@@ -12,3 +12,15 @@ jobs:
         - yarn
         - yarn build
       name: 'Build'
+
+    - stage: deploy
+      env:
+        AZURE_BLOB_ACCOUNT: ${DEV_AZURE_BLOB_ACCOUNT}
+        AZURE_BLOB_ACCOUNT_KEY: ${DEV_AZURE_BLOB_ACCOUNT_KEY}
+    - script:
+        - yarn
+        - yarn build
+        - yarn upload
+      name: 'Publish Dev'
+      on:
+        branch: edge

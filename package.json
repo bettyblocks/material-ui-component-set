@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "dist/templates.json",
   "license": "UNLICENSED",
-  "private": true,
+  "private": false,
   "devDependencies": {
     "@betty-blocks/cli": "^21.0.0",
     "eslint": "^5.9.0",
@@ -21,7 +21,7 @@
     "build": "bb components build",
     "dev": "nodemon --watch src --exec 'yarn build && yarn start'",
     "lint": "eslint --ext js ./src",
-    "publish": "bb components publish -b clara-component-set",
+    "upload": "bb components publish -b clara-component-set",
     "test": "echo \"Error: no test specified\" && exit 0"
   },
   "files": [
