@@ -1,0 +1,50 @@
+language: node_js
+node_js: 12.7.0
+
+jobs:
+  include:
+    - stage: quality
+    - script:
+        - yarn
+        - yarn lint
+      name: 'Lint'
+    - script:
+        - yarn
+        - yarn build
+      name: 'Build'
+
+    - stage: deploy_edge
+      script: skip
+      name: 'Publish Edge'
+      if: branch = edge AND type != pull_request
+      deploy:
+        provider: script
+        skip_cleanup: true
+        script:
+          - yarn  && yarn build && yarn upload
+        on:
+          branch: edge
+
+    - stage: deploy_acc
+      script: skip
+      name: 'Publish Acceptance'
+      if: branch = acceptance AND type != pull_request
+      deploy:
+        provider: script
+        skip_cleanup: true
+        script:
+          - yarn  && yarn build && yarn upload
+        on:
+          branch: master
+
+    - stage: deploy_prod
+      script: skip
+      name: 'Publish Production'
+      if: branch = master AND type != pull_request
+      deploy:
+        provider: script
+        skip_cleanup: true
+        script:
+          - yarn  && yarn build && yarn upload
+        on:
+          branch: master
