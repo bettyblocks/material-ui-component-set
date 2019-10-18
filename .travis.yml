@@ -1,0 +1,14 @@
+anguage: node_js
+node_js: 12.7.0
+
+jobs:
+  include:
+    - stage: quality
+    - script:
+        - yarn
+        - yarn lint
+      name: 'Lint'
+    - script:
+        - yarn
+        - yarn build
+      name: 'Build'
