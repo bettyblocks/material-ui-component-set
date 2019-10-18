@@ -20,8 +20,11 @@ jobs:
       deploy:
         provider: script
         skip_cleanup: true
+        before_script:
+          - yarn
+          - yarn build
         script:
-          - yarn  && yarn build && yarn upload
+          - yarn upload
         on:
           branch: edge
 
@@ -32,8 +35,11 @@ jobs:
       deploy:
         provider: script
         skip_cleanup: true
+        before_script:
+          - yarn
+          - yarn build
         script:
-          - yarn  && yarn build && yarn upload
+          - yarn upload
         on:
           branch: master
 
@@ -44,7 +50,10 @@ jobs:
       deploy:
         provider: script
         skip_cleanup: true
+        before_script:
+          - yarn
+          - yarn build
         script:
-          - yarn  && yarn build && yarn upload
+          - yarn upload
         on:
           branch: master
