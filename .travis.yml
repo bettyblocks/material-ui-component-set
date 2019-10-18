@@ -1,0 +1,26 @@
+language: node_js
+node_js: 12.7.0
+
+jobs:
+  include:
+    - stage: quality
+    - script:
+        - yarn
+        - yarn lint
+      name: 'Lint'
+    - script:
+        - yarn
+        - yarn build
+      name: 'Build'
+
+    - stage: deploy
+      env:
+        AZURE_BLOB_ACCOUNT: ${AZURE_BLOB_ACCOUNT}
+        AZURE_BLOB_ACCOUNT_KEY: ${AZURE_BLOB_ACCOUNT_KEY}
+    - script:
+        - yarn
+        - yarn build
+        - yarn upload
+      name: 'Publish Dev'
+      on:
+        branch: edge
