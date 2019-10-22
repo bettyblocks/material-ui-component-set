@@ -23,5 +23,5 @@ jobs:
           - yarn
         script:
           - yarn build && yarn upload
-        on
+        on:
           all_branches: true
