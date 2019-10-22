@@ -1,0 +1,283 @@
+(() => ({
+  name: 'Column',
+  icon: 'ColumnIcon',
+  category: 'LAYOUT',
+  type: 'COLUMN',
+  allowedTypes: [
+    'ACCORDION',
+    'ALERT',
+    'BREADCRUMB',
+    'BUTTON',
+    'DATALIST',
+    'DATATABLE',
+    'DIVIDER',
+    'FORM',
+    'IMAGE',
+    'PARTIAL',
+    'PANEL',
+    'PROGRESS',
+    'TAB',
+    'TEXT',
+  ],
+  orientation: 'VERTICAL',
+  jsx: (
+    <div className={classes.column}>
+      {(() => {
+        const isEmpty = children.length === 0;
+
+        const isPristine = isEmpty && B.env === 'dev';
+
+        return children.length !== 0 ? (
+          children
+        ) : (
+          <div
+            className={[
+              isEmpty ? classes.empty : '',
+              isPristine ? classes.pristine : '',
+            ].join(' ')}
+          >
+            {isPristine ? 'Column' : ''}
+          </div>
+        );
+      })()}
+    </div>
+  ),
+  styles: B => theme => {
+    const style = new B.Styling(theme);
+    const getSpacing = (idx, device = 'Mobile') =>
+      idx === '0' ? '0rem' : style.getSpacing(idx, device);
+
+    return {
+      column: {
+        display: ({
+          options: {
+            columnWidthMobile,
+            horizontalAlignment,
+            verticalAlignment,
+          },
+        }) => {
+          if (columnWidthMobile === 'hidden') {
+            return 'none';
+          }
+          return horizontalAlignment === 'inherit' &&
+            verticalAlignment === 'inherit'
+            ? 'block'
+            : 'flex';
+        },
+        flexDirection: 'column',
+        justifyContent: ({ options: { verticalAlignment } }) =>
+          verticalAlignment,
+        alignItems: ({ options: { horizontalAlignment } }) =>
+          horizontalAlignment,
+        flexGrow: ({ options: { columnWidthMobile } }) =>
+          columnWidthMobile === 'flexible' ? 1 : 0,
+        flexShrink: ({ options: { columnWidthMobile } }) =>
+          columnWidthMobile === 'flexible' || columnWidthMobile === 'fitContent'
+            ? 1
+            : 0,
+        flexBasis: ({ options: { columnWidthMobile } }) => {
+          if (
+            columnWidthMobile === 'flexible' ||
+            columnWidthMobile === 'fitContent'
+          ) {
+            return 'auto';
+          }
+
+          return `calc(${(columnWidthMobile / 12) * 100}%)`;
+        },
+        marginTop: ({ options: { outerSpacing } }) =>
+          getSpacing(outerSpacing[0]),
+        marginRight: ({ options: { outerSpacing } }) =>
+          getSpacing(outerSpacing[1]),
+        marginBottom: ({ options: { outerSpacing } }) =>
+          getSpacing(outerSpacing[2]),
+        marginLeft: ({ options: { outerSpacing } }) =>
+          getSpacing(outerSpacing[3]),
+        paddingTop: ({ options: { innerSpacing } }) =>
+          getSpacing(innerSpacing[0]),
+        paddingRight: ({ options: { innerSpacing } }) =>
+          getSpacing(innerSpacing[1]),
+        paddingBottom: ({ options: { innerSpacing } }) =>
+          getSpacing(innerSpacing[2]),
+        paddingLeft: ({ options: { innerSpacing } }) =>
+          getSpacing(innerSpacing[3]),
+        height: ({ options: { columnHeight } }) => columnHeight,
+        minHeight: 1,
+        backgroundColor: ({ options: { backgroundColor } }) =>
+          backgroundColor === 'transparent'
+            ? 'transparent'
+            : style.getColor(backgroundColor),
+        backgroundImage: 'none',
+        backgroundPosition: 'left top',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+        borderWidth: 0,
+        borderColor: 'transparent',
+        borderStyle: 'none',
+        borderRadius: 0,
+        overflow: 'auto',
+        boxSizing: 'border-box',
+        [`@media ${B.mediaMinWidth(768)}`]: {
+          display: ({
+            options: {
+              columnWidthTabletPortrait,
+              horizontalAlignment,
+              verticalAlignment,
+            },
+          }) => {
+            if (columnWidthTabletPortrait === 'hidden') {
+              return 'none';
+            }
+            return horizontalAlignment === 'inherit' &&
+              verticalAlignment === 'inherit'
+              ? 'block'
+              : 'flex';
+          },
+          flexGrow: ({ options: { columnWidthTabletPortrait } }) =>
+            columnWidthTabletPortrait === 'flexible' ? 1 : 0,
+          flexShrink: ({ options: { columnWidthTabletPortrait } }) =>
+            columnWidthTabletPortrait === 'flexible' ||
+            columnWidthTabletPortrait === 'fitContent'
+              ? 1
+              : 0,
+          flexBasis: ({ options: { columnWidthTabletPortrait } }) => {
+            if (
+              columnWidthTabletPortrait === 'flexible' ||
+              columnWidthTabletPortrait === 'fitContent'
+            ) {
+              return 'auto';
+            }
+
+            return `calc(${(columnWidthTabletPortrait / 12) * 100}%)`;
+          },
+          maxWidth: '100%',
+          marginTop: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[0], 'Portrait'),
+          marginRight: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[1], 'Portrait'),
+          marginBottom: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[2], 'Portrait'),
+          marginLeft: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[3], 'Portrait'),
+          paddingTop: ({ options: { innerSpacing } }) =>
+            getSpacing(innerSpacing[0], 'Portrait'),
+          paddingRight: ({ options: { innerSpacing } }) =>
+            getSpacing(innerSpacing[1], 'Portrait'),
+          paddingBottom: ({ options: { innerSpacing } }) =>
+            getSpacing(innerSpacing[2], 'Portrait'),
+          paddingLeft: ({ options: { innerSpacing } }) =>
+            getSpacing(innerSpacing[3], 'Portrait'),
+        },
+        [`@media ${B.mediaMinWidth(1024)}`]: {
+          display: ({
+            options: {
+              columnWidthTabletLandscape,
+              horizontalAlignment,
+              verticalAlignment,
+            },
+          }) => {
+            if (columnWidthTabletLandscape === 'hidden') {
+              return 'none';
+            }
+            return horizontalAlignment === 'inherit' &&
+              verticalAlignment === 'inherit'
+              ? 'block'
+              : 'flex';
+          },
+          flexGrow: ({ options: { columnWidthTabletLandscape } }) =>
+            columnWidthTabletLandscape === 'flexible' ? 1 : 0,
+          flexShrink: ({ options: { columnWidthTabletLandscape } }) =>
+            columnWidthTabletLandscape === 'flexible' ||
+            columnWidthTabletLandscape === 'fitContent'
+              ? 1
+              : 0,
+          flexBasis: ({ options: { columnWidthTabletLandscape } }) => {
+            if (
+              columnWidthTabletLandscape === 'flexible' ||
+              columnWidthTabletLandscape === 'fitContent'
+            ) {
+              return 'auto';
+            }
+
+            return `calc(${(columnWidthTabletLandscape / 12) * 100}%)`;
+          },
+          marginTop: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[0], 'Landscape'),
+          marginRight: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[1], 'Landscape'),
+          marginBottom: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[2], 'Landscape'),
+          marginLeft: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[3], 'Landscape'),
+          paddingTop: ({ options: { innerSpacing } }) =>
+            getSpacing(innerSpacing[0], 'Landscape'),
+          paddingRight: ({ options: { innerSpacing } }) =>
+            getSpacing(innerSpacing[1], 'Landscape'),
+          paddingBottom: ({ options: { innerSpacing } }) =>
+            getSpacing(innerSpacing[2], 'Landscape'),
+          paddingLeft: ({ options: { innerSpacing } }) =>
+            getSpacing(innerSpacing[3], 'Landscape'),
+        },
+        [`@media ${B.mediaMinWidth(1200)}`]: {
+          display: ({
+            options: { columnWidth, horizontalAlignment, verticalAlignment },
+          }) => {
+            if (columnWidth === 'hidden') {
+              return 'none';
+            }
+            return horizontalAlignment === 'inherit' &&
+              verticalAlignment === 'inherit'
+              ? 'block'
+              : 'flex';
+          },
+          flexGrow: ({ options: { columnWidth } }) =>
+            columnWidth === 'flexible' ? 1 : 0,
+          flexShrink: ({ options: { columnWidth } }) =>
+            columnWidth === 'flexible' || columnWidth === 'fitContent' ? 1 : 0,
+          flexBasis: ({ options: { columnWidth } }) => {
+            if (columnWidth === 'flexible' || columnWidth === 'fitContent') {
+              return 'auto';
+            }
+
+            return `calc(${(columnWidth / 12) * 100}%)`;
+          },
+          marginTop: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[0], 'Desktop'),
+          marginRight: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[1], 'Desktop'),
+          marginBottom: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[2], 'Desktop'),
+          marginLeft: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[3], 'Desktop'),
+          paddingTop: ({ options: { innerSpacing } }) =>
+            getSpacing(innerSpacing[0], 'Desktop'),
+          paddingRight: ({ options: { innerSpacing } }) =>
+            getSpacing(innerSpacing[1], 'Desktop'),
+          paddingBottom: ({ options: { innerSpacing } }) =>
+            getSpacing(innerSpacing[2], 'Desktop'),
+          paddingLeft: ({ options: { innerSpacing } }) =>
+            getSpacing(innerSpacing[3], 'Desktop'),
+        },
+      },
+      empty: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: ({ options: { columnHeight } }) =>
+          columnHeight ? 0 : '4rem',
+        height: '100%',
+        width: '100%',
+        fontSize: '0.75rem',
+        color: '#262A3A',
+        textTransform: 'uppercase',
+        boxSizing: 'border-box',
+      },
+      pristine: {
+        borderWidth: '0.0625rem',
+        borderColor: '#AFB5C8',
+        borderStyle: 'dashed',
+        backgroundColor: '#F0F1F5',
+      },
+    };
+  },
+}))();
