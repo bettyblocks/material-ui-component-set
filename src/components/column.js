@@ -8,6 +8,7 @@
     'ALERT',
     'BREADCRUMB',
     'BUTTON',
+    'DATACONTAINER',
     'DATALIST',
     'DATATABLE',
     'DIVIDER',
@@ -75,15 +76,18 @@
           columnWidthMobile === 'flexible' || columnWidthMobile === 'fitContent'
             ? 1
             : 0,
-        flexBasis: ({ options: { columnWidthMobile } }) => {
+        flexBasis: ({ options: { columnWidthMobile, outerSpacing } }) => {
           if (
             columnWidthMobile === 'flexible' ||
             columnWidthMobile === 'fitContent'
           ) {
             return 'auto';
           }
+          const marginRight = getSpacing(outerSpacing[1]);
+          const marginLeft = getSpacing(outerSpacing[3]);
 
-          return `calc(${(columnWidthMobile / 12) * 100}%)`;
+          return `calc(${(columnWidthMobile / 12) *
+            100}% - ${marginRight} - ${marginLeft})`;
         },
         marginTop: ({ options: { outerSpacing } }) =>
           getSpacing(outerSpacing[0]),
@@ -140,15 +144,20 @@
             columnWidthTabletPortrait === 'fitContent'
               ? 1
               : 0,
-          flexBasis: ({ options: { columnWidthTabletPortrait } }) => {
+          flexBasis: ({
+            options: { columnWidthTabletPortrait, outerSpacing },
+          }) => {
             if (
               columnWidthTabletPortrait === 'flexible' ||
               columnWidthTabletPortrait === 'fitContent'
             ) {
               return 'auto';
             }
+            const marginRight = getSpacing(outerSpacing[1], 'Portrait');
+            const marginLeft = getSpacing(outerSpacing[3], 'Portrait');
 
-            return `calc(${(columnWidthTabletPortrait / 12) * 100}%)`;
+            return `calc(${(columnWidthTabletPortrait / 12) *
+              100}% - ${marginRight} - ${marginLeft})`;
           },
           maxWidth: '100%',
           marginTop: ({ options: { outerSpacing } }) =>
@@ -191,15 +200,20 @@
             columnWidthTabletLandscape === 'fitContent'
               ? 1
               : 0,
-          flexBasis: ({ options: { columnWidthTabletLandscape } }) => {
+          flexBasis: ({
+            options: { columnWidthTabletLandscape, outerSpacing },
+          }) => {
             if (
               columnWidthTabletLandscape === 'flexible' ||
               columnWidthTabletLandscape === 'fitContent'
             ) {
               return 'auto';
             }
+            const marginRight = getSpacing(outerSpacing[1], 'Landscape');
+            const marginLeft = getSpacing(outerSpacing[3], 'Landscape');
 
-            return `calc(${(columnWidthTabletLandscape / 12) * 100}%)`;
+            return `calc(${(columnWidthTabletLandscape / 12) *
+              100}% - ${marginRight} - ${marginLeft})`;
           },
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Landscape'),
@@ -234,12 +248,15 @@
             columnWidth === 'flexible' ? 1 : 0,
           flexShrink: ({ options: { columnWidth } }) =>
             columnWidth === 'flexible' || columnWidth === 'fitContent' ? 1 : 0,
-          flexBasis: ({ options: { columnWidth } }) => {
+          flexBasis: ({ options: { columnWidth, outerSpacing } }) => {
             if (columnWidth === 'flexible' || columnWidth === 'fitContent') {
               return 'auto';
             }
+            const marginRight = getSpacing(outerSpacing[1], 'Desktop');
+            const marginLeft = getSpacing(outerSpacing[3], 'Desktop');
 
-            return `calc(${(columnWidth / 12) * 100}%)`;
+            return `calc(${(columnWidth / 12) *
+              100}% - ${marginRight} - ${marginLeft})`;
           },
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Desktop'),

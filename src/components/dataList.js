@@ -124,7 +124,10 @@
           );
 
           return (
-            <B.GetAll modelId={options.model} variables={variables}>
+            <B.GetAll
+              modelId={options.model}
+              __SECRET_VARIABLES_DO_NOT_USE={variables}
+            >
               {({ loading, error, data }) => {
                 if (loading) return 'loading...';
                 if (error) return 'failed';
