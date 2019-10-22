@@ -14,8 +14,8 @@ jobs:
       name: 'Build'
 
     - stage: deploy
-      name: 'Publish ${TRAVIS_BRANCH}'
-      if: branch = edge AND type != pull_request
+      name: 'Publish Component Set'
+      if: branch IN (master, acceptance, edge) AND type != pull_request
       deploy:
         provider: script
         skip_cleanup: true
@@ -23,3 +23,5 @@ jobs:
           - yarn
         script:
           - yarn build && yarn upload
+        on
+          all_branches: true
