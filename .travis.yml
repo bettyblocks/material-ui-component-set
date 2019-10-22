@@ -15,7 +15,7 @@ jobs:
 
     - stage: deploy
       name: 'Publish ${TRAVIS_BRANCH}'
-      if: branch IN ( master, acceptance, edge ) AND type != pull_request
+      if: branch = edge AND type != pull_request
       deploy:
         provider: script
         skip_cleanup: true
