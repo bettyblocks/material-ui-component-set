@@ -13,9 +13,9 @@ jobs:
         - yarn build
       name: 'Build'
 
-    - stage: deploy_edge
-      name: 'Publish Edge'
-      if: branch = edge AND type != pull_request
+    - stage: deploy
+      name: 'Publish ${TRAVIS_BRANCH}'
+      if: branch IN ( master, acceptance, edge ) AND type != pull_request
       deploy:
         provider: script
         skip_cleanup: true
@@ -23,31 +23,3 @@ jobs:
           - yarn
         script:
           - yarn build && yarn upload
-        on:
-          branch: edge
-
-    - stage: deploy_acc
-      name: 'Publish Acceptance'
-      if: branch = acceptance AND type != pull_request
-      deploy:
-        provider: script
-        skip_cleanup: true
-        before_script:
-          - yarn
-        script:
-          - yarn build && yarn upload
-        on:
-          branch: master
-
-    - stage: deploy_prod
-      name: 'Publish Production'
-      if: branch = master AND type != pull_request
-      deploy:
-        provider: script
-        skip_cleanup: true
-        before_script:
-          - yarn
-        script:
-          - yarn build && yarn upload
-        on:
-          branch: master
