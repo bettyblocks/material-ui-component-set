@@ -208,14 +208,15 @@
             }
           }, [totalCount]);
 
+          const totalText = B.env === 'dev' ? '[total]' : totalCount;
+
           return (
             <>
               <span>
                 {firstItem + 1}
                 {firstItem + 1 !== totalCount &&
-                  ` - ${firstItem + resultCount}`}
-                of
-                {B.env === 'dev' ? '[total]' : totalCount}
+                  ` - ${firstItem + resultCount}`}{' '}
+                of {totalText}
               </span>
               <div className={classes.pagination}>
                 {typeof currentPage !== 'undefined' && currentPage > 1 ? (
