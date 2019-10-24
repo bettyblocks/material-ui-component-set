@@ -43,11 +43,10 @@
       })()}
     </div>
   ),
-  styles: B => theme => {
-    const style = new B.Styling(theme);
+  styles: B => {
+    const { theme } = B;
     const getSpacing = (idx, device = 'Mobile') =>
-      idx === '0' ? '0rem' : style.getSpacing(idx, device);
-
+      idx === '0' ? '0rem' : theme.getSpacing(idx, device);
     return {
       column: {
         display: ({
@@ -110,7 +109,7 @@
         backgroundColor: ({ options: { backgroundColor } }) =>
           backgroundColor === 'transparent'
             ? 'transparent'
-            : style.getColor(backgroundColor),
+            : theme.getColor(backgroundColor),
         backgroundImage: 'none',
         backgroundPosition: 'left top',
         backgroundRepeat: 'no-repeat',

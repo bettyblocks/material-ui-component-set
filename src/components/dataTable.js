@@ -429,11 +429,10 @@
       })()}
     </div>
   ),
-  styles: B => theme => {
-    const style = new B.Styling(theme);
+  styles: B => {
+    const { theme } = B;
     const getSpacing = (idx, device = 'Mobile') =>
-      idx === '0' ? '0rem' : style.getSpacing(idx, device);
-
+      idx === '0' ? '0rem' : theme.getSpacing(idx, device);
     return {
       root: {
         marginTop: ({ options: { outerSpacing } }) =>
@@ -453,12 +452,12 @@
       },
       title: {
         margin: 0,
-        fontFamily: style.getFontFamily('Title2'),
-        fontSize: style.getFontSize('Title2'),
-        fontWeight: style.getFontWeight('Title2'),
-        textTransform: style.getTextTransform('Title2'),
-        letterSpacing: style.getLetterSpacing('Title2'),
-        color: style.getFontColor('Title2'),
+        fontFamily: theme.getFontFamily('Title2'),
+        fontSize: theme.getFontSize('Title2'),
+        fontWeight: theme.getFontWeight('Title2'),
+        textTransform: theme.getTextTransform('Title2'),
+        letterSpacing: theme.getLetterSpacing('Title2'),
+        color: theme.getFontColor('Title2'),
       },
       searchWrapper: {
         display: 'flex',
@@ -487,46 +486,46 @@
       column: {
         display: 'table-cell',
         padding: '0.75rem 1rem 0.75rem 0',
-        fontFamily: style.getFontFamily('Body1'),
-        fontSize: style.getFontSize('Body1'),
-        fontWeight: style.getFontWeight('Body1'),
-        textTransform: style.getTextTransform('Body1'),
-        letterSpacing: style.getLetterSpacing('Body1'),
-        color: style.getFontColor('Body1'),
-        borderBottom: `0.0625rem solid ${style.getColor('Accent1')}`,
+        fontFamily: theme.getFontFamily('Body1'),
+        fontSize: theme.getFontSize('Body1'),
+        fontWeight: theme.getFontWeight('Body1'),
+        textTransform: theme.getTextTransform('Body1'),
+        letterSpacing: theme.getLetterSpacing('Body1'),
+        color: theme.getFontColor('Body1'),
+        borderBottom: `0.0625rem solid ${theme.getColor('Accent1')}`,
         [`@media ${B.mediaMinWidth(768)}`]: {
-          fontSize: style.getFontSize('Body1', 'Portrait'),
+          fontSize: theme.getFontSize('Body1', 'Portrait'),
         },
         [`@media ${B.mediaMinWidth(1024)}`]: {
-          fontSize: style.getFontSize('Body1', 'Landscape'),
+          fontSize: theme.getFontSize('Body1', 'Landscape'),
         },
         [`@media ${B.mediaMinWidth(1200)}`]: {
-          fontSize: style.getFontSize('Body1', 'Desktop'),
+          fontSize: theme.getFontSize('Body1', 'Desktop'),
         },
       },
       columnHeading: {
-        fontFamily: style.getFont('Body2').fontFamily,
-        fontSize: style.getFont('Body2').Mobile,
-        fontWeight: style.getFont('Body2').fontWeight,
-        textTransform: style.getFont('Body2').textTransform,
-        letterSpacing: style.getFont('Body2').letterSpacing,
+        fontFamily: theme.getFont('Body2').fontFamily,
+        fontSize: theme.getFont('Body2').Mobile,
+        fontWeight: theme.getFont('Body2').fontWeight,
+        textTransform: theme.getFont('Body2').textTransform,
+        letterSpacing: theme.getFont('Body2').letterSpacing,
         lineHeight: '1.2',
-        color: style.getFont('Body2').color,
+        color: theme.getFont('Body2').color,
         [`@media ${B.mediaMinWidth(768)}`]: {
-          fontSize: style.getFont('Body2').Portrait,
+          fontSize: theme.getFont('Body2').Portrait,
         },
         [`@media ${B.mediaMinWidth(1024)}`]: {
-          fontSize: style.getFont('Body2').Landscape,
+          fontSize: theme.getFont('Body2').Landscape,
         },
         [`@media ${B.mediaMinWidth(1200)}`]: {
-          fontSize: style.getFont('Body2').Desktop,
+          fontSize: theme.getFont('Body2').Desktop,
         },
         borderBottomWidth: '0.125rem',
       },
       columnHeadingLink: {
         display: 'flex',
         alignItems: 'center',
-        color: style.getFont('Body2').color,
+        color: theme.getFont('Body2').color,
         whiteSpace: 'nowrap',
         textDecoration: 'none',
       },
@@ -536,27 +535,27 @@
         margin: [0, '0.5rem'],
       },
       skeleton: {
-        height: `calc(${style.getFont('Body1').Mobile} * 1.2)`,
+        height: `calc(${theme.getFont('Body1').Mobile} * 1.2)`,
         [`@media ${B.mediaMinWidth(768)}`]: {
-          height: `calc(${style.getFont('Body1').Portrait} * 1.2)`,
+          height: `calc(${theme.getFont('Body1').Portrait} * 1.2)`,
         },
         [`@media ${B.mediaMinWidth(1024)}`]: {
-          height: `calc(${style.getFont('Body1').Landscape} * 1.2)`,
+          height: `calc(${theme.getFont('Body1').Landscape} * 1.2)`,
         },
         [`@media ${B.mediaMinWidth(1200)}`]: {
-          height: `calc(${style.getFont('Body1').Desktop} * 1.2)`,
+          height: `calc(${theme.getFont('Body1').Desktop} * 1.2)`,
         },
       },
       skeletonHeading: {
-        height: `calc(${style.getFont('Body2').Mobile} * 1.15)`,
+        height: `calc(${theme.getFont('Body2').Mobile} * 1.15)`,
         [`@media ${B.mediaMinWidth(768)}`]: {
-          height: `calc(${style.getFont('Body2').Portrait} * 1.15)`,
+          height: `calc(${theme.getFont('Body2').Portrait} * 1.15)`,
         },
         [`@media ${B.mediaMinWidth(1024)}`]: {
-          height: `calc(${style.getFont('Body2').Landscape} * 1.15)`,
+          height: `calc(${theme.getFont('Body2').Landscape} * 1.15)`,
         },
         [`@media ${B.mediaMinWidth(1200)}`]: {
-          height: `calc(${style.getFont('Body2').Desktop} * 1.15)`,
+          height: `calc(${theme.getFont('Body2').Desktop} * 1.15)`,
         },
         backgroundColor: '#eee',
         borderRadius: 8,
@@ -570,7 +569,7 @@
           backgroundSize: '200% 100%',
           backgroundRepeat: 'no-repeat',
           backgroundPositionX: '150%',
-          borderRadius: `calc(${style.getFont('Body2').Landscape} / 2)`,
+          borderRadius: `calc(${theme.getFont('Body2').Landscape} / 2)`,
           content: '""',
           animation: 'loading 1.5s infinite',
         },

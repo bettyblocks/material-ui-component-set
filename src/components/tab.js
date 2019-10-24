@@ -76,12 +76,12 @@
       })()}
     </div>
   ),
-  styles: B => t => {
-    const style = new B.Styling(t);
+  styles: B => {
+    const { theme } = B;
     return {
       tabContainer: {
         position: 'relative',
-        backgroundColor: style.getColor('White'),
+        backgroundColor: theme.getColor('White'),
         display: 'flex',
         flexDirection: 'column',
       },
@@ -90,7 +90,7 @@
         margin: 0,
         listStyle: 'none',
         display: 'flex',
-        backgroundColor: style.getColor('White'),
+        backgroundColor: theme.getColor('White'),
         height: '3rem',
         borderBottom: '0.0625rem solid rgba(0,0,0,.12)',
         overflowX: 'auto',
@@ -116,12 +116,12 @@
         borderBottomColor: 'transparent',
         transition: 'background-color 0.15s ease-in-out',
         '&:hover, &:focus': {
-          backgroundColor: B.color.alpha(style.getColor('Primary'), 0.1),
+          backgroundColor: B.color.alpha(theme.getColor('Primary'), 0.1),
         },
       },
       activeTab: {
-        borderBottomColor: style.getColor('Primary'),
-        color: style.getColor('Primary'),
+        borderBottomColor: theme.getColor('Primary'),
+        color: theme.getColor('Primary'),
       },
       empty: {
         display: 'flex',

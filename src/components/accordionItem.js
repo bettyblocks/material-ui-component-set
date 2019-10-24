@@ -55,13 +55,12 @@
       </div>
     </div>
   ),
-  styles: B => t => {
-    const style = new B.Styling(t);
-
+  styles: B => {
+    const { theme } = B;
     return {
       root: {
         display: 'block',
-        backgroundColor: style.getColor('White'),
+        backgroundColor: theme.getColor('White'),
         boxShadow:
           '0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12)',
       },
@@ -79,15 +78,15 @@
         alignItems: 'center',
         boxSizing: 'border-box',
         height: '3rem',
-        color: style.getColor('Black'),
-        backgroundColor: style.getColor('White'),
+        color: theme.getColor('Black'),
+        backgroundColor: theme.getColor('White'),
 
         '&:hover, &:focus': {
           outline: 'none',
-          backgroundColor: B.color.darken(style.getColor('White'), 0.08),
+          backgroundColor: B.color.darken(theme.getColor('White'), 0.08),
         },
         '&:active': {
-          backgroundColor: B.color.darken(style.getColor('White'), 0.24),
+          backgroundColor: B.color.darken(theme.getColor('White'), 0.24),
         },
       },
       activeTitle: {
