@@ -12,7 +12,6 @@
   - [Use your components inside the Page Builder](#use-your-components-inside-the-page-builder)
 - [API Docs](#api-docs)
 - [Attachments](#attachments)
-  - [Default theme](#default-theme)
 
 ## Introduction
 
@@ -67,20 +66,6 @@ The keys we define in our styles object will be translated to classes which you 
 ```
 
 If you'd like to read more about what you can do with styles, see the [JSS documentation](https://cssinjs.org/jss-syntax).
-
-**Theme**
-
-Adding theme support to your components is a good practice. By doing this you allow the user to change the appearance of all the components used in the application at once. Theming is a safe and predictable way to apply global styling to your application. A theme variable can be applied by using the theme object inside of the styles:
-
-```
-{
-  heading: {
-    color: theme.colors.default
-  }
-}
-```
-
-Use the [default theme](#default-theme) as a reference on which keys you can use.
 
 **Options**
 
