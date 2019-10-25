@@ -111,9 +111,8 @@
       })()}
     </div>
   ),
-  styles: B => t => {
-    const style = new B.Styling(t);
-
+  styles: B => {
+    const { theme } = B;
     return {
       root: {
         display: 'block',
@@ -153,7 +152,7 @@
 
         '&:focus + $borders > $border, &:active + $borders > $border': {
           borderWidth: '0.125rem',
-          borderColor: style.getColor('Primary'),
+          borderColor: theme.getColor('Primary'),
         },
 
         '&:focus + $borders > $borderMiddle, &:active + $borders > $borderMiddle, &$hasValue + $borders > $borderMiddle': {
@@ -161,7 +160,7 @@
         },
 
         '&:focus + $borders $formLabel, &:active + $borders $formLabel': {
-          color: style.getColor('Primary'),
+          color: theme.getColor('Primary'),
         },
 
         '&:focus + $borders $formLabel, &:active + $borders $formLabel, &$hasValue + $borders $formLabel': {
@@ -176,20 +175,20 @@
       },
       invalid: {
         '& $border': {
-          borderColor: style.getColor('Danger'),
+          borderColor: theme.getColor('Danger'),
         },
         '& $formLabel': {
-          color: style.getColor('Danger'),
+          color: theme.getColor('Danger'),
         },
         '& $formControl:focus + $borders > $border, & $formControl:active + $borders > $border': {
           borderWidth: '0.125rem',
-          borderColor: style.getColor('Danger'),
+          borderColor: theme.getColor('Danger'),
         },
         '& $formControl:focus + $borders $formLabel, & $formControl:active + $borders $formLabel': {
-          color: style.getColor('Danger'),
+          color: theme.getColor('Danger'),
         },
         '& $helperText': {
-          color: style.getColor('Danger'),
+          color: theme.getColor('Danger'),
         },
       },
       noEvents: {

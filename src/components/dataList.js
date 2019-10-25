@@ -272,11 +272,10 @@
       })()}
     </div>
   ),
-  styles: B => theme => {
-    const style = new B.Styling(theme);
+  styles: B => {
+    const { theme } = B;
     const getSpacing = (idx, device = 'Mobile') =>
-      idx === '0' ? '0rem' : style.getSpacing(idx, device);
-
+      idx === '0' ? '0rem' : theme.getSpacing(idx, device);
     return {
       root: {
         marginTop: ({ options: { outerSpacing } }) =>

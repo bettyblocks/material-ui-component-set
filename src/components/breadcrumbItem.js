@@ -36,8 +36,8 @@
       })()}
     </li>
   ),
-  styles: B => t => {
-    const style = new B.Styling(t);
+  styles: B => {
+    const { theme } = B;
     return {
       breadcrumbItem: {
         position: 'relative',
@@ -66,13 +66,13 @@
         cursor: 'pointer',
         transition: 'background-color 0.15s ease-in-out',
         justifyContent: 'center',
-        color: style.getColor('Black'),
+        color: theme.getColor('Black'),
 
         '&:hover': {
           color:
             B.env === 'prod'
-              ? style.getColor('Primary')
-              : style.getColor('Black'),
+              ? theme.getColor('Primary')
+              : theme.getColor('Black'),
           textDecoration: B.env === 'prod' ? 'underline' : 'none',
         },
         '&:active': {
@@ -81,7 +81,7 @@
         '&:not(:active):focus': {
           boxShadow:
             B.env === 'prod'
-              ? `${style.getColor('Primary')} 0 0 0 0.125rem inset`
+              ? `${theme.getColor('Primary')} 0 0 0 0.125rem inset`
               : 'none',
           outline: 'none',
         },
