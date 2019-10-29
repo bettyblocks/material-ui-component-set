@@ -114,10 +114,6 @@
           }
 
           const variables = Object.assign(
-            {
-              skip: page ? (page - 1) * take : 0,
-              take,
-            },
             Object.keys(where).length !== 0 && {
               where,
             },
@@ -127,6 +123,8 @@
             <B.GetAll
               modelId={options.model}
               __SECRET_VARIABLES_DO_NOT_USE={variables}
+              skip={page ? (page - 1) * take : 0}
+              take={take}
             >
               {({ loading, error, data }) => {
                 if (loading) return 'loading...';
