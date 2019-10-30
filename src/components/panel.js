@@ -33,10 +33,10 @@
       })()}
     </div>
   ),
-  styles: B => theme => {
-    const style = new B.Styling(theme);
+  styles: B => {
+    const { theme } = B;
     const getSpacing = (idx, device = 'Mobile') =>
-      idx === '0' ? '0rem' : style.getSpacing(idx, device);
+      idx === '0' ? '0rem' : theme.getSpacing(idx, device);
     return {
       panel: {
         display: 'flex',
@@ -54,7 +54,7 @@
         backgroundColor: 'transparent',
         borderWidth: '0.125rem',
         borderColor: ({ options: { panelColor } }) =>
-          style.getColor(panelColor) || style.getColor('Primary'),
+          theme.getColor(panelColor) || theme.getColor('Primary'),
         borderStyle: 'solid',
         borderRadius: '0.125rem',
         overflow: 'auto',
@@ -67,18 +67,18 @@
         paddingLeft: '0.5rem',
         paddingTop: '0.4375rem',
         paddingBottom: '0.5625rem',
-        fontFamily: style.getFontFamily('Body1'),
+        fontFamily: theme.getFontFamily('Body1'),
         fontSize: '1rem',
-        fontWeight: style.getFontWeight('Body1'),
-        textTransform: style.getTextTransform('Body1'),
-        letterSpacing: style.getLetterSpacing('Body1'),
+        fontWeight: theme.getFontWeight('Body1'),
+        textTransform: theme.getTextTransform('Body1'),
+        letterSpacing: theme.getLetterSpacing('Body1'),
         color: ({ options: { color } }) =>
-          style.getColor(color) || style.getColor('White'),
+          theme.getColor(color) || theme.getColor('White'),
         backgroundColor: ({ options: { panelColor } }) =>
-          style.getColor(panelColor) || style.getColor('Primary'),
+          theme.getColor(panelColor) || theme.getColor('Primary'),
         borderBottomWidth: '0.125rem',
         borderBottomColor: ({ options: { panelColor } }) =>
-          style.getColor(panelColor) || style.getColor('Primary'),
+          theme.getColor(panelColor) || theme.getColor('Primary'),
         borderBottomStyle: 'solid',
       },
       content: {
@@ -103,7 +103,7 @@
         title: {
           paddingRight: getSpacing('M', 'Portrait'),
           paddingLeft: getSpacing('M', 'Portrait'),
-          fontSize: style.getFontSize('Body1', 'Portrait'),
+          fontSize: theme.getFontSize('Body1', 'Portrait'),
         },
         content: {
           paddingTop: getSpacing('M', 'Portrait'),
@@ -123,7 +123,7 @@
         title: {
           paddingRight: getSpacing('M', 'Landscape'),
           paddingLeft: getSpacing('M', 'Landscape'),
-          fontSize: style.getFontSize('Body1', 'Landscape'),
+          fontSize: theme.getFontSize('Body1', 'Landscape'),
         },
         content: {
           padding: getSpacing('M', 'Landscape'),
@@ -143,7 +143,7 @@
         title: {
           paddingRight: getSpacing('M', 'Desktop'),
           paddingLeft: getSpacing('M', 'Desktop'),
-          fontSize: style.getFontSize('Body1', 'Desktop'),
+          fontSize: theme.getFontSize('Body1', 'Desktop'),
         },
         content: {
           padding: getSpacing('M', 'Desktop'),

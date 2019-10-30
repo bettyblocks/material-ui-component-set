@@ -41,11 +41,10 @@
       })()}
     </span>
   ),
-  styles: B => t => {
-    const style = new B.Styling(t);
+  styles: B => {
+    const { theme } = B;
     const getSpacing = (idx, device = 'Mobile') =>
-      idx === '0' ? '0rem' : style.getSpacing(idx, device);
-
+      idx === '0' ? '0rem' : theme.getSpacing(idx, device);
     return {
       wrapper: {
         display: 'inline-block',
@@ -59,23 +58,22 @@
           getSpacing(outerSpacing[3]),
       },
       root: {
-        extend: t.base,
         display: 'inline-flex',
         position: 'relative',
         alignItems: 'center',
         justifyContent: 'center',
         margin: 0,
-        color: style.getColor('White'),
-        fontFamily: style.getFontFamily('Button'),
-        fontSize: style.getFontSize('Button'),
-        fontWeight: style.getFontWeight('Button'),
-        textTransform: style.getTextTransform('Button'),
-        letterSpacing: style.getLetterSpacing('Button'),
+        color: theme.getColor('White'),
+        fontFamily: theme.getFontFamily('Button'),
+        fontSize: theme.getFontSize('Button'),
+        fontWeight: theme.getFontWeight('Button'),
+        textTransform: theme.getTextTransform('Button'),
+        letterSpacing: theme.getLetterSpacing('Button'),
         textDecoration: 'none',
         backgroundColor: ({ options: { backgroundColor } }) =>
-          style.getColor(backgroundColor),
+          theme.getColor(backgroundColor),
         border: 'none',
-        borderRadius: style.getBorderRadius('M'),
+        borderRadius: theme.getBorderRadius('M'),
         boxSizing: 'border-box',
         padding: '0 1rem',
         minWidth: '4rem',
@@ -92,11 +90,11 @@
         },
         '&:hover': {
           backgroundColor: ({ options: { backgroundColor } }) =>
-            B.color.darken(style.getColor(backgroundColor), 0.08),
+            B.color.darken(theme.getColor(backgroundColor), 0.08),
         },
         '&:active': {
           backgroundColor: ({ options: { backgroundColor } }) =>
-            B.color.darken(style.getColor(backgroundColor), 0.08),
+            B.color.darken(theme.getColor(backgroundColor), 0.08),
         },
         '&:hover, &:active, &:focus': {
           outline: 'none',
@@ -104,7 +102,7 @@
         '&:not(:active):focus': {
           boxShadow: ({ options: { backgroundColor } }) =>
             `0 0 0 0.2rem ${B.color.alpha(
-              style.getColor(backgroundColor),
+              theme.getColor(backgroundColor),
               0.5,
             )}`,
         },
@@ -114,7 +112,7 @@
         '&:active': {
           boxShadow: ({ options: { backgroundColor } }) =>
             `0 0 0 0.2rem ${B.color.alpha(
-              style.getColor(backgroundColor),
+              theme.getColor(backgroundColor),
               0.5,
             )}`,
         },

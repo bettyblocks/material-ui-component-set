@@ -33,8 +33,8 @@
       })()}
     </div>
   ),
-  styles: B => t => {
-    const style = new B.Styling(t);
+  styles: B => {
+    const { theme } = B;
     return {
       tabItem: {
         position: 'relative',
@@ -61,7 +61,7 @@
         cursor: 'pointer',
         transition: 'background-color 0.15s ease-in-out',
         justifyContent: 'center',
-        color: style.getColor('Primary'),
+        color: theme.getColor('Primary'),
       },
       empty: {
         display: 'flex',

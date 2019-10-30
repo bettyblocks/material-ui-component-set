@@ -114,10 +114,6 @@
           }
 
           const variables = Object.assign(
-            {
-              skip: page ? (page - 1) * take : 0,
-              take,
-            },
             Object.keys(where).length !== 0 && {
               where,
             },
@@ -127,6 +123,8 @@
             <B.GetAll
               modelId={options.model}
               __SECRET_VARIABLES_DO_NOT_USE={variables}
+              skip={page ? (page - 1) * take : 0}
+              take={take}
             >
               {({ loading, error, data }) => {
                 if (loading) return 'loading...';
@@ -208,14 +206,15 @@
             }
           }, [totalCount]);
 
+          const totalText = B.env === 'dev' ? '[total]' : totalCount;
+
           return (
             <>
               <span>
                 {firstItem + 1}
                 {firstItem + 1 !== totalCount &&
-                  ` - ${firstItem + resultCount}`}
-                of
-                {B.env === 'dev' ? '[total]' : totalCount}
+                  ` - ${firstItem + resultCount}`}{' '}
+                of {totalText}
               </span>
               <div className={classes.pagination}>
                 {typeof currentPage !== 'undefined' && currentPage > 1 ? (
@@ -271,11 +270,10 @@
       })()}
     </div>
   ),
-  styles: B => theme => {
-    const style = new B.Styling(theme);
+  styles: B => {
+    const { theme } = B;
     const getSpacing = (idx, device = 'Mobile') =>
-      idx === '0' ? '0rem' : style.getSpacing(idx, device);
-
+      idx === '0' ? '0rem' : theme.getSpacing(idx, device);
     return {
       root: {
         marginTop: ({ options: { outerSpacing } }) =>

@@ -12,11 +12,10 @@
       </div>
     </div>
   ),
-  styles: B => t => {
-    const style = new B.Styling(t);
+  styles: B => {
+    const { theme } = B;
     const getSpacing = (idx, device = 'Mobile') =>
-      idx === '0' ? '0rem' : style.getSpacing(idx, device);
-
+      idx === '0' ? '0rem' : theme.getSpacing(idx, device);
     return {
       root: {
         marginTop: ({ options: { outerSpacing } }) =>
@@ -81,9 +80,9 @@
         padding: '0.25rem 0',
       },
       divider: {
-        height: ({ options: { thickness } }) => style.getBorderSize(thickness),
+        height: ({ options: { thickness } }) => theme.getBorderSize(thickness),
         margin: 0,
-        backgroundColor: ({ options: { color } }) => style.getColor(color),
+        backgroundColor: ({ options: { color } }) => theme.getColor(color),
         border: 'none',
       },
     };

@@ -49,14 +49,12 @@
       })()}
     </section>
   ))(),
-  styles: B => theme => {
-    const style = new B.Styling(theme);
+  styles: B => {
+    const { theme } = B;
     const getSpacing = (idx, device = 'Mobile') =>
-      idx === '0' ? '0rem' : style.getSpacing(idx, device);
-
+      idx === '0' ? '0rem' : theme.getSpacing(idx, device);
     return {
       root: {
-        extend: theme.base,
         display: 'flex',
         marginTop: ({ options: { outerSpacing } }) =>
           getSpacing(outerSpacing[0]),
@@ -66,9 +64,9 @@
           getSpacing(outerSpacing[2]),
         marginLeft: ({ options: { outerSpacing } }) =>
           getSpacing(outerSpacing[3]),
-        fontFamily: style.getFontFamily('Body1'),
-        backgroundColor: style.getColor('White'),
-        border: ({ options }) => `1px solid ${style.getColor(options.color)}`,
+        fontFamily: theme.getFontFamily('Body1'),
+        backgroundColor: theme.getColor('White'),
+        border: ({ options }) => `1px solid ${theme.getColor(options.color)}`,
         borderRadius: '0.125rem',
         width: ({ options: { outerSpacing } }) =>
           `calc(100% - ${getSpacing(outerSpacing[1])} - ${getSpacing(
@@ -78,14 +76,14 @@
       iconWrapper: {
         padding: '0.25rem',
         margin: '-0.0625rem 0 -0.0625rem -0.0625rem',
-        backgroundColor: ({ options }) => style.getColor(options.color),
+        backgroundColor: ({ options }) => theme.getColor(options.color),
         borderRadius: '0.125rem 0 0 0.125rem',
       },
       icon: {
         margin: ({ options: { titleText } }) =>
           `${titleText ? '1rem' : '0.875rem'} 0.5rem 0`,
         fontSize: '1.5rem',
-        color: style.getColor('White'),
+        color: theme.getColor('White'),
       },
       contentWrapper: {
         display: 'flex',
@@ -110,15 +108,15 @@
       },
       title: {
         margin: '1.25rem 0',
-        fontSize: style.getFontSize('Title6'),
-        fontWeight: style.getFontSize('Title6'),
+        fontSize: theme.getFontSize('Title6'),
+        fontWeight: theme.getFontSize('Title6'),
       },
       content: {
         margin: '1.125rem 0',
-        fontSize: style.getFontSize('Body1'),
-        fontWeight: style.getFontWeight('Body1'),
+        fontSize: theme.getFontSize('Body1'),
+        fontWeight: theme.getFontWeight('Body1'),
         color: ({ options: { titleText, color } }) =>
-          titleText ? style.getColor(color) : style.getColor('Dark'),
+          titleText ? theme.getColor(color) : theme.getColor('Dark'),
       },
       buttonWrapper: {
         display: 'flex',
@@ -131,10 +129,10 @@
         margin: '0 0.5rem 0.5rem',
         marginBottom: ({ options: { titleText, bodyText } }) =>
           (!titleText || !bodyText) && 0,
-        fontFamily: style.getFontFamily('Button'),
-        fontSize: style.getFontSize('Button'),
-        fontWeight: style.getFontWeight('Button'),
-        color: ({ options: { color } }) => style.getColor(color),
+        fontFamily: theme.getFontFamily('Button'),
+        fontSize: theme.getFontSize('Button'),
+        fontWeight: theme.getFontWeight('Button'),
+        color: ({ options: { color } }) => theme.getColor(color),
         textTransform: 'uppercase',
         backgroundColor: 'transparent',
         border: 'none',
@@ -150,7 +148,7 @@
         textDecoration: 'none',
         '&:active': {
           boxShadow: ({ options: { color } }) =>
-            `0 0 0 0.2rem ${B.color.alpha(style.getColor(color), 0.5)}`,
+            `0 0 0 0.2rem ${B.color.alpha(theme.getColor(color), 0.5)}`,
         },
       },
       [`@media ${B.mediaMinWidth(768)}`]: {

@@ -26,12 +26,12 @@
       })()}
     </header>
   ),
-  styles: B => t => {
-    const style = new B.Styling(t);
+  styles: B => {
+    const { theme } = B;
     return {
       breadCrumb: {
         position: 'relative',
-        backgroundColor: style.getColor('White'),
+        backgroundColor: theme.getColor('White'),
         width: '100%',
       },
       breadCrumbList: {
@@ -40,7 +40,7 @@
         listStyle: 'none',
         display: 'flex',
         flexWrap: 'wrap',
-        backgroundColor: style.getColor('White'),
+        backgroundColor: theme.getColor('White'),
       },
       empty: {
         display: 'flex',

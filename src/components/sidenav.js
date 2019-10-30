@@ -56,9 +56,8 @@
       })()}
     </div>
   ),
-  styles: B => theme => {
-    const style = new B.Styling(theme);
-
+  styles: B => {
+    const { theme } = B;
     return {
       root: {
         backgroundColor: 'transparent',
@@ -72,7 +71,7 @@
           B.env === 'dev'
             ? 'none'
             : 'width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1)',
-        backgroundColor: style.getColor('White'),
+        backgroundColor: theme.getColor('White'),
         position: 'relative',
         overflow: 'hidden',
         left: 0,
@@ -91,13 +90,13 @@
         zIndex: 1,
         transition:
           B.env === 'dev' ? 'none' : 'left 0.4s cubic-bezier(.25,.8,.25,1)',
-        color: style.getColor('Black'),
+        color: theme.getColor('Black'),
         padding: '1.25rem 1rem',
         lineHeight: 0,
         fontSize: 0,
         border: 'none',
         outline: 'none',
-        backgroundColor: style.getColor('White'),
+        backgroundColor: theme.getColor('White'),
         cursor: 'pointer',
         '&$open': {
           left: '13.5rem',
@@ -151,7 +150,7 @@
         lineHeight: '1.5rem',
         fontWeight: '500',
         minHeight: '1.5rem',
-        color: style.getColor('Black'),
+        color: theme.getColor('Black'),
         [`@media ${B.mediaMinWidth(1024)}`]: {
           paddingLeft: '1.5rem',
         },
