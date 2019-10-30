@@ -22,6 +22,9 @@
               label: 'Content',
               key: 'content',
               value: ['Type your content here...'],
+              configuration: {
+                as: 'MULTILINE',
+              },
             },
             {
               value: 'Body1',
