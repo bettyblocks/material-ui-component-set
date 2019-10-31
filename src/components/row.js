@@ -26,8 +26,8 @@
       })()}
     </div>
   ),
-  styles: B => {
-    const { theme } = B;
+  styles: B => theme => {
+    const style = new B.Styling(theme);
     const width = {
       Full: '100%',
       XL: '1200px',
@@ -36,7 +36,8 @@
       S: '540px',
     };
     const getSpacing = (idx, device = 'Mobile') =>
-      idx === '0' ? '0rem' : theme.getSpacing(idx, device);
+      idx === '0' ? '0rem' : style.getSpacing(idx, device);
+
     return {
       container: {
         width: '100%',
@@ -45,7 +46,7 @@
         backgroundColor: ({ options: { backgroundColor } }) =>
           backgroundColor === 'transparent'
             ? 'transparent'
-            : theme.getColor(backgroundColor),
+            : style.getColor(backgroundColor),
         backgroundImage: 'none',
         backgroundPosition: 'left top',
         backgroundRepeat: 'no-repeat',

@@ -25,10 +25,10 @@
       </Tag>
     );
   })(),
-  styles: B => {
-    const { theme } = B;
+  styles: B => t => {
+    const style = new B.Styling(t);
     const getSpacing = (idx, device = 'Mobile') =>
-      idx === '0' ? '0rem' : theme.getSpacing(idx, device);
+      idx === '0' ? '0rem' : style.getSpacing(idx, device);
     return {
       content: {
         display: 'block',
@@ -43,12 +43,12 @@
         textAlign: ({ options: { textAlignment } }) => textAlignment,
         padding: 0,
         whiteSpace: 'pre-wrap',
-        color: ({ options: { type } }) => theme.getFontColor(type),
-        fontFamily: ({ options: { type } }) => theme.getFontFamily(type),
-        fontSize: ({ options: { type } }) => theme.getFontSize(type),
-        fontWeight: ({ options: { type } }) => theme.getFontWeight(type),
-        textTransform: ({ options: { type } }) => theme.getTextTransform(type),
-        letterSpacing: ({ options: { type } }) => theme.getLetterSpacing(type),
+        color: ({ options: { type } }) => style.getFontColor(type),
+        fontFamily: ({ options: { type } }) => style.getFontFamily(type),
+        fontSize: ({ options: { type } }) => style.getFontSize(type),
+        fontWeight: ({ options: { type } }) => style.getFontWeight(type),
+        textTransform: ({ options: { type } }) => style.getTextTransform(type),
+        letterSpacing: ({ options: { type } }) => style.getLetterSpacing(type),
         [`@media ${B.mediaMinWidth(768)}`]: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Portrait'),
@@ -59,7 +59,7 @@
           marginLeft: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[3], 'Portrait'),
           fontSize: ({ options: { type } }) =>
-            theme.getFontSize(type, 'Portrait'),
+            style.getFontSize(type, 'Portrait'),
         },
         [`@media ${B.mediaMinWidth(1024)}`]: {
           marginTop: ({ options: { outerSpacing } }) =>
@@ -71,7 +71,7 @@
           marginLeft: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[3], 'Landscape'),
           fontSize: ({ options: { type } }) =>
-            theme.getFontSize(type, 'Landscape'),
+            style.getFontSize(type, 'Landscape'),
         },
         [`@media ${B.mediaMinWidth(1200)}`]: {
           marginTop: ({ options: { outerSpacing } }) =>
@@ -83,7 +83,7 @@
           marginLeft: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[3], 'Desktop'),
           fontSize: ({ options: { type } }) =>
-            theme.getFontSize(type, 'Desktop'),
+            style.getFontSize(type, 'Desktop'),
         },
       },
       placeholder: {

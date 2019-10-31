@@ -82,13 +82,13 @@
       })()}
     </header>
   ),
-  styles: B => {
-    const { theme } = B;
+  styles: B => t => {
+    const style = new B.Styling(t);
     return {
       navigationContainer: {
         position: 'relative',
         zIndex: 998,
-        backgroundColor: theme.getColor('Primary'),
+        backgroundColor: style.getColor('Primary'),
         minHeight: '4rem',
         boxShadow: '0 0.125rem 0.625rem 0 rgba(0,0,0,0.1)',
       },
@@ -112,7 +112,7 @@
       },
       brand: {
         margin: 0,
-        color: theme.getColor('White'),
+        color: style.getColor('White'),
         padding: '0 1rem 0',
         boxSizing: 'border-box',
         maxHeight: '4rem',
@@ -164,7 +164,7 @@
         listStyle: 'none',
         display: 'block',
         clear: 'both',
-        backgroundColor: theme.getColor('White'),
+        backgroundColor: style.getColor('White'),
 
         [`@media ${B.mediaMinWidth(1024)}`]: {
           clear: 'none',
@@ -197,7 +197,7 @@
         },
       },
       navigationIcon: {
-        backgroundColor: theme.getColor('White'),
+        backgroundColor: style.getColor('White'),
         display: 'block',
         height: '0.125rem',
         position: 'relative',
@@ -205,7 +205,7 @@
         width: '1.125rem',
 
         '&::before, &::after': {
-          backgroundColor: theme.getColor('White'),
+          backgroundColor: style.getColor('White'),
           content: '""',
           display: 'block',
           height: '100%',
