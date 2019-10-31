@@ -155,10 +155,10 @@
     </div>
   ),
   styles: B => t => {
-    const { theme } = B;
+    const style = new B.Styling(t);
     const { base } = t;
     const getSpacing = (idx, device = 'Mobile') =>
-      idx === '0' ? '0rem' : theme.getSpacing(idx, device);
+      idx === '0' ? '0rem' : style.getSpacing(idx, device);
 
     return {
       root: {
@@ -181,10 +181,10 @@
         height: '2.25rem',
       },
       success: {
-        color: theme.getColor('Success'),
+        color: style.getColor('Success'),
       },
       error: {
-        color: theme.getColor('Danger'),
+        color: style.getColor('Danger'),
       },
       [`@media ${B.mediaMinWidth(768)}`]: {
         root: {
