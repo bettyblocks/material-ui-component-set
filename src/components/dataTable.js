@@ -491,7 +491,7 @@
         borderCollapse: 'collapse',
         tableLayout: 'fixed',
         '& $row:first-child > div': {
-          borderBottom: `0.125rem solid ${theme.getColor('Accent1')}`,
+          borderBottom: `0.125rem solid ${style.getColor('Accent1')}`,
         },
       },
       row: {

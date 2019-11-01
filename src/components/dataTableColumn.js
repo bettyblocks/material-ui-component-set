@@ -124,53 +124,55 @@
       })()}
     </div>
   ),
-  styles: B => {
-    const { theme, env } = B;
+  styles: B => theme => {
+    const { env, Styling } = B;
+    const style = new Styling(theme);
+
     return {
       column: {
         display: 'table-cell',
-        fontFamily: theme.getFontFamily('Body1'),
-        fontSize: theme.getFontSize('Body1'),
-        fontWeight: theme.getFontWeight('Body1'),
-        textTransform: theme.getTextTransform('Body1'),
+        fontFamily: style.getFontFamily('Body1'),
+        fontSize: style.getFontSize('Body1'),
+        fontWeight: style.getFontWeight('Body1'),
+        textTransform: style.getTextTransform('Body1'),
         textAlign: ({ options: { horizontalAlignment } }) =>
           horizontalAlignment,
-        letterSpacing: theme.getLetterSpacing('Body1'),
-        color: theme.getFontColor('Body1'),
-        borderBottom: `0.0625rem solid ${theme.getColor('Accent1')}`,
+        letterSpacing: style.getLetterSpacing('Body1'),
+        color: style.getFontColor('Body1'),
+        borderBottom: `0.0625rem solid ${style.getColor('Accent1')}`,
         pointerEvents: ({ parent }) =>
           parent && parent.headerOnly && env === 'dev' ? 'none' : null,
         [`@media ${B.mediaMinWidth(768)}`]: {
-          fontSize: theme.getFontSize('Body1', 'Portrait'),
+          fontSize: style.getFontSize('Body1', 'Portrait'),
         },
         [`@media ${B.mediaMinWidth(1024)}`]: {
-          fontSize: theme.getFontSize('Body1', 'Landscape'),
+          fontSize: style.getFontSize('Body1', 'Landscape'),
         },
         [`@media ${B.mediaMinWidth(1200)}`]: {
-          fontSize: theme.getFontSize('Body1', 'Desktop'),
+          fontSize: style.getFontSize('Body1', 'Desktop'),
         },
       },
       heading: {
         padding: '0.75rem 1rem 0.75rem 0',
         boxSizing: 'border-box',
-        color: ({ options: { type } }) => theme.getFontColor(type),
-        fontFamily: ({ options: { type } }) => theme.getFontFamily(type),
-        fontSize: ({ options: { type } }) => theme.getFontSize(type),
-        fontWeight: ({ options: { type } }) => theme.getFontWeight(type),
-        textTransform: ({ options: { type } }) => theme.getTextTransform(type),
-        letterSpacing: ({ options: { type } }) => theme.getLetterSpacing(type),
+        color: ({ options: { type } }) => style.getFontColor(type),
+        fontFamily: ({ options: { type } }) => style.getFontFamily(type),
+        fontSize: ({ options: { type } }) => style.getFontSize(type),
+        fontWeight: ({ options: { type } }) => style.getFontWeight(type),
+        textTransform: ({ options: { type } }) => style.getTextTransform(type),
+        letterSpacing: ({ options: { type } }) => style.getLetterSpacing(type),
         lineHeight: '1.2',
         [`@media ${B.mediaMinWidth(768)}`]: {
           fontSize: ({ options: { type } }) =>
-            theme.getFontSize(type, 'Portrait'),
+            style.getFontSize(type, 'Portrait'),
         },
         [`@media ${B.mediaMinWidth(1024)}`]: {
           fontSize: ({ options: { type } }) =>
-            theme.getFontSize(type, 'Landscape'),
+            style.getFontSize(type, 'Landscape'),
         },
         [`@media ${B.mediaMinWidth(1200)}`]: {
           fontSize: ({ options: { type } }) =>
-            theme.getFontSize(type, 'Desktop'),
+            style.getFontSize(type, 'Desktop'),
         },
       },
       content: {
@@ -181,18 +183,18 @@
         alignItems: 'center',
         whiteSpace: 'nowrap',
         textDecoration: 'none',
-        color: ({ options: { type } }) => theme.getFontColor(type),
+        color: ({ options: { type } }) => style.getFontColor(type),
       },
       columnHeadingIcon: {
         position: 'relative',
         top: '0.0625rem',
         margin: [0, '0.5rem'],
-        fontSize: theme.getFont('Body2').Mobile,
-        fontWeight: theme.getFont('Body2').fontWeight,
-        textTransform: theme.getFont('Body2').textTransform,
-        letterSpacing: theme.getFont('Body2').letterSpacing,
+        fontSize: style.getFont('Body2').Mobile,
+        fontWeight: style.getFont('Body2').fontWeight,
+        textTransform: style.getFont('Body2').textTransform,
+        letterSpacing: style.getFont('Body2').letterSpacing,
         lineHeight: '1.2',
-        color: theme.getFont('Body2').color,
+        color: style.getFont('Body2').color,
       },
     };
   },
