@@ -27,10 +27,10 @@
       )}
     </figure>
   ),
-  styles: B => {
-    const { theme } = B;
+  styles: B => t => {
+    const style = new B.Styling(t);
     const getSpacing = (idx, device = 'Mobile') =>
-      idx === '0' ? '0rem' : theme.getSpacing(idx, device);
+      idx === '0' ? '0rem' : style.getSpacing(idx, device);
     return {
       figure: {
         fontSize: 0,
