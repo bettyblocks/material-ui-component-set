@@ -117,8 +117,8 @@
       empty: {
         alignItems: 'center',
         justifyContent: 'center',
-        minHeight: '1px',
-        height: '4rem',
+        minHeight: ({ options: { rowHeight } }) => (rowHeight ? 0 : '4rem'),
+        height: '100%',
         fontSize: '0.75rem',
         color: '#262A3A',
         textTransform: 'uppercase',
