@@ -291,7 +291,6 @@
         alignItems: 'center',
         justifyContent: 'space-between',
         flexDirection: 'row-reverse',
-        minHeight: '4rem',
         width: '100%',
       },
       searchWrapper: {
@@ -299,6 +298,7 @@
         alignItems: 'center',
         padding: [0, '0.5rem'],
         borderBottom: [1, 'solid', '#000'],
+        minHeight: '4rem',
       },
       searchIcon: {
         fontSize: '1.25rem',
