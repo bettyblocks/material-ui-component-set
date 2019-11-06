@@ -36,8 +36,9 @@
       })()}
     </li>
   ),
-  styles: B => {
-    const { theme } = B;
+  styles: B => theme => {
+    const style = new B.Styling(theme);
+
     return {
       navigationItem: {
         position: 'relative',
@@ -60,7 +61,7 @@
         textDecoration: 'none',
         cursor: B.env === 'prod' ? 'pointer' : 'default',
         transition: 'background-color 0.15s ease-in-out',
-        color: theme.getColor('Primary'),
+        color: style.getColor('Primary'),
 
         '&:hover': {
           backgroundColor:
@@ -74,7 +75,7 @@
           fontSize: '1rem',
         },
         [`@media ${B.mediaMinWidth(1024)}`]: {
-          color: theme.getColor('Primary'),
+          color: style.getColor('Primary'),
           paddingRight: '1rem',
           paddingLeft: '1.5rem',
         },

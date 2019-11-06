@@ -270,10 +270,11 @@
       })()}
     </div>
   ),
-  styles: B => {
-    const { theme } = B;
+  styles: B => theme => {
+    const style = new B.Styling(theme);
     const getSpacing = (idx, device = 'Mobile') =>
-      idx === '0' ? '0rem' : theme.getSpacing(idx, device);
+      idx === '0' ? '0rem' : style.getSpacing(idx, device);
+
     return {
       root: {
         marginTop: ({ options: { outerSpacing } }) =>
@@ -290,7 +291,6 @@
         alignItems: 'center',
         justifyContent: 'space-between',
         flexDirection: 'row-reverse',
-        minHeight: '4rem',
         width: '100%',
       },
       searchWrapper: {
@@ -298,6 +298,7 @@
         alignItems: 'center',
         padding: [0, '0.5rem'],
         borderBottom: [1, 'solid', '#000'],
+        minHeight: '4rem',
       },
       searchIcon: {
         fontSize: '1.25rem',
