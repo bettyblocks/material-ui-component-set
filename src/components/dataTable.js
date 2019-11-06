@@ -467,13 +467,13 @@
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'flex-end',
-        minHeight: '4rem',
       },
       searchWrapper: {
         display: 'flex',
         alignItems: 'center',
         padding: [0, '0.5rem'],
         borderBottom: [1, 'solid', '#000'],
+        minHeight: '4rem',
       },
       searchIcon: {
         fontSize: '1.25rem',
