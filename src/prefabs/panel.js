@@ -8,7 +8,7 @@
       options: [
         {
           type: 'VARIABLE',
-          label: 'Title Color',
+          label: 'Title',
           key: 'panelTitle',
           value: ['Title'],
         },
