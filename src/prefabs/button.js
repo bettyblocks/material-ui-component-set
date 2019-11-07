@@ -14,9 +14,18 @@
         },
         {
           value: '',
-          label: 'Link to',
+          label: 'Link to Page',
           key: 'linkTo',
           type: 'ENDPOINT',
+        },
+        {
+          value: '',
+          label: 'URL (overrides internal link)',
+          key: 'linkToExternal',
+          type: 'TEXT',
+          configuration: {
+            placeholder: 'Starts with https:// or http://',
+          },
         },
         {
           value: 'Primary',
