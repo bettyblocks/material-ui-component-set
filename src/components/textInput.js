@@ -65,11 +65,6 @@
                 onFocus={e => {
                   setLabelWidth(e.target);
                 }}
-                onBlur={e => {
-                  if (!value) {
-                    unsetLabelWidth(e.target);
-                  }
-                }}
                 defaultValue={options.formComponentValue}
                 required={options.formComponentRequired}
               />
