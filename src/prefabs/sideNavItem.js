@@ -18,6 +18,15 @@
           key: 'endpointId',
           type: 'ENDPOINT',
         },
+        {
+          value: '',
+          label: 'URL (overrides internal link)',
+          key: 'linkToExternal',
+          type: 'TEXT',
+          configuration: {
+            placeholder: 'Starts with https:// or http://',
+          },
+        },
       ],
       descendants: [],
     },

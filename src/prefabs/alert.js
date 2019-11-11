@@ -49,6 +49,15 @@
           type: 'ENDPOINT',
         },
         {
+          value: '',
+          label: 'URL (overrides internal link)',
+          key: 'linkToExternal',
+          type: 'TEXT',
+          configuration: {
+            placeholder: 'Starts with https:// or http://',
+          },
+        },
+        {
           value: ['0rem', '0rem', 'M', '0rem'],
           label: 'Outer space',
           key: 'outerSpacing',
