@@ -8,7 +8,30 @@
   jsx: (() => (
     <section className={classes.root}>
       {(() => {
-        const { icon, titleText, bodyText, buttonLink, buttonText } = options;
+        const {
+          icon,
+          titleText,
+          bodyText,
+          buttonLink,
+          buttonText,
+          linkToExternal,
+        } = options;
+        const renderLink = () =>
+          linkToExternal ? (
+            <a
+              href={linkToExternal}
+              className={[classes.button, classes.link].join(' ')}
+            >
+              <B.Text value={buttonText} />
+            </a>
+          ) : (
+            <B.Link
+              endpointId={buttonLink}
+              className={[classes.button, classes.link].join(' ')}
+            >
+              <B.Text value={buttonText} />
+            </B.Link>
+          );
         return (
           <>
             <div className={classes.iconWrapper}>
@@ -30,13 +53,8 @@
             </div>
             <div className={classes.controlsWrapper}>
               <div className={classes.buttonsWrapper}>
-                {buttonText && buttonLink ? (
-                  <B.Link
-                    endpointId={buttonLink}
-                    className={[classes.button, classes.link].join(' ')}
-                  >
-                    <B.Text value={buttonText} />
-                  </B.Link>
+                {buttonText && (buttonLink || linkToExternal) ? (
+                  renderLink()
                 ) : (
                   <button type="button" className={classes.button}>
                     <B.Text value={buttonText} />

@@ -8,7 +8,24 @@
   jsx: (
     <span className={classes.wrapper}>
       {(() => {
-        const { linkTo, disabled, buttonText } = options;
+        const { linkTo, linkToExternal, disabled, buttonText } = options;
+
+        if (linkToExternal && linkToExternal !== '') {
+          return (
+            <a
+              href={linkToExternal}
+              className={[
+                classes.root,
+                classes['size-normal'],
+                classes.link,
+                B.env === 'dev' ? classes.noEvents : '',
+              ].join(' ')}
+            >
+              <B.Text value={buttonText} />
+            </a>
+          );
+        }
+
         if (linkTo && linkTo !== '') {
           return (
             <B.Link
