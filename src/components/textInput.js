@@ -21,6 +21,13 @@
           formLabel.parentElement.style.width = `${width}px`;
         };
 
+        const unsetLabelWidth = target => {
+          const formLabel = target.parentElement.querySelector(
+            '[data-element="form-label"]',
+          );
+          formLabel.style.width = null;
+        };
+
         React.useEffect(() => {
           if (
             options.formComponentLabel &&
@@ -64,6 +71,9 @@
                 }}
                 onFocus={e => {
                   setLabelWidth(e.target);
+                }}
+                onBlur={e => {
+                  if (!value) unsetLabelWidth(e.target);
                 }}
                 defaultValue={options.formComponentValue}
                 required={options.formComponentRequired}
