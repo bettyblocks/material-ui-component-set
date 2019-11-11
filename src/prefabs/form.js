@@ -113,6 +113,12 @@
               key: 'backgroundColor',
               type: 'COLOR',
             },
+            {
+              value: ['0rem', 'M', '0rem', '0rem'],
+              label: 'Outer space',
+              key: 'outerSpacing',
+              type: 'SIZES',
+            },
           ],
           descendants: [],
         },
