@@ -20,6 +20,11 @@
     'FILE_INPUT',
     'IMAGE_INPUT',
     'SUBMIT_BUTTON',
+    'ALERT',
+    'TEXT',
+    'BUTTON',
+    'DIVIDER',
+    'IMAGE',
   ],
   orientation: 'HORIZONTAL',
   jsx: (
