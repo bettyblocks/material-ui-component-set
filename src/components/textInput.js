@@ -8,7 +8,15 @@
   jsx: (
     <div className={classes.root}>
       {(() => {
-        const [value, setValue] = useState(options.formComponentValue);
+        const {
+          formComponentLabel,
+          formComponentName,
+          formComponentRequired,
+          formComponentValue,
+          handleChange,
+          showValid,
+        } = options;
+        const [value, setValue] = useState(formComponentValue);
         const [valid, setValid] = useState(true);
         const inputRef = React.createRef();
 
@@ -30,13 +38,13 @@
 
         React.useEffect(() => {
           if (
-            options.formComponentLabel &&
+            formComponentLabel &&
             ((B.env === 'prod' && value) ||
-              (B.env === 'dev' && options.formComponentValue))
+              (B.env === 'dev' && formComponentValue))
           ) {
             setLabelWidth(inputRef.current);
           }
-          if (options.showValid && options.formComponentRequired) {
+          if (showValid && formComponentRequired) {
             setValid(!!value);
           }
         });
@@ -55,41 +63,41 @@
                 className={[
                   classes.formControl,
                   B.env === 'dev' ? classes.noEvents : '',
-                  value || (B.env === 'dev' && options.formComponentValue)
+                  value || (B.env === 'dev' && formComponentValue)
                     ? classes.hasValue
                     : '',
                 ].join(' ')}
-                name={options.formComponentName}
+                name={formComponentName}
                 onChange={e => {
                   setValue(e.target.value);
-                  if (options.formComponentRequired) {
+                  if (formComponentRequired) {
                     setValid(e.target.value !== '');
                   }
-                  if (options.handleChange) {
-                    options.handleChange(e);
+                  if (handleChange) {
+                    handleChange(e);
                   }
                 }}
                 onFocus={e => {
-                  setLabelWidth(e.target);
+                  if (formComponentValue) setLabelWidth(e.target);
                 }}
                 onBlur={e => {
-                  if (!value) unsetLabelWidth(e.target);
+                  if (!value && formComponentValue) unsetLabelWidth(e.target);
                 }}
-                defaultValue={options.formComponentValue}
-                required={options.formComponentRequired}
+                defaultValue={formComponentValue}
+                required={formComponentRequired}
               />
               <div className={classes.borders}>
                 <div
                   className={[classes.border, classes.borderStart].join(' ')}
                 />
-                {options.formComponentLabel && (
+                {formComponentLabel && (
                   <div
                     data-element="form-label"
                     className={[classes.border, classes.borderMiddle].join(' ')}
                   >
                     <span className={classes.formLabel}>
-                      {options.formComponentLabel}
-                      {options.formComponentRequired ? ' *' : ''}
+                      {formComponentLabel}
+                      {formComponentRequired ? ' *' : ''}
                     </span>
                   </div>
                 )}
@@ -98,11 +106,9 @@
                 />
               </div>
             </div>
-            {options.formComponentRequired && (
+            {formComponentRequired && (
               <div className={classes.helperLine}>
-                <p className={classes.helperText}>
-                  {options.formComponentRequired ? '* Required' : ''}
-                </p>
+                <p className={classes.helperText}>* Required</p>
               </div>
             )}
           </div>
