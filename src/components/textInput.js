@@ -78,10 +78,10 @@
                   }
                 }}
                 onFocus={e => {
-                  if (formComponentValue) setLabelWidth(e.target);
+                  if (formComponentLabel) setLabelWidth(e.target);
                 }}
                 onBlur={e => {
-                  if (!value && formComponentValue) unsetLabelWidth(e.target);
+                  if (!value && formComponentLabel) unsetLabelWidth(e.target);
                 }}
                 defaultValue={formComponentValue}
                 required={formComponentRequired}
