@@ -47,8 +47,9 @@
       },
       empty: {
         position: 'relative',
+        width: '100%',
         backgroundColor: '#F0F1F5',
-        border: `0.0625rem dashed #AFB5C8`,
+        border: '0.0625rem dashed #AFB5C8',
         paddingBottom: ({ options: { imgUrl } }) => !imgUrl && '62.5%',
       },
       image: {
