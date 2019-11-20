@@ -13,10 +13,32 @@
           value: ['Button'],
         },
         {
+          type: 'CUSTOM',
+          label: 'Link type',
+          key: 'linkType',
+          value: 'Internal',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Internal', value: 'Internal' },
+              { name: 'External', value: 'External' },
+            ],
+          },
+        },
+        {
           value: '',
           label: 'Link to Page',
           key: 'linkTo',
           type: 'ENDPOINT',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'linkType',
+              comparator: 'EQ',
+              value: 'Internal',
+            },
+          },
         },
         {
           value: '',
@@ -25,6 +47,12 @@
           type: 'TEXT',
           configuration: {
             placeholder: 'Starts with https:// or http://',
+            condition: {
+              type: 'SHOW',
+              option: 'linkType',
+              comparator: 'EQ',
+              value: 'External',
+            },
           },
         },
         {
