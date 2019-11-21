@@ -14,21 +14,21 @@
         },
         {
           type: 'CUSTOM',
-          label: 'Link type',
+          label: 'Link to',
           key: 'linkType',
           value: 'Internal',
           configuration: {
             as: 'BUTTONGROUP',
             dataType: 'string',
             allowedInput: [
-              { name: 'Internal', value: 'Internal' },
-              { name: 'External', value: 'External' },
+              { name: 'Internal page', value: 'Internal' },
+              { name: 'External page', value: 'External' },
             ],
           },
         },
         {
           value: '',
-          label: 'Link to Page',
+          label: 'Page',
           key: 'linkTo',
           type: 'ENDPOINT',
           configuration: {
@@ -42,7 +42,7 @@
         },
         {
           value: '',
-          label: 'URL (overrides internal link)',
+          label: 'URL',
           key: 'linkToExternal',
           type: 'TEXT',
           configuration: {
