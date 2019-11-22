@@ -93,13 +93,15 @@
                 if (loading) return 'loading...';
                 if (error) return 'failed';
 
+                const item = data.results[0];
+
                 return (
                   <>
-                    {data.results.map(item => (
+                    {item && (
                       <B.GetOneProvider key={item.id} value={item}>
                         {children}
                       </B.GetOneProvider>
-                    ))}
+                    )}
                   </>
                 );
               }}
