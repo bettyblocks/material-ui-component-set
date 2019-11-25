@@ -15,9 +15,23 @@
           buttonLink,
           buttonText,
           linkToExternal,
-          linkType,
         } = options;
-
+        const renderLink = () =>
+          linkToExternal ? (
+            <a
+              href={linkToExternal}
+              className={[classes.button, classes.link].join(' ')}
+            >
+              <B.Text value={buttonText} />
+            </a>
+          ) : (
+            <B.Link
+              endpointId={buttonLink}
+              className={[classes.button, classes.link].join(' ')}
+            >
+              <B.Text value={buttonText} />
+            </B.Link>
+          );
         return (
           <>
             <div className={classes.iconWrapper}>
@@ -39,28 +53,9 @@
             </div>
             <div className={classes.controlsWrapper}>
               <div className={classes.buttonsWrapper}>
-                {buttonText &&
-                  linkType === 'External' &&
-                  linkToExternal !==
-                    ''(
-                      <a
-                        href={linkToExternal}
-                        className={[classes.button, classes.link].join(' ')}
-                      >
-                        <B.Text value={buttonText} />
-                      </a>,
-                    )}
-
-                {buttonText && linkType === 'Internal' && buttonLink !== '' && (
-                  <B.Link
-                    endpointId={buttonLink}
-                    className={[classes.button, classes.link].join(' ')}
-                  >
-                    <B.Text value={buttonText} />
-                  </B.Link>
-                )}
-
-                {buttonText && (
+                {buttonText && (buttonLink || linkToExternal) ? (
+                  renderLink()
+                ) : (
                   <button type="button" className={classes.button}>
                     <B.Text value={buttonText} />
                   </button>
