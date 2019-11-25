@@ -58,7 +58,7 @@
         },
         {
           value: '',
-          label: 'Button Link',
+          label: 'Page',
           key: 'buttonLink',
           type: 'ENDPOINT',
           configuration: {
