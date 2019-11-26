@@ -8,9 +8,15 @@
   jsx: (
     <span className={classes.wrapper}>
       {(() => {
-        const { linkTo, linkToExternal, disabled, buttonText } = options;
+        const {
+          linkType,
+          linkTo,
+          linkToExternal,
+          disabled,
+          buttonText,
+        } = options;
 
-        if (linkToExternal && linkToExternal !== '') {
+        if (linkType === 'External' && linkToExternal !== '') {
           return (
             <a
               href={linkToExternal}
@@ -26,7 +32,7 @@
           );
         }
 
-        if (linkTo && linkTo !== '') {
+        if (linkType === 'Internal' && linkTo !== '') {
           return (
             <B.Link
               endpointId={linkTo}
