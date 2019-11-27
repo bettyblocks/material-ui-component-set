@@ -15,23 +15,14 @@
           buttonLink,
           buttonText,
           linkToExternal,
+          linkType,
         } = options;
-        const renderLink = () =>
-          linkToExternal ? (
-            <a
-              href={linkToExternal}
-              className={[classes.button, classes.link].join(' ')}
-            >
-              <B.Text value={buttonText} />
-            </a>
-          ) : (
-            <B.Link
-              endpointId={buttonLink}
-              className={[classes.button, classes.link].join(' ')}
-            >
-              <B.Text value={buttonText} />
-            </B.Link>
-          );
+
+        const useExternalLink =
+          linkType === 'External' && linkToExternal !== '';
+        const useInternalLink = linkType === 'Internal' && buttonLink !== '';
+        const useTextOnly = !useExternalLink && !useInternalLink;
+
         return (
           <>
             <div className={classes.iconWrapper}>
@@ -53,9 +44,25 @@
             </div>
             <div className={classes.controlsWrapper}>
               <div className={classes.buttonsWrapper}>
-                {buttonText && (buttonLink || linkToExternal) ? (
-                  renderLink()
-                ) : (
+                {buttonText && useExternalLink && (
+                  <a
+                    href={linkToExternal}
+                    className={[classes.button, classes.link].join(' ')}
+                  >
+                    <B.Text value={buttonText} />
+                  </a>
+                )}
+
+                {buttonText && useInternalLink && (
+                  <B.Link
+                    endpointId={buttonLink}
+                    className={[classes.button, classes.link].join(' ')}
+                  >
+                    <B.Text value={buttonText} />
+                  </B.Link>
+                )}
+
+                {buttonText && useTextOnly && (
                   <button type="button" className={classes.button}>
                     <B.Text value={buttonText} />
                   </button>
