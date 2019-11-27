@@ -8,12 +8,7 @@
   jsx: (
     <li className={classes.navigationItem}>
       {(() => {
-        const {
-          navigationContent,
-          endpointId,
-          linkToExternal,
-          linkType,
-        } = options;
+        const { navigationContent, endpointId, linkToExternal } = options;
         if (!navigationContent)
           return (
             <span
@@ -26,11 +21,7 @@
             </span>
           );
 
-        if (
-          B.env === 'prod' &&
-          linkType === 'External' &&
-          linkToExternal !== ''
-        ) {
+        if (B.env === 'prod' && linkToExternal) {
           return (
             navigationContent.length > 0 && (
               <a href={linkToExternal} className={classes.navigationLink}>
@@ -40,7 +31,7 @@
           );
         }
 
-        if (B.env === 'prod' && linkType === 'Internal' && endpointId !== '') {
+        if (B.env === 'prod' && endpointId) {
           return (
             navigationContent.length > 0 && (
               <B.Link

@@ -36,46 +36,18 @@
               value: ['Item 1'],
             },
             {
-              type: 'CUSTOM',
-              label: 'Link to',
-              key: 'linkType',
-              value: 'Internal',
-              configuration: {
-                as: 'BUTTONGROUP',
-                dataType: 'string',
-                allowedInput: [
-                  { name: 'Internal page', value: 'Internal' },
-                  { name: 'External page', value: 'External' },
-                ],
-              },
-            },
-            {
               value: '',
-              label: 'Page',
+              label: 'Link to',
               key: 'endpointId',
               type: 'ENDPOINT',
-              configuration: {
-                condition: {
-                  type: 'SHOW',
-                  option: 'linkType',
-                  comparator: 'EQ',
-                  value: 'Internal',
-                },
-              },
             },
             {
               value: '',
-              label: 'URL',
+              label: 'URL (overrides internal link)',
               key: 'linkToExternal',
               type: 'TEXT',
               configuration: {
                 placeholder: 'Starts with https:// or http://',
-                condition: {
-                  type: 'SHOW',
-                  option: 'linkType',
-                  comparator: 'EQ',
-                  value: 'External',
-                },
               },
             },
           ],
@@ -91,46 +63,18 @@
               value: ['Item 2'],
             },
             {
-              type: 'CUSTOM',
-              label: 'Link to',
-              key: 'linkType',
-              value: 'Internal',
-              configuration: {
-                as: 'BUTTONGROUP',
-                dataType: 'string',
-                allowedInput: [
-                  { name: 'Internal page', value: 'Internal' },
-                  { name: 'External page', value: 'External' },
-                ],
-              },
-            },
-            {
               value: '',
-              label: 'Page',
+              label: 'Link to',
               key: 'endpointId',
               type: 'ENDPOINT',
-              configuration: {
-                condition: {
-                  type: 'SHOW',
-                  option: 'linkType',
-                  comparator: 'EQ',
-                  value: 'Internal',
-                },
-              },
             },
             {
               value: '',
-              label: 'URL',
+              label: 'URL (overrides internal link)',
               key: 'linkToExternal',
               type: 'TEXT',
               configuration: {
                 placeholder: 'Starts with https:// or http://',
-                condition: {
-                  type: 'SHOW',
-                  option: 'linkType',
-                  comparator: 'EQ',
-                  value: 'External',
-                },
               },
             },
           ],
@@ -146,46 +90,18 @@
               value: ['Item 3'],
             },
             {
-              type: 'CUSTOM',
-              label: 'Link to',
-              key: 'linkType',
-              value: 'Internal',
-              configuration: {
-                as: 'BUTTONGROUP',
-                dataType: 'string',
-                allowedInput: [
-                  { name: 'Internal page', value: 'Internal' },
-                  { name: 'External page', value: 'External' },
-                ],
-              },
-            },
-            {
               value: '',
-              label: 'Page',
+              label: 'Link to',
               key: 'endpointId',
               type: 'ENDPOINT',
-              configuration: {
-                condition: {
-                  type: 'SHOW',
-                  option: 'linkType',
-                  comparator: 'EQ',
-                  value: 'Internal',
-                },
-              },
             },
             {
               value: '',
-              label: 'URL',
+              label: 'URL (overrides internal link)',
               key: 'linkToExternal',
               type: 'TEXT',
               configuration: {
                 placeholder: 'Starts with https:// or http://',
-                condition: {
-                  type: 'SHOW',
-                  option: 'linkType',
-                  comparator: 'EQ',
-                  value: 'External',
-                },
               },
             },
           ],

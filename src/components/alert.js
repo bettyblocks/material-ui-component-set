@@ -15,14 +15,12 @@
           buttonLink,
           buttonText,
           linkToExternal,
-          linkType,
         } = options;
-
+    
         const useExternalLink =
           linkType === 'External' && linkToExternal !== '';
         const useInternalLink = linkType === 'Internal' && buttonLink !== '';
         const useTextOnly = !useExternalLink && !useInternalLink;
-
         return (
           <>
             <div className={classes.iconWrapper}>
