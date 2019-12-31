@@ -19,6 +19,8 @@
     'TAB',
     'TEXT',
     'ROW',
+    'CONTAINER_COMPONENT',
+    'COMPONENT',
   ],
   orientation: 'HORIZONTAL',
   jsx: (

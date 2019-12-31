@@ -19,6 +19,9 @@
     'PROGRESS',
     'TAB',
     'TEXT',
+    'BODY_COMPONENT',
+    'CONTAINER_COMPONENT',
+    'COMPONENT',
   ],
   orientation: 'VERTICAL',
   jsx: (
