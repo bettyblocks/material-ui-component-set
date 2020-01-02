@@ -20,7 +20,7 @@
     'TEXT',
     'ROW',
     'CONTAINER_COMPONENT',
-    'COMPONENT',
+    'CONTENT_COMPONENT',
   ],
   orientation: 'HORIZONTAL',
   jsx: (

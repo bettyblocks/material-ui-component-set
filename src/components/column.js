@@ -21,7 +21,7 @@
     'TEXT',
     'BODY_COMPONENT',
     'CONTAINER_COMPONENT',
-    'COMPONENT',
+    'CONTENT_COMPONENT',
   ],
   orientation: 'VERTICAL',
   jsx: (
