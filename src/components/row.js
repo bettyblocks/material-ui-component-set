@@ -3,7 +3,7 @@
   icon: 'RowIcon',
   category: 'LAYOUT',
   type: 'ROW',
-  allowedTypes: ['COLUMN'],
+  allowedTypes: ['COLUMN', 'LAYOUT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (
     <div className={classes.container}>
