@@ -47,6 +47,7 @@
           const getInputVariableValue = value => {
             const variable = B.getVariable(value.id);
             if (variable) {
+              // eslint-disable-next-line no-undef
               const params = useParams();
 
               return variable.kind === 'integer'
