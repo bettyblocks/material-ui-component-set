@@ -25,6 +25,9 @@
     'BUTTON',
     'DIVIDER',
     'IMAGE',
+    'CONTAINER_COMPONENT',
+    'FORM_COMPONENT',
+    'CONTENT_COMPONENT',
   ],
   orientation: 'HORIZONTAL',
   jsx: (
