@@ -143,9 +143,29 @@
 
           const { name: propertyName, kind } = lhsProperty;
 
-          const rhsValue = ['serial', 'integer'].includes(kind)
-            ? parseInt(rhs, 10)
-            : rhs;
+          const getRawValue = (opts, value) =>
+            opts.includes(kind) ? parseInt(value, 10) : value;
+
+          const getInputVariableValue = value => {
+            const variable = B.getVariable(value.id);
+            if (variable) {
+              // eslint-disable-next-line no-undef
+              const params = useParams();
+
+              return variable.kind === 'integer'
+                ? parseInt(params[variable.name], 10)
+                : params[variable.name];
+            }
+
+            return null;
+          };
+
+          const isInputVariable = value =>
+            value && value[0] && value[0].type === 'INPUT';
+
+          const rhsValue = isInputVariable(rhs)
+            ? getInputVariableValue(rhs[0])
+            : getRawValue(['serial', 'integer'], rhs);
 
           return {
             [propertyName]: {
