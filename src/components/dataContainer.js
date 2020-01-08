@@ -65,7 +65,7 @@
 
           const rhsValue = isInputVariable(rhs)
             ? getInputVariableValue(rhs[0])
-            : getRawValue(['serial', 'integer'], rhs);
+            : getRawValue(['serial', 'integer'], rhs[0]);
 
           return {
             [propertyName]: {
