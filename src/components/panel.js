@@ -3,7 +3,7 @@
   icon: 'PanelIcon',
   category: 'LAYOUT',
   type: 'PANEL',
-  allowedTypes: ['ROW'],
+  allowedTypes: ['ROW', 'BODY_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (
     <div className={classes.panel}>
