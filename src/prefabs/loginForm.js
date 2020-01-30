@@ -1,19 +1,16 @@
 (() => ({
-  name: 'Form',
+  name: 'LoginForm',
   icon: 'FormIcon',
   category: 'FORM',
   structure: [
     {
-      name: 'Form',
+      name: 'LoginForm',
       options: [
         {
           value: '',
           label: 'Action',
           key: 'actionId',
           type: 'ACTION',
-          configuration: {
-            apiVersion: 'v1',
-          },
         },
         {
           type: 'ENDPOINT',
@@ -22,13 +19,13 @@
           value: '',
         },
         {
-          value: 'Thanks for submitting the form!',
+          value: "You're logged in!",
           label: 'Success message',
           key: 'formSuccessMessage',
           type: 'TEXT',
         },
         {
-          value: 'Failed to submit the form!',
+          value: 'Failed to login!',
           label: 'Error message',
           key: 'formErrorMessage',
           type: 'TEXT',
@@ -45,13 +42,13 @@
           name: 'TextInput',
           options: [
             {
-              value: 'Label',
+              value: 'Email',
               label: 'Label',
               key: 'formComponentLabel',
               type: 'TEXT',
             },
             {
-              value: 'text',
+              value: 'email',
               label: 'Content format',
               key: 'formComponentType',
               type: 'CUSTOM',
@@ -60,8 +57,6 @@
                 dataType: 'string',
                 allowedInput: [
                   { name: 'Text', value: 'text' },
-                  { name: 'Number', value: 'number' },
-                  { name: 'Password', value: 'password' },
                   { name: 'Email', value: 'email' },
                 ],
               },
@@ -85,13 +80,13 @@
           name: 'TextInput',
           options: [
             {
-              value: 'Label',
+              value: 'Password',
               label: 'Label',
               key: 'formComponentLabel',
               type: 'TEXT',
             },
             {
-              value: 'text',
+              value: 'password',
               label: 'Content format',
               key: 'formComponentType',
               type: 'CUSTOM',
@@ -100,9 +95,7 @@
                 dataType: 'string',
                 allowedInput: [
                   { name: 'Text', value: 'text' },
-                  { name: 'Number', value: 'number' },
                   { name: 'Password', value: 'password' },
-                  { name: 'Email', value: 'email' },
                 ],
               },
             },
@@ -125,7 +118,7 @@
           name: 'SubmitButton',
           options: [
             {
-              value: 'Submit',
+              value: 'Login',
               label: 'Button text',
               key: 'submitButtonText',
               type: 'TEXT',

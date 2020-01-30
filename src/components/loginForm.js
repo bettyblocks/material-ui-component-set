@@ -1,5 +1,5 @@
 (() => ({
-  name: 'Form',
+  name: 'LoginForm',
   icon: 'FormIcon',
   category: 'FORM',
   type: 'FORM',
@@ -52,9 +52,21 @@
         const empty = children.length === 0;
         const isPristine = empty && B.env === 'dev';
 
+        const isJWT = input => {
+          const parts = input.split('.');
+          return parts.length === 3 && input.startsWith('ey');
+        };
+
         return (
           <Action actionId={actionId}>
             {(callAction, { data, loading, error }) => {
+              if (
+                data &&
+                data[`action${actionId}`] &&
+                isJWT(data[`action${actionId}`])
+              ) {
+                localStorage.setItem('TOKEN', data[`action${actionId}`]);
+              }
               if (data && url) {
                 history.push(url);
               }
