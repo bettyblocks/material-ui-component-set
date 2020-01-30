@@ -1,5 +1,5 @@
 (() => ({
-  name: '@betty-blocks/default/LoginForm',
+  name: 'LoginForm',
   icon: 'FormIcon',
   category: 'FORM',
   type: 'FORM',

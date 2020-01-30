@@ -1,10 +1,10 @@
 (() => ({
-  name: '@betty-blocks/default/LoginForm',
+  name: 'LoginForm',
   icon: 'FormIcon',
   category: 'FORM',
   structure: [
     {
-      name: '@betty-blocks/default/LoginForm',
+      name: 'LoginForm',
       options: [
         {
           value: '',
@@ -39,7 +39,7 @@
       ],
       descendants: [
         {
-          name: '@betty-blocks/default/TextInput',
+          name: 'TextInput',
           options: [
             {
               value: 'Email',
@@ -77,7 +77,7 @@
           descendants: [],
         },
         {
-          name: '@betty-blocks/default/TextInput',
+          name: 'TextInput',
           options: [
             {
               value: 'Password',
@@ -115,7 +115,7 @@
           descendants: [],
         },
         {
-          name: '@betty-blocks/default/SubmitButton',
+          name: 'SubmitButton',
           options: [
             {
               value: 'Login',
