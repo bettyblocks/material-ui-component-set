@@ -9,7 +9,7 @@
     <span className={classes.wrapper}>
       {(() => (
         <button
-          type="button"
+          type="submit"
           className={[
             classes.root,
             classes['size-normal'],
@@ -22,9 +22,7 @@
           <span
             className={[
               classes.loader,
-              options.formStatus && options.formStatus === 'waiting'
-                ? classes.show
-                : classes.hidden,
+              parent.loading ? classes.show : classes.hidden,
             ].join(' ')}
           />
         </button>
@@ -33,20 +31,10 @@
   ),
   styles: B => t => {
     const style = new B.Styling(t);
-    const getSpacing = (idx, device = 'Mobile') =>
-      idx === '0' ? '0rem' : style.getSpacing(idx, device);
 
     return {
       wrapper: {
         display: 'inline-block',
-        marginTop: ({ options: { outerSpacing } }) =>
-          getSpacing(outerSpacing[0]),
-        marginRight: ({ options: { outerSpacing } }) =>
-          getSpacing(outerSpacing[1]),
-        marginBottom: ({ options: { outerSpacing } }) =>
-          getSpacing(outerSpacing[2]),
-        marginLeft: ({ options: { outerSpacing } }) =>
-          getSpacing(outerSpacing[3]),
       },
       root: {
         extend: t.base,
@@ -130,49 +118,13 @@
         border: '0.1875rem solid #ffffff',
         borderRadius: '50%',
         borderTop: '0.1875rem solid transparent',
-        animation: 'loading infinite linear 1s',
+        animation: '$loading infinite linear 1s',
       },
       show: {
         display: 'inline-block',
       },
       hidden: {
         display: 'none',
-      },
-      [`@media ${B.mediaMinWidth(768)}`]: {
-        wrapper: {
-          marginTop: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[0], 'Portrait'),
-          marginRight: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[1], 'Portrait'),
-          marginBottom: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[2], 'Portrait'),
-          marginLeft: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[3], 'Portrait'),
-        },
-      },
-      [`@media ${B.mediaMinWidth(1024)}`]: {
-        wrapper: {
-          marginTop: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[0], 'Landscape'),
-          marginRight: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[1], 'Landscape'),
-          marginBottom: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[2], 'Landscape'),
-          marginLeft: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[3], 'Landscape'),
-        },
-      },
-      [`@media ${B.mediaMinWidth(1200)}`]: {
-        wrapper: {
-          marginTop: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[0], 'Desktop'),
-          marginRight: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[1], 'Desktop'),
-          marginBottom: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[2], 'Desktop'),
-          marginLeft: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[3], 'Desktop'),
-        },
       },
     };
   },
