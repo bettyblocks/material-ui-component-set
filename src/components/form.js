@@ -33,69 +33,53 @@
   jsx: (
     <div className={classes.root}>
       {(() => {
-        const { env, Action, Children, getEndpoint } = B;
+        const { env, Action, Children } = B;
 
         // eslint-disable-next-line
         const history = env === 'dev' ? { push: x => x } : useHistory();
 
-        const {
-          actionId,
-          formErrorMessage,
-          formSuccessMessage,
-          formEndpoint,
-        } = options;
+        const { actionId, formErrorMessage, formSuccessMessage } = options;
 
         const [state, setState] = useState({});
-        const { url } =
-          B.env !== 'dev' && formEndpoint && getEndpoint(formEndpoint);
 
         const empty = children.length === 0;
         const isPristine = empty && B.env === 'dev';
 
         return (
           <Action actionId={actionId}>
-            {(callAction, { data, loading, error }) => {
-              if (data && url) {
-                history.push(url);
-              }
-              return (
-                <>
-                  <div className={classes.messageContainer}>
-                    {error && (
-                      <span className={classes.error}>{formErrorMessage}</span>
-                    )}
-                    {data && (
-                      <span className={classes.success}>
-                        {formSuccessMessage}
-                      </span>
-                    )}
-                  </div>
+            {(callAction, { data, loading, error }) => (
+              <>
+                <div className={classes.messageContainer}>
+                  {error && (
+                    <span className={classes.error}>{formErrorMessage}</span>
+                  )}
+                  {data && (
+                    <span className={classes.success}>
+                      {formSuccessMessage}
+                    </span>
+                  )}
+                </div>
 
-                  <form
-                    onSubmit={event => {
-                      event.preventDefault();
-                      callAction({
-                        variables: { input: state },
-                      });
-                    }}
-                    className={[
-                      classes.form,
-                      empty && classes.empty,
-                      isPristine && classes.pristine,
-                    ].join(' ')}
-                  >
-                    {isPristine && <span>form</span>}
-                    <Children
-                      state={state}
-                      setState={setState}
-                      loading={loading}
-                    >
-                      {children}
-                    </Children>
-                  </form>
-                </>
-              );
-            }}
+                <form
+                  onSubmit={event => {
+                    event.preventDefault();
+                    callAction({
+                      variables: { input: state },
+                    });
+                  }}
+                  className={[
+                    classes.form,
+                    empty && classes.empty,
+                    isPristine && classes.pristine,
+                  ].join(' ')}
+                >
+                  {isPristine && <span>form</span>}
+                  <Children state={state} setState={setState} loading={loading}>
+                    {children}
+                  </Children>
+                </form>
+              </>
+            )}
           </Action>
         );
       })()}
