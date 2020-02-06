@@ -29,7 +29,7 @@
         {
           value: '',
           label: 'Page',
-          key: 'endpointId',
+          key: 'endpoint',
           type: 'ENDPOINT',
           configuration: {
             condition: {

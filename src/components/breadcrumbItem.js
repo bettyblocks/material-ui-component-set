@@ -8,7 +8,7 @@
   jsx: (
     <li className={classes.breadcrumbItem}>
       {(() => {
-        const { breadcrumbContent, endpointId } = options;
+        const { breadcrumbContent, endpoint } = options;
         if (!breadcrumbContent)
           return (
             <span
@@ -23,8 +23,8 @@
 
         return (
           breadcrumbContent &&
-          (B.env === 'prod' && endpointId ? (
-            <B.Link endpointId={endpointId} className={classes.breadcrumbLink}>
+          (B.env === 'prod' && endpoint ? (
+            <B.Link endpoint={endpoint} className={classes.breadcrumbLink}>
               <B.Text value={breadcrumbContent} />
             </B.Link>
           ) : (
