@@ -16,12 +16,6 @@
           },
         },
         {
-          type: 'ENDPOINT',
-          label: 'Redirect to endpoint after success',
-          key: 'formEndpoint',
-          value: '',
-        },
-        {
           value: 'Thanks for submitting the form!',
           label: 'Success message',
           key: 'formSuccessMessage',
