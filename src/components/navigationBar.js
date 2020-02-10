@@ -10,16 +10,16 @@
       {(() => {
         const [activeState, setActiveState] = useState(false);
         const showPlaceholder = children.length === 0;
-        const { endpointId, logoUrl, brandName } = options;
+        const { endpoint, logoUrl, brandName } = options;
         const isPristine = showPlaceholder && B.env === 'dev' && !logoUrl;
 
         return (
           <div className={classes.navigationContainer}>
             {logoUrl && (
               <div className={classes.logoWrapper}>
-                {endpointId ? (
+                {endpoint ? (
                   <B.Link
-                    endpointId={endpointId}
+                    endpoint={endpoint}
                     className={classes.navigationLink}
                   >
                     <img
@@ -38,11 +38,8 @@
               </div>
             )}
             <div className={classes.brandWrapper}>
-              {endpointId ? (
-                <B.Link
-                  endpointId={endpointId}
-                  className={classes.navigationLink}
-                >
+              {endpoint ? (
+                <B.Link endpoint={endpoint} className={classes.navigationLink}>
                   <h1 className={classes.brand}>{brandName}</h1>
                 </B.Link>
               ) : (

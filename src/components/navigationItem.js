@@ -10,7 +10,7 @@
       {(() => {
         const {
           navigationContent,
-          endpointId,
+          endpoint,
           linkToExternal,
           linkType,
         } = options;
@@ -41,13 +41,10 @@
           );
         }
 
-        if (B.env === 'prod' && linkType === 'Internal' && endpointId !== '') {
+        if (B.env === 'prod' && linkType === 'Internal' && endpoint !== '') {
           return (
             navigationContent.length > 0 && (
-              <B.Link
-                endpointId={endpointId}
-                className={classes.navigationLink}
-              >
+              <B.Link endpoint={endpoint} className={classes.navigationLink}>
                 <B.Text value={navigationContent} />
               </B.Link>
             )

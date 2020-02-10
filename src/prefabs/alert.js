@@ -59,7 +59,7 @@
         {
           value: '',
           label: 'Page',
-          key: 'buttonLink',
+          key: 'linkToInternal',
           type: 'ENDPOINT',
           configuration: {
             condition: {

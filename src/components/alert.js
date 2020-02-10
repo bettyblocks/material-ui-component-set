@@ -12,7 +12,7 @@
           icon,
           titleText,
           bodyText,
-          buttonLink,
+          linkToInternal,
           buttonText,
           linkToExternal,
           linkType,
@@ -20,7 +20,8 @@
 
         const useExternalLink =
           linkType === 'External' && linkToExternal !== '';
-        const useInternalLink = linkType === 'Internal' && buttonLink !== '';
+        const useInternalLink =
+          linkType === 'Internal' && linkToInternal !== '';
         const useTextOnly = !useExternalLink && !useInternalLink;
 
         return (
@@ -55,7 +56,7 @@
 
                 {buttonText && useInternalLink && (
                   <B.Link
-                    endpointId={buttonLink}
+                    endpoint={linkToInternal}
                     className={[classes.button, classes.link].join(' ')}
                   >
                     <B.Text value={buttonText} />

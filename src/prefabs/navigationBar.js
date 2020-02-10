@@ -21,7 +21,7 @@
         {
           value: '',
           label: 'Link to',
-          key: 'endpointId',
+          key: 'endpoint',
           type: 'ENDPOINT',
         },
       ],
@@ -52,7 +52,7 @@
             {
               value: '',
               label: 'Page',
-              key: 'endpointId',
+              key: 'endpoint',
               type: 'ENDPOINT',
               configuration: {
                 condition: {
@@ -107,7 +107,7 @@
             {
               value: '',
               label: 'Page',
-              key: 'endpointId',
+              key: 'endpoint',
               type: 'ENDPOINT',
               configuration: {
                 condition: {
@@ -162,7 +162,7 @@
             {
               value: '',
               label: 'Page',
-              key: 'endpointId',
+              key: 'endpoint',
               type: 'ENDPOINT',
               configuration: {
                 condition: {
