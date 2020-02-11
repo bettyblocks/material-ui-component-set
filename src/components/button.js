@@ -35,7 +35,7 @@
         if (linkType === 'Internal' && linkTo !== '') {
           return (
             <B.Link
-              endpointId={linkTo}
+              endpoint={linkTo}
               className={[
                 classes.root,
                 classes['size-normal'],

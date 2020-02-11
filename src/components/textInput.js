@@ -8,17 +8,24 @@
   jsx: (
     <div className={classes.root}>
       {(() => {
+        const { getActionInput } = B;
         const {
           formComponentLabel,
-          formComponentName,
           formComponentRequired,
-          formComponentValue,
+          formComponentType,
           handleChange,
+          actionInputId,
           showValid,
         } = options;
-        const [value, setValue] = useState(formComponentValue);
+
         const [valid, setValid] = useState(true);
+        const [currentValue, setCurrentValue] = useState();
         const inputRef = React.createRef();
+
+        const actionInput = getActionInput(actionInputId);
+        const value = actionInput
+          ? parent.state[actionInput.name]
+          : currentValue;
 
         const setLabelWidth = target => {
           const formLabel = target.parentElement.querySelector(
@@ -37,11 +44,7 @@
         };
 
         React.useEffect(() => {
-          if (
-            formComponentLabel &&
-            ((B.env === 'prod' && value) ||
-              (B.env === 'dev' && formComponentValue))
-          ) {
+          if (formComponentLabel && (B.env === 'prod' && value)) {
             setLabelWidth(inputRef.current);
           }
           if (showValid && formComponentRequired) {
@@ -59,22 +62,29 @@
             <div className={classes.formField}>
               <input
                 ref={inputRef}
-                type="text"
+                type={formComponentType}
                 className={[
                   classes.formControl,
                   B.env === 'dev' ? classes.noEvents : '',
-                  value || (B.env === 'dev' && formComponentValue)
-                    ? classes.hasValue
-                    : '',
+                  value ? classes.hasValue : '',
                 ].join(' ')}
-                name={formComponentName}
-                onChange={e => {
-                  setValue(e.target.value);
+                onChange={event => {
+                  const {
+                    target: { value: eventValue },
+                  } = event;
                   if (formComponentRequired) {
-                    setValid(e.target.value !== '');
+                    setValid(value !== '');
                   }
                   if (handleChange) {
-                    handleChange(e);
+                    handleChange(event);
+                  }
+                  if (actionInput) {
+                    parent.setState({
+                      ...parent.state,
+                      [actionInput.name]: eventValue,
+                    });
+                  } else {
+                    setCurrentValue(eventValue);
                   }
                 }}
                 onFocus={e => {
@@ -83,7 +93,6 @@
                 onBlur={e => {
                   if (!value && formComponentLabel) unsetLabelWidth(e.target);
                 }}
-                defaultValue={formComponentValue}
                 required={formComponentRequired}
               />
               <div className={classes.borders}>
