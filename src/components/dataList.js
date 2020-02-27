@@ -29,6 +29,7 @@
         const [page, setPage] = useState(1);
         const [search, setSearch] = useState('');
         const [isTyping, setIsTyping] = useState(false);
+        const { filter } = options;
 
         const take = parseInt(options.take, 10) || 50;
         const searchProp = B.getProperty(options.searchProperty);
@@ -36,52 +37,6 @@
         const isEmpty = children.length === 0;
         const isDev = B.env === 'dev';
         const isPristine = isEmpty && isDev;
-
-        const buildFilter = ([lhs, operator, rhs]) => {
-          if (!lhs || !rhs) {
-            return {};
-          }
-
-          const lhsProperty = B.getProperty(lhs);
-
-          if (!lhsProperty) {
-            return {};
-          }
-
-          const { name: propertyName, kind } = lhsProperty;
-
-          const getRawValue = (opts, value) =>
-            opts.includes(kind) ? parseInt(value, 10) : value;
-
-          const getInputVariableValue = value => {
-            const variable = B.getVariable(value.id);
-            if (variable) {
-              // eslint-disable-next-line no-undef
-              const params = useParams();
-
-              return variable.kind === 'integer'
-                ? parseInt(params[variable.name], 10)
-                : params[variable.name];
-            }
-
-            return null;
-          };
-
-          const isInputVariable = value =>
-            value && value[0] && value[0].type === 'INPUT';
-
-          const rhsValue = isInputVariable(rhs)
-            ? getInputVariableValue(rhs[0])
-            : getRawValue(['serial', 'integer'], rhs[0]);
-
-          return {
-            [propertyName]: {
-              [operator]: rhsValue,
-            },
-          };
-        };
-
-        /* Layouts */
 
         const builderLayout = () => (
           <>
@@ -126,25 +81,14 @@
             return builderLayout();
           }
 
-          const where = buildFilter(options.filter);
-
-          if (searchProp && search !== '') {
-            where[searchProp.name] = {
-              ...(where[searchProp.name] ? where[searchProp.name] : {}),
-              regex: search,
-            };
-          }
-
-          const variables = Object.assign(
-            Object.keys(where).length !== 0 && {
-              where,
-            },
-          );
-
           return (
             <B.GetAll
               modelId={options.model}
-              __SECRET_VARIABLES_DO_NOT_USE={variables}
+              filter={
+                searchProp && search !== ''
+                  ? { ...filter, [searchProp.id]: { matches: search } }
+                  : filter
+              }
               skip={page ? (page - 1) * take : 0}
               take={take}
             >

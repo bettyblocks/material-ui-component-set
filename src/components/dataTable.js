@@ -9,6 +9,7 @@
     <div className={classes.root}>
       {(() => {
         const { env, getProperty, GetAll, Link, Children } = B;
+        const { filter } = options;
 
         const take = parseInt(options.take, 10) || 50;
 
@@ -128,85 +129,19 @@
 
         const queryParams = new URLSearchParams(querystring);
 
-        /* ####### Filters ####### */
-
-        function buildFilter(where, [lhs, operator, rhs]) {
-          if (!lhs || !rhs) {
-            return null;
-          }
-
-          const lhsProperty = getProperty(lhs);
-
-          if (!lhsProperty) {
-            return null;
-          }
-
-          const { name: propertyName, kind } = lhsProperty;
-
-          const getRawValue = (opts, value) =>
-            opts.includes(kind) ? parseInt(value, 10) : value;
-
-          const getInputVariableValue = value => {
-            const variable = B.getVariable(value.id);
-            if (variable) {
-              // eslint-disable-next-line no-undef
-              const params = useParams();
-
-              return variable.kind === 'integer'
-                ? parseInt(params[variable.name], 10)
-                : params[variable.name];
-            }
-
-            return null;
-          };
-
-          const isInputVariable = value =>
-            value && value[0] && value[0].type === 'INPUT';
-
-          const rhsValue = isInputVariable(rhs)
-            ? getInputVariableValue(rhs[0])
-            : getRawValue(['serial', 'integer'], rhs[0]);
-
-          return {
-            [propertyName]: {
-              [operator]: rhsValue,
-            },
-          };
-        }
-
-        let where = {};
-
-        const filter = buildFilter(where, options.filter);
-
-        if (filter !== null) {
-          where = filter;
-        }
-
         const searchParam = queryParams.get('search') || '';
         const searchProp = getProperty(options.searchProperty);
 
-        if (searchProp && searchParam !== '') {
-          where[searchProp.name] = {
-            ...(where[searchProp.name] ? where[searchProp.name] : {}),
-            regex: searchParam,
-          };
-        }
-
-        /* ####################### */
-
         const page = parseInt(queryParams.get('page'), 10) || undefined;
         const field = queryParams.get('sort') || '';
-        const order = queryParams.get('order');
+        const order = queryParams.get('order') || '';
 
         const variables = Object.assign(
-          field && {
+          order && {
             sort: {
               field,
               order: order.toUpperCase(),
             },
-          },
-          Object.keys(where).length !== 0 && {
-            where,
           },
         );
 
@@ -224,6 +159,11 @@
             )}
             <GetAll
               modelId={options.model}
+              filter={
+                searchProp && searchParam !== ''
+                  ? { ...filter, [searchProp.id]: { matches: searchParam } }
+                  : filter
+              }
               __SECRET_VARIABLES_DO_NOT_USE={variables}
               skip={page ? (page - 1) * take : 0}
               take={take}
@@ -288,8 +228,6 @@
             </GetAll>
           </>
         );
-
-        /* Private components */
 
         // eslint-disable-next-line no-shadow
         function Search({ name, search, isTyping, setIsTyping }) {
