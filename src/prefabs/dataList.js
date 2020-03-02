@@ -13,7 +13,7 @@
           type: 'MODEL',
         },
         {
-          value: '',
+          value: {},
           label: 'Filter',
           key: 'filter',
           type: 'FILTER',
