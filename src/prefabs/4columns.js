@@ -49,6 +49,7 @@
         {
           name: 'Column',
           options: [
+            { type: 'TOGGLE', label: 'Show', key: 'show', value: true },
             {
               value: '3',
               label: 'Column width',
@@ -222,6 +223,7 @@
         {
           name: 'Column',
           options: [
+            { type: 'TOGGLE', label: 'Show', key: 'show', value: true },
             {
               value: '3',
               label: 'Column width',
@@ -395,6 +397,7 @@
         {
           name: 'Column',
           options: [
+            { type: 'TOGGLE', label: 'Show', key: 'show', value: true },
             {
               value: '3',
               label: 'Column width',
@@ -568,6 +571,7 @@
         {
           name: 'Column',
           options: [
+            { type: 'TOGGLE', label: 'Show', key: 'show', value: true },
             {
               value: '3',
               label: 'Column width',
