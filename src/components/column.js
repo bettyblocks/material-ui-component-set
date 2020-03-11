@@ -25,7 +25,12 @@
   ],
   orientation: 'VERTICAL',
   jsx: (
-    <div className={classes.column}>
+    <div
+      className={[
+        classes.column,
+        options.show || B.env === 'dev' ? '' : classes.hide,
+      ].join(' ')}
+    >
       {(() => {
         const isEmpty = children.length === 0;
 
@@ -297,6 +302,9 @@
         borderColor: '#AFB5C8',
         borderStyle: 'dashed',
         backgroundColor: '#F0F1F5',
+      },
+      hide: {
+        display: 'none !important',
       },
     };
   },

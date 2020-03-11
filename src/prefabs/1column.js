@@ -49,6 +49,7 @@
         {
           name: 'Column',
           options: [
+            { type: 'TOGGLE', label: 'Show', key: 'show', value: true },
             {
               value: 'flexible',
               label: 'Column width',
