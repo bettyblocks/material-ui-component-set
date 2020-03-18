@@ -23,9 +23,7 @@
         const inputRef = React.createRef();
 
         const actionInput = getActionInput(actionInputId);
-        const value = actionInput
-          ? parent.state[actionInput.name]
-          : currentValue;
+        const value = currentValue;
 
         const setLabelWidth = target => {
           const formLabel = target.parentElement.querySelector(
@@ -62,6 +60,7 @@
             <div className={classes.formField}>
               <input
                 ref={inputRef}
+                name={actionInput && actionInput.name}
                 type={formComponentType}
                 className={[
                   classes.formControl,
@@ -78,14 +77,7 @@
                   if (handleChange) {
                     handleChange(event);
                   }
-                  if (actionInput) {
-                    parent.setState({
-                      ...parent.state,
-                      [actionInput.name]: eventValue,
-                    });
-                  } else {
-                    setCurrentValue(eventValue);
-                  }
+                  setCurrentValue(eventValue);
                 }}
                 onFocus={e => {
                   if (formComponentLabel) setLabelWidth(e.target);

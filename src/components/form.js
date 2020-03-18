@@ -28,19 +28,17 @@
     'CONTAINER_COMPONENT',
     'FORM_COMPONENT',
     'CONTENT_COMPONENT',
+    'ROW',
   ],
   orientation: 'HORIZONTAL',
   jsx: (
-    <div className={classes.root}>
+    <div>
       {(() => {
-        const { env, Action, Children } = B;
-
-        // eslint-disable-next-line
-        const history = env === 'dev' ? { push: x => x } : useHistory();
+        const { Action, Children } = B;
 
         const { actionId, formErrorMessage, formSuccessMessage } = options;
 
-        const [state, setState] = useState({});
+        const formRef = React.createRef();
 
         const empty = children.length === 0;
         const isPristine = empty && B.env === 'dev';
@@ -63,10 +61,18 @@
                 <form
                   onSubmit={event => {
                     event.preventDefault();
+                    const formData = new FormData(formRef.current);
+                    const entries = Array.from(formData);
+                    const values = entries.reduce((acc, currentvalue) => {
+                      const key = currentvalue[0];
+                      const value = currentvalue[1];
+                      return { ...acc, [key]: value };
+                    }, {});
                     callAction({
-                      variables: { input: state },
+                      variables: { input: values },
                     });
                   }}
+                  ref={formRef}
                   className={[
                     classes.form,
                     empty && classes.empty,
@@ -74,9 +80,7 @@
                   ].join(' ')}
                 >
                   {isPristine && <span>form</span>}
-                  <Children state={state} setState={setState} loading={loading}>
-                    {children}
-                  </Children>
+                  <Children loading={loading}>{children}</Children>
                 </form>
               </>
             )}
