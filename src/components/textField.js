@@ -22,7 +22,6 @@
       margin,
       helperText,
       actionInputId,
-      handleChange,
     } = options;
 
     const { TextField } = window.MaterialUI.Core;
@@ -40,14 +39,10 @@
         target: { value: eventValue },
       } = event;
 
-      if (handleChange) {
-        handleChange(event);
-      }
-
       setCurrentValue(eventValue);
     }
     
-    const textField = (
+    const TextFieldCmp = (
       <TextField
         name={actionInput && actionInput.name}
         value={isDev 
@@ -72,8 +67,8 @@
     );
 
     return isDev 
-      ? <div className={classes.root}>{textField}</div>
-      : textField;
+      ? <div className={classes.root}>{TextFieldCmp}</div>
+      : TextFieldCmp;
   })(),
   styles: () => () => ({
     root: {
