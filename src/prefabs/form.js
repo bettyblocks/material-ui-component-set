@@ -36,84 +36,130 @@
       ],
       descendants: [
         {
-          name: 'TextInput',
+          name: 'DataContainer',
           options: [
             {
-              value: 'Label',
-              label: 'Label',
-              key: 'formComponentLabel',
-              type: 'TEXT',
+              value: '',
+              label: 'Model',
+              key: 'model',
+              type: 'MODEL',
             },
             {
-              value: 'text',
-              label: 'Content format',
-              key: 'formComponentType',
-              type: 'CUSTOM',
+              value: {},
+              label: 'Filter',
+              key: 'filter',
+              type: 'FILTER',
               configuration: {
-                as: 'DROPDOWN',
-                dataType: 'string',
-                allowedInput: [
-                  { name: 'Text', value: 'text' },
-                  { name: 'Number', value: 'number' },
-                  { name: 'Password', value: 'password' },
-                  { name: 'Email', value: 'email' },
-                ],
+                dependsOn: 'model',
               },
             },
+          ],
+          descendants: [
             {
-              value: false,
-              label: 'Required',
-              key: 'formComponentRequired',
-              type: 'TOGGLE',
-            },
-            {
-              value: '',
-              label: 'Input',
-              key: 'actionInputId',
-              type: 'ACTION_INPUT',
+              name: 'TextField',
+              options: [
+                {
+                  value: 'label',
+                  label: 'Label',
+                  key: 'label',
+                  type: 'TEXT',
+                },
+                {
+                  value: [],
+                  label: 'Value',
+                  key: 'defaultValue',
+                  type: 'VARIABLE',
+                },
+                {
+                  value: '',
+                  label: 'Input',
+                  key: 'actionInputId',
+                  type: 'ACTION_INPUT',
+                },
+                {
+                  value: false,
+                  label: 'Required',
+                  key: 'required',
+                  type: 'TOGGLE',
+                },
+                {
+                  value: false,
+                  label: 'Error',
+                  key: 'error',
+                  type: 'TOGGLE',
+                },
+                {
+                  type: 'TOGGLE',
+                  label: 'Disabled',
+                  key: 'disabled',
+                  value: false,
+                },
+                {
+                  value: '',
+                  label: 'Placeholder',
+                  key: 'placeholder',
+                  type: 'TEXT',
+                },
+                {
+                  value: '',
+                  label: 'Helper text',
+                  key: 'helperText',
+                  type: 'TEXT',
+                },
+                {
+                  label: 'Variant',
+                  key: 'variant',
+                  value: 'outlined',
+                  type: 'CUSTOM',
+                  configuration: {
+                    as: 'BUTTONGROUP',
+                    dataType: 'string',
+                    allowedInput: [
+                      { name: 'Standard', value: 'standard' },
+                      { name: 'Outlined', value: 'outlined' },
+                      { name: 'Filled', value: 'filled' },
+                    ],
+                  },
+                },
+                {
+                  type: 'TOGGLE',
+                  label: 'Full width',
+                  key: 'fullWidth',
+                  value: true,
+                },
+                {
+                  label: 'Size',
+                  key: 'size',
+                  value: 'medium',
+                  type: 'CUSTOM',
+                  configuration: {
+                    as: 'BUTTONGROUP',
+                    dataType: 'string',
+                    allowedInput: [
+                      { name: 'Medium', value: 'medium' },
+                      { name: 'Small', value: 'small' },
+                    ],
+                  },
+                },
+                {
+                  label: 'Margin',
+                  key: 'margin',
+                  value: 'none',
+                  type: 'CUSTOM',
+                  configuration: {
+                    as: 'BUTTONGROUP',
+                    dataType: 'string',
+                    allowedInput: [
+                      { name: 'None', value: 'none' },
+                      { name: 'Dense', value: 'dense' },
+                      { name: 'Normal', value: 'normal' },
+                    ],
+                  },
+                },
+              ],
+              descendants: [],
             },
           ],
-          descendants: [],
-        },
-        {
-          name: 'TextInput',
-          options: [
-            {
-              value: 'Label',
-              label: 'Label',
-              key: 'formComponentLabel',
-              type: 'TEXT',
-            },
-            {
-              value: 'text',
-              label: 'Content format',
-              key: 'formComponentType',
-              type: 'CUSTOM',
-              configuration: {
-                as: 'DROPDOWN',
-                dataType: 'string',
-                allowedInput: [
-                  { name: 'Text', value: 'text' },
-                  { name: 'Number', value: 'number' },
-                  { name: 'Password', value: 'password' },
-                  { name: 'Email', value: 'email' },
-                ],
-              },
-            },
-            {
-              value: false,
-              label: 'Required',
-              key: 'formComponentRequired',
-              type: 'TOGGLE',
-            },
-            {
-              value: '',
-              label: 'Input',
-              key: 'actionInputId',
-              type: 'ACTION_INPUT',
-            },
-          ],
-          descendants: [],
         },
         {
           name: 'SubmitButton',
