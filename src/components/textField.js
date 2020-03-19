@@ -8,59 +8,62 @@
   jsx: (() => {
     const {
       label,
+      defaultValue,
       required,
       disabled,
+      error,
       multiline,
-      rowsMax,
+      rows,
       placeholder,
-      text,
       variant,
       type,
       size,
       fullWidth,
-      error,
       margin,
       helperText,
       actionInputId,
+      handleChange,
     } = options;
 
-    const isDev = B.env === 'dev';
+    const { TextField } = window.MaterialUI.Core;
     const { getActionInput, useText } = B;
+    const isDev = B.env === 'dev';
+    const [currentValue, setCurrentValue] = isDev 
+      ? useState(defaultValue.join(' ')) 
+      : useState(useText(defaultValue));
+
     const actionInput = getActionInput(actionInputId);
-    const [currentValue, setCurrentValue] =
-      B.env === 'dev' ? useState(text.join(' ')) : useState(useText(text));
     const value = currentValue;
 
-    const { TextField } = window.MaterialUI.Core;
-    const handleChange = event => {
+    const changeHandler = event => {
       const {
         target: { value: eventValue },
       } = event;
 
-      setCurrentValue(eventValue);
-    };
+      if (handleChange) {
+        handleChange(event);
+      }
 
-    const TextFieldCmp = (
+      setCurrentValue(eventValue);
+    }
+    
+    const textField = (
       <TextField
         name={actionInput && actionInput.name}
-        value={
-          B.env === 'dev'
-            ? text
-                .map(textitem => (textitem.name ? textitem.name : textitem))
-                .join(' ')
-            : value
-        }
+        value={isDev 
+          ? defaultValue.map(textitem => textitem.name ? textitem.name : textitem).join(' ') 
+          : value}
         size={size}
         variant={variant}
         placeholder={placeholder}
         fullWidth={fullWidth}
         type={type}
-        onChange={handleChange}
+        onChange={changeHandler}
         inputProps={{ name: actionInput && actionInput.name }}
         required={required}
         disabled={disabled}
         multiline={multiline}
-        rowsMax={rowsMax}
+        rows={rows}
         label={label}
         error={error}
         margin={margin}
@@ -68,11 +71,9 @@
       />
     );
 
-    return isDev ? (
-      <div className={classes.root}>{TextFieldCmp}</div>
-    ) : (
-      TextFieldCmp
-    );
+    return isDev 
+      ? <div className={classes.root}>{textField}</div>
+      : textField;
   })(),
   styles: () => () => ({
     root: {

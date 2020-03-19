@@ -1,5 +1,5 @@
 (() => ({
-  name: 'TextInput',
+  name: 'TextField',
   icon: 'TextInputIcon',
   category: 'FORM',
   structure: [
@@ -7,44 +7,22 @@
       name: 'TextField',
       options: [
         {
-          value: 'Label',
+          value: 'label',
           label: 'Label',
           key: 'label',
           type: 'TEXT',
         },
         {
-          value: 'text',
-          label: 'Content format',
-          key: 'type',
-          type: 'CUSTOM',
-          configuration: {
-            as: 'DROPDOWN',
-            dataType: 'string',
-            allowedInput: [
-              { name: 'Text', value: 'text' },
-              { name: 'Number', value: 'number' },
-              { name: 'Password', value: 'password' },
-              { name: 'Email', value: 'email' },
-            ],
-          },
-        },
-        {
           value: [],
           label: 'Value',
-          key: 'text',
+          key: 'defaultValue',
           type: 'VARIABLE',
         },
         {
           value: '',
-          label: 'Placeholder',
-          key: 'placeholder',
-          type: 'TEXT',
-        },
-        {
-          value: false,
-          label: 'Full width',
-          key: 'fullWidth',
-          type: 'TOGGLE',
+          label: 'Input',
+          key: 'actionInputId',
+          type: 'ACTION_INPUT',
         },
         {
           value: false,
@@ -54,34 +32,32 @@
         },
         {
           value: false,
+          label: 'Error',
+          key: 'error',
+          type: 'TOGGLE',
+        },
+        {
+          type: 'TOGGLE',
           label: 'Disabled',
           key: 'disabled',
-          type: 'TOGGLE',
-        },
-        {
           value: false,
-          label: 'Multiline',
-          key: 'multiline',
-          type: 'TOGGLE',
         },
         {
-          value: 4,
-          label: 'Max Rows',
-          key: 'rowsMax',
-          type: 'NUMBER',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'multiline',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
+          value: '',
+          label: 'Placeholder',
+          key: 'placeholder',
+          type: 'TEXT',
+        },
+        {
+          value: '',
+          label: 'Helper text',
+          key: 'helperText',
+          type: 'TEXT',
         },
         {
           label: 'Variant',
           key: 'variant',
-          value: 'standard',
+          value: 'outlined',
           type: 'CUSTOM',
           configuration: {
             as: 'BUTTONGROUP',
@@ -94,9 +70,15 @@
           },
         },
         {
-          value: 'medium',
+          type: 'TOGGLE',
+          label: 'Full width',
+          key: 'fullWidth',
+          value: true,
+        },
+        {
           label: 'Size',
           key: 'size',
+          value: 'medium',
           type: 'CUSTOM',
           configuration: {
             as: 'BUTTONGROUP',
@@ -108,15 +90,9 @@
           },
         },
         {
-          value: false,
-          label: 'Error',
-          key: 'error',
-          type: 'TOGGLE',
-        },
-        {
-          value: 'none',
           label: 'Margin',
           key: 'margin',
+          value: 'none',
           type: 'CUSTOM',
           configuration: {
             as: 'BUTTONGROUP',
@@ -127,18 +103,6 @@
               { name: 'Normal', value: 'normal' },
             ],
           },
-        },
-        {
-          value: '',
-          label: 'Helper text',
-          key: 'helperText',
-          type: 'TEXT',
-        },
-        {
-          value: '',
-          label: 'Input',
-          key: 'actionInputId',
-          type: 'ACTION_INPUT',
         },
       ],
       descendants: [],
