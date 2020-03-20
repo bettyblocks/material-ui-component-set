@@ -21,6 +21,7 @@
     'ROW',
     'CONTAINER_COMPONENT',
     'CONTENT_COMPONENT',
+    'TEXT_INPUT'
   ],
   orientation: 'HORIZONTAL',
   jsx: (

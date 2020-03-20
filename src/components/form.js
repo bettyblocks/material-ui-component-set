@@ -74,7 +74,6 @@
                   }}
                   ref={formRef}
                   className={[
-                    classes.form,
                     empty && classes.empty,
                     isPristine && classes.pristine,
                   ].join(' ')}
