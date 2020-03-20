@@ -38,6 +38,7 @@
     'BODY_COMPONENT',
     'CONTAINER_COMPONENT',
     'CONTENT_COMPONENT',
+    'BUTTON_GROUP',
   ],
   orientation: 'VERTICAL',
   jsx: (
