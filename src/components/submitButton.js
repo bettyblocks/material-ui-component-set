@@ -86,7 +86,10 @@
         },
       },
       contained: {
-        color: style.getColor('White'),
+        color: ({ options: { textColor } }) => [
+          style.getColor(textColor),
+          '!important',
+        ],
         backgroundColor: ({ options: { background } }) => [
           style.getColor(background),
           '!important',
