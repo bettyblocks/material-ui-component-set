@@ -1,6 +1,6 @@
 (() => ({
   name: 'Partial',
-  type: 'PARTIAL',
+  type: 'CONTAINER_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (
