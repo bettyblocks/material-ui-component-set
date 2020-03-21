@@ -43,7 +43,6 @@
       },
       root: {
         '&.MuiButton-root': {
-          color: style.getColor('White'),
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0]),
           marginRight: ({ options: { outerSpacing } }) =>
