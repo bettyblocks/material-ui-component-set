@@ -22,68 +22,16 @@
           },
         },
         {
-          value: '',
-          label: 'Icon',
-          key: 'icon',
-          type: 'TEXT',
-        },
-        {
-          value: 'Primary',
-          label: 'Color',
-          key: 'color',
+          value: 'Black',
+          label: 'Text color',
+          key: 'textColor',
           type: 'COLOR',
         },
         {
-          type: 'VARIABLE',
-          label: 'Button text',
-          key: 'buttonText',
-          value: ['Button text'],
-          configuration: {
-            dependsOn: 'model',
-          },
-        },
-        {
-          type: 'CUSTOM',
-          label: 'Link to',
-          key: 'linkType',
-          value: 'Internal',
-          configuration: {
-            as: 'BUTTONGROUP',
-            dataType: 'string',
-            allowedInput: [
-              { name: 'Internal page', value: 'Internal' },
-              { name: 'External page', value: 'External' },
-            ],
-          },
-        },
-        {
-          value: '',
-          label: 'Page',
-          key: 'linkToInternal',
-          type: 'ENDPOINT',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'linkType',
-              comparator: 'EQ',
-              value: 'Internal',
-            },
-          },
-        },
-        {
-          value: '',
-          label: 'URL',
-          key: 'linkToExternal',
-          type: 'TEXT',
-          configuration: {
-            placeholder: 'Starts with https:// or http://',
-            condition: {
-              type: 'SHOW',
-              option: 'linkType',
-              comparator: 'EQ',
-              value: 'External',
-            },
-          },
+          value: 'Success',
+          label: 'Background color',
+          key: 'background',
+          type: 'COLOR',
         },
         {
           value: ['0rem', '0rem', 'M', '0rem'],
