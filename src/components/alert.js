@@ -6,16 +6,51 @@
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { Alert } = window.MaterialUI.Lab;
+    const { Alert, AlertTitle } = window.MaterialUI.Lab;
+    const { Close } = window.MaterialUI.Icons;
+    const { Icons } = window.MaterialUI;
+    const { IconButton } = window.MaterialUI.Core;
 
     const isDev = B.env === 'dev';
+    const [open, setOpen] = useState(true);
+
+    useEffect(() => {
+      setOpen(options.visible);
+    }, [options.visible]);
+
     const AlertPanel = (
       <Alert
         classes={{
           root: classes.root,
         }}
+        className={open || isDev ? '' : classes.hide}
+        icon={
+          options.icon !== 'None'
+            ? React.createElement(Icons[options.icon])
+            : null
+        }
+        action={
+          options.collapsable ? (
+            <IconButton
+              color="inherit"
+              size="small"
+              onClick={() => {
+                setOpen(false);
+              }}
+            >
+              <Close />
+            </IconButton>
+          ) : (
+            undefined
+          )
+        }
       >
-        {options.titleText}
+        {options.titleText.length > 0 && (
+          <AlertTitle>
+            <B.Text value={options.titleText} />
+          </AlertTitle>
+        )}
+        <B.Text value={options.bodyText} />
       </Alert>
     );
     return isDev ? (
@@ -41,7 +76,7 @@
             '!important',
           ],
         },
-        '&.MuiAlert-icon': {
+        '& .MuiAlert-icon': {
           color: ({ options: { textColor } }) => [
             style.getColor(textColor),
             '!important',
@@ -55,10 +90,9 @@
           getSpacing(outerSpacing[2]),
         marginLeft: ({ options: { outerSpacing } }) =>
           getSpacing(outerSpacing[3]),
-        width: ({ options: { outerSpacing } }) =>
-          `calc(100% - ${getSpacing(outerSpacing[1])} - ${getSpacing(
-            outerSpacing[3],
-          )})`,
+      },
+      hide: {
+        display: 'none !important',
       },
     };
   },

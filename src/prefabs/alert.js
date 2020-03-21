@@ -7,6 +7,12 @@
       name: 'Alert',
       options: [
         {
+          value: true,
+          label: 'Visible',
+          key: 'visible',
+          type: 'TOGGLE',
+        },
+        {
           type: 'VARIABLE',
           label: 'Body text',
           key: 'bodyText',
@@ -32,6 +38,52 @@
           label: 'Background color',
           key: 'background',
           type: 'COLOR',
+        },
+        {
+          label: 'Icon',
+          key: 'icon',
+          value: 'Search',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'DROPDOWN',
+            dataType: 'string',
+            allowedInput: [
+              {
+                name: '',
+                value: 'None',
+              },
+              {
+                name: 'ExpandMore',
+                value: 'ExpandMore',
+              },
+              {
+                name: 'FilterList',
+                value: 'FilterList',
+              },
+              {
+                name: 'Search',
+                value: 'Search',
+              },
+              {
+                name: 'FileCopy',
+                value: 'FileCopy',
+              },
+              {
+                name: 'GetApp',
+                value: 'GetApp',
+              },
+              {
+                name: 'Email',
+                value: 'Email',
+              },
+            ],
+          },
+        },
+        {
+          value: false,
+          label: 'Collapsable',
+          key: 'collapsable',
+          type: 'TOGGLE',
         },
         {
           value: ['0rem', '0rem', 'M', '0rem'],
