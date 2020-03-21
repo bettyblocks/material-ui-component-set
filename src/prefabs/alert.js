@@ -8,18 +8,18 @@
       options: [
         {
           type: 'VARIABLE',
-          label: 'Title text',
-          key: 'titleText',
-          value: ['Type your content here...'],
-        },
-        {
-          type: 'VARIABLE',
           label: 'Body text',
           key: 'bodyText',
           value: ['Type your content here...'],
           configuration: {
             dependsOn: 'model',
           },
+        },
+        {
+          type: 'VARIABLE',
+          label: 'Title text',
+          key: 'titleText',
+          value: [''],
         },
         {
           value: 'Black',
