@@ -182,6 +182,12 @@
                 },
                 {
                   type: 'COLOR',
+                  label: 'Text color',
+                  key: 'textColor',
+                  value: 'White',
+                },
+                {
+                  type: 'COLOR',
                   label: 'Background color',
                   key: 'background',
                   value: 'Success',
