@@ -16,6 +16,8 @@
         classes={{
           root: classes.root,
           contained: classes.contained,
+          text: classes.text,
+          outlined: classes.outlined,
         }}
         type="submit"
       >
@@ -90,6 +92,22 @@
           '!important',
         ],
         backgroundColor: ({ options: { background } }) => [
+          style.getColor(background),
+          '!important',
+        ],
+      },
+      text: {
+        color: ({ options: { textColor } }) => [
+          style.getColor(textColor),
+          '!important',
+        ],
+      },
+      outlined: {
+        color: ({ options: { textColor } }) => [
+          style.getColor(textColor),
+          '!important',
+        ],
+        borderColor: ({ options: { background } }) => [
           style.getColor(background),
           '!important',
         ],
