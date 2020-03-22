@@ -160,12 +160,6 @@
                   value: ['Button'],
                 },
                 {
-                  value: false,
-                  label: 'Full width',
-                  key: 'fullWidth',
-                  type: 'TOGGLE',
-                },
-                {
                   type: 'CUSTOM',
                   label: 'variant',
                   key: 'variant',
@@ -179,6 +173,12 @@
                       { name: 'Contained', value: 'contained' },
                     ],
                   },
+                },
+                {
+                  value: false,
+                  label: 'Full width',
+                  key: 'fullWidth',
+                  type: 'TOGGLE',
                 },
                 {
                   value: 'medium',

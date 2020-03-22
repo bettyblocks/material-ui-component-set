@@ -23,6 +23,7 @@
             allowedInput: [
               { name: 'Internal page', value: 'Internal' },
               { name: 'External page', value: 'External' },
+              { name: 'Action', value: 'Action' },
             ],
           },
         },
@@ -56,10 +57,18 @@
           },
         },
         {
-          value: false,
-          label: 'Full width',
-          key: 'fullWidth',
-          type: 'TOGGLE',
+          value: '',
+          label: 'Action',
+          key: 'ActionId',
+          type: 'ACTION',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'linkType',
+              comparator: 'EQ',
+              value: 'Action',
+            },
+          },
         },
         {
           type: 'CUSTOM',
@@ -75,6 +84,12 @@
               { name: 'Contained', value: 'contained' },
             ],
           },
+        },
+        {
+          value: false,
+          label: 'Full width',
+          key: 'fullWidth',
+          type: 'TOGGLE',
         },
         {
           value: 'medium',
