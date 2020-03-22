@@ -5,7 +5,18 @@
   orientation: 'VERTICAL',
   jsx: (() => {
     const { Button } = window.MaterialUI.Core;
-    const { variant, disabled, fullWidth, size } = options;
+    const { Icons } = window.MaterialUI;
+    const {
+      variant,
+      disabled,
+      fullWidth,
+      size,
+      startIcon,
+      linkType,
+      linkTo,
+      linkToExternal,
+      type,
+    } = options;
     const isDev = B.env === 'dev';
     const ButtonComponent = (
       <Button
@@ -13,17 +24,24 @@
         disabled={disabled}
         variant={variant}
         size={size}
+        startIcon={
+          startIcon !== 'None'
+            ? React.createElement(Icons[startIcon])
+            : undefined
+        }
         classes={{
           root: classes.root,
           contained: classes.contained,
           outlined: classes.outlined,
         }}
         // only set submit when submit prefab is used
-        type={options.linkType === undefined ? undefined : 'submit'}
-        // if prefab is button set href
-        href={
-          options.linkType === 'External' ? options.linkToExternal : undefined
-        }
+        type={isDev ? 'button' : type}
+        //        type={linkType === undefined ? undefined : 'submit'}
+        // if prefab is button set href when link is external
+        href={linkType === 'External' ? linkToExternal : undefined}
+        // if prefab is button and internal link
+        component={linkType === 'Internal' ? B.Link : undefined}
+        endpoint={linkType === 'Internal' ? linkTo : undefined}
       >
         {options.buttonText}
       </Button>

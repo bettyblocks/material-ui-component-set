@@ -140,6 +140,20 @@
               name: 'Button',
               options: [
                 {
+                  type: 'CUSTOM',
+                  label: 'type',
+                  key: 'type',
+                  value: 'submit',
+                  configuration: {
+                    as: 'BUTTONGROUP',
+                    dataType: 'string',
+                    allowedInput: [
+                      { name: 'Submit', value: 'submit' },
+                      { name: 'Reset', value: 'reset' },
+                    ],
+                  },
+                },
+                {
                   type: 'VARIABLE',
                   label: 'Button text',
                   key: 'buttonText',
@@ -177,6 +191,46 @@
                     allowedInput: [
                       { name: 'Medium', value: 'medium' },
                       { name: 'Small', value: 'small' },
+                    ],
+                  },
+                },
+                {
+                  label: 'StartIcon',
+                  key: 'startIcon',
+                  value: 'None',
+                  type: 'CUSTOM',
+                  configuration: {
+                    as: 'DROPDOWN',
+                    dataType: 'string',
+                    allowedInput: [
+                      {
+                        name: '',
+                        value: 'None',
+                      },
+                      {
+                        name: 'ExpandMore',
+                        value: 'ExpandMore',
+                      },
+                      {
+                        name: 'FilterList',
+                        value: 'FilterList',
+                      },
+                      {
+                        name: 'Search',
+                        value: 'Search',
+                      },
+                      {
+                        name: 'FileCopy',
+                        value: 'FileCopy',
+                      },
+                      {
+                        name: 'GetApp',
+                        value: 'GetApp',
+                      },
+                      {
+                        name: 'Email',
+                        value: 'Email',
+                      },
                     ],
                   },
                 },
