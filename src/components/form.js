@@ -29,6 +29,7 @@
     'FORM_COMPONENT',
     'CONTENT_COMPONENT',
     'ROW',
+    'BUTTON_GROUP',
   ],
   orientation: 'HORIZONTAL',
   jsx: (

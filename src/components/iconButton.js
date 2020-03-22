@@ -1,57 +1,32 @@
 (() => ({
-  name: 'Button',
-  type: 'SUBMIT_BUTTON',
+  name: 'IconButton',
+  type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'VERTICAL',
   jsx: (() => {
-    const { Button } = window.MaterialUI.Core;
+    const { IconButton } = window.MaterialUI.Core;
     const { Icons } = window.MaterialUI;
-    const {
-      variant,
-      disabled,
-      fullWidth,
-      size,
-      startIcon,
-      linkType,
-      linkTo,
-      linkToExternal,
-      type,
-      visible,
-    } = options;
+    const { size, icon, linkType, linkTo, linkToExternal } = options;
     const isDev = B.env === 'dev';
-    const ButtonComponent = (
-      <Button
-        fullWidth={fullWidth}
-        disabled={disabled}
-        variant={variant}
-        size={size}
-        startIcon={
-          startIcon !== 'None'
-            ? React.createElement(Icons[startIcon])
-            : undefined
-        }
+
+    const IconButtonComponent = (
+      <IconButton
         classes={{
           root: classes.root,
-          contained: classes.contained,
-          outlined: classes.outlined,
         }}
-        className={visible || isDev ? '' : classes.hide}
-        // only set submit when submit prefab is used
-        type={isDev ? 'button' : type}
-        //        type={linkType === undefined ? undefined : 'submit'}
         // if prefab is button set href when link is external
         href={linkType === 'External' ? linkToExternal : undefined}
         // if prefab is button and internal link
         component={linkType === 'Internal' ? B.Link : undefined}
         endpoint={linkType === 'Internal' ? linkTo : undefined}
       >
-        {options.buttonText}
-      </Button>
+        {React.createElement(Icons[icon], { fontSize: size })}
+      </IconButton>
     );
     return isDev ? (
-      <div className={classes.wrapper}>{ButtonComponent}</div>
+      <div className={classes.wrapper}>{IconButtonComponent}</div>
     ) : (
-      ButtonComponent
+      IconButtonComponent
     );
   })(),
   styles: B => t => {
@@ -69,8 +44,8 @@
         },
       },
       root: {
-        color: ({ options: { textColor } }) => [
-          style.getColor(textColor),
+        color: ({ options: { color } }) => [
+          style.getColor(color),
           '!important',
         ],
         '&.MuiButton-root': {
@@ -138,21 +113,6 @@
               getSpacing(outerSpacing[3], 'Desktop'),
           },
         },
-      },
-      contained: {
-        backgroundColor: ({ options: { background } }) => [
-          style.getColor(background),
-          '!important',
-        ],
-      },
-      outlined: {
-        borderColor: ({ options: { background } }) => [
-          style.getColor(background),
-          '!important',
-        ],
-      },
-      hide: {
-        display: 'none',
       },
     };
   },
