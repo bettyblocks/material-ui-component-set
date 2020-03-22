@@ -1,190 +1,135 @@
 (() => ({
   name: 'Button',
-  icon: 'ButtonIcon',
-  category: 'CONTENT',
-  type: 'BUTTON',
+  type: 'SUBMIT_BUTTON',
   allowedTypes: [],
   orientation: 'VERTICAL',
-  jsx: (
-    <span className={classes.wrapper}>
-      {(() => {
-        const {
-          linkType,
-          linkTo,
-          linkToExternal,
-          disabled,
-          buttonText,
-        } = options;
-
-        if (linkType === 'External' && linkToExternal !== '') {
-          return (
-            <a
-              href={linkToExternal}
-              className={[
-                classes.root,
-                classes['size-normal'],
-                classes.link,
-                B.env === 'dev' ? classes.noEvents : '',
-              ].join(' ')}
-            >
-              <B.Text value={buttonText} />
-            </a>
-          );
+  jsx: (() => {
+    const { Button } = window.MaterialUI.Core;
+    const { variant, disabled, fullWidth, size } = options;
+    const isDev = B.env === 'dev';
+    const SubmitButton = (
+      <Button
+        fullWidth={fullWidth}
+        disabled={disabled}
+        variant={variant}
+        size={size}
+        classes={{
+          root: classes.root,
+          contained: classes.contained,
+          outlined: classes.outlined,
+        }}
+        // only set submit when submit prefab is used
+        type={options.linkType === undefined ? undefined : 'submit'}
+        // if prefab is button set href
+        href={
+          options.linkType === 'External' ? options.linkToExternal : undefined
         }
-
-        if (linkType === 'Internal' && linkTo !== '') {
-          return (
-            <B.Link
-              endpoint={linkTo}
-              className={[
-                classes.root,
-                classes['size-normal'],
-                classes.link,
-                B.env === 'dev' ? classes.noEvents : '',
-              ].join(' ')}
-            >
-              <B.Text value={buttonText} />
-            </B.Link>
-          );
-        }
-
-        return (
-          <button
-            type="button"
-            className={[
-              classes.root,
-              classes['size-normal'],
-              B.env === 'dev' ? classes.noEvents : '',
-            ].join(' ')}
-            disabled={B.env === 'dev' ? false : disabled === 'true'}
-          >
-            <B.Text value={buttonText} />
-          </button>
-        );
-      })()}
-    </span>
-  ),
+      >
+        {options.buttonText}
+      </Button>
+    );
+    return isDev ? (
+      <div className={classes.wrapper}>{SubmitButton}</div>
+    ) : (
+      SubmitButton
+    );
+  })(),
   styles: B => t => {
     const style = new B.Styling(t);
     const getSpacing = (idx, device = 'Mobile') =>
       idx === '0' ? '0rem' : style.getSpacing(idx, device);
-
     return {
       wrapper: {
-        display: 'inline-block',
-        marginTop: ({ options: { outerSpacing } }) =>
-          getSpacing(outerSpacing[0]),
-        marginRight: ({ options: { outerSpacing } }) =>
-          getSpacing(outerSpacing[1]),
-        marginBottom: ({ options: { outerSpacing } }) =>
-          getSpacing(outerSpacing[2]),
-        marginLeft: ({ options: { outerSpacing } }) =>
-          getSpacing(outerSpacing[3]),
+        display: ({ options: { fullWidth } }) =>
+          fullWidth ? 'block' : 'inline-block',
+        width: ({ options: { fullWidth } }) => fullWidth && '100%',
+        minHeight: '1rem',
+        '& > *': {
+          pointerEvents: 'none',
+        },
       },
       root: {
-        extend: t.base,
-        display: 'inline-flex',
-        position: 'relative',
-        alignItems: 'center',
-        justifyContent: 'center',
-        margin: 0,
-        color: style.getColor('White'),
-        fontFamily: style.getFontFamily('Button'),
-        fontSize: style.getFontSize('Button'),
-        fontWeight: style.getFontWeight('Button'),
-        textTransform: style.getTextTransform('Button'),
-        letterSpacing: style.getLetterSpacing('Button'),
-        textDecoration: 'none',
-        backgroundColor: ({ options: { backgroundColor } }) =>
-          style.getColor(backgroundColor),
-        border: 'none',
-        borderRadius: style.getBorderRadius('M'),
-        boxSizing: 'border-box',
-        padding: '0 1rem',
-        minWidth: '4rem',
-        height: '2.25rem',
-        appearance: 'none',
-        overflow: 'hidden',
-        verticalAlign: 'middle',
-        userSelect: 'none',
-        transition: 'box-shadow 0.1s',
-        opacity: ({ options: { disabled } }) =>
-          disabled === 'true' ? 0.38 : 1,
-        '&::-moz-focus-inner': {
-          border: 0,
-        },
-        '&:hover': {
-          backgroundColor: ({ options: { backgroundColor } }) =>
-            B.color.darken(style.getColor(backgroundColor), 0.08),
-        },
-        '&:active': {
-          backgroundColor: ({ options: { backgroundColor } }) =>
-            B.color.darken(style.getColor(backgroundColor), 0.08),
-        },
-        '&:hover, &:active, &:focus': {
-          outline: 'none',
-        },
-        '&:not(:active):focus': {
-          boxShadow: ({ options: { backgroundColor } }) =>
-            `0 0 0 0.2rem ${B.color.alpha(
-              style.getColor(backgroundColor),
-              0.5,
-            )}`,
-        },
-      },
-      link: {
-        cursor: 'pointer',
-        '&:active': {
-          boxShadow: ({ options: { backgroundColor } }) =>
-            `0 0 0 0.2rem ${B.color.alpha(
-              style.getColor(backgroundColor),
-              0.5,
-            )}`,
-        },
-      },
-      noEvents: {
-        pointerEvents: 'none',
-      },
-      normal: {
-        padding: '0 1rem',
-        fontSize: '0.875rem',
-        height: '2.25rem',
-      },
-      [`@media ${B.mediaMinWidth(768)}`]: {
-        wrapper: {
+        color: ({ options: { textColor } }) => [
+          style.getColor(textColor),
+          '!important',
+        ],
+        '&.MuiButton-root': {
+          width: ({ options: { fullWidth, outerSpacing } }) => {
+            if (!fullWidth) return 'auto';
+            const marginRight = getSpacing(outerSpacing[1]);
+            const marginLeft = getSpacing(outerSpacing[3]);
+            return `calc(100% - ${marginRight} - ${marginLeft})`;
+          },
           marginTop: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[0], 'Portrait'),
+            getSpacing(outerSpacing[0]),
           marginRight: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[1], 'Portrait'),
+            getSpacing(outerSpacing[1]),
           marginBottom: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[2], 'Portrait'),
+            getSpacing(outerSpacing[2]),
           marginLeft: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[3], 'Portrait'),
+            getSpacing(outerSpacing[3]),
+
+          [`@media ${B.mediaMinWidth(768)}`]: {
+            width: ({ options: { fullWidth, outerSpacing } }) => {
+              if (!fullWidth) return 'auto';
+              const marginRight = getSpacing(outerSpacing[1], 'Portrait');
+              const marginLeft = getSpacing(outerSpacing[3], 'Portrait');
+              return `calc(100% - ${marginRight} - ${marginLeft})`;
+            },
+            marginTop: ({ options: { outerSpacing } }) =>
+              getSpacing(outerSpacing[0], 'Portrait'),
+            marginRight: ({ options: { outerSpacing } }) =>
+              getSpacing(outerSpacing[1], 'Portrait'),
+            marginBottom: ({ options: { outerSpacing } }) =>
+              getSpacing(outerSpacing[2], 'Portrait'),
+            marginLeft: ({ options: { outerSpacing } }) =>
+              getSpacing(outerSpacing[3], 'Portrait'),
+          },
+          [`@media ${B.mediaMinWidth(1024)}`]: {
+            width: ({ options: { fullWidth, outerSpacing } }) => {
+              if (!fullWidth) return 'auto';
+              const marginRight = getSpacing(outerSpacing[1], 'Landscape');
+              const marginLeft = getSpacing(outerSpacing[3], 'Landscape');
+              return `calc(100% - ${marginRight} - ${marginLeft})`;
+            },
+            marginTop: ({ options: { outerSpacing } }) =>
+              getSpacing(outerSpacing[0], 'Landscape'),
+            marginRight: ({ options: { outerSpacing } }) =>
+              getSpacing(outerSpacing[1], 'Landscape'),
+            marginBottom: ({ options: { outerSpacing } }) =>
+              getSpacing(outerSpacing[2], 'Landscape'),
+            marginLeft: ({ options: { outerSpacing } }) =>
+              getSpacing(outerSpacing[3], 'Landscape'),
+          },
+          [`@media ${B.mediaMinWidth(1200)}`]: {
+            width: ({ options: { fullWidth, outerSpacing } }) => {
+              if (!fullWidth) return 'auto';
+              const marginRight = getSpacing(outerSpacing[1], 'Desktop');
+              const marginLeft = getSpacing(outerSpacing[3], 'Desktop');
+              return `calc(100% - ${marginRight} - ${marginLeft})`;
+            },
+            marginTop: ({ options: { outerSpacing } }) =>
+              getSpacing(outerSpacing[0], 'Desktop'),
+            marginRight: ({ options: { outerSpacing } }) =>
+              getSpacing(outerSpacing[1], 'Desktop'),
+            marginBottom: ({ options: { outerSpacing } }) =>
+              getSpacing(outerSpacing[2], 'Desktop'),
+            marginLeft: ({ options: { outerSpacing } }) =>
+              getSpacing(outerSpacing[3], 'Desktop'),
+          },
         },
       },
-      [`@media ${B.mediaMinWidth(1024)}`]: {
-        wrapper: {
-          marginTop: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[0], 'Landscape'),
-          marginRight: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[1], 'Landscape'),
-          marginBottom: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[2], 'Landscape'),
-          marginLeft: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[3], 'Landscape'),
-        },
+      contained: {
+        backgroundColor: ({ options: { background } }) => [
+          style.getColor(background),
+          '!important',
+        ],
       },
-      [`@media ${B.mediaMinWidth(1200)}`]: {
-        wrapper: {
-          marginTop: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[0], 'Desktop'),
-          marginRight: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[1], 'Desktop'),
-          marginBottom: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[2], 'Desktop'),
-          marginLeft: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[3], 'Desktop'),
-        },
+      outlined: {
+        borderColor: ({ options: { background } }) => [
+          style.getColor(background),
+          '!important',
+        ],
       },
     };
   },

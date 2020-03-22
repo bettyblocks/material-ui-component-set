@@ -137,7 +137,7 @@
           ],
           descendants: [
             {
-              name: 'SubmitButton',
+              name: 'Button',
               options: [
                 {
                   type: 'VARIABLE',

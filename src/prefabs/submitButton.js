@@ -4,7 +4,7 @@
   category: 'FORM',
   structure: [
     {
-      name: 'SubmitButton',
+      name: 'Button',
       options: [
         {
           type: 'VARIABLE',
