@@ -2,7 +2,7 @@
   name: 'Divider',
   icon: 'HorizontalRuleIcon',
   category: 'CONTENT',
-  type: 'DIVIDER',
+  type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (

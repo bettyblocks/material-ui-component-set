@@ -2,7 +2,7 @@
   name: 'Image',
   icon: 'ImageIcon',
   category: 'CONTENT',
-  type: 'IMAGE',
+  type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'VERTICAL',
   jsx: (

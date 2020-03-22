@@ -1,6 +1,8 @@
 (() => ({
   name: 'Button',
-  type: 'SUBMIT_BUTTON',
+  icon: 'ButtonIcon',
+  category: 'CONTENT',
+  type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'VERTICAL',
   jsx: (() => {

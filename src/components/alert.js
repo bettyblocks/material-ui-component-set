@@ -2,7 +2,7 @@
   name: 'Alert',
   icon: 'AlertIcon',
   category: 'CONTENT',
-  type: 'ALERT',
+  type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {

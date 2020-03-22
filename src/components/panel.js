@@ -2,7 +2,7 @@
   name: 'Panel',
   icon: 'PanelIcon',
   category: 'LAYOUT',
-  type: 'PANEL',
+  type: 'CONTAINER_COMPONENT',
   allowedTypes: ['ROW', 'BODY_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (

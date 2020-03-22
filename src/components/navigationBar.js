@@ -2,7 +2,7 @@
   name: 'NavigationBar',
   icon: 'NavbarIcon',
   category: 'NAVIGATION',
-  type: 'NAVIGATION_BAR',
+  type: 'BODY_COMPONENT',
   allowedTypes: ['NAVIGATION_ITEM'],
   orientation: 'HORIZONTAL',
   jsx: (
