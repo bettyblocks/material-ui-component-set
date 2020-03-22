@@ -2,7 +2,7 @@
   name: 'Breadcrumb',
   icon: 'BreadcrumbIcon',
   category: 'NAVIGATION',
-  type: 'BREADCRUMB',
+  type: 'CONTENT_COMPONENT',
   allowedTypes: ['BREADCRUMB_ITEM'],
   orientation: 'HORIZONTAL',
   jsx: (

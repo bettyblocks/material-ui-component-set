@@ -2,7 +2,7 @@
   name: 'SubmitButton',
   icon: 'SubmitButtonIcon',
   category: 'FORM',
-  type: 'SUBMIT_BUTTON',
+  type: 'FORM_COMPONENT',
   allowedTypes: [],
   orientation: 'VERTICAL',
   jsx: (

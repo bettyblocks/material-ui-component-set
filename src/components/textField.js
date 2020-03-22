@@ -2,7 +2,7 @@
   name: 'TextField',
   icon: 'TextInputIcon',
   category: 'FORM',
-  type: 'TEXT_INPUT',
+  type: 'FORM_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {
@@ -27,8 +27,8 @@
     const { TextField } = window.MaterialUI.Core;
     const { getActionInput, useText } = B;
     const isDev = B.env === 'dev';
-    const [currentValue, setCurrentValue] = isDev 
-      ? useState(defaultValue.join(' ')) 
+    const [currentValue, setCurrentValue] = isDev
+      ? useState(defaultValue.join(' '))
       : useState(useText(defaultValue));
 
     const actionInput = getActionInput(actionInputId);
@@ -40,14 +40,18 @@
       } = event;
 
       setCurrentValue(eventValue);
-    }
-    
+    };
+
     const TextFieldCmp = (
       <TextField
         name={actionInput && actionInput.name}
-        value={isDev 
-          ? defaultValue.map(textitem => textitem.name ? textitem.name : textitem).join(' ') 
-          : value}
+        value={
+          isDev
+            ? defaultValue
+                .map(textitem => (textitem.name ? textitem.name : textitem))
+                .join(' ')
+            : value
+        }
         size={size}
         variant={variant}
         placeholder={placeholder}
@@ -66,9 +70,11 @@
       />
     );
 
-    return isDev 
-      ? <div className={classes.root}>{TextFieldCmp}</div>
-      : TextFieldCmp;
+    return isDev ? (
+      <div className={classes.root}>{TextFieldCmp}</div>
+    ) : (
+      TextFieldCmp
+    );
   })(),
   styles: () => () => ({
     root: {

@@ -2,8 +2,8 @@
   name: 'Row',
   icon: 'RowIcon',
   category: 'LAYOUT',
-  type: 'ROW',
-  allowedTypes: ['COLUMN', 'LAYOUT_COMPONENT'],
+  type: 'BODY_COMPONENT',
+  allowedTypes: ['LAYOUT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (
     <div className={classes.container}>
