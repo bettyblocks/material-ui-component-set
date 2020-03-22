@@ -7,10 +7,10 @@
       name: 'Alert',
       options: [
         {
-          type: 'VARIABLE',
-          label: 'Title text',
-          key: 'titleText',
-          value: ['Type your content here...'],
+          value: true,
+          label: 'Visible',
+          key: 'visible',
+          type: 'TOGGLE',
         },
         {
           type: 'VARIABLE',
@@ -22,68 +22,68 @@
           },
         },
         {
-          value: '',
-          label: 'Icon',
-          key: 'icon',
-          type: 'TEXT',
+          type: 'VARIABLE',
+          label: 'Title text',
+          key: 'titleText',
+          value: [''],
         },
         {
-          value: 'Primary',
-          label: 'Color',
-          key: 'color',
+          value: 'Black',
+          label: 'Text color',
+          key: 'textColor',
           type: 'COLOR',
         },
         {
-          type: 'VARIABLE',
-          label: 'Button text',
-          key: 'buttonText',
-          value: ['Button text'],
-          configuration: {
-            dependsOn: 'model',
-          },
+          value: 'Success',
+          label: 'Background color',
+          key: 'background',
+          type: 'COLOR',
         },
         {
+          label: 'Icon',
+          key: 'icon',
+          value: 'Search',
           type: 'CUSTOM',
-          label: 'Link to',
-          key: 'linkType',
-          value: 'Internal',
           configuration: {
-            as: 'BUTTONGROUP',
+            as: 'DROPDOWN',
             dataType: 'string',
             allowedInput: [
-              { name: 'Internal page', value: 'Internal' },
-              { name: 'External page', value: 'External' },
+              {
+                name: '',
+                value: 'None',
+              },
+              {
+                name: 'ExpandMore',
+                value: 'ExpandMore',
+              },
+              {
+                name: 'FilterList',
+                value: 'FilterList',
+              },
+              {
+                name: 'Search',
+                value: 'Search',
+              },
+              {
+                name: 'FileCopy',
+                value: 'FileCopy',
+              },
+              {
+                name: 'GetApp',
+                value: 'GetApp',
+              },
+              {
+                name: 'Email',
+                value: 'Email',
+              },
             ],
           },
         },
         {
-          value: '',
-          label: 'Page',
-          key: 'linkToInternal',
-          type: 'ENDPOINT',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'linkType',
-              comparator: 'EQ',
-              value: 'Internal',
-            },
-          },
-        },
-        {
-          value: '',
-          label: 'URL',
-          key: 'linkToExternal',
-          type: 'TEXT',
-          configuration: {
-            placeholder: 'Starts with https:// or http://',
-            condition: {
-              type: 'SHOW',
-              option: 'linkType',
-              comparator: 'EQ',
-              value: 'External',
-            },
-          },
+          value: false,
+          label: 'Collapsable',
+          key: 'collapsable',
+          type: 'TOGGLE',
         },
         {
           value: ['0rem', '0rem', 'M', '0rem'],
