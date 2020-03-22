@@ -1,9 +1,9 @@
 (() => ({
-  name: 'ButtonGroup',
-  icon: 'ButtonGroupIcon',
-  category: 'CONTENT',
-  type: 'BUTTON_GROUP',
-  allowedTypes: ['SUBMIT_BUTTON', 'BUTTON'],
+  name: 'Box',
+  icon: 'ContainerIcon',
+  category: 'LAYOUT',
+  type: 'CONTAINER_COMPONENT',
+  allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { Box } = window.MaterialUI.Core;
@@ -11,7 +11,7 @@
     const { alignment } = options;
     const isEmpty = children.length === 0;
     const ButtonGroup = isEmpty ? (
-      <div className={classes.empty}>Button group</div>
+      <div className={classes.empty}>Box</div>
     ) : (
       <Box display="flex" flexDirection="row" justifyContent={alignment}>
         {children}

@@ -162,7 +162,7 @@
           ],
         },
         {
-          name: 'ButtonGroup',
+          name: 'Box',
           options: [
             {
               value: 'flex-start',
@@ -209,7 +209,7 @@
                   type: 'VARIABLE',
                   label: 'Button text',
                   key: 'buttonText',
-                  value: ['Button'],
+                  value: ['Send'],
                 },
                 {
                   type: 'CUSTOM',
