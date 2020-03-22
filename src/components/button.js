@@ -7,7 +7,7 @@
     const { Button } = window.MaterialUI.Core;
     const { variant, disabled, fullWidth, size } = options;
     const isDev = B.env === 'dev';
-    const SubmitButton = (
+    const ButtonComponent = (
       <Button
         fullWidth={fullWidth}
         disabled={disabled}
@@ -29,9 +29,9 @@
       </Button>
     );
     return isDev ? (
-      <div className={classes.wrapper}>{SubmitButton}</div>
+      <div className={classes.wrapper}>{ButtonComponent}</div>
     ) : (
-      SubmitButton
+      ButtonComponent
     );
   })(),
   styles: B => t => {
