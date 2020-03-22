@@ -1,10 +1,10 @@
 (() => ({
-  name: 'ButtonGroup',
-  icon: 'ButtonGroupIcon',
-  category: 'CONTENT',
+  name: 'Box',
+  icon: 'ContainerIcon',
+  category: 'LAYOUT',
   structure: [
     {
-      name: 'ButtonGroup',
+      name: 'Box',
       options: [
         {
           value: 'flex-start',
