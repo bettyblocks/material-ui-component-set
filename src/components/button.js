@@ -16,6 +16,7 @@
       linkTo,
       linkToExternal,
       type,
+      visible,
     } = options;
     const isDev = B.env === 'dev';
     const ButtonComponent = (
@@ -34,6 +35,7 @@
           contained: classes.contained,
           outlined: classes.outlined,
         }}
+        className={visible || isDev ? '' : classes.hide}
         // only set submit when submit prefab is used
         type={isDev ? 'button' : type}
         //        type={linkType === undefined ? undefined : 'submit'}
@@ -148,6 +150,9 @@
           style.getColor(background),
           '!important',
         ],
+      },
+      hide: {
+        display: 'none',
       },
     };
   },

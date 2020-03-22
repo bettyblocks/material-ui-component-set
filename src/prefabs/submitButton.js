@@ -7,6 +7,12 @@
       name: 'Button',
       options: [
         {
+          label: 'Visible',
+          key: 'visible',
+          value: true,
+          type: 'TOGGLE',
+        },
+        {
           type: 'CUSTOM',
           label: 'type',
           key: 'type',
@@ -119,6 +125,12 @@
           label: 'Outer space',
           key: 'outerSpacing',
           type: 'SIZES',
+        },
+        {
+          label: 'Disabled',
+          key: 'disabled',
+          value: false,
+          type: 'TOGGLE',
         },
       ],
       descendants: [],
