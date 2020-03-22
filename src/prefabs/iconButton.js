@@ -1,58 +1,68 @@
 (() => ({
-  name: 'SubmitButton',
-  icon: 'SubmitButtonIcon',
-  category: 'FORM',
+  name: 'IconButton',
+  icon: 'IconIcon',
+  category: 'CONTENT',
   structure: [
     {
-      name: 'Button',
+      name: 'IconButton',
       options: [
         {
-          label: 'Visible',
-          key: 'visible',
-          value: true,
-          type: 'TOGGLE',
-        },
-        {
           type: 'CUSTOM',
-          label: 'type',
-          key: 'type',
-          value: 'submit',
+          label: 'Link to',
+          key: 'linkType',
+          value: 'Internal',
           configuration: {
             as: 'BUTTONGROUP',
             dataType: 'string',
             allowedInput: [
-              { name: 'Submit', value: 'submit' },
-              { name: 'Reset', value: 'reset' },
+              { name: 'Internal page', value: 'Internal' },
+              { name: 'External page', value: 'External' },
+              { name: 'Action', value: 'Action' },
             ],
           },
         },
         {
-          type: 'VARIABLE',
-          label: 'Button text',
-          key: 'buttonText',
-          value: ['Button'],
-        },
-
-        {
-          type: 'CUSTOM',
-          label: 'variant',
-          key: 'variant',
-          value: 'contained',
+          value: '',
+          label: 'Page',
+          key: 'linkTo',
+          type: 'ENDPOINT',
           configuration: {
-            as: 'BUTTONGROUP',
-            dataType: 'string',
-            allowedInput: [
-              { name: 'Text', value: 'text' },
-              { name: 'Outlined', value: 'outlined' },
-              { name: 'Contained', value: 'contained' },
-            ],
+            condition: {
+              type: 'SHOW',
+              option: 'linkType',
+              comparator: 'EQ',
+              value: 'Internal',
+            },
           },
         },
         {
-          value: false,
-          label: 'Full width',
-          key: 'fullWidth',
-          type: 'TOGGLE',
+          value: '',
+          label: 'URL',
+          key: 'linkToExternal',
+          type: 'TEXT',
+          configuration: {
+            placeholder: 'Starts with https:// or http://',
+            condition: {
+              type: 'SHOW',
+              option: 'linkType',
+              comparator: 'EQ',
+              value: 'External',
+            },
+          },
+        },
+        {
+          value: '',
+          label: 'Action',
+          key: 'ActionId',
+          type: 'ACTION',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'linkType',
+              comparator: 'EQ',
+              value: 'Action',
+            },
+          },
         },
         {
           value: 'medium',
@@ -63,24 +73,21 @@
             as: 'BUTTONGROUP',
             dataType: 'string',
             allowedInput: [
-              { name: 'Medium', value: 'medium' },
               { name: 'Small', value: 'small' },
+              { name: 'Medium', value: 'medium' },
+              { name: 'Large', value: 'large' },
             ],
           },
         },
         {
-          label: 'StartIcon',
-          key: 'startIcon',
-          value: 'None',
+          label: 'Icon',
+          key: 'icon',
+          value: 'Email',
           type: 'CUSTOM',
           configuration: {
             as: 'DROPDOWN',
             dataType: 'string',
             allowedInput: [
-              {
-                name: '',
-                value: 'None',
-              },
               {
                 name: 'ExpandMore',
                 value: 'ExpandMore',
@@ -110,27 +117,15 @@
         },
         {
           type: 'COLOR',
-          label: 'Text color',
-          key: 'textColor',
-          value: 'White',
+          label: 'Color',
+          key: 'color',
+          value: 'Primary',
         },
         {
-          type: 'COLOR',
-          label: 'Background color',
-          key: 'background',
-          value: 'Success',
-        },
-        {
-          value: ['0rem', 'M', '0rem', '0rem'],
+          value: ['0rem', '0rem', '0rem', '0rem'],
           label: 'Outer space',
           key: 'outerSpacing',
           type: 'SIZES',
-        },
-        {
-          label: 'Disabled',
-          key: 'disabled',
-          value: false,
-          type: 'TOGGLE',
         },
       ],
       descendants: [],
