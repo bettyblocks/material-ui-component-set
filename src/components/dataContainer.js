@@ -21,6 +21,7 @@
     'ROW',
     'CONTAINER_COMPONENT',
     'CONTENT_COMPONENT',
+    'CHECKBOX',
   ],
   orientation: 'HORIZONTAL',
   jsx: (
