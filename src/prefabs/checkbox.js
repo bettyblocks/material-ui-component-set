@@ -15,7 +15,7 @@
         {
           value: [],
           label: 'Value',
-          key: 'value',
+          key: 'defaultValue',
           type: 'VARIABLE',
         },
         {

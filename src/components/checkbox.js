@@ -8,7 +8,7 @@
     const {
       label,
       disabled,
-      value,
+      defaultValue,
       error,
       required,
       position,
@@ -18,39 +18,43 @@
     const { useText, getActionInput } = B;
     const isDev = B.env === 'dev';
     let componentLabel = label.map(l => (l.name ? l.name : l)).join(' ');
-    let componentValue = value.map(v => (v.name ? v.name : v)).join(' ');
+    let componentValue = defaultValue.map(v => (v.name ? v.name : v)).join(' ');
     const actionInput = getActionInput(actionInputId);
     if (!isDev) {
       componentLabel = useText(label);
-      componentValue = useText(value);
+      componentValue = useText(defaultValue);
     }
-    const [stateValue, setValue] = useState({ value: componentValue });
+    const [value, setValue] = useState({ value: componentValue });
 
-    const { Checkbox, FormControlLabel, FormControl } = window.MaterialUI.Core;
+    const {
+      Checkbox: MUICheckbox,
+      FormControlLabel,
+      FormControl,
+    } = window.MaterialUI.Core;
 
     const handleChange = evt => {
       setValue({ value: evt.target.value });
     };
 
-    const checkbox = (
-      <Checkbox
-        value={stateValue}
+    const Checkbox = (
+      <MUICheckbox
+        value={value}
         onChange={handleChange}
         name={actionInput && actionInput.name}
         disabled={disabled}
       />
     );
 
-    const control = (
+    const Control = (
       <FormControl required={required} error={error} fullWidth={fullWidth}>
         <FormControlLabel
-          control={checkbox}
+          control={Checkbox}
           label={componentLabel}
           labelPlacement={position}
         />
       </FormControl>
     );
-    return isDev ? <div className={classes.root}>{control}</div> : control;
+    return isDev ? <div className={classes.root}>{Control}</div> : Control;
   })(),
   styles: () => () => ({
     root: {
