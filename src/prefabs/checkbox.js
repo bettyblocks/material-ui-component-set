@@ -19,12 +19,6 @@
           type: 'VARIABLE',
         },
         {
-          value: [],
-          label: 'Name',
-          key: 'name',
-          type: 'VARIABLE',
-        },
-        {
           label: 'Label Position',
           key: 'position',
           value: 'end',

@@ -12,36 +12,31 @@
       error,
       required,
       position,
-      name,
       fullWidth,
+      actionInputId,
     } = options;
-    const { useText } = B;
+    const { useText, getActionInput } = B;
     const isDev = B.env === 'dev';
     let componentLabel = label.map(l => (l.name ? l.name : l)).join(' ');
-    let componentName = name.map(n => (n.name ? n.name : n)).join(' ');
     let componentValue = value.map(v => (v.name ? v.name : v)).join(' ');
+    const actionInput = getActionInput(actionInputId);
     if (!isDev) {
       componentLabel = useText(label);
-      componentName = useText(name);
       componentValue = useText(value);
     }
-    const [setChecked] = useState({
-      name: componentName,
-      value: componentValue,
-    });
+    const [stateValue, setValue] = useState({ value: componentValue });
 
     const { Checkbox, FormControlLabel, FormControl } = window.MaterialUI.Core;
 
     const handleChange = evt => {
-      const { name: evtName, value: evtValue } = evt.target;
-      setChecked({ name: evtName, value: evtValue });
+      setValue({ value: evt.target.value });
     };
 
     const checkbox = (
       <Checkbox
-        value={componentValue}
+        value={stateValue}
         onChange={handleChange}
-        name={componentName}
+        name={actionInput && actionInput.name}
         disabled={disabled}
       />
     );
