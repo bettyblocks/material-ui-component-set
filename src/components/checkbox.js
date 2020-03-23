@@ -1,72 +1,53 @@
 (() => ({
   name: 'Checkbox',
-  type: 'CHECKBOX',
+  type: 'CONTENT_COMPONENT',
   category: 'FORM',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const {
       label,
-      // formComponentName,
-      // color,
       disabled,
-      checked,
-      // size,
+      value,
       error,
       required,
       position,
       name,
-      // margin,
+      fullWidth,
     } = options;
     const { useText } = B;
     const isDev = B.env === 'dev';
-    const componentValue = isDev
-      ? checked.map(v => (v.name ? v.name : v)).join(' ')
-      : useText(checked);
-    // hacky
-    const [value, setValue] = useState(!!componentValue);
+    let componentLabel = label.map(l => (l.name ? l.name : l)).join(' ');
+    let componentName = name.map(n => (n.name ? n.name : n)).join(' ');
+    let componentValue = value.map(v => (v.name ? v.name : v)).join(' ');
+    if (!isDev) {
+      componentLabel = useText(label);
+      componentName = useText(name);
+      componentValue = useText(value);
+    }
+    const [setChecked] = useState({
+      name: componentName,
+      value: componentValue,
+    });
 
-    const {
-      Checkbox,
-      FormControlLabel,
-      FormControl,
-      // FormGroup,
-    } = window.MaterialUI.Core;
+    const { Checkbox, FormControlLabel, FormControl } = window.MaterialUI.Core;
 
-    // const handleChange = event => {
-    //   setValue(event.target.checked);
-    //   if (options.handleValueChange) {
-    //     options.handleValueChange({
-    //       name: formComponentName,
-    //       value: event.target.checked,
-    //     });
-    //   }
-    // };
-    const componentLabel = isDev
-      ? label.map(l => (l.name ? l.name : l)).join(' ')
-      : useText(label);
-    const componentName = isDev
-      ? name.map(n => (n.name ? n.name : n)).join(' ')
-      : useText(name);
+    const handleChange = evt => {
+      const { name: evtName, value: evtValue } = evt.target;
+      setChecked({ name: evtName, value: evtValue });
+    };
 
     const checkbox = (
       <Checkbox
-        checked={value}
-        color={error ? 'secondary' : 'primary'} // this will change
-        // size={size}
-        // onChange={handleChange}
+        value={componentValue}
+        onChange={handleChange}
         name={componentName}
         disabled={disabled}
       />
     );
 
     const control = (
-      <FormControl
-        // margin={margin}
-        required={required}
-        error={error}
-        // className={classes.checkbox}
-      >
+      <FormControl required={required} error={error} fullWidth={fullWidth}>
         <FormControlLabel
           control={checkbox}
           label={componentLabel}
@@ -74,11 +55,15 @@
         />
       </FormControl>
     );
-    return isDev ? <div>{control}</div> : control;
+    return isDev ? <div className={classes.root}>{control}</div> : control;
   })(),
-  styles: B => ({
-    checkbox: {
-      display: 'block',
+  styles: () => () => ({
+    root: {
+      display: ({ options: { fullWidth } }) =>
+        fullWidth ? 'block' : 'inline-block',
+      '& > *': {
+        pointerEvents: 'none',
+      },
     },
   }),
 }))();
