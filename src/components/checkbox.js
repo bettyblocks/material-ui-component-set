@@ -12,7 +12,8 @@
       error,
       required,
       position,
-      fullWidth,
+      size,
+      helperText,
       actionInputId,
     } = options;
     const { useText, getActionInput } = B;
@@ -30,6 +31,7 @@
       Checkbox: MUICheckbox,
       FormControlLabel,
       FormControl,
+      FormHelperText,
     } = window.MaterialUI.Core;
 
     const handleChange = evt => {
@@ -42,24 +44,24 @@
         onChange={handleChange}
         name={actionInput && actionInput.name}
         disabled={disabled}
+        size={size}
       />
     );
 
     const Control = (
-      <FormControl required={required} error={error} fullWidth={fullWidth}>
+      <FormControl required={required} error={error}>
         <FormControlLabel
           control={Checkbox}
           label={componentLabel}
           labelPlacement={position}
         />
+        {!!helperText && <FormHelperText>{helperText}</FormHelperText>}
       </FormControl>
     );
     return isDev ? <div className={classes.root}>{Control}</div> : Control;
   })(),
   styles: () => () => ({
     root: {
-      display: ({ options: { fullWidth } }) =>
-        fullWidth ? 'block' : 'inline-block',
       '& > *': {
         pointerEvents: 'none',
       },
