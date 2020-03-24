@@ -7,7 +7,7 @@
       name: 'Checkbox',
       options: [
         {
-          value: [],
+          value: ['Label'],
           label: 'Label',
           key: 'label',
           type: 'VARIABLE',
@@ -35,6 +35,12 @@
           },
         },
         {
+          value: '',
+          label: 'Input',
+          key: 'actionInputId',
+          type: 'ACTION_INPUT',
+        },
+        {
           value: false,
           label: 'Required',
           key: 'required',
@@ -53,16 +59,24 @@
           value: false,
         },
         {
-          type: 'TOGGLE',
-          label: 'Full width',
-          key: 'fullWidth',
-          value: true,
+          value: '',
+          label: 'Helper text',
+          key: 'helperText',
+          type: 'TEXT',
         },
         {
-          value: '',
-          label: 'Input',
-          key: 'actionInputId',
-          type: 'ACTION_INPUT',
+          label: 'Size',
+          key: 'size',
+          value: 'medium',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Medium', value: 'medium' },
+              { name: 'Small', value: 'small' },
+            ],
+          },
         },
       ],
       descendants: [],
