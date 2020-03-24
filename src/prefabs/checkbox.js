@@ -59,10 +59,10 @@
           value: false,
         },
         {
-          value: '',
+          value: [],
           label: 'Helper text',
           key: 'helperText',
-          type: 'TEXT',
+          type: 'VARIABLE',
         },
         {
           label: 'Size',
