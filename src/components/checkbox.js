@@ -20,10 +20,14 @@
     const isDev = B.env === 'dev';
     let componentLabel = label.map(l => (l.name ? l.name : l)).join(' ');
     let componentValue = defaultValue.map(v => (v.name ? v.name : v)).join(' ');
+    let componentHelperText = helperText
+      .map(h => (h.name ? h.name : h))
+      .join(' ');
     const actionInput = getActionInput(actionInputId);
     if (!isDev) {
       componentLabel = useText(label);
       componentValue = useText(defaultValue);
+      componentHelperText = useText(helperText);
     }
     const [value, setValue] = useState({ value: componentValue });
 
@@ -55,7 +59,9 @@
           label={componentLabel}
           labelPlacement={position}
         />
-        {!!helperText && <FormHelperText>{helperText}</FormHelperText>}
+        {!!componentHelperText && (
+          <FormHelperText>{componentHelperText}</FormHelperText>
+        )}
       </FormControl>
     );
     return isDev ? <div className={classes.root}>{Control}</div> : Control;
