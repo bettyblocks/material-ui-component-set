@@ -20,7 +20,6 @@
     "classes": "readonly",
     "children": "readonly",
     "index": "readonly",
-    "parent": "readonly",
     "options": "readonly",
     "parent": "readonly",
     "React": "readonly",
