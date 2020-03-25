@@ -37,7 +37,10 @@
           contained: classes.contained,
           outlined: classes.outlined,
         }}
-        className={visible || isDev ? '' : classes.hide}
+        className={[
+          visible || isDev ? '' : classes.hide,
+          options.buttonText.length === 0 ? classes.empty : '',
+        ].join(' ')}
         // only set submit when submit prefab is used
         type={isDev ? 'button' : type}
         //        type={linkType === undefined ? undefined : 'submit'}
@@ -152,6 +155,11 @@
           style.getColor(background),
           '!important',
         ],
+      },
+      empty: {
+        '&::before': {
+          content: '"\xA0"',
+        },
       },
       hide: {
         display: 'none',
