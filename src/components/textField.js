@@ -2,7 +2,7 @@
   name: 'TextField',
   icon: 'TextInputIcon',
   category: 'FORM',
-  type: 'FORM_COMPONENT',
+  type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {
