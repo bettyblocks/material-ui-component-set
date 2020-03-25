@@ -59,7 +59,7 @@
       [`${adornmentPosition}Adornment`]: <InputAdornment position={adornmentPosition}>{adornment}</InputAdornment>
     };
 
-    if (type === 'password') {
+    if (adornment && type === 'password') {
       InputAdornmentCmp = {
         [`${adornmentPosition}Adornment`]: (<InputAdornment position={adornmentPosition}><IconButton
           aria-label="toggle password visibility"

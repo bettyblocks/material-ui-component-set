@@ -105,11 +105,23 @@
           },
         },
         {
+          label: 'Show password toggle',
+          key: 'adornment',
+          value: true,
+          type: 'TOGGLE',
+        },
+        {
           type: 'CUSTOM',
-          label: 'Adornment position',
+          label: 'Position',
           key: 'adornmentPosition',
           value: 'start',
           configuration: {
+            condition: {
+              type: 'HIDE',
+              option: 'adornment',
+              comparator: 'EQ',
+              value: false,
+            },
             as: 'BUTTONGROUP',
             dataType: 'string',
             allowedInput: [
