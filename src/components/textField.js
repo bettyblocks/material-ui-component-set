@@ -2,7 +2,7 @@
   name: 'TextField',
   icon: 'TextInputIcon',
   category: 'FORM',
-  type: 'FORM_COMPONENT',
+  type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {
@@ -22,14 +22,19 @@
       margin,
       helperText,
       actionInputId,
+      adornment,
+      adornmentPosition,
     } = options;
 
-    const { TextField } = window.MaterialUI.Core;
+    const { TextField, InputAdornment, IconButton } = window.MaterialUI.Core;
+    const { Visibility, VisibilityOff } = window.MaterialUI.Icons;
+    
     const { getActionInput, useText } = B;
     const isDev = B.env === 'dev';
     const [currentValue, setCurrentValue] = isDev
       ? useState(defaultValue.join(' '))
       : useState(useText(defaultValue));
+    const [showPassword, togglePassword] = useState(false);
 
     const actionInput = getActionInput(actionInputId);
     const value = currentValue;
@@ -42,21 +47,44 @@
       setCurrentValue(eventValue);
     };
 
+    const handleClickShowPassword = () => {
+      togglePassword(!showPassword);
+    };
+
+    const handleMouseDownPassword = event => {
+      event.preventDefault();
+    };
+
+    let InputAdornmentCmp = adornment && {
+      [`${adornmentPosition}Adornment`]: <InputAdornment position={adornmentPosition}>{adornment}</InputAdornment>
+    };
+
+    if (type === 'password') {
+      InputAdornmentCmp = {
+        [`${adornmentPosition}Adornment`]: (<InputAdornment position={adornmentPosition}><IconButton
+          aria-label="toggle password visibility"
+          onClick={handleClickShowPassword}
+          onMouseDown={handleMouseDownPassword}
+        >{showPassword ? <Visibility /> : <VisibilityOff />}
+        </IconButton></InputAdornment>)
+      }
+    };
+
     const TextFieldCmp = (
       <TextField
         name={actionInput && actionInput.name}
         value={
           isDev
             ? defaultValue
-                .map(textitem => (textitem.name ? textitem.name : textitem))
-                .join(' ')
+              .map(textitem => (textitem.name ? textitem.name : textitem))
+              .join(' ')
             : value
         }
         size={size}
         variant={variant}
         placeholder={placeholder}
         fullWidth={fullWidth}
-        type={type}
+        type={(isDev && type === 'number') || showPassword ? 'text' : type}
         onChange={changeHandler}
         inputProps={{ name: actionInput && actionInput.name }}
         required={required}
@@ -67,14 +95,15 @@
         error={error}
         margin={margin}
         helperText={helperText}
+        InputProps={InputAdornmentCmp}
       />
     );
 
     return isDev ? (
       <div className={classes.root}>{TextFieldCmp}</div>
     ) : (
-      TextFieldCmp
-    );
+        TextFieldCmp
+      );
   })(),
   styles: () => () => ({
     root: {
