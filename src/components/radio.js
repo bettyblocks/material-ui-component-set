@@ -101,6 +101,7 @@
         required={required}
         margin={margin}
         component="fieldset"
+        aria-label={label}
         error={error}
       >
         <FormLabel component="legend">{label}</FormLabel>
