@@ -34,9 +34,8 @@
     const value = currentValue;
 
     const labelProperty = getProperty(property);
-    const valueProperty = options.valueproperty
-      ? getProperty(options.valueproperty) && getProperty(options.valueproperty)
-      : null;
+    const valueProperty =
+      options.valueproperty && getProperty(options.valueproperty);
 
     const handleChange = event => {
       const {
@@ -104,11 +103,18 @@
                 margin={margin}
                 helperText={helper}
               >
-                {results.map(item => (
-                  <MenuItem key={item.id} value={item[valueProperty.name]}>
-                    {item[labelProperty.name]}
-                  </MenuItem>
-                ))}
+                {results.map(item => {
+                  const { name: propName } = valueProperty || {};
+                  const { name: labelName } = labelProperty || {};
+                  return (
+                    propName &&
+                    labelName && (
+                      <MenuItem key={item.id} value={item[propName]}>
+                        {item[labelName]}
+                      </MenuItem>
+                    )
+                  );
+                })}
               </TextField>
             );
           }}
