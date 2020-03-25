@@ -70,7 +70,7 @@
         {
           value: '',
           label: 'Value property',
-          key: 'valueproperty',
+          key: 'valueProperty',
           type: 'PROPERTY',
           configuration: {
             dependsOn: 'model',

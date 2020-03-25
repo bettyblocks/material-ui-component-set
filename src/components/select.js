@@ -20,6 +20,7 @@
       model,
       optionType,
       property,
+      valueProperty: valueProp,
       actionInputId,
     } = options;
     const { TextField, MenuItem } = window.MaterialUI.Core;
@@ -34,8 +35,7 @@
     const value = currentValue;
 
     const labelProperty = getProperty(property);
-    const valueProperty =
-      options.valueproperty && getProperty(options.valueproperty);
+    const valueProperty = getProperty(valueProp);
 
     const handleChange = event => {
       const {
