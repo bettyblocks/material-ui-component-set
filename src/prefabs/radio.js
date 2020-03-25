@@ -7,15 +7,45 @@
       name: 'RadioGroup',
       options: [
         {
-          value: ['Label'],
+          value: 'Label',
           label: 'Label',
           key: 'label',
-          type: 'VARIABLE',
+          type: 'TEXT',
         },
         {
           value: [],
           label: 'Value',
           key: 'defaultValue',
+          type: 'VARIABLE',
+        },
+        {
+          value: '',
+          label: 'Input',
+          key: 'actionInputId',
+          type: 'ACTION_INPUT',
+        },
+        {
+          value: false,
+          label: 'Required',
+          key: 'required',
+          type: 'TOGGLE',
+        },
+        {
+          value: false,
+          label: 'Error',
+          key: 'error',
+          type: 'TOGGLE',
+        },
+        {
+          value: false,
+          label: 'Disabled',
+          key: 'disabled',
+          type: 'TOGGLE',
+        },
+        {
+          value: [],
+          label: 'Helper text',
+          key: 'helperText',
           type: 'VARIABLE',
         },
         {
@@ -114,18 +144,6 @@
           value: true,
         },
         {
-          value: false,
-          label: 'Required',
-          key: 'required',
-          type: 'TOGGLE',
-        },
-        {
-          value: false,
-          label: 'Disabled',
-          key: 'disabled',
-          type: 'TOGGLE',
-        },
-        {
           label: 'Size',
           key: 'size',
           value: 'medium',
@@ -140,16 +158,19 @@
           },
         },
         {
-          value: '',
-          label: 'Input',
-          key: 'actionInputId',
-          type: 'ACTION_INPUT',
-        },
-        {
-          value: [],
-          label: 'Helper text',
-          key: 'helperText',
-          type: 'VARIABLE',
+          label: 'Margin',
+          key: 'margin',
+          value: 'none',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'None', value: 'none' },
+              { name: 'Dense', value: 'dense' },
+              { name: 'Normal', value: 'normal' },
+            ],
+          },
         },
       ],
       descendants: [],

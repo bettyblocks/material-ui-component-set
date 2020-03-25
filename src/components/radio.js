@@ -20,6 +20,8 @@
       actionInputId,
       size,
       position,
+      margin,
+      error,
     } = options;
     const isDev = B.env === 'dev';
     const { GetAll, getProperty, useText, getActionInput } = B;
@@ -28,14 +30,12 @@
     const valueProperty = getProperty(valueProp);
     const actionInput = getActionInput(actionInputId);
 
-    let legend = label.map(l => (l.name ? l.name : l)).join(' ');
     let componentValue = defaultValue.map(v => (v.name ? v.name : v)).join(' ');
     let componentHelperText = helperText
       .map(h => (h.name ? h.name : h))
       .join(' ');
 
     if (!isDev) {
-      legend = useText(label);
       componentValue = useText(defaultValue);
       componentHelperText = useText(helperText);
     }
@@ -70,11 +70,11 @@
       if (!isDev) {
         Radios = (
           <GetAll modelId={model} skip={0} take={50}>
-            {({ loading, error, data }) => {
+            {({ loading, error: err, data }) => {
               if (loading) return <span>Loading...</span>;
 
-              if (error) {
-                return <span>Something went wrong: {error.message} :(</span>;
+              if (err) {
+                return <span>Something went wrong: {err.message} :(</span>;
               }
 
               const { results } = data;
@@ -87,14 +87,28 @@
       }
     }
 
+    const handleChange = evt => {
+      // radios modify the type of value
+      let evtValue = evt.target.value;
+      // maintain the type of the value
+      evtValue = isNaN(Number(evtValue)) ? evtValue : Number(evtValue);
+      setValue(evtValue);
+    };
+
     const FormControl = (
-      <MUIFormControl required={required} component="fieldset">
-        <FormLabel component="legend">{legend}</FormLabel>
+      <MUIFormControl
+        className={classes.formControl}
+        required={required}
+        margin={margin}
+        component="fieldset"
+        error={error}
+      >
+        <FormLabel component="legend">{label}</FormLabel>
         <RadioGroup
           row={row}
           value={value}
           name={actionInput && actionInput.name}
-          onChange={event => setValue(event.target.value)}
+          onChange={handleChange}
         >
           {Radios}
         </RadioGroup>
@@ -109,6 +123,9 @@
     );
   })(),
   styles: () => () => ({
+    formControl: {
+      display: 'block',
+    },
     root: {
       '& > *': {
         pointerEvents: 'none',
