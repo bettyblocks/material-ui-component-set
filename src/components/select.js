@@ -36,6 +36,8 @@
 
     const labelProperty = getProperty(property);
     const valueProperty = getProperty(valueProp);
+    const { name: propName } = valueProperty || {};
+    const { name: labelName } = labelProperty || {};
 
     const handleChange = event => {
       const {
@@ -103,18 +105,15 @@
                 margin={margin}
                 helperText={helper}
               >
-                {results.map(item => {
-                  const { name: propName } = valueProperty || {};
-                  const { name: labelName } = labelProperty || {};
-                  return (
+                {results.map(
+                  item =>
                     propName &&
                     labelName && (
                       <MenuItem key={item.id} value={item[propName]}>
                         {item[labelName]}
                       </MenuItem>
-                    )
-                  );
-                })}
+                    ),
+                )}
               </TextField>
             );
           }}
