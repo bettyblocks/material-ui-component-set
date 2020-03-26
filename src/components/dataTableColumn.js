@@ -3,7 +3,7 @@
   icon: 'DataTableColumnIcon',
   category: 'DATATABLE',
   type: 'DATATABLE_COLUMN',
-  allowedTypes: ['TEXT', 'IMAGE', 'BUTTON'],
+  allowedTypes: ['CONTENT_COMPONENT'],
   orientation: 'VERTICAL',
   jsx: (
     <div className={classes.column}>
