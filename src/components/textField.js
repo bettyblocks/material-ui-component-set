@@ -23,11 +23,12 @@
       helperText,
       actionInputId,
       adornment,
+      adornmentIcon,
       adornmentPosition,
     } = options;
 
     const { TextField, InputAdornment, IconButton } = window.MaterialUI.Core;
-    const { Visibility, VisibilityOff } = window.MaterialUI.Icons;
+    const { Icons, Icons: { Visibility, VisibilityOff} } = window.MaterialUI;
     
     const { getActionInput, useText } = B;
     const isDev = B.env === 'dev';
@@ -54,9 +55,12 @@
     const handleMouseDownPassword = event => {
       event.preventDefault();
     };
-
-    let InputAdornmentCmp = adornment && {
-      [`${adornmentPosition}Adornment`]: <InputAdornment position={adornmentPosition}>{adornment}</InputAdornment>
+    
+    const adornmentCmp = adornmentIcon && adornmentIcon !== 'none' 
+      ? React.createElement(Icons[adornmentIcon], { fontSize: size }) 
+      : adornment;
+    let InputAdornmentCmp = adornmentCmp && {
+      [`${adornmentPosition}Adornment`]: <InputAdornment position={adornmentPosition}>{adornmentCmp}</InputAdornment>
     };
 
     if (adornment && type === 'password') {
