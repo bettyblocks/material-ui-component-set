@@ -115,7 +115,7 @@
         {
           label: 'Margin',
           key: 'margin',
-          value: 'none',
+          value: 'normal',
           type: 'CUSTOM',
           configuration: {
             as: 'BUTTONGROUP',
@@ -132,8 +132,6 @@
     },
   ],
 }))();
-
-
 
 (() => ({
   name: 'TextArea',
@@ -195,7 +193,7 @@
           key: 'disabled',
           type: 'TOGGLE',
         },
-        
+
         {
           label: 'Variant',
           key: 'variant',
