@@ -18,6 +18,7 @@
       helperText,
       selectOptions,
       model,
+      filter,
       optionType,
       property,
       valueProperty: valueProp,
@@ -77,7 +78,7 @@
           ))}
         </TextField>
       ) : (
-        <GetAll modelId={model} skip={0} take={50}>
+        <GetAll modelId={model} filter={filter} skip={0} take={50}>
           {({ loading, error, data }) => {
             if (loading) {
               return <span>Loading...</span>;
