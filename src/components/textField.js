@@ -90,7 +90,10 @@
         fullWidth={fullWidth}
         type={(isDev && type === 'number') || showPassword ? 'text' : type}
         onChange={changeHandler}
-        inputProps={{ name: actionInput && actionInput.name }}
+        inputProps={{ 
+          name: actionInput && actionInput.name,
+           ...InputAdornmentCmp 
+        }}
         required={required}
         disabled={disabled}
         multiline={multiline}
@@ -99,7 +102,6 @@
         error={error}
         margin={margin}
         helperText={helperText}
-        InputProps={InputAdornmentCmp}
       />
     );
 
