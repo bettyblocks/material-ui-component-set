@@ -28,8 +28,11 @@
     } = options;
 
     const { TextField, InputAdornment, IconButton } = window.MaterialUI.Core;
-    const { Icons, Icons: { Visibility, VisibilityOff} } = window.MaterialUI;
-    
+    const {
+      Icons,
+      Icons: { Visibility, VisibilityOff },
+    } = window.MaterialUI;
+
     const { getActionInput, useText } = B;
     const isDev = B.env === 'dev';
     const [currentValue, setCurrentValue] = isDev
@@ -55,24 +58,34 @@
     const handleMouseDownPassword = event => {
       event.preventDefault();
     };
-    
-    const adornmentCmp = adornmentIcon && adornmentIcon !== 'none' 
-      ? React.createElement(Icons[adornmentIcon], { fontSize: size }) 
-      : adornment;
+
+    const adornmentCmp =
+      adornmentIcon && adornmentIcon !== 'none'
+        ? React.createElement(Icons[adornmentIcon], { fontSize: size })
+        : adornment;
     let InputAdornmentCmp = adornmentCmp && {
-      [`${adornmentPosition}Adornment`]: <InputAdornment position={adornmentPosition}>{adornmentCmp}</InputAdornment>
+      [`${adornmentPosition}Adornment`]: (
+        <InputAdornment position={adornmentPosition}>
+          {adornmentCmp}
+        </InputAdornment>
+      ),
     };
 
     if (adornment && type === 'password') {
       InputAdornmentCmp = {
-        [`${adornmentPosition}Adornment`]: (<InputAdornment position={adornmentPosition}><IconButton
-          aria-label="toggle password visibility"
-          onClick={handleClickShowPassword}
-          onMouseDown={handleMouseDownPassword}
-        >{showPassword ? <Visibility /> : <VisibilityOff />}
-        </IconButton></InputAdornment>)
-      }
-    };
+        [`${adornmentPosition}Adornment`]: (
+          <InputAdornment position={adornmentPosition}>
+            <IconButton
+              aria-label="toggle password visibility"
+              onClick={handleClickShowPassword}
+              onMouseDown={handleMouseDownPassword}
+            >
+              {showPassword ? <Visibility /> : <VisibilityOff />}
+            </IconButton>
+          </InputAdornment>
+        ),
+      };
+    }
 
     const TextFieldCmp = (
       <TextField
@@ -80,8 +93,8 @@
         value={
           isDev
             ? defaultValue
-              .map(textitem => (textitem.name ? textitem.name : textitem))
-              .join(' ')
+                .map(textitem => (textitem.name ? textitem.name : textitem))
+                .join(' ')
             : value
         }
         size={size}
@@ -90,9 +103,9 @@
         fullWidth={fullWidth}
         type={(isDev && type === 'number') || showPassword ? 'text' : type}
         onChange={changeHandler}
-        InputProps={{ 
+        InputProps={{
           inputProps: { name: actionInput && actionInput.name },
-          ...InputAdornmentCmp, 
+          ...InputAdornmentCmp,
         }}
         required={required}
         disabled={disabled}
@@ -108,8 +121,8 @@
     return isDev ? (
       <div className={classes.root}>{TextFieldCmp}</div>
     ) : (
-        TextFieldCmp
-      );
+      TextFieldCmp
+    );
   })(),
   styles: () => () => ({
     root: {

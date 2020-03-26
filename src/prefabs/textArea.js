@@ -133,8 +133,6 @@
   ],
 }))();
 
-
-
 (() => ({
   name: 'TextArea',
   icon: 'TextInputIcon',
@@ -195,7 +193,7 @@
           key: 'disabled',
           type: 'TOGGLE',
         },
-        
+
         {
           label: 'Variant',
           key: 'variant',

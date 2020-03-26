@@ -128,7 +128,7 @@
               { name: 'Start', value: 'start' },
               { name: 'End', value: 'end' },
             ],
-          }
+          },
         },
         {
           label: 'Type',
@@ -142,8 +142,8 @@
               comparator: 'EQ',
               value: 0,
             },
-          }
-        }
+          },
+        },
       ],
       descendants: [],
     },

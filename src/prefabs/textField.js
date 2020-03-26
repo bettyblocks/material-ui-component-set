@@ -255,7 +255,7 @@
               { name: 'Start', value: 'start' },
               { name: 'End', value: 'end' },
             ],
-          }
+          },
         },
       ],
       descendants: [],
