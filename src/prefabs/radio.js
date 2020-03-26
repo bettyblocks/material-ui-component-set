@@ -93,6 +93,21 @@
           },
         },
         {
+          value: {},
+          label: 'Filter',
+          key: 'filter',
+          type: 'FILTER',
+          configuration: {
+            dependsOn: 'model',
+            condition: {
+              type: 'SHOW',
+              option: 'optionType',
+              comparator: 'EQ',
+              value: 'data',
+            },
+          },
+        },
+        {
           type: 'PROPERTY',
           label: 'Label Property',
           key: 'labelProp',

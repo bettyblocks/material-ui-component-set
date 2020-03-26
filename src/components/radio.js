@@ -22,6 +22,7 @@
       position,
       margin,
       error,
+      filter,
     } = options;
     const isDev = B.env === 'dev';
     const { GetAll, getProperty, useText, getActionInput } = B;
@@ -40,7 +41,13 @@
       componentHelperText = useText(helperText);
     }
 
-    const [value, setValue] = useState(componentValue);
+    componentValue = isNaN(Number(componentValue))
+      ? componentValue
+      : Number(componentValue);
+
+    // maintain the type of the value
+    const getValue = val => (isNaN(Number(val)) ? val : Number(val));
+    const [value, setValue] = useState(getValue(componentValue));
 
     const {
       FormControl: MUIFormControl,
@@ -69,7 +76,7 @@
       Radios = renderRadio('value', 'Placeholder');
       if (!isDev) {
         Radios = (
-          <GetAll modelId={model} skip={0} take={50}>
+          <GetAll modelId={model} filter={filter} skip={0} take={50}>
             {({ loading, error: err, data }) => {
               if (loading) return <span>Loading...</span>;
 
@@ -88,11 +95,7 @@
     }
 
     const handleChange = evt => {
-      // radios modify the type of value
-      let evtValue = evt.target.value;
-      // maintain the type of the value
-      evtValue = isNaN(Number(evtValue)) ? evtValue : Number(evtValue);
-      setValue(evtValue);
+      setValue(getValue(evt.target.value));
     };
 
     const FormControl = (
@@ -101,7 +104,6 @@
         required={required}
         margin={margin}
         component="fieldset"
-        aria-label={label}
         error={error}
       >
         <FormLabel component="legend">{label}</FormLabel>
@@ -110,6 +112,7 @@
           value={value}
           name={actionInput && actionInput.name}
           onChange={handleChange}
+          aria-label={label}
         >
           {Radios}
         </RadioGroup>
