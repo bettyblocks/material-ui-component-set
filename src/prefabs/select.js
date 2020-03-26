@@ -53,6 +53,21 @@
           },
         },
         {
+          value: {},
+          label: 'Filter',
+          key: 'filter',
+          type: 'FILTER',
+          configuration: {
+            dependsOn: 'model',
+            condition: {
+              type: 'SHOW',
+              option: 'optionType',
+              comparator: 'EQ',
+              value: 'data',
+            },
+          },
+        },
+        {
           type: 'PROPERTY',
           label: 'Property',
           key: 'property',
@@ -70,7 +85,7 @@
         {
           value: '',
           label: 'Value property',
-          key: 'valueproperty',
+          key: 'valueProperty',
           type: 'PROPERTY',
           configuration: {
             dependsOn: 'model',

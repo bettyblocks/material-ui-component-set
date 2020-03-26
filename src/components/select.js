@@ -18,8 +18,10 @@
       helperText,
       selectOptions,
       model,
+      filter,
       optionType,
       property,
+      valueProperty: valueProp,
       actionInputId,
     } = options;
     const { TextField, MenuItem } = window.MaterialUI.Core;
@@ -34,9 +36,9 @@
     const value = currentValue;
 
     const labelProperty = getProperty(property);
-    const valueProperty = options.valueproperty
-      ? getProperty(options.valueproperty) && getProperty(options.valueproperty)
-      : null;
+    const valueProperty = getProperty(valueProp);
+    const { name: propName } = valueProperty || {};
+    const { name: labelName } = labelProperty || {};
 
     const handleChange = event => {
       const {
@@ -76,7 +78,7 @@
           ))}
         </TextField>
       ) : (
-        <GetAll modelId={model} skip={0} take={50}>
+        <GetAll modelId={model} filter={filter} skip={0} take={50}>
           {({ loading, error, data }) => {
             if (loading) {
               return <span>Loading...</span>;
@@ -104,11 +106,15 @@
                 margin={margin}
                 helperText={helper}
               >
-                {results.map(item => (
-                  <MenuItem key={item.id} value={item[valueProperty.name]}>
-                    {item[labelProperty.name]}
-                  </MenuItem>
-                ))}
+                {results.map(
+                  item =>
+                    propName &&
+                    labelName && (
+                      <MenuItem key={item.id} value={item[propName]}>
+                        {item[labelName]}
+                      </MenuItem>
+                    ),
+                )}
               </TextField>
             );
           }}
