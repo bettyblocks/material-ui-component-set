@@ -7,7 +7,64 @@
       name: 'TextField',
       options: [
         {
-          value: 'label',
+          label: 'Property/Name',
+          key: 'propertyType',
+          value: 'property',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Property', value: 'property' },
+              { name: 'Name', value: 'name' },
+            ],
+          },
+        },
+        {
+          type: 'PROPERTY',
+          label: 'Property',
+          key: 'property',
+          value: '',
+          configuration: {
+            dependsOn: 'model',
+            condition: {
+              type: 'SHOW',
+              option: 'propertyType',
+              comparator: 'EQ',
+              value: 'property',
+            },
+          },
+        },
+        {
+          value: '',
+          label: 'Input',
+          key: 'actionInputId',
+          type: 'ACTION_INPUT',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'propertyType',
+              comparator: 'EQ',
+              value: 'property',
+            },
+          },
+        },
+        {
+          value: '',
+          label: 'Name',
+          key: 'name',
+          type: 'TEXT',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'propertyType',
+              comparator: 'EQ',
+              value: 'name',
+            },
+          },
+        },
+        {
+          value: '',
           label: 'Label',
           key: 'label',
           type: 'TEXT',
@@ -17,12 +74,6 @@
           label: 'Value',
           key: 'defaultValue',
           type: 'VARIABLE',
-        },
-        {
-          value: '',
-          label: 'Input',
-          key: 'actionInputId',
-          type: 'ACTION_INPUT',
         },
         {
           value: false,

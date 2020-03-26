@@ -7,6 +7,7 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const {
+      property,
       label,
       defaultValue,
       required,
@@ -33,16 +34,34 @@
       Icons: { Visibility, VisibilityOff },
     } = window.MaterialUI;
 
-    const { getActionInput, useText } = B;
+    const { getActionInput, Property, getProperty, Text, useText, getVariable } = B;
     const isDev = B.env === 'dev';
+
+    console.log('defaultValue', defaultValue);
+    console.log('useText', useText(defaultValue));
+
+    console.log('getVariable', getVariable(property));
+
     const [currentValue, setCurrentValue] = isDev
       ? useState(defaultValue.join(' '))
       : useState(useText(defaultValue));
     const [showPassword, togglePassword] = useState(false);
+    
+    const labelProperty = getProperty(property);
+    console.log('property', property);
+    console.log('labelProperty', labelProperty);
+    const { name: propLabel } = labelProperty || {};
+    let inputLabel = label;
+    if (property && isDev) {
+      inputLabel = '{{ Property }}'
+    }
+    if (!isDev && property) {
+      inputLabel = propLabel;
+    }
 
     const actionInput = getActionInput(actionInputId);
-    const value = currentValue;
-
+    const value = !isDev && property ? <Property id={property} /> : currentValue;
+    
     const changeHandler = event => {
       const {
         target: { value: eventValue },
@@ -111,7 +130,7 @@
         disabled={disabled}
         multiline={multiline}
         rows={rows}
-        label={label}
+        label={label || inputLabel}
         error={error}
         margin={margin}
         helperText={helperText}
