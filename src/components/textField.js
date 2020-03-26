@@ -90,9 +90,9 @@
         fullWidth={fullWidth}
         type={(isDev && type === 'number') || showPassword ? 'text' : type}
         onChange={changeHandler}
-        inputProps={{ 
-          name: actionInput && actionInput.name,
-           ...InputAdornmentCmp 
+        InputProps={{ 
+          inputProps: { name: actionInput && actionInput.name },
+          ...InputAdornmentCmp, 
         }}
         required={required}
         disabled={disabled}
