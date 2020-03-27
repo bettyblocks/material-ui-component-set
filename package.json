@@ -14,7 +14,9 @@
     "eslint-plugin-prettier": "^3.0.0",
     "eslint-plugin-react": "^7.11.1",
     "nodemon": "^1.19.1",
-    "prettier": "^1.15.3"
+    "prettier": "^1.15.3",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11"
   },
   "scripts": {
     "start": "bb components serve -p 5002",
@@ -22,9 +24,21 @@
     "dev": "nodemon --watch src --exec 'yarn build && yarn start'",
     "lint": "eslint --ext js ./src",
     "upload": "bb components publish -b clara-component-set",
-    "test": "echo \"Error: no test specified\" && exit 0"
+    "test": "echo \"Error: no test specified\" && exit 0",
+    "bundle": "npx webpack --config webpack.config.js"
   },
   "files": [
     "dist"
-  ]
+  ],
+  "dependencies": {
+    "@date-io/date-fns": "^1.3.13",
+    "@material-ui/core": "^4.9.7",
+    "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.46",
+    "@material-ui/pickers": "^3.2.10",
+    "@material-ui/styles": "^4.9.6",
+    "date-fns": "^2.11.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  }
 }
