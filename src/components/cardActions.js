@@ -5,13 +5,12 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { CardActions } = window.MaterialUI.Core;
-    const { alignment } = options;
     const isDev = B.env === 'dev';
     const isPristine = children.length === 0 && isDev;
     const PlaceHolder = <div className={classes.empty}>Card Content</div>;
 
     const CardActionsComponent = (
-      <CardActions className={classes.cardActions}>
+      <CardActions classes={{ root: classes.root }}>
         {isPristine ? PlaceHolder : children}
       </CardActions>
     );
@@ -19,10 +18,12 @@
     return isDev ? <div>{CardActionsComponent}</div> : CardActionsComponent;
   })(),
   styles: () => () => ({
-    cardActions: {
+    root: {
       flexDirection: 'column',
-      alignItems: ({ options: { alignment } }) => alignment,
-      padding: 0,
+      '&.MuiCardActions-root': {
+        padding: 0,
+        alignItems: ({ options: { alignment } }) => alignment,
+      },
     },
     empty: {
       display: 'flex',
