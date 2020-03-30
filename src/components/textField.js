@@ -39,6 +39,10 @@
       ? useState(defaultValue.join(' '))
       : useState(useText(defaultValue));
     const [showPassword, togglePassword] = useState(false);
+    const helper = isDev ? helperText.join(' ') : useText(helperText);
+    const placeholderText = isDev
+      ? placeholder.join(' ')
+      : useText(placeholder);
 
     const actionInput = getActionInput(actionInputId);
     const value = currentValue;
@@ -99,7 +103,7 @@
         }
         size={size}
         variant={variant}
-        placeholder={placeholder}
+        placeholder={placeholderText}
         fullWidth={fullWidth}
         type={(isDev && type === 'number') || showPassword ? 'text' : type}
         onChange={changeHandler}
@@ -114,7 +118,7 @@
         label={label}
         error={error}
         margin={margin}
-        helperText={helperText}
+        helperText={helper}
       />
     );
 

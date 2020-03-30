@@ -95,16 +95,16 @@
                   value: false,
                 },
                 {
-                  value: '',
+                  value: [],
                   label: 'Placeholder',
                   key: 'placeholder',
-                  type: 'TEXT',
+                  type: 'VARIABLE',
                 },
                 {
-                  value: '',
+                  value: [],
                   label: 'Helper text',
                   key: 'helperText',
-                  type: 'TEXT',
+                  type: 'VARIABLE',
                 },
                 {
                   label: 'Variant',
