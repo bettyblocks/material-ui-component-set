@@ -15,8 +15,6 @@
       logoComponent
     );
 
-    const titleWithLink = <Link endpoint={endpoint}>{title}</Link>;
-
     const toolbar = (
       <Toolbar>
         {options.logo.length > 0 && logoWithLink}
@@ -26,8 +24,14 @@
           color="inherit"
           aria-label="menu"
         />
-        <Typography variant="h6" noWrap className={classes.title}>
-          {endpoint.id ? titleWithLink : title}
+        <Typography
+          variant="h6"
+          noWrap
+          className={classes.title}
+          component={endpoint.id && Link}
+          endpointId={endpoint.id && endpoint}
+        >
+          {title}
         </Typography>
         {children}
       </Toolbar>
