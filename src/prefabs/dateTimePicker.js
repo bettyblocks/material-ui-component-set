@@ -109,10 +109,10 @@
           value: false,
         },
         {
-          value: '',
+          value: [],
           label: 'Placeholder',
           key: 'placeholder',
-          type: 'TEXT',
+          type: 'VARIABLE',
         },
         {
           value: [],
