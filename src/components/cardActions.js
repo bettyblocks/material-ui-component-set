@@ -21,7 +21,6 @@
     root: {
       flexDirection: 'column',
       '&.MuiCardActions-root': {
-        padding: 0,
         alignItems: ({ options: { alignment } }) => alignment,
       },
     },
