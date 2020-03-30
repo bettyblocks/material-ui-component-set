@@ -1,5 +1,5 @@
 (() => ({
-  name: 'BreadCrumb Item',
+  name: 'Breadcrumb Item',
   icon: 'BreadcrumbItemIcon',
   category: 'NAVIGATION',
   structure: [
