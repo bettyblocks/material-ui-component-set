@@ -14,7 +14,7 @@
         },
         {
           value: '',
-          label: 'Link to',
+          label: 'Page',
           key: 'endpoint',
           type: 'ENDPOINT',
         },
