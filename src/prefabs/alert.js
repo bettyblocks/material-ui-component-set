@@ -42,14 +42,14 @@
         {
           label: 'Icon',
           key: 'icon',
-          value: 'Search',
+          value: 'None',
           type: 'CUSTOM',
           configuration: {
             as: 'DROPDOWN',
             dataType: 'string',
             allowedInput: [
               {
-                name: '',
+                name: 'Success',
                 value: 'None',
               },
               {
