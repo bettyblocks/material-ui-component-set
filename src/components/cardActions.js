@@ -1,25 +1,19 @@
 (() => ({
   name: 'CardActions',
-  type: 'CONTAINER_COMPONENT',
+  type: 'CARD_ACTIONS',
   allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { CardActions } = window.MaterialUI.Core;
     const isDev = B.env === 'dev';
-    const isEmpty = children.length === 0;
-    const isPristine = isEmpty && isDev;
-    const builderLayout = () => (
-      <div
-        className={[
-          isEmpty ? classes.empty : '',
-          isPristine ? classes.pristine : '',
-        ].join(' ')}
-      >
-        {isPristine ? 'Card Actions' : children}
-      </div>
+    const isPristine = children.length === 0 && isDev;
+    const PlaceHolder = <div className={classes.empty}>Card Content</div>;
+
+    const CardActionsComponent = (
+      <CardActions>{isPristine ? PlaceHolder : children}</CardActions>
     );
 
-    return isDev ? builderLayout() : <CardActions>{children}</CardActions>;
+    return isDev ? <div>{CardActionsComponent}</div> : CardActionsComponent;
   })(),
   styles: () => () => ({
     empty: {
