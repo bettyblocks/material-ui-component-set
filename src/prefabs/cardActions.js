@@ -5,7 +5,32 @@
   structure: [
     {
       name: 'CardActions',
-      options: [],
+      options: [
+        {
+          type: 'CUSTOM',
+          label: 'Alignment',
+          key: 'alignment',
+          value: 'start',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              {
+                name: 'Start',
+                value: 'start',
+              },
+              {
+                name: 'Center',
+                value: 'center',
+              },
+              {
+                name: 'End',
+                value: 'flex-end',
+              },
+            ],
+          },
+        },
+      ],
       descendants: [
         {
           name: 'Button',
