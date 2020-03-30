@@ -107,7 +107,7 @@
                   label: 'Content',
                   key: 'content',
                   value: [
-                    'Lizards are a widespread group of squamate reptiles',
+                    'Lizards are a widespread group of squamate reptiles  ',
                   ],
                   configuration: {
                     as: 'MULTILINE',
@@ -149,11 +149,20 @@
           name: 'CardActions',
           options: [
             {
-              value:
-                'https://material-ui.com/static/images/cards/contemplative-reptile.jpg',
-              label: 'Image',
-              key: 'image',
-              type: 'TEXT',
+              value: 'flex-start',
+              label: 'Alignment',
+              key: 'alignment',
+              type: 'CUSTOM',
+              configuration: {
+                as: 'BUTTONGROUP',
+                dataType: 'string',
+                allowedInput: [
+                  { name: 'Left', value: 'flex-start' },
+                  { name: 'Center', value: 'center' },
+                  { name: 'Right', value: 'flex-end' },
+                  { name: 'Justified', value: 'space-between' },
+                ],
+              },
             },
           ],
           descendants: [
