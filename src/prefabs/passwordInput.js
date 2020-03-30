@@ -114,7 +114,7 @@
           type: 'CUSTOM',
           label: 'Position',
           key: 'adornmentPosition',
-          value: 'start',
+          value: 'end',
           configuration: {
             condition: {
               type: 'HIDE',
