@@ -42,6 +42,9 @@
       ? useState(strDefaultValue)
       : useState(useText(defaultValue));
     const helper = isDev ? helperText.join(' ') : useText(helperText);
+    const placeholderText = isDev
+      ? placeholder.join(' ')
+      : useText(placeholder);
 
     const isValidDate = date => date instanceof Date && !isNaN(date);
 
@@ -96,7 +99,7 @@
           value={isDev ? devValue : prodValue}
           size={size}
           variant={variant}
-          placeholder={placeholder}
+          placeholder={placeholderText}
           fullWidth={fullWidth}
           onChange={changeHandler}
           inputVariant={inputvariant}
