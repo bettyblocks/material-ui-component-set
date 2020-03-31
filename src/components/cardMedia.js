@@ -6,7 +6,8 @@
   jsx: (() => {
     const { CardMedia } = window.MaterialUI.Core;
     const isDev = B.env === 'dev';
-    const { image, title, imageHeight } = options;
+    const { image, title } = options;
+
     const cardMedia = (
       <CardMedia
         className={classes.root}
@@ -20,7 +21,7 @@
   })(),
   styles: () => () => ({
     root: {
-      height: ({ options: { imageHeight } }) => imageHeight,
+      minHeight: '30px',
     },
   }),
 }))();

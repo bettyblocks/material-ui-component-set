@@ -51,13 +51,10 @@
               type: 'TEXT',
             },
             {
-              value: '140px',
-              label: 'Media Height',
-              key: 'imageHeight',
-              type: 'SIZE',
-              configuration: {
-                as: 'UNIT',
-              },
+              value: '',
+              label: 'Image Title',
+              key: 'title',
+              type: 'TEXT',
             },
           ],
           descendants: [],
