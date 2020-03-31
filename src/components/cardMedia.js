@@ -21,7 +21,7 @@
   })(),
   styles: () => () => ({
     root: {
-      minHeight: '30px',
+      minHeight: '1.875rem',
     },
   }),
 }))();
