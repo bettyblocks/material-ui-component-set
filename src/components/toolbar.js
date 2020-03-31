@@ -10,6 +10,7 @@
 
     const logoComponent = <img src={logo} width="100" alt="" />;
     const logoWithLink = endpoint.id ? (
+      // eslint-disable-next-line jsx-a11y/anchor-is-valid
       <Link endpoint={endpoint}>{logoComponent}</Link>
     ) : (
       logoComponent
