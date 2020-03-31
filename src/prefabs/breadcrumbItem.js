@@ -1,5 +1,5 @@
 (() => ({
-  name: 'BreadCrumb Item',
+  name: 'Breadcrumb Item',
   icon: 'BreadcrumbItemIcon',
   category: 'NAVIGATION',
   structure: [
@@ -14,7 +14,7 @@
         },
         {
           value: '',
-          label: 'Link to',
+          label: 'Page',
           key: 'endpoint',
           type: 'ENDPOINT',
         },
