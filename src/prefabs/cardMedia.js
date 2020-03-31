@@ -19,6 +19,15 @@
           key: 'title',
           type: 'TEXT',
         },
+        {
+          value: '140px',
+          label: 'Media Height ',
+          key: 'imageHeight',
+          type: 'SIZE',
+          configuration: {
+            as: 'UNIT',
+          },
+        },
       ],
       descendants: [],
     },
