@@ -29,7 +29,7 @@
           noWrap
           className={classes.title}
           component={endpoint.id && Link}
-          endpointId={endpoint.id && endpoint}
+          endpoint={endpoint.id && endpoint}
         >
           {title}
         </Typography>
