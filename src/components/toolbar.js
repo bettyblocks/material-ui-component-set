@@ -46,6 +46,8 @@
     },
     title: {
       flexGrow: 1,
+      color: '#fff',
+      textDecoration: 'none',
     },
   }),
 }))();
