@@ -14,10 +14,19 @@
       ? breadcrumbContent.join(' ')
       : useText(breadcrumbContent);
 
-    // eslint-disable-next-line jsx-a11y/anchor-is-valid
-    const breadcrumbItem = <Link endpoint={endpoint}>{content}</Link>;
+    const breadcrumbItem = (
+      // eslint-disable-next-line jsx-a11y/anchor-is-valid
+      <Link className={classes.link} endpoint={endpoint}>
+        {content}
+      </Link>
+    );
 
     return isDev ? <div>{breadcrumbItem}</div> : breadcrumbItem;
   })(),
-  styles: () => () => ({}),
+  styles: () => () => ({
+    link: {
+      color: 'black',
+      textDecoration: 'none',
+    },
+  }),
 }))();
