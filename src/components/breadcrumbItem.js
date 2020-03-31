@@ -7,11 +7,17 @@
   orientation: 'VERTICAL',
   jsx: (() => {
     const isDev = B.env === 'dev';
-    const { Link } = B;
+    const { Link, useText } = B;
     const { endpoint, breadcrumbContent } = options;
-    const breadcrumbItem = <Link endpoint={endpoint}>{breadcrumbContent}</Link>;
+
+    const content = isDev
+      ? breadcrumbContent.join(' ')
+      : useText(breadcrumbContent);
+
+    // eslint-disable-next-line jsx-a11y/anchor-is-valid
+    const breadcrumbItem = <Link endpoint={endpoint}>{content}</Link>;
 
     return isDev ? <div>{breadcrumbItem}</div> : breadcrumbItem;
   })(),
-  styles: {},
+  styles: () => () => ({}),
 }))();
