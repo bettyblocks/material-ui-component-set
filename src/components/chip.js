@@ -24,14 +24,14 @@
     return {
       chip: {
         margin: ({ options: { margin } }) => convertSizes(margin),
-      },
-      root: {
-        '.&MuiChip-root': {
-          backgroundColor: ({ options: { color } }) => [
-            style.getColor(color),
-            '!important',
-          ],
-        },
+        color: ({ options: { textColor } }) => [
+          style.getColor(textColor),
+          '!important',
+        ],
+        backgroundColor: ({ options: { color } }) => [
+          style.getColor(color),
+          '!important',
+        ],
       },
     };
   },

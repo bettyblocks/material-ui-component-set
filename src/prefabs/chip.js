@@ -36,7 +36,13 @@
           type: 'COLOR',
           label: 'Color',
           key: 'color',
-          value: 'primary',
+          value: 'Primary',
+        },
+        {
+          type: 'COLOR',
+          label: 'Text Color',
+          key: 'textColor',
+          value: 'White',
         },
         {
           type: 'SIZES',
