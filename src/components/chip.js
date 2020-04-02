@@ -7,7 +7,7 @@
     const { Chip } = window.MaterialUI.Core;
     const { label, disabled, variant } = options;
     const isDev = B.env === 'dev';
-    const chip = (
+    const ChipComponent = (
       <Chip
         className={classes.chip}
         label={label}
@@ -15,7 +15,7 @@
         variant={variant}
       />
     );
-    return isDev ? <span>{chip}</span> : chip;
+    return isDev ? <span>{ChipComponent}</span> : ChipComponent;
   })(),
   styles: B => theme => {
     const style = new B.Styling(theme);
