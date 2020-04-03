@@ -10,7 +10,7 @@
     const isPristine = children.length === 0 && isDev;
     const PlaceHolder = <div className={classes.empty}>Paper</div>;
 
-    const paper = (
+    const PaperComponent = (
       <Paper
         className={[
           isPristine ? classes.pristine : '',
@@ -24,7 +24,7 @@
         {isPristine ? PlaceHolder : children}
       </Paper>
     );
-    return isDev ? <div>{paper}</div> : paper;
+    return isDev ? <div>{PaperComponent}</div> : PaperComponent;
   })(),
   styles: () => () => ({
     dev: {
