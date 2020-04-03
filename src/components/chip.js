@@ -9,7 +9,7 @@
     const isDev = B.env === 'dev';
     const ChipComponent = (
       <Chip
-        className={classes.chip}
+        className={variant === 'default' ? classes.chip : classes.outlined}
         label={label}
         disabled={disabled}
         variant={variant}
@@ -30,6 +30,18 @@
         ],
         backgroundColor: ({ options: { color } }) => [
           style.getColor(color),
+          '!important',
+        ],
+      },
+      outlined: {
+        margin: ({ options: { margin } }) => convertSizes(margin),
+        color: ({ options: { textColor } }) => [
+          style.getColor(textColor),
+          '!important',
+        ],
+        backgroundColor: 'transparent !important',
+        border: ({ options: { color } }) => [
+          ['1px solid ', style.getColor(color)].join(' '),
           '!important',
         ],
       },
