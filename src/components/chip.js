@@ -9,7 +9,10 @@
     const isDev = B.env === 'dev';
     const ChipComponent = (
       <Chip
-        className={variant === 'default' ? classes.chip : classes.outlined}
+        className={[
+          classes.root,
+          variant === 'default' ? classes.chip : classes.outlined,
+        ].join(' ')}
         label={label}
         disabled={disabled}
         variant={variant}
@@ -22,28 +25,27 @@
     const convertSizes = sizes =>
       sizes.map(size => style.getSpacing(size)).join(' ');
     return {
-      chip: {
+      root: {
         margin: ({ options: { margin } }) => convertSizes(margin),
         color: ({ options: { textColor } }) => [
           style.getColor(textColor),
           '!important',
         ],
+      },
+      chip: {
         backgroundColor: ({ options: { color } }) => [
           style.getColor(color),
           '!important',
         ],
       },
       outlined: {
-        margin: ({ options: { margin } }) => convertSizes(margin),
-        color: ({ options: { textColor } }) => [
-          style.getColor(textColor),
-          '!important',
-        ],
         backgroundColor: 'transparent !important',
-        border: ({ options: { color } }) => [
-          ['1px solid ', style.getColor(color)].join(' '),
-          '!important',
-        ],
+        '&.MuiChip-outlined': {
+          borderColor: ({ options: { color } }) => [
+            style.getColor(color),
+            '!important',
+          ],
+        },
       },
     };
   },
