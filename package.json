@@ -38,6 +38,7 @@
     "@material-ui/pickers": "^3.2.10",
     "@material-ui/styles": "^4.9.6",
     "date-fns": "^2.11.0",
+    "mustache": "^4.0.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   }
