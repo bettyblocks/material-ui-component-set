@@ -1,6 +1,6 @@
 (() => ({
   name: 'Icon',
-  icon: 'IconIcon',
+  icon: 'ContainerIcon',
   category: 'LAYOUT',
   type: 'CONTENT_COMPONENT',
   allowedTypes: [],
@@ -9,9 +9,13 @@
     const { Icons } = window.MaterialUI;
     const isDev = B.env === 'dev';
     const { icon } = options;
-    const IconComponent = React.createElement(Icons['FileCopy']);
+    const IconComponent = React.createElement(Icons[icon]);
 
     return isDev ? <div>{IconComponent}</div> : IconComponent;
   })(),
-  styles: {},
+  styles: () => () => ({
+    root: {
+      fontSize: 40,
+    },
+  }),
 }))();
