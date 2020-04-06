@@ -1,7 +1,7 @@
 (() => ({
   name: 'Icon',
-  icon: 'ContainerIcon',
-  category: 'LAYOUT',
+  icon: 'IconIcon',
+  category: 'CONTENT',
   structure: [
     {
       name: 'Icon',
@@ -9,16 +9,12 @@
         {
           label: 'Icon',
           key: 'icon',
-          value: 'None',
+          value: 'FileCopy',
           type: 'CUSTOM',
           configuration: {
             as: 'DROPDOWN',
             dataType: 'string',
             allowedInput: [
-              {
-                name: '',
-                value: 'None',
-              },
               {
                 name: 'FileCopy',
                 value: 'FileCopy',

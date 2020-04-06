@@ -1,7 +1,7 @@
 (() => ({
   name: 'Icon',
   icon: 'ContainerIcon',
-  category: 'LAYOUT',
+  category: 'CONTENT',
   type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
@@ -13,7 +13,7 @@
       className: classes.root,
     });
 
-    return isDev ? <div>{IconComponent}</div> : IconComponent;
+    return isDev ? <span>{IconComponent}</span> : IconComponent;
   })(),
   styles: B => t => {
     const style = new B.Styling(t);
