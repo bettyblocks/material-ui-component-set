@@ -16,10 +16,6 @@
             dataType: 'string',
             allowedInput: [
               {
-                name: 'FileCopy',
-                value: 'FileCopy',
-              },
-              {
                 name: 'AcUnit',
                 value: 'AcUnit',
               },
@@ -590,6 +586,10 @@
               {
                 name: 'FavoriteBorder',
                 value: 'FavoriteBorder',
+              },
+              {
+                name: 'FileCopy',
+                value: 'FileCopy',
               },
               {
                 name: 'FilterList',
