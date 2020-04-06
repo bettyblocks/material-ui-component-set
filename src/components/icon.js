@@ -4,7 +4,7 @@
   category: 'CONTENT',
   type: 'CONTENT_COMPONENT',
   allowedTypes: [],
-  orientation: 'HORIZONTAL',
+  orientation: 'VERTICAL',
   jsx: (() => {
     const { Icons } = window.MaterialUI;
     const isDev = B.env === 'dev';
@@ -13,12 +13,19 @@
       className: classes.root,
     });
 
-    return isDev ? <span>{IconComponent}</span> : IconComponent;
+    return isDev ? (
+      <span className={classes.wrapper}>{IconComponent}</span>
+    ) : (
+      IconComponent
+    );
   })(),
   styles: B => t => {
     const style = new B.Styling(t);
 
     return {
+      wrapper: {
+        display: 'inline-block',
+      },
       root: {
         '&.MuiSvgIcon-root': {
           [`@media ${B.mediaMinWidth(768)}`]: {
