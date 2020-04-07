@@ -26,7 +26,7 @@
     const { Autocomplete } = window.MaterialUI.Lab;
     const { TextField, CircularProgress, Chip } = window.MaterialUI.Core;
     const { ExpandMore, Close } = window.MaterialUI.Icons;
-    const { useText, getProperty, getActionInput } = B;
+    const { useText, getProperty, getActionInput, GetAll } = B;
     const [currentValue, setCurrentValue] = isDev
       ? useState(defaultValue.join(' '))
       : useState(useText(defaultValue));
@@ -49,7 +49,7 @@
       helperText: helper,
     };
 
-    if (isDev) {
+    if (isDev || !model) {
       const textValue = defaultValue
         .map(textitem => (textitem.name ? textitem.name : textitem))
         .join(' ');
@@ -89,7 +89,6 @@
       : null;
 
     const [searchParam, setSearchParam] = useState('');
-    const [records, setRecords] = React.useState([]);
 
     const onChange = (_, newValue) => {
       if (!valueProp || !newValue) {
@@ -103,47 +102,26 @@
       setCurrentValue(newCurrentValue);
     };
 
-    const AutoCompleteCmp = ({ loading, onInputChange, currentRecs }) => (
-      <Autocomplete
-        multiple={multiple}
-        freeSolo={freeSolo}
-        options={records}
-        getOptionLabel={option =>
-          searchProp &&
-          option[searchProp.name] &&
-          option[searchProp.name].toString()
+    const getDefaultValue = records => {
+      let currentRecordsKeys = value;
+      if (!Array.isArray(value)) {
+        currentRecordsKeys = [value];
+      }
+      const currentRecords = records.reduce((acc, cv) => {
+        const searchStr = cv[valueProp.name].toString();
+        const search = cv[valueProp.name];
+        if (
+          currentRecordsKeys.indexOf(searchStr) > -1 ||
+          currentRecordsKeys.indexOf(search) > -1
+        ) {
+          acc.push(cv);
         }
-        defaultValue={multiple ? currentRecs : currentRecs[0]}
-        loading={loading}
-        onInputChange={onInputChange}
-        onChange={onChange}
-        renderInput={params => (
-          <>
-            <input
-              type="hidden"
-              name={actionInput && actionInput.name}
-              value={value}
-            />
-            <TextField
-              {...params}
-              {...textFieldProps}
-              loading={loading}
-              InputProps={{
-                ...params.InputProps,
-                endAdornment: (
-                  <>
-                    {loading ? (
-                      <CircularProgress color="inherit" size={20} />
-                    ) : null}
-                    {params.InputProps.endAdornment}
-                  </>
-                ),
-              }}
-            />
-          </>
-        )}
-      />
-    );
+        return acc;
+      }, []);
+
+      const singleRecord = currentRecords[0] ? { ...currentRecords[0] } : null;
+      return multiple ? currentRecords : singleRecord;
+    };
 
     const { filter } = options;
 
@@ -153,39 +131,66 @@
       };
     }
 
-    let currentRecs = [];
+    return (
+      <GetAll modelId={model} filter={filter} skip={0} take={50}>
+        {({ loading, error: errorResp, data }) => {
+          if (errorResp) {
+            return <span>Something went wrong: {errorResp.message} :(</span>;
+          }
 
-    const DataComponent = () =>
-      model ? (
-        <B.GetAll modelId={model} filter={filter} skip={0} take={50}>
-          {({ loading, error: errorResp, data, refetch }) => {
-            if (data && !loading && !errorResp && valueProp) {
-              currentRecs = data.results.filter(
-                rec =>
-                  rec[valueProp.name] === value ||
-                  rec[valueProp.name] === parseInt(value, 10),
-              );
-              setRecords(data.results);
-            }
-            return (
-              <AutoCompleteCmp
-                loading={loading}
-                onInputChange={(_event, evtValue) => {
-                  setSearchParam(evtValue);
-                  if (refetch) {
-                    refetch();
-                  }
-                }}
-                currentRecs={currentRecs}
-              />
-            );
-          }}
-        </B.GetAll>
-      ) : (
-        <AutoCompleteCmp onInputChange={() => {}} currentRecs={[]} />
-      );
+          let timeout = null;
 
-    return <DataComponent />;
+          return (
+            <Autocomplete
+              multiple={multiple}
+              freeSolo={freeSolo}
+              options={data ? data.results : []}
+              value={getDefaultValue(data ? data.results : [])}
+              getOptionLabel={option =>
+                searchProp &&
+                option[searchProp.name] &&
+                option[searchProp.name].toString()
+              }
+              onInputChange={(_, inputValue) => {
+                if (!freeSolo) {
+                  return;
+                }
+                clearTimeout(timeout);
+                timeout = setTimeout(() => {
+                  setSearchParam(inputValue);
+                }, 1000);
+              }}
+              onChange={onChange}
+              renderInput={params => (
+                <>
+                  <input
+                    type="hidden"
+                    name={actionInput && actionInput.name}
+                    value={value}
+                  />
+                  <TextField
+                    {...params}
+                    {...textFieldProps}
+                    loading={loading}
+                    InputProps={{
+                      ...params.InputProps,
+                      endAdornment: (
+                        <>
+                          {loading ? (
+                            <CircularProgress color="inherit" size={20} />
+                          ) : null}
+                          {params.InputProps.endAdornment}
+                        </>
+                      ),
+                    }}
+                  />
+                </>
+              )}
+            />
+          );
+        }}
+      </GetAll>
+    );
   })(),
   styles: () => () => ({
     root: {
