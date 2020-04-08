@@ -154,12 +154,23 @@
             return <span>Something went wrong: {errorResp.message} :(</span>;
           }
 
+          if (!data) {
+            return (
+              <TextField
+                {...textFieldProps}
+                InputProps={{
+                  endAdornment: <CircularProgress color="inherit" size={20} />,
+                }}
+              />
+            );
+          }
+
           return (
             <Autocomplete
               multiple={multiple}
               freeSolo={freeSolo}
-              options={data ? data.results : []}
-              value={getDefaultValue(data ? data.results : [])}
+              options={data.results}
+              defaultValue={getDefaultValue(data.results)}
               getOptionLabel={option =>
                 searchProp &&
                 option[searchProp.name] &&
