@@ -89,6 +89,8 @@
       : null;
 
     const [searchParam, setSearchParam] = useState('');
+    const [debouncedSearchParam, setDebouncedSearchParam] = useState('');
+    const debounceDelay = 1000;
 
     const onChange = (_, newValue) => {
       if (!valueProp || !newValue) {
@@ -103,9 +105,12 @@
     };
 
     const getDefaultValue = records => {
+      if (!value) {
+        return multiple ? [] : null;
+      }
       let currentRecordsKeys = value;
       if (!Array.isArray(value)) {
-        currentRecordsKeys = [value];
+        currentRecordsKeys = multiple ? value.toString().split(',') : [value];
       }
       const currentRecords = records.reduce((acc, cv) => {
         const searchStr = cv[valueProp.name].toString();
@@ -125,11 +130,22 @@
 
     const { filter } = options;
 
-    if (searchProp && searchParam !== '') {
+    if (searchProp && debouncedSearchParam !== '') {
       filter[searchProp.id] = {
-        regex: searchParam,
+        regex: debouncedSearchParam,
       };
+    } else if (searchProp && debouncedSearchParam === '') {
+      delete filter[searchProp.id];
     }
+
+    useEffect(() => {
+      const handler = setTimeout(() => {
+        setDebouncedSearchParam(searchParam);
+      }, debounceDelay);
+      return () => {
+        clearTimeout(handler);
+      };
+    }, [searchParam]);
 
     return (
       <GetAll modelId={model} filter={filter} skip={0} take={50}>
@@ -137,8 +153,6 @@
           if (errorResp) {
             return <span>Something went wrong: {errorResp.message} :(</span>;
           }
-
-          let timeout = null;
 
           return (
             <Autocomplete
@@ -155,10 +169,7 @@
                 if (!freeSolo) {
                   return;
                 }
-                clearTimeout(timeout);
-                timeout = setTimeout(() => {
-                  setSearchParam(inputValue);
-                }, 1000);
+                setSearchParam(inputValue);
               }}
               onChange={onChange}
               renderInput={params => (
