@@ -1298,7 +1298,7 @@
               type: 'HIDE',
               option: 'icon',
               comparator: 'EQ',
-              value: true,
+              value: 'None',
             },
           },
         },
