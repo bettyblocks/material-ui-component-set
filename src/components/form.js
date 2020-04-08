@@ -10,12 +10,19 @@
       {(() => {
         const { Action, Children } = B;
 
-        const { actionId, formErrorMessage, formSuccessMessage } = options;
+        const {
+          actionId,
+          model,
+          filter,
+          formErrorMessage,
+          formSuccessMessage,
+        } = options;
 
         const formRef = React.createRef();
 
         const empty = children.length === 0;
-        const isPristine = empty && B.env === 'dev';
+        const isDev = B.env === 'dev';
+        const isPristine = empty && isDev;
 
         return (
           <Action actionId={actionId}>
@@ -53,7 +60,26 @@
                   ].join(' ')}
                 >
                   {isPristine && <span>form</span>}
-                  <Children loading={loading}>{children}</Children>
+                  {!model || isDev ? (
+                    <Children loading={loading}>{children}</Children>
+                  ) : (
+                    <B.GetAll modelId={model} filter={filter} skip={0} take={1}>
+                      {({ loading: dataLoading, error: dataError , data: modelData }) => {
+                        if (dataLoading) return 'Loading...';
+                        if (dataError) return 'Failed';
+
+                        const item = modelData.results[0];
+
+                        return (
+                          <>
+                            <B.GetOneProvider key={item.id} value={item}>
+                              {children}
+                            </B.GetOneProvider>
+                          </>
+                        );
+                      }}
+                    </B.GetAll>
+                  )}
                 </form>
               </>
             )}
