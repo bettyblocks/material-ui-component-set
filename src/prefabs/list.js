@@ -20,7 +20,7 @@
               type: 'VARIABLE',
               label: 'Secondary text',
               key: 'secondaryText',
-              value: [''],
+              value: ['Seconday text'],
             },
             {
               value: '',
@@ -31,7 +31,7 @@
             {
               label: 'Icon',
               key: 'icon',
-              value: 'None',
+              value: 'Mail',
               type: 'CUSTOM',
               configuration: {
                 as: 'DROPDOWN',
