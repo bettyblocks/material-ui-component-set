@@ -154,10 +154,17 @@
             return <span>Something went wrong: {errorResp.message} :(</span>;
           }
 
-          if (!data) {
+          let reason = 'No data';
+          if (!searchProp || !valueProp) {
+            reason = 'No property selected';
+          }
+
+          if (!data || !searchProp || !valueProp) {
             return (
               <TextField
                 {...textFieldProps}
+                defaultValue={reason}
+                disabled
                 InputProps={{
                   endAdornment: <CircularProgress color="inherit" size={20} />,
                 }}
@@ -172,9 +179,7 @@
               options={data.results}
               defaultValue={getDefaultValue(data.results)}
               getOptionLabel={option =>
-                searchProp &&
-                option[searchProp.name] &&
-                option[searchProp.name].toString()
+                option[searchProp.name] && option[searchProp.name].toString()
               }
               onInputChange={(_, inputValue) => {
                 if (!freeSolo) {
