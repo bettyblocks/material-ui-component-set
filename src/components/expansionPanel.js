@@ -12,12 +12,14 @@
       Typography,
     } = window.MaterialUI.Core;
     const { ExpandMore } = window.MaterialUI.Icons;
-    const isDev = B.env === 'dev';
+    const { useText, env } = B;
+    const isDev = env === 'dev';
     const { title, disabled } = options;
+    const titleText = title.map(t => (t.name ? t.name : t)).join(' ');
     const ExpansionPanelComponent = (
       <ExpansionPanel disabled={disabled}>
         <ExpansionPanelSummary expandIcon={<ExpandMore />}>
-          <Typography>{title}</Typography>
+          <Typography>{isDev ? titleText : useText(title)}</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>{children}</ExpansionPanelDetails>
       </ExpansionPanel>

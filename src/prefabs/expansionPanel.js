@@ -7,10 +7,10 @@
       name: 'ExpansionPanel',
       options: [
         {
-          value: 'Expansion Panel',
-          label: 'Title',
           key: 'title',
-          type: 'TEXT',
+          label: 'Title',
+          value: ['Title'],
+          type: 'VARIABLE',
         },
         {
           value: false,
