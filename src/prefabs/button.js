@@ -21,7 +21,7 @@
               { name: 'Icon', value: 'icon' },
             ],
           },
-        },    
+        },
         {
           type: 'VARIABLE',
           label: 'Button text',
@@ -118,6 +118,7 @@
             as: 'BUTTONGROUP',
             dataType: 'string',
             allowedInput: [
+              { name: 'Large', value: 'large' },
               { name: 'Medium', value: 'medium' },
               { name: 'Small', value: 'small' },
             ],

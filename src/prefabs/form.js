@@ -235,6 +235,7 @@
                     as: 'BUTTONGROUP',
                     dataType: 'string',
                     allowedInput: [
+                      { name: 'Large', value: 'large' },
                       { name: 'Medium', value: 'medium' },
                       { name: 'Small', value: 'small' },
                     ],
