@@ -1352,10 +1352,10 @@
           value: 'Primary',
           configuration: {
             condition: {
-              type: 'SHOW',
-              option: 'variant',
+              type: 'HIDE',
+              option: 'badge',
               comparator: 'EQ',
-              value: 'icon',
+              value: '',
             },
           },
         },

@@ -1531,9 +1531,9 @@
                   configuration: {
                     condition: {
                       type: 'SHOW',
-                      option: 'variant',
+                      option: 'badge',
                       comparator: 'EQ',
-                      value: 'icon',
+                      value: '',
                     },
                   },
                 },
