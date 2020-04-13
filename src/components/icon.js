@@ -15,7 +15,7 @@
     });
 
     const BagdedIcon = badge ? (
-      <Badge badgeContent={badge} color="primary">
+      <Badge badgeContent={badge} color="primary" className={classes.badge}>
         {IconComponent}
       </Badge>
     ) : (
@@ -49,6 +49,14 @@
             fontSize: ({ options: { type } }) =>
               style.getFontSize(type, 'Desktop'),
           },
+        },
+      },
+      badge: {
+        '&>.MuiBadge-colorPrimary': {
+          backgroundColor: ({ options: { badgeColor } }) => [
+            style.getColor(badgeColor),
+            '!important',
+          ],
         },
       },
     };
