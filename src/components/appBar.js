@@ -9,13 +9,21 @@
     const isDev = B.env === 'dev';
 
     const appBar = (
-      <AppBar position={isDev ? 'static' : position}>{children}</AppBar>
+      <AppBar position={isDev ? 'static' : position} className={classes.root}>
+        {children}
+      </AppBar>
     );
     return isDev ? <div>{appBar}</div> : appBar;
   })(),
-  styles: () => () => ({
-    root: {
-      flexGrow: 1,
-    },
-  }),
+  styles: B => t => {
+    const style = new B.Styling(t);
+    return {
+      root: {
+        backgroundColor: ({ options: { backgroundColor } }) => [
+          style.getColor(backgroundColor),
+          '!important',
+        ],
+      },
+    };
+  },
 }))();

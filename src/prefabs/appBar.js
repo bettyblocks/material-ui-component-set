@@ -7,6 +7,12 @@
       name: 'AppBar',
       options: [
         {
+          type: 'COLOR',
+          label: 'Background color',
+          key: 'backgroundColor',
+          value: 'Primary',
+        },
+        {
           label: 'Position',
           key: 'position',
           value: 'static',
