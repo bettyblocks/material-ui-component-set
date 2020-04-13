@@ -29,7 +29,6 @@
       actionId,
       buttonText,
       badge,
-      badgeColor,
     } = options;
 
     const isDev = B.env === 'dev';
