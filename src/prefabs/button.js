@@ -1407,6 +1407,20 @@
           },
         },
         {
+          type: 'COLOR',
+          label: 'Badge color',
+          key: 'badgeColor',
+          value: 'Primary',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'variant',
+              comparator: 'EQ',
+              value: 'icon',
+            },
+          },
+        },
+        {
           type: 'CUSTOM',
           label: 'Icon position',
           key: 'iconPosition',

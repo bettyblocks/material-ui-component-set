@@ -29,6 +29,7 @@
       actionId,
       buttonText,
       badge,
+      badgeColor,
     } = options;
 
     const isDev = B.env === 'dev';
@@ -66,30 +67,26 @@
       type: isDev ? 'button' : type,
     };
 
-    let ButtonComponent =
-      variant === 'icon' ? (
-        <IconButton {...iconButtonProps}>
-          {React.createElement(Icons[icon === 'None' ? 'Error' : icon], {
-            fontSize: size,
-          })}
-        </IconButton>
-      ) : (
-        <Button {...buttonProps}>{buttonText}</Button>
-      );
-
-    const Loader = <CircularProgress size={16} className={classes.loader} />;
-
     const Icon = React.createElement(Icons[icon === 'None' ? 'Error' : icon], {
       fontSize: size,
     });
 
-    const BagdedIcon = badge ? (
-      <Badge badgeContent={badge} color="primary">
+    const BadgedIcon = badge ? (
+      <Badge badgeContent={badge} color="Primary" className={classes.badge}>
         {Icon}
       </Badge>
     ) : (
       Icon
     );
+
+    let ButtonComponent =
+      variant === 'icon' ? (
+        <IconButton {...iconButtonProps}>{BadgedIcon}</IconButton>
+      ) : (
+        <Button {...buttonProps}>{buttonText}</Button>
+      );
+
+    const Loader = <CircularProgress size={16} className={classes.loader} />;
 
     if (isAction) {
       ButtonComponent = (
@@ -102,7 +99,7 @@
             const actionClickHandler = isAction && { onClick: onClickAction };
             return variant === 'icon' ? (
               <IconButton {...iconButtonProps} {...actionClickHandler}>
-                {loading ? Loader : BagdedIcon}
+                {loading ? Loader : BadgedIcon}
               </IconButton>
             ) : (
               <Button {...buttonProps} {...actionClickHandler}>
@@ -232,6 +229,14 @@
       },
       hide: {
         display: 'none',
+      },
+      badge: {
+        '&>.MuiBadge-colorPrimary': {
+          backgroundColor: ({ options: { badgeColor } }) => [
+            style.getColor(badgeColor),
+            '!important',
+          ],
+        },
       },
     };
   },
