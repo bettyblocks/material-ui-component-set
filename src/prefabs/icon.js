@@ -1277,6 +1277,20 @@
           type: 'TEXT',
         },
         {
+          type: 'COLOR',
+          label: 'Badge color',
+          key: 'badgeColor',
+          value: 'Primary',
+          configuration: {
+            condition: {
+              type: 'HIDE',
+              option: 'badge',
+              comparator: 'EQ',
+              value: '',
+            },
+          },
+        },
+        {
           value: 'Body1',
           label: 'Type',
           key: 'type',
