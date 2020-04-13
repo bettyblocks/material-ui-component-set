@@ -1271,6 +1271,12 @@
           },
         },
         {
+          value: '',
+          label: 'Badge',
+          key: 'badge',
+          type: 'TEXT',
+        },
+        {
           value: 'Body1',
           label: 'Type',
           key: 'type',

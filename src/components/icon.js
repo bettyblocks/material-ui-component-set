@@ -7,16 +7,25 @@
   orientation: 'VERTICAL',
   jsx: (() => {
     const { Icons } = window.MaterialUI;
+    const { Badge } = window.MaterialUI.Core;
     const isDev = B.env === 'dev';
-    const { icon } = options;
+    const { icon, badge } = options;
     const IconComponent = React.createElement(Icons[icon], {
       className: classes.root,
     });
 
-    return isDev ? (
-      <span className={classes.wrapper}>{IconComponent}</span>
+    const BagdedIcon = badge ? (
+      <Badge badgeContent={badge} color="primary">
+        {IconComponent}
+      </Badge>
     ) : (
       IconComponent
+    );
+
+    return isDev ? (
+      <span className={classes.wrapper}>{BagdedIcon}</span>
+    ) : (
+      BagdedIcon
     );
   })(),
   styles: B => t => {

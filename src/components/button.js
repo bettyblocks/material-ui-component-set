@@ -6,7 +6,12 @@
   allowedTypes: [],
   orientation: 'VERTICAL',
   jsx: (() => {
-    const { Button, IconButton, CircularProgress } = window.MaterialUI.Core;
+    const {
+      Button,
+      IconButton,
+      CircularProgress,
+      Badge,
+    } = window.MaterialUI.Core;
     const { Icons } = window.MaterialUI;
 
     const {
@@ -23,6 +28,7 @@
       visible,
       actionId,
       buttonText,
+      badge,
     } = options;
 
     const isDev = B.env === 'dev';
@@ -71,8 +77,18 @@
         <Button {...buttonProps}>{buttonText}</Button>
       );
 
-    const Loader = (
-      <CircularProgress size={16} className={classes.loader}></CircularProgress>
+    const Loader = <CircularProgress size={16} className={classes.loader} />;
+
+    const Icon = React.createElement(Icons[icon === 'None' ? 'Error' : icon], {
+      fontSize: size,
+    });
+
+    const BagdedIcon = badge ? (
+      <Badge badgeContent={badge} color="primary">
+        {Icon}
+      </Badge>
+    ) : (
+      Icon
     );
 
     if (isAction) {
@@ -86,14 +102,7 @@
             const actionClickHandler = isAction && { onClick: onClickAction };
             return variant === 'icon' ? (
               <IconButton {...iconButtonProps} {...actionClickHandler}>
-                {loading
-                  ? Loader
-                  : React.createElement(
-                      Icons[icon === 'None' ? 'Error' : icon],
-                      {
-                        fontSize: size,
-                      },
-                    )}
+                {loading ? Loader : BagdedIcon}
               </IconButton>
             ) : (
               <Button {...buttonProps} {...actionClickHandler}>
