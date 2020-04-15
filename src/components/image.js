@@ -14,7 +14,7 @@
       {options.imgUrl ? (
         <img
           className={classes.image}
-          src={options.imgUrl}
+          src={B.useText(options.imgUrl)}
           alt={options.imgAlt ? options.imgAlt : ' '}
         />
       ) : (

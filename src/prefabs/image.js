@@ -7,10 +7,10 @@
       name: 'Image',
       options: [
         {
-          value: '',
+          value: [''],
           label: 'Image url',
           key: 'imgUrl',
-          type: 'TEXT',
+          type: 'VARIABLE',
         },
         {
           value: '',
