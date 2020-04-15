@@ -64,7 +64,11 @@
                     <Children loading={loading}>{children}</Children>
                   ) : (
                     <B.GetAll modelId={model} filter={filter} skip={0} take={1}>
-                      {({ loading: dataLoading, error: dataError , data: modelData }) => {
+                      {({
+                        loading: dataLoading,
+                        error: dataError,
+                        data: modelData,
+                      }) => {
                         if (dataLoading) return 'Loading...';
                         if (dataError) return 'Failed';
 
