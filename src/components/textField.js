@@ -1,7 +1,6 @@
 (() => ({
   name: 'TextField',
   icon: 'TextInputIcon',
-  category: 'FORM',
   type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
