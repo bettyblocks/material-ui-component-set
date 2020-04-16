@@ -1,7 +1,6 @@
 (() => ({
   name: 'Form',
   icon: 'FormIcon',
-  category: 'FORM',
   type: 'CONTAINER_COMPONENT',
   allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
