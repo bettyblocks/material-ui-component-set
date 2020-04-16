@@ -7,16 +7,16 @@
     const { Typography, Box } = window.MaterialUI.Core;
     const isDev = B.env === 'dev';
     const { value } = parent;
-    const renderOnCanvas = isDev && value === index;
+    const isActive = value === index;
 
-    const TabPanel = (renderOnCanvas || !isDev) && (
+    const TabPanel = (isActive || !isDev) && (
       <Typography
         component="div"
         role="tabpanel"
-        hidden={value !== index}
+        hidden={!isActive}
         aria-labelledby="tabs"
       >
-        {value === index && (
+        {isActive && (
           <Box
             className={isDev && children.length === 0 && classes.empty}
             p={3}
