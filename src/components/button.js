@@ -71,9 +71,7 @@
         <Button {...buttonProps}>{buttonText}</Button>
       );
 
-    const Loader = (
-      <CircularProgress size={16} className={classes.loader}></CircularProgress>
-    );
+    const Loader = <CircularProgress size={16} className={classes.loader} />;
 
     if (isAction) {
       ButtonComponent = (

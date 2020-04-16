@@ -21,7 +21,7 @@
               { name: 'Icon', value: 'icon' },
             ],
           },
-        },    
+        },
         {
           type: 'VARIABLE',
           label: 'Button text',
