@@ -18,13 +18,20 @@
         variant={variant}
       />
     );
-    return isDev ? <span>{ChipComponent}</span> : ChipComponent;
+    return isDev ? (
+      <div className={classes.wrapper}>{ChipComponent}</div>
+    ) : (
+      ChipComponent
+    );
   })(),
   styles: B => theme => {
     const style = new B.Styling(theme);
     const convertSizes = sizes =>
       sizes.map(size => style.getSpacing(size)).join(' ');
     return {
+      wrapper: {
+        display: 'inline-block',
+      },
       root: {
         margin: ({ options: { margin } }) => convertSizes(margin),
         color: ({ options: { textColor } }) => [
