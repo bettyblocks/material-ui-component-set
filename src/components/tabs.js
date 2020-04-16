@@ -25,39 +25,38 @@
     };
 
     const TabGroup = (
-      <>
-        <div className={classes.tabs}>
-          <Tabs
-            aria-label="tabs"
-            onChange={handleChange}
-            value={currentValue}
-            variant={variant}
-            centered={centered}
-            orientation={orientation}
-            scrollButtons={scrollButtons}
-            classes={{ root: classes.root, indicator: classes.indicator }}
-          >
-            {[...children].map((child, index) => {
-              const { label, icon, disabled, disableRipple } = isDev
-                ? {}
-                : child.props.options;
-              return (
-                <Tab
-                  label={isDev ? `Tab ${index + 1}` : label}
-                  icon={
-                    icon && icon !== 'None'
-                      ? React.createElement(Icons[icon])
-                      : undefined
-                  }
-                  disabled={disabled}
-                  disableRipple={disableRipple}
-                />
-              );
-            })}
-          </Tabs>
-          <Children value={currentValue}>{children}</Children>
-        </div>
-      </>
+      <div className={classes.tabs}>
+        <Tabs
+          aria-label="tabs"
+          onChange={handleChange}
+          value={currentValue}
+          variant={variant}
+          centered={centered}
+          orientation={orientation}
+          scrollButtons={scrollButtons}
+          classes={{ root: classes.root, indicator: classes.indicator }}
+        >
+          {React.Children.map(children, (child, index) => {
+            const { options } = child.props;
+            const { label, icon, disabled, disableRipple } = isDev
+              ? {}
+              : options;
+            return (
+              <Tab
+                label={isDev ? `Tab ${index + 1}` : label}
+                icon={
+                  icon && icon !== 'None'
+                    ? React.createElement(Icons[icon])
+                    : undefined
+                }
+                disabled={disabled}
+                disableRipple={disableRipple}
+              />
+            );
+          })}
+        </Tabs>
+        <Children value={currentValue}>{children}</Children>
+      </div>
     );
     return isDev ? (
       <div
