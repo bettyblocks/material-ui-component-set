@@ -64,9 +64,13 @@
     };
 
     const adornmentCmp =
-      adornmentIcon && adornmentIcon !== 'none'
-        ? <IconButton>{React.createElement(Icons[adornmentIcon], { fontSize: size })}</IconButton>
-        : adornment;
+      adornmentIcon && adornmentIcon !== 'none' ? (
+        <IconButton>
+          {React.createElement(Icons[adornmentIcon], { fontSize: size })}
+        </IconButton>
+      ) : (
+        adornment
+      );
     let InputAdornmentCmp = adornmentCmp && {
       [`${adornmentPosition}Adornment`]: (
         <InputAdornment position={adornmentPosition}>
