@@ -69,16 +69,16 @@
           value: 'right',
           type: 'CUSTOM',
           configuration: {
-            as: 'DROPDOWN',
+            as: 'BUTTONGROUP',
             dataType: 'string',
             allowedInput: [
               {
-                name: 'Right',
-                value: 'right',
-              },
-              {
                 name: 'Left',
                 value: 'left',
+              },
+              {
+                name: 'Right',
+                value: 'right',
               },
             ],
           },
