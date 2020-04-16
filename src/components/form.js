@@ -1,7 +1,6 @@
 (() => ({
   name: 'Form',
   icon: 'FormIcon',
-  category: 'FORM',
   type: 'CONTAINER_COMPONENT',
   allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
@@ -64,7 +63,11 @@
                     <Children loading={loading}>{children}</Children>
                   ) : (
                     <B.GetAll modelId={model} filter={filter} skip={0} take={1}>
-                      {({ loading: dataLoading, error: dataError , data: modelData }) => {
+                      {({
+                        loading: dataLoading,
+                        error: dataError,
+                        data: modelData,
+                      }) => {
                         if (dataLoading) return 'Loading...';
                         if (dataError) return 'Failed';
 

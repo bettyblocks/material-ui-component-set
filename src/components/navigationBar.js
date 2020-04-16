@@ -1,7 +1,6 @@
 (() => ({
   name: 'NavigationBar',
   icon: 'NavbarIcon',
-  category: 'NAVIGATION',
   type: 'BODY_COMPONENT',
   allowedTypes: ['NAVIGATION_ITEM'],
   orientation: 'HORIZONTAL',
