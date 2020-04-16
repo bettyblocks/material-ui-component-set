@@ -4,9 +4,23 @@
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { Chip } = window.MaterialUI.Core;
-    const { label, disabled, variant } = options;
+    const { Chip, Avatar } = window.MaterialUI.Core;
+    const { Icons } = window.MaterialUI;
+    const {
+      label,
+      disabled,
+      variant,
+      startIcon,
+      avatar,
+      avatartype,
+      size,
+    } = options;
     const isDev = B.env === 'dev';
+
+    const AvatarImage = <Avatar alt="" src={avatar} />;
+    const AvatarText = <Avatar>{avatar}</Avatar>;
+    const AvatarComponent = avatartype === 'text' ? AvatarText : AvatarImage;
+
     const ChipComponent = (
       <Chip
         className={[
@@ -16,6 +30,13 @@
         label={label}
         disabled={disabled}
         variant={variant}
+        icon={
+          startIcon !== 'None'
+            ? React.createElement(Icons[startIcon])
+            : undefined
+        }
+        avatar={avatar && AvatarComponent}
+        size={size}
       />
     );
     return isDev ? (
@@ -38,6 +59,12 @@
           style.getColor(textColor),
           '!important',
         ],
+        '& .MuiChip-icon': {
+          color: ({ options: { textColor } }) => [
+            style.getColor(textColor),
+            '!important',
+          ],
+        },
       },
       chip: {
         backgroundColor: ({ options: { color } }) => [
