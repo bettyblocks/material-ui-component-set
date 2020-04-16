@@ -9,7 +9,7 @@
         {
           label: 'Selected tab index',
           key: 'defaultValue',
-          value: '0',
+          value: '1',
           type: 'NUMBER',
         },
         {

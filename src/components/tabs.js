@@ -16,8 +16,8 @@
     } = options;
 
     const isDev = env === 'dev';
-    const [value, setValue] = useState(parseInt(defaultValue, 10) || 0);
-    const devValue = parseInt(defaultValue, 10) || 0;
+    const [value, setValue] = useState(parseInt(defaultValue - 1, 10) || 0);
+    const devValue = parseInt(defaultValue - 1, 10) || 0;
     const currentValue = isDev ? devValue : value;
 
     const handleChange = (_, newValue) => {
