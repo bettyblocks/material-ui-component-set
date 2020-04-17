@@ -90,7 +90,7 @@
           type: 'ENDPOINT',
         },
         {
-          label: 'AppBar variant',
+          label: 'Variant',
           key: 'appBarVariant',
           value: 'elevation',
           type: 'CUSTOM',
@@ -130,7 +130,7 @@
           type: 'TOGGLE',
         },
         {
-          label: 'Toolbar variant',
+          label: 'Size',
           key: 'toolbarVariant',
           value: 'regular',
           type: 'CUSTOM',
