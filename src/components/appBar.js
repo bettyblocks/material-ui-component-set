@@ -27,23 +27,13 @@
     const [anchorEl, setAnchorEl] = useState(null);
     const open = !!anchorEl;
 
-    const handleMenu = useCallback(e => {
-      e.stopPropagation();
-      setAnchorEl(e.currentTarget);
-    }, []);
+    const handleMenu = event => {
+      setAnchorEl(event.currentTarget);
+    };
 
     const handleClose = () => {
       setAnchorEl(null);
     };
-
-    const MenuHandler = useCallback(
-      () => (
-        <IconButton color="inherit" onClick={handleMenu}>
-          <MenuIcon />
-        </IconButton>
-      ),
-      [handleMenu],
-    );
 
     const logoComponent = logo && <img src={logo} width="100" alt="" />;
     const logoWithLink = endpoint.id ? (
@@ -76,7 +66,9 @@
           {!isDev ? (
             <>
               <div className={classes.collapsed}>
-                <MenuHandler />
+                <IconButton color="inherit" onClick={handleMenu}>
+                  <MenuIcon />
+                </IconButton>
                 <Menu
                   anchorEl={anchorEl}
                   open={open}
