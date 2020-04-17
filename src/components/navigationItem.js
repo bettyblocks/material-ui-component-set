@@ -1,7 +1,6 @@
 (() => ({
   name: 'NavigationItem',
   icon: 'NavItemIcon',
-  category: 'NAVIGATION',
   type: 'NAVIGATION_ITEM',
   allowedTypes: [],
   orientation: 'VERTICAL',

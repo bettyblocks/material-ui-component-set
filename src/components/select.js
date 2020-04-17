@@ -1,6 +1,5 @@
 (() => ({
   name: 'Select',
-  category: 'FORM',
   type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
