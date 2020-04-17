@@ -6,7 +6,7 @@
   jsx: (
     <div className={classes.root}>
       {(() => {
-        const isDev = B.env == 'dev';
+        const isDev = B.env === 'dev';
         const isReady = () =>
           typeof window !== 'undefined' &&
           typeof window.grecaptcha !== 'undefined' &&
@@ -28,7 +28,7 @@
         useEffect(() => {
           if (ready && element.current && !widget && options.sitekey) {
             setWidget(
-              grecaptcha.render(element.current, {
+              window.grecaptcha.render(element.current, {
                 sitekey: options.sitekey,
                 callback: () => {
                   setValidated(true);
@@ -58,17 +58,18 @@
           };
         }, []);
 
-        useEffect(() => {
-          return () => {
+        useEffect(
+          () => () => {
             if (readyCheck) {
               clearInterval(readyCheck);
             }
 
             if (widget) {
-              grecaptcha.reset(widget);
+              window.grecaptcha.reset(widget);
             }
-          };
-        }, []);
+          },
+          [],
+        );
 
         useEffect(() => {
           B.defineFunction('NoRobot', event => {
@@ -86,5 +87,5 @@
       })()}
     </div>
   ),
-  styles: B => () => ({}),
+  styles: () => () => ({}),
 }))();
