@@ -7,20 +7,14 @@
       name: 'Card',
       options: [
         {
-          type: 'VARIABLE',
-          label: 'Title',
-          key: 'title',
-          value: ['Title'],
-        },
-        {
-          type: 'VARIABLE',
-          label: 'Subtitle',
-          key: 'subTitle',
-          value: ['Subtitle'],
-        },
-        {
           label: 'Raised',
           key: 'raised',
+          value: false,
+          type: 'TOGGLE',
+        },
+        {
+          label: 'Square',
+          key: 'square',
           value: false,
           type: 'TOGGLE',
         },
@@ -38,23 +32,159 @@
             ],
           },
         },
+        {
+          label: 'Elevation',
+          key: 'elevation',
+          value: '1',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'DROPDOWN',
+            dataType: 'string',
+            allowedInput: [
+              { name: '1', value: '1' },
+              { name: '2', value: '2' },
+              { name: '3', value: '3' },
+              { name: '4', value: '4' },
+              { name: '5', value: '5' },
+              { name: '6', value: '6' },
+              { name: '7', value: '7' },
+              { name: '8', value: '8' },
+              { name: '9', value: '9' },
+              { name: '10', value: '10' },
+              { name: '11', value: '11' },
+              { name: '12', value: '12' },
+              { name: '13', value: '13' },
+              { name: '14', value: '14' },
+              { name: '15', value: '15' },
+              { name: '16', value: '16' },
+              { name: '17', value: '17' },
+              { name: '18', value: '18' },
+              { name: '19', value: '19' },
+              { name: '20', value: '20' },
+              { name: '21', value: '21' },
+              { name: '22', value: '22' },
+              { name: '23', value: '23' },
+              { name: '24', value: '24' },
+            ],
+            condition: {
+              type: 'SHOW',
+              option: 'variant',
+              comparator: 'EQ',
+              value: 'elevation',
+            },
+          },
+        },
       ],
       descendants: [
+        {
+          name: 'CardHeader',
+          options: [
+            {
+              value: '',
+              label: 'Avatar',
+              key: 'avatar',
+              type: 'TEXT',
+            },
+            {
+              label: 'Avatar type',
+              key: 'avatarType',
+              value: 'text',
+              type: 'CUSTOM',
+              configuration: {
+                as: 'BUTTONGROUP',
+                dataType: 'string',
+                allowedInput: [
+                  { name: 'Text', value: 'text' },
+                  { name: 'Image', value: 'image' },
+                ],
+                condition: {
+                  type: 'HIDE',
+                  option: 'avatar',
+                  comparator: 'EQ',
+                  value: '',
+                },
+              },
+            },
+            {
+              value: ['Title'],
+              label: 'Title',
+              key: 'title',
+              type: 'VARIABLE',
+            },
+            {
+              value: [],
+              label: 'Sub header',
+              key: 'subheader',
+              type: 'VARIABLE',
+            },
+          ],
+          descendants: [],
+        },
         {
           name: 'CardMedia',
           options: [
             {
-              value:
-                'https://material-ui.com/static/images/cards/contemplative-reptile.jpg',
-              label: 'Image',
-              key: 'image',
+              label: 'Media type',
+              key: 'type',
+              value: 'img',
+              type: 'CUSTOM',
+              configuration: {
+                as: 'BUTTONGROUP',
+                dataType: 'string',
+                allowedInput: [
+                  { name: 'Image', value: 'img' },
+                  { name: 'Video', value: 'video' },
+                  { name: 'I-frame', value: 'iframe' },
+                ],
+              },
+            },
+            {
+              value: 'https://picsum.photos/300/200',
+              label: 'Source',
+              key: 'imageSource',
               type: 'TEXT',
+              configuration: {
+                condition: {
+                  type: 'SHOW',
+                  option: 'type',
+                  comparator: 'EQ',
+                  value: 'img',
+                },
+              },
             },
             {
               value: '',
-              label: 'Image Title',
-              key: 'title',
+              label: 'Source',
+              key: 'videoSource',
               type: 'TEXT',
+              configuration: {
+                condition: {
+                  type: 'SHOW',
+                  option: 'type',
+                  comparator: 'EQ',
+                  value: 'video',
+                },
+              },
+            },
+            {
+              value: '',
+              label: 'Source',
+              key: 'iframeSource',
+              type: 'TEXT',
+              configuration: {
+                condition: {
+                  type: 'SHOW',
+                  option: 'type',
+                  comparator: 'EQ',
+                  value: 'iframe',
+                },
+              },
+            },
+            {
+              value: [],
+              label: 'Title',
+              key: 'title',
+              type: 'VARIABLE',
             },
           ],
           descendants: [],
@@ -70,7 +200,7 @@
                   type: 'VARIABLE',
                   label: 'Content',
                   key: 'content',
-                  value: ['Lizard'],
+                  value: ['Title'],
                   configuration: {
                     as: 'MULTILINE',
                   },
@@ -112,9 +242,7 @@
                   type: 'VARIABLE',
                   label: 'Content',
                   key: 'content',
-                  value: [
-                    'Lizards are a widespread group of squamate reptiles  ',
-                  ],
+                  value: ['Type your content here...'],
                   configuration: {
                     as: 'MULTILINE',
                   },
@@ -155,20 +283,34 @@
           name: 'CardActions',
           options: [
             {
-              value: 'flex-start',
+              type: 'CUSTOM',
               label: 'Alignment',
               key: 'alignment',
-              type: 'CUSTOM',
+              value: 'flex-start',
               configuration: {
                 as: 'BUTTONGROUP',
                 dataType: 'string',
                 allowedInput: [
-                  { name: 'Left', value: 'flex-start' },
-                  { name: 'Center', value: 'center' },
-                  { name: 'Right', value: 'flex-end' },
-                  { name: 'Justified', value: 'space-between' },
+                  {
+                    name: 'Start',
+                    value: 'flex-start',
+                  },
+                  {
+                    name: 'Center',
+                    value: 'center',
+                  },
+                  {
+                    name: 'End',
+                    value: 'flex-end',
+                  },
                 ],
               },
+            },
+            {
+              type: 'TOGGLE',
+              label: 'Disable spacing',
+              key: 'disableSpacing',
+              value: false,
             },
           ],
           descendants: [
@@ -248,8 +390,8 @@
                 {
                   type: 'CUSTOM',
                   label: 'variant',
-                  key: 'variant',
-                  value: 'text',
+                  key: 'text',
+                  value: 'contained',
                   configuration: {
                     as: 'BUTTONGROUP',
                     dataType: 'string',
@@ -333,7 +475,7 @@
                   value: 'Success',
                 },
                 {
-                  value: ['0rem', 'M', '0rem', '0rem'],
+                  value: ['0rem', '0rem', '0rem', '0rem'],
                   label: 'Outer space',
                   key: 'outerSpacing',
                   type: 'SIZES',

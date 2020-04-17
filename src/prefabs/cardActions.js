@@ -10,14 +10,14 @@
           type: 'CUSTOM',
           label: 'Alignment',
           key: 'alignment',
-          value: 'start',
+          value: 'flex-start',
           configuration: {
             as: 'BUTTONGROUP',
             dataType: 'string',
             allowedInput: [
               {
                 name: 'Start',
-                value: 'start',
+                value: 'flex-start',
               },
               {
                 name: 'Center',
@@ -29,6 +29,12 @@
               },
             ],
           },
+        },
+        {
+          type: 'TOGGLE',
+          label: 'Disable spacing',
+          key: 'disableSpacing',
+          value: false,
         },
       ],
       descendants: [
@@ -193,7 +199,7 @@
               value: 'Success',
             },
             {
-              value: ['0rem', 'M', '0rem', '0rem'],
+              value: ['0rem', '0rem', '0rem', '0rem'],
               label: 'Outer space',
               key: 'outerSpacing',
               type: 'SIZES',
