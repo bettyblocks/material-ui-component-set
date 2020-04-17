@@ -10,17 +10,20 @@
         const isDev = env === 'dev';
         const evalCondition = () => {
           const left = useText(options.left);
-          const compare = options.compare;
+          const { compare } = options;
           const right = useText(options.right);
 
           if (compare === 'eq') {
             return left === right;
-          } else if (compare === 'not_eq') {
-            return left !== right;
-          } else {
-            console.warn(`Unsupported comparison: ${compare}`);
-            return false;
           }
+
+          if (compare === 'not_eq') {
+            return left !== right;
+          }
+
+          // eslint-disable-next-line no-console
+          console.warn(`Unsupported comparison: ${compare}`);
+          return false;
         };
         const initialVisibility = isDev || evalCondition();
         const [visible, setVisible] = useState(initialVisibility);
