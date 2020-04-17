@@ -6,6 +6,7 @@
   jsx: (() => {
     const { Chip, Avatar } = window.MaterialUI.Core;
     const { Icons } = window.MaterialUI;
+    const { env, useText } = B;
     const {
       label,
       disabled,
@@ -15,7 +16,7 @@
       avatartype,
       size,
     } = options;
-    const isDev = B.env === 'dev';
+    const isDev = env === 'dev';
 
     const AvatarImage = <Avatar alt="" src={avatar} />;
     const AvatarText = <Avatar>{avatar}</Avatar>;
@@ -27,7 +28,7 @@
           classes.root,
           variant === 'default' ? classes.chip : classes.outlined,
         ].join(' ')}
-        label={label}
+        label={isDev ? label.join(' ') : useText(label)}
         disabled={disabled}
         variant={variant}
         icon={
