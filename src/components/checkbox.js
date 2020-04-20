@@ -1,7 +1,6 @@
 (() => ({
   name: 'Checkbox',
   type: 'CONTENT_COMPONENT',
-  category: 'FORM',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {

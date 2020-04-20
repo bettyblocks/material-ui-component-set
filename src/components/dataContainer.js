@@ -1,7 +1,6 @@
 (() => ({
   name: 'DataContainer',
   icon: 'DataContainer',
-  category: 'CONTENT',
   type: 'CONTAINER_COMPONENT',
   allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',

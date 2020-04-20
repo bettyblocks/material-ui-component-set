@@ -7,7 +7,7 @@
       name: 'TextField',
       options: [
         {
-          value: 'Weight',
+          value: 'Number',
           label: 'Label',
           key: 'label',
           type: 'TEXT',
@@ -107,7 +107,7 @@
         {
           label: 'Adornment',
           key: 'adornment',
-          value: 'Kg',
+          value: '',
           type: 'TEXT',
         },
         {
