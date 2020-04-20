@@ -33,14 +33,20 @@
       elevation,
     } = options;
     const titleText = title.map(t => (t.name ? t.name : t)).join(' ');
+
+    const panelOptions = {
+      disabled,
+      defaultExpanded,
+      square,
+      variant,
+      elevation,
+    };
+    if (isDev) {
+      panelOptions.expanded = defaultExpanded;
+    }
+
     const ExpansionPanelComponent = (
-      <ExpansionPanel
-        disabled={disabled}
-        defaultExpanded={defaultExpanded}
-        square={square}
-        variant={variant}
-        elevation={elevation}
-      >
+      <ExpansionPanel {...panelOptions}>
         <ExpansionPanelSummary expandIcon={<ExpandMore />}>
           <Typography>{isDev ? titleText : useText(title)}</Typography>
         </ExpansionPanelSummary>
