@@ -1,20 +1,12 @@
 (() => ({
-  name: 'Card',
+  name: 'Paper',
   type: 'CONTAINER_COMPONENT',
-  allowedTypes: [
-    'BODY_COMPONENT',
-    'CONTAINER_COMPONENT',
-    'CONTENT_COMPONENT',
-    'CARD_HEADER',
-    'CARD_MEDIA',
-    'CARD_ACTIONS',
-    'CARD_CONTENT',
-  ],
+  allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { env } = B;
-    const { Card } = window.MaterialUI.Core;
-    const { raised, variant, elevation, square } = options;
+    const { Paper } = window.MaterialUI.Core;
+    const { elevation, variant, square } = options;
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
     const isPristine = isEmpty && isDev;
@@ -27,18 +19,12 @@
       />
     );
 
-    const CardComponent = (
-      <Card
-        variant={variant}
-        raised={raised}
-        square={square}
-        elevation={elevation}
-      >
+    const PaperComponent = (
+      <Paper variant={variant} elevation={elevation} square={square}>
         {isEmpty ? PlaceHolder : children}
-      </Card>
+      </Paper>
     );
-
-    return isDev ? <div>{CardComponent}</div> : CardComponent;
+    return isDev ? <div>{PaperComponent}</div> : PaperComponent;
   })(),
   styles: () => () => ({
     empty: {
@@ -59,7 +45,7 @@
       borderStyle: 'dashed',
       backgroundColor: '#F0F1F5',
       '&::after': {
-        content: '"Card"',
+        content: '"Paper"',
       },
     },
   }),

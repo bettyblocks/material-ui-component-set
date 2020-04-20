@@ -4,14 +4,27 @@
   allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
+    const { env } = B;
     const { CardActions } = window.MaterialUI.Core;
-    const isDev = B.env === 'dev';
-    const isPristine = children.length === 0 && isDev;
-    const PlaceHolder = <div className={classes.empty}>Card Content</div>;
+    const isDev = env === 'dev';
+    const { disableSpacing } = options;
+    const isEmpty = children.length === 0;
+    const isPristine = isEmpty && isDev;
+    const PlaceHolder = (
+      <div
+        className={[
+          isEmpty ? classes.empty : '',
+          isPristine ? classes.pristine : '',
+        ].join(' ')}
+      />
+    );
 
     const CardActionsComponent = (
-      <CardActions classes={{ root: classes.root }}>
-        {isPristine ? PlaceHolder : children}
+      <CardActions
+        classes={{ root: classes.root }}
+        disableSpacing={disableSpacing}
+      >
+        {isEmpty ? PlaceHolder : children}
       </CardActions>
     );
 
@@ -19,14 +32,11 @@
   })(),
   styles: () => () => ({
     root: {
-      flexDirection: 'column',
-      '&.MuiCardActions-root': {
-        alignItems: ({ options: { alignment } }) => alignment,
-      },
+      alignItems: 'center',
+      justifyContent: ({ options: { alignment } }) => alignment,
     },
     empty: {
       display: 'flex',
-      flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
       minHeight: '4rem',
@@ -42,6 +52,9 @@
       borderColor: '#AFB5C8',
       borderStyle: 'dashed',
       backgroundColor: '#F0F1F5',
+      '&::after': {
+        content: '"Card Actions"',
+      },
     },
   }),
 }))();
