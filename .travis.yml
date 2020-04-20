@@ -22,6 +22,6 @@ jobs:
         before_script:
           - yarn
         script:
-          - yarn build && yarn upload
+          - yarn build && yarn bundle && yarn upload
         on:
           all_branches: true
