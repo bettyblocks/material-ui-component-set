@@ -22,7 +22,8 @@
           },
         },
         {
-          value: '',
+          value:
+            'https://material-ui.com/static/images/cards/contemplative-reptile.jpg',
           label: 'Source',
           key: 'imageSource',
           type: 'TEXT',

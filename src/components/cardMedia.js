@@ -56,9 +56,18 @@
       <CardMedia title={titleText} component={MediaComponent} />
     );
 
-    return isDev ? <div>{CardMediaComponent}</div> : CardMediaComponent;
+    return isDev ? (
+      <div className={classes.root}>{CardMediaComponent}</div>
+    ) : (
+      CardMediaComponent
+    );
   })(),
   styles: () => () => ({
+    root: {
+      '& > *': {
+        pointerEvents: 'none',
+      },
+    },
     empty: {
       display: 'flex',
       alignItems: 'center',
