@@ -1,7 +1,6 @@
 (() => ({
   name: 'Breadcrumb',
   icon: 'BreadcrumbIcon',
-  category: 'NAVIGATION',
   type: 'CONTENT_COMPONENT',
   allowedTypes: ['BREADCRUMB_ITEM'],
   orientation: 'HORIZONTAL',

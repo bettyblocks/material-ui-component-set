@@ -1,7 +1,6 @@
 (() => ({
   name: 'Divider',
   icon: 'HorizontalRuleIcon',
-  category: 'CONTENT',
   type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',

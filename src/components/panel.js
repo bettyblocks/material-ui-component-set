@@ -1,9 +1,8 @@
 (() => ({
   name: 'Panel',
   icon: 'PanelIcon',
-  category: 'LAYOUT',
   type: 'CONTAINER_COMPONENT',
-  allowedTypes: ['ROW', 'BODY_COMPONENT'],
+  allowedTypes: ['BODY_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (
     <div className={classes.panel}>

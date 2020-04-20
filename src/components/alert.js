@@ -1,7 +1,6 @@
 (() => ({
   name: 'Alert',
   icon: 'AlertIcon',
-  category: 'CONTENT',
   type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
@@ -30,7 +29,7 @@
             : null
         }
         action={
-          options.collapsable ? (
+          options.collapsable && (
             <IconButton
               color="inherit"
               size="small"
@@ -40,8 +39,6 @@
             >
               <Close />
             </IconButton>
-          ) : (
-            undefined
           )
         }
       >

@@ -1,13 +1,13 @@
 (() => ({
-  name: 'TextField',
-  icon: 'TextInputIcon',
+  name: 'EmailInput',
+  icon: 'EmailInputIcon',
   category: 'FORM',
   structure: [
     {
       name: 'TextField',
       options: [
         {
-          value: 'label',
+          value: 'Email',
           label: 'Label',
           key: 'label',
           type: 'TEXT',
@@ -107,7 +107,7 @@
         {
           label: 'Adornment',
           key: 'adornmentIcon',
-          value: 'none',
+          value: 'Email',
           type: 'CUSTOM',
           configuration: {
             as: 'DROPDOWN',
@@ -1369,13 +1369,13 @@
           type: 'CUSTOM',
           label: 'Position',
           key: 'adornmentPosition',
-          value: 'start',
+          value: 'end',
           configuration: {
             condition: {
               type: 'HIDE',
               option: 'adornmentIcon',
               comparator: 'EQ',
-              value: '',
+              value: 'none',
             },
             as: 'BUTTONGROUP',
             dataType: 'string',
@@ -1383,6 +1383,20 @@
               { name: 'Start', value: 'start' },
               { name: 'End', value: 'end' },
             ],
+          },
+        },
+        {
+          label: 'Type',
+          key: 'type',
+          value: 'email',
+          type: 'TEXT',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'adornmentIcon',
+              comparator: 'EQ',
+              value: 0,
+            },
           },
         },
       ],
