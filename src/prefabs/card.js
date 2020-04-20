@@ -319,29 +319,47 @@
               name: 'Button',
               options: [
                 {
-                  label: 'Visible',
-                  key: 'visible',
-                  value: true,
-                  type: 'TOGGLE',
+                  type: 'CUSTOM',
+                  label: 'variant',
+                  key: 'variant',
+                  value: 'contained',
+                  configuration: {
+                    as: 'BUTTONGROUP',
+                    dataType: 'string',
+                    allowedInput: [
+                      { name: 'Text', value: 'text' },
+                      { name: 'Outlined', value: 'outlined' },
+                      { name: 'Contain', value: 'contained' },
+                      { name: 'Icon', value: 'icon' },
+                    ],
+                  },
                 },
                 {
                   type: 'VARIABLE',
                   label: 'Button text',
                   key: 'buttonText',
                   value: ['Button'],
+                  configuration: {
+                    condition: {
+                      type: 'HIDE',
+                      option: 'variant',
+                      comparator: 'EQ',
+                      value: 'icon',
+                    },
+                  },
                 },
                 {
                   type: 'CUSTOM',
                   label: 'Link to',
                   key: 'linkType',
-                  value: 'Internal',
+                  value: 'internal',
                   configuration: {
                     as: 'BUTTONGROUP',
                     dataType: 'string',
                     allowedInput: [
-                      { name: 'Internal page', value: 'Internal' },
-                      { name: 'External page', value: 'External' },
-                      { name: 'Action', value: 'Action' },
+                      { name: 'Internal page', value: 'internal' },
+                      { name: 'External page', value: 'external' },
+                      { name: 'Action', value: 'action' },
                     ],
                   },
                 },
@@ -355,7 +373,7 @@
                       type: 'SHOW',
                       option: 'linkType',
                       comparator: 'EQ',
-                      value: 'Internal',
+                      value: 'internal',
                     },
                   },
                 },
@@ -370,37 +388,23 @@
                       type: 'SHOW',
                       option: 'linkType',
                       comparator: 'EQ',
-                      value: 'External',
+                      value: 'external',
                     },
                   },
                 },
                 {
                   value: '',
                   label: 'Action',
-                  key: 'ActionId',
+                  key: 'actionId',
                   type: 'ACTION',
                   configuration: {
+                    apiVersion: 'v1',
                     condition: {
                       type: 'SHOW',
                       option: 'linkType',
                       comparator: 'EQ',
-                      value: 'Action',
+                      value: 'action',
                     },
-                  },
-                },
-                {
-                  type: 'CUSTOM',
-                  label: 'variant',
-                  key: 'variant',
-                  value: 'contained',
-                  configuration: {
-                    as: 'BUTTONGROUP',
-                    dataType: 'string',
-                    allowedInput: [
-                      { name: 'Text', value: 'text' },
-                      { name: 'Outlined', value: 'outlined' },
-                      { name: 'Contained', value: 'contained' },
-                    ],
                   },
                 },
                 {
@@ -408,6 +412,14 @@
                   label: 'Full width',
                   key: 'fullWidth',
                   type: 'TOGGLE',
+                  configuration: {
+                    condition: {
+                      type: 'HIDE',
+                      option: 'variant',
+                      comparator: 'EQ',
+                      value: 'icon',
+                    },
+                  },
                 },
                 {
                   value: 'medium',
@@ -418,14 +430,15 @@
                     as: 'BUTTONGROUP',
                     dataType: 'string',
                     allowedInput: [
+                      { name: 'Large', value: 'large' },
                       { name: 'Medium', value: 'medium' },
                       { name: 'Small', value: 'small' },
                     ],
                   },
                 },
                 {
-                  label: 'StartIcon',
-                  key: 'startIcon',
+                  label: 'Icon',
+                  key: 'icon',
                   value: 'None',
                   type: 'CUSTOM',
                   configuration: {
@@ -433,7 +446,7 @@
                     dataType: 'string',
                     allowedInput: [
                       {
-                        name: '',
+                        name: 'None',
                         value: 'None',
                       },
                       {
@@ -1007,6 +1020,10 @@
                       {
                         name: 'FavoriteBorder',
                         value: 'FavoriteBorder',
+                      },
+                      {
+                        name: 'FileCopy',
+                        value: 'FileCopy',
                       },
                       {
                         name: 'FilterList',
@@ -1688,16 +1705,44 @@
                   },
                 },
                 {
+                  type: 'CUSTOM',
+                  label: 'Icon position',
+                  key: 'iconPosition',
+                  value: 'start',
+                  configuration: {
+                    as: 'BUTTONGROUP',
+                    dataType: 'string',
+                    condition: {
+                      type: 'HIDE',
+                      option: 'variant',
+                      comparator: 'EQ',
+                      value: 'icon',
+                    },
+                    allowedInput: [
+                      { name: 'Start', value: 'start' },
+                      { name: 'End', value: 'end' },
+                    ],
+                  },
+                },
+                {
                   type: 'COLOR',
                   label: 'Text color',
                   key: 'textColor',
                   value: 'White',
+                  configuration: {
+                    condition: {
+                      type: 'HIDE',
+                      option: 'variant',
+                      comparator: 'EQ',
+                      value: 'icon',
+                    },
+                  },
                 },
                 {
                   type: 'COLOR',
-                  label: 'Background color',
+                  label: 'color',
                   key: 'background',
-                  value: 'Success',
+                  value: 'Primary',
                 },
                 {
                   value: ['0rem', '0rem', '0rem', '0rem'],
@@ -1709,6 +1754,12 @@
                   label: 'Disabled',
                   key: 'disabled',
                   value: false,
+                  type: 'TOGGLE',
+                },
+                {
+                  label: 'Visible',
+                  key: 'visible',
+                  value: true,
                   type: 'TOGGLE',
                 },
               ],
