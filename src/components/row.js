@@ -1,7 +1,6 @@
 (() => ({
   name: 'Row',
   icon: 'RowIcon',
-  category: 'LAYOUT',
   type: 'BODY_COMPONENT',
   allowedTypes: ['LAYOUT_COMPONENT'],
   orientation: 'HORIZONTAL',

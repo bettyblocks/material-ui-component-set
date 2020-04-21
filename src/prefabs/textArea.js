@@ -127,134 +127,158 @@
             ],
           },
         },
-      ],
-      descendants: [],
-    },
-  ],
-}))();
-
-(() => ({
-  name: 'TextArea',
-  icon: 'TextInputIcon',
-  category: 'FORM',
-  structure: [
-    {
-      name: 'TextField',
-      options: [
         {
-          value: 'Label',
-          label: 'Label',
-          key: 'label',
-          type: 'TEXT',
-        },
-        {
-          value: 'text',
-          label: 'Content format',
-          key: 'type',
+          label: 'Adornment',
+          key: 'adornmentIcon',
+          value: 'none',
           type: 'CUSTOM',
           configuration: {
             as: 'DROPDOWN',
             dataType: 'string',
             allowedInput: [
-              { name: 'Text', value: 'text' },
-              { name: 'Number', value: 'number' },
-              { name: 'Password', value: 'password' },
-              { name: 'Email', value: 'email' },
-            ],
-          },
-        },
-        {
-          value: [],
-          label: 'Value',
-          key: 'text',
-          type: 'VARIABLE',
-        },
-        {
-          value: [],
-          label: 'Placeholder',
-          key: 'placeholder',
-          type: 'VARIABLE',
-        },
-        {
-          value: false,
-          label: 'Full width',
-          key: 'fullWidth',
-          type: 'TOGGLE',
-        },
-        {
-          value: false,
-          label: 'Required',
-          key: 'required',
-          type: 'TOGGLE',
-        },
-        {
-          value: false,
-          label: 'Disabled',
-          key: 'disabled',
-          type: 'TOGGLE',
-        },
-
-        {
-          label: 'Variant',
-          key: 'variant',
-          value: 'standard',
-          type: 'CUSTOM',
-          configuration: {
-            as: 'BUTTONGROUP',
-            dataType: 'string',
-            allowedInput: [
-              { name: 'Standard', value: 'standard' },
-              { name: 'Outlined', value: 'outlined' },
-              { name: 'Filled', value: 'filled' },
-            ],
-          },
-        },
-        {
-          value: 'medium',
-          label: 'Size',
-          key: 'size',
-          type: 'CUSTOM',
-          configuration: {
-            as: 'BUTTONGROUP',
-            dataType: 'string',
-            allowedInput: [
-              { name: 'Medium', value: 'medium' },
-              { name: 'Small', value: 'small' },
-            ],
-          },
-        },
-        {
-          value: false,
-          label: 'Error',
-          key: 'error',
-          type: 'TOGGLE',
-        },
-        {
-          value: 'none',
-          label: 'Margin',
-          key: 'margin',
-          type: 'CUSTOM',
-          configuration: {
-            as: 'BUTTONGROUP',
-            dataType: 'string',
-            allowedInput: [
               { name: 'None', value: 'none' },
-              { name: 'Dense', value: 'dense' },
-              { name: 'Normal', value: 'normal' },
+              {
+                name: 'AcUnit',
+                value: 'AcUnit',
+              },
+              {
+                name: 'AccessAlarm',
+                value: 'AccessAlarm',
+              },
+              {
+                name: 'AccessAlarms',
+                value: 'AccessAlarms',
+              },
+              {
+                name: 'AccessTime',
+                value: 'AccessTime',
+              },
+              {
+                name: 'Accessibility',
+                value: 'Accessibility',
+              },
+              {
+                name: 'AccessibilityNew',
+                value: 'AccessibilityNew',
+              },
+              {
+                name: 'Accessible',
+                value: 'Accessible',
+              },
+              {
+                name: 'AccessibleForward',
+                value: 'AccessibleForward',
+              },
+              {
+                name: 'AccountBalance',
+                value: 'AccountBalance',
+              },
+              {
+                name: 'AccountBalanceWallet',
+                value: 'AccountBalanceWallet',
+              },
+              {
+                name: 'AccountBox',
+                value: 'AccountBox',
+              },
+              {
+                name: 'AccountCircle',
+                value: 'AccountCircle',
+              },
+              {
+                name: 'AccountTree',
+                value: 'AccountTree',
+              },
+              {
+                name: 'Adb',
+                value: 'Adb',
+              },
+              {
+                name: 'Add',
+                value: 'Add',
+              },
+              {
+                name: 'AddAPhoto',
+                value: 'AddAPhoto',
+              },
+              {
+                name: 'AddAlarm',
+                value: 'AddAlarm',
+              },
+              {
+                name: 'AddAlert',
+                value: 'AddAlert',
+              },
+              {
+                name: 'AddBox',
+                value: 'AddBox',
+              },
+              {
+                name: 'AddCircle',
+                value: 'AddCircle',
+              },
+              {
+                name: 'AddCircleOutline',
+                value: 'AddCircleOutline',
+              },
+              {
+                name: 'AddComment',
+                value: 'AddComment',
+              },
+              {
+                name: 'AddIcCall',
+                value: 'AddIcCall',
+              },
+              {
+                name: 'AddLocation',
+                value: 'AddLocation',
+              },
+              {
+                name: 'AddPhotoAlternate',
+                value: 'AddPhotoAlternate',
+              },
+              {
+                name: 'AddShoppingCart',
+                value: 'AddShoppingCart',
+              },
+              {
+                name: 'AddToHomeScreen',
+                value: 'AddToHomeScreen',
+              },
+              {
+                name: 'AddToPhotos',
+                value: 'AddToPhotos',
+              },
+              {
+                name: 'AddToQueue',
+                value: 'AddToQueue',
+              },
+              {
+                name: 'Adjust',
+                value: 'Adjust',
+              },
             ],
           },
         },
         {
-          value: [],
-          label: 'Helper text',
-          key: 'helperText',
-          type: 'VARIABLE',
-        },
-        {
-          value: '',
-          label: 'Input',
-          key: 'actionInputId',
-          type: 'ACTION_INPUT',
+          type: 'CUSTOM',
+          label: 'Position',
+          key: 'adornmentPosition',
+          value: 'start',
+          configuration: {
+            condition: {
+              type: 'HIDE',
+              option: 'adornmentIcon',
+              comparator: 'EQ',
+              value: '',
+            },
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Start', value: 'start' },
+              { name: 'End', value: 'end' },
+            ],
+          },
         },
       ],
       descendants: [],

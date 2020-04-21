@@ -23,7 +23,7 @@
     "build": "bb components build",
     "dev": "nodemon --watch src --exec 'yarn build && yarn start'",
     "lint": "eslint --ext js ./src",
-    "upload": "bb components publish -b clara-component-set",
+    "upload": "bb components publish -b material-ui-component-set && bb bundle publish -b material-ui-component-set",
     "test": "echo \"Error: no test specified\" && exit 0",
     "bundle": "npx webpack --config webpack.config.js"
   },

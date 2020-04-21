@@ -1,7 +1,6 @@
 (() => ({
   name: 'TextField',
   icon: 'TextInputIcon',
-  category: 'FORM',
   type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
@@ -66,9 +65,13 @@
     };
 
     const adornmentCmp =
-      adornmentIcon && adornmentIcon !== 'none'
-        ? React.createElement(Icons[adornmentIcon], { fontSize: size })
-        : adornment;
+      adornmentIcon && adornmentIcon !== 'none' ? (
+        <IconButton>
+          {React.createElement(Icons[adornmentIcon], { fontSize: size })}
+        </IconButton>
+      ) : (
+        adornment
+      );
     let InputAdornmentCmp = adornmentCmp && {
       [`${adornmentPosition}Adornment`]: (
         <InputAdornment position={adornmentPosition}>

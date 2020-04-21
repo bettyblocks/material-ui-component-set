@@ -1,13 +1,13 @@
 (() => ({
-  name: 'PasswordInput',
-  icon: 'PasswordInputIcon',
+  name: 'AutoComplete',
+  icon: 'AutoCompleteIcon',
   category: 'FORM',
   structure: [
     {
-      name: 'TextField',
+      name: 'AutoComplete',
       options: [
         {
-          value: 'Password',
+          value: 'label',
           label: 'Label',
           key: 'label',
           type: 'TEXT',
@@ -23,6 +23,45 @@
           label: 'Input',
           key: 'actionInputId',
           type: 'ACTION_INPUT',
+        },
+        {
+          value: '',
+          label: 'Model',
+          key: 'model',
+          type: 'MODEL',
+        },
+        {
+          value: {},
+          label: 'Filter',
+          key: 'filter',
+          type: 'FILTER',
+          configuration: {
+            dependsOn: 'model',
+          },
+        },
+        {
+          value: '',
+          label: 'Label property',
+          key: 'property',
+          type: 'PROPERTY',
+        },
+        {
+          value: '',
+          label: 'Value property',
+          key: 'valueproperty',
+          type: 'PROPERTY',
+        },
+        {
+          type: 'TOGGLE',
+          label: 'Allow multiple values',
+          key: 'multiple',
+          value: false,
+        },
+        {
+          type: 'TOGGLE',
+          label: 'Free solo',
+          key: 'freeSolo',
+          value: false,
         },
         {
           value: false,
@@ -102,46 +141,6 @@
               { name: 'Dense', value: 'dense' },
               { name: 'Normal', value: 'normal' },
             ],
-          },
-        },
-        {
-          label: 'Show password toggle',
-          key: 'adornment',
-          value: true,
-          type: 'TOGGLE',
-        },
-        {
-          type: 'CUSTOM',
-          label: 'Position',
-          key: 'adornmentPosition',
-          value: 'end',
-          configuration: {
-            condition: {
-              type: 'HIDE',
-              option: 'adornment',
-              comparator: 'EQ',
-              value: false,
-            },
-            as: 'BUTTONGROUP',
-            dataType: 'string',
-            allowedInput: [
-              { name: 'Start', value: 'start' },
-              { name: 'End', value: 'end' },
-            ],
-          },
-        },
-        {
-          label: 'Type',
-          key: 'type',
-          value: 'password',
-          type: 'TEXT',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'adornmentPosition',
-              comparator: 'EQ',
-              value: 0,
-            },
           },
         },
       ],
