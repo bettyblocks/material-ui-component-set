@@ -33,9 +33,14 @@
     const style = new B.Styling(t);
     return {
       root: {
-        color: ({ options: { textColor } }) => style.getColor(textColor),
-        backgroundColor: ({ options: { backgroundColor } }) =>
+        color: ({ options: { textColor } }) => [
+          style.getColor(textColor),
+          '!important',
+        ],
+        backgroundColor: ({ options: { backgroundColor } }) => [
           style.getColor(backgroundColor),
+          '!important',
+        ],
       },
       placeholder: {
         color: '#dadde4',

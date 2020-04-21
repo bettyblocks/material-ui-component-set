@@ -27,6 +27,8 @@
     const { env, useText, Link } = B;
     const isDev = env === 'dev';
 
+    const hasLink = linkTo && linkTo.id !== '';
+
     const primary = isDev
       ? primaryText.map(t => (t.name ? t.name : t)).join(' ')
       : useText(primaryText);
@@ -56,8 +58,8 @@
 
     const listItem = (
       <ListItem
-        button={linkTo}
-        component={linkTo ? Link : 'li'}
+        button={hasLink}
+        component={hasLink ? Link : 'li'}
         endpoint={linkTo}
         alignItems={alignItems}
         disabled={disabled}
@@ -80,19 +82,16 @@
   styles: B => t => {
     const style = new B.Styling(t);
     return {
-      wrapper: {
-        '& > *': {
-          pointerEvents: 'none',
-        },
-      },
       root: {
         color: ({ options: { textColor } }) => style.getColor(textColor),
         backgroundColor: ({ options: { backgroundColor } }) =>
           style.getColor(backgroundColor),
-        '&.MuiButtonBase-root': {
+        '&.MuiButtonBase-root, &.MuiListItem-button, .MuiListItem-button:hover': {
           color: ({ options: { textColor } }) => style.getColor(textColor),
-          backgroundColor: ({ options: { backgroundColor } }) =>
+          backgroundColor: ({ options: { backgroundColor } }) => [
             style.getColor(backgroundColor),
+            '!important',
+          ],
         },
       },
       placeholder: {
