@@ -7,12 +7,6 @@
       name: 'Card',
       options: [
         {
-          label: 'Raised',
-          key: 'raised',
-          value: false,
-          type: 'TOGGLE',
-        },
-        {
           label: 'Square',
           key: 'square',
           value: false,
