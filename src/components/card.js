@@ -14,7 +14,7 @@
   jsx: (() => {
     const { env } = B;
     const { Card } = window.MaterialUI.Core;
-    const { raised, variant, elevation, square } = options;
+    const { variant, elevation, square } = options;
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
     const isPristine = isEmpty && isDev;
@@ -28,12 +28,7 @@
     );
 
     const CardComponent = (
-      <Card
-        variant={variant}
-        raised={raised}
-        square={square}
-        elevation={elevation}
-      >
+      <Card variant={variant} square={square} elevation={elevation}>
         {isEmpty ? PlaceHolder : children}
       </Card>
     );
