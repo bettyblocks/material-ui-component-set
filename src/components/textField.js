@@ -38,9 +38,11 @@
       ? useState(defaultValue.join(' '))
       : useState(useText(defaultValue));
     const [showPassword, togglePassword] = useState(false);
-    const helper = isDev ? helperText.join(' ') : useText(helperText);
+    const helper = isDev
+      ? helperText.map(h => (h.name ? h.name : h)).join(' ')
+      : useText(helperText);
     const placeholderText = isDev
-      ? placeholder.join(' ')
+      ? placeholder.map(p => (p.name ? p.name : p)).join(' ')
       : useText(placeholder);
 
     const actionInput = getActionInput(actionInputId);
