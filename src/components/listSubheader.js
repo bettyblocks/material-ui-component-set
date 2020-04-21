@@ -6,12 +6,40 @@
   jsx: (() => {
     const { ListSubheader } = window.MaterialUI.Core;
     const { text, inset } = options;
-    const isDev = B.env === 'dev';
+    const { env, useText } = B;
+    const isDev = env === 'dev';
+
+    const content = isDev
+      ? text.map(t => (t.name ? t.name : t)).join(' ')
+      : useText(text);
+
+    const isEmpty = content === '';
+
+    const ItemText =
+      isEmpty && isDev ? (
+        <span className={classes.placeholder}>Empty content</span>
+      ) : (
+        <>{content}</>
+      );
 
     const ListSubheaderComponent = (
-      <ListSubheader inset={inset}>{text}</ListSubheader>
+      <ListSubheader className={classes.root} inset={inset}>
+        {ItemText}
+      </ListSubheader>
     );
     return isDev ? <div>{ListSubheaderComponent}</div> : ListSubheaderComponent;
   })(),
-  styles: () => () => ({}),
+  styles: B => t => {
+    const style = new B.Styling(t);
+    return {
+      root: {
+        color: ({ options: { textColor } }) => style.getColor(textColor),
+        backgroundColor: ({ options: { backgroundColor } }) =>
+          style.getColor(backgroundColor),
+      },
+      placeholder: {
+        color: '#dadde4',
+      },
+    };
+  },
 }))();

@@ -1,7 +1,7 @@
 (() => ({
   name: 'ListItem',
   type: 'LIST_ITEM',
-  allowedTypes: ['TEXT', 'IMAGE', 'CHIP', 'BUTTON', 'LINK', 'SWITCH'],
+  allowedTypes: ['CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const {
@@ -24,7 +24,16 @@
       avatar,
       linkTo,
     } = options;
-    const isDev = B.env === 'dev';
+    const { env, useText, Link } = B;
+    const isDev = env === 'dev';
+
+    const primary = isDev
+      ? primaryText.map(t => (t.name ? t.name : t)).join(' ')
+      : useText(primaryText);
+    const secondary = isDev
+      ? secondaryText.map(t => (t.name ? t.name : t)).join(' ')
+      : useText(primaryText);
+
     const IconComponent = (
       <ListItemIcon>
         {icon !== 'None' && React.createElement(Icons[icon])}
@@ -37,26 +46,58 @@
       </ListItemAvatar>
     );
 
+    const isEmpty =
+      primary === '' &&
+      secondary === '' &&
+      icon === 'None' &&
+      children.length === 0;
+
+    const itemText = isEmpty && isDev ? 'Empty content' : primary;
+
     const listItem = (
       <ListItem
         button={linkTo}
-        component={linkTo ? B.Link : 'li'}
+        component={linkTo ? Link : 'li'}
         endpoint={linkTo}
         alignItems={alignItems}
         disabled={disabled}
         disableGutters={disableGutters}
         divider={divider}
         selected={selected}
+        className={classes.root}
       >
         {icon !== 'None' && (avatar ? AvatarComponent : IconComponent)}
         <ListItemText
-          primary={primaryText}
-          secondary={children.length ? children : secondaryText}
+          className={isEmpty && isDev && classes.placeholder}
+          primary={itemText}
+          secondary={children.length > 0 ? children : secondary}
         />
       </ListItem>
     );
 
-    return isDev ? <span>{listItem}</span> : listItem;
+    return isDev ? <div className={classes.wrapper}>{listItem}</div> : listItem;
   })(),
-  styles: () => () => ({}),
+  styles: B => t => {
+    const style = new B.Styling(t);
+    return {
+      wrapper: {
+        '& > *': {
+          pointerEvents: 'none',
+        },
+      },
+      root: {
+        color: ({ options: { textColor } }) => style.getColor(textColor),
+        backgroundColor: ({ options: { backgroundColor } }) =>
+          style.getColor(backgroundColor),
+        '&.MuiButtonBase-root': {
+          color: ({ options: { textColor } }) => style.getColor(textColor),
+          backgroundColor: ({ options: { backgroundColor } }) =>
+            style.getColor(backgroundColor),
+        },
+      },
+      placeholder: {
+        color: '#dadde4',
+      },
+    };
+  },
 }))();

@@ -1,7 +1,7 @@
 (() => ({
   name: 'ListItem',
   icon: 'ListItemIcon',
-  category: 'LAYOUT',
+  category: 'CONTENT',
   structure: [
     {
       name: 'ListItem',
@@ -19,10 +19,36 @@
           value: [''],
         },
         {
-          value: '',
+          type: 'COLOR',
+          label: 'Background color',
+          key: 'backgroundColor',
+          value: 'Transparent',
+        },
+        {
+          type: 'COLOR',
+          label: 'Text color',
+          key: 'textColor',
+          value: 'Black',
+        },
+        {
+          type: 'ENDPOINT',
           label: 'Page',
           key: 'linkTo',
-          type: 'ENDPOINT',
+          value: '',
+        },
+        {
+          type: 'CUSTOM',
+          label: 'Align items',
+          key: 'alignItems',
+          value: 'center',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Start', value: 'flex-start' },
+              { name: 'Center', value: 'center' },
+            ],
+          },
         },
         {
           label: 'Icon',
@@ -34,7 +60,7 @@
             dataType: 'string',
             allowedInput: [
               {
-                name: '',
+                name: 'None',
                 value: 'None',
               },
               {
@@ -608,6 +634,10 @@
               {
                 name: 'FavoriteBorder',
                 value: 'FavoriteBorder',
+              },
+              {
+                name: 'FileCopy',
+                value: 'FileCopy',
               },
               {
                 name: 'FilterList',

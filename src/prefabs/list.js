@@ -1,11 +1,33 @@
 (() => ({
   name: 'List',
   icon: 'OrderedListIcon',
-  category: 'LAYOUT',
+  category: 'CONTENT',
   structure: [
     {
       name: 'List',
-      options: [],
+      options: [
+        {
+          value: '',
+          label: 'Model',
+          key: 'model',
+          type: 'MODEL',
+        },
+        {
+          value: {},
+          label: 'Filter',
+          key: 'filter',
+          type: 'FILTER',
+          configuration: {
+            dependsOn: 'model',
+          },
+        },
+        {
+          type: 'COLOR',
+          label: 'Background color',
+          key: 'backgroundColor',
+          value: 'Transparent',
+        },
+      ],
       descendants: [
         {
           name: 'ListItem',
@@ -23,22 +45,48 @@
               value: ['Seconday text'],
             },
             {
+              type: 'COLOR',
+              label: 'Background color',
+              key: 'backgroundColor',
+              value: 'Transparent',
+            },
+            {
+              type: 'COLOR',
+              label: 'Text color',
+              key: 'textColor',
+              value: 'Black',
+            },
+            {
               value: '',
               label: 'Page',
               key: 'linkTo',
               type: 'ENDPOINT',
             },
             {
+              type: 'CUSTOM',
+              label: 'Align items',
+              key: 'alignItems',
+              value: 'center',
+              configuration: {
+                as: 'BUTTONGROUP',
+                dataType: 'string',
+                allowedInput: [
+                  { name: 'Start', value: 'flex-start' },
+                  { name: 'Center', value: 'center' },
+                ],
+              },
+            },
+            {
               label: 'Icon',
               key: 'icon',
-              value: 'Mail',
+              value: 'None',
               type: 'CUSTOM',
               configuration: {
                 as: 'DROPDOWN',
                 dataType: 'string',
                 allowedInput: [
                   {
-                    name: '',
+                    name: 'None',
                     value: 'None',
                   },
                   {
@@ -612,6 +660,10 @@
                   {
                     name: 'FavoriteBorder',
                     value: 'FavoriteBorder',
+                  },
+                  {
+                    name: 'FileCopy',
+                    value: 'FileCopy',
                   },
                   {
                     name: 'FilterList',
