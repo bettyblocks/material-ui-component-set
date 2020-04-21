@@ -1,7 +1,6 @@
 (() => ({
   name: 'Alert',
   icon: 'AlertIcon',
-  category: 'CONTENT',
   type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',

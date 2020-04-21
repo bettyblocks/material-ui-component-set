@@ -1,6 +1,5 @@
 (() => ({
   name: 'Select',
-  category: 'FORM',
   type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
@@ -30,7 +29,9 @@
     const [currentValue, setCurrentValue] = isDev
       ? useState(defaultValue.join(' '))
       : useState(useText(defaultValue));
-    const helper = isDev ? helperText.join(' ') : useText(helperText);
+    const helper = isDev
+      ? helperText.map(h => (h.name ? h.name : h)).join(' ')
+      : useText(helperText);
 
     const actionInput = getActionInput(actionInputId);
     const value = currentValue;
