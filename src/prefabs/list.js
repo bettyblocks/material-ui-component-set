@@ -52,9 +52,21 @@
             },
             {
               type: 'COLOR',
-              label: 'Text color',
-              key: 'textColor',
+              label: 'Title color',
+              key: 'titleColor',
               value: 'Black',
+            },
+            {
+              type: 'COLOR',
+              label: 'Icon color',
+              key: 'iconColor',
+              value: 'Black',
+            },
+            {
+              type: 'COLOR',
+              label: 'Subtitle color',
+              key: 'subtitleColor',
+              value: 'Secondary',
             },
             {
               value: '',

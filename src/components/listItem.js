@@ -83,15 +83,22 @@
     const style = new B.Styling(t);
     return {
       root: {
-        color: ({ options: { textColor } }) => style.getColor(textColor),
+        color: ({ options: { titleColor } }) => style.getColor(titleColor),
         backgroundColor: ({ options: { backgroundColor } }) =>
           style.getColor(backgroundColor),
         '&.MuiButtonBase-root, &.MuiListItem-button, .MuiListItem-button:hover': {
-          color: ({ options: { textColor } }) => style.getColor(textColor),
+          color: ({ options: { titleColor } }) => style.getColor(titleColor),
           backgroundColor: ({ options: { backgroundColor } }) => [
             style.getColor(backgroundColor),
             '!important',
           ],
+        },
+        '& .MuiTypography-colorTextSecondary': {
+          color: ({ options: { subtitleColor } }) =>
+            style.getColor(subtitleColor),
+        },
+        '& .MuiListItemIcon-root': {
+          color: ({ options: { iconColor } }) => style.getColor(iconColor),
         },
       },
       placeholder: {
