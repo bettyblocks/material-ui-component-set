@@ -52,8 +52,8 @@
         paddingBottom: ({ options: { imgUrl } }) => !imgUrl && '62.5%',
       },
       image: {
-        width: ({options: { width } }) => width ? width : 'auto',
-        height: ({options: { height } }) => height ? height : 'auto',
+        width: ({options: { width } }) => width || 'auto',
+        height: ({options: { height } }) => height || 'auto',
       },
       placeholderWrapper: {
         position: 'absolute',
