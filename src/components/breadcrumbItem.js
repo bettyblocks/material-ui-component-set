@@ -39,18 +39,18 @@
       </>
     );
 
+    const BreadcrumbChildren = isEmpty ? PlaceHolder : ItemContent;
+
     const breadcrumbItem = endpoint ? (
       // eslint-disable-next-line jsx-a11y/anchor-is-valid
       <Link
         className={[classes.content, classes.link].join(' ')}
         endpoint={endpoint}
       >
-        {isEmpty ? PlaceHolder : ItemContent}
+        {BreadcrumbChildren}
       </Link>
     ) : (
-      <Typography className={classes.content}>
-        {isEmpty ? PlaceHolder : ItemContent}
-      </Typography>
+      <Typography className={classes.content}>{BreadcrumbChildren}</Typography>
     );
 
     return isDev ? (
