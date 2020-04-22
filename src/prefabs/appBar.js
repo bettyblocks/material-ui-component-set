@@ -186,7 +186,7 @@
               type: 'CUSTOM',
               label: 'variant',
               key: 'variant',
-              value: 'contained',
+              value: 'text',
               configuration: {
                 as: 'BUTTONGROUP',
                 dataType: 'string',
@@ -1636,7 +1636,7 @@
               type: 'CUSTOM',
               label: 'variant',
               key: 'variant',
-              value: 'contained',
+              value: 'text',
               configuration: {
                 as: 'BUTTONGROUP',
                 dataType: 'string',
