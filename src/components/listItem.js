@@ -34,7 +34,7 @@
       : useText(primaryText);
     const secondary = isDev
       ? secondaryText.map(t => (t.name ? t.name : t)).join(' ')
-      : useText(primaryText);
+      : useText(secondaryText);
 
     const IconComponent = (
       <ListItemIcon>
