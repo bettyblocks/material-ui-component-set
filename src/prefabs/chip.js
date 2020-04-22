@@ -1,32 +1,66 @@
 (() => ({
-  name: 'Breadcrumb Item',
-  icon: 'BreadcrumbItemIcon',
-  category: 'NAVIGATION',
+  name: 'Chip',
+  icon: 'ContainerIcon',
+  category: 'CONTENT',
   structure: [
     {
-      name: 'BreadcrumbItem',
+      name: 'Chip',
       options: [
         {
           type: 'VARIABLE',
-          label: 'Content',
-          key: 'breadcrumbContent',
-          value: ['Breadcrumb Item'],
+          label: 'Label',
+          key: 'label',
+          value: ['Label'],
         },
         {
-          type: 'ENDPOINT',
-          label: 'Page',
-          key: 'endpoint',
-          value: '',
+          type: 'TOGGLE',
+          label: 'Disabled',
+          key: 'disabled',
+          value: false,
+        },
+        {
+          label: 'Variant',
+          key: 'variant',
+          value: 'default',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Default', value: 'default' },
+              { name: 'Outlined', value: 'outlined' },
+            ],
+          },
+        },
+        {
+          label: 'Size',
+          key: 'size',
+          value: 'medium',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Small', value: 'small' },
+              { name: 'Medium', value: 'medium' },
+            ],
+          },
         },
         {
           type: 'COLOR',
-          label: 'Text color',
-          key: 'textColor',
-          value: 'Black',
+          label: 'Color',
+          key: 'color',
+          value: 'Primary',
         },
         {
-          label: 'Icon',
-          key: 'icon',
+          type: 'COLOR',
+          label: 'Text Color',
+          key: 'textColor',
+          value: 'White',
+        },
+        {
+          label: 'StartIcon',
+          key: 'startIcon',
           value: 'None',
           type: 'CUSTOM',
           configuration: {
@@ -34,7 +68,7 @@
             dataType: 'string',
             allowedInput: [
               {
-                name: 'None',
+                name: '',
                 value: 'None',
               },
               {
@@ -608,10 +642,6 @@
               {
                 name: 'FavoriteBorder',
                 value: 'FavoriteBorder',
-              },
-              {
-                name: 'FileCopy',
-                value: 'FileCopy',
               },
               {
                 name: 'FilterList',
@@ -1290,27 +1320,53 @@
                 value: 'Work',
               },
             ],
+            condition: {
+              type: 'SHOW',
+              option: 'avatar',
+              comparator: 'EQ',
+              value: '',
+            },
           },
         },
         {
+          type: 'TEXT',
+          label: 'Avatar',
+          key: 'avatar',
+          value: '',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'startIcon',
+              comparator: 'EQ',
+              value: 'None',
+            },
+          },
+        },
+        {
+          label: 'Avatar type',
+          key: 'avatartype',
+          value: 'text',
           type: 'CUSTOM',
-          label: 'Icon position',
-          key: 'iconPosition',
-          value: 'start',
           configuration: {
             as: 'BUTTONGROUP',
             dataType: 'string',
+            allowedInput: [
+              { name: 'Text', value: 'text' },
+              { name: 'Image', value: 'image' },
+            ],
             condition: {
               type: 'HIDE',
-              option: 'variant',
+              option: 'avatar',
               comparator: 'EQ',
-              value: 'icon',
+              value: '',
             },
-            allowedInput: [
-              { name: 'Start', value: 'start' },
-              { name: 'End', value: 'end' },
-            ],
           },
+        },
+        {
+          type: 'SIZES',
+          label: 'Outer Space',
+          key: 'margin',
+          value: ['M', 'M', 'M', 'M'],
         },
       ],
       descendants: [],
