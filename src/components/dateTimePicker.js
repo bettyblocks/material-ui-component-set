@@ -40,7 +40,9 @@
     const [selectedDate, setSelectedDate] = isDev
       ? useState(strDefaultValue)
       : useState(useText(defaultValue));
-    const helper = isDev ? helperText.join(' ') : useText(helperText);
+    const helper = isDev
+      ? helperText.map(h => (h.name ? h.name : h)).join(' ')
+      : useText(helperText);
     const placeholderText = isDev
       ? placeholder.join(' ')
       : useText(placeholder);
