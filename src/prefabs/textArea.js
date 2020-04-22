@@ -40,10 +40,10 @@
           type: 'TOGGLE',
         },
         {
-          type: 'TOGGLE',
+          value: false,
           label: 'Disabled',
           key: 'disabled',
-          value: false,
+          type: 'TOGGLE',
         },
         {
           value: [],
