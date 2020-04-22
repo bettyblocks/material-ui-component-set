@@ -45,7 +45,7 @@
               type: 'CUSTOM',
               label: 'variant',
               key: 'variant',
-              value: 'contained',
+              value: 'text',
               configuration: {
                 as: 'BUTTONGROUP',
                 dataType: 'string',
@@ -1451,7 +1451,7 @@
               type: 'COLOR',
               label: 'Text color',
               key: 'textColor',
-              value: 'White',
+              value: 'Primary',
               configuration: {
                 condition: {
                   type: 'HIDE',
@@ -1465,7 +1465,7 @@
               type: 'COLOR',
               label: 'color',
               key: 'background',
-              value: 'Primary',
+              value: 'Secondary',
             },
             {
               value: ['0rem', '0rem', '0rem', '0rem'],
