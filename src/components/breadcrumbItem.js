@@ -4,99 +4,107 @@
   type: 'BREADCRUMB_ITEM',
   allowedTypes: [],
   orientation: 'VERTICAL',
-  jsx: (
-    <li className={classes.breadcrumbItem}>
-      {(() => {
-        const { breadcrumbContent, endpoint } = options;
-        if (!breadcrumbContent)
-          return (
-            <span
-              className={[
-                classes.breadcrumbLink,
-                B.env === 'dev' ? classes.placeholder : classes.hidden,
-              ].join(' ')}
-            >
-              Empty item
-            </span>
-          );
+  jsx: (() => {
+    const { Link, useText, env } = B;
+    const isDev = env === 'dev';
+    const { Typography } = window.MaterialUI.Core;
+    const { Icons } = window.MaterialUI;
+    const { endpoint, breadcrumbContent, icon, iconPosition } = options;
+    const content = isDev
+      ? breadcrumbContent.map(b => (b.name ? b.name : b)).join(' ')
+      : useText(breadcrumbContent);
 
-        return (
-          breadcrumbContent &&
-          (B.env === 'prod' && endpoint ? (
-            <B.Link endpoint={endpoint} className={classes.breadcrumbLink}>
-              <B.Text value={breadcrumbContent} />
-            </B.Link>
-          ) : (
-            <span className={classes.breadcrumbLink}>
-              <B.Text value={breadcrumbContent} />
-            </span>
-          ))
-        );
-      })()}
-    </li>
-  ),
+    const isEmpty = breadcrumbContent.length === 0 && icon === 'None';
+    const isPristine = isEmpty && isDev;
+    const PlaceHolder = (
+      <div
+        className={[
+          isEmpty ? classes.empty : '',
+          isPristine ? classes.pristine : '',
+        ].join(' ')}
+      />
+    );
+
+    const IconComponent =
+      icon !== 'None' &&
+      React.createElement(Icons[icon], {
+        className: classes[`icon${iconPosition}`],
+      });
+
+    const ItemContent = (
+      <>
+        {iconPosition === 'start' && IconComponent}
+        {content}
+        {iconPosition === 'end' && IconComponent}
+      </>
+    );
+
+    const BreadcrumbChildren = isEmpty ? PlaceHolder : ItemContent;
+
+    const breadcrumbItem = endpoint ? (
+      // eslint-disable-next-line jsx-a11y/anchor-is-valid
+      <Link
+        className={[classes.content, classes.link].join(' ')}
+        endpoint={endpoint}
+      >
+        {BreadcrumbChildren}
+      </Link>
+    ) : (
+      <Typography className={classes.content}>{BreadcrumbChildren}</Typography>
+    );
+
+    return isDev ? (
+      <div className={classes.root}>{breadcrumbItem}</div>
+    ) : (
+      breadcrumbItem
+    );
+  })(),
   styles: B => t => {
     const style = new B.Styling(t);
     return {
-      breadcrumbItem: {
-        position: 'relative',
-        display: 'inline-flex',
-        alignItems: 'center',
-        whiteSpace: 'nowrap',
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-        '&:not(:first-of-type)::before': {
-          display: 'block',
-          content: '"/"',
-          fontSize: '0.75rem',
-          color: '#999999',
-          width: '5px',
+      root: {
+        '& > *': {
+          pointerEvents: 'none',
         },
       },
-      breadcrumbLink: {
-        fontFamily: 'Roboto, sans-serif',
-        fontSize: '0.75rem',
-        fontWeight: '400',
+      content: {
         display: 'flex',
-        flex: 1,
-        alignItems: 'center',
-        padding: '0.5rem',
+        color: ({ options: { textColor } }) => style.getColor(textColor),
+      },
+      link: {
         textDecoration: 'none',
-        cursor: 'pointer',
-        transition: 'background-color 0.15s ease-in-out',
-        justifyContent: 'center',
-        color: style.getColor('Black'),
-
         '&:hover': {
-          color:
-            B.env === 'prod'
-              ? style.getColor('Primary')
-              : style.getColor('Black'),
-          textDecoration: B.env === 'prod' ? 'underline' : 'none',
-        },
-        '&:active': {
-          outline: 'none',
-        },
-        '&:not(:active):focus': {
-          boxShadow:
-            B.env === 'prod'
-              ? `${style.getColor('Primary')} 0 0 0 0.125rem inset`
-              : 'none',
-          outline: 'none',
+          textDecoration: 'underline',
         },
       },
-      icon: {
+      iconstart: {
         marginRight: ({ options: { breadcrumbContent } }) =>
-          breadcrumbContent && '0.5rem',
-        width: '1rem',
+          breadcrumbContent.length > 0 && style.getSpacing('M', 'Mobile'),
       },
-      placeholder: {
-        color: '#DADDE4',
+      iconend: {
+        marginLeft: ({ options: { breadcrumbContent } }) =>
+          breadcrumbContent.length > 0 && style.getSpacing('M', 'Mobile'),
       },
-      hidden: {
-        opacity: 0,
-        pointerEvents: 'none',
-        userSelect: 'none',
+      empty: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: '1rem',
+        height: '100%',
+        width: '100%',
+        fontSize: '0.75rem',
+        color: '#262A3A',
+        textTransform: 'uppercase',
+        boxSizing: 'border-box',
+      },
+      pristine: {
+        borderWidth: '0.0625rem',
+        borderColor: '#AFB5C8',
+        borderStyle: 'dashed',
+        backgroundColor: '#F0F1F5',
+        '&::after': {
+          content: '"Breadcrumb Item"',
+        },
       },
     };
   },
