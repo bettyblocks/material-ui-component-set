@@ -1,6 +1,6 @@
 (() => ({
   name: 'Card',
-  icon: 'ContainerIcon',
+  icon: 'CardIcon',
   category: 'CARDS',
   structure: [
     {
