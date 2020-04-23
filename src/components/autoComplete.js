@@ -21,6 +21,7 @@
       model,
       multiple,
       freeSolo,
+      closeOnSelect,
     } = options;
     const isDev = B.env === 'dev';
     const { Autocomplete } = window.MaterialUI.Lab;
@@ -188,6 +189,7 @@
                 setSearchParam(inputValue);
               }}
               onChange={onChange}
+              disableCloseOnSelect={!closeOnSelect}
               renderInput={params => (
                 <>
                   <input

@@ -59,6 +59,12 @@
         },
         {
           type: 'TOGGLE',
+          label: 'Close dropdown after select',
+          key: 'closeOnSelect',
+          value: true,
+        },
+        {
+          type: 'TOGGLE',
           label: 'Free solo',
           key: 'freeSolo',
           value: false,
