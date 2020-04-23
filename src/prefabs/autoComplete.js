@@ -59,6 +59,12 @@
         },
         {
           type: 'TOGGLE',
+          label: 'Add checkboxes',
+          key: 'renderCheckboxes',
+          value: false,
+        },
+        {
+          type: 'TOGGLE',
           label: 'Close dropdown after select',
           key: 'closeOnSelect',
           value: true,
