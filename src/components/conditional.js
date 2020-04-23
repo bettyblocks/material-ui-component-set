@@ -8,7 +8,7 @@
       {(() => {
         const { useText, env } = B;
         const isDev = env === 'dev';
-        const isPristine = children.length === 0 && B.env === 'dev';
+        const isPristine = isDev && children.length === 0;
 
         const evalCondition = () => {
           const left = useText(options.left);
