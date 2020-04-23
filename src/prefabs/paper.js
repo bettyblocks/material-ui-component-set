@@ -1,7 +1,7 @@
 (() => ({
   name: 'Paper',
-  icon: 'ContainerIcon',
-  category: 'CARDS',
+  icon: 'PaperIcon',
+  category: 'LAYOUT',
   structure: [
     {
       name: 'Paper',
