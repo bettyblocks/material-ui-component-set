@@ -13,7 +13,11 @@
       <div className={classes.empty}>Box</div>
     ) : (
       <Box display="flex" flexDirection="row" justifyContent={alignment}>
-        {children}
+        {parent ? (
+          <B.Children loading={parent.loading}>{children}</B.Children>
+        ) : (
+          children
+        )}
       </Box>
     );
 

@@ -27,8 +27,10 @@
     const isDev = B.env === 'dev';
     const isAction = linkType === 'action';
 
+    const isDisabled = parent && parent.loading ? parent.loading : disabled;
+
     const generalProps = {
-      disabled,
+      disabled: isDisabled,
       size,
       href: linkType === 'external' ? linkToExternal : undefined,
       component: linkType === 'internal' ? B.Link : undefined,
@@ -59,6 +61,8 @@
       type: isDev ? 'button' : type,
     };
 
+    const Loader = <CircularProgress size={16} className={classes.loader} />;
+
     let ButtonComponent =
       variant === 'icon' ? (
         <IconButton {...iconButtonProps}>
@@ -67,10 +71,11 @@
           })}
         </IconButton>
       ) : (
-        <Button {...buttonProps}>{buttonText}</Button>
+        <Button {...buttonProps}>
+          {buttonText}
+          {parent && parent.loading && Loader}
+        </Button>
       );
-
-    const Loader = <CircularProgress size={16} className={classes.loader} />;
 
     if (isAction) {
       ButtonComponent = (
