@@ -4,26 +4,22 @@
   allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (
-    <div className={!children.length ? classes.empty : null}>
+    <div className={children.length === 0 ? classes.empty : null}>
       {(() => {
         const { useText, env } = B;
         const isDev = env === 'dev';
+        const isPristine = children.length === 0 && B.env === 'dev';
+
         const evalCondition = () => {
           const left = useText(options.left);
           const { compare } = options;
           const right = useText(options.right);
 
-          if (compare === 'eq') {
-            return left === right;
-          }
-
           if (compare === 'not_eq') {
             return left !== right;
           }
 
-          // eslint-disable-next-line no-console
-          console.warn(`Unsupported comparison: ${compare}`);
-          return false;
+          return left === right;
         };
         const initialVisibility = isDev || evalCondition();
         const [visible, setVisible] = useState(initialVisibility);
@@ -34,7 +30,11 @@
           B.defineFunction('Toggle', () => setVisible(s => !s));
         }, []);
 
-        return visible ? children : null;
+        if (visible) {
+          return isPristine ? 'Conditional' : children;
+        }
+
+        return null;
       })()}
     </div>
   ),
