@@ -1,7 +1,6 @@
 (() => ({
   name: 'TextField',
   icon: 'TextInputIcon',
-  category: 'FORM',
   type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
@@ -39,9 +38,11 @@
       ? useState(defaultValue.join(' '))
       : useState(useText(defaultValue));
     const [showPassword, togglePassword] = useState(false);
-    const helper = isDev ? helperText.join(' ') : useText(helperText);
+    const helper = isDev
+      ? helperText.map(h => (h.name ? h.name : h)).join(' ')
+      : useText(helperText);
     const placeholderText = isDev
-      ? placeholder.join(' ')
+      ? placeholder.map(p => (p.name ? p.name : p)).join(' ')
       : useText(placeholder);
 
     const actionInput = getActionInput(actionInputId);
@@ -64,9 +65,13 @@
     };
 
     const adornmentCmp =
-      adornmentIcon && adornmentIcon !== 'none'
-        ? React.createElement(Icons[adornmentIcon], { fontSize: size })
-        : adornment;
+      adornmentIcon && adornmentIcon !== 'none' ? (
+        <IconButton>
+          {React.createElement(Icons[adornmentIcon], { fontSize: size })}
+        </IconButton>
+      ) : (
+        adornment
+      );
     let InputAdornmentCmp = adornmentCmp && {
       [`${adornmentPosition}Adornment`]: (
         <InputAdornment position={adornmentPosition}>

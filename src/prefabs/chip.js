@@ -1,40 +1,16 @@
 (() => ({
-  name: 'TextField',
-  icon: 'TextInputIcon',
-  category: 'FORM',
+  name: 'Chip',
+  icon: 'ChipIcon',
+  category: 'CONTENT',
   structure: [
     {
-      name: 'TextField',
+      name: 'Chip',
       options: [
         {
-          value: 'label',
+          type: 'VARIABLE',
           label: 'Label',
           key: 'label',
-          type: 'TEXT',
-        },
-        {
-          value: [],
-          label: 'Value',
-          key: 'defaultValue',
-          type: 'VARIABLE',
-        },
-        {
-          value: '',
-          label: 'Input',
-          key: 'actionInputId',
-          type: 'ACTION_INPUT',
-        },
-        {
-          value: false,
-          label: 'Required',
-          key: 'required',
-          type: 'TOGGLE',
-        },
-        {
-          value: false,
-          label: 'Error',
-          key: 'error',
-          type: 'TOGGLE',
+          value: ['Label'],
         },
         {
           type: 'TOGGLE',
@@ -43,37 +19,18 @@
           value: false,
         },
         {
-          value: [],
-          label: 'Placeholder',
-          key: 'placeholder',
-          type: 'VARIABLE',
-        },
-        {
-          value: [],
-          label: 'Helper text',
-          key: 'helperText',
-          type: 'VARIABLE',
-        },
-        {
           label: 'Variant',
           key: 'variant',
-          value: 'outlined',
+          value: 'default',
           type: 'CUSTOM',
           configuration: {
             as: 'BUTTONGROUP',
             dataType: 'string',
             allowedInput: [
-              { name: 'Standard', value: 'standard' },
+              { name: 'Default', value: 'default' },
               { name: 'Outlined', value: 'outlined' },
-              { name: 'Filled', value: 'filled' },
             ],
           },
-        },
-        {
-          type: 'TOGGLE',
-          label: 'Full width',
-          key: 'fullWidth',
-          value: true,
         },
         {
           label: 'Size',
@@ -84,36 +41,36 @@
             as: 'BUTTONGROUP',
             dataType: 'string',
             allowedInput: [
-              { name: 'Medium', value: 'medium' },
               { name: 'Small', value: 'small' },
+              { name: 'Medium', value: 'medium' },
             ],
           },
         },
         {
-          label: 'Margin',
-          key: 'margin',
-          value: 'normal',
-          type: 'CUSTOM',
-          configuration: {
-            as: 'BUTTONGROUP',
-            dataType: 'string',
-            allowedInput: [
-              { name: 'None', value: 'none' },
-              { name: 'Dense', value: 'dense' },
-              { name: 'Normal', value: 'normal' },
-            ],
-          },
+          type: 'COLOR',
+          label: 'Color',
+          key: 'color',
+          value: 'Primary',
         },
         {
-          label: 'Adornment',
-          key: 'adornmentIcon',
-          value: 'none',
+          type: 'COLOR',
+          label: 'Text Color',
+          key: 'textColor',
+          value: 'White',
+        },
+        {
+          label: 'StartIcon',
+          key: 'startIcon',
+          value: 'None',
           type: 'CUSTOM',
           configuration: {
             as: 'DROPDOWN',
             dataType: 'string',
             allowedInput: [
-              { name: 'None', value: 'none' },
+              {
+                name: '',
+                value: 'None',
+              },
               {
                 name: 'AcUnit',
                 value: 'AcUnit',
@@ -1363,27 +1320,53 @@
                 value: 'Work',
               },
             ],
-          },
-        },
-        {
-          type: 'CUSTOM',
-          label: 'Position',
-          key: 'adornmentPosition',
-          value: 'start',
-          configuration: {
             condition: {
-              type: 'HIDE',
-              option: 'adornmentIcon',
+              type: 'SHOW',
+              option: 'avatar',
               comparator: 'EQ',
               value: '',
             },
+          },
+        },
+        {
+          type: 'TEXT',
+          label: 'Avatar',
+          key: 'avatar',
+          value: '',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'startIcon',
+              comparator: 'EQ',
+              value: 'None',
+            },
+          },
+        },
+        {
+          label: 'Avatar type',
+          key: 'avatartype',
+          value: 'text',
+          type: 'CUSTOM',
+          configuration: {
             as: 'BUTTONGROUP',
             dataType: 'string',
             allowedInput: [
-              { name: 'Start', value: 'start' },
-              { name: 'End', value: 'end' },
+              { name: 'Text', value: 'text' },
+              { name: 'Image', value: 'image' },
             ],
+            condition: {
+              type: 'HIDE',
+              option: 'avatar',
+              comparator: 'EQ',
+              value: '',
+            },
           },
+        },
+        {
+          type: 'SIZES',
+          label: 'Outer Space',
+          key: 'margin',
+          value: ['M', 'M', 'M', 'M'],
         },
       ],
       descendants: [],

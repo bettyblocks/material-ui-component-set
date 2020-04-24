@@ -1,58 +1,108 @@
 (() => ({
   name: 'Button',
   icon: 'ButtonIcon',
-  category: 'CONTENT',
   type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'VERTICAL',
   jsx: (() => {
-    const { Button } = window.MaterialUI.Core;
+    const { Button, IconButton, CircularProgress } = window.MaterialUI.Core;
     const { Icons } = window.MaterialUI;
+
     const {
       variant,
       disabled,
       fullWidth,
       size,
-      startIcon,
+      icon,
+      iconPosition,
       linkType,
       linkTo,
       linkToExternal,
       type,
       visible,
+      actionId,
+      buttonText,
     } = options;
+
     const isDev = B.env === 'dev';
-    const ButtonComponent = (
-      <Button
-        fullWidth={fullWidth}
-        disabled={disabled}
-        variant={variant}
-        size={size}
-        startIcon={
-          startIcon !== 'None'
-            ? React.createElement(Icons[startIcon])
-            : undefined
-        }
-        classes={{
-          root: classes.root,
-          contained: classes.contained,
-          outlined: classes.outlined,
-        }}
-        className={[
-          visible || isDev ? '' : classes.hide,
-          options.buttonText.length === 0 ? classes.empty : '',
-        ].join(' ')}
-        // only set submit when submit prefab is used
-        type={isDev ? 'button' : type}
-        //        type={linkType === undefined ? undefined : 'submit'}
-        // if prefab is button set href when link is external
-        href={linkType === 'External' ? linkToExternal : undefined}
-        // if prefab is button and internal link
-        component={linkType === 'Internal' ? B.Link : undefined}
-        endpoint={linkType === 'Internal' ? linkTo : undefined}
-      >
-        {options.buttonText}
-      </Button>
-    );
+    const isAction = linkType === 'action';
+
+    const generalProps = {
+      disabled,
+      size,
+      href: linkType === 'external' ? linkToExternal : undefined,
+      component: linkType === 'internal' ? B.Link : undefined,
+      endpoint: linkType === 'internal' ? linkTo : undefined,
+    };
+
+    const iconButtonProps = {
+      ...generalProps,
+      classes: { root: classes.root },
+      classname: visible || isDev ? '' : classes.hide,
+    };
+
+    const buttonProps = {
+      ...generalProps,
+      fullWidth,
+      variant,
+      [`${iconPosition}Icon`]:
+        icon !== 'None' ? React.createElement(Icons[icon]) : undefined,
+      classes: {
+        root: classes.root,
+        contained: classes.contained,
+        outlined: classes.outlined,
+      },
+      className: [
+        visible || isDev ? '' : classes.hide,
+        buttonText.length === 0 ? classes.empty : '',
+      ].join(' '),
+      type: isDev ? 'button' : type,
+    };
+
+    let ButtonComponent =
+      variant === 'icon' ? (
+        <IconButton {...iconButtonProps}>
+          {React.createElement(Icons[icon === 'None' ? 'Error' : icon], {
+            fontSize: size,
+          })}
+        </IconButton>
+      ) : (
+        <Button {...buttonProps}>{buttonText}</Button>
+      );
+
+    const Loader = <CircularProgress size={16} className={classes.loader} />;
+
+    if (isAction) {
+      ButtonComponent = (
+        <B.Action actionId={actionId}>
+          {(callAction, { loading }) => {
+            const onClickAction = event => {
+              event.preventDefault();
+              if (!isDev && !loading && linkType === 'action') callAction();
+            };
+            const actionClickHandler = isAction && { onClick: onClickAction };
+            return variant === 'icon' ? (
+              <IconButton {...iconButtonProps} {...actionClickHandler}>
+                {loading
+                  ? Loader
+                  : React.createElement(
+                      Icons[icon === 'None' ? 'Error' : icon],
+                      {
+                        fontSize: size,
+                      },
+                    )}
+              </IconButton>
+            ) : (
+              <Button {...buttonProps} {...actionClickHandler}>
+                {buttonText}
+                {loading && Loader}
+              </Button>
+            );
+          }}
+        </B.Action>
+      );
+    }
+
     return isDev ? (
       <div className={classes.wrapper}>{ButtonComponent}</div>
     ) : (
@@ -74,11 +124,11 @@
         },
       },
       root: {
-        color: ({ options: { textColor } }) => [
-          style.getColor(textColor),
+        color: ({ options: { variant, textColor, background } }) => [
+          style.getColor(variant === 'icon' ? background : textColor),
           '!important',
         ],
-        '&.MuiButton-root': {
+        '&.MuiButton-root, &.MuiIconButton-root': {
           width: ({ options: { fullWidth, outerSpacing } }) => {
             if (!fullWidth) return 'auto';
             const marginRight = getSpacing(outerSpacing[1]);
@@ -155,6 +205,13 @@
           style.getColor(background),
           '!important',
         ],
+      },
+      loader: {
+        color: ({ options: { variant, textColor, background } }) => [
+          style.getColor(variant === 'icon' ? background : textColor),
+          '!important',
+        ],
+        marginLeft: '0.25rem',
       },
       empty: {
         '&::before': {
