@@ -26,10 +26,10 @@
                     color="primary" 
                     onClick={handleOpen}
                     readonly={isDev}>
-                  Test button
+                  {options.modalButtonTitle}
                 </Button>
                 
-                {isDev ? <div className={[
+                {isDev && options.isToggleOn ? <div className={[
                     classes.content,
                     isEmpty ? classes.empty : '',
                     isPristine ? classes.pristine : '',

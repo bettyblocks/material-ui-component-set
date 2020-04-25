@@ -8,9 +8,15 @@
       options: [
         {
           type: 'VARIABLE',
-          label: 'Title',
-          key: 'panelTitle',
+          label: 'Button title',
+          key: 'modalButtonTitle',
           value: ['Title'],
+        },
+        {
+          value: true,
+          label: 'Is toggle On',
+          key: 'isToggleOn',
+          type: 'TOGGLE',
         },
         {
           value: 'White',
