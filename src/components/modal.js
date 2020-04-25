@@ -19,26 +19,13 @@
         const handleOpen = () => setOpen(true)
         const handleClose = () => setOpen(false)
 
-        const useStyles =  window.MaterialUI.Core.makeStyles(theme => ({
-          paper: {
-            position: "absolute",
-            width: 400,
-            backgroundColor: theme.palette.background.paper,
-            border: "2px solid #000",
-            boxShadow: theme.shadows[5],
-            padding: theme.spacing(2, 4, 3)
-          }
-        }));
-
-        // const classes = useStyles()
-
-
         return (
           <div>
             <div>
                 <Button 
                     color="primary" 
-                    onClick={handleOpen}>
+                    onClick={handleOpen}
+                    readonly={isDev}>
                   Test button
                 </Button>
                 
