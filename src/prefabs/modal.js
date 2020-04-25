@@ -32,51 +32,6 @@
         },
       ],
       descendants: [
-        {
-          name: 'Row',
-          options: [
-            {
-              type: 'CUSTOM',
-              label: 'Width',
-              key: 'maxRowWidth',
-              value: 'XL',
-              configuration: {
-                as: 'BUTTONGROUP',
-                dataType: 'string',
-                allowedInput: [
-                  { name: 'S', value: 'S' },
-                  { name: 'M', value: 'M' },
-                  { name: 'L', value: 'L' },
-                  { name: 'XL', value: 'XL' },
-                  { name: 'Full', value: 'Full' },
-                ],
-              },
-            },
-            {
-              value: '',
-              label: 'Height',
-              key: 'rowHeight',
-              type: 'TEXT',
-              configuration: {
-                as: 'UNIT',
-              },
-            },
-            {
-              value: 'transparent',
-              label: 'Background color',
-              key: 'backgroundColor',
-              type: 'COLOR',
-            },
-            {
-              value: ['0rem', '0rem', '0rem', '0rem'],
-              label: 'Outer space',
-              key: 'outerSpacing',
-              type: 'SIZES',
-            },
-          ],
-          descendants: [
-          ],
-        },
       ],
     },
   ],
