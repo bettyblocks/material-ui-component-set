@@ -4,7 +4,7 @@
   allowedTypes: ['BODY_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (
-    <div className={classes.panel}>
+    <div className={B.env === "dev" ? classes.panel : ""}>
       {(() => {
         const { env, Children } = B
         const { Modal } = window.MaterialUI.Core
@@ -43,7 +43,7 @@
                     aria-labelledby="simple-modal-title"
                     aria-describedby="simple-modal-description"
               > 
-                    <B.Children><div style={{background: "white"}}>{children}</div></B.Children>
+                    <Children><div style={{background: "white", width: "50%", margin: "0 auto", padding: "20px", overflowWrap: "break-word"}}>{children}</div></Children>
               </Modal>
             </div>
           </div>
