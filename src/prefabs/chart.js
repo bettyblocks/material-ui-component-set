@@ -1,0 +1,50 @@
+(() => ({
+  name: 'Chart',
+  icon: 'ContainerIcon',
+  category: 'LAYOUT',
+  structure: [
+    {
+      name: 'Chart',
+      options: [
+        {
+          value: '',
+          label: 'Model',
+          key: 'model',
+          type: 'MODEL',
+        },
+        {
+          value: {},
+          label: 'Filter',
+          key: 'filter',
+          type: 'FILTER',
+          configuration: {
+            dependsOn: 'model',
+          },
+        },
+        {
+          value: 'pie',
+          label: 'Chart Type',
+          key: 'charttype',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Pie', value: 'pie' },
+              { name: 'Bar', value: 'bar' },
+              { name: 'Column', value: 'column' },
+              { name: 'Line', value: 'line' },
+            ],
+          },
+        },
+        {
+          value: '600',
+          label: 'Width',
+          key: 'width',
+          type: 'NUMBER',
+        },
+      ],
+      descendants: [],
+    },
+  ],
+}))();
