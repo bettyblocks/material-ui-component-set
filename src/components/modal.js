@@ -17,13 +17,19 @@
         const isPristine = isEmpty && isDev
         
 
-        const isDev = B.env === 'dev';
-        const { Modal, Button} = window.MaterialUI.Core
+        useEffect(() => {
+          B.defineFunction('handleOpenModal', e => {
+            e.preventDefault();
+            
+            setOpen(true)
+          });
 
-        const [open, setOpen] = React.useState(false);
+          B.defineFunction('handleCloseModal', e => {
+            e.preventDefault();
 
-        const handleOpen = () => setOpen(true)
-        const handleClose = () => setOpen(false)
+            setOpen(false)
+          })
+        }, []);
 
         return (
           <div>
@@ -39,7 +45,7 @@
 
               <Modal
                     open={open}
-                    onClose={handleClose}
+                    onClose={() => setOpen(false)}
                     aria-labelledby="simple-modal-title"
                     aria-describedby="simple-modal-description"
               > 
