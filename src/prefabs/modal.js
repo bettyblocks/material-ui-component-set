@@ -14,8 +14,8 @@
         },
         {
           value: true,
-          label: 'Is toggle On',
-          key: 'isToggleOn',
+          label: 'Visible in dev?',
+          key: 'isVisibleInDev',
           type: 'TOGGLE',
         },
         {

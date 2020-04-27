@@ -1,15 +1,21 @@
 (() => ({
   name: 'Modal',
-  icon: 'PanelIcon',
   type: 'CONTAINER_COMPONENT',
   allowedTypes: ['BODY_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (
     <div className={classes.panel}>
       {(() => {
+        const { env, Children } = B
+        const { Modal } = window.MaterialUI.Core
+        
+        const [open, setOpen] = React.useState(false);
+        
         const isEmpty = children.length === 0;
+        const isDev = env === 'dev';
 
-        const isPristine = isEmpty && B.env === 'dev';
+        const isPristine = isEmpty && isDev
+        
 
         const isDev = B.env === 'dev';
         const { Modal, Button} = window.MaterialUI.Core
@@ -22,14 +28,7 @@
         return (
           <div>
             <div>
-                <Button 
-                    color="primary" 
-                    onClick={handleOpen}
-                    readonly={isDev}>
-                  {options.modalButtonTitle}
-                </Button>
-                
-                {isDev && options.isToggleOn ? <div className={[
+                {isDev && options.isVisibleInDev ? <div className={[
                     classes.content,
                     isEmpty ? classes.empty : '',
                     isPristine ? classes.pristine : '',
