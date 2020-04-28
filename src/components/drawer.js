@@ -32,6 +32,14 @@
           right: false,
         });
 
+        useEffect(() => {
+          B.defineFunction("handleOpenDrawer", e => {
+            e.preventDefault();
+        
+            setState({ ...state, [anchor]: true });
+          });
+        }, []);
+
         const toggleDrawer = (anchor, open) => (event) => {
           if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
             return;
