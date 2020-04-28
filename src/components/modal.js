@@ -4,54 +4,57 @@
   allowedTypes: ['BODY_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (
-    <div className={B.env === "dev" ? classes.panel : ""}>
+    <div className={B.env === 'dev' ? classes.panel : ''}>
       {(() => {
-        const { env, Children } = B
-        const { Modal } = window.MaterialUI.Core
-        
-        const [open, setOpen] = React.useState(false);
-        
+        const { env, Children } = B;
+        const { Modal } = window.MaterialUI.Core;
+
         const isEmpty = children.length === 0;
         const isDev = env === 'dev';
+        const isPristine = isEmpty && isDev;
 
-        const isPristine = isEmpty && isDev
-        
+        const [open, setOpen] = React.useState(false);
 
         useEffect(() => {
           B.defineFunction('handleOpenModal', e => {
             e.preventDefault();
-            
-            setOpen(true)
+
+            setOpen(true);
           });
 
           B.defineFunction('handleCloseModal', e => {
             e.preventDefault();
 
-            setOpen(false)
-          })
+            setOpen(false);
+          });
         }, []);
 
         return (
           <div>
-            <div>
-                {isDev && options.isVisibleInDev ? <div className={[
-                    classes.content,
-                    isEmpty ? classes.empty : '',
-                    isPristine ? classes.pristine : '',
-                  ].join(' ')}>
-                  {isPristine ? 'Panel' : children}
-              </div> : ''}
-              
+            {isDev && options.isVisibleInDev ? (
+              <div
+                className={[
+                  classes.content,
+                  isEmpty ? classes.empty : '',
+                  isPristine ? classes.pristine : '',
+                ].join(' ')}
+              >
+                {isPristine ? 'Panel' : children}
+              </div>
+            ) : (
+              ''
+            )}
 
-              <Modal
-                    open={open}
-                    onClose={() => setOpen(false)}
-                    aria-labelledby="simple-modal-title"
-                    aria-describedby="simple-modal-description"
-              > 
-                    <Children><div style={{background: "white", width: "50%", margin: "0 auto", padding: "20px", overflowWrap: "break-word"}}>{children}</div></Children>
-              </Modal>
-            </div>
+            <Modal
+              open={open}
+              onClose={() => setOpen(false)}
+              aria-labelledby="simple-modal-title"
+              aria-describedby="simple-modal-description"
+            >
+              <Children>
+                <div className={classes.modal}>{children}</div>
+              </Children>
+            </Modal>
           </div>
         );
       })()}
@@ -62,6 +65,13 @@
     const getSpacing = (idx, device = 'Mobile') =>
       idx === '0' ? '0rem' : style.getSpacing(idx, device);
     return {
+      modal: {
+        background: 'white',
+        width: '50%',
+        margin: '0 auto',
+        padding: '20px',
+        overflowWrap: 'break-word',
+      },
       panel: {
         display: 'flex',
         flexDirection: 'column',

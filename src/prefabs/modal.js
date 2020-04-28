@@ -37,8 +37,7 @@
           type: 'SIZES',
         },
       ],
-      descendants: [
-      ],
+      descendants: [],
     },
   ],
 }))();
