@@ -1,7 +1,7 @@
 (() => ({
   name: 'Drawer',
   icon: 'PanelIcon',
-  category: 'LAYOUT',
+  category: 'DRAWER',
   structure: [
     {
       name: 'Drawer',
