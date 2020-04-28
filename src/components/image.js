@@ -46,10 +46,12 @@
       },
       empty: {
         position: 'relative',
-        width: '100%',
+        width: ({ options: { width } }) => width || '100%',
+        height: ({ options: { height } }) => height || 'inherit',
         backgroundColor: '#F0F1F5',
         border: '0.0625rem dashed #AFB5C8',
-        paddingBottom: ({ options: { imgUrl } }) => !imgUrl && '62.5%',
+        paddingBottom: ({ options: { height } }) =>
+          (!height || height === '100%') && '62.5%',
       },
       image: {
         width: ({ options: { width } }) => width || 'auto',
