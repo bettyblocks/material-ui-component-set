@@ -23,14 +23,17 @@
         },
         {
           value: '',
-          label: 'Temp Value',
-          key: 'tempValue',
-          type: 'TEXT',
+          label: 'Value property',
+          key: 'valueProperty',
+          type: 'PROPERTY',
+          configuration: {
+            dependsOn: 'model',
+          },
         },
         {
           value: '',
-          label: 'Value property',
-          key: 'valueProperty',
+          label: 'Label property',
+          key: 'labelProperty',
           type: 'PROPERTY',
           configuration: {
             dependsOn: 'model',

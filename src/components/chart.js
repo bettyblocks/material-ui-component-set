@@ -9,9 +9,9 @@
     const isEmpty = children.length === 0;
     const isPristine = isEmpty && isDev;
     const chartType = options.chartType;
-    const chartVal = options.valueProperty;
     const { Chart } = window.ApexCharts;
-    const tempValue = options.tempValue;
+    const chartVal = B.getProperty(options.valueProperty);
+    const chartLabel = B.getProperty(options.labelProperty);
 
     let defaultSeries;
     switch (chartType) {
@@ -50,16 +50,26 @@
 
           const { totalCount, results } = data;
 
-          let labels = results.map(obj => obj[tempValue]);
+          let labels = results.map(obj => obj[chartLabel.name]);
           labels = [...new Set(labels)];
 
           let liveSeries = [];
-          let series2 = results.map(obj => obj[tempValue]);
+          let series2 = results.map(obj => obj[chartVal.name]);
 
-          var count = {};
-          series2.forEach(i => {
-            count[i] = ++count[i] || 1;
-          });
+          var count;
+          if (chartVal.kind == 'string') {
+            count = {};
+            series2.forEach(i => {
+              count[i] = ++count[i] || 1;
+            });
+          } else if (chartVal.kind == 'integer') {
+            count = {};
+            results.forEach(e =>
+              count[e[chartLabel.name]]
+                ? (count[e[chartLabel.name]] += e[chartVal.name])
+                : (count[e[chartLabel.name]] = e[chartVal.name]),
+            );
+          }
 
           let values;
           switch (chartType) {
@@ -92,7 +102,7 @@
           return (
             <Chart
               options={chartOptions.options}
-              series={liveSeries}
+              series={chartOptions.series}
               type={chartType}
               width={600}
             />
