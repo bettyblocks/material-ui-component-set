@@ -1,7 +1,6 @@
 (() => ({
   name: 'Panel',
   icon: 'PanelIcon',
-  category: 'LAYOUT',
   type: 'CONTAINER_COMPONENT',
   allowedTypes: ['BODY_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
