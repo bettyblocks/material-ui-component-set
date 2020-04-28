@@ -5,7 +5,9 @@
   allowedTypes: ['BODY_COMPONENT', 'CONTENT_COMPONENT', "DRAWER_LIST_ITEM_COMPONENT"],
   orientation: 'HORIZONTAL',
   jsx: (<div>
-    
+    {(() => {
+      return <div><p style={{marginLeft: '10px'}}> Drawer list component</p>{children}</div>
+    })()} 
   </div>
   ),
   styles: B => theme => {
