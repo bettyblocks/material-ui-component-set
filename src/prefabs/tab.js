@@ -1,28 +1,16 @@
 (() => ({
-  name: 'Breadcrumb Item',
-  icon: 'BreadcrumbItemIcon',
-  category: 'NAVIGATION',
+  name: 'Tab',
+  icon: 'TabIcon',
+  category: 'CONTENT',
   structure: [
     {
-      name: 'BreadcrumbItem',
+      name: 'Tab',
       options: [
         {
-          type: 'VARIABLE',
-          label: 'Content',
-          key: 'breadcrumbContent',
-          value: ['Breadcrumb Item'],
-        },
-        {
-          type: 'ENDPOINT',
-          label: 'Page',
-          key: 'endpoint',
-          value: '',
-        },
-        {
-          type: 'COLOR',
-          label: 'Text color',
-          key: 'textColor',
-          value: 'Black',
+          label: 'Tab label',
+          key: 'label',
+          value: 'TAB',
+          type: 'TEXT',
         },
         {
           label: 'Icon',
@@ -34,7 +22,7 @@
             dataType: 'string',
             allowedInput: [
               {
-                name: 'None',
+                name: '',
                 value: 'None',
               },
               {
@@ -608,10 +596,6 @@
               {
                 name: 'FavoriteBorder',
                 value: 'FavoriteBorder',
-              },
-              {
-                name: 'FileCopy',
-                value: 'FileCopy',
               },
               {
                 name: 'FilterList',
@@ -1293,24 +1277,16 @@
           },
         },
         {
-          type: 'CUSTOM',
-          label: 'Icon position',
-          key: 'iconPosition',
-          value: 'start',
-          configuration: {
-            as: 'BUTTONGROUP',
-            dataType: 'string',
-            condition: {
-              type: 'HIDE',
-              option: 'variant',
-              comparator: 'EQ',
-              value: 'icon',
-            },
-            allowedInput: [
-              { name: 'Start', value: 'start' },
-              { name: 'End', value: 'end' },
-            ],
-          },
+          type: 'TOGGLE',
+          label: 'Disabled',
+          key: 'disabled',
+          value: false,
+        },
+        {
+          type: 'TOGGLE',
+          label: 'Disable ripple',
+          key: 'disableRipple',
+          value: false,
         },
       ],
       descendants: [],
