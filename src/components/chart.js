@@ -7,7 +7,6 @@
     const { env, GetAll } = B;
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
-    const isPristine = isEmpty && isDev;
     const chartType = options.chartType;
     const { Chart } = window.ApexCharts;
     const chartVal = B.getProperty(options.valueProperty);
@@ -48,21 +47,21 @@
           if (loading) return 'loading...';
           if (error) return error;
 
-          const { totalCount, results } = data;
+          const { results } = data;
 
           let labels = results.map(obj => obj[chartLabel.name]);
           labels = [...new Set(labels)];
 
           let liveSeries = [];
-          let series2 = results.map(obj => obj[chartVal.name]);
+          const series2 = results.map(obj => obj[chartVal.name]);
 
-          var count;
-          if (chartVal.kind == 'string') {
+          let count;
+          if (chartVal.kind === 'string') {
             count = {};
             series2.forEach(i => {
               count[i] = ++count[i] || 1;
             });
-          } else if (chartVal.kind == 'integer') {
+          } else if (chartVal.kind === 'integer') {
             count = {};
             results.forEach(e =>
               count[e[chartLabel.name]]
@@ -96,8 +95,6 @@
             },
             series: liveSeries,
           };
-
-          let blah = [{ data: [25, 40, 20, 15] }];
 
           return (
             <Chart
