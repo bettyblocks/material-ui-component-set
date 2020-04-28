@@ -7,6 +7,22 @@
       name: 'Drawer',
       options: [
         {
+          type: 'CUSTOM',
+          label: 'Anchor',
+          key: 'anchor',
+          value: 'left',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Left', value: 'left' },
+              { name: 'Right', value: 'right' },
+              { name: 'Top', value: 'top' },
+              { name: 'Bottom', value: 'bottom' },
+            ],
+          },
+        },
+        {
           type: 'VARIABLE',
           label: 'Title',
           key: 'panelTitle',

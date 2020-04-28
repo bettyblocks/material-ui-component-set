@@ -23,6 +23,8 @@
 
         const isDev = env === 'dev';
 
+        const { anchor } = options;
+
         const [state, setState] = useState({
           top: false,
           left: false,
@@ -69,20 +71,20 @@
 
         const drawerComponent = (
           <div>
-            {['left', 'right', 'top', 'bottom'].map((anchor) => (
+            {
               <React.Fragment key={anchor}>
                 <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
                 <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
                   {list(anchor)}
                 </Drawer>
               </React.Fragment>
-            ))}
+            }
           </div>
         );
 
         return (
           <>
-            {isDev ? 'Drawer' : drawerComponent}
+            { isDev ? 'Drawer' : drawerComponent }
           </>
         );
       })()}
