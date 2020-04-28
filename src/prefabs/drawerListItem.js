@@ -6,6 +6,12 @@
     {
       name: 'DrawerListItem',
       options: [
+        {
+          type: 'VARIABLE',
+          label: 'Text',
+          key: 'text',
+          value: ['Text'],
+        },
       ],
       descendants: [
       ],
