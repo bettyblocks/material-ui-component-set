@@ -6,7 +6,7 @@
   jsx: (
     <div className={B.env === 'dev' ? classes.panel : ''}>
       {(() => {
-        const { env, Children } = B;
+        const { env } = B;
         const { Modal } = window.MaterialUI.Core;
 
         const isEmpty = children.length === 0;
