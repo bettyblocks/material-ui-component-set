@@ -22,6 +22,15 @@
           },
         },
         {
+          value: '',
+          label: 'Value property',
+          key: 'valueProperty',
+          type: 'PROPERTY',
+          configuration: {
+            dependsOn: 'model',
+          },
+        },
+        {
           value: 'pie',
           label: 'Chart Type',
           key: 'charttype',
@@ -32,8 +41,6 @@
             allowedInput: [
               { name: 'Pie', value: 'pie' },
               { name: 'Bar', value: 'bar' },
-              { name: 'Column', value: 'column' },
-              { name: 'Line', value: 'line' },
             ],
           },
         },

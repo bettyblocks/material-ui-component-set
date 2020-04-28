@@ -8,8 +8,18 @@
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
     const isPristine = isEmpty && isDev;
+    const chartType = options.charttype;
     const { Chart } = window.ApexCharts;
 
+    let defaultSeries;
+    switch (chartType) {
+      case 'pie':
+        defaultSeries = [25, 40, 20, 15];
+        break;
+      case 'bar':
+        defaultSeries = [{ data: [25, 40, 20, 15] }];
+        break;
+    }
     const defaultOptions = {
       options: {
         chart: {
@@ -18,62 +28,78 @@
         },
         labels: ['Gorilla', 'Monkey', 'Panda', 'Unicorn'],
       },
-      series: [25, 40, 20, 15],
+      series: defaultSeries,
     };
 
     const devChart = (
       <Chart
         options={defaultOptions.options}
         series={defaultOptions.series}
-        type="pie"
+        type={chartType}
         width={600}
       />
     );
 
-    const prodLabels = () => (
+    const liveChart = (
       <GetAll modelId={options.model} filter={options.filter}>
         {({ loading, error, data }) => {
           if (loading) return 'loading...';
-          if (error) return 'failed';
+          if (error) return error;
 
           const { totalCount, results } = data;
 
+          let labels = results.map(obj => obj.status);
+          labels = [...new Set(labels)];
+
+          let liveSeries = [];
+          let series2 = results.map(obj => obj.status);
+
+          var count = {};
+          series2.forEach(i => {
+            count[i] = ++count[i] || 1;
+          });
+
+          let values;
+          switch (chartType) {
+            case 'pie':
+              liveSeries = Object.values(count);
+              break;
+            case 'bar':
+              values = Object.values(count);
+              liveSeries = [{ data: values }];
+              break;
+            case 'line':
+              values = Object.values(count);
+              liveSeries = [{ data: values }];
+              break;
+          }
+
+          const chartOptions = {
+            options: {
+              chart: {
+                width: 600,
+                type: chartType,
+              },
+              labels: labels,
+            },
+            series: liveSeries,
+          };
+
+          let blah = [{ data: [25, 40, 20, 15] }];
+
           return (
-            <div>
-              <p>There are {totalCount} records.</p>
-              <ul>
-                {results.map(row => (
-                  <li key={row.id}>{row.name}</li>
-                ))}
-              </ul>
-            </div>
+            <Chart
+              options={chartOptions.options}
+              series={liveSeries}
+              type={chartType}
+              width={600}
+            />
           );
         }}
       </GetAll>
     );
 
-    /*     const prodSeries = () => {};
-
-    const prodOptions = {
-      options: {
-        chart: {
-          type: options.charttype,
-        },
-        labels: prodLabels,
-      },
-      series: prodSeries,
-    };
-
-    const prodChart = (
-      <Chart
-        options={prodOptions.options}
-        series={prodOptions.series}
-        type={options.charttype}
-        width={options.width}
-      />
-    ); */
-
-    return isDev ? <div>{devChart}</div> : prodLabels;
+    return isDev ? <div>{devChart}</div> : liveChart;
   })(),
   styles: () => () => ({
     empty: {

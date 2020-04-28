@@ -21,7 +21,7 @@
   "scripts": {
     "start": "bb components serve -p 5002",
     "build": "bb components build",
-    "dev": "nodemon --watch src --exec 'yarn build && yarn start'",
+    "dev": "nodemon --watch src --exec \"yarn build && yarn start\"",
     "lint": "eslint --ext js ./src",
     "upload": "bb components publish -b material-ui-component-set",
     "test": "echo \"Error: no test specified\" && exit 0",
