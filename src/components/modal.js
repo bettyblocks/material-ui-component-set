@@ -92,27 +92,6 @@
         overflow: 'auto',
         boxSizing: 'border-box',
       },
-      title: {
-        margin: '0',
-        display: 'block',
-        paddingRight: '0.5rem',
-        paddingLeft: '0.5rem',
-        paddingTop: '0.4375rem',
-        paddingBottom: '0.5625rem',
-        fontFamily: style.getFontFamily('Body1'),
-        fontSize: '1rem',
-        fontWeight: style.getFontWeight('Body1'),
-        textTransform: style.getTextTransform('Body1'),
-        letterSpacing: style.getLetterSpacing('Body1'),
-        color: ({ options: { color } }) =>
-          style.getColor(color) || style.getColor('White'),
-        backgroundColor: ({ options: { panelColor } }) =>
-          style.getColor(panelColor) || style.getColor('Primary'),
-        borderBottomWidth: '0.125rem',
-        borderBottomColor: ({ options: { panelColor } }) =>
-          style.getColor(panelColor) || style.getColor('Primary'),
-        borderBottomStyle: 'solid',
-      },
       content: {
         flexGrow: 1,
         flexBasis: '100%',
@@ -132,11 +111,6 @@
           marginLeft: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[3], 'Portrait'),
         },
-        title: {
-          paddingRight: getSpacing('M', 'Portrait'),
-          paddingLeft: getSpacing('M', 'Portrait'),
-          fontSize: style.getFontSize('Body1', 'Portrait'),
-        },
         content: {
           paddingTop: getSpacing('M', 'Portrait'),
         },
@@ -152,11 +126,6 @@
           marginLeft: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[3], 'Landscape'),
         },
-        title: {
-          paddingRight: getSpacing('M', 'Landscape'),
-          paddingLeft: getSpacing('M', 'Landscape'),
-          fontSize: style.getFontSize('Body1', 'Landscape'),
-        },
         content: {
           padding: getSpacing('M', 'Landscape'),
         },
@@ -171,11 +140,6 @@
             getSpacing(outerSpacing[2], 'Desktop'),
           marginLeft: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[3], 'Desktop'),
-        },
-        title: {
-          paddingRight: getSpacing('M', 'Desktop'),
-          paddingLeft: getSpacing('M', 'Desktop'),
-          fontSize: style.getFontSize('Body1', 'Desktop'),
         },
         content: {
           padding: getSpacing('M', 'Desktop'),

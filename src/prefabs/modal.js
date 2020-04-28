@@ -7,22 +7,10 @@
       name: 'Modal',
       options: [
         {
-          type: 'VARIABLE',
-          label: 'Button title',
-          key: 'modalButtonTitle',
-          value: ['Title'],
-        },
-        {
           value: true,
           label: 'Visible in dev?',
           key: 'isVisibleInDev',
           type: 'TOGGLE',
-        },
-        {
-          value: 'White',
-          label: 'Title Color',
-          key: 'color',
-          type: 'COLOR',
         },
         {
           value: 'Primary',
