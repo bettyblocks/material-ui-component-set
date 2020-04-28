@@ -48,6 +48,7 @@
               { name: 'Internal page', value: 'internal' },
               { name: 'External page', value: 'external' },
               { name: 'Action', value: 'action' },
+              { name: 'None', value: 'none' },
             ],
           },
         },
