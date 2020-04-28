@@ -90,9 +90,31 @@
           </div>
         );
 
+        const drawerComponentWithList = (
+          <div>
+            {
+              <React.Fragment key={anchor}>
+                <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
+                <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
+                  <div
+                    className={clsx(classes.list, {
+                      [classes.fullList]: anchor === 'top' || anchor === 'bottom',
+                    })}
+                    role="presentation"
+                    onClick={toggleDrawer(anchor, false)}
+                    onKeyDown={toggleDrawer(anchor, false)}
+                  >
+                    {children}
+                  </div>
+                </Drawer>
+              </React.Fragment>
+            }
+          </div>
+        )
+
         return (
           <>
-            { isDev ? 'Drawer' : drawerComponent }
+            { isDev ? <div><p>Drawer</p>{children}</div> : drawerComponentWithList}
           </>
         );
       })()}
