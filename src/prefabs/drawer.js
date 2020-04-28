@@ -7,6 +7,12 @@
       name: 'Drawer',
       options: [
         {
+          value: true,
+          label: 'Open on start?',
+          key: 'isOpenOnStart',
+          type: 'TOGGLE',
+        },
+        {
           type: 'CUSTOM',
           label: 'Anchor',
           key: 'anchor',

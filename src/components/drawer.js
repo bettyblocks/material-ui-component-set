@@ -23,14 +23,19 @@
 
         const isDev = env === 'dev';
 
-        const { anchor } = options;
-
-        const [state, setState] = useState({
-          top: false,
-          left: false,
-          bottom: false,
-          right: false,
-        });
+        const { anchor, isOpenOnStart } = options;
+        
+        const initialState = {
+          ...{
+            top: false,
+            left: false,
+            bottom: false,
+            right: false,
+          },
+          ...{[anchor]: isOpenOnStart}
+        }
+        
+        const [state, setState] = useState(initialState);
 
         useEffect(() => {
           B.defineFunction("handleOpenDrawer", e => {
