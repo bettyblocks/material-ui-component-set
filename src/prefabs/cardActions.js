@@ -1,6 +1,6 @@
 (() => ({
   name: 'CardActions',
-  icon: 'ButtonGroupIcon',
+  icon: 'CardActionsIcon',
   category: 'CARDS',
   structure: [
     {
