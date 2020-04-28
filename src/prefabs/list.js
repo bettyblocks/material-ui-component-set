@@ -42,7 +42,7 @@
               type: 'VARIABLE',
               label: 'Secondary text',
               key: 'secondaryText',
-              value: ['Seconday text'],
+              value: ['Secondary text'],
             },
             {
               type: 'COLOR',
