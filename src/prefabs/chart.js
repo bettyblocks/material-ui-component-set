@@ -23,6 +23,12 @@
         },
         {
           value: '',
+          label: 'Temp Value',
+          key: 'tempValue',
+          type: 'TEXT',
+        },
+        {
+          value: '',
           label: 'Value property',
           key: 'valueProperty',
           type: 'PROPERTY',
@@ -33,7 +39,7 @@
         {
           value: 'pie',
           label: 'Chart Type',
-          key: 'charttype',
+          key: 'chartType',
           type: 'CUSTOM',
           configuration: {
             as: 'BUTTONGROUP',

@@ -8,8 +8,10 @@
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
     const isPristine = isEmpty && isDev;
-    const chartType = options.charttype;
+    const chartType = options.chartType;
+    const chartVal = options.valueProperty;
     const { Chart } = window.ApexCharts;
+    const tempValue = options.tempValue;
 
     let defaultSeries;
     switch (chartType) {
@@ -48,11 +50,11 @@
 
           const { totalCount, results } = data;
 
-          let labels = results.map(obj => obj.status);
+          let labels = results.map(obj => obj[tempValue]);
           labels = [...new Set(labels)];
 
           let liveSeries = [];
-          let series2 = results.map(obj => obj.status);
+          let series2 = results.map(obj => obj[tempValue]);
 
           var count = {};
           series2.forEach(i => {
