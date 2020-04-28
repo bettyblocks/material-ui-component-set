@@ -1,6 +1,6 @@
 (() => ({
   name: 'CardMedia',
-  icon: 'ImageIcon',
+  icon: 'CardMediaIcon',
   category: 'CARDS',
   structure: [
     {
