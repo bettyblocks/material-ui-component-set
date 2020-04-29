@@ -52,7 +52,6 @@
       : useText(placeholder);
 
     const actionInput = getActionInput(actionInputId);
-    const value = currentValue;
 
     const changeHandler = event => {
       const {
@@ -115,7 +114,7 @@
               ? defaultValue
                   .map(textitem => (textitem.name ? textitem.name : textitem))
                   .join(' ')
-              : value
+              : currentValue
           }
           type={(isDev && type === 'number') || showPassword ? 'text' : type}
           multiline={multiline}
