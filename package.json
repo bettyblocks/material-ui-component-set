@@ -37,6 +37,7 @@
     "@material-ui/lab": "^4.0.0-alpha.50",
     "@material-ui/pickers": "^3.2.10",
     "@material-ui/styles": "^4.9.10",
+    "chart.js": "^2.9.3",
     "date-fns": "^2.11.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
