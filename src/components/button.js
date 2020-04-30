@@ -27,11 +27,13 @@
     const isDev = B.env === 'dev';
     const isAction = linkType === 'action';
     const hasLink = linkTo && linkTo.id !== '';
+    const hasExternalLink = linkToExternal && linkToExternal.id !== '';
 
     const generalProps = {
       disabled,
       size,
-      href: linkType === 'external' && hasLink ? linkToExternal : undefined,
+      href:
+        linkType === 'external' && hasExternalLink ? linkToExternal : undefined,
       component: linkType === 'internal' && hasLink ? B.Link : undefined,
       endpoint: linkType === 'internal' && hasLink ? linkTo : undefined,
     };
