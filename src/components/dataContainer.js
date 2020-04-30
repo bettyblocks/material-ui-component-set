@@ -32,14 +32,14 @@
 
           return (
             <B.GetOne modelId={model} filter={filter}>
-              {({ loading, error, item }) => {
+              {({ loading, error, data }) => {
                 if (loading) return 'loading...';
                 if (error) return 'failed';
 
                 return (
                   <>
-                    {item && (
-                      <B.GetOneProvider key={item.id} value={item}>
+                    {data && (
+                      <B.GetOneProvider key={data.id} value={data}>
                         {children}
                       </B.GetOneProvider>
                     )}
