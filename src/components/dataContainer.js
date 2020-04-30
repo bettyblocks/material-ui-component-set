@@ -10,7 +10,7 @@
         const isEmpty = children.length === 0;
         const isDev = B.env === 'dev';
         const isPristine = isEmpty && isDev;
-        const { filter, model } = options;
+        const { filter, model, redirectWithoutResult } = options;
 
         const builderLayout = () => (
           <>
@@ -25,6 +25,11 @@
           </>
         );
 
+        const redirect = () => {
+          const history = useHistory();
+          history.push(B.useEndpoint(redirectWithoutResult));
+        };
+
         const canvasLayout = () => {
           if (!model) {
             return builderLayout();
@@ -35,6 +40,10 @@
               {({ loading, error, data }) => {
                 if (loading) return 'loading...';
                 if (error) return 'failed';
+
+                if (!data && redirectWithoutResult) {
+                  redirect();
+                }
 
                 return (
                   <>
