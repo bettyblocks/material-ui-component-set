@@ -31,12 +31,10 @@
           }
 
           return (
-            <B.GetAll modelId={model} filter={filter} skip={0} take={1}>
-              {({ loading, error, data }) => {
+            <B.GetOne modelId={model} filter={filter}>
+              {({ loading, error, item }) => {
                 if (loading) return 'loading...';
                 if (error) return 'failed';
-
-                const item = data.results[0];
 
                 return (
                   <>
@@ -48,7 +46,7 @@
                   </>
                 );
               }}
-            </B.GetAll>
+            </B.GetOne>
           );
         };
 
