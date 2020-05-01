@@ -2,7 +2,7 @@
   name: 'Drawer',
   icon: 'PanelIcon',
   type: 'CONTAINER_COMPONENT',
-  allowedTypes: ['BODY_COMPONENT', 'CONTENT_COMPONENT', "DRAWER_LIST_COMPONENT"],
+  allowedTypes: ['BODY_COMPONENT', 'CONTENT_COMPONENT', "LIST_COMPONENT"],
   orientation: 'HORIZONTAL',
   jsx: (
     <div className={classes.panel}>

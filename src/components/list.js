@@ -1,5 +1,5 @@
 (() => ({
-  name: 'DrawerList',
+  name: 'List',
   icon: 'PanelIcon',
   type: 'CONTENT_COMPONENT',
   allowedTypes: ['BODY_COMPONENT', 'CONTENT_COMPONENT', "DRAWER_LIST_ITEM_COMPONENT"],
@@ -9,8 +9,7 @@
       const { env } = B;
       const isDev = env === "dev";
 
-      const { makeStyles,
-              List,
+      const { List,
               ListItem,
               Divider,
               ListItemText,

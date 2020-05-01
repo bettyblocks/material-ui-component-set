@@ -1,10 +1,10 @@
 (() => ({
-  name: 'DrawerList',
+  name: 'List',
   icon: 'PanelIcon',
   category: 'DRAWER',
   structure: [
     {
-      name: 'DrawerList',
+      name: 'List',
       options: [
       ],
       descendants: [
