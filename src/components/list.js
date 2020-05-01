@@ -9,11 +9,7 @@
       const { env } = B;
       const isDev = env === "dev";
 
-      const { List,
-              ListItem,
-              Divider,
-              ListItemText,
-              ListItemIcon } = window.MaterialUI.Core;
+      const { List } = window.MaterialUI.Core;
 
       const list =  (
         <div className={classes.root}>

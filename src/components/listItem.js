@@ -12,9 +12,13 @@
       const { env } = B
       const isDev = env === 'dev';
 
+      const { Icons } = window.MaterialUI;
       const { ListItem, 
-              ListItemText 
+              ListItemIcon,
+              ListItemText,
             } = window.MaterialUI.Core;
+
+      const { icon, size } = options;
 
 
       // const { Inbox: InboxIcon, 
@@ -46,10 +50,18 @@
 
       const listItemComponent = (
         <ListItem button key={text}>
+          {icon !== 'None' && (
+              <ListItemIcon>
+              {React.createElement(Icons[icon], {
+                fontSize: size,
+              })}
+            </ListItemIcon>
+          )}
+
           <ListItemText primary={text} />
         </ListItem>)
         
-      return <div>{isDev ? <p style={{marginLeft: '20px'}}> {text}</p> : listItemComponent }</div>
+      return <div>{isDev ? <p style={{marginLeft: '20px'}}> [{icon !== 'None' && `${icon} icon`}] {text}</p> : listItemComponent }</div>
     })()}
     </div>
   ),
