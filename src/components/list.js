@@ -2,7 +2,7 @@
   name: 'List',
   icon: 'PanelIcon',
   type: 'CONTENT_COMPONENT',
-  allowedTypes: ['BODY_COMPONENT', 'CONTENT_COMPONENT', "DRAWER_LIST_ITEM_COMPONENT"],
+  allowedTypes: ['BODY_COMPONENT', 'CONTENT_COMPONENT', "LIST_ITEM_COMPONENT"],
   orientation: 'HORIZONTAL',
   jsx: (<div>
     {(() => {
@@ -15,40 +15,15 @@
               ListItemText,
               ListItemIcon } = window.MaterialUI.Core;
 
-      const { Inbox: InboxIcon, 
-              Drafts: DraftsIcon } = window.MaterialUI.Icons;
-
-      const ListItemLink =  props => <ListItem button component="a" {...props} />;
-
       const list =  (
         <div className={classes.root}>
           <List component="nav" aria-label="main mailbox folders">
-            <ListItem button>
-              <ListItemIcon>
-                <InboxIcon />
-              </ListItemIcon>
-              <ListItemText primary="Inbox" />
-            </ListItem>
-            <ListItem button>
-              <ListItemIcon>
-                <DraftsIcon />
-              </ListItemIcon>
-              <ListItemText primary="Drafts" />
-            </ListItem>
-          </List>
-          <Divider />
-          <List component="nav" aria-label="secondary mailbox folders">
-            <ListItem button>
-              <ListItemText primary="Trash" />
-            </ListItem>
-            <ListItemLink href="#simple-list">
-              <ListItemText primary="Spam" />
-            </ListItemLink>
+            {children}
           </List>
         </div>
       );
 
-      return isDev ? 'List' : list
+      return isDev ? <div>List {children}</div> : list
     })()} 
   </div>
   ),

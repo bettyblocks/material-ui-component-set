@@ -1,10 +1,10 @@
 (() => ({
-  name: 'DrawerListItem',
+  name: 'ListItem',
   icon: 'PanelIcon',
   category: 'DRAWER',
   structure: [
     {
-      name: 'DrawerListItem',
+      name: 'ListItem',
       options: [
         {
           type: 'VARIABLE',
