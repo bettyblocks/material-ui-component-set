@@ -20,14 +20,13 @@
       );
 
       return isDev ? <div>List {children}</div> : list
-    })()} 
+    })()}
   </div>
   ),
   styles: B => theme => {
     return {
       root: {
         width: '100%',
-        maxWidth: 360,
         backgroundColor: "white"
       },
     }
