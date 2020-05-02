@@ -9,11 +9,11 @@
       const { env } = B;
       const isDev = env === "dev";
 
-      const { List } = window.MaterialUI.Core;
+      const { List, ListSubheader } = window.MaterialUI.Core;
 
       const list =  (
         <div className={classes.root}>
-          <List component="nav" aria-label="main mailbox folders">
+          <List subheader={<ListSubheader>Main</ListSubheader>} component="nav" aria-label="main mailbox folders">
             {children}
           </List>
         </div>
