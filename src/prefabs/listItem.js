@@ -1340,8 +1340,7 @@
           },
         },
       ],
-      descendants: [
-      ],
+      descendants: [],
     },
   ],
 }))();

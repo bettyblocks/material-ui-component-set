@@ -2,29 +2,19 @@
   name: 'Drawer',
   icon: 'PanelIcon',
   type: 'CONTAINER_COMPONENT',
-  allowedTypes: ['BODY_COMPONENT', 'CONTENT_COMPONENT', "LIST_COMPONENT"],
+  allowedTypes: ['BODY_COMPONENT', 'CONTENT_COMPONENT', 'LIST_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (
     <div className={classes.panel}>
       {(() => {
-
-        const { env } = B
-        const { Drawer, 
-                Button, 
-                List, 
-                Divider, 
-                ListItem, 
-                ListItemIcon, 
-                ListItemText 
-              } = window.MaterialUI.Core;
-
-              
-        const { Inbox, Mail } = window.MaterialUI.Icons
+        const { env } = B;
+        const { Drawer } = window.MaterialUI.Core;
+        const { clsx } = window;
 
         const isDev = env === 'dev';
 
         const { anchor, isOpenOnStart, isVisibleInDev } = options;
-        
+
         const initialState = {
           ...{
             top: false,
@@ -32,59 +22,71 @@
             bottom: false,
             right: false,
           },
-          ...{[anchor]: isOpenOnStart}
-        }
-        
+          ...{ [anchor]: isOpenOnStart },
+        };
+
         const [state, setState] = useState(initialState);
 
         useEffect(() => {
-          B.defineFunction("handleDrawerOpen", e => {
+          B.defineFunction('handleDrawerOpen', e => {
             e.preventDefault();
-        
+
             setState({ ...state, [anchor]: true });
           });
         }, []);
 
         useEffect(() => {
-          B.defineFunction("handleDrawerClose", e => {
+          B.defineFunction('handleDrawerClose', e => {
             e.preventDefault();
-        
+
             setState({ ...state, [anchor]: false });
           });
         }, []);
 
-        const toggleDrawer = (anchor, open) => (event) => {
-          if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+        const toggleDrawer = (currentAnchor, open) => event => {
+          if (
+            event.type === 'keydown' &&
+            (event.key === 'Tab' || event.key === 'Shift')
+          ) {
             return;
           }
-      
-          setState({ ...state, [anchor]: open });
+
+          setState({ ...state, [currentAnchor]: open });
         };
 
         const drawerComponentWithList = (
           <div>
-            {
-              <React.Fragment key={anchor}>
-                <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
-                  <div
-                    className={clsx(classes.list, {
-                      [classes.fullList]: anchor === 'top' || anchor === 'bottom',
-                    })}
-                    role="presentation"
-                    onClick={toggleDrawer(anchor, false)}
-                    onKeyDown={toggleDrawer(anchor, false)}
-                  >
-                    {children}
-                  </div>
-                </Drawer>
-              </React.Fragment>
-            }
+            <React.Fragment key={anchor}>
+              <Drawer
+                anchor={anchor}
+                open={state[anchor]}
+                onClose={toggleDrawer(anchor, false)}
+              >
+                <div
+                  className={clsx(classes.list, {
+                    [classes.fullList]: anchor === 'top' || anchor === 'bottom',
+                  })}
+                  role="presentation"
+                  onClick={toggleDrawer(anchor, false)}
+                  onKeyDown={toggleDrawer(anchor, false)}
+                >
+                  {children}
+                </div>
+              </Drawer>
+            </React.Fragment>
           </div>
-        )
+        );
 
         return (
           <>
-            { isDev ? <div><p>Drawer</p>{isVisibleInDev && children}</div> : drawerComponentWithList}
+            {isDev ? (
+              <div>
+                <p>Drawer</p>
+                {isVisibleInDev && children}
+              </div>
+            ) : (
+              drawerComponentWithList
+            )}
           </>
         );
       })()}

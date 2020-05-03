@@ -13,8 +13,7 @@
           value: ['title'],
         },
       ],
-      descendants: [
-      ],
+      descendants: [],
     },
   ],
 }))();
