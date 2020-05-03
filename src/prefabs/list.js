@@ -6,6 +6,12 @@
     {
       name: 'List',
       options: [
+        {
+          type: 'VARIABLE',
+          label: 'Title',
+          key: 'title',
+          value: ['title'],
+        },
       ],
       descendants: [
       ],

@@ -10,16 +10,17 @@
       const isDev = env === "dev";
 
       const { List, ListSubheader } = window.MaterialUI.Core;
+      const { title } = options
 
       const list =  (
         <div className={classes.root}>
-          <List subheader={<ListSubheader>Main</ListSubheader>} component="nav" aria-label="main mailbox folders">
+          <List subheader={<ListSubheader>{title}</ListSubheader>} component="nav" aria-label="main mailbox folders">
             {children}
           </List>
         </div>
       );
 
-      return isDev ? <div>List {children}</div> : list
+      return list
     })()}
   </div>
   ),
