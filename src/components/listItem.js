@@ -9,7 +9,7 @@
 
       const { text } = options
 
-      const { env } = B
+      const { env, Link } = B
       const isDev = env === 'dev';
 
       const { Icons } = window.MaterialUI;
@@ -18,38 +18,22 @@
               ListItemText,
             } = window.MaterialUI.Core;
 
-      const { icon, size } = options;
+      const { icon, 
+              size,
+              linkType,
+              linkTo,
+              linkToExternal, 
+            } = options;
 
+      const generalProps = {
+        href: linkType === 'external' ? linkToExternal : undefined,
+        target: linkType === 'external' && "_blank",
+        component: linkType === 'internal' ? Link : !isDev && "a",
+        endpoint: linkType === 'internal' ? linkTo : undefined,
+      };
 
-      // const { Inbox: InboxIcon, 
-      //   Drafts: DraftsIcon } = window.MaterialUI.Icons;
-
-      // const ListItemLink =  props => <ListItem button component="a" {...props} />;
-
-          //   <ListItem button>
-          //     <ListItemIcon>
-          //       <InboxIcon />
-          //     </ListItemIcon>
-          //     <ListItemText primary="Inbox" />
-          //   </ListItem>
-          //   <ListItem button>
-          //     <ListItemIcon>
-          //       <DraftsIcon />
-          //     </ListItemIcon>
-          //     <ListItemText primary="Drafts" />
-          //   </ListItem>
-          // </List>
-          // <Divider />
-          // <List component="nav" aria-label="secondary mailbox folders">
-          //   <ListItem button>
-          //     <ListItemText primary="Trash" />
-          //   </ListItem>
-          //   <ListItemLink href="#simple-list">
-          //     <ListItemText primary="Spam" />
-          //   </ListItemLink>
-
-      const listItemComponent = (
-        <ListItem button key={text}>
+      const listItemComponent = props => (
+        <ListItem {...props} button key={text}>
           {icon !== 'None' && (
               <ListItemIcon>
               {React.createElement(Icons[icon], {
@@ -61,7 +45,7 @@
           <ListItemText primary={text} />
         </ListItem>)
         
-      return <div className={isDev && classes.pristine}>{ listItemComponent }</div>
+      return <div disabled={isDev} className={isDev && classes.pristine}>{ listItemComponent(generalProps) }</div>
     })()}
     </div>
   ),
