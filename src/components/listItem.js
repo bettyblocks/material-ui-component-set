@@ -61,10 +61,18 @@
           <ListItemText primary={text} />
         </ListItem>)
         
-      return <div>{isDev ? <p style={{marginLeft: '20px'}}> [{icon !== 'None' && `${icon} icon`}] {text}</p> : listItemComponent }</div>
+      return <div className={isDev && classes.pristine}>{ listItemComponent }</div>
     })()}
     </div>
   ),
   styles: B => theme => {
+    return {
+      pristine: {
+        color: '#262A3A',
+        textTransform: 'uppercase',
+        boxSizing: 'border-box',
+        border: '0.0625rem dashed #AFB5C8',
+      },
+    }
   },
 }))();
