@@ -47,7 +47,7 @@
           type: 'COLOR',
         },
         {
-          value: 'Primary',
+          value: 'White',
           label: 'Panel Color',
           key: 'panelColor',
           type: 'COLOR',
