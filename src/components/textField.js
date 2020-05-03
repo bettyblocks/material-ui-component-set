@@ -26,14 +26,20 @@
       adornmentPosition,
     } = options;
 
-    const { TextField, InputAdornment, IconButton } = window.MaterialUI.Core;
     const {
-      Icons,
-      Icons: { Visibility, VisibilityOff },
-    } = window.MaterialUI;
+      FormControl,
+      Input,
+      OutlinedInput,
+      FilledInput,
+      InputLabel,
+      FormHelperText,
+      InputAdornment,
+      IconButton,
+    } = window.MaterialUI.Core;
+    const { Icons } = window.MaterialUI;
 
-    const { getActionInput, useText } = B;
-    const isDev = B.env === 'dev';
+    const { getActionInput, useText, env } = B;
+    const isDev = env === 'dev';
     const [currentValue, setCurrentValue] = isDev
       ? useState(defaultValue.join(' '))
       : useState(useText(defaultValue));
@@ -46,7 +52,6 @@
       : useText(placeholder);
 
     const actionInput = getActionInput(actionInputId);
-    const value = currentValue;
 
     const changeHandler = event => {
       const {
@@ -64,67 +69,86 @@
       event.preventDefault();
     };
 
-    const adornmentCmp =
-      adornmentIcon && adornmentIcon !== 'none' ? (
-        <IconButton>
-          {React.createElement(Icons[adornmentIcon], { fontSize: size })}
-        </IconButton>
-      ) : (
-        adornment
-      );
-    let InputAdornmentCmp = adornmentCmp && {
-      [`${adornmentPosition}Adornment`]: (
-        <InputAdornment position={adornmentPosition}>
-          {adornmentCmp}
-        </InputAdornment>
-      ),
-    };
+    let InputCmp = Input;
+    if (variant === 'outlined') {
+      InputCmp = OutlinedInput;
+    } else if (variant === 'filled') {
+      InputCmp = FilledInput;
+    }
 
-    if (adornment && type === 'password') {
-      InputAdornmentCmp = {
-        [`${adornmentPosition}Adornment`]: (
-          <InputAdornment position={adornmentPosition}>
-            <IconButton
-              aria-label="toggle password visibility"
-              onClick={handleClickShowPassword}
-              onMouseDown={handleMouseDownPassword}
-            >
-              {showPassword ? <Visibility /> : <VisibilityOff />}
-            </IconButton>
-          </InputAdornment>
-        ),
-      };
+    const passwordIcon = showPassword ? 'Visibility' : 'VisibilityOff';
+    const inputIcon = type === 'password' ? passwordIcon : adornmentIcon;
+    const hasIcon = inputIcon && inputIcon !== 'none';
+    const hasAdornment = adornment || hasIcon;
+
+    const IconCmp =
+      hasIcon &&
+      React.createElement(Icons[inputIcon], {
+        fontSize: size,
+      });
+
+    const iconButtonOptions = {
+      edge: adornmentPosition,
+    };
+    if (type === 'password') {
+      iconButtonOptions.ariaLabel = 'toggle password visibility';
+      iconButtonOptions.onClick = handleClickShowPassword;
+      iconButtonOptions.onMouseDown = handleMouseDownPassword;
     }
 
     const TextFieldCmp = (
-      <TextField
-        name={actionInput && actionInput.name}
-        value={
-          isDev
-            ? defaultValue
-                .map(textitem => (textitem.name ? textitem.name : textitem))
-                .join(' ')
-            : value
-        }
-        size={size}
+      <FormControl
         variant={variant}
-        placeholder={placeholderText}
+        size={size}
         fullWidth={fullWidth}
-        type={(isDev && type === 'number') || showPassword ? 'text' : type}
-        onChange={changeHandler}
-        InputProps={{
-          inputProps: { name: actionInput && actionInput.name },
-          ...InputAdornmentCmp,
-        }}
         required={required}
         disabled={disabled}
-        multiline={multiline}
-        rows={rows}
-        label={label}
-        error={error}
         margin={margin}
-        helperText={helper}
-      />
+        error={error}
+      >
+        {label && <InputLabel>{label}</InputLabel>}
+        <InputCmp
+          name={actionInput && actionInput.name}
+          value={
+            isDev
+              ? defaultValue
+                  .map(textitem => (textitem.name ? textitem.name : textitem))
+                  .join(' ')
+              : currentValue
+          }
+          type={(isDev && type === 'number') || showPassword ? 'text' : type}
+          multiline={multiline}
+          rows={rows}
+          label={label}
+          placeholder={placeholderText}
+          onChange={changeHandler}
+          startAdornment={
+            hasAdornment &&
+            adornmentPosition === 'start' && (
+              <InputAdornment position={adornmentPosition}>
+                {hasIcon ? (
+                  <IconButton {...iconButtonOptions}>{IconCmp}</IconButton>
+                ) : (
+                  adornment
+                )}
+              </InputAdornment>
+            )
+          }
+          endAdornment={
+            hasAdornment &&
+            adornmentPosition === 'end' && (
+              <InputAdornment position={adornmentPosition}>
+                {hasIcon ? (
+                  <IconButton {...iconButtonOptions}>{IconCmp}</IconButton>
+                ) : (
+                  adornment
+                )}
+              </InputAdornment>
+            )
+          }
+        />
+        {helper && <FormHelperText>{helper}</FormHelperText>}
+      </FormControl>
     );
 
     return isDev ? (
