@@ -13,6 +13,12 @@
           type: 'TOGGLE',
         },
         {
+          value: true,
+          label: 'Visible in dev?',
+          key: 'isVisibleInDev',
+          type: 'TOGGLE',
+        },
+        {
           type: 'CUSTOM',
           label: 'Anchor',
           key: 'anchor',

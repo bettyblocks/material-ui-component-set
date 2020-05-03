@@ -23,7 +23,7 @@
 
         const isDev = env === 'dev';
 
-        const { anchor, isOpenOnStart } = options;
+        const { anchor, isOpenOnStart, isVisibleInDev } = options;
         
         const initialState = {
           ...{
@@ -119,7 +119,7 @@
 
         return (
           <>
-            { isDev ? <div><p>Drawer</p>{children}</div> : drawerComponentWithList}
+            { isDev ? <div><p>Drawer</p>{isVisibleInDev && children}</div> : drawerComponentWithList}
           </>
         );
       })()}
