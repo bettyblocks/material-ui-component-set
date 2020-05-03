@@ -38,10 +38,18 @@
         const [state, setState] = useState(initialState);
 
         useEffect(() => {
-          B.defineFunction("handleOpenDrawer", e => {
+          B.defineFunction("handleDrawerOpen", e => {
             e.preventDefault();
         
             setState({ ...state, [anchor]: true });
+          });
+        }, []);
+
+        useEffect(() => {
+          B.defineFunction("handleDrawerClose", e => {
+            e.preventDefault();
+        
+            setState({ ...state, [anchor]: false });
           });
         }, []);
 
