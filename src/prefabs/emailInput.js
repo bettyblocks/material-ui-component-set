@@ -13,10 +13,10 @@
           type: 'PROPERTY',
         },
         {
-          value: 'Email',
+          value: ['Email'],
           label: 'Label',
           key: 'label',
-          type: 'TEXT',
+          type: 'VARIABLE',
           configuration: {
             condition: {
               type: 'SHOW',
@@ -27,10 +27,10 @@
           },
         },
         {
-          value: '',
+          value: [],
           label: 'Label',
           key: 'propertyLabelOverride',
-          type: 'TEXT',
+          type: 'VARIABLE',
           configuration: {
             placeholder: 'Label of property',
             condition: {

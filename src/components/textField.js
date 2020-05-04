@@ -55,8 +55,11 @@
 
     const propLabel =
       property && getProperty(property) && getProperty(property).label;
+    const propLabelOverride = isDev
+      ? propertyLabelOverride.map(l => (l.name ? l.name : l)).join(' ')
+      : useText(propertyLabelOverride);
     const propertyLabelText = isDev ? '{{ property label }}' : propLabel;
-    const propertyLabel = propertyLabelOverride || propertyLabelText;
+    const propertyLabel = propLabelOverride || propertyLabelText;
     const labelText = property ? propertyLabel : label;
 
     const actionInput = getActionInput(actionInputId);
