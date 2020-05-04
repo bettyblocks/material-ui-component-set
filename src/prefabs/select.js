@@ -7,10 +7,39 @@
       name: 'Select',
       options: [
         {
+          value: '',
+          label: 'Property',
+          key: 'property',
+          type: 'PROPERTY',
+        },
+        {
           value: 'Label',
           label: 'Label',
           key: 'label',
           type: 'TEXT',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'property',
+              comparator: 'EQ',
+              value: '',
+            },
+          },
+        },
+        {
+          value: '',
+          label: 'Label',
+          key: 'propertyLabelOverride',
+          type: 'TEXT',
+          configuration: {
+            placeholder: 'Label of property',
+            condition: {
+              type: 'HIDE',
+              option: 'property',
+              comparator: 'EQ',
+              value: '',
+            },
+          },
         },
         {
           value: [],
@@ -70,7 +99,7 @@
         {
           type: 'PROPERTY',
           label: 'Property',
-          key: 'property',
+          key: 'labelProperty',
           value: '',
           configuration: {
             dependsOn: 'model',

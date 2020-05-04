@@ -7,10 +7,39 @@
       name: 'TextField',
       options: [
         {
+          value: '',
+          label: 'Property',
+          key: 'property',
+          type: 'PROPERTY',
+        },
+        {
           value: 'Password',
           label: 'Label',
           key: 'label',
           type: 'TEXT',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'property',
+              comparator: 'EQ',
+              value: '',
+            },
+          },
+        },
+        {
+          value: '',
+          label: 'Label',
+          key: 'propertyLabelOverride',
+          type: 'TEXT',
+          configuration: {
+            placeholder: 'Label of property',
+            condition: {
+              type: 'HIDE',
+              option: 'property',
+              comparator: 'EQ',
+              value: '',
+            },
+          },
         },
         {
           value: [],

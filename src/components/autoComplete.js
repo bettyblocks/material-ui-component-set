@@ -21,6 +21,10 @@
       model,
       multiple,
       freeSolo,
+      searchProperty,
+      valueProperty,
+      property,
+      propertyLabel,
     } = options;
     const isDev = B.env === 'dev';
     const { Autocomplete } = window.MaterialUI.Lab;
@@ -37,10 +41,17 @@
       ? helperText.map(h => (h.name ? h.name : h)).join(' ')
       : useText(helperText);
 
+    const propLabel =
+      property && getProperty(property) && getProperty(property).label;
+    const propertyLabelText = isDev
+      ? propertyLabel || '{{ property label }}'
+      : propertyLabel || propLabel;
+    const labelText = property ? propertyLabelText : label;
+
     const textFieldProps = {
       disabled,
       variant,
-      label,
+      label: labelText,
       fullWidth,
       size,
       type,
@@ -84,11 +95,9 @@
 
     const actionInput = getActionInput(actionInputId);
     const value = currentValue;
-    const searchProp = options.property ? getProperty(options.property) : null;
+    const searchProp = searchProperty ? getProperty(searchProperty) : null;
 
-    const valueProp = options.valueproperty
-      ? getProperty(options.valueproperty)
-      : null;
+    const valueProp = valueProperty ? getProperty(valueProperty) : null;
 
     const [searchParam, setSearchParam] = useState('');
     const [debouncedSearchParam, setDebouncedSearchParam] = useState('');
