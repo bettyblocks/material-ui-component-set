@@ -20,6 +20,19 @@
           label: 'Model',
           key: 'model',
           type: 'MODEL',
+          configuration: {
+            modal: {
+              type: 'MODEL_AND_PROPERTIES',
+              generateCustomModel: true,
+              modelRequired: true,
+            },
+          },
+        },
+        {
+          value: '',
+          label: 'Custom Model',
+          key: 'customModel',
+          type: 'CUSTOM_MODEL',
         },
         {
           value: {},
