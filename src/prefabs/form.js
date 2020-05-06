@@ -24,7 +24,7 @@
             modal: {
               type: 'MODEL_AND_PROPERTIES',
               generateCustomModel: true,
-              modelRequired: true,
+              modelRequired: false,
             },
           },
         },
