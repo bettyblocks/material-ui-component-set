@@ -21,12 +21,28 @@
       model,
       multiple,
       freeSolo,
+      searchProperty,
+      valueProperty,
+      property,
+      propertyLabelOverride,
+      closeOnSelect,
+      renderCheckboxes,
     } = options;
-    const isDev = B.env === 'dev';
     const { Autocomplete } = window.MaterialUI.Lab;
-    const { TextField, CircularProgress, Chip } = window.MaterialUI.Core;
-    const { ExpandMore, Close } = window.MaterialUI.Icons;
-    const { useText, getProperty, getActionInput, GetAll } = B;
+    const {
+      TextField,
+      CircularProgress,
+      Chip,
+      Checkbox,
+    } = window.MaterialUI.Core;
+    const {
+      ExpandMore,
+      Close,
+      CheckBox,
+      CheckBoxOutlineBlank,
+    } = window.MaterialUI.Icons;
+    const { useText, getProperty, getActionInput, GetAll, env } = B;
+    const isDev = env === 'dev';
     const [currentValue, setCurrentValue] = isDev
       ? useState(defaultValue.join(' '))
       : useState(useText(defaultValue));
@@ -37,10 +53,19 @@
       ? helperText.map(h => (h.name ? h.name : h)).join(' ')
       : useText(helperText);
 
+    const propLabel =
+      property && getProperty(property) && getProperty(property).label;
+    const propLabelOverride = isDev
+      ? propertyLabelOverride.map(l => (l.name ? l.name : l)).join(' ')
+      : useText(propertyLabelOverride);
+    const propertyLabelText = isDev ? '{{ property label }}' : propLabel;
+    const propertyLabel = propLabelOverride || propertyLabelText;
+    const labelText = property ? propertyLabel : label;
+
     const textFieldProps = {
       disabled,
       variant,
-      label,
+      label: labelText,
       fullWidth,
       size,
       type,
@@ -84,11 +109,9 @@
 
     const actionInput = getActionInput(actionInputId);
     const value = currentValue;
-    const searchProp = options.property ? getProperty(options.property) : null;
+    const searchProp = searchProperty ? getProperty(searchProperty) : null;
 
-    const valueProp = options.valueproperty
-      ? getProperty(options.valueproperty)
-      : null;
+    const valueProp = valueProperty ? getProperty(valueProperty) : null;
 
     const [searchParam, setSearchParam] = useState('');
     const [debouncedSearchParam, setDebouncedSearchParam] = useState('');
@@ -174,15 +197,28 @@
             );
           }
 
+          const renderLabel = option =>
+            option[searchProp.name] && option[searchProp.name].toString();
+
+          const renderOption = (option, { selected }) => (
+            <>
+              <Checkbox
+                icon={<CheckBoxOutlineBlank fontSize="small" />}
+                checkedIcon={<CheckBox fontSize="small" />}
+                style={{ marginRight: 8 }}
+                checked={selected}
+              />
+              {renderLabel(option)}
+            </>
+          );
+
           return (
             <Autocomplete
               multiple={multiple}
               freeSolo={freeSolo}
               options={data.results}
               defaultValue={getDefaultValue(data.results)}
-              getOptionLabel={option =>
-                option[searchProp.name] && option[searchProp.name].toString()
-              }
+              getOptionLabel={renderLabel}
               onInputChange={(_, inputValue) => {
                 if (!freeSolo) {
                   return;
@@ -190,6 +226,8 @@
                 setSearchParam(inputValue);
               }}
               onChange={onChange}
+              disableCloseOnSelect={!closeOnSelect}
+              renderOption={renderCheckboxes && renderOption}
               renderInput={params => (
                 <>
                   <input

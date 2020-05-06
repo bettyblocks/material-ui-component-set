@@ -48,15 +48,16 @@
       },
       empty: {
         position: 'relative',
-        width: '100%',
+        width: ({ options: { width } }) => width || '100%',
+        height: ({ options: { height } }) => height || 'inherit',
         backgroundColor: '#F0F1F5',
         border: '0.0625rem dashed #AFB5C8',
-        paddingBottom: ({ options: { imgUrl } }) =>
-          !B.Text({ value: imgUrl }) && '62.5%',
+        paddingBottom: ({ options: { height } }) =>
+          (!height || height === '100%') && '62.5%',
       },
       media: {
-        width: '100%',
-        height: 'auto',
+        width: ({ options: { width } }) => width || 'auto',
+        height: ({ options: { height } }) => height || 'auto',
       },
       placeholderWrapper: {
         position: 'absolute',
