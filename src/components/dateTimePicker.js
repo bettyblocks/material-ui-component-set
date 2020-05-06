@@ -24,6 +24,8 @@
       helperText,
       actionInputId,
       disableToolbar,
+      property,
+      propertyLabelOverride,
     } = options;
 
     const {
@@ -33,17 +35,27 @@
       KeyboardDateTimePicker,
     } = window.MaterialUI.Pickers;
     const { DateFnsUtils } = window.MaterialUI;
-    const { getActionInput, useText } = B;
-    const isDev = B.env === 'dev';
+    const { getActionInput, useText, getProperty, env } = B;
+    const isDev = env === 'dev';
     const actionInput = getActionInput(actionInputId);
     const strDefaultValue = defaultValue.join(' ');
     const [selectedDate, setSelectedDate] = isDev
       ? useState(strDefaultValue)
       : useState(useText(defaultValue));
-    const helper = isDev ? helperText.join(' ') : useText(helperText);
+    const helper = isDev
+      ? helperText.map(h => (h.name ? h.name : h)).join(' ')
+      : useText(helperText);
     const placeholderText = isDev
       ? placeholder.join(' ')
       : useText(placeholder);
+    const propLabel =
+      property && getProperty(property) && getProperty(property).label;
+    const propLabelOverride = isDev
+      ? propertyLabelOverride.map(l => (l.name ? l.name : l)).join(' ')
+      : useText(propertyLabelOverride);
+    const propertyLabelText = isDev ? '{{ property label }}' : propLabel;
+    const propertyLabel = propLabelOverride || propertyLabelText;
+    const labelText = property ? propertyLabel : label;
 
     const isValidDate = date => date instanceof Date && !isNaN(date);
 
@@ -92,35 +104,39 @@
     }
 
     const DateTimeCmp = (
-      <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <DateTimeComponent
-          name={actionInput && actionInput.name}
-          value={isDev ? devValue : prodValue}
-          size={size}
-          variant={variant}
-          placeholder={placeholderText}
-          fullWidth={fullWidth}
-          onChange={changeHandler}
-          inputVariant={inputvariant}
-          inputProps={{
-            name: actionInput && actionInput.name,
-          }}
-          required={required}
-          disabled={disabled}
-          label={label}
-          error={error}
-          margin={margin}
-          helperText={helper}
-          disableToolbar={disableToolbar}
-          format={format}
-        />
-      </MuiPickersUtilsProvider>
+      <DateTimeComponent
+        name={actionInput && actionInput.name}
+        value={isDev ? devValue : prodValue}
+        size={size}
+        variant={variant}
+        placeholder={placeholderText}
+        fullWidth={fullWidth}
+        onChange={changeHandler}
+        inputVariant={inputvariant}
+        inputProps={{
+          name: actionInput && actionInput.name,
+        }}
+        required={required}
+        disabled={disabled}
+        label={labelText}
+        error={error}
+        margin={margin}
+        helperText={helper}
+        disableToolbar={disableToolbar}
+        format={format}
+      />
     );
 
     return isDev ? (
-      <div className={classes.root}>{DateTimeCmp}</div>
+      <div className={classes.root}>
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          {DateTimeCmp}
+        </MuiPickersUtilsProvider>
+      </div>
     ) : (
-      DateTimeCmp
+      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        {DateTimeCmp}
+      </MuiPickersUtilsProvider>
     );
   })(),
   styles: () => () => ({

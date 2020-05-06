@@ -1,116 +1,92 @@
 (() => ({
-  name: 'Tabs',
-  icon: 'TabsIcon',
+  name: 'List',
+  icon: 'OrderedListIcon',
   category: 'CONTENT',
   structure: [
     {
-      name: 'Tabs',
+      name: 'List',
       options: [
         {
-          label: 'Selected tab index',
-          key: 'defaultValue',
-          value: '1',
-          type: 'NUMBER',
+          value: '',
+          label: 'Model',
+          key: 'model',
+          type: 'MODEL',
         },
         {
-          label: 'Orientation',
-          key: 'orientation',
-          value: 'horizontal',
-          type: 'CUSTOM',
+          value: {},
+          label: 'Filter',
+          key: 'filter',
+          type: 'FILTER',
           configuration: {
-            as: 'BUTTONGROUP',
-            dataType: 'string',
-            allowedInput: [
-              { name: 'Horizontal', value: 'horizontal' },
-              { name: 'Vertical', value: 'vertical' },
-            ],
+            dependsOn: 'model',
           },
         },
         {
-          label: 'Variant',
-          key: 'variant',
-          value: 'standard',
-          type: 'CUSTOM',
-          configuration: {
-            as: 'BUTTONGROUP',
-            dataType: 'string',
-            allowedInput: [
-              { name: 'Standard', value: 'standard' },
-              { name: 'Scrollable', value: 'scrollable' },
-              { name: 'Full width', value: 'fullWidth' },
-            ],
-            condition: {
-              type: 'SHOW',
-              option: 'orientation',
-              comparator: 'EQ',
-              value: 'horizontal',
-            },
-          },
-        },
-        {
-          label: 'Scrollbuttons',
-          key: 'scrollButtons',
-          value: 'auto',
-          type: 'CUSTOM',
-          configuration: {
-            as: 'BUTTONGROUP',
-            dataType: 'string',
-            allowedInput: [
-              { name: 'Auto', value: 'auto' },
-              { name: 'Desktop', value: 'desktop' },
-              { name: 'Always', value: 'on' },
-              { name: 'Never', value: 'off' },
-            ],
-            condition: {
-              type: 'SHOW',
-              option: 'variant',
-              comparator: 'EQ',
-              value: 'scrollable',
-            },
-          },
-        },
-        {
-          type: 'TOGGLE',
-          label: 'Centered',
-          key: 'centered',
-          value: false,
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'orientation',
-              comparator: 'EQ',
-              value: 'horizontal',
-            },
-          },
-        },
-        {
-          label: 'Bar color',
-          key: 'appBarColor',
-          value: 'Primary',
           type: 'COLOR',
-        },
-        {
-          label: 'Text color',
-          key: 'textColor',
-          value: 'White',
-          type: 'COLOR',
-        },
-        {
-          label: 'Indicator color',
-          key: 'indicatorColor',
-          value: 'Success',
-          type: 'COLOR',
+          label: 'Background color',
+          key: 'backgroundColor',
+          value: 'Transparent',
         },
       ],
       descendants: [
         {
-          name: 'Tab',
+          name: 'ListItem',
           options: [
             {
-              label: 'Tab label',
-              key: 'label',
-              value: 'TAB',
-              type: 'TEXT',
+              type: 'VARIABLE',
+              label: 'Primary text',
+              key: 'primaryText',
+              value: ['Title'],
+            },
+            {
+              type: 'VARIABLE',
+              label: 'Secondary text',
+              key: 'secondaryText',
+              value: ['Secondary text'],
+            },
+            {
+              type: 'COLOR',
+              label: 'Background color',
+              key: 'backgroundColor',
+              value: 'Transparent',
+            },
+            {
+              type: 'COLOR',
+              label: 'Title color',
+              key: 'titleColor',
+              value: 'Black',
+            },
+            {
+              type: 'COLOR',
+              label: 'Icon color',
+              key: 'iconColor',
+              value: 'Black',
+            },
+            {
+              type: 'COLOR',
+              label: 'Subtitle color',
+              key: 'subtitleColor',
+              value: 'Secondary',
+            },
+            {
+              value: '',
+              label: 'Page',
+              key: 'linkTo',
+              type: 'ENDPOINT',
+            },
+            {
+              type: 'CUSTOM',
+              label: 'Align items',
+              key: 'alignItems',
+              value: 'center',
+              configuration: {
+                as: 'BUTTONGROUP',
+                dataType: 'string',
+                allowedInput: [
+                  { name: 'Start', value: 'flex-start' },
+                  { name: 'Center', value: 'center' },
+                ],
+              },
             },
             {
               label: 'Icon',
@@ -122,7 +98,7 @@
                 dataType: 'string',
                 allowedInput: [
                   {
-                    name: '',
+                    name: 'None',
                     value: 'None',
                   },
                   {
@@ -696,6 +672,10 @@
                   {
                     name: 'FavoriteBorder',
                     value: 'FavoriteBorder',
+                  },
+                  {
+                    name: 'FileCopy',
+                    value: 'FileCopy',
                   },
                   {
                     name: 'FilterList',
@@ -1377,6 +1357,20 @@
               },
             },
             {
+              value: false,
+              label: 'Show icon as avatar',
+              key: 'avatar',
+              type: 'TOGGLE',
+              configuration: {
+                condition: {
+                  type: 'HIDE',
+                  option: 'icon',
+                  comparator: 'EQ',
+                  value: 'None',
+                },
+              },
+            },
+            {
               type: 'TOGGLE',
               label: 'Disabled',
               key: 'disabled',
@@ -1384,8 +1378,20 @@
             },
             {
               type: 'TOGGLE',
-              label: 'Disable ripple',
-              key: 'disableRipple',
+              label: 'Disable gutters',
+              key: 'disableGutters',
+              value: false,
+            },
+            {
+              type: 'TOGGLE',
+              label: 'Divider',
+              key: 'divider',
+              value: false,
+            },
+            {
+              type: 'TOGGLE',
+              label: 'Selected',
+              key: 'selected',
               value: false,
             },
           ],

@@ -1,16 +1,66 @@
 (() => ({
-  name: 'Tab',
-  icon: 'TabIcon',
+  name: 'ListItem',
+  icon: 'ListItemIcon',
   category: 'CONTENT',
   structure: [
     {
-      name: 'Tab',
+      name: 'ListItem',
       options: [
         {
-          label: 'Tab label',
-          key: 'label',
-          value: 'TAB',
-          type: 'TEXT',
+          type: 'VARIABLE',
+          label: 'Primary text',
+          key: 'primaryText',
+          value: ['Title'],
+        },
+        {
+          type: 'VARIABLE',
+          label: 'Secondary text',
+          key: 'secondaryText',
+          value: [''],
+        },
+        {
+          type: 'COLOR',
+          label: 'Background color',
+          key: 'backgroundColor',
+          value: 'Transparent',
+        },
+        {
+          type: 'COLOR',
+          label: 'Title color',
+          key: 'titleColor',
+          value: 'Black',
+        },
+        {
+          type: 'COLOR',
+          label: 'Icon color',
+          key: 'iconColor',
+          value: 'Black',
+        },
+        {
+          type: 'COLOR',
+          label: 'Subtitle color',
+          key: 'subtitleColor',
+          value: 'Secondary',
+        },
+        {
+          type: 'ENDPOINT',
+          label: 'Page',
+          key: 'linkTo',
+          value: '',
+        },
+        {
+          type: 'CUSTOM',
+          label: 'Align items',
+          key: 'alignItems',
+          value: 'center',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Start', value: 'flex-start' },
+              { name: 'Center', value: 'center' },
+            ],
+          },
         },
         {
           label: 'Icon',
@@ -22,7 +72,7 @@
             dataType: 'string',
             allowedInput: [
               {
-                name: '',
+                name: 'None',
                 value: 'None',
               },
               {
@@ -596,6 +646,10 @@
               {
                 name: 'FavoriteBorder',
                 value: 'FavoriteBorder',
+              },
+              {
+                name: 'FileCopy',
+                value: 'FileCopy',
               },
               {
                 name: 'FilterList',
@@ -1277,6 +1331,20 @@
           },
         },
         {
+          value: false,
+          label: 'Show icon as avatar',
+          key: 'avatar',
+          type: 'TOGGLE',
+          configuration: {
+            condition: {
+              type: 'HIDE',
+              option: 'icon',
+              comparator: 'EQ',
+              value: 'None',
+            },
+          },
+        },
+        {
           type: 'TOGGLE',
           label: 'Disabled',
           key: 'disabled',
@@ -1284,8 +1352,20 @@
         },
         {
           type: 'TOGGLE',
-          label: 'Disable ripple',
-          key: 'disableRipple',
+          label: 'Disable gutters',
+          key: 'disableGutters',
+          value: false,
+        },
+        {
+          type: 'TOGGLE',
+          label: 'Divider',
+          key: 'divider',
+          value: false,
+        },
+        {
+          type: 'TOGGLE',
+          label: 'Selected',
+          key: 'selected',
           value: false,
         },
       ],

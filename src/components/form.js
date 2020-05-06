@@ -73,6 +73,8 @@
 
                         const item = modelData.results[0];
 
+                        if (!item) return children;
+
                         return (
                           <>
                             <B.GetOneProvider key={item.id} value={item}>

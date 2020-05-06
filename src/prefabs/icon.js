@@ -1,30 +1,20 @@
 (() => ({
-  name: 'Tab',
-  icon: 'TabIcon',
+  name: 'Icon',
+  icon: 'IconIcon',
   category: 'CONTENT',
   structure: [
     {
-      name: 'Tab',
+      name: 'Icon',
       options: [
-        {
-          label: 'Tab label',
-          key: 'label',
-          value: 'TAB',
-          type: 'TEXT',
-        },
         {
           label: 'Icon',
           key: 'icon',
-          value: 'None',
+          value: 'FileCopy',
           type: 'CUSTOM',
           configuration: {
             as: 'DROPDOWN',
             dataType: 'string',
             allowedInput: [
-              {
-                name: '',
-                value: 'None',
-              },
               {
                 name: 'AcUnit',
                 value: 'AcUnit',
@@ -596,6 +586,10 @@
               {
                 name: 'FavoriteBorder',
                 value: 'FavoriteBorder',
+              },
+              {
+                name: 'FileCopy',
+                value: 'FileCopy',
               },
               {
                 name: 'FilterList',
@@ -1277,16 +1271,10 @@
           },
         },
         {
-          type: 'TOGGLE',
-          label: 'Disabled',
-          key: 'disabled',
-          value: false,
-        },
-        {
-          type: 'TOGGLE',
-          label: 'Disable ripple',
-          key: 'disableRipple',
-          value: false,
+          value: 'Body1',
+          label: 'Type',
+          key: 'type',
+          type: 'FONT',
         },
       ],
       descendants: [],
