@@ -4,28 +4,30 @@
   type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'VERTICAL',
-  jsx: (
-    <figure
-      className={[classes.figure, !options.imgUrl ? classes.empty : ''].join(
-        ' ',
-      )}
-    >
-      {options.imgUrl ? (
-        <img
-          className={classes.image}
-          src={options.imgUrl}
-          alt={options.imgAlt ? options.imgAlt : ' '}
-        />
-      ) : (
-        <div className={classes.placeholderWrapper}>
-          <svg className={classes.placeholder} viewBox="0 0 86 48">
-            <rect x="19.5" y="8.5" rx="2" />
-            <path d="M61.1349945 29.020979v3.9160839H25v-2.5379375l6.5998225-4.9892478 5.6729048 4.2829541 13.346858-11.2981564L61.1349945 29.020979zm-22.5-10.270979c0 1.0416667-.3645833 1.9270833-1.09375 2.65625S35.9266612 22.5 34.8849945 22.5s-1.9270833-.3645833-2.65625-1.09375-1.09375-1.6145833-1.09375-2.65625.3645833-1.9270833 1.09375-2.65625S33.8433278 15 34.8849945 15s1.9270833.3645833 2.65625 1.09375 1.09375 1.6145833 1.09375 2.65625z" />
-          </svg>
-        </div>
-      )}
-    </figure>
-  ),
+  jsx: (() => {
+    const imgUrl = B.Text({ value: options.imgUrl });
+
+    return (
+      <figure
+        className={[classes.figure, !imgUrl ? classes.empty : ''].join(' ')}
+      >
+        {imgUrl ? (
+          <img
+            className={classes.media}
+            src={imgUrl}
+            alt={B.Text({ value: options.imgAlt })}
+          />
+        ) : (
+          <div className={classes.placeholderWrapper}>
+            <svg className={classes.placeholder} viewBox="0 0 86 48">
+              <rect x="19.5" y="8.5" rx="2" />
+              <path d="M61.1349945 29.020979v3.9160839H25v-2.5379375l6.5998225-4.9892478 5.6729048 4.2829541 13.346858-11.2981564L61.1349945 29.020979zm-22.5-10.270979c0 1.0416667-.3645833 1.9270833-1.09375 2.65625S35.9266612 22.5 34.8849945 22.5s-1.9270833-.3645833-2.65625-1.09375-1.09375-1.6145833-1.09375-2.65625.3645833-1.9270833 1.09375-2.65625S33.8433278 15 34.8849945 15s1.9270833.3645833 2.65625 1.09375 1.09375 1.6145833 1.09375 2.65625z" />
+            </svg>
+          </div>
+        )}
+      </figure>
+    );
+  })(),
   styles: B => t => {
     const style = new B.Styling(t);
     const getSpacing = (idx, device = 'Mobile') =>
@@ -46,16 +48,15 @@
       },
       empty: {
         position: 'relative',
-        width: ({ options: { width } }) => width || '100%',
-        height: ({ options: { height } }) => height || 'inherit',
+        width: '100%',
         backgroundColor: '#F0F1F5',
         border: '0.0625rem dashed #AFB5C8',
-        paddingBottom: ({ options: { height } }) =>
-          (!height || height === '100%') && '62.5%',
+        paddingBottom: ({ options: { imgUrl } }) =>
+          !B.Text({ value: imgUrl }) && '62.5%',
       },
-      image: {
-        width: ({ options: { width } }) => width || 'auto',
-        height: ({ options: { height } }) => height || 'auto',
+      media: {
+        width: '100%',
+        height: 'auto',
       },
       placeholderWrapper: {
         position: 'absolute',

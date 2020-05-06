@@ -60,8 +60,8 @@
         {
           label: 'Logo',
           key: 'logo',
-          value: '',
-          type: 'TEXT',
+          value: [],
+          type: 'VARIABLE',
         },
         {
           label: 'Align items',

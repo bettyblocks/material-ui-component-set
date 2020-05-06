@@ -4,18 +4,19 @@
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { env, useText } = B;
+    const { env, Text } = B;
     const { CardMedia } = window.MaterialUI.Core;
     const isDev = env === 'dev';
     const { type, imageSource, videoSource, iframeSource, title } = options;
 
-    const titleText = isDev
-      ? title.map(t => (t.name ? t.name : t)).join(' ')
-      : useText(title);
+    const titleText = Text(title);
+    const imgUrl = Text({ value: imageSource });
+    const videoUrl = Text({ value: videoSource });
+    const iframeUrl = Text({ value: iframeSource });
 
-    const isImage = type === 'img' && imageSource !== '';
-    const isVideo = type === 'video' && videoSource !== '';
-    const isIframe = type === 'iframe' && iframeSource !== '';
+    const isImage = type === 'img' && imgUrl;
+    const isVideo = type === 'video' && videoUrl;
+    const isIframe = type === 'iframe' && iframeUrl;
     const isEmpty = !titleText && !isImage && !isVideo && !isIframe;
 
     let MediaComponent = () => (
@@ -33,7 +34,7 @@
       MediaComponent = () => (
         <img
           className={classes.media}
-          src={imageSource}
+          src={imgUrl}
           title={titleText}
           alt={titleText}
         />
@@ -43,18 +44,14 @@
         // eslint-disable-next-line jsx-a11y/media-has-caption
         <video
           className={classes.media}
-          src={videoSource}
+          src={videoUrl}
           title={titleText}
           controls
         />
       );
     } else if (isIframe) {
       MediaComponent = () => (
-        <iframe
-          className={classes.media}
-          title={titleText}
-          src={iframeSource}
-        />
+        <iframe className={classes.media} title={titleText} src={iframeUrl} />
       );
     }
 
