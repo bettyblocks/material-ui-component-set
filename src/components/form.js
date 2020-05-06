@@ -73,14 +73,14 @@
 
                         const item = modelData.results[0];
 
-                        return item ? (
+                        if (!item) return children;
+
+                        return (
                           <>
                             <B.GetOneProvider key={item.id} value={item}>
                               {children}
                             </B.GetOneProvider>
                           </>
-                        ) : (
-                          children
                         );
                       }}
                     </B.GetAll>
