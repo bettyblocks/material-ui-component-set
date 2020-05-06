@@ -30,6 +30,7 @@
     "useReducer": "readonly",
     "useRef": "readonly",
     "useRouter": "readonly",
-    "useState": "readonly"
+    "useState": "readonly",
+    "useHistory": "readonly"
   }
 }
