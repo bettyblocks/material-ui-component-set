@@ -9,7 +9,7 @@
     const isDev = env === 'dev';
     const { type, imageSource, videoSource, iframeSource, title } = options;
 
-    const titleText = Text(title);
+    const titleText = Text({ value: title });
     const imgUrl = Text({ value: imageSource });
     const videoUrl = Text({ value: videoSource });
     const iframeUrl = Text({ value: iframeSource });

@@ -5,7 +5,8 @@
   allowedTypes: [],
   orientation: 'VERTICAL',
   jsx: (() => {
-    const imgUrl = B.Text({ value: options.imgUrl });
+    const { Text } = B;
+    const imgUrl = Text({ value: options.imgUrl });
 
     return (
       <figure
@@ -15,7 +16,7 @@
           <img
             className={classes.media}
             src={imgUrl}
-            alt={B.Text({ value: options.imgAlt })}
+            alt={Text({ value: options.imgAlt })}
           />
         ) : (
           <div className={classes.placeholderWrapper}>

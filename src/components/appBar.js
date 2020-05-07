@@ -36,12 +36,12 @@
     };
 
     const logo = Text({ value: logoLink });
-    const logoCmp = logo && <img src={logo} width="100" alt="" />;
+    const LogoCmp = logo && <img src={logo} width="100" alt="" />;
     const LogoComponent = endpoint.id ? (
       // eslint-disable-next-line jsx-a11y/anchor-is-valid
-      <Link endpoint={endpoint}>{logoCmp}</Link>
+      <Link endpoint={endpoint}>{LogoCmp}</Link>
     ) : (
-      logoCmp
+      LogoCmp
     );
 
     const AppBarComponent = (
