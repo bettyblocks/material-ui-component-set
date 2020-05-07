@@ -73,10 +73,10 @@
               type: 'PROPERTY',
             },
             {
-              value: 'label',
+              value: ['Label'],
               label: 'Label',
               key: 'label',
-              type: 'TEXT',
+              type: 'VARIABLE',
               configuration: {
                 condition: {
                   type: 'SHOW',
@@ -87,10 +87,10 @@
               },
             },
             {
-              value: '',
+              value: [],
               label: 'Label',
               key: 'propertyLabelOverride',
-              type: 'TEXT',
+              type: 'VARIABLE',
               configuration: {
                 placeholder: 'Label of property',
                 condition: {
