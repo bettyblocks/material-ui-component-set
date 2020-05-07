@@ -1,10 +1,10 @@
 (() => ({
-  name: 'Modal',
+  name: 'Dialog',
   icon: 'PanelIcon',
   category: 'LAYOUT',
   structure: [
     {
-      name: 'Modal',
+      name: 'Dialog',
       options: [
         {
           value: true,

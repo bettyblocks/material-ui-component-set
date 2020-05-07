@@ -1,5 +1,5 @@
 (() => ({
-  name: 'Modal',
+  name: 'Dialog',
   type: 'CONTAINER_COMPONENT',
   allowedTypes: ['BODY_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
@@ -7,7 +7,7 @@
     <div className={B.env === 'dev' ? classes.panel : ''}>
       {(() => {
         const { env } = B;
-        const { Modal } = window.MaterialUI.Core;
+        const { Dialog } = window.MaterialUI.Core;
 
         const isEmpty = children.length === 0;
         const isDev = env === 'dev';
@@ -16,13 +16,13 @@
         const [open, setOpen] = React.useState(false);
 
         useEffect(() => {
-          B.defineFunction('handleOpenModal', e => {
+          B.defineFunction('handleDialogOpen', e => {
             e.preventDefault();
 
             setOpen(true);
           });
 
-          B.defineFunction('handleCloseModal', e => {
+          B.defineFunction('handleDialogClose', e => {
             e.preventDefault();
 
             setOpen(false);
@@ -45,14 +45,12 @@
               ''
             )}
 
-            <Modal
+            <Dialog
               open={open}
               onClose={() => setOpen(false)}
-              aria-labelledby="simple-modal-title"
-              aria-describedby="simple-modal-description"
             >
-              <div className={classes.modal}>{children}</div>
-            </Modal>
+              <div className={classes.dialog}>{children}</div>
+            </Dialog>
           </div>
         );
       })()}
@@ -63,7 +61,7 @@
     const getSpacing = (idx, device = 'Mobile') =>
       idx === '0' ? '0rem' : style.getSpacing(idx, device);
     return {
-      modal: {
+      dialog: {
         background: 'white',
         width: '50%',
         margin: '0 auto',
