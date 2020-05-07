@@ -4,33 +4,37 @@
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { env, Text } = B;
+    const { env, useText } = B;
     const { CardMedia } = window.MaterialUI.Core;
     const isDev = env === 'dev';
     const { type, imageSource, videoSource, iframeSource, title } = options;
 
-    const titleText = Text({ value: title });
-    const imgUrl = Text({ value: imageSource });
-    const videoUrl = Text({ value: videoSource });
-    const iframeUrl = Text({ value: iframeSource });
+    const titleText = useText(title);
+    const imgUrl = useText(imageSource);
+    const videoUrl = useText(videoSource);
+    const iframeUrl = useText(iframeSource);
 
     const isImage = type === 'img' && imgUrl;
     const isVideo = type === 'video' && videoUrl;
     const isIframe = type === 'iframe' && iframeUrl;
     const isEmpty = !titleText && !isImage && !isVideo && !isIframe;
 
+    const variable = imageSource && imageSource.findIndex(v => v.name) !== -1;
+    const variableDev = env === 'dev' && (variable || !imgUrl);
+
     let MediaComponent = () => (
-      <div className={isEmpty && classes.empty}>
+      <div className={(isEmpty || variableDev) && classes.empty}>
         <div className={classes.placeholderWrapper}>
           <svg className={classes.placeholder} viewBox="0 0 86 48">
             <title>{titleText}</title>
             <rect x="19.5" y="8.5" rx="2" />
             <path d="M61.1349945 29.020979v3.9160839H25v-2.5379375l6.5998225-4.9892478 5.6729048 4.2829541 13.346858-11.2981564L61.1349945 29.020979zm-22.5-10.270979c0 1.0416667-.3645833 1.9270833-1.09375 2.65625S35.9266612 22.5 34.8849945 22.5s-1.9270833-.3645833-2.65625-1.09375-1.09375-1.6145833-1.09375-2.65625.3645833-1.9270833 1.09375-2.65625S33.8433278 15 34.8849945 15s1.9270833.3645833 2.65625 1.09375 1.09375 1.6145833 1.09375 2.65625z" />
           </svg>
+          {variable && <span>{imgUrl}</span>}
         </div>
       </div>
     );
-    if (isImage) {
+    if (isImage && !variableDev) {
       MediaComponent = () => (
         <img
           className={classes.media}
@@ -81,8 +85,12 @@
     },
     placeholderWrapper: {
       display: 'flex',
+      flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
+      fontSize: '0.75rem',
+      color: '#262A3A',
+      textTransform: 'uppercase',
     },
     placeholder: {
       maxHeight: '100%',
