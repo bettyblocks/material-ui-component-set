@@ -40,7 +40,9 @@
     const [selectedDate, setSelectedDate] = isDev
       ? useState(strDefaultValue)
       : useState(useText(defaultValue));
-    const helper = isDev ? helperText.join(' ') : useText(helperText);
+    const helper = isDev
+      ? helperText.map(h => (h.name ? h.name : h)).join(' ')
+      : useText(helperText);
     const placeholderText = isDev
       ? placeholder.join(' ')
       : useText(placeholder);
@@ -92,35 +94,39 @@
     }
 
     const DateTimeCmp = (
-      <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <DateTimeComponent
-          name={actionInput && actionInput.name}
-          value={isDev ? devValue : prodValue}
-          size={size}
-          variant={variant}
-          placeholder={placeholderText}
-          fullWidth={fullWidth}
-          onChange={changeHandler}
-          inputVariant={inputvariant}
-          inputProps={{
-            name: actionInput && actionInput.name,
-          }}
-          required={required}
-          disabled={disabled}
-          label={label}
-          error={error}
-          margin={margin}
-          helperText={helper}
-          disableToolbar={disableToolbar}
-          format={format}
-        />
-      </MuiPickersUtilsProvider>
+      <DateTimeComponent
+        name={actionInput && actionInput.name}
+        value={isDev ? devValue : prodValue}
+        size={size}
+        variant={variant}
+        placeholder={placeholderText}
+        fullWidth={fullWidth}
+        onChange={changeHandler}
+        inputVariant={inputvariant}
+        inputProps={{
+          name: actionInput && actionInput.name,
+        }}
+        required={required}
+        disabled={disabled}
+        label={label}
+        error={error}
+        margin={margin}
+        helperText={helper}
+        disableToolbar={disableToolbar}
+        format={format}
+      />
     );
 
     return isDev ? (
-      <div className={classes.root}>{DateTimeCmp}</div>
+      <div className={classes.root}>
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          {DateTimeCmp}
+        </MuiPickersUtilsProvider>
+      </div>
     ) : (
-      DateTimeCmp
+      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        {DateTimeCmp}
+      </MuiPickersUtilsProvider>
     );
   })(),
   styles: () => () => ({
