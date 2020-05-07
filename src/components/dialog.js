@@ -21,7 +21,7 @@
       : '';
 
     const [open, setOpen] = React.useState(false);
-    const devContent = isContentVisible ? children : 'Dialog';
+    const devContent = isContentVisible && !isEmpty ? children : 'Dialog';
 
     useEffect(() => {
       B.defineFunction('handleDialogOpen', e => {
