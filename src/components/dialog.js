@@ -3,92 +3,60 @@
   type: 'CONTAINER_COMPONENT',
   allowedTypes: ['BODY_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
-  jsx: (
-    <div className={B.env === 'dev' ? classes.panel : ''}>
-      {(() => {
-        const { env } = B;
-        const { Dialog } = window.MaterialUI.Core;
+  jsx: (() => {
+    const { env } = B;
+    const { Dialog } = window.MaterialUI.Core;
 
-        const isEmpty = children.length === 0;
-        const isDev = env === 'dev';
-        const isPristine = isEmpty && isDev;
+    const isEmpty = children.length === 0;
+    const isDev = env === 'dev';
+    const isPristine = isDev && isEmpty;
+    const isContentVisible = isDev && options.isVisibleInDev;
 
-        const [open, setOpen] = React.useState(false);
+    const classNames = isContentVisible
+      ? [
+          classes.content,
+          isEmpty ? classes.empty : '',
+          isPristine ? classes.pristine : '',
+        ].join(' ')
+      : '';
 
-        useEffect(() => {
-          B.defineFunction('handleDialogOpen', e => {
-            e.preventDefault();
+    const [open, setOpen] = React.useState(false);
+    const devContent = isContentVisible ? children : 'Dialog';
 
-            setOpen(true);
-          });
+    useEffect(() => {
+      B.defineFunction('handleDialogOpen', e => {
+        e.preventDefault();
 
-          B.defineFunction('handleDialogClose', e => {
-            e.preventDefault();
+        setOpen(true);
+      });
 
-            setOpen(false);
-          });
-        }, []);
+      B.defineFunction('handleDialogClose', e => {
+        e.preventDefault();
 
-        return (
-          <div>
-            {isDev && options.isVisibleInDev ? (
-              <div
-                className={[
-                  classes.content,
-                  isEmpty ? classes.empty : '',
-                  isPristine ? classes.pristine : '',
-                ].join(' ')}
-              >
-                {isPristine ? 'Panel' : children}
-              </div>
-            ) : (
-              ''
-            )}
+        setOpen(false);
+      });
+    }, []);
 
-            <Dialog
-              open={open}
-              onClose={() => setOpen(false)}
-            >
-              <div className={classes.dialog}>{children}</div>
-            </Dialog>
-          </div>
-        );
-      })()}
-    </div>
-  ),
+    return (
+      <div className={classNames}>
+        {isDev ? devContent : ''}
+
+        <Dialog open={open} onClose={() => setOpen(false)}>
+          <div className={classes.dialog}>{children}</div>
+        </Dialog>
+      </div>
+    );
+  })(),
   styles: B => theme => {
     const style = new B.Styling(theme);
     const getSpacing = (idx, device = 'Mobile') =>
       idx === '0' ? '0rem' : style.getSpacing(idx, device);
     return {
       dialog: {
-        background: 'white',
-        width: '50%',
+        backgroundColor: 'white',
         margin: '0 auto',
-        padding: '20px',
+        padding: '1.5rem',
         overflowWrap: 'break-word',
-      },
-      panel: {
-        display: 'flex',
-        flexDirection: 'column',
-        marginTop: ({ options: { outerSpacing } }) =>
-          getSpacing(outerSpacing[0]),
-        marginRight: ({ options: { outerSpacing } }) =>
-          getSpacing(outerSpacing[1]),
-        marginBottom: ({ options: { outerSpacing } }) =>
-          getSpacing(outerSpacing[2]),
-        marginLeft: ({ options: { outerSpacing } }) =>
-          getSpacing(outerSpacing[3]),
-        height: 'auto',
-        minHeight: 1,
-        backgroundColor: 'transparent',
-        borderWidth: '0.125rem',
-        borderColor: ({ options: { panelColor } }) =>
-          style.getColor(panelColor) || style.getColor('Primary'),
-        borderStyle: 'solid',
-        borderRadius: '0.125rem',
-        overflow: 'auto',
-        boxSizing: 'border-box',
       },
       content: {
         flexGrow: 1,
@@ -99,46 +67,16 @@
         paddingLeft: getSpacing('M'),
       },
       [`@media ${B.mediaMinWidth(768)}`]: {
-        panel: {
-          marginTop: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[0], 'Portrait'),
-          marginRight: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[1], 'Portrait'),
-          marginBottom: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[2], 'Portrait'),
-          marginLeft: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[3], 'Portrait'),
-        },
         content: {
           paddingTop: getSpacing('M', 'Portrait'),
         },
       },
       [`@media ${B.mediaMinWidth(1024)}`]: {
-        panel: {
-          marginTop: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[0], 'Landscape'),
-          marginRight: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[1], 'Landscape'),
-          marginBottom: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[2], 'Landscape'),
-          marginLeft: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[3], 'Landscape'),
-        },
         content: {
           padding: getSpacing('M', 'Landscape'),
         },
       },
       [`@media ${B.mediaMinWidth(1200)}`]: {
-        panel: {
-          marginTop: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[0], 'Desktop'),
-          marginRight: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[1], 'Desktop'),
-          marginBottom: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[2], 'Desktop'),
-          marginLeft: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[3], 'Desktop'),
-        },
         content: {
           padding: getSpacing('M', 'Desktop'),
         },
