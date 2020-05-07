@@ -1,5 +1,5 @@
 language: node_js
-node_js: 12.7.0
+node_js: 14.2.0
 
 jobs:
   include:
@@ -10,6 +10,7 @@ jobs:
       name: 'Lint'
     - script:
         - yarn
+        - yarn bundle
         - yarn build
       name: 'Build'
 
