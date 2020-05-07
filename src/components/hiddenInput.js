@@ -10,18 +10,16 @@
     const { actionInputId } = options;
     const actionInput = getActionInput(actionInputId);
 
-    return (
+    return isDev ? (
       <div className={[classes.root, isDev ? classes.bordered : ''].join(' ')}>
-        {isDev ? (
-          'HIDDEN INPUT'
-        ) : (
-          <input
-            type="hidden"
-            name={actionInput.name}
-            value={useText(options.defaultValue)}
-          />
-        )}
+        HIDDEN INPUT
       </div>
+    ) : (
+      <input
+        type="hidden"
+        name={actionInput.name}
+        value={useText(options.defaultValue)}
+      />
     );
   })(),
   styles: () => () => ({
