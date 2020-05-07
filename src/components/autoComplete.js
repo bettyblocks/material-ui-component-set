@@ -21,12 +21,24 @@
       model,
       multiple,
       freeSolo,
+      closeOnSelect,
+      renderCheckboxes,
     } = options;
-    const isDev = B.env === 'dev';
     const { Autocomplete } = window.MaterialUI.Lab;
-    const { TextField, CircularProgress, Chip } = window.MaterialUI.Core;
-    const { ExpandMore, Close } = window.MaterialUI.Icons;
-    const { useText, getProperty, getActionInput, GetAll } = B;
+    const {
+      TextField,
+      CircularProgress,
+      Chip,
+      Checkbox,
+    } = window.MaterialUI.Core;
+    const {
+      ExpandMore,
+      Close,
+      CheckBox,
+      CheckBoxOutlineBlank,
+    } = window.MaterialUI.Icons;
+    const { useText, getProperty, getActionInput, GetAll, env } = B;
+    const isDev = env === 'dev';
     const [currentValue, setCurrentValue] = isDev
       ? useState(defaultValue.join(' '))
       : useState(useText(defaultValue));
@@ -174,15 +186,28 @@
             );
           }
 
+          const renderLabel = option =>
+            option[searchProp.name] && option[searchProp.name].toString();
+
+          const renderOption = (option, { selected }) => (
+            <>
+              <Checkbox
+                icon={<CheckBoxOutlineBlank fontSize="small" />}
+                checkedIcon={<CheckBox fontSize="small" />}
+                style={{ marginRight: 8 }}
+                checked={selected}
+              />
+              {renderLabel(option)}
+            </>
+          );
+
           return (
             <Autocomplete
               multiple={multiple}
               freeSolo={freeSolo}
               options={data.results}
               defaultValue={getDefaultValue(data.results)}
-              getOptionLabel={option =>
-                option[searchProp.name] && option[searchProp.name].toString()
-              }
+              getOptionLabel={renderLabel}
               onInputChange={(_, inputValue) => {
                 if (!freeSolo) {
                   return;
@@ -190,6 +215,8 @@
                 setSearchParam(inputValue);
               }}
               onChange={onChange}
+              disableCloseOnSelect={!closeOnSelect}
+              renderOption={renderCheckboxes && renderOption}
               renderInput={params => (
                 <>
                   <input
