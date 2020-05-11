@@ -25,13 +25,11 @@
     useEffect(() => {
       B.defineFunction('handleDialogOpen', e => {
         e.preventDefault();
-
         setOpen(true);
       });
 
       B.defineFunction('handleDialogClose', e => {
         e.preventDefault();
-
         setOpen(false);
       });
     }, []);
