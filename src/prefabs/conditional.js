@@ -1,10 +1,10 @@
 (() => ({
-  name: 'conditional',
+  name: 'Conditional',
   icon: 'CheckboxIcon',
   category: 'LOGIC',
   structure: [
     {
-      name: 'conditional',
+      name: 'Conditional',
       options: [
         {
           type: 'VARIABLE',
