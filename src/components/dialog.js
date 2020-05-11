@@ -14,7 +14,6 @@
 
     const classNames = isContentVisible
       ? [
-          classes.content,
           isEmpty ? classes.empty : '',
           isPristine ? classes.pristine : '',
         ].join(' ')
@@ -47,39 +46,13 @@
       </div>
     );
   })(),
-  styles: B => theme => {
-    const style = new B.Styling(theme);
-    const getSpacing = (idx, device = 'Mobile') =>
-      idx === '0' ? '0rem' : style.getSpacing(idx, device);
+  styles: () => () => {
     return {
       dialog: {
         backgroundColor: 'white',
         margin: '0 auto',
         padding: '1.5rem',
         overflowWrap: 'break-word',
-      },
-      content: {
-        flexGrow: 1,
-        flexBasis: '100%',
-        paddingTop: getSpacing('M'),
-        paddingRight: getSpacing('M'),
-        paddingBottom: getSpacing('M'),
-        paddingLeft: getSpacing('M'),
-      },
-      [`@media ${B.mediaMinWidth(768)}`]: {
-        content: {
-          paddingTop: getSpacing('M', 'Portrait'),
-        },
-      },
-      [`@media ${B.mediaMinWidth(1024)}`]: {
-        content: {
-          padding: getSpacing('M', 'Landscape'),
-        },
-      },
-      [`@media ${B.mediaMinWidth(1200)}`]: {
-        content: {
-          padding: getSpacing('M', 'Desktop'),
-        },
       },
       empty: {
         display: 'flex',
