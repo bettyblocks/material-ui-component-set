@@ -10,7 +10,7 @@
     const isEmpty = children.length === 0;
     const isDev = env === 'dev';
     const isPristine = isDev && isEmpty;
-    const isContentVisible = isDev && options.isVisibleInDev;
+    const isContentVisible = isDev && options.visible;
 
     const classNames = isContentVisible
       ? [

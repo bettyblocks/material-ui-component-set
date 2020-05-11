@@ -8,8 +8,8 @@
       options: [
         {
           value: true,
-          label: 'Visible in dev?',
-          key: 'isVisibleInDev',
+          label: 'Visible',
+          key: 'visible',
           type: 'TOGGLE',
         },
       ],
