@@ -13,10 +13,9 @@
     const isContentVisible = isDev && options.visible;
 
     const classNames = isContentVisible
-      ? [
-          isEmpty ? classes.empty : '',
-          isPristine ? classes.pristine : '',
-        ].join(' ')
+      ? [isEmpty ? classes.empty : '', isPristine ? classes.pristine : ''].join(
+          ' ',
+        )
       : '';
 
     const [open, setOpen] = React.useState(false);
@@ -44,29 +43,27 @@
       </div>
     );
   })(),
-  styles: () => () => {
-    return {
-      dialog: {
-        backgroundColor: 'white',
-        margin: '0 auto',
-        padding: '1.5rem',
-        overflowWrap: 'break-word',
-      },
-      empty: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: () => 'center',
-        minHeight: '4rem',
-        margin: '1rem',
-        fontSize: '0.75rem',
-      },
-      pristine: {
-        color: '#262A3A',
-        textTransform: 'uppercase',
-        boxSizing: 'border-box',
-        border: '0.0625rem dashed #AFB5C8',
-        backgroundColor: '#F0F1F5',
-      },
-    };
-  },
+  styles: () => () => ({
+    dialog: {
+      backgroundColor: 'white',
+      margin: '0 auto',
+      padding: '1.5rem',
+      overflowWrap: 'break-word',
+    },
+    empty: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: () => 'center',
+      minHeight: '4rem',
+      margin: '1rem',
+      fontSize: '0.75rem',
+    },
+    pristine: {
+      color: '#262A3A',
+      textTransform: 'uppercase',
+      boxSizing: 'border-box',
+      border: '0.0625rem dashed #AFB5C8',
+      backgroundColor: '#F0F1F5',
+    },
+  }),
 }))();
