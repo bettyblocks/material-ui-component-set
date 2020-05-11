@@ -21,6 +21,12 @@
             dependsOn: 'model',
           },
         },
+        {
+          value: '',
+          label: 'Redirect when no result',
+          key: 'redirectWithoutResult',
+          type: 'ENDPOINT',
+        },
       ],
       descendants: [],
     },
