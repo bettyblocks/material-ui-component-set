@@ -57,7 +57,6 @@
         alignItems: 'center',
         justifyContent: () => 'center',
         minHeight: '4rem',
-        height: '100%',
         margin: '1rem',
         fontSize: '0.75rem',
       },
