@@ -24,7 +24,7 @@
           type: 'VARIABLE',
           label: 'Button text',
           key: 'buttonText',
-          value: ['Button'],
+          value: ['Send'],
         },
 
         {
@@ -1359,7 +1359,7 @@
         },
         {
           type: 'COLOR',
-          label: 'color',
+          label: 'Color',
           key: 'background',
           value: 'Success',
         },
