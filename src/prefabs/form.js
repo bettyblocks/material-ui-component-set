@@ -1551,6 +1551,7 @@
                     as: 'BUTTONGROUP',
                     dataType: 'string',
                     allowedInput: [
+                      { name: 'Large', value: 'large' },
                       { name: 'Medium', value: 'medium' },
                       { name: 'Small', value: 'small' },
                     ],
@@ -2852,7 +2853,7 @@
                 },
                 {
                   type: 'COLOR',
-                  label: 'Background color',
+                  label: 'Color',
                   key: 'background',
                   value: 'Success',
                 },
