@@ -19,9 +19,11 @@
       model,
       filter,
       optionType,
-      property,
+      labelProperty: labelProp,
       valueProperty: valueProp,
       actionInputId,
+      property,
+      propertyLabelOverride,
     } = options;
     const { TextField, MenuItem } = window.MaterialUI.Core;
     const isDev = B.env === 'dev';
@@ -33,10 +35,19 @@
       ? helperText.map(h => (h.name ? h.name : h)).join(' ')
       : useText(helperText);
 
+    const propLabel =
+      property && getProperty(property) && getProperty(property).label;
+    const propLabelOverride = isDev
+      ? propertyLabelOverride.map(l => (l.name ? l.name : l)).join(' ')
+      : useText(propertyLabelOverride);
+    const propertyLabelText = isDev ? '{{ property label }}' : propLabel;
+    const propertyLabel = propLabelOverride || propertyLabelText;
+    const labelText = property ? propertyLabel : label;
+
     const actionInput = getActionInput(actionInputId);
     const value = currentValue;
 
-    const labelProperty = getProperty(property);
+    const labelProperty = getProperty(labelProp);
     const valueProperty = getProperty(valueProp);
     const { name: propName } = valueProperty || {};
     const { name: labelName } = labelProperty || {};
@@ -67,7 +78,7 @@
           inputProps={{ name: actionInput && actionInput.name }}
           required={required}
           disabled={disabled}
-          label={label}
+          label={labelText}
           error={hasError}
           margin={margin}
           helperText={helper}
@@ -102,7 +113,7 @@
                 inputProps={{ name: actionInput && actionInput.name }}
                 required={required}
                 disabled={disabled}
-                label={label}
+                label={labelText}
                 error={hasError}
                 margin={margin}
                 helperText={helper}
