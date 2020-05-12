@@ -35,7 +35,9 @@
       setAnchorEl(null);
     };
 
-    const logoComponent = logo && <img src={logo} width="100" alt="" />;
+    const logoComponent = logo && (
+      <img src={logo} width="100" className={classes.logo} alt="" />
+    );
     const logoWithLink = endpoint.id ? (
       // eslint-disable-next-line jsx-a11y/anchor-is-valid
       <Link endpoint={endpoint}>{logoComponent}</Link>
@@ -113,6 +115,9 @@
       },
       title: {
         textDecoration: 'none',
+      },
+      logo: {
+        marginRight: style.getSpacing('M'),
       },
       spacer: {
         flexGrow: 1,
