@@ -10,7 +10,7 @@
         const [page, setPage] = useState(1);
         const [search, setSearch] = useState('');
         const [isTyping, setIsTyping] = useState(false);
-        const { filter } = options;
+        const { filter, hidePagination } = options;
 
         const take = parseInt(options.take, 10) || 50;
         const searchProp = B.getProperty(options.searchProperty);
@@ -50,7 +50,7 @@
               </div>
             ))}
             <div className={classes.footer}>
-              {(isDev || options.model) && (
+              {(isDev || options.model) && !hidePagination && (
                 <Pagination totalCount={0} resultCount={take} currentPage={1} />
               )}
             </div>
@@ -96,7 +96,7 @@
                       </B.GetOneProvider>
                     ))}
                     <div className={classes.footer}>
-                      {!isEmpty && (
+                      {!isEmpty && !hidePagination && (
                         <Pagination
                           totalCount={data.totalCount}
                           resultCount={data.results.length}

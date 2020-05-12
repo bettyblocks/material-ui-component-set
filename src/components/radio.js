@@ -22,9 +22,20 @@
       margin,
       error,
       filter,
+      property,
+      propertyLabelOverride,
     } = options;
     const isDev = B.env === 'dev';
     const { GetAll, getProperty, useText, getActionInput } = B;
+
+    const propLabel =
+      property && getProperty(property) && getProperty(property).label;
+    const propLabelOverride = isDev
+      ? propertyLabelOverride.map(l => (l.name ? l.name : l)).join(' ')
+      : useText(propertyLabelOverride);
+    const propertyLabelText = isDev ? '{{ property label }}' : propLabel;
+    const propertyLabel = propLabelOverride || propertyLabelText;
+    const labelText = property ? propertyLabel : label;
 
     const labelProperty = getProperty(labelProp);
     const valueProperty = getProperty(valueProp);
@@ -105,13 +116,13 @@
         component="fieldset"
         error={error}
       >
-        <FormLabel component="legend">{label}</FormLabel>
+        <FormLabel component="legend">{labelText}</FormLabel>
         <RadioGroup
           row={row}
           value={value}
           name={actionInput && actionInput.name}
           onChange={handleChange}
-          aria-label={label}
+          aria-label={labelText}
         >
           {Radios}
         </RadioGroup>
