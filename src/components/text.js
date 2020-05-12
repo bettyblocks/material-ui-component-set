@@ -42,7 +42,7 @@
         textAlign: ({ options: { textAlignment } }) => textAlignment,
         padding: 0,
         whiteSpace: 'pre-wrap',
-        color: ({ options: { type } }) => style.getFontColor(type),
+        color: ({ options: { textColor } }) => style.getColor(textColor),
         fontFamily: ({ options: { type } }) => style.getFontFamily(type),
         fontSize: ({ options: { type } }) => style.getFontSize(type),
         fontWeight: ({ options: { type } }) => style.getFontWeight(type),

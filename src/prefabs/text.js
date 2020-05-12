@@ -22,6 +22,12 @@
           type: 'FONT',
         },
         {
+          type: 'COLOR',
+          label: 'Text Color',
+          key: 'textColor',
+          value: 'Black',
+        },
+        {
           type: 'CUSTOM',
           label: 'Text Alignment',
           key: 'textAlignment',
