@@ -20,6 +20,19 @@
           label: 'Model',
           key: 'model',
           type: 'MODEL',
+          configuration: {
+            modal: {
+              type: 'MODEL_AND_PROPERTIES',
+              generateCustomModel: true,
+              modelRequired: false,
+            },
+          },
+        },
+        {
+          value: '',
+          label: 'Custom Model',
+          key: 'customModel',
+          type: 'CUSTOM_MODEL',
         },
         {
           value: {},
@@ -1538,6 +1551,7 @@
                     as: 'BUTTONGROUP',
                     dataType: 'string',
                     allowedInput: [
+                      { name: 'Large', value: 'large' },
                       { name: 'Medium', value: 'medium' },
                       { name: 'Small', value: 'small' },
                     ],
@@ -2839,7 +2853,7 @@
                 },
                 {
                   type: 'COLOR',
-                  label: 'Background color',
+                  label: 'Color',
                   key: 'background',
                   value: 'Success',
                 },

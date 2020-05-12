@@ -22,11 +22,12 @@
           },
         },
         {
-          value:
+          value: [
             'https://material-ui.com/static/images/cards/contemplative-reptile.jpg',
+          ],
           label: 'Source',
           key: 'imageSource',
-          type: 'TEXT',
+          type: 'VARIABLE',
           configuration: {
             condition: {
               type: 'SHOW',
@@ -37,10 +38,10 @@
           },
         },
         {
-          value: '',
+          value: [],
           label: 'Source',
           key: 'videoSource',
-          type: 'TEXT',
+          type: 'VARIABLE',
           configuration: {
             condition: {
               type: 'SHOW',
@@ -51,10 +52,10 @@
           },
         },
         {
-          value: '',
+          value: [],
           label: 'Source',
           key: 'iframeSource',
-          type: 'TEXT',
+          type: 'VARIABLE',
           configuration: {
             condition: {
               type: 'SHOW',

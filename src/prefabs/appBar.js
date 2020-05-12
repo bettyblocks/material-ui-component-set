@@ -60,8 +60,8 @@
         {
           label: 'Logo',
           key: 'logo',
-          value: '',
-          type: 'TEXT',
+          value: [],
+          type: 'VARIABLE',
         },
         {
           label: 'Align items',
@@ -1604,7 +1604,7 @@
             },
             {
               type: 'COLOR',
-              label: 'color',
+              label: 'Color',
               key: 'background',
               value: 'Primary',
             },
@@ -3054,7 +3054,7 @@
             },
             {
               type: 'COLOR',
-              label: 'color',
+              label: 'Color',
               key: 'background',
               value: 'Primary',
             },
