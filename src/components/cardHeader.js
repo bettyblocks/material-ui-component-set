@@ -9,8 +9,9 @@
     const { CardHeader, Avatar } = window.MaterialUI.Core;
     const { avatar, avatarType, title, subheader } = options;
 
-    const AvatarImage = <Avatar alt="" src={avatar} />;
-    const AvatarText = <Avatar>{avatar}</Avatar>;
+    const avatarSource = useText(avatar);
+    const AvatarImage = <Avatar alt="" src={avatarSource} />;
+    const AvatarText = <Avatar>{avatarSource}</Avatar>;
     const AvatarComponent = avatarType === 'text' ? AvatarText : AvatarImage;
 
     const isEmpty = !avatar && !title.length && !subheader.length;
@@ -18,17 +19,9 @@
 
     const CardHeaderComponent = (
       <CardHeader
-        avatar={avatar && AvatarComponent}
-        title={
-          isDev
-            ? title.map(t => (t.name ? t.name : t)).join(' ')
-            : useText(title)
-        }
-        subheader={
-          isDev
-            ? subheader.map(s => (s.name ? s.name : s)).join(' ')
-            : useText(subheader)
-        }
+        avatar={avatarSource && AvatarComponent}
+        title={useText(title)}
+        subheader={useText(subheader)}
         className={[
           isEmpty ? classes.empty : '',
           isPristine ? classes.pristine : '',
