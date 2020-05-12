@@ -202,7 +202,7 @@
         {
           label: 'Margin',
           key: 'margin',
-          value: 'none',
+          value: 'normal',
           type: 'CUSTOM',
           configuration: {
             as: 'BUTTONGROUP',
