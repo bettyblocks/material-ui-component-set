@@ -22,12 +22,6 @@
           type: 'MODEL',
         },
         {
-          value: '',
-          label: 'Custom Model',
-          key: 'customModel',
-          type: 'CUSTOM_MODEL',
-        },
-        {
           value: {},
           label: 'Filter',
           key: 'filter',
