@@ -59,9 +59,9 @@
         },
         {
           label: 'Logo',
-          key: 'logo',
-          value: '',
-          type: 'TEXT',
+          key: 'logoSource',
+          value: [],
+          type: 'VARIABLE',
         },
         {
           label: 'Align items',

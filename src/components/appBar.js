@@ -15,14 +15,14 @@
     const {
       position,
       title,
-      logo,
+      logoSource,
       endpoint,
       appBarVariant,
       toolbarVariant,
       square,
       elevation,
     } = options;
-    const { Link, env } = B;
+    const { Link, env, useText } = B;
     const isDev = env === 'dev';
     const [anchorEl, setAnchorEl] = useState(null);
     const open = !!anchorEl;
@@ -35,12 +35,13 @@
       setAnchorEl(null);
     };
 
-    const logoComponent = logo && <img src={logo} width="100" alt="" />;
-    const logoWithLink = endpoint.id ? (
+    const logo = useText(logoSource);
+    const LogoCmp = logo && <img src={logo} width="100" alt="" />;
+    const LogoComponent = endpoint.id ? (
       // eslint-disable-next-line jsx-a11y/anchor-is-valid
-      <Link endpoint={endpoint}>{logoComponent}</Link>
+      <Link endpoint={endpoint}>{LogoCmp}</Link>
     ) : (
-      logoComponent
+      LogoCmp
     );
 
     const AppBarComponent = (
@@ -52,7 +53,7 @@
         elevation={elevation}
       >
         <Toolbar variant={toolbarVariant} classes={{ root: classes.toolbar }}>
-          {logo.length > 0 && logoWithLink}
+          {logo.length > 0 && LogoComponent}
           <Typography
             variant="h6"
             noWrap
