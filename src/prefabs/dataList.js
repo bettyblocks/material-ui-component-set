@@ -42,6 +42,12 @@
           key: 'outerSpacing',
           type: 'SIZES',
         },
+        {
+          label: 'Hide pagination',
+          key: 'hidePagination',
+          value: false,
+          type: 'TOGGLE',
+        },
       ],
       descendants: [],
     },
