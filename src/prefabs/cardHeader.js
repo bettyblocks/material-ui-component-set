@@ -7,10 +7,10 @@
       name: 'CardHeader',
       options: [
         {
-          value: '',
+          value: [],
           label: 'Avatar',
           key: 'avatar',
-          type: 'TEXT',
+          type: 'VARIABLE',
         },
         {
           label: 'Avatar type',

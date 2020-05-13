@@ -24,6 +24,8 @@
       adornment,
       adornmentIcon,
       adornmentPosition,
+      property,
+      propertyLabelOverride,
     } = options;
 
     const {
@@ -38,7 +40,7 @@
     } = window.MaterialUI.Core;
     const { Icons } = window.MaterialUI;
 
-    const { getActionInput, useText, env } = B;
+    const { getActionInput, useText, env, getProperty } = B;
     const isDev = env === 'dev';
     const [currentValue, setCurrentValue] = isDev
       ? useState(defaultValue.join(' '))
@@ -50,6 +52,15 @@
     const placeholderText = isDev
       ? placeholder.map(p => (p.name ? p.name : p)).join(' ')
       : useText(placeholder);
+
+    const propLabel =
+      property && getProperty(property) && getProperty(property).label;
+    const propLabelOverride = isDev
+      ? propertyLabelOverride.map(l => (l.name ? l.name : l)).join(' ')
+      : useText(propertyLabelOverride);
+    const propertyLabelText = isDev ? '{{ property label }}' : propLabel;
+    const propertyLabel = propLabelOverride || propertyLabelText;
+    const labelText = property ? propertyLabel : label;
 
     const actionInput = getActionInput(actionInputId);
 
@@ -106,7 +117,7 @@
         margin={margin}
         error={error}
       >
-        {label && <InputLabel>{label}</InputLabel>}
+        {labelText && <InputLabel>{labelText}</InputLabel>}
         <InputCmp
           name={actionInput && actionInput.name}
           value={
@@ -119,7 +130,7 @@
           type={(isDev && type === 'number') || showPassword ? 'text' : type}
           multiline={multiline}
           rows={rows}
-          label={label}
+          label={labelText}
           placeholder={placeholderText}
           onChange={changeHandler}
           startAdornment={
