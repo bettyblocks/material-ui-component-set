@@ -98,6 +98,21 @@
           },
         },
         {
+          value: '',
+          label: 'Height',
+          key: 'barHeight',
+          type: 'TEXT',
+          configuration: {
+            as: 'UNIT',
+            condition: {
+              type: 'SHOW',
+              option: 'type',
+              comparator: 'EQ',
+              value: 'linear',
+            },
+          },
+        },
+        {
           value: ['0'],
           label: 'Min value',
           key: 'minValue',
