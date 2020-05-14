@@ -34,12 +34,12 @@ https://github.com/bettyblocks/cli/wiki/Usage#start-the-development-server
 
 3.  Work on your feature.
 
-4.  When you're confident about your work, submit a merge request to `edge` and assign it to one of the reviewers. You can comment on your techsupport ticket in Jira **"In review"** and provide the link to the pull request. 
+4.  When you're confident about your work, submit a pull request to `edge` and assign it to one of the reviewers. You can comment on your techsupport ticket in Jira **"In review"** and provide the link to the pull request. 
 
     - If there are conflicts, do not merge `edge` into your branch, you can try merging `acceptance` in your branch and else contact techsupport.
 
 5. Once the ticket is in review our tech department will either give you feedback to make changes or it will be added to the sprint of a team so that the feature can go through our testing process. 
 
-6.  Once testing is complete, we will merge the branch to `acceptance` and update the techsupport ticket.
+6.  Once testing is complete, the techsupport ticket will be promoted to ready for acceptance and you can create a pull request to `acceptance`.
 
 7.  When your work is merged into `acceptance`, you can assume that it will be released with the next release.
