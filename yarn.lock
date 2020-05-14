@@ -134,7 +134,7 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@betty-blocks/cli@23.2.4":
+"@betty-blocks/cli@^23.2.4":
   version "23.2.4"
   resolved "https://registry.yarnpkg.com/@betty-blocks/cli/-/cli-23.2.4.tgz#d20d28baaa000ade90d14e410747dd90d42626fc"
   integrity sha512-9K/0lI3qL6epHWhz1JTXWJMy3zkRLx6AZy/a8910IslLX/7iADEY2HqU20WbBOBb1C5RVfz4OI2QSDpE+R2klw==
