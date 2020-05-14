@@ -73,6 +73,7 @@
       wrapper: {
         display: ({ options: { type } }) =>
           type === 'circular' ? 'inline-block' : 'block',
+        padding: '0.25rem 0',
       },
       normalBackgroundColor: {
         backgroundColor: ({ options: { color } }) => [
@@ -142,6 +143,10 @@
             getSpacing(outerSpacing[2], 'Desktop'),
           marginLeft: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[3], 'Desktop'),
+        },
+        '&.MuiLinearProgress-root': {
+          height: ({ options: { barHeight, type } }) =>
+            type === 'linear' && barHeight ? barHeight : null,
         },
       },
     };
