@@ -27,6 +27,18 @@
           key: 'backgroundColor',
           value: 'Transparent',
         },
+        {
+          type: 'TOGGLE',
+          label: 'Disable padding',
+          key: 'disablePadding',
+          value: false,
+        },
+        {
+          type: 'TOGGLE',
+          label: 'Dense',
+          key: 'dense',
+          value: false,
+        },
       ],
       descendants: [
         {

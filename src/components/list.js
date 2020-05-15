@@ -9,7 +9,7 @@
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
     const isPristine = children.length === 0 && isDev;
-    const { filter, model } = options;
+    const { filter, model, disablePadding, dense } = options;
 
     const PlaceHolder = (
       <div
@@ -28,6 +28,8 @@
       </List>
     );
 
+    const listArgs = { className: classes.root, disablePadding, dense };
+
     const DataContainer = (
       <GetAll modelId={model} filter={filter}>
         {({ loading, error, data }) => {
@@ -41,7 +43,7 @@
           }
 
           return (
-            <List className={classes.root}>
+            <List {...listArgs}>
               {results.map(value => (
                 <GetOneProvider value={value}>{children}</GetOneProvider>
               ))}
@@ -52,7 +54,7 @@
     );
 
     const ListComponent = (
-      <List className={classes.root}>{isEmpty ? PlaceHolder : children}</List>
+      <List {...listArgs}>{isEmpty ? PlaceHolder : children}</List>
     );
 
     const ListOrDataComponent = model ? DataContainer : ListComponent;
