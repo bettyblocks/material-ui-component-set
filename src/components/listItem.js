@@ -23,7 +23,7 @@
       icon,
       avatar,
       linkTo,
-      dense
+      dense,
     } = options;
     const { env, useText, Link } = B;
     const isDev = env === 'dev';
