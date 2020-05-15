@@ -7,16 +7,16 @@
       name: 'Image',
       options: [
         {
-          value: '',
+          value: [],
           label: 'Image url',
           key: 'imgUrl',
-          type: 'TEXT',
+          type: 'VARIABLE',
         },
         {
-          value: '',
+          value: [],
           label: 'Image Alternative Text',
           key: 'imgAlt',
-          type: 'TEXT',
+          type: 'VARIABLE',
         },
         {
           value: ['0rem', '0rem', 'M', '0rem'],
