@@ -1,6 +1,5 @@
 (() => ({
   name: 'DateTimePicker',
-  icon: 'DateTimePickerIcon',
   type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
