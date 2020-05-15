@@ -42,7 +42,7 @@
           },
         },
         {
-          value: [],
+          value: ['Option 1'],
           label: 'Value',
           key: 'defaultValue',
           type: 'VARIABLE',

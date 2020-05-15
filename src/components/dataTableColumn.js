@@ -95,10 +95,7 @@
           );
         }
 
-        const propertyName = options.property
-          ? getProperty(options.property) && getProperty(options.property).name
-          : '';
-
+        const { name: propertyName } = getProperty(options.property) || {};
         const searchParam = '';
 
         return (

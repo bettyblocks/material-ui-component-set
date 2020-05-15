@@ -28,11 +28,7 @@
           classes.root,
           variant === 'default' ? classes.chip : classes.outlined,
         ].join(' ')}
-        label={
-          isDev
-            ? label.map(l => (l.name ? l.name : l)).join(' ')
-            : useText(label)
-        }
+        label={useText(label)}
         disabled={disabled}
         variant={variant}
         icon={

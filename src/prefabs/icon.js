@@ -588,6 +588,10 @@
                 value: 'FavoriteBorder',
               },
               {
+                name: 'FileCopy',
+                value: 'FileCopy',
+              },
+              {
                 name: 'FilterList',
                 value: 'FilterList',
               },

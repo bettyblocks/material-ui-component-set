@@ -46,19 +46,11 @@
     const [currentValue, setCurrentValue] = isDev
       ? useState(defaultValue.join(' '))
       : useState(useText(defaultValue));
-    const placeholderText = isDev
-      ? placeholder.join(' ')
-      : useText(placeholder);
-    const helper = isDev
-      ? helperText.map(h => (h.name ? h.name : h)).join(' ')
-      : useText(helperText);
+    const placeholderText = useText(placeholder);
+    const helper = useText(helperText);
 
-    const propLabel =
-      property && getProperty(property) && getProperty(property).label;
-    const propLabelOverride = isDev
-      ? propertyLabelOverride.map(l => (l.name ? l.name : l)).join(' ')
-      : useText(propertyLabelOverride);
-    const propertyLabelText = isDev ? '{{ property label }}' : propLabel;
+    const { label: propertyLabelText } = getProperty(property) || {};
+    const propLabelOverride = useText(propertyLabelOverride);
     const propertyLabel = propLabelOverride || propertyLabelText;
     const labelText = property ? propertyLabel : label;
 

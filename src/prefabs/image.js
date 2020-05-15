@@ -14,7 +14,7 @@
         },
         {
           value: [],
-          label: 'Image Alternative Text',
+          label: 'Alternative Text',
           key: 'imgAlt',
           type: 'VARIABLE',
         },

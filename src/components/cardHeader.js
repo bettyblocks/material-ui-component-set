@@ -4,12 +4,12 @@
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { env, useText } = B;
+    const { env, Text } = B;
     const isDev = env === 'dev';
     const { CardHeader, Avatar } = window.MaterialUI.Core;
     const { avatar, avatarType, title, subheader } = options;
 
-    const avatarSource = useText(avatar);
+    const avatarSource = Text({ value: avatar });
     const AvatarImage = <Avatar alt="" src={avatarSource} />;
     const AvatarText = <Avatar>{avatarSource}</Avatar>;
     const AvatarComponent = avatarType === 'text' ? AvatarText : AvatarImage;
@@ -20,8 +20,8 @@
     const CardHeaderComponent = (
       <CardHeader
         avatar={avatarSource && AvatarComponent}
-        title={useText(title)}
-        subheader={useText(subheader)}
+        title={Text({ value: title })}
+        subheader={Text({ value: subheader })}
         className={[
           isEmpty ? classes.empty : '',
           isPristine ? classes.pristine : '',

@@ -37,22 +37,14 @@
     const { getActionInput, useText, getProperty, env } = B;
     const isDev = env === 'dev';
     const actionInput = getActionInput(actionInputId);
-    const strDefaultValue = defaultValue.join(' ');
-    const [selectedDate, setSelectedDate] = isDev
-      ? useState(strDefaultValue)
-      : useState(useText(defaultValue));
-    const helper = isDev
-      ? helperText.map(h => (h.name ? h.name : h)).join(' ')
-      : useText(helperText);
-    const placeholderText = isDev
-      ? placeholder.join(' ')
-      : useText(placeholder);
-    const propLabel =
-      property && getProperty(property) && getProperty(property).label;
-    const propLabelOverride = isDev
-      ? propertyLabelOverride.map(l => (l.name ? l.name : l)).join(' ')
-      : useText(propertyLabelOverride);
-    const propertyLabelText = isDev ? '{{ property label }}' : propLabel;
+    const strDefaultValue = isDev
+      ? defaultValue.join(' ')
+      : useText(defaultValue);
+    const [selectedDate, setSelectedDate] = useState(strDefaultValue);
+    const helper = useText(helperText);
+    const placeholderText = useText(placeholder);
+    const { label: propertyLabelText } = getProperty(property) || {};
+    const propLabelOverride = useText(propertyLabelOverride);
     const propertyLabel = propLabelOverride || propertyLabelText;
     const labelText = property ? propertyLabel : label;
 

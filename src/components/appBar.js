@@ -15,14 +15,14 @@
     const {
       position,
       title,
-      logoSource,
+      logo: logoLink,
       endpoint,
       appBarVariant,
       toolbarVariant,
       square,
       elevation,
     } = options;
-    const { Link, env, useText } = B;
+    const { Link, env, Text } = B;
     const isDev = env === 'dev';
     const [anchorEl, setAnchorEl] = useState(null);
     const open = !!anchorEl;
@@ -35,7 +35,7 @@
       setAnchorEl(null);
     };
 
-    const logo = useText(logoSource);
+    const logo = Text({ value: logoLink });
     const LogoCmp = logo && <img src={logo} width="100" alt="" />;
     const LogoComponent = endpoint.id ? (
       // eslint-disable-next-line jsx-a11y/anchor-is-valid

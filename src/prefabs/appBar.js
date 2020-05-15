@@ -59,7 +59,7 @@
         },
         {
           label: 'Logo',
-          key: 'logoSource',
+          key: 'logo',
           value: [],
           type: 'VARIABLE',
         },

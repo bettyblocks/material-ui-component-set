@@ -9,9 +9,7 @@
     const { Typography } = window.MaterialUI.Core;
     const { Icons } = window.MaterialUI;
     const { endpoint, breadcrumbContent, icon, iconPosition } = options;
-    const content = isDev
-      ? breadcrumbContent.map(b => (b.name ? b.name : b)).join(' ')
-      : useText(breadcrumbContent);
+    const content = useText(breadcrumbContent);
 
     const isEmpty = breadcrumbContent.length === 0 && icon === 'None';
     const isPristine = isEmpty && isDev;

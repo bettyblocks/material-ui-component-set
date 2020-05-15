@@ -28,12 +28,8 @@
     const isDev = B.env === 'dev';
     const { GetAll, getProperty, useText, getActionInput } = B;
 
-    const propLabel =
-      property && getProperty(property) && getProperty(property).label;
-    const propLabelOverride = isDev
-      ? propertyLabelOverride.map(l => (l.name ? l.name : l)).join(' ')
-      : useText(propertyLabelOverride);
-    const propertyLabelText = isDev ? '{{ property label }}' : propLabel;
+    const { label: propertyLabelText } = getProperty(property) || {};
+    const propLabelOverride = useText(propertyLabelOverride);
     const propertyLabel = propLabelOverride || propertyLabelText;
     const labelText = property ? propertyLabel : label;
 
@@ -41,15 +37,8 @@
     const valueProperty = getProperty(valueProp);
     const actionInput = getActionInput(actionInputId);
 
-    let componentValue = defaultValue.map(v => (v.name ? v.name : v)).join(' ');
-    let componentHelperText = helperText
-      .map(h => (h.name ? h.name : h))
-      .join(' ');
-
-    if (!isDev) {
-      componentValue = useText(defaultValue);
-      componentHelperText = useText(helperText);
-    }
+    let componentValue = useText(defaultValue);
+    const componentHelperText = useText(helperText);
 
     componentValue = isNaN(Number(componentValue))
       ? componentValue
@@ -58,6 +47,10 @@
     // maintain the type of the value
     const getValue = val => (isNaN(Number(val)) ? val : Number(val));
     const [value, setValue] = useState(getValue(componentValue));
+
+    useEffect(() => {
+      setValue(getValue(componentValue));
+    }, [componentValue]);
 
     const {
       FormControl: MUIFormControl,
