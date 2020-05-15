@@ -19,6 +19,21 @@
           type: 'TEXT',
         },
         {
+          type: 'CUSTOM',
+          label: 'variant',
+          key: 'variant',
+          value: 'circle',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Circle', value: 'circle' },
+              { name: 'Rounded', value: 'rounded' },
+              { name: 'Square', value: 'square' },
+            ],
+          },
+        },
+        {
           type: 'SIZE',
           label: 'Width',
           key: 'width',

@@ -7,10 +7,15 @@
     const { Avatar } = window.MaterialUI.Core;
     const { env } = B;
     const isDev = env === 'dev';
-    const { imgUrl, imgAlt } = options;
+    const { imgUrl, imgAlt, variant } = options;
 
     const AvatarComponent = (
-      <Avatar alt={imgAlt} src={imgUrl} className={classes.avatar}>
+      <Avatar
+        variant={variant}
+        alt={imgAlt}
+        src={imgUrl}
+        className={classes.avatar}
+      >
         {children}
       </Avatar>
     );
