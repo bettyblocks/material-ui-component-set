@@ -1,6 +1,5 @@
 (() => ({
   name: 'Button',
-  icon: 'ButtonIcon',
   type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'VERTICAL',

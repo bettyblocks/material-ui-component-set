@@ -1,6 +1,5 @@
 (() => ({
   name: 'BreadcrumbItem',
-  icon: 'BreadcrumbItemIcon',
   type: 'BREADCRUMB_ITEM',
   allowedTypes: [],
   orientation: 'VERTICAL',
