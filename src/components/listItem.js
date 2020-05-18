@@ -29,12 +29,8 @@
 
     const hasLink = linkTo && linkTo.id !== '';
 
-    const primary = isDev
-      ? primaryText.map(t => (t.name ? t.name : t)).join(' ')
-      : useText(primaryText);
-    const secondary = isDev
-      ? secondaryText.map(t => (t.name ? t.name : t)).join(' ')
-      : useText(secondaryText);
+    const primary = useText(primaryText);
+    const secondary = useText(secondaryText);
 
     const IconComponent = (
       <ListItemIcon>
