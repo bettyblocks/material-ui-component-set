@@ -49,6 +49,7 @@
         name={actionInput && actionInput.name}
         disabled={disabled}
         size={size}
+        tabIndex={isDev && -1}
       />
     );
 

@@ -62,7 +62,7 @@
       <MUIFormControlLabel
         disabled={disabled}
         value={optionValue}
-        control={<Radio size={size} />}
+        control={<Radio tabIndex={isDev && -1} size={size} />}
         label={optionLabel}
         labelPlacement={position}
       />
