@@ -9,9 +9,7 @@
     const { env, useText } = B;
     const isDev = env === 'dev';
 
-    const content = isDev
-      ? text.map(t => (t.name ? t.name : t)).join(' ')
-      : useText(text);
+    const content = useText(text);
 
     const isEmpty = content === '';
 
