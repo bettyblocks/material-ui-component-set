@@ -1,6 +1,5 @@
 (() => ({
   name: 'Column',
-  icon: 'ColumnIcon',
   type: 'LAYOUT_COMPONENT',
   allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'VERTICAL',

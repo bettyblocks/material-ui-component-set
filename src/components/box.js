@@ -1,6 +1,5 @@
 (() => ({
   name: 'Box',
-  icon: 'ContainerIcon',
   type: 'CONTAINER_COMPONENT',
   allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
