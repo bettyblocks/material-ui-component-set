@@ -1,6 +1,5 @@
 (() => ({
   name: 'Text',
-  icon: 'HeadingIcon',
   type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
