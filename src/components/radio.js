@@ -97,6 +97,12 @@
       setValue(getValue(evt.target.value));
     };
 
+    useEffect(() => {
+      if (isDev) {
+        setValue(useText(defaultValue));
+      }
+    }, [isDev, defaultValue]);
+
     const FormControl = (
       <MUIFormControl
         className={classes.formControl}

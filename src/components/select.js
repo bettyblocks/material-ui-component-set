@@ -50,6 +50,12 @@
       setCurrentValue(eventValue);
     };
 
+    useEffect(() => {
+      if (isDev) {
+        setCurrentValue(useText(defaultValue));
+      }
+    }, [isDev, defaultValue]);
+
     const SelectCmp =
       optionType === 'static' ? (
         <TextField

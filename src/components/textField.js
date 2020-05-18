@@ -52,7 +52,6 @@
     const labelText = property ? propertyLabel : label;
 
     const actionInput = getActionInput(actionInputId);
-    const value = currentValue;
 
     const changeHandler = event => {
       const {
@@ -98,6 +97,12 @@
       iconButtonOptions.onMouseDown = handleMouseDownPassword;
     }
 
+    useEffect(() => {
+      if (isDev) {
+        setCurrentValue(useText(defaultValue));
+      }
+    }, [isDev, defaultValue]);
+
     const TextFieldCmp = (
       <FormControl
         variant={variant}
@@ -111,7 +116,7 @@
         {labelText && <InputLabel>{labelText}</InputLabel>}
         <InputCmp
           name={actionInput && actionInput.name}
-          value={value}
+          value={currentValue}
           type={(isDev && type === 'number') || showPassword ? 'text' : type}
           multiline={multiline}
           rows={rows}

@@ -22,11 +22,11 @@
     const actionInput = getActionInput(actionInputId);
 
     const componentLabel = useText(label);
-    const componentValue = useText(defaultValue);
+    const componentChecked = useText(defaultValue);
     const componentHelperText = useText(helperText);
     const propLabelOverride = useText(propertyLabelOverride);
     const { label: propertyLabelText } = getProperty(property) || {};
-    const [value, setValue] = useState({ value: componentValue });
+    const [checked, setChecked] = useState(componentChecked);
 
     const propertyLabel = propLabelOverride || propertyLabelText;
     const labelText = property ? propertyLabel : componentLabel;
@@ -39,12 +39,18 @@
     } = window.MaterialUI.Core;
 
     const handleChange = evt => {
-      setValue({ value: evt.target.value });
+      setChecked(evt.target.checked);
     };
+
+    useEffect(() => {
+      if (isDev) {
+        setChecked(useText(defaultValue) === 'true');
+      }
+    }, [isDev, defaultValue]);
 
     const Checkbox = (
       <MUICheckbox
-        value={value}
+        checked={checked}
         onChange={handleChange}
         name={actionInput && actionInput.name}
         disabled={disabled}

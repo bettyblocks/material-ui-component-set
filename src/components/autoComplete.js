@@ -66,6 +66,12 @@
       helperText: helper,
     };
 
+    useEffect(() => {
+      if (isDev) {
+        setCurrentValue(useText(defaultValue));
+      }
+    }, [isDev, defaultValue]);
+
     if (isDev || !model) {
       let inputProps = {
         inputProps: {
