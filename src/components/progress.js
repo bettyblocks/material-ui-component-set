@@ -1,6 +1,5 @@
 (() => ({
   name: 'Progress',
-  icon: 'ProgressBarIcon',
   type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',

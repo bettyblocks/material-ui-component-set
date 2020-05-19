@@ -41,9 +41,7 @@
 
     const { getActionInput, useText, env, getProperty } = B;
     const isDev = env === 'dev';
-    const [currentValue, setCurrentValue] = isDev
-      ? useState(defaultValue.join(' '))
-      : useState(useText(defaultValue));
+    const [currentValue, setCurrentValue] = useState(useText(defaultValue));
     const [showPassword, togglePassword] = useState(false);
     const helper = useText(helperText);
     const placeholderText = useText(placeholder);
@@ -91,12 +89,19 @@
 
     const iconButtonOptions = {
       edge: adornmentPosition,
+      tabIndex: isDev && -1,
     };
     if (type === 'password') {
       iconButtonOptions.ariaLabel = 'toggle password visibility';
       iconButtonOptions.onClick = handleClickShowPassword;
       iconButtonOptions.onMouseDown = handleMouseDownPassword;
     }
+
+    useEffect(() => {
+      if (isDev) {
+        setCurrentValue(useText(defaultValue));
+      }
+    }, [isDev, defaultValue]);
 
     const TextFieldCmp = (
       <FormControl
@@ -111,13 +116,7 @@
         {labelText && <InputLabel>{labelText}</InputLabel>}
         <InputCmp
           name={actionInput && actionInput.name}
-          value={
-            isDev
-              ? defaultValue
-                  .map(textitem => (textitem.name ? textitem.name : textitem))
-                  .join(' ')
-              : currentValue
-          }
+          value={currentValue}
           type={(isDev && type === 'number') || showPassword ? 'text' : type}
           multiline={multiline}
           rows={rows}
@@ -148,6 +147,9 @@
               </InputAdornment>
             )
           }
+          inputProps={{
+            tabIndex: isDev && -1,
+          }}
         />
         {helper && <FormHelperText>{helper}</FormHelperText>}
       </FormControl>
