@@ -18,7 +18,7 @@
         {
           value: '',
           label: 'Input',
-          key: 'actionInputId-f',
+          key: 'actionInputId',
           type: 'ACTION_INPUT',
         },
         {
