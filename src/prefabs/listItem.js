@@ -1358,6 +1358,12 @@
         },
         {
           type: 'TOGGLE',
+          label: 'Dense',
+          key: 'dense',
+          value: false,
+        },
+        {
+          type: 'TOGGLE',
           label: 'Divider',
           key: 'divider',
           value: false,

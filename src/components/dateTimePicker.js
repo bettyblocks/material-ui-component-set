@@ -37,9 +37,7 @@
     const { getActionInput, useText, getProperty, env } = B;
     const isDev = env === 'dev';
     const actionInput = getActionInput(actionInputId);
-    const strDefaultValue = isDev
-      ? defaultValue.join(' ')
-      : useText(defaultValue);
+    const strDefaultValue = useText(defaultValue);
     const [selectedDate, setSelectedDate] = useState(strDefaultValue);
     const helper = useText(helperText);
     const placeholderText = useText(placeholder);
@@ -87,10 +85,9 @@
         ? selectedDate
         : new Date(`${dateString}${selectedDate}`);
 
-      devValue =
-        defaultValue.length > 0
-          ? new Date(`${dateString}${strDefaultValue}`)
-          : new Date(`${dateString}00:00:00`);
+      devValue = strDefaultValue
+        ? new Date(`${dateString}${strDefaultValue}`)
+        : new Date(`${dateString}00:00:00`);
       prodValue = !isDev ? selectedDateInDateFormat : devValue;
     }
 
@@ -104,8 +101,14 @@
         fullWidth={fullWidth}
         onChange={changeHandler}
         inputVariant={inputvariant}
-        inputProps={{
-          name: actionInput && actionInput.name,
+        InputProps={{
+          inputProps: {
+            name: actionInput && actionInput.name,
+            tabIndex: isDev && -1,
+          },
+        }}
+        KeyboardButtonProps={{
+          tabIndex: isDev && -1,
         }}
         required={required}
         disabled={disabled}

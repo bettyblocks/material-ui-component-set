@@ -23,14 +23,18 @@
       buttonText,
     } = options;
 
-    const isDev = B.env === 'dev';
+    const { env, useText } = B;
+    const isDev = env === 'dev';
     const isAction = linkType === 'action';
     const hasLink = linkTo && linkTo.id !== '';
     const hasExternalLink = linkToExternal && linkToExternal.id !== '';
+    const isIcon = variant === 'icon';
+    const buttonContent = useText(buttonText);
 
     const generalProps = {
       disabled,
       size,
+      tabindex: isDev && -1,
       href:
         linkType === 'external' && hasExternalLink ? linkToExternal : undefined,
       component: linkType === 'internal' && hasLink ? B.Link : undefined,
@@ -54,7 +58,7 @@
       },
       className: [
         visible || isDev ? '' : classes.hide,
-        buttonText.length === 0 ? classes.empty : '',
+        buttonContent ? '' : classes.empty,
       ].join(' '),
       type: isDev ? 'button' : type,
     };
@@ -63,21 +67,23 @@
       <Button
         {...buttonProps}
         startIcon={
+          !isIcon &&
           icon !== 'None' &&
           iconPosition === 'start' &&
           React.createElement(Icons[icon])
         }
         endIcon={
+          !isIcon &&
           icon !== 'None' &&
           iconPosition === 'end' &&
           React.createElement(Icons[icon])
         }
       >
-        {variant === 'icon'
+        {isIcon
           ? React.createElement(Icons[icon === 'None' ? 'Error' : icon], {
               fontSize: size,
             })
-          : buttonText}
+          : buttonContent}
       </Button>
     );
 
@@ -92,7 +98,7 @@
               if (!isDev && !loading && linkType === 'action') callAction();
             };
             const actionClickHandler = isAction && { onClick: onClickAction };
-            return variant === 'icon' ? (
+            return isIcon ? (
               <IconButton {...iconButtonProps} {...actionClickHandler}>
                 {loading
                   ? Loader
@@ -105,7 +111,7 @@
               </IconButton>
             ) : (
               <Button {...buttonProps} {...actionClickHandler}>
-                {buttonText}
+                {buttonContent}
                 {loading && Loader}
               </Button>
             );
