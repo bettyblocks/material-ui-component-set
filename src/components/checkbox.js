@@ -26,7 +26,7 @@
     const componentHelperText = useText(helperText);
     const propLabelOverride = useText(propertyLabelOverride);
     const { label: propertyLabelText } = getProperty(property) || {};
-    const [checked, setChecked] = useState(componentChecked);
+    const [checked, setChecked] = useState(componentChecked === 'true');
 
     const propertyLabel = propLabelOverride || propertyLabelText;
     const labelText = property ? propertyLabel : componentLabel;
