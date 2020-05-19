@@ -56,6 +56,7 @@
         disabled={disabled}
         size={size}
         tabIndex={isDev && -1}
+        value="on"
       />
     );
 
