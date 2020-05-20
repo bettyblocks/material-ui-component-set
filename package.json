@@ -6,6 +6,9 @@
   "private": false,
   "devDependencies": {
     "@betty-blocks/cli": "^23.2.4",
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-angular": "^8.3.4",
+    "@commitlint/prompt-cli": "^8.3.5",
     "eslint": "^5.9.0",
     "eslint-config-airbnb": "17.1.0",
     "eslint-config-prettier": "^3.3.0",
@@ -13,16 +16,27 @@
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-prettier": "^3.0.0",
     "eslint-plugin-react": "^7.11.1",
+    "husky": "^4.2.5",
     "nodemon": "^1.19.1",
     "prettier": "^1.15.3",
+    "semantic-release": "^17.0.7",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn prettier:check",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
   },
   "scripts": {
     "start": "bb components serve -p 5002",
     "build": "bb components build",
     "dev": "nodemon --watch src --exec 'yarn build && yarn start'",
     "lint": "eslint --ext js ./src",
+    "prettier:base": "prettier --single-quote",
+    "prettier:check": "yarn prettier:base --list-different \"src/**/*.js\"",
+    "prettier:write": "yarn prettier:base --write \"src/**/*.js\"",
     "upload": "bb components publish -b material-ui-component-set",
     "test": "echo \"Error: no test specified\" && exit 0",
     "bundle": "npx webpack --config webpack.config.js"
@@ -40,5 +54,9 @@
     "date-fns": "^2.11.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bettyblocks/material-ui-component-set.git"
   }
 }
