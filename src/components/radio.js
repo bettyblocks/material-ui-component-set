@@ -28,7 +28,8 @@
     const isDev = B.env === 'dev';
     const { GetAll, getProperty, useText, getActionInput } = B;
 
-    const { label: propertyLabelText } = getProperty(property) || {};
+    const { label: propertyLabelText, name: propertyName } =
+      getProperty(property) || {};
     const propLabelOverride = useText(propertyLabelOverride);
     const propertyLabel = propLabelOverride || propertyLabelText;
     const labelText = property ? propertyLabel : label;
@@ -36,6 +37,7 @@
     const labelProperty = getProperty(labelProp);
     const valueProperty = getProperty(valueProp);
     const actionInput = getActionInput(actionInputId);
+    const formComponentName = propertyName || (actionInput && actionInput.name);
 
     let componentValue = useText(defaultValue);
     const componentHelperText = useText(helperText);
@@ -115,7 +117,7 @@
         <RadioGroup
           row={row}
           value={value}
-          name={actionInput && actionInput.name}
+          name={formComponentName}
           onChange={handleChange}
           aria-label={labelText}
         >

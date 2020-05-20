@@ -46,12 +46,14 @@
     const helper = useText(helperText);
     const placeholderText = useText(placeholder);
 
-    const { label: propertyLabelText } = getProperty(property) || {};
+    const { label: propertyLabelText, name: propertyName } =
+      getProperty(property) || {};
     const propLabelOverride = useText(propertyLabelOverride);
     const propertyLabel = propLabelOverride || propertyLabelText;
     const labelText = property ? propertyLabel : label;
 
     const actionInput = getActionInput(actionInputId);
+    const formComponentName = propertyName || (actionInput && actionInput.name);
 
     const changeHandler = event => {
       const {
@@ -115,7 +117,7 @@
       >
         {labelText && <InputLabel>{labelText}</InputLabel>}
         <InputCmp
-          name={actionInput && actionInput.name}
+          name={formComponentName}
           value={currentValue}
           type={(isDev && type === 'number') || showPassword ? 'text' : type}
           multiline={multiline}

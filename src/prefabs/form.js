@@ -20,6 +20,14 @@
           label: 'Input',
           key: 'actionInputId',
           type: 'ACTION_INPUT',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'customModel',
+              comparator: 'EQ',
+              value: '',
+            },
+          },
         },
         {
           value: '',
@@ -118,6 +126,14 @@
               label: 'Input',
               key: 'actionInputId',
               type: 'ACTION_INPUT',
+              configuration: {
+                condition: {
+                  type: 'SHOW',
+                  option: 'property',
+                  comparator: 'EQ',
+                  value: '',
+                },
+              },
             },
             {
               value: false,

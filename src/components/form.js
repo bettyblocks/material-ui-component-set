@@ -6,10 +6,11 @@
   jsx: (
     <div>
       {(() => {
-        const { Action, Children } = B;
+        const { Action, Children, getActionInput } = B;
 
         const {
           actionId,
+          actionInputId,
           model,
           filter,
           formErrorMessage,
@@ -21,6 +22,7 @@
         const empty = children.length === 0;
         const isDev = B.env === 'dev';
         const isPristine = empty && isDev;
+        const actionInput = getActionInput(actionInputId);
 
         return (
           <Action actionId={actionId}>
@@ -42,13 +44,20 @@
                     event.preventDefault();
                     const formData = new FormData(formRef.current);
                     const entries = Array.from(formData);
+                    const variableName = actionInput && actionInput.name;
                     const values = entries.reduce((acc, currentvalue) => {
                       const key = currentvalue[0];
                       const value = currentvalue[1];
-                      return { ...acc, [key]: value };
+                      return {
+                        ...acc,
+                        [key]: value,
+                      };
                     }, {});
+                    const submitData = variableName
+                      ? { [variableName]: values }
+                      : values;
                     callAction({
-                      variables: { input: values },
+                      variables: { input: submitData },
                     });
                   }}
                   ref={formRef}
