@@ -47,7 +47,8 @@
     const placeholderText = useText(placeholder);
     const helper = useText(helperText);
 
-    const { label: propertyLabelText } = getProperty(property) || {};
+    const { label: propertyLabelText, name: propertyName } =
+      getProperty(property) || {};
     const propLabelOverride = useText(propertyLabelOverride);
     const propertyLabel = propLabelOverride || propertyLabelText;
     const labelText = property ? propertyLabel : label;
@@ -105,8 +106,8 @@
     const actionInput = getActionInput(actionInputId);
     const value = currentValue;
     const searchProp = searchProperty ? getProperty(searchProperty) : null;
-
     const valueProp = valueProperty ? getProperty(valueProperty) : null;
+    const formComponentName = propertyName || (actionInput && actionInput.name);
 
     const [searchParam, setSearchParam] = useState('');
     const [debouncedSearchParam, setDebouncedSearchParam] = useState('');
@@ -225,11 +226,7 @@
               renderOption={renderCheckboxes && renderOption}
               renderInput={params => (
                 <>
-                  <input
-                    type="hidden"
-                    name={actionInput && actionInput.name}
-                    value={value}
-                  />
+                  <input type="hidden" name={formComponentName} value={value} />
                   <TextField
                     {...params}
                     {...textFieldProps}

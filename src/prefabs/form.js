@@ -50,6 +50,20 @@
           },
         },
         {
+          value: '',
+          label: 'Input',
+          key: 'actionInputId',
+          type: 'ACTION_INPUT',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'customModel',
+              comparator: 'EQ',
+              value: '',
+            },
+          },
+        },
+        {
           value: 'Thanks for submitting the form!',
           label: 'Success message',
           key: 'formSuccessMessage',

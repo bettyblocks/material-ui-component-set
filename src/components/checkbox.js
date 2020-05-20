@@ -25,11 +25,13 @@
     const componentChecked = useText(defaultValue);
     const componentHelperText = useText(helperText);
     const propLabelOverride = useText(propertyLabelOverride);
-    const { label: propertyLabelText } = getProperty(property) || {};
+    const { label: propertyLabelText, name: propertyName } =
+      getProperty(property) || {};
     const [checked, setChecked] = useState(componentChecked === 'true');
 
     const propertyLabel = propLabelOverride || propertyLabelText;
     const labelText = property ? propertyLabel : componentLabel;
+    const formComponentName = propertyName || (actionInput && actionInput.name);
 
     const {
       Checkbox: MUICheckbox,
@@ -52,7 +54,7 @@
       <MUICheckbox
         checked={checked}
         onChange={handleChange}
-        name={actionInput && actionInput.name}
+        name={formComponentName}
         disabled={disabled}
         size={size}
         tabIndex={isDev && -1}
