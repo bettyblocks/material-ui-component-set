@@ -23,18 +23,15 @@
       icon,
       avatar,
       linkTo,
+      dense,
     } = options;
     const { env, useText, Link } = B;
     const isDev = env === 'dev';
 
     const hasLink = linkTo && linkTo.id !== '';
 
-    const primary = isDev
-      ? primaryText.map(t => (t.name ? t.name : t)).join(' ')
-      : useText(primaryText);
-    const secondary = isDev
-      ? secondaryText.map(t => (t.name ? t.name : t)).join(' ')
-      : useText(secondaryText);
+    const primary = useText(primaryText);
+    const secondary = useText(secondaryText);
 
     const IconComponent = (
       <ListItemIcon>
@@ -67,6 +64,7 @@
         divider={divider}
         selected={selected}
         className={classes.root}
+        dense={dense}
       >
         {icon !== 'None' && (avatar ? AvatarComponent : IconComponent)}
         <ListItemText

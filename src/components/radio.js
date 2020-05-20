@@ -28,12 +28,8 @@
     const isDev = B.env === 'dev';
     const { GetAll, getProperty, useText, getActionInput } = B;
 
-    const propLabel =
-      property && getProperty(property) && getProperty(property).label;
-    const propLabelOverride = isDev
-      ? propertyLabelOverride.map(l => (l.name ? l.name : l)).join(' ')
-      : useText(propertyLabelOverride);
-    const propertyLabelText = isDev ? '{{ property label }}' : propLabel;
+    const { label: propertyLabelText } = getProperty(property) || {};
+    const propLabelOverride = useText(propertyLabelOverride);
     const propertyLabel = propLabelOverride || propertyLabelText;
     const labelText = property ? propertyLabel : label;
 
@@ -41,15 +37,8 @@
     const valueProperty = getProperty(valueProp);
     const actionInput = getActionInput(actionInputId);
 
-    let componentValue = defaultValue.map(v => (v.name ? v.name : v)).join(' ');
-    let componentHelperText = helperText
-      .map(h => (h.name ? h.name : h))
-      .join(' ');
-
-    if (!isDev) {
-      componentValue = useText(defaultValue);
-      componentHelperText = useText(helperText);
-    }
+    let componentValue = useText(defaultValue);
+    const componentHelperText = useText(helperText);
 
     componentValue = isNaN(Number(componentValue))
       ? componentValue
@@ -73,7 +62,7 @@
       <MUIFormControlLabel
         disabled={disabled}
         value={optionValue}
-        control={<Radio size={size} />}
+        control={<Radio tabIndex={isDev && -1} size={size} />}
         label={optionLabel}
         labelPlacement={position}
       />
@@ -107,6 +96,12 @@
     const handleChange = evt => {
       setValue(getValue(evt.target.value));
     };
+
+    useEffect(() => {
+      if (isDev) {
+        setValue(useText(defaultValue));
+      }
+    }, [isDev, defaultValue]);
 
     const FormControl = (
       <MUIFormControl

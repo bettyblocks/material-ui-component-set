@@ -1,6 +1,5 @@
 (() => ({
   name: 'DateTimePicker',
-  icon: 'DateTimePickerIcon',
   type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
@@ -38,22 +37,12 @@
     const { getActionInput, useText, getProperty, env } = B;
     const isDev = env === 'dev';
     const actionInput = getActionInput(actionInputId);
-    const strDefaultValue = defaultValue.join(' ');
-    const [selectedDate, setSelectedDate] = isDev
-      ? useState(strDefaultValue)
-      : useState(useText(defaultValue));
-    const helper = isDev
-      ? helperText.map(h => (h.name ? h.name : h)).join(' ')
-      : useText(helperText);
-    const placeholderText = isDev
-      ? placeholder.join(' ')
-      : useText(placeholder);
-    const propLabel =
-      property && getProperty(property) && getProperty(property).label;
-    const propLabelOverride = isDev
-      ? propertyLabelOverride.map(l => (l.name ? l.name : l)).join(' ')
-      : useText(propertyLabelOverride);
-    const propertyLabelText = isDev ? '{{ property label }}' : propLabel;
+    const strDefaultValue = useText(defaultValue);
+    const [selectedDate, setSelectedDate] = useState(strDefaultValue);
+    const helper = useText(helperText);
+    const placeholderText = useText(placeholder);
+    const { label: propertyLabelText } = getProperty(property) || {};
+    const propLabelOverride = useText(propertyLabelOverride);
     const propertyLabel = propLabelOverride || propertyLabelText;
     const labelText = property ? propertyLabel : label;
 
@@ -96,10 +85,9 @@
         ? selectedDate
         : new Date(`${dateString}${selectedDate}`);
 
-      devValue =
-        defaultValue.length > 0
-          ? new Date(`${dateString}${strDefaultValue}`)
-          : new Date(`${dateString}00:00:00`);
+      devValue = strDefaultValue
+        ? new Date(`${dateString}${strDefaultValue}`)
+        : new Date(`${dateString}00:00:00`);
       prodValue = !isDev ? selectedDateInDateFormat : devValue;
     }
 
@@ -113,8 +101,14 @@
         fullWidth={fullWidth}
         onChange={changeHandler}
         inputVariant={inputvariant}
-        inputProps={{
-          name: actionInput && actionInput.name,
+        InputProps={{
+          inputProps: {
+            name: actionInput && actionInput.name,
+            tabIndex: isDev && -1,
+          },
+        }}
+        KeyboardButtonProps={{
+          tabIndex: isDev && -1,
         }}
         required={required}
         disabled={disabled}

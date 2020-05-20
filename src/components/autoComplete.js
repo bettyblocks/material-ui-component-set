@@ -43,22 +43,12 @@
     } = window.MaterialUI.Icons;
     const { useText, getProperty, getActionInput, GetAll, env } = B;
     const isDev = env === 'dev';
-    const [currentValue, setCurrentValue] = isDev
-      ? useState(defaultValue.join(' '))
-      : useState(useText(defaultValue));
-    const placeholderText = isDev
-      ? placeholder.join(' ')
-      : useText(placeholder);
-    const helper = isDev
-      ? helperText.map(h => (h.name ? h.name : h)).join(' ')
-      : useText(helperText);
+    const [currentValue, setCurrentValue] = useState(useText(defaultValue));
+    const placeholderText = useText(placeholder);
+    const helper = useText(helperText);
 
-    const propLabel =
-      property && getProperty(property) && getProperty(property).label;
-    const propLabelOverride = isDev
-      ? propertyLabelOverride.map(l => (l.name ? l.name : l)).join(' ')
-      : useText(propertyLabelOverride);
-    const propertyLabelText = isDev ? '{{ property label }}' : propLabel;
+    const { label: propertyLabelText } = getProperty(property) || {};
+    const propLabelOverride = useText(propertyLabelOverride);
     const propertyLabel = propLabelOverride || propertyLabelText;
     const labelText = property ? propertyLabel : label;
 
@@ -76,23 +66,28 @@
       helperText: helper,
     };
 
-    if (isDev || !model) {
-      const textValue = defaultValue
-        .map(textitem => (textitem.name ? textitem.name : textitem))
-        .join(' ');
+    useEffect(() => {
+      if (isDev) {
+        setCurrentValue(useText(defaultValue));
+      }
+    }, [isDev, defaultValue]);
 
-      let inputAdornments = {
+    if (isDev || !model) {
+      let inputProps = {
+        inputProps: {
+          tabIndex: isDev && -1,
+        },
         endAdornment: (
           <>
-            {textValue && <Close className={classes.icon} />}
+            {currentValue && <Close className={classes.icon} />}
             {!freeSolo && <ExpandMore className={classes.icon} />}
           </>
         ),
       };
-      if (multiple && textValue) {
-        inputAdornments = {
-          ...inputAdornments,
-          startAdornment: <Chip label={textValue} onDelete={() => {}} />,
+      if (multiple && currentValue) {
+        inputProps = {
+          ...inputProps,
+          startAdornment: <Chip label={currentValue} onDelete={() => {}} />,
         };
       }
 
@@ -100,8 +95,8 @@
         <div className={classes.root}>
           <TextField
             {...textFieldProps}
-            value={multiple ? '' : textValue}
-            InputProps={inputAdornments}
+            value={multiple ? '' : currentValue}
+            InputProps={inputProps}
           />
         </div>
       );

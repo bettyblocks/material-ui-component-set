@@ -28,29 +28,19 @@
     const { TextField, MenuItem } = window.MaterialUI.Core;
     const isDev = B.env === 'dev';
     const { GetAll, getProperty, getActionInput, useText } = B;
-    const [currentValue, setCurrentValue] = isDev
-      ? useState(defaultValue.join(' '))
-      : useState(useText(defaultValue));
-    const helper = isDev
-      ? helperText.map(h => (h.name ? h.name : h)).join(' ')
-      : useText(helperText);
+    const [currentValue, setCurrentValue] = useState(useText(defaultValue));
+    const helper = useText(helperText);
 
-    const propLabel =
-      property && getProperty(property) && getProperty(property).label;
-    const propLabelOverride = isDev
-      ? propertyLabelOverride.map(l => (l.name ? l.name : l)).join(' ')
-      : useText(propertyLabelOverride);
-    const propertyLabelText = isDev ? '{{ property label }}' : propLabel;
+    const { label: propertyLabelText } = getProperty(property) || {};
+    const propLabelOverride = useText(propertyLabelOverride);
     const propertyLabel = propLabelOverride || propertyLabelText;
     const labelText = property ? propertyLabel : label;
 
     const actionInput = getActionInput(actionInputId);
     const value = currentValue;
 
-    const labelProperty = getProperty(labelProp);
-    const valueProperty = getProperty(valueProp);
-    const { name: propName } = valueProperty || {};
-    const { name: labelName } = labelProperty || {};
+    const { name: labelName } = getProperty(labelProp) || {};
+    const { name: propName } = getProperty(valueProp) || {};
 
     const handleChange = event => {
       const {
@@ -60,22 +50,25 @@
       setCurrentValue(eventValue);
     };
 
+    useEffect(() => {
+      if (isDev) {
+        setCurrentValue(useText(defaultValue));
+      }
+    }, [isDev, defaultValue]);
+
     const SelectCmp =
       optionType === 'static' ? (
         <TextField
           select
-          value={
-            isDev
-              ? defaultValue
-                  .map(textitem => (textitem.name ? textitem.name : textitem))
-                  .join(' ')
-              : value
-          }
+          value={value}
           size={size}
           variant={variant}
           fullWidth={fullWidth}
           onChange={handleChange}
-          inputProps={{ name: actionInput && actionInput.name }}
+          inputProps={{
+            name: actionInput && actionInput.name,
+            tabIndex: isDev ? -1 : 0,
+          }}
           required={required}
           disabled={disabled}
           label={labelText}
@@ -110,7 +103,10 @@
                 variant={variant}
                 fullWidth={fullWidth}
                 onChange={handleChange}
-                inputProps={{ name: actionInput && actionInput.name }}
+                inputProps={{
+                  name: actionInput && actionInput.name,
+                  tabIndex: isDev ? -1 : 0,
+                }}
                 required={required}
                 disabled={disabled}
                 label={labelText}

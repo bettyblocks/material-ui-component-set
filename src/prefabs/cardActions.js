@@ -1463,7 +1463,7 @@
             },
             {
               type: 'COLOR',
-              label: 'color',
+              label: 'Color',
               key: 'background',
               value: 'Secondary',
             },

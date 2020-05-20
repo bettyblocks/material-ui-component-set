@@ -19,26 +19,14 @@
     } = options;
     const { useText, getActionInput, getProperty } = B;
     const isDev = B.env === 'dev';
-    let componentLabel = label.map(l => (l.name ? l.name : l)).join(' ');
-    let propLabelOverride = propertyLabelOverride
-      .map(l => (l.name ? l.name : l))
-      .join(' ');
-    let propertyLabelText = '{{ property label }}';
-    let componentValue = defaultValue.map(v => (v.name ? v.name : v)).join(' ');
-    let componentHelperText = helperText
-      .map(h => (h.name ? h.name : h))
-      .join(' ');
     const actionInput = getActionInput(actionInputId);
-    const propLabel =
-      property && getProperty(property) && getProperty(property).label;
-    if (!isDev) {
-      componentLabel = useText(label);
-      componentValue = useText(defaultValue);
-      componentHelperText = useText(helperText);
-      propLabelOverride = useText(propertyLabelOverride);
-      propertyLabelText = propLabel;
-    }
-    const [value, setValue] = useState({ value: componentValue });
+
+    const componentLabel = useText(label);
+    const componentChecked = useText(defaultValue);
+    const componentHelperText = useText(helperText);
+    const propLabelOverride = useText(propertyLabelOverride);
+    const { label: propertyLabelText } = getProperty(property) || {};
+    const [checked, setChecked] = useState(componentChecked === 'true');
 
     const propertyLabel = propLabelOverride || propertyLabelText;
     const labelText = property ? propertyLabel : componentLabel;
@@ -51,16 +39,24 @@
     } = window.MaterialUI.Core;
 
     const handleChange = evt => {
-      setValue({ value: evt.target.value });
+      setChecked(evt.target.checked);
     };
+
+    useEffect(() => {
+      if (isDev) {
+        setChecked(useText(defaultValue) === 'true');
+      }
+    }, [isDev, defaultValue]);
 
     const Checkbox = (
       <MUICheckbox
-        value={value}
+        checked={checked}
         onChange={handleChange}
         name={actionInput && actionInput.name}
         disabled={disabled}
         size={size}
+        tabIndex={isDev && -1}
+        value="on"
       />
     );
 
