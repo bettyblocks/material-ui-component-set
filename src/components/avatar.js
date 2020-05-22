@@ -2,7 +2,7 @@
   name: 'Avatar',
   type: 'CONTENT_COMPONENT',
   allowedTypes: ['CONTENT_COMPONENT'],
-  orientation: 'HORIZONTAL',
+  orientation: 'VERTICAL',
   jsx: (() => {
     const { Avatar } = window.MaterialUI.Core;
     const { env } = B;
