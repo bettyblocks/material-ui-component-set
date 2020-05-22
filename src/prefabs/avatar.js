@@ -1,6 +1,6 @@
 (() => ({
   name: 'Avatar',
-  icon: 'ImageInputIcon',
+  icon: 'ImageIcon',
   category: 'CONTENT',
   structure: [
     {
