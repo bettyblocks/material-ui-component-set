@@ -59,9 +59,9 @@
         },
         {
           label: 'Logo',
-          key: 'logo',
-          value: '',
-          type: 'TEXT',
+          key: 'logoSource',
+          value: [],
+          type: 'VARIABLE',
         },
         {
           label: 'Align items',
@@ -186,7 +186,7 @@
               type: 'CUSTOM',
               label: 'variant',
               key: 'variant',
-              value: 'contained',
+              value: 'text',
               configuration: {
                 as: 'BUTTONGROUP',
                 dataType: 'string',
@@ -1604,7 +1604,7 @@
             },
             {
               type: 'COLOR',
-              label: 'color',
+              label: 'Color',
               key: 'background',
               value: 'Primary',
             },
@@ -1636,7 +1636,7 @@
               type: 'CUSTOM',
               label: 'variant',
               key: 'variant',
-              value: 'contained',
+              value: 'text',
               configuration: {
                 as: 'BUTTONGROUP',
                 dataType: 'string',
@@ -3054,7 +3054,7 @@
             },
             {
               type: 'COLOR',
-              label: 'color',
+              label: 'Color',
               key: 'background',
               value: 'Primary',
             },

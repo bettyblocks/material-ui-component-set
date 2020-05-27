@@ -1,6 +1,5 @@
 (() => ({
   name: 'DataTable',
-  icon: 'DataTable',
   type: 'CONTENT_COMPONENT',
   allowedTypes: ['DATATABLE_COLUMN'],
   orientation: 'HORIZONTAL',

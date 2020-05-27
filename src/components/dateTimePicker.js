@@ -1,6 +1,5 @@
 (() => ({
   name: 'DateTimePicker',
-  icon: 'DateTimePickerIcon',
   type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
@@ -24,6 +23,8 @@
       helperText,
       actionInputId,
       disableToolbar,
+      property,
+      propertyLabelOverride,
     } = options;
 
     const {
@@ -33,17 +34,17 @@
       KeyboardDateTimePicker,
     } = window.MaterialUI.Pickers;
     const { DateFnsUtils } = window.MaterialUI;
-    const { getActionInput, useText } = B;
-    const isDev = B.env === 'dev';
+    const { getActionInput, useText, getProperty, env } = B;
+    const isDev = env === 'dev';
     const actionInput = getActionInput(actionInputId);
-    const strDefaultValue = defaultValue.join(' ');
-    const [selectedDate, setSelectedDate] = isDev
-      ? useState(strDefaultValue)
-      : useState(useText(defaultValue));
-    const helper = isDev ? helperText.join(' ') : useText(helperText);
-    const placeholderText = isDev
-      ? placeholder.join(' ')
-      : useText(placeholder);
+    const strDefaultValue = useText(defaultValue);
+    const [selectedDate, setSelectedDate] = useState(strDefaultValue);
+    const helper = useText(helperText);
+    const placeholderText = useText(placeholder);
+    const { label: propertyLabelText } = getProperty(property) || {};
+    const propLabelOverride = useText(propertyLabelOverride);
+    const propertyLabel = propLabelOverride || propertyLabelText;
+    const labelText = property ? propertyLabel : label;
 
     const isValidDate = date => date instanceof Date && !isNaN(date);
 
@@ -84,43 +85,52 @@
         ? selectedDate
         : new Date(`${dateString}${selectedDate}`);
 
-      devValue =
-        defaultValue.length > 0
-          ? new Date(`${dateString}${strDefaultValue}`)
-          : new Date(`${dateString}00:00:00`);
+      devValue = strDefaultValue
+        ? new Date(`${dateString}${strDefaultValue}`)
+        : new Date(`${dateString}00:00:00`);
       prodValue = !isDev ? selectedDateInDateFormat : devValue;
     }
 
     const DateTimeCmp = (
-      <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <DateTimeComponent
-          name={actionInput && actionInput.name}
-          value={isDev ? devValue : prodValue}
-          size={size}
-          variant={variant}
-          placeholder={placeholderText}
-          fullWidth={fullWidth}
-          onChange={changeHandler}
-          inputVariant={inputvariant}
-          inputProps={{
+      <DateTimeComponent
+        name={actionInput && actionInput.name}
+        value={isDev ? devValue : prodValue}
+        size={size}
+        variant={variant}
+        placeholder={placeholderText}
+        fullWidth={fullWidth}
+        onChange={changeHandler}
+        inputVariant={inputvariant}
+        InputProps={{
+          inputProps: {
             name: actionInput && actionInput.name,
-          }}
-          required={required}
-          disabled={disabled}
-          label={label}
-          error={error}
-          margin={margin}
-          helperText={helper}
-          disableToolbar={disableToolbar}
-          format={format}
-        />
-      </MuiPickersUtilsProvider>
+            tabIndex: isDev && -1,
+          },
+        }}
+        KeyboardButtonProps={{
+          tabIndex: isDev && -1,
+        }}
+        required={required}
+        disabled={disabled}
+        label={labelText}
+        error={error}
+        margin={margin}
+        helperText={helper}
+        disableToolbar={disableToolbar}
+        format={format}
+      />
     );
 
     return isDev ? (
-      <div className={classes.root}>{DateTimeCmp}</div>
+      <div className={classes.root}>
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          {DateTimeCmp}
+        </MuiPickersUtilsProvider>
+      </div>
     ) : (
-      DateTimeCmp
+      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        {DateTimeCmp}
+      </MuiPickersUtilsProvider>
     );
   })(),
   styles: () => () => ({

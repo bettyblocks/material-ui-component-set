@@ -1,6 +1,5 @@
 (() => ({
   name: 'DataTableColumn',
-  icon: 'DataTableColumnIcon',
   type: 'DATATABLE_COLUMN',
   allowedTypes: ['CONTENT_COMPONENT'],
   orientation: 'VERTICAL',
@@ -96,10 +95,7 @@
           );
         }
 
-        const propertyName = options.property
-          ? getProperty(options.property) && getProperty(options.property).name
-          : '';
-
+        const { name: propertyName } = getProperty(options.property) || {};
         const searchParam = '';
 
         return (

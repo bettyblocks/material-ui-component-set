@@ -1,6 +1,5 @@
 (() => ({
   name: 'Form',
-  icon: 'FormIcon',
   type: 'CONTAINER_COMPONENT',
   allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
@@ -80,6 +79,8 @@
                         if (dataError) return 'Failed';
 
                         const item = modelData.results[0];
+
+                        if (!item) return children;
 
                         return (
                           <>

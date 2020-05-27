@@ -1,6 +1,5 @@
 (() => ({
   name: 'Button',
-  icon: 'ButtonIcon',
   type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'VERTICAL',
@@ -24,15 +23,22 @@
       buttonText,
     } = options;
 
-    const isDev = B.env === 'dev';
+    const { env, useText } = B;
+    const isDev = env === 'dev';
     const isAction = linkType === 'action';
+    const hasLink = linkTo && linkTo.id !== '';
+    const hasExternalLink = linkToExternal && linkToExternal.id !== '';
+    const isIcon = variant === 'icon';
+    const buttonContent = useText(buttonText);
 
     const generalProps = {
       disabled,
       size,
-      href: linkType === 'external' ? linkToExternal : undefined,
-      component: linkType === 'internal' ? B.Link : undefined,
-      endpoint: linkType === 'internal' ? linkTo : undefined,
+      tabindex: isDev && -1,
+      href:
+        linkType === 'external' && hasExternalLink ? linkToExternal : undefined,
+      component: linkType === 'internal' && hasLink ? B.Link : undefined,
+      endpoint: linkType === 'internal' && hasLink ? linkTo : undefined,
     };
 
     const iconButtonProps = {
@@ -45,8 +51,6 @@
       ...generalProps,
       fullWidth,
       variant,
-      [`${iconPosition}Icon`]:
-        icon !== 'None' ? React.createElement(Icons[icon]) : undefined,
       classes: {
         root: classes.root,
         contained: classes.contained,
@@ -54,21 +58,34 @@
       },
       className: [
         visible || isDev ? '' : classes.hide,
-        buttonText.length === 0 ? classes.empty : '',
+        buttonContent ? '' : classes.empty,
       ].join(' '),
       type: isDev ? 'button' : type,
     };
 
-    let ButtonComponent =
-      variant === 'icon' ? (
-        <IconButton {...iconButtonProps}>
-          {React.createElement(Icons[icon === 'None' ? 'Error' : icon], {
-            fontSize: size,
-          })}
-        </IconButton>
-      ) : (
-        <Button {...buttonProps}>{buttonText}</Button>
-      );
+    let ButtonComponent = (
+      <Button
+        {...buttonProps}
+        startIcon={
+          !isIcon &&
+          icon !== 'None' &&
+          iconPosition === 'start' &&
+          React.createElement(Icons[icon])
+        }
+        endIcon={
+          !isIcon &&
+          icon !== 'None' &&
+          iconPosition === 'end' &&
+          React.createElement(Icons[icon])
+        }
+      >
+        {isIcon
+          ? React.createElement(Icons[icon === 'None' ? 'Error' : icon], {
+              fontSize: size,
+            })
+          : buttonContent}
+      </Button>
+    );
 
     const Loader = <CircularProgress size={16} className={classes.loader} />;
 
@@ -81,7 +98,7 @@
               if (!isDev && !loading && linkType === 'action') callAction();
             };
             const actionClickHandler = isAction && { onClick: onClickAction };
-            return variant === 'icon' ? (
+            return isIcon ? (
               <IconButton {...iconButtonProps} {...actionClickHandler}>
                 {loading
                   ? Loader
@@ -94,7 +111,7 @@
               </IconButton>
             ) : (
               <Button {...buttonProps} {...actionClickHandler}>
-                {buttonText}
+                {buttonContent}
                 {loading && Loader}
               </Button>
             );

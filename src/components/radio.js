@@ -22,23 +22,23 @@
       margin,
       error,
       filter,
+      property,
+      propertyLabelOverride,
     } = options;
     const isDev = B.env === 'dev';
     const { GetAll, getProperty, useText, getActionInput } = B;
+
+    const { label: propertyLabelText } = getProperty(property) || {};
+    const propLabelOverride = useText(propertyLabelOverride);
+    const propertyLabel = propLabelOverride || propertyLabelText;
+    const labelText = property ? propertyLabel : label;
 
     const labelProperty = getProperty(labelProp);
     const valueProperty = getProperty(valueProp);
     const actionInput = getActionInput(actionInputId);
 
-    let componentValue = defaultValue.map(v => (v.name ? v.name : v)).join(' ');
-    let componentHelperText = helperText
-      .map(h => (h.name ? h.name : h))
-      .join(' ');
-
-    if (!isDev) {
-      componentValue = useText(defaultValue);
-      componentHelperText = useText(helperText);
-    }
+    let componentValue = useText(defaultValue);
+    const componentHelperText = useText(helperText);
 
     componentValue = isNaN(Number(componentValue))
       ? componentValue
@@ -62,7 +62,7 @@
       <MUIFormControlLabel
         disabled={disabled}
         value={optionValue}
-        control={<Radio size={size} />}
+        control={<Radio tabIndex={isDev && -1} size={size} />}
         label={optionLabel}
         labelPlacement={position}
       />
@@ -97,6 +97,12 @@
       setValue(getValue(evt.target.value));
     };
 
+    useEffect(() => {
+      if (isDev) {
+        setValue(useText(defaultValue));
+      }
+    }, [isDev, defaultValue]);
+
     const FormControl = (
       <MUIFormControl
         className={classes.formControl}
@@ -105,13 +111,13 @@
         component="fieldset"
         error={error}
       >
-        <FormLabel component="legend">{label}</FormLabel>
+        <FormLabel component="legend">{labelText}</FormLabel>
         <RadioGroup
           row={row}
           value={value}
           name={actionInput && actionInput.name}
           onChange={handleChange}
-          aria-label={label}
+          aria-label={labelText}
         >
           {Radios}
         </RadioGroup>

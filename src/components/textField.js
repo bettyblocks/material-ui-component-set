@@ -1,6 +1,5 @@
 (() => ({
   name: 'TextField',
-  icon: 'TextInputIcon',
   type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
@@ -24,29 +23,35 @@
       adornment,
       adornmentIcon,
       adornmentPosition,
+      property,
+      propertyLabelOverride,
     } = options;
 
-    const { TextField, InputAdornment, IconButton } = window.MaterialUI.Core;
     const {
-      Icons,
-      Icons: { Visibility, VisibilityOff },
-    } = window.MaterialUI;
+      FormControl,
+      Input,
+      OutlinedInput,
+      FilledInput,
+      InputLabel,
+      FormHelperText,
+      InputAdornment,
+      IconButton,
+    } = window.MaterialUI.Core;
+    const { Icons } = window.MaterialUI;
 
-    const { getActionInput, useText } = B;
-    const isDev = B.env === 'dev';
-    const [currentValue, setCurrentValue] = isDev
-      ? useState(defaultValue.join(' '))
-      : useState(useText(defaultValue));
+    const { getActionInput, useText, env, getProperty } = B;
+    const isDev = env === 'dev';
+    const [currentValue, setCurrentValue] = useState(useText(defaultValue));
     const [showPassword, togglePassword] = useState(false);
-    const helper = isDev
-      ? helperText.map(h => (h.name ? h.name : h)).join(' ')
-      : useText(helperText);
-    const placeholderText = isDev
-      ? placeholder.map(p => (p.name ? p.name : p)).join(' ')
-      : useText(placeholder);
+    const helper = useText(helperText);
+    const placeholderText = useText(placeholder);
+
+    const { label: propertyLabelText } = getProperty(property) || {};
+    const propLabelOverride = useText(propertyLabelOverride);
+    const propertyLabel = propLabelOverride || propertyLabelText;
+    const labelText = property ? propertyLabel : label;
 
     const actionInput = getActionInput(actionInputId);
-    const value = currentValue;
 
     const changeHandler = event => {
       const {
@@ -64,67 +69,90 @@
       event.preventDefault();
     };
 
-    const adornmentCmp =
-      adornmentIcon && adornmentIcon !== 'none' ? (
-        <IconButton>
-          {React.createElement(Icons[adornmentIcon], { fontSize: size })}
-        </IconButton>
-      ) : (
-        adornment
-      );
-    let InputAdornmentCmp = adornmentCmp && {
-      [`${adornmentPosition}Adornment`]: (
-        <InputAdornment position={adornmentPosition}>
-          {adornmentCmp}
-        </InputAdornment>
-      ),
-    };
-
-    if (adornment && type === 'password') {
-      InputAdornmentCmp = {
-        [`${adornmentPosition}Adornment`]: (
-          <InputAdornment position={adornmentPosition}>
-            <IconButton
-              aria-label="toggle password visibility"
-              onClick={handleClickShowPassword}
-              onMouseDown={handleMouseDownPassword}
-            >
-              {showPassword ? <Visibility /> : <VisibilityOff />}
-            </IconButton>
-          </InputAdornment>
-        ),
-      };
+    let InputCmp = Input;
+    if (variant === 'outlined') {
+      InputCmp = OutlinedInput;
+    } else if (variant === 'filled') {
+      InputCmp = FilledInput;
     }
 
+    const passwordIcon = showPassword ? 'Visibility' : 'VisibilityOff';
+    const inputIcon = type === 'password' ? passwordIcon : adornmentIcon;
+    const hasIcon = inputIcon && inputIcon !== 'none';
+    const hasAdornment = adornment || hasIcon;
+
+    const IconCmp =
+      hasIcon &&
+      React.createElement(Icons[inputIcon], {
+        fontSize: size,
+      });
+
+    const iconButtonOptions = {
+      edge: adornmentPosition,
+      tabIndex: isDev && -1,
+    };
+    if (type === 'password') {
+      iconButtonOptions.ariaLabel = 'toggle password visibility';
+      iconButtonOptions.onClick = handleClickShowPassword;
+      iconButtonOptions.onMouseDown = handleMouseDownPassword;
+    }
+
+    useEffect(() => {
+      if (isDev) {
+        setCurrentValue(useText(defaultValue));
+      }
+    }, [isDev, defaultValue]);
+
     const TextFieldCmp = (
-      <TextField
-        name={actionInput && actionInput.name}
-        value={
-          isDev
-            ? defaultValue
-                .map(textitem => (textitem.name ? textitem.name : textitem))
-                .join(' ')
-            : value
-        }
-        size={size}
+      <FormControl
         variant={variant}
-        placeholder={placeholderText}
+        size={size}
         fullWidth={fullWidth}
-        type={(isDev && type === 'number') || showPassword ? 'text' : type}
-        onChange={changeHandler}
-        InputProps={{
-          inputProps: { name: actionInput && actionInput.name },
-          ...InputAdornmentCmp,
-        }}
         required={required}
         disabled={disabled}
-        multiline={multiline}
-        rows={rows}
-        label={label}
-        error={error}
         margin={margin}
-        helperText={helper}
-      />
+        error={error}
+      >
+        {labelText && <InputLabel>{labelText}</InputLabel>}
+        <InputCmp
+          name={actionInput && actionInput.name}
+          value={currentValue}
+          type={(isDev && type === 'number') || showPassword ? 'text' : type}
+          multiline={multiline}
+          rows={rows}
+          label={labelText}
+          placeholder={placeholderText}
+          onChange={changeHandler}
+          startAdornment={
+            hasAdornment &&
+            adornmentPosition === 'start' && (
+              <InputAdornment position={adornmentPosition}>
+                {hasIcon ? (
+                  <IconButton {...iconButtonOptions}>{IconCmp}</IconButton>
+                ) : (
+                  adornment
+                )}
+              </InputAdornment>
+            )
+          }
+          endAdornment={
+            hasAdornment &&
+            adornmentPosition === 'end' && (
+              <InputAdornment position={adornmentPosition}>
+                {hasIcon ? (
+                  <IconButton {...iconButtonOptions}>{IconCmp}</IconButton>
+                ) : (
+                  adornment
+                )}
+              </InputAdornment>
+            )
+          }
+          inputProps={{
+            tabIndex: isDev && -1,
+          }}
+        />
+        {helper && <FormHelperText>{helper}</FormHelperText>}
+      </FormControl>
     );
 
     return isDev ? (

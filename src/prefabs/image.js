@@ -7,22 +7,40 @@
       name: 'Image',
       options: [
         {
-          value: '',
+          value: [],
           label: 'Image url',
           key: 'imgUrl',
-          type: 'TEXT',
+          type: 'VARIABLE',
         },
         {
-          value: '',
+          value: [],
           label: 'Image Alternative Text',
           key: 'imgAlt',
-          type: 'TEXT',
+          type: 'VARIABLE',
         },
         {
           value: ['0rem', '0rem', 'M', '0rem'],
           label: 'Outer space',
           key: 'outerSpacing',
           type: 'SIZES',
+        },
+        {
+          type: 'SIZE',
+          label: 'Width',
+          key: 'width',
+          value: '100%',
+          configuration: {
+            as: 'UNIT',
+          },
+        },
+        {
+          type: 'SIZE',
+          label: 'Height',
+          key: 'height',
+          value: '',
+          configuration: {
+            as: 'UNIT',
+          },
         },
       ],
       descendants: [],

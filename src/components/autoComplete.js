@@ -21,24 +21,41 @@
       model,
       multiple,
       freeSolo,
+      searchProperty,
+      valueProperty,
+      property,
+      propertyLabelOverride,
+      closeOnSelect,
+      renderCheckboxes,
     } = options;
-    const isDev = B.env === 'dev';
     const { Autocomplete } = window.MaterialUI.Lab;
-    const { TextField, CircularProgress, Chip } = window.MaterialUI.Core;
-    const { ExpandMore, Close } = window.MaterialUI.Icons;
-    const { useText, getProperty, getActionInput, GetAll } = B;
-    const [currentValue, setCurrentValue] = isDev
-      ? useState(defaultValue.join(' '))
-      : useState(useText(defaultValue));
-    const placeholderText = isDev
-      ? placeholder.join(' ')
-      : useText(placeholder);
-    const helper = isDev ? helperText.join(' ') : useText(helperText);
+    const {
+      TextField,
+      CircularProgress,
+      Chip,
+      Checkbox,
+    } = window.MaterialUI.Core;
+    const {
+      ExpandMore,
+      Close,
+      CheckBox,
+      CheckBoxOutlineBlank,
+    } = window.MaterialUI.Icons;
+    const { useText, getProperty, getActionInput, GetAll, env } = B;
+    const isDev = env === 'dev';
+    const [currentValue, setCurrentValue] = useState(useText(defaultValue));
+    const placeholderText = useText(placeholder);
+    const helper = useText(helperText);
+
+    const { label: propertyLabelText } = getProperty(property) || {};
+    const propLabelOverride = useText(propertyLabelOverride);
+    const propertyLabel = propLabelOverride || propertyLabelText;
+    const labelText = property ? propertyLabel : label;
 
     const textFieldProps = {
       disabled,
       variant,
-      label,
+      label: labelText,
       fullWidth,
       size,
       type,
@@ -49,23 +66,28 @@
       helperText: helper,
     };
 
-    if (isDev || !model) {
-      const textValue = defaultValue
-        .map(textitem => (textitem.name ? textitem.name : textitem))
-        .join(' ');
+    useEffect(() => {
+      if (isDev) {
+        setCurrentValue(useText(defaultValue));
+      }
+    }, [isDev, defaultValue]);
 
-      let inputAdornments = {
+    if (isDev || !model) {
+      let inputProps = {
+        inputProps: {
+          tabIndex: isDev && -1,
+        },
         endAdornment: (
           <>
-            {textValue && <Close className={classes.icon} />}
+            {currentValue && <Close className={classes.icon} />}
             {!freeSolo && <ExpandMore className={classes.icon} />}
           </>
         ),
       };
-      if (multiple && textValue) {
-        inputAdornments = {
-          ...inputAdornments,
-          startAdornment: <Chip label={textValue} onDelete={() => {}} />,
+      if (multiple && currentValue) {
+        inputProps = {
+          ...inputProps,
+          startAdornment: <Chip label={currentValue} onDelete={() => {}} />,
         };
       }
 
@@ -73,8 +95,8 @@
         <div className={classes.root}>
           <TextField
             {...textFieldProps}
-            value={multiple ? '' : textValue}
-            InputProps={inputAdornments}
+            value={multiple ? '' : currentValue}
+            InputProps={inputProps}
           />
         </div>
       );
@@ -82,11 +104,9 @@
 
     const actionInput = getActionInput(actionInputId);
     const value = currentValue;
-    const searchProp = options.property ? getProperty(options.property) : null;
+    const searchProp = searchProperty ? getProperty(searchProperty) : null;
 
-    const valueProp = options.valueproperty
-      ? getProperty(options.valueproperty)
-      : null;
+    const valueProp = valueProperty ? getProperty(valueProperty) : null;
 
     const [searchParam, setSearchParam] = useState('');
     const [debouncedSearchParam, setDebouncedSearchParam] = useState('');
@@ -172,15 +192,28 @@
             );
           }
 
+          const renderLabel = option =>
+            option[searchProp.name] && option[searchProp.name].toString();
+
+          const renderOption = (option, { selected }) => (
+            <>
+              <Checkbox
+                icon={<CheckBoxOutlineBlank fontSize="small" />}
+                checkedIcon={<CheckBox fontSize="small" />}
+                style={{ marginRight: 8 }}
+                checked={selected}
+              />
+              {renderLabel(option)}
+            </>
+          );
+
           return (
             <Autocomplete
               multiple={multiple}
               freeSolo={freeSolo}
               options={data.results}
               defaultValue={getDefaultValue(data.results)}
-              getOptionLabel={option =>
-                option[searchProp.name] && option[searchProp.name].toString()
-              }
+              getOptionLabel={renderLabel}
               onInputChange={(_, inputValue) => {
                 if (!freeSolo) {
                   return;
@@ -188,6 +221,8 @@
                 setSearchParam(inputValue);
               }}
               onChange={onChange}
+              disableCloseOnSelect={!closeOnSelect}
+              renderOption={renderCheckboxes && renderOption}
               renderInput={params => (
                 <>
                   <input

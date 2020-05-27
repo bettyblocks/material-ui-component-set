@@ -1,6 +1,5 @@
 (() => ({
   name: 'DataContainer',
-  icon: 'DataContainer',
   type: 'CONTAINER_COMPONENT',
   allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
@@ -10,7 +9,7 @@
         const isEmpty = children.length === 0;
         const isDev = B.env === 'dev';
         const isPristine = isEmpty && isDev;
-        const { filter, model } = options;
+        const { filter, model, redirectWithoutResult } = options;
 
         const builderLayout = () => (
           <>
@@ -25,30 +24,37 @@
           </>
         );
 
+        const redirect = () => {
+          const history = useHistory();
+          history.push(B.useEndpoint(redirectWithoutResult));
+        };
+
         const canvasLayout = () => {
           if (!model) {
             return builderLayout();
           }
 
           return (
-            <B.GetAll modelId={model} filter={filter} skip={0} take={1}>
+            <B.GetOne modelId={model} filter={filter}>
               {({ loading, error, data }) => {
                 if (loading) return 'loading...';
                 if (error) return 'failed';
 
-                const item = data.results[0];
+                if (!data && redirectWithoutResult) {
+                  redirect();
+                }
 
                 return (
                   <>
-                    {item && (
-                      <B.GetOneProvider key={item.id} value={item}>
+                    {data && (
+                      <B.GetOneProvider key={data.id} value={data}>
                         {children}
                       </B.GetOneProvider>
                     )}
                   </>
                 );
               }}
-            </B.GetAll>
+            </B.GetOne>
           );
         };
 
