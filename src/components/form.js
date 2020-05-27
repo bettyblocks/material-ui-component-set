@@ -31,8 +31,7 @@
             {(callAction, { data, loading, error }) => (
               <>
                 {(() => {
-                  if (data && redirectTo)
-                    history.push(redirectTo);
+                  if (data && redirectTo) history.push(redirectTo);
                 })()}
                 <div className={classes.messageContainer}>
                   {error && (
