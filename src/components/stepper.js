@@ -217,10 +217,16 @@
         },
       },
       stepIcon: {
-        fill: ({ options: { inactiveColor } }) => style.getColor(inactiveColor),
+        fill: ({ options: { inactiveColor } }) => [
+          style.getColor(inactiveColor),
+          '!important',
+        ],
       },
       stepIconActive: {
-        fill: ({ options: { activeColor } }) => style.getColor(activeColor),
+        fill: ({ options: { activeColor } }) => [
+          style.getColor(activeColor),
+          '!important',
+        ],
       },
       empty: {
         display: 'flex',
