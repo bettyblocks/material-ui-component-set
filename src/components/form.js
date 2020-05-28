@@ -15,6 +15,7 @@
           filter,
           formErrorMessage,
           formSuccessMessage,
+          redirect,
         } = options;
 
         const formRef = React.createRef();
@@ -23,11 +24,17 @@
         const isDev = B.env === 'dev';
         const isPristine = empty && isDev;
         const actionInput = getActionInput(actionInputId);
+        const redirectTo =
+          B.env === 'prod' && redirect && B.useEndpoint(redirect);
+        const history = isDev ? {} : useHistory();
 
         return (
           <Action actionId={actionId}>
             {(callAction, { data, loading, error }) => (
               <>
+                {(() => {
+                  if (data && redirectTo) history.push(redirectTo);
+                })()}
                 <div className={classes.messageContainer}>
                   {error && (
                     <span className={classes.error}>{formErrorMessage}</span>

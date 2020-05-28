@@ -75,6 +75,12 @@
           key: 'outerSpacing',
           type: 'SIZES',
         },
+        {
+          value: '',
+          label: 'Redirect after succesful submit',
+          key: 'redirect',
+          type: 'ENDPOINT',
+        },
       ],
       descendants: [
         {
