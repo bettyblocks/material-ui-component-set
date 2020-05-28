@@ -188,6 +188,12 @@
           value: true,
         },
         {
+          type: 'TOGGLE',
+          label: 'Full width',
+          key: 'fullWidth',
+          value: true,
+        },
+        {
           label: 'Size',
           key: 'size',
           value: 'medium',

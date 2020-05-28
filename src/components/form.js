@@ -45,6 +45,10 @@
                     const values = entries.reduce((acc, currentvalue) => {
                       const key = currentvalue[0];
                       const value = currentvalue[1];
+                      if (acc[key]) {
+                        acc[key] = `${acc[key]},${value}`;
+                        return acc;
+                      }
                       return { ...acc, [key]: value };
                     }, {});
                     callAction({
