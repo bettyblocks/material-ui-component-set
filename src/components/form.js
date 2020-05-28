@@ -55,10 +55,11 @@
                     const values = entries.reduce((acc, currentvalue) => {
                       const key = currentvalue[0];
                       const value = currentvalue[1];
-                      return {
-                        ...acc,
-                        [key]: value,
-                      };
+                      if (acc[key]) {
+                        acc[key] = `${acc[key]},${value}`;
+                        return acc;
+                      }
+                      return { ...acc, [key]: value };
                     }, {});
                     const submitData = variableName
                       ? { [variableName]: values }
