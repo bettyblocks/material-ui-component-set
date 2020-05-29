@@ -83,6 +83,27 @@
           value: ['Rows per page'],
         },
         {
+          type: 'TOGGLE',
+          label: 'Sticky header',
+          key: 'stickyHeader',
+          value: false,
+        },
+        {
+          type: 'SIZE',
+          label: 'Height',
+          key: 'height',
+          value: '',
+          configuration: {
+            as: 'UNIT',
+            condition: {
+              type: 'SHOW',
+              option: 'stickyHeader',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
           value: 'medium',
           label: 'Size',
           key: 'size',

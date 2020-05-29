@@ -33,6 +33,7 @@
       square,
       elevation,
       variant,
+      stickyHeader,
     } = options;
     const [page, setPage] = React.useState(0);
     const takeNum = parseInt(take, 10);
@@ -91,9 +92,8 @@
 
       return (
         <div className={classes.root}>
-          <TableContainer
-            classes={{ root: classes.container }}
-            component={Paper}
+          <Paper
+            classes={{ root: classes.paper }}
             square={square}
             variant={variant}
             elevation={elevation}
@@ -113,19 +113,25 @@
                 />
               </Toolbar>
             )}
-            <Table size={size} classes={{ root: classes.tableRoot }}>
-              <TableHead>
-                <TableRow classes={{ root: classes.headerRow }}>
-                  <Children headerOnly>{children}</Children>
-                </TableRow>
-              </TableHead>
-              <TableBody ref={tableRef}>
-                <TableRow classes={{ root: classes.bodyRow }}>
-                  {children}
-                </TableRow>
-              </TableBody>
-              <TableBody ref={repeaterRef} />
-            </Table>
+            <TableContainer classes={{ root: classes.container }}>
+              <Table
+                stickyHeader={stickyHeader}
+                size={size}
+                classes={{ root: classes.tableRoot }}
+              >
+                <TableHead>
+                  <TableRow classes={{ root: classes.headerRow }}>
+                    <Children headerOnly>{children}</Children>
+                  </TableRow>
+                </TableHead>
+                <TableBody ref={tableRef}>
+                  <TableRow classes={{ root: classes.bodyRow }}>
+                    {children}
+                  </TableRow>
+                </TableBody>
+                <TableBody ref={repeaterRef} />
+              </Table>
+            </TableContainer>
             <TablePagination
               classes={{ root: classes.pagination }}
               rowsPerPageOptions={[5, 10, 25, 50, 100]}
@@ -137,7 +143,7 @@
               onChangePage={() => {}}
               onChangeRowsPerPage={() => {}}
             />
-          </TableContainer>
+          </Paper>
         </div>
       );
     }
@@ -145,9 +151,8 @@
     if (!model) {
       return (
         <div className={classes.root}>
-          <TableContainer
-            classes={{ root: classes.container }}
-            component={Paper}
+          <Paper
+            classes={{ root: classes.paper }}
             square={square}
             variant={variant}
             elevation={elevation}
@@ -167,20 +172,26 @@
                 />
               </Toolbar>
             )}
-            <Table size={size} classes={{ root: classes.tableRoot }}>
-              <TableHead>
-                <TableRow classes={{ root: classes.headerRow }}>
-                  <Children headerOnly>{children}</Children>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {Array.from(Array(rowsPerPage).keys()).map(idx => (
-                  <TableRow key={idx} classes={{ root: classes.bodyRow }}>
-                    {children}
+            <TableContainer classes={{ root: classes.container }}>
+              <Table
+                stickyHeader={stickyHeader}
+                size={size}
+                classes={{ root: classes.tableRoot }}
+              >
+                <TableHead>
+                  <TableRow classes={{ root: classes.headerRow }}>
+                    <Children headerOnly>{children}</Children>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+                </TableHead>
+                <TableBody>
+                  {Array.from(Array(rowsPerPage).keys()).map(idx => (
+                    <TableRow key={idx} classes={{ root: classes.bodyRow }}>
+                      {children}
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
             <TablePagination
               classes={{ root: classes.pagination }}
               rowsPerPageOptions={[5, 10, 25, 50, 100]}
@@ -192,7 +203,7 @@
               onChangePage={() => {}}
               onChangeRowsPerPage={() => {}}
             />
-          </TableContainer>
+          </Paper>
         </div>
       );
     }
@@ -222,9 +233,8 @@
 
     return (
       <div className={classes.root}>
-        <TableContainer
-          classes={{ root: classes.container }}
-          component={Paper}
+        <Paper
+          classes={{ root: classes.paper }}
           square={square}
           variant={variant}
           elevation={elevation}
@@ -261,37 +271,43 @@
               if (loading || error) {
                 return (
                   <>
-                    <Table size={size}>
-                      <TableHead>
-                        <TableRow classes={{ root: classes.headerRow }}>
-                          {Array.from(Array(children.length).keys()).map(
-                            colIdx => (
-                              <TableCell key={colIdx}>
-                                <div className={classes.skeleton}>
-                                  {error && 'Oops, something went wrong'}
-                                </div>
-                              </TableCell>
-                            ),
-                          )}
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {Array.from(Array(rowsPerPage).keys()).map(idx => (
-                          <TableRow
-                            key={idx}
-                            classes={{ root: classes.bodyRow }}
-                          >
+                    <TableContainer classes={{ root: classes.container }}>
+                      <Table
+                        stickyHeader={stickyHeader}
+                        size={size}
+                        classes={{ root: classes.tableRoot }}
+                      >
+                        <TableHead>
+                          <TableRow classes={{ root: classes.headerRow }}>
                             {Array.from(Array(children.length).keys()).map(
                               colIdx => (
                                 <TableCell key={colIdx}>
-                                  <div className={classes.skeleton} />
+                                  <div className={classes.skeleton}>
+                                    {error && 'Oops, something went wrong'}
+                                  </div>
                                 </TableCell>
                               ),
                             )}
                           </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
+                        </TableHead>
+                        <TableBody>
+                          {Array.from(Array(rowsPerPage).keys()).map(idx => (
+                            <TableRow
+                              key={idx}
+                              classes={{ root: classes.bodyRow }}
+                            >
+                              {Array.from(Array(children.length).keys()).map(
+                                colIdx => (
+                                  <TableCell key={colIdx}>
+                                    <div className={classes.skeleton} />
+                                  </TableCell>
+                                ),
+                              )}
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                    </TableContainer>
                     <TablePagination
                       classes={{ root: classes.pagination }}
                       rowsPerPageOptions={[5, 10, 25, 50, 100]}
@@ -310,29 +326,35 @@
 
               return (
                 <>
-                  <Table size={size}>
-                    <TableHead>
-                      <TableRow classes={{ root: classes.headerRow }}>
-                        <Children
-                          headerOnly
-                          handleSort={handleSort}
-                          orderBy={orderBy}
-                        >
-                          {children}
-                        </Children>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {results.map(value => (
-                        <TableRow
-                          key={value[0]}
-                          classes={{ root: classes.bodyRow }}
-                        >
-                          <Children value={value}>{children}</Children>
+                  <TableContainer classes={{ root: classes.container }}>
+                    <Table
+                      stickyHeader={stickyHeader}
+                      size={size}
+                      classes={{ root: classes.tableRoot }}
+                    >
+                      <TableHead>
+                        <TableRow classes={{ root: classes.headerRow }}>
+                          <Children
+                            headerOnly
+                            handleSort={handleSort}
+                            orderBy={orderBy}
+                          >
+                            {children}
+                          </Children>
                         </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
+                      </TableHead>
+                      <TableBody>
+                        {results.map(value => (
+                          <TableRow
+                            key={value[0]}
+                            classes={{ root: classes.bodyRow }}
+                          >
+                            <Children value={value}>{children}</Children>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
                   <TablePagination
                     classes={{ root: classes.pagination }}
                     rowsPerPageOptions={[5, 10, 25, 50, 100]}
@@ -347,7 +369,7 @@
               );
             }}
           </GetAll>
-        </TableContainer>
+        </Paper>
       </div>
     );
   })(),
@@ -369,11 +391,15 @@
         marginLeft: ({ options: { outerSpacing } }) =>
           getSpacing(outerSpacing[3]),
       },
-      container: {
+      paper: {
         backgroundColor: ({ options: { background } }) => [
           style.getColor(background),
           '!important',
         ],
+      },
+      container: {
+        height: ({ options: { stickyHeader, height } }) =>
+          stickyHeader && height,
       },
       tableRoot: {
         tableLayout: 'fixed',
@@ -383,6 +409,12 @@
           style.getColor(backgroundHeader),
           '!important',
         ],
+        '& th': {
+          backgroundColor: ({ options: { backgroundHeader } }) => [
+            style.getColor(backgroundHeader),
+            '!important',
+          ],
+        },
       },
       searchField: {
         marginLeft: ['auto', '!important'],
