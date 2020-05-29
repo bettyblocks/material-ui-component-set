@@ -3,405 +3,358 @@
   type: 'CONTENT_COMPONENT',
   allowedTypes: ['DATATABLE_COLUMN'],
   orientation: 'HORIZONTAL',
-  jsx: (
-    <div className={classes.root}>
-      {(() => {
-        const { env, getProperty, GetAll, Link, Children } = B;
-        const { filter } = options;
+  jsx: (() => {
+    const { Children, env, GetAll, getProperty, useText } = B;
+    const {
+      Table,
+      TableBody,
+      TableContainer,
+      TableHead,
+      TableRow,
+      TableCell,
+      TablePagination,
+      Paper,
+      Toolbar,
+      TextField,
+      InputAdornment,
+    } = window.MaterialUI.Core;
+    const { Search } = window.MaterialUI.Icons;
+    const isDev = env === 'dev';
 
-        const take = parseInt(options.take, 10) || 50;
-
-        if (env === 'dev') {
-          const repeaterRef = React.createRef();
-          const tableRef = React.createRef();
-
-          const repeat = () => {
-            if (!repeaterRef.current) {
-              return;
-            }
-            if (
-              repeaterRef.current.previousElementSibling.children.length === 0
-            ) {
-              return;
-            }
-            repeaterRef.current.innerHTML = '';
-            for (let i = 0, j = take - 1; i < j; i += 1) {
-              repeaterRef.current.innerHTML +=
-                repeaterRef.current.previousElementSibling.children[1].outerHTML;
-            }
-          };
-
-          React.useEffect(() => {
-            const mutationObserver = new MutationObserver(() => {
-              repeat();
-            });
-            mutationObserver.observe(tableRef.current, {
-              attributes: true,
-              characterData: true,
-              childList: true,
-              subtree: true,
-              attributeOldValue: false,
-              characterDataOldValue: false,
-            });
-            repeat();
-          });
-
-          return (
-            <>
-              {options.searchProperty && (
-                <div
-                  className={[classes.tableHeader, classes.noEvents].join(' ')}
-                >
-                  {options.searchProperty && (
-                    <Search
-                      name="{property}"
-                      search=""
-                      isTyping=""
-                      setIsTyping=""
-                    />
-                  )}
-                </div>
-              )}
-              <div className={classes.table}>
-                <div className={classes.row}>
-                  <Children headerOnly>{children}</Children>
-                </div>
-                <div ref={tableRef} className={classes.row}>
-                  <Children>{children}</Children>
-                </div>
-              </div>
-              <div ref={repeaterRef} className={classes.autoRow} />
-              <div className={classes.tableFooter}>
-                <Pagination
-                  totalCount={15}
-                  resultCount={parseInt(options.take, 10)}
-                />
-              </div>
-            </>
-          );
-        }
-
-        if (!options.model) {
-          return (
-            <>
-              {options.searchProperty && (
-                <div
-                  className={[classes.tableHeader, classes.noEvents].join(' ')}
-                >
-                  {options.searchProperty && (
-                    <Search
-                      name="{property}"
-                      search=""
-                      isTyping=""
-                      setIsTyping=""
-                    />
-                  )}
-                </div>
-              )}
-              <div className={classes.table}>
-                <div className={classes.row}>
-                  <Children headerOnly>{children}</Children>
-                </div>
-                {Array.from(Array(take).keys()).map(rowKey => (
-                  <div key={rowKey} className={classes.row}>
-                    <Children>{children}</Children>
-                  </div>
-                ))}
-              </div>
-              <div className={classes.tableFooter}>
-                <Pagination
-                  totalCount={15}
-                  resultCount={parseInt(options.take, 10)}
-                />
-              </div>
-            </>
-          );
-        }
-
-        const [isTyping, setIsTyping] = useState(false);
-
-        const {
-          location: { search: querystring = '' },
-          history,
-        } = useRouter();
-
-        const queryParams = new URLSearchParams(querystring);
-
-        const searchParam = queryParams.get('search') || '';
-        const searchProp = getProperty(options.searchProperty);
-
-        const page = parseInt(queryParams.get('page'), 10) || undefined;
-        const field = queryParams.get('sort') || '';
-        const order = queryParams.get('order') || '';
-
-        const variables = Object.assign(
-          order && {
+    const {
+      take,
+      size,
+      model,
+      filter,
+      searchProperty,
+      orderProperty,
+      sortOrder,
+      labelRowsPerPage,
+      square,
+      elevation,
+      variant,
+    } = options;
+    const [page, setPage] = React.useState(0);
+    const takeNum = parseInt(take, 10);
+    const [rowsPerPage, setRowsPerPage] = React.useState(takeNum);
+    const [search, setSearch] = React.useState('');
+    const { name: orderProp } = getProperty(orderProperty) || {};
+    const [orderBy, setOrderBy] = React.useState({
+      field: orderProp || null,
+      order: orderProp ? sortOrder : null,
+    });
+    const { id: searchId, name: searchPropertyName = '{property}' } =
+      getProperty(searchProperty) || {};
+    const [variables, setVariables] = React.useState(
+      orderProp
+        ? {
             sort: {
-              field,
-              order: order.toUpperCase(),
+              field: orderProp,
+              order: 'ASC',
             },
-          },
-        );
+          }
+        : {},
+    );
 
-        return (
-          <>
-            {searchProp && (
-              <div className={classes.tableHeader}>
-                <Search
-                  name={searchProp.name}
-                  search={searchParam}
-                  isTyping={isTyping}
-                  setIsTyping={setIsTyping}
+    if (isDev) {
+      const repeaterRef = React.createRef();
+      const tableRef = React.createRef();
+
+      const repeat = () => {
+        if (!repeaterRef.current) {
+          return;
+        }
+        if (repeaterRef.current.previousElementSibling.children.length === 0) {
+          return;
+        }
+        repeaterRef.current.innerHTML = '';
+        for (let i = 0, j = takeNum - 1; i < j; i += 1) {
+          repeaterRef.current.innerHTML +=
+            repeaterRef.current.previousElementSibling.children[0].outerHTML;
+        }
+      };
+
+      React.useEffect(() => {
+        const mutationObserver = new MutationObserver(() => {
+          repeat();
+        });
+        mutationObserver.observe(tableRef.current, {
+          attributes: true,
+          characterData: true,
+          childList: true,
+          subtree: true,
+          attributeOldValue: false,
+          characterDataOldValue: false,
+        });
+        repeat();
+      });
+
+      return (
+        <div className={classes.root}>
+          <TableContainer
+            classes={{ root: classes.container }}
+            component={Paper}
+            square={square}
+            variant={variant}
+            elevation={elevation}
+          >
+            {searchProperty && (
+              <Toolbar>
+                <TextField
+                  classes={{ root: classes.searchField }}
+                  placeholder={`Search on ${searchPropertyName}`}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <Search />
+                      </InputAdornment>
+                    ),
+                  }}
                 />
-              </div>
+              </Toolbar>
             )}
-            <GetAll
-              modelId={options.model}
-              filter={
-                searchProp && searchParam !== ''
-                  ? { ...filter, [searchProp.id]: { matches: searchParam } }
-                  : filter
-              }
-              __SECRET_VARIABLES_DO_NOT_USE={variables}
-              skip={page ? (page - 1) * take : 0}
-              take={take}
-            >
-              {({ loading, error, data }) => {
-                if (loading) {
-                  return <LoadingTable numberOfItems={take} />;
-                }
+            <Table size={size} classes={{ root: classes.tableRoot }}>
+              <TableHead>
+                <TableRow classes={{ root: classes.headerRow }}>
+                  <Children headerOnly>{children}</Children>
+                </TableRow>
+              </TableHead>
+              <TableBody ref={tableRef}>
+                <TableRow classes={{ root: classes.bodyRow }}>
+                  {children}
+                </TableRow>
+              </TableBody>
+              <TableBody ref={repeaterRef} />
+            </Table>
+            <TablePagination
+              classes={{ root: classes.pagination }}
+              rowsPerPageOptions={[5, 10, 25, 50, 100]}
+              labelRowsPerPage={useText(labelRowsPerPage)}
+              component="div"
+              count={takeNum}
+              rowsPerPage={takeNum}
+              page={page}
+              onChangePage={() => {}}
+              onChangeRowsPerPage={() => {}}
+            />
+          </TableContainer>
+        </div>
+      );
+    }
 
-                if (error) {
-                  return <EmptyTable text="Something went terribly wrong" />;
-                }
+    if (!model) {
+      return (
+        <div className={classes.root}>
+          <TableContainer
+            classes={{ root: classes.container }}
+            component={Paper}
+            square={square}
+            variant={variant}
+            elevation={elevation}
+          >
+            {searchProperty && (
+              <Toolbar>
+                <TextField
+                  classes={{ root: classes.searchField }}
+                  placeholder={`Search on ${searchPropertyName}`}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <Search />
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+              </Toolbar>
+            )}
+            <Table size={size} classes={{ root: classes.tableRoot }}>
+              <TableHead>
+                <TableRow classes={{ root: classes.headerRow }}>
+                  <Children headerOnly>{children}</Children>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {Array.from(Array(rowsPerPage).keys()).map(idx => (
+                  <TableRow key={idx} classes={{ root: classes.bodyRow }}>
+                    {children}
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+            <TablePagination
+              classes={{ root: classes.pagination }}
+              rowsPerPageOptions={[5, 10, 25, 50, 100]}
+              labelRowsPerPage={useText(labelRowsPerPage)}
+              component="div"
+              count={takeNum}
+              rowsPerPage={takeNum}
+              page={page}
+              onChangePage={() => {}}
+              onChangeRowsPerPage={() => {}}
+            />
+          </TableContainer>
+        </div>
+      );
+    }
 
-                const { totalCount, results } = data;
+    const handleChangePage = (_, newPage) => {
+      setPage(newPage);
+    };
 
-                if (results.length === 0) {
-                  return <EmptyTable text="No results" />;
-                }
+    const handleChangeRowsPerPage = event => {
+      setRowsPerPage(parseInt(event.target.value, 10));
+      setPage(0);
+    };
 
+    const handleSort = (field, newOrder) => {
+      setOrderBy({ field, order: newOrder });
+      setVariables({
+        sort: {
+          field,
+          order: newOrder.toUpperCase(),
+        },
+      });
+    };
+
+    const handleSearch = event => {
+      setSearch(event.target.value);
+    };
+
+    return (
+      <div className={classes.root}>
+        <TableContainer
+          classes={{ root: classes.container }}
+          component={Paper}
+          square={square}
+          variant={variant}
+          elevation={elevation}
+        >
+          {searchProperty && (
+            <Toolbar>
+              <TextField
+                key="searchinput"
+                classes={{ root: classes.searchField }}
+                placeholder={`Search on ${searchPropertyName}`}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <Search />
+                    </InputAdornment>
+                  ),
+                }}
+                onChange={handleSearch}
+              />
+            </Toolbar>
+          )}
+          <GetAll
+            modelId={model}
+            filter={
+              searchId && search !== ''
+                ? { ...filter, [searchId]: { matches: search } }
+                : filter
+            }
+            __SECRET_VARIABLES_DO_NOT_USE={variables}
+            take={rowsPerPage}
+            skip={page * rowsPerPage}
+          >
+            {({ loading, error, data }) => {
+              if (loading || error) {
                 return (
                   <>
-                    <div className={classes.table}>
-                      <div className={classes.row}>
+                    <Table size={size}>
+                      <TableHead>
+                        <TableRow classes={{ root: classes.headerRow }}>
+                          {Array.from(Array(children.length).keys()).map(
+                            colIdx => (
+                              <TableCell key={colIdx}>
+                                <div className={classes.skeleton}>
+                                  {error && 'Oops, something went wrong'}
+                                </div>
+                              </TableCell>
+                            ),
+                          )}
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {Array.from(Array(rowsPerPage).keys()).map(idx => (
+                          <TableRow
+                            key={idx}
+                            classes={{ root: classes.bodyRow }}
+                          >
+                            {Array.from(Array(children.length).keys()).map(
+                              colIdx => (
+                                <TableCell key={colIdx}>
+                                  <div className={classes.skeleton} />
+                                </TableCell>
+                              ),
+                            )}
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                    <TablePagination
+                      classes={{ root: classes.pagination }}
+                      rowsPerPageOptions={[5, 10, 25, 50, 100]}
+                      component="div"
+                      count={0}
+                      rowsPerPage={rowsPerPage}
+                      page={page}
+                      onChangePage={handleChangePage}
+                      onChangeRowsPerPage={handleChangeRowsPerPage}
+                    />
+                  </>
+                );
+              }
+
+              const { totalCount, results } = data;
+
+              return (
+                <>
+                  <Table size={size}>
+                    <TableHead>
+                      <TableRow classes={{ root: classes.headerRow }}>
                         <Children
-                          location={location}
-                          history={history}
-                          page={page}
-                          order={order}
-                          field={field}
-                          index={index}
                           headerOnly
+                          handleSort={handleSort}
+                          orderBy={orderBy}
                         >
                           {children}
                         </Children>
-                      </div>
-                      {results.map((value, index) => (
-                        <div key={value[0]} className={classes.row}>
-                          <Children
-                            location={location}
-                            history={history}
-                            page={page}
-                            order={order}
-                            field={field}
-                            index={index}
-                            value={value}
-                          >
-                            {children}
-                          </Children>
-                        </div>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {results.map(value => (
+                        <TableRow
+                          key={value[0]}
+                          classes={{ root: classes.bodyRow }}
+                        >
+                          <Children value={value}>{children}</Children>
+                        </TableRow>
                       ))}
-                    </div>
-                    <div className={classes.tableFooter}>
-                      <Pagination
-                        totalCount={totalCount}
-                        resultCount={results.length}
-                        search={searchParam}
-                      />
-                    </div>
-                  </>
-                );
-              }}
-            </GetAll>
-          </>
-        );
-
-        // eslint-disable-next-line no-shadow
-        function Search({ name, search, isTyping, setIsTyping }) {
-          const inputRef = React.createRef();
-
-          const {
-            location: { pathname },
-          } = useRouter();
-
-          React.useEffect(() => {
-            if (isTyping) {
-              inputRef.current.focus();
-            }
-          });
-
-          return (
-            <div className={classes.searchWrapper}>
-              <i
-                className={[classes.searchIcon, 'zmdi zmdi-search'].join(' ')}
-              />
-              <input
-                className={classes.search}
-                type="text"
-                defaultValue={search}
-                onChange={({ target: { value } }) =>
-                  history.push(`${pathname}?search=${value}`)
-                }
-                ref={inputRef}
-                onFocus={() => setIsTyping(true)}
-                onBlur={() => setIsTyping(false)}
-                placeholder={`Search on ${name}`}
-              />
-            </div>
-          );
-        }
-
-        function EmptyTable({ text }) {
-          return (
-            <div className={classes.table}>
-              <div className={classes.row}>
-                <div className={classes.column}>{text}</div>
-              </div>
-            </div>
-          );
-        }
-
-        function LoadingTable({ numberOfItems }) {
-          const skeletonHeadingClass = [
-            classes.skeleton,
-            classes.skeletonHeading,
-          ].join(' ');
-
-          return (
-            <>
-              <div className={classes.table}>
-                <div className={classes.row}>
-                  <div
-                    className={[classes.column, classes.columnHeading].join(
-                      ' ',
-                    )}
-                  >
-                    <div className={skeletonHeadingClass} />
-                  </div>
-                  <div
-                    className={[classes.column, classes.columnHeading].join(
-                      ' ',
-                    )}
-                  >
-                    <div className={skeletonHeadingClass} />
-                  </div>
-                  <div
-                    className={[classes.column, classes.columnHeading].join(
-                      ' ',
-                    )}
-                  >
-                    <div className={skeletonHeadingClass} />
-                  </div>
-                </div>
-                {Array.from(Array(numberOfItems).keys()).map(idx => (
-                  <div key={idx} className={classes.row}>
-                    <div className={classes.column}>
-                      <div className={classes.skeleton} />
-                    </div>
-                    <div className={classes.column}>
-                      <div className={classes.skeleton} />
-                    </div>
-                    <div className={classes.column}>
-                      <div className={classes.skeleton} />
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <div className={classes.tableFooter}>
-                <span className={classes.paginationInfoSkeleton} />
-                <div className={classes.paginationSkeleton}>
-                  <div className={classes.arrowSkeleton} />
-                  <div className={classes.arrowSkeleton} />
-                </div>
-              </div>
-            </>
-          );
-        }
-
-        function Pagination({ totalCount, resultCount, search }) {
-          const {
-            location: { pathname },
-          } = useRouter();
-
-          const firstItem = page ? (page - 1) * take : 0;
-
-          return (
-            <>
-              <span>
-                {firstItem + 1}
-                {firstItem + 1 !== totalCount &&
-                  ` - ${firstItem + resultCount}`}{' '}
-                of {totalCount}
-              </span>
-              <div className={classes.pagination}>
-                {typeof page !== 'undefined' && page > 1 ? (
-                  <Link
-                    className={[classes.arrow, 'zmdi zmdi-chevron-left'].join(
-                      ' ',
-                    )}
-                    to={[
-                      pathname,
-                      '?',
-                      page ? `page=${page - 1}&` : '',
-                      search ? `search=${search}&` : '',
-                      field ? `sort=${field}&` : '',
-                      order ? `order=${order}` : '',
-                    ].join('')}
+                    </TableBody>
+                  </Table>
+                  <TablePagination
+                    classes={{ root: classes.pagination }}
+                    rowsPerPageOptions={[5, 10, 25, 50, 100]}
+                    component="div"
+                    count={totalCount}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    onChangePage={handleChangePage}
+                    onChangeRowsPerPage={handleChangeRowsPerPage}
                   />
-                ) : (
-                  <span
-                    className={[
-                      classes.arrow,
-                      classes.arrowDisabled,
-                      'zmdi zmdi-chevron-left',
-                    ].join(' ')}
-                  />
-                )}
-                {(typeof page === 'undefined' ? 1 : page) <
-                totalCount / take ? (
-                  <Link
-                    className={[classes.arrow, 'zmdi zmdi-chevron-right'].join(
-                      ' ',
-                    )}
-                    to={[
-                      pathname,
-                      '?',
-                      page ? `page=${page + 1}&` : 'page=2&',
-                      search ? `search=${search}&` : '',
-                      field ? `sort=${field}&` : '',
-                      order ? `order=${order}` : '',
-                    ].join('')}
-                  />
-                ) : (
-                  <span
-                    className={[
-                      classes.arrow,
-                      classes.arrowDisabled,
-                      'zmdi zmdi-chevron-right',
-                    ].join(' ')}
-                  />
-                )}
-              </div>
-            </>
-          );
-        }
-      })()}
-    </div>
-  ),
+                </>
+              );
+            }}
+          </GetAll>
+        </TableContainer>
+      </div>
+    );
+  })(),
   styles: B => theme => {
-    const style = new B.Styling(theme);
+    const { env, Styling } = B;
+    const style = new Styling(theme);
+    const isDev = env === 'dev';
     const getSpacing = (idx, device = 'Mobile') =>
       idx === '0' ? '0rem' : style.getSpacing(idx, device);
 
@@ -416,115 +369,31 @@
         marginLeft: ({ options: { outerSpacing } }) =>
           getSpacing(outerSpacing[3]),
       },
-      noEvents: {
-        pointerEvents: 'none',
+      container: {
+        backgroundColor: ({ options: { background } }) => [
+          style.getColor(background),
+          '!important',
+        ],
       },
-      tableHeader: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'flex-end',
-      },
-      searchWrapper: {
-        display: 'flex',
-        alignItems: 'center',
-        padding: [0, '0.5rem'],
-        borderBottom: [1, 'solid', '#000'],
-        minHeight: '4rem',
-      },
-      searchIcon: {
-        fontSize: '1.25rem',
-        marginRight: '1rem',
-      },
-      search: {
-        padding: ['0.25rem', 0],
-        fontSize: '1rem',
-        border: 'none',
-        outline: 'none',
-      },
-      table: {
-        display: 'table',
-        width: '100%',
-        borderCollapse: 'collapse',
+      tableRoot: {
         tableLayout: 'fixed',
-        '& $row:first-child > div': {
-          borderBottom: `0.125rem solid ${style.getColor('Accent1')}`,
-        },
       },
-      row: {
-        display: 'table-row',
+      headerRow: {
+        backgroundColor: ({ options: { backgroundHeader } }) => [
+          style.getColor(backgroundHeader),
+          '!important',
+        ],
       },
-      autoRow: {
-        display: 'table',
-        width: '100%',
-        borderCollapse: 'collapse',
-        tableLayout: 'fixed',
-        position: 'relative',
-        pointerEvents: 'none',
-        '& > *': {
-          pointerEvents: 'none',
-        },
-        '&::after': {
-          content: '""',
-          display: 'block',
-          pointerEvents: 'none',
-          position: 'absolute',
-          top: 0,
-          bottom: 0,
-          left: 0,
-          right: 0,
-          backgroundColor: 'rgba(255,255,255,0.3)',
-        },
+      searchField: {
+        marginLeft: ['auto', '!important'],
+        pointerEvents: isDev && 'none',
       },
-      column: {
-        display: 'table-cell',
-        padding: '0.75rem 1rem 0.75rem 0',
-        fontFamily: style.getFontFamily('Body1'),
-        fontSize: style.getFontSize('Body1'),
-        fontWeight: style.getFontWeight('Body1'),
-        textTransform: style.getTextTransform('Body1'),
-        letterSpacing: style.getLetterSpacing('Body1'),
-        color: style.getFontColor('Body1'),
-        borderBottom: `0.0625rem solid ${style.getColor('Accent1')}`,
-        [`@media ${B.mediaMinWidth(768)}`]: {
-          fontSize: style.getFontSize('Body1', 'Portrait'),
-        },
-        [`@media ${B.mediaMinWidth(1024)}`]: {
-          fontSize: style.getFontSize('Body1', 'Landscape'),
-        },
-        [`@media ${B.mediaMinWidth(1200)}`]: {
-          fontSize: style.getFontSize('Body1', 'Desktop'),
-        },
-      },
-      columnHeading: {
-        fontFamily: style.getFont('Body2').fontFamily,
-        fontSize: style.getFont('Body2').Mobile,
-        fontWeight: style.getFont('Body2').fontWeight,
-        textTransform: style.getFont('Body2').textTransform,
-        letterSpacing: style.getFont('Body2').letterSpacing,
-        lineHeight: '1.2',
-        color: style.getFont('Body2').color,
-        [`@media ${B.mediaMinWidth(768)}`]: {
-          fontSize: style.getFont('Body2').Portrait,
-        },
-        [`@media ${B.mediaMinWidth(1024)}`]: {
-          fontSize: style.getFont('Body2').Landscape,
-        },
-        [`@media ${B.mediaMinWidth(1200)}`]: {
-          fontSize: style.getFont('Body2').Desktop,
-        },
-        borderBottomWidth: '0.125rem',
-      },
-      columnHeadingLink: {
-        display: 'flex',
-        alignItems: 'center',
-        color: style.getFont('Body2').color,
-        whiteSpace: 'nowrap',
-        textDecoration: 'none',
-      },
-      columnHeadingIcon: {
-        position: 'relative',
-        top: '0.0625rem',
-        margin: [0, '0.5rem'],
+      pagination: {
+        pointerEvents: isDev && 'none',
+        backgroundColor: ({ options: { background } }) => [
+          style.getColor(background),
+          '!important',
+        ],
       },
       skeleton: {
         height: `calc(${style.getFont('Body1').Mobile} * 1.2)`,
@@ -536,18 +405,6 @@
         },
         [`@media ${B.mediaMinWidth(1200)}`]: {
           height: `calc(${style.getFont('Body1').Desktop} * 1.2)`,
-        },
-      },
-      skeletonHeading: {
-        height: `calc(${style.getFont('Body2').Mobile} * 1.15)`,
-        [`@media ${B.mediaMinWidth(768)}`]: {
-          height: `calc(${style.getFont('Body2').Portrait} * 1.15)`,
-        },
-        [`@media ${B.mediaMinWidth(1024)}`]: {
-          height: `calc(${style.getFont('Body2').Landscape} * 1.15)`,
-        },
-        [`@media ${B.mediaMinWidth(1200)}`]: {
-          height: `calc(${style.getFont('Body2').Desktop} * 1.15)`,
         },
         backgroundColor: '#eee',
         borderRadius: 8,
@@ -569,65 +426,6 @@
       '@keyframes loading': {
         to: {
           backgroundPositionX: '-150%',
-        },
-      },
-      tableFooter: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'flex-end',
-        padding: ['0.75rem', 0],
-      },
-      paginationInfoSkeleton: {
-        height: 'calc(1rem * 1.2)',
-        width: 100,
-        backgroundColor: '#eee',
-        borderRadius: 'calc(1rem / 2)',
-        '&::after': {
-          display: 'block',
-          width: '100%',
-          height: '100%',
-          backgroundImage:
-            'linear-gradient(90deg, #eee 25%, #fff 50%, #eee 75%)',
-          backgroundSize: '200% 100%',
-          backgroundRepeat: 'no-repeat',
-          backgroundPositionX: '150%',
-          borderRadius: 'calc(1rem / 2)',
-          content: '""',
-          animation: 'loading 1.5s infinite',
-        },
-      },
-      pagination: {
-        marginLeft: '1rem',
-      },
-      paginationSkeleton: {
-        marginLeft: '1rem',
-      },
-      arrow: {
-        padding: '1rem',
-        fontSize: '1.625rem',
-        color: '#000',
-        textDecoration: 'none',
-      },
-      arrowDisabled: { color: '#ccc' },
-      arrowSkeleton: {
-        display: 'inline-block',
-        height: 'calc(1.625rem * 1.2)',
-        width: 'calc(1.625rem * 1.2)',
-        margin: '0.75rem 0.375rem',
-        backgroundColor: '#eee',
-        borderRadius: '50%',
-        '&::after': {
-          display: 'block',
-          width: '100%',
-          height: '100%',
-          backgroundImage:
-            'linear-gradient(90deg, #eee 25%, #fff 50%, #eee 75%)',
-          backgroundSize: '200% 100%',
-          backgroundRepeat: 'no-repeat',
-          backgroundPositionX: '150%',
-          borderRadius: '50%',
-          content: '""',
-          animation: 'loading 1.5s infinite',
         },
       },
       [`@media ${B.mediaMinWidth(768)}`]: {

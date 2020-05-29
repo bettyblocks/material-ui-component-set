@@ -13,10 +13,10 @@
           type: 'PROPERTY',
         },
         {
-          type: 'TEXT',
+          type: 'VARIABLE',
           label: 'Header text',
           key: 'headerText',
-          value: 'Column',
+          value: ['Column'],
         },
         {
           value: 'Body1',
@@ -38,6 +38,18 @@
               { name: 'Right', value: 'right' },
             ],
           },
+        },
+        {
+          type: 'COLOR',
+          label: 'Background',
+          key: 'background',
+          value: 'Transparent',
+        },
+        {
+          type: 'COLOR',
+          label: 'Border color',
+          key: 'borderColor',
+          value: 'Light',
         },
       ],
       descendants: [
