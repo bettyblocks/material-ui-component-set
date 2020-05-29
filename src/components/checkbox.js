@@ -38,22 +38,22 @@
     const labelProperty = getProperty(labelProp);
     const valueProperty = getProperty(valueProp);
 
-    const returnArray = () => {
-      let value = useText(defaultValue);
-      if (!Array.isArray(value)) {
-        value = [value];
-      }
-      return value;
+    const getValues = () => {
+      const value = useText(defaultValue);
+      // split the string and trim spaces
+      return !Array.isArray(value)
+        ? value.split(',').map(str => str.trim())
+        : value;
     };
 
-    const [values, setValues] = useState(returnArray());
+    const [values, setValues] = useState(getValues());
 
     const propertyLabel = propLabelOverride || propertyLabelText;
     const labelText = property ? propertyLabel : componentLabel;
 
     useEffect(() => {
       if (isDev) {
-        setValues(returnArray());
+        setValues(getValues());
       }
     }, [isDev, defaultValue]);
 
