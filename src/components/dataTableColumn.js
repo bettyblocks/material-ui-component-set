@@ -14,7 +14,8 @@
       sortable,
     } = options;
     const { headerOnly, handleSort, orderBy } = parent || {};
-    const { name: propertyName } = getProperty(property) || {};
+    const { name: propertyName, label: propertyLabel } =
+      getProperty(property) || {};
     const { field, order = 'asc' } = orderBy || {};
     const isDev = env === 'dev';
     const contentPlaceholder = 'Select property';
@@ -31,7 +32,7 @@
     }
 
     const header = useText(headerText);
-    let columnHeaderText = propertyName || contentPlaceholder;
+    let columnHeaderText = propertyLabel || contentPlaceholder;
     if (header) {
       columnHeaderText = header;
     }
