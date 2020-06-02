@@ -1,117 +1,39 @@
 (() => ({
   name: 'Drawer',
-  type: 'CONTAINER_COMPONENT',
-  allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
-  orientation: 'HORIZONTAL',
+  type: 'ROW',
+  allowedTypes: ['CONTAINER'],
+  orientation: 'VERTICAL',
   jsx: (() => {
-    const {
-      Drawer,
-      //   Divider,
-      //   List,
-      //   ListItem,
-      //   ListItemText,
-    } = window.MaterialUI.Core;
-    const isDev = B.env === 'dev';
-    const { anchor } = options;
-    // const isEmpty = children.length === 0;
+    const { Children } = B;
+    const { useMediaQuery, useTheme } = window.MaterialUI.Core;
+    const theme = useTheme();
+    // TODO - this will probably have to change
+    const isLargeScreen = useMediaQuery(theme.breakpoints.up('sm'));
 
-    const [visible, setVisible] = useState(true);
-    const closeDrawer = () => setVisible(false);
-    const openDrawer = () => setVisible(true);
-    const toggleDrawer = () => setVisible(s => !s);
+    const [isOpen, setIsOpen] = useState(true);
 
-    useEffect(() => {
-      B.defineFunction('OpenDrawer', openDrawer);
-      B.defineFunction('CloseDrawer', closeDrawer);
-      B.defineFunction('ToggleDrawer', toggleDrawer);
-    }, []);
+    const closeDrawer = () => setIsOpen(false);
+    const openDrawer = () => setIsOpen(true);
+    const toggleDrawer = () => setIsOpen(s => !s);
 
-    const handleButton = evt => {
-      evt.preventDefault();
-      evt.stopPropagation();
-      toggleDrawer();
-    };
-
-    // const drawer = (
-    //   <Drawer
-    //     open={visible}
-    //     anchor={anchor}
-    //     onClose={closeDrawer}
-    //     className={classes.drawer}
-    //     ModalProps={{
-    //       container: document.getElementById('drawer-container'),
-    //     }}
-    //     classes={{
-    //       paper: [classes.drawer, classes.absolute].join(' '),
-    //       modal: classes.absolute,
-    //       backdrop: classes.absolute,
-    //     }}
-    //     variant="permanent"
-    //   >
-    //     <List>
-    //       {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text) => (
-    //         <ListItem button key={text}>
-    //           <ListItemText primary={text} />
-    //         </ListItem>
-    //       ))}
-    //     </List>
-    //     <Divider />
-    //     <List>
-    //       {['All mail', 'Trash', 'Spam'].map((text) => (
-    //         <ListItem button key={text}>
-    //           <ListItemText primary={text} />
-    //         </ListItem>
-    //       ))}
-    //     </List>
-    //   </Drawer>
-    // );
-
-    const Comp = (
+    return (
       <div className={classes.root}>
-        <nav>
-          <Drawer
-            open={visible}
-            anchor={anchor}
-            onClose={closeDrawer}
-            className={classes.drawer}
-            ModalProps={{
-              container: document.getElementById('drawer-container'),
-            }}
-            classes={{
-              paper: [classes.drawer, classes.absolute].join(' '),
-              modal: classes.absolute,
-              backdrop: classes.absolute,
-            }}
-            // variant="permanent"
-          >
-            {children}
-          </Drawer>
-        </nav>
-        <main>
-          <button type="button" onClick={handleButton}>
-            toggle drawer
-          </button>
+        <Children
+          isLargeScreen={isLargeScreen}
+          isOpen={isOpen}
+          openDrawer={openDrawer}
+          closeDrawer={closeDrawer}
+          toggleDrawer={toggleDrawer}
+        >
           {children}
-        </main>
+        </Children>
       </div>
     );
-
-    return isDev ? <div>{Comp}</div> : Comp;
   })(),
   styles: () => () => ({
     root: {
       display: 'flex',
-      height: '100%',
-      position: 'relative',
-    },
-    nav: {},
-    drawer: {
-      width: '240px',
-    },
-    absolute: {
-      position: 'absolute !important',
-      top: '0px',
-      bottom: '0px',
+      height: '100vh',
     },
   }),
 }))();
