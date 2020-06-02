@@ -60,6 +60,7 @@
     );
     const titleText = useText(title);
     const hasToolbar = titleText || searchProperty;
+    const elevationLevel = variant === 'flat' ? 0 : elevation;
 
     if (isDev) {
       const repeaterRef = React.createRef();
@@ -100,7 +101,7 @@
             classes={{ root: classes.paper }}
             square={square}
             variant={variant}
-            elevation={elevation}
+            elevation={elevationLevel}
           >
             {hasToolbar && (
               <Toolbar classes={{ root: classes.toolbar }}>
@@ -166,7 +167,7 @@
             classes={{ root: classes.paper }}
             square={square}
             variant={variant}
-            elevation={elevation}
+            elevation={elevationLevel}
           >
             {hasToolbar && (
               <Toolbar classes={{ root: classes.toolbar }}>
@@ -255,7 +256,7 @@
           classes={{ root: classes.paper }}
           square={square}
           variant={variant}
-          elevation={elevation}
+          elevation={elevationLevel}
         >
           {hasToolbar && (
             <Toolbar classes={{ root: classes.toolbar }}>
