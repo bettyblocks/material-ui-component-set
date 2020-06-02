@@ -4,12 +4,13 @@
   allowedTypes: ['CONTENT_COMPONENT'],
   orientation: 'VERTICAL',
   jsx: (() => {
-    const { env, GetOneProvider, useText, getProperty } = B;
+    const { env, useText, getProperty } = B;
     const { TableCell, TableSortLabel } = window.MaterialUI.Core;
-    const { horizontalAlignment, headerText, property } = options;
-    const { headerOnly, value, handleSort, orderBy } = parent || {};
+    const { horizontalAlignment, headerText, property, content } = options;
+    const { headerOnly, handleSort, orderBy } = parent || {};
     const { name: propertyName } = getProperty(property) || {};
     const { field, order = 'asc' } = orderBy || {};
+    const bodyText = useText(content);
 
     const isDev = env === 'dev';
 
@@ -18,11 +19,12 @@
       handleSort(prop, sortOrder);
     };
 
-    const ColumnChildren = value ? (
-      <GetOneProvider value={value}>{children}</GetOneProvider>
-    ) : (
-      children
-    );
+    const Content =
+      children.length > 0 ? (
+        children
+      ) : (
+        <span className={classes.content}>{bodyText}</span>
+      );
 
     const headerLabel = useText(headerText) || propertyName;
 
@@ -46,12 +48,12 @@
           component="div"
           classes={{ root: classes.root }}
         >
-          {headerOnly ? Header : children}
+          {headerOnly ? Header : Content}
         </TableCell>
       </div>
     ) : (
       <TableCell classes={{ root: classes.root }} align={horizontalAlignment}>
-        {headerOnly ? Header : ColumnChildren}
+        {headerOnly ? Header : Content}
       </TableCell>
     );
   })(),
@@ -93,6 +95,31 @@
         [`@media ${B.mediaMinWidth(1200)}`]: {
           fontSize: ({ options: { type } }) =>
             style.getFontSize(type, 'Desktop'),
+        },
+      },
+      content: {
+        color: ({ options: { bodyType } }) => style.getFontColor(bodyType),
+        fontFamily: ({ options: { bodyType } }) =>
+          style.getFontFamily(bodyType),
+        fontSize: ({ options: { bodyType } }) => style.getFontSize(bodyType),
+        fontWeight: ({ options: { bodyType } }) =>
+          style.getFontWeight(bodyType),
+        textTransform: ({ options: { bodyType } }) =>
+          style.getTextTransform(bodyType),
+        letterSpacing: ({ options: { bodyType } }) =>
+          style.getLetterSpacing(bodyType),
+        lineHeight: '1.2',
+        [`@media ${B.mediaMinWidth(768)}`]: {
+          fontSize: ({ options: { bodyType } }) =>
+            style.getFontSize(bodyType, 'Portrait'),
+        },
+        [`@media ${B.mediaMinWidth(1024)}`]: {
+          fontSize: ({ options: { bodyType } }) =>
+            style.getFontSize(bodyType, 'Landscape'),
+        },
+        [`@media ${B.mediaMinWidth(1200)}`]: {
+          fontSize: ({ options: { bodyType } }) =>
+            style.getFontSize(bodyType, 'Desktop'),
         },
       },
       columnSort: {

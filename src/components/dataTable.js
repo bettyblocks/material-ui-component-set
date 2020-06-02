@@ -4,7 +4,7 @@
   allowedTypes: ['DATATABLE_COLUMN'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { Children, env, GetAll, getProperty, useText } = B;
+    const { Children, env, GetAll, getProperty, useText, GetOneProvider } = B;
     const {
       Table,
       TableBody,
@@ -34,6 +34,7 @@
       elevation,
       variant,
       stickyHeader,
+      title,
     } = options;
     const [page, setPage] = React.useState(0);
     const takeNum = parseInt(take, 10);
@@ -56,6 +57,7 @@
           }
         : {},
     );
+    const titleText = useText(title);
 
     if (isDev) {
       const repeaterRef = React.createRef();
@@ -98,19 +100,24 @@
             variant={variant}
             elevation={elevation}
           >
-            {searchProperty && (
-              <Toolbar>
-                <TextField
-                  classes={{ root: classes.searchField }}
-                  placeholder={`Search on ${searchPropertyName}`}
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <Search />
-                      </InputAdornment>
-                    ),
-                  }}
-                />
+            {(titleText || searchProperty) && (
+              <Toolbar classes={{ root: classes.toolbar }}>
+                {titleText && (
+                  <span className={classes.title}>{titleText}</span>
+                )}
+                {searchProperty && (
+                  <TextField
+                    classes={{ root: classes.searchField }}
+                    placeholder={`Search on ${searchPropertyName}`}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <Search />
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                )}
               </Toolbar>
             )}
             <TableContainer classes={{ root: classes.container }}>
@@ -157,19 +164,24 @@
             variant={variant}
             elevation={elevation}
           >
-            {searchProperty && (
-              <Toolbar>
-                <TextField
-                  classes={{ root: classes.searchField }}
-                  placeholder={`Search on ${searchPropertyName}`}
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <Search />
-                      </InputAdornment>
-                    ),
-                  }}
-                />
+            {(titleText || searchProperty) && (
+              <Toolbar classes={{ root: classes.toolbar }}>
+                {titleText && (
+                  <span className={classes.title}>{titleText}</span>
+                )}
+                {searchProperty && (
+                  <TextField
+                    classes={{ root: classes.searchField }}
+                    placeholder={`Search on ${searchPropertyName}`}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <Search />
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                )}
               </Toolbar>
             )}
             <TableContainer classes={{ root: classes.container }}>
@@ -239,21 +251,23 @@
           variant={variant}
           elevation={elevation}
         >
-          {searchProperty && (
-            <Toolbar>
-              <TextField
-                key="searchinput"
-                classes={{ root: classes.searchField }}
-                placeholder={`Search on ${searchPropertyName}`}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <Search />
-                    </InputAdornment>
-                  ),
-                }}
-                onChange={handleSearch}
-              />
+          {(titleText || searchProperty) && (
+            <Toolbar classes={{ root: classes.toolbar }}>
+              {titleText && <span className={classes.title}>{titleText}</span>}
+              {searchProperty && (
+                <TextField
+                  classes={{ root: classes.searchField }}
+                  placeholder={`Search on ${searchPropertyName}`}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <Search />
+                      </InputAdornment>
+                    ),
+                  }}
+                  onChange={handleSearch}
+                />
+              )}
             </Toolbar>
           )}
           <GetAll
@@ -349,7 +363,9 @@
                             key={value[0]}
                             classes={{ root: classes.bodyRow }}
                           >
-                            <Children value={value}>{children}</Children>
+                            <GetOneProvider value={value}>
+                              {children}
+                            </GetOneProvider>
                           </TableRow>
                         ))}
                       </TableBody>
@@ -403,6 +419,35 @@
       },
       tableRoot: {
         tableLayout: 'fixed',
+      },
+      toolbar: {
+        paddingLeft: ['1rem', '!important'],
+        paddingRight: ['1rem', '!important'],
+      },
+      title: {
+        color: ({ options: { titleType } }) => style.getFontColor(titleType),
+        fontFamily: ({ options: { titleType } }) =>
+          style.getFontFamily(titleType),
+        fontSize: ({ options: { titleType } }) => style.getFontSize(titleType),
+        fontWeight: ({ options: { titleType } }) =>
+          style.getFontWeight(titleType),
+        textTransform: ({ options: { titleType } }) =>
+          style.getTextTransform(titleType),
+        letterSpacing: ({ options: { titleType } }) =>
+          style.getLetterSpacing(titleType),
+        lineHeight: '1.2',
+        [`@media ${B.mediaMinWidth(768)}`]: {
+          fontSize: ({ options: { titleType } }) =>
+            style.getFontSize(titleType, 'Portrait'),
+        },
+        [`@media ${B.mediaMinWidth(1024)}`]: {
+          fontSize: ({ options: { titleType } }) =>
+            style.getFontSize(titleType, 'Landscape'),
+        },
+        [`@media ${B.mediaMinWidth(1200)}`]: {
+          fontSize: ({ options: { titleType } }) =>
+            style.getFontSize(titleType, 'Desktop'),
+        },
       },
       headerRow: {
         backgroundColor: ({ options: { backgroundHeader } }) => [
