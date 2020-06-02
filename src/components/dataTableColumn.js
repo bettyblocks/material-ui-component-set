@@ -4,15 +4,39 @@
   allowedTypes: ['CONTENT_COMPONENT'],
   orientation: 'VERTICAL',
   jsx: (() => {
-    const { env, useText, getProperty } = B;
+    const { env, useText, getProperty, Property } = B;
     const { TableCell, TableSortLabel } = window.MaterialUI.Core;
-    const { horizontalAlignment, headerText, property, content } = options;
+    const {
+      horizontalAlignment,
+      headerText,
+      property,
+      content,
+      sortable,
+    } = options;
     const { headerOnly, handleSort, orderBy } = parent || {};
     const { name: propertyName } = getProperty(property) || {};
     const { field, order = 'asc' } = orderBy || {};
-    const bodyText = useText(content);
-
     const isDev = env === 'dev';
+    const contentPlaceholder = 'Select property';
+
+    const bodyText = useText(content);
+    const propContent = isDev ? (
+      `{{ ${propertyName} }}`
+    ) : (
+      <Property id={property} />
+    );
+    let columnText = propertyName ? propContent : contentPlaceholder;
+    if (bodyText) {
+      columnText = bodyText;
+    }
+
+    const header = useText(headerText);
+    let columnHeaderText = propertyName || contentPlaceholder;
+    if (header) {
+      columnHeaderText = header;
+    }
+
+    const isSortable = propertyName && sortable;
 
     const createSortHandler = prop => {
       const sortOrder = order === 'asc' ? 'desc' : 'asc';
@@ -23,22 +47,20 @@
       children.length > 0 ? (
         children
       ) : (
-        <span className={classes.content}>{bodyText}</span>
+        <span className={classes.content}>{columnText}</span>
       );
 
-    const headerLabel = useText(headerText) || propertyName;
-
-    const Header = property ? (
+    const Header = isSortable ? (
       <TableSortLabel
         classes={{ root: classes.columnSort }}
         active={field === propertyName}
         direction={field === propertyName && order ? order : 'asc'}
         onClick={() => createSortHandler(propertyName)}
       >
-        <span className={classes.columnHeader}>{headerLabel}</span>
+        <span className={classes.columnHeader}>{columnHeaderText}</span>
       </TableSortLabel>
     ) : (
-      <span className={classes.columnHeader}>{headerLabel}</span>
+      <span className={classes.columnHeader}>{columnHeaderText}</span>
     );
 
     return isDev ? (
@@ -124,6 +146,9 @@
       },
       columnSort: {
         pointerEvents: isDev && 'none',
+        '& .MuiSvgIcon-root': {
+          opacity: isDev && 0.5,
+        },
       },
     };
   },

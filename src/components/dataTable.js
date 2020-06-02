@@ -35,6 +35,7 @@
       variant,
       stickyHeader,
       title,
+      pagination,
     } = options;
     const [page, setPage] = React.useState(0);
     const takeNum = parseInt(take, 10);
@@ -140,17 +141,19 @@
                 <TableBody ref={repeaterRef} className={classes.autoRepeat} />
               </Table>
             </TableContainer>
-            <TablePagination
-              classes={{ root: classes.pagination }}
-              rowsPerPageOptions={[5, 10, 25, 50, 100]}
-              labelRowsPerPage={useText(labelRowsPerPage)}
-              component="div"
-              count={takeNum}
-              rowsPerPage={takeNum}
-              page={page}
-              onChangePage={() => {}}
-              onChangeRowsPerPage={() => {}}
-            />
+            {pagination && (
+              <TablePagination
+                classes={{ root: classes.pagination }}
+                rowsPerPageOptions={[5, 10, 25, 50, 100]}
+                labelRowsPerPage={useText(labelRowsPerPage)}
+                component="div"
+                count={takeNum}
+                rowsPerPage={takeNum}
+                page={page}
+                onChangePage={() => {}}
+                onChangeRowsPerPage={() => {}}
+              />
+            )}
           </Paper>
         </div>
       );
@@ -205,17 +208,19 @@
                 </TableBody>
               </Table>
             </TableContainer>
-            <TablePagination
-              classes={{ root: classes.pagination }}
-              rowsPerPageOptions={[5, 10, 25, 50, 100]}
-              labelRowsPerPage={useText(labelRowsPerPage)}
-              component="div"
-              count={takeNum}
-              rowsPerPage={takeNum}
-              page={page}
-              onChangePage={() => {}}
-              onChangeRowsPerPage={() => {}}
-            />
+            {pagination && (
+              <TablePagination
+                classes={{ root: classes.pagination }}
+                rowsPerPageOptions={[5, 10, 25, 50, 100]}
+                labelRowsPerPage={useText(labelRowsPerPage)}
+                component="div"
+                count={takeNum}
+                rowsPerPage={takeNum}
+                page={page}
+                onChangePage={() => {}}
+                onChangeRowsPerPage={() => {}}
+              />
+            )}
           </Paper>
         </div>
       );
@@ -279,8 +284,8 @@
                 : filter
             }
             __SECRET_VARIABLES_DO_NOT_USE={variables}
-            take={rowsPerPage}
-            skip={page * rowsPerPage}
+            take={pagination && rowsPerPage}
+            skip={pagination && page * rowsPerPage}
           >
             {({ loading, error, data }) => {
               if (loading || error) {
@@ -323,16 +328,19 @@
                         </TableBody>
                       </Table>
                     </TableContainer>
-                    <TablePagination
-                      classes={{ root: classes.pagination }}
-                      rowsPerPageOptions={[5, 10, 25, 50, 100]}
-                      component="div"
-                      count={0}
-                      rowsPerPage={rowsPerPage}
-                      page={page}
-                      onChangePage={handleChangePage}
-                      onChangeRowsPerPage={handleChangeRowsPerPage}
-                    />
+                    {pagination && (
+                      <TablePagination
+                        classes={{ root: classes.pagination }}
+                        rowsPerPageOptions={[5, 10, 25, 50, 100]}
+                        labelRowsPerPage={useText(labelRowsPerPage)}
+                        component="div"
+                        count={0}
+                        rowsPerPage={rowsPerPage}
+                        page={page}
+                        onChangePage={() => {}}
+                        onChangeRowsPerPage={() => {}}
+                      />
+                    )}
                   </>
                 );
               }
@@ -372,16 +380,19 @@
                       </TableBody>
                     </Table>
                   </TableContainer>
-                  <TablePagination
-                    classes={{ root: classes.pagination }}
-                    rowsPerPageOptions={[5, 10, 25, 50, 100]}
-                    component="div"
-                    count={totalCount}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    onChangePage={handleChangePage}
-                    onChangeRowsPerPage={handleChangeRowsPerPage}
-                  />
+                  {pagination && (
+                    <TablePagination
+                      classes={{ root: classes.pagination }}
+                      rowsPerPageOptions={[5, 10, 25, 50, 100]}
+                      labelRowsPerPage={useText(labelRowsPerPage)}
+                      component="div"
+                      count={totalCount}
+                      rowsPerPage={rowsPerPage}
+                      page={page}
+                      onChangePage={handleChangePage}
+                      onChangeRowsPerPage={handleChangeRowsPerPage}
+                    />
+                  )}
                 </>
               );
             }}
