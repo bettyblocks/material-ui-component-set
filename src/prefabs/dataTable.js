@@ -72,6 +72,12 @@
           type: 'FONT',
         },
         {
+          type: 'TOGGLE',
+          label: 'Pagination',
+          key: 'pagination',
+          value: true,
+        },
+        {
           value: '5',
           label: 'Rows per page',
           key: 'take',
@@ -86,6 +92,12 @@
               { name: '50', value: '50' },
               { name: '100', value: '100' },
             ],
+            condition: {
+              type: 'SHOW',
+              option: 'pagination',
+              comparator: 'EQ',
+              value: true,
+            },
           },
         },
         {
@@ -93,6 +105,14 @@
           label: 'Rows per page text',
           key: 'labelRowsPerPage',
           value: ['Rows per page'],
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'pagination',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
         },
         {
           type: 'TOGGLE',
@@ -217,15 +237,21 @@
           options: [
             {
               value: '',
-              label: 'Order by',
+              label: 'Property',
               key: 'property',
               type: 'PROPERTY',
+            },
+            {
+              type: 'TOGGLE',
+              label: 'Sortable',
+              key: 'sortable',
+              value: false,
             },
             {
               type: 'VARIABLE',
               label: 'Header text',
               key: 'headerText',
-              value: ['Column'],
+              value: [''],
             },
             {
               value: 'Body1',
@@ -237,7 +263,7 @@
               type: 'VARIABLE',
               label: 'Content',
               key: 'content',
-              value: ['Type your content here...'],
+              value: [''],
               configuration: {
                 as: 'MULTILINE',
               },
@@ -283,15 +309,21 @@
           options: [
             {
               value: '',
-              label: 'Order by',
+              label: 'Property',
               key: 'property',
               type: 'PROPERTY',
+            },
+            {
+              type: 'TOGGLE',
+              label: 'Sortable',
+              key: 'sortable',
+              value: false,
             },
             {
               type: 'VARIABLE',
               label: 'Header text',
               key: 'headerText',
-              value: ['Column'],
+              value: [''],
             },
             {
               value: 'Body1',
@@ -303,7 +335,7 @@
               type: 'VARIABLE',
               label: 'Content',
               key: 'content',
-              value: ['Type your content here...'],
+              value: [''],
               configuration: {
                 as: 'MULTILINE',
               },
