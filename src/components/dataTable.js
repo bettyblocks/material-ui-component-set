@@ -58,6 +58,7 @@
         : {},
     );
     const titleText = useText(title);
+    const hasToolbar = titleText || searchProperty;
 
     if (isDev) {
       const repeaterRef = React.createRef();
@@ -100,7 +101,7 @@
             variant={variant}
             elevation={elevation}
           >
-            {(titleText || searchProperty) && (
+            {hasToolbar && (
               <Toolbar classes={{ root: classes.toolbar }}>
                 {titleText && (
                   <span className={classes.title}>{titleText}</span>
@@ -164,7 +165,7 @@
             variant={variant}
             elevation={elevation}
           >
-            {(titleText || searchProperty) && (
+            {hasToolbar && (
               <Toolbar classes={{ root: classes.toolbar }}>
                 {titleText && (
                   <span className={classes.title}>{titleText}</span>
@@ -251,7 +252,7 @@
           variant={variant}
           elevation={elevation}
         >
-          {(titleText || searchProperty) && (
+          {hasToolbar && (
             <Toolbar classes={{ root: classes.toolbar }}>
               {titleText && <span className={classes.title}>{titleText}</span>}
               {searchProperty && (
