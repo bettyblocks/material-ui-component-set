@@ -25,6 +25,21 @@
           type: 'FONT',
         },
         {
+          type: 'VARIABLE',
+          label: 'Content',
+          key: 'content',
+          value: ['Type your content here...'],
+          configuration: {
+            as: 'MULTILINE',
+          },
+        },
+        {
+          value: 'Body1',
+          label: 'Body type',
+          key: 'bodyType',
+          type: 'FONT',
+        },
+        {
           type: 'CUSTOM',
           label: 'Column Alignment',
           key: 'horizontalAlignment',
