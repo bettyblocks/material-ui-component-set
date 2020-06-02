@@ -129,7 +129,7 @@
                     {children}
                   </TableRow>
                 </TableBody>
-                <TableBody ref={repeaterRef} />
+                <TableBody ref={repeaterRef} className={classes.autoRepeat} />
               </Table>
             </TableContainer>
             <TablePagination
@@ -426,6 +426,9 @@
           style.getColor(background),
           '!important',
         ],
+      },
+      autoRepeat: {
+        opacity: 0.5,
       },
       skeleton: {
         height: `calc(${style.getFont('Body1').Mobile} * 1.2)`,
