@@ -18,7 +18,8 @@
       getProperty(property) || {};
     const { field, order = 'asc' } = orderBy || {};
     const isDev = env === 'dev';
-    const contentPlaceholder = 'Select property';
+    const isEmpty = children.length === 0;
+    const contentPlaceholder = isDev && isEmpty ? 'Select property' : '\u00A0';
 
     const bodyText = useText(content);
     const propContent = isDev ? (
@@ -65,14 +66,20 @@
     );
 
     return isDev ? (
-      <div className={classes.column}>
-        <TableCell
-          align={horizontalAlignment}
-          component="div"
-          classes={{ root: classes.root }}
-        >
-          {headerOnly ? Header : Content}
-        </TableCell>
+      <div
+        className={[
+          classes.tableColumn,
+          !headerOnly ? classes.tableColumnBody : '',
+          !headerOnly ? 'MuiTableCell-root' : '',
+        ].join(' ')}
+      >
+        {headerOnly ? (
+          <TableCell align={horizontalAlignment} component="div">
+            {Header}
+          </TableCell>
+        ) : (
+          Content
+        )}
       </div>
     ) : (
       <TableCell classes={{ root: classes.root }} align={horizontalAlignment}>
@@ -85,8 +92,26 @@
     const style = new Styling(theme);
     const isDev = env === 'dev';
     return {
-      column: {
+      tableColumn: {
         display: 'table-cell',
+        verticalAlign: 'middle',
+        '& > div': {
+          display: 'block',
+        },
+      },
+      tableColumnBody: {
+        textAlign: ({ options: { horizontalAlignment } }) => [
+          horizontalAlignment,
+          '!important',
+        ],
+        backgroundColor: ({ options: { background } }) => [
+          style.getColor(background),
+          '!important',
+        ],
+        borderColor: ({ options: { borderColor } }) => [
+          style.getColor(borderColor),
+          '!important',
+        ],
       },
       root: {
         display: isDev && ['block', '!important'],
