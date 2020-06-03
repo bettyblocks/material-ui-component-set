@@ -1,5 +1,5 @@
 (() => ({
-  name: 'drawerContainer',
+  name: 'DrawerContainer',
   type: 'ROW',
   allowedTypes: [
     'BODY_COMPONENT',
@@ -9,21 +9,24 @@
   ],
   orientation: 'HORIZONTAL',
   jsx: (() => {
+    const { Children } = B;
     const isEmpty = children.length === 0;
     const isDev = B.env === 'dev';
     const isPristine = isEmpty && isDev;
-    const { isOpen } = parent;
+    const { isResponsive, toggleDrawer, isLargeScreen } = parent;
+    const showDrawer = isResponsive && !isDev;
 
     return (
       <div
         className={[
           classes.root,
           isPristine ? classes.pristine : '',
-          isOpen && !isDev ? classes.rootShift : '',
+          showDrawer ? classes.rootShift : '',
         ].join(' ')}
       >
-        {isPristine ? 'Drawer Container' : ''}
-        {children}
+        <Children showToggleIcon={!isLargeScreen} toggleDrawer={toggleDrawer}>
+          {isPristine ? 'Drawer Container' : children}
+        </Children>
       </div>
     );
   })(),
@@ -37,18 +40,10 @@
         flexGrow: 1,
         backgroundColor: ({ options: { bgColor } }) => style.getColor(bgColor),
         boxSizing: 'border-box',
-        transition: theme.transitions.create('margin', {
-          easing: theme.transitions.easing.sharp,
-          duration: theme.transitions.duration.leavingScreen,
-        }),
       },
       rootShift: {
         [theme.breakpoints.up('sm')]: {
-          transition: theme.transitions.create('margin', {
-            easing: theme.transitions.easing.easeOut,
-            duration: theme.transitions.duration.enteringScreen,
-          }),
-          marginLeft: 200, // TODO - adjust this to be dynamic
+          marginLeft: ({ parent }) => parent.drawerWidth,
         },
       },
       pristine: {

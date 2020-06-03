@@ -53,6 +53,11 @@
         elevation={elevation}
       >
         <Toolbar variant={toolbarVariant} classes={{ root: classes.toolbar }}>
+          {parent.showToggleIcon && (
+            <IconButton color="inherit" onClick={parent.toggleDrawer}>
+              <MenuIcon />
+            </IconButton>
+          )}
           {logo.length > 0 && LogoComponent}
           <Typography
             variant="h6"
@@ -64,7 +69,7 @@
             {title}
           </Typography>
           <div className={classes.spacer} />
-          {!isDev ? (
+          {!isDev && !!children.length ? (
             <>
               <div className={classes.collapsed}>
                 <IconButton color="inherit" onClick={handleMenu}>

@@ -1,5 +1,5 @@
 (() => ({
-  name: 'drawerBar',
+  name: 'DrawerBar',
   type: 'ROW',
   allowedTypes: [
     'BODY_COMPONENT',
@@ -12,11 +12,13 @@
     const { Drawer } = window.MaterialUI.Core;
     // this will probably have to change
     const {
+      isResponsive,
       isLargeScreen,
       isOpen,
       toggleDrawer,
       openDrawer,
       closeDrawer,
+      anchor,
     } = parent;
 
     const isEmpty = children.length === 0;
@@ -30,39 +32,35 @@
     }, []);
 
     const drawerContent = children.length ? children : 'Drawer content here.';
+    const anchorValue = isResponsive ? 'left' : anchor;
+
+    if (!isResponsive || !isLargeScreen) {
+      return (
+        <div className={isPristine ? classes.pristine : ''}>
+          <Drawer
+            container={container}
+            variant="temporary"
+            open={isOpen}
+            anchor={anchorValue}
+            onClose={toggleDrawer}
+            classes={{ paper: classes.paper }}
+            className={classes.drawer}
+            ModalProps={{ keepMounted: true }}
+          >
+            {drawerContent}
+          </Drawer>
+        </div>
+      );
+    }
 
     return (
       <div className={isPristine ? classes.pristine : ''}>
-        {!isLargeScreen && (
-          <div className={[isPristine ? classes.pristine : ''].join(' ')}>
-            {isPristine ? 'Drawer Bar' : ''}
-            <Drawer
-              container={container}
-              variant="temporary"
-              open={isOpen}
-              onClose={toggleDrawer}
-              classes={{
-                paper:
-                  B.env === 'dev'
-                    ? classes.devDrawerPaper
-                    : classes.drawerPaper,
-              }}
-              ModalProps={{ keepMounted: true }}
-            >
-              {drawerContent}
-            </Drawer>
-          </div>
-        )}
-
-        {isLargeScreen && (
+        {isResponsive && isLargeScreen && (
           <Drawer
             variant="persistent"
-            open={isOpen}
-            onClose={toggleDrawer}
-            classes={{
-              paper:
-                B.env === 'dev' ? classes.devDrawerPaper : classes.drawerPaper,
-            }}
+            open
+            className={classes.drawer}
+            classes={{ paper: classes.paper }}
           >
             {drawerContent}
           </Drawer>
@@ -70,18 +68,22 @@
       </div>
     );
   })(),
-  styles: B => t => {
-    const style = new B.Styling(t);
+  styles: B => () => {
+    const staticPositioning =
+      B.env === 'dev' ? { position: 'static !important' } : {};
 
     return {
-      devDrawerPaper: {
-        position: 'static !important',
-        width: 200, // TODO - adjust this to be dynamic
-        backgroundColor: ({ options: { bgColor } }) => style.getColor(bgColor),
+      drawer: {
+        height: '100%',
       },
-      drawerPaper: {
-        width: 200, // TODO - adjust this to be dynamic
-        backgroundColor: ({ options: { bgColor } }) => style.getColor(bgColor),
+      paper: {
+        ...staticPositioning,
+        width: ({ parent }) => {
+          const { anchor, isResponsive, drawerWidth } = parent;
+          return isResponsive || ['left', 'right'].includes(anchor)
+            ? drawerWidth
+            : '100%';
+        },
       },
       pristine: {
         borderWidth: '0.0625rem',
