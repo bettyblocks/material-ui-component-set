@@ -1,50 +1,80 @@
 (() => ({
-  name: 'Alert',
-  icon: 'AlertIcon',
+  name: 'Avatar',
+  icon: 'AvatarIcon',
   category: 'CONTENT',
   structure: [
     {
-      name: 'Alert',
+      name: 'Avatar',
       options: [
         {
-          value: true,
-          label: 'Visible',
-          key: 'visible',
-          type: 'TOGGLE',
-        },
-        {
-          type: 'VARIABLE',
-          label: 'Body text',
-          key: 'bodyText',
-          value: ['Type your content here...'],
+          type: 'CUSTOM',
+          label: 'Type',
+          key: 'type',
+          value: 'img',
           configuration: {
-            dependsOn: 'model',
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Image', value: 'img' },
+              { name: 'Letter', value: 'letter' },
+              { name: 'Icon', value: 'icon' },
+            ],
           },
         },
         {
+          value: [],
+          label: 'Image url',
+          key: 'imgUrl',
           type: 'VARIABLE',
-          label: 'Title text',
-          key: 'titleText',
-          value: [''],
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'type',
+              comparator: 'EQ',
+              value: 'img',
+            },
+          },
         },
         {
-          value: 'Black',
-          label: 'Text color',
-          key: 'textColor',
-          type: 'COLOR',
+          value: [],
+          label: 'Image alternative text',
+          key: 'imgAlt',
+          type: 'VARIABLE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'type',
+              comparator: 'EQ',
+              value: 'img',
+            },
+          },
         },
         {
-          value: 'Success',
-          label: 'Background color',
-          key: 'background',
-          type: 'COLOR',
+          value: [],
+          label: 'Letter',
+          key: 'letter',
+          type: 'VARIABLE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'type',
+              comparator: 'EQ',
+              value: 'letter',
+            },
+          },
         },
         {
           label: 'Icon',
           key: 'icon',
-          value: 'None',
+          value: 'Person',
           type: 'CUSTOM',
           configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'type',
+              comparator: 'EQ',
+              value: 'icon',
+            },
             as: 'DROPDOWN',
             dataType: 'string',
             allowedInput: [
@@ -1300,16 +1330,51 @@
           },
         },
         {
-          value: false,
-          label: 'Collapsable',
-          key: 'collapsable',
-          type: 'TOGGLE',
+          type: 'CUSTOM',
+          label: 'Variant',
+          key: 'variant',
+          value: 'circle',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Circle', value: 'circle' },
+              { name: 'Rounded', value: 'rounded' },
+              { name: 'Square', value: 'square' },
+            ],
+          },
         },
         {
-          value: ['0rem', '0rem', 'M', '0rem'],
-          label: 'Outer space',
-          key: 'outerSpacing',
-          type: 'SIZES',
+          type: 'COLOR',
+          label: 'color',
+          key: 'color',
+          value: 'Accent1',
+          configuration: {
+            condition: {
+              type: 'HIDE',
+              option: 'type',
+              comparator: 'EQ',
+              value: 'img',
+            },
+          },
+        },
+        {
+          type: 'SIZE',
+          label: 'Width',
+          key: 'width',
+          value: '40px',
+          configuration: {
+            as: 'UNIT',
+          },
+        },
+        {
+          type: 'SIZE',
+          label: 'Height',
+          key: 'height',
+          value: '40px',
+          configuration: {
+            as: 'UNIT',
+          },
         },
       ],
       descendants: [],
