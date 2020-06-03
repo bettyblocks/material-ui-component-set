@@ -1346,9 +1346,23 @@
         },
         {
           type: 'COLOR',
-          label: 'color',
-          key: 'color',
+          label: 'Background color',
+          key: 'backgroundColor',
           value: 'Accent1',
+          configuration: {
+            condition: {
+              type: 'HIDE',
+              option: 'type',
+              comparator: 'EQ',
+              value: 'img',
+            },
+          },
+        },
+        {
+          type: 'COLOR',
+          label: 'Text color',
+          key: 'textColor',
+          value: 'White',
           configuration: {
             condition: {
               type: 'HIDE',
@@ -1375,6 +1389,12 @@
           configuration: {
             as: 'UNIT',
           },
+        },
+        {
+          type: 'SIZES',
+          label: 'Outer Space',
+          key: 'margin',
+          value: ['M', 'M', 'M', 'M'],
         },
       ],
       descendants: [],
