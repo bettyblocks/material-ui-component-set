@@ -16,7 +16,7 @@ jobs:
 
     - stage: deploy_test_environment
       name: 'Publish Component Set on test environments'
-      if: branch IN (acceptance, edge) AND type != pull_request
+      if: branch IN (edge) AND type != pull_request
       deploy:
         provider: script
         skip_cleanup: true
@@ -29,7 +29,7 @@ jobs:
 
     - stage: deploy
       name: 'Publish Component Set'
-      if: branch = master AND type != pull_request
+      if: branch IN (acceptance, master) AND type != pull_request
       deploy:
         provider: script
         skip_cleanup: true
