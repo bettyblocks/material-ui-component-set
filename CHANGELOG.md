@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.1.1...v1.2.0) (2020-06-04)
+
+
+### Features
+
+* add hidden input component ([f46443f](https://github.com/bettyblocks/material-ui-component-set/commit/f46443f491a0130b163a1b9b29a88e98793e7a4c))
+
 ## [1.1.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.1.0...v1.1.1) (2020-06-04)
 
 
