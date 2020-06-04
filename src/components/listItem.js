@@ -23,6 +23,7 @@
       icon,
       avatar,
       linkTo,
+      dense,
     } = options;
     const { env, useText, Link } = B;
     const isDev = env === 'dev';
@@ -63,6 +64,7 @@
         divider={divider}
         selected={selected}
         className={classes.root}
+        dense={dense}
       >
         {icon !== 'None' && (avatar ? AvatarComponent : IconComponent)}
         <ListItemText

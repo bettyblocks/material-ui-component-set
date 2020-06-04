@@ -27,6 +27,18 @@
           key: 'backgroundColor',
           value: 'Transparent',
         },
+        {
+          type: 'TOGGLE',
+          label: 'Disable padding',
+          key: 'disablePadding',
+          value: false,
+        },
+        {
+          type: 'TOGGLE',
+          label: 'Dense',
+          key: 'dense',
+          value: false,
+        },
       ],
       descendants: [
         {
@@ -1380,6 +1392,12 @@
               type: 'TOGGLE',
               label: 'Disable gutters',
               key: 'disableGutters',
+              value: false,
+            },
+            {
+              type: 'TOGGLE',
+              label: 'Dense',
+              key: 'dense',
               value: false,
             },
             {

@@ -24,6 +24,7 @@
       filter,
       property,
       propertyLabelOverride,
+      fullWidth,
     } = options;
     const isDev = B.env === 'dev';
     const { GetAll, getProperty, useText, getActionInput } = B;
@@ -62,7 +63,7 @@
       <MUIFormControlLabel
         disabled={disabled}
         value={optionValue}
-        control={<Radio size={size} />}
+        control={<Radio tabIndex={isDev && -1} size={size} />}
         label={optionLabel}
         labelPlacement={position}
       />
@@ -97,13 +98,19 @@
       setValue(getValue(evt.target.value));
     };
 
+    useEffect(() => {
+      if (isDev) {
+        setValue(useText(defaultValue));
+      }
+    }, [isDev, defaultValue]);
+
     const FormControl = (
       <MUIFormControl
-        className={classes.formControl}
         required={required}
         margin={margin}
         component="fieldset"
         error={error}
+        fullWidth={fullWidth}
       >
         <FormLabel component="legend">{labelText}</FormLabel>
         <RadioGroup
@@ -126,10 +133,9 @@
     );
   })(),
   styles: () => () => ({
-    formControl: {
-      display: 'block',
-    },
     root: {
+      display: ({ options: { fullWidth } }) =>
+        fullWidth ? 'block' : 'inline-block',
       '& > *': {
         pointerEvents: 'none',
       },

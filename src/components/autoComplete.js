@@ -43,9 +43,7 @@
     } = window.MaterialUI.Icons;
     const { useText, getProperty, getActionInput, GetAll, env } = B;
     const isDev = env === 'dev';
-    const [currentValue, setCurrentValue] = isDev
-      ? useState(defaultValue.join(' '))
-      : useState(useText(defaultValue));
+    const [currentValue, setCurrentValue] = useState(useText(defaultValue));
     const placeholderText = useText(placeholder);
     const helper = useText(helperText);
 
@@ -68,23 +66,28 @@
       helperText: helper,
     };
 
-    if (isDev || !model) {
-      const textValue = defaultValue
-        .map(textitem => (textitem.name ? textitem.name : textitem))
-        .join(' ');
+    useEffect(() => {
+      if (isDev) {
+        setCurrentValue(useText(defaultValue));
+      }
+    }, [isDev, defaultValue]);
 
-      let inputAdornments = {
+    if (isDev || !model) {
+      let inputProps = {
+        inputProps: {
+          tabIndex: isDev && -1,
+        },
         endAdornment: (
           <>
-            {textValue && <Close className={classes.icon} />}
+            {currentValue && <Close className={classes.icon} />}
             {!freeSolo && <ExpandMore className={classes.icon} />}
           </>
         ),
       };
-      if (multiple && textValue) {
-        inputAdornments = {
-          ...inputAdornments,
-          startAdornment: <Chip label={textValue} onDelete={() => {}} />,
+      if (multiple && currentValue) {
+        inputProps = {
+          ...inputProps,
+          startAdornment: <Chip label={currentValue} onDelete={() => {}} />,
         };
       }
 
@@ -92,8 +95,8 @@
         <div className={classes.root}>
           <TextField
             {...textFieldProps}
-            value={multiple ? '' : textValue}
-            InputProps={inputAdornments}
+            value={multiple ? '' : currentValue}
+            InputProps={inputProps}
           />
         </div>
       );
