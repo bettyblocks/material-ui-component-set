@@ -18,7 +18,7 @@
     },
     {
       "name": "acceptance",
-      "channel": "next"
+      "channel": "acceptance"
     }
   ]
 }
