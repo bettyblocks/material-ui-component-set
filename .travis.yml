@@ -38,4 +38,4 @@ jobs:
         script:
           - yarn build && yarn bundle && yarn upload && npx semantic-release
         on:
-          branch: master
+          all_branches: true
