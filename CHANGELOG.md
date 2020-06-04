@@ -1,3 +1,27 @@
+## [1.1.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.1.0...v1.1.1) (2020-06-04)
+
+
+### Bug Fixes
+
+* prerelease should be channel next ([8947508](https://github.com/bettyblocks/material-ui-component-set/commit/8947508fac1f7116efac97edae97808ba5398847))
+
+# [1.1.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.0.0...v1.1.0) (2020-06-04)
+
+
+### Bug Fixes
+
+* align adornments textarea to textfield ([#169](https://github.com/bettyblocks/material-ui-component-set/issues/169)) ([f201ffe](https://github.com/bettyblocks/material-ui-component-set/commit/f201ffec13d60bcde4c57d901406b21d58d817cf))
+* branch check is done on other place ([a8f08c4](https://github.com/bettyblocks/material-ui-component-set/commit/a8f08c4422c2ad28beac2204bd65e086714f57bf))
+* change tabs category ([#195](https://github.com/bettyblocks/material-ui-component-set/issues/195)) ([15e2f5f](https://github.com/bettyblocks/material-ui-component-set/commit/15e2f5f2d646e445e9f0d8e50f5855b4562eb91b))
+* default value margin option ([0d0029f](https://github.com/bettyblocks/material-ui-component-set/commit/0d0029f14465bdec1b8b87713b482f1ac170df71))
+* remove modal configuration from form ([#165](https://github.com/bettyblocks/material-ui-component-set/issues/165)) ([62173d2](https://github.com/bettyblocks/material-ui-component-set/commit/62173d24bea24a0baa89e1e7c3828d94c6a57d01))
+
+
+### Features
+
+* add modal configuration to form prefab ([#161](https://github.com/bettyblocks/material-ui-component-set/issues/161)) ([97aad9a](https://github.com/bettyblocks/material-ui-component-set/commit/97aad9a81f31c97abc2de1282e02801459785dee))
+* check changelog generation on acceptance ([b660861](https://github.com/bettyblocks/material-ui-component-set/commit/b660861efc5d8261b75cf1f1d86df13d37144a44))
+
 # 1.0.0 (2020-05-20)
 
 
