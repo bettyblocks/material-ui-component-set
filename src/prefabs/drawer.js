@@ -7,12 +7,6 @@
       name: 'Drawer',
       options: [
         {
-          type: 'TOGGLE',
-          label: 'Responsive',
-          key: 'isResponsive',
-          value: false,
-        },
-        {
           type: 'SIZE',
           label: 'Drawer Width',
           key: 'drawerWidth',
@@ -22,9 +16,24 @@
           },
         },
         {
+          value: 'responsive',
+          label: 'Drawer type',
+          key: 'drawerType',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Responsive', value: 'responsive' },
+              { name: 'Temporary', value: 'temporary' },
+              { name: 'Permanent', value: 'permanent' },
+            ],
+          },
+        },
+        {
           value: 'left',
           label: 'Alignment',
-          key: 'anchor',
+          key: 'temporaryAnchor',
           type: 'CUSTOM',
           configuration: {
             as: 'BUTTONGROUP',
@@ -35,6 +44,46 @@
               { name: 'Right', value: 'right' },
               { name: 'Bottom', value: 'bottom' },
             ],
+            condition: {
+              type: 'SHOW',
+              option: 'drawerType',
+              comparator: 'EQ',
+              value: 'temporary',
+            },
+          },
+        },
+        {
+          value: 'left',
+          label: 'Alignment',
+          key: 'permanentAnchor',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Left', value: 'left' },
+              { name: 'Right', value: 'right' },
+            ],
+            condition: {
+              type: 'HIDE',
+              option: 'drawerType',
+              comparator: 'EQ',
+              value: 'temporary',
+            },
+          },
+        },
+        {
+          type: 'TOGGLE',
+          label: 'Show Drawer',
+          key: 'editDrawer',
+          value: true,
+          configuration: {
+            condition: {
+              type: 'HIDE',
+              option: 'drawerType',
+              comparator: 'EQ',
+              value: 'permanent',
+            },
           },
         },
       ],
