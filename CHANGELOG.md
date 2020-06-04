@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.1.0...v1.1.1) (2020-06-04)
+
+
+### Bug Fixes
+
+* prerelease should be channel next ([8947508](https://github.com/bettyblocks/material-ui-component-set/commit/8947508fac1f7116efac97edae97808ba5398847))
+
 # [1.1.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.0.0...v1.1.0) (2020-06-04)
 
 
