@@ -18,7 +18,7 @@
       </>
     );
 
-    return isDev ? <div className={classes.wrapper}>{StepCmp}</div> : StepCmp;
+    return isDev ? <div>{StepCmp}</div> : StepCmp;
   })(),
   styles: () => () => ({
     empty: {
