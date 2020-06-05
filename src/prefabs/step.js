@@ -1,16 +1,16 @@
 (() => ({
-  name: 'Tab',
-  icon: 'TabIcon',
+  name: 'Step',
+  icon: 'StepperIcon',
   category: 'NAVIGATION',
   structure: [
     {
-      name: 'Tab',
+      name: 'Step',
       options: [
         {
-          label: 'Tab label',
+          type: 'VARIABLE',
+          label: 'Label',
           key: 'label',
-          value: 'TAB',
-          type: 'TEXT',
+          value: ['Step'],
         },
         {
           label: 'Icon',
@@ -22,7 +22,7 @@
             dataType: 'string',
             allowedInput: [
               {
-                name: '',
+                name: 'None',
                 value: 'None',
               },
               {
@@ -596,6 +596,10 @@
               {
                 name: 'FavoriteBorder',
                 value: 'FavoriteBorder',
+              },
+              {
+                name: 'FileCopy',
+                value: 'FileCopy',
               },
               {
                 name: 'FilterList',
@@ -1275,18 +1279,6 @@
               },
             ],
           },
-        },
-        {
-          type: 'TOGGLE',
-          label: 'Disabled',
-          key: 'disabled',
-          value: false,
-        },
-        {
-          type: 'TOGGLE',
-          label: 'Disable ripple',
-          key: 'disableRipple',
-          value: false,
         },
       ],
       descendants: [],

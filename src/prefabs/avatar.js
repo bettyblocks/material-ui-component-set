@@ -1,30 +1,83 @@
 (() => ({
-  name: 'Tab',
-  icon: 'TabIcon',
-  category: 'NAVIGATION',
+  name: 'Avatar',
+  icon: 'AvatarIcon',
+  category: 'CONTENT',
   structure: [
     {
-      name: 'Tab',
+      name: 'Avatar',
       options: [
         {
-          label: 'Tab label',
-          key: 'label',
-          value: 'TAB',
-          type: 'TEXT',
+          type: 'CUSTOM',
+          label: 'Type',
+          key: 'type',
+          value: 'img',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Image', value: 'img' },
+              { name: 'Letter', value: 'letter' },
+              { name: 'Icon', value: 'icon' },
+            ],
+          },
+        },
+        {
+          value: [],
+          label: 'Image url',
+          key: 'imgUrl',
+          type: 'VARIABLE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'type',
+              comparator: 'EQ',
+              value: 'img',
+            },
+          },
+        },
+        {
+          value: [],
+          label: 'Image alternative text',
+          key: 'imgAlt',
+          type: 'VARIABLE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'type',
+              comparator: 'EQ',
+              value: 'img',
+            },
+          },
+        },
+        {
+          value: [],
+          label: 'Letter',
+          key: 'letter',
+          type: 'VARIABLE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'type',
+              comparator: 'EQ',
+              value: 'letter',
+            },
+          },
         },
         {
           label: 'Icon',
           key: 'icon',
-          value: 'None',
+          value: 'Person',
           type: 'CUSTOM',
           configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'type',
+              comparator: 'EQ',
+              value: 'icon',
+            },
             as: 'DROPDOWN',
             dataType: 'string',
             allowedInput: [
-              {
-                name: '',
-                value: 'None',
-              },
               {
                 name: 'AcUnit',
                 value: 'AcUnit',
@@ -1277,16 +1330,71 @@
           },
         },
         {
-          type: 'TOGGLE',
-          label: 'Disabled',
-          key: 'disabled',
-          value: false,
+          type: 'CUSTOM',
+          label: 'Variant',
+          key: 'variant',
+          value: 'circle',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Circle', value: 'circle' },
+              { name: 'Rounded', value: 'rounded' },
+              { name: 'Square', value: 'square' },
+            ],
+          },
         },
         {
-          type: 'TOGGLE',
-          label: 'Disable ripple',
-          key: 'disableRipple',
-          value: false,
+          type: 'COLOR',
+          label: 'Background color',
+          key: 'backgroundColor',
+          value: 'Accent1',
+          configuration: {
+            condition: {
+              type: 'HIDE',
+              option: 'type',
+              comparator: 'EQ',
+              value: 'img',
+            },
+          },
+        },
+        {
+          type: 'COLOR',
+          label: 'Text color',
+          key: 'textColor',
+          value: 'White',
+          configuration: {
+            condition: {
+              type: 'HIDE',
+              option: 'type',
+              comparator: 'EQ',
+              value: 'img',
+            },
+          },
+        },
+        {
+          type: 'SIZE',
+          label: 'Width',
+          key: 'width',
+          value: '40px',
+          configuration: {
+            as: 'UNIT',
+          },
+        },
+        {
+          type: 'SIZE',
+          label: 'Height',
+          key: 'height',
+          value: '40px',
+          configuration: {
+            as: 'UNIT',
+          },
+        },
+        {
+          type: 'SIZES',
+          label: 'Outer Space',
+          key: 'margin',
+          value: ['M', 'M', 'M', 'M'],
         },
       ],
       descendants: [],
