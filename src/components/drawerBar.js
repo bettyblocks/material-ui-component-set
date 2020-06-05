@@ -1,6 +1,6 @@
 (() => ({
   name: 'DrawerBar',
-  type: 'ROW',
+  type: 'LAYOUT_COMPONENT',
   allowedTypes: [
     'LAYOUT_COMPONENT',
     'CONTAINER_COMPONENT',

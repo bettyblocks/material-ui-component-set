@@ -1,7 +1,11 @@
 (() => ({
   name: 'Drawer',
   type: 'BODY_COMPONENT',
-  allowedTypes: ['BODY_CONTAINER'],
+  allowedTypes: [
+    'LAYOUT_COMPONENT',
+    'CONTAINER_COMPONENT',
+    'CONTENT_COMPONENT',
+  ],
   orientation: 'VERTICAL',
   jsx: (() => {
     const { Children } = B;
