@@ -8,7 +8,7 @@
   ],
   orientation: 'VERTICAL',
   jsx: (() => {
-    const { Drawer, useMediaQuery, useTheme } = window.MaterialUI.Core;
+    const { Hidden, Drawer, useMediaQuery, useTheme } = window.MaterialUI.Core;
     const {
       isOpen,
       toggleDrawer,
@@ -34,17 +34,41 @@
       B.defineFunction('ToggleDrawer', toggleDrawer);
     }, []);
 
-    const DrawerComponent = (
+    const tempDrawer = (
       <Drawer
         variant={activeTemporary ? 'temporary' : 'persistent'}
         open={isOpen}
         anchor={anchor}
-        onClose={closeDrawer}
+        onClose={toggleDrawer}
         classes={{ paper: classes.paper }}
         ModalProps={{ keepMounted: true }}
       >
         {children}
       </Drawer>
+    );
+
+    if (!isDev && isTemporary) return tempDrawer;
+
+    const DrawerComponent = (
+      <>
+        <Hidden
+          smUp={breakpoint === 'sm'}
+          mdUp={breakpoint === 'md'}
+          lgUp={breakpoint === 'lg'}
+        >
+          {tempDrawer}
+        </Hidden>
+        <Hidden xsDown>
+          <Drawer
+            variant={activeTemporary ? 'temporary' : 'persistent'}
+            open={isOpen}
+            anchor={anchor}
+            classes={{ paper: classes.paper }}
+          >
+            {children}
+          </Drawer>
+        </Hidden>
+      </>
     );
 
     if (!isDev) return DrawerComponent;
@@ -97,7 +121,9 @@
         width: computeWidth,
         '&.MuiPaper-root': {
           backgroundColor: ({ options: { themeBgColor, bgColorOverwrite } }) =>
-            bgColorOverwrite || style.getColor(themeBgColor),
+            bgColorOverwrite
+              ? `${bgColorOverwrite} !important`
+              : [style.getColor(themeBgColor), '!important'],
         },
       },
       drawerDev: {
@@ -111,6 +137,11 @@
         width: computeWidth,
         alignSelf: ({ parent: { anchor } }) =>
           anchor === 'bottom' ? 'flex-end' : 'flex-start',
+        color: 'blue !important',
+        backgroundColor: ({ options: { themeBgColor, bgColorOverwrite } }) =>
+          bgColorOverwrite
+            ? `${bgColorOverwrite} !important`
+            : [style.getColor(themeBgColor), '!important'],
       },
       empty: {
         display: 'flex',
