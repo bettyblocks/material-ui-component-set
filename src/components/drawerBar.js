@@ -1,29 +1,32 @@
 (() => ({
-  name: 'DrawerBar',
-  type: 'ROW',
+  name: 'DrawerSidebar',
+  type: 'DRAWER_SIDEBAR',
   allowedTypes: [
-    'BODY_COMPONENT',
     'LAYOUT_COMPONENT',
     'CONTAINER_COMPONENT',
     'CONTENT_COMPONENT',
   ],
-  orientation: 'HORIZONTAL',
+  orientation: 'VERTICAL',
   jsx: (() => {
-    const { Drawer } = window.MaterialUI.Core;
-    // this will probably have to change
+    const { Drawer, useMediaQuery, useTheme } = window.MaterialUI.Core;
     const {
-      isResponsive,
-      isLargeScreen,
       isOpen,
       toggleDrawer,
       openDrawer,
       closeDrawer,
       anchor,
+      isTemporary,
+      isPersistent,
+      breakpoint,
     } = parent;
 
     const isEmpty = children.length === 0;
-    const isPristine = isEmpty && B.env === 'dev';
-    const container = window !== undefined ? window.document.body : undefined;
+    const isDev = B.env === 'dev';
+    const isPristine = isEmpty && isDev;
+    const aboveBreakpoint = useMediaQuery(
+      useTheme().breakpoints.up(breakpoint),
+    );
+    const activeTemporary = isTemporary || (isPersistent && !aboveBreakpoint);
 
     useEffect(() => {
       B.defineFunction('OpenDrawer', openDrawer);
@@ -31,67 +34,111 @@
       B.defineFunction('ToggleDrawer', toggleDrawer);
     }, []);
 
-    const drawerContent = children.length ? children : 'Drawer content here.';
-    const anchorValue = isResponsive ? 'left' : anchor;
+    const DrawerComponent = (
+      <Drawer
+        variant={activeTemporary ? 'temporary' : 'persistent'}
+        open={isOpen}
+        anchor={anchor}
+        onClose={closeDrawer}
+        classes={{ paper: classes.paper }}
+        ModalProps={{ keepMounted: true }}
+      >
+        {children}
+      </Drawer>
+    );
 
-    if (!isResponsive || !isLargeScreen) {
-      return (
-        <div className={isPristine ? classes.pristine : ''}>
-          <Drawer
-            container={container}
-            variant="temporary"
-            open={isOpen}
-            anchor={anchorValue}
-            onClose={toggleDrawer}
-            classes={{ paper: classes.paper }}
-            className={classes.drawer}
-            ModalProps={{ keepMounted: true }}
-          >
-            {drawerContent}
-          </Drawer>
-        </div>
-      );
-    }
+    if (!isDev) return DrawerComponent;
+
+    if (!isOpen) return <div />;
 
     return (
-      <div className={isPristine ? classes.pristine : ''}>
-        {isResponsive && isLargeScreen && (
+      <div className={isTemporary && classes.overlay}>
+        {!isEmpty ? (
           <Drawer
             variant="persistent"
             open
-            className={classes.drawer}
-            classes={{ paper: classes.paper }}
+            anchor={anchor}
+            className={classes.drawerDev}
+            classes={{
+              paper: [classes.paper, classes.paperDev],
+            }}
           >
-            {drawerContent}
+            {children}
           </Drawer>
+        ) : (
+          <div
+            className={[
+              classes.drawerDev,
+              isEmpty ? classes.empty : '',
+              isPristine ? classes.pristine : '',
+            ].join(' ')}
+          >
+            Drawer Sidebar
+          </div>
         )}
       </div>
     );
   })(),
-  styles: B => () => {
+  styles: B => t => {
+    const style = new B.Styling(t);
     const staticPositioning =
-      B.env === 'dev' ? { position: 'static !important' } : {};
+      B.env === 'dev'
+        ? { position: 'static !important', zIndex: '0 !important' }
+        : {};
+
+    const computeWidth = ({ parent }) => {
+      const { anchor, drawerWidth } = parent;
+      return ['left', 'right'].includes(anchor) ? drawerWidth : '100%';
+    };
 
     return {
-      drawer: {
-        height: '100%',
-      },
       paper: {
         ...staticPositioning,
-        width: ({ parent }) => {
-          const { anchor, isResponsive, drawerWidth } = parent;
-          return isResponsive || ['left', 'right'].includes(anchor)
-            ? drawerWidth
-            : '100%';
+        width: computeWidth,
+        '&.MuiPaper-root': {
+          backgroundColor: ({ options: { themeBgColor, bgColorOverwrite } }) =>
+            bgColorOverwrite || style.getColor(themeBgColor),
         },
+      },
+      drawerDev: {
+        display: 'flex',
+        height: '100%',
+        width: computeWidth,
+        alignSelf: ({ parent: { anchor } }) =>
+          anchor === 'bottom' ? 'flex-end' : 'flex-start',
+      },
+      paperDev: {
+        width: computeWidth,
+        alignSelf: ({ parent: { anchor } }) =>
+          anchor === 'bottom' ? 'flex-end' : 'flex-start',
+      },
+      empty: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: computeWidth,
+        height: ({ parent: { anchor } }) =>
+          ['top', 'bottom'].includes(anchor) ? '20%' : '100%',
+        fontSize: '0.75rem',
+        color: '#262A3A',
+        textTransform: 'uppercase',
+        boxSizing: 'border-box',
       },
       pristine: {
         borderWidth: '0.0625rem',
         borderColor: '#AFB5C8',
         borderStyle: 'dashed',
         backgroundColor: '#F0F1F5 !important',
-        textAlign: 'center',
-        lineHeight: '100vh',
+      },
+      overlay: {
+        display: 'flex',
+        justifyContent: ({ parent: { anchor } }) =>
+          anchor === 'right' ? 'flex-end' : 'flex-start',
+        position: 'absolute',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        width: '100%',
+        height: '100%',
+        zIndex: 2,
       },
     };
   },
