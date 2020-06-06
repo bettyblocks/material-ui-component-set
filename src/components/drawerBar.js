@@ -23,10 +23,10 @@
     const isEmpty = children.length === 0;
     const isDev = B.env === 'dev';
     const isPristine = isEmpty && isDev;
-    const container = window !== undefined ? window.document.body : undefined;
     const aboveBreakpoint = useMediaQuery(
       useTheme().breakpoints.up(breakpoint),
     );
+    const activeTemporary = isTemporary || (isPersistent && !aboveBreakpoint);
 
     useEffect(() => {
       B.defineFunction('OpenDrawer', openDrawer);
@@ -34,32 +34,18 @@
       B.defineFunction('ToggleDrawer', toggleDrawer);
     }, []);
 
-    let DrawerComponent = (
+    const DrawerComponent = (
       <Drawer
-        variant="persistent"
+        variant={activeTemporary ? 'temporary' : 'persistent'}
         open={isOpen}
         anchor={anchor}
+        onClose={closeDrawer}
         classes={{ paper: classes.paper }}
+        ModalProps={{ keepMounted: true }}
       >
         {children}
       </Drawer>
     );
-
-    if ((isPersistent && !aboveBreakpoint) || isTemporary) {
-      DrawerComponent = (
-        <Drawer
-          container={container}
-          variant="temporary"
-          open={isOpen}
-          anchor={anchor}
-          onClose={closeDrawer}
-          classes={{ paper: classes.paper }}
-          ModalProps={{ keepMounted: true }}
-        >
-          {children}
-        </Drawer>
-      );
-    }
 
     if (!isDev) return DrawerComponent;
 

@@ -116,12 +116,6 @@
               key: 'bgColorOverwrite',
               value: '',
             },
-            {
-              type: 'SIZES',
-              label: 'Padding',
-              key: 'padding',
-              value: ['None', 'None', 'None', 'None'],
-            },
           ],
           descendants: [
             {
