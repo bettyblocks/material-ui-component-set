@@ -1,71 +1,73 @@
 (() => ({
   name: 'Drawer',
   type: 'BODY_COMPONENT',
-  allowedTypes: [
-    'LAYOUT_COMPONENT',
-    'CONTAINER_COMPONENT',
-    'CONTENT_COMPONENT',
-  ],
-  orientation: 'VERTICAL',
+  allowedTypes: ['DRAWER_SIDEBAR', 'DRAWER_CONTAINER'],
+  orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { Children } = B;
-    const { useMediaQuery, useTheme } = window.MaterialUI.Core;
-    // TODO - this will probably have to change
-    const theme = useTheme();
-    const isLargeScreen = useMediaQuery(theme.breakpoints.up('sm'));
+    const { Children, env } = B;
+
+    const isEmpty = children.length === 0;
+    const isPristine = isEmpty && env === 'dev';
     const {
       drawerWidth,
       drawerType,
-      permanentAnchor,
+      persistentAnchor,
       temporaryAnchor,
-      editDrawer,
+      breakpoint,
+      visibility,
     } = options;
+
     const isTemporary = drawerType === 'temporary';
-    const isPermanent = drawerType === 'permanent';
-    const isResponsive = drawerType === 'responsive';
+    const anchor = isTemporary ? temporaryAnchor : persistentAnchor;
 
-    const [isOpen, setIsOpen] = useState(editDrawer);
-
-    let anchor = temporaryAnchor;
-    if (!isTemporary) anchor = permanentAnchor;
+    const [isOpen, setIsOpen] = useState(visibility);
 
     const closeDrawer = () => setIsOpen(false);
     const openDrawer = () => setIsOpen(true);
     const toggleDrawer = () => setIsOpen(s => !s);
 
     useEffect(() => {
-      setIsOpen(editDrawer);
-    }, [editDrawer]);
+      setIsOpen(visibility);
+    }, [visibility]);
 
     return (
-      <div className={classes.root}>
-        <Children
-          isLargeScreen={isLargeScreen}
-          isOpen={isOpen}
-          anchor={anchor}
-          openDrawer={openDrawer}
-          closeDrawer={closeDrawer}
-          toggleDrawer={toggleDrawer}
-          drawerWidth={drawerWidth}
-          drawerType={drawerType}
-          isTemporary={isTemporary}
-          isPermanent={isPermanent}
-          isResponsive={isResponsive}
-        >
-          {children}
-        </Children>
+      <div
+        className={[
+          classes.root,
+          isEmpty ? classes.empty : '',
+          isPristine ? classes.pristine : '',
+        ].join(' ')}
+      >
+        {isPristine ? (
+          'Drawer'
+        ) : (
+          <Children
+            isOpen={isOpen}
+            anchor={anchor}
+            openDrawer={openDrawer}
+            closeDrawer={closeDrawer}
+            toggleDrawer={toggleDrawer}
+            drawerWidth={drawerWidth}
+            drawerType={drawerType}
+            isTemporary={isTemporary}
+            isPersistent={drawerType === 'persistent'}
+            breakpoint={breakpoint}
+          >
+            {children}
+          </Children>
+        )}
       </div>
     );
   })(),
   styles: () => () => ({
     root: {
       display: 'flex',
-      height: '100vh',
+      flex: 1,
       position: 'relative',
       flexDirection: ({ options }) => {
-        const { drawerType, permanentAnchor, temporaryAnchor } = options;
-        let anchor = temporaryAnchor;
-        if (drawerType !== 'temporary') anchor = permanentAnchor;
+        const { drawerType, persistentAnchor, temporaryAnchor } = options;
+        const anchor =
+          drawerType === 'temporary' ? temporaryAnchor : persistentAnchor;
         switch (anchor) {
           case 'right':
             return 'row-reverse';
@@ -77,6 +79,21 @@
             return 'row';
         }
       },
+    },
+    empty: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      minHeight: '100%',
+      height: '100%',
+      fontSize: '0.75rem',
+      color: '#262A3A',
+      textTransform: 'uppercase',
+    },
+    pristine: {
+      borderWidth: '0.0625rem',
+      borderColor: '#AFB5C8',
+      borderStyle: 'dashed',
+      backgroundColor: '#F0F1F5',
     },
   }),
 }))();

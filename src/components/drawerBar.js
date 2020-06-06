@@ -1,31 +1,32 @@
 (() => ({
-  name: 'DrawerBar',
-  type: 'LAYOUT_COMPONENT',
+  name: 'DrawerSidebar',
+  type: 'DRAWER_SIDEBAR',
   allowedTypes: [
     'LAYOUT_COMPONENT',
     'CONTAINER_COMPONENT',
     'CONTENT_COMPONENT',
   ],
-  orientation: 'HORIZONTAL',
+  orientation: 'VERTICAL',
   jsx: (() => {
-    const { Drawer } = window.MaterialUI.Core;
-    // this will probably have to change
+    const { Drawer, useMediaQuery, useTheme } = window.MaterialUI.Core;
     const {
-      isLargeScreen,
       isOpen,
       toggleDrawer,
       openDrawer,
       closeDrawer,
       anchor,
       isTemporary,
-      isPermanent,
-      isResponsive,
+      isPersistent,
+      breakpoint,
     } = parent;
 
     const isEmpty = children.length === 0;
     const isDev = B.env === 'dev';
     const isPristine = isEmpty && isDev;
     const container = window !== undefined ? window.document.body : undefined;
+    const aboveBreakpoint = useMediaQuery(
+      useTheme().breakpoints.up(breakpoint),
+    );
 
     useEffect(() => {
       B.defineFunction('OpenDrawer', openDrawer);
@@ -33,29 +34,26 @@
       B.defineFunction('ToggleDrawer', toggleDrawer);
     }, []);
 
-    const openState = isPermanent || isOpen;
     let DrawerComponent = (
       <Drawer
         variant="persistent"
-        open={openState}
+        open={isOpen}
         anchor={anchor}
-        className={classes.drawer}
         classes={{ paper: classes.paper }}
       >
         {children}
       </Drawer>
     );
 
-    if ((isResponsive && !isLargeScreen) || isTemporary) {
+    if ((isPersistent && !aboveBreakpoint) || isTemporary) {
       DrawerComponent = (
         <Drawer
           container={container}
           variant="temporary"
           open={isOpen}
           anchor={anchor}
-          onClose={toggleDrawer}
+          onClose={closeDrawer}
           classes={{ paper: classes.paper }}
-          className={classes.drawer}
           ModalProps={{ keepMounted: true }}
         >
           {children}
@@ -65,31 +63,38 @@
 
     if (!isDev) return DrawerComponent;
 
-    if ((isTemporary || isResponsive) && !isOpen) return <div />;
+    if (!isOpen) return <div />;
 
     return (
       <div className={isTemporary && classes.overlay}>
-        <div className={isPristine ? classes.pristine : classes.dirty}>
-          {!isEmpty ? (
-            <Drawer
-              variant="persistent"
-              open
-              anchor={anchor}
-              className={[classes.drawer, !isEmpty && classes.dirtyDrawer]}
-              classes={{
-                paper: [classes.paper, !isEmpty && classes.dirtyPaper],
-              }}
-            >
-              {children}
-            </Drawer>
-          ) : (
-            'Drawer content here.'
-          )}
-        </div>
+        {!isEmpty ? (
+          <Drawer
+            variant="persistent"
+            open
+            anchor={anchor}
+            className={classes.drawerDev}
+            classes={{
+              paper: [classes.paper, classes.paperDev],
+            }}
+          >
+            {children}
+          </Drawer>
+        ) : (
+          <div
+            className={[
+              classes.drawerDev,
+              isEmpty ? classes.empty : '',
+              isPristine ? classes.pristine : '',
+            ].join(' ')}
+          >
+            Drawer Sidebar
+          </div>
+        )}
       </div>
     );
   })(),
-  styles: B => () => {
+  styles: B => t => {
+    const style = new B.Styling(t);
     const staticPositioning =
       B.env === 'dev'
         ? { position: 'static !important', zIndex: '0 !important' }
@@ -101,37 +106,43 @@
     };
 
     return {
-      drawer: {
-        height: '100%',
-      },
-      dirtyDrawer: {
-        display: 'flex',
-      },
-      dirtyPaper: {
-        alignSelf: ({ parent: { anchor } }) =>
-          anchor === 'bottom' ? 'flex-end' : 'flex-start',
-      },
       paper: {
         ...staticPositioning,
         width: computeWidth,
+        '&.MuiPaper-root': {
+          backgroundColor: ({ options: { themeBgColor, bgColorOverwrite } }) =>
+            bgColorOverwrite || style.getColor(themeBgColor),
+        },
       },
-      pristine: {
+      drawerDev: {
         display: 'flex',
-        justifyContent: 'center',
+        height: '100%',
+        width: computeWidth,
         alignSelf: ({ parent: { anchor } }) =>
           anchor === 'bottom' ? 'flex-end' : 'flex-start',
+      },
+      paperDev: {
+        width: computeWidth,
+        alignSelf: ({ parent: { anchor } }) =>
+          anchor === 'bottom' ? 'flex-end' : 'flex-start',
+      },
+      empty: {
+        display: 'flex',
         alignItems: 'center',
+        justifyContent: 'center',
+        width: computeWidth,
+        height: ({ parent: { anchor } }) =>
+          ['top', 'bottom'].includes(anchor) ? '20%' : '100%',
+        fontSize: '0.75rem',
+        color: '#262A3A',
+        textTransform: 'uppercase',
+        boxSizing: 'border-box',
+      },
+      pristine: {
         borderWidth: '0.0625rem',
         borderColor: '#AFB5C8',
         borderStyle: 'dashed',
         backgroundColor: '#F0F1F5 !important',
-        width: computeWidth,
-        height: ({ parent: { anchor } }) =>
-          ['top', 'bottom'].includes(anchor) ? '20%' : '100%',
-      },
-      dirty: {
-        width: computeWidth,
-        height: '100%',
       },
       overlay: {
         display: 'flex',
