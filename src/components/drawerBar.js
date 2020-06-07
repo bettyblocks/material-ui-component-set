@@ -2,6 +2,7 @@
   name: 'DrawerSidebar',
   type: 'DRAWER_SIDEBAR',
   allowedTypes: [
+    'BODY_COMPONENT',
     'LAYOUT_COMPONENT',
     'CONTAINER_COMPONENT',
     'CONTENT_COMPONENT',
@@ -90,16 +91,16 @@
             {children}
           </Drawer>
         ) : (
-          <div
-            className={[
-              classes.drawerDev,
-              isEmpty ? classes.empty : '',
-              isPristine ? classes.pristine : '',
-            ].join(' ')}
-          >
-            Drawer Sidebar
-          </div>
-        )}
+            <div
+              className={[
+                classes.drawerDev,
+                isEmpty ? classes.empty : '',
+                isPristine ? classes.pristine : '',
+              ].join(' ')}
+            >
+              Drawer Sidebar
+            </div>
+          )}
       </div>
     );
   })(),
