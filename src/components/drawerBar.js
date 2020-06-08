@@ -91,16 +91,16 @@
             {children}
           </Drawer>
         ) : (
-            <div
-              className={[
-                classes.drawerDev,
-                isEmpty ? classes.empty : '',
-                isPristine ? classes.pristine : '',
-              ].join(' ')}
-            >
-              Drawer Sidebar
-            </div>
-          )}
+          <div
+            className={[
+              classes.drawerDev,
+              isEmpty ? classes.empty : '',
+              isPristine ? classes.pristine : '',
+            ].join(' ')}
+          >
+            Drawer Sidebar
+          </div>
+        )}
       </div>
     );
   })(),
