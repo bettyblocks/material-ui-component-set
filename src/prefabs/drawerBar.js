@@ -12,12 +12,6 @@
           key: 'themeBgColor',
           value: 'White',
         },
-        {
-          type: 'TEXT',
-          label: 'Background color overwrite',
-          key: 'bgColorOverwrite',
-          value: '',
-        },
       ],
       descendants: [
         {

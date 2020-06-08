@@ -35,7 +35,7 @@
       B.defineFunction('ToggleDrawer', toggleDrawer);
     }, []);
 
-    const tempDrawer = (
+    const TempDrawer = (
       <Drawer
         variant={activeTemporary ? 'temporary' : 'persistent'}
         open={isOpen}
@@ -48,7 +48,7 @@
       </Drawer>
     );
 
-    if (!isDev && isTemporary) return tempDrawer;
+    if (!isDev && isTemporary) return TempDrawer;
 
     const DrawerComponent = (
       <>
@@ -57,7 +57,7 @@
           mdUp={breakpoint === 'md'}
           lgUp={breakpoint === 'lg'}
         >
-          {tempDrawer}
+          {TempDrawer}
         </Hidden>
         <Hidden xsDown>
           <Drawer
@@ -121,10 +121,10 @@
         ...staticPositioning,
         width: computeWidth,
         '&.MuiPaper-root': {
-          backgroundColor: ({ options: { themeBgColor, bgColorOverwrite } }) =>
-            bgColorOverwrite
-              ? `${bgColorOverwrite} !important`
-              : [style.getColor(themeBgColor), '!important'],
+          backgroundColor: ({ options: { themeBgColor } }) => [
+            style.getColor(themeBgColor),
+            '!important',
+          ],
         },
       },
       drawerDev: {
@@ -139,10 +139,10 @@
         alignSelf: ({ parent: { anchor } }) =>
           anchor === 'bottom' ? 'flex-end' : 'flex-start',
         color: 'blue !important',
-        backgroundColor: ({ options: { themeBgColor, bgColorOverwrite } }) =>
-          bgColorOverwrite
-            ? `${bgColorOverwrite} !important`
-            : [style.getColor(themeBgColor), '!important'],
+        backgroundColor: ({ options: { themeBgColor } }) => [
+          style.getColor(themeBgColor),
+          '!important',
+        ],
       },
       empty: {
         display: 'flex',
