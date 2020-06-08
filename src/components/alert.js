@@ -16,6 +16,16 @@
       setOpen(options.visible);
     }, [options.visible]);
 
+    useEffect(() => {
+      B.defineFunction('Show', () => {
+        setOpen(true);
+      });
+
+      B.defineFunction('Hide', () => {
+        setOpen(false);
+      });
+    }, []);
+
     const AlertPanel = (
       <Alert
         classes={{

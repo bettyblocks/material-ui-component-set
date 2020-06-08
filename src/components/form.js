@@ -28,13 +28,29 @@
           B.env === 'prod' && redirect && B.useEndpoint(redirect);
         const history = isDev ? {} : useHistory();
 
+        const trigger = (data, loading, error) => {
+          if (data) {
+            B.triggerEvent('onSuccess', data);
+
+            if (redirectTo) {
+              history.push(redirectTo);
+            }
+          }
+
+          if (loading) {
+            B.triggerEvent('onLoad', loading);
+          }
+
+          if (error) {
+            B.triggerEvent('onError', error);
+          }
+        };
+
         return (
           <Action actionId={actionId}>
             {(callAction, { data, loading, error }) => (
               <>
-                {(() => {
-                  if (data && redirectTo) history.push(redirectTo);
-                })()}
+                {trigger(data, loading, error)}
                 <div className={classes.messageContainer}>
                   {error && (
                     <span className={classes.error}>{formErrorMessage}</span>
