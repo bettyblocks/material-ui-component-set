@@ -25,13 +25,20 @@
         const redirectTo =
           B.env === 'prod' && redirect && B.useEndpoint(redirect);
         const history = isDev ? {} : useHistory();
+        const location = isDev ? {} : useLocation();
 
         return (
           <Action actionId={actionId}>
             {(callAction, { data, loading, error }) => (
               <>
                 {(() => {
-                  if (data && redirectTo) history.push(redirectTo);
+                  if (data && redirectTo) {
+                    if (redirectTo === location.pathname) {
+                      history.go(0);
+                    } else {
+                      history.push(redirectTo);
+                    }
+                  }
                 })()}
                 <div className={classes.messageContainer}>
                   {error && (
