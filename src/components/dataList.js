@@ -9,7 +9,7 @@
         const [page, setPage] = useState(1);
         const [search, setSearch] = useState('');
         const [isTyping, setIsTyping] = useState(false);
-        const { filter, hidePagination } = options;
+        const { filter, hidePagination, type } = options;
 
         const take = parseInt(options.take, 10) || 50;
         const searchProp = B.getProperty(options.searchProperty);
@@ -28,26 +28,29 @@
                 />
               </div>
             )}
-            <div
-              className={[
-                isEmpty ? classes.empty : '',
-                isPristine ? classes.pristine : '',
-              ].join(' ')}
-            >
-              {isPristine ? 'Data List' : children}
-            </div>
-            {Array.from(Array(take - 1).keys()).map(key => (
+            <div className={type === 'grid' ? classes.grid : ''}>
               <div
-                key={key}
                 className={[
-                  isDev ? classes.pristine : '',
-                  classes.empty,
-                  classes.placeholder,
+                  isEmpty ? classes.empty : '',
+                  isPristine ? classes.pristine : '',
                 ].join(' ')}
               >
-                {isDev ? 'Dynamic Item' : ''}
+                {isPristine ? 'Data List' : children}
               </div>
-            ))}
+
+              {Array.from(Array(take - 1).keys()).map(key => (
+                <div
+                  key={key}
+                  className={[
+                    isDev ? classes.pristine : '',
+                    classes.empty,
+                    classes.placeholder,
+                  ].join(' ')}
+                >
+                  {isDev ? 'Dynamic Item' : ''}
+                </div>
+              ))}
+            </div>
             <div className={classes.footer}>
               {(isDev || options.model) && !hidePagination && (
                 <Pagination totalCount={0} resultCount={take} currentPage={1} />
@@ -89,11 +92,13 @@
                         />
                       )}
                     </div>
-                    {data.results.map(item => (
-                      <B.GetOneProvider key={item.id} value={item}>
-                        {children}
-                      </B.GetOneProvider>
-                    ))}
+                    <div className={type === 'grid' ? classes.grid : ''}>
+                      {data.results.map(item => (
+                        <B.GetOneProvider key={item.id} value={item}>
+                          {children}
+                        </B.GetOneProvider>
+                      ))}
+                    </div>
                     <div className={classes.footer}>
                       {!isEmpty && !hidePagination && (
                         <Pagination
@@ -321,6 +326,12 @@
           marginLeft: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[3], 'Desktop'),
         },
+      },
+      grid: {
+        display: 'grid',
+        gridTemplateColumns: ({ options: { width } }) =>
+          `repeat(auto-fit, minmax(${width}, 1fr))`,
+        gridGap: ({ options: { gap } }) => `${gap}`,
       },
       empty: {
         display: 'flex',
