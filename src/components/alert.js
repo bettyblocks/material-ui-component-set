@@ -10,7 +10,7 @@
     const { IconButton } = window.MaterialUI.Core;
 
     const isDev = B.env === 'dev';
-    const [open, setOpen] = useState(true);
+    const [open, setOpen] = useState(options.visible);
 
     useEffect(() => {
       setOpen(options.visible);
