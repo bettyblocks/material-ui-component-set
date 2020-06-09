@@ -37,7 +37,9 @@
     };
 
     const logo = useText(logoSource);
-    const LogoCmp = logo && <img src={logo} width="100" alt="" />;
+    const LogoCmp = logo && (
+      <img src={logo} width="100" alt="" className={classes.logo} />
+    );
     const LogoComponent = endpoint.id ? (
       // eslint-disable-next-line jsx-a11y/anchor-is-valid
       <Link endpoint={endpoint}>{LogoCmp}</Link>
@@ -54,18 +56,7 @@
         elevation={elevationLevel}
       >
         <Toolbar variant={toolbarVariant} classes={{ root: classes.toolbar }}>
-          {logo.length > 0 && LogoComponent}
-          <Typography
-            variant="h6"
-            noWrap
-            className={classes.title}
-            component={endpoint.id && Link}
-            endpoint={endpoint.id && endpoint}
-          >
-            {title}
-          </Typography>
-          <div className={classes.spacer} />
-          {!isDev ? (
+          {classes.collapsed && (
             <>
               <div className={classes.collapsed}>
                 <IconButton color="inherit" onClick={handleMenu}>
@@ -81,10 +72,23 @@
                   {children}
                 </Menu>
               </div>
+            </>
+          )}
+          {logo.length > 0 && LogoComponent}
+          <Typography
+            variant="h6"
+            noWrap
+            className={classes.title}
+            component={endpoint.id && Link}
+            endpoint={endpoint.id && endpoint}
+          >
+            {title}
+          </Typography>
+          <div className={classes.spacer} />
+          {classes.uncollapsed && (
+            <>
               <div className={classes.uncollapsed}>{children}</div>
             </>
-          ) : (
-            children
           )}
         </Toolbar>
       </AppBar>
@@ -96,6 +100,24 @@
     const style = new B.Styling(t);
     return {
       root: {
+        '&.MuiPaper-root.MuiMenu-paper': {
+          position: 'fixed !important',
+          left: '0 !important',
+          top: ({ options: { toolbarVariant } }) => [
+            toolbarVariant === 'dense' ? '50px' : '80px',
+            '!important',
+          ],
+          height: ({ options: { toolbarVariant } }) =>
+            `calc(100vh - ${toolbarVariant === 'dense' ? '50px' : '80px'})`,
+          transform: 'none !important',
+          bottom: '0 !important',
+          maxHeight: 'none',
+          width: '100%',
+          boxShadow: 'none',
+          maxWidth: 'none',
+          borderTop: '1px solid #ddd',
+        },
+        justifyContent: 'center',
         backgroundColor: ({ options: { backgroundColor } }) => [
           style.getColor(backgroundColor),
           '!important',
@@ -104,6 +126,8 @@
           style.getColor(color),
           '!important',
         ],
+        height: ({ options: { toolbarVariant } }) =>
+          toolbarVariant === 'dense' ? '50px' : '80px',
       },
       toolbar: {
         flexDirection: ({ options: { alignItems } }) =>
@@ -123,9 +147,27 @@
         '& > *': {
           display: 'block',
         },
+        '&.MuiList-root.MuiMenu-list': {
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'flex-start',
+          alignItems: 'flex-start',
+          padding: '0',
+        },
+        '&.MuiList-root.MuiMenu-list button': {
+          [`@media ${B.mediaMinWidth(600)}`]: {
+            padding: '16px 24px',
+          },
+          width: '100%',
+          background: '#fff',
+          justifyContent: 'flex-start',
+          padding: '16px',
+          borderBottom: '1px solid #ddd',
+        },
       },
       collapsed: {
         display: 'block',
+        marginLeft: '-12px',
         [`@media ${B.mediaMinWidth(768)}`]: {
           display: 'none',
         },
@@ -135,6 +177,10 @@
         [`@media ${B.mediaMinWidth(768)}`]: {
           display: 'block',
         },
+      },
+      logo: {
+        marginRight: '16px',
+        maxWidth: '30vw',
       },
     };
   },
