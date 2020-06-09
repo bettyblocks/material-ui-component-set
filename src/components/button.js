@@ -1,7 +1,7 @@
 (() => ({
   name: 'Button',
   type: 'CONTENT_COMPONENT',
-  allowedTypes: [],
+  allowedTypes: ['INPUT_VARIABLE'],
   orientation: 'VERTICAL',
   jsx: (() => {
     const { Button, IconButton, CircularProgress } = window.MaterialUI.Core;
@@ -17,7 +17,7 @@
       linkType,
       linkTo,
       linkToExternal,
-      type,
+      type = 'submit',
       visible,
       actionId,
       buttonText,
@@ -30,6 +30,8 @@
     const hasExternalLink = linkToExternal && linkToExternal.id !== '';
     const isIcon = variant === 'icon';
     const buttonContent = useText(buttonText);
+
+    const formRef = React.createRef();
 
     const generalProps = {
       disabled,
@@ -63,67 +65,97 @@
       type: isDev ? 'button' : type,
     };
 
-    let ButtonComponent = (
-      <Button
-        {...buttonProps}
-        startIcon={
-          !isIcon &&
-          icon !== 'None' &&
-          iconPosition === 'start' &&
-          React.createElement(Icons[icon])
-        }
-        endIcon={
-          !isIcon &&
-          icon !== 'None' &&
-          iconPosition === 'end' &&
-          React.createElement(Icons[icon])
-        }
-      >
-        {isIcon
-          ? React.createElement(Icons[icon === 'None' ? 'Error' : icon], {
-              fontSize: size,
-            })
-          : buttonContent}
-      </Button>
-    );
+    function ButtonComponent() {
+      return (
+        <Button
+          {...buttonProps}
+          startIcon={
+            !isIcon &&
+            icon !== 'None' &&
+            iconPosition === 'start' &&
+            React.createElement(Icons[icon])
+          }
+          endIcon={
+            !isIcon &&
+            icon !== 'None' &&
+            iconPosition === 'end' &&
+            React.createElement(Icons[icon])
+          }
+        >
+          {isIcon
+            ? React.createElement(Icons[icon === 'None' ? 'Error' : icon], {
+                fontSize: size,
+              })
+            : buttonContent}
+        </Button>
+      );
+    }
 
     const Loader = <CircularProgress size={16} className={classes.loader} />;
 
-    if (isAction) {
-      ButtonComponent = (
+    function ButtonComponentAction() {
+      return (
         <B.Action actionId={actionId}>
-          {(callAction, { loading }) => {
-            const onClickAction = event => {
-              event.preventDefault();
-              if (!isDev && !loading && linkType === 'action') callAction();
-            };
-            const actionClickHandler = isAction && { onClick: onClickAction };
-            return isIcon ? (
-              <IconButton {...iconButtonProps} {...actionClickHandler}>
-                {loading
-                  ? Loader
-                  : React.createElement(
-                      Icons[icon === 'None' ? 'Error' : icon],
-                      {
-                        fontSize: size,
-                      },
-                    )}
-              </IconButton>
-            ) : (
-              <Button {...buttonProps} {...actionClickHandler}>
-                {buttonContent}
-                {loading && Loader}
-              </Button>
-            );
-          }}
+          {(runAction, { loading, error, data }) => (
+            <form
+              className={classes.form}
+              onSubmit={event => {
+                event.preventDefault();
+                const formData = new FormData(formRef.current);
+                const entries = Array.from(formData);
+                const values = entries.reduce((acc, currentvalue) => {
+                  const key = currentvalue[0];
+                  const value = currentvalue[1];
+                  if (acc[key]) {
+                    acc[key] = `${acc[key]},${value}`;
+                    return acc;
+                  }
+                  return { ...acc, [key]: value };
+                }, {});
+
+                runAction({
+                  variables: { input: values },
+                });
+              }}
+              ref={formRef}
+            >
+              {isIcon ? (
+                <IconButton {...iconButtonProps}>
+                  {loading
+                    ? Loader
+                    : React.createElement(
+                        Icons[icon === 'None' ? 'Error' : icon],
+                        {
+                          fontSize: size,
+                        },
+                      )}
+                </IconButton>
+              ) : (
+                <Button {...buttonProps}>
+                  {buttonContent}
+                  {loading && Loader}
+                </Button>
+              )}
+              <div
+                id="vars"
+                className={[!isDev ? classes.hide : classes.vars].join(' ')}
+              >
+                {children}
+              </div>
+            </form>
+          )}
         </B.Action>
       );
     }
 
+    if (isAction) {
+      return <div>{ButtonComponentAction()}</div>;
+    }
+
     return isDev ? (
-      <div className={classes.wrapper}>{ButtonComponent}</div>
+      <div className={classes.wrapper}>{ButtonComponent()}</div>
     ) : (
-      ButtonComponent
+      ButtonComponent()
     );
   })(),
   styles: B => t => {
@@ -236,7 +268,10 @@
         },
       },
       hide: {
-        display: 'none',
+        display: 'none !important',
+      },
+      vars: {
+        display: 'flex',
       },
     };
   },

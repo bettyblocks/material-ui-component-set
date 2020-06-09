@@ -1451,7 +1451,26 @@
           type: 'TOGGLE',
         },
       ],
-      descendants: [],
+      descendants: [
+        {
+          name: 'inputVariable',
+          options: [
+            {
+              label: 'Input variable',
+              key: 'actionInputId',
+              value: '',
+              type: 'ACTION_INPUT',
+            },
+            {
+              label: 'Value',
+              key: 'defaultValue',
+              value: [''],
+              type: 'VARIABLE',
+            },
+          ],
+          descendants: [],
+        },
+      ],
     },
   ],
 }))();
