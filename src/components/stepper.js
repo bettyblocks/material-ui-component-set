@@ -27,24 +27,39 @@
 
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
-    const [activeStep, setActiveStep] = React.useState(0);
+    const [activeStep, setActiveStep] = useState(0);
     const devActiveStep = parseInt(devStep - 1, 10) || 0;
     const showAllSteps = isDev && allSteps;
     const buttonNextText = useText(buttonNext);
     const buttonPrevText = useText(buttonPrev);
     const currentStep = isDev ? devActiveStep : activeStep;
     const isLinear = variant === 'linear';
+    const numRendersRef = useRef(1);
 
     const handleNext = () => {
-      setActiveStep(prevActiveStep => prevActiveStep + 1);
+      setActiveStep(prevActiveStep => {
+        const nextStep = prevActiveStep + 1;
+        if (nextStep > children.length - 1) {
+          return prevActiveStep;
+        }
+        return nextStep;
+      });
     };
 
     const handleBack = () => {
-      setActiveStep(prevActiveStep => prevActiveStep - 1);
+      setActiveStep(prevActiveStep => {
+        const nextStep = prevActiveStep - 1;
+        if (nextStep < 0) {
+          return prevActiveStep;
+        }
+        return nextStep;
+      });
     };
 
     const handleStep = step => () => {
-      setActiveStep(step);
+      if (step < children.length && step > -1) {
+        setActiveStep(step);
+      }
     };
 
     const StepperCmp = (
@@ -56,7 +71,7 @@
           orientation={type}
         >
           {React.Children.map(children, (child, index) => {
-            const { options } = child.props;
+            const { options = {} } = child.props || {};
             const { label = ['Step'], icon = 'None' } = isDev ? {} : options;
             const labelText = useText(label);
             const isActive = index === currentStep;
@@ -84,6 +99,8 @@
                 StepIconComponent: IconCmp,
               };
             }
+            options.active = isActive;
+            options.isFirstRender = numRendersRef.current === 1;
 
             const StepComponent = (
               <Step key={labelText} {...stepProps}>
@@ -108,10 +125,13 @@
                   </StepButton>
                 )}
 
-                <StepContent>{React.cloneElement(child)}</StepContent>
+                <StepContent>
+                  {React.cloneElement(child, { ...options })}
+                </StepContent>
               </Step>
             );
 
+            numRendersRef.current += 1;
             return StepComponent;
           })}
         </Stepper>
