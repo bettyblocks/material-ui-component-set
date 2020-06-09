@@ -26,6 +26,7 @@
     const isDev = env === 'dev';
     const [anchorEl, setAnchorEl] = useState(null);
     const open = !!anchorEl;
+    const elevationLevel = appBarVariant === 'flat' ? 0 : elevation;
 
     const handleMenu = event => {
       setAnchorEl(event.currentTarget);
@@ -50,7 +51,7 @@
         classes={{ root: classes.root }}
         variant={appBarVariant}
         square={square}
-        elevation={elevation}
+        elevation={elevationLevel}
       >
         <Toolbar variant={toolbarVariant} classes={{ root: classes.toolbar }}>
           {logo.length > 0 && LogoComponent}
