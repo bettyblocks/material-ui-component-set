@@ -1,3 +1,11 @@
+# [1.3.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.2.0...v1.3.0) (2020-06-09)
+
+
+### Features
+
+* adds show and hide functions to alert ([5938eba](https://github.com/bettyblocks/material-ui-component-set/commit/5938ebad645d4431b37b0484189f960c257704b2))
+* adds triggers to form component ([f383ad2](https://github.com/bettyblocks/material-ui-component-set/commit/f383ad22698e0f7f76dbb736c711681873851780))
+
 # [1.2.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.1.1...v1.2.0) (2020-06-04)
 
 
