@@ -7,6 +7,7 @@
     const { env } = B;
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
+    const { active, isFirstRender } = options || {};
 
     const StepCmp = (
       <>
@@ -17,6 +18,14 @@
         )}
       </>
     );
+
+    useEffect(() => {
+      if (active && !isFirstRender) {
+        B.triggerEvent('OnStepActive');
+      } else if (!active) {
+        B.triggerEvent('OnStepInactive');
+      }
+    }, [active, isFirstRender]);
 
     return isDev ? <div className={classes.wrapper}>{StepCmp}</div> : StepCmp;
   })(),
