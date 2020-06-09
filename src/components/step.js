@@ -25,7 +25,7 @@
       } else if (!active) {
         B.triggerEvent('OnStepInactive');
       }
-    }, [active]);
+    }, [active, isFirstRender]);
 
     return isDev ? <div className={classes.wrapper}>{StepCmp}</div> : StepCmp;
   })(),
