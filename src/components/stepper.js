@@ -27,7 +27,7 @@
 
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
-    const [activeStep, setActiveStep] = React.useState(0);
+    const [activeStep, setActiveStep] = useState(0);
     const devActiveStep = parseInt(devStep - 1, 10) || 0;
     const showAllSteps = isDev && allSteps;
     const buttonNextText = useText(buttonNext);
