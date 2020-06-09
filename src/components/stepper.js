@@ -57,7 +57,7 @@
     };
 
     const handleStep = step => () => {
-      if (step < children.length - 1 && step > -1) {
+      if (step < children.length && step > -1) {
         setActiveStep(step);
       }
     };
