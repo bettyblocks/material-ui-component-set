@@ -1,43 +1,16 @@
 (() => ({
-  name: 'Alert',
-  icon: 'AlertIcon',
-  category: 'CONTENT',
+  name: 'Step',
+  icon: 'StepperIcon',
+  category: 'NAVIGATION',
   structure: [
     {
-      name: 'Alert',
+      name: 'Step',
       options: [
         {
-          value: true,
-          label: 'Visible',
-          key: 'visible',
-          type: 'TOGGLE',
-        },
-        {
           type: 'VARIABLE',
-          label: 'Body text',
-          key: 'bodyText',
-          value: ['Type your content here...'],
-          configuration: {
-            dependsOn: 'model',
-          },
-        },
-        {
-          type: 'VARIABLE',
-          label: 'Title text',
-          key: 'titleText',
-          value: [''],
-        },
-        {
-          value: 'Black',
-          label: 'Text color',
-          key: 'textColor',
-          type: 'COLOR',
-        },
-        {
-          value: 'Success',
-          label: 'Background color',
-          key: 'background',
-          type: 'COLOR',
+          label: 'Label',
+          key: 'label',
+          value: ['Step'],
         },
         {
           label: 'Icon',
@@ -48,6 +21,10 @@
             as: 'DROPDOWN',
             dataType: 'string',
             allowedInput: [
+              {
+                name: 'None',
+                value: 'None',
+              },
               {
                 name: 'AcUnit',
                 value: 'AcUnit',
@@ -619,6 +596,10 @@
               {
                 name: 'FavoriteBorder',
                 value: 'FavoriteBorder',
+              },
+              {
+                name: 'FileCopy',
+                value: 'FileCopy',
               },
               {
                 name: 'FilterList',
@@ -1298,18 +1279,6 @@
               },
             ],
           },
-        },
-        {
-          value: false,
-          label: 'Collapsable',
-          key: 'collapsable',
-          type: 'TOGGLE',
-        },
-        {
-          value: ['0rem', '0rem', 'M', '0rem'],
-          label: 'Outer space',
-          key: 'outerSpacing',
-          type: 'SIZES',
         },
       ],
       descendants: [],
