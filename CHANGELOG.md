@@ -1,3 +1,21 @@
+# [1.5.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.4.0...v1.5.0) (2020-06-10)
+
+
+### Bug Fixes
+
+* resolve failing linter ([d2f80c0](https://github.com/bettyblocks/material-ui-component-set/commit/d2f80c0efb7a8d644c0835271fbff8e26a06a731))
+
+
+### Features
+
+* add prefabs for drawer ([f2b9ac9](https://github.com/bettyblocks/material-ui-component-set/commit/f2b9ac93d1be0d2cdc432a4e4c492d4742abbebe))
+* appBar above drawer and visible drawer while mounting ([fe9ff44](https://github.com/bettyblocks/material-ui-component-set/commit/fe9ff44c3a201e9601f66f7b7b4e0a05e6d5950a))
+* show different types of drawers ([fc7b7c3](https://github.com/bettyblocks/material-ui-component-set/commit/fc7b7c37b0c2f775b3b65eb6795ad49d4bbd00f0))
+* updated drawer component ([6e19017](https://github.com/bettyblocks/material-ui-component-set/commit/6e19017cbc44a8a60c6be3c72477a5d628656cd1))
+* use appbar component and show responsive and unresponsive bar ([0393618](https://github.com/bettyblocks/material-ui-component-set/commit/03936189c8d3392248fd3191690026ba33feb115))
+* use nested children in drawer ([2193548](https://github.com/bettyblocks/material-ui-component-set/commit/21935484c76207fa4c40c40cf9330b535a2a80b6))
+* wip ([33c1eae](https://github.com/bettyblocks/material-ui-component-set/commit/33c1eae00c12f56e44a79af74e4981b33d134b6e))
+
 # [1.4.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.3.0...v1.4.0) (2020-06-09)
 
 
