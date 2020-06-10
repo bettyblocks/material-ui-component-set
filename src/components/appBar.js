@@ -50,7 +50,7 @@
         classes={{ root: classes.root }}
         variant={appBarVariant}
         square={square}
-        elevation={elevation}
+        elevation={appBarVariant === 'flat' ? 0 : elevation}
       >
         <Toolbar variant={toolbarVariant} classes={{ root: classes.toolbar }}>
           {logo.length > 0 && LogoComponent}
@@ -64,7 +64,7 @@
             {title}
           </Typography>
           <div className={classes.spacer} />
-          {!isDev ? (
+          {!isDev && !!children.length ? (
             <>
               <div className={classes.collapsed}>
                 <IconButton color="inherit" onClick={handleMenu}>
@@ -103,6 +103,7 @@
           style.getColor(color),
           '!important',
         ],
+        zIndex: '1201 !important',
       },
       toolbar: {
         flexDirection: ({ options: { alignItems } }) =>
