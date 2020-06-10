@@ -47,33 +47,33 @@
       {},
     );
 
-    const GridComp =
-      isEmpty && isDev ? (
-        <div className={classes.empty}>Grid</div>
-      ) : (
-        <Grid
-          alignContent={alignContent}
-          alignItems={alignItems}
-          classes={{ root: classes.root }}
-          container={isContainer}
-          direction={gridDirection}
-          item={isItem}
-          justify={justify}
-          spacing={spacing}
-          wrap={wrap}
-          zeroMinWidth={zeroMinWidth}
-          xs={sizes.xs}
-          sm={sizes.sm}
-          md={sizes.md}
-          lg={sizes.lg}
-          xl={sizes.xl}
-        >
-          {children}
-        </Grid>
-      );
+    const GridComp = (
+      <Grid
+        alignContent={alignContent}
+        alignItems={alignItems}
+        classes={{ root: classes.root }}
+        container={isContainer}
+        direction={gridDirection}
+        item={isItem}
+        justify={justify}
+        spacing={spacing}
+        wrap={wrap}
+        zeroMinWidth={zeroMinWidth}
+        xs={sizes.xs}
+        sm={sizes.sm}
+        md={sizes.md}
+        lg={sizes.lg}
+        xl={sizes.xl}
+      >
+        {children}
+      </Grid>
+    );
 
     return isDev ? (
-      <div className={classes.wrapper} data-type={`grid-${type}`}>
+      <div
+        className={[classes.wrapper, isEmpty ? classes.empty : ''].join(' ')}
+        data-type={`grid-${type}`}
+      >
         {GridComp}
       </div>
     ) : (
@@ -150,6 +150,7 @@
       },
       root: {
         height: ({ options: { height } }) => height,
+        minHeight: ({ children }) => children.length === 0 && '2.5rem',
         backgroundColor: ({ options: { backgroundColor } }) =>
           style.getColor(backgroundColor),
         '& > div[data-type="grid-item"]': {
@@ -159,16 +160,27 @@
       },
       empty: {
         display: 'flex',
-        alignItems: 'center',
         justifyContent: 'center',
-        height: '2.5rem',
+        alignItems: 'center',
+        minHeight: '2.5rem',
         fontSize: '0.75rem',
         color: '#262A3A',
         textTransform: 'uppercase',
         borderWidth: '0.0625rem',
         borderColor: '#AFB5C8',
         borderStyle: 'dashed',
-        backgroundColor: '#F0F1F5',
+        backgroundColor: ({ options: { backgroundColor } }) =>
+          backgroundColor === 'Transparent'
+            ? '#F0F1F5'
+            : style.getColor(backgroundColor),
+        '& > div': {
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        },
+        '& > div::after': {
+          content: '"Grid"',
+        },
       },
     };
   },
