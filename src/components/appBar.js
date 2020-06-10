@@ -1,7 +1,7 @@
 (() => ({
   name: 'AppBar',
   type: 'BODY_COMPONENT',
-  allowedTypes: ['CONTENT_COMPONENT'],
+  allowedTypes: ['CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const {
@@ -101,7 +101,7 @@
     return {
       root: {
         '&.MuiPaper-root.MuiMenu-paper': {
-          position: 'fixed !important',
+          position: 'absolute !important',
           left: '0 !important',
           top: ({ options: { toolbarVariant } }) => [
             toolbarVariant === 'dense' ? '50px' : '80px',
@@ -175,12 +175,15 @@
       uncollapsed: {
         display: 'none',
         [`@media ${B.mediaMinWidth(768)}`]: {
-          display: 'block',
+          display: 'flex',
         },
       },
       logo: {
+        maxHeight: ({options: {toolbarVariant}}) => 
+          toolbarVariant === 'dense' ? '28px' : '40px',
+        width: 'auto',
+        maxWidth: '130px',
         marginRight: '16px',
-        maxWidth: '30vw',
       },
     };
   },

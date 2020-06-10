@@ -131,6 +131,9 @@
     const getSpacing = (idx, device = 'Mobile') =>
       idx === '0' ? '0rem' : style.getSpacing(idx, device);
     return {
+      label: {
+        textTransform: 'capitalize',
+      },
       wrapper: {
         display: ({ options: { fullWidth } }) =>
           fullWidth ? 'block' : 'inline-block',
