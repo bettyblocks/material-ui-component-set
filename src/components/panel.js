@@ -87,7 +87,7 @@
         paddingBottom: getSpacing('M'),
         paddingLeft: getSpacing('M'),
       },
-      [`@media ${B.mediaMinWidth(768)}`]: {
+      [`@media ${B.mediaMinWidth(600)}`]: {
         panel: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Portrait'),
@@ -107,7 +107,7 @@
           paddingTop: getSpacing('M', 'Portrait'),
         },
       },
-      [`@media ${B.mediaMinWidth(1024)}`]: {
+      [`@media ${B.mediaMinWidth(960)}`]: {
         panel: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Landscape'),
@@ -127,7 +127,7 @@
           padding: getSpacing('M', 'Landscape'),
         },
       },
-      [`@media ${B.mediaMinWidth(1200)}`]: {
+      [`@media ${B.mediaMinWidth(1280)}`]: {
         panel: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Desktop'),

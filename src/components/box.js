@@ -58,7 +58,7 @@
           getSpacing(innerSpacing[2]),
         paddingLeft: ({ options: { innerSpacing } }) =>
           getSpacing(innerSpacing[3]),
-        [`@media ${B.mediaMinWidth(768)}`]: {
+        [`@media ${B.mediaMinWidth(600)}`]: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Portrait'),
           marginRight: ({ options: { outerSpacing } }) =>
@@ -76,7 +76,7 @@
           paddingLeft: ({ options: { innerSpacing } }) =>
             getSpacing(innerSpacing[3], 'Portrait'),
         },
-        [`@media ${B.mediaMinWidth(1024)}`]: {
+        [`@media ${B.mediaMinWidth(960)}`]: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Landscape'),
           marginRight: ({ options: { outerSpacing } }) =>
@@ -94,7 +94,7 @@
           paddingLeft: ({ options: { innerSpacing } }) =>
             getSpacing(innerSpacing[3], 'Landscape'),
         },
-        [`@media ${B.mediaMinWidth(1200)}`]: {
+        [`@media ${B.mediaMinWidth(1280)}`]: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Desktop'),
           marginRight: ({ options: { outerSpacing } }) =>

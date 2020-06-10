@@ -126,13 +126,13 @@
       },
       collapsed: {
         display: 'block',
-        [`@media ${B.mediaMinWidth(768)}`]: {
+        [`@media ${B.mediaMinWidth(600)}`]: {
           display: 'none',
         },
       },
       uncollapsed: {
         display: 'none',
-        [`@media ${B.mediaMinWidth(768)}`]: {
+        [`@media ${B.mediaMinWidth(600)}`]: {
           display: 'block',
         },
       },
