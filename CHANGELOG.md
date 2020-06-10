@@ -1,3 +1,25 @@
+# [1.4.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.3.0...v1.4.0) (2020-06-09)
+
+
+### Bug Fixes
+
+* add property to dependency list ([9845eff](https://github.com/bettyblocks/material-ui-component-set/commit/9845eff7a51bc1ef761e66ec1e96f11bbc587d04))
+* handleStep for last step ([58854ba](https://github.com/bettyblocks/material-ui-component-set/commit/58854babff73fb181a4e7f28092599cb6c346596))
+* remove React namespace ([3744493](https://github.com/bettyblocks/material-ui-component-set/commit/37444935d3d53c42efec70b5897d1bdb6341306c))
+
+
+### Features
+
+* add step events ([fa56774](https://github.com/bettyblocks/material-ui-component-set/commit/fa56774ce98d6969cec932f69db3a7788a8ac9b9))
+
+# [1.3.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.2.0...v1.3.0) (2020-06-09)
+
+
+### Features
+
+* adds show and hide functions to alert ([5938eba](https://github.com/bettyblocks/material-ui-component-set/commit/5938ebad645d4431b37b0484189f960c257704b2))
+* adds triggers to form component ([f383ad2](https://github.com/bettyblocks/material-ui-component-set/commit/f383ad22698e0f7f76dbb736c711681873851780))
+
 # [1.2.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.1.1...v1.2.0) (2020-06-04)
 
 
