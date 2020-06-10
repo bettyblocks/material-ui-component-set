@@ -4,8 +4,9 @@
   allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
+    const { env, GetAll, GetOneProvider } = B;
     const { Grid } = window.MaterialUI.Core;
-    const isDev = B.env === 'dev';
+    const isDev = env === 'dev';
     const {
       alignItems,
       alignContent,
@@ -21,6 +22,8 @@
       mdWidth,
       lgWidth,
       xlWidth,
+      model,
+      filter,
     } = options;
     const isEmpty = children.length === 0;
     const isContainer = type === 'container';
@@ -47,27 +50,45 @@
       {},
     );
 
-    const GridComp = (
-      <Grid
-        alignContent={alignContent}
-        alignItems={alignItems}
-        classes={{ root: classes.root }}
-        container={isContainer}
-        direction={gridDirection}
-        item={isItem}
-        justify={justify}
-        spacing={spacing}
-        wrap={wrap}
-        zeroMinWidth={zeroMinWidth}
-        xs={sizes.xs}
-        sm={sizes.sm}
-        md={sizes.md}
-        lg={sizes.lg}
-        xl={sizes.xl}
-      >
-        {children}
-      </Grid>
-    );
+    const gridOptions = {
+      alignContent,
+      alignItems,
+      classes: { root: classes.root },
+      container: isContainer,
+      direction: gridDirection,
+      item: isItem,
+      justify,
+      spacing,
+      wrap,
+      zeroMinWidth,
+      xs: sizes.xs,
+      sm: sizes.sm,
+      md: sizes.md,
+      lg: sizes.lg,
+      xl: sizes.xl,
+    };
+
+    const GridComp =
+      !model || isDev ? (
+        <Grid {...gridOptions}>{children}</Grid>
+      ) : (
+        <GetAll modelId={options.model} filter={filter}>
+          {({ loading, error, data }) => {
+            if (loading) return 'loading...';
+            if (error) return 'failed';
+
+            return (
+              <Grid {...gridOptions}>
+                {data.results.map(item => (
+                  <GetOneProvider key={item.id} value={item}>
+                    {children}
+                  </GetOneProvider>
+                ))}
+              </Grid>
+            );
+          }}
+        </GetAll>
+      );
 
     return isDev ? (
       <div
@@ -119,6 +140,7 @@
 
     return {
       wrapper: {
+        boxSizing: 'border-box',
         width: ({ options: { type } }) => type === 'container' && '100%',
         flexGrow: ({ options: { xsWidth } }) => getFlexGrow(xsWidth),
         maxWidth: ({ options: { xsWidth } }) => getWidth(xsWidth),
@@ -150,7 +172,8 @@
       },
       root: {
         height: ({ options: { height } }) => height,
-        minHeight: ({ children }) => children.length === 0 && '2.5rem',
+        minHeight: ({ children, options: { height } }) =>
+          children.length === 0 && isDev ? '2.5rem' : height,
         backgroundColor: ({ options: { backgroundColor } }) =>
           style.getColor(backgroundColor),
         '& > div[data-type="grid-item"]': {
