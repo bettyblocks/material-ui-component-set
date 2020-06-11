@@ -225,6 +225,20 @@
           },
         },
         {
+          value: '',
+          label: 'Row click',
+          key: 'linkTo',
+          type: 'ENDPOINT',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'linkType',
+              comparator: 'EQ',
+              value: 'internal',
+            },
+          },
+        },
+        {
           value: ['0rem', '0rem', 'M', '0rem'],
           label: 'Outer space',
           key: 'outerSpacing',
