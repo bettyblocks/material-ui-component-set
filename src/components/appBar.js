@@ -122,21 +122,21 @@
           },
         },
         '&.MuiPaper-root.MuiMenu-paper': {
-          position: 'absolute !important',
           left: '0 !important',
-          top: ({ options: { toolbarVariant } }) => [
-            toolbarVariant === 'dense' ? '50px' : '80px',
-            '!important',
-          ],
-          height: ({ options: { toolbarVariant } }) =>
-            `calc(100vh - ${toolbarVariant === 'dense' ? '50px' : '80px'})`,
-          transform: 'none !important',
-          bottom: '0 !important',
-          maxHeight: 'none',
-          width: '100%',
-          boxShadow: 'none',
-          maxWidth: 'none',
-          borderTop: '1px solid #ddd',
+           marginTop: ({ options: { toolbarVariant } }) => [
+             toolbarVariant === 'dense' ? '34px' : '64px',
+             '!important',
+           ],
+          //  height: ({ options: { toolbarVariant } }) =>
+          //    `calc(100vh - ${toolbarVariant === 'dense' ? '50px' : '80px'})`,
+           height: 'auto',
+           transform: 'none !important',
+           maxHeight: 'none',
+           width: '100%',
+           boxShadow: 'none',
+           maxWidth: 'none',
+           borderTop: '1px solid #ddd',
+           boxShadow: '0 50px 0 0 #fff, 0 100px 0 0 #fff, 0 150px 0 0 #fff, 0 200px 0 0 #fff, 0 250px 0 0 #fff, 0 300px 0 0 #fff, 0 350px 0 0 #fff, 0 400px 0 0 #fff, 0 450px 0 0 #fff, 0 450px 0 0 #fff, 0 500px 0 0 #fff, 0 550px 0 0 #fff, 0 600px 0 0 #fff, 0 650px 0 0 #fff, 0 700px 0 0 #fff, 0 750px 0 0 #fff, 0 800px 0 0 #fff, 0 850px 0 0 #fff, 0 900px 0 0 #fff, 0 950px 0 0 #fff, 0 1000px 0 0 #fff;',
         },
         justifyContent: 'center',
         backgroundColor: ({ options: { backgroundColor } }) => [
