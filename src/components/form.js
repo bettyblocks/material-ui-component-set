@@ -24,8 +24,9 @@
         const isDev = B.env === 'dev';
         const isPristine = empty && isDev;
         const actionInput = getActionInput(actionInputId);
+        const hasRedirect = redirect && redirect.id !== '';
         const redirectTo =
-          B.env === 'prod' && redirect && B.useEndpoint(redirect);
+          B.env === 'prod' && hasRedirect && B.useEndpoint(redirect);
         const history = isDev ? {} : useHistory();
 
         const trigger = (data, loading, error) => {
