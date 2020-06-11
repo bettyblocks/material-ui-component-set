@@ -229,12 +229,18 @@
           label: 'Row click',
           key: 'linkTo',
           type: 'ENDPOINT',
+        },
+        {
+          type: 'COLOR',
+          label: 'Row hover color',
+          key: 'backgroundRowHover',
+          value: 'Transparent',
           configuration: {
             condition: {
-              type: 'SHOW',
-              option: 'linkType',
+              type: 'HIDE',
+              option: 'linkTo',
               comparator: 'EQ',
-              value: 'internal',
+              value: '',
             },
           },
         },

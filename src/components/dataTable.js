@@ -522,8 +522,8 @@
         cursor: ({ options: { linkTo } }) =>
           linkTo && linkTo.id !== '' && 'pointer',
         '&:hover td': {
-          backgroundColor: ({ options: { linkTo } }) =>
-            linkTo && ['rgba(0,0,0,0.3)', '!important'],
+          backgroundColor: ({ options: { linkTo, backgroundRowHover } }) =>
+            linkTo && [style.getColor(backgroundRowHover), '!important'],
         },
       },
       searchField: {
