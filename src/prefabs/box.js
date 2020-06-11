@@ -22,6 +22,12 @@
             ],
           },
         },
+        {
+          type: 'VARIABLE',
+          label: 'CSS class',
+          key: 'cssClass',
+          value: [''],
+        },
       ],
       descendants: [],
     },

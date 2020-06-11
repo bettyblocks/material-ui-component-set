@@ -56,24 +56,23 @@
         elevation={elevationLevel}
       >
         <Toolbar variant={toolbarVariant} classes={{ root: classes.toolbar }}>
-          {classes.collapsed && (
-            <>
-              <div className={classes.collapsed}>
-                <IconButton color="inherit" onClick={handleMenu}>
-                  <MenuIcon />
-                </IconButton>
-                <Menu
-                  anchorEl={anchorEl}
-                  open={open}
-                  keepMounted
-                  onClose={handleClose}
-                  classes={{ paper: classes.root, list: classes.list }}
-                >
-                  {children}
-                </Menu>
-              </div>
-            </>
-          )}
+
+            
+          <div className={classes.collapsed}>
+            <IconButton color="inherit" onClick={handleMenu}>
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              anchorEl={anchorEl}
+              open={open}
+              keepMounted
+              onClose={handleClose}
+              classes={{ paper: classes.root, list: classes.list }}
+            >
+              {children}
+            </Menu>
+          </div>
+
           {logo.length > 0 && LogoComponent}
           <Typography
             variant="h6"
@@ -84,12 +83,9 @@
           >
             {title}
           </Typography>
-          <div className={classes.spacer} />
-          {classes.uncollapsed && (
-            <>
-              <div className={classes.uncollapsed}>{children}</div>
-            </>
-          )}
+
+          <div class="menuItems">{children}</div>
+          
         </Toolbar>
       </AppBar>
     );
@@ -100,6 +96,31 @@
     const style = new B.Styling(t);
     return {
       root: {
+        '& .menuItems': {
+          display: 'flex',
+          flexGrow: 1,
+          justifyContent: 'flex-end',
+          paddingLeft: '24px',
+        },
+        // moet een optie zijn. 
+        // '& .responsiveItems.uncollapsed': {
+        //   marginRight: 'auto',
+        // },
+        '&.MuiMenu-paper .fixedItems': {
+            display: 'none',
+        },
+        '&.MuiMenu-paper .responsiveItems.uncollapsed': {
+            display: 'flex',
+            flexDirection: 'column',
+            width: '100%',
+            marginRight: 0,
+        },
+        '& .uncollapsed': {
+          display: 'none',
+          [`@media ${B.mediaMinWidth(768)}`]: {
+            display: 'flex',
+          },
+        },
         '&.MuiPaper-root.MuiMenu-paper': {
           position: 'absolute !important',
           left: '0 !important',
@@ -140,9 +161,6 @@
       title: {
         textDecoration: 'none',
       },
-      spacer: {
-        flexGrow: 1,
-      },
       list: {
         '& > *': {
           display: 'block',
@@ -170,12 +188,6 @@
         marginLeft: '-12px',
         [`@media ${B.mediaMinWidth(768)}`]: {
           display: 'none',
-        },
-      },
-      uncollapsed: {
-        display: 'none',
-        [`@media ${B.mediaMinWidth(768)}`]: {
-          display: 'flex',
         },
       },
       logo: {

@@ -9,17 +9,17 @@
     const { alignment } = options;
     const isEmpty = children.length === 0;
     const ButtonGroup = isEmpty ? (
-      <div className={classes.empty}>Box</div>
+      <div className={[classes.empty, options.cssClass].join(" ")}>Box</div>
     ) : (
-      <Box display="flex" flexDirection="row" justifyContent={alignment}>
+      <Box className={options.cssClass} display="flex" flexDirection="row" justifyContent={alignment}>
         {children}
       </Box>
     );
 
     return isDev ? (
-      <div className={classes.wrapper}>{ButtonGroup}</div>
+      <div className={[classes.wrapper, options.cssClass].join(" ")}>{ButtonGroup}</div>
     ) : (
-      ButtonGroup
+      <div className={options.cssClass}>{ButtonGroup}</div>
     );
   })(),
   styles: () => () => ({
