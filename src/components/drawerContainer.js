@@ -33,14 +33,13 @@
   })(),
   styles: B => t => {
     const style = new B.Styling(t);
-    // const isDev = B.env === 'dev';
     const { useTheme } = window.MaterialUI.Core;
     const theme = useTheme();
 
     return {
-      typhus: {},
       root: {
         flexGrow: 1,
+        overflowY: 'auto',
         backgroundColor: ({ options: { themeBgColor, bgColor } }) =>
           style.getColor(themeBgColor) || bgColor,
         boxSizing: 'border-box',

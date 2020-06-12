@@ -129,7 +129,8 @@
       },
       drawerDev: {
         display: 'flex',
-        height: '100%',
+        height: '100vh',
+        overflowY: 'hidden',
         width: computeWidth,
         alignSelf: ({ parent: { anchor } }) =>
           anchor === 'bottom' ? 'flex-end' : 'flex-start',
