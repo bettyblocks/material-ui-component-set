@@ -27,6 +27,7 @@
     "setState": "readonly",
     "useCallback": "readonly",
     "useEffect": "readonly",
+    "useLocation": "readonly",
     "useReducer": "readonly",
     "useRef": "readonly",
     "useRouter": "readonly",

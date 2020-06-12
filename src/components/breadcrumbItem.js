@@ -10,6 +10,7 @@
     const { Icons } = window.MaterialUI;
     const { endpoint, breadcrumbContent, icon, iconPosition } = options;
     const content = useText(breadcrumbContent);
+    const hasEndpoint = endpoint && endpoint.id !== '';
 
     const isEmpty = breadcrumbContent.length === 0 && icon === 'None';
     const isPristine = isEmpty && isDev;
@@ -38,7 +39,7 @@
 
     const BreadcrumbChildren = isEmpty ? PlaceHolder : ItemContent;
 
-    const breadcrumbItem = endpoint ? (
+    const breadcrumbItem = hasEndpoint ? (
       // eslint-disable-next-line jsx-a11y/anchor-is-valid
       <Link
         className={[classes.content, classes.link].join(' ')}
