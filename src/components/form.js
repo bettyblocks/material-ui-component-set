@@ -28,13 +28,18 @@
         const redirectTo =
           B.env === 'prod' && hasRedirect && B.useEndpoint(redirect);
         const history = isDev ? {} : useHistory();
+        const location = isDev ? {} : useLocation();
 
         const trigger = (data, loading, error) => {
           if (data) {
             B.triggerEvent('onSuccess', data);
 
-            if (redirectTo) {
-              history.push(redirectTo);
+            if (hasRedirect) {
+              if (redirectTo === location.pathname) {
+                history.go(0);
+              } else {
+                history.push(redirectTo);
+              }
             }
           }
 
