@@ -32,6 +32,7 @@
             {(callAction, { data, loading, error }) => (
               <>
                 {(() => {
+                  // This part is changed
                   if (data && redirectTo) {
                     if (redirectTo === location.pathname) {
                       history.go(0);
