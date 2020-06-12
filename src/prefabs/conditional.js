@@ -1,6 +1,6 @@
 (() => ({
   name: 'Conditional',
-  icon: 'CheckboxIcon',
+  icon: 'ConditionalIcon',
   category: 'LOGIC',
   structure: [
     {
