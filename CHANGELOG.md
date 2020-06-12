@@ -1,3 +1,10 @@
+## [1.7.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.7.0...v1.7.1) (2020-06-12)
+
+
+### Bug Fixes
+
+* set nested drawer to be 100% of the parent ([f51abb5](https://github.com/bettyblocks/material-ui-component-set/commit/f51abb567a3a392fe977b27fd28b9a76836e087c))
+
 # [1.7.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.6.0...v1.7.0) (2020-06-12)
 
 
