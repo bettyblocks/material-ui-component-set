@@ -25,7 +25,9 @@
         const redirectTo =
           B.env === 'prod' && redirect && B.useEndpoint(redirect);
         const history = isDev ? {} : useHistory();
+        // This pard is added
         const location = isDev ? {} : useLocation();
+        // End added
 
         return (
           <Action actionId={actionId}>
@@ -40,6 +42,7 @@
                       history.push(redirectTo);
                     }
                   }
+                  // End change
                 })()}
                 <div className={classes.messageContainer}>
                   {error && (
