@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.5.0...v1.5.1) (2020-06-12)
+
+
+### Bug Fixes
+
+* broken endpoint option in form and breadcrumbitem ([8fce6f4](https://github.com/bettyblocks/material-ui-component-set/commit/8fce6f4dd6637aa7e2080ef5f0ac5dc9ba741597))
+
 # [1.5.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.4.0...v1.5.0) (2020-06-10)
 
 
