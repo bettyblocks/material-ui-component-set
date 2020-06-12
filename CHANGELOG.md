@@ -1,3 +1,10 @@
+## [1.7.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.7.1...v1.7.2) (2020-06-12)
+
+
+### Bug Fixes
+
+* default descending ordering in datatable ([4fe4513](https://github.com/bettyblocks/material-ui-component-set/commit/4fe4513612092829daee57cbfcd2a4bedc0547a3))
+
 ## [1.7.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.7.0...v1.7.1) (2020-06-12)
 
 
