@@ -1,3 +1,65 @@
+# [1.6.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.5.1...v1.6.0) (2020-06-12)
+
+
+### Bug Fixes
+
+* add new box options to form prefab ([ef2f30f](https://github.com/bettyblocks/material-ui-component-set/commit/ef2f30f9cac9197c239c3ffd1950fe335f3e0c38))
+* use material breakpoints ([e92e6a6](https://github.com/bettyblocks/material-ui-component-set/commit/e92e6a6750bc3cd7e4e01b2adfde4ccb59b6156d))
+
+
+### Features
+
+* add grid component ([b1127d8](https://github.com/bettyblocks/material-ui-component-set/commit/b1127d8c6caf7a2c1e45dc5069892ba80d3feff6))
+* add inner space, outer space and background color to box ([f2ab6a3](https://github.com/bettyblocks/material-ui-component-set/commit/f2ab6a343e128f47a9ba3dc8e00d9342ac6dd09c))
+* add model and filter option to grid component ([52a7a16](https://github.com/bettyblocks/material-ui-component-set/commit/52a7a1692dc0210c84e9c1822b67ed8e84d03ab6))
+
+## [1.5.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.5.0...v1.5.1) (2020-06-12)
+
+
+### Bug Fixes
+
+* broken endpoint option in form and breadcrumbitem ([8fce6f4](https://github.com/bettyblocks/material-ui-component-set/commit/8fce6f4dd6637aa7e2080ef5f0ac5dc9ba741597))
+
+# [1.5.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.4.0...v1.5.0) (2020-06-10)
+
+
+### Bug Fixes
+
+* resolve failing linter ([d2f80c0](https://github.com/bettyblocks/material-ui-component-set/commit/d2f80c0efb7a8d644c0835271fbff8e26a06a731))
+
+
+### Features
+
+* add prefabs for drawer ([f2b9ac9](https://github.com/bettyblocks/material-ui-component-set/commit/f2b9ac93d1be0d2cdc432a4e4c492d4742abbebe))
+* appBar above drawer and visible drawer while mounting ([fe9ff44](https://github.com/bettyblocks/material-ui-component-set/commit/fe9ff44c3a201e9601f66f7b7b4e0a05e6d5950a))
+* show different types of drawers ([fc7b7c3](https://github.com/bettyblocks/material-ui-component-set/commit/fc7b7c37b0c2f775b3b65eb6795ad49d4bbd00f0))
+* updated drawer component ([6e19017](https://github.com/bettyblocks/material-ui-component-set/commit/6e19017cbc44a8a60c6be3c72477a5d628656cd1))
+* use appbar component and show responsive and unresponsive bar ([0393618](https://github.com/bettyblocks/material-ui-component-set/commit/03936189c8d3392248fd3191690026ba33feb115))
+* use nested children in drawer ([2193548](https://github.com/bettyblocks/material-ui-component-set/commit/21935484c76207fa4c40c40cf9330b535a2a80b6))
+* wip ([33c1eae](https://github.com/bettyblocks/material-ui-component-set/commit/33c1eae00c12f56e44a79af74e4981b33d134b6e))
+
+# [1.4.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.3.0...v1.4.0) (2020-06-09)
+
+
+### Bug Fixes
+
+* add property to dependency list ([9845eff](https://github.com/bettyblocks/material-ui-component-set/commit/9845eff7a51bc1ef761e66ec1e96f11bbc587d04))
+* handleStep for last step ([58854ba](https://github.com/bettyblocks/material-ui-component-set/commit/58854babff73fb181a4e7f28092599cb6c346596))
+* remove React namespace ([3744493](https://github.com/bettyblocks/material-ui-component-set/commit/37444935d3d53c42efec70b5897d1bdb6341306c))
+
+
+### Features
+
+* add step events ([fa56774](https://github.com/bettyblocks/material-ui-component-set/commit/fa56774ce98d6969cec932f69db3a7788a8ac9b9))
+
+# [1.3.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.2.0...v1.3.0) (2020-06-09)
+
+
+### Features
+
+* adds show and hide functions to alert ([5938eba](https://github.com/bettyblocks/material-ui-component-set/commit/5938ebad645d4431b37b0484189f960c257704b2))
+* adds triggers to form component ([f383ad2](https://github.com/bettyblocks/material-ui-component-set/commit/f383ad22698e0f7f76dbb736c711681873851780))
+
 # [1.2.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.1.1...v1.2.0) (2020-06-04)
 
 

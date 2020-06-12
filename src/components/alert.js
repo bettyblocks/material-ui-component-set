@@ -10,11 +10,21 @@
     const { IconButton } = window.MaterialUI.Core;
 
     const isDev = B.env === 'dev';
-    const [open, setOpen] = useState(true);
+    const [open, setOpen] = useState(options.visible);
 
     useEffect(() => {
       setOpen(options.visible);
     }, [options.visible]);
+
+    useEffect(() => {
+      B.defineFunction('Show', () => {
+        setOpen(true);
+      });
+
+      B.defineFunction('Hide', () => {
+        setOpen(false);
+      });
+    }, []);
 
     const AlertPanel = (
       <Alert
