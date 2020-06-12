@@ -1,3 +1,18 @@
+# [1.6.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.5.1...v1.6.0) (2020-06-12)
+
+
+### Bug Fixes
+
+* add new box options to form prefab ([ef2f30f](https://github.com/bettyblocks/material-ui-component-set/commit/ef2f30f9cac9197c239c3ffd1950fe335f3e0c38))
+* use material breakpoints ([e92e6a6](https://github.com/bettyblocks/material-ui-component-set/commit/e92e6a6750bc3cd7e4e01b2adfde4ccb59b6156d))
+
+
+### Features
+
+* add grid component ([b1127d8](https://github.com/bettyblocks/material-ui-component-set/commit/b1127d8c6caf7a2c1e45dc5069892ba80d3feff6))
+* add inner space, outer space and background color to box ([f2ab6a3](https://github.com/bettyblocks/material-ui-component-set/commit/f2ab6a343e128f47a9ba3dc8e00d9342ac6dd09c))
+* add model and filter option to grid component ([52a7a16](https://github.com/bettyblocks/material-ui-component-set/commit/52a7a1692dc0210c84e9c1822b67ed8e84d03ab6))
+
 ## [1.5.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.5.0...v1.5.1) (2020-06-12)
 
 

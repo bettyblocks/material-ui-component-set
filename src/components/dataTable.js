@@ -449,15 +449,15 @@
         letterSpacing: ({ options: { titleType } }) =>
           style.getLetterSpacing(titleType),
         lineHeight: '1.2',
-        [`@media ${B.mediaMinWidth(768)}`]: {
+        [`@media ${B.mediaMinWidth(600)}`]: {
           fontSize: ({ options: { titleType } }) =>
             style.getFontSize(titleType, 'Portrait'),
         },
-        [`@media ${B.mediaMinWidth(1024)}`]: {
+        [`@media ${B.mediaMinWidth(960)}`]: {
           fontSize: ({ options: { titleType } }) =>
             style.getFontSize(titleType, 'Landscape'),
         },
-        [`@media ${B.mediaMinWidth(1200)}`]: {
+        [`@media ${B.mediaMinWidth(1280)}`]: {
           fontSize: ({ options: { titleType } }) =>
             style.getFontSize(titleType, 'Desktop'),
         },
@@ -490,13 +490,13 @@
       },
       skeleton: {
         height: `calc(${style.getFont('Body1').Mobile} * 1.2)`,
-        [`@media ${B.mediaMinWidth(768)}`]: {
+        [`@media ${B.mediaMinWidth(600)}`]: {
           height: `calc(${style.getFont('Body1').Portrait} * 1.2)`,
         },
-        [`@media ${B.mediaMinWidth(1024)}`]: {
+        [`@media ${B.mediaMinWidth(960)}`]: {
           height: `calc(${style.getFont('Body1').Landscape} * 1.2)`,
         },
-        [`@media ${B.mediaMinWidth(1200)}`]: {
+        [`@media ${B.mediaMinWidth(1280)}`]: {
           height: `calc(${style.getFont('Body1').Desktop} * 1.2)`,
         },
         backgroundColor: '#eee',
@@ -521,7 +521,7 @@
           backgroundPositionX: '-150%',
         },
       },
-      [`@media ${B.mediaMinWidth(768)}`]: {
+      [`@media ${B.mediaMinWidth(600)}`]: {
         root: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Portrait'),
@@ -533,7 +533,7 @@
             getSpacing(outerSpacing[3], 'Portrait'),
         },
       },
-      [`@media ${B.mediaMinWidth(1024)}`]: {
+      [`@media ${B.mediaMinWidth(960)}`]: {
         root: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Landscape'),
@@ -545,7 +545,7 @@
             getSpacing(outerSpacing[3], 'Landscape'),
         },
       },
-      [`@media ${B.mediaMinWidth(1200)}`]: {
+      [`@media ${B.mediaMinWidth(1280)}`]: {
         root: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Desktop'),
