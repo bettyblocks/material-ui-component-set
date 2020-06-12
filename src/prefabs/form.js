@@ -1524,6 +1524,30 @@
                 ],
               },
             },
+            {
+              value: false,
+              label: 'Stretch (when in flex container)',
+              key: 'stretch',
+              type: 'TOGGLE',
+            },
+            {
+              value: 'Transparent',
+              label: 'Background color',
+              key: 'backgroundColor',
+              type: 'COLOR',
+            },
+            {
+              value: ['0rem', '0rem', '0rem', '0rem'],
+              label: 'Outer space',
+              key: 'outerSpacing',
+              type: 'SIZES',
+            },
+            {
+              value: ['M', 'M', 'M', 'M'],
+              label: 'Inner space',
+              key: 'innerSpacing',
+              type: 'SIZES',
+            },
           ],
           descendants: [
             {
