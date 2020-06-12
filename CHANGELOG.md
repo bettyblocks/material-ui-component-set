@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.6.0...v1.7.0) (2020-06-12)
+
+
+### Features
+
+* reload page when form redirect is current location ([6eb585d](https://github.com/bettyblocks/material-ui-component-set/commit/6eb585d51030282affc386bd7f31c5953a88a7a5))
+
 # [1.6.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.5.1...v1.6.0) (2020-06-12)
 
 
