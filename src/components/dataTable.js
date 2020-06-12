@@ -53,7 +53,7 @@
         ? {
             sort: {
               field: orderProp,
-              order: 'ASC',
+              order: sortOrder.toUpperCase(),
             },
           }
         : {},
