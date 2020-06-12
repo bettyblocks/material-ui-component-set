@@ -95,6 +95,7 @@
     }
 
     const handleChange = evt => {
+      B.triggerEvent('Change', evt);
       setValue(getValue(evt.target.value));
     };
 
