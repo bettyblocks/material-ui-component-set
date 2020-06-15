@@ -5,29 +5,32 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { Box } = window.MaterialUI.Core;
-    const isDev = B.env === 'dev';
     const { alignment } = options;
+    const isDev = B.env === 'dev';
     const isEmpty = children.length === 0;
+    const isPristine = isDev && isEmpty;
+    const isFlex = alignment !== 'none';
+
+    const boxOptions = {
+      display: isFlex && 'flex',
+      justifyContent: isFlex && alignment,
+      flexDirection: isFlex && 'row',
+    };
+
     const BoxCmp = (
       <Box
-        className={classes.root}
-        display="flex"
-        flexDirection="row"
-        justifyContent={alignment}
+        className={[
+          classes.root,
+          isEmpty ? classes.empty : '',
+          isPristine ? classes.pristine : '',
+        ].join(' ')}
+        {...boxOptions}
       >
-        {children}
+        {isPristine ? 'Box' : children}
       </Box>
     );
 
-    return isDev ? (
-      <div
-        className={[classes.wrapper, isEmpty ? classes.empty : ''].join(' ')}
-      >
-        {BoxCmp}
-      </div>
-    ) : (
-      BoxCmp
-    );
+    return isDev ? <div className={classes.wrapper}>{BoxCmp}</div> : BoxCmp;
   })(),
   styles: B => theme => {
     const style = new B.Styling(theme);
@@ -39,6 +42,7 @@
         flex: ({ options: { stretch } }) => (stretch ? 1 : 0),
       },
       root: {
+        height: ({ options: { height } }) => height,
         flex: ({ options: { stretch } }) => (stretch ? 1 : 0),
         backgroundColor: ({ options: { backgroundColor } }) =>
           style.getColor(backgroundColor),
@@ -114,13 +118,15 @@
         },
       },
       empty: {
-        display: 'flex',
-        justifyContent: 'center',
+        display: ['flex', '!important'],
+        justifyContent: ['center', '!important'],
         alignItems: 'center',
         height: '2.5rem',
         fontSize: '0.75rem',
         color: '#262A3A',
         textTransform: 'uppercase',
+      },
+      pristine: {
         borderWidth: '0.0625rem',
         borderColor: '#AFB5C8',
         borderStyle: 'dashed',
@@ -128,14 +134,6 @@
           backgroundColor === 'Transparent'
             ? '#F0F1F5'
             : style.getColor(backgroundColor),
-        '& > div': {
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        },
-        '& > div::after': {
-          content: '"Box"',
-        },
       },
     };
   },
