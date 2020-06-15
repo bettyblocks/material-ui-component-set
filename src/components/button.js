@@ -34,7 +34,7 @@
 
     useEffect(() => {
       setVisible(visible);
-    }, [options.visible]);
+    }, [visible]);
 
     useEffect(() => {
       B.defineFunction('Show', () => {
