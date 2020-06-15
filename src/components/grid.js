@@ -1,11 +1,11 @@
 (() => ({
   name: 'Grid',
-  type: 'BODY_COMPONENT',
-  allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
+  type: 'CONTAINER_COMPONENT',
+  allowedTypes: ['CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { env, GetAll, GetOneProvider } = B;
-    const { Grid } = window.MaterialUI.Core;
+    const { Grid, Hidden } = window.MaterialUI.Core;
     const isDev = env === 'dev';
     const {
       alignItems,
@@ -24,13 +24,16 @@
       xlWidth,
       model,
       filter,
+      show,
     } = options;
     const isEmpty = children.length === 0;
     const isContainer = type === 'container';
     const isItem = type === 'item';
     const gridDirection = reverse ? `${direction}-reverse` : direction;
+    const [isVisible, setIsVisible] = useState(show);
 
     const sizeNames = ['xs', 'sm', 'md', 'lg', 'xl'];
+    const only = [];
     const sizes = [xsWidth, smWidth, mdWidth, lgWidth, xlWidth].reduce(
       (acc, w, index) => {
         const name = sizeNames[index];
@@ -41,6 +44,8 @@
           value = false;
         } else if (w === 'auto') {
           value = w;
+        } else if (w === 'hidden') {
+          only.push(name);
         } else {
           value = parseInt(w, 10);
         }
@@ -90,15 +95,28 @@
         </GetAll>
       );
 
+    const ConditionalGrid = <Hidden only={only}>{GridComp}</Hidden>;
+    const RuntimeCmp = isVisible ? ConditionalGrid : <></>;
+
+    useEffect(() => {
+      B.defineFunction('Show', () => {
+        setIsVisible(true);
+      });
+
+      B.defineFunction('Hide', () => {
+        setIsVisible(false);
+      });
+    }, []);
+
     return isDev ? (
       <div
         className={[classes.wrapper, isEmpty ? classes.empty : ''].join(' ')}
         data-type={`grid-${type}`}
       >
-        {GridComp}
+        {ConditionalGrid}
       </div>
     ) : (
-      GridComp
+      RuntimeCmp
     );
   })(),
   styles: B => theme => {
@@ -140,15 +158,15 @@
 
     return {
       wrapper: {
+        display: ({ options: { type } }) => type === 'container' && 'flex',
         boxSizing: 'border-box',
         width: ({ options: { type } }) => type === 'container' && '100%',
+        height: ({ options: { height } }) => height,
         flexGrow: ({ options: { xsWidth } }) => getFlexGrow(xsWidth),
         maxWidth: ({ options: { xsWidth } }) => getWidth(xsWidth),
         flexBasis: ({ options: { xsWidth } }) => getFlexBasis(xsWidth),
-        '& > div': {
-          flexGrow: ['initial', '!important'],
-          maxWidth: ['none', '!important'],
-        },
+        backgroundColor: ({ options: { backgroundColor } }) =>
+          style.getColor(backgroundColor),
         [`@media ${B.mediaMinWidth(600)}`]: {
           flexGrow: ({ options: { smWidth } }) => getFlexGrow(smWidth),
           maxWidth: ({ options: { smWidth } }) => getWidth(smWidth),
