@@ -13,6 +13,7 @@
       centered,
       orientation,
       scrollButtons,
+      hideTabs,
     } = options;
 
     const isDev = env === 'dev';
@@ -24,6 +25,18 @@
       setValue(newValue);
     };
 
+    useEffect(() => {
+      B.defineFunction('Select first tab', e => setValue(0));
+    }, []);
+
+    useEffect(() => {
+      B.defineFunction('Select second tab', e => setValue(1));
+    }, []);
+
+    useEffect(() => {
+      B.defineFunction('Select third tab', e => setValue(2));
+    }, []);
+
     const TabGroup = (
       <div className={classes.tabs}>
         <Tabs
@@ -34,6 +47,7 @@
           centered={centered}
           orientation={orientation}
           scrollButtons={scrollButtons}
+          className={hideTabs && classes.hide}
           classes={{ root: classes.root, indicator: classes.indicator }}
         >
           {React.Children.map(children, (child, index) => {
@@ -99,6 +113,9 @@
           style.getColor(indicatorColor),
           '!important',
         ],
+      },
+      hide: {
+        display: 'none !important',
       },
       empty: {
         display: 'flex',
