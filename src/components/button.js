@@ -20,6 +20,7 @@
       type,
       actionId,
       buttonText,
+      visible,
     } = options;
 
     const { env, useText } = B;
@@ -29,10 +30,10 @@
     const hasExternalLink = linkToExternal && linkToExternal.id !== '';
     const isIcon = variant === 'icon';
     const buttonContent = useText(buttonText);
-    const [isVisible, setVisible] = useState(options.visible);
+    const [isVisible, setVisible] = useState(visible);
 
     useEffect(() => {
-      setVisible(options.visible);
+      setVisible(visible);
     }, [options.visible]);
 
     useEffect(() => {
