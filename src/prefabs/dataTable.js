@@ -225,6 +225,26 @@
           },
         },
         {
+          value: '',
+          label: 'Row click',
+          key: 'linkTo',
+          type: 'ENDPOINT',
+        },
+        {
+          type: 'COLOR',
+          label: 'Row hover color',
+          key: 'backgroundRowHover',
+          value: 'Transparent',
+          configuration: {
+            condition: {
+              type: 'HIDE',
+              option: 'linkTo',
+              comparator: 'EQ',
+              value: '',
+            },
+          },
+        },
+        {
           value: ['0rem', '0rem', 'M', '0rem'],
           label: 'Outer space',
           key: 'outerSpacing',
