@@ -91,6 +91,9 @@
         '& .MuiAlert-action': {
           marginBottom: "auto",
         },
+        '& .MuiAlert-message': {
+          padding: "8px 0 9px",
+        },
         marginTop: ({ options: { outerSpacing } }) =>
           getSpacing(outerSpacing[0]),
         marginRight: ({ options: { outerSpacing } }) =>
