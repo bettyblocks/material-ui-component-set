@@ -8,8 +8,8 @@
       options: [
         {
           value: true,
-          label: 'Show',
-          key: 'show',
+          label: 'Visibility',
+          key: 'visibility',
           type: 'TOGGLE',
         },
         {
@@ -25,6 +25,20 @@
           type: 'FILTER',
           configuration: {
             dependsOn: 'model',
+          },
+        },
+        {
+          value: '5',
+          label: 'Repeated items (preview)',
+          key: 'repeatedItems',
+          type: 'NUMBER',
+          configuration: {
+            condition: {
+              type: 'HIDE',
+              option: 'model',
+              comparator: 'EQ',
+              value: '',
+            },
           },
         },
         {
@@ -53,6 +67,12 @@
               { name: 'Horizontal', value: 'row' },
               { name: 'Vertical', value: 'column' },
             ],
+            condition: {
+              type: 'SHOW',
+              option: 'type',
+              comparator: 'EQ',
+              value: 'container',
+            },
           },
         },
         {
@@ -60,6 +80,14 @@
           label: 'Reverse',
           key: 'reverse',
           type: 'TOGGLE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'type',
+              comparator: 'EQ',
+              value: 'container',
+            },
+          },
         },
         {
           value: 'stretch',
@@ -76,6 +104,12 @@
               { name: 'Stretch', value: 'stretch' },
               { name: 'Baseline', value: 'baseline' },
             ],
+            condition: {
+              type: 'SHOW',
+              option: 'type',
+              comparator: 'EQ',
+              value: 'container',
+            },
           },
         },
         {
@@ -94,6 +128,12 @@
               { name: 'Space around', value: 'space-around' },
               { name: 'Space between', value: 'space-between' },
             ],
+            condition: {
+              type: 'SHOW',
+              option: 'type',
+              comparator: 'EQ',
+              value: 'container',
+            },
           },
         },
         {
@@ -112,6 +152,21 @@
               { name: 'Space around', value: 'space-around' },
               { name: 'Space evenly', value: 'space-evenly' },
             ],
+            condition: {
+              type: 'SHOW',
+              option: 'type',
+              comparator: 'EQ',
+              value: 'container',
+            },
+          },
+        },
+        {
+          type: 'SIZE',
+          label: 'Height',
+          key: 'height',
+          value: '',
+          configuration: {
+            as: 'UNIT',
           },
         },
         {
@@ -338,15 +393,6 @@
               comparator: 'EQ',
               value: true,
             },
-          },
-        },
-        {
-          type: 'SIZE',
-          label: 'Height',
-          key: 'height',
-          value: '',
-          configuration: {
-            as: 'UNIT',
           },
         },
       ],
