@@ -1,3 +1,11 @@
+# [1.9.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.8.0...v1.9.0) (2020-06-16)
+
+
+### Features
+
+* add option for row hover background color ([d4189fd](https://github.com/bettyblocks/material-ui-component-set/commit/d4189fd3c6f5409dbbe4ab26fdece583b45433ee))
+* add row click handler and event trigger on table row ([a82c2e7](https://github.com/bettyblocks/material-ui-component-set/commit/a82c2e75ec867873be83aef11dcab50c1e1e23b1))
+
 # [1.8.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.7.2...v1.8.0) (2020-06-16)
 
 
