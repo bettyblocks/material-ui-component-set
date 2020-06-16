@@ -38,7 +38,7 @@
             : null
         }
         action={
-          options.collapsable && (
+          options.collapsable ? (
             <IconButton
               color="inherit"
               size="small"
@@ -48,7 +48,7 @@
             >
               <Close />
             </IconButton>
-          )
+          ) : null
         }
       >
         {options.titleText.length > 0 && (
