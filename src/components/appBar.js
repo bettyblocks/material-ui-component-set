@@ -102,10 +102,14 @@
           justifyContent: 'flex-end',
           paddingLeft: '24px',
         },
-        // moet een optie zijn. 
-        // '& .responsiveItems.uncollapsed': {
-        //   marginRight: 'auto',
-        // },
+        '& .responsiveItems.uncollapsed': {
+          margin: ({ options: { alignItems } }) => {
+            if(alignItems === 'right') return  0;
+            if(alignItems === 'left') return "0 auto 0 0";
+            
+            return "auto";
+          }
+        },
         '&.MuiMenu-paper .fixedItems': {
             display: 'none',
         },
@@ -113,7 +117,6 @@
             display: 'flex',
             flexDirection: 'column',
             width: '100%',
-            marginRight: 0,
         },
         '& .uncollapsed': {
           display: 'none',
@@ -149,10 +152,6 @@
         ],
         height: ({ options: { toolbarVariant } }) =>
           toolbarVariant === 'dense' ? '50px' : '80px',
-      },
-      toolbar: {
-        flexDirection: ({ options: { alignItems } }) =>
-          alignItems === 'right' ? 'row' : 'row-reverse',
       },
       menuButton: {
         marginLeft: style.getSpacing('M'),
