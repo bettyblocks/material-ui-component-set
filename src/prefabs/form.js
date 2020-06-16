@@ -152,6 +152,20 @@
               },
             },
             {
+              value: false,
+              label: 'Basic label?',
+              key: 'isBasicLabel',
+              type: 'TOGGLE',
+              configuration: {
+                condition: {
+                  type: 'SHOW',
+                  option: 'variant',
+                  comparator: 'EQ',
+                  value: 'outlined',
+                },
+              },
+            },
+            {
               type: 'TOGGLE',
               label: 'Full width',
               key: 'fullWidth',
