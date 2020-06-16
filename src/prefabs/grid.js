@@ -8,8 +8,8 @@
       options: [
         {
           value: true,
-          label: 'Show',
-          key: 'show',
+          label: 'Visibility',
+          key: 'visibility',
           type: 'TOGGLE',
         },
         {
@@ -25,6 +25,20 @@
           type: 'FILTER',
           configuration: {
             dependsOn: 'model',
+          },
+        },
+        {
+          value: '5',
+          label: 'Repeated items (preview)',
+          key: 'repeatedItems',
+          type: 'NUMBER',
+          configuration: {
+            condition: {
+              type: 'HIDE',
+              option: 'model',
+              comparator: 'EQ',
+              value: '',
+            },
           },
         },
         {
@@ -144,6 +158,15 @@
               comparator: 'EQ',
               value: 'container',
             },
+          },
+        },
+        {
+          type: 'SIZE',
+          label: 'Height',
+          key: 'height',
+          value: '',
+          configuration: {
+            as: 'UNIT',
           },
         },
         {
@@ -370,15 +393,6 @@
               comparator: 'EQ',
               value: true,
             },
-          },
-        },
-        {
-          type: 'SIZE',
-          label: 'Height',
-          key: 'height',
-          value: '',
-          configuration: {
-            as: 'UNIT',
           },
         },
       ],

@@ -24,13 +24,15 @@
       xlWidth,
       model,
       filter,
-      show,
+      visibility,
+      repeatedItems,
     } = options;
     const isEmpty = children.length === 0;
     const isContainer = type === 'container';
     const isItem = type === 'item';
     const gridDirection = reverse ? `${direction}-reverse` : direction;
-    const [isVisible, setIsVisible] = useState(show);
+    const take = parseInt(repeatedItems, 10) || 50;
+    const [isVisible, setIsVisible] = useState(visibility);
 
     const sizeNames = ['xs', 'sm', 'md', 'lg', 'xl'];
     const only = [];
@@ -73,27 +75,66 @@
       xl: sizes.xl,
     };
 
-    const GridComp =
-      !model || isDev ? (
-        <Grid {...gridOptions}>{children}</Grid>
-      ) : (
-        <GetAll modelId={options.model} filter={filter}>
-          {({ loading, error, data }) => {
-            if (loading) return 'loading...';
-            if (error) return 'failed';
+    const gridRef = React.createRef();
+    const numberOfChildren = children.length;
 
-            return (
-              <Grid {...gridOptions}>
-                {data.results.map(item => (
-                  <GetOneProvider key={item.id} value={item}>
-                    {children}
-                  </GetOneProvider>
-                ))}
-              </Grid>
-            );
-          }}
-        </GetAll>
-      );
+    if (isDev) {
+      const repeat = () => {
+        if (!gridRef.current || !model || children.length === 0) {
+          return;
+        }
+        Array.from(gridRef.current.children).forEach((child, index) => {
+          if (index >= numberOfChildren) {
+            child.parentNode.removeChild(child);
+          }
+        });
+        const currentHTML = gridRef.current.innerHTML;
+        const newDiv = document.createElement('div');
+        newDiv.innerHTML = currentHTML;
+        Array.from(newDiv.children).forEach(child => {
+          child.classList.add(classes.opac);
+        });
+        for (let i = 0; i < take - 1; i += 1) {
+          gridRef.current.insertAdjacentHTML('beforeend', newDiv.innerHTML);
+        }
+      };
+
+      React.useEffect(() => {
+        const mutationObserver = new MutationObserver(() => {
+          repeat();
+        });
+        mutationObserver.observe(gridRef.current, {
+          attributes: true,
+          characterData: true,
+          childList: false,
+          subtree: true,
+          attributeOldValue: false,
+          characterDataOldValue: false,
+        });
+        repeat();
+      });
+    }
+
+    const GridComp = !model ? (
+      <Grid {...gridOptions}>{children}</Grid>
+    ) : (
+      <GetAll modelId={model} filter={filter}>
+        {({ loading, error, data }) => {
+          if (loading) return 'loading...';
+          if (error) return 'failed';
+
+          return (
+            <Grid {...gridOptions}>
+              {data.results.map(item => (
+                <GetOneProvider key={item.id} value={item}>
+                  {children}
+                </GetOneProvider>
+              ))}
+            </Grid>
+          );
+        }}
+      </GetAll>
+    );
 
     const ConditionalGrid = <Hidden only={only}>{GridComp}</Hidden>;
     const RuntimeCmp = isVisible ? ConditionalGrid : <></>;
@@ -113,7 +154,9 @@
         className={[classes.wrapper, isEmpty ? classes.empty : ''].join(' ')}
         data-type={`grid-${type}`}
       >
-        {ConditionalGrid}
+        <Grid ref={gridRef} {...gridOptions}>
+          {children}
+        </Grid>
       </div>
     ) : (
       RuntimeCmp
@@ -187,6 +230,10 @@
           maxWidth: ({ options: { xlWidth } }) => getWidth(xlWidth),
           flexBasis: ({ options: { xlWidth } }) => getFlexBasis(xlWidth),
         },
+        '& > div': {
+          maxWidth: 'none',
+          flexBasis: 'auto',
+        },
       },
       root: {
         height: ({ options: { height } }) => height,
@@ -198,6 +245,9 @@
           padding: ({ options: { spacing } }) =>
             isDev && `${parseInt(spacing, 10) * 4}px`,
         },
+      },
+      opac: {
+        opacity: 0.3,
       },
       empty: {
         display: 'flex',
