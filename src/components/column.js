@@ -108,7 +108,7 @@
         borderRadius: 0,
         overflow: 'auto',
         boxSizing: 'border-box',
-        [`@media ${B.mediaMinWidth(768)}`]: {
+        [`@media ${B.mediaMinWidth(600)}`]: {
           display: ({
             options: {
               columnWidthTabletPortrait,
@@ -164,7 +164,7 @@
           paddingLeft: ({ options: { innerSpacing } }) =>
             getSpacing(innerSpacing[3], 'Portrait'),
         },
-        [`@media ${B.mediaMinWidth(1024)}`]: {
+        [`@media ${B.mediaMinWidth(960)}`]: {
           display: ({
             options: {
               columnWidthTabletLandscape,
@@ -219,7 +219,7 @@
           paddingLeft: ({ options: { innerSpacing } }) =>
             getSpacing(innerSpacing[3], 'Landscape'),
         },
-        [`@media ${B.mediaMinWidth(1200)}`]: {
+        [`@media ${B.mediaMinWidth(1280)}`]: {
           display: ({
             options: { columnWidth, horizontalAlignment, verticalAlignment },
           }) => {
