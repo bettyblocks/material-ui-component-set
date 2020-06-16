@@ -1,3 +1,58 @@
+# [1.8.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.7.2...v1.8.0) (2020-06-16)
+
+
+### Features
+
+* add dialog component ([112ca5b](https://github.com/bettyblocks/material-ui-component-set/commit/112ca5b0c32b1b5bd243316126f4f730c205b514))
+* add sample prefabs to the dialog ([3db2172](https://github.com/bettyblocks/material-ui-component-set/commit/3db217288d8fcc1a9fcdcb99f05ec8c748633ad4))
+* fix positioning of the overlay ([0648dc2](https://github.com/bettyblocks/material-ui-component-set/commit/0648dc2a94d7ed7f248be1c559d4e922f70d99f1))
+* show dialog by default ([58457b0](https://github.com/bettyblocks/material-ui-component-set/commit/58457b0c94a18239b74a58c1f8796853e802e8c9))
+* show dialog by default if visible is set to true ([d0199b8](https://github.com/bettyblocks/material-ui-component-set/commit/d0199b813f43cf4ee8d2c797a7ccf9b777c07808))
+* use button instead of icon ([695c370](https://github.com/bettyblocks/material-ui-component-set/commit/695c370aacf92072b7d30bb1767221b98088bc0f))
+
+## [1.7.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.7.1...v1.7.2) (2020-06-12)
+
+
+### Bug Fixes
+
+* default descending ordering in datatable ([4fe4513](https://github.com/bettyblocks/material-ui-component-set/commit/4fe4513612092829daee57cbfcd2a4bedc0547a3))
+
+## [1.7.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.7.0...v1.7.1) (2020-06-12)
+
+
+### Bug Fixes
+
+* set nested drawer to be 100% of the parent ([f51abb5](https://github.com/bettyblocks/material-ui-component-set/commit/f51abb567a3a392fe977b27fd28b9a76836e087c))
+
+# [1.7.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.6.0...v1.7.0) (2020-06-12)
+
+
+### Features
+
+* reload page when form redirect is current location ([6eb585d](https://github.com/bettyblocks/material-ui-component-set/commit/6eb585d51030282affc386bd7f31c5953a88a7a5))
+
+# [1.6.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.5.1...v1.6.0) (2020-06-12)
+
+
+### Bug Fixes
+
+* add new box options to form prefab ([ef2f30f](https://github.com/bettyblocks/material-ui-component-set/commit/ef2f30f9cac9197c239c3ffd1950fe335f3e0c38))
+* use material breakpoints ([e92e6a6](https://github.com/bettyblocks/material-ui-component-set/commit/e92e6a6750bc3cd7e4e01b2adfde4ccb59b6156d))
+
+
+### Features
+
+* add grid component ([b1127d8](https://github.com/bettyblocks/material-ui-component-set/commit/b1127d8c6caf7a2c1e45dc5069892ba80d3feff6))
+* add inner space, outer space and background color to box ([f2ab6a3](https://github.com/bettyblocks/material-ui-component-set/commit/f2ab6a343e128f47a9ba3dc8e00d9342ac6dd09c))
+* add model and filter option to grid component ([52a7a16](https://github.com/bettyblocks/material-ui-component-set/commit/52a7a1692dc0210c84e9c1822b67ed8e84d03ab6))
+
+## [1.5.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.5.0...v1.5.1) (2020-06-12)
+
+
+### Bug Fixes
+
+* broken endpoint option in form and breadcrumbitem ([8fce6f4](https://github.com/bettyblocks/material-ui-component-set/commit/8fce6f4dd6637aa7e2080ef5f0ac5dc9ba741597))
+
 # [1.5.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.4.0...v1.5.0) (2020-06-10)
 
 

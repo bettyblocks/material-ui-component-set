@@ -132,15 +132,15 @@
         textTransform: ({ options: { type } }) => style.getTextTransform(type),
         letterSpacing: ({ options: { type } }) => style.getLetterSpacing(type),
         lineHeight: '1.2',
-        [`@media ${B.mediaMinWidth(768)}`]: {
+        [`@media ${B.mediaMinWidth(600)}`]: {
           fontSize: ({ options: { type } }) =>
             style.getFontSize(type, 'Portrait'),
         },
-        [`@media ${B.mediaMinWidth(1024)}`]: {
+        [`@media ${B.mediaMinWidth(960)}`]: {
           fontSize: ({ options: { type } }) =>
             style.getFontSize(type, 'Landscape'),
         },
-        [`@media ${B.mediaMinWidth(1200)}`]: {
+        [`@media ${B.mediaMinWidth(1280)}`]: {
           fontSize: ({ options: { type } }) =>
             style.getFontSize(type, 'Desktop'),
         },
@@ -157,15 +157,15 @@
         letterSpacing: ({ options: { bodyType } }) =>
           style.getLetterSpacing(bodyType),
         lineHeight: '1.2',
-        [`@media ${B.mediaMinWidth(768)}`]: {
+        [`@media ${B.mediaMinWidth(600)}`]: {
           fontSize: ({ options: { bodyType } }) =>
             style.getFontSize(bodyType, 'Portrait'),
         },
-        [`@media ${B.mediaMinWidth(1024)}`]: {
+        [`@media ${B.mediaMinWidth(960)}`]: {
           fontSize: ({ options: { bodyType } }) =>
             style.getFontSize(bodyType, 'Landscape'),
         },
-        [`@media ${B.mediaMinWidth(1200)}`]: {
+        [`@media ${B.mediaMinWidth(1280)}`]: {
           fontSize: ({ options: { bodyType } }) =>
             style.getFontSize(bodyType, 'Desktop'),
         },
