@@ -25,7 +25,7 @@
       adornmentPosition,
       property,
       propertyLabelOverride,
-      isBasicLabel
+      isBasicLabel,
     } = options;
 
     const {
@@ -53,7 +53,7 @@
     const labelText = property ? propertyLabel : label;
 
     const actionInput = getActionInput(actionInputId);
-    const isOutlined = variant === 'outlined'
+    const isOutlined = variant === 'outlined';
 
     const changeHandler = event => {
       const {
@@ -115,7 +115,15 @@
         margin={margin}
         error={error}
       >
-        {labelText && <InputLabel className={ isBasicLabel && isOutlined ? 'MuiInputLabel-static' : null }>{labelText}</InputLabel>}
+        {labelText && (
+          <InputLabel
+            className={
+              isBasicLabel && isOutlined ? 'MuiInputLabel-static' : null
+            }
+          >
+            {labelText}
+          </InputLabel>
+        )}
         <InputCmp
           name={actionInput && actionInput.name}
           value={currentValue}
@@ -158,7 +166,9 @@
     );
 
     return isDev ? (
-      <div className={[classes.root, classes.inputContainer].join(" ")}>{TextFieldCmp}</div>
+      <div className={[classes.root, classes.inputContainer].join(' ')}>
+        {TextFieldCmp}
+      </div>
     ) : (
       <div className={classes.inputContainer}>{TextFieldCmp}</div>
     );
@@ -187,6 +197,6 @@
         },
         top: 0,
       },
-    }
+    },
   }),
 }))();
