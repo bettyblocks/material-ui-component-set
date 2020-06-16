@@ -62,6 +62,7 @@
   styles: () => () => ({
     root: {
       display: 'flex',
+      height: '100%',
       flex: 1,
       position: 'relative',
       flexDirection: ({ options }) => {
@@ -83,8 +84,6 @@
     empty: {
       alignItems: 'center',
       justifyContent: 'center',
-      minHeight: '100%',
-      height: '100%',
       fontSize: '0.75rem',
       color: '#262A3A',
       textTransform: 'uppercase',
