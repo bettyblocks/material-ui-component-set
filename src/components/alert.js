@@ -83,8 +83,8 @@
           ],
         },
         '& .MuiAlert-icon': {
-          color: ({ options: { textColor } }) => [
-            style.getColor(textColor),
+          color: ({ options: { iconColor } }) => [
+            style.getColor(iconColor),
             '!important',
           ],
         },

@@ -34,6 +34,12 @@
           type: 'COLOR',
         },
         {
+          value: 'Black',
+          label: 'Icon color',
+          key: 'iconColor',
+          type: 'COLOR',
+        },
+        {
           value: 'Success',
           label: 'Background color',
           key: 'background',
