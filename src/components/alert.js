@@ -94,6 +94,7 @@
         '& .MuiAlert-message': {
           padding: "8px 0 9px",
         },
+        border: ({ options: { borderColor }}) => borderColor !== 'Transparent' ? `1px solid ${style.getColor(borderColor)}` : 'none',
         justifyContent: ({ options: { horizontalAlignment } }) => horizontalAlignment,
         alignItems: ({ options: { verticalAlignment } }) => verticalAlignment,
         marginTop: ({ options: { outerSpacing } }) =>

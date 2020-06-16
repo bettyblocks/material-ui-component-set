@@ -46,6 +46,12 @@
           type: 'COLOR',
         },
         {
+          value: 'Transparent',
+          label: 'Border color',
+          key: 'borderColor',
+          type: 'COLOR',
+        },
+        {
           label: 'Icon',
           key: 'icon',
           value: 'None',
@@ -1336,7 +1342,7 @@
           type: 'CUSTOM',
           label: 'Vertical Alignment',
           key: 'verticalAlignment',
-          value: 'flext-start',
+          value: 'flex-start',
           configuration: {
             as: 'BUTTONGROUP',
             dataType: 'string',
