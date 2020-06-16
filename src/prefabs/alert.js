@@ -25,7 +25,7 @@
           type: 'VARIABLE',
           label: 'Title text',
           key: 'titleText',
-          value: [''],
+          value: [],
         },
         {
           value: 'Black',
