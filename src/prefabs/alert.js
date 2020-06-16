@@ -1317,6 +1317,21 @@
           key: 'outerSpacing',
           type: 'SIZES',
         },
+        {
+          type: 'CUSTOM',
+          label: 'Horizontal Alignment',
+          key: 'horizontalAlignment',
+          value: 'flex-start',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Left', value: 'flex-start' },
+              { name: 'Center', value: 'center' },
+              { name: 'Right', value: 'flex-end' },
+            ],
+          },
+        },
       ],
       descendants: [],
     },

@@ -94,6 +94,7 @@
         '& .MuiAlert-message': {
           padding: "8px 0 9px",
         },
+        justifyContent: ({ options: { horizontalAlignment } }) => horizontalAlignment,
         marginTop: ({ options: { outerSpacing } }) =>
           getSpacing(outerSpacing[0]),
         marginRight: ({ options: { outerSpacing } }) =>
