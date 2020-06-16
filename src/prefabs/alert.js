@@ -1332,6 +1332,21 @@
             ],
           },
         },
+        {
+          type: 'CUSTOM',
+          label: 'Vertical Alignment',
+          key: 'verticalAlignment',
+          value: 'flext-start',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Top', value: 'flex-start' },
+              { name: 'Center', value: 'center' },
+              { name: 'Bottom', value: 'flex-end' },
+            ],
+          },
+        },
       ],
       descendants: [],
     },
