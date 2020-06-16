@@ -1450,6 +1450,18 @@
           value: true,
           type: 'TOGGLE',
         },
+        {
+          label: 'No Padding',
+          key: 'isNoPadding',
+          value: false,
+          type: 'TOGGLE',
+        },
+        {
+          label: 'No minimum width',
+          key: 'isNoMinWidth',
+          value: false,
+          type: 'TOGGLE',
+        },
       ],
       descendants: [],
     },
