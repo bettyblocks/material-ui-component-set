@@ -7,10 +7,14 @@
     const { isVisible, isFullscreen, width } = options;
     const { Dialog } = window.MaterialUI.Core;
     const isDev = B.env === 'dev';
-    const [isOpen, setIsOpen] = useState(isDev);
+    const [isOpen, setIsOpen] = useState(isVisible);
 
     const closeDialog = () => setIsOpen(false);
     const openDialog = () => setIsOpen(true);
+
+    useEffect(() => {
+      setIsOpen(isVisible);
+    }, [isVisible]);
 
     useEffect(() => {
       B.defineFunction('OpenDialog', openDialog);
@@ -45,8 +49,8 @@
     );
 
     return isDev ? (
-      <div className={isVisible ? classes.overlay : classes.root}>
-        {isVisible ? <EmptyCmp /> : 'Dialog'}
+      <div className={isOpen ? classes.overlay : classes.root}>
+        {isOpen ? <EmptyCmp /> : 'Dialog'}
       </div>
     ) : (
       DialogCmp
