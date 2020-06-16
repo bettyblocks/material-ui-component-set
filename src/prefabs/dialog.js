@@ -414,8 +414,126 @@
                           descendants: [],
                         },
                         {
-                          name: 'Icon',
+                          name: 'Button',
                           options: [
+                            {
+                              type: 'CUSTOM',
+                              label: 'variant',
+                              key: 'variant',
+                              value: 'icon',
+                              configuration: {
+                                as: 'BUTTONGROUP',
+                                dataType: 'string',
+                                allowedInput: [
+                                  { name: 'Text', value: 'text' },
+                                  { name: 'Outlined', value: 'outlined' },
+                                  { name: 'Contain', value: 'contained' },
+                                  { name: 'Icon', value: 'icon' },
+                                ],
+                              },
+                            },
+                            {
+                              type: 'VARIABLE',
+                              label: 'Button text',
+                              key: 'buttonText',
+                              value: ['Cancel'],
+                              configuration: {
+                                condition: {
+                                  type: 'HIDE',
+                                  option: 'variant',
+                                  comparator: 'EQ',
+                                  value: 'icon',
+                                },
+                              },
+                            },
+                            {
+                              type: 'CUSTOM',
+                              label: 'Link to',
+                              key: 'linkType',
+                              value: 'internal',
+                              configuration: {
+                                as: 'BUTTONGROUP',
+                                dataType: 'string',
+                                allowedInput: [
+                                  { name: 'Internal page', value: 'internal' },
+                                  { name: 'External page', value: 'external' },
+                                  { name: 'Action', value: 'action' },
+                                ],
+                              },
+                            },
+                            {
+                              value: '',
+                              label: 'Page',
+                              key: 'linkTo',
+                              type: 'ENDPOINT',
+                              configuration: {
+                                condition: {
+                                  type: 'SHOW',
+                                  option: 'linkType',
+                                  comparator: 'EQ',
+                                  value: 'internal',
+                                },
+                              },
+                            },
+                            {
+                              value: '',
+                              label: 'URL',
+                              key: 'linkToExternal',
+                              type: 'TEXT',
+                              configuration: {
+                                placeholder: 'Starts with https:// or http://',
+                                condition: {
+                                  type: 'SHOW',
+                                  option: 'linkType',
+                                  comparator: 'EQ',
+                                  value: 'external',
+                                },
+                              },
+                            },
+                            {
+                              value: '',
+                              label: 'Action',
+                              key: 'actionId',
+                              type: 'ACTION',
+                              configuration: {
+                                apiVersion: 'v1',
+                                condition: {
+                                  type: 'SHOW',
+                                  option: 'linkType',
+                                  comparator: 'EQ',
+                                  value: 'action',
+                                },
+                              },
+                            },
+                            {
+                              value: false,
+                              label: 'Full width',
+                              key: 'fullWidth',
+                              type: 'TOGGLE',
+                              configuration: {
+                                condition: {
+                                  type: 'HIDE',
+                                  option: 'variant',
+                                  comparator: 'EQ',
+                                  value: 'icon',
+                                },
+                              },
+                            },
+                            {
+                              value: 'large',
+                              label: 'Size',
+                              key: 'size',
+                              type: 'CUSTOM',
+                              configuration: {
+                                as: 'BUTTONGROUP',
+                                dataType: 'string',
+                                allowedInput: [
+                                  { name: 'Large', value: 'large' },
+                                  { name: 'Medium', value: 'medium' },
+                                  { name: 'Small', value: 'small' },
+                                ],
+                              },
+                            },
                             {
                               label: 'Icon',
                               key: 'icon',
@@ -425,6 +543,10 @@
                                 as: 'DROPDOWN',
                                 dataType: 'string',
                                 allowedInput: [
+                                  {
+                                    name: 'None',
+                                    value: 'None',
+                                  },
                                   {
                                     name: 'AcUnit',
                                     value: 'AcUnit',
@@ -996,6 +1118,10 @@
                                   {
                                     name: 'FavoriteBorder',
                                     value: 'FavoriteBorder',
+                                  },
+                                  {
+                                    name: 'FileCopy',
+                                    value: 'FileCopy',
                                   },
                                   {
                                     name: 'FilterList',
@@ -1677,15 +1803,43 @@
                               },
                             },
                             {
-                              value: 'S',
-                              label: 'Size',
-                              key: 'size',
-                              type: 'SIZE',
+                              type: 'CUSTOM',
+                              label: 'Icon position',
+                              key: 'iconPosition',
+                              value: 'start',
+                              configuration: {
+                                as: 'BUTTONGROUP',
+                                dataType: 'string',
+                                condition: {
+                                  type: 'HIDE',
+                                  option: 'variant',
+                                  comparator: 'EQ',
+                                  value: 'icon',
+                                },
+                                allowedInput: [
+                                  { name: 'Start', value: 'start' },
+                                  { name: 'End', value: 'end' },
+                                ],
+                              },
+                            },
+                            {
+                              type: 'COLOR',
+                              label: 'Text color',
+                              key: 'textColor',
+                              value: 'White',
+                              configuration: {
+                                condition: {
+                                  type: 'HIDE',
+                                  option: 'variant',
+                                  comparator: 'EQ',
+                                  value: 'icon',
+                                },
+                              },
                             },
                             {
                               type: 'COLOR',
                               label: 'Color',
-                              key: 'color',
+                              key: 'background',
                               value: 'Black',
                             },
                             {
@@ -1693,6 +1847,18 @@
                               label: 'Outer space',
                               key: 'outerSpacing',
                               type: 'SIZES',
+                            },
+                            {
+                              label: 'Disabled',
+                              key: 'disabled',
+                              value: false,
+                              type: 'TOGGLE',
+                            },
+                            {
+                              label: 'Visible',
+                              key: 'visible',
+                              value: true,
+                              type: 'TOGGLE',
                             },
                           ],
                           descendants: [],
