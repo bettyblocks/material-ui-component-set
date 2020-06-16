@@ -88,6 +88,9 @@
             '!important',
           ],
         },
+        '& .MuiAlert-action': {
+          marginBottom: "auto",
+        },
         marginTop: ({ options: { outerSpacing } }) =>
           getSpacing(outerSpacing[0]),
         marginRight: ({ options: { outerSpacing } }) =>
