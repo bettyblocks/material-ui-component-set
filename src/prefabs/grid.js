@@ -53,6 +53,12 @@
               { name: 'Horizontal', value: 'row' },
               { name: 'Vertical', value: 'column' },
             ],
+            condition: {
+              type: 'SHOW',
+              option: 'type',
+              comparator: 'EQ',
+              value: 'container',
+            },
           },
         },
         {
@@ -60,6 +66,14 @@
           label: 'Reverse',
           key: 'reverse',
           type: 'TOGGLE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'type',
+              comparator: 'EQ',
+              value: 'container',
+            },
+          },
         },
         {
           value: 'stretch',
@@ -76,6 +90,12 @@
               { name: 'Stretch', value: 'stretch' },
               { name: 'Baseline', value: 'baseline' },
             ],
+            condition: {
+              type: 'SHOW',
+              option: 'type',
+              comparator: 'EQ',
+              value: 'container',
+            },
           },
         },
         {
@@ -94,6 +114,12 @@
               { name: 'Space around', value: 'space-around' },
               { name: 'Space between', value: 'space-between' },
             ],
+            condition: {
+              type: 'SHOW',
+              option: 'type',
+              comparator: 'EQ',
+              value: 'container',
+            },
           },
         },
         {
@@ -112,6 +138,12 @@
               { name: 'Space around', value: 'space-around' },
               { name: 'Space evenly', value: 'space-evenly' },
             ],
+            condition: {
+              type: 'SHOW',
+              option: 'type',
+              comparator: 'EQ',
+              value: 'container',
+            },
           },
         },
         {
