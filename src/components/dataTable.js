@@ -27,6 +27,7 @@
       model,
       filter,
       searchProperty,
+      hideSearch,
       orderProperty,
       sortOrder,
       labelRowsPerPage,
@@ -59,8 +60,14 @@
         : {},
     );
     const titleText = useText(title);
-    const hasToolbar = titleText || searchProperty;
+    const hasToolbar = titleText || (searchProperty && !hideSearch);
     const elevationLevel = variant === 'flat' ? 0 : elevation;
+
+    useEffect(() => {
+      B.defineFunction('Set search text', event => {
+        setSearch(event.target.value);
+      });
+    }, []);
 
     if (isDev) {
       const repeaterRef = React.createRef();
@@ -108,7 +115,7 @@
                 {titleText && (
                   <span className={classes.title}>{titleText}</span>
                 )}
-                {searchProperty && (
+                {searchProperty && !hideSearch && (
                   <TextField
                     classes={{ root: classes.searchField }}
                     placeholder={`Search on ${searchPropertyName}`}
@@ -174,7 +181,7 @@
                 {titleText && (
                   <span className={classes.title}>{titleText}</span>
                 )}
-                {searchProperty && (
+                {searchProperty && !hideSearch && (
                   <TextField
                     classes={{ root: classes.searchField }}
                     placeholder={`Search on ${searchPropertyName}`}

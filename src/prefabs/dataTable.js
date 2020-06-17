@@ -60,6 +60,12 @@
           },
         },
         {
+          value: '',
+          label: 'Hide built-in search field',
+          key: 'hideSearch',
+          type: 'TOGGLE',
+        },
+        {
           type: 'VARIABLE',
           label: 'Title',
           key: 'title',
