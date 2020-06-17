@@ -1,6 +1,6 @@
 (() => ({
   name: 'Step',
-  icon: 'StepperIcon',
+  icon: 'StepIcon',
   category: 'NAVIGATION',
   structure: [
     {

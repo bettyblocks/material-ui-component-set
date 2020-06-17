@@ -1,3 +1,30 @@
+# [1.10.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.9.0...v1.10.0) (2020-06-17)
+
+
+### Features
+
+* add alignment options to alert ([9197b77](https://github.com/bettyblocks/material-ui-component-set/commit/9197b77776cf4ba899c20a78b643044ce055a943))
+
+# [1.9.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.8.0...v1.9.0) (2020-06-16)
+
+
+### Features
+
+* add option for row hover background color ([d4189fd](https://github.com/bettyblocks/material-ui-component-set/commit/d4189fd3c6f5409dbbe4ab26fdece583b45433ee))
+* add row click handler and event trigger on table row ([a82c2e7](https://github.com/bettyblocks/material-ui-component-set/commit/a82c2e75ec867873be83aef11dcab50c1e1e23b1))
+
+# [1.8.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.7.2...v1.8.0) (2020-06-16)
+
+
+### Features
+
+* add dialog component ([112ca5b](https://github.com/bettyblocks/material-ui-component-set/commit/112ca5b0c32b1b5bd243316126f4f730c205b514))
+* add sample prefabs to the dialog ([3db2172](https://github.com/bettyblocks/material-ui-component-set/commit/3db217288d8fcc1a9fcdcb99f05ec8c748633ad4))
+* fix positioning of the overlay ([0648dc2](https://github.com/bettyblocks/material-ui-component-set/commit/0648dc2a94d7ed7f248be1c559d4e922f70d99f1))
+* show dialog by default ([58457b0](https://github.com/bettyblocks/material-ui-component-set/commit/58457b0c94a18239b74a58c1f8796853e802e8c9))
+* show dialog by default if visible is set to true ([d0199b8](https://github.com/bettyblocks/material-ui-component-set/commit/d0199b813f43cf4ee8d2c797a7ccf9b777c07808))
+* use button instead of icon ([695c370](https://github.com/bettyblocks/material-ui-component-set/commit/695c370aacf92072b7d30bb1767221b98088bc0f))
+
 ## [1.7.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.7.1...v1.7.2) (2020-06-12)
 
 
