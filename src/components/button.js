@@ -22,6 +22,8 @@
       actionId,
       buttonText,
       isBtnShadow,
+      isNoPadding,
+      isNoMinWidth,
     } = options;
 
     const { env, useText } = B;
@@ -46,6 +48,7 @@
       ...generalProps,
       classes: { root: classes.root },
       classname: visible || isDev ? '' : classes.hide,
+
     };
 
     const buttonProps = {
@@ -61,6 +64,8 @@
         visible || isDev ? '' : classes.hide,
         buttonContent ? '' : classes.empty,
         isBtnShadow ? '' : 'MuiButton-flat',
+        isNoPadding ? 'noPadding' : '',
+        isNoMinWidth ? 'noMinWidth' : '',
       ].join(' '),
       type: isDev ? 'button' : type,
     };
@@ -84,6 +89,7 @@
         {isIcon
           ? React.createElement(Icons[icon === 'None' ? 'Error' : icon], {
               fontSize: size,
+              padding: '6px 10px',
             })
           : buttonContent}
       </Button>
@@ -164,6 +170,12 @@
           borderRadus: '0px',
         },
         // Underneath already exists
+        '&.MuiButton-root.noPadding': {
+          padding: 0,
+        },
+        '&.MuiButton-root.noMinWidth': {
+          minWidth: 0,
+        },
         '&.MuiButton-root, &.MuiIconButton-root': {
           width: ({ options: { fullWidth, outerSpacing } }) => {
             if (!fullWidth) return 'auto';

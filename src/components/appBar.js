@@ -57,7 +57,7 @@
       >
         <Toolbar variant={toolbarVariant} classes={{ root: classes.toolbar }}>
 
-            
+
           <div className={classes.collapsed}>
             <IconButton color="inherit" onClick={handleMenu}>
               <MenuIcon />
@@ -85,7 +85,7 @@
           </Typography>
 
           <div class="menuItems">{children}</div>
-          
+
         </Toolbar>
       </AppBar>
     );
@@ -102,26 +102,16 @@
           justifyContent: 'flex-end',
           paddingLeft: '24px',
         },
-        // Moeten opties zijn. 
-        // Items gaan naar links:
-        // '& .responsiveItems.uncollapsed': {
-        //   marginRight: 'auto',
-        // },
-        // Items gaan naar rechts (is al standaard zo, deze regel is niet echt nodig):
-        // '& .responsiveItems.uncollapsed': {
-        //   marginLeft: 'auto',
-        // },
-        // Items gaan naar het midden:
-        // '& .responsiveItems.uncollapsed': {
-        //   marginRight: 'auto',
-        //   marginLeft: 'auto',
-        // },
-
         // Fix voor shadow:
         // ul.MuiList-root.MuiMenu-list:after{ content: ""; background: #fff; width: 100%; height: 100vh;}
+        '& .responsiveItems.uncollapsed': {
+          margin: ({ options: { alignItems } }) => {
+            if(alignItems === 'right') return  0;
+            if(alignItems === 'left') return "0 auto 0 0";
 
-        /// Maak Sign out Link!!
-
+            return "auto";
+          }
+        },
         '&.MuiMenu-paper .fixedItems': {
             display: 'none',
         },
@@ -129,7 +119,6 @@
             display: 'flex',
             flexDirection: 'column',
             width: '100%',
-            marginRight: 0,
         },
         '& .uncollapsed': {
           display: 'none',
@@ -149,10 +138,18 @@
            transform: 'none !important',
            maxHeight: 'none',
            width: '100%',
-           boxShadow: 'none',
            maxWidth: 'none',
            borderTop: '1px solid #ddd',
-           boxShadow: '0 50px 0 0 #fff, 0 100px 0 0 #fff, 0 150px 0 0 #fff, 0 200px 0 0 #fff, 0 250px 0 0 #fff, 0 300px 0 0 #fff, 0 350px 0 0 #fff, 0 400px 0 0 #fff, 0 450px 0 0 #fff, 0 450px 0 0 #fff, 0 500px 0 0 #fff, 0 550px 0 0 #fff, 0 600px 0 0 #fff, 0 650px 0 0 #fff, 0 700px 0 0 #fff, 0 750px 0 0 #fff, 0 800px 0 0 #fff, 0 850px 0 0 #fff, 0 900px 0 0 #fff, 0 950px 0 0 #fff, 0 1000px 0 0 #fff;',
+          //  boxShadow: '0 50px 0 0 #fff, 0 100px 0 0 #fff, 0 150px 0 0 #fff, 0 200px 0 0 #fff, 0 250px 0 0 #fff, 0 300px 0 0 #fff, 0 350px 0 0 #fff, 0 400px 0 0 #fff, 0 450px 0 0 #fff, 0 450px 0 0 #fff, 0 500px 0 0 #fff, 0 550px 0 0 #fff, 0 600px 0 0 #fff, 0 650px 0 0 #fff, 0 700px 0 0 #fff, 0 750px 0 0 #fff, 0 800px 0 0 #fff, 0 850px 0 0 #fff, 0 900px 0 0 #fff, 0 950px 0 0 #fff, 0 1000px 0 0 #fff;',
+        },
+        // SEBAS REVIEW
+        '&.MuiList-root.MuiMenu-list': {
+          '&:after': {
+            content: "",
+            background: "#f00",
+            width: "100%",
+            height: "100vh",
+          },
         },
         justifyContent: 'center',
         backgroundColor: ({ options: { backgroundColor } }) => [
@@ -165,10 +162,6 @@
         ],
         height: ({ options: { toolbarVariant } }) =>
           toolbarVariant === 'dense' ? '50px' : '80px',
-      },
-      toolbar: {
-        flexDirection: ({ options: { alignItems } }) =>
-          alignItems === 'right' ? 'row' : 'row-reverse',
       },
       menuButton: {
         marginLeft: style.getSpacing('M'),
@@ -207,7 +200,7 @@
         },
       },
       logo: {
-        maxHeight: ({options: {toolbarVariant}}) => 
+        maxHeight: ({options: {toolbarVariant}}) =>
           toolbarVariant === 'dense' ? '28px' : '40px',
         width: 'auto',
         maxWidth: '130px',
