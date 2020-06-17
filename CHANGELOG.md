@@ -1,3 +1,10 @@
+# [1.10.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.9.0...v1.10.0) (2020-06-17)
+
+
+### Features
+
+* add alignment options to alert ([9197b77](https://github.com/bettyblocks/material-ui-component-set/commit/9197b77776cf4ba899c20a78b643044ce055a943))
+
 # [1.9.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.8.0...v1.9.0) (2020-06-16)
 
 
