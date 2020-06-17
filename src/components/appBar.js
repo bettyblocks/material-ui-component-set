@@ -102,10 +102,26 @@
           justifyContent: 'flex-end',
           paddingLeft: '24px',
         },
-        // moet een optie zijn. 
+        // Moeten opties zijn. 
+        // Items gaan naar links:
         // '& .responsiveItems.uncollapsed': {
         //   marginRight: 'auto',
         // },
+        // Items gaan naar rechts (is al standaard zo, deze regel is niet echt nodig):
+        // '& .responsiveItems.uncollapsed': {
+        //   marginLeft: 'auto',
+        // },
+        // Items gaan naar het midden:
+        // '& .responsiveItems.uncollapsed': {
+        //   marginRight: 'auto',
+        //   marginLeft: 'auto',
+        // },
+
+        // Fix voor shadow:
+        // ul.MuiList-root.MuiMenu-list:after{ content: ""; background: #fff; width: 100%; height: 100vh;}
+
+        /// Maak Sign out Link!!
+
         '&.MuiMenu-paper .fixedItems': {
             display: 'none',
         },

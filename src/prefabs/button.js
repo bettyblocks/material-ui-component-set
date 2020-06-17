@@ -23,6 +23,22 @@
           },
         },
         {
+          type: 'CUSTOM',
+          label: 'Text transform',
+          key: 'textTransform',
+          value: 'uppercase',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'None', value: 'none' },
+              { name: 'Capitalize', value: 'capitalize' },
+              { name: 'Uppercase', value: 'uppercase' },
+              { name: 'Lowercase', value: 'lowercase' },
+            ],
+          },
+        },
+        {
           type: 'VARIABLE',
           label: 'Button text',
           key: 'buttonText',
@@ -92,6 +108,20 @@
               option: 'linkType',
               comparator: 'EQ',
               value: 'action',
+            },
+          },
+        },
+        {
+          value: true,
+          label: 'Shadow',
+          key: 'isBtnShadow',
+          type: 'TOGGLE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'variant',
+              comparator: 'EQ',
+              value: 'contained',
             },
           },
         },

@@ -21,6 +21,7 @@
       visible,
       actionId,
       buttonText,
+      isBtnShadow,
     } = options;
 
     const { env, useText } = B;
@@ -59,6 +60,7 @@
       className: [
         visible || isDev ? '' : classes.hide,
         buttonContent ? '' : classes.empty,
+        isBtnShadow ? '' : 'MuiButton-flat',
       ].join(' '),
       type: isDev ? 'button' : type,
     };
@@ -131,9 +133,6 @@
     const getSpacing = (idx, device = 'Mobile') =>
       idx === '0' ? '0rem' : style.getSpacing(idx, device);
     return {
-      label: {
-        textTransform: 'capitalize',
-      },
       wrapper: {
         display: ({ options: { fullWidth } }) =>
           fullWidth ? 'block' : 'inline-block',
@@ -148,6 +147,23 @@
           style.getColor(variant === 'icon' ? background : textColor),
           '!important',
         ],
+        // Text transforms upon the button
+        '& .MuiButton-label': {
+          textTransform: ({options: {textTransform}}) => textTransform,
+        },
+        // Give contained buttons a shadow?
+        // MuiButton-flat is new (box shadow = standard)
+        '&.MuiButton-root.MuiButton-flat': {
+          boxShadow: 'none',
+        },
+        // MuiButton forms (rounded corners = standard)
+        '&.MuiButton-root.MuiButton-pill': {
+          borderRadus: '50px',
+        },
+        '&.MuiButton-root.MuiButton-square': {
+          borderRadus: '0px',
+        },
+        // Underneath already exists
         '&.MuiButton-root, &.MuiIconButton-root': {
           width: ({ options: { fullWidth, outerSpacing } }) => {
             if (!fullWidth) return 'auto';

@@ -27,6 +27,8 @@
         display: 'inline-block',
       },
       root: {
+        // We want to give more control to the sizing of the icon element.
+        // At the very least we want to add an XS size (basically about 16px or 1rem)
         '&.MuiSvgIcon-root': {
           fontSize: ({ options: { size } }) => style.getIconSize(size),
           color: ({ options: { color } }) => style.getColor(color),
