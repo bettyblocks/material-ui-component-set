@@ -34,9 +34,21 @@
           type: 'COLOR',
         },
         {
+          value: 'Black',
+          label: 'Icon color',
+          key: 'iconColor',
+          type: 'COLOR',
+        },
+        {
           value: 'Success',
           label: 'Background color',
           key: 'background',
+          type: 'COLOR',
+        },
+        {
+          value: 'Transparent',
+          label: 'Border color',
+          key: 'borderColor',
           type: 'COLOR',
         },
         {
@@ -1304,6 +1316,43 @@
           label: 'Collapsable',
           key: 'collapsable',
           type: 'TOGGLE',
+        },
+        {
+          type: 'CUSTOM',
+          label: 'Horizontal Alignment',
+          key: 'horizontalAlignment',
+          value: 'flex-start',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Left', value: 'flex-start' },
+              { name: 'Center', value: 'center' },
+              { name: 'Right', value: 'flex-end' },
+            ],
+            condition: {
+              type: 'HIDE',
+              option: 'collapsable',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'CUSTOM',
+          label: 'Vertical Alignment',
+          key: 'verticalAlignment',
+          value: 'stretch',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Top', value: 'flex-start' },
+              { name: 'Center', value: 'center' },
+              { name: 'Bottom', value: 'flex-end' },
+              { name: 'Justified', value: 'stretch' },
+            ],
+          },
         },
         {
           value: ['0rem', '0rem', 'M', '0rem'],
