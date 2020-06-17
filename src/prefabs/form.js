@@ -1482,6 +1482,7 @@
                 as: 'BUTTONGROUP',
                 dataType: 'string',
                 allowedInput: [
+                  { name: 'None', value: 'none' },
                   { name: 'Left', value: 'flex-start' },
                   { name: 'Center', value: 'center' },
                   { name: 'Right', value: 'flex-end' },
@@ -1500,6 +1501,15 @@
               label: 'Background color',
               key: 'backgroundColor',
               type: 'COLOR',
+            },
+            {
+              type: 'SIZE',
+              label: 'Height',
+              key: 'height',
+              value: '',
+              configuration: {
+                as: 'UNIT',
+              },
             },
             {
               value: ['0rem', '0rem', '0rem', '0rem'],

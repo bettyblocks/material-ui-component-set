@@ -7,6 +7,12 @@
       name: 'Grid',
       options: [
         {
+          value: true,
+          label: 'Visibility',
+          key: 'visibility',
+          type: 'TOGGLE',
+        },
+        {
           value: '',
           label: 'Model',
           key: 'model',
@@ -19,6 +25,20 @@
           type: 'FILTER',
           configuration: {
             dependsOn: 'model',
+          },
+        },
+        {
+          value: '5',
+          label: 'Repeated items (preview)',
+          key: 'repeatedItems',
+          type: 'NUMBER',
+          configuration: {
+            condition: {
+              type: 'HIDE',
+              option: 'model',
+              comparator: 'EQ',
+              value: '',
+            },
           },
         },
         {
@@ -47,6 +67,12 @@
               { name: 'Horizontal', value: 'row' },
               { name: 'Vertical', value: 'column' },
             ],
+            condition: {
+              type: 'SHOW',
+              option: 'type',
+              comparator: 'EQ',
+              value: 'container',
+            },
           },
         },
         {
@@ -54,6 +80,14 @@
           label: 'Reverse',
           key: 'reverse',
           type: 'TOGGLE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'type',
+              comparator: 'EQ',
+              value: 'container',
+            },
+          },
         },
         {
           value: 'stretch',
@@ -70,6 +104,12 @@
               { name: 'Stretch', value: 'stretch' },
               { name: 'Baseline', value: 'baseline' },
             ],
+            condition: {
+              type: 'SHOW',
+              option: 'type',
+              comparator: 'EQ',
+              value: 'container',
+            },
           },
         },
         {
@@ -88,6 +128,12 @@
               { name: 'Space around', value: 'space-around' },
               { name: 'Space between', value: 'space-between' },
             ],
+            condition: {
+              type: 'SHOW',
+              option: 'type',
+              comparator: 'EQ',
+              value: 'container',
+            },
           },
         },
         {
@@ -106,6 +152,21 @@
               { name: 'Space around', value: 'space-around' },
               { name: 'Space evenly', value: 'space-evenly' },
             ],
+            condition: {
+              type: 'SHOW',
+              option: 'type',
+              comparator: 'EQ',
+              value: 'container',
+            },
+          },
+        },
+        {
+          type: 'SIZE',
+          label: 'Height',
+          key: 'height',
+          value: '',
+          configuration: {
+            as: 'UNIT',
           },
         },
         {
@@ -159,7 +220,13 @@
           type: 'TOGGLE',
         },
         {
-          value: 'false',
+          value: false,
+          label: 'Show responsive options',
+          key: 'responsiveOptions',
+          type: 'TOGGLE',
+        },
+        {
+          value: 'true',
           label: 'XS width',
           key: 'xsWidth',
           type: 'CUSTOM',
@@ -168,8 +235,9 @@
             dataType: 'string',
             allowedInput: [
               { name: 'Not set', value: 'false' },
-              { name: 'Inherit', value: 'true' },
-              { name: 'Auto', value: 'auto' },
+              { name: 'Flexible', value: 'true' },
+              { name: 'Fit content', value: 'auto' },
+              { name: 'Hidden', value: 'hidden' },
               { name: '1', value: '1' },
               { name: '2', value: '2' },
               { name: '3', value: '3' },
@@ -180,7 +248,15 @@
               { name: '8', value: '8' },
               { name: '9', value: '9' },
               { name: '10', value: '10' },
+              { name: '11', value: '11' },
+              { name: '12', value: '12' },
             ],
+            condition: {
+              type: 'SHOW',
+              option: 'responsiveOptions',
+              comparator: 'EQ',
+              value: true,
+            },
           },
         },
         {
@@ -193,8 +269,9 @@
             dataType: 'string',
             allowedInput: [
               { name: 'Not set', value: 'false' },
-              { name: 'Inherit', value: 'true' },
-              { name: 'Auto', value: 'auto' },
+              { name: 'Flexible', value: 'true' },
+              { name: 'Fit content', value: 'auto' },
+              { name: 'Hidden', value: 'hidden' },
               { name: '1', value: '1' },
               { name: '2', value: '2' },
               { name: '3', value: '3' },
@@ -205,7 +282,15 @@
               { name: '8', value: '8' },
               { name: '9', value: '9' },
               { name: '10', value: '10' },
+              { name: '11', value: '11' },
+              { name: '12', value: '12' },
             ],
+            condition: {
+              type: 'SHOW',
+              option: 'responsiveOptions',
+              comparator: 'EQ',
+              value: true,
+            },
           },
         },
         {
@@ -218,8 +303,9 @@
             dataType: 'string',
             allowedInput: [
               { name: 'Not set', value: 'false' },
-              { name: 'Inherit', value: 'true' },
-              { name: 'Auto', value: 'auto' },
+              { name: 'Flexible', value: 'true' },
+              { name: 'Fit content', value: 'auto' },
+              { name: 'Hidden', value: 'hidden' },
               { name: '1', value: '1' },
               { name: '2', value: '2' },
               { name: '3', value: '3' },
@@ -230,7 +316,15 @@
               { name: '8', value: '8' },
               { name: '9', value: '9' },
               { name: '10', value: '10' },
+              { name: '11', value: '11' },
+              { name: '12', value: '12' },
             ],
+            condition: {
+              type: 'SHOW',
+              option: 'responsiveOptions',
+              comparator: 'EQ',
+              value: true,
+            },
           },
         },
         {
@@ -243,8 +337,9 @@
             dataType: 'string',
             allowedInput: [
               { name: 'Not set', value: 'false' },
-              { name: 'Inherit', value: 'true' },
-              { name: 'Auto', value: 'auto' },
+              { name: 'Flexible', value: 'true' },
+              { name: 'Fit content', value: 'auto' },
+              { name: 'Hidden', value: 'hidden' },
               { name: '1', value: '1' },
               { name: '2', value: '2' },
               { name: '3', value: '3' },
@@ -255,7 +350,15 @@
               { name: '8', value: '8' },
               { name: '9', value: '9' },
               { name: '10', value: '10' },
+              { name: '11', value: '11' },
+              { name: '12', value: '12' },
             ],
+            condition: {
+              type: 'SHOW',
+              option: 'responsiveOptions',
+              comparator: 'EQ',
+              value: true,
+            },
           },
         },
         {
@@ -268,8 +371,9 @@
             dataType: 'string',
             allowedInput: [
               { name: 'Not set', value: 'false' },
-              { name: 'Inherit', value: 'true' },
-              { name: 'Auto', value: 'auto' },
+              { name: 'Flexible', value: 'true' },
+              { name: 'Fit content', value: 'auto' },
+              { name: 'Hidden', value: 'hidden' },
               { name: '1', value: '1' },
               { name: '2', value: '2' },
               { name: '3', value: '3' },
@@ -280,16 +384,15 @@
               { name: '8', value: '8' },
               { name: '9', value: '9' },
               { name: '10', value: '10' },
+              { name: '11', value: '11' },
+              { name: '12', value: '12' },
             ],
-          },
-        },
-        {
-          type: 'SIZE',
-          label: 'Height',
-          key: 'height',
-          value: '',
-          configuration: {
-            as: 'UNIT',
+            condition: {
+              type: 'SHOW',
+              option: 'responsiveOptions',
+              comparator: 'EQ',
+              value: true,
+            },
           },
         },
       ],

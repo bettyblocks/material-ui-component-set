@@ -1,11 +1,11 @@
 (() => ({
   name: 'Grid',
-  type: 'BODY_COMPONENT',
-  allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
+  type: 'CONTAINER_COMPONENT',
+  allowedTypes: ['CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { env, GetAll, GetOneProvider } = B;
-    const { Grid } = window.MaterialUI.Core;
+    const { Grid, Hidden } = window.MaterialUI.Core;
     const isDev = env === 'dev';
     const {
       alignItems,
@@ -24,13 +24,18 @@
       xlWidth,
       model,
       filter,
+      visibility,
+      repeatedItems,
     } = options;
     const isEmpty = children.length === 0;
     const isContainer = type === 'container';
     const isItem = type === 'item';
     const gridDirection = reverse ? `${direction}-reverse` : direction;
+    const take = parseInt(repeatedItems, 10) || 50;
+    const [isVisible, setIsVisible] = useState(visibility);
 
     const sizeNames = ['xs', 'sm', 'md', 'lg', 'xl'];
+    const only = [];
     const sizes = [xsWidth, smWidth, mdWidth, lgWidth, xlWidth].reduce(
       (acc, w, index) => {
         const name = sizeNames[index];
@@ -41,6 +46,8 @@
           value = false;
         } else if (w === 'auto') {
           value = w;
+        } else if (w === 'hidden') {
+          only.push(name);
         } else {
           value = parseInt(w, 10);
         }
@@ -68,37 +75,91 @@
       xl: sizes.xl,
     };
 
-    const GridComp =
-      !model || isDev ? (
-        <Grid {...gridOptions}>{children}</Grid>
-      ) : (
-        <GetAll modelId={options.model} filter={filter}>
-          {({ loading, error, data }) => {
-            if (loading) return 'loading...';
-            if (error) return 'failed';
+    const gridRef = React.createRef();
+    const numberOfChildren = children.length;
 
-            return (
-              <Grid {...gridOptions}>
-                {data.results.map(item => (
-                  <GetOneProvider key={item.id} value={item}>
-                    {children}
-                  </GetOneProvider>
-                ))}
-              </Grid>
-            );
-          }}
-        </GetAll>
-      );
+    if (isDev) {
+      const repeat = () => {
+        if (!gridRef.current || !model || children.length === 0) {
+          return;
+        }
+        Array.from(gridRef.current.children).forEach((child, index) => {
+          if (index >= numberOfChildren) {
+            child.parentNode.removeChild(child);
+          }
+        });
+        const currentHTML = gridRef.current.innerHTML;
+        const newDiv = document.createElement('div');
+        newDiv.innerHTML = currentHTML;
+        Array.from(newDiv.children).forEach(child => {
+          child.classList.add(classes.opac);
+        });
+        for (let i = 0; i < take - 1; i += 1) {
+          gridRef.current.insertAdjacentHTML('beforeend', newDiv.innerHTML);
+        }
+      };
+
+      React.useEffect(() => {
+        const mutationObserver = new MutationObserver(() => {
+          repeat();
+        });
+        mutationObserver.observe(gridRef.current, {
+          attributes: true,
+          characterData: true,
+          childList: false,
+          subtree: true,
+          attributeOldValue: false,
+          characterDataOldValue: false,
+        });
+        repeat();
+      });
+    }
+
+    const GridComp = !model ? (
+      <Grid {...gridOptions}>{children}</Grid>
+    ) : (
+      <GetAll modelId={model} filter={filter}>
+        {({ loading, error, data }) => {
+          if (loading) return 'loading...';
+          if (error) return 'failed';
+
+          return (
+            <Grid {...gridOptions}>
+              {data.results.map(item => (
+                <GetOneProvider key={item.id} value={item}>
+                  {children}
+                </GetOneProvider>
+              ))}
+            </Grid>
+          );
+        }}
+      </GetAll>
+    );
+
+    const ConditionalGrid = <Hidden only={only}>{GridComp}</Hidden>;
+    const RuntimeCmp = isVisible ? ConditionalGrid : <></>;
+
+    useEffect(() => {
+      B.defineFunction('Show', () => {
+        setIsVisible(true);
+      });
+
+      B.defineFunction('Hide', () => {
+        setIsVisible(false);
+      });
+    }, []);
 
     return isDev ? (
       <div
         className={[classes.wrapper, isEmpty ? classes.empty : ''].join(' ')}
         data-type={`grid-${type}`}
       >
-        {GridComp}
+        <Grid ref={gridRef} {...gridOptions}>
+          {children}
+        </Grid>
       </div>
     ) : (
-      GridComp
+      RuntimeCmp
     );
   })(),
   styles: B => theme => {
@@ -140,15 +201,15 @@
 
     return {
       wrapper: {
+        display: ({ options: { type } }) => type === 'container' && 'flex',
         boxSizing: 'border-box',
         width: ({ options: { type } }) => type === 'container' && '100%',
+        height: ({ options: { height } }) => height,
         flexGrow: ({ options: { xsWidth } }) => getFlexGrow(xsWidth),
         maxWidth: ({ options: { xsWidth } }) => getWidth(xsWidth),
         flexBasis: ({ options: { xsWidth } }) => getFlexBasis(xsWidth),
-        '& > div': {
-          flexGrow: ['initial', '!important'],
-          maxWidth: ['none', '!important'],
-        },
+        backgroundColor: ({ options: { backgroundColor } }) =>
+          style.getColor(backgroundColor),
         [`@media ${B.mediaMinWidth(600)}`]: {
           flexGrow: ({ options: { smWidth } }) => getFlexGrow(smWidth),
           maxWidth: ({ options: { smWidth } }) => getWidth(smWidth),
@@ -169,6 +230,10 @@
           maxWidth: ({ options: { xlWidth } }) => getWidth(xlWidth),
           flexBasis: ({ options: { xlWidth } }) => getFlexBasis(xlWidth),
         },
+        '& > div': {
+          maxWidth: 'none',
+          flexBasis: 'auto',
+        },
       },
       root: {
         height: ({ options: { height } }) => height,
@@ -180,6 +245,9 @@
           padding: ({ options: { spacing } }) =>
             isDev && `${parseInt(spacing, 10) * 4}px`,
         },
+      },
+      opac: {
+        opacity: 0.3,
       },
       empty: {
         display: 'flex',
