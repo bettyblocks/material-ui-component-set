@@ -161,7 +161,7 @@
           marginLeft: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[3]),
 
-          [`@media ${B.mediaMinWidth(768)}`]: {
+          [`@media ${B.mediaMinWidth(600)}`]: {
             width: ({ options: { fullWidth, outerSpacing } }) => {
               if (!fullWidth) return 'auto';
               const marginRight = getSpacing(outerSpacing[1], 'Portrait');
@@ -177,7 +177,7 @@
             marginLeft: ({ options: { outerSpacing } }) =>
               getSpacing(outerSpacing[3], 'Portrait'),
           },
-          [`@media ${B.mediaMinWidth(1024)}`]: {
+          [`@media ${B.mediaMinWidth(960)}`]: {
             width: ({ options: { fullWidth, outerSpacing } }) => {
               if (!fullWidth) return 'auto';
               const marginRight = getSpacing(outerSpacing[1], 'Landscape');
@@ -193,7 +193,7 @@
             marginLeft: ({ options: { outerSpacing } }) =>
               getSpacing(outerSpacing[3], 'Landscape'),
           },
-          [`@media ${B.mediaMinWidth(1200)}`]: {
+          [`@media ${B.mediaMinWidth(1280)}`]: {
             width: ({ options: { fullWidth, outerSpacing } }) => {
               if (!fullWidth) return 'auto';
               const marginRight = getSpacing(outerSpacing[1], 'Desktop');

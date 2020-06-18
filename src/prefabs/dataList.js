@@ -37,6 +37,56 @@
           type: 'NUMBER',
         },
         {
+          type: 'CUSTOM',
+          label: 'Type',
+          key: 'type',
+          value: 'list',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              {
+                name: 'List',
+                value: 'list',
+              },
+              {
+                name: 'Grid',
+                value: 'grid',
+              },
+            ],
+          },
+        },
+        {
+          type: 'SIZE',
+          label: 'Min Width',
+          key: 'width',
+          value: '200px',
+          configuration: {
+            as: 'UNIT',
+            condition: {
+              type: 'SHOW',
+              option: 'type',
+              comparator: 'EQ',
+              value: 'grid',
+            },
+          },
+        },
+        {
+          type: 'SIZE',
+          label: 'Gap',
+          key: 'gap',
+          value: '1rem',
+          configuration: {
+            as: 'UNIT',
+            condition: {
+              type: 'SHOW',
+              option: 'type',
+              comparator: 'EQ',
+              value: 'grid',
+            },
+          },
+        },
+        {
           value: ['0rem', '0rem', 'M', '0rem'],
           label: 'Outer space',
           key: 'outerSpacing',

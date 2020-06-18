@@ -1,3 +1,105 @@
+# [1.11.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.10.0...v1.11.0) (2020-06-17)
+
+
+### Bug Fixes
+
+* conditional option based on type of grid ([643a9ad](https://github.com/bettyblocks/material-ui-component-set/commit/643a9adeafb95135d2bcb55076d98e3fd7bdd883))
+* improve grid component ([17c5ccd](https://github.com/bettyblocks/material-ui-component-set/commit/17c5ccd4577452e58cb4e36ba10fa30903e27c63))
+* update box prefab with new options ([ad3cfcc](https://github.com/bettyblocks/material-ui-component-set/commit/ad3cfccf70eac68a0fc6f943f2c49837f004922b))
+
+
+### Features
+
+* add repeated children to grid when based on model ([c05f661](https://github.com/bettyblocks/material-ui-component-set/commit/c05f661d15e8b06a2afe0b1aa93a51f09421e7f5))
+
+# [1.10.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.9.0...v1.10.0) (2020-06-17)
+
+
+### Features
+
+* add alignment options to alert ([9197b77](https://github.com/bettyblocks/material-ui-component-set/commit/9197b77776cf4ba899c20a78b643044ce055a943))
+
+# [1.9.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.8.0...v1.9.0) (2020-06-16)
+
+
+### Features
+
+* add option for row hover background color ([d4189fd](https://github.com/bettyblocks/material-ui-component-set/commit/d4189fd3c6f5409dbbe4ab26fdece583b45433ee))
+* add row click handler and event trigger on table row ([a82c2e7](https://github.com/bettyblocks/material-ui-component-set/commit/a82c2e75ec867873be83aef11dcab50c1e1e23b1))
+
+# [1.8.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.7.2...v1.8.0) (2020-06-16)
+
+
+### Features
+
+* add dialog component ([112ca5b](https://github.com/bettyblocks/material-ui-component-set/commit/112ca5b0c32b1b5bd243316126f4f730c205b514))
+* add sample prefabs to the dialog ([3db2172](https://github.com/bettyblocks/material-ui-component-set/commit/3db217288d8fcc1a9fcdcb99f05ec8c748633ad4))
+* fix positioning of the overlay ([0648dc2](https://github.com/bettyblocks/material-ui-component-set/commit/0648dc2a94d7ed7f248be1c559d4e922f70d99f1))
+* show dialog by default ([58457b0](https://github.com/bettyblocks/material-ui-component-set/commit/58457b0c94a18239b74a58c1f8796853e802e8c9))
+* show dialog by default if visible is set to true ([d0199b8](https://github.com/bettyblocks/material-ui-component-set/commit/d0199b813f43cf4ee8d2c797a7ccf9b777c07808))
+* use button instead of icon ([695c370](https://github.com/bettyblocks/material-ui-component-set/commit/695c370aacf92072b7d30bb1767221b98088bc0f))
+
+## [1.7.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.7.1...v1.7.2) (2020-06-12)
+
+
+### Bug Fixes
+
+* default descending ordering in datatable ([4fe4513](https://github.com/bettyblocks/material-ui-component-set/commit/4fe4513612092829daee57cbfcd2a4bedc0547a3))
+
+## [1.7.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.7.0...v1.7.1) (2020-06-12)
+
+
+### Bug Fixes
+
+* set nested drawer to be 100% of the parent ([f51abb5](https://github.com/bettyblocks/material-ui-component-set/commit/f51abb567a3a392fe977b27fd28b9a76836e087c))
+
+# [1.7.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.6.0...v1.7.0) (2020-06-12)
+
+
+### Features
+
+* reload page when form redirect is current location ([6eb585d](https://github.com/bettyblocks/material-ui-component-set/commit/6eb585d51030282affc386bd7f31c5953a88a7a5))
+
+# [1.6.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.5.1...v1.6.0) (2020-06-12)
+
+
+### Bug Fixes
+
+* add new box options to form prefab ([ef2f30f](https://github.com/bettyblocks/material-ui-component-set/commit/ef2f30f9cac9197c239c3ffd1950fe335f3e0c38))
+* use material breakpoints ([e92e6a6](https://github.com/bettyblocks/material-ui-component-set/commit/e92e6a6750bc3cd7e4e01b2adfde4ccb59b6156d))
+
+
+### Features
+
+* add grid component ([b1127d8](https://github.com/bettyblocks/material-ui-component-set/commit/b1127d8c6caf7a2c1e45dc5069892ba80d3feff6))
+* add inner space, outer space and background color to box ([f2ab6a3](https://github.com/bettyblocks/material-ui-component-set/commit/f2ab6a343e128f47a9ba3dc8e00d9342ac6dd09c))
+* add model and filter option to grid component ([52a7a16](https://github.com/bettyblocks/material-ui-component-set/commit/52a7a1692dc0210c84e9c1822b67ed8e84d03ab6))
+
+## [1.5.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.5.0...v1.5.1) (2020-06-12)
+
+
+### Bug Fixes
+
+* broken endpoint option in form and breadcrumbitem ([8fce6f4](https://github.com/bettyblocks/material-ui-component-set/commit/8fce6f4dd6637aa7e2080ef5f0ac5dc9ba741597))
+
+# [1.5.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.4.0...v1.5.0) (2020-06-10)
+
+
+### Bug Fixes
+
+* resolve failing linter ([d2f80c0](https://github.com/bettyblocks/material-ui-component-set/commit/d2f80c0efb7a8d644c0835271fbff8e26a06a731))
+
+
+### Features
+
+* add prefabs for drawer ([f2b9ac9](https://github.com/bettyblocks/material-ui-component-set/commit/f2b9ac93d1be0d2cdc432a4e4c492d4742abbebe))
+* appBar above drawer and visible drawer while mounting ([fe9ff44](https://github.com/bettyblocks/material-ui-component-set/commit/fe9ff44c3a201e9601f66f7b7b4e0a05e6d5950a))
+* show different types of drawers ([fc7b7c3](https://github.com/bettyblocks/material-ui-component-set/commit/fc7b7c37b0c2f775b3b65eb6795ad49d4bbd00f0))
+* updated drawer component ([6e19017](https://github.com/bettyblocks/material-ui-component-set/commit/6e19017cbc44a8a60c6be3c72477a5d628656cd1))
+* use appbar component and show responsive and unresponsive bar ([0393618](https://github.com/bettyblocks/material-ui-component-set/commit/03936189c8d3392248fd3191690026ba33feb115))
+* use nested children in drawer ([2193548](https://github.com/bettyblocks/material-ui-component-set/commit/21935484c76207fa4c40c40cf9330b535a2a80b6))
+* wip ([33c1eae](https://github.com/bettyblocks/material-ui-component-set/commit/33c1eae00c12f56e44a79af74e4981b33d134b6e))
+
 # [1.4.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.3.0...v1.4.0) (2020-06-09)
 
 
