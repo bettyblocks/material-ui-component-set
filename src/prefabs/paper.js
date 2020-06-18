@@ -23,6 +23,7 @@
             allowedInput: [
               { name: 'Elevation', value: 'elevation' },
               { name: 'Outlined', value: 'outlined' },
+              { name: 'Flat', value: 'flat' },
             ],
           },
         },

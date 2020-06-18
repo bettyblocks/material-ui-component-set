@@ -20,7 +20,7 @@
     );
 
     const PaperComponent = (
-      <Paper variant={variant} elevation={elevation} square={square}>
+      <Paper variant={variant} elevation={elevation} square={square} className={classes.container}>
         {isEmpty ? PlaceHolder : children}
       </Paper>
     );
@@ -48,5 +48,10 @@
         content: '"Paper"',
       },
     },
+    container: {
+      '&.MuiPaper-root': {
+        boxShadow: 'none',
+      }
+    }
   }),
 }))();
