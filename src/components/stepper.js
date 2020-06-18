@@ -215,6 +215,9 @@
           '& .MuiStepContent-root': {
             marginTop: 0,
           },
+          '& .MuiStep-horizontal': {
+            padding: ({ options: { isConnectedLines } }) => isConnectedLines ? 0 : '0 8px 0 8px',
+          },
           backgroundColor: ({ options: { backgroundColor }}) => style.getColor(backgroundColor),
       },
       stepLabel: {

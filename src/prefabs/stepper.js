@@ -133,6 +133,12 @@
             },
           },
         },
+        {
+          type: 'TOGGLE',
+          label: 'Connect lines',
+          key: 'isConnectedLines',
+          value: false,
+        },
       ],
       descendants: [
         {
