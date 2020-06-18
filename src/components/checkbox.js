@@ -34,7 +34,8 @@
     const componentLabel = useText(label);
     const componentHelperText = useText(helperText);
     const propLabelOverride = useText(propertyLabelOverride);
-    const { label: propertyLabelText } = getProperty(property) || {};
+    const { label: propertyLabelText, name: propertyName } =
+      getProperty(property) || {};
     const labelProperty = getProperty(labelProp);
     const valueProperty = getProperty(valueProp);
 
@@ -50,6 +51,7 @@
 
     const propertyLabel = propLabelOverride || propertyLabelText;
     const labelText = property ? propertyLabel : componentLabel;
+    const formComponentName = propertyName || (actionInput && actionInput.name);
 
     useEffect(() => {
       if (isDev) {
@@ -81,8 +83,8 @@
         labelPlacement={position}
         checked={values.includes(checkboxValue)}
         onChange={handleChange}
+        name={formComponentName}
         disabled={disabled}
-        name={actionInput && actionInput.name}
         value={checkboxValue}
       />
     );

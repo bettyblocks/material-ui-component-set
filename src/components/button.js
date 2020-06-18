@@ -18,9 +18,9 @@
       linkTo,
       linkToExternal,
       type,
-      visible,
       actionId,
       buttonText,
+      visible,
     } = options;
 
     const { env, useText } = B;
@@ -30,6 +30,21 @@
     const hasExternalLink = linkToExternal && linkToExternal.id !== '';
     const isIcon = variant === 'icon';
     const buttonContent = useText(buttonText);
+    const [isVisible, setVisible] = useState(visible);
+
+    useEffect(() => {
+      setVisible(visible);
+    }, [visible]);
+
+    useEffect(() => {
+      B.defineFunction('Show', () => {
+        setVisible(true);
+      });
+
+      B.defineFunction('Hide', () => {
+        setVisible(false);
+      });
+    }, []);
 
     const generalProps = {
       disabled,
@@ -44,7 +59,7 @@
     const iconButtonProps = {
       ...generalProps,
       classes: { root: classes.root },
-      classname: visible || isDev ? '' : classes.hide,
+      classname: isVisible || isDev ? '' : classes.hide,
     };
 
     const buttonProps = {
@@ -57,7 +72,7 @@
         outlined: classes.outlined,
       },
       className: [
-        visible || isDev ? '' : classes.hide,
+        isVisible || isDev ? '' : classes.hide,
         buttonContent ? '' : classes.empty,
       ].join(' '),
       type: isDev ? 'button' : type,
@@ -236,7 +251,7 @@
         },
       },
       hide: {
-        display: 'none',
+        display: 'none !important',
       },
     };
   },
