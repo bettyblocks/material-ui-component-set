@@ -68,6 +68,26 @@
           },
         },
         {
+          type: 'TOGGLE',
+          label: 'Circular frame label',
+          key: 'isCircularFrameLabel',
+          value: false,
+        },
+        {
+          type: 'COLOR',
+          label: 'Circular Frame Color',
+          key: 'circularFrameColor',
+          value: 'Primary',
+          configuration: {
+            condition: {
+              type: 'HIDE',
+              option: 'isCircularFrameLabel',
+              comparator: 'EQ',
+              value: false,
+            },
+          }
+        },
+        {
           type: 'COLOR',
           label: 'Active color',
           key: 'activeColor',

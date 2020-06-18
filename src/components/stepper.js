@@ -23,6 +23,7 @@
       allSteps,
       buttonNext,
       buttonPrev,
+      isCircularFrameLabel,
     } = options;
 
     const isDev = env === 'dev';
@@ -106,7 +107,10 @@
             const stepLabelComponent = labelText => (
               <StepLabel
                 classes={{root: classes.stepLabel,}}
-                className={labelText.length > 0 ? '' : 'Step-noLabels'}
+                className={[
+                  labelText.length > 0 ? '' : 'Step-noLabels',
+                  isCircularFrameLabel && classes.circularFrame
+                ]}
                 {...labelProps}
               >
                 {labelText}
@@ -232,10 +236,6 @@
           '& .MuiStepLabel-iconContainer': {
             padding: 0,
           },
-  
-          '& .MuiStepContent-root': {
-            display: 'none',
-          },
         },
       },
       stepButton: {
@@ -272,6 +272,20 @@
           '!important',
         ],
       },
+      circularFrame: {
+        '& .MuiStepLabel-iconContainer': {
+          backgroundColor: ({ options: { isCircularFrameLabel, circularFrameColor } }) => isCircularFrameLabel && style.getColor(circularFrameColor),
+          width: '40px',
+          height: '40px',
+          flexShrink: 0,
+          borderRadius: '30px',
+          boxSizing: 'border-box',
+          justifyContent: 'center',
+          alignItems: 'center',
+          padding: 0,
+        }
+      },
+
       empty: {
         display: 'flex',
         alignItems: 'center',
