@@ -103,26 +103,26 @@
             options.active = isActive;
             options.isFirstRender = numRendersRef.current === 1;
 
+            const stepLabelComponent = labelText => (
+              <StepLabel
+                classes={{root: classes.stepLabel,}}
+                className={labelText.length > 0 ? '' : 'Step-noLabels'}
+                {...labelProps}
+              >
+                {labelText}
+              </StepLabel>
+            );
+
             const StepComponent = (
               <Step key={labelText} {...stepProps}>
                 {isLinear ? (
-                  <StepLabel
-                    classes={{ root: classes.stepLabel }}
-                    {...labelProps}
-                  >
-                    {labelText}
-                  </StepLabel>
+                  stepLabelComponent(labelText)
                 ) : (
                   <StepButton
                     classes={{ root: classes.stepButton }}
                     onClick={handleStep(index)}
                   >
-                    <StepLabel
-                      classes={{ root: classes.stepLabel }}
-                      {...labelProps}
-                    >
-                      {labelText}
-                    </StepLabel>
+                    {stepLabelComponent(labelText)}
                   </StepButton>
                 )}
 
@@ -214,10 +214,27 @@
       stepLabel: {
         '& .MuiStepIcon-root': {
           color: ({ options: { inactiveColor } }) =>
-            style.getColor(inactiveColor),
+          style.getColor(inactiveColor),
           '&.MuiStepIcon-active': {
             color: ({ options: { activeColor } }) =>
-              style.getColor(activeColor),
+            style.getColor(activeColor),
+          },
+        },
+        '&.MuiStepLabel-root': {
+          justifyContent: 'center',
+        },
+
+        '&.Step-noLabels': {
+          '& .MuiStepLabel-labelContainer': {
+            display: 'none',
+          },
+  
+          '& .MuiStepLabel-iconContainer': {
+            padding: 0,
+          },
+  
+          '& .MuiStepContent-root': {
+            display: 'none',
           },
         },
       },
