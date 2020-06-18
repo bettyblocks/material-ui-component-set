@@ -212,8 +212,10 @@
     return {
       container: {
         '&.MuiStepper-root': {
+          '& .MuiStepContent-root': {
+            marginTop: 0,
+          },
           backgroundColor: ({ options: { backgroundColor }}) => style.getColor(backgroundColor),
-        },
       },
       stepLabel: {
         '& .MuiStepIcon-root': {
