@@ -134,6 +134,18 @@
           },
         },
         {
+          value: ['0rem', '0rem', '0rem', '0rem'],
+          label: 'Inner space',
+          key: 'innerSpacing',
+          type: 'SIZES',
+        },
+        {
+          value: ['0rem', '0rem', '0rem', '0rem'],
+          label: 'Outer space',
+          key: 'outerSpacing',
+          type: 'SIZES',
+        },
+        {
           type: 'TOGGLE',
           label: 'Connect lines',
           key: 'isConnectedLines',

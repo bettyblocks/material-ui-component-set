@@ -208,7 +208,10 @@
     const style = new B.Styling(t);
     const { color: colorFunc } = B;
     const getLighterColor = (col, val) => colorFunc.lighten(col, val);
+    const getSpacing = (idx, device = 'Mobile') =>
+      idx === '0' ? '0rem' : style.getSpacing(idx, device);
     const isDev = B.env === 'dev';
+    
     return {
       container: {
         '&.MuiStepper-root': {
@@ -219,6 +222,25 @@
             padding: ({ options: { isConnectedLines } }) => isConnectedLines ? 0 : '0 8px 0 8px',
           },
           backgroundColor: ({ options: { backgroundColor }}) => style.getColor(backgroundColor),
+
+          marginTop: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[0]),
+          marginRight: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[1]),
+          margingBottom: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[2]),
+          marginLeft: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[3]),
+
+          paddingTop: ({ options: { innerSpacing } }) =>
+            getSpacing(innerSpacing[0]),
+          paddingRight: ({ options: { innerSpacing } }) =>
+            getSpacing(innerSpacing[1]),
+          paddingBottom: ({ options: { innerSpacing } }) =>
+            getSpacing(innerSpacing[2]),
+          paddingLeft: ({ options: { innerSpacing } }) =>
+            getSpacing(innerSpacing[3]),
+        },
       },
       stepLabel: {
         '& .MuiStepIcon-root': {
