@@ -69,6 +69,7 @@
           alternativeLabel={alternativeLabel}
           activeStep={currentStep}
           orientation={type}
+          className={classes.container}
         >
           {React.Children.map(children, (child, index) => {
             const { options = {} } = child.props || {};
@@ -155,6 +156,7 @@
           variant="text"
           activeStep={activeStep}
           classes={{ root: classes.mobileRoot }}
+          className={ classes.container }
           nextButton={
             <Button
               size="small"
@@ -204,6 +206,11 @@
     const getLighterColor = (col, val) => colorFunc.lighten(col, val);
     const isDev = B.env === 'dev';
     return {
+      container: {
+        '&.MuiStepper-root': {
+          backgroundColor: ({ options: { backgroundColor }}) => style.getColor(backgroundColor),
+        },
+      },
       stepLabel: {
         '& .MuiStepIcon-root': {
           color: ({ options: { inactiveColor } }) =>

@@ -80,6 +80,12 @@
           value: 'Secondary',
         },
         {
+          value: 'Transparent',
+          label: 'Background color',
+          key: 'backgroundColor',
+          type: 'COLOR',
+        },
+        {
           type: 'VARIABLE',
           label: 'Button next text',
           key: 'buttonNext',
