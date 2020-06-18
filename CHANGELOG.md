@@ -1,3 +1,24 @@
+# [1.11.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.10.0...v1.11.0) (2020-06-17)
+
+
+### Bug Fixes
+
+* conditional option based on type of grid ([643a9ad](https://github.com/bettyblocks/material-ui-component-set/commit/643a9adeafb95135d2bcb55076d98e3fd7bdd883))
+* improve grid component ([17c5ccd](https://github.com/bettyblocks/material-ui-component-set/commit/17c5ccd4577452e58cb4e36ba10fa30903e27c63))
+* update box prefab with new options ([ad3cfcc](https://github.com/bettyblocks/material-ui-component-set/commit/ad3cfccf70eac68a0fc6f943f2c49837f004922b))
+
+
+### Features
+
+* add repeated children to grid when based on model ([c05f661](https://github.com/bettyblocks/material-ui-component-set/commit/c05f661d15e8b06a2afe0b1aa93a51f09421e7f5))
+
+# [1.10.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.9.0...v1.10.0) (2020-06-17)
+
+
+### Features
+
+* add alignment options to alert ([9197b77](https://github.com/bettyblocks/material-ui-component-set/commit/9197b77776cf4ba899c20a78b643044ce055a943))
+
 # [1.9.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.8.0...v1.9.0) (2020-06-16)
 
 
