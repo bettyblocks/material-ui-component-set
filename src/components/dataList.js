@@ -94,9 +94,13 @@
                     </div>
                     <div className={type === 'grid' ? classes.grid : ''}>
                       {data.results.map(item => (
-                        <B.GetOneProvider key={item.id} value={item}>
+                        <B.ModelProvider
+                          key={item.id}
+                          value={item}
+                          id={options.model}
+                        >
                           {children}
-                        </B.GetOneProvider>
+                        </B.ModelProvider>
                       ))}
                     </div>
                     <div className={classes.footer}>
