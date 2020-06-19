@@ -52,6 +52,10 @@
       setSelectedDate(date);
     };
 
+    useEffect(() => {
+      B.defineFunction('Clear', () => setSelectedDate(''));
+    }, []);
+
     const pad = value => {
       if (value < 10) {
         return `0${value}`;
