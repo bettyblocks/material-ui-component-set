@@ -72,6 +72,12 @@
       }
     }, [isDev, defaultValue]);
 
+    useEffect(() => {
+      B.defineFunction('Clear', () => {
+        setCurrentValue(multiple ? [] : null);
+      });
+    }, []);
+
     if (isDev || !model) {
       let inputProps = {
         inputProps: {
@@ -124,7 +130,7 @@
       setCurrentValue(newCurrentValue);
     };
 
-    const getDefaultValue = records => {
+    const getValue = records => {
       if (!value) {
         return multiple ? [] : null;
       }
@@ -212,7 +218,7 @@
               multiple={multiple}
               freeSolo={freeSolo}
               options={data.results}
-              defaultValue={getDefaultValue(data.results)}
+              value={getValue(data.results)}
               getOptionLabel={renderLabel}
               onInputChange={(_, inputValue) => {
                 if (!freeSolo) {
