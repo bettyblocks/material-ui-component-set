@@ -1,3 +1,10 @@
+## [1.11.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.11.2...v1.11.3) (2020-06-22)
+
+
+### Bug Fixes
+
+* add autocomplete clear function ([760c92e](https://github.com/bettyblocks/material-ui-component-set/commit/760c92ed72cacc6255fcb7dd21abf82d9e6ce323))
+
 ## [1.11.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.11.1...v1.11.2) (2020-06-22)
 
 
