@@ -104,7 +104,7 @@
             options.active = isActive;
             options.isFirstRender = numRendersRef.current === 1;
 
-            const stepLabelComponent = labelText => (
+            const StepLabelComponent = (
               <StepLabel
                 classes={{root: classes.stepLabel,}}
                 className={[
@@ -120,13 +120,13 @@
             const StepComponent = (
               <Step key={labelText} {...stepProps}>
                 {isLinear ? (
-                  stepLabelComponent(labelText)
+                  StepLabelComponent
                 ) : (
                   <StepButton
                     classes={{ root: classes.stepButton }}
                     onClick={handleStep(index)}
                   >
-                    {stepLabelComponent(labelText)}
+                    {StepLabelComponent}
                   </StepButton>
                 )}
 
