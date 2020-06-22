@@ -1,3 +1,24 @@
+## [1.11.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.11.2...v1.11.3) (2020-06-22)
+
+
+### Bug Fixes
+
+* add autocomplete clear function ([760c92e](https://github.com/bettyblocks/material-ui-component-set/commit/760c92ed72cacc6255fcb7dd21abf82d9e6ce323))
+
+## [1.11.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.11.1...v1.11.2) (2020-06-22)
+
+
+### Bug Fixes
+
+* container height option ([ea948cb](https://github.com/bettyblocks/material-ui-component-set/commit/ea948cb079d9054852c83be93aae133ee566ec67))
+
+## [1.11.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.11.0...v1.11.1) (2020-06-22)
+
+
+### Bug Fixes
+
+* box height option ([8f53cf2](https://github.com/bettyblocks/material-ui-component-set/commit/8f53cf2f88396aa51e1fffd7b370bb27c0c11964))
+
 # [1.11.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.10.0...v1.11.0) (2020-06-17)
 
 

@@ -24,16 +24,24 @@
       </Container>
     );
 
-    return isDev ? <div>{ContainerCmp}</div> : ContainerCmp;
+    return isDev ? (
+      <div className={classes.wrapper}>{ContainerCmp}</div>
+    ) : (
+      ContainerCmp
+    );
   })(),
   styles: B => theme => {
+    const isDev = B.env === 'dev';
     const style = new B.Styling(theme);
     return {
+      wrapper: {
+        height: ({ options: { height } }) => height,
+      },
       root: {
         flexBasis: 'auto',
         backgroundColor: ({ options: { backgroundColor } }) =>
           style.getColor(backgroundColor),
-        height: ({ options: { height } }) => height,
+        height: ({ options: { height } }) => (isDev ? '100%' : height),
       },
       empty: {
         display: ['flex', '!important'],

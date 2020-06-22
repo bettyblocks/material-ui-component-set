@@ -72,6 +72,10 @@
       }
     }, [isDev, defaultValue]);
 
+    useEffect(() => {
+      B.defineFunction('Clear', () => setCurrentValue(null));
+    }, []);
+
     if (isDev || !model) {
       let inputProps = {
         inputProps: {
@@ -103,7 +107,6 @@
     }
 
     const actionInput = getActionInput(actionInputId);
-    const value = currentValue;
     const searchProp = searchProperty ? getProperty(searchProperty) : null;
 
     const valueProp = valueProperty ? getProperty(valueProperty) : null;
@@ -125,12 +128,14 @@
     };
 
     const getDefaultValue = records => {
-      if (!value) {
+      if (!currentValue) {
         return multiple ? [] : null;
       }
-      let currentRecordsKeys = value;
-      if (!Array.isArray(value)) {
-        currentRecordsKeys = multiple ? value.toString().split(',') : [value];
+      let currentRecordsKeys = currentValue;
+      if (!Array.isArray(currentValue)) {
+        currentRecordsKeys = multiple
+          ? currentValue.toString().split(',')
+          : [currentValue];
       }
       const currentRecords = records.reduce((acc, cv) => {
         const searchStr = cv[valueProp.name].toString();
@@ -212,7 +217,7 @@
               multiple={multiple}
               freeSolo={freeSolo}
               options={data.results}
-              defaultValue={getDefaultValue(data.results)}
+              value={getDefaultValue(data.results)}
               getOptionLabel={renderLabel}
               onInputChange={(_, inputValue) => {
                 if (!freeSolo) {
@@ -227,8 +232,9 @@
                 <>
                   <input
                     type="hidden"
+                    key={currentValue ? 'hasValue' : 'isEmpty'}
                     name={actionInput && actionInput.name}
-                    value={value}
+                    value={currentValue}
                   />
                   <TextField
                     {...params}
