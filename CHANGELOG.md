@@ -1,3 +1,10 @@
+## [1.11.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.11.0...v1.11.1) (2020-06-22)
+
+
+### Bug Fixes
+
+* box height option ([8f53cf2](https://github.com/bettyblocks/material-ui-component-set/commit/8f53cf2f88396aa51e1fffd7b370bb27c0c11964))
+
 # [1.11.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.10.0...v1.11.0) (2020-06-17)
 
 
