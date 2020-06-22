@@ -26,15 +26,15 @@
     };
 
     useEffect(() => {
-      B.defineFunction('Select first tab', e => setValue(0));
+      B.defineFunction('Select first tab', setValue(0));
     }, []);
 
     useEffect(() => {
-      B.defineFunction('Select second tab', e => setValue(1));
+      B.defineFunction('Select second tab', setValue(1));
     }, []);
 
     useEffect(() => {
-      B.defineFunction('Select third tab', e => setValue(2));
+      B.defineFunction('Select third tab', setValue(2));
     }, []);
 
     const TabGroup = (
