@@ -34,15 +34,19 @@
   })(),
   styles: B => theme => {
     const style = new B.Styling(theme);
+    const isDev = B.env === 'dev';
     const getSpacing = (idx, device = 'Mobile') =>
       idx === '0' ? '0rem' : style.getSpacing(idx, device);
 
     return {
       wrapper: {
         flex: ({ options: { stretch } }) => (stretch ? 1 : 0),
+        height: ({ options: { height } }) => height,
+        flexBasis: 'auto',
       },
       root: {
-        height: ({ options: { height } }) => height,
+        boxSizing: 'border-box',
+        height: ({ options: { height } }) => (isDev ? '100%' : height),
         flex: ({ options: { stretch } }) => (stretch ? 1 : 0),
         backgroundColor: ({ options: { backgroundColor } }) =>
           style.getColor(backgroundColor),
