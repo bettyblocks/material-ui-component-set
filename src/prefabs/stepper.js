@@ -85,7 +85,7 @@
               comparator: 'EQ',
               value: false,
             },
-          }
+          },
         },
         {
           type: 'COLOR',

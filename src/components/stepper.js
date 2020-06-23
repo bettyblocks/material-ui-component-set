@@ -106,10 +106,10 @@
 
             const StepLabelComponent = (
               <StepLabel
-                classes={{root: classes.stepLabel,}}
+                classes={{ root: classes.stepLabel }}
                 className={[
                   labelText.length > 0 ? '' : 'Step-noLabels',
-                  isCircularFrameLabel && classes.circularFrame
+                  isCircularFrameLabel && classes.circularFrame,
                 ]}
                 {...labelProps}
               >
@@ -160,7 +160,7 @@
           variant="text"
           activeStep={activeStep}
           classes={{ root: classes.mobileRoot }}
-          className={ classes.container }
+          className={classes.container}
           nextButton={
             <Button
               size="small"
@@ -211,7 +211,7 @@
     const getSpacing = (idx, device = 'Mobile') =>
       idx === '0' ? '0rem' : style.getSpacing(idx, device);
     const isDev = B.env === 'dev';
-    
+
     return {
       container: {
         '&.MuiStepper-root': {
@@ -219,9 +219,11 @@
             marginTop: 0,
           },
           '& .MuiStep-horizontal': {
-            padding: ({ options: { isConnectedLines } }) => isConnectedLines ? 0 : '0 8px 0 8px',
+            padding: ({ options: { isConnectedLines } }) =>
+              isConnectedLines ? 0 : '0 8px 0 8px',
           },
-          backgroundColor: ({ options: { backgroundColor }}) => style.getColor(backgroundColor),
+          backgroundColor: ({ options: { backgroundColor } }) =>
+            style.getColor(backgroundColor),
 
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0]),
@@ -245,10 +247,10 @@
       stepLabel: {
         '& .MuiStepIcon-root': {
           color: ({ options: { inactiveColor } }) =>
-          style.getColor(inactiveColor),
+            style.getColor(inactiveColor),
           '&.MuiStepIcon-active': {
             color: ({ options: { activeColor } }) =>
-            style.getColor(activeColor),
+              style.getColor(activeColor),
           },
         },
         '&.MuiStepLabel-root': {
@@ -259,7 +261,7 @@
           '& .MuiStepLabel-labelContainer': {
             display: 'none',
           },
-  
+
           '& .MuiStepLabel-iconContainer': {
             padding: 0,
           },
@@ -301,7 +303,9 @@
       },
       circularFrame: {
         '& .MuiStepLabel-iconContainer': {
-          backgroundColor: ({ options: { isCircularFrameLabel, circularFrameColor } }) => isCircularFrameLabel && style.getColor(circularFrameColor),
+          backgroundColor: ({
+            options: { isCircularFrameLabel, circularFrameColor },
+          }) => isCircularFrameLabel && style.getColor(circularFrameColor),
           width: '40px',
           height: '40px',
           flexShrink: 0,
@@ -310,7 +314,7 @@
           justifyContent: 'center',
           alignItems: 'center',
           padding: 0,
-        }
+        },
       },
 
       empty: {
