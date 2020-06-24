@@ -1,3 +1,10 @@
+# [1.12.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.11.3...v1.12.0) (2020-06-24)
+
+
+### Features
+
+* replace getOneProvider with the new ModelProvider ([2974f77](https://github.com/bettyblocks/material-ui-component-set/commit/2974f775ce3b7d14248743d9202f511d51b6818a))
+
 ## [1.11.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.11.2...v1.11.3) (2020-06-22)
 
 
