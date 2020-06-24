@@ -1,3 +1,15 @@
+# [1.13.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.12.0...v1.13.0) (2020-06-24)
+
+
+### Bug Fixes
+
+* avatar width in repeated datatable columns ([067a351](https://github.com/bettyblocks/material-ui-component-set/commit/067a351d0ccf862e216c85e12455e3b8ee1664a3))
+
+
+### Features
+
+* add belongs to and width option to datatable ([56e6531](https://github.com/bettyblocks/material-ui-component-set/commit/56e653185613860db48ac2b2b41ff1a92f64dca7))
+
 # [1.12.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.11.3...v1.12.0) (2020-06-24)
 
 
