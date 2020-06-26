@@ -196,7 +196,7 @@
             ? style.getColor(backgroundColor)
             : getColorAlpha(
                 style.getColor(backgroundColor),
-                backgroundColorAlpha,
+                backgroundColorAlpha / 100,
               ),
         backgroundImage: ({ options: { backgroundUrl } }) => {
           const image = B.useText(backgroundUrl);
