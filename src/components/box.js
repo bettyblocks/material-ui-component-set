@@ -93,7 +93,8 @@
         flexDirection: 'column',
         alignContent: 'stretch',
         boxSizing: 'border-box',
-        position: ({ options: { position } }) => position,
+        position: ({ options: { position } }) =>
+          position === 'fixed' && isDev ? 'absolute' : position,
         top: ({ options: { top } }) => top,
         right: ({ options: { right } }) => right,
         bottom: ({ options: { bottom } }) => bottom,
