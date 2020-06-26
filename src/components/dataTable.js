@@ -12,6 +12,7 @@
       useText,
       ModelProvider,
       useEndpoint,
+      useFilter,
     } = B;
     const {
       Table,
@@ -55,8 +56,9 @@
       field: orderProp || null,
       order: orderProp ? sortOrder : null,
     });
-    const { id: searchId, name: searchPropertyName = '{property}' } =
-      getProperty(searchProperty) || {};
+    const searchPropertyArray = [searchProperty].flat();
+    const { id: searchId, label: searchPropertyLabel = '{property}' } =
+      getProperty(searchPropertyArray[searchPropertyArray.length - 1]) || {};
     const [variables, setVariables] = React.useState(
       orderProp
         ? {
@@ -121,7 +123,7 @@
                 {searchProperty && (
                   <TextField
                     classes={{ root: classes.searchField }}
-                    placeholder={`Search on ${searchPropertyName}`}
+                    placeholder={`Search on ${searchPropertyLabel}`}
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
@@ -187,7 +189,7 @@
                 {searchProperty && (
                   <TextField
                     classes={{ root: classes.searchField }}
-                    placeholder={`Search on ${searchPropertyName}`}
+                    placeholder={`Search on ${searchPropertyLabel}`}
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
@@ -306,7 +308,7 @@
               {searchProperty && (
                 <TextField
                   classes={{ root: classes.searchField }}
-                  placeholder={`Search on ${searchPropertyName}`}
+                  placeholder={`Search on ${searchPropertyLabel}`}
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
