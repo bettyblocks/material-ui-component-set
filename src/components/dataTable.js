@@ -29,7 +29,6 @@
     } = window.MaterialUI.Core;
     const { Search } = window.MaterialUI.Icons;
     const isDev = env === 'dev';
-
     const {
       take,
       size,
@@ -57,7 +56,7 @@
       order: orderProp ? sortOrder : null,
     });
     const searchPropertyArray = [searchProperty].flat();
-    const { id: searchId, label: searchPropertyLabel = '{property}' } =
+    const { label: searchPropertyLabel = '{property}' } =
       getProperty(searchPropertyArray[searchPropertyArray.length - 1]) || {};
     const [variables, setVariables] = React.useState(
       orderProp
@@ -294,6 +293,46 @@
       }
     };
 
+    const isObject = item =>
+      item && typeof item === 'object' && !Array.isArray(item);
+    const deepMerge = (target, ...sources) => {
+      if (!sources.length) return target;
+      const source = sources.shift();
+
+      if (isObject(target) && isObject(source)) {
+        // eslint-disable-next-line no-restricted-syntax
+        for (const key in source) {
+          if (isObject(source[key])) {
+            if (!target[key]) Object.assign(target, { [key]: {} });
+            deepMerge(target[key], source[key]);
+          } else {
+            Object.assign(target, { [key]: source[key] });
+          }
+        }
+      }
+
+      return deepMerge(target, ...sources);
+    };
+
+    const searchFilter = {};
+
+    if (searchProperty) {
+      searchPropertyArray.reduce(
+        // eslint-disable-next-line no-return-assign
+        (acc, property, index) =>
+          (acc[property] =
+            index !== searchPropertyArray.length - 1
+              ? {}
+              : { matches: search }),
+        searchFilter,
+      );
+    }
+    const newFilter =
+      searchProperty && search !== ''
+        ? deepMerge({}, filter, searchFilter)
+        : filter;
+    const where = useFilter(newFilter);
+
     return (
       <div className={classes.root}>
         <Paper
@@ -321,13 +360,10 @@
               )}
             </Toolbar>
           )}
+
           <GetAll
             modelId={model}
-            filter={
-              searchId && search !== ''
-                ? { ...filter, [searchId]: { matches: search } }
-                : filter
-            }
+            rawFilter={where}
             __SECRET_VARIABLES_DO_NOT_USE={variables}
             take={pagination && rowsPerPage}
             skip={pagination && page * rowsPerPage}
