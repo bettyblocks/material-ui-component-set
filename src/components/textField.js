@@ -43,6 +43,7 @@
     const isDev = env === 'dev';
     const [currentValue, setCurrentValue] = useState(useText(defaultValue));
     const [showPassword, togglePassword] = useState(false);
+    const [errorState, setErrorState] = useState(error);
     const helper = useText(helperText);
     const placeholderText = useText(placeholder);
 
@@ -58,12 +59,22 @@
         target: { value: eventValue },
       } = event;
 
+      setErrorState(!event.target.validity.valid);
+
       setCurrentValue(eventValue);
     };
 
     useEffect(() => {
       B.defineFunction('Clear', () => setCurrentValue(''));
     }, []);
+    const blurHandler = event => {
+      setErrorState(!event.target.validity.valid);
+    };
+
+    const invalidHandler = event => {
+      event.preventDefault();
+      setErrorState(!event.target.validity.valid);
+    };
 
     const handleClickShowPassword = () => {
       togglePassword(!showPassword);
@@ -115,7 +126,7 @@
         required={required}
         disabled={disabled}
         margin={margin}
-        error={error}
+        error={errorState}
       >
         {labelText && <InputLabel>{labelText}</InputLabel>}
         <InputCmp
@@ -127,6 +138,8 @@
           label={labelText}
           placeholder={placeholderText}
           onChange={changeHandler}
+          onBlur={blurHandler}
+          onInvalid={invalidHandler}
           startAdornment={
             hasAdornment &&
             adornmentPosition === 'start' && (
