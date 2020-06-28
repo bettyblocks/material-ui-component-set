@@ -140,6 +140,12 @@
           type: 'TOGGLE',
         },
         {
+          label: 'Password pattern',
+          key: 'passwordPattern',
+          value: '(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}',
+          type: 'TEXT',
+        },
+        {
           type: 'CUSTOM',
           label: 'Position',
           key: 'adornmentPosition',

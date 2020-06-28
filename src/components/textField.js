@@ -25,6 +25,7 @@
       adornmentPosition,
       property,
       propertyLabelOverride,
+      passwordPattern,
     } = options;
 
     const {
@@ -165,6 +166,7 @@
             )
           }
           inputProps={{
+            pattern: passwordPattern,
             tabIndex: isDev && -1,
           }}
         />
