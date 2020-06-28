@@ -45,7 +45,23 @@
     const [currentValue, setCurrentValue] = useState(useText(defaultValue));
     const [showPassword, togglePassword] = useState(false);
     const [errorState, setErrorState] = useState(error);
-    const helper = useText(helperText);
+    const [helper, setHelper] = useState(useText(helperText));
+
+    const validationMessage = validityObject => {
+      if (validityObject.valid) {
+        return '';
+      }
+      if (validityObject.typeMismatch && type === 'email') {
+        return 'No valid e-mail address provided';
+      }
+      if (validityObject.patternMismatch && type === 'password') {
+        return 'Invalid password';
+      }
+      if (validityObject.valueMissing) {
+        return 'This field is required';
+      }
+    };
+
     const placeholderText = useText(placeholder);
 
     const { label: propertyLabelText } = getProperty(property) || {};
@@ -60,8 +76,10 @@
         target: { value: eventValue },
       } = event;
 
-      // eslint-disable-next-line no-unused-expressions
-      errorState && setErrorState(!event.target.validity.valid);
+      if (errorState) {
+        setErrorState(!event.target.validity.valid);
+        setHelper(validationMessage(event.target.validity));
+      }
 
       setCurrentValue(eventValue);
     };
@@ -71,11 +89,13 @@
     }, []);
     const blurHandler = event => {
       setErrorState(!event.target.validity.valid);
+      setHelper(validationMessage(event.target.validity));
     };
 
     const invalidHandler = event => {
       event.preventDefault();
       setErrorState(!event.target.validity.valid);
+      setHelper(validationMessage(event.target.validity));
     };
 
     const handleClickShowPassword = () => {
