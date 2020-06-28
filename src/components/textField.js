@@ -60,7 +60,8 @@
         target: { value: eventValue },
       } = event;
 
-      setErrorState(!event.target.validity.valid);
+      // eslint-disable-next-line no-unused-expressions
+      errorState && setErrorState(!event.target.validity.valid);
 
       setCurrentValue(eventValue);
     };
