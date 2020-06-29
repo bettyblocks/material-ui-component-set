@@ -31,15 +31,13 @@
     const [currentValue, setCurrentValue] = useState(useText(defaultValue));
     const helper = useText(helperText);
 
-    const { label: propertyLabelText, name: propertyName } =
-      getProperty(property) || {};
+    const { label: propertyLabelText } = getProperty(property) || {};
     const propLabelOverride = useText(propertyLabelOverride);
     const propertyLabel = propLabelOverride || propertyLabelText;
     const labelText = property ? propertyLabel : label;
 
     const actionInput = getActionInput(actionInputId);
     const value = currentValue;
-    const formComponentName = propertyName || (actionInput && actionInput.name);
 
     const { name: labelName } = getProperty(labelProp) || {};
     const { name: propName } = getProperty(valueProp) || {};
