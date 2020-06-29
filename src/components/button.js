@@ -30,22 +30,6 @@
     const hasExternalLink = linkToExternal && linkToExternal.id !== '';
     const isIcon = variant === 'icon';
     const buttonContent = useText(buttonText);
-    const [isVisible, setVisible] = useState(visible);
-
-    useEffect(() => {
-      setVisible(visible);
-    }, [visible]);
-
-    useEffect(() => {
-      B.defineFunction('Show', () => {
-        setVisible(true);
-      });
-
-      B.defineFunction('Hide', () => {
-        setVisible(false);
-      });
-    }, []);
-
     const [isVisible, setIsVisible] = useState(visible);
 
     const hideButton = () => setIsVisible(false);
