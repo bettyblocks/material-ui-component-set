@@ -225,6 +225,26 @@
           },
         },
         {
+          value: '',
+          label: 'Row click',
+          key: 'linkTo',
+          type: 'ENDPOINT',
+        },
+        {
+          type: 'COLOR',
+          label: 'Row hover color',
+          key: 'backgroundRowHover',
+          value: 'Transparent',
+          configuration: {
+            condition: {
+              type: 'HIDE',
+              option: 'linkTo',
+              comparator: 'EQ',
+              value: '',
+            },
+          },
+        },
+        {
           value: ['0rem', '0rem', 'M', '0rem'],
           label: 'Outer space',
           key: 'outerSpacing',
@@ -287,6 +307,15 @@
                   { name: 'Center', value: 'center' },
                   { name: 'Right', value: 'right' },
                 ],
+              },
+            },
+            {
+              type: 'SIZE',
+              label: 'Width',
+              key: 'width',
+              value: '',
+              configuration: {
+                as: 'UNIT',
               },
             },
             {
@@ -359,6 +388,15 @@
                   { name: 'Center', value: 'center' },
                   { name: 'Right', value: 'right' },
                 ],
+              },
+            },
+            {
+              type: 'SIZE',
+              label: 'Width',
+              key: 'width',
+              value: '',
+              configuration: {
+                as: 'UNIT',
               },
             },
             {

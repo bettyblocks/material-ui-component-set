@@ -61,6 +61,10 @@
       setCurrentValue(eventValue);
     };
 
+    useEffect(() => {
+      B.defineFunction('Clear', () => setCurrentValue(''));
+    }, []);
+
     const handleClickShowPassword = () => {
       togglePassword(!showPassword);
     };

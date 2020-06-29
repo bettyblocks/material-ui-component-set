@@ -47,9 +47,9 @@
                 return (
                   <>
                     {data && (
-                      <B.GetOneProvider key={data.id} value={data}>
+                      <B.ModelProvider key={data.id} value={data} id={model}>
                         {children}
-                      </B.GetOneProvider>
+                      </B.ModelProvider>
                     )}
                   </>
                 );

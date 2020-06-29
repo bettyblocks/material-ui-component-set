@@ -31,6 +31,22 @@
     const isIcon = variant === 'icon';
     const buttonContent = useText(buttonText);
 
+    const [isVisible, setIsVisible] = useState(visible);
+
+    const hideButton = () => setIsVisible(false);
+    const showButton = () => setIsVisible(true);
+    const toggleVisibility = () => setIsVisible(s => !s);
+
+    useEffect(() => {
+      setIsVisible(visible);
+    }, [visible]);
+
+    useEffect(() => {
+      B.defineFunction('ShowButton', showButton);
+      B.defineFunction('HideButton', hideButton);
+      B.defineFunction('ToggleButtonVisibility', toggleVisibility);
+    }, []);
+
     const generalProps = {
       disabled,
       size,
@@ -44,7 +60,6 @@
     const iconButtonProps = {
       ...generalProps,
       classes: { root: classes.root },
-      classname: visible || isDev ? '' : classes.hide,
     };
 
     const buttonProps = {
@@ -56,10 +71,7 @@
         contained: classes.contained,
         outlined: classes.outlined,
       },
-      className: [
-        visible || isDev ? '' : classes.hide,
-        buttonContent ? '' : classes.empty,
-      ].join(' '),
+      className: !!buttonContent && classes.empty,
       type: isDev ? 'button' : type,
     };
 
@@ -120,11 +132,10 @@
       );
     }
 
-    return isDev ? (
-      <div className={classes.wrapper}>{ButtonComponent}</div>
-    ) : (
-      ButtonComponent
-    );
+    if (isDev) {
+      return <div className={classes.wrapper}>{ButtonComponent}</div>;
+    }
+    return isVisible ? ButtonComponent : <></>;
   })(),
   styles: B => t => {
     const style = new B.Styling(t);
@@ -161,7 +172,7 @@
           marginLeft: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[3]),
 
-          [`@media ${B.mediaMinWidth(768)}`]: {
+          [`@media ${B.mediaMinWidth(600)}`]: {
             width: ({ options: { fullWidth, outerSpacing } }) => {
               if (!fullWidth) return 'auto';
               const marginRight = getSpacing(outerSpacing[1], 'Portrait');
@@ -177,7 +188,7 @@
             marginLeft: ({ options: { outerSpacing } }) =>
               getSpacing(outerSpacing[3], 'Portrait'),
           },
-          [`@media ${B.mediaMinWidth(1024)}`]: {
+          [`@media ${B.mediaMinWidth(960)}`]: {
             width: ({ options: { fullWidth, outerSpacing } }) => {
               if (!fullWidth) return 'auto';
               const marginRight = getSpacing(outerSpacing[1], 'Landscape');
@@ -193,7 +204,7 @@
             marginLeft: ({ options: { outerSpacing } }) =>
               getSpacing(outerSpacing[3], 'Landscape'),
           },
-          [`@media ${B.mediaMinWidth(1200)}`]: {
+          [`@media ${B.mediaMinWidth(1280)}`]: {
             width: ({ options: { fullWidth, outerSpacing } }) => {
               if (!fullWidth) return 'auto';
               const marginRight = getSpacing(outerSpacing[1], 'Desktop');
@@ -234,9 +245,6 @@
         '&::before': {
           content: '"\xA0"',
         },
-      },
-      hide: {
-        display: 'none',
       },
     };
   },
