@@ -73,6 +73,7 @@
         display: ({ options: { type } }) =>
           type === 'circular' ? 'inline-block' : 'block',
         padding: '0.25rem 0',
+        width: ({ options: { type } }) => type !== 'circular' && '100%',
       },
       normalBackgroundColor: {
         backgroundColor: ({ options: { color } }) => [
@@ -105,6 +106,7 @@
         ],
       },
       root: {
+        width: ({ options: { type } }) => type !== 'circular' && '100%',
         marginTop: ({ options: { outerSpacing } }) =>
           getSpacing(outerSpacing[0]),
         marginRight: ({ options: { outerSpacing } }) =>

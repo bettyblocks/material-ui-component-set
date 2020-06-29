@@ -1,3 +1,17 @@
+# [1.14.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.13.1...v1.14.0) (2020-06-29)
+
+
+### Bug Fixes
+
+* added CONTAINER_COMPONENT to allowed types ([6471cf0](https://github.com/bettyblocks/material-ui-component-set/commit/6471cf0a0ea6445736275d4c8e886db990911921))
+* removed unnesc argument ([c3d02c1](https://github.com/bettyblocks/material-ui-component-set/commit/c3d02c16dfb34ff6abc4288d07907d5016a17396))
+
+
+### Features
+
+* made tabs optional and added functions ([49e115a](https://github.com/bettyblocks/material-ui-component-set/commit/49e115a2a67f8e3ef85d0126d815bdcf62ff3015))
+* removed box from tab to remove inner space ([6a892a3](https://github.com/bettyblocks/material-ui-component-set/commit/6a892a3ed4f1f53570a0a757092fb97a7f4917b4))
+
 ## [1.13.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.13.0...v1.13.1) (2020-06-29)
 
 
