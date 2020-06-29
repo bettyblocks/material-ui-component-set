@@ -14,9 +14,8 @@
       sortable,
     } = options;
     const { headerOnly, handleSort, orderBy } = parent || {};
-    const propertyId = Array.isArray(property)
-      ? property[property.length - 1]
-      : property;
+    const propertyArray = [property].flat();
+    const propertyId = propertyArray[propertyArray.length - 1];
     const { name: propertyName, label: propertyLabel } =
       getProperty(propertyId) || {};
     const { field, order = 'asc' } = orderBy || {};
@@ -48,6 +47,17 @@
       handleSort(prop, sortOrder);
     };
 
+    const isFilterSelected = fields => {
+      if (!fields || fields.length !== propertyArray.length) return false;
+
+      // eslint-disable-next-line no-plusplus
+      for (let index = 0; index < fields.length; index++) {
+        if (fields[index] !== propertyArray[index]) return false;
+      }
+
+      return true;
+    };
+
     const Content =
       children.length > 0 ? (
         children
@@ -58,9 +68,9 @@
     const Header = isSortable ? (
       <TableSortLabel
         classes={{ root: classes.columnSort }}
-        active={field === propertyName}
-        direction={field === propertyName && order ? order : 'asc'}
-        onClick={() => createSortHandler(propertyName)}
+        active={isFilterSelected(field)}
+        direction={isFilterSelected(field) && order ? order : 'asc'}
+        onClick={() => createSortHandler(propertyArray)}
       >
         <span className={classes.columnHeader}>{columnHeaderText}</span>
       </TableSortLabel>

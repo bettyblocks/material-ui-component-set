@@ -220,9 +220,8 @@
       );
     }
 
-    // const { name: orderProp } = getProperty(orderProperty) || {};
     const [orderBy, setOrderBy] = React.useState({
-      field: orderProperty || null,
+      field: [orderProperty].flat() || null,
       order: orderProperty ? sortOrder : null,
     });
     const searchPropertyArray = [searchProperty].flat();
