@@ -310,6 +310,15 @@
               },
             },
             {
+              type: 'SIZE',
+              label: 'Width',
+              key: 'width',
+              value: '',
+              configuration: {
+                as: 'UNIT',
+              },
+            },
+            {
               type: 'COLOR',
               label: 'Background',
               key: 'background',
@@ -379,6 +388,15 @@
                   { name: 'Center', value: 'center' },
                   { name: 'Right', value: 'right' },
                 ],
+              },
+            },
+            {
+              type: 'SIZE',
+              label: 'Width',
+              key: 'width',
+              value: '',
+              configuration: {
+                as: 'UNIT',
               },
             },
             {

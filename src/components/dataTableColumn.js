@@ -14,8 +14,11 @@
       sortable,
     } = options;
     const { headerOnly, handleSort, orderBy } = parent || {};
+    const propertyId = Array.isArray(property)
+      ? property[property.length - 1]
+      : property;
     const { name: propertyName, label: propertyLabel } =
-      getProperty(property) || {};
+      getProperty(propertyId) || {};
     const { field, order = 'asc' } = orderBy || {};
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
@@ -95,6 +98,7 @@
       tableColumn: {
         display: 'table-cell',
         verticalAlign: 'middle',
+        width: ({ options: { width } }) => width || 'auto',
         '& > div': {
           display: 'block',
         },
@@ -115,6 +119,7 @@
       },
       root: {
         display: isDev && ['block', '!important'],
+        width: ({ options: { width } }) => width || 'auto',
         backgroundColor: ({ options: { background } }) => [
           style.getColor(background),
           '!important',

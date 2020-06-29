@@ -61,6 +61,15 @@
           },
         },
         {
+          type: 'SIZE',
+          label: 'Width',
+          key: 'width',
+          value: '',
+          configuration: {
+            as: 'UNIT',
+          },
+        },
+        {
           type: 'COLOR',
           label: 'Background',
           key: 'background',
