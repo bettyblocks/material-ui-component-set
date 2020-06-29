@@ -1,3 +1,10 @@
+## [1.13.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.13.0...v1.13.1) (2020-06-29)
+
+
+### Bug Fixes
+
+* hide button when visible is unchecked ([fb641ae](https://github.com/bettyblocks/material-ui-component-set/commit/fb641ae17f39903f876d6fbf9bdcab8a8c52fdcd))
+
 # [1.13.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.12.0...v1.13.0) (2020-06-24)
 
 
