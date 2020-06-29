@@ -50,24 +50,6 @@
     const takeNum = parseInt(take, 10);
     const [rowsPerPage, setRowsPerPage] = React.useState(takeNum);
     const [search, setSearch] = React.useState('');
-    const { name: orderProp } = getProperty(orderProperty) || {};
-    const [orderBy, setOrderBy] = React.useState({
-      field: orderProp || null,
-      order: orderProp ? sortOrder : null,
-    });
-    const searchPropertyArray = [searchProperty].flat();
-    const { label: searchPropertyLabel = '{property}' } =
-      getProperty(searchPropertyArray[searchPropertyArray.length - 1]) || {};
-    const [variables, setVariables] = React.useState(
-      orderProp
-        ? {
-            sort: {
-              field: orderProp,
-              order: sortOrder.toUpperCase(),
-            },
-          }
-        : {},
-    );
     const titleText = useText(title);
     const hasToolbar = titleText || searchProperty;
     const elevationLevel = variant === 'flat' ? 0 : elevation;
@@ -238,6 +220,36 @@
       );
     }
 
+    // const { name: orderProp } = getProperty(orderProperty) || {};
+    const [orderBy, setOrderBy] = React.useState({
+      field: orderProperty || null,
+      order: orderProperty ? sortOrder : null,
+    });
+    const searchPropertyArray = [searchProperty].flat();
+    const { label: searchPropertyLabel = '{property}' } =
+      getProperty(searchPropertyArray[searchPropertyArray.length - 1]) || {};
+    const createSortObject = (fields, order) => {
+      const fieldsArray = [fields].flat();
+      const sort = {};
+      fieldsArray.reduce((acc, item, index) => {
+        const prop = getProperty(item);
+        // eslint-disable-next-line no-return-assign
+        return (acc[prop.name] =
+          index !== fieldsArray.length - 1 ? {} : order.toUpperCase());
+      }, sort);
+
+      return sort;
+    };
+    const [variables, setVariables] = React.useState(
+      orderProperty
+        ? {
+            sort: {
+              relation: createSortObject(orderProperty, sortOrder),
+            },
+          }
+        : {},
+    );
+
     const handleChangePage = (_, newPage) => {
       setPage(newPage);
     };
@@ -251,8 +263,7 @@
       setOrderBy({ field, order: newOrder });
       setVariables({
         sort: {
-          field,
-          order: newOrder.toUpperCase(),
+          relation: createSortObject(field, newOrder),
         },
       });
     };
