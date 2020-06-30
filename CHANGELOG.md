@@ -1,3 +1,17 @@
+## [1.14.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.14.1...v1.14.2) (2020-06-29)
+
+
+### Bug Fixes
+
+* register interactions when option type is data ([fe3ea85](https://github.com/bettyblocks/material-ui-component-set/commit/fe3ea857f9f7babb26e635fecd0407d19bf26760))
+
+## [1.14.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.14.0...v1.14.1) (2020-06-29)
+
+
+### Bug Fixes
+
+* set the progress to 100 percent of container if it's linear ([765bf53](https://github.com/bettyblocks/material-ui-component-set/commit/765bf535e05bdd248096be5a440f68384f461963))
+
 # [1.14.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.13.1...v1.14.0) (2020-06-29)
 
 
