@@ -16,6 +16,8 @@
           hidePagination,
           type,
           model,
+          orderBy,
+          order,
         } = options;
         const { TextField, InputAdornment } = window.MaterialUI.Core;
         const { Search } = window.MaterialUI.Icons;
@@ -108,6 +110,18 @@
           return deepMerge(target, ...sources);
         };
 
+        const orderByArray = [orderBy].flat();
+        const sort = {};
+
+        if (!isDev && orderBy) {
+          orderByArray.reduce((acc, property, index) => {
+            const prop = getProperty(property);
+            // eslint-disable-next-line no-return-assign
+            return (acc[prop.name] =
+              index !== orderByArray.length - 1 ? {} : order.toUpperCase());
+          }, sort);
+        }
+
         const canvasLayout = () => {
           if (!model) {
             return builderLayout();
@@ -158,6 +172,15 @@
                 rawFilter={where}
                 skip={page ? (page - 1) * rowsPerPage : 0}
                 take={rowsPerPage}
+                __SECRET_VARIABLES_DO_NOT_USE={
+                  orderBy
+                    ? {
+                        sort: {
+                          relation: sort,
+                        },
+                      }
+                    : {}
+                }
               >
                 {({ loading, error, data }) => {
                   if (loading) return <div className={classes.skeleton} />;

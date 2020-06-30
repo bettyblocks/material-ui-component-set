@@ -31,6 +31,35 @@
           },
         },
         {
+          type: 'PROPERTY',
+          label: 'Order by',
+          key: 'orderBy',
+          value: '',
+          configuration: {
+            dependsOn: 'model',
+          },
+        },
+        {
+          type: 'CUSTOM',
+          label: 'Order',
+          key: 'order',
+          value: 'asc',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            condition: {
+              type: 'HIDE',
+              option: 'orderBy',
+              comparator: 'EQ',
+              value: '',
+            },
+            allowedInput: [
+              { name: 'Ascending', value: 'asc' },
+              { name: 'Descending', value: 'desc' },
+            ],
+          },
+        },
+        {
           value: '5',
           label: 'Rows per page (max 50)',
           key: 'take',
