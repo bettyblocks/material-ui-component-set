@@ -76,10 +76,13 @@
 
     const { files, data } = uploads;
 
-    const [uploadFile, { loading, error: uploadError } = {}] = useFileUpload({
+    const [uploadFile, { loading } = {}] = useFileUpload({
       options: {
         variables: {
           fileList: Array.from(files),
+        },
+        onError: errorData => {
+          B.triggerEvent('onError', errorData.message);
         },
         onCompleted: uploadData => {
           const { uploadFiles } = uploadData;
@@ -98,15 +101,6 @@
         ...uploads,
         data: newList,
       });
-    };
-
-    const trigger = (loadingFiles, errorFiles) => {
-      if (loadingFiles) {
-        B.triggerEvent('onLoad');
-      }
-      if (errorFiles) {
-        B.triggerEvent('onError', errorFiles.message);
-      }
     };
 
     const UploadComponent = (
@@ -184,7 +178,7 @@
           </Children>
         </div>
         <div className={classes.messageContainer}>
-          {trigger(loading, uploadError)}
+          {loading && B.triggerEvent('onLoad')}
           {data.map(file => (
             <div className={classes.fileList}>
               <Typography variant="body1" noWrap className={classes.span}>
