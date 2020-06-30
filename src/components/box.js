@@ -4,9 +4,11 @@
   allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
+    const { loading: parentLoading } = parent || {};
     const { Box } = window.MaterialUI.Core;
     const { alignment } = options;
-    const isDev = B.env === 'dev';
+    const { env, Children } = B;
+    const isDev = env === 'dev';
     const isEmpty = children.length === 0;
     const isPristine = isDev && isEmpty;
     const isFlex = alignment !== 'none';
@@ -26,7 +28,11 @@
         ].join(' ')}
         {...boxOptions}
       >
-        {isPristine ? 'Box' : children}
+        {isPristine ? (
+          'Box'
+        ) : (
+          <Children loading={parentLoading}>{children}</Children>
+        )}
       </Box>
     );
 

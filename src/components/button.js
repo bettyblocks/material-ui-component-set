@@ -22,8 +22,8 @@
       actionId,
       buttonText,
     } = options;
-
-    const { env, useText } = B;
+    const { loading: parentLoading } = parent || {};
+    const { env, useText, Action } = B;
     const isDev = env === 'dev';
     const isAction = linkType === 'action';
     const hasLink = linkTo && linkTo.id !== '';
@@ -32,7 +32,7 @@
     const buttonContent = useText(buttonText);
 
     const generalProps = {
-      disabled,
+      disabled: disabled || parentLoading,
       size,
       tabindex: isDev && -1,
       href:
@@ -63,6 +63,8 @@
       type: isDev ? 'button' : type,
     };
 
+    const Loader = <CircularProgress size={16} className={classes.loader} />;
+
     let ButtonComponent = (
       <Button
         {...buttonProps}
@@ -84,14 +86,13 @@
               fontSize: size,
             })
           : buttonContent}
+        {parentLoading && Loader}
       </Button>
     );
 
-    const Loader = <CircularProgress size={16} className={classes.loader} />;
-
     if (isAction) {
       ButtonComponent = (
-        <B.Action actionId={actionId}>
+        <Action actionId={actionId}>
           {(callAction, { loading }) => {
             const onClickAction = event => {
               event.preventDefault();
@@ -116,7 +117,7 @@
               </Button>
             );
           }}
-        </B.Action>
+        </Action>
       );
     }
 
