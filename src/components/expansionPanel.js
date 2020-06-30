@@ -61,7 +61,7 @@
       defaultExpanded,
       square,
       variant,
-      elevation,
+      elevation: variant === 'flat' ? 0 : elevation,
       expanded,
       onClick,
     };
