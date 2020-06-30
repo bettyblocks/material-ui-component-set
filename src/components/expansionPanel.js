@@ -31,9 +31,9 @@
     const togglePanel = () => setExpanded(s => !s);
 
     useEffect(() => {
-      B.defineFunction('OpenPanel', openPanel);
-      B.defineFunction('ClosePanel', closePanel);
-      B.defineFunction('TogglePanel', togglePanel);
+      B.defineFunction('Expand', openPanel);
+      B.defineFunction('Collapse', closePanel);
+      B.defineFunction('Expand/Collapse', togglePanel);
     }, []);
 
     useEffect(() => {
@@ -61,7 +61,7 @@
       defaultExpanded,
       square,
       variant,
-      elevation,
+      elevation: variant === 'flat' ? 0 : elevation,
       expanded,
       onClick,
     };
