@@ -1,3 +1,10 @@
+## [1.14.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.14.3...v1.14.4) (2020-06-30)
+
+
+### Bug Fixes
+
+* hide vertical line for a horizontal stepper ([33cceba](https://github.com/bettyblocks/material-ui-component-set/commit/33cceba49f6031ce2f400c623722cbd82b7b4151))
+
 ## [1.14.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.14.2...v1.14.3) (2020-06-30)
 
 
