@@ -13,7 +13,7 @@
           type: 'PROPERTY',
         },
         {
-          value: ['Label'],
+          value: ['Select file(s)...'],
           label: 'Label',
           key: 'label',
           type: 'VARIABLE',
@@ -39,22 +39,6 @@
               comparator: 'EQ',
               value: '',
             },
-          },
-        },
-        {
-          label: 'Label Position',
-          key: 'position',
-          value: 'top',
-          type: 'CUSTOM',
-          configuration: {
-            as: 'BUTTONGROUP',
-            dataType: 'string',
-            allowedInput: [
-              { name: 'Start', value: 'start' },
-              { name: 'End', value: 'end' },
-              { name: 'Top', value: 'top' },
-              { name: 'Bottom', value: 'bottom' },
-            ],
           },
         },
         {
