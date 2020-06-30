@@ -43,6 +43,7 @@
     const { getActionInput, useText, env, getProperty } = B;
     const isDev = env === 'dev';
     const [currentValue, setCurrentValue] = useState(useText(defaultValue));
+    const [isDisabled, setIsDisabled] = useState(disabled);
     const [showPassword, togglePassword] = useState(false);
     const [errorState, setErrorState] = useState(error);
     const [afterFirstInvalidion, setAfterFirstInvalidion] = useState(false);
@@ -88,7 +89,9 @@
 
     useEffect(() => {
       B.defineFunction('Clear', () => setCurrentValue(''));
+      B.defineFunction('Disable', () => setIsDisabled(true));
     }, []);
+
     const blurHandler = event => {
       setErrorState(!event.target.validity.valid);
       // eslint-disable-next-line no-unused-expressions
@@ -152,7 +155,7 @@
         size={size}
         fullWidth={fullWidth}
         required={required}
-        disabled={disabled}
+        disabled={isDisabled}
         margin={margin}
         error={errorState}
       >
