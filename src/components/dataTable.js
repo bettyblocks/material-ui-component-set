@@ -54,6 +54,9 @@
     const hasToolbar = titleText || searchProperty;
     const elevationLevel = variant === 'flat' ? 0 : elevation;
     const hasLink = linkTo && linkTo.id !== '';
+    const searchPropertyArray = [searchProperty].flat();
+    const { label: searchPropertyLabel = '{property}' } =
+      getProperty(searchPropertyArray[searchPropertyArray.length - 1]) || {};
 
     if (isDev) {
       const repeaterRef = React.createRef();
@@ -224,9 +227,6 @@
       field: [orderProperty].flat() || null,
       order: orderProperty ? sortOrder : null,
     });
-    const searchPropertyArray = [searchProperty].flat();
-    const { label: searchPropertyLabel = '{property}' } =
-      getProperty(searchPropertyArray[searchPropertyArray.length - 1]) || {};
     const createSortObject = (fields, order) => {
       const fieldsArray = [fields].flat();
       const sort = {};
