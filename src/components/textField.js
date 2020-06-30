@@ -45,6 +45,7 @@
     const [currentValue, setCurrentValue] = useState(useText(defaultValue));
     const [showPassword, togglePassword] = useState(false);
     const [errorState, setErrorState] = useState(error);
+    const [afterFirstInvalidion, setAfterFirstInvalidion] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
 
     const validationMessage = validityObject => {
@@ -76,7 +77,7 @@
         target: { value: eventValue },
       } = event;
 
-      if (errorState) {
+      if (afterFirstInvalidion) {
         setErrorState(!event.target.validity.valid);
         setHelper(validationMessage(event.target.validity));
       }
@@ -89,12 +90,16 @@
     }, []);
     const blurHandler = event => {
       setErrorState(!event.target.validity.valid);
+      // eslint-disable-next-line no-unused-expressions
+      !event.target.validity.valid && setAfterFirstInvalidion(true);
       setHelper(validationMessage(event.target.validity));
     };
 
     const invalidHandler = event => {
       event.preventDefault();
       setErrorState(!event.target.validity.valid);
+      // eslint-disable-next-line no-unused-expressions
+      !event.target.validity.valid && setAfterFirstInvalidion(true);
       setHelper(validationMessage(event.target.validity));
     };
 
