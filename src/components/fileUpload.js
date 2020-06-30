@@ -75,22 +75,20 @@
 
     const { files, data } = uploads;
 
-    const [uploadFile, { loading, error: uploadError } = {}] = !isDev
-      ? useFileUpload({
-          options: {
-            variables: {
-              fileList: Array.from(files),
-            },
-            onCompleted: uploadData => {
-              const { uploadFiles } = uploadData;
-              setUploads({
-                ...uploads,
-                data: uploadFiles,
-              });
-            },
-          },
-        })
-      : {};
+    const [uploadFile, { loading, error: uploadError } = {}] = useFileUpload({
+      options: {
+        variables: {
+          fileList: Array.from(files),
+        },
+        onCompleted: uploadData => {
+          const { uploadFiles } = uploadData;
+          setUploads({
+            ...uploads,
+            data: uploadFiles,
+          });
+        },
+      },
+    });
 
     const UploadComponent = (
       <div
