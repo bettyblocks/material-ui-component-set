@@ -61,6 +61,7 @@
       if (validityObject.valueMissing) {
         return 'This field is required';
       }
+      return '';
     };
 
     const placeholderText = useText(placeholder);
