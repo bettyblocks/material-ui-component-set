@@ -51,15 +51,11 @@
         };
 
         const [invalid, setInvalid] = useState(false);
-        const handleInvalid = event => {
+        const handleInvalid = () => {
           if (!invalid) {
             setInvalid(true);
             B.triggerEvent('onInvalid');
           }
-        };
-
-        const handleSubmit = event => {
-          B.triggerEvent('onSubmit');
         };
 
         return (
