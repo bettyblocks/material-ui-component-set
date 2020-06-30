@@ -14,7 +14,7 @@
       Button,
     } = window.MaterialUI.Core;
     const { Icons } = window.MaterialUI;
-    const { env, useText } = B;
+    const { env, useText, Children } = B;
     const {
       activeStep: devStep,
       variant,
@@ -71,10 +71,13 @@
           orientation={type}
         >
           {React.Children.map(children, (child, index) => {
-            const { options = {} } = child.props || {};
-            const { label = ['Step'], icon = 'None' } = isDev ? {} : options;
-            const labelText = useText(label);
+            const { options: childOptions = {} } = child.props || {};
+            const {
+              label = [`Step ${index + 1}`],
+              icon = 'None',
+            } = childOptions;
             const isActive = index === currentStep;
+            const labelText = useText(label);
             const hasIcon = icon !== 'None';
             let stepProps = {};
             let labelProps = {};
@@ -84,6 +87,7 @@
                 active: true,
               };
             }
+
             const IconCmp = () =>
               hasIcon &&
               React.createElement(Icons[icon], {
@@ -99,8 +103,8 @@
                 StepIconComponent: IconCmp,
               };
             }
-            options.active = isActive;
-            options.isFirstRender = numRendersRef.current === 1;
+            childOptions.active = isActive;
+            childOptions.isFirstRender = numRendersRef.current === 1;
 
             const StepComponent = (
               <Step key={labelText} {...stepProps}>
@@ -125,9 +129,11 @@
                   </StepButton>
                 )}
 
-                <StepContent>
-                  {React.cloneElement(child, { ...options })}
-                </StepContent>
+                {type === 'vertical' && (
+                  <StepContent>
+                    {React.cloneElement(child, { ...childOptions })}
+                  </StepContent>
+                )}
               </Step>
             );
 
@@ -135,6 +141,16 @@
             return StepComponent;
           })}
         </Stepper>
+        {type === 'horizontal' && (
+          <Children>
+            {React.Children.map(children, (child, index) => {
+              const { options: childOptions = {} } = child.props || {};
+              return index === currentStep || showAllSteps
+                ? React.cloneElement(child, { ...childOptions })
+                : null;
+            })}
+          </Children>
+        )}
       </>
     );
 
