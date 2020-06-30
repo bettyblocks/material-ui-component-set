@@ -1,3 +1,10 @@
+## [1.14.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.14.2...v1.14.3) (2020-06-30)
+
+
+### Bug Fixes
+
+* make sure menu bar buttons don't change direction ([35539df](https://github.com/bettyblocks/material-ui-component-set/commit/35539dfe5b5bbbb01f73c38e3f70d0fc2ab85d3a))
+
 ## [1.14.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.14.1...v1.14.2) (2020-06-29)
 
 
