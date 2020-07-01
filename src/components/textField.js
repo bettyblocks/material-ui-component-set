@@ -25,7 +25,7 @@
       adornmentPosition,
       property,
       propertyLabelOverride,
-      passwordPattern,
+      pattern,
     } = options;
 
     const {
@@ -46,7 +46,7 @@
     const [isDisabled, setIsDisabled] = useState(disabled);
     const [showPassword, togglePassword] = useState(false);
     const [errorState, setErrorState] = useState(error);
-    const [afterFirstInvalidion, setAfterFirstInvalidion] = useState(false);
+    const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
 
     const validationMessage = validityObject => {
@@ -56,8 +56,8 @@
       if (validityObject.typeMismatch && type === 'email') {
         return 'No valid e-mail address provided';
       }
-      if (validityObject.patternMismatch && type === 'password') {
-        return 'Invalid password';
+      if (validityObject.patternMismatch) {
+        return `Invalid ${type}`;
       }
       if (validityObject.valueMissing) {
         return 'This field is required';
@@ -74,38 +74,50 @@
 
     const actionInput = getActionInput(actionInputId);
 
+    const handleValidation = validation => {
+      setErrorState(!validation.valid);
+      setHelper(validationMessage(validation));
+    };
+
     const changeHandler = event => {
       const {
-        target: { value: eventValue },
+        target: { value: eventValue, validity },
       } = event;
 
-      if (afterFirstInvalidion) {
-        setErrorState(!event.target.validity.valid);
-        setHelper(validationMessage(event.target.validity));
+      if (afterFirstInvalidation) {
+        handleValidation(validity);
       }
 
       setCurrentValue(eventValue);
+    };
+
+    const blurHandler = event => {
+      const {
+        target: {
+          validity,
+          validity: { valid: isValid },
+        },
+      } = event;
+      setAfterFirstInvalidation(!isValid);
+      handleValidation(validity);
+    };
+
+    const invalidHandler = event => {
+      event.preventDefault();
+      const {
+        target: {
+          validity,
+          validity: { valid: isValid },
+        },
+      } = event;
+      setAfterFirstInvalidation(!isValid);
+      handleValidation(validity);
     };
 
     useEffect(() => {
       B.defineFunction('Clear', () => setCurrentValue(''));
       B.defineFunction('Disable', () => setIsDisabled(true));
     }, []);
-
-    const blurHandler = event => {
-      setErrorState(!event.target.validity.valid);
-      // eslint-disable-next-line no-unused-expressions
-      !event.target.validity.valid && setAfterFirstInvalidion(true);
-      setHelper(validationMessage(event.target.validity));
-    };
-
-    const invalidHandler = event => {
-      event.preventDefault();
-      setErrorState(!event.target.validity.valid);
-      // eslint-disable-next-line no-unused-expressions
-      !event.target.validity.valid && setAfterFirstInvalidion(true);
-      setHelper(validationMessage(event.target.validity));
-    };
 
     const handleClickShowPassword = () => {
       togglePassword(!showPassword);
@@ -196,7 +208,7 @@
             )
           }
           inputProps={{
-            pattern: passwordPattern,
+            pattern,
             tabIndex: isDev && -1,
           }}
         />

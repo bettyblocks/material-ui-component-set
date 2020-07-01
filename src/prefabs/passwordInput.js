@@ -141,7 +141,7 @@
         },
         {
           label: 'Password pattern',
-          key: 'passwordPattern',
+          key: 'pattern',
           value: '(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}',
           type: 'TEXT',
         },

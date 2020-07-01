@@ -50,10 +50,10 @@
           }
         };
 
-        const [invalid, setInvalid] = useState(false);
+        const [isInvalid, setIsInvalid] = useState(false);
         const handleInvalid = () => {
-          if (!invalid) {
-            setInvalid(true);
+          if (!isInvalid) {
+            setIsInvalid(true);
             B.triggerEvent('onInvalid');
           }
         };
@@ -78,7 +78,7 @@
                   onInvalid={handleInvalid}
                   onSubmit={event => {
                     event.preventDefault();
-                    setInvalid(false);
+                    setIsInvalid(false);
                     B.triggerEvent('onSubmit');
                     const formData = new FormData(formRef.current);
                     const entries = Array.from(formData);
