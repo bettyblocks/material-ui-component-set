@@ -1,3 +1,30 @@
+# [1.15.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.14.4...v1.15.0) (2020-07-01)
+
+
+### Bug Fixes
+
+* set elevation to zero when variant is flat ([9912a33](https://github.com/bettyblocks/material-ui-component-set/commit/9912a33720997d0014b3ff765edb6f8e7cf380b5))
+
+
+### Features
+
+* add custom interactions to toggle expansion component ([d8176b2](https://github.com/bettyblocks/material-ui-component-set/commit/d8176b2bff273ed027987aa038563b956a6b92e2))
+* rename the expansion panel interactions ([42de090](https://github.com/bettyblocks/material-ui-component-set/commit/42de0904928fc566d3fd711f1594371943c02409))
+
+## [1.14.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.14.3...v1.14.4) (2020-06-30)
+
+
+### Bug Fixes
+
+* hide vertical line for a horizontal stepper ([33cceba](https://github.com/bettyblocks/material-ui-component-set/commit/33cceba49f6031ce2f400c623722cbd82b7b4151))
+
+## [1.14.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.14.2...v1.14.3) (2020-06-30)
+
+
+### Bug Fixes
+
+* make sure menu bar buttons don't change direction ([35539df](https://github.com/bettyblocks/material-ui-component-set/commit/35539dfe5b5bbbb01f73c38e3f70d0fc2ab85d3a))
+
 ## [1.14.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.14.1...v1.14.2) (2020-06-29)
 
 

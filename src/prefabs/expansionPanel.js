@@ -33,6 +33,7 @@
             as: 'BUTTONGROUP',
             dataType: 'string',
             allowedInput: [
+              { name: 'Flat', value: 'flat' },
               { name: 'Outlined', value: 'outlined' },
               { name: 'Elevation', value: 'elevation' },
             ],
