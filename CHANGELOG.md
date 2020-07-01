@@ -1,3 +1,16 @@
+# [1.15.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.14.4...v1.15.0) (2020-07-01)
+
+
+### Bug Fixes
+
+* set elevation to zero when variant is flat ([9912a33](https://github.com/bettyblocks/material-ui-component-set/commit/9912a33720997d0014b3ff765edb6f8e7cf380b5))
+
+
+### Features
+
+* add custom interactions to toggle expansion component ([d8176b2](https://github.com/bettyblocks/material-ui-component-set/commit/d8176b2bff273ed027987aa038563b956a6b92e2))
+* rename the expansion panel interactions ([42de090](https://github.com/bettyblocks/material-ui-component-set/commit/42de0904928fc566d3fd711f1594371943c02409))
+
 ## [1.14.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.14.3...v1.14.4) (2020-06-30)
 
 
