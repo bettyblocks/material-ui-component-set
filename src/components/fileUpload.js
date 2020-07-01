@@ -18,8 +18,10 @@
       FormHelperText,
       Button,
       Typography,
+      IconButton,
     } = window.MaterialUI.Core;
     const { Icons } = window.MaterialUI;
+    const { Close } = Icons;
     const {
       property,
       label,
@@ -31,7 +33,6 @@
       helperText,
       fullWidth,
       size,
-      position,
       accept,
       margin,
       variant,
@@ -60,8 +61,8 @@
 
     const handleChange = e => {
       setUploads({
+        ...uploads,
         files: e.target.files,
-        data: [],
       });
     };
 
@@ -75,29 +76,38 @@
 
     const { files, data } = uploads;
 
-    const [uploadFile, { loading, error: uploadError } = {}] = useFileUpload({
+    const [uploadFile, { loading } = {}] = useFileUpload({
       options: {
         variables: {
           fileList: Array.from(files),
         },
+        onError: errorData => {
+          B.triggerEvent('onError', errorData.message);
+        },
         onCompleted: uploadData => {
           const { uploadFiles } = uploadData;
+          B.triggerEvent('onSuccess', uploadFiles);
           setUploads({
             ...uploads,
-            data: uploadFiles,
+            data: multiple ? data.concat(uploadFiles) : uploadFiles,
           });
         },
       },
     });
 
+    const removeFileFromList = fileUrl => {
+      const newList = data.filter(d => d.url !== fileUrl);
+      setUploads({
+        ...uploads,
+        data: newList,
+      });
+    };
+
     const UploadComponent = (
       <div
-        className={[
-          classes.control,
-          fullWidth ? classes.fullwidth : '',
-          position === 'start' ? classes.start : '',
-          position === 'end' ? classes.end : '',
-        ].join(' ')}
+        className={[classes.control, fullWidth ? classes.fullwidth : ''].join(
+          ' ',
+        )}
       >
         <input
           accept={accept}
@@ -136,18 +146,13 @@
               })
             : useText(buttonText)}
         </Button>
-        <Typography variant="body1" noWrap className={classes.span}>
-          {data.length === 0 && 'Select file(s)...'}
-          {data.length === 1 && data[0].name}
-          {data.length > 1 && `Selected ${data.length} files`}
-          {data.length > 0 && (
-            <input
-              type="hidden"
-              name={actionInput && actionInput.name}
-              value={data.map(d => d.url).join(',')}
-            />
-          )}
-        </Typography>
+        {data.length > 0 && (
+          <input
+            type="hidden"
+            name={actionInput && actionInput.name}
+            value={data.map(d => d.url).join(',')}
+          />
+        )}
       </div>
     );
 
@@ -163,7 +168,7 @@
           <FormControlLabel
             control={UploadComponent}
             label={`${labelText}${requiredText}`}
-            labelPlacement={position}
+            labelPlacement="top"
             classes={{
               root: classes.label,
             }}
@@ -173,10 +178,21 @@
           </Children>
         </div>
         <div className={classes.messageContainer}>
-          {loading && <span>Uploading...</span>}
-          {uploadError && (
-            <span className={classes.error}>{uploadError.message}</span>
-          )}
+          {loading && B.triggerEvent('onLoad')}
+          {data.map(file => (
+            <div className={classes.fileList}>
+              <Typography variant="body1" noWrap className={classes.span}>
+                {file.name}
+              </Typography>
+              <IconButton
+                className={classes.remove}
+                size="small"
+                onClick={() => removeFileFromList(file.url)}
+              >
+                <Close fontSize="small" />
+              </IconButton>
+            </div>
+          ))}
         </div>
         {helper && <FormHelperText>{helper}</FormHelperText>}
       </FormControl>
@@ -207,11 +223,9 @@
         justifyContent: 'space-between',
       },
       label: {
+        marginLeft: [0, '!important'],
         pointerEvents: B.env === 'dev' && 'none',
-        alignItems: ({ options: { position } }) =>
-          position === 'top' || position === 'bottom'
-            ? ['start', '!important']
-            : 'center',
+        alignItems: ['start', '!important'],
       },
       input: {
         display: 'none',
@@ -227,14 +241,7 @@
       span: {
         flex: 1,
         textAlign: 'start',
-        marginLeft: ['1rem', '!important'],
         marginRight: ['1rem', '!important'],
-      },
-      start: {
-        marginLeft: '1rem',
-      },
-      end: {
-        marginRight: '1rem',
       },
       button: {
         color: ({ options: { variant, textColor, background } }) => [
@@ -254,8 +261,15 @@
           '!important',
         ],
       },
-      error: {
-        color: style.getColor('Danger'),
+      messageContainer: {
+        paddingTop: '1.25rem',
+      },
+      fileList: {
+        display: 'flex',
+        alignItems: 'center',
+      },
+      remove: {
+        padding: ['0.25rem', '!important'],
       },
     };
   },
