@@ -1,3 +1,10 @@
+## [1.15.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.15.0...v1.15.1) (2020-07-01)
+
+
+### Bug Fixes
+
+* trigger change event in autocomplete ([a7bf809](https://github.com/bettyblocks/material-ui-component-set/commit/a7bf809968d1368651859c12df68ce9bf4d6334b))
+
 # [1.15.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.14.4...v1.15.0) (2020-07-01)
 
 
