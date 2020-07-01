@@ -5,7 +5,7 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { List, ListItem, ListItemText } = window.MaterialUI.Core;
-    const { env, GetAll, GetOneProvider } = B;
+    const { env, GetAll, ModelProvider } = B;
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
     const isPristine = children.length === 0 && isDev;
@@ -45,7 +45,9 @@
           return (
             <List {...listArgs}>
               {results.map(value => (
-                <GetOneProvider value={value}>{children}</GetOneProvider>
+                <ModelProvider value={value} id={model}>
+                  {children}
+                </ModelProvider>
               ))}
             </List>
           );

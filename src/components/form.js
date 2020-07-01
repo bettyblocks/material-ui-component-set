@@ -109,9 +109,13 @@
 
                         return (
                           <>
-                            <B.GetOneProvider key={item.id} value={item}>
+                            <B.ModelProvider
+                              key={item.id}
+                              value={item}
+                              id={model}
+                            >
                               {children}
-                            </B.GetOneProvider>
+                            </B.ModelProvider>
                           </>
                         );
                       }}

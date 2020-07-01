@@ -1,3 +1,71 @@
+## [1.14.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.14.3...v1.14.4) (2020-06-30)
+
+
+### Bug Fixes
+
+* hide vertical line for a horizontal stepper ([33cceba](https://github.com/bettyblocks/material-ui-component-set/commit/33cceba49f6031ce2f400c623722cbd82b7b4151))
+
+## [1.14.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.14.2...v1.14.3) (2020-06-30)
+
+
+### Bug Fixes
+
+* make sure menu bar buttons don't change direction ([35539df](https://github.com/bettyblocks/material-ui-component-set/commit/35539dfe5b5bbbb01f73c38e3f70d0fc2ab85d3a))
+
+## [1.14.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.14.1...v1.14.2) (2020-06-29)
+
+
+### Bug Fixes
+
+* register interactions when option type is data ([fe3ea85](https://github.com/bettyblocks/material-ui-component-set/commit/fe3ea857f9f7babb26e635fecd0407d19bf26760))
+
+## [1.14.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.14.0...v1.14.1) (2020-06-29)
+
+
+### Bug Fixes
+
+* set the progress to 100 percent of container if it's linear ([765bf53](https://github.com/bettyblocks/material-ui-component-set/commit/765bf535e05bdd248096be5a440f68384f461963))
+
+# [1.14.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.13.1...v1.14.0) (2020-06-29)
+
+
+### Bug Fixes
+
+* added CONTAINER_COMPONENT to allowed types ([6471cf0](https://github.com/bettyblocks/material-ui-component-set/commit/6471cf0a0ea6445736275d4c8e886db990911921))
+* removed unnesc argument ([c3d02c1](https://github.com/bettyblocks/material-ui-component-set/commit/c3d02c16dfb34ff6abc4288d07907d5016a17396))
+
+
+### Features
+
+* made tabs optional and added functions ([49e115a](https://github.com/bettyblocks/material-ui-component-set/commit/49e115a2a67f8e3ef85d0126d815bdcf62ff3015))
+* removed box from tab to remove inner space ([6a892a3](https://github.com/bettyblocks/material-ui-component-set/commit/6a892a3ed4f1f53570a0a757092fb97a7f4917b4))
+
+## [1.13.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.13.0...v1.13.1) (2020-06-29)
+
+
+### Bug Fixes
+
+* hide button when visible is unchecked ([fb641ae](https://github.com/bettyblocks/material-ui-component-set/commit/fb641ae17f39903f876d6fbf9bdcab8a8c52fdcd))
+
+# [1.13.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.12.0...v1.13.0) (2020-06-24)
+
+
+### Bug Fixes
+
+* avatar width in repeated datatable columns ([067a351](https://github.com/bettyblocks/material-ui-component-set/commit/067a351d0ccf862e216c85e12455e3b8ee1664a3))
+
+
+### Features
+
+* add belongs to and width option to datatable ([56e6531](https://github.com/bettyblocks/material-ui-component-set/commit/56e653185613860db48ac2b2b41ff1a92f64dca7))
+
+# [1.12.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.11.3...v1.12.0) (2020-06-24)
+
+
+### Features
+
+* replace getOneProvider with the new ModelProvider ([2974f77](https://github.com/bettyblocks/material-ui-component-set/commit/2974f775ce3b7d14248743d9202f511d51b6818a))
+
 ## [1.11.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.11.2...v1.11.3) (2020-06-22)
 
 
