@@ -31,6 +31,22 @@
     const isIcon = variant === 'icon';
     const buttonContent = useText(buttonText);
 
+    const [isVisible, setIsVisible] = useState(visible);
+
+    const hideButton = () => setIsVisible(false);
+    const showButton = () => setIsVisible(true);
+    const toggleVisibility = () => setIsVisible(s => !s);
+
+    useEffect(() => {
+      setIsVisible(visible);
+    }, [visible]);
+
+    useEffect(() => {
+      B.defineFunction('ShowButton', showButton);
+      B.defineFunction('HideButton', hideButton);
+      B.defineFunction('ToggleButtonVisibility', toggleVisibility);
+    }, []);
+
     const generalProps = {
       disabled: disabled || parentLoading,
       size,
@@ -44,7 +60,6 @@
     const iconButtonProps = {
       ...generalProps,
       classes: { root: classes.root },
-      classname: visible || isDev ? '' : classes.hide,
     };
 
     const buttonProps = {
@@ -56,10 +71,7 @@
         contained: classes.contained,
         outlined: classes.outlined,
       },
-      className: [
-        visible || isDev ? '' : classes.hide,
-        buttonContent ? '' : classes.empty,
-      ].join(' '),
+      className: !!buttonContent && classes.empty,
       type: isDev ? 'button' : type,
     };
 
@@ -121,11 +133,10 @@
       );
     }
 
-    return isDev ? (
-      <div className={classes.wrapper}>{ButtonComponent}</div>
-    ) : (
-      ButtonComponent
-    );
+    if (isDev) {
+      return <div className={classes.wrapper}>{ButtonComponent}</div>;
+    }
+    return isVisible ? ButtonComponent : <></>;
   })(),
   styles: B => t => {
     const style = new B.Styling(t);
@@ -235,9 +246,6 @@
         '&::before': {
           content: '"\xA0"',
         },
-      },
-      hide: {
-        display: 'none',
       },
     };
   },

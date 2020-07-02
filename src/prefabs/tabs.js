@@ -101,6 +101,12 @@
           value: 'Success',
           type: 'COLOR',
         },
+        {
+          label: 'Hide visual tabs',
+          key: 'hideTabs',
+          value: false,
+          type: 'TOGGLE',
+        },
       ],
       descendants: [
         {
