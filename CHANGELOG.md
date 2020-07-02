@@ -1,3 +1,16 @@
+# [1.16.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.15.1...v1.16.0) (2020-07-02)
+
+
+### Bug Fixes
+
+* box options in all prefabs ([e392328](https://github.com/bettyblocks/material-ui-component-set/commit/e39232856360611d4d383cda3fcec65a80438187))
+* set fixed position to absolute in dev ([747f9e6](https://github.com/bettyblocks/material-ui-component-set/commit/747f9e6859384ae7702889bc3eba9338126efbcc))
+
+
+### Features
+
+* add background and positioning options to box ([45442f0](https://github.com/bettyblocks/material-ui-component-set/commit/45442f020246f192073b5455fb53e6d7cf134b82))
+
 ## [1.15.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.15.0...v1.15.1) (2020-07-01)
 
 
