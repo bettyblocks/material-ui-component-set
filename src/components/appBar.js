@@ -83,7 +83,7 @@
               <div className={classes.uncollapsed}>{children}</div>
             </>
           ) : (
-            children
+            <div>{children}</div>
           )}
         </Toolbar>
       </AppBar>

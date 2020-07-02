@@ -4,7 +4,7 @@
   allowedTypes: ['CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { env, GetAll, GetOneProvider } = B;
+    const { env, GetAll, ModelProvider } = B;
     const { Grid, Hidden } = window.MaterialUI.Core;
     const isDev = env === 'dev';
     const {
@@ -126,9 +126,9 @@
           return (
             <Grid {...gridOptions}>
               {data.results.map(item => (
-                <GetOneProvider key={item.id} value={item}>
+                <ModelProvider key={item.id} value={item} id={model}>
                   {children}
-                </GetOneProvider>
+                </ModelProvider>
               ))}
             </Grid>
           );
