@@ -9,7 +9,7 @@
         const [page, setPage] = useState(1);
         const [search, setSearch] = useState('');
         const [isTyping, setIsTyping] = useState(false);
-        const { filter, hidePagination, type } = options;
+        const { filter, hidePagination, type, model } = options;
 
         const take = parseInt(options.take, 10) || 50;
         const searchProp = B.getProperty(options.searchProperty);
@@ -52,7 +52,7 @@
               ))}
             </div>
             <div className={classes.footer}>
-              {(isDev || options.model) && !hidePagination && (
+              {(isDev || model) && !hidePagination && (
                 <Pagination totalCount={0} resultCount={take} currentPage={1} />
               )}
             </div>
@@ -60,13 +60,13 @@
         );
 
         const canvasLayout = () => {
-          if (!options.model) {
+          if (!model) {
             return builderLayout();
           }
 
           return (
             <B.GetAll
-              modelId={options.model}
+              modelId={model}
               filter={
                 searchProp && search !== ''
                   ? { ...filter, [searchProp.id]: { matches: search } }
@@ -94,9 +94,9 @@
                     </div>
                     <div className={type === 'grid' ? classes.grid : ''}>
                       {data.results.map(item => (
-                        <B.GetOneProvider key={item.id} value={item}>
+                        <B.ModelProvider key={item.id} value={item} id={model}>
                           {children}
-                        </B.GetOneProvider>
+                        </B.ModelProvider>
                       ))}
                     </div>
                     <div className={classes.footer}>

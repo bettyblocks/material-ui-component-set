@@ -118,6 +118,7 @@
     const onChange = (_, newValue) => {
       if (!valueProp || !newValue) {
         setCurrentValue(newValue);
+        B.triggerEvent('OnChange');
         return;
       }
       let newCurrentValue = newValue[valueProp.name];
@@ -125,6 +126,7 @@
         newCurrentValue = newValue.map(rec => rec[valueProp.name]);
       }
       setCurrentValue(newCurrentValue);
+      B.triggerEvent('OnChange');
     };
 
     const getDefaultValue = records => {

@@ -10,7 +10,7 @@
       GetAll,
       getProperty,
       useText,
-      GetOneProvider,
+      ModelProvider,
       useEndpoint,
     } = B;
     const {
@@ -411,7 +411,7 @@
                       </TableHead>
                       <TableBody>
                         {results.map(value => (
-                          <GetOneProvider value={value}>
+                          <ModelProvider value={value} id={model}>
                             <TableRow
                               key={value[0]}
                               classes={{ root: classes.bodyRow }}
@@ -420,7 +420,7 @@
                             >
                               {children}
                             </TableRow>
-                          </GetOneProvider>
+                          </ModelProvider>
                         ))}
                       </TableBody>
                     </Table>
