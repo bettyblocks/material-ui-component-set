@@ -64,7 +64,7 @@
     const elevationLevel = variant === 'flat' ? 0 : elevation;
 
     useEffect(() => {
-      B.defineFunction('Set search text', event => {
+      B.defineFunction('SetSearchValue', event => {
         setSearch(event.target.value);
       });
     }, []);
