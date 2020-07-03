@@ -22,7 +22,6 @@
       actionId,
       buttonText,
     } = options;
-    const { loading: parentLoading } = parent || {};
     const { env, useText, Action } = B;
     const isDev = env === 'dev';
     const isAction = linkType === 'action';
@@ -32,11 +31,12 @@
     const buttonContent = useText(buttonText);
 
     const [isVisible, setIsVisible] = useState(visible);
+    const [isLoading, setIsLoading] = useState(false);
 
     const hideButton = () => setIsVisible(false);
     const showButton = () => setIsVisible(true);
     const toggleVisibility = () => setIsVisible(s => !s);
-
+    const toggleLoading = () => setIsLoading(loading => !loading);
     useEffect(() => {
       setIsVisible(visible);
     }, [visible]);
@@ -45,10 +45,11 @@
       B.defineFunction('ShowButton', showButton);
       B.defineFunction('HideButton', hideButton);
       B.defineFunction('ToggleButtonVisibility', toggleVisibility);
+      B.defineFunction('ToggleLoadingState', toggleLoading);
     }, []);
 
     const generalProps = {
-      disabled: disabled || parentLoading,
+      disabled: disabled || isLoading,
       size,
       tabindex: isDev && -1,
       href:
@@ -98,7 +99,7 @@
               fontSize: size,
             })
           : buttonContent}
-        {parentLoading && Loader}
+        {isLoading && Loader}
       </Button>
     );
 
@@ -157,6 +158,11 @@
           style.getColor(variant === 'icon' ? background : textColor),
           '!important',
         ],
+        '&.MuiButton-contained.Mui-disabled': {
+          color: ['rgba(0, 0, 0, 0.26)', '!important'],
+          boxShadow: ['none', '!important'],
+          backgroundColor: ['rgba(0, 0, 0, 0.12)', '!important'],
+        },
         '&.MuiButton-root, &.MuiIconButton-root': {
           width: ({ options: { fullWidth, outerSpacing } }) => {
             if (!fullWidth) return 'auto';

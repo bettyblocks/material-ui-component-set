@@ -31,7 +31,6 @@
         const trigger = (data, loading, error) => {
           if (data) {
             B.triggerEvent('onSuccess', data);
-
             if (hasRedirect) {
               if (redirectTo === location.pathname) {
                 history.go(0);
