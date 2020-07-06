@@ -7,7 +7,7 @@
       name: 'Box',
       options: [
         {
-          value: 'flex-start',
+          value: 'none',
           label: 'Alignment',
           key: 'alignment',
           type: 'CUSTOM',
@@ -36,9 +36,30 @@
           type: 'COLOR',
         },
         {
+          value: 100,
+          label: 'Background color opacity',
+          key: 'backgroundColorAlpha',
+          type: 'NUMBER',
+        },
+        {
+          value: false,
+          label: 'Transparent',
+          key: 'transparent',
+          type: 'TOGGLE',
+        },
+        {
           type: 'SIZE',
           label: 'Height',
           key: 'height',
+          value: '',
+          configuration: {
+            as: 'UNIT',
+          },
+        },
+        {
+          type: 'SIZE',
+          label: 'Width',
+          key: 'width',
           value: '',
           configuration: {
             as: 'UNIT',
@@ -55,6 +76,224 @@
           label: 'Inner space',
           key: 'innerSpacing',
           type: 'SIZES',
+        },
+        {
+          value: false,
+          label: 'Show positioning options',
+          key: 'positioningOptions',
+          type: 'TOGGLE',
+        },
+        {
+          value: 'relative',
+          label: 'Position',
+          key: 'position',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Static', value: 'static' },
+              { name: 'Relative', value: 'relative' },
+              { name: 'Absolute', value: 'absolute' },
+              { name: 'Fixed', value: 'fixed' },
+              { name: 'Sticky', value: 'sticky' },
+            ],
+            condition: {
+              type: 'SHOW',
+              option: 'positioningOptions',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'SIZE',
+          label: 'Top position',
+          key: 'top',
+          value: '',
+          configuration: {
+            as: 'UNIT',
+            condition: {
+              type: 'SHOW',
+              option: 'positioningOptions',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'SIZE',
+          label: 'Right position',
+          key: 'right',
+          value: '',
+          configuration: {
+            as: 'UNIT',
+            condition: {
+              type: 'SHOW',
+              option: 'positioningOptions',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'SIZE',
+          label: 'Bottom position',
+          key: 'bottom',
+          value: '',
+          configuration: {
+            as: 'UNIT',
+            condition: {
+              type: 'SHOW',
+              option: 'positioningOptions',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'SIZE',
+          label: 'Left position',
+          key: 'left',
+          value: '',
+          configuration: {
+            as: 'UNIT',
+            condition: {
+              type: 'SHOW',
+              option: 'positioningOptions',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          value: false,
+          label: 'Show background options',
+          key: 'backgroundOptions',
+          type: 'TOGGLE',
+        },
+        {
+          value: [''],
+          label: 'Background url',
+          key: 'backgroundUrl',
+          type: 'VARIABLE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'backgroundOptions',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          value: 'initial',
+          label: 'Background size',
+          key: 'backgroundSize',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Initial', value: 'initial' },
+              { name: 'Contain', value: 'contain' },
+              { name: 'Cover', value: 'cover' },
+            ],
+            condition: {
+              type: 'SHOW',
+              option: 'backgroundOptions',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          value: 'no-repeat',
+          label: 'Background repeat',
+          key: 'backgroundRepeat',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'None', value: 'no-repeat' },
+              { name: 'X', value: 'repeat-x' },
+              { name: 'Y', value: 'repeat-y' },
+              { name: 'All', value: 'repeat' },
+            ],
+            condition: {
+              type: 'SHOW',
+              option: 'backgroundOptions',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          value: 'Transparent',
+          label: 'Border color',
+          key: 'borderColor',
+          type: 'COLOR',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'backgroundOptions',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'SIZE',
+          label: 'Border thickness',
+          key: 'borderWidth',
+          value: '',
+          configuration: {
+            as: 'UNIT',
+            condition: {
+              type: 'SHOW',
+              option: 'backgroundOptions',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          value: 'solid',
+          label: 'Border style',
+          key: 'borderStyle',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'None', value: 'none' },
+              { name: 'Solid', value: 'solid' },
+              { name: 'Dashed', value: 'dashed' },
+              { name: 'Dotted', value: 'dotted' },
+            ],
+            condition: {
+              type: 'SHOW',
+              option: 'backgroundOptions',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'SIZE',
+          label: 'Border radius',
+          key: 'borderRadius',
+          value: '',
+          configuration: {
+            as: 'UNIT',
+            condition: {
+              type: 'SHOW',
+              option: 'backgroundOptions',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
         },
       ],
       descendants: [],
