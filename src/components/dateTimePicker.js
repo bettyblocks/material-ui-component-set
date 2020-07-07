@@ -45,8 +45,8 @@
       getProperty(property) || {};
     const propLabelOverride = useText(propertyLabelOverride);
     const propertyLabel = propLabelOverride || propertyLabelText;
-    const labelText = property ? propertyLabel : label;
     const formComponentName = propertyName || (actionInput && actionInput.name);
+    const labelText = property ? propertyLabel : useText(label);
 
     const isValidDate = date => date instanceof Date && !isNaN(date);
 

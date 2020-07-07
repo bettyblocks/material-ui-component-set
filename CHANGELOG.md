@@ -1,3 +1,43 @@
+# [1.16.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.15.1...v1.16.0) (2020-07-02)
+
+
+### Bug Fixes
+
+* box options in all prefabs ([e392328](https://github.com/bettyblocks/material-ui-component-set/commit/e39232856360611d4d383cda3fcec65a80438187))
+* set fixed position to absolute in dev ([747f9e6](https://github.com/bettyblocks/material-ui-component-set/commit/747f9e6859384ae7702889bc3eba9338126efbcc))
+
+
+### Features
+
+* add background and positioning options to box ([45442f0](https://github.com/bettyblocks/material-ui-component-set/commit/45442f020246f192073b5455fb53e6d7cf134b82))
+
+## [1.15.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.15.0...v1.15.1) (2020-07-01)
+
+
+### Bug Fixes
+
+* trigger change event in autocomplete ([a7bf809](https://github.com/bettyblocks/material-ui-component-set/commit/a7bf809968d1368651859c12df68ce9bf4d6334b))
+
+# [1.15.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.14.4...v1.15.0) (2020-07-01)
+
+
+### Bug Fixes
+
+* set elevation to zero when variant is flat ([9912a33](https://github.com/bettyblocks/material-ui-component-set/commit/9912a33720997d0014b3ff765edb6f8e7cf380b5))
+
+
+### Features
+
+* add custom interactions to toggle expansion component ([d8176b2](https://github.com/bettyblocks/material-ui-component-set/commit/d8176b2bff273ed027987aa038563b956a6b92e2))
+* rename the expansion panel interactions ([42de090](https://github.com/bettyblocks/material-ui-component-set/commit/42de0904928fc566d3fd711f1594371943c02409))
+
+## [1.14.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.14.3...v1.14.4) (2020-06-30)
+
+
+### Bug Fixes
+
+* hide vertical line for a horizontal stepper ([33cceba](https://github.com/bettyblocks/material-ui-component-set/commit/33cceba49f6031ce2f400c623722cbd82b7b4151))
+
 ## [1.14.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.14.2...v1.14.3) (2020-06-30)
 
 
