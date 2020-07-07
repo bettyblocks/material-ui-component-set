@@ -14,14 +14,16 @@
       sortable,
     } = options;
     const { headerOnly, handleSort, orderBy } = parent || {};
-    const propertyId = Array.isArray(property)
-      ? property[property.length - 1]
-      : property;
+    const isRelation = Array.isArray(property);
+    const getRelationNameByList = prop => prop.map(p => getProperty(p).name);
+    const isDev = env === 'dev';
+    const isEmpty = children.length === 0;
+    const relationPath =
+      isRelation && !isDev ? getRelationNameByList(property) : '';
+    const propertyId = isRelation ? property[property.length - 1] : property;
     const { name: propertyName, label: propertyLabel } =
       getProperty(propertyId) || {};
     const { field, order = 'asc' } = orderBy || {};
-    const isDev = env === 'dev';
-    const isEmpty = children.length === 0;
     const contentPlaceholder = isDev && isEmpty ? 'Select property' : '\u00A0';
 
     const bodyText = useText(content);
@@ -45,7 +47,7 @@
 
     const createSortHandler = prop => {
       const sortOrder = order === 'asc' ? 'desc' : 'asc';
-      handleSort(prop, sortOrder);
+      handleSort(prop, sortOrder, relationPath);
     };
 
     const Content =

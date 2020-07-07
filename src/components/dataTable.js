@@ -50,20 +50,42 @@
     const takeNum = parseInt(take, 10);
     const [rowsPerPage, setRowsPerPage] = React.useState(takeNum);
     const [search, setSearch] = React.useState('');
-    const { name: orderProp } = getProperty(orderProperty) || {};
+    const isRelationOrderBy = Array.isArray(orderProperty);
+    const getRelationNameByList = prop => prop.map(p => getProperty(p).name);
+    const relationOrderPath =
+      isRelationOrderBy && !isDev ? getRelationNameByList(orderProperty) : '';
+    const orderPropertyId = isRelationOrderBy
+      ? orderProperty[orderProperty.length - 1]
+      : orderProperty;
+
+    const { name: orderProp } = getProperty(orderPropertyId) || {};
     const [orderBy, setOrderBy] = React.useState({
       field: orderProp || null,
       order: orderProp ? sortOrder : null,
     });
     const { id: searchId, name: searchPropertyName = '{property}' } =
       getProperty(searchProperty) || {};
+
+    const sortOnPath = (path, order) =>
+      path.reduceRight(
+        (obj, next, i) =>
+          i === path.length - 1
+            ? { [next]: order.toUpperCase() }
+            : { [next]: obj },
+        {},
+      );
+
+    const sortOnProperty = (prop, order) => ({
+      field: prop,
+      order: order.toUpperCase(),
+    });
+
     const [variables, setVariables] = React.useState(
       orderProp
         ? {
-            sort: {
-              field: orderProp,
-              order: sortOrder.toUpperCase(),
-            },
+            sort: relationOrderPath
+              ? { relation: sortOnPath(relationOrderPath, sortOrder) }
+              : sortOnProperty(orderProp, sortOrder),
           }
         : {},
     );
@@ -246,14 +268,17 @@
       setPage(0);
     };
 
-    const handleSort = (field, newOrder) => {
+    const handleSort = (field, newOrder, path) => {
       setOrderBy({ field, order: newOrder });
-      setVariables({
-        sort: {
-          field,
-          order: newOrder.toUpperCase(),
-        },
-      });
+      if (path) {
+        setVariables({
+          sort: { relation: sortOnPath(path, newOrder) },
+        });
+      } else {
+        setVariables({
+          sort: sortOnProperty(field, newOrder),
+        });
+      }
     };
 
     const handleSearch = event => {
