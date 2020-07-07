@@ -22,8 +22,7 @@
       buttonText,
       visible,
     } = options;
-
-    const { env, useText } = B;
+    const { env, useText, Action } = B;
     const isDev = env === 'dev';
     const isAction = linkType === 'action';
     const hasLink = linkTo && linkTo.id !== '';
@@ -31,11 +30,12 @@
     const isIcon = variant === 'icon';
     const buttonContent = useText(buttonText);
     const [isVisible, setIsVisible] = useState(visible);
+    const [isLoading, setIsLoading] = useState(false);
 
     const hideButton = () => setIsVisible(false);
     const showButton = () => setIsVisible(true);
     const toggleVisibility = () => setIsVisible(s => !s);
-
+    const toggleLoading = () => setIsLoading(loading => !loading);
     useEffect(() => {
       setIsVisible(visible);
     }, [visible]);
@@ -44,10 +44,11 @@
       B.defineFunction('ShowButton', showButton);
       B.defineFunction('HideButton', hideButton);
       B.defineFunction('ToggleButtonVisibility', toggleVisibility);
+      B.defineFunction('ToggleLoadingState', toggleLoading);
     }, []);
 
     const generalProps = {
-      disabled,
+      disabled: disabled || isLoading,
       size,
       tabindex: isDev && -1,
       href:
@@ -74,6 +75,8 @@
       type: isDev ? 'button' : type,
     };
 
+    const Loader = <CircularProgress size={16} className={classes.loader} />;
+
     let ButtonComponent = (
       <Button
         {...buttonProps}
@@ -95,14 +98,13 @@
               fontSize: size,
             })
           : buttonContent}
+        {isLoading && Loader}
       </Button>
     );
 
-    const Loader = <CircularProgress size={16} className={classes.loader} />;
-
     if (isAction) {
       ButtonComponent = (
-        <B.Action actionId={actionId}>
+        <Action actionId={actionId}>
           {(callAction, { loading }) => {
             const onClickAction = event => {
               event.preventDefault();
@@ -127,7 +129,7 @@
               </Button>
             );
           }}
-        </B.Action>
+        </Action>
       );
     }
 
@@ -155,6 +157,11 @@
           style.getColor(variant === 'icon' ? background : textColor),
           '!important',
         ],
+        '&.MuiButton-contained.Mui-disabled': {
+          color: ['rgba(0, 0, 0, 0.26)', '!important'],
+          boxShadow: ['none', '!important'],
+          backgroundColor: ['rgba(0, 0, 0, 0.12)', '!important'],
+        },
         '&.MuiButton-root, &.MuiIconButton-root': {
           width: ({ options: { fullWidth, outerSpacing } }) => {
             if (!fullWidth) return 'auto';
