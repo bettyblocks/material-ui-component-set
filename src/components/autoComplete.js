@@ -242,6 +242,9 @@
                   <TextField
                     {...params}
                     {...textFieldProps}
+                    required={
+                      required && (!currentValue || currentValue.length === 0)
+                    }
                     loading={loading}
                     InputProps={{
                       ...params.InputProps,
