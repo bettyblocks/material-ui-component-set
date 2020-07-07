@@ -69,10 +69,15 @@
 
     const { files, data } = uploads;
 
+    const acceptList = useText(accept)
+      .split(',')
+      .map(item => item.trim());
+
     const [uploadFile, { loading } = {}] = useFileUpload({
       options: {
         variables: {
           fileList: Array.from(files),
+          mimeType: acceptList,
         },
         onError: errorData => {
           B.triggerEvent('onError', errorData.message);
