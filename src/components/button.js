@@ -75,7 +75,19 @@
       type: isDev ? 'button' : type,
     };
 
-    let ButtonComponent = (
+    const Loader = <CircularProgress size={16} className={classes.loader} />;
+
+    const IconComp = ({ loading, onClick }) => (
+      <IconButton {...iconButtonProps} onClick={onClick}>
+        {loading
+          ? Loader
+          : React.createElement(Icons[icon === 'None' ? 'Error' : icon], {
+              fontSize: size,
+            })}
+      </IconButton>
+    );
+
+    const BtnComp = ({ loading, onClick }) => (
       <Button
         {...buttonProps}
         startIcon={
@@ -90,16 +102,14 @@
           iconPosition === 'end' &&
           React.createElement(Icons[icon])
         }
+        onClick={onClick}
       >
-        {isIcon
-          ? React.createElement(Icons[icon === 'None' ? 'Error' : icon], {
-              fontSize: size,
-            })
-          : buttonContent}
+        {buttonContent}
+        {loading && Loader}
       </Button>
     );
 
-    const Loader = <CircularProgress size={16} className={classes.loader} />;
+    let ButtonComponent = isIcon ? <IconComp /> : <BtnComp />;
 
     if (isAction) {
       ButtonComponent = (
@@ -107,25 +117,14 @@
           {(callAction, { loading }) => {
             const onClickAction = event => {
               event.preventDefault();
-              if (!isDev && !loading && linkType === 'action') callAction();
+              if (!isDev && !loading && linkType === 'action') {
+                callAction();
+              }
             };
-            const actionClickHandler = isAction && { onClick: onClickAction };
             return isIcon ? (
-              <IconButton {...iconButtonProps} {...actionClickHandler}>
-                {loading
-                  ? Loader
-                  : React.createElement(
-                      Icons[icon === 'None' ? 'Error' : icon],
-                      {
-                        fontSize: size,
-                      },
-                    )}
-              </IconButton>
+              <IconComp loading={loading} onClick={onClickAction} />
             ) : (
-              <Button {...buttonProps} {...actionClickHandler}>
-                {buttonContent}
-                {loading && Loader}
-              </Button>
+              <BtnComp loading={loading} onClick={onClickAction} />
             );
           }}
         </B.Action>
