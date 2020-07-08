@@ -1,17 +1,10 @@
 (() => ({
   name: 'FileUpload',
   type: 'CONTENT_COMPONENT',
-  allowedTypes: ['CONTENT_COMPONENT'],
+  allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const {
-      env,
-      useText,
-      getProperty,
-      getActionInput,
-      Children,
-      useFileUpload,
-    } = B;
+    const { env, useText, getProperty, getActionInput, useFileUpload } = B;
     const {
       FormControl,
       FormControlLabel,
@@ -76,10 +69,14 @@
 
     const { files, data } = uploads;
 
+    const acceptedValue = useText(accept) || 'image/*';
+    const acceptList = acceptedValue.split(',').map(item => item.trim());
+
     const [uploadFile, { loading } = {}] = useFileUpload({
       options: {
         variables: {
           fileList: Array.from(files),
+          mimeType: acceptList,
         },
         onError: errorData => {
           B.triggerEvent('onError', errorData.message);
@@ -110,7 +107,7 @@
         )}
       >
         <input
-          accept={accept}
+          accept={acceptedValue}
           className={classes.input}
           multiple={multiple}
           type="file"
@@ -164,19 +161,14 @@
         disabled={disabled}
         margin={margin}
       >
-        <div className={classes.labelWrapper}>
-          <FormControlLabel
-            control={UploadComponent}
-            label={`${labelText}${requiredText}`}
-            labelPlacement="top"
-            classes={{
-              root: classes.label,
-            }}
-          />
-          <Children disabled={disabled || files.length === 0}>
-            {children}
-          </Children>
-        </div>
+        <FormControlLabel
+          control={UploadComponent}
+          label={`${labelText}${requiredText}`}
+          labelPlacement="top"
+          classes={{
+            root: classes.label,
+          }}
+        />
         <div className={classes.messageContainer}>
           {loading && B.triggerEvent('onLoad')}
           {data.map(file => (
@@ -216,11 +208,6 @@
       root: {
         display: ({ options: { fullWidth } }) =>
           fullWidth ? 'block' : 'inline-block',
-      },
-      labelWrapper: {
-        display: 'flex',
-        alignItems: 'flex-end',
-        justifyContent: 'space-between',
       },
       label: {
         marginLeft: [0, '!important'],
