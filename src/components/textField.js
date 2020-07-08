@@ -28,6 +28,11 @@
       pattern,
       minlength,
       maxlength,
+      validationTypeMismatch,
+      validationPatternMismatch,
+      validationValueMissing,
+      validationTooLong,
+      validationTooShort,
     } = options;
 
     const {
@@ -59,20 +64,20 @@
       if (validityObject.valid) {
         return '';
       }
-      if (validityObject.typeMismatch && type === 'email') {
-        return 'No valid e-mail address provided';
+      if (validityObject.typeMismatch) {
+        return useText(validationTypeMismatch);
       }
       if (validityObject.patternMismatch) {
-        return `Invalid ${type || 'value'}`;
+        return useText(validationPatternMismatch);
       }
       if (validityObject.valueMissing) {
-        return 'This field is required';
+        return useText(validationValueMissing);
       }
       if (validityObject.tooLong) {
-        return 'This value is too long';
+        return useText(validationTooLong);
       }
       if (validityObject.tooShort) {
-        return 'This value is too short';
+        return useText(validationTooShort);
       }
       return '';
     };
