@@ -69,9 +69,8 @@
 
     const { files, data } = uploads;
 
-    const acceptList = useText(accept)
-      .split(',')
-      .map(item => item.trim());
+    const acceptedValue = useText(accept) || 'image/*';
+    const acceptList = acceptedValue.split(',').map(item => item.trim());
 
     const [uploadFile, { loading } = {}] = useFileUpload({
       options: {
@@ -108,7 +107,7 @@
         )}
       >
         <input
-          accept={accept}
+          accept={acceptedValue}
           className={classes.input}
           multiple={multiple}
           type="file"
