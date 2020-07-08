@@ -134,6 +134,27 @@
           },
         },
         {
+          label: 'Validation pattern',
+          key: 'pattern',
+          value: '',
+          type: 'TEXT',
+          configuration: {
+            placeholder: '[0-9]+(\\.[0-9][0-9]?)?',
+          },
+        },
+        {
+          label: 'Min length',
+          key: 'minlength',
+          value: '',
+          type: 'NUMBER',
+        },
+        {
+          label: 'Max length',
+          key: 'maxlength',
+          value: '',
+          type: 'NUMBER',
+        },
+        {
           label: 'Currency',
           key: 'adornment',
           value: '€',

@@ -26,6 +26,8 @@
       property,
       propertyLabelOverride,
       pattern,
+      minlength,
+      maxlength,
     } = options;
 
     const {
@@ -49,6 +51,10 @@
     const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
 
+    const validPattern = pattern || null;
+    const validMinlength = minlength || null;
+    const validMaxlength = maxlength || null;
+
     const validationMessage = validityObject => {
       if (validityObject.valid) {
         return '';
@@ -57,10 +63,16 @@
         return 'No valid e-mail address provided';
       }
       if (validityObject.patternMismatch) {
-        return `Invalid ${type}`;
+        return `Invalid ${type || 'value'}`;
       }
       if (validityObject.valueMissing) {
         return 'This field is required';
+      }
+      if (validityObject.tooLong) {
+        return 'This value is too long';
+      }
+      if (validityObject.tooShort) {
+        return 'This value is too short';
       }
       return '';
     };
@@ -208,7 +220,9 @@
             )
           }
           inputProps={{
-            pattern,
+            pattern: validPattern,
+            minlength: validMinlength,
+            maxlength: validMaxlength,
             tabIndex: isDev && -1,
           }}
         />

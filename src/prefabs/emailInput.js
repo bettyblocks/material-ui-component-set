@@ -134,6 +134,27 @@
           },
         },
         {
+          label: 'Validation pattern',
+          key: 'pattern',
+          value: '',
+          type: 'TEXT',
+          configuration: {
+            placeholder: '[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$',
+          },
+        },
+        {
+          label: 'Min length',
+          key: 'minlength',
+          value: '',
+          type: 'NUMBER',
+        },
+        {
+          label: 'Max length',
+          key: 'maxlength',
+          value: '',
+          type: 'NUMBER',
+        },
+        {
           label: 'Adornment',
           key: 'adornmentIcon',
           value: 'Email',

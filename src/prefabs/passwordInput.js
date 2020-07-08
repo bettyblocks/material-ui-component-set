@@ -144,6 +144,21 @@
           key: 'pattern',
           value: '(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}',
           type: 'TEXT',
+          configuration: {
+            placeholder: '(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}',
+          },
+        },
+        {
+          label: 'Min length',
+          key: 'minlength',
+          value: '',
+          type: 'NUMBER',
+        },
+        {
+          label: 'Max length',
+          key: 'maxlength',
+          value: '',
+          type: 'NUMBER',
         },
         {
           type: 'CUSTOM',
