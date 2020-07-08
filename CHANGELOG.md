@@ -1,3 +1,10 @@
+## [1.16.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.16.1...v1.16.2) (2020-07-08)
+
+
+### Bug Fixes
+
+* required option for auto complete when multiple ([78faeb0](https://github.com/bettyblocks/material-ui-component-set/commit/78faeb00c7e5b4936c2471aab78df2db60a7c9ac))
+
 ## [1.16.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.16.0...v1.16.1) (2020-07-08)
 
 
