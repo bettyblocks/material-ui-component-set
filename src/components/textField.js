@@ -25,6 +25,14 @@
       adornmentPosition,
       property,
       propertyLabelOverride,
+      pattern,
+      minlength,
+      maxlength,
+      validationTypeMismatch,
+      validationPatternMismatch,
+      validationValueMissing,
+      validationTooLong,
+      validationTooShort,
     } = options;
 
     const {
@@ -42,8 +50,38 @@
     const { getActionInput, useText, env, getProperty } = B;
     const isDev = env === 'dev';
     const [currentValue, setCurrentValue] = useState(useText(defaultValue));
+    const [isDisabled, setIsDisabled] = useState(disabled);
     const [showPassword, togglePassword] = useState(false);
-    const helper = useText(helperText);
+    const [errorState, setErrorState] = useState(error);
+    const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
+    const [helper, setHelper] = useState(useText(helperText));
+
+    const validPattern = pattern || null;
+    const validMinlength = minlength || null;
+    const validMaxlength = maxlength || null;
+
+    const validationMessage = validityObject => {
+      if (validityObject.valid) {
+        return '';
+      }
+      if (validityObject.typeMismatch) {
+        return useText(validationTypeMismatch);
+      }
+      if (validityObject.patternMismatch) {
+        return useText(validationPatternMismatch);
+      }
+      if (validityObject.valueMissing) {
+        return useText(validationValueMissing);
+      }
+      if (validityObject.tooLong) {
+        return useText(validationTooLong);
+      }
+      if (validityObject.tooShort) {
+        return useText(validationTooShort);
+      }
+      return '';
+    };
+
     const placeholderText = useText(placeholder);
 
     const { label: propertyLabelText, name: propertyName } =
@@ -55,16 +93,49 @@
     const actionInput = getActionInput(actionInputId);
     const formComponentName = propertyName || (actionInput && actionInput.name);
 
+    const handleValidation = validation => {
+      setErrorState(!validation.valid);
+      setHelper(validationMessage(validation));
+    };
+
     const changeHandler = event => {
       const {
-        target: { value: eventValue },
+        target: { value: eventValue, validity },
       } = event;
+
+      if (afterFirstInvalidation) {
+        handleValidation(validity);
+      }
 
       setCurrentValue(eventValue);
     };
 
+    const blurHandler = event => {
+      const {
+        target: {
+          validity,
+          validity: { valid: isValid },
+        },
+      } = event;
+      setAfterFirstInvalidation(!isValid);
+      handleValidation(validity);
+    };
+
+    const invalidHandler = event => {
+      event.preventDefault();
+      const {
+        target: {
+          validity,
+          validity: { valid: isValid },
+        },
+      } = event;
+      setAfterFirstInvalidation(!isValid);
+      handleValidation(validity);
+    };
+
     useEffect(() => {
       B.defineFunction('Clear', () => setCurrentValue(''));
+      B.defineFunction('Disable', () => setIsDisabled(true));
     }, []);
 
     const handleClickShowPassword = () => {
@@ -115,9 +186,9 @@
         size={size}
         fullWidth={fullWidth}
         required={required}
-        disabled={disabled}
+        disabled={isDisabled}
         margin={margin}
-        error={error}
+        error={errorState}
       >
         {labelText && <InputLabel>{labelText}</InputLabel>}
         <InputCmp
@@ -129,6 +200,8 @@
           label={labelText}
           placeholder={placeholderText}
           onChange={changeHandler}
+          onBlur={blurHandler}
+          onInvalid={invalidHandler}
           startAdornment={
             hasAdornment &&
             adornmentPosition === 'start' && (
@@ -154,6 +227,9 @@
             )
           }
           inputProps={{
+            pattern: validPattern,
+            minlength: validMinlength,
+            maxlength: validMaxlength,
             tabIndex: isDev && -1,
           }}
         />

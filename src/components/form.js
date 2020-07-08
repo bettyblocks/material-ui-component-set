@@ -51,6 +51,14 @@
           }
         };
 
+        const [isInvalid, setIsInvalid] = useState(false);
+        const handleInvalid = () => {
+          if (!isInvalid) {
+            setIsInvalid(true);
+            B.triggerEvent('onInvalid');
+          }
+        };
+
         return (
           <Action actionId={actionId}>
             {(callAction, { data, loading, error }) => (
@@ -68,8 +76,11 @@
                 </div>
 
                 <form
+                  onInvalid={handleInvalid}
                   onSubmit={event => {
                     event.preventDefault();
+                    setIsInvalid(false);
+                    B.triggerEvent('onSubmit');
                     const formData = new FormData(formRef.current);
                     const entries = Array.from(formData);
                     const variableName = actionInput && actionInput.name;
