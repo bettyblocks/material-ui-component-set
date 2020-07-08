@@ -1,3 +1,10 @@
+## [1.16.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.16.0...v1.16.1) (2020-07-08)
+
+
+### Bug Fixes
+
+* add useText around labels ([9d26e1f](https://github.com/bettyblocks/material-ui-component-set/commit/9d26e1f273d1ee6a4d6f9a7c28ba0a64c6159cb9))
+
 # [1.16.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.15.1...v1.16.0) (2020-07-02)
 
 
