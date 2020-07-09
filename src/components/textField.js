@@ -64,19 +64,19 @@
       if (validityObject.valid) {
         return '';
       }
-      if (validityObject.typeMismatch) {
+      if (validityObject.typeMismatch && validationTypeMismatch) {
         return useText(validationTypeMismatch);
       }
-      if (validityObject.patternMismatch) {
+      if (validityObject.patternMismatch && validationPatternMismatch) {
         return useText(validationPatternMismatch);
       }
-      if (validityObject.valueMissing) {
+      if (validityObject.valueMissing && validationValueMissing) {
         return useText(validationValueMissing);
       }
-      if (validityObject.tooLong) {
+      if (validityObject.tooLong && validationTooLong) {
         return useText(validationTooLong);
       }
-      if (validityObject.tooShort) {
+      if (validityObject.tooShort && validationTooShort) {
         return useText(validationTooShort);
       }
       return '';
@@ -175,8 +175,9 @@
     useEffect(() => {
       if (isDev) {
         setCurrentValue(useText(defaultValue));
+        setHelper(useText(helperText));
       }
-    }, [isDev, defaultValue]);
+    }, [isDev, defaultValue, helperText]);
 
     const TextFieldCmp = (
       <FormControl

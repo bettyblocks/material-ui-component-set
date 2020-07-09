@@ -117,9 +117,9 @@
           },
         },
         {
-          value: ['No valid value provided'],
-          label: 'Type mismatch message',
-          key: 'validationTypeMismatch',
+          value: ['This field is required'],
+          label: 'Value required message',
+          key: 'validationValueMissing',
           type: 'VARIABLE',
           configuration: {
             condition: {
@@ -145,9 +145,9 @@
           },
         },
         {
-          value: ['This field is required'],
-          label: 'Value missing message',
-          key: 'validationValueMissing',
+          value: ['This value is too short'],
+          label: 'Value too short message',
+          key: 'validationTooShort',
           type: 'VARIABLE',
           configuration: {
             condition: {
@@ -173,9 +173,9 @@
           },
         },
         {
-          value: ['This value is too short'],
-          label: 'Value too short message',
-          key: 'validationTooShort',
+          value: ['No valid value provided'],
+          label: 'Email mismatch message',
+          key: 'validationTypeMismatch',
           type: 'VARIABLE',
           configuration: {
             condition: {

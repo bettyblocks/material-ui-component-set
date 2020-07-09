@@ -117,36 +117,8 @@
           },
         },
         {
-          value: ['No valid value provided'],
-          label: 'Type mismatch message',
-          key: 'validationTypeMismatch',
-          type: 'VARIABLE',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'validationOptions',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
-        },
-        {
-          value: ['Invalid value'],
-          label: 'Pattern mismatch message',
-          key: 'validationPatternMismatch',
-          type: 'VARIABLE',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'validationOptions',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
-        },
-        {
           value: ['This field is required'],
-          label: 'Value missing message',
+          label: 'Value required message',
           key: 'validationValueMissing',
           type: 'VARIABLE',
           configuration: {
@@ -159,9 +131,11 @@
           },
         },
         {
-          value: ['This value is too long'],
-          label: 'Value too long message',
-          key: 'validationTooLong',
+          value: [
+            'Password must contain 8 characters, 1 lowercase character, 1 upper case character and 1 digit',
+          ],
+          label: 'Pattern mismatch message',
+          key: 'validationPatternMismatch',
           type: 'VARIABLE',
           configuration: {
             condition: {
@@ -176,6 +150,20 @@
           value: ['This value is too short'],
           label: 'Value too short message',
           key: 'validationTooShort',
+          type: 'VARIABLE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'validationOptions',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          value: ['This value is too long'],
+          label: 'Value too long message',
+          key: 'validationTooLong',
           type: 'VARIABLE',
           configuration: {
             condition: {
