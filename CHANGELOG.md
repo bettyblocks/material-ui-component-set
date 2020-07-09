@@ -1,3 +1,11 @@
+## [1.16.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.16.2...v1.16.3) (2020-07-09)
+
+
+### Bug Fixes
+
+* properly set interactions on button ([069fc84](https://github.com/bettyblocks/material-ui-component-set/commit/069fc84b2902b5ebba487f0513e8336c1f25d73f))
+* use rounded buttons on hover for all icon types ([48ec484](https://github.com/bettyblocks/material-ui-component-set/commit/48ec4840aa90062db9f719f0a66199eb514a72b2))
+
 ## [1.16.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.16.1...v1.16.2) (2020-07-08)
 
 
