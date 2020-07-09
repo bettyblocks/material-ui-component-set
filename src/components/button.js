@@ -74,32 +74,42 @@
       className: !!buttonContent && classes.empty,
       type: isDev ? 'button' : type,
     };
+    const compProps = isIcon ? iconButtonProps : buttonProps;
+    const BtnComp = isIcon ? IconButton : Button;
 
-    let ButtonComponent = (
-      <Button
-        {...buttonProps}
-        startIcon={
-          !isIcon &&
-          icon !== 'None' &&
-          iconPosition === 'start' &&
-          React.createElement(Icons[icon])
-        }
-        endIcon={
-          !isIcon &&
-          icon !== 'None' &&
-          iconPosition === 'end' &&
-          React.createElement(Icons[icon])
-        }
-      >
-        {isIcon
-          ? React.createElement(Icons[icon === 'None' ? 'Error' : icon], {
+    const Comp = props => {
+      const { loading, onClick = () => {} } = props;
+      return (
+        <BtnComp
+          {...compProps}
+          startIcon={
+            !isIcon &&
+            icon !== 'None' &&
+            iconPosition === 'start' &&
+            React.createElement(Icons[icon])
+          }
+          endIcon={
+            !isIcon &&
+            icon !== 'None' &&
+            iconPosition === 'end' &&
+            React.createElement(Icons[icon])
+          }
+          {...props}
+          onClick={onClick}
+        >
+          {isIcon &&
+            React.createElement(Icons[icon === 'None' ? 'Error' : icon], {
               fontSize: size,
-            })
-          : buttonContent}
-      </Button>
-    );
+            })}
+          {!isIcon && buttonContent}
+          {!isIcon && loading && (
+            <CircularProgress size={16} className={classes.loader} />
+          )}
+        </BtnComp>
+      );
+    };
 
-    const Loader = <CircularProgress size={16} className={classes.loader} />;
+    let ButtonComponent = <Comp />;
 
     if (isAction) {
       ButtonComponent = (
@@ -107,26 +117,11 @@
           {(callAction, { loading }) => {
             const onClickAction = event => {
               event.preventDefault();
-              if (!isDev && !loading && linkType === 'action') callAction();
+              if (!isDev && !loading && linkType === 'action') {
+                callAction();
+              }
             };
-            const actionClickHandler = isAction && { onClick: onClickAction };
-            return isIcon ? (
-              <IconButton {...iconButtonProps} {...actionClickHandler}>
-                {loading
-                  ? Loader
-                  : React.createElement(
-                      Icons[icon === 'None' ? 'Error' : icon],
-                      {
-                        fontSize: size,
-                      },
-                    )}
-              </IconButton>
-            ) : (
-              <Button {...buttonProps} {...actionClickHandler}>
-                {buttonContent}
-                {loading && Loader}
-              </Button>
-            );
+            return <Comp onClick={onClickAction} loading={loading} />;
           }}
         </B.Action>
       );
