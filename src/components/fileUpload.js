@@ -21,7 +21,7 @@
       propertyLabelOverride,
       actionInputId,
       required,
-      error,
+      hideDefaultError,
       disabled,
       helperText,
       fullWidth,
@@ -40,6 +40,7 @@
     const [uploads, setUploads] = useState({
       files: [],
       data: [],
+      failedFiles: [],
     });
     const helper = useText(helperText);
     const propLabel =
@@ -64,10 +65,11 @@
       setUploads({
         files: [],
         data: [],
+        failedFiles: [],
       });
     };
 
-    const { files, data } = uploads;
+    const { files, data, failedFiles } = uploads;
 
     const acceptedValue = useText(accept) || 'image/*';
     const acceptList = acceptedValue.split(',').map(item => item.trim());
@@ -83,10 +85,29 @@
         },
         onCompleted: uploadData => {
           const { uploadFiles } = uploadData;
-          B.triggerEvent('onSuccess', uploadFiles);
+
+          const [succeededData, failedData] = uploadFiles.reduce(
+            (result, d) => {
+              result[d.url.startsWith('http') ? 0 : 1].push(d);
+              return result;
+            },
+            [[], []],
+          );
+          if (succeededData.length > 0) {
+            B.triggerEvent('onSuccess', succeededData);
+          }
+          if (failedData.length > 0) {
+            B.triggerEvent(
+              'onError',
+              failedData.map(
+                d => `File: ${d.name} failed with error: ${d.url}`,
+              ),
+            );
+          }
           setUploads({
             ...uploads,
-            data: multiple ? data.concat(uploadFiles) : uploadFiles,
+            data: multiple ? data.concat(succeededData) : succeededData,
+            failedFiles: multiple ? failedFiles.concat(failedData) : failedData,
           });
         },
       },
@@ -157,7 +178,7 @@
       <FormControl
         fullWidth={fullWidth}
         required={required}
-        error={error}
+        error={!hideDefaultError && failedFiles.length > 0}
         disabled={disabled}
         margin={margin}
       >
@@ -169,6 +190,14 @@
             root: classes.label,
           }}
         />
+        <FormHelperText>
+          {!hideDefaultError &&
+            failedFiles.length > 0 &&
+            failedFiles.map(
+              file => `File: ${file.name} failed with error: ${file.url}`,
+            )}
+          {helper && { helper }}
+        </FormHelperText>
         <div className={classes.messageContainer}>
           {loading && B.triggerEvent('onLoad')}
           {data.map(file => (
@@ -186,7 +215,6 @@
             </div>
           ))}
         </div>
-        {helper && <FormHelperText>{helper}</FormHelperText>}
       </FormControl>
     );
 

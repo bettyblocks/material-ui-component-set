@@ -55,8 +55,8 @@
         },
         {
           value: false,
-          label: 'Error',
-          key: 'error',
+          label: 'Hide default error',
+          key: 'hideDefaultError',
           type: 'TOGGLE',
         },
         {
