@@ -73,15 +73,14 @@
 
     const acceptedValue = useText(accept) || 'image/*';
     const acceptList = acceptedValue.split(',').map(item => item.trim());
-    const helperFunction = () => {
+    const helperValue = (() => {
       if (!hideDefaultError && failedFiles.length > 0) {
-        return failedFiles.map(
-          file => `File: ${file.name} failed with error: ${file.url}`,
-        );
+        return failedFiles.map(file => (
+          <div>{`File: ${file.name} failed with error: ${file.url}`}</div>
+        ));
       }
       return helper;
-    };
-    const helperValue = helperFunction();
+    })();
 
     const [uploadFile, { loading } = {}] = useFileUpload({
       options: {
@@ -108,9 +107,9 @@
           if (failedData.length > 0) {
             B.triggerEvent(
               'onError',
-              failedData.map(
-                d => `File: ${d.name} failed with error: ${d.url}`,
-              ),
+              failedData.map(d => (
+                <div>{`File: ${d.name} failed with error: ${d.url}`}</div>
+              )),
             );
           }
           setUploads({
@@ -199,7 +198,7 @@
             root: classes.label,
           }}
         />
-        <FormHelperText>{helperValue && helperValue}</FormHelperText>
+        <FormHelperText>{helperValue}</FormHelperText>
         <div className={classes.messageContainer}>
           {loading && B.triggerEvent('onLoad')}
           {data.map(file => (
