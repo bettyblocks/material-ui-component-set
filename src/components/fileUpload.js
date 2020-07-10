@@ -197,23 +197,25 @@
           }}
         />
         <FormHelperText>{helperValue}</FormHelperText>
-        <div className={classes.messageContainer}>
-          {loading && B.triggerEvent('onLoad')}
-          {data.map(file => (
-            <div className={classes.fileList}>
-              <Typography variant="body1" noWrap className={classes.span}>
-                {file.name}
-              </Typography>
-              <IconButton
-                className={classes.remove}
-                size="small"
-                onClick={() => removeFileFromList(file.url)}
-              >
-                <Close fontSize="small" />
-              </IconButton>
-            </div>
-          ))}
-        </div>
+        {loading && B.triggerEvent('onLoad')}
+        {data && data.length > 0 && (
+          <div className={classes.messageContainer}>
+            {data.map(file => (
+              <div className={classes.fileList}>
+                <Typography variant="body1" noWrap className={classes.span}>
+                  {file.name}
+                </Typography>
+                <IconButton
+                  className={classes.remove}
+                  size="small"
+                  onClick={() => removeFileFromList(file.url)}
+                >
+                  <Close fontSize="small" />
+                </IconButton>
+              </div>
+            ))}
+          </div>
+        )}
       </FormControl>
     );
 
