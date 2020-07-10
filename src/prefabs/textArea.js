@@ -128,9 +128,9 @@
           },
         },
         {
-          value: ['No valid value provided'],
-          label: 'Type mismatch message',
-          key: 'validationTypeMismatch',
+          value: ['This field is required'],
+          label: 'Value required message',
+          key: 'validationValueMissing',
           type: 'VARIABLE',
           configuration: {
             condition: {
@@ -156,9 +156,9 @@
           },
         },
         {
-          value: ['This field is required'],
-          label: 'Value missing message',
-          key: 'validationValueMissing',
+          value: ['This value is too short'],
+          label: 'Value too short message',
+          key: 'validationTooShort',
           type: 'VARIABLE',
           configuration: {
             condition: {
@@ -173,20 +173,6 @@
           value: ['This value is too long'],
           label: 'Value too long message',
           key: 'validationTooLong',
-          type: 'VARIABLE',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'validationOptions',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
-        },
-        {
-          value: ['This value is too short'],
-          label: 'Value too short message',
-          key: 'validationTooShort',
           type: 'VARIABLE',
           configuration: {
             condition: {
