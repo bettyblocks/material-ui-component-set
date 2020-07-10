@@ -40,7 +40,7 @@
     const [uploads, setUploads] = useState({
       files: [],
       data: [],
-      failedFiles: [],
+      failureMessage: [],
     });
     const helper = useText(helperText);
     const propLabel =
@@ -65,19 +65,17 @@
       setUploads({
         files: [],
         data: [],
-        failedFiles: [],
+        failureMessage: [],
       });
     };
 
-    const { files, data, failedFiles } = uploads;
+    const { files, data, failureMessage } = uploads;
 
     const acceptedValue = useText(accept) || 'image/*';
     const acceptList = acceptedValue.split(',').map(item => item.trim());
     const helperValue = (() => {
-      if (!hideDefaultError && failedFiles.length > 0) {
-        return failedFiles.map(file => (
-          <div>{`File: ${file.name} failed with error: ${file.url}`}</div>
-        ));
+      if (!hideDefaultError && failureMessage.length > 0) {
+        return failureMessage;
       }
       return helper;
     })();
@@ -90,6 +88,10 @@
         },
         onError: errorData => {
           B.triggerEvent('onError', errorData.message);
+          setUploads({
+            ...uploads,
+            failureMessage: [errorData.message],
+          });
         },
         onCompleted: uploadData => {
           const { uploadFiles } = uploadData;
@@ -101,21 +103,21 @@
             },
             [[], []],
           );
+
+          const formattedFailedData = failedData.map(d => (
+            <div>{`File: ${d.name} failed with error: ${d.url}`}</div>
+          ));
+
           if (succeededData.length > 0) {
             B.triggerEvent('onSuccess', succeededData);
           }
           if (failedData.length > 0) {
-            B.triggerEvent(
-              'onError',
-              failedData.map(d => (
-                <div>{`File: ${d.name} failed with error: ${d.url}`}</div>
-              )),
-            );
+            B.triggerEvent('onError', formattedFailedData);
           }
           setUploads({
             ...uploads,
             data: multiple ? data.concat(succeededData) : succeededData,
-            failedFiles: multiple ? failedFiles.concat(failedData) : failedData,
+            failureMessage: formattedFailedData,
           });
         },
       },
@@ -186,7 +188,7 @@
       <FormControl
         fullWidth={fullWidth}
         required={required}
-        error={!hideDefaultError && failedFiles.length > 0}
+        error={!hideDefaultError && failureMessage.length > 0}
         disabled={disabled}
         margin={margin}
       >
