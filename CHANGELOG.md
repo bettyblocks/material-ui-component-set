@@ -1,3 +1,107 @@
+## [1.16.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.16.2...v1.16.3) (2020-07-09)
+
+
+### Bug Fixes
+
+* properly set interactions on button ([069fc84](https://github.com/bettyblocks/material-ui-component-set/commit/069fc84b2902b5ebba487f0513e8336c1f25d73f))
+* use rounded buttons on hover for all icon types ([48ec484](https://github.com/bettyblocks/material-ui-component-set/commit/48ec4840aa90062db9f719f0a66199eb514a72b2))
+
+## [1.16.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.16.1...v1.16.2) (2020-07-08)
+
+
+### Bug Fixes
+
+* required option for auto complete when multiple ([78faeb0](https://github.com/bettyblocks/material-ui-component-set/commit/78faeb00c7e5b4936c2471aab78df2db60a7c9ac))
+
+## [1.16.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.16.0...v1.16.1) (2020-07-08)
+
+
+### Bug Fixes
+
+* add useText around labels ([9d26e1f](https://github.com/bettyblocks/material-ui-component-set/commit/9d26e1f273d1ee6a4d6f9a7c28ba0a64c6159cb9))
+
+# [1.16.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.15.1...v1.16.0) (2020-07-02)
+
+
+### Bug Fixes
+
+* box options in all prefabs ([e392328](https://github.com/bettyblocks/material-ui-component-set/commit/e39232856360611d4d383cda3fcec65a80438187))
+* set fixed position to absolute in dev ([747f9e6](https://github.com/bettyblocks/material-ui-component-set/commit/747f9e6859384ae7702889bc3eba9338126efbcc))
+
+
+### Features
+
+* add background and positioning options to box ([45442f0](https://github.com/bettyblocks/material-ui-component-set/commit/45442f020246f192073b5455fb53e6d7cf134b82))
+
+## [1.15.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.15.0...v1.15.1) (2020-07-01)
+
+
+### Bug Fixes
+
+* trigger change event in autocomplete ([a7bf809](https://github.com/bettyblocks/material-ui-component-set/commit/a7bf809968d1368651859c12df68ce9bf4d6334b))
+
+# [1.15.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.14.4...v1.15.0) (2020-07-01)
+
+
+### Bug Fixes
+
+* set elevation to zero when variant is flat ([9912a33](https://github.com/bettyblocks/material-ui-component-set/commit/9912a33720997d0014b3ff765edb6f8e7cf380b5))
+
+
+### Features
+
+* add custom interactions to toggle expansion component ([d8176b2](https://github.com/bettyblocks/material-ui-component-set/commit/d8176b2bff273ed027987aa038563b956a6b92e2))
+* rename the expansion panel interactions ([42de090](https://github.com/bettyblocks/material-ui-component-set/commit/42de0904928fc566d3fd711f1594371943c02409))
+
+## [1.14.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.14.3...v1.14.4) (2020-06-30)
+
+
+### Bug Fixes
+
+* hide vertical line for a horizontal stepper ([33cceba](https://github.com/bettyblocks/material-ui-component-set/commit/33cceba49f6031ce2f400c623722cbd82b7b4151))
+
+## [1.14.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.14.2...v1.14.3) (2020-06-30)
+
+
+### Bug Fixes
+
+* make sure menu bar buttons don't change direction ([35539df](https://github.com/bettyblocks/material-ui-component-set/commit/35539dfe5b5bbbb01f73c38e3f70d0fc2ab85d3a))
+
+## [1.14.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.14.1...v1.14.2) (2020-06-29)
+
+
+### Bug Fixes
+
+* register interactions when option type is data ([fe3ea85](https://github.com/bettyblocks/material-ui-component-set/commit/fe3ea857f9f7babb26e635fecd0407d19bf26760))
+
+## [1.14.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.14.0...v1.14.1) (2020-06-29)
+
+
+### Bug Fixes
+
+* set the progress to 100 percent of container if it's linear ([765bf53](https://github.com/bettyblocks/material-ui-component-set/commit/765bf535e05bdd248096be5a440f68384f461963))
+
+# [1.14.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.13.1...v1.14.0) (2020-06-29)
+
+
+### Bug Fixes
+
+* added CONTAINER_COMPONENT to allowed types ([6471cf0](https://github.com/bettyblocks/material-ui-component-set/commit/6471cf0a0ea6445736275d4c8e886db990911921))
+* removed unnesc argument ([c3d02c1](https://github.com/bettyblocks/material-ui-component-set/commit/c3d02c16dfb34ff6abc4288d07907d5016a17396))
+
+
+### Features
+
+* made tabs optional and added functions ([49e115a](https://github.com/bettyblocks/material-ui-component-set/commit/49e115a2a67f8e3ef85d0126d815bdcf62ff3015))
+* removed box from tab to remove inner space ([6a892a3](https://github.com/bettyblocks/material-ui-component-set/commit/6a892a3ed4f1f53570a0a757092fb97a7f4917b4))
+
+## [1.13.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.13.0...v1.13.1) (2020-06-29)
+
+
+### Bug Fixes
+
+* hide button when visible is unchecked ([fb641ae](https://github.com/bettyblocks/material-ui-component-set/commit/fb641ae17f39903f876d6fbf9bdcab8a8c52fdcd))
+
 # [1.13.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.12.0...v1.13.0) (2020-06-24)
 
 

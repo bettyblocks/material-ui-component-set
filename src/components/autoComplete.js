@@ -50,7 +50,7 @@
     const { label: propertyLabelText } = getProperty(property) || {};
     const propLabelOverride = useText(propertyLabelOverride);
     const propertyLabel = propLabelOverride || propertyLabelText;
-    const labelText = property ? propertyLabel : label;
+    const labelText = property ? propertyLabel : useText(label);
 
     const textFieldProps = {
       disabled,
@@ -118,6 +118,7 @@
     const onChange = (_, newValue) => {
       if (!valueProp || !newValue) {
         setCurrentValue(newValue);
+        B.triggerEvent('OnChange');
         return;
       }
       let newCurrentValue = newValue[valueProp.name];
@@ -125,6 +126,7 @@
         newCurrentValue = newValue.map(rec => rec[valueProp.name]);
       }
       setCurrentValue(newCurrentValue);
+      B.triggerEvent('OnChange');
     };
 
     const getDefaultValue = records => {
@@ -239,6 +241,9 @@
                   <TextField
                     {...params}
                     {...textFieldProps}
+                    required={
+                      required && (!currentValue || currentValue.length === 0)
+                    }
                     loading={loading}
                     InputProps={{
                       ...params.InputProps,
