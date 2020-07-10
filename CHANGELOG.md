@@ -1,3 +1,27 @@
+# [1.17.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.16.3...v1.17.0) (2020-07-10)
+
+
+### Bug Fixes
+
+* add fallback default to accept so empty field doesn't fail ([102f754](https://github.com/bettyblocks/material-ui-component-set/commit/102f7541d3b14bbe4ae104c0a66718ac049c26b4))
+* add formatting to the error  message so it's correctly shown ([474b02e](https://github.com/bettyblocks/material-ui-component-set/commit/474b02e12ad62797c53998d54084b8858c8e49ed))
+* add inline error to file component and allow it to be turned off ([ffda544](https://github.com/bettyblocks/material-ui-component-set/commit/ffda5441fc52ff79741a52178f3adf4989035fd6))
+* alignment, events, and file listing in file upload ([ee5406b](https://github.com/bettyblocks/material-ui-component-set/commit/ee5406bfa314dbd608e1f68af35e4ccc30ce2c03))
+* don't allow children in the file upload component ([de65276](https://github.com/bettyblocks/material-ui-component-set/commit/de652765928d8ca2b9b7f17c1521a8d6b5ce76bd))
+* fire onerror only when network returns an error ([ce9047c](https://github.com/bettyblocks/material-ui-component-set/commit/ce9047c20ec44ef46034d0c2b89875290418f291))
+* improve error handling with helper text feedback ([cb71b22](https://github.com/bettyblocks/material-ui-component-set/commit/cb71b22589a93f77cc6c1d70ed1b06b4fce0350d))
+* move loading outside the component show section ([1cbc6a1](https://github.com/bettyblocks/material-ui-component-set/commit/1cbc6a1f873862941204961d2eadb577fe53e332))
+* only show file list when there are files to remove margin ([841c494](https://github.com/bettyblocks/material-ui-component-set/commit/841c494e13bd6a31b5106a1c38e52131a50f2871))
+* only show last occurring failure message ([32773e2](https://github.com/bettyblocks/material-ui-component-set/commit/32773e220cdd258f5d71fbb3102675ed94b5c1d8))
+* remove condition for useFileUpload hook ([57f1978](https://github.com/bettyblocks/material-ui-component-set/commit/57f197832c08773086ad4961a25f8c870f88b6b8))
+* simplify some code to get the value for the helper ([4aac907](https://github.com/bettyblocks/material-ui-component-set/commit/4aac9076afe9d2278f4b36b01357914570c394c3))
+
+
+### Features
+
+* add file upload component ([9383551](https://github.com/bettyblocks/material-ui-component-set/commit/93835516edbb8465ee507ecb8f3f4340657711b5))
+* add support for public file upload and enforce mime type accept ([81e83dd](https://github.com/bettyblocks/material-ui-component-set/commit/81e83dd701b769f677a33e497647600da09bffae))
+
 ## [1.16.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.16.2...v1.16.3) (2020-07-09)
 
 
