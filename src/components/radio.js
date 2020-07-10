@@ -25,6 +25,7 @@
       property,
       propertyLabelOverride,
       fullWidth,
+      hideLabel,
     } = options;
     const isDev = B.env === 'dev';
     const { GetAll, getProperty, useText, getActionInput } = B;
@@ -108,13 +109,14 @@
 
     const FormControl = (
       <MUIFormControl
+        classes={{ root: classes.formControl }}
         required={required}
         margin={margin}
         component="fieldset"
         error={error}
         fullWidth={fullWidth}
       >
-        <FormLabel component="legend">{labelText}</FormLabel>
+        {!hideLabel && <FormLabel component="legend">{labelText}</FormLabel>}
         <RadioGroup
           row={row}
           value={value}
@@ -134,13 +136,84 @@
       FormControl
     );
   })(),
-  styles: () => () => ({
-    root: {
-      display: ({ options: { fullWidth } }) =>
-        fullWidth ? 'block' : 'inline-block',
-      '& > *': {
-        pointerEvents: 'none',
+  styles: B => t => {
+    const style = new B.Styling(t);
+    const { color: colorFunc } = B;
+    const getOpacColor = (col, val) => colorFunc.alpha(col, val);
+    return {
+      root: {
+        display: ({ options: { fullWidth } }) =>
+          fullWidth ? 'block' : 'inline-block',
+        '& > *': {
+          pointerEvents: 'none',
+        },
       },
-    },
-  }),
+      formControl: {
+        '& > legend': {
+          color: ({ options: { labelColor } }) => [
+            style.getColor(labelColor),
+            '!important',
+          ],
+          '&.Mui-error': {
+            color: ({ options: { errorColor } }) => [
+              style.getColor(errorColor),
+              '!important',
+            ],
+          },
+          '&.Mui-disabled': {
+            pointerEvents: 'none',
+            opacity: '0.7',
+          },
+        },
+        '& > p': {
+          color: ({ options: { helperColor } }) => [
+            style.getColor(helperColor),
+            '!important',
+          ],
+          '&.Mui-error': {
+            color: ({ options: { errorColor } }) => [
+              style.getColor(errorColor),
+              '!important',
+            ],
+          },
+        },
+        '& .MuiFormControlLabel-root': {
+          '& .MuiRadio-root': {
+            color: ({ options: { radioColor } }) => [
+              style.getColor(radioColor),
+              '!important',
+            ],
+            '&:hover': {
+              backgroundColor: ({ options: { radioColor } }) => [
+                getOpacColor(style.getColor(radioColor), 0.04),
+                '!important',
+              ],
+            },
+            '&.Mui-checked': {
+              color: ({ options: { radioColorChecked } }) => [
+                style.getColor(radioColorChecked),
+                '!important',
+              ],
+              '&:hover': {
+                backgroundColor: ({ options: { radioColorChecked } }) => [
+                  getOpacColor(style.getColor(radioColorChecked), 0.04),
+                  '!important',
+                ],
+              },
+            },
+          },
+          '& .MuiTypography-root': {
+            color: ({ options: { textColor } }) => [
+              style.getColor(textColor),
+              '!important',
+            ],
+          },
+          '&.Mui-disabled': {
+            pointerEvents: 'none',
+            opacity: '0.7',
+          },
+        },
+      },
+    };
+  },
 }))();
