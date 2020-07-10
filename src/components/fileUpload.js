@@ -73,12 +73,8 @@
 
     const acceptedValue = useText(accept) || 'image/*';
     const acceptList = acceptedValue.split(',').map(item => item.trim());
-    const helperValue = (() => {
-      if (!hideDefaultError && failureMessage.length > 0) {
-        return failureMessage;
-      }
-      return helper;
-    })();
+    const helperValue =
+      !hideDefaultError && failureMessage.length > 0 ? failureMessage : helper;
 
     const [uploadFile, { loading } = {}] = useFileUpload({
       options: {
