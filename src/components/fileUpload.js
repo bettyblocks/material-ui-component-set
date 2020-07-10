@@ -21,7 +21,7 @@
       propertyLabelOverride,
       actionInputId,
       required,
-      error,
+      hideDefaultError,
       disabled,
       helperText,
       fullWidth,
@@ -40,6 +40,7 @@
     const [uploads, setUploads] = useState({
       files: [],
       data: [],
+      failureMessage: [],
     });
     const helper = useText(helperText);
     const propLabel =
@@ -64,13 +65,16 @@
       setUploads({
         files: [],
         data: [],
+        failureMessage: [],
       });
     };
 
-    const { files, data } = uploads;
+    const { files, data, failureMessage } = uploads;
 
     const acceptedValue = useText(accept) || 'image/*';
     const acceptList = acceptedValue.split(',').map(item => item.trim());
+    const helperValue =
+      !hideDefaultError && failureMessage.length > 0 ? failureMessage : helper;
 
     const [uploadFile, { loading } = {}] = useFileUpload({
       options: {
@@ -80,13 +84,36 @@
         },
         onError: errorData => {
           B.triggerEvent('onError', errorData.message);
+          setUploads({
+            ...uploads,
+            failureMessage: [errorData.message],
+          });
         },
         onCompleted: uploadData => {
           const { uploadFiles } = uploadData;
-          B.triggerEvent('onSuccess', uploadFiles);
+
+          const [succeededData, failedData] = uploadFiles.reduce(
+            (result, d) => {
+              result[d.url.startsWith('http') ? 0 : 1].push(d);
+              return result;
+            },
+            [[], []],
+          );
+
+          const formattedFailedData = failedData.map(d => (
+            <div>{`File: ${d.name} failed with error: ${d.url}`}</div>
+          ));
+
+          if (succeededData.length > 0) {
+            B.triggerEvent('onSuccess', succeededData);
+          }
+          if (failedData.length > 0) {
+            B.triggerEvent('onError', formattedFailedData);
+          }
           setUploads({
             ...uploads,
-            data: multiple ? data.concat(uploadFiles) : uploadFiles,
+            data: multiple ? data.concat(succeededData) : succeededData,
+            failureMessage: formattedFailedData,
           });
         },
       },
@@ -157,7 +184,7 @@
       <FormControl
         fullWidth={fullWidth}
         required={required}
-        error={error}
+        error={!hideDefaultError && failureMessage.length > 0}
         disabled={disabled}
         margin={margin}
       >
@@ -169,6 +196,7 @@
             root: classes.label,
           }}
         />
+        <FormHelperText>{helperValue}</FormHelperText>
         <div className={classes.messageContainer}>
           {loading && B.triggerEvent('onLoad')}
           {data.map(file => (
@@ -186,7 +214,6 @@
             </div>
           ))}
         </div>
-        {helper && <FormHelperText>{helper}</FormHelperText>}
       </FormControl>
     );
 
