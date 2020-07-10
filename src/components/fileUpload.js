@@ -197,9 +197,9 @@
           }}
         />
         <FormHelperText>{helperValue}</FormHelperText>
+        {loading && B.triggerEvent('onLoad')}
         {data && data.length > 0 && (
           <div className={classes.messageContainer}>
-            {loading && B.triggerEvent('onLoad')}
             {data.map(file => (
               <div className={classes.fileList}>
                 <Typography variant="body1" noWrap className={classes.span}>
