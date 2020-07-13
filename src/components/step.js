@@ -7,7 +7,14 @@
     const { env } = B;
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
-    const { active, isFirstRender } = options || {};
+    const { label, icon } = options || {};
+    const {
+      active,
+      isFirstRender,
+      stepLabelData,
+      setStepLabelData,
+      index,
+    } = parent;
 
     const StepCmp = (
       <>
@@ -26,6 +33,16 @@
         B.triggerEvent('OnStepInactive');
       }
     }, [active, isFirstRender]);
+
+    useEffect(() => {
+      if (setStepLabelData) {
+        setStepLabelData({
+          ...stepLabelData,
+          [`label${index}`]: label,
+          [`icon${index}`]: icon,
+        });
+      }
+    }, [setStepLabelData, index, label, icon]);
 
     return isDev ? <div className={classes.wrapper}>{StepCmp}</div> : StepCmp;
   })(),

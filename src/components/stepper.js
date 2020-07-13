@@ -35,6 +35,7 @@
     const currentStep = isDev ? devActiveStep : activeStep;
     const isLinear = variant === 'linear';
     const numRendersRef = useRef(1);
+    const [stepLabelData, setStepLabelData] = useState({});
 
     const handleNext = () => {
       setActiveStep(prevActiveStep => {
@@ -72,9 +73,10 @@
         >
           {React.Children.map(children, (child, index) => {
             const { options: childOptions = {} } = child.props || {};
+
             const {
-              label = [`Step ${index + 1}`],
-              icon = 'None',
+              label = stepLabelData[`label${index}`] || [`Step ${index + 1}`],
+              icon = stepLabelData[`icon${index}`] || 'None',
             } = childOptions;
             const isActive = index === currentStep;
             const labelText = useText(label);
@@ -103,8 +105,6 @@
                 StepIconComponent: IconCmp,
               };
             }
-            childOptions.active = isActive;
-            childOptions.isFirstRender = numRendersRef.current === 1;
 
             const StepComponent = (
               <Step key={labelText} {...stepProps}>
@@ -128,10 +128,17 @@
                     </StepLabel>
                   </StepButton>
                 )}
-
                 {type === 'vertical' && (
                   <StepContent>
-                    {React.cloneElement(child, { ...childOptions })}
+                    <Children
+                      stepLabelData={stepLabelData}
+                      setStepLabelData={setStepLabelData}
+                      active={isActive}
+                      index={index}
+                      isFirstRender={numRendersRef.current === 1}
+                    >
+                      {React.cloneElement(child, { ...childOptions })}
+                    </Children>
                   </StepContent>
                 )}
               </Step>
@@ -142,14 +149,24 @@
           })}
         </Stepper>
         {type === 'horizontal' && (
-          <Children>
+          <>
             {React.Children.map(children, (child, index) => {
               const { options: childOptions = {} } = child.props || {};
-              return index === currentStep || showAllSteps
-                ? React.cloneElement(child, { ...childOptions })
-                : null;
+              const isActive = index === currentStep;
+
+              return index === currentStep || showAllSteps ? (
+                <Children
+                  stepLabelData={stepLabelData}
+                  setStepLabelData={setStepLabelData}
+                  active={isActive}
+                  index={index}
+                  isFirstRender={numRendersRef.current === 1}
+                >
+                  {React.cloneElement(child, { ...childOptions })}
+                </Children>
+              ) : null;
             })}
-          </Children>
+          </>
         )}
       </>
     );

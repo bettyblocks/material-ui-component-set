@@ -6,7 +6,7 @@
   jsx: (() => {
     const { Tabs, Tab } = window.MaterialUI.Core;
     const { Icons } = window.MaterialUI;
-    const { Children, env } = B;
+    const { Children, env, useText } = B;
     const {
       defaultValue,
       variant,
@@ -19,6 +19,7 @@
     const [value, setValue] = useState(parseInt(defaultValue - 1, 10) || 0);
     const devValue = parseInt(defaultValue - 1, 10) || 0;
     const currentValue = isDev ? devValue : value;
+    const [tabData, setTabData] = useState({});
 
     const handleChange = (_, newValue) => {
       setValue(newValue);
@@ -38,12 +39,16 @@
         >
           {React.Children.map(children, (child, index) => {
             const { options } = child.props;
-            const { label, icon, disabled, disableRipple } = isDev
-              ? {}
-              : options;
+            const {
+              label = tabData[`label${index}`] || [`Tab`],
+              icon = tabData[`icon${index}`] || 'None',
+              disabled = tabData[`disabled${index}`] || false,
+              disableRipple = tabData[`disableRipple${index}`] || false,
+            } = isDev ? {} : options;
+
             return (
               <Tab
-                label={isDev ? `Tab ${index + 1}` : label}
+                label={useText(label)}
                 icon={
                   icon && icon !== 'None'
                     ? React.createElement(Icons[icon])
@@ -55,7 +60,13 @@
             );
           })}
         </Tabs>
-        <Children value={currentValue}>{children}</Children>
+        <Children
+          value={currentValue}
+          tabData={tabData}
+          setTabData={setTabData}
+        >
+          {children}
+        </Children>
       </div>
     );
     return isDev ? (
