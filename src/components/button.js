@@ -110,19 +110,23 @@
       );
     };
 
-    let ButtonComponent = <Comp />;
+    let ButtonComponent = <Comp loading={isLoading} />;
 
     if (isAction) {
       ButtonComponent = (
         <Action actionId={actionId}>
           {(callAction, { loading }) => {
+            useEffect(() => {
+              setIsLoading(loading);
+            }, [loading]);
+
             const onClickAction = event => {
               event.preventDefault();
               if (!isDev && !loading && linkType === 'action') {
                 callAction();
               }
             };
-            return <Comp onClick={onClickAction} loading={loading} />;
+            return <Comp onClick={onClickAction} loading={isLoading} />;
           }}
         </Action>
       );
