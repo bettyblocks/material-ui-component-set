@@ -1,3 +1,10 @@
+# [1.18.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.17.0...v1.18.0) (2020-07-13)
+
+
+### Features
+
+* add set search function ([3276ce8](https://github.com/bettyblocks/material-ui-component-set/commit/3276ce87d87397e4d73d9ea729f19f33b0b63322))
+
 # [1.17.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.16.3...v1.17.0) (2020-07-10)
 
 
