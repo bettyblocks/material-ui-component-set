@@ -9,6 +9,12 @@
     const { value } = parent;
     const isActive = value === index;
 
+    const emptyBox = (
+      <Box className={classes.empty} p={3}>
+        Tab
+      </Box>
+    );
+
     const TabPanel = (isActive || !isDev) && (
       <Typography
         component="div"
@@ -16,14 +22,7 @@
         hidden={!isActive}
         aria-labelledby="tabs"
       >
-        {isActive && (
-          <Box
-            className={isDev && children.length === 0 && classes.empty}
-            p={3}
-          >
-            {children.length === 0 ? 'Tab' : children}
-          </Box>
-        )}
+        {children.length === 0 ? emptyBox : children}
       </Typography>
     );
     return isDev ? <div>{TabPanel}</div> : TabPanel;

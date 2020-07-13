@@ -20,7 +20,11 @@
     );
 
     const PaperComponent = (
-      <Paper variant={variant} elevation={elevation} square={square}>
+      <Paper
+        variant={variant}
+        elevation={variant === 'flat' ? 0 : elevation}
+        square={square}
+      >
         {isEmpty ? PlaceHolder : children}
       </Paper>
     );

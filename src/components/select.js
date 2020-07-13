@@ -15,7 +15,7 @@
       hasError,
       margin,
       helperText,
-      selectOptions,
+      selectOptions = '',
       model,
       filter,
       optionType,
@@ -34,7 +34,7 @@
     const { label: propertyLabelText } = getProperty(property) || {};
     const propLabelOverride = useText(propertyLabelOverride);
     const propertyLabel = propLabelOverride || propertyLabelText;
-    const labelText = property ? propertyLabel : label;
+    const labelText = property ? propertyLabel : useText(label);
 
     const actionInput = getActionInput(actionInputId);
     const value = currentValue;
@@ -56,38 +56,44 @@
       }
     }, [isDev, defaultValue]);
 
-    const SelectCmp =
-      optionType === 'static' ? (
-        <TextField
-          select
-          value={value}
-          size={size}
-          variant={variant}
-          fullWidth={fullWidth}
-          onChange={handleChange}
-          inputProps={{
-            name: actionInput && actionInput.name,
-            tabIndex: isDev ? -1 : 0,
-          }}
-          required={required}
-          disabled={disabled}
-          label={labelText}
-          error={hasError}
-          margin={margin}
-          helperText={helper}
-        >
-          {(selectOptions || '').split('\n').map(option => (
-            <MenuItem key={option} value={option}>
-              {option}
-            </MenuItem>
-          ))}
-        </TextField>
-      ) : (
+    const TextComp = ({ children }) => (
+      <TextField
+        select
+        defaultValue={value}
+        value={value}
+        size={size}
+        variant={variant}
+        fullWidth={fullWidth}
+        onChange={handleChange}
+        inputProps={{
+          name: actionInput && actionInput.name,
+          tabIndex: isDev ? -1 : 0,
+        }}
+        required={required}
+        disabled={disabled}
+        label={labelText}
+        error={hasError}
+        margin={margin}
+        helperText={helper}
+      >
+        {children}
+      </TextField>
+    );
+
+    let SelectCmp = (
+      <TextComp>
+        {selectOptions.split('\n').map(option => (
+          <MenuItem key={option} value={option}>
+            {option}
+          </MenuItem>
+        ))}
+      </TextComp>
+    );
+    if (optionType !== 'static') {
+      SelectCmp = (
         <GetAll modelId={model} filter={filter} skip={0} take={50}>
           {({ loading, error, data }) => {
-            if (loading) {
-              return <span>Loading...</span>;
-            }
+            if (loading) return <span>Loading...</span>;
 
             if (error) {
               return <span>Something went wrong: {error.message} :(</span>;
@@ -95,25 +101,7 @@
 
             const { results } = data;
             return (
-              <TextField
-                select
-                defaultValue={value}
-                value={value}
-                size={size}
-                variant={variant}
-                fullWidth={fullWidth}
-                onChange={handleChange}
-                inputProps={{
-                  name: actionInput && actionInput.name,
-                  tabIndex: isDev ? -1 : 0,
-                }}
-                required={required}
-                disabled={disabled}
-                label={labelText}
-                error={hasError}
-                margin={margin}
-                helperText={helper}
-              >
+              <TextComp>
                 {results.map(
                   item =>
                     propName &&
@@ -123,11 +111,12 @@
                       </MenuItem>
                     ),
                 )}
-              </TextField>
+              </TextComp>
             );
           }}
         </GetAll>
       );
+    }
 
     return isDev ? <div className={classes.root}>{SelectCmp}</div> : SelectCmp;
   })(),

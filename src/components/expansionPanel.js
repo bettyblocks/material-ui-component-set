@@ -15,14 +15,6 @@
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
     const isPristine = isEmpty && isDev;
-    const PlaceHolder = (
-      <div
-        className={[
-          isEmpty ? classes.empty : '',
-          isPristine ? classes.pristine : '',
-        ].join(' ')}
-      />
-    );
     const {
       title,
       disabled,
@@ -32,16 +24,47 @@
       elevation,
     } = options;
 
+    const [expanded, setExpanded] = useState(defaultExpanded);
+
+    const closePanel = () => setExpanded(false);
+    const openPanel = () => setExpanded(true);
+    const togglePanel = () => setExpanded(s => !s);
+
+    useEffect(() => {
+      B.defineFunction('Expand', openPanel);
+      B.defineFunction('Collapse', closePanel);
+      B.defineFunction('Expand/Collapse', togglePanel);
+    }, []);
+
+    useEffect(() => {
+      if (isDev) {
+        setExpanded(defaultExpanded);
+      }
+    }, [defaultExpanded, isDev]);
+
+    const PlaceHolder = (
+      <div
+        className={[
+          isEmpty ? classes.empty : '',
+          isPristine ? classes.pristine : '',
+        ].join(' ')}
+      />
+    );
+
+    const onClick = () => {
+      if (isDev) return;
+      togglePanel();
+    };
+
     const panelOptions = {
       disabled,
       defaultExpanded,
       square,
       variant,
-      elevation,
+      elevation: variant === 'flat' ? 0 : elevation,
+      expanded,
+      onClick,
     };
-    if (isDev) {
-      panelOptions.expanded = defaultExpanded;
-    }
 
     const ExpansionPanelComponent = (
       <ExpansionPanel {...panelOptions}>
