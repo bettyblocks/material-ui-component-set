@@ -66,6 +66,12 @@
           type: 'TOGGLE',
         },
         {
+          value: true,
+          label: 'Show Error',
+          key: 'showError',
+          type: 'TOGGLE',
+        },
+        {
           value: false,
           label: 'Disabled',
           key: 'disabled',

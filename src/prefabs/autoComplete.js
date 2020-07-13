@@ -117,6 +117,12 @@
           type: 'TOGGLE',
         },
         {
+          value: true,
+          label: 'Show Error',
+          key: 'showError',
+          type: 'TOGGLE',
+        },
+        {
           type: 'TOGGLE',
           label: 'Disabled',
           key: 'disabled',

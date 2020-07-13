@@ -24,6 +24,7 @@
       actionInputId,
       property,
       propertyLabelOverride,
+      showError,
     } = options;
     const { TextField, MenuItem } = window.MaterialUI.Core;
     const isDev = B.env === 'dev';
@@ -96,7 +97,9 @@
             if (loading) return <span>Loading...</span>;
 
             if (error) {
-              return <span>Something went wrong: {error.message} :(</span>;
+              B.triggerEvent('onError', error.message);
+              if (!showError) return <></>;
+              return <span>{error.message}</span>;
             }
 
             const { results } = data;

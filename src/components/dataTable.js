@@ -45,6 +45,7 @@
       title,
       pagination,
       linkTo,
+      showError,
     } = options;
     const [page, setPage] = React.useState(0);
     const takeNum = parseInt(take, 10);
@@ -332,6 +333,9 @@
           >
             {({ loading, error, data }) => {
               if (loading || error) {
+                if (error) {
+                  B.triggerEvent('onError', error.message);
+                }
                 return (
                   <>
                     <TableContainer classes={{ root: classes.container }}>
@@ -346,7 +350,7 @@
                               colIdx => (
                                 <TableCell key={colIdx}>
                                   <div className={classes.skeleton}>
-                                    {error && 'Oops, something went wrong'}
+                                    {error && !showError && error.message}
                                   </div>
                                 </TableCell>
                               ),

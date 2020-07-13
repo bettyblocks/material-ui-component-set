@@ -250,6 +250,12 @@
           key: 'outerSpacing',
           type: 'SIZES',
         },
+        {
+          value: true,
+          label: 'Show Error',
+          key: 'showError',
+          type: 'TOGGLE',
+        },
       ],
       descendants: [
         {

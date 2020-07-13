@@ -98,6 +98,12 @@
           value: false,
           type: 'TOGGLE',
         },
+        {
+          value: true,
+          label: 'Show Error',
+          key: 'showError',
+          type: 'TOGGLE',
+        },
       ],
       descendants: [],
     },

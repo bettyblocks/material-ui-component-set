@@ -395,6 +395,12 @@
             },
           },
         },
+        {
+          value: true,
+          label: 'Error',
+          key: 'showError',
+          type: 'TOGGLE',
+        },
       ],
       descendants: [],
     },

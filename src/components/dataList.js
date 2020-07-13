@@ -9,7 +9,7 @@
         const [page, setPage] = useState(1);
         const [search, setSearch] = useState('');
         const [isTyping, setIsTyping] = useState(false);
-        const { filter, hidePagination, type, model } = options;
+        const { filter, hidePagination, type, model, showError } = options;
 
         const take = parseInt(options.take, 10) || 50;
         const searchProp = B.getProperty(options.searchProperty);
@@ -77,7 +77,11 @@
             >
               {({ loading, error, data }) => {
                 if (loading) return 'loading...';
-                if (error) return 'failed';
+                if (error) {
+                  B.triggerEvent('onError', error.message);
+                  if (!showError) return <></>;
+                  return <span>{error.message}</span>;
+                }
 
                 return (
                   <>

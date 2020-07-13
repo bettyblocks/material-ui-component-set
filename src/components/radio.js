@@ -25,6 +25,7 @@
       property,
       propertyLabelOverride,
       fullWidth,
+      showError,
     } = options;
     const isDev = B.env === 'dev';
     const { GetAll, getProperty, useText, getActionInput } = B;
@@ -81,7 +82,9 @@
               if (loading) return <span>Loading...</span>;
 
               if (err) {
-                return <span>Something went wrong: {err.message} :(</span>;
+                B.triggerEvent('onError', err.message);
+                if (!showError) return <></>;
+                return <span>{err.message}</span>;
               }
 
               const { results } = data;

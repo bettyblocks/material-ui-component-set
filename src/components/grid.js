@@ -26,6 +26,7 @@
       filter,
       visibility,
       repeatedItems,
+      showError,
     } = options;
     const isEmpty = children.length === 0;
     const isContainer = type === 'container';
@@ -121,7 +122,11 @@
       <GetAll modelId={model} filter={filter}>
         {({ loading, error, data }) => {
           if (loading) return 'loading...';
-          if (error) return 'failed';
+          if (error) {
+            B.triggerEvent('onError', error.message);
+            if (!showError) return <></>;
+            return <span>{error.message}</span>;
+          }
 
           return (
             <Grid {...gridOptions}>

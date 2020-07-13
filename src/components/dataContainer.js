@@ -9,7 +9,7 @@
         const isEmpty = children.length === 0;
         const isDev = B.env === 'dev';
         const isPristine = isEmpty && isDev;
-        const { filter, model, redirectWithoutResult } = options;
+        const { filter, model, redirectWithoutResult, showError } = options;
 
         const builderLayout = () => (
           <>
@@ -38,7 +38,11 @@
             <B.GetOne modelId={model} filter={filter}>
               {({ loading, error, data }) => {
                 if (loading) return 'loading...';
-                if (error) return 'failed';
+                if (error) {
+                  B.triggerEvent('onError', error.message);
+                  if (!showError) return <></>;
+                  return <span>{error.message}</span>;
+                }
 
                 if (!data && redirectWithoutResult) {
                   redirect();

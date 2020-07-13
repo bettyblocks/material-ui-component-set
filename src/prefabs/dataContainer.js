@@ -27,6 +27,12 @@
           key: 'redirectWithoutResult',
           type: 'ENDPOINT',
         },
+        {
+          value: true,
+          label: 'Show Error',
+          key: 'showError',
+          type: 'TOGGLE',
+        },
       ],
       descendants: [],
     },

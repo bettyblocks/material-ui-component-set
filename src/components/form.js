@@ -15,6 +15,7 @@
           formErrorMessage,
           formSuccessMessage,
           redirect,
+          showError,
         } = options;
 
         const formRef = React.createRef();
@@ -56,7 +57,7 @@
               <>
                 {trigger(data, loading, error)}
                 <div className={classes.messageContainer}>
-                  {error && (
+                  {error && !showError && (
                     <span className={classes.error}>{formErrorMessage}</span>
                   )}
                   {data && (
@@ -101,7 +102,10 @@
                         data: modelData,
                       }) => {
                         if (dataLoading) return 'Loading...';
-                        if (dataError) return 'Failed';
+                        if (dataError) {
+                          B.triggerEvent('onError', dataError.message);
+                          return dataError.message;
+                        }
 
                         const item = modelData.results[0];
 

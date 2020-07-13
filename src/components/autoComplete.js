@@ -27,6 +27,7 @@
       propertyLabelOverride,
       closeOnSelect,
       renderCheckboxes,
+      showError,
     } = options;
     const { Autocomplete } = window.MaterialUI.Lab;
     const {
@@ -178,7 +179,9 @@
       <GetAll modelId={model} filter={filter} skip={0} take={50}>
         {({ loading, error: errorResp, data }) => {
           if (errorResp) {
-            return <span>Something went wrong: {errorResp.message} :(</span>;
+            B.triggerEvent('onError', errorResp.message);
+            if (!showError) return <></>;
+            return <span>{errorResp.message}</span>;
           }
 
           let reason = 'No data';
