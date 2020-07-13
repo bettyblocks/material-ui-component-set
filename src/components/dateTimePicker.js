@@ -44,13 +44,17 @@
     const { label: propertyLabelText } = getProperty(property) || {};
     const propLabelOverride = useText(propertyLabelOverride);
     const propertyLabel = propLabelOverride || propertyLabelText;
-    const labelText = property ? propertyLabel : label;
+    const labelText = property ? propertyLabel : useText(label);
 
     const isValidDate = date => date instanceof Date && !isNaN(date);
 
     const changeHandler = date => {
       setSelectedDate(date);
     };
+
+    useEffect(() => {
+      B.defineFunction('Clear', () => setSelectedDate(''));
+    }, []);
 
     const pad = value => {
       if (value < 10) {

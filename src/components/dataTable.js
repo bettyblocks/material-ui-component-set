@@ -4,7 +4,15 @@
   allowedTypes: ['DATATABLE_COLUMN'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { Children, env, GetAll, getProperty, useText, GetOneProvider } = B;
+    const {
+      Children,
+      env,
+      GetAll,
+      getProperty,
+      useText,
+      ModelProvider,
+      useEndpoint,
+    } = B;
     const {
       Table,
       TableBody,
@@ -37,6 +45,7 @@
       stickyHeader,
       title,
       pagination,
+      linkTo,
     } = options;
     const [page, setPage] = React.useState(0);
     const takeNum = parseInt(take, 10);
@@ -54,7 +63,7 @@
         ? {
             sort: {
               field: orderProp,
-              order: 'ASC',
+              order: sortOrder.toUpperCase(),
             },
           }
         : {},
@@ -62,6 +71,7 @@
     const titleText = useText(title);
     const hasToolbar = titleText || (searchProperty && !hideSearch);
     const elevationLevel = variant === 'flat' ? 0 : elevation;
+    const hasLink = linkTo && linkTo.id !== '';
 
     useEffect(() => {
       B.defineFunction('SetSearchValue', event => {
@@ -257,6 +267,38 @@
       setSearch(event.target.value);
     };
 
+    const isFlatValue = value =>
+      typeof value === 'string' ||
+      typeof value === 'number' ||
+      typeof value === 'boolean';
+
+    const history = useHistory();
+
+    const handleRowClick = rowValue => {
+      B.triggerEvent('OnRowClick', rowValue);
+      if (hasLink) {
+        const { id, params } = linkTo;
+        const newParams = Object.entries(params).reduce((acc, cv) => {
+          const key = cv[0];
+          const value = cv[1];
+          if (isFlatValue(value[0])) {
+            acc[key] = value;
+          } else {
+            const propId = value[0].id;
+            const property = getProperty(propId).name;
+            acc[key] = [rowValue[property].toString()];
+          }
+          return acc;
+        }, {});
+
+        const endpointParams = {
+          id,
+          params: newParams,
+        };
+        history.push(useEndpoint(endpointParams));
+      }
+    };
+
     return (
       <div className={classes.root}>
         <Paper
@@ -376,14 +418,16 @@
                       </TableHead>
                       <TableBody>
                         {results.map(value => (
-                          <TableRow
-                            key={value[0]}
-                            classes={{ root: classes.bodyRow }}
-                          >
-                            <GetOneProvider value={value}>
+                          <ModelProvider value={value} id={model}>
+                            <TableRow
+                              key={value[0]}
+                              classes={{ root: classes.bodyRow }}
+                              onClick={() => handleRowClick(value)}
+                              data-id={value.id}
+                            >
                               {children}
-                            </GetOneProvider>
-                          </TableRow>
+                            </TableRow>
+                          </ModelProvider>
                         ))}
                       </TableBody>
                     </Table>
@@ -456,15 +500,15 @@
         letterSpacing: ({ options: { titleType } }) =>
           style.getLetterSpacing(titleType),
         lineHeight: '1.2',
-        [`@media ${B.mediaMinWidth(768)}`]: {
+        [`@media ${B.mediaMinWidth(600)}`]: {
           fontSize: ({ options: { titleType } }) =>
             style.getFontSize(titleType, 'Portrait'),
         },
-        [`@media ${B.mediaMinWidth(1024)}`]: {
+        [`@media ${B.mediaMinWidth(960)}`]: {
           fontSize: ({ options: { titleType } }) =>
             style.getFontSize(titleType, 'Landscape'),
         },
-        [`@media ${B.mediaMinWidth(1200)}`]: {
+        [`@media ${B.mediaMinWidth(1280)}`]: {
           fontSize: ({ options: { titleType } }) =>
             style.getFontSize(titleType, 'Desktop'),
         },
@@ -479,6 +523,14 @@
             style.getColor(backgroundHeader),
             '!important',
           ],
+        },
+      },
+      bodyRow: {
+        cursor: ({ options: { linkTo } }) =>
+          linkTo && linkTo.id !== '' && 'pointer',
+        '&:hover td': {
+          backgroundColor: ({ options: { linkTo, backgroundRowHover } }) =>
+            linkTo && [style.getColor(backgroundRowHover), '!important'],
         },
       },
       searchField: {
@@ -497,13 +549,13 @@
       },
       skeleton: {
         height: `calc(${style.getFont('Body1').Mobile} * 1.2)`,
-        [`@media ${B.mediaMinWidth(768)}`]: {
+        [`@media ${B.mediaMinWidth(600)}`]: {
           height: `calc(${style.getFont('Body1').Portrait} * 1.2)`,
         },
-        [`@media ${B.mediaMinWidth(1024)}`]: {
+        [`@media ${B.mediaMinWidth(960)}`]: {
           height: `calc(${style.getFont('Body1').Landscape} * 1.2)`,
         },
-        [`@media ${B.mediaMinWidth(1200)}`]: {
+        [`@media ${B.mediaMinWidth(1280)}`]: {
           height: `calc(${style.getFont('Body1').Desktop} * 1.2)`,
         },
         backgroundColor: '#eee',
@@ -528,7 +580,7 @@
           backgroundPositionX: '-150%',
         },
       },
-      [`@media ${B.mediaMinWidth(768)}`]: {
+      [`@media ${B.mediaMinWidth(600)}`]: {
         root: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Portrait'),
@@ -540,7 +592,7 @@
             getSpacing(outerSpacing[3], 'Portrait'),
         },
       },
-      [`@media ${B.mediaMinWidth(1024)}`]: {
+      [`@media ${B.mediaMinWidth(960)}`]: {
         root: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Landscape'),
@@ -552,7 +604,7 @@
             getSpacing(outerSpacing[3], 'Landscape'),
         },
       },
-      [`@media ${B.mediaMinWidth(1200)}`]: {
+      [`@media ${B.mediaMinWidth(1280)}`]: {
         root: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Desktop'),

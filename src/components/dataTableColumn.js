@@ -1,7 +1,7 @@
 (() => ({
   name: 'DataTableColumn',
   type: 'DATATABLE_COLUMN',
-  allowedTypes: ['CONTENT_COMPONENT'],
+  allowedTypes: ['CONTENT_COMPONENT', 'CONTAINER_COMPONENT'],
   orientation: 'VERTICAL',
   jsx: (() => {
     const { env, useText, getProperty, Property } = B;
@@ -14,8 +14,11 @@
       sortable,
     } = options;
     const { headerOnly, handleSort, orderBy } = parent || {};
+    const propertyId = Array.isArray(property)
+      ? property[property.length - 1]
+      : property;
     const { name: propertyName, label: propertyLabel } =
-      getProperty(property) || {};
+      getProperty(propertyId) || {};
     const { field, order = 'asc' } = orderBy || {};
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
@@ -95,6 +98,7 @@
       tableColumn: {
         display: 'table-cell',
         verticalAlign: 'middle',
+        width: ({ options: { width } }) => width || 'auto',
         '& > div': {
           display: 'block',
         },
@@ -115,6 +119,7 @@
       },
       root: {
         display: isDev && ['block', '!important'],
+        width: ({ options: { width } }) => width || 'auto',
         backgroundColor: ({ options: { background } }) => [
           style.getColor(background),
           '!important',
@@ -132,15 +137,15 @@
         textTransform: ({ options: { type } }) => style.getTextTransform(type),
         letterSpacing: ({ options: { type } }) => style.getLetterSpacing(type),
         lineHeight: '1.2',
-        [`@media ${B.mediaMinWidth(768)}`]: {
+        [`@media ${B.mediaMinWidth(600)}`]: {
           fontSize: ({ options: { type } }) =>
             style.getFontSize(type, 'Portrait'),
         },
-        [`@media ${B.mediaMinWidth(1024)}`]: {
+        [`@media ${B.mediaMinWidth(960)}`]: {
           fontSize: ({ options: { type } }) =>
             style.getFontSize(type, 'Landscape'),
         },
-        [`@media ${B.mediaMinWidth(1200)}`]: {
+        [`@media ${B.mediaMinWidth(1280)}`]: {
           fontSize: ({ options: { type } }) =>
             style.getFontSize(type, 'Desktop'),
         },
@@ -157,15 +162,15 @@
         letterSpacing: ({ options: { bodyType } }) =>
           style.getLetterSpacing(bodyType),
         lineHeight: '1.2',
-        [`@media ${B.mediaMinWidth(768)}`]: {
+        [`@media ${B.mediaMinWidth(600)}`]: {
           fontSize: ({ options: { bodyType } }) =>
             style.getFontSize(bodyType, 'Portrait'),
         },
-        [`@media ${B.mediaMinWidth(1024)}`]: {
+        [`@media ${B.mediaMinWidth(960)}`]: {
           fontSize: ({ options: { bodyType } }) =>
             style.getFontSize(bodyType, 'Landscape'),
         },
-        [`@media ${B.mediaMinWidth(1200)}`]: {
+        [`@media ${B.mediaMinWidth(1280)}`]: {
           fontSize: ({ options: { bodyType } }) =>
             style.getFontSize(bodyType, 'Desktop'),
         },

@@ -8,16 +8,21 @@
     const { Close } = window.MaterialUI.Icons;
     const { Icons } = window.MaterialUI;
     const { IconButton } = window.MaterialUI.Core;
-
-    const isDev = B.env === 'dev';
-    const [open, setOpen] = useState(options.visible);
+    const { env, useText } = B;
+    const { visible, icon, collapsable, titleText, bodyText } = options;
+    const title = useText(titleText);
+    const body = useText(bodyText);
+    const isDev = env === 'dev';
+    const [open, setOpen] = useState(visible);
+    const [text, setText] = useState('');
 
     useEffect(() => {
-      setOpen(options.visible);
-    }, [options.visible]);
+      setOpen(visible);
+    }, [visible]);
 
     useEffect(() => {
-      B.defineFunction('Show', () => {
+      B.defineFunction('Show', showMessage => {
+        setText(showMessage);
         setOpen(true);
       });
 
@@ -32,13 +37,9 @@
           root: classes.root,
         }}
         className={open || isDev ? '' : classes.hide}
-        icon={
-          options.icon !== 'None'
-            ? React.createElement(Icons[options.icon])
-            : null
-        }
+        icon={icon !== 'None' ? React.createElement(Icons[icon]) : null}
         action={
-          options.collapsable && (
+          collapsable ? (
             <IconButton
               color="inherit"
               size="small"
@@ -48,15 +49,11 @@
             >
               <Close />
             </IconButton>
-          )
+          ) : null
         }
       >
-        {options.titleText.length > 0 && (
-          <AlertTitle>
-            <B.Text value={options.titleText} />
-          </AlertTitle>
-        )}
-        <B.Text value={options.bodyText} />
+        {title && <AlertTitle>{title}</AlertTitle>}
+        {text || body}
       </Alert>
     );
     return isDev ? (
@@ -83,11 +80,18 @@
           ],
         },
         '& .MuiAlert-icon': {
-          color: ({ options: { textColor } }) => [
-            style.getColor(textColor),
+          color: ({ options: { iconColor } }) => [
+            style.getColor(iconColor),
             '!important',
           ],
         },
+        border: ({ options: { borderColor } }) =>
+          borderColor !== 'Transparent'
+            ? `0.0625rem solid ${style.getColor(borderColor)}`
+            : 'none',
+        justifyContent: ({ options: { horizontalAlignment } }) =>
+          horizontalAlignment,
+        alignItems: ({ options: { verticalAlignment } }) => verticalAlignment,
         marginTop: ({ options: { outerSpacing } }) =>
           getSpacing(outerSpacing[0]),
         marginRight: ({ options: { outerSpacing } }) =>

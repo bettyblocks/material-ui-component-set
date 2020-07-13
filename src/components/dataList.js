@@ -9,7 +9,7 @@
         const [page, setPage] = useState(1);
         const [search, setSearch] = useState('');
         const [isTyping, setIsTyping] = useState(false);
-        const { filter, hidePagination } = options;
+        const { filter, hidePagination, type, model } = options;
 
         const take = parseInt(options.take, 10) || 50;
         const searchProp = B.getProperty(options.searchProperty);
@@ -28,28 +28,31 @@
                 />
               </div>
             )}
-            <div
-              className={[
-                isEmpty ? classes.empty : '',
-                isPristine ? classes.pristine : '',
-              ].join(' ')}
-            >
-              {isPristine ? 'Data List' : children}
-            </div>
-            {Array.from(Array(take - 1).keys()).map(key => (
+            <div className={type === 'grid' ? classes.grid : ''}>
               <div
-                key={key}
                 className={[
-                  isDev ? classes.pristine : '',
-                  classes.empty,
-                  classes.placeholder,
+                  isEmpty ? classes.empty : '',
+                  isPristine ? classes.pristine : '',
                 ].join(' ')}
               >
-                {isDev ? 'Dynamic Item' : ''}
+                {isPristine ? 'Data List' : children}
               </div>
-            ))}
+
+              {Array.from(Array(take - 1).keys()).map(key => (
+                <div
+                  key={key}
+                  className={[
+                    isDev ? classes.pristine : '',
+                    classes.empty,
+                    classes.placeholder,
+                  ].join(' ')}
+                >
+                  {isDev ? 'Dynamic Item' : ''}
+                </div>
+              ))}
+            </div>
             <div className={classes.footer}>
-              {(isDev || options.model) && !hidePagination && (
+              {(isDev || model) && !hidePagination && (
                 <Pagination totalCount={0} resultCount={take} currentPage={1} />
               )}
             </div>
@@ -57,13 +60,13 @@
         );
 
         const canvasLayout = () => {
-          if (!options.model) {
+          if (!model) {
             return builderLayout();
           }
 
           return (
             <B.GetAll
-              modelId={options.model}
+              modelId={model}
               filter={
                 searchProp && search !== ''
                   ? { ...filter, [searchProp.id]: { matches: search } }
@@ -89,11 +92,13 @@
                         />
                       )}
                     </div>
-                    {data.results.map(item => (
-                      <B.GetOneProvider key={item.id} value={item}>
-                        {children}
-                      </B.GetOneProvider>
-                    ))}
+                    <div className={type === 'grid' ? classes.grid : ''}>
+                      {data.results.map(item => (
+                        <B.ModelProvider key={item.id} value={item} id={model}>
+                          {children}
+                        </B.ModelProvider>
+                      ))}
+                    </div>
                     <div className={classes.footer}>
                       {!isEmpty && !hidePagination && (
                         <Pagination
@@ -286,7 +291,7 @@
         textDecoration: 'none',
       },
       arrowDisabled: { color: '#ccc' },
-      [`@media ${B.mediaMinWidth(768)}`]: {
+      [`@media ${B.mediaMinWidth(600)}`]: {
         root: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Portrait'),
@@ -298,7 +303,7 @@
             getSpacing(outerSpacing[3], 'Portrait'),
         },
       },
-      [`@media ${B.mediaMinWidth(1024)}`]: {
+      [`@media ${B.mediaMinWidth(960)}`]: {
         root: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Landscape'),
@@ -310,7 +315,7 @@
             getSpacing(outerSpacing[3], 'Landscape'),
         },
       },
-      [`@media ${B.mediaMinWidth(1200)}`]: {
+      [`@media ${B.mediaMinWidth(1280)}`]: {
         root: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Desktop'),
@@ -321,6 +326,12 @@
           marginLeft: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[3], 'Desktop'),
         },
+      },
+      grid: {
+        display: 'grid',
+        gridTemplateColumns: ({ options: { width } }) =>
+          `repeat(auto-fit, minmax(${width}, 1fr))`,
+        gridGap: ({ options: { gap } }) => `${gap}`,
       },
       empty: {
         display: 'flex',

@@ -49,7 +49,7 @@
     const { label: propertyLabelText } = getProperty(property) || {};
     const propLabelOverride = useText(propertyLabelOverride);
     const propertyLabel = propLabelOverride || propertyLabelText;
-    const labelText = property ? propertyLabel : label;
+    const labelText = property ? propertyLabel : useText(label);
 
     const actionInput = getActionInput(actionInputId);
 
@@ -60,6 +60,10 @@
 
       setCurrentValue(eventValue);
     };
+
+    useEffect(() => {
+      B.defineFunction('Clear', () => setCurrentValue(''));
+    }, []);
 
     const handleClickShowPassword = () => {
       togglePassword(!showPassword);
