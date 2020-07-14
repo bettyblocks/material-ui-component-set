@@ -135,8 +135,7 @@
             return <span>{error.message}</span>;
           }
 
-          const { results } = data;
-
+          const { results = [] } = data || {};
           if (results.length > 0) {
             B.triggerEvent('onSuccess', results);
           } else {

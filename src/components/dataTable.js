@@ -398,7 +398,7 @@
                 );
               }
 
-              const { totalCount, results } = data;
+              const { totalCount, results = [] } = data || {};
 
               if (results.length > 0) {
                 B.triggerEvent('onSuccess', results);
@@ -441,7 +441,7 @@
                       </TableBody>
                     </Table>
                   </TableContainer>
-                  {pagination && (
+                  {pagination && totalCount && (
                     <TablePagination
                       classes={{ root: classes.pagination }}
                       rowsPerPageOptions={[5, 10, 25, 50, 100]}

@@ -195,8 +195,7 @@
             reason = 'No property selected';
           }
 
-          const { results } = data;
-
+          const { results = [] } = data || {};
           if (results.length > 0) {
             B.triggerEvent('onSuccess', results);
           } else {

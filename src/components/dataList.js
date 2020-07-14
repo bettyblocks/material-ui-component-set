@@ -89,10 +89,11 @@
                   return <span>{error.message}</span>;
                 }
 
-                const { results, totalCount } = data;
-                const resultCount = results.length;
+                const { results = [], totalCount } = data || {};
+                const resultCount = results && results.length;
+                const hasResults = resultCount > 0;
 
-                if (resultCount > 0) {
+                if (hasResults) {
                   B.triggerEvent('onSuccess', results);
                 } else {
                   B.triggerEvent('onNoResults', results);
