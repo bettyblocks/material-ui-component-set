@@ -20,6 +20,7 @@
 
         const formRef = React.createRef();
 
+        const displayError = showError === 'built-in';
         const empty = children.length === 0;
         const isDev = B.env === 'dev';
         const isPristine = empty && isDev;
@@ -31,7 +32,11 @@
 
         const trigger = (data, loading, error) => {
           if (data) {
-            B.triggerEvent('onSuccess', data);
+            if (data.actionb5) {
+              B.triggerEvent('onSuccess', data.actionb5);
+            } else {
+              B.triggerEvent('onNoResults', data.actionb5);
+            }
 
             if (hasRedirect) {
               if (redirectTo === location.pathname) {
@@ -46,7 +51,7 @@
             B.triggerEvent('onLoad', loading);
           }
 
-          if (error) {
+          if (error && !displayError) {
             B.triggerEvent('onError', error);
           }
         };
@@ -57,7 +62,7 @@
               <>
                 {trigger(data, loading, error)}
                 <div className={classes.messageContainer}>
-                  {error && !showError && (
+                  {error && displayError && (
                     <span className={classes.error}>{formErrorMessage}</span>
                   )}
                   {data && (
@@ -101,13 +106,24 @@
                         error: dataError,
                         data: modelData,
                       }) => {
-                        if (dataLoading) return 'Loading...';
-                        if (dataError) {
+                        if (dataLoading) {
+                          B.triggerEvent('onLoad', dataLoading);
+                          return 'Loading...';
+                        }
+                        if (dataError && !displayError) {
                           B.triggerEvent('onError', dataError.message);
+                        }
+                        if (dataError && displayError) {
                           return dataError.message;
                         }
 
-                        const item = modelData.results[0];
+                        const item = modelData && modelData.results[0];
+
+                        if (item && item.id) {
+                          B.triggerEvent('onSuccess', item);
+                        } else {
+                          B.triggerEvent('onNoResults', item);
+                        }
 
                         if (!item) return children;
 

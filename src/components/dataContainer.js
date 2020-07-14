@@ -10,6 +10,7 @@
         const isDev = B.env === 'dev';
         const isPristine = isEmpty && isDev;
         const { filter, model, redirectWithoutResult, showError } = options;
+        const displayError = showError === 'built-in';
 
         const builderLayout = () => (
           <>
@@ -37,11 +38,22 @@
           return (
             <B.GetOne modelId={model} filter={filter}>
               {({ loading, error, data }) => {
-                if (loading) return 'loading...';
-                if (error) {
+                if (loading) {
+                  B.triggerEvent('onLoad', loading);
+                  return <span>Loading...</span>;
+                }
+
+                if (error && !displayError) {
                   B.triggerEvent('onError', error.message);
-                  if (!showError) return <></>;
+                }
+                if (error && displayError) {
                   return <span>{error.message}</span>;
+                }
+
+                if (data && data.id) {
+                  B.triggerEvent('onSuccess', data);
+                } else {
+                  B.triggerEvent('onNoResults', data);
                 }
 
                 if (!data && redirectWithoutResult) {

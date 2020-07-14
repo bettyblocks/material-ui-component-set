@@ -396,10 +396,18 @@
           },
         },
         {
-          value: true,
-          label: 'Error',
+          value: 'built-in',
+          label: 'Error message',
           key: 'showError',
-          type: 'TOGGLE',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Built in', value: 'built-in' },
+              { name: 'User interaction', value: 'user-interaction' },
+            ],
+          },
         },
       ],
       descendants: [],

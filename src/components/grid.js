@@ -31,6 +31,8 @@
     const isEmpty = children.length === 0;
     const isContainer = type === 'container';
     const isItem = type === 'item';
+    const displayError = showError === 'built-in';
+
     const gridDirection = reverse ? `${direction}-reverse` : direction;
     const take = parseInt(repeatedItems, 10) || 50;
     const [isVisible, setIsVisible] = useState(visibility);
@@ -121,16 +123,29 @@
     ) : (
       <GetAll modelId={model} filter={filter}>
         {({ loading, error, data }) => {
-          if (loading) return 'loading...';
-          if (error) {
+          if (loading) {
+            B.triggerEvent('onLoad', loading);
+            return <span>Loading...</span>;
+          }
+
+          if (error && !displayError) {
             B.triggerEvent('onError', error.message);
-            if (!showError) return <></>;
+          }
+          if (error && displayError) {
             return <span>{error.message}</span>;
+          }
+
+          const { results } = data;
+
+          if (results.length > 0) {
+            B.triggerEvent('onSuccess', results);
+          } else {
+            B.triggerEvent('onNoResults', results);
           }
 
           return (
             <Grid {...gridOptions}>
-              {data.results.map(item => (
+              {results.map(item => (
                 <ModelProvider key={item.id} value={item} id={model}>
                   {children}
                 </ModelProvider>
