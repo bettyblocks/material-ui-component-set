@@ -441,7 +441,7 @@
                       </TableBody>
                     </Table>
                   </TableContainer>
-                  {pagination && totalCount && (
+                  {pagination && (
                     <TablePagination
                       classes={{ root: classes.pagination }}
                       rowsPerPageOptions={[5, 10, 25, 50, 100]}
