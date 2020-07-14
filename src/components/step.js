@@ -8,28 +8,17 @@
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
     const { label, icon } = options || {};
-    const {
-      active,
-      isFirstRender,
-      stepLabelData,
-      setStepLabelData,
-      index,
-    } = parent;
+    const { stepLabelData, setStepLabelData, active, isFirstRender } = parent;
 
-    const StepCmp = (
-      <>
-        {isEmpty && isDev ? (
-          <div className={classes.empty}>Step</div>
-        ) : (
-          children
-        )}
-      </>
-    );
+    const StepContent =
+      isEmpty && isDev ? <div className={classes.empty}>Step</div> : children;
+
+    const StepCmp = <>{active ? StepContent : null}</>;
 
     useEffect(() => {
       if (active && !isFirstRender) {
         B.triggerEvent('OnStepActive');
-      } else if (!active) {
+      } else if (!active && !isFirstRender) {
         B.triggerEvent('OnStepInactive');
       }
     }, [active, isFirstRender]);
