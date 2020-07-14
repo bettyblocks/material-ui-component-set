@@ -90,9 +90,10 @@
                 }
 
                 const { results, totalCount } = data;
-                const resultCount = results.length;
+                const resultCount = results && results.length;
+                const hasResults = data && resultCount > 0;
 
-                if (resultCount > 0) {
+                if (hasResults) {
                   B.triggerEvent('onSuccess', results);
                 } else {
                   B.triggerEvent('onNoResults', results);
