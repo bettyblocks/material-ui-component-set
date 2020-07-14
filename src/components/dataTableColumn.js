@@ -1,7 +1,7 @@
 (() => ({
   name: 'DataTableColumn',
   type: 'DATATABLE_COLUMN',
-  allowedTypes: ['CONTENT_COMPONENT'],
+  allowedTypes: ['CONTENT_COMPONENT', 'CONTAINER_COMPONENT'],
   orientation: 'VERTICAL',
   jsx: (() => {
     const { env, useText, getProperty, Property } = B;
