@@ -1,3 +1,23 @@
+# [1.19.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.18.0...v1.19.0) (2020-07-14)
+
+
+### Bug Fixes
+
+* add form component styling options to form prefab ([90f51d1](https://github.com/bettyblocks/material-ui-component-set/commit/90f51d156ec6fff983d7f556b5ce872b4b7562d1))
+* add styling options to all textfields ([6f31235](https://github.com/bettyblocks/material-ui-component-set/commit/6f31235f88ac083e7931d69ca8b5ed4ba47b4a48))
+
+
+### Features
+
+* add component styling options to form components ([b63bf9e](https://github.com/bettyblocks/material-ui-component-set/commit/b63bf9e19813d118be0c2b46793959fabed926af))
+
+# [1.18.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.17.0...v1.18.0) (2020-07-13)
+
+
+### Features
+
+* add set search function ([3276ce8](https://github.com/bettyblocks/material-ui-component-set/commit/3276ce87d87397e4d73d9ea729f19f33b0b63322))
+
 # [1.17.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.16.3...v1.17.0) (2020-07-10)
 
 
