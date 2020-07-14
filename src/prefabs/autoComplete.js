@@ -126,7 +126,7 @@
             dataType: 'string',
             allowedInput: [
               { name: 'Built in', value: 'built-in' },
-              { name: 'User interaction', value: 'user-interaction' },
+              { name: 'Custom', value: 'custom' },
             ],
           },
         },
