@@ -111,35 +111,30 @@
         };
 
         const orderByArray = [orderBy].flat();
-        const sort = {};
-
-        if (!isDev && orderBy) {
-          orderByArray.reduce((acc, property, index) => {
-            const prop = getProperty(property);
-            // eslint-disable-next-line no-return-assign
-            return (acc[prop.name] =
-              index !== orderByArray.length - 1 ? {} : order.toUpperCase());
-          }, sort);
-        }
+        const sort =
+          !isDev && orderBy
+            ? orderByArray.reduceRight((acc, property, index) => {
+                const prop = getProperty(property);
+                return index === orderByArray.length - 1
+                  ? { [prop.name]: order.toUpperCase() }
+                  : { [prop.name]: acc };
+              }, {})
+            : {};
 
         const canvasLayout = () => {
           if (!model) {
             return builderLayout();
           }
 
-          const searchFilter = {};
-
-          if (searchProperty) {
-            searchPropertyArray.reduce(
-              // eslint-disable-next-line no-return-assign
-              (acc, property, index) =>
-                (acc[property] =
-                  index !== searchPropertyArray.length - 1
-                    ? {}
-                    : { matches: search }),
-              searchFilter,
-            );
-          }
+          const searchFilter = searchProperty
+            ? searchPropertyArray.reduceRight(
+                (acc, property, index) =>
+                  index === searchPropertyArray.length - 1
+                    ? { [property]: { matches: search } }
+                    : { [property]: acc },
+                {},
+              )
+            : {};
 
           const newFilter =
             searchProperty && search !== ''
