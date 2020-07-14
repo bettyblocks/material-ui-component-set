@@ -229,13 +229,12 @@
     });
     const createSortObject = (fields, order) => {
       const fieldsArray = [fields].flat();
-      const sort = {};
-      fieldsArray.reduce((acc, item, index) => {
-        const prop = getProperty(item);
-        // eslint-disable-next-line no-return-assign
-        return (acc[prop.name] =
-          index !== fieldsArray.length - 1 ? {} : order.toUpperCase());
-      }, sort);
+      const sort = fieldsArray.reduceRight((acc, property, index) => {
+        const prop = getProperty(property);
+        return index === fieldsArray.length - 1
+          ? { [prop.name]: order.toUpperCase() }
+          : { [prop.name]: acc };
+      }, {});
 
       return sort;
     };
@@ -324,19 +323,16 @@
       return deepMerge(target, ...sources);
     };
 
-    const searchFilter = {};
+    const searchFilter = searchProperty
+      ? searchPropertyArray.reduceRight(
+          (acc, property, index) =>
+            index === searchPropertyArray.length - 1
+              ? { [property]: { matches: search } }
+              : { [property]: acc },
+          {},
+        )
+      : {};
 
-    if (searchProperty) {
-      searchPropertyArray.reduce(
-        // eslint-disable-next-line no-return-assign
-        (acc, property, index) =>
-          (acc[property] =
-            index !== searchPropertyArray.length - 1
-              ? {}
-              : { matches: search }),
-        searchFilter,
-      );
-    }
     const newFilter =
       searchProperty && search !== ''
         ? deepMerge({}, filter, searchFilter)

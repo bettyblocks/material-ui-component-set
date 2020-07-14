@@ -50,8 +50,7 @@
     const isFilterSelected = fields => {
       if (!fields || fields.length !== propertyArray.length) return false;
 
-      // eslint-disable-next-line no-plusplus
-      for (let index = 0; index < fields.length; index++) {
+      for (let index = 0; index < fields.length; index += 1) {
         if (fields[index] !== propertyArray[index]) return false;
       }
 
