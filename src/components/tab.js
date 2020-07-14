@@ -5,8 +5,10 @@
   orientation: 'VERTICAL',
   jsx: (() => {
     const { Typography, Box } = window.MaterialUI.Core;
-    const isDev = B.env === 'dev';
-    const { value } = parent;
+    const { env, useText } = B;
+    const isDev = env === 'dev';
+    const { label, icon, disabled, disableRipple } = options;
+    const { value, tabData, setTabData } = parent;
     const isActive = value === index;
 
     const emptyBox = (
@@ -25,6 +27,39 @@
         {children.length === 0 ? emptyBox : children}
       </Typography>
     );
+
+    const labelChanged = () => {
+      const currentLabel = tabData[`label${index}`]
+        ? useText(tabData[`label${index}`])
+        : '';
+      return currentLabel !== useText(label);
+    };
+
+    const iconChanged = () => tabData[`icon${index}`] !== icon;
+
+    const disabledChanged = () => tabData[`disabled${index}`] !== disabled;
+
+    const disabledRippleChanged = () =>
+      tabData[`disableRipple${index}`] !== disableRipple;
+
+    const hasChange = () =>
+      labelChanged() ||
+      iconChanged() ||
+      disabledChanged() ||
+      disabledRippleChanged();
+
+    useEffect(() => {
+      if (setTabData && hasChange()) {
+        setTabData({
+          ...tabData,
+          [`label${index}`]: label,
+          [`icon${index}`]: icon,
+          [`disabled${index}`]: disabled,
+          [`disableRipple${index}`]: disableRipple,
+        });
+      }
+    }, [setTabData, tabData, label, icon, disabled, disableRipple]);
+
     return isDev ? <div>{TabPanel}</div> : TabPanel;
   })(),
   styles: () => () => ({
