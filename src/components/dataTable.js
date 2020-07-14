@@ -46,7 +46,9 @@
       title,
       pagination,
       linkTo,
+      showError,
     } = options;
+    const displayError = showError === 'built-in';
     const [page, setPage] = React.useState(0);
     const takeNum = parseInt(take, 10);
     const [rowsPerPage, setRowsPerPage] = React.useState(takeNum);
@@ -339,6 +341,14 @@
           >
             {({ loading, error, data }) => {
               if (loading || error) {
+                if (loading) {
+                  B.triggerEvent('onLoad', loading);
+                }
+
+                if (error && !displayError) {
+                  B.triggerEvent('onError', error.message);
+                }
+
                 return (
                   <>
                     <TableContainer classes={{ root: classes.container }}>
@@ -353,7 +363,7 @@
                               colIdx => (
                                 <TableCell key={colIdx}>
                                   <div className={classes.skeleton}>
-                                    {error && 'Oops, something went wrong'}
+                                    {error && displayError && error.message}
                                   </div>
                                 </TableCell>
                               ),
@@ -396,6 +406,12 @@
               }
 
               const { totalCount, results } = data;
+
+              if (results.length > 0) {
+                B.triggerEvent('onSuccess', results);
+              } else {
+                B.triggerEvent('onNoResults', results);
+              }
 
               return (
                 <>

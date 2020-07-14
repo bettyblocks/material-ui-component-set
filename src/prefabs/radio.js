@@ -74,6 +74,20 @@
           type: 'TOGGLE',
         },
         {
+          value: 'built-in',
+          label: 'Error message',
+          key: 'showError',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Built in', value: 'built-in' },
+              { name: 'Custom', value: 'custom' },
+            ],
+          },
+        },
+        {
           value: false,
           label: 'Disabled',
           key: 'disabled',

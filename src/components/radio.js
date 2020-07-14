@@ -26,8 +26,11 @@
       propertyLabelOverride,
       fullWidth,
       hideLabel,
+      showError,
     } = options;
     const isDev = B.env === 'dev';
+    const displayError = showError === 'built-in';
+
     const { GetAll, getProperty, useText, getActionInput } = B;
 
     const { label: propertyLabelText, name: propertyName } =
@@ -81,13 +84,24 @@
         Radios = (
           <GetAll modelId={model} filter={filter} skip={0} take={50}>
             {({ loading, error: err, data }) => {
-              if (loading) return <span>Loading...</span>;
+              if (loading) {
+                B.triggerEvent('onLoad', loading);
+                return <span>Loading...</span>;
+              }
 
-              if (err) {
-                return <span>Something went wrong: {err.message} :(</span>;
+              if (err && !displayError) {
+                B.triggerEvent('onError', err.message);
+              }
+              if (err && displayError) {
+                return <span>{err.message}</span>;
               }
 
               const { results } = data;
+              if (results.length > 0) {
+                B.triggerEvent('onSuccess', results);
+              } else {
+                B.triggerEvent('onNoResults', results);
+              }
               return results.map(item =>
                 renderRadio(item[valueProperty.name], item[labelProperty.name]),
               );
