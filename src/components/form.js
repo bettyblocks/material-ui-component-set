@@ -52,7 +52,7 @@
           }
 
           if (error && !displayError) {
-            B.triggerEvent('onError', error);
+            B.triggerEvent('onError', error.message);
           }
         };
 
