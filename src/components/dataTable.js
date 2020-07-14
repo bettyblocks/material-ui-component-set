@@ -339,7 +339,6 @@
       searchProperty && search !== ''
         ? deepMerge({}, filter, searchFilter)
         : filter;
-    debugger;
     const where = useFilter(newFilter);
 
     return (
