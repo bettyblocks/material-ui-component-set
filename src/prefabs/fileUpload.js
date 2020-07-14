@@ -1423,26 +1423,6 @@
           },
         },
         {
-          type: 'COLOR',
-          label: 'Button text color',
-          key: 'textColor',
-          value: 'White',
-          configuration: {
-            condition: {
-              type: 'HIDE',
-              option: 'variant',
-              comparator: 'EQ',
-              value: 'icon',
-            },
-          },
-        },
-        {
-          type: 'COLOR',
-          label: 'Button color',
-          key: 'background',
-          value: 'Primary',
-        },
-        {
           label: 'Margin',
           key: 'margin',
           value: 'normal',
@@ -1455,6 +1435,110 @@
               { name: 'Dense', value: 'dense' },
               { name: 'Normal', value: 'normal' },
             ],
+          },
+        },
+        {
+          value: false,
+          label: 'Styles',
+          key: 'styles',
+          type: 'TOGGLE',
+        },
+        {
+          value: false,
+          label: 'Hide label',
+          key: 'hideLabel',
+          type: 'TOGGLE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'styles',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'COLOR',
+          label: 'Label color',
+          key: 'labelColor',
+          value: 'Black',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'styles',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'COLOR',
+          label: 'Button text color',
+          key: 'buttonTextColor',
+          value: 'White',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'styles',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'COLOR',
+          label: 'Button color',
+          key: 'background',
+          value: 'Primary',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'styles',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'COLOR',
+          label: 'Text color',
+          key: 'textColor',
+          value: 'Black',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'styles',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'COLOR',
+          label: 'Helper color',
+          key: 'helperColor',
+          value: 'Accent2',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'styles',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'COLOR',
+          label: 'Error color',
+          key: 'errorColor',
+          value: 'Danger',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'styles',
+              comparator: 'EQ',
+              value: true,
+            },
           },
         },
       ],
