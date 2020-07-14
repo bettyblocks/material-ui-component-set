@@ -24,6 +24,7 @@
       actionInputId,
       property,
       propertyLabelOverride,
+      hideLabel,
     } = options;
     const { TextField, MenuItem } = window.MaterialUI.Core;
     const isDev = B.env === 'dev';
@@ -62,6 +63,7 @@
         defaultValue={value}
         value={value}
         size={size}
+        classes={{ root: classes.formControl }}
         variant={variant}
         fullWidth={fullWidth}
         onChange={handleChange}
@@ -71,7 +73,7 @@
         }}
         required={required}
         disabled={disabled}
-        label={labelText}
+        label={!hideLabel && labelText}
         error={hasError}
         margin={margin}
         helperText={helper}
@@ -120,13 +122,155 @@
 
     return isDev ? <div className={classes.root}>{SelectCmp}</div> : SelectCmp;
   })(),
-  styles: () => () => ({
-    root: {
-      display: ({ options: { fullWidth } }) =>
-        fullWidth ? 'block' : 'inline-block',
-      '& > *': {
-        pointerEvents: 'none',
+  styles: B => t => {
+    const style = new B.Styling(t);
+    return {
+      root: {
+        display: ({ options: { fullWidth } }) =>
+          fullWidth ? 'block' : 'inline-block',
+        '& > *': {
+          pointerEvents: 'none',
+        },
       },
-    },
-  }),
+      formControl: {
+        '& > label': {
+          color: ({ options: { labelColor } }) => [
+            style.getColor(labelColor),
+            '!important',
+          ],
+          zIndex: ({ options: { variant } }) =>
+            variant === 'standard' ? 1 : null,
+          '&.Mui-focused': {
+            color: ({ options: { borderFocusColor } }) => [
+              style.getColor(borderFocusColor),
+              '!important',
+            ],
+          },
+          '&.Mui-error': {
+            color: ({ options: { errorColor } }) => [
+              style.getColor(errorColor),
+              '!important',
+            ],
+          },
+          '&.Mui-disabled': {
+            pointerEvents: 'none',
+            opacity: '0.7',
+          },
+        },
+        '& > p': {
+          color: ({ options: { helperColor } }) => [
+            style.getColor(helperColor),
+            '!important',
+          ],
+          '&.Mui-error': {
+            color: ({ options: { errorColor } }) => [
+              style.getColor(errorColor),
+              '!important',
+            ],
+          },
+        },
+        '& .MuiInputBase-root': {
+          color: ({ options: { textColor } }) => [
+            style.getColor(textColor),
+            '!important',
+          ],
+          backgroundColor: ({ options: { backgroundColor } }) => [
+            style.getColor(backgroundColor),
+            '!important',
+          ],
+          '&:hover': {
+            '& .MuiOutlinedInput-notchedOutline, & .MuiFilledInput-underline, & .MuiInput-underline': {
+              borderColor: ({ options: { borderHoverColor } }) => [
+                style.getColor(borderHoverColor),
+                '!important',
+              ],
+            },
+          },
+          '&.Mui-focused, &.Mui-focused:hover': {
+            '& .MuiOutlinedInput-notchedOutline, & .MuiFilledInput-underline, & .MuiInput-underline': {
+              borderColor: ({ options: { borderFocusColor } }) => [
+                style.getColor(borderFocusColor),
+                '!important',
+              ],
+            },
+          },
+          '& fieldset': {
+            top: ({ options: { hideLabel } }) => (hideLabel ? 0 : null),
+          },
+          '& legend': {
+            display: ({ options: { hideLabel } }) =>
+              hideLabel ? ['none', '!important'] : null,
+          },
+          '&.Mui-disabled': {
+            pointerEvents: 'none',
+            opacity: '0.7',
+          },
+        },
+        '& .MuiIconButton-root': {
+          color: ({ options: { textColor } }) => [
+            style.getColor(textColor),
+            '!important',
+          ],
+        },
+        '& .MuiOutlinedInput-notchedOutline, & .MuiFilledInput-underline, & .MuiInput-underline': {
+          borderColor: ({ options: { borderColor } }) => [
+            style.getColor(borderColor),
+            '!important',
+          ],
+        },
+        '& .MuiInput-underline, & .MuiFilledInput-underline': {
+          '&::before, &::after': {
+            borderColor: ({ options: { borderColor } }) => [
+              style.getColor(borderColor),
+              '!important',
+            ],
+          },
+          '&:hover': {
+            '&::before, &::after': {
+              borderColor: ({ options: { borderHoverColor } }) => [
+                style.getColor(borderHoverColor),
+                '!important',
+              ],
+            },
+          },
+          '&.Mui-focused::before, &.Mui-focused::after, &.Mui-focused:hover::before, &.Mui-focused:hover::after': {
+            borderColor: ({ options: { borderFocusColor } }) => [
+              style.getColor(borderFocusColor),
+              '!important',
+            ],
+          },
+        },
+        '& .MuiInputBase-root.Mui-error, & .MuiInputBase-root.Mui-error:hover, & .MuiInputBase-root.Mui-error.Mui-focused, & .MuiInputBase-root.Mui-error.Mui-focused:hover': {
+          '& .MuiOutlinedInput-notchedOutline, & .MuiFilledInput-underline, & .MuiInput-underline': {
+            borderColor: ({ options: { errorColor } }) => [
+              style.getColor(errorColor),
+              '!important',
+            ],
+          },
+          '&.MuiInput-underline, &.MuiFilledInput-underline': {
+            '&::before, &::after': {
+              borderColor: ({ options: { errorColor } }) => [
+                style.getColor(errorColor),
+                '!important',
+              ],
+            },
+            '&:hover': {
+              '&::before, &::after': {
+                borderColor: ({ options: { errorColor } }) => [
+                  style.getColor(errorColor),
+                  '!important',
+                ],
+              },
+            },
+            '&.Mui-focused::before, &.Mui-focused::after, &.Mui-focused:hover::before, &.Mui-focused:hover::after': {
+              borderColor: ({ options: { errorColor } }) => [
+                style.getColor(errorColor),
+                '!important',
+              ],
+            },
+          },
+        },
+      },
+    };
+  },
 }))();
