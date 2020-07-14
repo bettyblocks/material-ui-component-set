@@ -135,9 +135,8 @@
             return <span>{error.message}</span>;
           }
 
-          const { results } = data;
-          const hasResults = data && results && results.length > 0;
-          if (hasResults) {
+          const { results = [] } = data || {};
+          if (results.length > 0) {
             B.triggerEvent('onSuccess', results);
           } else {
             B.triggerEvent('onNoResults', results);

@@ -89,9 +89,9 @@
                   return <span>{error.message}</span>;
                 }
 
-                const { results, totalCount } = data;
+                const { results = [], totalCount } = data || {};
                 const resultCount = results && results.length;
-                const hasResults = data && resultCount > 0;
+                const hasResults = resultCount > 0;
 
                 if (hasResults) {
                   B.triggerEvent('onSuccess', results);

@@ -109,7 +109,7 @@
               return <span>{error.message}</span>;
             }
 
-            const { results } = data;
+            const { results = [] } = data || {};
 
             const hasResults = data && results && results.length > 0;
 
