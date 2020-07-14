@@ -108,7 +108,7 @@
             dataType: 'string',
             allowedInput: [
               { name: 'Built in', value: 'built-in' },
-              { name: 'Custom', value: 'custom' },
+              { name: 'Interaction', value: 'interaction' },
             ],
           },
         },
