@@ -399,8 +399,9 @@
               }
 
               const { totalCount, results } = data;
+              const hasResults = data && results && results.length > 0;
 
-              if (results.length > 0) {
+              if (hasResults) {
                 B.triggerEvent('onSuccess', results);
               } else {
                 B.triggerEvent('onNoResults', results);
