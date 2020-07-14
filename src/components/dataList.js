@@ -96,13 +96,16 @@
           const source = sources.shift();
 
           if (isObject(target) && isObject(source)) {
-            // eslint-disable-next-line no-restricted-syntax
-            for (const key in source) {
-              if (isObject(source[key])) {
+            const keys = Object.keys(source);
+
+            for (let index = 0; index < keys.length; index += 1) {
+              const key = keys[index];
+              const value = source[key];
+              if (isObject(value)) {
                 if (!target[key]) Object.assign(target, { [key]: {} });
-                deepMerge(target[key], source[key]);
+                deepMerge(target[key], value);
               } else {
-                Object.assign(target, { [key]: source[key] });
+                Object.assign(target, { [key]: value });
               }
             }
           }
