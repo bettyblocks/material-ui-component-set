@@ -1,3 +1,10 @@
+## [1.22.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.22.0...v1.22.1) (2020-07-15)
+
+
+### Bug Fixes
+
+* remove extra onnoresult calls with data ([3e0c0a8](https://github.com/bettyblocks/material-ui-component-set/commit/3e0c0a8efb546efa6d0351264b535f747352364b))
+
 # [1.22.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.21.1...v1.22.0) (2020-07-15)
 
 
