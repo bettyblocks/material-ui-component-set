@@ -33,6 +33,7 @@
       iconPosition,
       buttonText,
       multiple,
+      hideLabel,
     } = options;
 
     const isDev = env === 'dev';
@@ -192,13 +193,15 @@
       >
         <FormControlLabel
           control={UploadComponent}
-          label={`${labelText}${requiredText}`}
+          label={hideLabel ? '' : `${labelText}${requiredText}`}
           labelPlacement="top"
           classes={{
             root: classes.label,
           }}
         />
-        <FormHelperText>{helperValue}</FormHelperText>
+        <FormHelperText classes={{ root: classes.helper }}>
+          {helperValue}
+        </FormHelperText>
         {loading && B.triggerEvent('onLoad')}
         {data && data.length > 0 && (
           <div className={classes.messageContainer}>
@@ -235,6 +238,8 @@
   })(),
   styles: B => t => {
     const style = new B.Styling(t);
+    const { color: colorFunc } = B;
+    const getOpacColor = (col, val) => colorFunc.alpha(col, val);
     return {
       root: {
         display: ({ options: { fullWidth } }) =>
@@ -244,6 +249,32 @@
         marginLeft: [0, '!important'],
         pointerEvents: B.env === 'dev' && 'none',
         alignItems: ['start', '!important'],
+        color: ({ options: { labelColor } }) => [
+          style.getColor(labelColor),
+          '!important',
+        ],
+        '&.Mui-error': {
+          color: ({ options: { errorColor } }) => [
+            style.getColor(errorColor),
+            '!important',
+          ],
+        },
+        '&.Mui-disabled': {
+          pointerEvents: 'none',
+          opacity: '0.7',
+        },
+      },
+      helper: {
+        color: ({ options: { helperColor } }) => [
+          style.getColor(helperColor),
+          '!important',
+        ],
+        '&.Mui-error': {
+          color: ({ options: { errorColor } }) => [
+            style.getColor(errorColor),
+            '!important',
+          ],
+        },
       },
       input: {
         display: 'none',
@@ -262,10 +293,14 @@
         marginRight: ['1rem', '!important'],
       },
       button: {
-        color: ({ options: { variant, textColor, background } }) => [
-          style.getColor(variant === 'icon' ? background : textColor),
+        color: ({ options: { variant, buttonTextColor, background } }) => [
+          style.getColor(variant === 'icon' ? background : buttonTextColor),
           '!important',
         ],
+        '&.Mui-disabled': {
+          pointerEvents: 'none',
+          opacity: '0.7',
+        },
       },
       contained: {
         backgroundColor: ({ options: { background } }) => [
@@ -281,6 +316,16 @@
       },
       messageContainer: {
         paddingTop: '1.25rem',
+        color: ({ options: { textColor } }) => [
+          style.getColor(textColor),
+          '!important',
+        ],
+        '& .MuiIconButton-root': {
+          color: ({ options: { textColor } }) => [
+            getOpacColor(style.getColor(textColor), 0.54),
+            '!important',
+          ],
+        },
       },
       fileList: {
         display: 'flex',
