@@ -53,7 +53,7 @@
                 if (data && data.id) {
                   B.triggerEvent('onSuccess', data);
                 } else {
-                  B.triggerEvent('onNoResults', data);
+                  B.triggerEvent('onNoResults');
                 }
 
                 if (!data && redirectWithoutResult) {

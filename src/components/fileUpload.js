@@ -108,7 +108,7 @@
           if (succeededData.length > 0) {
             B.triggerEvent('onSuccess', succeededData);
           } else {
-            B.triggerEvent('onNoResults', succeededData);
+            B.triggerEvent('onNoResults');
           }
           if (failedData.length > 0) {
             B.triggerEvent('onError', formattedFailedData);
