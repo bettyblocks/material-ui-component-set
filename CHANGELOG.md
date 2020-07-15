@@ -1,3 +1,27 @@
+# [1.20.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.19.0...v1.20.0) (2020-07-14)
+
+
+### Bug Fixes
+
+* linter ([90375b9](https://github.com/bettyblocks/material-ui-component-set/commit/90375b9e8a036bc1c4a661ba3074806144594351))
+* only set errorState on change when set ([06416f9](https://github.com/bettyblocks/material-ui-component-set/commit/06416f90a9cf2d5eecb89830ba280f56c470cecb))
+* ordering validation messages and show helper text in page builder ([6931681](https://github.com/bettyblocks/material-ui-component-set/commit/6931681b3ba8bac40f587a4922402dd5b980d5cf))
+* refactor blur and change handlers ([c646e74](https://github.com/bettyblocks/material-ui-component-set/commit/c646e74c2a2f081b831d88fb11924529bc100703))
+* remove error option and group validation options ([1e317f6](https://github.com/bettyblocks/material-ui-component-set/commit/1e317f632eab2e44e59fef7a8e00576a72c8f44a))
+* remove unnes argument ([4527482](https://github.com/bettyblocks/material-ui-component-set/commit/45274825218f5867daecf99b6382fbf1310042a4))
+* state change only after firstInvalidation ([b7f92da](https://github.com/bettyblocks/material-ui-component-set/commit/b7f92daa4754ca8422ca2f08fe8687f7ded87c09))
+
+
+### Features
+
+* add Disable function ([d9db3e8](https://github.com/bettyblocks/material-ui-component-set/commit/d9db3e8d998629bedf5c0972dd1faf5ad7407a3a))
+* add minlength and maxlength validation to form components ([65150bc](https://github.com/bettyblocks/material-ui-component-set/commit/65150bc52886812b81ff51261b81cbb9a864986e))
+* add validation messages as options to form components ([4a8d7b5](https://github.com/bettyblocks/material-ui-component-set/commit/4a8d7b54d4df481462c317e5d5c4ff9b547bc42a))
+* added passwordPattern ([82078a4](https://github.com/bettyblocks/material-ui-component-set/commit/82078a446d9e8a37def32bfc677da5dd4324b9f5))
+* added validations in helperText ([55f0179](https://github.com/bettyblocks/material-ui-component-set/commit/55f0179c3444c9fc1d1ef5c276553072f4868bc5))
+* invalid state plus events ([6279731](https://github.com/bettyblocks/material-ui-component-set/commit/627973101589922b77f29a2bfa55e0493487cfef))
+* sycned HTML5 validity state with component ([b1ab343](https://github.com/bettyblocks/material-ui-component-set/commit/b1ab3436d8fb39d3d8264c08ced8fcb83e31d0f2))
+
 # [1.19.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.18.0...v1.19.0) (2020-07-14)
 
 

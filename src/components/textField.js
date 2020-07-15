@@ -275,7 +275,7 @@
             '!important',
           ],
         },
-        '&.Mui-error': {
+        '&.Mui-error, &.Mui-error .Mui-error': {
           color: ({ options: { errorColor } }) => [
             style.getColor(errorColor),
             '!important',
@@ -378,7 +378,7 @@
             ],
           },
         },
-        '& .MuiInputBase-root.Mui-error': {
+        '& .MuiInputBase-root.Mui-error, & .MuiInputBase-root.Mui-error:hover, & .MuiInputBase-root.Mui-error.Mui-focused, & .MuiInputBase-root.Mui-error.Mui-focused:hover': {
           '& .MuiOutlinedInput-notchedOutline, & .MuiFilledInput-underline, & .MuiInput-underline': {
             borderColor: ({ options: { errorColor } }) => [
               style.getColor(errorColor),
