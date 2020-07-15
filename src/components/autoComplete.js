@@ -199,7 +199,7 @@
           if (results.length > 0) {
             B.triggerEvent('onSuccess', results);
           } else {
-            B.triggerEvent('onNoResults', results);
+            B.triggerEvent('onNoResults');
           }
 
           if (!data || !searchProp || !valueProp) {
