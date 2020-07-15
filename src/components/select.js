@@ -116,7 +116,7 @@
             if (hasResults) {
               B.triggerEvent('onSuccess', results);
             } else {
-              B.triggerEvent('onNoResults', results);
+              B.triggerEvent('onNoResults');
             }
 
             return (
