@@ -1,3 +1,10 @@
+## [1.20.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.20.0...v1.20.1) (2020-07-15)
+
+
+### Bug Fixes
+
+* border color in textfield in error state ([939921c](https://github.com/bettyblocks/material-ui-component-set/commit/939921c08770947d0afade2fe459062703ad3570))
+
 # [1.20.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.19.0...v1.20.0) (2020-07-14)
 
 
