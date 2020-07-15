@@ -116,7 +116,7 @@
               type: 'VARIABLE',
               label: 'Label',
               key: 'label',
-              value: ['Step'],
+              value: ['Step 1'],
             },
             {
               label: 'Icon',
@@ -1396,7 +1396,7 @@
               type: 'VARIABLE',
               label: 'Label',
               key: 'label',
-              value: ['Step'],
+              value: ['Step 2'],
             },
             {
               label: 'Icon',

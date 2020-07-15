@@ -14,13 +14,15 @@
     const body = useText(bodyText);
     const isDev = env === 'dev';
     const [open, setOpen] = useState(visible);
+    const [text, setText] = useState('');
 
     useEffect(() => {
       setOpen(visible);
     }, [visible]);
 
     useEffect(() => {
-      B.defineFunction('Show', () => {
+      B.defineFunction('Show', showMessage => {
+        setText(showMessage);
         setOpen(true);
       });
 
@@ -51,7 +53,7 @@
         }
       >
         {title && <AlertTitle>{title}</AlertTitle>}
-        {body}
+        {text || body}
       </Alert>
     );
     return isDev ? (

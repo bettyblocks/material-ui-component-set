@@ -1,3 +1,136 @@
+## [1.22.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.22.0...v1.22.1) (2020-07-15)
+
+
+### Bug Fixes
+
+* remove extra onnoresult calls with data ([3e0c0a8](https://github.com/bettyblocks/material-ui-component-set/commit/3e0c0a8efb546efa6d0351264b535f747352364b))
+
+# [1.22.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.21.1...v1.22.0) (2020-07-15)
+
+
+### Features
+
+* add gating for when results does not exist ([03ce70f](https://github.com/bettyblocks/material-ui-component-set/commit/03ce70f8e276a196052b82a4361be34c54251f41))
+* change from user interaction to custom ([c0a2597](https://github.com/bettyblocks/material-ui-component-set/commit/c0a2597deb4e0accad8e1244c3bd6ad616da7823))
+* change the label to interaction ([0f66022](https://github.com/bettyblocks/material-ui-component-set/commit/0f66022fa4d8e95d1ab4ee6ef57fd463d0c1c8d0))
+* don't provide a result on no results ([2b4a842](https://github.com/bettyblocks/material-ui-component-set/commit/2b4a84250b5d31e1a809641b7ca3b0320c80afae))
+* remove the total cout check ([899944b](https://github.com/bettyblocks/material-ui-component-set/commit/899944bc61c9acd6746c6a6908c975c00c964679))
+* send the message on trigger error ([2bfa484](https://github.com/bettyblocks/material-ui-component-set/commit/2bfa4843bccf86f1419cc7b92e3b1ab622278cef))
+* show error message in components that fetch data ([57ac26b](https://github.com/bettyblocks/material-ui-component-set/commit/57ac26b925b7ddcbdb6c3bebfd324d891d29de3a))
+* use a button group, expose onLoad and onSuccess ([64b2f3e](https://github.com/bettyblocks/material-ui-component-set/commit/64b2f3e1e42f30095e8e1ab802c4aa95e82c1e64))
+
+## [1.21.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.21.0...v1.21.1) (2020-07-15)
+
+
+### Bug Fixes
+
+* show all steps or any selected step in runtime ([3fec38e](https://github.com/bettyblocks/material-ui-component-set/commit/3fec38e31fc23b982d78c78c00ec916646d8e8a3))
+* update stepper and tabs with props from child components ([458d38f](https://github.com/bettyblocks/material-ui-component-set/commit/458d38fd5dd37a29d3c49c8b7ed51ce3daaf78b1))
+
+# [1.21.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.20.1...v1.21.0) (2020-07-15)
+
+
+### Features
+
+* add color options to file upload component ([cbd0d93](https://github.com/bettyblocks/material-ui-component-set/commit/cbd0d93156fef550db62a5b5c6559c6b0436bfdc))
+
+## [1.20.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.20.0...v1.20.1) (2020-07-15)
+
+
+### Bug Fixes
+
+* border color in textfield in error state ([939921c](https://github.com/bettyblocks/material-ui-component-set/commit/939921c08770947d0afade2fe459062703ad3570))
+
+# [1.20.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.19.0...v1.20.0) (2020-07-14)
+
+
+### Bug Fixes
+
+* linter ([90375b9](https://github.com/bettyblocks/material-ui-component-set/commit/90375b9e8a036bc1c4a661ba3074806144594351))
+* only set errorState on change when set ([06416f9](https://github.com/bettyblocks/material-ui-component-set/commit/06416f90a9cf2d5eecb89830ba280f56c470cecb))
+* ordering validation messages and show helper text in page builder ([6931681](https://github.com/bettyblocks/material-ui-component-set/commit/6931681b3ba8bac40f587a4922402dd5b980d5cf))
+* refactor blur and change handlers ([c646e74](https://github.com/bettyblocks/material-ui-component-set/commit/c646e74c2a2f081b831d88fb11924529bc100703))
+* remove error option and group validation options ([1e317f6](https://github.com/bettyblocks/material-ui-component-set/commit/1e317f632eab2e44e59fef7a8e00576a72c8f44a))
+* remove unnes argument ([4527482](https://github.com/bettyblocks/material-ui-component-set/commit/45274825218f5867daecf99b6382fbf1310042a4))
+* state change only after firstInvalidation ([b7f92da](https://github.com/bettyblocks/material-ui-component-set/commit/b7f92daa4754ca8422ca2f08fe8687f7ded87c09))
+
+
+### Features
+
+* add Disable function ([d9db3e8](https://github.com/bettyblocks/material-ui-component-set/commit/d9db3e8d998629bedf5c0972dd1faf5ad7407a3a))
+* add minlength and maxlength validation to form components ([65150bc](https://github.com/bettyblocks/material-ui-component-set/commit/65150bc52886812b81ff51261b81cbb9a864986e))
+* add validation messages as options to form components ([4a8d7b5](https://github.com/bettyblocks/material-ui-component-set/commit/4a8d7b54d4df481462c317e5d5c4ff9b547bc42a))
+* added passwordPattern ([82078a4](https://github.com/bettyblocks/material-ui-component-set/commit/82078a446d9e8a37def32bfc677da5dd4324b9f5))
+* added validations in helperText ([55f0179](https://github.com/bettyblocks/material-ui-component-set/commit/55f0179c3444c9fc1d1ef5c276553072f4868bc5))
+* invalid state plus events ([6279731](https://github.com/bettyblocks/material-ui-component-set/commit/627973101589922b77f29a2bfa55e0493487cfef))
+* sycned HTML5 validity state with component ([b1ab343](https://github.com/bettyblocks/material-ui-component-set/commit/b1ab3436d8fb39d3d8264c08ced8fcb83e31d0f2))
+
+# [1.19.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.18.0...v1.19.0) (2020-07-14)
+
+
+### Bug Fixes
+
+* add form component styling options to form prefab ([90f51d1](https://github.com/bettyblocks/material-ui-component-set/commit/90f51d156ec6fff983d7f556b5ce872b4b7562d1))
+* add styling options to all textfields ([6f31235](https://github.com/bettyblocks/material-ui-component-set/commit/6f31235f88ac083e7931d69ca8b5ed4ba47b4a48))
+
+
+### Features
+
+* add component styling options to form components ([b63bf9e](https://github.com/bettyblocks/material-ui-component-set/commit/b63bf9e19813d118be0c2b46793959fabed926af))
+
+# [1.18.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.17.0...v1.18.0) (2020-07-13)
+
+
+### Features
+
+* add set search function ([3276ce8](https://github.com/bettyblocks/material-ui-component-set/commit/3276ce87d87397e4d73d9ea729f19f33b0b63322))
+
+# [1.17.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.16.3...v1.17.0) (2020-07-10)
+
+
+### Bug Fixes
+
+* add fallback default to accept so empty field doesn't fail ([102f754](https://github.com/bettyblocks/material-ui-component-set/commit/102f7541d3b14bbe4ae104c0a66718ac049c26b4))
+* add formatting to the error  message so it's correctly shown ([474b02e](https://github.com/bettyblocks/material-ui-component-set/commit/474b02e12ad62797c53998d54084b8858c8e49ed))
+* add inline error to file component and allow it to be turned off ([ffda544](https://github.com/bettyblocks/material-ui-component-set/commit/ffda5441fc52ff79741a52178f3adf4989035fd6))
+* alignment, events, and file listing in file upload ([ee5406b](https://github.com/bettyblocks/material-ui-component-set/commit/ee5406bfa314dbd608e1f68af35e4ccc30ce2c03))
+* don't allow children in the file upload component ([de65276](https://github.com/bettyblocks/material-ui-component-set/commit/de652765928d8ca2b9b7f17c1521a8d6b5ce76bd))
+* fire onerror only when network returns an error ([ce9047c](https://github.com/bettyblocks/material-ui-component-set/commit/ce9047c20ec44ef46034d0c2b89875290418f291))
+* improve error handling with helper text feedback ([cb71b22](https://github.com/bettyblocks/material-ui-component-set/commit/cb71b22589a93f77cc6c1d70ed1b06b4fce0350d))
+* move loading outside the component show section ([1cbc6a1](https://github.com/bettyblocks/material-ui-component-set/commit/1cbc6a1f873862941204961d2eadb577fe53e332))
+* only show file list when there are files to remove margin ([841c494](https://github.com/bettyblocks/material-ui-component-set/commit/841c494e13bd6a31b5106a1c38e52131a50f2871))
+* only show last occurring failure message ([32773e2](https://github.com/bettyblocks/material-ui-component-set/commit/32773e220cdd258f5d71fbb3102675ed94b5c1d8))
+* remove condition for useFileUpload hook ([57f1978](https://github.com/bettyblocks/material-ui-component-set/commit/57f197832c08773086ad4961a25f8c870f88b6b8))
+* simplify some code to get the value for the helper ([4aac907](https://github.com/bettyblocks/material-ui-component-set/commit/4aac9076afe9d2278f4b36b01357914570c394c3))
+
+
+### Features
+
+* add file upload component ([9383551](https://github.com/bettyblocks/material-ui-component-set/commit/93835516edbb8465ee507ecb8f3f4340657711b5))
+* add support for public file upload and enforce mime type accept ([81e83dd](https://github.com/bettyblocks/material-ui-component-set/commit/81e83dd701b769f677a33e497647600da09bffae))
+
+## [1.16.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.16.2...v1.16.3) (2020-07-09)
+
+
+### Bug Fixes
+
+* properly set interactions on button ([069fc84](https://github.com/bettyblocks/material-ui-component-set/commit/069fc84b2902b5ebba487f0513e8336c1f25d73f))
+* use rounded buttons on hover for all icon types ([48ec484](https://github.com/bettyblocks/material-ui-component-set/commit/48ec4840aa90062db9f719f0a66199eb514a72b2))
+
+## [1.16.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.16.1...v1.16.2) (2020-07-08)
+
+
+### Bug Fixes
+
+* required option for auto complete when multiple ([78faeb0](https://github.com/bettyblocks/material-ui-component-set/commit/78faeb00c7e5b4936c2471aab78df2db60a7c9ac))
+
+## [1.16.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.16.0...v1.16.1) (2020-07-08)
+
+
+### Bug Fixes
+
+* add useText around labels ([9d26e1f](https://github.com/bettyblocks/material-ui-component-set/commit/9d26e1f273d1ee6a4d6f9a7c28ba0a64c6159cb9))
+
 # [1.16.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.15.1...v1.16.0) (2020-07-02)
 
 

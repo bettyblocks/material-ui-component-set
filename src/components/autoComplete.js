@@ -27,6 +27,8 @@
       propertyLabelOverride,
       closeOnSelect,
       renderCheckboxes,
+      showError,
+      hideLabel,
     } = options;
     const { Autocomplete } = window.MaterialUI.Lab;
     const {
@@ -43,6 +45,7 @@
     } = window.MaterialUI.Icons;
     const { useText, getProperty, getActionInput, GetAll, env } = B;
     const isDev = env === 'dev';
+    const displayError = showError === 'built-in';
     const [currentValue, setCurrentValue] = useState(useText(defaultValue));
     const placeholderText = useText(placeholder);
     const helper = useText(helperText);
@@ -50,12 +53,12 @@
     const { label: propertyLabelText } = getProperty(property) || {};
     const propLabelOverride = useText(propertyLabelOverride);
     const propertyLabel = propLabelOverride || propertyLabelText;
-    const labelText = property ? propertyLabel : label;
+    const labelText = property ? propertyLabel : useText(label);
 
     const textFieldProps = {
       disabled,
       variant,
-      label: labelText,
+      label: !hideLabel && labelText,
       fullWidth,
       size,
       type,
@@ -64,6 +67,7 @@
       placeholder: placeholderText,
       margin,
       helperText: helper,
+      classes: { root: classes.formControl },
     };
 
     useEffect(() => {
@@ -83,8 +87,8 @@
         },
         endAdornment: (
           <>
-            {currentValue && <Close className={classes.icon} />}
-            {!freeSolo && <ExpandMore className={classes.icon} />}
+            {currentValue && <Close />}
+            {!freeSolo && <ExpandMore />}
           </>
         ),
       };
@@ -177,13 +181,27 @@
     return (
       <GetAll modelId={model} filter={filter} skip={0} take={50}>
         {({ loading, error: errorResp, data }) => {
-          if (errorResp) {
-            return <span>Something went wrong: {errorResp.message} :(</span>;
+          if (loading) {
+            B.triggerEvent('onLoad', loading);
+          }
+
+          if (errorResp && !displayError) {
+            B.triggerEvent('onError', errorResp.message);
+          }
+          if (errorResp && displayError) {
+            return <span>{errorResp.message}</span>;
           }
 
           let reason = 'No data';
           if (!searchProp || !valueProp) {
             reason = 'No property selected';
+          }
+
+          const { results = [] } = data || {};
+          if (results.length > 0) {
+            B.triggerEvent('onSuccess', results);
+          } else {
+            B.triggerEvent('onNoResults');
           }
 
           if (!data || !searchProp || !valueProp) {
@@ -205,6 +223,7 @@
           const renderOption = (option, { selected }) => (
             <>
               <Checkbox
+                classes={{ root: classes.checkbox }}
                 icon={<CheckBoxOutlineBlank fontSize="small" />}
                 checkedIcon={<CheckBox fontSize="small" />}
                 style={{ marginRight: 8 }}
@@ -218,9 +237,14 @@
             <Autocomplete
               multiple={multiple}
               freeSolo={freeSolo}
-              options={data.results}
-              value={getDefaultValue(data.results)}
+              options={results}
+              value={getDefaultValue(results)}
               getOptionLabel={renderLabel}
+              PopoverProps={{
+                classes: {
+                  root: classes.popover,
+                },
+              }}
               onInputChange={(_, inputValue) => {
                 if (!freeSolo) {
                   return;
@@ -241,6 +265,9 @@
                   <TextField
                     {...params}
                     {...textFieldProps}
+                    required={
+                      required && (!currentValue || currentValue.length === 0)
+                    }
                     loading={loading}
                     InputProps={{
                       ...params.InputProps,
@@ -262,19 +289,187 @@
       </GetAll>
     );
   })(),
-  styles: () => () => ({
-    root: {
-      display: ({ options: { fullWidth } }) =>
-        fullWidth ? 'block' : 'inline-block',
-      '& > *': {
-        pointerEvents: 'none',
+  styles: B => t => {
+    const style = new B.Styling(t);
+    const { color: colorFunc } = B;
+    const getOpacColor = (col, val) => colorFunc.alpha(col, val);
+    return {
+      root: {
+        display: ({ options: { fullWidth } }) =>
+          fullWidth ? 'block' : 'inline-block',
+        '& > *': {
+          pointerEvents: 'none',
+        },
       },
-    },
-    icon: {
-      '&.MuiSvgIcon-root': {
-        color: 'rgba(0, 0, 0, 0.54)',
-        fontSize: '1.25rem',
+      checkbox: {
+        color: ({ options: { checkboxColor } }) => [
+          style.getColor(checkboxColor),
+          '!important',
+        ],
+        '&.MuiCheckbox-root.Mui-checked:hover, &.MuiIconButton-root:hover': {
+          backgroundColor: ({ options: { checkboxColor } }) => [
+            getOpacColor(style.getColor(checkboxColor), 0.04),
+            '!important',
+          ],
+        },
       },
-    },
-  }),
+      formControl: {
+        '& > label': {
+          color: ({ options: { labelColor } }) => [
+            style.getColor(labelColor),
+            '!important',
+          ],
+          zIndex: ({ options: { variant } }) =>
+            variant === 'standard' ? 1 : null,
+          '&.Mui-focused': {
+            color: ({ options: { borderFocusColor } }) => [
+              style.getColor(borderFocusColor),
+              '!important',
+            ],
+          },
+          '&.Mui-error': {
+            color: ({ options: { errorColor } }) => [
+              style.getColor(errorColor),
+              '!important',
+            ],
+          },
+          '&.Mui-disabled': {
+            pointerEvents: 'none',
+            opacity: '0.7',
+          },
+        },
+        '& > p': {
+          color: ({ options: { helperColor } }) => [
+            style.getColor(helperColor),
+            '!important',
+          ],
+          '&.Mui-error': {
+            color: ({ options: { errorColor } }) => [
+              style.getColor(errorColor),
+              '!important',
+            ],
+          },
+        },
+        '& .MuiInputBase-root': {
+          color: ({ options: { textColor } }) => [
+            style.getColor(textColor),
+            '!important',
+          ],
+          backgroundColor: ({ options: { backgroundColor } }) => [
+            style.getColor(backgroundColor),
+            '!important',
+          ],
+          '&:hover': {
+            '& .MuiOutlinedInput-notchedOutline, & .MuiFilledInput-underline, & .MuiInput-underline': {
+              borderColor: ({ options: { borderHoverColor } }) => [
+                style.getColor(borderHoverColor),
+                '!important',
+              ],
+            },
+          },
+          '&.Mui-focused, &.Mui-focused:hover': {
+            '& .MuiOutlinedInput-notchedOutline, & .MuiFilledInput-underline, & .MuiInput-underline': {
+              borderColor: ({ options: { borderFocusColor } }) => [
+                style.getColor(borderFocusColor),
+                '!important',
+              ],
+            },
+          },
+          '& fieldset': {
+            top: ({ options: { hideLabel } }) => (hideLabel ? 0 : null),
+          },
+          '& legend': {
+            display: ({ options: { hideLabel } }) =>
+              hideLabel ? ['none', '!important'] : null,
+          },
+          '& input': {
+            '&::placeholder': {
+              color: ({ options: { placeholderColor } }) => [
+                style.getColor(placeholderColor),
+                '!important',
+              ],
+            },
+          },
+          '&.Mui-disabled': {
+            pointerEvents: 'none',
+            opacity: '0.7',
+          },
+          '& .MuiChip-root': {
+            color: ({ options: { textColorChip } }) => [
+              style.getColor(textColorChip),
+              '!important',
+            ],
+            backgroundColor: ({ options: { backgroundColorChip } }) => [
+              style.getColor(backgroundColorChip),
+              '!important',
+            ],
+          },
+        },
+        '& .MuiIconButton-root': {
+          color: ({ options: { textColor } }) => [
+            style.getColor(textColor),
+            '!important',
+          ],
+        },
+        '& .MuiOutlinedInput-notchedOutline, & .MuiFilledInput-underline, & .MuiInput-underline': {
+          borderColor: ({ options: { borderColor } }) => [
+            style.getColor(borderColor),
+            '!important',
+          ],
+        },
+        '& .MuiInput-underline, & .MuiFilledInput-underline': {
+          '&::before, &::after': {
+            borderColor: ({ options: { borderColor } }) => [
+              style.getColor(borderColor),
+              '!important',
+            ],
+          },
+          '&:hover': {
+            '&::before, &::after': {
+              borderColor: ({ options: { borderHoverColor } }) => [
+                style.getColor(borderHoverColor),
+                '!important',
+              ],
+            },
+          },
+          '&.Mui-focused::before, &.Mui-focused::after, &.Mui-focused:hover::before, &.Mui-focused:hover::after': {
+            borderColor: ({ options: { borderFocusColor } }) => [
+              style.getColor(borderFocusColor),
+              '!important',
+            ],
+          },
+        },
+        '& .MuiInputBase-root.Mui-error, & .MuiInputBase-root.Mui-error:hover, & .MuiInputBase-root.Mui-error.Mui-focused, & .MuiInputBase-root.Mui-error.Mui-focused:hover': {
+          '& .MuiOutlinedInput-notchedOutline, & .MuiFilledInput-underline, & .MuiInput-underline': {
+            borderColor: ({ options: { errorColor } }) => [
+              style.getColor(errorColor),
+              '!important',
+            ],
+          },
+          '&.MuiInput-underline, &.MuiFilledInput-underline': {
+            '&::before, &::after': {
+              borderColor: ({ options: { errorColor } }) => [
+                style.getColor(errorColor),
+                '!important',
+              ],
+            },
+            '&:hover': {
+              '&::before, &::after': {
+                borderColor: ({ options: { errorColor } }) => [
+                  style.getColor(errorColor),
+                  '!important',
+                ],
+              },
+            },
+            '&.Mui-focused::before, &.Mui-focused::after, &.Mui-focused:hover::before, &.Mui-focused:hover::after': {
+              borderColor: ({ options: { errorColor } }) => [
+                style.getColor(errorColor),
+                '!important',
+              ],
+            },
+          },
+        },
+      },
+    };
+  },
 }))();
