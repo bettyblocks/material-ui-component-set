@@ -9,7 +9,7 @@
         const [page, setPage] = useState(1);
         const [search, setSearch] = useState('');
         const [isTyping, setIsTyping] = useState(false);
-        const { filter, hidePagination, type, model } = options;
+        const { filter, hidePagination, type, model, showError } = options;
 
         const take = parseInt(options.take, 10) || 50;
         const searchProp = B.getProperty(options.searchProperty);
@@ -17,6 +17,7 @@
         const isEmpty = children.length === 0;
         const isDev = B.env === 'dev';
         const isPristine = isEmpty && isDev;
+        const displayError = showError === 'built-in';
 
         const builderLayout = () => (
           <>
@@ -76,8 +77,27 @@
               take={take}
             >
               {({ loading, error, data }) => {
-                if (loading) return 'loading...';
-                if (error) return 'failed';
+                if (loading) {
+                  B.triggerEvent('onLoad', loading);
+                  return 'loading...';
+                }
+
+                if (error && !displayError) {
+                  B.triggerEvent('onError', error.message);
+                }
+                if (error && displayError) {
+                  return <span>{error.message}</span>;
+                }
+
+                const { results = [], totalCount } = data || {};
+                const resultCount = results && results.length;
+                const hasResults = resultCount > 0;
+
+                if (hasResults) {
+                  B.triggerEvent('onSuccess', results);
+                } else {
+                  B.triggerEvent('onNoResults');
+                }
 
                 return (
                   <>
@@ -93,7 +113,7 @@
                       )}
                     </div>
                     <div className={type === 'grid' ? classes.grid : ''}>
-                      {data.results.map(item => (
+                      {results.map(item => (
                         <B.ModelProvider key={item.id} value={item} id={model}>
                           {children}
                         </B.ModelProvider>
@@ -102,8 +122,8 @@
                     <div className={classes.footer}>
                       {!isEmpty && !hidePagination && (
                         <Pagination
-                          totalCount={data.totalCount}
-                          resultCount={data.results.length}
+                          totalCount={totalCount}
+                          resultCount={resultCount}
                           currentPage={page}
                         />
                       )}

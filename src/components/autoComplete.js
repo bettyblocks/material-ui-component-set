@@ -27,6 +27,7 @@
       propertyLabelOverride,
       closeOnSelect,
       renderCheckboxes,
+      showError,
       hideLabel,
     } = options;
     const { Autocomplete } = window.MaterialUI.Lab;
@@ -44,6 +45,7 @@
     } = window.MaterialUI.Icons;
     const { useText, getProperty, getActionInput, GetAll, env } = B;
     const isDev = env === 'dev';
+    const displayError = showError === 'built-in';
     const [currentValue, setCurrentValue] = useState(useText(defaultValue));
     const placeholderText = useText(placeholder);
     const helper = useText(helperText);
@@ -179,13 +181,27 @@
     return (
       <GetAll modelId={model} filter={filter} skip={0} take={50}>
         {({ loading, error: errorResp, data }) => {
-          if (errorResp) {
-            return <span>Something went wrong: {errorResp.message} :(</span>;
+          if (loading) {
+            B.triggerEvent('onLoad', loading);
+          }
+
+          if (errorResp && !displayError) {
+            B.triggerEvent('onError', errorResp.message);
+          }
+          if (errorResp && displayError) {
+            return <span>{errorResp.message}</span>;
           }
 
           let reason = 'No data';
           if (!searchProp || !valueProp) {
             reason = 'No property selected';
+          }
+
+          const { results = [] } = data || {};
+          if (results.length > 0) {
+            B.triggerEvent('onSuccess', results);
+          } else {
+            B.triggerEvent('onNoResults');
           }
 
           if (!data || !searchProp || !valueProp) {
@@ -221,8 +237,8 @@
             <Autocomplete
               multiple={multiple}
               freeSolo={freeSolo}
-              options={data.results}
-              value={getDefaultValue(data.results)}
+              options={results}
+              value={getDefaultValue(results)}
               getOptionLabel={renderLabel}
               PopoverProps={{
                 classes: {

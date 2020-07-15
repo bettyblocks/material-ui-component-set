@@ -256,6 +256,20 @@
           key: 'outerSpacing',
           type: 'SIZES',
         },
+        {
+          value: 'built-in',
+          label: 'Error message',
+          key: 'showError',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Built in', value: 'built-in' },
+              { name: 'Interaction', value: 'interaction' },
+            ],
+          },
+        },
       ],
       descendants: [
         {

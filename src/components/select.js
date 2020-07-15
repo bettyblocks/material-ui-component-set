@@ -24,9 +24,11 @@
       actionInputId,
       property,
       propertyLabelOverride,
+      showError,
       hideLabel,
     } = options;
     const { TextField, MenuItem } = window.MaterialUI.Core;
+    const displayError = showError === 'built-in';
     const isDev = B.env === 'dev';
     const { GetAll, getProperty, getActionInput, useText } = B;
     const [currentValue, setCurrentValue] = useState(useText(defaultValue));
@@ -95,13 +97,26 @@
       SelectCmp = (
         <GetAll modelId={model} filter={filter} skip={0} take={50}>
           {({ loading, error, data }) => {
-            if (loading) return <span>Loading...</span>;
-
-            if (error) {
-              return <span>Something went wrong: {error.message} :(</span>;
+            if (loading) {
+              B.triggerEvent('onLoad', loading);
+              return <span>Loading...</span>;
             }
 
-            const { results } = data;
+            if (error && !displayError) {
+              B.triggerEvent('onError', error.message);
+            }
+            if (error && displayError) {
+              return <span>{error.message}</span>;
+            }
+
+            const { results = [] } = data || {};
+
+            if (results.length > 0) {
+              B.triggerEvent('onSuccess', results);
+            } else {
+              B.triggerEvent('onNoResults');
+            }
+
             return (
               <TextComp>
                 {results.map(
