@@ -1,3 +1,17 @@
+# [1.22.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.21.1...v1.22.0) (2020-07-15)
+
+
+### Features
+
+* add gating for when results does not exist ([03ce70f](https://github.com/bettyblocks/material-ui-component-set/commit/03ce70f8e276a196052b82a4361be34c54251f41))
+* change from user interaction to custom ([c0a2597](https://github.com/bettyblocks/material-ui-component-set/commit/c0a2597deb4e0accad8e1244c3bd6ad616da7823))
+* change the label to interaction ([0f66022](https://github.com/bettyblocks/material-ui-component-set/commit/0f66022fa4d8e95d1ab4ee6ef57fd463d0c1c8d0))
+* don't provide a result on no results ([2b4a842](https://github.com/bettyblocks/material-ui-component-set/commit/2b4a84250b5d31e1a809641b7ca3b0320c80afae))
+* remove the total cout check ([899944b](https://github.com/bettyblocks/material-ui-component-set/commit/899944bc61c9acd6746c6a6908c975c00c964679))
+* send the message on trigger error ([2bfa484](https://github.com/bettyblocks/material-ui-component-set/commit/2bfa4843bccf86f1419cc7b92e3b1ab622278cef))
+* show error message in components that fetch data ([57ac26b](https://github.com/bettyblocks/material-ui-component-set/commit/57ac26b925b7ddcbdb6c3bebfd324d891d29de3a))
+* use a button group, expose onLoad and onSuccess ([64b2f3e](https://github.com/bettyblocks/material-ui-component-set/commit/64b2f3e1e42f30095e8e1ab802c4aa95e82c1e64))
+
 ## [1.21.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.21.0...v1.21.1) (2020-07-15)
 
 
