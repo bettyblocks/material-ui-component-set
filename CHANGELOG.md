@@ -1,3 +1,11 @@
+## [1.21.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.21.0...v1.21.1) (2020-07-15)
+
+
+### Bug Fixes
+
+* show all steps or any selected step in runtime ([3fec38e](https://github.com/bettyblocks/material-ui-component-set/commit/3fec38e31fc23b982d78c78c00ec916646d8e8a3))
+* update stepper and tabs with props from child components ([458d38f](https://github.com/bettyblocks/material-ui-component-set/commit/458d38fd5dd37a29d3c49c8b7ed51ce3daaf78b1))
+
 # [1.21.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.20.1...v1.21.0) (2020-07-15)
 
 
