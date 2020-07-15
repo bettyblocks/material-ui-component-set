@@ -25,6 +25,14 @@
       adornmentPosition,
       property,
       propertyLabelOverride,
+      pattern,
+      minlength,
+      maxlength,
+      validationTypeMismatch,
+      validationPatternMismatch,
+      validationValueMissing,
+      validationTooLong,
+      validationTooShort,
       hideLabel,
     } = options;
 
@@ -43,8 +51,38 @@
     const { getActionInput, useText, env, getProperty } = B;
     const isDev = env === 'dev';
     const [currentValue, setCurrentValue] = useState(useText(defaultValue));
+    const [isDisabled, setIsDisabled] = useState(disabled);
     const [showPassword, togglePassword] = useState(false);
-    const helper = useText(helperText);
+    const [errorState, setErrorState] = useState(error);
+    const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
+    const [helper, setHelper] = useState(useText(helperText));
+
+    const validPattern = pattern || null;
+    const validMinlength = minlength || null;
+    const validMaxlength = maxlength || null;
+
+    const validationMessage = validityObject => {
+      if (validityObject.valid) {
+        return '';
+      }
+      if (validityObject.typeMismatch && validationTypeMismatch) {
+        return useText(validationTypeMismatch);
+      }
+      if (validityObject.patternMismatch && validationPatternMismatch) {
+        return useText(validationPatternMismatch);
+      }
+      if (validityObject.valueMissing && validationValueMissing) {
+        return useText(validationValueMissing);
+      }
+      if (validityObject.tooLong && validationTooLong) {
+        return useText(validationTooLong);
+      }
+      if (validityObject.tooShort && validationTooShort) {
+        return useText(validationTooShort);
+      }
+      return '';
+    };
+
     const placeholderText = useText(placeholder);
 
     const { label: propertyLabelText } = getProperty(property) || {};
@@ -54,16 +92,49 @@
 
     const actionInput = getActionInput(actionInputId);
 
+    const handleValidation = validation => {
+      setErrorState(!validation.valid);
+      setHelper(validationMessage(validation));
+    };
+
     const changeHandler = event => {
       const {
-        target: { value: eventValue },
+        target: { value: eventValue, validity },
       } = event;
+
+      if (afterFirstInvalidation) {
+        handleValidation(validity);
+      }
 
       setCurrentValue(eventValue);
     };
 
+    const blurHandler = event => {
+      const {
+        target: {
+          validity,
+          validity: { valid: isValid },
+        },
+      } = event;
+      setAfterFirstInvalidation(!isValid);
+      handleValidation(validity);
+    };
+
+    const invalidHandler = event => {
+      event.preventDefault();
+      const {
+        target: {
+          validity,
+          validity: { valid: isValid },
+        },
+      } = event;
+      setAfterFirstInvalidation(!isValid);
+      handleValidation(validity);
+    };
+
     useEffect(() => {
       B.defineFunction('Clear', () => setCurrentValue(''));
+      B.defineFunction('Disable', () => setIsDisabled(true));
     }, []);
 
     const handleClickShowPassword = () => {
@@ -105,8 +176,9 @@
     useEffect(() => {
       if (isDev) {
         setCurrentValue(useText(defaultValue));
+        setHelper(useText(helperText));
       }
-    }, [isDev, defaultValue]);
+    }, [isDev, defaultValue, helperText]);
 
     const TextFieldCmp = (
       <FormControl
@@ -115,9 +187,9 @@
         size={size}
         fullWidth={fullWidth}
         required={required}
-        disabled={disabled}
+        disabled={isDisabled}
         margin={margin}
-        error={error}
+        error={errorState}
       >
         {labelText && !hideLabel && (
           <InputLabel classes={{ root: classes.label }}>{labelText}</InputLabel>
@@ -131,6 +203,8 @@
           label={labelText}
           placeholder={placeholderText}
           onChange={changeHandler}
+          onBlur={blurHandler}
+          onInvalid={invalidHandler}
           startAdornment={
             hasAdornment &&
             adornmentPosition === 'start' && (
@@ -156,6 +230,9 @@
             )
           }
           inputProps={{
+            pattern: validPattern,
+            minlength: validMinlength,
+            maxlength: validMaxlength,
             tabIndex: isDev && -1,
           }}
         />
@@ -196,7 +273,7 @@
             '!important',
           ],
         },
-        '&.Mui-error': {
+        '&.Mui-error, &.Mui-error .Mui-error': {
           color: ({ options: { errorColor } }) => [
             style.getColor(errorColor),
             '!important',
@@ -299,7 +376,7 @@
             ],
           },
         },
-        '& .MuiInputBase-root.Mui-error': {
+        '& .MuiInputBase-root.Mui-error, & .MuiInputBase-root.Mui-error:hover, & .MuiInputBase-root.Mui-error.Mui-focused, & .MuiInputBase-root.Mui-error.Mui-focused:hover': {
           '& .MuiOutlinedInput-notchedOutline, & .MuiFilledInput-underline, & .MuiInput-underline': {
             borderColor: ({ options: { errorColor } }) => [
               style.getColor(errorColor),
