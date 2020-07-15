@@ -1,3 +1,10 @@
+# [1.21.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.20.1...v1.21.0) (2020-07-15)
+
+
+### Features
+
+* add color options to file upload component ([cbd0d93](https://github.com/bettyblocks/material-ui-component-set/commit/cbd0d93156fef550db62a5b5c6559c6b0436bfdc))
+
 ## [1.20.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.20.0...v1.20.1) (2020-07-15)
 
 
