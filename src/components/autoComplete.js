@@ -27,8 +27,8 @@
       propertyLabelOverride,
       closeOnSelect,
       renderCheckboxes,
-      hideLabel,
       showError,
+      hideLabel,
     } = options;
     const { Autocomplete } = window.MaterialUI.Lab;
     const {

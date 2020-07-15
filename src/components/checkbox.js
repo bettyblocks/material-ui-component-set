@@ -25,8 +25,8 @@
       margin,
       filter,
       fullWidth,
-      hideLabel,
       showError,
+      hideLabel,
     } = options;
 
     const { useText, getActionInput, getProperty, GetAll } = B;

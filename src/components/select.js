@@ -24,8 +24,8 @@
       actionInputId,
       property,
       propertyLabelOverride,
-      hideLabel,
       showError,
+      hideLabel,
     } = options;
     const { TextField, MenuItem } = window.MaterialUI.Core;
     const displayError = showError === 'built-in';

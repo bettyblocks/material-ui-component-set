@@ -1,3 +1,25 @@
+## [1.21.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.21.0...v1.21.1) (2020-07-15)
+
+
+### Bug Fixes
+
+* show all steps or any selected step in runtime ([3fec38e](https://github.com/bettyblocks/material-ui-component-set/commit/3fec38e31fc23b982d78c78c00ec916646d8e8a3))
+* update stepper and tabs with props from child components ([458d38f](https://github.com/bettyblocks/material-ui-component-set/commit/458d38fd5dd37a29d3c49c8b7ed51ce3daaf78b1))
+
+# [1.21.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.20.1...v1.21.0) (2020-07-15)
+
+
+### Features
+
+* add color options to file upload component ([cbd0d93](https://github.com/bettyblocks/material-ui-component-set/commit/cbd0d93156fef550db62a5b5c6559c6b0436bfdc))
+
+## [1.20.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.20.0...v1.20.1) (2020-07-15)
+
+
+### Bug Fixes
+
+* border color in textfield in error state ([939921c](https://github.com/bettyblocks/material-ui-component-set/commit/939921c08770947d0afade2fe459062703ad3570))
+
 # [1.20.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.19.0...v1.20.0) (2020-07-14)
 
 

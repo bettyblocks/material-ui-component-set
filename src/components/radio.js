@@ -25,8 +25,8 @@
       property,
       propertyLabelOverride,
       fullWidth,
-      hideLabel,
       showError,
+      hideLabel,
     } = options;
     const isDev = B.env === 'dev';
     const displayError = showError === 'built-in';
