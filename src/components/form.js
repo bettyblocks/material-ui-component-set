@@ -35,7 +35,7 @@
             if (data.actionb5) {
               B.triggerEvent('onSuccess', data.actionb5);
             } else {
-              B.triggerEvent('onNoResults', data.actionb5);
+              B.triggerEvent('onNoResults');
             }
 
             if (hasRedirect) {
@@ -133,7 +133,7 @@
                         if (item && item.id) {
                           B.triggerEvent('onSuccess', item);
                         } else {
-                          B.triggerEvent('onNoResults', item);
+                          B.triggerEvent('onNoResults');
                         }
 
                         if (!item) return children;
