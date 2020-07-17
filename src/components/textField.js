@@ -96,7 +96,8 @@
 
     const handleValidation = validation => {
       setErrorState(!validation.valid);
-      setHelper(validationMessage(validation));
+      const message = validationMessage(validation) || useText(helperText);
+      setHelper(message);
     };
 
     const changeHandler = event => {
