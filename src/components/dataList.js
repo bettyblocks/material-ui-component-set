@@ -60,78 +60,78 @@
           </>
         );
 
+        const filterObj =
+          searchProp && search !== ''
+            ? { ...filter, [searchProp.id]: { matches: search } }
+            : filter;
+
+        const { loading, error, data, refetch } = B.useGetAll(model, {
+          filter: filterObj,
+          skip: page ? (page - 1) * take : 0,
+          take,
+        });
+
+        useEffect(() => {
+          B.defineFunction('Refetch', () => refetch());
+        }, []);
+
         const canvasLayout = () => {
           if (!model) {
             return builderLayout();
           }
 
+          if (loading) {
+            B.triggerEvent('onLoad', loading);
+            return 'loading...';
+          }
+
+          if (error && !displayError) {
+            B.triggerEvent('onError', error.message);
+          }
+          if (error && displayError) {
+            return <span>{error.message}</span>;
+          }
+
+          const { results = [], totalCount } = data || {};
+          const resultCount = results && results.length;
+          const hasResults = resultCount > 0;
+
+          if (hasResults) {
+            B.triggerEvent('onSuccess', results);
+          } else {
+            B.triggerEvent('onNoResults');
+          }
+
           return (
-            <B.GetAll
-              modelId={model}
-              filter={
-                searchProp && search !== ''
-                  ? { ...filter, [searchProp.id]: { matches: search } }
-                  : filter
-              }
-              skip={page ? (page - 1) * take : 0}
-              take={take}
-            >
-              {({ loading, error, data }) => {
-                if (loading) {
-                  B.triggerEvent('onLoad', loading);
-                  return 'loading...';
-                }
-
-                if (error && !displayError) {
-                  B.triggerEvent('onError', error.message);
-                }
-                if (error && displayError) {
-                  return <span>{error.message}</span>;
-                }
-
-                const { results = [], totalCount } = data || {};
-                const resultCount = results && results.length;
-                const hasResults = resultCount > 0;
-
-                if (hasResults) {
-                  B.triggerEvent('onSuccess', results);
-                } else {
-                  B.triggerEvent('onNoResults');
-                }
-
-                return (
-                  <>
-                    <div className={classes.header}>
-                      {searchProp && (
-                        <Search
-                          name={searchProp.name}
-                          search={search}
-                          isTyping={isTyping}
-                          setSearch={setSearch}
-                          setIsTyping={setIsTyping}
-                        />
-                      )}
-                    </div>
-                    <div className={type === 'grid' ? classes.grid : ''}>
-                      {results.map(item => (
-                        <B.ModelProvider key={item.id} value={item} id={model}>
-                          {children}
-                        </B.ModelProvider>
-                      ))}
-                    </div>
-                    <div className={classes.footer}>
-                      {!isEmpty && !hidePagination && (
-                        <Pagination
-                          totalCount={totalCount}
-                          resultCount={resultCount}
-                          currentPage={page}
-                        />
-                      )}
-                    </div>
-                  </>
-                );
-              }}
-            </B.GetAll>
+            <>
+              <div className={classes.header}>
+                {searchProp && (
+                  <Search
+                    name={searchProp.name}
+                    search={search}
+                    isTyping={isTyping}
+                    setSearch={setSearch}
+                    setIsTyping={setIsTyping}
+                  />
+                )}
+              </div>
+              <div className={type === 'grid' ? classes.grid : ''}>
+                {results.map(item => (
+                  <B.ModelProvider key={item.id} value={item} id={model}>
+                    {children}
+                  </B.ModelProvider>
+                ))}
+              </div>
+              <div className={classes.footer}>
+                {!isEmpty && !hidePagination && (
+                  <Pagination
+                    totalCount={totalCount}
+                    resultCount={resultCount}
+                    currentPage={page}
+                  />
+                )}
+              </div>
+            </>
           );
         };
 
