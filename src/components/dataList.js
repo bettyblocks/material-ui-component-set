@@ -6,16 +6,17 @@
   jsx: (
     <div className={classes.root}>
       {(() => {
+        const { env, getProperty, useGetAll, ModelProvider } = B;
         const [page, setPage] = useState(1);
         const [search, setSearch] = useState('');
         const [isTyping, setIsTyping] = useState(false);
         const { filter, hidePagination, type, model, showError } = options;
 
         const take = parseInt(options.take, 10) || 50;
-        const searchProp = B.getProperty(options.searchProperty);
+        const searchProp = getProperty(options.searchProperty);
 
         const isEmpty = children.length === 0;
-        const isDev = B.env === 'dev';
+        const isDev = env === 'dev';
         const isPristine = isEmpty && isDev;
         const displayError = showError === 'built-in';
 
@@ -24,7 +25,7 @@
             {options.searchProperty && (
               <div className={classes.header}>
                 <Search
-                  name={B.env === 'dev' ? '[property]' : searchProp.name}
+                  name={env === 'dev' ? '[property]' : searchProp.name}
                   search={search}
                 />
               </div>
@@ -60,13 +61,11 @@
           </>
         );
 
-        const filterObj =
-          searchProp && search !== ''
-            ? { ...filter, [searchProp.id]: { matches: search } }
-            : filter;
-
-        const { loading, error, data, refetch } = B.useGetAll(model, {
-          filter: filterObj,
+        const { loading, error, data, refetch } = useGetAll(model, {
+          filter:
+            searchProp && search !== ''
+              ? { ...filter, [searchProp.id]: { matches: search } }
+              : filter,
           skip: page ? (page - 1) * take : 0,
           take,
         });
@@ -117,9 +116,9 @@
               </div>
               <div className={type === 'grid' ? classes.grid : ''}>
                 {results.map(item => (
-                  <B.ModelProvider key={item.id} value={item} id={model}>
+                  <ModelProvider key={item.id} value={item} id={model}>
                     {children}
-                  </B.ModelProvider>
+                  </ModelProvider>
                 ))}
               </div>
               <div className={classes.footer}>
@@ -177,7 +176,7 @@
             }
           }, [totalCount]);
 
-          const totalText = B.env === 'dev' ? '[total]' : totalCount;
+          const totalText = env === 'dev' ? '[total]' : totalCount;
 
           return (
             <>
