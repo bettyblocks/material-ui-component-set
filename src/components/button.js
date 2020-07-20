@@ -77,16 +77,15 @@
     const compProps = isIcon ? iconButtonProps : buttonProps;
     const BtnComp = isIcon ? IconButton : Button;
 
-    let onClickFn = () => {};
-    const [actionCallback, { loading }] = useAction(actionId, {
-      onCompleted(data) {
-        B.triggerEvent('onSuccess', data.actionb5);
-      },
-      onError(error) {
-        B.triggerEvent('onError', error.message);
-      },
-    });
-    if (isAction && !isDev) onClickFn = actionCallback;
+    const [actionCallback, { loading }] = (isAction &&
+      useAction(actionId, {
+        onCompleted(data) {
+          B.triggerEvent('onSuccess', data.actionb5);
+        },
+        onError(error) {
+          B.triggerEvent('onError', error.message);
+        },
+      })) || [() => {}, { loading: false }];
 
     if (loading) {
       B.triggerEvent('onLoad', loading);
@@ -107,7 +106,7 @@
           iconPosition === 'end' &&
           React.createElement(Icons[icon])
         }
-        onClick={onClickFn}
+        onClick={actionCallback}
       >
         {isIcon &&
           React.createElement(Icons[icon === 'None' ? 'Error' : icon], {
