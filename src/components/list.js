@@ -5,20 +5,11 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { List, ListItem, ListItemText } = window.MaterialUI.Core;
-    const { env, GetAll, ModelProvider } = B;
+    const { env, ModelProvider, useGetAll } = B;
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
     const isPristine = children.length === 0 && isDev;
     const { filter, model, disablePadding, dense } = options;
-
-    const PlaceHolder = (
-      <div
-        className={[
-          isEmpty ? classes.empty : '',
-          isPristine ? classes.pristine : '',
-        ].join(' ')}
-      />
-    );
 
     const DataPlaceHolder = ({ text }) => (
       <List className={classes.root}>
@@ -30,38 +21,40 @@
 
     const listArgs = { className: classes.root, disablePadding, dense };
 
-    const DataContainer = (
-      <GetAll modelId={model} filter={filter}>
-        {({ loading, error, data }) => {
-          if (loading) return <DataPlaceHolder text="loading..." />;
-          if (error) return <DataPlaceHolder text="failed" />;
+    const { loading, error, data } = useGetAll(model, { filter });
 
-          const { results } = data;
+    if (loading) return <DataPlaceHolder text="loading..." />;
+    if (error) return <DataPlaceHolder text="failed" />;
 
-          if (results.length === 0) {
-            return <DataPlaceHolder text="No results" />;
-          }
+    const { results } = data || {};
 
-          return (
-            <List {...listArgs}>
-              {results.map(value => (
-                <ModelProvider value={value} id={model}>
-                  {children}
-                </ModelProvider>
-              ))}
-            </List>
-          );
-        }}
-      </GetAll>
-    );
+    if (results && results.length === 0) {
+      return <DataPlaceHolder text="No results" />;
+    }
 
-    const ListComponent = (
-      <List {...listArgs}>{isEmpty ? PlaceHolder : children}</List>
-    );
+    const renderData = () => {
+      if (!model || isDev) {
+        return isEmpty ? (
+          <div
+            className={[
+              isEmpty ? classes.empty : '',
+              isPristine ? classes.pristine : '',
+            ].join(' ')}
+          />
+        ) : (
+          children
+        );
+      }
+      return (results || []).map(value => (
+        <ModelProvider value={value} id={model}>
+          {children}
+        </ModelProvider>
+      ));
+    };
 
-    const ListOrDataComponent = model ? DataContainer : ListComponent;
+    const ListComponent = <List {...listArgs}>{renderData()}</List>;
 
-    return isDev ? <div>{ListComponent}</div> : ListOrDataComponent;
+    return isDev ? <div>{ListComponent}</div> : ListComponent;
   })(),
   styles: B => t => {
     const style = new B.Styling(t);

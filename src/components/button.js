@@ -22,7 +22,8 @@
       buttonText,
       visible,
     } = options;
-    const { env, useText, Action } = B;
+
+    const { env, useText, useAction } = B;
     const isDev = env === 'dev';
     const isAction = linkType === 'action';
     const hasLink = linkTo && linkTo.id !== '';
@@ -41,9 +42,9 @@
     }, [visible]);
 
     useEffect(() => {
-      B.defineFunction('ShowButton', showButton);
-      B.defineFunction('HideButton', hideButton);
-      B.defineFunction('ToggleButtonVisibility', toggleVisibility);
+      B.defineFunction('Show', showButton);
+      B.defineFunction('Hide', hideButton);
+      B.defineFunction('ToggleVisibility', toggleVisibility);
       B.defineFunction('ToggleLoadingState', toggleLoading);
     }, []);
 
@@ -77,55 +78,48 @@
     const compProps = isIcon ? iconButtonProps : buttonProps;
     const BtnComp = isIcon ? IconButton : Button;
 
-    const Comp = props => {
-      const { loading, onClick = () => {} } = props;
-      return (
-        <BtnComp
-          {...compProps}
-          startIcon={
-            !isIcon &&
-            icon !== 'None' &&
-            iconPosition === 'start' &&
-            React.createElement(Icons[icon])
-          }
-          endIcon={
-            !isIcon &&
-            icon !== 'None' &&
-            iconPosition === 'end' &&
-            React.createElement(Icons[icon])
-          }
-          {...props}
-          onClick={onClick}
-        >
-          {isIcon &&
-            React.createElement(Icons[icon === 'None' ? 'Error' : icon], {
-              fontSize: size,
-            })}
-          {!isIcon && buttonContent}
-          {!isIcon && loading && (
-            <CircularProgress size={16} className={classes.loader} />
-          )}
-        </BtnComp>
-      );
-    };
+    let onClickFn = () => {};
+    const [actionCallback, { loading }] = useAction(actionId, {
+      onCompleted(data) {
+        B.triggerEvent('onSuccess', data.actionb5);
+      },
+      onError(error) {
+        B.triggerEvent('onError', error.message);
+      },
+    });
+    if (isAction && !isDev) onClickFn = actionCallback;
 
-    let ButtonComponent = <Comp />;
-
-    if (isAction) {
-      ButtonComponent = (
-        <Action actionId={actionId}>
-          {(callAction, { loading }) => {
-            const onClickAction = event => {
-              event.preventDefault();
-              if (!isDev && !loading && linkType === 'action') {
-                callAction();
-              }
-            };
-            return <Comp onClick={onClickAction} loading={loading} />;
-          }}
-        </Action>
-      );
+    if (loading) {
+      B.triggerEvent('onLoad', loading);
     }
+
+    const ButtonComponent = (
+      <BtnComp
+        {...compProps}
+        startIcon={
+          !isIcon &&
+          icon !== 'None' &&
+          iconPosition === 'start' &&
+          React.createElement(Icons[icon])
+        }
+        endIcon={
+          !isIcon &&
+          icon !== 'None' &&
+          iconPosition === 'end' &&
+          React.createElement(Icons[icon])
+        }
+        onClick={onClickFn}
+      >
+        {isIcon &&
+          React.createElement(Icons[icon === 'None' ? 'Error' : icon], {
+            fontSize: size,
+          })}
+        {!isIcon && buttonContent}
+        {!isIcon && loading && (
+          <CircularProgress size={16} className={classes.loader} />
+        )}
+      </BtnComp>
+    );
 
     if (isDev) {
       return <div className={classes.wrapper}>{ButtonComponent}</div>;
