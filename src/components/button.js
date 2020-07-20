@@ -78,8 +78,19 @@
     const BtnComp = isIcon ? IconButton : Button;
 
     let onClickFn = () => {};
-    const [actionCallback, { loading }] = useAction(actionId);
-    if (isAction) onClickFn = actionCallback;
+    const [actionCallback, { loading }] = useAction(actionId, {
+      onCompleted(data) {
+        B.triggerEvent('onSuccess', data.actionb5);
+      },
+      onError(error) {
+        B.triggerEvent('onError', error.message);
+      },
+    });
+    if (isAction && !isDev) onClickFn = actionCallback;
+
+    if (loading) {
+      B.triggerEvent('onLoad', loading);
+    }
 
     const ButtonComponent = (
       <BtnComp
