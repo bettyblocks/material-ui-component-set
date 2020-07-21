@@ -8,12 +8,22 @@
       {(() => {
         const { env, getProperty, useGetAll, ModelProvider } = B;
         const [page, setPage] = useState(1);
-        const [search, setSearch] = useState('');
+        const [search, setSearch] = React.useState('');
+        const [searchTerm, setSearchTerm] = React.useState('');
         const [isTyping, setIsTyping] = useState(false);
-        const { filter, hidePagination, type, model, showError } = options;
+        const {
+          filter,
+          hidePagination,
+          type,
+          model,
+          showError,
+          hideSearch,
+          searchProperty,
+        } = options;
 
         const take = parseInt(options.take, 10) || 50;
-        const searchProp = getProperty(options.searchProperty);
+        const { id: searchId, name: searchPropertyName = '{property}' } =
+          getProperty(searchProperty) || {};
 
         const isEmpty = children.length === 0;
         const isDev = env === 'dev';
@@ -22,12 +32,9 @@
 
         const builderLayout = () => (
           <>
-            {options.searchProperty && (
+            {searchProperty && !hideSearch && (
               <div className={classes.header}>
-                <Search
-                  name={env === 'dev' ? '[property]' : searchProp.name}
-                  search={search}
-                />
+                <Search name={searchPropertyName} search={search} />
               </div>
             )}
             <div className={type === 'grid' ? classes.grid : ''}>
@@ -54,24 +61,39 @@
               ))}
             </div>
             <div className={classes.footer}>
-              {(isDev || model) && !hidePagination && (
+              {isDev && !hidePagination && (
                 <Pagination totalCount={0} resultCount={take} currentPage={1} />
               )}
             </div>
           </>
         );
 
-        const { loading, error, data, refetch } = useGetAll(model, {
-          filter:
-            searchProp && search !== ''
-              ? { ...filter, [searchProp.id]: { matches: search } }
-              : filter,
-          skip: page ? (page - 1) * take : 0,
-          take,
-        });
+        const { loading, error, data, refetch } =
+          model &&
+          useGetAll(model, {
+            filter:
+              searchId && searchTerm !== ''
+                ? { ...filter, [searchId]: { matches: searchTerm } }
+                : filter,
+            skip: page ? (page - 1) * take : 0,
+            take,
+          });
+
+        useEffect(() => {
+          const handler = setTimeout(() => {
+            setSearchTerm(search);
+          }, 300);
+
+          return () => {
+            clearTimeout(handler);
+          };
+        }, [search]);
 
         useEffect(() => {
           B.defineFunction('Refetch', () => refetch());
+          B.defineFunction('SetSearchValue', event => {
+            setSearch(event.target.value);
+          });
         }, []);
 
         const canvasLayout = () => {
@@ -104,9 +126,9 @@
           return (
             <>
               <div className={classes.header}>
-                {searchProp && (
+                {searchProperty && !hideSearch && (
                   <Search
-                    name={searchProp.name}
+                    name={searchPropertyName}
                     search={search}
                     isTyping={isTyping}
                     setSearch={setSearch}

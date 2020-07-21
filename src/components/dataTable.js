@@ -11,6 +11,7 @@
       useText,
       ModelProvider,
       useEndpoint,
+      useGetAll,
     } = B;
     const {
       Table,
@@ -77,15 +78,17 @@
     const elevationLevel = variant === 'flat' ? 0 : elevation;
     const hasLink = linkTo && linkTo.id !== '';
 
-    const { loading, error, data, refetch } = B.useGetAll(model, {
-      filter:
-        searchId && searchTerm !== ''
-          ? { ...filter, [searchId]: { matches: searchTerm } }
-          : filter,
-      variables,
-      skip: pagination && page * rowsPerPage,
-      take: pagination && rowsPerPage,
-    });
+    const { loading, error, data, refetch } =
+      model &&
+      useGetAll(model, {
+        filter:
+          searchId && searchTerm !== ''
+            ? { ...filter, [searchId]: { matches: searchTerm } }
+            : filter,
+        variables,
+        skip: pagination && page * rowsPerPage,
+        take: pagination && rowsPerPage,
+      });
 
     useEffect(() => {
       const handler = setTimeout(() => {

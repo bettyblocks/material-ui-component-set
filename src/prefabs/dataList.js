@@ -99,6 +99,12 @@
           type: 'TOGGLE',
         },
         {
+          value: '',
+          label: 'Hide built-in search field',
+          key: 'hideSearch',
+          type: 'TOGGLE',
+        },
+        {
           value: 'built-in',
           label: 'Error message',
           key: 'showError',
