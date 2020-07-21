@@ -6,27 +6,35 @@
   jsx: (
     <div className={classes.root}>
       {(() => {
+        const { env, getProperty, useGetAll, ModelProvider } = B;
         const [page, setPage] = useState(1);
-        const [search, setSearch] = useState('');
+        const [search, setSearch] = React.useState('');
+        const [searchTerm, setSearchTerm] = React.useState('');
         const [isTyping, setIsTyping] = useState(false);
-        const { filter, hidePagination, type, model, showError } = options;
+        const {
+          filter,
+          hidePagination,
+          type,
+          model,
+          showError,
+          hideSearch,
+          searchProperty,
+        } = options;
 
         const take = parseInt(options.take, 10) || 50;
-        const searchProp = B.getProperty(options.searchProperty);
+        const { id: searchId, name: searchPropertyName = '{property}' } =
+          getProperty(searchProperty) || {};
 
         const isEmpty = children.length === 0;
-        const isDev = B.env === 'dev';
+        const isDev = env === 'dev';
         const isPristine = isEmpty && isDev;
         const displayError = showError === 'built-in';
 
         const builderLayout = () => (
           <>
-            {options.searchProperty && (
+            {searchProperty && !hideSearch && (
               <div className={classes.header}>
-                <Search
-                  name={B.env === 'dev' ? '[property]' : searchProp.name}
-                  search={search}
-                />
+                <Search name={searchPropertyName} search={search} />
               </div>
             )}
             <div className={type === 'grid' ? classes.grid : ''}>
@@ -53,85 +61,98 @@
               ))}
             </div>
             <div className={classes.footer}>
-              {(isDev || model) && !hidePagination && (
+              {isDev && !hidePagination && (
                 <Pagination totalCount={0} resultCount={take} currentPage={1} />
               )}
             </div>
           </>
         );
 
+        const { loading, error, data, refetch } =
+          model &&
+          useGetAll(model, {
+            filter:
+              searchId && searchTerm !== ''
+                ? { ...filter, [searchId]: { matches: searchTerm } }
+                : filter,
+            skip: page ? (page - 1) * take : 0,
+            take,
+          });
+
+        useEffect(() => {
+          const handler = setTimeout(() => {
+            setSearchTerm(search);
+          }, 300);
+
+          return () => {
+            clearTimeout(handler);
+          };
+        }, [search]);
+
+        useEffect(() => {
+          B.defineFunction('Refetch', () => refetch());
+          B.defineFunction('SetSearchValue', event => {
+            setSearch(event.target.value);
+          });
+        }, []);
+
         const canvasLayout = () => {
           if (!model) {
             return builderLayout();
           }
 
+          if (loading) {
+            B.triggerEvent('onLoad', loading);
+            return 'loading...';
+          }
+
+          if (error && !displayError) {
+            B.triggerEvent('onError', error.message);
+          }
+          if (error && displayError) {
+            return <span>{error.message}</span>;
+          }
+
+          const { results = [], totalCount } = data || {};
+          const resultCount = results && results.length;
+          const hasResults = resultCount > 0;
+
+          if (hasResults) {
+            B.triggerEvent('onSuccess', results);
+          } else {
+            B.triggerEvent('onNoResults');
+          }
+
           return (
-            <B.GetAll
-              modelId={model}
-              filter={
-                searchProp && search !== ''
-                  ? { ...filter, [searchProp.id]: { matches: search } }
-                  : filter
-              }
-              skip={page ? (page - 1) * take : 0}
-              take={take}
-            >
-              {({ loading, error, data }) => {
-                if (loading) {
-                  B.triggerEvent('onLoad', loading);
-                  return 'loading...';
-                }
-
-                if (error && !displayError) {
-                  B.triggerEvent('onError', error.message);
-                }
-                if (error && displayError) {
-                  return <span>{error.message}</span>;
-                }
-
-                const { results = [], totalCount } = data || {};
-                const resultCount = results && results.length;
-                const hasResults = resultCount > 0;
-
-                if (hasResults) {
-                  B.triggerEvent('onSuccess', results);
-                } else {
-                  B.triggerEvent('onNoResults');
-                }
-
-                return (
-                  <>
-                    <div className={classes.header}>
-                      {searchProp && (
-                        <Search
-                          name={searchProp.name}
-                          search={search}
-                          isTyping={isTyping}
-                          setSearch={setSearch}
-                          setIsTyping={setIsTyping}
-                        />
-                      )}
-                    </div>
-                    <div className={type === 'grid' ? classes.grid : ''}>
-                      {results.map(item => (
-                        <B.ModelProvider key={item.id} value={item} id={model}>
-                          {children}
-                        </B.ModelProvider>
-                      ))}
-                    </div>
-                    <div className={classes.footer}>
-                      {!isEmpty && !hidePagination && (
-                        <Pagination
-                          totalCount={totalCount}
-                          resultCount={resultCount}
-                          currentPage={page}
-                        />
-                      )}
-                    </div>
-                  </>
-                );
-              }}
-            </B.GetAll>
+            <>
+              <div className={classes.header}>
+                {searchProperty && !hideSearch && (
+                  <Search
+                    name={searchPropertyName}
+                    search={search}
+                    isTyping={isTyping}
+                    setSearch={setSearch}
+                    setIsTyping={setIsTyping}
+                  />
+                )}
+              </div>
+              <div className={type === 'grid' ? classes.grid : ''}>
+                {results.map(item => (
+                  <ModelProvider key={item.id} value={item} id={model}>
+                    {children}
+                  </ModelProvider>
+                ))}
+              </div>
+              <div className={classes.footer}>
+                {!isEmpty && !hidePagination && (
+                  <Pagination
+                    totalCount={totalCount}
+                    resultCount={resultCount}
+                    currentPage={page}
+                  />
+                )}
+              </div>
+            </>
           );
         };
 
@@ -177,7 +198,7 @@
             }
           }, [totalCount]);
 
-          const totalText = B.env === 'dev' ? '[total]' : totalCount;
+          const totalText = env === 'dev' ? '[total]' : totalCount;
 
           return (
             <>
