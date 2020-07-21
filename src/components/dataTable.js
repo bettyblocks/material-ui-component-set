@@ -302,27 +302,25 @@
       }
     };
 
-    const isObject = item =>
-      item && typeof item === 'object' && !Array.isArray(item);
-    const deepMerge = (target, ...sources) => {
-      if (!sources.length) return target;
-      const source = sources.shift();
+    const deepMerge = (...objects) => {
+      const isObject = item =>
+        item && typeof item === 'object' && !Array.isArray(item);
 
-      if (isObject(target) && isObject(source)) {
-        const keys = Object.keys(source);
-        for (let index = 0; index < keys.length; index += 1) {
-          const key = keys[index];
-          const value = source[key];
-          if (isObject(value)) {
-            if (!target[key]) Object.assign(target, { [key]: {} });
-            deepMerge(target[key], value);
+      return objects.reduce((accumulator, object) => {
+        Object.keys(object).forEach(key => {
+          const accumulatorValue = accumulator[key];
+          const value = object[key];
+
+          if (Array.isArray(accumulatorValue) && Array.isArray(value)) {
+            accumulator[key] = accumulatorValue.concat(value);
+          } else if (isObject(accumulatorValue) && isObject(value)) {
+            accumulator[key] = deepMerge(accumulatorValue, value);
           } else {
-            Object.assign(target, { [key]: value });
+            accumulator[key] = value;
           }
-        }
-      }
-
-      return deepMerge(target, ...sources);
+        });
+        return accumulator;
+      }, {});
     };
 
     const searchFilter = searchProperty
@@ -337,7 +335,7 @@
 
     const newFilter =
       searchProperty && search !== ''
-        ? deepMerge({}, filter, searchFilter)
+        ? deepMerge(filter, searchFilter)
         : filter;
     const where = useFilter(newFilter);
 
