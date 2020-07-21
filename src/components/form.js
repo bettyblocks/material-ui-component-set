@@ -6,7 +6,7 @@
   jsx: (
     <div>
       {(() => {
-        const { Action, Children } = B;
+        const { env, Children, useAction, useGetAll } = B;
 
         const {
           actionId,
@@ -26,18 +26,18 @@
         const isPristine = empty && isDev;
         const hasRedirect = redirect && redirect.id !== '';
         const redirectTo =
-          B.env === 'prod' && hasRedirect && B.useEndpoint(redirect);
+          env === 'prod' && hasRedirect && B.useEndpoint(redirect);
         const history = isDev ? {} : useHistory();
+        const [isInvalid, setIsInvalid] = useState(false);
         const location = isDev ? {} : useLocation();
 
-        const trigger = (data, loading, error) => {
-          if (data) {
-            if (data.actionb5) {
-              B.triggerEvent('onSuccess', data.actionb5);
+        const [callAction, { data, loading, error }] = useAction(actionId, {
+          onCompleted({ actionb5 }) {
+            if (actionb5) {
+              B.triggerEvent('onSuccess', actionb5);
             } else {
               B.triggerEvent('onNoResults');
             }
-
             if (hasRedirect) {
               if (redirectTo === location.pathname) {
                 history.go(0);
@@ -45,18 +45,42 @@
                 history.push(redirectTo);
               }
             }
-          }
+          },
+          onError(err) {
+            if (err && !displayError) {
+              B.triggerEvent('onError', err.message);
+            }
+          },
+        });
 
-          if (loading) {
-            B.triggerEvent('onLoad', loading);
-          }
+        const { loading: isFetching, data: models, error: err } =
+          model &&
+          useGetAll(model, {
+            filter,
+            skip: 0,
+            take: 1,
+          });
 
-          if (error && !displayError) {
-            B.triggerEvent('onError', error.message);
-          }
-        };
+        if (loading) {
+          B.triggerEvent('onLoad', loading);
+        }
 
-        const [isInvalid, setIsInvalid] = useState(false);
+        if (isFetching) {
+          B.triggerEvent('onLoad', isFetching);
+        }
+
+        if (err && !displayError) {
+          B.triggerEvent('onError', err.message);
+        }
+
+        const item = models && models.results[0];
+
+        if (item && item.id) {
+          B.triggerEvent('onSuccess', item);
+        } else {
+          B.triggerEvent('onNoResults');
+        }
+
         const handleInvalid = () => {
           if (!isInvalid) {
             setIsInvalid(true);
@@ -64,98 +88,57 @@
           }
         };
 
+        const handleSubmit = evt => {
+          evt.preventDefault();
+          setIsInvalid(false);
+          B.triggerEvent('onSubmit');
+          const formData = new FormData(formRef.current);
+          const values = Array.from(formData).reduce((acc, [key, value]) => {
+            if (!acc[key]) return { ...acc, [key]: value };
+            acc[key] = `${acc[key]},${value}`;
+            return acc;
+          }, {});
+          callAction({ variables: { input: values } });
+        };
+
+        const renderContent = () => {
+          if (!model || isDev) {
+            return <Children loading={loading}>{children}</Children>;
+          }
+          if (isFetching) return 'Loading...';
+          if (err && displayError) return err.message;
+          if (!item) return children;
+          return (
+            <B.ModelProvider key={item.id} value={item} id={model}>
+              {children}
+            </B.ModelProvider>
+          );
+        };
+
         return (
-          <Action actionId={actionId}>
-            {(callAction, { data, loading, error }) => (
-              <>
-                {trigger(data, loading, error)}
-                <div className={classes.messageContainer}>
-                  {error && displayError && (
-                    <span className={classes.error}>{formErrorMessage}</span>
-                  )}
-                  {data && (
-                    <span className={classes.success}>
-                      {formSuccessMessage}
-                    </span>
-                  )}
-                </div>
+          <>
+            <div className={classes.messageContainer}>
+              {error && displayError && (
+                <span className={classes.error}>{formErrorMessage}</span>
+              )}
+              {data && (
+                <span className={classes.success}>{formSuccessMessage}</span>
+              )}
+            </div>
 
-                <form
-                  onInvalid={handleInvalid}
-                  onSubmit={event => {
-                    event.preventDefault();
-                    setIsInvalid(false);
-                    B.triggerEvent('onSubmit');
-                    const formData = new FormData(formRef.current);
-                    const entries = Array.from(formData);
-                    const values = entries.reduce((acc, currentvalue) => {
-                      const key = currentvalue[0];
-                      const value = currentvalue[1];
-                      if (acc[key]) {
-                        acc[key] = `${acc[key]},${value}`;
-                        return acc;
-                      }
-                      return { ...acc, [key]: value };
-                    }, {});
-                    callAction({
-                      variables: { input: values },
-                    });
-                  }}
-                  ref={formRef}
-                  className={[
-                    empty && classes.empty,
-                    isPristine && classes.pristine,
-                  ].join(' ')}
-                >
-                  {isPristine && <span>form</span>}
-                  {!model || isDev ? (
-                    <Children loading={loading}>{children}</Children>
-                  ) : (
-                    <B.GetAll modelId={model} filter={filter} skip={0} take={1}>
-                      {({
-                        loading: dataLoading,
-                        error: dataError,
-                        data: modelData,
-                      }) => {
-                        if (dataLoading) {
-                          B.triggerEvent('onLoad', dataLoading);
-                          return 'Loading...';
-                        }
-                        if (dataError && !displayError) {
-                          B.triggerEvent('onError', dataError.message);
-                        }
-                        if (dataError && displayError) {
-                          return dataError.message;
-                        }
-
-                        const item = modelData && modelData.results[0];
-
-                        if (item && item.id) {
-                          B.triggerEvent('onSuccess', item);
-                        } else {
-                          B.triggerEvent('onNoResults');
-                        }
-
-                        if (!item) return children;
-
-                        return (
-                          <>
-                            <B.ModelProvider
-                              key={item.id}
-                              value={item}
-                              id={model}
-                            >
-                              {children}
-                            </B.ModelProvider>
-                          </>
-                        );
-                      }}
-                    </B.GetAll>
-                  )}
-                </form>
-              </>
-            )}
-          </Action>
+            <form
+              onInvalid={handleInvalid}
+              onSubmit={handleSubmit}
+              ref={formRef}
+              className={[
+                empty && classes.empty,
+                isPristine && classes.pristine,
+              ].join(' ')}
+            >
+              {isPristine && <span>form</span>}
+              {renderContent()}
+            </form>
+          </>
         );
       })()}
     </div>

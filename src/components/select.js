@@ -30,7 +30,7 @@
     const { TextField, MenuItem } = window.MaterialUI.Core;
     const displayError = showError === 'built-in';
     const isDev = B.env === 'dev';
-    const { GetAll, getProperty, getActionInput, useText } = B;
+    const { useGetAll, getProperty, getActionInput, useText } = B;
     const [currentValue, setCurrentValue] = useState(useText(defaultValue));
     const helper = useText(helperText);
 
@@ -44,6 +44,25 @@
 
     const { name: labelName } = getProperty(labelProp) || {};
     const { name: propName } = getProperty(valueProp) || {};
+
+    const { loading, error, data } =
+      model && useGetAll(model, { filter, skip: 0, take: 50 });
+
+    if (loading) {
+      B.triggerEvent('onLoad', loading);
+    }
+
+    if (error && !displayError) {
+      B.triggerEvent('onError', error.message);
+    }
+
+    const { results = [] } = data || {};
+
+    if (results.length > 0) {
+      B.triggerEvent('onSuccess', results);
+    } else {
+      B.triggerEvent('onNoResults');
+    }
 
     const handleChange = event => {
       const {
@@ -59,7 +78,28 @@
       }
     }, [isDev, defaultValue]);
 
-    const TextComp = ({ children }) => (
+    const renderOptions = () => {
+      if (optionType !== 'data') {
+        return selectOptions.split('\n').map(option => (
+          <MenuItem key={option} value={option}>
+            {option}
+          </MenuItem>
+        ));
+      }
+      if (loading) return <span>Loading...</span>;
+      if (error && displayError) return <span>{error.message}</span>;
+      return results.map(
+        item =>
+          propName &&
+          labelName && (
+            <MenuItem key={item.id} value={item[propName]}>
+              {item[labelName]}
+            </MenuItem>
+          ),
+      );
+    };
+
+    const SelectCmp = (
       <TextField
         select
         defaultValue={value}
@@ -80,60 +120,9 @@
         margin={margin}
         helperText={helper}
       >
-        {children}
+        {renderOptions()}
       </TextField>
     );
-
-    let SelectCmp = (
-      <TextComp>
-        {selectOptions.split('\n').map(option => (
-          <MenuItem key={option} value={option}>
-            {option}
-          </MenuItem>
-        ))}
-      </TextComp>
-    );
-    if (optionType !== 'static') {
-      SelectCmp = (
-        <GetAll modelId={model} filter={filter} skip={0} take={50}>
-          {({ loading, error, data }) => {
-            if (loading) {
-              B.triggerEvent('onLoad', loading);
-              return <span>Loading...</span>;
-            }
-
-            if (error && !displayError) {
-              B.triggerEvent('onError', error.message);
-            }
-            if (error && displayError) {
-              return <span>{error.message}</span>;
-            }
-
-            const { results = [] } = data || {};
-
-            if (results.length > 0) {
-              B.triggerEvent('onSuccess', results);
-            } else {
-              B.triggerEvent('onNoResults');
-            }
-
-            return (
-              <TextComp>
-                {results.map(
-                  item =>
-                    propName &&
-                    labelName && (
-                      <MenuItem key={item.id} value={item[propName]}>
-                        {item[labelName]}
-                      </MenuItem>
-                    ),
-                )}
-              </TextComp>
-            );
-          }}
-        </GetAll>
-      );
-    }
 
     return isDev ? <div className={classes.root}>{SelectCmp}</div> : SelectCmp;
   })(),
