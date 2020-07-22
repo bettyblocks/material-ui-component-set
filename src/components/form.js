@@ -75,10 +75,12 @@
 
         const item = models && models.results[0];
 
-        if (item && item.id) {
-          B.triggerEvent('onSuccess', item);
-        } else {
-          B.triggerEvent('onNoResults');
+        if (item) {
+          if (item.id) {
+            B.triggerEvent('onSuccess', item);
+          } else {
+            B.triggerEvent('onNoResults');
+          }
         }
 
         const handleInvalid = () => {

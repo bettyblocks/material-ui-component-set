@@ -65,11 +65,13 @@
       B.triggerEvent('onError', err.message);
     }
 
-    const { results = [] } = data || {};
-    if (results.length > 0) {
-      B.triggerEvent('onSuccess', results);
-    } else {
-      B.triggerEvent('onNoResults');
+    const { results } = data || {};
+    if (results) {
+      if (results.length > 0) {
+        B.triggerEvent('onSuccess', results);
+      } else {
+        B.triggerEvent('onNoResults');
+      }
     }
 
     useEffect(() => {

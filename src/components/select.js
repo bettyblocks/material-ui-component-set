@@ -56,12 +56,14 @@
       B.triggerEvent('onError', error.message);
     }
 
-    const { results = [] } = data || {};
+    const { results } = data || {};
 
-    if (results.length > 0) {
-      B.triggerEvent('onSuccess', results);
-    } else {
-      B.triggerEvent('onNoResults');
+    if (results) {
+      if (results.length > 0) {
+        B.triggerEvent('onSuccess', results);
+      } else {
+        B.triggerEvent('onNoResults');
+      }
     }
 
     useEffect(() => {
