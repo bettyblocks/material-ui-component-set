@@ -54,7 +54,7 @@
     const propertyLabel = propLabelOverride || propertyLabelText;
     const labelText = property ? propertyLabel : componentLabel;
 
-    const { loading, error: err, data } =
+    const { loading, error: err, data, refetch } =
       model && useGetAll(model, { filter, skip: 0, take: 50 });
 
     if (loading) {
@@ -71,6 +71,12 @@
     } else {
       B.triggerEvent('onNoResults');
     }
+
+    useEffect(() => {
+      if (refetch && refetch instanceof Function) {
+        B.defineFunction('Refetch', () => refetch());
+      }
+    }, [refetch]);
 
     useEffect(() => {
       if (isDev) {

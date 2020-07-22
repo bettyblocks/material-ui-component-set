@@ -45,7 +45,7 @@
     const { name: labelName } = getProperty(labelProp) || {};
     const { name: propName } = getProperty(valueProp) || {};
 
-    const { loading, error, data } =
+    const { loading, error, data, refetch } =
       model && useGetAll(model, { filter, skip: 0, take: 50 });
 
     if (loading) {
@@ -63,6 +63,12 @@
     } else {
       B.triggerEvent('onNoResults');
     }
+
+    useEffect(() => {
+      if (refetch && refetch instanceof Function) {
+        B.defineFunction('Refetch', () => refetch());
+      }
+    }, [refetch]);
 
     const handleChange = event => {
       const {

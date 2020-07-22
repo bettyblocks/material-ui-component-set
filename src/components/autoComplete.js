@@ -110,6 +110,9 @@
       };
     }
 
+    const { loading, error: err, data, refetch } =
+      model && useGetAll(model, { filter, skip: 0, take: 50 });
+
     useEffect(() => {
       if (isDev) {
         setCurrentValue(useText(defaultValue));
@@ -121,6 +124,12 @@
     }, []);
 
     useEffect(() => {
+      if (refetch && refetch instanceof Function) {
+        B.defineFunction('Refetch', () => refetch());
+      }
+    }, [refetch]);
+
+    useEffect(() => {
       const handler = setTimeout(() => {
         setDebouncedSearchParam(searchParam);
       }, 1000);
@@ -128,9 +137,6 @@
         clearTimeout(handler);
       };
     }, [searchParam]);
-
-    const { loading, error: err, data } =
-      model && useGetAll(model, { filter, skip: 0, take: 50 });
 
     if (loading) {
       B.triggerEvent('onLoad', loading);

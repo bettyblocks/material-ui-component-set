@@ -62,7 +62,7 @@
       Radio,
     } = window.MaterialUI.Core;
 
-    const { loading, error: err, data } =
+    const { loading, error: err, data, refetch } =
       model && useGetAll(model, { filter, skip: 0, take: 50 });
 
     if (loading) {
@@ -79,6 +79,12 @@
     } else {
       B.triggerEvent('onNoResults');
     }
+
+    useEffect(() => {
+      if (refetch && refetch instanceof Function) {
+        B.defineFunction('Refetch', () => refetch());
+      }
+    }, [refetch]);
 
     // renders the radio component
     const renderRadio = (optionValue, optionLabel) => (
