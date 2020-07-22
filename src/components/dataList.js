@@ -18,10 +18,10 @@
           model,
           orderBy,
           order,
+          showError,
         } = options;
         const { TextField, InputAdornment } = window.MaterialUI.Core;
         const { Search } = window.MaterialUI.Icons;
-
         const rowsPerPage = parseInt(take, 10) || 50;
         const searchPropertyArray = [searchProperty].flat();
         const { label: searchPropertyLabel } =
@@ -31,6 +31,7 @@
         const isEmpty = children.length === 0;
         const isDev = env === 'dev';
         const isPristine = isEmpty && isDev;
+        const displayError = showError === 'built-in';
 
         const builderLayout = () => (
           <>
@@ -179,12 +180,28 @@
               >
                 {({ loading, error, data }) => {
                   if (loading) return <div className={classes.skeleton} />;
-                  if (error) return 'failed';
+
+                  if (error && !displayError) {
+                    B.triggerEvent('onError', error.message);
+                  }
+
+                  if (error && displayError) {
+                    return <span>{error.message}</span>;
+                  }
+
+                  const { results = [], totalCount } = data || {};
+                  const resultCount = results && results.length;
+
+                  if (resultCount > 0) {
+                    B.triggerEvent('onSuccess', results);
+                  } else {
+                    B.triggerEvent('onNoResults');
+                  }
 
                   return (
                     <>
                       <div className={type === 'grid' ? classes.grid : ''}>
-                        {data.results.map(item => (
+                        {results.map(item => (
                           <ModelProvider key={item.id} value={item} id={model}>
                             {children}
                           </ModelProvider>
@@ -193,8 +210,8 @@
                       <div className={classes.footer}>
                         {!isEmpty && !hidePagination && (
                           <Pagination
-                            totalCount={data.totalCount}
-                            resultCount={data.results.length}
+                            totalCount={totalCount}
+                            resultCount={resultCount}
                             currentPage={page}
                           />
                         )}

@@ -35,6 +35,7 @@
       model,
       filter,
       searchProperty,
+      hideSearch,
       orderProperty,
       sortOrder,
       labelRowsPerPage,
@@ -45,18 +46,26 @@
       title,
       pagination,
       linkTo,
+      showError,
     } = options;
+    const displayError = showError === 'built-in';
     const [page, setPage] = React.useState(0);
     const takeNum = parseInt(take, 10);
     const [rowsPerPage, setRowsPerPage] = React.useState(takeNum);
     const [search, setSearch] = React.useState('');
     const titleText = useText(title);
-    const hasToolbar = titleText || searchProperty;
+    const hasToolbar = titleText || (searchProperty && !hideSearch);
     const elevationLevel = variant === 'flat' ? 0 : elevation;
     const hasLink = linkTo && linkTo.id !== '';
     const searchPropertyArray = [searchProperty].flat();
     const { label: searchPropertyLabel = '{property}' } =
       getProperty(searchPropertyArray[searchPropertyArray.length - 1]) || {};
+
+    useEffect(() => {
+      B.defineFunction('SetSearchValue', event => {
+        setSearch(event.target.value);
+      });
+    }, []);
 
     if (isDev) {
       const repeaterRef = React.createRef();
@@ -104,7 +113,7 @@
                 {titleText && (
                   <span className={classes.title}>{titleText}</span>
                 )}
-                {searchProperty && (
+                {searchProperty && !hideSearch && (
                   <TextField
                     classes={{ root: classes.searchField }}
                     placeholder={`Search on ${searchPropertyLabel}`}
@@ -170,7 +179,7 @@
                 {titleText && (
                   <span className={classes.title}>{titleText}</span>
                 )}
-                {searchProperty && (
+                {searchProperty && !hideSearch && (
                   <TextField
                     classes={{ root: classes.searchField }}
                     placeholder={`Search on ${searchPropertyLabel}`}
@@ -376,6 +385,14 @@
           >
             {({ loading, error, data }) => {
               if (loading || error) {
+                if (loading) {
+                  B.triggerEvent('onLoad', loading);
+                }
+
+                if (error && !displayError) {
+                  B.triggerEvent('onError', error.message);
+                }
+
                 return (
                   <>
                     <TableContainer classes={{ root: classes.container }}>
@@ -390,7 +407,7 @@
                               colIdx => (
                                 <TableCell key={colIdx}>
                                   <div className={classes.skeleton}>
-                                    {error && 'Oops, something went wrong'}
+                                    {error && displayError && error.message}
                                   </div>
                                 </TableCell>
                               ),
@@ -432,7 +449,13 @@
                 );
               }
 
-              const { totalCount, results } = data;
+              const { totalCount, results = [] } = data || {};
+
+              if (results.length > 0) {
+                B.triggerEvent('onSuccess', results);
+              } else {
+                B.triggerEvent('onNoResults');
+              }
 
               return (
                 <>
