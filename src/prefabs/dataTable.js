@@ -60,6 +60,12 @@
           },
         },
         {
+          value: '',
+          label: 'Hide built-in search field',
+          key: 'hideSearch',
+          type: 'TOGGLE',
+        },
+        {
           type: 'VARIABLE',
           label: 'Title',
           key: 'title',
@@ -249,6 +255,20 @@
           label: 'Outer space',
           key: 'outerSpacing',
           type: 'SIZES',
+        },
+        {
+          value: 'built-in',
+          label: 'Error message',
+          key: 'showError',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Built in', value: 'built-in' },
+              { name: 'Interaction', value: 'interaction' },
+            ],
+          },
         },
       ],
       descendants: [

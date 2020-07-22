@@ -115,8 +115,8 @@
             {
               label: 'Tab label',
               key: 'label',
-              value: 'TAB',
-              type: 'TEXT',
+              value: ['TAB'],
+              type: 'VARIABLE',
             },
             {
               label: 'Icon',
