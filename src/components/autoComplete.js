@@ -43,7 +43,7 @@
       CheckBox,
       CheckBoxOutlineBlank,
     } = window.MaterialUI.Icons;
-    const { useText, getProperty, getActionInput, GetAll, env } = B;
+    const { useText, getProperty, getActionInput, useGetAll, env } = B;
     const isDev = env === 'dev';
     const displayError = showError === 'built-in';
     const [currentValue, setCurrentValue] = useState(useText(defaultValue));
@@ -71,6 +71,50 @@
       classes: { root: classes.formControl },
     };
 
+    const actionInput = getActionInput(actionInputId);
+    const searchProp = getProperty(searchProperty) || {};
+    const valueProp = getProperty(valueProperty) || {};
+    const formComponentName = propertyName || (actionInput && actionInput.name);
+    const [searchParam, setSearchParam] = useState('');
+    const [debouncedSearchParam, setDebouncedSearchParam] = useState('');
+
+    const { filter } = options;
+    const hasSearch = searchProp && searchProp.id;
+    const hasValue = valueProp && valueProp.id;
+
+    if (hasSearch && debouncedSearchParam !== '') {
+      filter[searchProp.id] = {
+        regex: debouncedSearchParam,
+      };
+    } else if (hasSearch && debouncedSearchParam === '') {
+      delete filter[searchProp.id];
+    }
+
+    const hasNoProp = !hasSearch || !hasValue;
+    const reason = hasNoProp ? 'No property selected' : 'No data';
+
+    let inputProps = {
+      inputProps: {
+        tabIndex: isDev && -1,
+      },
+      endAdornment: (
+        <>
+          {currentValue && <Close />}
+          {!freeSolo && <ExpandMore />}
+        </>
+      ),
+    };
+
+    if (multiple && currentValue) {
+      inputProps = {
+        ...inputProps,
+        startAdornment: <Chip label={currentValue} onDelete={() => {}} />,
+      };
+    }
+
+    const { loading, error: err, data, refetch } =
+      model && useGetAll(model, { filter, skip: 0, take: 50 });
+
     useEffect(() => {
       if (isDev) {
         setCurrentValue(useText(defaultValue));
@@ -81,44 +125,37 @@
       B.defineFunction('Clear', () => setCurrentValue(null));
     }, []);
 
-    if (isDev || !model) {
-      let inputProps = {
-        inputProps: {
-          tabIndex: isDev && -1,
-        },
-        endAdornment: (
-          <>
-            {currentValue && <Close />}
-            {!freeSolo && <ExpandMore />}
-          </>
-        ),
-      };
-      if (multiple && currentValue) {
-        inputProps = {
-          ...inputProps,
-          startAdornment: <Chip label={currentValue} onDelete={() => {}} />,
-        };
+    useEffect(() => {
+      if (refetch && refetch instanceof Function) {
+        B.defineFunction('Refetch', () => refetch());
       }
+    }, [refetch]);
 
-      return (
-        <div className={classes.root}>
-          <TextField
-            {...textFieldProps}
-            value={multiple ? '' : currentValue}
-            InputProps={inputProps}
-          />
-        </div>
-      );
+    useEffect(() => {
+      const handler = setTimeout(() => {
+        setDebouncedSearchParam(searchParam);
+      }, 1000);
+      return () => {
+        clearTimeout(handler);
+      };
+    }, [searchParam]);
+
+    if (loading) {
+      B.triggerEvent('onLoad', loading);
     }
 
-    const actionInput = getActionInput(actionInputId);
-    const searchProp = searchProperty ? getProperty(searchProperty) : null;
-    const valueProp = valueProperty ? getProperty(valueProperty) : null;
-    const formComponentName = propertyName || (actionInput && actionInput.name);
+    if (err && !displayError) {
+      B.triggerEvent('onError', err.message);
+    }
 
-    const [searchParam, setSearchParam] = useState('');
-    const [debouncedSearchParam, setDebouncedSearchParam] = useState('');
-    const debounceDelay = 1000;
+    const { results } = data || {};
+    if (results) {
+      if (results.length > 0) {
+        B.triggerEvent('onSuccess', results);
+      } else {
+        B.triggerEvent('onNoResults');
+      }
+    }
 
     const onChange = (_, newValue) => {
       if (!valueProp || !newValue) {
@@ -160,134 +197,99 @@
       return multiple ? currentRecords : singleRecord;
     };
 
-    const { filter } = options;
+    const renderLabel = option =>
+      option[searchProp.name] && option[searchProp.name].toString();
 
-    if (searchProp && debouncedSearchParam !== '') {
-      filter[searchProp.id] = {
-        regex: debouncedSearchParam,
-      };
-    } else if (searchProp && debouncedSearchParam === '') {
-      delete filter[searchProp.id];
+    const renderOption = (option, { selected }) => (
+      <>
+        <Checkbox
+          classes={{ root: classes.checkbox }}
+          icon={<CheckBoxOutlineBlank fontSize="small" />}
+          checkedIcon={<CheckBox fontSize="small" />}
+          style={{ marginRight: 8 }}
+          checked={selected}
+        />
+        {renderLabel(option)}
+      </>
+    );
+
+    if (isDev || !model) {
+      return (
+        <div className={classes.root}>
+          <TextField
+            {...textFieldProps}
+            value={multiple ? '' : currentValue}
+            InputProps={inputProps}
+          />
+        </div>
+      );
     }
 
-    useEffect(() => {
-      const handler = setTimeout(() => {
-        setDebouncedSearchParam(searchParam);
-      }, debounceDelay);
-      return () => {
-        clearTimeout(handler);
-      };
-    }, [searchParam]);
+    if (err && displayError) return <span>{err.message}</span>;
+    if (!data || hasNoProp) {
+      return (
+        <TextField
+          {...textFieldProps}
+          defaultValue={reason}
+          disabled
+          InputProps={{
+            endAdornment: <CircularProgress color="inherit" size={20} />,
+          }}
+        />
+      );
+    }
 
     return (
-      <GetAll modelId={model} filter={filter} skip={0} take={50}>
-        {({ loading, error: errorResp, data }) => {
-          if (loading) {
-            B.triggerEvent('onLoad', loading);
-          }
-
-          if (errorResp && !displayError) {
-            B.triggerEvent('onError', errorResp.message);
-          }
-          if (errorResp && displayError) {
-            return <span>{errorResp.message}</span>;
-          }
-
-          let reason = 'No data';
-          if (!searchProp || !valueProp) {
-            reason = 'No property selected';
-          }
-
-          const { results = [] } = data || {};
-          if (results.length > 0) {
-            B.triggerEvent('onSuccess', results);
-          } else {
-            B.triggerEvent('onNoResults');
-          }
-
-          if (!data || !searchProp || !valueProp) {
-            return (
-              <TextField
-                {...textFieldProps}
-                defaultValue={reason}
-                disabled
-                InputProps={{
-                  endAdornment: <CircularProgress color="inherit" size={20} />,
-                }}
-              />
-            );
-          }
-
-          const renderLabel = option =>
-            option[searchProp.name] && option[searchProp.name].toString();
-
-          const renderOption = (option, { selected }) => (
-            <>
-              <Checkbox
-                classes={{ root: classes.checkbox }}
-                icon={<CheckBoxOutlineBlank fontSize="small" />}
-                checkedIcon={<CheckBox fontSize="small" />}
-                style={{ marginRight: 8 }}
-                checked={selected}
-              />
-              {renderLabel(option)}
-            </>
-          );
-
-          return (
-            <Autocomplete
-              multiple={multiple}
-              freeSolo={freeSolo}
-              options={results}
-              value={getDefaultValue(results)}
-              getOptionLabel={renderLabel}
-              PopoverProps={{
-                classes: {
-                  root: classes.popover,
-                },
-              }}
-              onInputChange={(_, inputValue) => {
-                if (!freeSolo) {
-                  return;
-                }
-                setSearchParam(inputValue);
-              }}
-              onChange={onChange}
-              disableCloseOnSelect={!closeOnSelect}
-              renderOption={renderCheckboxes && renderOption}
-              renderInput={params => (
-                <>
-                  <input
-                    type="hidden"
-                    key={currentValue ? 'hasValue' : 'isEmpty'}
-                    name={formComponentName}
-                    value={currentValue}
-                  />
-                  <TextField
-                    {...params}
-                    {...textFieldProps}
-                    required={
-                      required && (!currentValue || currentValue.length === 0)
-                    }
-                    loading={loading}
-                    InputProps={{
-                      ...params.InputProps,
-                      endAdornment: (
-                        <>
-                          {loading ? (
-                            <CircularProgress color="inherit" size={20} />
-                          ) : null}
-                          {params.InputProps.endAdornment}
-                        </>
-                      ),
-                    }}
-                  />
-                </>
-              )}
-            />
-          );
+      <Autocomplete
+        multiple={multiple}
+        freeSolo={freeSolo}
+        options={results}
+        value={getDefaultValue(results)}
+        getOptionLabel={renderLabel}
+        PopoverProps={{
+          classes: {
+            root: classes.popover,
+          },
         }}
-      </GetAll>
+        onInputChange={(_, inputValue) => {
+          if (!freeSolo) {
+            return;
+          }
+          setSearchParam(inputValue);
+        }}
+        onChange={onChange}
+        disableCloseOnSelect={!closeOnSelect}
+        renderOption={renderCheckboxes && renderOption}
+        renderInput={params => (
+          <>
+            <input
+              type="hidden"
+              key={currentValue ? 'hasValue' : 'isEmpty'}
+              name={formComponentName}
+              value={currentValue}
+            />
+            <TextField
+              {...params}
+              {...textFieldProps}
+              required={
+                required && (!currentValue || currentValue.length === 0)
+              }
+              loading={loading}
+              InputProps={{
+                ...params.InputProps,
+                endAdornment: (
+                  <>
+                    {loading ? (
+                      <CircularProgress color="inherit" size={20} />
+                    ) : null}
+                    {params.InputProps.endAdornment}
+                  </>
+                ),
+              }}
+            />
+          </>
+        )}
+      />
     );
   })(),
   styles: B => t => {

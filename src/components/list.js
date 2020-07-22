@@ -21,7 +21,7 @@
 
     const listArgs = { className: classes.root, disablePadding, dense };
 
-    const { loading, error, data } = useGetAll(model, { filter });
+    const { loading, error, data } = model && useGetAll(model, { filter });
 
     if (loading) return <DataPlaceHolder text="loading..." />;
     if (error) return <DataPlaceHolder text="failed" />;

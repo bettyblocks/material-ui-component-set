@@ -29,7 +29,7 @@
       hideLabel,
     } = options;
 
-    const { useText, getActionInput, getProperty, GetAll } = B;
+    const { useText, getActionInput, getProperty, useGetAll } = B;
     const displayError = showError === 'built-in';
     const isDev = B.env === 'dev';
     const actionInput = getActionInput(actionInputId);
@@ -55,6 +55,32 @@
     const propertyLabel = propLabelOverride || propertyLabelText;
     const labelText = property ? propertyLabel : componentLabel;
     const formComponentName = propertyName || (actionInput && actionInput.name);
+
+    const { loading, error: err, data, refetch } =
+      model && useGetAll(model, { filter, skip: 0, take: 50 });
+
+    if (loading) {
+      B.triggerEvent('onLoad', loading);
+    }
+
+    if (err && !displayError) {
+      B.triggerEvent('onError', err.message);
+    }
+
+    const { results } = data || {};
+    if (results) {
+      if (results.length > 0) {
+        B.triggerEvent('onSuccess', results);
+      } else {
+        B.triggerEvent('onNoResults');
+      }
+    }
+
+    useEffect(() => {
+      if (refetch && refetch instanceof Function) {
+        B.defineFunction('Refetch', () => refetch());
+      }
+    }, [refetch]);
 
     useEffect(() => {
       if (isDev) {
@@ -93,44 +119,18 @@
     );
 
     const checkboxData = (checkboxOptions || '').split('\n');
-    let Checkboxes = checkboxData.map(opt => renderCheckbox(opt, opt));
 
-    if (optionType === 'data') {
-      Checkboxes = renderCheckbox('Placeholder', false);
-      if (!isDev) {
-        Checkboxes = (
-          <GetAll modelId={model} filter={filter} skip={0} take={50}>
-            {({ loading, error: err, data }) => {
-              if (loading) {
-                B.triggerEvent('onLoad', loading);
-                return <span>Loading...</span>;
-              }
-
-              if (err && !displayError) {
-                B.triggerEvent('onError', err.message);
-              }
-              if (err && displayError) {
-                return <span>{err.message}</span>;
-              }
-
-              const { results = [] } = data || {};
-              if (results.length > 0) {
-                B.triggerEvent('onSuccess', results);
-              } else {
-                B.triggerEvent('onNoResults');
-              }
-
-              return results.map(item =>
-                renderCheckbox(
-                  item[labelProperty.name],
-                  `${item[valueProperty.name]}`, // this is dirty
-                ),
-              );
-            }}
-          </GetAll>
-        );
+    const renderCheckBoxes = () => {
+      if (optionType !== 'data') {
+        return checkboxData.map(opt => renderCheckbox(opt, opt));
       }
-    }
+      if (isDev) return renderCheckbox('Placeholder', false);
+      if (loading) return <span>Loading...</span>;
+      if (err && displayError) return <span>{err.message}</span>;
+      return results.map(item =>
+        renderCheckbox(item[labelProperty.name], `${item[valueProperty.name]}`),
+      );
+    };
 
     const Control = (
       <FormControl
@@ -144,7 +144,7 @@
         {labelText && !hideLabel && (
           <FormLabel component="legend">{labelText}</FormLabel>
         )}
-        <FormGroup row={row}>{Checkboxes}</FormGroup>
+        <FormGroup row={row}>{renderCheckBoxes()}</FormGroup>
         {componentHelperText && (
           <FormHelperText>{componentHelperText}</FormHelperText>
         )}
