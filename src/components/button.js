@@ -35,7 +35,20 @@
 
     const hideButton = () => setIsVisible(false);
     const showButton = () => setIsVisible(true);
+    const [isLoading, setIsLoading] = useState(false);
     const toggleVisibility = () => setIsVisible(s => !s);
+
+    const [actionCallback, { loading }] = (isAction &&
+      useAction(actionId, {
+        onCompleted(data) {
+          B.triggerEvent('onSuccess', data.actionb5);
+        },
+        onError(error) {
+          B.triggerEvent('onError', error.message);
+        },
+      })) || [() => {}, { loading: false }];
+
+    const toggleLoading = () => setIsLoading(l => !l);
 
     useEffect(() => {
       setIsVisible(visible);
@@ -45,10 +58,15 @@
       B.defineFunction('Show', showButton);
       B.defineFunction('Hide', hideButton);
       B.defineFunction('ToggleVisibility', toggleVisibility);
+      B.defineFunction('ToggleLoadingState', toggleLoading);
     }, []);
 
+    useEffect(() => {
+      B.triggerEvent('onLoad', loading);
+    }, [loading]);
+
     const generalProps = {
-      disabled,
+      disabled: disabled || isLoading || loading,
       size,
       tabindex: isDev && -1,
       href:
@@ -77,19 +95,7 @@
     const compProps = isIcon ? iconButtonProps : buttonProps;
     const BtnComp = isIcon ? IconButton : Button;
 
-    const [actionCallback, { loading }] = (isAction &&
-      useAction(actionId, {
-        onCompleted(data) {
-          B.triggerEvent('onSuccess', data.actionb5);
-        },
-        onError(error) {
-          B.triggerEvent('onError', error.message);
-        },
-      })) || [() => {}, { loading: false }];
-
-    if (loading) {
-      B.triggerEvent('onLoad', loading);
-    }
+    const showIndicator = !isIcon && (isLoading || loading);
 
     const ButtonComponent = (
       <BtnComp
@@ -113,7 +119,7 @@
             fontSize: size,
           })}
         {!isIcon && buttonContent}
-        {!isIcon && loading && (
+        {showIndicator && (
           <CircularProgress size={16} className={classes.loader} />
         )}
       </BtnComp>
@@ -143,6 +149,11 @@
           style.getColor(variant === 'icon' ? background : textColor),
           '!important',
         ],
+        '&.MuiButton-contained.Mui-disabled': {
+          color: ['rgba(0, 0, 0, 0.26)', '!important'],
+          boxShadow: ['none', '!important'],
+          backgroundColor: ['rgba(0, 0, 0, 0.12)', '!important'],
+        },
         '&.MuiButton-root, &.MuiIconButton-root': {
           width: ({ options: { fullWidth, outerSpacing } }) => {
             if (!fullWidth) return 'auto';

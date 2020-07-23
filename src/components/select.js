@@ -67,9 +67,7 @@
     }
 
     useEffect(() => {
-      if (refetch && refetch instanceof Function) {
-        B.defineFunction('Refetch', () => refetch());
-      }
+      B.defineFunction('Refetch', () => refetch());
     }, [refetch]);
 
     const handleChange = event => {
@@ -96,7 +94,7 @@
       }
       if (loading) return <span>Loading...</span>;
       if (error && displayError) return <span>{error.message}</span>;
-      return results.map(
+      return (results || []).map(
         item =>
           propName &&
           labelName && (

@@ -124,9 +124,7 @@
     }, []);
 
     useEffect(() => {
-      if (refetch && refetch instanceof Function) {
-        B.defineFunction('Refetch', () => refetch());
-      }
+      B.defineFunction('Refetch', () => refetch());
     }, [refetch]);
 
     useEffect(() => {
