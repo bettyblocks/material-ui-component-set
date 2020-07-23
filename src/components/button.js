@@ -22,8 +22,7 @@
       actionId,
       buttonText,
     } = options;
-
-    const { env, useText } = B;
+    const { env, useText, Action } = B;
     const isDev = env === 'dev';
     const isAction = linkType === 'action';
     const hasLink = linkTo && linkTo.id !== '';
@@ -32,11 +31,12 @@
     const buttonContent = useText(buttonText);
 
     const [isVisible, setIsVisible] = useState(visible);
+    const [isLoading, setIsLoading] = useState(false);
 
     const hideButton = () => setIsVisible(false);
     const showButton = () => setIsVisible(true);
     const toggleVisibility = () => setIsVisible(s => !s);
-
+    const toggleLoading = () => setIsLoading(loading => !loading);
     useEffect(() => {
       setIsVisible(visible);
     }, [visible]);
@@ -45,10 +45,11 @@
       B.defineFunction('ShowButton', showButton);
       B.defineFunction('HideButton', hideButton);
       B.defineFunction('ToggleButtonVisibility', toggleVisibility);
+      B.defineFunction('ToggleLoadingState', toggleLoading);
     }, []);
 
     const generalProps = {
-      disabled,
+      disabled: disabled || isLoading,
       size,
       tabindex: isDev && -1,
       href:
@@ -109,21 +110,25 @@
       );
     };
 
-    let ButtonComponent = <Comp />;
+    let ButtonComponent = <Comp loading={isLoading} />;
 
     if (isAction) {
       ButtonComponent = (
-        <B.Action actionId={actionId}>
+        <Action actionId={actionId}>
           {(callAction, { loading }) => {
+            useEffect(() => {
+              setIsLoading(loading);
+            }, [loading]);
+
             const onClickAction = event => {
               event.preventDefault();
               if (!isDev && !loading && linkType === 'action') {
                 callAction();
               }
             };
-            return <Comp onClick={onClickAction} loading={loading} />;
+            return <Comp onClick={onClickAction} loading={isLoading} />;
           }}
-        </B.Action>
+        </Action>
       );
     }
 
@@ -151,6 +156,11 @@
           style.getColor(variant === 'icon' ? background : textColor),
           '!important',
         ],
+        '&.MuiButton-contained.Mui-disabled': {
+          color: ['rgba(0, 0, 0, 0.26)', '!important'],
+          boxShadow: ['none', '!important'],
+          backgroundColor: ['rgba(0, 0, 0, 0.12)', '!important'],
+        },
         '&.MuiButton-root, &.MuiIconButton-root': {
           width: ({ options: { fullWidth, outerSpacing } }) => {
             if (!fullWidth) return 'auto';
