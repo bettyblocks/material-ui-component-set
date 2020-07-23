@@ -69,12 +69,12 @@
           type: 'VARIABLE',
         },
         {
-          value: 'MM/dd/yyyy',
+          value: 'dd/MM/yyyy',
           label: 'Format',
           key: 'dateFormat',
           type: 'TEXT',
           configuration: {
-            placeholder: 'MM/dd/yyyy',
+            placeholder: 'dd/MM/yyyy',
             condition: {
               type: 'SHOW',
               option: 'type',
@@ -99,12 +99,12 @@
           },
         },
         {
-          value: 'MM/dd/yyyy HH:mm:ss',
+          value: 'dd/MM/yyyy HH:mm:ss',
           label: 'Format',
           key: 'dateTimeFormat',
           type: 'TEXT',
           configuration: {
-            placeholder: 'MM/dd/yyyy HH:mm:ss',
+            placeholder: 'dd/MM/yyyy HH:mm:ss',
             condition: {
               type: 'SHOW',
               option: 'type',
