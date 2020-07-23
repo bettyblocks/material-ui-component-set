@@ -31,12 +31,24 @@
     const isIcon = variant === 'icon';
     const buttonContent = useText(buttonText);
     const [isVisible, setIsVisible] = useState(visible);
-    const [isLoading, setIsLoading] = useState(false);
 
     const hideButton = () => setIsVisible(false);
     const showButton = () => setIsVisible(true);
+    const [isLoading, setIsLoading] = useState(false);
     const toggleVisibility = () => setIsVisible(s => !s);
-    const toggleLoading = () => setIsLoading(loading => !loading);
+
+    const [actionCallback, { loading }] = (isAction &&
+      useAction(actionId, {
+        onCompleted(data) {
+          B.triggerEvent('onSuccess', data.actionb5);
+        },
+        onError(error) {
+          B.triggerEvent('onError', error.message);
+        },
+      })) || [() => {}, { loading: false }];
+
+    const toggleLoading = () => setIsLoading(l => !l);
+
     useEffect(() => {
       setIsVisible(visible);
     }, [visible]);
@@ -48,8 +60,12 @@
       B.defineFunction('ToggleLoadingState', toggleLoading);
     }, []);
 
+    useEffect(() => {
+      B.triggerEvent('onLoad', loading);
+    }, [loading]);
+
     const generalProps = {
-      disabled: disabled || isLoading,
+      disabled: disabled || isLoading || loading,
       size,
       tabindex: isDev && -1,
       href:
@@ -78,19 +94,7 @@
     const compProps = isIcon ? iconButtonProps : buttonProps;
     const BtnComp = isIcon ? IconButton : Button;
 
-    const [actionCallback, { loading }] = (isAction &&
-      useAction(actionId, {
-        onCompleted(data) {
-          B.triggerEvent('onSuccess', data.actionb5);
-        },
-        onError(error) {
-          B.triggerEvent('onError', error.message);
-        },
-      })) || [() => {}, { loading: false }];
-
-    if (loading) {
-      B.triggerEvent('onLoad', loading);
-    }
+    const showIndicator = !isIcon && (isLoading || loading);
 
     const ButtonComponent = (
       <BtnComp
@@ -114,7 +118,7 @@
             fontSize: size,
           })}
         {!isIcon && buttonContent}
-        {!isIcon && loading && (
+        {showIndicator && (
           <CircularProgress size={16} className={classes.loader} />
         )}
       </BtnComp>
