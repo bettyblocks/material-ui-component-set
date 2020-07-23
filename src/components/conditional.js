@@ -15,11 +15,20 @@
           const { compare } = options;
           const right = useText(options.right);
 
-          if (compare === 'not_eq') {
-            return left !== right;
+          switch (compare) {
+            case 'neq':
+              return left !== right;
+            case 'gt':
+              return left > right;
+            case 'lt':
+              return left < right;
+            case 'gteq':
+              return left >= right;
+            case 'lteq':
+              return left <= right;
+            default:
+              return left === right;
           }
-
-          return left === right;
         };
         const initialVisibility = isDev || evalCondition();
         const [visible, setVisible] = useState(initialVisibility);
