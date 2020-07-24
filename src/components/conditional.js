@@ -14,18 +14,20 @@
           const left = useText(options.left);
           const { compare } = options;
           const right = useText(options.right);
+          const leftAsNumber = parseFloat(left);
+          const rightAsNumber = parseFloat(right);
 
           switch (compare) {
             case 'neq':
               return left !== right;
             case 'gt':
-              return left > right;
+              return leftAsNumber > rightAsNumber;
             case 'lt':
-              return left < right;
+              return leftAsNumber < rightAsNumber;
             case 'gteq':
-              return left >= right;
+              return leftAsNumber >= rightAsNumber;
             case 'lteq':
-              return left <= right;
+              return leftAsNumber <= rightAsNumber;
             default:
               return left === right;
           }
