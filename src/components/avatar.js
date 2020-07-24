@@ -26,9 +26,7 @@
     const imgSrc = useText(imgUrl);
     const altText = useText(imgAlt);
 
-    const IconComponent = React.createElement(Icons[icon], {
-      className: classes.root,
-    });
+    const IconComponent = React.createElement(Icons[icon]);
 
     const styleOptions = {
       width,
@@ -40,11 +38,11 @@
         variant={variant}
         alt={isImage && altText}
         src={isImage && imgSrc}
-        classes={{ root: classes.avatar }}
+        className={classes.avatar}
         style={styleOptions}
       >
-        {isLetter ? useText(letter) : null}
-        {isIcon ? IconComponent : null}
+        {isLetter && useText(letter)}
+        {isIcon && IconComponent}
       </Avatar>
     );
 
@@ -65,6 +63,10 @@
           style.getColor(backgroundColor),
           '!important',
         ],
+        fontWeight: ({ options: { fontWeight } }) => fontWeight,
+        '&.MuiAvatar-root': {
+          fontSize: ({ options: { fontSize } }) => fontSize,
+        },
       },
     };
   },
