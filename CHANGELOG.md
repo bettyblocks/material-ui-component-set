@@ -1,3 +1,10 @@
+## [1.22.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.22.2...v1.22.3) (2020-07-24)
+
+
+### Bug Fixes
+
+* background options position in box ([0a8662f](https://github.com/bettyblocks/material-ui-component-set/commit/0a8662f0956299ee021e18b1cac8ebd3cfd482f6))
+
 ## [1.22.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.22.1...v1.22.2) (2020-07-20)
 
 
