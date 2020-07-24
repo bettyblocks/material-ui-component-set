@@ -11,6 +11,7 @@
         const isPristine = isEmpty && isDev;
         const { filter, model, redirectWithoutResult, showError } = options;
         const displayError = showError === 'built-in';
+        const componentIsMounted = useRef(false);
 
         const builderLayout = () => (
           <>
@@ -38,7 +39,7 @@
           return (
             <B.GetOne modelId={model} filter={filter}>
               {({ loading, error, data }) => {
-                if (loading) {
+                if (loading && componentIsMounted.current) {
                   B.triggerEvent('onLoad', loading);
                   return <span>Loading...</span>;
                 }
@@ -60,6 +61,7 @@
                   redirect();
                 }
 
+                componentIsMounted.current = true;
                 return (
                   <>
                     {data && (
