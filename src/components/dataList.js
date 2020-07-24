@@ -6,12 +6,12 @@
   jsx: (
     <div className={classes.root}>
       {(() => {
-        const { env, getProperty, useGetAll, ModelProvider } = B;
+        const { env, getProperty, useGetAll, ModelProvider, useFilter } = B;
         const [page, setPage] = useState(1);
-        const [search, setSearch] = React.useState('');
-        const [searchTerm, setSearchTerm] = React.useState('');
-        const [isTyping, setIsTyping] = useState(false);
+        const [search, setSearch] = useState('');
+        const [searchTerm, setSearchTerm] = useState('');
         const {
+          take,
           filter,
           hidePagination,
           type,
@@ -19,11 +19,17 @@
           showError,
           hideSearch,
           searchProperty,
+          order,
+          orderBy,
         } = options;
 
-        const take = parseInt(options.take, 10) || 50;
-        const { id: searchId, name: searchPropertyName = '{property}' } =
-          getProperty(searchProperty) || {};
+        const rowsPerPage = parseInt(take, 10) || 50;
+        const { TextField, InputAdornment } = window.MaterialUI.Core;
+        const { Search } = window.MaterialUI.Icons;
+        const searchPropertyArray = [searchProperty].flat();
+        const { label: searchPropertyLabel } =
+          getProperty(searchPropertyArray[searchPropertyArray.length - 1]) ||
+          {};
 
         const isEmpty = children.length === 0;
         const isDev = env === 'dev';
@@ -34,7 +40,18 @@
           <>
             {searchProperty && !hideSearch && (
               <div className={classes.header}>
-                <Search name={searchPropertyName} search={search} />
+                <div className={classes.searchWrapper}>
+                  <TextField
+                    placeholder={`Search on ${searchPropertyLabel}`}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <Search />
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                </div>
               </div>
             )}
             <div className={type === 'grid' ? classes.grid : ''}>
@@ -47,7 +64,7 @@
                 {isPristine ? 'Data List' : children}
               </div>
 
-              {Array.from(Array(take - 1).keys()).map(key => (
+              {Array.from(Array(rowsPerPage - 1).keys()).map(key => (
                 <div
                   key={key}
                   className={[
@@ -62,21 +79,78 @@
             </div>
             <div className={classes.footer}>
               {isDev && !hidePagination && (
-                <Pagination totalCount={0} resultCount={take} currentPage={1} />
+                <Pagination
+                  totalCount={0}
+                  resultCount={rowsPerPage}
+                  currentPage={1}
+                />
               )}
             </div>
           </>
         );
 
+        const handleSearch = event => {
+          setSearch(event.target.value);
+        };
+
+        const deepMerge = (...objects) => {
+          const isObject = item =>
+            item && typeof item === 'object' && !Array.isArray(item);
+
+          return objects.reduce((accumulator, object) => {
+            Object.keys(object).forEach(key => {
+              const accumulatorValue = accumulator[key];
+              const value = object[key];
+
+              if (Array.isArray(accumulatorValue) && Array.isArray(value)) {
+                accumulator[key] = accumulatorValue.concat(value);
+              } else if (isObject(accumulatorValue) && isObject(value)) {
+                accumulator[key] = deepMerge(accumulatorValue, value);
+              } else {
+                accumulator[key] = value;
+              }
+            });
+            return accumulator;
+          }, {});
+        };
+
+        const orderByArray = [orderBy].flat();
+        const sort =
+          !isDev && orderBy
+            ? orderByArray.reduceRight((acc, property, index) => {
+                const prop = getProperty(property);
+                return index === orderByArray.length - 1
+                  ? { [prop.name]: order.toUpperCase() }
+                  : { [prop.name]: acc };
+              }, {})
+            : {};
+
+        const searchFilter = searchProperty
+          ? searchPropertyArray.reduceRight(
+              (acc, property, index) =>
+                index === searchPropertyArray.length - 1
+                  ? { [property]: { matches: searchTerm } }
+                  : { [property]: acc },
+              {},
+            )
+          : {};
+
+        const newFilter =
+          searchProperty && search !== ''
+            ? deepMerge(filter, searchFilter)
+            : filter;
+
+        const where = useFilter(newFilter);
+
         const { loading, error, data, refetch } =
           model &&
           useGetAll(model, {
-            filter:
-              searchId && searchTerm !== ''
-                ? { ...filter, [searchId]: { matches: searchTerm } }
-                : filter,
-            skip: page ? (page - 1) * take : 0,
-            take,
+            rawFilter: where,
+            skip: page ? (page - 1) * rowsPerPage : 0,
+            take: rowsPerPage,
+            variables: {
+              ...(orderBy ? { sort: { relation: sort } } : {}),
+            },
           });
 
         useEffect(() => {
@@ -103,7 +177,7 @@
 
           if (loading) {
             B.triggerEvent('onLoad', loading);
-            return 'loading...';
+            return <div className={classes.skeleton} />;
           }
 
           if (error && !displayError) {
@@ -127,13 +201,20 @@
             <>
               <div className={classes.header}>
                 {searchProperty && !hideSearch && (
-                  <Search
-                    name={searchPropertyName}
-                    search={search}
-                    isTyping={isTyping}
-                    setSearch={setSearch}
-                    setIsTyping={setIsTyping}
-                  />
+                  <div className={classes.searchWrapper}>
+                    <TextField
+                      placeholder={`Search on ${searchPropertyLabel}`}
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <Search />
+                          </InputAdornment>
+                        ),
+                      }}
+                      onChange={handleSearch}
+                      value={search}
+                    />
+                  </div>
                 )}
               </div>
               <div className={type === 'grid' ? classes.grid : ''}>
@@ -158,40 +239,11 @@
 
         /* SubComponents */
 
-        // eslint-disable-next-line no-shadow
-        function Search({ name, search, isTyping, setIsTyping }) {
-          const inputRef = React.createRef();
-
-          React.useEffect(() => {
-            if (isTyping) {
-              inputRef.current.focus();
-            }
-          });
-
-          return (
-            <div className={classes.searchWrapper}>
-              <i
-                className={[classes.searchIcon, 'zmdi zmdi-search'].join(' ')}
-              />
-              <input
-                className={classes.search}
-                type="text"
-                value={search}
-                onChange={({ target: { value } }) => setSearch(value)}
-                ref={inputRef}
-                onFocus={() => setIsTyping(true)}
-                onBlur={() => setIsTyping(false)}
-                placeholder={`Search on ${name}`}
-              />
-            </div>
-          );
-        }
-
         function Pagination({ totalCount, resultCount, currentPage }) {
-          const firstItem = currentPage ? (currentPage - 1) * take : 0;
+          const firstItem = currentPage ? (currentPage - 1) * rowsPerPage : 0;
 
           useEffect(() => {
-            const totalPages = Math.ceil(totalCount / take);
+            const totalPages = Math.ceil(totalCount / rowsPerPage);
 
             if (currentPage > totalPages) {
               setPage(totalPages);
@@ -231,7 +283,7 @@
                   />
                 )}
                 {(typeof currentPage === 'undefined' ? 1 : currentPage) <
-                totalCount / take ? (
+                totalCount / rowsPerPage ? (
                   <button
                     className={classes.button}
                     type="button"
@@ -289,7 +341,6 @@
         display: 'flex',
         alignItems: 'center',
         padding: [0, '0.5rem'],
-        borderBottom: [1, 'solid', '#000'],
         minHeight: '4rem',
       },
       searchIcon: {
@@ -332,6 +383,34 @@
         textDecoration: 'none',
       },
       arrowDisabled: { color: '#ccc' },
+      skeleton: {
+        height: `calc(${style.getFont('Body1').Mobile} * 1.2)`,
+        [`@media ${B.mediaMinWidth(600)}`]: {
+          height: `calc(${style.getFont('Body1').Portrait} * 1.2)`,
+        },
+        [`@media ${B.mediaMinWidth(960)}`]: {
+          height: `calc(${style.getFont('Body1').Landscape} * 1.2)`,
+        },
+        [`@media ${B.mediaMinWidth(1280)}`]: {
+          height: `calc(${style.getFont('Body1').Desktop} * 1.2)`,
+        },
+        backgroundColor: '#eee',
+        borderRadius: 8,
+        overflow: 'hidden',
+        '&::after': {
+          display: 'block',
+          width: '100%',
+          height: '100%',
+          backgroundImage:
+            'linear-gradient(90deg, #eee 25%, #fff 50%, #eee 75%)',
+          backgroundSize: '200% 100%',
+          backgroundRepeat: 'no-repeat',
+          backgroundPositionX: '150%',
+          borderRadius: `calc(${style.getFont('Body2').Landscape} / 2)`,
+          content: '""',
+          animation: 'loading 1.5s infinite',
+        },
+      },
       [`@media ${B.mediaMinWidth(600)}`]: {
         root: {
           marginTop: ({ options: { outerSpacing } }) =>
