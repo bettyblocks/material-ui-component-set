@@ -49,21 +49,6 @@
           type: 'TOGGLE',
         },
         {
-          value: '3.25rem',
-          label: 'Font Size',
-          key: 'fontSize',
-          type: 'TEXT',
-          configuration: {
-            as: 'UNIT',
-            condition: {
-              type: 'SHOW',
-              option: 'styles',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
-        },
-        {
           type: 'COLOR',
           label: 'Text color',
           key: 'textColor',

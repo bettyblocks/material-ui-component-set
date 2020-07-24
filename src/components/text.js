@@ -43,7 +43,7 @@
         whiteSpace: 'pre-wrap',
         color: ({ options: { textColor } }) => style.getColor(textColor),
         fontFamily: ({ options: { type } }) => style.getFontFamily(type),
-        fontSize: ({ options: { fontSize } }) => fontSize,
+        fontSize: ({ options: { type } }) => style.getFontSize(type),
         fontWeight: ({ options: { fontWeight } }) => fontWeight,
         textTransform: ({ options: { type } }) => style.getTextTransform(type),
         letterSpacing: ({ options: { type } }) => style.getLetterSpacing(type),
@@ -56,6 +56,8 @@
             getSpacing(outerSpacing[2], 'Portrait'),
           marginLeft: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[3], 'Portrait'),
+          fontSize: ({ options: { type } }) =>
+            style.getFontSize(type, 'Portrait'),
         },
         [`@media ${B.mediaMinWidth(960)}`]: {
           marginTop: ({ options: { outerSpacing } }) =>
@@ -66,6 +68,8 @@
             getSpacing(outerSpacing[2], 'Landscape'),
           marginLeft: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[3], 'Landscape'),
+          fontSize: ({ options: { type } }) =>
+            style.getFontSize(type, 'Landscape'),
         },
         [`@media ${B.mediaMinWidth(1280)}`]: {
           marginTop: ({ options: { outerSpacing } }) =>
@@ -76,6 +80,8 @@
             getSpacing(outerSpacing[2], 'Desktop'),
           marginLeft: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[3], 'Desktop'),
+          fontSize: ({ options: { type } }) =>
+            style.getFontSize(type, 'Desktop'),
         },
       },
       placeholder: {
