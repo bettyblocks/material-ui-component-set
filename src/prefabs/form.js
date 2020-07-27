@@ -1764,18 +1764,6 @@
               type: 'TOGGLE',
             },
             {
-              value: 'Transparent',
-              label: 'Background color',
-              key: 'backgroundColor',
-              type: 'COLOR',
-            },
-            {
-              value: 100,
-              label: 'Background color opacity',
-              key: 'backgroundColorAlpha',
-              type: 'NUMBER',
-            },
-            {
               value: false,
               label: 'Transparent',
               key: 'transparent',
@@ -1905,6 +1893,34 @@
               label: 'Show background options',
               key: 'backgroundOptions',
               type: 'TOGGLE',
+            },
+            {
+              value: 'Transparent',
+              label: 'Background color',
+              key: 'backgroundColor',
+              type: 'COLOR',
+              configuration: {
+                condition: {
+                  type: 'SHOW',
+                  option: 'backgroundOptions',
+                  comparator: 'EQ',
+                  value: true,
+                },
+              },
+            },
+            {
+              value: 100,
+              label: 'Background color opacity',
+              key: 'backgroundColorAlpha',
+              type: 'NUMBER',
+              configuration: {
+                condition: {
+                  type: 'SHOW',
+                  option: 'backgroundOptions',
+                  comparator: 'EQ',
+                  value: true,
+                },
+              },
             },
             {
               value: [''],
