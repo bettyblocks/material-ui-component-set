@@ -1,3 +1,47 @@
+# [1.24.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.23.0...v1.24.0) (2020-07-27)
+
+
+### Bug Fixes
+
+* ensure condition parameters are numbers ([9d14ec7](https://github.com/bettyblocks/material-ui-component-set/commit/9d14ec7a48268b0019b557b9a7c9ebf55f5bc2f7))
+
+
+### Features
+
+* add more conditions to conditional component ([89ca058](https://github.com/bettyblocks/material-ui-component-set/commit/89ca0580af1b98a29a399c3c56fb133a9ae17076))
+
+# [1.23.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.22.3...v1.23.0) (2020-07-27)
+
+
+### Bug Fixes
+
+* select component not to break on data type ([724ad6c](https://github.com/bettyblocks/material-ui-component-set/commit/724ad6c3313aa2beac62dd79d2c48b41263498ab))
+
+
+### Features
+
+* add refetch in data components ([7ac471e](https://github.com/bettyblocks/material-ui-component-set/commit/7ac471e0a9d39f40afb982dcf8b158107e80fc59))
+* call useAction only if the linkType is Action ([e68a1fa](https://github.com/bettyblocks/material-ui-component-set/commit/e68a1fa970ec49b28eb1dfd48f982ed737415bc0))
+* change the button and list to use hooks ([5faa3bf](https://github.com/bettyblocks/material-ui-component-set/commit/5faa3bfe211f69927b3a6ed893ca06b767593ac4))
+* don't trigger noresult if there's no modal ([2c3f87d](https://github.com/bettyblocks/material-ui-component-set/commit/2c3f87d19a37466fec6275902259068510d3c545))
+* execute usegetAll when model has been defined ([dc27ca1](https://github.com/bettyblocks/material-ui-component-set/commit/dc27ca1a7052300b72a3df05c2dcf6be2aa5d8aa))
+* migrate form, radio, checkbox, select and autocomplete component ([204f35e](https://github.com/bettyblocks/material-ui-component-set/commit/204f35e5ccdb8d2c7ed70b579abbce44b1081d9f))
+* trigger onSuccess and onError events ([d721762](https://github.com/bettyblocks/material-ui-component-set/commit/d721762ad3a6994e712c39aa5bac5b29c6c5aa9e))
+
+## [1.22.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.22.2...v1.22.3) (2020-07-24)
+
+
+### Bug Fixes
+
+* background options position in box ([0a8662f](https://github.com/bettyblocks/material-ui-component-set/commit/0a8662f0956299ee021e18b1cac8ebd3cfd482f6))
+
+## [1.22.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.22.1...v1.22.2) (2020-07-20)
+
+
+### Bug Fixes
+
+* empty helper / validation message in textfield component ([0c6804d](https://github.com/bettyblocks/material-ui-component-set/commit/0c6804dc8e2083ea11ea3018f14252e5bc3762fd))
+
 ## [1.22.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.22.0...v1.22.1) (2020-07-15)
 
 

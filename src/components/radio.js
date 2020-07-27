@@ -31,7 +31,7 @@
     const isDev = B.env === 'dev';
     const displayError = showError === 'built-in';
 
-    const { GetAll, getProperty, useText, getActionInput } = B;
+    const { useGetAll, getProperty, useText, getActionInput } = B;
 
     const { label: propertyLabelText } = getProperty(property) || {};
     const propLabelOverride = useText(propertyLabelOverride);
@@ -62,6 +62,30 @@
       Radio,
     } = window.MaterialUI.Core;
 
+    const { loading, error: err, data, refetch } =
+      model && useGetAll(model, { filter, skip: 0, take: 50 });
+
+    if (loading) {
+      B.triggerEvent('onLoad', loading);
+    }
+
+    if (err && !displayError) {
+      B.triggerEvent('onError', err.message);
+    }
+
+    const { results } = data || {};
+    if (results) {
+      if (results.length > 0) {
+        B.triggerEvent('onSuccess', results);
+      } else {
+        B.triggerEvent('onNoResults');
+      }
+    }
+
+    useEffect(() => {
+      B.defineFunction('Refetch', () => refetch());
+    }, [refetch]);
+
     // renders the radio component
     const renderRadio = (optionValue, optionLabel) => (
       <MUIFormControlLabel
@@ -72,42 +96,19 @@
         labelPlacement={position}
       />
     );
-
     const radioData = (radioOptions || '').split('\n');
-    let Radios = radioData.map(option => renderRadio(option, option));
 
-    if (optionType === 'data') {
-      Radios = renderRadio('value', 'Placeholder');
-      if (!isDev) {
-        Radios = (
-          <GetAll modelId={model} filter={filter} skip={0} take={50}>
-            {({ loading, error: err, data }) => {
-              if (loading) {
-                B.triggerEvent('onLoad', loading);
-                return <span>Loading...</span>;
-              }
-
-              if (err && !displayError) {
-                B.triggerEvent('onError', err.message);
-              }
-              if (err && displayError) {
-                return <span>{err.message}</span>;
-              }
-
-              const { results = [] } = data || {};
-              if (results.length > 0) {
-                B.triggerEvent('onSuccess', results);
-              } else {
-                B.triggerEvent('onNoResults');
-              }
-              return results.map(item =>
-                renderRadio(item[valueProperty.name], item[labelProperty.name]),
-              );
-            }}
-          </GetAll>
-        );
+    const renderRadios = () => {
+      if (optionType !== 'data') {
+        return radioData.map(option => renderRadio(option, option));
       }
-    }
+      if (isDev) return renderRadio('value', 'Placeholder');
+      if (loading) return <span>Loading...</span>;
+      if (err && displayError) return <span>{err.message}</span>;
+      return results.map(item =>
+        renderRadio(item[valueProperty.name], item[labelProperty.name]),
+      );
+    };
 
     const handleChange = evt => {
       setValue(getValue(evt.target.value));
@@ -136,7 +137,7 @@
           onChange={handleChange}
           aria-label={labelText}
         >
-          {Radios}
+          {renderRadios()}
         </RadioGroup>
         <FormHelperText>{componentHelperText}</FormHelperText>
       </MUIFormControl>
