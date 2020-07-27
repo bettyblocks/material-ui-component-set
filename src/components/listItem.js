@@ -91,9 +91,15 @@
             '!important',
           ],
         },
-        '& .MuiTypography-colorTextSecondary': {
+        '& .MuiListItemText-primary': {
+          fontSize: ({ options: { titleSize } }) => titleSize,
+          fontWeight: ({ options: { titleWeight } }) => titleWeight,
+        },
+        '& .MuiListItemText-secondary': {
           color: ({ options: { subtitleColor } }) =>
             style.getColor(subtitleColor),
+          fontSize: ({ options: { subtitleSize } }) => subtitleSize,
+          fontWeight: ({ options: { subtitleWeight } }) => subtitleWeight,
         },
         '& .MuiListItemIcon-root': {
           color: ({ options: { iconColor } }) => style.getColor(iconColor),
