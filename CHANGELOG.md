@@ -1,3 +1,11 @@
+# [1.26.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.25.0...v1.26.0) (2020-07-27)
+
+
+### Features
+
+* get font size from theme type ([a73bac9](https://github.com/bettyblocks/material-ui-component-set/commit/a73bac90abdf301378f07cd778e0963b565ee56d))
+* overwrite theme styles for text, title, avatar and list item ([c2ba12e](https://github.com/bettyblocks/material-ui-component-set/commit/c2ba12e8c4d4af79ebb273809c61bcde833402c0))
+
 # [1.25.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.24.0...v1.25.0) (2020-07-27)
 
 
