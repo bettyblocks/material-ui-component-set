@@ -1,3 +1,15 @@
+# [1.24.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.23.0...v1.24.0) (2020-07-27)
+
+
+### Bug Fixes
+
+* ensure condition parameters are numbers ([9d14ec7](https://github.com/bettyblocks/material-ui-component-set/commit/9d14ec7a48268b0019b557b9a7c9ebf55f5bc2f7))
+
+
+### Features
+
+* add more conditions to conditional component ([89ca058](https://github.com/bettyblocks/material-ui-component-set/commit/89ca0580af1b98a29a399c3c56fb133a9ae17076))
+
 # [1.23.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.22.3...v1.23.0) (2020-07-27)
 
 
