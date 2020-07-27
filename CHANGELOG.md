@@ -1,3 +1,11 @@
+# [1.25.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.24.0...v1.25.0) (2020-07-27)
+
+
+### Features
+
+* data table and list based on hook and added refetch interaction ([c29214f](https://github.com/bettyblocks/material-ui-component-set/commit/c29214f91589d830c66948c02f99e6b197dac5eb))
+* search debounce on data list ([e3d3209](https://github.com/bettyblocks/material-ui-component-set/commit/e3d3209d6c4adb5b8a43787061d3b89d5a2d8d3d))
+
 # [1.24.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.23.0...v1.24.0) (2020-07-27)
 
 
