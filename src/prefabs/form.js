@@ -37,7 +37,6 @@
           configuration: {
             modal: {
               type: 'MODEL_AND_PROPERTIES',
-              generateCustomModel: true,
               modelRequired: false,
             },
           },
