@@ -6,10 +6,11 @@
   jsx: (
     <div>
       {(() => {
-        const { env, Children, useAction, useGetAll } = B;
+        const { env, Children, useAction, useGetAll, getActionInput } = B;
 
         const {
           actionId,
+          actionInputId,
           model,
           filter,
           formErrorMessage,
@@ -24,6 +25,7 @@
         const empty = children.length === 0;
         const isDev = B.env === 'dev';
         const isPristine = empty && isDev;
+        const actionInput = getActionInput(actionInputId);
         const hasRedirect = redirect && redirect.id !== '';
         const redirectTo =
           env === 'prod' && hasRedirect && B.useEndpoint(redirect);
@@ -100,7 +102,11 @@
             acc[key] = `${acc[key]},${value}`;
             return acc;
           }, {});
-          callAction({ variables: { input: values } });
+          const variableName = actionInput && actionInput.name;
+          const submitData = variableName ? { [variableName]: values } : values;
+          callAction({
+            variables: { input: submitData },
+          });
         };
 
         const renderContent = () => {

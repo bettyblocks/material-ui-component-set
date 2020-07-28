@@ -50,7 +50,8 @@
     const placeholderText = useText(placeholder);
     const helper = useText(helperText);
 
-    const { label: propertyLabelText } = getProperty(property) || {};
+    const { label: propertyLabelText, name: propertyName } =
+      getProperty(property) || {};
     const propLabelOverride = useText(propertyLabelOverride);
     const propertyLabel = propLabelOverride || propertyLabelText;
     const labelText = property ? propertyLabel : useText(label);
@@ -73,6 +74,7 @@
     const actionInput = getActionInput(actionInputId);
     const searchProp = getProperty(searchProperty) || {};
     const valueProp = getProperty(valueProperty) || {};
+    const formComponentName = propertyName || (actionInput && actionInput.name);
     const [searchParam, setSearchParam] = useState('');
     const [debouncedSearchParam, setDebouncedSearchParam] = useState('');
 
@@ -261,7 +263,7 @@
             <input
               type="hidden"
               key={currentValue ? 'hasValue' : 'isEmpty'}
-              name={actionInput && actionInput.name}
+              name={formComponentName}
               value={currentValue}
             />
             <TextField

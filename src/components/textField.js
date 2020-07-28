@@ -85,12 +85,14 @@
 
     const placeholderText = useText(placeholder);
 
-    const { label: propertyLabelText } = getProperty(property) || {};
+    const { label: propertyLabelText, name: propertyName } =
+      getProperty(property) || {};
     const propLabelOverride = useText(propertyLabelOverride);
     const propertyLabel = propLabelOverride || propertyLabelText;
     const labelText = property ? propertyLabel : useText(label);
 
     const actionInput = getActionInput(actionInputId);
+    const formComponentName = propertyName || (actionInput && actionInput.name);
 
     const handleValidation = validation => {
       setErrorState(!validation.valid);
@@ -196,7 +198,7 @@
           <InputLabel classes={{ root: classes.label }}>{labelText}</InputLabel>
         )}
         <InputCmp
-          name={actionInput && actionInput.name}
+          name={formComponentName}
           value={currentValue}
           type={(isDev && type === 'number') || showPassword ? 'text' : type}
           multiline={multiline}

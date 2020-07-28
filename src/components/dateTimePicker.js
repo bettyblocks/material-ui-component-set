@@ -42,9 +42,11 @@
     const [selectedDate, setSelectedDate] = useState(strDefaultValue);
     const helper = useText(helperText);
     const placeholderText = useText(placeholder);
-    const { label: propertyLabelText } = getProperty(property) || {};
+    const { label: propertyLabelText, name: propertyName } =
+      getProperty(property) || {};
     const propLabelOverride = useText(propertyLabelOverride);
     const propertyLabel = propLabelOverride || propertyLabelText;
+    const formComponentName = propertyName || (actionInput && actionInput.name);
     const labelText = property ? propertyLabel : useText(label);
 
     const isValidDate = date => date instanceof Date && !isNaN(date);
@@ -98,7 +100,7 @@
 
     const DateTimeCmp = (
       <DateTimeComponent
-        name={actionInput && actionInput.name}
+        name={formComponentName}
         value={isDev ? devValue : prodValue}
         size={size}
         classes={{ root: classes.formControl }}
@@ -109,7 +111,7 @@
         inputVariant={inputvariant}
         InputProps={{
           inputProps: {
-            name: actionInput && actionInput.name,
+            name: formComponentName,
             tabIndex: isDev && -1,
           },
         }}
