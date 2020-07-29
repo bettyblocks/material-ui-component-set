@@ -122,7 +122,7 @@
       : {};
 
     const newFilter =
-      searchProperty && search !== ''
+      searchProperty && searchTerm !== ''
         ? deepMerge(filter, searchFilter)
         : filter;
     const where = useFilter(newFilter);
