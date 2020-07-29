@@ -96,15 +96,20 @@
           });
         }, []);
 
+        const mounted = useRef(true);
+        useEffect(() => {
+          if (!mounted.current && loading) {
+            B.triggerEvent('onLoad', loading);
+          }
+          mounted.current = false;
+        }, [loading]);
+
         const canvasLayout = () => {
           if (!model) {
             return builderLayout();
           }
 
-          if (loading) {
-            B.triggerEvent('onLoad', loading);
-            return 'loading...';
-          }
+          if (loading) return 'loading...';
 
           if (error && !displayError) {
             B.triggerEvent('onError', error.message);

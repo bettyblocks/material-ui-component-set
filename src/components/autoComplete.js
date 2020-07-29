@@ -136,9 +136,13 @@
       };
     }, [searchParam]);
 
-    if (loading) {
-      B.triggerEvent('onLoad', loading);
-    }
+    const mounted = useRef(true);
+    useEffect(() => {
+      if (!mounted.current && loading) {
+        B.triggerEvent('onLoad', loading);
+      }
+      mounted.current = false;
+    }, [loading]);
 
     if (err && !displayError) {
       B.triggerEvent('onError', err.message);
