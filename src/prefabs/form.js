@@ -37,6 +37,20 @@
           type: 'TEXT',
         },
         {
+          value: 'built-in',
+          label: 'Error message',
+          key: 'showError',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Built in', value: 'built-in' },
+              { name: 'Interaction', value: 'interaction' },
+            ],
+          },
+        },
+        {
           value: 'Failed to submit the form!',
           label: 'Error message',
           key: 'formErrorMessage',
@@ -223,20 +237,6 @@
                   comparator: 'EQ',
                   value: true,
                 },
-              },
-            },
-            {
-              value: 'built-in',
-              label: 'Error message',
-              key: 'showError',
-              type: 'CUSTOM',
-              configuration: {
-                as: 'BUTTONGROUP',
-                dataType: 'string',
-                allowedInput: [
-                  { name: 'Built in', value: 'built-in' },
-                  { name: 'Interaction', value: 'interaction' },
-                ],
               },
             },
             {
