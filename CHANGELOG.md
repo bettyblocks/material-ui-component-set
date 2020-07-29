@@ -1,3 +1,10 @@
+## [1.26.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.26.0...v1.26.1) (2020-07-29)
+
+
+### Bug Fixes
+
+* move the show error option on the form ([cfc4f16](https://github.com/bettyblocks/material-ui-component-set/commit/cfc4f16a67b98aca8c7779c74b5510bd421f630f))
+
 # [1.26.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.25.0...v1.26.0) (2020-07-27)
 
 
