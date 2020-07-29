@@ -10,6 +10,7 @@
         const [page, setPage] = useState(1);
         const [search, setSearch] = useState('');
         const [searchTerm, setSearchTerm] = useState('');
+        const [isTyping, setIsTyping] = useState(false);
         const {
           take,
           filter,
@@ -40,18 +41,7 @@
           <>
             {searchProperty && !hideSearch && (
               <div className={classes.header}>
-                <div className={classes.searchWrapper}>
-                  <TextField
-                    placeholder={`Search on ${searchPropertyLabel}`}
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <Search />
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
-                </div>
+                <SearchComponent label={searchPropertyLabel} />
               </div>
             )}
             <div className={type === 'grid' ? classes.grid : ''}>
@@ -136,7 +126,7 @@
           : {};
 
         const newFilter =
-          searchProperty && search !== ''
+          searchProperty && searchTerm !== ''
             ? deepMerge(filter, searchFilter)
             : filter;
 
@@ -201,20 +191,13 @@
             <>
               <div className={classes.header}>
                 {searchProperty && !hideSearch && (
-                  <div className={classes.searchWrapper}>
-                    <TextField
-                      placeholder={`Search on ${searchPropertyLabel}`}
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <Search />
-                          </InputAdornment>
-                        ),
-                      }}
-                      onChange={handleSearch}
-                      value={search}
-                    />
-                  </div>
+                  <SearchComponent
+                    label={searchPropertyLabel}
+                    onChange={handleSearch}
+                    value={search}
+                    isTyping={isTyping}
+                    setIsTyping={setIsTyping}
+                  />
                 )}
               </div>
               <div className={type === 'grid' ? classes.grid : ''}>
@@ -238,6 +221,44 @@
         };
 
         /* SubComponents */
+
+        function SearchComponent({
+          label,
+          onChange,
+          value,
+          // eslint-disable-next-line no-shadow
+          isTyping,
+          // eslint-disable-next-line no-shadow
+          setIsTyping,
+        }) {
+          const inputRef = React.createRef();
+
+          useEffect(() => {
+            if (isTyping) {
+              inputRef.current.focus();
+            }
+          });
+
+          return (
+            <div className={classes.searchWrapper}>
+              <TextField
+                placeholder={`Search on ${label}`}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <Search />
+                    </InputAdornment>
+                  ),
+                }}
+                onChange={onChange}
+                inputRef={inputRef}
+                onFocus={() => setIsTyping(true)}
+                onBlur={() => setIsTyping(false)}
+                value={value}
+              />
+            </div>
+          );
+        }
 
         function Pagination({ totalCount, resultCount, currentPage }) {
           const firstItem = currentPage ? (currentPage - 1) * rowsPerPage : 0;
