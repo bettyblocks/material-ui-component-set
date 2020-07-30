@@ -48,7 +48,7 @@
           },
           onError(err) {
             if (err && !displayError) {
-              B.triggerEvent('onError', err.message);
+              B.triggerEvent('onError', formErrorMessage || err.message);
             }
           },
         });
@@ -70,7 +70,7 @@
         }
 
         if (err && !displayError) {
-          B.triggerEvent('onError', err.message);
+          B.triggerEvent('onError', formErrorMessage || err.message);
         }
 
         const item = models && models.results[0];
