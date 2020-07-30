@@ -67,9 +67,13 @@
           B.triggerEvent('onLoad', loading);
         }
 
-        if (isFetching) {
-          B.triggerEvent('onLoad', isFetching);
-        }
+        const mounted = useRef(true);
+        useEffect(() => {
+          if (!mounted.current && isFetching) {
+            B.triggerEvent('onLoad', isFetching);
+          }
+          mounted.current = false;
+        }, [isFetching]);
 
         if (err && !displayError) {
           B.triggerEvent('onError', formErrorMessage || err.message);
