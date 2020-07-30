@@ -12,6 +12,7 @@
       ModelProvider,
       useEndpoint,
       useGetAll,
+      useFilter,
     } = B;
     const {
       Table,
@@ -28,7 +29,6 @@
     } = window.MaterialUI.Core;
     const { Search } = window.MaterialUI.Icons;
     const isDev = env === 'dev';
-
     const {
       take,
       size,
@@ -51,40 +51,86 @@
     const repeaterRef = React.createRef();
     const tableRef = React.createRef();
     const displayError = showError === 'built-in';
-    const [page, setPage] = React.useState(0);
+    const [page, setPage] = useState(0);
     const takeNum = parseInt(take, 10);
-    const [rowsPerPage, setRowsPerPage] = React.useState(takeNum);
-    const [search, setSearch] = React.useState('');
-    const [searchTerm, setSearchTerm] = React.useState('');
-    const { name: orderProp } = getProperty(orderProperty) || {};
+    const [rowsPerPage, setRowsPerPage] = useState(takeNum);
+    const [search, setSearch] = useState('');
+    const [searchTerm, setSearchTerm] = useState('');
+    const searchPropertyArray = [searchProperty].flat();
+    const { label: searchPropertyLabel = '{property}' } =
+      getProperty(searchPropertyArray[searchPropertyArray.length - 1]) || {};
     const [orderBy, setOrderBy] = React.useState({
-      field: orderProp || null,
-      order: orderProp ? sortOrder : null,
+      field: [orderProperty].flat() || null,
+      order: orderProperty ? sortOrder : null,
     });
-    const { id: searchId, name: searchPropertyName = '{property}' } =
-      getProperty(searchProperty) || {};
-    const [variables, setVariables] = React.useState(
-      orderProp
+
+    const createSortObject = (fields, order) => {
+      const fieldsArray = [fields].flat();
+      const sort = fieldsArray.reduceRight((acc, property, index) => {
+        const prop = getProperty(property);
+        return index === fieldsArray.length - 1
+          ? { [prop.name]: order.toUpperCase() }
+          : { [prop.name]: acc };
+      }, {});
+
+      return sort;
+    };
+    const [variables, setVariables] = useState(
+      orderProperty
         ? {
             sort: {
-              field: orderProp,
-              order: sortOrder.toUpperCase(),
+              relation: !isDev && createSortObject(orderProperty, sortOrder),
             },
           }
         : {},
     );
+
     const titleText = useText(title);
     const hasToolbar = titleText || (searchProperty && !hideSearch);
     const elevationLevel = variant === 'flat' ? 0 : elevation;
     const hasLink = linkTo && linkTo.id !== '';
 
+    const deepMerge = (...objects) => {
+      const isObject = item =>
+        item && typeof item === 'object' && !Array.isArray(item);
+
+      return objects.reduce((accumulator, object) => {
+        Object.keys(object).forEach(key => {
+          const accumulatorValue = accumulator[key];
+          const value = object[key];
+
+          if (Array.isArray(accumulatorValue) && Array.isArray(value)) {
+            accumulator[key] = accumulatorValue.concat(value);
+          } else if (isObject(accumulatorValue) && isObject(value)) {
+            accumulator[key] = deepMerge(accumulatorValue, value);
+          } else {
+            accumulator[key] = value;
+          }
+        });
+        return accumulator;
+      }, {});
+    };
+
+    const searchFilter = searchProperty
+      ? searchPropertyArray.reduceRight(
+          (acc, property, index) =>
+            index === searchPropertyArray.length - 1
+              ? { [property]: { matches: searchTerm } }
+              : { [property]: acc },
+          {},
+        )
+      : {};
+
+    const newFilter =
+      searchProperty && searchTerm !== ''
+        ? deepMerge(filter, searchFilter)
+        : filter;
+    const where = useFilter(newFilter);
+
     const { loading, error, data, refetch } =
       model &&
       useGetAll(model, {
-        filter:
-          searchId && searchTerm !== ''
-            ? { ...filter, [searchId]: { matches: searchTerm } }
-            : filter,
+        rawFilter: where,
         variables,
         skip: pagination && page * rowsPerPage,
         take: pagination && rowsPerPage,
@@ -107,7 +153,7 @@
       });
     }, []);
 
-    React.useEffect(() => {
+    useEffect(() => {
       if (!isDev) return;
       const repeat = () => {
         if (!repeaterRef.current) return;
@@ -166,8 +212,7 @@
       setOrderBy({ field, order: newOrder });
       setVariables({
         sort: {
-          field,
-          order: newOrder.toUpperCase(),
+          relation: createSortObject(field, newOrder),
         },
       });
     };
@@ -282,7 +327,7 @@
               {searchProperty && (
                 <TextField
                   classes={{ root: classes.searchField }}
-                  placeholder={`Search on ${searchPropertyName}`}
+                  placeholder={`Search on ${searchPropertyLabel}`}
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
