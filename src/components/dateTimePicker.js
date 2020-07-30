@@ -26,6 +26,8 @@
       property,
       propertyLabelOverride,
       hideLabel,
+      use24HourClockDateTime,
+      use24HourClockTime,
     } = options;
 
     const {
@@ -35,11 +37,12 @@
       KeyboardDateTimePicker,
     } = window.MaterialUI.Pickers;
     const { DateFnsUtils } = window.MaterialUI;
+    const DateFns = new DateFnsUtils();
     const { getActionInput, useText, getProperty, env } = B;
     const isDev = env === 'dev';
     const actionInput = getActionInput(actionInputId);
     const strDefaultValue = useText(defaultValue);
-    const [selectedDate, setSelectedDate] = useState(strDefaultValue);
+    const [selectedDate, setSelectedDate] = useState();
     const helper = useText(helperText);
     const placeholderText = useText(placeholder);
     const { label: propertyLabelText } = getProperty(property) || {};
@@ -53,53 +56,74 @@
       setSelectedDate(date);
     };
 
+    const setDefaultDate = (defaultFormat, givenFormat) => {
+      if (!selectedDate) {
+        const propDefaultParse = defaultFormat
+          ? DateFns.parse(strDefaultValue, defaultFormat)
+          : new Date(strDefaultValue);
+        const formatDefaultParse = DateFns.parse(strDefaultValue, givenFormat);
+
+        if (isValidDate(propDefaultParse)) {
+          setSelectedDate(propDefaultParse);
+        } else if (isValidDate(formatDefaultParse)) {
+          setSelectedDate(formatDefaultParse);
+        } else {
+          setSelectedDate(DateFns.parse('00:00:00', 'HH:mm:ss'));
+        }
+      }
+    };
+
     useEffect(() => {
       B.defineFunction('Clear', () => setSelectedDate(''));
     }, []);
 
-    const pad = value => {
-      if (value < 10) {
-        return `0${value}`;
+    let DateTimeComponent;
+    let format;
+    let resultString;
+    let use24HourClock = true;
+
+    switch (type) {
+      case 'date': {
+        DateTimeComponent = KeyboardDatePicker;
+        format = dateFormat || 'dd/MM/yyyy';
+
+        setDefaultDate('yyyy-MM-dd', format);
+
+        resultString = isValidDate(selectedDate)
+          ? DateFns.format(selectedDate, 'yyyy-MM-dd')
+          : null;
+        break;
       }
-      return value;
-    };
+      case 'datetime': {
+        DateTimeComponent = KeyboardDateTimePicker;
+        format = dateTimeFormat || 'dd/MM/yyyy HH:mm:ss';
+        use24HourClock = use24HourClockDateTime;
 
-    let DateTimeComponent = KeyboardDatePicker;
-    let format = dateFormat || 'MM/dd/yyyy';
-    let devValue = isValidDate(new Date(strDefaultValue))
-      ? new Date(strDefaultValue)
-      : new Date();
-    let prodValue = isValidDate(new Date(selectedDate))
-      ? new Date(selectedDate)
-      : new Date();
+        setDefaultDate(null, format);
 
-    if (type === 'datetime') {
-      DateTimeComponent = KeyboardDateTimePicker;
-      format = dateTimeFormat || 'MM/dd/yyyy HH:mm:ss';
-    }
-    if (type === 'time') {
-      DateTimeComponent = KeyboardTimePicker;
-      format = timeFormat || 'HH:mm:ss';
-      const today = new Date();
-      const year = today.getFullYear();
-      const month = pad(today.getMonth() + 1);
-      const day = pad(today.getDate());
-      const dateString = `${year}-${month}-${day}T`;
+        resultString = isValidDate(selectedDate)
+          ? new Date(selectedDate).toISOString()
+          : new Date().toISOString();
+        break;
+      }
+      case 'time': {
+        DateTimeComponent = KeyboardTimePicker;
+        format = timeFormat || 'HH:mm:ss';
+        use24HourClock = use24HourClockTime;
 
-      const selectedDateInDateFormat = isValidDate(selectedDate)
-        ? selectedDate
-        : new Date(`${dateString}${selectedDate}`);
+        setDefaultDate('HH:mm:ss', format);
 
-      devValue = strDefaultValue
-        ? new Date(`${dateString}${strDefaultValue}`)
-        : new Date(`${dateString}00:00:00`);
-      prodValue = !isDev ? selectedDateInDateFormat : devValue;
+        resultString = isValidDate(selectedDate)
+          ? DateFns.format(selectedDate, 'HH:mm:ss')
+          : null;
+        break;
+      }
+      default:
     }
 
     const DateTimeCmp = (
       <DateTimeComponent
-        name={actionInput && actionInput.name}
-        value={isDev ? devValue : prodValue}
+        value={selectedDate}
         size={size}
         classes={{ root: classes.formControl }}
         variant={variant}
@@ -109,7 +133,6 @@
         inputVariant={inputvariant}
         InputProps={{
           inputProps: {
-            name: actionInput && actionInput.name,
             tabIndex: isDev && -1,
           },
         }}
@@ -132,6 +155,7 @@
         DialogProps={{
           className: classes.dialog,
         }}
+        ampm={!use24HourClock}
       />
     );
 
@@ -147,6 +171,11 @@
       </div>
     ) : (
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <input
+          type="hidden"
+          name={actionInput && actionInput.name}
+          value={resultString}
+        />
         {variant === 'static' ? (
           <div className={classes.static}>{DateTimeCmp}</div>
         ) : (
