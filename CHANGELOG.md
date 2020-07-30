@@ -1,3 +1,17 @@
+# [1.27.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.26.1...v1.27.0) (2020-07-30)
+
+
+### Bug Fixes
+
+* move search input to separate component ([bcc3c1d](https://github.com/bettyblocks/material-ui-component-set/commit/bcc3c1db1aea07f0f48ba00e2263afe52538eaef))
+* update searchFilter to use searchTerm instead of search ([4dd2dd4](https://github.com/bettyblocks/material-ui-component-set/commit/4dd2dd47b7236dd9141b2e686a561d29663ecd26))
+
+
+### Features
+
+* add nested search and sort to datalist ([e09275a](https://github.com/bettyblocks/material-ui-component-set/commit/e09275a9ee210be8ca4aee2ea457152549c46d97))
+* add nested search and sort to dataTable ([bf914ad](https://github.com/bettyblocks/material-ui-component-set/commit/bf914ada5d7a13b61c22975126183116221153ca))
+
 ## [1.26.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.26.0...v1.26.1) (2020-07-29)
 
 
