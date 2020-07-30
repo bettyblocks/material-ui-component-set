@@ -1,3 +1,10 @@
+# [1.29.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.28.0...v1.29.0) (2020-07-30)
+
+
+### Features
+
+* trigger loading after mount ([752a193](https://github.com/bettyblocks/material-ui-component-set/commit/752a193ec6afff97838999f645405de0c5d49ef0))
+
 # [1.28.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.27.0...v1.28.0) (2020-07-30)
 
 
