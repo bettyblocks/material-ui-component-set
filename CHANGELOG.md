@@ -1,3 +1,10 @@
+# [1.28.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.27.0...v1.28.0) (2020-07-30)
+
+
+### Features
+
+* make date picker compatible with backend time format ([b681f64](https://github.com/bettyblocks/material-ui-component-set/commit/b681f643cad3ff3cf5f8faeb7d4a6a0091bb8dae))
+
 # [1.27.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.26.1...v1.27.0) (2020-07-30)
 
 
