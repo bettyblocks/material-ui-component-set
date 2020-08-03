@@ -36,6 +36,10 @@
         const [visible, setVisible] = useState(initialVisibility);
 
         useEffect(() => {
+          setVisible(initialVisibility);
+        }, [initialVisibility]);
+
+        useEffect(() => {
           B.defineFunction('Hide', () => setVisible(false));
           B.defineFunction('Show', () => setVisible(true));
           B.defineFunction('Toggle', () => setVisible(s => !s));
