@@ -1,3 +1,10 @@
+## [1.30.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.30.0...v1.30.1) (2020-08-04)
+
+
+### Bug Fixes
+
+* bump version ([2ed410d](https://github.com/bettyblocks/material-ui-component-set/commit/2ed410dd928910e42595a7f68a12697ff9fda87a))
+
 # [1.30.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.29.0...v1.30.0) (2020-08-04)
 
 
