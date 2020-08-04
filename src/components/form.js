@@ -6,7 +6,7 @@
   jsx: (
     <div>
       {(() => {
-        const { env, Children, useAction, useGetAll } = B;
+        const { env, Children, Action, useGetAll } = B;
 
         const {
           actionId,
@@ -16,11 +16,12 @@
           formSuccessMessage,
           redirect,
           showError,
+          showSuccess,
         } = options;
-
         const formRef = React.createRef();
 
         const displayError = showError === 'built-in';
+        const displaySuccess = showSuccess === 'built-in';
         const empty = children.length === 0;
         const isDev = B.env === 'dev';
         const isPristine = empty && isDev;
@@ -31,28 +32,6 @@
         const [isInvalid, setIsInvalid] = useState(false);
         const location = isDev ? {} : useLocation();
 
-        const [callAction, { data, loading, error }] = useAction(actionId, {
-          onCompleted({ actionb5 }) {
-            if (actionb5) {
-              B.triggerEvent('onSuccess', actionb5);
-            } else {
-              B.triggerEvent('onNoResults');
-            }
-            if (hasRedirect) {
-              if (redirectTo === location.pathname) {
-                history.go(0);
-              } else {
-                history.push(redirectTo);
-              }
-            }
-          },
-          onError(err) {
-            if (err && !displayError) {
-              B.triggerEvent('onError', formErrorMessage || err.message);
-            }
-          },
-        });
-
         const { loading: isFetching, data: models, error: err } =
           model &&
           useGetAll(model, {
@@ -61,29 +40,25 @@
             take: 1,
           });
 
-        if (loading) {
-          B.triggerEvent('onLoad', loading);
-        }
-
         const mounted = useRef(true);
         useEffect(() => {
           if (!mounted.current && isFetching) {
-            B.triggerEvent('onLoad', isFetching);
+            B.triggerEvent('onDataLoad', isFetching);
           }
           mounted.current = false;
         }, [isFetching]);
 
         if (err && !displayError) {
-          B.triggerEvent('onError', formErrorMessage || err.message);
+          B.triggerEvent('onDataError', formErrorMessage || err.message);
         }
 
         const item = models && models.results[0];
 
         if (item) {
           if (item.id) {
-            B.triggerEvent('onSuccess', item);
+            B.triggerEvent('onDataSuccess', item);
           } else {
-            B.triggerEvent('onNoResults');
+            B.triggerEvent('onDataNoResults');
           }
         }
 
@@ -94,7 +69,7 @@
           }
         };
 
-        const handleSubmit = evt => {
+        const handleSubmit = (evt, callAction) => {
           evt.preventDefault();
           setIsInvalid(false);
           B.triggerEvent('onSubmit');
@@ -107,7 +82,7 @@
           callAction({ variables: { input: values } });
         };
 
-        const renderContent = () => {
+        const renderContent = loading => {
           if (!model || isDev) {
             return <Children loading={loading}>{children}</Children>;
           }
@@ -121,30 +96,59 @@
           );
         };
 
-        return (
-          <>
-            <div className={classes.messageContainer}>
-              {error && displayError && (
-                <span className={classes.error}>{formErrorMessage}</span>
-              )}
-              {data && (
-                <span className={classes.success}>{formSuccessMessage}</span>
-              )}
-            </div>
+        const trigger = (data, loading, error) => {
+          if (data) {
+            B.triggerEvent('onActionSuccess', data);
 
-            <form
-              onInvalid={handleInvalid}
-              onSubmit={handleSubmit}
-              ref={formRef}
-              className={[
-                empty && classes.empty,
-                isPristine && classes.pristine,
-              ].join(' ')}
-            >
-              {isPristine && <span>form</span>}
-              {renderContent()}
-            </form>
-          </>
+            if (hasRedirect) {
+              if (redirectTo === location.pathname) {
+                history.go(0);
+              } else {
+                history.push(redirectTo);
+              }
+            }
+          }
+
+          if (loading) {
+            B.triggerEvent('onActionLoad', loading);
+          }
+
+          if (error) {
+            B.triggerEvent('onActionError', formErrorMessage || error.message);
+          }
+        };
+
+        return (
+          <Action actionId={actionId}>
+            {(callAction, { data, loading, error }) => (
+              <>
+                {trigger(data, loading, error)}
+                <div className={classes.messageContainer}>
+                  {error && displayError && (
+                    <span className={classes.error}>{formErrorMessage}</span>
+                  )}
+                  {data && displaySuccess && (
+                    <span className={classes.success}>
+                      {formSuccessMessage}
+                    </span>
+                  )}
+                </div>
+
+                <form
+                  onInvalid={handleInvalid}
+                  onSubmit={evt => handleSubmit(evt, callAction)}
+                  ref={formRef}
+                  className={[
+                    empty && classes.empty,
+                    isPristine && classes.pristine,
+                  ].join(' ')}
+                >
+                  {isPristine && <span>form</span>}
+                  {renderContent(loading)}
+                </form>
+              </>
+            )}
+          </Action>
         );
       })()}
     </div>
