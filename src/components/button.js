@@ -41,10 +41,10 @@
     const [actionCallback, { loading }] = (isAction &&
       useAction(actionId, {
         onCompleted(data) {
-          B.triggerEvent('onSuccess', data.actionb5);
+          B.triggerEvent('onActionSuccess', data.actionb5);
         },
         onError(error) {
-          B.triggerEvent('onError', error.message);
+          B.triggerEvent('onActionError', error.message);
         },
       })) || [() => {}, { loading: false }];
 
@@ -62,7 +62,7 @@
     }, []);
 
     useEffect(() => {
-      B.triggerEvent('onLoad', loading);
+      B.triggerEvent('onActionLoad', loading);
     }, [loading]);
 
     const generalProps = {
