@@ -8,6 +8,7 @@
     const isDev = env === 'dev';
     const { CircularProgress, LinearProgress } = window.MaterialUI.Core;
     const {
+      visible,
       type,
       linearVariant,
       circularVariant,
@@ -18,6 +19,22 @@
       thickness,
       size,
     } = options;
+
+    const [open, setOpen] = useState(visible);
+
+    useEffect(() => {
+      setOpen(visible);
+    }, [visible]);
+
+    useEffect(() => {
+      B.defineFunction('Show', () => {
+        setOpen(true);
+      });
+
+      B.defineFunction('Hide', () => {
+        setOpen(false);
+      });
+    }, []);
 
     const min = parseInt(useText(minValue), 10) || 0;
     const max = parseInt(useText(maxValue), 10) || 100;
@@ -55,6 +72,8 @@
         size={useText(size)}
       />
     );
+
+    if (!isDev && !open) return <></>;
 
     return isDev ? (
       <div className={classes.wrapper}>{ProgressCmp}</div>
