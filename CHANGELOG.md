@@ -1,3 +1,30 @@
+# [1.30.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.29.0...v1.30.0) (2020-08-04)
+
+
+### Bug Fixes
+
+* alert doesnt break on show when object is passed ([352e6e2](https://github.com/bettyblocks/material-ui-component-set/commit/352e6e2d0338a96ecdfe4a3f8c00a1602972154b))
+* login interaction works with form again ([b8aaa47](https://github.com/bettyblocks/material-ui-component-set/commit/b8aaa4770472d425112451359a0348568d744d41))
+
+
+### Features
+
+* progress component has visibility option and interactions ([786d658](https://github.com/bettyblocks/material-ui-component-set/commit/786d658c3ba512a5d1a04ce852c8678eda4a8235))
+
+# [1.29.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.28.0...v1.29.0) (2020-07-30)
+
+
+### Features
+
+* trigger loading after mount ([752a193](https://github.com/bettyblocks/material-ui-component-set/commit/752a193ec6afff97838999f645405de0c5d49ef0))
+
+# [1.28.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.27.0...v1.28.0) (2020-07-30)
+
+
+### Features
+
+* make date picker compatible with backend time format ([b681f64](https://github.com/bettyblocks/material-ui-component-set/commit/b681f643cad3ff3cf5f8faeb7d4a6a0091bb8dae))
+
 # [1.27.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.26.1...v1.27.0) (2020-07-30)
 
 

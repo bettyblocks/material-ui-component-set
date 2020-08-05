@@ -22,7 +22,7 @@
 
     useEffect(() => {
       B.defineFunction('Show', showMessage => {
-        setText(showMessage);
+        if (typeof showMessage === 'string') setText(showMessage);
         setOpen(true);
       });
 

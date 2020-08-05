@@ -49,7 +49,7 @@
         {
           name: 'Column',
           options: [
-            { type: 'TOGGLE', label: 'Show', key: 'show', value: true },
+            { type: 'TOGGLE', label: 'Visible', key: 'show', value: true },
             {
               value: '6',
               label: 'Column width',
@@ -223,7 +223,7 @@
         {
           name: 'Column',
           options: [
-            { type: 'TOGGLE', label: 'Show', key: 'show', value: true },
+            { type: 'TOGGLE', label: 'Visible', key: 'show', value: true },
             {
               value: '6',
               label: 'Column width',

@@ -160,15 +160,20 @@
           });
         }, []);
 
+        const mounted = useRef(true);
+        useEffect(() => {
+          if (!mounted.current && loading) {
+            B.triggerEvent('onLoad', loading);
+          }
+          mounted.current = false;
+        }, [loading]);
+
         const canvasLayout = () => {
           if (!model) {
             return builderLayout();
           }
 
-          if (loading) {
-            B.triggerEvent('onLoad', loading);
-            return <div className={classes.skeleton} />;
-          }
+          if (loading) return <div className={classes.skeleton} />;
 
           if (error && !displayError) {
             B.triggerEvent('onError', error.message);

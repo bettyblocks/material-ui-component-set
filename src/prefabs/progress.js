@@ -7,6 +7,12 @@
       name: 'Progress',
       options: [
         {
+          value: true,
+          label: 'Visible',
+          key: 'visible',
+          type: 'TOGGLE',
+        },
+        {
           value: 'linear',
           label: 'Type',
           key: 'type',
