@@ -62,7 +62,9 @@
     }, []);
 
     useEffect(() => {
-      B.triggerEvent('onActionLoad', loading);
+      if (loading) {
+        B.triggerEvent('onActionLoad', loading);
+      }
     }, [loading]);
 
     const generalProps = {
