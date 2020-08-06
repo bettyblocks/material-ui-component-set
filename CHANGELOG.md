@@ -1,3 +1,11 @@
+## [1.30.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.30.1...v1.30.2) (2020-08-05)
+
+
+### Bug Fixes
+
+* trigger loading state for button only when it's true ([fc60e4b](https://github.com/bettyblocks/material-ui-component-set/commit/fc60e4b206204c4e91e2ce5aad7ee5c2d0ac32d9))
+* update value in state when option changes ([946b4b1](https://github.com/bettyblocks/material-ui-component-set/commit/946b4b1270d79119fa86ca7fcee724f47873933e))
+
 ## [1.30.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.30.0...v1.30.1) (2020-08-04)
 
 
