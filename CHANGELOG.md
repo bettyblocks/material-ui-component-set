@@ -1,3 +1,10 @@
+## [1.30.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.30.2...v1.30.3) (2020-08-10)
+
+
+### Bug Fixes
+
+* form action error message passed ([ed157b2](https://github.com/bettyblocks/material-ui-component-set/commit/ed157b2faff0a7c43c5e43c67af09c0db42dd7f7))
+
 ## [1.30.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.30.1...v1.30.2) (2020-08-05)
 
 
