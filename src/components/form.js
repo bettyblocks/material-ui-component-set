@@ -48,8 +48,8 @@
           mounted.current = false;
         }, [isFetching]);
 
-        if (err && !displayError) {
-          B.triggerEvent('onDataError', formErrorMessage || err.message);
+        if (err) {
+          B.triggerEvent('onDataError', err.message);
         }
 
         const item = models && models.results[0];
@@ -98,7 +98,7 @@
 
         const trigger = (data, loading, error) => {
           if (data) {
-            B.triggerEvent('onActionSuccess', data);
+            B.triggerEvent('onActionSuccess', data.actionb5);
 
             if (hasRedirect) {
               if (redirectTo === location.pathname) {
@@ -113,8 +113,8 @@
             B.triggerEvent('onActionLoad', loading);
           }
 
-          if (error) {
-            B.triggerEvent('onActionError', formErrorMessage || error.message);
+          if (error && !displayError) {
+            B.triggerEvent('onActionError', error.message);
           }
         };
 
