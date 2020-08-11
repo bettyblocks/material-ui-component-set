@@ -1,3 +1,38 @@
+## [1.30.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.30.1...v1.30.2) (2020-08-05)
+
+
+### Bug Fixes
+
+* trigger loading state for button only when it's true ([fc60e4b](https://github.com/bettyblocks/material-ui-component-set/commit/fc60e4b206204c4e91e2ce5aad7ee5c2d0ac32d9))
+* update value in state when option changes ([946b4b1](https://github.com/bettyblocks/material-ui-component-set/commit/946b4b1270d79119fa86ca7fcee724f47873933e))
+
+## [1.30.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.30.0...v1.30.1) (2020-08-04)
+
+
+### Bug Fixes
+
+* bump version ([2ed410d](https://github.com/bettyblocks/material-ui-component-set/commit/2ed410dd928910e42595a7f68a12697ff9fda87a))
+
+# [1.30.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.29.0...v1.30.0) (2020-08-04)
+
+
+### Bug Fixes
+
+* alert doesnt break on show when object is passed ([352e6e2](https://github.com/bettyblocks/material-ui-component-set/commit/352e6e2d0338a96ecdfe4a3f8c00a1602972154b))
+* login interaction works with form again ([b8aaa47](https://github.com/bettyblocks/material-ui-component-set/commit/b8aaa4770472d425112451359a0348568d744d41))
+
+
+### Features
+
+* progress component has visibility option and interactions ([786d658](https://github.com/bettyblocks/material-ui-component-set/commit/786d658c3ba512a5d1a04ce852c8678eda4a8235))
+
+## [1.29.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.29.0...v1.29.1) (2020-07-30)
+
+
+### Bug Fixes
+
+* bump version ([2ed410d](https://github.com/bettyblocks/material-ui-component-set/commit/2ed410dd928910e42595a7f68a12697ff9fda87a))
+
 # [1.29.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.28.0...v1.29.0) (2020-07-30)
 
 
