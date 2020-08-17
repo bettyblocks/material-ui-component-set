@@ -6,7 +6,7 @@
   jsx: (
     <div>
       {(() => {
-        const { Action, Children, getActionInput } = B;
+        const { env, Children, Action, useGetAll, getActionInput } = B;
 
         const {
           actionId,
@@ -16,33 +16,111 @@
           formErrorMessage,
           formSuccessMessage,
           redirect,
+          showError,
+          showSuccess,
         } = options;
-
         const formRef = React.createRef();
 
+        const displayError = showError === 'built-in';
+        const displaySuccess = showSuccess === 'built-in';
         const empty = children.length === 0;
         const isDev = B.env === 'dev';
         const isPristine = empty && isDev;
         const actionInput = getActionInput(actionInputId);
+        const hasRedirect = redirect && redirect.id !== '';
         const redirectTo =
-          B.env === 'prod' && redirect && B.useEndpoint(redirect);
+          env === 'prod' && hasRedirect && B.useEndpoint(redirect);
         const history = isDev ? {} : useHistory();
+        const [isInvalid, setIsInvalid] = useState(false);
+        const location = isDev ? {} : useLocation();
+
+        const { loading: isFetching, data: models, error: err } =
+          model &&
+          useGetAll(model, {
+            filter,
+            skip: 0,
+            take: 1,
+          });
+
+        const mounted = useRef(true);
+        useEffect(() => {
+          if (!mounted.current && isFetching) {
+            B.triggerEvent('onDataLoad', isFetching);
+          }
+          mounted.current = false;
+        }, [isFetching]);
+
+        if (err) {
+          B.triggerEvent('onDataError', err.message);
+        }
+
+        const item = models && models.results[0];
+
+        if (item) {
+          if (item.id) {
+            B.triggerEvent('onDataSuccess', item);
+          } else {
+            B.triggerEvent('onDataNoResults');
+          }
+        }
+
+        const handleInvalid = () => {
+          if (!isInvalid) {
+            setIsInvalid(true);
+            B.triggerEvent('onInvalid');
+          }
+        };
+
+        const handleSubmit = (evt, callAction) => {
+          evt.preventDefault();
+          setIsInvalid(false);
+          B.triggerEvent('onSubmit');
+          const formData = new FormData(formRef.current);
+          const values = Array.from(formData).reduce((acc, [key, value]) => {
+            if (!acc[key]) return { ...acc, [key]: value };
+            acc[key] = `${acc[key]},${value}`;
+            return acc;
+          }, {});
+          const variableName = actionInput && actionInput.name;
+          const submitData = variableName ? { [variableName]: values } : values;
+          callAction({
+            variables: { input: submitData },
+          });
+        };
+
+        const renderContent = loading => {
+          if (!model || isDev) {
+            return <Children loading={loading}>{children}</Children>;
+          }
+          if (isFetching) return 'Loading...';
+          if (err && displayError) return err.message;
+          if (!item) return children;
+          return (
+            <B.ModelProvider key={item.id} value={item} id={model}>
+              {children}
+            </B.ModelProvider>
+          );
+        };
 
         const trigger = (data, loading, error) => {
           if (data) {
-            B.triggerEvent('onSuccess', data);
+            B.triggerEvent('onActionSuccess', data.actionb5);
 
-            if (redirectTo) {
-              history.push(redirectTo);
+            if (hasRedirect) {
+              if (redirectTo === location.pathname) {
+                history.go(0);
+              } else {
+                history.push(redirectTo);
+              }
             }
           }
 
           if (loading) {
-            B.triggerEvent('onLoad', loading);
+            B.triggerEvent('onActionLoad', loading);
           }
 
-          if (error) {
-            B.triggerEvent('onError', error);
+          if (error && !displayError) {
+            B.triggerEvent('onActionError', error.message);
           }
         };
 
@@ -52,10 +130,10 @@
               <>
                 {trigger(data, loading, error)}
                 <div className={classes.messageContainer}>
-                  {error && (
+                  {error && displayError && (
                     <span className={classes.error}>{formErrorMessage}</span>
                   )}
-                  {data && (
+                  {data && displaySuccess && (
                     <span className={classes.success}>
                       {formSuccessMessage}
                     </span>
@@ -63,27 +141,8 @@
                 </div>
 
                 <form
-                  onSubmit={event => {
-                    event.preventDefault();
-                    const formData = new FormData(formRef.current);
-                    const entries = Array.from(formData);
-                    const variableName = actionInput && actionInput.name;
-                    const values = entries.reduce((acc, currentvalue) => {
-                      const key = currentvalue[0];
-                      const value = currentvalue[1];
-                      if (acc[key]) {
-                        acc[key] = `${acc[key]},${value}`;
-                        return acc;
-                      }
-                      return { ...acc, [key]: value };
-                    }, {});
-                    const submitData = variableName
-                      ? { [variableName]: values }
-                      : values;
-                    callAction({
-                      variables: { input: submitData },
-                    });
-                  }}
+                  onInvalid={handleInvalid}
+                  onSubmit={evt => handleSubmit(evt, callAction)}
                   ref={formRef}
                   className={[
                     empty && classes.empty,
@@ -91,32 +150,7 @@
                   ].join(' ')}
                 >
                   {isPristine && <span>form</span>}
-                  {!model || isDev ? (
-                    <Children loading={loading}>{children}</Children>
-                  ) : (
-                    <B.GetAll modelId={model} filter={filter} skip={0} take={1}>
-                      {({
-                        loading: dataLoading,
-                        error: dataError,
-                        data: modelData,
-                      }) => {
-                        if (dataLoading) return 'Loading...';
-                        if (dataError) return 'Failed';
-
-                        const item = modelData.results[0];
-
-                        if (!item) return children;
-
-                        return (
-                          <>
-                            <B.GetOneProvider key={item.id} value={item}>
-                              {children}
-                            </B.GetOneProvider>
-                          </>
-                        );
-                      }}
-                    </B.GetAll>
-                  )}
+                  {renderContent(loading)}
                 </form>
               </>
             )}

@@ -6,117 +6,239 @@
   jsx: (
     <div className={classes.root}>
       {(() => {
+        const { env, getProperty, useGetAll, ModelProvider, useFilter } = B;
         const [page, setPage] = useState(1);
         const [search, setSearch] = useState('');
+        const [searchTerm, setSearchTerm] = useState('');
         const [isTyping, setIsTyping] = useState(false);
-        const { filter, hidePagination } = options;
+        const {
+          take,
+          filter,
+          hidePagination,
+          type,
+          model,
+          showError,
+          hideSearch,
+          searchProperty,
+          order,
+          orderBy,
+        } = options;
 
-        const take = parseInt(options.take, 10) || 50;
-        const searchProp = B.getProperty(options.searchProperty);
+        const rowsPerPage = parseInt(take, 10) || 50;
+        const { TextField, InputAdornment } = window.MaterialUI.Core;
+        const { Search } = window.MaterialUI.Icons;
+        const searchPropertyArray = [searchProperty].flat();
+        const { label: searchPropertyLabel } =
+          getProperty(searchPropertyArray[searchPropertyArray.length - 1]) ||
+          {};
 
         const isEmpty = children.length === 0;
-        const isDev = B.env === 'dev';
+        const isDev = env === 'dev';
         const isPristine = isEmpty && isDev;
+        const displayError = showError === 'built-in';
 
         const builderLayout = () => (
           <>
-            {options.searchProperty && (
+            {searchProperty && !hideSearch && (
               <div className={classes.header}>
-                <Search
-                  name={B.env === 'dev' ? '[property]' : searchProp.name}
-                  search={search}
-                />
+                <SearchComponent label={searchPropertyLabel} />
               </div>
             )}
-            <div
-              className={[
-                isEmpty ? classes.empty : '',
-                isPristine ? classes.pristine : '',
-              ].join(' ')}
-            >
-              {isPristine ? 'Data List' : children}
-            </div>
-            {Array.from(Array(take - 1).keys()).map(key => (
+            <div className={type === 'grid' ? classes.grid : ''}>
               <div
-                key={key}
                 className={[
-                  isDev ? classes.pristine : '',
-                  classes.empty,
-                  classes.placeholder,
+                  isEmpty ? classes.empty : '',
+                  isPristine ? classes.pristine : '',
                 ].join(' ')}
               >
-                {isDev ? 'Dynamic Item' : ''}
+                {isPristine ? 'Data List' : children}
               </div>
-            ))}
+
+              {Array.from(Array(rowsPerPage - 1).keys()).map(key => (
+                <div
+                  key={key}
+                  className={[
+                    isDev ? classes.pristine : '',
+                    classes.empty,
+                    classes.placeholder,
+                  ].join(' ')}
+                >
+                  {isDev ? 'Dynamic Item' : ''}
+                </div>
+              ))}
+            </div>
             <div className={classes.footer}>
-              {(isDev || options.model) && !hidePagination && (
-                <Pagination totalCount={0} resultCount={take} currentPage={1} />
+              {isDev && !hidePagination && (
+                <Pagination
+                  totalCount={0}
+                  resultCount={rowsPerPage}
+                  currentPage={1}
+                />
               )}
             </div>
           </>
         );
 
+        const handleSearch = event => {
+          setSearch(event.target.value);
+        };
+
+        const deepMerge = (...objects) => {
+          const isObject = item =>
+            item && typeof item === 'object' && !Array.isArray(item);
+
+          return objects.reduce((accumulator, object) => {
+            Object.keys(object).forEach(key => {
+              const accumulatorValue = accumulator[key];
+              const value = object[key];
+
+              if (Array.isArray(accumulatorValue) && Array.isArray(value)) {
+                accumulator[key] = accumulatorValue.concat(value);
+              } else if (isObject(accumulatorValue) && isObject(value)) {
+                accumulator[key] = deepMerge(accumulatorValue, value);
+              } else {
+                accumulator[key] = value;
+              }
+            });
+            return accumulator;
+          }, {});
+        };
+
+        const orderByArray = [orderBy].flat();
+        const sort =
+          !isDev && orderBy
+            ? orderByArray.reduceRight((acc, property, index) => {
+                const prop = getProperty(property);
+                return index === orderByArray.length - 1
+                  ? { [prop.name]: order.toUpperCase() }
+                  : { [prop.name]: acc };
+              }, {})
+            : {};
+
+        const searchFilter = searchProperty
+          ? searchPropertyArray.reduceRight(
+              (acc, property, index) =>
+                index === searchPropertyArray.length - 1
+                  ? { [property]: { matches: searchTerm } }
+                  : { [property]: acc },
+              {},
+            )
+          : {};
+
+        const newFilter =
+          searchProperty && searchTerm !== ''
+            ? deepMerge(filter, searchFilter)
+            : filter;
+
+        const where = useFilter(newFilter);
+
+        const { loading, error, data, refetch } =
+          model &&
+          useGetAll(model, {
+            rawFilter: where,
+            skip: page ? (page - 1) * rowsPerPage : 0,
+            take: rowsPerPage,
+            variables: {
+              ...(orderBy ? { sort: { relation: sort } } : {}),
+            },
+          });
+
+        useEffect(() => {
+          const handler = setTimeout(() => {
+            setSearchTerm(search);
+          }, 300);
+
+          return () => {
+            clearTimeout(handler);
+          };
+        }, [search]);
+
+        useEffect(() => {
+          B.defineFunction('Refetch', () => refetch());
+          B.defineFunction('SetSearchValue', event => {
+            setSearch(event.target.value);
+          });
+        }, []);
+
+        const mounted = useRef(true);
+        useEffect(() => {
+          if (!mounted.current && loading) {
+            B.triggerEvent('onLoad', loading);
+          }
+          mounted.current = false;
+        }, [loading]);
+
         const canvasLayout = () => {
-          if (!options.model) {
+          if (!model) {
             return builderLayout();
           }
 
-          return (
-            <B.GetAll
-              modelId={options.model}
-              filter={
-                searchProp && search !== ''
-                  ? { ...filter, [searchProp.id]: { matches: search } }
-                  : filter
-              }
-              skip={page ? (page - 1) * take : 0}
-              take={take}
-            >
-              {({ loading, error, data }) => {
-                if (loading) return 'loading...';
-                if (error) return 'failed';
+          if (loading) return <div className={classes.skeleton} />;
 
-                return (
-                  <>
-                    <div className={classes.header}>
-                      {searchProp && (
-                        <Search
-                          name={searchProp.name}
-                          search={search}
-                          isTyping={isTyping}
-                          setSearch={setSearch}
-                          setIsTyping={setIsTyping}
-                        />
-                      )}
-                    </div>
-                    {data.results.map(item => (
-                      <B.GetOneProvider key={item.id} value={item}>
-                        {children}
-                      </B.GetOneProvider>
-                    ))}
-                    <div className={classes.footer}>
-                      {!isEmpty && !hidePagination && (
-                        <Pagination
-                          totalCount={data.totalCount}
-                          resultCount={data.results.length}
-                          currentPage={page}
-                        />
-                      )}
-                    </div>
-                  </>
-                );
-              }}
-            </B.GetAll>
+          if (error && !displayError) {
+            B.triggerEvent('onError', error.message);
+          }
+          if (error && displayError) {
+            return <span>{error.message}</span>;
+          }
+
+          const { results = [], totalCount } = data || {};
+          const resultCount = results && results.length;
+          const hasResults = resultCount > 0;
+
+          if (hasResults) {
+            B.triggerEvent('onSuccess', results);
+          } else {
+            B.triggerEvent('onNoResults');
+          }
+
+          return (
+            <>
+              <div className={classes.header}>
+                {searchProperty && !hideSearch && (
+                  <SearchComponent
+                    label={searchPropertyLabel}
+                    onChange={handleSearch}
+                    value={search}
+                    isTyping={isTyping}
+                    setIsTyping={setIsTyping}
+                  />
+                )}
+              </div>
+              <div className={type === 'grid' ? classes.grid : ''}>
+                {results.map(item => (
+                  <ModelProvider key={item.id} value={item} id={model}>
+                    {children}
+                  </ModelProvider>
+                ))}
+              </div>
+              <div className={classes.footer}>
+                {!isEmpty && !hidePagination && (
+                  <Pagination
+                    totalCount={totalCount}
+                    resultCount={resultCount}
+                    currentPage={page}
+                  />
+                )}
+              </div>
+            </>
           );
         };
 
         /* SubComponents */
 
-        // eslint-disable-next-line no-shadow
-        function Search({ name, search, isTyping, setIsTyping }) {
+        function SearchComponent({
+          label,
+          onChange,
+          value,
+          // eslint-disable-next-line no-shadow
+          isTyping,
+          // eslint-disable-next-line no-shadow
+          setIsTyping,
+        }) {
           const inputRef = React.createRef();
 
-          React.useEffect(() => {
+          useEffect(() => {
             if (isTyping) {
               inputRef.current.focus();
             }
@@ -124,35 +246,37 @@
 
           return (
             <div className={classes.searchWrapper}>
-              <i
-                className={[classes.searchIcon, 'zmdi zmdi-search'].join(' ')}
-              />
-              <input
-                className={classes.search}
-                type="text"
-                value={search}
-                onChange={({ target: { value } }) => setSearch(value)}
-                ref={inputRef}
+              <TextField
+                placeholder={`Search on ${label}`}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <Search />
+                    </InputAdornment>
+                  ),
+                }}
+                onChange={onChange}
+                inputRef={inputRef}
                 onFocus={() => setIsTyping(true)}
                 onBlur={() => setIsTyping(false)}
-                placeholder={`Search on ${name}`}
+                value={value}
               />
             </div>
           );
         }
 
         function Pagination({ totalCount, resultCount, currentPage }) {
-          const firstItem = currentPage ? (currentPage - 1) * take : 0;
+          const firstItem = currentPage ? (currentPage - 1) * rowsPerPage : 0;
 
           useEffect(() => {
-            const totalPages = Math.ceil(totalCount / take);
+            const totalPages = Math.ceil(totalCount / rowsPerPage);
 
             if (currentPage > totalPages) {
               setPage(totalPages);
             }
           }, [totalCount]);
 
-          const totalText = B.env === 'dev' ? '[total]' : totalCount;
+          const totalText = env === 'dev' ? '[total]' : totalCount;
 
           return (
             <>
@@ -185,7 +309,7 @@
                   />
                 )}
                 {(typeof currentPage === 'undefined' ? 1 : currentPage) <
-                totalCount / take ? (
+                totalCount / rowsPerPage ? (
                   <button
                     className={classes.button}
                     type="button"
@@ -243,7 +367,6 @@
         display: 'flex',
         alignItems: 'center',
         padding: [0, '0.5rem'],
-        borderBottom: [1, 'solid', '#000'],
         minHeight: '4rem',
       },
       searchIcon: {
@@ -286,7 +409,35 @@
         textDecoration: 'none',
       },
       arrowDisabled: { color: '#ccc' },
-      [`@media ${B.mediaMinWidth(768)}`]: {
+      skeleton: {
+        height: `calc(${style.getFont('Body1').Mobile} * 1.2)`,
+        [`@media ${B.mediaMinWidth(600)}`]: {
+          height: `calc(${style.getFont('Body1').Portrait} * 1.2)`,
+        },
+        [`@media ${B.mediaMinWidth(960)}`]: {
+          height: `calc(${style.getFont('Body1').Landscape} * 1.2)`,
+        },
+        [`@media ${B.mediaMinWidth(1280)}`]: {
+          height: `calc(${style.getFont('Body1').Desktop} * 1.2)`,
+        },
+        backgroundColor: '#eee',
+        borderRadius: 8,
+        overflow: 'hidden',
+        '&::after': {
+          display: 'block',
+          width: '100%',
+          height: '100%',
+          backgroundImage:
+            'linear-gradient(90deg, #eee 25%, #fff 50%, #eee 75%)',
+          backgroundSize: '200% 100%',
+          backgroundRepeat: 'no-repeat',
+          backgroundPositionX: '150%',
+          borderRadius: `calc(${style.getFont('Body2').Landscape} / 2)`,
+          content: '""',
+          animation: 'loading 1.5s infinite',
+        },
+      },
+      [`@media ${B.mediaMinWidth(600)}`]: {
         root: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Portrait'),
@@ -298,7 +449,7 @@
             getSpacing(outerSpacing[3], 'Portrait'),
         },
       },
-      [`@media ${B.mediaMinWidth(1024)}`]: {
+      [`@media ${B.mediaMinWidth(960)}`]: {
         root: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Landscape'),
@@ -310,7 +461,7 @@
             getSpacing(outerSpacing[3], 'Landscape'),
         },
       },
-      [`@media ${B.mediaMinWidth(1200)}`]: {
+      [`@media ${B.mediaMinWidth(1280)}`]: {
         root: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Desktop'),
@@ -321,6 +472,12 @@
           marginLeft: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[3], 'Desktop'),
         },
+      },
+      grid: {
+        display: 'grid',
+        gridTemplateColumns: ({ options: { width } }) =>
+          `repeat(auto-fit, minmax(${width}, 1fr))`,
+        gridGap: ({ options: { gap } }) => `${gap}`,
       },
       empty: {
         display: 'flex',

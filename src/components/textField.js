@@ -25,6 +25,15 @@
       adornmentPosition,
       property,
       propertyLabelOverride,
+      pattern,
+      minlength,
+      maxlength,
+      validationTypeMismatch,
+      validationPatternMismatch,
+      validationValueMissing,
+      validationTooLong,
+      validationTooShort,
+      hideLabel,
     } = options;
 
     const {
@@ -42,26 +51,94 @@
     const { getActionInput, useText, env, getProperty } = B;
     const isDev = env === 'dev';
     const [currentValue, setCurrentValue] = useState(useText(defaultValue));
+    const [isDisabled, setIsDisabled] = useState(disabled);
     const [showPassword, togglePassword] = useState(false);
-    const helper = useText(helperText);
+    const [errorState, setErrorState] = useState(error);
+    const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
+    const [helper, setHelper] = useState(useText(helperText));
+
+    const validPattern = pattern || null;
+    const validMinlength = minlength || null;
+    const validMaxlength = maxlength || null;
+
+    const validationMessage = validityObject => {
+      if (validityObject.valid) {
+        return '';
+      }
+      if (validityObject.typeMismatch && validationTypeMismatch) {
+        return useText(validationTypeMismatch);
+      }
+      if (validityObject.patternMismatch && validationPatternMismatch) {
+        return useText(validationPatternMismatch);
+      }
+      if (validityObject.valueMissing && validationValueMissing) {
+        return useText(validationValueMissing);
+      }
+      if (validityObject.tooLong && validationTooLong) {
+        return useText(validationTooLong);
+      }
+      if (validityObject.tooShort && validationTooShort) {
+        return useText(validationTooShort);
+      }
+      return '';
+    };
+
     const placeholderText = useText(placeholder);
 
     const { label: propertyLabelText, name: propertyName } =
       getProperty(property) || {};
     const propLabelOverride = useText(propertyLabelOverride);
     const propertyLabel = propLabelOverride || propertyLabelText;
-    const labelText = property ? propertyLabel : label;
+    const labelText = property ? propertyLabel : useText(label);
 
     const actionInput = getActionInput(actionInputId);
     const formComponentName = propertyName || (actionInput && actionInput.name);
 
+    const handleValidation = validation => {
+      setErrorState(!validation.valid);
+      const message = validationMessage(validation) || useText(helperText);
+      setHelper(message);
+    };
+
     const changeHandler = event => {
       const {
-        target: { value: eventValue },
+        target: { value: eventValue, validity },
       } = event;
+
+      if (afterFirstInvalidation) {
+        handleValidation(validity);
+      }
 
       setCurrentValue(eventValue);
     };
+
+    const blurHandler = event => {
+      const {
+        target: {
+          validity,
+          validity: { valid: isValid },
+        },
+      } = event;
+      setAfterFirstInvalidation(!isValid);
+      handleValidation(validity);
+    };
+
+    const invalidHandler = event => {
+      event.preventDefault();
+      const {
+        target: {
+          validity,
+          validity: { valid: isValid },
+        },
+      } = event;
+      setAfterFirstInvalidation(!isValid);
+      handleValidation(validity);
+    };
+
+    useEffect(() => {
+      B.defineFunction('Clear', () => setCurrentValue(''));
+      B.defineFunction('Disable', () => setIsDisabled(true));
+    }, []);
 
     const handleClickShowPassword = () => {
       togglePassword(!showPassword);
@@ -102,20 +179,24 @@
     useEffect(() => {
       if (isDev) {
         setCurrentValue(useText(defaultValue));
+        setHelper(useText(helperText));
       }
-    }, [isDev, defaultValue]);
+    }, [isDev, defaultValue, helperText]);
 
     const TextFieldCmp = (
       <FormControl
+        classes={{ root: classes.formControl }}
         variant={variant}
         size={size}
         fullWidth={fullWidth}
         required={required}
-        disabled={disabled}
+        disabled={isDisabled}
         margin={margin}
-        error={error}
+        error={errorState}
       >
-        {labelText && <InputLabel>{labelText}</InputLabel>}
+        {labelText && !hideLabel && (
+          <InputLabel classes={{ root: classes.label }}>{labelText}</InputLabel>
+        )}
         <InputCmp
           name={formComponentName}
           value={currentValue}
@@ -125,6 +206,8 @@
           label={labelText}
           placeholder={placeholderText}
           onChange={changeHandler}
+          onBlur={blurHandler}
+          onInvalid={invalidHandler}
           startAdornment={
             hasAdornment &&
             adornmentPosition === 'start' && (
@@ -150,10 +233,17 @@
             )
           }
           inputProps={{
+            pattern: validPattern,
+            minlength: validMinlength,
+            maxlength: validMaxlength,
             tabIndex: isDev && -1,
           }}
         />
-        {helper && <FormHelperText>{helper}</FormHelperText>}
+        {helper && (
+          <FormHelperText classes={{ root: classes.helper }}>
+            {helper}
+          </FormHelperText>
+        )}
       </FormControl>
     );
 
@@ -163,13 +253,163 @@
       TextFieldCmp
     );
   })(),
-  styles: () => () => ({
-    root: {
-      display: ({ options: { fullWidth } }) =>
-        fullWidth ? 'block' : 'inline-block',
-      '& > *': {
-        pointerEvents: 'none',
+  styles: B => t => {
+    const style = new B.Styling(t);
+    return {
+      root: {
+        display: ({ options: { fullWidth } }) =>
+          fullWidth ? 'block' : 'inline-block',
+        '& > *': {
+          pointerEvents: 'none',
+        },
       },
-    },
-  }),
+      label: {
+        color: ({ options: { labelColor } }) => [
+          style.getColor(labelColor),
+          '!important',
+        ],
+        zIndex: ({ options: { variant } }) =>
+          variant === 'standard' ? 1 : null,
+        '&.Mui-focused': {
+          color: ({ options: { borderFocusColor } }) => [
+            style.getColor(borderFocusColor),
+            '!important',
+          ],
+        },
+        '&.Mui-error, &.Mui-error .Mui-error': {
+          color: ({ options: { errorColor } }) => [
+            style.getColor(errorColor),
+            '!important',
+          ],
+        },
+        '&.Mui-disabled': {
+          pointerEvents: 'none',
+          opacity: '0.7',
+        },
+      },
+      helper: {
+        color: ({ options: { helperColor } }) => [
+          style.getColor(helperColor),
+          '!important',
+        ],
+        '&.Mui-error': {
+          color: ({ options: { errorColor } }) => [
+            style.getColor(errorColor),
+            '!important',
+          ],
+        },
+      },
+      formControl: {
+        '& .MuiInputBase-root': {
+          color: ({ options: { textColor } }) => [
+            style.getColor(textColor),
+            '!important',
+          ],
+          backgroundColor: ({ options: { backgroundColor } }) => [
+            style.getColor(backgroundColor),
+            '!important',
+          ],
+          '&:hover': {
+            '& .MuiOutlinedInput-notchedOutline, & .MuiFilledInput-underline, & .MuiInput-underline': {
+              borderColor: ({ options: { borderHoverColor } }) => [
+                style.getColor(borderHoverColor),
+                '!important',
+              ],
+            },
+          },
+          '&.Mui-focused, &.Mui-focused:hover': {
+            '& .MuiOutlinedInput-notchedOutline, & .MuiFilledInput-underline, & .MuiInput-underline': {
+              borderColor: ({ options: { borderFocusColor } }) => [
+                style.getColor(borderFocusColor),
+                '!important',
+              ],
+            },
+          },
+          '& fieldset': {
+            top: ({ options: { hideLabel } }) => (hideLabel ? 0 : null),
+          },
+          '& legend': {
+            display: ({ options: { hideLabel } }) =>
+              hideLabel ? ['none', '!important'] : null,
+          },
+          '& input': {
+            '&::placeholder': {
+              color: ({ options: { placeholderColor } }) => [
+                style.getColor(placeholderColor),
+                '!important',
+              ],
+            },
+          },
+          '&.Mui-disabled': {
+            pointerEvents: 'none',
+            opacity: '0.7',
+          },
+        },
+        '& .MuiIconButton-root': {
+          color: ({ options: { textColor } }) => [
+            style.getColor(textColor),
+            '!important',
+          ],
+        },
+        '& .MuiOutlinedInput-notchedOutline, & .MuiFilledInput-underline, & .MuiInput-underline': {
+          borderColor: ({ options: { borderColor } }) => [
+            style.getColor(borderColor),
+            '!important',
+          ],
+        },
+        '& .MuiInput-underline, & .MuiFilledInput-underline': {
+          '&::before, &::after': {
+            borderColor: ({ options: { borderColor } }) => [
+              style.getColor(borderColor),
+              '!important',
+            ],
+          },
+          '&:hover': {
+            '&::before, &::after': {
+              borderColor: ({ options: { borderHoverColor } }) => [
+                style.getColor(borderHoverColor),
+                '!important',
+              ],
+            },
+          },
+          '&.Mui-focused::before, &.Mui-focused::after, &.Mui-focused:hover::before, &.Mui-focused:hover::after': {
+            borderColor: ({ options: { borderFocusColor } }) => [
+              style.getColor(borderFocusColor),
+              '!important',
+            ],
+          },
+        },
+        '& .MuiInputBase-root.Mui-error, & .MuiInputBase-root.Mui-error:hover, & .MuiInputBase-root.Mui-error.Mui-focused, & .MuiInputBase-root.Mui-error.Mui-focused:hover': {
+          '& .MuiOutlinedInput-notchedOutline, & .MuiFilledInput-underline, & .MuiInput-underline': {
+            borderColor: ({ options: { errorColor } }) => [
+              style.getColor(errorColor),
+              '!important',
+            ],
+          },
+          '&.MuiInput-underline, &.MuiFilledInput-underline': {
+            '&::before, &::after': {
+              borderColor: ({ options: { errorColor } }) => [
+                style.getColor(errorColor),
+                '!important',
+              ],
+            },
+            '&:hover': {
+              '&::before, &::after': {
+                borderColor: ({ options: { errorColor } }) => [
+                  style.getColor(errorColor),
+                  '!important',
+                ],
+              },
+            },
+            '&.Mui-focused::before, &.Mui-focused::after, &.Mui-focused:hover::before, &.Mui-focused:hover::after': {
+              borderColor: ({ options: { errorColor } }) => [
+                style.getColor(errorColor),
+                '!important',
+              ],
+            },
+          },
+        },
+      },
+    };
+  },
 }))();

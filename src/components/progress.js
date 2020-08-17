@@ -8,6 +8,7 @@
     const isDev = env === 'dev';
     const { CircularProgress, LinearProgress } = window.MaterialUI.Core;
     const {
+      visible,
       type,
       linearVariant,
       circularVariant,
@@ -18,6 +19,22 @@
       thickness,
       size,
     } = options;
+
+    const [open, setOpen] = useState(visible);
+
+    useEffect(() => {
+      setOpen(visible);
+    }, [visible]);
+
+    useEffect(() => {
+      B.defineFunction('Show', () => {
+        setOpen(true);
+      });
+
+      B.defineFunction('Hide', () => {
+        setOpen(false);
+      });
+    }, []);
 
     const min = parseInt(useText(minValue), 10) || 0;
     const max = parseInt(useText(maxValue), 10) || 100;
@@ -56,6 +73,8 @@
       />
     );
 
+    if (!isDev && !open) return <></>;
+
     return isDev ? (
       <div className={classes.wrapper}>{ProgressCmp}</div>
     ) : (
@@ -73,6 +92,7 @@
         display: ({ options: { type } }) =>
           type === 'circular' ? 'inline-block' : 'block',
         padding: '0.25rem 0',
+        width: ({ options: { type } }) => type !== 'circular' && '100%',
       },
       normalBackgroundColor: {
         backgroundColor: ({ options: { color } }) => [
@@ -105,6 +125,7 @@
         ],
       },
       root: {
+        width: ({ options: { type } }) => type !== 'circular' && '100%',
         marginTop: ({ options: { outerSpacing } }) =>
           getSpacing(outerSpacing[0]),
         marginRight: ({ options: { outerSpacing } }) =>
@@ -113,7 +134,7 @@
           getSpacing(outerSpacing[2]),
         marginLeft: ({ options: { outerSpacing } }) =>
           getSpacing(outerSpacing[3]),
-        [`@media ${B.mediaMinWidth(768)}`]: {
+        [`@media ${B.mediaMinWidth(600)}`]: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Portrait'),
           marginRight: ({ options: { outerSpacing } }) =>
@@ -123,7 +144,7 @@
           marginLeft: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[3], 'Portrait'),
         },
-        [`@media ${B.mediaMinWidth(1024)}`]: {
+        [`@media ${B.mediaMinWidth(960)}`]: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Landscape'),
           marginRight: ({ options: { outerSpacing } }) =>
@@ -133,7 +154,7 @@
           marginLeft: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[3], 'Landscape'),
         },
-        [`@media ${B.mediaMinWidth(1200)}`]: {
+        [`@media ${B.mediaMinWidth(1280)}`]: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Desktop'),
           marginRight: ({ options: { outerSpacing } }) =>

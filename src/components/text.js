@@ -41,13 +41,13 @@
         textAlign: ({ options: { textAlignment } }) => textAlignment,
         padding: 0,
         whiteSpace: 'pre-wrap',
-        color: ({ options: { type } }) => style.getFontColor(type),
+        color: ({ options: { textColor } }) => style.getColor(textColor),
         fontFamily: ({ options: { type } }) => style.getFontFamily(type),
         fontSize: ({ options: { type } }) => style.getFontSize(type),
-        fontWeight: ({ options: { type } }) => style.getFontWeight(type),
+        fontWeight: ({ options: { fontWeight } }) => fontWeight,
         textTransform: ({ options: { type } }) => style.getTextTransform(type),
         letterSpacing: ({ options: { type } }) => style.getLetterSpacing(type),
-        [`@media ${B.mediaMinWidth(768)}`]: {
+        [`@media ${B.mediaMinWidth(600)}`]: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Portrait'),
           marginRight: ({ options: { outerSpacing } }) =>
@@ -59,7 +59,7 @@
           fontSize: ({ options: { type } }) =>
             style.getFontSize(type, 'Portrait'),
         },
-        [`@media ${B.mediaMinWidth(1024)}`]: {
+        [`@media ${B.mediaMinWidth(960)}`]: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Landscape'),
           marginRight: ({ options: { outerSpacing } }) =>
@@ -71,7 +71,7 @@
           fontSize: ({ options: { type } }) =>
             style.getFontSize(type, 'Landscape'),
         },
-        [`@media ${B.mediaMinWidth(1200)}`]: {
+        [`@media ${B.mediaMinWidth(1280)}`]: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Desktop'),
           marginRight: ({ options: { outerSpacing } }) =>

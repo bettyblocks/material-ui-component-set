@@ -60,6 +60,12 @@
           },
         },
         {
+          value: '',
+          label: 'Hide built-in search field',
+          key: 'hideSearch',
+          type: 'TOGGLE',
+        },
+        {
           type: 'VARIABLE',
           label: 'Title',
           key: 'title',
@@ -225,10 +231,44 @@
           },
         },
         {
+          value: '',
+          label: 'Row click',
+          key: 'linkTo',
+          type: 'ENDPOINT',
+        },
+        {
+          type: 'COLOR',
+          label: 'Row hover color',
+          key: 'backgroundRowHover',
+          value: 'Transparent',
+          configuration: {
+            condition: {
+              type: 'HIDE',
+              option: 'linkTo',
+              comparator: 'EQ',
+              value: '',
+            },
+          },
+        },
+        {
           value: ['0rem', '0rem', 'M', '0rem'],
           label: 'Outer space',
           key: 'outerSpacing',
           type: 'SIZES',
+        },
+        {
+          value: 'built-in',
+          label: 'Error message',
+          key: 'showError',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Built in', value: 'built-in' },
+              { name: 'Interaction', value: 'interaction' },
+            ],
+          },
         },
       ],
       descendants: [
@@ -287,6 +327,15 @@
                   { name: 'Center', value: 'center' },
                   { name: 'Right', value: 'right' },
                 ],
+              },
+            },
+            {
+              type: 'SIZE',
+              label: 'Width',
+              key: 'width',
+              value: '',
+              configuration: {
+                as: 'UNIT',
               },
             },
             {
@@ -359,6 +408,15 @@
                   { name: 'Center', value: 'center' },
                   { name: 'Right', value: 'right' },
                 ],
+              },
+            },
+            {
+              type: 'SIZE',
+              label: 'Width',
+              key: 'width',
+              value: '',
+              configuration: {
+                as: 'UNIT',
               },
             },
             {

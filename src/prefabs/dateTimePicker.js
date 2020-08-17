@@ -69,12 +69,12 @@
           type: 'VARIABLE',
         },
         {
-          value: 'MM/dd/yyyy',
+          value: 'dd/MM/yyyy',
           label: 'Format',
           key: 'dateFormat',
           type: 'TEXT',
           configuration: {
-            placeholder: 'MM/dd/yyyy',
+            placeholder: 'dd/MM/yyyy',
             condition: {
               type: 'SHOW',
               option: 'type',
@@ -99,12 +99,40 @@
           },
         },
         {
-          value: 'MM/dd/yyyy HH:mm:ss',
+          value: 'dd/MM/yyyy HH:mm:ss',
           label: 'Format',
           key: 'dateTimeFormat',
           type: 'TEXT',
           configuration: {
-            placeholder: 'MM/dd/yyyy HH:mm:ss',
+            placeholder: 'dd/MM/yyyy HH:mm:ss',
+            condition: {
+              type: 'SHOW',
+              option: 'type',
+              comparator: 'EQ',
+              value: 'datetime',
+            },
+          },
+        },
+        {
+          value: true,
+          label: 'Use 24-hour format',
+          key: 'use24HourClockTime',
+          type: 'TOGGLE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'type',
+              comparator: 'EQ',
+              value: 'time',
+            },
+          },
+        },
+        {
+          value: true,
+          label: 'Use 24-hour format',
+          key: 'use24HourClockDateTime',
+          type: 'TOGGLE',
+          configuration: {
             condition: {
               type: 'SHOW',
               option: 'type',
@@ -220,6 +248,166 @@
               { name: 'Dense', value: 'dense' },
               { name: 'Normal', value: 'normal' },
             ],
+          },
+        },
+        {
+          value: false,
+          label: 'Styles',
+          key: 'styles',
+          type: 'TOGGLE',
+        },
+        {
+          type: 'COLOR',
+          label: 'Background color',
+          key: 'backgroundColor',
+          value: 'White',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'styles',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'COLOR',
+          label: 'Background color popup',
+          key: 'backgroundColorPopup',
+          value: 'Primary',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'styles',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'COLOR',
+          label: 'Border color',
+          key: 'borderColor',
+          value: 'Accent1',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'styles',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'COLOR',
+          label: 'Border color (hover)',
+          key: 'borderHoverColor',
+          value: 'Black',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'styles',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'COLOR',
+          label: 'Border color (focus)',
+          key: 'borderFocusColor',
+          value: 'Primary',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'styles',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          value: false,
+          label: 'Hide label',
+          key: 'hideLabel',
+          type: 'TOGGLE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'styles',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'COLOR',
+          label: 'Label color',
+          key: 'labelColor',
+          value: 'Accent3',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'styles',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'COLOR',
+          label: 'Text color',
+          key: 'textColor',
+          value: 'Black',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'styles',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'COLOR',
+          label: 'Placeholder color',
+          key: 'placeholderColor',
+          value: 'Light',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'styles',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'COLOR',
+          label: 'Helper color',
+          key: 'helperColor',
+          value: 'Accent2',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'styles',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'COLOR',
+          label: 'Error color',
+          key: 'errorColor',
+          value: 'Danger',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'styles',
+              comparator: 'EQ',
+              value: true,
+            },
           },
         },
       ],

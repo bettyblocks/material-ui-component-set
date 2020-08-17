@@ -90,7 +90,7 @@
           fill: '#666D85',
         },
       },
-      [`@media ${B.mediaMinWidth(768)}`]: {
+      [`@media ${B.mediaMinWidth(600)}`]: {
         figure: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Portrait'),
@@ -102,7 +102,7 @@
             getSpacing(outerSpacing[3], 'Portrait'),
         },
       },
-      [`@media ${B.mediaMinWidth(1024)}`]: {
+      [`@media ${B.mediaMinWidth(960)}`]: {
         figure: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Landscape'),
@@ -114,7 +114,7 @@
             getSpacing(outerSpacing[3], 'Landscape'),
         },
       },
-      [`@media ${B.mediaMinWidth(1200)}`]: {
+      [`@media ${B.mediaMinWidth(1280)}`]: {
         figure: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Desktop'),

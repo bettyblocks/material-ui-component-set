@@ -14,15 +14,30 @@
           const left = useText(options.left);
           const { compare } = options;
           const right = useText(options.right);
+          const leftAsNumber = parseFloat(left);
+          const rightAsNumber = parseFloat(right);
 
-          if (compare === 'not_eq') {
-            return left !== right;
+          switch (compare) {
+            case 'neq':
+              return left !== right;
+            case 'gt':
+              return leftAsNumber > rightAsNumber;
+            case 'lt':
+              return leftAsNumber < rightAsNumber;
+            case 'gteq':
+              return leftAsNumber >= rightAsNumber;
+            case 'lteq':
+              return leftAsNumber <= rightAsNumber;
+            default:
+              return left === right;
           }
-
-          return left === right;
         };
         const initialVisibility = isDev || evalCondition();
         const [visible, setVisible] = useState(initialVisibility);
+
+        useEffect(() => {
+          setVisible(initialVisibility);
+        }, [initialVisibility]);
 
         useEffect(() => {
           B.defineFunction('Hide', () => setVisible(false));

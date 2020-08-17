@@ -74,6 +74,20 @@
           type: 'TOGGLE',
         },
         {
+          value: 'built-in',
+          label: 'Error message',
+          key: 'showError',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Built in', value: 'built-in' },
+              { name: 'Interaction', value: 'interaction' },
+            ],
+          },
+        },
+        {
           value: false,
           label: 'Disabled',
           key: 'disabled',
@@ -228,6 +242,110 @@
               { name: 'Dense', value: 'dense' },
               { name: 'Normal', value: 'normal' },
             ],
+          },
+        },
+        {
+          value: false,
+          label: 'Styles',
+          key: 'styles',
+          type: 'TOGGLE',
+        },
+        {
+          type: 'COLOR',
+          label: 'Radio color',
+          key: 'radioColor',
+          value: 'Accent3',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'styles',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'COLOR',
+          label: 'Radio color checked',
+          key: 'radioColorChecked',
+          value: 'Primary',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'styles',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          value: false,
+          label: 'Hide label',
+          key: 'hideLabel',
+          type: 'TOGGLE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'styles',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'COLOR',
+          label: 'Label color',
+          key: 'labelColor',
+          value: 'Accent3',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'styles',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'COLOR',
+          label: 'Text color',
+          key: 'textColor',
+          value: 'Black',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'styles',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'COLOR',
+          label: 'Helper color',
+          key: 'helperColor',
+          value: 'Accent2',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'styles',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'COLOR',
+          label: 'Error color',
+          key: 'errorColor',
+          value: 'Danger',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'styles',
+              comparator: 'EQ',
+              value: true,
+            },
           },
         },
       ],

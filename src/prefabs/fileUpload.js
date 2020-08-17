@@ -1,83 +1,152 @@
 (() => ({
-  name: 'Avatar',
-  icon: 'AvatarIcon',
-  category: 'CONTENT',
+  name: 'FileUpload',
+  icon: 'FileInputIcon',
+  category: 'FORM',
   structure: [
     {
-      name: 'Avatar',
+      name: 'FileUpload',
       options: [
         {
+          value: '',
+          label: 'Property',
+          key: 'property',
+          type: 'PROPERTY',
+        },
+        {
+          value: ['Select file(s)...'],
+          label: 'Label',
+          key: 'label',
+          type: 'VARIABLE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'property',
+              comparator: 'EQ',
+              value: '',
+            },
+          },
+        },
+        {
+          value: [],
+          label: 'Label',
+          key: 'propertyLabelOverride',
+          type: 'VARIABLE',
+          configuration: {
+            placeholder: 'Label of property',
+            condition: {
+              type: 'HIDE',
+              option: 'property',
+              comparator: 'EQ',
+              value: '',
+            },
+          },
+        },
+        {
+          value: '',
+          label: 'Input',
+          key: 'actionInputId',
+          type: 'ACTION_INPUT',
+        },
+        {
+          value: false,
+          label: 'Required',
+          key: 'required',
+          type: 'TOGGLE',
+        },
+        {
+          value: false,
+          label: 'Hide default error',
+          key: 'hideDefaultError',
+          type: 'TOGGLE',
+        },
+        {
+          type: 'TOGGLE',
+          label: 'Disabled',
+          key: 'disabled',
+          value: false,
+        },
+        {
+          value: [],
+          label: 'Helper text',
+          key: 'helperText',
+          type: 'VARIABLE',
+        },
+        {
+          type: 'TOGGLE',
+          label: 'Full width',
+          key: 'fullWidth',
+          value: true,
+        },
+        {
+          value: ['image/*'],
+          label: 'Accept files',
+          key: 'accept',
+          type: 'VARIABLE',
+        },
+        {
+          type: 'TOGGLE',
+          label: 'Allow multiple',
+          key: 'multiple',
+          value: false,
+        },
+        {
+          label: 'Button size',
+          key: 'size',
+          value: 'medium',
           type: 'CUSTOM',
-          label: 'Type',
-          key: 'type',
-          value: 'img',
           configuration: {
             as: 'BUTTONGROUP',
             dataType: 'string',
             allowedInput: [
-              { name: 'Image', value: 'img' },
-              { name: 'Letter', value: 'letter' },
+              { name: 'Large', value: 'large' },
+              { name: 'Medium', value: 'medium' },
+              { name: 'Small', value: 'small' },
+            ],
+          },
+        },
+        {
+          type: 'CUSTOM',
+          label: 'Button variant',
+          key: 'variant',
+          value: 'contained',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Text', value: 'text' },
+              { name: 'Outlined', value: 'outlined' },
+              { name: 'Contain', value: 'contained' },
               { name: 'Icon', value: 'icon' },
             ],
           },
         },
         {
-          value: [],
-          label: 'Image url',
-          key: 'imgUrl',
           type: 'VARIABLE',
+          label: 'Button text',
+          key: 'buttonText',
+          value: ['Upload'],
           configuration: {
             condition: {
-              type: 'SHOW',
-              option: 'type',
-              comparator: 'EQ',
-              value: 'img',
-            },
-          },
-        },
-        {
-          value: [],
-          label: 'Image alternative text',
-          key: 'imgAlt',
-          type: 'VARIABLE',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'type',
-              comparator: 'EQ',
-              value: 'img',
-            },
-          },
-        },
-        {
-          value: [],
-          label: 'Letter',
-          key: 'letter',
-          type: 'VARIABLE',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'type',
-              comparator: 'EQ',
-              value: 'letter',
-            },
-          },
-        },
-        {
-          label: 'Icon',
-          key: 'icon',
-          value: 'Person',
-          type: 'CUSTOM',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'type',
+              type: 'HIDE',
+              option: 'variant',
               comparator: 'EQ',
               value: 'icon',
             },
+          },
+        },
+        {
+          label: 'Button icon',
+          key: 'icon',
+          value: 'None',
+          type: 'CUSTOM',
+          configuration: {
             as: 'DROPDOWN',
             dataType: 'string',
             allowedInput: [
+              {
+                name: 'None',
+                value: 'None',
+              },
               {
                 name: 'AcUnit',
                 value: 'AcUnit',
@@ -649,6 +718,10 @@
               {
                 name: 'FavoriteBorder',
                 value: 'FavoriteBorder',
+              },
+              {
+                name: 'FileCopy',
+                value: 'FileCopy',
               },
               {
                 name: 'FilterList',
@@ -1331,56 +1404,38 @@
         },
         {
           type: 'CUSTOM',
-          label: 'Variant',
-          key: 'variant',
-          value: 'circle',
+          label: 'Button icon position',
+          key: 'iconPosition',
+          value: 'start',
           configuration: {
             as: 'BUTTONGROUP',
             dataType: 'string',
+            condition: {
+              type: 'HIDE',
+              option: 'variant',
+              comparator: 'EQ',
+              value: 'icon',
+            },
             allowedInput: [
-              { name: 'Circle', value: 'circle' },
-              { name: 'Rounded', value: 'rounded' },
-              { name: 'Square', value: 'square' },
+              { name: 'Start', value: 'start' },
+              { name: 'End', value: 'end' },
             ],
           },
         },
         {
-          type: 'COLOR',
-          label: 'Background color',
-          key: 'backgroundColor',
-          value: 'Accent1',
-          configuration: {
-            condition: {
-              type: 'HIDE',
-              option: 'type',
-              comparator: 'EQ',
-              value: 'img',
-            },
-          },
-        },
-        {
-          type: 'SIZE',
-          label: 'Width',
-          key: 'width',
-          value: '40px',
-          configuration: {
-            as: 'UNIT',
-          },
-        },
-        {
-          type: 'SIZE',
-          label: 'Height',
-          key: 'height',
-          value: '40px',
-          configuration: {
-            as: 'UNIT',
-          },
-        },
-        {
-          type: 'SIZES',
-          label: 'Outer Space',
+          label: 'Margin',
           key: 'margin',
-          value: ['M', 'M', 'M', 'M'],
+          value: 'normal',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'None', value: 'none' },
+              { name: 'Dense', value: 'dense' },
+              { name: 'Normal', value: 'normal' },
+            ],
+          },
         },
         {
           value: false,
@@ -1389,12 +1444,53 @@
           type: 'TOGGLE',
         },
         {
-          value: '1.25rem',
-          label: 'Font Size',
-          key: 'fontSize',
-          type: 'TEXT',
+          value: false,
+          label: 'Hide label',
+          key: 'hideLabel',
+          type: 'TOGGLE',
           configuration: {
-            as: 'UNIT',
+            condition: {
+              type: 'SHOW',
+              option: 'styles',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'COLOR',
+          label: 'Label color',
+          key: 'labelColor',
+          value: 'Black',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'styles',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'COLOR',
+          label: 'Button text color',
+          key: 'buttonTextColor',
+          value: 'White',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'styles',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'COLOR',
+          label: 'Button color',
+          key: 'background',
+          value: 'Primary',
+          configuration: {
             condition: {
               type: 'SHOW',
               option: 'styles',
@@ -1407,7 +1503,7 @@
           type: 'COLOR',
           label: 'Text color',
           key: 'textColor',
-          value: 'White',
+          value: 'Black',
           configuration: {
             condition: {
               type: 'SHOW',
@@ -1418,24 +1514,25 @@
           },
         },
         {
-          type: 'CUSTOM',
-          label: 'Font weight',
-          key: 'fontWeight',
-          value: '400',
+          type: 'COLOR',
+          label: 'Helper color',
+          key: 'helperColor',
+          value: 'Accent2',
           configuration: {
-            as: 'DROPDOWN',
-            dataType: 'string',
-            allowedInput: [
-              { name: '100', value: '100' },
-              { name: '200', value: '200' },
-              { name: '300', value: '300' },
-              { name: '400', value: '400' },
-              { name: '500', value: '500' },
-              { name: '600', value: '600' },
-              { name: '700', value: '700' },
-              { name: '800', value: '800' },
-              { name: '900', value: '900' },
-            ],
+            condition: {
+              type: 'SHOW',
+              option: 'styles',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'COLOR',
+          label: 'Error color',
+          key: 'errorColor',
+          value: 'Danger',
+          configuration: {
             condition: {
               type: 'SHOW',
               option: 'styles',

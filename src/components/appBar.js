@@ -16,6 +16,7 @@
       position,
       title,
       logoSource,
+      logoWidth,
       endpoint,
       appBarVariant,
       toolbarVariant,
@@ -36,7 +37,7 @@
     };
 
     const logo = useText(logoSource);
-    const LogoCmp = logo && <img src={logo} width="100" alt="" />;
+    const LogoCmp = logo && <img src={logo} width={logoWidth} alt="" />;
     const LogoComponent = endpoint.id ? (
       // eslint-disable-next-line jsx-a11y/anchor-is-valid
       <Link endpoint={endpoint}>{LogoCmp}</Link>
@@ -83,7 +84,7 @@
               <div className={classes.uncollapsed}>{children}</div>
             </>
           ) : (
-            children
+            <div>{children}</div>
           )}
         </Toolbar>
       </AppBar>
@@ -126,13 +127,13 @@
       },
       collapsed: {
         display: 'block',
-        [`@media ${B.mediaMinWidth(768)}`]: {
+        [`@media ${B.mediaMinWidth(600)}`]: {
           display: 'none',
         },
       },
       uncollapsed: {
         display: 'none',
-        [`@media ${B.mediaMinWidth(768)}`]: {
+        [`@media ${B.mediaMinWidth(600)}`]: {
           display: 'block',
         },
       },

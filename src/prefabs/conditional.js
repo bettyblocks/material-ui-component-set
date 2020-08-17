@@ -1,6 +1,6 @@
 (() => ({
   name: 'Conditional',
-  icon: 'CheckboxIcon',
+  icon: 'ConditionalIcon',
   category: 'LOGIC',
   structure: [
     {
@@ -22,12 +22,28 @@
             dataType: 'string',
             allowedInput: [
               {
-                name: 'Equal to',
+                name: 'Equals',
                 value: 'eq',
               },
               {
-                name: 'Not equal to',
-                value: 'not_eq',
+                name: 'Not equal',
+                value: 'neq',
+              },
+              {
+                name: 'Greater than',
+                value: 'gt',
+              },
+              {
+                name: 'Less than',
+                value: 'lt',
+              },
+              {
+                name: 'Greater than or equal to',
+                value: 'gteq',
+              },
+              {
+                name: 'Less than or equal to',
+                value: 'lteq',
               },
             ],
           },

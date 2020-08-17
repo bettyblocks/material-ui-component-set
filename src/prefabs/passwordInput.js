@@ -63,15 +63,124 @@
         },
         {
           value: false,
-          label: 'Required',
-          key: 'required',
+          label: 'Validation options',
+          key: 'validationOptions',
           type: 'TOGGLE',
         },
         {
           value: false,
-          label: 'Error',
-          key: 'error',
+          label: 'Required',
+          key: 'required',
           type: 'TOGGLE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'validationOptions',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          label: 'Validation pattern',
+          key: 'pattern',
+          value: '(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}',
+          type: 'TEXT',
+          configuration: {
+            placeholder: '(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}',
+            condition: {
+              type: 'SHOW',
+              option: 'validationOptions',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          label: 'Min length',
+          key: 'minlength',
+          value: '',
+          type: 'NUMBER',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'validationOptions',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          label: 'Max length',
+          key: 'maxlength',
+          value: '',
+          type: 'NUMBER',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'validationOptions',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          value: ['This field is required'],
+          label: 'Value required message',
+          key: 'validationValueMissing',
+          type: 'VARIABLE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'validationOptions',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          value: [
+            'Password must contain 8 characters, 1 lowercase character, 1 upper case character and 1 digit',
+          ],
+          label: 'Pattern mismatch message',
+          key: 'validationPatternMismatch',
+          type: 'VARIABLE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'validationOptions',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          value: ['This value is too short'],
+          label: 'Value too short message',
+          key: 'validationTooShort',
+          type: 'VARIABLE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'validationOptions',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          value: ['This value is too long'],
+          label: 'Value too long message',
+          key: 'validationTooLong',
+          type: 'VARIABLE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'validationOptions',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
         },
         {
           type: 'TOGGLE',
@@ -178,6 +287,152 @@
               option: 'adornmentPosition',
               comparator: 'EQ',
               value: 0,
+            },
+          },
+        },
+        {
+          value: false,
+          label: 'Styles',
+          key: 'styles',
+          type: 'TOGGLE',
+        },
+        {
+          type: 'COLOR',
+          label: 'Background color',
+          key: 'backgroundColor',
+          value: 'White',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'styles',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'COLOR',
+          label: 'Border color',
+          key: 'borderColor',
+          value: 'Accent1',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'styles',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'COLOR',
+          label: 'Border color (hover)',
+          key: 'borderHoverColor',
+          value: 'Black',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'styles',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'COLOR',
+          label: 'Border color (focus)',
+          key: 'borderFocusColor',
+          value: 'Primary',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'styles',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          value: false,
+          label: 'Hide label',
+          key: 'hideLabel',
+          type: 'TOGGLE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'styles',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'COLOR',
+          label: 'Label color',
+          key: 'labelColor',
+          value: 'Accent3',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'styles',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'COLOR',
+          label: 'Text color',
+          key: 'textColor',
+          value: 'Black',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'styles',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'COLOR',
+          label: 'Placeholder color',
+          key: 'placeholderColor',
+          value: 'Light',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'styles',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'COLOR',
+          label: 'Helper color',
+          key: 'helperColor',
+          value: 'Accent2',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'styles',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'COLOR',
+          label: 'Error color',
+          key: 'errorColor',
+          value: 'Danger',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'styles',
+              comparator: 'EQ',
+              value: true,
             },
           },
         },

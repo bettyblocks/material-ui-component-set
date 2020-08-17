@@ -14,9 +14,9 @@
       Button,
     } = window.MaterialUI.Core;
     const { Icons } = window.MaterialUI;
-    const { env, useText } = B;
+    const { env, useText, Children } = B;
     const {
-      activeStep: devStep,
+      activeStep: stepIndex,
       variant,
       type,
       alternativeLabel,
@@ -27,14 +27,13 @@
 
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
-    const [activeStep, setActiveStep] = useState(0);
-    const devActiveStep = parseInt(devStep - 1, 10) || 0;
-    const showAllSteps = isDev && allSteps;
+    const activeStepIndex = parseInt(stepIndex - 1, 10) || 0;
+    const [activeStep, setActiveStep] = useState(activeStepIndex);
     const buttonNextText = useText(buttonNext);
     const buttonPrevText = useText(buttonPrev);
-    const currentStep = isDev ? devActiveStep : activeStep;
     const isLinear = variant === 'linear';
     const numRendersRef = useRef(1);
+    const [stepLabelData, setStepLabelData] = useState({});
 
     const handleNext = () => {
       setActiveStep(prevActiveStep => {
@@ -62,28 +61,39 @@
       }
     };
 
+    useEffect(() => {
+      if (isDev) {
+        setActiveStep(parseInt(stepIndex - 1, 10));
+      }
+    }, [isDev, stepIndex]);
+
     const StepperCmp = (
       <>
         <Stepper
           nonLinear={!isLinear}
           alternativeLabel={alternativeLabel}
-          activeStep={currentStep}
+          activeStep={activeStep}
           orientation={type}
         >
           {React.Children.map(children, (child, index) => {
-            const { options = {} } = child.props || {};
-            const { label = ['Step'], icon = 'None' } = isDev ? {} : options;
+            const { options: childOptions = {} } = child.props || {};
+
+            const {
+              label = stepLabelData[`label${index}`] || [`Step ${index + 1}`],
+              icon = stepLabelData[`icon${index}`] || 'None',
+            } = childOptions;
+            const isActive = index === activeStep || allSteps;
             const labelText = useText(label);
-            const isActive = index === currentStep;
             const hasIcon = icon !== 'None';
             let stepProps = {};
             let labelProps = {};
-            if (showAllSteps) {
+            if (allSteps) {
               stepProps = {
                 ...stepProps,
                 active: true,
               };
             }
+
             const IconCmp = () =>
               hasIcon &&
               React.createElement(Icons[icon], {
@@ -99,8 +109,6 @@
                 StepIconComponent: IconCmp,
               };
             }
-            options.active = isActive;
-            options.isFirstRender = numRendersRef.current === 1;
 
             const StepComponent = (
               <Step key={labelText} {...stepProps}>
@@ -124,17 +132,43 @@
                     </StepLabel>
                   </StepButton>
                 )}
-
-                <StepContent>
-                  {React.cloneElement(child, { ...options })}
-                </StepContent>
+                {type === 'vertical' && (
+                  <StepContent>
+                    <Children
+                      stepLabelData={stepLabelData}
+                      setStepLabelData={setStepLabelData}
+                      active={isActive}
+                      isFirstRender={numRendersRef.current === 1}
+                    >
+                      {React.cloneElement(child, { ...childOptions })}
+                    </Children>
+                  </StepContent>
+                )}
               </Step>
             );
 
-            numRendersRef.current += 1;
             return StepComponent;
           })}
         </Stepper>
+        {type === 'horizontal' && (
+          <>
+            {React.Children.map(children, (child, index) => {
+              const { options: childOptions = {} } = child.props || {};
+              const isActive = index === activeStep || allSteps;
+
+              return (
+                <Children
+                  stepLabelData={stepLabelData}
+                  setStepLabelData={setStepLabelData}
+                  active={isActive}
+                  isFirstRender={numRendersRef.current === 1}
+                >
+                  {React.cloneElement(child, { ...childOptions })}
+                </Children>
+              );
+            })}
+          </>
+        )}
       </>
     );
 
@@ -144,11 +178,16 @@
 
     const MobileStepperCmp = (
       <>
-        {React.Children.map(
-          children,
-          (child, index) =>
-            (index === activeStep || showAllSteps) && React.cloneElement(child),
-        )}
+        {React.Children.map(children, (child, index) => (
+          <Children
+            stepLabelData={stepLabelData}
+            setStepLabelData={setStepLabelData}
+            active={index === activeStep || allSteps}
+            isFirstRender={numRendersRef.current === 1}
+          >
+            {React.cloneElement(child)}
+          </Children>
+        ))}
         <MobileStepper
           steps={maxSteps}
           position="static"
@@ -187,6 +226,8 @@
       B.defineFunction('NextStep', () => handleNext());
       B.defineFunction('PreviousStep', () => handleBack());
     }, []);
+
+    numRendersRef.current += 1;
 
     return isDev ? (
       <div

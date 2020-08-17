@@ -18,21 +18,56 @@
       linkTo,
       linkToExternal,
       type,
-      visible,
       actionId,
       buttonText,
+      visible,
     } = options;
 
-    const { env, useText } = B;
+    const { env, useText, useAction } = B;
     const isDev = env === 'dev';
     const isAction = linkType === 'action';
     const hasLink = linkTo && linkTo.id !== '';
     const hasExternalLink = linkToExternal && linkToExternal.id !== '';
     const isIcon = variant === 'icon';
     const buttonContent = useText(buttonText);
+    const [isVisible, setIsVisible] = useState(visible);
+
+    const hideButton = () => setIsVisible(false);
+    const showButton = () => setIsVisible(true);
+    const [isLoading, setIsLoading] = useState(false);
+    const toggleVisibility = () => setIsVisible(s => !s);
+
+    const [actionCallback, { loading }] = (isAction &&
+      useAction(actionId, {
+        onCompleted(data) {
+          B.triggerEvent('onActionSuccess', data.actionb5);
+        },
+        onError(error) {
+          B.triggerEvent('onActionError', error.message);
+        },
+      })) || [() => {}, { loading: false }];
+
+    const toggleLoading = () => setIsLoading(l => !l);
+
+    useEffect(() => {
+      setIsVisible(visible);
+    }, [visible]);
+
+    useEffect(() => {
+      B.defineFunction('Show', showButton);
+      B.defineFunction('Hide', hideButton);
+      B.defineFunction('ToggleVisibility', toggleVisibility);
+      B.defineFunction('ToggleLoadingState', toggleLoading);
+    }, []);
+
+    useEffect(() => {
+      if (loading) {
+        B.triggerEvent('onActionLoad', loading);
+      }
+    }, [loading]);
 
     const generalProps = {
-      disabled,
+      disabled: disabled || isLoading || loading,
       size,
       tabindex: isDev && -1,
       href:
@@ -44,7 +79,6 @@
     const iconButtonProps = {
       ...generalProps,
       classes: { root: classes.root },
-      classname: visible || isDev ? '' : classes.hide,
     };
 
     const buttonProps = {
@@ -56,16 +90,17 @@
         contained: classes.contained,
         outlined: classes.outlined,
       },
-      className: [
-        visible || isDev ? '' : classes.hide,
-        buttonContent ? '' : classes.empty,
-      ].join(' '),
+      className: !!buttonContent && classes.empty,
       type: isDev ? 'button' : type,
     };
+    const compProps = isIcon ? iconButtonProps : buttonProps;
+    const BtnComp = isIcon ? IconButton : Button;
 
-    let ButtonComponent = (
-      <Button
-        {...buttonProps}
+    const showIndicator = !isIcon && (isLoading || loading);
+
+    const ButtonComponent = (
+      <BtnComp
+        {...compProps}
         startIcon={
           !isIcon &&
           icon !== 'None' &&
@@ -78,53 +113,23 @@
           iconPosition === 'end' &&
           React.createElement(Icons[icon])
         }
+        onClick={actionCallback}
       >
-        {isIcon
-          ? React.createElement(Icons[icon === 'None' ? 'Error' : icon], {
-              fontSize: size,
-            })
-          : buttonContent}
-      </Button>
+        {isIcon &&
+          React.createElement(Icons[icon === 'None' ? 'Error' : icon], {
+            fontSize: size,
+          })}
+        {!isIcon && buttonContent}
+        {showIndicator && (
+          <CircularProgress size={16} className={classes.loader} />
+        )}
+      </BtnComp>
     );
 
-    const Loader = <CircularProgress size={16} className={classes.loader} />;
-
-    if (isAction) {
-      ButtonComponent = (
-        <B.Action actionId={actionId}>
-          {(callAction, { loading }) => {
-            const onClickAction = event => {
-              event.preventDefault();
-              if (!isDev && !loading && linkType === 'action') callAction();
-            };
-            const actionClickHandler = isAction && { onClick: onClickAction };
-            return isIcon ? (
-              <IconButton {...iconButtonProps} {...actionClickHandler}>
-                {loading
-                  ? Loader
-                  : React.createElement(
-                      Icons[icon === 'None' ? 'Error' : icon],
-                      {
-                        fontSize: size,
-                      },
-                    )}
-              </IconButton>
-            ) : (
-              <Button {...buttonProps} {...actionClickHandler}>
-                {buttonContent}
-                {loading && Loader}
-              </Button>
-            );
-          }}
-        </B.Action>
-      );
+    if (isDev) {
+      return <div className={classes.wrapper}>{ButtonComponent}</div>;
     }
-
-    return isDev ? (
-      <div className={classes.wrapper}>{ButtonComponent}</div>
-    ) : (
-      ButtonComponent
-    );
+    return isVisible ? ButtonComponent : <></>;
   })(),
   styles: B => t => {
     const style = new B.Styling(t);
@@ -145,6 +150,11 @@
           style.getColor(variant === 'icon' ? background : textColor),
           '!important',
         ],
+        '&.MuiButton-contained.Mui-disabled': {
+          color: ['rgba(0, 0, 0, 0.26)', '!important'],
+          boxShadow: ['none', '!important'],
+          backgroundColor: ['rgba(0, 0, 0, 0.12)', '!important'],
+        },
         '&.MuiButton-root, &.MuiIconButton-root': {
           width: ({ options: { fullWidth, outerSpacing } }) => {
             if (!fullWidth) return 'auto';
@@ -161,7 +171,7 @@
           marginLeft: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[3]),
 
-          [`@media ${B.mediaMinWidth(768)}`]: {
+          [`@media ${B.mediaMinWidth(600)}`]: {
             width: ({ options: { fullWidth, outerSpacing } }) => {
               if (!fullWidth) return 'auto';
               const marginRight = getSpacing(outerSpacing[1], 'Portrait');
@@ -177,7 +187,7 @@
             marginLeft: ({ options: { outerSpacing } }) =>
               getSpacing(outerSpacing[3], 'Portrait'),
           },
-          [`@media ${B.mediaMinWidth(1024)}`]: {
+          [`@media ${B.mediaMinWidth(960)}`]: {
             width: ({ options: { fullWidth, outerSpacing } }) => {
               if (!fullWidth) return 'auto';
               const marginRight = getSpacing(outerSpacing[1], 'Landscape');
@@ -193,7 +203,7 @@
             marginLeft: ({ options: { outerSpacing } }) =>
               getSpacing(outerSpacing[3], 'Landscape'),
           },
-          [`@media ${B.mediaMinWidth(1200)}`]: {
+          [`@media ${B.mediaMinWidth(1280)}`]: {
             width: ({ options: { fullWidth, outerSpacing } }) => {
               if (!fullWidth) return 'auto';
               const marginRight = getSpacing(outerSpacing[1], 'Desktop');
@@ -234,9 +244,6 @@
         '&::before': {
           content: '"\xA0"',
         },
-      },
-      hide: {
-        display: 'none',
       },
     };
   },

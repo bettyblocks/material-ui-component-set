@@ -51,16 +51,60 @@
           },
         },
         {
+          value: 'built-in',
+          label: 'Success message',
+          key: 'showSuccess',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Built in', value: 'built-in' },
+              { name: 'Interaction', value: 'interaction' },
+            ],
+          },
+        },
+        {
           value: 'Thanks for submitting the form!',
           label: 'Success message',
           key: 'formSuccessMessage',
           type: 'TEXT',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'showSuccess',
+              comparator: 'EQ',
+              value: 'built-in',
+            },
+          },
+        },
+        {
+          value: 'built-in',
+          label: 'Error message',
+          key: 'showError',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Built in', value: 'built-in' },
+              { name: 'Interaction', value: 'interaction' },
+            ],
+          },
         },
         {
           value: 'Failed to submit the form!',
           label: 'Error message',
           key: 'formErrorMessage',
           type: 'TEXT',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'showError',
+              comparator: 'EQ',
+              value: 'built-in',
+            },
+          },
         },
         {
           value: ['0rem', '0rem', 'M', '0rem'],
@@ -136,15 +180,122 @@
             },
             {
               value: false,
-              label: 'Required',
-              key: 'required',
+              label: 'Validation options',
+              key: 'validationOptions',
               type: 'TOGGLE',
             },
             {
               value: false,
-              label: 'Error',
-              key: 'error',
+              label: 'Required',
+              key: 'required',
               type: 'TOGGLE',
+              configuration: {
+                condition: {
+                  type: 'SHOW',
+                  option: 'validationOptions',
+                  comparator: 'EQ',
+                  value: true,
+                },
+              },
+            },
+            {
+              label: 'Validation pattern',
+              key: 'pattern',
+              value: '',
+              type: 'TEXT',
+              configuration: {
+                placeholder: '(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}',
+                condition: {
+                  type: 'SHOW',
+                  option: 'validationOptions',
+                  comparator: 'EQ',
+                  value: true,
+                },
+              },
+            },
+            {
+              label: 'Min length',
+              key: 'minlength',
+              value: '',
+              type: 'NUMBER',
+              configuration: {
+                condition: {
+                  type: 'SHOW',
+                  option: 'validationOptions',
+                  comparator: 'EQ',
+                  value: true,
+                },
+              },
+            },
+            {
+              label: 'Max length',
+              key: 'maxlength',
+              value: '',
+              type: 'NUMBER',
+              configuration: {
+                condition: {
+                  type: 'SHOW',
+                  option: 'validationOptions',
+                  comparator: 'EQ',
+                  value: true,
+                },
+              },
+            },
+            {
+              value: ['This field is required'],
+              label: 'Value required message',
+              key: 'validationValueMissing',
+              type: 'VARIABLE',
+              configuration: {
+                condition: {
+                  type: 'SHOW',
+                  option: 'validationOptions',
+                  comparator: 'EQ',
+                  value: true,
+                },
+              },
+            },
+            {
+              value: ['Invalid value'],
+              label: 'Pattern mismatch message',
+              key: 'validationPatternMismatch',
+              type: 'VARIABLE',
+              configuration: {
+                condition: {
+                  type: 'SHOW',
+                  option: 'validationOptions',
+                  comparator: 'EQ',
+                  value: true,
+                },
+              },
+            },
+            {
+              value: ['This value is too short'],
+              label: 'Value too short message',
+              key: 'validationTooShort',
+              type: 'VARIABLE',
+              configuration: {
+                condition: {
+                  type: 'SHOW',
+                  option: 'validationOptions',
+                  comparator: 'EQ',
+                  value: true,
+                },
+              },
+            },
+            {
+              value: ['This value is too long'],
+              label: 'Value too long message',
+              key: 'validationTooLong',
+              type: 'VARIABLE',
+              configuration: {
+                condition: {
+                  type: 'SHOW',
+                  option: 'validationOptions',
+                  comparator: 'EQ',
+                  value: true,
+                },
+              },
             },
             {
               type: 'TOGGLE',
@@ -1495,6 +1646,152 @@
                 ],
               },
             },
+            {
+              value: false,
+              label: 'Styles',
+              key: 'styles',
+              type: 'TOGGLE',
+            },
+            {
+              type: 'COLOR',
+              label: 'Background color',
+              key: 'backgroundColor',
+              value: 'White',
+              configuration: {
+                condition: {
+                  type: 'SHOW',
+                  option: 'styles',
+                  comparator: 'EQ',
+                  value: true,
+                },
+              },
+            },
+            {
+              type: 'COLOR',
+              label: 'Border color',
+              key: 'borderColor',
+              value: 'Accent1',
+              configuration: {
+                condition: {
+                  type: 'SHOW',
+                  option: 'styles',
+                  comparator: 'EQ',
+                  value: true,
+                },
+              },
+            },
+            {
+              type: 'COLOR',
+              label: 'Border color (hover)',
+              key: 'borderHoverColor',
+              value: 'Black',
+              configuration: {
+                condition: {
+                  type: 'SHOW',
+                  option: 'styles',
+                  comparator: 'EQ',
+                  value: true,
+                },
+              },
+            },
+            {
+              type: 'COLOR',
+              label: 'Border color (focus)',
+              key: 'borderFocusColor',
+              value: 'Primary',
+              configuration: {
+                condition: {
+                  type: 'SHOW',
+                  option: 'styles',
+                  comparator: 'EQ',
+                  value: true,
+                },
+              },
+            },
+            {
+              value: false,
+              label: 'Hide label',
+              key: 'hideLabel',
+              type: 'TOGGLE',
+              configuration: {
+                condition: {
+                  type: 'SHOW',
+                  option: 'styles',
+                  comparator: 'EQ',
+                  value: true,
+                },
+              },
+            },
+            {
+              type: 'COLOR',
+              label: 'Label color',
+              key: 'labelColor',
+              value: 'Accent3',
+              configuration: {
+                condition: {
+                  type: 'SHOW',
+                  option: 'styles',
+                  comparator: 'EQ',
+                  value: true,
+                },
+              },
+            },
+            {
+              type: 'COLOR',
+              label: 'Text color',
+              key: 'textColor',
+              value: 'Black',
+              configuration: {
+                condition: {
+                  type: 'SHOW',
+                  option: 'styles',
+                  comparator: 'EQ',
+                  value: true,
+                },
+              },
+            },
+            {
+              type: 'COLOR',
+              label: 'Placeholder color',
+              key: 'placeholderColor',
+              value: 'Light',
+              configuration: {
+                condition: {
+                  type: 'SHOW',
+                  option: 'styles',
+                  comparator: 'EQ',
+                  value: true,
+                },
+              },
+            },
+            {
+              type: 'COLOR',
+              label: 'Helper color',
+              key: 'helperColor',
+              value: 'Accent2',
+              configuration: {
+                condition: {
+                  type: 'SHOW',
+                  option: 'styles',
+                  comparator: 'EQ',
+                  value: true,
+                },
+              },
+            },
+            {
+              type: 'COLOR',
+              label: 'Error color',
+              key: 'errorColor',
+              value: 'Danger',
+              configuration: {
+                condition: {
+                  type: 'SHOW',
+                  option: 'styles',
+                  comparator: 'EQ',
+                  value: true,
+                },
+              },
+            },
           ],
           descendants: [],
         },
@@ -1510,11 +1807,300 @@
                 as: 'BUTTONGROUP',
                 dataType: 'string',
                 allowedInput: [
+                  { name: 'None', value: 'none' },
                   { name: 'Left', value: 'flex-start' },
                   { name: 'Center', value: 'center' },
                   { name: 'Right', value: 'flex-end' },
                   { name: 'Justified', value: 'space-between' },
                 ],
+              },
+            },
+            {
+              value: false,
+              label: 'Stretch (when in flex container)',
+              key: 'stretch',
+              type: 'TOGGLE',
+            },
+            {
+              value: false,
+              label: 'Transparent',
+              key: 'transparent',
+              type: 'TOGGLE',
+            },
+            {
+              type: 'SIZE',
+              label: 'Height',
+              key: 'height',
+              value: '',
+              configuration: {
+                as: 'UNIT',
+              },
+            },
+            {
+              type: 'SIZE',
+              label: 'Width',
+              key: 'width',
+              value: '',
+              configuration: {
+                as: 'UNIT',
+              },
+            },
+            {
+              value: ['0rem', '0rem', '0rem', '0rem'],
+              label: 'Outer space',
+              key: 'outerSpacing',
+              type: 'SIZES',
+            },
+            {
+              value: ['0rem', '0rem', '0rem', '0rem'],
+              label: 'Inner space',
+              key: 'innerSpacing',
+              type: 'SIZES',
+            },
+            {
+              value: false,
+              label: 'Show positioning options',
+              key: 'positioningOptions',
+              type: 'TOGGLE',
+            },
+            {
+              value: 'relative',
+              label: 'Position',
+              key: 'position',
+              type: 'CUSTOM',
+              configuration: {
+                as: 'BUTTONGROUP',
+                dataType: 'string',
+                allowedInput: [
+                  { name: 'Static', value: 'static' },
+                  { name: 'Relative', value: 'relative' },
+                  { name: 'Absolute', value: 'absolute' },
+                  { name: 'Fixed', value: 'fixed' },
+                  { name: 'Sticky', value: 'sticky' },
+                ],
+                condition: {
+                  type: 'SHOW',
+                  option: 'positioningOptions',
+                  comparator: 'EQ',
+                  value: true,
+                },
+              },
+            },
+            {
+              type: 'SIZE',
+              label: 'Top position',
+              key: 'top',
+              value: '',
+              configuration: {
+                as: 'UNIT',
+                condition: {
+                  type: 'SHOW',
+                  option: 'positioningOptions',
+                  comparator: 'EQ',
+                  value: true,
+                },
+              },
+            },
+            {
+              type: 'SIZE',
+              label: 'Right position',
+              key: 'right',
+              value: '',
+              configuration: {
+                as: 'UNIT',
+                condition: {
+                  type: 'SHOW',
+                  option: 'positioningOptions',
+                  comparator: 'EQ',
+                  value: true,
+                },
+              },
+            },
+            {
+              type: 'SIZE',
+              label: 'Bottom position',
+              key: 'bottom',
+              value: '',
+              configuration: {
+                as: 'UNIT',
+                condition: {
+                  type: 'SHOW',
+                  option: 'positioningOptions',
+                  comparator: 'EQ',
+                  value: true,
+                },
+              },
+            },
+            {
+              type: 'SIZE',
+              label: 'Left position',
+              key: 'left',
+              value: '',
+              configuration: {
+                as: 'UNIT',
+                condition: {
+                  type: 'SHOW',
+                  option: 'positioningOptions',
+                  comparator: 'EQ',
+                  value: true,
+                },
+              },
+            },
+            {
+              value: false,
+              label: 'Show background options',
+              key: 'backgroundOptions',
+              type: 'TOGGLE',
+            },
+            {
+              value: 'Transparent',
+              label: 'Background color',
+              key: 'backgroundColor',
+              type: 'COLOR',
+              configuration: {
+                condition: {
+                  type: 'SHOW',
+                  option: 'backgroundOptions',
+                  comparator: 'EQ',
+                  value: true,
+                },
+              },
+            },
+            {
+              value: 100,
+              label: 'Background color opacity',
+              key: 'backgroundColorAlpha',
+              type: 'NUMBER',
+              configuration: {
+                condition: {
+                  type: 'SHOW',
+                  option: 'backgroundOptions',
+                  comparator: 'EQ',
+                  value: true,
+                },
+              },
+            },
+            {
+              value: [''],
+              label: 'Background url',
+              key: 'backgroundUrl',
+              type: 'VARIABLE',
+              configuration: {
+                condition: {
+                  type: 'SHOW',
+                  option: 'backgroundOptions',
+                  comparator: 'EQ',
+                  value: true,
+                },
+              },
+            },
+            {
+              value: 'initial',
+              label: 'Background size',
+              key: 'backgroundSize',
+              type: 'CUSTOM',
+              configuration: {
+                as: 'BUTTONGROUP',
+                dataType: 'string',
+                allowedInput: [
+                  { name: 'Initial', value: 'initial' },
+                  { name: 'Contain', value: 'contain' },
+                  { name: 'Cover', value: 'cover' },
+                ],
+                condition: {
+                  type: 'SHOW',
+                  option: 'backgroundOptions',
+                  comparator: 'EQ',
+                  value: true,
+                },
+              },
+            },
+            {
+              value: 'no-repeat',
+              label: 'Background repeat',
+              key: 'backgroundRepeat',
+              type: 'CUSTOM',
+              configuration: {
+                as: 'BUTTONGROUP',
+                dataType: 'string',
+                allowedInput: [
+                  { name: 'None', value: 'no-repeat' },
+                  { name: 'X', value: 'repeat-x' },
+                  { name: 'Y', value: 'repeat-y' },
+                  { name: 'All', value: 'repeat' },
+                ],
+                condition: {
+                  type: 'SHOW',
+                  option: 'backgroundOptions',
+                  comparator: 'EQ',
+                  value: true,
+                },
+              },
+            },
+            {
+              value: 'Transparent',
+              label: 'Border color',
+              key: 'borderColor',
+              type: 'COLOR',
+              configuration: {
+                condition: {
+                  type: 'SHOW',
+                  option: 'backgroundOptions',
+                  comparator: 'EQ',
+                  value: true,
+                },
+              },
+            },
+            {
+              type: 'SIZE',
+              label: 'Border thickness',
+              key: 'borderWidth',
+              value: '',
+              configuration: {
+                as: 'UNIT',
+                condition: {
+                  type: 'SHOW',
+                  option: 'backgroundOptions',
+                  comparator: 'EQ',
+                  value: true,
+                },
+              },
+            },
+            {
+              value: 'solid',
+              label: 'Border style',
+              key: 'borderStyle',
+              type: 'CUSTOM',
+              configuration: {
+                as: 'BUTTONGROUP',
+                dataType: 'string',
+                allowedInput: [
+                  { name: 'None', value: 'none' },
+                  { name: 'Solid', value: 'solid' },
+                  { name: 'Dashed', value: 'dashed' },
+                  { name: 'Dotted', value: 'dotted' },
+                ],
+                condition: {
+                  type: 'SHOW',
+                  option: 'backgroundOptions',
+                  comparator: 'EQ',
+                  value: true,
+                },
+              },
+            },
+            {
+              type: 'SIZE',
+              label: 'Border radius',
+              key: 'borderRadius',
+              value: '',
+              configuration: {
+                as: 'UNIT',
+                condition: {
+                  type: 'SHOW',
+                  option: 'backgroundOptions',
+                  comparator: 'EQ',
+                  value: true,
+                },
               },
             },
           ],

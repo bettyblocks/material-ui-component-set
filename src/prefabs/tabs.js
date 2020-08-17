@@ -101,6 +101,12 @@
           value: 'Success',
           type: 'COLOR',
         },
+        {
+          label: 'Hide visual tabs',
+          key: 'hideTabs',
+          value: false,
+          type: 'TOGGLE',
+        },
       ],
       descendants: [
         {
@@ -109,8 +115,8 @@
             {
               label: 'Tab label',
               key: 'label',
-              value: 'TAB',
-              type: 'TEXT',
+              value: ['TAB'],
+              type: 'VARIABLE',
             },
             {
               label: 'Icon',
