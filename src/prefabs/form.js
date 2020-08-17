@@ -34,12 +34,6 @@
           label: 'Model',
           key: 'model',
           type: 'MODEL',
-          configuration: {
-            modal: {
-              type: 'MODEL_AND_PROPERTIES',
-              modelRequired: false,
-            },
-          },
         },
         {
           value: '',
