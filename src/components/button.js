@@ -17,6 +17,7 @@
       linkType,
       linkTo,
       linkToExternal,
+      openNewTab,
       type,
       visible,
       actionId,
@@ -30,6 +31,7 @@
     const hasExternalLink = linkToExternal && linkToExternal.id !== '';
     const isIcon = variant === 'icon';
     const buttonContent = useText(buttonText);
+    const parsedExternalLink = useText(linkToExternal);
 
     const [isVisible, setIsVisible] = useState(visible);
 
@@ -72,7 +74,8 @@
       size,
       tabindex: isDev && -1,
       href:
-        linkType === 'external' && hasExternalLink ? linkToExternal : undefined,
+        linkType === 'external' && hasExternalLink ? parsedExternalLink : undefined,
+      target: openNewTab ? "_blank" : "_self",
       component: linkType === 'internal' && hasLink ? B.Link : undefined,
       endpoint: linkType === 'internal' && hasLink ? linkTo : undefined,
     };

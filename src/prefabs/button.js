@@ -66,12 +66,11 @@
           },
         },
         {
-          value: '',
+          value: [''],
           label: 'URL',
           key: 'linkToExternal',
-          type: 'TEXT',
+          type: 'VARIABLE',
           configuration: {
-            placeholder: 'Starts with https:// or http://',
             condition: {
               type: 'SHOW',
               option: 'linkType',
@@ -79,6 +78,12 @@
               value: 'external',
             },
           },
+        },
+        {
+          value: false,
+          label: 'Open link in new tab',
+          key: 'openNewTab',
+          type: 'TOGGLE'
         },
         {
           value: '',
