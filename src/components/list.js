@@ -28,7 +28,7 @@
 
     const { results } = data || {};
 
-    if (results && results.length === 0) {
+    if (!isDev && results && results.length === 0) {
       return <DataPlaceHolder text="No results" />;
     }
 
