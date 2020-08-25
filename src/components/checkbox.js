@@ -8,7 +8,6 @@
       label,
       disabled,
       defaultValue,
-      error,
       required,
       position,
       size,
@@ -27,6 +26,7 @@
       fullWidth,
       showError,
       hideLabel,
+      validationValueMissing,
     } = options;
 
     const { useText, getActionInput, getProperty, useGetAll } = B;
@@ -35,7 +35,6 @@
     const actionInput = getActionInput(actionInputId);
 
     const componentLabel = useText(label);
-    const componentHelperText = useText(helperText);
     const propLabelOverride = useText(propertyLabelOverride);
     const { label: propertyLabelText, name: propertyName } =
       getProperty(property) || {};
@@ -55,6 +54,9 @@
     const propertyLabel = propLabelOverride || propertyLabelText;
     const labelText = property ? propertyLabel : componentLabel;
     const formComponentName = propertyName || (actionInput && actionInput.name);
+    const [errorState, setErrorState] = useState(false);
+    const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
+    const [helper, setHelper] = useState(useText(helperText));
 
     const { loading, error: err, data, refetch } =
       model && useGetAll(model, { filter, skip: 0, take: 50 });
@@ -99,12 +101,34 @@
       FormLabel,
     } = window.MaterialUI.Core;
 
+    const handleValidation = () => {
+      const checkValue = values.join('');
+      const hasError = required && !checkValue;
+      setErrorState(hasError);
+      const message = hasError
+        ? useText(validationValueMissing)
+        : useText(helperText);
+      setHelper(message);
+    };
+
     const handleChange = evt => {
       const { checked, value } = evt.target;
+
+      if (afterFirstInvalidation) {
+        handleValidation();
+      }
+
       setValues(state => {
         if (checked) return state.concat(value);
         return state.filter(v => v !== value);
       });
+    };
+
+    const validationHandler = () => {
+      const checkValue = values.join('');
+      const hasError = required && !checkValue;
+      setAfterFirstInvalidation(hasError);
+      handleValidation();
     };
 
     const renderCheckbox = (checkboxLabel, checkboxValue) => (
@@ -115,6 +139,7 @@
         checked={values.includes(checkboxValue)}
         onChange={handleChange}
         name={formComponentName}
+        onBlur={validationHandler}
         disabled={disabled}
         value={checkboxValue}
       />
@@ -135,22 +160,30 @@
     };
 
     const Control = (
-      <FormControl
-        classes={{ root: classes.formControl }}
-        margin={margin}
-        component="fieldset"
-        required={required}
-        error={error}
-        fullWidth={fullWidth}
-      >
-        {labelText && !hideLabel && (
-          <FormLabel component="legend">{labelText}</FormLabel>
-        )}
-        <FormGroup row={row}>{renderCheckBoxes()}</FormGroup>
-        {componentHelperText && (
-          <FormHelperText>{componentHelperText}</FormHelperText>
-        )}
-      </FormControl>
+      <>
+        <FormControl
+          classes={{ root: classes.formControl }}
+          margin={margin}
+          component="fieldset"
+          required={required}
+          error={errorState}
+          fullWidth={fullWidth}
+        >
+          {labelText && !hideLabel && (
+            <FormLabel component="legend">{labelText}</FormLabel>
+          )}
+          <FormGroup row={row}>{renderCheckBoxes()}</FormGroup>
+          {helper && <FormHelperText>{helper}</FormHelperText>}
+        </FormControl>
+        <input
+          className={classes.validationInput}
+          onInvalid={validationHandler}
+          type="text"
+          tabIndex="-1"
+          required={required}
+          value={values.join()}
+        />
+      </>
     );
     return isDev ? <div className={classes.root}>{Control}</div> : Control;
   })(),
@@ -165,6 +198,14 @@
         '& > *': {
           pointerEvents: 'none',
         },
+      },
+      validationInput: {
+        height: 0,
+        width: 0,
+        fontSize: 0,
+        padding: 0,
+        border: 'none',
+        pointerEvents: 'none',
       },
       formControl: {
         '& > legend': {
