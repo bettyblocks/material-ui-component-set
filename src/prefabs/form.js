@@ -20,26 +20,12 @@
           label: 'Input',
           key: 'actionInputId',
           type: 'ACTION_INPUT',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'customModel',
-              comparator: 'EQ',
-              value: '',
-            },
-          },
         },
         {
           value: '',
           label: 'Model',
           key: 'model',
           type: 'MODEL',
-        },
-        {
-          value: '',
-          label: 'Custom Model',
-          key: 'customModel',
-          type: 'CUSTOM_MODEL',
         },
         {
           value: {},
