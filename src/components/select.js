@@ -12,7 +12,6 @@
       variant,
       size,
       fullWidth,
-      hasError,
       margin,
       helperText,
       selectOptions = '',
@@ -26,13 +25,16 @@
       propertyLabelOverride,
       showError,
       hideLabel,
+      validationValueMissing,
     } = options;
     const { TextField, MenuItem } = window.MaterialUI.Core;
     const displayError = showError === 'built-in';
     const isDev = B.env === 'dev';
     const { useGetAll, getProperty, getActionInput, useText } = B;
     const [currentValue, setCurrentValue] = useState(useText(defaultValue));
-    const helper = useText(helperText);
+    const [errorState, setErrorState] = useState(false);
+    const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
+    const [helper, setHelper] = useState(useText(helperText));
 
     const { label: propertyLabelText } = getProperty(property) || {};
     const propLabelOverride = useText(propertyLabelOverride);
@@ -74,12 +76,31 @@
       B.defineFunction('Refetch', () => refetch());
     }, [refetch]);
 
+    const handleValidation = () => {
+      const hasError = required && !value;
+      setErrorState(hasError);
+      const message = hasError
+        ? useText(validationValueMissing)
+        : useText(helperText);
+      setHelper(message);
+    };
+
     const handleChange = event => {
       const {
         target: { value: eventValue },
       } = event;
 
+      if (afterFirstInvalidation) {
+        handleValidation();
+      }
+
       setCurrentValue(eventValue);
+    };
+
+    const validationHandler = () => {
+      const hasError = required && !value;
+      setAfterFirstInvalidation(hasError);
+      handleValidation();
     };
 
     useEffect(() => {
@@ -110,28 +131,39 @@
     };
 
     const SelectCmp = (
-      <TextField
-        select
-        defaultValue={value}
-        value={value}
-        size={size}
-        classes={{ root: classes.formControl }}
-        variant={variant}
-        fullWidth={fullWidth}
-        onChange={handleChange}
-        inputProps={{
-          name: actionInput && actionInput.name,
-          tabIndex: isDev ? -1 : 0,
-        }}
-        required={required}
-        disabled={disabled}
-        label={!hideLabel && labelText}
-        error={hasError}
-        margin={margin}
-        helperText={helper}
-      >
-        {renderOptions()}
-      </TextField>
+      <>
+        <TextField
+          select
+          defaultValue={value}
+          value={value}
+          size={size}
+          classes={{ root: classes.formControl }}
+          variant={variant}
+          fullWidth={fullWidth}
+          onChange={handleChange}
+          onBlur={validationHandler}
+          inputProps={{
+            name: actionInput && actionInput.name,
+            tabIndex: isDev ? -1 : 0,
+          }}
+          required={required}
+          disabled={disabled}
+          label={!hideLabel && labelText}
+          error={errorState}
+          margin={margin}
+          helperText={helper}
+        >
+          {renderOptions()}
+        </TextField>
+        <input
+          className={classes.validationInput}
+          onInvalid={validationHandler}
+          type="text"
+          tabIndex="-1"
+          required={required}
+          value={value}
+        />
+      </>
     );
 
     return isDev ? <div className={classes.root}>{SelectCmp}</div> : SelectCmp;
@@ -145,6 +177,14 @@
         '& > *': {
           pointerEvents: 'none',
         },
+      },
+      validationInput: {
+        height: 0,
+        width: 0,
+        fontSize: 0,
+        padding: 0,
+        border: 'none',
+        pointerEvents: 'none',
       },
       formControl: {
         '& > label': {
