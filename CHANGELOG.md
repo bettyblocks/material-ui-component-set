@@ -1,3 +1,10 @@
+# [1.31.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.30.5...v1.31.0) (2020-08-26)
+
+
+### Features
+
+* add required option to select, checkbox and radiogroup ([ba136fb](https://github.com/bettyblocks/material-ui-component-set/commit/ba136fbe4f1111910b90b7de89600eeef0abb674))
+
 ## [1.30.5](https://github.com/bettyblocks/material-ui-component-set/compare/v1.30.4...v1.30.5) (2020-08-26)
 
 
