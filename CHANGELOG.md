@@ -1,3 +1,10 @@
+## [1.30.5](https://github.com/bettyblocks/material-ui-component-set/compare/v1.30.4...v1.30.5) (2020-08-26)
+
+
+### Bug Fixes
+
+* list component breaks when data option is set ([2b002f3](https://github.com/bettyblocks/material-ui-component-set/commit/2b002f332ea73c7582491611fee1b020bc5bd4e1))
+
 ## [1.30.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.30.3...v1.30.4) (2020-08-24)
 
 
