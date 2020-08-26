@@ -1,3 +1,10 @@
+## [1.30.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.30.3...v1.30.4) (2020-08-24)
+
+
+### Bug Fixes
+
+* make chip component avatar configuration more clear ([c2fca99](https://github.com/bettyblocks/material-ui-component-set/commit/c2fca99f0317a6f62a06af51f8ecd2f229023663))
+
 ## [1.30.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.30.2...v1.30.3) (2020-08-10)
 
 
