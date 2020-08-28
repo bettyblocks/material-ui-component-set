@@ -1,3 +1,10 @@
+## [1.31.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.31.0...v1.31.1) (2020-08-28)
+
+
+### Bug Fixes
+
+* old version of lodash vulnerability ([999af20](https://github.com/bettyblocks/material-ui-component-set/commit/999af207accf96a71e5af131813baae00c27aac3))
+
 # [1.31.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.30.5...v1.31.0) (2020-08-26)
 
 
