@@ -17,12 +17,6 @@
         },
         {
           value: '',
-          label: 'Input',
-          key: 'actionInputId',
-          type: 'ACTION_INPUT',
-        },
-        {
-          value: '',
           label: 'Model',
           key: 'model',
           type: 'MODEL',
