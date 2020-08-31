@@ -54,18 +54,19 @@
                 {isPristine ? 'Data List' : children}
               </div>
 
-              {Array.from(Array(rowsPerPage - 1).keys()).map(key => (
-                <div
-                  key={key}
-                  className={[
-                    isDev ? classes.pristine : '',
-                    classes.empty,
-                    classes.placeholder,
-                  ].join(' ')}
-                >
-                  {isDev ? 'Dynamic Item' : ''}
-                </div>
-              ))}
+              {type !== 'inline' &&
+                Array.from(Array(rowsPerPage - 1).keys()).map(key => (
+                  <div
+                    key={key}
+                    className={[
+                      isDev ? classes.pristine : '',
+                      classes.empty,
+                      classes.placeholder,
+                    ].join(' ')}
+                  >
+                    {isDev ? 'Dynamic Item' : ''}
+                  </div>
+                ))}
             </div>
             <div className={classes.footer}>
               {isDev && !hidePagination && (
@@ -168,6 +169,14 @@
           mounted.current = false;
         }, [loading]);
 
+        const Looper = results => {
+          return results.map(item => (
+            <ModelProvider key={item.id} value={item} id={model}>
+              {children}
+            </ModelProvider>
+          ));
+        };
+
         const canvasLayout = () => {
           if (!model) {
             return builderLayout();
@@ -194,8 +203,8 @@
 
           return (
             <>
-              <div className={classes.header}>
-                {searchProperty && !hideSearch && (
+              {searchProperty && !hideSearch && (
+                <div className={classes.header}>
                   <SearchComponent
                     label={searchPropertyLabel}
                     onChange={handleSearch}
@@ -203,24 +212,26 @@
                     isTyping={isTyping}
                     setIsTyping={setIsTyping}
                   />
-                )}
-              </div>
-              <div className={type === 'grid' ? classes.grid : ''}>
-                {results.map(item => (
-                  <ModelProvider key={item.id} value={item} id={model}>
-                    {children}
-                  </ModelProvider>
-                ))}
-              </div>
-              <div className={classes.footer}>
-                {!isEmpty && !hidePagination && (
+                </div>
+              )}
+
+              {type === 'inline' ? (
+                Looper(results)
+              ) : (
+                <div className={type === 'grid' ? classes.grid : ''}>
+                  {Looper(results)}
+                </div>
+              )}
+
+              {!isEmpty && !hidePagination && (
+                <div className={classes.footer}>
                   <Pagination
                     totalCount={totalCount}
                     resultCount={resultCount}
                     currentPage={page}
                   />
-                )}
-              </div>
+                </div>
+              )}
             </>
           );
         };
