@@ -1,3 +1,38 @@
+## [1.31.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.31.0...v1.31.1) (2020-08-28)
+
+
+### Bug Fixes
+
+* old version of lodash vulnerability ([999af20](https://github.com/bettyblocks/material-ui-component-set/commit/999af207accf96a71e5af131813baae00c27aac3))
+
+# [1.31.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.30.5...v1.31.0) (2020-08-26)
+
+
+### Features
+
+* add required option to select, checkbox and radiogroup ([ba136fb](https://github.com/bettyblocks/material-ui-component-set/commit/ba136fbe4f1111910b90b7de89600eeef0abb674))
+
+## [1.30.5](https://github.com/bettyblocks/material-ui-component-set/compare/v1.30.4...v1.30.5) (2020-08-26)
+
+
+### Bug Fixes
+
+* list component breaks when data option is set ([2b002f3](https://github.com/bettyblocks/material-ui-component-set/commit/2b002f332ea73c7582491611fee1b020bc5bd4e1))
+
+## [1.30.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.30.3...v1.30.4) (2020-08-24)
+
+
+### Bug Fixes
+
+* make chip component avatar configuration more clear ([c2fca99](https://github.com/bettyblocks/material-ui-component-set/commit/c2fca99f0317a6f62a06af51f8ecd2f229023663))
+
+## [1.30.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.30.2...v1.30.3) (2020-08-10)
+
+
+### Bug Fixes
+
+* form action error message passed ([ed157b2](https://github.com/bettyblocks/material-ui-component-set/commit/ed157b2faff0a7c43c5e43c67af09c0db42dd7f7))
+
 ## [1.30.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.30.1...v1.30.2) (2020-08-05)
 
 
