@@ -68,15 +68,16 @@
                   </div>
                 ))}
             </div>
-            <div className={classes.footer}>
-              {isDev && !hidePagination && (
+
+            {isDev && !hidePagination && (
+              <div className={classes.footer}>
                 <Pagination
                   totalCount={0}
                   resultCount={rowsPerPage}
                   currentPage={1}
                 />
-              )}
-            </div>
+              </div>
+            )}
           </>
         );
 
@@ -223,7 +224,7 @@
                 </div>
               )}
 
-              {!isEmpty && !hidePagination && (
+              {!hidePagination && (
                 <div className={classes.footer}>
                   <Pagination
                     totalCount={totalCount}
