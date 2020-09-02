@@ -16,10 +16,48 @@
           },
         },
         {
-          type: 'TOGGLE',
-          label: 'Display Rich Text',
-          key: 'useInnerHtml',
-          value: false,
+          type: 'CUSTOM',
+          label: 'Link to',
+          key: 'linkType',
+          value: 'none',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Page', value: 'internal' },
+              { name: 'External', value: 'external' },
+              { name: 'None', value: 'none' },
+            ],
+          },
+        },
+        {
+          value: '',
+          label: 'Page',
+          key: 'linkTo',
+          type: 'ENDPOINT',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'linkType',
+              comparator: 'EQ',
+              value: 'internal',
+            },
+          },
+        },
+        {
+          value: [''],
+          label: 'URL',
+          key: 'linkToExternal',
+          type: 'VARIABLE',
+          configuration: {
+            placeholder: 'Starts with https:// or http://',
+            condition: {
+              type: 'SHOW',
+              option: 'linkType',
+              comparator: 'EQ',
+              value: 'external',
+            },
+          },
         },
         {
           value: 'Body1',
@@ -94,6 +132,12 @@
               value: true,
             },
           },
+        },
+        {
+          type: 'TOGGLE',
+          label: 'Display Rich Text',
+          key: 'useInnerHtml',
+          value: false,
         },
       ],
       descendants: [],

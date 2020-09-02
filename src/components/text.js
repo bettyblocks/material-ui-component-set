@@ -4,9 +4,12 @@
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { content, useInnerHtml } = options;
-    const { env } = B;
+    const { content, useInnerHtml, linkType, linkTo, linkToExternal } = options;
+    const { env, useEndpoint, useText } = B;
     const isDev = env === 'dev';
+    const hasExternalLink = linkToExternal && linkToExternal.id !== '';
+    const linkToExternalVariable =
+      (linkToExternal && useText(linkToExternal)) || '';
 
     const Tag = useInnerHtml
       ? 'div'
@@ -22,20 +25,33 @@
         }[options.type || 'Body1'];
 
     const parsedContent = B.useText(content);
+    const href =
+      linkType === 'external' && hasExternalLink
+        ? linkToExternalVariable
+        : useEndpoint(linkTo);
 
-    return useInnerHtml && !isDev ? (
-      <Tag
-        className={classes.content}
-        dangerouslySetInnerHTML={{ __html: parsedContent }}
-      />
-    ) : (
-      <Tag className={classes.content}>
-        {content.length > 0 && parsedContent}
-        {content.length === 0 && isDev && (
-          <span className={classes.placeholder}>Empty content</span>
-        )}
-      </Tag>
+    const wrapInAnchor = component => (
+      <a href={href} className={classes.anchor}>
+        {component}
+      </a>
     );
+
+    const Comp =
+      useInnerHtml && !isDev ? (
+        <Tag
+          className={classes.content}
+          dangerouslySetInnerHTML={{ __html: parsedContent }}
+        />
+      ) : (
+        <Tag className={classes.content}>
+          {content.length > 0 && parsedContent}
+          {content.length === 0 && isDev && (
+            <span className={classes.placeholder}>Empty content</span>
+          )}
+        </Tag>
+      );
+
+    return linkType === 'none' ? Comp : wrapInAnchor(Comp);
   })(),
   styles: B => t => {
     const style = new B.Styling(t);
@@ -100,6 +116,25 @@
       },
       placeholder: {
         color: '#dadde4',
+      },
+      anchor: {
+        textDecoration: 'none',
+        '&:hover, &:focus': {
+          outline: 'none',
+        },
+      },
+      linkButton: {
+        backgroundColor: 'transparent',
+        border: 'none',
+        cursor: 'pointer',
+        textDecoration: 'none',
+        display: 'block',
+        margin: 0,
+        padding: 0,
+        '&:hover, &:focus': {
+          textDecoration: 'none',
+          outline: 'none',
+        },
       },
     };
   },
