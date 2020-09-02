@@ -170,13 +170,12 @@
           mounted.current = false;
         }, [loading]);
 
-        const Looper = results => {
-          return results.map(item => (
+        const Looper = results =>
+          results.map(item => (
             <ModelProvider key={item.id} value={item} id={model}>
               {children}
             </ModelProvider>
           ));
-        };
 
         const canvasLayout = () => {
           if (!model) {
