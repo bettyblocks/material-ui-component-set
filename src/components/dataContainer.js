@@ -60,15 +60,7 @@
                   redirect();
                 }
 
-                return (
-                  <>
-                    {data && (
-                      <B.ModelProvider key={data.id} value={data} id={model}>
-                        {children}
-                      </B.ModelProvider>
-                    )}
-                  </>
-                );
+                return data && children;
               }}
             </B.GetOne>
           );
