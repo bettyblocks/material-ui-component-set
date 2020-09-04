@@ -197,12 +197,8 @@
       return multiple ? currentRecords : singleRecord;
     };
 
-    const renderLabel = option => {
-      const optionValue =
-        (option[searchProp.name] && option[searchProp.name].toString()) ||
-        option;
-      return optionValue;
-    };
+    const renderLabel = option =>
+      (option[searchProp.name] && option[searchProp.name].toString()) || option;
 
     const renderOption = (option, { selected }) => (
       <>
