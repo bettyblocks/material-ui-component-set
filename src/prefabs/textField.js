@@ -54,6 +54,15 @@
           type: 'ACTION_INPUT',
         },
         {
+          value: '',
+          label: 'Property',
+          key: 'customModelAttribute',
+          type: 'CUSTOM_MODEL_ATTRIBUTE',
+          configuration: {
+            allowedTypes: ['string', 'boolean', 'integer'],
+          },
+        },
+        {
           value: false,
           label: 'Validation options',
           key: 'validationOptions',
