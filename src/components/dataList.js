@@ -36,6 +36,7 @@
         const isDev = env === 'dev';
         const isPristine = isEmpty && isDev;
         const displayError = showError === 'built-in';
+        const listRef = React.createRef();
 
         const builderLayout = () => (
           <>
@@ -44,29 +45,16 @@
                 <SearchComponent label={searchPropertyLabel} />
               </div>
             )}
-            <div className={type === 'grid' ? classes.grid : ''}>
+            <div ref={listRef} className={type === 'grid' ? classes.grid : ''}>
               <div
                 className={[
                   isEmpty ? classes.empty : '',
                   isPristine ? classes.pristine : '',
+                  type === 'inline' ? classes.inline : '',
                 ].join(' ')}
               >
                 {isPristine ? 'Data List' : children}
               </div>
-
-              {type !== 'inline' &&
-                Array.from(Array(rowsPerPage - 1).keys()).map(key => (
-                  <div
-                    key={key}
-                    className={[
-                      isDev ? classes.pristine : '',
-                      classes.empty,
-                      classes.placeholder,
-                    ].join(' ')}
-                  >
-                    {isDev ? 'Dynamic Item' : ''}
-                  </div>
-                ))}
             </div>
 
             {isDev && !hidePagination && (
@@ -80,6 +68,48 @@
             )}
           </>
         );
+
+        useEffect(() => {
+          if (!isDev) return;
+          const repeat = () => {
+            if (!listRef.current) return;
+            const numberOfChildren = listRef.current.children.length;
+            if (numberOfChildren === 0) {
+              return;
+            }
+            for (let i = numberOfChildren - 1, j = 0; i > j; i -= 1) {
+              const child = listRef.current.children[i];
+              if (child) {
+                listRef.current.removeChild(child);
+              }
+            }
+            for (let i = 0, j = rowsPerPage - 1; i < j; i += 1) {
+              listRef.current.children[0].insertAdjacentHTML(
+                'afterend',
+                listRef.current.children[0].outerHTML,
+              );
+            }
+            listRef.current.children.forEach((child, index) => {
+              if (index > 0) {
+                const elem = child;
+                elem.style.opacity = 0.7;
+                elem.style.pointerEvents = 'none';
+              }
+            });
+          };
+          const mutationObserver = new MutationObserver(() => {
+            repeat();
+          });
+          mutationObserver.observe(listRef.current.children[0], {
+            attributes: true,
+            characterData: true,
+            childList: true,
+            subtree: true,
+            attributeOldValue: false,
+            characterDataOldValue: false,
+          });
+          repeat();
+        });
 
         const handleSearch = event => {
           setSearch(event.target.value);
@@ -366,6 +396,9 @@
           getSpacing(outerSpacing[2]),
         marginLeft: ({ options: { outerSpacing } }) =>
           getSpacing(outerSpacing[3]),
+      },
+      inline: {
+        display: 'inline',
       },
       header: {
         display: 'flex',
