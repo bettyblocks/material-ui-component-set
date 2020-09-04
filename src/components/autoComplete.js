@@ -165,10 +165,7 @@
       }
       let newCurrentValue = newValue[valueProp.name] || newValue;
       if (multiple) {
-        newCurrentValue = newValue.map(rec => {
-          const recValue = rec[valueProp.name] || rec;
-          return recValue;
-        });
+        newCurrentValue = newValue.map(rec => rec[valueProp.name] || rec);
       }
       setCurrentValue(newCurrentValue);
       B.triggerEvent('OnChange');
