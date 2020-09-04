@@ -201,9 +201,9 @@
     };
 
     const renderLabel = option => {
-      const optionValue = option[searchProp.name]
-        ? option[searchProp.name].toString()
-        : option;
+      const optionValue =
+        (option[searchProp.name] && option[searchProp.name].toString()) ||
+        option;
       return optionValue;
     };
 
