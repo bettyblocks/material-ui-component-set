@@ -166,7 +166,7 @@
       let newCurrentValue = newValue[valueProp.name] || newValue;
       if (multiple) {
         newCurrentValue = newValue.map(rec => {
-          const recValue = rec[valueProp.name] ? rec[valueProp.name] : rec;
+          const recValue = rec[valueProp.name] || rec;
           return recValue;
         });
       }
