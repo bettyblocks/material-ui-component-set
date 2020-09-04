@@ -92,7 +92,7 @@
             listRef.current.children.forEach((child, index) => {
               if (index > 0) {
                 const elem = child;
-                elem.style.opacity = 0.7;
+                elem.style.opacity = 0.4;
                 elem.style.pointerEvents = 'none';
               }
             });
