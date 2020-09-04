@@ -1,3 +1,10 @@
+## [1.31.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.31.1...v1.31.2) (2020-09-04)
+
+
+### Bug Fixes
+
+* remove ModelProvider as child of GetOne helper ([0fc9c71](https://github.com/bettyblocks/material-ui-component-set/commit/0fc9c711e4eed371ab3fe8174af902cae2f7d3ef))
+
 ## [1.31.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.31.0...v1.31.1) (2020-08-28)
 
 
