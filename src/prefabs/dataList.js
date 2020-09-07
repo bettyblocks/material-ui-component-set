@@ -82,6 +82,10 @@
                 name: 'Grid',
                 value: 'grid',
               },
+              {
+                name: 'Inline',
+                value: 'inline',
+              },
             ],
           },
         },
