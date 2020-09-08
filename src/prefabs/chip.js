@@ -13,6 +13,66 @@
           value: ['Label'],
         },
         {
+          type: 'CUSTOM',
+          label: 'Link to',
+          key: 'linkType',
+          value: 'none',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Page', value: 'internal' },
+              { name: 'External', value: 'external' },
+              { name: 'Action', value: 'action' },
+              { name: 'None', value: 'none' },
+            ],
+          },
+        },
+        {
+          value: '',
+          label: 'Page',
+          key: 'linkTo',
+          type: 'ENDPOINT',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'linkType',
+              comparator: 'EQ',
+              value: 'internal',
+            },
+          },
+        },
+        {
+          value: '',
+          label: 'URL',
+          key: 'linkToExternal',
+          type: 'TEXT',
+          configuration: {
+            placeholder: 'Starts with https:// or http://',
+            condition: {
+              type: 'SHOW',
+              option: 'linkType',
+              comparator: 'EQ',
+              value: 'external',
+            },
+          },
+        },
+        {
+          value: '',
+          label: 'Action',
+          key: 'actionId',
+          type: 'ACTION',
+          configuration: {
+            apiVersion: 'v1',
+            condition: {
+              type: 'SHOW',
+              option: 'linkType',
+              comparator: 'EQ',
+              value: 'action',
+            },
+          },
+        },
+        {
           type: 'TOGGLE',
           label: 'Disabled',
           key: 'disabled',

@@ -6,7 +6,7 @@
   jsx: (() => {
     const { Chip, Avatar } = window.MaterialUI.Core;
     const { Icons } = window.MaterialUI;
-    const { env, useText } = B;
+    const { env, useText, useEndpoint, useAction } = B;
     const {
       label,
       disabled,
@@ -16,8 +16,30 @@
       imgUrl,
       avatartype,
       size,
+      linkType,
+      linkTo,
+      linkToExternal,
+      actionId,
     } = options;
     const isDev = env === 'dev';
+    const isAction = linkType === 'action';
+    const href = linkType === 'external' ? linkToExternal : useEndpoint(linkTo);
+
+    const [actionCallback, { loading }] = (isAction &&
+      useAction(actionId, {
+        onCompleted(data) {
+          B.triggerEvent('onActionSuccess', data.actionb5);
+        },
+        onError(error) {
+          B.triggerEvent('onActionError', error.message);
+        },
+      })) || [() => {}, { loading: false }];
+
+    useEffect(() => {
+      if (loading) {
+        B.triggerEvent('onActionLoad', loading);
+      }
+    }, [loading]);
 
     const imgSrc = imgUrl && useText(imgUrl);
     const AvatarImage = <Avatar alt="" src={imgSrc} />;
@@ -28,6 +50,13 @@
     } else if (avatartype === 'image') {
       AvatarComponent = AvatarImage;
     }
+
+    const doRedirect = () => {
+      const history = useHistory();
+      history.push(href);
+    };
+
+    const handleClick = () => (isAction ? actionCallback() : doRedirect());
 
     const ChipComponent = (
       <Chip
@@ -45,13 +74,11 @@
         }
         avatar={AvatarComponent}
         size={size}
+        onClick={linkType !== 'none' && handleClick}
       />
     );
-    return isDev ? (
-      <div className={classes.wrapper}>{ChipComponent}</div>
-    ) : (
-      ChipComponent
-    );
+
+    return isDev ? <div>{ChipComponent}</div> : ChipComponent;
   })(),
   styles: B => theme => {
     const style = new B.Styling(theme);
