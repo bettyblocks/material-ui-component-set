@@ -198,13 +198,12 @@
     };
 
     const renderLabel = option => {
-      const emptyResult =
-        !option[searchProp.name] || option[searchProp.name] === '';
-      const recordResult =
-        (option[searchProp.name] && option[searchProp.name].toString()) ||
-        option;
-      return emptyResult ? '-- empty --' : recordResult;
+      const optionLabel = option[searchProp.name];
+      const emptyLabel = !optionLabel;
+      const recordLabel = (optionLabel && optionLabel.toString()) || option;
+      return emptyLabel ? '-- empty --' : recordLabel;
     };
+
     const renderOption = (option, { selected }) => (
       <>
         <Checkbox
