@@ -53,6 +53,10 @@
     }
 
     const doRedirect = () => {
+      if (linkType === 'external') {
+        window.location.href = href;
+        return;
+      }
       history.push(href);
     };
 
