@@ -87,7 +87,7 @@
       setHelper(message);
     };
 
-    const handleChange = (event) => {
+    const handleChange = event => {
       const {
         target: { value: eventValue },
       } = event;
@@ -113,14 +113,14 @@
 
     const renderOptions = () => {
       if (kind === 'list') {
-        return values.map(({ value }) => (
-          <MenuItem key={value} value={value}>
-            {value}
+        return values.map(({ value: v }) => (
+          <MenuItem key={v} value={v}>
+            {v}
           </MenuItem>
         ));
       }
       if (optionType !== 'data') {
-        return selectOptions.split('\n').map((option) => (
+        return selectOptions.split('\n').map(option => (
           <MenuItem key={option} value={option}>
             {option}
           </MenuItem>
@@ -129,7 +129,7 @@
       if (loading) return <span>Loading...</span>;
       if (error && displayError) return <span>{error.message}</span>;
       return (results || []).map(
-        (item) =>
+        item =>
           propName &&
           labelName && (
             <MenuItem key={item.id} value={item[propName]}>
@@ -177,7 +177,7 @@
 
     return isDev ? <div className={classes.root}>{SelectCmp}</div> : SelectCmp;
   })(),
-  styles: (B) => (t) => {
+  styles: B => t => {
     const style = new B.Styling(t);
     return {
       root: {
