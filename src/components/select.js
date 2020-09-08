@@ -36,7 +36,7 @@
     const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
 
-    const { label: propertyLabelText, kind, values } =
+    const { label: propertyLabelText, kind, values = [] } =
       getProperty(property) || {};
 
     const propLabelOverride = useText(propertyLabelOverride);
@@ -112,8 +112,8 @@
     }, [isDev, defaultValue]);
 
     const renderOptions = () => {
-      if (selectOptions === '' && kind === 'list') {
-        return values?.map(({ value }) => (
+      if (kind === 'list') {
+        return values.map(({ value }) => (
           <MenuItem key={value} value={value}>
             {value}
           </MenuItem>
