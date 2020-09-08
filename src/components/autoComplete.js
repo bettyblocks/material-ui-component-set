@@ -199,9 +199,7 @@
 
     const renderLabel = option => {
       const optionLabel = option[searchProp.name];
-      const emptyLabel = !optionLabel;
-      const recordLabel = (optionLabel && optionLabel.toString()) || option;
-      return emptyLabel ? '-- empty --' : recordLabel;
+      return !optionLabel ? '-- empty --' : optionLabel.toString() || option;
     };
 
     const renderOption = (option, { selected }) => (
