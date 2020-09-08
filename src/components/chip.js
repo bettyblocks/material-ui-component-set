@@ -20,6 +20,7 @@
       linkTo,
       linkToExternal,
       actionId,
+      deletable,
     } = options;
     const isDev = env === 'dev';
     const isAction = linkType === 'action';
@@ -61,6 +62,7 @@
     };
 
     const handleClick = () => (isAction ? actionCallback() : doRedirect());
+    const handleDelete = () => B.triggerEvent('onDelete');
 
     const ChipComponent = (
       <Chip
@@ -79,6 +81,7 @@
         avatar={AvatarComponent}
         size={size}
         onClick={linkType !== 'none' && handleClick}
+        onDelete={deletable && handleDelete}
       />
     );
 

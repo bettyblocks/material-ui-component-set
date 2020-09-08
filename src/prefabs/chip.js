@@ -79,6 +79,12 @@
           value: false,
         },
         {
+          type: 'TOGGLE',
+          label: 'Deletable',
+          key: 'deletable',
+          value: false,
+        },
+        {
           label: 'Variant',
           key: 'variant',
           value: 'default',
