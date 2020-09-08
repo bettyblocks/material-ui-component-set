@@ -59,7 +59,7 @@
           key: 'customModelAttribute',
           type: 'CUSTOM_MODEL_ATTRIBUTE',
           configuration: {
-            allowedTypes: ['string', 'boolean', 'integer'],
+            allowedTypes: ['string'],
           },
         },
         {
