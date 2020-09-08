@@ -24,6 +24,7 @@
     const isDev = env === 'dev';
     const isAction = linkType === 'action';
     const href = linkType === 'external' ? linkToExternal : useEndpoint(linkTo);
+    const history = isDev ? {} : useHistory();
 
     const [actionCallback, { loading }] = (isAction &&
       useAction(actionId, {
@@ -52,7 +53,6 @@
     }
 
     const doRedirect = () => {
-      const history = useHistory();
       history.push(href);
     };
 
