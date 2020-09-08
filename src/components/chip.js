@@ -56,9 +56,9 @@
     const doRedirect = () => {
       if (linkType === 'external') {
         window.location.href = href;
-        return;
+      } else {
+        history.push(href);
       }
-      history.push(href);
     };
 
     const handleClick = () => (isAction ? actionCallback() : doRedirect());
