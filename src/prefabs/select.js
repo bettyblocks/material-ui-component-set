@@ -150,7 +150,7 @@
           type: 'TEXT',
           label: 'Options',
           key: 'selectOptions',
-          value: 'a\nb\nc',
+          value: '',
           configuration: {
             as: 'MULTILINE',
             condition: {

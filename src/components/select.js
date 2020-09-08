@@ -36,7 +36,9 @@
     const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
 
-    const { label: propertyLabelText } = getProperty(property) || {};
+    const { label: propertyLabelText, kind, values } =
+      getProperty(property) || {};
+
     const propLabelOverride = useText(propertyLabelOverride);
     const propertyLabel = propLabelOverride || propertyLabelText;
     const labelText = property ? propertyLabel : useText(label);
@@ -85,7 +87,7 @@
       setHelper(message);
     };
 
-    const handleChange = event => {
+    const handleChange = (event) => {
       const {
         target: { value: eventValue },
       } = event;
@@ -110,8 +112,15 @@
     }, [isDev, defaultValue]);
 
     const renderOptions = () => {
+      if (selectOptions === '' && kind === 'list') {
+        return values?.map(({ value }) => (
+          <MenuItem key={value} value={value}>
+            {value}
+          </MenuItem>
+        ));
+      }
       if (optionType !== 'data') {
-        return selectOptions.split('\n').map(option => (
+        return selectOptions.split('\n').map((option) => (
           <MenuItem key={option} value={option}>
             {option}
           </MenuItem>
@@ -120,7 +129,7 @@
       if (loading) return <span>Loading...</span>;
       if (error && displayError) return <span>{error.message}</span>;
       return (results || []).map(
-        item =>
+        (item) =>
           propName &&
           labelName && (
             <MenuItem key={item.id} value={item[propName]}>
@@ -168,7 +177,7 @@
 
     return isDev ? <div className={classes.root}>{SelectCmp}</div> : SelectCmp;
   })(),
-  styles: B => t => {
+  styles: (B) => (t) => {
     const style = new B.Styling(t);
     return {
       root: {
