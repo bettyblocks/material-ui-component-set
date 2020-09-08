@@ -197,9 +197,14 @@
       return multiple ? currentRecords : singleRecord;
     };
 
-    const renderLabel = option =>
-      (option[searchProp.name] && option[searchProp.name].toString()) || option;
-
+    const renderLabel = option => {
+      const emptyResult =
+        !option[searchProp.name] || option[searchProp.name] === '';
+      const recordResult =
+        (option[searchProp.name] && option[searchProp.name].toString()) ||
+        option;
+      return emptyResult ? '-- empty --' : recordResult;
+    };
     const renderOption = (option, { selected }) => (
       <>
         <Checkbox
@@ -243,6 +248,7 @@
       <Autocomplete
         multiple={multiple}
         freeSolo={freeSolo}
+        autoSelect={freeSolo}
         options={results}
         defaultValue={getDefaultValue(results)}
         getOptionLabel={renderLabel}
