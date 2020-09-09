@@ -199,8 +199,12 @@
       return multiple ? currentRecords : singleRecord;
     };
 
-    const renderLabel = option =>
-      (option[searchProp.name] && option[searchProp.name].toString()) || option;
+    const renderLabel = option => {
+      const optionLabel = option[searchProp.name];
+      return optionLabel !== undefined && optionLabel === ''
+        ? '-- empty --'
+        : (optionLabel && optionLabel.toString()) || option;
+    };
 
     const renderOption = (option, { selected }) => (
       <>
@@ -245,6 +249,7 @@
       <Autocomplete
         multiple={multiple}
         freeSolo={freeSolo}
+        autoSelect={freeSolo}
         options={results}
         defaultValue={getDefaultValue(results)}
         getOptionLabel={renderLabel}
