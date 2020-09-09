@@ -19,7 +19,6 @@
       fullWidth,
       margin,
       helperText,
-      actionInputId,
       adornment,
       adornmentIcon,
       adornmentPosition,
@@ -49,13 +48,7 @@
     } = window.MaterialUI.Core;
     const { Icons } = window.MaterialUI;
 
-    const {
-      getActionInput,
-      useText,
-      env,
-      getProperty,
-      getCustomModelAttribute,
-    } = B;
+    const { useText, env, getProperty, getCustomModelAttribute } = B;
     const isDev = env === 'dev';
     const [currentValue, setCurrentValue] = useState(useText(defaultValue));
     const [isDisabled, setIsDisabled] = useState(disabled);
@@ -97,7 +90,6 @@
     const propertyLabel = propLabelOverride || propertyLabelText;
     const labelText = property ? propertyLabel : useText(label);
 
-    const actionInput = getActionInput(actionInputId);
     const customModelAttribute = getCustomModelAttribute(
       customModelAttributeId,
     );
