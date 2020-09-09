@@ -163,9 +163,9 @@
         B.triggerEvent('OnChange');
         return;
       }
-      let newCurrentValue = newValue[valueProp.name];
+      let newCurrentValue = newValue[valueProp.name] || newValue;
       if (multiple) {
-        newCurrentValue = newValue.map(rec => rec[valueProp.name]);
+        newCurrentValue = newValue.map(rec => rec[valueProp.name] || rec);
       }
       setCurrentValue(newCurrentValue);
       B.triggerEvent('OnChange');
@@ -197,8 +197,12 @@
       return multiple ? currentRecords : singleRecord;
     };
 
-    const renderLabel = option =>
-      option[searchProp.name] && option[searchProp.name].toString();
+    const renderLabel = option => {
+      const optionLabel = option[searchProp.name];
+      return optionLabel !== undefined && optionLabel === ''
+        ? '-- empty --'
+        : (optionLabel && optionLabel.toString()) || option;
+    };
 
     const renderOption = (option, { selected }) => (
       <>
@@ -243,8 +247,9 @@
       <Autocomplete
         multiple={multiple}
         freeSolo={freeSolo}
+        autoSelect={freeSolo}
         options={results}
-        value={getDefaultValue(results)}
+        defaultValue={getDefaultValue(results)}
         getOptionLabel={renderLabel}
         PopoverProps={{
           classes: {
