@@ -1,3 +1,10 @@
+## [1.32.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.32.1...v1.32.2) (2020-09-09)
+
+
+### Bug Fixes
+
+* Enable appBar title to have variables ([d8afb28](https://github.com/bettyblocks/material-ui-component-set/commit/d8afb28b117bb74c671e6e68fbbdb1176d8919a0))
+
 ## [1.32.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.32.0...v1.32.1) (2020-09-09)
 
 
