@@ -1,3 +1,14 @@
+## [1.32.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.32.0...v1.32.1) (2020-09-09)
+
+
+### Bug Fixes
+
+* freesolo option in autocomplete ([3970605](https://github.com/bettyblocks/material-ui-component-set/commit/3970605de73dad6c9524ba1f5a839a301c1fd34c))
+* handle freesolo label ([1e69be4](https://github.com/bettyblocks/material-ui-component-set/commit/1e69be4f4e54f28faf213a4b1aace6b985224613))
+* remove unneeded ternary condition ([989d2f2](https://github.com/bettyblocks/material-ui-component-set/commit/989d2f2b12dd62567fa87fab65f8004fdc3b1b56))
+* remove unneeded ternary condition ([d4ed551](https://github.com/bettyblocks/material-ui-component-set/commit/d4ed551bdd6450709e13dfb17b01ec1d911e56e4))
+* tab to blur on freesolo and handle empty values ([318292b](https://github.com/bettyblocks/material-ui-component-set/commit/318292b6c0745bcdc04bea4f1092d9afd418a510))
+
 # [1.32.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.31.2...v1.32.0) (2020-09-07)
 
 
