@@ -36,6 +36,7 @@
         const isDev = env === 'dev';
         const isPristine = isEmpty && isDev;
         const displayError = showError === 'built-in';
+        const listRef = React.createRef();
 
         const builderLayout = () => (
           <>
@@ -44,40 +45,71 @@
                 <SearchComponent label={searchPropertyLabel} />
               </div>
             )}
-            <div className={type === 'grid' ? classes.grid : ''}>
+            <div ref={listRef} className={type === 'grid' ? classes.grid : ''}>
               <div
                 className={[
                   isEmpty ? classes.empty : '',
                   isPristine ? classes.pristine : '',
+                  type === 'inline' ? classes.inline : '',
                 ].join(' ')}
               >
                 {isPristine ? 'Data List' : children}
               </div>
-
-              {Array.from(Array(rowsPerPage - 1).keys()).map(key => (
-                <div
-                  key={key}
-                  className={[
-                    isDev ? classes.pristine : '',
-                    classes.empty,
-                    classes.placeholder,
-                  ].join(' ')}
-                >
-                  {isDev ? 'Dynamic Item' : ''}
-                </div>
-              ))}
             </div>
-            <div className={classes.footer}>
-              {isDev && !hidePagination && (
+
+            {isDev && !hidePagination && (
+              <div className={classes.footer}>
                 <Pagination
                   totalCount={0}
                   resultCount={rowsPerPage}
                   currentPage={1}
                 />
-              )}
-            </div>
+              </div>
+            )}
           </>
         );
+
+        useEffect(() => {
+          if (!isDev) return;
+          const repeat = () => {
+            if (!listRef.current) return;
+            const numberOfChildren = listRef.current.children.length;
+            if (numberOfChildren === 0) {
+              return;
+            }
+            for (let i = numberOfChildren - 1, j = 0; i > j; i -= 1) {
+              const child = listRef.current.children[i];
+              if (child) {
+                listRef.current.removeChild(child);
+              }
+            }
+            for (let i = 0, j = rowsPerPage - 1; i < j; i += 1) {
+              listRef.current.children[0].insertAdjacentHTML(
+                'afterend',
+                listRef.current.children[0].outerHTML,
+              );
+            }
+            listRef.current.children.forEach((child, index) => {
+              if (index > 0) {
+                const elem = child;
+                elem.style.opacity = 0.4;
+                elem.style.pointerEvents = 'none';
+              }
+            });
+          };
+          const mutationObserver = new MutationObserver(() => {
+            repeat();
+          });
+          mutationObserver.observe(listRef.current.children[0], {
+            attributes: true,
+            characterData: true,
+            childList: true,
+            subtree: true,
+            attributeOldValue: false,
+            characterDataOldValue: false,
+          });
+          repeat();
+        });
 
         const handleSearch = event => {
           setSearch(event.target.value);
@@ -168,6 +200,13 @@
           mounted.current = false;
         }, [loading]);
 
+        const Looper = results =>
+          results.map(item => (
+            <ModelProvider key={item.id} value={item} id={model}>
+              {children}
+            </ModelProvider>
+          ));
+
         const canvasLayout = () => {
           if (!model) {
             return builderLayout();
@@ -194,8 +233,8 @@
 
           return (
             <>
-              <div className={classes.header}>
-                {searchProperty && !hideSearch && (
+              {searchProperty && !hideSearch && (
+                <div className={classes.header}>
                   <SearchComponent
                     label={searchPropertyLabel}
                     onChange={handleSearch}
@@ -203,24 +242,26 @@
                     isTyping={isTyping}
                     setIsTyping={setIsTyping}
                   />
-                )}
-              </div>
-              <div className={type === 'grid' ? classes.grid : ''}>
-                {results.map(item => (
-                  <ModelProvider key={item.id} value={item} id={model}>
-                    {children}
-                  </ModelProvider>
-                ))}
-              </div>
-              <div className={classes.footer}>
-                {!isEmpty && !hidePagination && (
+                </div>
+              )}
+
+              {type === 'inline' ? (
+                Looper(results)
+              ) : (
+                <div className={type === 'grid' ? classes.grid : ''}>
+                  {Looper(results)}
+                </div>
+              )}
+
+              {!hidePagination && (
+                <div className={classes.footer}>
                   <Pagination
                     totalCount={totalCount}
                     resultCount={resultCount}
                     currentPage={page}
                   />
-                )}
-              </div>
+                </div>
+              )}
             </>
           );
         };
@@ -355,6 +396,9 @@
           getSpacing(outerSpacing[2]),
         marginLeft: ({ options: { outerSpacing } }) =>
           getSpacing(outerSpacing[3]),
+      },
+      inline: {
+        display: 'inline',
       },
       header: {
         display: 'flex',

@@ -1,3 +1,43 @@
+## [1.32.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.32.1...v1.32.2) (2020-09-09)
+
+
+### Bug Fixes
+
+* Enable appBar title to have variables ([d8afb28](https://github.com/bettyblocks/material-ui-component-set/commit/d8afb28b117bb74c671e6e68fbbdb1176d8919a0))
+
+## [1.32.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.32.0...v1.32.1) (2020-09-09)
+
+
+### Bug Fixes
+
+* freesolo option in autocomplete ([3970605](https://github.com/bettyblocks/material-ui-component-set/commit/3970605de73dad6c9524ba1f5a839a301c1fd34c))
+* handle freesolo label ([1e69be4](https://github.com/bettyblocks/material-ui-component-set/commit/1e69be4f4e54f28faf213a4b1aace6b985224613))
+* remove unneeded ternary condition ([989d2f2](https://github.com/bettyblocks/material-ui-component-set/commit/989d2f2b12dd62567fa87fab65f8004fdc3b1b56))
+* remove unneeded ternary condition ([d4ed551](https://github.com/bettyblocks/material-ui-component-set/commit/d4ed551bdd6450709e13dfb17b01ec1d911e56e4))
+* tab to blur on freesolo and handle empty values ([318292b](https://github.com/bettyblocks/material-ui-component-set/commit/318292b6c0745bcdc04bea4f1092d9afd418a510))
+
+# [1.32.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.31.2...v1.32.0) (2020-09-07)
+
+
+### Bug Fixes
+
+* change opacity of repeated datalist item ([327d8ec](https://github.com/bettyblocks/material-ui-component-set/commit/327d8ec550a7d8a9604a686c54a0ac474ba8a147))
+* datalist linter ([885e1ec](https://github.com/bettyblocks/material-ui-component-set/commit/885e1ec2c6b6bbb891ffb504a3c18a52133345f9))
+
+
+### Features
+
+* add inline with datalist ([2dde37b](https://github.com/bettyblocks/material-ui-component-set/commit/2dde37b445e3d576eefe6fdfd2162053517b9188))
+* no footer in datalist if hidePagination ([f25b062](https://github.com/bettyblocks/material-ui-component-set/commit/f25b062134e3bd0c275a0e7808c8d4293f01779a))
+* show repeated content and children ([14b65e6](https://github.com/bettyblocks/material-ui-component-set/commit/14b65e65f89c670511b16180e411fe099ab0c96e))
+
+## [1.31.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.31.1...v1.31.2) (2020-09-04)
+
+
+### Bug Fixes
+
+* remove ModelProvider as child of GetOne helper ([0fc9c71](https://github.com/bettyblocks/material-ui-component-set/commit/0fc9c711e4eed371ab3fe8174af902cae2f7d3ef))
+
 ## [1.31.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.31.0...v1.31.1) (2020-08-28)
 
 
