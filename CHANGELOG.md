@@ -1,3 +1,18 @@
+# [1.32.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.31.2...v1.32.0) (2020-09-07)
+
+
+### Bug Fixes
+
+* change opacity of repeated datalist item ([327d8ec](https://github.com/bettyblocks/material-ui-component-set/commit/327d8ec550a7d8a9604a686c54a0ac474ba8a147))
+* datalist linter ([885e1ec](https://github.com/bettyblocks/material-ui-component-set/commit/885e1ec2c6b6bbb891ffb504a3c18a52133345f9))
+
+
+### Features
+
+* add inline with datalist ([2dde37b](https://github.com/bettyblocks/material-ui-component-set/commit/2dde37b445e3d576eefe6fdfd2162053517b9188))
+* no footer in datalist if hidePagination ([f25b062](https://github.com/bettyblocks/material-ui-component-set/commit/f25b062134e3bd0c275a0e7808c8d4293f01779a))
+* show repeated content and children ([14b65e6](https://github.com/bettyblocks/material-ui-component-set/commit/14b65e65f89c670511b16180e411fe099ab0c96e))
+
 ## [1.31.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.31.1...v1.31.2) (2020-09-04)
 
 
