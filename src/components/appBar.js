@@ -26,6 +26,7 @@
     const isDev = env === 'dev';
     const [anchorEl, setAnchorEl] = useState(null);
     const open = !!anchorEl;
+    title = useText(title);
 
     const handleMenu = event => {
       setAnchorEl(event.currentTarget);
