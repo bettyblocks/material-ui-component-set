@@ -27,6 +27,7 @@
     const isDev = env === 'dev';
     const [anchorEl, setAnchorEl] = useState(null);
     const open = !!anchorEl;
+    const titleText = useText(title);
 
     const handleMenu = event => {
       setAnchorEl(event.currentTarget);
@@ -62,7 +63,7 @@
             component={endpoint.id && Link}
             endpoint={endpoint.id && endpoint}
           >
-            {title}
+            {titleText}
           </Typography>
           <div className={classes.spacer} />
           {!isDev && !!children.length ? (
