@@ -28,6 +28,7 @@
     const isAction = linkType === 'action';
     const hasLink = linkTo && linkTo.id !== '';
     const hasExternalLink = linkToExternal && linkToExternal.id !== '';
+    const linkToExternalVariable = useText(linkToExternal);
     const isIcon = variant === 'icon';
     const buttonContent = useText(buttonText);
     const [isVisible, setIsVisible] = useState(visible);
@@ -71,7 +72,9 @@
       size,
       tabindex: isDev && -1,
       href:
-        linkType === 'external' && hasExternalLink ? linkToExternal : undefined,
+        linkType === 'external' && hasExternalLink
+          ? linkToExternalVariable
+          : undefined,
       component: linkType === 'internal' && hasLink ? B.Link : undefined,
       endpoint: linkType === 'internal' && hasLink ? linkTo : undefined,
     };
