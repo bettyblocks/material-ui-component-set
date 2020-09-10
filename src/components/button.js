@@ -37,7 +37,7 @@
     const hideButton = () => setIsVisible(false);
     const showButton = () => setIsVisible(true);
     const [isLoading, setIsLoading] = useState(false);
-    const toggleVisibility = () => setIsVisible((s) => !s);
+    const toggleVisibility = () => setIsVisible(s => !s);
 
     const [actionCallback, { loading }] = (isAction &&
       useAction(actionId, {
@@ -49,7 +49,7 @@
         },
       })) || [() => {}, { loading: false }];
 
-    const toggleLoading = () => setIsLoading((l) => !l);
+    const toggleLoading = () => setIsLoading(l => !l);
 
     useEffect(() => {
       setIsVisible(visible);
@@ -135,7 +135,7 @@
     }
     return isVisible ? ButtonComponent : <></>;
   })(),
-  styles: (B) => (t) => {
+  styles: B => t => {
     const style = new B.Styling(t);
     const getSpacing = (idx, device = 'Mobile') =>
       idx === '0' ? '0rem' : style.getSpacing(idx, device);
