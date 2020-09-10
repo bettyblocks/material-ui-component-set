@@ -28,6 +28,7 @@
     const isAction = linkType === 'action';
     const hasLink = linkTo && linkTo.id !== '';
     const hasExternalLink = linkToExternal && linkToExternal.id !== '';
+    const linkToExternalVariable = useText(linkToExternal);
     const isIcon = variant === 'icon';
     const buttonContent = useText(buttonText);
 
@@ -36,7 +37,7 @@
     const hideButton = () => setIsVisible(false);
     const showButton = () => setIsVisible(true);
     const [isLoading, setIsLoading] = useState(false);
-    const toggleVisibility = () => setIsVisible(s => !s);
+    const toggleVisibility = () => setIsVisible((s) => !s);
 
     const [actionCallback, { loading }] = (isAction &&
       useAction(actionId, {
@@ -48,7 +49,7 @@
         },
       })) || [() => {}, { loading: false }];
 
-    const toggleLoading = () => setIsLoading(l => !l);
+    const toggleLoading = () => setIsLoading((l) => !l);
 
     useEffect(() => {
       setIsVisible(visible);
@@ -72,7 +73,9 @@
       size,
       tabindex: isDev && -1,
       href:
-        linkType === 'external' && hasExternalLink ? linkToExternal : undefined,
+        linkType === 'external' && hasExternalLink
+          ? linkToExternalVariable
+          : undefined,
       component: linkType === 'internal' && hasLink ? B.Link : undefined,
       endpoint: linkType === 'internal' && hasLink ? linkTo : undefined,
     };
@@ -132,7 +135,7 @@
     }
     return isVisible ? ButtonComponent : <></>;
   })(),
-  styles: B => t => {
+  styles: (B) => (t) => {
     const style = new B.Styling(t);
     const getSpacing = (idx, device = 'Mobile') =>
       idx === '0' ? '0rem' : style.getSpacing(idx, device);
