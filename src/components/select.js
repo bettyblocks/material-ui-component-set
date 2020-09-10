@@ -112,7 +112,7 @@
     }, [isDev, defaultValue]);
 
     const renderOptions = () => {
-      if (kind === 'list') {
+      if (kind === 'list' || kind === 'LIST') {
         return values.map(({ value: v }) => (
           <MenuItem key={v} value={v}>
             {v}
