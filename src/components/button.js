@@ -28,7 +28,7 @@
     const isAction = linkType === 'action';
     const hasLink = linkTo && linkTo.id !== '';
     const hasExternalLink = linkToExternal && linkToExternal.id !== '';
-    const linkToExternalVariable = linkToExternal && useText(linkToExternal) || "";
+    const linkToExternalVariable = (linkToExternal && useText(linkToExternal)) || "";
     const isIcon = variant === 'icon';
     const buttonContent = useText(buttonText);
 
