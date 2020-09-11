@@ -36,8 +36,12 @@
 
     const componentLabel = useText(label);
     const propLabelOverride = useText(propertyLabelOverride);
-    const { label: propertyLabelText, name: propertyName } =
-      getProperty(property) || {};
+    const {
+      label: propertyLabelText,
+      name: propertyName,
+      kind,
+      values: listValues = [],
+    } = getProperty(property) || {};
     const labelProperty = getProperty(labelProp);
     const valueProperty = getProperty(valueProp);
 
@@ -145,11 +149,14 @@
       />
     );
 
-    const checkboxData = (checkboxOptions || '').split('\n');
-
     const renderCheckBoxes = () => {
+      if (kind === 'list' || kind === 'LIST') {
+        return listValues.map(({ value: v }) => renderCheckbox(v, v));
+      }
       if (optionType !== 'data') {
-        return checkboxData.map(opt => renderCheckbox(opt, opt));
+        return (checkboxOptions || '')
+          .split('\n')
+          .map(opt => renderCheckbox(opt, opt));
       }
       if (isDev) return renderCheckbox('Placeholder', false);
       if (loading) return <span>Loading...</span>;
