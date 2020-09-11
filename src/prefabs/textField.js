@@ -49,14 +49,8 @@
         },
         {
           value: '',
-          label: 'Input',
-          key: 'actionInputId',
-          type: 'ACTION_INPUT',
-        },
-        {
-          value: '',
           label: 'Property',
-          key: 'customModelAttribute',
+          key: 'customModelAttributeId',
           type: 'CUSTOM_MODEL_ATTRIBUTE',
           configuration: {
             allowedTypes: ['string'],

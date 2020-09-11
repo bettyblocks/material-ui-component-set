@@ -6,7 +6,7 @@
   jsx: (
     <div>
       {(() => {
-        const { env, Children, useAction, useGetAll } = B;
+        const { env, Children, useAction, useGetAll, getActionInput } = B;
 
         const {
           actionId,
@@ -16,6 +16,7 @@
           formSuccessMessage,
           redirect,
           showError,
+          actionInputId,
         } = options;
 
         const formRef = React.createRef();
@@ -30,6 +31,7 @@
         const history = isDev ? {} : useHistory();
         const [isInvalid, setIsInvalid] = useState(false);
         const location = isDev ? {} : useLocation();
+        const formVariable = getActionInput(actionInputId);
 
         const [callAction, { data, loading, error }] = useAction(actionId, {
           onCompleted({ actionb5 }) {
@@ -100,7 +102,13 @@
             acc[key] = `${acc[key]},${value}`;
             return acc;
           }, {});
-          callAction({ variables: { input: values } });
+          let variables = { variables: { input: values } };
+          if (formVariable && formVariable.name) {
+            variables = {
+              variables: { input: { [formVariable.name]: values } },
+            };
+          }
+          callAction(variables);
         };
 
         const renderContent = () => {

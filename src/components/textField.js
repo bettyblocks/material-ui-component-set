@@ -19,7 +19,6 @@
       fullWidth,
       margin,
       helperText,
-      actionInputId,
       adornment,
       adornmentIcon,
       adornmentPosition,
@@ -34,6 +33,7 @@
       validationTooLong,
       validationTooShort,
       hideLabel,
+      customModelAttributeId,
     } = options;
 
     const {
@@ -48,7 +48,7 @@
     } = window.MaterialUI.Core;
     const { Icons } = window.MaterialUI;
 
-    const { getActionInput, useText, env, getProperty } = B;
+    const { useText, env, getProperty, getCustomModelAttribute } = B;
     const isDev = env === 'dev';
     const [currentValue, setCurrentValue] = useState(useText(defaultValue));
     const [isDisabled, setIsDisabled] = useState(disabled);
@@ -90,7 +90,9 @@
     const propertyLabel = propLabelOverride || propertyLabelText;
     const labelText = property ? propertyLabel : useText(label);
 
-    const actionInput = getActionInput(actionInputId);
+    const customModelAttribute = getCustomModelAttribute(
+      customModelAttributeId,
+    );
 
     const handleValidation = validation => {
       setErrorState(!validation.valid);
@@ -196,7 +198,7 @@
           <InputLabel classes={{ root: classes.label }}>{labelText}</InputLabel>
         )}
         <InputCmp
-          name={actionInput && actionInput.name}
+          name={customModelAttribute && customModelAttribute.name}
           value={currentValue}
           type={(isDev && type === 'number') || showPassword ? 'text' : type}
           multiline={multiline}
