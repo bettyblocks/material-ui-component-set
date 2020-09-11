@@ -33,7 +33,8 @@
 
     const { useGetAll, getProperty, useText, getActionInput } = B;
 
-    const { label: propertyLabelText } = getProperty(property) || {};
+    const { label: propertyLabelText, kind, values: listValues } =
+      getProperty(property) || {};
     const propLabelOverride = useText(propertyLabelOverride);
     const propertyLabel = propLabelOverride || propertyLabelText;
     const labelText = property ? propertyLabel : useText(label);
@@ -106,6 +107,9 @@
     const radioData = (radioOptions || '').split('\n');
 
     const renderRadios = () => {
+      if (kind === 'list' || kind === 'LIST') {
+        return listValues.map(({ value: v }) => renderRadio(v, v));
+      }
       if (optionType !== 'data') {
         radioValues = radioData.map(option => option);
         return radioData.map(option => renderRadio(option, option));
