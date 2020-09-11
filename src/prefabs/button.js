@@ -66,10 +66,10 @@
           },
         },
         {
-          value: '',
+          value: [''],
           label: 'URL',
           key: 'linkToExternal',
-          type: 'TEXT',
+          type: 'VARIABLE',
           configuration: {
             placeholder: 'Starts with https:// or http://',
             condition: {
