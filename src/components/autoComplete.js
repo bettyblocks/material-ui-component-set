@@ -50,7 +50,8 @@
     const placeholderText = useText(placeholder);
     const helper = useText(helperText);
 
-    const { label: propertyLabelText } = getProperty(property) || {};
+    const { label: propertyLabelText, kind, values: listValues } =
+      getProperty(property) || {};
     const propLabelOverride = useText(propertyLabelOverride);
     const propertyLabel = propLabelOverride || propertyLabelText;
     const labelText = property ? propertyLabel : useText(label);
@@ -217,7 +218,62 @@
       </>
     );
 
-    if (isDev || !model) {
+    if (isDev) {
+      return (
+        <div className={classes.root}>
+          <TextField
+            {...textFieldProps}
+            value={multiple ? '' : currentValue}
+            InputProps={inputProps}
+          />
+        </div>
+      );
+    }
+
+    if (kind === 'list' || kind === 'LIST') {
+      const onPropertyListChange = (_, newValue) => {
+        setCurrentValue(newValue);
+        B.triggerEvent('OnChange');
+      };
+
+      const selectValues =
+        listValues
+          .map(({ value }) => value)
+          .filter(e => e.startsWith(searchParam)) || [];
+
+      return (
+        <Autocomplete
+          id="combo-box-demo"
+          options={selectValues}
+          value={currentValue}
+          PopoverProps={{
+            classes: {
+              root: classes.popover,
+            },
+          }}
+          onInputChange={(_, inputValue) => {
+            setSearchParam(inputValue);
+          }}
+          onChange={onPropertyListChange}
+          getOptionLabel={option => option}
+          renderInput={params => (
+            <TextField
+              {...params}
+              {...textFieldProps}
+              name={actionInput && actionInput.name}
+              key={currentValue ? 'hasValue' : 'isEmpty'}
+              required={required && !currentValue}
+              InputProps={{
+                ...params.InputProps,
+                endAdornment: params.InputProps.endAdornment,
+              }}
+            />
+          )}
+        />
+      );
+    }
+
+    if (!model) {
       return (
         <div className={classes.root}>
           <TextField

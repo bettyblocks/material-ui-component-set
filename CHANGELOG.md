@@ -1,3 +1,14 @@
+## [1.32.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.32.2...v1.32.3) (2020-09-11)
+
+
+### Bug Fixes
+
+* add show property list values for checkbox and radio component ([6c4a61b](https://github.com/bettyblocks/material-ui-component-set/commit/6c4a61ba1f919ebe81982d5dbc5ba66a591b6b65))
+* remove override behaviour on select component list property values ([7183e6f](https://github.com/bettyblocks/material-ui-component-set/commit/7183e6faecd444fc340c22c17679b9ff07d0237f))
+* resolve lint errors ([a0a56b9](https://github.com/bettyblocks/material-ui-component-set/commit/a0a56b94e9ec07aa0fe189092030894270d53666))
+* show list property values in the dropdown when a listproperty is selected ([b0ea904](https://github.com/bettyblocks/material-ui-component-set/commit/b0ea90412c8853331d324f289bcc35d0e9b34458))
+* show list property values on autocomplete component ([3537863](https://github.com/bettyblocks/material-ui-component-set/commit/3537863bb3d87851058794198ee77df5080da078))
+
 ## [1.32.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.32.1...v1.32.2) (2020-09-09)
 
 
