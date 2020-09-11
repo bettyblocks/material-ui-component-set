@@ -131,13 +131,14 @@
               label: 'Input',
               key: 'actionInputId',
               type: 'ACTION_INPUT',
+            },
+            {
+              value: '',
+              label: 'Property',
+              key: 'customModelAttribute',
+              type: 'CUSTOM_MODEL_ATTRIBUTE',
               configuration: {
-                condition: {
-                  type: 'SHOW',
-                  option: 'property',
-                  comparator: 'EQ',
-                  value: '',
-                },
+                allowedTypes: ['string'],
               },
             },
             {
@@ -257,20 +258,6 @@
                   comparator: 'EQ',
                   value: true,
                 },
-              },
-            },
-            {
-              value: 'built-in',
-              label: 'Error message',
-              key: 'showError',
-              type: 'CUSTOM',
-              configuration: {
-                as: 'BUTTONGROUP',
-                dataType: 'string',
-                allowedInput: [
-                  { name: 'Built in', value: 'built-in' },
-                  { name: 'Interaction', value: 'interaction' },
-                ],
               },
             },
             {
