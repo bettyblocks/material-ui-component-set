@@ -116,6 +116,7 @@
     };
 
     const handleChange = evt => {
+      B.triggerEvent('onChange', evt);
       const { checked, value } = evt.target;
 
       if (afterFirstInvalidation) {
