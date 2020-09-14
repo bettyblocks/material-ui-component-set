@@ -134,6 +134,7 @@
     };
 
     const handleChange = evt => {
+      B.triggerEvent('onChange', evt);
       if (afterFirstInvalidation) {
         handleValidation();
       }
