@@ -36,7 +36,9 @@
     const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
 
-    const { label: propertyLabelText } = getProperty(property) || {};
+    const { label: propertyLabelText, kind, values = [] } =
+      getProperty(property) || {};
+
     const propLabelOverride = useText(propertyLabelOverride);
     const propertyLabel = propLabelOverride || propertyLabelText;
     const labelText = property ? propertyLabel : useText(label);
@@ -110,6 +112,13 @@
     }, [isDev, defaultValue]);
 
     const renderOptions = () => {
+      if (kind === 'list' || kind === 'LIST') {
+        return values.map(({ value: v }) => (
+          <MenuItem key={v} value={v}>
+            {v}
+          </MenuItem>
+        ));
+      }
       if (optionType !== 'data') {
         return selectOptions.split('\n').map(option => (
           <MenuItem key={option} value={option}>

@@ -63,12 +63,16 @@
       variant,
       elevation: variant === 'flat' ? 0 : elevation,
       expanded,
+    };
+
+    const panelSummaryOptions = {
       onClick,
+      expandIcon: <ExpandMore />,
     };
 
     const ExpansionPanelComponent = (
       <ExpansionPanel {...panelOptions}>
-        <ExpansionPanelSummary expandIcon={<ExpandMore />}>
+        <ExpansionPanelSummary {...panelSummaryOptions}>
           <Typography>{useText(title)}</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
