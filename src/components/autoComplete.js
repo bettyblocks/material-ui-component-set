@@ -110,9 +110,23 @@
         startAdornment: <Chip label={currentValue} onDelete={() => {}} />,
       };
     }
+    const useCustomFilter = currentValue !== '' && !multiple;
+    const customFilter = {
+      rawFilter: {
+        [valueProp.name]: { eq: currentValue },
+      },
+    };
+
+    const [useFilter, setUseFilter] = useState(
+      useCustomFilter ? customFilter : filter,
+    );
+
+    const resetFilter = () => {
+      setUseFilter({ filter });
+    };
 
     const { loading, error: err, data, refetch } =
-      model && useGetAll(model, { filter, skip: 0, take: 50 });
+      model && useGetAll(model, { ...useFilter, skip: 0, take: 50 });
 
     useEffect(() => {
       if (isDev) {
@@ -159,6 +173,9 @@
     }
 
     const onChange = (_, newValue) => {
+      if (newValue === null) {
+        resetFilter();
+      }
       if (!valueProp || !newValue) {
         setCurrentValue(newValue);
         B.triggerEvent('OnChange');
