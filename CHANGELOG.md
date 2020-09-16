@@ -1,3 +1,10 @@
+## [1.32.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.32.3...v1.32.4) (2020-09-16)
+
+
+### Bug Fixes
+
+* add apiVersion to v1 for search and sort property options ([e3b5522](https://github.com/bettyblocks/material-ui-component-set/commit/e3b55220d33db2e410d6e22da0e2b5684c6f6f04))
+
 ## [1.32.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.32.2...v1.32.3) (2020-09-11)
 
 
