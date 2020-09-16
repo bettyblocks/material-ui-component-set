@@ -131,14 +131,10 @@
       model && useGetAll(model, { ...useFilter, skip: 0, take: 50 });
 
     useEffect(() => {
-      if (!isDev) {
-        if (multiple && data) {
-          resetFilter();
-        } else if (!currentValue) {
-          resetFilter();
-        }
+      if (!isDev && data) {
+        resetFilter();
       }
-    }, [data, currentValue]);
+    }, [data]);
 
     useEffect(() => {
       if (isDev) {
