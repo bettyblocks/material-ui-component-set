@@ -28,6 +28,7 @@
           type: 'PROPERTY',
           configuration: {
             dependsOn: 'model',
+            apiVersion: 'v1',
           },
         },
         {
@@ -37,6 +38,7 @@
           value: '',
           configuration: {
             dependsOn: 'model',
+            apiVersion: 'v1',
           },
         },
         {
