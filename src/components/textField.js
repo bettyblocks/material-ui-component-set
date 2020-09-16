@@ -5,7 +5,6 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const {
-      label,
       defaultValue,
       required,
       disabled,
@@ -22,8 +21,6 @@
       adornment,
       adornmentIcon,
       adornmentPosition,
-      property,
-      propertyLabelOverride,
       pattern,
       minlength,
       maxlength,
@@ -33,7 +30,7 @@
       validationTooLong,
       validationTooShort,
       hideLabel,
-      customModelAttributeId,
+      customModelAttribute: customModelAttributeObj,
     } = options;
 
     const {
@@ -48,7 +45,7 @@
     } = window.MaterialUI.Core;
     const { Icons } = window.MaterialUI;
 
-    const { useText, env, getProperty, getCustomModelAttribute } = B;
+    const { useText, env, getCustomModelAttribute } = B;
     const isDev = env === 'dev';
     const [currentValue, setCurrentValue] = useState(useText(defaultValue));
     const [isDisabled, setIsDisabled] = useState(disabled);
@@ -56,6 +53,7 @@
     const [errorState, setErrorState] = useState(error);
     const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
+    const { id: customModelAttributeId, label } = customModelAttributeObj;
 
     const validPattern = pattern || null;
     const validMinlength = minlength || null;
@@ -85,10 +83,7 @@
 
     const placeholderText = useText(placeholder);
 
-    const { label: propertyLabelText } = getProperty(property) || {};
-    const propLabelOverride = useText(propertyLabelOverride);
-    const propertyLabel = propLabelOverride || propertyLabelText;
-    const labelText = property ? propertyLabel : useText(label);
+    const labelText = useText(label);
 
     const customModelAttribute = getCustomModelAttribute(
       customModelAttributeId,
