@@ -111,20 +111,11 @@
       };
     }
 
-    function makeInt(string) {
-      return parseInt(string, 10);
-    }
-
-    const intValueArray = currentValue
-      ? currentValue
-          .toString()
-          .split(',')
-          .map(item => makeInt(item))
-      : [];
+    const valueArray = currentValue ? currentValue.toString().split(',') : [];
 
     const rawFilter = {
       rawFilter: {
-        [valueProp.name]: { in: intValueArray },
+        [valueProp.name]: { in: valueArray },
       },
     };
 
