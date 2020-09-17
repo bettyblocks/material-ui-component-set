@@ -47,6 +47,7 @@
 
     const { useText, env, getCustomModelAttribute } = B;
     const isDev = env === 'dev';
+    const isNumberType = type === 'number';
     const [currentValue, setCurrentValue] = useState(useText(defaultValue));
     const [isDisabled, setIsDisabled] = useState(disabled);
     const [showPassword, togglePassword] = useState(false);
@@ -96,7 +97,7 @@
     };
 
     const onKeyDown = event => {
-      if (type === 'number' && (event.key === '.' || event.key === ',')) {
+      if (isNumberType && (event.key === '.' || event.key === ',')) {
         event.preventDefault();
       }
     };
@@ -106,15 +107,19 @@
         target: { value: eventValue, validity },
       } = event;
 
-      if (type === 'number') {
-        eventValue = parseInt(eventValue);
+      let numberValue;
+      if (isNumberType) {
+        numberValue = parseInt(eventValue);
       }
 
       if (afterFirstInvalidation) {
         handleValidation(validity);
       }
-
-      setCurrentValue(eventValue);
+      if (isNumberType) {
+        setCurrentValue(numberValue);
+      } else {
+        setCurrentValue(eventValue);
+      }
     };
 
     const blurHandler = event => {
