@@ -1,6 +1,6 @@
 (() => ({
-  name: 'DateTimePicker',
-  icon: 'DateTimePickerIcon',
+  name: 'TimePicker',
+  icon: 'TimePickerIcon',
   category: 'FORM',
   structure: [
     {
@@ -44,7 +44,7 @@
         {
           label: 'Type',
           key: 'type',
-          value: 'datetime',
+          value: 'time',
           type: 'CUSTOM',
           configuration: {
             condition: {
@@ -68,19 +68,10 @@
           type: 'VARIABLE',
         },
         {
-          value: 'MM/dd/yyyy HH:mm:ss',
+          value: 'HH:mm:ss',
           label: 'Format',
-          key: 'dateTimeFormat',
+          key: 'timeFormat',
           type: 'TEXT',
-          configuration: {
-            placeholder: 'MM/dd/yyyy HH:mm:ss',
-            condition: {
-              type: 'SHOW',
-              option: 'type',
-              comparator: 'EQ',
-              value: 'datetime',
-            },
-          },
         },
         {
           value: '',
