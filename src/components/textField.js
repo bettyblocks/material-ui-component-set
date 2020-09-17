@@ -109,7 +109,7 @@
 
       let numberValue;
       if (isNumberType) {
-        numberValue = parseInt(eventValue);
+        numberValue = parseInt(eventValue, 10);
       }
 
       if (afterFirstInvalidation) {
