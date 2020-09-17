@@ -115,11 +115,7 @@
       if (afterFirstInvalidation) {
         handleValidation(validity);
       }
-      if (isNumberType) {
-        setCurrentValue(numberValue);
-      } else {
-        setCurrentValue(eventValue);
-      }
+      setCurrentValue(isNumberType ? numberValue : eventValue);
     };
 
     const blurHandler = event => {
