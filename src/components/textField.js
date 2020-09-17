@@ -95,10 +95,20 @@
       setHelper(message);
     };
 
+    const onKeyDown = event => {
+      if (type === 'number' && (event.key === '.' || event.key === ',')) {
+        event.preventDefault();
+      }
+    };
+
     const changeHandler = event => {
       const {
         target: { value: eventValue, validity },
       } = event;
+
+      if (type === 'number') {
+        eventValue = parseInt(eventValue);
+      }
 
       if (afterFirstInvalidation) {
         handleValidation(validity);
@@ -200,6 +210,7 @@
           rows={rows}
           label={labelText}
           placeholder={placeholderText}
+          onKeyDown={onKeyDown}
           onChange={changeHandler}
           onBlur={blurHandler}
           onInvalid={invalidHandler}
