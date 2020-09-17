@@ -1,5 +1,5 @@
 (() => ({
-  name: 'NumberInput',
+  name: 'DecimalInput',
   icon: 'NumberInputIcon',
   category: 'FORM',
   structure: [
@@ -12,22 +12,7 @@
           key: 'customModelAttribute',
           type: 'CUSTOM_MODEL_ATTRIBUTE',
           configuration: {
-            allowedTypes: ['integer'],
-          },
-        },
-        {
-          value: [],
-          label: 'Label',
-          key: 'propertyLabelOverride',
-          type: 'VARIABLE',
-          configuration: {
-            placeholder: 'Label of property',
-            condition: {
-              type: 'HIDE',
-              option: 'property',
-              comparator: 'EQ',
-              value: '',
-            },
+            allowedTypes: ['decimal'],
           },
         },
         {
@@ -252,7 +237,7 @@
         {
           label: 'Type',
           key: 'type',
-          value: 'number',
+          value: 'decimal',
           type: 'TEXT',
           configuration: {
             condition: {
