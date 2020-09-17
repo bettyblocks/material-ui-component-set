@@ -8,6 +8,7 @@
       Children,
       env,
       getProperty,
+      GetMe,
       useText,
       ModelProvider,
       useEndpoint,
@@ -33,6 +34,7 @@
       take,
       size,
       model,
+      authProfile,
       filter,
       searchProperty,
       hideSearch,
@@ -58,7 +60,7 @@
     const [searchTerm, setSearchTerm] = useState('');
     const searchPropertyArray = [searchProperty].flat();
     const { label: searchPropertyLabel = '{property}' } =
-      getProperty(searchPropertyArray[searchPropertyArray.length - 1]) || {};
+      getProperty(searchProperty) || {};
     const [orderBy, setOrderBy] = React.useState({
       field: [orderProperty].flat() || null,
       order: orderProperty ? sortOrder : null,
@@ -287,7 +289,8 @@
           </TableRow>
         ));
       }
-      return results.map(value => (
+
+      const rows = results.map(value => (
         <ModelProvider value={value} id={model}>
           <TableRow
             key={value[0]}
@@ -299,6 +302,12 @@
           </TableRow>
         </ModelProvider>
       ));
+
+      if (authProfile) {
+        return <GetMe authenticationProfileId={authProfile}>{rows}</GetMe>;
+      }
+
+      return rows;
     };
 
     const renderTableContent = () => {
