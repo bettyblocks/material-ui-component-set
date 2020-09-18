@@ -9,7 +9,13 @@
         const isEmpty = children.length === 0;
         const isDev = B.env === 'dev';
         const isPristine = isEmpty && isDev;
-        const { filter, model, redirectWithoutResult, showError } = options;
+        const {
+          filter,
+          model,
+          authProfile,
+          redirectWithoutResult,
+          showError,
+        } = options;
         const displayError = showError === 'built-in';
 
         const builderLayout = () => (
@@ -66,7 +72,19 @@
           );
         };
 
-        return isDev ? builderLayout() : canvasLayout();
+        if (isDev) {
+          return builderLayout();
+        }
+
+        if (authProfile) {
+          return (
+            <B.GetMe authenticationProfileId={authProfile}>
+              {canvasLayout()}
+            </B.GetMe>
+          );
+        }
+
+        return canvasLayout();
       })()}
     </div>
   ),
