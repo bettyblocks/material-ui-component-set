@@ -7,38 +7,12 @@
       name: 'DateTimePicker',
       options: [
         {
-          value: '',
-          label: 'Property',
-          key: 'property',
-          type: 'PROPERTY',
-        },
-        {
-          value: ['Label'],
+          value: { label: ['Label'] },
           label: 'Label',
-          key: 'label',
-          type: 'VARIABLE',
+          key: 'customModelAttribute',
+          type: 'CUSTOM_MODEL_ATTRIBUTE',
           configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'property',
-              comparator: 'EQ',
-              value: '',
-            },
-          },
-        },
-        {
-          value: [],
-          label: 'Label',
-          key: 'propertyLabelOverride',
-          type: 'VARIABLE',
-          configuration: {
-            placeholder: 'Label of property',
-            condition: {
-              type: 'HIDE',
-              option: 'property',
-              comparator: 'EQ',
-              value: '',
-            },
+            allowedTypes: ['string'],
           },
         },
         {
@@ -72,12 +46,6 @@
           label: 'Format',
           key: 'timeFormat',
           type: 'TEXT',
-        },
-        {
-          value: '',
-          label: 'Input',
-          key: 'actionInputId',
-          type: 'ACTION_INPUT',
         },
         {
           value: false,
