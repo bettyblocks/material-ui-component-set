@@ -4,12 +4,20 @@
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { defaultValue, required, disabled, actionInputId } = options;
+    const {
+      defaultValue,
+      required,
+      disabled,
+      customModelAttribute: customModelAttributeObj,
+    } = options;
 
-    const { getActionInput, useText, env } = B;
+    const { getCustomModelAttribute, useText, env } = B;
     const isDev = env === 'dev';
     const [currentValue, setCurrentValue] = useState(useText(defaultValue));
-    const actionInput = getActionInput(actionInputId);
+    const { id: customModelAttributeId } = customModelAttributeObj;
+    const customModelAttribute = getCustomModelAttribute(
+      customModelAttributeId,
+    );
 
     useEffect(() => {
       if (isDev) {
@@ -21,7 +29,7 @@
       <input
         className={isDev && classes.pristine}
         type={isDev ? 'text' : 'hidden'}
-        name={actionInput && actionInput.name}
+        name={customModelAttribute && customModelAttribute.name}
         value={isDev ? currentValue || '{{ hidden input }}' : currentValue}
         required={required}
         disabled={disabled}

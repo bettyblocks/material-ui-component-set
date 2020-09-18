@@ -5,7 +5,6 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const {
-      label,
       defaultValue,
       required,
       disabled,
@@ -21,11 +20,11 @@
       fullWidth,
       margin,
       helperText,
-      actionInputId,
       disableToolbar,
+      hideLabel,
+      customModelAttribute: customModelAttributeObj,
       property,
       propertyLabelOverride,
-      hideLabel,
     } = options;
 
     const {
@@ -35,17 +34,22 @@
       KeyboardDateTimePicker,
     } = window.MaterialUI.Pickers;
     const { DateFnsUtils } = window.MaterialUI;
-    const { getActionInput, useText, getProperty, env } = B;
+    const { useText, getProperty, env, getCustomModelAttribute } = B;
     const isDev = env === 'dev';
-    const actionInput = getActionInput(actionInputId);
     const strDefaultValue = useText(defaultValue);
     const [selectedDate, setSelectedDate] = useState(strDefaultValue);
     const helper = useText(helperText);
     const placeholderText = useText(placeholder);
+
+    const { id: customModelAttributeId, label } = customModelAttributeObj;
     const { label: propertyLabelText } = getProperty(property) || {};
     const propLabelOverride = useText(propertyLabelOverride);
     const propertyLabel = propLabelOverride || propertyLabelText;
     const labelText = property ? propertyLabel : useText(label);
+
+    const customModelAttribute = getCustomModelAttribute(
+      customModelAttributeId,
+    );
 
     const isValidDate = date => date instanceof Date && !isNaN(date);
 
@@ -98,7 +102,7 @@
 
     const DateTimeCmp = (
       <DateTimeComponent
-        name={actionInput && actionInput.name}
+        name={customModelAttribute && customModelAttribute.name}
         value={isDev ? devValue : prodValue}
         size={size}
         classes={{ root: classes.formControl }}
@@ -109,7 +113,7 @@
         inputVariant={inputvariant}
         InputProps={{
           inputProps: {
-            name: actionInput && actionInput.name,
+            name: customModelAttribute && customModelAttribute.name,
             tabIndex: isDev && -1,
           },
         }}

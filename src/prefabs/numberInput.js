@@ -7,12 +7,24 @@
       name: 'TextField',
       options: [
         {
+          value: '',
+          label: 'Property',
+          key: 'property',
+          type: 'PROPERTY',
+        },
+        {
           value: { label: ['Number'] },
           label: 'Label',
           key: 'customModelAttribute',
           type: 'CUSTOM_MODEL_ATTRIBUTE',
           configuration: {
             allowedTypes: ['integer'],
+            condition: {
+              type: 'SHOW',
+              option: 'property',
+              comparator: 'EQ',
+              value: '',
+            },
           },
         },
         {

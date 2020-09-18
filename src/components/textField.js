@@ -31,6 +31,8 @@
       validationTooShort,
       hideLabel,
       customModelAttribute: customModelAttributeObj,
+      property,
+      propertyLabelOverride,
     } = options;
 
     const {
@@ -45,7 +47,7 @@
     } = window.MaterialUI.Core;
     const { Icons } = window.MaterialUI;
 
-    const { useText, env, getCustomModelAttribute } = B;
+    const { useText, env, getCustomModelAttribute, getProperty } = B;
     const isDev = env === 'dev';
     const isNumberType = type === 'number';
     const [currentValue, setCurrentValue] = useState(useText(defaultValue));
@@ -55,6 +57,10 @@
     const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
     const { id: customModelAttributeId, label } = customModelAttributeObj;
+    const { label: propertyLabelText } = getProperty(property) || {};
+    const propLabelOverride = useText(propertyLabelOverride);
+    const propertyLabel = propLabelOverride || propertyLabelText;
+    const labelText = property ? propertyLabel : useText(label);
 
     const validPattern = pattern || null;
     const validMinlength = minlength || null;
@@ -83,8 +89,6 @@
     };
 
     const placeholderText = useText(placeholder);
-
-    const labelText = useText(label);
 
     const customModelAttribute = getCustomModelAttribute(
       customModelAttributeId,

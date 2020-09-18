@@ -5,7 +5,6 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const {
-      label,
       disabled,
       defaultValue,
       error,
@@ -13,24 +12,26 @@
       position,
       size,
       helperText,
-      actionInputId,
+      customModelAttribute: customModelAttributeObj,
       property,
       propertyLabelOverride,
     } = options;
-    const { useText, getActionInput, getProperty } = B;
+    const { useText, getCustomModelAttribute, getProperty } = B;
     const isDev = B.env === 'dev';
-    const actionInput = getActionInput(actionInputId);
 
-    const componentLabel = useText(label);
     const componentChecked = useText(defaultValue);
     const componentHelperText = useText(helperText);
-    const propLabelOverride = useText(propertyLabelOverride);
-    const { label: propertyLabelText } = getProperty(property) || {};
     const [checked, setChecked] = useState(componentChecked === 'true');
 
+    const { id: customModelAttributeId, label } = customModelAttributeObj;
+    const { label: propertyLabelText } = getProperty(property) || {};
+    const propLabelOverride = useText(propertyLabelOverride);
     const propertyLabel = propLabelOverride || propertyLabelText;
-    const labelText = property ? propertyLabel : componentLabel;
+    const labelText = property ? propertyLabel : useText(label);
 
+    const customModelAttribute = getCustomModelAttribute(
+      customModelAttributeId,
+    );
     const {
       Checkbox: MUICheckbox,
       FormControlLabel,
@@ -52,7 +53,7 @@
       <MUICheckbox
         checked={checked}
         onChange={handleChange}
-        name={actionInput && actionInput.name}
+        name={customModelAttribute && customModelAttribute.name}
         disabled={disabled}
         size={size}
         tabIndex={isDev && -1}

@@ -5,7 +5,6 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const {
-      label,
       required,
       disabled,
       defaultValue,
@@ -16,23 +15,24 @@
       optionType,
       labelProp,
       valueProp,
-      actionInputId,
       size,
       position,
       margin,
       error,
       filter,
-      property,
-      propertyLabelOverride,
       fullWidth,
       showError,
       hideLabel,
+      customModelAttribute: customModelAttributeObj,
+      property,
+      propertyLabelOverride,
     } = options;
     const isDev = B.env === 'dev';
     const displayError = showError === 'built-in';
 
-    const { useGetAll, getProperty, useText, getActionInput } = B;
+    const { useGetAll, getProperty, useText, getCustomModelAttribute } = B;
 
+    const { id: customModelAttributeId, label } = customModelAttributeObj;
     const { label: propertyLabelText } = getProperty(property) || {};
     const propLabelOverride = useText(propertyLabelOverride);
     const propertyLabel = propLabelOverride || propertyLabelText;
@@ -40,7 +40,9 @@
 
     const labelProperty = getProperty(labelProp);
     const valueProperty = getProperty(valueProp);
-    const actionInput = getActionInput(actionInputId);
+    const customModelAttribute = getCustomModelAttribute(
+      customModelAttributeId,
+    );
 
     let componentValue = useText(defaultValue);
     const componentHelperText = useText(helperText);
@@ -133,7 +135,7 @@
         <RadioGroup
           row={row}
           value={value}
-          name={actionInput && actionInput.name}
+          name={customModelAttribute && customModelAttribute.name}
           onChange={handleChange}
           aria-label={labelText}
         >

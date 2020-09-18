@@ -5,7 +5,6 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const {
-      label,
       required,
       disabled,
       defaultValue,
@@ -21,25 +20,28 @@
       optionType,
       labelProperty: labelProp,
       valueProperty: valueProp,
-      actionInputId,
-      property,
-      propertyLabelOverride,
       showError,
       hideLabel,
+      customModelAttribute: customModelAttributeObj,
+      property,
+      propertyLabelOverride,
     } = options;
     const { TextField, MenuItem } = window.MaterialUI.Core;
     const displayError = showError === 'built-in';
     const isDev = B.env === 'dev';
-    const { useGetAll, getProperty, getActionInput, useText } = B;
+    const { useGetAll, getProperty, useText, getCustomModelAttribute } = B;
     const [currentValue, setCurrentValue] = useState(useText(defaultValue));
     const helper = useText(helperText);
 
+    const { id: customModelAttributeId, label } = customModelAttributeObj;
     const { label: propertyLabelText } = getProperty(property) || {};
     const propLabelOverride = useText(propertyLabelOverride);
     const propertyLabel = propLabelOverride || propertyLabelText;
     const labelText = property ? propertyLabel : useText(label);
 
-    const actionInput = getActionInput(actionInputId);
+    const customModelAttribute = getCustomModelAttribute(
+      customModelAttributeId,
+    );
     const value = currentValue;
 
     const { name: labelName } = getProperty(labelProp) || {};
@@ -116,7 +118,7 @@
         fullWidth={fullWidth}
         onChange={handleChange}
         inputProps={{
-          name: actionInput && actionInput.name,
+          name: customModelAttribute && customModelAttribute.name,
           tabIndex: isDev ? -1 : 0,
         }}
         required={required}

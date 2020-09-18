@@ -5,7 +5,6 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const {
-      label,
       defaultValue,
       required,
       disabled,
@@ -17,18 +16,18 @@
       fullWidth,
       margin,
       helperText,
-      actionInputId,
       model,
       multiple,
       freeSolo,
       searchProperty,
       valueProperty,
-      property,
-      propertyLabelOverride,
       closeOnSelect,
       renderCheckboxes,
       showError,
       hideLabel,
+      customModelAttribute: customModelAttributeObj,
+      property,
+      propertyLabelOverride,
     } = options;
     const { Autocomplete } = window.MaterialUI.Lab;
     const {
@@ -43,13 +42,14 @@
       CheckBox,
       CheckBoxOutlineBlank,
     } = window.MaterialUI.Icons;
-    const { useText, getProperty, getActionInput, useGetAll, env } = B;
+    const { useText, getProperty, getCustomModelAttribute, useGetAll, env } = B;
     const isDev = env === 'dev';
     const displayError = showError === 'built-in';
     const [currentValue, setCurrentValue] = useState(useText(defaultValue));
     const placeholderText = useText(placeholder);
     const helper = useText(helperText);
 
+    const { id: customModelAttributeId, label } = customModelAttributeObj;
     const { label: propertyLabelText } = getProperty(property) || {};
     const propLabelOverride = useText(propertyLabelOverride);
     const propertyLabel = propLabelOverride || propertyLabelText;
@@ -70,7 +70,9 @@
       classes: { root: classes.formControl },
     };
 
-    const actionInput = getActionInput(actionInputId);
+    const customModelAttribute = getCustomModelAttribute(
+      customModelAttributeId,
+    );
     const searchProp = getProperty(searchProperty) || {};
     const valueProp = getProperty(valueProperty) || {};
     const [searchParam, setSearchParam] = useState('');
@@ -261,7 +263,7 @@
             <input
               type="hidden"
               key={currentValue ? 'hasValue' : 'isEmpty'}
-              name={actionInput && actionInput.name}
+              name={customModelAttribute && customModelAttribute.name}
               value={currentValue}
             />
             <TextField
