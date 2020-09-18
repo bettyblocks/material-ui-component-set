@@ -1,6 +1,6 @@
 (() => ({
   name: 'CheckboxGroup',
-  icon: 'CheckboxIcon',
+  icon: 'CheckboxGroupIcon',
   category: 'FORM',
   structure: [
     {
