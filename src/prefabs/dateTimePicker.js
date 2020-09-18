@@ -46,11 +46,11 @@
           label: 'Type',
           key: 'type',
           value: 'datetime',
-          type: 'CUSTOM',
+          type: 'TEXT',
           configuration: {
             condition: {
               type: 'SHOW',
-              option: 'label',
+              option: 'customModelAttribute',
               comparator: 'EQ',
               value: false,
             },
