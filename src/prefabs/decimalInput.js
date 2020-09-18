@@ -7,7 +7,7 @@
       name: 'TextField',
       options: [
         {
-          value: { label: ['Number'] },
+          value: { label: ['Decimal'] },
           label: 'Label',
           key: 'customModelAttribute',
           type: 'CUSTOM_MODEL_ATTRIBUTE',
