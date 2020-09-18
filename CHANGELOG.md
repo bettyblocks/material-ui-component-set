@@ -1,3 +1,12 @@
+## [1.32.5](https://github.com/bettyblocks/material-ui-component-set/compare/v1.32.4...v1.32.5) (2020-09-18)
+
+
+### Bug Fixes
+
+* enable me-data in datacontainer ([c627c53](https://github.com/bettyblocks/material-ui-component-set/commit/c627c53ae86c1cd5dcb3a41e7123bb12d856f31e))
+* enable me-data in datalist ([61e7b90](https://github.com/bettyblocks/material-ui-component-set/commit/61e7b90895df03ca14e8bc25e5584d1203afd3fd))
+* enable me-data in dataTable ([e0b24fb](https://github.com/bettyblocks/material-ui-component-set/commit/e0b24fb57dd73a81616646ce60bcaef041c08b0a))
+
 ## [1.32.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.32.3...v1.32.4) (2020-09-16)
 
 
