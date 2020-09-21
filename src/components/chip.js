@@ -13,14 +13,21 @@
       variant,
       startIcon,
       avatar,
+      imgUrl,
       avatartype,
       size,
     } = options;
     const isDev = env === 'dev';
 
-    const AvatarImage = <Avatar alt="" src={avatar} />;
+    const imgSrc = imgUrl && useText(imgUrl);
+    const AvatarImage = <Avatar alt="" src={imgSrc} />;
     const AvatarText = <Avatar>{avatar}</Avatar>;
-    const AvatarComponent = avatartype === 'text' ? AvatarText : AvatarImage;
+    let AvatarComponent;
+    if (avatartype === 'text') {
+      AvatarComponent = AvatarText;
+    } else if (avatartype === 'image') {
+      AvatarComponent = AvatarImage;
+    }
 
     const ChipComponent = (
       <Chip
@@ -32,11 +39,11 @@
         disabled={disabled}
         variant={variant}
         icon={
-          startIcon !== 'None'
+          avatartype === 'icon' && startIcon !== 'None'
             ? React.createElement(Icons[startIcon])
             : undefined
         }
-        avatar={avatar && AvatarComponent}
+        avatar={AvatarComponent}
         size={size}
       />
     );

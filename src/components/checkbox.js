@@ -7,7 +7,6 @@
     const {
       disabled,
       defaultValue,
-      error,
       required,
       position,
       size,
@@ -15,13 +14,15 @@
       customModelAttribute: customModelAttributeObj,
       property,
       propertyLabelOverride,
+      validationValueMissing,
     } = options;
     const { useText, getCustomModelAttribute, getProperty } = B;
     const isDev = B.env === 'dev';
 
     const componentChecked = useText(defaultValue);
-    const componentHelperText = useText(helperText);
     const [checked, setChecked] = useState(componentChecked === 'true');
+    const [errorState, setErrorState] = useState(false);
+    const [helper, setHelper] = useState(useText(helperText));
 
     const { id: customModelAttributeId, label } = customModelAttributeObj;
     const { label: propertyLabelText } = getProperty(property) || {};
@@ -39,7 +40,17 @@
       FormHelperText,
     } = window.MaterialUI.Core;
 
+    const handleValidation = isChecked => {
+      const valid = (isChecked && required) || !required;
+      setErrorState(!valid);
+      const message = !valid
+        ? useText(validationValueMissing)
+        : useText(helperText);
+      setHelper(message);
+    };
+
     const handleChange = evt => {
+      handleValidation(evt.target.checked);
       setChecked(evt.target.checked);
     };
 
@@ -62,15 +73,13 @@
     );
 
     const Control = (
-      <FormControl required={required} error={error}>
+      <FormControl required={required} error={errorState}>
         <FormControlLabel
           control={Checkbox}
           label={labelText}
           labelPlacement={position}
         />
-        {!!componentHelperText && (
-          <FormHelperText>{componentHelperText}</FormHelperText>
-        )}
+        {!!helper && <FormHelperText>{helper}</FormHelperText>}
       </FormControl>
     );
     return isDev ? <div className={classes.root}>{Control}</div> : Control;

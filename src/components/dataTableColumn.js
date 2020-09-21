@@ -14,11 +14,10 @@
       sortable,
     } = options;
     const { headerOnly, handleSort, orderBy } = parent || {};
-    const propertyId = Array.isArray(property)
-      ? property[property.length - 1]
-      : property;
+    const { type } = property;
+    const propertyArray = [property].flat();
     const { name: propertyName, label: propertyLabel } =
-      getProperty(propertyId) || {};
+      getProperty(property) || {};
     const { field, order = 'asc' } = orderBy || {};
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
@@ -30,7 +29,12 @@
     ) : (
       <Property id={property} />
     );
+
     let columnText = propertyName ? propContent : contentPlaceholder;
+    if (type === 'ME_PROPERTY') {
+      columnText = isDev ? `{{ ${propertyName} }}` : useText([property]);
+    }
+
     if (bodyText) {
       columnText = bodyText;
     }
@@ -48,6 +52,16 @@
       handleSort(prop, sortOrder);
     };
 
+    const isFilterSelected = fields => {
+      if (!fields || fields.length !== propertyArray.length) return false;
+
+      for (let index = 0; index < fields.length; index += 1) {
+        if (fields[index] !== propertyArray[index]) return false;
+      }
+
+      return true;
+    };
+
     const Content =
       children.length > 0 ? (
         children
@@ -58,9 +72,9 @@
     const Header = isSortable ? (
       <TableSortLabel
         classes={{ root: classes.columnSort }}
-        active={field === propertyName}
-        direction={field === propertyName && order ? order : 'asc'}
-        onClick={() => createSortHandler(propertyName)}
+        active={isFilterSelected(field)}
+        direction={isFilterSelected(field) && order ? order : 'asc'}
+        onClick={() => createSortHandler(propertyArray)}
       >
         <span className={classes.columnHeader}>{columnHeaderText}</span>
       </TableSortLabel>

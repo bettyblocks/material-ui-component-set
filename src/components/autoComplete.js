@@ -50,7 +50,8 @@
     const helper = useText(helperText);
 
     const { id: customModelAttributeId, label } = customModelAttributeObj;
-    const { label: propertyLabelText } = getProperty(property) || {};
+    const { label: propertyLabelText, kind, values: listValues } =
+      getProperty(property) || {};
     const propLabelOverride = useText(propertyLabelOverride);
     const propertyLabel = propLabelOverride || propertyLabelText;
     const labelText = property ? propertyLabel : useText(label);
@@ -112,8 +113,30 @@
       };
     }
 
+    const valueArray = currentValue ? currentValue.toString().split(',') : [];
+
+    const rawFilter = {
+      rawFilter: {
+        [valueProp.name]: { in: valueArray },
+      },
+    };
+
+    const [useFilter, setUseFilter] = useState(
+      currentValue ? rawFilter : filter,
+    );
+
+    const resetFilter = () => {
+      setUseFilter({ filter });
+    };
+
     const { loading, error: err, data, refetch } =
-      model && useGetAll(model, { filter, skip: 0, take: 50 });
+      model && useGetAll(model, { ...useFilter, skip: 0, take: 50 });
+
+    useEffect(() => {
+      if (!isDev && data) {
+        resetFilter();
+      }
+    }, [data]);
 
     useEffect(() => {
       if (isDev) {
@@ -138,9 +161,13 @@
       };
     }, [searchParam]);
 
-    if (loading) {
-      B.triggerEvent('onLoad', loading);
-    }
+    const mounted = useRef(true);
+    useEffect(() => {
+      if (!mounted.current && loading) {
+        B.triggerEvent('onLoad', loading);
+      }
+      mounted.current = false;
+    }, [loading]);
 
     if (err && !displayError) {
       B.triggerEvent('onError', err.message);
@@ -161,9 +188,9 @@
         B.triggerEvent('OnChange');
         return;
       }
-      let newCurrentValue = newValue[valueProp.name];
+      let newCurrentValue = newValue[valueProp.name] || newValue;
       if (multiple) {
-        newCurrentValue = newValue.map(rec => rec[valueProp.name]);
+        newCurrentValue = newValue.map(rec => rec[valueProp.name] || rec);
       }
       setCurrentValue(newCurrentValue);
       B.triggerEvent('OnChange');
@@ -195,8 +222,12 @@
       return multiple ? currentRecords : singleRecord;
     };
 
-    const renderLabel = option =>
-      option[searchProp.name] && option[searchProp.name].toString();
+    const renderLabel = option => {
+      const optionLabel = option[searchProp.name];
+      return optionLabel !== undefined && optionLabel === ''
+        ? '-- empty --'
+        : (optionLabel && optionLabel.toString()) || option;
+    };
 
     const renderOption = (option, { selected }) => (
       <>
@@ -211,7 +242,62 @@
       </>
     );
 
-    if (isDev || !model) {
+    if (isDev) {
+      return (
+        <div className={classes.root}>
+          <TextField
+            {...textFieldProps}
+            value={multiple ? '' : currentValue}
+            InputProps={inputProps}
+          />
+        </div>
+      );
+    }
+
+    if (kind === 'list' || kind === 'LIST') {
+      const onPropertyListChange = (_, newValue) => {
+        setCurrentValue(newValue);
+        B.triggerEvent('OnChange');
+      };
+
+      const selectValues =
+        listValues
+          .map(({ value }) => value)
+          .filter(e => e.startsWith(searchParam)) || [];
+
+      return (
+        <Autocomplete
+          id="combo-box-demo"
+          options={selectValues}
+          value={currentValue}
+          PopoverProps={{
+            classes: {
+              root: classes.popover,
+            },
+          }}
+          onInputChange={(_, inputValue) => {
+            setSearchParam(inputValue);
+          }}
+          onChange={onPropertyListChange}
+          getOptionLabel={option => option}
+          renderInput={params => (
+            <TextField
+              {...params}
+              {...textFieldProps}
+              name={actionInput && actionInput.name}
+              key={currentValue ? 'hasValue' : 'isEmpty'}
+              required={required && !currentValue}
+              InputProps={{
+                ...params.InputProps,
+                endAdornment: params.InputProps.endAdornment,
+              }}
+            />
+          )}
+        />
+      );
+    }
+
+    if (!model) {
       return (
         <div className={classes.root}>
           <TextField
@@ -241,8 +327,9 @@
       <Autocomplete
         multiple={multiple}
         freeSolo={freeSolo}
+        autoSelect={freeSolo}
         options={results}
-        value={getDefaultValue(results)}
+        defaultValue={getDefaultValue(results)}
         getOptionLabel={renderLabel}
         PopoverProps={{
           classes: {

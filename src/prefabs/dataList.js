@@ -13,6 +13,12 @@
           type: 'MODEL',
         },
         {
+          value: '',
+          label: 'Authentication Profile',
+          key: 'authProfile',
+          type: 'AUTHENTICATION_PROFILE',
+        },
+        {
           value: {},
           label: 'Filter',
           key: 'filter',
@@ -28,6 +34,37 @@
           type: 'PROPERTY',
           configuration: {
             dependsOn: 'model',
+            apiVersion: 'v1',
+          },
+        },
+        {
+          type: 'PROPERTY',
+          label: 'Order by',
+          key: 'orderBy',
+          value: '',
+          configuration: {
+            dependsOn: 'model',
+            apiVersion: 'v1',
+          },
+        },
+        {
+          type: 'CUSTOM',
+          label: 'Order',
+          key: 'order',
+          value: 'asc',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            condition: {
+              type: 'HIDE',
+              option: 'orderBy',
+              comparator: 'EQ',
+              value: '',
+            },
+            allowedInput: [
+              { name: 'Ascending', value: 'asc' },
+              { name: 'Descending', value: 'desc' },
+            ],
           },
         },
         {
@@ -52,6 +89,10 @@
               {
                 name: 'Grid',
                 value: 'grid',
+              },
+              {
+                name: 'Inline',
+                value: 'inline',
               },
             ],
           },

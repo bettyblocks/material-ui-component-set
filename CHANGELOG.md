@@ -1,3 +1,185 @@
+## [1.32.6](https://github.com/bettyblocks/material-ui-component-set/compare/v1.32.5...v1.32.6) (2020-09-21)
+
+
+### Bug Fixes
+
+* default value works for items above take amount ([ef89cb9](https://github.com/bettyblocks/material-ui-component-set/commit/ef89cb9db1262aca4892b521237fe641f640012e))
+* make default values above take amount work for multiple values ([20811ce](https://github.com/bettyblocks/material-ui-component-set/commit/20811ce61d98663129db0eab9b6e87c3c8d451da))
+* remove conversion to int ([689d80f](https://github.com/bettyblocks/material-ui-component-set/commit/689d80fb663d1cd7d5a646482add06fe07449990))
+* simplify if statement ([811eb90](https://github.com/bettyblocks/material-ui-component-set/commit/811eb904247c2def22b3494639d5ea7c82f82c96))
+
+## [1.32.5](https://github.com/bettyblocks/material-ui-component-set/compare/v1.32.4...v1.32.5) (2020-09-18)
+
+
+### Bug Fixes
+
+* enable me-data in datacontainer ([c627c53](https://github.com/bettyblocks/material-ui-component-set/commit/c627c53ae86c1cd5dcb3a41e7123bb12d856f31e))
+* enable me-data in datalist ([61e7b90](https://github.com/bettyblocks/material-ui-component-set/commit/61e7b90895df03ca14e8bc25e5584d1203afd3fd))
+* enable me-data in dataTable ([e0b24fb](https://github.com/bettyblocks/material-ui-component-set/commit/e0b24fb57dd73a81616646ce60bcaef041c08b0a))
+
+## [1.32.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.32.3...v1.32.4) (2020-09-16)
+
+
+### Bug Fixes
+
+* add apiVersion to v1 for search and sort property options ([e3b5522](https://github.com/bettyblocks/material-ui-component-set/commit/e3b55220d33db2e410d6e22da0e2b5684c6f6f04))
+
+## [1.32.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.32.2...v1.32.3) (2020-09-11)
+
+
+### Bug Fixes
+
+* add show property list values for checkbox and radio component ([6c4a61b](https://github.com/bettyblocks/material-ui-component-set/commit/6c4a61ba1f919ebe81982d5dbc5ba66a591b6b65))
+* remove override behaviour on select component list property values ([7183e6f](https://github.com/bettyblocks/material-ui-component-set/commit/7183e6faecd444fc340c22c17679b9ff07d0237f))
+* resolve lint errors ([a0a56b9](https://github.com/bettyblocks/material-ui-component-set/commit/a0a56b94e9ec07aa0fe189092030894270d53666))
+* show list property values in the dropdown when a listproperty is selected ([b0ea904](https://github.com/bettyblocks/material-ui-component-set/commit/b0ea90412c8853331d324f289bcc35d0e9b34458))
+* show list property values on autocomplete component ([3537863](https://github.com/bettyblocks/material-ui-component-set/commit/3537863bb3d87851058794198ee77df5080da078))
+
+## [1.32.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.32.1...v1.32.2) (2020-09-09)
+
+
+### Bug Fixes
+
+* Enable appBar title to have variables ([d8afb28](https://github.com/bettyblocks/material-ui-component-set/commit/d8afb28b117bb74c671e6e68fbbdb1176d8919a0))
+
+## [1.32.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.32.0...v1.32.1) (2020-09-09)
+
+
+### Bug Fixes
+
+* freesolo option in autocomplete ([3970605](https://github.com/bettyblocks/material-ui-component-set/commit/3970605de73dad6c9524ba1f5a839a301c1fd34c))
+* handle freesolo label ([1e69be4](https://github.com/bettyblocks/material-ui-component-set/commit/1e69be4f4e54f28faf213a4b1aace6b985224613))
+* remove unneeded ternary condition ([989d2f2](https://github.com/bettyblocks/material-ui-component-set/commit/989d2f2b12dd62567fa87fab65f8004fdc3b1b56))
+* remove unneeded ternary condition ([d4ed551](https://github.com/bettyblocks/material-ui-component-set/commit/d4ed551bdd6450709e13dfb17b01ec1d911e56e4))
+* tab to blur on freesolo and handle empty values ([318292b](https://github.com/bettyblocks/material-ui-component-set/commit/318292b6c0745bcdc04bea4f1092d9afd418a510))
+
+# [1.32.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.31.2...v1.32.0) (2020-09-07)
+
+
+### Bug Fixes
+
+* change opacity of repeated datalist item ([327d8ec](https://github.com/bettyblocks/material-ui-component-set/commit/327d8ec550a7d8a9604a686c54a0ac474ba8a147))
+* datalist linter ([885e1ec](https://github.com/bettyblocks/material-ui-component-set/commit/885e1ec2c6b6bbb891ffb504a3c18a52133345f9))
+
+
+### Features
+
+* add inline with datalist ([2dde37b](https://github.com/bettyblocks/material-ui-component-set/commit/2dde37b445e3d576eefe6fdfd2162053517b9188))
+* no footer in datalist if hidePagination ([f25b062](https://github.com/bettyblocks/material-ui-component-set/commit/f25b062134e3bd0c275a0e7808c8d4293f01779a))
+* show repeated content and children ([14b65e6](https://github.com/bettyblocks/material-ui-component-set/commit/14b65e65f89c670511b16180e411fe099ab0c96e))
+
+## [1.31.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.31.1...v1.31.2) (2020-09-04)
+
+
+### Bug Fixes
+
+* remove ModelProvider as child of GetOne helper ([0fc9c71](https://github.com/bettyblocks/material-ui-component-set/commit/0fc9c711e4eed371ab3fe8174af902cae2f7d3ef))
+
+## [1.31.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.31.0...v1.31.1) (2020-08-28)
+
+
+### Bug Fixes
+
+* old version of lodash vulnerability ([999af20](https://github.com/bettyblocks/material-ui-component-set/commit/999af207accf96a71e5af131813baae00c27aac3))
+
+# [1.31.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.30.5...v1.31.0) (2020-08-26)
+
+
+### Features
+
+* add required option to select, checkbox and radiogroup ([ba136fb](https://github.com/bettyblocks/material-ui-component-set/commit/ba136fbe4f1111910b90b7de89600eeef0abb674))
+
+## [1.30.5](https://github.com/bettyblocks/material-ui-component-set/compare/v1.30.4...v1.30.5) (2020-08-26)
+
+
+### Bug Fixes
+
+* list component breaks when data option is set ([2b002f3](https://github.com/bettyblocks/material-ui-component-set/commit/2b002f332ea73c7582491611fee1b020bc5bd4e1))
+
+## [1.30.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.30.3...v1.30.4) (2020-08-24)
+
+
+### Bug Fixes
+
+* make chip component avatar configuration more clear ([c2fca99](https://github.com/bettyblocks/material-ui-component-set/commit/c2fca99f0317a6f62a06af51f8ecd2f229023663))
+
+## [1.30.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.30.2...v1.30.3) (2020-08-10)
+
+
+### Bug Fixes
+
+* form action error message passed ([ed157b2](https://github.com/bettyblocks/material-ui-component-set/commit/ed157b2faff0a7c43c5e43c67af09c0db42dd7f7))
+
+## [1.30.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.30.1...v1.30.2) (2020-08-05)
+
+
+### Bug Fixes
+
+* trigger loading state for button only when it's true ([fc60e4b](https://github.com/bettyblocks/material-ui-component-set/commit/fc60e4b206204c4e91e2ce5aad7ee5c2d0ac32d9))
+* update value in state when option changes ([946b4b1](https://github.com/bettyblocks/material-ui-component-set/commit/946b4b1270d79119fa86ca7fcee724f47873933e))
+
+## [1.30.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.30.0...v1.30.1) (2020-08-04)
+
+
+### Bug Fixes
+
+* bump version ([2ed410d](https://github.com/bettyblocks/material-ui-component-set/commit/2ed410dd928910e42595a7f68a12697ff9fda87a))
+
+# [1.30.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.29.0...v1.30.0) (2020-08-04)
+
+
+### Bug Fixes
+
+* alert doesnt break on show when object is passed ([352e6e2](https://github.com/bettyblocks/material-ui-component-set/commit/352e6e2d0338a96ecdfe4a3f8c00a1602972154b))
+* login interaction works with form again ([b8aaa47](https://github.com/bettyblocks/material-ui-component-set/commit/b8aaa4770472d425112451359a0348568d744d41))
+
+
+### Features
+
+* progress component has visibility option and interactions ([786d658](https://github.com/bettyblocks/material-ui-component-set/commit/786d658c3ba512a5d1a04ce852c8678eda4a8235))
+
+## [1.29.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.29.0...v1.29.1) (2020-07-30)
+
+
+### Bug Fixes
+
+* bump version ([2ed410d](https://github.com/bettyblocks/material-ui-component-set/commit/2ed410dd928910e42595a7f68a12697ff9fda87a))
+
+# [1.29.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.28.0...v1.29.0) (2020-07-30)
+
+
+### Features
+
+* trigger loading after mount ([752a193](https://github.com/bettyblocks/material-ui-component-set/commit/752a193ec6afff97838999f645405de0c5d49ef0))
+
+# [1.28.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.27.0...v1.28.0) (2020-07-30)
+
+
+### Features
+
+* make date picker compatible with backend time format ([b681f64](https://github.com/bettyblocks/material-ui-component-set/commit/b681f643cad3ff3cf5f8faeb7d4a6a0091bb8dae))
+
+# [1.27.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.26.1...v1.27.0) (2020-07-30)
+
+
+### Bug Fixes
+
+* move search input to separate component ([bcc3c1d](https://github.com/bettyblocks/material-ui-component-set/commit/bcc3c1db1aea07f0f48ba00e2263afe52538eaef))
+* update searchFilter to use searchTerm instead of search ([4dd2dd4](https://github.com/bettyblocks/material-ui-component-set/commit/4dd2dd47b7236dd9141b2e686a561d29663ecd26))
+
+
+### Features
+
+* add nested search and sort to datalist ([e09275a](https://github.com/bettyblocks/material-ui-component-set/commit/e09275a9ee210be8ca4aee2ea457152549c46d97))
+* add nested search and sort to dataTable ([bf914ad](https://github.com/bettyblocks/material-ui-component-set/commit/bf914ada5d7a13b61c22975126183116221153ca))
+
+## [1.26.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.26.0...v1.26.1) (2020-07-29)
+
+
+### Bug Fixes
+
+* move the show error option on the form ([cfc4f16](https://github.com/bettyblocks/material-ui-component-set/commit/cfc4f16a67b98aca8c7779c74b5510bd421f630f))
+
 # [1.26.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.25.0...v1.26.0) (2020-07-27)
 
 

@@ -28,6 +28,8 @@
     const isAction = linkType === 'action';
     const hasLink = linkTo && linkTo.id !== '';
     const hasExternalLink = linkToExternal && linkToExternal.id !== '';
+    const linkToExternalVariable =
+      (linkToExternal && useText(linkToExternal)) || '';
     const isIcon = variant === 'icon';
     const buttonContent = useText(buttonText);
 
@@ -41,10 +43,10 @@
     const [actionCallback, { loading }] = (isAction &&
       useAction(actionId, {
         onCompleted(data) {
-          B.triggerEvent('onSuccess', data.actionb5);
+          B.triggerEvent('onActionSuccess', data.actionb5);
         },
         onError(error) {
-          B.triggerEvent('onError', error.message);
+          B.triggerEvent('onActionError', error.message);
         },
       })) || [() => {}, { loading: false }];
 
@@ -62,7 +64,9 @@
     }, []);
 
     useEffect(() => {
-      B.triggerEvent('onLoad', loading);
+      if (loading) {
+        B.triggerEvent('onActionLoad', loading);
+      }
     }, [loading]);
 
     const generalProps = {
@@ -70,7 +74,9 @@
       size,
       tabindex: isDev && -1,
       href:
-        linkType === 'external' && hasExternalLink ? linkToExternal : undefined,
+        linkType === 'external' && hasExternalLink
+          ? linkToExternalVariable
+          : undefined,
       component: linkType === 'internal' && hasLink ? B.Link : undefined,
       endpoint: linkType === 'internal' && hasLink ? linkTo : undefined,
     };

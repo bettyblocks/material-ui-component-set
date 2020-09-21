@@ -153,7 +153,7 @@
                   options: [
                     {
                       type: 'TOGGLE',
-                      label: 'Show',
+                      label: 'Visible',
                       key: 'show',
                       value: true,
                     },
@@ -2178,7 +2178,7 @@
                           options: [
                             {
                               type: 'TOGGLE',
-                              label: 'Show',
+                              label: 'Visible',
                               key: 'show',
                               value: true,
                             },

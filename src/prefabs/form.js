@@ -57,16 +57,60 @@
           },
         },
         {
+          value: 'built-in',
+          label: 'Success message',
+          key: 'showSuccess',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Built in', value: 'built-in' },
+              { name: 'Interaction', value: 'interaction' },
+            ],
+          },
+        },
+        {
           value: 'Thanks for submitting the form!',
           label: 'Success message',
           key: 'formSuccessMessage',
           type: 'TEXT',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'showSuccess',
+              comparator: 'EQ',
+              value: 'built-in',
+            },
+          },
+        },
+        {
+          value: 'built-in',
+          label: 'Error message',
+          key: 'showError',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Built in', value: 'built-in' },
+              { name: 'Interaction', value: 'interaction' },
+            ],
+          },
         },
         {
           value: 'Failed to submit the form!',
           label: 'Error message',
           key: 'formErrorMessage',
           type: 'TEXT',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'showError',
+              comparator: 'EQ',
+              value: 'built-in',
+            },
+          },
         },
         {
           value: ['0rem', '0rem', 'M', '0rem'],

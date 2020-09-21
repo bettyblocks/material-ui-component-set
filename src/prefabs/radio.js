@@ -50,28 +50,36 @@
         },
         {
           value: false,
-          label: 'Required',
-          key: 'required',
+          label: 'Validation options',
+          key: 'validationOptions',
           type: 'TOGGLE',
         },
         {
           value: false,
-          label: 'Error',
-          key: 'error',
+          label: 'Required',
+          key: 'required',
           type: 'TOGGLE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'validationOptions',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
         },
         {
-          value: 'built-in',
-          label: 'Error message',
-          key: 'showError',
-          type: 'CUSTOM',
+          value: ['This field is required'],
+          label: 'Value required message',
+          key: 'validationValueMissing',
+          type: 'VARIABLE',
           configuration: {
-            as: 'BUTTONGROUP',
-            dataType: 'string',
-            allowedInput: [
-              { name: 'Built in', value: 'built-in' },
-              { name: 'Interaction', value: 'interaction' },
-            ],
+            condition: {
+              type: 'SHOW',
+              option: 'validationOptions',
+              comparator: 'EQ',
+              value: true,
+            },
           },
         },
         {
@@ -167,6 +175,26 @@
           value: '',
           configuration: {
             dependsOn: 'model',
+            condition: {
+              type: 'SHOW',
+              option: 'optionType',
+              comparator: 'EQ',
+              value: 'data',
+            },
+          },
+        },
+        {
+          value: 'built-in',
+          label: 'Error message',
+          key: 'showError',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Built in', value: 'built-in' },
+              { name: 'Interaction', value: 'interaction' },
+            ],
             condition: {
               type: 'SHOW',
               option: 'optionType',

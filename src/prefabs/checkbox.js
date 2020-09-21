@@ -66,15 +66,37 @@
         },
         {
           value: false,
-          label: 'Required',
-          key: 'required',
+          label: 'Validation options',
+          key: 'validationOptions',
           type: 'TOGGLE',
         },
         {
           value: false,
-          label: 'Error',
-          key: 'error',
+          label: 'Required',
+          key: 'required',
           type: 'TOGGLE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'validationOptions',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          value: ['This field is required'],
+          label: 'Value required message',
+          key: 'validationValueMissing',
+          type: 'VARIABLE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'validationOptions',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
         },
         {
           type: 'TOGGLE',
