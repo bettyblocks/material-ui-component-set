@@ -6,7 +6,14 @@
   jsx: (
     <div className={classes.root}>
       {(() => {
-        const { env, getProperty, useGetAll, ModelProvider, useFilter } = B;
+        const {
+          env,
+          getProperty,
+          GetMe,
+          useGetAll,
+          ModelProvider,
+          useFilter,
+        } = B;
         const [page, setPage] = useState(1);
         const [search, setSearch] = useState('');
         const [searchTerm, setSearchTerm] = useState('');
@@ -17,6 +24,7 @@
           hidePagination,
           type,
           model,
+          authProfile,
           showError,
           hideSearch,
           searchProperty,
@@ -29,8 +37,7 @@
         const { Search } = window.MaterialUI.Icons;
         const searchPropertyArray = [searchProperty].flat();
         const { label: searchPropertyLabel } =
-          getProperty(searchPropertyArray[searchPropertyArray.length - 1]) ||
-          {};
+          getProperty(searchProperty) || {};
 
         const isEmpty = children.length === 0;
         const isDev = env === 'dev';
@@ -200,12 +207,19 @@
           mounted.current = false;
         }, [loading]);
 
-        const Looper = results =>
-          results.map(item => (
+        const Looper = results => {
+          const rows = results.map(item => (
             <ModelProvider key={item.id} value={item} id={model}>
               {children}
             </ModelProvider>
           ));
+
+          if (authProfile) {
+            return <GetMe authenticationProfileId={authProfile}>{rows}</GetMe>;
+          }
+
+          return rows;
+        };
 
         const canvasLayout = () => {
           if (!model) {

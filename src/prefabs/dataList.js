@@ -13,6 +13,12 @@
           type: 'MODEL',
         },
         {
+          value: '',
+          label: 'Authentication Profile',
+          key: 'authProfile',
+          type: 'AUTHENTICATION_PROFILE',
+        },
+        {
           value: {},
           label: 'Filter',
           key: 'filter',
@@ -28,6 +34,7 @@
           type: 'PROPERTY',
           configuration: {
             dependsOn: 'model',
+            apiVersion: 'v1',
           },
         },
         {
@@ -37,6 +44,7 @@
           value: '',
           configuration: {
             dependsOn: 'model',
+            apiVersion: 'v1',
           },
         },
         {
