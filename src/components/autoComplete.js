@@ -111,8 +111,30 @@
       };
     }
 
+    const valueArray = currentValue ? currentValue.toString().split(',') : [];
+
+    const rawFilter = {
+      rawFilter: {
+        [valueProp.name]: { in: valueArray },
+      },
+    };
+
+    const [useFilter, setUseFilter] = useState(
+      currentValue ? rawFilter : filter,
+    );
+
+    const resetFilter = () => {
+      setUseFilter({ filter });
+    };
+
     const { loading, error: err, data, refetch } =
-      model && useGetAll(model, { filter, skip: 0, take: 50 });
+      model && useGetAll(model, { ...useFilter, skip: 0, take: 50 });
+
+    useEffect(() => {
+      if (!isDev && data) {
+        resetFilter();
+      }
+    }, [data]);
 
     useEffect(() => {
       if (isDev) {
