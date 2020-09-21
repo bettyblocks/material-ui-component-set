@@ -17,9 +17,35 @@
         },
         {
           value: '',
+          label: 'Input',
+          key: 'actionInputId',
+          type: 'ACTION_INPUT',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'customModel',
+              comparator: 'EQ',
+              value: '',
+            },
+          },
+        },
+        {
+          value: '',
           label: 'Model',
           key: 'model',
           type: 'MODEL',
+          configuration: {
+            modal: {
+              type: 'MODEL_AND_PROPERTIES',
+              modelRequired: false,
+            },
+          },
+        },
+        {
+          value: '',
+          label: 'Custom Model',
+          key: 'customModel',
+          type: 'CUSTOM_MODEL',
         },
         {
           value: {},
@@ -110,11 +136,12 @@
               type: 'PROPERTY',
             },
             {
-              value: ['Label'],
+              value: { label: ['Label'] },
               label: 'Label',
-              key: 'label',
-              type: 'VARIABLE',
+              key: 'customModelAttribute',
+              type: 'CUSTOM_MODEL_ATTRIBUTE',
               configuration: {
+                allowedTypes: ['string'],
                 condition: {
                   type: 'SHOW',
                   option: 'property',
@@ -143,20 +170,6 @@
               label: 'Value',
               key: 'defaultValue',
               type: 'VARIABLE',
-            },
-            {
-              value: '',
-              label: 'Input',
-              key: 'actionInputId',
-              type: 'ACTION_INPUT',
-              configuration: {
-                condition: {
-                  type: 'SHOW',
-                  option: 'property',
-                  comparator: 'EQ',
-                  value: '',
-                },
-              },
             },
             {
               value: false,

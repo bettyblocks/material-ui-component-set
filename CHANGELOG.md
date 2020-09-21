@@ -1,3 +1,22 @@
+## [1.32.6](https://github.com/bettyblocks/material-ui-component-set/compare/v1.32.5...v1.32.6) (2020-09-21)
+
+
+### Bug Fixes
+
+* default value works for items above take amount ([ef89cb9](https://github.com/bettyblocks/material-ui-component-set/commit/ef89cb9db1262aca4892b521237fe641f640012e))
+* make default values above take amount work for multiple values ([20811ce](https://github.com/bettyblocks/material-ui-component-set/commit/20811ce61d98663129db0eab9b6e87c3c8d451da))
+* remove conversion to int ([689d80f](https://github.com/bettyblocks/material-ui-component-set/commit/689d80fb663d1cd7d5a646482add06fe07449990))
+* simplify if statement ([811eb90](https://github.com/bettyblocks/material-ui-component-set/commit/811eb904247c2def22b3494639d5ea7c82f82c96))
+
+## [1.32.5](https://github.com/bettyblocks/material-ui-component-set/compare/v1.32.4...v1.32.5) (2020-09-18)
+
+
+### Bug Fixes
+
+* enable me-data in datacontainer ([c627c53](https://github.com/bettyblocks/material-ui-component-set/commit/c627c53ae86c1cd5dcb3a41e7123bb12d856f31e))
+* enable me-data in datalist ([61e7b90](https://github.com/bettyblocks/material-ui-component-set/commit/61e7b90895df03ca14e8bc25e5584d1203afd3fd))
+* enable me-data in dataTable ([e0b24fb](https://github.com/bettyblocks/material-ui-component-set/commit/e0b24fb57dd73a81616646ce60bcaef041c08b0a))
+
 ## [1.32.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.32.3...v1.32.4) (2020-09-16)
 
 

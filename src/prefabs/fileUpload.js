@@ -13,11 +13,12 @@
           type: 'PROPERTY',
         },
         {
-          value: ['Select file(s)...'],
+          value: { label: ['Select files(s)...'] },
           label: 'Label',
-          key: 'label',
-          type: 'VARIABLE',
+          key: 'customModelAttribute',
+          type: 'CUSTOM_MODEL_ATTRIBUTE',
           configuration: {
+            allowedTypes: ['string'],
             condition: {
               type: 'SHOW',
               option: 'property',
@@ -40,12 +41,6 @@
               value: '',
             },
           },
-        },
-        {
-          value: '',
-          label: 'Input',
-          key: 'actionInputId',
-          type: 'ACTION_INPUT',
         },
         {
           value: false,

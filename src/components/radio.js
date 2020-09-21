@@ -5,7 +5,6 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const {
-      label,
       required,
       disabled,
       defaultValue,
@@ -16,37 +15,35 @@
       optionType,
       labelProp,
       valueProp,
-      actionInputId,
       size,
       position,
       margin,
       filter,
-      property,
-      propertyLabelOverride,
       fullWidth,
       showError,
       hideLabel,
+      customModelAttribute: customModelAttributeObj,
+      property,
+      propertyLabelOverride,
       validationValueMissing,
     } = options;
     const isDev = B.env === 'dev';
     const displayError = showError === 'built-in';
 
-    const { useGetAll, getProperty, useText, getActionInput } = B;
+    const { useGetAll, getProperty, useText, getCustomModelAttribute } = B;
 
-    const {
-      label: propertyLabelText,
-      name: propertyName,
-      kind,
-      values: listValues,
-    } = getProperty(property) || {};
+    const { id: customModelAttributeId, label } = customModelAttributeObj;
+    const { label: propertyLabelText, kind, values: listValues } =
+      getProperty(property) || {};
     const propLabelOverride = useText(propertyLabelOverride);
     const propertyLabel = propLabelOverride || propertyLabelText;
     const labelText = property ? propertyLabel : useText(label);
 
     const labelProperty = getProperty(labelProp);
     const valueProperty = getProperty(valueProp);
-    const actionInput = getActionInput(actionInputId);
-    const formComponentName = propertyName || (actionInput && actionInput.name);
+    const customModelAttribute = getCustomModelAttribute(
+      customModelAttributeId,
+    );
 
     let componentValue = useText(defaultValue);
 
@@ -172,7 +169,7 @@
         <RadioGroup
           row={row}
           value={value}
-          name={formComponentName}
+          name={customModelAttribute && customModelAttribute.name}
           onChange={handleChange}
           onBlur={validationHandler}
           aria-label={labelText}

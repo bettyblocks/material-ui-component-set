@@ -1,6 +1,6 @@
 (() => ({
-  name: 'PasswordInput',
-  icon: 'PasswordInputIcon',
+  name: 'DecimalInput',
+  icon: 'DecimalInputIcon',
   category: 'FORM',
   structure: [
     {
@@ -13,12 +13,12 @@
           type: 'PROPERTY',
         },
         {
-          value: { label: ['Password'] },
+          value: { label: ['Decimal'] },
           label: 'Label',
           key: 'customModelAttribute',
           type: 'CUSTOM_MODEL_ATTRIBUTE',
           configuration: {
-            allowedTypes: ['string'],
+            allowedTypes: ['decimal'],
             condition: {
               type: 'SHOW',
               option: 'property',
@@ -71,10 +71,10 @@
         {
           label: 'Validation pattern',
           key: 'pattern',
-          value: '(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}',
+          value: '',
           type: 'TEXT',
           configuration: {
-            placeholder: '(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}',
+            placeholder: '[0-9]{8,}',
             condition: {
               type: 'SHOW',
               option: 'validationOptions',
@@ -126,9 +126,7 @@
           },
         },
         {
-          value: [
-            'Password must contain 8 characters, 1 lowercase character, 1 upper case character and 1 digit',
-          ],
+          value: ['Invalid value'],
           label: 'Pattern mismatch message',
           key: 'validationPatternMismatch',
           type: 'VARIABLE',
@@ -238,22 +236,22 @@
           },
         },
         {
-          label: 'Show password toggle',
+          label: 'Adornment',
           key: 'adornment',
-          value: true,
-          type: 'TOGGLE',
+          value: '',
+          type: 'TEXT',
         },
         {
           type: 'CUSTOM',
           label: 'Position',
           key: 'adornmentPosition',
-          value: 'end',
+          value: 'start',
           configuration: {
             condition: {
               type: 'HIDE',
               option: 'adornment',
               comparator: 'EQ',
-              value: false,
+              value: '',
             },
             as: 'BUTTONGROUP',
             dataType: 'string',
@@ -266,12 +264,12 @@
         {
           label: 'Type',
           key: 'type',
-          value: 'password',
+          value: 'decimal',
           type: 'TEXT',
           configuration: {
             condition: {
               type: 'SHOW',
-              option: 'adornmentPosition',
+              option: 'adornment',
               comparator: 'EQ',
               value: 0,
             },

@@ -13,11 +13,12 @@
           type: 'PROPERTY',
         },
         {
-          value: ['Label'],
+          value: { label: ['Label'] },
           label: 'Label',
-          key: 'label',
-          type: 'VARIABLE',
+          key: 'customModelAttribute',
+          type: 'CUSTOM_MODEL_ATTRIBUTE',
           configuration: {
+            allowedTypes: ['string'],
             condition: {
               type: 'SHOW',
               option: 'property',
@@ -48,20 +49,6 @@
           type: 'VARIABLE',
           configuration: {
             as: 'MULTILINE',
-          },
-        },
-        {
-          value: '',
-          label: 'Input',
-          key: 'actionInputId',
-          type: 'ACTION_INPUT',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'property',
-              comparator: 'EQ',
-              value: '',
-            },
           },
         },
         {

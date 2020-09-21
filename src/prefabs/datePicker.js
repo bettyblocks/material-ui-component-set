@@ -1,10 +1,10 @@
 (() => ({
-  name: 'PasswordInput',
-  icon: 'PasswordInputIcon',
+  name: 'DatePicker',
+  icon: 'DatePickerIcon',
   category: 'FORM',
   structure: [
     {
-      name: 'TextField',
+      name: 'DateTimePicker',
       options: [
         {
           value: '',
@@ -13,12 +13,12 @@
           type: 'PROPERTY',
         },
         {
-          value: { label: ['Password'] },
+          value: { label: ['Label'] },
           label: 'Label',
           key: 'customModelAttribute',
           type: 'CUSTOM_MODEL_ATTRIBUTE',
           configuration: {
-            allowedTypes: ['string'],
+            allowedTypes: ['date'],
             condition: {
               type: 'SHOW',
               option: 'property',
@@ -43,131 +43,48 @@
           },
         },
         {
+          label: 'Type',
+          key: 'type',
+          value: 'date',
+          type: 'TEXT',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'customModelAttribute',
+              comparator: 'EQ',
+              value: false,
+            },
+          },
+        },
+        {
+          type: 'TOGGLE',
+          label: 'Disable Toolbar',
+          key: 'disableToolbar',
+          value: false,
+        },
+        {
           value: [],
           label: 'Value',
           key: 'defaultValue',
           type: 'VARIABLE',
         },
         {
-          value: false,
-          label: 'Validation options',
-          key: 'validationOptions',
-          type: 'TOGGLE',
+          value: 'MM/dd/yyyy',
+          label: 'Format',
+          key: 'dateFormat',
+          type: 'TEXT',
         },
         {
           value: false,
           label: 'Required',
           key: 'required',
           type: 'TOGGLE',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'validationOptions',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
         },
         {
-          label: 'Validation pattern',
-          key: 'pattern',
-          value: '(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}',
-          type: 'TEXT',
-          configuration: {
-            placeholder: '(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}',
-            condition: {
-              type: 'SHOW',
-              option: 'validationOptions',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
-        },
-        {
-          label: 'Min length',
-          key: 'minlength',
-          value: '',
-          type: 'NUMBER',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'validationOptions',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
-        },
-        {
-          label: 'Max length',
-          key: 'maxlength',
-          value: '',
-          type: 'NUMBER',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'validationOptions',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
-        },
-        {
-          value: ['This field is required'],
-          label: 'Value required message',
-          key: 'validationValueMissing',
-          type: 'VARIABLE',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'validationOptions',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
-        },
-        {
-          value: [
-            'Password must contain 8 characters, 1 lowercase character, 1 upper case character and 1 digit',
-          ],
-          label: 'Pattern mismatch message',
-          key: 'validationPatternMismatch',
-          type: 'VARIABLE',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'validationOptions',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
-        },
-        {
-          value: ['This value is too short'],
-          label: 'Value too short message',
-          key: 'validationTooShort',
-          type: 'VARIABLE',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'validationOptions',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
-        },
-        {
-          value: ['This value is too long'],
-          label: 'Value too long message',
-          key: 'validationTooLong',
-          type: 'VARIABLE',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'validationOptions',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
+          value: false,
+          label: 'Error',
+          key: 'error',
+          type: 'TOGGLE',
         },
         {
           type: 'TOGGLE',
@@ -190,6 +107,21 @@
         {
           label: 'Variant',
           key: 'variant',
+          value: 'inline',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Dialog', value: 'dialog' },
+              { name: 'Inline', value: 'inline' },
+              { name: 'Static', value: 'static' },
+            ],
+          },
+        },
+        {
+          label: 'Input Variant',
+          key: 'inputvariant',
           value: 'outlined',
           type: 'CUSTOM',
           configuration: {
@@ -238,46 +170,6 @@
           },
         },
         {
-          label: 'Show password toggle',
-          key: 'adornment',
-          value: true,
-          type: 'TOGGLE',
-        },
-        {
-          type: 'CUSTOM',
-          label: 'Position',
-          key: 'adornmentPosition',
-          value: 'end',
-          configuration: {
-            condition: {
-              type: 'HIDE',
-              option: 'adornment',
-              comparator: 'EQ',
-              value: false,
-            },
-            as: 'BUTTONGROUP',
-            dataType: 'string',
-            allowedInput: [
-              { name: 'Start', value: 'start' },
-              { name: 'End', value: 'end' },
-            ],
-          },
-        },
-        {
-          label: 'Type',
-          key: 'type',
-          value: 'password',
-          type: 'TEXT',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'adornmentPosition',
-              comparator: 'EQ',
-              value: 0,
-            },
-          },
-        },
-        {
           value: false,
           label: 'Styles',
           key: 'styles',
@@ -288,6 +180,20 @@
           label: 'Background color',
           key: 'backgroundColor',
           value: 'White',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'styles',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'COLOR',
+          label: 'Background color popup',
+          key: 'backgroundColorPopup',
+          value: 'Primary',
           configuration: {
             condition: {
               type: 'SHOW',

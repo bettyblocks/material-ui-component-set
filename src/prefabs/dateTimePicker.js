@@ -13,11 +13,12 @@
           type: 'PROPERTY',
         },
         {
-          value: ['Label'],
+          value: { label: ['Label'] },
           label: 'Label',
-          key: 'label',
-          type: 'VARIABLE',
+          key: 'customModelAttribute',
+          type: 'CUSTOM_MODEL_ATTRIBUTE',
           configuration: {
+            allowedTypes: ['date_time'],
             condition: {
               type: 'SHOW',
               option: 'property',
@@ -44,16 +45,15 @@
         {
           label: 'Type',
           key: 'type',
-          value: 'date',
-          type: 'CUSTOM',
+          value: 'datetime',
+          type: 'TEXT',
           configuration: {
-            as: 'BUTTONGROUP',
-            dataType: 'string',
-            allowedInput: [
-              { name: 'Date', value: 'date' },
-              { name: 'Time', value: 'time' },
-              { name: 'DateTime', value: 'datetime' },
-            ],
+            condition: {
+              type: 'SHOW',
+              option: 'customModelAttribute',
+              comparator: 'EQ',
+              value: false,
+            },
           },
         },
         {
@@ -69,37 +69,7 @@
           type: 'VARIABLE',
         },
         {
-          value: 'dd/MM/yyyy',
-          label: 'Format',
-          key: 'dateFormat',
-          type: 'TEXT',
-          configuration: {
-            placeholder: 'dd/MM/yyyy',
-            condition: {
-              type: 'SHOW',
-              option: 'type',
-              comparator: 'EQ',
-              value: 'date',
-            },
-          },
-        },
-        {
-          value: 'HH:mm:ss',
-          label: 'Format',
-          key: 'timeFormat',
-          type: 'TEXT',
-          configuration: {
-            placeholder: 'HH:mm:ss',
-            condition: {
-              type: 'SHOW',
-              option: 'type',
-              comparator: 'EQ',
-              value: 'time',
-            },
-          },
-        },
-        {
-          value: 'dd/MM/yyyy HH:mm:ss',
+          value: 'MM/dd/yyyy HH:mm:ss',
           label: 'Format',
           key: 'dateTimeFormat',
           type: 'TEXT',
@@ -138,20 +108,6 @@
               option: 'type',
               comparator: 'EQ',
               value: 'datetime',
-            },
-          },
-        },
-        {
-          value: '',
-          label: 'Input',
-          key: 'actionInputId',
-          type: 'ACTION_INPUT',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'property',
-              comparator: 'EQ',
-              value: '',
             },
           },
         },

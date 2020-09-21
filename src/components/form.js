@@ -26,13 +26,13 @@
         const empty = children.length === 0;
         const isDev = B.env === 'dev';
         const isPristine = empty && isDev;
-        const actionInput = getActionInput(actionInputId);
         const hasRedirect = redirect && redirect.id !== '';
         const redirectTo =
           env === 'prod' && hasRedirect && B.useEndpoint(redirect);
         const history = isDev ? {} : useHistory();
         const [isInvalid, setIsInvalid] = useState(false);
         const location = isDev ? {} : useLocation();
+        const formVariable = getActionInput(actionInputId);
 
         const { loading: isFetching, data: models, error: err } =
           model &&
@@ -81,11 +81,13 @@
             acc[key] = `${acc[key]},${value}`;
             return acc;
           }, {});
-          const variableName = actionInput && actionInput.name;
-          const submitData = variableName ? { [variableName]: values } : values;
-          callAction({
-            variables: { input: submitData },
-          });
+          let variables = { variables: { input: values } };
+          if (formVariable && formVariable.name) {
+            variables = {
+              variables: { input: { [formVariable.name]: values } },
+            };
+          }
+          callAction(variables);
         };
 
         const renderContent = loading => {

@@ -13,11 +13,12 @@
           type: 'PROPERTY',
         },
         {
-          value: ['Number'],
+          value: { label: ['Number'] },
           label: 'Label',
-          key: 'label',
-          type: 'VARIABLE',
+          key: 'customModelAttribute',
+          type: 'CUSTOM_MODEL_ATTRIBUTE',
           configuration: {
+            allowedTypes: ['integer'],
             condition: {
               type: 'SHOW',
               option: 'property',
@@ -46,20 +47,6 @@
           label: 'Value',
           key: 'defaultValue',
           type: 'VARIABLE',
-        },
-        {
-          value: '',
-          label: 'Input',
-          key: 'actionInputId',
-          type: 'ACTION_INPUT',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'property',
-              comparator: 'EQ',
-              value: '',
-            },
-          },
         },
         {
           value: false,

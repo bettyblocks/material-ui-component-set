@@ -5,7 +5,6 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const {
-      label,
       defaultValue,
       required,
       disabled,
@@ -17,18 +16,18 @@
       fullWidth,
       margin,
       helperText,
-      actionInputId,
       model,
       multiple,
       freeSolo,
       searchProperty,
       valueProperty,
-      property,
-      propertyLabelOverride,
       closeOnSelect,
       renderCheckboxes,
       showError,
       hideLabel,
+      customModelAttribute: customModelAttributeObj,
+      property,
+      propertyLabelOverride,
     } = options;
     const { Autocomplete } = window.MaterialUI.Lab;
     const {
@@ -43,19 +42,16 @@
       CheckBox,
       CheckBoxOutlineBlank,
     } = window.MaterialUI.Icons;
-    const { useText, getProperty, getActionInput, useGetAll, env } = B;
+    const { useText, getProperty, getCustomModelAttribute, useGetAll, env } = B;
     const isDev = env === 'dev';
     const displayError = showError === 'built-in';
     const [currentValue, setCurrentValue] = useState(useText(defaultValue));
     const placeholderText = useText(placeholder);
     const helper = useText(helperText);
 
-    const {
-      label: propertyLabelText,
-      name: propertyName,
-      kind,
-      values: listValues,
-    } = getProperty(property) || {};
+    const { id: customModelAttributeId, label } = customModelAttributeObj;
+    const { label: propertyLabelText, kind, values: listValues } =
+      getProperty(property) || {};
     const propLabelOverride = useText(propertyLabelOverride);
     const propertyLabel = propLabelOverride || propertyLabelText;
     const labelText = property ? propertyLabel : useText(label);
@@ -75,10 +71,11 @@
       classes: { root: classes.formControl },
     };
 
-    const actionInput = getActionInput(actionInputId);
+    const customModelAttribute = getCustomModelAttribute(
+      customModelAttributeId,
+    );
     const searchProp = getProperty(searchProperty) || {};
     const valueProp = getProperty(valueProperty) || {};
-    const formComponentName = propertyName || (actionInput && actionInput.name);
     const [searchParam, setSearchParam] = useState('');
     const [debouncedSearchParam, setDebouncedSearchParam] = useState('');
 
@@ -287,7 +284,7 @@
             <TextField
               {...params}
               {...textFieldProps}
-              name={actionInput && actionInput.name}
+              name={customModelAttribute && customModelAttribute.name}
               key={currentValue ? 'hasValue' : 'isEmpty'}
               required={required && !currentValue}
               InputProps={{
@@ -353,7 +350,7 @@
             <input
               type="hidden"
               key={currentValue ? 'hasValue' : 'isEmpty'}
-              name={formComponentName}
+              name={customModelAttribute && customModelAttribute.name}
               value={currentValue}
             />
             <TextField

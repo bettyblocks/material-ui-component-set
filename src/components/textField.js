@@ -5,7 +5,6 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const {
-      label,
       defaultValue,
       required,
       disabled,
@@ -19,12 +18,9 @@
       fullWidth,
       margin,
       helperText,
-      actionInputId,
       adornment,
       adornmentIcon,
       adornmentPosition,
-      property,
-      propertyLabelOverride,
       pattern,
       minlength,
       maxlength,
@@ -34,6 +30,9 @@
       validationTooLong,
       validationTooShort,
       hideLabel,
+      customModelAttribute: customModelAttributeObj,
+      property,
+      propertyLabelOverride,
     } = options;
 
     const {
@@ -48,14 +47,20 @@
     } = window.MaterialUI.Core;
     const { Icons } = window.MaterialUI;
 
-    const { getActionInput, useText, env, getProperty } = B;
+    const { useText, env, getCustomModelAttribute, getProperty } = B;
     const isDev = env === 'dev';
+    const isNumberType = type === 'number';
     const [currentValue, setCurrentValue] = useState(useText(defaultValue));
     const [isDisabled, setIsDisabled] = useState(disabled);
     const [showPassword, togglePassword] = useState(false);
     const [errorState, setErrorState] = useState(error);
     const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
+    const { id: customModelAttributeId, label } = customModelAttributeObj;
+    const { label: propertyLabelText } = getProperty(property) || {};
+    const propLabelOverride = useText(propertyLabelOverride);
+    const propertyLabel = propLabelOverride || propertyLabelText;
+    const labelText = property ? propertyLabel : useText(label);
 
     const validPattern = pattern || null;
     const validMinlength = minlength || null;
@@ -85,14 +90,9 @@
 
     const placeholderText = useText(placeholder);
 
-    const { label: propertyLabelText, name: propertyName } =
-      getProperty(property) || {};
-    const propLabelOverride = useText(propertyLabelOverride);
-    const propertyLabel = propLabelOverride || propertyLabelText;
-    const labelText = property ? propertyLabel : useText(label);
-
-    const actionInput = getActionInput(actionInputId);
-    const formComponentName = propertyName || (actionInput && actionInput.name);
+    const customModelAttribute = getCustomModelAttribute(
+      customModelAttributeId,
+    );
 
     const handleValidation = validation => {
       setErrorState(!validation.valid);
@@ -100,16 +100,26 @@
       setHelper(message);
     };
 
+    const onKeyDown = event => {
+      if (isNumberType && (event.key === '.' || event.key === ',')) {
+        event.preventDefault();
+      }
+    };
+
     const changeHandler = event => {
       const {
         target: { value: eventValue, validity },
       } = event;
 
+      let numberValue;
+      if (isNumberType) {
+        numberValue = parseInt(eventValue, 10);
+      }
+
       if (afterFirstInvalidation) {
         handleValidation(validity);
       }
-
-      setCurrentValue(eventValue);
+      setCurrentValue(isNumberType ? numberValue : eventValue);
     };
 
     const blurHandler = event => {
@@ -198,13 +208,14 @@
           <InputLabel classes={{ root: classes.label }}>{labelText}</InputLabel>
         )}
         <InputCmp
-          name={formComponentName}
+          name={customModelAttribute && customModelAttribute.name}
           value={currentValue}
           type={(isDev && type === 'number') || showPassword ? 'text' : type}
           multiline={multiline}
           rows={rows}
           label={labelText}
           placeholder={placeholderText}
+          onKeyDown={onKeyDown}
           onChange={changeHandler}
           onBlur={blurHandler}
           onInvalid={invalidHandler}
