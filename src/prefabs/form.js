@@ -7,26 +7,17 @@
       name: 'Form',
       options: [
         {
-          value: '',
+          value: {
+            customModelId: null,
+            actionId: null,
+            modelId: null,
+            variableId: null,
+          },
           label: 'Action',
-          key: 'actionId',
-          type: 'ACTION',
+          key: 'formData',
+          type: 'FORM_DATA',
           configuration: {
             apiVersion: 'v1',
-          },
-        },
-        {
-          value: '',
-          label: 'Input',
-          key: 'actionInputId',
-          type: 'ACTION_INPUT',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'customModel',
-              comparator: 'EQ',
-              value: '',
-            },
           },
         },
         {
@@ -35,17 +26,13 @@
           key: 'model',
           type: 'MODEL',
           configuration: {
-            modal: {
-              type: 'MODEL_AND_PROPERTIES',
-              modelRequired: false,
+            condition: {
+              type: 'SHOW',
+              option: 'formData',
+              comparator: 'EQ',
+              value: '',
             },
           },
-        },
-        {
-          value: '',
-          label: 'Custom Model',
-          key: 'customModel',
-          type: 'CUSTOM_MODEL',
         },
         {
           value: {},
