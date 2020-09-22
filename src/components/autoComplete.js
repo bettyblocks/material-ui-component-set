@@ -16,6 +16,7 @@
       fullWidth,
       margin,
       helperText,
+      actionInputId,
       model,
       multiple,
       freeSolo,
@@ -42,7 +43,14 @@
       CheckBox,
       CheckBoxOutlineBlank,
     } = window.MaterialUI.Icons;
-    const { useText, getProperty, getCustomModelAttribute, useGetAll, env } = B;
+    const {
+      useText,
+      getProperty,
+      getCustomModelAttribute,
+      getActionInput,
+      useGetAll,
+      env,
+    } = B;
     const isDev = env === 'dev';
     const displayError = showError === 'built-in';
     const [currentValue, setCurrentValue] = useState(useText(defaultValue));
@@ -74,6 +82,7 @@
     const customModelAttribute = getCustomModelAttribute(
       customModelAttributeId,
     );
+    const actionInput = getActionInput(actionInputId);
     const searchProp = getProperty(searchProperty) || {};
     const valueProp = getProperty(valueProperty) || {};
     const [searchParam, setSearchParam] = useState('');
