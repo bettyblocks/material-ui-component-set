@@ -264,7 +264,7 @@
         {
           label: 'Type',
           key: 'type',
-          value: 'number',
+          value: 'decimal',
           type: 'TEXT',
           configuration: {
             condition: {
