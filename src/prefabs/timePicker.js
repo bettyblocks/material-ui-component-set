@@ -75,6 +75,12 @@
           type: 'TEXT',
         },
         {
+          value: true,
+          label: 'Use 24-hour format',
+          key: 'use24HourClockTime',
+          type: 'TOGGLE',
+        },
+        {
           value: false,
           label: 'Required',
           key: 'required',
