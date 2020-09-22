@@ -125,7 +125,7 @@
 
     const DateTimeCmp = (
       <DateTimeComponent
-        name={nameAttribute ? nameAttribute : customModelAttributeName}
+        name={nameAttribute || customModelAttributeName}
         value={selectedDate}
         size={size}
         classes={{ root: classes.formControl }}
@@ -136,7 +136,7 @@
         inputVariant={inputvariant}
         InputProps={{
           inputProps: {
-            name: nameAttribute ? nameAttribute : customModelAttributeName,
+            name: nameAttribute || customModelAttributeName,
             tabIndex: isDev && -1,
           },
         }}
@@ -178,7 +178,7 @@
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <input
           type="hidden"
-          name={nameAttribute ? nameAttribute : customModelAttributeName}
+          name={nameAttribute || customModelAttributeName}
           value={resultString}
         />
         {variant === 'static' ? (

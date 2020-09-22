@@ -173,7 +173,7 @@
         {data.length > 0 && (
           <input
             type="hidden"
-            name={nameAttribute ? nameAttribute : customModelAttributeName}
+            name={nameAttribute || customModelAttributeName}
             value={data.map(d => d.url).join(',')}
           />
         )}

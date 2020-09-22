@@ -61,7 +61,7 @@
       <MUICheckbox
         checked={checked}
         onChange={handleChange}
-        name={nameAttribute ? nameAttribute : customModelAttributeName}
+        name={nameAttribute || customModelAttributeName}
         disabled={disabled}
         size={size}
         tabIndex={isDev && -1}

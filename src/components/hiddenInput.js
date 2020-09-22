@@ -32,7 +32,7 @@
       <input
         className={isDev && classes.pristine}
         type={isDev ? 'text' : 'hidden'}
-        name={nameAttribute ? nameAttribute : customModelAttributeName}
+        name={nameAttribute || customModelAttributeName}
         value={isDev ? currentValue || '{{ hidden input }}' : currentValue}
         required={required}
         disabled={disabled}

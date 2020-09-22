@@ -107,7 +107,7 @@
         checked={values.includes(checkboxValue)}
         onChange={handleChange}
         disabled={disabled}
-        name={nameAttribute ? nameAttribute : customModelAttributeName}
+        name={nameAttribute || customModelAttributeName}
         value={checkboxValue}
       />
     );

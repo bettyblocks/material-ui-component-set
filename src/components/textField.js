@@ -205,7 +205,7 @@
           <InputLabel classes={{ root: classes.label }}>{labelText}</InputLabel>
         )}
         <InputCmp
-          name={nameAttribute ? nameAttribute : customModelAttributeName}
+          name={nameAttribute || customModelAttributeName}
           value={currentValue}
           type={(isDev && type === 'number') || showPassword ? 'text' : type}
           multiline={multiline}
