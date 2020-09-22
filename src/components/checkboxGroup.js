@@ -24,27 +24,23 @@
       showError,
       hideLabel,
       customModelAttribute: customModelAttributeObj,
-      property,
-      propertyLabelOverride,
+      nameAttribute,
     } = options;
 
-    const { useText, getCustomModelAttribute, getProperty, useGetAll } = B;
+    const { useText, getProperty, useGetAll, getCustomModelAttribute } = B;
     const displayError = showError === 'built-in';
     const isDev = B.env === 'dev';
 
     const componentHelperText = useText(helperText);
     const labelProperty = getProperty(labelProp);
     const valueProperty = getProperty(valueProp);
-
-    const { id: customModelAttributeId, label } = customModelAttributeObj;
-    const { label: propertyLabelText } = getProperty(property) || {};
-    const propLabelOverride = useText(propertyLabelOverride);
-    const propertyLabel = propLabelOverride || propertyLabelText;
-    const labelText = property ? propertyLabel : useText(label);
-
+    const { label, customModelAttributeId } = customModelAttributeObj;
     const customModelAttribute = getCustomModelAttribute(
       customModelAttributeId,
     );
+    const customModelAttributeName =
+      customModelAttribute && customModelAttribute.name;
+    const labelText = useText(label);
 
     const getValues = () => {
       const value = useText(defaultValue);
@@ -111,7 +107,7 @@
         checked={values.includes(checkboxValue)}
         onChange={handleChange}
         disabled={disabled}
-        name={customModelAttribute && customModelAttribute.name}
+        name={nameAttribute ? nameAttribute : customModelAttributeName}
         value={checkboxValue}
       />
     );

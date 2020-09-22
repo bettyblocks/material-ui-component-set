@@ -9,15 +9,18 @@
       required,
       disabled,
       customModelAttribute: customModelAttributeObj,
+      nameAttribute,
     } = options;
 
-    const { getCustomModelAttribute, useText, env } = B;
+    const { useText, env, getCustomModelAttribute } = B;
     const isDev = env === 'dev';
     const [currentValue, setCurrentValue] = useState(useText(defaultValue));
     const { id: customModelAttributeId } = customModelAttributeObj;
     const customModelAttribute = getCustomModelAttribute(
       customModelAttributeId,
     );
+    const customModelAttributeName =
+      customModelAttribute && customModelAttribute.name;
 
     useEffect(() => {
       if (isDev) {
@@ -29,7 +32,7 @@
       <input
         className={isDev && classes.pristine}
         type={isDev ? 'text' : 'hidden'}
-        name={customModelAttribute && customModelAttribute.name}
+        name={nameAttribute ? nameAttribute : customModelAttributeName}
         value={isDev ? currentValue || '{{ hidden input }}' : currentValue}
         required={required}
         disabled={disabled}

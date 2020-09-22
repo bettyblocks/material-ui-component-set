@@ -4,13 +4,7 @@
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const {
-      env,
-      useText,
-      getProperty,
-      getCustomModelAttribute,
-      useFileUpload,
-    } = B;
+    const { env, useText, useFileUpload, getCustomModelAttribute } = B;
     const {
       FormControl,
       FormControlLabel,
@@ -37,8 +31,7 @@
       multiple,
       hideLabel,
       customModelAttribute: customModelAttributeObj,
-      property,
-      propertyLabelOverride,
+      nameAttribute,
     } = options;
 
     const isDev = env === 'dev';
@@ -50,15 +43,13 @@
     });
     const helper = useText(helperText);
     const { id: customModelAttributeId, label } = customModelAttributeObj;
-    const { label: propertyLabelText } = getProperty(property) || {};
-    const propLabelOverride = useText(propertyLabelOverride);
-    const propertyLabel = propLabelOverride || propertyLabelText;
-    const labelText = property ? propertyLabel : useText(label);
+    const labelText = useText(label);
     const requiredText = required ? '*' : '';
-
     const customModelAttribute = getCustomModelAttribute(
       customModelAttributeId,
     );
+    const customModelAttributeName =
+      customModelAttribute && customModelAttribute.name;
 
     const handleChange = e => {
       setUploads({
@@ -182,7 +173,7 @@
         {data.length > 0 && (
           <input
             type="hidden"
-            name={customModelAttribute && customModelAttribute.name}
+            name={nameAttribute ? nameAttribute : customModelAttributeName}
             value={data.map(d => d.url).join(',')}
           />
         )}

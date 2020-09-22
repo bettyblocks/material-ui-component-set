@@ -7,12 +7,6 @@
       name: 'TextField',
       options: [
         {
-          value: '',
-          label: 'Property',
-          key: 'property',
-          type: 'PROPERTY',
-        },
-        {
           value: { label: ['Label'] },
           label: 'Label',
           key: 'customModelAttribute',
@@ -21,21 +15,6 @@
             allowedTypes: ['string'],
             condition: {
               type: 'SHOW',
-              option: 'property',
-              comparator: 'EQ',
-              value: '',
-            },
-          },
-        },
-        {
-          value: [],
-          label: 'Label',
-          key: 'propertyLabelOverride',
-          type: 'VARIABLE',
-          configuration: {
-            placeholder: 'Label of property',
-            condition: {
-              type: 'HIDE',
               option: 'property',
               comparator: 'EQ',
               value: '',
@@ -1657,6 +1636,26 @@
             condition: {
               type: 'SHOW',
               option: 'styles',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          value: false,
+          label: 'Advanced settings',
+          key: 'advancedSettings',
+          type: 'TOGGLE',
+        },
+        {
+          type: 'TEXT',
+          label: 'name attribute',
+          key: 'nameAttribute',
+          value: '',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'advancedSettings',
               comparator: 'EQ',
               value: true,
             },

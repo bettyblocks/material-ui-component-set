@@ -23,10 +23,9 @@
       disableToolbar,
       hideLabel,
       customModelAttribute: customModelAttributeObj,
-      property,
-      propertyLabelOverride,
       use24HourClockDateTime,
       use24HourClockTime,
+      nameAttribute,
     } = options;
 
     const {
@@ -37,7 +36,7 @@
     } = window.MaterialUI.Pickers;
     const { DateFnsUtils } = window.MaterialUI;
     const { AccessTime, Event } = window.MaterialUI.Icons;
-    const { useText, getProperty, env, getCustomModelAttribute } = B;
+    const { useText, env, getCustomModelAttribute } = B;
     const DateFns = new DateFnsUtils();
     const isDev = env === 'dev';
     const strDefaultValue = useText(defaultValue);
@@ -46,14 +45,12 @@
     const placeholderText = useText(placeholder);
 
     const { id: customModelAttributeId, label } = customModelAttributeObj;
-    const { label: propertyLabelText } = getProperty(property) || {};
-    const propLabelOverride = useText(propertyLabelOverride);
-    const propertyLabel = propLabelOverride || propertyLabelText;
-    const labelText = property ? propertyLabel : useText(label);
-
+    const labelText = useText(label);
     const customModelAttribute = getCustomModelAttribute(
       customModelAttributeId,
     );
+    const customModelAttributeName =
+      customModelAttribute && customModelAttribute.name;
 
     const isValidDate = date => date instanceof Date && !isNaN(date);
 
@@ -128,7 +125,7 @@
 
     const DateTimeCmp = (
       <DateTimeComponent
-        name={customModelAttribute && customModelAttribute.name}
+        name={nameAttribute ? nameAttribute : customModelAttributeName}
         value={selectedDate}
         size={size}
         classes={{ root: classes.formControl }}
@@ -139,7 +136,7 @@
         inputVariant={inputvariant}
         InputProps={{
           inputProps: {
-            name: customModelAttribute && customModelAttribute.name,
+            name: nameAttribute ? nameAttribute : customModelAttributeName,
             tabIndex: isDev && -1,
           },
         }}
@@ -181,7 +178,7 @@
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <input
           type="hidden"
-          name={actionInput && actionInput.name}
+          name={nameAttribute ? nameAttribute : customModelAttributeName}
           value={resultString}
         />
         {variant === 'static' ? (

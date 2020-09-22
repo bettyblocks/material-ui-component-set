@@ -12,27 +12,24 @@
       size,
       helperText,
       customModelAttribute: customModelAttributeObj,
-      property,
-      propertyLabelOverride,
       validationValueMissing,
+      nameAttribute,
     } = options;
-    const { useText, getCustomModelAttribute, getProperty } = B;
+    const { useText, getCustomModelAttribute } = B;
     const isDev = B.env === 'dev';
 
     const componentChecked = useText(defaultValue);
     const [checked, setChecked] = useState(componentChecked === 'true');
     const [errorState, setErrorState] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
-
     const { id: customModelAttributeId, label } = customModelAttributeObj;
-    const { label: propertyLabelText } = getProperty(property) || {};
-    const propLabelOverride = useText(propertyLabelOverride);
-    const propertyLabel = propLabelOverride || propertyLabelText;
-    const labelText = property ? propertyLabel : useText(label);
-
     const customModelAttribute = getCustomModelAttribute(
       customModelAttributeId,
     );
+    const customModelAttributeName =
+      customModelAttribute && customModelAttribute.name;
+    const labelText = useText(label);
+
     const {
       Checkbox: MUICheckbox,
       FormControlLabel,
@@ -64,7 +61,7 @@
       <MUICheckbox
         checked={checked}
         onChange={handleChange}
-        name={customModelAttribute && customModelAttribute.name}
+        name={nameAttribute ? nameAttribute : customModelAttributeName}
         disabled={disabled}
         size={size}
         tabIndex={isDev && -1}

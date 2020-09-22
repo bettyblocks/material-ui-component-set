@@ -31,8 +31,7 @@
       validationTooShort,
       hideLabel,
       customModelAttribute: customModelAttributeObj,
-      property,
-      propertyLabelOverride,
+      nameAttribute,
     } = options;
 
     const {
@@ -47,7 +46,7 @@
     } = window.MaterialUI.Core;
     const { Icons } = window.MaterialUI;
 
-    const { useText, env, getCustomModelAttribute, getProperty } = B;
+    const { useText, env, getCustomModelAttribute } = B;
     const isDev = env === 'dev';
     const isNumberType = type === 'number';
     const [currentValue, setCurrentValue] = useState(useText(defaultValue));
@@ -57,10 +56,12 @@
     const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
     const { id: customModelAttributeId, label } = customModelAttributeObj;
-    const { label: propertyLabelText } = getProperty(property) || {};
-    const propLabelOverride = useText(propertyLabelOverride);
-    const propertyLabel = propLabelOverride || propertyLabelText;
-    const labelText = property ? propertyLabel : useText(label);
+    const labelText = useText(label);
+    const customModelAttribute = getCustomModelAttribute(
+      customModelAttributeId,
+    );
+    const customModelAttributeName =
+      customModelAttribute && customModelAttribute.name;
 
     const validPattern = pattern || null;
     const validMinlength = minlength || null;
@@ -89,10 +90,6 @@
     };
 
     const placeholderText = useText(placeholder);
-
-    const customModelAttribute = getCustomModelAttribute(
-      customModelAttributeId,
-    );
 
     const handleValidation = validation => {
       setErrorState(!validation.valid);
@@ -208,7 +205,7 @@
           <InputLabel classes={{ root: classes.label }}>{labelText}</InputLabel>
         )}
         <InputCmp
-          name={customModelAttribute && customModelAttribute.name}
+          name={nameAttribute ? nameAttribute : customModelAttributeName}
           value={currentValue}
           type={(isDev && type === 'number') || showPassword ? 'text' : type}
           multiline={multiline}
