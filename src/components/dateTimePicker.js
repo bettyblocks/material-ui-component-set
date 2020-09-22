@@ -36,6 +36,7 @@
       KeyboardDateTimePicker,
     } = window.MaterialUI.Pickers;
     const { DateFnsUtils } = window.MaterialUI;
+    const { AccessTime, Event } = window.MaterialUI.Icons;
     const { useText, getProperty, env, getCustomModelAttribute } = B;
     const DateFns = new DateFnsUtils();
     const isDev = env === 'dev';
@@ -162,6 +163,7 @@
           className: classes.dialog,
         }}
         ampm={!use24HourClock}
+        keyboardIcon={type === 'time' ? <AccessTime /> : <Event />}
       />
     );
 
