@@ -24,6 +24,7 @@
       showError,
       hideLabel,
       customModelAttribute: customModelAttributeObj,
+      property,
       nameAttribute,
     } = options;
 
@@ -34,7 +35,7 @@
     const componentHelperText = useText(helperText);
     const labelProperty = getProperty(labelProp);
     const valueProperty = getProperty(valueProp);
-    const { label, customModelAttributeId } = customModelAttributeObj;
+    const { id: customModelAttributeId, label } = customModelAttributeObj;
     const customModelAttribute = getCustomModelAttribute(
       customModelAttributeId,
     );
@@ -115,7 +116,7 @@
     const checkboxData = (checkboxOptions || '').split('\n');
 
     const renderCheckBoxes = () => {
-      if (optionType !== 'data') {
+      if (optionType === 'static') {
         return checkboxData.map(opt => renderCheckbox(opt, opt));
       }
       if (isDev) return renderCheckbox('Placeholder', false);

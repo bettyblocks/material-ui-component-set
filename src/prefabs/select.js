@@ -7,12 +7,6 @@
       name: 'Select',
       options: [
         {
-          value: '',
-          label: 'Property',
-          key: 'property',
-          type: 'PROPERTY',
-        },
-        {
           value: { label: ['Label'] },
           label: 'Label',
           key: 'customModelAttribute',
@@ -59,7 +53,22 @@
             allowedInput: [
               { name: 'Static', value: 'static' },
               { name: 'Data', value: 'data' },
+              { name: 'Property', value: 'property' },
             ],
+          },
+        },
+        {
+          value: '',
+          label: 'Property',
+          key: 'property',
+          type: 'PROPERTY',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'optionType',
+              comparator: 'EQ',
+              value: 'property',
+            },
           },
         },
         {

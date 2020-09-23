@@ -121,7 +121,7 @@
           </MenuItem>
         ));
       }
-      if (optionType !== 'data') {
+      if (optionType === 'static') {
         return selectOptions.split('\n').map(option => (
           <MenuItem key={option} value={option}>
             {option}

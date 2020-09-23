@@ -24,8 +24,8 @@
       hideLabel,
       customModelAttribute: customModelAttributeObj,
       property,
-      propertyLabelOverride,
       validationValueMissing,
+      nameAttribute,
     } = options;
     const isDev = B.env === 'dev';
     const displayError = showError === 'built-in';
@@ -33,17 +33,16 @@
     const { useGetAll, getProperty, useText, getCustomModelAttribute } = B;
 
     const { id: customModelAttributeId, label } = customModelAttributeObj;
-    const { label: propertyLabelText, kind, values: listValues } =
-      getProperty(property) || {};
-    const propLabelOverride = useText(propertyLabelOverride);
-    const propertyLabel = propLabelOverride || propertyLabelText;
-    const labelText = property ? propertyLabel : useText(label);
+    const { kind, values: listValues } = getProperty(property) || {};
+    const labelText = useText(label);
 
     const labelProperty = getProperty(labelProp);
     const valueProperty = getProperty(valueProp);
     const customModelAttribute = getCustomModelAttribute(
       customModelAttributeId,
     );
+    const customModelAttributeName =
+      customModelAttribute && customModelAttribute.name;
 
     let componentValue = useText(defaultValue);
 
@@ -112,7 +111,7 @@
       if (kind === 'list' || kind === 'LIST') {
         return listValues.map(({ value: v }) => renderRadio(v, v));
       }
-      if (optionType !== 'data') {
+      if (optionType === 'static') {
         radioValues = radioData.map(option => option);
         return radioData.map(option => renderRadio(option, option));
       }
@@ -168,7 +167,7 @@
         <RadioGroup
           row={row}
           value={value}
-          name={customModelAttribute && customModelAttribute.name}
+          name={nameAttribute || customModelAttributeName}
           onChange={handleChange}
           onBlur={validationHandler}
           aria-label={labelText}

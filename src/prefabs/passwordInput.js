@@ -409,7 +409,7 @@
           type: 'TOGGLE',
         },
         {
-          type: 'TEXT',
+          type: 'VARIABLE',
           label: 'name attribute',
           key: 'nameAttribute',
           value: '',

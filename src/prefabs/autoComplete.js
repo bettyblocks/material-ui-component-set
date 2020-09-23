@@ -7,12 +7,6 @@
       name: 'AutoComplete',
       options: [
         {
-          value: '',
-          label: 'Property',
-          key: 'property',
-          type: 'PROPERTY',
-        },
-        {
           value: { label: ['Label'] },
           label: 'Label',
           key: 'customModelAttribute',
@@ -29,36 +23,51 @@
         },
         {
           value: [],
-          label: 'Label',
-          key: 'propertyLabelOverride',
-          type: 'VARIABLE',
-          configuration: {
-            placeholder: 'Label of property',
-            condition: {
-              type: 'HIDE',
-              option: 'property',
-              comparator: 'EQ',
-              value: '',
-            },
-          },
-        },
-        {
-          value: [],
           label: 'Value',
           key: 'defaultValue',
           type: 'VARIABLE',
         },
         {
+          label: 'Option type',
+          key: 'optionType',
+          value: 'data',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Data', value: 'data' },
+              { name: 'Property', value: 'property' },
+            ],
+          },
+        },
+        {
           value: '',
-          label: 'Input',
-          key: 'actionInputId',
-          type: 'ACTION_INPUT',
+          label: 'Property',
+          key: 'property',
+          type: 'PROPERTY',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'optionType',
+              comparator: 'EQ',
+              value: 'property',
+            },
+          },
         },
         {
           value: '',
           label: 'Model',
           key: 'model',
           type: 'MODEL',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'optionType',
+              comparator: 'EQ',
+              value: 'data',
+            },
+          },
         },
         {
           value: {},
@@ -67,6 +76,12 @@
           type: 'FILTER',
           configuration: {
             dependsOn: 'model',
+            condition: {
+              type: 'SHOW',
+              option: 'optionType',
+              comparator: 'EQ',
+              value: 'data',
+            },
           },
         },
         {
@@ -74,12 +89,28 @@
           label: 'Label property',
           key: 'searchProperty',
           type: 'PROPERTY',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'optionType',
+              comparator: 'EQ',
+              value: 'data',
+            },
+          },
         },
         {
           value: '',
           label: 'Value property',
           key: 'valueProperty',
           type: 'PROPERTY',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'optionType',
+              comparator: 'EQ',
+              value: 'data',
+            },
+          },
         },
         {
           type: 'TOGGLE',

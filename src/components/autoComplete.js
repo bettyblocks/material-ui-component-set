@@ -16,7 +16,6 @@
       fullWidth,
       margin,
       helperText,
-      actionInputId,
       model,
       multiple,
       freeSolo,
@@ -28,7 +27,7 @@
       hideLabel,
       customModelAttribute: customModelAttributeObj,
       property,
-      propertyLabelOverride,
+      nameAttribute,
     } = options;
     const { Autocomplete } = window.MaterialUI.Lab;
     const {
@@ -43,14 +42,7 @@
       CheckBox,
       CheckBoxOutlineBlank,
     } = window.MaterialUI.Icons;
-    const {
-      useText,
-      getProperty,
-      getCustomModelAttribute,
-      getActionInput,
-      useGetAll,
-      env,
-    } = B;
+    const { useText, getProperty, getCustomModelAttribute, useGetAll, env } = B;
     const isDev = env === 'dev';
     const displayError = showError === 'built-in';
     const [currentValue, setCurrentValue] = useState(useText(defaultValue));
@@ -58,11 +50,8 @@
     const helper = useText(helperText);
 
     const { id: customModelAttributeId, label } = customModelAttributeObj;
-    const { label: propertyLabelText, kind, values: listValues } =
-      getProperty(property) || {};
-    const propLabelOverride = useText(propertyLabelOverride);
-    const propertyLabel = propLabelOverride || propertyLabelText;
-    const labelText = property ? propertyLabel : useText(label);
+    const { kind, values: listValues } = getProperty(property) || {};
+    const labelText = useText(label);
 
     const textFieldProps = {
       disabled,
@@ -82,7 +71,10 @@
     const customModelAttribute = getCustomModelAttribute(
       customModelAttributeId,
     );
-    const actionInput = getActionInput(actionInputId);
+
+    const customModelAttributeName =
+      customModelAttribute && customModelAttribute.name;
+
     const searchProp = getProperty(searchProperty) || {};
     const valueProp = getProperty(valueProperty) || {};
     const [searchParam, setSearchParam] = useState('');
@@ -293,7 +285,7 @@
             <TextField
               {...params}
               {...textFieldProps}
-              name={actionInput && actionInput.name}
+              name={nameAttribute || customModelAttributeName}
               key={currentValue ? 'hasValue' : 'isEmpty'}
               required={required && !currentValue}
               InputProps={{
