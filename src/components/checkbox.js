@@ -29,6 +29,7 @@
     const customModelAttributeName =
       customModelAttribute && customModelAttribute.name;
     const labelText = useText(label);
+    const nameAttributeValue = nameAttribute && useText(nameAttribute);
 
     const {
       Checkbox: MUICheckbox,
@@ -61,7 +62,7 @@
       <MUICheckbox
         checked={checked}
         onChange={handleChange}
-        name={nameAttribute || customModelAttributeName}
+        name={nameAttributeValue || customModelAttributeName}
         disabled={disabled}
         size={size}
         tabIndex={isDev && -1}

@@ -43,6 +43,7 @@
     );
     const customModelAttributeName =
       customModelAttribute && customModelAttribute.name;
+    const nameAttributeValue = nameAttribute && useText(nameAttribute);
 
     let componentValue = useText(defaultValue);
 
@@ -167,7 +168,7 @@
         <RadioGroup
           row={row}
           value={value}
-          name={nameAttribute || customModelAttributeName}
+          name={nameAttributeValue || customModelAttributeName}
           onChange={handleChange}
           onBlur={validationHandler}
           aria-label={labelText}

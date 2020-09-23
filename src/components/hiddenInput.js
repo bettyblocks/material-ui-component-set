@@ -21,6 +21,7 @@
     );
     const customModelAttributeName =
       customModelAttribute && customModelAttribute.name;
+    const nameAttributeValue = nameAttribute && useText(nameAttribute);
 
     useEffect(() => {
       if (isDev) {
@@ -32,7 +33,7 @@
       <input
         className={isDev && classes.pristine}
         type={isDev ? 'text' : 'hidden'}
-        name={nameAttribute || customModelAttributeName}
+        name={nameAttributeValue || customModelAttributeName}
         value={isDev ? currentValue || '{{ hidden input }}' : currentValue}
         required={required}
         disabled={disabled}

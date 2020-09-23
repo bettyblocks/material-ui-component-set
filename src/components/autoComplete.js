@@ -48,6 +48,7 @@
     const [currentValue, setCurrentValue] = useState(useText(defaultValue));
     const placeholderText = useText(placeholder);
     const helper = useText(helperText);
+    const nameAttributeValue = nameAttribute && useText(nameAttribute);
 
     const { id: customModelAttributeId, label } = customModelAttributeObj;
     const { kind, values: listValues } = getProperty(property) || {};
@@ -285,7 +286,7 @@
             <TextField
               {...params}
               {...textFieldProps}
-              name={nameAttribute || customModelAttributeName}
+              name={nameAttributeValue || customModelAttributeName}
               key={currentValue ? 'hasValue' : 'isEmpty'}
               required={required && !currentValue}
               InputProps={{

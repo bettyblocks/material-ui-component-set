@@ -62,6 +62,7 @@
     );
     const customModelAttributeName =
       customModelAttribute && customModelAttribute.name;
+    const nameAttributeValue = nameAttribute && useText(nameAttribute);
 
     const validPattern = pattern || null;
     const validMinlength = minlength || null;
@@ -205,7 +206,7 @@
           <InputLabel classes={{ root: classes.label }}>{labelText}</InputLabel>
         )}
         <InputCmp
-          name={nameAttribute || customModelAttributeName}
+          name={nameAttributeValue || customModelAttributeName}
           value={currentValue}
           type={(isDev && type === 'number') || showPassword ? 'text' : type}
           multiline={multiline}

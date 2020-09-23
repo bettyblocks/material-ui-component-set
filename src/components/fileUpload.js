@@ -50,6 +50,7 @@
     );
     const customModelAttributeName =
       customModelAttribute && customModelAttribute.name;
+    const nameAttributeValue = nameAttribute && useText(nameAttribute);
 
     const handleChange = e => {
       setUploads({
@@ -173,7 +174,7 @@
         {data.length > 0 && (
           <input
             type="hidden"
-            name={nameAttribute || customModelAttributeName}
+            name={nameAttributeValue || customModelAttributeName}
             value={data.map(d => d.url).join(',')}
           />
         )}

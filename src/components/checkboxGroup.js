@@ -43,6 +43,7 @@
     const customModelAttributeName =
       customModelAttribute && customModelAttribute.name;
     const labelText = useText(label);
+    const nameAttributeValue = nameAttribute && useText(nameAttribute);
 
     const getValues = () => {
       const value = useText(defaultValue);
@@ -109,7 +110,7 @@
         checked={values.includes(checkboxValue)}
         onChange={handleChange}
         disabled={disabled}
-        name={nameAttribute || customModelAttributeName}
+        name={nameAttributeValue || customModelAttributeName}
         value={checkboxValue}
       />
     );

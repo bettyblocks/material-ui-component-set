@@ -51,7 +51,7 @@
     );
     const customModelAttributeName =
       customModelAttribute && customModelAttribute.name;
-
+    const nameAttributeValue = nameAttribute && useText(nameAttribute);
     const isValidDate = date => date instanceof Date && !isNaN(date);
 
     const changeHandler = date => {
@@ -125,7 +125,7 @@
 
     const DateTimeCmp = (
       <DateTimeComponent
-        name={nameAttribute || customModelAttributeName}
+        name={nameAttributeValue || customModelAttributeName}
         value={selectedDate}
         size={size}
         classes={{ root: classes.formControl }}
@@ -136,7 +136,7 @@
         inputVariant={inputvariant}
         InputProps={{
           inputProps: {
-            name: nameAttribute || customModelAttributeName,
+            name: nameAttributeValue || customModelAttributeName,
             tabIndex: isDev && -1,
           },
         }}
@@ -178,7 +178,7 @@
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <input
           type="hidden"
-          name={nameAttribute || customModelAttributeName}
+          name={nameAttributeValue || customModelAttributeName}
           value={resultString}
         />
         {variant === 'static' ? (

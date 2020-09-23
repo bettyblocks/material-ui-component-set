@@ -23,8 +23,8 @@
       hideLabel,
       customModelAttribute: customModelAttributeObj,
       property,
-      propertyLabelOverride,
       validationValueMissing,
+      nameAttribute,
     } = options;
     const { TextField, MenuItem } = window.MaterialUI.Core;
     const displayError = showError === 'built-in';
@@ -35,17 +35,18 @@
     const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
 
-    const { label: propertyLabelText, kind, values = [] } =
-      getProperty(property) || {};
+    const { kind, values = [] } = getProperty(property) || {};
 
     const { id: customModelAttributeId, label } = customModelAttributeObj;
-    const propLabelOverride = useText(propertyLabelOverride);
-    const propertyLabel = propLabelOverride || propertyLabelText;
-    const labelText = property ? propertyLabel : useText(label);
+
+    const labelText = useText(label);
+    const nameAttributeValue = nameAttribute && useText(nameAttribute);
 
     const customModelAttribute = getCustomModelAttribute(
       customModelAttributeId,
     );
+    const customModelAttributeName =
+      customModelAttribute && customModelAttribute.name;
     const value = currentValue;
 
     const { name: labelName } = getProperty(labelProp) || {};
@@ -154,7 +155,7 @@
           onChange={handleChange}
           onBlur={validationHandler}
           inputProps={{
-            name: customModelAttribute && customModelAttribute.name,
+            name: nameAttributeValue || customModelAttributeName,
             tabIndex: isDev ? -1 : 0,
           }}
           required={required}

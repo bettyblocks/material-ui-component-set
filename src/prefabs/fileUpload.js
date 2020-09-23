@@ -1525,7 +1525,7 @@
           type: 'VARIABLE',
           label: 'name attribute',
           key: 'nameAttribute',
-          value: '',
+          value: [],
           configuration: {
             condition: {
               type: 'SHOW',
