@@ -14,10 +14,10 @@
       sortable,
     } = options;
     const { headerOnly, handleSort, orderBy } = parent || {};
+    const { type } = property;
     const propertyArray = [property].flat();
-    const propertyId = propertyArray[propertyArray.length - 1];
     const { name: propertyName, label: propertyLabel } =
-      getProperty(propertyId) || {};
+      getProperty(property) || {};
     const { field, order = 'asc' } = orderBy || {};
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
@@ -29,7 +29,12 @@
     ) : (
       <Property id={property} />
     );
+
     let columnText = propertyName ? propContent : contentPlaceholder;
+    if (type === 'ME_PROPERTY') {
+      columnText = isDev ? `{{ ${propertyName} }}` : useText([property]);
+    }
+
     if (bodyText) {
       columnText = bodyText;
     }

@@ -13,6 +13,12 @@
           type: 'MODEL',
         },
         {
+          value: '',
+          label: 'Authentication Profile',
+          key: 'authProfile',
+          type: 'AUTHENTICATION_PROFILE',
+        },
+        {
           value: {},
           label: 'Filter',
           key: 'filter',
