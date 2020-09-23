@@ -64,12 +64,6 @@
           type: 'VARIABLE',
         },
         {
-          label: 'Logo width',
-          key: 'logoWidth',
-          value: '100',
-          type: 'TEXT',
-        },
-        {
           label: 'Align items',
           key: 'alignItems',
           value: 'right',

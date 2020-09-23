@@ -10,13 +10,13 @@
 
         const {
           actionId,
-          actionInputId,
           model,
           filter,
           formErrorMessage,
           formSuccessMessage,
           redirect,
           showError,
+          actionInputId,
           showSuccess,
         } = options;
         const formRef = React.createRef();
