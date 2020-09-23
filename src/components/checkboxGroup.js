@@ -114,8 +114,6 @@
       />
     );
 
-    const checkboxData = (checkboxOptions || '').split('\n');
-
     const renderCheckBoxes = () => {
       if (kind === 'list' || kind === 'LIST') {
         return listValues.map(({ value: v }) => renderCheckbox(v, v));
