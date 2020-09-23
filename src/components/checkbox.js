@@ -29,7 +29,7 @@
     const customModelAttributeName =
       customModelAttribute && customModelAttribute.name;
     const labelText = useText(label);
-    const nameAttributeValue = nameAttribute && useText(nameAttribute);
+    const nameAttributeValue = useText(nameAttribute);
 
     const {
       Checkbox: MUICheckbox,

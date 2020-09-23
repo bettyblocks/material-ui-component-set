@@ -62,7 +62,7 @@
     );
     const customModelAttributeName =
       customModelAttribute && customModelAttribute.name;
-    const nameAttributeValue = nameAttribute && useText(nameAttribute);
+    const nameAttributeValue = useText(nameAttribute);
 
     const validPattern = pattern || null;
     const validMinlength = minlength || null;

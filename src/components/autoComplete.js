@@ -48,7 +48,7 @@
     const [currentValue, setCurrentValue] = useState(useText(defaultValue));
     const placeholderText = useText(placeholder);
     const helper = useText(helperText);
-    const nameAttributeValue = nameAttribute && useText(nameAttribute);
+    const nameAttributeValue = useText(nameAttribute);
 
     const { id: customModelAttributeId, label } = customModelAttributeObj;
     const { kind, values: listValues } = getProperty(property) || {};

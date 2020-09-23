@@ -43,7 +43,7 @@
     );
     const customModelAttributeName =
       customModelAttribute && customModelAttribute.name;
-    const nameAttributeValue = nameAttribute && useText(nameAttribute);
+    const nameAttributeValue = useText(nameAttribute);
 
     let componentValue = useText(defaultValue);
 

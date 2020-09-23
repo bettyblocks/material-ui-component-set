@@ -40,7 +40,7 @@
     const { id: customModelAttributeId, label } = customModelAttributeObj;
 
     const labelText = useText(label);
-    const nameAttributeValue = nameAttribute && useText(nameAttribute);
+    const nameAttributeValue = useText(nameAttribute);
 
     const customModelAttribute = getCustomModelAttribute(
       customModelAttributeId,
