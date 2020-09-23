@@ -33,6 +33,7 @@
     const isDev = B.env === 'dev';
 
     const componentHelperText = useText(helperText);
+    const { kind, values: listValues = [] } = getProperty(property) || {};
     const labelProperty = getProperty(labelProp);
     const valueProperty = getProperty(valueProp);
     const { id: customModelAttributeId, label } = customModelAttributeObj;
@@ -116,8 +117,13 @@
     const checkboxData = (checkboxOptions || '').split('\n');
 
     const renderCheckBoxes = () => {
+      if (kind === 'list' || kind === 'LIST') {
+        return listValues.map(({ value: v }) => renderCheckbox(v, v));
+      }
       if (optionType === 'static') {
-        return checkboxData.map(opt => renderCheckbox(opt, opt));
+        return (checkboxOptions || '')
+          .split('\n')
+          .map(opt => renderCheckbox(opt, opt));
       }
       if (isDev) return renderCheckbox('Placeholder', false);
       if (loading) return <span>Loading...</span>;
