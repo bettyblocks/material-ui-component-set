@@ -18,9 +18,9 @@
       linkTo,
       linkToExternal,
       type,
-      visible,
       actionId,
       buttonText,
+      visible,
     } = options;
 
     const { env, useText, useAction } = B;
@@ -32,7 +32,6 @@
       (linkToExternal && useText(linkToExternal)) || '';
     const isIcon = variant === 'icon';
     const buttonContent = useText(buttonText);
-
     const [isVisible, setIsVisible] = useState(visible);
 
     const hideButton = () => setIsVisible(false);
