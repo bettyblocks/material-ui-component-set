@@ -33,7 +33,7 @@
         } = options;
 
         const rowsPerPage = parseInt(take, 10) || 50;
-        const { TextField, InputAdornment } = window.MaterialUI.Core;
+        const { TextField, InputAdornment, Box } = window.MaterialUI.Core;
         const { Search } = window.MaterialUI.Icons;
         const searchPropertyArray = [searchProperty].flat();
         const { label: searchPropertyLabel } =
@@ -224,7 +224,7 @@
         const Looper = results => {
           const rows = results.map(item => (
             <ModelProvider key={item.id} value={item} id={model}>
-              <div onClick={() => handleClick(item)}>{children}</div>
+              <Box onClick={() => handleClick(item)}>{children}</Box>
             </ModelProvider>
           ));
 
