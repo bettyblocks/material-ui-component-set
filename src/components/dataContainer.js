@@ -15,8 +15,20 @@
           authProfile,
           redirectWithoutResult,
           showError,
+          currentRecord,
         } = options;
         const displayError = showError === 'built-in';
+
+        const getFilter = React.useCallback(() => {
+          if (isDev || !currentRecord || !model) {
+            return filter;
+          }
+
+          const idProperty = B.getIdProperty(model);
+          return {
+            [idProperty.id]: { eq: currentRecord },
+          };
+        }, [isDev, filter, currentRecord, model]);
 
         const builderLayout = () => (
           <>
@@ -41,8 +53,11 @@
             return builderLayout();
           }
 
+          const dynamicFilter = getFilter();
+          console.log({ dynamicFilter, currentRecord });
+
           return (
-            <B.GetOne modelId={model} filter={filter}>
+            <B.GetOne modelId={model} filter={dynamicFilter}>
               {({ loading, error, data }) => {
                 if (loading) {
                   B.triggerEvent('onLoad', loading);
