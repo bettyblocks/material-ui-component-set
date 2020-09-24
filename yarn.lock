@@ -134,10 +134,10 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@betty-blocks/cli@^23.13.0":
-  version "23.13.0"
-  resolved "https://registry.yarnpkg.com/@betty-blocks/cli/-/cli-23.13.0.tgz#97c18c6eef358d14854dad8fdb0c81761589e36f"
-  integrity sha512-MNpSbEpqU2h80/Q0YGarRi1DavxP8wwx4ku6IBqHSTS9BBajCh0HBYLEROh3E7amMov3XtdNeoevPGlC1bwMGw==
+"@betty-blocks/cli@^23.14.0":
+  version "23.14.0"
+  resolved "https://registry.yarnpkg.com/@betty-blocks/cli/-/cli-23.14.0.tgz#a9d830b32175b2633d0a63c6c062d656f3f9d33f"
+  integrity sha512-UDw1rPjUaDId9VQo10+oZn+43U3bjrxEHaBpX0F8nn6RzxfjmnL5SubZU0wUsT7oUALNr/lKlBO8i+uKZ/QxaQ==
   dependencies:
     "@azure/ms-rest-js" "^2.0.4"
     "@azure/storage-blob" "^10.3.0"
@@ -6107,7 +6107,7 @@ lodash@^3.3.1:
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-3.10.1.tgz#5bf45e8e49ba4189e17d482789dfd15bd140b7b6"
   integrity sha1-W/Rejkm6QYnhfUgnid/RW9FAt7Y=
 
-lodash@^4.17.20:
+lodash@^4.17.11, lodash@^4.17.12, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.20, lodash@^4.17.4, lodash@^4.5.1:
   version "4.17.20"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.20.tgz#b44a9b6297bcb698f1c51a3545a2b3b368d59c52"
   integrity sha512-PlhdFcillOINfeV7Ni6oF1TAEayyZBoZ8bcshTHqOYJYlrqzRK5hagpagky5o4HfCzzd1TRkXPMFq6cKk9rGmA==
