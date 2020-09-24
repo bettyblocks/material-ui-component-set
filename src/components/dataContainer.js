@@ -53,10 +53,8 @@
             return builderLayout();
           }
 
-          const dynamicFilter = getFilter();
-
           return (
-            <B.GetOne modelId={model} filter={dynamicFilter}>
+            <B.GetOne modelId={model} filter={getFilter()}>
               {({ loading, error, data }) => {
                 if (loading) {
                   B.triggerEvent('onLoad', loading);

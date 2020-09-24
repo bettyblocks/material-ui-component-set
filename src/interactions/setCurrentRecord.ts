@@ -5,6 +5,5 @@ function setCurrentRecord({
   event: Event;
   argument: number;
 }): number {
-  // Logic
   return argument;
 }
