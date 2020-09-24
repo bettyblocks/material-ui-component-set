@@ -54,7 +54,6 @@
           }
 
           const dynamicFilter = getFilter();
-          console.log({ dynamicFilter, currentRecord });
 
           return (
             <B.GetOne modelId={model} filter={dynamicFilter}>
