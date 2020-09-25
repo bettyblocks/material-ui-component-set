@@ -98,7 +98,7 @@
 
         const trigger = (data, loading, error) => {
           if (data || error) {
-            B.triggerEvent('onActionDone', loading);
+            B.triggerEvent('onActionDone');
           }
 
           if (data) {
