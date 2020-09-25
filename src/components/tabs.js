@@ -17,20 +17,24 @@
 
     const isDev = env === 'dev';
     const [value, setValue] = useState(parseInt(defaultValue - 1, 10) || 0);
-    const devValue = parseInt(defaultValue - 1, 10) || 0;
-    const currentValue = isDev ? devValue : value;
     const [tabData, setTabData] = useState({});
 
     const handleChange = (_, newValue) => {
       setValue(newValue);
     };
 
+    useEffect(() => {
+      if (isDev) {
+        setValue(parseInt(defaultValue - 1, 10));
+      }
+    }, [isDev, defaultValue]);
+
     const TabGroup = (
       <div className={classes.tabs}>
         <Tabs
           aria-label="tabs"
           onChange={handleChange}
-          value={currentValue}
+          value={value}
           variant={variant}
           centered={centered}
           orientation={orientation}
@@ -60,11 +64,7 @@
             );
           })}
         </Tabs>
-        <Children
-          value={currentValue}
-          tabData={tabData}
-          setTabData={setTabData}
-        >
+        <Children value={value} tabData={tabData} setTabData={setTabData}>
           {children}
         </Children>
       </div>
