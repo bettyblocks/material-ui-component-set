@@ -33,7 +33,7 @@
         } = options;
 
         const rowsPerPage = parseInt(take, 10) || 50;
-        const { TextField, InputAdornment } = window.MaterialUI.Core;
+        const { TextField, InputAdornment, Box } = window.MaterialUI.Core;
         const { Search } = window.MaterialUI.Icons;
         const searchPropertyArray = [searchProperty].flat();
         const { label: searchPropertyLabel } =
@@ -118,8 +118,22 @@
           repeat();
         });
 
+        React.useEffect(() => {
+          if (isDev) return;
+          if (options.currentRecord !== '') {
+            B.triggerEvent('OnRowClick', options.currentRecord);
+          }
+        }, [options.currentRecord]);
+
         const handleSearch = event => {
           setSearch(event.target.value);
+        };
+
+        const [, updateOptions] = useOptions();
+
+        const handleClick = item => {
+          if (isDev) return;
+          updateOptions({ ...options, currentRecord: item.id });
         };
 
         const deepMerge = (...objects) => {
@@ -210,7 +224,7 @@
         const Looper = results => {
           const rows = results.map(item => (
             <ModelProvider key={item.id} value={item} id={model}>
-              {children}
+              <Box onClick={() => handleClick(item)}>{children}</Box>
             </ModelProvider>
           ));
 
