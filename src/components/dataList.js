@@ -60,7 +60,9 @@
                   type === 'inline' ? classes.inline : '',
                 ].join(' ')}
               >
-                {isPristine ? 'Data List' : children}
+                {isPristine
+                  ? 'Drag a component in the data list to display the data'
+                  : children}
               </div>
             </div>
 
