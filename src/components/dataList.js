@@ -21,7 +21,6 @@
         const {
           take,
           filter,
-          hidePagination,
           type,
           model,
           authProfile,
@@ -30,6 +29,7 @@
           searchProperty,
           order,
           orderBy,
+          pagination,
         } = options;
 
         const rowsPerPage = parseInt(take, 10) || 50;
@@ -44,7 +44,7 @@
         const isPristine = isEmpty && isDev;
         const displayError = showError === 'built-in';
         const listRef = React.createRef();
-
+        const [showPagination, setShowPagination] = useState(true);
         const builderLayout = () => (
           <>
             {searchProperty && !hideSearch && (
@@ -64,7 +64,7 @@
               </div>
             </div>
 
-            {isDev && !hidePagination && (
+            {isDev && showPagination && (
               <div className={classes.footer}>
                 <Pagination
                   totalCount={0}
@@ -183,6 +183,24 @@
           });
 
         useEffect(() => {
+          if (!isDev && data) {
+            switch (pagination) {
+              case 'never':
+                setShowPagination(false);
+                break;
+              case 'whenNeeded':
+                if (rowsPerPage >= data.totalCount) {
+                  setShowPagination(false);
+                }
+                break;
+              default:
+              case 'always':
+                setShowPagination(true);
+            }
+          }
+        }, [data, rowsPerPage]);
+
+        useEffect(() => {
           const handler = setTimeout(() => {
             setSearchTerm(search);
           }, 300);
@@ -267,7 +285,7 @@
                 </div>
               )}
 
-              {!hidePagination && (
+              {showPagination && (
                 <div className={classes.footer}>
                   <Pagination
                     totalCount={totalCount}
