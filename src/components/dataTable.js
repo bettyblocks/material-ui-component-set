@@ -329,11 +329,20 @@
 
     useEffect(() => {
       if (!isDev && data) {
-        pagination === 'always' && setShowPagination(true);
-        pagination === 'never' && setShowPagination(false);
-        pagination === 'whenNeeded' &&
-          rowsPerPage >= totalCount &&
-          setShowPagination(false);
+        switch (pagination) {
+          case 'never':
+            setShowPagination(false);
+            break;
+          case 'whenNeeded':
+            if (rowsPerPage >= totalCount) {
+              setShowPagination(false);
+            }
+            break;
+          default:
+          case 'always':
+            setShowPagination(true);
+            break;
+        }
       }
     }, [data, rowsPerPage]);
 
