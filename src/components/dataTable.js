@@ -49,6 +49,7 @@
       pagination,
       linkTo,
       showError,
+      autoLoadOnScroll,
     } = options;
     const repeaterRef = React.createRef();
     const tableRef = React.createRef();
@@ -65,6 +66,7 @@
       field: [orderProperty].flat() || null,
       order: orderProperty ? sortOrder : null,
     });
+    const endTableRef = React.createRef();
 
     const createSortObject = (fields, order) => {
       const fieldsArray = [fields].flat();
@@ -113,6 +115,8 @@
       }, {});
     };
 
+    const [skipTest, setSkipTest] = useState(0);
+
     const searchFilter = searchProperty
       ? searchPropertyArray.reduceRight(
           (acc, property, index) =>
@@ -134,9 +138,23 @@
       useGetAll(model, {
         rawFilter: where,
         variables,
-        skip: pagination && page * rowsPerPage,
-        take: pagination && rowsPerPage,
+        skip: (pagination && page * rowsPerPage) || skipTest,
+        take: (pagination && rowsPerPage) || 25,
       });
+
+    const [results, setResults] = useState([]);
+    const [totalCount, setTotalCount] = useState(0);
+
+    useEffect(() => {
+      if (!isDev && data) {
+        if (!pagination && autoLoadOnScroll) {
+          setResults(prev => [...prev, ...data.results]);
+        } else {
+          setResults(data.results);
+        }
+        setTotalCount(data.totalCount);
+      }
+    }, [data]);
 
     useEffect(() => {
       const handler = setTimeout(() => {
@@ -193,8 +211,6 @@
     if (error && !displayError) {
       B.triggerEvent('onError', error.message);
     }
-
-    const { totalCount = 0, results = [] } = data || {};
 
     if (results.length > 0) {
       B.triggerEvent('onSuccess', results);
@@ -326,6 +342,41 @@
       return tableContent;
     };
 
+    const [scrollTop, setScrollTop] = useState(0);
+
+    function fetchNextSet() {
+      if (totalCount > results.length) {
+        setSkipTest(prev => prev + 25);
+      }
+    }
+
+    useEffect(() => {
+      if (!isDev && autoLoadOnScroll && !pagination && endTableRef.current) {
+        setTimeout(() => {
+          const bounding =
+            endTableRef.current && endTableRef.current.getBoundingClientRect();
+          if (bounding) {
+            if (
+              bounding.top >= 0 &&
+              bounding.left >= 0 &&
+              bounding.right <=
+                (window.innerWidth || document.documentElement.clientWidth) &&
+              bounding.bottom <=
+                (window.innerHeight || document.documentElement.clientHeight)
+            ) {
+              fetchNextSet();
+            }
+          }
+        }, 400);
+
+        const onScroll = e => {
+          setScrollTop(e.target.documentElement.scrollTop);
+        };
+        window.addEventListener('scroll', onScroll);
+        return () => window.removeEventListener('scroll', onScroll);
+      }
+    }, [scrollTop]);
+
     return (
       <div className={classes.root}>
         <Paper
@@ -370,6 +421,7 @@
               )}
             </Table>
           </TableContainer>
+          <div ref={endTableRef} />
           {pagination && (
             <TablePagination
               classes={{ root: classes.pagination }}

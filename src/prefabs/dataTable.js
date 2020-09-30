@@ -74,6 +74,12 @@
           type: 'TOGGLE',
         },
         {
+          value: false,
+          label: 'Auto load on scroll',
+          key: 'autoLoadOnScroll',
+          type: 'TOGGLE',
+        },
+        {
           type: 'VARIABLE',
           label: 'Title',
           key: 'title',
