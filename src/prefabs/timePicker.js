@@ -7,7 +7,7 @@
       name: 'DateTimePicker',
       options: [
         {
-          value: { label: ['Label'] },
+          value: { label: ['Time'] },
           label: 'Label',
           key: 'customModelAttribute',
           type: 'CUSTOM_MODEL_ATTRIBUTE',
