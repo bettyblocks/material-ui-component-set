@@ -149,12 +149,6 @@
           type: 'SIZES',
         },
         {
-          label: 'Hide pagination',
-          key: 'hidePagination',
-          value: false,
-          type: 'TOGGLE',
-        },
-        {
           value: '',
           label: 'Hide built-in search field',
           key: 'hideSearch',
