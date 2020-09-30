@@ -79,8 +79,10 @@
             acc[key] = `${acc[key]},${value}`;
             return acc;
           }, {});
-          const input = item && item.id ? { id: item.id, ...values } : values;
-          callAction({ variables: { input } });
+
+          const postValues =
+            item && item.id ? { id: item.id, ...values } : values;
+          callAction({ variables: { input: postValues } });
         };
 
         const renderContent = loading => {
