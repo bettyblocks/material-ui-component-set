@@ -58,6 +58,7 @@
     const [rowsPerPage, setRowsPerPage] = useState(takeNum);
     const [search, setSearch] = useState('');
     const [searchTerm, setSearchTerm] = useState('');
+    const [showPagination, setShowPagination] = useState(true);
     const searchPropertyArray = [searchProperty].flat();
     const { label: searchPropertyLabel = '{property}' } =
       getProperty(searchProperty) || {};
@@ -134,8 +135,8 @@
       useGetAll(model, {
         rawFilter: where,
         variables,
-        skip: pagination && page * rowsPerPage,
-        take: pagination && rowsPerPage,
+        skip: pagination !== 'never' && page * rowsPerPage,
+        take: pagination !== 'never' && rowsPerPage,
       });
 
     useEffect(() => {
@@ -335,6 +336,25 @@
       return tableContent;
     };
 
+    useEffect(() => {
+      if (!isDev && data) {
+        switch (pagination) {
+          case 'never':
+            setShowPagination(false);
+            break;
+          case 'whenNeeded':
+            if (rowsPerPage >= totalCount) {
+              setShowPagination(false);
+            }
+            break;
+          default:
+          case 'always':
+            setShowPagination(true);
+            break;
+        }
+      }
+    }, [data, rowsPerPage]);
+
     return (
       <div className={classes.root}>
         <Paper
@@ -379,7 +399,7 @@
               )}
             </Table>
           </TableContainer>
-          {pagination && (
+          {showPagination && (
             <TablePagination
               classes={{ root: classes.pagination }}
               rowsPerPageOptions={[5, 10, 25, 50, 100]}

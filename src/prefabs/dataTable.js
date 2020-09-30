@@ -100,10 +100,19 @@
           type: 'FONT',
         },
         {
-          type: 'TOGGLE',
           label: 'Pagination',
           key: 'pagination',
-          value: true,
+          value: 'always',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Always', value: 'always' },
+              { name: 'When needed', value: 'whenNeeded' },
+              { name: 'Never', value: 'never' },
+            ],
+          },
         },
         {
           value: '5',
@@ -121,10 +130,10 @@
               { name: '100', value: '100' },
             ],
             condition: {
-              type: 'SHOW',
+              type: 'HIDE',
               option: 'pagination',
               comparator: 'EQ',
-              value: true,
+              value: 'never',
             },
           },
         },
@@ -135,10 +144,10 @@
           value: ['Rows per page'],
           configuration: {
             condition: {
-              type: 'SHOW',
+              type: 'HIDE',
               option: 'pagination',
               comparator: 'EQ',
-              value: true,
+              value: 'never',
             },
           },
         },

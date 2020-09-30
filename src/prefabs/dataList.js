@@ -82,6 +82,21 @@
           },
         },
         {
+          label: 'Pagination',
+          key: 'pagination',
+          value: 'always',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Always', value: 'always' },
+              { name: 'When needed', value: 'whenNeeded' },
+              { name: 'Never', value: 'never' },
+            ],
+          },
+        },
+        {
           value: '5',
           label: 'Rows per page (max 50)',
           key: 'take',
@@ -146,12 +161,6 @@
           label: 'Outer space',
           key: 'outerSpacing',
           type: 'SIZES',
-        },
-        {
-          label: 'Hide pagination',
-          key: 'hidePagination',
-          value: false,
-          type: 'TOGGLE',
         },
         {
           value: '',
