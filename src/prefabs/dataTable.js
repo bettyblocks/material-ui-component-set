@@ -115,12 +115,6 @@
               { name: '50', value: '50' },
               { name: '100', value: '100' },
             ],
-            condition: {
-              type: 'HIDE',
-              option: 'pagination',
-              comparator: 'EQ',
-              value: 'never',
-            },
           },
         },
         {
