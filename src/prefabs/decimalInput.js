@@ -1,18 +1,18 @@
 (() => ({
-  name: 'NumberInput',
-  icon: 'NumberInputIcon',
+  name: 'DecimalInput',
+  icon: 'DecimalInputIcon',
   category: 'FORM',
   structure: [
     {
       name: 'TextField',
       options: [
         {
-          value: { label: ['Number'] },
+          value: { label: ['Decimal'] },
           label: 'Label',
           key: 'customModelAttribute',
           type: 'CUSTOM_MODEL_ATTRIBUTE',
           configuration: {
-            allowedTypes: ['integer'],
+            allowedTypes: ['decimal'],
             condition: {
               type: 'SHOW',
               option: 'property',
@@ -243,7 +243,7 @@
         {
           label: 'Type',
           key: 'type',
-          value: 'number',
+          value: 'decimal',
           type: 'TEXT',
           configuration: {
             condition: {
