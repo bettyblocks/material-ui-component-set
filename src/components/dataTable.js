@@ -135,8 +135,8 @@
       useGetAll(model, {
         rawFilter: where,
         variables,
-        skip: pagination !== 'never' && page * rowsPerPage,
-        take: pagination !== 'never' && rowsPerPage,
+        skip: page * rowsPerPage,
+        take: rowsPerPage,
       });
 
     useEffect(() => {
