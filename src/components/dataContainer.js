@@ -1,6 +1,6 @@
 (() => ({
   name: 'DataContainer',
-  type: 'CONTAINER_COMPONENT',
+  type: 'BODY_COMPONENT',
   allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (
