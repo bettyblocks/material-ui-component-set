@@ -1,3 +1,11 @@
+# [1.34.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.33.0...v1.34.0) (2020-10-01)
+
+
+### Features
+
+* improve placeholder text, and empty text & title content ([765544f](https://github.com/bettyblocks/material-ui-component-set/commit/765544f1b4734a5bf3b63f40a39a8df21a33c187))
+* remove additional text/title values ([dccca8c](https://github.com/bettyblocks/material-ui-component-set/commit/dccca8c97fea521f877e55618d6c7da18147c64c))
+
 # [1.33.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.32.6...v1.33.0) (2020-10-01)
 
 
