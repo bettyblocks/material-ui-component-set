@@ -50,12 +50,14 @@
       linkTo,
       showError,
       autoLoadOnScroll,
+      autoLoadTakeAmount,
     } = options;
     const repeaterRef = React.createRef();
     const tableRef = React.createRef();
     const displayError = showError === 'built-in';
     const [page, setPage] = useState(0);
     const takeNum = parseInt(take, 10);
+    const autoLoadTakeAmountNum = parseInt(autoLoadTakeAmount, 10);
     const [rowsPerPage, setRowsPerPage] = useState(takeNum);
     const [search, setSearch] = useState('');
     const [searchTerm, setSearchTerm] = useState('');
@@ -115,7 +117,7 @@
       }, {});
     };
 
-    const [skipTest, setSkipTest] = useState(0);
+    const [skip, setSkip] = useState(0);
 
     const searchFilter = searchProperty
       ? searchPropertyArray.reduceRight(
@@ -138,8 +140,8 @@
       useGetAll(model, {
         rawFilter: where,
         variables,
-        skip: (pagination && page * rowsPerPage) || skipTest,
-        take: (pagination && rowsPerPage) || 25,
+        skip: (pagination && page * rowsPerPage) || skip,
+        take: (pagination && rowsPerPage) || autoLoadTakeAmountNum,
       });
 
     const [results, setResults] = useState([]);
@@ -294,7 +296,7 @@
     };
 
     const tableContentModel = () => {
-      if (loading || error) {
+      if ((loading && pagination) || error) {
         return Array.from(Array(rowsPerPage).keys()).map(idx => (
           <TableRow key={idx} classes={{ root: classes.bodyRow }}>
             {Array.from(Array(children.length).keys()).map(colIdx => (
@@ -327,7 +329,9 @@
     };
 
     const renderTableContent = () => {
-      let tableContent = Array.from(Array(rowsPerPage).keys()).map(idx => (
+      let tableContent = Array.from(
+        Array(pagination ? rowsPerPage : autoLoadTakeAmountNum).keys(),
+      ).map(idx => (
         <TableRow key={idx} classes={{ root: classes.bodyRow }}>
           {children}
         </TableRow>
@@ -346,12 +350,12 @@
 
     function fetchNextSet() {
       if (totalCount > results.length) {
-        setSkipTest(prev => prev + 25);
+        setSkip(prev => prev + autoLoadTakeAmountNum);
       }
     }
 
-    useEffect(() => {
-      if (!isDev && autoLoadOnScroll && !pagination && endTableRef.current) {
+    function checkEndTable() {
+      if (!isDev && autoLoadOnScroll) {
         setTimeout(() => {
           const bounding =
             endTableRef.current && endTableRef.current.getBoundingClientRect();
@@ -362,13 +366,25 @@
               bounding.right <=
                 (window.innerWidth || document.documentElement.clientWidth) &&
               bounding.bottom <=
-                (window.innerHeight || document.documentElement.clientHeight)
+                (window.innerHeight + 400 ||
+                  document.documentElement.clientHeight)
             ) {
               fetchNextSet();
             }
           }
         }, 400);
+      }
+    }
 
+    useEffect(() => {
+      if (!isDev && autoLoadOnScroll) {
+        checkEndTable();
+      }
+    }, [endTableRef]);
+
+    useEffect(() => {
+      if (!isDev && autoLoadOnScroll) {
+        checkEndTable();
         const onScroll = e => {
           setScrollTop(e.target.documentElement.scrollTop);
         };

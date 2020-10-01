@@ -74,12 +74,6 @@
           type: 'TOGGLE',
         },
         {
-          value: false,
-          label: 'Auto load on scroll',
-          key: 'autoLoadOnScroll',
-          type: 'TOGGLE',
-        },
-        {
           type: 'VARIABLE',
           label: 'Title',
           key: 'title',
@@ -129,6 +123,43 @@
             condition: {
               type: 'SHOW',
               option: 'pagination',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          value: false,
+          label: 'Auto load on scroll',
+          key: 'autoLoadOnScroll',
+          type: 'TOGGLE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'pagination',
+              comparator: 'EQ',
+              value: false,
+            },
+          },
+        },
+        {
+          value: '50',
+          label: 'Number of records to auto load',
+          key: 'autoLoadTakeAmount',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'DROPDOWN',
+            dataType: 'string',
+            allowedInput: [
+              { name: '5', value: '5' },
+              { name: '10', value: '10' },
+              { name: '25', value: '25' },
+              { name: '50', value: '50' },
+              { name: '100', value: '100' },
+            ],
+            condition: {
+              type: 'SHOW',
+              option: 'autoLoadOnScroll',
               comparator: 'EQ',
               value: true,
             },
