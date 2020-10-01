@@ -7,17 +7,12 @@
       name: 'Select',
       options: [
         {
-          value: '',
-          label: 'Property',
-          key: 'property',
-          type: 'PROPERTY',
-        },
-        {
-          value: ['Label'],
+          value: { label: ['Label'] },
           label: 'Label',
-          key: 'label',
-          type: 'VARIABLE',
+          key: 'customModelAttribute',
+          type: 'CUSTOM_MODEL_ATTRIBUTE',
           configuration: {
+            allowedTypes: ['string'],
             condition: {
               type: 'SHOW',
               option: 'property',
@@ -48,12 +43,6 @@
           type: 'VARIABLE',
         },
         {
-          value: '',
-          label: 'Input',
-          key: 'actionInputId',
-          type: 'ACTION_INPUT',
-        },
-        {
           label: 'Option type',
           key: 'optionType',
           value: 'static',
@@ -63,8 +52,23 @@
             dataType: 'string',
             allowedInput: [
               { name: 'Static', value: 'static' },
-              { name: 'Data', value: 'data' },
+              { name: 'Model', value: 'model' },
+              { name: 'Property', value: 'property' },
             ],
+          },
+        },
+        {
+          value: '',
+          label: 'Property',
+          key: 'property',
+          type: 'PROPERTY',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'optionType',
+              comparator: 'EQ',
+              value: 'property',
+            },
           },
         },
         {
@@ -77,7 +81,7 @@
               type: 'SHOW',
               option: 'optionType',
               comparator: 'EQ',
-              value: 'data',
+              value: 'model',
             },
           },
         },
@@ -92,7 +96,7 @@
               type: 'SHOW',
               option: 'optionType',
               comparator: 'EQ',
-              value: 'data',
+              value: 'model',
             },
           },
         },
@@ -107,7 +111,7 @@
               type: 'SHOW',
               option: 'optionType',
               comparator: 'EQ',
-              value: 'data',
+              value: 'model',
             },
           },
         },
@@ -122,7 +126,7 @@
               type: 'SHOW',
               option: 'optionType',
               comparator: 'EQ',
-              value: 'data',
+              value: 'model',
             },
           },
         },
@@ -142,7 +146,7 @@
               type: 'SHOW',
               option: 'optionType',
               comparator: 'EQ',
-              value: 'data',
+              value: 'model',
             },
           },
         },
@@ -384,6 +388,26 @@
             condition: {
               type: 'SHOW',
               option: 'styles',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          value: false,
+          label: 'Advanced settings',
+          key: 'advancedSettings',
+          type: 'TOGGLE',
+        },
+        {
+          type: 'VARIABLE',
+          label: 'name attribute',
+          key: 'nameAttribute',
+          value: [],
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'advancedSettings',
               comparator: 'EQ',
               value: true,
             },
