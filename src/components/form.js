@@ -154,7 +154,9 @@
                     isPristine && classes.pristine,
                   ].join(' ')}
                 >
-                  {isPristine && <span>form</span>}
+                  {isPristine && (
+                    <span>Drag form components in the form to submit data</span>
+                  )}
                   {renderContent(loading)}
                 </form>
               </>
