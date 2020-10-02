@@ -354,7 +354,7 @@
 
     useEffect(() => {
       if (!pagination && autoLoadOnScroll) {
-        const fetchingNextSet = false;
+        let fetchingNextSet = false;
         const tableContainerElement = tableContainerRef.current;
         const parent = tableContainerElement.parentNode;
 
