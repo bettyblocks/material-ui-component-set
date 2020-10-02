@@ -1,3 +1,11 @@
+## [1.35.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.35.0...v1.35.1) (2020-10-02)
+
+
+### Bug Fixes
+
+* hide dev pagination if option set to never ([be96974](https://github.com/bettyblocks/material-ui-component-set/commit/be9697490870b757760f083711ebaac517e2fbd2))
+* hide dev pagination if option set to never (dataList) ([1a074a6](https://github.com/bettyblocks/material-ui-component-set/commit/1a074a63be3e51a10fd8e20dcaf7ff1491dabe54))
+
 # [1.35.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.34.0...v1.35.0) (2020-10-02)
 
 
