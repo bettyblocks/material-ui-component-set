@@ -332,6 +332,16 @@
     };
 
     useEffect(() => {
+      if (isDev) {
+        if (pagination === 'never') {
+          setShowPagination(false);
+        } else {
+          setShowPagination(true);
+        }
+      }
+    }, [pagination]);
+
+    useEffect(() => {
       if (!isDev && data) {
         switch (pagination) {
           case 'never':
