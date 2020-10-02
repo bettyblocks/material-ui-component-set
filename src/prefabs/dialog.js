@@ -643,7 +643,7 @@
                               type: 'VARIABLE',
                               label: 'Content',
                               key: 'content',
-                              value: ['Dialog title'],
+                              value: [],
                               configuration: {
                                 as: 'MULTILINE',
                               },
