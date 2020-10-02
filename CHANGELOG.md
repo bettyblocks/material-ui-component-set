@@ -1,3 +1,29 @@
+## [1.35.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.35.0...v1.35.1) (2020-10-02)
+
+
+### Bug Fixes
+
+* hide dev pagination if option set to never ([be96974](https://github.com/bettyblocks/material-ui-component-set/commit/be9697490870b757760f083711ebaac517e2fbd2))
+* hide dev pagination if option set to never (dataList) ([1a074a6](https://github.com/bettyblocks/material-ui-component-set/commit/1a074a63be3e51a10fd8e20dcaf7ff1491dabe54))
+
+# [1.35.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.34.0...v1.35.0) (2020-10-02)
+
+
+### Bug Fixes
+
+* always show rows per page option ([f095613](https://github.com/bettyblocks/material-ui-component-set/commit/f0956134d137c1572de5f7ad0978564747bc25f6))
+* linting errors by using switch instead of ternaries ([92f0880](https://github.com/bettyblocks/material-ui-component-set/commit/92f088041909a4bc8917096f9d9fe0c8cc00f4b9))
+* remove hide pagination prefab ([80b323a](https://github.com/bettyblocks/material-ui-component-set/commit/80b323a40fc5bb832787f1c59d51fe5f54cb07be))
+* remove the check of never for skip and take ([3916cab](https://github.com/bettyblocks/material-ui-component-set/commit/3916cab3321bacee16ef7a6a493cdd663ed19579))
+* update rowsPerPage on takeNum change ([06d69ef](https://github.com/bettyblocks/material-ui-component-set/commit/06d69ef8fe90dec78aeea3407919c843079cbe6a))
+
+
+### Features
+
+* add 'when needed' option to dataTable pagination ([05a8cd4](https://github.com/bettyblocks/material-ui-component-set/commit/05a8cd4c9cfdc7c3070ab8743c2f16ad3ec88c3a))
+* add condition for displaying take & rows per page options ([7e8546f](https://github.com/bettyblocks/material-ui-component-set/commit/7e8546fe5a10444cf0f1c7c9ef0f7db828d96000))
+* add pagination options to dataList ([9408487](https://github.com/bettyblocks/material-ui-component-set/commit/9408487707b23e8cc3eb4ef65fb38d0b5d268605))
+
 # [1.34.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.33.0...v1.34.0) (2020-10-01)
 
 
