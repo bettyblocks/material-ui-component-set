@@ -5,7 +5,6 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const {
-      label,
       required,
       disabled,
       defaultValue,
@@ -20,30 +19,34 @@
       optionType,
       labelProperty: labelProp,
       valueProperty: valueProp,
-      actionInputId,
-      property,
-      propertyLabelOverride,
       showError,
       hideLabel,
+      customModelAttribute: customModelAttributeObj,
+      property,
       validationValueMissing,
+      nameAttribute,
     } = options;
     const { TextField, MenuItem } = window.MaterialUI.Core;
     const displayError = showError === 'built-in';
     const isDev = B.env === 'dev';
-    const { useGetAll, getProperty, getActionInput, useText } = B;
+    const { useGetAll, getProperty, useText, getCustomModelAttribute } = B;
     const [currentValue, setCurrentValue] = useState(useText(defaultValue));
     const [errorState, setErrorState] = useState(false);
     const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
 
-    const { label: propertyLabelText, kind, values = [] } =
-      getProperty(property) || {};
+    const { kind, values = [] } = getProperty(property) || {};
 
-    const propLabelOverride = useText(propertyLabelOverride);
-    const propertyLabel = propLabelOverride || propertyLabelText;
-    const labelText = property ? propertyLabel : useText(label);
+    const { id: customModelAttributeId, label } = customModelAttributeObj;
 
-    const actionInput = getActionInput(actionInputId);
+    const labelText = useText(label);
+    const nameAttributeValue = useText(nameAttribute);
+
+    const customModelAttribute = getCustomModelAttribute(
+      customModelAttributeId,
+    );
+    const customModelAttributeName =
+      customModelAttribute && customModelAttribute.name;
     const value = currentValue;
 
     const { name: labelName } = getProperty(labelProp) || {};
@@ -119,7 +122,7 @@
           </MenuItem>
         ));
       }
-      if (optionType !== 'data') {
+      if (optionType === 'static') {
         return selectOptions.split('\n').map(option => (
           <MenuItem key={option} value={option}>
             {option}
@@ -152,7 +155,7 @@
           onChange={handleChange}
           onBlur={validationHandler}
           inputProps={{
-            name: actionInput && actionInput.name,
+            name: nameAttributeValue || customModelAttributeName,
             tabIndex: isDev ? -1 : 0,
           }}
           required={required}
