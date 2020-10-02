@@ -353,18 +353,26 @@
     }
 
     useEffect(() => {
-      const fetchingNextSet = false;
-      const tableContainerElement = tableContainerRef.current;
-      const scrollEvent = e => {
-        const { scrollTop, clientHeight, scrollHeight } = e.target;
-        const hitBottom = scrollTop + clientHeight >= scrollHeight - 500;
-        if (hitBottom && !fetchingNextSet) {
-          fetchingNextSet = true;
+      if (!pagination && autoLoadOnScroll) {
+        const fetchingNextSet = false;
+        const tableContainerElement = tableContainerRef.current;
+        const parent = tableContainerElement.parentNode;
+
+        if (tableContainerElement.scrollHeight <= parent.clientHeight) {
           fetchNextSet();
         }
-      };
 
-      tableContainerElement.addEventListener('scroll', scrollEvent);
+        const scrollEvent = e => {
+          const { scrollTop, clientHeight, scrollHeight } = e.target;
+          const hitBottom = scrollTop + clientHeight >= scrollHeight - 500;
+          if (hitBottom && !fetchingNextSet) {
+            fetchingNextSet = true;
+            fetchNextSet();
+          }
+        };
+
+        tableContainerElement.addEventListener('scroll', scrollEvent);
+      }
     }, [totalCount, results]);
 
     return (
