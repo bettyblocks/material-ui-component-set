@@ -183,6 +183,10 @@
       repeat();
     });
 
+    useEffect(() => {
+      setRowsPerPage(takeNum);
+    }, [takeNum]);
+
     const mounted = useRef(true);
     useEffect(() => {
       if (!mounted.current && loading) {
