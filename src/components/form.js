@@ -6,11 +6,10 @@
   jsx: (
     <div>
       {(() => {
-        const { env, Children, Action, useGetAll } = B;
+        const { env, Children, Action, useGetAll, getActionInput } = B;
 
         const {
-          actionId,
-          model,
+          formData,
           filter,
           formErrorMessage,
           formSuccessMessage,
@@ -31,14 +30,17 @@
         const history = isDev ? {} : useHistory();
         const [isInvalid, setIsInvalid] = useState(false);
         const location = isDev ? {} : useLocation();
+        const { actionId, modelId, variableId } = formData;
+        const formVariable = getActionInput(variableId);
 
         const { loading: isFetching, data: models, error: err } =
-          model &&
-          useGetAll(model, {
-            filter,
-            skip: 0,
-            take: 1,
-          });
+          (modelId &&
+            useGetAll(modelId, {
+              filter,
+              skip: 0,
+              take: 1,
+            })) ||
+          {};
 
         const mounted = useRef(true);
         useEffect(() => {
@@ -73,27 +75,35 @@
           evt.preventDefault();
           setIsInvalid(false);
           B.triggerEvent('onSubmit');
-          const formData = new FormData(formRef.current);
-          const values = Array.from(formData).reduce((acc, [key, value]) => {
-            if (!acc[key]) return { ...acc, [key]: value };
-            acc[key] = `${acc[key]},${value}`;
-            return acc;
-          }, {});
-
+          const formDataValues = new FormData(formRef.current);
+          const values = Array.from(formDataValues).reduce(
+            (acc, [key, value]) => {
+              if (!acc[key]) return { ...acc, [key]: value };
+              acc[key] = `${acc[key]},${value}`;
+              return acc;
+            },
+            {},
+          );
           const postValues =
             item && item.id ? { id: item.id, ...values } : values;
-          callAction({ variables: { input: postValues } });
+          let variables = { variables: { input: postValues } };
+          if (formVariable && formVariable.name) {
+            variables = {
+              variables: { input: { [formVariable.name]: postValues } },
+            };
+          }
+          callAction(variables);
         };
 
         const renderContent = loading => {
-          if (!model || isDev) {
+          if (!modelId || isDev) {
             return <Children loading={loading}>{children}</Children>;
           }
           if (isFetching) return 'Loading...';
           if (err && displayError) return err.message;
           if (!item) return children;
           return (
-            <B.ModelProvider key={item.id} value={item} id={model}>
+            <B.ModelProvider key={item.id} value={item} id={modelId}>
               {children}
             </B.ModelProvider>
           );
@@ -146,7 +156,9 @@
                     isPristine && classes.pristine,
                   ].join(' ')}
                 >
-                  {isPristine && <span>form</span>}
+                  {isPristine && (
+                    <span>Drag form components in the form to submit data</span>
+                  )}
                   {renderContent(loading)}
                 </form>
               </>
