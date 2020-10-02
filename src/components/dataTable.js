@@ -279,7 +279,7 @@
     };
 
     const renderTableHead = () => {
-      if (loading || error) {
+      if ((loading && pagination) || error) {
         return Array.from(Array(children.length).keys()).map(colIdx => (
           <TableCell key={colIdx}>
             <div className={classes.skeleton}>
@@ -353,11 +353,13 @@
     }
 
     useEffect(() => {
+      const fetchingNextSet = false;
       const tableContainerElement = tableContainerRef.current;
       const scrollEvent = e => {
         const { scrollTop, clientHeight, scrollHeight } = e.target;
-        const hitBottom = scrollTop + clientHeight === scrollHeight;
-        if (hitBottom) {
+        const hitBottom = scrollTop + clientHeight >= scrollHeight - 500;
+        if (hitBottom && !fetchingNextSet) {
+          fetchingNextSet = true;
           fetchNextSet();
         }
       };
