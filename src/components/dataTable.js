@@ -359,6 +359,7 @@
         const parent = tableContainerElement.parentNode;
 
         if (tableContainerElement.scrollHeight <= parent.clientHeight) {
+          fetchingNextSet = true;
           fetchNextSet();
         }
 
