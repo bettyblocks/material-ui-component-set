@@ -54,6 +54,7 @@
     } = options;
     const repeaterRef = React.createRef();
     const tableRef = React.createRef();
+    const tableContainerRef = React.createRef();
     const displayError = showError === 'built-in';
     const [page, setPage] = useState(0);
     const takeNum = parseInt(take, 10);
@@ -68,7 +69,6 @@
       field: [orderProperty].flat() || null,
       order: orderProperty ? sortOrder : null,
     });
-    const endTableRef = React.createRef();
 
     const createSortObject = (fields, order) => {
       const fieldsArray = [fields].flat();
@@ -346,52 +346,24 @@
       return tableContent;
     };
 
-    const [scrollTop, setScrollTop] = useState(0);
-
     function fetchNextSet() {
       if (totalCount > results.length) {
         setSkip(prev => prev + autoLoadTakeAmountNum);
       }
     }
 
-    function checkEndTable() {
-      if (!isDev && autoLoadOnScroll) {
-        setTimeout(() => {
-          const bounding =
-            endTableRef.current && endTableRef.current.getBoundingClientRect();
-          if (bounding) {
-            if (
-              bounding.top >= 0 &&
-              bounding.left >= 0 &&
-              bounding.right <=
-                (window.innerWidth || document.documentElement.clientWidth) &&
-              bounding.bottom <=
-                (window.innerHeight + 400 ||
-                  document.documentElement.clientHeight)
-            ) {
-              fetchNextSet();
-            }
-          }
-        }, 400);
-      }
-    }
-
     useEffect(() => {
-      if (!isDev && autoLoadOnScroll) {
-        checkEndTable();
-      }
-    }, [endTableRef]);
+      const tableContainerElement = tableContainerRef.current;
+      const scrollEvent = e => {
+        const { scrollTop, clientHeight, scrollHeight } = e.target;
+        const hitBottom = scrollTop + clientHeight === scrollHeight;
+        if (hitBottom) {
+          fetchNextSet();
+        }
+      };
 
-    useEffect(() => {
-      if (!isDev && autoLoadOnScroll) {
-        checkEndTable();
-        const onScroll = e => {
-          setScrollTop(e.target.documentElement.scrollTop);
-        };
-        window.addEventListener('scroll', onScroll);
-        return () => window.removeEventListener('scroll', onScroll);
-      }
-    }, [scrollTop]);
+      tableContainerElement.addEventListener('scroll', scrollEvent);
+    }, [totalCount, results]);
 
     return (
       <div className={classes.root}>
@@ -420,7 +392,10 @@
               )}
             </Toolbar>
           )}
-          <TableContainer classes={{ root: classes.container }}>
+          <TableContainer
+            ref={tableContainerRef}
+            classes={{ root: classes.container }}
+          >
             <Table
               stickyHeader={stickyHeader}
               size={size}
@@ -437,7 +412,6 @@
               )}
             </Table>
           </TableContainer>
-          <div ref={endTableRef} />
           {pagination && (
             <TablePagination
               classes={{ root: classes.pagination }}
