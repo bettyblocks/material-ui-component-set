@@ -21,7 +21,7 @@
       visible,
       actionId,
       buttonText,
-      actionInputProperties,
+      actionProperties,
     } = options;
 
     const { env, useText, useAction } = B;
@@ -41,7 +41,7 @@
     const [isLoading, setIsLoading] = useState(false);
     const toggleVisibility = () => setIsVisible(s => !s);
 
-    const propertyMappings = new Map(actionInputProperties);
+    const propertyMappings = new Map(actionProperties);
     const input = Array.from(propertyMappings.keys()).reduce((acc, key) => {
       const propertyId = propertyMappings.get(key);
 
