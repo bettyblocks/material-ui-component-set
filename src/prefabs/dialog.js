@@ -2291,7 +2291,7 @@
                               },
                             },
                             {
-                              value: '100px',
+                              value: '',
                               label: 'Height',
                               key: 'columnHeight',
                               type: 'TEXT',
