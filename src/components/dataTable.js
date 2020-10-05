@@ -346,33 +346,50 @@
       return tableContent;
     };
 
-    function fetchNextSet() {
+    function increaseSkipAmount() {
       if (totalCount > results.length) {
         setSkip(prev => prev + autoLoadTakeAmountNum);
       }
     }
 
     useEffect(() => {
-      if (!pagination && autoLoadOnScroll) {
+      if (!pagination && autoLoadOnScroll && !isDev) {
+        const offset = 500;
         let fetchingNextSet = false;
         const tableContainerElement = tableContainerRef.current;
-        const parent = tableContainerElement.parentNode;
 
-        if (tableContainerElement.scrollHeight <= parent.clientHeight) {
+        function fetchNextSet() {
           fetchingNextSet = true;
-          fetchNextSet();
+          increaseSkipAmount();
         }
 
-        const scrollEvent = e => {
-          const { scrollTop, clientHeight, scrollHeight } = e.target;
-          const hitBottom = scrollTop + clientHeight >= scrollHeight - 500;
-          if (hitBottom && !fetchingNextSet) {
-            fetchingNextSet = true;
+        if (stickyHeader) {
+          const parent = tableContainerElement.parentNode;
+          if (tableContainerElement.scrollHeight <= parent.clientHeight) {
             fetchNextSet();
           }
-        };
-
-        tableContainerElement.addEventListener('scroll', scrollEvent);
+          const scrollEvent = e => {
+            const { scrollTop, clientHeight, scrollHeight } = e.target;
+            const hitBottom = scrollTop + clientHeight >= scrollHeight - offset;
+            if (hitBottom && !fetchingNextSet) {
+              fetchNextSet();
+            }
+          };
+          tableContainerElement.addEventListener('scroll', scrollEvent);
+        } else {
+          if (window.innerHeight >= tableContainerElement.clientHeight) {
+            fetchNextSet();
+          }
+          const scrollEvent = () => {
+            const { scrollY, innerHeight } = window;
+            const { scrollHeight } = document.scrollingElement;
+            const hitBottom = innerHeight + scrollY >= scrollHeight - offset;
+            if (hitBottom && !fetchingNextSet) {
+              fetchNextSet();
+            }
+          };
+          window.addEventListener('scroll', scrollEvent);
+        }
       }
     }, [totalCount, results]);
 
