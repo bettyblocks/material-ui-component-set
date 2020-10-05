@@ -144,6 +144,9 @@
         take: (pagination && rowsPerPage) || autoLoadTakeAmountNum,
       });
 
+    const [results, setResults] = useState([]);
+    const [totalCount, setTotalCount] = useState(0);
+
     useEffect(() => {
       if (autoLoadOnScroll) {
         setResults([]);
@@ -152,9 +155,6 @@
         }, 0);
       }
     }, [searchTerm]);
-
-    const [results, setResults] = useState([]);
-    const [totalCount, setTotalCount] = useState(0);
 
     useEffect(() => {
       if (!isDev && data) {
@@ -355,20 +355,20 @@
       return tableContent;
     };
 
-    function increaseSkipAmount() {
-      if (totalCount > results.length) {
-        setSkip(prev => prev + autoLoadTakeAmountNum);
-      }
-    }
-
     let fetchingNextSet = false;
-    function fetchNextSet() {
-      fetchingNextSet = true;
-      increaseSkipAmount();
-    }
 
     useEffect(() => {
       if (!pagination && autoLoadOnScroll && !isDev) {
+        const increaseSkipAmount = () => {
+          if (totalCount > results.length) {
+            setSkip(prev => prev + autoLoadTakeAmountNum);
+          }
+        };
+        const fetchNextSet = () => {
+          fetchingNextSet = true;
+          increaseSkipAmount();
+        };
+
         const offset = 500;
         const tableContainerElement = tableContainerRef.current;
         if (stickyHeader) {
