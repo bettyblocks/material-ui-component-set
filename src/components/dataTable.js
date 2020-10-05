@@ -144,6 +144,15 @@
         take: (pagination && rowsPerPage) || autoLoadTakeAmountNum,
       });
 
+    useEffect(() => {
+      if (autoLoadOnScroll) {
+        setResults([]);
+        setTimeout(() => {
+          setSkip(0);
+        }, 0);
+      }
+    }, [searchTerm]);
+
     const [results, setResults] = useState([]);
     const [totalCount, setTotalCount] = useState(0);
 
