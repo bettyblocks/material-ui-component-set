@@ -123,6 +123,12 @@
             },
           },
         },
+        {
+          value: false,
+          label: 'Submit after change',
+          key: 'submit',
+          type: 'TOGGLE',
+        },
       ],
       descendants: [],
     },

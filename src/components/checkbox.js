@@ -14,6 +14,7 @@
       customModelAttribute: customModelAttributeObj,
       validationValueMissing,
       nameAttribute,
+      submit,
     } = options;
     const { useText, getCustomModelAttribute } = B;
     const isDev = B.env === 'dev';
@@ -47,9 +48,14 @@
       setHelper(message);
     };
 
+    const inputRef = useRef(null);
+
     const handleChange = evt => {
       handleValidation(evt.target.checked);
       setChecked(evt.target.checked);
+      if (submit && input.current.form) {
+        inputRef.current.form.dispatchEvent(new Event('submit'));
+      }
     };
 
     useEffect(() => {

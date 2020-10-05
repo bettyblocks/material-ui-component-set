@@ -28,6 +28,7 @@
       customModelAttribute: customModelAttributeObj,
       property,
       nameAttribute,
+      submit,
     } = options;
     const { Autocomplete } = window.MaterialUI.Lab;
     const {
@@ -184,6 +185,8 @@
       }
     }
 
+    const inputRef = useRef(null);
+
     const onChange = (_, newValue) => {
       if (!valueProp || !newValue) {
         setCurrentValue(newValue);
@@ -196,6 +199,9 @@
       }
       setCurrentValue(newCurrentValue);
       B.triggerEvent('OnChange');
+      if (submit && input.current.form) {
+        inputRef.current.form.dispatchEvent(new Event('submit'));
+      }
     };
 
     const getDefaultValue = records => {

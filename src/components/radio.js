@@ -26,6 +26,7 @@
       property,
       validationValueMissing,
       nameAttribute,
+      submit,
     } = options;
     const isDev = B.env === 'dev';
     const displayError = showError === 'built-in';
@@ -135,12 +136,17 @@
       setHelper(message);
     };
 
+    const inputRef = useRef(null);
+
     const handleChange = evt => {
       if (afterFirstInvalidation) {
         handleValidation();
       }
 
       setValue(getValue(evt.target.value));
+      if (submit && input.current.form) {
+        inputRef.current.form.dispatchEvent(new Event('submit'));
+      }
     };
 
     const validationHandler = () => {

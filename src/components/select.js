@@ -25,6 +25,7 @@
       property,
       validationValueMissing,
       nameAttribute,
+      submit,
     } = options;
     const { TextField, MenuItem } = window.MaterialUI.Core;
     const displayError = showError === 'built-in';
@@ -90,6 +91,8 @@
       setHelper(message);
     };
 
+    const inputRef = useRef(null);
+
     const handleChange = event => {
       const {
         target: { value: eventValue },
@@ -100,6 +103,9 @@
       }
 
       setCurrentValue(eventValue);
+      if (submit && input.current.form) {
+        inputRef.current.form.dispatchEvent(new Event('submit'));
+      }
     };
 
     const validationHandler = () => {
@@ -168,6 +174,7 @@
           {renderOptions()}
         </TextField>
         <input
+          ref={input}
           className={classes.validationInput}
           onInvalid={validationHandler}
           type="text"
