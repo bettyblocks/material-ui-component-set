@@ -352,17 +352,16 @@
       }
     }
 
+    let fetchingNextSet = false;
+    function fetchNextSet() {
+      fetchingNextSet = true;
+      increaseSkipAmount();
+    }
+
     useEffect(() => {
       if (!pagination && autoLoadOnScroll && !isDev) {
         const offset = 500;
-        let fetchingNextSet = false;
         const tableContainerElement = tableContainerRef.current;
-
-        function fetchNextSet() {
-          fetchingNextSet = true;
-          increaseSkipAmount();
-        }
-
         if (stickyHeader) {
           const parent = tableContainerElement.parentNode;
           if (tableContainerElement.scrollHeight <= parent.clientHeight) {
