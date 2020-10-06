@@ -147,25 +147,31 @@
     const [results, setResults] = useState([]);
     const [totalCount, setTotalCount] = useState(0);
 
-    useEffect(() => {
-      if (autoLoadOnScroll) {
-        setResults([]);
-        setTimeout(() => {
-          setSkip(0);
-        }, 0);
-      }
-    }, [searchTerm]);
+    const [previousSearchTerm, setPreviousSearchTerm] = useState('');
+    const [newSearch, setNewSearch] = useState(false);
 
     useEffect(() => {
       if (!isDev && data) {
-        if (autoLoadOnScroll) {
-          setResults(prev => [...prev, ...data.results]);
-        } else {
+        if (pagination) {
           setResults(data.results);
+          setTotalCount(data.totalCount);
+          return;
+        }
+        if (searchTerm !== previousSearchTerm) {
+          setSkip(0);
+          setPreviousSearchTerm(searchTerm);
+          setNewSearch(true);
+        } else {
+          if (newSearch) {
+            setResults(data.results);
+          } else {
+            setResults(prev => [...prev, ...data.results]);
+          }
+          setNewSearch(false);
         }
         setTotalCount(data.totalCount);
       }
-    }, [data]);
+    }, [data, searchTerm]);
 
     useEffect(() => {
       const handler = setTimeout(() => {
@@ -373,9 +379,6 @@
         const offset = 500;
         const tableContainerElement = tableContainerRef.current;
         if (stickyHeader) {
-          if (searchTerm) {
-            fetchNextSet();
-          }
           const parent = tableContainerElement.parentNode;
           if (tableContainerElement.scrollHeight <= parent.clientHeight) {
             fetchNextSet();
