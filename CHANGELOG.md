@@ -1,3 +1,15 @@
+# [1.37.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.36.0...v1.37.0) (2020-10-06)
+
+
+### Bug Fixes
+
+* change input const to postValues ([3c5fb35](https://github.com/bettyblocks/material-ui-component-set/commit/3c5fb3521c8e67f94faaaf8a10ec9e3f118ffce4))
+
+
+### Features
+
+* add item id to variables if item id exists ([8a5dddf](https://github.com/bettyblocks/material-ui-component-set/commit/8a5dddf8da720ceabe1fe690a5fa53d2608bc81f))
+
 # [1.36.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.35.1...v1.36.0) (2020-10-06)
 
 
