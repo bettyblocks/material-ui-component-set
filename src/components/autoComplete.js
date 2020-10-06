@@ -147,6 +147,19 @@
       }
     }, [isDev, defaultValue]);
 
+    const inputRef = useRef(null);
+    const isFirstRun = useRef(true);
+
+    useEffect(() => {
+      if (isFirstRun.current) {
+        isFirstRun.current = false;
+      } else {
+        if (submit && inputRef.current.form) {
+          inputRef.current.form.dispatchEvent(new Event('submit'));
+        }
+      }
+    }, [currentValue]);
+
     useEffect(() => {
       B.defineFunction('Clear', () => setCurrentValue(null));
     }, []);
@@ -185,8 +198,6 @@
       }
     }
 
-    const inputRef = useRef(null);
-
     const onChange = (_, newValue) => {
       if (!valueProp || !newValue) {
         setCurrentValue(newValue);
@@ -199,9 +210,6 @@
       }
       setCurrentValue(newCurrentValue);
       B.triggerEvent('OnChange');
-      if (submit && input.current.form) {
-        inputRef.current.form.dispatchEvent(new Event('submit'));
-      }
     };
 
     const getDefaultValue = records => {
@@ -356,6 +364,7 @@
         renderInput={params => (
           <>
             <input
+              ref={inputRef}
               type="hidden"
               key={currentValue ? 'hasValue' : 'isEmpty'}
               name={customModelAttribute && customModelAttribute.name}

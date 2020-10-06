@@ -92,6 +92,17 @@
     };
 
     const inputRef = useRef(null);
+    const isFirstRun = useRef(true);
+
+    useEffect(() => {
+      if (isFirstRun.current) {
+        isFirstRun.current = false;
+      } else {
+        if (submit && inputRef.current.form) {
+          inputRef.current.form.dispatchEvent(new Event('submit'));
+        }
+      }
+    }, [currentValue]);
 
     const handleChange = event => {
       const {
@@ -103,9 +114,6 @@
       }
 
       setCurrentValue(eventValue);
-      if (submit && input.current.form) {
-        inputRef.current.form.dispatchEvent(new Event('submit'));
-      }
     };
 
     const validationHandler = () => {
@@ -174,7 +182,7 @@
           {renderOptions()}
         </TextField>
         <input
-          ref={input}
+          ref={inputRef}
           className={classes.validationInput}
           onInvalid={validationHandler}
           type="text"

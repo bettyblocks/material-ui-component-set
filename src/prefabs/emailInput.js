@@ -1525,6 +1525,12 @@
         },
         {
           value: false,
+          label: 'Submit on blur',
+          key: 'submit',
+          type: 'TOGGLE',
+        },
+        {
+          value: false,
           label: 'Styles',
           key: 'styles',
           type: 'TOGGLE',
