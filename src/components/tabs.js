@@ -24,6 +24,10 @@
       setValue(newValue);
     };
 
+    const setSelectedTab = index => {
+      setValue(index);
+    };
+
     useEffect(() => {
       if (isDev) {
         setValue(parseInt(defaultValue - 1, 10));
@@ -69,7 +73,12 @@
     const TabGroup = (
       <div className={classes.tabs}>
         {!hideTabs && TabsHeader}
-        <Children value={value} tabData={tabData} setTabData={setTabData}>
+        <Children
+          value={value}
+          tabData={tabData}
+          setTabData={setTabData}
+          setSelectedTab={setSelectedTab}
+        >
           {children}
         </Children>
       </div>
