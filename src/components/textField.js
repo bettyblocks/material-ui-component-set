@@ -32,6 +32,7 @@
       hideLabel,
       customModelAttribute: customModelAttributeObj,
       nameAttribute,
+      submit,
     } = options;
 
     const {
@@ -120,6 +121,8 @@
       setCurrentValue(isNumberType ? numberValue : eventValue);
     };
 
+    const inputRef = useRef(null);
+
     const blurHandler = event => {
       const {
         target: {
@@ -129,6 +132,9 @@
       } = event;
       setAfterFirstInvalidation(!isValid);
       handleValidation(validity);
+      if (submit && inputRef.current.form) {
+        inputRef.current.form.requestSubmit();
+      }
     };
 
     const invalidHandler = event => {
@@ -206,6 +212,7 @@
           <InputLabel classes={{ root: classes.label }}>{labelText}</InputLabel>
         )}
         <InputCmp
+          inputRef={inputRef}
           name={nameAttributeValue || customModelAttributeName}
           value={currentValue}
           type={(isDev && type === 'number') || showPassword ? 'text' : type}

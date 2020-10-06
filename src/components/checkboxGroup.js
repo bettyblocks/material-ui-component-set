@@ -26,6 +26,7 @@
       customModelAttribute: customModelAttributeObj,
       property,
       nameAttribute,
+      submit,
     } = options;
 
     const { useText, getProperty, useGetAll, getCustomModelAttribute } = B;
@@ -85,6 +86,19 @@
       }
     }, [isDev, defaultValue]);
 
+    const inputRef = useRef(null);
+    const isFirstRun = useRef(true);
+
+    useEffect(() => {
+      if (isFirstRun.current) {
+        isFirstRun.current = false;
+      } else {
+        if (!isDev && submit && inputRef.current.form) {
+          inputRef.current.form.requestSubmit();
+        }
+      }
+    }, [values]);
+
     const {
       Checkbox: MUICheckbox,
       FormControlLabel,
@@ -104,6 +118,7 @@
 
     const renderCheckbox = (checkboxLabel, checkboxValue) => (
       <FormControlLabel
+        inputRef={inputRef}
         control={<MUICheckbox tabIndex={isDev && -1} size={size} />}
         label={checkboxLabel}
         labelPlacement={position}
