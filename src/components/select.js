@@ -95,12 +95,10 @@
     const isFirstRun = useRef(true);
 
     useEffect(() => {
-      if (isFirstRun.current) {
-        isFirstRun.current = false;
+      if (!isFirstRun.current && submit && inputRef.current.form) {
+        inputRef.current.form.requestSubmit();
       } else {
-        if (submit && inputRef.current.form) {
-          inputRef.current.form.requestSubmit();
-        }
+        isFirstRun.current = false;
       }
     }, [currentValue]);
 

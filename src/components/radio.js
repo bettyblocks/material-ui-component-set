@@ -144,7 +144,7 @@
       }
 
       setValue(getValue(evt.target.value));
-      if (submit && input.current.form) {
+      if (submit && inputRef.current.form) {
         inputRef.current.form.requestSubmit();
       }
     };
