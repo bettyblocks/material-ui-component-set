@@ -23,12 +23,6 @@
         },
         {
           value: false,
-          label: 'Required',
-          key: 'required',
-          type: 'TOGGLE',
-        },
-        {
-          value: false,
           label: 'Hide default error',
           key: 'hideDefaultError',
           type: 'TOGGLE',

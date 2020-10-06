@@ -29,12 +29,6 @@
         },
         {
           value: false,
-          label: 'Required',
-          key: 'required',
-          type: 'TOGGLE',
-        },
-        {
-          value: false,
           label: 'Error',
           key: 'error',
           type: 'TOGGLE',
