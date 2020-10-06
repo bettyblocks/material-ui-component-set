@@ -96,6 +96,21 @@
           },
         },
         {
+          value: [],
+          label: 'Property',
+          key: 'actionProperties',
+          type: 'ACTION_PROPERTIES',
+          configuration: {
+            apiVersion: 'v1',
+            condition: {
+              type: 'SHOW',
+              option: 'linkType',
+              comparator: 'EQ',
+              value: 'action',
+            },
+          },
+        },
+        {
           value: false,
           label: 'Full width',
           key: 'fullWidth',
