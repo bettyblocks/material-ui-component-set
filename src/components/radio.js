@@ -145,7 +145,7 @@
 
       setValue(getValue(evt.target.value));
       if (submit && input.current.form) {
-        inputRef.current.form.dispatchEvent(new Event('submit'));
+        inputRef.current.form.requestSubmit();
       }
     };
 
