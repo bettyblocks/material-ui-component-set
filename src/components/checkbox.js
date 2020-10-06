@@ -53,8 +53,8 @@
     const handleChange = evt => {
       handleValidation(evt.target.checked);
       setChecked(evt.target.checked);
-      if (submit && input.current.form) {
-        inputRef.current.form.dispatchEvent(new Event('submit'));
+      if (submit && inputRef.current.form) {
+        inputRef.current.form.requestSubmit();
       }
     };
 
@@ -66,6 +66,7 @@
 
     const Checkbox = (
       <MUICheckbox
+        inputRef={inputRef}
         checked={checked}
         onChange={handleChange}
         name={nameAttributeValue || customModelAttributeName}

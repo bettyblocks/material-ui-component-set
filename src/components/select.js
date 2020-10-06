@@ -99,7 +99,7 @@
         isFirstRun.current = false;
       } else {
         if (submit && inputRef.current.form) {
-          inputRef.current.form.dispatchEvent(new Event('submit'));
+          inputRef.current.form.requestSubmit();
         }
       }
     }, [currentValue]);
