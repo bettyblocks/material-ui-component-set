@@ -1,3 +1,16 @@
+# [1.36.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.35.1...v1.36.0) (2020-10-06)
+
+
+### Bug Fixes
+
+* rename actionProperties ([389f35e](https://github.com/bettyblocks/material-ui-component-set/commit/389f35e60ca2694235c087a1af5d50427e5587c1))
+* update cli ([77c4bee](https://github.com/bettyblocks/material-ui-component-set/commit/77c4beeb31cc80f10c7cc5c23290d05c3e3c611d))
+
+
+### Features
+
+* use new actionProperties ([5ce2960](https://github.com/bettyblocks/material-ui-component-set/commit/5ce2960865788b2d4de7be269de99f22fbfcbfeb))
+
 ## [1.35.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.35.0...v1.35.1) (2020-10-02)
 
 
