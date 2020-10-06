@@ -158,7 +158,7 @@
 
     useEffect(() => {
       if (!isDev && data) {
-        if (!pagination && autoLoadOnScroll) {
+        if (autoLoadOnScroll) {
           setResults(prev => [...prev, ...data.results]);
         } else {
           setResults(data.results);
@@ -358,7 +358,7 @@
     let fetchingNextSet = false;
 
     useEffect(() => {
-      if (!pagination && autoLoadOnScroll && !isDev) {
+      if (autoLoadOnScroll && !isDev) {
         const increaseSkipAmount = () => {
           if (totalCount > results.length) {
             setSkip(prev => prev + autoLoadTakeAmountNum);
