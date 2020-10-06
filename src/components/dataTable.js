@@ -192,7 +192,8 @@
           return;
         }
         repeaterRef.current.innerHTML = '';
-        for (let i = 0, j = takeNum - 1; i < j; i += 1) {
+        const amount = pagination ? takeNum : autoLoadTakeAmountNum;
+        for (let i = 0, j = amount - 1; i < j; i += 1) {
           repeaterRef.current.innerHTML +=
             repeaterRef.current.previousElementSibling.children[0].outerHTML;
         }
