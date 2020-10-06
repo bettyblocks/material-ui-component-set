@@ -372,6 +372,9 @@
         const offset = 500;
         const tableContainerElement = tableContainerRef.current;
         if (stickyHeader) {
+          if (searchTerm) {
+            fetchNextSet();
+          }
           const parent = tableContainerElement.parentNode;
           if (tableContainerElement.scrollHeight <= parent.clientHeight) {
             fetchNextSet();
