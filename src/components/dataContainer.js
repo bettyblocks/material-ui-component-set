@@ -1,6 +1,6 @@
 (() => ({
   name: 'DataContainer',
-  type: 'CONTAINER_COMPONENT',
+  type: 'BODY_COMPONENT',
   allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (
@@ -26,7 +26,9 @@
                 isPristine ? classes.pristine : '',
               ].join(' ')}
             >
-              {isPristine ? 'Data Container' : children}
+              {isPristine
+                ? 'Drag a component in the data container to display the data'
+                : children}
             </div>
           </>
         );
