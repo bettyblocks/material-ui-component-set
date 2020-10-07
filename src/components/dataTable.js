@@ -58,6 +58,8 @@
     const displayError = showError === 'built-in';
     const [page, setPage] = useState(0);
     const takeNum = parseInt(take, 10);
+    const initialRender = useRef(true);
+    const [skip, setSkip] = useState(0);
     const autoLoadTakeAmountNum = parseInt(autoLoadTakeAmount, 10);
     const [rowsPerPage, setRowsPerPage] = useState(takeNum);
     const [search, setSearch] = useState('');
@@ -116,8 +118,6 @@
         return accumulator;
       }, {});
     };
-
-    const [skip, setSkip] = useState(0);
 
     const searchFilter = searchProperty
       ? searchPropertyArray.reduceRight(
@@ -367,7 +367,10 @@
     useEffect(() => {
       if (autoLoadOnScroll && !isDev) {
         const increaseSkipAmount = () => {
-          setSkip(prev => prev + autoLoadTakeAmountNum);
+          if (!initialRender.current) {
+            setSkip(prev => prev + autoLoadTakeAmountNum);
+          }
+          initialRender.current = false;
         };
         const fetchNextSet = () => {
           fetchingNextSet.current = true;
@@ -404,7 +407,7 @@
           window.addEventListener('scroll', scrollEvent);
         }
       }
-    }, [totalCount, results]);
+    }, [results]);
 
     return (
       <div className={classes.root}>
