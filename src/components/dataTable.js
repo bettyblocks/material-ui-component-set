@@ -149,6 +149,7 @@
 
     const [previousSearchTerm, setPreviousSearchTerm] = useState('');
     const [newSearch, setNewSearch] = useState(false);
+    const fetchingNextSet = useRef(false);
 
     useEffect(() => {
       if (!isDev && data) {
@@ -167,6 +168,7 @@
           } else {
             setResults(prev => [...prev, ...data.results]);
           }
+          fetchingNextSet.current = false;
           setNewSearch(false);
         }
         setTotalCount(data.totalCount);
@@ -362,17 +364,13 @@
       return tableContent;
     };
 
-    let fetchingNextSet = false;
-
     useEffect(() => {
       if (autoLoadOnScroll && !isDev) {
         const increaseSkipAmount = () => {
-          if (totalCount > results.length) {
-            setSkip(prev => prev + autoLoadTakeAmountNum);
-          }
+          setSkip(prev => prev + autoLoadTakeAmountNum);
         };
         const fetchNextSet = () => {
-          fetchingNextSet = true;
+          fetchingNextSet.current = true;
           increaseSkipAmount();
         };
 
@@ -386,7 +384,7 @@
           const scrollEvent = e => {
             const { scrollTop, clientHeight, scrollHeight } = e.target;
             const hitBottom = scrollTop + clientHeight >= scrollHeight - offset;
-            if (hitBottom && !fetchingNextSet) {
+            if (hitBottom && !fetchingNextSet.current) {
               fetchNextSet();
             }
           };
@@ -399,7 +397,7 @@
             const { scrollY, innerHeight } = window;
             const { scrollHeight } = document.scrollingElement;
             const hitBottom = innerHeight + scrollY >= scrollHeight - offset;
-            if (hitBottom && !fetchingNextSet) {
+            if (hitBottom && !fetchingNextSet.current) {
               fetchNextSet();
             }
           };
