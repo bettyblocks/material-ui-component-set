@@ -5,17 +5,34 @@
   orientation: 'VERTICAL',
   jsx: (() => {
     const { Icons } = window.MaterialUI;
+    const { Link } = window.MaterialUI.Core;
     const isDev = B.env === 'dev';
-    const { icon } = options;
+    const { icon, linkTo, linkToExternal, linkType } = options;
+
+    const hasLink = linkTo && linkTo.id !== '';
+    const hasExternalLink = linkToExternal && linkToExternal.id !== '';
+
     const IconComponent = React.createElement(Icons[icon], {
       className: classes.root,
     });
 
-    return isDev ? (
-      <span className={classes.wrapper}>{IconComponent}</span>
-    ) : (
-      IconComponent
+    const LinkComponent = (
+      <Link
+        href={
+          linkType === 'external' && hasExternalLink
+            ? linkToExternal
+            : 'https://google.com'
+        }
+        component={linkType === 'internal' && hasLink ? B.Link : undefined}
+        endpoint={linkType === 'internal' && hasLink ? linkTo : undefined}
+      >
+        {IconComponent}
+      </Link>
     );
+
+    const Icon = hasLink ? LinkComponent : IconComponent;
+
+    return isDev ? <span className={classes.wrapper}>{Icon}</span> : Icon;
   })(),
   styles: B => t => {
     const style = new B.Styling(t);
