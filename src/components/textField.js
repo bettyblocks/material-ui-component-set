@@ -132,6 +132,7 @@
       } = event;
       setAfterFirstInvalidation(!isValid);
       handleValidation(validity);
+
       if (submit && inputRef.current.form) {
         inputRef.current.form.requestSubmit();
       }
