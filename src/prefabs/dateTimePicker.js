@@ -187,12 +187,6 @@
         },
         {
           value: false,
-          label: 'Submit after change',
-          key: 'submit',
-          type: 'TOGGLE',
-        },
-        {
-          value: false,
           label: 'Styles',
           key: 'styles',
           type: 'TOGGLE',
