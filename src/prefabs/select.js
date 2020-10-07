@@ -172,20 +172,6 @@
           type: 'TOGGLE',
         },
         {
-          value: false,
-          label: 'Required',
-          key: 'required',
-          type: 'TOGGLE',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'validationOptions',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
-        },
-        {
           value: ['This field is required'],
           label: 'Value required message',
           key: 'validationValueMissing',

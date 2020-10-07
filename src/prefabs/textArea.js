@@ -37,20 +37,6 @@
           type: 'TOGGLE',
         },
         {
-          value: false,
-          label: 'Required',
-          key: 'required',
-          type: 'TOGGLE',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'validationOptions',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
-        },
-        {
           label: 'Validation pattern',
           key: 'pattern',
           value: '',
