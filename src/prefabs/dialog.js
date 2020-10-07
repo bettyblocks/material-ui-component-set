@@ -324,6 +324,12 @@
                       key: 'innerSpacing',
                       type: 'SIZES',
                     },
+                    {
+                      type: 'TOGGLE',
+                      label: 'Allow overflow',
+                      key: 'overflow',
+                      value: false,
+                    },
                   ],
                   descendants: [
                     {
@@ -2348,6 +2354,12 @@
                               label: 'Inner space',
                               key: 'innerSpacing',
                               type: 'SIZES',
+                            },
+                            {
+                              type: 'TOGGLE',
+                              label: 'Allow overflow',
+                              key: 'overflow',
+                              value: false,
                             },
                           ],
                           descendants: [

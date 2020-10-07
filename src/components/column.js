@@ -106,7 +106,8 @@
         borderColor: 'transparent',
         borderStyle: 'none',
         borderRadius: 0,
-        overflow: 'auto',
+        overflow: ({ options: { overflow } }) =>
+          overflow ? 'visible' : 'auto',
         boxSizing: 'border-box',
         [`@media ${B.mediaMinWidth(600)}`]: {
           display: ({
