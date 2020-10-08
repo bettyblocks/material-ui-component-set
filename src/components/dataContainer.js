@@ -26,7 +26,9 @@
                 isPristine ? classes.pristine : '',
               ].join(' ')}
             >
-              {isPristine ? 'Data Container' : children}
+              {isPristine
+                ? 'Drag a component in the data container to display the data'
+                : children}
             </div>
           </>
         );

@@ -64,6 +64,7 @@
     const [rowsPerPage, setRowsPerPage] = useState(takeNum);
     const [search, setSearch] = useState('');
     const [searchTerm, setSearchTerm] = useState('');
+    const [showPagination, setShowPagination] = useState(true);
     const searchPropertyArray = [searchProperty].flat();
     const { label: searchPropertyLabel = '{property}' } =
       getProperty(searchProperty) || {};
@@ -140,8 +141,8 @@
       useGetAll(model, {
         rawFilter: where,
         variables,
-        skip: (pagination && page * rowsPerPage) || skip,
-        take: (pagination && rowsPerPage) || autoLoadTakeAmountNum,
+        skip: (pagination !== 'never' && page * rowsPerPage) || skip,
+        take: (pagination !== 'never' && rowsPerPage) || autoLoadTakeAmountNum,
       });
 
     const [results, setResults] = useState([]);
@@ -153,7 +154,7 @@
 
     useEffect(() => {
       if (!isDev && data) {
-        if (pagination) {
+        if (pagination !== 'never') {
           setResults(data.results);
           setTotalCount(data.totalCount);
           return;
@@ -200,7 +201,7 @@
           return;
         }
         repeaterRef.current.innerHTML = '';
-        const amount = pagination ? takeNum : autoLoadTakeAmountNum;
+        const amount = pagination !== 'never' ? takeNum : autoLoadTakeAmountNum;
         for (let i = 0, j = amount - 1; i < j; i += 1) {
           repeaterRef.current.innerHTML +=
             repeaterRef.current.previousElementSibling.children[0].outerHTML;
@@ -219,6 +220,10 @@
       });
       repeat();
     });
+
+    useEffect(() => {
+      setRowsPerPage(takeNum);
+    }, [takeNum]);
 
     const mounted = useRef(true);
     useEffect(() => {
@@ -297,7 +302,7 @@
     };
 
     const renderTableHead = () => {
-      if ((loading && pagination) || error) {
+      if ((loading && pagination !== 'never') || error) {
         return Array.from(Array(children.length).keys()).map(colIdx => (
           <TableCell key={colIdx}>
             <div className={classes.skeleton}>
@@ -314,7 +319,7 @@
     };
 
     const tableContentModel = () => {
-      if ((loading && pagination) || error) {
+      if ((loading && pagination !== 'never') || error) {
         return Array.from(Array(rowsPerPage).keys()).map(idx => (
           <TableRow key={idx} classes={{ root: classes.bodyRow }}>
             {Array.from(Array(children.length).keys()).map(colIdx => (
@@ -348,7 +353,9 @@
 
     const renderTableContent = () => {
       let tableContent = Array.from(
-        Array(pagination ? rowsPerPage : autoLoadTakeAmountNum).keys(),
+        Array(
+          pagination !== 'never' ? rowsPerPage : autoLoadTakeAmountNum,
+        ).keys(),
       ).map(idx => (
         <TableRow key={idx} classes={{ root: classes.bodyRow }}>
           {children}
@@ -395,6 +402,37 @@
         }
       }
     }, [results]);
+
+    useEffect(() => {
+      if (isDev) {
+        if (pagination === 'never') {
+          setShowPagination(false);
+        } else {
+          setShowPagination(true);
+        }
+      }
+    }, [pagination]);
+
+    useEffect(() => {
+      if (!isDev && data) {
+        switch (pagination) {
+          case 'never':
+            setShowPagination(false);
+            break;
+          case 'whenNeeded':
+            if (rowsPerPage >= data.totalCount) {
+              setShowPagination(false);
+            } else {
+              setShowPagination(true);
+            }
+            break;
+          default:
+          case 'always':
+            setShowPagination(true);
+            break;
+        }
+      }
+    }, [data, rowsPerPage]);
 
     return (
       <div className={classes.root}>
@@ -443,7 +481,7 @@
               )}
             </Table>
           </TableContainer>
-          {pagination && (
+          {showPagination && (
             <TablePagination
               classes={{ root: classes.pagination }}
               rowsPerPageOptions={[5, 10, 25, 50, 100]}
