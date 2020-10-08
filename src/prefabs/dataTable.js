@@ -178,12 +178,6 @@
           value: '',
           configuration: {
             as: 'UNIT',
-            condition: {
-              type: 'SHOW',
-              option: 'stickyHeader',
-              comparator: 'EQ',
-              value: true,
-            },
           },
         },
         {

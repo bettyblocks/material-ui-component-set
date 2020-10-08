@@ -379,7 +379,7 @@
 
         const offset = 500;
         const tableContainerElement = tableContainerRef.current;
-        if (stickyHeader) {
+        if (autoLoadOnScroll) {
           const parent = tableContainerElement.parentNode;
           if (tableContainerElement.scrollHeight <= parent.clientHeight) {
             fetchNextSet();
@@ -392,19 +392,6 @@
             }
           };
           tableContainerElement.addEventListener('scroll', scrollEvent);
-        } else {
-          if (window.innerHeight >= tableContainerElement.clientHeight) {
-            fetchNextSet();
-          }
-          const scrollEvent = () => {
-            const { scrollY, innerHeight } = window;
-            const { scrollHeight } = document.scrollingElement;
-            const hitBottom = innerHeight + scrollY >= scrollHeight - offset;
-            if (hitBottom && !fetchingNextSet.current) {
-              fetchNextSet();
-            }
-          };
-          window.addEventListener('scroll', scrollEvent);
         }
       }
     }, [results]);
@@ -490,16 +477,22 @@
           getSpacing(outerSpacing[2]),
         marginLeft: ({ options: { outerSpacing } }) =>
           getSpacing(outerSpacing[3]),
+        height: ({ options: { height } }) => height,
       },
       paper: {
         backgroundColor: ({ options: { background } }) => [
           style.getColor(background),
           '!important',
         ],
+        height: '100%',
       },
       container: {
-        height: ({ options: { stickyHeader, height } }) =>
-          stickyHeader && height,
+        height: ({ options: { hideSearch, searchProperty } }) => {
+          if (searchProperty !== '' && !hideSearch) {
+            return 'calc(100% - 64px)';
+          }
+          return '100%';
+        },
       },
       tableRoot: {
         tableLayout: 'fixed',
