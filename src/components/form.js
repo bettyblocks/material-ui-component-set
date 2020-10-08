@@ -84,10 +84,12 @@
             },
             {},
           );
-          let variables = { variables: { input: values } };
+          const postValues =
+            item && item.id ? { id: item.id, ...values } : values;
+          let variables = { variables: { input: postValues } };
           if (formVariable && formVariable.name) {
             variables = {
-              variables: { input: { [formVariable.name]: values } },
+              variables: { input: { [formVariable.name]: postValues } },
             };
           }
           callAction(variables);
@@ -108,6 +110,9 @@
         };
 
         const trigger = (data, loading, error) => {
+          if (data || error) {
+            B.triggerEvent('onActionDone');
+          }
           if (data) {
             B.triggerEvent('onActionSuccess', data.actionb5);
 

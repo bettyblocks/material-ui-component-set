@@ -3421,7 +3421,7 @@
                   type: 'COLOR',
                   label: 'Color',
                   key: 'background',
-                  value: 'Success',
+                  value: 'Primary',
                 },
                 {
                   value: ['0rem', 'M', '0rem', '0rem'],
