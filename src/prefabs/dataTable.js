@@ -141,7 +141,7 @@
               type: 'SHOW',
               option: 'pagination',
               comparator: 'EQ',
-              value: false,
+              value: 'never',
             },
           },
         },
