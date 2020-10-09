@@ -17,21 +17,6 @@
         },
         {
           value: [],
-          label: 'Label',
-          key: 'propertyLabelOverride',
-          type: 'VARIABLE',
-          configuration: {
-            placeholder: 'Label of property',
-            condition: {
-              type: 'HIDE',
-              option: 'property',
-              comparator: 'EQ',
-              value: '',
-            },
-          },
-        },
-        {
-          value: [],
           label: 'Value',
           key: 'defaultValue',
           type: 'VARIABLE',
