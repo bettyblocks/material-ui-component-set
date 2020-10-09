@@ -101,37 +101,6 @@
           },
         },
         {
-          value: '5',
-          label: 'Rows per page',
-          key: 'take',
-          type: 'CUSTOM',
-          configuration: {
-            as: 'DROPDOWN',
-            dataType: 'string',
-            allowedInput: [
-              { name: '5', value: '5' },
-              { name: '10', value: '10' },
-              { name: '25', value: '25' },
-              { name: '50', value: '50' },
-              { name: '100', value: '100' },
-            ],
-          },
-        },
-        {
-          type: 'VARIABLE',
-          label: 'Rows per page text',
-          key: 'labelRowsPerPage',
-          value: ['Rows per page'],
-          configuration: {
-            condition: {
-              type: 'HIDE',
-              option: 'pagination',
-              comparator: 'EQ',
-              value: 'never',
-            },
-          },
-        },
-        {
           value: false,
           label: 'Auto load on scroll',
           key: 'autoLoadOnScroll',
@@ -169,10 +138,41 @@
           },
         },
         {
-          type: 'TOGGLE',
-          label: 'Sticky header',
-          key: 'stickyHeader',
-          value: false,
+          value: '5',
+          label: 'Rows per page',
+          key: 'take',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'DROPDOWN',
+            dataType: 'string',
+            allowedInput: [
+              { name: '5', value: '5' },
+              { name: '10', value: '10' },
+              { name: '25', value: '25' },
+              { name: '50', value: '50' },
+              { name: '100', value: '100' },
+            ],
+            condition: {
+              type: 'HIDE',
+              option: 'autoLoadOnScroll',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'VARIABLE',
+          label: 'Rows per page text',
+          key: 'labelRowsPerPage',
+          value: ['Rows per page'],
+          configuration: {
+            condition: {
+              type: 'HIDE',
+              option: 'pagination',
+              comparator: 'EQ',
+              value: 'never',
+            },
+          },
         },
         {
           type: 'SIZE',
@@ -182,6 +182,12 @@
           configuration: {
             as: 'UNIT',
           },
+        },
+        {
+          type: 'TOGGLE',
+          label: 'Sticky header',
+          key: 'stickyHeader',
+          value: false,
         },
         {
           value: 'medium',

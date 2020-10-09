@@ -142,7 +142,10 @@
         rawFilter: where,
         variables,
         skip: (pagination !== 'never' && page * rowsPerPage) || skip,
-        take: (pagination !== 'never' && rowsPerPage) || autoLoadTakeAmountNum,
+        take:
+          pagination === 'never' && autoLoadOnScroll
+            ? autoLoadTakeAmountNum
+            : rowsPerPage,
       });
 
     const [results, setResults] = useState([]);
@@ -201,7 +204,10 @@
           return;
         }
         repeaterRef.current.innerHTML = '';
-        const amount = pagination !== 'never' ? takeNum : autoLoadTakeAmountNum;
+        const amount =
+          pagination === 'never' && autoLoadOnScroll
+            ? autoLoadTakeAmountNum
+            : takeNum;
         for (let i = 0, j = amount - 1; i < j; i += 1) {
           repeaterRef.current.innerHTML +=
             repeaterRef.current.previousElementSibling.children[0].outerHTML;
@@ -354,7 +360,9 @@
     const renderTableContent = () => {
       let tableContent = Array.from(
         Array(
-          pagination !== 'never' ? rowsPerPage : autoLoadTakeAmountNum,
+          pagination === 'never' && autoLoadOnScroll
+            ? autoLoadTakeAmountNum
+            : rowsPerPage,
         ).keys(),
       ).map(idx => (
         <TableRow key={idx} classes={{ root: classes.bodyRow }}>
@@ -525,8 +533,14 @@
         height: '100%',
       },
       container: {
-        height: ({ options: { hideSearch, searchProperty } }) => {
+        height: ({ options: { hideSearch, searchProperty, pagination } }) => {
           if (searchProperty !== '' && !hideSearch) {
+            if (pagination === 'never') {
+              return 'calc(100% - 64px)';
+            }
+            return 'calc(100% - 140px)';
+          }
+          if (pagination !== 'never') {
             return 'calc(100% - 64px)';
           }
           return '100%';
