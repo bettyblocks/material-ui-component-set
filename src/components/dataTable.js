@@ -60,7 +60,7 @@
     const takeNum = parseInt(take, 10);
     const initialRender = useRef(true);
     const [skip, setSkip] = useState(0);
-    const loadOnscroll = pagination === 'never' && autoLoadOnScroll;
+    const loadOnScroll = pagination === 'never' && autoLoadOnScroll;
     const autoLoadTakeAmountNum = parseInt(autoLoadTakeAmount, 10);
     const [rowsPerPage, setRowsPerPage] = useState(takeNum);
     const [search, setSearch] = useState('');
@@ -73,6 +73,11 @@
       field: [orderProperty].flat() || null,
       order: orderProperty ? sortOrder : null,
     });
+    const [results, setResults] = useState([]);
+    const [totalCount, setTotalCount] = useState(0);
+    const [previousSearchTerm, setPreviousSearchTerm] = useState('');
+    const [newSearch, setNewSearch] = useState(false);
+    const fetchingNextSet = useRef(false);
 
     const createSortObject = (fields, order) => {
       const fieldsArray = [fields].flat();
@@ -142,15 +147,9 @@
       useGetAll(model, {
         rawFilter: where,
         variables,
-        skip: loadOnscroll ? skip : page * rowsPerPage,
-        take: loadOnscroll ? autoLoadTakeAmountNum : rowsPerPage,
+        skip: loadOnScroll ? skip : page * rowsPerPage,
+        take: loadOnScroll ? autoLoadTakeAmountNum : rowsPerPage,
       });
-
-    const [results, setResults] = useState([]);
-    const [totalCount, setTotalCount] = useState(0);
-    const [previousSearchTerm, setPreviousSearchTerm] = useState('');
-    const [newSearch, setNewSearch] = useState(false);
-    const fetchingNextSet = useRef(false);
 
     useEffect(() => {
       if (!isDev && data) {
@@ -201,7 +200,7 @@
           return;
         }
         repeaterRef.current.innerHTML = '';
-        const amount = loadOnscroll ? autoLoadTakeAmountNum : takeNum;
+        const amount = loadOnScroll ? autoLoadTakeAmountNum : takeNum;
         for (let i = 0, j = amount - 1; i < j; i += 1) {
           repeaterRef.current.innerHTML +=
             repeaterRef.current.previousElementSibling.children[0].outerHTML;
@@ -302,7 +301,7 @@
     };
 
     const renderTableHead = () => {
-      if ((loading && !loadOnscroll) || error) {
+      if ((loading && !loadOnScroll) || error) {
         return Array.from(Array(children.length).keys()).map(colIdx => (
           <TableCell key={colIdx}>
             <div className={classes.skeleton}>
@@ -319,7 +318,7 @@
     };
 
     const tableContentModel = () => {
-      if ((loading && !loadOnscroll) || error) {
+      if ((loading && !loadOnScroll) || error) {
         return Array.from(Array(rowsPerPage).keys()).map(idx => (
           <TableRow key={idx} classes={{ root: classes.bodyRow }}>
             {Array.from(Array(children.length).keys()).map(colIdx => (
@@ -353,7 +352,7 @@
 
     const renderTableContent = () => {
       let tableContent = Array.from(
-        Array(loadOnscroll ? autoLoadTakeAmountNum : rowsPerPage).keys(),
+        Array(loadOnScroll ? autoLoadTakeAmountNum : rowsPerPage).keys(),
       ).map(idx => (
         <TableRow key={idx} classes={{ root: classes.bodyRow }}>
           {children}
@@ -370,21 +369,18 @@
     };
 
     useEffect(() => {
-      if (autoLoadOnScroll && !isDev) {
-        const increaseSkipAmount = () => {
+      if (loadOnScroll && !isDev) {
+        const fetchNextSet = () => {
+          fetchingNextSet.current = true;
           if (!initialRender.current) {
             setSkip(prev => prev + autoLoadTakeAmountNum);
           }
           initialRender.current = false;
         };
-        const fetchNextSet = () => {
-          fetchingNextSet.current = true;
-          increaseSkipAmount();
-        };
 
         const offset = 500;
         const tableContainerElement = tableContainerRef.current;
-        if (autoLoadOnScroll) {
+        if (loadOnScroll) {
           const parent = tableContainerElement.parentNode;
           if (tableContainerElement.scrollHeight <= parent.clientHeight) {
             fetchNextSet();
