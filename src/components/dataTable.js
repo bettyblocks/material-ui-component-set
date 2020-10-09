@@ -60,6 +60,7 @@
     const takeNum = parseInt(take, 10);
     const initialRender = useRef(true);
     const [skip, setSkip] = useState(0);
+    const loadOnscroll = pagination === 'never' && autoLoadOnScroll;
     const autoLoadTakeAmountNum = parseInt(autoLoadTakeAmount, 10);
     const [rowsPerPage, setRowsPerPage] = useState(takeNum);
     const [search, setSearch] = useState('');
@@ -141,16 +142,12 @@
       useGetAll(model, {
         rawFilter: where,
         variables,
-        skip: (pagination !== 'never' && page * rowsPerPage) || skip,
-        take:
-          pagination === 'never' && autoLoadOnScroll
-            ? autoLoadTakeAmountNum
-            : rowsPerPage,
+        skip: loadOnscroll ? skip : page * rowsPerPage,
+        take: loadOnscroll ? autoLoadTakeAmountNum : rowsPerPage,
       });
 
     const [results, setResults] = useState([]);
     const [totalCount, setTotalCount] = useState(0);
-
     const [previousSearchTerm, setPreviousSearchTerm] = useState('');
     const [newSearch, setNewSearch] = useState(false);
     const fetchingNextSet = useRef(false);
@@ -204,10 +201,7 @@
           return;
         }
         repeaterRef.current.innerHTML = '';
-        const amount =
-          pagination === 'never' && autoLoadOnScroll
-            ? autoLoadTakeAmountNum
-            : takeNum;
+        const amount = loadOnscroll ? autoLoadTakeAmountNum : takeNum;
         for (let i = 0, j = amount - 1; i < j; i += 1) {
           repeaterRef.current.innerHTML +=
             repeaterRef.current.previousElementSibling.children[0].outerHTML;
@@ -308,7 +302,7 @@
     };
 
     const renderTableHead = () => {
-      if ((loading && pagination !== 'never') || error) {
+      if ((loading && !loadOnscroll) || error) {
         return Array.from(Array(children.length).keys()).map(colIdx => (
           <TableCell key={colIdx}>
             <div className={classes.skeleton}>
@@ -325,7 +319,7 @@
     };
 
     const tableContentModel = () => {
-      if ((loading && pagination !== 'never') || error) {
+      if ((loading && !loadOnscroll) || error) {
         return Array.from(Array(rowsPerPage).keys()).map(idx => (
           <TableRow key={idx} classes={{ root: classes.bodyRow }}>
             {Array.from(Array(children.length).keys()).map(colIdx => (
@@ -359,11 +353,7 @@
 
     const renderTableContent = () => {
       let tableContent = Array.from(
-        Array(
-          pagination === 'never' && autoLoadOnScroll
-            ? autoLoadTakeAmountNum
-            : rowsPerPage,
-        ).keys(),
+        Array(loadOnscroll ? autoLoadTakeAmountNum : rowsPerPage).keys(),
       ).map(idx => (
         <TableRow key={idx} classes={{ root: classes.bodyRow }}>
           {children}
@@ -538,7 +528,7 @@
             if (pagination === 'never') {
               return 'calc(100% - 64px)';
             }
-            return 'calc(100% - 140px)';
+            return 'calc(100% - 128px)';
           }
           if (pagination !== 'never') {
             return 'calc(100% - 64px)';
