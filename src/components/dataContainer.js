@@ -81,7 +81,20 @@
         if (authProfile) {
           return (
             <B.GetMe authenticationProfileId={authProfile}>
-              {canvasLayout()}
+              {({ loading, error, data }) => {
+                if (loading) {
+                  B.triggerEvent('onUserLoading');
+                }
+                if (error) {
+                  B.triggerEvent('onNoUser', error.message);
+                }
+
+                if (data && data.id) {
+                  B.triggerEvent('onUser', data);
+                }
+
+                return canvasLayout();
+              }}
             </B.GetMe>
           );
         }
