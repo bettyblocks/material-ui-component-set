@@ -4,11 +4,29 @@
   allowedTypes: [],
   orientation: 'VERTICAL',
   jsx: (() => {
-    const { env, useText } = B;
-    const { imgUrl, imgAlt } = options;
+    const { env, useText, getProperty } = B;
+    const { imgUrl, imgAlt, sourceType, propertyId, sizeName } = options;
+
+    const isDev = env === 'dev';
+
     const imgSrc = useText(imgUrl);
     const variable = imgUrl && imgUrl.findIndex(v => v.name) !== -1;
-    const variableDev = env === 'dev' && (variable || !imgSrc);
+    const variableDev = isDev && (variable || !imgSrc);
+
+    function getSize(image) {
+      const size = image.resized.find(item => item.name === sizeName);
+      if (size) {
+        return size.url;
+      }
+      return image.url;
+    }
+
+    if (!isDev && sourceType === 'id' && propertyId) {
+      const { modelId, name } = getProperty(propertyId);
+      const data =
+        modelId && useContext(__SECRET_MODEL_CONTEXT_MAP_DO_NOT_USE[modelId]);
+      imgSrc = getSize(data[name]);
+    }
 
     return (
       <figure

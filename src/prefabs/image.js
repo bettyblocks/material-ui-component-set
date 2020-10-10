@@ -7,10 +7,66 @@
       name: 'Image',
       options: [
         {
+          type: 'CUSTOM',
+          label: 'Source Type',
+          key: 'sourceType',
+          value: 'url',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              {
+                name: 'Url',
+                value: 'url',
+              },
+              {
+                name: 'Property ID',
+                value: 'id',
+              },
+            ],
+          },
+        },
+        {
           value: [],
           label: 'Image url',
           key: 'imgUrl',
           type: 'VARIABLE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'sourceType',
+              comparator: 'EQ',
+              value: 'url',
+            },
+          },
+        },
+        {
+          type: 'TEXT',
+          label: 'Image property ID',
+          key: 'propertyId',
+          value: '',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'sourceType',
+              comparator: 'EQ',
+              value: 'id',
+            },
+          },
+        },
+        {
+          type: 'TEXT',
+          label: 'Size name',
+          key: 'sizeName',
+          value: '',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'sourceType',
+              comparator: 'EQ',
+              value: 'id',
+            },
+          },
         },
         {
           value: [],
