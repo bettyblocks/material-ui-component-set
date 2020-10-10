@@ -4,8 +4,15 @@
   allowedTypes: [],
   orientation: 'VERTICAL',
   jsx: (() => {
-    const { env, useText, getProperty } = B;
-    const { imgUrl, imgAlt, sourceType, propertyId, sizeName } = options;
+    const { env, useText, useProperty } = B;
+    const {
+      imgUrl,
+      imgAlt,
+      sourceType,
+      propertyId,
+      sizeName,
+      imgUrlFallback,
+    } = options;
 
     const isDev = env === 'dev';
 
@@ -22,10 +29,12 @@
     }
 
     if (!isDev && sourceType === 'id' && propertyId) {
-      const { modelId, name } = getProperty(propertyId);
-      const data =
-        modelId && useContext(__SECRET_MODEL_CONTEXT_MAP_DO_NOT_USE[modelId]);
-      imgSrc = getSize(data[name]);
+      const imageObject = useProperty(propertyId);
+      if (imageObject && imageObject.url) {
+        imgSrc = getSize(imageObject);
+      } else {
+        imgSrc = useText(imgUrlFallback);
+      }
     }
 
     return (

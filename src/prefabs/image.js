@@ -70,6 +70,20 @@
         },
         {
           value: [],
+          label: 'Image fallback',
+          key: 'imgUrlFallback',
+          type: 'VARIABLE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'sourceType',
+              comparator: 'EQ',
+              value: 'id',
+            },
+          },
+        },
+        {
+          value: [],
           label: 'Image Alternative Text',
           key: 'imgAlt',
           type: 'VARIABLE',
