@@ -16,7 +16,7 @@
 
     const isDev = env === 'dev';
 
-    const imgSrc = useText(imgUrl);
+    var imgSrc = useText(imgUrl);
     const variable = imgUrl && imgUrl.findIndex(v => v.name) !== -1;
     const variableDev = isDev && (variable || !imgSrc);
 
