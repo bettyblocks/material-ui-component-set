@@ -78,6 +78,7 @@
     const [previousSearchTerm, setPreviousSearchTerm] = useState('');
     const [newSearch, setNewSearch] = useState(false);
     const fetchingNextSet = useRef(false);
+    const amountOfRows = loadOnScroll ? autoLoadTakeAmountNum : rowsPerPage;
 
     const createSortObject = (fields, order) => {
       const fieldsArray = [fields].flat();
@@ -200,8 +201,7 @@
           return;
         }
         repeaterRef.current.innerHTML = '';
-        const amount = loadOnScroll ? autoLoadTakeAmountNum : takeNum;
-        for (let i = 0, j = amount - 1; i < j; i += 1) {
+        for (let i = 0, j = amountOfRows - 1; i < j; i += 1) {
           repeaterRef.current.innerHTML +=
             repeaterRef.current.previousElementSibling.children[0].outerHTML;
         }
@@ -351,9 +351,7 @@
     };
 
     const renderTableContent = () => {
-      let tableContent = Array.from(
-        Array(loadOnScroll ? autoLoadTakeAmountNum : rowsPerPage).keys(),
-      ).map(idx => (
+      let tableContent = Array.from(Array(amountOfRows).keys()).map(idx => (
         <TableRow key={idx} classes={{ root: classes.bodyRow }}>
           {children}
         </TableRow>
@@ -520,14 +518,15 @@
       },
       container: {
         height: ({ options: { hideSearch, searchProperty, pagination } }) => {
+          const headerHeight = 64;
           if (searchProperty !== '' && !hideSearch) {
             if (pagination === 'never') {
-              return 'calc(100% - 64px)';
+              return `calc(100% - ${headerHeight}px)`;
             }
-            return 'calc(100% - 128px)';
+            return `calc(100% - ${headerHeight * 2}px)`;
           }
           if (pagination !== 'never') {
-            return 'calc(100% - 64px)';
+            return `calc(100% - ${headerHeight}px)`;
           }
           return '100%';
         },
