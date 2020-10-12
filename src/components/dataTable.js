@@ -376,7 +376,6 @@
           initialRender.current = false;
         };
 
-        const offset = 500;
         const tableContainerElement = tableContainerRef.current;
         if (loadOnScroll) {
           const parent = tableContainerElement.parentNode;
@@ -385,6 +384,7 @@
           }
           const scrollEvent = e => {
             const { scrollTop, clientHeight, scrollHeight } = e.target;
+            const offset = scrollHeight / 5;
             const hitBottom = scrollTop + clientHeight >= scrollHeight - offset;
             if (hitBottom && !fetchingNextSet.current) {
               fetchNextSet();
