@@ -2405,7 +2405,9 @@
                                   type: 'VARIABLE',
                                   label: 'Content',
                                   key: 'content',
-                                  value: ['To start using the dialog, please drag or remove components to your liking.'],
+                                  value: [
+                                    'To start using the dialog, please drag or remove components to your liking.',
+                                  ],
                                   configuration: {
                                     as: 'MULTILINE',
                                   },
