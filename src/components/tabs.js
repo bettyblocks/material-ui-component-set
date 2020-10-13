@@ -11,10 +11,11 @@
       defaultValue,
       variant,
       centered,
-      orientation,
       scrollButtons,
+      alignment,
     } = options;
-
+    const orientation =
+      alignment === 'top' || alignment === 'bottom' ? 'horizontal' : 'vertical';
     const isDev = env === 'dev';
     const [value, setValue] = useState(parseInt(defaultValue - 1, 10) || 0);
     const devValue = parseInt(defaultValue - 1, 10) || 0;
@@ -92,8 +93,19 @@
       },
       tabs: {
         display: 'flex',
-        flexDirection: ({ options: { orientation } }) =>
-          orientation === 'horizontal' ? 'column' : 'row',
+        flexDirection: ({ options: { alignment } }) => {
+          switch (alignment) {
+            case 'top':
+              return 'column';
+            case 'right':
+              return 'row-reverse';
+            case 'bottom':
+              return 'column-reverse';
+            case 'left':
+            default:
+              return 'row';
+          }
+        },
       },
       root: {
         backgroundColor: ({ options: { appBarColor } }) => [
@@ -106,6 +118,8 @@
         ],
       },
       indicator: {
+        left: ({ options: { alignment } }) => alignment === 'right' && 0,
+        top: ({ options: { alignment } }) => alignment === 'bottom' && 0,
         backgroundColor: ({ options: { indicatorColor } }) => [
           style.getColor(indicatorColor),
           '!important',
