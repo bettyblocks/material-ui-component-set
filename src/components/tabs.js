@@ -13,57 +13,71 @@
       centered,
       orientation,
       scrollButtons,
+      hideTabs,
     } = options;
 
     const isDev = env === 'dev';
     const [value, setValue] = useState(parseInt(defaultValue - 1, 10) || 0);
-    const devValue = parseInt(defaultValue - 1, 10) || 0;
-    const currentValue = isDev ? devValue : value;
     const [tabData, setTabData] = useState({});
 
     const handleChange = (_, newValue) => {
       setValue(newValue);
     };
 
+    const setSelectedTab = index => {
+      setValue(index);
+    };
+
+    useEffect(() => {
+      if (isDev) {
+        setValue(parseInt(defaultValue - 1, 10));
+      }
+    }, [isDev, defaultValue]);
+
+    const TabsHeader = (
+      <Tabs
+        aria-label="tabs"
+        onChange={handleChange}
+        value={value}
+        variant={variant}
+        centered={centered}
+        orientation={orientation}
+        scrollButtons={scrollButtons}
+        classes={{ root: classes.root, indicator: classes.indicator }}
+      >
+        {React.Children.map(children, (child, index) => {
+          const { options } = child.props;
+          const {
+            label = tabData[`label${index}`] || [`Tab`],
+            icon = tabData[`icon${index}`] || 'None',
+            disabled = tabData[`disabled${index}`] || false,
+            disableRipple = tabData[`disableRipple${index}`] || false,
+          } = isDev ? {} : options;
+
+          return (
+            <Tab
+              label={useText(label)}
+              icon={
+                icon && icon !== 'None'
+                  ? React.createElement(Icons[icon])
+                  : undefined
+              }
+              disabled={disabled}
+              disableRipple={disableRipple}
+            />
+          );
+        })}
+      </Tabs>
+    );
+
     const TabGroup = (
       <div className={classes.tabs}>
-        <Tabs
-          aria-label="tabs"
-          onChange={handleChange}
-          value={currentValue}
-          variant={variant}
-          centered={centered}
-          orientation={orientation}
-          scrollButtons={scrollButtons}
-          classes={{ root: classes.root, indicator: classes.indicator }}
-        >
-          {React.Children.map(children, (child, index) => {
-            const { options } = child.props;
-            const {
-              label = tabData[`label${index}`] || [`Tab`],
-              icon = tabData[`icon${index}`] || 'None',
-              disabled = tabData[`disabled${index}`] || false,
-              disableRipple = tabData[`disableRipple${index}`] || false,
-            } = isDev ? {} : options;
-
-            return (
-              <Tab
-                label={useText(label)}
-                icon={
-                  icon && icon !== 'None'
-                    ? React.createElement(Icons[icon])
-                    : undefined
-                }
-                disabled={disabled}
-                disableRipple={disableRipple}
-              />
-            );
-          })}
-        </Tabs>
+        {!hideTabs && TabsHeader}
         <Children
-          value={currentValue}
+          value={value}
           tabData={tabData}
           setTabData={setTabData}
+          setSelectedTab={setSelectedTab}
         >
           {children}
         </Children>
