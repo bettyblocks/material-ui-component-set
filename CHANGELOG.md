@@ -1,3 +1,10 @@
+# [1.40.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.39.0...v1.40.0) (2020-10-13)
+
+
+### Features
+
+* add vertical alignment to Box ([69f0369](https://github.com/bettyblocks/material-ui-component-set/commit/69f036935793d116eff8ec4bcc24b4c465ffdbe5))
+
 # [1.39.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.38.0...v1.39.0) (2020-10-13)
 
 
