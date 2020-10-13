@@ -1,3 +1,17 @@
+# [1.38.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.37.0...v1.38.0) (2020-10-12)
+
+
+### Bug Fixes
+
+* file upload data type ([32aa366](https://github.com/bettyblocks/material-ui-component-set/commit/32aa366f0b1113d071478e40f6255d182c858c28))
+* remove condition for custom model attribute option ([5c6ac5a](https://github.com/bettyblocks/material-ui-component-set/commit/5c6ac5a0746eed9d50d5a07e4f0cd89de4400c62))
+* remove propertyLabelOverride ([956ec27](https://github.com/bettyblocks/material-ui-component-set/commit/956ec2779cc8612882a6e2d2e0b2ea63349bb70b))
+
+
+### Features
+
+* get required from custom model attribute ([4c7e30a](https://github.com/bettyblocks/material-ui-component-set/commit/4c7e30a98195db9566eb7d8662300a17e604a848))
+
 # [1.37.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.36.0...v1.37.0) (2020-10-06)
 
 

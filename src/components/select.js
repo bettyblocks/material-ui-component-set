@@ -5,7 +5,6 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const {
-      required,
       disabled,
       defaultValue,
       variant,
@@ -45,8 +44,8 @@
     const customModelAttribute = getCustomModelAttribute(
       customModelAttributeId,
     );
-    const customModelAttributeName =
-      customModelAttribute && customModelAttribute.name;
+    const { name: customModelAttributeName, validations: { required } = {} } =
+      customModelAttribute || {};
     const value = currentValue;
 
     const { name: labelName } = getProperty(labelProp) || {};

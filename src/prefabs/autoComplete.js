@@ -13,12 +13,6 @@
           type: 'CUSTOM_MODEL_ATTRIBUTE',
           configuration: {
             allowedTypes: ['string'],
-            condition: {
-              type: 'SHOW',
-              option: 'property',
-              comparator: 'EQ',
-              value: '',
-            },
           },
         },
         {
@@ -135,12 +129,6 @@
           label: 'Free solo',
           key: 'freeSolo',
           value: false,
-        },
-        {
-          value: false,
-          label: 'Required',
-          key: 'required',
-          type: 'TOGGLE',
         },
         {
           value: false,

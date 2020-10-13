@@ -6,7 +6,6 @@
   jsx: (() => {
     const {
       defaultValue,
-      required,
       disabled,
       error,
       placeholder,
@@ -51,6 +50,11 @@
     const nameAttributeValue = useText(nameAttribute);
 
     const { id: customModelAttributeId, label } = customModelAttributeObj;
+    const customModelAttribute = getCustomModelAttribute(
+      customModelAttributeId,
+    );
+    const { name: customModelAttributeName, validations: { required } = {} } =
+      customModelAttribute || {};
     const { kind, values: listValues } = getProperty(property) || {};
     const labelText = useText(label);
 
@@ -68,13 +72,6 @@
       helperText: helper,
       classes: { root: classes.formControl },
     };
-
-    const customModelAttribute = getCustomModelAttribute(
-      customModelAttributeId,
-    );
-
-    const customModelAttributeName =
-      customModelAttribute && customModelAttribute.name;
 
     const searchProp = getProperty(searchProperty) || {};
     const valueProp = getProperty(valueProperty) || {};

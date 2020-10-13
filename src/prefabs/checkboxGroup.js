@@ -13,12 +13,6 @@
           type: 'CUSTOM_MODEL_ATTRIBUTE',
           configuration: {
             allowedTypes: ['string'],
-            condition: {
-              type: 'SHOW',
-              option: 'property',
-              comparator: 'EQ',
-              value: '',
-            },
           },
         },
         {
@@ -26,12 +20,6 @@
           label: 'Value',
           key: 'defaultValue',
           type: 'VARIABLE',
-        },
-        {
-          value: false,
-          label: 'Required',
-          key: 'required',
-          type: 'TOGGLE',
         },
         {
           value: false,

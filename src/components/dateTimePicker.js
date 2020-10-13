@@ -6,7 +6,6 @@
   jsx: (() => {
     const {
       defaultValue,
-      required,
       disabled,
       error,
       placeholder,
@@ -49,8 +48,8 @@
     const customModelAttribute = getCustomModelAttribute(
       customModelAttributeId,
     );
-    const customModelAttributeName =
-      customModelAttribute && customModelAttribute.name;
+    const { name: customModelAttributeName, validations: { required } = {} } =
+      customModelAttribute || {};
     const nameAttributeValue = useText(nameAttribute);
     const isValidDate = date => date instanceof Date && !isNaN(date);
 
