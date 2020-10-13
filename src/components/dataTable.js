@@ -437,7 +437,7 @@
           {hasToolbar && (
             <Toolbar classes={{ root: classes.toolbar }}>
               {titleText && <span className={classes.title}>{titleText}</span>}
-              {searchProperty && (
+              {searchProperty && !hideSearch && (
                 <TextField
                   classes={{ root: classes.searchField }}
                   placeholder={`Search on ${searchPropertyLabel}`}
@@ -517,9 +517,11 @@
         height: '100%',
       },
       container: {
-        height: ({ options: { hideSearch, searchProperty, pagination } }) => {
+        height: ({
+          options: { hideSearch, searchProperty, pagination, title },
+        }) => {
           const headerHeight = 64;
-          if (searchProperty !== '' && !hideSearch) {
+          if ((searchProperty !== '' && !hideSearch) || title.length > 0) {
             if (pagination === 'never') {
               return `calc(100% - ${headerHeight}px)`;
             }
