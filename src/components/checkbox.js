@@ -6,7 +6,6 @@
   jsx: (() => {
     const {
       disabled,
-      defaultValue,
       position,
       size,
       helperText,
@@ -17,17 +16,21 @@
     const { useText, getCustomModelAttribute } = B;
     const isDev = B.env === 'dev';
 
-    const componentChecked = useText(defaultValue);
-    const [checked, setChecked] = useState(componentChecked === 'true');
     const [errorState, setErrorState] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
-    const { id: customModelAttributeId, label } = customModelAttributeObj;
+    const {
+      id: customModelAttributeId,
+      label,
+      value: defaultValue,
+    } = customModelAttributeObj;
     const customModelAttribute = getCustomModelAttribute(
       customModelAttributeId,
     );
     const { name: customModelAttributeName, validations: { required } = {} } =
       customModelAttribute || {};
     const labelText = useText(label);
+    const componentChecked = useText(defaultValue);
+    const [checked, setChecked] = useState(componentChecked === 'true');
     const nameAttributeValue = useText(nameAttribute);
 
     const {

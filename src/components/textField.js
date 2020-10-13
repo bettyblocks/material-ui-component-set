@@ -5,7 +5,6 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const {
-      defaultValue,
       disabled,
       error,
       multiline,
@@ -48,13 +47,17 @@
     const { useText, env, getCustomModelAttribute } = B;
     const isDev = env === 'dev';
     const isNumberType = type === 'number';
-    const [currentValue, setCurrentValue] = useState(useText(defaultValue));
     const [isDisabled, setIsDisabled] = useState(disabled);
     const [showPassword, togglePassword] = useState(false);
     const [errorState, setErrorState] = useState(error);
     const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
-    const { id: customModelAttributeId, label } = customModelAttributeObj;
+    const {
+      id: customModelAttributeId,
+      label,
+      value: defaultValue,
+    } = customModelAttributeObj;
+    const [currentValue, setCurrentValue] = useState(useText(defaultValue));
     const labelText = useText(label);
     const customModelAttribute = getCustomModelAttribute(
       customModelAttributeId,

@@ -7,19 +7,13 @@
       name: 'TextField',
       options: [
         {
-          value: { label: ['Decimal'] },
+          value: { label: ['Decimal'], value: [] },
           label: 'Label',
           key: 'customModelAttribute',
           type: 'CUSTOM_MODEL_ATTRIBUTE',
           configuration: {
             allowedTypes: ['decimal'],
           },
-        },
-        {
-          value: [],
-          label: 'Value',
-          key: 'defaultValue',
-          type: 'VARIABLE',
         },
         {
           value: false,
