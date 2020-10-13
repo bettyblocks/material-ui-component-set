@@ -29,20 +29,6 @@
           },
         },
         {
-          label: 'Orientation',
-          key: 'orientation',
-          value: 'horizontal',
-          type: 'CUSTOM',
-          configuration: {
-            as: 'BUTTONGROUP',
-            dataType: 'string',
-            allowedInput: [
-              { name: 'Horizontal', value: 'horizontal' },
-              { name: 'Vertical', value: 'vertical' },
-            ],
-          },
-        },
-        {
           label: 'Variant',
           key: 'variant',
           value: 'standard',
@@ -55,12 +41,6 @@
               { name: 'Scrollable', value: 'scrollable' },
               { name: 'Full width', value: 'fullWidth' },
             ],
-            condition: {
-              type: 'SHOW',
-              option: 'orientation',
-              comparator: 'EQ',
-              value: 'horizontal',
-            },
           },
         },
         {
