@@ -643,7 +643,7 @@
                               type: 'VARIABLE',
                               label: 'Content',
                               key: 'content',
-                              value: ['Dialog title'],
+                              value: [],
                               configuration: {
                                 as: 'MULTILINE',
                               },
@@ -2291,7 +2291,7 @@
                               },
                             },
                             {
-                              value: '100px',
+                              value: '',
                               label: 'Height',
                               key: 'columnHeight',
                               type: 'TEXT',

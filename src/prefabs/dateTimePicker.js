@@ -7,53 +7,26 @@
       name: 'DateTimePicker',
       options: [
         {
-          value: '',
-          label: 'Property',
-          key: 'property',
-          type: 'PROPERTY',
-        },
-        {
-          value: ['Label'],
+          value: { label: ['Date time'] },
           label: 'Label',
-          key: 'label',
-          type: 'VARIABLE',
+          key: 'customModelAttribute',
+          type: 'CUSTOM_MODEL_ATTRIBUTE',
           configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'property',
-              comparator: 'EQ',
-              value: '',
-            },
-          },
-        },
-        {
-          value: [],
-          label: 'Label',
-          key: 'propertyLabelOverride',
-          type: 'VARIABLE',
-          configuration: {
-            placeholder: 'Label of property',
-            condition: {
-              type: 'HIDE',
-              option: 'property',
-              comparator: 'EQ',
-              value: '',
-            },
+            allowedTypes: ['date_time'],
           },
         },
         {
           label: 'Type',
           key: 'type',
-          value: 'date',
-          type: 'CUSTOM',
+          value: 'datetime',
+          type: 'TEXT',
           configuration: {
-            as: 'BUTTONGROUP',
-            dataType: 'string',
-            allowedInput: [
-              { name: 'Date', value: 'date' },
-              { name: 'Time', value: 'time' },
-              { name: 'DateTime', value: 'datetime' },
-            ],
+            condition: {
+              type: 'SHOW',
+              option: 'customModelAttribute',
+              comparator: 'EQ',
+              value: false,
+            },
           },
         },
         {
@@ -69,37 +42,7 @@
           type: 'VARIABLE',
         },
         {
-          value: 'dd/MM/yyyy',
-          label: 'Format',
-          key: 'dateFormat',
-          type: 'TEXT',
-          configuration: {
-            placeholder: 'dd/MM/yyyy',
-            condition: {
-              type: 'SHOW',
-              option: 'type',
-              comparator: 'EQ',
-              value: 'date',
-            },
-          },
-        },
-        {
-          value: 'HH:mm:ss',
-          label: 'Format',
-          key: 'timeFormat',
-          type: 'TEXT',
-          configuration: {
-            placeholder: 'HH:mm:ss',
-            condition: {
-              type: 'SHOW',
-              option: 'type',
-              comparator: 'EQ',
-              value: 'time',
-            },
-          },
-        },
-        {
-          value: 'dd/MM/yyyy HH:mm:ss',
+          value: 'MM/dd/yyyy HH:mm:ss',
           label: 'Format',
           key: 'dateTimeFormat',
           type: 'TEXT',
@@ -140,18 +83,6 @@
               value: 'datetime',
             },
           },
-        },
-        {
-          value: '',
-          label: 'Input',
-          key: 'actionInputId',
-          type: 'ACTION_INPUT',
-        },
-        {
-          value: false,
-          label: 'Required',
-          key: 'required',
-          type: 'TOGGLE',
         },
         {
           value: false,
@@ -397,6 +328,26 @@
             condition: {
               type: 'SHOW',
               option: 'styles',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          value: false,
+          label: 'Advanced settings',
+          key: 'advancedSettings',
+          type: 'TOGGLE',
+        },
+        {
+          type: 'VARIABLE',
+          label: 'name attribute',
+          key: 'nameAttribute',
+          value: [],
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'advancedSettings',
               comparator: 'EQ',
               value: true,
             },

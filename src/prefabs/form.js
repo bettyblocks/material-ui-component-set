@@ -7,10 +7,15 @@
       name: 'Form',
       options: [
         {
-          value: '',
+          value: {
+            customModelId: null,
+            actionId: null,
+            modelId: null,
+            variableId: null,
+          },
           label: 'Action',
-          key: 'actionId',
-          type: 'ACTION',
+          key: 'formData',
+          type: 'FORM_DATA',
           configuration: {
             apiVersion: 'v1',
           },
@@ -20,6 +25,14 @@
           label: 'Model',
           key: 'model',
           type: 'MODEL',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'formData',
+              comparator: 'EQ',
+              value: '',
+            },
+          },
         },
         {
           value: {},
@@ -104,38 +117,12 @@
           name: 'TextField',
           options: [
             {
-              value: '',
-              label: 'Property',
-              key: 'property',
-              type: 'PROPERTY',
-            },
-            {
-              value: ['Label'],
+              value: { label: ['Label'] },
               label: 'Label',
-              key: 'label',
-              type: 'VARIABLE',
+              key: 'customModelAttribute',
+              type: 'CUSTOM_MODEL_ATTRIBUTE',
               configuration: {
-                condition: {
-                  type: 'SHOW',
-                  option: 'property',
-                  comparator: 'EQ',
-                  value: '',
-                },
-              },
-            },
-            {
-              value: [],
-              label: 'Label',
-              key: 'propertyLabelOverride',
-              type: 'VARIABLE',
-              configuration: {
-                placeholder: 'Label of property',
-                condition: {
-                  type: 'HIDE',
-                  option: 'property',
-                  comparator: 'EQ',
-                  value: '',
-                },
+                allowedTypes: ['string'],
               },
             },
             {
@@ -145,30 +132,10 @@
               type: 'VARIABLE',
             },
             {
-              value: '',
-              label: 'Input',
-              key: 'actionInputId',
-              type: 'ACTION_INPUT',
-            },
-            {
               value: false,
               label: 'Validation options',
               key: 'validationOptions',
               type: 'TOGGLE',
-            },
-            {
-              value: false,
-              label: 'Required',
-              key: 'required',
-              type: 'TOGGLE',
-              configuration: {
-                condition: {
-                  type: 'SHOW',
-                  option: 'validationOptions',
-                  comparator: 'EQ',
-                  value: true,
-                },
-              },
             },
             {
               label: 'Validation pattern',
@@ -1759,6 +1726,26 @@
                 condition: {
                   type: 'SHOW',
                   option: 'styles',
+                  comparator: 'EQ',
+                  value: true,
+                },
+              },
+            },
+            {
+              value: false,
+              label: 'Advanced settings',
+              key: 'advancedSettings',
+              type: 'TOGGLE',
+            },
+            {
+              type: 'VARIABLE',
+              label: 'name attribute',
+              key: 'nameAttribute',
+              value: [],
+              configuration: {
+                condition: {
+                  type: 'SHOW',
+                  option: 'advancedSettings',
                   comparator: 'EQ',
                   value: true,
                 },
@@ -3434,7 +3421,7 @@
                   type: 'COLOR',
                   label: 'Color',
                   key: 'background',
-                  value: 'Success',
+                  value: 'Primary',
                 },
                 {
                   value: ['0rem', 'M', '0rem', '0rem'],
