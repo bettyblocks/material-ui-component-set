@@ -16,7 +16,6 @@
     const { Icons } = window.MaterialUI;
     const { Close } = Icons;
     const {
-      required,
       hideDefaultError,
       disabled,
       helperText,
@@ -44,13 +43,13 @@
     const helper = useText(helperText);
     const { id: customModelAttributeId, label } = customModelAttributeObj;
     const labelText = useText(label);
-    const requiredText = required ? '*' : '';
     const customModelAttribute = getCustomModelAttribute(
       customModelAttributeId,
     );
-    const customModelAttributeName =
-      customModelAttribute && customModelAttribute.name;
+    const { name: customModelAttributeName, validations: { required } = {} } =
+      customModelAttribute || {};
     const nameAttributeValue = useText(nameAttribute);
+    const requiredText = required ? '*' : '';
 
     const handleChange = e => {
       setUploads({

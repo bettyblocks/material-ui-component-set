@@ -123,12 +123,6 @@
               type: 'CUSTOM_MODEL_ATTRIBUTE',
               configuration: {
                 allowedTypes: ['string'],
-                condition: {
-                  type: 'SHOW',
-                  option: 'property',
-                  comparator: 'EQ',
-                  value: '',
-                },
               },
             },
             {
@@ -142,20 +136,6 @@
               label: 'Validation options',
               key: 'validationOptions',
               type: 'TOGGLE',
-            },
-            {
-              value: false,
-              label: 'Required',
-              key: 'required',
-              type: 'TOGGLE',
-              configuration: {
-                condition: {
-                  type: 'SHOW',
-                  option: 'validationOptions',
-                  comparator: 'EQ',
-                  value: true,
-                },
-              },
             },
             {
               label: 'Validation pattern',
@@ -3441,7 +3421,7 @@
                   type: 'COLOR',
                   label: 'Color',
                   key: 'background',
-                  value: 'Success',
+                  value: 'Primary',
                 },
                 {
                   value: ['0rem', 'M', '0rem', '0rem'],

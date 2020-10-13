@@ -13,12 +13,6 @@
           type: 'CUSTOM_MODEL_ATTRIBUTE',
           configuration: {
             allowedTypes: ['string'],
-            condition: {
-              type: 'SHOW',
-              option: 'property',
-              comparator: 'EQ',
-              value: '',
-            },
           },
         },
         {
@@ -57,12 +51,6 @@
           value: true,
           label: 'Use 24-hour format',
           key: 'use24HourClockTime',
-          type: 'TOGGLE',
-        },
-        {
-          value: false,
-          label: 'Required',
-          key: 'required',
           type: 'TOGGLE',
         },
         {

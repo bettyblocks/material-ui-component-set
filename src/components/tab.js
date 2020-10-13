@@ -8,8 +8,16 @@
     const { env, useText } = B;
     const isDev = env === 'dev';
     const { label, icon, disabled, disableRipple } = options;
-    const { value, tabData, setTabData } = parent;
+    const { value, tabData, setTabData, setSelectedTab } = parent;
     const isActive = value === index;
+
+    const doSetTab = () => {
+      setSelectedTab(index);
+    };
+
+    useEffect(() => {
+      B.defineFunction('Select', doSetTab);
+    });
 
     const emptyBox = (
       <Box className={classes.empty} p={3}>

@@ -8,7 +8,6 @@
       disabled,
       defaultValue,
       error,
-      required,
       position,
       size,
       helperText,
@@ -40,8 +39,8 @@
     const customModelAttribute = getCustomModelAttribute(
       customModelAttributeId,
     );
-    const customModelAttributeName =
-      customModelAttribute && customModelAttribute.name;
+    const { name: customModelAttributeName, validations: { required } = {} } =
+      customModelAttribute || {};
     const labelText = useText(label);
     const nameAttributeValue = useText(nameAttribute);
 
