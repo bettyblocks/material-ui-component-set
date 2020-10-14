@@ -432,7 +432,7 @@
     useEffect(() => {
       let amount = 0;
       if (hasToolbar) {
-        amount += toolbarRef.current?.clientHeight;
+        amount += toolbarRef.current.clientHeight;
       }
       if (showPagination) {
         amount += paginationRef.current?.clientHeight;
