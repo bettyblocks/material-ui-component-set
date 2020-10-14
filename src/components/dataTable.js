@@ -65,7 +65,7 @@
     const [rowsPerPage, setRowsPerPage] = useState(takeNum);
     const [search, setSearch] = useState('');
     const [searchTerm, setSearchTerm] = useState('');
-    const [showPagination, setShowPagination] = useState(true);
+    const [showPagination, setShowPagination] = useState(false);
     const searchPropertyArray = [searchProperty].flat();
     const { label: searchPropertyLabel = '{property}' } =
       getProperty(searchProperty) || {};
@@ -107,7 +107,7 @@
     const hasLink = linkTo && linkTo.id !== '';
     const toolbarRef = React.createRef();
     const paginationRef = React.createRef();
-    const [containerStyles, setContainerStyles] = useState();
+    const [stylesProps, setStylesProps] = useState(null);
 
     const deepMerge = (...objects) => {
       const isObject = item =>
@@ -438,9 +438,10 @@
         amount += paginationRef.current.clientHeight;
       }
       if (amount > 0) {
-        setContainerStyles({ height: `calc(100% - ${amount}px)` });
+        const style = { height: `calc(100% - ${amount}px)` };
+        setStylesProps({ style });
       } else {
-        setContainerStyles({});
+        setStylesProps(null);
       }
     }, [showPagination, hasToolbar]);
 
@@ -474,7 +475,7 @@
           <TableContainer
             ref={tableContainerRef}
             classes={{ root: classes.container }}
-            style={containerStyles}
+            {...stylesProps}
           >
             <Table
               stickyHeader={stickyHeader}
