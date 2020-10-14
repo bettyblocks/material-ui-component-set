@@ -536,15 +536,15 @@
         ],
         height: '100%',
       },
+      container: {
+        height: '100%',
+      },
       tableRoot: {
         tableLayout: 'fixed',
       },
       toolbar: {
         paddingLeft: ['1rem', '!important'],
         paddingRight: ['1rem', '!important'],
-      },
-      container: {
-        height: '100%',
       },
       title: {
         color: ({ options: { titleType } }) => style.getFontColor(titleType),
