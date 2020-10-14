@@ -65,7 +65,7 @@
     const [rowsPerPage, setRowsPerPage] = useState(takeNum);
     const [search, setSearch] = useState('');
     const [searchTerm, setSearchTerm] = useState('');
-    const [showPagination, setShowPagination] = useState(true);
+    const [showPagination, setShowPagination] = useState(false);
     const searchPropertyArray = [searchProperty].flat();
     const { label: searchPropertyLabel = '{property}' } =
       getProperty(searchProperty) || {};
@@ -105,6 +105,9 @@
     const hasToolbar = titleText || (searchProperty && !hideSearch);
     const elevationLevel = variant === 'flat' ? 0 : elevation;
     const hasLink = linkTo && linkTo.id !== '';
+    const toolbarRef = React.createRef();
+    const paginationRef = React.createRef();
+    const [stylesProps, setStylesProps] = useState(null);
 
     const deepMerge = (...objects) => {
       const isObject = item =>
@@ -435,6 +438,22 @@
       }
     }, [data, rowsPerPage]);
 
+    useEffect(() => {
+      let amount = 0;
+      if (hasToolbar) {
+        amount += toolbarRef.current.clientHeight;
+      }
+      if (showPagination) {
+        amount += paginationRef.current.clientHeight;
+      }
+      if (amount > 0) {
+        const style = { height: `calc(100% - ${amount}px)` };
+        setStylesProps({ style });
+      } else {
+        setStylesProps(null);
+      }
+    }, [showPagination, hasToolbar]);
+
     return (
       <div className={classes.root}>
         <Paper
@@ -444,9 +463,9 @@
           elevation={elevationLevel}
         >
           {hasToolbar && (
-            <Toolbar classes={{ root: classes.toolbar }}>
+            <Toolbar ref={toolbarRef} classes={{ root: classes.toolbar }}>
               {titleText && <span className={classes.title}>{titleText}</span>}
-              {searchProperty && (
+              {searchProperty && !hideSearch && (
                 <TextField
                   classes={{ root: classes.searchField }}
                   placeholder={`Search on ${searchPropertyLabel}`}
@@ -465,6 +484,7 @@
           <TableContainer
             ref={tableContainerRef}
             classes={{ root: classes.container }}
+            {...stylesProps}
           >
             <Table
               stickyHeader={stickyHeader}
@@ -484,6 +504,7 @@
           </TableContainer>
           {showPagination && (
             <TablePagination
+              ref={paginationRef}
               classes={{ root: classes.pagination }}
               rowsPerPageOptions={[5, 10, 25, 50, 100]}
               labelRowsPerPage={useText(labelRowsPerPage)}
@@ -526,19 +547,7 @@
         height: '100%',
       },
       container: {
-        height: ({ options: { hideSearch, searchProperty, pagination } }) => {
-          const headerHeight = 64;
-          if (searchProperty !== '' && !hideSearch) {
-            if (pagination === 'never') {
-              return `calc(100% - ${headerHeight}px)`;
-            }
-            return `calc(100% - ${headerHeight * 2}px)`;
-          }
-          if (pagination !== 'never') {
-            return `calc(100% - ${headerHeight}px)`;
-          }
-          return '100%';
-        },
+        height: '100%',
       },
       tableRoot: {
         tableLayout: 'fixed',
