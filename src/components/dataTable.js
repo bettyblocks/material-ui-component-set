@@ -105,6 +105,9 @@
     const hasToolbar = titleText || (searchProperty && !hideSearch);
     const elevationLevel = variant === 'flat' ? 0 : elevation;
     const hasLink = linkTo && linkTo.id !== '';
+    const toolbarRef = React.createRef();
+    const paginationRef = React.createRef();
+    const [extraHeight, setExtraHeight] = useState(0);
 
     const deepMerge = (...objects) => {
       const isObject = item =>
@@ -426,6 +429,17 @@
       }
     }, [data, rowsPerPage]);
 
+    useEffect(() => {
+      let amount = 0;
+      if (hasToolbar) {
+        amount += toolbarRef.current?.clientHeight;
+      }
+      if (showPagination) {
+        amount += paginationRef.current?.clientHeight;
+      }
+      setExtraHeight(amount);
+    }, [showPagination, hasToolbar]);
+
     return (
       <div className={classes.root}>
         <Paper
@@ -435,7 +449,7 @@
           elevation={elevationLevel}
         >
           {hasToolbar && (
-            <Toolbar classes={{ root: classes.toolbar }}>
+            <Toolbar ref={toolbarRef} classes={{ root: classes.toolbar }}>
               {titleText && <span className={classes.title}>{titleText}</span>}
               {searchProperty && !hideSearch && (
                 <TextField
@@ -456,6 +470,7 @@
           <TableContainer
             ref={tableContainerRef}
             classes={{ root: classes.container }}
+            style={{ height: `calc(100% - ${extraHeight}px)` }}
           >
             <Table
               stickyHeader={stickyHeader}
@@ -475,6 +490,7 @@
           </TableContainer>
           {showPagination && (
             <TablePagination
+              ref={paginationRef}
               classes={{ root: classes.pagination }}
               rowsPerPageOptions={[5, 10, 25, 50, 100]}
               labelRowsPerPage={useText(labelRowsPerPage)}
@@ -515,20 +531,6 @@
           '!important',
         ],
         height: '100%',
-      },
-      container: {
-        height: ({
-          options: { hideSearch, searchProperty, pagination, title },
-        }) => {
-          let extraHeight = 0;
-          if ((searchProperty !== '' && !hideSearch) || title.length > 0) {
-            extraHeight += 64;
-          }
-          if (pagination !== 'never') {
-            extraHeight += 64;
-          }
-          return `calc(100% - ${extraHeight}px)`;
-        },
       },
       tableRoot: {
         tableLayout: 'fixed',
