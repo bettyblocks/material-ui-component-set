@@ -1,3 +1,11 @@
+## [1.40.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.40.1...v1.40.2) (2020-10-14)
+
+
+### Bug Fixes
+
+* add missing options to text prefab in dialog ([b98733d](https://github.com/bettyblocks/material-ui-component-set/commit/b98733db9ea8909b78a2a68dbf3d90b5c1479789))
+* refactor default value in text for better readability ([7b64cef](https://github.com/bettyblocks/material-ui-component-set/commit/7b64cef00c31f5fa85b0309c3d62a087c01567c2))
+
 ## [1.40.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.40.0...v1.40.1) (2020-10-14)
 
 
