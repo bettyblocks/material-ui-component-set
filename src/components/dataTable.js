@@ -435,7 +435,7 @@
         amount += toolbarRef.current.clientHeight;
       }
       if (showPagination) {
-        amount += paginationRef.current?.clientHeight;
+        amount += paginationRef.current.clientHeight;
       }
       setExtraHeight(amount);
     }, [showPagination, hasToolbar]);
