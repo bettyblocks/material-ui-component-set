@@ -520,17 +520,15 @@
         height: ({
           options: { hideSearch, searchProperty, pagination, title },
         }) => {
-          const headerHeight = 64;
-          if ((searchProperty !== '' && !hideSearch) || title.length > 0) {
-            if (pagination === 'never') {
-              return `calc(100% - ${headerHeight}px)`;
-            }
-            return `calc(100% - ${headerHeight * 2}px)`;
-          }
-          if (pagination !== 'never') {
-            return `calc(100% - ${headerHeight}px)`;
-          }
-          return '100%';
+          let extraHeight = 0;
+          const visiblePagination = pagination !== 'never';
+          const visibleSearch = searchProperty !== '' && !hideSearch;
+          const visibleToolbar = visibleSearch || title.length > 0;
+
+          visibleToolbar && (extraHeight += 64);
+          visiblePagination && (extraHeight += 64);
+
+          return `calc(100% - ${extraHeight}px)`;
         },
       },
       tableRoot: {
