@@ -521,13 +521,12 @@
           options: { hideSearch, searchProperty, pagination, title },
         }) => {
           let extraHeight = 0;
-          const visiblePagination = pagination !== 'never';
-          const visibleSearch = searchProperty !== '' && !hideSearch;
-          const visibleToolbar = visibleSearch || title.length > 0;
-
-          visibleToolbar && (extraHeight += 64);
-          visiblePagination && (extraHeight += 64);
-
+          if ((searchProperty !== '' && !hideSearch) || title.length > 0) {
+            extraHeight += 64;
+          }
+          if (pagination !== 'never') {
+            extraHeight += 64;
+          }
           return `calc(100% - ${extraHeight}px)`;
         },
       },
