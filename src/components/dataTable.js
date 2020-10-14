@@ -107,7 +107,7 @@
     const hasLink = linkTo && linkTo.id !== '';
     const toolbarRef = React.createRef();
     const paginationRef = React.createRef();
-    const [extraHeight, setExtraHeight] = useState(0);
+    const [containerStyles, setContainerStyles] = useState();
 
     const deepMerge = (...objects) => {
       const isObject = item =>
@@ -437,7 +437,11 @@
       if (showPagination) {
         amount += paginationRef.current.clientHeight;
       }
-      setExtraHeight(amount);
+      if (amount > 0) {
+        setContainerStyles({ height: `calc(100% - ${amount}px)` });
+      } else {
+        setContainerStyles({});
+      }
     }, [showPagination, hasToolbar]);
 
     return (
@@ -470,7 +474,7 @@
           <TableContainer
             ref={tableContainerRef}
             classes={{ root: classes.container }}
-            style={{ height: `calc(100% - ${extraHeight}px)` }}
+            style={containerStyles}
           >
             <Table
               stickyHeader={stickyHeader}
@@ -538,6 +542,9 @@
       toolbar: {
         paddingLeft: ['1rem', '!important'],
         paddingRight: ['1rem', '!important'],
+      },
+      container: {
+        height: '100%',
       },
       title: {
         color: ({ options: { titleType } }) => style.getFontColor(titleType),
