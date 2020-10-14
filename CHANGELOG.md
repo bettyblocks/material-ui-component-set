@@ -1,3 +1,11 @@
+## [1.40.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.40.0...v1.40.1) (2020-10-14)
+
+
+### Bug Fixes
+
+* change text to variables in card, cardActions and dialog ([3f49363](https://github.com/bettyblocks/material-ui-component-set/commit/3f49363734cd9487be1c932e4ff63232ecbc083a))
+* update external link to accept variables ([7942577](https://github.com/bettyblocks/material-ui-component-set/commit/794257722afa92bcaf238a0c77f86b418b71b8f8))
+
 # [1.40.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.39.0...v1.40.0) (2020-10-13)
 
 
