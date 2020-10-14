@@ -83,14 +83,14 @@
             <B.GetMe authenticationProfileId={authProfile}>
               {({ loading, error, data }) => {
                 if (loading) {
-                  B.triggerEvent('onUserLoading');
+                  B.triggerEvent('onUserLoad');
                 }
                 if (error) {
-                  B.triggerEvent('onNoUser', error.message);
+                  B.triggerEvent('onUserError', error.message);
                 }
 
                 if (data && data.id) {
-                  B.triggerEvent('onUser', data);
+                  B.triggerEvent('onUserSuccess', data);
                 }
 
                 return canvasLayout();
