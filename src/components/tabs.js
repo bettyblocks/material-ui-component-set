@@ -43,17 +43,39 @@
             const {
               label = tabData[`label${index}`] || [`Tab`],
               icon = tabData[`icon${index}`] || 'None',
+              iconAlignment = tabData[`iconAlignment${index}`] || 'top',
               disabled = tabData[`disabled${index}`] || false,
               disableRipple = tabData[`disableRipple${index}`] || false,
             } = isDev ? {} : options;
 
+            function flexTranslator() {
+              switch (iconAlignment) {
+                case 'top':
+                  return 'column';
+                case 'right':
+                  return 'row-reverse';
+                case 'bottom':
+                  return 'column-reverse';
+                case 'left':
+                default:
+                  return 'row';
+              }
+            }
+
             return (
               <Tab
-                label={useText(label)}
-                icon={
-                  icon && icon !== 'None'
-                    ? React.createElement(Icons[icon])
-                    : undefined
+                label={
+                  <div
+                    className={classes.labelWrapper}
+                    style={{ flexDirection: flexTranslator() }}
+                  >
+                    <div className={classes.iconWrapper}>
+                      {icon && icon !== 'None'
+                        ? React.createElement(Icons[icon])
+                        : undefined}
+                    </div>
+                    <div>{useText(label)}</div>
+                  </div>
                 }
                 disabled={disabled}
                 disableRipple={disableRipple}
@@ -124,6 +146,16 @@
           style.getColor(indicatorColor),
           '!important',
         ],
+      },
+      labelWrapper: {
+        display: 'flex',
+        alignItems: 'center',
+      },
+      iconWrapper: {
+        marginLeft: 5,
+        marginRight: 5,
+        display: 'flex',
+        alignItems: 'center',
       },
       empty: {
         display: 'flex',

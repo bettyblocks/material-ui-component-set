@@ -7,7 +7,7 @@
     const { Typography, Box } = window.MaterialUI.Core;
     const { env, useText } = B;
     const isDev = env === 'dev';
-    const { label, icon, disabled, disableRipple } = options;
+    const { label, icon, disabled, disableRipple, iconAlignment } = options;
     const { value, tabData, setTabData } = parent;
     const isActive = value === index;
 
@@ -56,6 +56,7 @@
           [`icon${index}`]: icon,
           [`disabled${index}`]: disabled,
           [`disableRipple${index}`]: disableRipple,
+          [`iconAlignment${index}`]: iconAlignment,
         });
       }
     }, [setTabData, tabData, label, icon, disabled, disableRipple]);
