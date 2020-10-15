@@ -332,12 +332,11 @@
     };
 
     useEffect(() => {
-      if (isDev) {
-        if (pagination === 'never') {
-          setShowPagination(false);
-        } else {
-          setShowPagination(true);
-        }
+      if (pagination === 'never') {
+        setShowPagination(false);
+      }
+      if (isDev && pagination !== 'never') {
+        setShowPagination(true);
       }
     }, [pagination]);
 
