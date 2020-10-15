@@ -124,7 +124,6 @@
               return 'row-reverse';
             case 'bottom':
               return 'column-reverse';
-            case 'left':
             default:
               return 'row';
           }
