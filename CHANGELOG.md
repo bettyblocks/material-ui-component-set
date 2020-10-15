@@ -1,3 +1,39 @@
+## [1.40.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.40.1...v1.40.2) (2020-10-14)
+
+
+### Bug Fixes
+
+* add missing options to text prefab in dialog ([b98733d](https://github.com/bettyblocks/material-ui-component-set/commit/b98733db9ea8909b78a2a68dbf3d90b5c1479789))
+* refactor default value in text for better readability ([7b64cef](https://github.com/bettyblocks/material-ui-component-set/commit/7b64cef00c31f5fa85b0309c3d62a087c01567c2))
+
+## [1.40.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.40.0...v1.40.1) (2020-10-14)
+
+
+### Bug Fixes
+
+* change text to variables in card, cardActions and dialog ([3f49363](https://github.com/bettyblocks/material-ui-component-set/commit/3f49363734cd9487be1c932e4ff63232ecbc083a))
+* update external link to accept variables ([7942577](https://github.com/bettyblocks/material-ui-component-set/commit/794257722afa92bcaf238a0c77f86b418b71b8f8))
+
+# [1.40.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.39.0...v1.40.0) (2020-10-13)
+
+
+### Features
+
+* add vertical alignment to Box ([69f0369](https://github.com/bettyblocks/material-ui-component-set/commit/69f036935793d116eff8ec4bcc24b4c465ffdbe5))
+
+# [1.39.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.38.0...v1.39.0) (2020-10-13)
+
+
+### Bug Fixes
+
+* use default tab index in runtime ([b4a57be](https://github.com/bettyblocks/material-ui-component-set/commit/b4a57be48838bc7db3f46a33590e05a32b7c0e73))
+
+
+### Features
+
+* add Select function to tab ([d63ab90](https://github.com/bettyblocks/material-ui-component-set/commit/d63ab90b0515d70a6a6bdf0d7b87288dea9c4965))
+* make hideTabs work ([53042c0](https://github.com/bettyblocks/material-ui-component-set/commit/53042c0fa217f89c2a5c7941397267a758ad77ed))
+
 # [1.38.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.37.0...v1.38.0) (2020-10-12)
 
 
