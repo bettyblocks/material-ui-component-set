@@ -37,6 +37,8 @@
 
     const iconChanged = () => tabData[`icon${index}`] !== icon;
 
+    const iconAlignmentChanged = () =>
+      tabData[`iconAlignment${index}`] !== iconAlignment;
     const disabledChanged = () => tabData[`disabled${index}`] !== disabled;
 
     const disabledRippleChanged = () =>
@@ -45,6 +47,7 @@
     const hasChange = () =>
       labelChanged() ||
       iconChanged() ||
+      iconAlignmentChanged() ||
       disabledChanged() ||
       disabledRippleChanged();
 
@@ -59,7 +62,15 @@
           [`iconAlignment${index}`]: iconAlignment,
         });
       }
-    }, [setTabData, tabData, label, icon, disabled, disableRipple]);
+    }, [
+      setTabData,
+      tabData,
+      label,
+      icon,
+      iconAlignment,
+      disabled,
+      disableRipple,
+    ]);
 
     return isDev ? <div>{TabPanel}</div> : TabPanel;
   })(),

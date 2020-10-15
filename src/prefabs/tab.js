@@ -1290,6 +1290,12 @@
               { name: 'Right', value: 'right' },
               { name: 'Bottom', value: 'bottom' },
             ],
+            condition: {
+              type: 'HIDE',
+              option: 'icon',
+              comparator: 'EQ',
+              value: 'None',
+            },
           },
         },
         {
