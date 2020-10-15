@@ -7,9 +7,9 @@
     const { Typography, Box } = window.MaterialUI.Core;
     const { env, useText } = B;
     const isDev = env === 'dev';
-    const { label, icon, disabled, disableRipple } = options;
-    const { value, tabData, setTabData, setSelectedTab } = parent;
-    const isActive = value === index;
+    const { label, icon, disabled, disableRipple, iconAlignment } = options;
+    const { value, tabData, setTabData, setSelectedTab, showAllTabs } = parent;
+    const isActive = value === index || showAllTabs;
 
     const doSetTab = () => {
       setSelectedTab(index);
@@ -45,6 +45,9 @@
 
     const iconChanged = () => tabData[`icon${index}`] !== icon;
 
+    const iconAlignmentChanged = () =>
+      tabData[`iconAlignment${index}`] !== iconAlignment;
+
     const disabledChanged = () => tabData[`disabled${index}`] !== disabled;
 
     const disabledRippleChanged = () =>
@@ -53,6 +56,7 @@
     const hasChange = () =>
       labelChanged() ||
       iconChanged() ||
+      iconAlignmentChanged() ||
       disabledChanged() ||
       disabledRippleChanged();
 
@@ -64,9 +68,19 @@
           [`icon${index}`]: icon,
           [`disabled${index}`]: disabled,
           [`disableRipple${index}`]: disableRipple,
+          [`iconAlignment${index}`]: iconAlignment,
         });
       }
-    }, [setTabData, tabData, label, icon, disabled, disableRipple]);
+    }, [
+      index,
+      setTabData,
+      tabData,
+      label,
+      icon,
+      iconAlignment,
+      disabled,
+      disableRipple,
+    ]);
 
     return isDev ? <div>{TabPanel}</div> : TabPanel;
   })(),
