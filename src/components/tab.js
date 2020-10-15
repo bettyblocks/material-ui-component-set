@@ -8,8 +8,8 @@
     const { env, useText } = B;
     const isDev = env === 'dev';
     const { label, icon, disabled, disableRipple, iconAlignment } = options;
-    const { value, tabData, setTabData } = parent;
-    const isActive = value === index;
+    const { value, tabData, setTabData, showAllTabs } = parent;
+    const isActive = value === index || showAllTabs;
 
     const emptyBox = (
       <Box className={classes.empty} p={3}>
@@ -63,6 +63,7 @@
         });
       }
     }, [
+      index,
       setTabData,
       tabData,
       label,

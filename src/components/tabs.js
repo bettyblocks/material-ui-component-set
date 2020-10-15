@@ -13,6 +13,7 @@
       centered,
       scrollButtons,
       alignment,
+      showAllTabs,
     } = options;
     const orientation =
       alignment === 'top' || alignment === 'bottom' ? 'horizontal' : 'vertical';
@@ -87,6 +88,7 @@
           value={currentValue}
           tabData={tabData}
           setTabData={setTabData}
+          showAllTabs={showAllTabs}
         >
           {children}
         </Children>
