@@ -39,6 +39,7 @@
 
     const iconAlignmentChanged = () =>
       tabData[`iconAlignment${index}`] !== iconAlignment;
+
     const disabledChanged = () => tabData[`disabled${index}`] !== disabled;
 
     const disabledRippleChanged = () =>
