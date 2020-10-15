@@ -29,7 +29,7 @@
     const isDev = B.env === 'dev';
     const displayError = showError === 'built-in';
 
-    const { useGetAll, getProperty, useText, getCustomModelAttribute } = B;
+    const { useAllQuery, getProperty, useText, getCustomModelAttribute } = B;
 
     const { id: customModelAttributeId, label } = customModelAttributeObj;
     const { kind, values: listValues } = getProperty(property) || {};
@@ -68,14 +68,21 @@
     } = window.MaterialUI.Core;
 
     const { loading, error: err, data, refetch } =
-      model && useGetAll(model, { filter, skip: 0, take: 50 });
+      model && useAllQuery(model, { filter, skip: 0, take: 50 });
 
-    const mounted = useRef(true);
+    const mounted = useRef(false);
+
     useEffect(() => {
-      if (!mounted.current && loading) {
+      mounted.current = true;
+      return () => {
+        mounted.current = false;
+      };
+    }, []);
+
+    useEffect(() => {
+      if (mounted.current && loading) {
         B.triggerEvent('onLoad', loading);
       }
-      mounted.current = false;
     }, [loading]);
 
     if (err && !displayError) {

@@ -6,7 +6,7 @@
   jsx: (
     <div>
       {(() => {
-        const { env, Children, Action, useGetAll, getActionInput } = B;
+        const { env, Children, Action, useAllQuery, getActionInput } = B;
 
         const {
           formData,
@@ -32,29 +32,37 @@
         const location = isDev ? {} : useLocation();
         const { actionId, modelId, variableId } = formData;
         const formVariable = getActionInput(variableId);
+        const hasFilter = modelId && filter && Object.keys(filter).length > 0;
 
-        const { loading: isFetching, data: models, error: err } =
-          (modelId &&
-            useGetAll(modelId, {
+        const { loading: isFetching, data: records, error: err } =
+          (hasFilter &&
+            useAllQuery(modelId, {
               filter,
               skip: 0,
               take: 1,
             })) ||
           {};
 
-        const mounted = useRef(true);
+        const mounted = useRef(false);
+
         useEffect(() => {
-          if (!mounted.current && isFetching) {
+          mounted.current = true;
+          return () => {
+            mounted.current = false;
+          };
+        }, []);
+
+        useEffect(() => {
+          if (mounted.current && isFetching) {
             B.triggerEvent('onDataLoad', isFetching);
           }
-          mounted.current = false;
         }, [isFetching]);
 
         if (err) {
           B.triggerEvent('onDataError', err.message);
         }
 
-        const item = models && models.results[0];
+        const item = records && records.results[0];
 
         if (item) {
           if (item.id) {
@@ -96,7 +104,7 @@
         };
 
         const renderContent = loading => {
-          if (!modelId || isDev) {
+          if (!hasFilter || isDev) {
             return <Children loading={loading}>{children}</Children>;
           }
           if (isFetching) return 'Loading...';

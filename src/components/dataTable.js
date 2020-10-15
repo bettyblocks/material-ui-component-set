@@ -12,7 +12,7 @@
       useText,
       ModelProvider,
       useEndpoint,
-      useGetAll,
+      useAllQuery,
       useFilter,
     } = B;
     const {
@@ -132,7 +132,7 @@
 
     const { loading, error, data, refetch } =
       model &&
-      useGetAll(model, {
+      useAllQuery(model, {
         rawFilter: where,
         variables,
         skip: page * rowsPerPage,
@@ -187,12 +187,19 @@
       setRowsPerPage(takeNum);
     }, [takeNum]);
 
-    const mounted = useRef(true);
+    const mounted = useRef(false);
+
     useEffect(() => {
-      if (!mounted.current && loading) {
+      mounted.current = true;
+      return () => {
+        mounted.current = false;
+      };
+    }, []);
+
+    useEffect(() => {
+      if (mounted.current && loading) {
         B.triggerEvent('onLoad', loading);
       }
-      mounted.current = false;
     }, [loading]);
 
     if (error && !displayError) {
