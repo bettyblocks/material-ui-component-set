@@ -49,7 +49,7 @@
               disableRipple = tabData[`disableRipple${index}`] || false,
             } = isDev ? {} : options;
 
-            function flexTranslator() {
+            function getFlexDirection() {
               switch (iconAlignment) {
                 case 'top':
                   return 'column';
@@ -57,7 +57,6 @@
                   return 'row-reverse';
                 case 'bottom':
                   return 'column-reverse';
-                case 'left':
                 default:
                   return 'row';
               }
@@ -68,7 +67,7 @@
                 label={
                   <div
                     className={classes.labelWrapper}
-                    style={{ flexDirection: flexTranslator() }}
+                    style={{ flexDirection: getFlexDirection() }}
                   >
                     <div className={classes.iconWrapper}>
                       {icon && icon !== 'None'
