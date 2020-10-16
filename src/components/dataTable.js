@@ -49,16 +49,23 @@
       pagination,
       linkTo,
       showError,
+      autoLoadOnScroll,
+      autoLoadTakeAmount,
     } = options;
     const repeaterRef = React.createRef();
     const tableRef = React.createRef();
+    const tableContainerRef = React.createRef();
     const displayError = showError === 'built-in';
     const [page, setPage] = useState(0);
     const takeNum = parseInt(take, 10);
+    const initialRender = useRef(true);
+    const [skip, setSkip] = useState(0);
+    const loadOnScroll = pagination === 'never' && autoLoadOnScroll;
+    const autoLoadTakeAmountNum = parseInt(autoLoadTakeAmount, 10);
     const [rowsPerPage, setRowsPerPage] = useState(takeNum);
     const [search, setSearch] = useState('');
     const [searchTerm, setSearchTerm] = useState('');
-    const [showPagination, setShowPagination] = useState(true);
+    const [showPagination, setShowPagination] = useState(false);
     const searchPropertyArray = [searchProperty].flat();
     const { label: searchPropertyLabel = '{property}' } =
       getProperty(searchProperty) || {};
@@ -66,6 +73,12 @@
       field: [orderProperty].flat() || null,
       order: orderProperty ? sortOrder : null,
     });
+    const [results, setResults] = useState([]);
+    const [totalCount, setTotalCount] = useState(0);
+    const [previousSearchTerm, setPreviousSearchTerm] = useState('');
+    const [newSearch, setNewSearch] = useState(false);
+    const fetchingNextSet = useRef(false);
+    const amountOfRows = loadOnScroll ? autoLoadTakeAmountNum : rowsPerPage;
 
     const createSortObject = (fields, order) => {
       const fieldsArray = [fields].flat();
@@ -92,6 +105,9 @@
     const hasToolbar = titleText || (searchProperty && !hideSearch);
     const elevationLevel = variant === 'flat' ? 0 : elevation;
     const hasLink = linkTo && linkTo.id !== '';
+    const toolbarRef = React.createRef();
+    const paginationRef = React.createRef();
+    const [stylesProps, setStylesProps] = useState(null);
 
     const deepMerge = (...objects) => {
       const isObject = item =>
@@ -135,9 +151,33 @@
       useGetAll(model, {
         rawFilter: where,
         variables,
-        skip: page * rowsPerPage,
-        take: rowsPerPage,
+        skip: loadOnScroll ? skip : page * rowsPerPage,
+        take: loadOnScroll ? autoLoadTakeAmountNum : rowsPerPage,
       });
+
+    useEffect(() => {
+      if (!isDev && data) {
+        if (pagination !== 'never') {
+          setResults(data.results);
+          setTotalCount(data.totalCount);
+          return;
+        }
+        if (searchTerm !== previousSearchTerm) {
+          setSkip(0);
+          setPreviousSearchTerm(searchTerm);
+          setNewSearch(true);
+        } else {
+          if (newSearch) {
+            setResults(data.results);
+          } else {
+            setResults(prev => [...prev, ...data.results]);
+          }
+          fetchingNextSet.current = false;
+          setNewSearch(false);
+        }
+        setTotalCount(data.totalCount);
+      }
+    }, [data, searchTerm]);
 
     useEffect(() => {
       const handler = setTimeout(() => {
@@ -164,7 +204,7 @@
           return;
         }
         repeaterRef.current.innerHTML = '';
-        for (let i = 0, j = takeNum - 1; i < j; i += 1) {
+        for (let i = 0, j = amountOfRows - 1; i < j; i += 1) {
           repeaterRef.current.innerHTML +=
             repeaterRef.current.previousElementSibling.children[0].outerHTML;
         }
@@ -198,8 +238,6 @@
     if (error && !displayError) {
       B.triggerEvent('onError', error.message);
     }
-
-    const { totalCount = 0, results = [] } = data || {};
 
     if (results.length > 0) {
       B.triggerEvent('onSuccess', results);
@@ -266,7 +304,7 @@
     };
 
     const renderTableHead = () => {
-      if (loading || error) {
+      if ((loading && !loadOnScroll) || error) {
         return Array.from(Array(children.length).keys()).map(colIdx => (
           <TableCell key={colIdx}>
             <div className={classes.skeleton}>
@@ -283,7 +321,7 @@
     };
 
     const tableContentModel = () => {
-      if (loading || error) {
+      if ((loading && !loadOnScroll) || error) {
         return Array.from(Array(rowsPerPage).keys()).map(idx => (
           <TableRow key={idx} classes={{ root: classes.bodyRow }}>
             {Array.from(Array(children.length).keys()).map(colIdx => (
@@ -316,7 +354,7 @@
     };
 
     const renderTableContent = () => {
-      let tableContent = Array.from(Array(rowsPerPage).keys()).map(idx => (
+      let tableContent = Array.from(Array(amountOfRows).keys()).map(idx => (
         <TableRow key={idx} classes={{ root: classes.bodyRow }}>
           {children}
         </TableRow>
@@ -330,6 +368,35 @@
       }
       return tableContent;
     };
+
+    useEffect(() => {
+      if (loadOnScroll && !isDev) {
+        const fetchNextSet = () => {
+          fetchingNextSet.current = true;
+          if (!initialRender.current) {
+            setSkip(prev => prev + autoLoadTakeAmountNum);
+          }
+          initialRender.current = false;
+        };
+
+        const tableContainerElement = tableContainerRef.current;
+        if (loadOnScroll) {
+          const parent = tableContainerElement.parentNode;
+          if (tableContainerElement.scrollHeight <= parent.clientHeight) {
+            fetchNextSet();
+          }
+          const scrollEvent = e => {
+            const { scrollTop, clientHeight, scrollHeight } = e.target;
+            const offset = scrollHeight / 5;
+            const hitBottom = scrollTop + clientHeight >= scrollHeight - offset;
+            if (hitBottom && !fetchingNextSet.current) {
+              fetchNextSet();
+            }
+          };
+          tableContainerElement.addEventListener('scroll', scrollEvent);
+        }
+      }
+    }, [results]);
 
     useEffect(() => {
       if (isDev) {
@@ -348,8 +415,10 @@
             setShowPagination(false);
             break;
           case 'whenNeeded':
-            if (rowsPerPage >= totalCount) {
+            if (rowsPerPage >= data.totalCount) {
               setShowPagination(false);
+            } else {
+              setShowPagination(true);
             }
             break;
           default:
@@ -360,6 +429,22 @@
       }
     }, [data, rowsPerPage]);
 
+    useEffect(() => {
+      let amount = 0;
+      if (hasToolbar) {
+        amount += toolbarRef.current.clientHeight;
+      }
+      if (showPagination) {
+        amount += paginationRef.current.clientHeight;
+      }
+      if (amount > 0) {
+        const style = { height: `calc(100% - ${amount}px)` };
+        setStylesProps({ style });
+      } else {
+        setStylesProps(null);
+      }
+    }, [showPagination, hasToolbar]);
+
     return (
       <div className={classes.root}>
         <Paper
@@ -369,9 +454,9 @@
           elevation={elevationLevel}
         >
           {hasToolbar && (
-            <Toolbar classes={{ root: classes.toolbar }}>
+            <Toolbar ref={toolbarRef} classes={{ root: classes.toolbar }}>
               {titleText && <span className={classes.title}>{titleText}</span>}
-              {searchProperty && (
+              {searchProperty && !hideSearch && (
                 <TextField
                   classes={{ root: classes.searchField }}
                   placeholder={`Search on ${searchPropertyLabel}`}
@@ -387,7 +472,11 @@
               )}
             </Toolbar>
           )}
-          <TableContainer classes={{ root: classes.container }}>
+          <TableContainer
+            ref={tableContainerRef}
+            classes={{ root: classes.container }}
+            {...stylesProps}
+          >
             <Table
               stickyHeader={stickyHeader}
               size={size}
@@ -406,6 +495,7 @@
           </TableContainer>
           {showPagination && (
             <TablePagination
+              ref={paginationRef}
               classes={{ root: classes.pagination }}
               rowsPerPageOptions={[5, 10, 25, 50, 100]}
               labelRowsPerPage={useText(labelRowsPerPage)}
@@ -438,16 +528,17 @@
           getSpacing(outerSpacing[2]),
         marginLeft: ({ options: { outerSpacing } }) =>
           getSpacing(outerSpacing[3]),
+        height: ({ options: { height } }) => height,
       },
       paper: {
         backgroundColor: ({ options: { background } }) => [
           style.getColor(background),
           '!important',
         ],
+        height: '100%',
       },
       container: {
-        height: ({ options: { stickyHeader, height } }) =>
-          stickyHeader && height,
+        height: '100%',
       },
       tableRoot: {
         tableLayout: 'fixed',
