@@ -7,7 +7,7 @@
       name: 'Select',
       options: [
         {
-          value: { label: ['Label'], value: [] },
+          value: { label: ['Select'], value: [] },
           label: 'Label',
           key: 'customModelAttribute',
           type: 'CUSTOM_MODEL_ATTRIBUTE',

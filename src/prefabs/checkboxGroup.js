@@ -7,7 +7,7 @@
       name: 'CheckboxGroup',
       options: [
         {
-          value: { label: ['Label'], value: [] },
+          value: { label: ['Checkbox group'], value: [] },
           label: 'Label',
           key: 'customModelAttribute',
           type: 'CUSTOM_MODEL_ATTRIBUTE',

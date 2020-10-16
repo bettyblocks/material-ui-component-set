@@ -6,7 +6,6 @@
   jsx: (() => {
     const {
       disabled,
-      defaultValue,
       row,
       helperText,
       radioOptions,
@@ -31,7 +30,11 @@
 
     const { useGetAll, getProperty, useText, getCustomModelAttribute } = B;
 
-    const { id: customModelAttributeId, label } = customModelAttributeObj;
+    const {
+      id: customModelAttributeId,
+      label,
+      value: defaultValue,
+    } = customModelAttributeObj;
     const { kind, values: listValues } = getProperty(property) || {};
     const labelText = useText(label);
 
