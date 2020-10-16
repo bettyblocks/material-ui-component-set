@@ -4,6 +4,7 @@ node_js: 14.2.0
 jobs:
   include:
     - stage: quality
+    - before_install: git remote set-branches origin master && git fetch
     - script:
         - commitlint --from=master
       if: type = pull_request
