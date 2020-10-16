@@ -1,8 +1,6 @@
 language: node_js
 node_js: 14.2.0
 
-before_install: git remote set-branches origin master && git fetch
-
 jobs:
   include:
     - stage: linter
