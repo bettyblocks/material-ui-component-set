@@ -5,6 +5,10 @@ jobs:
   include:
     - stage: quality
     - script:
+        - commitlint --from=master
+      if: type = pull_request
+      name: 'Commit lint'
+    - script:
         - yarn
         - yarn lint
       name: 'Lint'
