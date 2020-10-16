@@ -7,7 +7,7 @@
       name: 'AutoComplete',
       options: [
         {
-          value: { label: ['Label'], value: [] },
+          value: { label: ['Autocomplete'], value: [] },
           label: 'Label',
           key: 'customModelAttribute',
           type: 'CUSTOM_MODEL_ATTRIBUTE',

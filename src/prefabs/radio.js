@@ -7,7 +7,7 @@
       name: 'RadioGroup',
       options: [
         {
-          value: { label: ['Label'], value: [] },
+          value: { label: ['Radio group'], value: [] },
           label: 'Label',
           key: 'customModelAttribute',
           type: 'CUSTOM_MODEL_ATTRIBUTE',

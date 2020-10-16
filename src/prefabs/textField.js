@@ -7,7 +7,7 @@
       name: 'TextField',
       options: [
         {
-          value: { label: ['Label'], value: [] },
+          value: { label: ['Textfield'], value: [] },
           label: 'Label',
           key: 'customModelAttribute',
           type: 'CUSTOM_MODEL_ATTRIBUTE',
