@@ -6,7 +6,6 @@
   jsx: (() => {
     const {
       defaultValue,
-      required,
       disabled,
       customModelAttribute: customModelAttributeObj,
       nameAttribute,
@@ -19,8 +18,8 @@
     const customModelAttribute = getCustomModelAttribute(
       customModelAttributeId,
     );
-    const customModelAttributeName =
-      customModelAttribute && customModelAttribute.name;
+    const { name: customModelAttributeName, validations: { required } = {} } =
+      customModelAttribute || {};
     const nameAttributeValue = useText(nameAttribute);
 
     useEffect(() => {

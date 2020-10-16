@@ -6,7 +6,6 @@
   jsx: (() => {
     const {
       defaultValue,
-      required,
       disabled,
       error,
       multiline,
@@ -60,8 +59,9 @@
     const customModelAttribute = getCustomModelAttribute(
       customModelAttributeId,
     );
-    const customModelAttributeName =
-      customModelAttribute && customModelAttribute.name;
+
+    const { name: customModelAttributeName, validations: { required } = {} } =
+      customModelAttribute || {};
     const nameAttributeValue = useText(nameAttribute);
 
     const validPattern = pattern || null;

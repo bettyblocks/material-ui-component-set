@@ -1,11 +1,11 @@
 {
   "name": "component-set",
-  "version": "1.37.0",
+  "version": "1.40.3",
   "main": "dist/templates.json",
   "license": "UNLICENSED",
   "private": false,
   "devDependencies": {
-    "@betty-blocks/cli": "^23.15.0",
+    "@betty-blocks/cli": "^23.16.1",
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-angular": "^8.3.4",
     "@commitlint/prompt-cli": "^8.3.5",
@@ -32,7 +32,7 @@
   "scripts": {
     "start": "bb components serve -p 5002",
     "build": "bb components build",
-    "dev": "nodemon --watch src --exec 'yarn build && yarn start'",
+    "dev": "nodemon --watch src --exec \"yarn build && yarn start\"",
     "lint": "eslint --ext js ./src",
     "prettier:base": "prettier --single-quote",
     "prettier:check": "yarn prettier:base --list-different \"src/**/*.js\"",
