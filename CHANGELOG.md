@@ -1,3 +1,10 @@
+# [1.42.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.41.0...v1.42.0) (2020-10-16)
+
+
+### Features
+
+* add improved git guideline checks and documentation ([a0e3ccf](https://github.com/bettyblocks/material-ui-component-set/commit/a0e3ccf2b07d151a21bc629d865ad65863d25579))
+
 # [1.41.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.40.3...v1.41.0) (2020-10-16)
 
 
