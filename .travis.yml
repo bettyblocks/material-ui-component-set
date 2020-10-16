@@ -1,11 +1,12 @@
 language: node_js
 node_js: 14.2.0
 
+before_install: git remote set-branches origin master && git fetch
+
 jobs:
   include:
-    - stage: quality
-    - before_install: git remote set-branches origin master && git fetch
-    - script:
+    - stage: linter
+      script:
         - commitlint --from=master
       if: type = pull_request
       name: 'Commit lint'
