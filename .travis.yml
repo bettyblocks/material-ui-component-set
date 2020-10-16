@@ -5,7 +5,7 @@ jobs:
   include:
     - stage: linter
       script:
-        - commitlint --from=master
+        - commitlint --from=edge
       if: type = pull_request
       name: 'Commit lint'
     - script:
