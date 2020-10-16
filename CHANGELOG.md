@@ -1,3 +1,11 @@
+## [1.40.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.40.2...v1.40.3) (2020-10-16)
+
+
+### Bug Fixes
+
+* update cli with fix for building set on windows ([b8d421f](https://github.com/bettyblocks/material-ui-component-set/commit/b8d421f16fab5c6bb29cdb1f88a148f64cbc299b))
+* use correct command for yarn dev so it works on windows ([9bed31d](https://github.com/bettyblocks/material-ui-component-set/commit/9bed31d734a2f4f4a81d607f26e6a629c4b91947))
+
 ## [1.40.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.40.1...v1.40.2) (2020-10-14)
 
 
