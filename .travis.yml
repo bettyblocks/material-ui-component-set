@@ -5,7 +5,7 @@ jobs:
   include:
     - stage: linter
       script:
-        - commitlint --from=acceptance
+        - commitlint --from $(git rev-parse --short HEAD^1) --to $(git rev-parse --short HEAD^2)
       if: type = pull_request
       name: 'Commit lint'
     - script:
