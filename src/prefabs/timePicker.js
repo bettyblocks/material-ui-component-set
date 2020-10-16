@@ -7,7 +7,7 @@
       name: 'DateTimePicker',
       options: [
         {
-          value: { label: ['Time'] },
+          value: { label: ['Time'], value: [] },
           label: 'Label',
           key: 'customModelAttribute',
           type: 'CUSTOM_MODEL_ATTRIBUTE',
@@ -34,12 +34,6 @@
           label: 'Disable Toolbar',
           key: 'disableToolbar',
           value: false,
-        },
-        {
-          value: [],
-          label: 'Value',
-          key: 'defaultValue',
-          type: 'VARIABLE',
         },
         {
           value: 'HH:mm:ss',

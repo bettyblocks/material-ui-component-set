@@ -5,7 +5,6 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const {
-      defaultValue,
       disabled,
       error,
       placeholder,
@@ -38,12 +37,16 @@
     const { useText, env, getCustomModelAttribute } = B;
     const DateFns = new DateFnsUtils();
     const isDev = env === 'dev';
-    const strDefaultValue = useText(defaultValue);
     const [selectedDate, setSelectedDate] = useState();
     const helper = useText(helperText);
     const placeholderText = useText(placeholder);
 
-    const { id: customModelAttributeId, label } = customModelAttributeObj;
+    const {
+      id: customModelAttributeId,
+      label,
+      value: defaultValue,
+    } = customModelAttributeObj;
+    const strDefaultValue = useText(defaultValue);
     const labelText = useText(label);
     const customModelAttribute = getCustomModelAttribute(
       customModelAttributeId,

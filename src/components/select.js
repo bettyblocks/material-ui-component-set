@@ -6,7 +6,6 @@
   jsx: (() => {
     const {
       disabled,
-      defaultValue,
       variant,
       size,
       fullWidth,
@@ -29,15 +28,19 @@
     const displayError = showError === 'built-in';
     const isDev = B.env === 'dev';
     const { useAllQuery, getProperty, useText, getCustomModelAttribute } = B;
-    const [currentValue, setCurrentValue] = useState(useText(defaultValue));
     const [errorState, setErrorState] = useState(false);
     const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
 
     const { kind, values = [] } = getProperty(property) || {};
 
-    const { id: customModelAttributeId, label } = customModelAttributeObj;
+    const {
+      id: customModelAttributeId,
+      label,
+      value: defaultValue,
+    } = customModelAttributeObj;
 
+    const [currentValue, setCurrentValue] = useState(useText(defaultValue));
     const labelText = useText(label);
     const nameAttributeValue = useText(nameAttribute);
 
