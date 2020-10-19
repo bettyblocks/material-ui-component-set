@@ -1,3 +1,10 @@
+# [1.43.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.42.0...v1.43.0) (2020-10-19)
+
+
+### Features
+
+* show boolean props as string in data table ([b2b431f](https://github.com/bettyblocks/material-ui-component-set/commit/b2b431fbfcbefad84f8b108f2d19475239089aeb))
+
 # [1.42.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.41.0...v1.42.0) (2020-10-16)
 
 
