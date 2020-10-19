@@ -1,14 +1,14 @@
 {
   "name": "component-set",
-  "version": "1.40.3",
+  "version": "1.42.0",
   "main": "dist/templates.json",
   "license": "UNLICENSED",
   "private": false,
   "devDependencies": {
     "@betty-blocks/cli": "^23.16.1",
-    "@commitlint/cli": "^8.3.5",
-    "@commitlint/config-angular": "^8.3.4",
-    "@commitlint/prompt-cli": "^8.3.5",
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-angular": "^11.0.0",
+    "@commitlint/prompt-cli": "^11.0.0",
     "eslint": "^5.9.0",
     "eslint-config-airbnb": "17.1.0",
     "eslint-config-prettier": "^3.3.0",

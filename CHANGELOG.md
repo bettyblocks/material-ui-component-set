@@ -1,3 +1,53 @@
+# [1.42.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.41.0...v1.42.0) (2020-10-16)
+
+
+### Features
+
+* add improved git guideline checks and documentation ([a0e3ccf](https://github.com/bettyblocks/material-ui-component-set/commit/a0e3ccf2b07d151a21bc629d865ad65863d25579))
+
+# [1.41.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.40.3...v1.41.0) (2020-10-16)
+
+
+### Bug Fixes
+
+* add fetchingNextSet to scroll fill check ([65dbfef](https://github.com/bettyblocks/material-ui-component-set/commit/65dbfefce3cef0a23cb0362f654115b9717b44c8))
+* allow 1 fetchNextSet at a time ([800e236](https://github.com/bettyblocks/material-ui-component-set/commit/800e236d1c6531911041951573202608c769f1a8))
+* cleaner conditional ([d7bf709](https://github.com/bettyblocks/material-ui-component-set/commit/d7bf709b503e952c9155391e0b6bf569fb0c9b0c))
+* hide search properly, fix overflow ([21912ed](https://github.com/bettyblocks/material-ui-component-set/commit/21912edab686b08250ac658ae1421727c54d3817))
+* improve unlimited scroll search ([8da0924](https://github.com/bettyblocks/material-ui-component-set/commit/8da0924e545324a84bc2deef74bddeffe3cc0523))
+* linter ([53732bb](https://github.com/bettyblocks/material-ui-component-set/commit/53732bbc11fa80b579e8f090cb739044ca18e61a))
+* linter ([0ae52c4](https://github.com/bettyblocks/material-ui-component-set/commit/0ae52c496115a9fc87bd1287b6c3ee48cbfaeed4))
+* linter ([071c2b0](https://github.com/bettyblocks/material-ui-component-set/commit/071c2b0bdd30d0a8d122ddfbdd7acc5153e9a719))
+* linter ([7046c26](https://github.com/bettyblocks/material-ui-component-set/commit/7046c2685ed70e98acb7bf3dae618b4211db85d8))
+* linter, move functions into useeffect ([6325d9e](https://github.com/bettyblocks/material-ui-component-set/commit/6325d9e5239f52183f5461005aa116363ccc69eb))
+* make autoscroll work properly with new pagination options ([54e3602](https://github.com/bettyblocks/material-ui-component-set/commit/54e36028e643000fdb031966124efc1d8d6c5866))
+* make inline styling conditional ([bbcde32](https://github.com/bettyblocks/material-ui-component-set/commit/bbcde32aede2de33eaec6959c4db51ae3952f8c3))
+* make offset dynamic ([7a2767b](https://github.com/bettyblocks/material-ui-component-set/commit/7a2767bdd361f34f23f694cfc6b01dee9565cb3f))
+* make scroll based on table container instead of window ([9341e8e](https://github.com/bettyblocks/material-ui-component-set/commit/9341e8e0ae961d100b49e2d7fc57806561f4ff8e))
+* place container styling in original place ([de9e2d5](https://github.com/bettyblocks/material-ui-component-set/commit/de9e2d5ee1e62d1b6dc1427ed41edbd85c77893e))
+* refactor extraHeight calculation ([78f954c](https://github.com/bettyblocks/material-ui-component-set/commit/78f954cb6ea1449e5f3b90509f3c46b2d85097ed))
+* remove pagination check ([2eec74e](https://github.com/bettyblocks/material-ui-component-set/commit/2eec74eb1378e5914847b42150a6b6c4bd916dfe))
+* search on autoload ([2a39c00](https://github.com/bettyblocks/material-ui-component-set/commit/2a39c003fd6bb3f11e38a6daaadcd7ff2bda9b2d))
+* show all results of search ([e1e8c6f](https://github.com/bettyblocks/material-ui-component-set/commit/e1e8c6ffd6ffd2ff93142b54bc17cbeaa3c94678))
+* show first set of records ([bfde0fd](https://github.com/bettyblocks/material-ui-component-set/commit/bfde0fd8ce2158752dbf257b917a1475d0aeb424))
+* simplify conditions for extraHeight ([1c0ac6c](https://github.com/bettyblocks/material-ui-component-set/commit/1c0ac6c183c4ced8ac48836c1772c547800c630c))
+* tidy up file ([68c3724](https://github.com/bettyblocks/material-ui-component-set/commit/68c37243d3d6e3a6564001f331f82a3bc851f087))
+* update comparator value of new pagination ([1979af1](https://github.com/bettyblocks/material-ui-component-set/commit/1979af16b8edbbdc8bace3d692aef45cf721bc8b))
+* use amountOfRows and HeaderHeight ([08e9d84](https://github.com/bettyblocks/material-ui-component-set/commit/08e9d8486affe245cc849fd6a9f00cbcc258a631))
+* work with when needed option. Add toolbar pagination ref ([cb8a115](https://github.com/bettyblocks/material-ui-component-set/commit/cb8a1156e9d7cfaa45c0c46c5a71e2eaeafea206))
+
+
+### Features
+
+* add unlimited scrolling option to datatable ([5355d35](https://github.com/bettyblocks/material-ui-component-set/commit/5355d35c5d044aa66302c8c3d12bc6a450c4d87c))
+* always show height, remove need for window scroll listener ([5b305a2](https://github.com/bettyblocks/material-ui-component-set/commit/5b305a2f9e145ecdfaca36505b96cb0cf28d0d96))
+* configure takeAmount and fix scroll issue ([70a777f](https://github.com/bettyblocks/material-ui-component-set/commit/70a777fa498acb50cb2c6e843806a53bc6c570d3))
+* fetch when autoLoadOnScroll is true, fill with data untill scroll ([b645c01](https://github.com/bettyblocks/material-ui-component-set/commit/b645c01e8970130cd6b897a342e130e3b63dff0a))
+* improve fetchingnextset handling ([06b69bb](https://github.com/bettyblocks/material-ui-component-set/commit/06b69bb2e22189f3133df157caeca9278a1947d6))
+* make endless scroll dynamic ([37ef6c8](https://github.com/bettyblocks/material-ui-component-set/commit/37ef6c8214e1dcf6311d960eb629140c38bf1d8c))
+* make ide representation dynamic ([f0043b4](https://github.com/bettyblocks/material-ui-component-set/commit/f0043b45ad5f5a2e3caf37063e3fdcecbbae6919))
+* use loadOnScroll const ([aa90baa](https://github.com/bettyblocks/material-ui-component-set/commit/aa90baa5d91ae256aa6b0c2f15bbdff46f288c3b))
+
 ## [1.40.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.40.2...v1.40.3) (2020-10-16)
 
 
