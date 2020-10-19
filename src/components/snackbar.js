@@ -63,6 +63,7 @@
           <CloseIcon fontSize="small" />
         </IconButton>
       ),
+      classes: { root: classes.root },
     };
 
     if (isEmpty) {
@@ -87,22 +88,28 @@
       SnackbarCmp
     );
   })(),
-  styles: () => () => ({
-    pristine: {
-      borderWidth: '0.0625rem',
-      borderColor: '#AFB5C8',
-      borderStyle: 'dashed',
-      backgroundColor: '#F0F1F5',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      minHeight: '2rem',
-      width: '100%',
-      fontSize: '0.75rem',
-      color: '#262A3A',
-      textTransform: 'uppercase',
-      boxSizing: 'border-box',
-      textAlign: 'center',
-    },
-  }),
+  styles: B => () => {
+    const isDev = B.env === 'dev';
+    return {
+      root: {
+        position: () => isDev && 'absolute !important',
+      },
+      pristine: {
+        borderWidth: '0.0625rem',
+        borderColor: '#AFB5C8',
+        borderStyle: 'dashed',
+        backgroundColor: '#F0F1F5',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: '2rem',
+        width: '100%',
+        fontSize: '0.75rem',
+        color: '#262A3A',
+        textTransform: 'uppercase',
+        boxSizing: 'border-box',
+        textAlign: 'center',
+      },
+    };
+  },
 }))();

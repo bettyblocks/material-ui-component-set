@@ -65,7 +65,7 @@
 
         {
           type: 'NUMBER',
-          label: 'Auto Hide Duration',
+          label: 'Auto Hide Duration (ms)',
           key: 'autoHideDuration',
           value: 6000,
           configuration: {
