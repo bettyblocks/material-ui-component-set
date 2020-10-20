@@ -32,8 +32,8 @@
 
     const {
       id: customModelAttributeId,
-      label,
-      value: defaultValue,
+      label = [],
+      value: defaultValue = [],
     } = customModelAttributeObj;
     const { kind, values: listValues } = getProperty(property) || {};
     const labelText = useText(label);

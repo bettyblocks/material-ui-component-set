@@ -20,8 +20,8 @@
     const [helper, setHelper] = useState(useText(helperText));
     const {
       id: customModelAttributeId,
-      label,
-      value: defaultValue,
+      label = [],
+      value: defaultValue = [],
     } = customModelAttributeObj;
     const customModelAttribute = getCustomModelAttribute(
       customModelAttributeId,

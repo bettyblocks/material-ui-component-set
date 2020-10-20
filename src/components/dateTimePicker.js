@@ -43,8 +43,8 @@
 
     const {
       id: customModelAttributeId,
-      label,
-      value: defaultValue,
+      label = [],
+      value: defaultValue = [],
     } = customModelAttributeObj;
     const strDefaultValue = useText(defaultValue);
     const labelText = useText(label);
