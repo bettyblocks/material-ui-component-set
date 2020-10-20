@@ -14,7 +14,7 @@
     const isDev = env === 'dev';
     const {
       id: customModelAttributeId,
-      value: defaultValue,
+      value: defaultValue = [''],
     } = customModelAttributeObj;
     const customModelAttribute = getCustomModelAttribute(
       customModelAttributeId,

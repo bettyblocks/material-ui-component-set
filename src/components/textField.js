@@ -54,8 +54,8 @@
     const [helper, setHelper] = useState(useText(helperText));
     const {
       id: customModelAttributeId,
-      label,
-      value: defaultValue,
+      label = [],
+      value: defaultValue = [],
     } = customModelAttributeObj;
     const [currentValue, setCurrentValue] = useState(useText(defaultValue));
     const labelText = useText(label);

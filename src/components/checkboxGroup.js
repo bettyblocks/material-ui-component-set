@@ -36,7 +36,7 @@
     const valueProperty = getProperty(valueProp);
     const {
       id: customModelAttributeId,
-      label,
+      label = [],
       value: defaultValue,
     } = customModelAttributeObj;
     const customModelAttribute = getCustomModelAttribute(
@@ -48,7 +48,7 @@
     const nameAttributeValue = useText(nameAttribute);
 
     const getValues = () => {
-      const value = useText(defaultValue);
+      const value = defaultValue ? useText(defaultValue) : [];
       // split the string and trim spaces
       return !Array.isArray(value)
         ? value.split(',').map(str => str.trim())

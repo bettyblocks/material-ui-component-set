@@ -55,8 +55,8 @@
 
     const {
       id: customModelAttributeId,
-      label,
-      value: defaultValue,
+      label = [],
+      value: defaultValue = [],
     } = customModelAttributeObj;
     const customModelAttribute = getCustomModelAttribute(
       customModelAttributeId,

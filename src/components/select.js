@@ -36,8 +36,8 @@
 
     const {
       id: customModelAttributeId,
-      label,
-      value: defaultValue,
+      label = [],
+      value: defaultValue = [],
     } = customModelAttributeObj;
 
     const [currentValue, setCurrentValue] = useState(useText(defaultValue));
