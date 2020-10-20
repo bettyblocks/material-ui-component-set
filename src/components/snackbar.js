@@ -1,7 +1,7 @@
 (() => ({
   name: 'Snackbar',
   type: 'CONTENT_COMPONENT',
-  allowedTypes: ['CONTENT_COMPONENT'],
+  allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { Snackbar, IconButton } = window.MaterialUI.Core;
@@ -12,12 +12,13 @@
       anchorOriginVertical,
       autoHide,
       autoHideDuration,
+      content,
     } = options;
-    const { env } = B;
+    const { env, useText } = B;
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
     const [open, setOpen] = useState(false);
-    const [text, setText] = useState('');
+    const [text, setText] = useState(useText(content));
 
     const CloseIcon = Icons.Close;
 
@@ -41,7 +42,12 @@
       setOpen(visible);
     }, [visible]);
 
-    const emptyMessage = 'Drag a component in the snackbar or use interactions';
+    useEffect(() => {
+      if (isDev) {
+        setText(useText(content));
+      }
+    }, [isDev, content]);
+
     const duration = autoHide ? autoHideDuration : null;
 
     let snackbarOptions = {
@@ -69,7 +75,7 @@
     if (isEmpty) {
       snackbarOptions = {
         ...snackbarOptions,
-        message: isDev ? emptyMessage : text,
+        message: text,
       };
     }
 
@@ -80,10 +86,7 @@
     );
 
     return isDev ? (
-      <div className={classes.wrapper}>
-        <div className={classes.pristine}>Snackbar</div>
-        {SnackbarCmp}
-      </div>
+      <div className={classes.wrapper}>{SnackbarCmp}</div>
     ) : (
       SnackbarCmp
     );
@@ -92,23 +95,15 @@
     const isDev = B.env === 'dev';
     return {
       root: {
-        position: () => isDev && 'absolute !important',
-      },
-      pristine: {
-        borderWidth: '0.0625rem',
-        borderColor: '#AFB5C8',
-        borderStyle: 'dashed',
-        backgroundColor: '#F0F1F5',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        minHeight: '2rem',
-        width: '100%',
-        fontSize: '0.75rem',
-        color: '#262A3A',
-        textTransform: 'uppercase',
-        boxSizing: 'border-box',
-        textAlign: 'center',
+        zIndex: isDev && [900, '!important'],
+        left: ({ options: { anchorOriginHorizontal } }) => {
+          const isRight = anchorOriginHorizontal === 'right';
+          const isLeft = anchorOriginHorizontal === 'left';
+          const recalculatedPosition = isLeft
+            ? 'calc(8px + 328px)'
+            : 'calc(50% + 328px / 2)';
+          return isDev && !isRight && [recalculatedPosition, '!important'];
+        },
       },
     };
   },
