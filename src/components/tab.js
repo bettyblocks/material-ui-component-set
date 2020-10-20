@@ -8,7 +8,7 @@
     const { env, useText } = B;
     const isDev = env === 'dev';
     const { label, icon, disabled, disableRipple, iconAlignment } = options;
-    const { value, tabData, setTabData, setSelectedTab, showAllTabs } = parent;
+    const { value, tabData, setTabData, showAllTabs, setSelectedTab } = parent;
     const isActive = value === index || showAllTabs;
 
     const doSetTab = () => {

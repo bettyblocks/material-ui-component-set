@@ -12,9 +12,9 @@
       variant,
       centered,
       scrollButtons,
-      hideTabs,
       alignment,
       showAllTabs,
+      hideTabs,
     } = options;
     const orientation =
       alignment === 'top' || alignment === 'bottom' ? 'horizontal' : 'vertical';
@@ -100,8 +100,8 @@
           value={value}
           tabData={tabData}
           setTabData={setTabData}
-          setSelectedTab={setSelectedTab}
           showAllTabs={showAllTabs}
+          setSelectedTab={setSelectedTab}
         >
           {children}
         </Children>
