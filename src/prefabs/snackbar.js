@@ -13,6 +13,12 @@
           value: true,
         },
         {
+          type: 'VARIABLE',
+          label: 'Content',
+          key: 'content',
+          value: ['You can also drag an alert component here for example'],
+        },
+        {
           label: 'Vertical position',
           key: 'anchorOriginVertical',
           value: 'bottom',
