@@ -1,3 +1,10 @@
+## [1.44.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.44.0...v1.44.1) (2020-10-20)
+
+
+### Bug Fixes
+
+* styling label textfield variant standard ([e523f3e](https://github.com/bettyblocks/material-ui-component-set/commit/e523f3e1826faa562af45a545fb5659ce4b5dadc))
+
 # [1.44.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.43.0...v1.44.0) (2020-10-19)
 
 
