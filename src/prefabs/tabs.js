@@ -13,16 +13,24 @@
           type: 'NUMBER',
         },
         {
-          label: 'Orientation',
-          key: 'orientation',
-          value: 'horizontal',
+          label: 'Show all tabs',
+          key: 'showAllTabs',
+          value: false,
+          type: 'TOGGLE',
+        },
+        {
+          value: 'top',
+          label: 'Alignment',
+          key: 'alignment',
           type: 'CUSTOM',
           configuration: {
             as: 'BUTTONGROUP',
             dataType: 'string',
             allowedInput: [
-              { name: 'Horizontal', value: 'horizontal' },
-              { name: 'Vertical', value: 'vertical' },
+              { name: 'Left', value: 'left' },
+              { name: 'Top', value: 'top' },
+              { name: 'Right', value: 'right' },
+              { name: 'Bottom', value: 'bottom' },
             ],
           },
         },
@@ -39,12 +47,6 @@
               { name: 'Scrollable', value: 'scrollable' },
               { name: 'Full width', value: 'fullWidth' },
             ],
-            condition: {
-              type: 'SHOW',
-              option: 'orientation',
-              comparator: 'EQ',
-              value: 'horizontal',
-            },
           },
         },
         {
@@ -1380,6 +1382,28 @@
                     value: 'Work',
                   },
                 ],
+              },
+            },
+            {
+              label: 'Icon Alignment',
+              key: 'iconAlignment',
+              value: 'top',
+              type: 'CUSTOM',
+              configuration: {
+                as: 'BUTTONGROUP',
+                dataType: 'string',
+                allowedInput: [
+                  { name: 'Left', value: 'left' },
+                  { name: 'Top', value: 'top' },
+                  { name: 'Right', value: 'right' },
+                  { name: 'Bottom', value: 'bottom' },
+                ],
+                condition: {
+                  type: 'HIDE',
+                  option: 'icon',
+                  comparator: 'EQ',
+                  value: 'None',
+                },
               },
             },
             {

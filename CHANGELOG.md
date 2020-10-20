@@ -1,3 +1,28 @@
+# [1.44.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.43.0...v1.44.0) (2020-10-19)
+
+
+### Bug Fixes
+
+* cleaner second case ([bb70c91](https://github.com/bettyblocks/material-ui-component-set/commit/bb70c9158df5fac28abd303555f81a878b5314e5))
+* cleaner switch case, better getFlexDirection function name ([bdcfe57](https://github.com/bettyblocks/material-ui-component-set/commit/bdcfe574c7ff2e801f89798babda008b1a34ad21))
+* extra line break to keep consistency ([aecacae](https://github.com/bettyblocks/material-ui-component-set/commit/aecacae215020f61a55dc19b53037e3fa365eeb0))
+* remove orientation options, remove variant condition for now ([715f7ee](https://github.com/bettyblocks/material-ui-component-set/commit/715f7ee412a6a2a23366aa1c878d55359aec4d94))
+
+
+### Features
+
+* ability to show all tabs ([97c411e](https://github.com/bettyblocks/material-ui-component-set/commit/97c411e7516a8248bee7b3a5ab61fb70870f4c14))
+* add Icon alignment for tabs ([6abc082](https://github.com/bettyblocks/material-ui-component-set/commit/6abc0824da3f57ba9cbc46cac5de793f689e4930))
+* add tabs alignments ([5ca2898](https://github.com/bettyblocks/material-ui-component-set/commit/5ca2898f00e7d6942e134b2ca508a88ee283d57f))
+* show iconAlignment changes directly on canvas ([c60170a](https://github.com/bettyblocks/material-ui-component-set/commit/c60170a875e5adb17d60b4533ace20bebddce171))
+
+# [1.43.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.42.0...v1.43.0) (2020-10-19)
+
+
+### Features
+
+* show boolean props as string in data table ([b2b431f](https://github.com/bettyblocks/material-ui-component-set/commit/b2b431fbfcbefad84f8b108f2d19475239089aeb))
+
 # [1.42.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.41.0...v1.42.0) (2020-10-16)
 
 
