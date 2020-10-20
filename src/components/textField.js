@@ -280,8 +280,6 @@
           style.getColor(labelColor),
           '!important',
         ],
-        zIndex: ({ options: { variant } }) =>
-          variant === 'standard' ? 1 : null,
         '&.Mui-focused': {
           color: ({ options: { borderFocusColor } }) => [
             style.getColor(borderFocusColor),
@@ -317,10 +315,11 @@
             style.getColor(textColor),
             '!important',
           ],
-          backgroundColor: ({ options: { backgroundColor } }) => [
-            style.getColor(backgroundColor),
-            '!important',
-          ],
+          backgroundColor: ({ options: { backgroundColor, variant } }) =>
+            variant !== 'standard' && [
+              style.getColor(backgroundColor),
+              '!important',
+            ],
           '&:hover': {
             '& .MuiOutlinedInput-notchedOutline, & .MuiFilledInput-underline, & .MuiInput-underline': {
               borderColor: ({ options: { borderHoverColor } }) => [
