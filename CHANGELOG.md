@@ -1,3 +1,16 @@
+# [1.46.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.45.0...v1.46.0) (2020-10-21)
+
+
+### Bug Fixes
+
+* radio default value ([efef655](https://github.com/bettyblocks/material-ui-component-set/commit/efef6558657c63e29e15c5a78f000db486baa2a2))
+* set fallback value for default values ([31605db](https://github.com/bettyblocks/material-ui-component-set/commit/31605dbf260e030eba1ab0119b0688b1664a7023))
+
+
+### Features
+
+* set value when property is linked in custom model attribute ([416e002](https://github.com/bettyblocks/material-ui-component-set/commit/416e002c69a54116752006f7dd2b35de3b714420))
+
 # [1.45.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.44.1...v1.45.0) (2020-10-21)
 
 
