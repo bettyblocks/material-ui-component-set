@@ -7,19 +7,13 @@
       name: 'Checkbox',
       options: [
         {
-          value: { label: ['Label'] },
+          value: { label: ['Checkbox'], value: [] },
           label: 'Label',
           key: 'customModelAttribute',
           type: 'CUSTOM_MODEL_ATTRIBUTE',
           configuration: {
             allowedTypes: ['boolean'],
           },
-        },
-        {
-          value: [],
-          label: 'Value',
-          key: 'defaultValue',
-          type: 'VARIABLE',
         },
         {
           label: 'Label Position',

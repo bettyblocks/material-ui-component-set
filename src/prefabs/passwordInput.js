@@ -7,19 +7,13 @@
       name: 'TextField',
       options: [
         {
-          value: { label: ['Password'] },
+          value: { label: ['Password'], value: [] },
           label: 'Label',
           key: 'customModelAttribute',
           type: 'CUSTOM_MODEL_ATTRIBUTE',
           configuration: {
             allowedTypes: ['string'],
           },
-        },
-        {
-          value: [],
-          label: 'Value',
-          key: 'defaultValue',
-          type: 'VARIABLE',
         },
         {
           value: false,

@@ -1,3 +1,25 @@
+# [1.46.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.45.0...v1.46.0) (2020-10-21)
+
+
+### Bug Fixes
+
+* radio default value ([efef655](https://github.com/bettyblocks/material-ui-component-set/commit/efef6558657c63e29e15c5a78f000db486baa2a2))
+* set fallback value for default values ([31605db](https://github.com/bettyblocks/material-ui-component-set/commit/31605dbf260e030eba1ab0119b0688b1664a7023))
+
+
+### Features
+
+* set value when property is linked in custom model attribute ([416e002](https://github.com/bettyblocks/material-ui-component-set/commit/416e002c69a54116752006f7dd2b35de3b714420))
+
+# [1.45.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.44.1...v1.45.0) (2020-10-21)
+
+
+### Features
+
+* add me interaction triggers to dataContainer ([4360b99](https://github.com/bettyblocks/material-ui-component-set/commit/4360b99936f5a84b2bd3a82b734911299f8042c7))
+* add me interaction triggers to dataContainer ([27bb8fe](https://github.com/bettyblocks/material-ui-component-set/commit/27bb8fe1d0e5a4ac31775f1782563024e779a65e))
+* add me interaction triggers to dataContainer ([a6cbc1d](https://github.com/bettyblocks/material-ui-component-set/commit/a6cbc1d83689d408019ad57b4993cdf96ebe8aa2))
+
 ## [1.44.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.44.0...v1.44.1) (2020-10-20)
 
 
