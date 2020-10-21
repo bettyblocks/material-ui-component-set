@@ -1277,6 +1277,28 @@
           },
         },
         {
+          label: 'Icon Alignment',
+          key: 'iconAlignment',
+          value: 'top',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Left', value: 'left' },
+              { name: 'Top', value: 'top' },
+              { name: 'Right', value: 'right' },
+              { name: 'Bottom', value: 'bottom' },
+            ],
+            condition: {
+              type: 'HIDE',
+              option: 'icon',
+              comparator: 'EQ',
+              value: 'None',
+            },
+          },
+        },
+        {
           type: 'TOGGLE',
           label: 'Disabled',
           key: 'disabled',
