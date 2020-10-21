@@ -22,12 +22,6 @@
           type: 'VARIABLE',
         },
         {
-          value: false,
-          label: 'Required',
-          key: 'required',
-          type: 'TOGGLE',
-        },
-        {
           type: 'TOGGLE',
           label: 'Disabled',
           key: 'disabled',

@@ -6,7 +6,6 @@
   jsx: (() => {
     const {
       defaultValue,
-      required,
       disabled,
       error,
       multiline,
@@ -60,8 +59,9 @@
     const customModelAttribute = getCustomModelAttribute(
       customModelAttributeId,
     );
-    const customModelAttributeName =
-      customModelAttribute && customModelAttribute.name;
+
+    const { name: customModelAttributeName, validations: { required } = {} } =
+      customModelAttribute || {};
     const nameAttributeValue = useText(nameAttribute);
 
     const validPattern = pattern || null;
@@ -277,8 +277,6 @@
           style.getColor(labelColor),
           '!important',
         ],
-        zIndex: ({ options: { variant } }) =>
-          variant === 'standard' ? 1 : null,
         '&.Mui-focused': {
           color: ({ options: { borderFocusColor } }) => [
             style.getColor(borderFocusColor),
@@ -314,10 +312,11 @@
             style.getColor(textColor),
             '!important',
           ],
-          backgroundColor: ({ options: { backgroundColor } }) => [
-            style.getColor(backgroundColor),
-            '!important',
-          ],
+          backgroundColor: ({ options: { backgroundColor, variant } }) =>
+            variant !== 'standard' && [
+              style.getColor(backgroundColor),
+              '!important',
+            ],
           '&:hover': {
             '& .MuiOutlinedInput-notchedOutline, & .MuiFilledInput-underline, & .MuiInput-underline': {
               borderColor: ({ options: { borderHoverColor } }) => [
