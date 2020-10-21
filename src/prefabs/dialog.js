@@ -326,8 +326,8 @@
                     },
                     {
                       type: 'TOGGLE',
-                      label: 'Allow overflow',
-                      key: 'overflow',
+                      label: 'Allow allowOverflow',
+                      key: 'allowOverflow',
                       value: false,
                     },
                   ],
@@ -2357,8 +2357,8 @@
                             },
                             {
                               type: 'TOGGLE',
-                              label: 'Allow overflow',
-                              key: 'overflow',
+                              label: 'Allow allowOverflow',
+                              key: 'allowOverflow',
                               value: false,
                             },
                           ],
