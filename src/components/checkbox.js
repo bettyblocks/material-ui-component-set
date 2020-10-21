@@ -17,8 +17,6 @@
     const { useText, getCustomModelAttribute } = B;
     const isDev = B.env === 'dev';
 
-    const componentChecked = useText(defaultValue);
-    const [checked, setChecked] = useState(componentChecked === 'true');
     const [errorState, setErrorState] = useState(error);
     const [helper, setHelper] = useState(useText(helperText));
     const {
