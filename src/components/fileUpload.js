@@ -4,7 +4,7 @@
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { env, useText, getProperty, getActionInput, useFileUpload } = B;
+    const { env, useText, useFileUpload, getCustomModelAttribute } = B;
     const {
       FormControl,
       FormControlLabel,
@@ -16,11 +16,6 @@
     const { Icons } = window.MaterialUI;
     const { Close } = Icons;
     const {
-      property,
-      label,
-      propertyLabelOverride,
-      actionInputId,
-      required,
       hideDefaultError,
       disabled,
       helperText,
@@ -34,6 +29,8 @@
       buttonText,
       multiple,
       hideLabel,
+      customModelAttribute: customModelAttributeObj,
+      nameAttribute,
     } = options;
 
     const isDev = env === 'dev';
@@ -44,15 +41,15 @@
       failureMessage: [],
     });
     const helper = useText(helperText);
-    const propLabel =
-      property && getProperty(property) && getProperty(property).label;
-    const propLabelOverride = useText(propertyLabelOverride);
-    const propertyLabelText = isDev ? '{{ property label }}' : propLabel;
-    const propertyLabel = propLabelOverride || propertyLabelText;
-    const labelText = property ? propertyLabel : useText(label);
+    const { id: customModelAttributeId, label } = customModelAttributeObj;
+    const labelText = useText(label);
+    const customModelAttribute = getCustomModelAttribute(
+      customModelAttributeId,
+    );
+    const { name: customModelAttributeName, validations: { required } = {} } =
+      customModelAttribute || {};
+    const nameAttributeValue = useText(nameAttribute);
     const requiredText = required ? '*' : '';
-
-    const actionInput = getActionInput(actionInputId);
 
     const handleChange = e => {
       setUploads({
@@ -176,7 +173,7 @@
         {data.length > 0 && (
           <input
             type="hidden"
-            name={actionInput && actionInput.name}
+            name={nameAttributeValue || customModelAttributeName}
             value={data.map(d => d.url).join(',')}
           />
         )}

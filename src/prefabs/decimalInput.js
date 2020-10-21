@@ -1,13 +1,13 @@
 (() => ({
-  name: 'PriceInput',
-  icon: 'PriceInputIcon',
+  name: 'DecimalInput',
+  icon: 'DecimalInputIcon',
   category: 'FORM',
   structure: [
     {
       name: 'TextField',
       options: [
         {
-          value: { label: ['Price'] },
+          value: { label: ['Decimal'] },
           label: 'Label',
           key: 'customModelAttribute',
           type: 'CUSTOM_MODEL_ATTRIBUTE',
@@ -33,7 +33,7 @@
           value: '',
           type: 'TEXT',
           configuration: {
-            placeholder: '[0-9]+(\\.[0-9][0-9]?)?',
+            placeholder: '[0-9]{8,}',
             condition: {
               type: 'SHOW',
               option: 'validationOptions',
@@ -195,9 +195,9 @@
           },
         },
         {
-          label: 'Currency',
+          label: 'Adornment',
           key: 'adornment',
-          value: '€',
+          value: '',
           type: 'TEXT',
         },
         {

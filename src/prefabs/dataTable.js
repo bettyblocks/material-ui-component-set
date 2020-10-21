@@ -86,10 +86,56 @@
           type: 'FONT',
         },
         {
-          type: 'TOGGLE',
           label: 'Pagination',
           key: 'pagination',
-          value: true,
+          value: 'always',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Always', value: 'always' },
+              { name: 'When needed', value: 'whenNeeded' },
+              { name: 'Never', value: 'never' },
+            ],
+          },
+        },
+        {
+          value: false,
+          label: 'Auto load on scroll',
+          key: 'autoLoadOnScroll',
+          type: 'TOGGLE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'pagination',
+              comparator: 'EQ',
+              value: 'never',
+            },
+          },
+        },
+        {
+          value: '50',
+          label: 'Number of records to auto load',
+          key: 'autoLoadTakeAmount',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'DROPDOWN',
+            dataType: 'string',
+            allowedInput: [
+              { name: '5', value: '5' },
+              { name: '10', value: '10' },
+              { name: '25', value: '25' },
+              { name: '50', value: '50' },
+              { name: '100', value: '100' },
+            ],
+            condition: {
+              type: 'SHOW',
+              option: 'autoLoadOnScroll',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
         },
         {
           value: '5',
@@ -107,8 +153,8 @@
               { name: '100', value: '100' },
             ],
             condition: {
-              type: 'SHOW',
-              option: 'pagination',
+              type: 'HIDE',
+              option: 'autoLoadOnScroll',
               comparator: 'EQ',
               value: true,
             },
@@ -121,18 +167,12 @@
           value: ['Rows per page'],
           configuration: {
             condition: {
-              type: 'SHOW',
+              type: 'HIDE',
               option: 'pagination',
               comparator: 'EQ',
-              value: true,
+              value: 'never',
             },
           },
-        },
-        {
-          type: 'TOGGLE',
-          label: 'Sticky header',
-          key: 'stickyHeader',
-          value: false,
         },
         {
           type: 'SIZE',
@@ -141,13 +181,13 @@
           value: '',
           configuration: {
             as: 'UNIT',
-            condition: {
-              type: 'SHOW',
-              option: 'stickyHeader',
-              comparator: 'EQ',
-              value: true,
-            },
           },
+        },
+        {
+          type: 'TOGGLE',
+          label: 'Sticky header',
+          key: 'stickyHeader',
+          value: false,
         },
         {
           value: 'medium',

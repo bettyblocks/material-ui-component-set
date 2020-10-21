@@ -10,7 +10,7 @@
           type: 'VARIABLE',
           label: 'Content',
           key: 'content',
-          value: ['Type your content here...'],
+          value: [],
           configuration: {
             as: 'MULTILINE',
           },

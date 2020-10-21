@@ -649,7 +649,7 @@
                               type: 'VARIABLE',
                               label: 'Content',
                               key: 'content',
-                              value: ['Dialog title'],
+                              value: [],
                               configuration: {
                                 as: 'MULTILINE',
                               },
@@ -680,6 +680,53 @@
                               label: 'Outer space',
                               key: 'outerSpacing',
                               type: 'SIZES',
+                            },
+                            {
+                              value: false,
+                              label: 'Styles',
+                              key: 'styles',
+                              type: 'TOGGLE',
+                            },
+                            {
+                              type: 'COLOR',
+                              label: 'Text color',
+                              key: 'textColor',
+                              value: 'Black',
+                              configuration: {
+                                condition: {
+                                  type: 'SHOW',
+                                  option: 'styles',
+                                  comparator: 'EQ',
+                                  value: true,
+                                },
+                              },
+                            },
+                            {
+                              type: 'CUSTOM',
+                              label: 'Font weight',
+                              key: 'fontWeight',
+                              value: '400',
+                              configuration: {
+                                as: 'DROPDOWN',
+                                dataType: 'string',
+                                allowedInput: [
+                                  { name: '100', value: '100' },
+                                  { name: '200', value: '200' },
+                                  { name: '300', value: '300' },
+                                  { name: '400', value: '400' },
+                                  { name: '500', value: '500' },
+                                  { name: '600', value: '600' },
+                                  { name: '700', value: '700' },
+                                  { name: '800', value: '800' },
+                                  { name: '900', value: '900' },
+                                ],
+                                condition: {
+                                  type: 'SHOW',
+                                  option: 'styles',
+                                  comparator: 'EQ',
+                                  value: true,
+                                },
+                              },
                             },
                           ],
                           descendants: [],
@@ -747,10 +794,10 @@
                               },
                             },
                             {
-                              value: '',
+                              value: [''],
                               label: 'URL',
                               key: 'linkToExternal',
-                              type: 'TEXT',
+                              type: 'VARIABLE',
                               configuration: {
                                 placeholder: 'Starts with https:// or http://',
                                 condition: {
@@ -2297,7 +2344,7 @@
                               },
                             },
                             {
-                              value: '100px',
+                              value: '',
                               label: 'Height',
                               key: 'columnHeight',
                               type: 'TEXT',
@@ -2403,6 +2450,53 @@
                                   label: 'Outer space',
                                   key: 'outerSpacing',
                                   type: 'SIZES',
+                                },
+                                {
+                                  value: false,
+                                  label: 'Styles',
+                                  key: 'styles',
+                                  type: 'TOGGLE',
+                                },
+                                {
+                                  type: 'COLOR',
+                                  label: 'Text color',
+                                  key: 'textColor',
+                                  value: 'Black',
+                                  configuration: {
+                                    condition: {
+                                      type: 'SHOW',
+                                      option: 'styles',
+                                      comparator: 'EQ',
+                                      value: true,
+                                    },
+                                  },
+                                },
+                                {
+                                  type: 'CUSTOM',
+                                  label: 'Font weight',
+                                  key: 'fontWeight',
+                                  value: '400',
+                                  configuration: {
+                                    as: 'DROPDOWN',
+                                    dataType: 'string',
+                                    allowedInput: [
+                                      { name: '100', value: '100' },
+                                      { name: '200', value: '200' },
+                                      { name: '300', value: '300' },
+                                      { name: '400', value: '400' },
+                                      { name: '500', value: '500' },
+                                      { name: '600', value: '600' },
+                                      { name: '700', value: '700' },
+                                      { name: '800', value: '800' },
+                                      { name: '900', value: '900' },
+                                    ],
+                                    condition: {
+                                      type: 'SHOW',
+                                      option: 'styles',
+                                      comparator: 'EQ',
+                                      value: true,
+                                    },
+                                  },
                                 },
                               ],
                               descendants: [],
@@ -2784,10 +2878,10 @@
                               },
                             },
                             {
-                              value: '',
+                              value: [''],
                               label: 'URL',
                               key: 'linkToExternal',
-                              type: 'TEXT',
+                              type: 'VARIABLE',
                               configuration: {
                                 placeholder: 'Starts with https:// or http://',
                                 condition: {
@@ -4234,10 +4328,10 @@
                               },
                             },
                             {
-                              value: '',
+                              value: [''],
                               label: 'URL',
                               key: 'linkToExternal',
-                              type: 'TEXT',
+                              type: 'VARIABLE',
                               configuration: {
                                 placeholder: 'Starts with https:// or http://',
                                 condition: {
