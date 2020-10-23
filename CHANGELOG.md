@@ -1,3 +1,10 @@
+# [1.47.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.46.0...v1.47.0) (2020-10-23)
+
+
+### Features
+
+* children in form are shown when there is no data fetched ([535c77a](https://github.com/bettyblocks/material-ui-component-set/commit/535c77af3669b90c944bc9bef8773a99f5a5b729))
+
 # [1.46.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.45.0...v1.46.0) (2020-10-21)
 
 
