@@ -7,19 +7,13 @@
       name: 'TextField',
       options: [
         {
-          value: { label: ['Number'] },
+          value: { label: ['Number'], value: [] },
           label: 'Label',
           key: 'customModelAttribute',
           type: 'CUSTOM_MODEL_ATTRIBUTE',
           configuration: {
             allowedTypes: ['integer'],
           },
-        },
-        {
-          value: [],
-          label: 'Value',
-          key: 'defaultValue',
-          type: 'VARIABLE',
         },
         {
           value: false,

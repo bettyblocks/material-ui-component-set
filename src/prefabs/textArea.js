@@ -7,21 +7,12 @@
       name: 'TextField',
       options: [
         {
-          value: { label: ['Label'] },
+          value: { label: ['Textarea'], value: [] },
           label: 'Label',
           key: 'customModelAttribute',
           type: 'CUSTOM_MODEL_ATTRIBUTE',
           configuration: {
             allowedTypes: ['string'],
-          },
-        },
-        {
-          value: [],
-          label: 'Value',
-          key: 'defaultValue',
-          type: 'VARIABLE',
-          configuration: {
-            as: 'MULTILINE',
           },
         },
         {

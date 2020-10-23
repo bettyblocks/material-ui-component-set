@@ -6,7 +6,6 @@
   jsx: (() => {
     const {
       disabled,
-      defaultValue,
       error,
       position,
       size,
@@ -35,7 +34,11 @@
     const { kind, values: listValues = [] } = getProperty(property) || {};
     const labelProperty = getProperty(labelProp);
     const valueProperty = getProperty(valueProp);
-    const { id: customModelAttributeId, label } = customModelAttributeObj;
+    const {
+      id: customModelAttributeId,
+      label = [],
+      value: defaultValue,
+    } = customModelAttributeObj;
     const customModelAttribute = getCustomModelAttribute(
       customModelAttributeId,
     );
@@ -45,7 +48,7 @@
     const nameAttributeValue = useText(nameAttribute);
 
     const getValues = () => {
-      const value = useText(defaultValue);
+      const value = defaultValue ? useText(defaultValue) : [];
       // split the string and trim spaces
       return !Array.isArray(value)
         ? value.split(',').map(str => str.trim())

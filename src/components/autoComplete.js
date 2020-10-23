@@ -5,7 +5,6 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const {
-      defaultValue,
       disabled,
       error,
       placeholder,
@@ -50,18 +49,22 @@
     } = B;
     const isDev = env === 'dev';
     const displayError = showError === 'built-in';
-    const [currentValue, setCurrentValue] = useState(useText(defaultValue));
     const placeholderText = useText(placeholder);
     const helper = useText(helperText);
     const nameAttributeValue = useText(nameAttribute);
 
-    const { id: customModelAttributeId, label } = customModelAttributeObj;
+    const {
+      id: customModelAttributeId,
+      label = [],
+      value: defaultValue = [],
+    } = customModelAttributeObj;
     const customModelAttribute = getCustomModelAttribute(
       customModelAttributeId,
     );
     const { name: customModelAttributeName, validations: { required } = {} } =
       customModelAttribute || {};
     const { kind, values: listValues } = getProperty(property) || {};
+    const [currentValue, setCurrentValue] = useState(useText(defaultValue));
     const labelText = useText(label);
 
     const textFieldProps = {

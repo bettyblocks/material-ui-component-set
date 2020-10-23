@@ -41,7 +41,7 @@
       failureMessage: [],
     });
     const helper = useText(helperText);
-    const { id: customModelAttributeId, label } = customModelAttributeObj;
+    const { id: customModelAttributeId, label = [] } = customModelAttributeObj;
     const labelText = useText(label);
     const customModelAttribute = getCustomModelAttribute(
       customModelAttributeId,
