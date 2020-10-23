@@ -1,3 +1,18 @@
+# [1.48.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.47.0...v1.48.0) (2020-10-23)
+
+
+### Bug Fixes
+
+* no animation on canvas and place back placeholder in snackbar ([2e68fc6](https://github.com/bettyblocks/material-ui-component-set/commit/2e68fc6ed713e49981058daa2bee2bf4ec79bf5d))
+* position snackbar relative to canvas in page builder ([b0d9a79](https://github.com/bettyblocks/material-ui-component-set/commit/b0d9a79f3b4b14e7072d3dafc2c6768304ab60cb))
+* positioning and options snackbar component ([055a2c8](https://github.com/bettyblocks/material-ui-component-set/commit/055a2c8c353d6de7a8ce2be522ae530559d4cc2d))
+
+
+### Features
+
+* add snackbar component ([edd8f18](https://github.com/bettyblocks/material-ui-component-set/commit/edd8f18e514b71c593986c8fd947565a9b893a78))
+* add snackbar icon ([9372252](https://github.com/bettyblocks/material-ui-component-set/commit/93722528699bbe19e6045a6df657e9fcdf1127ae))
+
 # [1.47.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.46.0...v1.47.0) (2020-10-23)
 
 
