@@ -40,7 +40,13 @@
       CheckBox,
       CheckBoxOutlineBlank,
     } = window.MaterialUI.Icons;
-    const { useText, getProperty, getCustomModelAttribute, useGetAll, env } = B;
+    const {
+      useText,
+      getProperty,
+      getCustomModelAttribute,
+      useAllQuery,
+      env,
+    } = B;
     const isDev = env === 'dev';
     const displayError = showError === 'built-in';
     const placeholderText = useText(placeholder);
@@ -132,7 +138,7 @@
     };
 
     const { loading, error: err, data, refetch } =
-      model && useGetAll(model, { ...useFilter, skip: 0, take: 50 });
+      model && useAllQuery(model, { ...useFilter, skip: 0, take: 50 });
 
     useEffect(() => {
       if (!isDev && data) {
@@ -163,12 +169,19 @@
       };
     }, [searchParam]);
 
-    const mounted = useRef(true);
+    const mounted = useRef(false);
+
     useEffect(() => {
-      if (!mounted.current && loading) {
+      mounted.current = true;
+      return () => {
+        mounted.current = false;
+      };
+    }, []);
+
+    useEffect(() => {
+      if (mounted.current && loading) {
         B.triggerEvent('onLoad', loading);
       }
-      mounted.current = false;
     }, [loading]);
 
     if (err && !displayError) {

@@ -26,7 +26,7 @@
       nameAttribute,
     } = options;
 
-    const { useText, getProperty, useGetAll, getCustomModelAttribute } = B;
+    const { useText, getProperty, useAllQuery, getCustomModelAttribute } = B;
     const displayError = showError === 'built-in';
     const isDev = B.env === 'dev';
 
@@ -58,7 +58,7 @@
     const [values, setValues] = useState(getValues());
 
     const { loading, error: err, data, refetch } =
-      model && useGetAll(model, { filter, skip: 0, take: 50 });
+      model && useAllQuery(model, { filter, skip: 0, take: 50 });
 
     if (loading) {
       B.triggerEvent('onLoad', loading);

@@ -10,7 +10,7 @@
           env,
           getProperty,
           GetMe,
-          useGetAll,
+          useAllQuery,
           ModelProvider,
           useFilter,
         } = B;
@@ -175,7 +175,7 @@
 
         const { loading, error, data, refetch } =
           model &&
-          useGetAll(model, {
+          useAllQuery(model, {
             rawFilter: where,
             skip: page ? (page - 1) * rowsPerPage : 0,
             take: rowsPerPage,
@@ -229,12 +229,19 @@
           });
         }, []);
 
-        const mounted = useRef(true);
+        const mounted = useRef(false);
+
         useEffect(() => {
-          if (!mounted.current && loading) {
+          mounted.current = true;
+          return () => {
+            mounted.current = false;
+          };
+        }, []);
+
+        useEffect(() => {
+          if (mounted.current && loading) {
             B.triggerEvent('onLoad', loading);
           }
-          mounted.current = false;
         }, [loading]);
 
         const Looper = results => {
