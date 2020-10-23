@@ -7,19 +7,13 @@
       name: 'Select',
       options: [
         {
-          value: { label: ['Label'] },
+          value: { label: ['Select'], value: [] },
           label: 'Label',
           key: 'customModelAttribute',
           type: 'CUSTOM_MODEL_ATTRIBUTE',
           configuration: {
             allowedTypes: ['string'],
           },
-        },
-        {
-          value: [],
-          label: 'Value',
-          key: 'defaultValue',
-          type: 'VARIABLE',
         },
         {
           label: 'Option type',

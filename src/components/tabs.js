@@ -11,11 +11,13 @@
       defaultValue,
       variant,
       centered,
-      orientation,
       scrollButtons,
+      alignment,
+      showAllTabs,
       hideTabs,
     } = options;
-
+    const orientation =
+      alignment === 'top' || alignment === 'bottom' ? 'horizontal' : 'vertical';
     const isDev = env === 'dev';
     const [value, setValue] = useState(parseInt(defaultValue - 1, 10) || 0);
     const [tabData, setTabData] = useState({});
@@ -50,17 +52,38 @@
           const {
             label = tabData[`label${index}`] || [`Tab`],
             icon = tabData[`icon${index}`] || 'None',
+            iconAlignment = tabData[`iconAlignment${index}`] || 'top',
             disabled = tabData[`disabled${index}`] || false,
             disableRipple = tabData[`disableRipple${index}`] || false,
           } = isDev ? {} : options;
 
+          function getFlexDirection() {
+            switch (iconAlignment) {
+              case 'top':
+                return 'column';
+              case 'right':
+                return 'row-reverse';
+              case 'bottom':
+                return 'column-reverse';
+              default:
+                return 'row';
+            }
+          }
+
           return (
             <Tab
-              label={useText(label)}
-              icon={
-                icon && icon !== 'None'
-                  ? React.createElement(Icons[icon])
-                  : undefined
+              label={
+                <div
+                  className={classes.labelWrapper}
+                  style={{ flexDirection: getFlexDirection() }}
+                >
+                  <div className={classes.iconWrapper}>
+                    {icon && icon !== 'None'
+                      ? React.createElement(Icons[icon])
+                      : undefined}
+                  </div>
+                  <div>{useText(label)}</div>
+                </div>
               }
               disabled={disabled}
               disableRipple={disableRipple}
@@ -77,6 +100,7 @@
           value={value}
           tabData={tabData}
           setTabData={setTabData}
+          showAllTabs={showAllTabs}
           setSelectedTab={setSelectedTab}
         >
           {children}
@@ -106,8 +130,18 @@
       },
       tabs: {
         display: 'flex',
-        flexDirection: ({ options: { orientation } }) =>
-          orientation === 'horizontal' ? 'column' : 'row',
+        flexDirection: ({ options: { alignment } }) => {
+          switch (alignment) {
+            case 'top':
+              return 'column';
+            case 'right':
+              return 'row-reverse';
+            case 'bottom':
+              return 'column-reverse';
+            default:
+              return 'row';
+          }
+        },
       },
       root: {
         backgroundColor: ({ options: { appBarColor } }) => [
@@ -120,10 +154,22 @@
         ],
       },
       indicator: {
+        left: ({ options: { alignment } }) => alignment === 'right' && 0,
+        top: ({ options: { alignment } }) => alignment === 'bottom' && 0,
         backgroundColor: ({ options: { indicatorColor } }) => [
           style.getColor(indicatorColor),
           '!important',
         ],
+      },
+      labelWrapper: {
+        display: 'flex',
+        alignItems: 'center',
+      },
+      iconWrapper: {
+        marginLeft: 5,
+        marginRight: 5,
+        display: 'flex',
+        alignItems: 'center',
       },
       empty: {
         display: 'flex',

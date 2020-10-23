@@ -1,3 +1,57 @@
+# [1.46.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.45.0...v1.46.0) (2020-10-21)
+
+
+### Bug Fixes
+
+* radio default value ([efef655](https://github.com/bettyblocks/material-ui-component-set/commit/efef6558657c63e29e15c5a78f000db486baa2a2))
+* set fallback value for default values ([31605db](https://github.com/bettyblocks/material-ui-component-set/commit/31605dbf260e030eba1ab0119b0688b1664a7023))
+
+
+### Features
+
+* set value when property is linked in custom model attribute ([416e002](https://github.com/bettyblocks/material-ui-component-set/commit/416e002c69a54116752006f7dd2b35de3b714420))
+
+# [1.45.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.44.1...v1.45.0) (2020-10-21)
+
+
+### Features
+
+* add me interaction triggers to dataContainer ([4360b99](https://github.com/bettyblocks/material-ui-component-set/commit/4360b99936f5a84b2bd3a82b734911299f8042c7))
+* add me interaction triggers to dataContainer ([27bb8fe](https://github.com/bettyblocks/material-ui-component-set/commit/27bb8fe1d0e5a4ac31775f1782563024e779a65e))
+* add me interaction triggers to dataContainer ([a6cbc1d](https://github.com/bettyblocks/material-ui-component-set/commit/a6cbc1d83689d408019ad57b4993cdf96ebe8aa2))
+
+## [1.44.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.44.0...v1.44.1) (2020-10-20)
+
+
+### Bug Fixes
+
+* styling label textfield variant standard ([e523f3e](https://github.com/bettyblocks/material-ui-component-set/commit/e523f3e1826faa562af45a545fb5659ce4b5dadc))
+
+# [1.44.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.43.0...v1.44.0) (2020-10-19)
+
+
+### Bug Fixes
+
+* cleaner second case ([bb70c91](https://github.com/bettyblocks/material-ui-component-set/commit/bb70c9158df5fac28abd303555f81a878b5314e5))
+* cleaner switch case, better getFlexDirection function name ([bdcfe57](https://github.com/bettyblocks/material-ui-component-set/commit/bdcfe574c7ff2e801f89798babda008b1a34ad21))
+* extra line break to keep consistency ([aecacae](https://github.com/bettyblocks/material-ui-component-set/commit/aecacae215020f61a55dc19b53037e3fa365eeb0))
+* remove orientation options, remove variant condition for now ([715f7ee](https://github.com/bettyblocks/material-ui-component-set/commit/715f7ee412a6a2a23366aa1c878d55359aec4d94))
+
+
+### Features
+
+* ability to show all tabs ([97c411e](https://github.com/bettyblocks/material-ui-component-set/commit/97c411e7516a8248bee7b3a5ab61fb70870f4c14))
+* add Icon alignment for tabs ([6abc082](https://github.com/bettyblocks/material-ui-component-set/commit/6abc0824da3f57ba9cbc46cac5de793f689e4930))
+* add tabs alignments ([5ca2898](https://github.com/bettyblocks/material-ui-component-set/commit/5ca2898f00e7d6942e134b2ca508a88ee283d57f))
+* show iconAlignment changes directly on canvas ([c60170a](https://github.com/bettyblocks/material-ui-component-set/commit/c60170a875e5adb17d60b4533ace20bebddce171))
+
+# [1.43.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.42.0...v1.43.0) (2020-10-19)
+
+
+### Features
+
+* show boolean props as string in data table ([b2b431f](https://github.com/bettyblocks/material-ui-component-set/commit/b2b431fbfcbefad84f8b108f2d19475239089aeb))
+
 # [1.42.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.41.0...v1.42.0) (2020-10-16)
 
 
