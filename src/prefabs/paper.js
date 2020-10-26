@@ -117,7 +117,12 @@
             {
               name: 'Column',
               options: [
-                { type: 'TOGGLE', label: 'Visible', key: 'show', value: true },
+                {
+                  type: 'TOGGLE',
+                  label: 'Visible',
+                  key: 'visible',
+                  value: true,
+                },
                 {
                   value: 'flexible',
                   label: 'Column width',

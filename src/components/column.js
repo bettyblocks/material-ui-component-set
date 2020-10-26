@@ -3,19 +3,16 @@
   type: 'LAYOUT_COMPONENT',
   allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'VERTICAL',
-  jsx: (
-    <div
-      className={[
-        classes.column,
-        options.show || B.env === 'dev' ? '' : classes.hide,
-      ].join(' ')}
-    >
-      {(() => {
-        const isEmpty = children.length === 0;
+  jsx: (() => {
+    const { visible } = options;
+    const { env } = B;
+    const isDev = env === 'dev';
+    const isEmpty = children.length === 0;
+    const isPristine = isEmpty && isDev;
 
-        const isPristine = isEmpty && B.env === 'dev';
-
-        return children.length !== 0 ? (
+    const Column = (
+      <div className={classes.column}>
+        {!isEmpty ? (
           children
         ) : (
           <div
@@ -24,12 +21,16 @@
               isPristine ? classes.pristine : '',
             ].join(' ')}
           >
-            {isPristine ? 'Column' : ''}
+            {isPristine && 'Column'}
           </div>
-        );
-      })()}
-    </div>
-  ),
+        )}
+      </div>
+    );
+
+    const EmptyColumn = isDev ? <div /> : <></>;
+
+    return visible ? Column : EmptyColumn;
+  })(),
   styles: B => theme => {
     const style = new B.Styling(theme);
     const getSpacing = (idx, device = 'Mobile') =>
@@ -281,9 +282,6 @@
         borderColor: '#AFB5C8',
         borderStyle: 'dashed',
         backgroundColor: '#F0F1F5',
-      },
-      hide: {
-        display: 'none !important',
       },
     };
   },

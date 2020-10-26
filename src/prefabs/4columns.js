@@ -49,7 +49,7 @@
         {
           name: 'Column',
           options: [
-            { type: 'TOGGLE', label: 'Visible', key: 'show', value: true },
+            { type: 'TOGGLE', label: 'Visible', key: 'visible', value: true },
             {
               value: '3',
               label: 'Column width',
@@ -223,7 +223,7 @@
         {
           name: 'Column',
           options: [
-            { type: 'TOGGLE', label: 'Visible', key: 'show', value: true },
+            { type: 'TOGGLE', label: 'Visible', key: 'visible', value: true },
             {
               value: '3',
               label: 'Column width',
@@ -397,7 +397,7 @@
         {
           name: 'Column',
           options: [
-            { type: 'TOGGLE', label: 'Visible', key: 'show', value: true },
+            { type: 'TOGGLE', label: 'Visible', key: 'visible', value: true },
             {
               value: '3',
               label: 'Column width',
@@ -571,7 +571,7 @@
         {
           name: 'Column',
           options: [
-            { type: 'TOGGLE', label: 'Visible', key: 'show', value: true },
+            { type: 'TOGGLE', label: 'Visible', key: 'visible', value: true },
             {
               value: '3',
               label: 'Column width',

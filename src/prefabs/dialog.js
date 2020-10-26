@@ -154,7 +154,7 @@
                     {
                       type: 'TOGGLE',
                       label: 'Visible',
-                      key: 'show',
+                      key: 'visible',
                       value: true,
                     },
                     {
@@ -2226,7 +2226,7 @@
                             {
                               type: 'TOGGLE',
                               label: 'Visible',
-                              key: 'show',
+                              key: 'visible',
                               value: true,
                             },
                             {

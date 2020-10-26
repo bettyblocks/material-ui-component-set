@@ -31,12 +31,11 @@
       });
     }, []);
 
-    const AlertPanel = (
+    const AlertPanel = open ? (
       <Alert
         classes={{
           root: classes.root,
         }}
-        className={open || isDev ? '' : classes.hide}
         icon={icon !== 'None' ? React.createElement(Icons[icon]) : null}
         action={
           collapsable ? (
@@ -55,6 +54,8 @@
         {title && <AlertTitle>{title}</AlertTitle>}
         {text || body}
       </Alert>
+    ) : (
+      <></>
     );
     return isDev ? (
       <div className={classes.wrapper}>{AlertPanel}</div>
@@ -100,9 +101,6 @@
           getSpacing(outerSpacing[2]),
         marginLeft: ({ options: { outerSpacing } }) =>
           getSpacing(outerSpacing[3]),
-      },
-      hide: {
-        display: 'none !important',
       },
     };
   },
