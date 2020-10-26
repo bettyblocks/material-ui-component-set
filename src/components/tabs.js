@@ -20,7 +20,6 @@
       alignment === 'top' || alignment === 'bottom' ? 'horizontal' : 'vertical';
     const isDev = env === 'dev';
     const [value, setValue] = useState(parseInt(defaultValue - 1, 10) || 0);
-    const devValue = parseInt(defaultValue - 1, 10) || 0;
     const [tabData, setTabData] = useState({});
 
     const handleChange = (_, newValue) => {
@@ -31,11 +30,17 @@
       setValue(index);
     };
 
+    useEffect(() => {
+      if (isDev) {
+        setValue(parseInt(defaultValue - 1, 10));
+      }
+    }, [isDev, defaultValue]);
+
     const TabsHeader = (
       <Tabs
         aria-label="tabs"
         onChange={handleChange}
-        value={isDev ? devValue : value}
+        value={value}
         variant={variant}
         centered={centered}
         orientation={orientation}
@@ -97,7 +102,7 @@
           return (
             <Children
               index={index}
-              value={isDev ? devValue : value}
+              value={value}
               tabData={tabData}
               setTabData={setTabData}
               showAllTabs={showAllTabs}
