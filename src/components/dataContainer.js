@@ -103,6 +103,8 @@
 
                 if (data && data.id) {
                   B.triggerEvent('onUserSuccess', data);
+                } else {
+                  B.triggerEvent('onNoUserResults');
                 }
 
                 return canvasLayout();
