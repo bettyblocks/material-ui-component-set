@@ -169,7 +169,8 @@
     const passwordIcon = showPassword ? 'Visibility' : 'VisibilityOff';
     const inputIcon = type === 'password' ? passwordIcon : adornmentIcon;
     const hasIcon = inputIcon && inputIcon !== 'none';
-    const hasAdornment = adornment || hasIcon;
+    const hasAdornment =
+      type === 'password' ? adornment && hasIcon : adornment || hasIcon;
 
     const IconCmp =
       hasIcon &&
