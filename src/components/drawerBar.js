@@ -72,12 +72,14 @@
       </>
     );
 
-    if (!isDev) return DrawerComponent;
+    if (!isDev) return <div className={classes.wrapper}>{DrawerComponent}</div>;
 
     if (!isOpen) return <div />;
 
     return (
-      <div className={isTemporary && classes.overlay}>
+      <div
+        className={[isTemporary && classes.overlay, classes.wrapper].join(' ')}
+      >
         {!isEmpty ? (
           <Drawer
             variant="persistent"
@@ -106,6 +108,8 @@
   })(),
   styles: B => t => {
     const style = new B.Styling(t);
+    const getSpacing = (idx, device = 'Mobile') =>
+      idx === '0' ? '0rem' : style.getSpacing(idx, device);
     const staticPositioning =
       B.env === 'dev'
         ? { position: 'static !important', zIndex: '0 !important' }
@@ -117,15 +121,42 @@
     };
 
     return {
+      wrapper: {
+        marginTop: ({ options: { outerSpacing } }) =>
+          getSpacing(outerSpacing[0]),
+        marginRight: ({ options: { outerSpacing } }) =>
+          getSpacing(outerSpacing[1]),
+        marginBottom: ({ options: { outerSpacing } }) =>
+          getSpacing(outerSpacing[2]),
+        marginLeft: ({ options: { outerSpacing } }) =>
+          getSpacing(outerSpacing[3]),
+      },
       paper: {
         ...staticPositioning,
         width: computeWidth,
         '&.MuiPaper-root': {
+          boxSizing: 'border-box',
           backgroundColor: ({ options: { themeBgColor } }) => [
             style.getColor(themeBgColor),
             '!important',
           ],
         },
+        marginTop: ({ options: { outerSpacing } }) =>
+          getSpacing(outerSpacing[0]),
+        marginRight: ({ options: { outerSpacing } }) =>
+          getSpacing(outerSpacing[1]),
+        marginBottom: ({ options: { outerSpacing } }) =>
+          getSpacing(outerSpacing[2]),
+        marginLeft: ({ options: { outerSpacing } }) =>
+          getSpacing(outerSpacing[3]),
+        paddingTop: ({ options: { innerSpacing } }) =>
+          getSpacing(innerSpacing[0]),
+        paddingRight: ({ options: { innerSpacing } }) =>
+          getSpacing(innerSpacing[1]),
+        paddingBottom: ({ options: { innerSpacing } }) =>
+          getSpacing(innerSpacing[2]),
+        paddingLeft: ({ options: { innerSpacing } }) =>
+          getSpacing(innerSpacing[3]),
       },
       drawerDev: {
         display: 'flex',
@@ -144,6 +175,14 @@
           style.getColor(themeBgColor),
           '!important',
         ],
+        paddingTop: ({ options: { innerSpacing } }) =>
+          getSpacing(innerSpacing[0]),
+        paddingRight: ({ options: { innerSpacing } }) =>
+          getSpacing(innerSpacing[1]),
+        paddingBottom: ({ options: { innerSpacing } }) =>
+          getSpacing(innerSpacing[2]),
+        paddingLeft: ({ options: { innerSpacing } }) =>
+          getSpacing(innerSpacing[3]),
       },
       empty: {
         display: 'flex',
