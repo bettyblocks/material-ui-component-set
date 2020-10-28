@@ -33,6 +33,8 @@
   })(),
   styles: B => t => {
     const style = new B.Styling(t);
+    const getSpacing = (idx, device = 'Mobile') =>
+      idx === '0' ? '0rem' : style.getSpacing(idx, device);
     const { useTheme } = window.MaterialUI.Core;
     const theme = useTheme();
 
@@ -47,6 +49,44 @@
           easing: theme.transitions.easing.sharp,
           duration: theme.transitions.duration.leavingScreen,
         }),
+        paddingTop: ({ options: { innerSpacing } }) =>
+          getSpacing(innerSpacing[0]),
+        paddingRight: ({ options: { innerSpacing } }) =>
+          getSpacing(innerSpacing[1]),
+        paddingBottom: ({ options: { innerSpacing } }) =>
+          getSpacing(innerSpacing[2]),
+        paddingLeft: ({ options: { innerSpacing } }) =>
+          getSpacing(innerSpacing[3]),
+        [`@media ${B.mediaMinWidth(600)}`]: {
+          paddingTop: ({ options: { innerSpacing } }) =>
+            getSpacing(innerSpacing[0], 'Portrait'),
+          paddingRight: ({ options: { innerSpacing } }) =>
+            getSpacing(innerSpacing[1], 'Portrait'),
+          paddingBottom: ({ options: { innerSpacing } }) =>
+            getSpacing(innerSpacing[2], 'Portrait'),
+          paddingLeft: ({ options: { innerSpacing } }) =>
+            getSpacing(innerSpacing[3], 'Portrait'),
+        },
+        [`@media ${B.mediaMinWidth(960)}`]: {
+          paddingTop: ({ options: { innerSpacing } }) =>
+            getSpacing(innerSpacing[0], 'Landscape'),
+          paddingRight: ({ options: { innerSpacing } }) =>
+            getSpacing(innerSpacing[1], 'Landscape'),
+          paddingBottom: ({ options: { innerSpacing } }) =>
+            getSpacing(innerSpacing[2], 'Landscape'),
+          paddingLeft: ({ options: { innerSpacing } }) =>
+            getSpacing(innerSpacing[3], 'Landscape'),
+        },
+        [`@media ${B.mediaMinWidth(1280)}`]: {
+          paddingTop: ({ options: { innerSpacing } }) =>
+            getSpacing(innerSpacing[0], 'Desktop'),
+          paddingRight: ({ options: { innerSpacing } }) =>
+            getSpacing(innerSpacing[1], 'Desktop'),
+          paddingBottom: ({ options: { innerSpacing } }) =>
+            getSpacing(innerSpacing[2], 'Desktop'),
+          paddingLeft: ({ options: { innerSpacing } }) =>
+            getSpacing(innerSpacing[3], 'Desktop'),
+        },
       },
       rootShiftxs: {
         [theme.breakpoints.up('xs')]: {
