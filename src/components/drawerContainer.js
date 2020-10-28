@@ -16,18 +16,20 @@
     const showDrawer = isPersistent && isOpen && !isDev;
 
     return (
-      <div
-        className={[
-          classes.root,
-          isEmpty ? classes.empty : '',
-          isPristine ? classes.pristine : '',
-          showDrawer && breakpoint === 'xs' ? classes.rootShiftxs : '',
-          showDrawer && breakpoint === 'sm' ? classes.rootShiftsm : '',
-          showDrawer && breakpoint === 'md' ? classes.rootShiftmd : '',
-          showDrawer && breakpoint === 'lg' ? classes.rootShiftlg : '',
-        ].join(' ')}
-      >
-        {isPristine ? 'Page content' : children}
+      <div className={classes.outerSpacing}>
+        <div
+          className={[
+            classes.root,
+            isEmpty ? classes.empty : '',
+            isPristine ? classes.pristine : '',
+            showDrawer && breakpoint === 'xs' ? classes.rootShiftxs : '',
+            showDrawer && breakpoint === 'sm' ? classes.rootShiftsm : '',
+            showDrawer && breakpoint === 'md' ? classes.rootShiftmd : '',
+            showDrawer && breakpoint === 'lg' ? classes.rootShiftlg : '',
+          ].join(' ')}
+        >
+          {isPristine ? 'Page content' : children}
+        </div>
       </div>
     );
   })(),
@@ -86,6 +88,48 @@
             getSpacing(innerSpacing[2], 'Desktop'),
           paddingLeft: ({ options: { innerSpacing } }) =>
             getSpacing(innerSpacing[3], 'Desktop'),
+        },
+      },
+      outerSpacing: {
+        width: '100%',
+        marginTop: ({ options: { outerSpacing } }) =>
+          getSpacing(outerSpacing[0]),
+        marginRight: ({ options: { outerSpacing } }) =>
+          getSpacing(outerSpacing[1]),
+        marginBottom: ({ options: { outerSpacing } }) =>
+          getSpacing(outerSpacing[2]),
+        marginLeft: ({ options: { outerSpacing } }) =>
+          getSpacing(outerSpacing[3]),
+
+        [`@media ${B.mediaMinWidth(600)}`]: {
+          marginTop: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[0], 'Portrait'),
+          marginRight: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[1], 'Portrait'),
+          marginBottom: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[2], 'Portrait'),
+          marginLeft: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[3], 'Portrait'),
+        },
+        [`@media ${B.mediaMinWidth(960)}`]: {
+          marginTop: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[0], 'Landscape'),
+          marginRight: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[1], 'Landscape'),
+          marginBottom: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[2], 'Landscape'),
+          marginLeft: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[3], 'Landscape'),
+        },
+        [`@media ${B.mediaMinWidth(1280)}`]: {
+          marginTop: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[0], 'Desktop'),
+          marginRight: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[1], 'Desktop'),
+          marginBottom: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[2], 'Desktop'),
+          marginLeft: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[3], 'Desktop'),
         },
       },
       rootShiftxs: {
