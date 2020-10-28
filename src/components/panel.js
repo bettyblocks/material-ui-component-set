@@ -82,10 +82,14 @@
       content: {
         flexGrow: 1,
         flexBasis: '100%',
-        paddingTop: getSpacing('M'),
-        paddingRight: getSpacing('M'),
-        paddingBottom: getSpacing('M'),
-        paddingLeft: getSpacing('M'),
+        paddingTop: ({ options: { innerSpacing } }) =>
+          getSpacing(innerSpacing[0]),
+        paddingRight: ({ options: { innerSpacing } }) =>
+          getSpacing(innerSpacing[1]),
+        paddingBottom: ({ options: { innerSpacing } }) =>
+          getSpacing(innerSpacing[2]),
+        paddingLeft: ({ options: { innerSpacing } }) =>
+          getSpacing(innerSpacing[3]),
       },
       [`@media ${B.mediaMinWidth(600)}`]: {
         panel: {
