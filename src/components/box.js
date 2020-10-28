@@ -102,6 +102,7 @@
         bottom: ({ options: { bottom } }) => bottom,
         left: ({ options: { left } }) => left,
         width: ({ options: { width } }) => width,
+        overflow: ({ options: { overflow } }) => overflow,
         '& > div': {
           flexShrink: [1, '!important'],
           flexGrow: [1, '!important'],
@@ -120,6 +121,7 @@
         flexShrink: ({ options: { stretch } }) => (stretch ? 1 : 0),
         flexGrow: ({ options: { stretch } }) => (stretch ? 1 : 0),
         transition: 'opacity 0.5s ease-out',
+        overflow: ({ options: { overflow } }) => overflow,
         marginTop: ({ options: { outerSpacing } }) =>
           getSpacing(outerSpacing[0]),
         marginRight: ({ options: { outerSpacing } }) =>

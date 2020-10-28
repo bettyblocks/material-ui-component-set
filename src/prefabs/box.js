@@ -70,6 +70,24 @@
           },
         },
         {
+          value: 'visible',
+          label: 'Overflow',
+          key: 'overflow',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'DROPDOWN',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Visible', value: 'visible' },
+              { name: 'Hidden', value: 'hidden' },
+              { name: 'Scroll', value: 'scroll' },
+              { name: 'Auto', value: 'auto' },
+              { name: 'Initial', value: 'initial' },
+              { name: 'Inherit', value: 'inherit' },
+            ],
+          },
+        },
+        {
           value: ['0rem', '0rem', '0rem', '0rem'],
           label: 'Outer space',
           key: 'outerSpacing',
