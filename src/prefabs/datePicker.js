@@ -1,24 +1,24 @@
 (() => ({
-  name: 'DateTimePicker',
-  icon: 'DateTimePickerIcon',
+  name: 'DatePicker',
+  icon: 'DatePickerIcon',
   category: 'FORM',
   structure: [
     {
       name: 'DateTimePicker',
       options: [
         {
-          value: { label: ['Date time'], value: [] },
+          value: { label: ['Date'], value: [] },
           label: 'Label',
           key: 'customModelAttribute',
           type: 'CUSTOM_MODEL_ATTRIBUTE',
           configuration: {
-            allowedTypes: ['date_time'],
+            allowedTypes: ['date'],
           },
         },
         {
           label: 'Type',
           key: 'type',
-          value: 'datetime',
+          value: 'date',
           type: 'TEXT',
           configuration: {
             condition: {
@@ -36,47 +36,10 @@
           value: false,
         },
         {
-          value: 'MM/dd/yyyy HH:mm:ss',
+          value: 'MM/dd/yyyy',
           label: 'Format',
-          key: 'dateTimeFormat',
+          key: 'dateFormat',
           type: 'TEXT',
-          configuration: {
-            placeholder: 'dd/MM/yyyy HH:mm:ss',
-            condition: {
-              type: 'SHOW',
-              option: 'type',
-              comparator: 'EQ',
-              value: 'datetime',
-            },
-          },
-        },
-        {
-          value: true,
-          label: 'Use 24-hour format',
-          key: 'use24HourClockTime',
-          type: 'TOGGLE',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'type',
-              comparator: 'EQ',
-              value: 'time',
-            },
-          },
-        },
-        {
-          value: true,
-          label: 'Use 24-hour format',
-          key: 'use24HourClockDateTime',
-          type: 'TOGGLE',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'type',
-              comparator: 'EQ',
-              value: 'datetime',
-            },
-          },
         },
         {
           value: false,

@@ -1,6 +1,6 @@
 (() => ({
   name: 'DataContainer',
-  type: 'CONTAINER_COMPONENT',
+  type: 'BODY_COMPONENT',
   allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (
@@ -38,7 +38,9 @@
                 isPristine ? classes.pristine : '',
               ].join(' ')}
             >
-              {isPristine ? 'Data Container' : children}
+              {isPristine
+                ? 'Drag a component in the data container to display the data'
+                : children}
             </div>
           </>
         );
@@ -91,7 +93,22 @@
         if (authProfile) {
           return (
             <B.GetMe authenticationProfileId={authProfile}>
-              {canvasLayout()}
+              {({ loading, error, data }) => {
+                if (loading) {
+                  B.triggerEvent('onUserLoad');
+                }
+                if (error) {
+                  B.triggerEvent('onUserError', error.message);
+                }
+
+                if (data && data.id) {
+                  B.triggerEvent('onUserSuccess', data);
+                } else {
+                  B.triggerEvent('onNoUserResults');
+                }
+
+                return canvasLayout();
+              }}
             </B.GetMe>
           );
         }

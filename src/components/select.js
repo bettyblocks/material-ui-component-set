@@ -5,10 +5,7 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const {
-      label,
-      required,
       disabled,
-      defaultValue,
       variant,
       size,
       fullWidth,
@@ -20,44 +17,59 @@
       optionType,
       labelProperty: labelProp,
       valueProperty: valueProp,
-      actionInputId,
-      property,
-      propertyLabelOverride,
       showError,
       hideLabel,
+      customModelAttribute: customModelAttributeObj,
+      property,
       validationValueMissing,
+      nameAttribute,
     } = options;
     const { TextField, MenuItem } = window.MaterialUI.Core;
     const displayError = showError === 'built-in';
     const isDev = B.env === 'dev';
-    const { useGetAll, getProperty, getActionInput, useText } = B;
-    const [currentValue, setCurrentValue] = useState(useText(defaultValue));
+    const { useAllQuery, getProperty, useText, getCustomModelAttribute } = B;
     const [errorState, setErrorState] = useState(false);
     const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
 
-    const { label: propertyLabelText, kind, values = [] } =
-      getProperty(property) || {};
+    const { kind, values = [] } = getProperty(property) || {};
 
-    const propLabelOverride = useText(propertyLabelOverride);
-    const propertyLabel = propLabelOverride || propertyLabelText;
-    const labelText = property ? propertyLabel : useText(label);
+    const {
+      id: customModelAttributeId,
+      label = [],
+      value: defaultValue = [],
+    } = customModelAttributeObj;
 
-    const actionInput = getActionInput(actionInputId);
+    const [currentValue, setCurrentValue] = useState(useText(defaultValue));
+    const labelText = useText(label);
+    const nameAttributeValue = useText(nameAttribute);
+
+    const customModelAttribute = getCustomModelAttribute(
+      customModelAttributeId,
+    );
+    const { name: customModelAttributeName, validations: { required } = {} } =
+      customModelAttribute || {};
     const value = currentValue;
 
     const { name: labelName } = getProperty(labelProp) || {};
     const { name: propName } = getProperty(valueProp) || {};
 
     const { loading, error, data, refetch } =
-      model && useGetAll(model, { filter, skip: 0, take: 50 });
+      model && useAllQuery(model, { filter, skip: 0, take: 50 });
 
-    const mounted = useRef(true);
+    const mounted = useRef(false);
+
     useEffect(() => {
-      if (!mounted.current && loading) {
+      mounted.current = true;
+      return () => {
+        mounted.current = false;
+      };
+    }, []);
+
+    useEffect(() => {
+      if (mounted.current && loading) {
         B.triggerEvent('onLoad', loading);
       }
-      mounted.current = false;
     }, [loading]);
 
     if (error && !displayError) {
@@ -119,7 +131,7 @@
           </MenuItem>
         ));
       }
-      if (optionType !== 'data') {
+      if (optionType === 'static') {
         return selectOptions.split('\n').map(option => (
           <MenuItem key={option} value={option}>
             {option}
@@ -152,7 +164,7 @@
           onChange={handleChange}
           onBlur={validationHandler}
           inputProps={{
-            name: actionInput && actionInput.name,
+            name: nameAttributeValue || customModelAttributeName,
             tabIndex: isDev ? -1 : 0,
           }}
           required={required}

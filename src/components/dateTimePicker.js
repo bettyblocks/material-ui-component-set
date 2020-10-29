@@ -5,9 +5,6 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const {
-      label,
-      defaultValue,
-      required,
       disabled,
       error,
       placeholder,
@@ -21,13 +18,12 @@
       fullWidth,
       margin,
       helperText,
-      actionInputId,
       disableToolbar,
-      property,
-      propertyLabelOverride,
       hideLabel,
+      customModelAttribute: customModelAttributeObj,
       use24HourClockDateTime,
       use24HourClockTime,
+      nameAttribute,
     } = options;
 
     const {
@@ -37,19 +33,27 @@
       KeyboardDateTimePicker,
     } = window.MaterialUI.Pickers;
     const { DateFnsUtils } = window.MaterialUI;
+    const { AccessTime, Event } = window.MaterialUI.Icons;
+    const { useText, env, getCustomModelAttribute } = B;
     const DateFns = new DateFnsUtils();
-    const { getActionInput, useText, getProperty, env } = B;
     const isDev = env === 'dev';
-    const actionInput = getActionInput(actionInputId);
-    const strDefaultValue = useText(defaultValue);
     const [selectedDate, setSelectedDate] = useState();
     const helper = useText(helperText);
     const placeholderText = useText(placeholder);
-    const { label: propertyLabelText } = getProperty(property) || {};
-    const propLabelOverride = useText(propertyLabelOverride);
-    const propertyLabel = propLabelOverride || propertyLabelText;
-    const labelText = property ? propertyLabel : useText(label);
 
+    const {
+      id: customModelAttributeId,
+      label = [],
+      value: defaultValue = [],
+    } = customModelAttributeObj;
+    const strDefaultValue = useText(defaultValue);
+    const labelText = useText(label);
+    const customModelAttribute = getCustomModelAttribute(
+      customModelAttributeId,
+    );
+    const { name: customModelAttributeName, validations: { required } = {} } =
+      customModelAttribute || {};
+    const nameAttributeValue = useText(nameAttribute);
     const isValidDate = date => date instanceof Date && !isNaN(date);
 
     const changeHandler = date => {
@@ -123,6 +127,7 @@
 
     const DateTimeCmp = (
       <DateTimeComponent
+        name={nameAttributeValue || customModelAttributeName}
         value={selectedDate}
         size={size}
         classes={{ root: classes.formControl }}
@@ -133,6 +138,7 @@
         inputVariant={inputvariant}
         InputProps={{
           inputProps: {
+            name: nameAttributeValue || customModelAttributeName,
             tabIndex: isDev && -1,
           },
         }}
@@ -156,6 +162,7 @@
           className: classes.dialog,
         }}
         ampm={!use24HourClock}
+        keyboardIcon={type === 'time' ? <AccessTime /> : <Event />}
       />
     );
 
@@ -173,7 +180,7 @@
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <input
           type="hidden"
-          name={actionInput && actionInput.name}
+          name={nameAttributeValue || customModelAttributeName}
           value={resultString}
         />
         {variant === 'static' ? (

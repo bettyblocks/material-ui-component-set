@@ -6,11 +6,10 @@
   jsx: (
     <div>
       {(() => {
-        const { env, Children, Action, useGetAll } = B;
+        const { env, Children, Action, useAllQuery, getActionInput } = B;
 
         const {
-          actionId,
-          model,
+          formData,
           filter,
           formErrorMessage,
           formSuccessMessage,
@@ -31,28 +30,39 @@
         const history = isDev ? {} : useHistory();
         const [isInvalid, setIsInvalid] = useState(false);
         const location = isDev ? {} : useLocation();
+        const { actionId, modelId, variableId } = formData;
+        const formVariable = getActionInput(variableId);
+        const hasFilter = modelId && filter && Object.keys(filter).length > 0;
 
-        const { loading: isFetching, data: models, error: err } =
-          model &&
-          useGetAll(model, {
-            filter,
-            skip: 0,
-            take: 1,
-          });
+        const { loading: isFetching, data: records, error: err } =
+          (hasFilter &&
+            useAllQuery(modelId, {
+              filter,
+              skip: 0,
+              take: 1,
+            })) ||
+          {};
 
-        const mounted = useRef(true);
+        const mounted = useRef(false);
+
         useEffect(() => {
-          if (!mounted.current && isFetching) {
+          mounted.current = true;
+          return () => {
+            mounted.current = false;
+          };
+        }, []);
+
+        useEffect(() => {
+          if (mounted.current && isFetching) {
             B.triggerEvent('onDataLoad', isFetching);
           }
-          mounted.current = false;
         }, [isFetching]);
 
         if (err) {
           B.triggerEvent('onDataError', err.message);
         }
 
-        const item = models && models.results[0];
+        const item = records && records.results[0];
 
         if (item) {
           if (item.id) {
@@ -73,30 +83,44 @@
           evt.preventDefault();
           setIsInvalid(false);
           B.triggerEvent('onSubmit');
-          const formData = new FormData(formRef.current);
-          const values = Array.from(formData).reduce((acc, [key, value]) => {
-            if (!acc[key]) return { ...acc, [key]: value };
-            acc[key] = `${acc[key]},${value}`;
-            return acc;
-          }, {});
-          callAction({ variables: { input: values } });
+          const formDataValues = new FormData(formRef.current);
+          const values = Array.from(formDataValues).reduce(
+            (acc, [key, value]) => {
+              if (!acc[key]) return { ...acc, [key]: value };
+              acc[key] = `${acc[key]},${value}`;
+              return acc;
+            },
+            {},
+          );
+          const postValues =
+            item && item.id ? { id: item.id, ...values } : values;
+          let variables = { variables: { input: postValues } };
+          if (formVariable && formVariable.name) {
+            variables = {
+              variables: { input: { [formVariable.name]: postValues } },
+            };
+          }
+          callAction(variables);
         };
 
         const renderContent = loading => {
-          if (!model || isDev) {
+          if (!hasFilter || isDev) {
             return <Children loading={loading}>{children}</Children>;
           }
           if (isFetching) return 'Loading...';
           if (err && displayError) return err.message;
           if (!item) return children;
           return (
-            <B.ModelProvider key={item.id} value={item} id={model}>
+            <B.ModelProvider key={item.id} value={item} id={modelId}>
               {children}
             </B.ModelProvider>
           );
         };
 
         const trigger = (data, loading, error) => {
+          if (data || error) {
+            B.triggerEvent('onActionDone');
+          }
           if (data) {
             B.triggerEvent('onActionSuccess', data.actionb5);
 
@@ -143,7 +167,9 @@
                     isPristine && classes.pristine,
                   ].join(' ')}
                 >
-                  {isPristine && <span>form</span>}
+                  {isPristine && (
+                    <span>Drag form components in the form to submit data</span>
+                  )}
                   {renderContent(loading)}
                 </form>
               </>

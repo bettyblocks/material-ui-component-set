@@ -1,88 +1,124 @@
 (() => ({
-  name: 'DateTimePicker',
-  icon: 'DateTimePickerIcon',
+  name: 'DecimalInput',
+  icon: 'DecimalInputIcon',
   category: 'FORM',
   structure: [
     {
-      name: 'DateTimePicker',
+      name: 'TextField',
       options: [
         {
-          value: { label: ['Date time'], value: [] },
+          value: { label: ['Decimal'], value: [] },
           label: 'Label',
           key: 'customModelAttribute',
           type: 'CUSTOM_MODEL_ATTRIBUTE',
           configuration: {
-            allowedTypes: ['date_time'],
-          },
-        },
-        {
-          label: 'Type',
-          key: 'type',
-          value: 'datetime',
-          type: 'TEXT',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'customModelAttribute',
-              comparator: 'EQ',
-              value: false,
-            },
-          },
-        },
-        {
-          type: 'TOGGLE',
-          label: 'Disable Toolbar',
-          key: 'disableToolbar',
-          value: false,
-        },
-        {
-          value: 'MM/dd/yyyy HH:mm:ss',
-          label: 'Format',
-          key: 'dateTimeFormat',
-          type: 'TEXT',
-          configuration: {
-            placeholder: 'dd/MM/yyyy HH:mm:ss',
-            condition: {
-              type: 'SHOW',
-              option: 'type',
-              comparator: 'EQ',
-              value: 'datetime',
-            },
-          },
-        },
-        {
-          value: true,
-          label: 'Use 24-hour format',
-          key: 'use24HourClockTime',
-          type: 'TOGGLE',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'type',
-              comparator: 'EQ',
-              value: 'time',
-            },
-          },
-        },
-        {
-          value: true,
-          label: 'Use 24-hour format',
-          key: 'use24HourClockDateTime',
-          type: 'TOGGLE',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'type',
-              comparator: 'EQ',
-              value: 'datetime',
-            },
+            allowedTypes: ['decimal'],
           },
         },
         {
           value: false,
-          label: 'Error',
-          key: 'error',
+          label: 'Validation options',
+          key: 'validationOptions',
           type: 'TOGGLE',
+        },
+        {
+          label: 'Validation pattern',
+          key: 'pattern',
+          value: '',
+          type: 'TEXT',
+          configuration: {
+            placeholder: '[0-9]{8,}',
+            condition: {
+              type: 'SHOW',
+              option: 'validationOptions',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          label: 'Min length',
+          key: 'minlength',
+          value: '',
+          type: 'NUMBER',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'validationOptions',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          label: 'Max length',
+          key: 'maxlength',
+          value: '',
+          type: 'NUMBER',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'validationOptions',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          value: ['This field is required'],
+          label: 'Value required message',
+          key: 'validationValueMissing',
+          type: 'VARIABLE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'validationOptions',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          value: ['Invalid value'],
+          label: 'Pattern mismatch message',
+          key: 'validationPatternMismatch',
+          type: 'VARIABLE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'validationOptions',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          value: ['This value is too short'],
+          label: 'Value too short message',
+          key: 'validationTooShort',
+          type: 'VARIABLE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'validationOptions',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          value: ['This value is too long'],
+          label: 'Value too long message',
+          key: 'validationTooLong',
+          type: 'VARIABLE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'validationOptions',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
         },
         {
           type: 'TOGGLE',
@@ -105,21 +141,6 @@
         {
           label: 'Variant',
           key: 'variant',
-          value: 'inline',
-          type: 'CUSTOM',
-          configuration: {
-            as: 'BUTTONGROUP',
-            dataType: 'string',
-            allowedInput: [
-              { name: 'Dialog', value: 'dialog' },
-              { name: 'Inline', value: 'inline' },
-              { name: 'Static', value: 'static' },
-            ],
-          },
-        },
-        {
-          label: 'Input Variant',
-          key: 'inputvariant',
           value: 'outlined',
           type: 'CUSTOM',
           configuration: {
@@ -168,6 +189,46 @@
           },
         },
         {
+          label: 'Adornment',
+          key: 'adornment',
+          value: '',
+          type: 'TEXT',
+        },
+        {
+          type: 'CUSTOM',
+          label: 'Position',
+          key: 'adornmentPosition',
+          value: 'start',
+          configuration: {
+            condition: {
+              type: 'HIDE',
+              option: 'adornment',
+              comparator: 'EQ',
+              value: '',
+            },
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Start', value: 'start' },
+              { name: 'End', value: 'end' },
+            ],
+          },
+        },
+        {
+          label: 'Type',
+          key: 'type',
+          value: 'decimal',
+          type: 'TEXT',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'adornment',
+              comparator: 'EQ',
+              value: 0,
+            },
+          },
+        },
+        {
           value: false,
           label: 'Styles',
           key: 'styles',
@@ -178,20 +239,6 @@
           label: 'Background color',
           key: 'backgroundColor',
           value: 'White',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'styles',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
-        },
-        {
-          type: 'COLOR',
-          label: 'Background color popup',
-          key: 'backgroundColorPopup',
-          value: 'Primary',
           configuration: {
             condition: {
               type: 'SHOW',

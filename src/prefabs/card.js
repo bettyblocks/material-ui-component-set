@@ -196,7 +196,7 @@
                   type: 'VARIABLE',
                   label: 'Content',
                   key: 'content',
-                  value: ['Title'],
+                  value: [],
                   configuration: {
                     as: 'MULTILINE',
                   },
@@ -238,7 +238,7 @@
                   type: 'VARIABLE',
                   label: 'Content',
                   key: 'content',
-                  value: ['Type your content here...'],
+                  value: [],
                   configuration: {
                     as: 'MULTILINE',
                   },
@@ -373,10 +373,10 @@
                   },
                 },
                 {
-                  value: '',
+                  value: [''],
                   label: 'URL',
                   key: 'linkToExternal',
-                  type: 'TEXT',
+                  type: 'VARIABLE',
                   configuration: {
                     placeholder: 'Starts with https:// or http://',
                     condition: {

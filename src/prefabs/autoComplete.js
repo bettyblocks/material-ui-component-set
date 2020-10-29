@@ -7,57 +7,55 @@
       name: 'AutoComplete',
       options: [
         {
+          value: { label: ['Autocomplete'], value: [] },
+          label: 'Label',
+          key: 'customModelAttribute',
+          type: 'CUSTOM_MODEL_ATTRIBUTE',
+          configuration: {
+            allowedTypes: ['string'],
+          },
+        },
+        {
+          label: 'Option type',
+          key: 'optionType',
+          value: 'model',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Model', value: 'model' },
+              { name: 'Property', value: 'property' },
+            ],
+          },
+        },
+        {
           value: '',
           label: 'Property',
           key: 'property',
           type: 'PROPERTY',
-        },
-        {
-          value: ['Label'],
-          label: 'Label',
-          key: 'label',
-          type: 'VARIABLE',
           configuration: {
             condition: {
               type: 'SHOW',
-              option: 'property',
+              option: 'optionType',
               comparator: 'EQ',
-              value: '',
+              value: 'property',
             },
           },
-        },
-        {
-          value: [],
-          label: 'Label',
-          key: 'propertyLabelOverride',
-          type: 'VARIABLE',
-          configuration: {
-            placeholder: 'Label of property',
-            condition: {
-              type: 'HIDE',
-              option: 'property',
-              comparator: 'EQ',
-              value: '',
-            },
-          },
-        },
-        {
-          value: [],
-          label: 'Value',
-          key: 'defaultValue',
-          type: 'VARIABLE',
-        },
-        {
-          value: '',
-          label: 'Input',
-          key: 'actionInputId',
-          type: 'ACTION_INPUT',
         },
         {
           value: '',
           label: 'Model',
           key: 'model',
           type: 'MODEL',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'optionType',
+              comparator: 'EQ',
+              value: 'model',
+            },
+          },
         },
         {
           value: {},
@@ -66,6 +64,12 @@
           type: 'FILTER',
           configuration: {
             dependsOn: 'model',
+            condition: {
+              type: 'SHOW',
+              option: 'optionType',
+              comparator: 'EQ',
+              value: 'model',
+            },
           },
         },
         {
@@ -73,12 +77,28 @@
           label: 'Label property',
           key: 'searchProperty',
           type: 'PROPERTY',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'optionType',
+              comparator: 'EQ',
+              value: 'model',
+            },
+          },
         },
         {
           value: '',
           label: 'Value property',
           key: 'valueProperty',
           type: 'PROPERTY',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'optionType',
+              comparator: 'EQ',
+              value: 'model',
+            },
+          },
         },
         {
           type: 'TOGGLE',
@@ -103,12 +123,6 @@
           label: 'Free solo',
           key: 'freeSolo',
           value: false,
-        },
-        {
-          value: false,
-          label: 'Required',
-          key: 'required',
-          type: 'TOGGLE',
         },
         {
           value: false,
@@ -381,6 +395,26 @@
             condition: {
               type: 'SHOW',
               option: 'styles',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          value: false,
+          label: 'Advanced settings',
+          key: 'advancedSettings',
+          type: 'TOGGLE',
+        },
+        {
+          type: 'VARIABLE',
+          label: 'name attribute',
+          key: 'nameAttribute',
+          value: [],
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'advancedSettings',
               comparator: 'EQ',
               value: true,
             },

@@ -1,81 +1,18 @@
 (() => ({
-  name: 'DateTimePicker',
-  icon: 'DateTimePickerIcon',
+  name: 'CheckboxGroup',
+  icon: 'CheckboxGroupIcon',
   category: 'FORM',
   structure: [
     {
-      name: 'DateTimePicker',
+      name: 'CheckboxGroup',
       options: [
         {
-          value: { label: ['Date time'], value: [] },
+          value: { label: ['Checkbox group'], value: [] },
           label: 'Label',
           key: 'customModelAttribute',
           type: 'CUSTOM_MODEL_ATTRIBUTE',
           configuration: {
-            allowedTypes: ['date_time'],
-          },
-        },
-        {
-          label: 'Type',
-          key: 'type',
-          value: 'datetime',
-          type: 'TEXT',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'customModelAttribute',
-              comparator: 'EQ',
-              value: false,
-            },
-          },
-        },
-        {
-          type: 'TOGGLE',
-          label: 'Disable Toolbar',
-          key: 'disableToolbar',
-          value: false,
-        },
-        {
-          value: 'MM/dd/yyyy HH:mm:ss',
-          label: 'Format',
-          key: 'dateTimeFormat',
-          type: 'TEXT',
-          configuration: {
-            placeholder: 'dd/MM/yyyy HH:mm:ss',
-            condition: {
-              type: 'SHOW',
-              option: 'type',
-              comparator: 'EQ',
-              value: 'datetime',
-            },
-          },
-        },
-        {
-          value: true,
-          label: 'Use 24-hour format',
-          key: 'use24HourClockTime',
-          type: 'TOGGLE',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'type',
-              comparator: 'EQ',
-              value: 'time',
-            },
-          },
-        },
-        {
-          value: true,
-          label: 'Use 24-hour format',
-          key: 'use24HourClockDateTime',
-          type: 'TOGGLE',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'type',
-              comparator: 'EQ',
-              value: 'datetime',
-            },
+            allowedTypes: ['string'],
           },
         },
         {
@@ -85,16 +22,24 @@
           type: 'TOGGLE',
         },
         {
+          value: 'built-in',
+          label: 'Error message',
+          key: 'showError',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Built in', value: 'built-in' },
+              { name: 'Interaction', value: 'interaction' },
+            ],
+          },
+        },
+        {
           type: 'TOGGLE',
           label: 'Disabled',
           key: 'disabled',
           value: false,
-        },
-        {
-          value: [],
-          label: 'Placeholder',
-          key: 'placeholder',
-          type: 'VARIABLE',
         },
         {
           value: [],
@@ -103,34 +48,129 @@
           type: 'VARIABLE',
         },
         {
-          label: 'Variant',
-          key: 'variant',
-          value: 'inline',
+          label: 'Label Position',
+          key: 'position',
+          value: 'end',
           type: 'CUSTOM',
           configuration: {
             as: 'BUTTONGROUP',
             dataType: 'string',
             allowedInput: [
-              { name: 'Dialog', value: 'dialog' },
-              { name: 'Inline', value: 'inline' },
-              { name: 'Static', value: 'static' },
+              { name: 'Start', value: 'start' },
+              { name: 'End', value: 'end' },
+              { name: 'Top', value: 'top' },
+              { name: 'Bottom', value: 'bottom' },
             ],
           },
         },
         {
-          label: 'Input Variant',
-          key: 'inputvariant',
-          value: 'outlined',
+          label: 'Option type',
+          key: 'optionType',
+          value: 'static',
           type: 'CUSTOM',
           configuration: {
             as: 'BUTTONGROUP',
             dataType: 'string',
             allowedInput: [
-              { name: 'Standard', value: 'standard' },
-              { name: 'Outlined', value: 'outlined' },
-              { name: 'Filled', value: 'filled' },
+              { name: 'Static', value: 'static' },
+              { name: 'Model', value: 'model' },
+              { name: 'Property', value: 'property' },
             ],
           },
+        },
+        {
+          value: '',
+          label: 'Property',
+          key: 'property',
+          type: 'PROPERTY',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'optionType',
+              comparator: 'EQ',
+              value: 'property',
+            },
+          },
+        },
+        {
+          type: 'MODEL',
+          label: 'Model',
+          key: 'model',
+          value: '',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'optionType',
+              comparator: 'EQ',
+              value: 'model',
+            },
+          },
+        },
+        {
+          value: {},
+          label: 'Filter',
+          key: 'filter',
+          type: 'FILTER',
+          configuration: {
+            dependsOn: 'model',
+            condition: {
+              type: 'SHOW',
+              option: 'optionType',
+              comparator: 'EQ',
+              value: 'model',
+            },
+          },
+        },
+        {
+          type: 'PROPERTY',
+          label: 'Label Property',
+          key: 'labelProp',
+          value: '',
+          configuration: {
+            dependsOn: 'model',
+            condition: {
+              type: 'SHOW',
+              option: 'optionType',
+              comparator: 'EQ',
+              value: 'model',
+            },
+          },
+        },
+        {
+          type: 'PROPERTY',
+          label: 'Value Property',
+          key: 'valueProp',
+          value: '',
+          configuration: {
+            dependsOn: 'model',
+            condition: {
+              type: 'SHOW',
+              option: 'optionType',
+              comparator: 'EQ',
+              value: 'model',
+            },
+          },
+        },
+        {
+          type: 'TEXT',
+          label: 'Options',
+          key: 'checkboxOptions',
+          value: 'Option 1\nOption 2\nOption 3',
+          configuration: {
+            as: 'MULTILINE',
+            condition: {
+              type: 'SHOW',
+              option: 'optionType',
+              comparator: 'EQ',
+              value: 'static',
+            },
+          },
+        },
+        {
+          type: 'TOGGLE',
+          label: 'Row',
+          key: 'row',
+          value: true,
         },
         {
           type: 'TOGGLE',
@@ -175,9 +215,9 @@
         },
         {
           type: 'COLOR',
-          label: 'Background color',
-          key: 'backgroundColor',
-          value: 'White',
+          label: 'Checkbox color',
+          key: 'checkboxColor',
+          value: 'Accent3',
           configuration: {
             condition: {
               type: 'SHOW',
@@ -189,50 +229,8 @@
         },
         {
           type: 'COLOR',
-          label: 'Background color popup',
-          key: 'backgroundColorPopup',
-          value: 'Primary',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'styles',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
-        },
-        {
-          type: 'COLOR',
-          label: 'Border color',
-          key: 'borderColor',
-          value: 'Accent1',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'styles',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
-        },
-        {
-          type: 'COLOR',
-          label: 'Border color (hover)',
-          key: 'borderHoverColor',
-          value: 'Black',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'styles',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
-        },
-        {
-          type: 'COLOR',
-          label: 'Border color (focus)',
-          key: 'borderFocusColor',
+          label: 'Checkbox color checked',
+          key: 'checkboxColorChecked',
           value: 'Primary',
           configuration: {
             condition: {
@@ -276,20 +274,6 @@
           label: 'Text color',
           key: 'textColor',
           value: 'Black',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'styles',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
-        },
-        {
-          type: 'COLOR',
-          label: 'Placeholder color',
-          key: 'placeholderColor',
-          value: 'Light',
           configuration: {
             condition: {
               type: 'SHOW',
