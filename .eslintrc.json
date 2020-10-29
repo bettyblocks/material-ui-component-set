@@ -32,6 +32,7 @@
     "useRef": "readonly",
     "useRouter": "readonly",
     "useState": "readonly",
-    "useHistory": "readonly"
+    "useHistory": "readonly",
+    "useOptions": "readonly"
   }
 }
