@@ -1377,10 +1377,13 @@
           type: 'TOGGLE',
         },
         {
-          label: 'Visible',
+          label: 'Toggle visibility',
           key: 'visible',
           value: true,
           type: 'TOGGLE',
+          configuration: {
+            as: 'VISIBILITY',
+          },
         },
       ],
       descendants: [],
