@@ -5,7 +5,7 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { List, ListItem, ListItemText } = window.MaterialUI.Core;
-    const { env, ModelProvider, useGetAll } = B;
+    const { env, ModelProvider, useAllQuery } = B;
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
     const isPristine = children.length === 0 && isDev;
@@ -21,7 +21,7 @@
 
     const listArgs = { className: classes.root, disablePadding, dense };
 
-    const { loading, error, data } = model && useGetAll(model, { filter });
+    const { loading, error, data } = model && useAllQuery(model, { filter });
 
     if (loading) return <DataPlaceHolder text="loading..." />;
     if (error) return <DataPlaceHolder text="failed" />;
