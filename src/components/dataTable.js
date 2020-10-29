@@ -252,13 +252,6 @@
       B.triggerEvent('onNoResults');
     }
 
-    React.useEffect(() => {
-      if (isDev) return;
-      if (options.currentRecord !== '') {
-        B.triggerEvent('OnRowClick', options.currentRecord);
-      }
-    }, [options.currentRecord]);
-
     const handleChangePage = (_, newPage) => {
       if (loading || error) return;
       setPage(newPage);
@@ -291,11 +284,9 @@
 
     const history = isDev ? {} : useHistory();
 
-    const [, updateOptions] = useOptions();
-
     const handleRowClick = rowValue => {
       if (isDev) return;
-      updateOptions({ ...options, currentRecord: rowValue.id });
+      B.triggerEvent('OnRowClick', rowValue);
       if (hasLink) {
         const { id, params } = linkTo;
         const newParams = Object.entries(params).reduce((acc, cv) => {
