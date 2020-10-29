@@ -49,7 +49,15 @@
         {
           name: 'Column',
           options: [
-            { type: 'TOGGLE', label: 'Visible', key: 'visible', value: true },
+            {
+              label: 'Toggle visibility',
+              key: 'visible',
+              value: true,
+              type: 'TOGGLE',
+              configuration: {
+                as: 'VISIBILITY',
+              },
+            },
             {
               value: '4',
               label: 'Column width',
@@ -223,7 +231,15 @@
         {
           name: 'Column',
           options: [
-            { type: 'TOGGLE', label: 'Visible', key: 'visible', value: true },
+            {
+              label: 'Toggle visibility',
+              key: 'visible',
+              value: true,
+              type: 'TOGGLE',
+              configuration: {
+                as: 'VISIBILITY',
+              },
+            },
             {
               value: '4',
               label: 'Column width',
@@ -397,7 +413,15 @@
         {
           name: 'Column',
           options: [
-            { type: 'TOGGLE', label: 'Visible', key: 'visible', value: true },
+            {
+              label: 'Toggle visibility',
+              key: 'visible',
+              value: true,
+              type: 'TOGGLE',
+              configuration: {
+                as: 'VISIBILITY',
+              },
+            },
             {
               value: '4',
               label: 'Column width',

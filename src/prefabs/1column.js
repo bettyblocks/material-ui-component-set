@@ -49,7 +49,15 @@
         {
           name: 'Column',
           options: [
-            { type: 'TOGGLE', label: 'Visible', key: 'visible', value: true },
+            {
+              label: 'Toggle visibility',
+              key: 'visible',
+              value: true,
+              type: 'TOGGLE',
+              configuration: {
+                as: 'VISIBILITY',
+              },
+            },
             {
               value: 'flexible',
               label: 'Column width',

@@ -7,10 +7,13 @@
       name: 'Dialog',
       options: [
         {
-          type: 'TOGGLE',
-          label: 'Visibility',
+          label: 'Toggle visibility',
           key: 'isVisible',
           value: true,
+          type: 'TOGGLE',
+          configuration: {
+            as: 'VISIBILITY',
+          },
         },
         {
           type: 'TOGGLE',
@@ -152,10 +155,13 @@
                   name: 'Column',
                   options: [
                     {
-                      type: 'TOGGLE',
-                      label: 'Visible',
+                      label: 'Toggle visibility',
                       key: 'visible',
                       value: true,
+                      type: 'TOGGLE',
+                      configuration: {
+                        as: 'VISIBILITY',
+                      },
                     },
                     {
                       value: 'flexible',
@@ -2167,10 +2173,13 @@
                               type: 'TOGGLE',
                             },
                             {
-                              label: 'Visible',
+                              label: 'Toggle visibility',
                               key: 'visible',
                               value: true,
                               type: 'TOGGLE',
+                              configuration: {
+                                as: 'VISIBILITY',
+                              },
                             },
                           ],
                           descendants: [],
@@ -2224,10 +2233,13 @@
                           name: 'Column',
                           options: [
                             {
-                              type: 'TOGGLE',
-                              label: 'Visible',
+                              label: 'Toggle visibility',
                               key: 'visible',
                               value: true,
+                              type: 'TOGGLE',
+                              configuration: {
+                                as: 'VISIBILITY',
+                              },
                             },
                             {
                               value: 'flexible',
@@ -4245,10 +4257,13 @@
                               type: 'TOGGLE',
                             },
                             {
-                              label: 'Visible',
+                              label: 'Toggle visibility',
                               key: 'visible',
                               value: true,
                               type: 'TOGGLE',
+                              configuration: {
+                                as: 'VISIBILITY',
+                              },
                             },
                           ],
                           descendants: [],
@@ -5695,10 +5710,13 @@
                               type: 'TOGGLE',
                             },
                             {
-                              label: 'Visible',
+                              label: 'Toggle visibility',
                               key: 'visible',
                               value: true,
                               type: 'TOGGLE',
+                              configuration: {
+                                as: 'VISIBILITY',
+                              },
                             },
                           ],
                           descendants: [],
