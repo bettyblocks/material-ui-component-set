@@ -51,7 +51,7 @@
     if (!isDev && isTemporary) return TempDrawer;
 
     const DrawerComponent = (
-      <>
+      <div className={classes.wrapper}>
         <Hidden
           smUp={breakpoint === 'sm'}
           mdUp={breakpoint === 'md'}
@@ -69,10 +69,10 @@
             {children}
           </Drawer>
         </Hidden>
-      </>
+      </div>
     );
 
-    if (!isDev) return <div className={classes.wrapper}>{DrawerComponent}</div>;
+    if (!isDev) return DrawerComponent;
 
     if (!isOpen) return <div />;
 
