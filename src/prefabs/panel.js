@@ -30,6 +30,12 @@
           key: 'outerSpacing',
           type: 'SIZES',
         },
+        {
+          value: ['M', 'M', 'M', 'M'],
+          label: 'Inner space',
+          key: 'innerSpacing',
+          type: 'SIZES',
+        },
       ],
       descendants: [
         {
