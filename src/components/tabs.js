@@ -96,15 +96,22 @@
     const TabGroup = (
       <div className={classes.tabs}>
         {!hideTabs && TabsHeader}
-        <Children
-          value={value}
-          tabData={tabData}
-          setTabData={setTabData}
-          showAllTabs={showAllTabs}
-          setSelectedTab={setSelectedTab}
-        >
-          {children}
-        </Children>
+        {React.Children.map(children, (child, index) => {
+          const { options: childOptions = {} } = child.props || {};
+
+          return (
+            <Children
+              index={index}
+              value={value}
+              tabData={tabData}
+              setTabData={setTabData}
+              showAllTabs={showAllTabs}
+              setSelectedTab={setSelectedTab}
+            >
+              {React.cloneElement(child, { ...childOptions })}
+            </Children>
+          );
+        })}
       </div>
     );
     return isDev ? (
