@@ -1,3 +1,11 @@
+# [1.49.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.48.0...v1.49.0) (2020-10-29)
+
+
+### Features
+
+* allow linking between data container and list and table views ([1c4e574](https://github.com/bettyblocks/material-ui-component-set/commit/1c4e57437fbe1d257f686978b4c7b90fd66a41b6))
+* remove onRowSelected ([9785532](https://github.com/bettyblocks/material-ui-component-set/commit/97855327ac9e3709d6589c3cd21a274dae2cecae))
+
 # [1.48.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.47.0...v1.48.0) (2020-10-23)
 
 
