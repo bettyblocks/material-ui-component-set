@@ -14,20 +14,6 @@
         },
         {
           value: '',
-          label: 'Current Record',
-          key: 'currentRecord',
-          type: 'NUMBER',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'currentRecord',
-              comparator: 'EQ',
-              value: 'never',
-            },
-          },
-        },
-        {
-          value: '',
           label: 'Authentication Profile',
           key: 'authProfile',
           type: 'AUTHENTICATION_PROFILE',
