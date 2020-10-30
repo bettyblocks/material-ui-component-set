@@ -1,3 +1,11 @@
+## [1.49.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.49.0...v1.49.1) (2020-10-29)
+
+
+### Bug Fixes
+
+* tabs in partial ([cfac5b7](https://github.com/bettyblocks/material-ui-component-set/commit/cfac5b711eebcff13c7b32cee12b206f2e8aaa0a))
+* use state for handling tabs value on canvas ([5f51fe8](https://github.com/bettyblocks/material-ui-component-set/commit/5f51fe82666a6322ec658edf2c16304c7a149aac))
+
 # [1.49.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.48.0...v1.49.0) (2020-10-29)
 
 
