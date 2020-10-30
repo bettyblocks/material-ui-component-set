@@ -113,6 +113,9 @@
     return {
       devWrapper: {
         display: 'flex',
+        '& > *': {
+          pointerEvents: 'none',
+        },
       },
       empty: {
         position: 'relative',
