@@ -46,6 +46,13 @@
         const mounted = useRef(false);
 
         useEffect(() => {
+          B.defineFunction('Submit', () => {
+            formRef.current.dispatchEvent(new Event('submit'));
+          });
+          B.triggerEvent('onComponentLoad');
+        }, []);
+
+        useEffect(() => {
           mounted.current = true;
           return () => {
             mounted.current = false;
