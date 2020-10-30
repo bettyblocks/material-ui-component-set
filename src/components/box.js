@@ -206,6 +206,7 @@
           return image && `url("${image}")`;
         },
         backgroundSize: ({ options: { backgroundSize } }) => backgroundSize,
+        backgroundPosition: ({ options: { backgroundPosition } }) => backgroundPosition,
         backgroundRepeat: ({ options: { backgroundRepeat } }) =>
           backgroundRepeat,
       },
