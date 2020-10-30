@@ -59,7 +59,7 @@
         onMouseLeave={handleMouseLeave}
         style={{ opacity }}
       >
-        {isEmpty ? 'Box' : children}
+        {isEmpty ? 'Jeroen' : children}
       </Box>
     );
 
