@@ -1,3 +1,10 @@
+## [1.49.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.49.1...v1.49.2) (2020-10-30)
+
+
+### Bug Fixes
+
+* set default progress to zero in runtime ([905ede9](https://github.com/bettyblocks/material-ui-component-set/commit/905ede9fef39a8f957598570a885aa7259d944ea))
+
 ## [1.49.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.49.0...v1.49.1) (2020-10-29)
 
 
