@@ -1,3 +1,10 @@
+# [1.50.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.49.2...v1.50.0) (2020-10-30)
+
+
+### Features
+
+* add style options to checkbox ([def0700](https://github.com/bettyblocks/material-ui-component-set/commit/def070024702beb4b13183253257e78ac34c03b7))
+
 ## [1.49.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.49.1...v1.49.2) (2020-10-30)
 
 
