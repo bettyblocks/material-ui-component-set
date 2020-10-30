@@ -1,3 +1,10 @@
+# [1.51.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.50.1...v1.51.0) (2020-10-30)
+
+
+### Features
+
+* add minHeight to box component ([1fb6f2f](https://github.com/bettyblocks/material-ui-component-set/commit/1fb6f2f1cc709b5f87b6d6077d32427eb717f9b4))
+
 ## [1.50.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.50.0...v1.50.1) (2020-10-30)
 
 
