@@ -6,6 +6,8 @@
   jsx: (
     <div>
       {(() => {
+        const { useOneQuery, useMeQuery, ModelProvider, MeProvider } = B;
+
         const isEmpty = children.length === 0;
         const isDev = B.env === 'dev';
         const isPristine = isEmpty && isDev;
@@ -18,90 +20,110 @@
         } = options;
         const displayError = showError === 'built-in';
 
-        const builderLayout = () => (
-          <>
-            <div
-              className={[
-                isEmpty ? classes.empty : '',
-                isPristine ? classes.pristine : '',
-              ].join(' ')}
-            >
-              {isPristine
-                ? 'Drag a component in the data container to display the data'
-                : children}
-            </div>
-          </>
-        );
+        const BuilderLayout = () => {
+          B.defineFunction('Refetch', () => {});
+
+          return (
+            <>
+              <div
+                className={[
+                  isEmpty ? classes.empty : '',
+                  isPristine ? classes.pristine : '',
+                ].join(' ')}
+              >
+                {isPristine
+                  ? 'Drag a component in the data container to display the data'
+                  : children}
+              </div>
+            </>
+          );
+        };
+
+        if (isDev) {
+          return <BuilderLayout />;
+        }
+
+        const CanvasLayout = () => {
+          if (!model) {
+            return <BuilderLayout />;
+          }
+
+          return <One modelId={model} />;
+        };
 
         const redirect = () => {
           const history = useHistory();
           history.push(B.useEndpoint(redirectWithoutResult));
         };
 
-        const canvasLayout = () => {
-          if (!model) {
-            return builderLayout();
+        const One = ({ modelId }) => {
+          const { loading, data, error, refetch } = useOneQuery(modelId, {
+            filter,
+          });
+
+          B.defineFunction('Refetch', () => {
+            refetch();
+          });
+
+          if (loading) {
+            B.triggerEvent('onLoad', loading);
+            return <span>Loading...</span>;
+          }
+
+          if (error && !displayError) {
+            B.triggerEvent('onError', error.message);
+          }
+          if (error && displayError) {
+            return <span>{error.message}</span>;
+          }
+
+          if (data && data.id) {
+            B.triggerEvent('onSuccess', data);
+          } else {
+            B.triggerEvent('onNoResults');
+          }
+
+          if (!data && redirectWithoutResult) {
+            redirect();
           }
 
           return (
-            <B.GetOne modelId={model} filter={filter}>
-              {({ loading, error, data }) => {
-                if (loading) {
-                  B.triggerEvent('onLoad', loading);
-                  return <span>Loading...</span>;
-                }
-
-                if (error && !displayError) {
-                  B.triggerEvent('onError', error.message);
-                }
-                if (error && displayError) {
-                  return <span>{error.message}</span>;
-                }
-
-                if (data && data.id) {
-                  B.triggerEvent('onSuccess', data);
-                } else {
-                  B.triggerEvent('onNoResults');
-                }
-
-                if (!data && redirectWithoutResult) {
-                  redirect();
-                }
-
-                return data && children;
-              }}
-            </B.GetOne>
+            data && (
+              <ModelProvider value={data} id={model}>
+                {children}
+              </ModelProvider>
+            )
           );
         };
 
-        if (isDev) {
-          return builderLayout();
-        }
+        const Me = ({ authenticationProfileId }) => {
+          const { data, loading, error } = useMeQuery(authenticationProfileId);
+
+          if (loading) {
+            B.triggerEvent('onUserLoad');
+          }
+          if (error) {
+            B.triggerEvent('onUserError', error.message);
+          }
+
+          if (data && data.id) {
+            B.triggerEvent('onUserSuccess', data);
+          } else {
+            B.triggerEvent('onNoUserResults');
+          }
+
+          return (
+            <MeProvider value={data} id={model}>
+              <CanvasLayout />
+            </MeProvider>
+          );
+        };
 
         if (authProfile) {
-          return (
-            <B.GetMe authenticationProfileId={authProfile}>
-              {({ loading, error, data }) => {
-                if (loading) {
-                  B.triggerEvent('onUserLoad');
-                }
-                if (error) {
-                  B.triggerEvent('onUserError', error.message);
-                }
-
-                if (data && data.id) {
-                  B.triggerEvent('onUserSuccess', data);
-                } else {
-                  B.triggerEvent('onNoUserResults');
-                }
-
-                return canvasLayout();
-              }}
-            </B.GetMe>
-          );
+          return <Me authenticationProfileId={authProfile} />;
         }
 
-        return canvasLayout();
+        return <CanvasLayout />;
       })()}
     </div>
   ),
