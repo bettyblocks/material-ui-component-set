@@ -1279,10 +1279,178 @@
           value: 'Black',
         },
         {
+          type: 'CUSTOM',
+          label: 'Link to',
+          key: 'linkType',
+          value: 'internal',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Internal page', value: 'internal' },
+              { name: 'External page', value: 'external' },
+            ],
+          },
+        },
+        {
+          value: '',
+          label: 'Page',
+          key: 'linkTo',
+          type: 'ENDPOINT',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'linkType',
+              comparator: 'EQ',
+              value: 'internal',
+            },
+          },
+        },
+        {
+          value: '',
+          label: 'URL',
+          key: 'linkToExternal',
+          type: 'TEXT',
+          configuration: {
+            placeholder: 'Starts with https:// or http://',
+            condition: {
+              type: 'SHOW',
+              option: 'linkType',
+              comparator: 'EQ',
+              value: 'external',
+            },
+          },
+        },
+        {
           value: ['0rem', '0rem', '0rem', '0rem'],
           label: 'Outer space',
           key: 'outerSpacing',
           type: 'SIZES',
+        },
+        {
+          type: 'TOGGLE',
+          label: 'Add Badge',
+          key: 'addBadge',
+          value: false,
+        },
+        {
+          type: 'VARIABLE',
+          label: 'Content',
+          key: 'content',
+          value: ['1'],
+          configuration: {
+            as: 'MULTILINE',
+            condition: {
+              type: 'SHOW',
+              option: 'addBadge',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          label: 'Badge Color',
+          key: 'badgeColor',
+          value: 'default',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Default', value: 'default' },
+              { name: 'Error', value: 'error' },
+              { name: 'Primary', value: 'primary' },
+              { name: 'Secondary', value: 'secondary' },
+            ],
+            condition: {
+              type: 'SHOW',
+              option: 'addBadge',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          label: 'Anchor Origin',
+          key: 'anchorOrigin',
+          value: 'right,top',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              {
+                name: 'Top Right',
+                value: 'right,top',
+              },
+              {
+                name: 'Top Left',
+                value: 'left,top',
+              },
+              {
+                name: 'Bottom Right',
+                value: 'right,bottom',
+              },
+              {
+                name: 'Bottom Left',
+                value: 'left,bottom',
+              },
+            ],
+            condition: {
+              type: 'SHOW',
+              option: 'addBadge',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          label: 'Variant',
+          key: 'variant',
+          value: 'standard',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Standard', value: 'standard' },
+              { name: 'Dot', value: 'dot' },
+            ],
+            condition: {
+              type: 'SHOW',
+              option: 'addBadge',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'SIZES',
+          label: 'Outer Space',
+          key: 'margin',
+          value: ['S', 'S', 'S', 'S'],
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'addBadge',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'TOGGLE',
+          label: 'Invisible',
+          key: 'invisible',
+          value: false,
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'addBadge',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
         },
       ],
       descendants: [],
