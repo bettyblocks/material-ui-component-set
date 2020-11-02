@@ -5,8 +5,6 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const {
-      defaultValue,
-      required,
       disabled,
       error,
       placeholder,
@@ -42,16 +40,31 @@
       CheckBox,
       CheckBoxOutlineBlank,
     } = window.MaterialUI.Icons;
-    const { useText, getProperty, getCustomModelAttribute, useGetAll, env } = B;
+    const {
+      useText,
+      getProperty,
+      getCustomModelAttribute,
+      useAllQuery,
+      env,
+    } = B;
     const isDev = env === 'dev';
     const displayError = showError === 'built-in';
-    const [currentValue, setCurrentValue] = useState(useText(defaultValue));
     const placeholderText = useText(placeholder);
     const helper = useText(helperText);
     const nameAttributeValue = useText(nameAttribute);
 
-    const { id: customModelAttributeId, label } = customModelAttributeObj;
+    const {
+      id: customModelAttributeId,
+      label = [],
+      value: defaultValue = [],
+    } = customModelAttributeObj;
+    const customModelAttribute = getCustomModelAttribute(
+      customModelAttributeId,
+    );
+    const { name: customModelAttributeName, validations: { required } = {} } =
+      customModelAttribute || {};
     const { kind, values: listValues } = getProperty(property) || {};
+    const [currentValue, setCurrentValue] = useState(useText(defaultValue));
     const labelText = useText(label);
 
     const textFieldProps = {
@@ -68,13 +81,6 @@
       helperText: helper,
       classes: { root: classes.formControl },
     };
-
-    const customModelAttribute = getCustomModelAttribute(
-      customModelAttributeId,
-    );
-
-    const customModelAttributeName =
-      customModelAttribute && customModelAttribute.name;
 
     const searchProp = getProperty(searchProperty) || {};
     const valueProp = getProperty(valueProperty) || {};
@@ -132,7 +138,7 @@
     };
 
     const { loading, error: err, data, refetch } =
-      model && useGetAll(model, { ...useFilter, skip: 0, take: 50 });
+      model && useAllQuery(model, { ...useFilter, skip: 0, take: 50 });
 
     useEffect(() => {
       if (!isDev && data) {
@@ -163,12 +169,19 @@
       };
     }, [searchParam]);
 
-    const mounted = useRef(true);
+    const mounted = useRef(false);
+
     useEffect(() => {
-      if (!mounted.current && loading) {
+      mounted.current = true;
+      return () => {
+        mounted.current = false;
+      };
+    }, []);
+
+    useEffect(() => {
+      if (mounted.current && loading) {
         B.triggerEvent('onLoad', loading);
       }
-      mounted.current = false;
     }, [loading]);
 
     if (err && !displayError) {

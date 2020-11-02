@@ -1,14 +1,14 @@
 {
   "name": "component-set",
-  "version": "1.35.1",
+  "version": "1.51.0",
   "main": "dist/templates.json",
   "license": "UNLICENSED",
   "private": false,
   "devDependencies": {
-    "@betty-blocks/cli": "^23.14.0",
-    "@commitlint/cli": "^8.3.5",
-    "@commitlint/config-angular": "^8.3.4",
-    "@commitlint/prompt-cli": "^8.3.5",
+    "@betty-blocks/cli": "^23.17.0",
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-angular": "^11.0.0",
+    "@commitlint/prompt-cli": "^11.0.0",
     "eslint": "^5.9.0",
     "eslint-config-airbnb": "17.1.0",
     "eslint-config-prettier": "^3.3.0",
@@ -32,7 +32,7 @@
   "scripts": {
     "start": "bb components serve -p 5002",
     "build": "bb components build",
-    "dev": "nodemon --watch src --exec 'yarn build && yarn start'",
+    "dev": "nodemon --watch src --exec \"yarn build && yarn start\"",
     "lint": "eslint --ext js ./src",
     "prettier:base": "prettier --single-quote",
     "prettier:check": "yarn prettier:base --list-different \"src/**/*.js\"",

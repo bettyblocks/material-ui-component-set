@@ -7,25 +7,13 @@
       name: 'AutoComplete',
       options: [
         {
-          value: { label: ['Label'] },
+          value: { label: ['Autocomplete'], value: [] },
           label: 'Label',
           key: 'customModelAttribute',
           type: 'CUSTOM_MODEL_ATTRIBUTE',
           configuration: {
             allowedTypes: ['string'],
-            condition: {
-              type: 'SHOW',
-              option: 'property',
-              comparator: 'EQ',
-              value: '',
-            },
           },
-        },
-        {
-          value: [],
-          label: 'Value',
-          key: 'defaultValue',
-          type: 'VARIABLE',
         },
         {
           label: 'Option type',
@@ -135,12 +123,6 @@
           label: 'Free solo',
           key: 'freeSolo',
           value: false,
-        },
-        {
-          value: false,
-          label: 'Required',
-          key: 'required',
-          type: 'TOGGLE',
         },
         {
           value: false,

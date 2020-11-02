@@ -5,9 +5,7 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const {
-      required,
       disabled,
-      defaultValue,
       variant,
       size,
       fullWidth,
@@ -29,38 +27,49 @@
     const { TextField, MenuItem } = window.MaterialUI.Core;
     const displayError = showError === 'built-in';
     const isDev = B.env === 'dev';
-    const { useGetAll, getProperty, useText, getCustomModelAttribute } = B;
-    const [currentValue, setCurrentValue] = useState(useText(defaultValue));
+    const { useAllQuery, getProperty, useText, getCustomModelAttribute } = B;
     const [errorState, setErrorState] = useState(false);
     const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
 
     const { kind, values = [] } = getProperty(property) || {};
 
-    const { id: customModelAttributeId, label } = customModelAttributeObj;
+    const {
+      id: customModelAttributeId,
+      label = [],
+      value: defaultValue = [],
+    } = customModelAttributeObj;
 
+    const [currentValue, setCurrentValue] = useState(useText(defaultValue));
     const labelText = useText(label);
     const nameAttributeValue = useText(nameAttribute);
 
     const customModelAttribute = getCustomModelAttribute(
       customModelAttributeId,
     );
-    const customModelAttributeName =
-      customModelAttribute && customModelAttribute.name;
+    const { name: customModelAttributeName, validations: { required } = {} } =
+      customModelAttribute || {};
     const value = currentValue;
 
     const { name: labelName } = getProperty(labelProp) || {};
     const { name: propName } = getProperty(valueProp) || {};
 
     const { loading, error, data, refetch } =
-      model && useGetAll(model, { filter, skip: 0, take: 50 });
+      model && useAllQuery(model, { filter, skip: 0, take: 50 });
 
-    const mounted = useRef(true);
+    const mounted = useRef(false);
+
     useEffect(() => {
-      if (!mounted.current && loading) {
+      mounted.current = true;
+      return () => {
+        mounted.current = false;
+      };
+    }, []);
+
+    useEffect(() => {
+      if (mounted.current && loading) {
         B.triggerEvent('onLoad', loading);
       }
-      mounted.current = false;
     }, [loading]);
 
     if (error && !displayError) {

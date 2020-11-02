@@ -8,6 +8,7 @@
     const { Box } = window.MaterialUI.Core;
     const {
       alignment,
+      valignment,
       transparent,
       backgroundColor,
       borderColor,
@@ -20,14 +21,15 @@
     const isEmpty = isDev && children.length === 0;
     const isPristine =
       isEmpty && !hasBackgroundColor && !hasBorderColor && !hasBackgroundImage;
-    const isFlex = alignment !== 'none';
+    const isFlex = alignment !== 'none' || valignment !== 'none';
     const opac = transparent ? 0 : 1;
     const [opacity, setOpacity] = useState(opac);
 
     const boxOptions = {
       display: isFlex && 'flex',
-      justifyContent: isFlex && alignment,
+      justifyContent: alignment !== 'none' && alignment,
       flexDirection: isFlex && 'row',
+      alignItems: valignment !== 'none' && valignment,
     };
 
     const handleClick = () => {
@@ -89,6 +91,7 @@
         flexShrink: ({ options: { stretch } }) => (stretch ? 1 : 0),
         flexGrow: ({ options: { stretch } }) => (stretch ? 1 : 0),
         height: ({ options: { height } }) => height,
+        minHeight: 0,
         flexBasis: 'auto',
         flexDirection: 'column',
         alignContent: 'stretch',
@@ -108,6 +111,7 @@
       root: {
         boxSizing: 'border-box',
         height: ({ options: { height } }) => (isDev ? '100%' : height),
+        minHeight: 0,
         position: ({ options: { position } }) =>
           (!isDev && position) || 'relative',
         top: ({ options: { top } }) => !isDev && top,

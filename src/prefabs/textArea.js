@@ -7,27 +7,12 @@
       name: 'TextField',
       options: [
         {
-          value: { label: ['Label'] },
+          value: { label: ['Textarea'], value: [] },
           label: 'Label',
           key: 'customModelAttribute',
           type: 'CUSTOM_MODEL_ATTRIBUTE',
           configuration: {
             allowedTypes: ['string'],
-            condition: {
-              type: 'SHOW',
-              option: 'property',
-              comparator: 'EQ',
-              value: '',
-            },
-          },
-        },
-        {
-          value: [],
-          label: 'Value',
-          key: 'defaultValue',
-          type: 'VARIABLE',
-          configuration: {
-            as: 'MULTILINE',
           },
         },
         {
@@ -35,20 +20,6 @@
           label: 'Validation options',
           key: 'validationOptions',
           type: 'TOGGLE',
-        },
-        {
-          value: false,
-          label: 'Required',
-          key: 'required',
-          type: 'TOGGLE',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'validationOptions',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
         },
         {
           label: 'Validation pattern',

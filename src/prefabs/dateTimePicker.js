@@ -7,18 +7,12 @@
       name: 'DateTimePicker',
       options: [
         {
-          value: { label: ['Date time'] },
+          value: { label: ['Date time'], value: [] },
           label: 'Label',
           key: 'customModelAttribute',
           type: 'CUSTOM_MODEL_ATTRIBUTE',
           configuration: {
             allowedTypes: ['date_time'],
-            condition: {
-              type: 'SHOW',
-              option: 'property',
-              comparator: 'EQ',
-              value: '',
-            },
           },
         },
         {
@@ -40,12 +34,6 @@
           label: 'Disable Toolbar',
           key: 'disableToolbar',
           value: false,
-        },
-        {
-          value: [],
-          label: 'Value',
-          key: 'defaultValue',
-          type: 'VARIABLE',
         },
         {
           value: 'MM/dd/yyyy HH:mm:ss',
@@ -89,12 +77,6 @@
               value: 'datetime',
             },
           },
-        },
-        {
-          value: false,
-          label: 'Required',
-          key: 'required',
-          type: 'TOGGLE',
         },
         {
           value: false,

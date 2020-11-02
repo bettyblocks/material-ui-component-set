@@ -43,3 +43,10 @@ https://github.com/bettyblocks/cli/wiki/Usage#start-the-development-server
 6.  Once testing is complete, the techsupport ticket will be promoted to ready for acceptance and you can create a pull request to `acceptance`.
 
 7.  When your work is merged into `acceptance`, you can assume that it will be released with the next release.
+
+## Commit messages
+
+Commit messages should be descriptive in what kind of problem it solves or feature it implements.
+Like `fix: this solves this bug` or `feat: implemented this feature`
+
+Further guidelines about git messages are available here: https://github.com/conventional-changelog/commitlint/tree/master/@commitlint/config-conventional

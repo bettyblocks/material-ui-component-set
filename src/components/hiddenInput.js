@@ -5,8 +5,6 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const {
-      defaultValue,
-      required,
       disabled,
       customModelAttribute: customModelAttributeObj,
       nameAttribute,
@@ -14,13 +12,16 @@
 
     const { useText, env, getCustomModelAttribute } = B;
     const isDev = env === 'dev';
-    const [currentValue, setCurrentValue] = useState(useText(defaultValue));
-    const { id: customModelAttributeId } = customModelAttributeObj;
+    const {
+      id: customModelAttributeId,
+      value: defaultValue = [''],
+    } = customModelAttributeObj;
     const customModelAttribute = getCustomModelAttribute(
       customModelAttributeId,
     );
-    const customModelAttributeName =
-      customModelAttribute && customModelAttribute.name;
+    const [currentValue, setCurrentValue] = useState(useText(defaultValue));
+    const { name: customModelAttributeName, validations: { required } = {} } =
+      customModelAttribute || {};
     const nameAttributeValue = useText(nameAttribute);
 
     useEffect(() => {

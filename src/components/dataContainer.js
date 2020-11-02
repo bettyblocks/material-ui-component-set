@@ -15,8 +15,20 @@
           authProfile,
           redirectWithoutResult,
           showError,
+          currentRecord,
         } = options;
         const displayError = showError === 'built-in';
+
+        const getFilter = React.useCallback(() => {
+          if (isDev || !currentRecord || !model) {
+            return filter;
+          }
+
+          const idProperty = B.getIdProperty(model);
+          return {
+            [idProperty.id]: { eq: currentRecord },
+          };
+        }, [isDev, filter, currentRecord, model]);
 
         const builderLayout = () => (
           <>
@@ -44,7 +56,7 @@
           }
 
           return (
-            <B.GetOne modelId={model} filter={filter}>
+            <B.GetOne modelId={model} filter={getFilter()}>
               {({ loading, error, data }) => {
                 if (loading) {
                   B.triggerEvent('onLoad', loading);
@@ -81,7 +93,22 @@
         if (authProfile) {
           return (
             <B.GetMe authenticationProfileId={authProfile}>
-              {canvasLayout()}
+              {({ loading, error, data }) => {
+                if (loading) {
+                  B.triggerEvent('onUserLoad');
+                }
+                if (error) {
+                  B.triggerEvent('onUserError', error.message);
+                }
+
+                if (data && data.id) {
+                  B.triggerEvent('onUserSuccess', data);
+                } else {
+                  B.triggerEvent('onNoUserResults');
+                }
+
+                return canvasLayout();
+              }}
             </B.GetMe>
           );
         }

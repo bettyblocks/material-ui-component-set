@@ -7,18 +7,12 @@
       name: 'DateTimePicker',
       options: [
         {
-          value: { label: ['Time'] },
+          value: { label: ['Time'], value: [] },
           label: 'Label',
           key: 'customModelAttribute',
           type: 'CUSTOM_MODEL_ATTRIBUTE',
           configuration: {
             allowedTypes: ['string'],
-            condition: {
-              type: 'SHOW',
-              option: 'property',
-              comparator: 'EQ',
-              value: '',
-            },
           },
         },
         {
@@ -42,12 +36,6 @@
           value: false,
         },
         {
-          value: [],
-          label: 'Value',
-          key: 'defaultValue',
-          type: 'VARIABLE',
-        },
-        {
           value: 'HH:mm:ss',
           label: 'Format',
           key: 'timeFormat',
@@ -57,12 +45,6 @@
           value: true,
           label: 'Use 24-hour format',
           key: 'use24HourClockTime',
-          type: 'TOGGLE',
-        },
-        {
-          value: false,
-          label: 'Required',
-          key: 'required',
           type: 'TOGGLE',
         },
         {

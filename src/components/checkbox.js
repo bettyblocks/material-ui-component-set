@@ -5,9 +5,8 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const {
+      error,
       disabled,
-      defaultValue,
-      required,
       position,
       size,
       helperText,
@@ -18,17 +17,21 @@
     const { useText, getCustomModelAttribute } = B;
     const isDev = B.env === 'dev';
 
-    const componentChecked = useText(defaultValue);
-    const [checked, setChecked] = useState(componentChecked === 'true');
-    const [errorState, setErrorState] = useState(false);
+    const [errorState, setErrorState] = useState(error);
     const [helper, setHelper] = useState(useText(helperText));
-    const { id: customModelAttributeId, label } = customModelAttributeObj;
+    const {
+      id: customModelAttributeId,
+      label = [],
+      value: defaultValue = [],
+    } = customModelAttributeObj;
     const customModelAttribute = getCustomModelAttribute(
       customModelAttributeId,
     );
-    const customModelAttributeName =
-      customModelAttribute && customModelAttribute.name;
+    const { name: customModelAttributeName, validations: { required } = {} } =
+      customModelAttribute || {};
     const labelText = useText(label);
+    const componentChecked = useText(defaultValue);
+    const [checked, setChecked] = useState(componentChecked === 'true');
     const nameAttributeValue = useText(nameAttribute);
 
     const {
@@ -71,7 +74,11 @@
     );
 
     const Control = (
-      <FormControl required={required} error={errorState}>
+      <FormControl
+        required={required}
+        error={errorState}
+        classes={{ root: classes.formControl }}
+      >
         <FormControlLabel
           control={Checkbox}
           label={labelText}
@@ -82,11 +89,78 @@
     );
     return isDev ? <div className={classes.root}>{Control}</div> : Control;
   })(),
-  styles: () => () => ({
-    root: {
-      '& > *': {
-        pointerEvents: 'none',
+  styles: B => t => {
+    const style = new B.Styling(t);
+    const { color: colorFunc } = B;
+    const getOpacColor = (col, val) => colorFunc.alpha(col, val);
+    return {
+      root: {
+        '& > *': {
+          pointerEvents: 'none',
+        },
       },
-    },
-  }),
+      formControl: {
+        '& > legend': {
+          '&.Mui-error': {
+            color: ({ options: { errorColor } }) => [
+              style.getColor(errorColor),
+              '!important',
+            ],
+          },
+          '&.Mui-disabled': {
+            pointerEvents: 'none',
+            opacity: '0.7',
+          },
+        },
+        '& > p': {
+          color: ({ options: { helperColor } }) => [
+            style.getColor(helperColor),
+            '!important',
+          ],
+          '&.Mui-error': {
+            color: ({ options: { errorColor } }) => [
+              style.getColor(errorColor),
+              '!important',
+            ],
+          },
+        },
+        '& .MuiFormControlLabel-root': {
+          '& .MuiCheckbox-root': {
+            color: ({ options: { checkboxColor } }) => [
+              style.getColor(checkboxColor),
+              '!important',
+            ],
+            '&:hover': {
+              backgroundColor: ({ options: { checkboxColor } }) => [
+                getOpacColor(style.getColor(checkboxColor), 0.04),
+                '!important',
+              ],
+            },
+            '&.Mui-checked': {
+              color: ({ options: { checkboxColorChecked } }) => [
+                style.getColor(checkboxColorChecked),
+                '!important',
+              ],
+              '&:hover': {
+                backgroundColor: ({ options: { checkboxColorChecked } }) => [
+                  getOpacColor(style.getColor(checkboxColorChecked), 0.04),
+                  '!important',
+                ],
+              },
+            },
+          },
+          '& .MuiTypography-root': {
+            color: ({ options: { textColor } }) => [
+              style.getColor(textColor),
+              '!important',
+            ],
+          },
+          '&.Mui-disabled': {
+            pointerEvents: 'none',
+            opacity: '0.7',
+          },
+        },
+      },
+    };
+  },
 }))();

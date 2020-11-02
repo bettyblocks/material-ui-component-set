@@ -5,8 +5,6 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const {
-      defaultValue,
-      required,
       disabled,
       error,
       multiline,
@@ -49,19 +47,24 @@
     const { useText, env, getCustomModelAttribute } = B;
     const isDev = env === 'dev';
     const isNumberType = type === 'number';
-    const [currentValue, setCurrentValue] = useState(useText(defaultValue));
     const [isDisabled, setIsDisabled] = useState(disabled);
     const [showPassword, togglePassword] = useState(false);
     const [errorState, setErrorState] = useState(error);
     const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
-    const { id: customModelAttributeId, label } = customModelAttributeObj;
+    const {
+      id: customModelAttributeId,
+      label = [],
+      value: defaultValue = [],
+    } = customModelAttributeObj;
+    const [currentValue, setCurrentValue] = useState(useText(defaultValue));
     const labelText = useText(label);
     const customModelAttribute = getCustomModelAttribute(
       customModelAttributeId,
     );
-    const customModelAttributeName =
-      customModelAttribute && customModelAttribute.name;
+
+    const { name: customModelAttributeName, validations: { required } = {} } =
+      customModelAttribute || {};
     const nameAttributeValue = useText(nameAttribute);
 
     const validPattern = pattern || null;
@@ -166,7 +169,8 @@
     const passwordIcon = showPassword ? 'Visibility' : 'VisibilityOff';
     const inputIcon = type === 'password' ? passwordIcon : adornmentIcon;
     const hasIcon = inputIcon && inputIcon !== 'none';
-    const hasAdornment = adornment || hasIcon;
+    const hasAdornment =
+      type === 'password' ? adornment && hasIcon : adornment || hasIcon;
 
     const IconCmp =
       hasIcon &&
@@ -277,8 +281,6 @@
           style.getColor(labelColor),
           '!important',
         ],
-        zIndex: ({ options: { variant } }) =>
-          variant === 'standard' ? 1 : null,
         '&.Mui-focused': {
           color: ({ options: { borderFocusColor } }) => [
             style.getColor(borderFocusColor),
@@ -314,10 +316,11 @@
             style.getColor(textColor),
             '!important',
           ],
-          backgroundColor: ({ options: { backgroundColor } }) => [
-            style.getColor(backgroundColor),
-            '!important',
-          ],
+          backgroundColor: ({ options: { backgroundColor, variant } }) =>
+            variant !== 'standard' && [
+              style.getColor(backgroundColor),
+              '!important',
+            ],
           '&:hover': {
             '& .MuiOutlinedInput-notchedOutline, & .MuiFilledInput-underline, & .MuiInput-underline': {
               borderColor: ({ options: { borderHoverColor } }) => [

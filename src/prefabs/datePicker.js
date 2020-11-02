@@ -7,18 +7,12 @@
       name: 'DateTimePicker',
       options: [
         {
-          value: { label: ['Date'] },
+          value: { label: ['Date'], value: [] },
           label: 'Label',
           key: 'customModelAttribute',
           type: 'CUSTOM_MODEL_ATTRIBUTE',
           configuration: {
             allowedTypes: ['date'],
-            condition: {
-              type: 'SHOW',
-              option: 'property',
-              comparator: 'EQ',
-              value: '',
-            },
           },
         },
         {
@@ -42,22 +36,10 @@
           value: false,
         },
         {
-          value: [],
-          label: 'Value',
-          key: 'defaultValue',
-          type: 'VARIABLE',
-        },
-        {
           value: 'MM/dd/yyyy',
           label: 'Format',
           key: 'dateFormat',
           type: 'TEXT',
-        },
-        {
-          value: false,
-          label: 'Required',
-          key: 'required',
-          type: 'TOGGLE',
         },
         {
           value: false,
