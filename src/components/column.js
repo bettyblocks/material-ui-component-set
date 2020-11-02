@@ -7,7 +7,7 @@
     <div
       className={[
         classes.column,
-        options.show || B.env === 'dev' ? '' : classes.hide,
+        options.visible || B.env === 'dev' ? '' : classes.hide,
       ].join(' ')}
     >
       {(() => {
