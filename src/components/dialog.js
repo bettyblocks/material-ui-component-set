@@ -43,6 +43,7 @@
         fullWidth
         maxWidth={width}
         aria-labelledby="modal-dialog"
+        keepMounted
       >
         {children}
       </Dialog>

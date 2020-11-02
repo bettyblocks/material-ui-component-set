@@ -17,6 +17,7 @@
           authProfile,
           redirectWithoutResult,
           showError,
+          currentRecord,
         } = options;
         const displayError = showError === 'built-in';
 
@@ -39,6 +40,17 @@
           );
         };
 
+        const getFilter = React.useCallback(() => {
+          if (isDev || !currentRecord || !model) {
+            return filter;
+          }
+
+          const idProperty = B.getIdProperty(model);
+          return {
+            [idProperty.id]: { eq: currentRecord },
+          };
+        }, [isDev, filter, currentRecord, model]);
+
         if (isDev) {
           return <BuilderLayout />;
         }
@@ -58,7 +70,7 @@
 
         const One = ({ modelId }) => {
           const { loading, data, error, refetch } = useOneQuery(modelId, {
-            filter,
+            filter: getFilter(),
           });
 
           B.defineFunction('Refetch', () => {
