@@ -1,3 +1,10 @@
+## [1.51.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.51.0...v1.51.1) (2020-11-02)
+
+
+### Bug Fixes
+
+* keep dialog mounted in dom for interactions ([b3bb163](https://github.com/bettyblocks/material-ui-component-set/commit/b3bb163d16e8ed96fcfe81dee9411136c3e06302))
+
 # [1.51.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.50.1...v1.51.0) (2020-10-30)
 
 
