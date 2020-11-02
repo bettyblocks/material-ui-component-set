@@ -7,10 +7,13 @@
       name: 'Dialog',
       options: [
         {
-          type: 'TOGGLE',
-          label: 'Visibility',
+          label: 'Toggle visibility',
           key: 'isVisible',
           value: true,
+          type: 'TOGGLE',
+          configuration: {
+            as: 'VISIBILITY',
+          },
         },
         {
           type: 'TOGGLE',
@@ -152,10 +155,13 @@
                   name: 'Column',
                   options: [
                     {
-                      type: 'TOGGLE',
-                      label: 'Visible',
-                      key: 'show',
+                      label: 'Toggle visibility',
+                      key: 'visible',
                       value: true,
+                      type: 'TOGGLE',
+                      configuration: {
+                        as: 'VISIBILITY',
+                      },
                     },
                     {
                       value: 'flexible',
@@ -323,6 +329,12 @@
                       label: 'Inner space',
                       key: 'innerSpacing',
                       type: 'SIZES',
+                    },
+                    {
+                      type: 'TOGGLE',
+                      label: 'Allow overflow',
+                      key: 'overflow',
+                      value: false,
                     },
                   ],
                   descendants: [
@@ -728,6 +740,15 @@
                         {
                           name: 'Button',
                           options: [
+                            {
+                              label: 'Toggle visibility',
+                              key: 'visible',
+                              value: true,
+                              type: 'TOGGLE',
+                              configuration: {
+                                as: 'VISIBILITY',
+                              },
+                            },
                             {
                               type: 'CUSTOM',
                               label: 'variant',
@@ -2166,12 +2187,6 @@
                               value: false,
                               type: 'TOGGLE',
                             },
-                            {
-                              label: 'Visible',
-                              key: 'visible',
-                              value: true,
-                              type: 'TOGGLE',
-                            },
                           ],
                           descendants: [],
                         },
@@ -2224,10 +2239,13 @@
                           name: 'Column',
                           options: [
                             {
-                              type: 'TOGGLE',
-                              label: 'Visible',
-                              key: 'show',
+                              label: 'Toggle visibility',
+                              key: 'visible',
                               value: true,
+                              type: 'TOGGLE',
+                              configuration: {
+                                as: 'VISIBILITY',
+                              },
                             },
                             {
                               value: 'flexible',
@@ -2395,6 +2413,12 @@
                               label: 'Inner space',
                               key: 'innerSpacing',
                               type: 'SIZES',
+                            },
+                            {
+                              type: 'TOGGLE',
+                              label: 'Allow overflow',
+                              key: 'overflow',
+                              value: false,
                             },
                           ],
                           descendants: [
@@ -2806,6 +2830,15 @@
                         {
                           name: 'Button',
                           options: [
+                            {
+                              label: 'Toggle visibility',
+                              key: 'visible',
+                              value: true,
+                              type: 'TOGGLE',
+                              configuration: {
+                                as: 'VISIBILITY',
+                              },
+                            },
                             {
                               type: 'CUSTOM',
                               label: 'variant',
@@ -4244,18 +4277,21 @@
                               value: false,
                               type: 'TOGGLE',
                             },
-                            {
-                              label: 'Visible',
-                              key: 'visible',
-                              value: true,
-                              type: 'TOGGLE',
-                            },
                           ],
                           descendants: [],
                         },
                         {
                           name: 'Button',
                           options: [
+                            {
+                              label: 'Toggle visibility',
+                              key: 'visible',
+                              value: true,
+                              type: 'TOGGLE',
+                              configuration: {
+                                as: 'VISIBILITY',
+                              },
+                            },
                             {
                               type: 'CUSTOM',
                               label: 'variant',
@@ -5692,12 +5728,6 @@
                               label: 'Disabled',
                               key: 'disabled',
                               value: false,
-                              type: 'TOGGLE',
-                            },
-                            {
-                              label: 'Visible',
-                              key: 'visible',
-                              value: true,
                               type: 'TOGGLE',
                             },
                           ],

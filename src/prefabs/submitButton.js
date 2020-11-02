@@ -7,6 +7,15 @@
       name: 'Button',
       options: [
         {
+          label: 'Toggle visibility',
+          key: 'visible',
+          value: true,
+          type: 'TOGGLE',
+          configuration: {
+            as: 'VISIBILITY',
+          },
+        },
+        {
           type: 'CUSTOM',
           label: 'type',
           key: 'type',
@@ -39,6 +48,7 @@
               { name: 'Text', value: 'text' },
               { name: 'Outlined', value: 'outlined' },
               { name: 'Contained', value: 'contained' },
+              { name: 'Icon', value: 'icon' },
             ],
           },
         },
@@ -1373,12 +1383,6 @@
           label: 'Disabled',
           key: 'disabled',
           value: false,
-          type: 'TOGGLE',
-        },
-        {
-          label: 'Visible',
-          key: 'visible',
-          value: true,
           type: 'TOGGLE',
         },
       ],

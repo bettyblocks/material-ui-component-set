@@ -117,7 +117,15 @@
             {
               name: 'Column',
               options: [
-                { type: 'TOGGLE', label: 'Visible', key: 'show', value: true },
+                {
+                  label: 'Toggle visibility',
+                  key: 'visible',
+                  value: true,
+                  type: 'TOGGLE',
+                  configuration: {
+                    as: 'VISIBILITY',
+                  },
+                },
                 {
                   value: 'flexible',
                   label: 'Column width',
@@ -284,6 +292,12 @@
                   label: 'Inner space',
                   key: 'innerSpacing',
                   type: 'SIZES',
+                },
+                {
+                  type: 'TOGGLE',
+                  label: 'Allow overflow',
+                  key: 'overflow',
+                  value: false,
                 },
               ],
               descendants: [],
