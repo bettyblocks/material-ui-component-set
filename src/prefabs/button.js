@@ -7,6 +7,15 @@
       name: 'Button',
       options: [
         {
+          label: 'Toggle visibility',
+          key: 'visible',
+          value: true,
+          type: 'TOGGLE',
+          configuration: {
+            as: 'VISIBILITY',
+          },
+        },
+        {
           type: 'CUSTOM',
           label: 'variant',
           key: 'variant',
@@ -1458,15 +1467,6 @@
           key: 'disabled',
           value: false,
           type: 'TOGGLE',
-        },
-        {
-          label: 'Toggle visibility',
-          key: 'visible',
-          value: true,
-          type: 'TOGGLE',
-          configuration: {
-            as: 'VISIBILITY',
-          },
         },
       ],
       descendants: [],
