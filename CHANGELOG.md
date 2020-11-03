@@ -1,3 +1,10 @@
+## [1.51.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.51.1...v1.51.2) (2020-11-03)
+
+
+### Bug Fixes
+
+* autocomplete multiselect labels are selected with default value ([c179e02](https://github.com/bettyblocks/material-ui-component-set/commit/c179e02e54a7ae400b105a0e1f1b41676d612186))
+
 ## [1.51.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.51.0...v1.51.1) (2020-11-02)
 
 
