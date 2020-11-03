@@ -20,6 +20,10 @@
           switch (compare) {
             case 'neq':
               return left !== right;
+            case 'contains':
+              return left.indexOf(right) !== -1;
+            case 'ncontains':
+              return left.indexOf(right) === -1;
             case 'gt':
               return leftAsNumber > rightAsNumber;
             case 'lt':
