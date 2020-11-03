@@ -35,7 +35,7 @@
               },
               {
                 name: 'Does not contain',
-                value: 'ncontains',
+                value: 'notcontains',
               },
               {
                 name: 'Greater than',
