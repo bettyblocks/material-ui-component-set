@@ -1,3 +1,10 @@
+# [1.52.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.51.2...v1.52.0) (2020-11-03)
+
+
+### Features
+
+* add contains and not contains filters to conditional ([714f945](https://github.com/bettyblocks/material-ui-component-set/commit/714f94508889c7fb4393f250c2b9c5c043eb11ac))
+
 ## [1.51.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.51.1...v1.51.2) (2020-11-03)
 
 
