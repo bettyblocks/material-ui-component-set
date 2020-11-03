@@ -25,7 +25,7 @@
     const isImage = type === 'img' && imgUrl;
     const isVideo = type === 'video' && videoUrl;
     const isIframe = type === 'iframe' && iframeUrl;
-    const isEmpty = !titleText && !isImage && !isVideo && !isIframe;
+    const isEmpty = !isImage && !isVideo && !isIframe;
 
     const variable = imageSource && imageSource.findIndex(v => v.name) !== -1;
     const variableDev = env === 'dev' && (variable || !imgUrl);
