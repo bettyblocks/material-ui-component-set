@@ -38,7 +38,8 @@
 
     const min = parseInt(useText(minValue), 10) || 0;
     const max = parseInt(useText(maxValue), 10) || 100;
-    const currentValue = parseInt(useText(value), 10) || 50;
+    const currentValue =
+      parseInt(useText(value), 10) || (env === 'dev' ? 50 : 0);
     const currentValueBuffer = parseInt(useText(valueBuffer), 10) || 0;
 
     const normalise = v => ((v - min) * 100) / (max - min);
