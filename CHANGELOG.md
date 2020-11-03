@@ -1,3 +1,24 @@
+## [1.51.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.51.0...v1.51.1) (2020-11-02)
+
+
+### Bug Fixes
+
+* keep dialog mounted in dom for interactions ([b3bb163](https://github.com/bettyblocks/material-ui-component-set/commit/b3bb163d16e8ed96fcfe81dee9411136c3e06302))
+
+# [1.51.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.50.1...v1.51.0) (2020-10-30)
+
+
+### Features
+
+* add minHeight to box component ([1fb6f2f](https://github.com/bettyblocks/material-ui-component-set/commit/1fb6f2f1cc709b5f87b6d6077d32427eb717f9b4))
+
+## [1.50.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.50.0...v1.50.1) (2020-10-30)
+
+
+### Bug Fixes
+
+* password visibility toggle ([5aa020f](https://github.com/bettyblocks/material-ui-component-set/commit/5aa020fddeb895c1ff7e4fd2957274da72b2a164))
+
 # [1.50.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.49.2...v1.50.0) (2020-10-30)
 
 
