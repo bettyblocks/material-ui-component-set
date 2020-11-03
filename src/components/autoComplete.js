@@ -346,6 +346,7 @@
         options={results}
         defaultValue={getDefaultValue(results)}
         getOptionLabel={renderLabel}
+        getOptionSelected={(option, value) => value.id === option.id}
         PopoverProps={{
           classes: {
             root: classes.popover,
