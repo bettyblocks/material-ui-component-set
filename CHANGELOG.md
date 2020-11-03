@@ -1,3 +1,51 @@
+# [1.53.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.52.0...v1.53.0) (2020-11-03)
+
+
+### Bug Fixes
+
+* autocomplete multiselect labels are selected with default value ([ef58712](https://github.com/bettyblocks/material-ui-component-set/commit/ef587126a56674374b85961ff451f413a200fe05))
+
+
+### Features
+
+* add consistent container spacing options ([f9add32](https://github.com/bettyblocks/material-ui-component-set/commit/f9add32b182455b36dbd5373c51b7563a94f4cbf))
+* add contains and not contains filters to conditional ([54f0352](https://github.com/bettyblocks/material-ui-component-set/commit/54f035210536d15ef2f9f6a366792591cab34d8d))
+
+# [1.52.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.51.2...v1.52.0) (2020-11-03)
+
+
+### Features
+
+* add contains and not contains filters to conditional ([714f945](https://github.com/bettyblocks/material-ui-component-set/commit/714f94508889c7fb4393f250c2b9c5c043eb11ac))
+
+## [1.51.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.51.1...v1.51.2) (2020-11-03)
+
+
+### Bug Fixes
+
+* autocomplete multiselect labels are selected with default value ([c179e02](https://github.com/bettyblocks/material-ui-component-set/commit/c179e02e54a7ae400b105a0e1f1b41676d612186))
+
+## [1.51.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.51.0...v1.51.1) (2020-11-02)
+
+
+### Bug Fixes
+
+* keep dialog mounted in dom for interactions ([b3bb163](https://github.com/bettyblocks/material-ui-component-set/commit/b3bb163d16e8ed96fcfe81dee9411136c3e06302))
+
+# [1.51.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.50.1...v1.51.0) (2020-10-30)
+
+
+### Features
+
+* add minHeight to box component ([1fb6f2f](https://github.com/bettyblocks/material-ui-component-set/commit/1fb6f2f1cc709b5f87b6d6077d32427eb717f9b4))
+
+## [1.50.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.50.0...v1.50.1) (2020-10-30)
+
+
+### Bug Fixes
+
+* password visibility toggle ([5aa020f](https://github.com/bettyblocks/material-ui-component-set/commit/5aa020fddeb895c1ff7e4fd2957274da72b2a164))
+
 # [1.50.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.49.2...v1.50.0) (2020-10-30)
 
 

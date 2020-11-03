@@ -30,6 +30,14 @@
                 value: 'neq',
               },
               {
+                name: 'Contains',
+                value: 'contains',
+              },
+              {
+                name: 'Does not contain',
+                value: 'notcontains',
+              },
+              {
                 name: 'Greater than',
                 value: 'gt',
               },
