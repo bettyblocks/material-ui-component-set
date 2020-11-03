@@ -142,8 +142,8 @@
     const orderByArray = [orderBy].flat();
     const sort =
       !isDev && orderBy
-        ? orderByArray.reduceRight((acc, property, index) => {
-            const prop = getProperty(property);
+        ? orderByArray.reduceRight((acc, orderByProperty, index) => {
+            const prop = getProperty(orderByProperty);
             return index === orderByArray.length - 1
               ? { [prop.name]: order.toUpperCase() }
               : { [prop.name]: acc };
