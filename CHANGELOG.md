@@ -1,3 +1,16 @@
+# [1.53.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.52.0...v1.53.0) (2020-11-03)
+
+
+### Bug Fixes
+
+* autocomplete multiselect labels are selected with default value ([ef58712](https://github.com/bettyblocks/material-ui-component-set/commit/ef587126a56674374b85961ff451f413a200fe05))
+
+
+### Features
+
+* add consistent container spacing options ([f9add32](https://github.com/bettyblocks/material-ui-component-set/commit/f9add32b182455b36dbd5373c51b7563a94f4cbf))
+* add contains and not contains filters to conditional ([54f0352](https://github.com/bettyblocks/material-ui-component-set/commit/54f035210536d15ef2f9f6a366792591cab34d8d))
+
 # [1.52.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.51.2...v1.52.0) (2020-11-03)
 
 
