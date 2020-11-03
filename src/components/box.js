@@ -209,7 +209,7 @@
         },
         backgroundSize: ({ options: { backgroundSize } }) => backgroundSize,
         backgroundPosition: ({ options: { backgroundPosition } }) =>
-         backgroundPosition,
+          backgroundPosition,
         backgroundRepeat: ({ options: { backgroundRepeat } }) =>
           backgroundRepeat,
       },
