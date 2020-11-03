@@ -6,10 +6,10 @@
   jsx: (
     <div>
       {(() => {
-        const { useOneQuery, useMeQuery, ModelProvider, MeProvider } = B;
+        const { useOneQuery, useMeQuery, ModelProvider, MeProvider, env } = B;
 
         const isEmpty = children.length === 0;
-        const isDev = B.env === 'dev';
+        const isDev = env === 'dev';
         const isPristine = isEmpty && isDev;
         const {
           filter,
