@@ -348,7 +348,7 @@
             onClick={() => handleRowClick(value)}
             data-id={value.id}
           >
-            <B.InteractionScope>{children}</B.InteractionScope>
+            {children}
           </TableRow>
         </ModelProvider>
       ));
@@ -363,7 +363,7 @@
     const renderTableContent = () => {
       let tableContent = Array.from(Array(amountOfRows).keys()).map(idx => (
         <TableRow key={idx} classes={{ root: classes.bodyRow }}>
-          <B.InteractionScope>{children}</B.InteractionScope>
+          {children}
         </TableRow>
       ));
       if (isDev) {
