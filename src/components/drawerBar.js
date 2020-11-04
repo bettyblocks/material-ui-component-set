@@ -29,11 +29,9 @@
     );
     const activeTemporary = isTemporary || (isPersistent && !aboveBreakpoint);
 
-    useEffect(() => {
-      B.defineFunction('OpenDrawer', openDrawer);
-      B.defineFunction('CloseDrawer', closeDrawer);
-      B.defineFunction('ToggleDrawer', toggleDrawer);
-    }, []);
+    B.defineFunction('OpenDrawer', openDrawer);
+    B.defineFunction('CloseDrawer', closeDrawer);
+    B.defineFunction('ToggleDrawer', toggleDrawer);
 
     const TempDrawer = (
       <Drawer

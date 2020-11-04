@@ -173,13 +173,8 @@
       }
     }, [isDev, defaultValue]);
 
-    useEffect(() => {
-      B.defineFunction('Clear', () => setCurrentValue(null));
-    }, []);
-
-    useEffect(() => {
-      B.defineFunction('Refetch', () => refetch());
-    }, [refetch]);
+    B.defineFunction('Clear', () => setCurrentValue(null));
+    B.defineFunction('Refetch', () => refetch());
 
     useEffect(() => {
       const handler = setTimeout(() => {

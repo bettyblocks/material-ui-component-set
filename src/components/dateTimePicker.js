@@ -77,9 +77,7 @@
       }
     };
 
-    useEffect(() => {
-      B.defineFunction('Clear', () => setSelectedDate(''));
-    }, []);
+    B.defineFunction('Clear', () => setSelectedDate(''));
 
     let DateTimeComponent;
     let format;

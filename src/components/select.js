@@ -107,9 +107,7 @@
       }
     }
 
-    useEffect(() => {
-      B.defineFunction('Refetch', () => refetch());
-    }, [refetch]);
+    B.defineFunction('Refetch', () => refetch());
 
     const handleValidation = () => {
       const hasError = required && !value;
