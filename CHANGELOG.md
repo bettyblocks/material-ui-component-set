@@ -1,3 +1,10 @@
+# [1.54.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.53.0...v1.54.0) (2020-11-04)
+
+
+### Features
+
+* change datacontainer to use hooks ([065e8d2](https://github.com/bettyblocks/material-ui-component-set/commit/065e8d2453e280846da0dfdeea65b3c15f735472))
+
 # [1.53.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.52.0...v1.53.0) (2020-11-03)
 
 
