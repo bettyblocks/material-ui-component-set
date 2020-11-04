@@ -78,6 +78,7 @@
     const [previousSearchTerm, setPreviousSearchTerm] = useState('');
     const [newSearch, setNewSearch] = useState(false);
     const fetchingNextSet = useRef(false);
+    const [initialTimesFetched, setInitialTimesFetched] = useState(0);
     const amountOfRows = loadOnScroll ? autoLoadTakeAmountNum : rowsPerPage;
 
     const createSortObject = (fields, order) => {
@@ -389,7 +390,12 @@
         const tableContainerElement = tableContainerRef.current;
         if (loadOnScroll) {
           const parent = tableContainerElement.parentNode;
-          if (tableContainerElement.scrollHeight <= parent.clientHeight) {
+
+          if (
+            tableContainerElement.scrollHeight <= parent.clientHeight &&
+            initialTimesFetched < 5
+          ) {
+            setInitialTimesFetched(prev => prev + 1);
             fetchNextSet();
           }
           const scrollEvent = e => {
