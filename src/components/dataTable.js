@@ -167,11 +167,7 @@
           setPreviousSearchTerm(searchTerm);
           setNewSearch(true);
         } else {
-          if (newSearch) {
-            setResults(data.results);
-          } else {
-            setResults(prev => [...prev, ...data.results]);
-          }
+          setResults(data.results);
           fetchingNextSet.current = false;
           setNewSearch(false);
         }
