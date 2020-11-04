@@ -43,11 +43,9 @@
           setVisible(initialVisibility);
         }, [initialVisibility]);
 
-        useEffect(() => {
-          B.defineFunction('Hide', () => setVisible(false));
-          B.defineFunction('Show', () => setVisible(true));
-          B.defineFunction('Toggle', () => setVisible(s => !s));
-        }, []);
+        B.defineFunction('Hide', () => setVisible(false));
+        B.defineFunction('Show', () => setVisible(true));
+        B.defineFunction('Toggle', () => setVisible(s => !s));
 
         if (!visible) return null;
         return isPristine ? 'Conditional' : children;
