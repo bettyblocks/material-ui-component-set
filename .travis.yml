@@ -12,11 +12,13 @@ jobs:
         - yarn
         - yarn lint
       name: 'Lint'
+      if: (type == push) OR (type == pull_request AND fork == true)
     - script:
         - yarn
         - yarn bundle
         - yarn build
       name: 'Build'
+      if: (type == push) OR (type == pull_request AND fork == true)
 
     - stage: deploy_test_environment
       name: 'Publish Component Set on test environments'
