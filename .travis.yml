@@ -1,12 +1,6 @@
 language: node_js
 node_js: 14.2.0
 
-branches:
-  only:
-    - master
-    - acceptance
-    - edge
-
 jobs:
   include:
     - stage: linter
