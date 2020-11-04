@@ -91,6 +91,7 @@
         flexShrink: ({ options: { stretch } }) => (stretch ? 1 : 0),
         flexGrow: ({ options: { stretch } }) => (stretch ? 1 : 0),
         height: ({ options: { height } }) => height,
+        minHeight: 0,
         flexBasis: 'auto',
         flexDirection: 'column',
         alignContent: 'stretch',
@@ -110,6 +111,7 @@
       root: {
         boxSizing: 'border-box',
         height: ({ options: { height } }) => (isDev ? '100%' : height),
+        minHeight: 0,
         position: ({ options: { position } }) =>
           (!isDev && position) || 'relative',
         top: ({ options: { top } }) => !isDev && top,
