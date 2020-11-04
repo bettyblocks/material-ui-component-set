@@ -6,10 +6,8 @@
   jsx: (
     <div>
       {(() => {
-        const { useOneQuery, useMeQuery, ModelProvider, MeProvider, env } = B;
-
         const isEmpty = children.length === 0;
-        const isDev = env === 'dev';
+        const isDev = B.env === 'dev';
         const isPristine = isEmpty && isDev;
         const {
           filter,
@@ -20,25 +18,6 @@
           currentRecord,
         } = options;
         const displayError = showError === 'built-in';
-
-        const BuilderLayout = () => {
-          B.defineFunction('Refetch', () => {});
-
-          return (
-            <>
-              <div
-                className={[
-                  isEmpty ? classes.empty : '',
-                  isPristine ? classes.pristine : '',
-                ].join(' ')}
-              >
-                {isPristine
-                  ? 'Drag a component in the data container to display the data'
-                  : children}
-              </div>
-            </>
-          );
-        };
 
         const getFilter = React.useCallback(() => {
           if (isDev || !currentRecord || !model) {
@@ -51,91 +30,90 @@
           };
         }, [isDev, filter, currentRecord, model]);
 
-        if (isDev) {
-          return <BuilderLayout />;
-        }
-
-        const CanvasLayout = () => {
-          if (!model) {
-            return <BuilderLayout />;
-          }
-
-          return <One modelId={model} />;
-        };
+        const builderLayout = () => (
+          <>
+            <div
+              className={[
+                isEmpty ? classes.empty : '',
+                isPristine ? classes.pristine : '',
+              ].join(' ')}
+            >
+              {isPristine
+                ? 'Drag a component in the data container to display the data'
+                : children}
+            </div>
+          </>
+        );
 
         const redirect = () => {
           const history = useHistory();
           history.push(B.useEndpoint(redirectWithoutResult));
         };
 
-        const One = ({ modelId }) => {
-          const { loading, data, error, refetch } = useOneQuery(modelId, {
-            filter: getFilter(),
-          });
-
-          B.defineFunction('Refetch', () => {
-            refetch();
-          });
-
-          if (loading) {
-            B.triggerEvent('onLoad', loading);
-            return <span>Loading...</span>;
-          }
-
-          if (error && !displayError) {
-            B.triggerEvent('onError', error.message);
-          }
-          if (error && displayError) {
-            return <span>{error.message}</span>;
-          }
-
-          if (data && data.id) {
-            B.triggerEvent('onSuccess', data);
-          } else {
-            B.triggerEvent('onNoResults');
-          }
-
-          if (!data && redirectWithoutResult) {
-            redirect();
+        const canvasLayout = () => {
+          if (!model) {
+            return builderLayout();
           }
 
           return (
-            data && (
-              <ModelProvider value={data} id={model}>
-                {children}
-              </ModelProvider>
-            )
+            <B.GetOne modelId={model} filter={getFilter()}>
+              {({ loading, error, data }) => {
+                if (loading) {
+                  B.triggerEvent('onLoad', loading);
+                  return <span>Loading...</span>;
+                }
+
+                if (error && !displayError) {
+                  B.triggerEvent('onError', error.message);
+                }
+                if (error && displayError) {
+                  return <span>{error.message}</span>;
+                }
+
+                if (data && data.id) {
+                  B.triggerEvent('onSuccess', data);
+                } else {
+                  B.triggerEvent('onNoResults');
+                }
+
+                if (!data && redirectWithoutResult) {
+                  redirect();
+                }
+
+                return data && children;
+              }}
+            </B.GetOne>
           );
         };
 
-        const Me = ({ authenticationProfileId }) => {
-          const { data, loading, error } = useMeQuery(authenticationProfileId);
-
-          if (loading) {
-            B.triggerEvent('onUserLoad');
-          }
-          if (error) {
-            B.triggerEvent('onUserError', error.message);
-          }
-
-          if (data && data.id) {
-            B.triggerEvent('onUserSuccess', data);
-          } else {
-            B.triggerEvent('onNoUserResults');
-          }
-
-          return (
-            <MeProvider value={data} id={model}>
-              <CanvasLayout />
-            </MeProvider>
-          );
-        };
-
-        if (authProfile) {
-          return <Me authenticationProfileId={authProfile} />;
+        if (isDev) {
+          return builderLayout();
         }
 
-        return <CanvasLayout />;
+        if (authProfile) {
+          return (
+            <B.GetMe authenticationProfileId={authProfile}>
+              {({ loading, error, data }) => {
+                if (loading) {
+                  B.triggerEvent('onUserLoad');
+                }
+                if (error) {
+                  B.triggerEvent('onUserError', error.message);
+                }
+
+                if (data && data.id) {
+                  B.triggerEvent('onUserSuccess', data);
+                } else {
+                  B.triggerEvent('onNoUserResults');
+                }
+
+                return canvasLayout();
+              }}
+            </B.GetMe>
+          );
+        }
+
+        return canvasLayout();
       })()}
     </div>
   ),
