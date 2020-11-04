@@ -49,15 +49,7 @@
         {
           name: 'Column',
           options: [
-            {
-              label: 'Toggle visibility',
-              key: 'visible',
-              value: true,
-              type: 'TOGGLE',
-              configuration: {
-                as: 'VISIBILITY',
-              },
-            },
+            { type: 'TOGGLE', label: 'Visible', key: 'show', value: true },
             {
               value: '6',
               label: 'Column width',
@@ -224,12 +216,6 @@
               label: 'Inner space',
               key: 'innerSpacing',
               type: 'SIZES',
-            },
-            {
-              type: 'TOGGLE',
-              label: 'Allow overflow',
-              key: 'overflow',
-              value: false,
             },
           ],
           descendants: [],
@@ -237,15 +223,7 @@
         {
           name: 'Column',
           options: [
-            {
-              label: 'Toggle visibility',
-              key: 'visible',
-              value: true,
-              type: 'TOGGLE',
-              configuration: {
-                as: 'VISIBILITY',
-              },
-            },
+            { type: 'TOGGLE', label: 'Visible', key: 'show', value: true },
             {
               value: '6',
               label: 'Column width',
@@ -412,12 +390,6 @@
               label: 'Inner space',
               key: 'innerSpacing',
               type: 'SIZES',
-            },
-            {
-              type: 'TOGGLE',
-              label: 'Allow overflow',
-              key: 'overflow',
-              value: false,
             },
           ],
           descendants: [],

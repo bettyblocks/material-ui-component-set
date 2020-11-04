@@ -7,7 +7,7 @@
     <div
       className={[
         classes.column,
-        options.visible || B.env === 'dev' ? '' : classes.hide,
+        options.show || B.env === 'dev' ? '' : classes.hide,
       ].join(' ')}
     >
       {(() => {
@@ -106,8 +106,7 @@
         borderColor: 'transparent',
         borderStyle: 'none',
         borderRadius: 0,
-        overflow: ({ options: { overflow } }) =>
-          overflow ? 'visible' : 'auto',
+        overflow: 'auto',
         boxSizing: 'border-box',
         [`@media ${B.mediaMinWidth(600)}`]: {
           display: ({

@@ -240,33 +240,6 @@
           },
         },
         {
-          value: 'center center',
-          label: 'Background position',
-          key: 'backgroundPosition',
-          type: 'CUSTOM',
-          configuration: {
-            as: 'DROPDOWN',
-            dataType: 'string',
-            allowedInput: [
-              { name: 'Left top', value: 'left top' },
-              { name: 'Left center', value: 'left center' },
-              { name: 'Left bottom', value: 'left bottom' },
-              { name: 'Center top', value: 'center top' },
-              { name: 'Center center', value: 'center center' },
-              { name: 'Center bottom', value: 'center bottom' },
-              { name: 'Right top', value: 'right top' },
-              { name: 'Right center', value: 'right center' },
-              { name: 'Right bottom', value: 'right bottom' },
-            ],
-            condition: {
-              type: 'SHOW',
-              option: 'backgroundOptions',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
-        },
-        {
           value: 'no-repeat',
           label: 'Background repeat',
           key: 'backgroundRepeat',

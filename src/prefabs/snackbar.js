@@ -7,13 +7,10 @@
       name: 'Snackbar',
       options: [
         {
-          label: 'Toggle visibility',
+          type: 'TOGGLE',
+          label: 'Visible',
           key: 'visible',
           value: true,
-          type: 'TOGGLE',
-          configuration: {
-            as: 'VISIBILITY',
-          },
         },
         {
           type: 'VARIABLE',

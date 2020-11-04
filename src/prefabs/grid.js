@@ -8,12 +8,9 @@
       options: [
         {
           value: true,
-          label: 'Toggle visibility',
+          label: 'Visibility',
           key: 'visibility',
           type: 'TOGGLE',
-          configuration: {
-            as: 'VISIBILITY',
-          },
         },
         {
           value: '',
