@@ -189,12 +189,10 @@
       };
     }, [search]);
 
-    useEffect(() => {
-      B.defineFunction('Refetch', () => refetch());
-      B.defineFunction('SetSearchValue', event => {
-        setSearch(event.target.value);
-      });
-    }, []);
+    B.defineFunction('Refetch', () => refetch());
+    B.defineFunction('SetSearchValue', event => {
+      setSearch(event.target.value);
+    });
 
     useEffect(() => {
       if (!isDev) return;

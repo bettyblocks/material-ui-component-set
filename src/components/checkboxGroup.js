@@ -77,9 +77,7 @@
       }
     }
 
-    useEffect(() => {
-      B.defineFunction('Refetch', () => refetch());
-    }, [refetch]);
+    B.defineFunction('Refetch', () => refetch());
 
     useEffect(() => {
       if (isDev) {

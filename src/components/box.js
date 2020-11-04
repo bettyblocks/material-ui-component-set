@@ -69,11 +69,9 @@
       }
     }, [isDev, transparent]);
 
-    useEffect(() => {
-      B.defineFunction('ToOpaque', () => setOpacity(1));
-      B.defineFunction('ToSemiTransparent', () => setOpacity(0.5));
-      B.defineFunction('ToTransparent', () => setOpacity(0));
-    }, []);
+    B.defineFunction('ToOpaque', () => setOpacity(1));
+    B.defineFunction('ToSemiTransparent', () => setOpacity(0.5));
+    B.defineFunction('ToTransparent', () => setOpacity(0));
 
     return isDev ? <div className={classes.wrapper}>{BoxCmp}</div> : BoxCmp;
   })(),

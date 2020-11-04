@@ -101,9 +101,7 @@
       }
     }
 
-    useEffect(() => {
-      B.defineFunction('Refetch', () => refetch());
-    }, [refetch]);
+    B.defineFunction('Refetch', () => refetch());
 
     // renders the radio component
     const renderRadio = (optionValue, optionLabel) => (
