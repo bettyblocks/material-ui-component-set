@@ -1,3 +1,17 @@
+# [1.56.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.55.0...v1.56.0) (2020-11-05)
+
+
+### Features
+
+* add visibility option ([9939853](https://github.com/bettyblocks/material-ui-component-set/commit/99398538a3fda8e26716552c0c79e949a1fdc52f))
+
+# [1.55.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.54.0...v1.55.0) (2020-11-04)
+
+
+### Features
+
+* convert image into media component ([2407644](https://github.com/bettyblocks/material-ui-component-set/commit/2407644052d28067be54cc1fc5f7616933048cba))
+
 # [1.54.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.53.0...v1.54.0) (2020-11-04)
 
 

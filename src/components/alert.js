@@ -20,16 +20,14 @@
       setOpen(visible);
     }, [visible]);
 
-    useEffect(() => {
-      B.defineFunction('Show', showMessage => {
-        if (typeof showMessage === 'string') setText(showMessage);
-        setOpen(true);
-      });
+    B.defineFunction('Show', showMessage => {
+      if (typeof showMessage === 'string') setText(showMessage);
+      setOpen(true);
+    });
 
-      B.defineFunction('Hide', () => {
-        setOpen(false);
-      });
-    }, []);
+    B.defineFunction('Hide', () => {
+      setOpen(false);
+    });
 
     const AlertPanel = (
       <Alert

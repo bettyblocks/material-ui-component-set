@@ -30,11 +30,9 @@
     const openPanel = () => setExpanded(true);
     const togglePanel = () => setExpanded(s => !s);
 
-    useEffect(() => {
-      B.defineFunction('Expand', openPanel);
-      B.defineFunction('Collapse', closePanel);
-      B.defineFunction('Expand/Collapse', togglePanel);
-    }, []);
+    B.defineFunction('Expand', openPanel);
+    B.defineFunction('Collapse', closePanel);
+    B.defineFunction('Expand/Collapse', togglePanel);
 
     useEffect(() => {
       if (isDev) {

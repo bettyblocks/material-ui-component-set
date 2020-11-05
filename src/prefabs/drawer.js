@@ -94,10 +94,13 @@
           },
         },
         {
-          type: 'TOGGLE',
-          label: 'Visibility',
+          label: 'Toggle visibility',
           key: 'visibility',
           value: true,
+          type: 'TOGGLE',
+          configuration: {
+            as: 'VISIBILITY',
+          },
         },
       ],
       descendants: [
