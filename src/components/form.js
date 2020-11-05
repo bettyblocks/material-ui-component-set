@@ -45,12 +45,10 @@
 
         const mounted = useRef(false);
 
-        useEffect(() => {
-          B.defineFunction('Submit', () => {
-            formRef.current.dispatchEvent(new Event('submit'));
-          });
-          B.triggerEvent('onComponentLoad');
-        }, []);
+        B.defineFunction('Submit', () => {
+          formRef.current.dispatchEvent(new Event('submit'));
+        });
+        B.triggerEvent('onComponentRendered');
 
         useEffect(() => {
           mounted.current = true;
