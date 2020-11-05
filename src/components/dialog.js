@@ -16,10 +16,8 @@
       setIsOpen(isVisible);
     }, [isVisible]);
 
-    useEffect(() => {
-      B.defineFunction('OpenDialog', openDialog);
-      B.defineFunction('CloseDialog', closeDialog);
-    }, []);
+    B.defineFunction('OpenDialog', openDialog);
+    B.defineFunction('CloseDialog', closeDialog);
 
     const isEmpty = !children.length;
 
@@ -43,6 +41,7 @@
         fullWidth
         maxWidth={width}
         aria-labelledby="modal-dialog"
+        keepMounted
       >
         {children}
       </Dialog>

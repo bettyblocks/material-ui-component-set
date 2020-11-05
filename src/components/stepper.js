@@ -222,10 +222,8 @@
 
     const StepperComponent = type === 'mobile' ? MobileStepperCmp : StepperCmp;
 
-    useEffect(() => {
-      B.defineFunction('NextStep', () => handleNext());
-      B.defineFunction('PreviousStep', () => handleBack());
-    }, []);
+    B.defineFunction('NextStep', () => handleNext());
+    B.defineFunction('PreviousStep', () => handleBack());
 
     numRendersRef.current += 1;
 
