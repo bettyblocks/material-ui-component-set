@@ -81,6 +81,12 @@
           configuration: {
             dependsOn: 'model',
             apiVersion: 'v1',
+            condition: {
+              type: 'SHOW',
+              option: 'optionType',
+              comparator: 'EQ',
+              value: 'model',
+            },
           },
         },
         {
