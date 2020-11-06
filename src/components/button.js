@@ -69,12 +69,10 @@
       setIsVisible(visible);
     }, [visible]);
 
-    useEffect(() => {
-      B.defineFunction('Show', showButton);
-      B.defineFunction('Hide', hideButton);
-      B.defineFunction('ToggleVisibility', toggleVisibility);
-      B.defineFunction('ToggleLoadingState', toggleLoading);
-    }, []);
+    B.defineFunction('Show', showButton);
+    B.defineFunction('Hide', hideButton);
+    B.defineFunction('ToggleVisibility', toggleVisibility);
+    B.defineFunction('ToggleLoadingState', toggleLoading);
 
     useEffect(() => {
       if (loading) {

@@ -146,10 +146,8 @@
       handleValidation(validity);
     };
 
-    useEffect(() => {
-      B.defineFunction('Clear', () => setCurrentValue(''));
-      B.defineFunction('Disable', () => setIsDisabled(true));
-    }, []);
+    B.defineFunction('Clear', () => setCurrentValue(''));
+    B.defineFunction('Disable', () => setIsDisabled(true));
 
     const handleClickShowPassword = () => {
       togglePassword(!showPassword);

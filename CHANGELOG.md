@@ -1,3 +1,31 @@
+## [1.56.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.56.0...v1.56.1) (2020-11-06)
+
+
+### Bug Fixes
+
+* add InteractionScope to grid and list ([2717045](https://github.com/bettyblocks/material-ui-component-set/commit/27170450724bbda3904ff938b0498658e7a76b63))
+
+# [1.56.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.55.0...v1.56.0) (2020-11-05)
+
+
+### Features
+
+* add visibility option ([9939853](https://github.com/bettyblocks/material-ui-component-set/commit/99398538a3fda8e26716552c0c79e949a1fdc52f))
+
+# [1.55.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.54.0...v1.55.0) (2020-11-04)
+
+
+### Features
+
+* convert image into media component ([2407644](https://github.com/bettyblocks/material-ui-component-set/commit/2407644052d28067be54cc1fc5f7616933048cba))
+
+# [1.54.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.53.0...v1.54.0) (2020-11-04)
+
+
+### Features
+
+* change datacontainer to use hooks ([065e8d2](https://github.com/bettyblocks/material-ui-component-set/commit/065e8d2453e280846da0dfdeea65b3c15f735472))
+
 # [1.53.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.52.0...v1.53.0) (2020-11-03)
 
 

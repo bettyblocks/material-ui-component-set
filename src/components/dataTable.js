@@ -190,12 +190,10 @@
       };
     }, [search]);
 
-    useEffect(() => {
-      B.defineFunction('Refetch', () => refetch());
-      B.defineFunction('SetSearchValue', event => {
-        setSearch(event.target.value);
-      });
-    }, []);
+    B.defineFunction('Refetch', () => refetch());
+    B.defineFunction('SetSearchValue', event => {
+      setSearch(event.target.value);
+    });
 
     useEffect(() => {
       if (!isDev) return;
@@ -349,7 +347,7 @@
             onClick={() => handleRowClick(value)}
             data-id={value.id}
           >
-            {children}
+            <B.InteractionScope>{children}</B.InteractionScope>
           </TableRow>
         </ModelProvider>
       ));
@@ -364,7 +362,7 @@
     const renderTableContent = () => {
       let tableContent = Array.from(Array(amountOfRows).keys()).map(idx => (
         <TableRow key={idx} classes={{ root: classes.bodyRow }}>
-          {children}
+          <B.InteractionScope>{children}</B.InteractionScope>
         </TableRow>
       ));
       if (isDev) {
