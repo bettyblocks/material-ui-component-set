@@ -47,7 +47,7 @@
 
         const applyFilter = getFilter();
 
-        const { loading: isFetching, data: records, error: err } =
+        const { loading: isFetching, data: records, error: err, refetch } =
           (applyFilter &&
             useAllQuery(modelId, {
               filter: applyFilter,
@@ -57,6 +57,8 @@
           {};
 
         const mounted = useRef(false);
+
+        B.defineFunction('Refetch', () => refetch());
 
         B.defineFunction('Submit', () => {
           formRef.current.dispatchEvent(new Event('submit'));
