@@ -1,3 +1,10 @@
+## [1.56.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.56.0...v1.56.1) (2020-11-06)
+
+
+### Bug Fixes
+
+* add InteractionScope to grid and list ([2717045](https://github.com/bettyblocks/material-ui-component-set/commit/27170450724bbda3904ff938b0498658e7a76b63))
+
 # [1.56.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.55.0...v1.56.0) (2020-11-05)
 
 
