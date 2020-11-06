@@ -45,7 +45,7 @@
           };
         }, [isDev, filter, currentRecord, modelId]);
 
-        const applyFilter = getFilter();
+        const applyFilter = getFilter() && currentRecord;
 
         const { loading: isFetching, data: records, error: err, refetch } =
           (applyFilter &&
