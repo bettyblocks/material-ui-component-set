@@ -16,6 +16,7 @@
           redirect,
           showError,
           showSuccess,
+          currentRecord,
         } = options;
         const formRef = React.createRef();
 
@@ -34,10 +35,21 @@
         const formVariable = getActionInput(variableId);
         const hasFilter = modelId && filter && Object.keys(filter).length > 0;
 
+        const getFilter = React.useCallback(() => {
+          if (isDev || !currentRecord || !modelId) {
+            return filter;
+          }
+
+          const idProperty = B.getIdProperty(modelId);
+          return {
+            [idProperty.id]: { eq: currentRecord },
+          };
+        }, [isDev, filter, currentRecord, modelId]);
+
         const { loading: isFetching, data: records, error: err } =
           (hasFilter &&
             useAllQuery(modelId, {
-              filter,
+              filter: getFilter(),
               skip: 0,
               take: 1,
             })) ||
