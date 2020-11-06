@@ -33,7 +33,6 @@
         const location = isDev ? {} : useLocation();
         const { actionId, modelId, variableId } = formData;
         const formVariable = getActionInput(variableId);
-        const hasFilter = modelId && filter && Object.keys(filter).length > 0;
 
         const getFilter = React.useCallback(() => {
           if (isDev || !currentRecord || !modelId) {
@@ -46,10 +45,12 @@
           };
         }, [isDev, filter, currentRecord, modelId]);
 
+        const applyFilter = getFilter();
+
         const { loading: isFetching, data: records, error: err } =
-          (hasFilter &&
+          (applyFilter &&
             useAllQuery(modelId, {
-              filter: getFilter(),
+              filter: applyFilter,
               skip: 0,
               take: 1,
             })) ||
@@ -123,7 +124,7 @@
         };
 
         const renderContent = loading => {
-          if (!hasFilter || isDev) {
+          if (!applyFilter || isDev) {
             return <Children loading={loading}>{children}</Children>;
           }
           if (isFetching) return 'Loading...';
