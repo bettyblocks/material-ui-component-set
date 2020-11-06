@@ -24,6 +24,8 @@
       customModelAttribute: customModelAttributeObj,
       property,
       nameAttribute,
+      order,
+      orderBy,
     } = options;
 
     const { useText, getProperty, useAllQuery, getCustomModelAttribute } = B;
@@ -57,8 +59,27 @@
 
     const [values, setValues] = useState(getValues());
 
+    const orderByArray = [orderBy].flat();
+    const sort =
+      !isDev && orderBy
+        ? orderByArray.reduceRight((acc, orderByProperty, index) => {
+            const prop = getProperty(orderByProperty);
+            return index === orderByArray.length - 1
+              ? { [prop.name]: order.toUpperCase() }
+              : { [prop.name]: acc };
+          }, {})
+        : {};
+
     const { loading, error: err, data, refetch } =
-      model && useAllQuery(model, { filter, skip: 0, take: 50 });
+      model &&
+      useAllQuery(model, {
+        filter,
+        skip: 0,
+        take: 50,
+        variables: {
+          ...(orderBy ? { sort: { relation: sort } } : {}),
+        },
+      });
 
     if (loading) {
       B.triggerEvent('onLoad', loading);

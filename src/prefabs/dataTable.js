@@ -13,12 +13,6 @@
           type: 'MODEL',
         },
         {
-          value: '',
-          label: 'Authentication Profile',
-          key: 'authProfile',
-          type: 'AUTHENTICATION_PROFILE',
-        },
-        {
           value: {},
           label: 'Filter',
           key: 'filter',
@@ -29,7 +23,7 @@
         },
         {
           value: '',
-          label: 'Default order',
+          label: 'Order by',
           key: 'orderProperty',
           type: 'PROPERTY',
           configuration: {
@@ -72,6 +66,12 @@
           label: 'Hide built-in search field',
           key: 'hideSearch',
           type: 'TOGGLE',
+        },
+        {
+          value: '',
+          label: 'Authentication Profile',
+          key: 'authProfile',
+          type: 'AUTHENTICATION_PROFILE',
         },
         {
           type: 'VARIABLE',
