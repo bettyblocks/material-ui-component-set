@@ -1,3 +1,10 @@
+# [1.57.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.56.2...v1.57.0) (2020-11-06)
+
+
+### Features
+
+* default sort data components ([1544df9](https://github.com/bettyblocks/material-ui-component-set/commit/1544df9d9f7ba22ba0b1373d7d71d00b3f205f33))
+
 ## [1.56.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.56.1...v1.56.2) (2020-11-06)
 
 
