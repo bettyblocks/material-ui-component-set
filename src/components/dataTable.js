@@ -78,6 +78,7 @@
     const [previousSearchTerm, setPreviousSearchTerm] = useState('');
     const [newSearch, setNewSearch] = useState(false);
     const fetchingNextSet = useRef(false);
+    const [initialTimesFetched, setInitialTimesFetched] = useState(0);
     const amountOfRows = loadOnScroll ? autoLoadTakeAmountNum : rowsPerPage;
 
     const createSortObject = (fields, order) => {
@@ -189,12 +190,10 @@
       };
     }, [search]);
 
-    useEffect(() => {
-      B.defineFunction('Refetch', () => refetch());
-      B.defineFunction('SetSearchValue', event => {
-        setSearch(event.target.value);
-      });
-    }, []);
+    B.defineFunction('Refetch', () => refetch());
+    B.defineFunction('SetSearchValue', event => {
+      setSearch(event.target.value);
+    });
 
     useEffect(() => {
       if (!isDev) return;
@@ -348,7 +347,7 @@
             onClick={() => handleRowClick(value)}
             data-id={value.id}
           >
-            {children}
+            <B.InteractionScope>{children}</B.InteractionScope>
           </TableRow>
         </ModelProvider>
       ));
@@ -363,7 +362,7 @@
     const renderTableContent = () => {
       let tableContent = Array.from(Array(amountOfRows).keys()).map(idx => (
         <TableRow key={idx} classes={{ root: classes.bodyRow }}>
-          {children}
+          <B.InteractionScope>{children}</B.InteractionScope>
         </TableRow>
       ));
       if (isDev) {
@@ -389,7 +388,12 @@
         const tableContainerElement = tableContainerRef.current;
         if (loadOnScroll) {
           const parent = tableContainerElement.parentNode;
-          if (tableContainerElement.scrollHeight <= parent.clientHeight) {
+
+          if (
+            tableContainerElement.scrollHeight <= parent.clientHeight &&
+            initialTimesFetched < 5
+          ) {
+            setInitialTimesFetched(prev => prev + 1);
             fetchNextSet();
           }
           const scrollEvent = e => {

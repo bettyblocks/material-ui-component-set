@@ -227,9 +227,7 @@
       }
     }, [files]);
 
-    useEffect(() => {
-      B.defineFunction('clearFileUpload', e => clearFiles(e));
-    }, []);
+    B.defineFunction('clearFileUpload', e => clearFiles(e));
 
     return isDev ? <div className={classes.root}>{Control}</div> : Control;
   })(),

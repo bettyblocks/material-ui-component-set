@@ -173,13 +173,8 @@
       }
     }, [isDev, defaultValue]);
 
-    useEffect(() => {
-      B.defineFunction('Clear', () => setCurrentValue(null));
-    }, []);
-
-    useEffect(() => {
-      B.defineFunction('Refetch', () => refetch());
-    }, [refetch]);
+    B.defineFunction('Clear', () => setCurrentValue(null));
+    B.defineFunction('Refetch', () => refetch());
 
     useEffect(() => {
       const handler = setTimeout(() => {
@@ -367,6 +362,7 @@
         options={results}
         defaultValue={getDefaultValue(results)}
         getOptionLabel={renderLabel}
+        getOptionSelected={(option, value) => value.id === option.id}
         PopoverProps={{
           classes: {
             root: classes.popover,

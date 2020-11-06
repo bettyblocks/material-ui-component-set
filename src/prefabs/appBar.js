@@ -187,6 +187,15 @@
           name: 'Button',
           options: [
             {
+              label: 'Toggle visibility',
+              key: 'visible',
+              value: true,
+              type: 'TOGGLE',
+              configuration: {
+                as: 'VISIBILITY',
+              },
+            },
+            {
               type: 'CUSTOM',
               label: 'variant',
               key: 'variant',
@@ -1624,18 +1633,21 @@
               value: false,
               type: 'TOGGLE',
             },
-            {
-              label: 'Visible',
-              key: 'visible',
-              value: true,
-              type: 'TOGGLE',
-            },
           ],
           descendants: [],
         },
         {
           name: 'Button',
           options: [
+            {
+              label: 'Toggle visibility',
+              key: 'visible',
+              value: true,
+              type: 'TOGGLE',
+              configuration: {
+                as: 'VISIBILITY',
+              },
+            },
             {
               type: 'CUSTOM',
               label: 'variant',
@@ -3072,12 +3084,6 @@
               label: 'Disabled',
               key: 'disabled',
               value: false,
-              type: 'TOGGLE',
-            },
-            {
-              label: 'Visible',
-              key: 'visible',
-              value: true,
               type: 'TOGGLE',
             },
           ],

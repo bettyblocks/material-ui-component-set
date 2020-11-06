@@ -65,7 +65,7 @@
       }
       return (results || []).map(value => (
         <ModelProvider value={value} id={model}>
-          {children}
+          <B.InteractionScope>{children}</B.InteractionScope>
         </ModelProvider>
       ));
     };
