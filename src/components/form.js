@@ -45,7 +45,10 @@
           };
         }, [isDev, filter, currentRecord, modelId]);
 
-        const applyFilter = getFilter() && currentRecord;
+        const hasFilter =
+          modelId &&
+          ((filter && Object.keys(filter).length !== 0) || currentRecord);
+        const applyFilter = getFilter();
 
         const { loading: isFetching, data: records, error: err, refetch } =
           (applyFilter &&
@@ -84,7 +87,7 @@
           B.triggerEvent('onDataError', err.message);
         }
 
-        const item = records && records.results[0];
+        const item = hasFilter && records && records.results[0];
 
         if (item) {
           if (item.id) {
@@ -126,7 +129,7 @@
         };
 
         const renderContent = loading => {
-          if (!applyFilter || isDev) {
+          if (!hasFilter || isDev) {
             return <Children loading={loading}>{children}</Children>;
           }
           if (isFetching) return 'Loading...';
