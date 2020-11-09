@@ -1,3 +1,24 @@
+# [1.57.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.56.2...v1.57.0) (2020-11-06)
+
+
+### Features
+
+* default sort data components ([1544df9](https://github.com/bettyblocks/material-ui-component-set/commit/1544df9d9f7ba22ba0b1373d7d71d00b3f205f33))
+
+## [1.56.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.56.1...v1.56.2) (2020-11-06)
+
+
+### Bug Fixes
+
+* set limit to initial fetches datatable ([#604](https://github.com/bettyblocks/material-ui-component-set/issues/604)) ([9c70195](https://github.com/bettyblocks/material-ui-component-set/commit/9c70195301c80f4154afab39d072a9e97b4595c2))
+
+## [1.56.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.56.0...v1.56.1) (2020-11-06)
+
+
+### Bug Fixes
+
+* add InteractionScope to grid and list ([2717045](https://github.com/bettyblocks/material-ui-component-set/commit/27170450724bbda3904ff938b0498658e7a76b63))
+
 # [1.56.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.55.0...v1.56.0) (2020-11-05)
 
 
