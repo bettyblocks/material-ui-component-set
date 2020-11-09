@@ -73,6 +73,42 @@
           },
         },
         {
+          type: 'PROPERTY',
+          label: 'Order by',
+          key: 'orderBy',
+          value: '',
+          configuration: {
+            dependsOn: 'model',
+            apiVersion: 'v1',
+            condition: {
+              type: 'SHOW',
+              option: 'optionType',
+              comparator: 'EQ',
+              value: 'model',
+            },
+          },
+        },
+        {
+          type: 'CUSTOM',
+          label: 'Sort order',
+          key: 'order',
+          value: 'asc',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            condition: {
+              type: 'HIDE',
+              option: 'orderBy',
+              comparator: 'EQ',
+              value: '',
+            },
+            allowedInput: [
+              { name: 'Ascending', value: 'asc' },
+              { name: 'Descending', value: 'desc' },
+            ],
+          },
+        },
+        {
           value: '',
           label: 'Label property',
           key: 'searchProperty',
