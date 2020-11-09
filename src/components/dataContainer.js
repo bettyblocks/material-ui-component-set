@@ -20,6 +20,7 @@
           currentRecord,
         } = options;
         const displayError = showError === 'built-in';
+        const hasFilter = model && filter && Object.keys(filter).length > 0;
 
         const BuilderLayout = () => {
           B.defineFunction('Refetch', () => {});
@@ -56,7 +57,7 @@
         }
 
         const CanvasLayout = () => {
-          if (!model) {
+          if (!model || !hasFilter) {
             return <BuilderLayout />;
           }
 
@@ -69,9 +70,12 @@
         };
 
         const One = ({ modelId }) => {
-          const { loading, data, error, refetch } = useOneQuery(modelId, {
-            filter: getFilter(),
-          });
+          const { loading, data, error, refetch } =
+            (hasFilter &&
+              useOneQuery(modelId, {
+                filter: getFilter(),
+              })) ||
+            {};
 
           B.defineFunction('Refetch', () => {
             refetch();
