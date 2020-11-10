@@ -55,7 +55,7 @@
         const hasFilter =
           modelId &&
           ((filter && Object.keys(filter).length !== 0) || currentRecord);
-        const applyFilter = getFilter();
+        const applyFilter = modelId && getFilter();
 
         const { loading: isFetching, data: records, error: err, refetch } =
           (applyFilter &&
