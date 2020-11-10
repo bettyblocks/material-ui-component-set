@@ -66,11 +66,9 @@
         B.defineFunction('Submit', () => {
           formRef.current.dispatchEvent(new Event('submit'));
         });
-        useEffect(() => {
-          B.triggerEvent('onComponentRendered');
-        }, []);
 
         useEffect(() => {
+          B.triggerEvent('onComponentRendered');
           mounted.current = true;
           return () => {
             mounted.current = false;
