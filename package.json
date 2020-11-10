@@ -1,6 +1,6 @@
 {
   "name": "component-set",
-  "version": "1.57.0",
+  "version": "1.58.0",
   "main": "dist/templates.json",
   "license": "UNLICENSED",
   "private": false,
@@ -32,7 +32,7 @@
   "scripts": {
     "start": "bb components serve -p 5002",
     "build": "bb components build",
-    "dev": "nodemon --watch src --exec \"yarn build && yarn start\"",
+    "dev": "nodemon",
     "lint": "eslint --ext js ./src",
     "prettier:base": "prettier --single-quote",
     "prettier:check": "yarn prettier:base --list-different \"src/**/*.js\"",
