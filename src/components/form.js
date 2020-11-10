@@ -6,7 +6,14 @@
   jsx: (
     <div>
       {(() => {
-        const { env, Children, Action, useAllQuery, getActionInput } = B;
+        const {
+          env,
+          Children,
+          Action,
+          useAllQuery,
+          getActionInput,
+          getIdProperty,
+        } = B;
 
         const {
           formData,
@@ -39,7 +46,7 @@
             return filter;
           }
 
-          const idProperty = B.getIdProperty(modelId);
+          const idProperty = getIdProperty(modelId);
           return {
             [idProperty.id]: { eq: currentRecord },
           };
