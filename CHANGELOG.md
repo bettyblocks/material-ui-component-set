@@ -1,3 +1,10 @@
+# [1.58.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.57.0...v1.58.0) (2020-11-09)
+
+
+### Features
+
+* **data table:** add beforeCreate with model and properties selection ([1a73df8](https://github.com/bettyblocks/material-ui-component-set/commit/1a73df837fbd9f499c6d57fbfba4f2fdab6e55f3))
+
 # [1.57.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.56.2...v1.57.0) (2020-11-06)
 
 
