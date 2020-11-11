@@ -57,7 +57,7 @@
         }
 
         const CanvasLayout = () => {
-          if (!model || !hasFilter) {
+          if (!hasFilter) {
             return <BuilderLayout />;
           }
 
