@@ -1,3 +1,10 @@
+## [1.58.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.58.1...v1.58.2) (2020-11-12)
+
+
+### Bug Fixes
+
+* autocomplete advanced name attribute is on the hidden input ([9777f8c](https://github.com/bettyblocks/material-ui-component-set/commit/9777f8ccc2a44e43f6e40ce77c81588ed2e76794))
+
 ## [1.58.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.58.0...v1.58.1) (2020-11-11)
 
 
