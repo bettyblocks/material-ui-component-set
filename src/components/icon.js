@@ -73,10 +73,10 @@
       Component
     );
   })(),
-  styles: (B) => (t) => {
+  styles: B => t => {
     const style = new B.Styling(t);
-    const convertSizes = (sizes) =>
-      sizes.map((size) => style.getSpacing(size)).join(' ');
+    const convertSizes = sizes =>
+      sizes.map(size => style.getSpacing(size)).join(' ');
     const getSpacing = (idx, device = 'Mobile') =>
       idx === '0' ? '0rem' : style.getSpacing(idx, device);
 
