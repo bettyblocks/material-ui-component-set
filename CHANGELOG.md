@@ -1,3 +1,18 @@
+## [1.58.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.58.1...v1.58.2) (2020-11-12)
+
+
+### Bug Fixes
+
+* autocomplete advanced name attribute is on the hidden input ([9777f8c](https://github.com/bettyblocks/material-ui-component-set/commit/9777f8ccc2a44e43f6e40ce77c81588ed2e76794))
+
+## [1.58.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.58.0...v1.58.1) (2020-11-11)
+
+
+### Bug Fixes
+
+* data container shows first record in case of no filter ([f48b2e1](https://github.com/bettyblocks/material-ui-component-set/commit/f48b2e19cb118d4f342ef8d538425a8f214aef01))
+* removed unnecessary check in data container ([0cc496b](https://github.com/bettyblocks/material-ui-component-set/commit/0cc496b4280d656314af6aecb0e86e68567d8329))
+
 # [1.58.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.57.0...v1.58.0) (2020-11-09)
 
 
