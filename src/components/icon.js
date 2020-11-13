@@ -13,7 +13,6 @@
       addBadge,
       content,
       badgeColor,
-      invisible,
       anchorOrigin,
       variant,
       linkTo,
@@ -56,7 +55,6 @@
         classes={{ root: classes.badge }}
         badgeContent={contentText}
         color={badgeColor}
-        invisible={invisible}
         anchorOrigin={anchorOriginObj}
         variant={variant}
         overlap={variant === 'dot' ? 'circle' : 'rectangle'}
