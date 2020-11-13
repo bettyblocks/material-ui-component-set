@@ -6,8 +6,8 @@
   jsx: (() => {
     const { Icons } = window.MaterialUI;
     const { Link, Badge } = window.MaterialUI.Core;
-    const { useText } = B;
-    const isDev = B.env === 'dev';
+    const { useText, env } = B;
+    const isDev = env === 'dev';
     const {
       icon,
       addBadge,
@@ -24,13 +24,13 @@
     const hasLink = linkTo && linkTo.id !== '';
     const hasExternalLink = linkToExternal && linkToExternal.id !== '';
 
-    const Content = useText(content);
+    const contentText = useText(content);
+    const linkToExternalText = useText(linkToExternal);
     const anchorOriginSplit = anchorOrigin.split(',');
     const anchorOriginObj = {
       horizontal: anchorOriginSplit[0],
       vertical: anchorOriginSplit[1],
     };
-
     const IconComponent = React.createElement(Icons[icon], {
       className: classes.root,
     });
@@ -39,8 +39,8 @@
       <Link
         href={
           linkType === 'external' && hasExternalLink
-            ? linkToExternal
-            : 'https://google.com'
+            ? linkToExternalText
+            : undefined
         }
         component={linkType === 'internal' && hasLink ? B.Link : undefined}
         endpoint={linkType === 'internal' && hasLink ? linkTo : undefined}
@@ -52,17 +52,17 @@
     const Icon = hasLink ? LinkComponent : IconComponent;
 
     const BadgeComponent = (
-      <div className={classes.badge}>
-        <Badge
-          badgeContent={Content}
-          color={badgeColor}
-          invisible={invisible}
-          anchorOrigin={anchorOriginObj}
-          variant={variant}
-        >
-          {Icon}
-        </Badge>
-      </div>
+      <Badge
+        classes={{ root: classes.badge }}
+        badgeContent={contentText}
+        color={badgeColor}
+        invisible={invisible}
+        anchorOrigin={anchorOriginObj}
+        variant={variant}
+        overlap={variant === 'dot' ? 'circle' : 'rectangle'}
+      >
+        {Icon}
+      </Badge>
     );
 
     const Component = addBadge ? BadgeComponent : Icon;
@@ -73,10 +73,10 @@
       Component
     );
   })(),
-  styles: B => t => {
+  styles: (B) => (t) => {
     const style = new B.Styling(t);
-    const convertSizes = sizes =>
-      sizes.map(size => style.getSpacing(size)).join(' ');
+    const convertSizes = (sizes) =>
+      sizes.map((size) => style.getSpacing(size)).join(' ');
     const getSpacing = (idx, device = 'Mobile') =>
       idx === '0' ? '0rem' : style.getSpacing(idx, device);
 

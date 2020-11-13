@@ -1307,10 +1307,10 @@
           },
         },
         {
-          value: '',
+          value: [''],
           label: 'URL',
           key: 'linkToExternal',
-          type: 'TEXT',
+          type: 'VARIABLE',
           configuration: {
             placeholder: 'Starts with https:// or http://',
             condition: {
@@ -1351,17 +1351,9 @@
         {
           label: 'Badge Color',
           key: 'badgeColor',
-          value: 'default',
-          type: 'CUSTOM',
+          value: 'Secondary',
+          type: 'COLOR',
           configuration: {
-            as: 'BUTTONGROUP',
-            dataType: 'string',
-            allowedInput: [
-              { name: 'Default', value: 'default' },
-              { name: 'Error', value: 'error' },
-              { name: 'Primary', value: 'primary' },
-              { name: 'Secondary', value: 'secondary' },
-            ],
             condition: {
               type: 'SHOW',
               option: 'addBadge',
@@ -1429,20 +1421,6 @@
           label: 'Outer Space',
           key: 'margin',
           value: ['S', 'S', 'S', 'S'],
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'addBadge',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
-        },
-        {
-          type: 'TOGGLE',
-          label: 'Invisible',
-          key: 'invisible',
-          value: false,
           configuration: {
             condition: {
               type: 'SHOW',
