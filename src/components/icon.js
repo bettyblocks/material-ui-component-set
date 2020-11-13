@@ -35,13 +35,13 @@
       className: classes.root,
     });
 
+    const href =
+      linkType === 'external' && hasExternalLink
+        ? linkToExternalText
+        : undefined;
     const LinkComponent = (
       <Link
-        href={
-          linkType === 'external' && hasExternalLink
-            ? linkToExternalText
-            : undefined
-        }
+        href={href}
         component={linkType === 'internal' && hasLink ? B.Link : undefined}
         endpoint={linkType === 'internal' && hasLink ? linkTo : undefined}
       >
