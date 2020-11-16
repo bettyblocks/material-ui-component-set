@@ -222,12 +222,10 @@
           };
         }, [search]);
 
-        useEffect(() => {
-          B.defineFunction('Refetch', () => refetch());
-          B.defineFunction('SetSearchValue', event => {
-            setSearch(event.target.value);
-          });
-        }, []);
+        B.defineFunction('Refetch', () => refetch());
+        B.defineFunction('SetSearchValue', event => {
+          setSearch(event.target.value);
+        });
 
         const mounted = useRef(false);
 
@@ -247,7 +245,7 @@
         const Looper = results => {
           const rows = results.map(item => (
             <ModelProvider key={item.id} value={item} id={model}>
-              {children}
+              <B.InteractionScope>{children}</B.InteractionScope>
             </ModelProvider>
           ));
 

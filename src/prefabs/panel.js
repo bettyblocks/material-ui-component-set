@@ -30,6 +30,12 @@
           key: 'outerSpacing',
           type: 'SIZES',
         },
+        {
+          value: ['M', 'M', 'M', 'M'],
+          label: 'Inner space',
+          key: 'innerSpacing',
+          type: 'SIZES',
+        },
       ],
       descendants: [
         {
@@ -78,7 +84,15 @@
             {
               name: 'Column',
               options: [
-                { type: 'TOGGLE', label: 'Visible', key: 'show', value: true },
+                {
+                  label: 'Toggle visibility',
+                  key: 'visible',
+                  value: true,
+                  type: 'TOGGLE',
+                  configuration: {
+                    as: 'VISIBILITY',
+                  },
+                },
                 {
                   value: 'flexible',
                   label: 'Column width',
