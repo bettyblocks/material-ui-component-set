@@ -49,12 +49,22 @@
         <Avatar>{icon !== 'None' && React.createElement(Icons[icon])}</Avatar>
       </ListItemAvatar>
     );
+    const componentType = () =>{
+      if(linkType === 'internal' && hasLink){
+        return Link;
+      }else if (linkType === 'external' && !isDev) {
+        return 'a';
+      }else{
+        return 'li';
+      }
+
+    }
     const linkProps = {
       href:
         linkType === 'external' && hasExternalLink
           ? linkToExternalVariable
           : undefined,
-      component: linkType === 'internal' && hasLink ? Link : (linkType === 'external' ? 'a' : 'li'),
+      component: componentType(),
       endpoint: linkType === 'internal' && hasLink ? linkTo : undefined,
     };
 
