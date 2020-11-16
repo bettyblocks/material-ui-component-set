@@ -382,7 +382,7 @@
             <input
               type="hidden"
               key={currentValue ? 'hasValue' : 'isEmpty'}
-              name={customModelAttribute && customModelAttribute.name}
+              name={nameAttributeValue || customModelAttributeName}
               value={currentValue}
             />
             <TextField

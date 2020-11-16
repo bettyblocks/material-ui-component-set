@@ -1,3 +1,28 @@
+# [1.59.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.58.2...v1.59.0) (2020-11-16)
+
+
+### Bug Fixes
+
+* apply either filter or currentrecord ([4667f55](https://github.com/bettyblocks/material-ui-component-set/commit/4667f552da9a302bf935ed5ce5f4ac7d06b2b401))
+* change filter behavior ([59e30b4](https://github.com/bettyblocks/material-ui-component-set/commit/59e30b4fb7c8437082921f6f967c98a530aa1ddd))
+* only fetch data when currentRecord or filter ([252789c](https://github.com/bettyblocks/material-ui-component-set/commit/252789c0f6170d467c9fb32045ec0d99503005f1))
+* only fetch record when model is set ([f4e6c09](https://github.com/bettyblocks/material-ui-component-set/commit/f4e6c096eb069b853f45e2a6048a1122e6ba32d6))
+* trigger needs to be in use effect ([8acf2ca](https://github.com/bettyblocks/material-ui-component-set/commit/8acf2ca244ee872d94a4fd0fa7af87fefc1ff82b))
+
+
+### Features
+
+* add currentRecord feature to form ([c09f533](https://github.com/bettyblocks/material-ui-component-set/commit/c09f5331b61b46c45e4bb90feb0f6ea5afef2207))
+* add interaction/trigger to auto submit form ([16be2bc](https://github.com/bettyblocks/material-ui-component-set/commit/16be2bc9bdee73d4016b277fcafcecb61b09b106))
+* add Refetch interaction to form component ([c83ac03](https://github.com/bettyblocks/material-ui-component-set/commit/c83ac03234cb7b7b60d6376635775f242f204d8d))
+
+## [1.58.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.58.1...v1.58.2) (2020-11-12)
+
+
+### Bug Fixes
+
+* autocomplete advanced name attribute is on the hidden input ([9777f8c](https://github.com/bettyblocks/material-ui-component-set/commit/9777f8ccc2a44e43f6e40ce77c81588ed2e76794))
+
 ## [1.58.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.58.0...v1.58.1) (2020-11-11)
 
 
