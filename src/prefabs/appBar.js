@@ -64,6 +64,15 @@
           type: 'VARIABLE',
         },
         {
+          type: 'SIZE',
+          label: 'Logo Width',
+          key: 'logoWidth',
+          value: '150px',
+          configuration: {
+            as: 'UNIT',
+          },
+        },
+        {
           label: 'Align items',
           key: 'alignItems',
           value: 'right',
