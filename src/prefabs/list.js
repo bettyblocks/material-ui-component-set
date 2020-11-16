@@ -99,10 +99,47 @@
               value: 'Black',
             },
             {
+              type: 'CUSTOM',
+              label: 'Link to',
+              key: 'linkType',
+              value: 'internal',
+              configuration: {
+                as: 'BUTTONGROUP',
+                dataType: 'string',
+                allowedInput: [
+                  { name: 'Internal page', value: 'internal' },
+                  { name: 'External page', value: 'external' },
+                ],
+              },
+            },
+            {
               value: '',
               label: 'Page',
               key: 'linkTo',
               type: 'ENDPOINT',
+              configuration: {
+                condition: {
+                  type: 'SHOW',
+                  option: 'linkType',
+                  comparator: 'EQ',
+                  value: 'internal',
+                },
+              },
+            },
+            {
+              value: [''],
+              label: 'URL',
+              key: 'linkToExternal',
+              type: 'VARIABLE',
+              configuration: {
+                placeholder: 'Starts with https:// or http://',
+                condition: {
+                  type: 'SHOW',
+                  option: 'linkType',
+                  comparator: 'EQ',
+                  value: 'external',
+                },
+              },
             },
             {
               type: 'CUSTOM',

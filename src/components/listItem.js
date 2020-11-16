@@ -23,12 +23,17 @@
       icon,
       avatar,
       linkTo,
+      linkType,
+      linkToExternal,
       dense,
     } = options;
     const { env, useText, Link } = B;
     const isDev = env === 'dev';
 
     const hasLink = linkTo && linkTo.id !== '';
+    const hasExternalLink = linkToExternal && linkToExternal.id !== '';
+    const linkToExternalVariable =
+      (linkToExternal && useText(linkToExternal)) || '';
 
     const primary = useText(primaryText);
     const secondary = useText(secondaryText);
@@ -44,6 +49,14 @@
         <Avatar>{icon !== 'None' && React.createElement(Icons[icon])}</Avatar>
       </ListItemAvatar>
     );
+    const linkProps = {
+      href:
+        linkType === 'external' && hasExternalLink
+          ? linkToExternalVariable
+          : undefined,
+      component: linkType === 'internal' && hasLink ? Link : (linkType === 'external' ? 'a' : 'li'),
+      endpoint: linkType === 'internal' && hasLink ? linkTo : undefined,
+    };
 
     const isEmpty =
       primary === '' &&
@@ -55,9 +68,8 @@
 
     const listItem = (
       <ListItem
+        {...linkProps}
         button={hasLink}
-        component={hasLink ? Link : 'li'}
-        endpoint={linkTo}
         alignItems={alignItems}
         disabled={disabled}
         disableGutters={disableGutters}
