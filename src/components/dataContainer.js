@@ -20,7 +20,6 @@
           currentRecord,
         } = options;
         const displayError = showError === 'built-in';
-        const hasFilter = model && filter && Object.keys(filter).length > 0;
 
         const BuilderLayout = () => {
           B.defineFunction('Refetch', () => {});
@@ -51,6 +50,10 @@
             [idProperty.id]: { eq: currentRecord },
           };
         }, [isDev, filter, currentRecord, model]);
+
+        const selectedFilter = getFilter();
+        const hasFilter =
+          selectedFilter && Object.keys(selectedFilter).length > 0;
 
         if (isDev) {
           return <BuilderLayout />;
