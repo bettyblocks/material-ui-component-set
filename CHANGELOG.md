@@ -1,3 +1,17 @@
+# [1.60.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.59.1...v1.60.0) (2020-11-17)
+
+
+### Features
+
+* add link and badge to icon component ([bfe1806](https://github.com/bettyblocks/material-ui-component-set/commit/bfe180675b36a10e1d997d490a9879e9e2a3451d))
+
+## [1.59.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.59.0...v1.59.1) (2020-11-16)
+
+
+### Bug Fixes
+
+* changed z-index of snackbar to be lower than toolbar ([3fbda8e](https://github.com/bettyblocks/material-ui-component-set/commit/3fbda8e00be5b8b875e92afa690b52490bd32a02))
+
 # [1.59.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.58.2...v1.59.0) (2020-11-16)
 
 
