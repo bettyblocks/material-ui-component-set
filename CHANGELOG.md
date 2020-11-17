@@ -1,3 +1,10 @@
+# [1.61.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.60.0...v1.61.0) (2020-11-17)
+
+
+### Features
+
+* add height option to Appbar ([7a7e9e3](https://github.com/bettyblocks/material-ui-component-set/commit/7a7e9e31ac600a21c375fe548d57fcab6ef19a8f))
+
 # [1.60.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.59.1...v1.60.0) (2020-11-17)
 
 
