@@ -1,3 +1,10 @@
+# [1.62.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.61.0...v1.62.0) (2020-11-17)
+
+
+### Features
+
+* add background position to box ([77773cd](https://github.com/bettyblocks/material-ui-component-set/commit/77773cdffeae7b500490bcced3d875e0324daa14))
+
 # [1.61.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.60.0...v1.61.0) (2020-11-17)
 
 
