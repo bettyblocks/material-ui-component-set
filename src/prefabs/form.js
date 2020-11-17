@@ -44,6 +44,20 @@
           },
         },
         {
+          value: '',
+          label: 'Current Record',
+          key: 'currentRecord',
+          type: 'NUMBER',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'currentRecord',
+              comparator: 'EQ',
+              value: 'never',
+            },
+          },
+        },
+        {
           value: 'built-in',
           label: 'Success message',
           key: 'showSuccess',
@@ -2062,6 +2076,15 @@
               name: 'Button',
               options: [
                 {
+                  label: 'Toggle visibility',
+                  key: 'visible',
+                  value: true,
+                  type: 'TOGGLE',
+                  configuration: {
+                    as: 'VISIBILITY',
+                  },
+                },
+                {
                   type: 'CUSTOM',
                   label: 'type',
                   key: 'type',
@@ -3427,12 +3450,6 @@
                   label: 'Disabled',
                   key: 'disabled',
                   value: false,
-                  type: 'TOGGLE',
-                },
-                {
-                  label: 'Visible',
-                  key: 'visible',
-                  value: true,
                   type: 'TOGGLE',
                 },
               ],
