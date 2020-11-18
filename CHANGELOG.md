@@ -1,3 +1,10 @@
+## [1.63.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.63.0...v1.63.1) (2020-11-18)
+
+
+### Bug Fixes
+
+* pattern validation number input ([4079372](https://github.com/bettyblocks/material-ui-component-set/commit/4079372214b8c975962c651e05f68628905f3708))
+
 # [1.63.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.62.1...v1.63.0) (2020-11-18)
 
 
