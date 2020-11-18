@@ -96,6 +96,7 @@
     const style = new B.Styling(t);
     return {
       root: {
+        height: ({ options: { height } }) => height,
         backgroundColor: ({ options: { backgroundColor } }) => [
           style.getColor(backgroundColor),
           '!important',

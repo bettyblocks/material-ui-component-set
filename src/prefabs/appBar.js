@@ -19,6 +19,15 @@
           type: 'COLOR',
         },
         {
+          type: 'SIZE',
+          label: 'Height',
+          key: 'height',
+          value: '60px',
+          configuration: {
+            as: 'UNIT',
+          },
+        },
+        {
           label: 'Position',
           key: 'position',
           value: 'static',
