@@ -146,10 +146,8 @@
       handleValidation(validity);
     };
 
-    useEffect(() => {
-      B.defineFunction('Clear', () => setCurrentValue(''));
-      B.defineFunction('Disable', () => setIsDisabled(true));
-    }, []);
+    B.defineFunction('Clear', () => setCurrentValue(''));
+    B.defineFunction('Disable', () => setIsDisabled(true));
 
     const handleClickShowPassword = () => {
       togglePassword(!showPassword);
@@ -169,7 +167,8 @@
     const passwordIcon = showPassword ? 'Visibility' : 'VisibilityOff';
     const inputIcon = type === 'password' ? passwordIcon : adornmentIcon;
     const hasIcon = inputIcon && inputIcon !== 'none';
-    const hasAdornment = adornment || hasIcon;
+    const hasAdornment =
+      type === 'password' ? adornment && hasIcon : adornment || hasIcon;
 
     const IconCmp =
       hasIcon &&

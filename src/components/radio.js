@@ -24,6 +24,8 @@
       property,
       validationValueMissing,
       nameAttribute,
+      order,
+      orderBy,
     } = options;
     const isDev = B.env === 'dev';
     const displayError = showError === 'built-in';
@@ -70,8 +72,27 @@
       Radio,
     } = window.MaterialUI.Core;
 
+    const orderByArray = [orderBy].flat();
+    const sort =
+      !isDev && orderBy
+        ? orderByArray.reduceRight((acc, orderByProperty, index) => {
+            const prop = getProperty(orderByProperty);
+            return index === orderByArray.length - 1
+              ? { [prop.name]: order.toUpperCase() }
+              : { [prop.name]: acc };
+          }, {})
+        : {};
+
     const { loading, error: err, data, refetch } =
-      model && useAllQuery(model, { filter, skip: 0, take: 50 });
+      model &&
+      useAllQuery(model, {
+        filter,
+        skip: 0,
+        take: 50,
+        variables: {
+          ...(orderBy ? { sort: { relation: sort } } : {}),
+        },
+      });
 
     const mounted = useRef(false);
 
@@ -101,9 +122,7 @@
       }
     }
 
-    useEffect(() => {
-      B.defineFunction('Refetch', () => refetch());
-    }, [refetch]);
+    B.defineFunction('Refetch', () => refetch());
 
     // renders the radio component
     const renderRadio = (optionValue, optionLabel) => (

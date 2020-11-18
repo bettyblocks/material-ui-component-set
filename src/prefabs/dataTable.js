@@ -2,6 +2,140 @@
   name: 'DataTable',
   icon: 'DataTable',
   category: 'DATA',
+  beforeCreate: ({
+    components: {
+      Content,
+      Header,
+      Field,
+      Footer,
+      ModelSelector,
+      PropertiesSelector,
+    },
+    prefab,
+    save,
+    close,
+  }) => {
+    const [modelId, setModelId] = React.useState('');
+    const [properties, setProperties] = React.useState(['']);
+
+    return (
+      <>
+        <Header title="Configure data table" onClose={close} />
+        <Content>
+          <Field label="Model">
+            <ModelSelector
+              onChange={value => {
+                setModelId(value);
+              }}
+              value={modelId}
+            />
+          </Field>
+          <Field label="Columns">
+            <PropertiesSelector
+              modelId={modelId}
+              value={properties}
+              onChange={value => {
+                setProperties(value);
+              }}
+            />
+          </Field>
+        </Content>
+        <Footer
+          onSave={() => {
+            const newPrefab = { ...prefab };
+
+            newPrefab.structure[0].options[0].value = modelId;
+            properties.forEach(property => {
+              newPrefab.structure[0].descendants.push({
+                name: 'DataTableColumn',
+                options: [
+                  {
+                    value: property,
+                    label: 'Property',
+                    key: 'property',
+                    type: 'PROPERTY',
+                  },
+                  {
+                    type: 'TOGGLE',
+                    label: 'Sortable',
+                    key: 'sortable',
+                    value: false,
+                  },
+                  {
+                    type: 'VARIABLE',
+                    label: 'Header text',
+                    key: 'headerText',
+                    value: [''],
+                  },
+                  {
+                    value: 'Body1',
+                    label: 'Header Type',
+                    key: 'type',
+                    type: 'FONT',
+                  },
+                  {
+                    type: 'VARIABLE',
+                    label: 'Content',
+                    key: 'content',
+                    value: [''],
+                    configuration: {
+                      as: 'MULTILINE',
+                    },
+                  },
+                  {
+                    value: 'Body1',
+                    label: 'Body type',
+                    key: 'bodyType',
+                    type: 'FONT',
+                  },
+                  {
+                    type: 'CUSTOM',
+                    label: 'Column Alignment',
+                    key: 'horizontalAlignment',
+                    value: 'left',
+                    configuration: {
+                      as: 'BUTTONGROUP',
+                      dataType: 'string',
+                      allowedInput: [
+                        { name: 'Left', value: 'left' },
+                        { name: 'Center', value: 'center' },
+                        { name: 'Right', value: 'right' },
+                      ],
+                    },
+                  },
+                  {
+                    type: 'SIZE',
+                    label: 'Width',
+                    key: 'width',
+                    value: '',
+                    configuration: {
+                      as: 'UNIT',
+                    },
+                  },
+                  {
+                    type: 'COLOR',
+                    label: 'Background',
+                    key: 'background',
+                    value: 'Transparent',
+                  },
+                  {
+                    type: 'COLOR',
+                    label: 'Border color',
+                    key: 'borderColor',
+                    value: 'Light',
+                  },
+                ],
+                descendants: [],
+              });
+            });
+
+            save(newPrefab);
+          }}
+          onClose={close}
+        />
+      </>
+    );
+  },
   structure: [
     {
       name: 'DataTable',
@@ -11,12 +145,6 @@
           label: 'Model',
           key: 'model',
           type: 'MODEL',
-        },
-        {
-          value: '',
-          label: 'Authentication Profile',
-          key: 'authProfile',
-          type: 'AUTHENTICATION_PROFILE',
         },
         {
           value: {},
@@ -29,7 +157,7 @@
         },
         {
           value: '',
-          label: 'Default order',
+          label: 'Order by',
           key: 'orderProperty',
           type: 'PROPERTY',
           configuration: {
@@ -72,6 +200,12 @@
           label: 'Hide built-in search field',
           key: 'hideSearch',
           type: 'TOGGLE',
+        },
+        {
+          value: '',
+          label: 'Authentication Profile',
+          key: 'authProfile',
+          type: 'AUTHENTICATION_PROFILE',
         },
         {
           type: 'VARIABLE',
@@ -319,170 +453,7 @@
           },
         },
       ],
-      descendants: [
-        {
-          name: 'DataTableColumn',
-          options: [
-            {
-              value: '',
-              label: 'Property',
-              key: 'property',
-              type: 'PROPERTY',
-            },
-            {
-              type: 'TOGGLE',
-              label: 'Sortable',
-              key: 'sortable',
-              value: false,
-            },
-            {
-              type: 'VARIABLE',
-              label: 'Header text',
-              key: 'headerText',
-              value: [''],
-            },
-            {
-              value: 'Body1',
-              label: 'Header Type',
-              key: 'type',
-              type: 'FONT',
-            },
-            {
-              type: 'VARIABLE',
-              label: 'Content',
-              key: 'content',
-              value: [''],
-              configuration: {
-                as: 'MULTILINE',
-              },
-            },
-            {
-              value: 'Body1',
-              label: 'Body type',
-              key: 'bodyType',
-              type: 'FONT',
-            },
-            {
-              type: 'CUSTOM',
-              label: 'Column Alignment',
-              key: 'horizontalAlignment',
-              value: 'left',
-              configuration: {
-                as: 'BUTTONGROUP',
-                dataType: 'string',
-                allowedInput: [
-                  { name: 'Left', value: 'left' },
-                  { name: 'Center', value: 'center' },
-                  { name: 'Right', value: 'right' },
-                ],
-              },
-            },
-            {
-              type: 'SIZE',
-              label: 'Width',
-              key: 'width',
-              value: '',
-              configuration: {
-                as: 'UNIT',
-              },
-            },
-            {
-              type: 'COLOR',
-              label: 'Background',
-              key: 'background',
-              value: 'Transparent',
-            },
-            {
-              type: 'COLOR',
-              label: 'Border color',
-              key: 'borderColor',
-              value: 'Light',
-            },
-          ],
-          descendants: [],
-        },
-        {
-          name: 'DataTableColumn',
-          options: [
-            {
-              value: '',
-              label: 'Property',
-              key: 'property',
-              type: 'PROPERTY',
-            },
-            {
-              type: 'TOGGLE',
-              label: 'Sortable',
-              key: 'sortable',
-              value: false,
-            },
-            {
-              type: 'VARIABLE',
-              label: 'Header text',
-              key: 'headerText',
-              value: [''],
-            },
-            {
-              value: 'Body1',
-              label: 'Header Type',
-              key: 'type',
-              type: 'FONT',
-            },
-            {
-              type: 'VARIABLE',
-              label: 'Content',
-              key: 'content',
-              value: [''],
-              configuration: {
-                as: 'MULTILINE',
-              },
-            },
-            {
-              value: 'Body1',
-              label: 'Body type',
-              key: 'bodyType',
-              type: 'FONT',
-            },
-            {
-              type: 'CUSTOM',
-              label: 'Column Alignment',
-              key: 'horizontalAlignment',
-              value: 'left',
-              configuration: {
-                as: 'BUTTONGROUP',
-                dataType: 'string',
-                allowedInput: [
-                  { name: 'Left', value: 'left' },
-                  { name: 'Center', value: 'center' },
-                  { name: 'Right', value: 'right' },
-                ],
-              },
-            },
-            {
-              type: 'SIZE',
-              label: 'Width',
-              key: 'width',
-              value: '',
-              configuration: {
-                as: 'UNIT',
-              },
-            },
-            {
-              type: 'COLOR',
-              label: 'Background',
-              key: 'background',
-              value: 'Transparent',
-            },
-            {
-              type: 'COLOR',
-              label: 'Border color',
-              key: 'borderColor',
-              value: 'Light',
-            },
-          ],
-          descendants: [],
-        },
-      ],
+      descendants: [],
     },
   ],
 }))();

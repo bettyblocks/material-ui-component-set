@@ -22,9 +22,7 @@
       setSelectedTab(index);
     };
 
-    useEffect(() => {
-      B.defineFunction('Select', doSetTab);
-    });
+    B.defineFunction('Select', doSetTab);
 
     const emptyBox = (
       <Box className={classes.empty} p={3}>

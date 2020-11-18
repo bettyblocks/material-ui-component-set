@@ -5,11 +5,11 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { List, ListItem, ListItemText } = window.MaterialUI.Core;
-    const { env, ModelProvider, useAllQuery } = B;
+    const { env, ModelProvider, useAllQuery, getProperty } = B;
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
     const isPristine = children.length === 0 && isDev;
-    const { filter, model, disablePadding, dense } = options;
+    const { filter, model, disablePadding, dense, orderBy, order } = options;
 
     const DataPlaceHolder = ({ text }) => (
       <List className={classes.root}>
@@ -21,7 +21,25 @@
 
     const listArgs = { className: classes.root, disablePadding, dense };
 
-    const { loading, error, data } = model && useAllQuery(model, { filter });
+    const orderByArray = [orderBy].flat();
+    const sort =
+      !isDev && orderBy
+        ? orderByArray.reduceRight((acc, property, index) => {
+            const prop = getProperty(property);
+            return index === orderByArray.length - 1
+              ? { [prop.name]: order.toUpperCase() }
+              : { [prop.name]: acc };
+          }, {})
+        : {};
+
+    const { loading, error, data } =
+      model &&
+      useAllQuery(model, {
+        filter,
+        variables: {
+          ...(orderBy ? { sort: { relation: sort } } : {}),
+        },
+      });
 
     if (loading) return <DataPlaceHolder text="loading..." />;
     if (error) return <DataPlaceHolder text="failed" />;
@@ -47,7 +65,7 @@
       }
       return (results || []).map(value => (
         <ModelProvider value={value} id={model}>
-          {children}
+          <B.InteractionScope>{children}</B.InteractionScope>
         </ModelProvider>
       ));
     };

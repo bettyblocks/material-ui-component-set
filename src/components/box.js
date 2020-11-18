@@ -69,11 +69,9 @@
       }
     }, [isDev, transparent]);
 
-    useEffect(() => {
-      B.defineFunction('ToOpaque', () => setOpacity(1));
-      B.defineFunction('ToSemiTransparent', () => setOpacity(0.5));
-      B.defineFunction('ToTransparent', () => setOpacity(0));
-    }, []);
+    B.defineFunction('ToOpaque', () => setOpacity(1));
+    B.defineFunction('ToSemiTransparent', () => setOpacity(0.5));
+    B.defineFunction('ToTransparent', () => setOpacity(0));
 
     return isDev ? <div className={classes.wrapper}>{BoxCmp}</div> : BoxCmp;
   })(),
@@ -91,6 +89,7 @@
         flexShrink: ({ options: { stretch } }) => (stretch ? 1 : 0),
         flexGrow: ({ options: { stretch } }) => (stretch ? 1 : 0),
         height: ({ options: { height } }) => height,
+        minHeight: 0,
         flexBasis: 'auto',
         flexDirection: 'column',
         alignContent: 'stretch',
@@ -110,6 +109,7 @@
       root: {
         boxSizing: 'border-box',
         height: ({ options: { height } }) => (isDev ? '100%' : height),
+        minHeight: 0,
         position: ({ options: { position } }) =>
           (!isDev && position) || 'relative',
         top: ({ options: { top } }) => !isDev && top,
@@ -206,6 +206,8 @@
           return image && `url("${image}")`;
         },
         backgroundSize: ({ options: { backgroundSize } }) => backgroundSize,
+        backgroundPosition: ({ options: { backgroundPosition } }) =>
+          backgroundPosition,
         backgroundRepeat: ({ options: { backgroundRepeat } }) =>
           backgroundRepeat,
       },

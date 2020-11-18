@@ -20,6 +20,10 @@
           switch (compare) {
             case 'neq':
               return left !== right;
+            case 'contains':
+              return left.indexOf(right) > -1;
+            case 'notcontains':
+              return left.indexOf(right) < 0;
             case 'gt':
               return leftAsNumber > rightAsNumber;
             case 'lt':
@@ -39,11 +43,9 @@
           setVisible(initialVisibility);
         }, [initialVisibility]);
 
-        useEffect(() => {
-          B.defineFunction('Hide', () => setVisible(false));
-          B.defineFunction('Show', () => setVisible(true));
-          B.defineFunction('Toggle', () => setVisible(s => !s));
-        }, []);
+        B.defineFunction('Hide', () => setVisible(false));
+        B.defineFunction('Show', () => setVisible(true));
+        B.defineFunction('Toggle', () => setVisible(s => !s));
 
         if (!visible) return null;
         return isPristine ? 'Conditional' : children;

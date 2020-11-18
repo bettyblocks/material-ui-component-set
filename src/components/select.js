@@ -23,6 +23,8 @@
       property,
       validationValueMissing,
       nameAttribute,
+      order,
+      orderBy,
     } = options;
     const { TextField, MenuItem } = window.MaterialUI.Core;
     const displayError = showError === 'built-in';
@@ -54,8 +56,27 @@
     const { name: labelName } = getProperty(labelProp) || {};
     const { name: propName } = getProperty(valueProp) || {};
 
+    const orderByArray = [orderBy].flat();
+    const sort =
+      !isDev && orderBy
+        ? orderByArray.reduceRight((acc, orderByProperty, index) => {
+            const prop = getProperty(orderByProperty);
+            return index === orderByArray.length - 1
+              ? { [prop.name]: order.toUpperCase() }
+              : { [prop.name]: acc };
+          }, {})
+        : {};
+
     const { loading, error, data, refetch } =
-      model && useAllQuery(model, { filter, skip: 0, take: 50 });
+      model &&
+      useAllQuery(model, {
+        filter,
+        skip: 0,
+        take: 50,
+        variables: {
+          ...(orderBy ? { sort: { relation: sort } } : {}),
+        },
+      });
 
     const mounted = useRef(false);
 
@@ -86,9 +107,7 @@
       }
     }
 
-    useEffect(() => {
-      B.defineFunction('Refetch', () => refetch());
-    }, [refetch]);
+    B.defineFunction('Refetch', () => refetch());
 
     const handleValidation = () => {
       const hasError = required && !value;

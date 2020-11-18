@@ -5,20 +5,76 @@
   orientation: 'VERTICAL',
   jsx: (() => {
     const { Icons } = window.MaterialUI;
-    const isDev = B.env === 'dev';
-    const { icon } = options;
+    const { Link, Badge } = window.MaterialUI.Core;
+    const { useText, env } = B;
+    const isDev = env === 'dev';
+    const {
+      icon,
+      addBadge,
+      content,
+      badgeColor,
+      anchorOrigin,
+      variant,
+      linkTo,
+      linkToExternal,
+      linkType,
+    } = options;
+
+    const hasLink = linkTo && linkTo.id !== '';
+    const hasExternalLink = linkToExternal && linkToExternal.id !== '';
+
+    const contentText = useText(content);
+    const linkToExternalText = useText(linkToExternal);
+    const anchorOriginSplit = anchorOrigin.split(',');
+    const anchorOriginObj = {
+      horizontal: anchorOriginSplit[0],
+      vertical: anchorOriginSplit[1],
+    };
     const IconComponent = React.createElement(Icons[icon], {
       className: classes.root,
     });
 
+    const href =
+      linkType === 'external' && hasExternalLink
+        ? linkToExternalText
+        : undefined;
+    const LinkComponent = (
+      <Link
+        href={href}
+        component={linkType === 'internal' && hasLink ? B.Link : undefined}
+        endpoint={linkType === 'internal' && hasLink ? linkTo : undefined}
+      >
+        {IconComponent}
+      </Link>
+    );
+
+    const Icon = hasLink ? LinkComponent : IconComponent;
+
+    const BadgeComponent = (
+      <Badge
+        classes={{ root: classes.badge }}
+        badgeContent={contentText}
+        color={badgeColor}
+        anchorOrigin={anchorOriginObj}
+        variant={variant}
+        overlap={variant === 'dot' ? 'circle' : 'rectangle'}
+      >
+        {Icon}
+      </Badge>
+    );
+
+    const Component = addBadge ? BadgeComponent : Icon;
+
     return isDev ? (
-      <span className={classes.wrapper}>{IconComponent}</span>
+      <span className={classes.wrapper}>{Component}</span>
     ) : (
-      IconComponent
+      Component
     );
   })(),
   styles: B => t => {
     const style = new B.Styling(t);
+    const convertSizes = sizes =>
+      sizes.map(size => style.getSpacing(size)).join(' ');
     const getSpacing = (idx, device = 'Mobile') =>
       idx === '0' ? '0rem' : style.getSpacing(idx, device);
 
@@ -69,6 +125,12 @@
               getSpacing(outerSpacing[3], 'Desktop'),
           },
         },
+      },
+      badge: {
+        margin: ({ options: { margin } }) => convertSizes(margin),
+        display: 'inline-flex',
+        justifyContent: 'center',
+        verticalAlign: 'middle',
       },
     };
   },
