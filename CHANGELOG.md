@@ -1,3 +1,10 @@
+## [1.63.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.63.1...v1.63.2) (2020-11-18)
+
+
+### Bug Fixes
+
+* responsive margin values in button ([10dd3b1](https://github.com/bettyblocks/material-ui-component-set/commit/10dd3b1b7931bb0b2eb2f1d4a376be42131c5c87))
+
 ## [1.63.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.63.0...v1.63.1) (2020-11-18)
 
 
