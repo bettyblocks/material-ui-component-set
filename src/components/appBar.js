@@ -21,7 +21,6 @@
       toolbarVariant,
       square,
       elevation,
-      logoWidth,
     } = options;
     const { Link, env, useText } = B;
     const isDev = env === 'dev';
@@ -38,7 +37,7 @@
     };
 
     const logo = useText(logoSource);
-    const LogoCmp = logo && <img src={logo} width={logoWidth} alt="" />;
+    const LogoCmp = logo && <img src={logo} className={classes.logo} alt="" />;
     const LogoComponent = endpoint.id ? (
       // eslint-disable-next-line jsx-a11y/anchor-is-valid
       <Link endpoint={endpoint}>{LogoCmp}</Link>
@@ -107,6 +106,9 @@
           '!important',
         ],
         zIndex: '1201 !important',
+      },
+      logo: {
+        width: ({ options: { logoWidth } }) => logoWidth,
       },
       toolbar: {
         flexDirection: ({ options: { alignItems } }) =>
