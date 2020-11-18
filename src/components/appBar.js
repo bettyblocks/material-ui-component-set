@@ -106,9 +106,8 @@
         ],
         zIndex: '1201 !important',
       },
-      logo:{
-        width: ({ options: { logoWidth } }) =>
-         logoWidth,
+      logo: {
+        width: ({ options: { logoWidth } }) => logoWidth,
       },
       toolbar: {
         flexDirection: ({ options: { alignItems } }) =>
