@@ -21,7 +21,6 @@
       toolbarVariant,
       square,
       elevation,
-      logoWidth,
     } = options;
     const { Link, env, useText } = B;
     const isDev = env === 'dev';
@@ -108,7 +107,8 @@
         zIndex: '1201 !important',
       },
       logo:{
-        width: ({ options: { logoWidth } }) => logoWidth,
+        width: ({ options: { logoWidth } }) =>
+         logoWidth,
       },
       toolbar: {
         flexDirection: ({ options: { alignItems } }) =>
