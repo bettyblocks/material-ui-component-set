@@ -1,3 +1,10 @@
+## [1.62.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.62.0...v1.62.1) (2020-11-18)
+
+
+### Bug Fixes
+
+* prevent form from sending data api request without filter ([b10b89f](https://github.com/bettyblocks/material-ui-component-set/commit/b10b89f6b3bf15015e8206ffcc8ab75a845614ae))
+
 # [1.62.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.61.0...v1.62.0) (2020-11-17)
 
 
