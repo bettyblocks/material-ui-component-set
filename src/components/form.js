@@ -36,7 +36,7 @@
         const redirectTo =
           env === 'prod' && hasRedirect && B.useEndpoint(redirect);
         const history = isDev ? {} : useHistory();
-        const [isInvalid, setIsInvalid] = useState(false);
+
         const location = isDev ? {} : useLocation();
         const { actionId, modelId, variableId } = formData;
         const formVariable = getActionInput(variableId);
@@ -59,16 +59,8 @@
           };
         }, []);
 
-        const handleInvalid = () => {
-          if (!isInvalid) {
-            setIsInvalid(true);
-            B.triggerEvent('onInvalid');
-          }
-        };
-
         const handleSubmit = (evt, callAction, item) => {
           evt.preventDefault();
-          setIsInvalid(false);
           B.triggerEvent('onSubmit');
           const formDataValues = new FormData(formRef.current);
           const values = Array.from(formDataValues).reduce(
@@ -117,6 +109,13 @@
         };
 
         const FormCmp = ({ item }) => {
+          const [isInvalid, setIsInvalid] = useState(false);
+          const handleInvalid = () => {
+            if (!isInvalid) {
+              setIsInvalid(true);
+              B.triggerEvent('onInvalid');
+            }
+          };
           useEffect(() => {
             B.triggerEvent('onComponentRendered');
           }, []);
@@ -139,7 +138,10 @@
 
                   <form
                     onInvalid={handleInvalid}
-                    onSubmit={evt => handleSubmit(evt, callAction, item)}
+                    onSubmit={evt => {
+                      setIsInvalid(false);
+                      handleSubmit(evt, callAction, item);
+                    }}
                     ref={formRef}
                     className={[
                       empty && classes.empty,
