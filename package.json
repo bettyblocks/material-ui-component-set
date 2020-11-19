@@ -1,6 +1,6 @@
 {
   "name": "component-set",
-  "version": "1.59.0",
+  "version": "1.63.2",
   "main": "dist/templates.json",
   "license": "UNLICENSED",
   "private": false,
@@ -19,7 +19,7 @@
     "husky": "^4.2.5",
     "nodemon": "^1.19.1",
     "prettier": "^1.15.3",
-    "semantic-release": "^17.0.7",
+    "semantic-release": "^17.2.3",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11"
   },

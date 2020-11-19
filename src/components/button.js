@@ -171,22 +171,21 @@
           boxShadow: ['none', '!important'],
           backgroundColor: ['rgba(0, 0, 0, 0.12)', '!important'],
         },
+        width: ({ options: { fullWidth, outerSpacing } }) => {
+          if (!fullWidth) return 'auto';
+          const marginRight = getSpacing(outerSpacing[1]);
+          const marginLeft = getSpacing(outerSpacing[3]);
+          return `calc(100% - ${marginRight} - ${marginLeft})`;
+        },
+        marginTop: ({ options: { outerSpacing } }) =>
+          getSpacing(outerSpacing[0]),
+        marginRight: ({ options: { outerSpacing } }) =>
+          getSpacing(outerSpacing[1]),
+        marginBottom: ({ options: { outerSpacing } }) =>
+          getSpacing(outerSpacing[2]),
+        marginLeft: ({ options: { outerSpacing } }) =>
+          getSpacing(outerSpacing[3]),
         '&.MuiButton-root, &.MuiIconButton-root': {
-          width: ({ options: { fullWidth, outerSpacing } }) => {
-            if (!fullWidth) return 'auto';
-            const marginRight = getSpacing(outerSpacing[1]);
-            const marginLeft = getSpacing(outerSpacing[3]);
-            return `calc(100% - ${marginRight} - ${marginLeft})`;
-          },
-          marginTop: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[0]),
-          marginRight: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[1]),
-          marginBottom: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[2]),
-          marginLeft: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[3]),
-
           [`@media ${B.mediaMinWidth(600)}`]: {
             width: ({ options: { fullWidth, outerSpacing } }) => {
               if (!fullWidth) return 'auto';
