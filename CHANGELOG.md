@@ -1,3 +1,10 @@
+## [1.63.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.63.2...v1.63.3) (2020-11-19)
+
+
+### Bug Fixes
+
+* changed data container filter to support global interaction ([9a7e015](https://github.com/bettyblocks/material-ui-component-set/commit/9a7e0153cd13bb8fd9d2f621c57ce1b583d4ef9c))
+
 ## [1.63.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.63.1...v1.63.2) (2020-11-18)
 
 
