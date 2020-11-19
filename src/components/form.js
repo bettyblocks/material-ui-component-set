@@ -6,7 +6,14 @@
   jsx: (
     <div>
       {(() => {
-        const { env, Children, Action, useAllQuery, getActionInput } = B;
+        const {
+          env,
+          Children,
+          Action,
+          useAllQuery,
+          getActionInput,
+          getIdProperty,
+        } = B;
 
         const {
           formData,
@@ -16,6 +23,7 @@
           redirect,
           showError,
           showSuccess,
+          currentRecord,
         } = options;
         const formRef = React.createRef();
 
@@ -32,18 +40,17 @@
         const location = isDev ? {} : useLocation();
         const { actionId, modelId, variableId } = formData;
         const formVariable = getActionInput(variableId);
-        const hasFilter = modelId && filter && Object.keys(filter).length > 0;
 
-        const { loading: isFetching, data: records, error: err } =
-          (hasFilter &&
-            useAllQuery(modelId, {
-              filter,
-              skip: 0,
-              take: 1,
-            })) ||
-          {};
+        const hasFilter =
+          modelId &&
+          ((filter && Object.keys(filter).length !== 0) || currentRecord);
 
         const mounted = useRef(false);
+
+        B.defineFunction('Submit', () => {
+          if (formRef.current)
+            formRef.current.dispatchEvent(new Event('submit'));
+        });
 
         useEffect(() => {
           mounted.current = true;
@@ -52,26 +59,6 @@
           };
         }, []);
 
-        useEffect(() => {
-          if (mounted.current && isFetching) {
-            B.triggerEvent('onDataLoad', isFetching);
-          }
-        }, [isFetching]);
-
-        if (err) {
-          B.triggerEvent('onDataError', err.message);
-        }
-
-        const item = records && records.results[0];
-
-        if (item) {
-          if (item.id) {
-            B.triggerEvent('onDataSuccess', item);
-          } else {
-            B.triggerEvent('onDataNoResults');
-          }
-        }
-
         const handleInvalid = () => {
           if (!isInvalid) {
             setIsInvalid(true);
@@ -79,7 +66,7 @@
           }
         };
 
-        const handleSubmit = (evt, callAction) => {
+        const handleSubmit = (evt, callAction, item) => {
           evt.preventDefault();
           setIsInvalid(false);
           B.triggerEvent('onSubmit');
@@ -101,20 +88,6 @@
             };
           }
           callAction(variables);
-        };
-
-        const renderContent = loading => {
-          if (!hasFilter || isDev) {
-            return <Children loading={loading}>{children}</Children>;
-          }
-          if (isFetching) return 'Loading...';
-          if (err && displayError) return err.message;
-          if (!item) return children;
-          return (
-            <B.ModelProvider key={item.id} value={item} id={modelId}>
-              {children}
-            </B.ModelProvider>
-          );
         };
 
         const trigger = (data, loading, error) => {
@@ -142,40 +115,108 @@
           }
         };
 
-        return (
-          <Action actionId={actionId}>
-            {(callAction, { data, loading, error }) => (
-              <>
-                {trigger(data, loading, error)}
-                <div className={classes.messageContainer}>
-                  {error && displayError && (
-                    <span className={classes.error}>{formErrorMessage}</span>
-                  )}
-                  {data && displaySuccess && (
-                    <span className={classes.success}>
-                      {formSuccessMessage}
-                    </span>
-                  )}
-                </div>
+        const FormCmp = ({ item }) => {
+          useEffect(() => {
+            B.triggerEvent('onComponentRendered');
+          }, []);
 
-                <form
-                  onInvalid={handleInvalid}
-                  onSubmit={evt => handleSubmit(evt, callAction)}
-                  ref={formRef}
-                  className={[
-                    empty && classes.empty,
-                    isPristine && classes.pristine,
-                  ].join(' ')}
-                >
-                  {isPristine && (
-                    <span>Drag form components in the form to submit data</span>
-                  )}
-                  {renderContent(loading)}
-                </form>
-              </>
-            )}
-          </Action>
-        );
+          return (
+            <Action actionId={actionId}>
+              {(callAction, { data, loading, error }) => (
+                <>
+                  {trigger(data, loading, error)}
+                  <div className={classes.messageContainer}>
+                    {error && displayError && (
+                      <span className={classes.error}>{formErrorMessage}</span>
+                    )}
+                    {data && displaySuccess && (
+                      <span className={classes.success}>
+                        {formSuccessMessage}
+                      </span>
+                    )}
+                  </div>
+
+                  <form
+                    onInvalid={handleInvalid}
+                    onSubmit={evt => handleSubmit(evt, callAction, item)}
+                    ref={formRef}
+                    className={[
+                      empty && classes.empty,
+                      isPristine && classes.pristine,
+                    ].join(' ')}
+                  >
+                    {isPristine && (
+                      <span>
+                        Drag form components in the form to submit data
+                      </span>
+                    )}
+                    {item ? (
+                      <B.ModelProvider key={item.id} value={item} id={modelId}>
+                        {children}
+                      </B.ModelProvider>
+                    ) : (
+                      <Children loading={loading}>{children}</Children>
+                    )}
+                  </form>
+                </>
+              )}
+            </Action>
+          );
+        };
+
+        const FormWithData = () => {
+          const getFilter = React.useCallback(() => {
+            if (isDev || !currentRecord || !modelId) {
+              return filter;
+            }
+
+            const idProperty = getIdProperty(modelId);
+            return {
+              [idProperty.id]: { eq: currentRecord },
+            };
+          }, [isDev, filter, currentRecord, modelId]);
+
+          const applyFilter = modelId && getFilter();
+
+          const { loading: isFetching, data: records, error: err, refetch } =
+            (applyFilter &&
+              useAllQuery(modelId, {
+                filter: applyFilter,
+                skip: 0,
+                take: 1,
+              })) ||
+            {};
+
+          B.defineFunction('Refetch', () => refetch());
+
+          useEffect(() => {
+            if (mounted.current && isFetching) {
+              B.triggerEvent('onDataLoad', isFetching);
+            }
+          }, [isFetching]);
+
+          if (err) {
+            B.triggerEvent('onDataError', err.message);
+          }
+
+          const item = records && records.results[0];
+
+          if (item) {
+            if (item.id) {
+              B.triggerEvent('onDataSuccess', item);
+            } else {
+              B.triggerEvent('onDataNoResults');
+            }
+          }
+
+          if (isFetching) return 'Loading...';
+          if (err && displayError) return err.message;
+          if (!item) return children;
+
+          return <FormCmp item={item} />;
+        };
+
+        return hasFilter ? <FormWithData /> : <FormCmp />;
       })()}
     </div>
   ),

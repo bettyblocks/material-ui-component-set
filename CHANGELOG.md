@@ -1,3 +1,87 @@
+## [1.63.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.63.2...v1.63.3) (2020-11-19)
+
+
+### Bug Fixes
+
+* changed data container filter to support global interaction ([9a7e015](https://github.com/bettyblocks/material-ui-component-set/commit/9a7e0153cd13bb8fd9d2f621c57ce1b583d4ef9c))
+
+## [1.63.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.63.1...v1.63.2) (2020-11-18)
+
+
+### Bug Fixes
+
+* responsive margin values in button ([10dd3b1](https://github.com/bettyblocks/material-ui-component-set/commit/10dd3b1b7931bb0b2eb2f1d4a376be42131c5c87))
+
+## [1.63.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.63.0...v1.63.1) (2020-11-18)
+
+
+### Bug Fixes
+
+* pattern validation number input ([4079372](https://github.com/bettyblocks/material-ui-component-set/commit/4079372214b8c975962c651e05f68628905f3708))
+
+# [1.63.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.62.1...v1.63.0) (2020-11-18)
+
+
+### Features
+
+* add logo width to appbar ([b7a5a8c](https://github.com/bettyblocks/material-ui-component-set/commit/b7a5a8cc31f4d5911e28710182479a98a7da4033))
+* add logo width to appbar ([532693b](https://github.com/bettyblocks/material-ui-component-set/commit/532693b6fa548541174dc19bad1f42c8ba998f5c))
+* add logo width to appbar ([ceffe0d](https://github.com/bettyblocks/material-ui-component-set/commit/ceffe0d2dab1d745e95647adcdc4be330b6db471))
+* add logo width to appbar ([14e893a](https://github.com/bettyblocks/material-ui-component-set/commit/14e893a75cc9fb717600adafdb35c315c588c689))
+
+## [1.62.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.62.0...v1.62.1) (2020-11-18)
+
+
+### Bug Fixes
+
+* prevent form from sending data api request without filter ([b10b89f](https://github.com/bettyblocks/material-ui-component-set/commit/b10b89f6b3bf15015e8206ffcc8ab75a845614ae))
+
+# [1.62.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.61.0...v1.62.0) (2020-11-17)
+
+
+### Features
+
+* add background position to box ([77773cd](https://github.com/bettyblocks/material-ui-component-set/commit/77773cdffeae7b500490bcced3d875e0324daa14))
+
+# [1.61.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.60.0...v1.61.0) (2020-11-17)
+
+
+### Features
+
+* add height option to Appbar ([7a7e9e3](https://github.com/bettyblocks/material-ui-component-set/commit/7a7e9e31ac600a21c375fe548d57fcab6ef19a8f))
+
+# [1.60.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.59.1...v1.60.0) (2020-11-17)
+
+
+### Features
+
+* add link and badge to icon component ([bfe1806](https://github.com/bettyblocks/material-ui-component-set/commit/bfe180675b36a10e1d997d490a9879e9e2a3451d))
+
+## [1.59.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.59.0...v1.59.1) (2020-11-16)
+
+
+### Bug Fixes
+
+* changed z-index of snackbar to be lower than toolbar ([3fbda8e](https://github.com/bettyblocks/material-ui-component-set/commit/3fbda8e00be5b8b875e92afa690b52490bd32a02))
+
+# [1.59.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.58.2...v1.59.0) (2020-11-16)
+
+
+### Bug Fixes
+
+* apply either filter or currentrecord ([4667f55](https://github.com/bettyblocks/material-ui-component-set/commit/4667f552da9a302bf935ed5ce5f4ac7d06b2b401))
+* change filter behavior ([59e30b4](https://github.com/bettyblocks/material-ui-component-set/commit/59e30b4fb7c8437082921f6f967c98a530aa1ddd))
+* only fetch data when currentRecord or filter ([252789c](https://github.com/bettyblocks/material-ui-component-set/commit/252789c0f6170d467c9fb32045ec0d99503005f1))
+* only fetch record when model is set ([f4e6c09](https://github.com/bettyblocks/material-ui-component-set/commit/f4e6c096eb069b853f45e2a6048a1122e6ba32d6))
+* trigger needs to be in use effect ([8acf2ca](https://github.com/bettyblocks/material-ui-component-set/commit/8acf2ca244ee872d94a4fd0fa7af87fefc1ff82b))
+
+
+### Features
+
+* add currentRecord feature to form ([c09f533](https://github.com/bettyblocks/material-ui-component-set/commit/c09f5331b61b46c45e4bb90feb0f6ea5afef2207))
+* add interaction/trigger to auto submit form ([16be2bc](https://github.com/bettyblocks/material-ui-component-set/commit/16be2bc9bdee73d4016b277fcafcecb61b09b106))
+* add Refetch interaction to form component ([c83ac03](https://github.com/bettyblocks/material-ui-component-set/commit/c83ac03234cb7b7b60d6376635775f242f204d8d))
+
 ## [1.58.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.58.1...v1.58.2) (2020-11-12)
 
 

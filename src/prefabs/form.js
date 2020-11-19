@@ -44,6 +44,20 @@
           },
         },
         {
+          value: '',
+          label: 'Current Record',
+          key: 'currentRecord',
+          type: 'NUMBER',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'currentRecord',
+              comparator: 'EQ',
+              value: 'never',
+            },
+          },
+        },
+        {
           value: 'built-in',
           label: 'Success message',
           key: 'showSuccess',
