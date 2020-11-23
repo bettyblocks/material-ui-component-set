@@ -235,7 +235,7 @@
           type={(isDev && type === 'number') || showPassword ? 'text' : type}
           multiline={multiline}
           rows={rows}
-          label={labelText}
+          label={labelText === '' ? undefined : labelText}
           placeholder={placeholderText}
           onKeyDown={onKeyDown}
           onChange={changeHandler}
