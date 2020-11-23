@@ -16,7 +16,7 @@
     close,
   }) => {
     const [modelId, setModelId] = React.useState('');
-    const [properties, setProperties] = React.useState(['']);
+    const [properties, setProperties] = React.useState([]);
 
     return (
       <>
