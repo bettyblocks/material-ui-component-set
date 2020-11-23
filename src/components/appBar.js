@@ -120,6 +120,10 @@
       },
       title: {
         textDecoration: 'none',
+        color: ({ options: { color } }) => [
+          style.getColor(color),
+          '!important',
+        ],
       },
       spacer: {
         flexGrow: 1,
