@@ -190,7 +190,19 @@
       };
     }, [search]);
 
-    B.defineFunction('Refetch', () => refetch());
+    B.defineFunction('Refetch', () => {
+      if (pagination === 'never') {
+        setInitialTimesFetched(0);
+        setResults([]);
+        setTimeout(() => {
+          setSkip(0);
+          refetch();
+        }, 0);
+      } else {
+        refetch();
+      }
+    });
+
     B.defineFunction('SetSearchValue', event => {
       setSearch(event.target.value);
     });
