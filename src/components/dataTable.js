@@ -190,12 +190,18 @@
       };
     }, [search]);
 
+    function clearResults() {
+      setInitialTimesFetched(0);
+      setResults([]);
+      setTimeout(() => {
+        setSkip(0);
+      }, 0);
+    }
+
     B.defineFunction('Refetch', () => {
       if (pagination === 'never') {
-        setInitialTimesFetched(0);
-        setResults([]);
+        clearResults();
         setTimeout(() => {
-          setSkip(0);
           refetch();
         }, 0);
       } else {
