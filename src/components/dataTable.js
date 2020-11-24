@@ -190,7 +190,25 @@
       };
     }, [search]);
 
-    B.defineFunction('Refetch', () => refetch());
+    function clearResults() {
+      setInitialTimesFetched(0);
+      setResults([]);
+      setTimeout(() => {
+        setSkip(0);
+      }, 0);
+    }
+
+    B.defineFunction('Refetch', () => {
+      if (pagination === 'never') {
+        clearResults();
+        setTimeout(() => {
+          refetch();
+        }, 0);
+      } else {
+        refetch();
+      }
+    });
+
     B.defineFunction('SetSearchValue', event => {
       setSearch(event.target.value);
     });
