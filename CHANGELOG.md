@@ -1,3 +1,17 @@
+## [1.63.5](https://github.com/bettyblocks/material-ui-component-set/compare/v1.63.4...v1.63.5) (2020-11-23)
+
+
+### Bug Fixes
+
+* remove empty string from properties list ([bf08083](https://github.com/bettyblocks/material-ui-component-set/commit/bf0808352ed5cf6ae8eace98c7b797572a30eca1))
+
+## [1.63.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.63.3...v1.63.4) (2020-11-23)
+
+
+### Bug Fixes
+
+* don’t reset form state on validation error ([56c1945](https://github.com/bettyblocks/material-ui-component-set/commit/56c1945decb83e8fb3829857b9dd641d9e4ab2f8))
+
 ## [1.63.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.63.2...v1.63.3) (2020-11-19)
 
 
