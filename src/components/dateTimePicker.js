@@ -37,7 +37,7 @@
     const { useText, env, getCustomModelAttribute } = B;
     const DateFns = new DateFnsUtils();
     const isDev = env === 'dev';
-    const [selectedDate, setSelectedDate] = useState();
+    const [selectedDate, setSelectedDate] = useState(null);
     const helper = useText(helperText);
     const placeholderText = useText(placeholder);
 
@@ -61,7 +61,7 @@
     };
 
     const setDefaultDate = (defaultFormat, givenFormat) => {
-      if (!selectedDate) {
+      if (!selectedDate && strDefaultValue) {
         const propDefaultParse = defaultFormat
           ? DateFns.parse(strDefaultValue, defaultFormat)
           : new Date(strDefaultValue);
@@ -77,7 +77,7 @@
       }
     };
 
-    B.defineFunction('Clear', () => setSelectedDate(''));
+    B.defineFunction('Clear', () => setSelectedDate(null));
 
     let DateTimeComponent;
     let format;
@@ -227,8 +227,9 @@
             style.getColor(labelColor),
             '!important',
           ],
-          zIndex: ({ options: { variant } }) =>
-            variant === 'standard' ? 1 : null,
+          zIndex: ({ options: { inputvariant } }) =>
+            inputvariant === 'standard' ? 1 : null,
+
           '&.Mui-focused': {
             color: ({ options: { borderFocusColor } }) => [
               style.getColor(borderFocusColor),
