@@ -1,3 +1,10 @@
+## [1.63.6](https://github.com/bettyblocks/material-ui-component-set/compare/v1.63.5...v1.63.6) (2020-11-25)
+
+
+### Bug Fixes
+
+* use color setting in appbar title when link is set (fixes [#649](https://github.com/bettyblocks/material-ui-component-set/issues/649)) ([7cf11ed](https://github.com/bettyblocks/material-ui-component-set/commit/7cf11ed35201dcd848cbb5a04c46a959b19154ad))
+
 ## [1.63.5](https://github.com/bettyblocks/material-ui-component-set/compare/v1.63.4...v1.63.5) (2020-11-23)
 
 
