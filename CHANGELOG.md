@@ -1,3 +1,10 @@
+# [1.64.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.63.7...v1.64.0) (2020-11-26)
+
+
+### Features
+
+* add dutch language to date pickers ([0f92a99](https://github.com/bettyblocks/material-ui-component-set/commit/0f92a99bdb7fa3f8f75be53fe0acb7bb35f338bb))
+
 ## [1.63.7](https://github.com/bettyblocks/material-ui-component-set/compare/v1.63.6...v1.63.7) (2020-11-26)
 
 
