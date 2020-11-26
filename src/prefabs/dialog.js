@@ -2,9 +2,33 @@
   name: 'Dialog',
   icon: 'DialogIcon',
   category: 'CONTENT',
+  actions: [],
+  interactions: [
+    {
+      name: 'CloseDialog',
+      sourceEvent: 'Click',
+      ref: {
+        targetComponentId: '#dialog',
+        sourceComponentId: '#closeBtn',
+      },
+      type: 'Custom',
+    },
+    {
+      name: 'CloseDialog',
+      sourceEvent: 'Click',
+      ref: {
+        targetComponentId: '#dialog',
+        sourceComponentId: '#cancelBtn',
+      },
+      type: 'Custom',
+    },
+  ],
   structure: [
     {
       name: 'Dialog',
+      ref: {
+        id: '#dialog',
+      },
       options: [
         {
           label: 'Toggle visibility',
@@ -739,6 +763,9 @@
                         },
                         {
                           name: 'Button',
+                          ref: {
+                            id: '#closeBtn',
+                          },
                           options: [
                             {
                               label: 'Toggle visibility',
@@ -2829,6 +2856,9 @@
                       descendants: [
                         {
                           name: 'Button',
+                          ref: {
+                            id: '#cancelBtn',
+                          },
                           options: [
                             {
                               label: 'Toggle visibility',
