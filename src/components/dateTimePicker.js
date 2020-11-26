@@ -24,6 +24,7 @@
       use24HourClockDateTime,
       use24HourClockTime,
       nameAttribute,
+      locale,
     } = options;
 
     const {
@@ -33,6 +34,7 @@
       KeyboardDateTimePicker,
     } = window.MaterialUI.Pickers;
     const { DateFnsUtils } = window.MaterialUI;
+    const { nlLocale, enLocale } = window.MaterialUI.DateLocales;
     const { AccessTime, Event } = window.MaterialUI.Icons;
     const { useText, env, getCustomModelAttribute } = B;
     const DateFns = new DateFnsUtils();
@@ -40,6 +42,11 @@
     const [selectedDate, setSelectedDate] = useState(null);
     const helper = useText(helperText);
     const placeholderText = useText(placeholder);
+
+    const localeMap = {
+      nl: nlLocale,
+      en: enLocale,
+    };
 
     const {
       id: customModelAttributeId,
@@ -166,7 +173,10 @@
 
     return isDev ? (
       <div className={classes.root}>
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <MuiPickersUtilsProvider
+          utils={DateFnsUtils}
+          locale={localeMap[locale]}
+        >
           {variant === 'static' ? (
             <div className={classes.static}>{DateTimeCmp}</div>
           ) : (
@@ -175,7 +185,7 @@
         </MuiPickersUtilsProvider>
       </div>
     ) : (
-      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+      <MuiPickersUtilsProvider utils={DateFnsUtils} locale={localeMap[locale]}>
         <input
           type="hidden"
           name={nameAttributeValue || customModelAttributeName}
