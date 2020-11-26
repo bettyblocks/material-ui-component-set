@@ -24,6 +24,7 @@
       use24HourClockDateTime,
       use24HourClockTime,
       nameAttribute,
+      locale,
     } = options;
 
     const {
@@ -33,13 +34,19 @@
       KeyboardDateTimePicker,
     } = window.MaterialUI.Pickers;
     const { DateFnsUtils } = window.MaterialUI;
+    const { nlLocale, enLocale } = window.MaterialUI.DateLocales;
     const { AccessTime, Event } = window.MaterialUI.Icons;
     const { useText, env, getCustomModelAttribute } = B;
     const DateFns = new DateFnsUtils();
     const isDev = env === 'dev';
-    const [selectedDate, setSelectedDate] = useState();
+    const [selectedDate, setSelectedDate] = useState(null);
     const helper = useText(helperText);
     const placeholderText = useText(placeholder);
+
+    const localeMap = {
+      nl: nlLocale,
+      en: enLocale,
+    };
 
     const {
       id: customModelAttributeId,
@@ -61,7 +68,7 @@
     };
 
     const setDefaultDate = (defaultFormat, givenFormat) => {
-      if (!selectedDate) {
+      if (!selectedDate && strDefaultValue) {
         const propDefaultParse = defaultFormat
           ? DateFns.parse(strDefaultValue, defaultFormat)
           : new Date(strDefaultValue);
@@ -77,7 +84,7 @@
       }
     };
 
-    B.defineFunction('Clear', () => setSelectedDate(''));
+    B.defineFunction('Clear', () => setSelectedDate(null));
 
     let DateTimeComponent;
     let format;
@@ -166,7 +173,10 @@
 
     return isDev ? (
       <div className={classes.root}>
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <MuiPickersUtilsProvider
+          utils={DateFnsUtils}
+          locale={localeMap[locale]}
+        >
           {variant === 'static' ? (
             <div className={classes.static}>{DateTimeCmp}</div>
           ) : (
@@ -175,7 +185,7 @@
         </MuiPickersUtilsProvider>
       </div>
     ) : (
-      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+      <MuiPickersUtilsProvider utils={DateFnsUtils} locale={localeMap[locale]}>
         <input
           type="hidden"
           name={nameAttributeValue || customModelAttributeName}
@@ -227,8 +237,9 @@
             style.getColor(labelColor),
             '!important',
           ],
-          zIndex: ({ options: { variant } }) =>
-            variant === 'standard' ? 1 : null,
+          zIndex: ({ options: { inputvariant } }) =>
+            inputvariant === 'standard' ? 1 : null,
+
           '&.Mui-focused': {
             color: ({ options: { borderFocusColor } }) => [
               style.getColor(borderFocusColor),

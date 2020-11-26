@@ -59,6 +59,7 @@
     const [page, setPage] = useState(0);
     const takeNum = parseInt(take, 10);
     const initialRender = useRef(true);
+    const skipAppend = useRef(false);
     const [skip, setSkip] = useState(0);
     const loadOnScroll = pagination === 'never' && autoLoadOnScroll;
     const autoLoadTakeAmountNum = parseInt(autoLoadTakeAmount, 10);
@@ -165,10 +166,11 @@
         }
         if (searchTerm !== previousSearchTerm) {
           setSkip(0);
+          setInitialTimesFetched(0);
           setPreviousSearchTerm(searchTerm);
           setNewSearch(true);
         } else {
-          if (newSearch) {
+          if (newSearch || (!autoLoadOnScroll && skipAppend.current)) {
             setResults(data.results);
           } else {
             setResults(prev => [...prev, ...data.results]);
@@ -176,9 +178,20 @@
           fetchingNextSet.current = false;
           setNewSearch(false);
         }
+        skipAppend.current = false;
         setTotalCount(data.totalCount);
       }
     }, [data, searchTerm]);
+
+    // results caching fix
+    useEffect(() => {
+      if (!autoLoadOnScroll) {
+        const dataResults = data && data.results;
+        if (results.length === 0 && dataResults && dataResults.length > 0) {
+          setResults(dataResults);
+        }
+      }
+    }, [results]);
 
     useEffect(() => {
       const handler = setTimeout(() => {
@@ -190,7 +203,26 @@
       };
     }, [search]);
 
-    B.defineFunction('Refetch', () => refetch());
+    function clearResults() {
+      setInitialTimesFetched(0);
+      setResults([]);
+      setTimeout(() => {
+        setSkip(0);
+      }, 0);
+    }
+
+    B.defineFunction('Refetch', () => {
+      if (pagination === 'never') {
+        clearResults();
+        skipAppend.current = true;
+        setTimeout(() => {
+          refetch();
+        }, 0);
+      } else {
+        refetch();
+      }
+    });
+
     B.defineFunction('SetSearchValue', event => {
       setSearch(event.target.value);
     });
