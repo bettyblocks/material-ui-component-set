@@ -1,3 +1,10 @@
+## [1.63.7](https://github.com/bettyblocks/material-ui-component-set/compare/v1.63.6...v1.63.7) (2020-11-26)
+
+
+### Bug Fixes
+
+* datatable autoload and refetch ([b230f66](https://github.com/bettyblocks/material-ui-component-set/commit/b230f664ab2269e0f29aad88755e82c1cdb354dd))
+
 ## [1.63.6](https://github.com/bettyblocks/material-ui-component-set/compare/v1.63.5...v1.63.6) (2020-11-25)
 
 
