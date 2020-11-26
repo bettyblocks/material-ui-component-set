@@ -1,3 +1,10 @@
+# [1.65.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.64.0...v1.65.0) (2020-11-26)
+
+
+### Features
+
+* date pickers have empty dates by default instead of today ([a243477](https://github.com/bettyblocks/material-ui-component-set/commit/a2434774693b42ae43afe83690b97462c0c21513))
+
 # [1.64.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.63.7...v1.64.0) (2020-11-26)
 
 
