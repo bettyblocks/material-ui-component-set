@@ -574,6 +574,7 @@
         height: ({ options: { height } }) => height,
       },
       paper: {
+        overflow: 'hidden',
         backgroundColor: ({ options: { background } }) => [
           style.getColor(background),
           '!important',
