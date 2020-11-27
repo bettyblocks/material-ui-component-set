@@ -442,15 +442,14 @@
           fetchingNextSet.current = false;
         };
 
-        if (needsCacheFix) {
-          if (!autoLoadOnScroll) {
-            setExistingData();
-          } else {
-            setSkip(0);
-            if (skip === 0) {
-              setExistingData();
-            }
-          }
+        if (needsCacheFix && !autoLoadOnScroll) {
+          setExistingData();
+        }
+        if (needsCacheFix && autoLoadOnScroll && skip === 0) {
+          setExistingData();
+        }
+        if (needsCacheFix && autoLoadOnScroll && skip !== 0) {
+          setSkip(0);
         }
       }
     }, [results]);
