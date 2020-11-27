@@ -34,6 +34,7 @@
     const [errorState, setErrorState] = useState(false);
     const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
+    const blancoOptionText = useText(blancoOption);
 
     const { kind, values = [] } = getProperty(property) || {};
 
@@ -194,7 +195,7 @@
           margin={margin}
           helperText={helper}
         >
-          {blancoOption && <MenuItem value="">{blancoOption}</MenuItem>}
+          {blancoOptionText && <MenuItem value="">{blancoOptionText}</MenuItem>}
           {renderOptions()}
         </TextField>
         <input

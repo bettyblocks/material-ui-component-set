@@ -16,10 +16,10 @@
           },
         },
         {
-          value: '',
+          value: [''],
           label: 'Blanco option',
           key: 'blancoOption',
-          type: 'TEXT',
+          type: 'VARIABLE',
         },
         {
           label: 'Option type',
