@@ -183,16 +183,6 @@
       }
     }, [data, searchTerm]);
 
-    // results caching fix
-    useEffect(() => {
-      if (!autoLoadOnScroll) {
-        const dataResults = data && data.results;
-        if (results.length === 0 && dataResults && dataResults.length > 0) {
-          setResults(dataResults);
-        }
-      }
-    }, [results]);
-
     useEffect(() => {
       const handler = setTimeout(() => {
         setSearchTerm(search);
@@ -437,6 +427,29 @@
             }
           };
           tableContainerElement.addEventListener('scroll', scrollEvent);
+        }
+      }
+    }, [results]);
+
+    useEffect(() => {
+      if (pagination === 'never') {
+        const dataResults = data && data.results;
+        const needsCacheFix =
+          results.length === 0 && dataResults && dataResults.length > 0;
+
+        const setExistingData = () => {
+          setResults(dataResults);
+          fetchingNextSet.current = false;
+        };
+
+        if (needsCacheFix && !autoLoadOnScroll) {
+          setExistingData();
+        }
+        if (needsCacheFix && autoLoadOnScroll && skip === 0) {
+          setExistingData();
+        }
+        if (needsCacheFix && autoLoadOnScroll && skip !== 0) {
+          setSkip(0);
         }
       }
     }, [results]);
