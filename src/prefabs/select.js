@@ -16,6 +16,12 @@
           },
         },
         {
+          value: '',
+          label: 'Blanco option',
+          key: 'blancoOption',
+          type: 'TEXT',
+        },
+        {
           label: 'Option type',
           key: 'optionType',
           value: 'static',
