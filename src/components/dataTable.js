@@ -637,7 +637,11 @@
           style.getColor(backgroundHeader),
           '!important',
         ],
-        '& th': {
+        '& div': {
+          borderBottom: `${isDev ? '0.0625rem solid #cccccc' : 0}`,
+        },
+        '& th, & div[role="columnheader"]': {
+          borderBottom: `${isDev ? 0 : '0.0625rem solid #cccccc!important'}`,
           backgroundColor: ({ options: { backgroundHeader } }) => [
             style.getColor(backgroundHeader),
             '!important',
