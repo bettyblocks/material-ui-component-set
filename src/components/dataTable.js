@@ -620,7 +620,13 @@
           style.getColor(backgroundHeader),
           '!important',
         ],
+        '& div': {
+          borderBottom: `${isDev ? '1px solid rgba(204, 204, 204, 1)' : 0}`,
+        },
         '& th, & div[role="columnheader"]': {
+          borderBottom: `${
+            isDev ? 0 : '1px solid rgba(204, 204, 204, 1)!important'
+          }`,
           backgroundColor: ({ options: { backgroundHeader } }) => [
             style.getColor(backgroundHeader),
             '!important',
