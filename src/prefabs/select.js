@@ -17,7 +17,7 @@
         },
         {
           value: [''],
-          label: 'Blanco',
+          label: 'Blank option',
           key: 'blanco',
           type: 'VARIABLE',
         },
