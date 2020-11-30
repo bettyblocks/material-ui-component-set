@@ -620,7 +620,7 @@
           style.getColor(backgroundHeader),
           '!important',
         ],
-        '& th': {
+        '& th, & div[role="columnheader"]': {
           backgroundColor: ({ options: { backgroundHeader } }) => [
             style.getColor(backgroundHeader),
             '!important',
