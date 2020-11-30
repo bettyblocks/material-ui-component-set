@@ -484,7 +484,7 @@
       if (amount > 0 || !hasToolbar) {
         style = {
           height: `calc(100% - ${amount}px)`,
-          borderRadius: `${hasToolbar ? '0px' : '5px'}`,
+          borderRadius: `${hasToolbar ? '0px' : '3px'}`,
         };
         setStylesProps({ style });
       } else {
@@ -644,7 +644,7 @@
         pointerEvents: isDev && 'none',
       },
       pagination: {
-        borderRadius: 5,
+        borderRadius: 3,
         pointerEvents: isDev && 'none',
         backgroundColor: ({ options: { background } }) => [
           style.getColor(background),
