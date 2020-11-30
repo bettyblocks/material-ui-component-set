@@ -480,8 +480,12 @@
       if (showPagination) {
         amount += paginationRef.current.clientHeight;
       }
-      if (amount > 0) {
-        const style = { height: `calc(100% - ${amount}px)` };
+      let style;
+      if (amount > 0 || !hasToolbar) {
+        style = {
+          height: `calc(100% - ${amount}px)`,
+          borderRadius: `${hasToolbar ? '0px' : '5px'}`,
+        };
         setStylesProps({ style });
       } else {
         setStylesProps(null);
@@ -574,7 +578,6 @@
         height: ({ options: { height } }) => height,
       },
       paper: {
-        overflow: 'hidden',
         backgroundColor: ({ options: { background } }) => [
           style.getColor(background),
           '!important',
@@ -641,6 +644,7 @@
         pointerEvents: isDev && 'none',
       },
       pagination: {
+        borderRadius: 5,
         pointerEvents: isDev && 'none',
         backgroundColor: ({ options: { background } }) => [
           style.getColor(background),
