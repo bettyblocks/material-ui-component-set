@@ -560,6 +560,7 @@
     const isDev = env === 'dev';
     const getSpacing = (idx, device = 'Mobile') =>
       idx === '0' ? '0rem' : style.getSpacing(idx, device);
+
     return {
       root: {
         marginTop: ({ options: { outerSpacing } }) =>
