@@ -17,8 +17,8 @@
         },
         {
           value: [''],
-          label: 'Blanco option',
-          key: 'blancoOption',
+          label: 'Blanco',
+          key: 'blanco',
           type: 'VARIABLE',
         },
         {
