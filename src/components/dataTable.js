@@ -560,7 +560,6 @@
     const isDev = env === 'dev';
     const getSpacing = (idx, device = 'Mobile') =>
       idx === '0' ? '0rem' : style.getSpacing(idx, device);
-
     return {
       root: {
         marginTop: ({ options: { outerSpacing } }) =>
@@ -621,12 +620,10 @@
           '!important',
         ],
         '& div': {
-          borderBottom: `${isDev ? '1px solid rgba(204, 204, 204, 1)' : 0}`,
+          borderBottom: `${isDev ? '1px solid #cccccc' : 0}`,
         },
         '& th, & div[role="columnheader"]': {
-          borderBottom: `${
-            isDev ? 0 : '1px solid rgba(204, 204, 204, 1)!important'
-          }`,
+          borderBottom: `${isDev ? 0 : '1px solid #cccccc!important'}`,
           backgroundColor: ({ options: { backgroundHeader } }) => [
             style.getColor(backgroundHeader),
             '!important',
