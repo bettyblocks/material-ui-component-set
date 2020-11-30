@@ -621,10 +621,10 @@
           '!important',
         ],
         '& div': {
-          borderBottom: `${isDev ? '1px solid #cccccc' : 0}`,
+          borderBottom: `${isDev ? '0.0625rem solid #cccccc' : 0}`,
         },
         '& th, & div[role="columnheader"]': {
-          borderBottom: `${isDev ? 0 : '1px solid #cccccc!important'}`,
+          borderBottom: `${isDev ? 0 : '0.0625rem solid #cccccc!important'}`,
           backgroundColor: ({ options: { backgroundHeader } }) => [
             style.getColor(backgroundHeader),
             '!important',
