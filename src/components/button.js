@@ -4,7 +4,12 @@
   allowedTypes: [],
   orientation: 'VERTICAL',
   jsx: (() => {
-    const { Button, IconButton, CircularProgress } = window.MaterialUI.Core;
+    const {
+      Button,
+      IconButton,
+      CircularProgress,
+      Tooltip,
+    } = window.MaterialUI.Core;
     const { Icons } = window.MaterialUI;
 
     const {
@@ -22,6 +27,9 @@
       actionId,
       buttonText,
       actionProperties,
+      addTooltip,
+      tooltipContent,
+      tooltipPlacement,
     } = options;
 
     const { env, useText, useAction } = B;
@@ -33,6 +41,7 @@
       (linkToExternal && useText(linkToExternal)) || '';
     const isIcon = variant === 'icon';
     const buttonContent = useText(buttonText);
+    const tooltipText = useText(tooltipContent);
 
     const [isVisible, setIsVisible] = useState(visible);
 
@@ -114,7 +123,7 @@
 
     const showIndicator = !isIcon && (isLoading || loading);
 
-    const ButtonComponent = (
+    const BasicButtonComponent = (
       <BtnComp
         {...compProps}
         startIcon={
@@ -141,6 +150,16 @@
         )}
       </BtnComp>
     );
+
+    const ButtonWithTooltip = (
+      <Tooltip title={tooltipText} placement={tooltipPlacement} arrow>
+        {BasicButtonComponent}
+      </Tooltip>
+    );
+
+    const ButtonComponent = addTooltip
+      ? ButtonWithTooltip
+      : BasicButtonComponent;
 
     if (isDev) {
       return <div className={classes.wrapper}>{ButtonComponent}</div>;
