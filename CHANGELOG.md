@@ -1,3 +1,10 @@
+## [1.65.5](https://github.com/bettyblocks/material-ui-component-set/compare/v1.65.4...v1.65.5) (2020-12-01)
+
+
+### Bug Fixes
+
+* remove previous caching fix ([#679](https://github.com/bettyblocks/material-ui-component-set/issues/679)) ([8ff7da3](https://github.com/bettyblocks/material-ui-component-set/commit/8ff7da3143c92a5a2f3049b9806eb825b01404ca))
+
 ## [1.65.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.65.3...v1.65.4) (2020-12-01)
 
 
