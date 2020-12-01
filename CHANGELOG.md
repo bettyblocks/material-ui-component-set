@@ -1,3 +1,10 @@
+## [1.65.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.65.3...v1.65.4) (2020-12-01)
+
+
+### Bug Fixes
+
+* dataTable interaction refetch without pagination ([f1c6842](https://github.com/bettyblocks/material-ui-component-set/commit/f1c684211a274696f422de3afee48c6b0300c786))
+
 ## [1.65.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.65.2...v1.65.3) (2020-12-01)
 
 
