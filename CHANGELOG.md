@@ -1,3 +1,10 @@
+## [1.65.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.65.1...v1.65.2) (2020-12-01)
+
+
+### Bug Fixes
+
+* dataTable border radius overflow ([84d9a7d](https://github.com/bettyblocks/material-ui-component-set/commit/84d9a7d75cefbea964270a36b08a0dc489961760))
+
 ## [1.65.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.65.0...v1.65.1) (2020-12-01)
 
 
