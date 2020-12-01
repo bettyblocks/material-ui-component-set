@@ -71,14 +71,17 @@
       }
     };
 
-    let MediaComponent = () => (
-      <div className={[(isEmpty || variableDev) && classes.empty]}>
-        <div className={classes.placeholderWrapper}>
-          <Placeholder />
-          {variable && <span>{imgUrl}</span>}
+    let MediaComponent = () => {
+      if (!isDev) return null;
+      return (
+        <div className={[(isEmpty || variableDev) && classes.empty]}>
+          <div className={classes.placeholderWrapper}>
+            <Placeholder />
+            {variable && <span>{imgUrl}</span>}
+          </div>
         </div>
-      </div>
-    );
+      );
+    };
 
     if (isImage && !variableDev) {
       MediaComponent = () => (

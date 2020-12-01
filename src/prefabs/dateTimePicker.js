@@ -36,6 +36,20 @@
           value: false,
         },
         {
+          label: 'Language',
+          key: 'locale',
+          value: 'en',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'English', value: 'en' },
+              { name: 'Dutch', value: 'nl' },
+            ],
+          },
+        },
+        {
           value: 'MM/dd/yyyy HH:mm:ss',
           label: 'Format',
           key: 'dateTimeFormat',

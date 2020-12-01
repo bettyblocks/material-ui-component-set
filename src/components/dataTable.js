@@ -183,6 +183,16 @@
       }
     }, [data, searchTerm]);
 
+    // results caching fix
+    useEffect(() => {
+      if (!autoLoadOnScroll) {
+        const dataResults = data && data.results;
+        if (results.length === 0 && dataResults && dataResults.length > 0) {
+          setResults(dataResults);
+        }
+      }
+    }, [results]);
+
     useEffect(() => {
       const handler = setTimeout(() => {
         setSearchTerm(search);
@@ -493,8 +503,12 @@
       if (showPagination) {
         amount += paginationRef.current.clientHeight;
       }
-      if (amount > 0) {
-        const style = { height: `calc(100% - ${amount}px)` };
+      let style;
+      if (amount > 0 || !hasToolbar) {
+        style = {
+          height: `calc(100% - ${amount}px)`,
+          borderRadius: `${hasToolbar ? '0rem' : '0.1875rem'}`,
+        };
         setStylesProps({ style });
       } else {
         setStylesProps(null);
@@ -633,7 +647,11 @@
           style.getColor(backgroundHeader),
           '!important',
         ],
-        '& th': {
+        '& div': {
+          borderBottom: `${isDev ? '0.0625rem solid #cccccc' : 0}`,
+        },
+        '& th, & div[role="columnheader"]': {
+          borderBottom: `${isDev ? 0 : '0.0625rem solid #cccccc!important'}`,
           backgroundColor: ({ options: { backgroundHeader } }) => [
             style.getColor(backgroundHeader),
             '!important',
@@ -653,6 +671,7 @@
         pointerEvents: isDev && 'none',
       },
       pagination: {
+        borderRadius: '0.1875rem',
         pointerEvents: isDev && 'none',
         backgroundColor: ({ options: { background } }) => [
           style.getColor(background),

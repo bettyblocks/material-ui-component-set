@@ -1,3 +1,52 @@
+## [1.65.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.65.2...v1.65.3) (2020-12-01)
+
+
+### Bug Fixes
+
+* prevent placeholder in runtime for media and tab ([c71e948](https://github.com/bettyblocks/material-ui-component-set/commit/c71e948e76c743dbc78214801894c958b393539d))
+
+## [1.65.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.65.1...v1.65.2) (2020-12-01)
+
+
+### Bug Fixes
+
+* dataTable border radius overflow ([84d9a7d](https://github.com/bettyblocks/material-ui-component-set/commit/84d9a7d75cefbea964270a36b08a0dc489961760))
+
+## [1.65.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.65.0...v1.65.1) (2020-12-01)
+
+
+### Bug Fixes
+
+* dataTable border radius overflow ([ee09c2c](https://github.com/bettyblocks/material-ui-component-set/commit/ee09c2c913294b96670f985be4f09d0802fd204b))
+
+# [1.65.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.64.0...v1.65.0) (2020-11-26)
+
+
+### Features
+
+* date pickers have empty dates by default instead of today ([a243477](https://github.com/bettyblocks/material-ui-component-set/commit/a2434774693b42ae43afe83690b97462c0c21513))
+
+# [1.64.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.63.7...v1.64.0) (2020-11-26)
+
+
+### Features
+
+* add dutch language to date pickers ([0f92a99](https://github.com/bettyblocks/material-ui-component-set/commit/0f92a99bdb7fa3f8f75be53fe0acb7bb35f338bb))
+
+## [1.63.7](https://github.com/bettyblocks/material-ui-component-set/compare/v1.63.6...v1.63.7) (2020-11-26)
+
+
+### Bug Fixes
+
+* datatable autoload and refetch ([b230f66](https://github.com/bettyblocks/material-ui-component-set/commit/b230f664ab2269e0f29aad88755e82c1cdb354dd))
+
+## [1.63.6](https://github.com/bettyblocks/material-ui-component-set/compare/v1.63.5...v1.63.6) (2020-11-25)
+
+
+### Bug Fixes
+
+* use color setting in appbar title when link is set (fixes [#649](https://github.com/bettyblocks/material-ui-component-set/issues/649)) ([7cf11ed](https://github.com/bettyblocks/material-ui-component-set/commit/7cf11ed35201dcd848cbb5a04c46a959b19154ad))
+
 ## [1.63.5](https://github.com/bettyblocks/material-ui-component-set/compare/v1.63.4...v1.63.5) (2020-11-23)
 
 
