@@ -183,16 +183,6 @@
       }
     }, [data, searchTerm]);
 
-    // results caching fix
-    useEffect(() => {
-      if (!autoLoadOnScroll) {
-        const dataResults = data && data.results;
-        if (results.length === 0 && dataResults && dataResults.length > 0) {
-          setResults(dataResults);
-        }
-      }
-    }, [results]);
-
     useEffect(() => {
       const handler = setTimeout(() => {
         setSearchTerm(search);
