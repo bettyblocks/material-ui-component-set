@@ -1,3 +1,10 @@
+## [1.65.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.65.2...v1.65.3) (2020-12-01)
+
+
+### Bug Fixes
+
+* prevent placeholder in runtime for media and tab ([c71e948](https://github.com/bettyblocks/material-ui-component-set/commit/c71e948e76c743dbc78214801894c958b393539d))
+
 ## [1.65.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.65.1...v1.65.2) (2020-12-01)
 
 
