@@ -40,6 +40,10 @@
     const showButton = () => setIsVisible(true);
     const [isLoading, setIsLoading] = useState(false);
     const toggleVisibility = () => setIsVisible(s => !s);
+    const logoutUser = () => {
+      localStorage.removeItem('TOKEN');
+      location.reload();
+    };
 
     const propertyMappings = new Map(actionProperties);
     const input = Array.from(propertyMappings.keys()).reduce((acc, key) => {
@@ -73,6 +77,7 @@
     B.defineFunction('Hide', hideButton);
     B.defineFunction('ToggleVisibility', toggleVisibility);
     B.defineFunction('ToggleLoadingState', toggleLoading);
+    B.defineFunction('Logout', logoutUser);
 
     useEffect(() => {
       if (loading) {
