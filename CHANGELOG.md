@@ -1,3 +1,10 @@
+# [1.66.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.65.6...v1.66.0) (2020-12-02)
+
+
+### Features
+
+* added blanco option to select ([af7e0d6](https://github.com/bettyblocks/material-ui-component-set/commit/af7e0d60961496a2ffd2dd9188310a321d6b0f81))
+
 ## [1.65.6](https://github.com/bettyblocks/material-ui-component-set/compare/v1.65.5...v1.65.6) (2020-12-02)
 
 
