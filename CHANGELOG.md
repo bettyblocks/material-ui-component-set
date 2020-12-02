@@ -1,3 +1,38 @@
+## [1.65.5](https://github.com/bettyblocks/material-ui-component-set/compare/v1.65.4...v1.65.5) (2020-12-01)
+
+
+### Bug Fixes
+
+* remove previous caching fix ([#679](https://github.com/bettyblocks/material-ui-component-set/issues/679)) ([8ff7da3](https://github.com/bettyblocks/material-ui-component-set/commit/8ff7da3143c92a5a2f3049b9806eb825b01404ca))
+
+## [1.65.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.65.3...v1.65.4) (2020-12-01)
+
+
+### Bug Fixes
+
+* dataTable interaction refetch without pagination ([f1c6842](https://github.com/bettyblocks/material-ui-component-set/commit/f1c684211a274696f422de3afee48c6b0300c786))
+
+## [1.65.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.65.2...v1.65.3) (2020-12-01)
+
+
+### Bug Fixes
+
+* prevent placeholder in runtime for media and tab ([c71e948](https://github.com/bettyblocks/material-ui-component-set/commit/c71e948e76c743dbc78214801894c958b393539d))
+
+## [1.65.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.65.1...v1.65.2) (2020-12-01)
+
+
+### Bug Fixes
+
+* dataTable border radius overflow ([84d9a7d](https://github.com/bettyblocks/material-ui-component-set/commit/84d9a7d75cefbea964270a36b08a0dc489961760))
+
+## [1.65.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.65.0...v1.65.1) (2020-12-01)
+
+
+### Bug Fixes
+
+* dataTable border radius overflow ([ee09c2c](https://github.com/bettyblocks/material-ui-component-set/commit/ee09c2c913294b96670f985be4f09d0802fd204b))
+
 # [1.65.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.64.0...v1.65.0) (2020-11-26)
 
 
