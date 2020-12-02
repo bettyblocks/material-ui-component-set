@@ -25,6 +25,7 @@
       nameAttribute,
       order,
       orderBy,
+      blanco,
     } = options;
     const { TextField, MenuItem } = window.MaterialUI.Core;
     const displayError = showError === 'built-in';
@@ -33,6 +34,7 @@
     const [errorState, setErrorState] = useState(false);
     const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
+    const blancoText = useText(blanco);
 
     const { kind, values = [] } = getProperty(property) || {};
 
@@ -193,6 +195,7 @@
           margin={margin}
           helperText={helper}
         >
+          {blancoText && <MenuItem value="">{blancoText}</MenuItem>}
           {renderOptions()}
         </TextField>
         <input

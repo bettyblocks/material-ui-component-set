@@ -16,6 +16,12 @@
           },
         },
         {
+          value: [''],
+          label: 'Blank option',
+          key: 'blanco',
+          type: 'VARIABLE',
+        },
+        {
           label: 'Option type',
           key: 'optionType',
           value: 'static',
