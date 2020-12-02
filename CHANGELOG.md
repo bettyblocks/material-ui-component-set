@@ -1,3 +1,10 @@
+## [1.65.6](https://github.com/bettyblocks/material-ui-component-set/compare/v1.65.5...v1.65.6) (2020-12-02)
+
+
+### Bug Fixes
+
+* temp undo usage of useProperty ([f75d49c](https://github.com/bettyblocks/material-ui-component-set/commit/f75d49cc71c9681ec7b4898b696386998d07bed4))
+
 ## [1.65.5](https://github.com/bettyblocks/material-ui-component-set/compare/v1.65.4...v1.65.5) (2020-12-01)
 
 
