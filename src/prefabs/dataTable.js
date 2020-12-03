@@ -202,6 +202,20 @@
           type: 'TOGGLE',
         },
         {
+          type: 'VARIABLE',
+          label: 'Search on text',
+          key: 'labelSearchOn',
+          value: ['Search on'],
+          configuration: {
+            condition: {
+              type: 'HIDE',
+              option: 'hideSearch',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
           value: '',
           label: 'Authentication Profile',
           key: 'authProfile',
