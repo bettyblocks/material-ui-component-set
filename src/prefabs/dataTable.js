@@ -46,7 +46,8 @@
 
             newPrefab.structure[0].options[0].value = modelId;
             properties.forEach(property => {
-              newPrefab.structure[0].descendants.push({
+              const row = newPrefab.structure[0].descendants[0];
+              row.descendants.push({
                 name: 'DataTableColumn',
                 options: [
                   {
@@ -125,7 +126,9 @@
                     value: 'Light',
                   },
                 ],
-                descendants: [],
+                descendants: [
+                  
+                ],
               });
             });
 
@@ -453,7 +456,9 @@
           },
         },
       ],
-      descendants: [],
+      descendants: [
+        {name: 'DataTableRow', options: [], descendants: []}
+      ],
     },
   ],
 }))();

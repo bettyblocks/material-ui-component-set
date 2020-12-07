@@ -1,7 +1,7 @@
 (() => ({
   name: 'DataTable',
   type: 'CONTENT_COMPONENT',
-  allowedTypes: ['DATATABLE_COLUMN'],
+  allowedTypes: ['DATATABLE_ROW'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const {
@@ -341,8 +341,16 @@
           </TableCell>
         ));
       }
+
+      console.log('updated');
+
       return (
-        <Children headerOnly handleSort={handleSort} orderBy={orderBy}>
+        <Children
+          headerOnly
+          handleSort={handleSort}
+          orderBy={orderBy}
+          backgroundHeader={options.backgroundHeader}
+        >
           {children}
         </Children>
       );
@@ -363,14 +371,7 @@
 
       const rows = results.map(value => (
         <ModelProvider value={value} id={model}>
-          <TableRow
-            key={value[0]}
-            classes={{ root: classes.bodyRow }}
-            onClick={() => handleRowClick(value)}
-            data-id={value.id}
-          >
-            <B.InteractionScope>{children}</B.InteractionScope>
-          </TableRow>
+          <B.InteractionScope key={value[0]}>{children}</B.InteractionScope>
         </ModelProvider>
       ));
 
@@ -389,7 +390,7 @@
       ));
       if (isDev) {
         tableContent = (
-          <TableRow classes={{ root: classes.bodyRow }}>{children}</TableRow>
+          <>{children}</>
         );
       } else if (model) {
         tableContent = tableContentModel();
@@ -542,11 +543,7 @@
               size={size}
               classes={{ root: classes.tableRoot }}
             >
-              <TableHead>
-                <TableRow classes={{ root: classes.headerRow }}>
-                  {renderTableHead()}
-                </TableRow>
-              </TableHead>
+              <TableHead>{renderTableHead()}</TableHead>
               <TableBody ref={tableRef}>{renderTableContent()}</TableBody>
               {isDev && (
                 <TableBody ref={repeaterRef} className={classes.autoRepeat} />
@@ -630,22 +627,6 @@
         [`@media ${B.mediaMinWidth(1280)}`]: {
           fontSize: ({ options: { titleType } }) =>
             style.getFontSize(titleType, 'Desktop'),
-        },
-      },
-      headerRow: {
-        backgroundColor: ({ options: { backgroundHeader } }) => [
-          style.getColor(backgroundHeader),
-          '!important',
-        ],
-        '& div': {
-          borderBottom: `${isDev ? '0.0625rem solid #cccccc' : 0}`,
-        },
-        '& th, & div[role="columnheader"]': {
-          borderBottom: `${isDev ? 0 : '0.0625rem solid #cccccc!important'}`,
-          backgroundColor: ({ options: { backgroundHeader } }) => [
-            style.getColor(backgroundHeader),
-            '!important',
-          ],
         },
       },
       bodyRow: {
