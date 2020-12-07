@@ -126,9 +126,7 @@
                     value: 'Light',
                   },
                 ],
-                descendants: [
-                  
-                ],
+                descendants: [],
               });
             });
 
@@ -456,9 +454,7 @@
           },
         },
       ],
-      descendants: [
-        {name: 'DataTableRow', options: [], descendants: []}
-      ],
+      descendants: [{ name: 'DataTableRow', options: [], descendants: [] }],
     },
   ],
 }))();
