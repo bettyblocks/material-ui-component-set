@@ -1,3 +1,11 @@
+## [1.66.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.66.0...v1.66.1) (2020-12-08)
+
+
+### Bug Fixes
+
+* remove apiVersion v1 and make v2 the default ([23d1699](https://github.com/bettyblocks/material-ui-component-set/commit/23d16997d28a481eeaa2b8cbacc35e83003d5c63))
+* rework filter setup. the property could be an object ([200c4ca](https://github.com/bettyblocks/material-ui-component-set/commit/200c4caa2d46caadf5eb24ab2d2e083a0c4dff5c))
+
 # [1.66.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.65.6...v1.66.0) (2020-12-02)
 
 
