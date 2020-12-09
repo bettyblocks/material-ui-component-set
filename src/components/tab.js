@@ -24,11 +24,14 @@
 
     B.defineFunction('Select', doSetTab);
 
-    const emptyBox = (
-      <Box className={classes.empty} p={3}>
-        Tab
-      </Box>
-    );
+    const EmptyBox = () => {
+      if (!isDev) return null;
+      return (
+        <Box className={classes.empty} p={3}>
+          Tab
+        </Box>
+      );
+    };
 
     const TabPanel = (isActive || !isDev) && (
       <Typography
@@ -37,7 +40,7 @@
         hidden={!isActive}
         aria-labelledby="tabs"
       >
-        {children.length === 0 ? emptyBox : children}
+        {children.length === 0 ? <EmptyBox /> : children}
       </Typography>
     );
 

@@ -59,6 +59,7 @@
     const [page, setPage] = useState(0);
     const takeNum = parseInt(take, 10);
     const initialRender = useRef(true);
+    const skipAppend = useRef(false);
     const [skip, setSkip] = useState(0);
     const loadOnScroll = pagination === 'never' && autoLoadOnScroll;
     const autoLoadTakeAmountNum = parseInt(autoLoadTakeAmount, 10);
@@ -66,7 +67,6 @@
     const [search, setSearch] = useState('');
     const [searchTerm, setSearchTerm] = useState('');
     const [showPagination, setShowPagination] = useState(false);
-    const searchPropertyArray = [searchProperty].flat();
     const { label: searchPropertyLabel = '{property}' } =
       getProperty(searchProperty) || {};
     const [orderBy, setOrderBy] = React.useState({
@@ -78,6 +78,7 @@
     const [previousSearchTerm, setPreviousSearchTerm] = useState('');
     const [newSearch, setNewSearch] = useState(false);
     const fetchingNextSet = useRef(false);
+    const [initialTimesFetched, setInitialTimesFetched] = useState(0);
     const amountOfRows = loadOnScroll ? autoLoadTakeAmountNum : rowsPerPage;
 
     const createSortObject = (fields, order) => {
@@ -130,10 +131,15 @@
       }, {});
     };
 
+    let path = [searchProperty].flat();
+    if (typeof searchProperty.id !== 'undefined') {
+      path = [searchProperty.id].flat();
+    }
+
     const searchFilter = searchProperty
-      ? searchPropertyArray.reduceRight(
+      ? path.reduceRight(
           (acc, property, index) =>
-            index === searchPropertyArray.length - 1
+            index === path.length - 1
               ? { [property]: { matches: searchTerm } }
               : { [property]: acc },
           {},
@@ -144,6 +150,7 @@
       searchProperty && searchTerm !== ''
         ? deepMerge(filter, searchFilter)
         : filter;
+
     const where = useFilter(newFilter);
 
     const { loading, error, data, refetch } =
@@ -164,10 +171,11 @@
         }
         if (searchTerm !== previousSearchTerm) {
           setSkip(0);
+          setInitialTimesFetched(0);
           setPreviousSearchTerm(searchTerm);
           setNewSearch(true);
         } else {
-          if (newSearch) {
+          if (newSearch || (!autoLoadOnScroll && skipAppend.current)) {
             setResults(data.results);
           } else {
             setResults(prev => [...prev, ...data.results]);
@@ -175,6 +183,7 @@
           fetchingNextSet.current = false;
           setNewSearch(false);
         }
+        skipAppend.current = false;
         setTotalCount(data.totalCount);
       }
     }, [data, searchTerm]);
@@ -189,7 +198,26 @@
       };
     }, [search]);
 
-    B.defineFunction('Refetch', () => refetch());
+    function clearResults() {
+      setInitialTimesFetched(0);
+      setResults([]);
+      setTimeout(() => {
+        setSkip(0);
+      }, 0);
+    }
+
+    B.defineFunction('Refetch', () => {
+      if (pagination === 'never') {
+        clearResults();
+        skipAppend.current = true;
+        setTimeout(() => {
+          refetch();
+        }, 0);
+      } else {
+        refetch();
+      }
+    });
+
     B.defineFunction('SetSearchValue', event => {
       setSearch(event.target.value);
     });
@@ -387,7 +415,12 @@
         const tableContainerElement = tableContainerRef.current;
         if (loadOnScroll) {
           const parent = tableContainerElement.parentNode;
-          if (tableContainerElement.scrollHeight <= parent.clientHeight) {
+
+          if (
+            tableContainerElement.scrollHeight <= parent.clientHeight &&
+            initialTimesFetched < 5
+          ) {
+            setInitialTimesFetched(prev => prev + 1);
             fetchNextSet();
           }
           const scrollEvent = e => {
@@ -399,6 +432,29 @@
             }
           };
           tableContainerElement.addEventListener('scroll', scrollEvent);
+        }
+      }
+    }, [results]);
+
+    useEffect(() => {
+      if (pagination === 'never') {
+        const dataResults = data && data.results;
+        const needsCacheFix =
+          results.length === 0 && dataResults && dataResults.length > 0;
+
+        const setExistingData = () => {
+          setResults(dataResults);
+          fetchingNextSet.current = false;
+        };
+
+        if (needsCacheFix && !autoLoadOnScroll) {
+          setExistingData();
+        }
+        if (needsCacheFix && autoLoadOnScroll && skip === 0) {
+          setExistingData();
+        }
+        if (needsCacheFix && autoLoadOnScroll && skip !== 0) {
+          setSkip(0);
         }
       }
     }, [results]);
@@ -442,8 +498,12 @@
       if (showPagination) {
         amount += paginationRef.current.clientHeight;
       }
-      if (amount > 0) {
-        const style = { height: `calc(100% - ${amount}px)` };
+      let style;
+      if (amount > 0 || !hasToolbar) {
+        style = {
+          height: `calc(100% - ${amount}px)`,
+          borderRadius: `${hasToolbar ? '0rem' : '0.1875rem'}`,
+        };
         setStylesProps({ style });
       } else {
         setStylesProps(null);
@@ -582,7 +642,11 @@
           style.getColor(backgroundHeader),
           '!important',
         ],
-        '& th': {
+        '& div': {
+          borderBottom: `${isDev ? '0.0625rem solid #cccccc' : 0}`,
+        },
+        '& th, & div[role="columnheader"]': {
+          borderBottom: `${isDev ? 0 : '0.0625rem solid #cccccc!important'}`,
           backgroundColor: ({ options: { backgroundHeader } }) => [
             style.getColor(backgroundHeader),
             '!important',
@@ -602,6 +666,7 @@
         pointerEvents: isDev && 'none',
       },
       pagination: {
+        borderRadius: '0.1875rem',
         pointerEvents: isDev && 'none',
         backgroundColor: ({ options: { background } }) => [
           style.getColor(background),

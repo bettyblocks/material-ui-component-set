@@ -51,12 +51,16 @@
           };
         }, [isDev, filter, currentRecord, model]);
 
+        const selectedFilter = getFilter();
+        const hasFilter =
+          selectedFilter && Object.keys(selectedFilter).length > 0;
+
         if (isDev) {
           return <BuilderLayout />;
         }
 
         const CanvasLayout = () => {
-          if (!model) {
+          if (!hasFilter) {
             return <BuilderLayout />;
           }
 
@@ -69,9 +73,12 @@
         };
 
         const One = ({ modelId }) => {
-          const { loading, data, error, refetch } = useOneQuery(modelId, {
-            filter: getFilter(),
-          });
+          const { loading, data, error, refetch } =
+            (hasFilter &&
+              useOneQuery(modelId, {
+                filter: getFilter(),
+              })) ||
+            {};
 
           B.defineFunction('Refetch', () => {
             refetch();

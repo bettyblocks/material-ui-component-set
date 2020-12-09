@@ -13,12 +13,6 @@
           type: 'MODEL',
         },
         {
-          value: '',
-          label: 'Authentication Profile',
-          key: 'authProfile',
-          type: 'AUTHENTICATION_PROFILE',
-        },
-        {
           value: {},
           label: 'Filter',
           key: 'filter',
@@ -28,28 +22,17 @@
           },
         },
         {
-          value: '',
-          label: 'Search on property',
-          key: 'searchProperty',
-          type: 'PROPERTY',
-          configuration: {
-            dependsOn: 'model',
-            apiVersion: 'v1',
-          },
-        },
-        {
           type: 'PROPERTY',
           label: 'Order by',
           key: 'orderBy',
           value: '',
           configuration: {
             dependsOn: 'model',
-            apiVersion: 'v1',
           },
         },
         {
           type: 'CUSTOM',
-          label: 'Order',
+          label: 'Sort order',
           key: 'order',
           value: 'asc',
           configuration: {
@@ -66,6 +49,27 @@
               { name: 'Descending', value: 'desc' },
             ],
           },
+        },
+        {
+          value: '',
+          label: 'Search on property',
+          key: 'searchProperty',
+          type: 'PROPERTY',
+          configuration: {
+            dependsOn: 'model',
+          },
+        },
+        {
+          value: '',
+          label: 'Hide built-in search field',
+          key: 'hideSearch',
+          type: 'TOGGLE',
+        },
+        {
+          value: '',
+          label: 'Authentication Profile',
+          key: 'authProfile',
+          type: 'AUTHENTICATION_PROFILE',
         },
         {
           label: 'Pagination',
@@ -147,12 +151,6 @@
           label: 'Outer space',
           key: 'outerSpacing',
           type: 'SIZES',
-        },
-        {
-          value: '',
-          label: 'Hide built-in search field',
-          key: 'hideSearch',
-          type: 'TOGGLE',
         },
         {
           value: 'built-in',

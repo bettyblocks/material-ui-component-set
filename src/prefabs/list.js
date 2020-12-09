@@ -22,6 +22,36 @@
           },
         },
         {
+          type: 'PROPERTY',
+          label: 'Order by',
+          key: 'orderBy',
+          value: '',
+          configuration: {
+            dependsOn: 'model',
+            apiVersion: 'v1',
+          },
+        },
+        {
+          type: 'CUSTOM',
+          label: 'Sort order',
+          key: 'order',
+          value: 'asc',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            condition: {
+              type: 'HIDE',
+              option: 'orderBy',
+              comparator: 'EQ',
+              value: '',
+            },
+            allowedInput: [
+              { name: 'Ascending', value: 'asc' },
+              { name: 'Descending', value: 'desc' },
+            ],
+          },
+        },
+        {
           type: 'COLOR',
           label: 'Background color',
           key: 'backgroundColor',

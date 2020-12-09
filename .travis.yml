@@ -6,7 +6,7 @@ jobs:
     - stage: linter
       script:
         - commitlint --from $(git rev-parse --short HEAD^1) --to $(git rev-parse --short HEAD^2)
-      if: type = pull_request
+      if: type = pull_request AND NOT (branch IN (acceptance, master))
       name: 'Commit lint'
     - script:
         - yarn

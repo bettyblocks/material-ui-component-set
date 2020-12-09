@@ -1,6 +1,6 @@
 {
   "name": "component-set",
-  "version": "1.56.0",
+  "version": "1.66.1",
   "main": "dist/templates.json",
   "license": "UNLICENSED",
   "private": false,
@@ -19,7 +19,7 @@
     "husky": "^4.2.5",
     "nodemon": "^1.19.1",
     "prettier": "^1.15.3",
-    "semantic-release": "^17.0.7",
+    "semantic-release": "^17.2.3",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11"
   },
@@ -32,7 +32,7 @@
   "scripts": {
     "start": "bb components serve -p 5002",
     "build": "bb components build",
-    "dev": "nodemon --watch src --exec \"yarn build && yarn start\"",
+    "dev": "nodemon",
     "lint": "eslint --ext js ./src",
     "prettier:base": "prettier --single-quote",
     "prettier:check": "yarn prettier:base --list-different \"src/**/*.js\"",

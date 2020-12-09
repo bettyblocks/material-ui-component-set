@@ -23,6 +23,9 @@
       property,
       validationValueMissing,
       nameAttribute,
+      order,
+      orderBy,
+      blanco,
     } = options;
     const { TextField, MenuItem } = window.MaterialUI.Core;
     const displayError = showError === 'built-in';
@@ -31,6 +34,7 @@
     const [errorState, setErrorState] = useState(false);
     const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
+    const blancoText = useText(blanco);
 
     const { kind, values = [] } = getProperty(property) || {};
 
@@ -54,8 +58,27 @@
     const { name: labelName } = getProperty(labelProp) || {};
     const { name: propName } = getProperty(valueProp) || {};
 
+    const orderByArray = [orderBy].flat();
+    const sort =
+      !isDev && orderBy
+        ? orderByArray.reduceRight((acc, orderByProperty, index) => {
+            const prop = getProperty(orderByProperty);
+            return index === orderByArray.length - 1
+              ? { [prop.name]: order.toUpperCase() }
+              : { [prop.name]: acc };
+          }, {})
+        : {};
+
     const { loading, error, data, refetch } =
-      model && useAllQuery(model, { filter, skip: 0, take: 50 });
+      model &&
+      useAllQuery(model, {
+        filter,
+        skip: 0,
+        take: 50,
+        variables: {
+          ...(orderBy ? { sort: { relation: sort } } : {}),
+        },
+      });
 
     const mounted = useRef(false);
 
@@ -172,6 +195,7 @@
           margin={margin}
           helperText={helper}
         >
+          {blancoText && <MenuItem value="">{blancoText}</MenuItem>}
           {renderOptions()}
         </TextField>
         <input

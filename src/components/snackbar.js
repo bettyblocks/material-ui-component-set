@@ -96,7 +96,7 @@
   })(),
   styles: () => () => ({
     root: {
-      zIndex: [900, '!important'],
+      zIndex: [9, '!important'],
       left: ({ options: { anchorOriginHorizontal } }) => {
         const isRight = anchorOriginHorizontal === 'right';
         const isLeft = anchorOriginHorizontal === 'left';
