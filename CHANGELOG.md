@@ -1,3 +1,10 @@
+# [1.67.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.66.1...v1.67.0) (2020-12-09)
+
+
+### Features
+
+* add close and cancel interactions to dialog prefab ([c8547ba](https://github.com/bettyblocks/material-ui-component-set/commit/c8547ba7877b491daa3da48b7d1bd151e1ca700d))
+
 ## [1.66.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.66.0...v1.66.1) (2020-12-08)
 
 
