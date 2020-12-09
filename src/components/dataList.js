@@ -35,7 +35,6 @@
         const rowsPerPage = parseInt(take, 10) || 50;
         const { TextField, InputAdornment } = window.MaterialUI.Core;
         const { Search } = window.MaterialUI.Icons;
-        const searchPropertyArray = [searchProperty].flat();
         const { label: searchPropertyLabel } =
           getProperty(searchProperty) || {};
 
@@ -156,10 +155,15 @@
               }, {})
             : {};
 
+        let path = [searchProperty].flat();
+        if (typeof searchProperty.id !== 'undefined') {
+          path = [searchProperty.id].flat();
+        }
+
         const searchFilter = searchProperty
-          ? searchPropertyArray.reduceRight(
+          ? path.reduceRight(
               (acc, property, index) =>
-                index === searchPropertyArray.length - 1
+                index === path.length - 1
                   ? { [property]: { matches: searchTerm } }
                   : { [property]: acc },
               {},
