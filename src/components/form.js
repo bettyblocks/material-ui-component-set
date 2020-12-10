@@ -12,6 +12,7 @@
           Action,
           useAllQuery,
           getActionInput,
+          getModel,
           getIdProperty,
         } = B;
 
@@ -73,10 +74,14 @@
           );
           const postValues =
             item && item.id ? { id: item.id, ...values } : values;
+          const postObjValues =
+            item && item.id ? { variable_id: item.id } : {};
           let variables = { variables: { input: postValues } };
           if (formVariable && formVariable.name) {
+            let modelName = getModel(modelId).name;
+            let modelLabel = modelName.split(/(?=[A-Z])/).join('_').toLowerCase();
             variables = {
-              variables: { input: { [formVariable.name]: postValues } },
+              variables: { input: { [formVariable.name]: postValues, [modelLabel]: postObjValues } },
             };
           }
           callAction(variables);
