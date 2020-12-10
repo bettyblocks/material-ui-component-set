@@ -30,10 +30,151 @@
               value={modelId}
             />
           </Field>
+          <Field label="Columns in the Data table">
+            <PropertiesSelector
+              modelId={modelId}
+              value={properties}
+              onChange={value => {
+                setProperties(value);
+              }}
+            />
+          </Field>
         </Content>
         <Footer
           onSave={() => {
             const newPrefab = { ...prefab };
+            newPrefab.structure[0].descendants[0].descendants[2].descendants[0].descendants[0].options[0].value = modelId;
+            newPrefab.structure[0].descendants[0].descendants[3].descendants[0].descendants[0].descendants[0].descendants[0].descendants[1].descendants[0].descendants[0].options[0].value.modelId = modelId;
+            newPrefab.structure[0].descendants[0].descendants[3].descendants[0].descendants[0].descendants[0].descendants[0].descendants[1].descendants[0].descendants[0].options[1].value = modelId;
+            newPrefab.structure[0].descendants[0].descendants[3].descendants[1].descendants[0].descendants[0].descendants[0].descendants[1].descendants[0].descendants[0].options[0].value.modelId = modelId;
+            newPrefab.structure[0].descendants[0].descendants[3].descendants[1].descendants[0].descendants[0].descendants[0].descendants[1].descendants[0].descendants[0].options[1].value = modelId;
+            properties.forEach(property => {
+              newPrefab.structure[0].descendants[0].descendants[2].descendants[0].descendants[0].descendants.unshift(
+                {
+                  name: 'DataTableColumn',
+                  options: [
+                    {
+                      value: property,
+                      label: 'Property',
+                      key: 'property',
+                      type: 'PROPERTY',
+                      configuration: {
+                        apiVersion: 'v2',
+                        allowedInput: [],
+                      },
+                    },
+                    {
+                      value: false,
+                      label: 'Sortable',
+                      key: 'sortable',
+                      type: 'TOGGLE',
+                      configuration: {
+                        apiVersion: 'v1',
+                        allowedInput: [],
+                      },
+                    },
+                    {
+                      value: [''],
+                      label: 'Header text',
+                      key: 'headerText',
+                      type: 'VARIABLE',
+                      configuration: {
+                        apiVersion: 'v1',
+                        allowedInput: [],
+                      },
+                    },
+                    {
+                      value: 'Body1',
+                      label: 'Header Type',
+                      key: 'type',
+                      type: 'FONT',
+                      configuration: {
+                        apiVersion: 'v1',
+                        allowedInput: [],
+                      },
+                    },
+                    {
+                      value: [''],
+                      label: 'Content',
+                      key: 'content',
+                      type: 'VARIABLE',
+                      configuration: {
+                        apiVersion: 'v1',
+                        as: 'MULTILINE',
+                        allowedInput: [],
+                      },
+                    },
+                    {
+                      value: 'Body1',
+                      label: 'Body type',
+                      key: 'bodyType',
+                      type: 'FONT',
+                      configuration: {
+                        apiVersion: 'v1',
+                        allowedInput: [],
+                      },
+                    },
+                    {
+                      value: 'left',
+                      label: 'Column Alignment',
+                      key: 'horizontalAlignment',
+                      type: 'CUSTOM',
+                      configuration: {
+                        apiVersion: 'v1',
+                        as: 'BUTTONGROUP',
+                        dataType: 'string',
+                        allowedInput: [
+                          {
+                            name: 'Left',
+                            value: 'left',
+                          },
+                          {
+                            name: 'Center',
+                            value: 'center',
+                          },
+                          {
+                            name: 'Right',
+                            value: 'right',
+                          },
+                        ],
+                      },
+                    },
+                    {
+                      value: '',
+                      label: 'Width',
+                      key: 'width',
+                      type: 'SIZE',
+                      configuration: {
+                        apiVersion: 'v1',
+                        as: 'UNIT',
+                        allowedInput: [],
+                      },
+                    },
+                    {
+                      value: 'Transparent',
+                      label: 'Background',
+                      key: 'background',
+                      type: 'COLOR',
+                      configuration: {
+                        apiVersion: 'v1',
+                        allowedInput: [],
+                      },
+                    },
+                    {
+                      value: 'Light',
+                      label: 'Border color',
+                      key: 'borderColor',
+                      type: 'COLOR',
+                      configuration: {
+                        apiVersion: 'v1',
+                        allowedInput: [],
+                      },
+                    },
+                  ],
+                  descendants: [],
+                },
+              );
+            });
             save(newPrefab);
           }}
           onClose={close}
@@ -1919,7 +2060,7 @@
                               comparator: 'EQ',
                               option: 'variant',
                               type: 'HIDE',
-                              value: '"icon"',
+                              value: 'icon',
                             },
                           },
                         },
@@ -1960,7 +2101,7 @@
                               comparator: 'EQ',
                               option: 'linkType',
                               type: 'SHOW',
-                              value: '"internal"',
+                              value: 'internal',
                             },
                           },
                         },
@@ -1977,7 +2118,7 @@
                               comparator: 'EQ',
                               option: 'linkType',
                               type: 'SHOW',
-                              value: '"external"',
+                              value: 'external',
                             },
                           },
                         },
@@ -2009,7 +2150,7 @@
                               comparator: 'EQ',
                               option: 'linkType',
                               type: 'SHOW',
-                              value: '"action"',
+                              value: 'action',
                             },
                           },
                         },
@@ -3878,6 +4019,7 @@
                       },
                     },
                   ],
+                  // Data table
                   descendants: [
                     {
                       name: 'DataTable',
@@ -4398,262 +4540,6 @@
                         },
                       ],
                       descendants: [
-                        {
-                          name: 'DataTableColumn',
-                          options: [
-                            {
-                              value: {
-                                id: ['408ab788445446cf8205511b30e2df5a'],
-                                label: 'Id',
-                                kind: 'SERIAL',
-                                type: 'PROPERTY',
-                              },
-                              label: 'Property',
-                              key: 'property',
-                              type: 'PROPERTY',
-                              configuration: {
-                                apiVersion: 'v2',
-                                allowedInput: [],
-                              },
-                            },
-                            {
-                              value: false,
-                              label: 'Sortable',
-                              key: 'sortable',
-                              type: 'TOGGLE',
-                              configuration: {
-                                apiVersion: 'v1',
-                                allowedInput: [],
-                              },
-                            },
-                            {
-                              value: [''],
-                              label: 'Header text',
-                              key: 'headerText',
-                              type: 'VARIABLE',
-                              configuration: {
-                                apiVersion: 'v1',
-                                allowedInput: [],
-                              },
-                            },
-                            {
-                              value: 'Body1',
-                              label: 'Header Type',
-                              key: 'type',
-                              type: 'FONT',
-                              configuration: {
-                                apiVersion: 'v1',
-                                allowedInput: [],
-                              },
-                            },
-                            {
-                              value: [''],
-                              label: 'Content',
-                              key: 'content',
-                              type: 'VARIABLE',
-                              configuration: {
-                                apiVersion: 'v1',
-                                as: 'MULTILINE',
-                                allowedInput: [],
-                              },
-                            },
-                            {
-                              value: 'Body1',
-                              label: 'Body type',
-                              key: 'bodyType',
-                              type: 'FONT',
-                              configuration: {
-                                apiVersion: 'v1',
-                                allowedInput: [],
-                              },
-                            },
-                            {
-                              value: 'left',
-                              label: 'Column Alignment',
-                              key: 'horizontalAlignment',
-                              type: 'CUSTOM',
-                              configuration: {
-                                apiVersion: 'v1',
-                                as: 'BUTTONGROUP',
-                                dataType: 'string',
-                                allowedInput: [
-                                  {
-                                    name: 'Left',
-                                    value: 'left',
-                                  },
-                                  {
-                                    name: 'Center',
-                                    value: 'center',
-                                  },
-                                  {
-                                    name: 'Right',
-                                    value: 'right',
-                                  },
-                                ],
-                              },
-                            },
-                            {
-                              value: '',
-                              label: 'Width',
-                              key: 'width',
-                              type: 'SIZE',
-                              configuration: {
-                                apiVersion: 'v1',
-                                as: 'UNIT',
-                                allowedInput: [],
-                              },
-                            },
-                            {
-                              value: 'Transparent',
-                              label: 'Background',
-                              key: 'background',
-                              type: 'COLOR',
-                              configuration: {
-                                apiVersion: 'v1',
-                                allowedInput: [],
-                              },
-                            },
-                            {
-                              value: 'Light',
-                              label: 'Border color',
-                              key: 'borderColor',
-                              type: 'COLOR',
-                              configuration: {
-                                apiVersion: 'v1',
-                                allowedInput: [],
-                              },
-                            },
-                          ],
-                          descendants: [],
-                        },
-                        {
-                          name: 'DataTableColumn',
-                          options: [
-                            {
-                              value: {
-                                id: ['d32d92f1cebf45b7b8cbb62864e55ece'],
-                                label: 'Name',
-                                kind: 'STRING',
-                                type: 'PROPERTY',
-                              },
-                              label: 'Property',
-                              key: 'property',
-                              type: 'PROPERTY',
-                              configuration: {
-                                apiVersion: 'v2',
-                                allowedInput: [],
-                              },
-                            },
-                            {
-                              value: false,
-                              label: 'Sortable',
-                              key: 'sortable',
-                              type: 'TOGGLE',
-                              configuration: {
-                                apiVersion: 'v1',
-                                allowedInput: [],
-                              },
-                            },
-                            {
-                              value: [''],
-                              label: 'Header text',
-                              key: 'headerText',
-                              type: 'VARIABLE',
-                              configuration: {
-                                apiVersion: 'v1',
-                                allowedInput: [],
-                              },
-                            },
-                            {
-                              value: 'Body1',
-                              label: 'Header Type',
-                              key: 'type',
-                              type: 'FONT',
-                              configuration: {
-                                apiVersion: 'v1',
-                                allowedInput: [],
-                              },
-                            },
-                            {
-                              value: [''],
-                              label: 'Content',
-                              key: 'content',
-                              type: 'VARIABLE',
-                              configuration: {
-                                apiVersion: 'v1',
-                                as: 'MULTILINE',
-                                allowedInput: [],
-                              },
-                            },
-                            {
-                              value: 'Body1',
-                              label: 'Body type',
-                              key: 'bodyType',
-                              type: 'FONT',
-                              configuration: {
-                                apiVersion: 'v1',
-                                allowedInput: [],
-                              },
-                            },
-                            {
-                              value: 'left',
-                              label: 'Column Alignment',
-                              key: 'horizontalAlignment',
-                              type: 'CUSTOM',
-                              configuration: {
-                                apiVersion: 'v1',
-                                as: 'BUTTONGROUP',
-                                dataType: 'string',
-                                allowedInput: [
-                                  {
-                                    name: 'Left',
-                                    value: 'left',
-                                  },
-                                  {
-                                    name: 'Center',
-                                    value: 'center',
-                                  },
-                                  {
-                                    name: 'Right',
-                                    value: 'right',
-                                  },
-                                ],
-                              },
-                            },
-                            {
-                              value: '',
-                              label: 'Width',
-                              key: 'width',
-                              type: 'SIZE',
-                              configuration: {
-                                apiVersion: 'v1',
-                                as: 'UNIT',
-                                allowedInput: [],
-                              },
-                            },
-                            {
-                              value: 'Transparent',
-                              label: 'Background',
-                              key: 'background',
-                              type: 'COLOR',
-                              configuration: {
-                                apiVersion: 'v1',
-                                allowedInput: [],
-                              },
-                            },
-                            {
-                              value: 'Light',
-                              label: 'Border color',
-                              key: 'borderColor',
-                              type: 'COLOR',
-                              configuration: {
-                                apiVersion: 'v1',
-                                allowedInput: [],
-                              },
-                            },
-                          ],
-                          descendants: [],
-                        },
                         {
                           name: 'DataTableColumn',
                           options: [
@@ -8912,23 +8798,19 @@
                                               type: 'FORM_DATA',
                                               configuration: {
                                                 apiVersion: 'v1',
-                                                allowedInput: [],
                                               },
                                             },
                                             {
-                                              value:
-                                                '663e53ac49914e00a34365078426b0b9',
+                                              value: '',
                                               label: 'Model',
                                               key: 'model',
                                               type: 'MODEL',
                                               configuration: {
-                                                apiVersion: 'v1',
-                                                allowedInput: [],
                                                 condition: {
-                                                  comparator: 'EQ',
-                                                  option: 'formData',
                                                   type: 'SHOW',
-                                                  value: '""',
+                                                  option: 'formData',
+                                                  comparator: 'EQ',
+                                                  value: '',
                                                 },
                                               },
                                             },
@@ -8955,7 +8837,7 @@
                                                   comparator: 'EQ',
                                                   option: 'currentRecord',
                                                   type: 'SHOW',
-                                                  value: '"never"',
+                                                  value: 'never',
                                                 },
                                               },
                                             },
@@ -8993,7 +8875,7 @@
                                                   comparator: 'EQ',
                                                   option: 'showSuccess',
                                                   type: 'SHOW',
-                                                  value: '"built-in"',
+                                                  value: 'built-in',
                                                 },
                                               },
                                             },
@@ -9031,7 +8913,7 @@
                                                   comparator: 'EQ',
                                                   option: 'showError',
                                                   type: 'SHOW',
-                                                  value: '"built-in"',
+                                                  value: 'built-in',
                                                 },
                                               },
                                             },
@@ -9047,7 +8929,6 @@
                                               type: 'SIZES',
                                               configuration: {
                                                 apiVersion: 'v1',
-                                                allowedInput: [],
                                               },
                                             },
                                             {
@@ -9058,7 +8939,6 @@
                                               type: 'ENDPOINT',
                                               configuration: {
                                                 apiVersion: 'v1',
-                                                allowedInput: [],
                                               },
                                             },
                                           ],
@@ -9068,16 +8948,8 @@
                                               options: [
                                                 {
                                                   value: {
-                                                    id: null,
                                                     label: ['Name'],
-                                                    value: [
-                                                      {
-                                                        id:
-                                                          'd32d92f1cebf45b7b8cbb62864e55ece',
-                                                        name: 'Customer.name',
-                                                        type: 'PROPERTY',
-                                                      },
-                                                    ],
+                                                    value: [],
                                                   },
                                                   label: 'Label',
                                                   key: 'customModelAttribute',
@@ -15387,14 +15259,7 @@
                                                   value: {
                                                     id: null,
                                                     label: ['Name'],
-                                                    value: [
-                                                      {
-                                                        id:
-                                                          'd32d92f1cebf45b7b8cbb62864e55ece',
-                                                        name: 'Customer.name',
-                                                        type: 'PROPERTY',
-                                                      },
-                                                    ],
+                                                    value: [],
                                                   },
                                                   label: 'Label',
                                                   key: 'customModelAttribute',
