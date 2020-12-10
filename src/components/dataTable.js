@@ -11,7 +11,6 @@
       GetMe,
       useText,
       ModelProvider,
-      useEndpoint,
       useAllQuery,
       useFilter,
     } = B;
@@ -303,36 +302,13 @@
       setSearch(event.target.value);
     };
 
-    const isFlatValue = value =>
-      typeof value === 'string' ||
-      typeof value === 'number' ||
-      typeof value === 'boolean';
-
     const history = isDev ? {} : useHistory();
 
-    const handleRowClick = rowValue => {
+    const handleRowClick = (endpoint, rowValue) => {
       if (isDev) return;
-      B.triggerEvent('OnRowClick', rowValue);
+      B.triggerEvent('OnRowClick', rowValue, endpoint);
       if (hasLink) {
-        const { id, params } = linkTo;
-        const newParams = Object.entries(params).reduce((acc, cv) => {
-          const key = cv[0];
-          const value = cv[1];
-          if (isFlatValue(value[0])) {
-            acc[key] = value;
-          } else {
-            const propId = value[0].id;
-            const property = getProperty(propId).name;
-            acc[key] = [rowValue[property].toString()];
-          }
-          return acc;
-        }, {});
-
-        const endpointParams = {
-          id,
-          params: newParams,
-        };
-        history.push(useEndpoint(endpointParams));
+        history.push(endpoint);
       }
     };
 
@@ -371,10 +347,17 @@
           <TableRow
             key={value[0]}
             classes={{ root: classes.bodyRow }}
-            onClick={() => handleRowClick(value)}
             data-id={value.id}
           >
-            <B.InteractionScope>{children}</B.InteractionScope>
+            <B.InteractionScope>
+              <Children
+                linkTo={linkTo}
+                handleRowClick={handleRowClick}
+                rowValue={value}
+              >
+                {children}
+              </Children>
+            </B.InteractionScope>
           </TableRow>
         </ModelProvider>
       ));
@@ -389,7 +372,11 @@
     const renderTableContent = () => {
       let tableContent = Array.from(Array(amountOfRows).keys()).map(idx => (
         <TableRow key={idx} classes={{ root: classes.bodyRow }}>
-          <B.InteractionScope>{children}</B.InteractionScope>
+          <B.InteractionScope>
+            <Children linkTo={linkTo} handleRowClick={handleRowClick}>
+              {children}
+            </Children>
+          </B.InteractionScope>
         </TableRow>
       ));
       if (isDev) {
