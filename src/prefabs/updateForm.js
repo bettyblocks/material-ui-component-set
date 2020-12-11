@@ -91,7 +91,8 @@
             const newPrefab = { ...prefab };
             newPrefab.structure[0].options[0].value.modelId = modelId;
             newPrefab.structure[0].options[1].value = modelId;
-            newPrefab.variables[0].modelId = modelId;
+            newPrefab.variables[0].options.modelId = modelId;
+            newPrefab.variables[1].options.modelId = modelId;
             newPrefab.actions[0].events[0].options.assign = properties.map(
               property => ({
                 leftHandSide: property.id[0],
@@ -521,6 +522,9 @@
                           label: [property.label],
                           value: [property],
                           propertyIds: property.id,
+                          ref: {
+                            id: `#attribute_${property.id[0]}`,
+                          },
                         },
                         label: 'Label',
                         key: 'customModelAttribute',
@@ -2196,6 +2200,9 @@
                           label: [property.label],
                           value: [property],
                           propertyIds: property.id,
+                          ref: {
+                            id: `#attribute_${property.id[0]}`,
+                          },
                         },
                         label: 'Label',
                         key: 'customModelAttribute',
@@ -2602,6 +2609,9 @@
                           label: [property.label],
                           value: [property],
                           propertyIds: property.id,
+                          ref: {
+                            id: `#attribute_${property.id[0]}`,
+                          },
                         },
                         label: 'Label',
                         key: 'customModelAttribute',
@@ -4269,6 +4279,9 @@
                           label: [property.label],
                           value: [property],
                           propertyIds: property.id,
+                          ref: {
+                            id: `#attribute_${property.id[0]}`,
+                          },
                         },
                         label: 'Label',
                         key: 'customModelAttribute',
@@ -4675,6 +4688,9 @@
                           label: [property.label],
                           value: [property],
                           propertyIds: property.id,
+                          ref: {
+                            id: `#attribute_${property.id[0]}`,
+                          },
                         },
                         label: 'Label',
                         key: 'customModelAttribute',
@@ -5083,6 +5099,9 @@
                           label: [property.label],
                           value: [property],
                           propertyIds: property.id,
+                          ref: {
+                            id: `#attribute_${property.id[0]}`,
+                          },
                         },
                         label: 'Label',
                         key: 'customModelAttribute',
@@ -5405,6 +5424,9 @@
                           label: [property.label],
                           value: [property],
                           propertyIds: property.id,
+                          ref: {
+                            id: `#attribute_${property.id[0]}`,
+                          },
                         },
                         label: 'Label',
                         key: 'customModelAttribute',
@@ -5764,6 +5786,9 @@
                           label: [property.label],
                           value: [property],
                           propertyIds: property.id,
+                          ref: {
+                            id: `#attribute_${property.id[0]}`,
+                          },
                         },
                         label: 'Label',
                         key: 'customModelAttribute',
@@ -6093,6 +6118,9 @@
                           label: [property.label],
                           value: [property],
                           propertyIds: property.id,
+                          ref: {
+                            id: `#attribute_${property.id[0]}`,
+                          },
                         },
                         label: 'Label',
                         key: 'customModelAttribute',
@@ -7628,6 +7656,9 @@
                           label: [property.label],
                           value: [property],
                           propertyIds: property.id,
+                          ref: {
+                            id: `#attribute_${property.id[0]}`,
+                          },
                         },
                         label: 'Label',
                         key: 'customModelAttribute',
@@ -7807,6 +7838,9 @@
                           label: [property.label],
                           value: [property],
                           propertyIds: property.id,
+                          ref: {
+                            id: `#attribute_${property.id[0]}`,
+                          },
                         },
                         label: 'Label',
                         key: 'customModelAttribute',
@@ -8236,6 +8270,9 @@
                           label: [property.label],
                           value: [property],
                           propertyIds: property.id,
+                          ref: {
+                            id: `#attribute_${property.id[0]}`,
+                          },
                         },
                         label: 'Label',
                         key: 'customModelAttribute',
@@ -9900,7 +9937,7 @@
       kind: 'construct',
       name: 'form_data',
       ref: {
-        id: '#variableId',
+        id: '#customModelVariableId',
         endpointId: '#endpointId',
       },
       options: {
@@ -9918,7 +9955,7 @@
         endpointId: '#endpointId',
       },
       options: {
-        modelId: 'abc',
+        modelId: '',
       },
     },
   ],
@@ -9936,7 +9973,6 @@
           options: {
             ref: {
               object: '#objectVariableId',
-              customModel: '#customModelId',
             },
             assign: [],
           },
@@ -9950,11 +9986,11 @@
       options: [
         {
           value: {
-            modelId: null,
+            modelId: '',
             ref: {
               customModelId: '#customModelId',
               actionId: '#actionId',
-              variableId: '#variableId',
+              variableId: '#customModelVariableId',
             },
           },
           label: 'Action',

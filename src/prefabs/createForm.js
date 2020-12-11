@@ -84,6 +84,16 @@
             newPrefab.structure[0].options[0].value.modelId = modelId;
             newPrefab.structure[0].options[1].value = modelId;
             newPrefab.variables[0].options.modelId = modelId;
+            newPrefab.variables[1].options.modelId = modelId;
+            newPrefab.actions[0].events[0].options.modelId = modelId;
+            newPrefab.actions[0].events[0].options.assign = properties.map(
+              property => ({
+                leftHandSide: property.id[0],
+                ref: {
+                  path: ['#customModelVariableId', `#attribute_${property.id}`],
+                },
+              }),
+            );
 
             const descendantsArray = properties.map(property => {
               switch (property.kind) {
@@ -96,6 +106,9 @@
                           label: [property.label],
                           value: [property],
                           propertyIds: property.id,
+                          ref: {
+                            id: `#attribute_${property.id[0]}`,
+                          },
                         },
                         label: 'Label',
                         key: 'customModelAttribute',
@@ -496,6 +509,9 @@
                           label: [property.label],
                           value: [property],
                           propertyIds: property.id,
+                          ref: {
+                            id: `#attribute_${property.id[0]}`,
+                          },
                         },
                         label: 'Label',
                         key: 'customModelAttribute',
@@ -2165,6 +2181,9 @@
                           label: [property.label],
                           value: [property],
                           propertyIds: property.id,
+                          ref: {
+                            id: `#attribute_${property.id[0]}`,
+                          },
                         },
                         label: 'Label',
                         key: 'customModelAttribute',
@@ -2565,6 +2584,9 @@
                           label: [property.label],
                           value: [property],
                           propertyIds: property.id,
+                          ref: {
+                            id: `#attribute_${property.id[0]}`,
+                          },
                         },
                         label: 'Label',
                         key: 'customModelAttribute',
@@ -4226,6 +4248,9 @@
                           label: [property.label],
                           value: [property],
                           propertyIds: property.id,
+                          ref: {
+                            id: `#attribute_${property.id[0]}`,
+                          },
                         },
                         label: 'Label',
                         key: 'customModelAttribute',
@@ -4626,6 +4651,9 @@
                           label: [property.label],
                           value: [property],
                           propertyIds: property.id,
+                          ref: {
+                            id: `#attribute_${property.id[0]}`,
+                          },
                         },
                         label: 'Label',
                         key: 'customModelAttribute',
@@ -5028,6 +5056,9 @@
                           label: [property.label],
                           value: [property],
                           propertyIds: property.id,
+                          ref: {
+                            id: `#attribute_${property.id[0]}`,
+                          },
                         },
                         label: 'Label',
                         key: 'customModelAttribute',
@@ -5344,6 +5375,9 @@
                           label: [property.label],
                           value: [property],
                           propertyIds: property.id,
+                          ref: {
+                            id: `#attribute_${property.id[0]}`,
+                          },
                         },
                         label: 'Label',
                         key: 'customModelAttribute',
@@ -5697,6 +5731,9 @@
                           label: [property.label],
                           value: [property],
                           propertyIds: property.id,
+                          ref: {
+                            id: `#attribute_${property.id[0]}`,
+                          },
                         },
                         label: 'Label',
                         key: 'customModelAttribute',
@@ -6020,6 +6057,9 @@
                           label: [property.label],
                           value: [property],
                           propertyIds: property.id,
+                          ref: {
+                            id: `#attribute_${property.id[0]}`,
+                          },
                         },
                         label: 'Label',
                         key: 'customModelAttribute',
@@ -7549,6 +7589,9 @@
                           label: [property.label],
                           value: [property],
                           propertyIds: property.id,
+                          ref: {
+                            id: `#attribute_${property.id[0]}`,
+                          },
                         },
                         label: 'Label',
                         key: 'customModelAttribute',
@@ -7728,6 +7771,9 @@
                           label: [property.label],
                           value: [property],
                           propertyIds: property.id,
+                          ref: {
+                            id: `#attribute_${property.id[0]}`,
+                          },
                         },
                         label: 'Label',
                         key: 'customModelAttribute',
@@ -8142,6 +8188,9 @@
                           label: [property.label],
                           value: [property],
                           propertyIds: property.id,
+                          ref: {
+                            id: `#attribute_${property.id[0]}`,
+                          },
                         },
                         label: 'Label',
                         key: 'customModelAttribute',
@@ -9803,10 +9852,10 @@
   },
   variables: [
     {
-      name: 'kekw',
       kind: 'construct',
+      name: 'form_data',
       ref: {
-        id: '#variableId',
+        id: '#customModelVariableId',
         endpointId: '#endpointId',
       },
       options: {
@@ -9814,6 +9863,17 @@
         ref: {
           customModelId: '#customModelId',
         },
+      },
+    },
+    {
+      kind: 'object',
+      name: 'form_object',
+      ref: {
+        id: '#objectVariableId',
+        endpointId: '#endpointId',
+      },
+      options: {
+        modelId: '',
       },
     },
   ],
@@ -9828,6 +9888,10 @@
       events: [
         {
           kind: 'create',
+          options: {
+            modelId: '',
+            assign: [],
+          },
         },
       ],
     },
