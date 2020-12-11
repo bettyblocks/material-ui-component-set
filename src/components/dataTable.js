@@ -41,6 +41,7 @@
       orderProperty,
       sortOrder,
       labelRowsPerPage,
+      labelNumberOfPages,
       labelSearchOn,
       square,
       elevation,
@@ -568,7 +569,7 @@
               rowsPerPageOptions={[5, 10, 25, 50, 100]}
               labelRowsPerPage={useText(labelRowsPerPage)}
               labelDisplayedRows={({ from, to, count }) =>
-                `${from}-${to} van ${count !== -1 ? count : `meer dan ${to}`}`
+                `${from}-${to} ${useText(labelNumberOfPages)} ${count}`
               }
               component="div"
               count={model ? totalCount : takeNum}
