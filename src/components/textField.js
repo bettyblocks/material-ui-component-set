@@ -111,13 +111,13 @@
       }
     };
 
-    const numberInputValidation = target => {
+    const customPatternValidation = target => {
       const { value: eventValue, validity } = target;
       if (!pattern) {
         return validity;
       }
-      const numberPatternRegex = RegExp(`^${pattern}$`);
-      const isValid = numberPatternRegex.test(eventValue);
+      const patternRegex = RegExp(`^${pattern}$`);
+      const isValid = patternRegex.test(eventValue);
       target.setCustomValidity(isValid ? '' : 'Invalid field.');
       return {
         ...validity,
@@ -128,14 +128,14 @@
 
     const changeHandler = event => {
       const { target } = event;
-      let numberValue;
       let { validity: validation } = target;
       const { value: eventValue } = target;
 
-      if (isNumberType) {
-        validation = numberInputValidation(target);
-        numberValue = eventValue && parseInt(eventValue, 10);
+      if (isNumberType || multiline) {
+        validation = customPatternValidation(target);
       }
+      const numberValue =
+        isNumberType && eventValue && parseInt(eventValue, 10);
 
       if (afterFirstInvalidation) {
         handleValidation(validation);
@@ -147,8 +147,8 @@
       const { target } = event;
       let { validity: validation } = target;
 
-      if (isNumberType) {
-        validation = numberInputValidation(target);
+      if (isNumberType || multiline) {
+        validation = customPatternValidation(target);
       }
 
       setAfterFirstInvalidation(!validation.valid);
