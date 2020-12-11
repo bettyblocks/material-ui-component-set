@@ -68,7 +68,6 @@
     const [search, setSearch] = useState('');
     const [searchTerm, setSearchTerm] = useState('');
     const [showPagination, setShowPagination] = useState(false);
-    const searchPropertyArray = [searchProperty].flat();
     const { label: searchPropertyLabel = '{property}' } =
       getProperty(searchProperty) || {};
     const [orderBy, setOrderBy] = React.useState({
@@ -133,10 +132,15 @@
       }, {});
     };
 
+    let path = [searchProperty].flat();
+    if (typeof searchProperty.id !== 'undefined') {
+      path = [searchProperty.id].flat();
+    }
+
     const searchFilter = searchProperty
-      ? searchPropertyArray.reduceRight(
+      ? path.reduceRight(
           (acc, property, index) =>
-            index === searchPropertyArray.length - 1
+            index === path.length - 1
               ? { [property]: { matches: searchTerm } }
               : { [property]: acc },
           {},
@@ -147,6 +151,7 @@
       searchProperty && searchTerm !== ''
         ? deepMerge(filter, searchFilter)
         : filter;
+
     const where = useFilter(newFilter);
 
     const { loading, error, data, refetch } =
