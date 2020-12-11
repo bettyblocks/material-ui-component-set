@@ -242,8 +242,7 @@
     };
 
     const getDefaultValue = React.useCallback(() => {
-      if (!results) return;
-      if (!currentValue) {
+      if (!currentValue || !results) {
         return multiple ? [] : null;
       }
       let currentRecordsKeys = currentValue;
