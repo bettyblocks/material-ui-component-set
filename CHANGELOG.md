@@ -1,3 +1,11 @@
+# [1.68.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.67.1...v1.68.0) (2020-12-14)
+
+
+### Features
+
+* make label search on data table adjustable ([3054877](https://github.com/bettyblocks/material-ui-component-set/commit/3054877d32e66e03bdb2c522d6951f95f80a53a4))
+* translate number of pages label in data table pagination ([e8463a1](https://github.com/bettyblocks/material-ui-component-set/commit/e8463a1992ae9ca3940d10d86686b46bfa7be426))
+
 ## [1.67.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.67.0...v1.67.1) (2020-12-14)
 
 
