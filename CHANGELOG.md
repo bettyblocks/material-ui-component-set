@@ -1,3 +1,10 @@
+## [1.67.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.67.0...v1.67.1) (2020-12-14)
+
+
+### Bug Fixes
+
+* add pattern validation to textarea ([1f5be1d](https://github.com/bettyblocks/material-ui-component-set/commit/1f5be1dc43f664a57fd7287f86a5609072ee5990))
+
 # [1.67.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.66.1...v1.67.0) (2020-12-09)
 
 
