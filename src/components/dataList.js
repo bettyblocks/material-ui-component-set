@@ -246,10 +246,20 @@
           }
         }, [loading]);
 
+        const handleClick = (event, context) => {
+          B.triggerEvent('OnItemClick', event, context);
+        };
+
         const Looper = results => {
           const rows = results.map(item => (
             <ModelProvider key={item.id} value={item} id={model}>
-              <B.InteractionScope>{children}</B.InteractionScope>
+              <B.InteractionScope model={model}>
+                {context => (
+                  <span onClick={event => handleClick(event, context)}>
+                    {children}
+                  </span>
+                )}
+              </B.InteractionScope>
             </ModelProvider>
           ));
 

@@ -310,9 +310,9 @@
 
     const history = isDev ? {} : useHistory();
 
-    const handleRowClick = rowValue => {
+    const handleRowClick = (rowValue, context) => {
       if (isDev) return;
-      B.triggerEvent('OnRowClick', rowValue);
+      B.triggerEvent('OnRowClick', rowValue, context);
       if (hasLink) {
         const { id, params } = linkTo;
         const newParams = Object.entries(params).reduce((acc, cv) => {
@@ -368,14 +368,18 @@
 
       const rows = results.map(value => (
         <ModelProvider value={value} id={model}>
-          <TableRow
-            key={value[0]}
-            classes={{ root: classes.bodyRow }}
-            onClick={() => handleRowClick(value)}
-            data-id={value.id}
-          >
-            <B.InteractionScope>{children}</B.InteractionScope>
-          </TableRow>
+          <B.InteractionScope model={model}>
+            {context => (
+              <TableRow
+                key={value[0]}
+                classes={{ root: classes.bodyRow }}
+                onClick={() => handleRowClick(value, context)}
+                data-id={value.id}
+              >
+                {children}
+              </TableRow>
+            )}
+          </B.InteractionScope>
         </ModelProvider>
       ));
 
@@ -387,19 +391,21 @@
     };
 
     const renderTableContent = () => {
-      let tableContent = Array.from(Array(amountOfRows).keys()).map(idx => (
-        <TableRow key={idx} classes={{ root: classes.bodyRow }}>
-          <B.InteractionScope>{children}</B.InteractionScope>
-        </TableRow>
-      ));
       if (isDev) {
-        tableContent = (
+        return (
           <TableRow classes={{ root: classes.bodyRow }}>{children}</TableRow>
         );
-      } else if (model) {
-        tableContent = tableContentModel();
       }
-      return tableContent;
+
+      if (model) {
+        return tableContentModel();
+      }
+
+      return Array.from(Array(amountOfRows).keys()).map(idx => (
+        <TableRow key={idx} classes={{ root: classes.bodyRow }}>
+          {children}
+        </TableRow>
+      ));
     };
 
     useEffect(() => {
