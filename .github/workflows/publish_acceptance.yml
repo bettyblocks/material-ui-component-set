@@ -24,8 +24,11 @@ jobs:
           AZURE_BLOB_ACCOUNT: ${{ secrets.AZURE_BLOB_ACCOUNT_ACCEPTANCE }}
           AZURE_BLOB_ACCOUNT_KEY: ${{ secrets.AZURE_BLOB_ACCOUNT_KEY_ACCEPTANCE }}
         run: yarn upload
-
+      - name: Configure git credentials
+        uses: OleksiyRudenko/gha-git-credentials@v2
+        with:
+          name: 'Bettyblocks release bot'
+          actor: 'BettyblocksReleaseBot'
+          token: '${{ secrets.GH_TOKEN }}'
       - name: release notes
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         run: npx semantic-release
