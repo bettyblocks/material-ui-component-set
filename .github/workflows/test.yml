@@ -1,6 +1,10 @@
 name: Material UI testing and linting
 
-on: [push]
+on:
+  push:
+    paths-ignore:
+      - 'CHANGELOG.md'
+      - 'package.json'
 
 jobs:
   test:

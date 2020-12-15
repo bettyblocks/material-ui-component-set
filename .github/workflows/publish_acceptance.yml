@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - acceptance
+    paths-ignore:
+      - 'CHANGELOG.md'
+      - 'package.json'
 
 jobs:
   deploy:
