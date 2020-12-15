@@ -1,3 +1,10 @@
+## [1.69.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.69.1...v1.69.2) (2020-12-15)
+
+
+### Bug Fixes
+
+* ignore changelog and package.json to stop pipeline ([398b744](https://github.com/bettyblocks/material-ui-component-set/commit/398b7448557852fbe20d1566b3db271724a23506))
+
 ## [1.69.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.69.0...v1.69.1) (2020-12-15)
 
 
