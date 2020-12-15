@@ -20,4 +20,7 @@ jobs:
         run: yarn bundle
 
       - name: upload
+        env:
+          AZURE_BLOB_ACCOUNT: ${{ secrets.AZURE_BLOB_ACCOUNT_EDGE }}
+          AZURE_BLOB_ACCOUNT_KEY: ${{ secrets.AZURE_BLOB_ACCOUNT_KEY_EDGE }}
         run: yarn upload
