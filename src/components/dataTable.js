@@ -41,6 +41,8 @@
       orderProperty,
       sortOrder,
       labelRowsPerPage,
+      labelNumberOfPages,
+      labelSearchOn,
       square,
       elevation,
       variant,
@@ -524,7 +526,9 @@
               {searchProperty && !hideSearch && (
                 <TextField
                   classes={{ root: classes.searchField }}
-                  placeholder={`Search on ${searchPropertyLabel}`}
+                  placeholder={`${useText(
+                    labelSearchOn,
+                  )} ${searchPropertyLabel}`}
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
@@ -564,6 +568,9 @@
               classes={{ root: classes.pagination }}
               rowsPerPageOptions={[5, 10, 25, 50, 100]}
               labelRowsPerPage={useText(labelRowsPerPage)}
+              labelDisplayedRows={({ from, to, count }) =>
+                `${from}-${to} ${useText(labelNumberOfPages)} ${count}`
+              }
               component="div"
               count={model ? totalCount : takeNum}
               rowsPerPage={model ? rowsPerPage : takeNum}
