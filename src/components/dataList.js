@@ -31,6 +31,7 @@
           orderBy,
           pagination,
         } = options;
+        const { Button } = window.MaterialUI.Core;
 
         const rowsPerPage = parseInt(take, 10) || 50;
         const { TextField, InputAdornment } = window.MaterialUI.Core;
@@ -255,9 +256,13 @@
             <ModelProvider key={item.id} value={item} id={model}>
               <B.InteractionScope model={model}>
                 {context => (
-                  <span onClick={event => handleClick(event, context)}>
+                  <Button
+                    plain
+                    as="span"
+                    onClick={event => handleClick(event, context)}
+                  >
                     {children}
-                  </span>
+                  </Button>
                 )}
               </B.InteractionScope>
             </ModelProvider>
