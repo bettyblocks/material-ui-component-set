@@ -28,6 +28,7 @@ jobs:
         uses: OleksiyRudenko/gha-git-credentials@v2
         with:
           name: 'Bettyblocks release bot'
+          email: 'bettyblocks-release@bettyblocks.com'
           actor: 'BettyblocksReleaseBot'
           token: '${{ secrets.GH_TOKEN }}'
       - name: release notes
