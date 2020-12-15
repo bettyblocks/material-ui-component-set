@@ -15,4 +15,4 @@ jobs:
         run: yarn install
 
       - name: Commit linter
-        run: commitlint --from $(git rev-parse --short HEAD^1) --to $(git rev-parse --short HEAD^2)
+        run: npx commitlint --from $(git rev-parse --short HEAD^1) --to $(git rev-parse --short HEAD^2)
