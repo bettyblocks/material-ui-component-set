@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GH_TOKEN }}
       - name: Install packages
         run: yarn install
 
@@ -24,12 +26,5 @@ jobs:
           AZURE_BLOB_ACCOUNT: ${{ secrets.AZURE_BLOB_ACCOUNT_ACCEPTANCE }}
           AZURE_BLOB_ACCOUNT_KEY: ${{ secrets.AZURE_BLOB_ACCOUNT_KEY_ACCEPTANCE }}
         run: yarn upload
-      - name: Configure git credentials
-        uses: OleksiyRudenko/gha-git-credentials@v2
-        with:
-          name: 'Bettyblocks release bot'
-          email: 'bettyblocks-release@bettyblocks.com'
-          actor: 'BettyblocksReleaseBot'
-          token: '${{ secrets.GH_TOKEN }}'
       - name: release notes
         run: npx semantic-release
