@@ -1,3 +1,10 @@
+## [1.69.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.69.0...v1.69.1) (2020-12-15)
+
+
+### Bug Fixes
+
+* also apply fix to production ci config ([bef54bf](https://github.com/bettyblocks/material-ui-component-set/commit/bef54bf88aa34623ce28b4746518a6c612b4eff4))
+
 # [1.69.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.68.1...v1.69.0) (2020-12-15)
 
 
