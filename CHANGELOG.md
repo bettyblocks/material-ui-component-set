@@ -1,3 +1,11 @@
+# [1.69.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.68.1...v1.69.0) (2020-12-15)
+
+
+### Features
+
+* add commit linter ci ([0a59e28](https://github.com/bettyblocks/material-ui-component-set/commit/0a59e285b46656ce442816c0d00e668e25f2218f))
+* add github actions ([ccc8bee](https://github.com/bettyblocks/material-ui-component-set/commit/ccc8beed991d3c0ba0673a243c10c1e7d497d569))
+
 ## [1.68.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.68.0...v1.68.1) (2020-12-15)
 
 
