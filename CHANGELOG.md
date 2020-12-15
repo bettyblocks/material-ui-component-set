@@ -1,3 +1,11 @@
+## [1.68.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.68.0...v1.68.1) (2020-12-15)
+
+
+### Bug Fixes
+
+* free solo on autocomplete keeps record id value ([4cfdd75](https://github.com/bettyblocks/material-ui-component-set/commit/4cfdd75d5e13e423ad224cf15bba62260d7a3033))
+* linter on return value ([34ceb27](https://github.com/bettyblocks/material-ui-component-set/commit/34ceb273ca8292c6dafeed387f83c0d599f58440))
+
 # [1.68.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.67.1...v1.68.0) (2020-12-14)
 
 
