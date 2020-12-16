@@ -3,11 +3,10 @@ name: Commit lint check
 on:
   pull_request:
     branches-ignore:
-      - acceptance
       - master
 
 jobs:
-  test:
+  commit_lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

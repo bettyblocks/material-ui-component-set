@@ -4,12 +4,17 @@ on:
   push:
     branches:
       - master
+    paths-ignore:
+      - 'CHANGELOG.md'
+      - 'package.json'
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GH_TOKEN }}
       - name: Install packages
         run: yarn install
 
@@ -82,5 +87,5 @@ jobs:
 
       - name: release notes
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         run: npx semantic-release

@@ -4,12 +4,17 @@ on:
   push:
     branches:
       - acceptance
+    paths-ignore:
+      - 'CHANGELOG.md'
+      - 'package.json'
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GH_TOKEN }}
       - name: Install packages
         run: yarn install
 
@@ -24,8 +29,7 @@ jobs:
           AZURE_BLOB_ACCOUNT: ${{ secrets.AZURE_BLOB_ACCOUNT_ACCEPTANCE }}
           AZURE_BLOB_ACCOUNT_KEY: ${{ secrets.AZURE_BLOB_ACCOUNT_KEY_ACCEPTANCE }}
         run: yarn upload
-
       - name: release notes
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         run: npx semantic-release

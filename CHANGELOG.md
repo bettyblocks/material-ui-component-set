@@ -1,3 +1,33 @@
+## [1.69.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.69.1...v1.69.2) (2020-12-15)
+
+
+### Bug Fixes
+
+* ignore changelog and package.json to stop pipeline ([398b744](https://github.com/bettyblocks/material-ui-component-set/commit/398b7448557852fbe20d1566b3db271724a23506))
+
+## [1.69.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.69.0...v1.69.1) (2020-12-15)
+
+
+### Bug Fixes
+
+* also apply fix to production ci config ([bef54bf](https://github.com/bettyblocks/material-ui-component-set/commit/bef54bf88aa34623ce28b4746518a6c612b4eff4))
+
+# [1.69.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.68.1...v1.69.0) (2020-12-15)
+
+
+### Features
+
+* add commit linter ci ([0a59e28](https://github.com/bettyblocks/material-ui-component-set/commit/0a59e285b46656ce442816c0d00e668e25f2218f))
+* add github actions ([ccc8bee](https://github.com/bettyblocks/material-ui-component-set/commit/ccc8beed991d3c0ba0673a243c10c1e7d497d569))
+
+## [1.68.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.68.0...v1.68.1) (2020-12-15)
+
+
+### Bug Fixes
+
+* free solo on autocomplete keeps record id value ([4cfdd75](https://github.com/bettyblocks/material-ui-component-set/commit/4cfdd75d5e13e423ad224cf15bba62260d7a3033))
+* linter on return value ([34ceb27](https://github.com/bettyblocks/material-ui-component-set/commit/34ceb273ca8292c6dafeed387f83c0d599f58440))
+
 # [1.68.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.67.1...v1.68.0) (2020-12-14)
 
 
