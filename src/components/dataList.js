@@ -251,18 +251,15 @@
           B.triggerEvent('OnItemClick', event, context);
         };
 
+        const Wrapper = type === 'inline' ? 'span' : 'div';
         const Looper = results => {
           const rows = results.map(item => (
             <ModelProvider key={item.id} value={item} id={model}>
               <B.InteractionScope model={model}>
                 {context => (
-                  <Button
-                    plain
-                    as="span"
-                    onClick={event => handleClick(event, context)}
-                  >
+                  <Wrapper onClick={event => handleClick(event, context)}>
                     {children}
-                  </Button>
+                  </Wrapper>
                 )}
               </B.InteractionScope>
             </ModelProvider>
