@@ -73,10 +73,16 @@
           );
           const postValues =
             item && item.id ? { id: item.id, ...values } : values;
+          const postObjValues = item && item.id ? { variable_id: item.id } : {};
           let variables = { variables: { input: postValues } };
           if (formVariable && formVariable.name) {
             variables = {
-              variables: { input: { [formVariable.name]: postValues } },
+              variables: {
+                input: {
+                  [formVariable.name]: postValues,
+                  form_object: postObjValues,
+                },
+              },
             };
           }
           callAction(variables);
