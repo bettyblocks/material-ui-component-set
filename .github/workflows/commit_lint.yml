@@ -1,0 +1,17 @@
+name: Commit lint check
+
+on:
+  pull_request:
+    branches-ignore:
+      - master
+
+jobs:
+  commit_lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install packages
+        run: yarn install
+
+      - name: Commit linter
+        run: npx commitlint --from $(git rev-parse --short HEAD^1) --to $(git rev-parse --short HEAD^2)
