@@ -31,7 +31,6 @@
           orderBy,
           pagination,
         } = options;
-        const { Button } = window.MaterialUI.Core;
 
         const rowsPerPage = parseInt(take, 10) || 50;
         const { TextField, InputAdornment } = window.MaterialUI.Core;
