@@ -1,0 +1,35 @@
+name: Publish component set on acceptance
+
+on:
+  push:
+    branches:
+      - acceptance
+    paths-ignore:
+      - 'CHANGELOG.md'
+      - 'package.json'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+      - name: Install packages
+        run: yarn install
+
+      - name: build
+        run: yarn build
+
+      - name: bundle
+        run: yarn bundle
+
+      - name: upload
+        env:
+          AZURE_BLOB_ACCOUNT: ${{ secrets.AZURE_BLOB_ACCOUNT_ACCEPTANCE }}
+          AZURE_BLOB_ACCOUNT_KEY: ${{ secrets.AZURE_BLOB_ACCOUNT_KEY_ACCEPTANCE }}
+        run: yarn upload
+      - name: release notes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: npx semantic-release
