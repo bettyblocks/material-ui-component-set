@@ -11,7 +11,6 @@
       GetMe,
       useText,
       ModelProvider,
-      useEndpoint,
       useAllQuery,
       useFilter,
     } = B;
@@ -305,36 +304,13 @@
       setSearch(event.target.value);
     };
 
-    const isFlatValue = value =>
-      typeof value === 'string' ||
-      typeof value === 'number' ||
-      typeof value === 'boolean';
-
     const history = isDev ? {} : useHistory();
 
-    const handleRowClick = (rowValue, context) => {
+    const handleRowClick = (endpoint, context) => {
       if (isDev) return;
-      B.triggerEvent('OnRowClick', rowValue, context);
+      B.triggerEvent('OnRowClick', endpoint, context);
       if (hasLink) {
-        const { id, params } = linkTo;
-        const newParams = Object.entries(params).reduce((acc, cv) => {
-          const key = cv[0];
-          const value = cv[1];
-          if (isFlatValue(value[0])) {
-            acc[key] = value;
-          } else {
-            const propId = value[0].id;
-            const property = getProperty(propId).name;
-            acc[key] = [rowValue[property].toString()];
-          }
-          return acc;
-        }, {});
-
-        const endpointParams = {
-          id,
-          params: newParams,
-        };
-        history.push(useEndpoint(endpointParams));
+        history.push(endpoint);
       }
     };
 
@@ -375,10 +351,15 @@
               <TableRow
                 key={value[0]}
                 classes={{ root: classes.bodyRow }}
-                onClick={() => handleRowClick(value, context)}
                 data-id={value.id}
               >
-                {children}
+                <Children
+                  linkTo={linkTo}
+                  handleRowClick={handleRowClick}
+                  context={context}
+                >
+                  {children}
+                </Children>
               </TableRow>
             )}
           </B.InteractionScope>
