@@ -13,14 +13,8 @@
       content,
       sortable,
     } = options;
-    const {
-      headerOnly,
-      handleSort,
-      orderBy,
-      linkTo,
-      handleRowClick,
-      rowValue,
-    } = parent || {};
+    const { headerOnly, handleSort, orderBy, linkTo, handleRowClick, context } =
+      parent || {};
     const { type } = property;
     const propertyArray = [property].flat();
     const { name: propertyName, label: propertyLabel } =
@@ -115,7 +109,7 @@
       <TableCell
         classes={{ root: classes.root }}
         align={horizontalAlignment}
-        onClick={() => handleRowClick && handleRowClick(myEndpoint, rowValue)}
+        onClick={() => handleRowClick && handleRowClick(myEndpoint, context)}
       >
         {headerOnly ? Header : Content}
       </TableCell>

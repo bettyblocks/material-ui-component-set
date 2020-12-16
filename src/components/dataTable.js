@@ -306,9 +306,9 @@
 
     const history = isDev ? {} : useHistory();
 
-    const handleRowClick = (endpoint, rowValue) => {
+    const handleRowClick = (endpoint, context) => {
       if (isDev) return;
-      B.triggerEvent('OnRowClick', rowValue, endpoint);
+      B.triggerEvent('OnRowClick', endpoint, context);
       if (hasLink) {
         history.push(endpoint);
       }
@@ -346,21 +346,23 @@
 
       const rows = results.map(value => (
         <ModelProvider value={value} id={model}>
-          <TableRow
-            key={value[0]}
-            classes={{ root: classes.bodyRow }}
-            data-id={value.id}
-          >
-            <B.InteractionScope>
-              <Children
-                linkTo={linkTo}
-                handleRowClick={handleRowClick}
-                rowValue={value}
+          <B.InteractionScope model={model}>
+            {context => (
+              <TableRow
+                key={value[0]}
+                classes={{ root: classes.bodyRow }}
+                data-id={value.id}
               >
-                {children}
-              </Children>
-            </B.InteractionScope>
-          </TableRow>
+                <Children
+                  linkTo={linkTo}
+                  handleRowClick={handleRowClick}
+                  context={context}
+                >
+                  {children}
+                </Children>
+              </TableRow>
+            )}
+          </B.InteractionScope>
         </ModelProvider>
       ));
 
@@ -372,23 +374,21 @@
     };
 
     const renderTableContent = () => {
-      let tableContent = Array.from(Array(amountOfRows).keys()).map(idx => (
-        <TableRow key={idx} classes={{ root: classes.bodyRow }}>
-          <B.InteractionScope>
-            <Children linkTo={linkTo} handleRowClick={handleRowClick}>
-              {children}
-            </Children>
-          </B.InteractionScope>
-        </TableRow>
-      ));
       if (isDev) {
-        tableContent = (
+        return (
           <TableRow classes={{ root: classes.bodyRow }}>{children}</TableRow>
         );
-      } else if (model) {
-        tableContent = tableContentModel();
       }
-      return tableContent;
+
+      if (model) {
+        return tableContentModel();
+      }
+
+      return Array.from(Array(amountOfRows).keys()).map(idx => (
+        <TableRow key={idx} classes={{ root: classes.bodyRow }}>
+          {children}
+        </TableRow>
+      ));
     };
 
     useEffect(() => {
