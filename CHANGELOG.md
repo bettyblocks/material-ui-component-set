@@ -1,3 +1,10 @@
+## [1.71.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.71.0...v1.71.1) (2020-12-17)
+
+
+### Bug Fixes
+
+* handle rowclick in datatable with outside variables ([adfc75c](https://github.com/bettyblocks/material-ui-component-set/commit/adfc75c4f6a194d688b31041059f663223cd0dbc))
+
 # [1.71.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.70.0...v1.71.0) (2020-12-17)
 
 
