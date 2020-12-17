@@ -109,7 +109,9 @@
       <TableCell
         classes={{ root: classes.root }}
         align={horizontalAlignment}
-        onClick={() => handleRowClick && handleRowClick(myEndpoint, context)}
+        onClick={event =>
+          handleRowClick && handleRowClick(myEndpoint || event, context)
+        }
       >
         {headerOnly ? Header : Content}
       </TableCell>
