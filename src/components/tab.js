@@ -39,6 +39,7 @@
         role="tabpanel"
         hidden={!isActive}
         aria-labelledby="tabs"
+        classes={{ root: classes.root }}
       >
         {children.length === 0 ? <EmptyBox /> : children}
       </Typography>
@@ -90,9 +91,15 @@
       disableRipple,
     ]);
 
-    return isDev ? <div>{TabPanel}</div> : TabPanel;
+    return isDev ? <div className={classes.wrapper}>{TabPanel}</div> : TabPanel;
   })(),
   styles: () => () => ({
+    wrapper: {
+      height: ({ options: { height } }) => height,
+    },
+    root: {
+      height: ({ options: { height } }) => height,
+    },
     empty: {
       display: 'flex',
       alignItems: 'center',

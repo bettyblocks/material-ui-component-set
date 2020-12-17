@@ -13,6 +13,15 @@
           type: 'VARIABLE',
         },
         {
+          type: 'SIZE',
+          label: 'Height',
+          key: 'height',
+          value: '',
+          configuration: {
+            as: 'UNIT',
+          },
+        },
+        {
           label: 'Icon',
           key: 'icon',
           value: 'None',

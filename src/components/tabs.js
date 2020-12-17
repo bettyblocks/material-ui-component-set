@@ -16,6 +16,7 @@
       showAllTabs,
       hideTabs,
     } = options;
+
     const orientation =
       alignment === 'top' || alignment === 'bottom' ? 'horizontal' : 'vertical';
     const isDev = env === 'dev';
@@ -131,12 +132,14 @@
     const style = new B.Styling(t);
     return {
       wrapper: {
+        height: ({ options: { height } }) => height,
         '& .MuiTabs-flexContainer > button': {
           pointerEvents: 'none',
         },
       },
       tabs: {
         display: 'flex',
+        height: ({ options: { height } }) => height,
         flexDirection: ({ options: { alignment } }) => {
           switch (alignment) {
             case 'top':
