@@ -11,6 +11,7 @@
       GetMe,
       useText,
       ModelProvider,
+      useEndpoint,
       useAllQuery,
       useFilter,
     } = B;
@@ -304,13 +305,36 @@
       setSearch(event.target.value);
     };
 
+    const isFlatValue = value =>
+      typeof value === 'string' ||
+      typeof value === 'number' ||
+      typeof value === 'boolean';
+
     const history = isDev ? {} : useHistory();
 
-    const handleRowClick = (endpoint, context) => {
+    const handleRowClick = rowValue => {
       if (isDev) return;
-      B.triggerEvent('OnRowClick', endpoint, context);
+      B.triggerEvent('OnRowClick', rowValue);
       if (hasLink) {
-        history.push(endpoint);
+        const { id, params } = linkTo;
+        const newParams = Object.entries(params).reduce((acc, cv) => {
+          const key = cv[0];
+          const value = cv[1];
+          if (isFlatValue(value[0])) {
+            acc[key] = value;
+          } else {
+            const propId = value[0].id;
+            const property = getProperty(propId).name;
+            acc[key] = [rowValue[property].toString()];
+          }
+          return acc;
+        }, {});
+
+        const endpointParams = {
+          id,
+          params: newParams,
+        };
+        history.push(useEndpoint(endpointParams));
       }
     };
 
@@ -346,23 +370,14 @@
 
       const rows = results.map(value => (
         <ModelProvider value={value} id={model}>
-          <B.InteractionScope model={model}>
-            {context => (
-              <TableRow
-                key={value[0]}
-                classes={{ root: classes.bodyRow }}
-                data-id={value.id}
-              >
-                <Children
-                  linkTo={linkTo}
-                  handleRowClick={handleRowClick}
-                  context={context}
-                >
-                  {children}
-                </Children>
-              </TableRow>
-            )}
-          </B.InteractionScope>
+          <TableRow
+            key={value[0]}
+            classes={{ root: classes.bodyRow }}
+            onClick={() => handleRowClick(value)}
+            data-id={value.id}
+          >
+            <B.InteractionScope>{children}</B.InteractionScope>
+          </TableRow>
         </ModelProvider>
       ));
 
@@ -374,21 +389,19 @@
     };
 
     const renderTableContent = () => {
-      if (isDev) {
-        return (
-          <TableRow classes={{ root: classes.bodyRow }}>{children}</TableRow>
-        );
-      }
-
-      if (model) {
-        return tableContentModel();
-      }
-
-      return Array.from(Array(amountOfRows).keys()).map(idx => (
+      let tableContent = Array.from(Array(amountOfRows).keys()).map(idx => (
         <TableRow key={idx} classes={{ root: classes.bodyRow }}>
-          {children}
+          <B.InteractionScope>{children}</B.InteractionScope>
         </TableRow>
       ));
+      if (isDev) {
+        tableContent = (
+          <TableRow classes={{ root: classes.bodyRow }}>{children}</TableRow>
+        );
+      } else if (model) {
+        tableContent = tableContentModel();
+      }
+      return tableContent;
     };
 
     useEffect(() => {
