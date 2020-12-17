@@ -1,3 +1,22 @@
+# [1.71.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.70.0...v1.71.0) (2020-12-17)
+
+
+### Features
+
+* add row click context to data list and data table ([322b691](https://github.com/bettyblocks/material-ui-component-set/commit/322b6919978e01482ff38e6773121500baafbc81))
+
+# [1.70.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.69.2...v1.70.0) (2020-12-16)
+
+
+### Bug Fixes
+
+* update cli ([0a75419](https://github.com/bettyblocks/material-ui-component-set/commit/0a754199dffea01c121ab22745f9ebf5e9c63a3d))
+
+
+### Features
+
+* update form prefab ([b18f82a](https://github.com/bettyblocks/material-ui-component-set/commit/b18f82aff6da4a22e8c46c42f5eaeb110c295db6))
+
 ## [1.69.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.69.1...v1.69.2) (2020-12-15)
 
 
