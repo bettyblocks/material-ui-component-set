@@ -19,6 +19,15 @@
           type: 'TOGGLE',
         },
         {
+          type: 'SIZE',
+          label: 'Height',
+          key: 'height',
+          value: '',
+          configuration: {
+            as: 'UNIT',
+          },
+        },
+        {
           value: 'top',
           label: 'Alignment',
           key: 'alignment',
