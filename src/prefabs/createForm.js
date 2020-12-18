@@ -7797,9 +7797,15 @@
                         },
                       },
                       {
+                        value: [''],
+                        label: 'Blank option',
+                        key: 'blanco',
+                        type: 'VARIABLE',
+                      },
+                      {
                         label: 'Option type',
                         key: 'optionType',
-                        value: 'property',
+                        value: 'static',
                         type: 'CUSTOM',
                         configuration: {
                           as: 'BUTTONGROUP',
