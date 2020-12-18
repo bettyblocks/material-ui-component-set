@@ -17,6 +17,7 @@
     },
   }) => {
     const [modelId, setModelId] = React.useState('');
+    const [model, setModel] = React.useState(null);
     const [properties, setProperties] = React.useState([]);
     const [showValidation, setShowValidation] = React.useState(false);
 
@@ -35,9 +36,10 @@
             }
           >
             <ModelSelector
-              onChange={value => {
+              onChange={(id, modelObject) => {
                 setShowValidation(false);
-                setModelId(value);
+                setModelId(id);
+                setModel(modelObject);
               }}
               value={modelId}
             />
@@ -83,11 +85,21 @@
         <Footer
           onClose={close}
           onSave={() => {
+            const camelToSnakeCase = str =>
+              str[0].toLowerCase() +
+              str
+                .slice(1, str.length)
+                .replace(/[A-Z]/g, letter => `_${letter.toLowerCase()}`);
+
             if (!modelId) {
               setShowValidation(true);
               return;
             }
+
             const newPrefab = { ...prefab };
+            if (model) {
+              newPrefab.variables[1].name = camelToSnakeCase(model.label);
+            }
             newPrefab.structure[0].options[0].value.modelId = modelId;
             newPrefab.structure[0].options[1].value = modelId;
             newPrefab.variables[0].options.modelId = modelId;
@@ -9984,6 +9996,7 @@
               customModelId: '#customModelId',
               actionId: '#actionId',
               variableId: '#customModelVariableId',
+              objectVariableId: '#objectVariableId',
             },
           },
           label: 'Action',
