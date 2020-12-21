@@ -1,3 +1,15 @@
+# [1.72.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.71.1...v1.72.0) (2020-12-21)
+
+
+### Bug Fixes
+
+* select prefab for list prop ([a27588c](https://github.com/bettyblocks/material-ui-component-set/commit/a27588ca523af597054ff4ddb3a8b0e9d3367836))
+
+
+### Features
+
+* create form prefab ([cbb728d](https://github.com/bettyblocks/material-ui-component-set/commit/cbb728d97eabf2870d1ee5fcad73c74b6c4761b2))
+
 ## [1.71.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.71.0...v1.71.1) (2020-12-17)
 
 
