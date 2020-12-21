@@ -101,6 +101,7 @@
       height: ({ options: { height } }) => height,
     },
     empty: {
+      height: ({ options: { height } }) => height,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
