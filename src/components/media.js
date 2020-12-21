@@ -13,8 +13,6 @@
       iframeSource,
       imgAlt,
       title,
-      width,
-      height,
     } = options;
 
     const titleText = useText(title);
