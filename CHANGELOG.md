@@ -1,3 +1,10 @@
+## [1.72.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.72.0...v1.72.1) (2020-12-21)
+
+
+### Bug Fixes
+
+* object variable name based on model ([356fc96](https://github.com/bettyblocks/material-ui-component-set/commit/356fc96e7ed67a75b26b25b416b247fbb64685a2))
+
 # [1.72.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.71.1...v1.72.0) (2020-12-21)
 
 
