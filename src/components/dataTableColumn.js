@@ -4,7 +4,7 @@
   allowedTypes: ['CONTENT_COMPONENT', 'CONTAINER_COMPONENT'],
   orientation: 'VERTICAL',
   jsx: (() => {
-    const { env, useText, getProperty, Property } = B;
+    const { env, useText, getProperty, Property, useEndpoint } = B;
     const { TableCell, TableSortLabel } = window.MaterialUI.Core;
     const {
       horizontalAlignment,
@@ -13,7 +13,8 @@
       content,
       sortable,
     } = options;
-    const { headerOnly, handleSort, orderBy } = parent || {};
+    const { headerOnly, handleSort, orderBy, linkTo, handleRowClick, context } =
+      parent || {};
     const { type } = property;
     const propertyArray = [property].flat();
     const { name: propertyName, label: propertyLabel } =
@@ -22,6 +23,12 @@
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
     const contentPlaceholder = isDev && isEmpty ? 'Select property' : '\u00A0';
+
+    let myEndpoint = null;
+
+    if (linkTo) {
+      myEndpoint = useEndpoint(linkTo);
+    }
 
     const bodyText = useText(content);
     const propContent = isDev ? (
@@ -99,7 +106,11 @@
         )}
       </div>
     ) : (
-      <TableCell classes={{ root: classes.root }} align={horizontalAlignment}>
+      <TableCell
+        classes={{ root: classes.root }}
+        align={horizontalAlignment}
+        onClick={() => handleRowClick && handleRowClick(myEndpoint, context)}
+      >
         {headerOnly ? Header : Content}
       </TableCell>
     );
