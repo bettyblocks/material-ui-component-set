@@ -4,20 +4,34 @@
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const Tag = {
-      Title1: 'h1',
-      Title2: 'h2',
-      Title3: 'h3',
-      Title4: 'h4',
-      Title5: 'h5',
-      Title6: 'h6',
-      Body1: 'p',
-      Body2: 'p',
-    }[options.type || 'Body1'];
-    return (
+    const { content, useInnerHtml } = options;
+    const { env } = B;
+    const isDev = env === 'dev';
+
+    const Tag = useInnerHtml
+      ? 'div'
+      : {
+          Title1: 'h1',
+          Title2: 'h2',
+          Title3: 'h3',
+          Title4: 'h4',
+          Title5: 'h5',
+          Title6: 'h6',
+          Body1: 'p',
+          Body2: 'p',
+        }[options.type || 'Body1'];
+
+    const parsedContent = B.useText(content);
+
+    return useInnerHtml && !isDev ? (
+      <Tag
+        className={classes.content}
+        dangerouslySetInnerHTML={{ __html: parsedContent }}
+      />
+    ) : (
       <Tag className={classes.content}>
-        {options.content.length > 0 && <B.Text value={options.content} />}
-        {options.content.length === 0 && B.env === 'dev' && (
+        {content.length > 0 && parsedContent}
+        {content.length === 0 && isDev && (
           <span className={classes.placeholder}>Empty content</span>
         )}
       </Tag>
