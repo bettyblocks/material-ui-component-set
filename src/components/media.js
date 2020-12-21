@@ -86,8 +86,6 @@
     if (isImage && !variableDev) {
       MediaComponent = () => (
         <img
-          width={width}
-          height={height}
           className={classes.media}
           src={imgUrl}
           title={titleText}
@@ -98,8 +96,6 @@
       MediaComponent = () => (
         // eslint-disable-next-line jsx-a11y/media-has-caption
         <video
-          width={width}
-          height={height}
           className={classes.media}
           src={videoUrl}
           title={titleText}
@@ -108,13 +104,7 @@
       );
     } else if (isIframe) {
       MediaComponent = () => (
-        <iframe
-          width={width}
-          height={height}
-          className={classes.media}
-          title={titleText}
-          src={iframeUrl}
-        />
+        <iframe className={classes.media} title={titleText} src={iframeUrl} />
       );
     }
 
@@ -176,7 +166,10 @@
           fill: '#666D85',
         },
       },
-
+      media: {
+        width: ({ options: { width } }) => width,
+        height: ({ options: { height } }) => height,
+      },
       outerSpacing: {
         marginTop: ({ options: { outerSpacing } }) =>
           getSpacing(outerSpacing[0]),
