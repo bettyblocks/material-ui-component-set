@@ -22,6 +22,15 @@
           },
         },
         {
+          type: 'SIZE',
+          label: 'Width',
+          key: 'width',
+          value: '',
+          configuration: {
+            as: 'UNIT',
+          },
+        },
+        {
           label: 'Icon',
           key: 'icon',
           value: 'None',
