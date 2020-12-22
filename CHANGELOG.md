@@ -1,3 +1,10 @@
+## [1.73.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.73.0...v1.73.1) (2020-12-22)
+
+
+### Bug Fixes
+
+* correct sizing for media component ([8580f12](https://github.com/bettyblocks/material-ui-component-set/commit/8580f1205ce5f26d79ceb57e8e77578076c07602))
+
 # [1.73.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.72.1...v1.73.0) (2020-12-22)
 
 
