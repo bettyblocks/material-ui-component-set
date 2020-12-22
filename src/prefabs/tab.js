@@ -13,6 +13,24 @@
           type: 'VARIABLE',
         },
         {
+          type: 'SIZE',
+          label: 'Height',
+          key: 'height',
+          value: '',
+          configuration: {
+            as: 'UNIT',
+          },
+        },
+        {
+          type: 'SIZE',
+          label: 'Width',
+          key: 'width',
+          value: '',
+          configuration: {
+            as: 'UNIT',
+          },
+        },
+        {
           label: 'Icon',
           key: 'icon',
           value: 'None',
