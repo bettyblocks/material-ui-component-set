@@ -108,9 +108,11 @@
 
     return (
       <div
-        className={[classes.outerSpacing, isDev ? classes.devWrapper : ''].join(
-          ' ',
-        )}
+        className={[
+          classes.outerSpacing,
+          isDev ? classes.devWrapper : '',
+          !isEmpty ? classes.hasContent : '',
+        ].join(' ')}
       >
         <MediaComponent />
       </div>
@@ -126,6 +128,10 @@
         '& > *': {
           pointerEvents: 'none',
         },
+      },
+      hasContent: {
+        width: 'fit-content',
+        height: 'fit-content',
       },
       empty: {
         position: 'relative',
