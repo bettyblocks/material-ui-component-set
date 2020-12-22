@@ -38,7 +38,7 @@
         const history = isDev ? {} : useHistory();
 
         const location = isDev ? {} : useLocation();
-        const { actionId, modelId, variableId } = formData;
+        const { actionId, modelId, variableId, objectVariableId } = formData;
         const formVariable = getActionInput(variableId);
 
         const hasFilter =
@@ -73,10 +73,24 @@
           );
           const postValues =
             item && item.id ? { id: item.id, ...values } : values;
+          const postObjValues = item && item.id ? { variable_id: item.id } : {};
           let variables = { variables: { input: postValues } };
           if (formVariable && formVariable.name) {
+            let inputVariables = {
+              [formVariable.name]: postValues,
+            };
+            if (objectVariableId) {
+              const objectVariable = getActionInput(objectVariableId);
+              inputVariables = {
+                ...inputVariables,
+                [objectVariable.name]: postObjValues,
+              };
+            }
+
             variables = {
-              variables: { input: { [formVariable.name]: postValues } },
+              variables: {
+                input: inputVariables,
+              },
             };
           }
           callAction(variables);
