@@ -1,3 +1,16 @@
+# [1.73.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.72.1...v1.73.0) (2020-12-22)
+
+
+### Bug Fixes
+
+* added height to default tab and placeholder ([5906138](https://github.com/bettyblocks/material-ui-component-set/commit/5906138026f21f9fee1522b211ff63992c836803))
+* lint errors ([dcb0cec](https://github.com/bettyblocks/material-ui-component-set/commit/dcb0ceccb1451e4643be5fec00e02d39bb0d8c0a))
+
+
+### Features
+
+* added width for tabs and tab components ([954de5c](https://github.com/bettyblocks/material-ui-component-set/commit/954de5c50357abd7bf73a6d555204e1d1b01e009))
+
 ## [1.72.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.72.0...v1.72.1) (2020-12-21)
 
 
