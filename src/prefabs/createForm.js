@@ -1,6 +1,6 @@
 (() => ({
-  name: 'UpdateForm',
-  icon: 'UpdateFormIcon',
+  name: 'CreateForm',
+  icon: 'CreateFormIcon',
   category: 'FORM',
   beforeCreate: ({
     prefab,
@@ -23,28 +23,24 @@
 
     React.useEffect(() => {
       setProperties([]);
-    }, [modelId]);
+    }, [model]);
 
     return (
       <>
         <Header onClose={close} title="Configure Form Fields" />
         <Content>
-          <Field
-            label="Select model"
-            error={
-              showValidation && <Text color="#e82600">Model is required</Text>
-            }
-          >
+          <Field label="Select model">
             <ModelSelector
               onChange={(id, modelObject) => {
                 setShowValidation(false);
-                setModelId(id);
                 setModel(modelObject);
+                setModelId(id);
               }}
               value={modelId}
+              margin
             />
           </Field>
-
+          {showValidation && <Text color="#e82600">Model is required</Text>}
           <Field label="Select properties">
             <PropertiesSelector
               onChange={value => {
@@ -52,7 +48,6 @@
               }}
               value={properties}
               modelId={modelId}
-              scopedModels={false}
               disabledNames={['created_at', 'updated_at', 'id']}
               disabledKinds={[
                 'BELONGS_TO',
@@ -76,8 +71,6 @@
                 'PRICE_EXPRESSION',
                 'STRING_EXPRESSION',
                 'TEXT_EXPRESSION',
-                'MINUTES',
-                'ZIPCODE',
               ]}
             />
           </Field>
@@ -95,7 +88,6 @@
               setShowValidation(true);
               return;
             }
-
             const newPrefab = { ...prefab };
             if (model) {
               newPrefab.variables[1].name = camelToSnakeCase(model.label);
@@ -104,6 +96,7 @@
             newPrefab.structure[0].options[1].value = modelId;
             newPrefab.variables[0].options.modelId = modelId;
             newPrefab.variables[1].options.modelId = modelId;
+            newPrefab.actions[0].events[0].options.modelId = modelId;
             newPrefab.actions[0].events[0].options.assign = properties.map(
               property => ({
                 leftHandSide: property.id[0],
@@ -270,14 +263,8 @@
                           as: 'BUTTONGROUP',
                           dataType: 'string',
                           allowedInput: [
-                            {
-                              name: 'Standard',
-                              value: 'standard',
-                            },
-                            {
-                              name: 'Outlined',
-                              value: 'outlined',
-                            },
+                            { name: 'Standard', value: 'standard' },
+                            { name: 'Outlined', value: 'outlined' },
                             { name: 'Filled', value: 'filled' },
                           ],
                         },
@@ -693,14 +680,8 @@
                           as: 'BUTTONGROUP',
                           dataType: 'string',
                           allowedInput: [
-                            {
-                              name: 'Standard',
-                              value: 'standard',
-                            },
-                            {
-                              name: 'Outlined',
-                              value: 'outlined',
-                            },
+                            { name: 'Standard', value: 'standard' },
+                            { name: 'Outlined', value: 'outlined' },
                             { name: 'Filled', value: 'filled' },
                           ],
                         },
@@ -2357,14 +2338,8 @@
                           as: 'BUTTONGROUP',
                           dataType: 'string',
                           allowedInput: [
-                            {
-                              name: 'Standard',
-                              value: 'standard',
-                            },
-                            {
-                              name: 'Outlined',
-                              value: 'outlined',
-                            },
+                            { name: 'Standard', value: 'standard' },
+                            { name: 'Outlined', value: 'outlined' },
                             { name: 'Filled', value: 'filled' },
                           ],
                         },
@@ -2766,14 +2741,8 @@
                           as: 'BUTTONGROUP',
                           dataType: 'string',
                           allowedInput: [
-                            {
-                              name: 'Standard',
-                              value: 'standard',
-                            },
-                            {
-                              name: 'Outlined',
-                              value: 'outlined',
-                            },
+                            { name: 'Standard', value: 'standard' },
+                            { name: 'Outlined', value: 'outlined' },
                             { name: 'Filled', value: 'filled' },
                           ],
                         },
@@ -4436,14 +4405,8 @@
                           as: 'BUTTONGROUP',
                           dataType: 'string',
                           allowedInput: [
-                            {
-                              name: 'Standard',
-                              value: 'standard',
-                            },
-                            {
-                              name: 'Outlined',
-                              value: 'outlined',
-                            },
+                            { name: 'Standard', value: 'standard' },
+                            { name: 'Outlined', value: 'outlined' },
                             { name: 'Filled', value: 'filled' },
                           ],
                         },
@@ -4847,14 +4810,8 @@
                           as: 'BUTTONGROUP',
                           dataType: 'string',
                           allowedInput: [
-                            {
-                              name: 'Standard',
-                              value: 'standard',
-                            },
-                            {
-                              name: 'Outlined',
-                              value: 'outlined',
-                            },
+                            { name: 'Standard', value: 'standard' },
+                            { name: 'Outlined', value: 'outlined' },
                             { name: 'Filled', value: 'filled' },
                           ],
                         },
@@ -5198,14 +5155,8 @@
                           as: 'BUTTONGROUP',
                           dataType: 'string',
                           allowedInput: [
-                            {
-                              name: 'Standard',
-                              value: 'standard',
-                            },
-                            {
-                              name: 'Outlined',
-                              value: 'outlined',
-                            },
+                            { name: 'Standard', value: 'standard' },
+                            { name: 'Outlined', value: 'outlined' },
                             { name: 'Filled', value: 'filled' },
                           ],
                         },
@@ -5560,14 +5511,8 @@
                           as: 'BUTTONGROUP',
                           dataType: 'string',
                           allowedInput: [
-                            {
-                              name: 'Standard',
-                              value: 'standard',
-                            },
-                            {
-                              name: 'Outlined',
-                              value: 'outlined',
-                            },
+                            { name: 'Standard', value: 'standard' },
+                            { name: 'Outlined', value: 'outlined' },
                             { name: 'Filled', value: 'filled' },
                           ],
                         },
@@ -5891,14 +5836,8 @@
                           as: 'BUTTONGROUP',
                           dataType: 'string',
                           allowedInput: [
-                            {
-                              name: 'Standard',
-                              value: 'standard',
-                            },
-                            {
-                              name: 'Outlined',
-                              value: 'outlined',
-                            },
+                            { name: 'Standard', value: 'standard' },
+                            { name: 'Outlined', value: 'outlined' },
                             { name: 'Filled', value: 'filled' },
                           ],
                         },
@@ -6204,14 +6143,8 @@
                           dataType: 'string',
                           allowedInput: [
                             { name: 'Text', value: 'text' },
-                            {
-                              name: 'Outlined',
-                              value: 'outlined',
-                            },
-                            {
-                              name: 'Contain',
-                              value: 'contained',
-                            },
+                            { name: 'Outlined', value: 'outlined' },
+                            { name: 'Contain', value: 'contained' },
                             { name: 'Icon', value: 'icon' },
                           ],
                         },
@@ -9966,7 +9899,7 @@
   ],
   actions: [
     {
-      name: 'Update form action',
+      name: 'Create form action',
       ref: {
         id: '#actionId',
         endpointId: '#endpointId',
@@ -9974,11 +9907,9 @@
       useNewRuntime: false,
       events: [
         {
-          kind: 'update',
+          kind: 'create',
           options: {
-            ref: {
-              object: '#objectVariableId',
-            },
+            modelId: '',
             assign: [],
           },
         },
@@ -9991,7 +9922,7 @@
       options: [
         {
           value: {
-            modelId: '',
+            modelId: null,
             ref: {
               customModelId: '#customModelId',
               actionId: '#actionId',
