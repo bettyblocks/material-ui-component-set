@@ -30,7 +30,13 @@
     const { TextField, MenuItem } = window.MaterialUI.Core;
     const displayError = showError === 'built-in';
     const isDev = B.env === 'dev';
-    const { useAllQuery, getProperty, useText, getCustomModelAttribute } = B;
+    const {
+      useAllQuery,
+      getProperty,
+      useText,
+      getCustomModelAttribute,
+      ModelProvider,
+    } = B;
     const [errorState, setErrorState] = useState(false);
     const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
@@ -120,10 +126,8 @@
       setHelper(message);
     };
 
-    const handleChange = event => {
-      const {
-        target: { value: eventValue },
-      } = event;
+    const handleClick = (event, eventValue, context) => {
+      B.triggerEvent('OnChange', event, context);
 
       if (afterFirstInvalidation) {
         handleValidation();
@@ -147,15 +151,31 @@
     const renderOptions = () => {
       if (kind === 'list' || kind === 'LIST') {
         return values.map(({ value: v }) => (
-          <MenuItem key={v} value={v}>
-            {v}
+          <MenuItem key={v} value={v} className={classes.menuItem}>
+            <div
+              className={classes.menuItemDiv}
+              key={v}
+              value={v}
+              onClick={event => handleClick(event, v)}
+              aria-hidden
+            >
+              {v}
+            </div>
           </MenuItem>
         ));
       }
       if (optionType === 'static') {
         return selectOptions.split('\n').map(option => (
-          <MenuItem key={option} value={option}>
-            {option}
+          <MenuItem key={option} value={option} className={classes.menuItem}>
+            <div
+              className={classes.menuItemDiv}
+              key={option}
+              value={option}
+              onClick={event => handleClick(event, option)}
+              aria-hidden
+            >
+              {option}
+            </div>
           </MenuItem>
         ));
       }
@@ -165,8 +185,28 @@
         item =>
           propName &&
           labelName && (
-            <MenuItem key={item.id} value={item[propName]}>
-              {item[labelName]}
+            <MenuItem
+              className={classes.menuItem}
+              key={item.id}
+              value={item[propName]}
+            >
+              <ModelProvider value={item} id={model}>
+                <B.InteractionScope model={model}>
+                  {context => (
+                    <div
+                      className={classes.menuItemDiv}
+                      key={item.id}
+                      value={item[propName]}
+                      onClick={event =>
+                        handleClick(event, item[propName], context)
+                      }
+                      aria-hidden
+                    >
+                      {item[labelName]}
+                    </div>
+                  )}
+                </B.InteractionScope>
+              </ModelProvider>
             </MenuItem>
           ),
       );
@@ -182,7 +222,6 @@
           classes={{ root: classes.formControl }}
           variant={variant}
           fullWidth={fullWidth}
-          onChange={handleChange}
           onBlur={validationHandler}
           inputProps={{
             name: nameAttributeValue || customModelAttributeName,
@@ -229,7 +268,20 @@
         border: 'none',
         pointerEvents: 'none',
       },
+      menuItem: {
+        padding: 0,
+        '&.MuiMenuItem-root': {
+          padding: 0,
+        },
+      },
+      menuItemDiv: {
+        padding: ['6px', '18px', '6px', '18px'],
+        width: '100%',
+      },
       formControl: {
+        '& .MuiSelect-root > div': {
+          padding: 0,
+        },
         '& > label': {
           color: ({ options: { labelColor } }) => [
             style.getColor(labelColor),
