@@ -125,7 +125,12 @@
                       {
                         value: {
                           label: [property.label],
-                          value: [property],
+                          value: [
+                            {
+                              id: property.id,
+                              type: property.type,
+                            },
+                          ],
                           propertyIds: property.id,
                           ref: {
                             id: `#attribute_${property.id[0]}`,
@@ -534,7 +539,12 @@
                       {
                         value: {
                           label: [property.label],
-                          value: [property],
+                          value: [
+                            {
+                              id: property.id,
+                              type: property.type,
+                            },
+                          ],
                           propertyIds: property.id,
                           ref: {
                             id: `#attribute_${property.id[0]}`,
@@ -2212,7 +2222,12 @@
                       {
                         value: {
                           label: [property.label],
-                          value: [property],
+                          value: [
+                            {
+                              id: property.id,
+                              type: property.type,
+                            },
+                          ],
                           propertyIds: property.id,
                           ref: {
                             id: `#attribute_${property.id[0]}`,
@@ -2621,7 +2636,12 @@
                       {
                         value: {
                           label: [property.label],
-                          value: [property],
+                          value: [
+                            {
+                              id: property.id,
+                              type: property.type,
+                            },
+                          ],
                           propertyIds: property.id,
                           ref: {
                             id: `#attribute_${property.id[0]}`,
@@ -4291,7 +4311,12 @@
                       {
                         value: {
                           label: [property.label],
-                          value: [property],
+                          value: [
+                            {
+                              id: property.id,
+                              type: property.type,
+                            },
+                          ],
                           propertyIds: property.id,
                           ref: {
                             id: `#attribute_${property.id[0]}`,
@@ -4700,7 +4725,12 @@
                       {
                         value: {
                           label: [property.label],
-                          value: [property],
+                          value: [
+                            {
+                              id: property.id,
+                              type: property.type,
+                            },
+                          ],
                           propertyIds: property.id,
                           ref: {
                             id: `#attribute_${property.id[0]}`,
@@ -5111,7 +5141,12 @@
                       {
                         value: {
                           label: [property.label],
-                          value: [property],
+                          value: [
+                            {
+                              id: property.id,
+                              type: property.type,
+                            },
+                          ],
                           propertyIds: property.id,
                           ref: {
                             id: `#attribute_${property.id[0]}`,
@@ -5436,7 +5471,12 @@
                       {
                         value: {
                           label: [property.label],
-                          value: [property],
+                          value: [
+                            {
+                              id: property.id,
+                              type: property.type,
+                            },
+                          ],
                           propertyIds: property.id,
                           ref: {
                             id: `#attribute_${property.id[0]}`,
@@ -5798,7 +5838,12 @@
                       {
                         value: {
                           label: [property.label],
-                          value: [property],
+                          value: [
+                            {
+                              id: property.id,
+                              type: property.type,
+                            },
+                          ],
                           propertyIds: property.id,
                           ref: {
                             id: `#attribute_${property.id[0]}`,
@@ -6130,7 +6175,12 @@
                       {
                         value: {
                           label: [property.label],
-                          value: [property],
+                          value: [
+                            {
+                              id: property.id,
+                              type: property.type,
+                            },
+                          ],
                           propertyIds: property.id,
                           ref: {
                             id: `#attribute_${property.id[0]}`,
@@ -7668,7 +7718,12 @@
                       {
                         value: {
                           label: [property.label],
-                          value: [property],
+                          value: [
+                            {
+                              id: property.id,
+                              type: property.type,
+                            },
+                          ],
                           propertyIds: property.id,
                           ref: {
                             id: `#attribute_${property.id[0]}`,
@@ -7850,7 +7905,12 @@
                       {
                         value: {
                           label: [property.label],
-                          value: [property],
+                          value: [
+                            {
+                              id: property.id,
+                              type: property.type,
+                            },
+                          ],
                           propertyIds: property.id,
                           ref: {
                             id: `#attribute_${property.id[0]}`,
@@ -8273,7 +8333,12 @@
                       {
                         value: {
                           label: [property.label],
-                          value: [property],
+                          value: [
+                            {
+                              id: property.id,
+                              type: property.type,
+                            },
+                          ],
                           propertyIds: property.id,
                           ref: {
                             id: `#attribute_${property.id[0]}`,
