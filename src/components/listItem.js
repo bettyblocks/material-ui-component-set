@@ -1,6 +1,6 @@
 (() => ({
   name: 'ListItem',
-  type: 'LIST_ITEM',
+  type: 'CONTENT_COMPONENT',
   allowedTypes: ['CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {

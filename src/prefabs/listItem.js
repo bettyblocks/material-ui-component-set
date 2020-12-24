@@ -25,12 +25,6 @@
           value: 'Transparent',
         },
         {
-          type: 'COLOR',
-          label: 'Icon color',
-          key: 'iconColor',
-          value: 'Black',
-        },
-        {
           type: 'ENDPOINT',
           label: 'Page',
           key: 'linkTo',
@@ -1317,6 +1311,12 @@
               },
             ],
           },
+        },
+        {
+          type: 'COLOR',
+          label: 'Icon color',
+          key: 'iconColor',
+          value: 'Black',
         },
         {
           value: false,

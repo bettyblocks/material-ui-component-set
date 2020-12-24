@@ -1,7 +1,7 @@
 (() => ({
   name: 'List',
   type: 'CONTAINER_COMPONENT',
-  allowedTypes: ['LIST_ITEM', 'LIST_SUBHEADER'],
+  allowedTypes: ['LIST_ITEM', 'LIST_SUBHEADER', 'CONTAINER_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { List, ListItem, ListItemText } = window.MaterialUI.Core;
@@ -21,58 +21,22 @@
 
     const listArgs = { className: classes.root, disablePadding, dense };
 
-    const orderByArray = [orderBy].flat();
-    const sort =
-      !isDev && orderBy
-        ? orderByArray.reduceRight((acc, property, index) => {
-            const prop = getProperty(property);
-            return index === orderByArray.length - 1
-              ? { [prop.name]: order.toUpperCase() }
-              : { [prop.name]: acc };
-          }, {})
-        : {};
-
-    const { loading, error, data } =
-      model &&
-      useAllQuery(model, {
-        filter,
-        variables: {
-          ...(orderBy ? { sort: { relation: sort } } : {}),
-        },
-      });
-
-    if (loading) return <DataPlaceHolder text="loading..." />;
-    if (error) return <DataPlaceHolder text="failed" />;
-
-    const { results } = data || {};
-
-    if (!isDev && results && results.length === 0) {
-      return <DataPlaceHolder text="No results" />;
-    }
-
     const renderData = () => {
-      if (!model || isDev) {
-        return isEmpty ? (
-          <div
-            className={[
-              isEmpty ? classes.empty : '',
-              isPristine ? classes.pristine : '',
-            ].join(' ')}
-          />
-        ) : (
-          children
-        );
-      }
-      return (results || []).map(value => (
-        <ModelProvider value={value} id={model}>
-          <B.InteractionScope>{children}</B.InteractionScope>
-        </ModelProvider>
-      ));
+      return isEmpty ? (
+        <div
+          className={[
+            isEmpty ? classes.empty : '',
+            isPristine ? classes.pristine : '',
+          ].join(' ')}
+        />
+      ) : (
+        children
+      );
     };
 
     const ListComponent = <List {...listArgs}>{renderData()}</List>;
 
-    return isDev ? <div>{ListComponent}</div> : ListComponent;
+    return ListComponent;
   })(),
   styles: B => t => {
     const style = new B.Styling(t);
