@@ -4,25 +4,17 @@
   allowedTypes: ['LIST_ITEM', 'LIST_SUBHEADER', 'CONTAINER_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { List, ListItem, ListItemText } = window.MaterialUI.Core;
-    const { env, ModelProvider, useAllQuery, getProperty } = B;
+    const { List } = window.MaterialUI.Core;
+    const { env } = B;
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
     const isPristine = children.length === 0 && isDev;
-    const { filter, model, disablePadding, dense, orderBy, order } = options;
-
-    const DataPlaceHolder = ({ text }) => (
-      <List className={classes.root}>
-        <ListItem>
-          <ListItemText primary={text} />
-        </ListItem>
-      </List>
-    );
+    const { disablePadding, dense } = options;
 
     const listArgs = { className: classes.root, disablePadding, dense };
 
-    const renderData = () => {
-      return isEmpty ? (
+    const renderData = () =>
+      isEmpty ? (
         <div
           className={[
             isEmpty ? classes.empty : '',
@@ -32,7 +24,6 @@
       ) : (
         children
       );
-    };
 
     const ListComponent = <List {...listArgs}>{renderData()}</List>;
 
