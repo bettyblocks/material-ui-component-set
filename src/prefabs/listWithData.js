@@ -17,18 +17,17 @@
   }) => {
     const [modelId, setModelId] = React.useState('');
     const [property, setProperty] = React.useState('');
-    const reduceStructure = (refValue, structure) => {
-      return structure.reduce((acc, component) => {
+    const reduceStructure = (refValue, structure) =>
+      structure.reduce((acc, component) => {
         if (acc) return acc;
         if (
           component.hasOwnProperty('ref') &&
-          Object.values(component['ref']).indexOf(refValue) > -1
+          Object.values(component.ref).indexOf(refValue) > -1
         ) {
           return component;
         }
         return reduceStructure(refValue, component.descendants);
       }, null);
-    };
 
     return (
       <>
