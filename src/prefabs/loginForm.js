@@ -32,6 +32,14 @@
                 </Text>
               )
             }
+            info={
+              <Text size="small" color="grey700">
+                Small note: After you have created the login end-user form, you
+                must add the Login interaction on the form component yourself
+                (manually). <br /> Soon this will be part of the form creation
+                process.
+              </Text>
+            }
           >
             <AuthenticationProfileSelector
               onChange={(id, authProfileObject) => {
