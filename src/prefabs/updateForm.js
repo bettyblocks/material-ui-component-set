@@ -27,7 +27,7 @@
 
     return (
       <>
-        <Header onClose={close} title="Configure Form Fields" />
+        <Header onClose={close} title="Configure form fields" />
         <Content>
           <Field
             label="Select model"

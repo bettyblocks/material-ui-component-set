@@ -21,10 +21,10 @@
 
     return (
       <>
-        <Header onClose={close} title="Configure Form Fields" />
+        <Header onClose={close} title="Configure login form" />
         <Content>
           <Field
-            label="Select authprofile"
+            label="Select an authentication profile"
             error={
               showValidation && (
                 <Text color="#e82600">
