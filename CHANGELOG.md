@@ -1,3 +1,17 @@
+# [1.74.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.73.2...v1.74.0) (2020-12-29)
+
+
+### Features
+
+* login form prefab ([73f64e3](https://github.com/bettyblocks/material-ui-component-set/commit/73f64e39dcd69d2010538fc1fb2d962ac8d228ab))
+
+## [1.73.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.73.1...v1.73.2) (2020-12-23)
+
+
+### Bug Fixes
+
+* pass property id instead of complete object ([3d364e1](https://github.com/bettyblocks/material-ui-component-set/commit/3d364e1342b70d4f41dd6a7bfd27d65b0181b530))
+
 ## [1.73.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.73.0...v1.73.1) (2020-12-22)
 
 
