@@ -1,6 +1,6 @@
 (() => ({
   name: 'LoginForm',
-  icon: 'FormIcon',
+  icon: 'LoginFormIcon',
   category: 'FORM',
   beforeCreate: ({
     prefab,
