@@ -141,10 +141,10 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@betty-blocks/cli@^23.20.0":
-  version "23.20.0"
-  resolved "https://registry.yarnpkg.com/@betty-blocks/cli/-/cli-23.20.0.tgz#33ac0215590fd1b3c6d6a51d572459718e188890"
-  integrity sha512-maU4ZTnxsPT/uGmSxU56InxqNe87nB3WiZV4MTXsyvS8LCCjfRfcNpkjlDQPTrqxAXXDxQcI4UBkI49x7Thmwg==
+"@betty-blocks/cli@^23.23.0":
+  version "23.23.0"
+  resolved "https://registry.yarnpkg.com/@betty-blocks/cli/-/cli-23.23.0.tgz#0d47f802bd091409bdaaddce32d6cbeb5f2822ef"
+  integrity sha512-T4DjdLDDcYjbasD+GbG/0JxQ+E57AeezOv38aMMOTXpzytDL+tCo61fd9yZqNRsERKZJ2G6Tr+AlTt9z8HRf+Q==
   dependencies:
     "@azure/ms-rest-js" "^2.0.4"
     "@azure/storage-blob" "^10.3.0"

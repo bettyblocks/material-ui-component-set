@@ -27,7 +27,7 @@
 
     return (
       <>
-        <Header onClose={close} title="Configure Form Fields" />
+        <Header onClose={close} title="Configure form fields" />
         <Content>
           <Field
             label="Select model"
@@ -45,7 +45,10 @@
             />
           </Field>
 
-          <Field label="Select properties">
+          <Field
+            label="Select properties"
+            info="Small note: After you have created the Update record form, you must apply the model filtering on the form component yourself (manually). By providing a filter, the form will fetch one record on page load. This record is used to Update. Soon this will be part of the form creation process."
+          >
             <PropertiesSelector
               onChange={value => {
                 setProperties(value);
