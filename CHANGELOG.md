@@ -1,3 +1,10 @@
+# [1.74.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.73.2...v1.74.0) (2020-12-29)
+
+
+### Features
+
+* login form prefab ([73f64e3](https://github.com/bettyblocks/material-ui-component-set/commit/73f64e39dcd69d2010538fc1fb2d962ac8d228ab))
+
 ## [1.73.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.73.1...v1.73.2) (2020-12-23)
 
 
