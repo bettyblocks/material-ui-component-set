@@ -3854,7 +3854,10 @@
 
               const alertSuccessDescendant = () => ([
                 {
-                  name: 'Success alert',
+                  name: 'Alert',
+                  ref: {
+                    id: '#alertSuccessId',
+                  },
                   options: [
                     {
                       value: false,
@@ -3869,7 +3872,7 @@
                       type: 'VARIABLE',
                       label: 'Body text',
                       key: 'bodyText',
-                      value: ['*This value is added from the response of the action*'],
+                      value: ['You are successfully logged in'],
                       configuration: {
                         dependsOn: 'model',
                       },
@@ -3878,7 +3881,7 @@
                       type: 'VARIABLE',
                       label: 'Title text',
                       key: 'titleText',
-                      value: ['Success alert'],
+                      value: ['Success'],
                     },
                     {
                       value: 'White',
@@ -5220,7 +5223,10 @@
 
               const alertErrorDescendant = () => ([
                 {
-                  name: 'Error alert',
+                  name: 'Alert',
+                  ref: {
+                    id: '#alertErrorId',
+                  },
                   options: [
                     {
                       value: false,
@@ -5235,7 +5241,7 @@
                       type: 'VARIABLE',
                       label: 'Body text',
                       key: 'bodyText',
-                      value: ['*This value is added from the response of the action*'],
+                      value: ['*Dynamic value from the Action response*'],
                       configuration: {
                         dependsOn: 'model',
                       },
@@ -5244,7 +5250,7 @@
                       type: 'VARIABLE',
                       label: 'Title text',
                       key: 'titleText',
-                      value: ['Error alert'],
+                      value: ['Error'],
                     },
                     {
                       value: 'White',
@@ -6592,7 +6598,7 @@
                         type: 'VARIABLE',
                         label: 'Content',
                         key: 'content',
-                        value: ["Login"],
+                        value: ["Login user"],
                         configuration: {
                           as: 'MULTILINE',
                         },
@@ -6780,6 +6786,9 @@
   structure: [
     {
       name: 'Form',
+      ref: {
+        id: '#formId'
+      },
       options: [
         {
           value: {
@@ -7216,6 +7225,9 @@
           descendants: [
             {
               name: 'Button',
+              ref: {
+                id: '#btnId',
+              },
               options: [
                 {
                   label: 'Toggle visibility',
