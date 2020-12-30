@@ -2,6 +2,25 @@
   name: 'Global Test',
   icon: 'RowColumnIcon',
   category: 'LAYOUT',
+  interactions: [
+    {
+      name: 'setCurrentRecord',
+      sourceEvent: 'OnRowClick',
+      parameters: [
+        {
+          path: null,
+          parameter: 'argument',
+          id: [],
+        },
+      ],
+      ref: {
+        targetComponentId: '#dataContainer',
+        sourceComponentId: '#dataTable',
+      },
+      targetOptionName: 'currentRecord',
+      type: 'Global',
+    },
+  ],
   beforeCreate: ({
     components: {
       Content,
@@ -11,12 +30,22 @@
       ModelSelector,
       PropertiesSelector,
     },
+    helpers: { getModel },
     prefab,
     save,
     close,
   }) => {
     const [modelId, setModelId] = React.useState('');
+    const [prop, setProp] = React.useState([]);
     const [properties, setProperties] = React.useState([]);
+
+    React.useEffect(() => {
+      if (modelId) {
+        getModel(modelId).then(({ data }) => {
+          setProp(data.model.properties.find(p => p.name === 'id'));
+        });
+      }
+    }, [modelId]);
 
     return (
       <>
@@ -30,6 +59,7 @@
               value={modelId}
             />
           </Field>
+
           <Field label="Columns">
             <PropertiesSelector
               modelId={modelId}
@@ -43,6 +73,8 @@
         <Footer
           onSave={() => {
             const newPrefab = { ...prefab };
+
+            newPrefab.interactions[0].parameters[0].id = [prop.id];
 
             newPrefab.structure[0].descendants[0].descendants[0].descendants[0].descendants[0].options[0].value = modelId;
             newPrefab.structure[0].descendants[0].descendants[1].descendants[0].descendants[0].options[0].value = modelId;
@@ -598,6 +630,9 @@
                   descendants: [
                     {
                       name: 'DataTable',
+                      ref: {
+                        id: '#dataTable',
+                      },
                       options: [
                         {
                           value: '',
@@ -1170,6 +1205,9 @@
                   descendants: [
                     {
                       name: 'DataContainer',
+                      ref: {
+                        id: '#dataContainer',
+                      },
                       options: [
                         {
                           value: '',
