@@ -22,6 +22,12 @@
           value: ['You can also drag an alert component here for example'],
         },
         {
+          label: 'Allow server response',
+          key: 'allowServerResponse',
+          value: false,
+          type: 'TOGGLE',
+        },
+        {
           label: 'Vertical position',
           key: 'anchorOriginVertical',
           value: 'bottom',
