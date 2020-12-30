@@ -1,3 +1,10 @@
+# [1.75.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.74.0...v1.75.0) (2020-12-30)
+
+
+### Features
+
+* add option to display rich text (html) to Text ([20679d7](https://github.com/bettyblocks/material-ui-component-set/commit/20679d7a1163c3aeb5ba9cb42b583c49c5740c71))
+
 # [1.74.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.73.2...v1.74.0) (2020-12-29)
 
 
