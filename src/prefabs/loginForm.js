@@ -6783,6 +6783,62 @@
       ],
     },
   ],
+  interactions: [
+    {
+      name: 'Show',
+      sourceEvent: 'onActionError',
+      ref: {
+        targetComponentId: '#alertErrorId',
+        sourceComponentId: '#formId',
+      },
+      type: 'Custom',
+    },
+    {
+      name: 'Show',
+      sourceEvent: 'onActionSuccess',
+      ref: {
+        targetComponentId: '#alertSuccessId',
+        sourceComponentId: '#formId',
+      },
+      type: 'Custom',
+    },
+    {
+      name: 'ToggleLoadingState',
+      sourceEvent: 'onSubmit',
+      ref: {
+        targetComponentId: '#btnId',
+        sourceComponentId: '#formId',
+      },
+      type: 'Custom',
+    },
+    {
+      name: 'ToggleLoadingState',
+      sourceEvent: 'onActionDone',
+      ref: {
+        targetComponentId: '#btnId',
+        sourceComponentId: '#formId',
+      },
+      type: 'Custom',
+    },
+    {
+      name: 'Hide',
+      sourceEvent: 'onSubmit',
+      ref: {
+        targetComponentId: '#alertSuccessId',
+        sourceComponentId: '#formId',
+      },
+      type: 'Custom',
+    },
+    {
+      name: 'Hide',
+      sourceEvent: 'onSubmit',
+      ref: {
+        targetComponentId: '#alertErrorId',
+        sourceComponentId: '#formId',
+      },
+      type: 'Custom',
+    },
+  ],
   structure: [
     {
       name: 'Form',
@@ -6844,7 +6900,7 @@
           },
         },
         {
-          value: 'built-in',
+          value: 'interaction',
           label: 'Success message',
           key: 'showSuccess',
           type: 'CUSTOM',
@@ -6872,7 +6928,7 @@
           },
         },
         {
-          value: 'built-in',
+          value: 'interaction',
           label: 'Error message',
           key: 'showError',
           type: 'CUSTOM',
