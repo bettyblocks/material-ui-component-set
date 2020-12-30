@@ -34,9 +34,8 @@
       setOpen(true);
     });
 
-    B.defineFunction('Hide', () => {
-      setOpen(false);
-    });
+    B.defineFunction('Hide', () => setOpen(false));
+    B.defineFunction('Show/Hide', () => setOpen(s => !s));
 
     useEffect(() => {
       setOpen(visible);

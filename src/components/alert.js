@@ -29,6 +29,10 @@
       setOpen(false);
     });
 
+    B.defineFunction('Show/Hide', () => {
+      setOpen(!open);
+    });
+
     const AlertPanel = (
       <Alert
         classes={{
