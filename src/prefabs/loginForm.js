@@ -3854,7 +3854,7 @@
 
               const alertSuccessDescendant = () => ([
                 {
-                  name: 'Alert',
+                  name: 'Success alert',
                   options: [
                     {
                       value: false,
@@ -5220,7 +5220,7 @@
 
               const alertErrorDescendant = () => ([
                 {
-                  name: 'Alert',
+                  name: 'Error alert',
                   options: [
                     {
                       value: false,
