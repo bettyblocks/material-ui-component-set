@@ -12,12 +12,11 @@
 
         const evalCondition = () => {
           const left = useText(options.left);
-          const { compare } = options;
           const right = useText(options.right);
           const leftAsNumber = parseFloat(left);
           const rightAsNumber = parseFloat(right);
 
-          switch (compare) {
+          switch (options.compare) {
             case 'neq':
               return left !== right;
             case 'contains':
@@ -36,16 +35,17 @@
               return left === right;
           }
         };
-        const initialVisibility = isDev || evalCondition();
+        const checkCondition = evalCondition();
+        const initialVisibility = isDev || checkCondition;
         const [visible, setVisible] = useState(initialVisibility);
 
         useEffect(() => {
-          setVisible(initialVisibility);
+          setVisible(options.visible ? checkCondition : !checkCondition);
         }, [initialVisibility]);
 
         B.defineFunction('Hide', () => setVisible(false));
         B.defineFunction('Show', () => setVisible(true));
-        B.defineFunction('Toggle', () => setVisible(s => !s));
+        B.defineFunction('Show/Hide', () => setVisible(s => !s));
 
         if (!visible) return null;
         return isPristine ? 'Conditional' : children;
