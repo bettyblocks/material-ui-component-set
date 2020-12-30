@@ -35,7 +35,9 @@
           err.graphQLErrors[0].extensions.error) ||
         err.message;
       const errorTitle =
-        (err.graphQLErrors[0] && err.graphQLErrors[0].message) ||
+        (err.graphQLErrors &&
+          err.graphQLErrors[0] &&
+          err.graphQLErrors[0].message) ||
         (err.networkError && err.networkError.message);
       return [errorTitle, errorMessage];
     };
