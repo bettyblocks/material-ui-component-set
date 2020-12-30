@@ -96,7 +96,7 @@
     }, [loading]);
 
     if (error && !displayError) {
-      B.triggerEvent('onError', error.message);
+      B.triggerEvent('onError', error);
     }
 
     const { results } = data || {};

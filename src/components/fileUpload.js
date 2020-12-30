@@ -81,7 +81,7 @@
           mimeType: acceptList,
         },
         onError: errorData => {
-          B.triggerEvent('onError', errorData.message);
+          B.triggerEvent('onError', errorData);
           setUploads({
             ...uploads,
             failureMessage: [errorData.message],

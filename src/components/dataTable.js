@@ -270,7 +270,7 @@
     }, [loading]);
 
     if (error && !displayError) {
-      B.triggerEvent('onError', error.message);
+      B.triggerEvent('onError', error);
     }
 
     if (results.length > 0) {
