@@ -31,6 +31,12 @@
           value: [''],
         },
         {
+          label: 'Allow server response',
+          key: 'allowServerResponse',
+          value: false,
+          type: 'TOGGLE',
+        },
+        {
           value: 'Black',
           label: 'Text color',
           key: 'textColor',

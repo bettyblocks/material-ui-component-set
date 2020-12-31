@@ -117,7 +117,7 @@
           }
 
           if (error && !displayError) {
-            B.triggerEvent('onActionError', error.message);
+            B.triggerEvent('onActionError', error);
           }
         };
 
@@ -212,7 +212,7 @@
           }, [isFetching]);
 
           if (err) {
-            B.triggerEvent('onDataError', err.message);
+            B.triggerEvent('onDataError', err);
           }
 
           const item = records && records.results[0];
