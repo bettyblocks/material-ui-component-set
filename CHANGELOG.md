@@ -1,3 +1,10 @@
+# [1.78.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.77.0...v1.78.0) (2020-12-31)
+
+
+### Features
+
+* **ART-2902:** Add alerts to update form ([6dc73e8](https://github.com/bettyblocks/material-ui-component-set/commit/6dc73e86aa0ff515e044d4c224008f1c7706dd22))
+
 # [1.77.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.76.0...v1.77.0) (2020-12-31)
 
 
