@@ -3851,7 +3851,7 @@
                 }
               });
 
-              const alertSuccessDescendant = () => [
+              const alertSuccessDescendant = [
                 {
                   name: 'Alert',
                   ref: {
@@ -5220,7 +5220,7 @@
                 },
               ];
 
-              const alertErrorDescendant = () => [
+              const alertErrorDescendant = [
                 {
                   name: 'Alert',
                   ref: {
@@ -6589,7 +6589,7 @@
                 },
               ];
 
-              const titleDescendant = () => [
+              const titleDescendant = [
                 {
                   name: 'Text',
                   options: [
