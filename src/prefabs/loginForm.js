@@ -3883,6 +3883,12 @@
                       value: ['Success'],
                     },
                     {
+                      label: 'Allow server response',
+                      key: 'allowServerResponse',
+                      value: false,
+                      type: 'TOGGLE',
+                    },
+                    {
                       value: 'White',
                       label: 'Text color',
                       key: 'textColor',
@@ -5250,6 +5256,12 @@
                       label: 'Title text',
                       key: 'titleText',
                       value: ['Error'],
+                    },
+                    {
+                      label: 'Allow server response',
+                      key: 'allowServerResponse',
+                      value: true,
+                      type: 'TOGGLE',
                     },
                     {
                       value: 'White',
