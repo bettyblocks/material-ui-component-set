@@ -30,7 +30,7 @@
       ModelSelector,
       PropertiesSelector,
     },
-    helpers: { getModel },
+    helpers: { useModelQuery },
     prefab,
     save,
     close,
@@ -39,13 +39,13 @@
     const [prop, setProp] = React.useState([]);
     const [properties, setProperties] = React.useState([]);
 
-    React.useEffect(() => {
-      if (modelId) {
-        getModel(modelId).then(({ data }) => {
-          setProp(data.model.properties.find(p => p.name === 'id'));
-        });
-      }
-    }, [modelId]);
+    useModelQuery({
+      variables: { id: modelId },
+      skip: !modelId,
+      onCompleted: data => {
+        setProp(data.model.properties.find(p => p.name === 'id'));
+      },
+    });
 
     return (
       <>
