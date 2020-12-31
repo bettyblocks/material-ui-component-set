@@ -11416,7 +11416,7 @@
                   {
                     label: 'Allow to overwrite by the server response',
                     key: 'allowTitleServerResponse',
-                    value: true,
+                    value: false,
                     type: 'TOGGLE',
                   },
                   {
