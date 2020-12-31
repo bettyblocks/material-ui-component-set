@@ -15,7 +15,8 @@
       collapsable,
       titleText,
       bodyText,
-      allowServerResponse,
+      allowTextServerResponse,
+      allowTitleServerResponse,
     } = options;
     const title = useText(titleText);
     const body = useText(bodyText);
@@ -87,10 +88,12 @@
       >
         {(title || titleFromServer) && (
           <AlertTitle>
-            {titleFromServer && allowServerResponse ? titleFromServer : title}
+            {titleFromServer && allowTitleServerResponse
+              ? titleFromServer
+              : title}
           </AlertTitle>
         )}
-        {textFromServer && allowServerResponse ? textFromServer : body}
+        {textFromServer && allowTextServerResponse ? textFromServer : body}
       </Alert>
     );
     return isDev ? (

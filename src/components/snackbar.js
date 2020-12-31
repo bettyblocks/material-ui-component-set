@@ -13,7 +13,7 @@
       autoHide,
       autoHideDuration,
       content,
-      allowServerResponse,
+      allowTextServerResponse,
     } = options;
     const { env, useText } = B;
     const isDev = env === 'dev';
@@ -68,7 +68,7 @@
     const duration = autoHide ? autoHideDuration : null;
 
     const textContent =
-      textFromServer && allowServerResponse ? textFromServer : text;
+      textFromServer && allowTextServerResponse ? textFromServer : text;
 
     let snackbarOptions = {
       open,

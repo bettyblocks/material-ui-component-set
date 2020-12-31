@@ -25,14 +25,20 @@
           },
         },
         {
+          label: 'Allow to overwrite by the server response',
+          key: 'allowTextServerResponse',
+          value: false,
+          type: 'TOGGLE',
+        },
+        {
           type: 'VARIABLE',
           label: 'Title text',
           key: 'titleText',
           value: [''],
         },
         {
-          label: 'Allow server response',
-          key: 'allowServerResponse',
+          label: 'Allow to overwrite by the server response',
+          key: 'allowTitleServerResponse',
           value: false,
           type: 'TOGGLE',
         },
