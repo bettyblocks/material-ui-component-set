@@ -1978,7 +1978,7 @@
                         {
                           label: 'Show password toggle',
                           key: 'adornment',
-                          value: true,
+                          value: false,
                           type: 'TOGGLE',
                         },
                         {
