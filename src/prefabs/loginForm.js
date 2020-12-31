@@ -6681,13 +6681,13 @@
                 },
               ];
 
-              newPrefab.structure[0].descendants = titleDescendant().concat(
-                alertSuccessDescendant().concat(
-                  alertErrorDescendant().concat(
-                    descendantsArray.concat(newPrefab.structure[0].descendants),
-                  ),
-                ),
-              );
+              newPrefab.structure[0].descendants = [
+                ...titleDescendant,
+                ...alertSuccessDescendant,
+                ...alertErrorDescendant,
+                ...descendantsArray,
+                ...newPrefab.structure[0].descendants,
+              ];
 
               save(newPrefab);
             }
