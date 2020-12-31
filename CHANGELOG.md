@@ -1,3 +1,10 @@
+# [1.77.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.76.0...v1.77.0) (2020-12-31)
+
+
+### Features
+
+* **ART-2891:** Add error&succes alerts to create prefab ([faa468a](https://github.com/bettyblocks/material-ui-component-set/commit/faa468abcd0141441ad044ae077b6b93e41e4a20))
+
 # [1.76.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.75.0...v1.76.0) (2020-12-31)
 
 
