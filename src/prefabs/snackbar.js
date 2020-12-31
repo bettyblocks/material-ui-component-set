@@ -22,8 +22,8 @@
           value: ['You can also drag an alert component here for example'],
         },
         {
-          label: 'Allow server response',
-          key: 'allowServerResponse',
+          label: 'Allow to overwrite by the server response',
+          key: 'allowTextServerResponse',
           value: false,
           type: 'TOGGLE',
         },
