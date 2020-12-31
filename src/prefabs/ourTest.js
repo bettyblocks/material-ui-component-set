@@ -8,7 +8,6 @@
       sourceEvent: 'OnRowClick',
       parameters: [
         {
-          path: null,
           parameter: 'argument',
           id: [],
         },
