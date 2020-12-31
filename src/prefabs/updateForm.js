@@ -12857,10 +12857,6 @@
               ...newPrefab.structure[0].descendants,
             ];
 
-            // newPrefab.structure[0].descendants = descendantsArray.concat(
-            //   newPrefab.structure[0].descendants,
-            // );
-
             save(newPrefab);
           }}
         />
