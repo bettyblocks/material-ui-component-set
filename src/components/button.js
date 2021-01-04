@@ -129,7 +129,10 @@
           iconPosition === 'end' &&
           React.createElement(Icons[icon])
         }
-        onClick={actionCallback}
+        onClick={event => {
+          event.stopPropagation();
+          actionCallback();
+        }}
       >
         {isIcon &&
           React.createElement(Icons[icon === 'None' ? 'Error' : icon], {

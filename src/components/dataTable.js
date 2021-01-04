@@ -11,7 +11,6 @@
       GetMe,
       useText,
       ModelProvider,
-      useEndpoint,
       useAllQuery,
       useFilter,
     } = B;
@@ -41,6 +40,8 @@
       orderProperty,
       sortOrder,
       labelRowsPerPage,
+      labelNumberOfPages,
+      labelSearchOn,
       square,
       elevation,
       variant,
@@ -67,7 +68,6 @@
     const [search, setSearch] = useState('');
     const [searchTerm, setSearchTerm] = useState('');
     const [showPagination, setShowPagination] = useState(false);
-    const searchPropertyArray = [searchProperty].flat();
     const { label: searchPropertyLabel = '{property}' } =
       getProperty(searchProperty) || {};
     const [orderBy, setOrderBy] = React.useState({
@@ -132,10 +132,15 @@
       }, {});
     };
 
+    let path = [searchProperty].flat();
+    if (typeof searchProperty.id !== 'undefined') {
+      path = [searchProperty.id].flat();
+    }
+
     const searchFilter = searchProperty
-      ? searchPropertyArray.reduceRight(
+      ? path.reduceRight(
           (acc, property, index) =>
-            index === searchPropertyArray.length - 1
+            index === path.length - 1
               ? { [property]: { matches: searchTerm } }
               : { [property]: acc },
           {},
@@ -146,6 +151,7 @@
       searchProperty && searchTerm !== ''
         ? deepMerge(filter, searchFilter)
         : filter;
+
     const where = useFilter(newFilter);
 
     const { loading, error, data, refetch } =
@@ -298,36 +304,13 @@
       setSearch(event.target.value);
     };
 
-    const isFlatValue = value =>
-      typeof value === 'string' ||
-      typeof value === 'number' ||
-      typeof value === 'boolean';
-
     const history = isDev ? {} : useHistory();
 
-    const handleRowClick = rowValue => {
+    const handleRowClick = (endpoint, context) => {
       if (isDev) return;
-      B.triggerEvent('OnRowClick', rowValue);
+      B.triggerEvent('OnRowClick', endpoint, context);
       if (hasLink) {
-        const { id, params } = linkTo;
-        const newParams = Object.entries(params).reduce((acc, cv) => {
-          const key = cv[0];
-          const value = cv[1];
-          if (isFlatValue(value[0])) {
-            acc[key] = value;
-          } else {
-            const propId = value[0].id;
-            const property = getProperty(propId).name;
-            acc[key] = [rowValue[property].toString()];
-          }
-          return acc;
-        }, {});
-
-        const endpointParams = {
-          id,
-          params: newParams,
-        };
-        history.push(useEndpoint(endpointParams));
+        history.push(endpoint);
       }
     };
 
@@ -363,14 +346,23 @@
 
       const rows = results.map(value => (
         <ModelProvider value={value} id={model}>
-          <TableRow
-            key={value[0]}
-            classes={{ root: classes.bodyRow }}
-            onClick={() => handleRowClick(value)}
-            data-id={value.id}
-          >
-            <B.InteractionScope>{children}</B.InteractionScope>
-          </TableRow>
+          <B.InteractionScope model={model}>
+            {context => (
+              <TableRow
+                key={value[0]}
+                classes={{ root: classes.bodyRow }}
+                data-id={value.id}
+              >
+                <Children
+                  linkTo={linkTo}
+                  handleRowClick={handleRowClick}
+                  context={context}
+                >
+                  {children}
+                </Children>
+              </TableRow>
+            )}
+          </B.InteractionScope>
         </ModelProvider>
       ));
 
@@ -382,19 +374,21 @@
     };
 
     const renderTableContent = () => {
-      let tableContent = Array.from(Array(amountOfRows).keys()).map(idx => (
-        <TableRow key={idx} classes={{ root: classes.bodyRow }}>
-          <B.InteractionScope>{children}</B.InteractionScope>
-        </TableRow>
-      ));
       if (isDev) {
-        tableContent = (
+        return (
           <TableRow classes={{ root: classes.bodyRow }}>{children}</TableRow>
         );
-      } else if (model) {
-        tableContent = tableContentModel();
       }
-      return tableContent;
+
+      if (model) {
+        return tableContentModel();
+      }
+
+      return Array.from(Array(amountOfRows).keys()).map(idx => (
+        <TableRow key={idx} classes={{ root: classes.bodyRow }}>
+          {children}
+        </TableRow>
+      ));
     };
 
     useEffect(() => {
@@ -519,7 +513,9 @@
               {searchProperty && !hideSearch && (
                 <TextField
                   classes={{ root: classes.searchField }}
-                  placeholder={`Search on ${searchPropertyLabel}`}
+                  placeholder={`${useText(
+                    labelSearchOn,
+                  )} ${searchPropertyLabel}`}
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
@@ -559,6 +555,9 @@
               classes={{ root: classes.pagination }}
               rowsPerPageOptions={[5, 10, 25, 50, 100]}
               labelRowsPerPage={useText(labelRowsPerPage)}
+              labelDisplayedRows={({ from, to, count }) =>
+                `${from}-${to} ${useText(labelNumberOfPages)} ${count}`
+              }
               component="div"
               count={model ? totalCount : takeNum}
               rowsPerPage={model ? rowsPerPage : takeNum}

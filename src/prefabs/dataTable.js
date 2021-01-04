@@ -162,7 +162,6 @@
           type: 'PROPERTY',
           configuration: {
             dependsOn: 'model',
-            apiVersion: 'v1',
           },
         },
         {
@@ -192,7 +191,6 @@
           type: 'PROPERTY',
           configuration: {
             dependsOn: 'model',
-            apiVersion: 'v1',
           },
         },
         {
@@ -200,6 +198,20 @@
           label: 'Hide built-in search field',
           key: 'hideSearch',
           type: 'TOGGLE',
+        },
+        {
+          type: 'VARIABLE',
+          label: 'Search on text',
+          key: 'labelSearchOn',
+          value: ['Search on'],
+          configuration: {
+            condition: {
+              type: 'HIDE',
+              option: 'hideSearch',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
         },
         {
           value: '',
@@ -299,6 +311,20 @@
           label: 'Rows per page text',
           key: 'labelRowsPerPage',
           value: ['Rows per page'],
+          configuration: {
+            condition: {
+              type: 'HIDE',
+              option: 'pagination',
+              comparator: 'EQ',
+              value: 'never',
+            },
+          },
+        },
+        {
+          type: 'VARIABLE',
+          label: "Pagination label (x 'of' y)",
+          key: 'labelNumberOfPages',
+          value: ['of'],
           configuration: {
             condition: {
               type: 'HIDE',
