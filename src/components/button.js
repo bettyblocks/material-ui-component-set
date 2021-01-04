@@ -55,7 +55,7 @@
           B.triggerEvent('onActionSuccess', data.actionb5);
         },
         onError(error) {
-          B.triggerEvent('onActionError', error.message);
+          B.triggerEvent('onActionError', error);
         },
       })) || [() => {}, { loading: false }];
 

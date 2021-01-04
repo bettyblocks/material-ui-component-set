@@ -129,7 +129,7 @@
           }
 
           if (error && !displayError) {
-            B.triggerEvent('onError', error.message);
+            B.triggerEvent('onError', error);
           }
           if (error && displayError) {
             return <span>{error.message}</span>;
