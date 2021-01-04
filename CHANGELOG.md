@@ -1,3 +1,16 @@
+# [1.80.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.79.0...v1.80.0) (2021-01-04)
+
+
+### Bug Fixes
+
+* conditional no longer disappears in designmode after reload ([6a927e3](https://github.com/bettyblocks/material-ui-component-set/commit/6a927e396e3a291c98d73b3eac75dce27204d74e))
+* dialog broken when dropping on canvas ([2f055d7](https://github.com/bettyblocks/material-ui-component-set/commit/2f055d7f83633e00675bb38e318c2235adde24c8))
+
+
+### Features
+
+* aligned visibility function names ([5d2dd33](https://github.com/bettyblocks/material-ui-component-set/commit/5d2dd3307840e2fdb685cfa892b0df3e82fbf652))
+
 # [1.79.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.78.0...v1.79.0) (2020-12-31)
 
 
