@@ -35,11 +35,7 @@
     const buttonContent = useText(buttonText);
 
     const [isVisible, setIsVisible] = useState(visible);
-
-    const hideButton = () => setIsVisible(false);
-    const showButton = () => setIsVisible(true);
     const [isLoading, setIsLoading] = useState(false);
-    const toggleVisibility = () => setIsVisible(s => !s);
 
     const propertyMappings = new Map(actionProperties);
     const input = Array.from(propertyMappings.keys()).reduce((acc, key) => {
@@ -63,16 +59,16 @@
         },
       })) || [() => {}, { loading: false }];
 
-    const toggleLoading = () => setIsLoading(l => !l);
-
     useEffect(() => {
       setIsVisible(visible);
     }, [visible]);
 
-    B.defineFunction('Show', showButton);
-    B.defineFunction('Hide', hideButton);
-    B.defineFunction('ToggleVisibility', toggleVisibility);
-    B.defineFunction('ToggleLoadingState', toggleLoading);
+    B.defineFunction('Show', () => setIsVisible(true));
+    B.defineFunction('Hide', () => setIsVisible(false));
+    B.defineFunction('Show/Hide', () => setIsVisible(s => !s));
+    B.defineFunction('Load', () => setIsLoading(true));
+    B.defineFunction('Loaded', () => setIsLoading(false));
+    B.defineFunction('Load/Loaded', () => setIsLoading(l => !l));
 
     useEffect(() => {
       if (loading) {
