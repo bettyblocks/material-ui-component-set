@@ -2,22 +2,38 @@
   name: 'crm',
   icon: 'DrawerIcon',
   category: 'CONTENT',
-  beforeCreate: ({
-    components: {
+  beforeCreate: ({ components, prefab, save, close }) => {
+    const [modelId, setModelId] = React.useState('');
+    const [properties, setProperties] = React.useState([]);
+    const [editFormProperties, setEditFormProperties] = React.useState([]);
+    const [
+      editFormUseDataProperties,
+      setEditFormUseDataProperties,
+    ] = React.useState(true);
+    const {
       Content,
       Header,
       Field,
       Footer,
       ModelSelector,
       PropertiesSelector,
-    },
-    prefab,
-    save,
-    close,
-  }) => {
-    const [modelId, setModelId] = React.useState('');
-    const [properties, setProperties] = React.useState([]);
+      CheckBox,
+    } = components;
 
+    const reduceStructure = (refValue, structure) => {
+      return structure.reduce((acc, component) => {
+        if (acc) return acc;
+        if (
+          component.hasOwnProperty('ref') &&
+          Object.values(component['ref']).indexOf(refValue) > -1
+        ) {
+          return component;
+        }
+        return reduceStructure(refValue, component.descendants);
+      }, null);
+    };
+
+    console.log('COMPONENTS: ', components);
     return (
       <>
         <Header title="Configure CRM Page" onClose={close} />
@@ -39,11 +55,34 @@
               }}
             />
           </Field>
+          <Field label="Edit Form">
+            <CheckBox
+              label="Use the same properties as the data table"
+              checked={editFormUseDataProperties}
+              onChange={event =>
+                setEditFormUseDataProperties(!editFormUseDataProperties)
+              }
+            />
+            {!editFormUseDataProperties && (
+              <PropertiesSelector
+                modelId={modelId}
+                value={editFormProperties}
+                onChange={value => {
+                  setEditFormProperties(value);
+                }}
+              />
+            )}
+          </Field>
         </Content>
         <Footer
           onSave={() => {
             const newPrefab = { ...prefab };
-            newPrefab.structure[0].descendants[0].descendants[2].descendants[0].descendants[0].options[0].value = modelId;
+            const dataTable = reduceStructure(
+              '#dataTable',
+              newPrefab.structure,
+            );
+            dataTable.options[0].value = modelId;
+            // newPrefab.structure[0].descendants[0].descendants[2].descendants[0].descendants[0].options[0].value = modelId;
             newPrefab.structure[0].descendants[0].descendants[3].descendants[0].descendants[0].descendants[0].descendants[0].descendants[1].descendants[0].descendants[0].options[0].value.modelId = modelId;
             newPrefab.structure[0].descendants[0].descendants[3].descendants[0].descendants[0].descendants[0].descendants[0].descendants[1].descendants[0].descendants[0].options[1].value = modelId;
             newPrefab.structure[0].descendants[0].descendants[3].descendants[1].descendants[0].descendants[0].descendants[0].descendants[1].descendants[0].descendants[0].options[0].value.modelId = modelId;
@@ -4023,16 +4062,15 @@
                   descendants: [
                     {
                       name: 'DataTable',
+                      ref: {
+                        id: '#dataTable',
+                      },
                       options: [
                         {
-                          value: '663e53ac49914e00a34365078426b0b9',
+                          value: '',
                           label: 'Model',
                           key: 'model',
                           type: 'MODEL',
-                          configuration: {
-                            apiVersion: 'v1',
-                            allowedInput: [],
-                          },
                         },
                         {
                           value: {},
@@ -4040,9 +4078,7 @@
                           key: 'filter',
                           type: 'FILTER',
                           configuration: {
-                            apiVersion: 'v1',
                             dependsOn: 'model',
-                            allowedInput: [],
                           },
                         },
                         {
@@ -4051,9 +4087,7 @@
                           key: 'orderProperty',
                           type: 'PROPERTY',
                           configuration: {
-                            apiVersion: 'v2',
                             dependsOn: 'model',
-                            allowedInput: [],
                           },
                         },
                         {
@@ -4062,24 +4096,17 @@
                           key: 'sortOrder',
                           type: 'CUSTOM',
                           configuration: {
-                            apiVersion: 'v1',
                             as: 'BUTTONGROUP',
                             dataType: 'string',
                             allowedInput: [
-                              {
-                                name: 'Ascending',
-                                value: 'asc',
-                              },
-                              {
-                                name: 'Descending',
-                                value: 'desc',
-                              },
+                              { name: 'Ascending', value: 'asc' },
+                              { name: 'Descending', value: 'desc' },
                             ],
                             condition: {
-                              comparator: 'EQ',
-                              option: 'orderProperty',
                               type: 'HIDE',
-                              value: '""',
+                              option: 'orderProperty',
+                              comparator: 'EQ',
+                              value: '',
                             },
                           },
                         },
@@ -4089,9 +4116,7 @@
                           key: 'searchProperty',
                           type: 'PROPERTY',
                           configuration: {
-                            apiVersion: 'v2',
                             dependsOn: 'model',
-                            allowedInput: [],
                           },
                         },
                         {
@@ -4099,9 +4124,19 @@
                           label: 'Hide built-in search field',
                           key: 'hideSearch',
                           type: 'TOGGLE',
+                        },
+                        {
+                          type: 'VARIABLE',
+                          label: 'Search on text',
+                          key: 'labelSearchOn',
+                          value: ['Search on'],
                           configuration: {
-                            apiVersion: 'v1',
-                            allowedInput: [],
+                            condition: {
+                              type: 'HIDE',
+                              option: 'hideSearch',
+                              comparator: 'EQ',
+                              value: true,
+                            },
                           },
                         },
                         {
@@ -4109,53 +4144,31 @@
                           label: 'Authentication Profile',
                           key: 'authProfile',
                           type: 'AUTHENTICATION_PROFILE',
-                          configuration: {
-                            apiVersion: 'v1',
-                            allowedInput: [],
-                          },
                         },
                         {
-                          value: [''],
+                          type: 'VARIABLE',
                           label: 'Title',
                           key: 'title',
-                          type: 'VARIABLE',
-                          configuration: {
-                            apiVersion: 'v1',
-                            allowedInput: [],
-                          },
+                          value: [''],
                         },
                         {
                           value: 'Title4',
                           label: 'Title type',
                           key: 'titleType',
                           type: 'FONT',
-                          configuration: {
-                            apiVersion: 'v1',
-                            allowedInput: [],
-                          },
                         },
                         {
-                          value: 'always',
                           label: 'Pagination',
                           key: 'pagination',
+                          value: 'always',
                           type: 'CUSTOM',
                           configuration: {
-                            apiVersion: 'v1',
                             as: 'BUTTONGROUP',
                             dataType: 'string',
                             allowedInput: [
-                              {
-                                name: 'Always',
-                                value: 'always',
-                              },
-                              {
-                                name: 'When needed',
-                                value: 'whenNeeded',
-                              },
-                              {
-                                name: 'Never',
-                                value: 'never',
-                              },
+                              { name: 'Always', value: 'always' },
+                              { name: 'When needed', value: 'whenNeeded' },
+                              { name: 'Never', value: 'never' },
                             ],
                           },
                         },
@@ -4165,13 +4178,11 @@
                           key: 'autoLoadOnScroll',
                           type: 'TOGGLE',
                           configuration: {
-                            apiVersion: 'v1',
-                            allowedInput: [],
                             condition: {
-                              comparator: 'EQ',
-                              option: 'pagination',
                               type: 'SHOW',
-                              value: '"never"',
+                              option: 'pagination',
+                              comparator: 'EQ',
+                              value: 'never',
                             },
                           },
                         },
@@ -4181,36 +4192,20 @@
                           key: 'autoLoadTakeAmount',
                           type: 'CUSTOM',
                           configuration: {
-                            apiVersion: 'v1',
                             as: 'DROPDOWN',
                             dataType: 'string',
                             allowedInput: [
-                              {
-                                name: '5',
-                                value: '5',
-                              },
-                              {
-                                name: '10',
-                                value: '10',
-                              },
-                              {
-                                name: '25',
-                                value: '25',
-                              },
-                              {
-                                name: '50',
-                                value: '50',
-                              },
-                              {
-                                name: '100',
-                                value: '100',
-                              },
+                              { name: '5', value: '5' },
+                              { name: '10', value: '10' },
+                              { name: '25', value: '25' },
+                              { name: '50', value: '50' },
+                              { name: '100', value: '100' },
                             ],
                             condition: {
-                              comparator: 'EQ',
-                              option: 'autoLoadOnScroll',
                               type: 'SHOW',
-                              value: 'true',
+                              option: 'autoLoadOnScroll',
+                              comparator: 'EQ',
+                              value: true,
                             },
                           },
                         },
@@ -4220,75 +4215,65 @@
                           key: 'take',
                           type: 'CUSTOM',
                           configuration: {
-                            apiVersion: 'v1',
                             as: 'DROPDOWN',
                             dataType: 'string',
                             allowedInput: [
-                              {
-                                name: '5',
-                                value: '5',
-                              },
-                              {
-                                name: '10',
-                                value: '10',
-                              },
-                              {
-                                name: '25',
-                                value: '25',
-                              },
-                              {
-                                name: '50',
-                                value: '50',
-                              },
-                              {
-                                name: '100',
-                                value: '100',
-                              },
+                              { name: '5', value: '5' },
+                              { name: '10', value: '10' },
+                              { name: '25', value: '25' },
+                              { name: '50', value: '50' },
+                              { name: '100', value: '100' },
                             ],
                             condition: {
-                              comparator: 'EQ',
-                              option: 'autoLoadOnScroll',
                               type: 'HIDE',
-                              value: 'true',
+                              option: 'autoLoadOnScroll',
+                              comparator: 'EQ',
+                              value: true,
                             },
                           },
                         },
                         {
-                          value: ['Rows per page'],
+                          type: 'VARIABLE',
                           label: 'Rows per page text',
                           key: 'labelRowsPerPage',
-                          type: 'VARIABLE',
+                          value: ['Rows per page'],
                           configuration: {
-                            apiVersion: 'v1',
-                            allowedInput: [],
                             condition: {
-                              comparator: 'EQ',
-                              option: 'pagination',
                               type: 'HIDE',
-                              value: '"never"',
+                              option: 'pagination',
+                              comparator: 'EQ',
+                              value: 'never',
                             },
                           },
                         },
                         {
-                          value: '',
-                          label: 'Height',
-                          key: 'height',
-                          type: 'SIZE',
+                          type: 'VARIABLE',
+                          label: "Pagination label (x 'of' y)",
+                          key: 'labelNumberOfPages',
+                          value: ['of'],
                           configuration: {
-                            apiVersion: 'v1',
-                            as: 'UNIT',
-                            allowedInput: [],
+                            condition: {
+                              type: 'HIDE',
+                              option: 'pagination',
+                              comparator: 'EQ',
+                              value: 'never',
+                            },
                           },
                         },
                         {
-                          value: false,
+                          type: 'SIZE',
+                          label: 'Height',
+                          key: 'height',
+                          value: '',
+                          configuration: {
+                            as: 'UNIT',
+                          },
+                        },
+                        {
+                          type: 'TOGGLE',
                           label: 'Sticky header',
                           key: 'stickyHeader',
-                          type: 'TOGGLE',
-                          configuration: {
-                            apiVersion: 'v1',
-                            allowedInput: [],
-                          },
+                          value: false,
                         },
                         {
                           value: 'medium',
@@ -4296,188 +4281,86 @@
                           key: 'size',
                           type: 'CUSTOM',
                           configuration: {
-                            apiVersion: 'v1',
                             as: 'BUTTONGROUP',
                             dataType: 'string',
                             allowedInput: [
-                              {
-                                name: 'Small',
-                                value: 'small',
-                              },
-                              {
-                                name: 'Medium',
-                                value: 'medium',
-                              },
+                              { name: 'Small', value: 'small' },
+                              { name: 'Medium', value: 'medium' },
                             ],
                           },
                         },
                         {
-                          value: 'Transparent',
+                          type: 'COLOR',
                           label: 'Background',
                           key: 'background',
-                          type: 'COLOR',
-                          configuration: {
-                            apiVersion: 'v1',
-                            allowedInput: [],
-                          },
+                          value: 'Transparent',
                         },
                         {
-                          value: 'Transparent',
+                          type: 'COLOR',
                           label: 'Background header',
                           key: 'backgroundHeader',
-                          type: 'COLOR',
-                          configuration: {
-                            apiVersion: 'v1',
-                            allowedInput: [],
-                          },
+                          value: 'Transparent',
                         },
                         {
-                          value: false,
                           label: 'Square',
                           key: 'square',
+                          value: false,
                           type: 'TOGGLE',
-                          configuration: {
-                            apiVersion: 'v1',
-                            allowedInput: [],
-                          },
                         },
                         {
-                          value: 'elevation',
                           label: 'Variant',
                           key: 'variant',
+                          value: 'elevation',
                           type: 'CUSTOM',
                           configuration: {
-                            apiVersion: 'v1',
                             as: 'BUTTONGROUP',
                             dataType: 'string',
                             allowedInput: [
-                              {
-                                name: 'Flat',
-                                value: 'flat',
-                              },
-                              {
-                                name: 'Elevation',
-                                value: 'elevation',
-                              },
-                              {
-                                name: 'Outlined',
-                                value: 'outlined',
-                              },
+                              { name: 'Flat', value: 'flat' },
+                              { name: 'Elevation', value: 'elevation' },
+                              { name: 'Outlined', value: 'outlined' },
                             ],
                           },
                         },
                         {
-                          value: '1',
                           label: 'Elevation',
                           key: 'elevation',
+                          value: '1',
                           type: 'CUSTOM',
                           configuration: {
-                            apiVersion: 'v1',
                             as: 'DROPDOWN',
                             dataType: 'string',
                             allowedInput: [
-                              {
-                                name: '1',
-                                value: '1',
-                              },
-                              {
-                                name: '2',
-                                value: '2',
-                              },
-                              {
-                                name: '3',
-                                value: '3',
-                              },
-                              {
-                                name: '4',
-                                value: '4',
-                              },
-                              {
-                                name: '5',
-                                value: '5',
-                              },
-                              {
-                                name: '6',
-                                value: '6',
-                              },
-                              {
-                                name: '7',
-                                value: '7',
-                              },
-                              {
-                                name: '8',
-                                value: '8',
-                              },
-                              {
-                                name: '9',
-                                value: '9',
-                              },
-                              {
-                                name: '10',
-                                value: '10',
-                              },
-                              {
-                                name: '11',
-                                value: '11',
-                              },
-                              {
-                                name: '12',
-                                value: '12',
-                              },
-                              {
-                                name: '13',
-                                value: '13',
-                              },
-                              {
-                                name: '14',
-                                value: '14',
-                              },
-                              {
-                                name: '15',
-                                value: '15',
-                              },
-                              {
-                                name: '16',
-                                value: '16',
-                              },
-                              {
-                                name: '17',
-                                value: '17',
-                              },
-                              {
-                                name: '18',
-                                value: '18',
-                              },
-                              {
-                                name: '19',
-                                value: '19',
-                              },
-                              {
-                                name: '20',
-                                value: '20',
-                              },
-                              {
-                                name: '21',
-                                value: '21',
-                              },
-                              {
-                                name: '22',
-                                value: '22',
-                              },
-                              {
-                                name: '23',
-                                value: '23',
-                              },
-                              {
-                                name: '24',
-                                value: '24',
-                              },
+                              { name: '1', value: '1' },
+                              { name: '2', value: '2' },
+                              { name: '3', value: '3' },
+                              { name: '4', value: '4' },
+                              { name: '5', value: '5' },
+                              { name: '6', value: '6' },
+                              { name: '7', value: '7' },
+                              { name: '8', value: '8' },
+                              { name: '9', value: '9' },
+                              { name: '10', value: '10' },
+                              { name: '11', value: '11' },
+                              { name: '12', value: '12' },
+                              { name: '13', value: '13' },
+                              { name: '14', value: '14' },
+                              { name: '15', value: '15' },
+                              { name: '16', value: '16' },
+                              { name: '17', value: '17' },
+                              { name: '18', value: '18' },
+                              { name: '19', value: '19' },
+                              { name: '20', value: '20' },
+                              { name: '21', value: '21' },
+                              { name: '22', value: '22' },
+                              { name: '23', value: '23' },
+                              { name: '24', value: '24' },
                             ],
                             condition: {
-                              comparator: 'EQ',
-                              option: 'variant',
                               type: 'SHOW',
-                              value: '"elevation"',
+                              option: 'variant',
+                              comparator: 'EQ',
+                              value: 'elevation',
                             },
                           },
                         },
@@ -4486,24 +4369,18 @@
                           label: 'Row click',
                           key: 'linkTo',
                           type: 'ENDPOINT',
-                          configuration: {
-                            apiVersion: 'v1',
-                            allowedInput: [],
-                          },
                         },
                         {
-                          value: 'Transparent',
+                          type: 'COLOR',
                           label: 'Row hover color',
                           key: 'backgroundRowHover',
-                          type: 'COLOR',
+                          value: 'Transparent',
                           configuration: {
-                            apiVersion: 'v1',
-                            allowedInput: [],
                             condition: {
-                              comparator: 'EQ',
-                              option: 'linkTo',
                               type: 'HIDE',
-                              value: '""',
+                              option: 'linkTo',
+                              comparator: 'EQ',
+                              value: '',
                             },
                           },
                         },
@@ -4512,10 +4389,6 @@
                           label: 'Outer space',
                           key: 'outerSpacing',
                           type: 'SIZES',
-                          configuration: {
-                            apiVersion: 'v1',
-                            allowedInput: [],
-                          },
                         },
                         {
                           value: 'built-in',
@@ -4523,18 +4396,11 @@
                           key: 'showError',
                           type: 'CUSTOM',
                           configuration: {
-                            apiVersion: 'v1',
                             as: 'BUTTONGROUP',
                             dataType: 'string',
                             allowedInput: [
-                              {
-                                name: 'Built in',
-                                value: 'built-in',
-                              },
-                              {
-                                name: 'Interaction',
-                                value: 'interaction',
-                              },
+                              { name: 'Built in', value: 'built-in' },
+                              { name: 'Interaction', value: 'interaction' },
                             ],
                           },
                         },
