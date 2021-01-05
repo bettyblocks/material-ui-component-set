@@ -1,3 +1,10 @@
+## [1.80.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.80.0...v1.80.1) (2021-01-05)
+
+
+### Bug Fixes
+
+* fix variable placeholder ([d7cb73c](https://github.com/bettyblocks/material-ui-component-set/commit/d7cb73c4dd4d450e930fee6b712b88b0c6734b57))
+
 # [1.80.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.79.0...v1.80.0) (2021-01-04)
 
 
