@@ -2,7 +2,11 @@
   name: 'crm',
   icon: 'DrawerIcon',
   category: 'CONTENT',
-  beforeCreate: ({ components, prefab, save, close }) => {
+  beforeCreate: options => {
+    console.log('options: ', options);
+    const { components, prefab, save, close, helpers: { useModelQuery} } = options;
+    console.log('Use Model query: ', useModelQuery);
+    
     const [modelId, setModelId] = React.useState('');
     const [properties, setProperties] = React.useState([]);
     const [editFormProperties, setEditFormProperties] = React.useState([]);
@@ -19,6 +23,12 @@
       PropertiesSelector,
       CheckBox,
     } = components;
+    
+    // const result = useModelQuery(
+    //   modelId
+    // );
+
+    // console.log("data: ", result);
 
     const reduceStructure = (refValue, structure) => {
       return structure.reduce((acc, component) => {
@@ -33,7 +43,6 @@
       }, null);
     };
 
-    console.log('COMPONENTS: ', components);
     return (
       <>
         <Header title="Configure CRM Page" onClose={close} />
@@ -59,7 +68,7 @@
             <CheckBox
               label="Use the same properties as the data table"
               checked={editFormUseDataProperties}
-              onChange={event =>
+              onChange={() =>
                 setEditFormUseDataProperties(!editFormUseDataProperties)
               }
             />
@@ -81,12 +90,27 @@
               '#dataTable',
               newPrefab.structure,
             );
+            
+            const newForm = reduceStructure(
+              '#newForm',
+              newPrefab.structure,
+            );
+            
+            const editForm = reduceStructure(
+              '#editForm',
+              newPrefab.structure,
+            );
+
             dataTable.options[0].value = modelId;
+            newForm.options[0].value.modelId = modelId;
+            newForm.options[1].value = modelId;
+            editForm.options[0].value.modelId = modelId;
+            editForm.options[1].value = modelId;
             // newPrefab.structure[0].descendants[0].descendants[2].descendants[0].descendants[0].options[0].value = modelId;
-            newPrefab.structure[0].descendants[0].descendants[3].descendants[0].descendants[0].descendants[0].descendants[0].descendants[1].descendants[0].descendants[0].options[0].value.modelId = modelId;
-            newPrefab.structure[0].descendants[0].descendants[3].descendants[0].descendants[0].descendants[0].descendants[0].descendants[1].descendants[0].descendants[0].options[1].value = modelId;
-            newPrefab.structure[0].descendants[0].descendants[3].descendants[1].descendants[0].descendants[0].descendants[0].descendants[1].descendants[0].descendants[0].options[0].value.modelId = modelId;
-            newPrefab.structure[0].descendants[0].descendants[3].descendants[1].descendants[0].descendants[0].descendants[0].descendants[1].descendants[0].descendants[0].options[1].value = modelId;
+            // newPrefab.structure[0].descendants[0].descendants[3].descendants[0].descendants[0].descendants[0].descendants[0].descendants[1].descendants[0].descendants[0].options[0].value.modelId = modelId;
+            // newPrefab.structure[0].descendants[0].descendants[3].descendants[0].descendants[0].descendants[0].descendants[0].descendants[1].descendants[0].descendants[0].options[1].value = modelId;
+            // newPrefab.structure[0].descendants[0].descendants[3].descendants[1].descendants[0].descendants[0].descendants[0].descendants[1].descendants[0].descendants[0].options[0].value.modelId = modelId;
+            // newPrefab.structure[0].descendants[0].descendants[3].descendants[1].descendants[0].descendants[0].descendants[0].descendants[1].descendants[0].descendants[0].options[1].value = modelId;
             properties.forEach(property => {
               newPrefab.structure[0].descendants[0].descendants[2].descendants[0].descendants[0].descendants.unshift(
                 {
@@ -8651,6 +8675,9 @@
                                       descendants: [
                                         {
                                           name: 'Form',
+                                          ref: {
+                                            id: '#newForm',
+                                          },
                                           options: [
                                             {
                                               value: {
@@ -14954,6 +14981,9 @@
                                       descendants: [
                                         {
                                           name: 'Form',
+                                          ref: {
+                                            id: '#editForm',
+                                          },
                                           options: [
                                             {
                                               value: {
