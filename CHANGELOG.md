@@ -1,3 +1,51 @@
+# [1.80.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.79.0...v1.80.0) (2021-01-04)
+
+
+### Bug Fixes
+
+* conditional no longer disappears in designmode after reload ([6a927e3](https://github.com/bettyblocks/material-ui-component-set/commit/6a927e396e3a291c98d73b3eac75dce27204d74e))
+* dialog broken when dropping on canvas ([2f055d7](https://github.com/bettyblocks/material-ui-component-set/commit/2f055d7f83633e00675bb38e318c2235adde24c8))
+
+
+### Features
+
+* aligned visibility function names ([5d2dd33](https://github.com/bettyblocks/material-ui-component-set/commit/5d2dd3307840e2fdb685cfa892b0df3e82fbf652))
+
+# [1.79.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.78.0...v1.79.0) (2020-12-31)
+
+
+### Features
+
+* **ART-2902:** Add alerts to login form ([7112d89](https://github.com/bettyblocks/material-ui-component-set/commit/7112d89c6a22bc94dba4746a96df356a79879a6e))
+
+# [1.78.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.77.0...v1.78.0) (2020-12-31)
+
+
+### Features
+
+* **ART-2902:** Add alerts to update form ([6dc73e8](https://github.com/bettyblocks/material-ui-component-set/commit/6dc73e86aa0ff515e044d4c224008f1c7706dd22))
+
+# [1.77.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.76.0...v1.77.0) (2020-12-31)
+
+
+### Features
+
+* **ART-2891:** Add error&succes alerts to create prefab ([faa468a](https://github.com/bettyblocks/material-ui-component-set/commit/faa468abcd0141441ad044ae077b6b93e41e4a20))
+
+# [1.76.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.75.0...v1.76.0) (2020-12-31)
+
+
+### Features
+
+* **TA-2086:** handle error object in interactions ([ea9253c](https://github.com/bettyblocks/material-ui-component-set/commit/ea9253cd0e295d9811902fc1eab53f885387435b))
+
+# [1.75.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.74.0...v1.75.0) (2020-12-30)
+
+
+### Features
+
+* add option to display rich text (html) to Text ([20679d7](https://github.com/bettyblocks/material-ui-component-set/commit/20679d7a1163c3aeb5ba9cb42b583c49c5740c71))
+
 # [1.74.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.73.2...v1.74.0) (2020-12-29)
 
 
