@@ -89,23 +89,36 @@
       <span className={classes.columnHeader}>{columnHeaderText}</span>
     );
 
-    return isDev ? (
-      <div
-        className={[
-          classes.tableColumn,
-          !headerOnly ? classes.tableColumnBody : '',
-          !headerOnly ? 'MuiTableCell-root' : '',
-        ].join(' ')}
-      >
-        {headerOnly ? (
-          <TableCell align={horizontalAlignment} component="div">
-            {Header}
-          </TableCell>
-        ) : (
-          Content
-        )}
-      </div>
-    ) : (
+    const [visible, setVisible] = useState(false);
+
+    useEffect(() => {
+      setVisible(options.visible);
+    }, []);
+
+    B.defineFunction('Hide', () => setVisible(false));
+    B.defineFunction('Show', () => setVisible(true));
+    B.defineFunction('ToggleVisibility', () => setVisible(s => !s));
+
+    if (isDev) {
+      return (
+        <div
+          className={[
+            classes.tableColumn,
+            !headerOnly ? classes.tableColumnBody : '',
+            !headerOnly ? 'MuiTableCell-root' : '',
+          ].join(' ')}
+        >
+          {headerOnly ? (
+            <TableCell align={horizontalAlignment} component="div">
+              {Header}
+            </TableCell>
+          ) : (
+            Content
+          )}
+        </div>
+      );
+    }
+    return visible ? (
       <TableCell
         classes={{ root: classes.root }}
         align={horizontalAlignment}
@@ -113,6 +126,8 @@
       >
         {headerOnly ? Header : Content}
       </TableCell>
+    ) : (
+      <></>
     );
   })(),
   styles: B => theme => {
