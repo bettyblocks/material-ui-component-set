@@ -111,7 +111,7 @@
         className={[
           classes.outerSpacing,
           isDev ? classes.devWrapper : '',
-          !isEmpty ? classes.hasContent : '',
+          !isEmpty && !variable ? classes.hasContent : '',
         ].join(' ')}
       >
         <MediaComponent />
