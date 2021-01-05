@@ -7,6 +7,15 @@
       name: 'Conditional',
       options: [
         {
+          value: true,
+          label: 'Initial visibility',
+          key: 'visible',
+          type: 'TOGGLE',
+          configuration: {
+            as: 'VISIBILITY',
+          },
+        },
+        {
           type: 'VARIABLE',
           label: 'Left',
           key: 'left',
