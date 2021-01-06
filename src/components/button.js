@@ -66,9 +66,7 @@
     B.defineFunction('Show', () => setIsVisible(true));
     B.defineFunction('Hide', () => setIsVisible(false));
     B.defineFunction('Show/Hide', () => setIsVisible(s => !s));
-    B.defineFunction('Load', () => setIsLoading(true));
-    B.defineFunction('Loaded', () => setIsLoading(false));
-    B.defineFunction('Load/Loaded', () => setIsLoading(l => !l));
+    B.defineFunction('Toggle loading state', () => setIsLoading(s => !s));
 
     useEffect(() => {
       if (loading) {
