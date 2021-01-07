@@ -14,7 +14,7 @@
       IconButton,
     } = window.MaterialUI.Core;
     const { Icons } = window.MaterialUI;
-    const { Close } = Icons;
+    const { Delete, CloudUpload } = Icons;
     const {
       hideDefaultError,
       disabled,
@@ -31,6 +31,7 @@
       hideLabel,
       customModelAttribute: customModelAttributeObj,
       nameAttribute,
+      showImagePreview,
     } = options;
 
     const isDev = env === 'dev';
@@ -203,19 +204,52 @@
         {data && data.length > 0 && (
           <div className={classes.messageContainer}>
             {data.map(file => (
-              <div className={classes.fileList}>
-                <Typography variant="body1" noWrap className={classes.span}>
-                  {file.name}
-                </Typography>
-                <IconButton
-                  className={classes.remove}
-                  size="small"
-                  onClick={() => removeFileFromList(file.url)}
-                >
-                  <Close fontSize="small" />
-                </IconButton>
-              </div>
+              <>
+                <hr className={classes.hr} />
+                <div className={classes.fileList}>
+                  {showImagePreview && <div className={classes.image} />}
+                  <div className={classes.fileDetails}>
+                    <Typography variant="body1" noWrap className={classes.span}>
+                      {file.name}
+                    </Typography>
+                    <div className={classes.fileDetailList}>
+                      <p className={classes.fileDetail}>size</p>
+                      <div className={classes.divider} />
+                      <p className={classes.fileDetail}>type</p>
+                    </div>
+                  </div>
+                  <IconButton
+                    size="small"
+                    className={classes.remove}
+                    onClick={() => removeFileFromList(file.url)}
+                  >
+                    <Delete fontSize="small" />
+                  </IconButton>
+                </div>
+              </>
             ))}
+          </div>
+        )}
+        {loading && (
+          <div style={{ paddingTop: files.length === 0 ? '0' : '1.25rem' }}>
+            <hr className={classes.hr} />
+            <div className={classes.fileList}>
+              {showImagePreview && (
+                <div className={classes.placeholderImage}>
+                  <CloudUpload />
+                </div>
+              )}
+              <div className={classes.fileDetails}>
+                <Typography variant="body1" noWrap className={classes.span}>
+                  uploading
+                </Typography>
+                <div className={classes.fileDetailList}>
+                  <p className={classes.fileDetail}>size</p>
+                  <div className={classes.divider} />
+                  <p className={classes.fileDetail}>type</p>
+                </div>
+              </div>
+            </div>
           </div>
         )}
       </FormControl>
@@ -326,8 +360,57 @@
         display: 'flex',
         alignItems: 'center',
       },
+      placeholderImage: {
+        color: 'white',
+        display: 'flex',
+        overflow: 'hidden',
+        margin: '0.9375rem',
+        alignItems: 'center',
+        backgroundColor: 'red',
+        borderRadius: '0.3rem',
+        justifyContent: 'center',
+        width: ({ options: { imagePreviewWidth } }) => imagePreviewWidth,
+        height: ({ options: { imagePreviewHeight } }) => imagePreviewHeight,
+      },
+      image: {
+        overflow: 'hidden',
+        margin: '0.9375rem',
+        borderRadius: '0.3rem',
+        backgroundSize: 'cover',
+        width: ({ options: { imagePreviewWidth } }) => imagePreviewWidth,
+        height: ({ options: { imagePreviewHeight } }) => imagePreviewHeight,
+        backgroundImage: 'url("")',
+      },
+      fileDetails: {
+        flexGrow: 1,
+        display: 'flex',
+        flexDirection: 'column',
+      },
+      fileDetail: {
+        margin: 0,
+        color: 'red',
+      },
+      fileDetailList: {
+        display: 'flex',
+        alignItems: 'center',
+      },
+      divider: {
+        width: '0.19rem',
+        height: '0.19rem',
+        borderRadius: '50%',
+        marginLeft: '0.625rem',
+        backgroundColor: 'red',
+        marginRight: '0.625rem',
+      },
+      hr: {
+        height: 1,
+        margin: 0,
+        border: 'none',
+        backgroundColor: 'red',
+      },
       remove: {
-        padding: ['0.25rem', '!important'],
+        margin: '0.9375rem!important',
+        padding: '0.25rem!important',
       },
     };
   },

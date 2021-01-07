@@ -16,6 +16,42 @@
           },
         },
         {
+          type: 'TOGGLE',
+          label: 'Show Image preview',
+          value: false,
+          key: 'showImagePreview',
+        },
+        {
+          type: 'SIZE',
+          label: 'Image preview width',
+          key: 'imagePreviewWidth',
+          value: '90px',
+          configuration: {
+            as: 'UNIT',
+            condition: {
+              type: 'SHOW',
+              option: 'showImagePreview',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'SIZE',
+          label: 'Image preview height',
+          key: 'imagePreviewHeight',
+          value: '60px',
+          configuration: {
+            as: 'UNIT',
+            condition: {
+              type: 'SHOW',
+              option: 'showImagePreview',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
           value: false,
           label: 'Hide default error',
           key: 'hideDefaultError',
