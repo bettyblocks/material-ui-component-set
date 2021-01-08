@@ -1,3 +1,17 @@
+## [1.81.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.81.0...v1.81.1) (2021-01-07)
+
+
+### Bug Fixes
+
+* revert button load interaction name to toggle loading state ([14e0edd](https://github.com/bettyblocks/material-ui-component-set/commit/14e0edd25309f50db1df9a106ee668fd93f2cd83))
+
+# [1.81.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.80.1...v1.81.0) (2021-01-07)
+
+
+### Features
+
+* adds global logout interaction ([de6cbcf](https://github.com/bettyblocks/material-ui-component-set/commit/de6cbcf2958f47e7e4578873edae239e1891b3a2))
+
 ## [1.80.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.80.0...v1.80.1) (2021-01-05)
 
 
