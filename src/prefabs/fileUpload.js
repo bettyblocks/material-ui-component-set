@@ -16,6 +16,26 @@
           },
         },
         {
+          type: 'CUSTOM',
+          label: 'Type',
+          key: 'type',
+          value: 'list',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              {
+                name: 'List',
+                value: 'list',
+              },
+              {
+                name: 'Grid',
+                value: 'grid',
+              },
+            ],
+          },
+        },
+        {
           type: 'TOGGLE',
           label: 'Show Image preview',
           value: false,

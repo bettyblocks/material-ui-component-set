@@ -32,6 +32,7 @@
       customModelAttribute: customModelAttributeObj,
       nameAttribute,
       showImagePreview,
+      type,
     } = options;
 
     const isDev = env === 'dev';
@@ -181,6 +182,92 @@
       </div>
     );
 
+    const Hr = () => <hr className={classes.hr} />;
+
+    const DeleteButton = ({ file }) => {
+      return (
+        <IconButton
+          size="small"
+          className={classes.remove}
+          onClick={file ? () => removeFileFromList(file.url) : {}}
+        >
+          <Delete fontSize="small" />
+        </IconButton>
+      );
+    };
+
+    const FileDetails = ({ file }) => {
+      return (
+        <div className={classes.fileDetails}>
+          <Typography variant="body1" noWrap className={classes.span}>
+            {file ? file.name : 'File name'}
+          </Typography>
+          <div className={classes.fileDetailList}>
+            <p className={classes.fileDetail}>Size</p>
+            <div className={classes.divider} />
+            <p className={classes.fileDetail}>Type</p>
+          </div>
+        </div>
+      );
+    };
+
+    const DevUploadedFile = () => {
+      switch (type) {
+        case 'list':
+          return (
+            <>
+              <Hr />
+              <div className={classes.fileList}>
+                {showImagePreview && <div className={classes.devImage} />}
+                <FileDetails />
+                <DeleteButton />
+              </div>
+            </>
+          );
+        case 'grid':
+        default:
+          return <>grid</>;
+      }
+    };
+
+    const UploadedFile = ({ file }) => {
+      return (
+        <>
+          <Hr />
+          <div className={classes.fileList}>
+            {showImagePreview && (
+              <div
+                style={{
+                  backgroundImage: `url("${file.url}")`,
+                }}
+                className={classes.image}
+              />
+            )}
+            <FileDetails file={file} />
+            <DeleteButton file={file} />
+          </div>
+        </>
+      );
+    };
+
+    const UploadingFile = () => (
+      <>
+        <Hr />
+        <div className={classes.fileList}>
+          {showImagePreview && (
+            <div className={classes.placeholderImage}>
+              <CloudUpload />
+            </div>
+          )}
+          <div className={classes.fileDetails}>
+            <Typography variant="body1" noWrap className={classes.span}>
+              Uploading
+            </Typography>
+          </div>
+        </div>
+      </>
+    );
+
     const Control = (
       <FormControl
         fullWidth={fullWidth}
@@ -201,57 +288,12 @@
           {helperValue}
         </FormHelperText>
         {loading && B.triggerEvent('onLoad')}
-        {data && data.length > 0 && (
-          <div className={classes.messageContainer}>
-            {data.map(file => (
-              <>
-                <hr className={classes.hr} />
-                <div className={classes.fileList}>
-                  {showImagePreview && <div className={classes.image} />}
-                  <div className={classes.fileDetails}>
-                    <Typography variant="body1" noWrap className={classes.span}>
-                      {file.name}
-                    </Typography>
-                    <div className={classes.fileDetailList}>
-                      <p className={classes.fileDetail}>size</p>
-                      <div className={classes.divider} />
-                      <p className={classes.fileDetail}>type</p>
-                    </div>
-                  </div>
-                  <IconButton
-                    size="small"
-                    className={classes.remove}
-                    onClick={() => removeFileFromList(file.url)}
-                  >
-                    <Delete fontSize="small" />
-                  </IconButton>
-                </div>
-              </>
-            ))}
-          </div>
-        )}
-        {loading && (
-          <div style={{ paddingTop: files.length === 0 ? '0' : '1.25rem' }}>
-            <hr className={classes.hr} />
-            <div className={classes.fileList}>
-              {showImagePreview && (
-                <div className={classes.placeholderImage}>
-                  <CloudUpload />
-                </div>
-              )}
-              <div className={classes.fileDetails}>
-                <Typography variant="body1" noWrap className={classes.span}>
-                  uploading
-                </Typography>
-                <div className={classes.fileDetailList}>
-                  <p className={classes.fileDetail}>size</p>
-                  <div className={classes.divider} />
-                  <p className={classes.fileDetail}>type</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
+        <div className={classes.messageContainer}>
+          {data &&
+            data.length > 0 &&
+            data.map(file => <UploadedFile file={file} />)}
+          {loading && <UploadingFile />}
+        </div>
       </FormControl>
     );
 
@@ -263,7 +305,14 @@
 
     B.defineFunction('clearFileUpload', e => clearFiles(e));
 
-    return isDev ? <div className={classes.root}>{Control}</div> : Control;
+    return isDev ? (
+      <div>
+        <div className={classes.root}>{Control}</div>
+        <DevUploadedFile />
+      </div>
+    ) : (
+      Control
+    );
   })(),
   styles: B => t => {
     const style = new B.Styling(t);
@@ -360,6 +409,19 @@
         display: 'flex',
         alignItems: 'center',
       },
+      devImage: {
+        display: 'flex',
+        overflow: 'hidden',
+        margin: '0.9375rem',
+        borderStyle: 'dashed',
+        borderColor: '#AFB5C8',
+        borderRadius: '0.3rem',
+        borderWidth: '0.0625rem',
+        backgroundColor: '#F0F1F5',
+        border: '2px dashed black',
+        width: ({ options: { imagePreviewWidth } }) => imagePreviewWidth,
+        height: ({ options: { imagePreviewHeight } }) => imagePreviewHeight,
+      },
       placeholderImage: {
         color: 'white',
         display: 'flex',
@@ -395,8 +457,8 @@
         alignItems: 'center',
       },
       divider: {
-        width: '0.19rem',
-        height: '0.19rem',
+        width: '0.1875rem',
+        height: '0.1875rem',
         borderRadius: '50%',
         marginLeft: '0.625rem',
         backgroundColor: 'red',
