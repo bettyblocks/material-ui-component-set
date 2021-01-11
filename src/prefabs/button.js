@@ -105,10 +105,10 @@
           },
         },
         {
-          value: [],
-          label: 'Property',
-          key: 'actionProperties',
-          type: 'ACTION_PROPERTIES',
+          value: '',
+          label: 'Object to pass to action',
+          key: 'actionModel',
+          type: 'ACTION_MODEL',
           configuration: {
             apiVersion: 'v1',
             condition: {
