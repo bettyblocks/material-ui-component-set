@@ -75,9 +75,71 @@
         },
         {
           type: 'COLOR',
+          label: 'Active Label color',
+          key: 'activeLabelColor',
+          value: 'Black',
+          configuration: {
+            condition: {
+              type: 'HIDE',
+              option: 'type',
+              comparator: 'EQ',
+              value: 'mobile',
+            },
+          },
+        },
+        {
+          type: 'COLOR',
           label: 'Inactive color',
           key: 'inactiveColor',
           value: 'Secondary',
+        },
+        {
+          type: 'COLOR',
+          label: 'Inactive Label color',
+          key: 'inactiveLabelColor',
+          value: 'Medium',
+          configuration: {
+            condition: {
+              type: 'HIDE',
+              option: 'type',
+              comparator: 'EQ',
+              value: 'mobile',
+            },
+          },
+        },
+        {
+          type: 'COLOR',
+          label: 'Background color',
+          key: 'backgroundColor',
+          value: 'White',
+        },
+        {
+          type: 'COLOR',
+          label: 'Connector color',
+          key: 'connectorColor',
+          value: 'Light',
+          configuration: {
+            condition: {
+              type: 'HIDE',
+              option: 'type',
+              comparator: 'EQ',
+              value: 'mobile',
+            },
+          },
+        },
+        {
+          type: 'COLOR',
+          label: 'Step Progress color',
+          key: 'stepProgressColor',
+          value: 'Black',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'type',
+              comparator: 'EQ',
+              value: 'mobile',
+            },
+          },
         },
         {
           type: 'VARIABLE',
