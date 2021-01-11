@@ -161,6 +161,8 @@
       },
       paper: {
         ...staticPositioning,
+        top: ['unset', '!important'],
+        left: ['unset', '!important'],
         width: computeWidth,
         '&.MuiPaper-root': {
           boxSizing: 'border-box',
