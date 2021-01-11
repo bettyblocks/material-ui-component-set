@@ -199,9 +199,9 @@
           {file ? file.name : 'File name'}
         </Typography>
         <div className={classes.fileDetailList}>
-          <p className={classes.fileDetail}>Size</p>
+          <p className={classes.fileDetail}>{isDev ? 'Size' : 'Size'}</p>
           <div className={classes.divider} />
-          <p className={classes.fileDetail}>Type</p>
+          <p className={classes.fileDetail}>{isDev ? 'Type' : 'Type'}</p>
         </div>
       </div>
     );
@@ -212,7 +212,7 @@
           return (
             <>
               <Hr />
-              <div className={classes.fileList}>
+              <div className={classes.listView}>
                 {showImagePreview && <div className={classes.devImage} />}
                 <FileDetails />
                 <DeleteButton />
@@ -225,7 +225,7 @@
             <>
               <div className={classes.gridView}>
                 <div className={classes.gridItem}>
-                  {showImagePreview && <div className={classes.devImageGrid} />}
+                  {showImagePreview && <div className={classes.gridDevImage} />}
                   <div className={classes.gridItemDetails}>
                     <FileDetails />
                     <DeleteButton />
@@ -243,7 +243,7 @@
           return (
             <>
               <Hr />
-              <div className={classes.fileList}>
+              <div className={classes.listView}>
                 {showImagePreview && (
                   <div
                     style={{
@@ -268,7 +268,7 @@
                       style={{
                         backgroundImage: `url("${file.url}")`,
                       }}
-                      className={classes.imageGrid}
+                      className={classes.gridImage}
                     />
                   )}
                   <div className={classes.gridItemDetails}>
@@ -288,7 +288,7 @@
           return (
             <>
               <Hr />
-              <div className={classes.fileList}>
+              <div className={classes.listView}>
                 {showImagePreview && (
                   <div className={classes.uploadingImage}>
                     <CloudUpload />
@@ -307,7 +307,7 @@
               <div className={classes.gridView}>
                 <div className={classes.gridItem}>
                   {showImagePreview && (
-                    <div className={classes.uploadingImageGrid}>
+                    <div className={classes.gridUploadingImage}>
                       <CloudUpload />
                     </div>
                   )}
@@ -462,7 +462,7 @@
           ],
         },
       },
-      fileList: {
+      listView: {
         display: 'flex',
         alignItems: 'center',
       },
@@ -478,6 +478,8 @@
         marginBottom: '0.9375rem',
       },
       gridItemDetails: {
+        maxWidth: ({ options: { imagePreviewWidth, showImagePreview } }) =>
+          showImagePreview ? imagePreviewWidth : 'auto',
         display: 'flex',
         margin: '0.9375rem',
         justifyContent: 'space-between',
@@ -495,7 +497,7 @@
         width: ({ options: { imagePreviewWidth } }) => imagePreviewWidth,
         height: ({ options: { imagePreviewHeight } }) => imagePreviewHeight,
       },
-      devImageGrid: {
+      gridDevImage: {
         extend: 'devImage',
 
         margin: 0,
@@ -519,7 +521,7 @@
         width: ({ options: { imagePreviewWidth } }) => imagePreviewWidth,
         height: ({ options: { imagePreviewHeight } }) => imagePreviewHeight,
       },
-      uploadingImageGrid: {
+      gridUploadingImage: {
         extend: 'uploadingImage',
 
         margin: 0,
@@ -535,7 +537,7 @@
         width: ({ options: { imagePreviewWidth } }) => imagePreviewWidth,
         height: ({ options: { imagePreviewHeight } }) => imagePreviewHeight,
       },
-      imageGrid: {
+      gridImage: {
         margin: 0,
         overflow: 'hidden',
         backgroundSize: 'cover',
@@ -545,6 +547,12 @@
       },
       fileDetails: {
         flexGrow: 1,
+        maxWidth: ({
+          options: { type, imagePreviewWidth, showImagePreview },
+        }) =>
+          showImagePreview && type === 'grid'
+            ? `calc(${imagePreviewWidth} - 58px)`
+            : 'auto',
         display: 'flex',
         flexDirection: 'column',
       },
