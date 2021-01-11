@@ -159,15 +159,12 @@
         },
       },
       root: {
-        color: ({ options: { variant, textColor, background } }) => [
-          style.getColor(variant === 'icon' ? background : textColor),
+        color: ({ options: { background, disabled, textColor, variant } }) => [
+          !disabled
+            ? style.getColor(variant === 'icon' ? background : textColor)
+            : 'rgba(0, 0, 0, 0.26)',
           '!important',
         ],
-        '&.MuiButton-contained.Mui-disabled': {
-          color: ['rgba(0, 0, 0, 0.26)', '!important'],
-          boxShadow: ['none', '!important'],
-          backgroundColor: ['rgba(0, 0, 0, 0.12)', '!important'],
-        },
         width: ({ options: { fullWidth, outerSpacing } }) => {
           if (!fullWidth) return 'auto';
           const marginRight = getSpacing(outerSpacing[1]);
@@ -234,14 +231,14 @@
         },
       },
       contained: {
-        backgroundColor: ({ options: { background } }) => [
-          style.getColor(background),
+        backgroundColor: ({ options: { background, disabled } }) => [
+          !disabled ? style.getColor(background) : 'rgba(0, 0, 0, 0.12)',
           '!important',
         ],
       },
       outlined: {
-        borderColor: ({ options: { background } }) => [
-          style.getColor(background),
+        borderColor: ({ options: { background, disabled } }) => [
+          !disabled ? style.getColor(background) : 'rgba(0, 0, 0, .12)',
           '!important',
         ],
       },
