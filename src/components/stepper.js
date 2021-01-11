@@ -74,6 +74,7 @@
           alternativeLabel={alternativeLabel}
           activeStep={activeStep}
           orientation={type}
+          classes={{ root: classes.root }}
         >
           {React.Children.map(children, (child, index) => {
             const { options: childOptions = {} } = child.props || {};
@@ -239,10 +240,22 @@
   })(),
   styles: B => t => {
     const style = new B.Styling(t);
-    const { color: colorFunc } = B;
-    const getLighterColor = (col, val) => colorFunc.lighten(col, val);
     const isDev = B.env === 'dev';
     return {
+      root: {
+        backgroundColor: ({ options: { backgroundColor } }) => [
+          style.getColor(backgroundColor),
+          '!important',
+        ],
+        '& .MuiStepConnector-line': {
+          borderColor: ({ options: { connectorColor } }) =>
+            style.getColor(connectorColor),
+        },
+        '& .MuiStepContent-root': {
+          borderColor: ({ options: { connectorColor } }) =>
+            style.getColor(connectorColor),
+        },
+      },
       stepLabel: {
         '& .MuiStepIcon-root': {
           color: ({ options: { inactiveColor } }) =>
@@ -252,13 +265,25 @@
               style.getColor(activeColor),
           },
         },
+        '& .MuiStepLabel-label': {
+          color: ({ options: { inactiveLabelColor } }) =>
+            style.getColor(inactiveLabelColor),
+          '&.MuiStepLabel-active': {
+            color: ({ options: { activeLabelColor } }) =>
+              style.getColor(activeLabelColor),
+          },
+        },
       },
       stepButton: {
         pointerEvents: isDev && 'none',
       },
       mobileRoot: {
-        backgroundColor: ({ options: { inactiveColor } }) => [
-          getLighterColor(style.getColor(inactiveColor), 0.7),
+        backgroundColor: ({ options: { backgroundColor } }) => [
+          style.getColor(backgroundColor),
+          '!important',
+        ],
+        color: ({ options: { stepProgressColor } }) => [
+          style.getColor(stepProgressColor),
           '!important',
         ],
       },
