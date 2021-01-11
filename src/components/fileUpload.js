@@ -184,32 +184,27 @@
 
     const Hr = () => <hr className={classes.hr} />;
 
-    const DeleteButton = ({ file }) => {
-      return (
-        <IconButton
-          size="small"
-          className={classes.remove}
-          onClick={file ? () => removeFileFromList(file.url) : {}}
-        >
-          <Delete fontSize="small" />
-        </IconButton>
-      );
-    };
-
-    const FileDetails = ({ file }) => {
-      return (
-        <div className={classes.fileDetails}>
-          <Typography variant="body1" noWrap className={classes.span}>
-            {file ? file.name : 'File name'}
-          </Typography>
-          <div className={classes.fileDetailList}>
-            <p className={classes.fileDetail}>Size</p>
-            <div className={classes.divider} />
-            <p className={classes.fileDetail}>Type</p>
-          </div>
+    const DeleteButton = ({ file }) => (
+      <IconButton
+        size="small"
+        className={classes.remove}
+        onClick={file ? () => removeFileFromList(file.url) : {}}
+      >
+        <Delete className={classes.deleteIcon} fontSize="small" />
+      </IconButton>
+    );
+    const FileDetails = ({ file }) => (
+      <div className={classes.fileDetails}>
+        <Typography variant="body1" noWrap className={classes.span}>
+          {file ? file.name : 'File name'}
+        </Typography>
+        <div className={classes.fileDetailList}>
+          <p className={classes.fileDetail}>Size</p>
+          <div className={classes.divider} />
+          <p className={classes.fileDetail}>Type</p>
         </div>
-      );
-    };
+      </div>
+    );
 
     const DevUploadedFile = () => {
       switch (type) {
@@ -230,25 +225,23 @@
       }
     };
 
-    const UploadedFile = ({ file }) => {
-      return (
-        <>
-          <Hr />
-          <div className={classes.fileList}>
-            {showImagePreview && (
-              <div
-                style={{
-                  backgroundImage: `url("${file.url}")`,
-                }}
-                className={classes.image}
-              />
-            )}
-            <FileDetails file={file} />
-            <DeleteButton file={file} />
-          </div>
-        </>
-      );
-    };
+    const UploadedFile = ({ file }) => (
+      <>
+        <Hr />
+        <div className={classes.fileList}>
+          {showImagePreview && (
+            <div
+              style={{
+                backgroundImage: `url("${file.url}")`,
+              }}
+              className={classes.image}
+            />
+          )}
+          <FileDetails file={file} />
+          <DeleteButton file={file} />
+        </div>
+      </>
+    );
 
     const UploadingFile = () => (
       <>
@@ -368,6 +361,7 @@
       span: {
         flex: 1,
         textAlign: 'start',
+        marginBottom: '0.1875rem!important',
         marginRight: ['1rem', '!important'],
       },
       button: {
@@ -422,15 +416,18 @@
         width: ({ options: { imagePreviewWidth } }) => imagePreviewWidth,
         height: ({ options: { imagePreviewHeight } }) => imagePreviewHeight,
       },
+      deleteIcon: {
+        color: `${t.colors.light}!important`,
+      },
       placeholderImage: {
         color: 'white',
         display: 'flex',
         overflow: 'hidden',
         margin: '0.9375rem',
         alignItems: 'center',
-        backgroundColor: 'red',
         borderRadius: '0.3rem',
         justifyContent: 'center',
+        backgroundColor: t.colors.warning,
         width: ({ options: { imagePreviewWidth } }) => imagePreviewWidth,
         height: ({ options: { imagePreviewHeight } }) => imagePreviewHeight,
       },
@@ -450,7 +447,7 @@
       },
       fileDetail: {
         margin: 0,
-        color: 'red',
+        color: t.colors.medium,
       },
       fileDetailList: {
         display: 'flex',
@@ -461,14 +458,14 @@
         height: '0.1875rem',
         borderRadius: '50%',
         marginLeft: '0.625rem',
-        backgroundColor: 'red',
+        backgroundColor: t.colors.light,
         marginRight: '0.625rem',
       },
       hr: {
         height: 1,
         margin: 0,
         border: 'none',
-        backgroundColor: 'red',
+        backgroundColor: t.colors.light,
       },
       remove: {
         margin: '0.9375rem!important',
