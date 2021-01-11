@@ -221,45 +221,105 @@
           );
         case 'grid':
         default:
-          return <>grid</>;
+          return (
+            <>
+              <div className={classes.gridView}>
+                <div className={classes.gridItem}>
+                  {showImagePreview && <div className={classes.devImageGrid} />}
+                  <div className={classes.gridItemDetails}>
+                    <FileDetails />
+                    <DeleteButton />
+                  </div>
+                </div>
+              </div>
+            </>
+          );
       }
     };
 
-    const UploadedFile = ({ file }) => (
-      <>
-        <Hr />
-        <div className={classes.fileList}>
-          {showImagePreview && (
-            <div
-              style={{
-                backgroundImage: `url("${file.url}")`,
-              }}
-              className={classes.image}
-            />
-          )}
-          <FileDetails file={file} />
-          <DeleteButton file={file} />
-        </div>
-      </>
-    );
+    const UploadedFile = ({ file }) => {
+      switch (type) {
+        case 'list':
+          return (
+            <>
+              <Hr />
+              <div className={classes.fileList}>
+                {showImagePreview && (
+                  <div
+                    style={{
+                      backgroundImage: `url("${file.url}")`,
+                    }}
+                    className={classes.image}
+                  />
+                )}
+                <FileDetails file={file} />
+                <DeleteButton file={file} />
+              </div>
+            </>
+          );
+        case 'grid':
+        default:
+          return (
+            <>
+              <div className={classes.gridView}>
+                <div className={classes.gridItem}>
+                  {showImagePreview && (
+                    <div
+                      style={{
+                        backgroundImage: `url("${file.url}")`,
+                      }}
+                      className={classes.imageGrid}
+                    />
+                  )}
+                  <div className={classes.gridItemDetails}>
+                    <FileDetails file={file} />
+                    <DeleteButton file={file} />
+                  </div>
+                </div>
+              </div>
+            </>
+          );
+      }
+    };
 
-    const UploadingFile = () => (
-      <>
-        <Hr />
-        <div className={classes.fileList}>
-          {showImagePreview && (
-            <div className={classes.placeholderImage}>
-              <CloudUpload />
-            </div>
-          )}
-          <div className={classes.fileDetails}>
-            <Typography variant="body1" noWrap className={classes.span}>
-              Uploading
-            </Typography>
-          </div>
-        </div>
-      </>
-    );
+    const UploadingFile = () => {
+      switch (type) {
+        case 'list':
+          return (
+            <>
+              <Hr />
+              <div className={classes.fileList}>
+                {showImagePreview && (
+                  <div className={classes.uploadingImage}>
+                    <CloudUpload />
+                  </div>
+                )}
+                <div className={classes.fileDetails}>
+                  <span>Uploading</span>
+                </div>
+              </div>
+            </>
+          );
+        case 'grid':
+        default:
+          return (
+            <>
+              <div className={classes.gridView}>
+                <div className={classes.gridItem}>
+                  {showImagePreview && (
+                    <div className={classes.uploadingImageGrid}>
+                      <CloudUpload />
+                    </div>
+                  )}
+                  <div className={classes.gridItemDetails}>
+                    <span>Uploading</span>
+                  </div>
+                </div>
+              </div>
+            </>
+          );
+      }
+    };
 
     const Control = (
       <FormControl
@@ -387,7 +447,10 @@
         ],
       },
       messageContainer: {
+        flexWrap: 'wrap',
         paddingTop: '1.25rem',
+        display: ({ options: { type } }) =>
+          type === 'list' ? 'block' : 'flex',
         color: ({ options: { textColor } }) => [
           style.getColor(textColor),
           '!important',
@@ -403,6 +466,22 @@
         display: 'flex',
         alignItems: 'center',
       },
+      gridView: {
+        display: 'flex',
+      },
+      gridItem: {
+        display: 'flex',
+        borderRadius: '0.3rem',
+        flexDirection: 'column',
+        border: '1px solid #eee',
+        marginRight: '0.9375rem',
+        marginBottom: '0.9375rem',
+      },
+      gridItemDetails: {
+        display: 'flex',
+        margin: '0.9375rem',
+        justifyContent: 'space-between',
+      },
       devImage: {
         display: 'flex',
         overflow: 'hidden',
@@ -411,15 +490,24 @@
         borderColor: '#AFB5C8',
         borderRadius: '0.3rem',
         borderWidth: '0.0625rem',
-        backgroundColor: '#F0F1F5',
         border: '2px dashed black',
+        backgroundColor: '#F0F1F5',
+        width: ({ options: { imagePreviewWidth } }) => imagePreviewWidth,
+        height: ({ options: { imagePreviewHeight } }) => imagePreviewHeight,
+      },
+      devImageGrid: {
+        extend: 'devImage',
+
+        margin: 0,
+        borderRadius: '0.3rem 0.3rem 0 0',
         width: ({ options: { imagePreviewWidth } }) => imagePreviewWidth,
         height: ({ options: { imagePreviewHeight } }) => imagePreviewHeight,
       },
       deleteIcon: {
         color: `${t.colors.light}!important`,
       },
-      placeholderImage: {
+      uploadingImage: {
+        border: 'none',
         color: 'white',
         display: 'flex',
         overflow: 'hidden',
@@ -431,6 +519,14 @@
         width: ({ options: { imagePreviewWidth } }) => imagePreviewWidth,
         height: ({ options: { imagePreviewHeight } }) => imagePreviewHeight,
       },
+      uploadingImageGrid: {
+        extend: 'uploadingImage',
+
+        margin: 0,
+        borderRadius: '0.3rem 0.3rem 0 0',
+        width: ({ options: { imagePreviewWidth } }) => imagePreviewWidth,
+        height: ({ options: { imagePreviewHeight } }) => imagePreviewHeight,
+      },
       image: {
         overflow: 'hidden',
         margin: '0.9375rem',
@@ -438,7 +534,14 @@
         backgroundSize: 'cover',
         width: ({ options: { imagePreviewWidth } }) => imagePreviewWidth,
         height: ({ options: { imagePreviewHeight } }) => imagePreviewHeight,
-        backgroundImage: 'url("")',
+      },
+      imageGrid: {
+        margin: 0,
+        overflow: 'hidden',
+        backgroundSize: 'cover',
+        borderRadius: '0.3rem 0.3rem 0 0',
+        width: ({ options: { imagePreviewWidth } }) => imagePreviewWidth,
+        height: ({ options: { imagePreviewHeight } }) => imagePreviewHeight,
       },
       fileDetails: {
         flexGrow: 1,
@@ -457,9 +560,9 @@
         width: '0.1875rem',
         height: '0.1875rem',
         borderRadius: '50%',
-        marginLeft: '0.625rem',
+        marginLeft: '0.9375rem',
         backgroundColor: t.colors.light,
-        marginRight: '0.625rem',
+        marginRight: '0.9375rem',
       },
       hr: {
         height: 1,
@@ -468,7 +571,7 @@
         backgroundColor: t.colors.light,
       },
       remove: {
-        margin: '0.9375rem!important',
+        height: '1.875rem',
         padding: '0.25rem!important',
       },
     };
