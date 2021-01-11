@@ -1,10 +1,10 @@
 (() => ({
-  name: 'Button',
+  name: 'ButtonOriginal',
   icon: 'ButtonIcon',
   category: 'CONTENT',
   structure: [
     {
-      name: 'Button',
+      name: 'ButtonOriginal',
       options: [
         {
           label: 'Toggle visibility',
@@ -35,7 +35,7 @@
           type: 'VARIABLE',
           label: 'Button text',
           key: 'buttonText',
-          value: ['Button'],
+          value: ['ButtonOriginal'],
           configuration: {
             condition: {
               type: 'HIDE',
@@ -105,10 +105,10 @@
           },
         },
         {
-          value: '',
-          label: 'Object to pass to action',
-          key: 'actionModel',
-          type: 'ACTION_MODEL',
+          value: [],
+          label: 'Property',
+          key: 'actionProperties',
+          type: 'ACTION_PROPERTIES',
           configuration: {
             apiVersion: 'v1',
             condition: {

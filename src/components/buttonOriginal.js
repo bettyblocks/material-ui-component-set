@@ -1,5 +1,5 @@
 (() => ({
-  name: 'Button',
+  name: 'ButtonOriginal',
   type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'VERTICAL',
@@ -21,10 +21,10 @@
       visible,
       actionId,
       buttonText,
-      actionModel,
+      actionProperties,
     } = options;
 
-    const { env, useText, useAction, getModel, getIdProperty, useProperty } = B;
+    const { env, useText, useAction } = B;
     const isDev = env === 'dev';
     const isAction = linkType === 'action';
     const hasLink = linkTo && linkTo.id !== '';
@@ -37,23 +37,14 @@
     const [isVisible, setIsVisible] = useState(visible);
     const [isLoading, setIsLoading] = useState(false);
 
-    const { name: modelName } = !isDev && actionModel && getModel(actionModel);
-    const propertyId = !isDev && actionModel && getIdProperty(actionModel);
-    const recordId = propertyId && useProperty(propertyId);
+    const propertyMappings = new Map(actionProperties);
+    const input = Array.from(propertyMappings.keys()).reduce((acc, key) => {
+      const propertyId = propertyMappings.get(key);
 
-    const camelToSnakeCase = str =>
-      str[0].toLowerCase() +
-      str
-        .slice(1, str.length)
-        .replace(/[A-Z]/g, letter => `_${letter.toLowerCase()}`);
-
-    const input = {
-      ...(recordId && {
-        [camelToSnakeCase(modelName)]: {
-          variable_id: recordId,
-        },
-      }),
-    };
+      const value = isDev ? '' : B.useProperty(propertyId);
+      acc[key] = value;
+      return acc;
+    }, {});
 
     const [actionCallback, { loading }] = (isAction &&
       useAction(actionId, {
@@ -75,7 +66,9 @@
     B.defineFunction('Show', () => setIsVisible(true));
     B.defineFunction('Hide', () => setIsVisible(false));
     B.defineFunction('Show/Hide', () => setIsVisible(s => !s));
-    B.defineFunction('Toggle loading state', () => setIsLoading(s => !s));
+    B.defineFunction('Load', () => setIsLoading(true));
+    B.defineFunction('Loaded', () => setIsLoading(false));
+    B.defineFunction('Load/Loaded', () => setIsLoading(l => !l));
 
     useEffect(() => {
       if (loading) {
