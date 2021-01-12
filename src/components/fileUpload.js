@@ -52,8 +52,18 @@
       customModelAttribute || {};
     const nameAttributeValue = useText(nameAttribute);
     const requiredText = required ? '*' : '';
+    const [uploadedFileArray, setUploadedFileArray] = useState([]);
+
+    const formatBytes = bytes => {
+      if (bytes === 0) return '0 Bytes';
+      const k = 1024;
+      const sizes = ['Bytes', 'KB', 'MB'];
+      const i = Math.floor(Math.log(bytes) / Math.log(k));
+      return `${parseFloat(bytes / k ** i).toFixed()} ${sizes[i]}`;
+    };
 
     const handleChange = e => {
+      setUploadedFileArray(prev => [...prev, ...e.target.files]);
       setUploads({
         ...uploads,
         files: e.target.files,
@@ -193,15 +203,19 @@
         <Delete className={classes.deleteIcon} fontSize="small" />
       </IconButton>
     );
-    const FileDetails = ({ file }) => (
+    const FileDetails = ({ file, fileType, fileSize }) => (
       <div className={classes.fileDetails}>
         <Typography variant="body1" noWrap className={classes.span}>
           {file ? file.name : 'File name'}
         </Typography>
         <div className={classes.fileDetailList}>
-          <p className={classes.fileDetail}>{isDev ? 'Size' : 'Size'}</p>
+          <p className={classes.fileDetail}>
+            {isDev ? 'Size' : formatBytes(fileSize)}
+          </p>
           <div className={classes.divider} />
-          <p className={classes.fileDetail}>{isDev ? 'Type' : 'Type'}</p>
+          <p className={classes.fileDetail}>
+            {isDev ? 'Type' : fileType.replace('image/', '.')}
+          </p>
         </div>
       </div>
     );
@@ -213,8 +227,10 @@
             <>
               <Hr />
               <div className={classes.listView}>
-                {showImagePreview && <div className={classes.devImage} />}
-                <FileDetails />
+                <div className={classes.fileDetailList}>
+                  {showImagePreview && <div className={classes.devImage} />}
+                  <FileDetails />
+                </div>
                 <DeleteButton />
               </div>
             </>
@@ -238,21 +254,31 @@
     };
 
     const UploadedFile = ({ file }) => {
+      const uploadedFile = uploadedFileArray.find(
+        item => item.name === file.name,
+      );
+
       switch (type) {
         case 'list':
           return (
             <>
               <Hr />
               <div className={classes.listView}>
-                {showImagePreview && (
-                  <div
-                    style={{
-                      backgroundImage: `url("${file.url}")`,
-                    }}
-                    className={classes.image}
+                <div className={classes.fileDetailList}>
+                  {showImagePreview && (
+                    <div
+                      style={{
+                        backgroundImage: `url("${file.url}")`,
+                      }}
+                      className={classes.image}
+                    />
+                  )}
+                  <FileDetails
+                    file={file}
+                    fileType={uploadedFile.type}
+                    fileSize={uploadedFile.size}
                   />
-                )}
-                <FileDetails file={file} />
+                </div>
                 <DeleteButton file={file} />
               </div>
             </>
@@ -272,7 +298,11 @@
                     />
                   )}
                   <div className={classes.gridItemDetails}>
-                    <FileDetails file={file} />
+                    <FileDetails
+                      file={file}
+                      fileType={uploadedFile.type}
+                      fileSize={uploadedFile.size}
+                    />
                     <DeleteButton file={file} />
                   </div>
                 </div>
@@ -465,6 +495,7 @@
       listView: {
         display: 'flex',
         alignItems: 'center',
+        justifyContent: 'space-between',
       },
       gridView: {
         display: 'flex',

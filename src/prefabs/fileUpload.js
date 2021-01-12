@@ -45,7 +45,7 @@
           type: 'SIZE',
           label: 'Image preview width',
           key: 'imagePreviewWidth',
-          value: '90px',
+          value: '200px',
           configuration: {
             as: 'UNIT',
             condition: {
@@ -60,7 +60,7 @@
           type: 'SIZE',
           label: 'Image preview height',
           key: 'imagePreviewHeight',
-          value: '60px',
+          value: '112px',
           configuration: {
             as: 'UNIT',
             condition: {
