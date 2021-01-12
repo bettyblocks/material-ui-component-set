@@ -1,6 +1,6 @@
 (() => ({
-  name: 'FileUpload',
-  icon: 'FileInputIcon',
+  name: 'imageUpload',
+  icon: 'ImageInputIcon',
   category: 'FORM',
   structure: [
     {
@@ -13,6 +13,62 @@
           type: 'CUSTOM_MODEL_ATTRIBUTE',
           configuration: {
             allowedTypes: ['file'],
+          },
+        },
+        {
+          type: 'CUSTOM',
+          label: 'Type',
+          key: 'type',
+          value: 'list',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              {
+                name: 'List',
+                value: 'list',
+              },
+              {
+                name: 'Grid',
+                value: 'grid',
+              },
+            ],
+          },
+        },
+        {
+          type: 'TOGGLE',
+          label: 'Show Image preview',
+          value: true,
+          key: 'showImagePreview',
+        },
+        {
+          type: 'SIZE',
+          label: 'Image preview width',
+          key: 'imagePreviewWidth',
+          value: '200px',
+          configuration: {
+            as: 'UNIT',
+            condition: {
+              type: 'SHOW',
+              option: 'showImagePreview',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'SIZE',
+          label: 'Image preview height',
+          key: 'imagePreviewHeight',
+          value: '112px',
+          configuration: {
+            as: 'UNIT',
+            condition: {
+              type: 'SHOW',
+              option: 'showImagePreview',
+              comparator: 'EQ',
+              value: true,
+            },
           },
         },
         {

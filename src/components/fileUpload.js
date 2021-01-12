@@ -31,8 +31,8 @@
       hideLabel,
       customModelAttribute: customModelAttributeObj,
       nameAttribute,
-      showImagePreview,
       type,
+      showImagePreview,
     } = options;
 
     const isDev = env === 'dev';
@@ -224,21 +224,7 @@
 
     const DevUploadedFile = () => {
       switch (type) {
-        case 'list':
-          return (
-            <>
-              <Hr />
-              <div className={classes.listView}>
-                <div className={classes.fileDetailList}>
-                  {showImagePreview && <div className={classes.devImage} />}
-                  <FileDetails />
-                </div>
-                <DeleteButton />
-              </div>
-            </>
-          );
         case 'grid':
-        default:
           return (
             <>
               <div className={classes.gridView}>
@@ -252,6 +238,20 @@
               </div>
             </>
           );
+        case 'list':
+        default:
+          return (
+            <>
+              <Hr />
+              <div className={classes.listView}>
+                <div className={classes.fileDetailList}>
+                  {showImagePreview && <div className={classes.devImage} />}
+                  <FileDetails />
+                </div>
+                <DeleteButton />
+              </div>
+            </>
+          );
       }
     };
 
@@ -261,32 +261,7 @@
       );
 
       switch (type) {
-        case 'list':
-          return (
-            <>
-              <Hr />
-              <div className={classes.listView}>
-                <div className={classes.fileDetailList}>
-                  {showImagePreview && (
-                    <div
-                      style={{
-                        backgroundImage: `url("${file.url}")`,
-                      }}
-                      className={classes.image}
-                    />
-                  )}
-                  <FileDetails
-                    file={file}
-                    fileType={uploadedFile.type}
-                    fileSize={uploadedFile.size}
-                  />
-                </div>
-                <DeleteButton file={file} />
-              </div>
-            </>
-          );
         case 'grid':
-        default:
           return (
             <>
               <div className={classes.gridView}>
@@ -311,29 +286,37 @@
               </div>
             </>
           );
+        case 'list':
+        default:
+          return (
+            <>
+              <Hr />
+              <div className={classes.listView}>
+                <div className={classes.fileDetailList}>
+                  {showImagePreview && (
+                    <div
+                      style={{
+                        backgroundImage: `url("${file.url}")`,
+                      }}
+                      className={classes.image}
+                    />
+                  )}
+                  <FileDetails
+                    file={file}
+                    fileType={uploadedFile.type}
+                    fileSize={uploadedFile.size}
+                  />
+                </div>
+                <DeleteButton file={file} />
+              </div>
+            </>
+          );
       }
     };
 
     const UploadingFile = () => {
       switch (type) {
-        case 'list':
-          return (
-            <>
-              <Hr />
-              <div className={classes.listView}>
-                {showImagePreview && (
-                  <div className={classes.uploadingImage}>
-                    <CloudUpload />
-                  </div>
-                )}
-                <div className={classes.fileDetails}>
-                  <span>Uploading</span>
-                </div>
-              </div>
-            </>
-          );
         case 'grid':
-        default:
           return (
             <>
               <div className={classes.gridView}>
@@ -346,6 +329,23 @@
                   <div className={classes.gridItemDetails}>
                     <span>Uploading</span>
                   </div>
+                </div>
+              </div>
+            </>
+          );
+        case 'list':
+        default:
+          return (
+            <>
+              <Hr />
+              <div className={classes.listView}>
+                {showImagePreview && (
+                  <div className={classes.uploadingImage}>
+                    <CloudUpload />
+                  </div>
+                )}
+                <div className={classes.fileDetails}>
+                  <span>Uploading</span>
                 </div>
               </div>
             </>
@@ -482,7 +482,7 @@
         flexWrap: 'wrap',
         paddingTop: '1.25rem',
         display: ({ options: { type } }) =>
-          type === 'list' ? 'block' : 'flex',
+          type === 'grid' ? 'flex' : 'block',
         color: ({ options: { textColor } }) => [
           style.getColor(textColor),
           '!important',
@@ -612,7 +612,7 @@
         backgroundColor: t.colors.light,
       },
       deleteButtonWrapper: {
-        margin: ({ options: { type } }) => (type === 'list' ? '0.9375rem' : 0),
+        margin: ({ options: { type } }) => (type === 'grid' ? 0 : '0.9375rem'),
       },
       remove: {
         height: '1.875rem',
