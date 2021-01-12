@@ -195,7 +195,7 @@
     const Hr = () => <hr className={classes.hr} />;
 
     const DeleteButton = ({ file }) => (
-      <div className={classes.DeleteButtonWrapper}>
+      <div className={classes.deleteButtonWrapper}>
         <IconButton
           size="small"
           className={classes.remove}
@@ -611,7 +611,7 @@
         border: 'none',
         backgroundColor: t.colors.light,
       },
-      DeleteButtonWrapper: {
+      deleteButtonWrapper: {
         margin: ({ options: { type } }) => (type === 'list' ? '0.9375rem' : 0),
       },
       remove: {
