@@ -21,7 +21,7 @@
       structure.reduce((acc, component) => {
         if (acc) return acc;
         if (
-          component.hasOwnProperty('ref') &&
+          component.ref &&
           Object.values(component.ref).indexOf(refValue) > -1
         ) {
           return component;
