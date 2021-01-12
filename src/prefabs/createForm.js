@@ -46,6 +46,7 @@
               onChange={value => {
                 setProperties(value);
               }}
+              scopedModels={false}
               value={properties}
               modelId={modelId}
               disabledNames={['created_at', 'updated_at', 'id']}
