@@ -260,6 +260,10 @@
         item => item.name === file.name,
       );
 
+      if (!multiple) {
+        B.triggerEvent('onFileUpload', file.url);
+      }
+
       switch (type) {
         case 'grid':
           return (

@@ -16,14 +16,32 @@
     } = options;
 
     const titleText = useText(title);
-    const imgUrl = useText(imageSource);
     const videoUrl = useText(videoSource);
     const iframeUrl = useText(iframeSource);
+    const [imgUrl, setImgUrl] = useState(useText(imageSource));
 
-    const isImage = type === 'img' && imgUrl;
     const isVideo = type === 'video' && videoUrl;
     const isIframe = type === 'iframe' && iframeUrl;
-    const isEmpty = !isImage && !isVideo && !isIframe;
+    const [isImage, setIsImage] = useState(type === 'img' && imgUrl);
+    const [isEmpty, setIsEmpty] = useState(!isImage && !isVideo && !isIframe);
+
+    useEffect(() => {
+      setImgUrl(useText(imageSource));
+    }, [imageSource]);
+
+    useEffect(() => {
+      setIsImage(type === 'img' && imgUrl);
+    }, [type, imgUrl]);
+
+    useEffect(() => {
+      setIsEmpty(!isImage && !isVideo && !isIframe);
+    }, [isImage, isVideo, isIframe]);
+
+    B.defineFunction('SetImage', url => {
+      setIsImage(true);
+      setImgUrl(url);
+      setIsEmpty(false);
+    });
 
     const variable = imageSource && imageSource.findIndex(v => v.name) !== -1;
     const variableDev = env === 'dev' && (variable || !imgUrl);
