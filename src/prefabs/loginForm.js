@@ -6824,7 +6824,7 @@
       type: 'Custom',
     },
     {
-      name: 'ToggleLoadingState',
+      name: 'Toggle loading state',
       sourceEvent: 'onSubmit',
       ref: {
         targetComponentId: '#btnId',
@@ -6833,7 +6833,7 @@
       type: 'Custom',
     },
     {
-      name: 'ToggleLoadingState',
+      name: 'Toggle loading state',
       sourceEvent: 'onActionDone',
       ref: {
         targetComponentId: '#btnId',
