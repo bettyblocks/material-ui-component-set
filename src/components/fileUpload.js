@@ -195,13 +195,15 @@
     const Hr = () => <hr className={classes.hr} />;
 
     const DeleteButton = ({ file }) => (
-      <IconButton
-        size="small"
-        className={classes.remove}
-        onClick={file ? () => removeFileFromList(file.url) : {}}
-      >
-        <Delete className={classes.deleteIcon} fontSize="small" />
-      </IconButton>
+      <div className={classes.DeleteButtonWrapper}>
+        <IconButton
+          size="small"
+          className={classes.remove}
+          onClick={file ? () => removeFileFromList(file.url) : {}}
+        >
+          <Delete className={classes.deleteIcon} fontSize="small" />
+        </IconButton>
+      </div>
     );
     const FileDetails = ({ file, fileType, fileSize }) => (
       <div className={classes.fileDetails}>
@@ -608,6 +610,9 @@
         margin: 0,
         border: 'none',
         backgroundColor: t.colors.light,
+      },
+      DeleteButtonWrapper: {
+        margin: ({ options: { type } }) => (type === 'list' ? '0.9375rem' : 0),
       },
       remove: {
         height: '1.875rem',
