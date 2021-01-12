@@ -1803,7 +1803,7 @@
                         {
                           label: 'Validation pattern',
                           key: 'pattern',
-                          value: '(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}',
+                          value: '',
                           type: 'TEXT',
                           configuration: {
                             placeholder: '(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}',
