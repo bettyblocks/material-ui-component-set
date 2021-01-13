@@ -1,7 +1,7 @@
 (() => ({
   name: 'ListWithData',
   icon: 'OrderedListIcon',
-  category: 'CONTENT',
+  category: 'LIST',
   beforeCreate: ({
     components: {
       Content,
@@ -188,7 +188,7 @@
               type: 'CUSTOM',
               label: 'Type',
               key: 'type',
-              value: 'list',
+              value: 'inline',
               configuration: {
                 as: 'BUTTONGROUP',
                 dataType: 'string',
