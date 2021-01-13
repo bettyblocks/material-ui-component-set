@@ -306,9 +306,7 @@
           .includes(state.inputValue.toLowerCase());
       });
       if (filteredOptions.length <= 1 && takeAmount.current < data.totalCount) {
-        // setTakeAmount(takeAmount + 50);
         takeAmount.current += 50;
-        console.log('>>>>>>>', takeAmount.current);
         refetch({ take: takeAmount.current });
       }
 
