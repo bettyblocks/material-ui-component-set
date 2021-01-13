@@ -1,7 +1,7 @@
 (() => ({
   name: 'ListItem',
   icon: 'ListItemIcon',
-  category: 'CONTENT',
+  category: 'LIST',
   structure: [
     {
       name: 'ListItem',
@@ -45,18 +45,35 @@
           },
         },
         {
+          type: 'CUSTOM',
+          label: 'Visual',
+          key: 'avatarOrIcon',
+          value: 'none',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'None', value: 'none' },
+              { name: 'Icon', value: 'icon' },
+              { name: 'Avatar', value: 'avatar' },
+            ],
+          },
+        },
+        {
           label: 'Icon',
           key: 'icon',
-          value: 'None',
+          value: 'Person',
           type: 'CUSTOM',
           configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'avatarOrIcon',
+              comparator: 'EQ',
+              value: 'icon',
+            },
             as: 'DROPDOWN',
             dataType: 'string',
             allowedInput: [
-              {
-                name: 'None',
-                value: 'None',
-              },
               {
                 name: 'AcUnit',
                 value: 'AcUnit',
@@ -1317,6 +1334,14 @@
           label: 'Icon color',
           key: 'iconColor',
           value: 'Black',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'avatarOrIcon',
+              comparator: 'EQ',
+              value: 'icon',
+            },
+          },
         },
         {
           value: false,
@@ -1325,10 +1350,24 @@
           type: 'TOGGLE',
           configuration: {
             condition: {
-              type: 'HIDE',
-              option: 'icon',
+              type: 'SHOW',
+              option: 'avatarOrIcon',
               comparator: 'EQ',
-              value: 'None',
+              value: 'icon',
+            },
+          },
+        },
+        {
+          type: 'VARIABLE',
+          label: 'Avatar URL',
+          key: 'avatarUrl',
+          value: [''],
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'avatarOrIcon',
+              comparator: 'EQ',
+              value: 'avatar',
             },
           },
         },
