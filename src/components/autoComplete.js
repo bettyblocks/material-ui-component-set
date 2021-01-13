@@ -68,7 +68,7 @@
     const { kind, values: listValues } = getProperty(property) || {};
     const [currentValue, setCurrentValue] = useState(useText(defaultValue));
     const [currentLabel, setCurrentLabel] = useState('');
-    const [takeAmount, setTakeAmount] = useState(50);
+    const takeAmount = useRef(50);
 
     const labelText = useText(label);
 
@@ -158,7 +158,7 @@
       useAllQuery(model, {
         ...useFilter,
         skip: 0,
-        take: takeAmount,
+        take: takeAmount.current,
         variables: {
           ...(orderBy ? { sort: { relation: sort } } : {}),
         },
@@ -305,8 +305,11 @@
           .toLowerCase()
           .includes(state.inputValue.toLowerCase());
       });
-      if (filteredOptions.length <= 1 && takeAmount < data.totalCount) {
-        setTakeAmount(takeAmount + 50, () => refetch({ take: takeAmount }));
+      if (filteredOptions.length <= 1 && takeAmount.current < data.totalCount) {
+        // setTakeAmount(takeAmount + 50);
+        takeAmount.current += 50;
+        console.log('>>>>>>>', takeAmount.current);
+        refetch({ take: takeAmount.current });
       }
 
       return filteredOptions;
