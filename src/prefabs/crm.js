@@ -4,10 +4,9 @@
   category: 'CONTENT',
   beforeCreate: options => {
     console.log('options: ', options);
-    const { components, prefab, save, close, helpers: { useModelQuery} } = options;
-    console.log('Use Model query: ', useModelQuery);
-    
+    const { components, prefab, save, close } = options;
     const [modelId, setModelId] = React.useState('');
+    const [model, setModel] = React.useState({});
     const [properties, setProperties] = React.useState([]);
     const [editFormProperties, setEditFormProperties] = React.useState([]);
     const [
@@ -23,7 +22,7 @@
       PropertiesSelector,
       CheckBox,
     } = components;
-    
+
     // const result = useModelQuery(
     //   modelId
     // );
@@ -49,7 +48,9 @@
         <Content>
           <Field label="Model">
             <ModelSelector
-              onChange={value => {
+              onChange={(value, modelObject) => {
+                console.log('model object: ', modelObject);
+                setModel(modelObject);
                 setModelId(value);
               }}
               value={modelId}
@@ -90,16 +91,10 @@
               '#dataTable',
               newPrefab.structure,
             );
-            
-            const newForm = reduceStructure(
-              '#newForm',
-              newPrefab.structure,
-            );
-            
-            const editForm = reduceStructure(
-              '#editForm',
-              newPrefab.structure,
-            );
+
+            const newForm = reduceStructure('#newForm', newPrefab.structure);
+
+            const editForm = reduceStructure('#editForm', newPrefab.structure);
 
             dataTable.options[0].value = modelId;
             newForm.options[0].value.modelId = modelId;
