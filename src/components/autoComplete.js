@@ -68,6 +68,7 @@
     const { kind, values: listValues } = getProperty(property) || {};
     const [currentValue, setCurrentValue] = useState(useText(defaultValue));
     const [currentLabel, setCurrentLabel] = useState('');
+    const [takeAmount, setTakeAmount] = useState(50);
 
     const labelText = useText(label);
 
@@ -157,7 +158,7 @@
       useAllQuery(model, {
         ...useFilter,
         skip: 0,
-        take: 50,
+        take: takeAmount,
         variables: {
           ...(orderBy ? { sort: { relation: sort } } : {}),
         },
@@ -268,6 +269,7 @@
     }, [results]);
 
     const defaultRecord = getDefaultValue();
+
     useEffect(() => {
       if (!multiple && defaultRecord && searchProp) {
         setCurrentLabel(defaultRecord[searchProp.name]);
@@ -293,6 +295,22 @@
         {renderLabel(option)}
       </>
     );
+
+    const filterOptions = (options, state) => {
+      const filteredOptions = [...options].filter(option => {
+        const optionLabel = option[searchProp.name]
+          ? option[searchProp.name].toString()
+          : option;
+        return optionLabel
+          .toLowerCase()
+          .includes(state.inputValue.toLowerCase());
+      });
+      if (filteredOptions.length <= 1 && takeAmount < data.totalCount) {
+        setTakeAmount(takeAmount + 50, () => refetch({ take: takeAmount }));
+      }
+
+      return filteredOptions;
+    };
 
     if (isDev) {
       return (
@@ -321,6 +339,7 @@
         <Autocomplete
           id="combo-box-demo"
           options={selectValues}
+          filterOptions={filterOptions}
           value={currentValue}
           PopoverProps={{
             classes: {
@@ -381,6 +400,7 @@
         freeSolo={freeSolo}
         autoSelect={freeSolo}
         options={results}
+        filterOptions={filterOptions}
         defaultValue={defaultRecord}
         getOptionLabel={renderLabel}
         getOptionSelected={(option, value) => value.id === option.id}
