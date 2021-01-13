@@ -203,7 +203,7 @@
     }, [loading]);
 
     if (err && !displayError) {
-      B.triggerEvent('onError', err.message);
+      B.triggerEvent('onError', err);
     }
 
     const { results } = data || {};
