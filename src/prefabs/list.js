@@ -1,7 +1,7 @@
 (() => ({
   name: 'List',
   icon: 'OrderedListIcon',
-  category: 'CONTENT',
+  category: 'LIST',
   structure: [
     {
       name: 'List',
