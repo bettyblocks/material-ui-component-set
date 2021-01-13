@@ -1,7 +1,7 @@
 (() => ({
   name: 'List',
   type: 'CONTAINER_COMPONENT',
-  allowedTypes: ['LIST_ITEM', 'LIST_SUBHEADER', 'CONTAINER_COMPONENT'],
+  allowedTypes: ['CONTENT_COMPONENT', 'LIST_SUBHEADER', 'CONTAINER_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { List } = window.MaterialUI.Core;
