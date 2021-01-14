@@ -79,7 +79,7 @@
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        position: 'absolute',
+        position: 'relative',
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
         top: '0.25rem',
         left: '0.25rem',

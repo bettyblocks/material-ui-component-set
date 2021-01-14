@@ -39,14 +39,13 @@
                 .slice(1, str.length)
                 .replace(/[A-Z]/g, letter => `_${letter.toLowerCase()}`);
 
-            if (!modelId) {
+            if (!modelId || !model) {
               setShowValidation(true);
               return;
             }
             const newPrefab = { ...prefab };
-            if (model) {
-              newPrefab.variables[0].name = camelToSnakeCase(model.label);
-            }
+            newPrefab.variables[0].name = camelToSnakeCase(model.label);
+            newPrefab.structure[0].descendants[1].descendants[0].descendants[0].descendants[0].descendants[2].descendants[1].options[7].value = modelId;
             newPrefab.structure[0].descendants[0].options[7].value = modelId;
             newPrefab.variables[0].options.modelId = modelId;
 
@@ -521,7 +520,7 @@
               type: 'CUSTOM',
               label: 'Link to',
               key: 'linkType',
-              value: 'action',
+              value: 'internal',
               configuration: {
                 as: 'BUTTONGROUP',
                 dataType: 'string',
@@ -562,9 +561,7 @@
               },
             },
             {
-              ref: {
-                value: '#actionId',
-              },
+              value: '',
               label: 'Action',
               key: 'actionId',
               type: 'ACTION',
@@ -2594,7 +2591,7 @@
                                   type: 'VARIABLE',
                                   label: 'Content',
                                   key: 'content',
-                                  value: [],
+                                  value: ['Delete record'],
                                   configuration: {
                                     as: 'MULTILINE',
                                   },
@@ -4385,7 +4382,7 @@
                                       label: 'Content',
                                       key: 'content',
                                       value: [
-                                        'To start using the dialog, please drag or remove components to your liking.',
+                                        'Are you sure you want to delete this record? You can’t undo this action.',
                                       ],
                                       configuration: {
                                         as: 'MULTILINE',
@@ -6247,6 +6244,9 @@
                             },
                             {
                               name: 'Button',
+                              ref: {
+                                id: '#submitButton',
+                              },
                               options: [
                                 {
                                   label: 'Toggle visibility',
@@ -6291,7 +6291,7 @@
                                   type: 'CUSTOM',
                                   label: 'Link to',
                                   key: 'linkType',
-                                  value: 'internal',
+                                  value: 'action',
                                   configuration: {
                                     as: 'BUTTONGROUP',
                                     dataType: 'string',
@@ -6343,6 +6343,21 @@
                                   label: 'Action',
                                   key: 'actionId',
                                   type: 'ACTION',
+                                  configuration: {
+                                    apiVersion: 'v1',
+                                    condition: {
+                                      type: 'SHOW',
+                                      option: 'linkType',
+                                      comparator: 'EQ',
+                                      value: 'action',
+                                    },
+                                  },
+                                },
+                                {
+                                  value: '',
+                                  label: 'Object to pass to action',
+                                  key: 'actionModel',
+                                  type: 'ACTION_MODEL',
                                   configuration: {
                                     apiVersion: 'v1',
                                     condition: {
