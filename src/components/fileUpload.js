@@ -199,7 +199,11 @@
         <IconButton
           size="small"
           className={classes.remove}
-          onClick={file ? () => removeFileFromList(file.url) : {}}
+          onClick={() => {
+            if (file) {
+              removeFileFromList(file.url);
+            }
+          }}
         >
           <Delete className={classes.deleteIcon} fontSize="small" />
         </IconButton>
@@ -226,17 +230,15 @@
       switch (type) {
         case 'grid':
           return (
-            <>
-              <div className={classes.gridView}>
-                <div className={classes.gridItem}>
-                  {showImagePreview && <div className={classes.gridDevImage} />}
-                  <div className={classes.gridItemDetails}>
-                    <FileDetails />
-                    <DeleteButton />
-                  </div>
+            <div className={classes.gridView}>
+              <div className={classes.gridItem}>
+                {showImagePreview && <div className={classes.gridDevImage} />}
+                <div className={classes.gridItemDetails}>
+                  <FileDetails />
+                  <DeleteButton />
                 </div>
               </div>
-            </>
+            </div>
           );
         case 'list':
         default:
@@ -267,28 +269,26 @@
       switch (type) {
         case 'grid':
           return (
-            <>
-              <div className={classes.gridView}>
-                <div className={classes.gridItem}>
-                  {showImagePreview && (
-                    <div
-                      style={{
-                        backgroundImage: `url("${file.url}")`,
-                      }}
-                      className={classes.gridImage}
-                    />
-                  )}
-                  <div className={classes.gridItemDetails}>
-                    <FileDetails
-                      file={file}
-                      fileType={uploadedFile.type}
-                      fileSize={uploadedFile.size}
-                    />
-                    <DeleteButton file={file} />
-                  </div>
+            <div className={classes.gridView}>
+              <div className={classes.gridItem}>
+                {showImagePreview && (
+                  <div
+                    style={{
+                      backgroundImage: `url("${file.url}")`,
+                    }}
+                    className={classes.gridImage}
+                  />
+                )}
+                <div className={classes.gridItemDetails}>
+                  <FileDetails
+                    file={file}
+                    fileType={uploadedFile.type}
+                    fileSize={uploadedFile.size}
+                  />
+                  <DeleteButton file={file} />
                 </div>
               </div>
-            </>
+            </div>
           );
         case 'list':
         default:
@@ -322,20 +322,18 @@
       switch (type) {
         case 'grid':
           return (
-            <>
-              <div className={classes.gridView}>
-                <div className={classes.gridItem}>
-                  {showImagePreview && (
-                    <div className={classes.gridUploadingImage}>
-                      <CloudUpload />
-                    </div>
-                  )}
-                  <div className={classes.gridItemDetails}>
-                    <span>Uploading</span>
+            <div className={classes.gridView}>
+              <div className={classes.gridItem}>
+                {showImagePreview && (
+                  <div className={classes.gridUploadingImage}>
+                    <CloudUpload />
                   </div>
+                )}
+                <div className={classes.gridItemDetails}>
+                  <span>Uploading</span>
                 </div>
               </div>
-            </>
+            </div>
           );
         case 'list':
         default:
@@ -357,7 +355,7 @@
       }
     };
 
-    const Control = (
+    const Control = () => (
       <FormControl
         fullWidth={fullWidth}
         required={required}
@@ -376,7 +374,6 @@
         <FormHelperText classes={{ root: classes.helper }}>
           {helperValue}
         </FormHelperText>
-        {loading && B.triggerEvent('onLoad')}
         <div className={classes.messageContainer}>
           {data &&
             data.length > 0 &&
@@ -385,6 +382,12 @@
         </div>
       </FormControl>
     );
+
+    useEffect(() => {
+      if (loading) {
+        B.triggerEvent('onLoad');
+      }
+    }, [loading]);
 
     useEffect(() => {
       if (files.length > 0) {
@@ -396,11 +399,13 @@
 
     return isDev ? (
       <div>
-        <div className={classes.root}>{Control}</div>
+        <div className={classes.root}>
+          <Control />
+        </div>
         <DevUploadedFile />
       </div>
     ) : (
-      Control
+      <Control />
     );
   })(),
   styles: B => t => {
@@ -413,9 +418,9 @@
           fullWidth ? 'block' : 'inline-block',
       },
       label: {
-        marginLeft: [0, '!important'],
+        marginLeft: '0!important',
         pointerEvents: B.env === 'dev' && 'none',
-        alignItems: ['start', '!important'],
+        alignItems: 'start!important',
         color: ({ options: { labelColor } }) => [
           style.getColor(labelColor),
           '!important',
@@ -458,7 +463,7 @@
         flex: 1,
         textAlign: 'start',
         marginBottom: '0.1875rem!important',
-        marginRight: ['1rem', '!important'],
+        marginRight: '1rem!important',
       },
       button: {
         color: ({ options: { variant, buttonTextColor, background } }) => [
@@ -508,28 +513,28 @@
       },
       gridItem: {
         display: 'flex',
-        borderRadius: '0.3rem',
+        borderRadius: '0.3125rem',
         flexDirection: 'column',
-        border: '1px solid #eee',
-        marginRight: '0.9375rem',
-        marginBottom: '0.9375rem',
+        border: ' 0.0625rem solid #eee',
+        marginRight: '1rem',
+        marginBottom: '1rem',
       },
       gridItemDetails: {
         maxWidth: ({ options: { imagePreviewWidth, showImagePreview } }) =>
           showImagePreview ? imagePreviewWidth : 'auto',
         display: 'flex',
-        margin: '0.9375rem',
+        margin: '1rem',
         justifyContent: 'space-between',
       },
       devImage: {
         display: 'flex',
         overflow: 'hidden',
-        margin: '0.9375rem',
+        margin: '1rem',
         borderStyle: 'dashed',
         borderColor: '#AFB5C8',
-        borderRadius: '0.3rem',
+        borderRadius: '0.3125rem',
         borderWidth: '0.0625rem',
-        border: '2px dashed black',
+        border: '0.125rem dashed black',
         backgroundColor: '#F0F1F5',
         width: ({ options: { imagePreviewWidth } }) => imagePreviewWidth,
         height: ({ options: { imagePreviewHeight } }) => imagePreviewHeight,
@@ -538,7 +543,7 @@
         extend: 'devImage',
 
         margin: 0,
-        borderRadius: '0.3rem 0.3rem 0 0',
+        borderRadius: '0.3125rem 0.3125rem 0 0',
         width: ({ options: { imagePreviewWidth } }) => imagePreviewWidth,
         height: ({ options: { imagePreviewHeight } }) => imagePreviewHeight,
       },
@@ -550,9 +555,9 @@
         color: 'white',
         display: 'flex',
         overflow: 'hidden',
-        margin: '0.9375rem',
+        margin: '1rem',
         alignItems: 'center',
-        borderRadius: '0.3rem',
+        borderRadius: '0.3125rem',
         justifyContent: 'center',
         backgroundColor: t.colors.warning,
         width: ({ options: { imagePreviewWidth } }) => imagePreviewWidth,
@@ -562,14 +567,14 @@
         extend: 'uploadingImage',
 
         margin: 0,
-        borderRadius: '0.3rem 0.3rem 0 0',
+        borderRadius: '0.3125rem 0.3125rem 0 0',
         width: ({ options: { imagePreviewWidth } }) => imagePreviewWidth,
         height: ({ options: { imagePreviewHeight } }) => imagePreviewHeight,
       },
       image: {
         overflow: 'hidden',
-        margin: '0.9375rem',
-        borderRadius: '0.3rem',
+        margin: '1rem',
+        borderRadius: '0.3125rem',
         backgroundSize: 'cover',
         width: ({ options: { imagePreviewWidth } }) => imagePreviewWidth,
         height: ({ options: { imagePreviewHeight } }) => imagePreviewHeight,
@@ -578,7 +583,7 @@
         margin: 0,
         overflow: 'hidden',
         backgroundSize: 'cover',
-        borderRadius: '0.3rem 0.3rem 0 0',
+        borderRadius: '0.3125rem 0.3125rem 0 0',
         width: ({ options: { imagePreviewWidth } }) => imagePreviewWidth,
         height: ({ options: { imagePreviewHeight } }) => imagePreviewHeight,
       },
@@ -588,7 +593,7 @@
           options: { type, imagePreviewWidth, showImagePreview },
         }) =>
           showImagePreview && type === 'grid'
-            ? `calc(${imagePreviewWidth} - 58px)`
+            ? `${parseInt(imagePreviewWidth, 10) - 58}px`
             : 'auto',
         display: 'flex',
         flexDirection: 'column',
@@ -605,9 +610,9 @@
         width: '0.1875rem',
         height: '0.1875rem',
         borderRadius: '50%',
-        marginLeft: '0.9375rem',
+        marginLeft: '1rem',
         backgroundColor: t.colors.light,
-        marginRight: '0.9375rem',
+        marginRight: '1rem',
       },
       hr: {
         height: 1,
@@ -616,7 +621,7 @@
         backgroundColor: t.colors.light,
       },
       deleteButtonWrapper: {
-        margin: ({ options: { type } }) => (type === 'grid' ? 0 : '0.9375rem'),
+        margin: ({ options: { type } }) => (type === 'grid' ? 0 : '1rem'),
       },
       remove: {
         height: '1.875rem',

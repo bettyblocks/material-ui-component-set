@@ -18,7 +18,8 @@
     const titleText = useText(title);
     const videoUrl = useText(videoSource);
     const iframeUrl = useText(iframeSource);
-    const [imgUrl, setImgUrl] = useState(useText(imageSource));
+    const imageSourceText = useText(imageSource);
+    const [imgUrl, setImgUrl] = useState(imageSourceText);
 
     const isVideo = type === 'video' && videoUrl;
     const isIframe = type === 'iframe' && iframeUrl;
@@ -26,7 +27,7 @@
     const [isEmpty, setIsEmpty] = useState(!isImage && !isVideo && !isIframe);
 
     useEffect(() => {
-      setImgUrl(useText(imageSource));
+      setImgUrl(imageSourceText);
     }, [imageSource]);
 
     useEffect(() => {

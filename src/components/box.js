@@ -25,26 +25,10 @@
     const opac = transparent ? 0 : 1;
     const [opacity, setOpacity] = useState(opac);
     const [interactionBackground, setInteractionBackground] = useState('');
-    const [boxStyles, setBoxStyles] = useState({});
 
     B.defineFunction('setBackgroundImage', url => {
       setInteractionBackground(url);
     });
-
-    useEffect(() => {
-      setBoxStyles({ opacity });
-    }, []);
-
-    useEffect(() => {
-      if (interactionBackground) {
-        setBoxStyles({
-          backgroundImage: interactionBackground
-            ? `url("${interactionBackground}")`
-            : 'none',
-          opacity,
-        });
-      }
-    }, [interactionBackground]);
 
     const boxOptions = {
       display: isFlex && 'flex',
@@ -78,7 +62,12 @@
         onClick={handleClick}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        style={boxStyles}
+        style={{
+          backgroundImage: interactionBackground
+            ? `url("${interactionBackground}")`
+            : 'auto',
+          opacity,
+        }}
       >
         {isEmpty ? 'Box' : children}
       </Box>
