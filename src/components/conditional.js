@@ -55,7 +55,7 @@
 
         B.defineFunction('Hide', () => setVisible(false));
         B.defineFunction('Show', () => setVisible(true));
-        B.defineFunction('ToggleVisibility', () => setVisible(s => !s));
+        B.defineFunction('Show/Hide', () => setVisible(s => !s));
 
         if (!isDev && !visible) return null;
         return isPristine ? 'Conditional' : children;
