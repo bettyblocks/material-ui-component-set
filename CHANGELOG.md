@@ -1,3 +1,38 @@
+## [1.82.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.82.3...v1.82.4) (2021-01-13)
+
+
+### Bug Fixes
+
+* fixes the icon/text/outlined button disabled state ([372fd7a](https://github.com/bettyblocks/material-ui-component-set/commit/372fd7a42abc65e81fa64540bbdbc913f7aa90fe))
+
+## [1.82.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.82.2...v1.82.3) (2021-01-13)
+
+
+### Bug Fixes
+
+* fixes the app bar over the sidebar items ([06b0b84](https://github.com/bettyblocks/material-ui-component-set/commit/06b0b84dfd69ca21bc1b68be9ab90bbc21976959))
+
+## [1.82.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.82.1...v1.82.2) (2021-01-12)
+
+
+### Bug Fixes
+
+* **ART-2906:** Remove validation from password field. ([9b90a3b](https://github.com/bettyblocks/material-ui-component-set/commit/9b90a3b9bf0552e92235e50e3c20847c4009c842))
+
+## [1.82.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.82.0...v1.82.1) (2021-01-12)
+
+
+### Bug Fixes
+
+* **ART-2907:** Fix interaction name. ([1cd02fc](https://github.com/bettyblocks/material-ui-component-set/commit/1cd02fc8b442dbef176398acd0c115d27938ed16))
+
+# [1.82.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.81.1...v1.82.0) (2021-01-11)
+
+
+### Features
+
+* added stepper background, texts and connector color picker ([7760f9b](https://github.com/bettyblocks/material-ui-component-set/commit/7760f9b72ddf6179db05b14fdb6c1beebec6326f))
+
 ## [1.81.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.81.0...v1.81.1) (2021-01-07)
 
 
