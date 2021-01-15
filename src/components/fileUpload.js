@@ -202,6 +202,9 @@
           onClick={() => {
             if (file) {
               removeFileFromList(file.url);
+              if (!multiple) {
+                B.triggerEvent('onFileRemove');
+              }
             }
           }}
         >

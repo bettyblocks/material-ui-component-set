@@ -7,7 +7,7 @@
       name: 'FileUpload',
       options: [
         {
-          value: { label: ['Select files(s)...'] },
+          value: { label: ['Select image(s)...'] },
           label: 'Label',
           key: 'customModelAttribute',
           type: 'CUSTOM_MODEL_ATTRIBUTE',
@@ -155,7 +155,7 @@
         {
           label: 'Button icon',
           key: 'icon',
-          value: 'None',
+          value: 'Image',
           type: 'CUSTOM',
           configuration: {
             as: 'DROPDOWN',

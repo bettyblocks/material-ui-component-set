@@ -21,28 +21,22 @@
     const imageSourceText = useText(imageSource);
     const [imgUrl, setImgUrl] = useState(imageSourceText);
 
-    const isVideo = type === 'video' && videoUrl;
-    const isIframe = type === 'iframe' && iframeUrl;
-    const [isImage, setIsImage] = useState(type === 'img' && imgUrl);
-    const [isEmpty, setIsEmpty] = useState(!isImage && !isVideo && !isIframe);
-
     useEffect(() => {
       setImgUrl(imageSourceText);
-    }, [imageSource]);
+    }, [imageSourceText]);
 
-    useEffect(() => {
-      setIsImage(type === 'img' && imgUrl);
-    }, [type, imgUrl]);
-
-    useEffect(() => {
-      setIsEmpty(!isImage && !isVideo && !isIframe);
-    }, [isImage, isVideo, isIframe]);
-
-    B.defineFunction('SetImage', url => {
-      setIsImage(true);
+    B.defineFunction('SetCustomImage', url => {
       setImgUrl(url);
-      setIsEmpty(false);
     });
+
+    B.defineFunction('RemoveCustomImage', () => {
+      setImgUrl(imageSourceText);
+    });
+
+    const isImage = type === 'img' && imgUrl;
+    const isVideo = type === 'video' && videoUrl;
+    const isIframe = type === 'iframe' && iframeUrl;
+    const isEmpty = !isImage && !isVideo && !isIframe;
 
     const variable = imageSource && imageSource.findIndex(v => v.name) !== -1;
     const variableDev = env === 'dev' && (variable || !imgUrl);
