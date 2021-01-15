@@ -59,11 +59,15 @@
 
     const itemText = isEmpty && isDev ? 'Empty content' : primary;
 
+    let linkComponent = 'li';
+    if (linkType === 'internal' && hasLink) linkComponent = Link;
+    if (linkType === 'external' && hasExternalLink) linkComponent = 'a';
+
     return (
       <ListItem
         button={hasLink || linkToExternalVariable}
         href={hasExternalLink ? linkToExternalVariable : undefined}
-        component={linkType === 'internal' && hasLink ? Link : 'li'}
+        component={linkComponent}
         endpoint={linkType === 'internal' && hasLink ? linkTo : undefined}
         alignItems={alignItems}
         disabled={disabled}
