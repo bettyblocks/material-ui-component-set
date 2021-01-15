@@ -10,13 +10,19 @@
   }) => {
     const [modelId, setModelId] = React.useState('');
     const [model, setModel] = React.useState(null);
-    const [showValidation, setShowValidation] = React.useState(false);
+    const [showValidation, setShowValidation] = React.useState(true);
 
     return (
       <>
         <Header onClose={close} title="Configure delete record" />
         <Content>
-          <Field label="Select model">
+          <Field
+            label="Select model"
+            error={
+              showValidation && <Text color="#e82600">Model is required</Text>
+            }
+            info="Small note: When you can't select any models try to place the button inside a component where an object is available."
+          >
             <ModelSelector
               onChange={(id, modelObject) => {
                 setShowValidation(false);
@@ -28,7 +34,6 @@
               scopedModels
             />
           </Field>
-          {showValidation && <Text color="#e82600">Model is required</Text>}
         </Content>
         <Footer
           onClose={close}
@@ -39,7 +44,7 @@
                 .slice(1, str.length)
                 .replace(/[A-Z]/g, letter => `_${letter.toLowerCase()}`);
 
-            if (!modelId || !model) {
+            if (!modelId) {
               setShowValidation(true);
               return;
             }
@@ -6339,7 +6344,9 @@
                                   },
                                 },
                                 {
-                                  value: '',
+                                  ref: {
+                                    value: '#actionId',
+                                  },
                                   label: 'Action',
                                   key: 'actionId',
                                   type: 'ACTION',
