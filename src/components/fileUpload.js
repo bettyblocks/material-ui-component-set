@@ -596,7 +596,7 @@
           options: { type, imagePreviewWidth, showImagePreview },
         }) =>
           showImagePreview && type === 'grid'
-            ? `${parseInt(imagePreviewWidth, 10) - 58}px`
+            ? `calc(${imagePreviewWidth} - 60px)`
             : 'auto',
         display: 'flex',
         flexDirection: 'column',
