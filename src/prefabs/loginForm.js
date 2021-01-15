@@ -1803,7 +1803,7 @@
                         {
                           label: 'Validation pattern',
                           key: 'pattern',
-                          value: '(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}',
+                          value: '',
                           type: 'TEXT',
                           configuration: {
                             placeholder: '(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}',
@@ -1978,7 +1978,7 @@
                         {
                           label: 'Show password toggle',
                           key: 'adornment',
-                          value: false,
+                          value: true,
                           type: 'TOGGLE',
                         },
                         {
@@ -6824,7 +6824,7 @@
       type: 'Custom',
     },
     {
-      name: 'ToggleLoadingState',
+      name: 'Toggle loading state',
       sourceEvent: 'onSubmit',
       ref: {
         targetComponentId: '#btnId',
@@ -6833,7 +6833,7 @@
       type: 'Custom',
     },
     {
-      name: 'ToggleLoadingState',
+      name: 'Toggle loading state',
       sourceEvent: 'onActionDone',
       ref: {
         targetComponentId: '#btnId',
