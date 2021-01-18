@@ -31,7 +31,7 @@
     });
 
     B.defineFunction('removeCustomBackgroundImage', () => {
-      setInteractionBackground(false);
+      setInteractionBackground('');
     });
 
     const boxOptions = {
