@@ -66,10 +66,14 @@
         onClick={handleClick}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        style={{
-          backgroundImage: interactionBackground || hasBackgroundImage,
-          opacity,
-        }}
+        style={
+          interactionBackground
+            ? {
+                backgroundImage: interactionBackground,
+                opacity,
+              }
+            : { opacity }
+        }
       >
         {isEmpty ? 'Box' : children}
       </Box>
