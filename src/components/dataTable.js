@@ -304,7 +304,7 @@
       setSearch(event.target.value);
     };
 
-    const history = isDev ? {} : useHistory();
+    const history = useHistory();
 
     const handleRowClick = (endpoint, context) => {
       if (isDev) return;

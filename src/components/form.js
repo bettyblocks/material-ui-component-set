@@ -35,9 +35,9 @@
         const hasRedirect = redirect && redirect.id !== '';
         const redirectTo =
           env === 'prod' && hasRedirect && B.useEndpoint(redirect);
-        const history = isDev ? {} : useHistory();
+        const history = useHistory();
 
-        const location = isDev ? {} : useLocation();
+        const location = useLocation();
         const { actionId, modelId, variableId, objectVariableId } = formData;
         const formVariable = getActionInput(variableId);
 
@@ -104,7 +104,7 @@
           if (data) {
             B.triggerEvent('onActionSuccess', data.actionb5);
 
-            if (hasRedirect) {
+            if (!isDev && hasRedirect) {
               if (redirectTo === location.pathname) {
                 history.go(0);
               } else {
