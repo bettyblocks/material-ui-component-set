@@ -4230,7 +4230,7 @@
           key: 'maxRowWidth',
           label: 'Width',
           type: 'CUSTOM',
-          value: 'XL',
+          value: 'Full',
         },
         {
           configuration: {
