@@ -24,13 +24,19 @@
       avatar,
       avatarUrl,
       avatarOrIcon,
+      linkType,
       linkTo,
+      linkToExternal,
       dense,
     } = options;
     const { env, useText, Link } = B;
     const isDev = env === 'dev';
 
     const hasLink = linkTo && linkTo.id !== '';
+    const hasExternalLink =
+      linkType === 'external' && linkToExternal && linkToExternal.id !== '';
+    const linkToExternalVariable =
+      (linkToExternal && useText(linkToExternal)) || '';
 
     const primary = useText(primaryText);
     const secondary = useText(secondaryText);
@@ -57,11 +63,16 @@
 
     const itemText = isEmpty && isDev ? 'Empty content' : primary;
 
-    const listItem = (
+    let linkComponent = 'li';
+    if (linkType === 'internal' && hasLink) linkComponent = Link;
+    if (linkType === 'external' && hasExternalLink) linkComponent = 'a';
+
+    return (
       <ListItem
-        button={hasLink}
-        component={hasLink ? Link : 'li'}
-        endpoint={linkTo}
+        button={hasLink || linkToExternalVariable}
+        href={hasExternalLink ? linkToExternalVariable : undefined}
+        component={linkComponent}
+        endpoint={linkType === 'internal' && hasLink ? linkTo : undefined}
         alignItems={alignItems}
         disabled={disabled}
         disableGutters={disableGutters}
@@ -81,8 +92,6 @@
         />
       </ListItem>
     );
-
-    return isDev ? <div className={classes.wrapper}>{listItem}</div> : listItem;
   })(),
   styles: B => t => {
     const style = new B.Styling(t);

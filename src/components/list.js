@@ -11,8 +11,6 @@
     const isPristine = children.length === 0 && isDev;
     const { disablePadding, dense } = options;
 
-    const listArgs = { className: classes.root, disablePadding, dense };
-
     const renderData = () =>
       isEmpty ? (
         <div
@@ -25,9 +23,15 @@
         children
       );
 
-    const ListComponent = <List {...listArgs}>{renderData()}</List>;
-
-    return ListComponent;
+    return (
+      <List
+        className={classes.root}
+        disablePadding={disablePadding}
+        dense={dense}
+      >
+        {renderData()}
+      </List>
+    );
   })(),
   styles: B => t => {
     const style = new B.Styling(t);

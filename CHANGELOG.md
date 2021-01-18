@@ -1,3 +1,36 @@
+# [1.83.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.82.5...v1.83.0) (2021-01-18)
+
+
+### Bug Fixes
+
+* external link for list item ([1628185](https://github.com/bettyblocks/material-ui-component-set/commit/16281859ab0d9f13cd3bc10f257d424640a9e371))
+
+
+### Features
+
+* external link in list items ([97e1f88](https://github.com/bettyblocks/material-ui-component-set/commit/97e1f88c0d4d9fe36a6c9619491c751c79303fc5))
+
+## [1.82.5](https://github.com/bettyblocks/material-ui-component-set/compare/v1.82.4...v1.82.5) (2021-01-15)
+
+
+### Bug Fixes
+
+* dialog prefab not closing ([45dd943](https://github.com/bettyblocks/material-ui-component-set/commit/45dd943819c7d043b454aa0c2d8732bf843441af))
+
+## [1.82.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.82.3...v1.82.4) (2021-01-13)
+
+
+### Bug Fixes
+
+* fixes the icon/text/outlined button disabled state ([372fd7a](https://github.com/bettyblocks/material-ui-component-set/commit/372fd7a42abc65e81fa64540bbdbc913f7aa90fe))
+
+## [1.82.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.82.2...v1.82.3) (2021-01-13)
+
+
+### Bug Fixes
+
+* fixes the app bar over the sidebar items ([06b0b84](https://github.com/bettyblocks/material-ui-component-set/commit/06b0b84dfd69ca21bc1b68be9ab90bbc21976959))
+
 ## [1.82.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.82.1...v1.82.2) (2021-01-12)
 
 

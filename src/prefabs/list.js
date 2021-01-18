@@ -48,10 +48,47 @@
               value: 'Transparent',
             },
             {
+              type: 'CUSTOM',
+              label: 'Link to',
+              key: 'linkType',
+              value: 'internal',
+              configuration: {
+                as: 'BUTTONGROUP',
+                dataType: 'string',
+                allowedInput: [
+                  { name: 'Internal page', value: 'internal' },
+                  { name: 'External page', value: 'external' },
+                ],
+              },
+            },
+            {
               value: '',
               label: 'Page',
               key: 'linkTo',
               type: 'ENDPOINT',
+              configuration: {
+                condition: {
+                  type: 'SHOW',
+                  option: 'linkType',
+                  comparator: 'EQ',
+                  value: 'internal',
+                },
+              },
+            },
+            {
+              value: [],
+              label: 'URL',
+              key: 'linkToExternal',
+              type: 'VARIABLE',
+              configuration: {
+                placeholder: 'Starts with https:// or http://',
+                condition: {
+                  type: 'SHOW',
+                  option: 'linkType',
+                  comparator: 'EQ',
+                  value: 'external',
+                },
+              },
             },
             {
               type: 'CUSTOM',
@@ -68,11 +105,32 @@
               },
             },
             {
+              type: 'CUSTOM',
+              label: 'Visual',
+              key: 'avatarOrIcon',
+              value: 'none',
+              configuration: {
+                as: 'BUTTONGROUP',
+                dataType: 'string',
+                allowedInput: [
+                  { name: 'None', value: 'none' },
+                  { name: 'Icon', value: 'icon' },
+                  { name: 'Avatar', value: 'avatar' },
+                ],
+              },
+            },
+            {
               label: 'Icon',
               key: 'icon',
               value: 'Apartment',
               type: 'CUSTOM',
               configuration: {
+                condition: {
+                  type: 'SHOW',
+                  option: 'avatarOrIcon',
+                  comparator: 'EQ',
+                  value: 'icon',
+                },
                 as: 'DROPDOWN',
                 dataType: 'string',
                 allowedInput: [
@@ -1340,6 +1398,14 @@
               label: 'Icon color',
               key: 'iconColor',
               value: 'Black',
+              configuration: {
+                condition: {
+                  type: 'SHOW',
+                  option: 'avatarOrIcon',
+                  comparator: 'EQ',
+                  value: 'icon',
+                },
+              },
             },
             {
               value: false,
@@ -1352,6 +1418,20 @@
                   option: 'icon',
                   comparator: 'EQ',
                   value: 'None',
+                },
+              },
+            },
+            {
+              type: 'VARIABLE',
+              label: 'Avatar URL',
+              key: 'avatarUrl',
+              value: [''],
+              configuration: {
+                condition: {
+                  type: 'SHOW',
+                  option: 'avatarOrIcon',
+                  comparator: 'EQ',
+                  value: 'avatar',
                 },
               },
             },
@@ -1548,11 +1628,32 @@
               },
             },
             {
+              type: 'CUSTOM',
+              label: 'Visual',
+              key: 'avatarOrIcon',
+              value: 'none',
+              configuration: {
+                as: 'BUTTONGROUP',
+                dataType: 'string',
+                allowedInput: [
+                  { name: 'None', value: 'none' },
+                  { name: 'Icon', value: 'icon' },
+                  { name: 'Avatar', value: 'avatar' },
+                ],
+              },
+            },
+            {
               label: 'Icon',
               key: 'icon',
               value: 'Person',
               type: 'CUSTOM',
               configuration: {
+                condition: {
+                  type: 'SHOW',
+                  option: 'avatarOrIcon',
+                  comparator: 'EQ',
+                  value: 'icon',
+                },
                 as: 'DROPDOWN',
                 dataType: 'string',
                 allowedInput: [
@@ -2820,6 +2921,14 @@
               label: 'Icon color',
               key: 'iconColor',
               value: 'Black',
+              configuration: {
+                condition: {
+                  type: 'SHOW',
+                  option: 'avatarOrIcon',
+                  comparator: 'EQ',
+                  value: 'icon',
+                },
+              },
             },
             {
               value: false,
@@ -2832,6 +2941,20 @@
                   option: 'icon',
                   comparator: 'EQ',
                   value: 'None',
+                },
+              },
+            },
+            {
+              type: 'VARIABLE',
+              label: 'Avatar URL',
+              key: 'avatarUrl',
+              value: [''],
+              configuration: {
+                condition: {
+                  type: 'SHOW',
+                  option: 'avatarOrIcon',
+                  comparator: 'EQ',
+                  value: 'avatar',
                 },
               },
             },

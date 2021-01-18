@@ -305,11 +305,32 @@
                   },
                 },
                 {
+                  type: 'CUSTOM',
+                  label: 'Visual',
+                  key: 'avatarOrIcon',
+                  value: 'none',
+                  configuration: {
+                    as: 'BUTTONGROUP',
+                    dataType: 'string',
+                    allowedInput: [
+                      { name: 'None', value: 'none' },
+                      { name: 'Icon', value: 'icon' },
+                      { name: 'Avatar', value: 'avatar' },
+                    ],
+                  },
+                },
+                {
                   label: 'Icon',
                   key: 'icon',
                   value: 'None',
                   type: 'CUSTOM',
                   configuration: {
+                    condition: {
+                      type: 'SHOW',
+                      option: 'avatarOrIcon',
+                      comparator: 'EQ',
+                      value: 'icon',
+                    },
                     as: 'DROPDOWN',
                     dataType: 'string',
                     allowedInput: [
@@ -1589,6 +1610,20 @@
                       option: 'icon',
                       comparator: 'EQ',
                       value: 'None',
+                    },
+                  },
+                },
+                {
+                  type: 'VARIABLE',
+                  label: 'Avatar URL',
+                  key: 'avatarUrl',
+                  value: [''],
+                  configuration: {
+                    condition: {
+                      type: 'SHOW',
+                      option: 'avatarOrIcon',
+                      comparator: 'EQ',
+                      value: 'avatar',
                     },
                   },
                 },
