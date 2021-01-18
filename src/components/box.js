@@ -26,8 +26,12 @@
     const [opacity, setOpacity] = useState(opac);
     const [interactionBackground, setInteractionBackground] = useState('');
 
-    B.defineFunction('setBackgroundImage', url => {
-      setInteractionBackground(url);
+    B.defineFunction('setCustomBackgroundImage', url => {
+      setInteractionBackground(`url("${url}")`);
+    });
+
+    B.defineFunction('removeCustomBackgroundImage', () => {
+      setInteractionBackground(false);
     });
 
     const boxOptions = {
@@ -63,9 +67,7 @@
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         style={{
-          backgroundImage: interactionBackground
-            ? `url("${interactionBackground}")`
-            : 'auto',
+          backgroundImage: interactionBackground || hasBackgroundImage,
           opacity,
         }}
       >
