@@ -68,8 +68,6 @@
     const { kind, values: listValues } = getProperty(property) || {};
     const [currentValue, setCurrentValue] = useState(useText(defaultValue));
     const [currentLabel, setCurrentLabel] = useState('');
-    const takeAmount = useRef(50);
-
     const labelText = useText(label);
 
     const textFieldProps = {
@@ -158,7 +156,7 @@
       useAllQuery(model, {
         ...useFilter,
         skip: 0,
-        take: takeAmount.current,
+        take: 50,
         variables: {
           ...(orderBy ? { sort: { relation: sort } } : {}),
         },
@@ -296,23 +294,6 @@
       </>
     );
 
-    const filterOptions = (options, state) => {
-      const filteredOptions = [...options].filter(option => {
-        const optionLabel = option[searchProp.name]
-          ? option[searchProp.name].toString()
-          : option;
-        return optionLabel
-          .toLowerCase()
-          .includes(state.inputValue.toLowerCase());
-      });
-      if (filteredOptions.length <= 1 && takeAmount.current < data.totalCount) {
-        takeAmount.current += 50;
-        refetch({ take: takeAmount.current });
-      }
-
-      return filteredOptions;
-    };
-
     if (isDev) {
       return (
         <div className={classes.root}>
@@ -340,7 +321,6 @@
         <Autocomplete
           id="combo-box-demo"
           options={selectValues}
-          filterOptions={filterOptions}
           value={currentValue}
           PopoverProps={{
             classes: {
@@ -401,7 +381,6 @@
         freeSolo={freeSolo}
         autoSelect={freeSolo}
         options={results}
-        filterOptions={filterOptions}
         defaultValue={defaultRecord}
         getOptionLabel={renderLabel}
         getOptionSelected={(option, value) => value.id === option.id}
@@ -411,9 +390,6 @@
           },
         }}
         onInputChange={(_, inputValue) => {
-          if (!freeSolo) {
-            return;
-          }
           setSearchParam(inputValue);
         }}
         onChange={onChange}
