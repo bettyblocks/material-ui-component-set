@@ -34,6 +34,7 @@
     const [errorState, setErrorState] = useState(false);
     const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
+    const mounted = useRef(false);
     const blancoText = useText(blanco);
 
     const { kind, values = [] } = getProperty(property) || {};
@@ -79,8 +80,6 @@
           ...(orderBy ? { sort: { relation: sort } } : {}),
         },
       });
-
-    const mounted = useRef(false);
 
     useEffect(() => {
       mounted.current = true;

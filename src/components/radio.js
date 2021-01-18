@@ -61,6 +61,7 @@
     const [errorState, setErrorState] = useState(false);
     const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
+    const mounted = useRef(false);
     let radioValues = [];
 
     const {
@@ -93,8 +94,6 @@
           ...(orderBy ? { sort: { relation: sort } } : {}),
         },
       });
-
-    const mounted = useRef(false);
 
     useEffect(() => {
       mounted.current = true;
