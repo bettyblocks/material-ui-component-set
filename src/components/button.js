@@ -35,11 +35,7 @@
     const buttonContent = useText(buttonText);
 
     const [isVisible, setIsVisible] = useState(visible);
-
-    const hideButton = () => setIsVisible(false);
-    const showButton = () => setIsVisible(true);
     const [isLoading, setIsLoading] = useState(false);
-    const toggleVisibility = () => setIsVisible(s => !s);
 
     const propertyMappings = new Map(actionProperties);
     const input = Array.from(propertyMappings.keys()).reduce((acc, key) => {
@@ -59,20 +55,18 @@
           B.triggerEvent('onActionSuccess', data.actionb5);
         },
         onError(error) {
-          B.triggerEvent('onActionError', error.message);
+          B.triggerEvent('onActionError', error);
         },
       })) || [() => {}, { loading: false }];
-
-    const toggleLoading = () => setIsLoading(l => !l);
 
     useEffect(() => {
       setIsVisible(visible);
     }, [visible]);
 
-    B.defineFunction('Show', showButton);
-    B.defineFunction('Hide', hideButton);
-    B.defineFunction('ToggleVisibility', toggleVisibility);
-    B.defineFunction('ToggleLoadingState', toggleLoading);
+    B.defineFunction('Show', () => setIsVisible(true));
+    B.defineFunction('Hide', () => setIsVisible(false));
+    B.defineFunction('Show/Hide', () => setIsVisible(s => !s));
+    B.defineFunction('Toggle loading state', () => setIsLoading(s => !s));
 
     useEffect(() => {
       if (loading) {
@@ -129,7 +123,10 @@
           iconPosition === 'end' &&
           React.createElement(Icons[icon])
         }
-        onClick={actionCallback}
+        onClick={event => {
+          event.stopPropagation();
+          actionCallback();
+        }}
       >
         {isIcon &&
           React.createElement(Icons[icon === 'None' ? 'Error' : icon], {
@@ -162,31 +159,27 @@
         },
       },
       root: {
-        color: ({ options: { variant, textColor, background } }) => [
-          style.getColor(variant === 'icon' ? background : textColor),
+        color: ({ options: { background, disabled, textColor, variant } }) => [
+          !disabled
+            ? style.getColor(variant === 'icon' ? background : textColor)
+            : 'rgba(0, 0, 0, 0.26)',
           '!important',
         ],
-        '&.MuiButton-contained.Mui-disabled': {
-          color: ['rgba(0, 0, 0, 0.26)', '!important'],
-          boxShadow: ['none', '!important'],
-          backgroundColor: ['rgba(0, 0, 0, 0.12)', '!important'],
+        width: ({ options: { fullWidth, outerSpacing } }) => {
+          if (!fullWidth) return 'auto';
+          const marginRight = getSpacing(outerSpacing[1]);
+          const marginLeft = getSpacing(outerSpacing[3]);
+          return `calc(100% - ${marginRight} - ${marginLeft})`;
         },
+        marginTop: ({ options: { outerSpacing } }) =>
+          getSpacing(outerSpacing[0]),
+        marginRight: ({ options: { outerSpacing } }) =>
+          getSpacing(outerSpacing[1]),
+        marginBottom: ({ options: { outerSpacing } }) =>
+          getSpacing(outerSpacing[2]),
+        marginLeft: ({ options: { outerSpacing } }) =>
+          getSpacing(outerSpacing[3]),
         '&.MuiButton-root, &.MuiIconButton-root': {
-          width: ({ options: { fullWidth, outerSpacing } }) => {
-            if (!fullWidth) return 'auto';
-            const marginRight = getSpacing(outerSpacing[1]);
-            const marginLeft = getSpacing(outerSpacing[3]);
-            return `calc(100% - ${marginRight} - ${marginLeft})`;
-          },
-          marginTop: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[0]),
-          marginRight: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[1]),
-          marginBottom: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[2]),
-          marginLeft: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[3]),
-
           [`@media ${B.mediaMinWidth(600)}`]: {
             width: ({ options: { fullWidth, outerSpacing } }) => {
               if (!fullWidth) return 'auto';
@@ -238,14 +231,14 @@
         },
       },
       contained: {
-        backgroundColor: ({ options: { background } }) => [
-          style.getColor(background),
+        backgroundColor: ({ options: { background, disabled } }) => [
+          !disabled ? style.getColor(background) : 'rgba(0, 0, 0, 0.12)',
           '!important',
         ],
       },
       outlined: {
-        borderColor: ({ options: { background } }) => [
-          style.getColor(background),
+        borderColor: ({ options: { background, disabled } }) => [
+          !disabled ? style.getColor(background) : 'rgba(0, 0, 0, .12)',
           '!important',
         ],
       },

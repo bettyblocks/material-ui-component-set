@@ -35,7 +35,6 @@
         const rowsPerPage = parseInt(take, 10) || 50;
         const { TextField, InputAdornment } = window.MaterialUI.Core;
         const { Search } = window.MaterialUI.Icons;
-        const searchPropertyArray = [searchProperty].flat();
         const { label: searchPropertyLabel } =
           getProperty(searchProperty) || {};
 
@@ -156,10 +155,15 @@
               }, {})
             : {};
 
+        let path = [searchProperty].flat();
+        if (typeof searchProperty.id !== 'undefined') {
+          path = [searchProperty.id].flat();
+        }
+
         const searchFilter = searchProperty
-          ? searchPropertyArray.reduceRight(
+          ? path.reduceRight(
               (acc, property, index) =>
-                index === searchPropertyArray.length - 1
+                index === path.length - 1
                   ? { [property]: { matches: searchTerm } }
                   : { [property]: acc },
               {},
@@ -242,10 +246,21 @@
           }
         }, [loading]);
 
+        const handleClick = (event, context) => {
+          B.triggerEvent('OnItemClick', event, context);
+        };
+
+        const Wrapper = type === 'inline' ? 'span' : 'div';
         const Looper = results => {
           const rows = results.map(item => (
             <ModelProvider key={item.id} value={item} id={model}>
-              <B.InteractionScope>{children}</B.InteractionScope>
+              <B.InteractionScope model={model}>
+                {context => (
+                  <Wrapper onClick={event => handleClick(event, context)}>
+                    {children}
+                  </Wrapper>
+                )}
+              </B.InteractionScope>
             </ModelProvider>
           ));
 
@@ -264,7 +279,7 @@
           if (loading) return <div className={classes.skeleton} />;
 
           if (error && !displayError) {
-            B.triggerEvent('onError', error.message);
+            B.triggerEvent('onError', error);
           }
           if (error && displayError) {
             return <span>{error.message}</span>;

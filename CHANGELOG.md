@@ -1,3 +1,428 @@
+## [1.82.5](https://github.com/bettyblocks/material-ui-component-set/compare/v1.82.4...v1.82.5) (2021-01-15)
+
+
+### Bug Fixes
+
+* dialog prefab not closing ([45dd943](https://github.com/bettyblocks/material-ui-component-set/commit/45dd943819c7d043b454aa0c2d8732bf843441af))
+
+## [1.82.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.82.3...v1.82.4) (2021-01-13)
+
+
+### Bug Fixes
+
+* fixes the icon/text/outlined button disabled state ([372fd7a](https://github.com/bettyblocks/material-ui-component-set/commit/372fd7a42abc65e81fa64540bbdbc913f7aa90fe))
+
+## [1.82.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.82.2...v1.82.3) (2021-01-13)
+
+
+### Bug Fixes
+
+* fixes the app bar over the sidebar items ([06b0b84](https://github.com/bettyblocks/material-ui-component-set/commit/06b0b84dfd69ca21bc1b68be9ab90bbc21976959))
+
+## [1.82.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.82.1...v1.82.2) (2021-01-12)
+
+
+### Bug Fixes
+
+* **ART-2906:** Remove validation from password field. ([9b90a3b](https://github.com/bettyblocks/material-ui-component-set/commit/9b90a3b9bf0552e92235e50e3c20847c4009c842))
+
+## [1.82.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.82.0...v1.82.1) (2021-01-12)
+
+
+### Bug Fixes
+
+* **ART-2907:** Fix interaction name. ([1cd02fc](https://github.com/bettyblocks/material-ui-component-set/commit/1cd02fc8b442dbef176398acd0c115d27938ed16))
+
+# [1.82.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.81.1...v1.82.0) (2021-01-11)
+
+
+### Features
+
+* added stepper background, texts and connector color picker ([7760f9b](https://github.com/bettyblocks/material-ui-component-set/commit/7760f9b72ddf6179db05b14fdb6c1beebec6326f))
+
+## [1.81.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.81.0...v1.81.1) (2021-01-07)
+
+
+### Bug Fixes
+
+* revert button load interaction name to toggle loading state ([14e0edd](https://github.com/bettyblocks/material-ui-component-set/commit/14e0edd25309f50db1df9a106ee668fd93f2cd83))
+
+# [1.81.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.80.1...v1.81.0) (2021-01-07)
+
+
+### Features
+
+* adds global logout interaction ([de6cbcf](https://github.com/bettyblocks/material-ui-component-set/commit/de6cbcf2958f47e7e4578873edae239e1891b3a2))
+
+## [1.80.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.80.0...v1.80.1) (2021-01-05)
+
+
+### Bug Fixes
+
+* fix variable placeholder ([d7cb73c](https://github.com/bettyblocks/material-ui-component-set/commit/d7cb73c4dd4d450e930fee6b712b88b0c6734b57))
+
+# [1.80.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.79.0...v1.80.0) (2021-01-04)
+
+
+### Bug Fixes
+
+* conditional no longer disappears in designmode after reload ([6a927e3](https://github.com/bettyblocks/material-ui-component-set/commit/6a927e396e3a291c98d73b3eac75dce27204d74e))
+* dialog broken when dropping on canvas ([2f055d7](https://github.com/bettyblocks/material-ui-component-set/commit/2f055d7f83633e00675bb38e318c2235adde24c8))
+
+
+### Features
+
+* aligned visibility function names ([5d2dd33](https://github.com/bettyblocks/material-ui-component-set/commit/5d2dd3307840e2fdb685cfa892b0df3e82fbf652))
+
+# [1.79.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.78.0...v1.79.0) (2020-12-31)
+
+
+### Features
+
+* **ART-2902:** Add alerts to login form ([7112d89](https://github.com/bettyblocks/material-ui-component-set/commit/7112d89c6a22bc94dba4746a96df356a79879a6e))
+
+# [1.78.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.77.0...v1.78.0) (2020-12-31)
+
+
+### Features
+
+* **ART-2902:** Add alerts to update form ([6dc73e8](https://github.com/bettyblocks/material-ui-component-set/commit/6dc73e86aa0ff515e044d4c224008f1c7706dd22))
+
+# [1.77.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.76.0...v1.77.0) (2020-12-31)
+
+
+### Features
+
+* **ART-2891:** Add error&succes alerts to create prefab ([faa468a](https://github.com/bettyblocks/material-ui-component-set/commit/faa468abcd0141441ad044ae077b6b93e41e4a20))
+
+# [1.76.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.75.0...v1.76.0) (2020-12-31)
+
+
+### Features
+
+* **TA-2086:** handle error object in interactions ([ea9253c](https://github.com/bettyblocks/material-ui-component-set/commit/ea9253cd0e295d9811902fc1eab53f885387435b))
+
+# [1.75.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.74.0...v1.75.0) (2020-12-30)
+
+
+### Features
+
+* add option to display rich text (html) to Text ([20679d7](https://github.com/bettyblocks/material-ui-component-set/commit/20679d7a1163c3aeb5ba9cb42b583c49c5740c71))
+
+# [1.74.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.73.2...v1.74.0) (2020-12-29)
+
+
+### Features
+
+* login form prefab ([73f64e3](https://github.com/bettyblocks/material-ui-component-set/commit/73f64e39dcd69d2010538fc1fb2d962ac8d228ab))
+
+## [1.73.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.73.1...v1.73.2) (2020-12-23)
+
+
+### Bug Fixes
+
+* pass property id instead of complete object ([3d364e1](https://github.com/bettyblocks/material-ui-component-set/commit/3d364e1342b70d4f41dd6a7bfd27d65b0181b530))
+
+## [1.73.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.73.0...v1.73.1) (2020-12-22)
+
+
+### Bug Fixes
+
+* correct sizing for media component ([8580f12](https://github.com/bettyblocks/material-ui-component-set/commit/8580f1205ce5f26d79ceb57e8e77578076c07602))
+
+# [1.73.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.72.1...v1.73.0) (2020-12-22)
+
+
+### Bug Fixes
+
+* added height to default tab and placeholder ([5906138](https://github.com/bettyblocks/material-ui-component-set/commit/5906138026f21f9fee1522b211ff63992c836803))
+* lint errors ([dcb0cec](https://github.com/bettyblocks/material-ui-component-set/commit/dcb0ceccb1451e4643be5fec00e02d39bb0d8c0a))
+
+
+### Features
+
+* added width for tabs and tab components ([954de5c](https://github.com/bettyblocks/material-ui-component-set/commit/954de5c50357abd7bf73a6d555204e1d1b01e009))
+
+## [1.72.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.72.0...v1.72.1) (2020-12-21)
+
+
+### Bug Fixes
+
+* object variable name based on model ([356fc96](https://github.com/bettyblocks/material-ui-component-set/commit/356fc96e7ed67a75b26b25b416b247fbb64685a2))
+
+# [1.72.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.71.1...v1.72.0) (2020-12-21)
+
+
+### Bug Fixes
+
+* select prefab for list prop ([a27588c](https://github.com/bettyblocks/material-ui-component-set/commit/a27588ca523af597054ff4ddb3a8b0e9d3367836))
+
+
+### Features
+
+* create form prefab ([cbb728d](https://github.com/bettyblocks/material-ui-component-set/commit/cbb728d97eabf2870d1ee5fcad73c74b6c4761b2))
+
+## [1.71.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.71.0...v1.71.1) (2020-12-17)
+
+
+### Bug Fixes
+
+* handle rowclick in datatable with outside variables ([adfc75c](https://github.com/bettyblocks/material-ui-component-set/commit/adfc75c4f6a194d688b31041059f663223cd0dbc))
+
+# [1.71.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.70.0...v1.71.0) (2020-12-17)
+
+
+### Features
+
+* add row click context to data list and data table ([322b691](https://github.com/bettyblocks/material-ui-component-set/commit/322b6919978e01482ff38e6773121500baafbc81))
+
+# [1.70.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.69.2...v1.70.0) (2020-12-16)
+
+
+### Bug Fixes
+
+* update cli ([0a75419](https://github.com/bettyblocks/material-ui-component-set/commit/0a754199dffea01c121ab22745f9ebf5e9c63a3d))
+
+
+### Features
+
+* update form prefab ([b18f82a](https://github.com/bettyblocks/material-ui-component-set/commit/b18f82aff6da4a22e8c46c42f5eaeb110c295db6))
+
+## [1.69.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.69.1...v1.69.2) (2020-12-15)
+
+
+### Bug Fixes
+
+* ignore changelog and package.json to stop pipeline ([398b744](https://github.com/bettyblocks/material-ui-component-set/commit/398b7448557852fbe20d1566b3db271724a23506))
+
+## [1.69.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.69.0...v1.69.1) (2020-12-15)
+
+
+### Bug Fixes
+
+* also apply fix to production ci config ([bef54bf](https://github.com/bettyblocks/material-ui-component-set/commit/bef54bf88aa34623ce28b4746518a6c612b4eff4))
+
+# [1.69.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.68.1...v1.69.0) (2020-12-15)
+
+
+### Features
+
+* add commit linter ci ([0a59e28](https://github.com/bettyblocks/material-ui-component-set/commit/0a59e285b46656ce442816c0d00e668e25f2218f))
+* add github actions ([ccc8bee](https://github.com/bettyblocks/material-ui-component-set/commit/ccc8beed991d3c0ba0673a243c10c1e7d497d569))
+
+## [1.68.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.68.0...v1.68.1) (2020-12-15)
+
+
+### Bug Fixes
+
+* free solo on autocomplete keeps record id value ([4cfdd75](https://github.com/bettyblocks/material-ui-component-set/commit/4cfdd75d5e13e423ad224cf15bba62260d7a3033))
+* linter on return value ([34ceb27](https://github.com/bettyblocks/material-ui-component-set/commit/34ceb273ca8292c6dafeed387f83c0d599f58440))
+
+# [1.68.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.67.1...v1.68.0) (2020-12-14)
+
+
+### Features
+
+* make label search on data table adjustable ([3054877](https://github.com/bettyblocks/material-ui-component-set/commit/3054877d32e66e03bdb2c522d6951f95f80a53a4))
+* translate number of pages label in data table pagination ([e8463a1](https://github.com/bettyblocks/material-ui-component-set/commit/e8463a1992ae9ca3940d10d86686b46bfa7be426))
+
+## [1.67.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.67.0...v1.67.1) (2020-12-14)
+
+
+### Bug Fixes
+
+* add pattern validation to textarea ([1f5be1d](https://github.com/bettyblocks/material-ui-component-set/commit/1f5be1dc43f664a57fd7287f86a5609072ee5990))
+
+# [1.67.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.66.1...v1.67.0) (2020-12-09)
+
+
+### Features
+
+* add close and cancel interactions to dialog prefab ([c8547ba](https://github.com/bettyblocks/material-ui-component-set/commit/c8547ba7877b491daa3da48b7d1bd151e1ca700d))
+
+## [1.66.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.66.0...v1.66.1) (2020-12-08)
+
+
+### Bug Fixes
+
+* remove apiVersion v1 and make v2 the default ([23d1699](https://github.com/bettyblocks/material-ui-component-set/commit/23d16997d28a481eeaa2b8cbacc35e83003d5c63))
+* rework filter setup. the property could be an object ([200c4ca](https://github.com/bettyblocks/material-ui-component-set/commit/200c4caa2d46caadf5eb24ab2d2e083a0c4dff5c))
+
+# [1.66.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.65.6...v1.66.0) (2020-12-02)
+
+
+### Features
+
+* added blanco option to select ([af7e0d6](https://github.com/bettyblocks/material-ui-component-set/commit/af7e0d60961496a2ffd2dd9188310a321d6b0f81))
+
+## [1.65.6](https://github.com/bettyblocks/material-ui-component-set/compare/v1.65.5...v1.65.6) (2020-12-02)
+
+
+### Bug Fixes
+
+* temp undo usage of useProperty ([f75d49c](https://github.com/bettyblocks/material-ui-component-set/commit/f75d49cc71c9681ec7b4898b696386998d07bed4))
+
+## [1.65.5](https://github.com/bettyblocks/material-ui-component-set/compare/v1.65.4...v1.65.5) (2020-12-01)
+
+
+### Bug Fixes
+
+* remove previous caching fix ([#679](https://github.com/bettyblocks/material-ui-component-set/issues/679)) ([8ff7da3](https://github.com/bettyblocks/material-ui-component-set/commit/8ff7da3143c92a5a2f3049b9806eb825b01404ca))
+
+## [1.65.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.65.3...v1.65.4) (2020-12-01)
+
+
+### Bug Fixes
+
+* dataTable interaction refetch without pagination ([f1c6842](https://github.com/bettyblocks/material-ui-component-set/commit/f1c684211a274696f422de3afee48c6b0300c786))
+
+## [1.65.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.65.2...v1.65.3) (2020-12-01)
+
+
+### Bug Fixes
+
+* prevent placeholder in runtime for media and tab ([c71e948](https://github.com/bettyblocks/material-ui-component-set/commit/c71e948e76c743dbc78214801894c958b393539d))
+
+## [1.65.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.65.1...v1.65.2) (2020-12-01)
+
+
+### Bug Fixes
+
+* dataTable border radius overflow ([84d9a7d](https://github.com/bettyblocks/material-ui-component-set/commit/84d9a7d75cefbea964270a36b08a0dc489961760))
+
+## [1.65.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.65.0...v1.65.1) (2020-12-01)
+
+
+### Bug Fixes
+
+* dataTable border radius overflow ([ee09c2c](https://github.com/bettyblocks/material-ui-component-set/commit/ee09c2c913294b96670f985be4f09d0802fd204b))
+
+# [1.65.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.64.0...v1.65.0) (2020-11-26)
+
+
+### Features
+
+* date pickers have empty dates by default instead of today ([a243477](https://github.com/bettyblocks/material-ui-component-set/commit/a2434774693b42ae43afe83690b97462c0c21513))
+
+# [1.64.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.63.7...v1.64.0) (2020-11-26)
+
+
+### Features
+
+* add dutch language to date pickers ([0f92a99](https://github.com/bettyblocks/material-ui-component-set/commit/0f92a99bdb7fa3f8f75be53fe0acb7bb35f338bb))
+
+## [1.63.7](https://github.com/bettyblocks/material-ui-component-set/compare/v1.63.6...v1.63.7) (2020-11-26)
+
+
+### Bug Fixes
+
+* datatable autoload and refetch ([b230f66](https://github.com/bettyblocks/material-ui-component-set/commit/b230f664ab2269e0f29aad88755e82c1cdb354dd))
+
+## [1.63.6](https://github.com/bettyblocks/material-ui-component-set/compare/v1.63.5...v1.63.6) (2020-11-25)
+
+
+### Bug Fixes
+
+* use color setting in appbar title when link is set (fixes [#649](https://github.com/bettyblocks/material-ui-component-set/issues/649)) ([7cf11ed](https://github.com/bettyblocks/material-ui-component-set/commit/7cf11ed35201dcd848cbb5a04c46a959b19154ad))
+
+## [1.63.5](https://github.com/bettyblocks/material-ui-component-set/compare/v1.63.4...v1.63.5) (2020-11-23)
+
+
+### Bug Fixes
+
+* remove empty string from properties list ([bf08083](https://github.com/bettyblocks/material-ui-component-set/commit/bf0808352ed5cf6ae8eace98c7b797572a30eca1))
+
+## [1.63.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.63.3...v1.63.4) (2020-11-23)
+
+
+### Bug Fixes
+
+* don’t reset form state on validation error ([56c1945](https://github.com/bettyblocks/material-ui-component-set/commit/56c1945decb83e8fb3829857b9dd641d9e4ab2f8))
+
+## [1.63.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.63.2...v1.63.3) (2020-11-19)
+
+
+### Bug Fixes
+
+* changed data container filter to support global interaction ([9a7e015](https://github.com/bettyblocks/material-ui-component-set/commit/9a7e0153cd13bb8fd9d2f621c57ce1b583d4ef9c))
+
+## [1.63.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.63.1...v1.63.2) (2020-11-18)
+
+
+### Bug Fixes
+
+* responsive margin values in button ([10dd3b1](https://github.com/bettyblocks/material-ui-component-set/commit/10dd3b1b7931bb0b2eb2f1d4a376be42131c5c87))
+
+## [1.63.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.63.0...v1.63.1) (2020-11-18)
+
+
+### Bug Fixes
+
+* pattern validation number input ([4079372](https://github.com/bettyblocks/material-ui-component-set/commit/4079372214b8c975962c651e05f68628905f3708))
+
+# [1.63.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.62.1...v1.63.0) (2020-11-18)
+
+
+### Features
+
+* add logo width to appbar ([b7a5a8c](https://github.com/bettyblocks/material-ui-component-set/commit/b7a5a8cc31f4d5911e28710182479a98a7da4033))
+* add logo width to appbar ([532693b](https://github.com/bettyblocks/material-ui-component-set/commit/532693b6fa548541174dc19bad1f42c8ba998f5c))
+* add logo width to appbar ([ceffe0d](https://github.com/bettyblocks/material-ui-component-set/commit/ceffe0d2dab1d745e95647adcdc4be330b6db471))
+* add logo width to appbar ([14e893a](https://github.com/bettyblocks/material-ui-component-set/commit/14e893a75cc9fb717600adafdb35c315c588c689))
+
+## [1.62.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.62.0...v1.62.1) (2020-11-18)
+
+
+### Bug Fixes
+
+* prevent form from sending data api request without filter ([b10b89f](https://github.com/bettyblocks/material-ui-component-set/commit/b10b89f6b3bf15015e8206ffcc8ab75a845614ae))
+
+# [1.62.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.61.0...v1.62.0) (2020-11-17)
+
+
+### Features
+
+* add background position to box ([77773cd](https://github.com/bettyblocks/material-ui-component-set/commit/77773cdffeae7b500490bcced3d875e0324daa14))
+
+# [1.61.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.60.0...v1.61.0) (2020-11-17)
+
+
+### Features
+
+* add height option to Appbar ([7a7e9e3](https://github.com/bettyblocks/material-ui-component-set/commit/7a7e9e31ac600a21c375fe548d57fcab6ef19a8f))
+
+# [1.60.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.59.1...v1.60.0) (2020-11-17)
+
+
+### Features
+
+* add link and badge to icon component ([bfe1806](https://github.com/bettyblocks/material-ui-component-set/commit/bfe180675b36a10e1d997d490a9879e9e2a3451d))
+
+## [1.59.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.59.0...v1.59.1) (2020-11-16)
+
+
+### Bug Fixes
+
+* changed z-index of snackbar to be lower than toolbar ([3fbda8e](https://github.com/bettyblocks/material-ui-component-set/commit/3fbda8e00be5b8b875e92afa690b52490bd32a02))
+
+# [1.59.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.58.2...v1.59.0) (2020-11-16)
+
+
+### Bug Fixes
+
+* apply either filter or currentrecord ([4667f55](https://github.com/bettyblocks/material-ui-component-set/commit/4667f552da9a302bf935ed5ce5f4ac7d06b2b401))
+* change filter behavior ([59e30b4](https://github.com/bettyblocks/material-ui-component-set/commit/59e30b4fb7c8437082921f6f967c98a530aa1ddd))
+* only fetch data when currentRecord or filter ([252789c](https://github.com/bettyblocks/material-ui-component-set/commit/252789c0f6170d467c9fb32045ec0d99503005f1))
+* only fetch record when model is set ([f4e6c09](https://github.com/bettyblocks/material-ui-component-set/commit/f4e6c096eb069b853f45e2a6048a1122e6ba32d6))
+* trigger needs to be in use effect ([8acf2ca](https://github.com/bettyblocks/material-ui-component-set/commit/8acf2ca244ee872d94a4fd0fa7af87fefc1ff82b))
+
+
+### Features
+
+* add currentRecord feature to form ([c09f533](https://github.com/bettyblocks/material-ui-component-set/commit/c09f5331b61b46c45e4bb90feb0f6ea5afef2207))
+* add interaction/trigger to auto submit form ([16be2bc](https://github.com/bettyblocks/material-ui-component-set/commit/16be2bc9bdee73d4016b277fcafcecb61b09b106))
+* add Refetch interaction to form component ([c83ac03](https://github.com/bettyblocks/material-ui-component-set/commit/c83ac03234cb7b7b60d6376635775f242f204d8d))
+
 ## [1.58.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.58.1...v1.58.2) (2020-11-12)
 
 

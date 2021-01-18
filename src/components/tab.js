@@ -24,11 +24,14 @@
 
     B.defineFunction('Select', doSetTab);
 
-    const emptyBox = (
-      <Box className={classes.empty} p={3}>
-        Tab
-      </Box>
-    );
+    const EmptyBox = () => {
+      if (!isDev) return null;
+      return (
+        <Box className={classes.empty} p={3}>
+          Tab
+        </Box>
+      );
+    };
 
     const TabPanel = (isActive || !isDev) && (
       <Typography
@@ -36,8 +39,9 @@
         role="tabpanel"
         hidden={!isActive}
         aria-labelledby="tabs"
+        classes={{ root: classes.root }}
       >
-        {children.length === 0 ? emptyBox : children}
+        {children.length === 0 ? <EmptyBox /> : children}
       </Typography>
     );
 
@@ -87,22 +91,51 @@
       disableRipple,
     ]);
 
-    return isDev ? <div>{TabPanel}</div> : TabPanel;
+    return isDev ? <div className={classes.wrapper}>{TabPanel}</div> : TabPanel;
   })(),
-  styles: () => () => ({
-    empty: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      minHeight: '4rem',
-      fontSize: '0.75rem',
-      color: '#262A3A',
-      textTransform: 'uppercase',
-      boxSizing: 'border-box',
-      borderWidth: '0.0625rem',
-      borderColor: '#AFB5C8',
-      borderStyle: 'dashed',
-      backgroundColor: '#F0F1F5',
-    },
-  }),
+  styles: B => () => {
+    const { env } = B;
+    const isDev = env === 'dev';
+
+    return {
+      wrapper: {
+        height: config => {
+          const {
+            options: { height },
+            parent: { index, value },
+          } = config;
+
+          return index === value ? height : 0;
+        },
+        width: config => {
+          const {
+            options: { width },
+            parent: { index, value },
+          } = config;
+
+          return index === value ? width : 0;
+        },
+      },
+      root: {
+        height: ({ options: { height } }) => (isDev ? '100%' : height),
+        width: ({ options: { width } }) => (isDev ? '100%' : width),
+      },
+      empty: {
+        height: '100%',
+        width: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: '4rem',
+        fontSize: '0.75rem',
+        color: '#262A3A',
+        textTransform: 'uppercase',
+        boxSizing: 'border-box',
+        borderWidth: '0.0625rem',
+        borderColor: '#AFB5C8',
+        borderStyle: 'dashed',
+        backgroundColor: '#F0F1F5',
+      },
+    };
+  },
 }))();

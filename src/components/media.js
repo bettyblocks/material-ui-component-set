@@ -13,8 +13,6 @@
       iframeSource,
       imgAlt,
       title,
-      width,
-      height,
     } = options;
 
     const titleText = useText(title);
@@ -71,20 +69,21 @@
       }
     };
 
-    let MediaComponent = () => (
-      <div className={[(isEmpty || variableDev) && classes.empty]}>
-        <div className={classes.placeholderWrapper}>
-          <Placeholder />
-          {variable && <span>{imgUrl}</span>}
+    let MediaComponent = () => {
+      if (!isDev) return null;
+      return (
+        <div className={[(isEmpty || variableDev) && classes.empty]}>
+          <div className={classes.placeholderWrapper}>
+            <Placeholder />
+            {variable && <span>{imgUrl}</span>}
+          </div>
         </div>
-      </div>
-    );
+      );
+    };
 
     if (isImage && !variableDev) {
       MediaComponent = () => (
         <img
-          width={width}
-          height={height}
           className={classes.media}
           src={imgUrl}
           title={titleText}
@@ -95,8 +94,6 @@
       MediaComponent = () => (
         // eslint-disable-next-line jsx-a11y/media-has-caption
         <video
-          width={width}
-          height={height}
           className={classes.media}
           src={videoUrl}
           title={titleText}
@@ -105,21 +102,17 @@
       );
     } else if (isIframe) {
       MediaComponent = () => (
-        <iframe
-          width={width}
-          height={height}
-          className={classes.media}
-          title={titleText}
-          src={iframeUrl}
-        />
+        <iframe className={classes.media} title={titleText} src={iframeUrl} />
       );
     }
 
     return (
       <div
-        className={[classes.outerSpacing, isDev ? classes.devWrapper : ''].join(
-          ' ',
-        )}
+        className={[
+          classes.outerSpacing,
+          isDev ? classes.devWrapper : '',
+          !isEmpty && !variable ? classes.hasContent : '',
+        ].join(' ')}
       >
         <MediaComponent />
       </div>
@@ -135,6 +128,10 @@
         '& > *': {
           pointerEvents: 'none',
         },
+      },
+      hasContent: {
+        width: 'fit-content',
+        height: 'fit-content',
       },
       empty: {
         position: 'relative',
@@ -173,7 +170,10 @@
           fill: '#666D85',
         },
       },
-
+      media: {
+        width: ({ options: { width } }) => width,
+        height: ({ options: { height } }) => height,
+      },
       outerSpacing: {
         marginTop: ({ options: { outerSpacing } }) =>
           getSpacing(outerSpacing[0]),

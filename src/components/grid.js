@@ -129,7 +129,7 @@
           }
 
           if (error && !displayError) {
-            B.triggerEvent('onError', error.message);
+            B.triggerEvent('onError', error);
           }
           if (error && displayError) {
             return <span>{error.message}</span>;
@@ -158,13 +158,9 @@
     const ConditionalGrid = <Hidden only={only}>{GridComp}</Hidden>;
     const RuntimeCmp = isVisible ? ConditionalGrid : <></>;
 
-    B.defineFunction('Show', () => {
-      setIsVisible(true);
-    });
-
-    B.defineFunction('Hide', () => {
-      setIsVisible(false);
-    });
+    B.defineFunction('Show', () => setIsVisible(true));
+    B.defineFunction('Hide', () => setIsVisible(false));
+    B.defineFunction('Show/Hide', () => setIsVisible(s => !s));
 
     return isDev ? (
       <div

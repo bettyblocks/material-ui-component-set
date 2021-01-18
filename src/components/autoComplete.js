@@ -67,6 +67,8 @@
       customModelAttribute || {};
     const { kind, values: listValues } = getProperty(property) || {};
     const [currentValue, setCurrentValue] = useState(useText(defaultValue));
+    const [currentLabel, setCurrentLabel] = useState('');
+
     const labelText = useText(label);
 
     const textFieldProps = {
@@ -201,7 +203,7 @@
     }, [loading]);
 
     if (err && !displayError) {
-      B.triggerEvent('onError', err.message);
+      B.triggerEvent('onError', err);
     }
 
     const { results } = data || {};
@@ -216,10 +218,22 @@
     const onChange = (_, newValue) => {
       if (!valueProp || !newValue) {
         setCurrentValue(newValue);
+        setCurrentLabel(newValue);
         B.triggerEvent('OnChange');
         return;
       }
+
       let newCurrentValue = newValue[valueProp.name] || newValue;
+
+      if (typeof newValue === 'string') {
+        if (currentLabel === newValue) {
+          newCurrentValue = currentValue;
+        }
+      } else if (searchProp) {
+        const newLabelValue = newValue[searchProp.name];
+        setCurrentLabel(newLabelValue);
+      }
+
       if (multiple) {
         newCurrentValue = newValue.map(rec => rec[valueProp.name] || rec);
       }
@@ -227,8 +241,8 @@
       B.triggerEvent('OnChange');
     };
 
-    const getDefaultValue = records => {
-      if (!currentValue) {
+    const getDefaultValue = React.useCallback(() => {
+      if (!currentValue || !results) {
         return multiple ? [] : null;
       }
       let currentRecordsKeys = currentValue;
@@ -237,7 +251,7 @@
           ? currentValue.toString().split(',')
           : [currentValue];
       }
-      const currentRecords = records.reduce((acc, cv) => {
+      const currentRecords = results.reduce((acc, cv) => {
         const searchStr = cv[valueProp.name].toString();
         const search = cv[valueProp.name];
         if (
@@ -251,7 +265,14 @@
 
       const singleRecord = currentRecords[0] ? { ...currentRecords[0] } : null;
       return multiple ? currentRecords : singleRecord;
-    };
+    }, [results]);
+
+    const defaultRecord = getDefaultValue();
+    useEffect(() => {
+      if (!multiple && defaultRecord && searchProp) {
+        setCurrentLabel(defaultRecord[searchProp.name]);
+      }
+    }, [defaultRecord]);
 
     const renderLabel = option => {
       const optionLabel = option[searchProp.name];
@@ -360,7 +381,7 @@
         freeSolo={freeSolo}
         autoSelect={freeSolo}
         options={results}
-        defaultValue={getDefaultValue(results)}
+        defaultValue={defaultRecord}
         getOptionLabel={renderLabel}
         getOptionSelected={(option, value) => value.id === option.id}
         PopoverProps={{

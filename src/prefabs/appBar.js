@@ -19,6 +19,15 @@
           type: 'COLOR',
         },
         {
+          type: 'SIZE',
+          label: 'Height',
+          key: 'height',
+          value: '60px',
+          configuration: {
+            as: 'UNIT',
+          },
+        },
+        {
           label: 'Position',
           key: 'position',
           value: 'static',
@@ -62,6 +71,15 @@
           key: 'logoSource',
           value: [],
           type: 'VARIABLE',
+        },
+        {
+          type: 'SIZE',
+          label: 'Logo Width',
+          key: 'logoWidth',
+          value: '150px',
+          configuration: {
+            as: 'UNIT',
+          },
         },
         {
           label: 'Align items',

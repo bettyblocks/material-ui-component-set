@@ -47,6 +47,7 @@
     const { useText, env, getCustomModelAttribute } = B;
     const isDev = env === 'dev';
     const isNumberType = type === 'number';
+    const isPasswordType = type === 'password';
     const [isDisabled, setIsDisabled] = useState(disabled);
     const [showPassword, togglePassword] = useState(false);
     const [errorState, setErrorState] = useState(error);
@@ -72,6 +73,9 @@
     const validMaxlength = maxlength || null;
 
     const validationMessage = validityObject => {
+      if (validityObject.customError && validationPatternMismatch) {
+        return useText(validationPatternMismatch);
+      }
       if (validityObject.valid) {
         return '';
       }
@@ -107,31 +111,48 @@
       }
     };
 
-    const changeHandler = event => {
-      const {
-        target: { value: eventValue, validity },
-      } = event;
-
-      let numberValue;
-      if (isNumberType) {
-        numberValue = parseInt(eventValue, 10);
+    const customPatternValidation = target => {
+      const { value: eventValue, validity } = target;
+      if (!pattern) {
+        return validity;
       }
+      const patternRegex = RegExp(`^${pattern}$`);
+      const isValid = patternRegex.test(eventValue);
+      target.setCustomValidity(isValid ? '' : 'Invalid field.');
+      return {
+        ...validity,
+        valid: isValid,
+        patternMismatch: !isValid,
+      };
+    };
+
+    const changeHandler = event => {
+      const { target } = event;
+      let { validity: validation } = target;
+      const { value: eventValue } = target;
+
+      if (isNumberType || multiline) {
+        validation = customPatternValidation(target);
+      }
+      const numberValue =
+        isNumberType && eventValue && parseInt(eventValue, 10);
 
       if (afterFirstInvalidation) {
-        handleValidation(validity);
+        handleValidation(validation);
       }
       setCurrentValue(isNumberType ? numberValue : eventValue);
     };
 
     const blurHandler = event => {
-      const {
-        target: {
-          validity,
-          validity: { valid: isValid },
-        },
-      } = event;
-      setAfterFirstInvalidation(!isValid);
-      handleValidation(validity);
+      const { target } = event;
+      let { validity: validation } = target;
+
+      if (isNumberType || multiline) {
+        validation = customPatternValidation(target);
+      }
+
+      setAfterFirstInvalidation(!validation.valid);
+      handleValidation(validation);
     };
 
     const invalidHandler = event => {
@@ -165,10 +186,11 @@
     }
 
     const passwordIcon = showPassword ? 'Visibility' : 'VisibilityOff';
-    const inputIcon = type === 'password' ? passwordIcon : adornmentIcon;
+    const inputIcon = isPasswordType ? passwordIcon : adornmentIcon;
     const hasIcon = inputIcon && inputIcon !== 'none';
-    const hasAdornment =
-      type === 'password' ? adornment && hasIcon : adornment || hasIcon;
+    const hasAdornment = isPasswordType
+      ? adornment && hasIcon
+      : adornment || hasIcon;
 
     const IconCmp =
       hasIcon &&
@@ -180,7 +202,7 @@
       edge: adornmentPosition,
       tabIndex: isDev && -1,
     };
-    if (type === 'password') {
+    if (isPasswordType) {
       iconButtonOptions.ariaLabel = 'toggle password visibility';
       iconButtonOptions.onClick = handleClickShowPassword;
       iconButtonOptions.onMouseDown = handleMouseDownPassword;

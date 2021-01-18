@@ -11,7 +11,6 @@
       GetMe,
       useText,
       ModelProvider,
-      useEndpoint,
       useAllQuery,
       useFilter,
     } = B;
@@ -41,6 +40,8 @@
       orderProperty,
       sortOrder,
       labelRowsPerPage,
+      labelNumberOfPages,
+      labelSearchOn,
       square,
       elevation,
       variant,
@@ -59,6 +60,7 @@
     const [page, setPage] = useState(0);
     const takeNum = parseInt(take, 10);
     const initialRender = useRef(true);
+    const skipAppend = useRef(false);
     const [skip, setSkip] = useState(0);
     const loadOnScroll = pagination === 'never' && autoLoadOnScroll;
     const autoLoadTakeAmountNum = parseInt(autoLoadTakeAmount, 10);
@@ -66,7 +68,6 @@
     const [search, setSearch] = useState('');
     const [searchTerm, setSearchTerm] = useState('');
     const [showPagination, setShowPagination] = useState(false);
-    const searchPropertyArray = [searchProperty].flat();
     const { label: searchPropertyLabel = '{property}' } =
       getProperty(searchProperty) || {};
     const [orderBy, setOrderBy] = React.useState({
@@ -131,10 +132,15 @@
       }, {});
     };
 
+    let path = [searchProperty].flat();
+    if (typeof searchProperty.id !== 'undefined') {
+      path = [searchProperty.id].flat();
+    }
+
     const searchFilter = searchProperty
-      ? searchPropertyArray.reduceRight(
+      ? path.reduceRight(
           (acc, property, index) =>
-            index === searchPropertyArray.length - 1
+            index === path.length - 1
               ? { [property]: { matches: searchTerm } }
               : { [property]: acc },
           {},
@@ -145,6 +151,7 @@
       searchProperty && searchTerm !== ''
         ? deepMerge(filter, searchFilter)
         : filter;
+
     const where = useFilter(newFilter);
 
     const { loading, error, data, refetch } =
@@ -165,10 +172,11 @@
         }
         if (searchTerm !== previousSearchTerm) {
           setSkip(0);
+          setInitialTimesFetched(0);
           setPreviousSearchTerm(searchTerm);
           setNewSearch(true);
         } else {
-          if (newSearch) {
+          if (newSearch || (!autoLoadOnScroll && skipAppend.current)) {
             setResults(data.results);
           } else {
             setResults(prev => [...prev, ...data.results]);
@@ -176,6 +184,7 @@
           fetchingNextSet.current = false;
           setNewSearch(false);
         }
+        skipAppend.current = false;
         setTotalCount(data.totalCount);
       }
     }, [data, searchTerm]);
@@ -190,7 +199,26 @@
       };
     }, [search]);
 
-    B.defineFunction('Refetch', () => refetch());
+    function clearResults() {
+      setInitialTimesFetched(0);
+      setResults([]);
+      setTimeout(() => {
+        setSkip(0);
+      }, 0);
+    }
+
+    B.defineFunction('Refetch', () => {
+      if (pagination === 'never') {
+        clearResults();
+        skipAppend.current = true;
+        setTimeout(() => {
+          refetch();
+        }, 0);
+      } else {
+        refetch();
+      }
+    });
+
     B.defineFunction('SetSearchValue', event => {
       setSearch(event.target.value);
     });
@@ -242,7 +270,7 @@
     }, [loading]);
 
     if (error && !displayError) {
-      B.triggerEvent('onError', error.message);
+      B.triggerEvent('onError', error);
     }
 
     if (results.length > 0) {
@@ -276,36 +304,13 @@
       setSearch(event.target.value);
     };
 
-    const isFlatValue = value =>
-      typeof value === 'string' ||
-      typeof value === 'number' ||
-      typeof value === 'boolean';
-
     const history = isDev ? {} : useHistory();
 
-    const handleRowClick = rowValue => {
+    const handleRowClick = (endpoint, context) => {
       if (isDev) return;
-      B.triggerEvent('OnRowClick', rowValue);
+      B.triggerEvent('OnRowClick', endpoint, context);
       if (hasLink) {
-        const { id, params } = linkTo;
-        const newParams = Object.entries(params).reduce((acc, cv) => {
-          const key = cv[0];
-          const value = cv[1];
-          if (isFlatValue(value[0])) {
-            acc[key] = value;
-          } else {
-            const propId = value[0].id;
-            const property = getProperty(propId).name;
-            acc[key] = [rowValue[property].toString()];
-          }
-          return acc;
-        }, {});
-
-        const endpointParams = {
-          id,
-          params: newParams,
-        };
-        history.push(useEndpoint(endpointParams));
+        history.push(endpoint);
       }
     };
 
@@ -341,14 +346,23 @@
 
       const rows = results.map(value => (
         <ModelProvider value={value} id={model}>
-          <TableRow
-            key={value[0]}
-            classes={{ root: classes.bodyRow }}
-            onClick={() => handleRowClick(value)}
-            data-id={value.id}
-          >
-            <B.InteractionScope>{children}</B.InteractionScope>
-          </TableRow>
+          <B.InteractionScope model={model}>
+            {context => (
+              <TableRow
+                key={value[0]}
+                classes={{ root: classes.bodyRow }}
+                data-id={value.id}
+              >
+                <Children
+                  linkTo={linkTo}
+                  handleRowClick={handleRowClick}
+                  context={context}
+                >
+                  {children}
+                </Children>
+              </TableRow>
+            )}
+          </B.InteractionScope>
         </ModelProvider>
       ));
 
@@ -360,19 +374,21 @@
     };
 
     const renderTableContent = () => {
-      let tableContent = Array.from(Array(amountOfRows).keys()).map(idx => (
-        <TableRow key={idx} classes={{ root: classes.bodyRow }}>
-          <B.InteractionScope>{children}</B.InteractionScope>
-        </TableRow>
-      ));
       if (isDev) {
-        tableContent = (
+        return (
           <TableRow classes={{ root: classes.bodyRow }}>{children}</TableRow>
         );
-      } else if (model) {
-        tableContent = tableContentModel();
       }
-      return tableContent;
+
+      if (model) {
+        return tableContentModel();
+      }
+
+      return Array.from(Array(amountOfRows).keys()).map(idx => (
+        <TableRow key={idx} classes={{ root: classes.bodyRow }}>
+          {children}
+        </TableRow>
+      ));
     };
 
     useEffect(() => {
@@ -405,6 +421,29 @@
             }
           };
           tableContainerElement.addEventListener('scroll', scrollEvent);
+        }
+      }
+    }, [results]);
+
+    useEffect(() => {
+      if (pagination === 'never') {
+        const dataResults = data && data.results;
+        const needsCacheFix =
+          results.length === 0 && dataResults && dataResults.length > 0;
+
+        const setExistingData = () => {
+          setResults(dataResults);
+          fetchingNextSet.current = false;
+        };
+
+        if (needsCacheFix && !autoLoadOnScroll) {
+          setExistingData();
+        }
+        if (needsCacheFix && autoLoadOnScroll && skip === 0) {
+          setExistingData();
+        }
+        if (needsCacheFix && autoLoadOnScroll && skip !== 0) {
+          setSkip(0);
         }
       }
     }, [results]);
@@ -448,8 +487,12 @@
       if (showPagination) {
         amount += paginationRef.current.clientHeight;
       }
-      if (amount > 0) {
-        const style = { height: `calc(100% - ${amount}px)` };
+      let style;
+      if (amount > 0 || !hasToolbar) {
+        style = {
+          height: `calc(100% - ${amount}px)`,
+          borderRadius: `${hasToolbar ? '0rem' : '0.1875rem'}`,
+        };
         setStylesProps({ style });
       } else {
         setStylesProps(null);
@@ -470,7 +513,9 @@
               {searchProperty && !hideSearch && (
                 <TextField
                   classes={{ root: classes.searchField }}
-                  placeholder={`Search on ${searchPropertyLabel}`}
+                  placeholder={`${useText(
+                    labelSearchOn,
+                  )} ${searchPropertyLabel}`}
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
@@ -510,6 +555,9 @@
               classes={{ root: classes.pagination }}
               rowsPerPageOptions={[5, 10, 25, 50, 100]}
               labelRowsPerPage={useText(labelRowsPerPage)}
+              labelDisplayedRows={({ from, to, count }) =>
+                `${from}-${to} ${useText(labelNumberOfPages)} ${count}`
+              }
               component="div"
               count={model ? totalCount : takeNum}
               rowsPerPage={model ? rowsPerPage : takeNum}
@@ -588,7 +636,11 @@
           style.getColor(backgroundHeader),
           '!important',
         ],
-        '& th': {
+        '& div': {
+          borderBottom: `${isDev ? '0.0625rem solid #cccccc' : 0}`,
+        },
+        '& th, & div[role="columnheader"]': {
+          borderBottom: `${isDev ? 0 : '0.0625rem solid #cccccc!important'}`,
           backgroundColor: ({ options: { backgroundHeader } }) => [
             style.getColor(backgroundHeader),
             '!important',
@@ -608,6 +660,7 @@
         pointerEvents: isDev && 'none',
       },
       pagination: {
+        borderRadius: '0.1875rem',
         pointerEvents: isDev && 'none',
         backgroundColor: ({ options: { background } }) => [
           style.getColor(background),

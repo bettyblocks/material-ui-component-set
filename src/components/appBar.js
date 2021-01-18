@@ -37,7 +37,7 @@
     };
 
     const logo = useText(logoSource);
-    const LogoCmp = logo && <img src={logo} width="100" alt="" />;
+    const LogoCmp = logo && <img src={logo} className={classes.logo} alt="" />;
     const LogoComponent = endpoint.id ? (
       // eslint-disable-next-line jsx-a11y/anchor-is-valid
       <Link endpoint={endpoint}>{LogoCmp}</Link>
@@ -96,6 +96,7 @@
     const style = new B.Styling(t);
     return {
       root: {
+        height: ({ options: { height } }) => height,
         backgroundColor: ({ options: { backgroundColor } }) => [
           style.getColor(backgroundColor),
           '!important',
@@ -105,6 +106,9 @@
           '!important',
         ],
         zIndex: '1201 !important',
+      },
+      logo: {
+        width: ({ options: { logoWidth } }) => logoWidth,
       },
       toolbar: {
         flexDirection: ({ options: { alignItems } }) =>
@@ -116,6 +120,10 @@
       },
       title: {
         textDecoration: 'none',
+        color: ({ options: { color } }) => [
+          style.getColor(color),
+          '!important',
+        ],
       },
       spacer: {
         flexGrow: 1,
