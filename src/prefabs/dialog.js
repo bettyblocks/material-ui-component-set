@@ -5,7 +5,7 @@
   actions: [],
   interactions: [
     {
-      name: 'CloseDialog',
+      name: 'Hide',
       sourceEvent: 'Click',
       ref: {
         targetComponentId: '#dialog',
@@ -14,7 +14,7 @@
       type: 'Custom',
     },
     {
-      name: 'CloseDialog',
+      name: 'Hide',
       sourceEvent: 'Click',
       ref: {
         targetComponentId: '#dialog',
