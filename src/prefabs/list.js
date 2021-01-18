@@ -108,7 +108,7 @@
               type: 'CUSTOM',
               label: 'Visual',
               key: 'avatarOrIcon',
-              value: 'none',
+              value: 'icon',
               configuration: {
                 as: 'BUTTONGROUP',
                 dataType: 'string',
@@ -1631,7 +1631,7 @@
               type: 'CUSTOM',
               label: 'Visual',
               key: 'avatarOrIcon',
-              value: 'none',
+              value: 'icon',
               configuration: {
                 as: 'BUTTONGROUP',
                 dataType: 'string',
