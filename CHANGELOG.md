@@ -1,3 +1,15 @@
+# [1.84.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.83.0...v1.84.0) (2021-01-19)
+
+
+### Bug Fixes
+
+* set row width to full ([a535de1](https://github.com/bettyblocks/material-ui-component-set/commit/a535de19b21fb0cd9153bb47540250658a81e7b7))
+
+
+### Features
+
+* add page prefab with app bar ([ef0c405](https://github.com/bettyblocks/material-ui-component-set/commit/ef0c405c90c00515abd4a27ba61c16ced83586d2))
+
 # [1.83.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.82.5...v1.83.0) (2021-01-18)
 
 
