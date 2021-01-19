@@ -225,6 +225,12 @@
               key: 'innerSpacing',
               type: 'SIZES',
             },
+            {
+              type: 'TOGGLE',
+              label: 'Allow overflow',
+              key: 'overflow',
+              value: false,
+            },
           ],
           descendants: [],
         },
