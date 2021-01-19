@@ -27,10 +27,18 @@
       orderBy,
       blanco,
     } = options;
+    const {
+      env,
+      defineFunction = () => {},
+      getCustomModelAttribute,
+      getProperty,
+      triggerEvent = () => {},
+      useAllQuery,
+      useText,
+    } = B;
     const { TextField, MenuItem } = window.MaterialUI.Core;
     const displayError = showError === 'built-in';
-    const isDev = B.env === 'dev';
-    const { useAllQuery, getProperty, useText, getCustomModelAttribute } = B;
+    const isDev = env === 'dev';
     const [errorState, setErrorState] = useState(false);
     const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
@@ -90,32 +98,30 @@
 
     useEffect(() => {
       if (mounted.current && loading) {
-        B.triggerEvent('onLoad', loading);
+        triggerEvent('onLoad', loading);
       }
     }, [loading]);
 
     if (error && !displayError) {
-      B.triggerEvent('onError', error);
+      triggerEvent('onError', error);
     }
 
     const { results } = data || {};
 
     if (results) {
       if (results.length > 0) {
-        B.triggerEvent('onSuccess', results);
+        triggerEvent('onSuccess', results);
       } else {
-        B.triggerEvent('onNoResults');
+        triggerEvent('onNoResults');
       }
     }
 
-    B.defineFunction('Refetch', () => refetch());
+    defineFunction('Refetch', () => refetch());
 
     const handleValidation = () => {
       const hasError = required && !value;
       setErrorState(hasError);
-      const message = hasError
-        ? useText(validationValueMissing)
-        : useText(helperText);
+      const message = useText(hasError ? validationValueMissing : helperText);
       setHelper(message);
     };
 
@@ -211,7 +217,8 @@
     return isDev ? <div className={classes.root}>{SelectCmp}</div> : SelectCmp;
   })(),
   styles: B => t => {
-    const style = new B.Styling(t);
+    const { Styling } = B;
+    const style = new Styling(t);
     return {
       root: {
         display: ({ options: { fullWidth } }) =>
