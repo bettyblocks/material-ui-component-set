@@ -5,6 +5,7 @@
   orientation: 'VERTICAL',
   jsx: (() => {
     const { env, useText } = B;
+    const { Link } = window.MaterialUI.Core;
     const isDev = env === 'dev';
     const {
       type,
@@ -13,6 +14,11 @@
       iframeSource,
       imgAlt,
       title,
+      width,
+      height,
+      linkTo,
+      linkToExternal,
+      linkType,
     } = options;
 
     const titleText = useText(title);
@@ -27,6 +33,15 @@
 
     const variable = imageSource && imageSource.findIndex(v => v.name) !== -1;
     const variableDev = env === 'dev' && (variable || !imgUrl);
+
+    const hasLink = linkTo && linkTo.id !== '';
+    const hasExternalLink = linkToExternal && linkToExternal.id !== '';
+    const anyLink = hasLink || hasExternalLink;
+    const linkToExternalText = useText(linkToExternal);
+    const href =
+      linkType === 'external' && hasExternalLink
+        ? linkToExternalText
+        : undefined;
 
     const ImgPlaceholder = () => (
       <svg className={classes.placeholder} width={86} height={48}>
@@ -81,9 +96,28 @@
       );
     };
 
-    if (isImage && !variableDev) {
+    if (isImage && !variableDev && anyLink) {
+      MediaComponent = () => (
+        <Link
+          href={href}
+          component={linkType === 'internal' && hasLink ? B.Link : undefined}
+          endpoint={linkType === 'internal' && hasLink ? linkTo : undefined}
+        >
+          <img
+            width={width}
+            height={height}
+            className={classes.media}
+            src={imgUrl}
+            title={titleText}
+            alt={imgAlt}
+          />
+        </Link>
+      );
+    } else if (isImage && !variableDev && !anyLink) {
       MediaComponent = () => (
         <img
+          width={width}
+          height={height}
           className={classes.media}
           src={imgUrl}
           title={titleText}
@@ -94,6 +128,8 @@
       MediaComponent = () => (
         // eslint-disable-next-line jsx-a11y/media-has-caption
         <video
+          width={width}
+          height={height}
           className={classes.media}
           src={videoUrl}
           title={titleText}
@@ -102,17 +138,21 @@
       );
     } else if (isIframe) {
       MediaComponent = () => (
-        <iframe className={classes.media} title={titleText} src={iframeUrl} />
+        <iframe
+          width={width}
+          height={height}
+          className={classes.media}
+          title={titleText}
+          src={iframeUrl}
+        />
       );
     }
 
     return (
       <div
-        className={[
-          classes.outerSpacing,
-          isDev ? classes.devWrapper : '',
-          !isEmpty && !variable ? classes.hasContent : '',
-        ].join(' ')}
+        className={[classes.outerSpacing, isDev ? classes.devWrapper : ''].join(
+          ' ',
+        )}
       >
         <MediaComponent />
       </div>
@@ -128,10 +168,6 @@
         '& > *': {
           pointerEvents: 'none',
         },
-      },
-      hasContent: {
-        width: 'fit-content',
-        height: 'fit-content',
       },
       empty: {
         position: 'relative',
@@ -170,10 +206,7 @@
           fill: '#666D85',
         },
       },
-      media: {
-        width: ({ options: { width } }) => width,
-        height: ({ options: { height } }) => height,
-      },
+
       outerSpacing: {
         marginTop: ({ options: { outerSpacing } }) =>
           getSpacing(outerSpacing[0]),
