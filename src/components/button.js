@@ -43,20 +43,21 @@
         .slice(1, str.length)
         .replace(/[A-Z]/g, letter => `_${letter.toLowerCase()}`);
 
-    const input = !isDev
-      ? actionModels.reduce((acc, value) => {
-          const propertyUuid = getIdProperty(value);
-          const model = getModel(value);
-          const recordId = propertyUuid && useProperty(propertyUuid);
+    const input =
+      !isDev && actionModels
+        ? actionModels.reduce((acc, value) => {
+            const propertyUuid = getIdProperty(value);
+            const model = getModel(value);
+            const recordId = propertyUuid && useProperty(propertyUuid);
 
-          if (recordId !== undefined) {
-            acc[camelToSnakeCase(model.name)] = {
-              variable_id: recordId,
-            };
-          }
-          return acc;
-        }, {})
-      : {};
+            if (recordId !== undefined) {
+              acc[camelToSnakeCase(model.name)] = {
+                variable_id: recordId,
+              };
+            }
+            return acc;
+          }, {})
+        : {};
 
     const [actionCallback, { loading }] = (isAction &&
       useAction(actionId, {
