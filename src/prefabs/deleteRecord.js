@@ -1,6 +1,6 @@
 (() => ({
   name: 'deleteRecord',
-  icon: 'ButtonIcon',
+  icon: 'DeleteRecordIcon',
   category: 'CONTENT',
   beforeCreate: ({
     prefab,
@@ -10,7 +10,11 @@
   }) => {
     const [modelId, setModelId] = React.useState('');
     const [model, setModel] = React.useState(null);
-    const [showValidation, setShowValidation] = React.useState(true);
+    const [showValidation, setShowValidation] = React.useState(false);
+
+    React.useEffect(() => {
+      setShowValidation(false);
+    }, [modelId]);
 
     return (
       <>
@@ -21,11 +25,10 @@
             error={
               showValidation && <Text color="#e82600">Model is required</Text>
             }
-            info="Small note: When you can't select any models try to place the button inside a component where an object is available."
+            info="Small note: If you can't select any models try to place the button inside a component where an object is available."
           >
             <ModelSelector
               onChange={(id, modelObject) => {
-                setShowValidation(false);
                 setModel(modelObject);
                 setModelId(id);
               }}
@@ -50,8 +53,9 @@
             }
             const newPrefab = { ...prefab };
             newPrefab.variables[0].name = camelToSnakeCase(model.label);
-            newPrefab.structure[0].descendants[1].descendants[0].descendants[0].descendants[0].descendants[2].descendants[1].options[7].value = modelId;
-            newPrefab.structure[0].descendants[0].options[7].value = modelId;
+            newPrefab.structure[0].descendants[1].descendants[0].descendants[0].descendants[0].descendants[2].descendants[1].options[7].value = [
+              modelId,
+            ];
             newPrefab.variables[0].options.modelId = modelId;
 
             save(newPrefab);
@@ -85,6 +89,15 @@
       ref: {
         targetComponentId: '#dialog',
         sourceComponentId: '#cancelBtn',
+      },
+      type: 'Custom',
+    },
+    {
+      name: 'Hide',
+      sourceEvent: 'onActionSuccess',
+      ref: {
+        targetComponentId: '#dialog',
+        sourceComponentId: '#submitButton',
       },
       type: 'Custom',
     },
@@ -570,21 +583,6 @@
               label: 'Action',
               key: 'actionId',
               type: 'ACTION',
-              configuration: {
-                apiVersion: 'v1',
-                condition: {
-                  type: 'SHOW',
-                  option: 'linkType',
-                  comparator: 'EQ',
-                  value: 'action',
-                },
-              },
-            },
-            {
-              value: '',
-              label: 'Object to pass to action',
-              key: 'actionModel',
-              type: 'ACTION_MODEL',
               configuration: {
                 apiVersion: 'v1',
                 condition: {
@@ -6216,7 +6214,7 @@
                                   type: 'COLOR',
                                   label: 'Text color',
                                   key: 'textColor',
-                                  value: 'White',
+                                  value: 'Dark',
                                   configuration: {
                                     condition: {
                                       type: 'HIDE',
@@ -6230,7 +6228,7 @@
                                   type: 'COLOR',
                                   label: 'Color',
                                   key: 'background',
-                                  value: 'Danger',
+                                  value: 'Light',
                                 },
                                 {
                                   value: ['0rem', 'M', '0rem', '0rem'],
@@ -6282,7 +6280,7 @@
                                   type: 'VARIABLE',
                                   label: 'Button text',
                                   key: 'buttonText',
-                                  value: ['Submit'],
+                                  value: ['Delete'],
                                   configuration: {
                                     condition: {
                                       type: 'HIDE',
@@ -6361,10 +6359,10 @@
                                   },
                                 },
                                 {
-                                  value: '',
-                                  label: 'Object to pass to action',
-                                  key: 'actionModel',
-                                  type: 'ACTION_MODEL',
+                                  value: [],
+                                  label: 'Objects to pass to action',
+                                  key: 'actionModels',
+                                  type: 'ACTION_INPUT_OBJECTS',
                                   configuration: {
                                     apiVersion: 'v1',
                                     condition: {
@@ -7710,7 +7708,7 @@
                                   type: 'COLOR',
                                   label: 'Color',
                                   key: 'background',
-                                  value: 'Primary',
+                                  value: 'Danger',
                                 },
                                 {
                                   value: ['0rem', '0rem', '0rem', '0rem'],
