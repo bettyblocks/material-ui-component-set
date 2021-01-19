@@ -27,10 +27,17 @@
       order,
       orderBy,
     } = options;
-    const isDev = B.env === 'dev';
+    const {
+      defineFunction = () => {},
+      env,
+      getCustomModelAttribute,
+      getProperty,
+      triggerEvent = () => {},
+      useAllQuery,
+      useText,
+    } = B;
+    const isDev = env === 'dev';
     const displayError = showError === 'built-in';
-
-    const { useAllQuery, getProperty, useText, getCustomModelAttribute } = B;
 
     const {
       id: customModelAttributeId,
@@ -104,24 +111,24 @@
 
     useEffect(() => {
       if (mounted.current && loading) {
-        B.triggerEvent('onLoad', loading);
+        triggerEvent('onLoad', loading);
       }
     }, [loading]);
 
     if (err && !displayError) {
-      B.triggerEvent('onError', err);
+      triggerEvent('onError', err);
     }
 
     const { results } = data || {};
     if (results) {
       if (results.length > 0) {
-        B.triggerEvent('onSuccess', results);
+        triggerEvent('onSuccess', results);
       } else {
-        B.triggerEvent('onNoResults');
+        triggerEvent('onNoResults');
       }
     }
 
-    B.defineFunction('Refetch', () => refetch());
+    defineFunction('Refetch', () => refetch());
 
     // renders the radio component
     const renderRadio = (optionValue, optionLabel) => (
@@ -221,8 +228,8 @@
     );
   })(),
   styles: B => t => {
-    const style = new B.Styling(t);
-    const { color: colorFunc } = B;
+    const { color: colorFunc, Styling } = B;
+    const style = new Styling(t);
     const getOpacColor = (col, val) => colorFunc.alpha(col, val);
     return {
       root: {

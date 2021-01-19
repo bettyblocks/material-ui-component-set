@@ -5,7 +5,7 @@
   orientation: 'VERTICAL',
   jsx: (() => {
     const { Typography, Box } = window.MaterialUI.Core;
-    const { env, useText } = B;
+    const { defineFunction = () => {}, env, useText } = B;
     const isDev = env === 'dev';
     const { label, icon, disabled, disableRipple, iconAlignment } = options;
     const {
@@ -22,7 +22,7 @@
       setSelectedTab(index);
     };
 
-    B.defineFunction('Select', doSetTab);
+    defineFunction('Select', doSetTab);
 
     const EmptyBox = () => {
       if (!isDev) return null;

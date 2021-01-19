@@ -4,7 +4,14 @@
   allowedTypes: ['CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { env, GetAll, ModelProvider } = B;
+    const {
+      defineFunction = () => {},
+      env,
+      GetAll,
+      InteractionScope,
+      ModelProvider,
+      triggerEvent = () => {},
+    } = B;
     const { Grid, Hidden } = window.MaterialUI.Core;
     const isDev = env === 'dev';
     const {
@@ -124,12 +131,12 @@
       <GetAll modelId={model} filter={filter}>
         {({ loading, error, data }) => {
           if (loading) {
-            B.triggerEvent('onLoad', loading);
+            triggerEvent('onLoad', loading);
             return <span>Loading...</span>;
           }
 
           if (error && !displayError) {
-            B.triggerEvent('onError', error);
+            triggerEvent('onError', error);
           }
           if (error && displayError) {
             return <span>{error.message}</span>;
@@ -137,16 +144,16 @@
 
           const { results = [] } = data || {};
           if (results.length > 0) {
-            B.triggerEvent('onSuccess', results);
+            triggerEvent('onSuccess', results);
           } else {
-            B.triggerEvent('onNoResults');
+            triggerEvent('onNoResults');
           }
 
           return (
             <Grid {...gridOptions}>
               {results.map(item => (
                 <ModelProvider key={item.id} value={item} id={model}>
-                  <B.InteractionScope>{children}</B.InteractionScope>
+                  <InteractionScope>{children}</InteractionScope>
                 </ModelProvider>
               ))}
             </Grid>
@@ -158,9 +165,9 @@
     const ConditionalGrid = <Hidden only={only}>{GridComp}</Hidden>;
     const RuntimeCmp = isVisible ? ConditionalGrid : <></>;
 
-    B.defineFunction('Show', () => setIsVisible(true));
-    B.defineFunction('Hide', () => setIsVisible(false));
-    B.defineFunction('Show/Hide', () => setIsVisible(s => !s));
+    defineFunction('Show', () => setIsVisible(true));
+    defineFunction('Hide', () => setIsVisible(false));
+    defineFunction('Show/Hide', () => setIsVisible(s => !s));
 
     return isDev ? (
       <div
@@ -176,8 +183,9 @@
     );
   })(),
   styles: B => theme => {
-    const isDev = B.env === 'dev';
-    const style = new B.Styling(theme);
+    const { env, mediaMinWidth, Styling } = B;
+    const isDev = env === 'dev';
+    const style = new Styling(theme);
     const getWidth = value => {
       if (value === 'false') {
         return null;
@@ -223,22 +231,22 @@
         flexBasis: ({ options: { xsWidth } }) => getFlexBasis(xsWidth),
         backgroundColor: ({ options: { backgroundColor } }) =>
           style.getColor(backgroundColor),
-        [`@media ${B.mediaMinWidth(600)}`]: {
+        [`@media ${mediaMinWidth(600)}`]: {
           flexGrow: ({ options: { smWidth } }) => getFlexGrow(smWidth),
           maxWidth: ({ options: { smWidth } }) => getWidth(smWidth),
           flexBasis: ({ options: { smWidth } }) => getFlexBasis(smWidth),
         },
-        [`@media ${B.mediaMinWidth(960)}`]: {
+        [`@media ${mediaMinWidth(960)}`]: {
           flexGrow: ({ options: { mdWidth } }) => getFlexGrow(mdWidth),
           maxWidth: ({ options: { mdWidth } }) => getWidth(mdWidth),
           flexBasis: ({ options: { mdWidth } }) => getFlexBasis(mdWidth),
         },
-        [`@media ${B.mediaMinWidth(1280)}`]: {
+        [`@media ${mediaMinWidth(1280)}`]: {
           flexGrow: ({ options: { lgWidth } }) => getFlexGrow(lgWidth),
           maxWidth: ({ options: { lgWidth } }) => getWidth(lgWidth),
           flexBasis: ({ options: { lgWidth } }) => getFlexBasis(lgWidth),
         },
-        [`@media ${B.mediaMinWidth(1920)}`]: {
+        [`@media ${mediaMinWidth(1920)}`]: {
           flexGrow: ({ options: { xlWidth } }) => getFlexGrow(xlWidth),
           maxWidth: ({ options: { xlWidth } }) => getWidth(xlWidth),
           flexBasis: ({ options: { xlWidth } }) => getFlexBasis(xlWidth),

@@ -7,12 +7,16 @@
     <div>
       {(() => {
         const {
-          env,
-          Children,
           Action,
-          useAllQuery,
+          Children,
+          defineFunction = () => {},
+          env,
           getActionInput,
           getIdProperty,
+          ModelProvider,
+          useAllQuery,
+          useEndpoint,
+          triggerEvent = () => {},
         } = B;
 
         const {
@@ -30,14 +34,11 @@
         const displayError = showError === 'built-in';
         const displaySuccess = showSuccess === 'built-in';
         const empty = children.length === 0;
-        const isDev = B.env === 'dev';
+        const isDev = env === 'dev';
         const isPristine = empty && isDev;
         const hasRedirect = redirect && redirect.id !== '';
         const redirectTo =
-          env === 'prod' && hasRedirect && B.useEndpoint(redirect);
-        const history = useHistory();
-
-        const location = useLocation();
+          env === 'prod' && hasRedirect && useEndpoint(redirect);
         const { actionId, modelId, variableId, objectVariableId } = formData;
         const formVariable = getActionInput(variableId);
 
@@ -47,7 +48,7 @@
 
         const mounted = useRef(false);
 
-        B.defineFunction('Submit', () => {
+        defineFunction('Submit', () => {
           if (formRef.current)
             formRef.current.dispatchEvent(new Event('submit'));
         });
@@ -61,7 +62,7 @@
 
         const handleSubmit = (evt, callAction, item) => {
           evt.preventDefault();
-          B.triggerEvent('onSubmit');
+          triggerEvent('onSubmit');
           const formDataValues = new FormData(formRef.current);
           const values = Array.from(formDataValues).reduce(
             (acc, [key, value]) => {
@@ -98,13 +99,15 @@
 
         const trigger = (data, loading, error) => {
           if (data || error) {
-            B.triggerEvent('onActionDone');
+            triggerEvent('onActionDone');
           }
 
           if (data) {
-            B.triggerEvent('onActionSuccess', data.actionb5);
+            triggerEvent('onActionSuccess', data.actionb5);
 
             if (!isDev && hasRedirect) {
+              const history = useHistory();
+              const location = useLocation();
               if (redirectTo === location.pathname) {
                 history.go(0);
               } else {
@@ -114,11 +117,11 @@
           }
 
           if (loading) {
-            B.triggerEvent('onActionLoad', loading);
+            triggerEvent('onActionLoad', loading);
           }
 
           if (error && !displayError) {
-            B.triggerEvent('onActionError', error);
+            triggerEvent('onActionError', error);
           }
         };
 
@@ -127,11 +130,11 @@
           const handleInvalid = () => {
             if (!isInvalid) {
               setIsInvalid(true);
-              B.triggerEvent('onInvalid');
+              triggerEvent('onInvalid');
             }
           };
           useEffect(() => {
-            B.triggerEvent('onComponentRendered');
+            triggerEvent('onComponentRendered');
           }, []);
 
           return (
@@ -168,9 +171,9 @@
                       </span>
                     )}
                     {item ? (
-                      <B.ModelProvider key={item.id} value={item} id={modelId}>
+                      <ModelProvider key={item.id} value={item} id={modelId}>
                         {children}
-                      </B.ModelProvider>
+                      </ModelProvider>
                     ) : (
                       <Children loading={loading}>{children}</Children>
                     )}
@@ -204,25 +207,25 @@
               })) ||
             {};
 
-          B.defineFunction('Refetch', () => refetch());
+          defineFunction('Refetch', () => refetch());
 
           useEffect(() => {
             if (mounted.current && isFetching) {
-              B.triggerEvent('onDataLoad', isFetching);
+              triggerEvent('onDataLoad', isFetching);
             }
           }, [isFetching]);
 
           if (err) {
-            B.triggerEvent('onDataError', err);
+            triggerEvent('onDataError', err);
           }
 
           const item = records && records.results[0];
 
           if (item) {
             if (item.id) {
-              B.triggerEvent('onDataSuccess', item);
+              triggerEvent('onDataSuccess', item);
             } else {
-              B.triggerEvent('onDataNoResults');
+              triggerEvent('onDataNoResults');
             }
           }
 
@@ -238,7 +241,8 @@
     </div>
   ),
   styles: B => t => {
-    const style = new B.Styling(t);
+    const { Styling } = B;
+    const style = new Styling(t);
 
     return {
       error: {
