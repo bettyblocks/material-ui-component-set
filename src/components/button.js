@@ -17,6 +17,7 @@
       linkType,
       linkTo,
       linkToExternal,
+      openLinkToExternal,
       type,
       visible,
       actionId,
@@ -78,6 +79,10 @@
       disabled: disabled || isLoading || loading,
       size,
       tabindex: isDev && -1,
+      target:
+        linkType === 'external' && hasExternalLink
+          ? openLinkToExternal
+          : undefined,
       href:
         linkType === 'external' && hasExternalLink
           ? linkToExternalVariable
