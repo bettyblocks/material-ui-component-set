@@ -1,3 +1,41 @@
+# [1.85.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.84.0...v1.85.0) (2021-01-19)
+
+
+### Features
+
+* add uploaded image preview ([5a7661c](https://github.com/bettyblocks/material-ui-component-set/commit/5a7661c19466db52d5ec3451d7b11f7125227d9e))
+
+# [1.84.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.83.0...v1.84.0) (2021-01-19)
+
+
+### Bug Fixes
+
+* set row width to full ([a535de1](https://github.com/bettyblocks/material-ui-component-set/commit/a535de19b21fb0cd9153bb47540250658a81e7b7))
+
+
+### Features
+
+* add page prefab with app bar ([ef0c405](https://github.com/bettyblocks/material-ui-component-set/commit/ef0c405c90c00515abd4a27ba61c16ced83586d2))
+
+# [1.83.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.82.5...v1.83.0) (2021-01-18)
+
+
+### Bug Fixes
+
+* external link for list item ([1628185](https://github.com/bettyblocks/material-ui-component-set/commit/16281859ab0d9f13cd3bc10f257d424640a9e371))
+
+
+### Features
+
+* external link in list items ([97e1f88](https://github.com/bettyblocks/material-ui-component-set/commit/97e1f88c0d4d9fe36a6c9619491c751c79303fc5))
+
+## [1.82.5](https://github.com/bettyblocks/material-ui-component-set/compare/v1.82.4...v1.82.5) (2021-01-15)
+
+
+### Bug Fixes
+
+* dialog prefab not closing ([45dd943](https://github.com/bettyblocks/material-ui-component-set/commit/45dd943819c7d043b454aa0c2d8732bf843441af))
+
 ## [1.82.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.82.3...v1.82.4) (2021-01-13)
 
 
