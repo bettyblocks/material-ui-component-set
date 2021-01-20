@@ -152,6 +152,32 @@
               },
             },
           },
+          '& .MuiSwitch-root': {
+            '& .MuiSwitch-track': {
+              backgroundColor: ({ options: { checkboxColor } }) => [
+                style.getColor(checkboxColor),
+                '!important',
+              ],
+            },
+            '& .Mui-checked': {
+              color: ({ options: { checkboxColorChecked } }) => [
+                style.getColor(checkboxColorChecked),
+                '!important',
+              ],
+              '&:hover': {
+                backgroundColor: ({ options: { checkboxColorChecked } }) => [
+                  getOpacColor(style.getColor(checkboxColorChecked), 0.04),
+                  '!important',
+                ],
+              },
+            },
+            '& .Mui-checked ~ .MuiSwitch-track': {
+              backgroundColor: ({ options: { checkboxColorChecked } }) => [
+                style.getColor(checkboxColorChecked),
+                '!important',
+              ],
+            },
+          },
           '& .MuiTypography-root': {
             color: ({ options: { textColor } }) => [
               style.getColor(textColor),
