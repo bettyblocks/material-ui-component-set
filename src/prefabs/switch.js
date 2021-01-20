@@ -21,7 +21,7 @@
           },
         },
         {
-          value: { label: ['Checkbox'], value: [] },
+          value: { label: ['Switch'], value: [] },
           label: 'Label',
           key: 'customModelAttribute',
           type: 'CUSTOM_MODEL_ATTRIBUTE',
@@ -99,7 +99,7 @@
         },
         {
           type: 'COLOR',
-          label: 'Checkbox color',
+          label: 'Switch color',
           key: 'checkboxColor',
           value: 'Accent3',
           configuration: {
@@ -113,7 +113,7 @@
         },
         {
           type: 'COLOR',
-          label: 'Checkbox color checked',
+          label: 'Switch color switched',
           key: 'checkboxColorChecked',
           value: 'Primary',
           configuration: {
