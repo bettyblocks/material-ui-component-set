@@ -221,7 +221,7 @@
           type: 'TOGGLE',
         },
         {
-          value: 'relative',
+          value: 'static',
           label: 'Position',
           key: 'position',
           type: 'CUSTOM',
