@@ -128,7 +128,7 @@
       if (afterFirstInvalidation) {
         handleValidation();
       }
-
+      B.triggerEvent('onChange', eventValue);
       setCurrentValue(eventValue);
     };
 
