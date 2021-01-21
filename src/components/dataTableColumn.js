@@ -4,7 +4,7 @@
   allowedTypes: ['CONTENT_COMPONENT', 'CONTAINER_COMPONENT'],
   orientation: 'VERTICAL',
   jsx: (() => {
-    const { env, getProperty, useProperty, useEndpoint, useText } = B;
+    const { env, getProperty, Property, useEndpoint, useText } = B;
     const { TableCell, TableSortLabel } = window.MaterialUI.Core;
     const {
       horizontalAlignment,
@@ -30,8 +30,11 @@
     }
 
     const bodyText = useText(content);
-    const prodProperty = useProperty(property);
-    const propContent = isDev ? `{{ ${propertyName} }}` : prodProperty;
+    const propContent = isDev ? (
+      `{{ ${propertyName} }}`
+    ) : (
+      <Property id={property} />
+    );
 
     let columnText = propertyName ? propContent : contentPlaceholder;
     if (type === 'ME_PROPERTY') {
