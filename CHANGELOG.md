@@ -1,3 +1,54 @@
+# [1.87.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.86.0...v1.87.0) (2021-01-21)
+
+
+### Bug Fixes
+
+* check for empty actionModels ([b838b63](https://github.com/bettyblocks/material-ui-component-set/commit/b838b63768eef4110cd4aa99396c83029297d143))
+
+
+### Features
+
+* added the ACTION_MODEL option to the button ([5308295](https://github.com/bettyblocks/material-ui-component-set/commit/5308295acdfac1bf2db1f95dfa4705f351f4a39f))
+
+# [1.86.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.85.1...v1.86.0) (2021-01-21)
+
+
+### Bug Fixes
+
+* changed default position in Box option for prefabs that use the Box ([10f130b](https://github.com/bettyblocks/material-ui-component-set/commit/10f130b8058d76bc5e73a579dd4c800a39bcb280))
+* dialog component not being shown correctly inside the box component ([074c379](https://github.com/bettyblocks/material-ui-component-set/commit/074c37957da219e5bdcd956abcd01d8884703e4e))
+
+
+### Features
+
+* delete record prefab ([290d24f](https://github.com/bettyblocks/material-ui-component-set/commit/290d24f3da49c72255d815ca0bd679636378eeed))
+
+## [1.85.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.85.0...v1.85.1) (2021-01-20)
+
+
+### Bug Fixes
+
+* **ta-1907:** fixes autocomplete not querying more than 50 records ([9baaabd](https://github.com/bettyblocks/material-ui-component-set/commit/9baaabd168d77e0e174557f1e33c88d4ad5400a8))
+
+# [1.85.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.84.0...v1.85.0) (2021-01-19)
+
+
+### Features
+
+* add uploaded image preview ([5a7661c](https://github.com/bettyblocks/material-ui-component-set/commit/5a7661c19466db52d5ec3451d7b11f7125227d9e))
+
+# [1.84.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.83.0...v1.84.0) (2021-01-19)
+
+
+### Bug Fixes
+
+* set row width to full ([a535de1](https://github.com/bettyblocks/material-ui-component-set/commit/a535de19b21fb0cd9153bb47540250658a81e7b7))
+
+
+### Features
+
+* add page prefab with app bar ([ef0c405](https://github.com/bettyblocks/material-ui-component-set/commit/ef0c405c90c00515abd4a27ba61c16ced83586d2))
+
 # [1.83.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.82.5...v1.83.0) (2021-01-18)
 
 
