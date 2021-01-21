@@ -5,7 +5,7 @@
   "license": "UNLICENSED",
   "private": false,
   "devDependencies": {
-    "@betty-blocks/cli": "^23.29.0",
+    "@betty-blocks/cli": "^23.30.0",
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-angular": "^11.0.0",
     "@commitlint/prompt-cli": "^11.0.0",
