@@ -209,7 +209,7 @@
           type: 'SIZES',
         },
         {
-          value: ['M', 'M', 'M', 'M'],
+          value: ['0rem', '0rem', '0rem', '0rem'],
           label: 'Inner space',
           key: 'innerSpacing',
           type: 'SIZES',
@@ -2346,7 +2346,7 @@
                               type: 'TOGGLE',
                             },
                             {
-                              value: 'relative',
+                              value: 'static',
                               label: 'Position',
                               key: 'position',
                               type: 'CUSTOM',
@@ -4541,7 +4541,7 @@
                               type: 'TOGGLE',
                             },
                             {
-                              value: 'relative',
+                              value: 'static',
                               label: 'Position',
                               key: 'position',
                               type: 'CUSTOM',
