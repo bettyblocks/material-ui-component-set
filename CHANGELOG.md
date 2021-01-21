@@ -1,3 +1,16 @@
+# [1.86.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.85.1...v1.86.0) (2021-01-21)
+
+
+### Bug Fixes
+
+* changed default position in Box option for prefabs that use the Box ([10f130b](https://github.com/bettyblocks/material-ui-component-set/commit/10f130b8058d76bc5e73a579dd4c800a39bcb280))
+* dialog component not being shown correctly inside the box component ([074c379](https://github.com/bettyblocks/material-ui-component-set/commit/074c37957da219e5bdcd956abcd01d8884703e4e))
+
+
+### Features
+
+* delete record prefab ([290d24f](https://github.com/bettyblocks/material-ui-component-set/commit/290d24f3da49c72255d815ca0bd679636378eeed))
+
 ## [1.85.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.85.0...v1.85.1) (2021-01-20)
 
 
