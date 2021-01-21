@@ -127,7 +127,7 @@
         height: ({ options: { height } }) => (isDev ? '100%' : height),
         minHeight: 0,
         position: ({ options: { position } }) =>
-          (!isDev && position) || 'relative',
+          (!isDev && position) || 'unset',
         top: ({ options: { top } }) => !isDev && top,
         right: ({ options: { right } }) => !isDev && right,
         bottom: ({ options: { bottom } }) => !isDev && bottom,
