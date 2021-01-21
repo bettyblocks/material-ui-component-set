@@ -21,10 +21,10 @@
       visible,
       actionId,
       buttonText,
-      actionProperties,
+      actionModels,
     } = options;
 
-    const { env, useText, useAction } = B;
+    const { env, useText, useAction, getIdProperty, getModel, useProperty } = B;
     const isDev = env === 'dev';
     const isAction = linkType === 'action';
     const hasLink = linkTo && linkTo.id !== '';
@@ -37,14 +37,27 @@
     const [isVisible, setIsVisible] = useState(visible);
     const [isLoading, setIsLoading] = useState(false);
 
-    const propertyMappings = new Map(actionProperties);
-    const input = Array.from(propertyMappings.keys()).reduce((acc, key) => {
-      const propertyId = propertyMappings.get(key);
+    const camelToSnakeCase = str =>
+      str[0].toLowerCase() +
+      str
+        .slice(1, str.length)
+        .replace(/[A-Z]/g, letter => `_${letter.toLowerCase()}`);
 
-      const value = isDev ? '' : B.useProperty(propertyId);
-      acc[key] = value;
-      return acc;
-    }, {});
+    const input =
+      !isDev && actionModels
+        ? actionModels.reduce((acc, value) => {
+            const propertyUuid = getIdProperty(value);
+            const model = getModel(value);
+            const recordId = propertyUuid && useProperty(propertyUuid);
+
+            if (recordId !== undefined) {
+              acc[camelToSnakeCase(model.name)] = {
+                variable_id: recordId,
+              };
+            }
+            return acc;
+          }, {})
+        : {};
 
     const [actionCallback, { loading }] = (isAction &&
       useAction(actionId, {
