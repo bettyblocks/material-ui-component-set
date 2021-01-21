@@ -1,3 +1,15 @@
+# [1.87.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.86.0...v1.87.0) (2021-01-21)
+
+
+### Bug Fixes
+
+* check for empty actionModels ([b838b63](https://github.com/bettyblocks/material-ui-component-set/commit/b838b63768eef4110cd4aa99396c83029297d143))
+
+
+### Features
+
+* added the ACTION_MODEL option to the button ([5308295](https://github.com/bettyblocks/material-ui-component-set/commit/5308295acdfac1bf2db1f95dfa4705f351f4a39f))
+
 # [1.86.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.85.1...v1.86.0) (2021-01-21)
 
 
