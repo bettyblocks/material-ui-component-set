@@ -7865,7 +7865,7 @@
                       {
                         label: 'Option type',
                         key: 'optionType',
-                        value: 'static',
+                        value: 'property',
                         type: 'CUSTOM',
                         configuration: {
                           as: 'BUTTONGROUP',
