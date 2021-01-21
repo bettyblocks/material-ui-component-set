@@ -1,3 +1,17 @@
+## [1.85.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.85.0...v1.85.1) (2021-01-20)
+
+
+### Bug Fixes
+
+* **ta-1907:** fixes autocomplete not querying more than 50 records ([9baaabd](https://github.com/bettyblocks/material-ui-component-set/commit/9baaabd168d77e0e174557f1e33c88d4ad5400a8))
+
+# [1.85.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.84.0...v1.85.0) (2021-01-19)
+
+
+### Features
+
+* add uploaded image preview ([5a7661c](https://github.com/bettyblocks/material-ui-component-set/commit/5a7661c19466db52d5ec3451d7b11f7125227d9e))
+
 # [1.84.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.83.0...v1.84.0) (2021-01-19)
 
 
