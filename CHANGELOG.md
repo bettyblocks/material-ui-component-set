@@ -1,3 +1,10 @@
+# [1.88.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.87.0...v1.88.0) (2021-01-22)
+
+
+### Features
+
+* add uploaded image preview ([5038fb4](https://github.com/bettyblocks/material-ui-component-set/commit/5038fb45a6064952f5b0f08a0d8afb3479720beb))
+
 # [1.87.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.86.0...v1.87.0) (2021-01-21)
 
 
