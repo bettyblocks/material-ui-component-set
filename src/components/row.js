@@ -6,9 +6,10 @@
   jsx: (
     <div className={classes.container}>
       {(() => {
+        const { env } = B;
+        const isDev = env === 'dev';
         const isEmpty = children.length === 0;
-
-        const isPristine = isEmpty && B.env === 'dev';
+        const isPristine = isEmpty && isDev;
 
         return (
           <section
@@ -25,7 +26,8 @@
     </div>
   ),
   styles: B => theme => {
-    const style = new B.Styling(theme);
+    const { mediaMinWidth, Styling } = B;
+    const style = new Styling(theme);
     const width = {
       Full: '100%',
       XL: '1200px',
@@ -62,7 +64,7 @@
           getSpacing(outerSpacing[2]),
         marginLeft: ({ options: { outerSpacing, maxRowWidth } }) =>
           maxRowWidth !== 'Full' ? 'auto' : getSpacing(outerSpacing[3]),
-        [`@media ${B.mediaMinWidth(600)}`]: {
+        [`@media ${mediaMinWidth(600)}`]: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Portrait'),
           marginRight: ({ options: { outerSpacing, maxRowWidth } }) =>
@@ -76,7 +78,7 @@
               ? 'auto'
               : getSpacing(outerSpacing[3], 'Portrait'),
         },
-        [`@media ${B.mediaMinWidth(960)}`]: {
+        [`@media ${mediaMinWidth(960)}`]: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Landscape'),
           marginRight: ({ options: { outerSpacing, maxRowWidth } }) =>
@@ -90,7 +92,7 @@
               ? 'auto'
               : getSpacing(outerSpacing[3], 'Landscape'),
         },
-        [`@media ${B.mediaMinWidth(1280)}`]: {
+        [`@media ${mediaMinWidth(1280)}`]: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Desktop'),
           marginRight: ({ options: { outerSpacing, maxRowWidth } }) =>

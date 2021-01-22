@@ -9,8 +9,9 @@
   ],
   orientation: 'VERTICAL',
   jsx: (() => {
+    const { env } = B;
     const isEmpty = children.length === 0;
-    const isDev = B.env === 'dev';
+    const isDev = env === 'dev';
     const isPristine = isEmpty && isDev;
     const { isOpen, isPersistent, breakpoint } = parent;
     const showDrawer = isPersistent && isOpen && !isDev;
@@ -34,7 +35,8 @@
     );
   })(),
   styles: B => t => {
-    const style = new B.Styling(t);
+    const { mediaMinWidth, Styling } = B;
+    const style = new Styling(t);
     const getSpacing = (idx, device = 'Mobile') =>
       idx === '0' ? '0rem' : style.getSpacing(idx, device);
     const { useTheme } = window.MaterialUI.Core;
@@ -59,7 +61,7 @@
           getSpacing(innerSpacing[2]),
         paddingLeft: ({ options: { innerSpacing } }) =>
           getSpacing(innerSpacing[3]),
-        [`@media ${B.mediaMinWidth(600)}`]: {
+        [`@media ${mediaMinWidth(600)}`]: {
           paddingTop: ({ options: { innerSpacing } }) =>
             getSpacing(innerSpacing[0], 'Portrait'),
           paddingRight: ({ options: { innerSpacing } }) =>
@@ -69,7 +71,7 @@
           paddingLeft: ({ options: { innerSpacing } }) =>
             getSpacing(innerSpacing[3], 'Portrait'),
         },
-        [`@media ${B.mediaMinWidth(960)}`]: {
+        [`@media ${mediaMinWidth(960)}`]: {
           paddingTop: ({ options: { innerSpacing } }) =>
             getSpacing(innerSpacing[0], 'Landscape'),
           paddingRight: ({ options: { innerSpacing } }) =>
@@ -79,7 +81,7 @@
           paddingLeft: ({ options: { innerSpacing } }) =>
             getSpacing(innerSpacing[3], 'Landscape'),
         },
-        [`@media ${B.mediaMinWidth(1280)}`]: {
+        [`@media ${mediaMinWidth(1280)}`]: {
           paddingTop: ({ options: { innerSpacing } }) =>
             getSpacing(innerSpacing[0], 'Desktop'),
           paddingRight: ({ options: { innerSpacing } }) =>
@@ -101,7 +103,7 @@
         marginLeft: ({ options: { outerSpacing } }) =>
           getSpacing(outerSpacing[3]),
 
-        [`@media ${B.mediaMinWidth(600)}`]: {
+        [`@media ${mediaMinWidth(600)}`]: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Portrait'),
           marginRight: ({ options: { outerSpacing } }) =>
@@ -111,7 +113,7 @@
           marginLeft: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[3], 'Portrait'),
         },
-        [`@media ${B.mediaMinWidth(960)}`]: {
+        [`@media ${mediaMinWidth(960)}`]: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Landscape'),
           marginRight: ({ options: { outerSpacing } }) =>
@@ -121,7 +123,7 @@
           marginLeft: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[3], 'Landscape'),
         },
-        [`@media ${B.mediaMinWidth(1280)}`]: {
+        [`@media ${mediaMinWidth(1280)}`]: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Desktop'),
           marginRight: ({ options: { outerSpacing } }) =>

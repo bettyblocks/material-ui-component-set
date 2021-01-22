@@ -129,8 +129,8 @@
     );
   })(),
   styles: B => t => {
-    const style = new B.Styling(t);
-    const { env } = B;
+    const { env, Styling } = B;
+    const style = new Styling(t);
     const isDev = env === 'dev';
 
     return {

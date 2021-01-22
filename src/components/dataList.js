@@ -7,11 +7,14 @@
     <div className={classes.root}>
       {(() => {
         const {
+          defineFunction = () => {},
           env,
           getProperty,
           GetMe,
-          useAllQuery,
+          InteractionScope,
+          triggerEvent = () => {},
           ModelProvider,
+          useAllQuery,
           useFilter,
         } = B;
         const [page, setPage] = useState(1);
@@ -226,8 +229,8 @@
           };
         }, [search]);
 
-        B.defineFunction('Refetch', () => refetch());
-        B.defineFunction('SetSearchValue', event => {
+        defineFunction('Refetch', () => refetch());
+        defineFunction('SetSearchValue', event => {
           setSearch(event.target.value);
         });
 
@@ -242,25 +245,25 @@
 
         useEffect(() => {
           if (mounted.current && loading) {
-            B.triggerEvent('onLoad', loading);
+            triggerEvent('onLoad', loading);
           }
         }, [loading]);
 
         const handleClick = (event, context) => {
-          B.triggerEvent('OnItemClick', event, context);
+          triggerEvent('OnItemClick', event, context);
         };
 
         const Wrapper = type === 'inline' ? 'span' : 'div';
         const Looper = results => {
           const rows = results.map(item => (
             <ModelProvider key={item.id} value={item} id={model}>
-              <B.InteractionScope model={model}>
+              <InteractionScope model={model}>
                 {context => (
                   <Wrapper onClick={event => handleClick(event, context)}>
                     {children}
                   </Wrapper>
                 )}
-              </B.InteractionScope>
+              </InteractionScope>
             </ModelProvider>
           ));
 
@@ -279,7 +282,7 @@
           if (loading) return <div className={classes.skeleton} />;
 
           if (error && !displayError) {
-            B.triggerEvent('onError', error);
+            triggerEvent('onError', error);
           }
           if (error && displayError) {
             return <span>{error.message}</span>;
@@ -290,9 +293,9 @@
           const hasResults = resultCount > 0;
 
           if (hasResults) {
-            B.triggerEvent('onSuccess', results);
+            triggerEvent('onSuccess', results);
           } else {
-            B.triggerEvent('onNoResults');
+            triggerEvent('onNoResults');
           }
 
           return (
@@ -446,7 +449,8 @@
     </div>
   ),
   styles: B => theme => {
-    const style = new B.Styling(theme);
+    const { mediaMinWidth, Styling } = B;
+    const style = new Styling(theme);
     const getSpacing = (idx, device = 'Mobile') =>
       idx === '0' ? '0rem' : style.getSpacing(idx, device);
 
@@ -519,13 +523,13 @@
       arrowDisabled: { color: '#ccc' },
       skeleton: {
         height: `calc(${style.getFont('Body1').Mobile} * 1.2)`,
-        [`@media ${B.mediaMinWidth(600)}`]: {
+        [`@media ${mediaMinWidth(600)}`]: {
           height: `calc(${style.getFont('Body1').Portrait} * 1.2)`,
         },
-        [`@media ${B.mediaMinWidth(960)}`]: {
+        [`@media ${mediaMinWidth(960)}`]: {
           height: `calc(${style.getFont('Body1').Landscape} * 1.2)`,
         },
-        [`@media ${B.mediaMinWidth(1280)}`]: {
+        [`@media ${mediaMinWidth(1280)}`]: {
           height: `calc(${style.getFont('Body1').Desktop} * 1.2)`,
         },
         backgroundColor: '#eee',
@@ -545,7 +549,7 @@
           animation: 'loading 1.5s infinite',
         },
       },
-      [`@media ${B.mediaMinWidth(600)}`]: {
+      [`@media ${mediaMinWidth(600)}`]: {
         root: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Portrait'),
@@ -557,7 +561,7 @@
             getSpacing(outerSpacing[3], 'Portrait'),
         },
       },
-      [`@media ${B.mediaMinWidth(960)}`]: {
+      [`@media ${mediaMinWidth(960)}`]: {
         root: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Landscape'),
@@ -569,7 +573,7 @@
             getSpacing(outerSpacing[3], 'Landscape'),
         },
       },
-      [`@media ${B.mediaMinWidth(1280)}`]: {
+      [`@media ${mediaMinWidth(1280)}`]: {
         root: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Desktop'),

@@ -4,8 +4,9 @@
   allowedTypes: ['CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
+    const { env } = B;
     const { Container } = window.MaterialUI.Core;
-    const isDev = B.env === 'dev';
+    const isDev = env === 'dev';
     const isEmpty = children.length === 0;
     const isPristine = isDev && isEmpty;
     const { maxWidth, disableGutters } = options;
@@ -31,8 +32,9 @@
     );
   })(),
   styles: B => theme => {
-    const isDev = B.env === 'dev';
-    const style = new B.Styling(theme);
+    const { env, Styling } = B;
+    const isDev = env === 'dev';
+    const style = new Styling(theme);
     return {
       wrapper: {
         height: ({ options: { height } }) => height,
