@@ -13,6 +13,7 @@
       customModelAttribute: customModelAttributeObj,
       validationValueMissing,
       nameAttribute,
+      isSwitch,
     } = options;
     const { useText, getCustomModelAttribute } = B;
     const isDev = B.env === 'dev';
@@ -36,6 +37,7 @@
 
     const {
       Checkbox: MUICheckbox,
+      Switch,
       FormControlLabel,
       FormControl,
       FormHelperText,
@@ -61,17 +63,18 @@
       }
     }, [isDev, defaultValue]);
 
-    const Checkbox = (
-      <MUICheckbox
-        checked={checked}
-        onChange={handleChange}
-        name={nameAttributeValue || customModelAttributeName}
-        disabled={disabled}
-        size={size}
-        tabIndex={isDev && -1}
-        value="on"
-      />
-    );
+    const props = {
+      checked,
+      onChange: handleChange,
+      name: nameAttributeValue || customModelAttributeName,
+      disabled,
+      size,
+      tabIndex: isDev && -1,
+      value: 'on',
+    };
+
+    const Checkbox = <MUICheckbox {...props} />;
+    const SwitchComponent = <Switch {...props} />;
 
     const Control = (
       <FormControl
@@ -80,7 +83,7 @@
         classes={{ root: classes.formControl }}
       >
         <FormControlLabel
-          control={Checkbox}
+          control={isSwitch ? SwitchComponent : Checkbox}
           label={labelText}
           labelPlacement={position}
         />
@@ -147,6 +150,32 @@
                   '!important',
                 ],
               },
+            },
+          },
+          '& .MuiSwitch-root': {
+            '& .MuiSwitch-track': {
+              backgroundColor: ({ options: { checkboxColor } }) => [
+                style.getColor(checkboxColor),
+                '!important',
+              ],
+            },
+            '& .Mui-checked': {
+              color: ({ options: { checkboxColorChecked } }) => [
+                style.getColor(checkboxColorChecked),
+                '!important',
+              ],
+              '&:hover': {
+                backgroundColor: ({ options: { checkboxColorChecked } }) => [
+                  getOpacColor(style.getColor(checkboxColorChecked), 0.04),
+                  '!important',
+                ],
+              },
+            },
+            '& .Mui-checked ~ .MuiSwitch-track': {
+              backgroundColor: ({ options: { checkboxColorChecked } }) => [
+                style.getColor(checkboxColorChecked),
+                '!important',
+              ],
             },
           },
           '& .MuiTypography-root': {
