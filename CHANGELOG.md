@@ -1,3 +1,10 @@
+# [1.89.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.88.0...v1.89.0) (2021-01-25)
+
+
+### Features
+
+* add switch component ([6718618](https://github.com/bettyblocks/material-ui-component-set/commit/6718618fcd0ad8ac48c5754df2201d4863e9266f))
+
 # [1.88.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.87.0...v1.88.0) (2021-01-22)
 
 
