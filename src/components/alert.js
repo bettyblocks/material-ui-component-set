@@ -9,25 +9,61 @@
     const { Icons } = window.MaterialUI;
     const { IconButton } = window.MaterialUI.Core;
     const { env, useText } = B;
-    const { visible, icon, collapsable, titleText, bodyText } = options;
+    const {
+      visible,
+      icon,
+      collapsable,
+      titleText,
+      bodyText,
+      allowTextServerResponse,
+      allowTitleServerResponse,
+    } = options;
     const title = useText(titleText);
     const body = useText(bodyText);
     const isDev = env === 'dev';
     const [open, setOpen] = useState(visible);
-    const [text, setText] = useState('');
+    const [titleFromServer, setTitleFromServer] = useState('');
+    const [textFromServer, setTextFromServer] = useState('');
 
     useEffect(() => {
       setOpen(visible);
     }, [visible]);
 
+    const formatError = err => {
+      const errorMessage =
+        (err.graphQLErrors &&
+          err.graphQLErrors[0] &&
+          err.graphQLErrors[0].extensions.error) ||
+        err.message;
+      const errorTitle =
+        (err.graphQLErrors &&
+          err.graphQLErrors[0] &&
+          err.graphQLErrors[0].message) ||
+        (err.networkError && err.networkError.message);
+      return [errorTitle, errorMessage];
+    };
+
+    const cleanUpMessage = message =>
+      message &&
+      JSON.stringify(message)
+        .replace(/[{}[\]_"]/g, ' ')
+        .replace(/[ ]+/g, ' ')
+        .replace(/ :/g, ':')
+        .replace(/ ,/g, ',')
+        .trim();
+
     B.defineFunction('Show', showMessage => {
-      if (typeof showMessage === 'string') setText(showMessage);
+      if (typeof showMessage === 'string') setTextFromServer(showMessage);
+      if (typeof showMessage === 'object' && showMessage !== null) {
+        const [errorTitle, errorMessage] = formatError(showMessage);
+        setTextFromServer(cleanUpMessage(errorMessage));
+        setTitleFromServer(errorTitle);
+      }
       setOpen(true);
     });
 
-    B.defineFunction('Hide', () => {
-      setOpen(false);
-    });
+    B.defineFunction('Hide', () => setOpen(false));
+    B.defineFunction('Show/Hide', () => setOpen(s => !s));
 
     const AlertPanel = (
       <Alert
@@ -50,8 +86,14 @@
           ) : null
         }
       >
-        {title && <AlertTitle>{title}</AlertTitle>}
-        {text || body}
+        {(title || titleFromServer) && (
+          <AlertTitle>
+            {titleFromServer && allowTitleServerResponse
+              ? titleFromServer
+              : title}
+          </AlertTitle>
+        )}
+        {textFromServer && allowTextServerResponse ? textFromServer : body}
       </Alert>
     );
     return isDev ? (

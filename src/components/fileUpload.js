@@ -14,7 +14,7 @@
       IconButton,
     } = window.MaterialUI.Core;
     const { Icons } = window.MaterialUI;
-    const { Close } = Icons;
+    const { Delete, CloudUpload } = Icons;
     const {
       hideDefaultError,
       disabled,
@@ -31,6 +31,8 @@
       hideLabel,
       customModelAttribute: customModelAttributeObj,
       nameAttribute,
+      type,
+      showImagePreview,
     } = options;
 
     const isDev = env === 'dev';
@@ -50,8 +52,18 @@
       customModelAttribute || {};
     const nameAttributeValue = useText(nameAttribute);
     const requiredText = required ? '*' : '';
+    const [uploadedFileArray, setUploadedFileArray] = useState([]);
+
+    const formatBytes = bytes => {
+      if (bytes === 0) return '0 Bytes';
+      const k = 1024;
+      const sizes = ['Bytes', 'KB', 'MB'];
+      const i = Math.floor(Math.log(bytes) / Math.log(k));
+      return `${parseFloat(bytes / k ** i).toFixed()} ${sizes[i]}`;
+    };
 
     const handleChange = e => {
+      setUploadedFileArray(prev => [...prev, ...e.target.files]);
       setUploads({
         ...uploads,
         files: e.target.files,
@@ -81,7 +93,7 @@
           mimeType: acceptList,
         },
         onError: errorData => {
-          B.triggerEvent('onError', errorData.message);
+          B.triggerEvent('onError', errorData);
           setUploads({
             ...uploads,
             failureMessage: [errorData.message],
@@ -180,7 +192,173 @@
       </div>
     );
 
-    const Control = (
+    const Hr = () => <hr className={classes.hr} />;
+
+    const DeleteButton = ({ file }) => (
+      <div className={classes.deleteButtonWrapper}>
+        <IconButton
+          size="small"
+          className={classes.remove}
+          onClick={() => {
+            if (file) {
+              removeFileFromList(file.url);
+              if (!multiple) {
+                B.triggerEvent('onFileRemove');
+              }
+            }
+          }}
+        >
+          <Delete className={classes.deleteIcon} fontSize="small" />
+        </IconButton>
+      </div>
+    );
+    const FileDetails = ({ file, fileType, fileSize }) => (
+      <div className={classes.fileDetails}>
+        <Typography variant="body1" noWrap className={classes.span}>
+          {file ? file.name : 'File name'}
+        </Typography>
+        <div className={classes.fileDetailList}>
+          <p className={classes.fileDetail}>
+            {isDev ? 'Size' : formatBytes(fileSize)}
+          </p>
+          <div className={classes.divider} />
+          <p className={classes.fileDetail}>
+            {isDev ? 'Type' : fileType.replace('image/', '.')}
+          </p>
+        </div>
+      </div>
+    );
+
+    const DevUploadedFile = () => {
+      switch (type) {
+        case 'grid':
+          return (
+            <div className={classes.gridView}>
+              <div className={classes.gridItem}>
+                {showImagePreview && <div className={classes.gridDevImage} />}
+                <div className={classes.gridItemDetails}>
+                  <FileDetails />
+                  <DeleteButton />
+                </div>
+              </div>
+            </div>
+          );
+        case 'list':
+        default:
+          return (
+            <>
+              <Hr />
+              <div className={classes.listView}>
+                <div className={classes.fileDetailList}>
+                  {showImagePreview && <div className={classes.devImage} />}
+                  <FileDetails />
+                </div>
+                <DeleteButton />
+              </div>
+            </>
+          );
+      }
+    };
+
+    const UploadedFile = ({ file }) => {
+      const uploadedFile = uploadedFileArray.find(
+        item => item.name === file.name,
+      );
+
+      if (!multiple) {
+        B.triggerEvent('onFileUpload', file.url);
+      }
+
+      switch (type) {
+        case 'grid':
+          return (
+            <div className={classes.gridView}>
+              <div className={classes.gridItem}>
+                {showImagePreview && (
+                  <div
+                    style={{
+                      backgroundImage: `url("${file.url}")`,
+                    }}
+                    className={classes.gridImage}
+                  />
+                )}
+                <div className={classes.gridItemDetails}>
+                  <FileDetails
+                    file={file}
+                    fileType={uploadedFile.type}
+                    fileSize={uploadedFile.size}
+                  />
+                  <DeleteButton file={file} />
+                </div>
+              </div>
+            </div>
+          );
+        case 'list':
+        default:
+          return (
+            <>
+              <Hr />
+              <div className={classes.listView}>
+                <div className={classes.fileDetailList}>
+                  {showImagePreview && (
+                    <div
+                      style={{
+                        backgroundImage: `url("${file.url}")`,
+                      }}
+                      className={classes.image}
+                    />
+                  )}
+                  <FileDetails
+                    file={file}
+                    fileType={uploadedFile.type}
+                    fileSize={uploadedFile.size}
+                  />
+                </div>
+                <DeleteButton file={file} />
+              </div>
+            </>
+          );
+      }
+    };
+
+    const UploadingFile = () => {
+      switch (type) {
+        case 'grid':
+          return (
+            <div className={classes.gridView}>
+              <div className={classes.gridItem}>
+                {showImagePreview && (
+                  <div className={classes.gridUploadingImage}>
+                    <CloudUpload />
+                  </div>
+                )}
+                <div className={classes.gridItemDetails}>
+                  <span>Uploading</span>
+                </div>
+              </div>
+            </div>
+          );
+        case 'list':
+        default:
+          return (
+            <>
+              <Hr />
+              <div className={classes.listView}>
+                {showImagePreview && (
+                  <div className={classes.uploadingImage}>
+                    <CloudUpload />
+                  </div>
+                )}
+                <div className={classes.fileDetails}>
+                  <span>Uploading</span>
+                </div>
+              </div>
+            </>
+          );
+      }
+    };
+
+    const Control = () => (
       <FormControl
         fullWidth={fullWidth}
         required={required}
@@ -199,27 +377,20 @@
         <FormHelperText classes={{ root: classes.helper }}>
           {helperValue}
         </FormHelperText>
-        {loading && B.triggerEvent('onLoad')}
-        {data && data.length > 0 && (
-          <div className={classes.messageContainer}>
-            {data.map(file => (
-              <div className={classes.fileList}>
-                <Typography variant="body1" noWrap className={classes.span}>
-                  {file.name}
-                </Typography>
-                <IconButton
-                  className={classes.remove}
-                  size="small"
-                  onClick={() => removeFileFromList(file.url)}
-                >
-                  <Close fontSize="small" />
-                </IconButton>
-              </div>
-            ))}
-          </div>
-        )}
+        <div className={classes.messageContainer}>
+          {data &&
+            data.length > 0 &&
+            data.map(file => <UploadedFile file={file} />)}
+          {loading && <UploadingFile />}
+        </div>
       </FormControl>
     );
+
+    useEffect(() => {
+      if (loading) {
+        B.triggerEvent('onLoad');
+      }
+    }, [loading]);
 
     useEffect(() => {
       if (files.length > 0) {
@@ -229,7 +400,16 @@
 
     B.defineFunction('clearFileUpload', e => clearFiles(e));
 
-    return isDev ? <div className={classes.root}>{Control}</div> : Control;
+    return isDev ? (
+      <div>
+        <div className={classes.root}>
+          <Control />
+        </div>
+        <DevUploadedFile />
+      </div>
+    ) : (
+      <Control />
+    );
   })(),
   styles: B => t => {
     const style = new B.Styling(t);
@@ -241,9 +421,9 @@
           fullWidth ? 'block' : 'inline-block',
       },
       label: {
-        marginLeft: [0, '!important'],
+        marginLeft: '0!important',
         pointerEvents: B.env === 'dev' && 'none',
-        alignItems: ['start', '!important'],
+        alignItems: 'start!important',
         color: ({ options: { labelColor } }) => [
           style.getColor(labelColor),
           '!important',
@@ -285,7 +465,8 @@
       span: {
         flex: 1,
         textAlign: 'start',
-        marginRight: ['1rem', '!important'],
+        marginBottom: '0.1875rem!important',
+        marginRight: '1rem!important',
       },
       button: {
         color: ({ options: { variant, buttonTextColor, background } }) => [
@@ -310,7 +491,10 @@
         ],
       },
       messageContainer: {
+        flexWrap: 'wrap',
         paddingTop: '1.25rem',
+        display: ({ options: { type } }) =>
+          type === 'grid' ? 'flex' : 'block',
         color: ({ options: { textColor } }) => [
           style.getColor(textColor),
           '!important',
@@ -322,12 +506,129 @@
           ],
         },
       },
-      fileList: {
+      listView: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+      },
+      gridView: {
+        display: 'flex',
+      },
+      gridItem: {
+        display: 'flex',
+        borderRadius: '0.3125rem',
+        flexDirection: 'column',
+        border: ' 0.0625rem solid #eee',
+        marginRight: '1rem',
+        marginBottom: '1rem',
+      },
+      gridItemDetails: {
+        maxWidth: ({ options: { imagePreviewWidth, showImagePreview } }) =>
+          showImagePreview ? imagePreviewWidth : 'auto',
+        display: 'flex',
+        margin: '1rem',
+        justifyContent: 'space-between',
+      },
+      devImage: {
+        display: 'flex',
+        overflow: 'hidden',
+        margin: '1rem',
+        borderStyle: 'dashed',
+        borderColor: '#AFB5C8',
+        borderRadius: '0.3125rem',
+        borderWidth: '0.0625rem',
+        border: '0.125rem dashed black',
+        backgroundColor: '#F0F1F5',
+        width: ({ options: { imagePreviewWidth } }) => imagePreviewWidth,
+        height: ({ options: { imagePreviewHeight } }) => imagePreviewHeight,
+      },
+      gridDevImage: {
+        extend: 'devImage',
+
+        margin: 0,
+        borderRadius: '0.3125rem 0.3125rem 0 0',
+        width: ({ options: { imagePreviewWidth } }) => imagePreviewWidth,
+        height: ({ options: { imagePreviewHeight } }) => imagePreviewHeight,
+      },
+      deleteIcon: {
+        color: `${t.colors.light}!important`,
+      },
+      uploadingImage: {
+        border: 'none',
+        color: 'white',
+        display: 'flex',
+        overflow: 'hidden',
+        margin: '1rem',
+        alignItems: 'center',
+        borderRadius: '0.3125rem',
+        justifyContent: 'center',
+        backgroundColor: t.colors.warning,
+        width: ({ options: { imagePreviewWidth } }) => imagePreviewWidth,
+        height: ({ options: { imagePreviewHeight } }) => imagePreviewHeight,
+      },
+      gridUploadingImage: {
+        extend: 'uploadingImage',
+
+        margin: 0,
+        borderRadius: '0.3125rem 0.3125rem 0 0',
+        width: ({ options: { imagePreviewWidth } }) => imagePreviewWidth,
+        height: ({ options: { imagePreviewHeight } }) => imagePreviewHeight,
+      },
+      image: {
+        overflow: 'hidden',
+        margin: '1rem',
+        borderRadius: '0.3125rem',
+        backgroundSize: 'cover',
+        width: ({ options: { imagePreviewWidth } }) => imagePreviewWidth,
+        height: ({ options: { imagePreviewHeight } }) => imagePreviewHeight,
+      },
+      gridImage: {
+        margin: 0,
+        overflow: 'hidden',
+        backgroundSize: 'cover',
+        borderRadius: '0.3125rem 0.3125rem 0 0',
+        width: ({ options: { imagePreviewWidth } }) => imagePreviewWidth,
+        height: ({ options: { imagePreviewHeight } }) => imagePreviewHeight,
+      },
+      fileDetails: {
+        flexGrow: 1,
+        maxWidth: ({
+          options: { type, imagePreviewWidth, showImagePreview },
+        }) =>
+          showImagePreview && type === 'grid'
+            ? `calc(${imagePreviewWidth} - 60px)`
+            : 'auto',
+        display: 'flex',
+        flexDirection: 'column',
+      },
+      fileDetail: {
+        margin: 0,
+        color: t.colors.medium,
+      },
+      fileDetailList: {
         display: 'flex',
         alignItems: 'center',
       },
+      divider: {
+        width: '0.1875rem',
+        height: '0.1875rem',
+        borderRadius: '50%',
+        marginLeft: '1rem',
+        backgroundColor: t.colors.light,
+        marginRight: '1rem',
+      },
+      hr: {
+        height: 1,
+        margin: 0,
+        border: 'none',
+        backgroundColor: t.colors.light,
+      },
+      deleteButtonWrapper: {
+        margin: ({ options: { type } }) => (type === 'grid' ? 0 : '1rem'),
+      },
       remove: {
-        padding: ['0.25rem', '!important'],
+        height: '1.875rem',
+        padding: '0.25rem!important',
       },
     };
   },

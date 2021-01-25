@@ -5,7 +5,7 @@
   actions: [],
   interactions: [
     {
-      name: 'CloseDialog',
+      name: 'Hide',
       sourceEvent: 'Click',
       ref: {
         targetComponentId: '#dialog',
@@ -14,7 +14,7 @@
       type: 'Custom',
     },
     {
-      name: 'CloseDialog',
+      name: 'Hide',
       sourceEvent: 'Click',
       ref: {
         targetComponentId: '#dialog',
@@ -425,7 +425,7 @@
                           type: 'TOGGLE',
                         },
                         {
-                          value: 'relative',
+                          value: 'static',
                           label: 'Position',
                           key: 'position',
                           type: 'CUSTOM',
@@ -2601,7 +2601,7 @@
                           type: 'TOGGLE',
                         },
                         {
-                          value: 'relative',
+                          value: 'static',
                           label: 'Position',
                           key: 'position',
                           type: 'CUSTOM',

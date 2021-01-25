@@ -68,7 +68,6 @@
     const { kind, values: listValues } = getProperty(property) || {};
     const [currentValue, setCurrentValue] = useState(useText(defaultValue));
     const [currentLabel, setCurrentLabel] = useState('');
-
     const labelText = useText(label);
 
     const textFieldProps = {
@@ -203,7 +202,7 @@
     }, [loading]);
 
     if (err && !displayError) {
-      B.triggerEvent('onError', err.message);
+      B.triggerEvent('onError', err);
     }
 
     const { results } = data || {};
@@ -268,6 +267,7 @@
     }, [results]);
 
     const defaultRecord = getDefaultValue();
+
     useEffect(() => {
       if (!multiple && defaultRecord && searchProp) {
         setCurrentLabel(defaultRecord[searchProp.name]);
@@ -390,9 +390,6 @@
           },
         }}
         onInputChange={(_, inputValue) => {
-          if (!freeSolo) {
-            return;
-          }
           setSearchParam(inputValue);
         }}
         onChange={onChange}

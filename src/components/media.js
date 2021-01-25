@@ -16,9 +16,22 @@
     } = options;
 
     const titleText = useText(title);
-    const imgUrl = useText(imageSource);
     const videoUrl = useText(videoSource);
     const iframeUrl = useText(iframeSource);
+    const imageSourceText = useText(imageSource);
+    const [imgUrl, setImgUrl] = useState(imageSourceText);
+
+    useEffect(() => {
+      setImgUrl(imageSourceText);
+    }, [imageSourceText]);
+
+    B.defineFunction('SetCustomImage', url => {
+      setImgUrl(url);
+    });
+
+    B.defineFunction('RemoveCustomImage', () => {
+      setImgUrl(imageSourceText);
+    });
 
     const isImage = type === 'img' && imgUrl;
     const isVideo = type === 'video' && videoUrl;
@@ -111,7 +124,7 @@
         className={[
           classes.outerSpacing,
           isDev ? classes.devWrapper : '',
-          !isEmpty ? classes.hasContent : '',
+          !isEmpty && !variable ? classes.hasContent : '',
         ].join(' ')}
       >
         <MediaComponent />

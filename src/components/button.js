@@ -21,10 +21,10 @@
       visible,
       actionId,
       buttonText,
-      actionProperties,
+      actionModels,
     } = options;
 
-    const { env, useText, useAction } = B;
+    const { env, useText, useAction, getIdProperty, getModel, useProperty } = B;
     const isDev = env === 'dev';
     const isAction = linkType === 'action';
     const hasLink = linkTo && linkTo.id !== '';
@@ -35,20 +35,29 @@
     const buttonContent = useText(buttonText);
 
     const [isVisible, setIsVisible] = useState(visible);
-
-    const hideButton = () => setIsVisible(false);
-    const showButton = () => setIsVisible(true);
     const [isLoading, setIsLoading] = useState(false);
-    const toggleVisibility = () => setIsVisible(s => !s);
 
-    const propertyMappings = new Map(actionProperties);
-    const input = Array.from(propertyMappings.keys()).reduce((acc, key) => {
-      const propertyId = propertyMappings.get(key);
+    const camelToSnakeCase = str =>
+      str[0].toLowerCase() +
+      str
+        .slice(1, str.length)
+        .replace(/[A-Z]/g, letter => `_${letter.toLowerCase()}`);
 
-      const value = isDev ? '' : B.useProperty(propertyId);
-      acc[key] = value;
-      return acc;
-    }, {});
+    const input =
+      !isDev && actionModels
+        ? actionModels.reduce((acc, value) => {
+            const propertyUuid = getIdProperty(value);
+            const model = getModel(value);
+            const recordId = propertyUuid && useProperty(propertyUuid);
+
+            if (recordId !== undefined) {
+              acc[camelToSnakeCase(model.name)] = {
+                variable_id: recordId,
+              };
+            }
+            return acc;
+          }, {})
+        : {};
 
     const [actionCallback, { loading }] = (isAction &&
       useAction(actionId, {
@@ -59,20 +68,18 @@
           B.triggerEvent('onActionSuccess', data.actionb5);
         },
         onError(error) {
-          B.triggerEvent('onActionError', error.message);
+          B.triggerEvent('onActionError', error);
         },
       })) || [() => {}, { loading: false }];
-
-    const toggleLoading = () => setIsLoading(l => !l);
 
     useEffect(() => {
       setIsVisible(visible);
     }, [visible]);
 
-    B.defineFunction('Show', showButton);
-    B.defineFunction('Hide', hideButton);
-    B.defineFunction('ToggleVisibility', toggleVisibility);
-    B.defineFunction('ToggleLoadingState', toggleLoading);
+    B.defineFunction('Show', () => setIsVisible(true));
+    B.defineFunction('Hide', () => setIsVisible(false));
+    B.defineFunction('Show/Hide', () => setIsVisible(s => !s));
+    B.defineFunction('Toggle loading state', () => setIsLoading(s => !s));
 
     useEffect(() => {
       if (loading) {
@@ -165,15 +172,12 @@
         },
       },
       root: {
-        color: ({ options: { variant, textColor, background } }) => [
-          style.getColor(variant === 'icon' ? background : textColor),
+        color: ({ options: { background, disabled, textColor, variant } }) => [
+          !disabled
+            ? style.getColor(variant === 'icon' ? background : textColor)
+            : 'rgba(0, 0, 0, 0.26)',
           '!important',
         ],
-        '&.MuiButton-contained.Mui-disabled': {
-          color: ['rgba(0, 0, 0, 0.26)', '!important'],
-          boxShadow: ['none', '!important'],
-          backgroundColor: ['rgba(0, 0, 0, 0.12)', '!important'],
-        },
         width: ({ options: { fullWidth, outerSpacing } }) => {
           if (!fullWidth) return 'auto';
           const marginRight = getSpacing(outerSpacing[1]);
@@ -240,14 +244,14 @@
         },
       },
       contained: {
-        backgroundColor: ({ options: { background } }) => [
-          style.getColor(background),
+        backgroundColor: ({ options: { background, disabled } }) => [
+          !disabled ? style.getColor(background) : 'rgba(0, 0, 0, 0.12)',
           '!important',
         ],
       },
       outlined: {
-        borderColor: ({ options: { background } }) => [
-          style.getColor(background),
+        borderColor: ({ options: { background, disabled } }) => [
+          !disabled ? style.getColor(background) : 'rgba(0, 0, 0, .12)',
           '!important',
         ],
       },

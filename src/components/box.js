@@ -24,6 +24,15 @@
     const isFlex = alignment !== 'none' || valignment !== 'none';
     const opac = transparent ? 0 : 1;
     const [opacity, setOpacity] = useState(opac);
+    const [interactionBackground, setInteractionBackground] = useState('');
+
+    B.defineFunction('setCustomBackgroundImage', url => {
+      setInteractionBackground(`url("${url}")`);
+    });
+
+    B.defineFunction('removeCustomBackgroundImage', () => {
+      setInteractionBackground('');
+    });
 
     const boxOptions = {
       display: isFlex && 'flex',
@@ -57,7 +66,14 @@
         onClick={handleClick}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        style={{ opacity }}
+        style={
+          interactionBackground
+            ? {
+                backgroundImage: interactionBackground,
+                opacity,
+              }
+            : { opacity }
+        }
       >
         {isEmpty ? 'Box' : children}
       </Box>
@@ -111,7 +127,7 @@
         height: ({ options: { height } }) => (isDev ? '100%' : height),
         minHeight: 0,
         position: ({ options: { position } }) =>
-          (!isDev && position) || 'relative',
+          (!isDev && position) || 'unset',
         top: ({ options: { top } }) => !isDev && top,
         right: ({ options: { right } }) => !isDev && right,
         bottom: ({ options: { bottom } }) => !isDev && bottom,

@@ -16,6 +16,12 @@
           },
         },
         {
+          type: 'TOGGLE',
+          label: 'Display Rich Text',
+          key: 'useInnerHtml',
+          value: false,
+        },
+        {
           value: 'Body1',
           label: 'Type',
           key: 'type',
