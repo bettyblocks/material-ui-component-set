@@ -4,7 +4,7 @@
   allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { env, triggerEvent } = B;
+    const { env } = B;
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
     const { label, icon } = options || {};
@@ -17,9 +17,9 @@
 
     useEffect(() => {
       if (active && !isFirstRender) {
-        triggerEvent('OnStepActive');
+        B.triggerEvent('OnStepActive');
       } else if (!active && !isFirstRender) {
-        triggerEvent('OnStepInactive');
+        B.triggerEvent('OnStepInactive');
       }
     }, [active, isFirstRender]);
 
