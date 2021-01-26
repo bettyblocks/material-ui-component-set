@@ -1,3 +1,10 @@
+## [1.89.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.89.1...v1.89.2) (2021-01-26)
+
+
+### Bug Fixes
+
+* use model_name for the variable name instead of the label ([ebb602f](https://github.com/bettyblocks/material-ui-component-set/commit/ebb602fdd72ddcf44848c67589b4119137950cb5))
+
 ## [1.89.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.89.0...v1.89.1) (2021-01-26)
 
 
