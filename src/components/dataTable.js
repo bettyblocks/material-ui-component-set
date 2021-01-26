@@ -6,7 +6,6 @@
   jsx: (() => {
     const {
       Children,
-      defineFunction = () => {},
       env,
       getProperty,
       GetMe,
@@ -210,7 +209,7 @@
       }, 0);
     }
 
-    defineFunction('Refetch', () => {
+    B.defineFunction('Refetch', () => {
       if (pagination === 'never') {
         clearResults();
         skipAppend.current = true;
@@ -222,7 +221,7 @@
       }
     });
 
-    defineFunction('SetSearchValue', event => {
+    B.defineFunction('SetSearchValue', event => {
       setSearch(event.target.value);
     });
 

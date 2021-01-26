@@ -9,7 +9,6 @@
         const {
           Action,
           Children,
-          defineFunction = () => {},
           env,
           getActionInput,
           getIdProperty,
@@ -48,7 +47,7 @@
 
         const mounted = useRef(false);
 
-        defineFunction('Submit', () => {
+        B.defineFunction('Submit', () => {
           if (formRef.current)
             formRef.current.dispatchEvent(new Event('submit'));
         });
@@ -206,7 +205,7 @@
               })) ||
             {};
 
-          defineFunction('Refetch', () => refetch());
+          B.defineFunction('Refetch', () => refetch());
 
           useEffect(() => {
             if (mounted.current && isFetching) {

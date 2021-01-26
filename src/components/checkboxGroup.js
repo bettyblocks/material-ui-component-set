@@ -29,7 +29,6 @@
     } = options;
 
     const {
-      defineFunction = () => {},
       env,
       getCustomModelAttribute,
       getProperty,
@@ -106,7 +105,7 @@
       }
     }
 
-    defineFunction('Refetch', () => refetch());
+    B.defineFunction('Refetch', () => refetch());
 
     useEffect(() => {
       if (isDev) {

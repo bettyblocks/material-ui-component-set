@@ -29,7 +29,6 @@
     } = options;
     const {
       env,
-      defineFunction = () => {},
       getCustomModelAttribute,
       getProperty,
       triggerEvent = () => {},
@@ -116,7 +115,7 @@
       }
     }
 
-    defineFunction('Refetch', () => refetch());
+    B.defineFunction('Refetch', () => refetch());
 
     const handleValidation = () => {
       const hasError = required && !value;

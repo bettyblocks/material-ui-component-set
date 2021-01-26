@@ -28,7 +28,6 @@
       orderBy,
     } = options;
     const {
-      defineFunction = () => {},
       env,
       getCustomModelAttribute,
       getProperty,
@@ -128,7 +127,7 @@
       }
     }
 
-    defineFunction('Refetch', () => refetch());
+    B.defineFunction('Refetch', () => refetch());
 
     // renders the radio component
     const renderRadio = (optionValue, optionLabel) => (

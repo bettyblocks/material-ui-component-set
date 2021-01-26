@@ -44,7 +44,6 @@
     } = window.MaterialUI.Icons;
     const {
       env,
-      defineFunction = () => {},
       getCustomModelAttribute,
       getProperty,
       useAllQuery,
@@ -176,8 +175,8 @@
       }
     }, [isDev, defaultValue]);
 
-    defineFunction('Clear', () => setCurrentValue(null));
-    defineFunction('Refetch', () => refetch());
+    B.defineFunction('Clear', () => setCurrentValue(null));
+    B.defineFunction('Refetch', () => refetch());
 
     useEffect(() => {
       const handler = setTimeout(() => {

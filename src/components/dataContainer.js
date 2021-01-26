@@ -8,7 +8,6 @@
       {(() => {
         const {
           env,
-          defineFunction = () => {},
           getIdProperty,
           MeProvider,
           ModelProvider,
@@ -32,7 +31,7 @@
         const displayError = showError === 'built-in';
 
         const BuilderLayout = () => {
-          defineFunction('Refetch', () => {});
+          B.defineFunction('Refetch', () => {});
 
           return (
             <>
@@ -90,7 +89,7 @@
               })) ||
             {};
 
-          defineFunction('Refetch', () => {
+          B.defineFunction('Refetch', () => {
             refetch();
           });
 
