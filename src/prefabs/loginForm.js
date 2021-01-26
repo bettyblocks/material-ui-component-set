@@ -6754,7 +6754,6 @@
   ],
   actions: [
     {
-      name: 'Update form action',
       ref: {
         id: '#actionId',
         endpointId: '#endpointId',
