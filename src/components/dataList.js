@@ -11,7 +11,6 @@
           getProperty,
           GetMe,
           InteractionScope,
-          triggerEvent = () => {},
           ModelProvider,
           useAllQuery,
           useFilter,
@@ -244,12 +243,12 @@
 
         useEffect(() => {
           if (mounted.current && loading) {
-            triggerEvent('onLoad', loading);
+            B.triggerEvent('onLoad', loading);
           }
         }, [loading]);
 
         const handleClick = (event, context) => {
-          triggerEvent('OnItemClick', event, context);
+          B.triggerEvent('OnItemClick', event, context);
         };
 
         const Wrapper = type === 'inline' ? 'span' : 'div';
@@ -281,7 +280,7 @@
           if (loading) return <div className={classes.skeleton} />;
 
           if (error && !displayError) {
-            triggerEvent('onError', error);
+            B.triggerEvent('onError', error);
           }
           if (error && displayError) {
             return <span>{error.message}</span>;
@@ -292,9 +291,9 @@
           const hasResults = resultCount > 0;
 
           if (hasResults) {
-            triggerEvent('onSuccess', results);
+            B.triggerEvent('onSuccess', results);
           } else {
-            triggerEvent('onNoResults');
+            B.triggerEvent('onNoResults');
           }
 
           return (

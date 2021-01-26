@@ -28,7 +28,6 @@
       getModel,
       getIdProperty,
       Link: BLink,
-      triggerEvent = () => {},
       useText,
       useAction,
       useProperty,
@@ -73,10 +72,10 @@
           input,
         },
         onCompleted(data) {
-          triggerEvent('onActionSuccess', data.actionb5);
+          B.triggerEvent('onActionSuccess', data.actionb5);
         },
         onError(error) {
-          triggerEvent('onActionError', error);
+          B.triggerEvent('onActionError', error);
         },
       })) || [() => {}, { loading: false }];
 
@@ -91,7 +90,7 @@
 
     useEffect(() => {
       if (loading) {
-        triggerEvent('onActionLoad', loading);
+        B.triggerEvent('onActionLoad', loading);
       }
     }, [loading]);
 

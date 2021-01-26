@@ -48,7 +48,6 @@
       getProperty,
       useAllQuery,
       useText,
-      triggerEvent = () => {},
     } = B;
     const isDev = env === 'dev';
     const displayError = showError === 'built-in';
@@ -198,20 +197,20 @@
 
     useEffect(() => {
       if (mounted.current && loading) {
-        triggerEvent('onLoad', loading);
+        B.triggerEvent('onLoad', loading);
       }
     }, [loading]);
 
     if (err && !displayError) {
-      triggerEvent('onError', err);
+      B.triggerEvent('onError', err);
     }
 
     const { results } = data || {};
     if (results) {
       if (results.length > 0) {
-        triggerEvent('onSuccess', results);
+        B.triggerEvent('onSuccess', results);
       } else {
-        triggerEvent('onNoResults');
+        B.triggerEvent('onNoResults');
       }
     }
 
@@ -219,7 +218,7 @@
       if (!valueProp || !newValue) {
         setCurrentValue(newValue);
         setCurrentLabel(newValue);
-        triggerEvent('OnChange');
+        B.triggerEvent('OnChange');
         return;
       }
 
@@ -238,7 +237,7 @@
         newCurrentValue = newValue.map(rec => rec[valueProp.name] || rec);
       }
       setCurrentValue(newCurrentValue);
-      triggerEvent('OnChange');
+      B.triggerEvent('OnChange');
     };
 
     const getDefaultValue = React.useCallback(() => {
@@ -310,7 +309,7 @@
     if (kind === 'list' || kind === 'LIST') {
       const onPropertyListChange = (_, newValue) => {
         setCurrentValue(newValue);
-        triggerEvent('OnChange');
+        B.triggerEvent('OnChange');
       };
 
       const selectValues =

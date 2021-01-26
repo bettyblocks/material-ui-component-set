@@ -31,7 +31,6 @@
       env,
       getCustomModelAttribute,
       getProperty,
-      triggerEvent = () => {},
       useAllQuery,
       useText,
     } = B;
@@ -97,21 +96,21 @@
 
     useEffect(() => {
       if (mounted.current && loading) {
-        triggerEvent('onLoad', loading);
+        B.triggerEvent('onLoad', loading);
       }
     }, [loading]);
 
     if (error && !displayError) {
-      triggerEvent('onError', error);
+      B.triggerEvent('onError', error);
     }
 
     const { results } = data || {};
 
     if (results) {
       if (results.length > 0) {
-        triggerEvent('onSuccess', results);
+        B.triggerEvent('onSuccess', results);
       } else {
-        triggerEvent('onNoResults');
+        B.triggerEvent('onNoResults');
       }
     }
 

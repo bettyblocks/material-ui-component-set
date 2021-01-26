@@ -4,7 +4,7 @@
   allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { env, triggerEvent = () => {}, useText } = B;
+    const { env, useText } = B;
     const { Box } = window.MaterialUI.Core;
     const {
       alignment,
@@ -42,15 +42,15 @@
     };
 
     const handleClick = () => {
-      triggerEvent('OnClick');
+      B.triggerEvent('OnClick');
     };
 
     const handleMouseEnter = () => {
-      triggerEvent('OnMouseEnter');
+      B.triggerEvent('OnMouseEnter');
     };
 
     const handleMouseLeave = () => {
-      triggerEvent('OnMouseLeave');
+      B.triggerEvent('OnMouseLeave');
     };
 
     const BoxCmp = (

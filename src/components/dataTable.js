@@ -11,7 +11,6 @@
       GetMe,
       InteractionScope,
       ModelProvider,
-      triggerEvent = () => {},
       useAllQuery,
       useFilter,
       useText,
@@ -267,18 +266,18 @@
 
     useEffect(() => {
       if (mounted.current && loading) {
-        triggerEvent('onLoad', loading);
+        B.triggerEvent('onLoad', loading);
       }
     }, [loading]);
 
     if (error && !displayError) {
-      triggerEvent('onError', error);
+      B.triggerEvent('onError', error);
     }
 
     if (results.length > 0) {
-      triggerEvent('onSuccess', results);
+      B.triggerEvent('onSuccess', results);
     } else {
-      triggerEvent('onNoResults');
+      B.triggerEvent('onNoResults');
     }
 
     const handleChangePage = (_, newPage) => {
@@ -308,7 +307,7 @@
 
     const handleRowClick = (endpoint, context) => {
       if (isDev) return;
-      triggerEvent('OnRowClick', endpoint, context);
+      B.triggerEvent('OnRowClick', endpoint, context);
       if (hasLink) {
         const history = useHistory();
         history.push(endpoint);
