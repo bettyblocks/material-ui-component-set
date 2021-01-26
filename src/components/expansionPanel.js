@@ -11,7 +11,7 @@
       Typography,
     } = window.MaterialUI.Core;
     const { ExpandMore } = window.MaterialUI.Icons;
-    const { useText, env } = B;
+    const { useText, env, defineFunction } = B;
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
     const isPristine = isEmpty && isDev;
@@ -30,9 +30,9 @@
     const openPanel = () => setExpanded(true);
     const togglePanel = () => setExpanded(s => !s);
 
-    B.defineFunction('Expand', openPanel);
-    B.defineFunction('Collapse', closePanel);
-    B.defineFunction('Expand/Collapse', togglePanel);
+    defineFunction('Expand', openPanel);
+    defineFunction('Collapse', closePanel);
+    defineFunction('Expand/Collapse', togglePanel);
 
     useEffect(() => {
       if (isDev) {
@@ -82,7 +82,8 @@
     return <div className={classes.panel}>{ExpansionPanelComponent}</div>;
   })(),
   styles: B => theme => {
-    const style = new B.Styling(theme);
+    const { mediaMinWidth, Styling } = B;
+    const style = new Styling(theme);
     const getSpacing = (idx, device = 'Mobile') =>
       idx === '0' ? '0rem' : style.getSpacing(idx, device);
     return {
@@ -96,7 +97,7 @@
             getSpacing(innerSpacing[2]),
           paddingLeft: ({ options: { innerSpacing } }) =>
             getSpacing(innerSpacing[3]),
-          [`@media ${B.mediaMinWidth(600)}`]: {
+          [`@media ${mediaMinWidth(600)}`]: {
             paddingTop: ({ options: { innerSpacing } }) =>
               getSpacing(innerSpacing[0], 'Portrait'),
             paddingRight: ({ options: { innerSpacing } }) =>
@@ -106,7 +107,7 @@
             paddingLeft: ({ options: { innerSpacing } }) =>
               getSpacing(innerSpacing[3], 'Portrait'),
           },
-          [`@media ${B.mediaMinWidth(960)}`]: {
+          [`@media ${mediaMinWidth(960)}`]: {
             paddingTop: ({ options: { innerSpacing } }) =>
               getSpacing(innerSpacing[0], 'Landscape'),
             paddingRight: ({ options: { innerSpacing } }) =>
@@ -116,7 +117,7 @@
             paddingLeft: ({ options: { innerSpacing } }) =>
               getSpacing(innerSpacing[3], 'Landscape'),
           },
-          [`@media ${B.mediaMinWidth(1280)}`]: {
+          [`@media ${mediaMinWidth(1280)}`]: {
             paddingTop: ({ options: { innerSpacing } }) =>
               getSpacing(innerSpacing[0], 'Desktop'),
             paddingRight: ({ options: { innerSpacing } }) =>
@@ -140,7 +141,7 @@
           getSpacing(outerSpacing[2]),
         marginLeft: ({ options: { outerSpacing } }) =>
           getSpacing(outerSpacing[3]),
-        [`@media ${B.mediaMinWidth(600)}`]: {
+        [`@media ${mediaMinWidth(600)}`]: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Portrait'),
           marginRight: ({ options: { outerSpacing } }) =>
@@ -150,7 +151,7 @@
           marginLeft: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[3], 'Portrait'),
         },
-        [`@media ${B.mediaMinWidth(960)}`]: {
+        [`@media ${mediaMinWidth(960)}`]: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Landscape'),
           marginRight: ({ options: { outerSpacing } }) =>
@@ -160,7 +161,7 @@
           marginLeft: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[3], 'Landscape'),
         },
-        [`@media ${B.mediaMinWidth(1280)}`]: {
+        [`@media ${mediaMinWidth(1280)}`]: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Desktop'),
           marginRight: ({ options: { outerSpacing } }) =>

@@ -6,7 +6,7 @@
   jsx: (
     <div className={children.length === 0 ? classes.empty : undefined}>
       {(() => {
-        const { useText, env } = B;
+        const { defineFunction = () => {}, useText, env } = B;
         const isDev = env === 'dev';
         const isPristine = isDev && children.length === 0;
 
@@ -45,9 +45,9 @@
           setVisible(initialVisibility);
         }, [checkCondition]);
 
-        B.defineFunction('Hide', () => setVisible(false));
-        B.defineFunction('Show', () => setVisible(true));
-        B.defineFunction('Show/Hide', () => setVisible(s => !s));
+        defineFunction('Hide', () => setVisible(false));
+        defineFunction('Show', () => setVisible(true));
+        defineFunction('Show/Hide', () => setVisible(s => !s));
 
         if (!isDev && !visible) return null;
         return isPristine ? 'Conditional' : children;
