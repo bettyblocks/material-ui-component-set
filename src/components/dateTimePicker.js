@@ -26,7 +26,12 @@
       nameAttribute,
       locale,
     } = options;
-
+    const {
+      defineFunction = () => {},
+      env,
+      getCustomModelAttribute,
+      useText,
+    } = B;
     const {
       MuiPickersUtilsProvider,
       KeyboardTimePicker,
@@ -36,7 +41,6 @@
     const { DateFnsUtils } = window.MaterialUI;
     const { nlLocale, enLocale } = window.MaterialUI.DateLocales;
     const { AccessTime, Event } = window.MaterialUI.Icons;
-    const { useText, env, getCustomModelAttribute } = B;
     const DateFns = new DateFnsUtils();
     const isDev = env === 'dev';
     const [selectedDate, setSelectedDate] = useState(null);
@@ -84,7 +88,7 @@
       }
     };
 
-    B.defineFunction('Clear', () => setSelectedDate(null));
+    defineFunction('Clear', () => setSelectedDate(null));
 
     let DateTimeComponent;
     let format;
@@ -200,7 +204,8 @@
     );
   })(),
   styles: B => t => {
-    const style = new B.Styling(t);
+    const { Styling } = B;
+    const style = new Styling(t);
     return {
       root: {
         display: ({ options: { fullWidth } }) =>

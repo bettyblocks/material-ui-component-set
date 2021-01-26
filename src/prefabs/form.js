@@ -2116,6 +2116,7 @@
                       { name: 'Text', value: 'text' },
                       { name: 'Outlined', value: 'outlined' },
                       { name: 'Contained', value: 'contained' },
+                      { name: 'Icon', value: 'icon' },
                     ],
                   },
                 },

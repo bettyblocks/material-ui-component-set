@@ -1,72 +1,27 @@
 (() => ({
   name: 'List',
   type: 'CONTAINER_COMPONENT',
-  allowedTypes: ['LIST_ITEM', 'LIST_SUBHEADER'],
+  allowedTypes: ['CONTENT_COMPONENT', 'LIST_SUBHEADER', 'CONTAINER_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { List, ListItem, ListItemText } = window.MaterialUI.Core;
-    const { env, ModelProvider, useAllQuery, getProperty } = B;
+    const { List } = window.MaterialUI.Core;
+    const { env } = B;
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
     const isPristine = children.length === 0 && isDev;
-    const { filter, model, disablePadding, dense, orderBy, order } = options;
+    const { disablePadding, dense } = options;
 
-    const DataPlaceHolder = ({ text }) => (
-      <List className={classes.root}>
-        <ListItem>
-          <ListItemText primary={text} />
-        </ListItem>
-      </List>
-    );
-
-    const orderByArray = [orderBy].flat();
-    const sort =
-      !isDev && orderBy
-        ? orderByArray.reduceRight((acc, property, index) => {
-            const prop = getProperty(property);
-            return index === orderByArray.length - 1
-              ? { [prop.name]: order.toUpperCase() }
-              : { [prop.name]: acc };
-          }, {})
-        : {};
-
-    const { loading, error, data } =
-      model &&
-      useAllQuery(model, {
-        filter,
-        variables: {
-          ...(orderBy ? { sort: { relation: sort } } : {}),
-        },
-      });
-
-    if (loading) return <DataPlaceHolder text="loading..." />;
-    if (error) return <DataPlaceHolder text="failed" />;
-
-    const { results } = data || {};
-
-    if (!isDev && results && results.length === 0) {
-      return <DataPlaceHolder text="No results" />;
-    }
-
-    const renderData = () => {
-      if (!model || isDev) {
-        return isEmpty ? (
-          <div
-            className={[
-              isEmpty ? classes.empty : '',
-              isPristine ? classes.pristine : '',
-            ].join(' ')}
-          />
-        ) : (
-          children
-        );
-      }
-      return (results || []).map(value => (
-        <ModelProvider value={value} id={model}>
-          <B.InteractionScope>{children}</B.InteractionScope>
-        </ModelProvider>
-      ));
-    };
+    const renderData = () =>
+      isEmpty ? (
+        <div
+          className={[
+            isEmpty ? classes.empty : '',
+            isPristine ? classes.pristine : '',
+          ].join(' ')}
+        />
+      ) : (
+        children
+      );
 
     return (
       <List
@@ -79,7 +34,8 @@
     );
   })(),
   styles: B => t => {
-    const style = new B.Styling(t);
+    const { Styling } = B;
+    const style = new Styling(t);
     return {
       root: {
         backgroundColor: ({ options: { backgroundColor } }) =>

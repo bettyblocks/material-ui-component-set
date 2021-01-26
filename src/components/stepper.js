@@ -14,7 +14,7 @@
       Button,
     } = window.MaterialUI.Core;
     const { Icons } = window.MaterialUI;
-    const { env, useText, Children } = B;
+    const { defineFunction = () => {}, env, useText, Children } = B;
     const {
       activeStep: stepIndex,
       variant,
@@ -223,8 +223,8 @@
 
     const StepperComponent = type === 'mobile' ? MobileStepperCmp : StepperCmp;
 
-    B.defineFunction('NextStep', () => handleNext());
-    B.defineFunction('PreviousStep', () => handleBack());
+    defineFunction('NextStep', () => handleNext());
+    defineFunction('PreviousStep', () => handleBack());
 
     numRendersRef.current += 1;
 
@@ -239,8 +239,9 @@
     );
   })(),
   styles: B => t => {
-    const style = new B.Styling(t);
-    const isDev = B.env === 'dev';
+    const { env, Styling } = B;
+    const style = new Styling(t);
+    const isDev = env === 'dev';
     return {
       root: {
         backgroundColor: ({ options: { backgroundColor } }) => [

@@ -43,11 +43,13 @@
       CheckBoxOutlineBlank,
     } = window.MaterialUI.Icons;
     const {
-      useText,
-      getProperty,
-      getCustomModelAttribute,
-      useAllQuery,
       env,
+      defineFunction = () => {},
+      getCustomModelAttribute,
+      getProperty,
+      useAllQuery,
+      useText,
+      triggerEvent = () => {},
     } = B;
     const isDev = env === 'dev';
     const displayError = showError === 'built-in';
@@ -174,8 +176,8 @@
       }
     }, [isDev, defaultValue]);
 
-    B.defineFunction('Clear', () => setCurrentValue(null));
-    B.defineFunction('Refetch', () => refetch());
+    defineFunction('Clear', () => setCurrentValue(null));
+    defineFunction('Refetch', () => refetch());
 
     useEffect(() => {
       const handler = setTimeout(() => {
@@ -197,20 +199,20 @@
 
     useEffect(() => {
       if (mounted.current && loading) {
-        B.triggerEvent('onLoad', loading);
+        triggerEvent('onLoad', loading);
       }
     }, [loading]);
 
     if (err && !displayError) {
-      B.triggerEvent('onError', err);
+      triggerEvent('onError', err);
     }
 
     const { results } = data || {};
     if (results) {
       if (results.length > 0) {
-        B.triggerEvent('onSuccess', results);
+        triggerEvent('onSuccess', results);
       } else {
-        B.triggerEvent('onNoResults');
+        triggerEvent('onNoResults');
       }
     }
 
@@ -218,7 +220,7 @@
       if (!valueProp || !newValue) {
         setCurrentValue(newValue);
         setCurrentLabel(newValue);
-        B.triggerEvent('OnChange');
+        triggerEvent('OnChange');
         return;
       }
 
@@ -237,7 +239,7 @@
         newCurrentValue = newValue.map(rec => rec[valueProp.name] || rec);
       }
       setCurrentValue(newCurrentValue);
-      B.triggerEvent('OnChange');
+      triggerEvent('OnChange');
     };
 
     const getDefaultValue = React.useCallback(() => {
@@ -309,7 +311,7 @@
     if (kind === 'list' || kind === 'LIST') {
       const onPropertyListChange = (_, newValue) => {
         setCurrentValue(newValue);
-        B.triggerEvent('OnChange');
+        triggerEvent('OnChange');
       };
 
       const selectValues =
@@ -428,8 +430,8 @@
     );
   })(),
   styles: B => t => {
-    const style = new B.Styling(t);
-    const { color: colorFunc } = B;
+    const { color: colorFunc, Styling } = B;
+    const style = new Styling(t);
     const getOpacColor = (col, val) => colorFunc.alpha(col, val);
     return {
       root: {

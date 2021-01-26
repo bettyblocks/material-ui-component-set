@@ -28,9 +28,17 @@
       orderBy,
     } = options;
 
-    const { useText, getProperty, useAllQuery, getCustomModelAttribute } = B;
+    const {
+      defineFunction = () => {},
+      env,
+      getCustomModelAttribute,
+      getProperty,
+      useAllQuery,
+      useText,
+      triggerEvent = () => {},
+    } = B;
     const displayError = showError === 'built-in';
-    const isDev = B.env === 'dev';
+    const isDev = env === 'dev';
 
     const componentHelperText = useText(helperText);
     const { kind, values: listValues = [] } = getProperty(property) || {};
@@ -82,23 +90,23 @@
       });
 
     if (loading) {
-      B.triggerEvent('onLoad', loading);
+      triggerEvent('onLoad', loading);
     }
 
     if (err && !displayError) {
-      B.triggerEvent('onError', err);
+      triggerEvent('onError', err);
     }
 
     const { results } = data || {};
     if (results) {
       if (results.length > 0) {
-        B.triggerEvent('onSuccess', results);
+        triggerEvent('onSuccess', results);
       } else {
-        B.triggerEvent('onNoResults');
+        triggerEvent('onNoResults');
       }
     }
 
-    B.defineFunction('Refetch', () => refetch());
+    defineFunction('Refetch', () => refetch());
 
     useEffect(() => {
       if (isDev) {
@@ -174,8 +182,8 @@
     return isDev ? <div className={classes.root}>{Control}</div> : Control;
   })(),
   styles: B => t => {
-    const style = new B.Styling(t);
-    const { color: colorFunc } = B;
+    const { color: colorFunc, Styling } = B;
+    const style = new Styling(t);
     const getOpacColor = (col, val) => colorFunc.alpha(col, val);
     return {
       root: {

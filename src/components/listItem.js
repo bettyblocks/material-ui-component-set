@@ -1,7 +1,7 @@
 (() => ({
   name: 'ListItem',
-  type: 'LIST_ITEM',
-  allowedTypes: ['CONTENT_COMPONENT'],
+  type: 'CONTENT_COMPONENT',
+  allowedTypes: ['CONTENT_COMPONENT', 'CONTAINER_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const {
@@ -22,6 +22,8 @@
       secondaryText,
       icon,
       avatar,
+      avatarUrl,
+      avatarOrIcon,
       linkType,
       linkTo,
       linkToExternal,
@@ -47,7 +49,9 @@
 
     const AvatarComponent = (
       <ListItemAvatar>
-        <Avatar>{icon !== 'None' && React.createElement(Icons[icon])}</Avatar>
+        <Avatar src={avatarOrIcon === 'avatar' && avatarUrl}>
+          {avatarOrIcon === 'icon' && React.createElement(Icons[icon])}
+        </Avatar>
       </ListItemAvatar>
     );
 
@@ -77,7 +81,10 @@
         className={classes.root}
         dense={dense}
       >
-        {icon !== 'None' && (avatar ? AvatarComponent : IconComponent)}
+        {avatarOrIcon === 'icon' && !avatar ? IconComponent : null}
+        {(avatarOrIcon === 'icon' && avatar) || avatarOrIcon === 'avatar'
+          ? AvatarComponent
+          : null}
         <ListItemText
           className={isEmpty && isDev && classes.placeholder}
           primary={itemText}
@@ -87,7 +94,8 @@
     );
   })(),
   styles: B => t => {
-    const style = new B.Styling(t);
+    const { Styling } = B;
+    const style = new Styling(t);
     return {
       root: {
         color: ({ options: { titleColor } }) => style.getColor(titleColor),

@@ -52,7 +52,7 @@
               return;
             }
             const newPrefab = { ...prefab };
-            newPrefab.variables[0].name = camelToSnakeCase(model.label);
+            newPrefab.variables[0].name = camelToSnakeCase(model.name);
             newPrefab.structure[0].descendants[1].descendants[0].descendants[0].descendants[0].descendants[2].descendants[1].options[7].value = [
               modelId,
             ];

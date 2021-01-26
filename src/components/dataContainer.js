@@ -6,7 +6,17 @@
   jsx: (
     <div>
       {(() => {
-        const { useOneQuery, useMeQuery, ModelProvider, MeProvider, env } = B;
+        const {
+          env,
+          defineFunction = () => {},
+          getIdProperty,
+          MeProvider,
+          ModelProvider,
+          useEndpoint,
+          useOneQuery,
+          useMeQuery,
+          triggerEvent = () => {},
+        } = B;
 
         const isEmpty = children.length === 0;
         const isDev = env === 'dev';
@@ -22,7 +32,7 @@
         const displayError = showError === 'built-in';
 
         const BuilderLayout = () => {
-          B.defineFunction('Refetch', () => {});
+          defineFunction('Refetch', () => {});
 
           return (
             <>
@@ -45,7 +55,7 @@
             return filter;
           }
 
-          const idProperty = B.getIdProperty(model);
+          const idProperty = getIdProperty(model);
           return {
             [idProperty.id]: { eq: currentRecord },
           };
@@ -69,7 +79,7 @@
 
         const redirect = () => {
           const history = useHistory();
-          history.push(B.useEndpoint(redirectWithoutResult));
+          history.push(useEndpoint(redirectWithoutResult));
         };
 
         const One = ({ modelId }) => {
@@ -80,26 +90,26 @@
               })) ||
             {};
 
-          B.defineFunction('Refetch', () => {
+          defineFunction('Refetch', () => {
             refetch();
           });
 
           if (loading) {
-            B.triggerEvent('onLoad', loading);
+            triggerEvent('onLoad', loading);
             return <span>Loading...</span>;
           }
 
           if (error && !displayError) {
-            B.triggerEvent('onError', error);
+            triggerEvent('onError', error);
           }
           if (error && displayError) {
             return <span>{error.message}</span>;
           }
 
           if (data && data.id) {
-            B.triggerEvent('onSuccess', data);
+            triggerEvent('onSuccess', data);
           } else {
-            B.triggerEvent('onNoResults');
+            triggerEvent('onNoResults');
           }
 
           if (!data && redirectWithoutResult) {
@@ -119,16 +129,16 @@
           const { data, loading, error } = useMeQuery(authenticationProfileId);
 
           if (loading) {
-            B.triggerEvent('onUserLoad');
+            triggerEvent('onUserLoad');
           }
           if (error) {
-            B.triggerEvent('onUserError', error);
+            triggerEvent('onUserError', error);
           }
 
           if (data && data.id) {
-            B.triggerEvent('onUserSuccess', data);
+            triggerEvent('onUserSuccess', data);
           } else {
-            B.triggerEvent('onNoUserResults');
+            triggerEvent('onNoUserResults');
           }
 
           return (

@@ -12,7 +12,6 @@
     >
       {(() => {
         const isEmpty = children.length === 0;
-
         const isPristine = isEmpty && B.env === 'dev';
 
         return children.length !== 0 ? (
@@ -31,7 +30,8 @@
     </div>
   ),
   styles: B => theme => {
-    const style = new B.Styling(theme);
+    const { mediaMinWidth, Styling } = B;
+    const style = new Styling(theme);
     const getSpacing = (idx, device = 'Mobile') =>
       idx === '0' ? '0rem' : style.getSpacing(idx, device);
 
@@ -106,9 +106,10 @@
         borderColor: 'transparent',
         borderStyle: 'none',
         borderRadius: 0,
-        overflow: 'auto',
+        overflow: ({ options: { overflow } }) =>
+          overflow ? 'visible' : 'auto',
         boxSizing: 'border-box',
-        [`@media ${B.mediaMinWidth(600)}`]: {
+        [`@media ${mediaMinWidth(600)}`]: {
           display: ({
             options: {
               columnWidthTabletPortrait,
@@ -164,7 +165,7 @@
           paddingLeft: ({ options: { innerSpacing } }) =>
             getSpacing(innerSpacing[3], 'Portrait'),
         },
-        [`@media ${B.mediaMinWidth(960)}`]: {
+        [`@media ${mediaMinWidth(960)}`]: {
           display: ({
             options: {
               columnWidthTabletLandscape,
@@ -219,7 +220,7 @@
           paddingLeft: ({ options: { innerSpacing } }) =>
             getSpacing(innerSpacing[3], 'Landscape'),
         },
-        [`@media ${B.mediaMinWidth(1280)}`]: {
+        [`@media ${mediaMinWidth(1280)}`]: {
           display: ({
             options: { columnWidth, horizontalAlignment, verticalAlignment },
           }) => {
