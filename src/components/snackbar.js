@@ -15,7 +15,7 @@
       content,
       allowTextServerResponse,
     } = options;
-    const { defineFunction = () => {}, env, useText } = B;
+    const { env, useText } = B;
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
     const [open, setOpen] = useState(false);
@@ -49,7 +49,7 @@
         .replace(/ ,/g, ',')
         .trim();
 
-    defineFunction('Show', showMessage => {
+    B.defineFunction('Show', showMessage => {
       if (typeof showMessage === 'string') setTextFromServer(showMessage);
       if (typeof showMessage === 'object' && showMessage !== null) {
         const errorMessage = formatError(showMessage);
@@ -58,8 +58,8 @@
       setOpen(true);
     });
 
-    defineFunction('Hide', () => setOpen(false));
-    defineFunction('Show/Hide', () => setOpen(s => !s));
+    B.defineFunction('Hide', () => setOpen(false));
+    B.defineFunction('Show/Hide', () => setOpen(s => !s));
 
     useEffect(() => {
       setOpen(visible);

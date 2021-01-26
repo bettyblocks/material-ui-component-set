@@ -28,11 +28,9 @@
       orderBy,
     } = options;
     const {
-      defineFunction = () => {},
       env,
       getCustomModelAttribute,
       getProperty,
-      triggerEvent = () => {},
       useAllQuery,
       useText,
     } = B;
@@ -111,24 +109,24 @@
 
     useEffect(() => {
       if (mounted.current && loading) {
-        triggerEvent('onLoad', loading);
+        B.triggerEvent('onLoad', loading);
       }
     }, [loading]);
 
     if (err && !displayError) {
-      triggerEvent('onError', err);
+      B.triggerEvent('onError', err);
     }
 
     const { results } = data || {};
     if (results) {
       if (results.length > 0) {
-        triggerEvent('onSuccess', results);
+        B.triggerEvent('onSuccess', results);
       } else {
-        triggerEvent('onNoResults');
+        B.triggerEvent('onNoResults');
       }
     }
 
-    defineFunction('Refetch', () => refetch());
+    B.defineFunction('Refetch', () => refetch());
 
     // renders the radio component
     const renderRadio = (optionValue, optionLabel) => (

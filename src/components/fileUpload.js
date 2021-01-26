@@ -4,14 +4,7 @@
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const {
-      defineFunction = () => {},
-      env,
-      getCustomModelAttribute,
-      useFileUpload,
-      useText,
-      triggerEvent = () => {},
-    } = B;
+    const { env, getCustomModelAttribute, useFileUpload, useText } = B;
     const {
       FormControl,
       FormControlLabel,
@@ -100,7 +93,7 @@
           mimeType: acceptList,
         },
         onError: errorData => {
-          triggerEvent('onError', errorData);
+          B.triggerEvent('onError', errorData);
           setUploads({
             ...uploads,
             failureMessage: [errorData.message],
@@ -122,12 +115,12 @@
           ));
 
           if (succeededData.length > 0) {
-            triggerEvent('onSuccess', succeededData);
+            B.triggerEvent('onSuccess', succeededData);
           } else {
-            triggerEvent('onNoResults');
+            B.triggerEvent('onNoResults');
           }
           if (failedData.length > 0) {
-            triggerEvent('onError', formattedFailedData);
+            B.triggerEvent('onError', formattedFailedData);
           }
           setUploads({
             ...uploads,
@@ -395,7 +388,7 @@
 
     useEffect(() => {
       if (loading) {
-        triggerEvent('onLoad');
+        B.triggerEvent('onLoad');
       }
     }, [loading]);
 
@@ -405,7 +398,7 @@
       }
     }, [files]);
 
-    defineFunction('clearFileUpload', e => clearFiles(e));
+    B.defineFunction('clearFileUpload', e => clearFiles(e));
 
     return isDev ? (
       <div>

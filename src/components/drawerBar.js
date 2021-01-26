@@ -20,7 +20,7 @@
       isPersistent,
       breakpoint,
     } = parent;
-    const { defineFunction = () => {}, env } = B;
+    const { env } = B;
 
     const isEmpty = children.length === 0;
     const isDev = env === 'dev';
@@ -30,9 +30,9 @@
     );
     const activeTemporary = isTemporary || (isPersistent && !aboveBreakpoint);
 
-    defineFunction('Show', openDrawer);
-    defineFunction('Hide', closeDrawer);
-    defineFunction('Show/Hide', toggleDrawer);
+    B.defineFunction('Show', openDrawer);
+    B.defineFunction('Hide', closeDrawer);
+    B.defineFunction('Show/Hide', toggleDrawer);
 
     const TempDrawer = (
       <Drawer

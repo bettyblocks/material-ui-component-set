@@ -24,12 +24,10 @@
       actionModels,
     } = options;
     const {
-      defineFunction = () => {},
       env,
       getModel,
       getIdProperty,
       Link: BLink,
-      triggerEvent = () => {},
       useText,
       useAction,
       useProperty,
@@ -74,10 +72,10 @@
           input,
         },
         onCompleted(data) {
-          triggerEvent('onActionSuccess', data.actionb5);
+          B.triggerEvent('onActionSuccess', data.actionb5);
         },
         onError(error) {
-          triggerEvent('onActionError', error);
+          B.triggerEvent('onActionError', error);
         },
       })) || [() => {}, { loading: false }];
 
@@ -85,14 +83,14 @@
       setIsVisible(visible);
     }, [visible]);
 
-    defineFunction('Show', () => setIsVisible(true));
-    defineFunction('Hide', () => setIsVisible(false));
-    defineFunction('Show/Hide', () => setIsVisible(s => !s));
-    defineFunction('Toggle loading state', () => setIsLoading(s => !s));
+    B.defineFunction('Show', () => setIsVisible(true));
+    B.defineFunction('Hide', () => setIsVisible(false));
+    B.defineFunction('Show/Hide', () => setIsVisible(s => !s));
+    B.defineFunction('Toggle loading state', () => setIsLoading(s => !s));
 
     useEffect(() => {
       if (loading) {
-        triggerEvent('onActionLoad', loading);
+        B.triggerEvent('onActionLoad', loading);
       }
     }, [loading]);
 

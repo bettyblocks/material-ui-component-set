@@ -4,14 +4,7 @@
   allowedTypes: ['CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const {
-      defineFunction = () => {},
-      env,
-      GetAll,
-      InteractionScope,
-      ModelProvider,
-      triggerEvent = () => {},
-    } = B;
+    const { env, GetAll, InteractionScope, ModelProvider } = B;
     const { Grid, Hidden } = window.MaterialUI.Core;
     const isDev = env === 'dev';
     const {
@@ -131,12 +124,12 @@
       <GetAll modelId={model} filter={filter}>
         {({ loading, error, data }) => {
           if (loading) {
-            triggerEvent('onLoad', loading);
+            B.triggerEvent('onLoad', loading);
             return <span>Loading...</span>;
           }
 
           if (error && !displayError) {
-            triggerEvent('onError', error);
+            B.triggerEvent('onError', error);
           }
           if (error && displayError) {
             return <span>{error.message}</span>;
@@ -144,9 +137,9 @@
 
           const { results = [] } = data || {};
           if (results.length > 0) {
-            triggerEvent('onSuccess', results);
+            B.triggerEvent('onSuccess', results);
           } else {
-            triggerEvent('onNoResults');
+            B.triggerEvent('onNoResults');
           }
 
           return (
@@ -165,9 +158,9 @@
     const ConditionalGrid = <Hidden only={only}>{GridComp}</Hidden>;
     const RuntimeCmp = isVisible ? ConditionalGrid : <></>;
 
-    defineFunction('Show', () => setIsVisible(true));
-    defineFunction('Hide', () => setIsVisible(false));
-    defineFunction('Show/Hide', () => setIsVisible(s => !s));
+    B.defineFunction('Show', () => setIsVisible(true));
+    B.defineFunction('Hide', () => setIsVisible(false));
+    B.defineFunction('Show/Hide', () => setIsVisible(s => !s));
 
     return isDev ? (
       <div

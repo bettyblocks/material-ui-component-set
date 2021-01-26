@@ -8,14 +8,12 @@
       {(() => {
         const {
           env,
-          defineFunction = () => {},
           getIdProperty,
           MeProvider,
           ModelProvider,
           useEndpoint,
           useOneQuery,
           useMeQuery,
-          triggerEvent = () => {},
         } = B;
 
         const isEmpty = children.length === 0;
@@ -32,7 +30,7 @@
         const displayError = showError === 'built-in';
 
         const BuilderLayout = () => {
-          defineFunction('Refetch', () => {});
+          B.defineFunction('Refetch', () => {});
 
           return (
             <>
@@ -90,26 +88,26 @@
               })) ||
             {};
 
-          defineFunction('Refetch', () => {
+          B.defineFunction('Refetch', () => {
             refetch();
           });
 
           if (loading) {
-            triggerEvent('onLoad', loading);
+            B.triggerEvent('onLoad', loading);
             return <span>Loading...</span>;
           }
 
           if (error && !displayError) {
-            triggerEvent('onError', error);
+            B.triggerEvent('onError', error);
           }
           if (error && displayError) {
             return <span>{error.message}</span>;
           }
 
           if (data && data.id) {
-            triggerEvent('onSuccess', data);
+            B.triggerEvent('onSuccess', data);
           } else {
-            triggerEvent('onNoResults');
+            B.triggerEvent('onNoResults');
           }
 
           if (!data && redirectWithoutResult) {
@@ -129,16 +127,16 @@
           const { data, loading, error } = useMeQuery(authenticationProfileId);
 
           if (loading) {
-            triggerEvent('onUserLoad');
+            B.triggerEvent('onUserLoad');
           }
           if (error) {
-            triggerEvent('onUserError', error);
+            B.triggerEvent('onUserError', error);
           }
 
           if (data && data.id) {
-            triggerEvent('onUserSuccess', data);
+            B.triggerEvent('onUserSuccess', data);
           } else {
-            triggerEvent('onNoUserResults');
+            B.triggerEvent('onNoUserResults');
           }
 
           return (
