@@ -7,7 +7,6 @@
     <div className={classes.root}>
       {(() => {
         const {
-          defineFunction = () => {},
           env,
           getProperty,
           GetMe,
@@ -229,8 +228,8 @@
           };
         }, [search]);
 
-        defineFunction('Refetch', () => refetch());
-        defineFunction('SetSearchValue', event => {
+        B.defineFunction('Refetch', () => refetch());
+        B.defineFunction('SetSearchValue', event => {
           setSearch(event.target.value);
         });
 

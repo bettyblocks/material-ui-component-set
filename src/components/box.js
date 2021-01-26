@@ -4,12 +4,7 @@
   allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const {
-      defineFunction = () => {},
-      env,
-      triggerEvent = () => {},
-      useText,
-    } = B;
+    const { env, triggerEvent = () => {}, useText } = B;
     const { Box } = window.MaterialUI.Core;
     const {
       alignment,
@@ -90,9 +85,9 @@
       }
     }, [isDev, transparent]);
 
-    defineFunction('ToOpaque', () => setOpacity(1));
-    defineFunction('ToSemiTransparent', () => setOpacity(0.5));
-    defineFunction('ToTransparent', () => setOpacity(0));
+    B.defineFunction('ToOpaque', () => setOpacity(1));
+    B.defineFunction('ToSemiTransparent', () => setOpacity(0.5));
+    B.defineFunction('ToTransparent', () => setOpacity(0));
 
     return isDev ? <div className={classes.wrapper}>{BoxCmp}</div> : BoxCmp;
   })(),

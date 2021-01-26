@@ -4,7 +4,7 @@
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { defineFunction = () => {}, env, useText } = B;
+    const { env, useText } = B;
     const isDev = env === 'dev';
     const { CircularProgress, LinearProgress } = window.MaterialUI.Core;
     const {
@@ -26,9 +26,9 @@
       setOpen(visible);
     }, [visible]);
 
-    defineFunction('Show', () => setOpen(true));
-    defineFunction('Hide', () => setOpen(false));
-    defineFunction('Show/Hide', () => setOpen(s => !s));
+    B.defineFunction('Show', () => setOpen(true));
+    B.defineFunction('Hide', () => setOpen(false));
+    B.defineFunction('Show/Hide', () => setOpen(s => !s));
 
     const min = parseInt(useText(minValue), 10) || 0;
     const max = parseInt(useText(maxValue), 10) || 100;

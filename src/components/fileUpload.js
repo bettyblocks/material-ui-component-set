@@ -5,7 +5,6 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const {
-      defineFunction = () => {},
       env,
       getCustomModelAttribute,
       useFileUpload,
@@ -405,7 +404,7 @@
       }
     }, [files]);
 
-    defineFunction('clearFileUpload', e => clearFiles(e));
+    B.defineFunction('clearFileUpload', e => clearFiles(e));
 
     return isDev ? (
       <div>

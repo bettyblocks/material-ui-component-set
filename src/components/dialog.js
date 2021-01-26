@@ -4,7 +4,7 @@
   allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'VERTICAL',
   jsx: (() => {
-    const { defineFunction = () => {}, env } = B;
+    const { env } = B;
     const { isVisible, isFullscreen, width } = options;
     const { Dialog } = window.MaterialUI.Core;
     const isDev = env === 'dev';
@@ -17,9 +17,9 @@
       setIsOpen(isVisible);
     }, [isVisible]);
 
-    defineFunction('Show', openDialog);
-    defineFunction('Hide', closeDialog);
-    defineFunction('Show/Hide', () => setIsOpen(s => !s));
+    B.defineFunction('Show', openDialog);
+    B.defineFunction('Hide', closeDialog);
+    B.defineFunction('Show/Hide', () => setIsOpen(s => !s));
 
     const isEmpty = !children.length;
 

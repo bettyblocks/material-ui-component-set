@@ -8,7 +8,7 @@
     const { Close } = window.MaterialUI.Icons;
     const { Icons } = window.MaterialUI;
     const { IconButton } = window.MaterialUI.Core;
-    const { defineFunction = () => {}, env, useText } = B;
+    const { env, useText } = B;
     const {
       visible,
       icon,
@@ -52,7 +52,7 @@
         .replace(/ ,/g, ',')
         .trim();
 
-    defineFunction('Show', showMessage => {
+    B.defineFunction('Show', showMessage => {
       if (typeof showMessage === 'string') setTextFromServer(showMessage);
       if (typeof showMessage === 'object' && showMessage !== null) {
         const [errorTitle, errorMessage] = formatError(showMessage);
@@ -62,8 +62,8 @@
       setOpen(true);
     });
 
-    defineFunction('Hide', () => setOpen(false));
-    defineFunction('Show/Hide', () => setOpen(s => !s));
+    B.defineFunction('Hide', () => setOpen(false));
+    B.defineFunction('Show/Hide', () => setOpen(s => !s));
 
     const AlertPanel = (
       <Alert

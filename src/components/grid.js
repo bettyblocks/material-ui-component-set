@@ -5,7 +5,6 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const {
-      defineFunction = () => {},
       env,
       GetAll,
       InteractionScope,
@@ -165,9 +164,9 @@
     const ConditionalGrid = <Hidden only={only}>{GridComp}</Hidden>;
     const RuntimeCmp = isVisible ? ConditionalGrid : <></>;
 
-    defineFunction('Show', () => setIsVisible(true));
-    defineFunction('Hide', () => setIsVisible(false));
-    defineFunction('Show/Hide', () => setIsVisible(s => !s));
+    B.defineFunction('Show', () => setIsVisible(true));
+    B.defineFunction('Hide', () => setIsVisible(false));
+    B.defineFunction('Show/Hide', () => setIsVisible(s => !s));
 
     return isDev ? (
       <div

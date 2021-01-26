@@ -24,7 +24,6 @@
       actionModels,
     } = options;
     const {
-      defineFunction = () => {},
       env,
       getModel,
       getIdProperty,
@@ -85,10 +84,10 @@
       setIsVisible(visible);
     }, [visible]);
 
-    defineFunction('Show', () => setIsVisible(true));
-    defineFunction('Hide', () => setIsVisible(false));
-    defineFunction('Show/Hide', () => setIsVisible(s => !s));
-    defineFunction('Toggle loading state', () => setIsLoading(s => !s));
+    B.defineFunction('Show', () => setIsVisible(true));
+    B.defineFunction('Hide', () => setIsVisible(false));
+    B.defineFunction('Show/Hide', () => setIsVisible(s => !s));
+    B.defineFunction('Toggle loading state', () => setIsLoading(s => !s));
 
     useEffect(() => {
       if (loading) {
