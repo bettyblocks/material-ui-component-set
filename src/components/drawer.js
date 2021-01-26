@@ -5,7 +5,6 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { Children, env } = B;
-
     const isEmpty = children.length === 0;
     const isPristine = isEmpty && env === 'dev';
     const {

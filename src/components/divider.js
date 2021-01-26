@@ -11,7 +11,8 @@
     </div>
   ),
   styles: B => t => {
-    const style = new B.Styling(t);
+    const { mediaMinWidth, Styling } = B;
+    const style = new Styling(t);
     const getSpacing = (idx, device = 'Mobile') =>
       idx === '0' ? '0rem' : style.getSpacing(idx, device);
 
@@ -29,7 +30,7 @@
           `calc(100% - ${getSpacing(outerSpacing[1])} - ${getSpacing(
             outerSpacing[3],
           )})`,
-        [`@media ${B.mediaMinWidth(600)}`]: {
+        [`@media ${mediaMinWidth(600)}`]: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Portrait'),
           marginRight: ({ options: { outerSpacing } }) =>
@@ -44,7 +45,7 @@
               'Portrait',
             )} - ${getSpacing(outerSpacing[3], 'Portrait')})`,
         },
-        [`@media ${B.mediaMinWidth(960)}`]: {
+        [`@media ${mediaMinWidth(960)}`]: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Landscape'),
           marginRight: ({ options: { outerSpacing } }) =>
@@ -59,7 +60,7 @@
               'Landscape',
             )} - ${getSpacing(outerSpacing[3], 'Landscape')})`,
         },
-        [`@media ${B.mediaMinWidth(1280)}`]: {
+        [`@media ${mediaMinWidth(1280)}`]: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Desktop'),
           marginRight: ({ options: { outerSpacing } }) =>

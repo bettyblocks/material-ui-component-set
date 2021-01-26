@@ -4,7 +4,14 @@
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { env, useText, useFileUpload, getCustomModelAttribute } = B;
+    const {
+      defineFunction = () => {},
+      env,
+      getCustomModelAttribute,
+      useFileUpload,
+      useText,
+      triggerEvent = () => {},
+    } = B;
     const {
       FormControl,
       FormControlLabel,
@@ -93,7 +100,7 @@
           mimeType: acceptList,
         },
         onError: errorData => {
-          B.triggerEvent('onError', errorData);
+          triggerEvent('onError', errorData);
           setUploads({
             ...uploads,
             failureMessage: [errorData.message],
@@ -115,12 +122,12 @@
           ));
 
           if (succeededData.length > 0) {
-            B.triggerEvent('onSuccess', succeededData);
+            triggerEvent('onSuccess', succeededData);
           } else {
-            B.triggerEvent('onNoResults');
+            triggerEvent('onNoResults');
           }
           if (failedData.length > 0) {
-            B.triggerEvent('onError', formattedFailedData);
+            triggerEvent('onError', formattedFailedData);
           }
           setUploads({
             ...uploads,
@@ -388,7 +395,7 @@
 
     useEffect(() => {
       if (loading) {
-        B.triggerEvent('onLoad');
+        triggerEvent('onLoad');
       }
     }, [loading]);
 
@@ -398,7 +405,7 @@
       }
     }, [files]);
 
-    B.defineFunction('clearFileUpload', e => clearFiles(e));
+    defineFunction('clearFileUpload', e => clearFiles(e));
 
     return isDev ? (
       <div>
@@ -412,8 +419,8 @@
     );
   })(),
   styles: B => t => {
-    const style = new B.Styling(t);
-    const { color: colorFunc } = B;
+    const { color: colorFunc, env, Styling } = B;
+    const style = new Styling(t);
     const getOpacColor = (col, val) => colorFunc.alpha(col, val);
     return {
       root: {
@@ -422,7 +429,7 @@
       },
       label: {
         marginLeft: '0!important',
-        pointerEvents: B.env === 'dev' && 'none',
+        pointerEvents: env === 'dev' && 'none',
         alignItems: 'start!important',
         color: ({ options: { labelColor } }) => [
           style.getColor(labelColor),

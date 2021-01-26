@@ -23,8 +23,17 @@
       buttonText,
       actionModels,
     } = options;
-
-    const { env, useText, useAction, getIdProperty, getModel, useProperty } = B;
+    const {
+      defineFunction = () => {},
+      env,
+      getModel,
+      getIdProperty,
+      Link: BLink,
+      triggerEvent = () => {},
+      useText,
+      useAction,
+      useProperty,
+    } = B;
     const isDev = env === 'dev';
     const isAction = linkType === 'action';
     const hasLink = linkTo && linkTo.id !== '';
@@ -65,10 +74,10 @@
           input,
         },
         onCompleted(data) {
-          B.triggerEvent('onActionSuccess', data.actionb5);
+          triggerEvent('onActionSuccess', data.actionb5);
         },
         onError(error) {
-          B.triggerEvent('onActionError', error);
+          triggerEvent('onActionError', error);
         },
       })) || [() => {}, { loading: false }];
 
@@ -76,14 +85,14 @@
       setIsVisible(visible);
     }, [visible]);
 
-    B.defineFunction('Show', () => setIsVisible(true));
-    B.defineFunction('Hide', () => setIsVisible(false));
-    B.defineFunction('Show/Hide', () => setIsVisible(s => !s));
-    B.defineFunction('Toggle loading state', () => setIsLoading(s => !s));
+    defineFunction('Show', () => setIsVisible(true));
+    defineFunction('Hide', () => setIsVisible(false));
+    defineFunction('Show/Hide', () => setIsVisible(s => !s));
+    defineFunction('Toggle loading state', () => setIsLoading(s => !s));
 
     useEffect(() => {
       if (loading) {
-        B.triggerEvent('onActionLoad', loading);
+        triggerEvent('onActionLoad', loading);
       }
     }, [loading]);
 
@@ -95,7 +104,7 @@
         linkType === 'external' && hasExternalLink
           ? linkToExternalVariable
           : undefined,
-      component: linkType === 'internal' && hasLink ? B.Link : undefined,
+      component: linkType === 'internal' && hasLink ? BLink : undefined,
       endpoint: linkType === 'internal' && hasLink ? linkTo : undefined,
     };
 
@@ -158,7 +167,8 @@
     return isVisible ? ButtonComponent : <></>;
   })(),
   styles: B => t => {
-    const style = new B.Styling(t);
+    const { mediaMinWidth, Styling } = B;
+    const style = new Styling(t);
     const getSpacing = (idx, device = 'Mobile') =>
       idx === '0' ? '0rem' : style.getSpacing(idx, device);
     return {
@@ -193,7 +203,7 @@
         marginLeft: ({ options: { outerSpacing } }) =>
           getSpacing(outerSpacing[3]),
         '&.MuiButton-root, &.MuiIconButton-root': {
-          [`@media ${B.mediaMinWidth(600)}`]: {
+          [`@media ${mediaMinWidth(600)}`]: {
             width: ({ options: { fullWidth, outerSpacing } }) => {
               if (!fullWidth) return 'auto';
               const marginRight = getSpacing(outerSpacing[1], 'Portrait');
@@ -209,7 +219,7 @@
             marginLeft: ({ options: { outerSpacing } }) =>
               getSpacing(outerSpacing[3], 'Portrait'),
           },
-          [`@media ${B.mediaMinWidth(960)}`]: {
+          [`@media ${mediaMinWidth(960)}`]: {
             width: ({ options: { fullWidth, outerSpacing } }) => {
               if (!fullWidth) return 'auto';
               const marginRight = getSpacing(outerSpacing[1], 'Landscape');
@@ -225,7 +235,7 @@
             marginLeft: ({ options: { outerSpacing } }) =>
               getSpacing(outerSpacing[3], 'Landscape'),
           },
-          [`@media ${B.mediaMinWidth(1280)}`]: {
+          [`@media ${mediaMinWidth(1280)}`]: {
             width: ({ options: { fullWidth, outerSpacing } }) => {
               if (!fullWidth) return 'auto';
               const marginRight = getSpacing(outerSpacing[1], 'Desktop');
