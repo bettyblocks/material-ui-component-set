@@ -1,3 +1,10 @@
+## [1.89.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.89.2...v1.89.3) (2021-01-26)
+
+
+### Bug Fixes
+
+* fixes defineFunction destructuring ([b9b568f](https://github.com/bettyblocks/material-ui-component-set/commit/b9b568fd8ea61da53b18f57c3e69ec3ec5f98ffb))
+
 ## [1.89.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.89.1...v1.89.2) (2021-01-26)
 
 
