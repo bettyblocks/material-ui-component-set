@@ -140,9 +140,11 @@
 
     return (
       <div
-        className={[classes.outerSpacing, isDev ? classes.devWrapper : ''].join(
-          ' ',
-        )}
+        className={[
+          classes.outerSpacing,
+          isDev ? classes.devWrapper : '',
+          !isEmpty && !variable ? classes.hasContent : '',
+        ].join(' ')}
       >
         <MediaComponent />
       </div>
