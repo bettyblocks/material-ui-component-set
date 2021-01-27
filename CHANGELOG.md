@@ -1,3 +1,10 @@
+# [1.90.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.89.4...v1.90.0) (2021-01-27)
+
+
+### Features
+
+* make it possible to open external link in new tab ([e4fc66a](https://github.com/bettyblocks/material-ui-component-set/commit/e4fc66a5e27c8b3f1b8d2b9cd2d8f227e5a9de08))
+
 ## [1.89.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.89.3...v1.89.4) (2021-01-27)
 
 
