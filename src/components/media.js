@@ -106,12 +106,8 @@
       MediaComponent = () => (
         <Link
           href={href}
-          component={
-            linkType === 'internal' && hasInteralLink ? B.Link : undefined
-          }
-          endpoint={
-            linkType === 'internal' && hasInteralLink ? linkTo : undefined
-          }
+          component={hasInteralLink ? B.Link : undefined}
+          endpoint={hasInteralLink ? linkTo : undefined}
         >
           {ImageComponent}
         </Link>
