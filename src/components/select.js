@@ -27,13 +27,20 @@
       orderBy,
       blanco,
     } = options;
+    const {
+      env,
+      getCustomModelAttribute,
+      getProperty,
+      useAllQuery,
+      useText,
+    } = B;
     const { TextField, MenuItem } = window.MaterialUI.Core;
     const displayError = showError === 'built-in';
-    const isDev = B.env === 'dev';
-    const { useAllQuery, getProperty, useText, getCustomModelAttribute } = B;
+    const isDev = env === 'dev';
     const [errorState, setErrorState] = useState(false);
     const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
+    const mounted = useRef(false);
     const blancoText = useText(blanco);
 
     const { kind, values = [] } = getProperty(property) || {};
@@ -80,8 +87,6 @@
         },
       });
 
-    const mounted = useRef(false);
-
     useEffect(() => {
       mounted.current = true;
       return () => {
@@ -114,9 +119,7 @@
     const handleValidation = () => {
       const hasError = required && !value;
       setErrorState(hasError);
-      const message = hasError
-        ? useText(validationValueMissing)
-        : useText(helperText);
+      const message = useText(hasError ? validationValueMissing : helperText);
       setHelper(message);
     };
 
@@ -212,7 +215,8 @@
     return isDev ? <div className={classes.root}>{SelectCmp}</div> : SelectCmp;
   })(),
   styles: B => t => {
-    const style = new B.Styling(t);
+    const { Styling } = B;
+    const style = new Styling(t);
     return {
       root: {
         display: ({ options: { fullWidth } }) =>

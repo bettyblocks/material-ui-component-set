@@ -126,9 +126,9 @@
         },
         {
           value: [],
-          label: 'Property',
-          key: 'actionProperties',
-          type: 'ACTION_PROPERTIES',
+          label: 'Objects to pass to action',
+          key: 'actionModels',
+          type: 'ACTION_INPUT_OBJECTS',
           configuration: {
             apiVersion: 'v1',
             condition: {
