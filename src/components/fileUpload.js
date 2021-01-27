@@ -71,7 +71,7 @@
     };
 
     const clearFiles = e => {
-      if (e && e.preventDefault()) e.preventDefault();
+      if (e && e.preventDefault) e.preventDefault();
       setUploads({
         files: [],
         data: [],
