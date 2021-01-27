@@ -82,6 +82,15 @@
       }
     };
 
+    const ImageComponent = (
+      <img
+        className={classes.media}
+        src={imgUrl}
+        title={titleText}
+        alt={imgAlt}
+      />
+    );
+
     let MediaComponent = () => {
       if (!isDev) return null;
       return (
@@ -105,23 +114,11 @@
             linkType === 'internal' && hasInteralLink ? linkTo : undefined
           }
         >
-          <img
-            className={classes.media}
-            src={imgUrl}
-            title={titleText}
-            alt={imgAlt}
-          />
+          {ImageComponent}
         </Link>
       );
-    } else if (isImage && !variableDev && !isLink) {
-      MediaComponent = () => (
-        <img
-          className={classes.media}
-          src={imgUrl}
-          title={titleText}
-          alt={imgAlt}
-        />
-      );
+    } else if (isImage && !variableDev) {
+      MediaComponent = () => ({ ImageComponent });
     } else if (isVideo) {
       MediaComponent = () => (
         // eslint-disable-next-line jsx-a11y/media-has-caption
