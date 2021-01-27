@@ -845,6 +845,26 @@
                               },
                             },
                             {
+                              value: '_self',
+                              label: 'Open in',
+                              key: 'openLinkToExternal',
+                              type: 'CUSTOM',
+                              configuration: {
+                                condition: {
+                                  type: 'SHOW',
+                                  option: 'linkType',
+                                  comparator: 'EQ',
+                                  value: 'external',
+                                },
+                                as: 'BUTTONGROUP',
+                                dataType: 'string',
+                                allowedInput: [
+                                  { name: 'Current Tab', value: '_self' },
+                                  { name: 'New Tab', value: '_blank' },
+                                ],
+                              },
+                            },
+                            {
                               value: '',
                               label: 'Action',
                               key: 'actionId',
@@ -2932,6 +2952,26 @@
                               },
                             },
                             {
+                              value: '_self',
+                              label: 'Open in',
+                              key: 'openLinkToExternal',
+                              type: 'CUSTOM',
+                              configuration: {
+                                condition: {
+                                  type: 'SHOW',
+                                  option: 'linkType',
+                                  comparator: 'EQ',
+                                  value: 'external',
+                                },
+                                as: 'BUTTONGROUP',
+                                dataType: 'string',
+                                allowedInput: [
+                                  { name: 'Current Tab', value: '_self' },
+                                  { name: 'New Tab', value: '_blank' },
+                                ],
+                              },
+                            },
+                            {
                               value: '',
                               label: 'Action',
                               key: 'actionId',
@@ -4382,6 +4422,26 @@
                                   comparator: 'EQ',
                                   value: 'external',
                                 },
+                              },
+                            },
+                            {
+                              value: '_self',
+                              label: 'Open in',
+                              key: 'openLinkToExternal',
+                              type: 'CUSTOM',
+                              configuration: {
+                                condition: {
+                                  type: 'SHOW',
+                                  option: 'linkType',
+                                  comparator: 'EQ',
+                                  value: 'external',
+                                },
+                                as: 'BUTTONGROUP',
+                                dataType: 'string',
+                                allowedInput: [
+                                  { name: 'Current Tab', value: '_self' },
+                                  { name: 'New Tab', value: '_blank' },
+                                ],
                               },
                             },
                             {
