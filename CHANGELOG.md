@@ -1,3 +1,11 @@
+## [1.89.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.89.3...v1.89.4) (2021-01-27)
+
+
+### Bug Fixes
+
+* clear upload interaction can be called without event argument ([b785f3d](https://github.com/bettyblocks/material-ui-component-set/commit/b785f3d2e962fc8fde395f843f0ceb1b1d7dfd81))
+* only check if preventDefault is defined ([230247f](https://github.com/bettyblocks/material-ui-component-set/commit/230247fbcd33bae92bcb26673a46d6df5850cb00))
+
 ## [1.89.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.89.2...v1.89.3) (2021-01-26)
 
 
