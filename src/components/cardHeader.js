@@ -10,6 +10,8 @@
     const { avatar, avatarType, title, subheader } = options;
 
     const avatarSource = useText(avatar);
+    const avatarTitle = useText(title);
+    const avatarSubheader = useText(subheader);
     const AvatarImage = <Avatar alt="" src={avatarSource} />;
     const AvatarText = <Avatar>{avatarSource}</Avatar>;
     const AvatarComponent = avatarType === 'text' ? AvatarText : AvatarImage;
@@ -20,8 +22,8 @@
     const CardHeaderComponent = (
       <CardHeader
         avatar={avatarSource && AvatarComponent}
-        title={useText(title)}
-        subheader={useText(subheader)}
+        title={avatarTitle}
+        subheader={avatarSubheader}
         className={[
           isEmpty ? classes.empty : '',
           isPristine ? classes.pristine : '',

@@ -239,8 +239,9 @@
     );
   })(),
   styles: B => t => {
-    const style = new B.Styling(t);
-    const isDev = B.env === 'dev';
+    const { env, Styling } = B;
+    const style = new Styling(t);
+    const isDev = env === 'dev';
     return {
       root: {
         backgroundColor: ({ options: { backgroundColor } }) => [
