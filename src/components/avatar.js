@@ -49,7 +49,8 @@
     return isDev ? <div>{AvatarComponent}</div> : AvatarComponent;
   })(),
   styles: B => t => {
-    const style = new B.Styling(t);
+    const { Styling } = B;
+    const style = new Styling(t);
     const convertSizes = sizes =>
       sizes.map(size => style.getSpacing(size)).join(' ');
     return {

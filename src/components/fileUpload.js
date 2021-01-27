@@ -4,7 +4,7 @@
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { env, useText, useFileUpload, getCustomModelAttribute } = B;
+    const { env, getCustomModelAttribute, useFileUpload, useText } = B;
     const {
       FormControl,
       FormControlLabel,
@@ -412,8 +412,8 @@
     );
   })(),
   styles: B => t => {
-    const style = new B.Styling(t);
-    const { color: colorFunc } = B;
+    const { color: colorFunc, env, Styling } = B;
+    const style = new Styling(t);
     const getOpacColor = (col, val) => colorFunc.alpha(col, val);
     return {
       root: {
@@ -422,7 +422,7 @@
       },
       label: {
         marginLeft: '0!important',
-        pointerEvents: B.env === 'dev' && 'none',
+        pointerEvents: env === 'dev' && 'none',
         alignItems: 'start!important',
         color: ({ options: { labelColor } }) => [
           style.getColor(labelColor),

@@ -21,10 +21,17 @@
       visible,
       actionId,
       buttonText,
-      actionProperties,
+      actionModels,
     } = options;
-
-    const { env, useText, useAction } = B;
+    const {
+      env,
+      getModel,
+      getIdProperty,
+      Link: BLink,
+      useText,
+      useAction,
+      useProperty,
+    } = B;
     const isDev = env === 'dev';
     const isAction = linkType === 'action';
     const hasLink = linkTo && linkTo.id !== '';
@@ -37,14 +44,27 @@
     const [isVisible, setIsVisible] = useState(visible);
     const [isLoading, setIsLoading] = useState(false);
 
-    const propertyMappings = new Map(actionProperties);
-    const input = Array.from(propertyMappings.keys()).reduce((acc, key) => {
-      const propertyId = propertyMappings.get(key);
+    const camelToSnakeCase = str =>
+      str[0].toLowerCase() +
+      str
+        .slice(1, str.length)
+        .replace(/[A-Z]/g, letter => `_${letter.toLowerCase()}`);
 
-      const value = isDev ? '' : B.useProperty(propertyId);
-      acc[key] = value;
-      return acc;
-    }, {});
+    const input =
+      !isDev && actionModels
+        ? actionModels.reduce((acc, value) => {
+            const propertyUuid = getIdProperty(value);
+            const model = getModel(value);
+            const recordId = propertyUuid && useProperty(propertyUuid);
+
+            if (recordId !== undefined) {
+              acc[camelToSnakeCase(model.name)] = {
+                variable_id: recordId,
+              };
+            }
+            return acc;
+          }, {})
+        : {};
 
     const [actionCallback, { loading }] = (isAction &&
       useAction(actionId, {
@@ -82,7 +102,7 @@
         linkType === 'external' && hasExternalLink
           ? linkToExternalVariable
           : undefined,
-      component: linkType === 'internal' && hasLink ? B.Link : undefined,
+      component: linkType === 'internal' && hasLink ? BLink : undefined,
       endpoint: linkType === 'internal' && hasLink ? linkTo : undefined,
     };
 
@@ -145,7 +165,8 @@
     return isVisible ? ButtonComponent : <></>;
   })(),
   styles: B => t => {
-    const style = new B.Styling(t);
+    const { mediaMinWidth, Styling } = B;
+    const style = new Styling(t);
     const getSpacing = (idx, device = 'Mobile') =>
       idx === '0' ? '0rem' : style.getSpacing(idx, device);
     return {
@@ -180,7 +201,7 @@
         marginLeft: ({ options: { outerSpacing } }) =>
           getSpacing(outerSpacing[3]),
         '&.MuiButton-root, &.MuiIconButton-root': {
-          [`@media ${B.mediaMinWidth(600)}`]: {
+          [`@media ${mediaMinWidth(600)}`]: {
             width: ({ options: { fullWidth, outerSpacing } }) => {
               if (!fullWidth) return 'auto';
               const marginRight = getSpacing(outerSpacing[1], 'Portrait');
@@ -196,7 +217,7 @@
             marginLeft: ({ options: { outerSpacing } }) =>
               getSpacing(outerSpacing[3], 'Portrait'),
           },
-          [`@media ${B.mediaMinWidth(960)}`]: {
+          [`@media ${mediaMinWidth(960)}`]: {
             width: ({ options: { fullWidth, outerSpacing } }) => {
               if (!fullWidth) return 'auto';
               const marginRight = getSpacing(outerSpacing[1], 'Landscape');
@@ -212,7 +233,7 @@
             marginLeft: ({ options: { outerSpacing } }) =>
               getSpacing(outerSpacing[3], 'Landscape'),
           },
-          [`@media ${B.mediaMinWidth(1280)}`]: {
+          [`@media ${mediaMinWidth(1280)}`]: {
             width: ({ options: { fullWidth, outerSpacing } }) => {
               if (!fullWidth) return 'auto';
               const marginRight = getSpacing(outerSpacing[1], 'Desktop');

@@ -103,7 +103,8 @@
     );
   })(),
   styles: B => theme => {
-    const style = new B.Styling(theme);
+    const { Styling } = B;
+    const style = new Styling(theme);
     const getSpacing = (idx, device = 'Mobile') =>
       idx === '0' ? '0rem' : style.getSpacing(idx, device);
 
