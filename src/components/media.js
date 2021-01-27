@@ -161,6 +161,10 @@
           pointerEvents: 'none',
         },
       },
+      hasContent: {
+        width: 'fit-content',
+        height: 'fit-content',
+      },
       empty: {
         position: 'relative',
         width: ({ options: { width } }) => width || '100%',
@@ -198,7 +202,10 @@
           fill: '#666D85',
         },
       },
-
+      media: {
+        width: ({ options: { width } }) => width,
+        height: ({ options: { height } }) => height,
+      },
       outerSpacing: {
         marginTop: ({ options: { outerSpacing } }) =>
           getSpacing(outerSpacing[0]),
