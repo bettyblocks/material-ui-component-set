@@ -14,8 +14,6 @@
       iframeSource,
       imgAlt,
       title,
-      width,
-      height,
       linkTo,
       linkToExternal,
       linkType,
@@ -34,9 +32,9 @@
     const variable = imageSource && imageSource.findIndex(v => v.name) !== -1;
     const variableDev = env === 'dev' && (variable || !imgUrl);
 
-    const hasLink = linkTo && linkTo.id !== '';
+    const hasInteralLink = linkTo && linkTo.id !== '';
     const hasExternalLink = linkToExternal && linkToExternal.id !== '';
-    const anyLink = hasLink || hasExternalLink;
+    const isLink = hasInteralLink || hasExternalLink;
     const linkToExternalText = useText(linkToExternal);
     const href =
       linkType === 'external' && hasExternalLink
@@ -96,16 +94,18 @@
       );
     };
 
-    if (isImage && !variableDev && anyLink) {
+    if (isImage && !variableDev && isLink) {
       MediaComponent = () => (
         <Link
           href={href}
-          component={linkType === 'internal' && hasLink ? B.Link : undefined}
-          endpoint={linkType === 'internal' && hasLink ? linkTo : undefined}
+          component={
+            linkType === 'internal' && hasInteralLink ? B.Link : undefined
+          }
+          endpoint={
+            linkType === 'internal' && hasInteralLink ? linkTo : undefined
+          }
         >
           <img
-            width={width}
-            height={height}
             className={classes.media}
             src={imgUrl}
             title={titleText}
@@ -113,11 +113,9 @@
           />
         </Link>
       );
-    } else if (isImage && !variableDev && !anyLink) {
+    } else if (isImage && !variableDev && !isLink) {
       MediaComponent = () => (
         <img
-          width={width}
-          height={height}
           className={classes.media}
           src={imgUrl}
           title={titleText}
@@ -128,8 +126,6 @@
       MediaComponent = () => (
         // eslint-disable-next-line jsx-a11y/media-has-caption
         <video
-          width={width}
-          height={height}
           className={classes.media}
           src={videoUrl}
           title={titleText}
@@ -138,13 +134,7 @@
       );
     } else if (isIframe) {
       MediaComponent = () => (
-        <iframe
-          width={width}
-          height={height}
-          className={classes.media}
-          title={titleText}
-          src={iframeUrl}
-        />
+        <iframe className={classes.media} title={titleText} src={iframeUrl} />
       );
     }
 
