@@ -32,9 +32,11 @@
     const variable = imageSource && imageSource.findIndex(v => v.name) !== -1;
     const variableDev = env === 'dev' && (variable || !imgUrl);
 
-    const hasInteralLink = linkTo && linkTo.id !== '';
-    const hasExternalLink = linkToExternal && linkToExternal.id !== '';
-    const isLink = hasInteralLink || hasExternalLink;
+    const hasInteralLink =
+      linkType === 'internal' && linkTo && linkTo.id !== '';
+    const hasExternalLink =
+      linkType === 'external' && linkToExternal && linkToExternal.id !== '';
+    const hasLink = hasInteralLink || hasExternalLink;
     const linkToExternalText = useText(linkToExternal);
     const href =
       linkType === 'external' && hasExternalLink
@@ -103,7 +105,7 @@
       );
     };
 
-    if (isImage && !variableDev && isLink) {
+    if (isImage && !variableDev && hasLink) {
       MediaComponent = () => (
         <Link
           href={href}
