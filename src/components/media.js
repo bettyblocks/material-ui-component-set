@@ -38,10 +38,7 @@
       linkType === 'external' && linkToExternal && linkToExternal.id !== '';
     const hasLink = hasInteralLink || hasExternalLink;
     const linkToExternalText = useText(linkToExternal);
-    const href =
-      linkType === 'external' && hasExternalLink
-        ? linkToExternalText
-        : undefined;
+    const href = hasExternalLink ? linkToExternalText : undefined;
 
     const ImgPlaceholder = () => (
       <svg className={classes.placeholder} width={86} height={48}>
