@@ -5,6 +5,7 @@
   orientation: 'VERTICAL',
   jsx: (() => {
     const { env, useText } = B;
+    const { Link } = window.MaterialUI.Core;
     const isDev = env === 'dev';
     const {
       type,
@@ -13,6 +14,9 @@
       iframeSource,
       imgAlt,
       title,
+      linkTo,
+      linkToExternal,
+      linkType,
     } = options;
 
     const titleText = useText(title);
@@ -40,6 +44,14 @@
 
     const variable = imageSource && imageSource.findIndex(v => v.name) !== -1;
     const variableDev = env === 'dev' && (variable || !imgUrl);
+
+    const hasInteralLink =
+      linkType === 'internal' && linkTo && linkTo.id !== '';
+    const hasExternalLink =
+      linkType === 'external' && linkToExternal && linkToExternal.id !== '';
+    const hasLink = hasInteralLink || hasExternalLink;
+    const linkToExternalText = useText(linkToExternal);
+    const href = hasExternalLink ? linkToExternalText : undefined;
 
     const ImgPlaceholder = () => (
       <svg className={classes.placeholder} width={86} height={48}>
@@ -82,6 +94,15 @@
       }
     };
 
+    const ImageComponent = (
+      <img
+        className={classes.media}
+        src={imgUrl}
+        title={titleText}
+        alt={imgAlt}
+      />
+    );
+
     let MediaComponent = () => {
       if (!isDev) return null;
       return (
@@ -94,15 +115,18 @@
       );
     };
 
-    if (isImage && !variableDev) {
+    if (isImage && !variableDev && hasLink) {
       MediaComponent = () => (
-        <img
-          className={classes.media}
-          src={imgUrl}
-          title={titleText}
-          alt={imgAlt}
-        />
+        <Link
+          href={href}
+          component={hasInteralLink ? B.Link : undefined}
+          endpoint={hasInteralLink ? linkTo : undefined}
+        >
+          {ImageComponent}
+        </Link>
       );
+    } else if (isImage && !variableDev) {
+      MediaComponent = () => ({ ImageComponent });
     } else if (isVideo) {
       MediaComponent = () => (
         // eslint-disable-next-line jsx-a11y/media-has-caption
