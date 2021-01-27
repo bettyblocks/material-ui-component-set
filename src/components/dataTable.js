@@ -154,6 +154,7 @@
 
     const where = useFilter(newFilter);
 
+    // TODO: move model to skip
     const { loading, error, data, refetch } =
       model &&
       useAllQuery(model, {

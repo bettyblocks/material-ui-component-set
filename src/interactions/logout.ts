@@ -3,14 +3,14 @@ interface Page {
   url: string;
 }
 
-function Logout({
+function logout({
   event,
   redirectTo,
 }: {
   event: Event;
   redirectTo: Page;
 }): void {
-  const { name, url } = redirectTo;
+  const { url } = redirectTo;
   localStorage.removeItem('TOKEN');
   localStorage.removeItem('REFRESH_TOKEN');
   window.location.href = url;

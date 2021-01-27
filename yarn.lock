@@ -141,10 +141,10 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@betty-blocks/cli@^23.26.0":
-  version "23.26.0"
-  resolved "https://registry.yarnpkg.com/@betty-blocks/cli/-/cli-23.26.0.tgz#ea94a50f075c95d4c7d2ccfe4d9eb79baeafac6a"
-  integrity sha512-TEyAbepKELmETSHMr9qbTzgeCEZUpZXiFDeFfAnDQDA0f5/JN2Pfy+pLFlE+3WlBr9MjP3rMV1rHdoNzrpwx8A==
+"@betty-blocks/cli@^23.32.2":
+  version "23.32.2"
+  resolved "https://registry.yarnpkg.com/@betty-blocks/cli/-/cli-23.32.2.tgz#7039d2d139f5297979167e10d93171f105322a3c"
+  integrity sha512-+5N+CSblcyc22Yxq29td7MqaViXJEzX0XfkgwcORmuvJVbCq6g3wakkdiLAmvHozTZpIDvTsZJrtxV8Z34swgg==
   dependencies:
     "@azure/ms-rest-js" "^2.0.4"
     "@azure/storage-blob" "^10.3.0"
@@ -160,6 +160,7 @@
     "@types/react" "^16.9.9"
     "@types/serve-handler" "^6.1.0"
     ava "^3.7.1"
+    case "^1.6.3"
     chalk "^2.4.2"
     commander "^2.20.0"
     eslint-config-airbnb-base "^14.0.0"
@@ -2014,6 +2015,11 @@ cardinal@^2.1.1:
   dependencies:
     ansicolors "~0.3.2"
     redeyed "~2.1.0"
+
+case@^1.6.3:
+  version "1.6.3"
+  resolved "https://registry.yarnpkg.com/case/-/case-1.6.3.tgz#0a4386e3e9825351ca2e6216c60467ff5f1ea1c9"
+  integrity sha512-mzDSXIPaFwVDvZAHqZ9VlbyF4yyXRuX6IvB06WvPYkqJVO24kX1PPhv9bfpKNFZyxYFmmgo03HUiD8iklmJYRQ==
 
 caseless@~0.12.0:
   version "0.12.0"
