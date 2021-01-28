@@ -8,7 +8,6 @@
     const { Drawer } = window.MaterialUI.Core;
 
     const isEmpty = children.length === 0;
-    const isPristine = isEmpty && env === 'dev';
     const { visibility, anchorOrigin } = options;
 
     const [isOpen, setIsOpen] = useState(visibility);
@@ -33,6 +32,8 @@
           return classes.drawerPositionLeft;
         case 'right':
           return classes.drawerPositionRight;
+        default:
+          return classes.drawerPositionLeft;
       }
     };
 
@@ -44,7 +45,7 @@
       <div
         className={[
           DevAnchor(),
-          anchorOrigin == 'left' || anchorOrigin == 'right'
+          anchorOrigin === 'left' || anchorOrigin === 'right'
             ? classes.paperVert
             : classes.paper,
           isEmpty ? classes.empty : '',
@@ -61,7 +62,7 @@
         onClose={toggleMenu}
         ModalProps={{ keepMounted: true }}
         classes={
-          anchorOrigin == 'left' || anchorOrigin == 'right'
+          anchorOrigin === 'left' || anchorOrigin === 'right'
             ? { paper: classes.paperVert }
             : { paper: classes.paper }
         }
@@ -175,22 +176,6 @@
       color: 'rgba(0, 0, 0, 0.87)',
       transition: 'box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
       backgroundColor: ({ options: { backgroundColor } }) => backgroundColor,
-    },
-    fullScreen: {
-      width: '100%',
-      height: '100%',
-    },
-    windowed: {
-      borderRadius: '0.25rem',
-      width: ({ options: { width } }) => Math.max(444),
-      margin: '1rem',
-      maxHeight: 'calc(100% - 4rem);',
-    },
-    pristine: {
-      borderWidth: '0.0625rem',
-      borderColor: '#AFB5C8',
-      borderStyle: 'dashed',
-      backgroundColor: '#F0F1F5',
     },
   }),
 }))();
