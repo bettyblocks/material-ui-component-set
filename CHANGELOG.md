@@ -1,3 +1,10 @@
+# [1.92.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.91.0...v1.92.0) (2021-01-28)
+
+
+### Features
+
+* add page prefab with login form ([c40b5c6](https://github.com/bettyblocks/material-ui-component-set/commit/c40b5c6e6a089f9202b0c80f71b343d7591b80f5))
+
 # [1.91.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.90.0...v1.91.0) (2021-01-28)
 
 
