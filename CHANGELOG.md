@@ -1,3 +1,53 @@
+# [1.91.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.90.0...v1.91.0) (2021-01-28)
+
+
+### Features
+
+* **ART-2788:** Remove action_name in prefabs. ([15169aa](https://github.com/bettyblocks/material-ui-component-set/commit/15169aad1b8e279b6aad4c183661bc82e1eac428))
+
+# [1.90.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.89.4...v1.90.0) (2021-01-27)
+
+
+### Features
+
+* make it possible to open external link in new tab ([e4fc66a](https://github.com/bettyblocks/material-ui-component-set/commit/e4fc66a5e27c8b3f1b8d2b9cd2d8f227e5a9de08))
+
+## [1.89.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.89.3...v1.89.4) (2021-01-27)
+
+
+### Bug Fixes
+
+* clear upload interaction can be called without event argument ([b785f3d](https://github.com/bettyblocks/material-ui-component-set/commit/b785f3d2e962fc8fde395f843f0ceb1b1d7dfd81))
+* only check if preventDefault is defined ([230247f](https://github.com/bettyblocks/material-ui-component-set/commit/230247fbcd33bae92bcb26673a46d6df5850cb00))
+
+## [1.89.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.89.2...v1.89.3) (2021-01-26)
+
+
+### Bug Fixes
+
+* fixes defineFunction destructuring ([b9b568f](https://github.com/bettyblocks/material-ui-component-set/commit/b9b568fd8ea61da53b18f57c3e69ec3ec5f98ffb))
+
+## [1.89.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.89.1...v1.89.2) (2021-01-26)
+
+
+### Bug Fixes
+
+* use model_name for the variable name instead of the label ([ebb602f](https://github.com/bettyblocks/material-ui-component-set/commit/ebb602fdd72ddcf44848c67589b4119137950cb5))
+
+## [1.89.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.89.0...v1.89.1) (2021-01-26)
+
+
+### Bug Fixes
+
+* **ta-2140:** refactor conditional hooks ([c669da8](https://github.com/bettyblocks/material-ui-component-set/commit/c669da8293ea8ad6b506679aa47a1500522414ae))
+
+# [1.89.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.88.0...v1.89.0) (2021-01-25)
+
+
+### Features
+
+* add switch component ([6718618](https://github.com/bettyblocks/material-ui-component-set/commit/6718618fcd0ad8ac48c5754df2201d4863e9266f))
+
 # [1.88.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.87.0...v1.88.0) (2021-01-22)
 
 
