@@ -15,8 +15,8 @@
       nameAttribute,
       isSwitch,
     } = options;
-    const { useText, getCustomModelAttribute } = B;
-    const isDev = B.env === 'dev';
+    const { env, useText, getCustomModelAttribute } = B;
+    const isDev = env === 'dev';
 
     const [errorState, setErrorState] = useState(error);
     const [helper, setHelper] = useState(useText(helperText));
@@ -46,9 +46,7 @@
     const handleValidation = isChecked => {
       const valid = (isChecked && required) || !required;
       setErrorState(!valid);
-      const message = !valid
-        ? useText(validationValueMissing)
-        : useText(helperText);
+      const message = useText(!valid ? validationValueMissing : helperText);
       setHelper(message);
     };
 
@@ -93,8 +91,8 @@
     return isDev ? <div className={classes.root}>{Control}</div> : Control;
   })(),
   styles: B => t => {
-    const style = new B.Styling(t);
-    const { color: colorFunc } = B;
+    const { color: colorFunc, Styling } = B;
+    const style = new Styling(t);
     const getOpacColor = (col, val) => colorFunc.alpha(col, val);
     return {
       root: {
