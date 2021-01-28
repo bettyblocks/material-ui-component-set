@@ -12822,7 +12822,6 @@
   ],
   actions: [
     {
-      name: 'Create form action',
       ref: {
         id: '#actionId',
         endpointId: '#endpointId',
