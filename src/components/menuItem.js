@@ -17,7 +17,7 @@
       linkType,
       primaryText,
     } = options;
-    const { env, Link, useText } = B;
+    const { Link, useText } = B;
     const hasLink = linkTo && linkTo.id !== '';
     const hasExternalLink =
       linkType === 'external' && linkToExternal && linkToExternal.id !== '';
