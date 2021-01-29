@@ -81,10 +81,9 @@
         className={classes.root}
         dense={dense}
       >
-        {avatarOrIcon === 'icon' && !avatar ? IconComponent : null}
-        {(avatarOrIcon === 'icon' && avatar) || avatarOrIcon === 'avatar'
+        {avatarOrIcon === 'avatar' || (avatarOrIcon === 'icon' && avatar)
           ? AvatarComponent
-          : null}
+          : IconComponent}
         <ListItemText
           className={isEmpty && isDev && classes.placeholder}
           primary={itemText}
