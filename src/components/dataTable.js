@@ -147,12 +147,15 @@
         )
       : {};
 
+    const resolvedFilter = useFilter(filter);
+    const resolvedSearchFilter = useFilter(searchFilter);
+
     const newFilter =
       searchProperty && searchTerm !== ''
-        ? deepMerge(filter, searchFilter)
-        : filter;
+        ? deepMerge(resolvedFilter, resolvedSearchFilter)
+        : resolvedFilter;
 
-    const where = useFilter(newFilter);
+    const where = newFilter;
 
     const { loading, error, data, refetch } =
       model &&
