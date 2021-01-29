@@ -206,6 +206,7 @@
       iconButtonOptions.ariaLabel = 'toggle password visibility';
       iconButtonOptions.onClick = handleClickShowPassword;
       iconButtonOptions.onMouseDown = handleMouseDownPassword;
+      iconButtonOptions.tabIndex = 0;
     }
 
     useEffect(() => {
