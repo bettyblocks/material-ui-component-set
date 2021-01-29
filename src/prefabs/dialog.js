@@ -354,6 +354,12 @@
                       key: 'innerSpacing',
                       type: 'SIZES',
                     },
+                    {
+                      type: 'TOGGLE',
+                      label: 'Allow overflow',
+                      key: 'overflow',
+                      value: false,
+                    },
                   ],
                   descendants: [
                     {
@@ -373,6 +379,22 @@
                               { name: 'Center', value: 'center' },
                               { name: 'Right', value: 'flex-end' },
                               { name: 'Justified', value: 'space-between' },
+                            ],
+                          },
+                        },
+                        {
+                          value: 'none',
+                          label: 'Vertical alignment',
+                          key: 'valignment',
+                          type: 'CUSTOM',
+                          configuration: {
+                            as: 'BUTTONGROUP',
+                            dataType: 'string',
+                            allowedInput: [
+                              { name: 'None', value: 'none' },
+                              { name: 'Top', value: 'flex-start' },
+                              { name: 'Center', value: 'center' },
+                              { name: 'Bottom', value: 'flex-end' },
                             ],
                           },
                         },
@@ -567,6 +589,33 @@
                               { name: 'Initial', value: 'initial' },
                               { name: 'Contain', value: 'contain' },
                               { name: 'Cover', value: 'cover' },
+                            ],
+                            condition: {
+                              type: 'SHOW',
+                              option: 'backgroundOptions',
+                              comparator: 'EQ',
+                              value: true,
+                            },
+                          },
+                        },
+                        {
+                          value: 'center center',
+                          label: 'Background position',
+                          key: 'backgroundPosition',
+                          type: 'CUSTOM',
+                          configuration: {
+                            as: 'DROPDOWN',
+                            dataType: 'string',
+                            allowedInput: [
+                              { name: 'Left top', value: 'left top' },
+                              { name: 'Left center', value: 'left center' },
+                              { name: 'Left bottom', value: 'left bottom' },
+                              { name: 'Center top', value: 'center top' },
+                              { name: 'Center center', value: 'center center' },
+                              { name: 'Center bottom', value: 'center bottom' },
+                              { name: 'Right top', value: 'right top' },
+                              { name: 'Right center', value: 'right center' },
+                              { name: 'Right bottom', value: 'right bottom' },
                             ],
                             condition: {
                               type: 'SHOW',
@@ -842,6 +891,26 @@
                                   comparator: 'EQ',
                                   value: 'external',
                                 },
+                              },
+                            },
+                            {
+                              value: '_self',
+                              label: 'Open in',
+                              key: 'openLinkToExternal',
+                              type: 'CUSTOM',
+                              configuration: {
+                                condition: {
+                                  type: 'SHOW',
+                                  option: 'linkType',
+                                  comparator: 'EQ',
+                                  value: 'external',
+                                },
+                                as: 'BUTTONGROUP',
+                                dataType: 'string',
+                                allowedInput: [
+                                  { name: 'Current Tab', value: '_self' },
+                                  { name: 'New Tab', value: '_blank' },
+                                ],
                               },
                             },
                             {
@@ -2435,6 +2504,12 @@
                               key: 'innerSpacing',
                               type: 'SIZES',
                             },
+                            {
+                              type: 'TOGGLE',
+                              label: 'Allow overflow',
+                              key: 'overflow',
+                              value: false,
+                            },
                           ],
                           descendants: [
                             {
@@ -2549,6 +2624,22 @@
                               { name: 'Center', value: 'center' },
                               { name: 'Right', value: 'flex-end' },
                               { name: 'Justified', value: 'space-between' },
+                            ],
+                          },
+                        },
+                        {
+                          value: 'none',
+                          label: 'Vertical alignment',
+                          key: 'valignment',
+                          type: 'CUSTOM',
+                          configuration: {
+                            as: 'BUTTONGROUP',
+                            dataType: 'string',
+                            allowedInput: [
+                              { name: 'None', value: 'none' },
+                              { name: 'Top', value: 'flex-start' },
+                              { name: 'Center', value: 'center' },
+                              { name: 'Bottom', value: 'flex-end' },
                             ],
                           },
                         },
@@ -2753,6 +2844,33 @@
                           },
                         },
                         {
+                          value: 'center center',
+                          label: 'Background position',
+                          key: 'backgroundPosition',
+                          type: 'CUSTOM',
+                          configuration: {
+                            as: 'DROPDOWN',
+                            dataType: 'string',
+                            allowedInput: [
+                              { name: 'Left top', value: 'left top' },
+                              { name: 'Left center', value: 'left center' },
+                              { name: 'Left bottom', value: 'left bottom' },
+                              { name: 'Center top', value: 'center top' },
+                              { name: 'Center center', value: 'center center' },
+                              { name: 'Center bottom', value: 'center bottom' },
+                              { name: 'Right top', value: 'right top' },
+                              { name: 'Right center', value: 'right center' },
+                              { name: 'Right bottom', value: 'right bottom' },
+                            ],
+                            condition: {
+                              type: 'SHOW',
+                              option: 'backgroundOptions',
+                              comparator: 'EQ',
+                              value: true,
+                            },
+                          },
+                        },
+                        {
                           value: 'no-repeat',
                           label: 'Background repeat',
                           key: 'backgroundRepeat',
@@ -2929,6 +3047,26 @@
                                   comparator: 'EQ',
                                   value: 'external',
                                 },
+                              },
+                            },
+                            {
+                              value: '_self',
+                              label: 'Open in',
+                              key: 'openLinkToExternal',
+                              type: 'CUSTOM',
+                              configuration: {
+                                condition: {
+                                  type: 'SHOW',
+                                  option: 'linkType',
+                                  comparator: 'EQ',
+                                  value: 'external',
+                                },
+                                as: 'BUTTONGROUP',
+                                dataType: 'string',
+                                allowedInput: [
+                                  { name: 'Current Tab', value: '_self' },
+                                  { name: 'New Tab', value: '_blank' },
+                                ],
                               },
                             },
                             {
@@ -4330,7 +4468,7 @@
                               type: 'VARIABLE',
                               label: 'Button text',
                               key: 'buttonText',
-                              value: ['Submit'],
+                              value: ['Button'],
                               configuration: {
                                 condition: {
                                   type: 'HIDE',
@@ -4385,10 +4523,45 @@
                               },
                             },
                             {
+                              value: '_self',
+                              label: 'Open in',
+                              key: 'openLinkToExternal',
+                              type: 'CUSTOM',
+                              configuration: {
+                                condition: {
+                                  type: 'SHOW',
+                                  option: 'linkType',
+                                  comparator: 'EQ',
+                                  value: 'external',
+                                },
+                                as: 'BUTTONGROUP',
+                                dataType: 'string',
+                                allowedInput: [
+                                  { name: 'Current Tab', value: '_self' },
+                                  { name: 'New Tab', value: '_blank' },
+                                ],
+                              },
+                            },
+                            {
                               value: '',
                               label: 'Action',
                               key: 'actionId',
                               type: 'ACTION',
+                              configuration: {
+                                apiVersion: 'v1',
+                                condition: {
+                                  type: 'SHOW',
+                                  option: 'linkType',
+                                  comparator: 'EQ',
+                                  value: 'action',
+                                },
+                              },
+                            },
+                            {
+                              value: [],
+                              label: 'Property',
+                              key: 'actionProperties',
+                              type: 'ACTION_PROPERTIES',
                               configuration: {
                                 apiVersion: 'v1',
                                 condition: {

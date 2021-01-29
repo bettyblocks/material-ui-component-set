@@ -11,7 +11,7 @@
       Typography,
     } = window.MaterialUI.Core;
     const { ExpandMore } = window.MaterialUI.Icons;
-    const { useText, env, defineFunction } = B;
+    const { useText, env } = B;
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
     const isPristine = isEmpty && isDev;
@@ -30,9 +30,9 @@
     const openPanel = () => setExpanded(true);
     const togglePanel = () => setExpanded(s => !s);
 
-    defineFunction('Expand', openPanel);
-    defineFunction('Collapse', closePanel);
-    defineFunction('Expand/Collapse', togglePanel);
+    B.defineFunction('Expand', openPanel);
+    B.defineFunction('Collapse', closePanel);
+    B.defineFunction('Expand/Collapse', togglePanel);
 
     useEffect(() => {
       if (isDev) {

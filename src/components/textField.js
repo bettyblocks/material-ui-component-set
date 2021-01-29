@@ -44,12 +44,7 @@
     } = window.MaterialUI.Core;
     const { Icons } = window.MaterialUI;
 
-    const {
-      env,
-      defineFunction = () => {},
-      getCustomModelAttribute,
-      useText,
-    } = B;
+    const { env, getCustomModelAttribute, useText } = B;
     const isDev = env === 'dev';
     const isNumberType = type === 'number';
     const isPasswordType = type === 'password';
@@ -172,8 +167,8 @@
       handleValidation(validity);
     };
 
-    defineFunction('Clear', () => setCurrentValue(''));
-    defineFunction('Disable', () => setIsDisabled(true));
+    B.defineFunction('Clear', () => setCurrentValue(''));
+    B.defineFunction('Disable', () => setIsDisabled(true));
 
     const handleClickShowPassword = () => {
       togglePassword(!showPassword);
@@ -240,7 +235,7 @@
           type={(isDev && type === 'number') || showPassword ? 'text' : type}
           multiline={multiline}
           rows={rows}
-          label={labelText}
+          label={labelText === '' ? undefined : labelText}
           placeholder={placeholderText}
           onKeyDown={onKeyDown}
           onChange={changeHandler}

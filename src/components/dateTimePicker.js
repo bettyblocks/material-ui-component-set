@@ -26,12 +26,7 @@
       nameAttribute,
       locale,
     } = options;
-    const {
-      defineFunction = () => {},
-      env,
-      getCustomModelAttribute,
-      useText,
-    } = B;
+    const { env, getCustomModelAttribute, useText } = B;
     const {
       MuiPickersUtilsProvider,
       KeyboardTimePicker,
@@ -88,7 +83,7 @@
       }
     };
 
-    defineFunction('Clear', () => setSelectedDate(null));
+    B.defineFunction('Clear', () => setSelectedDate(null));
 
     let DateTimeComponent;
     let format;

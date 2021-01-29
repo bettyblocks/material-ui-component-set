@@ -9,14 +9,12 @@
         const {
           Action,
           Children,
-          defineFunction = () => {},
           env,
           getActionInput,
           getIdProperty,
           ModelProvider,
           useAllQuery,
           useEndpoint,
-          triggerEvent = () => {},
         } = B;
 
         const {
@@ -48,7 +46,7 @@
 
         const mounted = useRef(false);
 
-        defineFunction('Submit', () => {
+        B.defineFunction('Submit', () => {
           if (formRef.current)
             formRef.current.dispatchEvent(new Event('submit'));
         });
@@ -62,7 +60,7 @@
 
         const handleSubmit = (evt, callAction, item) => {
           evt.preventDefault();
-          triggerEvent('onSubmit');
+          B.triggerEvent('onSubmit');
           const formDataValues = new FormData(formRef.current);
           const values = Array.from(formDataValues).reduce(
             (acc, [key, value]) => {
@@ -99,10 +97,11 @@
 
         const trigger = (data, loading, error) => {
           if (data || error) {
-            triggerEvent('onActionDone');
+            B.triggerEvent('onActionDone');
           }
+
           if (data) {
-            triggerEvent('onActionSuccess', data.actionb5);
+            B.triggerEvent('onActionSuccess', data.actionb5);
 
             if (!isDev && hasRedirect) {
               const history = useHistory();
@@ -116,11 +115,11 @@
           }
 
           if (loading) {
-            triggerEvent('onActionLoad', loading);
+            B.triggerEvent('onActionLoad', loading);
           }
 
           if (error && !displayError) {
-            triggerEvent('onActionError', error);
+            B.triggerEvent('onActionError', error);
           }
         };
 
@@ -129,11 +128,11 @@
           const handleInvalid = () => {
             if (!isInvalid) {
               setIsInvalid(true);
-              triggerEvent('onInvalid');
+              B.triggerEvent('onInvalid');
             }
           };
           useEffect(() => {
-            triggerEvent('onComponentRendered');
+            B.triggerEvent('onComponentRendered');
           }, []);
 
           return (
@@ -206,25 +205,25 @@
               })) ||
             {};
 
-          defineFunction('Refetch', () => refetch());
+          B.defineFunction('Refetch', () => refetch());
 
           useEffect(() => {
             if (mounted.current && isFetching) {
-              triggerEvent('onDataLoad', isFetching);
+              B.triggerEvent('onDataLoad', isFetching);
             }
           }, [isFetching]);
 
           if (err) {
-            triggerEvent('onDataError', err);
+            B.triggerEvent('onDataError', err);
           }
 
           const item = records && records.results[0];
 
           if (item) {
             if (item.id) {
-              triggerEvent('onDataSuccess', item);
+              B.triggerEvent('onDataSuccess', item);
             } else {
-              triggerEvent('onDataNoResults');
+              B.triggerEvent('onDataNoResults');
             }
           }
 
