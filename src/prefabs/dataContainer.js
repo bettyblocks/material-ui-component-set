@@ -7,12 +7,12 @@
     save,
     close,
     components: { ModelSelector, Header, Content, Field, Footer, Text },
-    helpers: { useGetCurrentPageId, camelToSnakeCase },
+    helpers: { useCurrentPageId, camelToSnakeCase },
   }) => {
     const [modelId, setModelId] = React.useState('');
     const [model, setModel] = React.useState(null);
     const [validation, setValidation] = React.useState('');
-    const pageUuid = useGetCurrentPageId();
+    const pageUuid = useCurrentPageId();
 
     React.useEffect(() => {
       setValidation('');
