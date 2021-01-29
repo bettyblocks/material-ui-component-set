@@ -142,9 +142,9 @@
     to-fast-properties "^2.0.0"
 
 "@betty-blocks/cli@^23.31.0":
-  version "23.32.1"
-  resolved "https://registry.yarnpkg.com/@betty-blocks/cli/-/cli-23.32.1.tgz#17d742d8480589b45e1e9dd7d9060e0528849ebc"
-  integrity sha512-NDKG7aTyBue8+Dz4WUIn8neWCSY9Z4ff9/wNpMu285FqUxJPE/J36ZckCGlpetIarDo4k+bovyUI9hvbCrFvRg==
+  version "23.31.0"
+  resolved "https://registry.yarnpkg.com/@betty-blocks/cli/-/cli-23.31.0.tgz#e693140d46fb70c4b07907abf8fe4461639a633c"
+  integrity sha512-bIxOOzOQwZeQIKrpKmMHmuyZYQcTyL/K0HCMfjrACGSVH/HGQ0I1jLGCeFX9iyY3ihwsvsTDqxQdFrJHIw+e1A==
   dependencies:
     "@azure/ms-rest-js" "^2.0.4"
     "@azure/storage-blob" "^10.3.0"
