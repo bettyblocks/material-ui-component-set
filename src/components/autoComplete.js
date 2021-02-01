@@ -43,11 +43,11 @@
       CheckBoxOutlineBlank,
     } = window.MaterialUI.Icons;
     const {
-      useText,
-      getProperty,
-      getCustomModelAttribute,
-      useAllQuery,
       env,
+      getCustomModelAttribute,
+      getProperty,
+      useAllQuery,
+      useText,
     } = B;
     const isDev = env === 'dev';
     const displayError = showError === 'built-in';
@@ -428,8 +428,8 @@
     );
   })(),
   styles: B => t => {
-    const style = new B.Styling(t);
-    const { color: colorFunc } = B;
+    const { color: colorFunc, Styling } = B;
+    const style = new Styling(t);
     const getOpacColor = (col, val) => colorFunc.alpha(col, val);
     return {
       root: {

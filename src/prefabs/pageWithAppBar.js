@@ -126,6 +126,26 @@
                       value: [''],
                     },
                     {
+                      value: '_self',
+                      label: 'Open in',
+                      key: 'openLinkToExternal',
+                      type: 'CUSTOM',
+                      configuration: {
+                        condition: {
+                          type: 'SHOW',
+                          option: 'linkType',
+                          comparator: 'EQ',
+                          value: 'external',
+                        },
+                        as: 'BUTTONGROUP',
+                        dataType: 'string',
+                        allowedInput: [
+                          { name: 'Current Tab', value: '_self' },
+                          { name: 'New Tab', value: '_blank' },
+                        ],
+                      },
+                    },
+                    {
                       configuration: {
                         apiVersion: 'v1',
                         condition: {
@@ -1633,6 +1653,26 @@
                       label: 'URL',
                       type: 'VARIABLE',
                       value: [''],
+                    },
+                    {
+                      value: '_self',
+                      label: 'Open in',
+                      key: 'openLinkToExternal',
+                      type: 'CUSTOM',
+                      configuration: {
+                        condition: {
+                          type: 'SHOW',
+                          option: 'linkType',
+                          comparator: 'EQ',
+                          value: 'external',
+                        },
+                        as: 'BUTTONGROUP',
+                        dataType: 'string',
+                        allowedInput: [
+                          { name: 'Current Tab', value: '_self' },
+                          { name: 'New Tab', value: '_blank' },
+                        ],
+                      },
                     },
                     {
                       configuration: {

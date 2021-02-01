@@ -4,7 +4,7 @@
   allowedTypes: ['CONTENT_COMPONENT', 'CONTAINER_COMPONENT'],
   orientation: 'VERTICAL',
   jsx: (() => {
-    const { env, useText, getProperty, Property, useEndpoint } = B;
+    const { env, getProperty, Property, useEndpoint, useText } = B;
     const { TableCell, TableSortLabel } = window.MaterialUI.Core;
     const {
       horizontalAlignment,
@@ -25,7 +25,6 @@
     const contentPlaceholder = isDev && isEmpty ? 'Select property' : '\u00A0';
 
     let myEndpoint = null;
-
     if (linkTo) {
       myEndpoint = useEndpoint(linkTo);
     }
@@ -116,7 +115,7 @@
     );
   })(),
   styles: B => theme => {
-    const { env, Styling } = B;
+    const { env, mediaMinWidth, Styling } = B;
     const style = new Styling(theme);
     const isDev = env === 'dev';
     return {
@@ -162,15 +161,15 @@
         textTransform: ({ options: { type } }) => style.getTextTransform(type),
         letterSpacing: ({ options: { type } }) => style.getLetterSpacing(type),
         lineHeight: '1.2',
-        [`@media ${B.mediaMinWidth(600)}`]: {
+        [`@media ${mediaMinWidth(600)}`]: {
           fontSize: ({ options: { type } }) =>
             style.getFontSize(type, 'Portrait'),
         },
-        [`@media ${B.mediaMinWidth(960)}`]: {
+        [`@media ${mediaMinWidth(960)}`]: {
           fontSize: ({ options: { type } }) =>
             style.getFontSize(type, 'Landscape'),
         },
-        [`@media ${B.mediaMinWidth(1280)}`]: {
+        [`@media ${mediaMinWidth(1280)}`]: {
           fontSize: ({ options: { type } }) =>
             style.getFontSize(type, 'Desktop'),
         },
@@ -187,15 +186,15 @@
         letterSpacing: ({ options: { bodyType } }) =>
           style.getLetterSpacing(bodyType),
         lineHeight: '1.2',
-        [`@media ${B.mediaMinWidth(600)}`]: {
+        [`@media ${mediaMinWidth(600)}`]: {
           fontSize: ({ options: { bodyType } }) =>
             style.getFontSize(bodyType, 'Portrait'),
         },
-        [`@media ${B.mediaMinWidth(960)}`]: {
+        [`@media ${mediaMinWidth(960)}`]: {
           fontSize: ({ options: { bodyType } }) =>
             style.getFontSize(bodyType, 'Landscape'),
         },
-        [`@media ${B.mediaMinWidth(1280)}`]: {
+        [`@media ${mediaMinWidth(1280)}`]: {
           fontSize: ({ options: { bodyType } }) =>
             style.getFontSize(bodyType, 'Desktop'),
         },
