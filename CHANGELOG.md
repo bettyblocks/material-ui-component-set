@@ -1,3 +1,17 @@
+# [1.92.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.91.0...v1.92.0) (2021-01-28)
+
+
+### Features
+
+* add page prefab with login form ([c40b5c6](https://github.com/bettyblocks/material-ui-component-set/commit/c40b5c6e6a089f9202b0c80f71b343d7591b80f5))
+
+# [1.91.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.90.0...v1.91.0) (2021-01-28)
+
+
+### Features
+
+* **ART-2788:** Remove action_name in prefabs. ([15169aa](https://github.com/bettyblocks/material-ui-component-set/commit/15169aad1b8e279b6aad4c183661bc82e1eac428))
+
 # [1.90.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.89.4...v1.90.0) (2021-01-27)
 
 
