@@ -27,10 +27,15 @@
       order,
       orderBy,
     } = options;
-    const isDev = B.env === 'dev';
+    const {
+      env,
+      getCustomModelAttribute,
+      getProperty,
+      useAllQuery,
+      useText,
+    } = B;
+    const isDev = env === 'dev';
     const displayError = showError === 'built-in';
-
-    const { useAllQuery, getProperty, useText, getCustomModelAttribute } = B;
 
     const {
       id: customModelAttributeId,
@@ -61,6 +66,7 @@
     const [errorState, setErrorState] = useState(false);
     const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
+    const mounted = useRef(false);
     let radioValues = [];
 
     const {
@@ -93,8 +99,6 @@
           ...(orderBy ? { sort: { relation: sort } } : {}),
         },
       });
-
-    const mounted = useRef(false);
 
     useEffect(() => {
       mounted.current = true;
@@ -222,8 +226,8 @@
     );
   })(),
   styles: B => t => {
-    const style = new B.Styling(t);
-    const { color: colorFunc } = B;
+    const { color: colorFunc, Styling } = B;
+    const style = new Styling(t);
     const getOpacColor = (col, val) => colorFunc.alpha(col, val);
     return {
       root: {

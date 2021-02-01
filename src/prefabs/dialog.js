@@ -5,7 +5,7 @@
   actions: [],
   interactions: [
     {
-      name: 'CloseDialog',
+      name: 'Hide',
       sourceEvent: 'Click',
       ref: {
         targetComponentId: '#dialog',
@@ -14,7 +14,7 @@
       type: 'Custom',
     },
     {
-      name: 'CloseDialog',
+      name: 'Hide',
       sourceEvent: 'Click',
       ref: {
         targetComponentId: '#dialog',
@@ -425,7 +425,7 @@
                           type: 'TOGGLE',
                         },
                         {
-                          value: 'relative',
+                          value: 'static',
                           label: 'Position',
                           key: 'position',
                           type: 'CUSTOM',
@@ -842,6 +842,26 @@
                                   comparator: 'EQ',
                                   value: 'external',
                                 },
+                              },
+                            },
+                            {
+                              value: '_self',
+                              label: 'Open in',
+                              key: 'openLinkToExternal',
+                              type: 'CUSTOM',
+                              configuration: {
+                                condition: {
+                                  type: 'SHOW',
+                                  option: 'linkType',
+                                  comparator: 'EQ',
+                                  value: 'external',
+                                },
+                                as: 'BUTTONGROUP',
+                                dataType: 'string',
+                                allowedInput: [
+                                  { name: 'Current Tab', value: '_self' },
+                                  { name: 'New Tab', value: '_blank' },
+                                ],
                               },
                             },
                             {
@@ -2601,7 +2621,7 @@
                           type: 'TOGGLE',
                         },
                         {
-                          value: 'relative',
+                          value: 'static',
                           label: 'Position',
                           key: 'position',
                           type: 'CUSTOM',
@@ -2929,6 +2949,26 @@
                                   comparator: 'EQ',
                                   value: 'external',
                                 },
+                              },
+                            },
+                            {
+                              value: '_self',
+                              label: 'Open in',
+                              key: 'openLinkToExternal',
+                              type: 'CUSTOM',
+                              configuration: {
+                                condition: {
+                                  type: 'SHOW',
+                                  option: 'linkType',
+                                  comparator: 'EQ',
+                                  value: 'external',
+                                },
+                                as: 'BUTTONGROUP',
+                                dataType: 'string',
+                                allowedInput: [
+                                  { name: 'Current Tab', value: '_self' },
+                                  { name: 'New Tab', value: '_blank' },
+                                ],
                               },
                             },
                             {
@@ -4382,6 +4422,26 @@
                                   comparator: 'EQ',
                                   value: 'external',
                                 },
+                              },
+                            },
+                            {
+                              value: '_self',
+                              label: 'Open in',
+                              key: 'openLinkToExternal',
+                              type: 'CUSTOM',
+                              configuration: {
+                                condition: {
+                                  type: 'SHOW',
+                                  option: 'linkType',
+                                  comparator: 'EQ',
+                                  value: 'external',
+                                },
+                                as: 'BUTTONGROUP',
+                                dataType: 'string',
+                                allowedInput: [
+                                  { name: 'Current Tab', value: '_self' },
+                                  { name: 'New Tab', value: '_blank' },
+                                ],
                               },
                             },
                             {

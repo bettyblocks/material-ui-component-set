@@ -1,6 +1,6 @@
 (() => ({
   name: 'deleteRecord',
-  icon: 'TabIcon',
+  icon: 'DeleteRecordIcon',
   category: 'CONTENT',
   beforeCreate: ({
     prefab,
@@ -52,7 +52,7 @@
               return;
             }
             const newPrefab = { ...prefab };
-            newPrefab.variables[0].name = camelToSnakeCase(model.label);
+            newPrefab.variables[0].name = camelToSnakeCase(model.name);
             newPrefab.structure[0].descendants[1].descendants[0].descendants[0].descendants[0].descendants[2].descendants[1].options[7].value = [
               modelId,
             ];
@@ -6348,6 +6348,21 @@
                                   label: 'Action',
                                   key: 'actionId',
                                   type: 'ACTION',
+                                  configuration: {
+                                    apiVersion: 'v1',
+                                    condition: {
+                                      type: 'SHOW',
+                                      option: 'linkType',
+                                      comparator: 'EQ',
+                                      value: 'action',
+                                    },
+                                  },
+                                },
+                                {
+                                  value: [],
+                                  label: 'Objects to pass to action',
+                                  key: 'actionModels',
+                                  type: 'ACTION_INPUT_OBJECTS',
                                   configuration: {
                                     apiVersion: 'v1',
                                     condition: {

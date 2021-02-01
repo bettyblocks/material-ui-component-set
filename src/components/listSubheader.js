@@ -10,7 +10,6 @@
     const isDev = env === 'dev';
 
     const content = useText(text);
-
     const isEmpty = content === '';
 
     const ItemText =
@@ -20,15 +19,15 @@
         <>{content}</>
       );
 
-    const ListSubheaderComponent = (
+    return (
       <ListSubheader className={classes.root} inset={inset}>
         {ItemText}
       </ListSubheader>
     );
-    return isDev ? <div>{ListSubheaderComponent}</div> : ListSubheaderComponent;
   })(),
   styles: B => t => {
-    const style = new B.Styling(t);
+    const { Styling } = B;
+    const style = new Styling(t);
     return {
       root: {
         color: ({ options: { textColor } }) => [
