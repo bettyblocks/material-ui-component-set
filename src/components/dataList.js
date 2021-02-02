@@ -475,7 +475,6 @@
       },
       inline: {
         display: 'inline-flex',
-        marginRight: '1rem',
       },
       header: {
         display: 'flex',
