@@ -45,6 +45,9 @@
         const displayError = showError === 'built-in';
         const listRef = React.createRef();
         const [showPagination, setShowPagination] = useState(true);
+        const isInline = type === 'inline';
+        const isGrid = type === 'grid';
+
         const builderLayout = () => (
           <>
             {searchProperty && !hideSearch && (
@@ -52,13 +55,13 @@
                 <SearchComponent label={searchPropertyLabel} />
               </div>
             )}
-            <div ref={listRef} className={type === 'grid' && classes.grid}>
+            <div ref={listRef} className={isGrid && classes.grid}>
               <div
                 className={
                   [
                     isEmpty ? classes.empty : '',
                     isPristine ? classes.pristine : '',
-                    type === 'inline' ? classes.inline : '',
+                    isInline ? classes.inline : '',
                   ]
                     .filter(Boolean)
                     .join(' ') || undefined
@@ -258,13 +261,13 @@
         };
 
         const Looper = results => {
-          const Wrapper = type === 'inline' ? 'span' : 'div';
+          const Wrapper = isInline ? 'span' : 'div';
           const rows = results.map(item => (
             <ModelProvider key={item.id} value={item} id={model}>
               <InteractionScope model={model}>
                 {context => (
                   <Wrapper
-                    className={type === 'inline' && classes.inline}
+                    className={isInline && classes.inline}
                     onClick={event => handleClick(event, context)}
                   >
                     {children}
@@ -319,7 +322,7 @@
                 </div>
               )}
 
-              {type !== 'grid' ? (
+              {!isGrid ? (
                 Looper(results)
               ) : (
                 <div className={classes.grid}>{Looper(results)}</div>
