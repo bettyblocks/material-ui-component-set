@@ -1,3 +1,11 @@
+# [1.93.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.92.0...v1.93.0) (2021-02-02)
+
+
+### Features
+
+* add page redirect to logout ([02f9eed](https://github.com/bettyblocks/material-ui-component-set/commit/02f9eedc7198e69fc878ed94d6c62b006e1be349))
+* add redirect to logout ([c80938f](https://github.com/bettyblocks/material-ui-component-set/commit/c80938f47b3b7615ee387196e9f3d59e3bc46ee7))
+
 # [1.92.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.91.0...v1.92.0) (2021-01-28)
 
 
