@@ -18,14 +18,14 @@
       primaryText,
     } = options;
     const { Link, useText } = B;
-    const hasLink = linkTo && linkTo.id !== '';
+    const hasLink = linkType === 'internal' && linkTo && linkTo.id !== '';
     const hasExternalLink =
       linkType === 'external' && linkToExternal && linkToExternal.id !== '';
     const linkToExternalVariable =
       (linkToExternal && useText(linkToExternal)) || '';
     let menuItemComponent = 'li';
-    if (linkType === 'internal' && hasLink) menuItemComponent = Link;
-    if (linkType === 'external' && hasExternalLink) menuItemComponent = 'a';
+    if (hasLink) menuItemComponent = Link;
+    if (hasExternalLink) menuItemComponent = 'a';
     const primary = useText(primaryText);
 
     return (
@@ -36,7 +36,7 @@
         disabled={disabled}
         divider={divider}
         href={hasExternalLink ? linkToExternalVariable : undefined}
-        endpoint={linkType === 'internal' && hasLink ? linkTo : undefined}
+        endpoint={hasLink ? linkTo : undefined}
       >
         {icon !== 'None' &&
           iconPosition === 'start' &&

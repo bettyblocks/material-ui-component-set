@@ -16,15 +16,6 @@
           },
         },
         {
-          label: 'Toggle visibility',
-          key: 'visible',
-          value: true,
-          type: 'TOGGLE',
-          configuration: {
-            as: 'VISIBILITY',
-          },
-        },
-        {
           type: 'CUSTOM',
           label: 'Menu Button Variant',
           key: 'variant',
@@ -1392,7 +1383,7 @@
           value: 'Primary',
         },
         {
-          value: ['0rem', 'M', '0rem', '0rem'],
+          value: ['0rem', '0rem', '0rem', '0rem'],
           label: 'Button Outer space',
           key: 'outerSpacing',
           type: 'SIZES',
@@ -1406,7 +1397,7 @@
         {
           label: 'Menu Placement',
           key: 'placement',
-          value: 'bottom',
+          value: 'bottom-start',
           type: 'CUSTOM',
           configuration: {
             as: 'DROPDOWN',

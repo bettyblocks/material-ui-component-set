@@ -26,14 +26,12 @@
       size,
       type,
       variant,
-      visible,
     } = options;
 
     const { env, useText } = B;
     const isDev = env === 'dev';
     const isIcon = variant === 'icon';
     const buttonContent = useText(buttonText);
-    const [isVisible, setIsVisible] = useState(visible);
     const [isOpen, setIsOpen] = useState(false);
     const buttonRef = useRef(null);
     const paperRef = useRef(null);
@@ -108,19 +106,11 @@
     }, []);
 
     useEffect(() => {
-      setIsVisible(visible);
-    }, [visible]);
-
-    useEffect(() => {
       if (isDev) {
         const { top, left } = getDevPlacement(buttonRef, paperRef, placement);
         setMenuPosition({ top, left });
       }
     }, [children, icon, isMenuListVisible, placement, outerSpacing, variant]);
-
-    B.defineFunction('Show', () => setIsVisible(true));
-    B.defineFunction('Hide', () => setIsVisible(false));
-    B.defineFunction('Show/Hide', () => setIsVisible(s => !s));
 
     const generalProps = {
       disabled,
@@ -195,7 +185,6 @@
         {ButtonComponent}
         {!isDev ? (
           <Popper
-            className={classes.popper}
             open={isOpen}
             anchorEl={buttonRef.current}
             role={undefined}
@@ -214,25 +203,24 @@
           </Popper>
         ) : (
           isMenuListVisible && (
-            <Paper
-              ref={paperRef}
-              className={classes.paper}
-              style={{
-                transform: `translate(${menuPosition.left}px, ${menuPosition.top}px)`,
-                willChange: 'transform',
-              }}
-            >
-              {children}
-            </Paper>
+            <div className={classes.wrapper}>
+              <Paper
+                ref={paperRef}
+                className={classes.paper}
+                style={{
+                  transform: `translate(${menuPosition.left}px, ${menuPosition.top}px)`,
+                  willChange: 'transform',
+                }}
+              >
+                {children}
+              </Paper>
+            </div>
           )
         )}
       </>
     );
 
-    if (isDev) {
-      return <div className={classes.wrapper}>{MenuComp}</div>;
-    }
-    return isVisible ? MenuComp : <></>;
+    return MenuComp;
   })(),
   styles: B => t => {
     const { env, mediaMinWidth, Styling } = B;
