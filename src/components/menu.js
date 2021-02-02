@@ -203,24 +203,26 @@
           </Popper>
         ) : (
           isMenuListVisible && (
-            <div className={classes.wrapper}>
-              <Paper
-                ref={paperRef}
-                className={classes.paper}
-                style={{
-                  transform: `translate(${menuPosition.left}px, ${menuPosition.top}px)`,
-                  willChange: 'transform',
-                }}
-              >
-                {children}
-              </Paper>
-            </div>
+            <Paper
+              ref={paperRef}
+              className={classes.paper}
+              style={{
+                transform: `translate(${menuPosition.left}px, ${menuPosition.top}px)`,
+                willChange: 'transform',
+              }}
+            >
+              {children}
+            </Paper>
           )
         )}
       </>
     );
 
-    return MenuComp;
+    return !isDev ? (
+      MenuComp
+    ) : (
+      <div className={classes.wrapper}>{MenuComp}</div>
+    );
   })(),
   styles: B => t => {
     const { env, mediaMinWidth, Styling } = B;
