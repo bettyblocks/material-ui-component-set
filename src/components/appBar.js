@@ -93,7 +93,8 @@
     return isDev ? <div>{AppBarComponent}</div> : AppBarComponent;
   })(),
   styles: B => t => {
-    const style = new B.Styling(t);
+    const { mediaMinWidth, Styling } = B;
+    const style = new Styling(t);
     return {
       root: {
         height: ({ options: { height } }) => height,
@@ -135,13 +136,13 @@
       },
       collapsed: {
         display: 'block',
-        [`@media ${B.mediaMinWidth(600)}`]: {
+        [`@media ${mediaMinWidth(600)}`]: {
           display: 'none',
         },
       },
       uncollapsed: {
         display: 'none',
-        [`@media ${B.mediaMinWidth(600)}`]: {
+        [`@media ${mediaMinWidth(600)}`]: {
           display: 'block',
         },
       },

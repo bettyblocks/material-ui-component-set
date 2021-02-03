@@ -44,7 +44,7 @@
     } = window.MaterialUI.Core;
     const { Icons } = window.MaterialUI;
 
-    const { useText, env, getCustomModelAttribute } = B;
+    const { env, getCustomModelAttribute, useText } = B;
     const isDev = env === 'dev';
     const isNumberType = type === 'number';
     const isPasswordType = type === 'password';
@@ -287,7 +287,8 @@
     );
   })(),
   styles: B => t => {
-    const style = new B.Styling(t);
+    const { Styling } = B;
+    const style = new Styling(t);
     return {
       root: {
         display: ({ options: { fullWidth } }) =>

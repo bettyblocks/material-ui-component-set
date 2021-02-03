@@ -43,11 +43,11 @@
       CheckBoxOutlineBlank,
     } = window.MaterialUI.Icons;
     const {
-      useText,
-      getProperty,
-      getCustomModelAttribute,
-      useAllQuery,
       env,
+      getCustomModelAttribute,
+      getProperty,
+      useAllQuery,
+      useText,
     } = B;
     const isDev = env === 'dev';
     const displayError = showError === 'built-in';
@@ -68,7 +68,6 @@
     const { kind, values: listValues } = getProperty(property) || {};
     const [currentValue, setCurrentValue] = useState(useText(defaultValue));
     const [currentLabel, setCurrentLabel] = useState('');
-
     const labelText = useText(label);
 
     const textFieldProps = {
@@ -203,7 +202,7 @@
     }, [loading]);
 
     if (err && !displayError) {
-      B.triggerEvent('onError', err.message);
+      B.triggerEvent('onError', err);
     }
 
     const { results } = data || {};
@@ -268,6 +267,7 @@
     }, [results]);
 
     const defaultRecord = getDefaultValue();
+
     useEffect(() => {
       if (!multiple && defaultRecord && searchProp) {
         setCurrentLabel(defaultRecord[searchProp.name]);
@@ -390,9 +390,6 @@
           },
         }}
         onInputChange={(_, inputValue) => {
-          if (!freeSolo) {
-            return;
-          }
           setSearchParam(inputValue);
         }}
         onChange={onChange}
@@ -431,8 +428,8 @@
     );
   })(),
   styles: B => t => {
-    const style = new B.Styling(t);
-    const { color: colorFunc } = B;
+    const { color: colorFunc, Styling } = B;
+    const style = new Styling(t);
     const getOpacColor = (col, val) => colorFunc.alpha(col, val);
     return {
       root: {

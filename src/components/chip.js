@@ -54,7 +54,8 @@
     );
   })(),
   styles: B => theme => {
-    const style = new B.Styling(theme);
+    const { Styling } = B;
+    const style = new Styling(theme);
     const convertSizes = sizes =>
       sizes.map(size => style.getSpacing(size)).join(' ');
     return {

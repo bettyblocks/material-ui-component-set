@@ -19,8 +19,6 @@
       </List>
     );
 
-    const listArgs = { className: classes.root, disablePadding, dense };
-
     const orderByArray = [orderBy].flat();
     const sort =
       !isDev && orderBy
@@ -70,12 +68,19 @@
       ));
     };
 
-    const ListComponent = <List {...listArgs}>{renderData()}</List>;
-
-    return isDev ? <div>{ListComponent}</div> : ListComponent;
+    return (
+      <List
+        className={classes.root}
+        disablePadding={disablePadding}
+        dense={dense}
+      >
+        {renderData()}
+      </List>
+    );
   })(),
   styles: B => t => {
-    const style = new B.Styling(t);
+    const { Styling } = B;
+    const style = new Styling(t);
     return {
       root: {
         backgroundColor: ({ options: { backgroundColor } }) =>

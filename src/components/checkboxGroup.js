@@ -28,9 +28,15 @@
       orderBy,
     } = options;
 
-    const { useText, getProperty, useAllQuery, getCustomModelAttribute } = B;
+    const {
+      env,
+      getCustomModelAttribute,
+      getProperty,
+      useAllQuery,
+      useText,
+    } = B;
     const displayError = showError === 'built-in';
-    const isDev = B.env === 'dev';
+    const isDev = env === 'dev';
 
     const componentHelperText = useText(helperText);
     const { kind, values: listValues = [] } = getProperty(property) || {};
@@ -86,7 +92,7 @@
     }
 
     if (err && !displayError) {
-      B.triggerEvent('onError', err.message);
+      B.triggerEvent('onError', err);
     }
 
     const { results } = data || {};
@@ -174,8 +180,8 @@
     return isDev ? <div className={classes.root}>{Control}</div> : Control;
   })(),
   styles: B => t => {
-    const style = new B.Styling(t);
-    const { color: colorFunc } = B;
+    const { color: colorFunc, Styling } = B;
+    const style = new Styling(t);
     const getOpacColor = (col, val) => colorFunc.alpha(col, val);
     return {
       root: {

@@ -13,12 +13,14 @@
       autoHide,
       autoHideDuration,
       content,
+      allowTextServerResponse,
     } = options;
     const { env, useText } = B;
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
     const [open, setOpen] = useState(false);
-    const [text, setText] = useState(useText(content));
+    const text = useText(content);
+    const [textFromServer, setTextFromServer] = useState('');
 
     const CloseIcon = Icons.Close;
 
@@ -29,26 +31,44 @@
       setOpen(false);
     };
 
+    const formatError = err => {
+      const errorMessage =
+        (err.graphQLErrors &&
+          err.graphQLErrors[0] &&
+          err.graphQLErrors[0].extensions.error) ||
+        err.message;
+      return errorMessage;
+    };
+
+    const cleanUpMessage = message =>
+      message &&
+      JSON.stringify(message)
+        .replace(/[{}[\]_"]/g, ' ')
+        .replace(/[ ]+/g, ' ')
+        .replace(/ :/g, ':')
+        .replace(/ ,/g, ',')
+        .trim();
+
     B.defineFunction('Show', showMessage => {
-      if (typeof showMessage === 'string') setText(showMessage);
+      if (typeof showMessage === 'string') setTextFromServer(showMessage);
+      if (typeof showMessage === 'object' && showMessage !== null) {
+        const errorMessage = formatError(showMessage);
+        setTextFromServer(cleanUpMessage(errorMessage));
+      }
       setOpen(true);
     });
 
-    B.defineFunction('Hide', () => {
-      setOpen(false);
-    });
+    B.defineFunction('Hide', () => setOpen(false));
+    B.defineFunction('Show/Hide', () => setOpen(s => !s));
 
     useEffect(() => {
       setOpen(visible);
     }, [visible]);
 
-    useEffect(() => {
-      if (isDev) {
-        setText(useText(content));
-      }
-    }, [isDev, content]);
-
     const duration = autoHide ? autoHideDuration : null;
+
+    const textContent =
+      textFromServer && allowTextServerResponse ? textFromServer : text;
 
     let snackbarOptions = {
       open,
@@ -58,7 +78,7 @@
         horizontal: anchorOriginHorizontal,
         vertical: anchorOriginVertical,
       },
-      key: text,
+      key: textContent,
       action: (
         <IconButton
           size="small"
@@ -75,7 +95,7 @@
     if (isEmpty) {
       snackbarOptions = {
         ...snackbarOptions,
-        message: text,
+        message: textContent,
       };
     }
 
