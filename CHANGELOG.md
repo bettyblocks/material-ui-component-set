@@ -1,3 +1,17 @@
+# [1.95.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.94.0...v1.95.0) (2021-02-03)
+
+
+### Bug Fixes
+
+* missing visibilty toggle to table prefab ([6b82944](https://github.com/bettyblocks/material-ui-component-set/commit/6b82944539e2d0e6fb9aaa841f89724228eeda14))
+
+
+### Features
+
+* **techsub-3022:** conditional table columns ([dc6280f](https://github.com/bettyblocks/material-ui-component-set/commit/dc6280f471b31a3dc0ff74e7342aeca9791a8a53))
+* **techsub-3022:** conditional table columns [] ([57098d0](https://github.com/bettyblocks/material-ui-component-set/commit/57098d0639fdc1ff19b0c39c80ccb19c965dd226))
+* **techsub-3022:** conditional table columns [] ([48de43c](https://github.com/bettyblocks/material-ui-component-set/commit/48de43c69a48e5cdbdc1f5474c0bc6071a6d13e0))
+
 # [1.94.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.93.0...v1.94.0) (2021-02-03)
 
 
