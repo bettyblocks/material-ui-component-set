@@ -27,7 +27,9 @@
       setValidation('');
     }, [modelId]);
 
-    const [buttonValue, setButtonValue] = React.useState('anotherPage');
+    const [buttonGroupValue, setButtonGroupValue] = React.useState(
+      'anotherPage',
+    );
 
     return (
       <>
@@ -44,9 +46,9 @@
           >
             <ButtonGroup
               onChange={({ target: { value } }) => {
-                setButtonValue(value);
+                setButtonGroupValue(value);
               }}
-              value={buttonValue}
+              value={buttonGroupValue}
             >
               <ButtonGroupButton
                 label="Another page"
