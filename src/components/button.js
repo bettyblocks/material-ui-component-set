@@ -308,14 +308,20 @@
         },
       },
       tooltip: {
-        backgroundColor: ({ options: { tooltipBackground } }) =>
-          style.getColor(tooltipBackground) + '!important',
-        color: ({ options: { tooltipText } }) =>
-          style.getColor(tooltipText) + '!important',
+        backgroundColor: ({ options: { tooltipBackground } }) => [
+          style.getColor(tooltipBackground),
+          '!important',
+        ],
+        color: ({ options: { tooltipText } }) => [
+          style.getColor(tooltipText),
+          '!important',
+        ],
       },
       arrow: {
-        color: ({ options: { tooltipBackground } }) =>
-          style.getColor(tooltipBackground) + '!important',
+        color: ({ options: { tooltipBackground } }) => [
+          style.getColor(tooltipBackground),
+          '!important',
+        ],
       },
     };
   },
