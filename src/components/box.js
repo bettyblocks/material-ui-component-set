@@ -92,9 +92,9 @@
     return isDev ? <div className={classes.wrapper}>{BoxCmp}</div> : BoxCmp;
   })(),
   styles: B => theme => {
-    const style = new B.Styling(theme);
-    const { color: colorFunc } = B;
-    const isDev = B.env === 'dev';
+    const { color: colorFunc, env, mediaMinWidth, Styling, useText } = B;
+    const style = new Styling(theme);
+    const isDev = env === 'dev';
     const getColorAlpha = (col, val) => colorFunc.alpha(col, val);
     const getSpacing = (idx, device = 'Mobile') =>
       idx === '0' ? '0rem' : style.getSpacing(idx, device);
@@ -152,7 +152,7 @@
           getSpacing(innerSpacing[2]),
         paddingLeft: ({ options: { innerSpacing } }) =>
           getSpacing(innerSpacing[3]),
-        [`@media ${B.mediaMinWidth(600)}`]: {
+        [`@media ${mediaMinWidth(600)}`]: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Portrait'),
           marginRight: ({ options: { outerSpacing } }) =>
@@ -170,7 +170,7 @@
           paddingLeft: ({ options: { innerSpacing } }) =>
             getSpacing(innerSpacing[3], 'Portrait'),
         },
-        [`@media ${B.mediaMinWidth(960)}`]: {
+        [`@media ${mediaMinWidth(960)}`]: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Landscape'),
           marginRight: ({ options: { outerSpacing } }) =>
@@ -188,7 +188,7 @@
           paddingLeft: ({ options: { innerSpacing } }) =>
             getSpacing(innerSpacing[3], 'Landscape'),
         },
-        [`@media ${B.mediaMinWidth(1280)}`]: {
+        [`@media ${mediaMinWidth(1280)}`]: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Desktop'),
           marginRight: ({ options: { outerSpacing } }) =>
@@ -218,7 +218,7 @@
                 backgroundColorAlpha / 100,
               ),
         backgroundImage: ({ options: { backgroundUrl } }) => {
-          const image = B.useText(backgroundUrl);
+          const image = useText(backgroundUrl);
           return image && `url("${image}")`;
         },
         backgroundSize: ({ options: { backgroundSize } }) => backgroundSize,

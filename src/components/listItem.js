@@ -93,7 +93,8 @@
     );
   })(),
   styles: B => t => {
-    const style = new B.Styling(t);
+    const { Styling } = B;
+    const style = new Styling(t);
     return {
       root: {
         color: ({ options: { titleColor } }) => style.getColor(titleColor),
