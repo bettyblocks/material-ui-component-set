@@ -12892,7 +12892,6 @@
   ],
   actions: [
     {
-      name: 'Update form action',
       ref: {
         id: '#actionId',
         endpointId: '#endpointId',
@@ -12931,7 +12930,7 @@
       type: 'Custom',
     },
     {
-      name: 'ToggleLoadingState',
+      name: 'Toggle loading state',
       sourceEvent: 'onSubmit',
       ref: {
         targetComponentId: '#btnId',
@@ -12940,7 +12939,7 @@
       type: 'Custom',
     },
     {
-      name: 'ToggleLoadingState',
+      name: 'Toggle loading state',
       sourceEvent: 'onActionDone',
       ref: {
         targetComponentId: '#btnId',
@@ -13167,7 +13166,7 @@
               type: 'TOGGLE',
             },
             {
-              value: 'relative',
+              value: 'static',
               label: 'Position',
               key: 'position',
               type: 'CUSTOM',

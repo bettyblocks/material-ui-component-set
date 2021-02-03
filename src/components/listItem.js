@@ -1,7 +1,7 @@
 (() => ({
   name: 'ListItem',
-  type: 'LIST_ITEM',
-  allowedTypes: ['CONTENT_COMPONENT'],
+  type: 'CONTENT_COMPONENT',
+  allowedTypes: ['CONTENT_COMPONENT', 'CONTAINER_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const {
@@ -22,13 +22,21 @@
       secondaryText,
       icon,
       avatar,
+      avatarUrl,
+      avatarOrIcon,
+      linkType,
       linkTo,
+      linkToExternal,
       dense,
     } = options;
     const { env, useText, Link } = B;
     const isDev = env === 'dev';
 
     const hasLink = linkTo && linkTo.id !== '';
+    const hasExternalLink =
+      linkType === 'external' && linkToExternal && linkToExternal.id !== '';
+    const linkToExternalVariable =
+      (linkToExternal && useText(linkToExternal)) || '';
 
     const primary = useText(primaryText);
     const secondary = useText(secondaryText);
@@ -41,7 +49,9 @@
 
     const AvatarComponent = (
       <ListItemAvatar>
-        <Avatar>{icon !== 'None' && React.createElement(Icons[icon])}</Avatar>
+        <Avatar src={avatarOrIcon === 'avatar' && avatarUrl}>
+          {avatarOrIcon === 'icon' && React.createElement(Icons[icon])}
+        </Avatar>
       </ListItemAvatar>
     );
 
@@ -53,11 +63,16 @@
 
     const itemText = isEmpty && isDev ? 'Empty content' : primary;
 
-    const listItem = (
+    let linkComponent = 'li';
+    if (linkType === 'internal' && hasLink) linkComponent = Link;
+    if (linkType === 'external' && hasExternalLink) linkComponent = 'a';
+
+    return (
       <ListItem
-        button={hasLink}
-        component={hasLink ? Link : 'li'}
-        endpoint={linkTo}
+        button={hasLink || linkToExternalVariable}
+        href={hasExternalLink ? linkToExternalVariable : undefined}
+        component={linkComponent}
+        endpoint={linkType === 'internal' && hasLink ? linkTo : undefined}
         alignItems={alignItems}
         disabled={disabled}
         disableGutters={disableGutters}
@@ -66,7 +81,9 @@
         className={classes.root}
         dense={dense}
       >
-        {icon !== 'None' && (avatar ? AvatarComponent : IconComponent)}
+        {avatarOrIcon === 'avatar' || (avatarOrIcon === 'icon' && avatar)
+          ? AvatarComponent
+          : IconComponent}
         <ListItemText
           className={isEmpty && isDev && classes.placeholder}
           primary={itemText}
@@ -74,11 +91,10 @@
         />
       </ListItem>
     );
-
-    return isDev ? <div className={classes.wrapper}>{listItem}</div> : listItem;
   })(),
   styles: B => t => {
-    const style = new B.Styling(t);
+    const { Styling } = B;
+    const style = new Styling(t);
     return {
       root: {
         color: ({ options: { titleColor } }) => style.getColor(titleColor),
