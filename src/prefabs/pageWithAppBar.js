@@ -1533,10 +1533,36 @@
                       configuration: {
                         apiVersion: 'v1',
                       },
+                      key: 'disabled',
+                      label: 'Disabled',
+                      type: 'TOGGLE',
+                      value: false,
+                    },
+                    {
+                      configuration: {
+                        apiVersion: 'v1',
+                        as: 'VISIBILITY',
+                      },
                       label: 'Add Tooltip',
                       key: 'addTooltip',
                       value: false,
                       type: 'TOGGLE',
+                    },
+                    {
+                      label: 'Toggle tooltip visibility',
+                      key: 'visibleTooltip',
+                      value: true,
+                      type: 'TOGGLE',
+                      configuration: {
+                        apiVersion: 'v1',
+                        as: 'VISIBILITY',
+                        condition: {
+                          type: 'SHOW',
+                          option: 'addTooltip',
+                          comparator: 'EQ',
+                          value: true,
+                        },
+                      },
                     },
                     {
                       type: 'VARIABLE',
@@ -1608,7 +1634,7 @@
                       type: 'COLOR',
                       label: 'Tooltip Background',
                       key: 'tooltipBackground',
-                      value: 'medium',
+                      value: 'Medium',
                       configuration: {
                         apiVersion: 'v1',
                         condition: {
@@ -1633,15 +1659,6 @@
                           value: true,
                         },
                       },
-                    },
-                    {
-                      configuration: {
-                        apiVersion: 'v1',
-                      },
-                      key: 'disabled',
-                      label: 'Disabled',
-                      type: 'TOGGLE',
-                      value: false,
                     },
                   ],
                 },
@@ -3167,6 +3184,16 @@
                       configuration: {
                         apiVersion: 'v1',
                       },
+                      key: 'disabled',
+                      label: 'Disabled',
+                      type: 'TOGGLE',
+                      value: false,
+                    },
+                    {
+                      configuration: {
+                        apiVersion: 'v1',
+                        as: 'VISIBILITY',
+                      },
                       label: 'Add Tooltip',
                       key: 'addTooltip',
                       value: false,
@@ -3267,15 +3294,6 @@
                           value: true,
                         },
                       },
-                    },
-                    {
-                      configuration: {
-                        apiVersion: 'v1',
-                      },
-                      key: 'disabled',
-                      label: 'Disabled',
-                      type: 'TOGGLE',
-                      value: false,
                     },
                   ],
                 },

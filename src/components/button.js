@@ -29,6 +29,7 @@
       buttonText,
       actionModels,
       addTooltip,
+      visibleTooltip,
       tooltipContent,
       tooltipPlacement,
     } = options;
@@ -53,6 +54,7 @@
 
     const [isVisible, setIsVisible] = useState(visible);
     const [isLoading, setIsLoading] = useState(false);
+    const [isOpen, setIsOpen] = useState(visibleTooltip);
 
     const camelToSnakeCase = str =>
       str[0].toLowerCase() +
@@ -91,7 +93,8 @@
 
     useEffect(() => {
       setIsVisible(visible);
-    }, [visible]);
+      setIsOpen(visibleTooltip);
+    }, [visible, visibleTooltip]);
 
     B.defineFunction('Show', () => setIsVisible(true));
     B.defineFunction('Hide', () => setIsVisible(false));
@@ -176,6 +179,7 @@
     const ButtonWithTooltip = (
       <Tooltip
         title={tooltipText}
+        open={isOpen}
         placement={tooltipPlacement}
         arrow
         classes={{
