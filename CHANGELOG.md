@@ -1,3 +1,19 @@
+# [1.94.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.93.0...v1.94.0) (2021-02-03)
+
+
+### Bug Fixes
+
+* turn on icons by default ([92b0388](https://github.com/bettyblocks/material-ui-component-set/commit/92b03885f7d0c216eb8ee09c0832afb0af065665))
+
+
+### Features
+
+* add list component to list catagory ([0f7c9fe](https://github.com/bettyblocks/material-ui-component-set/commit/0f7c9feab1ee5d01b760f6ea1f8ecf211063bfce))
+* add list component to list catagory ([1bb3b78](https://github.com/bettyblocks/material-ui-component-set/commit/1bb3b7845b924b379a9d5cc57f58a739b46c0880))
+* allow avatar url inside ListItem avatar ([e252252](https://github.com/bettyblocks/material-ui-component-set/commit/e25225233b30766191000f8eb5096ffa3a45a381))
+* allow container in list component ([e2096f7](https://github.com/bettyblocks/material-ui-component-set/commit/e2096f7f8999358b130293fa599bb468ae3d59d2))
+* split list component in 2 separate components ([c1de56a](https://github.com/bettyblocks/material-ui-component-set/commit/c1de56a4b568567c2359604a8f1689d31391a0c4))
+
 # [1.93.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.92.0...v1.93.0) (2021-02-02)
 
 
