@@ -176,10 +176,18 @@
       </BtnComp>
     );
 
+    let openPropsTooltip = {};
+
+    if (isDev) {
+      openPropsTooltip = {
+        open: isOpen,
+      };
+    }
+
     const ButtonWithTooltip = (
       <Tooltip
         title={tooltipText}
-        open={isOpen}
+        {...openPropsTooltip}
         placement={tooltipPlacement}
         arrow
         classes={{
