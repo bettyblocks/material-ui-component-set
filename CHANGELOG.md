@@ -1,3 +1,24 @@
+## [1.97.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.97.0...v1.97.1) (2021-02-04)
+
+
+### Bug Fixes
+
+* prevent firefox from infinite loop on auto form submit ([0afbc24](https://github.com/bettyblocks/material-ui-component-set/commit/0afbc2482fbca426abab0ccfee7862512bddf28c))
+
+# [1.97.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.96.0...v1.97.0) (2021-02-04)
+
+
+### Features
+
+* **ta-2230:** added link option to title and text components ([f0d25c8](https://github.com/bettyblocks/material-ui-component-set/commit/f0d25c8c3ae1dd5849439fd19f2ff02469e71b8e))
+
+# [1.96.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.95.0...v1.96.0) (2021-02-04)
+
+
+### Features
+
+* **ta-2249:** component set BUTTON section added ([d900053](https://github.com/bettyblocks/material-ui-component-set/commit/d900053de9812632644f812a8fe3dd83fa68b436))
+
 # [1.95.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.94.0...v1.95.0) (2021-02-03)
 
 
