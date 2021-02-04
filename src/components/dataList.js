@@ -86,7 +86,7 @@
         );
 
         useEffect(() => {
-          if (!isDev) return null;
+          if (!isDev) return;
           const repeat = () => {
             if (!listRef.current) return;
             const numberOfChildren = listRef.current.children.length;
@@ -125,8 +125,6 @@
             characterDataOldValue: false,
           });
           repeat();
-
-          return () => mutationObserver.disconnect();
         });
 
         const handleSearch = event => {
