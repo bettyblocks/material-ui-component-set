@@ -1,3 +1,10 @@
+## [1.97.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.97.0...v1.97.1) (2021-02-04)
+
+
+### Bug Fixes
+
+* prevent firefox from infinite loop on auto form submit ([0afbc24](https://github.com/bettyblocks/material-ui-component-set/commit/0afbc2482fbca426abab0ccfee7862512bddf28c))
+
 # [1.97.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.96.0...v1.97.0) (2021-02-04)
 
 
