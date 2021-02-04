@@ -1,3 +1,10 @@
+# [1.96.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.95.0...v1.96.0) (2021-02-04)
+
+
+### Features
+
+* **ta-2249:** component set BUTTON section added ([d900053](https://github.com/bettyblocks/material-ui-component-set/commit/d900053de9812632644f812a8fe3dd83fa68b436))
+
 # [1.95.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.94.0...v1.95.0) (2021-02-03)
 
 
