@@ -1,3 +1,10 @@
+# [1.97.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.96.0...v1.97.0) (2021-02-04)
+
+
+### Features
+
+* **ta-2230:** added link option to title and text components ([f0d25c8](https://github.com/bettyblocks/material-ui-component-set/commit/f0d25c8c3ae1dd5849439fd19f2ff02469e71b8e))
+
 # [1.96.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.95.0...v1.96.0) (2021-02-04)
 
 
