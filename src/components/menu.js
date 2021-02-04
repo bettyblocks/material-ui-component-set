@@ -1,6 +1,6 @@
 (() => ({
   name: 'Menu',
-  type: 'CONTAINER_COMPONENT',
+  type: 'CONTENT_COMPONENT',
   allowedTypes: ['MENU_ITEM'],
   orientation: 'VERTICAL',
   jsx: (() => {
