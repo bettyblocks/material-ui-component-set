@@ -44,7 +44,7 @@
         maxWidth={width}
         aria-labelledby="modal-dialog"
         keepMounted
-        disableBackdropClick
+        disableBackdropClick={disableBackdropClick}
       >
         {children}
       </Dialog>
