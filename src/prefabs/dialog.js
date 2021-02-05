@@ -46,6 +46,12 @@
           value: false,
         },
         {
+          type: 'TOGGLE',
+          label: 'Disable backdrop click',
+          key: 'disableBackdropClick',
+          value: false,
+        },
+        {
           value: 'sm',
           label: 'Width',
           key: 'width',
