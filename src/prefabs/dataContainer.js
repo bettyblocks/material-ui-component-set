@@ -39,8 +39,8 @@
             label="Where is the data coming from?"
             info={
               <Text size="small" color="grey700">
-                Another page is linked to this page, and passes the data to this
-                data container.
+                Link from another page to this page, and pass the ID property of
+                the model.
               </Text>
             }
           >
@@ -49,6 +49,7 @@
                 setButtonGroupValue(value);
               }}
               value={buttonGroupValue}
+              size="large"
             >
               <ButtonGroupButton
                 label="Another page"
@@ -70,8 +71,13 @@
             </ButtonGroup>
           </Field>
           <Field
-            label="Select model"
+            label="Model"
             error={validation && <Text color="#e82600">{validation}</Text>}
+            info={
+              <Text size="small" color="grey700">
+                Select the model where you want to show the data from.
+              </Text>
+            }
           >
             <ModelSelector
               onChange={(id, modelObject) => {
