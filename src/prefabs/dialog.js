@@ -48,7 +48,7 @@
         {
           type: 'TOGGLE',
           label: 'Disable backdrop click',
-          key: 'disableBackdropClick',
+          key: 'disableClick',
           value: false,
         },
         {

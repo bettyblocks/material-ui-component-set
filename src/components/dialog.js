@@ -5,7 +5,12 @@
   orientation: 'VERTICAL',
   jsx: (() => {
     const { env } = B;
-    const { isVisible, isFullscreen, width, disableBackdropClick } = options;
+    const {
+      isVisible,
+      isFullscreen,
+      width,
+      disableClick: disableBackdropClick,
+    } = options;
     const { Dialog } = window.MaterialUI.Core;
     const isDev = env === 'dev';
     const [isOpen, setIsOpen] = useState(isVisible);
