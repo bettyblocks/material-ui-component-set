@@ -47,10 +47,7 @@
         const mounted = useRef(false);
 
         B.defineFunction('Submit', () => {
-          if (formRef.current)
-            formRef.current.dispatchEvent(
-              new Event('submit', { cancelable: true }),
-            );
+          if (formRef.current) formRef.current.requestSubmit();
         });
 
         useEffect(() => {
