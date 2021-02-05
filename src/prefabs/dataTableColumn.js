@@ -7,6 +7,15 @@
       name: 'DataTableColumn',
       options: [
         {
+          value: true,
+          label: 'Initial visibility',
+          key: 'visible',
+          type: 'TOGGLE',
+          configuration: {
+            as: 'VISIBILITY',
+          },
+        },
+        {
           value: '',
           label: 'Property',
           key: 'property',
