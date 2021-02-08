@@ -259,17 +259,17 @@
         };
 
         const Looper = results => {
-          const Wrapper = isInline ? 'span' : 'div';
           const rows = results.map(item => (
             <ModelProvider key={item.id} value={item} id={model}>
               <InteractionScope model={model}>
                 {context => (
-                  <Wrapper
+                  <div
+                    role="none"
                     className={isInline && classes.inline}
                     onClick={event => handleClick(event, context)}
                   >
                     {children}
-                  </Wrapper>
+                  </div>
                 )}
               </InteractionScope>
             </ModelProvider>
