@@ -1,3 +1,10 @@
+## [1.98.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.98.0...v1.98.1) (2021-02-08)
+
+
+### Bug Fixes
+
+* **ta-2193:** fixes dataList structure ([0562870](https://github.com/bettyblocks/material-ui-component-set/commit/0562870e04d91b7884b91fd7db3f82c778c6006c))
+
 # [1.98.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.97.1...v1.98.0) (2021-02-08)
 
 
