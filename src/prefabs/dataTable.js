@@ -50,6 +50,15 @@
                 name: 'DataTableColumn',
                 options: [
                   {
+                    value: true,
+                    label: 'Initial visibility',
+                    key: 'visible',
+                    type: 'TOGGLE',
+                    configuration: {
+                      as: 'VISIBILITY',
+                    },
+                  },
+                  {
                     value: property,
                     label: 'Property',
                     key: 'property',
