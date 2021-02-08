@@ -1,3 +1,23 @@
+## [1.98.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.98.0...v1.98.1) (2021-02-08)
+
+
+### Bug Fixes
+
+* **ta-2193:** fixes dataList structure ([0562870](https://github.com/bettyblocks/material-ui-component-set/commit/0562870e04d91b7884b91fd7db3f82c778c6006c))
+
+# [1.98.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.97.1...v1.98.0) (2021-02-08)
+
+
+### Bug Fixes
+
+* **ART-2778:** change naming of state variable ([bb413ae](https://github.com/bettyblocks/material-ui-component-set/commit/bb413ae9e2586e411612951d7f9214996e86551c))
+* **ART-2778:** Update texts and small design feedback ([5252027](https://github.com/bettyblocks/material-ui-component-set/commit/52520270828c07265e7125e47426035953cb9c88))
+
+
+### Features
+
+* **ART-2778:** add beforeCreate to dataContainer ([24fdcbc](https://github.com/bettyblocks/material-ui-component-set/commit/24fdcbcc2e5c440f35d9d6407422837978b3f39c))
+
 ## [1.97.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.97.0...v1.97.1) (2021-02-04)
 
 
