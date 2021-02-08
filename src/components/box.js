@@ -227,7 +227,7 @@
         backgroundRepeat: ({ options: { backgroundRepeat } }) =>
           backgroundRepeat,
         backgroundAttachment: ({ options: { backgroundAttachment } }) =>
-          backgroundAttachment,
+          backgroundAttachmentr,
       },
       border: {
         borderWidth: ({ options: { borderWidth, borderStyle, borderColor } }) =>
