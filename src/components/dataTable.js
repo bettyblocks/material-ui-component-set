@@ -82,6 +82,7 @@
     const fetchingNextSet = useRef(false);
     const [initialTimesFetched, setInitialTimesFetched] = useState(0);
     const amountOfRows = loadOnScroll ? autoLoadTakeAmountNum : rowsPerPage;
+    const history = isDev ? null : useHistory();
 
     const createSortObject = (fields, order) => {
       const fieldsArray = [fields].flat();
@@ -309,8 +310,8 @@
     const handleRowClick = (endpoint, context) => {
       if (isDev) return;
       B.triggerEvent('OnRowClick', endpoint, context);
+
       if (hasLink) {
-        const history = useHistory();
         history.push(endpoint);
       }
     };
