@@ -1,3 +1,10 @@
+# [1.99.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.98.2...v1.99.0) (2021-02-08)
+
+
+### Features
+
+* **ta-1502:** menu component created ([59bc5d4](https://github.com/bettyblocks/material-ui-component-set/commit/59bc5d41943941e2ccf4df463f157a7fba591ccb))
+
 ## [1.98.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.98.1...v1.98.2) (2021-02-08)
 
 
