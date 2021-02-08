@@ -174,7 +174,7 @@
       }
     }, [isDev, defaultValue]);
 
-    B.defineFunction('Clear', () => setCurrentValue(null));
+    B.defineFunction('Clear', () => setCurrentValue(multiple ? [] : null));
     B.defineFunction('Refetch', () => refetch());
 
     useEffect(() => {
@@ -264,7 +264,7 @@
 
       const singleRecord = currentRecords[0] ? { ...currentRecords[0] } : null;
       return multiple ? currentRecords : singleRecord;
-    }, [results]);
+    }, [currentValue, results]);
 
     const defaultRecord = getDefaultValue();
 
@@ -381,6 +381,7 @@
         freeSolo={freeSolo}
         autoSelect={freeSolo}
         options={results}
+        value={defaultRecord}
         defaultValue={defaultRecord}
         getOptionLabel={renderLabel}
         getOptionSelected={(option, value) => value.id === option.id}
