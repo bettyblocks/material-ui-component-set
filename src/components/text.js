@@ -4,9 +4,12 @@
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { content, useInnerHtml } = options;
-    const { env, useText } = B;
+    const { content, linkType, linkTo, linkToExternal, useInnerHtml } = options;
+    const { Link } = window.MaterialUI.Core;
+    const { env, useText, Link: BLink } = B;
+    const isEmpty = content.length === 0;
     const isDev = env === 'dev';
+    const isPristine = isEmpty && isDev;
 
     const Tag = useInnerHtml
       ? 'div'
@@ -22,16 +25,35 @@
         }[options.type || 'Body1'];
 
     const parsedContent = useText(content);
+    const hasLink = linkType === 'internal' && linkTo && linkTo.id !== '';
+    const hasExternalLink =
+      linkType === 'external' && linkToExternal && linkToExternal.id !== '';
+    const linkToExternalText =
+      (linkToExternal && useText(linkToExternal)) || '';
+    let linkedContent = parsedContent;
+
+    if (hasLink || hasExternalLink) {
+      linkedContent = (
+        <Link
+          className={classes.link}
+          href={hasExternalLink ? linkToExternalText : undefined}
+          component={hasLink ? BLink : undefined}
+          endpoint={hasLink ? linkTo : undefined}
+        >
+          {parsedContent}
+        </Link>
+      );
+    }
 
     return useInnerHtml && !isDev ? (
       <Tag
         className={classes.content}
-        dangerouslySetInnerHTML={{ __html: parsedContent }}
+        dangerouslySetInnerHTML={{ __html: linkedContent }}
       />
     ) : (
       <Tag className={classes.content}>
-        {content.length > 0 && parsedContent}
-        {content.length === 0 && isDev && (
+        {!isEmpty && linkedContent}
+        {isPristine && (
           <span className={classes.placeholder}>Empty content</span>
         )}
       </Tag>
@@ -98,6 +120,10 @@
           fontSize: ({ options: { type } }) =>
             style.getFontSize(type, 'Desktop'),
         },
+      },
+      link: {
+        textDecoration: ['none', '!important'],
+        color: ['inherit', '!important'],
       },
       placeholder: {
         color: '#dadde4',
