@@ -1,3 +1,10 @@
+## [1.98.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.98.1...v1.98.2) (2021-02-08)
+
+
+### Bug Fixes
+
+* rewrite conditional hook in datatable ([fe36773](https://github.com/bettyblocks/material-ui-component-set/commit/fe367737d6ae6b1b6ad09289f4e46707a6bffe0b))
+
 ## [1.98.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.98.0...v1.98.1) (2021-02-08)
 
 
