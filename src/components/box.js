@@ -69,9 +69,9 @@
         style={
           interactionBackground
             ? {
-              backgroundImage: interactionBackground,
-              opacity,
-            }
+                backgroundImage: interactionBackground,
+                opacity,
+              }
             : { opacity }
         }
       >
@@ -214,9 +214,9 @@
           backgroundColor === 'Transparent'
             ? style.getColor(backgroundColor)
             : getColorAlpha(
-              style.getColor(backgroundColor),
-              backgroundColorAlpha / 100,
-            ),
+                style.getColor(backgroundColor),
+                backgroundColorAlpha / 100,
+              ),
         backgroundImage: ({ options: { backgroundUrl } }) => {
           const image = useText(backgroundUrl);
           return image && `url("${image}")`;
