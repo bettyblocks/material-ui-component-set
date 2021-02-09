@@ -45,6 +45,9 @@
         const displayError = showError === 'built-in';
         const listRef = React.createRef();
         const [showPagination, setShowPagination] = useState(true);
+        const isInline = type === 'inline';
+        const isGrid = type === 'grid';
+
         const builderLayout = () => (
           <>
             {searchProperty && !hideSearch && (
@@ -52,13 +55,17 @@
                 <SearchComponent label={searchPropertyLabel} />
               </div>
             )}
-            <div ref={listRef} className={type === 'grid' ? classes.grid : ''}>
+            <div ref={listRef} className={isGrid && classes.grid}>
               <div
-                className={[
-                  isEmpty ? classes.empty : '',
-                  isPristine ? classes.pristine : '',
-                  type === 'inline' ? classes.inline : '',
-                ].join(' ')}
+                className={
+                  [
+                    isEmpty ? classes.empty : '',
+                    isPristine ? classes.pristine : '',
+                    isInline ? classes.inline : '',
+                  ]
+                    .filter(Boolean)
+                    .join(' ') || undefined
+                }
               >
                 {isPristine
                   ? 'Drag a component in the data list to display the data'
@@ -251,15 +258,18 @@
           B.triggerEvent('OnItemClick', event, context);
         };
 
-        const Wrapper = type === 'inline' ? 'span' : 'div';
         const Looper = results => {
           const rows = results.map(item => (
             <ModelProvider key={item.id} value={item} id={model}>
               <InteractionScope model={model}>
                 {context => (
-                  <Wrapper onClick={event => handleClick(event, context)}>
+                  <div
+                    role="none"
+                    className={isInline && classes.inline}
+                    onClick={event => handleClick(event, context)}
+                  >
                     {children}
-                  </Wrapper>
+                  </div>
                 )}
               </InteractionScope>
             </ModelProvider>
@@ -310,12 +320,10 @@
                 </div>
               )}
 
-              {type === 'inline' ? (
+              {!isGrid ? (
                 Looper(results)
               ) : (
-                <div className={type === 'grid' ? classes.grid : ''}>
-                  {Looper(results)}
-                </div>
+                <div className={classes.grid}>{Looper(results)}</div>
               )}
 
               {showPagination && (
@@ -464,7 +472,7 @@
           getSpacing(outerSpacing[3]),
       },
       inline: {
-        display: 'inline',
+        display: 'inline-flex',
       },
       header: {
         display: 'flex',
