@@ -268,13 +268,13 @@
       return multiple ? currentRecords : singleRecord;
     }, [currentValue, results]);
 
-    const defaultRecord = getRecords();
+    const record = getRecords();
 
     useEffect(() => {
-      if (!multiple && defaultRecord && searchProp) {
-        setCurrentLabel(defaultRecord[searchProp.name]);
+      if (!multiple && record && searchProp) {
+        setCurrentLabel(record[searchProp.name]);
       }
-    }, [defaultRecord]);
+    }, [record]);
 
     const renderLabel = option => {
       const optionLabel = option[searchProp.name];
@@ -382,7 +382,7 @@
         multiple={multiple}
         freeSolo={freeSolo}
         options={results}
-        value={defaultRecord}
+        value={record}
         inputValue={searchParam}
         getOptionLabel={renderLabel}
         getOptionSelected={(option, value) => value.id === option.id}
