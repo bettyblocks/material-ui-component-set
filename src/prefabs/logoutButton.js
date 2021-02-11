@@ -8,34 +8,40 @@
     close,
     components: { Header, Content, Field, Footer, Text, EndpointSelector },
   }) => {
-    const [redirectTo, setRedirectTo] = React.useState(null);
+    const [value, setValue] = React.useState({});
     const [showValidation, setShowValidation] = React.useState(false);
+
+    function serializeParameters(obj) {
+      return Object.entries(obj).map(([name, entry]) => ({
+        name,
+        value: entry.map(v => JSON.stringify(v)),
+      }));
+    }
 
     return (
       <>
-        <Header onClose={close} title="Logout" />
+        <Header
+          onClose={close}
+          title="Logout"
+          subtitle="Generate your logout button based on the logout interaction and
+            redirect after logout"
+        />
         <Content>
           <Field
-            label="Generate your logout button based on the logout interaction and redirect after logout"
+            label="Redirect after logout"
             error={
               showValidation && (
                 <Text color="#e82600">Selecting a page is required</Text>
               )
             }
           >
-            <EndpointSelector
-              value={redirectTo}
-              onChange={value => {
-                console.log(`ai bruv, dis your page fam? ${value}`);
-                setRedirectTo(value);
-              }}
-            />
+            <EndpointSelector value={value} onChange={setValue} />
           </Field>
         </Content>
         <Footer
           onClose={close}
           onSave={() => {
-            if (!redirectTo) {
+            if (!Object.keys(value).length) {
               setShowValidation(true);
               return;
             }
@@ -44,8 +50,9 @@
             newPrefab.interactions[0].parameters = [
               {
                 parameter: 'redirectTo',
-                pageId: redirectTo.page.id,
-                endpointId: redirectTo.id,
+                pageId: value.pageId,
+                endpointId: value.id,
+                parameters: serializeParameters(value.params),
               },
             ];
             save(newPrefab);
@@ -56,15 +63,21 @@
   },
   interactions: [
     {
-      name: 'Logout',
+      name: 'logout',
       sourceEvent: 'Click',
       type: 'Global',
+      ref: {
+        sourceComponentId: '#logoutButton',
+      },
       parameters: [],
     },
   ],
   structure: [
     {
       name: 'Button',
+      ref: {
+        id: '#logoutButton',
+      },
       options: [
         {
           label: 'Toggle visibility',
