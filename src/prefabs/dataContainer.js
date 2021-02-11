@@ -10,6 +10,7 @@
       ButtonGroup,
       ButtonGroupButton,
       ComponentSelector,
+      AuthenticationProfileSelector,
       Content,
       Field,
       Footer,
@@ -22,6 +23,10 @@
     const [anotherPageState, setAnotherPageState] = React.useState({
       modelId: '',
       model: null,
+    });
+
+    const [loggedInUserState, setLoggedInUserState] = React.useState({
+      authenticationProfile: null,
     });
 
     const [thisPageState, setThisPageState] = React.useState({
@@ -84,6 +89,12 @@
           }
           if (!thisPageState.model) {
             setValidationMessage('Model is required.');
+            return false;
+          }
+          break;
+        case 'loggedInUser':
+          if (!loggedInUserState.authenticationProfile) {
+            setValidationMessage('Authentication Profile is required.');
             return false;
           }
           break;
@@ -157,6 +168,18 @@
       }
     };
 
+    const saveLoggedInUser = () => {
+      const newPrefab = { ...prefab };
+
+      newPrefab.structure[0].options[0].value =
+        loggedInUserState.authenticationProfile.loginModel;
+
+      newPrefab.structure[0].options[3].value =
+        loggedInUserState.authenticationProfile.id;
+
+      save(newPrefab);
+    };
+
     return (
       <>
         <Header onClose={close} title="Configure data container" />
@@ -193,7 +216,6 @@
                 label="Logged in user"
                 value="loggedInUser"
                 name="dataSourceSelect"
-                disabled
               />
             </ButtonGroup>
           </Field>
@@ -259,6 +281,22 @@
               />
             </Field>
           )}
+
+          {buttonGroupValue === 'loggedInUser' && (
+            <AuthenticationProfileSelector
+              onChange={(id, authProfileObject) => {
+                setLoggedInUserState(prevState => ({
+                  ...prevState,
+                  authenticationProfile: authProfileObject,
+                }));
+              }}
+              value={
+                loggedInUserState.authenticationProfile
+                  ? loggedInUserState.authenticationProfile.id
+                  : ''
+              }
+            />
+          )}
         </Content>
         <Footer
           onClose={close}
@@ -276,6 +314,9 @@
                 saveThisPage();
                 break;
 
+              case 'loggedInUser':
+                saveLoggedInUser();
+                break;
               default:
                 break;
             }
