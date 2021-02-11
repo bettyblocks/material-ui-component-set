@@ -10,6 +10,7 @@
       ButtonGroup,
       ButtonGroupButton,
       ComponentSelector,
+      AuthenticationProfileSelector,
       Content,
       Field,
       Footer,
@@ -25,7 +26,6 @@
     });
 
     const [loggedInUserState, setLoggedInUserState] = React.useState({
-      authenticationProfileId: '',
       authenticationProfile: null,
     });
 
@@ -92,12 +92,12 @@
             return false;
           }
           break;
-          case 'loggedInUser':
-            if(!loggedInUserState.authenticationProfile) {
+        case 'loggedInUser':
+          if (!loggedInUserState.authenticationProfile) {
             setValidationMessage('Authentication Profile is required.');
-              return false;
-            }
-            break;
+            return false;
+          }
+          break;
 
         default:
           break;
@@ -170,7 +170,13 @@
 
     const saveLoggedInUser = () => {
       const newPrefab = { ...prefab };
-        newPrefab.structure[0].options[0].value = thisPageState.modelId;
+
+      newPrefab.structure[0].options[0].value =
+        loggedInUserState.authenticationProfile.loginModel;
+
+      newPrefab.structure[0].options[3].value =
+        loggedInUserState.authenticationProfile.id;
+
       save(newPrefab);
     };
 
@@ -275,19 +281,23 @@
               />
             </Field>
           )}
-        </Co
+
           {buttonGroupValue === 'loggedInUser' && (
             <AuthenticationProfileSelector
-            onChange={(id, authProfileObject) => {
-              setLoggedInUserState(prevState => ({
-                ...prevState,
-                authenticationProfileId: id,
-                authenticationProfile: authProfileObject,
-              }));
-            }}
-            value={loggedInUserState.authenticationProfileId}
-          />
-          )}ntent>
+              onChange={(id, authProfileObject) => {
+                setLoggedInUserState(prevState => ({
+                  ...prevState,
+                  authenticationProfile: authProfileObject,
+                }));
+              }}
+              value={
+                loggedInUserState.authenticationProfile
+                  ? loggedInUserState.authenticationProfile.id
+                  : ''
+              }
+            />
+          )}
+        </Content>
         <Footer
           onClose={close}
           onSkip={() => {
@@ -304,10 +314,10 @@
                 saveThisPage();
                 break;
 
-
-                case 'loggedInUser':
-                  saveLoggedInUser();
-                break;              default:
+              case 'loggedInUser':
+                saveLoggedInUser();
+                break;
+              default:
                 break;
             }
           }}
