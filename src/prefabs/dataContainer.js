@@ -24,6 +24,11 @@
       model: null,
     });
 
+    const [loggedInUserState, setLoggedInUserState] = React.useState({
+      authenticationProfileId: '',
+      authenticationProfile: null,
+    });
+
     const [thisPageState, setThisPageState] = React.useState({
       modelId: null,
       model: null,
@@ -87,6 +92,12 @@
             return false;
           }
           break;
+          case 'loggedInUser':
+            if(!loggedInUserState.authenticationProfile) {
+            setValidationMessage('Authentication Profile is required.');
+              return false;
+            }
+            break;
 
         default:
           break;
@@ -157,6 +168,12 @@
       }
     };
 
+    const saveLoggedInUser = () => {
+      const newPrefab = { ...prefab };
+        newPrefab.structure[0].options[0].value = thisPageState.modelId;
+      save(newPrefab);
+    };
+
     return (
       <>
         <Header onClose={close} title="Configure data container" />
@@ -193,7 +210,6 @@
                 label="Logged in user"
                 value="loggedInUser"
                 name="dataSourceSelect"
-                disabled
               />
             </ButtonGroup>
           </Field>
@@ -259,7 +275,19 @@
               />
             </Field>
           )}
-        </Content>
+        </Co
+          {buttonGroupValue === 'loggedInUser' && (
+            <AuthenticationProfileSelector
+            onChange={(id, authProfileObject) => {
+              setLoggedInUserState(prevState => ({
+                ...prevState,
+                authenticationProfileId: id,
+                authenticationProfile: authProfileObject,
+              }));
+            }}
+            value={loggedInUserState.authenticationProfileId}
+          />
+          )}ntent>
         <Footer
           onClose={close}
           onSkip={() => {
@@ -276,7 +304,10 @@
                 saveThisPage();
                 break;
 
-              default:
+
+                case 'loggedInUser':
+                  saveLoggedInUser();
+                break;              default:
                 break;
             }
           }}
