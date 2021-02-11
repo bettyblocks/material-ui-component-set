@@ -53,14 +53,65 @@
       }
     }, [data]);
 
-    const saveAnotherPage = newPrefab => {
+    const validate = () => {
+      if (loading) {
+        setValidationMessage(
+          'Model details are still loading, please try submitting again.',
+        );
+        return false;
+      }
+      switch (buttonGroupValue) {
+        case 'anotherPage':
+          if (!anotherPageState.modelId) {
+            setValidationMessage('Model id is required.');
+            return false;
+          }
+          if (!anotherPageState.model) {
+            setValidationMessage('Model is required.');
+            return false;
+          }
+          break;
+        case 'thisPage':
+          if (!thisPageState.component) {
+            setValidationMessage('Component is required.');
+            return false;
+          }
+          if (!thisPageState.modelId) {
+            setValidationMessage(
+              'The selected component does not have a model.',
+            );
+            return false;
+          }
+          if (!thisPageState.model) {
+            setValidationMessage('Model is required.');
+            return false;
+          }
+          break;
+
+        default:
+          break;
+      }
+      return validationMessage === '';
+    };
+
+    const saveAnotherPage = () => {
+      const newPrefab = { ...prefab };
       if (validate()) {
         const idProperty = anotherPageState.model.properties.find(
           property => property.name === 'id',
         );
-        const variableName = `${camelToSnakeCase(anotherPageState.model.label)}_id`;
-        newPrefab.variables[0].pageId = pageUuid;
-        newPrefab.variables[0].name = variableName;
+        const variableName = `${camelToSnakeCase(
+          anotherPageState.model.label,
+        )}_id`;
+        newPrefab.variables.push({
+          kind: 'integer',
+          name: variableName,
+          pageId: pageUuid,
+          ref: {
+            id: '#idVariable',
+          },
+        });
+
         newPrefab.structure[0].options[0].value = anotherPageState.modelId;
 
         newPrefab.structure[0].options[2].value = {
@@ -76,57 +127,19 @@
       }
     };
 
-    const validate = () => {
-      if(loading) {
-        setValidationMessage('Model details are still loading, please try submitting again.');
-        return;
-      }
-      switch (buttonGroupValue) {
-        case 'anotherPage':
-          if (!anotherPageState.modelId) {
-            setValidationMessage('Model id is required.');
-            return;
-          }
-          if (!anotherPageState.model) {
-            setValidationMessage('Model is required.');
-            return;
-          }
-          break;
-
-        case 'thisPage':
-          
-          if(!thisPageState.component) {
-            setValidationMessage('Component is required.');
-            return;
-          }
-          if (!thisPageState.modelId) {
-            setValidationMessage(
-              'The selected component does not have a model.',
-            );
-            return;
-          }
-          if (!thisPageState.model) {
-            setValidationMessage('Model is required.');
-            return;
-          }
-          break;
-
-        default:
-          break;
-      }
-      return validationMessage.length === 0;
-    };
-
-    const saveThisPage = newPrefab => {
+    const saveThisPage = () => {
+      const newPrefab = { ...prefab };
       if (validate()) {
         const idProperty = thisPageState.model.properties.find(
           property => property.name === 'id',
         );
-        newPrefab.variables = [];
         newPrefab.structure[0].options[0].value = thisPageState.modelId;
         newPrefab.interactions.push({
           name: 'setCurrentRecord',
-          sourceEvent: thisPageState.component.name === 'DataTable' ? 'OnRowClick' : 'OnItemClick',
+          sourceEvent:
+            thisPageState.component.name === 'DataTable'
+              ? 'OnRowClick'
+              : 'OnItemClick',
           targetOptionName: 'currentRecord',
           parameters: [
             {
@@ -229,21 +242,19 @@
               <ComponentSelector
                 onChange={component => {
                   const modelId = Object.entries(component.options).reduce(
-                    (acc, [key, option]) => {
-                      return option.type === 'MODEL' ? option.value : acc;
-                    },
+                    /* eslint-disable no-unused-vars */
+                    (acc, [_key, option]) =>
+                      option.type === 'MODEL' ? option.value : acc,
                     null,
                   );
                   setThisPageState(prevState => ({
                     ...prevState,
-                    modelId: modelId,
-                    component: component,
+                    modelId,
+                    component,
                   }));
                 }}
                 value={thisPageState.component}
-                placeholder={
-                  'No components available - Add a DataTable or DataList first.'
-                }
+                placeholder="No components available - Add a DataTable or DataList first."
                 allowedComponents={['DataTable', 'DataList']}
               />
             </Field>
@@ -253,18 +264,16 @@
           onClose={close}
           onSkip={() => {
             const newPrefab = { ...prefab };
-            newPrefab.variables = [];
             save(newPrefab);
           }}
           onSave={() => {
-            setValidationMessage([]);
-            const newPrefab = { ...prefab };
+            setValidationMessage('');
             switch (buttonGroupValue) {
               case 'anotherPage':
-                saveAnotherPage(newPrefab);
+                saveAnotherPage();
                 break;
               case 'thisPage':
-                saveThisPage(newPrefab);
+                saveThisPage();
                 break;
 
               default:
@@ -276,16 +285,7 @@
     );
   },
   interactions: [],
-  variables: [
-    {
-      kind: 'integer',
-      name: '',
-      pageId: '',
-      ref: {
-        id: '#idVariable',
-      },
-    },
-  ],
+  variables: [],
   structure: [
     {
       name: 'DataContainer',
