@@ -169,15 +169,17 @@
     };
 
     const saveLoggedInUser = () => {
-      const newPrefab = { ...prefab };
+      if (validate()) {
+        const newPrefab = { ...prefab };
 
-      newPrefab.structure[0].options[0].value =
-        loggedInUserState.authenticationProfile.loginModel;
+        newPrefab.structure[0].options[0].value =
+          loggedInUserState.authenticationProfile.loginModel;
 
-      newPrefab.structure[0].options[3].value =
-        loggedInUserState.authenticationProfile.id;
+        newPrefab.structure[0].options[3].value =
+          loggedInUserState.authenticationProfile.id;
 
-      save(newPrefab);
+        save(newPrefab);
+      }
     };
 
     return (
@@ -192,6 +194,8 @@
                   'Link from another page to this page, and pass the ID property of the model.'}
                 {buttonGroupValue === 'thisPage' &&
                   'A component on this page is passing the data to this DataContainer.'}
+                {buttonGroupValue === 'loggedInUser' &&
+                  'Data from the logged in user can be used inside this DataContainer.'}
               </Text>
             }
           >
@@ -281,21 +285,35 @@
               />
             </Field>
           )}
-
           {buttonGroupValue === 'loggedInUser' && (
-            <AuthenticationProfileSelector
-              onChange={(id, authProfileObject) => {
-                setLoggedInUserState(prevState => ({
-                  ...prevState,
-                  authenticationProfile: authProfileObject,
-                }));
-              }}
-              value={
-                loggedInUserState.authenticationProfile
-                  ? loggedInUserState.authenticationProfile.id
-                  : ''
+            <Field
+              label="Authentication Profile"
+              error={
+                validationMessage && (
+                  <Text color="#e82600">{validationMessage}</Text>
+                )
               }
-            />
+              info={
+                <Text size="small" color="grey700">
+                  Select the Authentication Profile of which you want to show
+                  the data of.
+                </Text>
+              }
+            >
+              <AuthenticationProfileSelector
+                onChange={(id, authProfileObject) => {
+                  setLoggedInUserState(prevState => ({
+                    ...prevState,
+                    authenticationProfile: authProfileObject,
+                  }));
+                }}
+                value={
+                  loggedInUserState.authenticationProfile
+                    ? loggedInUserState.authenticationProfile.id
+                    : ''
+                }
+              />
+            </Field>
           )}
         </Content>
         <Footer
