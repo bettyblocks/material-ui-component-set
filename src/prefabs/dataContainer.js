@@ -106,8 +106,8 @@
     };
 
     const saveAnotherPage = () => {
-      const newPrefab = { ...prefab };
       if (validate()) {
+        const newPrefab = { ...prefab };
         const idProperty = anotherPageState.model.properties.find(
           property => property.name === 'id',
         );
@@ -139,8 +139,8 @@
     };
 
     const saveThisPage = () => {
-      const newPrefab = { ...prefab };
       if (validate()) {
+        const newPrefab = { ...prefab };
         const idProperty = thisPageState.model.properties.find(
           property => property.name === 'id',
         );
