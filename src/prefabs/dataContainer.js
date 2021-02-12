@@ -28,6 +28,7 @@
       modelId: null,
       model: null,
       component: null,
+      componentId: '',
     });
 
     const [validationMessage, setValidationMessage] = React.useState('');
@@ -240,7 +241,7 @@
               }
             >
               <ComponentSelector
-                onChange={component => {
+                onChange={(componentId, component ) => {
                   const modelId = Object.entries(component.options).reduce(
                     /* eslint-disable no-unused-vars */
                     (acc, [_key, option]) =>
@@ -251,10 +252,11 @@
                     ...prevState,
                     modelId,
                     component,
+                    componentId,
                   }));
                 }}
-                value={thisPageState.component}
-                placeholder="No components available - Add a DataTable or DataList first."
+                value={thisPageState.componentId}
+                placeholder="No components available."
                 allowedComponents={['DataTable', 'DataList']}
               />
             </Field>
