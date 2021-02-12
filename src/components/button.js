@@ -23,6 +23,7 @@
       actionId,
       buttonText,
       actionModels,
+      redirect,
     } = options;
     const {
       env,
@@ -32,6 +33,7 @@
       useText,
       useAction,
       useProperty,
+      useEndpoint,
     } = B;
     const isDev = env === 'dev';
     const isAction = linkType === 'action';
@@ -41,9 +43,13 @@
       (linkToExternal && useText(linkToExternal)) || '';
     const isIcon = variant === 'icon';
     const buttonContent = useText(buttonText);
+    const history = isDev ? {} : useHistory();
 
     const [isVisible, setIsVisible] = useState(visible);
     const [isLoading, setIsLoading] = useState(false);
+
+    const hasRedirect = redirect && redirect.id !== '';
+    const redirectTo = env === 'prod' && hasRedirect && useEndpoint(redirect);
 
     const camelToSnakeCase = str =>
       str[0].toLowerCase() +
@@ -73,6 +79,9 @@
           input,
         },
         onCompleted(data) {
+          if (!isDev && hasRedirect) {
+            history.push(redirectTo);
+          }
           B.triggerEvent('onActionSuccess', data.actionb5);
         },
         onError(error) {

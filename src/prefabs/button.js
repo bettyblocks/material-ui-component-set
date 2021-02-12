@@ -140,6 +140,20 @@
           },
         },
         {
+          value: '',
+          label: 'Redirect after succesful submit',
+          key: 'redirect',
+          type: 'ENDPOINT',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'linkType',
+              comparator: 'EQ',
+              value: 'action',
+            },
+          },
+        },
+        {
           value: false,
           label: 'Full width',
           key: 'fullWidth',
