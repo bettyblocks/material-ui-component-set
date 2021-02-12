@@ -33,6 +33,7 @@
       modelId: null,
       model: null,
       component: null,
+      componentId: '',
     });
 
     const [validationMessage, setValidationMessage] = React.useState('');
@@ -260,13 +261,12 @@
               }
               info={
                 <Text size="small" color="grey700">
-                  Select a component that contains a collection of data, for
-                  example DataList or DataTable.
+                  Select a component that contains a collection of data.
                 </Text>
               }
             >
               <ComponentSelector
-                onChange={component => {
+                onChange={(componentId, component) => {
                   const modelId = Object.entries(component.options).reduce(
                     /* eslint-disable no-unused-vars */
                     (acc, [_key, option]) =>
@@ -277,10 +277,11 @@
                     ...prevState,
                     modelId,
                     component,
+                    componentId,
                   }));
                 }}
-                value={thisPageState.component}
-                placeholder="No components available - Add a DataTable or DataList first."
+                value={thisPageState.componentId}
+                placeholder="No components available."
                 allowedComponents={['DataTable', 'DataList']}
               />
             </Field>
