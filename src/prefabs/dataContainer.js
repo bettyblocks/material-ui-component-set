@@ -241,7 +241,7 @@
               }
             >
               <ComponentSelector
-                onChange={(componentId, component ) => {
+                onChange={(componentId, component) => {
                   const modelId = Object.entries(component.options).reduce(
                     /* eslint-disable no-unused-vars */
                     (acc, [_key, option]) =>
