@@ -1395,7 +1395,7 @@
         },
         {
           label: 'Toggle tooltip visibility',
-          key: 'visibleTooltip',
+          key: 'hasVisibleTooltip',
           value: true,
           type: 'TOGGLE',
           configuration: {
