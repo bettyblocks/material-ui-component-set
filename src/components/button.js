@@ -29,6 +29,7 @@
       buttonText,
       actionModels,
       addTooltip,
+      hasVisibleTooltip,
       tooltipContent,
       tooltipPlacement,
     } = options;
@@ -53,6 +54,7 @@
 
     const [isVisible, setIsVisible] = useState(visible);
     const [isLoading, setIsLoading] = useState(false);
+    const [isOpen, setIsOpen] = useState(hasVisibleTooltip);
 
     const camelToSnakeCase = str =>
       str[0].toLowerCase() +
@@ -91,7 +93,8 @@
 
     useEffect(() => {
       setIsVisible(visible);
-    }, [visible]);
+      setIsOpen(hasVisibleTooltip);
+    }, [visible, hasVisibleTooltip]);
 
     B.defineFunction('Show', () => setIsVisible(true));
     B.defineFunction('Hide', () => setIsVisible(false));
@@ -173,18 +176,25 @@
       </BtnComp>
     );
 
+    let tooltipProps = {
+      title: tooltipText,
+      placement: tooltipPlacement,
+      arrow: true,
+      classes: {
+        tooltip: classes.tooltip,
+        arrow: classes.arrow,
+      },
+    };
+
+    if (isDev) {
+      tooltipProps = {
+        ...tooltipProps,
+        open: isOpen,
+      };
+    }
+
     const ButtonWithTooltip = (
-      <Tooltip
-        title={tooltipText}
-        placement={tooltipPlacement}
-        arrow
-        classes={{
-          tooltip: classes.tooltip,
-          arrow: classes.arrow,
-        }}
-      >
-        {BasicButtonComponent}
-      </Tooltip>
+      <Tooltip {...tooltipProps}>{BasicButtonComponent}</Tooltip>
     );
 
     const ButtonComponent = addTooltip

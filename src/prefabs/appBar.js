@@ -1666,10 +1666,31 @@
               type: 'SIZES',
             },
             {
+              label: 'Disabled',
+              key: 'disabled',
+              value: false,
+              type: 'TOGGLE',
+            },
+            {
               label: 'Add Tooltip',
               key: 'addTooltip',
               value: false,
               type: 'TOGGLE',
+            },
+            {
+              label: 'Toggle tooltip visibility',
+              key: 'hasVisibleTooltip',
+              value: true,
+              type: 'TOGGLE',
+              configuration: {
+                as: 'VISIBILITY',
+                condition: {
+                  type: 'SHOW',
+                  option: 'addTooltip',
+                  comparator: 'EQ',
+                  value: true,
+                },
+              },
             },
             {
               type: 'VARIABLE',
@@ -1739,7 +1760,7 @@
               type: 'COLOR',
               label: 'Tooltip Background',
               key: 'tooltipBackground',
-              value: 'medium',
+              value: 'Medium',
               configuration: {
                 condition: {
                   type: 'SHOW',
@@ -1762,12 +1783,6 @@
                   value: true,
                 },
               },
-            },
-            {
-              label: 'Disabled',
-              key: 'disabled',
-              value: false,
-              type: 'TOGGLE',
             },
           ],
           descendants: [],
@@ -3237,10 +3252,31 @@
               type: 'SIZES',
             },
             {
+              label: 'Disabled',
+              key: 'disabled',
+              value: false,
+              type: 'TOGGLE',
+            },
+            {
               label: 'Add Tooltip',
               key: 'addTooltip',
               value: false,
               type: 'TOGGLE',
+            },
+            {
+              label: 'Toggle tooltip visibility',
+              key: 'hasVisibleTooltip',
+              value: true,
+              type: 'TOGGLE',
+              configuration: {
+                as: 'VISIBILITY',
+                condition: {
+                  type: 'SHOW',
+                  option: 'addTooltip',
+                  comparator: 'EQ',
+                  value: true,
+                },
+              },
             },
             {
               type: 'VARIABLE',
@@ -3310,7 +3346,7 @@
               type: 'COLOR',
               label: 'Tooltip Background',
               key: 'tooltipBackground',
-              value: 'medium',
+              value: 'Medium',
               configuration: {
                 condition: {
                   type: 'SHOW',
@@ -3333,12 +3369,6 @@
                   value: true,
                 },
               },
-            },
-            {
-              label: 'Disabled',
-              key: 'disabled',
-              value: false,
-              type: 'TOGGLE',
             },
           ],
           descendants: [],
