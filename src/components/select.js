@@ -135,6 +135,10 @@
       setCurrentValue(eventValue);
     };
 
+    useEffect(() => {
+      B.triggerEvent('onChange', currentValue);
+    }, [currentValue]);
+
     const validationHandler = () => {
       const hasError = required && !value;
       setAfterFirstInvalidation(hasError);

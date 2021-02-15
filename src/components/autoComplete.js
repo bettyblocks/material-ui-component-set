@@ -214,11 +214,14 @@
       }
     }
 
+    useEffect(() => {
+      B.triggerEvent('onChange', currentValue);
+    }, [currentValue]);
+
     const onChange = (_, newValue) => {
       if (!valueProp || !newValue) {
         setCurrentValue(newValue);
         setCurrentLabel(newValue);
-        B.triggerEvent('OnChange');
         return;
       }
 
@@ -237,7 +240,6 @@
         newCurrentValue = newValue.map(rec => rec[valueProp.name] || rec);
       }
       setCurrentValue(newCurrentValue);
-      B.triggerEvent('OnChange');
     };
 
     const getDefaultValue = React.useCallback(() => {
@@ -309,7 +311,6 @@
     if (kind === 'list' || kind === 'LIST') {
       const onPropertyListChange = (_, newValue) => {
         setCurrentValue(newValue);
-        B.triggerEvent('OnChange');
       };
 
       const selectValues =

@@ -80,6 +80,14 @@
           history.push(useEndpoint(redirectWithoutResult));
         };
 
+        const [, setOptions] = useOptions();
+
+        B.defineFunction('setCurrentRecord', id =>
+          setOptions({
+            currentRecord: id,
+          }),
+        );
+
         const One = ({ modelId }) => {
           const { loading, data, error, refetch } =
             (hasFilter &&
