@@ -55,9 +55,7 @@
             <EndpointSelector
               value={redirectTo}
               size="large"
-              onChange={value => {
-                setRedirectTo(value);
-              }}
+              onChange={setRedirectTo}
             />
           </Field>
         </Content>
