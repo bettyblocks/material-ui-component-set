@@ -176,27 +176,25 @@
       </BtnComp>
     );
 
-    let openPropsTooltip = {};
+    let tooltipProps = {
+      title: tooltipText,
+      placement: tooltipPlacement,
+      arrow: true,
+      classes: {
+        tooltip: classes.tooltip,
+        arrow: classes.arrow,
+      },
+    };
 
     if (isDev) {
-      openPropsTooltip = {
+      tooltipProps = {
+        ...tooltipProps,
         open: isOpen,
       };
     }
 
     const ButtonWithTooltip = (
-      <Tooltip
-        title={tooltipText}
-        {...openPropsTooltip}
-        placement={tooltipPlacement}
-        arrow
-        classes={{
-          tooltip: classes.tooltip,
-          arrow: classes.arrow,
-        }}
-      >
-        {BasicButtonComponent}
-      </Tooltip>
+      <Tooltip {...tooltipProps}>{BasicButtonComponent}</Tooltip>
     );
 
     const ButtonComponent = addTooltip
