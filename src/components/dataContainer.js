@@ -29,6 +29,14 @@
         } = options;
         const displayError = showError === 'built-in';
 
+        const [, setOptions] = useOptions();
+
+        B.defineFunction('setCurrentRecord', id =>
+          setOptions({
+            currentRecord: id,
+          }),
+        );
+
         const BuilderLayout = () => {
           B.defineFunction('Refetch', () => {});
 
@@ -79,14 +87,6 @@
           const history = useHistory();
           history.push(useEndpoint(redirectWithoutResult));
         };
-
-        const [, setOptions] = useOptions();
-
-        B.defineFunction('setCurrentRecord', id =>
-          setOptions({
-            currentRecord: id,
-          }),
-        );
 
         const One = ({ modelId }) => {
           const { loading, data, error, refetch } =
