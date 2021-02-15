@@ -29,7 +29,7 @@
       buttonText,
       actionModels,
       addTooltip,
-      visibleTooltip,
+      hasVisibleTooltip,
       tooltipContent,
       tooltipPlacement,
     } = options;
@@ -54,7 +54,7 @@
 
     const [isVisible, setIsVisible] = useState(visible);
     const [isLoading, setIsLoading] = useState(false);
-    const [isOpen, setIsOpen] = useState(visibleTooltip);
+    const [isOpen, setIsOpen] = useState(hasVisibleTooltip);
 
     const camelToSnakeCase = str =>
       str[0].toLowerCase() +
@@ -93,8 +93,8 @@
 
     useEffect(() => {
       setIsVisible(visible);
-      setIsOpen(visibleTooltip);
-    }, [visible, visibleTooltip]);
+      setIsOpen(hasVisibleTooltip);
+    }, [visible, hasVisibleTooltip]);
 
     B.defineFunction('Show', () => setIsVisible(true));
     B.defineFunction('Hide', () => setIsVisible(false));
