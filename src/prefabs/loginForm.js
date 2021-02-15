@@ -13,11 +13,20 @@
       Field,
       Footer,
       Text,
+      EndpointSelector,
     },
   }) => {
     const [authProfileId, setAuthProfileId] = React.useState('');
+    const [redirectTo, setRedirectTo] = React.useState({});
     const [authProfile, setAuthProfile] = React.useState(null);
     const [showValidation, setShowValidation] = React.useState(false);
+
+    function serializeParameters(obj) {
+      return Object.entries(obj).map(([name, entry]) => ({
+        name,
+        value: entry.map(v => JSON.stringify(v)),
+      }));
+    }
 
     return (
       <>
@@ -50,6 +59,14 @@
               value={authProfileId}
             />
           </Field>
+          <Field>
+            <EndpointSelector
+              value={redirectTo}
+              onChange={value => {
+                setRedirectTo(value);
+              }}
+            />
+          </Field>
         </Content>
         <Footer
           onClose={close}
@@ -62,6 +79,14 @@
             const newPrefab = { ...prefab };
             if (authProfile) {
               const { loginModel, properties, id } = authProfile;
+              newPrefab.interactions[0].parameters = [
+                {
+                  parameter: 'redirectTo',
+                  pageId: redirectTo.pageId,
+                  endpointId: redirectTo.id,
+                  parameters: serializeParameters(redirectTo.params),
+                },
+              ];
               newPrefab.actions[1].events[0].options.authenticationProfileId = id;
               newPrefab.structure[0].options[0].value.modelId = loginModel;
               newPrefab.structure[0].options[1].value = loginModel;
@@ -6804,6 +6829,15 @@
     },
   ],
   interactions: [
+    {
+      name: 'login',
+      sourceEvent: 'onActionSuccess',
+      ref: {
+        sourceComponentId: '#formId',
+      },
+      parameters: [],
+      type: 'Global',
+    },
     {
       name: 'Show',
       sourceEvent: 'onActionError',
