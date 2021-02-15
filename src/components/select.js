@@ -132,6 +132,7 @@
         handleValidation();
       }
 
+      B.triggerEvent('onChange', eventValue);
       setCurrentValue(eventValue);
     };
 
