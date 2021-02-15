@@ -51,7 +51,7 @@
                 .slice(1, str.length)
                 .replace(/[A-Z]/g, letter => `_${letter.toLowerCase()}`);
 
-            if (!modelId) {
+            if (!modelId && !data && !data.model) {
               setShowValidation(true);
               return;
             }
