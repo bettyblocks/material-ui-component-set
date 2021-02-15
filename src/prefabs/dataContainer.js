@@ -267,7 +267,7 @@
                 value={
                   thisPageState.component ? thisPageState.component.id : ''
                 }
-                placeholder="No components available - Add a DataTable or DataList first."
+                placeholder="No components available."
                 allowedComponents={['DataTable', 'DataList']}
               />
             </Field>
