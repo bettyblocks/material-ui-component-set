@@ -1,3 +1,16 @@
+# [1.101.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.100.0...v1.101.0) (2021-02-15)
+
+
+### Bug Fixes
+
+* **ART-2779:** change placeholder text ([8bc6002](https://github.com/bettyblocks/material-ui-component-set/commit/8bc60028ac3e44e9d94fd73c74fe362f469bed70))
+
+
+### Features
+
+* **ART-2777:** Use component-selector & create interaction. ([84057b1](https://github.com/bettyblocks/material-ui-component-set/commit/84057b1aff6c6cbac4b51b4066a4a41c6a763443))
+* **ART-2779:** add loggedInUser to datacontainer ([3659e0c](https://github.com/bettyblocks/material-ui-component-set/commit/3659e0cdf829d2ede3d559b45f990e2589d4926f))
+
 # [1.100.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.99.0...v1.100.0) (2021-02-15)
 
 
