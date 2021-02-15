@@ -22,8 +22,9 @@
   }) => {
     const [anotherPageState, setAnotherPageState] = React.useState({
       modelId: '',
-      model: null,
     });
+
+    const [modelId, setModelId] = React.useState(null);
 
     const [loggedInUserState, setLoggedInUserState] = React.useState({
       authenticationProfile: null,
@@ -31,9 +32,7 @@
 
     const [thisPageState, setThisPageState] = React.useState({
       modelId: null,
-      model: null,
       component: null,
-      componentId: '',
     });
 
     const [validationMessage, setValidationMessage] = React.useState('');
@@ -43,21 +42,12 @@
     );
     const pageUuid = useCurrentPageId();
     const { data, loading } = useModelQuery({
-      variables: { id: thisPageState.modelId },
+      variables: { id: modelId },
     });
 
     React.useEffect(() => {
       setValidationMessage('');
     }, [buttonGroupValue]);
-
-    React.useEffect(() => {
-      if (data) {
-        setThisPageState(prevState => ({
-          ...prevState,
-          model: data.model,
-        }));
-      }
-    }, [data]);
 
     const validate = () => {
       if (loading) {
@@ -66,14 +56,14 @@
         );
         return false;
       }
+      if (!data.model) {
+        setValidationMessage('Model is required.');
+        return false;
+      }
       switch (buttonGroupValue) {
         case 'anotherPage':
           if (!anotherPageState.modelId) {
             setValidationMessage('Model id is required.');
-            return false;
-          }
-          if (!anotherPageState.model) {
-            setValidationMessage('Model is required.');
             return false;
           }
           break;
@@ -86,10 +76,6 @@
             setValidationMessage(
               'The selected component does not have a model.',
             );
-            return false;
-          }
-          if (!thisPageState.model) {
-            setValidationMessage('Model is required.');
             return false;
           }
           break;
@@ -109,12 +95,10 @@
     const saveAnotherPage = () => {
       if (validate()) {
         const newPrefab = { ...prefab };
-        const idProperty = anotherPageState.model.properties.find(
+        const idProperty = data.model.properties.find(
           property => property.name === 'id',
         );
-        const variableName = `${camelToSnakeCase(
-          anotherPageState.model.label,
-        )}_id`;
+        const variableName = `${camelToSnakeCase(data.model.label)}_id`;
         newPrefab.variables.push({
           kind: 'integer',
           name: variableName,
@@ -142,7 +126,7 @@
     const saveThisPage = () => {
       if (validate()) {
         const newPrefab = { ...prefab };
-        const idProperty = thisPageState.model.properties.find(
+        const idProperty = data.model.properties.find(
           property => property.name === 'id',
         );
         newPrefab.structure[0].options[0].value = thisPageState.modelId;
@@ -239,12 +223,12 @@
               }
             >
               <ModelSelector
-                onChange={(id, modelObject) => {
+                onChange={id => {
                   setAnotherPageState(prevState => ({
                     ...prevState,
-                    model: modelObject,
                     modelId: id,
                   }));
+                  setModelId(id);
                 }}
                 margin
                 value={anotherPageState.modelId}
@@ -266,21 +250,22 @@
               }
             >
               <ComponentSelector
-                onChange={(componentId, component) => {
-                  const modelId = Object.entries(component.options).reduce(
-                    /* eslint-disable no-unused-vars */
-                    (acc, [_key, option]) =>
+                onChange={component => {
+                  const foundModelId = Object.values(component.options).reduce(
+                    (acc, option) =>
                       option.type === 'MODEL' ? option.value : acc,
                     null,
                   );
                   setThisPageState(prevState => ({
                     ...prevState,
-                    modelId,
+                    modelId: foundModelId,
                     component,
-                    componentId,
                   }));
+                  setModelId(foundModelId);
                 }}
-                value={thisPageState.componentId}
+                value={
+                  thisPageState.component ? thisPageState.component.id : ''
+                }
                 placeholder="No components available."
                 allowedComponents={['DataTable', 'DataList']}
               />
