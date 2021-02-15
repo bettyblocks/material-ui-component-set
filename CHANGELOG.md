@@ -1,3 +1,10 @@
+# [1.100.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.99.0...v1.100.0) (2021-02-15)
+
+
+### Features
+
+* add login interaction ([989f01b](https://github.com/bettyblocks/material-ui-component-set/commit/989f01b3eebabc76c36c0e7842713b9bdffbf4a8))
+
 # [1.99.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.98.2...v1.99.0) (2021-02-08)
 
 
