@@ -1,5 +1,3 @@
-const { useEffect } = require('react');
-
 (() => ({
   name: 'AutoComplete',
   type: 'CONTENT_COMPONENT',

@@ -29,6 +29,16 @@
         } = options;
         const displayError = showError === 'built-in';
 
+        const [, setOptions] = useOptions();
+
+        B.defineFunction('setCurrentRecord', value => {
+          if (typeof value === 'number') {
+            setOptions({
+              currentRecord: value,
+            });
+          }
+        });
+
         const BuilderLayout = () => {
           B.defineFunction('Refetch', () => {});
 

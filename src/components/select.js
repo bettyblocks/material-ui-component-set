@@ -1,5 +1,3 @@
-const { useEffect } = require('react');
-
 (() => ({
   name: 'Select',
   type: 'CONTENT_COMPONENT',
