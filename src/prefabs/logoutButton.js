@@ -20,7 +20,7 @@
 
     return (
       <>
-        <Header onClose={close} title="Logout" />
+        <Header onClose={close} title="Configure logout button" />
         <Content>
           <Field
             label="Redirect after logout"
