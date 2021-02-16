@@ -34,17 +34,21 @@
       <>
         <Header onClose={close} title="Configure form fields" />
         <Content>
-          <Field label="Select model">
+          <Field
+            label="Select model"
+            error={
+              showValidation && <Text color="#e82600">Model is required</Text>
+            }
+          >
             <ModelSelector
               onChange={id => {
                 setShowValidation(false);
                 setModelId(id);
               }}
               value={modelId}
-              margin
             />
           </Field>
-          {showValidation && <Text color="#e82600">Model is required</Text>}
+
           <Field label="Select properties">
             <PropertiesSelector
               onChange={value => {
@@ -52,6 +56,7 @@
               }}
               value={properties}
               modelId={modelId}
+              scopedModels={false}
               disabledNames={['created_at', 'updated_at', 'id']}
               disabledKinds={[
                 'BELONGS_TO',
@@ -88,7 +93,7 @@
                 .slice(1, str.length)
                 .replace(/[A-Z]/g, letter => `_${letter.toLowerCase()}`);
 
-            if (!modelId && !data && !data.model) {
+            if (!modelId || !data || !data.model) {
               setShowValidation(true);
               return;
             }
