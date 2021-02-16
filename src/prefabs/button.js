@@ -35,7 +35,7 @@
           type: 'VARIABLE',
           label: 'Button text',
           key: 'buttonText',
-          value: ['Button'],
+          value: ['Logout'],
           configuration: {
             condition: {
               type: 'HIDE',
