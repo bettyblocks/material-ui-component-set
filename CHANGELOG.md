@@ -1,3 +1,10 @@
+# [1.102.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.101.3...v1.102.0) (2021-02-16)
+
+
+### Features
+
+* tooltip added to button ([a259e25](https://github.com/bettyblocks/material-ui-component-set/commit/a259e250934661030315543aa689ab9fa15890aa))
+
 ## [1.101.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.101.2...v1.101.3) (2021-02-16)
 
 
