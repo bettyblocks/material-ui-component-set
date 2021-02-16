@@ -56,6 +56,15 @@
     };
 
     useEffect(() => {
+      if (checked) {
+        B.triggerEvent('isTrue', true);
+      } else {
+        B.triggerEvent('isFalse', false);
+      }
+      B.triggerEvent('onChange', checked);
+    }, [checked]);
+
+    useEffect(() => {
       if (isDev) {
         setChecked(useText(defaultValue) === 'true');
       }

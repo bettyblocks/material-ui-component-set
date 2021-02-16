@@ -108,6 +108,10 @@
     }, []);
 
     useEffect(() => {
+      B.triggerEvent('onChange', value);
+    }, [value]);
+
+    useEffect(() => {
       if (mounted.current && loading) {
         B.triggerEvent('onLoad', loading);
       }
