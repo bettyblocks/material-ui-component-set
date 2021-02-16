@@ -7,10 +7,15 @@
     save,
     close,
     components: { ModelSelector, Header, Content, Field, Footer, Text },
+    helpers: { useModelQuery },
   }) => {
     const [modelId, setModelId] = React.useState('');
-    const [model, setModel] = React.useState(null);
     const [showValidation, setShowValidation] = React.useState(false);
+
+    const { data } = useModelQuery({
+      variables: { id: modelId },
+      skip: !modelId,
+    });
 
     React.useEffect(() => {
       setShowValidation(false);
@@ -28,8 +33,7 @@
             info="Small note: If you can't select any models try to place the button inside a component where an object is available."
           >
             <ModelSelector
-              onChange={(id, modelObject) => {
-                setModel(modelObject);
+              onChange={id => {
                 setModelId(id);
               }}
               value={modelId}
@@ -47,12 +51,14 @@
                 .slice(1, str.length)
                 .replace(/[A-Z]/g, letter => `_${letter.toLowerCase()}`);
 
-            if (!modelId) {
+            if (!modelId || !data || !data.model) {
               setShowValidation(true);
               return;
             }
             const newPrefab = { ...prefab };
-            newPrefab.variables[0].name = camelToSnakeCase(model.name);
+            if (data && data.model) {
+              newPrefab.variables[0].name = camelToSnakeCase(data.model.name);
+            }
             newPrefab.structure[0].descendants[1].descendants[0].descendants[0].descendants[0].descendants[2].descendants[1].options[7].value = [
               modelId,
             ];
