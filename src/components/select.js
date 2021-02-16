@@ -1,3 +1,5 @@
+const { useEffect } = require('react');
+
 (() => ({
   name: 'Select',
   type: 'CONTENT_COMPONENT',
@@ -93,6 +95,10 @@
         mounted.current = false;
       };
     }, []);
+
+    useEffect(() => {
+      B.triggerEvent('onChange', currentValue);
+    });
 
     useEffect(() => {
       if (mounted.current && loading) {
