@@ -1,49 +1,22 @@
 (() => ({
-  name: 'Button',
-  icon: 'ButtonIcon',
-  category: 'BUTTON',
+  name: 'Menu Item',
+  icon: 'MenuItemIcon',
+  category: 'NAVIGATION',
   structure: [
     {
-      name: 'Button',
+      name: 'MenuItem',
       options: [
         {
-          label: 'Toggle visibility',
-          key: 'visible',
-          value: true,
-          type: 'TOGGLE',
-          configuration: {
-            as: 'VISIBILITY',
-          },
-        },
-        {
-          type: 'CUSTOM',
-          label: 'variant',
-          key: 'variant',
-          value: 'contained',
-          configuration: {
-            as: 'BUTTONGROUP',
-            dataType: 'string',
-            allowedInput: [
-              { name: 'Text', value: 'text' },
-              { name: 'Outlined', value: 'outlined' },
-              { name: 'Contain', value: 'contained' },
-              { name: 'Icon', value: 'icon' },
-            ],
-          },
-        },
-        {
           type: 'VARIABLE',
-          label: 'Button text',
-          key: 'buttonText',
-          value: ['Button'],
-          configuration: {
-            condition: {
-              type: 'HIDE',
-              option: 'variant',
-              comparator: 'EQ',
-              value: 'icon',
-            },
-          },
+          label: 'Primary text',
+          key: 'primaryText',
+          value: ['Menu Item'],
+        },
+        {
+          type: 'COLOR',
+          label: 'Background color',
+          key: 'backgroundColor',
+          value: 'Transparent',
         },
         {
           type: 'CUSTOM',
@@ -75,7 +48,7 @@
           },
         },
         {
-          value: [''],
+          value: [],
           label: 'URL',
           key: 'linkToExternal',
           type: 'VARIABLE',
@@ -137,35 +110,6 @@
               comparator: 'EQ',
               value: 'action',
             },
-          },
-        },
-        {
-          value: false,
-          label: 'Full width',
-          key: 'fullWidth',
-          type: 'TOGGLE',
-          configuration: {
-            condition: {
-              type: 'HIDE',
-              option: 'variant',
-              comparator: 'EQ',
-              value: 'icon',
-            },
-          },
-        },
-        {
-          value: 'medium',
-          label: 'Size',
-          key: 'size',
-          type: 'CUSTOM',
-          configuration: {
-            as: 'BUTTONGROUP',
-            dataType: 'string',
-            allowedInput: [
-              { name: 'Large', value: 'large' },
-              { name: 'Medium', value: 'medium' },
-              { name: 'Small', value: 'small' },
-            ],
           },
         },
         {
@@ -1446,9 +1390,9 @@
             dataType: 'string',
             condition: {
               type: 'HIDE',
-              option: 'variant',
+              option: 'icon',
               comparator: 'EQ',
-              value: 'icon',
+              value: 'None',
             },
             allowedInput: [
               { name: 'Start', value: 'start' },
@@ -1460,146 +1404,25 @@
           type: 'COLOR',
           label: 'Text color',
           key: 'textColor',
-          value: 'White',
-          configuration: {
-            condition: {
-              type: 'HIDE',
-              option: 'variant',
-              comparator: 'EQ',
-              value: 'icon',
-            },
-          },
-        },
-        {
-          type: 'COLOR',
-          label: 'Color',
-          key: 'background',
           value: 'Primary',
         },
         {
-          value: ['0rem', 'M', '0rem', '0rem'],
-          label: 'Outer space',
-          key: 'outerSpacing',
-          type: 'SIZES',
-        },
-        {
+          type: 'TOGGLE',
           label: 'Disabled',
           key: 'disabled',
           value: false,
-          type: 'TOGGLE',
         },
         {
-          label: 'Add Tooltip',
-          key: 'addTooltip',
+          type: 'TOGGLE',
+          label: 'Dense',
+          key: 'dense',
           value: false,
+        },
+        {
           type: 'TOGGLE',
-        },
-        {
-          label: 'Toggle tooltip visibility',
-          key: 'hasVisibleTooltip',
-          value: true,
-          type: 'TOGGLE',
-          configuration: {
-            as: 'VISIBILITY',
-            condition: {
-              type: 'SHOW',
-              option: 'addTooltip',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
-        },
-        {
-          type: 'VARIABLE',
-          label: 'Tooltip Content',
-          key: 'tooltipContent',
-          value: ['Tips'],
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'addTooltip',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
-        },
-        {
-          label: 'Tooltip Placement',
-          key: 'tooltipPlacement',
-          value: 'bottom',
-          type: 'CUSTOM',
-          configuration: {
-            as: 'DROPDOWN',
-            dataType: 'string',
-            allowedInput: [
-              {
-                name: 'Top Start',
-                value: 'top-start',
-              },
-              {
-                name: 'Top',
-                value: 'top',
-              },
-              {
-                name: 'Top End',
-                value: 'top-end',
-              },
-              {
-                name: 'Right',
-                value: 'right',
-              },
-              {
-                name: 'Left',
-                value: 'left',
-              },
-              {
-                name: 'Botttom Start',
-                value: 'bottom-start',
-              },
-              {
-                name: 'Bottom',
-                value: 'bottom',
-              },
-              {
-                name: 'Bottom End',
-                value: 'bottom-end',
-              },
-            ],
-            condition: {
-              type: 'SHOW',
-              option: 'addTooltip',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
-        },
-        {
-          type: 'COLOR',
-          label: 'Tooltip Background',
-          key: 'tooltipBackground',
-          value: 'Medium',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'addTooltip',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
-        },
-        {
-          type: 'COLOR',
-          label: 'Tooltip Text',
-          key: 'tooltipText',
-          value: 'Black',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'addTooltip',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
+          label: 'Divider',
+          key: 'divider',
+          value: false,
         },
       ],
       descendants: [],

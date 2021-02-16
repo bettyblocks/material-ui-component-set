@@ -48,7 +48,9 @@
 
         B.defineFunction('Submit', () => {
           if (formRef.current)
-            formRef.current.dispatchEvent(new Event('submit'));
+            formRef.current.dispatchEvent(
+              new Event('submit', { cancelable: true }),
+            );
         });
 
         useEffect(() => {

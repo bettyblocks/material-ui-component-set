@@ -1,3 +1,113 @@
+## [1.101.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.101.2...v1.101.3) (2021-02-16)
+
+
+### Bug Fixes
+
+* model validations are showing correctly ([15c9ef8](https://github.com/bettyblocks/material-ui-component-set/commit/15c9ef804412e19615543f78c230cd9580ea19ef))
+
+## [1.101.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.101.1...v1.101.2) (2021-02-16)
+
+
+### Bug Fixes
+
+* **ART-2777:** fix validation errors in datacontainer beforeCreate ([ab81e10](https://github.com/bettyblocks/material-ui-component-set/commit/ab81e108e6de28232c07fac0afbc282e9f9b08ad))
+
+## [1.101.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.101.0...v1.101.1) (2021-02-16)
+
+
+### Bug Fixes
+
+* replace model param with query ([0a31861](https://github.com/bettyblocks/material-ui-component-set/commit/0a31861bc1ffe7a708684e61998db71571378af6))
+
+# [1.101.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.100.0...v1.101.0) (2021-02-15)
+
+
+### Bug Fixes
+
+* **ART-2779:** change placeholder text ([8bc6002](https://github.com/bettyblocks/material-ui-component-set/commit/8bc60028ac3e44e9d94fd73c74fe362f469bed70))
+
+
+### Features
+
+* **ART-2777:** Use component-selector & create interaction. ([84057b1](https://github.com/bettyblocks/material-ui-component-set/commit/84057b1aff6c6cbac4b51b4066a4a41c6a763443))
+* **ART-2779:** add loggedInUser to datacontainer ([3659e0c](https://github.com/bettyblocks/material-ui-component-set/commit/3659e0cdf829d2ede3d559b45f990e2589d4926f))
+
+# [1.100.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.99.0...v1.100.0) (2021-02-15)
+
+
+### Features
+
+* add login interaction ([989f01b](https://github.com/bettyblocks/material-ui-component-set/commit/989f01b3eebabc76c36c0e7842713b9bdffbf4a8))
+
+# [1.99.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.98.2...v1.99.0) (2021-02-08)
+
+
+### Features
+
+* **ta-1502:** menu component created ([59bc5d4](https://github.com/bettyblocks/material-ui-component-set/commit/59bc5d41943941e2ccf4df463f157a7fba591ccb))
+
+## [1.98.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.98.1...v1.98.2) (2021-02-08)
+
+
+### Bug Fixes
+
+* rewrite conditional hook in datatable ([fe36773](https://github.com/bettyblocks/material-ui-component-set/commit/fe367737d6ae6b1b6ad09289f4e46707a6bffe0b))
+
+## [1.98.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.98.0...v1.98.1) (2021-02-08)
+
+
+### Bug Fixes
+
+* **ta-2193:** fixes dataList structure ([0562870](https://github.com/bettyblocks/material-ui-component-set/commit/0562870e04d91b7884b91fd7db3f82c778c6006c))
+
+# [1.98.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.97.1...v1.98.0) (2021-02-08)
+
+
+### Bug Fixes
+
+* **ART-2778:** change naming of state variable ([bb413ae](https://github.com/bettyblocks/material-ui-component-set/commit/bb413ae9e2586e411612951d7f9214996e86551c))
+* **ART-2778:** Update texts and small design feedback ([5252027](https://github.com/bettyblocks/material-ui-component-set/commit/52520270828c07265e7125e47426035953cb9c88))
+
+
+### Features
+
+* **ART-2778:** add beforeCreate to dataContainer ([24fdcbc](https://github.com/bettyblocks/material-ui-component-set/commit/24fdcbcc2e5c440f35d9d6407422837978b3f39c))
+
+## [1.97.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.97.0...v1.97.1) (2021-02-04)
+
+
+### Bug Fixes
+
+* prevent firefox from infinite loop on auto form submit ([0afbc24](https://github.com/bettyblocks/material-ui-component-set/commit/0afbc2482fbca426abab0ccfee7862512bddf28c))
+
+# [1.97.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.96.0...v1.97.0) (2021-02-04)
+
+
+### Features
+
+* **ta-2230:** added link option to title and text components ([f0d25c8](https://github.com/bettyblocks/material-ui-component-set/commit/f0d25c8c3ae1dd5849439fd19f2ff02469e71b8e))
+
+# [1.96.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.95.0...v1.96.0) (2021-02-04)
+
+
+### Features
+
+* **ta-2249:** component set BUTTON section added ([d900053](https://github.com/bettyblocks/material-ui-component-set/commit/d900053de9812632644f812a8fe3dd83fa68b436))
+
+# [1.95.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.94.0...v1.95.0) (2021-02-03)
+
+
+### Bug Fixes
+
+* missing visibilty toggle to table prefab ([6b82944](https://github.com/bettyblocks/material-ui-component-set/commit/6b82944539e2d0e6fb9aaa841f89724228eeda14))
+
+
+### Features
+
+* **techsub-3022:** conditional table columns ([dc6280f](https://github.com/bettyblocks/material-ui-component-set/commit/dc6280f471b31a3dc0ff74e7342aeca9791a8a53))
+* **techsub-3022:** conditional table columns [] ([57098d0](https://github.com/bettyblocks/material-ui-component-set/commit/57098d0639fdc1ff19b0c39c80ccb19c965dd226))
+* **techsub-3022:** conditional table columns [] ([48de43c](https://github.com/bettyblocks/material-ui-component-set/commit/48de43c69a48e5cdbdc1f5474c0bc6071a6d13e0))
+
 # [1.94.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.93.0...v1.94.0) (2021-02-03)
 
 
