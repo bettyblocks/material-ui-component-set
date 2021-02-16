@@ -1,3 +1,10 @@
+## [1.101.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.101.0...v1.101.1) (2021-02-16)
+
+
+### Bug Fixes
+
+* replace model param with query ([0a31861](https://github.com/bettyblocks/material-ui-component-set/commit/0a31861bc1ffe7a708684e61998db71571378af6))
+
 # [1.101.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.100.0...v1.101.0) (2021-02-15)
 
 
