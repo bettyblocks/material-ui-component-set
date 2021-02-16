@@ -35,7 +35,7 @@
               )
             }
           >
-            <EndpointSelector size="large" value={value} onChange={setValue} />
+            <EndpointSelector value={value} onChange={setValue} />
           </Field>
         </Content>
         <Footer
@@ -108,7 +108,7 @@
           type: 'VARIABLE',
           label: 'Button text',
           key: 'buttonText',
-          value: ['Button'],
+          value: ['Logout'],
           configuration: {
             condition: {
               type: 'HIDE',
