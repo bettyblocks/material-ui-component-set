@@ -20,12 +20,7 @@
 
     return (
       <>
-        <Header
-          onClose={close}
-          title="Logout"
-          subtitle="Generate your logout button based on the logout interaction and
-            redirect after logout"
-        />
+        <Header onClose={close} title="Logout" />
         <Content>
           <Field
             label="Redirect after logout"
