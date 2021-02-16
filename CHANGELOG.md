@@ -1,3 +1,10 @@
+## [1.101.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.101.2...v1.101.3) (2021-02-16)
+
+
+### Bug Fixes
+
+* model validations are showing correctly ([15c9ef8](https://github.com/bettyblocks/material-ui-component-set/commit/15c9ef804412e19615543f78c230cd9580ea19ef))
+
 ## [1.101.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.101.1...v1.101.2) (2021-02-16)
 
 
