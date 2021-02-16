@@ -56,12 +56,13 @@
         );
         return false;
       }
-      if (!data.model) {
-        setValidationMessage('Model is required.');
-        return false;
-      }
+
       switch (buttonGroupValue) {
         case 'anotherPage':
+          if (!data || !data.model) {
+            setValidationMessage('Model is required.');
+            return false;
+          }
           if (!anotherPageState.modelId) {
             setValidationMessage('Model id is required.');
             return false;
@@ -70,6 +71,10 @@
         case 'thisPage':
           if (!thisPageState.component) {
             setValidationMessage('Component is required.');
+            return false;
+          }
+          if (!data || !data.model) {
+            setValidationMessage('Model is required.');
             return false;
           }
           if (!thisPageState.modelId) {
@@ -89,7 +94,7 @@
         default:
           break;
       }
-      return validationMessage === '';
+      return true;
     };
 
     const saveAnotherPage = () => {
