@@ -1,3 +1,10 @@
+## [1.103.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.103.0...v1.103.1) (2021-02-17)
+
+
+### Bug Fixes
+
+* **ta-2232:** fixes the appBar menu on mobile ([d609c31](https://github.com/bettyblocks/material-ui-component-set/commit/d609c310c186e84afaf12870d1eaa55a3eabf31e))
+
 # [1.103.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.102.0...v1.103.0) (2021-02-17)
 
 
