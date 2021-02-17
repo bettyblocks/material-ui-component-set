@@ -13,5 +13,7 @@ function logout({
   const { url } = redirectTo;
   localStorage.removeItem('TOKEN');
   localStorage.removeItem('REFRESH_TOKEN');
-  window.location.href = url;
+  if (url) {
+    window.location.href = url;
+  }
 }
