@@ -16,10 +16,25 @@
       Footer,
       Text,
     },
+    helpers: { useAuthenticationProfileQuery, useModelQuery },
   }) => {
     const [authProfileId, setAuthProfileId] = React.useState('');
-    const [authProfile, setAuthProfile] = React.useState(null);
     const [showValidation, setShowValidation] = React.useState(false);
+
+    const { data: authProfileData } = useAuthenticationProfileQuery({
+      variables: { id: authProfileId },
+      skip: !authProfileId,
+    });
+
+    const { data: modelData } = useModelQuery({
+      variables: {
+        ...(authProfileData &&
+          authProfileData.authenticationProfile && {
+            id: authProfileData.authenticationProfile.loginModel,
+          }),
+      },
+      skip: !authProfileId,
+    });
 
     return (
       <>
@@ -44,10 +59,9 @@
             }
           >
             <AuthenticationProfileSelector
-              onChange={(id, authProfileObject) => {
+              onChange={id => {
                 setShowValidation(false);
                 setAuthProfileId(id);
-                setAuthProfile(authProfileObject);
               }}
               value={authProfileId}
             />
@@ -56,21 +70,33 @@
         <Footer
           onClose={close}
           onSave={() => {
-            if (!authProfileId) {
+            if (
+              !authProfileData ||
+              !authProfileData.authenticationProfile ||
+              !modelData ||
+              !modelData.model
+            ) {
               setShowValidation(true);
               return;
             }
 
             const newPrefab = { ...prefab };
-            if (authProfile) {
-              const { loginModel, properties, id } = authProfile;
+            if (authProfileData.authenticationProfile) {
+              const { loginModel, id } = authProfileData.authenticationProfile;
               const formPrefab =
                 newPrefab.structure[0].descendants[0].descendants[0];
               newPrefab.actions[1].events[0].options.authenticationProfileId = id;
               formPrefab.options[0].value.modelId = loginModel;
               formPrefab.options[1].value = loginModel;
               newPrefab.variables[0].options.modelId = loginModel;
-              newPrefab.actions[0].events[0].options.assign = properties.map(
+              const userNamePassword = [
+                authProfileData.authenticationProfile.options.passwordProperty,
+                authProfileData.authenticationProfile.options.usernameProperty,
+              ];
+              const loginProperties = modelData.model.properties.filter(
+                property => userNamePassword.includes(property.id),
+              );
+              newPrefab.actions[0].events[0].options.assign = loginProperties.map(
                 property => {
                   const isPassword = property.kind === 'PASSWORD';
                   return {
@@ -87,7 +113,7 @@
                 },
               );
 
-              const descendantsArray = properties.map(property => {
+              const descendantsArray = loginProperties.map(property => {
                 switch (property.kind) {
                   case 'EMAIL_ADDRESS': {
                     return {

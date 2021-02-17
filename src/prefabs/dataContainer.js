@@ -18,16 +18,22 @@
       ModelSelector,
       Text,
     },
-    helpers: { useCurrentPageId, camelToSnakeCase, useModelQuery },
+    helpers: {
+      useCurrentPageId,
+      camelToSnakeCase,
+      useModelQuery,
+      useAuthenticationProfileQuery,
+    },
   }) => {
     const [anotherPageState, setAnotherPageState] = React.useState({
       modelId: '',
     });
-
     const [modelId, setModelId] = React.useState(null);
+    const [authProfileId, setAuthProfileId] = React.useState('');
 
-    const [loggedInUserState, setLoggedInUserState] = React.useState({
-      authenticationProfile: null,
+    const { data: authProfileData } = useAuthenticationProfileQuery({
+      variables: { id: authProfileId },
+      skip: !authProfileId,
     });
 
     const [thisPageState, setThisPageState] = React.useState({
@@ -85,7 +91,7 @@
           }
           break;
         case 'loggedInUser':
-          if (!loggedInUserState.authenticationProfile) {
+          if (!authProfileData || !authProfileData.authenticationProfile) {
             setValidationMessage('Authentication Profile is required.');
             return false;
           }
@@ -163,10 +169,10 @@
         const newPrefab = { ...prefab };
 
         newPrefab.structure[0].options[0].value =
-          loggedInUserState.authenticationProfile.loginModel;
+          authProfileData.authenticationProfile.loginModel;
 
         newPrefab.structure[0].options[3].value =
-          loggedInUserState.authenticationProfile.id;
+          authProfileData.authenticationProfile.id;
 
         save(newPrefab);
       }
@@ -293,17 +299,10 @@
               }
             >
               <AuthenticationProfileSelector
-                onChange={(id, authProfileObject) => {
-                  setLoggedInUserState(prevState => ({
-                    ...prevState,
-                    authenticationProfile: authProfileObject,
-                  }));
+                onChange={id => {
+                  setAuthProfileId(id);
                 }}
-                value={
-                  loggedInUserState.authenticationProfile
-                    ? loggedInUserState.authenticationProfile.id
-                    : ''
-                }
+                value={authProfileId}
               />
             </Field>
           )}
