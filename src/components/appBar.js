@@ -10,6 +10,7 @@
       IconButton,
       Typography,
       Menu,
+      MenuItem,
     } = window.MaterialUI.Core;
     const { Menu: MenuIcon } = window.MaterialUI.Icons;
     const {
@@ -25,7 +26,7 @@
     const { Link, env, useText } = B;
     const isDev = env === 'dev';
     const [anchorEl, setAnchorEl] = useState(null);
-    const open = !!anchorEl;
+    const isOpen = !!anchorEl;
     const titleText = useText(title);
 
     const handleMenu = event => {
@@ -73,12 +74,19 @@
                 </IconButton>
                 <Menu
                   anchorEl={anchorEl}
-                  open={open}
+                  open={isOpen}
                   keepMounted
                   onClose={handleClose}
-                  classes={{ paper: classes.root, list: classes.list }}
+                  classes={{ paper: classes.paper }}
                 >
-                  {children}
+                  {React.Children.map(children, child => (
+                    <MenuItem
+                      className={classes.menuItem}
+                      onTouchEnd={handleClose}
+                    >
+                      {child}
+                    </MenuItem>
+                  ))}
                 </Menu>
               </div>
               <div className={classes.uncollapsed}>{children}</div>
@@ -108,6 +116,15 @@
         ],
         zIndex: '1201 !important',
       },
+      paper: {
+        backgroundColor: ({ options: { backgroundColor } }) => [
+          style.getColor(backgroundColor),
+          '!important',
+        ],
+        [`@media ${mediaMinWidth(600)}`]: {
+          display: 'none',
+        },
+      },
       logo: {
         width: ({ options: { logoWidth } }) => logoWidth,
       },
@@ -129,9 +146,9 @@
       spacer: {
         flexGrow: 1,
       },
-      list: {
-        '& > *': {
-          display: 'block',
+      menuItem: {
+        '& .MuiButtonBase-root > .MuiTouchRipple-root': {
+          display: 'none !important',
         },
       },
       collapsed: {

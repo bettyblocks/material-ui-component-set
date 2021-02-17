@@ -300,7 +300,7 @@
                         {
                           label: 'Size',
                           key: 'size',
-                          value: 'medium',
+                          value: 'Medium',
                           type: 'CUSTOM',
                           configuration: {
                             as: 'BUTTONGROUP',

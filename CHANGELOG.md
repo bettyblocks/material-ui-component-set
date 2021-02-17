@@ -1,3 +1,37 @@
+## [1.101.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.101.2...v1.101.3) (2021-02-16)
+
+
+### Bug Fixes
+
+* model validations are showing correctly ([15c9ef8](https://github.com/bettyblocks/material-ui-component-set/commit/15c9ef804412e19615543f78c230cd9580ea19ef))
+
+## [1.101.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.101.1...v1.101.2) (2021-02-16)
+
+
+### Bug Fixes
+
+* **ART-2777:** fix validation errors in datacontainer beforeCreate ([ab81e10](https://github.com/bettyblocks/material-ui-component-set/commit/ab81e108e6de28232c07fac0afbc282e9f9b08ad))
+
+## [1.101.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.101.0...v1.101.1) (2021-02-16)
+
+
+### Bug Fixes
+
+* replace model param with query ([0a31861](https://github.com/bettyblocks/material-ui-component-set/commit/0a31861bc1ffe7a708684e61998db71571378af6))
+
+# [1.101.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.100.0...v1.101.0) (2021-02-15)
+
+
+### Bug Fixes
+
+* **ART-2779:** change placeholder text ([8bc6002](https://github.com/bettyblocks/material-ui-component-set/commit/8bc60028ac3e44e9d94fd73c74fe362f469bed70))
+
+
+### Features
+
+* **ART-2777:** Use component-selector & create interaction. ([84057b1](https://github.com/bettyblocks/material-ui-component-set/commit/84057b1aff6c6cbac4b51b4066a4a41c6a763443))
+* **ART-2779:** add loggedInUser to datacontainer ([3659e0c](https://github.com/bettyblocks/material-ui-component-set/commit/3659e0cdf829d2ede3d559b45f990e2589d4926f))
+
 # [1.100.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.99.0...v1.100.0) (2021-02-15)
 
 
