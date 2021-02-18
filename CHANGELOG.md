@@ -1,3 +1,56 @@
+# [1.106.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.105.0...v1.106.0) (2021-02-18)
+
+
+### Features
+
+* **ta-2270:** add deleteRecord to button category ([54ef1ef](https://github.com/bettyblocks/material-ui-component-set/commit/54ef1efb953af9251ca70e568643ab0a5d9ac0df))
+
+# [1.105.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.104.0...v1.105.0) (2021-02-18)
+
+
+### Features
+
+* **ta-2295:** add ListWithData to data category ([80e5b7a](https://github.com/bettyblocks/material-ui-component-set/commit/80e5b7a5197f8f6ae5a4916186c26938e10663bd))
+
+# [1.104.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.103.1...v1.104.0) (2021-02-17)
+
+
+### Features
+
+* re-add login form ([9438ecf](https://github.com/bettyblocks/material-ui-component-set/commit/9438ecfc4c75d0eaa2a9f8eac311387e3f6a33d1))
+
+## [1.103.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.103.0...v1.103.1) (2021-02-17)
+
+
+### Bug Fixes
+
+* **ta-2232:** fixes the appBar menu on mobile ([d609c31](https://github.com/bettyblocks/material-ui-component-set/commit/d609c310c186e84afaf12870d1eaa55a3eabf31e))
+
+# [1.103.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.102.0...v1.103.0) (2021-02-17)
+
+
+### Bug Fixes
+
+* button label ([e9e3d31](https://github.com/bettyblocks/material-ui-component-set/commit/e9e3d310c0ebb254b914e8381dfe2026ba63fbe7))
+* don't redirect if url isn't provided ([579023c](https://github.com/bettyblocks/material-ui-component-set/commit/579023cd11b3e73373b60f3540673540a143ad62))
+* endpoint selector size on logout prefab ([0d8d27c](https://github.com/bettyblocks/material-ui-component-set/commit/0d8d27cc7bee3eded6f49ce4df7fd1740e39c659))
+* logout modal title ([e552bc8](https://github.com/bettyblocks/material-ui-component-set/commit/e552bc878472507ed93df2358d7cf65a9563642c))
+
+
+### Features
+
+* add login button ([7a5bcba](https://github.com/bettyblocks/material-ui-component-set/commit/7a5bcbab9f3e012d48d0265bda4cb521452b8e4f))
+* remove helper text ([4b6d4b1](https://github.com/bettyblocks/material-ui-component-set/commit/4b6d4b1e5eadf3c28cc769ce2a8fa53f14c99f21))
+* serialize component params ([76ad07e](https://github.com/bettyblocks/material-ui-component-set/commit/76ad07edb8d1b2b60b8c6d14278967ea59c54ca4))
+* update dependencies ([dfea141](https://github.com/bettyblocks/material-ui-component-set/commit/dfea1417ef260df75b7d8e7c401f6cc5f745c94f))
+
+# [1.102.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.101.3...v1.102.0) (2021-02-16)
+
+
+### Features
+
+* tooltip added to button ([a259e25](https://github.com/bettyblocks/material-ui-component-set/commit/a259e250934661030315543aa689ab9fa15890aa))
+
 ## [1.101.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.101.2...v1.101.3) (2021-02-16)
 
 

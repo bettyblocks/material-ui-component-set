@@ -1,7 +1,7 @@
 (() => ({
   name: 'ListWithData',
   icon: 'ListWithDataIcon',
-  category: 'LIST',
+  category: 'DATA',
   beforeCreate: ({
     components: {
       Content,
