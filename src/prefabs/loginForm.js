@@ -69,12 +69,7 @@
               value={redirectTo}
               size="large"
               onChange={value => {
-                if (isEmptyRedirect(value)) {
-                  setShowEndpointValidation(true);
-                } else {
-                  setShowEndpointValidation(false);
-                }
-
+                setShowEndpointValidation(isEmptyRedirect(value));
                 setRedirectTo(value);
               }}
             />
