@@ -1,3 +1,17 @@
+# [1.106.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.105.0...v1.106.0) (2021-02-18)
+
+
+### Features
+
+* **ta-2270:** add deleteRecord to button category ([54ef1ef](https://github.com/bettyblocks/material-ui-component-set/commit/54ef1efb953af9251ca70e568643ab0a5d9ac0df))
+
+# [1.105.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.104.0...v1.105.0) (2021-02-18)
+
+
+### Features
+
+* **ta-2295:** add ListWithData to data category ([80e5b7a](https://github.com/bettyblocks/material-ui-component-set/commit/80e5b7a5197f8f6ae5a4916186c26938e10663bd))
+
 # [1.104.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.103.1...v1.104.0) (2021-02-17)
 
 
