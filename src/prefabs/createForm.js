@@ -15,32 +15,40 @@
       PropertiesSelector,
       Text,
     },
+    helpers: { useModelQuery },
   }) => {
     const [modelId, setModelId] = React.useState('');
-    const [model, setModel] = React.useState(null);
     const [properties, setProperties] = React.useState([]);
     const [showValidation, setShowValidation] = React.useState(false);
 
+    const { data } = useModelQuery({
+      variables: { id: modelId },
+      skip: !modelId,
+    });
+
     React.useEffect(() => {
       setProperties([]);
-    }, [model]);
+    }, [data]);
 
     return (
       <>
         <Header onClose={close} title="Configure form fields" />
         <Content>
-          <Field label="Select model">
+          <Field
+            label="Select model"
+            error={
+              showValidation && <Text color="#e82600">Model is required</Text>
+            }
+          >
             <ModelSelector
-              onChange={(id, modelObject) => {
+              onChange={id => {
                 setShowValidation(false);
-                setModel(modelObject);
                 setModelId(id);
               }}
               value={modelId}
-              margin
             />
           </Field>
-          {showValidation && <Text color="#e82600">Model is required</Text>}
+
           <Field label="Select properties">
             <PropertiesSelector
               onChange={value => {
@@ -48,6 +56,7 @@
               }}
               value={properties}
               modelId={modelId}
+              scopedModels={false}
               disabledNames={['created_at', 'updated_at', 'id']}
               disabledKinds={[
                 'BELONGS_TO',
@@ -84,13 +93,13 @@
                 .slice(1, str.length)
                 .replace(/[A-Z]/g, letter => `_${letter.toLowerCase()}`);
 
-            if (!modelId) {
+            if (!modelId || !data || !data.model) {
               setShowValidation(true);
               return;
             }
             const newPrefab = { ...prefab };
-            if (model) {
-              newPrefab.variables[1].name = camelToSnakeCase(model.label);
+            if (data && data.model) {
+              newPrefab.variables[1].name = camelToSnakeCase(data.model.label);
             }
             newPrefab.structure[0].options[0].value.modelId = modelId;
             newPrefab.structure[0].options[1].value = modelId;
@@ -14717,6 +14726,122 @@
                   key: 'disabled',
                   value: false,
                   type: 'TOGGLE',
+                },
+                {
+                  label: 'Add Tooltip',
+                  key: 'addTooltip',
+                  value: false,
+                  type: 'TOGGLE',
+                  configuration: {
+                    as: 'VISIBILITY',
+                  },
+                },
+                {
+                  label: 'Toggle tooltip visibility',
+                  key: 'hasVisibleTooltip',
+                  value: true,
+                  type: 'TOGGLE',
+                  configuration: {
+                    as: 'VISIBILITY',
+                    condition: {
+                      type: 'SHOW',
+                      option: 'addTooltip',
+                      comparator: 'EQ',
+                      value: true,
+                    },
+                  },
+                },
+                {
+                  type: 'VARIABLE',
+                  label: 'Tooltip Content',
+                  key: 'tooltipContent',
+                  value: ['Tips'],
+                  configuration: {
+                    condition: {
+                      type: 'SHOW',
+                      option: 'addTooltip',
+                      comparator: 'EQ',
+                      value: true,
+                    },
+                  },
+                },
+                {
+                  label: 'Tooltip Placement',
+                  key: 'tooltipPlacement',
+                  value: 'bottom',
+                  type: 'CUSTOM',
+                  configuration: {
+                    as: 'DROPDOWN',
+                    dataType: 'string',
+                    allowedInput: [
+                      {
+                        name: 'Top Start',
+                        value: 'top-start',
+                      },
+                      {
+                        name: 'Top',
+                        value: 'top',
+                      },
+                      {
+                        name: 'Top End',
+                        value: 'top-end',
+                      },
+                      {
+                        name: 'Right',
+                        value: 'right',
+                      },
+                      {
+                        name: 'Left',
+                        value: 'left',
+                      },
+                      {
+                        name: 'Botttom Start',
+                        value: 'bottom-start',
+                      },
+                      {
+                        name: 'Bottom',
+                        value: 'bottom',
+                      },
+                      {
+                        name: 'Bottom End',
+                        value: 'bottom-end',
+                      },
+                    ],
+                    condition: {
+                      type: 'SHOW',
+                      option: 'addTooltip',
+                      comparator: 'EQ',
+                      value: true,
+                    },
+                  },
+                },
+                {
+                  type: 'COLOR',
+                  label: 'Tooltip Background',
+                  key: 'tooltipBackground',
+                  value: 'Medium',
+                  configuration: {
+                    condition: {
+                      type: 'SHOW',
+                      option: 'addTooltip',
+                      comparator: 'EQ',
+                      value: true,
+                    },
+                  },
+                },
+                {
+                  type: 'COLOR',
+                  label: 'Tooltip Text',
+                  key: 'tooltipText',
+                  value: 'Black',
+                  configuration: {
+                    condition: {
+                      type: 'SHOW',
+                      option: 'addTooltip',
+                      comparator: 'EQ',
+                      value: true,
+                    },
+                  },
                 },
               ],
               descendants: [],
