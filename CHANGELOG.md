@@ -1,3 +1,18 @@
+# [1.107.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.106.0...v1.107.0) (2021-02-18)
+
+
+### Bug Fixes
+
+* update login page template ([d54828f](https://github.com/bettyblocks/material-ui-component-set/commit/d54828f0d0d002c9a9b604d06d10743f115d93fb))
+* validate empty endpoints in login form ([76ff62d](https://github.com/bettyblocks/material-ui-component-set/commit/76ff62d86860c91a80a216e6a41472458456b72f))
+
+
+### Features
+
+* add login interaction to login form ([9003350](https://github.com/bettyblocks/material-ui-component-set/commit/9003350e516ff07903c70eacad56390f5e7027ef))
+* remove success alert from login prefab ([2b6e7a4](https://github.com/bettyblocks/material-ui-component-set/commit/2b6e7a4bccc84cf8bbf3ffbf324dd9524e8b0ed3))
+* update the cli version ([e8b3a6c](https://github.com/bettyblocks/material-ui-component-set/commit/e8b3a6c715c7acc8485b393a0ce4663d88383f4b))
+
 # [1.106.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.105.0...v1.106.0) (2021-02-18)
 
 
