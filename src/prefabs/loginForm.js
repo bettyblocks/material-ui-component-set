@@ -19,7 +19,10 @@
     const [authProfileId, setAuthProfileId] = React.useState('');
     const [redirectTo, setRedirectTo] = React.useState({});
     const [authProfile, setAuthProfile] = React.useState(null);
-    const [showValidation, setShowValidation] = React.useState(false);
+    const [showAuthValidation, setShowAuthValidation] = React.useState(false);
+    const [showEndpointValidation, setShowEndpointValidation] = React.useState(
+      false,
+    );
 
     function serializeParameters(obj) {
       return Object.entries(obj).map(([name, entry]) => ({
@@ -28,6 +31,9 @@
       }));
     }
 
+    const isEmptyRedirect = value =>
+      !value || Object.keys(value).length === 0 || value.id === '';
+
     return (
       <>
         <Header onClose={close} title="Configure login form" />
@@ -35,7 +41,7 @@
           <Field
             label="Select an authentication profile"
             error={
-              showValidation && (
+              showAuthValidation && (
                 <Text color="#e82600">
                   Selecting an authentication profile is required
                 </Text>
@@ -44,18 +50,28 @@
           >
             <AuthenticationProfileSelector
               onChange={(id, authProfileObject) => {
-                setShowValidation(false);
+                setShowAuthValidation(false);
                 setAuthProfileId(id);
                 setAuthProfile(authProfileObject);
               }}
               value={authProfileId}
             />
           </Field>
-          <Field label="Redirect after successful login">
+          <Field
+            label="Redirect after successful login"
+            error={
+              showEndpointValidation && (
+                <Text color="#e82600">Selecting an endpoint is required</Text>
+              )
+            }
+          >
             <EndpointSelector
               value={redirectTo}
               size="large"
-              onChange={setRedirectTo}
+              onChange={value => {
+                setShowEndpointValidation(isEmptyRedirect(value));
+                setRedirectTo(value);
+              }}
             />
           </Field>
         </Content>
@@ -63,7 +79,12 @@
           onClose={close}
           onSave={() => {
             if (!authProfileId) {
-              setShowValidation(true);
+              setShowAuthValidation(true);
+              return;
+            }
+
+            if (isEmptyRedirect(redirectTo)) {
+              setShowEndpointValidation(true);
               return;
             }
 
