@@ -1,131 +1,126 @@
 (() => ({
-  name: 'Button',
+  name: 'Menu',
   type: 'CONTENT_COMPONENT',
-  allowedTypes: [],
+  allowedTypes: ['MENU_ITEM'],
   orientation: 'VERTICAL',
   jsx: (() => {
     const {
       Button,
       IconButton,
-      CircularProgress,
-      Tooltip,
+      Popper,
+      Paper,
+      ClickAwayListener,
+      MenuList,
     } = window.MaterialUI.Core;
     const { Icons } = window.MaterialUI;
 
     const {
-      variant,
+      buttonText,
       disabled,
       fullWidth,
-      size,
       icon,
       iconPosition,
-      linkType,
-      linkTo,
-      linkToExternal,
-      openLinkToExternal,
+      isMenuListVisible,
+      placement,
+      outerSpacing,
+      size,
       type,
-      visible,
-      actionId,
-      buttonText,
-      actionModels,
-      addTooltip,
-      hasVisibleTooltip,
-      tooltipContent,
-      tooltipPlacement,
+      variant,
     } = options;
-    const {
-      env,
-      getModel,
-      getIdProperty,
-      Link: BLink,
-      useText,
-      useAction,
-      useProperty,
-    } = B;
+
+    const { env, useText } = B;
     const isDev = env === 'dev';
-    const isAction = linkType === 'action';
-    const hasLink = linkTo && linkTo.id !== '';
-    const hasExternalLink = linkToExternal && linkToExternal.id !== '';
-    const linkToExternalVariable =
-      (linkToExternal && useText(linkToExternal)) || '';
     const isIcon = variant === 'icon';
     const buttonContent = useText(buttonText);
-    const tooltipText = useText(tooltipContent);
+    const [isOpen, setIsOpen] = useState(false);
+    const buttonRef = useRef(null);
+    const paperRef = useRef(null);
+    const [menuPosition, setMenuPosition] = useState({ top: 0, left: 0 });
 
-    const [isVisible, setIsVisible] = useState(visible);
-    const [isLoading, setIsLoading] = useState(false);
-    const [isOpen, setIsOpen] = useState(hasVisibleTooltip);
-
-    const camelToSnakeCase = str =>
-      str[0].toLowerCase() +
-      str
-        .slice(1, str.length)
-        .replace(/[A-Z]/g, letter => `_${letter.toLowerCase()}`);
-
-    const input =
-      !isDev && actionModels
-        ? actionModels.reduce((acc, value) => {
-            const propertyUuid = getIdProperty(value);
-            const model = getModel(value);
-            const recordId = propertyUuid && useProperty(propertyUuid);
-
-            if (recordId !== undefined) {
-              acc[camelToSnakeCase(model.name)] = {
-                variable_id: recordId,
-              };
-            }
-            return acc;
-          }, {})
-        : {};
-
-    const [actionCallback, { loading }] = (isAction &&
-      useAction(actionId, {
-        variables: {
-          input,
-        },
-        onCompleted(data) {
-          B.triggerEvent('onActionSuccess', data.actionb5);
-        },
-        onError(error) {
-          B.triggerEvent('onActionError', error);
-        },
-      })) || [() => {}, { loading: false }];
-
-    useEffect(() => {
-      setIsVisible(visible);
-      setIsOpen(hasVisibleTooltip);
-    }, [visible, hasVisibleTooltip]);
-
-    B.defineFunction('Show', () => setIsVisible(true));
-    B.defineFunction('Hide', () => setIsVisible(false));
-    B.defineFunction('Show/Hide', () => setIsVisible(s => !s));
-    B.defineFunction('Toggle loading state', () => setIsLoading(s => !s));
-
-    useEffect(() => {
-      if (loading) {
-        B.triggerEvent('onActionLoad', loading);
+    const getDevPlacement = (anchorRef, menuRef, position) => {
+      let top = 0;
+      let left = 0;
+      if (!anchorRef.current || !menuRef.current) {
+        return { top, left };
       }
-    }, [loading]);
+
+      const sideA = position.split('-')[0];
+      const sideB = position.split('-')[1];
+
+      const anchorBoundingRect = anchorRef.current.getBoundingClientRect();
+      const menuBoundingRect = menuRef.current.getBoundingClientRect();
+      const anchorStyles = getComputedStyle(anchorRef.current);
+      const anchorMargins = {
+        top: parseFloat(anchorStyles.marginTop),
+        bottom: parseFloat(anchorStyles.marginBottom),
+        left: parseFloat(anchorStyles.marginLeft),
+        right: parseFloat(anchorStyles.marginRight),
+      };
+
+      if (sideA === 'top' || sideA === 'bottom') {
+        if (sideA === 'top') {
+          top =
+            -menuBoundingRect.height -
+            anchorBoundingRect.height -
+            anchorMargins.top;
+        } else {
+          top = -anchorMargins.bottom;
+        }
+        left =
+          anchorBoundingRect.width / 2 -
+          menuBoundingRect.width / 2 +
+          (anchorMargins.left + anchorMargins.right) / 2;
+        if (sideB === 'end') {
+          left =
+            -menuBoundingRect.width +
+            anchorBoundingRect.width +
+            anchorMargins.left;
+        } else if (sideB === 'start') {
+          const { left: leftMargin } = anchorMargins;
+          left = leftMargin;
+        }
+      }
+      if (sideA === 'left' || sideA === 'right') {
+        if (sideA === 'left') {
+          left = -menuBoundingRect.width + anchorMargins.left;
+        } else {
+          left = anchorBoundingRect.width + anchorMargins.left;
+        }
+        top =
+          -(anchorBoundingRect.height + menuBoundingRect.height) / 2 -
+          anchorMargins.top;
+        if (sideB === 'end') {
+          top = -menuBoundingRect.height;
+        } else if (sideB === 'start') {
+          top = -anchorBoundingRect.height - anchorMargins.top;
+        }
+      }
+
+      return { top, left };
+    };
+
+    useEffect(() => {
+      if (isDev && buttonRef.current) {
+        setIsOpen(true);
+      }
+    }, []);
+
+    useEffect(() => {
+      if (isDev) {
+        const { top, left } = getDevPlacement(buttonRef, paperRef, placement);
+        setMenuPosition({ top, left });
+      }
+    }, [children, icon, isMenuListVisible, placement, outerSpacing, variant]);
 
     const generalProps = {
-      disabled: disabled || isLoading || loading,
+      disabled,
       size,
       tabindex: isDev && -1,
-      target:
-        linkType === 'external' && hasExternalLink
-          ? openLinkToExternal
-          : undefined,
-      href:
-        linkType === 'external' && hasExternalLink
-          ? linkToExternalVariable
-          : undefined,
-      component: linkType === 'internal' && hasLink ? BLink : undefined,
-      endpoint: linkType === 'internal' && hasLink ? linkTo : undefined,
     };
 
     const iconButtonProps = {
       ...generalProps,
-      classes: { root: classes.root },
+      classes: { root: classes.button },
     };
 
     const buttonProps = {
@@ -133,20 +128,35 @@
       fullWidth,
       variant,
       classes: {
-        root: classes.root,
-        contained: classes.contained,
-        outlined: classes.outlined,
+        root: classes.button,
+        contained: classes.buttonContained,
+        outlined: classes.buttonOutlined,
       },
       className: !!buttonContent && classes.empty,
       type: isDev ? 'button' : type,
     };
     const compProps = isIcon ? iconButtonProps : buttonProps;
-    const BtnComp = isIcon ? IconButton : Button;
+    const ButtonComp = isIcon ? IconButton : Button;
 
-    const showIndicator = !isIcon && (isLoading || loading);
+    const handleToggle = () => {
+      if (isDev) return;
+      setIsOpen(prevOpen => !prevOpen);
+    };
 
-    const BasicButtonComponent = (
-      <BtnComp
+    const handleClose = event => {
+      if (
+        isDev ||
+        (buttonRef.current && buttonRef.current.contains(event.target))
+      ) {
+        return;
+      }
+
+      setIsOpen(false);
+    };
+
+    const ButtonComponent = (
+      <ButtonComp
+        ref={buttonRef}
         {...compProps}
         startIcon={
           !isIcon &&
@@ -160,57 +170,66 @@
           iconPosition === 'end' &&
           React.createElement(Icons[icon])
         }
-        onClick={event => {
-          event.stopPropagation();
-          actionCallback();
-        }}
+        onClick={handleToggle}
       >
         {isIcon &&
           React.createElement(Icons[icon === 'None' ? 'Error' : icon], {
             fontSize: size,
           })}
         {!isIcon && buttonContent}
-        {showIndicator && (
-          <CircularProgress size={16} className={classes.loader} />
+      </ButtonComp>
+    );
+
+    const MenuComp = (
+      <>
+        {ButtonComponent}
+        {!isDev ? (
+          <Popper
+            open={isOpen}
+            anchorEl={buttonRef.current}
+            role={undefined}
+            disablePortal={false}
+            placement={placement}
+          >
+            <Paper className={classes.paper}>
+              <ClickAwayListener onClickAway={handleClose}>
+                <MenuList autoFocusItem={isOpen}>
+                  {React.Children.map(children, child =>
+                    React.cloneElement(child, { onClick: handleClose }),
+                  )}
+                </MenuList>
+              </ClickAwayListener>
+            </Paper>
+          </Popper>
+        ) : (
+          isMenuListVisible && (
+            <Paper
+              ref={paperRef}
+              className={classes.paper}
+              style={{
+                transform: `translate(${menuPosition.left}px, ${menuPosition.top}px)`,
+                willChange: 'transform',
+              }}
+            >
+              {children}
+            </Paper>
+          )
         )}
-      </BtnComp>
+      </>
     );
 
-    let tooltipProps = {
-      title: tooltipText,
-      placement: tooltipPlacement,
-      arrow: true,
-      classes: {
-        tooltip: classes.tooltip,
-        arrow: classes.arrow,
-      },
-    };
-
-    if (isDev) {
-      tooltipProps = {
-        ...tooltipProps,
-        open: isOpen,
-      };
-    }
-
-    const ButtonWithTooltip = (
-      <Tooltip {...tooltipProps}>{BasicButtonComponent}</Tooltip>
+    return !isDev ? (
+      MenuComp
+    ) : (
+      <div className={classes.wrapper}>{MenuComp}</div>
     );
-
-    const ButtonComponent = addTooltip
-      ? ButtonWithTooltip
-      : BasicButtonComponent;
-
-    if (isDev) {
-      return <div className={classes.wrapper}>{ButtonComponent}</div>;
-    }
-    return isVisible ? ButtonComponent : <></>;
   })(),
   styles: B => t => {
-    const { mediaMinWidth, Styling } = B;
+    const { env, mediaMinWidth, Styling } = B;
     const style = new Styling(t);
     const getSpacing = (idx, device = 'Mobile') =>
       idx === '0' ? '0rem' : style.getSpacing(idx, device);
+    const isDev = env === 'dev';
     return {
       wrapper: {
         display: ({ options: { fullWidth } }) =>
@@ -221,7 +240,7 @@
           pointerEvents: 'none',
         },
       },
-      root: {
+      button: {
         color: ({ options: { background, disabled, textColor, variant } }) => [
           !disabled
             ? style.getColor(variant === 'icon' ? background : textColor)
@@ -293,45 +312,35 @@
           },
         },
       },
-      contained: {
+      buttonContained: {
         backgroundColor: ({ options: { background, disabled } }) => [
           !disabled ? style.getColor(background) : 'rgba(0, 0, 0, 0.12)',
           '!important',
         ],
       },
-      outlined: {
+      buttonOutlined: {
         borderColor: ({ options: { background, disabled } }) => [
           !disabled ? style.getColor(background) : 'rgba(0, 0, 0, .12)',
           '!important',
         ],
       },
-      loader: {
-        color: ({ options: { variant, textColor, background } }) => [
-          style.getColor(variant === 'icon' ? background : textColor),
+      paper: {
+        minWidth: '5rem',
+        minHeight: '2rem',
+        backgroundColor: ({ options: { menuColor } }) => [
+          style.getColor(menuColor),
           '!important',
         ],
-        marginLeft: '0.25rem',
+        ...(isDev && {
+          position: 'absolute',
+          pointerEvents: ['unset', '!important'],
+          zIndex: 9,
+        }),
       },
       empty: {
         '&::before': {
           content: '"\xA0"',
         },
-      },
-      tooltip: {
-        backgroundColor: ({ options: { tooltipBackground } }) => [
-          style.getColor(tooltipBackground),
-          '!important',
-        ],
-        color: ({ options: { tooltipText } }) => [
-          style.getColor(tooltipText),
-          '!important',
-        ],
-      },
-      arrow: {
-        color: ({ options: { tooltipBackground } }) => [
-          style.getColor(tooltipBackground),
-          '!important',
-        ],
       },
     };
   },
