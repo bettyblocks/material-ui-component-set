@@ -1,3 +1,11 @@
+## [1.107.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.107.0...v1.107.1) (2021-02-19)
+
+
+### Bug Fixes
+
+* **ta-2224:** fixes the clear issue when using clear interaction ([941ebbf](https://github.com/bettyblocks/material-ui-component-set/commit/941ebbf0701c8728ff07cb7771758919068063fc))
+* **ta-2244:** last hovered option gets selected when using freesolo ([bccd696](https://github.com/bettyblocks/material-ui-component-set/commit/bccd6963dc85c1d0b566dcd081212fc61ca202a1))
+
 # [1.107.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.106.0...v1.107.0) (2021-02-18)
 
 
