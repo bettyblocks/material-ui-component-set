@@ -105,12 +105,17 @@
           getSpacing(titleSpacing[2]),
         marginLeft: ({ options: { titleSpacing } }) =>
           getSpacing(titleSpacing[3]),
-        color: ({ options: { titleTextColor } }) => style.getColor(titleTextColor),
-        fontFamily: ({ options: { titleType } }) => style.getFontFamily(titleType),
-        fontSize: ({ options: { titleType } }) => style.getFontSize(titleType),
+        color: ({ options: { titleTextColor } }) =>
+          style.getColor(titleTextColor),
+        fontFamily: ({ options: { titleType } }) =>
+          style.getFontFamily(titleType),
+        fontSize: ({ options: { titleType } }) =>
+          style.getFontSize(titleType),
         fontWeight: ({ options: { titleFontWeight } }) => titleFontWeight,
-        textTransform: ({ options: { titleType } }) => style.getTextTransform(titleType),
-        letterSpacing: ({ options: { titleType } }) => style.getLetterSpacing(titleType),
+        textTransform: ({ options: { titleType } }) =>
+          style.getTextTransform(titleType),
+        letterSpacing: ({ options: { titleType } }) =>
+          style.getLetterSpacing(titleType),
       },
 
       panelDetails: {
