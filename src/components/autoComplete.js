@@ -68,6 +68,7 @@
     const { kind, values: listValues } = getProperty(property) || {};
     const [currentValue, setCurrentValue] = useState(useText(defaultValue));
     const [currentLabel, setCurrentLabel] = useState('');
+    const mounted = useRef(false);
     const labelText = useText(label);
 
     const textFieldProps = {
@@ -151,7 +152,7 @@
           }, {})
         : {};
 
-    const { loading, error: err, data, refetch } =
+    const { loading, error: err, data: { results } = {}, refetch } =
       model &&
       useAllQuery(model, {
         ...useFilter,
@@ -163,37 +164,17 @@
       });
 
     useEffect(() => {
-      if (!isDev && data) {
-        resetFilter();
-      }
-    }, [data]);
-
-    useEffect(() => {
-      if (isDev) {
-        setCurrentValue(useText(defaultValue));
-      }
-    }, [isDev, defaultValue]);
-
-    B.defineFunction('Clear', () => setCurrentValue(null));
-    B.defineFunction('Refetch', () => refetch());
-
-    useEffect(() => {
-      const handler = setTimeout(() => {
-        setDebouncedSearchParam(searchParam);
-      }, 1000);
-      return () => {
-        clearTimeout(handler);
-      };
-    }, [searchParam]);
-
-    const mounted = useRef(false);
-
-    useEffect(() => {
       mounted.current = true;
       return () => {
         mounted.current = false;
       };
     }, []);
+
+    useEffect(() => {
+      if (!isDev && results) {
+        resetFilter();
+      }
+    }, [results]);
 
     useEffect(() => {
       if (mounted.current && loading) {
@@ -205,7 +186,6 @@
       B.triggerEvent('onError', err);
     }
 
-    const { results } = data || {};
     if (results) {
       if (results.length > 0) {
         B.triggerEvent('onSuccess', results);
@@ -213,6 +193,27 @@
         B.triggerEvent('onNoResults');
       }
     }
+
+    useEffect(() => {
+      if (isDev) {
+        setCurrentValue(useText(defaultValue));
+      }
+    }, [isDev, defaultValue]);
+
+    B.defineFunction('Clear', () => {
+      setCurrentValue(multiple ? [] : null);
+      setSearchParam('');
+    });
+    B.defineFunction('Refetch', () => refetch());
+
+    useEffect(() => {
+      const handler = setTimeout(() => {
+        setDebouncedSearchParam(searchParam);
+      }, 1000);
+      return () => {
+        clearTimeout(handler);
+      };
+    }, [searchParam]);
 
     const onChange = (_, newValue) => {
       if (!valueProp || !newValue) {
@@ -240,7 +241,7 @@
       B.triggerEvent('OnChange');
     };
 
-    const getDefaultValue = React.useCallback(() => {
+    const getRecords = React.useCallback(() => {
       if (!currentValue || !results) {
         return multiple ? [] : null;
       }
@@ -263,16 +264,17 @@
       }, []);
 
       const singleRecord = currentRecords[0] ? { ...currentRecords[0] } : null;
-      return multiple ? currentRecords : singleRecord;
-    }, [results]);
 
-    const defaultRecord = getDefaultValue();
+      return multiple ? currentRecords : singleRecord;
+    }, [currentValue, results]);
+
+    const record = getRecords();
 
     useEffect(() => {
-      if (!multiple && defaultRecord && searchProp) {
-        setCurrentLabel(defaultRecord[searchProp.name]);
+      if (!multiple && record && searchProp) {
+        setCurrentLabel(record[searchProp.name]);
       }
-    }, [defaultRecord]);
+    }, [record]);
 
     const renderLabel = option => {
       const optionLabel = option[searchProp.name];
@@ -362,7 +364,7 @@
     }
 
     if (err && displayError) return <span>{err.message}</span>;
-    if (!data || hasNoProp) {
+    if (!results || hasNoProp) {
       return (
         <TextField
           {...textFieldProps}
@@ -379,9 +381,9 @@
       <Autocomplete
         multiple={multiple}
         freeSolo={freeSolo}
-        autoSelect={freeSolo}
         options={results}
-        defaultValue={defaultRecord}
+        value={record}
+        inputValue={searchParam}
         getOptionLabel={renderLabel}
         getOptionSelected={(option, value) => value.id === option.id}
         PopoverProps={{
@@ -389,8 +391,8 @@
             root: classes.popover,
           },
         }}
-        onInputChange={(_, inputValue) => {
-          setSearchParam(inputValue);
+        onInputChange={(event, inputValue) => {
+          if (event) setSearchParam(inputValue);
         }}
         onChange={onChange}
         disableCloseOnSelect={!closeOnSelect}

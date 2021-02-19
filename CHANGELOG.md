@@ -1,3 +1,47 @@
+## [1.107.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.107.0...v1.107.1) (2021-02-19)
+
+
+### Bug Fixes
+
+* **ta-2224:** fixes the clear issue when using clear interaction ([941ebbf](https://github.com/bettyblocks/material-ui-component-set/commit/941ebbf0701c8728ff07cb7771758919068063fc))
+* **ta-2244:** last hovered option gets selected when using freesolo ([bccd696](https://github.com/bettyblocks/material-ui-component-set/commit/bccd6963dc85c1d0b566dcd081212fc61ca202a1))
+
+# [1.107.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.106.0...v1.107.0) (2021-02-18)
+
+
+### Bug Fixes
+
+* update login page template ([d54828f](https://github.com/bettyblocks/material-ui-component-set/commit/d54828f0d0d002c9a9b604d06d10743f115d93fb))
+* validate empty endpoints in login form ([76ff62d](https://github.com/bettyblocks/material-ui-component-set/commit/76ff62d86860c91a80a216e6a41472458456b72f))
+
+
+### Features
+
+* add login interaction to login form ([9003350](https://github.com/bettyblocks/material-ui-component-set/commit/9003350e516ff07903c70eacad56390f5e7027ef))
+* remove success alert from login prefab ([2b6e7a4](https://github.com/bettyblocks/material-ui-component-set/commit/2b6e7a4bccc84cf8bbf3ffbf324dd9524e8b0ed3))
+* update the cli version ([e8b3a6c](https://github.com/bettyblocks/material-ui-component-set/commit/e8b3a6c715c7acc8485b393a0ce4663d88383f4b))
+
+# [1.106.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.105.0...v1.106.0) (2021-02-18)
+
+
+### Features
+
+* **ta-2270:** add deleteRecord to button category ([54ef1ef](https://github.com/bettyblocks/material-ui-component-set/commit/54ef1efb953af9251ca70e568643ab0a5d9ac0df))
+
+# [1.105.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.104.0...v1.105.0) (2021-02-18)
+
+
+### Features
+
+* **ta-2295:** add ListWithData to data category ([80e5b7a](https://github.com/bettyblocks/material-ui-component-set/commit/80e5b7a5197f8f6ae5a4916186c26938e10663bd))
+
+# [1.104.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.103.1...v1.104.0) (2021-02-17)
+
+
+### Features
+
+* re-add login form ([9438ecf](https://github.com/bettyblocks/material-ui-component-set/commit/9438ecfc4c75d0eaa2a9f8eac311387e3f6a33d1))
+
 ## [1.103.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.103.0...v1.103.1) (2021-02-17)
 
 
