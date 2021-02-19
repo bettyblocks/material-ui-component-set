@@ -109,8 +109,7 @@
           style.getColor(titleTextColor),
         fontFamily: ({ options: { titleType } }) =>
           style.getFontFamily(titleType),
-        fontSize: ({ options: { titleType } }) =>
-          style.getFontSize(titleType),
+        fontSize: ({ options: { titleType } }) => style.getFontSize(titleType),
         fontWeight: ({ options: { titleFontWeight } }) => titleFontWeight,
         textTransform: ({ options: { titleType } }) =>
           style.getTextTransform(titleType),
