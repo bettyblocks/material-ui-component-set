@@ -27,6 +27,7 @@
           key: 'imageSource',
           type: 'VARIABLE',
           configuration: {
+            as: 'MULTILINE',
             condition: {
               type: 'SHOW',
               option: 'type',
@@ -90,6 +91,7 @@
           key: 'videoSource',
           type: 'VARIABLE',
           configuration: {
+            as: 'MULTILINE',
             condition: {
               type: 'SHOW',
               option: 'type',
@@ -104,6 +106,7 @@
           key: 'iframeSource',
           type: 'VARIABLE',
           configuration: {
+            as: 'MULTILINE',
             condition: {
               type: 'SHOW',
               option: 'type',
