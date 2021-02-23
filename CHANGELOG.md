@@ -1,3 +1,17 @@
+# [1.109.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.108.0...v1.109.0) (2021-02-23)
+
+
+### Features
+
+* **ta-2290:** visually bigger source option on media component ([5b16508](https://github.com/bettyblocks/material-ui-component-set/commit/5b16508c70535280a70cce8b7dd70f0f4e8d7190))
+
+# [1.108.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.107.1...v1.108.0) (2021-02-22)
+
+
+### Features
+
+* **ta-2245:** new openPage button component added ([11eeec6](https://github.com/bettyblocks/material-ui-component-set/commit/11eeec663870d717613020b7371e7045f01f313d))
+
 ## [1.107.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.107.0...v1.107.1) (2021-02-19)
 
 
