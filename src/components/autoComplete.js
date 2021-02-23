@@ -161,6 +161,18 @@
         variables: {
           ...(orderBy ? { sort: { relation: sort } } : {}),
         },
+        onCompleted(res) {
+          if (res.results.length > 0) {
+            B.triggerEvent('onSuccess', res.results);
+          } else {
+            B.triggerEvent('onNoResults');
+          }
+        },
+        onError(resp) {
+          if (!displayError) {
+            B.triggerEvent('onError', resp);
+          }
+        },
       });
 
     useEffect(() => {
@@ -181,18 +193,6 @@
         B.triggerEvent('onLoad', loading);
       }
     }, [loading]);
-
-    if (err && !displayError) {
-      B.triggerEvent('onError', err);
-    }
-
-    if (results) {
-      if (results.length > 0) {
-        B.triggerEvent('onSuccess', results);
-      } else {
-        B.triggerEvent('onNoResults');
-      }
-    }
 
     useEffect(() => {
       if (isDev) {

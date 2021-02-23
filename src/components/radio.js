@@ -98,6 +98,18 @@
         variables: {
           ...(orderBy ? { sort: { relation: sort } } : {}),
         },
+        onCompleted(res) {
+          if (res.results.length > 0) {
+            B.triggerEvent('onSuccess', res.results);
+          } else {
+            B.triggerEvent('onNoResults');
+          }
+        },
+        onError(resp) {
+          if (!displayError) {
+            B.triggerEvent('onError', resp);
+          }
+        },
       });
 
     useEffect(() => {
@@ -113,18 +125,7 @@
       }
     }, [loading]);
 
-    if (err && !displayError) {
-      B.triggerEvent('onError', err);
-    }
-
     const { results } = data || {};
-    if (results) {
-      if (results.length > 0) {
-        B.triggerEvent('onSuccess', results);
-      } else {
-        B.triggerEvent('onNoResults');
-      }
-    }
 
     B.defineFunction('Refetch', () => refetch());
 
