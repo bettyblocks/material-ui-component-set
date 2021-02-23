@@ -1,3 +1,10 @@
+# [1.108.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.107.1...v1.108.0) (2021-02-22)
+
+
+### Features
+
+* **ta-2245:** new openPage button component added ([11eeec6](https://github.com/bettyblocks/material-ui-component-set/commit/11eeec663870d717613020b7371e7045f01f313d))
+
 ## [1.107.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.107.0...v1.107.1) (2021-02-19)
 
 
