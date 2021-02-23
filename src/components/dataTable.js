@@ -165,7 +165,6 @@
         skip: loadOnScroll ? skip : page * rowsPerPage,
         take: loadOnScroll ? autoLoadTakeAmountNum : rowsPerPage,
         onCompleted(res) {
-          // if (isDev) return;
           if (res.results.length > 0) {
             B.triggerEvent('onSuccess', res.results);
           } else {
