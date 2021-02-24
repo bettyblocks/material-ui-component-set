@@ -5982,7 +5982,7 @@
                   type: 'VARIABLE',
                   label: 'Button text',
                   key: 'buttonText',
-                  value: ['Send'],
+                  value: ['Login'],
                 },
                 {
                   type: 'CUSTOM',
