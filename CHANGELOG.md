@@ -1,3 +1,10 @@
+# [1.110.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.109.0...v1.110.0) (2021-02-24)
+
+
+### Features
+
+* changes login button text ([9299cf5](https://github.com/bettyblocks/material-ui-component-set/commit/9299cf593615096f2e58e5d9330c392508164b15))
+
 # [1.109.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.108.0...v1.109.0) (2021-02-23)
 
 
