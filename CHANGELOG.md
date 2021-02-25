@@ -1,3 +1,10 @@
+## [1.111.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.111.0...v1.111.1) (2021-02-25)
+
+
+### Bug Fixes
+
+* use onCompleted to trigger onNoResult and onSuccess events ([f3027de](https://github.com/bettyblocks/material-ui-component-set/commit/f3027dedbf2e19229da649f6847cfe8b1d530bbd))
+
 # [1.111.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.110.0...v1.111.0) (2021-02-25)
 
 
