@@ -1,3 +1,31 @@
+## [1.111.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.111.1...v1.111.2) (2021-02-25)
+
+
+### Bug Fixes
+
+* **ta-2316:** fixes listItem without icon alignment ([d18ea4f](https://github.com/bettyblocks/material-ui-component-set/commit/d18ea4f7c372ccc9debafa8483f4754c543f7bc3))
+
+## [1.111.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.111.0...v1.111.1) (2021-02-25)
+
+
+### Bug Fixes
+
+* use onCompleted to trigger onNoResult and onSuccess events ([f3027de](https://github.com/bettyblocks/material-ui-component-set/commit/f3027dedbf2e19229da649f6847cfe8b1d530bbd))
+
+# [1.111.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.110.0...v1.111.0) (2021-02-25)
+
+
+### Features
+
+* adds redirect interaction ([e323738](https://github.com/bettyblocks/material-ui-component-set/commit/e32373899f204113af5f0657ee7e8ec53f7591c7))
+
+# [1.110.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.109.0...v1.110.0) (2021-02-24)
+
+
+### Features
+
+* changes login button text ([9299cf5](https://github.com/bettyblocks/material-ui-component-set/commit/9299cf593615096f2e58e5d9330c392508164b15))
+
 # [1.109.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.108.0...v1.109.0) (2021-02-23)
 
 
