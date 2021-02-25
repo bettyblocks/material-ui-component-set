@@ -5,7 +5,7 @@
   orientation: 'VERTICAL',
   jsx: (() => {
     const { Typography, Box } = window.MaterialUI.Core;
-    const { env, useText } = B;
+    const { env } = B;
     const isDev = env === 'dev';
     const { label, icon, disabled, disableRipple, iconAlignment } = options;
     const {
