@@ -45,12 +45,8 @@
       </Typography>
     );
 
-    const labelChanged = () => {
-      const currentLabel = tabData[`label${index}`]
-        ? useText(tabData[`label${index}`])
-        : '';
-      return currentLabel !== useText(label);
-    };
+    const labelChanged = () =>
+      JSON.stringify(tabData[`label${index}`] || '') !== JSON.stringify(label);
 
     const iconChanged = () => tabData[`icon${index}`] !== icon;
 
