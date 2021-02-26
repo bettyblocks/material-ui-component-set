@@ -1,6 +1,8 @@
 (() => ({
   name: 'Page With Master Detail View',
   icon: 'DataTable',
+  type: 'page',
+  description: 'Master Detail View with Edit and Delete options',
   category: 'LAYOUT',
   beforeCreate: ({
     components: {
