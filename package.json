@@ -1,6 +1,6 @@
 {
   "name": "component-set",
-  "version": "1.109.0",
+  "version": "1.111.4",
   "main": "dist/templates.json",
   "license": "UNLICENSED",
   "private": false,
@@ -25,7 +25,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn prettier:check",
+      "pre-commit": "yarn lint && yarn prettier:check",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
