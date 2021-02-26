@@ -1,3 +1,10 @@
+## [1.111.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.111.2...v1.111.3) (2021-02-26)
+
+
+### Bug Fixes
+
+* **ta-2310:** fixes the tabs crash when using model properties ([e47d42e](https://github.com/bettyblocks/material-ui-component-set/commit/e47d42e28c31aa0799a3871e157a204d75c972cd))
+
 ## [1.111.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.111.1...v1.111.2) (2021-02-25)
 
 
