@@ -4,7 +4,14 @@
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { content, linkType, linkTo, linkToExternal, useInnerHtml } = options;
+    const {
+      content,
+      linkType,
+      linkTo,
+      linkToExternal,
+      useInnerHtml,
+      testing,
+    } = options;
     const { Link } = window.MaterialUI.Core;
     const { env, useText, Link: BLink } = B;
     const isEmpty = content.length === 0;
@@ -45,13 +52,20 @@
       );
     }
 
+    function testingTag() {
+      if (testing && testing.length > 0) {
+        return `text|${useText(testing)}`;
+      }
+      return 'text';
+    }
+
     return useInnerHtml && !isDev ? (
       <Tag
         className={classes.content}
         dangerouslySetInnerHTML={{ __html: linkedContent }}
       />
     ) : (
-      <Tag className={classes.content}>
+      <Tag className={classes.content} data-component={testingTag()}>
         {!isEmpty && linkedContent}
         {isPristine && (
           <span className={classes.placeholder}>Empty content</span>

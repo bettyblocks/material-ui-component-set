@@ -7,7 +7,7 @@
     const { env, useText } = B;
     const isDev = env === 'dev';
     const { CardHeader, Avatar } = window.MaterialUI.Core;
-    const { avatar, avatarType, title, subheader } = options;
+    const { avatar, avatarType, title, subheader, testing } = options;
 
     const avatarSource = useText(avatar);
     const avatarTitle = useText(title);
@@ -19,6 +19,13 @@
     const isEmpty = !avatar && !title.length && !subheader.length;
     const isPristine = isEmpty && isDev;
 
+    function testingTag() {
+      if (testing && testing.length > 0) {
+        return `cardheader|${useText(testing)}`;
+      }
+      return 'cardheader';
+    }
+
     const CardHeaderComponent = (
       <CardHeader
         avatar={avatarSource && AvatarComponent}
@@ -28,6 +35,7 @@
           isEmpty ? classes.empty : '',
           isPristine ? classes.pristine : '',
         ].join(' ')}
+        data-component={testingTag()}
       />
     );
 

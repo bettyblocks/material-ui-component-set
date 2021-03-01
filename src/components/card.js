@@ -12,7 +12,8 @@
   ],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { env } = B;
+    const { env, useText } = B;
+    const { testing } = options;
     const { Card } = window.MaterialUI.Core;
     const { variant, elevation, square } = options;
     const isDev = env === 'dev';
@@ -27,8 +28,20 @@
       />
     );
 
+    function testingTag() {
+      if (testing && testing.length > 0) {
+        return `card|${useText(testing)}`;
+      }
+      return 'card';
+    }
+
     const CardComponent = (
-      <Card variant={variant} square={square} elevation={elevation}>
+      <Card
+        variant={variant}
+        square={square}
+        elevation={elevation}
+        data-component={testingTag()}
+      >
         {isEmpty ? PlaceHolder : children}
       </Card>
     );

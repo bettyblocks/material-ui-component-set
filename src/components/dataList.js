@@ -14,6 +14,7 @@
           ModelProvider,
           useAllQuery,
           useFilter,
+          useText,
         } = B;
         const [page, setPage] = useState(1);
         const [search, setSearch] = useState('');
@@ -31,6 +32,7 @@
           order,
           orderBy,
           pagination,
+          testing,
         } = options;
 
         const rowsPerPage = parseInt(take, 10) || 50;
@@ -47,6 +49,13 @@
         const [showPagination, setShowPagination] = useState(true);
         const isInline = type === 'inline';
         const isGrid = type === 'grid';
+
+        function testingTag() {
+          if (testing && testing.length > 0) {
+            return `datalist|${useText(testing)}`;
+          }
+          return 'datalist';
+        }
 
         const builderLayout = () => (
           <>
@@ -308,33 +317,35 @@
 
           return (
             <>
-              {searchProperty && !hideSearch && (
-                <div className={classes.header}>
-                  <SearchComponent
-                    label={searchPropertyLabel}
-                    onChange={handleSearch}
-                    value={search}
-                    isTyping={isTyping}
-                    setIsTyping={setIsTyping}
-                  />
-                </div>
-              )}
+              <div data-component={testingTag()}>
+                {searchProperty && !hideSearch && (
+                  <div className={classes.header}>
+                    <SearchComponent
+                      label={searchPropertyLabel}
+                      onChange={handleSearch}
+                      value={search}
+                      isTyping={isTyping}
+                      setIsTyping={setIsTyping}
+                    />
+                  </div>
+                )}
 
-              {!isGrid ? (
-                Looper(results)
-              ) : (
-                <div className={classes.grid}>{Looper(results)}</div>
-              )}
+                {!isGrid ? (
+                  Looper(results)
+                ) : (
+                  <div className={classes.grid}>{Looper(results)}</div>
+                )}
 
-              {showPagination && (
-                <div className={classes.footer}>
-                  <Pagination
-                    totalCount={totalCount}
-                    resultCount={resultCount}
-                    currentPage={page}
-                  />
-                </div>
-              )}
+                {showPagination && (
+                  <div className={classes.footer}>
+                    <Pagination
+                      totalCount={totalCount}
+                      resultCount={resultCount}
+                      currentPage={page}
+                    />
+                  </div>
+                )}
+              </div>
             </>
           );
         };

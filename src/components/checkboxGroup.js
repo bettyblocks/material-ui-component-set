@@ -26,6 +26,7 @@
       nameAttribute,
       order,
       orderBy,
+      testing,
     } = options;
 
     const {
@@ -159,6 +160,13 @@
       );
     };
 
+    function testingTag() {
+      if (testing && testing.length > 0) {
+        return `checkboxgroup|${useText(testing)}`;
+      }
+      return 'checkboxgroup';
+    }
+
     const Control = (
       <FormControl
         classes={{ root: classes.formControl }}
@@ -167,6 +175,7 @@
         required={required}
         error={error}
         fullWidth={fullWidth}
+        data-component={testingTag()}
       >
         {labelText && !hideLabel && (
           <FormLabel component="legend">{labelText}</FormLabel>

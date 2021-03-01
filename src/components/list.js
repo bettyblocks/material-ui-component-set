@@ -5,11 +5,11 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { List } = window.MaterialUI.Core;
-    const { env } = B;
+    const { env, useText } = B;
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
     const isPristine = children.length === 0 && isDev;
-    const { disablePadding, dense } = options;
+    const { disablePadding, dense, testing } = options;
 
     const renderData = () =>
       isEmpty ? (
@@ -23,11 +23,19 @@
         children
       );
 
+    function testingTag() {
+      if (testing && testing.length > 0) {
+        return `list|${useText(testing)}`;
+      }
+      return 'list';
+    }
+
     return (
       <List
         className={classes.root}
         disablePadding={disablePadding}
         dense={dense}
+        data-component={testingTag()}
       >
         {renderData()}
       </List>

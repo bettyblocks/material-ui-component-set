@@ -30,6 +30,7 @@
       hideLabel,
       customModelAttribute: customModelAttributeObj,
       nameAttribute,
+      testing,
     } = options;
 
     const {
@@ -215,6 +216,13 @@
       }
     }, [isDev, defaultValue, helperText]);
 
+    function testingTag() {
+      if (testing && testing.length > 0) {
+        return `textfield|${useText(testing)}`;
+      }
+      return 'textfield';
+    }
+
     const TextFieldCmp = (
       <FormControl
         classes={{ root: classes.formControl }}
@@ -225,6 +233,7 @@
         disabled={isDisabled}
         margin={margin}
         error={errorState}
+        data-component={testingTag()}
       >
         {labelText && !hideLabel && (
           <InputLabel classes={{ root: classes.label }}>{labelText}</InputLabel>

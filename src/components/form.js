@@ -15,6 +15,7 @@
           ModelProvider,
           useAllQuery,
           useEndpoint,
+          useText,
         } = B;
 
         const {
@@ -26,6 +27,7 @@
           showError,
           showSuccess,
           currentRecord,
+          testing,
         } = options;
         const formRef = React.createRef();
 
@@ -124,6 +126,13 @@
           }
         };
 
+        function testingTag() {
+          if (testing && testing.length > 0) {
+            return `form|${useText(testing)}`;
+          }
+          return 'form';
+        }
+
         const FormCmp = ({ item }) => {
           const [isInvalid, setIsInvalid] = useState(false);
           const handleInvalid = () => {
@@ -163,6 +172,7 @@
                       empty && classes.empty,
                       isPristine && classes.pristine,
                     ].join(' ')}
+                    data-component={testingTag()}
                   >
                     {isPristine && (
                       <span>

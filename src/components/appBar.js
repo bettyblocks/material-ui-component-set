@@ -22,6 +22,7 @@
       toolbarVariant,
       square,
       elevation,
+      testing,
     } = options;
     const { Link, env, useText } = B;
     const isDev = env === 'dev';
@@ -46,6 +47,13 @@
       LogoCmp
     );
 
+    function testingTag() {
+      if (testing && testing.length > 0) {
+        return `appbar|${useText(testing)}`;
+      }
+      return 'appbar';
+    }
+
     const AppBarComponent = (
       <AppBar
         position={isDev ? 'static' : position}
@@ -53,6 +61,7 @@
         variant={appBarVariant}
         square={square}
         elevation={appBarVariant === 'flat' ? 0 : elevation}
+        data-component={testingTag()}
       >
         <Toolbar variant={toolbarVariant} classes={{ root: classes.toolbar }}>
           {logo.length > 0 && LogoComponent}

@@ -17,6 +17,7 @@
       bodyText,
       allowTextServerResponse,
       allowTitleServerResponse,
+      testing,
     } = options;
     const title = useText(titleText);
     const body = useText(bodyText);
@@ -65,6 +66,13 @@
     B.defineFunction('Hide', () => setOpen(false));
     B.defineFunction('Show/Hide', () => setOpen(s => !s));
 
+    function testingTag() {
+      if (testing && testing.length > 0) {
+        return `alert|${useText(testing)}`;
+      }
+      return 'alert';
+    }
+
     const AlertPanel = (
       <Alert
         classes={{
@@ -85,6 +93,7 @@
             </IconButton>
           ) : null
         }
+        data-component={testingTag()}
       >
         {(title || titleFromServer) && (
           <AlertTitle>

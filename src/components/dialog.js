@@ -4,8 +4,8 @@
   allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'VERTICAL',
   jsx: (() => {
-    const { env } = B;
-    const { isVisible, isFullscreen, width } = options;
+    const { env, useText } = B;
+    const { isVisible, isFullscreen, width, testing } = options;
     const { Dialog } = window.MaterialUI.Core;
     const isDev = env === 'dev';
     const [isOpen, setIsOpen] = useState(isVisible);
@@ -34,6 +34,12 @@
         {!isEmpty ? children : 'Dialog Content'}
       </div>
     );
+    function testingTag() {
+      if (testing && testing.length > 0) {
+        return `dialog|${useText(testing)}`;
+      }
+      return 'dialog';
+    }
 
     const DialogCmp = (
       <Dialog
@@ -44,6 +50,7 @@
         maxWidth={width}
         aria-labelledby="modal-dialog"
         keepMounted
+        data-component={testingTag()}
       >
         {children}
       </Dialog>

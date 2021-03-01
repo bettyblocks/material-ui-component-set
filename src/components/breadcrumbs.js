@@ -4,7 +4,7 @@
   allowedTypes: ['BREADCRUMB_ITEM'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { env } = B;
+    const { env, useText } = B;
     const isDev = env === 'dev';
     const { Breadcrumbs } = window.MaterialUI.Core;
     const { Icons } = window.MaterialUI;
@@ -15,6 +15,7 @@
       maxItems,
       itemsAfterCollapse,
       itemsBeforeCollapse,
+      testing,
     } = options;
 
     const isEmpty = children.length === 0;
@@ -42,9 +43,20 @@
       breadcrumbsOptions.maxItems = parseInt(maxItems, 10);
     }
 
+    function testingTag() {
+      if (testing && testing.length > 0) {
+        return `breadcrumbs|${useText(testing)}`;
+      }
+      return 'breadcrumbs';
+    }
+
     const breadcrumbs =
       children.length > 0 ? (
-        <Breadcrumbs {...breadcrumbsOptions} aria-label="breadcrumb">
+        <Breadcrumbs
+          {...breadcrumbsOptions}
+          aria-label="breadcrumb"
+          data-component={testingTag()}
+        >
           {children}
         </Breadcrumbs>
       ) : (

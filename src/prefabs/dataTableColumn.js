@@ -90,6 +90,26 @@
           key: 'borderColor',
           value: 'Light',
         },
+        {
+          type: 'TOGGLE',
+          label: 'Advanced',
+          key: 'advanced',
+          value: false,
+        },
+        {
+          type: 'VARIABLE',
+          label: 'Testing',
+          key: 'testing',
+          value: [''],
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'advanced',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
       ],
       descendants: [],
     },

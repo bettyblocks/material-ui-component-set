@@ -6,6 +6,7 @@
   jsx: (
     <div className={children.length === 0 ? classes.empty : undefined}>
       {(() => {
+        const { testing } = options;
         const { useText, env } = B;
         const isDev = env === 'dev';
         const isPristine = isDev && children.length === 0;

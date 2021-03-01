@@ -53,6 +53,7 @@
       showError,
       autoLoadOnScroll,
       autoLoadTakeAmount,
+      testing,
     } = options;
     const repeaterRef = React.createRef();
     const tableRef = React.createRef();
@@ -155,6 +156,13 @@
         : filter;
 
     const where = useFilter(newFilter);
+
+    function testingTag() {
+      if (testing && testing.length > 0) {
+        return `datatable|${useText(testing)}`;
+      }
+      return 'datatable';
+    }
 
     // TODO: move model to skip
     const { loading, error, data, refetch } =
@@ -502,7 +510,7 @@
     }, [showPagination, hasToolbar]);
 
     return (
-      <div className={classes.root}>
+      <div className={classes.root} data-component={testingTag()}>
         <Paper
           classes={{ root: classes.paper }}
           square={square}

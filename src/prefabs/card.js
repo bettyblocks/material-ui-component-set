@@ -68,6 +68,26 @@
             },
           },
         },
+        {
+          type: 'TOGGLE',
+          label: 'Advanced',
+          key: 'advanced',
+          value: false,
+        },
+        {
+          type: 'VARIABLE',
+          label: 'Testing',
+          key: 'testing',
+          value: [''],
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'advanced',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
       ],
       descendants: [
         {
@@ -110,6 +130,26 @@
               label: 'Sub header',
               key: 'subheader',
               type: 'VARIABLE',
+            },
+            {
+              type: 'TOGGLE',
+              label: 'Advanced',
+              key: 'advanced',
+              value: false,
+            },
+            {
+              type: 'VARIABLE',
+              label: 'Testing',
+              key: 'testing',
+              value: [''],
+              configuration: {
+                condition: {
+                  type: 'SHOW',
+                  option: 'advanced',
+                  comparator: 'EQ',
+                  value: true,
+                },
+              },
             },
           ],
           descendants: [],
@@ -182,12 +222,53 @@
               key: 'title',
               type: 'VARIABLE',
             },
+            {
+              type: 'TOGGLE',
+              label: 'Advanced',
+              key: 'advanced',
+              value: false,
+            },
+            {
+              type: 'VARIABLE',
+              label: 'Testing',
+              key: 'testing',
+              value: [''],
+              configuration: {
+                condition: {
+                  type: 'SHOW',
+                  option: 'advanced',
+                  comparator: 'EQ',
+                  value: true,
+                },
+              },
+            },
           ],
           descendants: [],
         },
         {
           name: 'CardContent',
-          options: [],
+          options: [
+            {
+              type: 'TOGGLE',
+              label: 'Advanced',
+              key: 'advanced',
+              value: false,
+            },
+            {
+              type: 'VARIABLE',
+              label: 'Testing',
+              key: 'testing',
+              value: [''],
+              configuration: {
+                condition: {
+                  type: 'SHOW',
+                  option: 'advanced',
+                  comparator: 'EQ',
+                  value: true,
+                },
+              },
+            },
+          ],
           descendants: [
             {
               name: 'Text',
@@ -268,6 +349,26 @@
                       option: 'linkType',
                       comparator: 'EQ',
                       value: 'external',
+                    },
+                  },
+                },
+                {
+                  type: 'TOGGLE',
+                  label: 'Advanced',
+                  key: 'advanced',
+                  value: false,
+                },
+                {
+                  type: 'VARIABLE',
+                  label: 'Testing',
+                  key: 'testing',
+                  value: [''],
+                  configuration: {
+                    condition: {
+                      type: 'SHOW',
+                      option: 'advanced',
+                      comparator: 'EQ',
+                      value: true,
                     },
                   },
                 },
@@ -356,6 +457,26 @@
                     },
                   },
                 },
+                {
+                  type: 'TOGGLE',
+                  label: 'Advanced',
+                  key: 'advanced',
+                  value: false,
+                },
+                {
+                  type: 'VARIABLE',
+                  label: 'Testing',
+                  key: 'testing',
+                  value: [''],
+                  configuration: {
+                    condition: {
+                      type: 'SHOW',
+                      option: 'advanced',
+                      comparator: 'EQ',
+                      value: true,
+                    },
+                  },
+                },
               ],
               descendants: [],
             },
@@ -393,6 +514,26 @@
               label: 'Disable spacing',
               key: 'disableSpacing',
               value: false,
+            },
+            {
+              type: 'TOGGLE',
+              label: 'Advanced',
+              key: 'advanced',
+              value: false,
+            },
+            {
+              type: 'VARIABLE',
+              label: 'Testing',
+              key: 'testing',
+              value: [''],
+              configuration: {
+                condition: {
+                  type: 'SHOW',
+                  option: 'advanced',
+                  comparator: 'EQ',
+                  value: true,
+                },
+              },
             },
           ],
           descendants: [
@@ -1977,6 +2118,26 @@
                     condition: {
                       type: 'SHOW',
                       option: 'addTooltip',
+                      comparator: 'EQ',
+                      value: true,
+                    },
+                  },
+                },
+                {
+                  type: 'TOGGLE',
+                  label: 'Advanced',
+                  key: 'advanced',
+                  value: false,
+                },
+                {
+                  type: 'VARIABLE',
+                  label: 'Testing',
+                  key: 'testing',
+                  value: [''],
+                  configuration: {
+                    condition: {
+                      type: 'SHOW',
+                      option: 'advanced',
                       comparator: 'EQ',
                       value: true,
                     },

@@ -28,6 +28,7 @@
       linkTo,
       linkToExternal,
       dense,
+      testing,
     } = options;
     const { env, useText, Link } = B;
     const isDev = env === 'dev';
@@ -67,6 +68,13 @@
     if (linkType === 'internal' && hasLink) linkComponent = Link;
     if (linkType === 'external' && hasExternalLink) linkComponent = 'a';
 
+    function testingTag() {
+      if (testing && testing.length > 0) {
+        return `listitem|${useText(testing)}`;
+      }
+      return 'listitem';
+    }
+
     return (
       <ListItem
         button={hasLink || linkToExternalVariable}
@@ -80,6 +88,7 @@
         selected={selected}
         className={classes.root}
         dense={dense}
+        data-component={testingTag()}
       >
         {avatarOrIcon === 'avatar' || (avatarOrIcon === 'icon' && avatar)
           ? AvatarComponent

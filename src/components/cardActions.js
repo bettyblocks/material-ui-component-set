@@ -4,7 +4,8 @@
   allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { env } = B;
+    const { env, useText } = B;
+    const { testing } = options;
     const { CardActions } = window.MaterialUI.Core;
     const isDev = env === 'dev';
     const { disableSpacing } = options;
@@ -19,10 +20,18 @@
       />
     );
 
+    function testingTag() {
+      if (testing && testing.length > 0) {
+        return `cardactions|${useText(testing)}`;
+      }
+      return 'cardactions';
+    }
+
     const CardActionsComponent = (
       <CardActions
         classes={{ root: classes.root }}
         disableSpacing={disableSpacing}
+        data-component={testingTag()}
       >
         {isEmpty ? PlaceHolder : children}
       </CardActions>

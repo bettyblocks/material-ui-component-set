@@ -14,6 +14,7 @@
       validationValueMissing,
       nameAttribute,
       isSwitch,
+      testing,
     } = options;
     const { env, useText, getCustomModelAttribute } = B;
     const isDev = env === 'dev';
@@ -74,11 +75,19 @@
     const Checkbox = <MUICheckbox {...props} />;
     const SwitchComponent = <Switch {...props} />;
 
+    function testingTag() {
+      if (testing && testing.length > 0) {
+        return `checkbox|${useText(testing)}`;
+      }
+      return 'checkbox';
+    }
+
     const Control = (
       <FormControl
         required={required}
         error={errorState}
         classes={{ root: classes.formControl }}
+        data-component={testingTag()}
       >
         <FormControlLabel
           control={isSwitch ? SwitchComponent : Checkbox}

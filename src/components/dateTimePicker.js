@@ -25,6 +25,7 @@
       use24HourClockTime,
       nameAttribute,
       locale,
+      testing,
     } = options;
     const { env, getCustomModelAttribute, useText } = B;
     const {
@@ -129,6 +130,13 @@
       default:
     }
 
+    function testingTag() {
+      if (testing && testing.length > 0) {
+        return `datetimepicker|${useText(testing)}`;
+      }
+      return 'datetimepicker';
+    }
+
     const DateTimeCmp = (
       <DateTimeComponent
         name={nameAttributeValue || customModelAttributeName}
@@ -167,6 +175,7 @@
         }}
         ampm={!use24HourClock}
         keyboardIcon={type === 'time' ? <AccessTime /> : <Event />}
+        data-component={testingTag()}
       />
     );
 

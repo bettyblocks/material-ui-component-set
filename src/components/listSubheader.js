@@ -5,7 +5,7 @@
   orientation: 'VERTICAL',
   jsx: (() => {
     const { ListSubheader } = window.MaterialUI.Core;
-    const { text, inset } = options;
+    const { text, inset, testing } = options;
     const { env, useText } = B;
     const isDev = env === 'dev';
 
@@ -19,8 +19,19 @@
         <>{content}</>
       );
 
+    function testingTag() {
+      if (testing && testing.length > 0) {
+        return `listsubheader|${useText(testing)}`;
+      }
+      return 'listsubheader';
+    }
+
     return (
-      <ListSubheader className={classes.root} inset={inset}>
+      <ListSubheader
+        className={classes.root}
+        inset={inset}
+        data-component={testingTag()}
+      >
         {ItemText}
       </ListSubheader>
     );

@@ -535,6 +535,26 @@
                           },
                         },
                       },
+                      {
+                        type: 'TOGGLE',
+                        label: 'Advanced',
+                        key: 'advanced',
+                        value: false,
+                      },
+                      {
+                        type: 'VARIABLE',
+                        label: 'Testing',
+                        key: 'testing',
+                        value: [''],
+                        configuration: {
+                          condition: {
+                            type: 'SHOW',
+                            option: 'advanced',
+                            comparator: 'EQ',
+                            value: true,
+                          },
+                        },
+                      },
                     ],
                     descendants: [],
                   };
@@ -2218,6 +2238,26 @@
                           },
                         },
                       },
+                      {
+                        type: 'TOGGLE',
+                        label: 'Advanced',
+                        key: 'advanced',
+                        value: false,
+                      },
+                      {
+                        type: 'VARIABLE',
+                        label: 'Testing',
+                        key: 'testing',
+                        value: [''],
+                        configuration: {
+                          condition: {
+                            type: 'SHOW',
+                            option: 'advanced',
+                            comparator: 'EQ',
+                            value: true,
+                          },
+                        },
+                      },
                     ],
                     descendants: [],
                   };
@@ -2627,6 +2667,26 @@
                           condition: {
                             type: 'SHOW',
                             option: 'advancedSettings',
+                            comparator: 'EQ',
+                            value: true,
+                          },
+                        },
+                      },
+                      {
+                        type: 'TOGGLE',
+                        label: 'Advanced',
+                        key: 'advanced',
+                        value: false,
+                      },
+                      {
+                        type: 'VARIABLE',
+                        label: 'Testing',
+                        key: 'testing',
+                        value: [''],
+                        configuration: {
+                          condition: {
+                            type: 'SHOW',
+                            option: 'advanced',
                             comparator: 'EQ',
                             value: true,
                           },
@@ -4307,6 +4367,26 @@
                           },
                         },
                       },
+                      {
+                        type: 'TOGGLE',
+                        label: 'Advanced',
+                        key: 'advanced',
+                        value: false,
+                      },
+                      {
+                        type: 'VARIABLE',
+                        label: 'Testing',
+                        key: 'testing',
+                        value: [''],
+                        configuration: {
+                          condition: {
+                            type: 'SHOW',
+                            option: 'advanced',
+                            comparator: 'EQ',
+                            value: true,
+                          },
+                        },
+                      },
                     ],
                     descendants: [],
                   };
@@ -4716,6 +4796,26 @@
                           condition: {
                             type: 'SHOW',
                             option: 'advancedSettings',
+                            comparator: 'EQ',
+                            value: true,
+                          },
+                        },
+                      },
+                      {
+                        type: 'TOGGLE',
+                        label: 'Advanced',
+                        key: 'advanced',
+                        value: false,
+                      },
+                      {
+                        type: 'VARIABLE',
+                        label: 'Testing',
+                        key: 'testing',
+                        value: [''],
+                        configuration: {
+                          condition: {
+                            type: 'SHOW',
+                            option: 'advanced',
                             comparator: 'EQ',
                             value: true,
                           },
@@ -5137,6 +5237,26 @@
                           },
                         },
                       },
+                      {
+                        type: 'TOGGLE',
+                        label: 'Advanced',
+                        key: 'advanced',
+                        value: false,
+                      },
+                      {
+                        type: 'VARIABLE',
+                        label: 'Testing',
+                        key: 'testing',
+                        value: [''],
+                        configuration: {
+                          condition: {
+                            type: 'SHOW',
+                            option: 'advanced',
+                            comparator: 'EQ',
+                            value: true,
+                          },
+                        },
+                      },
                     ],
                     descendants: [],
                   };
@@ -5462,6 +5582,26 @@
                           condition: {
                             type: 'SHOW',
                             option: 'advancedSettings',
+                            comparator: 'EQ',
+                            value: true,
+                          },
+                        },
+                      },
+                      {
+                        type: 'TOGGLE',
+                        label: 'Advanced',
+                        key: 'advanced',
+                        value: false,
+                      },
+                      {
+                        type: 'VARIABLE',
+                        label: 'Testing',
+                        key: 'testing',
+                        value: [''],
+                        configuration: {
+                          condition: {
+                            type: 'SHOW',
+                            option: 'advanced',
                             comparator: 'EQ',
                             value: true,
                           },
@@ -5834,6 +5974,26 @@
                           },
                         },
                       },
+                      {
+                        type: 'TOGGLE',
+                        label: 'Advanced',
+                        key: 'advanced',
+                        value: false,
+                      },
+                      {
+                        type: 'VARIABLE',
+                        label: 'Testing',
+                        key: 'testing',
+                        value: [''],
+                        configuration: {
+                          condition: {
+                            type: 'SHOW',
+                            option: 'advanced',
+                            comparator: 'EQ',
+                            value: true,
+                          },
+                        },
+                      },
                     ],
                     descendants: [],
                   };
@@ -6165,6 +6325,26 @@
                           condition: {
                             type: 'SHOW',
                             option: 'advancedSettings',
+                            comparator: 'EQ',
+                            value: true,
+                          },
+                        },
+                      },
+                      {
+                        type: 'TOGGLE',
+                        label: 'Advanced',
+                        key: 'advanced',
+                        value: false,
+                      },
+                      {
+                        type: 'VARIABLE',
+                        label: 'Testing',
+                        key: 'testing',
+                        value: [''],
+                        configuration: {
+                          condition: {
+                            type: 'SHOW',
+                            option: 'advanced',
                             comparator: 'EQ',
                             value: true,
                           },
@@ -7714,6 +7894,26 @@
                           },
                         },
                       },
+                      {
+                        type: 'TOGGLE',
+                        label: 'Advanced',
+                        key: 'advanced',
+                        value: false,
+                      },
+                      {
+                        type: 'VARIABLE',
+                        label: 'Testing',
+                        key: 'testing',
+                        value: [''],
+                        configuration: {
+                          condition: {
+                            type: 'SHOW',
+                            option: 'advanced',
+                            comparator: 'EQ',
+                            value: true,
+                          },
+                        },
+                      },
                     ],
                     descendants: [],
                   };
@@ -7896,6 +8096,26 @@
                           condition: {
                             type: 'SHOW',
                             option: 'advancedSettings',
+                            comparator: 'EQ',
+                            value: true,
+                          },
+                        },
+                      },
+                      {
+                        type: 'TOGGLE',
+                        label: 'Advanced',
+                        key: 'advanced',
+                        value: false,
+                      },
+                      {
+                        type: 'VARIABLE',
+                        label: 'Testing',
+                        key: 'testing',
+                        value: [''],
+                        configuration: {
+                          condition: {
+                            type: 'SHOW',
+                            option: 'advanced',
                             comparator: 'EQ',
                             value: true,
                           },
@@ -8324,6 +8544,26 @@
                           condition: {
                             type: 'SHOW',
                             option: 'advancedSettings',
+                            comparator: 'EQ',
+                            value: true,
+                          },
+                        },
+                      },
+                      {
+                        type: 'TOGGLE',
+                        label: 'Advanced',
+                        key: 'advanced',
+                        value: false,
+                      },
+                      {
+                        type: 'VARIABLE',
+                        label: 'Testing',
+                        key: 'testing',
+                        value: [''],
+                        configuration: {
+                          condition: {
+                            type: 'SHOW',
+                            option: 'advanced',
                             comparator: 'EQ',
                             value: true,
                           },
@@ -9993,6 +10233,26 @@
                           },
                         },
                       },
+                      {
+                        type: 'TOGGLE',
+                        label: 'Advanced',
+                        key: 'advanced',
+                        value: false,
+                      },
+                      {
+                        type: 'VARIABLE',
+                        label: 'Testing',
+                        key: 'testing',
+                        value: [''],
+                        configuration: {
+                          condition: {
+                            type: 'SHOW',
+                            option: 'advanced',
+                            comparator: 'EQ',
+                            value: true,
+                          },
+                        },
+                      },
                     ],
                     descendants: [],
                   };
@@ -11375,6 +11635,26 @@
                     key: 'outerSpacing',
                     type: 'SIZES',
                   },
+                  {
+                    type: 'TOGGLE',
+                    label: 'Advanced',
+                    key: 'advanced',
+                    value: false,
+                  },
+                  {
+                    type: 'VARIABLE',
+                    label: 'Testing',
+                    key: 'testing',
+                    value: [''],
+                    configuration: {
+                      condition: {
+                        type: 'SHOW',
+                        option: 'advanced',
+                        comparator: 'EQ',
+                        value: true,
+                      },
+                    },
+                  },
                 ],
                 descendants: [],
               },
@@ -12756,6 +13036,26 @@
                     key: 'outerSpacing',
                     type: 'SIZES',
                   },
+                  {
+                    type: 'TOGGLE',
+                    label: 'Advanced',
+                    key: 'advanced',
+                    value: false,
+                  },
+                  {
+                    type: 'VARIABLE',
+                    label: 'Testing',
+                    key: 'testing',
+                    value: [''],
+                    configuration: {
+                      condition: {
+                        type: 'SHOW',
+                        option: 'advanced',
+                        comparator: 'EQ',
+                        value: true,
+                      },
+                    },
+                  },
                 ],
                 descendants: [],
               },
@@ -12843,6 +13143,26 @@
                       condition: {
                         type: 'SHOW',
                         option: 'styles',
+                        comparator: 'EQ',
+                        value: true,
+                      },
+                    },
+                  },
+                  {
+                    type: 'TOGGLE',
+                    label: 'Advanced',
+                    key: 'advanced',
+                    value: false,
+                  },
+                  {
+                    type: 'VARIABLE',
+                    label: 'Testing',
+                    key: 'testing',
+                    value: [''],
+                    configuration: {
+                      condition: {
+                        type: 'SHOW',
+                        option: 'advanced',
                         comparator: 'EQ',
                         value: true,
                       },

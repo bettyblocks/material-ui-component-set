@@ -5,7 +5,28 @@
   structure: [
     {
       name: 'CardContent',
-      options: [],
+      options: [
+        {
+          type: 'TOGGLE',
+          label: 'Advanced',
+          key: 'advanced',
+          value: false,
+        },
+        {
+          type: 'VARIABLE',
+          label: 'Testing',
+          key: 'testing',
+          value: [''],
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'advanced',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+      ],
       descendants: [
         {
           name: 'Text',
@@ -86,6 +107,26 @@
                   option: 'linkType',
                   comparator: 'EQ',
                   value: 'external',
+                },
+              },
+            },
+            {
+              type: 'TOGGLE',
+              label: 'Advanced',
+              key: 'advanced',
+              value: false,
+            },
+            {
+              type: 'VARIABLE',
+              label: 'Testing',
+              key: 'testing',
+              value: [''],
+              configuration: {
+                condition: {
+                  type: 'SHOW',
+                  option: 'advanced',
+                  comparator: 'EQ',
+                  value: true,
                 },
               },
             },
@@ -171,6 +212,26 @@
                   option: 'linkType',
                   comparator: 'EQ',
                   value: 'external',
+                },
+              },
+            },
+            {
+              type: 'TOGGLE',
+              label: 'Advanced',
+              key: 'advanced',
+              value: false,
+            },
+            {
+              type: 'VARIABLE',
+              label: 'Testing',
+              key: 'testing',
+              value: [''],
+              configuration: {
+                condition: {
+                  type: 'SHOW',
+                  option: 'advanced',
+                  comparator: 'EQ',
+                  value: true,
                 },
               },
             },

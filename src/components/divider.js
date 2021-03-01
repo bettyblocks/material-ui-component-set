@@ -3,13 +3,25 @@
   type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
-  jsx: (
-    <div className={classes.root}>
-      <div className={B.env === 'dev' ? classes.clickSpace : ''}>
-        <hr className={classes.divider} />
+  jsx: (() => {
+    const { testing } = options;
+    const { useText } = B;
+
+    function testingTag() {
+      if (testing && testing.length > 0) {
+        return `divider|${useText(testing)}`;
+      }
+      return 'divider';
+    }
+
+    return (
+      <div className={classes.root} data-component={testingTag()}>
+        <div className={B.env === 'dev' ? classes.clickSpace : ''}>
+          <hr className={classes.divider} />
+        </div>
       </div>
-    </div>
-  ),
+    );
+  })(),
   styles: B => t => {
     const { mediaMinWidth, Styling } = B;
     const style = new Styling(t);

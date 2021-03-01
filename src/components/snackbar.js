@@ -14,6 +14,7 @@
       autoHideDuration,
       content,
       allowTextServerResponse,
+      testing,
     } = options;
     const { env, useText } = B;
     const isDev = env === 'dev';
@@ -99,8 +100,15 @@
       };
     }
 
+    function testingTag() {
+      if (testing && testing.length > 0) {
+        return `snackbar|${useText(testing)}`;
+      }
+      return 'snackbar';
+    }
+
     const SnackbarCmp = (
-      <Snackbar {...snackbarOptions}>
+      <Snackbar {...snackbarOptions} data-component={testingTag()}>
         {isEmpty ? null : <div>{children}</div>}
       </Snackbar>
     );

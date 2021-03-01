@@ -32,6 +32,7 @@
       hasVisibleTooltip,
       tooltipContent,
       tooltipPlacement,
+      testing,
     } = options;
     const {
       env,
@@ -145,6 +146,13 @@
 
     const showIndicator = !isIcon && (isLoading || loading);
 
+    function testingTag() {
+      if (testing && testing.length > 0) {
+        return `button|${useText(testing)}`;
+      }
+      return 'button';
+    }
+
     const BasicButtonComponent = (
       <BtnComp
         {...compProps}
@@ -164,6 +172,7 @@
           event.stopPropagation();
           actionCallback();
         }}
+        data-component={testingTag()}
       >
         {isIcon &&
           React.createElement(Icons[icon === 'None' ? 'Error' : icon], {

@@ -7,7 +7,14 @@
     const { env, useText } = B;
     const { CardMedia } = window.MaterialUI.Core;
     const isDev = env === 'dev';
-    const { type, imageSource, videoSource, iframeSource, title } = options;
+    const {
+      type,
+      imageSource,
+      videoSource,
+      iframeSource,
+      title,
+      testing,
+    } = options;
 
     const titleText = useText(title);
     const imgUrl = useText(imageSource);
@@ -71,6 +78,13 @@
         </div>
       </div>
     );
+    function testingTag() {
+      if (testing && testing.length > 0) {
+        return `cardmedia|${useText(testing)}`;
+      }
+      return 'cardmedia';
+    }
+
     if (isImage && !variableDev) {
       MediaComponent = () => (
         <img
@@ -78,6 +92,7 @@
           src={imgUrl}
           title={titleText}
           alt={titleText}
+          data-component={testingTag()}
         />
       );
     } else if (isVideo) {
@@ -87,12 +102,18 @@
           className={classes.media}
           src={videoUrl}
           title={titleText}
+          data-component={testingTag()}
           controls
         />
       );
     } else if (isIframe) {
       MediaComponent = () => (
-        <iframe className={classes.media} title={titleText} src={iframeUrl} />
+        <iframe
+          className={classes.media}
+          title={titleText}
+          src={iframeUrl}
+          data-component={testingTag()}
+        />
       );
     }
 

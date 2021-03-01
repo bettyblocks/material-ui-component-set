@@ -23,6 +23,7 @@
       allSteps,
       buttonNext,
       buttonPrev,
+      testing,
     } = options;
 
     const isDev = env === 'dev';
@@ -67,6 +68,13 @@
       }
     }, [isDev, stepIndex]);
 
+    function testingTag() {
+      if (testing && testing.length > 0) {
+        return `stepper|${useText(testing)}`;
+      }
+      return 'stepper';
+    }
+
     const StepperCmp = (
       <>
         <Stepper
@@ -75,6 +83,7 @@
           activeStep={activeStep}
           orientation={type}
           classes={{ root: classes.root }}
+          data-component={testingTag()}
         >
           {React.Children.map(children, (child, index) => {
             const { options: childOptions = {} } = child.props || {};

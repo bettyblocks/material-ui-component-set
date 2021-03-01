@@ -4,16 +4,27 @@
   allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { env } = B;
+    const { env, useText } = B;
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
-    const { label, icon } = options || {};
+    const { label, icon, testing } = options || {};
     const { stepLabelData, setStepLabelData, active, isFirstRender } = parent;
 
     const StepContent =
       isEmpty && isDev ? <div className={classes.empty}>Step</div> : children;
 
-    const StepCmp = <>{active ? StepContent : null}</>;
+    function testingTag() {
+      if (testing && testing.length > 0) {
+        return `step|${useText(testing)}`;
+      }
+      return 'step';
+    }
+
+    const StepCmp = (
+      <>
+        <div data-component={testingTag()}>{active ? StepContent : null}</div>
+      </>
+    );
 
     useEffect(() => {
       if (active && !isFirstRender) {

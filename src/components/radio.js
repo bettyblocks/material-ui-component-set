@@ -26,6 +26,7 @@
       nameAttribute,
       order,
       orderBy,
+      testing,
     } = options;
     const {
       env,
@@ -187,6 +188,13 @@
       }
     }, [isDev, defaultValue]);
 
+    function testingTag() {
+      if (testing && testing.length > 0) {
+        return `radio|${useText(testing)}`;
+      }
+      return 'radio';
+    }
+
     const FormControl = (
       <MUIFormControl
         classes={{ root: classes.formControl }}
@@ -195,6 +203,7 @@
         component="fieldset"
         error={errorState}
         fullWidth={fullWidth}
+        data-component={testingTag()}
       >
         {!hideLabel && <FormLabel component="legend">{labelText}</FormLabel>}
         <RadioGroup

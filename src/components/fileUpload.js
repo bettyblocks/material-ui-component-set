@@ -33,6 +33,7 @@
       nameAttribute,
       type,
       showImagePreview,
+      testing,
     } = options;
 
     const isDev = env === 'dev';
@@ -358,6 +359,13 @@
       }
     };
 
+    function testingTag() {
+      if (testing && testing.length > 0) {
+        return `fileupload|${useText(testing)}`;
+      }
+      return 'fileupload';
+    }
+
     const Control = () => (
       <FormControl
         fullWidth={fullWidth}
@@ -365,6 +373,7 @@
         error={!hideDefaultError && failureMessage.length > 0}
         disabled={disabled}
         margin={margin}
+        data-component={testingTag()}
       >
         <FormControlLabel
           control={UploadComponent}

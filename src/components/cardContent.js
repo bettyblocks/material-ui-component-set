@@ -4,7 +4,8 @@
   allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { env } = B;
+    const { env, useText } = B;
+    const { testing } = options;
     const { CardContent } = window.MaterialUI.Core;
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
@@ -18,8 +19,17 @@
       />
     );
 
+    function testingTag() {
+      if (testing && testing.length > 0) {
+        return `cardcontent|${useText(testing)}`;
+      }
+      return 'cardcontent';
+    }
+
     const CardContentComponent = (
-      <CardContent>{isEmpty ? PlaceHolder : children}</CardContent>
+      <CardContent data-component={testingTag()}>
+        {isEmpty ? PlaceHolder : children}
+      </CardContent>
     );
 
     return isDev ? <div>{CardContentComponent}</div> : CardContentComponent;

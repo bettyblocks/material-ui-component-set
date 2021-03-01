@@ -12,6 +12,7 @@
       property,
       content,
       sortable,
+      testing,
     } = options;
     const { headerOnly, handleSort, orderBy, linkTo, handleRowClick, context } =
       parent || {};
@@ -117,11 +118,20 @@
         </div>
       );
     }
+
+    function testingTag() {
+      if (testing && testing.length > 0) {
+        return `datatablecolumn|${useText(testing)}`;
+      }
+      return 'datatablecolumn';
+    }
+
     return visible ? (
       <TableCell
         classes={{ root: classes.root }}
         align={horizontalAlignment}
         onClick={() => handleRowClick && handleRowClick(myEndpoint, context)}
+        data-component={testingTag()}
       >
         {headerOnly ? Header : Content}
       </TableCell>

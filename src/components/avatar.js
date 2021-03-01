@@ -16,6 +16,7 @@
       variant,
       width,
       height,
+      testing,
     } = options;
 
     const isDev = env === 'dev';
@@ -33,6 +34,13 @@
       height,
     };
 
+    function testingTag() {
+      if (testing && testing.length > 0) {
+        return `avatar|${useText(testing)}`;
+      }
+      return 'avatar';
+    }
+
     const AvatarComponent = (
       <Avatar
         variant={variant}
@@ -40,6 +48,7 @@
         src={isImage && imgSrc}
         className={classes.avatar}
         style={styleOptions}
+        data-component={testingTag()}
       >
         {isLetter && useText(letter)}
         {isIcon && IconComponent}

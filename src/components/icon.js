@@ -18,6 +18,7 @@
       linkTo,
       linkToExternal,
       linkType,
+      testing,
     } = options;
 
     const hasLink = linkTo && linkTo.id !== '';
@@ -30,8 +31,17 @@
       horizontal: anchorOriginSplit[0],
       vertical: anchorOriginSplit[1],
     };
+
+    function testingTag() {
+      if (testing && testing.length > 0) {
+        return `icon|${useText(testing)}`;
+      }
+      return 'icon';
+    }
+
     const IconComponent = React.createElement(Icons[icon], {
       className: classes.root,
+      dataComponent: testingTag(),
     });
 
     const href =

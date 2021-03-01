@@ -28,6 +28,7 @@
       nameAttribute,
       order,
       orderBy,
+      testing,
     } = options;
     const { Autocomplete } = window.MaterialUI.Lab;
     const {
@@ -308,6 +309,13 @@
       );
     }
 
+    function testingTag() {
+      if (testing && testing.length > 0) {
+        return `autocomplete|${useText(testing)}`;
+      }
+      return 'autocomplete';
+    }
+
     if (kind === 'list' || kind === 'LIST') {
       const onPropertyListChange = (_, newValue) => {
         setCurrentValue(newValue);
@@ -321,6 +329,7 @@
 
       return (
         <Autocomplete
+          data-component={testingTag()}
           id="combo-box-demo"
           options={selectValues}
           value={currentValue}
@@ -353,7 +362,7 @@
 
     if (!model) {
       return (
-        <div className={classes.root}>
+        <div className={classes.root} data-component={testingTag()}>
           <TextField
             {...textFieldProps}
             value={multiple ? '' : currentValue}
@@ -373,12 +382,14 @@
           InputProps={{
             endAdornment: <CircularProgress color="inherit" size={20} />,
           }}
+          data-component={testingTag()}
         />
       );
     }
 
     return (
       <Autocomplete
+        data-component={testingTag()}
         multiple={multiple}
         freeSolo={freeSolo}
         options={results}

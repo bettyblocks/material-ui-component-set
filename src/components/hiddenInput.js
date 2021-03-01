@@ -8,6 +8,7 @@
       disabled,
       customModelAttribute: customModelAttributeObj,
       nameAttribute,
+      testing,
     } = options;
 
     const { useText, env, getCustomModelAttribute } = B;
@@ -30,6 +31,13 @@
       }
     }, [isDev, defaultValue]);
 
+    function testingTag() {
+      if (testing && testing.length > 0) {
+        return `hiddeninput|${useText(testing)}`;
+      }
+      return 'hiddeninput';
+    }
+
     const InputCmp = (
       <input
         className={isDev && classes.pristine}
@@ -38,6 +46,7 @@
         value={isDev ? currentValue || '{{ hidden input }}' : currentValue}
         required={required}
         disabled={disabled}
+        data-component={testingTag()}
       />
     );
 

@@ -26,6 +26,7 @@
       order,
       orderBy,
       blanco,
+      testing,
     } = options;
     const {
       env,
@@ -175,6 +176,13 @@
       );
     };
 
+    function testingTag() {
+      if (testing && testing.length > 0) {
+        return `select|${useText(testing)}`;
+      }
+      return 'select';
+    }
+
     const SelectCmp = (
       <>
         <TextField
@@ -197,6 +205,7 @@
           error={errorState}
           margin={margin}
           helperText={helper}
+          data-component={testingTag()}
         >
           {blancoText && <MenuItem value="">{blancoText}</MenuItem>}
           {renderOptions()}

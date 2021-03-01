@@ -26,6 +26,7 @@
       size,
       type,
       variant,
+      testing,
     } = options;
 
     const { env, useText } = B;
@@ -154,6 +155,13 @@
       setIsOpen(false);
     };
 
+    function testingTag() {
+      if (testing && testing.length > 0) {
+        return `menu|${useText(testing)}`;
+      }
+      return 'menu';
+    }
+
     const ButtonComponent = (
       <ButtonComp
         ref={buttonRef}
@@ -171,6 +179,7 @@
           React.createElement(Icons[icon])
         }
         onClick={handleToggle}
+        data-component={testingTag()}
       >
         {isIcon &&
           React.createElement(Icons[icon === 'None' ? 'Error' : icon], {

@@ -19,6 +19,7 @@
       linkType,
       openLinkToExternal,
       primaryText,
+      testing,
     } = options;
     const {
       env,
@@ -87,6 +88,13 @@
       }
     }, [loading]);
 
+    function testingTag() {
+      if (testing && testing.length > 0) {
+        return `menuitem|${useText(testing)}`;
+      }
+      return 'menuitem';
+    }
+
     return (
       <MenuItem
         className={classes.root}
@@ -101,6 +109,7 @@
           e.stopPropagation();
           actionCallback();
         }}
+        data-component={testingTag()}
       >
         {icon !== 'None' &&
           iconPosition === 'start' &&

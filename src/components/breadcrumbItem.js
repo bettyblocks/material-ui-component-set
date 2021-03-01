@@ -8,7 +8,13 @@
     const isDev = env === 'dev';
     const { Typography } = window.MaterialUI.Core;
     const { Icons } = window.MaterialUI;
-    const { endpoint, breadcrumbContent, icon, iconPosition } = options;
+    const {
+      endpoint,
+      breadcrumbContent,
+      icon,
+      iconPosition,
+      testing,
+    } = options;
     const content = useText(breadcrumbContent);
     const hasEndpoint = endpoint && endpoint.id !== '';
 
@@ -39,16 +45,26 @@
 
     const BreadcrumbChildren = isEmpty ? PlaceHolder : ItemContent;
 
+    function testingTag() {
+      if (testing && testing.length > 0) {
+        return `breadcrumbitem|${useText(testing)}`;
+      }
+      return 'breadcrumbitem';
+    }
+
     const breadcrumbItem = hasEndpoint ? (
       // eslint-disable-next-line jsx-a11y/anchor-is-valid
       <Link
         className={[classes.content, classes.link].join(' ')}
         endpoint={endpoint}
+        data-component={testingTag()}
       >
         {BreadcrumbChildren}
       </Link>
     ) : (
-      <Typography className={classes.content}>{BreadcrumbChildren}</Typography>
+      <Typography className={classes.content} data-component={testingTag()}>
+        {BreadcrumbChildren}
+      </Typography>
     );
 
     return isDev ? (

@@ -13,6 +13,7 @@
       iframeSource,
       imgAlt,
       title,
+      testing,
     } = options;
 
     const titleText = useText(title);
@@ -119,6 +120,13 @@
       );
     }
 
+    function testingTag() {
+      if (testing && testing.length > 0) {
+        return `button|${useText(testing)}`;
+      }
+      return 'button';
+    }
+
     return (
       <div
         className={[
@@ -126,6 +134,7 @@
           isDev ? classes.devWrapper : '',
           !isEmpty && !variable ? classes.hasContent : '',
         ].join(' ')}
+        data-component={testingTag()}
       >
         <MediaComponent />
       </div>

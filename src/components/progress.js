@@ -18,6 +18,7 @@
       maxValue,
       thickness,
       size,
+      testing,
     } = options;
 
     const [open, setOpen] = useState(visible);
@@ -57,6 +58,13 @@
       classNames.colorPrimary = classes.normalColor;
     }
 
+    function testingTag() {
+      if (testing && testing.length > 0) {
+        return `progress|${useText(testing)}`;
+      }
+      return 'progress';
+    }
+
     const ProgressCmp = (
       <Progress
         classes={classNames}
@@ -65,6 +73,7 @@
         valueBuffer={currentValueBuffer}
         thickness={useText(thickness)}
         size={useText(size)}
+        data-component={testingTag()}
       />
     );
 

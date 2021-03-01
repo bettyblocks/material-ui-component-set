@@ -15,6 +15,7 @@
       alignment,
       showAllTabs,
       hideTabs,
+      testing,
     } = options;
 
     const orientation =
@@ -94,8 +95,15 @@
       </Tabs>
     );
 
+    function testingTag() {
+      if (testing && testing.length > 0) {
+        return `tabs|${useText(testing)}`;
+      }
+      return 'tabs';
+    }
+
     const TabGroup = (
-      <div className={classes.tabs}>
+      <div className={classes.tabs} data-component={testingTag()}>
         {!hideTabs && TabsHeader}
         {React.Children.map(children, (child, index) => {
           const { options: childOptions = {} } = child.props || {};

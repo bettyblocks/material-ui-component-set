@@ -16,6 +16,7 @@
       imgUrl,
       avatartype,
       size,
+      testing,
     } = options;
     const isDev = env === 'dev';
 
@@ -29,12 +30,20 @@
       AvatarComponent = AvatarImage;
     }
 
+    function testingTag() {
+      if (testing && testing.length > 0) {
+        return `chip|${useText(testing)}`;
+      }
+      return 'chip';
+    }
+
     const ChipComponent = (
       <Chip
         className={[
           classes.root,
           variant === 'default' ? classes.chip : classes.outlined,
         ].join(' ')}
+        data-component={testingTag()}
         label={useText(label)}
         disabled={disabled}
         variant={variant}

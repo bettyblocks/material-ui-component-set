@@ -7,7 +7,14 @@
     const { Typography, Box } = window.MaterialUI.Core;
     const { env, useText } = B;
     const isDev = env === 'dev';
-    const { label, icon, disabled, disableRipple, iconAlignment } = options;
+    const {
+      label,
+      icon,
+      disabled,
+      disableRipple,
+      iconAlignment,
+      testing,
+    } = options;
     const {
       value,
       tabData,
@@ -33,6 +40,13 @@
       );
     };
 
+    function testingTag() {
+      if (testing && testing.length > 0) {
+        return `tab|${useText(testing)}`;
+      }
+      return 'tab';
+    }
+
     const TabPanel = (isActive || !isDev) && (
       <Typography
         component="div"
@@ -40,6 +54,7 @@
         hidden={!isActive}
         aria-labelledby="tabs"
         classes={{ root: classes.root }}
+        data-component={testingTag()}
       >
         {children.length === 0 ? <EmptyBox /> : children}
       </Typography>
