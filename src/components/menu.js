@@ -37,6 +37,8 @@
     const paperRef = useRef(null);
     const [menuPosition, setMenuPosition] = useState({ top: 0, left: 0 });
 
+    B.defineFunction('Close', () => setIsOpen(false));
+
     const getDevPlacement = (anchorRef, menuRef, position) => {
       let top = 0;
       let left = 0;
