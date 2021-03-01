@@ -36,7 +36,7 @@
     );
     function testingTag() {
       if (testing && testing.length > 0) {
-        return `dialog|${useText(testing)}`;
+        return useText(testing);
       }
       return 'dialog';
     }

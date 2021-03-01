@@ -21,7 +21,7 @@
 
     function testingTag() {
       if (testing && testing.length > 0) {
-        return `cardheader|${useText(testing)}`;
+        return useText(testing);
       }
       return 'cardheader';
     }

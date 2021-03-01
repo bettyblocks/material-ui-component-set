@@ -22,7 +22,7 @@
 
     function testingTag() {
       if (testing && testing.length > 0) {
-        return `cardactions|${useText(testing)}`;
+        return useText(testing);
       }
       return 'cardactions';
     }

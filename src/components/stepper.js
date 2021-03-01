@@ -70,7 +70,7 @@
 
     function testingTag() {
       if (testing && testing.length > 0) {
-        return `stepper|${useText(testing)}`;
+        return useText(testing);
       }
       return 'stepper';
     }

@@ -60,7 +60,7 @@
 
     function testingTag() {
       if (testing && testing.length > 0) {
-        return `progress|${useText(testing)}`;
+        return useText(testing);
       }
       return 'progress';
     }

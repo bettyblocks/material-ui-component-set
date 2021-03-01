@@ -32,7 +32,7 @@
 
     function testingTag() {
       if (testing && testing.length > 0) {
-        return `chip|${useText(testing)}`;
+        return useText(testing);
       }
       return 'chip';
     }

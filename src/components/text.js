@@ -54,7 +54,7 @@
 
     function testingTag() {
       if (testing && testing.length > 0) {
-        return `text|${useText(testing)}`;
+        return useText(testing);
       }
       return 'text';
     }

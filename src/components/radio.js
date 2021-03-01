@@ -190,7 +190,7 @@
 
     function testingTag() {
       if (testing && testing.length > 0) {
-        return `radio|${useText(testing)}`;
+        return useText(testing);
       }
       return 'radio';
     }

@@ -9,7 +9,7 @@
 
     function testingTag() {
       if (testing && testing.length > 0) {
-        return `divider|${useText(testing)}`;
+        return useText(testing);
       }
       return 'divider';
     }

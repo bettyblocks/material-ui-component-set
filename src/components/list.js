@@ -25,7 +25,7 @@
 
     function testingTag() {
       if (testing && testing.length > 0) {
-        return `list|${useText(testing)}`;
+        return useText(testing);
       }
       return 'list';
     }

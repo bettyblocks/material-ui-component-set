@@ -162,7 +162,7 @@
 
     function testingTag() {
       if (testing && testing.length > 0) {
-        return `checkboxgroup|${useText(testing)}`;
+        return useText(testing);
       }
       return 'checkboxgroup';
     }

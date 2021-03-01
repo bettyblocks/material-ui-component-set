@@ -30,7 +30,7 @@
 
     function testingTag() {
       if (testing && testing.length > 0) {
-        return `card|${useText(testing)}`;
+        return useText(testing);
       }
       return 'card';
     }

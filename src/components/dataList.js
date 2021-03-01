@@ -52,7 +52,7 @@
 
         function testingTag() {
           if (testing && testing.length > 0) {
-            return `datalist|${useText(testing)}`;
+            return useText(testing);
           }
           return 'datalist';
         }

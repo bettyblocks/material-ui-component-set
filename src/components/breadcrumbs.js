@@ -45,7 +45,7 @@
 
     function testingTag() {
       if (testing && testing.length > 0) {
-        return `breadcrumbs|${useText(testing)}`;
+        return useText(testing);
       }
       return 'breadcrumbs';
     }

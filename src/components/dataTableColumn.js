@@ -121,7 +121,7 @@
 
     function testingTag() {
       if (testing && testing.length > 0) {
-        return `datatablecolumn|${useText(testing)}`;
+        return useText(testing);
       }
       return 'datatablecolumn';
     }

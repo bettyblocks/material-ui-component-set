@@ -34,7 +34,7 @@
 
     function testingTag() {
       if (testing && testing.length > 0) {
-        return `icon|${useText(testing)}`;
+        return useText(testing);
       }
       return 'icon';
     }

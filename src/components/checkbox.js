@@ -77,7 +77,7 @@
 
     function testingTag() {
       if (testing && testing.length > 0) {
-        return `checkbox|${useText(testing)}`;
+        return useText(testing);
       }
       return 'checkbox';
     }

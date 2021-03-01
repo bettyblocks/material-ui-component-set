@@ -102,7 +102,7 @@
 
     function testingTag() {
       if (testing && testing.length > 0) {
-        return `snackbar|${useText(testing)}`;
+        return useText(testing);
       }
       return 'snackbar';
     }

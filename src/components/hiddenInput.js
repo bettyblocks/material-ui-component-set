@@ -33,7 +33,7 @@
 
     function testingTag() {
       if (testing && testing.length > 0) {
-        return `hiddeninput|${useText(testing)}`;
+        return useText(testing);
       }
       return 'hiddeninput';
     }

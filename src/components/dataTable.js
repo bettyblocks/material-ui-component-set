@@ -159,7 +159,7 @@
 
     function testingTag() {
       if (testing && testing.length > 0) {
-        return `datatable|${useText(testing)}`;
+        return useText(testing);
       }
       return 'datatable';
     }

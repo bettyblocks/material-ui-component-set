@@ -157,7 +157,7 @@
 
     function testingTag() {
       if (testing && testing.length > 0) {
-        return `menu|${useText(testing)}`;
+        return useText(testing);
       }
       return 'menu';
     }

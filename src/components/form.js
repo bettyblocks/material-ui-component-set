@@ -128,7 +128,7 @@
 
         function testingTag() {
           if (testing && testing.length > 0) {
-            return `form|${useText(testing)}`;
+            return useText(testing);
           }
           return 'form';
         }

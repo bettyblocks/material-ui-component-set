@@ -97,7 +97,7 @@
 
     function testingTag() {
       if (testing && testing.length > 0) {
-        return `tabs|${useText(testing)}`;
+        return useText(testing);
       }
       return 'tabs';
     }

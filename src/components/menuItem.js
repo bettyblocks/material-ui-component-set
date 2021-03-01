@@ -90,7 +90,7 @@
 
     function testingTag() {
       if (testing && testing.length > 0) {
-        return `menuitem|${useText(testing)}`;
+        return useText(testing);
       }
       return 'menuitem';
     }

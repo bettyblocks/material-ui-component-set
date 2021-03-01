@@ -132,7 +132,7 @@
 
     function testingTag() {
       if (testing && testing.length > 0) {
-        return `datetimepicker|${useText(testing)}`;
+        return useText(testing);
       }
       return 'datetimepicker';
     }

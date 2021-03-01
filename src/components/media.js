@@ -122,7 +122,7 @@
 
     function testingTag() {
       if (testing && testing.length > 0) {
-        return `button|${useText(testing)}`;
+        return useText(testing);
       }
       return 'button';
     }

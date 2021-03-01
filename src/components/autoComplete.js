@@ -311,7 +311,7 @@
 
     function testingTag() {
       if (testing && testing.length > 0) {
-        return `autocomplete|${useText(testing)}`;
+        return useText(testing);
       }
       return 'autocomplete';
     }
