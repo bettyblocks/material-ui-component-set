@@ -27,16 +27,8 @@
           redirectWithoutResult,
           showError,
           currentRecord,
-          testing,
         } = options;
         const displayError = showError === 'built-in';
-
-        function testingTag() {
-          if (testing && testing.length > 0) {
-            return `datacontainer|${useText(testing)}`;
-          }
-          return 'datacontainer';
-        }
 
         const BuilderLayout = () => {
           B.defineFunction('Refetch', () => {});
