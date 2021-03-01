@@ -16,12 +16,15 @@ function login({
   event: Event;
   redirectTo: Page;
 }): void {
-  const { isValid, jwtToken, refreshToken } = event;
-  const { url } = redirectTo;
+  if (event) {
+    const isValid = event.isValid || false;
+    const url = redirectTo.url || location.pathname;
 
-  if (isValid) {
-    localStorage.setItem('TOKEN', jwtToken);
-    localStorage.setItem('REFRESH_TOKEN', refreshToken);
-    window.location.href = url;
+    if (isValid) {
+      const { jwtToken, refreshToken } = event;
+      localStorage.setItem('TOKEN', jwtToken);
+      localStorage.setItem('REFRESH_TOKEN', refreshToken);
+      window.location.href = url;
+    }
   }
 }
