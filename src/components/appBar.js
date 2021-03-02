@@ -78,6 +78,7 @@
                   keepMounted
                   onClose={handleClose}
                   classes={{ paper: classes.paper }}
+                  PopoverClasses={{ root: classes.popover }}
                 >
                   {React.Children.map(children, child => (
                     <MenuItem
@@ -124,6 +125,9 @@
         [`@media ${mediaMinWidth(600)}`]: {
           display: 'none',
         },
+      },
+      popover: {
+        zIndex: 'unset !important',
       },
       logo: {
         width: ({ options: { logoWidth } }) => logoWidth,

@@ -6,6 +6,7 @@
   jsx: (() => {
     const {
       Button,
+      Grow,
       IconButton,
       Popper,
       Paper,
@@ -34,6 +35,7 @@
     const buttonContent = useText(buttonText);
     const [isOpen, setIsOpen] = useState(false);
     const buttonRef = useRef(null);
+    const [anchorEl, setAnchorEl] = useState(null);
     const paperRef = useRef(null);
     const [menuPosition, setMenuPosition] = useState({ top: 0, left: 0 });
 
@@ -100,7 +102,7 @@
     };
 
     useEffect(() => {
-      if (isDev && buttonRef.current) {
+      if (isDev && anchorEl) {
         setIsOpen(true);
       }
     }, []);
@@ -138,19 +140,25 @@
     const compProps = isIcon ? iconButtonProps : buttonProps;
     const ButtonComp = isIcon ? IconButton : Button;
 
-    const handleToggle = () => {
+    const handleToggle = e => {
       if (isDev) return;
+
+      let { currentTarget } = e;
+      if (
+        currentTarget &&
+        currentTarget.parentElement.classList.contains('MuiListItem-root')
+      ) {
+        currentTarget = currentTarget.parentElement;
+      }
+      setAnchorEl(prevTarget => (prevTarget ? null : currentTarget));
       setIsOpen(prevOpen => !prevOpen);
     };
 
-    const handleClose = event => {
-      if (
-        isDev ||
-        (buttonRef.current && buttonRef.current.contains(event.target))
-      ) {
+    const handleClose = e => {
+      if (isDev || (anchorEl && anchorEl.contains(e.target))) {
         return;
       }
-
+      setAnchorEl(null);
       setIsOpen(false);
     };
 
@@ -186,20 +194,22 @@
         {!isDev ? (
           <Popper
             open={isOpen}
-            anchorEl={buttonRef.current}
+            anchorEl={anchorEl}
             role={undefined}
             disablePortal={false}
             placement={placement}
           >
-            <Paper className={classes.paper}>
-              <ClickAwayListener onClickAway={handleClose}>
-                <MenuList autoFocusItem={isOpen}>
-                  {React.Children.map(children, child =>
-                    React.cloneElement(child, { onClick: handleClose }),
-                  )}
-                </MenuList>
-              </ClickAwayListener>
-            </Paper>
+            <Grow in={isOpen} style={{ transformOrigin: '0 0 0' }}>
+              <Paper className={classes.paper}>
+                <ClickAwayListener onClickAway={handleClose}>
+                  <MenuList autoFocusItem={isOpen}>
+                    {React.Children.map(children, child =>
+                      React.cloneElement(child, { onClick: handleClose }),
+                    )}
+                  </MenuList>
+                </ClickAwayListener>
+              </Paper>
+            </Grow>
           </Popper>
         ) : (
           isMenuListVisible && (
