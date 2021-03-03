@@ -101,10 +101,34 @@
       return { top, left };
     };
 
+    const getHighestZ = () => {
+      let highestZ = 0;
+      const divs = document.getElementsByTagName('div');
+      // eslint-disable-next-line no-restricted-syntax
+      for (const element of divs) {
+        const { position, visibility, zIndex } = getComputedStyle(element);
+        const elementZIndex = element.style.zIndex || zIndex;
+        if (position && elementZIndex && visibility !== 'hidden') {
+          const index = parseInt(elementZIndex, 10);
+          if (index > highestZ) {
+            highestZ = index;
+          }
+        }
+      }
+
+      return highestZ;
+    };
+
     useEffect(() => {
       if (isDev && anchorEl) {
         setIsOpen(true);
       }
+
+      let ref = buttonRef.current;
+      if (ref && ref.parentElement.classList.contains('MuiListItem-root')) {
+        ref = ref.parentElement;
+      }
+      setAnchorEl(ref);
     }, []);
 
     useEffect(() => {
@@ -140,17 +164,9 @@
     const compProps = isIcon ? iconButtonProps : buttonProps;
     const ButtonComp = isIcon ? IconButton : Button;
 
-    const handleToggle = e => {
+    const handleToggle = () => {
       if (isDev) return;
 
-      let { currentTarget } = e;
-      if (
-        currentTarget &&
-        currentTarget.parentElement.classList.contains('MuiListItem-root')
-      ) {
-        currentTarget = currentTarget.parentElement;
-      }
-      setAnchorEl(prevTarget => (prevTarget ? null : currentTarget));
       setIsOpen(prevOpen => !prevOpen);
     };
 
@@ -158,7 +174,7 @@
       if (isDev || (anchorEl && anchorEl.contains(e.target))) {
         return;
       }
-      setAnchorEl(null);
+
       setIsOpen(false);
     };
 
@@ -179,6 +195,7 @@
           React.createElement(Icons[icon])
         }
         onClick={handleToggle}
+        onTouchEnd={e => e.stopPropagation()}
       >
         {isIcon &&
           React.createElement(Icons[icon === 'None' ? 'Error' : icon], {
@@ -198,6 +215,7 @@
             role={undefined}
             disablePortal={false}
             placement={placement}
+            style={{ ...(!isDev && { zIndex: getHighestZ() + 1 }) }}
           >
             <Grow in={isOpen} style={{ transformOrigin: '0 0 0' }}>
               <Paper className={classes.paper}>
