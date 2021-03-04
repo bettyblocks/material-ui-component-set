@@ -68,28 +68,31 @@
           <div className={classes.spacer} />
           {!isDev && !!children.length ? (
             <>
-              <div className={classes.collapsed}>
-                <IconButton color="inherit" onClick={handleMenu}>
-                  <MenuIcon />
-                </IconButton>
-                <Menu
-                  anchorEl={anchorEl}
-                  open={isOpen}
-                  keepMounted
-                  onClose={handleClose}
-                  classes={{ paper: classes.paper }}
-                >
-                  {React.Children.map(children, child => (
-                    <MenuItem
-                      className={classes.menuItem}
-                      onTouchEnd={handleClose}
-                    >
-                      {child}
-                    </MenuItem>
-                  ))}
-                </Menu>
-              </div>
-              <div className={classes.uncollapsed}>{children}</div>
+              {window.matchMedia().matches ? (
+                <div className={classes.collapsed}>
+                  <IconButton color="inherit" onClick={handleMenu}>
+                    <MenuIcon />
+                  </IconButton>
+                  <Menu
+                    anchorEl={anchorEl}
+                    open={isOpen}
+                    keepMounted
+                    onClose={handleClose}
+                    classes={{ paper: classes.paper }}
+                  >
+                    {React.Children.map(children, child => (
+                      <MenuItem
+                        className={classes.menuItem}
+                        onTouchEnd={handleClose}
+                      >
+                        {child}
+                      </MenuItem>
+                    ))}
+                  </Menu>
+                </div>
+              ) : (
+                <div className={classes.uncollapsed}>{children}</div>
+              )}
             </>
           ) : (
             <div>{children}</div>
