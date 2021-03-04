@@ -103,7 +103,7 @@
 
     const getHighestZ = () => {
       let highestZ = 0;
-      const divs = document.getElementsByTagName('div');
+      const divs = document.getElementsByTagName('*');
       // eslint-disable-next-line no-restricted-syntax
       for (const element of divs) {
         const { position, visibility, zIndex } = getComputedStyle(element);
@@ -128,6 +128,7 @@
       if (ref && ref.parentElement.classList.contains('MuiListItem-root')) {
         ref = ref.parentElement;
       }
+
       setAnchorEl(ref);
     }, []);
 
