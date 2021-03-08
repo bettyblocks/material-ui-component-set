@@ -1,3 +1,10 @@
+# [1.112.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.111.4...v1.112.0) (2021-03-08)
+
+
+### Features
+
+* **ta-2207:** adds outer spacing to card component ([26ee6cb](https://github.com/bettyblocks/material-ui-component-set/commit/26ee6cb7a27db7931b91a120c3f7dfcb68e92213))
+
 ## [1.111.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.111.3...v1.111.4) (2021-02-26)
 
 
