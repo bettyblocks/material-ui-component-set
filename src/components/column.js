@@ -30,7 +30,8 @@
     </div>
   ),
   styles: B => theme => {
-    const { mediaMinWidth, Styling } = B;
+    const { env, mediaMinWidth, Styling } = B;
+    const isDev = env === 'dev';
     const style = new Styling(theme);
     const getSpacing = (idx, device = 'Mobile') =>
       idx === '0' ? '0rem' : style.getSpacing(idx, device);
@@ -106,8 +107,7 @@
         borderColor: 'transparent',
         borderStyle: 'none',
         borderRadius: 0,
-        overflow: ({ options: { overflow } }) =>
-          overflow ? 'visible' : 'auto',
+        overflow: isDev ? 'unset' : 'auto',
         boxSizing: 'border-box',
         [`@media ${mediaMinWidth(600)}`]: {
           display: ({
