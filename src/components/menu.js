@@ -29,7 +29,7 @@
       variant,
     } = options;
 
-    const { env, useText } = B;
+    const { Children, env, useText } = B;
     const isDev = env === 'dev';
     const isIcon = variant === 'icon';
     const buttonContent = useText(buttonText);
@@ -99,24 +99,6 @@
       }
 
       return { top, left };
-    };
-
-    const getHighestZ = () => {
-      let highestZ = 0;
-      const divs = document.getElementsByTagName('*');
-      // eslint-disable-next-line no-restricted-syntax
-      for (const element of divs) {
-        const { position, visibility, zIndex } = getComputedStyle(element);
-        const elementZIndex = element.style.zIndex || zIndex;
-        if (position && elementZIndex && visibility !== 'hidden') {
-          const index = parseInt(elementZIndex, 10);
-          if (index > highestZ) {
-            highestZ = index;
-          }
-        }
-      }
-
-      return highestZ;
     };
 
     useEffect(() => {
@@ -211,20 +193,18 @@
         {ButtonComponent}
         {!isDev ? (
           <Popper
+            className={classes.popper}
             open={isOpen}
             anchorEl={anchorEl}
             role={undefined}
             disablePortal={false}
             placement={placement}
-            style={{ ...(!isDev && { zIndex: getHighestZ() + 1 }) }}
           >
             <Grow in={isOpen} style={{ transformOrigin: '0 0 0' }}>
               <Paper className={classes.paper}>
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList autoFocusItem={isOpen}>
-                    {React.Children.map(children, child =>
-                      React.cloneElement(child, { onClick: handleClose }),
-                    )}
+                    <Children onClick={handleClose}>{children}</Children>
                   </MenuList>
                 </ClickAwayListener>
               </Paper>
@@ -352,6 +332,9 @@
           !disabled ? style.getColor(background) : 'rgba(0, 0, 0, .12)',
           '!important',
         ],
+      },
+      popper: {
+        zIndex: 3500,
       },
       paper: {
         minWidth: '5rem',
