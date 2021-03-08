@@ -24,15 +24,13 @@
       );
 
     return (
-      <div className={classes.listWrapper}>
-        <List
-          classes={{ root: classes.root }}
-          disablePadding={disablePadding}
-          dense={dense}
-        >
-          {renderData()}
-        </List>
-      </div>
+      <List
+        classes={{ root: classes.root }}
+        disablePadding={disablePadding}
+        dense={dense}
+      >
+        {renderData()}
+      </List>
     );
   })(),
   styles: B => theme => {
@@ -44,15 +42,15 @@
       root: {
         backgroundColor: ({ options: { backgroundColor } }) =>
           style.getColor(backgroundColor),
-      },
-      listWrapper: {
-        margin: ({ options: { outerSpacing } }) =>
-          [
-            getSpacing(outerSpacing[0]),
-            getSpacing(outerSpacing[1]),
-            getSpacing(outerSpacing[2]),
-            getSpacing(outerSpacing[3]),
-          ].join(' '),
+        '&.MuiList-root': {
+          margin: ({ options: { outerSpacing } }) =>
+            [
+              getSpacing(outerSpacing[0]),
+              getSpacing(outerSpacing[1]),
+              getSpacing(outerSpacing[2]),
+              getSpacing(outerSpacing[3]),
+            ].join(' '),
+        },
       },
       empty: {
         display: 'flex',
