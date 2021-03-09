@@ -15,8 +15,6 @@
       setIsVisible(visible);
     }, []);
 
-    console.log(visible);
-
     B.defineFunction('Hide', () => setIsVisible(false));
     B.defineFunction('Show', () => setIsVisible(true));
     B.defineFunction('Show/Hide', () => setIsVisible(s => !s));
