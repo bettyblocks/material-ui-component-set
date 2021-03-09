@@ -20,6 +20,7 @@
       openLinkToExternal,
       primaryText,
     } = options;
+    const { onClick } = parent;
     const {
       env,
       getModel,
@@ -98,7 +99,7 @@
         endpoint={hasLink ? linkTo : undefined}
         target={hasExternalLink ? openLinkToExternal : undefined}
         onClick={e => {
-          e.stopPropagation();
+          if (onClick) onClick(e);
           actionCallback();
         }}
       >
