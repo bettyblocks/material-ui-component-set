@@ -1,3 +1,17 @@
+# [1.113.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.112.0...v1.113.0) (2021-03-09)
+
+
+### Features
+
+* **ta-2319:** adds switch component icon ([021db47](https://github.com/bettyblocks/material-ui-component-set/commit/021db47d962c804158529a4c0e6f5eb8d6d638d5))
+
+# [1.112.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.111.4...v1.112.0) (2021-03-08)
+
+
+### Features
+
+* **ta-2207:** adds outer spacing to card component ([26ee6cb](https://github.com/bettyblocks/material-ui-component-set/commit/26ee6cb7a27db7931b91a120c3f7dfcb68e92213))
+
 ## [1.111.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.111.3...v1.111.4) (2021-02-26)
 
 
