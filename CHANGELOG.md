@@ -1,3 +1,17 @@
+# [1.114.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.113.0...v1.114.0) (2021-03-09)
+
+
+### Features
+
+* **ta-2208:** adds outer spacing to list component ([6ed1704](https://github.com/bettyblocks/material-ui-component-set/commit/6ed1704886a91f83a559543ea9519286666b79bb))
+
+# [1.113.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.112.0...v1.113.0) (2021-03-09)
+
+
+### Features
+
+* **ta-2319:** adds switch component icon ([021db47](https://github.com/bettyblocks/material-ui-component-set/commit/021db47d962c804158529a4c0e6f5eb8d6d638d5))
+
 # [1.112.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.111.4...v1.112.0) (2021-03-08)
 
 
