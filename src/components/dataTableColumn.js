@@ -23,7 +23,7 @@
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
     const contentPlaceholder = isDev && isEmpty ? 'Select property' : '\u00A0';
-    const kindBoolean = kind === 'boolean' || kind === 'BOOLEAN';
+    const isBooleanProperty = kind === 'boolean' || kind === 'BOOLEAN';
 
     let myEndpoint = null;
     if (linkTo) {
@@ -31,7 +31,7 @@
     }
 
     let checkboxStatus = '';
-    if (kindBoolean && useText([property]))
+    if (isBooleanProperty && useText([property]))
       checkboxStatus =
         useText([property]) === 'true' ? (
           <span className={classes.checked} role="img" aria-label="checked">
@@ -46,7 +46,7 @@
     const propContent = isDev ? (
       `{{ ${propertyName} }}`
     ) : (
-      <>{!kindBoolean ? <Property id={property} /> : checkboxStatus}</>
+      <>{!isBooleanProperty ? <Property id={property} /> : checkboxStatus}</>
     );
 
     let columnText = propertyName ? propContent : contentPlaceholder;
