@@ -17,23 +17,36 @@
       parent || {};
     const { type } = property;
     const propertyArray = [property].flat();
-    const { name: propertyName, label: propertyLabel } =
+    const { kind, name: propertyName, label: propertyLabel } =
       getProperty(property) || {};
     const { field, order = 'asc' } = orderBy || {};
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
     const contentPlaceholder = isDev && isEmpty ? 'Select property' : '\u00A0';
+    const kindBoolean = kind === 'boolean' || kind === 'BOOLEAN';
 
     let myEndpoint = null;
     if (linkTo) {
       myEndpoint = useEndpoint(linkTo);
     }
 
+    let checkboxStatus = '';
+    if (kindBoolean && useText([property]))
+      checkboxStatus =
+        useText([property]) === 'true' ? (
+          <span className={classes.checked} role="img" aria-label="checked">
+            &#10003;
+          </span>
+        ) : (
+          <span className={classes.unchecked} role="img" aria-label="unchecked">
+            &#10007;
+          </span>
+        );
     const bodyText = useText(content);
     const propContent = isDev ? (
       `{{ ${propertyName} }}`
     ) : (
-      <Property id={property} />
+      <>{!kindBoolean ? <Property id={property} /> : checkboxStatus}</>
     );
 
     let columnText = propertyName ? propContent : contentPlaceholder;
@@ -219,6 +232,12 @@
         '& .MuiSvgIcon-root': {
           opacity: isDev && 0.5,
         },
+      },
+      checked: {
+        color: 'green',
+      },
+      unchecked: {
+        color: 'red',
       },
     };
   },
