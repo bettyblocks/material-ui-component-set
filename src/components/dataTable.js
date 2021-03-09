@@ -164,6 +164,19 @@
         variables,
         skip: loadOnScroll ? skip : page * rowsPerPage,
         take: loadOnScroll ? autoLoadTakeAmountNum : rowsPerPage,
+        onCompleted(res) {
+          const hasResult = res && res.result && res.result.length > 0;
+          if (hasResult) {
+            B.triggerEvent('onSuccess', res.results);
+          } else {
+            B.triggerEvent('onNoResults');
+          }
+        },
+        onError(err) {
+          if (!displayError) {
+            B.triggerEvent('onError', err);
+          }
+        },
       });
 
     useEffect(() => {
@@ -271,16 +284,6 @@
         B.triggerEvent('onLoad', loading);
       }
     }, [loading]);
-
-    if (error && !displayError) {
-      B.triggerEvent('onError', error);
-    }
-
-    if (results.length > 0) {
-      B.triggerEvent('onSuccess', results);
-    } else {
-      B.triggerEvent('onNoResults');
-    }
 
     const handleChangePage = (_, newPage) => {
       if (loading || error) return;

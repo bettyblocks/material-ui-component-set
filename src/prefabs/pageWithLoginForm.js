@@ -7086,12 +7086,6 @@
               key: 'innerSpacing',
               type: 'SIZES',
             },
-            {
-              type: 'TOGGLE',
-              label: 'Allow overflow',
-              key: 'overflow',
-              value: false,
-            },
           ],
           descendants: [
             {
@@ -7566,7 +7560,7 @@
                           type: 'VARIABLE',
                           label: 'Button text',
                           key: 'buttonText',
-                          value: ['Send'],
+                          value: ['Login'],
                         },
                         {
                           type: 'CUSTOM',

@@ -5,7 +5,7 @@
   orientation: 'VERTICAL',
   jsx: (() => {
     const { Typography, Box } = window.MaterialUI.Core;
-    const { env, useText } = B;
+    const { env } = B;
     const isDev = env === 'dev';
     const { label, icon, disabled, disableRipple, iconAlignment } = options;
     const {
@@ -45,12 +45,8 @@
       </Typography>
     );
 
-    const labelChanged = () => {
-      const currentLabel = tabData[`label${index}`]
-        ? useText(tabData[`label${index}`])
-        : '';
-      return currentLabel !== useText(label);
-    };
+    const labelChanged = () =>
+      JSON.stringify(tabData[`label${index}`] || '') !== JSON.stringify(label);
 
     const iconChanged = () => tabData[`icon${index}`] !== icon;
 
