@@ -1,3 +1,10 @@
+# [1.114.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.113.0...v1.114.0) (2021-03-09)
+
+
+### Features
+
+* **ta-2208:** adds outer spacing to list component ([6ed1704](https://github.com/bettyblocks/material-ui-component-set/commit/6ed1704886a91f83a559543ea9519286666b79bb))
+
 # [1.113.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.112.0...v1.113.0) (2021-03-09)
 
 
