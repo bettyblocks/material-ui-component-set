@@ -33,6 +33,9 @@
     B.defineFunction('Expand', openPanel);
     B.defineFunction('Collapse', closePanel);
     B.defineFunction('Expand/Collapse', togglePanel);
+    B.defineFunction('Set Expansion Panel', value => {
+      if (typeof value === 'boolean') setExpanded(value);
+    });
 
     useEffect(() => {
       if (isDev) {
