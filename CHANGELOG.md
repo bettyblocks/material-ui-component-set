@@ -1,3 +1,10 @@
+## [1.114.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.114.0...v1.114.1) (2021-03-09)
+
+
+### Bug Fixes
+
+* **ta-2311:** fixes overlapping menu items ([278520f](https://github.com/bettyblocks/material-ui-component-set/commit/278520f175be207c998426b9779d57f5471b0ca4))
+
 # [1.114.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.113.0...v1.114.0) (2021-03-09)
 
 
