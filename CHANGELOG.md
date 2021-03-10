@@ -1,3 +1,10 @@
+## [1.114.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.114.1...v1.114.2) (2021-03-10)
+
+
+### Bug Fixes
+
+* columns can now handle show and hide interactions ([f7bd4ed](https://github.com/bettyblocks/material-ui-component-set/commit/f7bd4ed1caaae5a327c8b23c1f5c871b66716eee))
+
 ## [1.114.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.114.0...v1.114.1) (2021-03-09)
 
 
