@@ -1,7 +1,54 @@
 (() => ({
-  name: 'SubmitButton',
-  icon: 'SubmitButtonIcon',
-  category: 'FORM',
+  name: 'openPage',
+  icon: 'OpenPageIcon',
+  category: 'BUTTON',
+  beforeCreate: ({
+    prefab,
+    save,
+    close,
+    components: { EndpointSelector, Header, Content, Field, Footer, Text },
+  }) => {
+    const [endpoint, setEndpoint] = React.useState({
+      id: '',
+      pageId: '',
+      params: {},
+    });
+    const [showValidation, setShowValidation] = React.useState(false);
+
+    React.useEffect(() => {
+      if (showValidation && endpoint.id.length) setShowValidation(false);
+    }, [endpoint, showValidation, setShowValidation]);
+
+    const onSaveHandler = () => {
+      if (!endpoint.id.length) {
+        setShowValidation(true);
+        return;
+      }
+      const newPrefab = { ...prefab };
+      newPrefab.structure[0].options[4].value = endpoint;
+      save(newPrefab);
+    };
+
+    return (
+      <>
+        <Header onClose={close} title="Configure open page button" />
+        <Content>
+          <Field
+            label="Link to"
+            error={
+              showValidation && <Text color="#e82600">Page is required</Text>
+            }
+          >
+            <EndpointSelector
+              value={endpoint}
+              onChange={value => setEndpoint(value)}
+            />
+          </Field>
+        </Content>
+        <Footer onClose={close} onSave={onSaveHandler} />
+      </>
+    );
+  },
   structure: [
     {
       name: 'Button',
@@ -17,27 +64,6 @@
         },
         {
           type: 'CUSTOM',
-          label: 'type',
-          key: 'type',
-          value: 'submit',
-          configuration: {
-            as: 'BUTTONGROUP',
-            dataType: 'string',
-            allowedInput: [
-              { name: 'Submit', value: 'submit' },
-              { name: 'Reset', value: 'reset' },
-            ],
-          },
-        },
-        {
-          type: 'VARIABLE',
-          label: 'Button text',
-          key: 'buttonText',
-          value: ['Send'],
-        },
-
-        {
-          type: 'CUSTOM',
           label: 'variant',
           key: 'variant',
           value: 'contained',
@@ -47,8 +73,117 @@
             allowedInput: [
               { name: 'Text', value: 'text' },
               { name: 'Outlined', value: 'outlined' },
-              { name: 'Contained', value: 'contained' },
+              { name: 'Contain', value: 'contained' },
+              { name: 'Icon', value: 'icon' },
             ],
+          },
+        },
+        {
+          type: 'VARIABLE',
+          label: 'Button text',
+          key: 'buttonText',
+          value: ['Open page'],
+          configuration: {
+            condition: {
+              type: 'HIDE',
+              option: 'variant',
+              comparator: 'EQ',
+              value: 'icon',
+            },
+          },
+        },
+        {
+          type: 'CUSTOM',
+          label: 'Link to',
+          key: 'linkType',
+          value: 'internal',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Internal page', value: 'internal' },
+              { name: 'External page', value: 'external' },
+              { name: 'Action', value: 'action' },
+            ],
+          },
+        },
+        {
+          value: '',
+          label: 'Page',
+          key: 'linkTo',
+          type: 'ENDPOINT',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'linkType',
+              comparator: 'EQ',
+              value: 'internal',
+            },
+          },
+        },
+        {
+          value: [''],
+          label: 'URL',
+          key: 'linkToExternal',
+          type: 'VARIABLE',
+          configuration: {
+            placeholder: 'Starts with https:// or http://',
+            condition: {
+              type: 'SHOW',
+              option: 'linkType',
+              comparator: 'EQ',
+              value: 'external',
+            },
+          },
+        },
+        {
+          value: '_self',
+          label: 'Open in',
+          key: 'openLinkToExternal',
+          type: 'CUSTOM',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'linkType',
+              comparator: 'EQ',
+              value: 'external',
+            },
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Current Tab', value: '_self' },
+              { name: 'New Tab', value: '_blank' },
+            ],
+          },
+        },
+        {
+          value: '',
+          label: 'Action',
+          key: 'actionId',
+          type: 'ACTION',
+          configuration: {
+            apiVersion: 'v1',
+            condition: {
+              type: 'SHOW',
+              option: 'linkType',
+              comparator: 'EQ',
+              value: 'action',
+            },
+          },
+        },
+        {
+          value: [],
+          label: 'Objects to pass to action',
+          key: 'actionModels',
+          type: 'ACTION_INPUT_OBJECTS',
+          configuration: {
+            apiVersion: 'v1',
+            condition: {
+              type: 'SHOW',
+              option: 'linkType',
+              comparator: 'EQ',
+              value: 'action',
+            },
           },
         },
         {
@@ -56,6 +191,14 @@
           label: 'Full width',
           key: 'fullWidth',
           type: 'TOGGLE',
+          configuration: {
+            condition: {
+              type: 'HIDE',
+              option: 'variant',
+              comparator: 'EQ',
+              value: 'icon',
+            },
+          },
         },
         {
           value: 'medium',
@@ -1350,9 +1493,9 @@
             dataType: 'string',
             condition: {
               type: 'HIDE',
-              option: 'icon',
+              option: 'variant',
               comparator: 'EQ',
-              value: 'None',
+              value: 'icon',
             },
             allowedInput: [
               { name: 'Start', value: 'start' },
@@ -1365,12 +1508,20 @@
           label: 'Text color',
           key: 'textColor',
           value: 'White',
+          configuration: {
+            condition: {
+              type: 'HIDE',
+              option: 'variant',
+              comparator: 'EQ',
+              value: 'icon',
+            },
+          },
         },
         {
           type: 'COLOR',
           label: 'Color',
           key: 'background',
-          value: 'Success',
+          value: 'Primary',
         },
         {
           value: ['0rem', 'M', '0rem', '0rem'],
@@ -1389,9 +1540,6 @@
           key: 'addTooltip',
           value: false,
           type: 'TOGGLE',
-          configuration: {
-            as: 'VISIBILITY',
-          },
         },
         {
           label: 'Toggle tooltip visibility',

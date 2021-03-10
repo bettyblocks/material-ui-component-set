@@ -1,10 +1,78 @@
 (() => ({
-  name: 'SubmitButton',
-  icon: 'SubmitButtonIcon',
-  category: 'FORM',
+  name: 'Logout Button',
+  icon: 'LogoutIcon',
+  category: 'BUTTON',
+  beforeCreate: ({
+    prefab,
+    save,
+    close,
+    components: { Header, Content, Field, Footer, Text, EndpointSelector },
+  }) => {
+    const [value, setValue] = React.useState({});
+    const [showValidation, setShowValidation] = React.useState(false);
+
+    function serializeParameters(obj) {
+      return Object.entries(obj).map(([name, entry]) => ({
+        name,
+        value: entry.map(v => JSON.stringify(v)),
+      }));
+    }
+
+    return (
+      <>
+        <Header onClose={close} title="Configure logout button" />
+        <Content>
+          <Field
+            label="Redirect after logout"
+            error={
+              showValidation && (
+                <Text color="#e82600">Selecting a page is required</Text>
+              )
+            }
+          >
+            <EndpointSelector size="large" value={value} onChange={setValue} />
+          </Field>
+        </Content>
+        <Footer
+          onClose={close}
+          onSave={() => {
+            if (!Object.keys(value).length) {
+              setShowValidation(true);
+              return;
+            }
+
+            const newPrefab = { ...prefab };
+            newPrefab.interactions[0].parameters = [
+              {
+                parameter: 'redirectTo',
+                pageId: value.pageId,
+                endpointId: value.id,
+                parameters: serializeParameters(value.params),
+              },
+            ];
+            save(newPrefab);
+          }}
+        />
+      </>
+    );
+  },
+  interactions: [
+    {
+      name: 'logout',
+      sourceEvent: 'Click',
+      type: 'Global',
+      ref: {
+        sourceComponentId: '#logoutButton',
+      },
+      parameters: [],
+    },
+  ],
   structure: [
     {
       name: 'Button',
+      ref: {
+        id: '#logoutButton',
+      },
       options: [
         {
           label: 'Toggle visibility',
@@ -17,27 +85,6 @@
         },
         {
           type: 'CUSTOM',
-          label: 'type',
-          key: 'type',
-          value: 'submit',
-          configuration: {
-            as: 'BUTTONGROUP',
-            dataType: 'string',
-            allowedInput: [
-              { name: 'Submit', value: 'submit' },
-              { name: 'Reset', value: 'reset' },
-            ],
-          },
-        },
-        {
-          type: 'VARIABLE',
-          label: 'Button text',
-          key: 'buttonText',
-          value: ['Send'],
-        },
-
-        {
-          type: 'CUSTOM',
           label: 'variant',
           key: 'variant',
           value: 'contained',
@@ -47,8 +94,117 @@
             allowedInput: [
               { name: 'Text', value: 'text' },
               { name: 'Outlined', value: 'outlined' },
-              { name: 'Contained', value: 'contained' },
+              { name: 'Contain', value: 'contained' },
+              { name: 'Icon', value: 'icon' },
             ],
+          },
+        },
+        {
+          type: 'VARIABLE',
+          label: 'Button text',
+          key: 'buttonText',
+          value: ['Logout'],
+          configuration: {
+            condition: {
+              type: 'HIDE',
+              option: 'variant',
+              comparator: 'EQ',
+              value: 'icon',
+            },
+          },
+        },
+        {
+          type: 'CUSTOM',
+          label: 'Link to',
+          key: 'linkType',
+          value: 'internal',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Internal page', value: 'internal' },
+              { name: 'External page', value: 'external' },
+              { name: 'Action', value: 'action' },
+            ],
+          },
+        },
+        {
+          value: '',
+          label: 'Page',
+          key: 'linkTo',
+          type: 'ENDPOINT',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'linkType',
+              comparator: 'EQ',
+              value: 'internal',
+            },
+          },
+        },
+        {
+          value: [''],
+          label: 'URL',
+          key: 'linkToExternal',
+          type: 'VARIABLE',
+          configuration: {
+            placeholder: 'Starts with https:// or http://',
+            condition: {
+              type: 'SHOW',
+              option: 'linkType',
+              comparator: 'EQ',
+              value: 'external',
+            },
+          },
+        },
+        {
+          value: '_self',
+          label: 'Open in',
+          key: 'openLinkToExternal',
+          type: 'CUSTOM',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'linkType',
+              comparator: 'EQ',
+              value: 'external',
+            },
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Current Tab', value: '_self' },
+              { name: 'New Tab', value: '_blank' },
+            ],
+          },
+        },
+        {
+          value: '',
+          label: 'Action',
+          key: 'actionId',
+          type: 'ACTION',
+          configuration: {
+            apiVersion: 'v1',
+            condition: {
+              type: 'SHOW',
+              option: 'linkType',
+              comparator: 'EQ',
+              value: 'action',
+            },
+          },
+        },
+        {
+          value: [],
+          label: 'Objects to pass to action',
+          key: 'actionModels',
+          type: 'ACTION_INPUT_OBJECTS',
+          configuration: {
+            apiVersion: 'v1',
+            condition: {
+              type: 'SHOW',
+              option: 'linkType',
+              comparator: 'EQ',
+              value: 'action',
+            },
           },
         },
         {
@@ -56,6 +212,14 @@
           label: 'Full width',
           key: 'fullWidth',
           type: 'TOGGLE',
+          configuration: {
+            condition: {
+              type: 'HIDE',
+              option: 'variant',
+              comparator: 'EQ',
+              value: 'icon',
+            },
+          },
         },
         {
           value: 'medium',
@@ -1350,9 +1514,9 @@
             dataType: 'string',
             condition: {
               type: 'HIDE',
-              option: 'icon',
+              option: 'variant',
               comparator: 'EQ',
-              value: 'None',
+              value: 'icon',
             },
             allowedInput: [
               { name: 'Start', value: 'start' },
@@ -1365,12 +1529,20 @@
           label: 'Text color',
           key: 'textColor',
           value: 'White',
+          configuration: {
+            condition: {
+              type: 'HIDE',
+              option: 'variant',
+              comparator: 'EQ',
+              value: 'icon',
+            },
+          },
         },
         {
           type: 'COLOR',
           label: 'Color',
           key: 'background',
-          value: 'Success',
+          value: 'Primary',
         },
         {
           value: ['0rem', 'M', '0rem', '0rem'],
@@ -1389,9 +1561,6 @@
           key: 'addTooltip',
           value: false,
           type: 'TOGGLE',
-          configuration: {
-            as: 'VISIBILITY',
-          },
         },
         {
           label: 'Toggle tooltip visibility',
