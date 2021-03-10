@@ -85,6 +85,12 @@
           value: false,
         },
         {
+          value: ['0rem', '0rem', '0rem', '0rem'],
+          label: 'Outer space',
+          key: 'outerSpacing',
+          type: 'SIZES',
+        },
+        {
           type: 'TOGGLE',
           label: 'Dense',
           key: 'dense',
