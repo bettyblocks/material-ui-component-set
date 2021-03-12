@@ -32,9 +32,10 @@
         const [, setOptions] = useOptions();
 
         B.defineFunction('setCurrentRecord', value => {
-          if (typeof value === 'number') {
+          const id = Number(value);
+          if (typeof id === 'number') {
             setOptions({
-              currentRecord: value,
+              currentRecord: id,
             });
           }
         });
