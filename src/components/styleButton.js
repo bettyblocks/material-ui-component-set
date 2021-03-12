@@ -14,9 +14,6 @@
     );
   })(),
   styles: () => () => ({
-    root: ({ style }) => ({
-      ...style,
-      padding: '0.5rem 1rem',
-    }),
+    root: ({ style }) => style,
   }),
 }))();
