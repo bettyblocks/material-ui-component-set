@@ -1,3 +1,11 @@
+# [1.117.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.116.0...v1.117.0) (2021-03-15)
+
+
+### Features
+
+* add interactions and triggers ([7f8bd34](https://github.com/bettyblocks/material-ui-component-set/commit/7f8bd349568cd03636063ad39a45f029f00a8ce7))
+* add interactions and triggers ([89b634d](https://github.com/bettyblocks/material-ui-component-set/commit/89b634d0bd5f85719c37a004ffbe71937827cb65))
+
 # [1.116.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.115.0...v1.116.0) (2021-03-15)
 
 
