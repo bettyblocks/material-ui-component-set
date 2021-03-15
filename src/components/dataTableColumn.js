@@ -234,10 +234,10 @@
         },
       },
       checked: {
-        color: 'green',
+        color: style.getColor('Success'),
       },
       unchecked: {
-        color: 'red',
+        color: style.getColor('Danger'),
       },
     };
   },
