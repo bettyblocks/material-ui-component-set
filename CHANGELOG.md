@@ -1,3 +1,32 @@
+# [1.116.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.115.0...v1.116.0) (2021-03-15)
+
+
+### Bug Fixes
+
+* make sure id is actually a number ([bb3ae39](https://github.com/bettyblocks/material-ui-component-set/commit/bb3ae392e5e859e86a8858ed7161a5166ebe0077))
+* show loading state ([de2f30d](https://github.com/bettyblocks/material-ui-component-set/commit/de2f30d863a6c84716d7bb29cd56bd24c2f2ad72))
+
+
+### Features
+
+* select com send current value with trigger event ([4a038c6](https://github.com/bettyblocks/material-ui-component-set/commit/4a038c6b3a1200c3c2fc03ef6b498dec875262fd))
+* send current value with trigger event ([8162948](https://github.com/bettyblocks/material-ui-component-set/commit/8162948678ad6c5a6ae04b59e921cf9e1e1d4e7e))
+* set current record custom interaction ([cc86a6d](https://github.com/bettyblocks/material-ui-component-set/commit/cc86a6db532433488a3895ca610576642fc4a4a1))
+
+# [1.115.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.114.2...v1.115.0) (2021-03-15)
+
+
+### Features
+
+* **ta-2186:** adds dataTable hex checkbox status ([c1019e7](https://github.com/bettyblocks/material-ui-component-set/commit/c1019e7c376b4dbe17fe991b0ea5405ed9e04a39))
+
+## [1.114.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.114.1...v1.114.2) (2021-03-10)
+
+
+### Bug Fixes
+
+* columns can now handle show and hide interactions ([f7bd4ed](https://github.com/bettyblocks/material-ui-component-set/commit/f7bd4ed1caaae5a327c8b23c1f5c871b66716eee))
+
 ## [1.114.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.114.0...v1.114.1) (2021-03-09)
 
 
