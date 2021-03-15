@@ -1,3 +1,17 @@
+# [1.115.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.114.2...v1.115.0) (2021-03-15)
+
+
+### Features
+
+* **ta-2186:** adds dataTable hex checkbox status ([c1019e7](https://github.com/bettyblocks/material-ui-component-set/commit/c1019e7c376b4dbe17fe991b0ea5405ed9e04a39))
+
+## [1.114.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.114.1...v1.114.2) (2021-03-10)
+
+
+### Bug Fixes
+
+* columns can now handle show and hide interactions ([f7bd4ed](https://github.com/bettyblocks/material-ui-component-set/commit/f7bd4ed1caaae5a327c8b23c1f5c871b66716eee))
+
 ## [1.114.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.114.0...v1.114.1) (2021-03-09)
 
 
