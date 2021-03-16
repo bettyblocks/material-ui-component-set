@@ -162,7 +162,7 @@
           ...(orderBy ? { sort: { relation: sort } } : {}),
         },
         onCompleted(res) {
-          const hasResult = res && res.result && res.result.length > 0;
+          const hasResult = res && res.results && res.results.length > 0;
           if (hasResult) {
             B.triggerEvent('onSuccess', res.results);
           } else {
