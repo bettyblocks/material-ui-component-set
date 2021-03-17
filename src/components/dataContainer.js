@@ -117,7 +117,7 @@
 
           if (loading) {
             B.triggerEvent('onLoad', loading);
-            return <ModelProvider>{children}</ModelProvider>;
+            return <span>Loading...</span>;
           }
 
           if (error && displayError) {
