@@ -21,7 +21,7 @@
     prefab,
     save,
   }) => {
-    const [rows, setRows] = React.useState([{ row: 1, columns: '2' }]);
+    const [rows, setRows] = React.useState([{ index: 1, columns: '2' }]);
 
     const createElements = n => {
       const elements = [];
@@ -44,6 +44,8 @@
       return elements;
     };
 
+    const maxRows = rows.length < 9;
+
     return (
       <>
         <Header onClose={close} title="Configure Layout" />
@@ -60,9 +62,9 @@
               >
                 <Button
                   label="+ Add Row"
-                  disabled={!(rows.length < 9)}
+                  disabled={!maxRows}
                   onClick={() => {
-                    if (rows.length < 9) {
+                    if (maxRows) {
                       setRows([
                         ...rows,
                         { row: rows.length + 1, columns: '1' },
@@ -80,13 +82,13 @@
                       alignSelf="center"
                       pad={{ right: '15px' }}
                     >
-                      <Text>Row {row.row}</Text>
+                      <Text>Row {row.index}</Text>
                     </Box>
                     <Box direction="column" basis="auto">
                       <ButtonGroup
                         onChange={({ target: { value } }) => {
                           const index = rows.findIndex(
-                            currentRow => currentRow.row === row.row,
+                            currentRow => currentRow.index === row.index,
                           );
                           const updatedRows = rows;
                           updatedRows[index].columns = value;
@@ -97,45 +99,45 @@
                         <ButtonGroupButton
                           label="1"
                           value="1"
-                          name={`options-${row.row}`}
+                          name={`options-${row.index}`}
                         />
                         <ButtonGroupButton
                           label="2"
                           value="2"
-                          name={`options-${row.row}`}
+                          name={`options-${row.index}`}
                         />
                         <ButtonGroupButton
                           label="3"
                           value="3"
-                          name={`options-${row.row}`}
+                          name={`options-${row.index}`}
                         />
                         <ButtonGroupButton
                           label="4"
                           value="4"
-                          name={`options-${row.row}`}
+                          name={`options-${row.index}`}
                         />
                         <ButtonGroupButton
                           label="5"
                           value="5"
-                          name={`options-${row.row}`}
+                          name={`options-${row.index}`}
                         />
                         <ButtonGroupButton
                           label="6"
                           value="6"
-                          name={`options-${row.row}`}
+                          name={`options-${row.index}`}
                         />
                       </ButtonGroup>
                     </Box>
                     <Box direction="column" basis="auto" pad={{ left: '5px' }}>
                       <DeleteButton
                         label="X"
-                        value={row.row}
+                        value={row.index}
                         disabled={!(rows.length > 1)}
                         onClick={event => {
                           const newRows = [...rows];
                           const index = newRows.findIndex(
                             currentRow =>
-                              currentRow.row ===
+                              currentRow.index ===
                               parseInt(event.target.value, 10),
                           );
                           if (index !== -1) {
@@ -143,7 +145,7 @@
 
                             newRows.map((correctRow, rowIndex) => {
                               const newRow = correctRow;
-                              newRow.row = rowIndex + 1;
+                              newRow.index = rowIndex + 1;
                               return { ...newRow };
                             });
                             setRows([...newRows]);
