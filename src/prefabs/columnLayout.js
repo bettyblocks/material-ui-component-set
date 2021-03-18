@@ -53,8 +53,8 @@
               <Field
                 info={
                   <Text size="small" color="grey700">
-                    Click the 'add rows' button to add a new row to the page.
-                    You can specify the amount of columns per row
+                    {`Click the 'add rows' button to add a new row to the page.
+                    You can specify the amount of columns per row`}
                   </Text>
                 }
               >
@@ -180,7 +180,7 @@
           onClose={close}
           onSave={() => {
             const newPrefab = { ...prefab };
-            rows.map(row => {
+            rows.forEach(row => {
               const newRow = {
                 name: 'Row',
                 options: [
