@@ -67,7 +67,7 @@
                     if (maxRows) {
                       setRows([
                         ...rows,
-                        { row: rows.length + 1, columns: '1' },
+                        { index: rows.length + 1, columns: '1' },
                       ]);
                     }
                   }}
