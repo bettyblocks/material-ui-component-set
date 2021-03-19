@@ -5,7 +5,6 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const {
-      error,
       disabled,
       position,
       size,
@@ -18,7 +17,7 @@
     const { env, useText, getCustomModelAttribute } = B;
     const isDev = env === 'dev';
 
-    const [errorState, setErrorState] = useState(error);
+    const [errorState, setErrorState] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
     const {
       id: customModelAttributeId,
@@ -43,16 +42,27 @@
       FormHelperText,
     } = window.MaterialUI.Core;
 
-    const handleValidation = isChecked => {
-      const valid = (isChecked && required) || !required;
-      setErrorState(!valid);
-      const message = useText(!valid ? validationValueMissing : helperText);
+    const handleValidation = isValid => {
+      setErrorState(!isValid);
+      const message = useText(!isValid ? validationValueMissing : helperText);
       setHelper(message);
     };
 
     const handleChange = evt => {
-      handleValidation(evt.target.checked);
+      const isChecked = evt.target.checked;
+      const isValid = (isChecked && required) || !required;
+      handleValidation(isValid);
       setChecked(evt.target.checked);
+    };
+
+    const invalidHandler = event => {
+      event.preventDefault();
+      const {
+        target: {
+          validity: { valid: isValid },
+        },
+      } = event;
+      handleValidation(isValid);
     };
 
     useEffect(() => {
@@ -72,6 +82,8 @@
 
     const props = {
       checked,
+      required,
+      onInvalid: invalidHandler,
       onChange: handleChange,
       name: nameAttributeValue || customModelAttributeName,
       disabled,
@@ -83,6 +95,20 @@
     const Checkbox = <MUICheckbox {...props} />;
     const SwitchComponent = <Switch {...props} />;
 
+    const ControlLabel = (
+      <>
+        {labelText}
+        {required ? (
+          <span className={errorState ? classes.formControlRequired : null}>
+            {' '}
+            *
+          </span>
+        ) : (
+          ''
+        )}
+      </>
+    );
+
     const Control = (
       <FormControl
         required={required}
@@ -91,7 +117,7 @@
       >
         <FormControlLabel
           control={isSwitch ? SwitchComponent : Checkbox}
-          label={labelText}
+          label={ControlLabel}
           labelPlacement={position}
         />
         {!!helper && <FormHelperText>{helper}</FormHelperText>}
@@ -108,6 +134,12 @@
         '& > *': {
           pointerEvents: 'none',
         },
+      },
+      formControlRequired: {
+        color: ({ options: { errorColor } }) => [
+          style.getColor(errorColor),
+          '!important',
+        ],
       },
       formControl: {
         '& > legend': {
