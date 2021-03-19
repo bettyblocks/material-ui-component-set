@@ -95,6 +95,20 @@
     const Checkbox = <MUICheckbox {...props} />;
     const SwitchComponent = <Switch {...props} />;
 
+    const ControlLabel = (
+      <>
+        {labelText}
+        {required ? (
+          <span className={errorState ? classes.formControlRequired : null}>
+            {' '}
+            *
+          </span>
+        ) : (
+          ''
+        )}
+      </>
+    );
+
     const Control = (
       <FormControl
         required={required}
@@ -103,7 +117,7 @@
       >
         <FormControlLabel
           control={isSwitch ? SwitchComponent : Checkbox}
-          label={`${labelText}${required ? ' *' : ''}`}
+          label={ControlLabel}
           labelPlacement={position}
         />
         {!!helper && <FormHelperText>{helper}</FormHelperText>}
@@ -120,6 +134,12 @@
         '& > *': {
           pointerEvents: 'none',
         },
+      },
+      formControlRequired: {
+        color: ({ options: { errorColor } }) => [
+          style.getColor(errorColor),
+          '!important',
+        ],
       },
       formControl: {
         '& > legend': {
