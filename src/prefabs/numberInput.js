@@ -1,5 +1,5 @@
 (() => ({
-  name: 'NumberInput',
+  name: 'Number',
   icon: 'NumberInputIcon',
   category: 'FORM',
   structure: [

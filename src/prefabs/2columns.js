@@ -1,5 +1,5 @@
 (() => ({
-  name: '2 columns',
+  name: '2 Columns',
   icon: 'Layout66Icon',
   category: 'LAYOUT',
   structure: [
