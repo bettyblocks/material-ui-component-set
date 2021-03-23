@@ -3,20 +3,14 @@
   type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'VERTICAL',
+  styleType: 'BUTTON',
   jsx: (() => {
-    const {
-      Button,
-      IconButton,
-      CircularProgress,
-      Tooltip,
-    } = window.MaterialUI.Core;
+    const { Button, CircularProgress, Tooltip } = window.MaterialUI.Core;
     const { Icons } = window.MaterialUI;
 
     const {
-      variant,
       disabled,
       fullWidth,
-      size,
       icon,
       iconPosition,
       linkType,
@@ -48,7 +42,6 @@
     const hasExternalLink = linkToExternal && linkToExternal.id !== '';
     const linkToExternalVariable =
       (linkToExternal && useText(linkToExternal)) || '';
-    const isIcon = variant === 'icon';
     const buttonContent = useText(buttonText);
     const tooltipText = useText(tooltipContent);
 
@@ -109,7 +102,6 @@
 
     const generalProps = {
       disabled: disabled || isLoading || loading,
-      size,
       tabindex: isDev && -1,
       target:
         linkType === 'external' && hasExternalLink
@@ -123,39 +115,28 @@
       endpoint: linkType === 'internal' && hasLink ? linkTo : undefined,
     };
 
-    const iconButtonProps = {
-      ...generalProps,
-      classes: { root: classes.root },
-    };
-
     const buttonProps = {
       ...generalProps,
       fullWidth,
-      variant,
       classes: {
         root: classes.root,
-        contained: classes.contained,
-        outlined: classes.outlined,
+        wrapper: isDev ? classes.wrapper : undefined,
       },
       className: !!buttonContent && classes.empty,
       type: isDev ? 'button' : type,
     };
-    const compProps = isIcon ? iconButtonProps : buttonProps;
-    const BtnComp = isIcon ? IconButton : Button;
 
-    const showIndicator = !isIcon && (isLoading || loading);
+    const showIndicator = isLoading || loading;
 
     const BasicButtonComponent = (
-      <BtnComp
-        {...compProps}
+      <Button
+        {...buttonProps}
         startIcon={
-          !isIcon &&
           icon !== 'None' &&
           iconPosition === 'start' &&
           React.createElement(Icons[icon])
         }
         endIcon={
-          !isIcon &&
           icon !== 'None' &&
           iconPosition === 'end' &&
           React.createElement(Icons[icon])
@@ -165,15 +146,11 @@
           actionCallback();
         }}
       >
-        {isIcon &&
-          React.createElement(Icons[icon === 'None' ? 'Error' : icon], {
-            fontSize: size,
-          })}
-        {!isIcon && buttonContent}
+        {buttonContent}
         {showIndicator && (
           <CircularProgress size={16} className={classes.loader} />
         )}
-      </BtnComp>
+      </Button>
     );
 
     let tooltipProps = {
@@ -201,9 +178,6 @@
       ? ButtonWithTooltip
       : BasicButtonComponent;
 
-    if (isDev) {
-      return <div className={classes.wrapper}>{ButtonComponent}</div>;
-    }
     return isVisible ? ButtonComponent : <></>;
   })(),
   styles: B => t => {
@@ -213,19 +187,17 @@
       idx === '0' ? '0rem' : style.getSpacing(idx, device);
     return {
       wrapper: {
-        display: ({ options: { fullWidth } }) =>
-          fullWidth ? 'block' : 'inline-block',
-        width: ({ options: { fullWidth } }) => fullWidth && '100%',
-        minHeight: '1rem',
-        '& > *': {
-          pointerEvents: 'none',
-        },
+        pointerEvents: 'none',
       },
       root: {
-        color: ({ options: { background, disabled, textColor, variant } }) => [
-          !disabled
-            ? style.getColor(variant === 'icon' ? background : textColor)
-            : 'rgba(0, 0, 0, 0.26)',
+        backgroundColor: ({ style: s }) => [s.backgroundColor, '!important'],
+        boxShadow: ({ style: s }) => [s.boxShadow, '!important'],
+        borderRadius: ({ style: s }) => [s.borderRadius, '!important'],
+        borderWidth: ({ style: s }) => [s.borderWidth, '!important'],
+        borderStyle: ({ style: s }) => [s.borderStyle, '!important'],
+        borderColor: ({ style: s }) => [s.borderColor, '!important'],
+        color: ({ style: s, options: { disabled } }) => [
+          !disabled ? s.color : 'rgba(0, 0, 0, 0.26)',
           '!important',
         ],
         width: ({ options: { fullWidth, outerSpacing } }) => {
@@ -293,23 +265,8 @@
           },
         },
       },
-      contained: {
-        backgroundColor: ({ options: { background, disabled } }) => [
-          !disabled ? style.getColor(background) : 'rgba(0, 0, 0, 0.12)',
-          '!important',
-        ],
-      },
-      outlined: {
-        borderColor: ({ options: { background, disabled } }) => [
-          !disabled ? style.getColor(background) : 'rgba(0, 0, 0, .12)',
-          '!important',
-        ],
-      },
       loader: {
-        color: ({ options: { variant, textColor, background } }) => [
-          style.getColor(variant === 'icon' ? background : textColor),
-          '!important',
-        ],
+        color: ({ style: s }) => [s.color, '!important'],
         marginLeft: '0.25rem',
       },
       empty: {
