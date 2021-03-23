@@ -1,5 +1,5 @@
 (() => ({
-  name: 'FileUpload',
+  name: 'File Upload',
   icon: 'FileInputIcon',
   category: 'FORM',
   structure: [

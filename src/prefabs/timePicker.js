@@ -1,5 +1,5 @@
 (() => ({
-  name: 'TimePicker',
+  name: 'Time Picker',
   icon: 'TimePickerIcon',
   category: 'FORM',
   structure: [

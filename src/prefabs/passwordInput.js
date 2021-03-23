@@ -1,5 +1,5 @@
 (() => ({
-  name: 'PasswordInput',
+  name: 'Password',
   icon: 'PasswordInputIcon',
   category: 'FORM',
   structure: [

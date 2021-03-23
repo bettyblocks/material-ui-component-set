@@ -1,5 +1,5 @@
 (() => ({
-  name: 'TextField',
+  name: 'Text Field',
   icon: 'TextInputIcon',
   category: 'FORM',
   structure: [

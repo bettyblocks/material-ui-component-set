@@ -1,5 +1,5 @@
 (() => ({
-  name: 'Progress',
+  name: 'Progress Bar',
   icon: 'ProgressBarIcon',
   category: 'CONTENT',
   structure: [

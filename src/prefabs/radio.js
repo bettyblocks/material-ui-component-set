@@ -1,5 +1,5 @@
 (() => ({
-  name: 'RadioGroup',
+  name: 'Radio Group',
   icon: 'RadioButtonIcon',
   category: 'FORM',
   structure: [

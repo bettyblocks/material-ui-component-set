@@ -1,5 +1,5 @@
 (() => ({
-  name: 'DataContainer',
+  name: 'Data Container',
   icon: 'DataContainer',
   category: 'DATA',
   beforeCreate: ({
