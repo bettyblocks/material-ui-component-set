@@ -8,6 +8,7 @@
       ExpansionPanel,
       ExpansionPanelSummary,
       ExpansionPanelDetails,
+      Typography,
     } = window.MaterialUI.Core;
     const { ExpandMore } = window.MaterialUI.Icons;
     const { useText, env } = B;
@@ -22,7 +23,7 @@
       variant,
       elevation,
     } = options;
-    const Tag = {
+    const Variant = {
       Title1: 'h1',
       Title2: 'h2',
       Title3: 'h3',
@@ -80,7 +81,7 @@
     const ExpansionPanelComponent = (
       <ExpansionPanel {...panelOptions}>
         <ExpansionPanelSummary {...panelSummaryOptions}>
-          <Tag className={classes.panelTitle}>{useText(title)}</Tag>
+          <Typography variant={Variant} className={classes.panelTitle}>{useText(title)}</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails className={classes.panelDetails}>
           {isEmpty ? PlaceHolder : children}
