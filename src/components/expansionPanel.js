@@ -81,7 +81,9 @@
     const ExpansionPanelComponent = (
       <ExpansionPanel {...panelOptions}>
         <ExpansionPanelSummary {...panelSummaryOptions}>
-          <Typography variant={Variant} className={classes.panelTitle}>{useText(title)}</Typography>
+          <Typography variant={Variant} className={classes.panelTitle}>
+            {useText(title)}
+          </Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails className={classes.panelDetails}>
           {isEmpty ? PlaceHolder : children}
