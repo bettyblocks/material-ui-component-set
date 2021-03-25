@@ -162,7 +162,7 @@
           ...(orderBy ? { sort: { relation: sort } } : {}),
         },
         onCompleted(res) {
-          const hasResult = res && res.result && res.result.length > 0;
+          const hasResult = res && res.results && res.results.length > 0;
           if (hasResult) {
             B.triggerEvent('onSuccess', res.results);
           } else {
@@ -216,11 +216,14 @@
       };
     }, [searchParam]);
 
+    useEffect(() => {
+      B.triggerEvent('onChange', currentValue);
+    });
+
     const onChange = (_, newValue) => {
       if (!valueProp || !newValue) {
         setCurrentValue(newValue);
         setCurrentLabel(newValue);
-        B.triggerEvent('OnChange');
         return;
       }
 
@@ -239,7 +242,6 @@
         newCurrentValue = newValue.map(rec => rec[valueProp.name] || rec);
       }
       setCurrentValue(newCurrentValue);
-      B.triggerEvent('OnChange');
     };
 
     const getRecords = React.useCallback(() => {
@@ -312,7 +314,6 @@
     if (kind === 'list' || kind === 'LIST') {
       const onPropertyListChange = (_, newValue) => {
         setCurrentValue(newValue);
-        B.triggerEvent('OnChange');
       };
 
       const selectValues =
