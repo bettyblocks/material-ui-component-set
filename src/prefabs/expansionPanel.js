@@ -116,20 +116,6 @@
           },
         },
         {
-          type: 'COLOR',
-          label: 'Title background color',
-          key: 'titleBgColor',
-          value: 'Transparent',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'titleStyles',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
-        },
-        {
           type: 'CUSTOM',
           label: 'Title font weight',
           key: 'titleFontWeight',
