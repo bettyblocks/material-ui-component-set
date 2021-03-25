@@ -1,3 +1,11 @@
+## [1.118.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.118.0...v1.118.1) (2021-03-25)
+
+
+### Bug Fixes
+
+* delete package lock ([51fc565](https://github.com/bettyblocks/material-ui-component-set/commit/51fc5654e21f8d322fd9719084eb8d8c68fd205d))
+* on no results interaction not working ([9147ace](https://github.com/bettyblocks/material-ui-component-set/commit/9147ace8cd61d6492a2aa24783e712e41bbdc9ef))
+
 # [1.118.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.117.1...v1.118.0) (2021-03-24)
 
 
