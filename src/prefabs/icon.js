@@ -2,6 +2,7 @@
   name: 'Icon',
   icon: 'IconIcon',
   category: 'CONTENT',
+  keywords: ['Content', 'icon', 'symbol'],
   structure: [
     {
       name: 'Icon',

@@ -2,6 +2,7 @@
   name: 'Card Header',
   icon: 'CardHeaderIcon',
   category: 'CARDS',
+  keywords: ['Cards', 'card', 'header', 'cardheader'],
   structure: [
     {
       name: 'CardHeader',

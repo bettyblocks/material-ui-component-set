@@ -2,6 +2,7 @@
   name: 'Time Picker',
   icon: 'TimePickerIcon',
   category: 'FORM',
+  keywords: ['Form', 'time', 'picker', 'timepicker'],
   structure: [
     {
       name: 'DateTimePicker',

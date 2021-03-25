@@ -2,6 +2,7 @@
   name: 'Progress Bar',
   icon: 'ProgressBarIcon',
   category: 'CONTENT',
+  keywords: ['Content', 'progress', 'bar', 'progressbar'],
   structure: [
     {
       name: 'Progress',

@@ -2,6 +2,7 @@
   name: 'Data Table Column',
   icon: 'DataTableColumn',
   category: 'DATA',
+  keywords: ['Data', 'table', 'column', 'datatablecolumn'],
   structure: [
     {
       name: 'DataTableColumn',

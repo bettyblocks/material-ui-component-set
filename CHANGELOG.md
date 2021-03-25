@@ -1,3 +1,15 @@
+# [1.118.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.117.1...v1.118.0) (2021-03-24)
+
+
+### Bug Fixes
+
+* add required validation to checkbox ([5978f0e](https://github.com/bettyblocks/material-ui-component-set/commit/5978f0eb9ba0256ba3f8b10613b84123d44b47fc))
+
+
+### Features
+
+* show error state in required symbol in checkbox ([f08b647](https://github.com/bettyblocks/material-ui-component-set/commit/f08b647ed63aaa284fa88fc2feffe4beca158689))
+
 ## [1.117.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.117.0...v1.117.1) (2021-03-17)
 
 

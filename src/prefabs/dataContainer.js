@@ -2,6 +2,7 @@
   name: 'Data Container',
   icon: 'DataContainer',
   category: 'DATA',
+  keywords: ['Data', 'container', 'datacontainer', 'object', 'record'],
   beforeCreate: ({
     prefab,
     save,

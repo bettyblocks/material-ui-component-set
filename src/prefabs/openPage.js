@@ -2,6 +2,7 @@
   name: 'Open Page',
   icon: 'OpenPageIcon',
   category: 'BUTTON',
+  keywords: ['Button', 'open', 'page', 'openpage'],
   beforeCreate: ({
     prefab,
     save,

@@ -2,6 +2,7 @@
   name: 'Media',
   icon: 'ImageIcon',
   category: 'CONTENT',
+  keywords: ['Content', 'media', 'image', 'video', 'iframe', 'picture'],
   structure: [
     {
       name: 'Media',

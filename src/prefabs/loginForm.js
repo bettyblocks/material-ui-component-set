@@ -2,6 +2,7 @@
   name: 'Login Form',
   icon: 'LoginFormIcon',
   category: 'FORM',
+  keywords: ['Form', 'login', 'loginform'],
   beforeCreate: ({
     prefab,
     save,

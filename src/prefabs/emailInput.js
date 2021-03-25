@@ -2,6 +2,7 @@
   name: 'Email',
   icon: 'EmailInputIcon',
   category: 'FORM',
+  keywords: ['Form', 'email', 'input', 'emailinput'],
   structure: [
     {
       name: 'TextField',

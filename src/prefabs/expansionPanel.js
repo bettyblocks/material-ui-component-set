@@ -2,6 +2,7 @@
   name: 'Expansion Panel',
   icon: 'AccordionItemIcon',
   category: 'LAYOUT',
+  keywords: ['Layout', 'panel', 'expansion', 'expansionpanel', 'collapse'],
   structure: [
     {
       name: 'ExpansionPanel',
