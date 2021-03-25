@@ -2,6 +2,7 @@
   name: 'DataList',
   icon: 'DataList',
   category: 'DATA',
+  keywords: ['Data', 'list', 'datalist', 'collection'],
   structure: [
     {
       name: 'DataList',

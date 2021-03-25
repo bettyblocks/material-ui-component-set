@@ -2,6 +2,7 @@
   name: 'DataTable',
   icon: 'DataTable',
   category: 'DATA',
+  keywords: ['Data', 'table', 'datatable', 'collection'],
   beforeCreate: ({
     components: {
       Content,

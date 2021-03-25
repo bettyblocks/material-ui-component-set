@@ -2,6 +2,7 @@
   name: 'DatePicker',
   icon: 'DatePickerIcon',
   category: 'FORM',
+  keywords: ['Form', 'date', 'picker', 'datepicker'],
   structure: [
     {
       name: 'DateTimePicker',

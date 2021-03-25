@@ -2,6 +2,7 @@
   name: 'CardMedia',
   icon: 'CardMediaIcon',
   category: 'CARDS',
+  keywords: ['Cards', 'card', 'media', 'cardmedia'],
   structure: [
     {
       name: 'CardMedia',

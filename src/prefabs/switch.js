@@ -2,6 +2,7 @@
   name: 'Switch',
   icon: 'SwitcherIcon',
   category: 'FORM',
+  keywords: ['Form', 'switch', 'toggle'],
   structure: [
     {
       name: 'Checkbox',

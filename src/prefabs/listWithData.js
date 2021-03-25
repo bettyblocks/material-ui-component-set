@@ -2,6 +2,7 @@
   name: 'ListWithData',
   icon: 'ListWithDataIcon',
   category: 'DATA',
+  keywords: ['Data', 'list', 'listwithdata', 'collection'],
   beforeCreate: ({
     components: {
       Content,

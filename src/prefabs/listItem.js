@@ -2,6 +2,7 @@
   name: 'ListItem',
   icon: 'ListItemIcon',
   category: 'LIST',
+  keywords: ['List', 'item', 'listitem'],
   structure: [
     {
       name: 'ListItem',

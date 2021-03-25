@@ -2,6 +2,7 @@
   name: 'CheckboxGroup',
   icon: 'CheckboxGroupIcon',
   category: 'FORM',
+  keywords: ['Form', 'check', 'box', 'group', 'checkbox', 'checkboxgroup'],
   structure: [
     {
       name: 'CheckboxGroup',

@@ -2,6 +2,7 @@
   name: 'PriceInput',
   icon: 'PriceInputIcon',
   category: 'FORM',
+  keywords: ['Form', 'price', 'input', 'priceinput'],
   structure: [
     {
       name: 'TextField',

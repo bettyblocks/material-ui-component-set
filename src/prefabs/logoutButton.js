@@ -2,6 +2,7 @@
   name: 'Logout Button',
   icon: 'LogoutIcon',
   category: 'BUTTON',
+  keywords: ['Form', 'logout', 'logoutbutton'],
   beforeCreate: ({
     prefab,
     save,

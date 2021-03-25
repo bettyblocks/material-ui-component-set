@@ -2,6 +2,7 @@
   name: '1 column',
   icon: 'RowColumnIcon',
   category: 'LAYOUT',
+  keywords: ['Layout', 'column', 'columns', '1'],
   structure: [
     {
       name: 'Row',

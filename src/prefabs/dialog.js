@@ -2,6 +2,15 @@
   name: 'Dialog',
   icon: 'DialogIcon',
   category: 'CONTENT',
+  keywords: [
+    'Content',
+    'dialog',
+    'popup',
+    'modal',
+    'pop-up',
+    'popover',
+    'pop-over',
+  ],
   actions: [],
   interactions: [
     {

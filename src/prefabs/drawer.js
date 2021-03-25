@@ -2,6 +2,7 @@
   name: 'Drawer',
   icon: 'DrawerIcon',
   category: 'LAYOUT',
+  keywords: ['Layout', 'drawer', 'sidebar'],
   structure: [
     {
       name: 'Drawer',

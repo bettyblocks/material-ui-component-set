@@ -2,6 +2,7 @@
   name: 'DecimalInput',
   icon: 'DecimalInputIcon',
   category: 'FORM',
+  keywords: ['Form', 'decimal', 'input', 'decimalinput'],
   structure: [
     {
       name: 'TextField',

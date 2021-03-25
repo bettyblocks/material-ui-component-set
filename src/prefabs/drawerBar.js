@@ -2,6 +2,7 @@
   name: 'DrawerSidebar',
   icon: 'RowColumnIcon',
   category: 'LAYOUT',
+  keywords: ['Layout', 'drawer', 'sidebar', 'drawersidebar'],
   structure: [
     {
       name: 'DrawerSidebar',
