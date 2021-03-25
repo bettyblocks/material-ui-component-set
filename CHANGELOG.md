@@ -1,3 +1,10 @@
+## [1.118.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.118.1...v1.118.2) (2021-03-25)
+
+
+### Bug Fixes
+
+* send empty datetime on picker when value is empty ([#975](https://github.com/bettyblocks/material-ui-component-set/issues/975)) ([c91f6ac](https://github.com/bettyblocks/material-ui-component-set/commit/c91f6acca7855bfc1133d11b793abd5dd84b69ed))
+
 ## [1.118.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.118.0...v1.118.1) (2021-03-25)
 
 
