@@ -2,7 +2,7 @@
   name: 'FileUpload',
   icon: 'FileInputIcon',
   category: 'FORM',
-  keywords: ['Form', 'file', 'upload', 'fileupload'],
+  keywords: ['Form', 'input', 'file', 'upload', 'fileupload'],
   structure: [
     {
       name: 'FileUpload',

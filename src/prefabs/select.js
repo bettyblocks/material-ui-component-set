@@ -2,7 +2,7 @@
   name: 'Select',
   icon: 'SelectIcon',
   category: 'FORM',
-  keywords: ['Form', 'select', 'dropdown'],
+  keywords: ['Form', 'input', 'select', 'dropdown'],
   structure: [
     {
       name: 'Select',

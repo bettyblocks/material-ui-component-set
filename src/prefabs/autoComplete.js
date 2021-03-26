@@ -2,7 +2,7 @@
   name: 'AutoComplete',
   icon: 'AutoCompleteIcon',
   category: 'FORM',
-  keywords: ['Form', 'auto', 'complete', 'autocomplete'],
+  keywords: ['Form', 'input', 'auto', 'complete', 'autocomplete'],
   structure: [
     {
       name: 'AutoComplete',
