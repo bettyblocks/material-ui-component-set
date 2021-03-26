@@ -1,3 +1,10 @@
+# [1.119.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.118.2...v1.119.0) (2021-03-26)
+
+
+### Features
+
+* **ta-2352:** understandable component names ([723364b](https://github.com/bettyblocks/material-ui-component-set/commit/723364b5d543bec209e9508084088cbe8e4f8512))
+
 ## [1.118.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.118.1...v1.118.2) (2021-03-25)
 
 
