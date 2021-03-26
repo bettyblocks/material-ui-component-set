@@ -201,6 +201,13 @@
       }
     }, [isDev, defaultValue]);
 
+    B.defineFunction('Select All', () => {
+      if (multiple && results.length > 0) {
+        const values = results.map((val) => val[valueProp.name]);
+        setCurrentValue(values);
+      }
+    });
+
     B.defineFunction('Clear', () => {
       setCurrentValue(multiple ? [] : null);
       setSearchParam('');
