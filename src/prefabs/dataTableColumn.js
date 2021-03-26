@@ -1,5 +1,5 @@
 (() => ({
-  name: 'DataTableColumn',
+  name: 'Data Table Column',
   icon: 'DataTableColumn',
   category: 'DATA',
   structure: [

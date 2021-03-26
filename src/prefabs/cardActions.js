@@ -1,5 +1,5 @@
 (() => ({
-  name: 'CardActions',
+  name: 'Card Actions',
   icon: 'CardActionsIcon',
   category: 'CARDS',
   structure: [

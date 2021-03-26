@@ -1,5 +1,5 @@
 (() => ({
-  name: 'DataTable',
+  name: 'Data Table',
   icon: 'DataTable',
   category: 'DATA',
   beforeCreate: ({

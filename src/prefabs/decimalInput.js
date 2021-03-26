@@ -1,5 +1,5 @@
 (() => ({
-  name: 'DecimalInput',
+  name: 'Decimal',
   icon: 'DecimalInputIcon',
   category: 'FORM',
   structure: [
