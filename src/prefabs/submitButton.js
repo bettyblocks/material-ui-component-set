@@ -2,7 +2,7 @@
   name: 'Submit Button',
   icon: 'SubmitButtonIcon',
   category: 'FORM',
-  keywords: ['Form', 'submit', 'button', 'submitbutton'],
+  keywords: ['Form', 'input', 'submit', 'button', 'submitbutton'],
   structure: [
     {
       name: 'Button',

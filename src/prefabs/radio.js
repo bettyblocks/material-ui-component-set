@@ -2,7 +2,7 @@
   name: 'Radio Group',
   icon: 'RadioButtonIcon',
   category: 'FORM',
-  keywords: ['Form', 'radio', 'group', 'radiogroup'],
+  keywords: ['Form', 'input', 'radio', 'group', 'radiogroup'],
   structure: [
     {
       name: 'RadioGroup',
