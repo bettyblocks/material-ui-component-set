@@ -1,5 +1,5 @@
 (() => ({
-  name: 'LoginForm',
+  name: 'Login Form',
   icon: 'LoginFormIcon',
   category: 'FORM',
   keywords: ['Form', 'input', 'login', 'loginform'],

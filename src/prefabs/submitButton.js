@@ -1,5 +1,5 @@
 (() => ({
-  name: 'SubmitButton',
+  name: 'Submit Button',
   icon: 'SubmitButtonIcon',
   category: 'FORM',
   keywords: ['Form', 'input', 'submit', 'button', 'submitbutton'],

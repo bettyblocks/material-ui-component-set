@@ -1,5 +1,5 @@
 (() => ({
-  name: 'openPage',
+  name: 'Open Page',
   icon: 'OpenPageIcon',
   category: 'BUTTON',
   keywords: ['Button', 'open', 'page', 'openpage'],

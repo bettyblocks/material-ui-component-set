@@ -1,5 +1,5 @@
 (() => ({
-  name: 'DataList',
+  name: 'Data List',
   icon: 'DataList',
   category: 'DATA',
   keywords: ['Data', 'list', 'datalist', 'collection'],

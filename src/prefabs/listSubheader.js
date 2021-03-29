@@ -1,5 +1,5 @@
 (() => ({
-  name: 'ListSubheader',
+  name: 'List Subheader',
   icon: 'OrderedListIcon',
   category: 'LIST',
   keywords: ['List', 'sub', 'header', 'subheader', 'listsubheader'],

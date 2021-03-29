@@ -1,3 +1,25 @@
+# [1.119.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.118.2...v1.119.0) (2021-03-26)
+
+
+### Features
+
+* **ta-2352:** understandable component names ([723364b](https://github.com/bettyblocks/material-ui-component-set/commit/723364b5d543bec209e9508084088cbe8e4f8512))
+
+## [1.118.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.118.1...v1.118.2) (2021-03-25)
+
+
+### Bug Fixes
+
+* send empty datetime on picker when value is empty ([#975](https://github.com/bettyblocks/material-ui-component-set/issues/975)) ([c91f6ac](https://github.com/bettyblocks/material-ui-component-set/commit/c91f6acca7855bfc1133d11b793abd5dd84b69ed))
+
+## [1.118.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.118.0...v1.118.1) (2021-03-25)
+
+
+### Bug Fixes
+
+* delete package lock ([51fc565](https://github.com/bettyblocks/material-ui-component-set/commit/51fc5654e21f8d322fd9719084eb8d8c68fd205d))
+* on no results interaction not working ([9147ace](https://github.com/bettyblocks/material-ui-component-set/commit/9147ace8cd61d6492a2aa24783e712e41bbdc9ef))
+
 # [1.118.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.117.1...v1.118.0) (2021-03-24)
 
 

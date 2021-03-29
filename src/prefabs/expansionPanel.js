@@ -1,5 +1,5 @@
 (() => ({
-  name: 'ExpansionPanel',
+  name: 'Expansion Panel',
   icon: 'AccordionItemIcon',
   category: 'LAYOUT',
   keywords: ['Layout', 'panel', 'expansion', 'expansionpanel', 'collapse'],
