@@ -1,3 +1,10 @@
+# [1.120.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.119.0...v1.120.0) (2021-03-29)
+
+
+### Features
+
+* **ta-2362:** adds keywords to component set prefabs ([9655eff](https://github.com/bettyblocks/material-ui-component-set/commit/9655eff15aa35e6b6cd293528cd5f5f91c6fd452))
+
 # [1.119.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.118.2...v1.119.0) (2021-03-26)
 
 
