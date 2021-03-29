@@ -2,6 +2,7 @@
   name: 'Card',
   icon: 'CardIcon',
   category: 'CARDS',
+  keywords: ['Card'],
   structure: [
     {
       name: 'Card',

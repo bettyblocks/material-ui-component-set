@@ -2,6 +2,7 @@
   name: 'Navigation Bar',
   icon: 'NavbarIcon',
   category: 'NAVIGATION',
+  keywords: ['Navigation', 'bar', 'navigationbar', 'menu', 'navbar', 'appbar'],
   structure: [
     {
       name: 'AppBar',

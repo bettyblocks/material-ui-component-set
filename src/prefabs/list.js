@@ -2,6 +2,7 @@
   name: 'List',
   icon: 'OrderedListIcon',
   category: 'LIST',
+  keywords: ['List'],
   structure: [
     {
       name: 'List',

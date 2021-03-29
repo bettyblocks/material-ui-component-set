@@ -2,6 +2,7 @@
   name: 'Number',
   icon: 'NumberInputIcon',
   category: 'FORM',
+  keywords: ['Form', 'number', 'input', 'numberinput'],
   structure: [
     {
       name: 'TextField',

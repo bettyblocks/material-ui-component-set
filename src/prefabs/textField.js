@@ -2,6 +2,7 @@
   name: 'Text Field',
   icon: 'TextInputIcon',
   category: 'FORM',
+  keywords: ['Form', 'text', 'field', 'textfield', 'input', 'textinput'],
   structure: [
     {
       name: 'TextField',

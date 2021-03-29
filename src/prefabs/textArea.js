@@ -2,6 +2,7 @@
   name: 'Text Area',
   icon: 'TextareaIcon',
   category: 'FORM',
+  keywords: ['Form', 'input', 'text', 'area', 'textarea', 'multiline'],
   structure: [
     {
       name: 'TextField',
