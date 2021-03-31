@@ -83,6 +83,81 @@
           },
         },
         {
+          value: false,
+          label: 'Title styles',
+          key: 'titleStyles',
+          type: 'TOGGLE',
+        },
+        {
+          value: 'Body1',
+          label: 'Title type',
+          key: 'titleType',
+          type: 'FONT',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'titleStyles',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'COLOR',
+          label: 'Title text color',
+          key: 'titleTextColor',
+          value: 'Black',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'titleStyles',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'CUSTOM',
+          label: 'Title font weight',
+          key: 'titleFontWeight',
+          value: '400',
+          configuration: {
+            as: 'DROPDOWN',
+            dataType: 'string',
+            allowedInput: [
+              { name: '100', value: '100' },
+              { name: '200', value: '200' },
+              { name: '300', value: '300' },
+              { name: '400', value: '400' },
+              { name: '500', value: '500' },
+              { name: '600', value: '600' },
+              { name: '700', value: '700' },
+              { name: '800', value: '800' },
+              { name: '900', value: '900' },
+            ],
+            condition: {
+              type: 'SHOW',
+              option: 'titleStyles',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          value: ['0rem', '0rem', '0rem', '0rem'],
+          label: 'Title outer space',
+          key: 'titleSpacing',
+          type: 'SIZES',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'titleStyles',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
           value: ['0rem', '0rem', '0rem', '0rem'],
           label: 'Outer space',
           key: 'outerSpacing',
