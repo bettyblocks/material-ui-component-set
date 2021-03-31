@@ -2,6 +2,7 @@
   name: 'Checkbox',
   icon: 'CheckboxIcon',
   category: 'FORM',
+  keywords: ['Form', 'input', 'check', 'box', 'checkbox'],
   structure: [
     {
       name: 'Checkbox',

@@ -1,7 +1,8 @@
 (() => ({
-  name: 'LoginForm',
+  name: 'Login Form',
   icon: 'LoginFormIcon',
   category: 'FORM',
+  keywords: ['Form', 'input', 'login', 'loginform'],
   beforeCreate: ({
     prefab,
     save,
@@ -5982,7 +5983,7 @@
                   type: 'VARIABLE',
                   label: 'Button text',
                   key: 'buttonText',
-                  value: ['Send'],
+                  value: ['Login'],
                 },
                 {
                   type: 'CUSTOM',

@@ -2,6 +2,7 @@
   name: 'Paper',
   icon: 'PaperIcon',
   category: 'LAYOUT',
+  keywords: ['Layout', 'paper'],
   structure: [
     {
       name: 'Paper',
