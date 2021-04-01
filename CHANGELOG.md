@@ -1,3 +1,10 @@
+## [1.121.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.121.0...v1.121.1) (2021-04-01)
+
+
+### Bug Fixes
+
+* **ta-2413:** fixes the default value display ([774bf3e](https://github.com/bettyblocks/material-ui-component-set/commit/774bf3e7cdd964f98a508eef73773351a204f87a))
+
 # [1.121.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.120.0...v1.121.0) (2021-03-31)
 
 
