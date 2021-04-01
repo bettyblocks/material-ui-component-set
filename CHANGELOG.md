@@ -1,3 +1,10 @@
+## [1.121.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.121.1...v1.121.2) (2021-04-01)
+
+
+### Bug Fixes
+
+* use theme color if styles is unchecked ([8342190](https://github.com/bettyblocks/material-ui-component-set/commit/83421909d564360b758db599298a1e2ad89850fa))
+
 ## [1.121.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.121.0...v1.121.1) (2021-04-01)
 
 
