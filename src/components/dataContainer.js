@@ -153,9 +153,12 @@
             B.triggerEvent('onNoUserResults');
           }
 
+          if (!data) {
+            return <div />;
+          }
           return (
             <MeProvider value={data} id={model}>
-              <CanvasLayout />
+              {children}
             </MeProvider>
           );
         };
