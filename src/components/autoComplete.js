@@ -223,7 +223,7 @@
     const onChange = (_, newValue) => {
       if (!valueProp || !newValue) {
         setCurrentValue(newValue);
-        setCurrentLabel(newValue);
+        setCurrentLabel(newValue || '');
         return;
       }
 
@@ -235,7 +235,7 @@
         }
       } else if (searchProp) {
         const newLabelValue = newValue[searchProp.name];
-        setCurrentLabel(newLabelValue);
+        setCurrentLabel(newLabelValue || '');
       }
 
       if (multiple) {
@@ -244,7 +244,7 @@
       setCurrentValue(newCurrentValue);
     };
 
-    const getRecords = React.useCallback(() => {
+    const record = React.useMemo(() => {
       if (!currentValue || !results) {
         return multiple ? [] : null;
       }
@@ -271,11 +271,11 @@
       return multiple ? currentRecords : singleRecord;
     }, [currentValue, results]);
 
-    const record = getRecords();
-
     useEffect(() => {
-      if (!multiple && record && searchProp) {
-        setCurrentLabel(record[searchProp.name]);
+      if (!multiple) {
+        setCurrentLabel(
+          (record && searchProp && record[searchProp.name]) || '',
+        );
       }
     }, [record]);
 
@@ -385,7 +385,7 @@
         freeSolo={freeSolo}
         options={results}
         value={record}
-        inputValue={searchParam}
+        inputValue={searchParam || currentLabel}
         getOptionLabel={renderLabel}
         getOptionSelected={(option, value) => value.id === option.id}
         PopoverProps={{
