@@ -1,3 +1,10 @@
+# [1.121.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.120.0...v1.121.0) (2021-03-31)
+
+
+### Features
+
+* added styling to expansionpanel title ([f837f9a](https://github.com/bettyblocks/material-ui-component-set/commit/f837f9adcbe6bb6ead346055fdaac244a557d39a))
+
 # [1.120.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.119.0...v1.120.0) (2021-03-29)
 
 
