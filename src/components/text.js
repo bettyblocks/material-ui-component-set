@@ -78,7 +78,10 @@
         textAlign: ({ options: { textAlignment } }) => textAlignment,
         padding: 0,
         whiteSpace: 'pre-wrap',
-        color: ({ options: { textColor } }) => style.getColor(textColor),
+        color: ({ options: { textColor, type, styles } }) =>
+          styles
+            ? style.getColor(textColor)
+            : style.theme.typography[type].color,
         fontFamily: ({ options: { type } }) => style.getFontFamily(type),
         fontSize: ({ options: { type } }) => style.getFontSize(type),
         fontWeight: ({ options: { fontWeight } }) => fontWeight,
