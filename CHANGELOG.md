@@ -1,3 +1,24 @@
+## [1.121.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.121.1...v1.121.2) (2021-04-01)
+
+
+### Bug Fixes
+
+* use theme color if styles is unchecked ([8342190](https://github.com/bettyblocks/material-ui-component-set/commit/83421909d564360b758db599298a1e2ad89850fa))
+
+## [1.121.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.121.0...v1.121.1) (2021-04-01)
+
+
+### Bug Fixes
+
+* **ta-2413:** fixes the default value display ([774bf3e](https://github.com/bettyblocks/material-ui-component-set/commit/774bf3e7cdd964f98a508eef73773351a204f87a))
+
+# [1.121.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.120.0...v1.121.0) (2021-03-31)
+
+
+### Features
+
+* added styling to expansionpanel title ([f837f9a](https://github.com/bettyblocks/material-ui-component-set/commit/f837f9adcbe6bb6ead346055fdaac244a557d39a))
+
 # [1.120.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.119.0...v1.120.0) (2021-03-29)
 
 
