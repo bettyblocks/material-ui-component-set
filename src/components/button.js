@@ -193,13 +193,23 @@
         backgroundColor: ({ style: s }) => [s.backgroundColor, '!important'],
         boxShadow: ({ style: s }) => [s.boxShadow, '!important'],
         borderRadius: ({ style: s }) => [s.borderRadius, '!important'],
-        borderWidth: ({ style: s }) => [s.borderWidth, '!important'],
-        borderStyle: ({ style: s }) => [s.borderStyle, '!important'],
-        borderColor: ({ style: s }) => [s.borderColor, '!important'],
+        border: ({ style: s }) => [
+          [s.borderWidth, s.borderStyle, s.borderColor],
+          '!important',
+        ],
         color: ({ style: s, options: { disabled } }) => [
           !disabled ? s.color : 'rgba(0, 0, 0, 0.26)',
           '!important',
         ],
+        fontFamily: ({ style: s }) => [s.fontFamily, '!important'],
+        fontSize: ({ style: s }) => [s.fontSize, '!important'],
+        fontStyle: ({ style: s }) => [s.fontStyle, '!important'],
+        fontWeight: ({ style: s }) => [s.fontWeight, '!important'],
+        letterSpacing: ({ style: s }) => [s.letterSpacing, '!important'],
+        lineHeight: ({ style: s }) => [s.lineHeight, '!important'],
+        padding: ({ style: s }) => [s.padding, ' !important'],
+        textDecoration: ({ style: s }) => [s.textDecoration, '!important'],
+        textTransform: ({ style: s }) => [s.textTransform, '!important'],
         width: ({ options: { fullWidth, outerSpacing } }) => {
           if (!fullWidth) return 'auto';
           const marginRight = getSpacing(outerSpacing[1]);
