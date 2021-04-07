@@ -1,8 +1,9 @@
 (() => ({
-  name: 'List View',
+  name: 'Page With List View',
   icon: 'DataList',
-  description: 'Page with list view',
   type: 'page',
+  description:
+    'This is a page containing a datalist with built-in search functionality',
   category: 'LAYOUT',
   beforeCreate: ({
     helpers: { useModelQuery },
