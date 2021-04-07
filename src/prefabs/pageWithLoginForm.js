@@ -2,7 +2,7 @@
   name: 'Login Form - Sidebar',
   icon: 'LoginFormIcon',
   description: 'Page with login form and side image',
-  type: 'page',
+  // type: 'page',
   category: 'FORM',
   beforeCreate: ({
     prefab,
@@ -6481,7 +6481,7 @@
                                     },
                                     {
                                       value: [
-                                        'https://via.placeholder.com/550x100/?text=[Insert logo here]',
+                                        'https://assets.bettyblocks.com/f95733c870a2471fa89e7716cac0556f_assets/files/logo-placeholder',
                                       ],
                                       label: 'Source',
                                       key: 'imageSource',
