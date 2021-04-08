@@ -1,3 +1,19 @@
+# [1.122.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.121.4...v1.122.0) (2021-04-08)
+
+
+### Features
+
+* disable backdrop click for dialog ([02b4279](https://github.com/bettyblocks/material-ui-component-set/commit/02b42799de3b13147cc9ac28351c473faf8db8b6))
+* disable backdrop click for dialog ([2f4ffcb](https://github.com/bettyblocks/material-ui-component-set/commit/2f4ffcb106ace4b88e275c546068d9767b55809d))
+* make sure submit interaction also validates inputs ([c17f7c5](https://github.com/bettyblocks/material-ui-component-set/commit/c17f7c5a2b5eb0ad31e0b716ba8c41ae533995fc))
+
+## [1.121.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.121.3...v1.121.4) (2021-04-08)
+
+
+### Bug Fixes
+
+* **ta-2434:** fixes the file upload button full width option ([e73eae8](https://github.com/bettyblocks/material-ui-component-set/commit/e73eae80ef2c0531429f893f1196473d94ff4167))
+
 ## [1.121.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.121.2...v1.121.3) (2021-04-07)
 
 
