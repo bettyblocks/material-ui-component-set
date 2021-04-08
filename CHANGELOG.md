@@ -1,3 +1,10 @@
+## [1.121.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.121.2...v1.121.3) (2021-04-07)
+
+
+### Bug Fixes
+
+* fontweight overwrite ([ada8c01](https://github.com/bettyblocks/material-ui-component-set/commit/ada8c010fca470c9042ee51cbb22876d5016f911))
+
 ## [1.121.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.121.1...v1.121.2) (2021-04-01)
 
 
