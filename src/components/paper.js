@@ -21,6 +21,7 @@
 
     const PaperComponent = (
       <Paper
+        classes={{ root: classes.root }}
         variant={variant}
         elevation={variant === 'flat' ? 0 : elevation}
         square={square}
@@ -30,27 +31,42 @@
     );
     return isDev ? <div>{PaperComponent}</div> : PaperComponent;
   })(),
-  styles: () => () => ({
-    empty: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      minHeight: '4rem',
-      height: '100%',
-      width: '100%',
-      fontSize: '0.75rem',
-      color: '#262A3A',
-      textTransform: 'uppercase',
-      boxSizing: 'border-box',
-    },
-    pristine: {
-      borderWidth: '0.0625rem',
-      borderColor: '#AFB5C8',
-      borderStyle: 'dashed',
-      backgroundColor: '#F0F1F5',
-      '&::after': {
-        content: '"Paper"',
+  styles: B => theme => {
+    const { Styling } = B;
+    const style = new Styling(theme);
+    const getSpacing = (idx, device = 'Mobile') =>
+      idx === '0' ? '0rem' : style.getSpacing(idx, device);
+    return {
+      root: {
+        margin: ({ options: { outerSpacing } }) =>
+          [
+            getSpacing(outerSpacing[0]),
+            getSpacing(outerSpacing[1]),
+            getSpacing(outerSpacing[2]),
+            getSpacing(outerSpacing[3]),
+          ].join(' '),
       },
-    },
-  }),
+      empty: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: '4rem',
+        height: '100%',
+        width: '100%',
+        fontSize: '0.75rem',
+        color: '#262A3A',
+        textTransform: 'uppercase',
+        boxSizing: 'border-box',
+      },
+      pristine: {
+        borderWidth: '0.0625rem',
+        borderColor: '#AFB5C8',
+        borderStyle: 'dashed',
+        backgroundColor: '#F0F1F5',
+        '&::after': {
+          content: '"Paper"',
+        },
+      },
+    };
+  },
 }))();
