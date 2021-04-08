@@ -32,7 +32,7 @@
     return isDev ? <div>{PaperComponent}</div> : PaperComponent;
   })(),
   styles: B => theme => {
-    const { Styling } = B;
+    const { mediaMinWidth, Styling } = B;
     const style = new Styling(theme);
     const getSpacing = (idx, device = 'Mobile') =>
       idx === '0' ? '0rem' : style.getSpacing(idx, device);
@@ -45,6 +45,33 @@
             getSpacing(outerSpacing[2]),
             getSpacing(outerSpacing[3]),
           ].join(' '),
+        [`@media ${mediaMinWidth(600)}`]: {
+          margin: ({ options: { outerSpacing } }) =>
+            [
+              getSpacing(outerSpacing[0], 'Portrait'),
+              getSpacing(outerSpacing[1], 'Portrait'),
+              getSpacing(outerSpacing[2], 'Portrait'),
+              getSpacing(outerSpacing[3], 'Portrait'),
+            ].join(' '),
+        },
+        [`@media ${mediaMinWidth(960)}`]: {
+          margin: ({ options: { outerSpacing } }) =>
+            [
+              getSpacing(outerSpacing[0], 'Landscape'),
+              getSpacing(outerSpacing[1], 'Landscape'),
+              getSpacing(outerSpacing[2], 'Landscape'),
+              getSpacing(outerSpacing[3], 'Landscape'),
+            ].join(' '),
+        },
+        [`@media ${mediaMinWidth(1280)}`]: {
+          margin: ({ options: { outerSpacing } }) =>
+            [
+              getSpacing(outerSpacing[0], 'Desktop'),
+              getSpacing(outerSpacing[1], 'Desktop'),
+              getSpacing(outerSpacing[2], 'Desktop'),
+              getSpacing(outerSpacing[3], 'Desktop'),
+            ].join(' '),
+        },
       },
       empty: {
         display: 'flex',
