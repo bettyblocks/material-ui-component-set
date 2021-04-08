@@ -290,6 +290,27 @@
           },
         },
         {
+          value: 'inherit',
+          label: 'Background attachment',
+          key: 'backgroundAttachment',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Inherit', value: 'inherit' },
+              { name: 'Scroll', value: 'scroll' },
+              { name: 'Fixed', value: 'fixed' },
+            ],
+            condition: {
+              type: 'SHOW',
+              option: 'backgroundOptions',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
           value: 'Transparent',
           label: 'Border color',
           key: 'borderColor',
