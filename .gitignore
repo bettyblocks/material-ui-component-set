@@ -9,6 +9,7 @@
 .vscode/
 .nvmrc
 .tool-versions
+.idea
 
 npm-debug.log*
 yarn-debug.log*

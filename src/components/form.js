@@ -47,8 +47,17 @@
         const mounted = useRef(false);
 
         B.defineFunction('Submit', () => {
-          if (formRef.current)
-            formRef.current.dispatchEvent(new Event('submit'));
+          if (formRef.current) formRef.current.requestSubmit();
+        });
+
+        const [, setOptions] = useOptions();
+
+        B.defineFunction('setCurrentRecord', value => {
+          if (typeof value === 'number') {
+            setOptions({
+              currentRecord: value,
+            });
+          }
         });
 
         useEffect(() => {

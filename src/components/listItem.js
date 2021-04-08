@@ -1,7 +1,7 @@
 (() => ({
   name: 'ListItem',
-  type: 'LIST_ITEM',
-  allowedTypes: ['CONTENT_COMPONENT'],
+  type: 'CONTENT_COMPONENT',
+  allowedTypes: ['CONTENT_COMPONENT', 'CONTAINER_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const {
@@ -22,6 +22,8 @@
       secondaryText,
       icon,
       avatar,
+      avatarUrl,
+      avatarOrIcon,
       linkType,
       linkTo,
       linkToExternal,
@@ -39,15 +41,15 @@
     const primary = useText(primaryText);
     const secondary = useText(secondaryText);
 
-    const IconComponent = (
-      <ListItemIcon>
-        {icon !== 'None' && React.createElement(Icons[icon])}
-      </ListItemIcon>
+    const IconComponent = icon !== 'None' && (
+      <ListItemIcon>{React.createElement(Icons[icon])}</ListItemIcon>
     );
 
     const AvatarComponent = (
       <ListItemAvatar>
-        <Avatar>{icon !== 'None' && React.createElement(Icons[icon])}</Avatar>
+        <Avatar src={avatarOrIcon === 'avatar' && avatarUrl}>
+          {avatarOrIcon === 'icon' && React.createElement(Icons[icon])}
+        </Avatar>
       </ListItemAvatar>
     );
 
@@ -77,7 +79,9 @@
         className={classes.root}
         dense={dense}
       >
-        {icon !== 'None' && (avatar ? AvatarComponent : IconComponent)}
+        {avatarOrIcon === 'avatar' || (avatarOrIcon === 'icon' && avatar)
+          ? AvatarComponent
+          : avatarOrIcon !== 'none' && IconComponent}
         <ListItemText
           className={isEmpty && isDev && classes.placeholder}
           primary={itemText}

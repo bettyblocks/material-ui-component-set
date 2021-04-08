@@ -1,7 +1,8 @@
 (() => ({
-  name: 'DataTable',
+  name: 'Data Table',
   icon: 'DataTable',
   category: 'DATA',
+  keywords: ['Data', 'table', 'datatable', 'collection'],
   beforeCreate: ({
     components: {
       Content,
@@ -49,6 +50,15 @@
               newPrefab.structure[0].descendants.push({
                 name: 'DataTableColumn',
                 options: [
+                  {
+                    value: true,
+                    label: 'Initial visibility',
+                    key: 'visible',
+                    type: 'TOGGLE',
+                    configuration: {
+                      as: 'VISIBILITY',
+                    },
+                  },
                   {
                     value: property,
                     label: 'Property',

@@ -2,6 +2,7 @@
   name: 'Conditional',
   icon: 'ConditionalIcon',
   category: 'LOGIC',
+  keywords: ['Logic', 'conditional'],
   structure: [
     {
       name: 'Conditional',

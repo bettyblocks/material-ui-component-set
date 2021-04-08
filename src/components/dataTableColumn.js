@@ -17,23 +17,36 @@
       parent || {};
     const { type } = property;
     const propertyArray = [property].flat();
-    const { name: propertyName, label: propertyLabel } =
+    const { kind, name: propertyName, label: propertyLabel } =
       getProperty(property) || {};
     const { field, order = 'asc' } = orderBy || {};
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
     const contentPlaceholder = isDev && isEmpty ? 'Select property' : '\u00A0';
+    const isBooleanProperty = kind === 'boolean' || kind === 'BOOLEAN';
 
     let myEndpoint = null;
     if (linkTo) {
       myEndpoint = useEndpoint(linkTo);
     }
 
+    let checkboxStatus = '';
+    if (isBooleanProperty && useText([property]))
+      checkboxStatus =
+        useText([property]) === 'true' ? (
+          <span className={classes.checked} role="img" aria-label="checked">
+            &#10003;
+          </span>
+        ) : (
+          <span className={classes.unchecked} role="img" aria-label="unchecked">
+            &#10007;
+          </span>
+        );
     const bodyText = useText(content);
     const propContent = isDev ? (
       `{{ ${propertyName} }}`
     ) : (
-      <Property id={property} />
+      <>{!isBooleanProperty ? <Property id={property} /> : checkboxStatus}</>
     );
 
     let columnText = propertyName ? propContent : contentPlaceholder;
@@ -88,23 +101,36 @@
       <span className={classes.columnHeader}>{columnHeaderText}</span>
     );
 
-    return isDev ? (
-      <div
-        className={[
-          classes.tableColumn,
-          !headerOnly ? classes.tableColumnBody : '',
-          !headerOnly ? 'MuiTableCell-root' : '',
-        ].join(' ')}
-      >
-        {headerOnly ? (
-          <TableCell align={horizontalAlignment} component="div">
-            {Header}
-          </TableCell>
-        ) : (
-          Content
-        )}
-      </div>
-    ) : (
+    const [visible, setVisible] = useState(false);
+
+    useEffect(() => {
+      setVisible(options.visible);
+    }, []);
+
+    B.defineFunction('Hide', () => setVisible(false));
+    B.defineFunction('Show', () => setVisible(true));
+    B.defineFunction('Show/Hide', () => setVisible(s => !s));
+
+    if (isDev) {
+      return (
+        <div
+          className={[
+            classes.tableColumn,
+            !headerOnly ? classes.tableColumnBody : '',
+            !headerOnly ? 'MuiTableCell-root' : '',
+          ].join(' ')}
+        >
+          {headerOnly ? (
+            <TableCell align={horizontalAlignment} component="div">
+              {Header}
+            </TableCell>
+          ) : (
+            Content
+          )}
+        </div>
+      );
+    }
+    return visible ? (
       <TableCell
         classes={{ root: classes.root }}
         align={horizontalAlignment}
@@ -112,6 +138,8 @@
       >
         {headerOnly ? Header : Content}
       </TableCell>
+    ) : (
+      <></>
     );
   })(),
   styles: B => theme => {
@@ -204,6 +232,12 @@
         '& .MuiSvgIcon-root': {
           opacity: isDev && 0.5,
         },
+      },
+      checked: {
+        color: style.getColor('Success'),
+      },
+      unchecked: {
+        color: style.getColor('Danger'),
       },
     };
   },
