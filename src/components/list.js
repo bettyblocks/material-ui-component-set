@@ -25,7 +25,7 @@
 
     return (
       <List
-        className={classes.root}
+        classes={{ root: classes.root }}
         disablePadding={disablePadding}
         dense={dense}
       >
@@ -33,13 +33,24 @@
       </List>
     );
   })(),
-  styles: B => t => {
+  styles: B => theme => {
     const { Styling } = B;
-    const style = new Styling(t);
+    const style = new Styling(theme);
+    const getSpacing = (idx, device = 'Mobile') =>
+      idx === '0rem' ? '0rem' : style.getSpacing(idx, device);
     return {
       root: {
         backgroundColor: ({ options: { backgroundColor } }) =>
           style.getColor(backgroundColor),
+        '&.MuiList-root': {
+          margin: ({ options: { outerSpacing } }) =>
+            [
+              getSpacing(outerSpacing[0]),
+              getSpacing(outerSpacing[1]),
+              getSpacing(outerSpacing[2]),
+              getSpacing(outerSpacing[3]),
+            ].join(' '),
+        },
       },
       empty: {
         display: 'flex',

@@ -2,6 +2,7 @@
   name: 'Alert',
   icon: 'AlertIcon',
   category: 'CONTENT',
+  keywords: ['Content', 'alert', 'notification'],
   structure: [
     {
       name: 'Alert',

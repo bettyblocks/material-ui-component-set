@@ -2,6 +2,7 @@
   name: 'Breadcrumb Item',
   icon: 'BreadcrumbItemIcon',
   category: 'NAVIGATION',
+  keywords: ['Navigation', 'bread', 'crumb', 'item', 'breadcrumbitem'],
   structure: [
     {
       name: 'BreadcrumbItem',

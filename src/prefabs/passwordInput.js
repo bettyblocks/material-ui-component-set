@@ -1,7 +1,8 @@
 (() => ({
-  name: 'PasswordInput',
+  name: 'Password',
   icon: 'PasswordInputIcon',
   category: 'FORM',
+  keywords: ['Form', 'password', 'input', 'passwordinput'],
   structure: [
     {
       name: 'TextField',

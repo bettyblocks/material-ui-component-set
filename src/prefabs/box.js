@@ -2,6 +2,7 @@
   name: 'Box',
   icon: 'ContainerIcon',
   category: 'LAYOUT',
+  keywords: ['Layout', 'box'],
   structure: [
     {
       name: 'Box',

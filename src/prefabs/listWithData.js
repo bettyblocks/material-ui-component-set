@@ -1,7 +1,8 @@
 (() => ({
-  name: 'ListWithData',
+  name: 'List With Data',
   icon: 'ListWithDataIcon',
-  category: 'LIST',
+  category: 'DATA',
+  keywords: ['Data', 'list', 'listwithdata', 'collection'],
   beforeCreate: ({
     components: {
       Content,
@@ -83,6 +84,12 @@
           label: 'Disable padding',
           key: 'disablePadding',
           value: false,
+        },
+        {
+          value: ['0rem', '0rem', '0rem', '0rem'],
+          label: 'Outer space',
+          key: 'outerSpacing',
+          type: 'SIZES',
         },
         {
           type: 'TOGGLE',

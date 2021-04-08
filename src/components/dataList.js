@@ -194,6 +194,19 @@
             variables: {
               ...(orderBy ? { sort: { relation: sort } } : {}),
             },
+            onCompleted(res) {
+              const hasResult = res && res.results && res.results.length > 0;
+              if (hasResult) {
+                B.triggerEvent('onSuccess', res.results);
+              } else {
+                B.triggerEvent('onNoResults');
+              }
+            },
+            onError(resp) {
+              if (!displayError) {
+                B.triggerEvent('onError', resp);
+              }
+            },
           });
 
         useEffect(() => {
@@ -289,22 +302,12 @@
 
           if (loading) return <div className={classes.skeleton} />;
 
-          if (error && !displayError) {
-            B.triggerEvent('onError', error);
-          }
           if (error && displayError) {
             return <span>{error.message}</span>;
           }
 
           const { results = [], totalCount } = data || {};
           const resultCount = results && results.length;
-          const hasResults = resultCount > 0;
-
-          if (hasResults) {
-            B.triggerEvent('onSuccess', results);
-          } else {
-            B.triggerEvent('onNoResults');
-          }
 
           return (
             <>

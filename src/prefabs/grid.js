@@ -2,6 +2,7 @@
   name: 'Grid',
   icon: 'GridIcon',
   category: 'LAYOUT',
+  keywords: ['Layout', 'grid'],
   structure: [
     {
       name: 'Grid',
