@@ -1,3 +1,10 @@
+## [1.121.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.121.3...v1.121.4) (2021-04-08)
+
+
+### Bug Fixes
+
+* **ta-2434:** fixes the file upload button full width option ([e73eae8](https://github.com/bettyblocks/material-ui-component-set/commit/e73eae80ef2c0531429f893f1196473d94ff4167))
+
 ## [1.121.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.121.2...v1.121.3) (2021-04-07)
 
 
