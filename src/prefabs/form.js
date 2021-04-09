@@ -2,6 +2,7 @@
   name: 'Form',
   icon: 'FormIcon',
   category: 'FORM',
+  keywords: ['Form', 'input'],
   structure: [
     {
       name: 'Form',

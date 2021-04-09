@@ -1,7 +1,8 @@
 (() => ({
-  name: 'deleteRecord',
+  name: 'Delete Record',
   icon: 'DeleteRecordIcon',
   category: 'BUTTON',
+  keywords: ['Button', 'delete', 'deleterecord'],
   beforeCreate: ({
     prefab,
     save,

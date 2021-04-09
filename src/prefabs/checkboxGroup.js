@@ -1,7 +1,16 @@
 (() => ({
-  name: 'CheckboxGroup',
+  name: 'Checkbox Group',
   icon: 'CheckboxGroupIcon',
   category: 'FORM',
+  keywords: [
+    'Form',
+    'input',
+    'check',
+    'box',
+    'group',
+    'checkbox',
+    'checkboxgroup',
+  ],
   structure: [
     {
       name: 'CheckboxGroup',
