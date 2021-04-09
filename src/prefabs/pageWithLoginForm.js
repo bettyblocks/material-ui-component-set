@@ -2,7 +2,7 @@
   name: 'Login Form - Sidebar',
   icon: 'LoginFormIcon',
   description: 'Page with login form and side image',
-  // type: 'page',
+  type: 'page',
   category: 'FORM',
   beforeCreate: ({
     prefab,
