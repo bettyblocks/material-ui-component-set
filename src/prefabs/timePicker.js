@@ -37,6 +37,12 @@
           value: false,
         },
         {
+          value: true,
+          label: 'Auto close on select',
+          key: 'autoOk',
+          type: 'TOGGLE',
+        },
+        {
           value: 'HH:mm:ss',
           label: 'Format',
           key: 'timeFormat',
