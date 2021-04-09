@@ -18,9 +18,13 @@
       PropertiesSelector,
     },
   }) => {
-    const [showValidation, setShowValidation] = React.useState(false);
     const [modelId, setModelId] = React.useState('');
+    const [showModelValidation, setShowModelValidation] = React.useState(false);
     const [properties, setProperties] = React.useState([]);
+    const [
+      showPropertiesValidation,
+      setShowPropertiesValidation,
+    ] = React.useState(false);
 
     const iconConfiguration = {
       as: 'DROPDOWN',
@@ -1458,12 +1462,6 @@
             key: 'innerSpacing',
             type: 'SIZES',
           },
-          {
-            type: 'TOGGLE',
-            label: 'Allow overflow',
-            key: 'overflow',
-            value: false,
-          },
         ],
         descendants: [
           {
@@ -2043,12 +2041,6 @@
                         key: 'innerSpacing',
                         type: 'SIZES',
                       },
-                      {
-                        type: 'TOGGLE',
-                        label: 'Allow overflow',
-                        key: 'overflow',
-                        value: false,
-                      },
                     ],
                     descendants: [
                       {
@@ -2072,7 +2064,7 @@
                             },
                           },
                           {
-                            value: '10%',
+                            value: '',
                             label: 'Height',
                             key: 'rowHeight',
                             type: 'TEXT',
@@ -2274,22 +2266,16 @@
                                 },
                               },
                               {
-                                value: ['XL', 'XL', '0rem', 'XL'],
+                                value: ['0rem', '0rem', '0rem', '0rem'],
                                 label: 'Outer space',
                                 key: 'outerSpacing',
                                 type: 'SIZES',
                               },
                               {
-                                value: ['0rem', 'XL', '0rem', 'XL'],
+                                value: ['XL', 'XL', 'XL', 'XL'],
                                 label: 'Inner space',
                                 key: 'innerSpacing',
                                 type: 'SIZES',
-                              },
-                              {
-                                type: 'TOGGLE',
-                                label: 'Allow overflow',
-                                key: 'overflow',
-                                value: false,
                               },
                             ],
                             descendants: [
@@ -2313,7 +2299,7 @@
                                   },
                                   {
                                     value: [
-                                      'https://via.placeholder.com/550x100/?text=[Insert logo here]',
+                                      'https://assets.bettyblocks.com/f95733c870a2471fa89e7716cac0556f_assets/files/logo-placeholder',
                                     ],
                                     label: 'Source',
                                     key: 'imageSource',
@@ -2394,7 +2380,7 @@
                                     },
                                   },
                                   {
-                                    value: ['S', 'S', 'S', 'S'],
+                                    value: ['XL', 'XL', 'XL', 'XL'],
                                     label: 'Outer space',
                                     key: 'outerSpacing',
                                     type: 'SIZES',
@@ -2427,7 +2413,7 @@
                             },
                           },
                           {
-                            value: '90%',
+                            value: '',
                             label: 'Height',
                             key: 'rowHeight',
                             type: 'TEXT',
@@ -2639,12 +2625,6 @@
                                 label: 'Inner space',
                                 key: 'innerSpacing',
                                 type: 'SIZES',
-                              },
-                              {
-                                type: 'TOGGLE',
-                                label: 'Allow overflow',
-                                key: 'overflow',
-                                value: false,
                               },
                             ],
                             descendants: [
@@ -4331,6 +4311,9 @@
       },
     ];
 
+    const isEmpty = value =>
+      !value || Object.keys(value).length === 0 || value.id === '';
+
     return (
       <>
         <Header onClose={close} title="Configure register form" />
@@ -4338,72 +4321,84 @@
           <Field
             label="Select model"
             error={
-              showValidation && (
+              showModelValidation && (
                 <Text color="#e82600">Selecting a model is required</Text>
               )
             }
           >
             <ModelSelector
               onChange={value => {
-                setShowValidation(false);
+                setShowModelValidation(false);
                 setModelId(value);
               }}
               value={modelId}
             />
           </Field>
-          {modelId && (
-            <Field label="Input fields in the register form">
-              <Text
-                size="small"
-                color="grey700"
-                as="div"
-                margin={{ bottom: '0.5rem' }}
-              >
-                The selected properties will show up as input fields in the
-                register form.
-              </Text>
-              <PropertiesSelector
-                modelId={modelId}
-                value={properties}
-                onChange={value => {
-                  setProperties(value);
-                }}
-                scopedModels={false}
-                disabledNames={['created_at', 'updated_at', 'id']}
-                disabledKinds={[
-                  'BELONGS_TO',
-                  'HAS_AND_BELONGS_TO_MANY',
-                  'HAS_MANY',
-                  'MULTI_FILE',
-                  'AUTO_INCREMENT',
-                  'COUNT',
-                  'EMAIL',
-                  'MULTI_IMAGE',
-                  'PDF',
-                  'RICH_TEXT',
-                  'SIGNED_PDF',
-                  'SUM',
-                  'BOOLEAN_EXPRESSION',
-                  'DATE_EXPRESSION',
-                  'DATE_TIME_EXPRESSION',
-                  'DECIMAL_EXPRESSION',
-                  'INTEGER_EXPRESSION',
-                  'MINUTES_EXPRESSION',
-                  'PRICE_EXPRESSION',
-                  'STRING_EXPRESSION',
-                  'TEXT_EXPRESSION',
-                ]}
-              />
-            </Field>
-          )}
+          <Field
+            label="Input fields in the register form"
+            error={
+              showPropertiesValidation && (
+                <Text color="#e82600">Select at least one property</Text>
+              )
+            }
+          >
+            <Text
+              size="small"
+              color="grey700"
+              as="div"
+              margin={{ bottom: '0.5rem' }}
+            >
+              The selected properties will show up as input fields in the
+              register form.
+            </Text>
+            <PropertiesSelector
+              modelId={modelId}
+              value={properties}
+              onChange={value => {
+                setProperties(value);
+                setShowPropertiesValidation(isEmpty(value));
+              }}
+              scopedModels={false}
+              disabledNames={['created_at', 'updated_at', 'id']}
+              disabledKinds={[
+                'BELONGS_TO',
+                'HAS_AND_BELONGS_TO_MANY',
+                'HAS_MANY',
+                'MULTI_FILE',
+                'AUTO_INCREMENT',
+                'COUNT',
+                'EMAIL',
+                'MULTI_IMAGE',
+                'PDF',
+                'RICH_TEXT',
+                'SIGNED_PDF',
+                'SUM',
+                'BOOLEAN_EXPRESSION',
+                'DATE_EXPRESSION',
+                'DATE_TIME_EXPRESSION',
+                'DECIMAL_EXPRESSION',
+                'INTEGER_EXPRESSION',
+                'MINUTES_EXPRESSION',
+                'PRICE_EXPRESSION',
+                'STRING_EXPRESSION',
+                'TEXT_EXPRESSION',
+              ]}
+            />
+          </Field>
         </Content>
         <Footer
           onClose={close}
           onSave={() => {
             if (!modelId) {
-              setShowValidation(true);
+              setShowModelValidation(true);
               return;
             }
+
+            if (isEmpty(properties)) {
+              setShowPropertiesValidation(true);
+              return;
+            }
+
             const newPrefab = { ...prefab };
             if (modelId) {
               const formPrefab =
