@@ -1,5 +1,5 @@
 (() => ({
-  name: 'Login And Register Form',
+  name: 'Login And Register Form - Sidebar',
   icon: 'LoginFormIcon',
   type: 'page',
   description: 'This page contains a ready to use login and register form',
@@ -2861,8 +2861,7 @@
                                             value: {
                                               modelId: '',
                                               ref: {
-                                                customModelId:
-                                                  '#customModelId',
+                                                customModelId: '#customModelId',
                                                 actionId: '#actionId',
                                                 variableId:
                                                   '#customModelVariableId',
@@ -2968,8 +2967,7 @@
                                             },
                                           },
                                           {
-                                            value:
-                                              'Failed to submit the form!',
+                                            value: 'Failed to submit the form!',
                                             label: 'Error message',
                                             key: 'formErrorMessage',
                                             type: 'TEXT',
@@ -3243,8 +3241,7 @@
                                                 configuration: {
                                                   condition: {
                                                     type: 'SHOW',
-                                                    option:
-                                                      'backgroundOptions',
+                                                    option: 'backgroundOptions',
                                                     comparator: 'EQ',
                                                     value: true,
                                                   },
@@ -3259,8 +3256,7 @@
                                                 configuration: {
                                                   condition: {
                                                     type: 'SHOW',
-                                                    option:
-                                                      'backgroundOptions',
+                                                    option: 'backgroundOptions',
                                                     comparator: 'EQ',
                                                     value: true,
                                                   },
@@ -3274,8 +3270,7 @@
                                                 configuration: {
                                                   condition: {
                                                     type: 'SHOW',
-                                                    option:
-                                                      'backgroundOptions',
+                                                    option: 'backgroundOptions',
                                                     comparator: 'EQ',
                                                     value: true,
                                                   },
@@ -3305,8 +3300,7 @@
                                                   ],
                                                   condition: {
                                                     type: 'SHOW',
-                                                    option:
-                                                      'backgroundOptions',
+                                                    option: 'backgroundOptions',
                                                     comparator: 'EQ',
                                                     value: true,
                                                   },
@@ -3360,8 +3354,7 @@
                                                   ],
                                                   condition: {
                                                     type: 'SHOW',
-                                                    option:
-                                                      'backgroundOptions',
+                                                    option: 'backgroundOptions',
                                                     comparator: 'EQ',
                                                     value: true,
                                                   },
@@ -3395,8 +3388,7 @@
                                                   ],
                                                   condition: {
                                                     type: 'SHOW',
-                                                    option:
-                                                      'backgroundOptions',
+                                                    option: 'backgroundOptions',
                                                     comparator: 'EQ',
                                                     value: true,
                                                   },
@@ -3410,8 +3402,7 @@
                                                 configuration: {
                                                   condition: {
                                                     type: 'SHOW',
-                                                    option:
-                                                      'backgroundOptions',
+                                                    option: 'backgroundOptions',
                                                     comparator: 'EQ',
                                                     value: true,
                                                   },
@@ -3426,8 +3417,7 @@
                                                   as: 'UNIT',
                                                   condition: {
                                                     type: 'SHOW',
-                                                    option:
-                                                      'backgroundOptions',
+                                                    option: 'backgroundOptions',
                                                     comparator: 'EQ',
                                                     value: true,
                                                   },
@@ -3461,8 +3451,7 @@
                                                   ],
                                                   condition: {
                                                     type: 'SHOW',
-                                                    option:
-                                                      'backgroundOptions',
+                                                    option: 'backgroundOptions',
                                                     comparator: 'EQ',
                                                     value: true,
                                                   },
@@ -3477,8 +3466,7 @@
                                                   as: 'UNIT',
                                                   condition: {
                                                     type: 'SHOW',
-                                                    option:
-                                                      'backgroundOptions',
+                                                    option: 'backgroundOptions',
                                                     comparator: 'EQ',
                                                     value: true,
                                                   },
@@ -3490,8 +3478,7 @@
                                                 name: 'Button',
                                                 options: [
                                                   {
-                                                    label:
-                                                      'Toggle visibility',
+                                                    label: 'Toggle visibility',
                                                     key: 'visible',
                                                     value: true,
                                                     type: 'TOGGLE',
@@ -3553,13 +3540,11 @@
                                                       dataType: 'string',
                                                       allowedInput: [
                                                         {
-                                                          name:
-                                                            'Internal page',
+                                                          name: 'Internal page',
                                                           value: 'internal',
                                                         },
                                                         {
-                                                          name:
-                                                            'External page',
+                                                          name: 'External page',
                                                           value: 'external',
                                                         },
                                                         {
@@ -3802,8 +3787,7 @@
                                                     },
                                                   },
                                                   {
-                                                    label:
-                                                      'Tooltip Placement',
+                                                    label: 'Tooltip Placement',
                                                     key: 'tooltipPlacement',
                                                     value: 'bottom',
                                                     type: 'CUSTOM',
@@ -3832,10 +3816,8 @@
                                                           value: 'left',
                                                         },
                                                         {
-                                                          name:
-                                                            'Botttom Start',
-                                                          value:
-                                                            'bottom-start',
+                                                          name: 'Botttom Start',
+                                                          value: 'bottom-start',
                                                         },
                                                         {
                                                           name: 'Bottom',
@@ -3856,8 +3838,7 @@
                                                   },
                                                   {
                                                     type: 'COLOR',
-                                                    label:
-                                                      'Tooltip Background',
+                                                    label: 'Tooltip Background',
                                                     key: 'tooltipBackground',
                                                     value: 'Medium',
                                                     configuration: {
@@ -4101,8 +4082,7 @@
                                                 configuration: {
                                                   condition: {
                                                     type: 'SHOW',
-                                                    option:
-                                                      'backgroundOptions',
+                                                    option: 'backgroundOptions',
                                                     comparator: 'EQ',
                                                     value: true,
                                                   },
@@ -4117,8 +4097,7 @@
                                                 configuration: {
                                                   condition: {
                                                     type: 'SHOW',
-                                                    option:
-                                                      'backgroundOptions',
+                                                    option: 'backgroundOptions',
                                                     comparator: 'EQ',
                                                     value: true,
                                                   },
@@ -4132,8 +4111,7 @@
                                                 configuration: {
                                                   condition: {
                                                     type: 'SHOW',
-                                                    option:
-                                                      'backgroundOptions',
+                                                    option: 'backgroundOptions',
                                                     comparator: 'EQ',
                                                     value: true,
                                                   },
@@ -4163,8 +4141,7 @@
                                                   ],
                                                   condition: {
                                                     type: 'SHOW',
-                                                    option:
-                                                      'backgroundOptions',
+                                                    option: 'backgroundOptions',
                                                     comparator: 'EQ',
                                                     value: true,
                                                   },
@@ -4198,8 +4175,7 @@
                                                   ],
                                                   condition: {
                                                     type: 'SHOW',
-                                                    option:
-                                                      'backgroundOptions',
+                                                    option: 'backgroundOptions',
                                                     comparator: 'EQ',
                                                     value: true,
                                                   },
@@ -4213,8 +4189,7 @@
                                                 configuration: {
                                                   condition: {
                                                     type: 'SHOW',
-                                                    option:
-                                                      'backgroundOptions',
+                                                    option: 'backgroundOptions',
                                                     comparator: 'EQ',
                                                     value: true,
                                                   },
@@ -4229,8 +4204,7 @@
                                                   as: 'UNIT',
                                                   condition: {
                                                     type: 'SHOW',
-                                                    option:
-                                                      'backgroundOptions',
+                                                    option: 'backgroundOptions',
                                                     comparator: 'EQ',
                                                     value: true,
                                                   },
@@ -4264,8 +4238,7 @@
                                                   ],
                                                   condition: {
                                                     type: 'SHOW',
-                                                    option:
-                                                      'backgroundOptions',
+                                                    option: 'backgroundOptions',
                                                     comparator: 'EQ',
                                                     value: true,
                                                   },
@@ -4280,8 +4253,7 @@
                                                   as: 'UNIT',
                                                   condition: {
                                                     type: 'SHOW',
-                                                    option:
-                                                      'backgroundOptions',
+                                                    option: 'backgroundOptions',
                                                     comparator: 'EQ',
                                                     value: true,
                                                   },
@@ -4296,8 +4268,7 @@
                                                 },
                                                 options: [
                                                   {
-                                                    label:
-                                                      'Toggle visibility',
+                                                    label: 'Toggle visibility',
                                                     key: 'visible',
                                                     value: true,
                                                     type: 'TOGGLE',
@@ -4487,8 +4458,7 @@
                                                     },
                                                   },
                                                   {
-                                                    label:
-                                                      'Tooltip Placement',
+                                                    label: 'Tooltip Placement',
                                                     key: 'tooltipPlacement',
                                                     value: 'bottom',
                                                     type: 'CUSTOM',
@@ -4517,10 +4487,8 @@
                                                           value: 'left',
                                                         },
                                                         {
-                                                          name:
-                                                            'Botttom Start',
-                                                          value:
-                                                            'bottom-start',
+                                                          name: 'Botttom Start',
+                                                          value: 'bottom-start',
                                                         },
                                                         {
                                                           name: 'Bottom',
@@ -4541,8 +4509,7 @@
                                                   },
                                                   {
                                                     type: 'COLOR',
-                                                    label:
-                                                      'Tooltip Background',
+                                                    label: 'Tooltip Background',
                                                     key: 'tooltipBackground',
                                                     value: 'Medium',
                                                     configuration: {
@@ -4767,8 +4734,7 @@
                                             },
                                           },
                                           {
-                                            value:
-                                              'Failed to submit the form!',
+                                            value: 'Failed to submit the form!',
                                             label: 'Error message',
                                             key: 'formErrorMessage',
                                             type: 'TEXT',
@@ -5014,8 +4980,7 @@
                                                 configuration: {
                                                   condition: {
                                                     type: 'SHOW',
-                                                    option:
-                                                      'backgroundOptions',
+                                                    option: 'backgroundOptions',
                                                     comparator: 'EQ',
                                                     value: true,
                                                   },
@@ -5030,8 +4995,7 @@
                                                 configuration: {
                                                   condition: {
                                                     type: 'SHOW',
-                                                    option:
-                                                      'backgroundOptions',
+                                                    option: 'backgroundOptions',
                                                     comparator: 'EQ',
                                                     value: true,
                                                   },
@@ -5045,8 +5009,7 @@
                                                 configuration: {
                                                   condition: {
                                                     type: 'SHOW',
-                                                    option:
-                                                      'backgroundOptions',
+                                                    option: 'backgroundOptions',
                                                     comparator: 'EQ',
                                                     value: true,
                                                   },
@@ -5076,8 +5039,7 @@
                                                   ],
                                                   condition: {
                                                     type: 'SHOW',
-                                                    option:
-                                                      'backgroundOptions',
+                                                    option: 'backgroundOptions',
                                                     comparator: 'EQ',
                                                     value: true,
                                                   },
@@ -5111,8 +5073,7 @@
                                                   ],
                                                   condition: {
                                                     type: 'SHOW',
-                                                    option:
-                                                      'backgroundOptions',
+                                                    option: 'backgroundOptions',
                                                     comparator: 'EQ',
                                                     value: true,
                                                   },
@@ -5126,8 +5087,7 @@
                                                 configuration: {
                                                   condition: {
                                                     type: 'SHOW',
-                                                    option:
-                                                      'backgroundOptions',
+                                                    option: 'backgroundOptions',
                                                     comparator: 'EQ',
                                                     value: true,
                                                   },
@@ -5142,8 +5102,7 @@
                                                   as: 'UNIT',
                                                   condition: {
                                                     type: 'SHOW',
-                                                    option:
-                                                      'backgroundOptions',
+                                                    option: 'backgroundOptions',
                                                     comparator: 'EQ',
                                                     value: true,
                                                   },
@@ -5177,8 +5136,7 @@
                                                   ],
                                                   condition: {
                                                     type: 'SHOW',
-                                                    option:
-                                                      'backgroundOptions',
+                                                    option: 'backgroundOptions',
                                                     comparator: 'EQ',
                                                     value: true,
                                                   },
@@ -5193,8 +5151,7 @@
                                                   as: 'UNIT',
                                                   condition: {
                                                     type: 'SHOW',
-                                                    option:
-                                                      'backgroundOptions',
+                                                    option: 'backgroundOptions',
                                                     comparator: 'EQ',
                                                     value: true,
                                                   },
@@ -5209,8 +5166,7 @@
                                                 },
                                                 options: [
                                                   {
-                                                    label:
-                                                      'Toggle visibility',
+                                                    label: 'Toggle visibility',
                                                     key: 'visible',
                                                     value: true,
                                                     type: 'TOGGLE',
@@ -5400,8 +5356,7 @@
                                                     },
                                                   },
                                                   {
-                                                    label:
-                                                      'Tooltip Placement',
+                                                    label: 'Tooltip Placement',
                                                     key: 'tooltipPlacement',
                                                     value: 'bottom',
                                                     type: 'CUSTOM',
@@ -5430,10 +5385,8 @@
                                                           value: 'left',
                                                         },
                                                         {
-                                                          name:
-                                                            'Botttom Start',
-                                                          value:
-                                                            'bottom-start',
+                                                          name: 'Botttom Start',
+                                                          value: 'bottom-start',
                                                         },
                                                         {
                                                           name: 'Bottom',
@@ -5454,8 +5407,7 @@
                                                   },
                                                   {
                                                     type: 'COLOR',
-                                                    label:
-                                                      'Tooltip Background',
+                                                    label: 'Tooltip Background',
                                                     key: 'tooltipBackground',
                                                     value: 'Medium',
                                                     configuration: {
@@ -5511,9 +5463,10 @@
 
     const stepper = {
       setStep: step => {
+        let activeStep;
         switch (step) {
           case 1:
-            return (
+            activeStep = (
               <>
                 <Field
                   label="Select an authentication profile"
@@ -5565,8 +5518,9 @@
                 </Field>
               </>
             );
+            break;
           case 2:
-            return (
+            activeStep = (
               <>
                 <Field
                   label="Input fields in the register form"
@@ -5620,9 +5574,11 @@
                 </Field>
               </>
             );
+            break;
           default:
             break;
         }
+        return activeStep;
       },
       onSave: () => {
         if (!authProfileId) {
@@ -13680,16 +13636,19 @@
           </Box>
         </Box>
       ),
-      progressBar: titles => (
-        <Box
-          justify="center"
-          margin={{ bottom: '2rem', left: '2rem', top: '-1rem' }}
-        >
-          <Text size="medium" weight="bold">{`Step: ${stepNumber} / ${
-            stepper.stepAmount
-          } - ${titles[stepNumber - 1]}`}</Text>
-        </Box>
-      ),
+      progressBar: titles => {
+        const titlesArray = titles;
+        return (
+          <Box
+            justify="center"
+            margin={{ bottom: '2rem', left: '2rem', top: '-1rem' }}
+          >
+            <Text size="medium" weight="bold">{`Step: ${stepNumber} / ${
+              stepper.stepAmount
+            } - ${titlesArray[stepNumber - 1]}`}</Text>
+          </Box>
+        );
+      },
       stepAmount: 2,
     };
 
