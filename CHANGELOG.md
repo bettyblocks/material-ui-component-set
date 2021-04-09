@@ -1,3 +1,17 @@
+## [1.122.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.122.1...v1.122.2) (2021-04-09)
+
+
+### Bug Fixes
+
+* adds outer paper space option to dialog ([4a9d14c](https://github.com/bettyblocks/material-ui-component-set/commit/4a9d14cd81ae20960c4a100897441204a1378d99))
+
+## [1.122.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.122.0...v1.122.1) (2021-04-09)
+
+
+### Bug Fixes
+
+* **ta-2437:** adds the outer space option to paper component ([b29afed](https://github.com/bettyblocks/material-ui-component-set/commit/b29afeda5adcf5109b0ed1f2357302a5d18151ea))
+
 # [1.122.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.121.4...v1.122.0) (2021-04-08)
 
 
