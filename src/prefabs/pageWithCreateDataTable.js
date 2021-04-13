@@ -41,7 +41,7 @@
       skip: !modelId,
     });
 
-    const reduceStructure = (refValue, structure) =>
+    const getDescendantByRef = (refValue, structure) =>
       structure.reduce((acc, component) => {
         if (acc) return acc;
         if (
@@ -51,7 +51,7 @@
         ) {
           return component;
         }
-        return reduceStructure(refValue, component.descendants);
+        return getDescendantByRef(refValue, component.descendants);
       }, null);
 
     const iconConfiguration = {
@@ -6475,6 +6475,31 @@
       },
     ];
 
+    const disabledKinds = [
+      'BELONGS_TO',
+      'HAS_AND_BELONGS_TO_MANY',
+      'HAS_MANY',
+      'MULTI_FILE',
+      'AUTO_INCREMENT',
+      'COUNT',
+      'MULTI_IMAGE',
+      'PDF',
+      'RICH_TEXT',
+      'SIGNED_PDF',
+      'SUM',
+      'BOOLEAN_EXPRESSION',
+      'DATE_EXPRESSION',
+      'DATE_TIME_EXPRESSION',
+      'DECIMAL_EXPRESSION',
+      'INTEGER_EXPRESSION',
+      'MINUTES_EXPRESSION',
+      'PRICE_EXPRESSION',
+      'STRING_EXPRESSION',
+      'TEXT_EXPRESSION',
+      'MINUTES',
+      'ZIPCODE',
+    ];
+
     return (
       <>
         <Header title="Configure data table" onClose={close} />
@@ -6506,30 +6531,7 @@
             <PropertiesSelector
               modelId={modelId}
               value={properties}
-              disabledKinds={[
-                'BELONGS_TO',
-                'HAS_AND_BELONGS_TO_MANY',
-                'HAS_MANY',
-                'MULTI_FILE',
-                'AUTO_INCREMENT',
-                'COUNT',
-                'MULTI_IMAGE',
-                'PDF',
-                'RICH_TEXT',
-                'SIGNED_PDF',
-                'SUM',
-                'BOOLEAN_EXPRESSION',
-                'DATE_EXPRESSION',
-                'DATE_TIME_EXPRESSION',
-                'DECIMAL_EXPRESSION',
-                'INTEGER_EXPRESSION',
-                'MINUTES_EXPRESSION',
-                'PRICE_EXPRESSION',
-                'STRING_EXPRESSION',
-                'TEXT_EXPRESSION',
-                'MINUTES',
-                'ZIPCODE',
-              ]}
+              disabledKinds={disabledKinds}
               onChange={value => {
                 setProperties(value);
               }}
@@ -6558,30 +6560,7 @@
                   modelId={modelId}
                   value={createFormProperties}
                   disabledNames={['created_at', 'updated_at', 'id']}
-                  disabledKinds={[
-                    'BELONGS_TO',
-                    'HAS_AND_BELONGS_TO_MANY',
-                    'HAS_MANY',
-                    'MULTI_FILE',
-                    'AUTO_INCREMENT',
-                    'COUNT',
-                    'MULTI_IMAGE',
-                    'PDF',
-                    'RICH_TEXT',
-                    'SIGNED_PDF',
-                    'SUM',
-                    'BOOLEAN_EXPRESSION',
-                    'DATE_EXPRESSION',
-                    'DATE_TIME_EXPRESSION',
-                    'DECIMAL_EXPRESSION',
-                    'INTEGER_EXPRESSION',
-                    'MINUTES_EXPRESSION',
-                    'PRICE_EXPRESSION',
-                    'STRING_EXPRESSION',
-                    'TEXT_EXPRESSION',
-                    'MINUTES',
-                    'ZIPCODE',
-                  ]}
+                  disabledKinds={disabledKinds}
                   onChange={value => {
                     setCreatePropertiesValidation(!value.length);
                     setCreateFormProperties(value);
@@ -6612,7 +6591,7 @@
               newPrefab.variables[1].name = camelToSnakeCase(data.model.label);
             }
             newPrefab.variables[0].options.modelId = modelId;
-            const dataTable = reduceStructure('#dataTable', prefabStructure);
+            const dataTable = getDescendantByRef('#dataTable', prefabStructure);
             dataTable.options[0].value = modelId;
             newPrefab.variables[1].options.modelId = modelId;
             properties.filter(property => property.kind !== 'SERIAL');
@@ -9370,6 +9349,12 @@
                           value: false,
                         },
                         {
+                          value: true,
+                          label: 'Auto close on select',
+                          key: 'autoOk',
+                          type: 'TOGGLE',
+                        },
+                        {
                           value: 'MM/dd/yyyy',
                           label: 'Format',
                           key: 'dateFormat',
@@ -9695,6 +9680,12 @@
                           label: 'Disable Toolbar',
                           key: 'disableToolbar',
                           value: false,
+                        },
+                        {
+                          value: true,
+                          label: 'Auto close on select',
+                          key: 'autoOk',
+                          type: 'TOGGLE',
                         },
                         {
                           value: 'MM/dd/yyyy HH:mm:ss',
@@ -10059,6 +10050,12 @@
                           label: 'Disable Toolbar',
                           key: 'disableToolbar',
                           value: false,
+                        },
+                        {
+                          value: true,
+                          label: 'Auto close on select',
+                          key: 'autoOk',
+                          type: 'TOGGLE',
                         },
                         {
                           value: 'HH:mm:ss',
@@ -12002,7 +11999,10 @@
 
             newPrefab.actions[0].events[0].options.modelId = modelId;
 
-            const createForm = reduceStructure('#createForm', prefabStructure);
+            const createForm = getDescendantByRef(
+              '#createForm',
+              prefabStructure,
+            );
 
             const createFormInputsArray = makeDescendantsArray(
               createFormUseDataProperties ? properties : createFormProperties,
@@ -12041,14 +12041,15 @@
             createForm.options[0].value.modelId = modelId;
             createForm.options[1].value = modelId;
 
-            reduceStructure(
+            getDescendantByRef(
               '#createDialogTitle',
               prefabStructure,
             ).options[0].value = [`Create new ${data.model.label}`];
-            reduceStructure('#createBtn', prefabStructure).options[2].value = [
-              `New ${data.model.label}`,
-            ];
-            reduceStructure(
+            getDescendantByRef(
+              '#createBtn',
+              prefabStructure,
+            ).options[2].value = [`New ${data.model.label}`];
+            getDescendantByRef(
               '#successAlert',
               prefabStructure,
             ).options[1].value = [
