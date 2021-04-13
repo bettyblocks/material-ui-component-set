@@ -5147,6 +5147,12 @@
                         value: false,
                       },
                       {
+                        value: true,
+                        label: 'Auto close on select',
+                        key: 'autoOk',
+                        type: 'TOGGLE',
+                      },
+                      {
                         value: 'MM/dd/yyyy',
                         label: 'Format',
                         key: 'dateFormat',
@@ -5469,6 +5475,12 @@
                         label: 'Disable Toolbar',
                         key: 'disableToolbar',
                         value: false,
+                      },
+                      {
+                        value: true,
+                        label: 'Auto close on select',
+                        key: 'autoOk',
+                        type: 'TOGGLE',
                       },
                       {
                         value: 'MM/dd/yyyy HH:mm:ss',
@@ -5830,6 +5842,12 @@
                         label: 'Disable Toolbar',
                         key: 'disableToolbar',
                         value: false,
+                      },
+                      {
+                        value: true,
+                        label: 'Auto close on select',
+                        key: 'autoOk',
+                        type: 'TOGGLE',
                       },
                       {
                         value: 'HH:mm:ss',
