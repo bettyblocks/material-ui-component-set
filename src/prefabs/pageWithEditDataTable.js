@@ -34,12 +34,37 @@
     const [editProperties, setEditProperties] = React.useState([]);
     const [inheritProperties, setInheritProperties] = React.useState(true);
 
+    const disabledKinds = [
+      'BELONGS_TO',
+      'HAS_AND_BELONGS_TO_MANY',
+      'HAS_MANY',
+      'MULTI_FILE',
+      'AUTO_INCREMENT',
+      'COUNT',
+      'MULTI_IMAGE',
+      'PDF',
+      'RICH_TEXT',
+      'SIGNED_PDF',
+      'SUM',
+      'BOOLEAN_EXPRESSION',
+      'DATE_EXPRESSION',
+      'DATE_TIME_EXPRESSION',
+      'DECIMAL_EXPRESSION',
+      'INTEGER_EXPRESSION',
+      'MINUTES_EXPRESSION',
+      'PRICE_EXPRESSION',
+      'STRING_EXPRESSION',
+      'TEXT_EXPRESSION',
+      'MINUTES',
+      'ZIPCODE',
+    ];
+
     const { data } = useModelQuery({
       variables: { id: modelId },
       skip: !modelId,
     });
 
-    const reduceStructure = (refValue, structure) =>
+    const getDescendantByRef = (refValue, structure) =>
       structure.reduce((acc, component) => {
         if (acc) return acc;
         if (
@@ -49,7 +74,7 @@
         ) {
           return component;
         }
-        return reduceStructure(refValue, component.descendants);
+        return getDescendantByRef(refValue, component.descendants);
       }, null);
 
     const iconConfiguration = {
@@ -5427,30 +5452,7 @@
             <PropertiesSelector
               modelId={modelId}
               value={properties}
-              disabledKinds={[
-                'BELONGS_TO',
-                'HAS_AND_BELONGS_TO_MANY',
-                'HAS_MANY',
-                'MULTI_FILE',
-                'AUTO_INCREMENT',
-                'COUNT',
-                'MULTI_IMAGE',
-                'PDF',
-                'RICH_TEXT',
-                'SIGNED_PDF',
-                'SUM',
-                'BOOLEAN_EXPRESSION',
-                'DATE_EXPRESSION',
-                'DATE_TIME_EXPRESSION',
-                'DECIMAL_EXPRESSION',
-                'INTEGER_EXPRESSION',
-                'MINUTES_EXPRESSION',
-                'PRICE_EXPRESSION',
-                'STRING_EXPRESSION',
-                'TEXT_EXPRESSION',
-                'MINUTES',
-                'ZIPCODE',
-              ]}
+              disabledKinds={disabledKinds}
               onChange={value => {
                 setPropertiesValidation(!value.length);
                 setProperties(value);
@@ -5481,30 +5483,7 @@
                   modelId={modelId}
                   value={editProperties}
                   disabledNames={['created_at', 'updated_at', 'id']}
-                  disabledKinds={[
-                    'BELONGS_TO',
-                    'HAS_AND_BELONGS_TO_MANY',
-                    'HAS_MANY',
-                    'MULTI_FILE',
-                    'AUTO_INCREMENT',
-                    'COUNT',
-                    'MULTI_IMAGE',
-                    'PDF',
-                    'RICH_TEXT',
-                    'SIGNED_PDF',
-                    'SUM',
-                    'BOOLEAN_EXPRESSION',
-                    'DATE_EXPRESSION',
-                    'DATE_TIME_EXPRESSION',
-                    'DECIMAL_EXPRESSION',
-                    'INTEGER_EXPRESSION',
-                    'MINUTES_EXPRESSION',
-                    'PRICE_EXPRESSION',
-                    'STRING_EXPRESSION',
-                    'TEXT_EXPRESSION',
-                    'MINUTES',
-                    'ZIPCODE',
-                  ]}
+                  disabledKinds={disabledKinds}
                   onChange={value => {
                     setEditPropertiesValidation(!value.length);
                     setEditProperties(value);
@@ -5534,7 +5513,7 @@
             }
             newPrefab.variables[0].options.modelId = modelId;
             newPrefab.variables[1].options.modelId = modelId;
-            const dataTable = reduceStructure(
+            const dataTable = getDescendantByRef(
               '#editDataTable',
               prefabStructure,
             );
@@ -8707,6 +8686,12 @@
                           value: false,
                         },
                         {
+                          value: true,
+                          label: 'Auto close on select',
+                          key: 'autoOk',
+                          type: 'TOGGLE',
+                        },
+                        {
                           value: 'MM/dd/yyyy',
                           label: 'Format',
                           key: 'dateFormat',
@@ -9029,6 +9014,12 @@
                           label: 'Disable Toolbar',
                           key: 'disableToolbar',
                           value: false,
+                        },
+                        {
+                          value: true,
+                          label: 'Auto close on select',
+                          key: 'autoOk',
+                          type: 'TOGGLE',
                         },
                         {
                           value: 'MM/dd/yyyy HH:mm:ss',
@@ -9390,6 +9381,12 @@
                           label: 'Disable Toolbar',
                           key: 'disableToolbar',
                           value: false,
+                        },
+                        {
+                          value: true,
+                          label: 'Auto close on select',
+                          key: 'autoOk',
+                          type: 'TOGGLE',
                         },
                         {
                           value: 'HH:mm:ss',
@@ -11316,7 +11313,7 @@
               return descendants;
             }
 
-            const editForm = reduceStructure('#editForm', prefabStructure);
+            const editForm = getDescendantByRef('#editForm', prefabStructure);
             const editFormProperties = inheritProperties
               ? properties
               : editProperties;
