@@ -1,3 +1,10 @@
+## [1.122.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.122.2...v1.122.3) (2021-04-16)
+
+
+### Bug Fixes
+
+* row click endpoint leads to compile error ([16cb710](https://github.com/bettyblocks/material-ui-component-set/commit/16cb7107f1dc83439371abf04918809792984072))
+
 ## [1.122.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.122.1...v1.122.2) (2021-04-09)
 
 
