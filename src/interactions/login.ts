@@ -1,5 +1,5 @@
 interface Event {
-  isValid: boolean;
+  isValid?: boolean;
   jwtToken: string;
   refreshToken: string;
 }
@@ -16,12 +16,12 @@ function login({
   event: Event;
   redirectTo: Page;
 }): void {
-  const { isValid, jwtToken, refreshToken } = event;
+  if (!event?.isValid) return;
+
+  const { jwtToken, refreshToken } = event;
   const { url } = redirectTo;
 
-  if (isValid) {
-    localStorage.setItem('TOKEN', jwtToken);
-    localStorage.setItem('REFRESH_TOKEN', refreshToken);
-    window.location.href = url;
-  }
+  localStorage.setItem('TOKEN', jwtToken);
+  localStorage.setItem('REFRESH_TOKEN', refreshToken);
+  window.location.href = url;
 }
