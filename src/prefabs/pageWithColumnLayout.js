@@ -1760,7 +1760,7 @@
                     if (maxRows) {
                       setRows([
                         ...rows,
-                        { index: rows.length + 1, columns: '1' },
+                        { index: rows.length + 1, columns: 1 },
                       ]);
                     }
                   }}
@@ -1784,7 +1784,7 @@
                             currentRow => currentRow.index === row.index,
                           );
                           const updatedRows = rows;
-                          updatedRows[index].columns = value;
+                          updatedRows[index].columns = parseInt(value, 10);
                           setRows([...updatedRows]);
                         }}
                         value={row.columns.toString()}
@@ -1920,7 +1920,7 @@
             descendants: [],
           };
 
-          for (let index = 0; index < row.columns; index += 1) {
+          for (let index = 0; index < parseInt(row.columns, 10); index += 1) {
             newRow.descendants.push({
               name: 'Column',
               options: [
