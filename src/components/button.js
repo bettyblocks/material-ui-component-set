@@ -3,27 +3,19 @@
   type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'VERTICAL',
+  styleType: 'BUTTON',
   jsx: (() => {
-    const {
-      Button,
-      IconButton,
-      CircularProgress,
-      Tooltip,
-    } = window.MaterialUI.Core;
+    const { CircularProgress, Tooltip } = window.MaterialUI.Core;
     const { Icons } = window.MaterialUI;
-
     const {
-      variant,
       disabled,
-      fullWidth,
       size,
       icon,
       iconPosition,
       linkType,
-      linkTo,
-      linkToExternal,
+      // linkTo,
+      // linkToExternal,
       openLinkToExternal,
-      type,
       visible,
       actionId,
       buttonText,
@@ -37,18 +29,17 @@
       env,
       getModel,
       getIdProperty,
-      Link: BLink,
       useText,
       useAction,
       useProperty,
+      // useEndpoint,
     } = B;
     const isDev = env === 'dev';
     const isAction = linkType === 'action';
-    const hasLink = linkTo && linkTo.id !== '';
-    const hasExternalLink = linkToExternal && linkToExternal.id !== '';
-    const linkToExternalVariable =
-      (linkToExternal && useText(linkToExternal)) || '';
-    const isIcon = variant === 'icon';
+    // const hasLink = linkTo && linkTo.id !== '';
+    // const hasExternalLink = linkToExternal && linkToExternal.id !== '';
+    // const linkToExternalVariable =
+    //   (linkToExternal && useText(linkToExternal)) || '';
     const buttonContent = useText(buttonText);
     const tooltipText = useText(tooltipContent);
 
@@ -107,73 +98,67 @@
       }
     }, [loading]);
 
-    const generalProps = {
-      disabled: disabled || isLoading || loading,
-      size,
-      tabindex: isDev && -1,
-      target:
-        linkType === 'external' && hasExternalLink
-          ? openLinkToExternal
-          : undefined,
-      href:
-        linkType === 'external' && hasExternalLink
-          ? linkToExternalVariable
-          : undefined,
-      component: linkType === 'internal' && hasLink ? BLink : undefined,
-      endpoint: linkType === 'internal' && hasLink ? linkTo : undefined,
-    };
-
-    const iconButtonProps = {
-      ...generalProps,
-      classes: { root: classes.root },
-    };
-
     const buttonProps = {
-      ...generalProps,
-      fullWidth,
-      variant,
-      classes: {
-        root: classes.root,
-        contained: classes.contained,
-        outlined: classes.outlined,
-      },
-      className: !!buttonContent && classes.empty,
-      type: isDev ? 'button' : type,
+      disabled: disabled || isLoading || loading,
+      tabindex: isDev && -1,
     };
-    const compProps = isIcon ? iconButtonProps : buttonProps;
-    const BtnComp = isIcon ? IconButton : Button;
 
-    const showIndicator = !isIcon && (isLoading || loading);
+    const aProps = {
+      // @ TODO: remove nested ternary
+      // href: disabled
+      //   ? false
+      //   : linkType === 'external' && hasExternalLink
+      //   ? linkToExternalVariable
+      //   : linkType === 'internal' && hasLink
+      //   ? useEndpoint(linkTo)
+      //   : false,
+      target: openLinkToExternal,
+    };
+
+    const showIndicator = isLoading || loading;
+
+    const emptySpace = () => {
+      if (icon === 'None') {
+        return '\xA0';
+      }
+      return null;
+    };
 
     const BasicButtonComponent = (
-      <BtnComp
-        {...compProps}
-        startIcon={
-          !isIcon &&
-          icon !== 'None' &&
-          iconPosition === 'start' &&
-          React.createElement(Icons[icon])
-        }
-        endIcon={
-          !isIcon &&
-          icon !== 'None' &&
-          iconPosition === 'end' &&
-          React.createElement(Icons[icon])
-        }
-        onClick={event => {
-          event.stopPropagation();
-          actionCallback();
-        }}
-      >
-        {isIcon &&
-          React.createElement(Icons[icon === 'None' ? 'Error' : icon], {
-            fontSize: size,
-          })}
-        {!isIcon && buttonContent}
-        {showIndicator && (
-          <CircularProgress size={16} className={classes.loader} />
-        )}
-      </BtnComp>
+      <a {...aProps} className={classes.a}>
+        <button
+          className={classes.root}
+          type="button"
+          {...buttonProps}
+          onClick={event => {
+            event.stopPropagation();
+            actionCallback();
+          }}
+        >
+          {icon !== 'None' && iconPosition === 'start' && (
+            <span
+              style={{
+                marginRight: buttonContent ? '5px' : 0,
+                display: 'flex',
+              }}
+            >
+              {React.createElement(Icons[icon], { fontSize: size })}
+            </span>
+          )}
+          {buttonContent !== '' ? buttonContent : emptySpace}
+
+          {icon !== 'None' && iconPosition === 'end' && (
+            <span
+              style={{ marginLeft: buttonContent ? '5px' : 0, display: 'flex' }}
+            >
+              {React.createElement(Icons[icon], { fontSize: size })}
+            </span>
+          )}
+          {showIndicator && (
+            <CircularProgress size={16} className={classes.loader} />
+          )}
+        </button>
+      </a>
     );
 
     let tooltipProps = {
@@ -201,115 +186,99 @@
       ? ButtonWithTooltip
       : BasicButtonComponent;
 
-    if (isDev) {
-      return <div className={classes.wrapper}>{ButtonComponent}</div>;
+    if (!isDev) {
+      if (!isVisible) {
+        return <></>;
+      }
+      return ButtonComponent;
     }
-    return isVisible ? ButtonComponent : <></>;
+
+    return <div className={classes.wrapper}>{ButtonComponent}</div>;
   })(),
   styles: B => t => {
     const { mediaMinWidth, Styling } = B;
-    const style = new Styling(t);
+    const newStyling = new Styling(t);
     const getSpacing = (idx, device = 'Mobile') =>
-      idx === '0' ? '0rem' : style.getSpacing(idx, device);
+      idx === '0' ? '0rem' : newStyling.getSpacing(idx, device);
     return {
       wrapper: {
         display: ({ options: { fullWidth } }) =>
-          fullWidth ? 'block' : 'inline-block',
-        width: ({ options: { fullWidth } }) => fullWidth && '100%',
+          fullWidth ? 'flex' : 'inline-block',
         minHeight: '1rem',
         '& > *': {
           pointerEvents: 'none',
         },
       },
-      root: {
-        color: ({ options: { background, disabled, textColor, variant } }) => [
-          !disabled
-            ? style.getColor(variant === 'icon' ? background : textColor)
-            : 'rgba(0, 0, 0, 0.26)',
-          '!important',
-        ],
-        width: ({ options: { fullWidth, outerSpacing } }) => {
-          if (!fullWidth) return 'auto';
-          const marginRight = getSpacing(outerSpacing[1]);
-          const marginLeft = getSpacing(outerSpacing[3]);
-          return `calc(100% - ${marginRight} - ${marginLeft})`;
-        },
-        marginTop: ({ options: { outerSpacing } }) =>
-          getSpacing(outerSpacing[0]),
-        marginRight: ({ options: { outerSpacing } }) =>
-          getSpacing(outerSpacing[1]),
-        marginBottom: ({ options: { outerSpacing } }) =>
-          getSpacing(outerSpacing[2]),
-        marginLeft: ({ options: { outerSpacing } }) =>
-          getSpacing(outerSpacing[3]),
+      a: ({ options: { fullWidth, outerSpacing } }) => ({
+        textDecoration: 'none',
+        display: fullWidth ? 'inline-flex' : 'inline-block',
+        width: !fullWidth
+          ? 'auto'
+          : `calc(100% - ${getSpacing(outerSpacing[1])} - ${getSpacing(
+              outerSpacing[3],
+            )})`,
+        marginTop: getSpacing(outerSpacing[0]),
+        marginRight: getSpacing(outerSpacing[1]),
+        marginBottom: getSpacing(outerSpacing[2]),
+        marginLeft: getSpacing(outerSpacing[3]),
         '&.MuiButton-root, &.MuiIconButton-root': {
           [`@media ${mediaMinWidth(600)}`]: {
-            width: ({ options: { fullWidth, outerSpacing } }) => {
+            width: () => {
               if (!fullWidth) return 'auto';
               const marginRight = getSpacing(outerSpacing[1], 'Portrait');
               const marginLeft = getSpacing(outerSpacing[3], 'Portrait');
               return `calc(100% - ${marginRight} - ${marginLeft})`;
             },
-            marginTop: ({ options: { outerSpacing } }) =>
-              getSpacing(outerSpacing[0], 'Portrait'),
-            marginRight: ({ options: { outerSpacing } }) =>
-              getSpacing(outerSpacing[1], 'Portrait'),
-            marginBottom: ({ options: { outerSpacing } }) =>
-              getSpacing(outerSpacing[2], 'Portrait'),
-            marginLeft: ({ options: { outerSpacing } }) =>
-              getSpacing(outerSpacing[3], 'Portrait'),
+            marginTop: getSpacing(outerSpacing[0], 'Portrait'),
+            marginRight: getSpacing(outerSpacing[1], 'Portrait'),
+            marginBottom: getSpacing(outerSpacing[2], 'Portrait'),
+            marginLeft: getSpacing(outerSpacing[3], 'Portrait'),
           },
           [`@media ${mediaMinWidth(960)}`]: {
-            width: ({ options: { fullWidth, outerSpacing } }) => {
+            width: () => {
               if (!fullWidth) return 'auto';
               const marginRight = getSpacing(outerSpacing[1], 'Landscape');
               const marginLeft = getSpacing(outerSpacing[3], 'Landscape');
               return `calc(100% - ${marginRight} - ${marginLeft})`;
             },
-            marginTop: ({ options: { outerSpacing } }) =>
-              getSpacing(outerSpacing[0], 'Landscape'),
-            marginRight: ({ options: { outerSpacing } }) =>
-              getSpacing(outerSpacing[1], 'Landscape'),
-            marginBottom: ({ options: { outerSpacing } }) =>
-              getSpacing(outerSpacing[2], 'Landscape'),
-            marginLeft: ({ options: { outerSpacing } }) =>
-              getSpacing(outerSpacing[3], 'Landscape'),
+            marginTop: getSpacing(outerSpacing[0], 'Landscape'),
+            marginRight: getSpacing(outerSpacing[1], 'Landscape'),
+            marginBottom: getSpacing(outerSpacing[2], 'Landscape'),
+            marginLeft: getSpacing(outerSpacing[3], 'Landscape'),
           },
           [`@media ${mediaMinWidth(1280)}`]: {
-            width: ({ options: { fullWidth, outerSpacing } }) => {
+            width: () => {
               if (!fullWidth) return 'auto';
               const marginRight = getSpacing(outerSpacing[1], 'Desktop');
               const marginLeft = getSpacing(outerSpacing[3], 'Desktop');
               return `calc(100% - ${marginRight} - ${marginLeft})`;
             },
-            marginTop: ({ options: { outerSpacing } }) =>
-              getSpacing(outerSpacing[0], 'Desktop'),
-            marginRight: ({ options: { outerSpacing } }) =>
-              getSpacing(outerSpacing[1], 'Desktop'),
-            marginBottom: ({ options: { outerSpacing } }) =>
-              getSpacing(outerSpacing[2], 'Desktop'),
-            marginLeft: ({ options: { outerSpacing } }) =>
-              getSpacing(outerSpacing[3], 'Desktop'),
+            marginTop: getSpacing(outerSpacing[0], 'Desktop'),
+            marginRight: getSpacing(outerSpacing[1], 'Desktop'),
+            marginBottom: getSpacing(outerSpacing[2], 'Desktop'),
+            marginLeft: getSpacing(outerSpacing[3], 'Desktop'),
           },
         },
-      },
-      contained: {
-        backgroundColor: ({ options: { background, disabled } }) => [
-          !disabled ? style.getColor(background) : 'rgba(0, 0, 0, 0.12)',
-          '!important',
-        ],
-      },
-      outlined: {
-        borderColor: ({ options: { background, disabled } }) => [
-          !disabled ? style.getColor(background) : 'rgba(0, 0, 0, .12)',
-          '!important',
-        ],
-      },
+      }),
+      root: ({ style }) => ({
+        ...style,
+        display: 'flex',
+        width: '100%',
+        cursor: 'pointer',
+        justifyContent: 'center',
+        alignItems: 'center',
+        transition: '0.3s',
+
+        '&:hover': {
+          filter: 'brightness(90%)',
+        },
+        '&:active, &:focus': {
+          filter: 'brightness(85%)',
+          outline: 'none',
+        },
+      }),
       loader: {
-        color: ({ options: { variant, textColor, background } }) => [
-          style.getColor(variant === 'icon' ? background : textColor),
-          '!important',
-        ],
+        color: 'inherit!important',
         marginLeft: '0.25rem',
       },
       empty: {
@@ -319,17 +288,17 @@
       },
       tooltip: {
         backgroundColor: ({ options: { tooltipBackground } }) => [
-          style.getColor(tooltipBackground),
+          newStyling.getColor(tooltipBackground),
           '!important',
         ],
         color: ({ options: { tooltipText } }) => [
-          style.getColor(tooltipText),
+          newStyling.getColor(tooltipText),
           '!important',
         ],
       },
       arrow: {
         color: ({ options: { tooltipBackground } }) => [
-          style.getColor(tooltipBackground),
+          newStyling.getColor(tooltipBackground),
           '!important',
         ],
       },
