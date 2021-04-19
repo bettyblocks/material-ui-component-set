@@ -3,7 +3,7 @@
   icon: 'GridIcon',
   description:
     'With this page with appbar you can select the amount of rows and the number of columns for each row',
-  // type: 'page',
+  type: 'page',
   category: 'LAYOUT',
   beforeCreate: ({
     close,
