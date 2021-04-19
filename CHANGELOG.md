@@ -1,3 +1,17 @@
+## [1.122.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.122.3...v1.122.4) (2021-04-19)
+
+
+### Bug Fixes
+
+* handle null values as empty string in autocomplete ([bb6a9d8](https://github.com/bettyblocks/material-ui-component-set/commit/bb6a9d84ab5ed5acdb2dd9ef9e68f3f8c929d729))
+
+## [1.122.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.122.2...v1.122.3) (2021-04-16)
+
+
+### Bug Fixes
+
+* row click endpoint leads to compile error ([16cb710](https://github.com/bettyblocks/material-ui-component-set/commit/16cb7107f1dc83439371abf04918809792984072))
+
 ## [1.122.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.122.1...v1.122.2) (2021-04-09)
 
 
