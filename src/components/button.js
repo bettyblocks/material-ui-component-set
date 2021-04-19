@@ -13,8 +13,8 @@
       icon,
       iconPosition,
       linkType,
-      // linkTo,
-      // linkToExternal,
+      linkTo,
+      linkToExternal,
       openLinkToExternal,
       visible,
       actionId,
@@ -32,14 +32,13 @@
       useText,
       useAction,
       useProperty,
-      // useEndpoint,
+      useEndpoint,
     } = B;
     const isDev = env === 'dev';
     const isAction = linkType === 'action';
-    // const hasLink = linkTo && linkTo.id !== '';
-    // const hasExternalLink = linkToExternal && linkToExternal.id !== '';
-    // const linkToExternalVariable =
-    //   (linkToExternal && useText(linkToExternal)) || '';
+    const linkToExternalVariable =
+      (linkToExternal && useText(linkToExternal)) || '';
+    const linkToInternalVariable = useEndpoint(linkTo);
     const buttonContent = useText(buttonText);
     const tooltipText = useText(tooltipContent);
 
@@ -98,21 +97,62 @@
       }
     }, [loading]);
 
-    const buttonProps = {
-      disabled: disabled || isLoading || loading,
-      tabindex: isDev && -1,
+    function isButtonBehavior(type) {
+      return type === 'action';
+    }
+
+    const getExternalHref = config => {
+      if (config.disabled) {
+        return false;
+      }
+      if (config.linkToExternal && config.linkToExternal.id !== '') {
+        return config.linkToExternalVariable;
+      }
+      return false;
     };
 
-    const aProps = {
-      // @ TODO: remove nested ternary
-      // href: disabled
-      //   ? false
-      //   : linkType === 'external' && hasExternalLink
-      //   ? linkToExternalVariable
-      //   : linkType === 'internal' && hasLink
-      //   ? useEndpoint(linkTo)
-      //   : false,
-      target: openLinkToExternal,
+    const getInternalHref = config => {
+      if (config.disabled) {
+        return false;
+      }
+      if (config.linkTo && config.linkTo.id !== '') {
+        return config.linkToInternalVariable;
+      }
+      return false;
+    };
+
+    const getProps = () => {
+      if (isButtonBehavior(linkType)) {
+        return {
+          disabled: disabled || isLoading || loading,
+          tabindex: isDev && -1,
+          onClick: event => {
+            event.stopPropagation();
+            actionCallback();
+          },
+          role: 'button',
+          endpoint:
+            linkType === 'internal' && linkTo && linkTo.id ? linkTo : undefined,
+        };
+      }
+
+      return {
+        href:
+          linkType === 'external'
+            ? getExternalHref({
+                disabled,
+                linkToExternal,
+                linkToExternalVariable,
+              })
+            : getInternalHref({ linkTo, linkToInternalVariable, disabled }),
+        target: openLinkToExternal,
+        endpoint:
+          linkType === 'internal' && linkTo && linkTo.id ? linkTo : undefined,
+        onClick: event => {
+          event.stopPropagation();
+          actionCallback();
+        },
+      };
     };
 
     const showIndicator = isLoading || loading;
@@ -124,17 +164,11 @@
       return null;
     };
 
+    // const hrefOverwrite =
+    //   linkType === 'internal' ? { href: useEndpoint(linkTo) } : {};
     const BasicButtonComponent = (
-      <a {...aProps} className={classes.a}>
-        <button
-          className={classes.root}
-          type="button"
-          {...buttonProps}
-          onClick={event => {
-            event.stopPropagation();
-            actionCallback();
-          }}
-        >
+      <a {...getProps()} className={classes.a}>
+        <div className={classes.root}>
           {icon !== 'None' && iconPosition === 'start' && (
             <span
               style={{
@@ -157,7 +191,7 @@
           {showIndicator && (
             <CircularProgress size={16} className={classes.loader} />
           )}
-        </button>
+        </div>
       </a>
     );
 
