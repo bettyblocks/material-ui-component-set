@@ -1920,7 +1920,7 @@
             descendants: [],
           };
 
-          for (let index = 0; index < parseInt(row.columns, 10); index += 1) {
+          for (let index = 0; index < row.columns; index += 1) {
             newRow.descendants.push({
               name: 'Column',
               options: [
