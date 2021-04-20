@@ -25,7 +25,7 @@
     const isBooleanProperty = kind === 'boolean' || kind === 'BOOLEAN';
 
     let myEndpoint = null;
-    if (linkTo) {
+    if (linkTo && linkTo.id !== '') {
       myEndpoint = useEndpoint(linkTo);
     }
 
