@@ -152,12 +152,12 @@
           }, {});
         };
 
-        const orderByArray = [orderBy].flat();
+        const orderByPath = Array.isArray(orderBy.id) ? orderBy.id : null;
         const sort =
-          !isDev && orderBy
-            ? orderByArray.reduceRight((acc, property, index) => {
+          !isDev && orderByPath
+            ? orderByPath.reduceRight((acc, property, index) => {
                 const prop = getProperty(property);
-                return index === orderByArray.length - 1
+                return index === orderByPath.length - 1
                   ? { [prop.name]: order.toUpperCase() }
                   : { [prop.name]: acc };
               }, {})
@@ -192,7 +192,7 @@
             skip: page ? (page - 1) * rowsPerPage : 0,
             take: rowsPerPage,
             variables: {
-              ...(orderBy ? { sort: { relation: sort } } : {}),
+              ...(orderByPath ? { sort: { relation: sort } } : {}),
             },
             onCompleted(res) {
               const hasResult = res && res.results && res.results.length > 0;
