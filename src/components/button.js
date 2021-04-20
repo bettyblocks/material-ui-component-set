@@ -164,8 +164,6 @@
       return null;
     };
 
-    // const hrefOverwrite =
-    //   linkType === 'internal' ? { href: useEndpoint(linkTo) } : {};
     const BasicButtonComponent = (
       <a {...getProps()} className={classes.a}>
         <div className={classes.root}>
@@ -296,12 +294,12 @@
       }),
       root: ({ style }) => ({
         ...style,
+        boxSizing: 'border-box',
         display: 'flex',
         width: '100%',
         cursor: 'pointer',
         justifyContent: 'center',
         alignItems: 'center',
-        transition: '0.3s',
 
         '&:hover': {
           filter: 'brightness(90%)',
