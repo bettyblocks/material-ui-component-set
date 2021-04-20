@@ -38,7 +38,8 @@
     const isAction = linkType === 'action';
     const linkToExternalVariable =
       (linkToExternal && useText(linkToExternal)) || '';
-    const linkToInternalVariable = useEndpoint(linkTo);
+    const linkToInternalVariable =
+      linkTo && linkTo.id !== '' && useEndpoint(linkTo);
     const buttonContent = useText(buttonText);
     const tooltipText = useText(tooltipContent);
 
