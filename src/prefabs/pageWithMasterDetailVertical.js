@@ -1615,94 +1615,82 @@
 
     const stepper = {
       setStep: step => {
-        let activeStep;
-        switch (step) {
-          case 1:
-            activeStep = (
-              <>
-                <Field
-                  label="Model"
-                  error={
-                    modelValidation && (
-                      <Text color="#e82600">Selecting a model is required</Text>
-                    )
-                  }
-                >
-                  <ModelSelector
-                    onChange={value => {
-                      setModelValidation(false);
-                      setModelId(value);
-                      setPropertiesValidation(false);
-                      setDetailsValidation(false);
-                    }}
-                    value={modelId}
-                  />
-                </Field>
-                <Field
-                  label="Columns in data table"
-                  error={
-                    propertiesValidation && (
-                      <Text color="#e82600">
-                        Selecting a property is required
-                      </Text>
-                    )
-                  }
-                >
-                  <PropertiesSelector
-                    modelId={modelId}
-                    value={properties}
-                    disabledKinds={[
-                      'HAS_AND_BELONGS_TO_MANY',
-                      'HAS_MANY',
-                      'MULTI_FILE',
-                      'AUTO_INCREMENT',
-                      'COUNT',
-                      'MULTI_IMAGE',
-                      'PDF',
-                      'SIGNED_PDF',
-                      'SUM',
-                    ]}
-                    onChange={value => {
-                      setPropertiesValidation(!value.length);
-                      setProperties(value);
-                    }}
-                  />
-                </Field>
-              </>
-            );
-            break;
-          case 2:
-            activeStep = (
-              <>
-                <Field
-                  label="Details"
-                  error={
-                    detailsValidation && (
-                      <Text color="#e82600">
-                        Selecting a property is required
-                      </Text>
-                    )
-                  }
-                >
-                  <Text color="#666D85">
-                    These properties will be visible in the detail section
-                  </Text>
-                  <PropertiesSelector
-                    modelId={modelId}
-                    value={detailProperties}
-                    onChange={value => {
-                      setDetailsValidation(!value.length);
-                      setDetailProperties(value);
-                    }}
-                  />
-                </Field>
-              </>
-            );
-            break;
-          default:
-            break;
+        if (step === 1) {
+          return (
+            <>
+              <Field
+                label="Model"
+                error={
+                  modelValidation && (
+                    <Text color="#e82600">Selecting a model is required</Text>
+                  )
+                }
+              >
+                <ModelSelector
+                  onChange={value => {
+                    setModelValidation(false);
+                    setModelId(value);
+                    setPropertiesValidation(false);
+                    setDetailsValidation(false);
+                  }}
+                  value={modelId}
+                />
+              </Field>
+              <Field
+                label="Columns in data table"
+                error={
+                  propertiesValidation && (
+                    <Text color="#e82600">
+                      Selecting a property is required
+                    </Text>
+                  )
+                }
+              >
+                <PropertiesSelector
+                  modelId={modelId}
+                  value={properties}
+                  disabledKinds={[
+                    'HAS_AND_BELONGS_TO_MANY',
+                    'HAS_MANY',
+                    'MULTI_FILE',
+                    'AUTO_INCREMENT',
+                    'COUNT',
+                    'MULTI_IMAGE',
+                    'PDF',
+                    'SIGNED_PDF',
+                    'SUM',
+                  ]}
+                  onChange={value => {
+                    setPropertiesValidation(!value.length);
+                    setProperties(value);
+                  }}
+                />
+              </Field>
+            </>
+          );
         }
-        return activeStep;
+        return (
+          <Field
+            label="Details"
+            error={
+              detailsValidation && (
+                <Text color="#e82600">Selecting a property is required</Text>
+              )
+            }
+          >
+            <Text color="#666D85">
+              These properties will be visible in the detail section
+            </Text>
+            <PropertiesSelector
+              modelId={modelId}
+              value={detailProperties}
+              onChange={value => {
+                setDetailsValidation(!value.length);
+                setDetailProperties(value);
+              }}
+            />
+          </Field>
+        );
       },
       onSave: () => {
         if (!modelId || properties.length < 1 || detailProperties.length < 1) {
