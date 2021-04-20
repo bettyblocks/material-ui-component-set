@@ -71,8 +71,11 @@
     const [showPagination, setShowPagination] = useState(false);
     const { label: searchPropertyLabel = '{property}' } =
       getProperty(searchProperty) || {};
+    const orderPropertyPath = Array.isArray(orderProperty.id)
+      ? orderProperty.id
+      : null;
     const [orderBy, setOrderBy] = React.useState({
-      field: [orderProperty].flat() || null,
+      field: orderPropertyPath,
       order: orderProperty ? sortOrder : null,
     });
     const [results, setResults] = useState([]);
@@ -85,21 +88,22 @@
     const history = isDev ? null : useHistory();
 
     const createSortObject = (fields, order) => {
-      const fieldsArray = [fields].flat();
-      const sort = fieldsArray.reduceRight((acc, property, index) => {
+      const sort = fields.reduceRight((acc, property, index) => {
         const prop = getProperty(property);
-        return index === fieldsArray.length - 1
+        return index === fields.length - 1
           ? { [prop.name]: order.toUpperCase() }
           : { [prop.name]: acc };
       }, {});
 
       return sort;
     };
+
     const [variables, setVariables] = useState(
-      orderProperty
+      orderPropertyPath
         ? {
             sort: {
-              relation: !isDev && createSortObject(orderProperty, sortOrder),
+              relation:
+                !isDev && createSortObject(orderPropertyPath, sortOrder),
             },
           }
         : {},
