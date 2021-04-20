@@ -1,7 +1,7 @@
 (() => ({
   name: 'Login And Register Form - Sidebar',
   icon: 'LoginFormIcon',
-  type: 'page',
+  // type: 'page',
   description: 'This page contains a ready to use login and register form',
   category: 'LAYOUT',
   beforeCreate: ({
@@ -5463,122 +5463,112 @@
 
     const stepper = {
       setStep: step => {
-        let activeStep;
-        switch (step) {
-          case 1:
-            activeStep = (
-              <>
-                <Field
-                  label="Select an authentication profile"
-                  error={
-                    showAuthValidation && (
-                      <Text color="#e82600">
-                        Selecting an authentication profile is required
-                      </Text>
-                    )
-                  }
+        if (step === 1) {
+          return (
+            <>
+              <Field
+                label="Select an authentication profile"
+                error={
+                  showAuthValidation && (
+                    <Text color="#e82600">
+                      Selecting an authentication profile is required
+                    </Text>
+                  )
+                }
+              >
+                <Text
+                  size="small"
+                  color="grey700"
+                  as="div"
+                  margin={{ bottom: '0.5rem' }}
                 >
-                  <Text
-                    size="small"
-                    color="grey700"
-                    as="div"
-                    margin={{ bottom: '0.5rem' }}
-                  >
-                    The input fields used in the login form are automatically
-                    generated based on the username and password property of the
-                    selected authentication profile.
-                  </Text>
-                  <AuthenticationProfileSelector
-                    onChange={(id, authProfileObject) => {
-                      setShowAuthValidation(false);
-                      setAuthProfileId(id);
-                      setAuthProfile(authProfileObject);
-                    }}
-                    value={authProfileId}
-                  />
-                </Field>
-                <Field
-                  label="Redirect after successful login"
-                  error={
-                    showEndpointValidation && (
-                      <Text color="#e82600">
-                        Selecting an endpoint is required
-                      </Text>
-                    )
-                  }
-                >
-                  <EndpointSelector
-                    value={redirectTo}
-                    size="large"
-                    onChange={value => {
-                      setShowEndpointValidation(isEmpty(value));
-                      setRedirectTo(value);
-                    }}
-                  />
-                </Field>
-              </>
-            );
-            break;
-          case 2:
-            activeStep = (
-              <>
-                <Field
-                  label="Input fields in the register form"
-                  error={
-                    showPropertiesValidation && (
-                      <Text color="#e82600">Select at least one property</Text>
-                    )
-                  }
-                >
-                  <Text
-                    size="small"
-                    color="grey700"
-                    as="div"
-                    margin={{ bottom: '0.5rem' }}
-                  >
-                    The selected properties will show up as input fields in the
-                    register form.
-                  </Text>
-                  <PropertiesSelector
-                    modelId={authProfile.loginModel}
-                    value={registerProperties}
-                    onChange={value => {
-                      setRegisterProperties(value);
-                    }}
-                    scopedModels={false}
-                    disabledNames={['created_at', 'updated_at', 'id']}
-                    disabledKinds={[
-                      'BELONGS_TO',
-                      'HAS_AND_BELONGS_TO_MANY',
-                      'HAS_MANY',
-                      'MULTI_FILE',
-                      'AUTO_INCREMENT',
-                      'COUNT',
-                      'EMAIL',
-                      'MULTI_IMAGE',
-                      'PDF',
-                      'RICH_TEXT',
-                      'SIGNED_PDF',
-                      'SUM',
-                      'BOOLEAN_EXPRESSION',
-                      'DATE_EXPRESSION',
-                      'DATE_TIME_EXPRESSION',
-                      'DECIMAL_EXPRESSION',
-                      'INTEGER_EXPRESSION',
-                      'MINUTES_EXPRESSION',
-                      'PRICE_EXPRESSION',
-                      'STRING_EXPRESSION',
-                      'TEXT_EXPRESSION',
-                    ]}
-                  />
-                </Field>
-              </>
-            );
-            break;
-          default:
-            break;
+                  The input fields used in the login form are automatically
+                  generated based on the username and password property of the
+                  selected authentication profile.
+                </Text>
+                <AuthenticationProfileSelector
+                  onChange={(id, authProfileObject) => {
+                    setShowAuthValidation(false);
+                    setAuthProfileId(id);
+                    setAuthProfile(authProfileObject);
+                  }}
+                  value={authProfileId}
+                />
+              </Field>
+              <Field
+                label="Redirect after successful login"
+                error={
+                  showEndpointValidation && (
+                    <Text color="#e82600">
+                      Selecting an endpoint is required
+                    </Text>
+                  )
+                }
+              >
+                <EndpointSelector
+                  value={redirectTo}
+                  size="large"
+                  onChange={value => {
+                    setShowEndpointValidation(isEmpty(value));
+                    setRedirectTo(value);
+                  }}
+                />
+              </Field>
+            </>
+          );
         }
-        return activeStep;
+        return (
+          <Field
+            label="Input fields in the register form"
+            error={
+              showPropertiesValidation && (
+                <Text color="#e82600">Select at least one property</Text>
+              )
+            }
+          >
+            <Text
+              size="small"
+              color="grey700"
+              as="div"
+              margin={{ bottom: '0.5rem' }}
+            >
+              The selected properties will show up as input fields in the
+              register form.
+            </Text>
+            <PropertiesSelector
+              modelId={authProfile.loginModel}
+              value={registerProperties}
+              onChange={value => {
+                setRegisterProperties(value);
+              }}
+              scopedModels={false}
+              disabledNames={['created_at', 'updated_at', 'id']}
+              disabledKinds={[
+                'BELONGS_TO',
+                'HAS_AND_BELONGS_TO_MANY',
+                'HAS_MANY',
+                'MULTI_FILE',
+                'AUTO_INCREMENT',
+                'COUNT',
+                'EMAIL',
+                'MULTI_IMAGE',
+                'PDF',
+                'RICH_TEXT',
+                'SIGNED_PDF',
+                'SUM',
+                'BOOLEAN_EXPRESSION',
+                'DATE_EXPRESSION',
+                'DATE_TIME_EXPRESSION',
+                'DECIMAL_EXPRESSION',
+                'INTEGER_EXPRESSION',
+                'MINUTES_EXPRESSION',
+                'PRICE_EXPRESSION',
+                'STRING_EXPRESSION',
+                'TEXT_EXPRESSION',
+              ]}
+            />
+          </Field>
+        );
       },
       onSave: () => {
         if (!authProfileId) {
