@@ -1403,6 +1403,12 @@
               { name: 'Medium', value: 'medium' },
               { name: 'Large', value: 'large' },
             ],
+            condition: {
+              type: 'HIDE',
+              option: 'icon',
+              comparator: 'EQ',
+              value: 'None',
+            },
           },
         },
         {
@@ -1417,6 +1423,12 @@
               { name: 'Start', value: 'start' },
               { name: 'End', value: 'end' },
             ],
+            condition: {
+              type: 'HIDE',
+              option: 'icon',
+              comparator: 'EQ',
+              value: 'None',
+            },
           },
         },
         {
