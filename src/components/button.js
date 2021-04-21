@@ -250,48 +250,6 @@
           : `calc(100% - ${getSpacing(outerSpacing[1])} - ${getSpacing(
               outerSpacing[3],
             )})`,
-        marginTop: getSpacing(outerSpacing[0]),
-        marginRight: getSpacing(outerSpacing[1]),
-        marginBottom: getSpacing(outerSpacing[2]),
-        marginLeft: getSpacing(outerSpacing[3]),
-        '&.MuiButton-root, &.MuiIconButton-root': {
-          [`@media ${mediaMinWidth(600)}`]: {
-            width: () => {
-              if (!fullWidth) return 'auto';
-              const marginRight = getSpacing(outerSpacing[1], 'Portrait');
-              const marginLeft = getSpacing(outerSpacing[3], 'Portrait');
-              return `calc(100% - ${marginRight} - ${marginLeft})`;
-            },
-            marginTop: getSpacing(outerSpacing[0], 'Portrait'),
-            marginRight: getSpacing(outerSpacing[1], 'Portrait'),
-            marginBottom: getSpacing(outerSpacing[2], 'Portrait'),
-            marginLeft: getSpacing(outerSpacing[3], 'Portrait'),
-          },
-          [`@media ${mediaMinWidth(960)}`]: {
-            width: () => {
-              if (!fullWidth) return 'auto';
-              const marginRight = getSpacing(outerSpacing[1], 'Landscape');
-              const marginLeft = getSpacing(outerSpacing[3], 'Landscape');
-              return `calc(100% - ${marginRight} - ${marginLeft})`;
-            },
-            marginTop: getSpacing(outerSpacing[0], 'Landscape'),
-            marginRight: getSpacing(outerSpacing[1], 'Landscape'),
-            marginBottom: getSpacing(outerSpacing[2], 'Landscape'),
-            marginLeft: getSpacing(outerSpacing[3], 'Landscape'),
-          },
-          [`@media ${mediaMinWidth(1280)}`]: {
-            width: () => {
-              if (!fullWidth) return 'auto';
-              const marginRight = getSpacing(outerSpacing[1], 'Desktop');
-              const marginLeft = getSpacing(outerSpacing[3], 'Desktop');
-              return `calc(100% - ${marginRight} - ${marginLeft})`;
-            },
-            marginTop: getSpacing(outerSpacing[0], 'Desktop'),
-            marginRight: getSpacing(outerSpacing[1], 'Desktop'),
-            marginBottom: getSpacing(outerSpacing[2], 'Desktop'),
-            marginLeft: getSpacing(outerSpacing[3], 'Desktop'),
-          },
-        },
       }),
       root: ({ style }) => ({
         ...style,
@@ -301,6 +259,62 @@
         cursor: 'pointer',
         justifyContent: 'center',
         alignItems: 'center',
+        marginTop: ({ options: { outerSpacing } }) =>
+          getSpacing(outerSpacing[0]),
+        marginRight: ({ options: { outerSpacing } }) =>
+          getSpacing(outerSpacing[1]),
+        marginBottom: ({ options: { outerSpacing } }) =>
+          getSpacing(outerSpacing[2]),
+        marginLeft: ({ options: { outerSpacing } }) =>
+          getSpacing(outerSpacing[3]),
+        [`@media ${mediaMinWidth(600)}`]: {
+          width: ({ options: { fullWidth, outerSpacing } }) => {
+            if (!fullWidth) return 'auto';
+            const marginRight = getSpacing(outerSpacing[1], 'Portrait');
+            const marginLeft = getSpacing(outerSpacing[3], 'Portrait');
+            return `calc(100% - ${marginRight} - ${marginLeft})`;
+          },
+          marginTop: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[0], 'Portrait'),
+          marginRight: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[1], 'Portrait'),
+          marginBottom: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[2], 'Portrait'),
+          marginLeft: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[3], 'Portrait'),
+        },
+        [`@media ${mediaMinWidth(960)}`]: {
+          width: ({ options: { fullWidth, outerSpacing } }) => {
+            if (!fullWidth) return 'auto';
+            const marginRight = getSpacing(outerSpacing[1], 'Landscape');
+            const marginLeft = getSpacing(outerSpacing[3], 'Landscape');
+            return `calc(100% - ${marginRight} - ${marginLeft})`;
+          },
+          marginTop: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[0], 'Landscape'),
+          marginRight: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[1], 'Landscape'),
+          marginBottom: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[2], 'Landscape'),
+          marginLeft: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[3], 'Landscape'),
+        },
+        [`@media ${mediaMinWidth(1280)}`]: {
+          width: ({ options: { fullWidth, outerSpacing } }) => {
+            if (!fullWidth) return 'auto';
+            const marginRight = getSpacing(outerSpacing[1], 'Desktop');
+            const marginLeft = getSpacing(outerSpacing[3], 'Desktop');
+            return `calc(100% - ${marginRight} - ${marginLeft})`;
+          },
+          marginTop: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[0], 'Desktop'),
+          marginRight: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[1], 'Desktop'),
+          marginBottom: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[2], 'Desktop'),
+          marginLeft: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[3], 'Desktop'),
+        },
 
         '&:hover': {
           filter: 'brightness(90%)',
