@@ -1,8 +1,8 @@
 (() => ({
-  name: 'Button',
+  name: 'Action Button',
   icon: 'ButtonIcon',
   category: 'BUTTON',
-  keywords: ['Button'],
+  keywords: ['Button', 'action', 'action button'],
   structure: [
     {
       name: 'Button',
@@ -36,7 +36,7 @@
           type: 'VARIABLE',
           label: 'Button text',
           key: 'buttonText',
-          value: ['Button'],
+          value: ['Action Button'],
           configuration: {
             condition: {
               type: 'HIDE',
@@ -44,70 +44,6 @@
               comparator: 'EQ',
               value: 'icon',
             },
-          },
-        },
-        {
-          type: 'CUSTOM',
-          label: 'Link to',
-          key: 'linkType',
-          value: 'internal',
-          configuration: {
-            as: 'BUTTONGROUP',
-            dataType: 'string',
-            allowedInput: [
-              { name: 'Internal page', value: 'internal' },
-              { name: 'External page', value: 'external' },
-              { name: 'Action', value: 'action' },
-            ],
-          },
-        },
-        {
-          value: '',
-          label: 'Page',
-          key: 'linkTo',
-          type: 'ENDPOINT',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'linkType',
-              comparator: 'EQ',
-              value: 'internal',
-            },
-          },
-        },
-        {
-          value: [''],
-          label: 'URL',
-          key: 'linkToExternal',
-          type: 'VARIABLE',
-          configuration: {
-            placeholder: 'Starts with https:// or http://',
-            condition: {
-              type: 'SHOW',
-              option: 'linkType',
-              comparator: 'EQ',
-              value: 'external',
-            },
-          },
-        },
-        {
-          value: '_self',
-          label: 'Open in',
-          key: 'openLinkToExternal',
-          type: 'CUSTOM',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'linkType',
-              comparator: 'EQ',
-              value: 'external',
-            },
-            as: 'BUTTONGROUP',
-            dataType: 'string',
-            allowedInput: [
-              { name: 'Current Tab', value: '_self' },
-              { name: 'New Tab', value: '_blank' },
-            ],
           },
         },
         {
