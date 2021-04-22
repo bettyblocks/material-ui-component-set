@@ -35,7 +35,7 @@
       useEndpoint,
     } = B;
     const isDev = env === 'dev';
-    const isAction = linkType === 'action';
+    const isAction = linkType === 'action' || actionId !== '';
     const linkToExternalVariable =
       (linkToExternal && useText(linkToExternal)) || '';
     const linkToInternalVariable =

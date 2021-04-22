@@ -45,10 +45,6 @@
                             name: 'External page',
                             value: 'external',
                           },
-                          {
-                            name: 'Action',
-                            value: 'action',
-                          },
                         ],
                         apiVersion: 'v1',
                         as: 'BUTTONGROUP',
@@ -1637,10 +1633,6 @@
                             name: 'External page',
                             value: 'external',
                           },
-                          {
-                            name: 'Action',
-                            value: 'action',
-                          },
                         ],
                         apiVersion: 'v1',
                         as: 'BUTTONGROUP',
@@ -3208,7 +3200,7 @@
                   key: 'height',
                   label: 'Height',
                   type: 'SIZE',
-                  value: '60px',
+                  value: '',
                 },
                 {
                   configuration: {
