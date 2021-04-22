@@ -23,6 +23,21 @@
           value: ['Button'],
         },
         {
+          type: 'CUSTOM',
+          label: 'Link to',
+          key: 'linkType',
+          value: 'internal',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Internal page', value: 'internal' },
+              { name: 'External page', value: 'external' },
+              { name: 'Action', value: 'action' },
+            ],
+          },
+        },
+        {
           value: '',
           label: 'Action',
           key: 'actionId',
@@ -1368,7 +1383,7 @@
           },
         },
         {
-          value: ['0rem', 'M', '0rem', '0rem'],
+          value: ['0rem', '0rem', '0rem', '0rem'],
           label: 'Outer space',
           key: 'outerSpacing',
           type: 'SIZES',
