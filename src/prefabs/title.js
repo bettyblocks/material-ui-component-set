@@ -2,6 +2,20 @@
   name: 'Title',
   icon: 'TitleIcon',
   category: 'CONTENT',
+  keywords: [
+    'Content',
+    'title',
+    'type',
+    'typography',
+    'heading',
+    'h1',
+    'h2',
+    'h3',
+    'h4',
+    'h5',
+    'h6',
+    'text',
+  ],
   structure: [
     {
       name: 'Text',

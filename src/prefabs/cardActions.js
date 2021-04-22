@@ -1,7 +1,8 @@
 (() => ({
-  name: 'CardActions',
+  name: 'Card Actions',
   icon: 'CardActionsIcon',
   category: 'CARDS',
+  keywords: ['Cards', 'card', 'actions', 'cardactions'],
   structure: [
     {
       name: 'CardActions',

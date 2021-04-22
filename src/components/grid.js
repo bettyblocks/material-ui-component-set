@@ -136,10 +136,12 @@
           }
 
           const { results = [] } = data || {};
-          if (results.length > 0) {
-            B.triggerEvent('onSuccess', results);
-          } else {
-            B.triggerEvent('onNoResults');
+          if (data && data.results) {
+            if (results.length > 0) {
+              B.triggerEvent('onSuccess', results);
+            } else {
+              B.triggerEvent('onNoResults');
+            }
           }
 
           return (

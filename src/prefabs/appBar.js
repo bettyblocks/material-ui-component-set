@@ -1,7 +1,8 @@
 (() => ({
-  name: 'AppBar',
+  name: 'Navigation Bar',
   icon: 'NavbarIcon',
   category: 'NAVIGATION',
+  keywords: ['Navigation', 'bar', 'navigationbar', 'menu', 'navbar', 'appbar'],
   structure: [
     {
       name: 'AppBar',
@@ -22,7 +23,7 @@
           type: 'SIZE',
           label: 'Height',
           key: 'height',
-          value: '60px',
+          value: '',
           configuration: {
             as: 'UNIT',
           },

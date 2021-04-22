@@ -2,6 +2,7 @@
   name: 'Chip',
   icon: 'ChipIcon',
   category: 'CONTENT',
+  keywords: ['Content', 'chip'],
   structure: [
     {
       name: 'Chip',
