@@ -26,7 +26,7 @@
         return;
       }
       const newPrefab = { ...prefab };
-      newPrefab.structure[0].options[4].value = endpoint;
+      newPrefab.structure[0].options[3].value = endpoint;
       save(newPrefab);
     };
 
