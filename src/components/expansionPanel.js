@@ -23,6 +23,16 @@
       variant,
       elevation,
     } = options;
+    const Variant = {
+      Title1: 'h1',
+      Title2: 'h2',
+      Title3: 'h3',
+      Title4: 'h4',
+      Title5: 'h5',
+      Title6: 'h6',
+      Body1: 'p',
+      Body2: 'p',
+    }[options.titleType || 'Body1'];
 
     const [expanded, setExpanded] = useState(defaultExpanded);
 
@@ -33,6 +43,9 @@
     B.defineFunction('Expand', openPanel);
     B.defineFunction('Collapse', closePanel);
     B.defineFunction('Expand/Collapse', togglePanel);
+    B.defineFunction('Set Expansion Panel', value => {
+      if (typeof value === 'boolean') setExpanded(value);
+    });
 
     useEffect(() => {
       if (isDev) {
@@ -71,7 +84,9 @@
     const ExpansionPanelComponent = (
       <ExpansionPanel {...panelOptions}>
         <ExpansionPanelSummary {...panelSummaryOptions}>
-          <Typography>{useText(title)}</Typography>
+          <Typography variant={Variant} className={classes.panelTitle}>
+            {useText(title)}
+          </Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails className={classes.panelDetails}>
           {isEmpty ? PlaceHolder : children}
@@ -87,6 +102,27 @@
     const getSpacing = (idx, device = 'Mobile') =>
       idx === '0' ? '0rem' : style.getSpacing(idx, device);
     return {
+      panelTitle: {
+        marginTop: ({ options: { titleSpacing } }) =>
+          getSpacing(titleSpacing[0]),
+        marginRight: ({ options: { titleSpacing } }) =>
+          getSpacing(titleSpacing[1]),
+        marginBottom: ({ options: { titleSpacing } }) =>
+          getSpacing(titleSpacing[2]),
+        marginLeft: ({ options: { titleSpacing } }) =>
+          getSpacing(titleSpacing[3]),
+        color: ({ options: { titleTextColor } }) =>
+          style.getColor(titleTextColor),
+        fontFamily: ({ options: { titleType } }) =>
+          style.getFontFamily(titleType),
+        fontSize: ({ options: { titleType } }) => style.getFontSize(titleType),
+        fontWeight: ({ options: { titleFontWeight } }) => titleFontWeight,
+        textTransform: ({ options: { titleType } }) =>
+          style.getTextTransform(titleType),
+        letterSpacing: ({ options: { titleType } }) =>
+          style.getLetterSpacing(titleType),
+      },
+
       panelDetails: {
         '&.MuiExpansionPanelDetails-root': {
           paddingTop: ({ options: { innerSpacing } }) =>

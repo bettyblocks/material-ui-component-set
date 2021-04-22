@@ -2,6 +2,7 @@
   name: 'Avatar',
   icon: 'AvatarIcon',
   category: 'CONTENT',
+  keywords: ['Content', 'avatar', 'profile picture'],
   structure: [
     {
       name: 'Avatar',

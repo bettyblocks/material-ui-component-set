@@ -2,6 +2,7 @@
   name: 'Menu',
   icon: 'MenuIcon',
   category: 'NAVIGATION',
+  keywords: ['Navigation', 'menu', 'dropdown'],
   structure: [
     {
       name: 'Menu',

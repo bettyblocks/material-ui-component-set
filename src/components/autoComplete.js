@@ -68,6 +68,7 @@
     const { kind, values: listValues } = getProperty(property) || {};
     const [currentValue, setCurrentValue] = useState(useText(defaultValue));
     const [currentLabel, setCurrentLabel] = useState('');
+    const mounted = useRef(false);
     const labelText = useText(label);
 
     const textFieldProps = {
@@ -151,7 +152,7 @@
           }, {})
         : {};
 
-    const { loading, error: err, data, refetch } =
+    const { loading, error: err, data: { results } = {}, refetch } =
       model &&
       useAllQuery(model, {
         ...useFilter,
@@ -160,13 +161,39 @@
         variables: {
           ...(orderBy ? { sort: { relation: sort } } : {}),
         },
+        onCompleted(res) {
+          const hasResult = res && res.results && res.results.length > 0;
+          if (hasResult) {
+            B.triggerEvent('onSuccess', res.results);
+          } else {
+            B.triggerEvent('onNoResults');
+          }
+        },
+        onError(resp) {
+          if (!displayError) {
+            B.triggerEvent('onError', resp);
+          }
+        },
       });
 
     useEffect(() => {
-      if (!isDev && data) {
+      mounted.current = true;
+      return () => {
+        mounted.current = false;
+      };
+    }, []);
+
+    useEffect(() => {
+      if (!isDev && results) {
         resetFilter();
       }
-    }, [data]);
+    }, [results]);
+
+    useEffect(() => {
+      if (mounted.current && loading) {
+        B.triggerEvent('onLoad', loading);
+      }
+    }, [loading]);
 
     useEffect(() => {
       if (isDev) {
@@ -174,7 +201,10 @@
       }
     }, [isDev, defaultValue]);
 
-    B.defineFunction('Clear', () => setCurrentValue(null));
+    B.defineFunction('Clear', () => {
+      setCurrentValue(multiple ? [] : null);
+      setSearchParam('');
+    });
     B.defineFunction('Refetch', () => refetch());
 
     useEffect(() => {
@@ -186,61 +216,36 @@
       };
     }, [searchParam]);
 
-    const mounted = useRef(false);
-
     useEffect(() => {
-      mounted.current = true;
-      return () => {
-        mounted.current = false;
-      };
-    }, []);
-
-    useEffect(() => {
-      if (mounted.current && loading) {
-        B.triggerEvent('onLoad', loading);
-      }
-    }, [loading]);
-
-    if (err && !displayError) {
-      B.triggerEvent('onError', err);
-    }
-
-    const { results } = data || {};
-    if (results) {
-      if (results.length > 0) {
-        B.triggerEvent('onSuccess', results);
-      } else {
-        B.triggerEvent('onNoResults');
-      }
-    }
+      B.triggerEvent('onChange', currentValue);
+    });
 
     const onChange = (_, newValue) => {
       if (!valueProp || !newValue) {
-        setCurrentValue(newValue);
-        setCurrentLabel(newValue);
-        B.triggerEvent('OnChange');
+        setCurrentValue(newValue || '');
+        setCurrentLabel(newValue || '');
         return;
       }
 
-      let newCurrentValue = newValue[valueProp.name] || newValue;
-
+      const isPropDefined = newValue[valueProp.name] !== undefined;
+      const propValue = isPropDefined ? newValue[valueProp.name] || '' : '';
+      let newCurrentValue = isPropDefined ? propValue : newValue;
       if (typeof newValue === 'string') {
         if (currentLabel === newValue) {
           newCurrentValue = currentValue;
         }
       } else if (searchProp) {
         const newLabelValue = newValue[searchProp.name];
-        setCurrentLabel(newLabelValue);
+        setCurrentLabel(newLabelValue || '');
       }
 
       if (multiple) {
         newCurrentValue = newValue.map(rec => rec[valueProp.name] || rec);
       }
       setCurrentValue(newCurrentValue);
-      B.triggerEvent('OnChange');
     };
 
-    const getDefaultValue = React.useCallback(() => {
+    const record = React.useMemo(() => {
       if (!currentValue || !results) {
         return multiple ? [] : null;
       }
@@ -251,8 +256,10 @@
           : [currentValue];
       }
       const currentRecords = results.reduce((acc, cv) => {
-        const searchStr = cv[valueProp.name].toString();
-        const search = cv[valueProp.name];
+        const searchStr = cv[valueProp.name]
+          ? cv[valueProp.name].toString()
+          : '';
+        const search = cv[valueProp.name] || '';
         if (
           currentRecordsKeys.indexOf(searchStr) > -1 ||
           currentRecordsKeys.indexOf(search) > -1
@@ -263,20 +270,24 @@
       }, []);
 
       const singleRecord = currentRecords[0] ? { ...currentRecords[0] } : null;
-      return multiple ? currentRecords : singleRecord;
-    }, [results]);
 
-    const defaultRecord = getDefaultValue();
+      return multiple ? currentRecords : singleRecord;
+    }, [currentValue, results]);
 
     useEffect(() => {
-      if (!multiple && defaultRecord && searchProp) {
-        setCurrentLabel(defaultRecord[searchProp.name]);
+      if (!multiple) {
+        setCurrentLabel(
+          (record && searchProp && record[searchProp.name]) || '',
+        );
       }
-    }, [defaultRecord]);
+    }, [record]);
 
     const renderLabel = option => {
       const optionLabel = option[searchProp.name];
-      return optionLabel !== undefined && optionLabel === ''
+      const isEmptyLabel =
+        optionLabel !== undefined &&
+        (optionLabel === '' || optionLabel === null);
+      return isEmptyLabel
         ? '-- empty --'
         : (optionLabel && optionLabel.toString()) || option;
     };
@@ -309,7 +320,6 @@
     if (kind === 'list' || kind === 'LIST') {
       const onPropertyListChange = (_, newValue) => {
         setCurrentValue(newValue);
-        B.triggerEvent('OnChange');
       };
 
       const selectValues =
@@ -362,7 +372,7 @@
     }
 
     if (err && displayError) return <span>{err.message}</span>;
-    if (!data || hasNoProp) {
+    if (!results || hasNoProp) {
       return (
         <TextField
           {...textFieldProps}
@@ -375,13 +385,21 @@
       );
     }
 
+    let currentInputValue = searchParam;
+    if (!searchParam && record) {
+      currentInputValue = currentLabel;
+    }
+    if (!currentInputValue) {
+      currentInputValue = '';
+    }
+
     return (
       <Autocomplete
         multiple={multiple}
         freeSolo={freeSolo}
-        autoSelect={freeSolo}
         options={results}
-        defaultValue={defaultRecord}
+        value={record}
+        inputValue={currentInputValue}
         getOptionLabel={renderLabel}
         getOptionSelected={(option, value) => value.id === option.id}
         PopoverProps={{
@@ -389,8 +407,8 @@
             root: classes.popover,
           },
         }}
-        onInputChange={(_, inputValue) => {
-          setSearchParam(inputValue);
+        onInputChange={(event, inputValue) => {
+          if (event) setSearchParam(inputValue);
         }}
         onChange={onChange}
         disableCloseOnSelect={!closeOnSelect}

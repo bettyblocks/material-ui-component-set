@@ -1,7 +1,8 @@
 (() => ({
-  name: '3 columns',
+  name: '3 Columns',
   icon: 'Layout444Icon',
   category: 'LAYOUT',
+  keywords: ['Layout', 'column', 'columns', '3'],
   structure: [
     {
       name: 'Row',

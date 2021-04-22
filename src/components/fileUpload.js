@@ -469,6 +469,7 @@
         marginRight: '1rem!important',
       },
       button: {
+        width: '100%',
         color: ({ options: { variant, buttonTextColor, background } }) => [
           style.getColor(variant === 'icon' ? background : buttonTextColor),
           '!important',
