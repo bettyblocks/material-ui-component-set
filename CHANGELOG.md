@@ -1,3 +1,10 @@
+## [1.122.5](https://github.com/bettyblocks/material-ui-component-set/compare/v1.122.4...v1.122.5) (2021-04-20)
+
+
+### Bug Fixes
+
+* sorting on belongs to property now uses the correct path ([78b0719](https://github.com/bettyblocks/material-ui-component-set/commit/78b071991c29e3a7f5b1cbabbb1756283a42d759))
+
 ## [1.122.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.122.3...v1.122.4) (2021-04-19)
 
 
