@@ -1,7 +1,8 @@
 (() => ({
-  name: 'TimePicker',
+  name: 'Time Picker',
   icon: 'TimePickerIcon',
   category: 'FORM',
+  keywords: ['Form', 'input', 'time', 'picker', 'timepicker'],
   structure: [
     {
       name: 'DateTimePicker',

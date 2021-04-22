@@ -2,6 +2,7 @@
   name: 'Divider',
   icon: 'HorizontalRuleIcon',
   category: 'CONTENT',
+  keywords: ['Content', 'divider', 'hr', 'hairline'],
   structure: [
     {
       name: 'Divider',

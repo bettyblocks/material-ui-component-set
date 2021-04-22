@@ -2,6 +2,7 @@
   name: 'Paper',
   icon: 'PaperIcon',
   category: 'LAYOUT',
+  keywords: ['Layout', 'paper'],
   structure: [
     {
       name: 'Paper',
@@ -68,6 +69,12 @@
               value: 'elevation',
             },
           },
+        },
+        {
+          value: ['0rem', '0rem', '0rem', '0rem'],
+          label: 'Outer space',
+          key: 'outerSpacing',
+          type: 'SIZES',
         },
       ],
       descendants: [

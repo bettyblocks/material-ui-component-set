@@ -15,25 +15,37 @@
     } = options;
     const { headerOnly, handleSort, orderBy, linkTo, handleRowClick, context } =
       parent || {};
-    const { type } = property;
-    const propertyArray = [property].flat();
-    const { name: propertyName, label: propertyLabel } =
+    const { type, id: propertyPath } = property;
+    const { kind, name: propertyName, label: propertyLabel } =
       getProperty(property) || {};
     const { field, order = 'asc' } = orderBy || {};
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
     const contentPlaceholder = isDev && isEmpty ? 'Select property' : '\u00A0';
+    const isBooleanProperty = kind === 'boolean' || kind === 'BOOLEAN';
 
     let myEndpoint = null;
-    if (linkTo) {
+    if (linkTo && linkTo.id !== '') {
       myEndpoint = useEndpoint(linkTo);
     }
 
+    let checkboxStatus = '';
+    if (isBooleanProperty && useText([property]))
+      checkboxStatus =
+        useText([property]) === 'true' ? (
+          <span className={classes.checked} role="img" aria-label="checked">
+            &#10003;
+          </span>
+        ) : (
+          <span className={classes.unchecked} role="img" aria-label="unchecked">
+            &#10007;
+          </span>
+        );
     const bodyText = useText(content);
     const propContent = isDev ? (
       `{{ ${propertyName} }}`
     ) : (
-      <Property id={property} />
+      <>{!isBooleanProperty ? <Property id={property} /> : checkboxStatus}</>
     );
 
     let columnText = propertyName ? propContent : contentPlaceholder;
@@ -59,10 +71,10 @@
     };
 
     const isFilterSelected = fields => {
-      if (!fields || fields.length !== propertyArray.length) return false;
+      if (!fields || fields.length !== propertyPath.length) return false;
 
       for (let index = 0; index < fields.length; index += 1) {
-        if (fields[index] !== propertyArray[index]) return false;
+        if (fields[index] !== propertyPath[index]) return false;
       }
 
       return true;
@@ -80,7 +92,7 @@
         classes={{ root: classes.columnSort }}
         active={isFilterSelected(field)}
         direction={isFilterSelected(field) && order ? order : 'asc'}
-        onClick={() => createSortHandler(propertyArray)}
+        onClick={() => createSortHandler(propertyPath)}
       >
         <span className={classes.columnHeader}>{columnHeaderText}</span>
       </TableSortLabel>
@@ -219,6 +231,12 @@
         '& .MuiSvgIcon-root': {
           opacity: isDev && 0.5,
         },
+      },
+      checked: {
+        color: style.getColor('Success'),
+      },
+      unchecked: {
+        color: style.getColor('Danger'),
       },
     };
   },

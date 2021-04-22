@@ -2,6 +2,7 @@
   name: 'Stepper',
   icon: 'StepperIcon',
   category: 'NAVIGATION',
+  keywords: ['Navigation', 'stepper', 'progress'],
   structure: [
     {
       name: 'Stepper',

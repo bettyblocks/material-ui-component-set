@@ -2,6 +2,7 @@
   name: 'Tab',
   icon: 'TabIcon',
   category: 'NAVIGATION',
+  keywords: ['Navigation', 'tab'],
   structure: [
     {
       name: 'Tab',
