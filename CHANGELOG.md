@@ -1,3 +1,10 @@
+# [1.123.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.122.5...v1.123.0) (2021-04-22)
+
+
+### Features
+
+* page with login form styled ([d589dc1](https://github.com/bettyblocks/material-ui-component-set/commit/d589dc1eea9ce26a2cdccb14ca0fdd93f2e6c0e8))
+
 ## [1.122.5](https://github.com/bettyblocks/material-ui-component-set/compare/v1.122.4...v1.122.5) (2021-04-20)
 
 
