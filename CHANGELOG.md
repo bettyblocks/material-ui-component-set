@@ -1,3 +1,15 @@
+# [1.126.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.125.0...v1.126.0) (2021-04-22)
+
+
+### Bug Fixes
+
+* add outerspace option to card prefab ([b8978e2](https://github.com/bettyblocks/material-ui-component-set/commit/b8978e2969cdbdbfeb2974fdb77ede56f7f4879b))
+
+
+### Features
+
+* page with grid and list view ([6a22566](https://github.com/bettyblocks/material-ui-component-set/commit/6a22566da85ba7293cc560d751836fc3dc59d38e))
+
 # [1.125.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.124.0...v1.125.0) (2021-04-22)
 
 
