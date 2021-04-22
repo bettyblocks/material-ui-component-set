@@ -3326,7 +3326,7 @@
                   key: 'height',
                   label: 'Height',
                   type: 'SIZE',
-                  value: '60px',
+                  value: '',
                 },
                 {
                   configuration: {
