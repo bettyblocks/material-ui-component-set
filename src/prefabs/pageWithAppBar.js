@@ -27,42 +27,7 @@
                     },
                     {
                       configuration: {
-                        allowedInput: [
-                          {
-                            name: 'Text',
-                            value: 'text',
-                          },
-                          {
-                            name: 'Outlined',
-                            value: 'outlined',
-                          },
-                          {
-                            name: 'Contain',
-                            value: 'contained',
-                          },
-                          {
-                            name: 'Icon',
-                            value: 'icon',
-                          },
-                        ],
                         apiVersion: 'v1',
-                        as: 'BUTTONGROUP',
-                        dataType: 'string',
-                      },
-                      key: 'variant',
-                      label: 'variant',
-                      type: 'CUSTOM',
-                      value: 'text',
-                    },
-                    {
-                      configuration: {
-                        apiVersion: 'v1',
-                        condition: {
-                          comparator: 'EQ',
-                          option: 'variant',
-                          type: 'HIDE',
-                          value: 'icon',
-                        },
                       },
                       key: 'buttonText',
                       label: 'Button text',
@@ -146,40 +111,24 @@
                         apiVersion: 'v1',
                         condition: {
                           comparator: 'EQ',
-                          option: 'variant',
-                          type: 'HIDE',
-                          value: 'icon',
+                          option: 'linkType',
+                          type: 'SHOW',
+                          value: 'action',
                         },
+                      },
+                      key: 'actionId',
+                      label: 'Action',
+                      type: 'ACTION',
+                      value: '',
+                    },
+                    {
+                      configuration: {
+                        apiVersion: 'v1',
                       },
                       key: 'fullWidth',
                       label: 'Full width',
                       type: 'TOGGLE',
                       value: false,
-                    },
-                    {
-                      configuration: {
-                        allowedInput: [
-                          {
-                            name: 'Large',
-                            value: 'large',
-                          },
-                          {
-                            name: 'Medium',
-                            value: 'medium',
-                          },
-                          {
-                            name: 'Small',
-                            value: 'small',
-                          },
-                        ],
-                        apiVersion: 'v1',
-                        as: 'BUTTONGROUP',
-                        dataType: 'string',
-                      },
-                      key: 'size',
-                      label: 'Size',
-                      type: 'CUSTOM',
-                      value: 'medium',
                     },
                     {
                       configuration: {
@@ -1454,6 +1403,37 @@
                       configuration: {
                         allowedInput: [
                           {
+                            name: 'Large',
+                            value: 'large',
+                          },
+                          {
+                            name: 'Medium',
+                            value: 'medium',
+                          },
+                          {
+                            name: 'Small',
+                            value: 'small',
+                          },
+                        ],
+                        apiVersion: 'v1',
+                        as: 'BUTTONGROUP',
+                        dataType: 'string',
+                        condition: {
+                          type: 'HIDE',
+                          option: 'icon',
+                          comparator: 'EQ',
+                          value: 'None',
+                        },
+                      },
+                      key: 'size',
+                      label: 'Size',
+                      type: 'CUSTOM',
+                      value: 'medium',
+                    },
+                    {
+                      configuration: {
+                        allowedInput: [
+                          {
                             name: 'Start',
                             value: 'start',
                           },
@@ -1465,10 +1445,10 @@
                         apiVersion: 'v1',
                         as: 'BUTTONGROUP',
                         condition: {
-                          comparator: 'EQ',
-                          option: 'variant',
                           type: 'HIDE',
-                          value: 'icon',
+                          option: 'icon',
+                          comparator: 'EQ',
+                          value: 'None',
                         },
                         dataType: 'string',
                       },
@@ -1476,30 +1456,6 @@
                       label: 'Icon position',
                       type: 'CUSTOM',
                       value: 'start',
-                    },
-                    {
-                      configuration: {
-                        apiVersion: 'v1',
-                        condition: {
-                          comparator: 'EQ',
-                          option: 'variant',
-                          type: 'HIDE',
-                          value: 'icon',
-                        },
-                      },
-                      key: 'textColor',
-                      label: 'Text color',
-                      type: 'COLOR',
-                      value: 'White',
-                    },
-                    {
-                      configuration: {
-                        apiVersion: 'v1',
-                      },
-                      key: 'background',
-                      label: 'Color',
-                      type: 'COLOR',
-                      value: 'Primary',
                     },
                     {
                       configuration: {
@@ -1659,42 +1615,7 @@
                     },
                     {
                       configuration: {
-                        allowedInput: [
-                          {
-                            name: 'Text',
-                            value: 'text',
-                          },
-                          {
-                            name: 'Outlined',
-                            value: 'outlined',
-                          },
-                          {
-                            name: 'Contain',
-                            value: 'contained',
-                          },
-                          {
-                            name: 'Icon',
-                            value: 'icon',
-                          },
-                        ],
                         apiVersion: 'v1',
-                        as: 'BUTTONGROUP',
-                        dataType: 'string',
-                      },
-                      key: 'variant',
-                      label: 'variant',
-                      type: 'CUSTOM',
-                      value: 'text',
-                    },
-                    {
-                      configuration: {
-                        apiVersion: 'v1',
-                        condition: {
-                          comparator: 'EQ',
-                          option: 'variant',
-                          type: 'HIDE',
-                          value: 'icon',
-                        },
                       },
                       key: 'buttonText',
                       label: 'Button text',
@@ -1778,40 +1699,24 @@
                         apiVersion: 'v1',
                         condition: {
                           comparator: 'EQ',
-                          option: 'variant',
-                          type: 'HIDE',
-                          value: 'icon',
+                          option: 'linkType',
+                          type: 'SHOW',
+                          value: 'action',
                         },
+                      },
+                      key: 'actionId',
+                      label: 'Action',
+                      type: 'ACTION',
+                      value: '',
+                    },
+                    {
+                      configuration: {
+                        apiVersion: 'v1',
                       },
                       key: 'fullWidth',
                       label: 'Full width',
                       type: 'TOGGLE',
                       value: false,
-                    },
-                    {
-                      configuration: {
-                        allowedInput: [
-                          {
-                            name: 'Large',
-                            value: 'large',
-                          },
-                          {
-                            name: 'Medium',
-                            value: 'medium',
-                          },
-                          {
-                            name: 'Small',
-                            value: 'small',
-                          },
-                        ],
-                        apiVersion: 'v1',
-                        as: 'BUTTONGROUP',
-                        dataType: 'string',
-                      },
-                      key: 'size',
-                      label: 'Size',
-                      type: 'CUSTOM',
-                      value: 'medium',
                     },
                     {
                       configuration: {
@@ -3086,6 +2991,37 @@
                       configuration: {
                         allowedInput: [
                           {
+                            name: 'Large',
+                            value: 'large',
+                          },
+                          {
+                            name: 'Medium',
+                            value: 'medium',
+                          },
+                          {
+                            name: 'Small',
+                            value: 'small',
+                          },
+                        ],
+                        condition: {
+                          type: 'HIDE',
+                          option: 'icon',
+                          comparator: 'EQ',
+                          value: 'None',
+                        },
+                        apiVersion: 'v1',
+                        as: 'BUTTONGROUP',
+                        dataType: 'string',
+                      },
+                      key: 'size',
+                      label: 'Size',
+                      type: 'CUSTOM',
+                      value: 'medium',
+                    },
+                    {
+                      configuration: {
+                        allowedInput: [
+                          {
                             name: 'Start',
                             value: 'start',
                           },
@@ -3097,10 +3033,10 @@
                         apiVersion: 'v1',
                         as: 'BUTTONGROUP',
                         condition: {
-                          comparator: 'EQ',
-                          option: 'variant',
                           type: 'HIDE',
-                          value: 'icon',
+                          option: 'icon',
+                          comparator: 'EQ',
+                          value: 'None',
                         },
                         dataType: 'string',
                       },
@@ -3108,30 +3044,6 @@
                       label: 'Icon position',
                       type: 'CUSTOM',
                       value: 'start',
-                    },
-                    {
-                      configuration: {
-                        apiVersion: 'v1',
-                        condition: {
-                          comparator: 'EQ',
-                          option: 'variant',
-                          type: 'HIDE',
-                          value: 'icon',
-                        },
-                      },
-                      key: 'textColor',
-                      label: 'Text color',
-                      type: 'COLOR',
-                      value: 'White',
-                    },
-                    {
-                      configuration: {
-                        apiVersion: 'v1',
-                      },
-                      key: 'background',
-                      label: 'Color',
-                      type: 'COLOR',
-                      value: 'Primary',
                     },
                     {
                       configuration: {

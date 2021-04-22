@@ -416,34 +416,10 @@
                   },
                 },
                 {
-                  type: 'CUSTOM',
-                  label: 'variant',
-                  key: 'variant',
-                  value: 'text',
-                  configuration: {
-                    as: 'BUTTONGROUP',
-                    dataType: 'string',
-                    allowedInput: [
-                      { name: 'Text', value: 'text' },
-                      { name: 'Outlined', value: 'outlined' },
-                      { name: 'Contain', value: 'contained' },
-                      { name: 'Icon', value: 'icon' },
-                    ],
-                  },
-                },
-                {
                   type: 'VARIABLE',
                   label: 'Button text',
                   key: 'buttonText',
                   value: ['Button'],
-                  configuration: {
-                    condition: {
-                      type: 'HIDE',
-                      option: 'variant',
-                      comparator: 'EQ',
-                      value: 'icon',
-                    },
-                  },
                 },
                 {
                   type: 'CUSTOM',
@@ -529,29 +505,6 @@
                   label: 'Full width',
                   key: 'fullWidth',
                   type: 'TOGGLE',
-                  configuration: {
-                    condition: {
-                      type: 'HIDE',
-                      option: 'variant',
-                      comparator: 'EQ',
-                      value: 'icon',
-                    },
-                  },
-                },
-                {
-                  value: 'medium',
-                  label: 'Size',
-                  key: 'size',
-                  type: 'CUSTOM',
-                  configuration: {
-                    as: 'BUTTONGROUP',
-                    dataType: 'string',
-                    allowedInput: [
-                      { name: 'Large', value: 'large' },
-                      { name: 'Medium', value: 'medium' },
-                      { name: 'Small', value: 'small' },
-                    ],
-                  },
                 },
                 {
                   label: 'Icon',
@@ -1822,6 +1775,27 @@
                   },
                 },
                 {
+                  value: 'small',
+                  label: 'Size',
+                  key: 'size',
+                  type: 'CUSTOM',
+                  configuration: {
+                    as: 'BUTTONGROUP',
+                    dataType: 'string',
+                    allowedInput: [
+                      { name: 'Large', value: 'large' },
+                      { name: 'Medium', value: 'medium' },
+                      { name: 'Small', value: 'small' },
+                    ],
+                    condition: {
+                      type: 'HIDE',
+                      option: 'icon',
+                      comparator: 'EQ',
+                      value: 'None',
+                    },
+                  },
+                },
+                {
                   type: 'CUSTOM',
                   label: 'Icon position',
                   key: 'iconPosition',
@@ -1831,35 +1805,15 @@
                     dataType: 'string',
                     condition: {
                       type: 'HIDE',
-                      option: 'variant',
+                      option: 'icon',
                       comparator: 'EQ',
-                      value: 'icon',
+                      value: 'None',
                     },
                     allowedInput: [
                       { name: 'Start', value: 'start' },
                       { name: 'End', value: 'end' },
                     ],
                   },
-                },
-                {
-                  type: 'COLOR',
-                  label: 'Text color',
-                  key: 'textColor',
-                  value: 'Primary',
-                  configuration: {
-                    condition: {
-                      type: 'HIDE',
-                      option: 'variant',
-                      comparator: 'EQ',
-                      value: 'icon',
-                    },
-                  },
-                },
-                {
-                  type: 'COLOR',
-                  label: 'Color',
-                  key: 'background',
-                  value: 'Secondary',
                 },
                 {
                   value: ['0rem', '0rem', '0rem', '0rem'],

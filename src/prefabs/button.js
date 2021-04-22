@@ -17,34 +17,10 @@
           },
         },
         {
-          type: 'CUSTOM',
-          label: 'variant',
-          key: 'variant',
-          value: 'contained',
-          configuration: {
-            as: 'BUTTONGROUP',
-            dataType: 'string',
-            allowedInput: [
-              { name: 'Text', value: 'text' },
-              { name: 'Outlined', value: 'outlined' },
-              { name: 'Contain', value: 'contained' },
-              { name: 'Icon', value: 'icon' },
-            ],
-          },
-        },
-        {
           type: 'VARIABLE',
           label: 'Button text',
           key: 'buttonText',
-          value: ['Action Button'],
-          configuration: {
-            condition: {
-              type: 'HIDE',
-              option: 'variant',
-              comparator: 'EQ',
-              value: 'icon',
-            },
-          },
+          value: ['Button'],
         },
         {
           value: '',
@@ -81,29 +57,6 @@
           label: 'Full width',
           key: 'fullWidth',
           type: 'TOGGLE',
-          configuration: {
-            condition: {
-              type: 'HIDE',
-              option: 'variant',
-              comparator: 'EQ',
-              value: 'icon',
-            },
-          },
-        },
-        {
-          value: 'medium',
-          label: 'Size',
-          key: 'size',
-          type: 'CUSTOM',
-          configuration: {
-            as: 'BUTTONGROUP',
-            dataType: 'string',
-            allowedInput: [
-              { name: 'Large', value: 'large' },
-              { name: 'Medium', value: 'medium' },
-              { name: 'Small', value: 'small' },
-            ],
-          },
         },
         {
           label: 'Icon',
@@ -1374,6 +1327,27 @@
           },
         },
         {
+          value: 'small',
+          label: 'Icon size',
+          key: 'size',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Small', value: 'small' },
+              { name: 'Medium', value: 'medium' },
+              { name: 'Large', value: 'large' },
+            ],
+            condition: {
+              type: 'HIDE',
+              option: 'icon',
+              comparator: 'EQ',
+              value: 'None',
+            },
+          },
+        },
+        {
           type: 'CUSTOM',
           label: 'Icon position',
           key: 'iconPosition',
@@ -1381,37 +1355,17 @@
           configuration: {
             as: 'BUTTONGROUP',
             dataType: 'string',
-            condition: {
-              type: 'HIDE',
-              option: 'variant',
-              comparator: 'EQ',
-              value: 'icon',
-            },
             allowedInput: [
               { name: 'Start', value: 'start' },
               { name: 'End', value: 'end' },
             ],
-          },
-        },
-        {
-          type: 'COLOR',
-          label: 'Text color',
-          key: 'textColor',
-          value: 'White',
-          configuration: {
             condition: {
               type: 'HIDE',
-              option: 'variant',
+              option: 'icon',
               comparator: 'EQ',
-              value: 'icon',
+              value: 'None',
             },
           },
-        },
-        {
-          type: 'COLOR',
-          label: 'Color',
-          key: 'background',
-          value: 'Primary',
         },
         {
           value: ['0rem', 'M', '0rem', '0rem'],
