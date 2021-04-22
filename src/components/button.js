@@ -167,7 +167,9 @@
 
     const BasicButtonComponent = (
       <a {...getProps()} className={classes.a}>
-        <div className={classes.root}>
+        <div
+          className={[classes.root, disabled ? classes.disabled : ''].join(' ')}
+        >
           {icon !== 'None' && iconPosition === 'start' && (
             <span
               style={{
@@ -242,23 +244,16 @@
           pointerEvents: 'none',
         },
       },
-      a: ({ options: { fullWidth, outerSpacing } }) => ({
+      a: {
         textDecoration: 'none',
-        display: fullWidth ? 'inline-flex' : 'inline-block',
-        width: !fullWidth
-          ? 'auto'
-          : `calc(100% - ${getSpacing(outerSpacing[1])} - ${getSpacing(
-              outerSpacing[3],
-            )})`,
-      }),
-      root: ({ style }) => ({
-        ...style,
-        boxSizing: 'border-box',
-        display: 'flex',
-        width: '100%',
-        cursor: 'pointer',
-        justifyContent: 'center',
-        alignItems: 'center',
+        display: ({ options: { fullWidth } }) =>
+          fullWidth ? 'inline-flex' : 'inline-block',
+        width: ({ options: { fullWidth, outerSpacing } }) =>
+          !fullWidth
+            ? 'auto'
+            : `calc(100% - ${getSpacing(outerSpacing[1])} - ${getSpacing(
+                outerSpacing[3],
+              )})`,
         marginTop: ({ options: { outerSpacing } }) =>
           getSpacing(outerSpacing[0]),
         marginRight: ({ options: { outerSpacing } }) =>
@@ -315,6 +310,15 @@
           marginLeft: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[3], 'Desktop'),
         },
+      },
+      root: ({ style }) => ({
+        ...style,
+        boxSizing: 'border-box',
+        display: 'flex',
+        width: '100%',
+        cursor: 'pointer',
+        justifyContent: 'center',
+        alignItems: 'center',
 
         '&:hover': {
           filter: 'brightness(90%)',
@@ -324,6 +328,11 @@
           outline: 'none',
         },
       }),
+      disabled: {
+        opacity: '50%',
+        boxShadow: 'none',
+        filter: 'grayscale(100%)',
+      },
       loader: {
         color: 'inherit!important',
         marginLeft: '0.25rem',
