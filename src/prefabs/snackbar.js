@@ -2,6 +2,15 @@
   name: 'Snackbar',
   icon: 'SnackbarIcon',
   category: 'CONTENT',
+  keywords: [
+    'Content',
+    'snack',
+    'bar',
+    'snackbar',
+    'toaster',
+    'notification',
+    'frikadel',
+  ],
   structure: [
     {
       name: 'Snackbar',

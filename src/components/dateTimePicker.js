@@ -111,7 +111,7 @@
 
         resultString = isValidDate(selectedDate)
           ? new Date(selectedDate).toISOString()
-          : new Date().toISOString();
+          : null;
         break;
       }
       case 'time': {

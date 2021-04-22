@@ -64,6 +64,15 @@
     const style = new Styling(t);
     const getSpacing = (idx, device = 'Mobile') =>
       idx === '0' ? '0rem' : style.getSpacing(idx, device);
+
+    const getPath = (path, data) =>
+      path.reduce((acc, next) => {
+        if (acc === undefined || acc[next] === undefined) {
+          return undefined;
+        }
+        return acc[next];
+      }, data);
+
     return {
       content: {
         display: 'block',
@@ -78,10 +87,16 @@
         textAlign: ({ options: { textAlignment } }) => textAlignment,
         padding: 0,
         whiteSpace: 'pre-wrap',
-        color: ({ options: { textColor } }) => style.getColor(textColor),
+        color: ({ options: { textColor, type, styles } }) =>
+          styles
+            ? style.getColor(textColor)
+            : getPath(['theme', 'typography', type, 'color'], style),
         fontFamily: ({ options: { type } }) => style.getFontFamily(type),
         fontSize: ({ options: { type } }) => style.getFontSize(type),
-        fontWeight: ({ options: { fontWeight } }) => fontWeight,
+        fontWeight: ({ options: { fontWeight, type, styles } }) =>
+          styles
+            ? fontWeight
+            : getPath(['theme', 'typography', type, 'fontWeight'], style),
         textTransform: ({ options: { type } }) => style.getTextTransform(type),
         letterSpacing: ({ options: { type } }) => style.getLetterSpacing(type),
         [`@media ${mediaMinWidth(600)}`]: {

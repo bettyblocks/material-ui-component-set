@@ -1,7 +1,8 @@
 (() => ({
-  name: 'ListItem',
+  name: 'List Item',
   icon: 'ListItemIcon',
   category: 'LIST',
+  keywords: ['List', 'item', 'listitem'],
   structure: [
     {
       name: 'ListItem',
