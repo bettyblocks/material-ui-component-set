@@ -1725,7 +1725,7 @@
                     type: 'SIZE',
                     label: 'Height',
                     key: 'height',
-                    value: '60px',
+                    value: '',
                     configuration: {
                       as: 'UNIT',
                     },
