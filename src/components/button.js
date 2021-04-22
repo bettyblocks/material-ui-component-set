@@ -147,6 +147,7 @@
               })
             : getInternalHref({ linkTo, linkToInternalVariable, disabled }),
         target: openLinkToExternal,
+        tabindex: isDev && -1,
         endpoint:
           linkType === 'internal' && linkTo && linkTo.id ? linkTo : undefined,
         onClick: event => {
@@ -332,6 +333,7 @@
         opacity: '50%',
         boxShadow: 'none',
         filter: 'grayscale(100%)',
+        pointerEvents: 'none',
       },
       loader: {
         color: 'inherit!important',
