@@ -1,3 +1,15 @@
+# [1.124.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.123.0...v1.124.0) (2021-04-22)
+
+
+### Bug Fixes
+
+* add outerspace option to paper ([8d0ab26](https://github.com/bettyblocks/material-ui-component-set/commit/8d0ab26c89ef446f6bc3fd3459d3e55d4ac506ac))
+
+
+### Features
+
+* page template with list view ([8c444ba](https://github.com/bettyblocks/material-ui-component-set/commit/8c444bae35b5c2b5ca7eb13303771f8e90d6b1ba))
+
 # [1.123.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.122.5...v1.123.0) (2021-04-22)
 
 
