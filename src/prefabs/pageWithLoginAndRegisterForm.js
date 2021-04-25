@@ -1,8 +1,8 @@
 (() => ({
-  name: 'Login And Register Form - Sidebar',
+  name: 'Login and register form',
   icon: 'LoginFormIcon',
   type: 'page',
-  description: 'This page contains a ready to use login and register form',
+  description: 'Page with a ready to use login form, register form and image.',
   category: 'LAYOUT',
   beforeCreate: ({
     prefab,
