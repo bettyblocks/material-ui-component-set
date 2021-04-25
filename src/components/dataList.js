@@ -31,6 +31,8 @@
           order,
           orderBy,
           pagination,
+          numberedList,
+          numberType,
         } = options;
 
         const rowsPerPage = parseInt(take, 10) || 50;
@@ -48,6 +50,17 @@
         const isInline = type === 'inline';
         const isGrid = type === 'grid';
 
+        const NumberTag = {
+          Title1: 'h1',
+          Title2: 'h2',
+          Title3: 'h3',
+          Title4: 'h4',
+          Title5: 'h5',
+          Title6: 'h6',
+          Body1: 'p',
+          Body2: 'p',
+        }[numberType || 'Body1'];
+
         const builderLayout = () => (
           <>
             {searchProperty && !hideSearch && (
@@ -62,14 +75,24 @@
                     isEmpty ? classes.empty : '',
                     isPristine ? classes.pristine : '',
                     isInline ? classes.inline : '',
+                    numberedList ? classes.itemNumberWrapper : '',
                   ]
                     .filter(Boolean)
                     .join(' ') || undefined
                 }
               >
-                {isPristine
-                  ? 'Drag a component in the data list to display the data'
-                  : children}
+                {isPristine &&
+                  'Drag a component in the data list to display the data'}
+                {!isPristine && numberedList ? (
+                  <>
+                    <NumberTag className={classes.itemNumber}>
+                      {`1. `}
+                    </NumberTag>
+                    {children}
+                  </>
+                ) : (
+                  children
+                )}
               </div>
             </div>
 
@@ -108,6 +131,8 @@
             listRef.current.children.forEach((child, index) => {
               if (index > 0) {
                 const elem = child;
+                if (numberedList)
+                  elem.childNodes[0].innerText = `${index + 1}.\u00A0`;
                 elem.style.opacity = 0.4;
                 elem.style.pointerEvents = 'none';
               }
@@ -272,21 +297,34 @@
         };
 
         const Looper = results => {
-          const rows = results.map(item => (
-            <ModelProvider key={item.id} value={item} id={model}>
-              <InteractionScope model={model}>
-                {context => (
-                  <div
-                    role="none"
-                    className={isInline && classes.inline}
-                    onClick={event => handleClick(event, context)}
-                  >
-                    {children}
-                  </div>
-                )}
-              </InteractionScope>
-            </ModelProvider>
-          ));
+          const rows = results.map((item, index) => {
+            const itemNumber = `${index + 1 + rowsPerPage * (page - 1)}.\u00A0`;
+
+            return (
+              <ModelProvider key={item.id} value={item} id={model}>
+                <InteractionScope model={model}>
+                  {context => (
+                    <div
+                      role="none"
+                      className={isInline && classes.inline}
+                      onClick={event => handleClick(event, context)}
+                    >
+                      {numberedList ? (
+                        <span className={classes.itemNumberWrapper}>
+                          <NumberTag className={classes.itemNumber}>
+                            {itemNumber}
+                          </NumberTag>
+                          {children}
+                        </span>
+                      ) : (
+                        children
+                      )}
+                    </div>
+                  )}
+                </InteractionScope>
+              </ModelProvider>
+            );
+          });
 
           if (authProfile) {
             return <GetMe authenticationProfileId={authProfile}>{rows}</GetMe>;
@@ -462,6 +500,13 @@
     const style = new Styling(theme);
     const getSpacing = (idx, device = 'Mobile') =>
       idx === '0' ? '0rem' : style.getSpacing(idx, device);
+    const getPath = (path, data) =>
+      path.reduce((acc, next) => {
+        if (acc === undefined || acc[next] === undefined) {
+          return undefined;
+        }
+        return acc[next];
+      }, data);
 
     return {
       root: {
@@ -499,6 +544,43 @@
         fontSize: '1rem',
         border: 'none',
         outline: 'none',
+      },
+      itemNumberWrapper: {
+        display: 'flex',
+        justifyContent: 'left',
+        flexDirection: 'row',
+        alignItems: 'center',
+      },
+      itemNumber: {
+        margin: 0,
+        color: ({ options: { textColor, numberType, styles } }) =>
+          styles
+            ? style.getColor(textColor)
+            : getPath(['theme', 'typography', numberType, 'color'], style),
+        fontFamily: ({ options: { numberType } }) =>
+          style.getFontFamily(numberType),
+        fontSize: ({ options: { numberType } }) =>
+          style.getFontSize(numberType),
+        fontWeight: ({ options: { fontWeight, numberType, styles } }) =>
+          styles
+            ? fontWeight
+            : getPath(['theme', 'typography', numberType, 'fontWeight'], style),
+        textTransform: ({ options: { numberType } }) =>
+          style.getTextTransform(numberType),
+        letterSpacing: ({ options: { numberType } }) =>
+          style.getLetterSpacing(numberType),
+        [`@media ${mediaMinWidth(600)}`]: {
+          fontSize: ({ options: { numberType } }) =>
+            style.getFontSize(numberType, 'Portrait'),
+        },
+        [`@media ${mediaMinWidth(960)}`]: {
+          fontSize: ({ options: { numberType } }) =>
+            style.getFontSize(numberType, 'Landscape'),
+        },
+        [`@media ${mediaMinWidth(1280)}`]: {
+          fontSize: ({ options: { numberType } }) =>
+            style.getFontSize(numberType, 'Desktop'),
+        },
       },
       button: {
         background: 'transparent',
