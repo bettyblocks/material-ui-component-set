@@ -1,7 +1,7 @@
 (() => ({
   name: 'Master Detail View - Vertical',
   icon: 'DataTable',
-  // type: 'page',
+  type: 'page',
   description:
     'This is a page containing a data table with detail view, vertically oriented',
   category: 'LAYOUT',
