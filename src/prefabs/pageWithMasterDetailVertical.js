@@ -1,7 +1,7 @@
 (() => ({
   name: 'Master Detail View - Vertical',
   icon: 'DataTable',
-  type: 'page',
+  // type: 'page',
   description:
     'This is a page containing a data table with detail view, vertically oriented',
   category: 'LAYOUT',
@@ -1600,6 +1600,8 @@
       skip: !modelId,
     });
 
+    const Capitalize = str => str.charAt(0).toUpperCase() + str.slice(1);
+
     const enrichVarObj = obj => {
       const returnObj = obj;
       if (data && data.model) {
@@ -1607,7 +1609,16 @@
           prop => prop.id === obj.id[0],
         );
         if (property) {
+          returnObj.value = Capitalize(property.name);
           returnObj.name = `{{ ${data.model.name}.${property.name} }}`;
+        } else {
+          const model = data.model.relationships.find(
+            prop => prop.id === obj.id[0],
+          );
+          returnObj.value = `${Capitalize(model.name)} ${obj.label}`;
+          if (model) {
+            returnObj.name = `{{ ${data.model.name}.${model.name}.${obj.label} }}`;
+          }
         }
       }
       return returnObj;
@@ -2935,7 +2946,7 @@
                             type: 'MODEL',
                           },
                           {
-                            value: '',
+                            value: '0',
                             label: 'Current Record',
                             key: 'currentRecord',
                             type: 'NUMBER',
@@ -3291,7 +3302,7 @@
                 type: 'VARIABLE',
                 label: 'Header text',
                 key: 'headerText',
-                value: [''],
+                value: [enrichVarObj(property).value],
               },
               {
                 value: 'Title6',
@@ -3482,7 +3493,7 @@
                         type: 'VARIABLE',
                         label: 'Content',
                         key: 'content',
-                        value: [`${detail.label}`],
+                        value: [enrichVarObj(detail).value],
                         configuration: {
                           as: 'MULTILINE',
                         },
