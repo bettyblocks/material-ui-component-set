@@ -171,28 +171,33 @@
         <div
           className={[classes.root, disabled ? classes.disabled : ''].join(' ')}
         >
-          {icon !== 'None' && iconPosition === 'start' && (
-            <span
-              style={{
-                marginRight: buttonContent ? '5px' : 0,
-                display: 'flex',
-              }}
-            >
-              {React.createElement(Icons[icon], { fontSize: size })}
-            </span>
-          )}
-          {buttonContent !== '' ? buttonContent : emptySpace}
+          <span className={classes.innerRoot}>
+            {icon !== 'None' && iconPosition === 'start' && (
+              <span
+                style={{
+                  marginRight: buttonContent ? '5px' : 0,
+                  display: 'flex',
+                }}
+              >
+                {React.createElement(Icons[icon], { fontSize: size })}
+              </span>
+            )}
+            {buttonContent !== '' ? buttonContent : emptySpace}
 
-          {icon !== 'None' && iconPosition === 'end' && (
-            <span
-              style={{ marginLeft: buttonContent ? '5px' : 0, display: 'flex' }}
-            >
-              {React.createElement(Icons[icon], { fontSize: size })}
-            </span>
-          )}
-          {showIndicator && (
-            <CircularProgress size={16} className={classes.loader} />
-          )}
+            {icon !== 'None' && iconPosition === 'end' && (
+              <span
+                style={{
+                  marginLeft: buttonContent ? '5px' : 0,
+                  display: 'flex',
+                }}
+              >
+                {React.createElement(Icons[icon], { fontSize: size })}
+              </span>
+            )}
+            {showIndicator && (
+              <CircularProgress size={16} className={classes.loader} />
+            )}
+          </span>
         </div>
       </a>
     );
@@ -329,6 +334,11 @@
           outline: 'none',
         },
       }),
+      innerRoot: {
+        display: 'flex',
+        alignItems: 'center',
+        minHeight: '1.25rem',
+      },
       disabled: {
         opacity: '50%',
         boxShadow: 'none',
