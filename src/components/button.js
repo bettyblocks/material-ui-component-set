@@ -10,6 +10,7 @@
     const {
       disabled,
       size,
+      type,
       icon,
       iconPosition,
       linkType,
@@ -98,10 +99,6 @@
       }
     }, [loading]);
 
-    function isButtonBehavior(type) {
-      return type === 'action';
-    }
-
     const getExternalHref = config => {
       if (config.disabled) {
         return false;
@@ -122,41 +119,6 @@
       return false;
     };
 
-    const getProps = () => {
-      if (isButtonBehavior(linkType)) {
-        return {
-          disabled: disabled || isLoading || loading,
-          tabindex: isDev && -1,
-          onClick: event => {
-            event.stopPropagation();
-            actionCallback();
-          },
-          role: 'button',
-          endpoint:
-            linkType === 'internal' && linkTo && linkTo.id ? linkTo : undefined,
-        };
-      }
-
-      return {
-        href:
-          linkType === 'external'
-            ? getExternalHref({
-                disabled,
-                linkToExternal,
-                linkToExternalVariable,
-              })
-            : getInternalHref({ linkTo, linkToInternalVariable, disabled }),
-        target: openLinkToExternal,
-        tabindex: isDev && -1,
-        endpoint:
-          linkType === 'internal' && linkTo && linkTo.id ? linkTo : undefined,
-        onClick: event => {
-          event.stopPropagation();
-          actionCallback();
-        },
-      };
-    };
-
     const showIndicator = isLoading || loading;
 
     const emptySpace = () => {
@@ -166,41 +128,93 @@
       return null;
     };
 
-    const BasicButtonComponent = (
-      <a {...getProps()} className={classes.a}>
-        <div
-          className={[classes.root, disabled ? classes.disabled : ''].join(' ')}
-        >
-          <span className={classes.innerRoot}>
-            {icon !== 'None' && iconPosition === 'start' && (
-              <span
-                style={{
-                  marginRight: buttonContent ? '5px' : 0,
-                  display: 'flex',
-                }}
-              >
-                {React.createElement(Icons[icon], { fontSize: size })}
-              </span>
-            )}
-            {buttonContent !== '' ? buttonContent : emptySpace}
+    const buttonProps = {
+      disabled: disabled || isLoading || loading,
+      tabindex: isDev && -1,
+      onClick: event => {
+        event.stopPropagation();
+        actionCallback();
+      },
+      role: 'button',
+      type: isDev ? 'button' : type,
+      endpoint:
+        linkType === 'internal' && linkTo && linkTo.id ? linkTo : undefined,
+    };
 
-            {icon !== 'None' && iconPosition === 'end' && (
-              <span
-                style={{
-                  marginLeft: buttonContent ? '5px' : 0,
-                  display: 'flex',
-                }}
-              >
-                {React.createElement(Icons[icon], { fontSize: size })}
-              </span>
-            )}
-            {showIndicator && (
-              <CircularProgress size={16} className={classes.loader} />
-            )}
+    const anchorProps = {
+      href:
+        linkType === 'external'
+          ? getExternalHref({
+              disabled,
+              linkToExternal,
+              linkToExternalVariable,
+            })
+          : getInternalHref({ linkTo, linkToInternalVariable, disabled }),
+      target: openLinkToExternal,
+      tabindex: isDev && -1,
+      type: isDev ? 'button' : type,
+      endpoint:
+        linkType === 'internal' && linkTo && linkTo.id ? linkTo : undefined,
+      onClick: event => {
+        event.stopPropagation();
+        actionCallback();
+      },
+    };
+
+    const IconWrapper = ({ children }) => (
+      <>
+        {icon !== 'None' && iconPosition === 'start' && (
+          <span
+            style={{
+              marginRight: buttonContent ? '5px' : 0,
+              display: 'flex',
+            }}
+          >
+            {React.createElement(Icons[icon], { fontSize: size })}
           </span>
-        </div>
+        )}
+        {children}
+        {icon !== 'None' && iconPosition === 'end' && (
+          <span
+            style={{
+              marginLeft: buttonContent ? '5px' : 0,
+              display: 'flex',
+            }}
+          >
+            {React.createElement(Icons[icon], { fontSize: size })}
+          </span>
+        )}
+      </>
+    );
+
+    const ButtonContent = (
+      <div
+        className={[classes.root, disabled ? classes.disabled : ''].join(' ')}
+      >
+        <span className={classes.innerRoot}>
+          <IconWrapper>
+            {buttonContent !== '' ? buttonContent : emptySpace}
+          </IconWrapper>
+          {showIndicator && (
+            <CircularProgress size={16} className={classes.loader} />
+          )}
+        </span>
+      </div>
+    );
+
+    const AnchorElement = (
+      <a className={classes.anchor} {...anchorProps}>
+        {ButtonContent}
       </a>
     );
+
+    const ButtonElement = (
+      <button type="button" className={classes.button} {...buttonProps}>
+        {ButtonContent}
+      </button>
+    );
+
+    const ButtonComponent = type === 'submit' ? ButtonElement : AnchorElement;
 
     let tooltipProps = {
       title: tooltipText,
@@ -220,21 +234,18 @@
     }
 
     const ButtonWithTooltip = (
-      <Tooltip {...tooltipProps}>{BasicButtonComponent}</Tooltip>
+      <Tooltip {...tooltipProps}>{ButtonComponent}</Tooltip>
     );
-
-    const ButtonComponent = addTooltip
-      ? ButtonWithTooltip
-      : BasicButtonComponent;
+    const Button = addTooltip ? ButtonWithTooltip : ButtonComponent;
 
     if (!isDev) {
       if (!isVisible) {
         return <></>;
       }
-      return ButtonComponent;
+      return Button;
     }
 
-    return <div className={classes.wrapper}>{ButtonComponent}</div>;
+    return <div className={classes.wrapper}>{Button}</div>;
   })(),
   styles: B => t => {
     const { mediaMinWidth, Styling } = B;
@@ -250,7 +261,7 @@
           pointerEvents: 'none',
         },
       },
-      a: {
+      anchor: {
         textDecoration: 'none',
         display: ({ options: { fullWidth } }) =>
           fullWidth ? 'inline-flex' : 'inline-block',
@@ -260,6 +271,67 @@
             : `calc(100% - ${getSpacing(outerSpacing[1])} - ${getSpacing(
                 outerSpacing[3],
               )})`,
+        marginTop: ({ options: { outerSpacing } }) =>
+          getSpacing(outerSpacing[0]),
+        marginRight: ({ options: { outerSpacing } }) =>
+          getSpacing(outerSpacing[1]),
+        marginBottom: ({ options: { outerSpacing } }) =>
+          getSpacing(outerSpacing[2]),
+        marginLeft: ({ options: { outerSpacing } }) =>
+          getSpacing(outerSpacing[3]),
+        [`@media ${mediaMinWidth(600)}`]: {
+          width: ({ options: { fullWidth, outerSpacing } }) => {
+            if (!fullWidth) return 'auto';
+            const marginRight = getSpacing(outerSpacing[1], 'Portrait');
+            const marginLeft = getSpacing(outerSpacing[3], 'Portrait');
+            return `calc(100% - ${marginRight} - ${marginLeft})`;
+          },
+          marginTop: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[0], 'Portrait'),
+          marginRight: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[1], 'Portrait'),
+          marginBottom: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[2], 'Portrait'),
+          marginLeft: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[3], 'Portrait'),
+        },
+        [`@media ${mediaMinWidth(960)}`]: {
+          width: ({ options: { fullWidth, outerSpacing } }) => {
+            if (!fullWidth) return 'auto';
+            const marginRight = getSpacing(outerSpacing[1], 'Landscape');
+            const marginLeft = getSpacing(outerSpacing[3], 'Landscape');
+            return `calc(100% - ${marginRight} - ${marginLeft})`;
+          },
+          marginTop: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[0], 'Landscape'),
+          marginRight: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[1], 'Landscape'),
+          marginBottom: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[2], 'Landscape'),
+          marginLeft: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[3], 'Landscape'),
+        },
+        [`@media ${mediaMinWidth(1280)}`]: {
+          width: ({ options: { fullWidth, outerSpacing } }) => {
+            if (!fullWidth) return 'auto';
+            const marginRight = getSpacing(outerSpacing[1], 'Desktop');
+            const marginLeft = getSpacing(outerSpacing[3], 'Desktop');
+            return `calc(100% - ${marginRight} - ${marginLeft})`;
+          },
+          marginTop: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[0], 'Desktop'),
+          marginRight: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[1], 'Desktop'),
+          marginBottom: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[2], 'Desktop'),
+          marginLeft: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[3], 'Desktop'),
+        },
+      },
+      button: {
+        border: 'none',
+        background: 'transparent',
+        padding: 0,
         marginTop: ({ options: { outerSpacing } }) =>
           getSpacing(outerSpacing[0]),
         marginRight: ({ options: { outerSpacing } }) =>
