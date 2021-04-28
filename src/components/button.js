@@ -163,6 +163,7 @@
 
     const IconWrapper = ({ children }) => (
       <>
+        &#8203;
         {icon !== 'None' && iconPosition === 'start' && (
           <span
             style={{
