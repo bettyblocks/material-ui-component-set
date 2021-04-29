@@ -43,7 +43,7 @@
       useProperty,
     } = B;
     const isDev = env === 'dev';
-    const isAction = linkType === 'action' || actionId !== '';
+    const isAction = linkType === 'action' || !!actionId;
     const hasLink = linkTo && linkTo.id !== '';
     const hasExternalLink = linkToExternal && linkToExternal.id !== '';
     const linkToExternalVariable =
