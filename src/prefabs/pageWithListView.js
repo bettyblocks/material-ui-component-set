@@ -1,5 +1,5 @@
 (() => ({
-  name: 'List View',
+  name: 'List view',
   icon: 'DataList',
   type: 'page',
   description:
