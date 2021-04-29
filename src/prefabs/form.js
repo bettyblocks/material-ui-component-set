@@ -3381,7 +3381,7 @@
                 },
                 {
                   value: 'small',
-                  label: 'Size',
+                  label: 'Icon size',
                   key: 'size',
                   type: 'CUSTOM',
                   configuration: {
