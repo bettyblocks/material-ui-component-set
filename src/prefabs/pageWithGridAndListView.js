@@ -3876,7 +3876,7 @@
                                         },
                                       },
                                       {
-                                        value: 'medium',
+                                        value: 'small',
                                         label: 'Size',
                                         key: 'size',
                                         type: 'CUSTOM',
