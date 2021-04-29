@@ -1,7 +1,8 @@
 (() => ({
-  name: 'DataTable',
+  name: 'Data Table',
   icon: 'DataTable',
   category: 'DATA',
+  keywords: ['Data', 'table', 'datatable', 'collection'],
   beforeCreate: ({
     components: {
       Content,

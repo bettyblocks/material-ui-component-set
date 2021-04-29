@@ -2,6 +2,7 @@
   name: 'Box',
   icon: 'ContainerIcon',
   category: 'LAYOUT',
+  keywords: ['Layout', 'box'],
   structure: [
     {
       name: 'Box',
@@ -279,6 +280,27 @@
               { name: 'X', value: 'repeat-x' },
               { name: 'Y', value: 'repeat-y' },
               { name: 'All', value: 'repeat' },
+            ],
+            condition: {
+              type: 'SHOW',
+              option: 'backgroundOptions',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          value: 'inherit',
+          label: 'Background attachment',
+          key: 'backgroundAttachment',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Inherit', value: 'inherit' },
+              { name: 'Scroll', value: 'scroll' },
+              { name: 'Fixed', value: 'fixed' },
             ],
             condition: {
               type: 'SHOW',

@@ -2,6 +2,7 @@
   name: 'Container',
   icon: 'ContainerIcon',
   category: 'LAYOUT',
+  keywords: ['Layout', 'container'],
   structure: [
     {
       name: 'Container',

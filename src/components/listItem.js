@@ -41,10 +41,8 @@
     const primary = useText(primaryText);
     const secondary = useText(secondaryText);
 
-    const IconComponent = (
-      <ListItemIcon>
-        {icon !== 'None' && React.createElement(Icons[icon])}
-      </ListItemIcon>
+    const IconComponent = icon !== 'None' && (
+      <ListItemIcon>{React.createElement(Icons[icon])}</ListItemIcon>
     );
 
     const AvatarComponent = (
@@ -83,7 +81,7 @@
       >
         {avatarOrIcon === 'avatar' || (avatarOrIcon === 'icon' && avatar)
           ? AvatarComponent
-          : IconComponent}
+          : avatarOrIcon !== 'none' && IconComponent}
         <ListItemText
           className={isEmpty && isDev && classes.placeholder}
           primary={itemText}
