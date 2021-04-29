@@ -2,6 +2,15 @@
   name: 'Dialog',
   icon: 'DialogIcon',
   category: 'CONTENT',
+  keywords: [
+    'Content',
+    'dialog',
+    'popup',
+    'modal',
+    'pop-up',
+    'popover',
+    'pop-over',
+  ],
   actions: [],
   interactions: [
     {
@@ -43,6 +52,12 @@
           type: 'TOGGLE',
           label: 'Fullscreen',
           key: 'isFullscreen',
+          value: false,
+        },
+        {
+          type: 'TOGGLE',
+          label: 'Disable backdrop click',
+          key: 'disableClick',
           value: false,
         },
         {
@@ -129,6 +144,12 @@
                   value: 'elevation',
                 },
               },
+            },
+            {
+              value: ['0rem', '0rem', '0rem', '0rem'],
+              label: 'Outer space',
+              key: 'outerSpacing',
+              type: 'SIZES',
             },
           ],
           descendants: [

@@ -1,7 +1,8 @@
 (() => ({
-  name: 'DrawerSidebar',
+  name: 'Drawer Sidebar',
   icon: 'RowColumnIcon',
   category: 'LAYOUT',
+  keywords: ['Layout', 'drawer', 'sidebar', 'drawersidebar'],
   structure: [
     {
       name: 'DrawerSidebar',
@@ -55,6 +56,12 @@
               label: 'Disable padding',
               key: 'disablePadding',
               value: false,
+            },
+            {
+              value: ['0rem', '0rem', '0rem', '0rem'],
+              label: 'Outer space',
+              key: 'outerSpacing',
+              type: 'SIZES',
             },
             {
               type: 'TOGGLE',
