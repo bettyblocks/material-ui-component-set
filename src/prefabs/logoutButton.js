@@ -1366,7 +1366,7 @@
         },
         {
           value: 'small',
-          label: 'Size',
+          label: 'Icon size',
           key: 'size',
           type: 'CUSTOM',
           configuration: {
@@ -1406,7 +1406,7 @@
           },
         },
         {
-          value: ['0rem', 'M', '0rem', '0rem'],
+          value: ['0rem', '0rem', '0rem', '0rem'],
           label: 'Outer space',
           key: 'outerSpacing',
           type: 'SIZES',

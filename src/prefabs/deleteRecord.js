@@ -1852,7 +1852,7 @@
             },
             {
               value: 'small',
-              label: 'Size',
+              label: 'Icon size',
               key: 'size',
               type: 'CUSTOM',
               configuration: {
@@ -2778,7 +2778,7 @@
                                   type: 'VARIABLE',
                                   label: 'Button text',
                                   key: 'buttonText',
-                                  value: ['Cancel'],
+                                  value: [''],
                                 },
                                 {
                                   type: 'CUSTOM',
@@ -4122,7 +4122,7 @@
                                 },
                                 {
                                   value: 'small',
-                                  label: 'Size',
+                                  label: 'Icon size',
                                   key: 'size',
                                   type: 'CUSTOM',
                                   configuration: {
@@ -6298,7 +6298,7 @@
                                 },
                                 {
                                   value: 'small',
-                                  label: 'Size',
+                                  label: 'Icon size',
                                   key: 'size',
                                   type: 'CUSTOM',
                                   configuration: {
@@ -7848,7 +7848,7 @@
                                 },
                                 {
                                   value: 'small',
-                                  label: 'Size',
+                                  label: 'Icon size',
                                   key: 'size',
                                   type: 'CUSTOM',
                                   configuration: {
