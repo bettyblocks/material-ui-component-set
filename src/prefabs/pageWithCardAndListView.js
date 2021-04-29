@@ -1,5 +1,5 @@
 (() => ({
-  name: 'Card And List View',
+  name: 'Card and list view',
   icon: 'DataList',
   type: 'page',
   description:
