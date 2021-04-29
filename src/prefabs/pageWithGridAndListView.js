@@ -1,9 +1,9 @@
 (() => ({
-  name: 'Page With Grid And List View',
+  name: 'Card And List View',
   icon: 'DataList',
   type: 'page',
   description:
-    'This is a page containing a toggle between a grid and a list view',
+    'Toggle the view of your content between a card view or a list view.',
   category: 'LAYOUT',
   beforeCreate: ({
     helpers: { useModelQuery },

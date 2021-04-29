@@ -1,9 +1,9 @@
 (() => ({
-  name: 'Page With Grid View',
+  name: 'Card view',
   icon: 'GridIcon',
   type: 'page',
   description:
-    'This is a page containing a data grid with a custom search field',
+    'View your content in a grid view with card items. This also includes a custom search field.',
   category: 'LAYOUT',
   beforeCreate: ({
     helpers: { useModelQuery },
