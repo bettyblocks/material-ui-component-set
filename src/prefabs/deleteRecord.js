@@ -2778,7 +2778,7 @@
                                   type: 'VARIABLE',
                                   label: 'Button text',
                                   key: 'buttonText',
-                                  value: ['Cancel'],
+                                  value: [''],
                                 },
                                 {
                                   type: 'CUSTOM',
