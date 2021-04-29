@@ -1,5 +1,5 @@
 (() => ({
-  name: 'Login Form - Sidebar',
+  name: 'Login form with image',
   icon: 'LoginFormIcon',
   description: 'Page with login form and side image',
   type: 'page',
