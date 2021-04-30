@@ -34,6 +34,11 @@
       className: classes.root,
     });
 
+    const IconWithoutLink = (
+      // eslint-disable-next-line
+      <span onClick={() => B.defineFunction('Click')}>{IconComponent}</span>
+    );
+
     const href =
       linkType === 'external' && hasExternalLink
         ? linkToExternalText
@@ -48,7 +53,7 @@
       </Link>
     );
 
-    const Icon = hasLink ? LinkComponent : IconComponent;
+    const Icon = hasLink ? LinkComponent : IconWithoutLink;
 
     const BadgeComponent = (
       <Badge
@@ -66,7 +71,9 @@
     const Component = addBadge ? BadgeComponent : Icon;
 
     return isDev ? (
-      <span className={classes.wrapper}>{Component}</span>
+      <span className={classes.wrapper}>
+        <span>{Component}</span>
+      </span>
     ) : (
       Component
     );
