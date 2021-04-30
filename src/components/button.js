@@ -161,41 +161,35 @@
       },
     };
 
-    const IconWrapper = ({ children }) => (
-      <>
-        &#8203;
-        {icon !== 'None' && iconPosition === 'start' && (
-          <span
-            style={{
-              marginRight: buttonContent ? '5px' : 0,
-              display: 'flex',
-            }}
-          >
-            {React.createElement(Icons[icon], { fontSize: size })}
-          </span>
-        )}
-        {children}
-        {icon !== 'None' && iconPosition === 'end' && (
-          <span
-            style={{
-              marginLeft: buttonContent ? '5px' : 0,
-              display: 'flex',
-            }}
-          >
-            {React.createElement(Icons[icon], { fontSize: size })}
-          </span>
-        )}
-      </>
-    );
-
     const ButtonContent = (
       <div
         className={[classes.root, disabled ? classes.disabled : ''].join(' ')}
       >
         <span className={classes.innerRoot}>
-          <IconWrapper>
+          <>
+            &#8203;
+            {icon !== 'None' && iconPosition === 'start' && (
+              <span
+                style={{
+                  marginRight: buttonContent ? '5px' : 0,
+                  display: 'flex',
+                }}
+              >
+                {React.createElement(Icons[icon], { fontSize: size })}
+              </span>
+            )}
             {buttonContent !== '' ? buttonContent : emptySpace}
-          </IconWrapper>
+            {icon !== 'None' && iconPosition === 'end' && (
+              <span
+                style={{
+                  marginLeft: buttonContent ? '5px' : 0,
+                  display: 'flex',
+                }}
+              >
+                {React.createElement(Icons[icon], { fontSize: size })}
+              </span>
+            )}
+          </>
           {showIndicator && (
             <CircularProgress size={16} className={classes.loader} />
           )}
