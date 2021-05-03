@@ -1,3 +1,10 @@
+# [1.128.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.127.0...v1.128.0) (2021-05-03)
+
+
+### Features
+
+* add style to button component ([a908b65](https://github.com/bettyblocks/material-ui-component-set/commit/a908b657d1838d12b5a6de920afe60b1da4435a1))
+
 # [1.127.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.126.0...v1.127.0) (2021-04-30)
 
 
