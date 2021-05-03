@@ -48,7 +48,7 @@
       as: 'DROPDOWN',
       dataType: 'string',
       allowedInput: [
-        { name: 'None', value: 'none' },
+        { name: 'None', value: 'None' },
         {
           name: 'AcUnit',
           value: 'AcUnit',
