@@ -1784,9 +1784,16 @@
                     type: 'TOGGLE',
                   },
                   {
+                    label: 'Icon',
+                    key: 'icon',
+                    value: 'None',
+                    type: 'CUSTOM',
+                    configuration: iconConfiguration,
+                  },
+                  {
                     value: 'small',
                     label: 'Size',
-                    key: 'size',
+                    key: 'Icon size',
                     type: 'CUSTOM',
                     configuration: {
                       as: 'BUTTONGROUP',
@@ -1803,13 +1810,6 @@
                         value: 'None',
                       },
                     },
-                  },
-                  {
-                    label: 'Icon',
-                    key: 'icon',
-                    value: 'None',
-                    type: 'CUSTOM',
-                    configuration: iconConfiguration,
                   },
                   {
                     type: 'CUSTOM',
@@ -2063,9 +2063,16 @@
                     type: 'TOGGLE',
                   },
                   {
+                    label: 'Icon',
+                    key: 'icon',
+                    value: 'None',
+                    type: 'CUSTOM',
+                    configuration: iconConfiguration,
+                  },
+                  {
                     value: 'small',
                     label: 'Size',
-                    key: 'size',
+                    key: 'Icon Size',
                     type: 'CUSTOM',
                     configuration: {
                       as: 'BUTTONGROUP',
@@ -2082,13 +2089,6 @@
                         value: 'None',
                       },
                     },
-                  },
-                  {
-                    label: 'Icon',
-                    key: 'icon',
-                    value: 'None',
-                    type: 'CUSTOM',
-                    configuration: iconConfiguration,
                   },
                   {
                     type: 'CUSTOM',
@@ -4895,6 +4895,13 @@
                                                 type: 'TOGGLE',
                                               },
                                               {
+                                                label: 'Icon',
+                                                key: 'icon',
+                                                value: 'ChevronRight',
+                                                type: 'CUSTOM',
+                                                configuration: iconConfiguration,
+                                              },
+                                              {
                                                 value: 'small',
                                                 label: 'Size',
                                                 key: 'size',
@@ -4923,13 +4930,6 @@
                                                     value: 'None',
                                                   },
                                                 },
-                                              },
-                                              {
-                                                label: 'Icon',
-                                                key: 'icon',
-                                                value: 'ChevronRight',
-                                                type: 'CUSTOM',
-                                                configuration: iconConfiguration,
                                               },
                                               {
                                                 type: 'CUSTOM',
