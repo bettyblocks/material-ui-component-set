@@ -1468,7 +1468,7 @@
                       key: 'outerSpacing',
                       label: 'Outer space',
                       type: 'SIZES',
-                      value: ['0rem', '0rem', '0rem', '0rem'],
+                      value: ['0rem', 'M', '0rem', '0rem'],
                     },
                     {
                       configuration: {
