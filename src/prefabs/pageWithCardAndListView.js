@@ -2040,7 +2040,7 @@
                   {
                     value: 'small',
                     label: 'Icon size',
-                    key: 'Icon size',
+                    key: 'size',
                     type: 'CUSTOM',
                     configuration: {
                       as: 'BUTTONGROUP',
@@ -4101,7 +4101,7 @@
                                       {
                                         value: 'small',
                                         label: 'Icon size',
-                                        key: 'Icon size',
+                                        key: 'size',
                                         type: 'CUSTOM',
                                         configuration: {
                                           as: 'BUTTONGROUP',
