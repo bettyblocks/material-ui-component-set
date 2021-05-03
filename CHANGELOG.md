@@ -1,3 +1,10 @@
+# [1.127.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.126.0...v1.127.0) (2021-04-30)
+
+
+### Features
+
+* release style editor with button component work 332 ([#1092](https://github.com/bettyblocks/material-ui-component-set/issues/1092)) ([4c832d5](https://github.com/bettyblocks/material-ui-component-set/commit/4c832d5d59f6a8ea9b20960738f9945233ccc04a))
+
 # [1.126.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.125.0...v1.126.0) (2021-04-22)
 
 

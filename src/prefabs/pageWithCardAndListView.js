@@ -1768,6 +1768,13 @@
                     type: 'TOGGLE',
                   },
                   {
+                    label: 'Icon',
+                    key: 'icon',
+                    value: 'None',
+                    type: 'CUSTOM',
+                    configuration: iconConfiguration,
+                  },
+                  {
                     value: 'small',
                     label: 'Icon size',
                     key: 'size',
@@ -1787,13 +1794,6 @@
                         value: 'None',
                       },
                     },
-                  },
-                  {
-                    label: 'Icon',
-                    key: 'icon',
-                    value: 'None',
-                    type: 'CUSTOM',
-                    configuration: iconConfiguration,
                   },
                   {
                     type: 'CUSTOM',
@@ -2031,9 +2031,16 @@
                     type: 'TOGGLE',
                   },
                   {
+                    label: 'Icon',
+                    key: 'icon',
+                    value: 'None',
+                    type: 'CUSTOM',
+                    configuration: iconConfiguration,
+                  },
+                  {
                     value: 'small',
                     label: 'Icon size',
-                    key: 'size',
+                    key: 'Icon size',
                     type: 'CUSTOM',
                     configuration: {
                       as: 'BUTTONGROUP',
@@ -2050,13 +2057,6 @@
                         value: 'None',
                       },
                     },
-                  },
-                  {
-                    label: 'Icon',
-                    key: 'icon',
-                    value: 'None',
-                    type: 'CUSTOM',
-                    configuration: iconConfiguration,
                   },
                   {
                     type: 'CUSTOM',
@@ -3813,8 +3813,15 @@
                                         },
                                       },
                                       {
+                                        label: 'Icon',
+                                        key: 'icon',
+                                        value: 'List',
+                                        type: 'CUSTOM',
+                                        configuration: iconConfiguration,
+                                      },
+                                      {
                                         value: 'small',
-                                        label: 'Size',
+                                        label: 'Icon size',
                                         key: 'size',
                                         type: 'CUSTOM',
                                         configuration: {
@@ -3825,14 +3832,13 @@
                                             { name: 'Medium', value: 'medium' },
                                             { name: 'Small', value: 'small' },
                                           ],
+                                          condition: {
+                                            type: 'HIDE',
+                                            option: 'icon',
+                                            comparator: 'EQ',
+                                            value: 'None',
+                                          },
                                         },
-                                      },
-                                      {
-                                        label: 'Icon',
-                                        key: 'icon',
-                                        value: 'List',
-                                        type: 'CUSTOM',
-                                        configuration: iconConfiguration,
                                       },
                                       {
                                         type: 'CUSTOM',
@@ -3844,35 +3850,15 @@
                                           dataType: 'string',
                                           condition: {
                                             type: 'HIDE',
-                                            option: 'variant',
+                                            option: 'icon',
                                             comparator: 'EQ',
-                                            value: 'icon',
+                                            value: 'None',
                                           },
                                           allowedInput: [
                                             { name: 'Start', value: 'start' },
                                             { name: 'End', value: 'end' },
                                           ],
                                         },
-                                      },
-                                      {
-                                        type: 'COLOR',
-                                        label: 'Text color',
-                                        key: 'textColor',
-                                        value: 'White',
-                                        configuration: {
-                                          condition: {
-                                            type: 'HIDE',
-                                            option: 'variant',
-                                            comparator: 'EQ',
-                                            value: 'icon',
-                                          },
-                                        },
-                                      },
-                                      {
-                                        type: 'COLOR',
-                                        label: 'Color',
-                                        key: 'background',
-                                        value: 'Primary',
                                       },
                                       {
                                         value: ['0rem', '0rem', '0rem', '0rem'],
@@ -4106,9 +4092,16 @@
                                         type: 'TOGGLE',
                                       },
                                       {
+                                        label: 'Icon',
+                                        key: 'icon',
+                                        value: 'Apps',
+                                        type: 'CUSTOM',
+                                        configuration: iconConfiguration,
+                                      },
+                                      {
                                         value: 'small',
                                         label: 'Icon size',
-                                        key: 'size',
+                                        key: 'Icon size',
                                         type: 'CUSTOM',
                                         configuration: {
                                           as: 'BUTTONGROUP',
@@ -4125,13 +4118,6 @@
                                             value: 'None',
                                           },
                                         },
-                                      },
-                                      {
-                                        label: 'Icon',
-                                        key: 'icon',
-                                        value: 'Apps',
-                                        type: 'CUSTOM',
-                                        configuration: iconConfiguration,
                                       },
                                       {
                                         type: 'CUSTOM',
@@ -6875,6 +6861,13 @@
                                             type: 'TOGGLE',
                                           },
                                           {
+                                            label: 'Icon',
+                                            key: 'icon',
+                                            value: 'ChevronRight',
+                                            type: 'CUSTOM',
+                                            configuration: iconConfiguration,
+                                          },
+                                          {
                                             value: 'small',
                                             label: 'Icon Size',
                                             key: 'size',
@@ -6903,13 +6896,6 @@
                                                 value: 'None',
                                               },
                                             },
-                                          },
-                                          {
-                                            label: 'Icon',
-                                            key: 'icon',
-                                            value: 'ChevronRight',
-                                            type: 'CUSTOM',
-                                            configuration: iconConfiguration,
                                           },
                                           {
                                             type: 'CUSTOM',
@@ -11389,6 +11375,13 @@
                                                         type: 'TOGGLE',
                                                       },
                                                       {
+                                                        label: 'Icon',
+                                                        key: 'icon',
+                                                        value: 'ChevronRight',
+                                                        type: 'CUSTOM',
+                                                        configuration: iconConfiguration,
+                                                      },
+                                                      {
                                                         value: 'small',
                                                         label: 'Icon size',
                                                         key: 'size',
@@ -11417,13 +11410,6 @@
                                                             value: 'None',
                                                           },
                                                         },
-                                                      },
-                                                      {
-                                                        label: 'Icon',
-                                                        key: 'icon',
-                                                        value: 'ChevronRight',
-                                                        type: 'CUSTOM',
-                                                        configuration: iconConfiguration,
                                                       },
                                                       {
                                                         type: 'CUSTOM',
