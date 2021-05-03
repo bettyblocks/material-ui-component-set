@@ -2811,6 +2811,26 @@
                             type: 'TOGGLE',
                           },
                           {
+                            label: 'Striped',
+                            key: 'striped',
+                            value: false,
+                            type: 'TOGGLE',
+                          },
+                          {
+                            type: 'COLOR',
+                            label: 'Stripe color',
+                            key: 'stripeColor',
+                            value: 'Light',
+                            configuration: {
+                              condition: {
+                                type: 'SHOW',
+                                option: 'striped',
+                                comparator: 'EQ',
+                                value: true,
+                              },
+                            },
+                          },
+                          {
                             label: 'Variant',
                             key: 'variant',
                             value: 'elevation',
