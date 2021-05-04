@@ -6,7 +6,6 @@
   jsx: (() => {
     const {
       disabled,
-      error,
       position,
       size,
       helperText,
@@ -26,6 +25,7 @@
       nameAttribute,
       order,
       orderBy,
+      validationValueMissing,
     } = options;
 
     const {
@@ -37,8 +37,10 @@
     } = B;
     const displayError = showError === 'built-in';
     const isDev = env === 'dev';
+    const [errorState, setErrorState] = useState(false);
+    const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
+    const [helper, setHelper] = useState(useText(helperText));
 
-    const componentHelperText = useText(helperText);
     const { kind, values: listValues = [] } = getProperty(property) || {};
     const labelProperty = getProperty(labelProp);
     const valueProperty = getProperty(valueProp);
@@ -111,8 +113,9 @@
     useEffect(() => {
       if (isDev) {
         setValues(getValues());
+        setHelper(useText(helperText));
       }
-    }, [isDev, defaultValue]);
+    }, [isDev, defaultValue, helperText]);
 
     const {
       Checkbox: MUICheckbox,
@@ -125,15 +128,31 @@
 
     const handleChange = evt => {
       const { checked, value } = evt.target;
+      setErrorState(false);
       setValues(state => {
         if (checked) return state.concat(value);
         return state.filter(v => v !== value);
       });
     };
 
+    const invalidHandler = event => {
+      event.preventDefault();
+      setAfterFirstInvalidation(true);
+      setErrorState(true);
+    };
+
+    const isValid = required ? values.join() !== '' : true;
+    const hasError = errorState || !isValid;
+
     const renderCheckbox = (checkboxLabel, checkboxValue) => (
       <FormControlLabel
-        control={<MUICheckbox tabIndex={isDev && -1} size={size} />}
+        control={
+          <MUICheckbox
+            required={required && !isValid}
+            tabIndex={isDev && -1}
+            size={size}
+          />
+        }
         label={checkboxLabel}
         labelPlacement={position}
         checked={values.includes(checkboxValue)}
@@ -141,6 +160,7 @@
         disabled={disabled}
         name={nameAttributeValue || customModelAttributeName}
         value={checkboxValue}
+        onInvalid={invalidHandler}
       />
     );
 
@@ -161,22 +181,27 @@
       );
     };
 
+    useEffect(() => {
+      if (afterFirstInvalidation) {
+        const message = useText(hasError ? validationValueMissing : helperText);
+        setHelper(message);
+      }
+    }, [errorState, values, required, afterFirstInvalidation]);
+
     const Control = (
       <FormControl
         classes={{ root: classes.formControl }}
         margin={margin}
         component="fieldset"
         required={required}
-        error={error}
+        error={afterFirstInvalidation && hasError}
         fullWidth={fullWidth}
       >
         {labelText && !hideLabel && (
           <FormLabel component="legend">{labelText}</FormLabel>
         )}
         <FormGroup row={row}>{renderCheckBoxes()}</FormGroup>
-        {componentHelperText && (
-          <FormHelperText>{componentHelperText}</FormHelperText>
-        )}
+        {helper && <FormHelperText>{helper}</FormHelperText>}
       </FormControl>
     );
     return isDev ? <div className={classes.root}>{Control}</div> : Control;
