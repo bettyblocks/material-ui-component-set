@@ -2,7 +2,7 @@
   name: 'Login form with image',
   icon: 'LoginFormIcon',
   description: 'Page with login form and side image',
-  type: 'page',
+  // type: 'page',
   category: 'FORM',
   beforeCreate: ({
     prefab,
@@ -22,9 +22,6 @@
     const [authProfile, setAuthProfile] = React.useState(null);
     const [redirectTo, setRedirectTo] = React.useState('');
     const [showAuthValidation, setShowAuthValidation] = React.useState(false);
-    const [showEndpointValidation, setShowEndpointValidation] = React.useState(
-      false,
-    );
 
     function serializeParameters(obj) {
       return Object.entries(obj).map(([name, entry]) => ({
@@ -50,6 +47,10 @@
               )
             }
           >
+            <Text size="small" color="grey700">
+              Authentication profiles let you define which model you want to use
+              to log into the front end.
+            </Text>
             <AuthenticationProfileSelector
               onChange={(id, authProfileObject) => {
                 setShowAuthValidation(false);
@@ -59,17 +60,14 @@
               value={authProfileId}
             />
           </Field>
-          <Field
-            label="Redirect after successful login"
-            error={
-              showEndpointValidation && (
-                <Text color="#e82600">Selecting an endpoint is required</Text>
-              )
-            }
-          >
+          <Field label="Redirect after successful login">
+            <Text size="small" color="grey700">
+              Select a page that will load after a succesful login. <br />
+              You can also configure this later in the interactions of the login
+              form.
+            </Text>
             <EndpointSelector
               onChange={value => {
-                setShowEndpointValidation(isEmptyRedirect(value));
                 setRedirectTo(value);
               }}
               value={redirectTo}
@@ -85,11 +83,6 @@
               return;
             }
 
-            if (isEmptyRedirect(redirectTo)) {
-              setShowEndpointValidation(true);
-              return;
-            }
-
             const newPrefab = { ...prefab };
             if (authProfile) {
               const { loginModel, properties, id } = authProfile;
@@ -101,14 +94,16 @@
               formPrefab.options[0].value.modelId = loginModel;
               formPrefab.options[1].value = loginModel;
               newPrefab.variables[0].options.modelId = loginModel;
-              newPrefab.interactions[4].parameters = [
-                {
-                  parameter: 'redirectTo',
-                  pageId: redirectTo.pageId,
-                  endpointId: redirectTo.id,
-                  parameters: serializeParameters(redirectTo.params),
-                },
-              ];
+              if (!isEmptyRedirect(redirectTo)) {
+                newPrefab.interactions[4].parameters = [
+                  {
+                    parameter: 'redirectTo',
+                    pageId: redirectTo.pageId,
+                    endpointId: redirectTo.id,
+                    parameters: serializeParameters(redirectTo.params),
+                  },
+                ];
+              }
               newPrefab.actions[0].events[0].options.assign = properties.map(
                 property => {
                   const isPassword = property.kind === 'PASSWORD';
