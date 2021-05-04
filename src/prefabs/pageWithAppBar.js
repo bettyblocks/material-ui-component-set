@@ -1426,7 +1426,7 @@
                         },
                       },
                       key: 'size',
-                      label: 'Size',
+                      label: 'Icon size',
                       type: 'CUSTOM',
                       value: 'medium',
                     },
@@ -1464,7 +1464,7 @@
                       key: 'outerSpacing',
                       label: 'Outer space',
                       type: 'SIZES',
-                      value: ['0rem', '0rem', '0rem', '0rem'],
+                      value: ['0rem', 'M', '0rem', '0rem'],
                     },
                     {
                       configuration: {
@@ -3014,7 +3014,7 @@
                         dataType: 'string',
                       },
                       key: 'size',
-                      label: 'Size',
+                      label: 'Icon size',
                       type: 'CUSTOM',
                       value: 'medium',
                     },

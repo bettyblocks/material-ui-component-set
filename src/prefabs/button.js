@@ -1,7 +1,7 @@
 (() => ({
   name: 'Button',
   icon: 'ButtonIcon',
-  category: 'CONTENT',
+  category: 'BUTTON',
   keywords: ['Button'],
   structure: [
     {
