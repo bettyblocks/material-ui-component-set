@@ -528,7 +528,6 @@
                 allowedInput: [
                   { name: 'Internal page', value: 'internal' },
                   { name: 'External page', value: 'external' },
-                  { name: 'Action', value: 'action' },
                 ],
               },
             },
@@ -558,21 +557,6 @@
                   option: 'linkType',
                   comparator: 'EQ',
                   value: 'external',
-                },
-              },
-            },
-            {
-              value: '',
-              label: 'Action',
-              key: 'actionId',
-              type: 'ACTION',
-              configuration: {
-                apiVersion: 'v1',
-                condition: {
-                  type: 'SHOW',
-                  option: 'linkType',
-                  comparator: 'EQ',
-                  value: 'action',
                 },
               },
             },
@@ -2766,6 +2750,124 @@
                               },
                               options: [
                                 {
+                                  label: 'Toggle visibility',
+                                  key: 'visible',
+                                  value: true,
+                                  type: 'TOGGLE',
+                                  configuration: {
+                                    as: 'VISIBILITY',
+                                  },
+                                },
+                                {
+                                  type: 'CUSTOM',
+                                  label: 'variant',
+                                  key: 'variant',
+                                  value: 'icon',
+                                  configuration: {
+                                    as: 'BUTTONGROUP',
+                                    dataType: 'string',
+                                    allowedInput: [
+                                      { name: 'Text', value: 'text' },
+                                      { name: 'Outlined', value: 'outlined' },
+                                      { name: 'Contain', value: 'contained' },
+                                      { name: 'Icon', value: 'icon' },
+                                    ],
+                                  },
+                                },
+                                {
+                                  type: 'VARIABLE',
+                                  label: 'Button text',
+                                  key: 'buttonText',
+                                  value: ['Cancel'],
+                                  configuration: {
+                                    condition: {
+                                      type: 'HIDE',
+                                      option: 'variant',
+                                      comparator: 'EQ',
+                                      value: 'icon',
+                                    },
+                                  },
+                                },
+                                {
+                                  type: 'CUSTOM',
+                                  label: 'Link to',
+                                  key: 'linkType',
+                                  value: 'internal',
+                                  configuration: {
+                                    as: 'BUTTONGROUP',
+                                    dataType: 'string',
+                                    allowedInput: [
+                                      {
+                                        name: 'Internal page',
+                                        value: 'internal',
+                                      },
+                                      {
+                                        name: 'External page',
+                                        value: 'external',
+                                      },
+                                    ],
+                                  },
+                                },
+                                {
+                                  value: '',
+                                  label: 'Page',
+                                  key: 'linkTo',
+                                  type: 'ENDPOINT',
+                                  configuration: {
+                                    condition: {
+                                      type: 'SHOW',
+                                      option: 'linkType',
+                                      comparator: 'EQ',
+                                      value: 'internal',
+                                    },
+                                  },
+                                },
+                                {
+                                  value: [''],
+                                  label: 'URL',
+                                  key: 'linkToExternal',
+                                  type: 'VARIABLE',
+                                  configuration: {
+                                    placeholder:
+                                      'Starts with https:// or http://',
+                                    condition: {
+                                      type: 'SHOW',
+                                      option: 'linkType',
+                                      comparator: 'EQ',
+                                      value: 'external',
+                                    },
+                                  },
+                                },
+                                {
+                                  value: false,
+                                  label: 'Full width',
+                                  key: 'fullWidth',
+                                  type: 'TOGGLE',
+                                  configuration: {
+                                    condition: {
+                                      type: 'HIDE',
+                                      option: 'variant',
+                                      comparator: 'EQ',
+                                      value: 'icon',
+                                    },
+                                  },
+                                },
+                                {
+                                  value: 'large',
+                                  label: 'Size',
+                                  key: 'size',
+                                  type: 'CUSTOM',
+                                  configuration: {
+                                    as: 'BUTTONGROUP',
+                                    dataType: 'string',
+                                    allowedInput: [
+                                      { name: 'Large', value: 'large' },
+                                      { name: 'Medium', value: 'medium' },
+                                      { name: 'Small', value: 'small' },
+                                    ],
+                                  },
+                                },
+                                {
                                   label: 'Icon',
                                   key: 'icon',
                                   value: 'Close',
@@ -4880,7 +4982,6 @@
                                         name: 'External page',
                                         value: 'external',
                                       },
-                                      { name: 'Action', value: 'action' },
                                     ],
                                   },
                                 },
@@ -4911,21 +5012,6 @@
                                       option: 'linkType',
                                       comparator: 'EQ',
                                       value: 'external',
-                                    },
-                                  },
-                                },
-                                {
-                                  value: '',
-                                  label: 'Action',
-                                  key: 'actionId',
-                                  type: 'ACTION',
-                                  configuration: {
-                                    apiVersion: 'v1',
-                                    condition: {
-                                      type: 'SHOW',
-                                      option: 'linkType',
-                                      comparator: 'EQ',
-                                      value: 'action',
                                     },
                                   },
                                 },
