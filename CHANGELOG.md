@@ -1,3 +1,10 @@
+## [1.128.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.128.0...v1.128.1) (2021-05-04)
+
+
+### Bug Fixes
+
+* validate required option in checkboxgroup ([53f5785](https://github.com/bettyblocks/material-ui-component-set/commit/53f57853c53c4a8f745c6df60d6fb305ac68ed94))
+
 # [1.128.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.127.0...v1.128.0) (2021-05-03)
 
 
