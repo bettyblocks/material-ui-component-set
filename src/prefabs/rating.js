@@ -12,7 +12,7 @@
           key: 'customModelAttribute',
           type: 'CUSTOM_MODEL_ATTRIBUTE',
           configuration: {
-            allowedTypes: ['integer'],
+            allowedTypes: ['decimal'],
           },
         },
         {
