@@ -12,40 +12,8 @@
           key: 'customModelAttribute',
           type: 'CUSTOM_MODEL_ATTRIBUTE',
           configuration: {
-            allowedTypes: ['integer', 'decimal'],
+            allowedTypes: ['integer'],
           },
-        },
-        {
-          value: false,
-          label: 'Validation options',
-          key: 'validationOptions',
-          type: 'TOGGLE',
-        },
-        {
-          value: ['This field is required'],
-          label: 'Value required message',
-          key: 'validationValueMissing',
-          type: 'VARIABLE',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'validationOptions',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
-        },
-        {
-          type: 'TOGGLE',
-          label: 'Disabled',
-          key: 'disabled',
-          value: false,
-        },
-        {
-          value: false,
-          label: 'Is read only',
-          key: 'readonly',
-          type: 'TOGGLE',
         },
         {
           type: 'CUSTOM',
@@ -98,6 +66,38 @@
               },
             ],
           },
+        },
+        {
+          value: false,
+          label: 'Validation options',
+          key: 'validationOptions',
+          type: 'TOGGLE',
+        },
+        {
+          value: ['This field is required'],
+          label: 'Value required message',
+          key: 'validationValueMissing',
+          type: 'VARIABLE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'validationOptions',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'TOGGLE',
+          label: 'Disabled',
+          key: 'disabled',
+          value: false,
+        },
+        {
+          value: false,
+          label: 'Is read only',
+          key: 'readonly',
+          type: 'TOGGLE',
         },
         {
           type: 'CUSTOM',
