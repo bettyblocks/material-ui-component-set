@@ -12021,21 +12021,6 @@
               },
             }));
 
-            (createFormUseDataProperties
-              ? properties
-              : createFormProperties
-            ).forEach(property => {
-              interactions.push({
-                name: 'Clear',
-                sourceEvent: 'onActionSuccess',
-                ref: {
-                  targetComponentId: `#input_${property.id[0]}`,
-                  sourceComponentId: '#createForm',
-                },
-                type: 'Custom',
-              });
-            });
-
             newPrefab.interactions = interactions;
 
             createForm.options[0].value.modelId = modelId;
