@@ -15,8 +15,7 @@
     } = options;
     const { headerOnly, handleSort, orderBy, linkTo, handleRowClick, context } =
       parent || {};
-    const { type } = property;
-    const propertyArray = [property].flat();
+    const { type, id: propertyPath } = property;
     const { kind, name: propertyName, label: propertyLabel } =
       getProperty(property) || {};
     const { field, order = 'asc' } = orderBy || {};
@@ -26,7 +25,7 @@
     const isBooleanProperty = kind === 'boolean' || kind === 'BOOLEAN';
 
     let myEndpoint = null;
-    if (linkTo) {
+    if (linkTo && linkTo.id !== '') {
       myEndpoint = useEndpoint(linkTo);
     }
 
@@ -72,10 +71,10 @@
     };
 
     const isFilterSelected = fields => {
-      if (!fields || fields.length !== propertyArray.length) return false;
+      if (!fields || fields.length !== propertyPath.length) return false;
 
       for (let index = 0; index < fields.length; index += 1) {
-        if (fields[index] !== propertyArray[index]) return false;
+        if (fields[index] !== propertyPath[index]) return false;
       }
 
       return true;
@@ -93,7 +92,7 @@
         classes={{ root: classes.columnSort }}
         active={isFilterSelected(field)}
         direction={isFilterSelected(field) && order ? order : 'asc'}
-        onClick={() => createSortHandler(propertyArray)}
+        onClick={() => createSortHandler(propertyPath)}
       >
         <span className={classes.columnHeader}>{columnHeaderText}</span>
       </TableSortLabel>
