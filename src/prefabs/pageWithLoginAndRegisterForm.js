@@ -5588,14 +5588,14 @@
         if (authProfileId) {
           const { loginModel, properties, id } = authProfile;
 
-          if(!isEmptyRedirect(redirectTo)){
+          if (!isEmptyRedirect(redirectTo)) {
             newPrefab.interactions[0].parameters = [
               {
                 parameter: 'redirectTo',
                 pageId: redirectTo.pageId,
                 endpointId: redirectTo.id,
                 parameters: serializeParameters(redirectTo.params),
-                },
+              },
             ];
           }
           const loginFormPrefab =
