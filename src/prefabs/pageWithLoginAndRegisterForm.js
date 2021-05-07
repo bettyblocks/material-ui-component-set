@@ -1,8 +1,8 @@
 (() => ({
-  name: 'Login And Register Form - Sidebar',
+  name: 'Login and register form',
   icon: 'LoginFormIcon',
   type: 'page',
-  description: 'This page contains a ready to use login and register form',
+  description: 'Page with a ready to use login form, register form and image.',
   category: 'LAYOUT',
   beforeCreate: ({
     prefab,
@@ -40,6 +40,9 @@
         value: entry.map(v => JSON.stringify(v)),
       }));
     }
+
+    const isEmptyRedirect = value =>
+      !value || Object.keys(value).length === 0 || value.id === '';
 
     const iconConfiguration = {
       as: 'DROPDOWN',
@@ -5576,11 +5579,6 @@
           return;
         }
 
-        if (isEmpty(redirectTo)) {
-          setShowEndpointValidation(true);
-          return;
-        }
-
         if (isEmpty(registerProperties)) {
           setShowPropertiesValidation(true);
           return;
@@ -5589,14 +5587,17 @@
         const newPrefab = { ...prefab };
         if (authProfileId) {
           const { loginModel, properties, id } = authProfile;
-          newPrefab.interactions[0].parameters = [
-            {
-              parameter: 'redirectTo',
-              pageId: redirectTo.pageId,
-              endpointId: redirectTo.id,
-              parameters: serializeParameters(redirectTo.params),
-            },
-          ];
+
+          if (!isEmptyRedirect(redirectTo)) {
+            newPrefab.interactions[0].parameters = [
+              {
+                parameter: 'redirectTo',
+                pageId: redirectTo.pageId,
+                endpointId: redirectTo.id,
+                parameters: serializeParameters(redirectTo.params),
+              },
+            ];
+          }
           const loginFormPrefab =
             prefabStructure[0].descendants[0].descendants[0].descendants[0]
               .descendants[1].descendants[0].descendants[0].descendants[0]
@@ -11097,11 +11098,6 @@
               onClick={() => {
                 if (!authProfile) {
                   setShowAuthValidation(true);
-                  return;
-                }
-                if (isEmpty(redirectTo)) {
-                  setShowEndpointValidation(true);
-
                   return;
                 }
                 const newStepnumber = stepNumber + 1;
