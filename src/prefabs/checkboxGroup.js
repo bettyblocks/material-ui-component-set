@@ -1,7 +1,16 @@
 (() => ({
-  name: 'CheckboxGroup',
+  name: 'Checkbox Group',
   icon: 'CheckboxGroupIcon',
   category: 'FORM',
+  keywords: [
+    'Form',
+    'input',
+    'check',
+    'box',
+    'group',
+    'checkbox',
+    'checkboxgroup',
+  ],
   structure: [
     {
       name: 'CheckboxGroup',
@@ -16,12 +25,6 @@
           },
         },
         {
-          value: false,
-          label: 'Error',
-          key: 'error',
-          type: 'TOGGLE',
-        },
-        {
           value: 'built-in',
           label: 'Error message',
           key: 'showError',
@@ -33,6 +36,26 @@
               { name: 'Built in', value: 'built-in' },
               { name: 'Interaction', value: 'interaction' },
             ],
+          },
+        },
+        {
+          value: false,
+          label: 'Validation options',
+          key: 'validationOptions',
+          type: 'TOGGLE',
+        },
+        {
+          value: ['This field is required'],
+          label: 'Value required message',
+          key: 'validationValueMissing',
+          type: 'VARIABLE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'validationOptions',
+              comparator: 'EQ',
+              value: true,
+            },
           },
         },
         {

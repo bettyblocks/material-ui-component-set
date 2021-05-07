@@ -162,7 +162,7 @@
           ...(orderBy ? { sort: { relation: sort } } : {}),
         },
         onCompleted(res) {
-          const hasResult = res && res.result && res.result.length > 0;
+          const hasResult = res && res.results && res.results.length > 0;
           if (hasResult) {
             B.triggerEvent('onSuccess', res.results);
           } else {
@@ -222,20 +222,21 @@
 
     const onChange = (_, newValue) => {
       if (!valueProp || !newValue) {
-        setCurrentValue(newValue);
-        setCurrentLabel(newValue);
+        setCurrentValue(newValue || '');
+        setCurrentLabel(newValue || '');
         return;
       }
 
-      let newCurrentValue = newValue[valueProp.name] || newValue;
-
+      const isPropDefined = newValue[valueProp.name] !== undefined;
+      const propValue = isPropDefined ? newValue[valueProp.name] || '' : '';
+      let newCurrentValue = isPropDefined ? propValue : newValue;
       if (typeof newValue === 'string') {
         if (currentLabel === newValue) {
           newCurrentValue = currentValue;
         }
       } else if (searchProp) {
         const newLabelValue = newValue[searchProp.name];
-        setCurrentLabel(newLabelValue);
+        setCurrentLabel(newLabelValue || '');
       }
 
       if (multiple) {
@@ -244,7 +245,7 @@
       setCurrentValue(newCurrentValue);
     };
 
-    const getRecords = React.useCallback(() => {
+    const record = React.useMemo(() => {
       if (!currentValue || !results) {
         return multiple ? [] : null;
       }
@@ -255,8 +256,10 @@
           : [currentValue];
       }
       const currentRecords = results.reduce((acc, cv) => {
-        const searchStr = cv[valueProp.name].toString();
-        const search = cv[valueProp.name];
+        const searchStr = cv[valueProp.name]
+          ? cv[valueProp.name].toString()
+          : '';
+        const search = cv[valueProp.name] || '';
         if (
           currentRecordsKeys.indexOf(searchStr) > -1 ||
           currentRecordsKeys.indexOf(search) > -1
@@ -271,17 +274,20 @@
       return multiple ? currentRecords : singleRecord;
     }, [currentValue, results]);
 
-    const record = getRecords();
-
     useEffect(() => {
-      if (!multiple && record && searchProp) {
-        setCurrentLabel(record[searchProp.name]);
+      if (!multiple) {
+        setCurrentLabel(
+          (record && searchProp && record[searchProp.name]) || '',
+        );
       }
     }, [record]);
 
     const renderLabel = option => {
       const optionLabel = option[searchProp.name];
-      return optionLabel !== undefined && optionLabel === ''
+      const isEmptyLabel =
+        optionLabel !== undefined &&
+        (optionLabel === '' || optionLabel === null);
+      return isEmptyLabel
         ? '-- empty --'
         : (optionLabel && optionLabel.toString()) || option;
     };
@@ -379,13 +385,21 @@
       );
     }
 
+    let currentInputValue = searchParam;
+    if (!searchParam && record) {
+      currentInputValue = currentLabel;
+    }
+    if (!currentInputValue) {
+      currentInputValue = '';
+    }
+
     return (
       <Autocomplete
         multiple={multiple}
         freeSolo={freeSolo}
         options={results}
         value={record}
-        inputValue={searchParam}
+        inputValue={currentInputValue}
         getOptionLabel={renderLabel}
         getOptionSelected={(option, value) => value.id === option.id}
         PopoverProps={{

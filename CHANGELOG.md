@@ -1,3 +1,200 @@
+# [1.129.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.128.1...v1.129.0) (2021-05-07)
+
+
+### Bug Fixes
+
+* iconConfiguration not available in prefab structure ([0538f92](https://github.com/bettyblocks/material-ui-component-set/commit/0538f9206e9f69414cc12b75ce2799f5fd78ddc8))
+* solved linter issues ([e35d3ab](https://github.com/bettyblocks/material-ui-component-set/commit/e35d3ab3fc42ada56d82f5bbe65a3906d2c85efd))
+
+
+### Features
+
+* page template with login and register form ([fbb1a8e](https://github.com/bettyblocks/material-ui-component-set/commit/fbb1a8e6d3e0752430d6b5bf1ed0fc519b27e1dd))
+
+## [1.128.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.128.0...v1.128.1) (2021-05-04)
+
+
+### Bug Fixes
+
+* validate required option in checkboxgroup ([53f5785](https://github.com/bettyblocks/material-ui-component-set/commit/53f57853c53c4a8f745c6df60d6fb305ac68ed94))
+
+# [1.128.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.127.0...v1.128.0) (2021-05-03)
+
+
+### Features
+
+* add style to button component ([a908b65](https://github.com/bettyblocks/material-ui-component-set/commit/a908b657d1838d12b5a6de920afe60b1da4435a1))
+
+# [1.127.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.126.0...v1.127.0) (2021-04-30)
+
+
+### Features
+
+* release style editor with button component work 332 ([#1092](https://github.com/bettyblocks/material-ui-component-set/issues/1092)) ([4c832d5](https://github.com/bettyblocks/material-ui-component-set/commit/4c832d5d59f6a8ea9b20960738f9945233ccc04a))
+
+# [1.126.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.125.0...v1.126.0) (2021-04-22)
+
+
+### Bug Fixes
+
+* add outerspace option to card prefab ([b8978e2](https://github.com/bettyblocks/material-ui-component-set/commit/b8978e2969cdbdbfeb2974fdb77ede56f7f4879b))
+
+
+### Features
+
+* page with grid and list view ([6a22566](https://github.com/bettyblocks/material-ui-component-set/commit/6a22566da85ba7293cc560d751836fc3dc59d38e))
+
+# [1.125.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.124.0...v1.125.0) (2021-04-22)
+
+
+### Bug Fixes
+
+* add outerspace option to card prefab ([82a242d](https://github.com/bettyblocks/material-ui-component-set/commit/82a242d45d8587e078462e68ef80e9b009933e44))
+
+
+### Features
+
+* page with grid view ([97a34c5](https://github.com/bettyblocks/material-ui-component-set/commit/97a34c59d0c274eb1c00d9e2a3d6d7fdf9860f11))
+
+# [1.124.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.123.0...v1.124.0) (2021-04-22)
+
+
+### Bug Fixes
+
+* add outerspace option to paper ([8d0ab26](https://github.com/bettyblocks/material-ui-component-set/commit/8d0ab26c89ef446f6bc3fd3459d3e55d4ac506ac))
+
+
+### Features
+
+* page template with list view ([8c444ba](https://github.com/bettyblocks/material-ui-component-set/commit/8c444bae35b5c2b5ca7eb13303771f8e90d6b1ba))
+
+# [1.123.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.122.5...v1.123.0) (2021-04-22)
+
+
+### Features
+
+* page with login form styled ([d589dc1](https://github.com/bettyblocks/material-ui-component-set/commit/d589dc1eea9ce26a2cdccb14ca0fdd93f2e6c0e8))
+
+## [1.122.5](https://github.com/bettyblocks/material-ui-component-set/compare/v1.122.4...v1.122.5) (2021-04-20)
+
+
+### Bug Fixes
+
+* sorting on belongs to property now uses the correct path ([78b0719](https://github.com/bettyblocks/material-ui-component-set/commit/78b071991c29e3a7f5b1cbabbb1756283a42d759))
+
+## [1.122.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.122.3...v1.122.4) (2021-04-19)
+
+
+### Bug Fixes
+
+* handle null values as empty string in autocomplete ([bb6a9d8](https://github.com/bettyblocks/material-ui-component-set/commit/bb6a9d84ab5ed5acdb2dd9ef9e68f3f8c929d729))
+
+## [1.122.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.122.2...v1.122.3) (2021-04-16)
+
+
+### Bug Fixes
+
+* row click endpoint leads to compile error ([16cb710](https://github.com/bettyblocks/material-ui-component-set/commit/16cb7107f1dc83439371abf04918809792984072))
+
+## [1.122.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.122.1...v1.122.2) (2021-04-09)
+
+
+### Bug Fixes
+
+* adds outer paper space option to dialog ([4a9d14c](https://github.com/bettyblocks/material-ui-component-set/commit/4a9d14cd81ae20960c4a100897441204a1378d99))
+
+## [1.122.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.122.0...v1.122.1) (2021-04-09)
+
+
+### Bug Fixes
+
+* **ta-2437:** adds the outer space option to paper component ([b29afed](https://github.com/bettyblocks/material-ui-component-set/commit/b29afeda5adcf5109b0ed1f2357302a5d18151ea))
+
+# [1.122.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.121.4...v1.122.0) (2021-04-08)
+
+
+### Features
+
+* disable backdrop click for dialog ([02b4279](https://github.com/bettyblocks/material-ui-component-set/commit/02b42799de3b13147cc9ac28351c473faf8db8b6))
+* disable backdrop click for dialog ([2f4ffcb](https://github.com/bettyblocks/material-ui-component-set/commit/2f4ffcb106ace4b88e275c546068d9767b55809d))
+* make sure submit interaction also validates inputs ([c17f7c5](https://github.com/bettyblocks/material-ui-component-set/commit/c17f7c5a2b5eb0ad31e0b716ba8c41ae533995fc))
+
+## [1.121.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.121.3...v1.121.4) (2021-04-08)
+
+
+### Bug Fixes
+
+* **ta-2434:** fixes the file upload button full width option ([e73eae8](https://github.com/bettyblocks/material-ui-component-set/commit/e73eae80ef2c0531429f893f1196473d94ff4167))
+
+## [1.121.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.121.2...v1.121.3) (2021-04-07)
+
+
+### Bug Fixes
+
+* fontweight overwrite ([ada8c01](https://github.com/bettyblocks/material-ui-component-set/commit/ada8c010fca470c9042ee51cbb22876d5016f911))
+
+## [1.121.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.121.1...v1.121.2) (2021-04-01)
+
+
+### Bug Fixes
+
+* use theme color if styles is unchecked ([8342190](https://github.com/bettyblocks/material-ui-component-set/commit/83421909d564360b758db599298a1e2ad89850fa))
+
+## [1.121.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.121.0...v1.121.1) (2021-04-01)
+
+
+### Bug Fixes
+
+* **ta-2413:** fixes the default value display ([774bf3e](https://github.com/bettyblocks/material-ui-component-set/commit/774bf3e7cdd964f98a508eef73773351a204f87a))
+
+# [1.121.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.120.0...v1.121.0) (2021-03-31)
+
+
+### Features
+
+* added styling to expansionpanel title ([f837f9a](https://github.com/bettyblocks/material-ui-component-set/commit/f837f9adcbe6bb6ead346055fdaac244a557d39a))
+
+# [1.120.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.119.0...v1.120.0) (2021-03-29)
+
+
+### Features
+
+* **ta-2362:** adds keywords to component set prefabs ([9655eff](https://github.com/bettyblocks/material-ui-component-set/commit/9655eff15aa35e6b6cd293528cd5f5f91c6fd452))
+
+# [1.119.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.118.2...v1.119.0) (2021-03-26)
+
+
+### Features
+
+* **ta-2352:** understandable component names ([723364b](https://github.com/bettyblocks/material-ui-component-set/commit/723364b5d543bec209e9508084088cbe8e4f8512))
+
+## [1.118.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.118.1...v1.118.2) (2021-03-25)
+
+
+### Bug Fixes
+
+* send empty datetime on picker when value is empty ([#975](https://github.com/bettyblocks/material-ui-component-set/issues/975)) ([c91f6ac](https://github.com/bettyblocks/material-ui-component-set/commit/c91f6acca7855bfc1133d11b793abd5dd84b69ed))
+
+## [1.118.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.118.0...v1.118.1) (2021-03-25)
+
+
+### Bug Fixes
+
+* delete package lock ([51fc565](https://github.com/bettyblocks/material-ui-component-set/commit/51fc5654e21f8d322fd9719084eb8d8c68fd205d))
+* on no results interaction not working ([9147ace](https://github.com/bettyblocks/material-ui-component-set/commit/9147ace8cd61d6492a2aa24783e712e41bbdc9ef))
+
+# [1.118.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.117.1...v1.118.0) (2021-03-24)
+
+
+### Bug Fixes
+
+* add required validation to checkbox ([5978f0e](https://github.com/bettyblocks/material-ui-component-set/commit/5978f0eb9ba0256ba3f8b10613b84123d44b47fc))
+
+
+### Features
+
+* show error state in required symbol in checkbox ([f08b647](https://github.com/bettyblocks/material-ui-component-set/commit/f08b647ed63aaa284fa88fc2feffe4beca158689))
+
 ## [1.117.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.117.0...v1.117.1) (2021-03-17)
 
 
