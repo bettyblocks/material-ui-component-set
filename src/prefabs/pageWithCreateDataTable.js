@@ -6402,16 +6402,15 @@
           onSave={() => {
             if (
               !modelId ||
-              (createFormProperties.length < 1 &&
-                !createFormUseDataProperties) ||
-              properties.length < 1
+              (!createFormProperties.length && !createFormUseDataProperties) ||
+              !properties.length
             ) {
               setModelValidation(!modelId);
               setCreatePropertiesValidation(
-                createFormProperties.length < 1 && !createFormUseDataProperties,
+                !createFormProperties.length && !createFormUseDataProperties,
               );
 
-              setPropertiesValidation(properties.length < 1);
+              setPropertiesValidation(!properties.length);
               return;
             }
             const newPrefab = { ...prefab };
