@@ -1,5 +1,5 @@
 (() => ({
-  name: 'Column Layout',
+  name: 'Column layout configurator',
   icon: 'GridIcon',
   description:
     'Generate your layout, columns and rows by using the column layout component.',
