@@ -5,12 +5,13 @@
   orientation: 'VERTICAL',
   jsx: (() => {
     const { Icons } = window.MaterialUI;
-    const { FormControl, FormHelperText } = window.MaterialUI.Core;
+    const { FormControl, FormHelperText, InputLabel } = window.MaterialUI.Core;
     const { Rating } = window.MaterialUI.Lab;
     const { env, getCustomModelAttribute, useText } = B;
     const isDev = env === 'dev';
 
     const {
+      hideLabel,
       customModelAttribute: customModelAttributeObj,
       numberOfIcons,
       size,
@@ -27,8 +28,10 @@
 
     const {
       id: customModelAttributeId,
+      label = [],
       value: defaultValue = [],
     } = customModelAttributeObj;
+    const labelText = useText(label);
 
     const customModelAttribute = getCustomModelAttribute(
       customModelAttributeId,
@@ -78,10 +81,16 @@
     const RatingComponent = (
       <div className={classes.root}>
         <FormControl
+          classes={{ root: classes.formControl }}
           required={required}
           component="fieldset"
           error={errorState}
         >
+          {labelText && !hideLabel && (
+            <InputLabel classes={{ root: classes.label }}>
+              {labelText}
+            </InputLabel>
+          )}
           <Rating
             className={classes.ratingIcon}
             name={nameAttributeValue || customModelAttributeName}
@@ -204,6 +213,14 @@
         padding: 0,
         border: 'none',
         pointerEvents: 'none',
+      },
+      formControl: {
+        marginTop: ({ options: { hideLabel } }) => [
+          hideLabel ? '' : '15px !important',
+        ],
+      },
+      label: {
+        transform: 'translate(0px, -14px) scale(0.75) !important',
       },
     };
   },

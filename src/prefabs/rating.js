@@ -1498,6 +1498,20 @@
         },
         {
           value: false,
+          label: 'Hide label',
+          key: 'hideLabel',
+          type: 'TOGGLE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'styles',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          value: false,
           label: 'Advanced settings',
           key: 'advancedSettings',
           type: 'TOGGLE',
