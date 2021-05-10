@@ -44,6 +44,7 @@
       labelNumberOfPages,
       labelSearchOn,
       square,
+      striped,
       elevation,
       variant,
       stickyHeader,
@@ -71,8 +72,11 @@
     const [showPagination, setShowPagination] = useState(false);
     const { label: searchPropertyLabel = '{property}' } =
       getProperty(searchProperty) || {};
+    const orderPropertyPath = Array.isArray(orderProperty.id)
+      ? orderProperty.id
+      : null;
     const [orderBy, setOrderBy] = React.useState({
-      field: [orderProperty].flat() || null,
+      field: orderPropertyPath,
       order: orderProperty ? sortOrder : null,
     });
     const [results, setResults] = useState([]);
@@ -85,21 +89,22 @@
     const history = isDev ? null : useHistory();
 
     const createSortObject = (fields, order) => {
-      const fieldsArray = [fields].flat();
-      const sort = fieldsArray.reduceRight((acc, property, index) => {
+      const sort = fields.reduceRight((acc, property, index) => {
         const prop = getProperty(property);
-        return index === fieldsArray.length - 1
+        return index === fields.length - 1
           ? { [prop.name]: order.toUpperCase() }
           : { [prop.name]: acc };
       }, {});
 
       return sort;
     };
+
     const [variables, setVariables] = useState(
-      orderProperty
+      orderPropertyPath
         ? {
             sort: {
-              relation: !isDev && createSortObject(orderProperty, sortOrder),
+              relation:
+                !isDev && createSortObject(orderPropertyPath, sortOrder),
             },
           }
         : {},
@@ -164,6 +169,19 @@
         variables,
         skip: loadOnScroll ? skip : page * rowsPerPage,
         take: loadOnScroll ? autoLoadTakeAmountNum : rowsPerPage,
+        onCompleted(res) {
+          const hasResult = res && res.results && res.results.length > 0;
+          if (hasResult) {
+            B.triggerEvent('onSuccess', res.results);
+          } else {
+            B.triggerEvent('onNoResults');
+          }
+        },
+        onError(err) {
+          if (!displayError) {
+            B.triggerEvent('onError', err);
+          }
+        },
       });
 
     useEffect(() => {
@@ -238,6 +256,22 @@
           repeaterRef.current.innerHTML +=
             repeaterRef.current.previousElementSibling.children[0].outerHTML;
         }
+        if (striped) {
+          const childrenLenght = children.length;
+          const collection = Array.from(repeaterRef.current.children);
+          collection
+            .filter(item => item.tagName === 'DIV')
+            .forEach((item, index) => {
+              if (
+                ((Math.ceil((index + 1) / childrenLenght) * childrenLenght) /
+                  childrenLenght) %
+                  2 ===
+                0
+              ) {
+                item.classList.add('striped');
+              }
+            });
+        }
       };
       const mutationObserver = new MutationObserver(() => {
         repeat();
@@ -271,16 +305,6 @@
         B.triggerEvent('onLoad', loading);
       }
     }, [loading]);
-
-    if (error && !displayError) {
-      B.triggerEvent('onError', error);
-    }
-
-    if (results.length > 0) {
-      B.triggerEvent('onSuccess', results);
-    } else {
-      B.triggerEvent('onNoResults');
-    }
 
     const handleChangePage = (_, newPage) => {
       if (loading || error) return;
@@ -656,6 +680,11 @@
           backgroundColor: ({ options: { linkTo, backgroundRowHover } }) =>
             linkTo && [style.getColor(backgroundRowHover), '!important'],
         },
+        '&:nth-child(odd)': {
+          backgroundColor: ({ options: { striped, stripeColor } }) => [
+            striped ? style.getColor(stripeColor) : 'transparent',
+          ],
+        },
       },
       searchField: {
         marginLeft: ['auto', '!important'],
@@ -671,6 +700,12 @@
       },
       autoRepeat: {
         opacity: 0.5,
+        '& .striped': {
+          background: ({ options: { striped, stripeColor } }) => [
+            striped ? style.getColor(stripeColor) : 'transparent',
+            '!important',
+          ],
+        },
       },
       skeleton: {
         height: `calc(${style.getFont('Body1').Mobile} * 1.2)`,

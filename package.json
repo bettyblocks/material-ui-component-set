@@ -1,11 +1,11 @@
 {
   "name": "component-set",
-  "version": "1.106.0",
+  "version": "1.130.0",
   "main": "dist/templates.json",
   "license": "UNLICENSED",
   "private": false,
   "devDependencies": {
-    "@betty-blocks/cli": "^23.34.0",
+    "@betty-blocks/cli": "^23.40.1",
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-angular": "^11.0.0",
     "@commitlint/prompt-cli": "^11.0.0",
@@ -25,7 +25,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn prettier:check",
+      "pre-commit": "yarn lint && yarn prettier:check",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },

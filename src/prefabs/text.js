@@ -2,6 +2,7 @@
   name: 'Text',
   icon: 'ParagraphIcon',
   category: 'CONTENT',
+  keywords: ['Content', 'text', 'type', 'typography', 'body', 'paragraph'],
   structure: [
     {
       name: 'Text',

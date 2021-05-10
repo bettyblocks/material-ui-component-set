@@ -1,7 +1,8 @@
 (() => ({
-  name: 'DrawerContainer',
+  name: 'Drawer Container',
   icon: 'RowColumnIcon',
   category: 'LAYOUT',
+  keywords: ['Layout', 'drawer', 'container', 'drawercontainer'],
   structure: [
     {
       name: 'DrawerContainer',

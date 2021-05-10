@@ -2,6 +2,7 @@
   name: 'Panel',
   icon: 'PanelIcon',
   category: 'LAYOUT',
+  keywords: ['Layout', 'panel'],
   structure: [
     {
       name: 'Panel',
