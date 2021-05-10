@@ -1693,10 +1693,10 @@
         );
       },
       onSave: () => {
-        if (!modelId || properties.length < 1 || detailProperties.length < 1) {
+        if (!modelId || !properties.length || !detailProperties.length) {
           setModelValidation(!modelId);
-          setPropertiesValidation(properties.length < 1);
-          setDetailsValidation(detailProperties.length < 1);
+          setPropertiesValidation(!properties.length);
+          setDetailsValidation(!detailProperties.length);
           return;
         }
         const newPrefab = { ...prefab };
@@ -3941,7 +3941,7 @@
                   setModelValidation(true);
                   return;
                 }
-                if (properties.length < 1) {
+                if (!properties.length) {
                   setPropertiesValidation(true);
                   return;
                 }
