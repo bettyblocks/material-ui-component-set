@@ -220,6 +220,10 @@
         ],
       },
       label: {
+        color: ({ options: { labelColor } }) => [
+          style.getColor(labelColor),
+          '!important',
+        ],
         transform: 'translate(0px, -14px) scale(0.75) !important',
       },
     };
