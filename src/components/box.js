@@ -24,6 +24,15 @@
     const isFlex = alignment !== 'none' || valignment !== 'none';
     const opac = transparent ? 0 : 1;
     const [opacity, setOpacity] = useState(opac);
+    const [interactionBackground, setInteractionBackground] = useState('');
+
+    B.defineFunction('setCustomBackgroundImage', url => {
+      setInteractionBackground(`url("${url}")`);
+    });
+
+    B.defineFunction('removeCustomBackgroundImage', () => {
+      setInteractionBackground('');
+    });
 
     const boxOptions = {
       display: isFlex && 'flex',
@@ -57,7 +66,14 @@
         onClick={handleClick}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        style={{ opacity }}
+        style={
+          interactionBackground
+            ? {
+                backgroundImage: interactionBackground,
+                opacity,
+              }
+            : { opacity }
+        }
       >
         {isEmpty ? 'Box' : children}
       </Box>
@@ -76,9 +92,9 @@
     return isDev ? <div className={classes.wrapper}>{BoxCmp}</div> : BoxCmp;
   })(),
   styles: B => theme => {
-    const style = new B.Styling(theme);
-    const { color: colorFunc } = B;
-    const isDev = B.env === 'dev';
+    const { color: colorFunc, env, mediaMinWidth, Styling, useText } = B;
+    const style = new Styling(theme);
+    const isDev = env === 'dev';
     const getColorAlpha = (col, val) => colorFunc.alpha(col, val);
     const getSpacing = (idx, device = 'Mobile') =>
       idx === '0' ? '0rem' : style.getSpacing(idx, device);
@@ -111,7 +127,7 @@
         height: ({ options: { height } }) => (isDev ? '100%' : height),
         minHeight: 0,
         position: ({ options: { position } }) =>
-          (!isDev && position) || 'relative',
+          (!isDev && position) || 'unset',
         top: ({ options: { top } }) => !isDev && top,
         right: ({ options: { right } }) => !isDev && right,
         bottom: ({ options: { bottom } }) => !isDev && bottom,
@@ -136,7 +152,7 @@
           getSpacing(innerSpacing[2]),
         paddingLeft: ({ options: { innerSpacing } }) =>
           getSpacing(innerSpacing[3]),
-        [`@media ${B.mediaMinWidth(600)}`]: {
+        [`@media ${mediaMinWidth(600)}`]: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Portrait'),
           marginRight: ({ options: { outerSpacing } }) =>
@@ -154,7 +170,7 @@
           paddingLeft: ({ options: { innerSpacing } }) =>
             getSpacing(innerSpacing[3], 'Portrait'),
         },
-        [`@media ${B.mediaMinWidth(960)}`]: {
+        [`@media ${mediaMinWidth(960)}`]: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Landscape'),
           marginRight: ({ options: { outerSpacing } }) =>
@@ -172,7 +188,7 @@
           paddingLeft: ({ options: { innerSpacing } }) =>
             getSpacing(innerSpacing[3], 'Landscape'),
         },
-        [`@media ${B.mediaMinWidth(1280)}`]: {
+        [`@media ${mediaMinWidth(1280)}`]: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Desktop'),
           marginRight: ({ options: { outerSpacing } }) =>
@@ -202,7 +218,7 @@
                 backgroundColorAlpha / 100,
               ),
         backgroundImage: ({ options: { backgroundUrl } }) => {
-          const image = B.useText(backgroundUrl);
+          const image = useText(backgroundUrl);
           return image && `url("${image}")`;
         },
         backgroundSize: ({ options: { backgroundSize } }) => backgroundSize,
@@ -210,6 +226,8 @@
           backgroundPosition,
         backgroundRepeat: ({ options: { backgroundRepeat } }) =>
           backgroundRepeat,
+        backgroundAttachment: ({ options: { backgroundAttachment } }) =>
+          backgroundAttachment,
       },
       border: {
         borderWidth: ({ options: { borderWidth, borderStyle, borderColor } }) =>

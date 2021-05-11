@@ -4,7 +4,8 @@
   allowedTypes: ['BREADCRUMB_ITEM'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const isDev = B.env === 'dev';
+    const { env } = B;
+    const isDev = env === 'dev';
     const { Breadcrumbs } = window.MaterialUI.Core;
     const { Icons } = window.MaterialUI;
     const {

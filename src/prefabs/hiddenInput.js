@@ -1,7 +1,8 @@
 (() => ({
-  name: 'HiddenInput',
+  name: 'Hidden Input',
   icon: 'HiddenInputIcon',
   category: 'FORM',
+  keywords: ['Form', 'hidden', 'input', 'hiddeninput'],
   structure: [
     {
       name: 'HiddenInput',

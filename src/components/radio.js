@@ -27,10 +27,15 @@
       order,
       orderBy,
     } = options;
-    const isDev = B.env === 'dev';
+    const {
+      env,
+      getCustomModelAttribute,
+      getProperty,
+      useAllQuery,
+      useText,
+    } = B;
+    const isDev = env === 'dev';
     const displayError = showError === 'built-in';
-
-    const { useAllQuery, getProperty, useText, getCustomModelAttribute } = B;
 
     const {
       id: customModelAttributeId,
@@ -61,6 +66,7 @@
     const [errorState, setErrorState] = useState(false);
     const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
+    const mounted = useRef(false);
     let radioValues = [];
 
     const {
@@ -92,9 +98,20 @@
         variables: {
           ...(orderBy ? { sort: { relation: sort } } : {}),
         },
+        onCompleted(res) {
+          const hasResult = res && res.result && res.result.length > 0;
+          if (hasResult) {
+            B.triggerEvent('onSuccess', res.results);
+          } else {
+            B.triggerEvent('onNoResults');
+          }
+        },
+        onError(resp) {
+          if (!displayError) {
+            B.triggerEvent('onError', resp);
+          }
+        },
       });
-
-    const mounted = useRef(false);
 
     useEffect(() => {
       mounted.current = true;
@@ -104,23 +121,16 @@
     }, []);
 
     useEffect(() => {
+      B.triggerEvent('onChange', value);
+    }, [value]);
+
+    useEffect(() => {
       if (mounted.current && loading) {
         B.triggerEvent('onLoad', loading);
       }
     }, [loading]);
 
-    if (err && !displayError) {
-      B.triggerEvent('onError', err);
-    }
-
     const { results } = data || {};
-    if (results) {
-      if (results.length > 0) {
-        B.triggerEvent('onSuccess', results);
-      } else {
-        B.triggerEvent('onNoResults');
-      }
-    }
 
     B.defineFunction('Refetch', () => refetch());
 
@@ -222,8 +232,8 @@
     );
   })(),
   styles: B => t => {
-    const style = new B.Styling(t);
-    const { color: colorFunc } = B;
+    const { color: colorFunc, Styling } = B;
+    const style = new Styling(t);
     const getOpacColor = (col, val) => colorFunc.alpha(col, val);
     return {
       root: {

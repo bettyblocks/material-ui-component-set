@@ -5,7 +5,6 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const {
-      error,
       disabled,
       position,
       size,
@@ -13,11 +12,12 @@
       customModelAttribute: customModelAttributeObj,
       validationValueMissing,
       nameAttribute,
+      isSwitch,
     } = options;
-    const { useText, getCustomModelAttribute } = B;
-    const isDev = B.env === 'dev';
+    const { env, useText, getCustomModelAttribute } = B;
+    const isDev = env === 'dev';
 
-    const [errorState, setErrorState] = useState(error);
+    const [errorState, setErrorState] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
     const {
       id: customModelAttributeId,
@@ -36,24 +36,43 @@
 
     const {
       Checkbox: MUICheckbox,
+      Switch,
       FormControlLabel,
       FormControl,
       FormHelperText,
     } = window.MaterialUI.Core;
 
-    const handleValidation = isChecked => {
-      const valid = (isChecked && required) || !required;
-      setErrorState(!valid);
-      const message = !valid
-        ? useText(validationValueMissing)
-        : useText(helperText);
+    const handleValidation = isValid => {
+      setErrorState(!isValid);
+      const message = useText(!isValid ? validationValueMissing : helperText);
       setHelper(message);
     };
 
     const handleChange = evt => {
-      handleValidation(evt.target.checked);
+      const isChecked = evt.target.checked;
+      const isValid = (isChecked && required) || !required;
+      handleValidation(isValid);
       setChecked(evt.target.checked);
     };
+
+    const invalidHandler = event => {
+      event.preventDefault();
+      const {
+        target: {
+          validity: { valid: isValid },
+        },
+      } = event;
+      handleValidation(isValid);
+    };
+
+    useEffect(() => {
+      if (checked) {
+        B.triggerEvent('isTrue', true);
+      } else {
+        B.triggerEvent('isFalse', false);
+      }
+      B.triggerEvent('onChange', checked);
+    }, [checked]);
 
     useEffect(() => {
       if (isDev) {
@@ -61,16 +80,33 @@
       }
     }, [isDev, defaultValue]);
 
-    const Checkbox = (
-      <MUICheckbox
-        checked={checked}
-        onChange={handleChange}
-        name={nameAttributeValue || customModelAttributeName}
-        disabled={disabled}
-        size={size}
-        tabIndex={isDev && -1}
-        value="on"
-      />
+    const props = {
+      checked,
+      required,
+      onInvalid: invalidHandler,
+      onChange: handleChange,
+      name: nameAttributeValue || customModelAttributeName,
+      disabled,
+      size,
+      tabIndex: isDev && -1,
+      value: 'on',
+    };
+
+    const Checkbox = <MUICheckbox {...props} />;
+    const SwitchComponent = <Switch {...props} />;
+
+    const ControlLabel = (
+      <>
+        {labelText}
+        {required ? (
+          <span className={errorState ? classes.formControlRequired : null}>
+            {' '}
+            *
+          </span>
+        ) : (
+          ''
+        )}
+      </>
     );
 
     const Control = (
@@ -80,8 +116,8 @@
         classes={{ root: classes.formControl }}
       >
         <FormControlLabel
-          control={Checkbox}
-          label={labelText}
+          control={isSwitch ? SwitchComponent : Checkbox}
+          label={ControlLabel}
           labelPlacement={position}
         />
         {!!helper && <FormHelperText>{helper}</FormHelperText>}
@@ -90,14 +126,20 @@
     return isDev ? <div className={classes.root}>{Control}</div> : Control;
   })(),
   styles: B => t => {
-    const style = new B.Styling(t);
-    const { color: colorFunc } = B;
+    const { color: colorFunc, Styling } = B;
+    const style = new Styling(t);
     const getOpacColor = (col, val) => colorFunc.alpha(col, val);
     return {
       root: {
         '& > *': {
           pointerEvents: 'none',
         },
+      },
+      formControlRequired: {
+        color: ({ options: { errorColor } }) => [
+          style.getColor(errorColor),
+          '!important',
+        ],
       },
       formControl: {
         '& > legend': {
@@ -147,6 +189,32 @@
                   '!important',
                 ],
               },
+            },
+          },
+          '& .MuiSwitch-root': {
+            '& .MuiSwitch-track': {
+              backgroundColor: ({ options: { checkboxColor } }) => [
+                style.getColor(checkboxColor),
+                '!important',
+              ],
+            },
+            '& .Mui-checked': {
+              color: ({ options: { checkboxColorChecked } }) => [
+                style.getColor(checkboxColorChecked),
+                '!important',
+              ],
+              '&:hover': {
+                backgroundColor: ({ options: { checkboxColorChecked } }) => [
+                  getOpacColor(style.getColor(checkboxColorChecked), 0.04),
+                  '!important',
+                ],
+              },
+            },
+            '& .Mui-checked ~ .MuiSwitch-track': {
+              backgroundColor: ({ options: { checkboxColorChecked } }) => [
+                style.getColor(checkboxColorChecked),
+                '!important',
+              ],
             },
           },
           '& .MuiTypography-root': {

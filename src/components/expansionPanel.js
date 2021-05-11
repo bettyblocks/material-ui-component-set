@@ -23,6 +23,16 @@
       variant,
       elevation,
     } = options;
+    const Variant = {
+      Title1: 'h1',
+      Title2: 'h2',
+      Title3: 'h3',
+      Title4: 'h4',
+      Title5: 'h5',
+      Title6: 'h6',
+      Body1: 'p',
+      Body2: 'p',
+    }[options.titleType || 'Body1'];
 
     const [expanded, setExpanded] = useState(defaultExpanded);
 
@@ -33,6 +43,9 @@
     B.defineFunction('Expand', openPanel);
     B.defineFunction('Collapse', closePanel);
     B.defineFunction('Expand/Collapse', togglePanel);
+    B.defineFunction('Set Expansion Panel', value => {
+      if (typeof value === 'boolean') setExpanded(value);
+    });
 
     useEffect(() => {
       if (isDev) {
@@ -71,7 +84,9 @@
     const ExpansionPanelComponent = (
       <ExpansionPanel {...panelOptions}>
         <ExpansionPanelSummary {...panelSummaryOptions}>
-          <Typography>{useText(title)}</Typography>
+          <Typography variant={Variant} className={classes.panelTitle}>
+            {useText(title)}
+          </Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails className={classes.panelDetails}>
           {isEmpty ? PlaceHolder : children}
@@ -82,10 +97,32 @@
     return <div className={classes.panel}>{ExpansionPanelComponent}</div>;
   })(),
   styles: B => theme => {
-    const style = new B.Styling(theme);
+    const { mediaMinWidth, Styling } = B;
+    const style = new Styling(theme);
     const getSpacing = (idx, device = 'Mobile') =>
       idx === '0' ? '0rem' : style.getSpacing(idx, device);
     return {
+      panelTitle: {
+        marginTop: ({ options: { titleSpacing } }) =>
+          getSpacing(titleSpacing[0]),
+        marginRight: ({ options: { titleSpacing } }) =>
+          getSpacing(titleSpacing[1]),
+        marginBottom: ({ options: { titleSpacing } }) =>
+          getSpacing(titleSpacing[2]),
+        marginLeft: ({ options: { titleSpacing } }) =>
+          getSpacing(titleSpacing[3]),
+        color: ({ options: { titleTextColor } }) =>
+          style.getColor(titleTextColor),
+        fontFamily: ({ options: { titleType } }) =>
+          style.getFontFamily(titleType),
+        fontSize: ({ options: { titleType } }) => style.getFontSize(titleType),
+        fontWeight: ({ options: { titleFontWeight } }) => titleFontWeight,
+        textTransform: ({ options: { titleType } }) =>
+          style.getTextTransform(titleType),
+        letterSpacing: ({ options: { titleType } }) =>
+          style.getLetterSpacing(titleType),
+      },
+
       panelDetails: {
         '&.MuiExpansionPanelDetails-root': {
           paddingTop: ({ options: { innerSpacing } }) =>
@@ -96,7 +133,7 @@
             getSpacing(innerSpacing[2]),
           paddingLeft: ({ options: { innerSpacing } }) =>
             getSpacing(innerSpacing[3]),
-          [`@media ${B.mediaMinWidth(600)}`]: {
+          [`@media ${mediaMinWidth(600)}`]: {
             paddingTop: ({ options: { innerSpacing } }) =>
               getSpacing(innerSpacing[0], 'Portrait'),
             paddingRight: ({ options: { innerSpacing } }) =>
@@ -106,7 +143,7 @@
             paddingLeft: ({ options: { innerSpacing } }) =>
               getSpacing(innerSpacing[3], 'Portrait'),
           },
-          [`@media ${B.mediaMinWidth(960)}`]: {
+          [`@media ${mediaMinWidth(960)}`]: {
             paddingTop: ({ options: { innerSpacing } }) =>
               getSpacing(innerSpacing[0], 'Landscape'),
             paddingRight: ({ options: { innerSpacing } }) =>
@@ -116,7 +153,7 @@
             paddingLeft: ({ options: { innerSpacing } }) =>
               getSpacing(innerSpacing[3], 'Landscape'),
           },
-          [`@media ${B.mediaMinWidth(1280)}`]: {
+          [`@media ${mediaMinWidth(1280)}`]: {
             paddingTop: ({ options: { innerSpacing } }) =>
               getSpacing(innerSpacing[0], 'Desktop'),
             paddingRight: ({ options: { innerSpacing } }) =>
@@ -140,7 +177,7 @@
           getSpacing(outerSpacing[2]),
         marginLeft: ({ options: { outerSpacing } }) =>
           getSpacing(outerSpacing[3]),
-        [`@media ${B.mediaMinWidth(600)}`]: {
+        [`@media ${mediaMinWidth(600)}`]: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Portrait'),
           marginRight: ({ options: { outerSpacing } }) =>
@@ -150,7 +187,7 @@
           marginLeft: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[3], 'Portrait'),
         },
-        [`@media ${B.mediaMinWidth(960)}`]: {
+        [`@media ${mediaMinWidth(960)}`]: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Landscape'),
           marginRight: ({ options: { outerSpacing } }) =>
@@ -160,7 +197,7 @@
           marginLeft: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[3], 'Landscape'),
         },
-        [`@media ${B.mediaMinWidth(1280)}`]: {
+        [`@media ${mediaMinWidth(1280)}`]: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Desktop'),
           marginRight: ({ options: { outerSpacing } }) =>

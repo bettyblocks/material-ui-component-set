@@ -4,9 +4,15 @@
   allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'VERTICAL',
   jsx: (() => {
-    const { isVisible, isFullscreen, width } = options;
+    const { env } = B;
+    const {
+      isVisible,
+      isFullscreen,
+      width,
+      disableClick: disableBackdropClick,
+    } = options;
     const { Dialog } = window.MaterialUI.Core;
-    const isDev = B.env === 'dev';
+    const isDev = env === 'dev';
     const [isOpen, setIsOpen] = useState(isVisible);
 
     const closeDialog = () => setIsOpen(false);
@@ -43,6 +49,7 @@
         maxWidth={width}
         aria-labelledby="modal-dialog"
         keepMounted
+        disableBackdropClick={disableBackdropClick}
       >
         {children}
       </Dialog>

@@ -10,8 +10,9 @@
           env,
           getProperty,
           GetMe,
-          useAllQuery,
+          InteractionScope,
           ModelProvider,
+          useAllQuery,
           useFilter,
         } = B;
         const [page, setPage] = useState(1);
@@ -44,6 +45,9 @@
         const displayError = showError === 'built-in';
         const listRef = React.createRef();
         const [showPagination, setShowPagination] = useState(true);
+        const isInline = type === 'inline';
+        const isGrid = type === 'grid';
+
         const builderLayout = () => (
           <>
             {searchProperty && !hideSearch && (
@@ -51,13 +55,17 @@
                 <SearchComponent label={searchPropertyLabel} />
               </div>
             )}
-            <div ref={listRef} className={type === 'grid' ? classes.grid : ''}>
+            <div ref={listRef} className={isGrid && classes.grid}>
               <div
-                className={[
-                  isEmpty ? classes.empty : '',
-                  isPristine ? classes.pristine : '',
-                  type === 'inline' ? classes.inline : '',
-                ].join(' ')}
+                className={
+                  [
+                    isEmpty ? classes.empty : '',
+                    isPristine ? classes.pristine : '',
+                    isInline ? classes.inline : '',
+                  ]
+                    .filter(Boolean)
+                    .join(' ') || undefined
+                }
               >
                 {isPristine
                   ? 'Drag a component in the data list to display the data'
@@ -144,12 +152,12 @@
           }, {});
         };
 
-        const orderByArray = [orderBy].flat();
+        const orderByPath = Array.isArray(orderBy.id) ? orderBy.id : null;
         const sort =
-          !isDev && orderBy
-            ? orderByArray.reduceRight((acc, property, index) => {
+          !isDev && orderByPath
+            ? orderByPath.reduceRight((acc, property, index) => {
                 const prop = getProperty(property);
-                return index === orderByArray.length - 1
+                return index === orderByPath.length - 1
                   ? { [prop.name]: order.toUpperCase() }
                   : { [prop.name]: acc };
               }, {})
@@ -184,7 +192,20 @@
             skip: page ? (page - 1) * rowsPerPage : 0,
             take: rowsPerPage,
             variables: {
-              ...(orderBy ? { sort: { relation: sort } } : {}),
+              ...(orderByPath ? { sort: { relation: sort } } : {}),
+            },
+            onCompleted(res) {
+              const hasResult = res && res.results && res.results.length > 0;
+              if (hasResult) {
+                B.triggerEvent('onSuccess', res.results);
+              } else {
+                B.triggerEvent('onNoResults');
+              }
+            },
+            onError(resp) {
+              if (!displayError) {
+                B.triggerEvent('onError', resp);
+              }
             },
           });
 
@@ -250,17 +271,20 @@
           B.triggerEvent('OnItemClick', event, context);
         };
 
-        const Wrapper = type === 'inline' ? 'span' : 'div';
         const Looper = results => {
           const rows = results.map(item => (
             <ModelProvider key={item.id} value={item} id={model}>
-              <B.InteractionScope model={model}>
+              <InteractionScope model={model}>
                 {context => (
-                  <Wrapper onClick={event => handleClick(event, context)}>
+                  <div
+                    role="none"
+                    className={isInline && classes.inline}
+                    onClick={event => handleClick(event, context)}
+                  >
                     {children}
-                  </Wrapper>
+                  </div>
                 )}
-              </B.InteractionScope>
+              </InteractionScope>
             </ModelProvider>
           ));
 
@@ -278,22 +302,12 @@
 
           if (loading) return <div className={classes.skeleton} />;
 
-          if (error && !displayError) {
-            B.triggerEvent('onError', error);
-          }
           if (error && displayError) {
             return <span>{error.message}</span>;
           }
 
           const { results = [], totalCount } = data || {};
           const resultCount = results && results.length;
-          const hasResults = resultCount > 0;
-
-          if (hasResults) {
-            B.triggerEvent('onSuccess', results);
-          } else {
-            B.triggerEvent('onNoResults');
-          }
 
           return (
             <>
@@ -309,12 +323,10 @@
                 </div>
               )}
 
-              {type === 'inline' ? (
+              {!isGrid ? (
                 Looper(results)
               ) : (
-                <div className={type === 'grid' ? classes.grid : ''}>
-                  {Looper(results)}
-                </div>
+                <div className={classes.grid}>{Looper(results)}</div>
               )}
 
               {showPagination && (
@@ -446,7 +458,8 @@
     </div>
   ),
   styles: B => theme => {
-    const style = new B.Styling(theme);
+    const { mediaMinWidth, Styling } = B;
+    const style = new Styling(theme);
     const getSpacing = (idx, device = 'Mobile') =>
       idx === '0' ? '0rem' : style.getSpacing(idx, device);
 
@@ -462,7 +475,7 @@
           getSpacing(outerSpacing[3]),
       },
       inline: {
-        display: 'inline',
+        display: 'inline-flex',
       },
       header: {
         display: 'flex',
@@ -519,13 +532,13 @@
       arrowDisabled: { color: '#ccc' },
       skeleton: {
         height: `calc(${style.getFont('Body1').Mobile} * 1.2)`,
-        [`@media ${B.mediaMinWidth(600)}`]: {
+        [`@media ${mediaMinWidth(600)}`]: {
           height: `calc(${style.getFont('Body1').Portrait} * 1.2)`,
         },
-        [`@media ${B.mediaMinWidth(960)}`]: {
+        [`@media ${mediaMinWidth(960)}`]: {
           height: `calc(${style.getFont('Body1').Landscape} * 1.2)`,
         },
-        [`@media ${B.mediaMinWidth(1280)}`]: {
+        [`@media ${mediaMinWidth(1280)}`]: {
           height: `calc(${style.getFont('Body1').Desktop} * 1.2)`,
         },
         backgroundColor: '#eee',
@@ -545,7 +558,7 @@
           animation: 'loading 1.5s infinite',
         },
       },
-      [`@media ${B.mediaMinWidth(600)}`]: {
+      [`@media ${mediaMinWidth(600)}`]: {
         root: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Portrait'),
@@ -557,7 +570,7 @@
             getSpacing(outerSpacing[3], 'Portrait'),
         },
       },
-      [`@media ${B.mediaMinWidth(960)}`]: {
+      [`@media ${mediaMinWidth(960)}`]: {
         root: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Landscape'),
@@ -569,7 +582,7 @@
             getSpacing(outerSpacing[3], 'Landscape'),
         },
       },
-      [`@media ${B.mediaMinWidth(1280)}`]: {
+      [`@media ${mediaMinWidth(1280)}`]: {
         root: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Desktop'),

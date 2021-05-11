@@ -45,9 +45,21 @@
           setVisible(initialVisibility);
         }, [checkCondition]);
 
+        useEffect(() => {
+          if (visible) {
+            B.triggerEvent('isTrue', true);
+          } else {
+            B.triggerEvent('isFalse', false);
+          }
+          B.triggerEvent('onChange', visible);
+        }, [visible]);
+
         B.defineFunction('Hide', () => setVisible(false));
         B.defineFunction('Show', () => setVisible(true));
         B.defineFunction('Show/Hide', () => setVisible(s => !s));
+        B.defineFunction('Set Visibility', value => {
+          if (typeof value === 'boolean') setVisible(value);
+        });
 
         if (!isDev && !visible) return null;
         return isPristine ? 'Conditional' : children;

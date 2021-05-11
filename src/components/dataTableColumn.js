@@ -4,7 +4,7 @@
   allowedTypes: ['CONTENT_COMPONENT', 'CONTAINER_COMPONENT'],
   orientation: 'VERTICAL',
   jsx: (() => {
-    const { env, useText, getProperty, Property, useEndpoint } = B;
+    const { env, getProperty, Property, useEndpoint, useText } = B;
     const { TableCell, TableSortLabel } = window.MaterialUI.Core;
     const {
       horizontalAlignment,
@@ -15,26 +15,37 @@
     } = options;
     const { headerOnly, handleSort, orderBy, linkTo, handleRowClick, context } =
       parent || {};
-    const { type } = property;
-    const propertyArray = [property].flat();
-    const { name: propertyName, label: propertyLabel } =
+    const { type, id: propertyPath } = property;
+    const { kind, name: propertyName, label: propertyLabel } =
       getProperty(property) || {};
     const { field, order = 'asc' } = orderBy || {};
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
     const contentPlaceholder = isDev && isEmpty ? 'Select property' : '\u00A0';
+    const isBooleanProperty = kind === 'boolean' || kind === 'BOOLEAN';
 
     let myEndpoint = null;
-
-    if (linkTo) {
+    if (linkTo && linkTo.id !== '') {
       myEndpoint = useEndpoint(linkTo);
     }
 
+    let checkboxStatus = '';
+    if (isBooleanProperty && useText([property]))
+      checkboxStatus =
+        useText([property]) === 'true' ? (
+          <span className={classes.checked} role="img" aria-label="checked">
+            &#10003;
+          </span>
+        ) : (
+          <span className={classes.unchecked} role="img" aria-label="unchecked">
+            &#10007;
+          </span>
+        );
     const bodyText = useText(content);
     const propContent = isDev ? (
       `{{ ${propertyName} }}`
     ) : (
-      <Property id={property} />
+      <>{!isBooleanProperty ? <Property id={property} /> : checkboxStatus}</>
     );
 
     let columnText = propertyName ? propContent : contentPlaceholder;
@@ -60,10 +71,10 @@
     };
 
     const isFilterSelected = fields => {
-      if (!fields || fields.length !== propertyArray.length) return false;
+      if (!fields || fields.length !== propertyPath.length) return false;
 
       for (let index = 0; index < fields.length; index += 1) {
-        if (fields[index] !== propertyArray[index]) return false;
+        if (fields[index] !== propertyPath[index]) return false;
       }
 
       return true;
@@ -81,7 +92,7 @@
         classes={{ root: classes.columnSort }}
         active={isFilterSelected(field)}
         direction={isFilterSelected(field) && order ? order : 'asc'}
-        onClick={() => createSortHandler(propertyArray)}
+        onClick={() => createSortHandler(propertyPath)}
       >
         <span className={classes.columnHeader}>{columnHeaderText}</span>
       </TableSortLabel>
@@ -89,23 +100,36 @@
       <span className={classes.columnHeader}>{columnHeaderText}</span>
     );
 
-    return isDev ? (
-      <div
-        className={[
-          classes.tableColumn,
-          !headerOnly ? classes.tableColumnBody : '',
-          !headerOnly ? 'MuiTableCell-root' : '',
-        ].join(' ')}
-      >
-        {headerOnly ? (
-          <TableCell align={horizontalAlignment} component="div">
-            {Header}
-          </TableCell>
-        ) : (
-          Content
-        )}
-      </div>
-    ) : (
+    const [visible, setVisible] = useState(false);
+
+    useEffect(() => {
+      setVisible(options.visible);
+    }, []);
+
+    B.defineFunction('Hide', () => setVisible(false));
+    B.defineFunction('Show', () => setVisible(true));
+    B.defineFunction('Show/Hide', () => setVisible(s => !s));
+
+    if (isDev) {
+      return (
+        <div
+          className={[
+            classes.tableColumn,
+            !headerOnly ? classes.tableColumnBody : '',
+            !headerOnly ? 'MuiTableCell-root' : '',
+          ].join(' ')}
+        >
+          {headerOnly ? (
+            <TableCell align={horizontalAlignment} component="div">
+              {Header}
+            </TableCell>
+          ) : (
+            Content
+          )}
+        </div>
+      );
+    }
+    return visible ? (
       <TableCell
         classes={{ root: classes.root }}
         align={horizontalAlignment}
@@ -113,10 +137,12 @@
       >
         {headerOnly ? Header : Content}
       </TableCell>
+    ) : (
+      <></>
     );
   })(),
   styles: B => theme => {
-    const { env, Styling } = B;
+    const { env, mediaMinWidth, Styling } = B;
     const style = new Styling(theme);
     const isDev = env === 'dev';
     return {
@@ -162,15 +188,15 @@
         textTransform: ({ options: { type } }) => style.getTextTransform(type),
         letterSpacing: ({ options: { type } }) => style.getLetterSpacing(type),
         lineHeight: '1.2',
-        [`@media ${B.mediaMinWidth(600)}`]: {
+        [`@media ${mediaMinWidth(600)}`]: {
           fontSize: ({ options: { type } }) =>
             style.getFontSize(type, 'Portrait'),
         },
-        [`@media ${B.mediaMinWidth(960)}`]: {
+        [`@media ${mediaMinWidth(960)}`]: {
           fontSize: ({ options: { type } }) =>
             style.getFontSize(type, 'Landscape'),
         },
-        [`@media ${B.mediaMinWidth(1280)}`]: {
+        [`@media ${mediaMinWidth(1280)}`]: {
           fontSize: ({ options: { type } }) =>
             style.getFontSize(type, 'Desktop'),
         },
@@ -187,15 +213,15 @@
         letterSpacing: ({ options: { bodyType } }) =>
           style.getLetterSpacing(bodyType),
         lineHeight: '1.2',
-        [`@media ${B.mediaMinWidth(600)}`]: {
+        [`@media ${mediaMinWidth(600)}`]: {
           fontSize: ({ options: { bodyType } }) =>
             style.getFontSize(bodyType, 'Portrait'),
         },
-        [`@media ${B.mediaMinWidth(960)}`]: {
+        [`@media ${mediaMinWidth(960)}`]: {
           fontSize: ({ options: { bodyType } }) =>
             style.getFontSize(bodyType, 'Landscape'),
         },
-        [`@media ${B.mediaMinWidth(1280)}`]: {
+        [`@media ${mediaMinWidth(1280)}`]: {
           fontSize: ({ options: { bodyType } }) =>
             style.getFontSize(bodyType, 'Desktop'),
         },
@@ -205,6 +231,12 @@
         '& .MuiSvgIcon-root': {
           opacity: isDev && 0.5,
         },
+      },
+      checked: {
+        color: style.getColor('Success'),
+      },
+      unchecked: {
+        color: style.getColor('Danger'),
       },
     };
   },

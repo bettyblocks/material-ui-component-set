@@ -6,15 +6,16 @@
   jsx: (
     <div className={classes.panel}>
       {(() => {
+        const { env, Text } = B;
+        const isDev = env === 'dev';
         const isEmpty = children.length === 0;
-
-        const isPristine = isEmpty && B.env === 'dev';
+        const isPristine = isEmpty && isDev;
 
         return (
           <>
             {options.panelTitle && (
               <div className={classes.title}>
-                <B.Text value={options.panelTitle} />
+                <Text value={options.panelTitle} />
               </div>
             )}
             <div
@@ -32,7 +33,8 @@
     </div>
   ),
   styles: B => theme => {
-    const style = new B.Styling(theme);
+    const { mediaMinWidth, Styling } = B;
+    const style = new Styling(theme);
     const getSpacing = (idx, device = 'Mobile') =>
       idx === '0' ? '0rem' : style.getSpacing(idx, device);
     return {
@@ -91,7 +93,7 @@
         paddingLeft: ({ options: { innerSpacing } }) =>
           getSpacing(innerSpacing[3]),
       },
-      [`@media ${B.mediaMinWidth(600)}`]: {
+      [`@media ${mediaMinWidth(600)}`]: {
         paddingTop: ({ options: { innerSpacing } }) =>
           getSpacing(innerSpacing[0], 'Portrait'),
         paddingRight: ({ options: { innerSpacing } }) =>
@@ -101,7 +103,7 @@
         paddingLeft: ({ options: { innerSpacing } }) =>
           getSpacing(innerSpacing[3], 'Portrait'),
       },
-      [`@media ${B.mediaMinWidth(960)}`]: {
+      [`@media ${mediaMinWidth(960)}`]: {
         paddingTop: ({ options: { innerSpacing } }) =>
           getSpacing(innerSpacing[0], 'Landscape'),
         paddingRight: ({ options: { innerSpacing } }) =>
@@ -111,7 +113,7 @@
         paddingLeft: ({ options: { innerSpacing } }) =>
           getSpacing(innerSpacing[3], 'Landscape'),
       },
-      [`@media ${B.mediaMinWidth(1280)}`]: {
+      [`@media ${mediaMinWidth(1280)}`]: {
         paddingTop: ({ options: { innerSpacing } }) =>
           getSpacing(innerSpacing[0], 'Desktop'),
         paddingRight: ({ options: { innerSpacing } }) =>
@@ -121,7 +123,7 @@
         paddingLeft: ({ options: { innerSpacing } }) =>
           getSpacing(innerSpacing[3], 'Desktop'),
       },
-      [`@media ${B.mediaMinWidth(600)}`]: {
+      [`@media ${mediaMinWidth(600)}`]: {
         panel: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Portrait'),
@@ -141,7 +143,7 @@
           paddingTop: getSpacing('M', 'Portrait'),
         },
       },
-      [`@media ${B.mediaMinWidth(960)}`]: {
+      [`@media ${mediaMinWidth(960)}`]: {
         panel: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Landscape'),
@@ -161,7 +163,7 @@
           padding: getSpacing('M', 'Landscape'),
         },
       },
-      [`@media ${B.mediaMinWidth(1280)}`]: {
+      [`@media ${mediaMinWidth(1280)}`]: {
         panel: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Desktop'),

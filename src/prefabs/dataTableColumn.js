@@ -1,11 +1,21 @@
 (() => ({
-  name: 'DataTableColumn',
+  name: 'Data Table Column',
   icon: 'DataTableColumn',
   category: 'DATA',
+  keywords: ['Data', 'table', 'column', 'datatablecolumn'],
   structure: [
     {
       name: 'DataTableColumn',
       options: [
+        {
+          value: true,
+          label: 'Initial visibility',
+          key: 'visible',
+          type: 'TOGGLE',
+          configuration: {
+            as: 'VISIBILITY',
+          },
+        },
         {
           value: '',
           label: 'Property',

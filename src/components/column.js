@@ -3,35 +3,50 @@
   type: 'LAYOUT_COMPONENT',
   allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'VERTICAL',
-  jsx: (
-    <div
-      className={[
-        classes.column,
-        options.visible || B.env === 'dev' ? '' : classes.hide,
-      ].join(' ')}
-    >
-      {(() => {
-        const isEmpty = children.length === 0;
+  jsx: (() => {
+    const { visible } = options;
+    const { env } = B;
+    const isDev = env === 'dev';
+    const isEmpty = children.length === 0;
+    const isPristine = isEmpty && isDev;
+    const [isVisible, setIsVisible] = useState(true);
 
-        const isPristine = isEmpty && B.env === 'dev';
+    useEffect(() => {
+      setIsVisible(visible);
+    }, []);
 
-        return children.length !== 0 ? (
-          children
-        ) : (
-          <div
-            className={[
-              isEmpty ? classes.empty : '',
-              isPristine ? classes.pristine : '',
-            ].join(' ')}
-          >
-            {isPristine ? 'Column' : ''}
-          </div>
-        );
-      })()}
-    </div>
-  ),
+    B.defineFunction('Hide', () => setIsVisible(false));
+    B.defineFunction('Show', () => setIsVisible(true));
+    B.defineFunction('Show/Hide', () => setIsVisible(s => !s));
+
+    const ColumnComponent = (
+      <div
+        className={[
+          classes.column,
+          isVisible || isDev ? '' : classes.hide,
+        ].join(' ')}
+      >
+        {(() =>
+          children.length !== 0 ? (
+            children
+          ) : (
+            <div
+              className={[
+                isEmpty ? classes.empty : '',
+                isPristine ? classes.pristine : '',
+              ].join(' ')}
+            >
+              {isPristine ? 'Column' : ''}
+            </div>
+          ))()}
+      </div>
+    );
+    return ColumnComponent;
+  })(),
   styles: B => theme => {
-    const style = new B.Styling(theme);
+    const { env, mediaMinWidth, Styling } = B;
+    const isDev = env === 'dev';
+    const style = new Styling(theme);
     const getSpacing = (idx, device = 'Mobile') =>
       idx === '0' ? '0rem' : style.getSpacing(idx, device);
 
@@ -106,9 +121,9 @@
         borderColor: 'transparent',
         borderStyle: 'none',
         borderRadius: 0,
-        overflow: 'auto',
+        overflow: isDev ? 'unset' : 'auto',
         boxSizing: 'border-box',
-        [`@media ${B.mediaMinWidth(600)}`]: {
+        [`@media ${mediaMinWidth(600)}`]: {
           display: ({
             options: {
               columnWidthTabletPortrait,
@@ -164,7 +179,7 @@
           paddingLeft: ({ options: { innerSpacing } }) =>
             getSpacing(innerSpacing[3], 'Portrait'),
         },
-        [`@media ${B.mediaMinWidth(960)}`]: {
+        [`@media ${mediaMinWidth(960)}`]: {
           display: ({
             options: {
               columnWidthTabletLandscape,
@@ -219,7 +234,7 @@
           paddingLeft: ({ options: { innerSpacing } }) =>
             getSpacing(innerSpacing[3], 'Landscape'),
         },
-        [`@media ${B.mediaMinWidth(1280)}`]: {
+        [`@media ${mediaMinWidth(1280)}`]: {
           display: ({
             options: { columnWidth, horizontalAlignment, verticalAlignment },
           }) => {

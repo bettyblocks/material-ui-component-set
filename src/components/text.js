@@ -4,9 +4,12 @@
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { content, useInnerHtml } = options;
-    const { env } = B;
+    const { content, linkType, linkTo, linkToExternal, useInnerHtml } = options;
+    const { Link } = window.MaterialUI.Core;
+    const { env, useText, Link: BLink } = B;
+    const isEmpty = content.length === 0;
     const isDev = env === 'dev';
+    const isPristine = isEmpty && isDev;
 
     const Tag = useInnerHtml
       ? 'div'
@@ -21,26 +24,55 @@
           Body2: 'p',
         }[options.type || 'Body1'];
 
-    const parsedContent = B.useText(content);
+    const parsedContent = useText(content);
+    const hasLink = linkType === 'internal' && linkTo && linkTo.id !== '';
+    const hasExternalLink =
+      linkType === 'external' && linkToExternal && linkToExternal.id !== '';
+    const linkToExternalText =
+      (linkToExternal && useText(linkToExternal)) || '';
+    let linkedContent = parsedContent;
+
+    if (hasLink || hasExternalLink) {
+      linkedContent = (
+        <Link
+          className={classes.link}
+          href={hasExternalLink ? linkToExternalText : undefined}
+          component={hasLink ? BLink : undefined}
+          endpoint={hasLink ? linkTo : undefined}
+        >
+          {parsedContent}
+        </Link>
+      );
+    }
 
     return useInnerHtml && !isDev ? (
       <Tag
         className={classes.content}
-        dangerouslySetInnerHTML={{ __html: parsedContent }}
+        dangerouslySetInnerHTML={{ __html: linkedContent }}
       />
     ) : (
       <Tag className={classes.content}>
-        {content.length > 0 && parsedContent}
-        {content.length === 0 && isDev && (
+        {!isEmpty && linkedContent}
+        {isPristine && (
           <span className={classes.placeholder}>Empty content</span>
         )}
       </Tag>
     );
   })(),
   styles: B => t => {
-    const style = new B.Styling(t);
+    const { mediaMinWidth, Styling } = B;
+    const style = new Styling(t);
     const getSpacing = (idx, device = 'Mobile') =>
       idx === '0' ? '0rem' : style.getSpacing(idx, device);
+
+    const getPath = (path, data) =>
+      path.reduce((acc, next) => {
+        if (acc === undefined || acc[next] === undefined) {
+          return undefined;
+        }
+        return acc[next];
+      }, data);
+
     return {
       content: {
         display: 'block',
@@ -55,13 +87,19 @@
         textAlign: ({ options: { textAlignment } }) => textAlignment,
         padding: 0,
         whiteSpace: 'pre-wrap',
-        color: ({ options: { textColor } }) => style.getColor(textColor),
+        color: ({ options: { textColor, type, styles } }) =>
+          styles
+            ? style.getColor(textColor)
+            : getPath(['theme', 'typography', type, 'color'], style),
         fontFamily: ({ options: { type } }) => style.getFontFamily(type),
         fontSize: ({ options: { type } }) => style.getFontSize(type),
-        fontWeight: ({ options: { fontWeight } }) => fontWeight,
+        fontWeight: ({ options: { fontWeight, type, styles } }) =>
+          styles
+            ? fontWeight
+            : getPath(['theme', 'typography', type, 'fontWeight'], style),
         textTransform: ({ options: { type } }) => style.getTextTransform(type),
         letterSpacing: ({ options: { type } }) => style.getLetterSpacing(type),
-        [`@media ${B.mediaMinWidth(600)}`]: {
+        [`@media ${mediaMinWidth(600)}`]: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Portrait'),
           marginRight: ({ options: { outerSpacing } }) =>
@@ -73,7 +111,7 @@
           fontSize: ({ options: { type } }) =>
             style.getFontSize(type, 'Portrait'),
         },
-        [`@media ${B.mediaMinWidth(960)}`]: {
+        [`@media ${mediaMinWidth(960)}`]: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Landscape'),
           marginRight: ({ options: { outerSpacing } }) =>
@@ -85,7 +123,7 @@
           fontSize: ({ options: { type } }) =>
             style.getFontSize(type, 'Landscape'),
         },
-        [`@media ${B.mediaMinWidth(1280)}`]: {
+        [`@media ${mediaMinWidth(1280)}`]: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Desktop'),
           marginRight: ({ options: { outerSpacing } }) =>
@@ -97,6 +135,10 @@
           fontSize: ({ options: { type } }) =>
             style.getFontSize(type, 'Desktop'),
         },
+      },
+      link: {
+        textDecoration: ['none', '!important'],
+        color: ['inherit', '!important'],
       },
       placeholder: {
         color: '#dadde4',

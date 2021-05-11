@@ -6,7 +6,15 @@
   jsx: (
     <div>
       {(() => {
-        const { useOneQuery, useMeQuery, ModelProvider, MeProvider, env } = B;
+        const {
+          env,
+          getIdProperty,
+          MeProvider,
+          ModelProvider,
+          useEndpoint,
+          useOneQuery,
+          useMeQuery,
+        } = B;
 
         const isEmpty = children.length === 0;
         const isDev = env === 'dev';
@@ -20,6 +28,17 @@
           currentRecord,
         } = options;
         const displayError = showError === 'built-in';
+
+        const [, setOptions] = useOptions();
+
+        B.defineFunction('setCurrentRecord', value => {
+          const id = Number(value);
+          if (typeof id === 'number') {
+            setOptions({
+              currentRecord: id,
+            });
+          }
+        });
 
         const BuilderLayout = () => {
           B.defineFunction('Refetch', () => {});
@@ -45,7 +64,7 @@
             return filter;
           }
 
-          const idProperty = B.getIdProperty(model);
+          const idProperty = getIdProperty(model);
           return {
             [idProperty.id]: { eq: currentRecord },
           };
@@ -69,7 +88,7 @@
 
         const redirect = () => {
           const history = useHistory();
-          history.push(B.useEndpoint(redirectWithoutResult));
+          history.push(useEndpoint(redirectWithoutResult));
         };
 
         const One = ({ modelId }) => {
@@ -77,6 +96,18 @@
             (hasFilter &&
               useOneQuery(modelId, {
                 filter: getFilter(),
+                onCompleted(resp) {
+                  if (resp && resp.id) {
+                    B.triggerEvent('onSuccess', resp);
+                  } else {
+                    B.triggerEvent('onNoResults');
+                  }
+                },
+                onError(resp) {
+                  if (!displayError) {
+                    B.triggerEvent('onError', resp);
+                  }
+                },
               })) ||
             {};
 
@@ -89,17 +120,8 @@
             return <span>Loading...</span>;
           }
 
-          if (error && !displayError) {
-            B.triggerEvent('onError', error);
-          }
           if (error && displayError) {
             return <span>{error.message}</span>;
-          }
-
-          if (data && data.id) {
-            B.triggerEvent('onSuccess', data);
-          } else {
-            B.triggerEvent('onNoResults');
           }
 
           if (!data && redirectWithoutResult) {
