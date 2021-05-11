@@ -77,13 +77,13 @@
         position="static"
         variant="dots"
         activeStep={activeStep}
-        classes={{ root: classes.overlay }}
+        classes={{ root: classes.overlay, dots: classes.dots }}
         nextButton={
           <Button
             size="small"
             onClick={handleNext}
             disabled={activeStep === maxSteps - 1}
-            classes={{ root: classes.arrowRight }}
+            classes={{ root: classes.arrowRight, label: classes.buttonLabel }}
           >
             <KeyboardArrowRight />
           </Button>
@@ -93,7 +93,7 @@
             size="small"
             onClick={handleBack}
             disabled={activeStep === 0}
-            classes={{ root: classes.arrowLeft }}
+            classes={{ root: classes.arrowLeft, label: classes.buttonLabel }}
           >
             <KeyboardArrowLeft />
           </Button>
@@ -231,6 +231,9 @@
         '& svg': {
           fontSize: '40px',
         },
+        '&:disabled': {
+          opacity: '0.3',
+        },
       },
       arrowRight: {
         position: 'absolute !important',
@@ -240,6 +243,22 @@
         '& svg': {
           fontSize: '40px',
         },
+        '&:disabled': {
+          opacity: '0.3',
+        },
+      },
+      buttonLabel: {
+        backgroundColor: ({ options: { buttonBackgroundColor } }) => [
+          style.getColor(buttonBackgroundColor),
+          '!important',
+        ],
+        color: ({ options: { buttonColor } }) => [
+          style.getColor(buttonColor),
+          '!important',
+        ],
+      },
+      dots: {
+        zIndex: '1',
       },
     };
   },

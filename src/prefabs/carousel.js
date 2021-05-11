@@ -69,8 +69,22 @@
         {
           type: 'COLOR',
           label: 'Button background color',
-          key: 'buttonBackground',
+          key: 'buttonBackgroundColor',
           value: 'White',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'variant',
+              comparator: 'EQ',
+              value: 'horizontal',
+            },
+          },
+        },
+        {
+          type: 'COLOR',
+          label: 'Button icon color',
+          key: 'buttonColor',
+          value: 'Black',
           configuration: {
             condition: {
               type: 'SHOW',
