@@ -70,7 +70,7 @@
           type: 'COLOR',
           label: 'Inactive dot color',
           key: 'incativeDotColor',
-          value: 'Black',
+          value: 'Light',
           configuration: {
             condition: {
               type: 'SHOW',
@@ -84,7 +84,7 @@
           type: 'COLOR',
           label: 'Button background color',
           key: 'buttonBackgroundColor',
-          value: 'White',
+          value: 'Light',
           configuration: {
             condition: {
               type: 'SHOW',
