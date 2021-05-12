@@ -1,7 +1,7 @@
 (() => ({
   name: 'Slider Input',
-  icon: 'ParagraphIcon',
-  category: 'CONTENT',
+  icon: 'ProgressBarIcon',
+  category: 'FORM',
   structure: [
     {
       name: 'sliderInput',
@@ -14,6 +14,12 @@
           configuration: {
             allowedTypes: ['integer'],
           },
+        },
+        {
+          type: 'TOGGLE',
+          label: 'Disable',
+          key: 'disable',
+          value: false,
         },
         {
           type: 'NUMBER',
@@ -64,12 +70,6 @@
           label: 'Marks',
           key: 'marks',
           type: 'TOGGLE',
-        },
-        {
-          type: 'TOGGLE',
-          label: 'Disable',
-          key: 'disable',
-          value: false,
         },
         {
           value: false,

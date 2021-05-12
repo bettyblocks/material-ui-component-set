@@ -35,7 +35,11 @@
 
     const sliderInput = (
       <div className={classes.spacing}>
-        <div className={withBorder ? classes.root : classes.rootWithoutBorder}>
+        <div
+          className={`${
+            withBorder ? classes.root : classes.rootWithoutBorder
+          } ${disable ? classes.disabled : ''}`}
+        >
           {labelText && (
             <InputLabel
               classes={{
@@ -100,13 +104,11 @@
         '&:hover': {
           borderColor: ({ options: { borderHoverColor } }) => [
             style.getColor(borderHoverColor),
-            '!important',
           ],
         },
         '&:focus-within': {
           borderColor: ({ options: { borderFocusColor } }) => [
             style.getColor(borderFocusColor),
-            '!important',
           ],
         },
       },
@@ -118,15 +120,16 @@
         '&:hover': {
           borderColor: ({ options: { borderHoverColor } }) => [
             style.getColor(borderHoverColor),
-            '!important',
           ],
         },
         '&:focus-within': {
           borderColor: ({ options: { borderFocusColor } }) => [
             style.getColor(borderFocusColor),
-            '!important',
           ],
         },
+      },
+      disabled: {
+        pointerEvents: 'none',
       },
       sliderRoot: {
         width: '100%',
