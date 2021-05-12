@@ -186,6 +186,10 @@
           borderRadius: '25px',
         },
         '& .MuiMobileStepper-dot': {
+          backgroundColor: ({ options: { incativeDotColor } }) => [
+            style.getColor(incativeDotColor),
+            '!important',
+          ],
           width: '12px',
           height: '12px',
         },

@@ -68,6 +68,20 @@
         },
         {
           type: 'COLOR',
+          label: 'Inactive dot color',
+          key: 'incativeDotColor',
+          value: 'Black',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'variant',
+              comparator: 'EQ',
+              value: 'horizontal',
+            },
+          },
+        },
+        {
+          type: 'COLOR',
           label: 'Button background color',
           key: 'buttonBackgroundColor',
           value: 'White',
