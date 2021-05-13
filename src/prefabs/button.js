@@ -53,12 +53,6 @@
           type: 'ACTION',
           configuration: {
             apiVersion: 'v1',
-            condition: {
-              type: 'SHOW',
-              option: 'linkType',
-              comparator: 'EQ',
-              value: 'action',
-            },
           },
         },
         {
@@ -68,12 +62,6 @@
           type: 'ACTION_INPUT_OBJECTS',
           configuration: {
             apiVersion: 'v1',
-            condition: {
-              type: 'SHOW',
-              option: 'linkType',
-              comparator: 'EQ',
-              value: 'action',
-            },
           },
         },
         {
