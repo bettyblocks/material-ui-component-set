@@ -109,21 +109,6 @@
                     {
                       configuration: {
                         apiVersion: 'v1',
-                        condition: {
-                          comparator: 'EQ',
-                          option: 'linkType',
-                          type: 'SHOW',
-                          value: 'action',
-                        },
-                      },
-                      key: 'actionId',
-                      label: 'Action',
-                      type: 'ACTION',
-                      value: '',
-                    },
-                    {
-                      configuration: {
-                        apiVersion: 'v1',
                       },
                       key: 'fullWidth',
                       label: 'Full width',
@@ -1693,21 +1678,6 @@
                           { name: 'New Tab', value: '_blank' },
                         ],
                       },
-                    },
-                    {
-                      configuration: {
-                        apiVersion: 'v1',
-                        condition: {
-                          comparator: 'EQ',
-                          option: 'linkType',
-                          type: 'SHOW',
-                          value: 'action',
-                        },
-                      },
-                      key: 'actionId',
-                      label: 'Action',
-                      type: 'ACTION',
-                      value: '',
                     },
                     {
                       configuration: {
