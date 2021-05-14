@@ -126,7 +126,7 @@
         </Link>
       );
     } else if (isImage && !variableDev) {
-      MediaComponent = () => ({ ImageComponent });
+      MediaComponent = () => ImageComponent;
     } else if (isVideo) {
       MediaComponent = () => (
         // eslint-disable-next-line jsx-a11y/media-has-caption

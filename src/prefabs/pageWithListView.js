@@ -3581,6 +3581,7 @@
                                                 key: 'imageSource',
                                                 type: 'VARIABLE',
                                                 configuration: {
+                                                  as: 'MULTILINE',
                                                   condition: {
                                                     type: 'SHOW',
                                                     option: 'type',
@@ -3595,6 +3596,7 @@
                                                 key: 'videoSource',
                                                 type: 'VARIABLE',
                                                 configuration: {
+                                                  as: 'MULTILINE',
                                                   condition: {
                                                     type: 'SHOW',
                                                     option: 'type',
@@ -3609,11 +3611,68 @@
                                                 key: 'iframeSource',
                                                 type: 'VARIABLE',
                                                 configuration: {
+                                                  as: 'MULTILINE',
                                                   condition: {
                                                     type: 'SHOW',
                                                     option: 'type',
                                                     comparator: 'EQ',
                                                     value: 'iframe',
+                                                  },
+                                                },
+                                              },
+                                              {
+                                                type: 'CUSTOM',
+                                                label: 'Link to',
+                                                key: 'linkType',
+                                                value: 'internal',
+                                                configuration: {
+                                                  as: 'BUTTONGROUP',
+                                                  dataType: 'string',
+                                                  allowedInput: [
+                                                    {
+                                                      name: 'Internal page',
+                                                      value: 'internal',
+                                                    },
+                                                    {
+                                                      name: 'External page',
+                                                      value: 'external',
+                                                    },
+                                                  ],
+                                                  condition: {
+                                                    type: 'SHOW',
+                                                    option: 'type',
+                                                    comparator: 'EQ',
+                                                    value: 'img',
+                                                  },
+                                                },
+                                              },
+                                              {
+                                                value: '',
+                                                label: 'Page',
+                                                key: 'linkTo',
+                                                type: 'ENDPOINT',
+                                                configuration: {
+                                                  condition: {
+                                                    type: 'SHOW',
+                                                    option: 'linkType',
+                                                    comparator: 'EQ',
+                                                    value: 'internal',
+                                                  },
+                                                },
+                                              },
+                                              {
+                                                value: [''],
+                                                label: 'URL',
+                                                key: 'linkToExternal',
+                                                type: 'VARIABLE',
+                                                configuration: {
+                                                  placeholder:
+                                                    'Starts with https:// or http://',
+                                                  condition: {
+                                                    type: 'SHOW',
+                                                    option: 'linkType',
+                                                    comparator: 'EQ',
+                                                    value: 'external',
                                                   },
                                                 },
                                               },

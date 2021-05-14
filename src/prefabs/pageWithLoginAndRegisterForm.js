@@ -1,8 +1,8 @@
 (() => ({
-  name: 'Login And Register Form - Sidebar',
+  name: 'Login and register form',
   icon: 'LoginFormIcon',
   type: 'page',
-  description: 'This page contains a ready to use login and register form',
+  description: 'Page with a ready to use login form, register form and image.',
   category: 'LAYOUT',
   beforeCreate: ({
     prefab,
@@ -40,6 +40,9 @@
         value: entry.map(v => JSON.stringify(v)),
       }));
     }
+
+    const isEmptyRedirect = value =>
+      !value || Object.keys(value).length === 0 || value.id === '';
 
     const iconConfiguration = {
       as: 'DROPDOWN',
@@ -2320,6 +2323,7 @@
                                     key: 'imageSource',
                                     type: 'VARIABLE',
                                     configuration: {
+                                      as: 'MULTILINE',
                                       condition: {
                                         type: 'SHOW',
                                         option: 'type',
@@ -2334,6 +2338,7 @@
                                     key: 'videoSource',
                                     type: 'VARIABLE',
                                     configuration: {
+                                      as: 'MULTILINE',
                                       condition: {
                                         type: 'SHOW',
                                         option: 'type',
@@ -2348,11 +2353,68 @@
                                     key: 'iframeSource',
                                     type: 'VARIABLE',
                                     configuration: {
+                                      as: 'MULTILINE',
                                       condition: {
                                         type: 'SHOW',
                                         option: 'type',
                                         comparator: 'EQ',
                                         value: 'iframe',
+                                      },
+                                    },
+                                  },
+                                  {
+                                    type: 'CUSTOM',
+                                    label: 'Link to',
+                                    key: 'linkType',
+                                    value: 'internal',
+                                    configuration: {
+                                      as: 'BUTTONGROUP',
+                                      dataType: 'string',
+                                      allowedInput: [
+                                        {
+                                          name: 'Internal page',
+                                          value: 'internal',
+                                        },
+                                        {
+                                          name: 'External page',
+                                          value: 'external',
+                                        },
+                                      ],
+                                      condition: {
+                                        type: 'SHOW',
+                                        option: 'type',
+                                        comparator: 'EQ',
+                                        value: 'img',
+                                      },
+                                    },
+                                  },
+                                  {
+                                    value: '',
+                                    label: 'Page',
+                                    key: 'linkTo',
+                                    type: 'ENDPOINT',
+                                    configuration: {
+                                      condition: {
+                                        type: 'SHOW',
+                                        option: 'linkType',
+                                        comparator: 'EQ',
+                                        value: 'internal',
+                                      },
+                                    },
+                                  },
+                                  {
+                                    value: [''],
+                                    label: 'URL',
+                                    key: 'linkToExternal',
+                                    type: 'VARIABLE',
+                                    configuration: {
+                                      placeholder:
+                                        'Starts with https:// or http://',
+                                      condition: {
+                                        type: 'SHOW',
+                                        option: 'linkType',
+                                        comparator: 'EQ',
+                                        value: 'external',
                                       },
                                     },
                                   },
@@ -5576,11 +5638,6 @@
           return;
         }
 
-        if (isEmpty(redirectTo)) {
-          setShowEndpointValidation(true);
-          return;
-        }
-
         if (isEmpty(registerProperties)) {
           setShowPropertiesValidation(true);
           return;
@@ -5589,14 +5646,17 @@
         const newPrefab = { ...prefab };
         if (authProfileId) {
           const { loginModel, properties, id } = authProfile;
-          newPrefab.interactions[0].parameters = [
-            {
-              parameter: 'redirectTo',
-              pageId: redirectTo.pageId,
-              endpointId: redirectTo.id,
-              parameters: serializeParameters(redirectTo.params),
-            },
-          ];
+
+          if (!isEmptyRedirect(redirectTo)) {
+            newPrefab.interactions[0].parameters = [
+              {
+                parameter: 'redirectTo',
+                pageId: redirectTo.pageId,
+                endpointId: redirectTo.id,
+                parameters: serializeParameters(redirectTo.params),
+              },
+            ];
+          }
           const loginFormPrefab =
             prefabStructure[0].descendants[0].descendants[0].descendants[0]
               .descendants[1].descendants[0].descendants[0].descendants[0]
@@ -11097,11 +11157,6 @@
               onClick={() => {
                 if (!authProfile) {
                   setShowAuthValidation(true);
-                  return;
-                }
-                if (isEmpty(redirectTo)) {
-                  setShowEndpointValidation(true);
-
                   return;
                 }
                 const newStepnumber = stepNumber + 1;
