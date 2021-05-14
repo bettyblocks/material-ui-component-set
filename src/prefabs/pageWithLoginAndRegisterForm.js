@@ -3550,10 +3550,6 @@
                                                           name: 'External page',
                                                           value: 'external',
                                                         },
-                                                        {
-                                                          name: 'Action',
-                                                          value: 'action',
-                                                        },
                                                       ],
                                                     },
                                                   },
@@ -3611,38 +3607,6 @@
                                                           value: '_blank',
                                                         },
                                                       ],
-                                                    },
-                                                  },
-                                                  {
-                                                    value: '',
-                                                    label: 'Action',
-                                                    key: 'actionId',
-                                                    type: 'ACTION',
-                                                    configuration: {
-                                                      apiVersion: 'v1',
-                                                      condition: {
-                                                        type: 'SHOW',
-                                                        option: 'linkType',
-                                                        comparator: 'EQ',
-                                                        value: 'action',
-                                                      },
-                                                    },
-                                                  },
-                                                  {
-                                                    value: [],
-                                                    label:
-                                                      'Objects to pass to action',
-                                                    key: 'actionModels',
-                                                    type:
-                                                      'ACTION_INPUT_OBJECTS',
-                                                    configuration: {
-                                                      apiVersion: 'v1',
-                                                      condition: {
-                                                        type: 'SHOW',
-                                                        option: 'linkType',
-                                                        comparator: 'EQ',
-                                                        value: 'action',
-                                                      },
                                                     },
                                                   },
                                                   {
