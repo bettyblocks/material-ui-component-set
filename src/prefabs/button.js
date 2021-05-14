@@ -1,8 +1,8 @@
 (() => ({
-  name: 'Action Button',
+  name: 'Button',
   icon: 'ButtonIcon',
   category: 'BUTTON',
-  keywords: ['Button', 'action', 'action button'],
+  keywords: ['Button'],
   structure: [
     {
       name: 'Button',
@@ -17,33 +17,73 @@
           },
         },
         {
+          type: 'VARIABLE',
+          label: 'Button text',
+          key: 'buttonText',
+          value: ['Button'],
+        },
+        {
           type: 'CUSTOM',
-          label: 'variant',
-          key: 'variant',
-          value: 'contained',
+          label: 'Link to',
+          key: 'linkType',
+          value: 'internal',
           configuration: {
             as: 'BUTTONGROUP',
             dataType: 'string',
             allowedInput: [
-              { name: 'Text', value: 'text' },
-              { name: 'Outlined', value: 'outlined' },
-              { name: 'Contain', value: 'contained' },
-              { name: 'Icon', value: 'icon' },
+              { name: 'Internal page', value: 'internal' },
+              { name: 'External page', value: 'external' },
+              { name: 'Action', value: 'action' },
             ],
           },
         },
         {
-          type: 'VARIABLE',
-          label: 'Button text',
-          key: 'buttonText',
-          value: ['Action Button'],
+          value: '',
+          label: 'Page',
+          key: 'linkTo',
+          type: 'ENDPOINT',
           configuration: {
             condition: {
-              type: 'HIDE',
-              option: 'variant',
+              type: 'SHOW',
+              option: 'linkType',
               comparator: 'EQ',
-              value: 'icon',
+              value: 'internal',
             },
+          },
+        },
+        {
+          value: [''],
+          label: 'URL',
+          key: 'linkToExternal',
+          type: 'VARIABLE',
+          configuration: {
+            placeholder: 'Starts with https:// or http://',
+            condition: {
+              type: 'SHOW',
+              option: 'linkType',
+              comparator: 'EQ',
+              value: 'external',
+            },
+          },
+        },
+        {
+          value: '_self',
+          label: 'Open in',
+          key: 'openLinkToExternal',
+          type: 'CUSTOM',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'linkType',
+              comparator: 'EQ',
+              value: 'external',
+            },
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Current Tab', value: '_self' },
+              { name: 'New Tab', value: '_blank' },
+            ],
           },
         },
         {
@@ -53,6 +93,12 @@
           type: 'ACTION',
           configuration: {
             apiVersion: 'v1',
+            condition: {
+              type: 'SHOW',
+              option: 'linkType',
+              comparator: 'EQ',
+              value: 'action',
+            },
           },
         },
         {
@@ -62,6 +108,12 @@
           type: 'ACTION_INPUT_OBJECTS',
           configuration: {
             apiVersion: 'v1',
+            condition: {
+              type: 'SHOW',
+              option: 'linkType',
+              comparator: 'EQ',
+              value: 'action',
+            },
           },
         },
         {
@@ -69,29 +121,6 @@
           label: 'Full width',
           key: 'fullWidth',
           type: 'TOGGLE',
-          configuration: {
-            condition: {
-              type: 'HIDE',
-              option: 'variant',
-              comparator: 'EQ',
-              value: 'icon',
-            },
-          },
-        },
-        {
-          value: 'medium',
-          label: 'Size',
-          key: 'size',
-          type: 'CUSTOM',
-          configuration: {
-            as: 'BUTTONGROUP',
-            dataType: 'string',
-            allowedInput: [
-              { name: 'Large', value: 'large' },
-              { name: 'Medium', value: 'medium' },
-              { name: 'Small', value: 'small' },
-            ],
-          },
         },
         {
           label: 'Icon',
@@ -1362,6 +1391,27 @@
           },
         },
         {
+          value: 'small',
+          label: 'Icon size',
+          key: 'size',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Small', value: 'small' },
+              { name: 'Medium', value: 'medium' },
+              { name: 'Large', value: 'large' },
+            ],
+            condition: {
+              type: 'HIDE',
+              option: 'icon',
+              comparator: 'EQ',
+              value: 'None',
+            },
+          },
+        },
+        {
           type: 'CUSTOM',
           label: 'Icon position',
           key: 'iconPosition',
@@ -1369,40 +1419,20 @@
           configuration: {
             as: 'BUTTONGROUP',
             dataType: 'string',
-            condition: {
-              type: 'HIDE',
-              option: 'variant',
-              comparator: 'EQ',
-              value: 'icon',
-            },
             allowedInput: [
               { name: 'Start', value: 'start' },
               { name: 'End', value: 'end' },
             ],
-          },
-        },
-        {
-          type: 'COLOR',
-          label: 'Text color',
-          key: 'textColor',
-          value: 'White',
-          configuration: {
             condition: {
               type: 'HIDE',
-              option: 'variant',
+              option: 'icon',
               comparator: 'EQ',
-              value: 'icon',
+              value: 'None',
             },
           },
         },
         {
-          type: 'COLOR',
-          label: 'Color',
-          key: 'background',
-          value: 'Primary',
-        },
-        {
-          value: ['0rem', 'M', '0rem', '0rem'],
+          value: ['0rem', '0rem', '0rem', '0rem'],
           label: 'Outer space',
           key: 'outerSpacing',
           type: 'SIZES',

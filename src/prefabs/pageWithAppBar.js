@@ -45,6 +45,10 @@
                             name: 'External page',
                             value: 'external',
                           },
+                          {
+                            name: 'Action',
+                            value: 'action',
+                          },
                         ],
                         apiVersion: 'v1',
                         as: 'BUTTONGROUP',
@@ -105,6 +109,21 @@
                           { name: 'New Tab', value: '_blank' },
                         ],
                       },
+                    },
+                    {
+                      configuration: {
+                        apiVersion: 'v1',
+                        condition: {
+                          comparator: 'EQ',
+                          option: 'linkType',
+                          type: 'SHOW',
+                          value: 'action',
+                        },
+                      },
+                      key: 'actionId',
+                      label: 'Action',
+                      type: 'ACTION',
+                      value: '',
                     },
                     {
                       configuration: {
@@ -1618,6 +1637,10 @@
                             name: 'External page',
                             value: 'external',
                           },
+                          {
+                            name: 'Action',
+                            value: 'action',
+                          },
                         ],
                         apiVersion: 'v1',
                         as: 'BUTTONGROUP',
@@ -1678,6 +1701,21 @@
                           { name: 'New Tab', value: '_blank' },
                         ],
                       },
+                    },
+                    {
+                      configuration: {
+                        apiVersion: 'v1',
+                        condition: {
+                          comparator: 'EQ',
+                          option: 'linkType',
+                          type: 'SHOW',
+                          value: 'action',
+                        },
+                      },
+                      key: 'actionId',
+                      label: 'Action',
+                      type: 'ACTION',
+                      value: '',
                     },
                     {
                       configuration: {
