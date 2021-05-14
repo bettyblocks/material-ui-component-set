@@ -206,86 +206,75 @@
           name: 'Button',
           options: [
             {
-              label: 'Toggle visibility',
-              key: 'visible',
-              value: true,
-              type: 'TOGGLE',
               configuration: {
+                apiVersion: 'v1',
                 as: 'VISIBILITY',
               },
+              key: 'visible',
+              label: 'Toggle visibility',
+              type: 'TOGGLE',
+              value: true,
             },
             {
-              type: 'CUSTOM',
-              label: 'variant',
-              key: 'variant',
-              value: 'text',
               configuration: {
-                as: 'BUTTONGROUP',
-                dataType: 'string',
-                allowedInput: [
-                  { name: 'Text', value: 'text' },
-                  { name: 'Outlined', value: 'outlined' },
-                  { name: 'Contain', value: 'contained' },
-                  { name: 'Icon', value: 'icon' },
-                ],
+                apiVersion: 'v1',
               },
-            },
-            {
-              type: 'VARIABLE',
-              label: 'Button text',
               key: 'buttonText',
+              label: 'Button text',
+              type: 'VARIABLE',
               value: ['Menu 1'],
-              configuration: {
-                condition: {
-                  type: 'HIDE',
-                  option: 'variant',
-                  comparator: 'EQ',
-                  value: 'icon',
-                },
-              },
             },
             {
-              type: 'CUSTOM',
-              label: 'Link to',
-              key: 'linkType',
-              value: 'internal',
               configuration: {
+                allowedInput: [
+                  {
+                    name: 'Internal page',
+                    value: 'internal',
+                  },
+                  {
+                    name: 'External page',
+                    value: 'external',
+                  },
+                ],
+                apiVersion: 'v1',
                 as: 'BUTTONGROUP',
                 dataType: 'string',
-                allowedInput: [
-                  { name: 'Internal page', value: 'internal' },
-                  { name: 'External page', value: 'external' },
-                ],
               },
+              key: 'linkType',
+              label: 'Link to',
+              type: 'CUSTOM',
+              value: 'internal',
             },
             {
-              value: '',
-              label: 'Page',
-              key: 'linkTo',
-              type: 'ENDPOINT',
               configuration: {
+                apiVersion: 'v1',
                 condition: {
-                  type: 'SHOW',
-                  option: 'linkType',
                   comparator: 'EQ',
+                  option: 'linkType',
+                  type: 'SHOW',
                   value: 'internal',
                 },
               },
+              key: 'linkTo',
+              label: 'Page',
+              type: 'ENDPOINT',
+              value: '',
             },
             {
-              value: [''],
-              label: 'URL',
-              key: 'linkToExternal',
-              type: 'VARIABLE',
               configuration: {
-                placeholder: 'Starts with https:// or http://',
+                apiVersion: 'v1',
                 condition: {
-                  type: 'SHOW',
-                  option: 'linkType',
                   comparator: 'EQ',
+                  option: 'linkType',
+                  type: 'SHOW',
                   value: 'external',
                 },
+                placeholder: 'Starts with https:// or http://',
               },
+              key: 'linkToExternal',
+              label: 'URL',
+              type: 'VARIABLE',
+              value: [''],
             },
             {
               value: '_self',
@@ -308,42 +297,16 @@
               },
             },
             {
-              value: false,
-              label: 'Full width',
+              configuration: {
+                apiVersion: 'v1',
+              },
               key: 'fullWidth',
+              label: 'Full width',
               type: 'TOGGLE',
-              configuration: {
-                condition: {
-                  type: 'HIDE',
-                  option: 'variant',
-                  comparator: 'EQ',
-                  value: 'icon',
-                },
-              },
+              value: false,
             },
             {
-              value: 'medium',
-              label: 'Size',
-              key: 'size',
-              type: 'CUSTOM',
               configuration: {
-                as: 'BUTTONGROUP',
-                dataType: 'string',
-                allowedInput: [
-                  { name: 'Large', value: 'large' },
-                  { name: 'Medium', value: 'medium' },
-                  { name: 'Small', value: 'small' },
-                ],
-              },
-            },
-            {
-              label: 'Icon',
-              key: 'icon',
-              value: 'None',
-              type: 'CUSTOM',
-              configuration: {
-                as: 'DROPDOWN',
-                dataType: 'string',
                 allowedInput: [
                   {
                     name: 'None',
@@ -1602,61 +1565,96 @@
                     value: 'Work',
                   },
                 ],
+                apiVersion: 'v1',
+                as: 'DROPDOWN',
+                dataType: 'string',
               },
+              key: 'icon',
+              label: 'Icon',
+              type: 'CUSTOM',
+              value: 'None',
             },
             {
-              type: 'CUSTOM',
-              label: 'Icon position',
-              key: 'iconPosition',
-              value: 'start',
               configuration: {
+                allowedInput: [
+                  {
+                    name: 'Large',
+                    value: 'large',
+                  },
+                  {
+                    name: 'Medium',
+                    value: 'medium',
+                  },
+                  {
+                    name: 'Small',
+                    value: 'small',
+                  },
+                ],
+                apiVersion: 'v1',
                 as: 'BUTTONGROUP',
                 dataType: 'string',
                 condition: {
                   type: 'HIDE',
-                  option: 'variant',
+                  option: 'icon',
                   comparator: 'EQ',
-                  value: 'icon',
+                  value: 'None',
                 },
-                allowedInput: [
-                  { name: 'Start', value: 'start' },
-                  { name: 'End', value: 'end' },
-                ],
               },
+              key: 'size',
+              label: 'Icon size',
+              type: 'CUSTOM',
+              value: 'medium',
             },
             {
-              type: 'COLOR',
-              label: 'Text color',
-              key: 'textColor',
-              value: 'White',
               configuration: {
+                allowedInput: [
+                  {
+                    name: 'Start',
+                    value: 'start',
+                  },
+                  {
+                    name: 'End',
+                    value: 'end',
+                  },
+                ],
+                apiVersion: 'v1',
+                as: 'BUTTONGROUP',
                 condition: {
                   type: 'HIDE',
-                  option: 'variant',
+                  option: 'icon',
                   comparator: 'EQ',
-                  value: 'icon',
+                  value: 'None',
                 },
+                dataType: 'string',
               },
+              key: 'iconPosition',
+              label: 'Icon position',
+              type: 'CUSTOM',
+              value: 'start',
             },
             {
-              type: 'COLOR',
-              label: 'Color',
-              key: 'background',
-              value: 'Primary',
-            },
-            {
-              value: ['0rem', '0rem', '0rem', '0rem'],
-              label: 'Outer space',
+              configuration: {
+                apiVersion: 'v1',
+              },
               key: 'outerSpacing',
+              label: 'Outer space',
               type: 'SIZES',
+              value: ['0rem', 'M', '0rem', '0rem'],
             },
             {
-              label: 'Disabled',
+              configuration: {
+                apiVersion: 'v1',
+              },
               key: 'disabled',
-              value: false,
+              label: 'Disabled',
               type: 'TOGGLE',
+              value: false,
             },
             {
+              configuration: {
+                apiVersion: 'v1',
+                as: 'VISIBILITY',
+              },
               label: 'Add Tooltip',
               key: 'addTooltip',
               value: false,
@@ -1668,6 +1666,7 @@
               value: true,
               type: 'TOGGLE',
               configuration: {
+                apiVersion: 'v1',
                 as: 'VISIBILITY',
                 condition: {
                   type: 'SHOW',
@@ -1683,6 +1682,7 @@
               key: 'tooltipContent',
               value: ['Tips'],
               configuration: {
+                apiVersion: 'v1',
                 condition: {
                   type: 'SHOW',
                   option: 'addTooltip',
@@ -1697,6 +1697,7 @@
               value: 'bottom',
               type: 'CUSTOM',
               configuration: {
+                apiVersion: 'v1',
                 as: 'DROPDOWN',
                 dataType: 'string',
                 allowedInput: [
@@ -1747,6 +1748,7 @@
               key: 'tooltipBackground',
               value: 'Medium',
               configuration: {
+                apiVersion: 'v1',
                 condition: {
                   type: 'SHOW',
                   option: 'addTooltip',
@@ -1761,6 +1763,7 @@
               key: 'tooltipText',
               value: 'Black',
               configuration: {
+                apiVersion: 'v1',
                 condition: {
                   type: 'SHOW',
                   option: 'addTooltip',
@@ -1776,86 +1779,75 @@
           name: 'Button',
           options: [
             {
-              label: 'Toggle visibility',
-              key: 'visible',
-              value: true,
-              type: 'TOGGLE',
               configuration: {
+                apiVersion: 'v1',
                 as: 'VISIBILITY',
               },
+              key: 'visible',
+              label: 'Toggle visibility',
+              type: 'TOGGLE',
+              value: true,
             },
             {
-              type: 'CUSTOM',
-              label: 'variant',
-              key: 'variant',
-              value: 'text',
               configuration: {
-                as: 'BUTTONGROUP',
-                dataType: 'string',
-                allowedInput: [
-                  { name: 'Text', value: 'text' },
-                  { name: 'Outlined', value: 'outlined' },
-                  { name: 'Contain', value: 'contained' },
-                  { name: 'Icon', value: 'icon' },
-                ],
+                apiVersion: 'v1',
               },
-            },
-            {
-              type: 'VARIABLE',
-              label: 'Button text',
               key: 'buttonText',
+              label: 'Button text',
+              type: 'VARIABLE',
               value: ['Menu 2'],
-              configuration: {
-                condition: {
-                  type: 'HIDE',
-                  option: 'variant',
-                  comparator: 'EQ',
-                  value: 'icon',
-                },
-              },
             },
             {
-              type: 'CUSTOM',
-              label: 'Link to',
-              key: 'linkType',
-              value: 'internal',
               configuration: {
+                allowedInput: [
+                  {
+                    name: 'Internal page',
+                    value: 'internal',
+                  },
+                  {
+                    name: 'External page',
+                    value: 'external',
+                  },
+                ],
+                apiVersion: 'v1',
                 as: 'BUTTONGROUP',
                 dataType: 'string',
-                allowedInput: [
-                  { name: 'Internal page', value: 'internal' },
-                  { name: 'External page', value: 'external' },
-                ],
               },
+              key: 'linkType',
+              label: 'Link to',
+              type: 'CUSTOM',
+              value: 'internal',
             },
             {
-              value: '',
-              label: 'Page',
-              key: 'linkTo',
-              type: 'ENDPOINT',
               configuration: {
+                apiVersion: 'v1',
                 condition: {
-                  type: 'SHOW',
-                  option: 'linkType',
                   comparator: 'EQ',
+                  option: 'linkType',
+                  type: 'SHOW',
                   value: 'internal',
                 },
               },
+              key: 'linkTo',
+              label: 'Page',
+              type: 'ENDPOINT',
+              value: '',
             },
             {
-              value: [''],
-              label: 'URL',
-              key: 'linkToExternal',
-              type: 'VARIABLE',
               configuration: {
-                placeholder: 'Starts with https:// or http://',
+                apiVersion: 'v1',
                 condition: {
-                  type: 'SHOW',
-                  option: 'linkType',
                   comparator: 'EQ',
+                  option: 'linkType',
+                  type: 'SHOW',
                   value: 'external',
                 },
+                placeholder: 'Starts with https:// or http://',
               },
+              key: 'linkToExternal',
+              label: 'URL',
+              type: 'VARIABLE',
+              value: [''],
             },
             {
               value: '_self',
@@ -1878,42 +1870,16 @@
               },
             },
             {
-              value: false,
-              label: 'Full width',
+              configuration: {
+                apiVersion: 'v1',
+              },
               key: 'fullWidth',
+              label: 'Full width',
               type: 'TOGGLE',
-              configuration: {
-                condition: {
-                  type: 'HIDE',
-                  option: 'variant',
-                  comparator: 'EQ',
-                  value: 'icon',
-                },
-              },
+              value: false,
             },
             {
-              value: 'medium',
-              label: 'Size',
-              key: 'size',
-              type: 'CUSTOM',
               configuration: {
-                as: 'BUTTONGROUP',
-                dataType: 'string',
-                allowedInput: [
-                  { name: 'Large', value: 'large' },
-                  { name: 'Medium', value: 'medium' },
-                  { name: 'Small', value: 'small' },
-                ],
-              },
-            },
-            {
-              label: 'Icon',
-              key: 'icon',
-              value: 'None',
-              type: 'CUSTOM',
-              configuration: {
-                as: 'DROPDOWN',
-                dataType: 'string',
                 allowedInput: [
                   {
                     name: 'None',
@@ -3172,80 +3138,100 @@
                     value: 'Work',
                   },
                 ],
+                apiVersion: 'v1',
+                as: 'DROPDOWN',
+                dataType: 'string',
               },
+              key: 'icon',
+              label: 'Icon',
+              type: 'CUSTOM',
+              value: 'None',
             },
             {
-              type: 'CUSTOM',
-              label: 'Icon position',
-              key: 'iconPosition',
-              value: 'start',
               configuration: {
+                allowedInput: [
+                  {
+                    name: 'Large',
+                    value: 'large',
+                  },
+                  {
+                    name: 'Medium',
+                    value: 'medium',
+                  },
+                  {
+                    name: 'Small',
+                    value: 'small',
+                  },
+                ],
+                condition: {
+                  type: 'HIDE',
+                  option: 'icon',
+                  comparator: 'EQ',
+                  value: 'None',
+                },
+                apiVersion: 'v1',
                 as: 'BUTTONGROUP',
                 dataType: 'string',
-                condition: {
-                  type: 'HIDE',
-                  option: 'variant',
-                  comparator: 'EQ',
-                  value: 'icon',
-                },
-                allowedInput: [
-                  { name: 'Start', value: 'start' },
-                  { name: 'End', value: 'end' },
-                ],
               },
+              key: 'size',
+              label: 'Icon size',
+              type: 'CUSTOM',
+              value: 'medium',
             },
             {
-              type: 'COLOR',
-              label: 'Text color',
-              key: 'textColor',
-              value: 'White',
               configuration: {
+                allowedInput: [
+                  {
+                    name: 'Start',
+                    value: 'start',
+                  },
+                  {
+                    name: 'End',
+                    value: 'end',
+                  },
+                ],
+                apiVersion: 'v1',
+                as: 'BUTTONGROUP',
                 condition: {
                   type: 'HIDE',
-                  option: 'variant',
+                  option: 'icon',
                   comparator: 'EQ',
-                  value: 'icon',
+                  value: 'None',
                 },
+                dataType: 'string',
               },
+              key: 'iconPosition',
+              label: 'Icon position',
+              type: 'CUSTOM',
+              value: 'start',
             },
             {
-              type: 'COLOR',
-              label: 'Color',
-              key: 'background',
-              value: 'Primary',
-            },
-            {
-              value: ['0rem', '0rem', '0rem', '0rem'],
-              label: 'Outer space',
+              configuration: {
+                apiVersion: 'v1',
+              },
               key: 'outerSpacing',
+              label: 'Outer space',
               type: 'SIZES',
+              value: ['0rem', '0rem', '0rem', '0rem'],
             },
             {
-              label: 'Disabled',
+              configuration: {
+                apiVersion: 'v1',
+              },
               key: 'disabled',
-              value: false,
+              label: 'Disabled',
               type: 'TOGGLE',
+              value: false,
             },
             {
+              configuration: {
+                apiVersion: 'v1',
+                as: 'VISIBILITY',
+              },
               label: 'Add Tooltip',
               key: 'addTooltip',
               value: false,
               type: 'TOGGLE',
-            },
-            {
-              label: 'Toggle tooltip visibility',
-              key: 'hasVisibleTooltip',
-              value: true,
-              type: 'TOGGLE',
-              configuration: {
-                as: 'VISIBILITY',
-                condition: {
-                  type: 'SHOW',
-                  option: 'addTooltip',
-                  comparator: 'EQ',
-                  value: true,
-                },
-              },
             },
             {
               type: 'VARIABLE',
@@ -3253,6 +3239,7 @@
               key: 'tooltipContent',
               value: ['Tips'],
               configuration: {
+                apiVersion: 'v1',
                 condition: {
                   type: 'SHOW',
                   option: 'addTooltip',
@@ -3267,6 +3254,7 @@
               value: 'bottom',
               type: 'CUSTOM',
               configuration: {
+                apiVersion: 'v1',
                 as: 'DROPDOWN',
                 dataType: 'string',
                 allowedInput: [
@@ -3315,8 +3303,9 @@
               type: 'COLOR',
               label: 'Tooltip Background',
               key: 'tooltipBackground',
-              value: 'Medium',
+              value: 'medium',
               configuration: {
+                apiVersion: 'v1',
                 condition: {
                   type: 'SHOW',
                   option: 'addTooltip',
@@ -3331,6 +3320,7 @@
               key: 'tooltipText',
               value: 'Black',
               configuration: {
+                apiVersion: 'v1',
                 condition: {
                   type: 'SHOW',
                   option: 'addTooltip',
