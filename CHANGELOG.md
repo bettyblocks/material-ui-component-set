@@ -1,3 +1,87 @@
+# [1.130.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.129.0...v1.130.0) (2021-05-10)
+
+
+### Features
+
+* pageWithColumnLayout ([dbe4494](https://github.com/bettyblocks/material-ui-component-set/commit/dbe44945c23e520d1cdbcb4b1f56ba875d481b01))
+
+# [1.129.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.128.1...v1.129.0) (2021-05-07)
+
+
+### Bug Fixes
+
+* iconConfiguration not available in prefab structure ([0538f92](https://github.com/bettyblocks/material-ui-component-set/commit/0538f9206e9f69414cc12b75ce2799f5fd78ddc8))
+* solved linter issues ([e35d3ab](https://github.com/bettyblocks/material-ui-component-set/commit/e35d3ab3fc42ada56d82f5bbe65a3906d2c85efd))
+
+
+### Features
+
+* page template with login and register form ([fbb1a8e](https://github.com/bettyblocks/material-ui-component-set/commit/fbb1a8e6d3e0752430d6b5bf1ed0fc519b27e1dd))
+
+## [1.128.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.128.0...v1.128.1) (2021-05-04)
+
+
+### Bug Fixes
+
+* validate required option in checkboxgroup ([53f5785](https://github.com/bettyblocks/material-ui-component-set/commit/53f57853c53c4a8f745c6df60d6fb305ac68ed94))
+
+# [1.128.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.127.0...v1.128.0) (2021-05-03)
+
+
+### Features
+
+* add style to button component ([a908b65](https://github.com/bettyblocks/material-ui-component-set/commit/a908b657d1838d12b5a6de920afe60b1da4435a1))
+
+# [1.127.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.126.0...v1.127.0) (2021-04-30)
+
+
+### Features
+
+* release style editor with button component work 332 ([#1092](https://github.com/bettyblocks/material-ui-component-set/issues/1092)) ([4c832d5](https://github.com/bettyblocks/material-ui-component-set/commit/4c832d5d59f6a8ea9b20960738f9945233ccc04a))
+
+# [1.126.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.125.0...v1.126.0) (2021-04-22)
+
+
+### Bug Fixes
+
+* add outerspace option to card prefab ([b8978e2](https://github.com/bettyblocks/material-ui-component-set/commit/b8978e2969cdbdbfeb2974fdb77ede56f7f4879b))
+
+
+### Features
+
+* page with grid and list view ([6a22566](https://github.com/bettyblocks/material-ui-component-set/commit/6a22566da85ba7293cc560d751836fc3dc59d38e))
+
+# [1.125.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.124.0...v1.125.0) (2021-04-22)
+
+
+### Bug Fixes
+
+* add outerspace option to card prefab ([82a242d](https://github.com/bettyblocks/material-ui-component-set/commit/82a242d45d8587e078462e68ef80e9b009933e44))
+
+
+### Features
+
+* page with grid view ([97a34c5](https://github.com/bettyblocks/material-ui-component-set/commit/97a34c59d0c274eb1c00d9e2a3d6d7fdf9860f11))
+
+# [1.124.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.123.0...v1.124.0) (2021-04-22)
+
+
+### Bug Fixes
+
+* add outerspace option to paper ([8d0ab26](https://github.com/bettyblocks/material-ui-component-set/commit/8d0ab26c89ef446f6bc3fd3459d3e55d4ac506ac))
+
+
+### Features
+
+* page template with list view ([8c444ba](https://github.com/bettyblocks/material-ui-component-set/commit/8c444bae35b5c2b5ca7eb13303771f8e90d6b1ba))
+
+# [1.123.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.122.5...v1.123.0) (2021-04-22)
+
+
+### Features
+
+* page with login form styled ([d589dc1](https://github.com/bettyblocks/material-ui-component-set/commit/d589dc1eea9ce26a2cdccb14ca0fdd93f2e6c0e8))
+
 ## [1.122.5](https://github.com/bettyblocks/material-ui-component-set/compare/v1.122.4...v1.122.5) (2021-04-20)
 
 
