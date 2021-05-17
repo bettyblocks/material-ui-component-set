@@ -4,6 +4,11 @@
   type: 'page',
   description:
     'View your content in a grid view with card items. This also includes a custom search field.',
+  detail:
+    'View your content in a grid view with card items. This also includes a custom search field.',
+  previewUrl: 'https://preview.betty.app/card-view',
+  previewImage:
+    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_Card_View.jpg',
   category: 'LAYOUT',
   beforeCreate: ({
     helpers: { useModelQuery },
@@ -1542,7 +1547,7 @@
               {
                 label: 'Title',
                 key: 'title',
-                value: ['Grid company'],
+                value: ['Card view'],
                 type: 'VARIABLE',
               },
               {

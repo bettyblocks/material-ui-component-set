@@ -3,6 +3,9 @@
   icon: 'LoginFormIcon',
   type: 'page',
   description: 'Page with a ready to use login form, register form and image.',
+  detail: 'Full height page with an app bar',
+  previewUrl: 'https://preview.betty.app/app-bar',
+  previewImage: '',
   category: 'LAYOUT',
   beforeCreate: ({
     prefab,

@@ -4,6 +4,9 @@
   type: 'page',
   description:
     'View your datalist in a list view, this also includes a built-in search functionality.',
+  detail: 'Full height page with an app bar',
+  previewUrl: 'https://preview.betty.app/app-bar',
+  previewImage: '',
   category: 'LAYOUT',
   beforeCreate: ({
     helpers: { useModelQuery },

@@ -1,8 +1,11 @@
 (() => ({
   name: 'Login form with image',
   icon: 'LoginFormIcon',
-  description: 'Page with login form and side image',
   type: 'page',
+  description: 'Page with login form and side image',
+  detail: 'Full height page with an app bar',
+  previewUrl: 'https://preview.betty.app/app-bar',
+  previewImage: '',
   category: 'FORM',
   beforeCreate: ({
     prefab,
