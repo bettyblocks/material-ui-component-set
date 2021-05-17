@@ -488,7 +488,7 @@
                               type: 'VARIABLE',
                               label: 'Label Text',
                               key: 'labelText',
-                              value: '',
+                              value: [],
                             },
                             {
                               value: 'Body1',
