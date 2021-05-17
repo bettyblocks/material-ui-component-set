@@ -44,6 +44,7 @@
       labelNumberOfPages,
       labelSearchOn,
       square,
+      striped,
       elevation,
       variant,
       stickyHeader,
@@ -254,6 +255,22 @@
         for (let i = 0, j = amountOfRows - 1; i < j; i += 1) {
           repeaterRef.current.innerHTML +=
             repeaterRef.current.previousElementSibling.children[0].outerHTML;
+        }
+        if (striped) {
+          const childrenLenght = children.length;
+          const collection = Array.from(repeaterRef.current.children);
+          collection
+            .filter(item => item.tagName === 'DIV')
+            .forEach((item, index) => {
+              if (
+                ((Math.ceil((index + 1) / childrenLenght) * childrenLenght) /
+                  childrenLenght) %
+                  2 ===
+                0
+              ) {
+                item.classList.add('striped');
+              }
+            });
         }
       };
       const mutationObserver = new MutationObserver(() => {
@@ -663,6 +680,11 @@
           backgroundColor: ({ options: { linkTo, backgroundRowHover } }) =>
             linkTo && [style.getColor(backgroundRowHover), '!important'],
         },
+        '&:nth-child(odd)': {
+          backgroundColor: ({ options: { striped, stripeColor } }) => [
+            striped ? style.getColor(stripeColor) : 'transparent',
+          ],
+        },
       },
       searchField: {
         marginLeft: ['auto', '!important'],
@@ -678,6 +700,12 @@
       },
       autoRepeat: {
         opacity: 0.5,
+        '& .striped': {
+          background: ({ options: { striped, stripeColor } }) => [
+            striped ? style.getColor(stripeColor) : 'transparent',
+            '!important',
+          ],
+        },
       },
       skeleton: {
         height: `calc(${style.getFont('Body1').Mobile} * 1.2)`,
