@@ -271,303 +271,311 @@
                     type: 'SIZES',
                   },
                 ],
-                descendants:
-                  property.kind === 'IMAGE'
-                    ? [
-                        {
-                          name: 'DetailViewChild',
-                          options: [
-                            {
-                              value: '',
-                              label: 'Property',
-                              key: 'property',
-                              type: 'PROPERTY',
-                            },
-                            {
-                              type: 'VARIABLE',
-                              label: 'Label Text',
-                              key: 'labelText',
-                              value: [`${property.label}`],
-                            },
-                            {
-                              value: 'Body1',
-                              label: 'Type',
-                              key: 'type',
-                              type: 'FONT',
-                            },
-                            {
-                              type: 'CUSTOM',
-                              label: 'Text Alignment',
-                              key: 'textAlignment',
-                              value: 'left',
-                              configuration: {
-                                as: 'BUTTONGROUP',
-                                dataType: 'string',
-                                allowedInput: [
-                                  { name: 'Left', value: 'left' },
-                                  { name: 'Center', value: 'center' },
-                                  { name: 'Right', value: 'right' },
-                                ],
-                              },
-                            },
-                            {
-                              value: ['0rem', '0rem', '0rem', '0rem'],
-                              label: 'Outer space',
-                              key: 'outerSpacing',
-                              type: 'SIZES',
-                            },
-                            {
-                              value: true,
-                              label: 'Styles',
-                              key: 'styles',
-                              type: 'TOGGLE',
-                            },
-                            {
-                              type: 'COLOR',
-                              label: 'Text color',
-                              key: 'textColor',
-                              value: 'Black',
-                              configuration: {
-                                condition: {
-                                  type: 'SHOW',
-                                  option: 'styles',
-                                  comparator: 'EQ',
-                                  value: true,
-                                },
-                              },
-                            },
-                            {
-                              type: 'CUSTOM',
-                              label: 'Font weight',
-                              key: 'fontWeight',
-                              value: '800',
-                              configuration: {
-                                as: 'DROPDOWN',
-                                dataType: 'string',
-                                allowedInput: [
-                                  { name: '100', value: '100' },
-                                  { name: '200', value: '200' },
-                                  { name: '300', value: '300' },
-                                  { name: '400', value: '400' },
-                                  { name: '500', value: '500' },
-                                  { name: '600', value: '600' },
-                                  { name: '700', value: '700' },
-                                  { name: '800', value: '800' },
-                                  { name: '900', value: '900' },
-                                ],
-                                condition: {
-                                  type: 'SHOW',
-                                  option: 'styles',
-                                  comparator: 'EQ',
-                                  value: true,
-                                },
-                              },
-                            },
+                descendants: [
+                  {
+                    name: 'DetailViewChild',
+                    options: [
+                      {
+                        value:
+                          property.kind === 'IMAGE'
+                            ? ''
+                            : enrichVarObj(property),
+                        label: 'Property',
+                        key: 'property',
+                        type: 'PROPERTY',
+                      },
+                      {
+                        type: 'VARIABLE',
+                        label: 'Label Text',
+                        key: 'labelText',
+                        value:
+                          property.kind === 'IMAGE'
+                            ? [`${property.label}`]
+                            : [],
+                      },
+                      {
+                        value: 'Body1',
+                        label: 'Type',
+                        key: 'type',
+                        type: 'FONT',
+                      },
+                      {
+                        type: 'CUSTOM',
+                        label: 'Text Alignment',
+                        key: 'textAlignment',
+                        value: 'left',
+                        configuration: {
+                          as: 'BUTTONGROUP',
+                          dataType: 'string',
+                          allowedInput: [
+                            { name: 'Left', value: 'left' },
+                            { name: 'Center', value: 'center' },
+                            { name: 'Right', value: 'right' },
                           ],
-                          descendants: [],
                         },
-                        {
-                          name: 'Media',
-                          options: [
+                      },
+                      {
+                        value: ['0rem', '0rem', '0rem', '0rem'],
+                        label: 'Outer space',
+                        key: 'outerSpacing',
+                        type: 'SIZES',
+                      },
+                      {
+                        value: true,
+                        label: 'Styles',
+                        key: 'styles',
+                        type: 'TOGGLE',
+                      },
+                      {
+                        type: 'COLOR',
+                        label: 'Text color',
+                        key: 'textColor',
+                        value: 'Black',
+                        configuration: {
+                          condition: {
+                            type: 'SHOW',
+                            option: 'styles',
+                            comparator: 'EQ',
+                            value: true,
+                          },
+                        },
+                      },
+                      {
+                        type: 'CUSTOM',
+                        label: 'Font weight',
+                        key: 'fontWeight',
+                        value: '800',
+                        configuration: {
+                          as: 'DROPDOWN',
+                          dataType: 'string',
+                          allowedInput: [
+                            { name: '100', value: '100' },
+                            { name: '200', value: '200' },
+                            { name: '300', value: '300' },
+                            { name: '400', value: '400' },
+                            { name: '500', value: '500' },
+                            { name: '600', value: '600' },
+                            { name: '700', value: '700' },
+                            { name: '800', value: '800' },
+                            { name: '900', value: '900' },
+                          ],
+                          condition: {
+                            type: 'SHOW',
+                            option: 'styles',
+                            comparator: 'EQ',
+                            value: true,
+                          },
+                        },
+                      },
+                    ],
+                    descendants:
+                      property.kind === 'IMAGE'
+                        ? [
                             {
-                              label: 'Media type',
-                              key: 'type',
-                              value: 'img',
-                              type: 'CUSTOM',
-                              configuration: {
-                                as: 'BUTTONGROUP',
-                                dataType: 'string',
-                                allowedInput: [
-                                  { name: 'Image', value: 'img' },
-                                  { name: 'Video', value: 'video' },
-                                  { name: 'I-frame', value: 'iframe' },
-                                ],
-                              },
-                            },
-                            {
-                              value: [property],
-                              label: 'Source',
-                              key: 'imageSource',
-                              type: 'VARIABLE',
-                              configuration: {
-                                condition: {
-                                  type: 'SHOW',
-                                  option: 'type',
-                                  comparator: 'EQ',
+                              name: 'Media',
+                              options: [
+                                {
+                                  label: 'Media type',
+                                  key: 'type',
                                   value: 'img',
+                                  type: 'CUSTOM',
+                                  configuration: {
+                                    as: 'BUTTONGROUP',
+                                    dataType: 'string',
+                                    allowedInput: [
+                                      { name: 'Image', value: 'img' },
+                                      { name: 'Video', value: 'video' },
+                                      { name: 'I-frame', value: 'iframe' },
+                                    ],
+                                  },
                                 },
-                              },
-                            },
-                            {
-                              value: [],
-                              label: 'Source',
-                              key: 'videoSource',
-                              type: 'VARIABLE',
-                              configuration: {
-                                condition: {
-                                  type: 'SHOW',
-                                  option: 'type',
-                                  comparator: 'EQ',
-                                  value: 'video',
+                                {
+                                  value: [property],
+                                  label: 'Source',
+                                  key: 'imageSource',
+                                  type: 'VARIABLE',
+                                  configuration: {
+                                    condition: {
+                                      type: 'SHOW',
+                                      option: 'type',
+                                      comparator: 'EQ',
+                                      value: 'img',
+                                    },
+                                  },
                                 },
-                              },
-                            },
-                            {
-                              value: [],
-                              label: 'Source',
-                              key: 'iframeSource',
-                              type: 'VARIABLE',
-                              configuration: {
-                                condition: {
-                                  type: 'SHOW',
-                                  option: 'type',
-                                  comparator: 'EQ',
-                                  value: 'iframe',
+                                {
+                                  value: [],
+                                  label: 'Source',
+                                  key: 'videoSource',
+                                  type: 'VARIABLE',
+                                  configuration: {
+                                    condition: {
+                                      type: 'SHOW',
+                                      option: 'type',
+                                      comparator: 'EQ',
+                                      value: 'video',
+                                    },
+                                  },
                                 },
-                              },
-                            },
-                            {
-                              value: [],
-                              label: 'Image Alternative Text',
-                              key: 'imgAlt',
-                              type: 'VARIABLE',
-                              configuration: {
-                                condition: {
-                                  type: 'SHOW',
-                                  option: 'type',
-                                  comparator: 'EQ',
-                                  value: 'img',
+                                {
+                                  value: [],
+                                  label: 'Source',
+                                  key: 'iframeSource',
+                                  type: 'VARIABLE',
+                                  configuration: {
+                                    condition: {
+                                      type: 'SHOW',
+                                      option: 'type',
+                                      comparator: 'EQ',
+                                      value: 'iframe',
+                                    },
+                                  },
                                 },
-                              },
-                            },
-                            {
-                              value: [],
-                              label: 'Title',
-                              key: 'title',
-                              type: 'VARIABLE',
-                            },
-                            {
-                              type: 'SIZE',
-                              label: 'Width',
-                              key: 'width',
-                              value: '100%',
-                              configuration: {
-                                as: 'UNIT',
-                              },
-                            },
-                            {
-                              type: 'SIZE',
-                              label: 'Height',
-                              key: 'height',
-                              value: '',
-                              configuration: {
-                                as: 'UNIT',
-                              },
-                            },
-                            {
-                              value: ['0rem', '0rem', 'M', '0rem'],
-                              label: 'Outer space',
-                              key: 'outerSpacing',
-                              type: 'SIZES',
-                            },
-                          ],
-                          descendants: [],
-                        },
-                      ]
-                    : [
-                        {
-                          name: 'DetailViewChild',
-                          options: [
-                            {
-                              value: enrichVarObj(property),
-                              label: 'Property',
-                              key: 'property',
-                              type: 'PROPERTY',
-                            },
-                            {
-                              type: 'VARIABLE',
-                              label: 'Label Text',
-                              key: 'labelText',
-                              value: [],
-                            },
-                            {
-                              value: 'Body1',
-                              label: 'Type',
-                              key: 'type',
-                              type: 'FONT',
-                            },
-                            {
-                              type: 'CUSTOM',
-                              label: 'Text Alignment',
-                              key: 'textAlignment',
-                              value: 'left',
-                              configuration: {
-                                as: 'BUTTONGROUP',
-                                dataType: 'string',
-                                allowedInput: [
-                                  { name: 'Left', value: 'left' },
-                                  { name: 'Center', value: 'center' },
-                                  { name: 'Right', value: 'right' },
-                                ],
-                              },
-                            },
-                            {
-                              value: ['0rem', '0rem', '0rem', '0rem'],
-                              label: 'Outer space',
-                              key: 'outerSpacing',
-                              type: 'SIZES',
-                            },
-                            {
-                              value: true,
-                              label: 'Styles',
-                              key: 'styles',
-                              type: 'TOGGLE',
-                            },
-                            {
-                              type: 'COLOR',
-                              label: 'Text color',
-                              key: 'textColor',
-                              value: 'Black',
-                              configuration: {
-                                condition: {
-                                  type: 'SHOW',
-                                  option: 'styles',
-                                  comparator: 'EQ',
-                                  value: true,
+                                {
+                                  value: [],
+                                  label: 'Image Alternative Text',
+                                  key: 'imgAlt',
+                                  type: 'VARIABLE',
+                                  configuration: {
+                                    condition: {
+                                      type: 'SHOW',
+                                      option: 'type',
+                                      comparator: 'EQ',
+                                      value: 'img',
+                                    },
+                                  },
                                 },
-                              },
-                            },
-                            {
-                              type: 'CUSTOM',
-                              label: 'Font weight',
-                              key: 'fontWeight',
-                              value: '800',
-                              configuration: {
-                                as: 'DROPDOWN',
-                                dataType: 'string',
-                                allowedInput: [
-                                  { name: '100', value: '100' },
-                                  { name: '200', value: '200' },
-                                  { name: '300', value: '300' },
-                                  { name: '400', value: '400' },
-                                  { name: '500', value: '500' },
-                                  { name: '600', value: '600' },
-                                  { name: '700', value: '700' },
-                                  { name: '800', value: '800' },
-                                  { name: '900', value: '900' },
-                                ],
-                                condition: {
-                                  type: 'SHOW',
-                                  option: 'styles',
-                                  comparator: 'EQ',
-                                  value: true,
+                                {
+                                  value: [],
+                                  label: 'Title',
+                                  key: 'title',
+                                  type: 'VARIABLE',
                                 },
-                              },
+                                {
+                                  type: 'SIZE',
+                                  label: 'Width',
+                                  key: 'width',
+                                  value: '100%',
+                                  configuration: {
+                                    as: 'UNIT',
+                                  },
+                                },
+                                {
+                                  type: 'SIZE',
+                                  label: 'Height',
+                                  key: 'height',
+                                  value: '',
+                                  configuration: {
+                                    as: 'UNIT',
+                                  },
+                                },
+                                {
+                                  value: ['0rem', '0rem', 'M', '0rem'],
+                                  label: 'Outer space',
+                                  key: 'outerSpacing',
+                                  type: 'SIZES',
+                                },
+                              ],
+                              descendants: [],
                             },
-                          ],
-                          descendants: [],
-                        },
-                      ],
+                          ]
+                        : '',
+                  },
+                ],
+                // : [
+                //     {
+                //       name: 'DetailViewChild',
+                //       options: [
+                //         {
+                //           value: enrichVarObj(property),
+                //           label: 'Property',
+                //           key: 'property',
+                //           type: 'PROPERTY',
+                //         },
+                //         {
+                //           type: 'VARIABLE',
+                //           label: 'Label Text',
+                //           key: 'labelText',
+                //           value: [],
+                //         },
+                //         {
+                //           value: 'Body1',
+                //           label: 'Type',
+                //           key: 'type',
+                //           type: 'FONT',
+                //         },
+                //         {
+                //           type: 'CUSTOM',
+                //           label: 'Text Alignment',
+                //           key: 'textAlignment',
+                //           value: 'left',
+                //           configuration: {
+                //             as: 'BUTTONGROUP',
+                //             dataType: 'string',
+                //             allowedInput: [
+                //               { name: 'Left', value: 'left' },
+                //               { name: 'Center', value: 'center' },
+                //               { name: 'Right', value: 'right' },
+                //             ],
+                //           },
+                //         },
+                //         {
+                //           value: ['0rem', '0rem', '0rem', '0rem'],
+                //           label: 'Outer space',
+                //           key: 'outerSpacing',
+                //           type: 'SIZES',
+                //         },
+                //         {
+                //           value: true,
+                //           label: 'Styles',
+                //           key: 'styles',
+                //           type: 'TOGGLE',
+                //         },
+                //         {
+                //           type: 'COLOR',
+                //           label: 'Text color',
+                //           key: 'textColor',
+                //           value: 'Black',
+                //           configuration: {
+                //             condition: {
+                //               type: 'SHOW',
+                //               option: 'styles',
+                //               comparator: 'EQ',
+                //               value: true,
+                //             },
+                //           },
+                //         },
+                //         {
+                //           type: 'CUSTOM',
+                //           label: 'Font weight',
+                //           key: 'fontWeight',
+                //           value: '800',
+                //           configuration: {
+                //             as: 'DROPDOWN',
+                //             dataType: 'string',
+                //             allowedInput: [
+                //               { name: '100', value: '100' },
+                //               { name: '200', value: '200' },
+                //               { name: '300', value: '300' },
+                //               { name: '400', value: '400' },
+                //               { name: '500', value: '500' },
+                //               { name: '600', value: '600' },
+                //               { name: '700', value: '700' },
+                //               { name: '800', value: '800' },
+                //               { name: '900', value: '900' },
+                //             ],
+                //             condition: {
+                //               type: 'SHOW',
+                //               option: 'styles',
+                //               comparator: 'EQ',
+                //               value: true,
+                //             },
+                //           },
+                //         },
+                //       ],
+                //       descendants: [],
+                //     },
+                //   ],
               });
             });
 

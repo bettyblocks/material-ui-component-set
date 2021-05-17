@@ -1,7 +1,7 @@
 (() => ({
   name: 'DetailViewChild',
   type: 'CONTENT_COMPONENT',
-  allowedTypes: [],
+  allowedTypes: ['CONTENT_COMPONENT', 'CONTAINER_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { labelText, property } = options;
@@ -29,6 +29,19 @@
     const parsedContent = labelIsEmpty ? propertyLabel : useText(labelText);
     const propName = isDev ? `{{ ${propertyName} }}` : useText([property]);
 
+    const Content =
+      children.length > 0 ? (
+        children
+      ) : (
+        <Tag className={classes.content}>
+          {isPristine ? (
+            <span className={classes.placeholder}>Select property</span>
+          ) : (
+            propName
+          )}
+        </Tag>
+      );
+
     return (
       <div>
         <Tag className={`${classes.content} ${classes.label}`}>
@@ -38,13 +51,7 @@
             parsedContent
           )}
         </Tag>
-        <Tag className={classes.content}>
-          {isPristine ? (
-            <span className={classes.placeholder}>Select property</span>
-          ) : (
-            propName
-          )}
-        </Tag>
+        {Content}
       </div>
     );
   })(),
