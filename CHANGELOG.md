@@ -1,3 +1,10 @@
+# [1.131.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.130.0...v1.131.0) (2021-05-17)
+
+
+### Features
+
+* set file before triggering success ([96c6a19](https://github.com/bettyblocks/material-ui-component-set/commit/96c6a1998731664a109aa8ea317fd11d57d24db5))
+
 # [1.130.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.129.0...v1.130.0) (2021-05-10)
 
 
