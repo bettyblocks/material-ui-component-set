@@ -1,3 +1,10 @@
+# [1.130.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.129.0...v1.130.0) (2021-05-10)
+
+
+### Features
+
+* pageWithColumnLayout ([dbe4494](https://github.com/bettyblocks/material-ui-component-set/commit/dbe44945c23e520d1cdbcb4b1f56ba875d481b01))
+
 # [1.129.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.128.1...v1.129.0) (2021-05-07)
 
 
