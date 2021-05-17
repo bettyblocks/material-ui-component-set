@@ -114,6 +114,12 @@
             <div>{`File: ${d.name} failed with error: ${d.url}`}</div>
           ));
 
+          setUploads({
+            ...uploads,
+            data: multiple ? data.concat(succeededData) : succeededData,
+            failureMessage: formattedFailedData,
+          });
+
           if (succeededData.length > 0) {
             B.triggerEvent('onSuccess', succeededData);
           } else {
@@ -122,11 +128,6 @@
           if (failedData.length > 0) {
             B.triggerEvent('onError', formattedFailedData);
           }
-          setUploads({
-            ...uploads,
-            data: multiple ? data.concat(succeededData) : succeededData,
-            failureMessage: formattedFailedData,
-          });
         },
       },
     });
