@@ -72,9 +72,12 @@
     const [showPagination, setShowPagination] = useState(false);
     const { label: searchPropertyLabel = '{property}' } =
       getProperty(searchProperty) || {};
-    const orderPropertyPath = Array.isArray(orderProperty.id)
-      ? orderProperty.id
-      : null;
+    let orderPropertyPath = null;
+    if (orderProperty && Array.isArray(orderProperty.id)) {
+      orderPropertyPath = orderProperty.id;
+    } else if (orderProperty && orderProperty.id) {
+      orderPropertyPath = [orderProperty.id];
+    }
     const [orderBy, setOrderBy] = React.useState({
       field: orderPropertyPath,
       order: orderProperty ? sortOrder : null,
