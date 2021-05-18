@@ -38,6 +38,36 @@
           },
         },
         {
+          value: [],
+          label: 'Source',
+          key: 'videoSource',
+          type: 'VARIABLE',
+          configuration: {
+            as: 'MULTILINE',
+            condition: {
+              type: 'SHOW',
+              option: 'type',
+              comparator: 'EQ',
+              value: 'video',
+            },
+          },
+        },
+        {
+          value: [],
+          label: 'Source',
+          key: 'iframeSource',
+          type: 'VARIABLE',
+          configuration: {
+            as: 'MULTILINE',
+            condition: {
+              type: 'SHOW',
+              option: 'type',
+              comparator: 'EQ',
+              value: 'iframe',
+            },
+          },
+        },
+        {
           type: 'CUSTOM',
           label: 'Link to',
           key: 'linkType',
@@ -83,36 +113,6 @@
               option: 'linkType',
               comparator: 'EQ',
               value: 'external',
-            },
-          },
-        },
-        {
-          value: [],
-          label: 'Source',
-          key: 'videoSource',
-          type: 'VARIABLE',
-          configuration: {
-            as: 'MULTILINE',
-            condition: {
-              type: 'SHOW',
-              option: 'type',
-              comparator: 'EQ',
-              value: 'video',
-            },
-          },
-        },
-        {
-          value: [],
-          label: 'Source',
-          key: 'iframeSource',
-          type: 'VARIABLE',
-          configuration: {
-            as: 'MULTILINE',
-            condition: {
-              type: 'SHOW',
-              option: 'type',
-              comparator: 'EQ',
-              value: 'iframe',
             },
           },
         },
