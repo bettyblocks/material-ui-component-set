@@ -3259,6 +3259,12 @@
                         type: 'NUMBER',
                       },
                       {
+                        value: '',
+                        label: 'Placeholder rows',
+                        key: 'placeholderTake',
+                        type: 'NUMBER',
+                      },
+                      {
                         type: 'CUSTOM',
                         label: 'Type',
                         key: 'type',
