@@ -3313,7 +3313,7 @@
                         },
                       },
                       {
-                        value: ['0rem', '0rem', 'M', '0rem'],
+                        value: ['M', '0rem', 'M', '0rem'],
                         label: 'Outer space',
                         key: 'outerSpacing',
                         type: 'SIZES',
