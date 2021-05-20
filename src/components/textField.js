@@ -168,6 +168,7 @@
     };
 
     B.defineFunction('Clear', () => setCurrentValue(''));
+    B.defineFunction('Enable', () => setIsDisabled(false));
     B.defineFunction('Disable', () => setIsDisabled(true));
 
     const handleClickShowPassword = () => {
