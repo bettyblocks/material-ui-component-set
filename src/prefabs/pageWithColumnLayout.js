@@ -1,9 +1,13 @@
 (() => ({
   name: 'Column layout configurator',
   icon: 'GridIcon',
+  type: 'page',
   description:
     'Generate your layout, columns and rows by using the column layout component.',
-  type: 'page',
+  detail:
+    'Generate your layout, columns and rows by using the column layout component.',
+  previewImage:
+    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_Column_Layout.jpg',
   category: 'LAYOUT',
   beforeCreate: ({
     close,
@@ -885,7 +889,7 @@
                 {
                   label: 'Square',
                   key: 'square',
-                  value: false,
+                  value: true,
                   type: 'TOGGLE',
                 },
                 {
