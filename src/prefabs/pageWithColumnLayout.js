@@ -6,7 +6,6 @@
     'Generate your layout, columns and rows by using the column layout component.',
   detail:
     'Generate your layout, columns and rows by using the column layout component.',
-  previewUrl: 'https://preview.betty.app/column-layout',
   previewImage:
     'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_Column_Layout.jpg',
   category: 'LAYOUT',

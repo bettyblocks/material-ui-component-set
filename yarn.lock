@@ -146,10 +146,10 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@betty-blocks/cli@^23.40.1":
-  version "23.40.1"
-  resolved "https://registry.yarnpkg.com/@betty-blocks/cli/-/cli-23.40.1.tgz#90e9c960d5ec72238366a47892bd1414dc58e990"
-  integrity sha512-MHu3ivIY9cWUpP1PcJ2fS3NaikkP76hkbvjBj0avpCZAbQRuuc9wUqcrlTkXmHl566dJ8Thcd3k7KQQBSz+Brw==
+"@betty-blocks/cli@^23.44.0":
+  version "23.44.0"
+  resolved "https://registry.yarnpkg.com/@betty-blocks/cli/-/cli-23.44.0.tgz#514240d87823f16833a43e7a2b76d6d11b15707a"
+  integrity sha512-+PnY71biY3fnuf4EYMYSnd/mZR3aimaQFfFjALeAsdRCzb2MoKyRb8AAub/IFLO+s1a8Y51Q24SZNNzFTUBGJg==
   dependencies:
     "@azure/ms-rest-js" "^2.0.4"
     "@azure/storage-blob" "^10.3.0"
@@ -160,10 +160,12 @@
     "@betty-blocks/preview" "^1.1.0"
     "@semantic-release/changelog" "^5.0.1"
     "@semantic-release/git" "^9.0.0"
+    "@types/adm-zip" "^0.4.33"
     "@types/hapi__joi" "^16.0.0"
     "@types/prompts" "^2.0.8"
     "@types/react" "^16.9.9"
     "@types/serve-handler" "^6.1.0"
+    adm-zip "^0.5.3"
     ava "^3.7.1"
     case "^1.6.3"
     chalk "^2.4.2"
@@ -188,7 +190,7 @@
     ts-node "^8.8.2"
     tsconfig-paths "^3.9.0"
     typescript "^3.5.3"
-    webhead "^1.1.1"
+    webhead "^1.1.3"
 
 "@betty-blocks/preview@^1.1.0":
   version "1.1.3"
@@ -844,6 +846,13 @@
   resolved "https://registry.yarnpkg.com/@tootallnate/once/-/once-1.1.2.tgz#ccb91445360179a04e7fe6aff78c00ffc1eeaf82"
   integrity sha512-RbzJvlNzmRq5c3O09UipeuXno4tA1FE6ikOjxZK0tuxVv3412l64l5t1W5pj4+rJq9vpkm/kwiR07aZXnsKPxw==
 
+"@types/adm-zip@^0.4.33":
+  version "0.4.34"
+  resolved "https://registry.yarnpkg.com/@types/adm-zip/-/adm-zip-0.4.34.tgz#62ac859eb2af6024362a1b3e43527ab79e0c624e"
+  integrity sha512-8ToYLLAYhkRfcmmljrKi22gT2pqu7hGMDtORP1emwIEGmgUTZOsaDjzWFzW5N2frcFRz/50CWt4zA1CxJ73pmQ==
+  dependencies:
+    "@types/node" "*"
+
 "@types/cheerio@^0.22.22":
   version "0.22.22"
   resolved "https://registry.yarnpkg.com/@types/cheerio/-/cheerio-0.22.22.tgz#ae71cf4ca59b8bbaf34c99af7a5d6c8894988f5f"
@@ -1200,6 +1209,11 @@ acorn@^7.1.1:
   version "7.1.1"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-7.1.1.tgz#e35668de0b402f359de515c5482a1ab9f89a69bf"
   integrity sha512-add7dgA5ppRPxCFJoAGfMDi7PIBXq1RtGo7BhbLaxwrXPOmw8gq48Y9ozT01hUKy9byMjlR20EJhu5zlkErEkg==
+
+adm-zip@^0.5.3:
+  version "0.5.5"
+  resolved "https://registry.yarnpkg.com/adm-zip/-/adm-zip-0.5.5.tgz#b6549dbea741e4050309f1bb4d47c47397ce2c4f"
+  integrity sha512-IWwXKnCbirdbyXSfUDvCCrmYrOHANRZcc8NcRrvTlIApdl7PwE9oGcsYvNeJPAVY1M+70b4PxXGKIf8AEuiQ6w==
 
 agent-base@4, agent-base@^4.3.0:
   version "4.3.0"
@@ -10258,10 +10272,10 @@ wcwidth@^1.0.0, wcwidth@^1.0.1:
   dependencies:
     defaults "^1.0.3"
 
-webhead@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/webhead/-/webhead-1.1.1.tgz#a484904a99a12b901c54ead41a0ded184d2dfd57"
-  integrity sha512-EW4dicBO82kQK8ir77imeFK0Q3iYaoOUCNAR/jXixYvYG312dwvCQB2U7yv5NxljSqagZOE4+yHL0P1bJhl0Cg==
+webhead@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/webhead/-/webhead-1.1.3.tgz#04dd95e47ab5ceff01f29d9f81d73c270e3bbb5d"
+  integrity sha512-PYR/igWOWqO7XAPkPCUqAwQfqZrI1RAXD5a/T2ytxFBmUon/T8WRjyrBKMaNSkYns8tr2NYtgG4NS2BUxJleFw==
   dependencies:
     "@types/cheerio" "^0.22.22"
     cheerio "^1.0.0-rc.3"

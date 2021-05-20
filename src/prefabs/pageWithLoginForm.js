@@ -3,9 +3,10 @@
   icon: 'LoginFormIcon',
   type: 'page',
   description: 'Page with login form and side image',
-  detail: 'Full height page with an app bar',
-  previewUrl: 'https://preview.betty.app/app-bar',
-  previewImage: '',
+  detail: 'Page with login form and side image',
+  previewUrl: 'https://preview.betty.app/login',
+  previewImage:
+    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_Login.jpg',
   category: 'FORM',
   beforeCreate: ({
     prefab,
