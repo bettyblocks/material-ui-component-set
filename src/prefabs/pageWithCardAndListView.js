@@ -4,6 +4,10 @@
   type: 'page',
   description:
     'Toggle the view of your content between a card view or a list view.',
+  detail: 'Toggle the view of your content between a card view or a list view.',
+  previewUrl: 'https://preview.betty.app/card-and-list-view',
+  previewImage:
+    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_Card_And_List_View.jpg',
   category: 'LAYOUT',
   beforeCreate: ({
     helpers: { useModelQuery },
@@ -1542,7 +1546,7 @@
               {
                 label: 'Title',
                 key: 'title',
-                value: ['Grid company'],
+                value: ['Card and list view'],
                 type: 'VARIABLE',
               },
               {

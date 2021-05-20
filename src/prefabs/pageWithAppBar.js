@@ -3,6 +3,10 @@
   icon: 'NavbarIcon',
   type: 'page',
   description: 'Full height page with an app bar',
+  detail: 'Full height page with an app bar',
+  previewUrl: 'https://preview.betty.app/app-bar',
+  previewImage:
+    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_App_Bar.jpg',
   category: 'LAYOUT',
   structure: [
     {
@@ -3410,7 +3414,7 @@
                   key: 'square',
                   label: 'Square',
                   type: 'TOGGLE',
-                  value: false,
+                  value: true,
                 },
                 {
                   configuration: {
