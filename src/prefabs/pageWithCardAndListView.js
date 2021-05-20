@@ -1713,7 +1713,6 @@
                       allowedInput: [
                         { name: 'Internal page', value: 'internal' },
                         { name: 'External page', value: 'external' },
-                        { name: 'Action', value: 'action' },
                       ],
                     },
                   },
@@ -1764,21 +1763,6 @@
                         { name: 'Current Tab', value: '_self' },
                         { name: 'New Tab', value: '_blank' },
                       ],
-                    },
-                  },
-                  {
-                    value: '',
-                    label: 'Action',
-                    key: 'actionId',
-                    type: 'ACTION',
-                    configuration: {
-                      apiVersion: 'v1',
-                      condition: {
-                        type: 'SHOW',
-                        option: 'linkType',
-                        comparator: 'EQ',
-                        value: 'action',
-                      },
                     },
                   },
                   {
@@ -1992,7 +1976,6 @@
                       allowedInput: [
                         { name: 'Internal page', value: 'internal' },
                         { name: 'External page', value: 'external' },
-                        { name: 'Action', value: 'action' },
                       ],
                     },
                   },
@@ -2043,21 +2026,6 @@
                         { name: 'Current Tab', value: '_self' },
                         { name: 'New Tab', value: '_blank' },
                       ],
-                    },
-                  },
-                  {
-                    value: '',
-                    label: 'Action',
-                    key: 'actionId',
-                    type: 'ACTION',
-                    configuration: {
-                      apiVersion: 'v1',
-                      condition: {
-                        type: 'SHOW',
-                        option: 'linkType',
-                        comparator: 'EQ',
-                        value: 'action',
-                      },
                     },
                   },
                   {
@@ -3775,7 +3743,6 @@
                                               name: 'External page',
                                               value: 'external',
                                             },
-                                            { name: 'Action', value: 'action' },
                                           ],
                                         },
                                       },
@@ -3833,36 +3800,6 @@
                                               value: '_blank',
                                             },
                                           ],
-                                        },
-                                      },
-                                      {
-                                        value: '',
-                                        label: 'Action',
-                                        key: 'actionId',
-                                        type: 'ACTION',
-                                        configuration: {
-                                          apiVersion: 'v1',
-                                          condition: {
-                                            type: 'SHOW',
-                                            option: 'linkType',
-                                            comparator: 'EQ',
-                                            value: 'action',
-                                          },
-                                        },
-                                      },
-                                      {
-                                        value: [],
-                                        label: 'Objects to pass to action',
-                                        key: 'actionModels',
-                                        type: 'ACTION_INPUT_OBJECTS',
-                                        configuration: {
-                                          apiVersion: 'v1',
-                                          condition: {
-                                            type: 'SHOW',
-                                            option: 'linkType',
-                                            comparator: 'EQ',
-                                            value: 'action',
-                                          },
                                         },
                                       },
                                       {
@@ -4093,7 +4030,6 @@
                                               name: 'External page',
                                               value: 'external',
                                             },
-                                            { name: 'Action', value: 'action' },
                                           ],
                                         },
                                       },
@@ -4151,36 +4087,6 @@
                                               value: '_blank',
                                             },
                                           ],
-                                        },
-                                      },
-                                      {
-                                        value: '',
-                                        label: 'Action',
-                                        key: 'actionId',
-                                        type: 'ACTION',
-                                        configuration: {
-                                          apiVersion: 'v1',
-                                          condition: {
-                                            type: 'SHOW',
-                                            option: 'linkType',
-                                            comparator: 'EQ',
-                                            value: 'action',
-                                          },
-                                        },
-                                      },
-                                      {
-                                        value: [],
-                                        label: 'Objects to pass to action',
-                                        key: 'actionModels',
-                                        type: 'ACTION_INPUT_OBJECTS',
-                                        configuration: {
-                                          apiVersion: 'v1',
-                                          condition: {
-                                            type: 'SHOW',
-                                            option: 'linkType',
-                                            comparator: 'EQ',
-                                            value: 'action',
-                                          },
                                         },
                                       },
                                       {
@@ -6856,86 +6762,6 @@
                                             label: 'Button text',
                                             key: 'buttonText',
                                             value: [''],
-                                          },
-                                          {
-                                            type: 'CUSTOM',
-                                            label: 'Link to',
-                                            key: 'linkType',
-                                            value: 'internal',
-                                            configuration: {
-                                              as: 'BUTTONGROUP',
-                                              dataType: 'string',
-                                              allowedInput: [
-                                                {
-                                                  name: 'Internal page',
-                                                  value: 'internal',
-                                                },
-                                                {
-                                                  name: 'External page',
-                                                  value: 'external',
-                                                },
-                                                {
-                                                  name: 'Action',
-                                                  value: 'action',
-                                                },
-                                              ],
-                                            },
-                                          },
-                                          {
-                                            value: '',
-                                            label: 'Page',
-                                            key: 'linkTo',
-                                            type: 'ENDPOINT',
-                                            configuration: {
-                                              condition: {
-                                                type: 'SHOW',
-                                                option: 'linkType',
-                                                comparator: 'EQ',
-                                                value: 'internal',
-                                              },
-                                            },
-                                          },
-                                          {
-                                            value: [''],
-                                            label: 'URL',
-                                            key: 'linkToExternal',
-                                            type: 'VARIABLE',
-                                            configuration: {
-                                              placeholder:
-                                                'Starts with https:// or http://',
-                                              condition: {
-                                                type: 'SHOW',
-                                                option: 'linkType',
-                                                comparator: 'EQ',
-                                                value: 'external',
-                                              },
-                                            },
-                                          },
-                                          {
-                                            value: '_self',
-                                            label: 'Open in',
-                                            key: 'openLinkToExternal',
-                                            type: 'CUSTOM',
-                                            configuration: {
-                                              condition: {
-                                                type: 'SHOW',
-                                                option: 'linkType',
-                                                comparator: 'EQ',
-                                                value: 'external',
-                                              },
-                                              as: 'BUTTONGROUP',
-                                              dataType: 'string',
-                                              allowedInput: [
-                                                {
-                                                  name: 'Current Tab',
-                                                  value: '_self',
-                                                },
-                                                {
-                                                  name: 'New Tab',
-                                                  value: '_blank',
-                                                },
-                                              ],
-                                            },
                                           },
                                           {
                                             value: '',
@@ -11410,90 +11236,6 @@
                                                         label: 'Button text',
                                                         key: 'buttonText',
                                                         value: [''],
-                                                      },
-                                                      {
-                                                        type: 'CUSTOM',
-                                                        label: 'Link to',
-                                                        key: 'linkType',
-                                                        value: 'internal',
-                                                        configuration: {
-                                                          as: 'BUTTONGROUP',
-                                                          dataType: 'string',
-                                                          allowedInput: [
-                                                            {
-                                                              name:
-                                                                'Internal page',
-                                                              value: 'internal',
-                                                            },
-                                                            {
-                                                              name:
-                                                                'External page',
-                                                              value: 'external',
-                                                            },
-                                                            {
-                                                              name: 'Action',
-                                                              value: 'action',
-                                                            },
-                                                          ],
-                                                        },
-                                                      },
-                                                      {
-                                                        value: '',
-                                                        label: 'Page',
-                                                        key: 'linkTo',
-                                                        type: 'ENDPOINT',
-                                                        configuration: {
-                                                          condition: {
-                                                            type: 'SHOW',
-                                                            option: 'linkType',
-                                                            comparator: 'EQ',
-                                                            value: 'internal',
-                                                          },
-                                                        },
-                                                      },
-                                                      {
-                                                        value: [''],
-                                                        label: 'URL',
-                                                        key: 'linkToExternal',
-                                                        type: 'VARIABLE',
-                                                        configuration: {
-                                                          placeholder:
-                                                            'Starts with https:// or http://',
-                                                          condition: {
-                                                            type: 'SHOW',
-                                                            option: 'linkType',
-                                                            comparator: 'EQ',
-                                                            value: 'external',
-                                                          },
-                                                        },
-                                                      },
-                                                      {
-                                                        value: '_self',
-                                                        label: 'Open in',
-                                                        key:
-                                                          'openLinkToExternal',
-                                                        type: 'CUSTOM',
-                                                        configuration: {
-                                                          condition: {
-                                                            type: 'SHOW',
-                                                            option: 'linkType',
-                                                            comparator: 'EQ',
-                                                            value: 'external',
-                                                          },
-                                                          as: 'BUTTONGROUP',
-                                                          dataType: 'string',
-                                                          allowedInput: [
-                                                            {
-                                                              name:
-                                                                'Current Tab',
-                                                              value: '_self',
-                                                            },
-                                                            {
-                                                              name: 'New Tab',
-                                                              value: '_blank',
-                                                            },
-                                                          ],
-                                                        },
                                                       },
                                                       {
                                                         value: '',
