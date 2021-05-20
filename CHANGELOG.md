@@ -1,3 +1,10 @@
+## [1.133.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.133.0...v1.133.1) (2021-05-20)
+
+
+### Bug Fixes
+
+* default ordering in datatable and datalist component ([7cc923e](https://github.com/bettyblocks/material-ui-component-set/commit/7cc923eb28469f8e85247183233fe45461576797))
+
 # [1.133.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.132.0...v1.133.0) (2021-05-19)
 
 
