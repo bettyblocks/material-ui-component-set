@@ -6,7 +6,7 @@
   jsx: (() => {
     const { MobileStepper, Button } = window.MaterialUI.Core;
     const { Icons } = window.MaterialUI;
-    const { env, useText, Children } = B;
+    const { env, useText, Children, useAllQuery, useFilter } = B;
     const {
       activeStep: stepIndex,
       allImages,
@@ -15,7 +15,11 @@
       variant,
       autoplay,
       duration,
+      select,
+      model,
+      filter,
     } = options;
+    const { KeyboardArrowLeft, KeyboardArrowRight } = Icons;
 
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
@@ -25,138 +29,318 @@
     const buttonPrevText = useText(buttonPrev);
     const numRendersRef = useRef(1);
     const [stepLabelData, setStepLabelData] = useState({});
+    const [results, setResults] = useState([]);
 
-    if (autoplay && !isDev) {
-      useEffect(() => {
-        const interval = setInterval(() => {
-          setActiveStep(prevActiveStep => {
-            const nextStep = prevActiveStep + 1;
-            if (nextStep > children.length - 1) {
-              return 0;
-            }
-            return nextStep;
-          });
-        }, duration);
-        return () => clearInterval(interval);
-      }, [activeStep]);
-    }
-
-    const handleNext = () => {
-      setActiveStep(prevActiveStep => {
-        const nextStep = prevActiveStep + 1;
-        if (nextStep > children.length - 1) {
-          return prevActiveStep;
-        }
-        return nextStep;
-      });
-    };
-
-    const handleBack = () => {
-      setActiveStep(prevActiveStep => {
-        const nextStep = prevActiveStep - 1;
-        if (nextStep < 0) {
-          return prevActiveStep;
-        }
-        return nextStep;
-      });
-    };
-
-    useEffect(() => {
-      if (isDev) {
-        setActiveStep(parseInt(stepIndex - 1, 10));
-      }
-    }, [isDev, stepIndex]);
-
-    const { KeyboardArrowLeft, KeyboardArrowRight } = Icons;
-
-    const maxSteps = children.length;
-
-    const overlay = (
-      <MobileStepper
-        steps={maxSteps}
-        position="static"
-        variant="dots"
-        activeStep={activeStep}
-        classes={{ root: classes.overlay, dots: classes.dots }}
-        nextButton={
-          <Button
-            size="small"
-            onClick={handleNext}
-            disabled={activeStep === maxSteps - 1}
-            classes={{ root: classes.arrowRight, label: classes.buttonLabel }}
-          >
-            <KeyboardArrowRight />
-          </Button>
-        }
-        backButton={
-          <Button
-            size="small"
-            onClick={handleBack}
-            disabled={activeStep === 0}
-            classes={{ root: classes.arrowLeft, label: classes.buttonLabel }}
-          >
-            <KeyboardArrowLeft />
-          </Button>
-        }
-      />
-    );
-
-    const bottom = (
-      <MobileStepper
-        steps={maxSteps}
-        position="static"
-        variant="text"
-        activeStep={activeStep}
-        classes={{ root: classes.mobileRoot }}
-        nextButton={
-          <Button
-            size="small"
-            onClick={handleNext}
-            disabled={activeStep === maxSteps - 1}
-            classes={{ root: classes.stepButtonMobile }}
-          >
-            {buttonNextText}
-            <KeyboardArrowRight />
-          </Button>
-        }
-        backButton={
-          <Button
-            size="small"
-            onClick={handleBack}
-            disabled={activeStep === 0}
-            classes={{ root: classes.stepButtonMobile }}
-          >
-            <KeyboardArrowLeft />
-            {buttonPrevText}
-          </Button>
-        }
-      />
-    );
-
-    const carouselVariant = variant === 'mobile' ? bottom : overlay;
-
-    const MobileStepperCmp = (
-      <div className={classes.container}>
-        {React.Children.map(children, (child, index) => (
-          <Children
-            stepLabelData={stepLabelData}
-            setStepLabelData={setStepLabelData}
-            active={index === activeStep || (isDev && allImages)}
-            isFirstRender={numRendersRef.current === 1}
-          >
-            {React.cloneElement(child)}
-          </Children>
-        ))}
-        {carouselVariant}
+    const ImgPlaceholder = () => (
+      <div className={classes.empty}>
+        <div className={classes.placeholderWrapper}>
+          <svg className={classes.placeholder} width={86} height={48}>
+            <title>placeholder</title>
+            <rect x="19.5" y="8.5" rx="2" />
+            <path d="M61.1349945 29.020979v3.9160839H25v-2.5379375l6.5998225-4.9892478 5.6729048 4.2829541 13.346858-11.2981564L61.1349945 29.020979zm-22.5-10.270979c0 1.0416667-.3645833 1.9270833-1.09375 2.65625S35.9266612 22.5 34.8849945 22.5s-1.9270833-.3645833-2.65625-1.09375-1.09375-1.6145833-1.09375-2.65625.3645833-1.9270833 1.09375-2.65625S33.8433278 15 34.8849945 15s1.9270833.3645833 2.65625 1.09375 1.09375 1.6145833 1.09375 2.65625z" />
+          </svg>
+        </div>
       </div>
     );
 
-    const StepperComponent = MobileStepperCmp;
+    const MobileStepperCmp = () => {
+      if (autoplay && !isDev) {
+        useEffect(() => {
+          const interval = setInterval(() => {
+            setActiveStep(prevActiveStep => {
+              const nextStep = prevActiveStep + 1;
+              if (nextStep > children.length - 1) {
+                return 0;
+              }
+              return nextStep;
+            });
+          }, duration);
+          return () => clearInterval(interval);
+        }, [activeStep]);
+      }
 
-    B.defineFunction('NextStep', () => handleNext());
-    B.defineFunction('PreviousStep', () => handleBack());
+      const handleNext = () => {
+        setActiveStep(prevActiveStep => {
+          const nextStep = prevActiveStep + 1;
+          if (nextStep > children.length - 1) {
+            return prevActiveStep;
+          }
+          return nextStep;
+        });
+      };
 
-    numRendersRef.current += 1;
+      const handleBack = () => {
+        setActiveStep(prevActiveStep => {
+          const nextStep = prevActiveStep - 1;
+          if (nextStep < 0) {
+            return prevActiveStep;
+          }
+          return nextStep;
+        });
+      };
+
+      useEffect(() => {
+        if (isDev) {
+          setActiveStep(parseInt(stepIndex - 1, 10));
+        }
+      }, [isDev, stepIndex]);
+
+      const maxSteps = children.length;
+      // setMaxSteps(children.length);
+
+      const overlay = (
+        <MobileStepper
+          steps={maxSteps}
+          position="static"
+          variant="dots"
+          activeStep={activeStep}
+          classes={{ root: classes.overlay, dots: classes.dots }}
+          nextButton={
+            <Button
+              size="small"
+              onClick={handleNext}
+              disabled={activeStep === maxSteps - 1}
+              classes={{ root: classes.arrowRight, label: classes.buttonLabel }}
+            >
+              <KeyboardArrowRight />
+            </Button>
+          }
+          backButton={
+            <Button
+              size="small"
+              onClick={handleBack}
+              disabled={activeStep === 0}
+              classes={{ root: classes.arrowLeft, label: classes.buttonLabel }}
+            >
+              <KeyboardArrowLeft />
+            </Button>
+          }
+        />
+      );
+
+      const bottom = (
+        <MobileStepper
+          steps={maxSteps}
+          position="static"
+          variant="text"
+          activeStep={activeStep}
+          classes={{ root: classes.mobileRoot }}
+          nextButton={
+            <Button
+              size="small"
+              onClick={handleNext}
+              disabled={activeStep === maxSteps - 1}
+              classes={{ root: classes.stepButtonMobile }}
+            >
+              {buttonNextText}
+              <KeyboardArrowRight />
+            </Button>
+          }
+          backButton={
+            <Button
+              size="small"
+              onClick={handleBack}
+              disabled={activeStep === 0}
+              classes={{ root: classes.stepButtonMobile }}
+            >
+              <KeyboardArrowLeft />
+              {buttonPrevText}
+            </Button>
+          }
+        />
+      );
+
+      B.defineFunction('NextStep', () => handleNext());
+      B.defineFunction('PreviousStep', () => handleBack());
+
+      const carouselVariant = variant === 'mobile' ? bottom : overlay;
+      numRendersRef.current += 1;
+
+      return (
+        <div className={classes.container}>
+          {React.Children.map(children, (child, index) => (
+            <Children
+              stepLabelData={stepLabelData}
+              setStepLabelData={setStepLabelData}
+              active={index === activeStep || (isDev && allImages)}
+              isFirstRender={numRendersRef.current === 1}
+            >
+              {React.cloneElement(child)}
+            </Children>
+          ))}
+          {carouselVariant}
+        </div>
+      );
+    };
+
+    const ModelStepperCmp = () => {
+      let maxSteps = 0;
+      const where = useFilter(filter);
+      const { loading, error, data, refetch } =
+        model &&
+        useAllQuery(model, {
+          rawFilter: where,
+          onCompleted(res) {
+            const hasResult = res && res.results && res.results.length > 0;
+            if (hasResult) {
+              B.triggerEvent('onSuccess', res.results);
+            } else {
+              B.triggerEvent('onNoResults');
+            }
+          },
+          onError(err) {
+            B.triggerEvent('onError', err);
+          },
+        });
+      useEffect(() => {
+        if (!isDev && data) {
+          setResults(data.results);
+        }
+      }, [data]);
+
+      const { totalCount } = data || {};
+      if (totalCount) {
+        maxSteps = totalCount;
+      }
+
+      if (autoplay && !isDev) {
+        useEffect(() => {
+          const interval = setInterval(() => {
+            setActiveStep(prevActiveStep => {
+              const nextStep = prevActiveStep + 1;
+              if (nextStep > maxSteps - 1) {
+                return 0;
+              }
+              return nextStep;
+            });
+          }, duration);
+          return () => clearInterval(interval);
+        });
+      }
+
+      if (loading) {
+        return <div className={classes.skeleton} />;
+      }
+
+      if (error) {
+        return <div>Something whent wrong.</div>;
+      }
+
+      B.defineFunction('Refetch', () => {
+        refetch();
+      });
+
+      const handleNext = () => {
+        setActiveStep(prevActiveStep => prevActiveStep + 1);
+      };
+
+      const handleBack = () => {
+        setActiveStep(prevActiveStep => prevActiveStep - 1);
+      };
+
+      const Step = props => {
+        const { active, isFirstRender, item } = props;
+        const StepContent = (
+          <div className={classes.root}>
+            <img src={item.photo.url} alt="carousel" />
+          </div>
+        );
+
+        const StepCmp = <>{active ? StepContent : null}</>;
+
+        useEffect(() => {
+          if (active && !isFirstRender) {
+            B.triggerEvent('OnStepActive');
+          } else if (!active && !isFirstRender) {
+            B.triggerEvent('OnStepInactive');
+          }
+        }, [active, isFirstRender]);
+        return StepCmp;
+      };
+
+      const overlay = (
+        <MobileStepper
+          steps={maxSteps}
+          position="static"
+          variant="dots"
+          activeStep={activeStep}
+          classes={{ root: classes.overlay, dots: classes.dots }}
+          nextButton={
+            <Button
+              size="small"
+              onClick={handleNext}
+              disabled={activeStep === maxSteps - 1}
+              classes={{ root: classes.arrowRight, label: classes.buttonLabel }}
+            >
+              <KeyboardArrowRight />
+            </Button>
+          }
+          backButton={
+            <Button
+              size="small"
+              onClick={handleBack}
+              disabled={activeStep === 0}
+              classes={{ root: classes.arrowLeft, label: classes.buttonLabel }}
+            >
+              <KeyboardArrowLeft />
+            </Button>
+          }
+        />
+      );
+
+      const bottom = (
+        <MobileStepper
+          steps={maxSteps}
+          position="static"
+          variant="text"
+          activeStep={activeStep}
+          classes={{ root: classes.mobileRoot }}
+          nextButton={
+            <Button
+              size="small"
+              onClick={handleNext}
+              disabled={activeStep === maxSteps - 1}
+              classes={{ root: classes.stepButtonMobile }}
+            >
+              {buttonNextText}
+              <KeyboardArrowRight />
+            </Button>
+          }
+          backButton={
+            <Button
+              size="small"
+              onClick={handleBack}
+              disabled={activeStep === 0}
+              classes={{ root: classes.stepButtonMobile }}
+            >
+              <KeyboardArrowLeft />
+              {buttonPrevText}
+            </Button>
+          }
+        />
+      );
+
+      const carouselVariant = variant === 'mobile' ? bottom : overlay;
+
+      return (
+        <div className={classes.container}>
+          {results.length === 0 || isDev ? (
+            <ImgPlaceholder />
+          ) : (
+            results.map((item, index) => (
+              <Step
+                item={item}
+                active={index === activeStep}
+                isFirstRender={numRendersRef.current === 1}
+              />
+            ))
+          )}
+          {carouselVariant}
+        </div>
+      );
+    };
+    const StepperComponent =
+      select === 'custom' ? MobileStepperCmp() : ModelStepperCmp();
 
     return isDev ? (
       <div
@@ -173,7 +357,18 @@
     const style = new Styling(t);
     const isDev = env === 'dev';
     return {
-      root: {},
+      wrapper: {},
+      root: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        '& img': {
+          width: ({ options: { width } }) => (width === '' ? '100%' : width),
+          height: ({ options: { height } }) =>
+            height === '' ? 'auto' : height,
+          objectFit: 'cover',
+        },
+      },
       container: {
         position: 'relative',
         '& .MuiMobileStepper-root': {
@@ -212,7 +407,7 @@
       },
       overlay: {
         justifyContent: 'center !important',
-        marginTop: '-40px',
+        padding: '0px !important',
       },
       stepButtonMobile: {
         pointerEvents: isDev && 'none',
@@ -262,7 +457,66 @@
         ],
       },
       dots: {
+        position: 'absolute',
+        bottom: 15,
         zIndex: '1',
+      },
+      empty: {
+        position: 'relative',
+        width: ({ options: { width } }) => width || '100%',
+        height: ({ options: { height } }) => height || 'inherit',
+        backgroundColor: '#F0F1F5',
+        border: '0.0625rem dashed #AFB5C8',
+        paddingBottom: ({ options: { height } }) =>
+          (!height || height === '100%') && '62.5%',
+      },
+      placeholderWrapper: {
+        position: 'absolute',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+        fontSize: '0.75rem',
+        color: '#262A3A',
+        textTransform: 'uppercase',
+      },
+      placeholder: {
+        maxHeight: '100%',
+
+        '& rect': {
+          stroke: '#AFB5C8',
+          fill: '#F7F8FA',
+          width: 47,
+          height: 30,
+        },
+
+        '& > path': {
+          fill: '#666D85',
+        },
+      },
+      skeleton: {
+        width: '100%',
+        height: '100%',
+        backgroundColor: '#eee',
+        borderRadius: 8,
+        overflow: 'hidden',
+        '&::after': {
+          display: 'block',
+          width: '100%',
+          height: '100%',
+          backgroundImage:
+            'linear-gradient(90deg, #eee 25%, #fff 50%, #eee 75%)',
+          backgroundSize: '200% 100%',
+          backgroundRepeat: 'no-repeat',
+          backgroundPositionX: '150%',
+          borderRadius: `calc(${style.getFont('Body2').Landscape} / 2)`,
+          content: '""',
+          animation: 'loading 1.5s infinite',
+        },
       },
     };
   },

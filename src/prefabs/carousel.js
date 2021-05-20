@@ -7,16 +7,96 @@
       name: 'Carousel',
       options: [
         {
+          type: 'CUSTOM',
+          label: 'Select',
+          key: 'select',
+          value: 'custom',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              {
+                name: 'Model',
+                value: 'model',
+              },
+              {
+                name: 'Custom',
+                value: 'custom',
+              },
+            ],
+          },
+        },
+        {
+          value: '',
+          label: 'Model',
+          key: 'model',
+          type: 'MODEL',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'select',
+              comparator: 'EQ',
+              value: 'model',
+            },
+          },
+        },
+        {
+          label: 'Property',
+          key: 'property',
+          type: 'PROPERTY',
+          value: '',
+          configuration: {
+            dependsOn: 'model',
+            condition: {
+              type: 'SHOW',
+              option: 'select',
+              comparator: 'EQ',
+              value: 'model',
+            },
+          },
+        },
+        {
+          value: {},
+          label: 'Filter',
+          key: 'filter',
+          type: 'FILTER',
+          configuration: {
+            dependsOn: 'model',
+            condition: {
+              type: 'SHOW',
+              option: 'select',
+              comparator: 'EQ',
+              value: 'model',
+            },
+          },
+        },
+        {
           type: 'NUMBER',
           label: 'Show image',
           key: 'activeStep',
           value: '1',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'select',
+              comparator: 'EQ',
+              value: 'custom',
+            },
+          },
         },
         {
           type: 'TOGGLE',
           label: 'Show all images',
           key: 'allImages',
           value: false,
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'select',
+              comparator: 'EQ',
+              value: 'custom',
+            },
+          },
         },
         {
           type: 'TOGGLE',
@@ -35,6 +115,36 @@
               option: 'autoplay',
               comparator: 'EQ',
               value: true,
+            },
+          },
+        },
+        {
+          type: 'SIZE',
+          label: 'Width',
+          key: 'width',
+          value: '',
+          configuration: {
+            as: 'UNIT',
+            condition: {
+              type: 'SHOW',
+              option: 'select',
+              comparator: 'EQ',
+              value: 'custom',
+            },
+          },
+        },
+        {
+          type: 'SIZE',
+          label: 'Height',
+          key: 'height',
+          value: '',
+          configuration: {
+            as: 'UNIT',
+            condition: {
+              type: 'SHOW',
+              option: 'select',
+              comparator: 'EQ',
+              value: 'custom',
             },
           },
         },
