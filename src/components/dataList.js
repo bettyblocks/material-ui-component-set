@@ -152,7 +152,12 @@
           }, {});
         };
 
-        const orderByPath = Array.isArray(orderBy.id) ? orderBy.id : null;
+        let orderByPath = null;
+        if (orderBy && Array.isArray(orderBy.id)) {
+          orderByPath = orderBy.id;
+        } else if (orderBy && orderBy.id) {
+          orderByPath = [orderBy.id];
+        }
         const sort =
           !isDev && orderByPath
             ? orderByPath.reduceRight((acc, property, index) => {
