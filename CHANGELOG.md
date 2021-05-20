@@ -1,3 +1,20 @@
+# [1.133.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.132.0...v1.133.0) (2021-05-19)
+
+
+### Bug Fixes
+
+* fixes appBar buttons ([4a499aa](https://github.com/bettyblocks/material-ui-component-set/commit/4a499aa82bedec3082ac5972550737a56b8e9870))
+* fixes the deleteRecord button to create only 1 action ([57a17fc](https://github.com/bettyblocks/material-ui-component-set/commit/57a17fc65104c4938ba15ddd92bcd5c97c973b2a))
+* removes actions options ([2bdc22c](https://github.com/bettyblocks/material-ui-component-set/commit/2bdc22c7546863ba205e327234358a59b346a84a))
+* removes buttons action option from page templates ([9bb2c8e](https://github.com/bettyblocks/material-ui-component-set/commit/9bb2c8e0cc456f9ff4065e1f73460a05e06528f7))
+* removes linkTo option from buttons ([136bd4b](https://github.com/bettyblocks/material-ui-component-set/commit/136bd4be4d108c401954ce67e9d1364d49716082))
+
+
+### Features
+
+* **2463:** removes linkTo option ([fe3ffaa](https://github.com/bettyblocks/material-ui-component-set/commit/fe3ffaab4ab8bb25a86ec8832bdbae29c1198b96))
+* **ta-2444:** renames Button prefab, removes action from other prefabs ([741f297](https://github.com/bettyblocks/material-ui-component-set/commit/741f29759e15cc755f348d2c00f97797055f3866))
+
 # [1.132.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.131.0...v1.132.0) (2021-05-17)
 
 
