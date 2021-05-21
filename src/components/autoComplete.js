@@ -217,8 +217,8 @@
     }, [searchParam]);
 
     useEffect(() => {
-      B.triggerEvent('OnChange', currentValue);
-    }, [currentValue]);
+      B.triggerEvent('onChange', currentValue);
+    });
 
     const onChange = (_, newValue) => {
       if (!valueProp || !newValue) {

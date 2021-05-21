@@ -108,7 +108,6 @@
           if (data || error) {
             B.triggerEvent('onActionDone');
           }
-
           if (data) {
             B.triggerEvent('onActionSuccess', data.actionb5);
 

@@ -2,7 +2,7 @@
   name: 'ActionButton',
   icon: 'ButtonIcon',
   category: 'BUTTON',
-  keywords: ['Button', 'action', 'action button'],
+  keywords: ['Button'],
   structure: [
     {
       name: 'Button',

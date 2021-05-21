@@ -71,7 +71,7 @@
       } else {
         B.triggerEvent('isFalse', false);
       }
-      B.triggerEvent('OnChange', checked);
+      B.triggerEvent('onChange', checked);
     }, [checked]);
 
     useEffect(() => {

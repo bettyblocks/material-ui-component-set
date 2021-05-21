@@ -251,7 +251,8 @@
               }
               info={
                 <Text size="small" color="grey700">
-                  Select a component that contains a collection of data.
+                  Select a component that contains a collection of data, for
+                  example DataList or DataTable.
                 </Text>
               }
             >
