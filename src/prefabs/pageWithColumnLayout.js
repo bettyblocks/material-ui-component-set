@@ -1,9 +1,13 @@
 (() => ({
   name: 'Column layout configurator',
   icon: 'GridIcon',
+  type: 'page',
   description:
     'Generate your layout, columns and rows by using the column layout component.',
-  type: 'page',
+  detail:
+    'Generate your layout, columns and rows by using the column layout component.',
+  previewImage:
+    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_Column_Layout.jpg',
   category: 'LAYOUT',
   beforeCreate: ({
     close,
@@ -885,7 +889,7 @@
                 {
                   label: 'Square',
                   key: 'square',
-                  value: false,
+                  value: true,
                   type: 'TOGGLE',
                 },
                 {
@@ -963,7 +967,6 @@
                         allowedInput: [
                           { name: 'Internal page', value: 'internal' },
                           { name: 'External page', value: 'external' },
-                          { name: 'Action', value: 'action' },
                         ],
                       },
                     },
@@ -1014,21 +1017,6 @@
                           { name: 'Current Tab', value: '_self' },
                           { name: 'New Tab', value: '_blank' },
                         ],
-                      },
-                    },
-                    {
-                      value: '',
-                      label: 'Action',
-                      key: 'actionId',
-                      type: 'ACTION',
-                      configuration: {
-                        apiVersion: 'v1',
-                        condition: {
-                          type: 'SHOW',
-                          option: 'linkType',
-                          comparator: 'EQ',
-                          value: 'action',
-                        },
                       },
                     },
                     {
@@ -2549,7 +2537,6 @@
                         allowedInput: [
                           { name: 'Internal page', value: 'internal' },
                           { name: 'External page', value: 'external' },
-                          { name: 'Action', value: 'action' },
                         ],
                       },
                     },
@@ -2600,21 +2587,6 @@
                           { name: 'Current Tab', value: '_self' },
                           { name: 'New Tab', value: '_blank' },
                         ],
-                      },
-                    },
-                    {
-                      value: '',
-                      label: 'Action',
-                      key: 'actionId',
-                      type: 'ACTION',
-                      configuration: {
-                        apiVersion: 'v1',
-                        condition: {
-                          type: 'SHOW',
-                          option: 'linkType',
-                          comparator: 'EQ',
-                          value: 'action',
-                        },
                       },
                     },
                     {

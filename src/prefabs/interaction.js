@@ -1,79 +1,11 @@
 (() => ({
-  name: 'Logout Button',
-  icon: 'LogoutIcon',
+  name: 'Interaction',
+  icon: 'ButtonIcon',
   category: 'BUTTON',
-  keywords: ['Form', 'input', 'logout', 'logoutbutton'],
-  beforeCreate: ({
-    prefab,
-    save,
-    close,
-    components: { Header, Content, Field, Footer, Text, EndpointSelector },
-  }) => {
-    const [value, setValue] = React.useState({});
-    const [showValidation, setShowValidation] = React.useState(false);
-
-    function serializeParameters(obj) {
-      return Object.entries(obj).map(([name, entry]) => ({
-        name,
-        value: entry.map(v => JSON.stringify(v)),
-      }));
-    }
-
-    return (
-      <>
-        <Header onClose={close} title="Configure logout button" />
-        <Content>
-          <Field
-            label="Redirect after logout"
-            error={
-              showValidation && (
-                <Text color="#e82600">Selecting a page is required</Text>
-              )
-            }
-          >
-            <EndpointSelector size="large" value={value} onChange={setValue} />
-          </Field>
-        </Content>
-        <Footer
-          onClose={close}
-          onSave={() => {
-            if (!Object.keys(value).length) {
-              setShowValidation(true);
-              return;
-            }
-
-            const newPrefab = { ...prefab };
-            newPrefab.interactions[0].parameters = [
-              {
-                parameter: 'redirectTo',
-                pageId: value.pageId,
-                endpointId: value.id,
-                parameters: serializeParameters(value.params),
-              },
-            ];
-            save(newPrefab);
-          }}
-        />
-      </>
-    );
-  },
-  interactions: [
-    {
-      name: 'logout',
-      sourceEvent: 'Click',
-      type: 'Global',
-      ref: {
-        sourceComponentId: '#logoutButton',
-      },
-      parameters: [],
-    },
-  ],
+  keywords: ['Button', 'interaction'],
   structure: [
     {
       name: 'Button',
-      ref: {
-        id: '#logoutButton',
-      },
       options: [
         {
           label: 'Toggle visibility',
@@ -88,7 +20,7 @@
           type: 'VARIABLE',
           label: 'Button text',
           key: 'buttonText',
-          value: ['Logout'],
+          value: ['Interaction'],
         },
         {
           value: false,
@@ -1373,9 +1305,9 @@
             as: 'BUTTONGROUP',
             dataType: 'string',
             allowedInput: [
-              { name: 'Large', value: 'large' },
-              { name: 'Medium', value: 'medium' },
               { name: 'Small', value: 'small' },
+              { name: 'Medium', value: 'medium' },
+              { name: 'Large', value: 'large' },
             ],
             condition: {
               type: 'HIDE',
@@ -1393,16 +1325,16 @@
           configuration: {
             as: 'BUTTONGROUP',
             dataType: 'string',
+            allowedInput: [
+              { name: 'Start', value: 'start' },
+              { name: 'End', value: 'end' },
+            ],
             condition: {
               type: 'HIDE',
               option: 'icon',
               comparator: 'EQ',
               value: 'None',
             },
-            allowedInput: [
-              { name: 'Start', value: 'start' },
-              { name: 'End', value: 'end' },
-            ],
           },
         },
         {
