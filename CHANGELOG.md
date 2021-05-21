@@ -1,3 +1,69 @@
+# [1.136.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.135.0...v1.136.0) (2021-05-21)
+
+
+### Features
+
+* grid column creator ([ffece78](https://github.com/bettyblocks/material-ui-component-set/commit/ffece7858d99f1f7772f07c6163fabaaa882f98c))
+
+# [1.135.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.134.1...v1.135.0) (2021-05-21)
+
+
+### Features
+
+* config placeholder rows in ddesign time ([44ae7c0](https://github.com/bettyblocks/material-ui-component-set/commit/44ae7c02f0997c941e52b10d8339024b1c64d458))
+
+## [1.134.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.134.0...v1.134.1) (2021-05-20)
+
+
+### Bug Fixes
+
+* added enable interaction on textfield ([b0ea07d](https://github.com/bettyblocks/material-ui-component-set/commit/b0ea07dd3965b0fc2503b5e21727a99752ffaf16))
+
+# [1.134.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.133.1...v1.134.0) (2021-05-20)
+
+
+### Features
+
+* add disable and enable interaction to button ([e7a847d](https://github.com/bettyblocks/material-ui-component-set/commit/e7a847d949b904d5d16ff60df3f37acdccce7e7e))
+
+## [1.133.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.133.0...v1.133.1) (2021-05-20)
+
+
+### Bug Fixes
+
+* default ordering in datatable and datalist component ([7cc923e](https://github.com/bettyblocks/material-ui-component-set/commit/7cc923eb28469f8e85247183233fe45461576797))
+
+# [1.133.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.132.0...v1.133.0) (2021-05-19)
+
+
+### Bug Fixes
+
+* fixes appBar buttons ([4a499aa](https://github.com/bettyblocks/material-ui-component-set/commit/4a499aa82bedec3082ac5972550737a56b8e9870))
+* fixes the deleteRecord button to create only 1 action ([57a17fc](https://github.com/bettyblocks/material-ui-component-set/commit/57a17fc65104c4938ba15ddd92bcd5c97c973b2a))
+* removes actions options ([2bdc22c](https://github.com/bettyblocks/material-ui-component-set/commit/2bdc22c7546863ba205e327234358a59b346a84a))
+* removes buttons action option from page templates ([9bb2c8e](https://github.com/bettyblocks/material-ui-component-set/commit/9bb2c8e0cc456f9ff4065e1f73460a05e06528f7))
+* removes linkTo option from buttons ([136bd4b](https://github.com/bettyblocks/material-ui-component-set/commit/136bd4be4d108c401954ce67e9d1364d49716082))
+
+
+### Features
+
+* **2463:** removes linkTo option ([fe3ffaa](https://github.com/bettyblocks/material-ui-component-set/commit/fe3ffaab4ab8bb25a86ec8832bdbae29c1198b96))
+* **ta-2444:** renames Button prefab, removes action from other prefabs ([741f297](https://github.com/bettyblocks/material-ui-component-set/commit/741f29759e15cc755f348d2c00f97797055f3866))
+
+# [1.132.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.131.0...v1.132.0) (2021-05-17)
+
+
+### Features
+
+* added link option to an image ([3f21b99](https://github.com/bettyblocks/material-ui-component-set/commit/3f21b999f805883b6dced1595c6776518d4c6a79))
+
+# [1.131.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.130.0...v1.131.0) (2021-05-17)
+
+
+### Features
+
+* set file before triggering success ([96c6a19](https://github.com/bettyblocks/material-ui-component-set/commit/96c6a1998731664a109aa8ea317fd11d57d24db5))
+
 # [1.130.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.129.0...v1.130.0) (2021-05-10)
 
 

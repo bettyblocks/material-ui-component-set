@@ -21,6 +21,7 @@
         const [isTyping, setIsTyping] = useState(false);
         const {
           take,
+          placeholderTake,
           filter,
           type,
           model,
@@ -87,6 +88,7 @@
 
         useEffect(() => {
           if (!isDev) return;
+          const placeholders = placeholderTake || rowsPerPage;
           const repeat = () => {
             if (!listRef.current) return;
             const numberOfChildren = listRef.current.children.length;
@@ -99,7 +101,7 @@
                 listRef.current.removeChild(child);
               }
             }
-            for (let i = 0, j = rowsPerPage - 1; i < j; i += 1) {
+            for (let i = 0, j = placeholders - 1; i < j; i += 1) {
               listRef.current.children[0].insertAdjacentHTML(
                 'afterend',
                 listRef.current.children[0].outerHTML,
@@ -152,7 +154,12 @@
           }, {});
         };
 
-        const orderByPath = Array.isArray(orderBy.id) ? orderBy.id : null;
+        let orderByPath = null;
+        if (orderBy && Array.isArray(orderBy.id)) {
+          orderByPath = orderBy.id;
+        } else if (orderBy && orderBy.id) {
+          orderByPath = [orderBy.id];
+        }
         const sort =
           !isDev && orderByPath
             ? orderByPath.reduceRight((acc, property, index) => {

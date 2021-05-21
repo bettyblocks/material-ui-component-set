@@ -1,9 +1,14 @@
 (() => ({
-  name: 'List View',
+  name: 'List view',
   icon: 'DataList',
   type: 'page',
   description:
     'View your datalist in a list view, this also includes a built-in search functionality.',
+  detail:
+    'View your datalist in a list view, this also includes a built-in search functionality.',
+  previewUrl: 'https://preview.betty.app/list-view',
+  previewImage:
+    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_List_View.jpg',
   category: 'LAYOUT',
   beforeCreate: ({
     helpers: { useModelQuery },
@@ -1542,7 +1547,7 @@
               {
                 label: 'Title',
                 key: 'title',
-                value: ['List company'],
+                value: ['List view'],
                 type: 'VARIABLE',
               },
               {
@@ -1709,7 +1714,6 @@
                       allowedInput: [
                         { name: 'Internal page', value: 'internal' },
                         { name: 'External page', value: 'external' },
-                        { name: 'Action', value: 'action' },
                       ],
                     },
                   },
@@ -1760,21 +1764,6 @@
                         { name: 'Current Tab', value: '_self' },
                         { name: 'New Tab', value: '_blank' },
                       ],
-                    },
-                  },
-                  {
-                    value: '',
-                    label: 'Action',
-                    key: 'actionId',
-                    type: 'ACTION',
-                    configuration: {
-                      apiVersion: 'v1',
-                      condition: {
-                        type: 'SHOW',
-                        option: 'linkType',
-                        comparator: 'EQ',
-                        value: 'action',
-                      },
                     },
                   },
                   {
@@ -1988,7 +1977,6 @@
                       allowedInput: [
                         { name: 'Internal page', value: 'internal' },
                         { name: 'External page', value: 'external' },
-                        { name: 'Action', value: 'action' },
                       ],
                     },
                   },
@@ -2039,21 +2027,6 @@
                         { name: 'Current Tab', value: '_self' },
                         { name: 'New Tab', value: '_blank' },
                       ],
-                    },
-                  },
-                  {
-                    value: '',
-                    label: 'Action',
-                    key: 'actionId',
-                    type: 'ACTION',
-                    configuration: {
-                      apiVersion: 'v1',
-                      condition: {
-                        type: 'SHOW',
-                        option: 'linkType',
-                        comparator: 'EQ',
-                        value: 'action',
-                      },
                     },
                   },
                   {
@@ -2810,7 +2783,394 @@
                     descendants: [],
                   },
                   {
+                    name: 'TextField',
+                    ref: {
+                      id: '#searchField',
+                    },
+                    options: [
+                      {
+                        value: { label: ['Search'], value: [] },
+                        label: 'Label',
+                        key: 'customModelAttribute',
+                        type: 'CUSTOM_MODEL_ATTRIBUTE',
+                        configuration: {
+                          allowedTypes: ['string'],
+                        },
+                      },
+                      {
+                        value: false,
+                        label: 'Validation options',
+                        key: 'validationOptions',
+                        type: 'TOGGLE',
+                      },
+                      {
+                        label: 'Validation pattern',
+                        key: 'pattern',
+                        value: '',
+                        type: 'TEXT',
+                        configuration: {
+                          placeholder: '(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}',
+                          condition: {
+                            type: 'SHOW',
+                            option: 'validationOptions',
+                            comparator: 'EQ',
+                            value: true,
+                          },
+                        },
+                      },
+                      {
+                        label: 'Min length',
+                        key: 'minlength',
+                        value: '',
+                        type: 'NUMBER',
+                        configuration: {
+                          condition: {
+                            type: 'SHOW',
+                            option: 'validationOptions',
+                            comparator: 'EQ',
+                            value: true,
+                          },
+                        },
+                      },
+                      {
+                        label: 'Max length',
+                        key: 'maxlength',
+                        value: '',
+                        type: 'NUMBER',
+                        configuration: {
+                          condition: {
+                            type: 'SHOW',
+                            option: 'validationOptions',
+                            comparator: 'EQ',
+                            value: true,
+                          },
+                        },
+                      },
+                      {
+                        value: ['This field is required'],
+                        label: 'Value required message',
+                        key: 'validationValueMissing',
+                        type: 'VARIABLE',
+                        configuration: {
+                          condition: {
+                            type: 'SHOW',
+                            option: 'validationOptions',
+                            comparator: 'EQ',
+                            value: true,
+                          },
+                        },
+                      },
+                      {
+                        value: ['Invalid value'],
+                        label: 'Pattern mismatch message',
+                        key: 'validationPatternMismatch',
+                        type: 'VARIABLE',
+                        configuration: {
+                          condition: {
+                            type: 'SHOW',
+                            option: 'validationOptions',
+                            comparator: 'EQ',
+                            value: true,
+                          },
+                        },
+                      },
+                      {
+                        value: ['This value is too short'],
+                        label: 'Value too short message',
+                        key: 'validationTooShort',
+                        type: 'VARIABLE',
+                        configuration: {
+                          condition: {
+                            type: 'SHOW',
+                            option: 'validationOptions',
+                            comparator: 'EQ',
+                            value: true,
+                          },
+                        },
+                      },
+                      {
+                        value: ['This value is too long'],
+                        label: 'Value too long message',
+                        key: 'validationTooLong',
+                        type: 'VARIABLE',
+                        configuration: {
+                          condition: {
+                            type: 'SHOW',
+                            option: 'validationOptions',
+                            comparator: 'EQ',
+                            value: true,
+                          },
+                        },
+                      },
+                      {
+                        type: 'TOGGLE',
+                        label: 'Disabled',
+                        key: 'disabled',
+                        value: false,
+                      },
+                      {
+                        value: [],
+                        label: 'Placeholder',
+                        key: 'placeholder',
+                        type: 'VARIABLE',
+                      },
+                      {
+                        value: [],
+                        label: 'Helper text',
+                        key: 'helperText',
+                        type: 'VARIABLE',
+                      },
+                      {
+                        label: 'Variant',
+                        key: 'variant',
+                        value: 'outlined',
+                        type: 'CUSTOM',
+                        configuration: {
+                          as: 'BUTTONGROUP',
+                          dataType: 'string',
+                          allowedInput: [
+                            { name: 'Standard', value: 'standard' },
+                            { name: 'Outlined', value: 'outlined' },
+                            { name: 'Filled', value: 'filled' },
+                          ],
+                        },
+                      },
+                      {
+                        type: 'TOGGLE',
+                        label: 'Full width',
+                        key: 'fullWidth',
+                        value: true,
+                      },
+                      {
+                        label: 'Size',
+                        key: 'size',
+                        value: 'medium',
+                        type: 'CUSTOM',
+                        configuration: {
+                          as: 'BUTTONGROUP',
+                          dataType: 'string',
+                          allowedInput: [
+                            { name: 'Medium', value: 'medium' },
+                            { name: 'Small', value: 'small' },
+                          ],
+                        },
+                      },
+                      {
+                        label: 'Margin',
+                        key: 'margin',
+                        value: 'normal',
+                        type: 'CUSTOM',
+                        configuration: {
+                          as: 'BUTTONGROUP',
+                          dataType: 'string',
+                          allowedInput: [
+                            { name: 'None', value: 'none' },
+                            { name: 'Dense', value: 'dense' },
+                            { name: 'Normal', value: 'normal' },
+                          ],
+                        },
+                      },
+                      {
+                        label: 'Adornment',
+                        key: 'adornmentIcon',
+                        value: 'Search',
+                        type: 'CUSTOM',
+                        configuration: iconConfiguration,
+                      },
+                      {
+                        type: 'CUSTOM',
+                        label: 'Position',
+                        key: 'adornmentPosition',
+                        value: 'start',
+                        configuration: {
+                          condition: {
+                            type: 'HIDE',
+                            option: 'adornmentIcon',
+                            comparator: 'EQ',
+                            value: '',
+                          },
+                          as: 'BUTTONGROUP',
+                          dataType: 'string',
+                          allowedInput: [
+                            { name: 'Start', value: 'start' },
+                            { name: 'End', value: 'end' },
+                          ],
+                        },
+                      },
+                      {
+                        value: false,
+                        label: 'Styles',
+                        key: 'styles',
+                        type: 'TOGGLE',
+                      },
+                      {
+                        type: 'COLOR',
+                        label: 'Background color',
+                        key: 'backgroundColor',
+                        value: 'White',
+                        configuration: {
+                          condition: {
+                            type: 'SHOW',
+                            option: 'styles',
+                            comparator: 'EQ',
+                            value: true,
+                          },
+                        },
+                      },
+                      {
+                        type: 'COLOR',
+                        label: 'Border color',
+                        key: 'borderColor',
+                        value: 'Accent1',
+                        configuration: {
+                          condition: {
+                            type: 'SHOW',
+                            option: 'styles',
+                            comparator: 'EQ',
+                            value: true,
+                          },
+                        },
+                      },
+                      {
+                        type: 'COLOR',
+                        label: 'Border color (hover)',
+                        key: 'borderHoverColor',
+                        value: 'Black',
+                        configuration: {
+                          condition: {
+                            type: 'SHOW',
+                            option: 'styles',
+                            comparator: 'EQ',
+                            value: true,
+                          },
+                        },
+                      },
+                      {
+                        type: 'COLOR',
+                        label: 'Border color (focus)',
+                        key: 'borderFocusColor',
+                        value: 'Primary',
+                        configuration: {
+                          condition: {
+                            type: 'SHOW',
+                            option: 'styles',
+                            comparator: 'EQ',
+                            value: true,
+                          },
+                        },
+                      },
+                      {
+                        value: false,
+                        label: 'Hide label',
+                        key: 'hideLabel',
+                        type: 'TOGGLE',
+                        configuration: {
+                          condition: {
+                            type: 'SHOW',
+                            option: 'styles',
+                            comparator: 'EQ',
+                            value: true,
+                          },
+                        },
+                      },
+                      {
+                        type: 'COLOR',
+                        label: 'Label color',
+                        key: 'labelColor',
+                        value: 'Accent3',
+                        configuration: {
+                          condition: {
+                            type: 'SHOW',
+                            option: 'styles',
+                            comparator: 'EQ',
+                            value: true,
+                          },
+                        },
+                      },
+                      {
+                        type: 'COLOR',
+                        label: 'Text color',
+                        key: 'textColor',
+                        value: 'Black',
+                        configuration: {
+                          condition: {
+                            type: 'SHOW',
+                            option: 'styles',
+                            comparator: 'EQ',
+                            value: true,
+                          },
+                        },
+                      },
+                      {
+                        type: 'COLOR',
+                        label: 'Placeholder color',
+                        key: 'placeholderColor',
+                        value: 'Light',
+                        configuration: {
+                          condition: {
+                            type: 'SHOW',
+                            option: 'styles',
+                            comparator: 'EQ',
+                            value: true,
+                          },
+                        },
+                      },
+                      {
+                        type: 'COLOR',
+                        label: 'Helper color',
+                        key: 'helperColor',
+                        value: 'Accent2',
+                        configuration: {
+                          condition: {
+                            type: 'SHOW',
+                            option: 'styles',
+                            comparator: 'EQ',
+                            value: true,
+                          },
+                        },
+                      },
+                      {
+                        type: 'COLOR',
+                        label: 'Error color',
+                        key: 'errorColor',
+                        value: 'Danger',
+                        configuration: {
+                          condition: {
+                            type: 'SHOW',
+                            option: 'styles',
+                            comparator: 'EQ',
+                            value: true,
+                          },
+                        },
+                      },
+                      {
+                        value: false,
+                        label: 'Advanced settings',
+                        key: 'advancedSettings',
+                        type: 'TOGGLE',
+                      },
+                      {
+                        type: 'VARIABLE',
+                        label: 'name attribute',
+                        key: 'nameAttribute',
+                        value: [],
+                        configuration: {
+                          condition: {
+                            type: 'SHOW',
+                            option: 'advancedSettings',
+                            comparator: 'EQ',
+                            value: true,
+                          },
+                        },
+                      },
+                    ],
+                    descendants: [],
+                  },
+                  {
                     name: 'DataList',
+                    ref: {
+                      id: '#dataList',
+                    },
                     options: [
                       {
                         value: '',
@@ -2857,7 +3217,7 @@
                         },
                       },
                       {
-                        value: '',
+                        value: titleProperty || '',
                         label: 'Search on property',
                         key: 'searchProperty',
                         type: 'PROPERTY',
@@ -2866,7 +3226,7 @@
                         },
                       },
                       {
-                        value: '',
+                        value: 'true',
                         label: 'Hide built-in search field',
                         key: 'hideSearch',
                         type: 'TOGGLE',
@@ -2896,6 +3256,12 @@
                         value: '10',
                         label: 'Rows per page (max 50)',
                         key: 'take',
+                        type: 'NUMBER',
+                      },
+                      {
+                        value: '',
+                        label: 'Placeholder rows',
+                        key: 'placeholderTake',
                         type: 'NUMBER',
                       },
                       {
@@ -2953,7 +3319,7 @@
                         },
                       },
                       {
-                        value: ['0rem', '0rem', 'M', '0rem'],
+                        value: ['M', '0rem', 'M', '0rem'],
                         label: 'Outer space',
                         key: 'outerSpacing',
                         type: 'SIZES',
@@ -3613,6 +3979,7 @@
                                                 key: 'imageSource',
                                                 type: 'VARIABLE',
                                                 configuration: {
+                                                  as: 'MULTILINE',
                                                   condition: {
                                                     type: 'SHOW',
                                                     option: 'type',
@@ -3627,6 +3994,7 @@
                                                 key: 'videoSource',
                                                 type: 'VARIABLE',
                                                 configuration: {
+                                                  as: 'MULTILINE',
                                                   condition: {
                                                     type: 'SHOW',
                                                     option: 'type',
@@ -3641,11 +4009,68 @@
                                                 key: 'iframeSource',
                                                 type: 'VARIABLE',
                                                 configuration: {
+                                                  as: 'MULTILINE',
                                                   condition: {
                                                     type: 'SHOW',
                                                     option: 'type',
                                                     comparator: 'EQ',
                                                     value: 'iframe',
+                                                  },
+                                                },
+                                              },
+                                              {
+                                                type: 'CUSTOM',
+                                                label: 'Link to',
+                                                key: 'linkType',
+                                                value: 'internal',
+                                                configuration: {
+                                                  as: 'BUTTONGROUP',
+                                                  dataType: 'string',
+                                                  allowedInput: [
+                                                    {
+                                                      name: 'Internal page',
+                                                      value: 'internal',
+                                                    },
+                                                    {
+                                                      name: 'External page',
+                                                      value: 'external',
+                                                    },
+                                                  ],
+                                                  condition: {
+                                                    type: 'SHOW',
+                                                    option: 'type',
+                                                    comparator: 'EQ',
+                                                    value: 'img',
+                                                  },
+                                                },
+                                              },
+                                              {
+                                                value: '',
+                                                label: 'Page',
+                                                key: 'linkTo',
+                                                type: 'ENDPOINT',
+                                                configuration: {
+                                                  condition: {
+                                                    type: 'SHOW',
+                                                    option: 'linkType',
+                                                    comparator: 'EQ',
+                                                    value: 'internal',
+                                                  },
+                                                },
+                                              },
+                                              {
+                                                value: [''],
+                                                label: 'URL',
+                                                key: 'linkToExternal',
+                                                type: 'VARIABLE',
+                                                configuration: {
+                                                  placeholder:
+                                                    'Starts with https:// or http://',
+                                                  condition: {
+                                                    type: 'SHOW',
+                                                    option: 'linkType',
+                                                    comparator: 'EQ',
+                                                    value: 'external',
                                                   },
                                                 },
                                               },
@@ -4794,10 +5219,6 @@
                                                       name: 'External page',
                                                       value: 'external',
                                                     },
-                                                    {
-                                                      name: 'Action',
-                                                      value: 'action',
-                                                    },
                                                   ],
                                                 },
                                               },
@@ -4855,37 +5276,6 @@
                                                       value: '_blank',
                                                     },
                                                   ],
-                                                },
-                                              },
-                                              {
-                                                value: '',
-                                                label: 'Action',
-                                                key: 'actionId',
-                                                type: 'ACTION',
-                                                configuration: {
-                                                  apiVersion: 'v1',
-                                                  condition: {
-                                                    type: 'SHOW',
-                                                    option: 'linkType',
-                                                    comparator: 'EQ',
-                                                    value: 'action',
-                                                  },
-                                                },
-                                              },
-                                              {
-                                                value: [],
-                                                label:
-                                                  'Objects to pass to action',
-                                                key: 'actionModels',
-                                                type: 'ACTION_INPUT_OBJECTS',
-                                                configuration: {
-                                                  apiVersion: 'v1',
-                                                  condition: {
-                                                    type: 'SHOW',
-                                                    option: 'linkType',
-                                                    comparator: 'EQ',
-                                                    value: 'action',
-                                                  },
                                                 },
                                               },
                                               {
@@ -5275,7 +5665,7 @@
             const newPrefab = { ...prefab };
             if (modelId) {
               const dataList =
-                prefabStructure[1].descendants[0].descendants[0].descendants[2];
+                prefabStructure[1].descendants[0].descendants[0].descendants[3];
               dataList.options[0].value = modelId;
               if (imageProperty.id) {
                 dataList.descendants[0].descendants[0].descendants[0].descendants[0].descendants[0].descendants[0].options[1].value = [
@@ -5309,7 +5699,17 @@
   },
   variables: [],
   actions: [],
-  interactions: [],
+  interactions: [
+    {
+      name: 'SetSearchValue',
+      sourceEvent: 'Change',
+      ref: {
+        targetComponentId: '#dataList',
+        sourceComponentId: '#searchField',
+      },
+      type: 'Custom',
+    },
+  ],
   structure: [
     {
       name: 'Row',
