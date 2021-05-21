@@ -2,6 +2,7 @@
   name: 'Column Layout',
   icon: 'GridIcon',
   category: 'LAYOUT',
+  keywords: ['Layout', 'column', 'columns', 'multiple'],
   beforeCreate: ({
     close,
     components: {
