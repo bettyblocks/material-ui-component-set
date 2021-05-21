@@ -1,8 +1,13 @@
 (() => ({
   name: 'CRUD with slide-out panel',
-  description: 'This page contains a datatable with CRUD sidebar',
   icon: 'DataTable',
-  // type: 'page',
+  type: 'page',
+  description: 'This page contains a datatable with CRUD sidebar',
+  detail: 'This page contains a datatable with CRUD sidebar',
+  previewUrl: 'https://preview.betty.app/crud-with-slide-out',
+  previewImage:
+    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_CRUD_1.jpg',
+
   category: 'DATA',
   beforeCreate: ({
     close,
