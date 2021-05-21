@@ -1,3 +1,10 @@
+# [1.135.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.134.1...v1.135.0) (2021-05-21)
+
+
+### Features
+
+* config placeholder rows in ddesign time ([44ae7c0](https://github.com/bettyblocks/material-ui-component-set/commit/44ae7c02f0997c941e52b10d8339024b1c64d458))
+
 ## [1.134.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.134.0...v1.134.1) (2021-05-20)
 
 
