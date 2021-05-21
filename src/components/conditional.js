@@ -51,7 +51,7 @@
           } else {
             B.triggerEvent('isFalse', false);
           }
-          B.triggerEvent('OnChange', visible);
+          B.triggerEvent('onChange', visible);
         }, [visible]);
 
         B.defineFunction('Hide', () => setVisible(false));

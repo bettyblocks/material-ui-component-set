@@ -121,7 +121,7 @@
     }, []);
 
     useEffect(() => {
-      B.triggerEvent('OnChange', value);
+      B.triggerEvent('onChange', value);
     }, [value]);
 
     useEffect(() => {
