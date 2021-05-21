@@ -217,18 +217,19 @@
     }, [searchParam]);
 
     useEffect(() => {
-      B.triggerEvent('onChange', currentValue);
-    });
+      B.triggerEvent('OnChange', currentValue);
+    }, [currentValue]);
 
     const onChange = (_, newValue) => {
       if (!valueProp || !newValue) {
-        setCurrentValue(newValue);
+        setCurrentValue(newValue || '');
         setCurrentLabel(newValue || '');
         return;
       }
 
-      let newCurrentValue = newValue[valueProp.name] || newValue;
-
+      const isPropDefined = newValue[valueProp.name] !== undefined;
+      const propValue = isPropDefined ? newValue[valueProp.name] || '' : '';
+      let newCurrentValue = isPropDefined ? propValue : newValue;
       if (typeof newValue === 'string') {
         if (currentLabel === newValue) {
           newCurrentValue = currentValue;
@@ -255,8 +256,10 @@
           : [currentValue];
       }
       const currentRecords = results.reduce((acc, cv) => {
-        const searchStr = cv[valueProp.name].toString();
-        const search = cv[valueProp.name];
+        const searchStr = cv[valueProp.name]
+          ? cv[valueProp.name].toString()
+          : '';
+        const search = cv[valueProp.name] || '';
         if (
           currentRecordsKeys.indexOf(searchStr) > -1 ||
           currentRecordsKeys.indexOf(search) > -1
@@ -281,7 +284,10 @@
 
     const renderLabel = option => {
       const optionLabel = option[searchProp.name];
-      return optionLabel !== undefined && optionLabel === ''
+      const isEmptyLabel =
+        optionLabel !== undefined &&
+        (optionLabel === '' || optionLabel === null);
+      return isEmptyLabel
         ? '-- empty --'
         : (optionLabel && optionLabel.toString()) || option;
     };
@@ -379,13 +385,21 @@
       );
     }
 
+    let currentInputValue = searchParam;
+    if (!searchParam && record) {
+      currentInputValue = currentLabel;
+    }
+    if (!currentInputValue) {
+      currentInputValue = '';
+    }
+
     return (
       <Autocomplete
         multiple={multiple}
         freeSolo={freeSolo}
         options={results}
         value={record}
-        inputValue={searchParam || currentLabel}
+        inputValue={currentInputValue}
         getOptionLabel={renderLabel}
         getOptionSelected={(option, value) => value.id === option.id}
         PopoverProps={{

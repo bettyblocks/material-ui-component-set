@@ -3,6 +3,10 @@
   icon: 'NavbarIcon',
   type: 'page',
   description: 'Full height page with an app bar',
+  detail: 'Full height page with an app bar',
+  previewUrl: 'https://preview.betty.app/app-bar',
+  previewImage:
+    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_App_Bar.jpg',
   category: 'LAYOUT',
   structure: [
     {
@@ -27,42 +31,7 @@
                     },
                     {
                       configuration: {
-                        allowedInput: [
-                          {
-                            name: 'Text',
-                            value: 'text',
-                          },
-                          {
-                            name: 'Outlined',
-                            value: 'outlined',
-                          },
-                          {
-                            name: 'Contain',
-                            value: 'contained',
-                          },
-                          {
-                            name: 'Icon',
-                            value: 'icon',
-                          },
-                        ],
                         apiVersion: 'v1',
-                        as: 'BUTTONGROUP',
-                        dataType: 'string',
-                      },
-                      key: 'variant',
-                      label: 'variant',
-                      type: 'CUSTOM',
-                      value: 'text',
-                    },
-                    {
-                      configuration: {
-                        apiVersion: 'v1',
-                        condition: {
-                          comparator: 'EQ',
-                          option: 'variant',
-                          type: 'HIDE',
-                          value: 'icon',
-                        },
                       },
                       key: 'buttonText',
                       label: 'Button text',
@@ -79,10 +48,6 @@
                           {
                             name: 'External page',
                             value: 'external',
-                          },
-                          {
-                            name: 'Action',
-                            value: 'action',
                           },
                         ],
                         apiVersion: 'v1',
@@ -148,57 +113,11 @@
                     {
                       configuration: {
                         apiVersion: 'v1',
-                        condition: {
-                          comparator: 'EQ',
-                          option: 'linkType',
-                          type: 'SHOW',
-                          value: 'action',
-                        },
-                      },
-                      key: 'actionId',
-                      label: 'Action',
-                      type: 'ACTION',
-                      value: '',
-                    },
-                    {
-                      configuration: {
-                        apiVersion: 'v1',
-                        condition: {
-                          comparator: 'EQ',
-                          option: 'variant',
-                          type: 'HIDE',
-                          value: 'icon',
-                        },
                       },
                       key: 'fullWidth',
                       label: 'Full width',
                       type: 'TOGGLE',
                       value: false,
-                    },
-                    {
-                      configuration: {
-                        allowedInput: [
-                          {
-                            name: 'Large',
-                            value: 'large',
-                          },
-                          {
-                            name: 'Medium',
-                            value: 'medium',
-                          },
-                          {
-                            name: 'Small',
-                            value: 'small',
-                          },
-                        ],
-                        apiVersion: 'v1',
-                        as: 'BUTTONGROUP',
-                        dataType: 'string',
-                      },
-                      key: 'size',
-                      label: 'Size',
-                      type: 'CUSTOM',
-                      value: 'medium',
                     },
                     {
                       configuration: {
@@ -1473,6 +1392,37 @@
                       configuration: {
                         allowedInput: [
                           {
+                            name: 'Large',
+                            value: 'large',
+                          },
+                          {
+                            name: 'Medium',
+                            value: 'medium',
+                          },
+                          {
+                            name: 'Small',
+                            value: 'small',
+                          },
+                        ],
+                        apiVersion: 'v1',
+                        as: 'BUTTONGROUP',
+                        dataType: 'string',
+                        condition: {
+                          type: 'HIDE',
+                          option: 'icon',
+                          comparator: 'EQ',
+                          value: 'None',
+                        },
+                      },
+                      key: 'size',
+                      label: 'Icon size',
+                      type: 'CUSTOM',
+                      value: 'medium',
+                    },
+                    {
+                      configuration: {
+                        allowedInput: [
+                          {
                             name: 'Start',
                             value: 'start',
                           },
@@ -1484,10 +1434,10 @@
                         apiVersion: 'v1',
                         as: 'BUTTONGROUP',
                         condition: {
-                          comparator: 'EQ',
-                          option: 'variant',
                           type: 'HIDE',
-                          value: 'icon',
+                          option: 'icon',
+                          comparator: 'EQ',
+                          value: 'None',
                         },
                         dataType: 'string',
                       },
@@ -1499,35 +1449,11 @@
                     {
                       configuration: {
                         apiVersion: 'v1',
-                        condition: {
-                          comparator: 'EQ',
-                          option: 'variant',
-                          type: 'HIDE',
-                          value: 'icon',
-                        },
-                      },
-                      key: 'textColor',
-                      label: 'Text color',
-                      type: 'COLOR',
-                      value: 'White',
-                    },
-                    {
-                      configuration: {
-                        apiVersion: 'v1',
-                      },
-                      key: 'background',
-                      label: 'Color',
-                      type: 'COLOR',
-                      value: 'Primary',
-                    },
-                    {
-                      configuration: {
-                        apiVersion: 'v1',
                       },
                       key: 'outerSpacing',
                       label: 'Outer space',
                       type: 'SIZES',
-                      value: ['0rem', '0rem', '0rem', '0rem'],
+                      value: ['0rem', 'M', '0rem', '0rem'],
                     },
                     {
                       configuration: {
@@ -1678,42 +1604,7 @@
                     },
                     {
                       configuration: {
-                        allowedInput: [
-                          {
-                            name: 'Text',
-                            value: 'text',
-                          },
-                          {
-                            name: 'Outlined',
-                            value: 'outlined',
-                          },
-                          {
-                            name: 'Contain',
-                            value: 'contained',
-                          },
-                          {
-                            name: 'Icon',
-                            value: 'icon',
-                          },
-                        ],
                         apiVersion: 'v1',
-                        as: 'BUTTONGROUP',
-                        dataType: 'string',
-                      },
-                      key: 'variant',
-                      label: 'variant',
-                      type: 'CUSTOM',
-                      value: 'text',
-                    },
-                    {
-                      configuration: {
-                        apiVersion: 'v1',
-                        condition: {
-                          comparator: 'EQ',
-                          option: 'variant',
-                          type: 'HIDE',
-                          value: 'icon',
-                        },
                       },
                       key: 'buttonText',
                       label: 'Button text',
@@ -1730,10 +1621,6 @@
                           {
                             name: 'External page',
                             value: 'external',
-                          },
-                          {
-                            name: 'Action',
-                            value: 'action',
                           },
                         ],
                         apiVersion: 'v1',
@@ -1799,57 +1686,11 @@
                     {
                       configuration: {
                         apiVersion: 'v1',
-                        condition: {
-                          comparator: 'EQ',
-                          option: 'linkType',
-                          type: 'SHOW',
-                          value: 'action',
-                        },
-                      },
-                      key: 'actionId',
-                      label: 'Action',
-                      type: 'ACTION',
-                      value: '',
-                    },
-                    {
-                      configuration: {
-                        apiVersion: 'v1',
-                        condition: {
-                          comparator: 'EQ',
-                          option: 'variant',
-                          type: 'HIDE',
-                          value: 'icon',
-                        },
                       },
                       key: 'fullWidth',
                       label: 'Full width',
                       type: 'TOGGLE',
                       value: false,
-                    },
-                    {
-                      configuration: {
-                        allowedInput: [
-                          {
-                            name: 'Large',
-                            value: 'large',
-                          },
-                          {
-                            name: 'Medium',
-                            value: 'medium',
-                          },
-                          {
-                            name: 'Small',
-                            value: 'small',
-                          },
-                        ],
-                        apiVersion: 'v1',
-                        as: 'BUTTONGROUP',
-                        dataType: 'string',
-                      },
-                      key: 'size',
-                      label: 'Size',
-                      type: 'CUSTOM',
-                      value: 'medium',
                     },
                     {
                       configuration: {
@@ -3124,6 +2965,37 @@
                       configuration: {
                         allowedInput: [
                           {
+                            name: 'Large',
+                            value: 'large',
+                          },
+                          {
+                            name: 'Medium',
+                            value: 'medium',
+                          },
+                          {
+                            name: 'Small',
+                            value: 'small',
+                          },
+                        ],
+                        condition: {
+                          type: 'HIDE',
+                          option: 'icon',
+                          comparator: 'EQ',
+                          value: 'None',
+                        },
+                        apiVersion: 'v1',
+                        as: 'BUTTONGROUP',
+                        dataType: 'string',
+                      },
+                      key: 'size',
+                      label: 'Icon size',
+                      type: 'CUSTOM',
+                      value: 'medium',
+                    },
+                    {
+                      configuration: {
+                        allowedInput: [
+                          {
                             name: 'Start',
                             value: 'start',
                           },
@@ -3135,10 +3007,10 @@
                         apiVersion: 'v1',
                         as: 'BUTTONGROUP',
                         condition: {
-                          comparator: 'EQ',
-                          option: 'variant',
                           type: 'HIDE',
-                          value: 'icon',
+                          option: 'icon',
+                          comparator: 'EQ',
+                          value: 'None',
                         },
                         dataType: 'string',
                       },
@@ -3146,30 +3018,6 @@
                       label: 'Icon position',
                       type: 'CUSTOM',
                       value: 'start',
-                    },
-                    {
-                      configuration: {
-                        apiVersion: 'v1',
-                        condition: {
-                          comparator: 'EQ',
-                          option: 'variant',
-                          type: 'HIDE',
-                          value: 'icon',
-                        },
-                      },
-                      key: 'textColor',
-                      label: 'Text color',
-                      type: 'COLOR',
-                      value: 'White',
-                    },
-                    {
-                      configuration: {
-                        apiVersion: 'v1',
-                      },
-                      key: 'background',
-                      label: 'Color',
-                      type: 'COLOR',
-                      value: 'Primary',
                     },
                     {
                       configuration: {
@@ -3326,7 +3174,7 @@
                   key: 'height',
                   label: 'Height',
                   type: 'SIZE',
-                  value: '60px',
+                  value: '',
                 },
                 {
                   configuration: {
@@ -3566,7 +3414,7 @@
                   key: 'square',
                   label: 'Square',
                   type: 'TOGGLE',
-                  value: false,
+                  value: true,
                 },
                 {
                   configuration: {
