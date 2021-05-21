@@ -23,7 +23,7 @@
           type: 'SIZE',
           label: 'Height',
           key: 'height',
-          value: '60px',
+          value: '',
           configuration: {
             as: 'UNIT',
           },
@@ -215,34 +215,10 @@
               },
             },
             {
-              type: 'CUSTOM',
-              label: 'variant',
-              key: 'variant',
-              value: 'text',
-              configuration: {
-                as: 'BUTTONGROUP',
-                dataType: 'string',
-                allowedInput: [
-                  { name: 'Text', value: 'text' },
-                  { name: 'Outlined', value: 'outlined' },
-                  { name: 'Contain', value: 'contained' },
-                  { name: 'Icon', value: 'icon' },
-                ],
-              },
-            },
-            {
               type: 'VARIABLE',
               label: 'Button text',
               key: 'buttonText',
               value: ['Menu 1'],
-              configuration: {
-                condition: {
-                  type: 'HIDE',
-                  option: 'variant',
-                  comparator: 'EQ',
-                  value: 'icon',
-                },
-              },
             },
             {
               type: 'CUSTOM',
@@ -255,7 +231,6 @@
                 allowedInput: [
                   { name: 'Internal page', value: 'internal' },
                   { name: 'External page', value: 'external' },
-                  { name: 'Action', value: 'action' },
                 ],
               },
             },
@@ -309,48 +284,10 @@
               },
             },
             {
-              value: '',
-              label: 'Action',
-              key: 'actionId',
-              type: 'ACTION',
-              configuration: {
-                apiVersion: 'v1',
-                condition: {
-                  type: 'SHOW',
-                  option: 'linkType',
-                  comparator: 'EQ',
-                  value: 'action',
-                },
-              },
-            },
-            {
               value: false,
               label: 'Full width',
               key: 'fullWidth',
               type: 'TOGGLE',
-              configuration: {
-                condition: {
-                  type: 'HIDE',
-                  option: 'variant',
-                  comparator: 'EQ',
-                  value: 'icon',
-                },
-              },
-            },
-            {
-              value: 'medium',
-              label: 'Size',
-              key: 'size',
-              type: 'CUSTOM',
-              configuration: {
-                as: 'BUTTONGROUP',
-                dataType: 'string',
-                allowedInput: [
-                  { name: 'Large', value: 'large' },
-                  { name: 'Medium', value: 'medium' },
-                  { name: 'Small', value: 'small' },
-                ],
-              },
             },
             {
               label: 'Icon',
@@ -1621,6 +1558,27 @@
               },
             },
             {
+              value: 'small',
+              label: 'Icon size',
+              key: 'size',
+              type: 'CUSTOM',
+              configuration: {
+                as: 'BUTTONGROUP',
+                dataType: 'string',
+                allowedInput: [
+                  { name: 'Large', value: 'large' },
+                  { name: 'Medium', value: 'medium' },
+                  { name: 'Small', value: 'small' },
+                ],
+                condition: {
+                  type: 'HIDE',
+                  option: 'icon',
+                  comparator: 'EQ',
+                  value: 'None',
+                },
+              },
+            },
+            {
               type: 'CUSTOM',
               label: 'Icon position',
               key: 'iconPosition',
@@ -1630,35 +1588,15 @@
                 dataType: 'string',
                 condition: {
                   type: 'HIDE',
-                  option: 'variant',
+                  option: 'icon',
                   comparator: 'EQ',
-                  value: 'icon',
+                  value: 'None',
                 },
                 allowedInput: [
                   { name: 'Start', value: 'start' },
                   { name: 'End', value: 'end' },
                 ],
               },
-            },
-            {
-              type: 'COLOR',
-              label: 'Text color',
-              key: 'textColor',
-              value: 'White',
-              configuration: {
-                condition: {
-                  type: 'HIDE',
-                  option: 'variant',
-                  comparator: 'EQ',
-                  value: 'icon',
-                },
-              },
-            },
-            {
-              type: 'COLOR',
-              label: 'Color',
-              key: 'background',
-              value: 'Primary',
             },
             {
               value: ['0rem', '0rem', '0rem', '0rem'],
@@ -1801,34 +1739,10 @@
               },
             },
             {
-              type: 'CUSTOM',
-              label: 'variant',
-              key: 'variant',
-              value: 'text',
-              configuration: {
-                as: 'BUTTONGROUP',
-                dataType: 'string',
-                allowedInput: [
-                  { name: 'Text', value: 'text' },
-                  { name: 'Outlined', value: 'outlined' },
-                  { name: 'Contain', value: 'contained' },
-                  { name: 'Icon', value: 'icon' },
-                ],
-              },
-            },
-            {
               type: 'VARIABLE',
               label: 'Button text',
               key: 'buttonText',
               value: ['Menu 2'],
-              configuration: {
-                condition: {
-                  type: 'HIDE',
-                  option: 'variant',
-                  comparator: 'EQ',
-                  value: 'icon',
-                },
-              },
             },
             {
               type: 'CUSTOM',
@@ -1841,7 +1755,6 @@
                 allowedInput: [
                   { name: 'Internal page', value: 'internal' },
                   { name: 'External page', value: 'external' },
-                  { name: 'Action', value: 'action' },
                 ],
               },
             },
@@ -1895,48 +1808,10 @@
               },
             },
             {
-              value: '',
-              label: 'Action',
-              key: 'actionId',
-              type: 'ACTION',
-              configuration: {
-                apiVersion: 'v1',
-                condition: {
-                  type: 'SHOW',
-                  option: 'linkType',
-                  comparator: 'EQ',
-                  value: 'action',
-                },
-              },
-            },
-            {
               value: false,
               label: 'Full width',
               key: 'fullWidth',
               type: 'TOGGLE',
-              configuration: {
-                condition: {
-                  type: 'HIDE',
-                  option: 'variant',
-                  comparator: 'EQ',
-                  value: 'icon',
-                },
-              },
-            },
-            {
-              value: 'medium',
-              label: 'Size',
-              key: 'size',
-              type: 'CUSTOM',
-              configuration: {
-                as: 'BUTTONGROUP',
-                dataType: 'string',
-                allowedInput: [
-                  { name: 'Large', value: 'large' },
-                  { name: 'Medium', value: 'medium' },
-                  { name: 'Small', value: 'small' },
-                ],
-              },
             },
             {
               label: 'Icon',
@@ -3207,6 +3082,27 @@
               },
             },
             {
+              value: 'small',
+              label: 'Icon size',
+              key: 'size',
+              type: 'CUSTOM',
+              configuration: {
+                as: 'BUTTONGROUP',
+                dataType: 'string',
+                allowedInput: [
+                  { name: 'Large', value: 'large' },
+                  { name: 'Medium', value: 'medium' },
+                  { name: 'Small', value: 'small' },
+                ],
+                condition: {
+                  type: 'HIDE',
+                  option: 'icon',
+                  comparator: 'EQ',
+                  value: 'None',
+                },
+              },
+            },
+            {
               type: 'CUSTOM',
               label: 'Icon position',
               key: 'iconPosition',
@@ -3216,35 +3112,15 @@
                 dataType: 'string',
                 condition: {
                   type: 'HIDE',
-                  option: 'variant',
+                  option: 'icon',
                   comparator: 'EQ',
-                  value: 'icon',
+                  value: 'None',
                 },
                 allowedInput: [
                   { name: 'Start', value: 'start' },
                   { name: 'End', value: 'end' },
                 ],
               },
-            },
-            {
-              type: 'COLOR',
-              label: 'Text color',
-              key: 'textColor',
-              value: 'White',
-              configuration: {
-                condition: {
-                  type: 'HIDE',
-                  option: 'variant',
-                  comparator: 'EQ',
-                  value: 'icon',
-                },
-              },
-            },
-            {
-              type: 'COLOR',
-              label: 'Color',
-              key: 'background',
-              value: 'Primary',
             },
             {
               value: ['0rem', '0rem', '0rem', '0rem'],

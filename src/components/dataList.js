@@ -21,6 +21,7 @@
         const [isTyping, setIsTyping] = useState(false);
         const {
           take,
+          placeholderTake,
           filter,
           type,
           model,
@@ -87,6 +88,7 @@
 
         useEffect(() => {
           if (!isDev) return;
+          const placeholders = placeholderTake || rowsPerPage;
           const repeat = () => {
             if (!listRef.current) return;
             const numberOfChildren = listRef.current.children.length;
@@ -99,7 +101,7 @@
                 listRef.current.removeChild(child);
               }
             }
-            for (let i = 0, j = rowsPerPage - 1; i < j; i += 1) {
+            for (let i = 0, j = placeholders - 1; i < j; i += 1) {
               listRef.current.children[0].insertAdjacentHTML(
                 'afterend',
                 listRef.current.children[0].outerHTML,
@@ -152,12 +154,17 @@
           }, {});
         };
 
-        const orderByArray = [orderBy].flat();
+        let orderByPath = null;
+        if (orderBy && Array.isArray(orderBy.id)) {
+          orderByPath = orderBy.id;
+        } else if (orderBy && orderBy.id) {
+          orderByPath = [orderBy.id];
+        }
         const sort =
-          !isDev && orderBy
-            ? orderByArray.reduceRight((acc, property, index) => {
+          !isDev && orderByPath
+            ? orderByPath.reduceRight((acc, property, index) => {
                 const prop = getProperty(property);
-                return index === orderByArray.length - 1
+                return index === orderByPath.length - 1
                   ? { [prop.name]: order.toUpperCase() }
                   : { [prop.name]: acc };
               }, {})
@@ -192,7 +199,7 @@
             skip: page ? (page - 1) * rowsPerPage : 0,
             take: rowsPerPage,
             variables: {
-              ...(orderBy ? { sort: { relation: sort } } : {}),
+              ...(orderByPath ? { sort: { relation: sort } } : {}),
             },
             onCompleted(res) {
               const hasResult = res && res.results && res.results.length > 0;

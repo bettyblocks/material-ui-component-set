@@ -32,6 +32,7 @@
     const isDev = env === 'dev';
     const {
       take,
+      placeholderTake,
       size,
       model,
       authProfile,
@@ -44,6 +45,7 @@
       labelNumberOfPages,
       labelSearchOn,
       square,
+      striped,
       elevation,
       variant,
       stickyHeader,
@@ -71,8 +73,14 @@
     const [showPagination, setShowPagination] = useState(false);
     const { label: searchPropertyLabel = '{property}' } =
       getProperty(searchProperty) || {};
+    let orderPropertyPath = null;
+    if (orderProperty && Array.isArray(orderProperty.id)) {
+      orderPropertyPath = orderProperty.id;
+    } else if (orderProperty && orderProperty.id) {
+      orderPropertyPath = [orderProperty.id];
+    }
     const [orderBy, setOrderBy] = React.useState({
-      field: [orderProperty].flat() || null,
+      field: orderPropertyPath,
       order: orderProperty ? sortOrder : null,
     });
     const [results, setResults] = useState([]);
@@ -85,21 +93,22 @@
     const history = isDev ? null : useHistory();
 
     const createSortObject = (fields, order) => {
-      const fieldsArray = [fields].flat();
-      const sort = fieldsArray.reduceRight((acc, property, index) => {
+      const sort = fields.reduceRight((acc, property, index) => {
         const prop = getProperty(property);
-        return index === fieldsArray.length - 1
+        return index === fields.length - 1
           ? { [prop.name]: order.toUpperCase() }
           : { [prop.name]: acc };
       }, {});
 
       return sort;
     };
+
     const [variables, setVariables] = useState(
-      orderProperty
+      orderPropertyPath
         ? {
             sort: {
-              relation: !isDev && createSortObject(orderProperty, sortOrder),
+              relation:
+                !isDev && createSortObject(orderPropertyPath, sortOrder),
             },
           }
         : {},
@@ -241,15 +250,32 @@
 
     useEffect(() => {
       if (!isDev) return;
+      const placeholders = placeholderTake || amountOfRows;
       const repeat = () => {
         if (!repeaterRef.current) return;
         if (repeaterRef.current.previousElementSibling.children.length === 0) {
           return;
         }
         repeaterRef.current.innerHTML = '';
-        for (let i = 0, j = amountOfRows - 1; i < j; i += 1) {
+        for (let i = 0, j = placeholders - 1; i < j; i += 1) {
           repeaterRef.current.innerHTML +=
             repeaterRef.current.previousElementSibling.children[0].outerHTML;
+        }
+        if (striped) {
+          const childrenLenght = children.length;
+          const collection = Array.from(repeaterRef.current.children);
+          collection
+            .filter(item => item.tagName === 'DIV')
+            .forEach((item, index) => {
+              if (
+                ((Math.ceil((index + 1) / childrenLenght) * childrenLenght) /
+                  childrenLenght) %
+                  2 ===
+                0
+              ) {
+                item.classList.add('striped');
+              }
+            });
         }
       };
       const mutationObserver = new MutationObserver(() => {
@@ -659,6 +685,11 @@
           backgroundColor: ({ options: { linkTo, backgroundRowHover } }) =>
             linkTo && [style.getColor(backgroundRowHover), '!important'],
         },
+        '&:nth-child(odd)': {
+          backgroundColor: ({ options: { striped, stripeColor } }) => [
+            striped ? style.getColor(stripeColor) : 'transparent',
+          ],
+        },
       },
       searchField: {
         marginLeft: ['auto', '!important'],
@@ -674,6 +705,12 @@
       },
       autoRepeat: {
         opacity: 0.5,
+        '& .striped': {
+          background: ({ options: { striped, stripeColor } }) => [
+            striped ? style.getColor(stripeColor) : 'transparent',
+            '!important',
+          ],
+        },
       },
       skeleton: {
         height: `calc(${style.getFont('Body1').Mobile} * 1.2)`,

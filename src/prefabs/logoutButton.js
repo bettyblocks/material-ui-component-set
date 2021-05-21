@@ -85,157 +85,16 @@
           },
         },
         {
-          type: 'CUSTOM',
-          label: 'variant',
-          key: 'variant',
-          value: 'contained',
-          configuration: {
-            as: 'BUTTONGROUP',
-            dataType: 'string',
-            allowedInput: [
-              { name: 'Text', value: 'text' },
-              { name: 'Outlined', value: 'outlined' },
-              { name: 'Contain', value: 'contained' },
-              { name: 'Icon', value: 'icon' },
-            ],
-          },
-        },
-        {
           type: 'VARIABLE',
           label: 'Button text',
           key: 'buttonText',
           value: ['Logout'],
-          configuration: {
-            condition: {
-              type: 'HIDE',
-              option: 'variant',
-              comparator: 'EQ',
-              value: 'icon',
-            },
-          },
-        },
-        {
-          type: 'CUSTOM',
-          label: 'Link to',
-          key: 'linkType',
-          value: 'internal',
-          configuration: {
-            as: 'BUTTONGROUP',
-            dataType: 'string',
-            allowedInput: [
-              { name: 'Internal page', value: 'internal' },
-              { name: 'External page', value: 'external' },
-              { name: 'Action', value: 'action' },
-            ],
-          },
-        },
-        {
-          value: '',
-          label: 'Page',
-          key: 'linkTo',
-          type: 'ENDPOINT',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'linkType',
-              comparator: 'EQ',
-              value: 'internal',
-            },
-          },
-        },
-        {
-          value: [''],
-          label: 'URL',
-          key: 'linkToExternal',
-          type: 'VARIABLE',
-          configuration: {
-            placeholder: 'Starts with https:// or http://',
-            condition: {
-              type: 'SHOW',
-              option: 'linkType',
-              comparator: 'EQ',
-              value: 'external',
-            },
-          },
-        },
-        {
-          value: '_self',
-          label: 'Open in',
-          key: 'openLinkToExternal',
-          type: 'CUSTOM',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'linkType',
-              comparator: 'EQ',
-              value: 'external',
-            },
-            as: 'BUTTONGROUP',
-            dataType: 'string',
-            allowedInput: [
-              { name: 'Current Tab', value: '_self' },
-              { name: 'New Tab', value: '_blank' },
-            ],
-          },
-        },
-        {
-          value: '',
-          label: 'Action',
-          key: 'actionId',
-          type: 'ACTION',
-          configuration: {
-            apiVersion: 'v1',
-            condition: {
-              type: 'SHOW',
-              option: 'linkType',
-              comparator: 'EQ',
-              value: 'action',
-            },
-          },
-        },
-        {
-          value: [],
-          label: 'Objects to pass to action',
-          key: 'actionModels',
-          type: 'ACTION_INPUT_OBJECTS',
-          configuration: {
-            apiVersion: 'v1',
-            condition: {
-              type: 'SHOW',
-              option: 'linkType',
-              comparator: 'EQ',
-              value: 'action',
-            },
-          },
         },
         {
           value: false,
           label: 'Full width',
           key: 'fullWidth',
           type: 'TOGGLE',
-          configuration: {
-            condition: {
-              type: 'HIDE',
-              option: 'variant',
-              comparator: 'EQ',
-              value: 'icon',
-            },
-          },
-        },
-        {
-          value: 'medium',
-          label: 'Size',
-          key: 'size',
-          type: 'CUSTOM',
-          configuration: {
-            as: 'BUTTONGROUP',
-            dataType: 'string',
-            allowedInput: [
-              { name: 'Large', value: 'large' },
-              { name: 'Medium', value: 'medium' },
-              { name: 'Small', value: 'small' },
-            ],
-          },
         },
         {
           label: 'Icon',
@@ -1506,6 +1365,27 @@
           },
         },
         {
+          value: 'small',
+          label: 'Icon size',
+          key: 'size',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Large', value: 'large' },
+              { name: 'Medium', value: 'medium' },
+              { name: 'Small', value: 'small' },
+            ],
+            condition: {
+              type: 'HIDE',
+              option: 'icon',
+              comparator: 'EQ',
+              value: 'None',
+            },
+          },
+        },
+        {
           type: 'CUSTOM',
           label: 'Icon position',
           key: 'iconPosition',
@@ -1515,9 +1395,9 @@
             dataType: 'string',
             condition: {
               type: 'HIDE',
-              option: 'variant',
+              option: 'icon',
               comparator: 'EQ',
-              value: 'icon',
+              value: 'None',
             },
             allowedInput: [
               { name: 'Start', value: 'start' },
@@ -1526,27 +1406,7 @@
           },
         },
         {
-          type: 'COLOR',
-          label: 'Text color',
-          key: 'textColor',
-          value: 'White',
-          configuration: {
-            condition: {
-              type: 'HIDE',
-              option: 'variant',
-              comparator: 'EQ',
-              value: 'icon',
-            },
-          },
-        },
-        {
-          type: 'COLOR',
-          label: 'Color',
-          key: 'background',
-          value: 'Primary',
-        },
-        {
-          value: ['0rem', 'M', '0rem', '0rem'],
+          value: ['0rem', '0rem', '0rem', '0rem'],
           label: 'Outer space',
           key: 'outerSpacing',
           type: 'SIZES',
