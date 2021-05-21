@@ -201,13 +201,12 @@
 
     const iconButtonOptions = {
       edge: adornmentPosition,
-      tabIndex: -1,
+      tabIndex: isDev && -1,
     };
     if (isPasswordType) {
       iconButtonOptions.ariaLabel = 'toggle password visibility';
       iconButtonOptions.onClick = handleClickShowPassword;
       iconButtonOptions.onMouseDown = handleMouseDownPassword;
-      iconButtonOptions.tabIndex = 0;
     }
 
     useEffect(() => {
@@ -237,7 +236,7 @@
           type={(isDev && type === 'number') || showPassword ? 'text' : type}
           multiline={multiline}
           rows={rows}
-          label={labelText === '' ? undefined : labelText}
+          label={labelText}
           placeholder={placeholderText}
           onKeyDown={onKeyDown}
           onChange={changeHandler}
