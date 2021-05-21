@@ -1,5 +1,5 @@
 (() => ({
-  name: 'ActionButton',
+  name: 'Action Button',
   icon: 'ButtonIcon',
   category: 'BUTTON',
   keywords: ['Button', 'action', 'action button'],
@@ -20,7 +20,7 @@
           type: 'VARIABLE',
           label: 'Button text',
           key: 'buttonText',
-          value: ['Action Button'],
+          value: ['Button'],
         },
         {
           value: '',
@@ -29,12 +29,6 @@
           type: 'ACTION',
           configuration: {
             apiVersion: 'v1',
-            condition: {
-              type: 'SHOW',
-              option: 'linkType',
-              comparator: 'EQ',
-              value: 'action',
-            },
           },
         },
         {
