@@ -222,95 +222,23 @@
               },
             },
             {
-              type: 'CUSTOM',
-              label: 'Grid screen size',
-              key: 'screenSize',
-              value: 'XL',
+              type: 'SIZE',
+              label: 'Min Width',
+              key: 'width',
+              value: '200px',
               configuration: {
-                as: 'BUTTONGROUP',
-                dataType: 'string',
-                allowedInput: [
-                  { name: 'Full', value: 'Full' },
-                  { name: 'XL', value: 'XL' },
-                  { name: 'L', value: 'L' },
-                  { name: 'M', value: 'M' },
-                  { name: 'S', value: 'S' },
-                ],
-              },
-            },
-            {
-              type: 'NUMBER',
-              label: 'Large screen columns',
-              key: 'fullSize',
-              value: 8,
-              configuration: {
+                as: 'UNIT',
                 condition: {
                   type: 'SHOW',
-                  option: 'screenSize',
+                  option: 'type',
                   comparator: 'EQ',
-                  value: 'Full',
-                },
-              },
-            },
-            {
-              type: 'NUMBER',
-              label: 'Desktop columns',
-              key: 'xlSize',
-              value: 6,
-              configuration: {
-                condition: {
-                  type: 'SHOW',
-                  option: 'screenSize',
-                  comparator: 'EQ',
-                  value: 'XL',
-                },
-              },
-            },
-            {
-              type: 'NUMBER',
-              label: 'Laptop columns',
-              key: 'lSize',
-              value: 4,
-              configuration: {
-                condition: {
-                  type: 'SHOW',
-                  option: 'screenSize',
-                  comparator: 'EQ',
-                  value: 'L',
-                },
-              },
-            },
-            {
-              type: 'NUMBER',
-              label: 'Tablet portrait columns',
-              key: 'mSize',
-              value: 2,
-              configuration: {
-                condition: {
-                  type: 'SHOW',
-                  option: 'screenSize',
-                  comparator: 'EQ',
-                  value: 'M',
-                },
-              },
-            },
-            {
-              type: 'NUMBER',
-              label: 'Mobile columns',
-              key: 'sSize',
-              value: 1,
-              configuration: {
-                condition: {
-                  type: 'SHOW',
-                  option: 'screenSize',
-                  comparator: 'EQ',
-                  value: 'S',
+                  value: 'grid',
                 },
               },
             },
             {
               type: 'SIZE',
-              label: 'Gap size',
+              label: 'Gap',
               key: 'gap',
               value: '1rem',
               configuration: {
