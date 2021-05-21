@@ -21,6 +21,7 @@
         const [isTyping, setIsTyping] = useState(false);
         const {
           take,
+          placeholderTake,
           filter,
           type,
           model,
@@ -87,6 +88,7 @@
 
         useEffect(() => {
           if (!isDev) return;
+          const placeholders = placeholderTake || rowsPerPage;
           const repeat = () => {
             if (!listRef.current) return;
             const numberOfChildren = listRef.current.children.length;
@@ -99,7 +101,7 @@
                 listRef.current.removeChild(child);
               }
             }
-            for (let i = 0, j = rowsPerPage - 1; i < j; i += 1) {
+            for (let i = 0, j = placeholders - 1; i < j; i += 1) {
               listRef.current.children[0].insertAdjacentHTML(
                 'afterend',
                 listRef.current.children[0].outerHTML,
@@ -152,7 +154,12 @@
           }, {});
         };
 
-        const orderByPath = Array.isArray(orderBy.id) ? orderBy.id : null;
+        let orderByPath = null;
+        if (orderBy && Array.isArray(orderBy.id)) {
+          orderByPath = orderBy.id;
+        } else if (orderBy && orderBy.id) {
+          orderByPath = [orderBy.id];
+        }
         const sort =
           !isDev && orderByPath
             ? orderByPath.reduceRight((acc, property, index) => {
@@ -474,6 +481,12 @@
         marginLeft: ({ options: { outerSpacing } }) =>
           getSpacing(outerSpacing[3]),
       },
+      grid: {
+        display: 'grid',
+        gridTemplateColumns: ({ options: { sSize } }) =>
+          `repeat(${sSize}, 1fr)`,
+        gridGap: ({ options: { gap } }) => `${gap}`,
+      },
       inline: {
         display: 'inline-flex',
       },
@@ -569,6 +582,12 @@
           marginLeft: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[3], 'Portrait'),
         },
+        grid: {
+          display: 'grid',
+          gridTemplateColumns: ({ options: { mSize } }) =>
+            `repeat(${mSize}, 1fr)`,
+          gridGap: ({ options: { gap } }) => `${gap}`,
+        },
       },
       [`@media ${mediaMinWidth(960)}`]: {
         root: {
@@ -580,6 +599,12 @@
             getSpacing(outerSpacing[2], 'Landscape'),
           marginLeft: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[3], 'Landscape'),
+        },
+        grid: {
+          display: 'grid',
+          gridTemplateColumns: ({ options: { lSize } }) =>
+            `repeat(${lSize}, 1fr)`,
+          gridGap: ({ options: { gap } }) => `${gap}`,
         },
       },
       [`@media ${mediaMinWidth(1280)}`]: {
@@ -593,12 +618,20 @@
           marginLeft: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[3], 'Desktop'),
         },
+        grid: {
+          display: 'grid',
+          gridTemplateColumns: ({ options: { xlSize } }) =>
+            `repeat(${xlSize}, 1fr)`,
+          gridGap: ({ options: { gap } }) => `${gap}`,
+        },
       },
-      grid: {
-        display: 'grid',
-        gridTemplateColumns: ({ options: { width } }) =>
-          `repeat(auto-fit, minmax(${width}, 1fr))`,
-        gridGap: ({ options: { gap } }) => `${gap}`,
+      [`@media ${mediaMinWidth(1600)}`]: {
+        grid: {
+          display: 'grid',
+          gridTemplateColumns: ({ options: { fullSize } }) =>
+            `repeat(${fullSize}, 1fr)`,
+          gridGap: ({ options: { gap } }) => `${gap}`,
+        },
       },
       empty: {
         display: 'flex',

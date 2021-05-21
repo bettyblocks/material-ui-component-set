@@ -317,6 +317,12 @@
           },
         },
         {
+          value: '',
+          label: 'Placeholder rows',
+          key: 'placeholderTake',
+          type: 'NUMBER',
+        },
+        {
           type: 'VARIABLE',
           label: 'Rows per page text',
           key: 'labelRowsPerPage',
