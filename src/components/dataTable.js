@@ -32,6 +32,7 @@
     const isDev = env === 'dev';
     const {
       take,
+      placeholderTake,
       size,
       model,
       authProfile,
@@ -72,9 +73,12 @@
     const [showPagination, setShowPagination] = useState(false);
     const { label: searchPropertyLabel = '{property}' } =
       getProperty(searchProperty) || {};
-    const orderPropertyPath = Array.isArray(orderProperty.id)
-      ? orderProperty.id
-      : null;
+    let orderPropertyPath = null;
+    if (orderProperty && Array.isArray(orderProperty.id)) {
+      orderPropertyPath = orderProperty.id;
+    } else if (orderProperty && orderProperty.id) {
+      orderPropertyPath = [orderProperty.id];
+    }
     const [orderBy, setOrderBy] = React.useState({
       field: orderPropertyPath,
       order: orderProperty ? sortOrder : null,
@@ -246,13 +250,14 @@
 
     useEffect(() => {
       if (!isDev) return;
+      const placeholders = placeholderTake || amountOfRows;
       const repeat = () => {
         if (!repeaterRef.current) return;
         if (repeaterRef.current.previousElementSibling.children.length === 0) {
           return;
         }
         repeaterRef.current.innerHTML = '';
-        for (let i = 0, j = amountOfRows - 1; i < j; i += 1) {
+        for (let i = 0, j = placeholders - 1; i < j; i += 1) {
           repeaterRef.current.innerHTML +=
             repeaterRef.current.previousElementSibling.children[0].outerHTML;
         }

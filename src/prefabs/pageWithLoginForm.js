@@ -1,8 +1,12 @@
 (() => ({
   name: 'Login form with image',
   icon: 'LoginFormIcon',
-  description: 'Page with login form and side image',
   type: 'page',
+  description: 'Page with login form and side image',
+  detail: 'Page with login form and side image',
+  previewUrl: 'https://preview.betty.app/login',
+  previewImage:
+    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_Login.jpg',
   category: 'FORM',
   beforeCreate: ({
     prefab,
@@ -7917,10 +7921,6 @@
                                                         name: 'External page',
                                                         value: 'external',
                                                       },
-                                                      {
-                                                        name: 'Action',
-                                                        value: 'action',
-                                                      },
                                                     ],
                                                   },
                                                 },
@@ -7978,37 +7978,6 @@
                                                         value: '_blank',
                                                       },
                                                     ],
-                                                  },
-                                                },
-                                                {
-                                                  value: '',
-                                                  label: 'Action',
-                                                  key: 'actionId',
-                                                  type: 'ACTION',
-                                                  configuration: {
-                                                    apiVersion: 'v1',
-                                                    condition: {
-                                                      type: 'SHOW',
-                                                      option: 'linkType',
-                                                      comparator: 'EQ',
-                                                      value: 'action',
-                                                    },
-                                                  },
-                                                },
-                                                {
-                                                  value: [],
-                                                  label:
-                                                    'Objects to pass to action',
-                                                  key: 'actionModels',
-                                                  type: 'ACTION_INPUT_OBJECTS',
-                                                  configuration: {
-                                                    apiVersion: 'v1',
-                                                    condition: {
-                                                      type: 'SHOW',
-                                                      option: 'linkType',
-                                                      comparator: 'EQ',
-                                                      value: 'action',
-                                                    },
                                                   },
                                                 },
                                                 {
@@ -9566,10 +9535,6 @@
                                                         name: 'External page',
                                                         value: 'external',
                                                       },
-                                                      {
-                                                        name: 'Action',
-                                                        value: 'action',
-                                                      },
                                                     ],
                                                   },
                                                 },
@@ -9627,37 +9592,6 @@
                                                         value: '_blank',
                                                       },
                                                     ],
-                                                  },
-                                                },
-                                                {
-                                                  value: '',
-                                                  label: 'Action',
-                                                  key: 'actionId',
-                                                  type: 'ACTION',
-                                                  configuration: {
-                                                    apiVersion: 'v1',
-                                                    condition: {
-                                                      type: 'SHOW',
-                                                      option: 'linkType',
-                                                      comparator: 'EQ',
-                                                      value: 'action',
-                                                    },
-                                                  },
-                                                },
-                                                {
-                                                  value: [],
-                                                  label:
-                                                    'Objects to pass to action',
-                                                  key: 'actionModels',
-                                                  type: 'ACTION_INPUT_OBJECTS',
-                                                  configuration: {
-                                                    apiVersion: 'v1',
-                                                    condition: {
-                                                      type: 'SHOW',
-                                                      option: 'linkType',
-                                                      comparator: 'EQ',
-                                                      value: 'action',
-                                                    },
                                                   },
                                                 },
                                                 {
