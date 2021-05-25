@@ -13436,7 +13436,7 @@
                             },
                           },
                           {
-                            value: '100vh',
+                            value: '100%',
                             label: 'Height',
                             key: 'columnHeight',
                             type: 'TEXT',
