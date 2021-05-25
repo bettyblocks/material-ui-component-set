@@ -1,3 +1,10 @@
+## [1.137.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.137.0...v1.137.1) (2021-05-25)
+
+
+### Bug Fixes
+
+* fixes action button not triggering action ([d6e458e](https://github.com/bettyblocks/material-ui-component-set/commit/d6e458ed231e4ffa5124cd6191e5b2c04dd9a146))
+
 # [1.137.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.136.0...v1.137.0) (2021-05-21)
 
 
