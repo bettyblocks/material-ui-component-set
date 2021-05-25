@@ -32,6 +32,8 @@
           order,
           orderBy,
           pagination,
+          showSeparator,
+          separatorValue,
         } = options;
 
         const rowsPerPage = parseInt(take, 10) || 50;
@@ -71,6 +73,7 @@
                 {isPristine
                   ? 'Drag a component in the data list to display the data'
                   : children}
+                {!isPristine && showSeparator && separatorValue}
               </div>
             </div>
 
@@ -279,7 +282,7 @@
         };
 
         const Looper = results => {
-          const rows = results.map(item => (
+          const rows = results.map((item, index) => (
             <ModelProvider key={item.id} value={item} id={model}>
               <InteractionScope model={model}>
                 {context => (
@@ -289,6 +292,7 @@
                     onClick={event => handleClick(event, context)}
                   >
                     {children}
+                    {showSeparator && results[index + 1] && separatorValue}
                   </div>
                 )}
               </InteractionScope>

@@ -124,6 +124,34 @@
           },
         },
         {
+          value: '',
+          label: 'Add separator',
+          key: 'showSeparator',
+          type: 'TOGGLE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'type',
+              comparator: 'EQ',
+              value: 'inline',
+            },
+          },
+        },
+        {
+          label: 'Separator',
+          key: 'separatorValue',
+          value: '',
+          type: 'TEXT',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'showSeparator',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
           type: 'SIZE',
           label: 'Min Width',
           key: 'width',
