@@ -7,7 +7,6 @@
   previewUrl: 'https://preview.betty.app/crud-with-slide-out',
   previewImage:
     'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_CRUD_1.jpg',
-
   category: 'DATA',
   beforeCreate: ({
     close,
@@ -9684,10 +9683,6 @@
                                                   name: 'External page',
                                                   value: 'external',
                                                 },
-                                                {
-                                                  name: 'Action',
-                                                  value: 'action',
-                                                },
                                               ],
                                             },
                                           },
@@ -9748,40 +9743,18 @@
                                             },
                                           },
                                           {
-                                            value: '',
-                                            label: 'Action',
-                                            key: 'actionId',
-                                            type: 'ACTION',
-                                            configuration: {
-                                              apiVersion: 'v1',
-                                              condition: {
-                                                type: 'SHOW',
-                                                option: 'linkType',
-                                                comparator: 'EQ',
-                                                value: 'action',
-                                              },
-                                            },
-                                          },
-                                          {
-                                            value: [],
-                                            label: 'Objects to pass to action',
-                                            key: 'actionModels',
-                                            type: 'ACTION_INPUT_OBJECTS',
-                                            configuration: {
-                                              apiVersion: 'v1',
-                                              condition: {
-                                                type: 'SHOW',
-                                                option: 'linkType',
-                                                comparator: 'EQ',
-                                                value: 'action',
-                                              },
-                                            },
-                                          },
-                                          {
                                             value: false,
                                             label: 'Full width',
                                             key: 'fullWidth',
                                             type: 'TOGGLE',
+                                            configuration: {
+                                              condition: {
+                                                type: 'HIDE',
+                                                option: 'variant',
+                                                comparator: 'EQ',
+                                                value: 'icon',
+                                              },
+                                            },
                                           },
                                           {
                                             label: 'Icon',
@@ -9828,6 +9801,12 @@
                                             configuration: {
                                               as: 'BUTTONGROUP',
                                               dataType: 'string',
+                                              condition: {
+                                                type: 'HIDE',
+                                                option: 'icon',
+                                                comparator: 'EQ',
+                                                value: 'None',
+                                              },
                                               allowedInput: [
                                                 {
                                                   name: 'Start',
@@ -9835,12 +9814,6 @@
                                                 },
                                                 { name: 'End', value: 'end' },
                                               ],
-                                              condition: {
-                                                type: 'HIDE',
-                                                option: 'icon',
-                                                comparator: 'EQ',
-                                                value: 'None',
-                                              },
                                             },
                                           },
                                           {
@@ -10548,7 +10521,6 @@
                                           name: 'External page',
                                           value: 'external',
                                         },
-                                        { name: 'Action', value: 'action' },
                                       ],
                                     },
                                   },
@@ -10603,40 +10575,18 @@
                                     },
                                   },
                                   {
-                                    value: '',
-                                    label: 'Action',
-                                    key: 'actionId',
-                                    type: 'ACTION',
-                                    configuration: {
-                                      apiVersion: 'v1',
-                                      condition: {
-                                        type: 'SHOW',
-                                        option: 'linkType',
-                                        comparator: 'EQ',
-                                        value: 'action',
-                                      },
-                                    },
-                                  },
-                                  {
-                                    value: [],
-                                    label: 'Objects to pass to action',
-                                    key: 'actionModels',
-                                    type: 'ACTION_INPUT_OBJECTS',
-                                    configuration: {
-                                      apiVersion: 'v1',
-                                      condition: {
-                                        type: 'SHOW',
-                                        option: 'linkType',
-                                        comparator: 'EQ',
-                                        value: 'action',
-                                      },
-                                    },
-                                  },
-                                  {
                                     value: false,
                                     label: 'Full width',
                                     key: 'fullWidth',
                                     type: 'TOGGLE',
+                                    configuration: {
+                                      condition: {
+                                        type: 'HIDE',
+                                        option: 'variant',
+                                        comparator: 'EQ',
+                                        value: 'icon',
+                                      },
+                                    },
                                   },
                                   {
                                     label: 'Icon',
@@ -10674,16 +10624,16 @@
                                     configuration: {
                                       as: 'BUTTONGROUP',
                                       dataType: 'string',
-                                      allowedInput: [
-                                        { name: 'Start', value: 'start' },
-                                        { name: 'End', value: 'end' },
-                                      ],
                                       condition: {
                                         type: 'HIDE',
                                         option: 'icon',
                                         comparator: 'EQ',
                                         value: 'None',
                                       },
+                                      allowedInput: [
+                                        { name: 'Start', value: 'start' },
+                                        { name: 'End', value: 'end' },
+                                      ],
                                     },
                                   },
                                   {
@@ -11911,10 +11861,6 @@
                                                   name: 'External page',
                                                   value: 'external',
                                                 },
-                                                {
-                                                  name: 'Action',
-                                                  value: 'action',
-                                                },
                                               ],
                                             },
                                           },
@@ -11975,40 +11921,18 @@
                                             },
                                           },
                                           {
-                                            value: '',
-                                            label: 'Action',
-                                            key: 'actionId',
-                                            type: 'ACTION',
-                                            configuration: {
-                                              apiVersion: 'v1',
-                                              condition: {
-                                                type: 'SHOW',
-                                                option: 'linkType',
-                                                comparator: 'EQ',
-                                                value: 'action',
-                                              },
-                                            },
-                                          },
-                                          {
-                                            value: [],
-                                            label: 'Objects to pass to action',
-                                            key: 'actionModels',
-                                            type: 'ACTION_INPUT_OBJECTS',
-                                            configuration: {
-                                              apiVersion: 'v1',
-                                              condition: {
-                                                type: 'SHOW',
-                                                option: 'linkType',
-                                                comparator: 'EQ',
-                                                value: 'action',
-                                              },
-                                            },
-                                          },
-                                          {
                                             value: false,
                                             label: 'Full width',
                                             key: 'fullWidth',
                                             type: 'TOGGLE',
+                                            configuration: {
+                                              condition: {
+                                                type: 'HIDE',
+                                                option: 'variant',
+                                                comparator: 'EQ',
+                                                value: 'icon',
+                                              },
+                                            },
                                           },
                                           {
                                             label: 'Icon',
@@ -12055,6 +11979,12 @@
                                             configuration: {
                                               as: 'BUTTONGROUP',
                                               dataType: 'string',
+                                              condition: {
+                                                type: 'HIDE',
+                                                option: 'icon',
+                                                comparator: 'EQ',
+                                                value: 'None',
+                                              },
                                               allowedInput: [
                                                 {
                                                   name: 'Start',
@@ -12062,12 +11992,6 @@
                                                 },
                                                 { name: 'End', value: 'end' },
                                               ],
-                                              condition: {
-                                                type: 'HIDE',
-                                                option: 'icon',
-                                                comparator: 'EQ',
-                                                value: 'None',
-                                              },
                                             },
                                           },
                                           {
@@ -12711,7 +12635,6 @@
                               allowedInput: [
                                 { name: 'Internal page', value: 'internal' },
                                 { name: 'External page', value: 'external' },
-                                { name: 'Action', value: 'action' },
                               ],
                             },
                           },
@@ -12765,40 +12688,18 @@
                             },
                           },
                           {
-                            value: '',
-                            label: 'Action',
-                            key: 'actionId',
-                            type: 'ACTION',
-                            configuration: {
-                              apiVersion: 'v1',
-                              condition: {
-                                type: 'SHOW',
-                                option: 'linkType',
-                                comparator: 'EQ',
-                                value: 'action',
-                              },
-                            },
-                          },
-                          {
-                            value: [],
-                            label: 'Objects to pass to action',
-                            key: 'actionModels',
-                            type: 'ACTION_INPUT_OBJECTS',
-                            configuration: {
-                              apiVersion: 'v1',
-                              condition: {
-                                type: 'SHOW',
-                                option: 'linkType',
-                                comparator: 'EQ',
-                                value: 'action',
-                              },
-                            },
-                          },
-                          {
                             value: false,
                             label: 'Full width',
                             key: 'fullWidth',
                             type: 'TOGGLE',
+                            configuration: {
+                              condition: {
+                                type: 'HIDE',
+                                option: 'variant',
+                                comparator: 'EQ',
+                                value: 'icon',
+                              },
+                            },
                           },
                           {
                             label: 'Icon',
@@ -12836,16 +12737,16 @@
                             configuration: {
                               as: 'BUTTONGROUP',
                               dataType: 'string',
-                              allowedInput: [
-                                { name: 'Start', value: 'start' },
-                                { name: 'End', value: 'end' },
-                              ],
                               condition: {
                                 type: 'HIDE',
                                 option: 'icon',
                                 comparator: 'EQ',
                                 value: 'None',
                               },
+                              allowedInput: [
+                                { name: 'Start', value: 'start' },
+                                { name: 'End', value: 'end' },
+                              ],
                             },
                           },
                           {
@@ -13005,7 +12906,6 @@
                               allowedInput: [
                                 { name: 'Internal page', value: 'internal' },
                                 { name: 'External page', value: 'external' },
-                                { name: 'Action', value: 'action' },
                               ],
                             },
                           },
@@ -13059,40 +12959,18 @@
                             },
                           },
                           {
-                            value: '',
-                            label: 'Action',
-                            key: 'actionId',
-                            type: 'ACTION',
-                            configuration: {
-                              apiVersion: 'v1',
-                              condition: {
-                                type: 'SHOW',
-                                option: 'linkType',
-                                comparator: 'EQ',
-                                value: 'action',
-                              },
-                            },
-                          },
-                          {
-                            value: [],
-                            label: 'Objects to pass to action',
-                            key: 'actionModels',
-                            type: 'ACTION_INPUT_OBJECTS',
-                            configuration: {
-                              apiVersion: 'v1',
-                              condition: {
-                                type: 'SHOW',
-                                option: 'linkType',
-                                comparator: 'EQ',
-                                value: 'action',
-                              },
-                            },
-                          },
-                          {
                             value: false,
                             label: 'Full width',
                             key: 'fullWidth',
                             type: 'TOGGLE',
+                            configuration: {
+                              condition: {
+                                type: 'HIDE',
+                                option: 'variant',
+                                comparator: 'EQ',
+                                value: 'icon',
+                              },
+                            },
                           },
                           {
                             label: 'Icon',
@@ -13130,16 +13008,16 @@
                             configuration: {
                               as: 'BUTTONGROUP',
                               dataType: 'string',
-                              allowedInput: [
-                                { name: 'Start', value: 'start' },
-                                { name: 'End', value: 'end' },
-                              ],
                               condition: {
                                 type: 'HIDE',
                                 option: 'icon',
                                 comparator: 'EQ',
                                 value: 'None',
                               },
+                              allowedInput: [
+                                { name: 'Start', value: 'start' },
+                                { name: 'End', value: 'end' },
+                              ],
                             },
                           },
                           {
@@ -15439,10 +15317,6 @@
                                                   name: 'External page',
                                                   value: 'external',
                                                 },
-                                                {
-                                                  name: 'Action',
-                                                  value: 'action',
-                                                },
                                               ],
                                             },
                                           },
@@ -15503,40 +15377,18 @@
                                             },
                                           },
                                           {
-                                            value: '',
-                                            label: 'Action',
-                                            key: 'actionId',
-                                            type: 'ACTION',
-                                            configuration: {
-                                              apiVersion: 'v1',
-                                              condition: {
-                                                type: 'SHOW',
-                                                option: 'linkType',
-                                                comparator: 'EQ',
-                                                value: 'action',
-                                              },
-                                            },
-                                          },
-                                          {
-                                            value: [],
-                                            label: 'Objects to pass to action',
-                                            key: 'actionModels',
-                                            type: 'ACTION_INPUT_OBJECTS',
-                                            configuration: {
-                                              apiVersion: 'v1',
-                                              condition: {
-                                                type: 'SHOW',
-                                                option: 'linkType',
-                                                comparator: 'EQ',
-                                                value: 'action',
-                                              },
-                                            },
-                                          },
-                                          {
                                             value: false,
                                             label: 'Full width',
                                             key: 'fullWidth',
                                             type: 'TOGGLE',
+                                            configuration: {
+                                              condition: {
+                                                type: 'HIDE',
+                                                option: 'variant',
+                                                comparator: 'EQ',
+                                                value: 'icon',
+                                              },
+                                            },
                                           },
                                           {
                                             label: 'Icon',
@@ -15583,6 +15435,12 @@
                                             configuration: {
                                               as: 'BUTTONGROUP',
                                               dataType: 'string',
+                                              condition: {
+                                                type: 'HIDE',
+                                                option: 'icon',
+                                                comparator: 'EQ',
+                                                value: 'None',
+                                              },
                                               allowedInput: [
                                                 {
                                                   name: 'Start',
@@ -15590,12 +15448,6 @@
                                                 },
                                                 { name: 'End', value: 'end' },
                                               ],
-                                              condition: {
-                                                type: 'HIDE',
-                                                option: 'icon',
-                                                comparator: 'EQ',
-                                                value: 'None',
-                                              },
                                             },
                                           },
                                           {
@@ -16329,6 +16181,55 @@
                               },
                             },
                             {
+                              type: 'CUSTOM',
+                              label: 'Link to',
+                              key: 'linkType',
+                              value: 'internal',
+                              configuration: {
+                                as: 'BUTTONGROUP',
+                                dataType: 'string',
+                                allowedInput: [
+                                  { name: 'Internal page', value: 'internal' },
+                                  { name: 'External page', value: 'external' },
+                                ],
+                                condition: {
+                                  type: 'SHOW',
+                                  option: 'type',
+                                  comparator: 'EQ',
+                                  value: 'img',
+                                },
+                              },
+                            },
+                            {
+                              value: '',
+                              label: 'Page',
+                              key: 'linkTo',
+                              type: 'ENDPOINT',
+                              configuration: {
+                                condition: {
+                                  type: 'SHOW',
+                                  option: 'linkType',
+                                  comparator: 'EQ',
+                                  value: 'internal',
+                                },
+                              },
+                            },
+                            {
+                              value: [''],
+                              label: 'URL',
+                              key: 'linkToExternal',
+                              type: 'VARIABLE',
+                              configuration: {
+                                placeholder: 'Starts with https:// or http://',
+                                condition: {
+                                  type: 'SHOW',
+                                  option: 'linkType',
+                                  comparator: 'EQ',
+                                  value: 'external',
+                                },
+                              },
+                            },
+                            {
                               value: [],
                               label: 'Image Alternative Text',
                               key: 'imgAlt',
@@ -16874,7 +16775,6 @@
                             allowedInput: [
                               { name: 'Internal page', value: 'internal' },
                               { name: 'External page', value: 'external' },
-                              { name: 'Action', value: 'action' },
                             ],
                           },
                         },
@@ -16928,40 +16828,18 @@
                           },
                         },
                         {
-                          value: '',
-                          label: 'Action',
-                          key: 'actionId',
-                          type: 'ACTION',
-                          configuration: {
-                            apiVersion: 'v1',
-                            condition: {
-                              type: 'SHOW',
-                              option: 'linkType',
-                              comparator: 'EQ',
-                              value: 'action',
-                            },
-                          },
-                        },
-                        {
-                          value: [],
-                          label: 'Objects to pass to action',
-                          key: 'actionModels',
-                          type: 'ACTION_INPUT_OBJECTS',
-                          configuration: {
-                            apiVersion: 'v1',
-                            condition: {
-                              type: 'SHOW',
-                              option: 'linkType',
-                              comparator: 'EQ',
-                              value: 'action',
-                            },
-                          },
-                        },
-                        {
                           value: false,
                           label: 'Full width',
                           key: 'fullWidth',
                           type: 'TOGGLE',
+                          configuration: {
+                            condition: {
+                              type: 'HIDE',
+                              option: 'variant',
+                              comparator: 'EQ',
+                              value: 'icon',
+                            },
+                          },
                         },
                         {
                           label: 'Icon',
@@ -16999,16 +16877,16 @@
                           configuration: {
                             as: 'BUTTONGROUP',
                             dataType: 'string',
-                            allowedInput: [
-                              { name: 'Start', value: 'start' },
-                              { name: 'End', value: 'end' },
-                            ],
                             condition: {
                               type: 'HIDE',
                               option: 'icon',
                               comparator: 'EQ',
                               value: 'None',
                             },
+                            allowedInput: [
+                              { name: 'Start', value: 'start' },
+                              { name: 'End', value: 'end' },
+                            ],
                           },
                         },
                         {
@@ -17171,7 +17049,6 @@
                             allowedInput: [
                               { name: 'Internal page', value: 'internal' },
                               { name: 'External page', value: 'external' },
-                              { name: 'Action', value: 'action' },
                             ],
                           },
                         },
@@ -17225,40 +17102,18 @@
                           },
                         },
                         {
-                          value: '',
-                          label: 'Action',
-                          key: 'actionId',
-                          type: 'ACTION',
-                          configuration: {
-                            apiVersion: 'v1',
-                            condition: {
-                              type: 'SHOW',
-                              option: 'linkType',
-                              comparator: 'EQ',
-                              value: 'action',
-                            },
-                          },
-                        },
-                        {
-                          value: [],
-                          label: 'Objects to pass to action',
-                          key: 'actionModels',
-                          type: 'ACTION_INPUT_OBJECTS',
-                          configuration: {
-                            apiVersion: 'v1',
-                            condition: {
-                              type: 'SHOW',
-                              option: 'linkType',
-                              comparator: 'EQ',
-                              value: 'action',
-                            },
-                          },
-                        },
-                        {
                           value: false,
                           label: 'Full width',
                           key: 'fullWidth',
                           type: 'TOGGLE',
+                          configuration: {
+                            condition: {
+                              type: 'HIDE',
+                              option: 'variant',
+                              comparator: 'EQ',
+                              value: 'icon',
+                            },
+                          },
                         },
                         {
                           label: 'Icon',
@@ -17296,16 +17151,16 @@
                           configuration: {
                             as: 'BUTTONGROUP',
                             dataType: 'string',
-                            allowedInput: [
-                              { name: 'Start', value: 'start' },
-                              { name: 'End', value: 'end' },
-                            ],
                             condition: {
                               type: 'HIDE',
                               option: 'icon',
                               comparator: 'EQ',
                               value: 'None',
                             },
+                            allowedInput: [
+                              { name: 'Start', value: 'start' },
+                              { name: 'End', value: 'end' },
+                            ],
                           },
                         },
                         {
@@ -17842,7 +17697,6 @@
                                 allowedInput: [
                                   { name: 'Internal page', value: 'internal' },
                                   { name: 'External page', value: 'external' },
-                                  { name: 'Action', value: 'action' },
                                 ],
                               },
                             },
@@ -17896,40 +17750,18 @@
                               },
                             },
                             {
-                              value: '',
-                              label: 'Action',
-                              key: 'actionId',
-                              type: 'ACTION',
-                              configuration: {
-                                apiVersion: 'v1',
-                                condition: {
-                                  type: 'SHOW',
-                                  option: 'linkType',
-                                  comparator: 'EQ',
-                                  value: 'action',
-                                },
-                              },
-                            },
-                            {
-                              value: [],
-                              label: 'Objects to pass to action',
-                              key: 'actionModels',
-                              type: 'ACTION_INPUT_OBJECTS',
-                              configuration: {
-                                apiVersion: 'v1',
-                                condition: {
-                                  type: 'SHOW',
-                                  option: 'linkType',
-                                  comparator: 'EQ',
-                                  value: 'action',
-                                },
-                              },
-                            },
-                            {
                               value: false,
                               label: 'Full width',
                               key: 'fullWidth',
                               type: 'TOGGLE',
+                              configuration: {
+                                condition: {
+                                  type: 'HIDE',
+                                  option: 'variant',
+                                  comparator: 'EQ',
+                                  value: 'icon',
+                                },
+                              },
                             },
                             {
                               label: 'Icon',
@@ -17967,16 +17799,16 @@
                               configuration: {
                                 as: 'BUTTONGROUP',
                                 dataType: 'string',
-                                allowedInput: [
-                                  { name: 'Start', value: 'start' },
-                                  { name: 'End', value: 'end' },
-                                ],
                                 condition: {
                                   type: 'HIDE',
                                   option: 'icon',
                                   comparator: 'EQ',
                                   value: 'None',
                                 },
+                                allowedInput: [
+                                  { name: 'Start', value: 'start' },
+                                  { name: 'End', value: 'end' },
+                                ],
                               },
                             },
                             {
@@ -20495,10 +20327,6 @@
                                                               'External page',
                                                             value: 'external',
                                                           },
-                                                          {
-                                                            name: 'Action',
-                                                            value: 'action',
-                                                          },
                                                         ],
                                                       },
                                                     },
@@ -20559,42 +20387,18 @@
                                                       },
                                                     },
                                                     {
-                                                      value: '',
-                                                      label: 'Action',
-                                                      key: 'actionId',
-                                                      type: 'ACTION',
-                                                      configuration: {
-                                                        apiVersion: 'v1',
-                                                        condition: {
-                                                          type: 'SHOW',
-                                                          option: 'linkType',
-                                                          comparator: 'EQ',
-                                                          value: 'action',
-                                                        },
-                                                      },
-                                                    },
-                                                    {
-                                                      value: [],
-                                                      label:
-                                                        'Objects to pass to action',
-                                                      key: 'actionModels',
-                                                      type:
-                                                        'ACTION_INPUT_OBJECTS',
-                                                      configuration: {
-                                                        apiVersion: 'v1',
-                                                        condition: {
-                                                          type: 'SHOW',
-                                                          option: 'linkType',
-                                                          comparator: 'EQ',
-                                                          value: 'action',
-                                                        },
-                                                      },
-                                                    },
-                                                    {
                                                       value: false,
                                                       label: 'Full width',
                                                       key: 'fullWidth',
                                                       type: 'TOGGLE',
+                                                      configuration: {
+                                                        condition: {
+                                                          type: 'HIDE',
+                                                          option: 'variant',
+                                                          comparator: 'EQ',
+                                                          value: 'icon',
+                                                        },
+                                                      },
                                                     },
                                                     {
                                                       label: 'Icon',
