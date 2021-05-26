@@ -215,7 +215,7 @@
     );
     const FileDetails = ({ file, fileType, fileSize }) => (
       <div className={classes.fileDetails}>
-        <Typography variant="body1" noWrap className={classes.span}>
+        <Typography variant="body1" className={classes.span}>
           {file ? file.name : 'File name'}
         </Typography>
         <div className={classes.fileDetailList}>
