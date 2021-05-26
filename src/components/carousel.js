@@ -4,7 +4,7 @@
   allowedTypes: ['STEP_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { MobileStepper, Button } = window.MaterialUI.Core;
+    const { MobileStepper, Button, IconButton } = window.MaterialUI.Core;
     const { Icons } = window.MaterialUI;
     const { env, useText, Children, useAllQuery, useFilter } = B;
     const {
@@ -18,6 +18,8 @@
       select,
       model,
       filter,
+      continiousLoop,
+      height,
     } = options;
     const { KeyboardArrowLeft, KeyboardArrowRight } = Icons;
 
@@ -63,6 +65,9 @@
         setActiveStep(prevActiveStep => {
           const nextStep = prevActiveStep + 1;
           if (nextStep > children.length - 1) {
+            if (continiousLoop) {
+              return 0;
+            }
             return prevActiveStep;
           }
           return nextStep;
@@ -73,6 +78,9 @@
         setActiveStep(prevActiveStep => {
           const nextStep = prevActiveStep - 1;
           if (nextStep < 0) {
+            if (continiousLoop) {
+              return children.length - 1;
+            }
             return prevActiveStep;
           }
           return nextStep;
@@ -86,7 +94,6 @@
       }, [isDev, stepIndex]);
 
       const maxSteps = children.length;
-      // setMaxSteps(children.length);
 
       const overlay = (
         <MobileStepper
@@ -96,24 +103,24 @@
           activeStep={activeStep}
           classes={{ root: classes.overlay, dots: classes.dots }}
           nextButton={
-            <Button
+            <IconButton
               size="small"
               onClick={handleNext}
-              disabled={activeStep === maxSteps - 1}
+              disabled={continiousLoop ? false : activeStep === maxSteps - 1}
               classes={{ root: classes.arrowRight, label: classes.buttonLabel }}
             >
               <KeyboardArrowRight />
-            </Button>
+            </IconButton>
           }
           backButton={
-            <Button
+            <IconButton
               size="small"
               onClick={handleBack}
-              disabled={activeStep === 0}
+              disabled={continiousLoop ? false : activeStep === 0}
               classes={{ root: classes.arrowLeft, label: classes.buttonLabel }}
             >
               <KeyboardArrowLeft />
-            </Button>
+            </IconButton>
           }
         />
       );
@@ -129,7 +136,7 @@
             <Button
               size="small"
               onClick={handleNext}
-              disabled={activeStep === maxSteps - 1}
+              disabled={continiousLoop ? false : activeStep === maxSteps - 1}
               classes={{ root: classes.stepButtonMobile }}
             >
               {buttonNextText}
@@ -140,7 +147,7 @@
             <Button
               size="small"
               onClick={handleBack}
-              disabled={activeStep === 0}
+              disabled={continiousLoop ? false : activeStep === 0}
               classes={{ root: classes.stepButtonMobile }}
             >
               <KeyboardArrowLeft />
@@ -157,13 +164,14 @@
       numRendersRef.current += 1;
 
       return (
-        <div className={classes.container}>
+        <div className={`${classes.container} ${classes.wrapper}`}>
           {React.Children.map(children, (child, index) => (
             <Children
               stepLabelData={stepLabelData}
               setStepLabelData={setStepLabelData}
               active={index === activeStep || (isDev && allImages)}
               isFirstRender={numRendersRef.current === 1}
+              parentHeight={height}
             >
               {React.cloneElement(child)}
             </Children>
@@ -231,11 +239,29 @@
       });
 
       const handleNext = () => {
-        setActiveStep(prevActiveStep => prevActiveStep + 1);
+        setActiveStep(prevActiveStep => {
+          const nextStep = prevActiveStep + 1;
+          if (nextStep > maxSteps - 1) {
+            if (continiousLoop) {
+              return 0;
+            }
+            return prevActiveStep;
+          }
+          return nextStep;
+        });
       };
 
       const handleBack = () => {
-        setActiveStep(prevActiveStep => prevActiveStep - 1);
+        setActiveStep(prevActiveStep => {
+          const nextStep = prevActiveStep - 1;
+          if (nextStep < 0) {
+            if (continiousLoop) {
+              return maxSteps - 1;
+            }
+            return prevActiveStep;
+          }
+          return nextStep;
+        });
       };
 
       const Step = props => {
@@ -266,24 +292,24 @@
           activeStep={activeStep}
           classes={{ root: classes.overlay, dots: classes.dots }}
           nextButton={
-            <Button
+            <IconButton
               size="small"
               onClick={handleNext}
-              disabled={activeStep === maxSteps - 1}
+              disabled={continiousLoop ? false : activeStep === maxSteps - 1}
               classes={{ root: classes.arrowRight, label: classes.buttonLabel }}
             >
               <KeyboardArrowRight />
-            </Button>
+            </IconButton>
           }
           backButton={
-            <Button
+            <IconButton
               size="small"
               onClick={handleBack}
-              disabled={activeStep === 0}
+              disabled={continiousLoop ? false : activeStep === 0}
               classes={{ root: classes.arrowLeft, label: classes.buttonLabel }}
             >
               <KeyboardArrowLeft />
-            </Button>
+            </IconButton>
           }
         />
       );
@@ -299,7 +325,7 @@
             <Button
               size="small"
               onClick={handleNext}
-              disabled={activeStep === maxSteps - 1}
+              disabled={continiousLoop ? false : activeStep === maxSteps - 1}
               classes={{ root: classes.stepButtonMobile }}
             >
               {buttonNextText}
@@ -310,7 +336,7 @@
             <Button
               size="small"
               onClick={handleBack}
-              disabled={activeStep === 0}
+              disabled={continiousLoop ? false : activeStep === 0}
               classes={{ root: classes.stepButtonMobile }}
             >
               <KeyboardArrowLeft />
@@ -343,9 +369,7 @@
       select === 'custom' ? MobileStepperCmp() : ModelStepperCmp();
 
     return isDev ? (
-      <div
-        className={[classes.wrapper, isEmpty ? classes.empty : ''].join(' ')}
-      >
+      <div className={[isEmpty ? classes.empty : ''].join(' ')}>
         {isEmpty ? 'Stepper' : StepperComponent}
       </div>
     ) : (
@@ -357,28 +381,33 @@
     const style = new Styling(t);
     const isDev = env === 'dev';
     return {
-      wrapper: {},
+      wrapper: {
+        height: ({ options: { height } }) => height,
+        width: ({ options: { width } }) => width,
+      },
       root: {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         '& img': {
-          width: ({ options: { width } }) => (width === '' ? '100%' : width),
+          width: '100%',
           height: ({ options: { height } }) =>
             height === '' ? 'auto' : height,
           objectFit: 'cover',
         },
       },
       container: {
+        width: ({ options: { width } }) => (width === '' ? '100%' : width),
+        height: ({ options: { height } }) => (height === '' ? 'auto' : height),
         position: 'relative',
         '& .MuiMobileStepper-root': {
           background: 'transparent',
         },
         '& .MuiButton-label': {
           width: 'auto',
-          padding: '5px',
           backgroundColor: 'rgba(255,255,255,0.3)',
           borderRadius: '25px',
+          padding: 8,
         },
         '& .MuiMobileStepper-dot': {
           backgroundColor: ({ options: { incativeDotColor } }) => [
@@ -423,25 +452,21 @@
         },
       },
       arrowLeft: {
+        padding: '0px !important',
         position: 'absolute !important',
         top: '50%',
-        left: '8px',
+        left: 16,
         transform: 'translate(0, -50%)',
-        '& svg': {
-          fontSize: '40px',
-        },
         '&:disabled': {
           opacity: '0.3',
         },
       },
       arrowRight: {
+        padding: '0px !important',
         position: 'absolute !important',
         top: '50%',
-        right: '8px',
+        right: 16,
         transform: 'translate(0, -50%)',
-        '& svg': {
-          fontSize: '40px',
-        },
         '&:disabled': {
           opacity: '0.3',
         },
@@ -455,15 +480,19 @@
           style.getColor(buttonColor),
           '!important',
         ],
+        '&:hover': {
+          boxShadow: 'inset 0 0 0 999px rgb(0 0 0 / 20%)',
+        },
+        borderRadius: 25,
+        padding: 8,
       },
       dots: {
         position: 'absolute',
-        bottom: 15,
+        bottom: 16,
         zIndex: '1',
       },
       empty: {
         position: 'relative',
-        width: ({ options: { width } }) => width || '100%',
         height: ({ options: { height } }) => height || 'inherit',
         backgroundColor: '#F0F1F5',
         border: '0.0625rem dashed #AFB5C8',
@@ -486,7 +515,6 @@
       },
       placeholder: {
         maxHeight: '100%',
-
         '& rect': {
           stroke: '#AFB5C8',
           fill: '#F7F8FA',

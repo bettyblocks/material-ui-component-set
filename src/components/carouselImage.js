@@ -8,7 +8,13 @@
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
     const { label, icon, imageSource } = options || {};
-    const { stepLabelData, setStepLabelData, active, isFirstRender } = parent;
+    const {
+      stepLabelData,
+      setStepLabelData,
+      active,
+      isFirstRender,
+      parentHeight,
+    } = parent;
     const imageSourceText = useText(imageSource);
 
     const ImgPlaceholder = () => (
@@ -21,13 +27,13 @@
 
     const StepContent =
       isEmpty && isDev ? (
-        <div className={classes.empty}>
+        <div className={classes.empty} style={{ height: parentHeight }}>
           <div className={classes.placeholderWrapper}>
             <ImgPlaceholder />
           </div>
         </div>
       ) : (
-        <div className={classes.root}>
+        <div className={classes.root} style={{ height: parentHeight }}>
           <img src={imageSourceText} alt="carousel" />
         </div>
       );
@@ -60,19 +66,16 @@
       alignItems: 'center',
       justifyContent: 'center',
       '& img': {
-        width: ({ options: { width } }) => (width === '' ? '100%' : width),
-        height: ({ options: { height } }) => (height === '' ? 'auto' : height),
+        width: '100%',
+        height: '100%',
         objectFit: 'cover',
       },
     },
     empty: {
       position: 'relative',
-      width: ({ options: { width } }) => width || '100%',
-      height: ({ options: { height } }) => height || 'inherit',
       backgroundColor: '#F0F1F5',
       border: '0.0625rem dashed #AFB5C8',
-      paddingBottom: ({ options: { height } }) =>
-        (!height || height === '100%') && '62.5%',
+      height: 300,
     },
     placeholderWrapper: {
       position: 'absolute',

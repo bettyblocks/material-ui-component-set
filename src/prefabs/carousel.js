@@ -100,6 +100,12 @@
         },
         {
           type: 'TOGGLE',
+          label: 'Continious loop',
+          key: 'continiousLoop',
+          value: false,
+        },
+        {
+          type: 'TOGGLE',
           label: 'Autoplay',
           key: 'autoplay',
           value: false,
@@ -125,12 +131,6 @@
           value: '',
           configuration: {
             as: 'UNIT',
-            condition: {
-              type: 'SHOW',
-              option: 'select',
-              comparator: 'EQ',
-              value: 'custom',
-            },
           },
         },
         {
@@ -140,12 +140,6 @@
           value: '',
           configuration: {
             as: 'UNIT',
-            condition: {
-              type: 'SHOW',
-              option: 'select',
-              comparator: 'EQ',
-              value: 'custom',
-            },
           },
         },
         {
@@ -343,24 +337,6 @@
               key: 'imageSource',
               type: 'VARIABLE',
             },
-            {
-              type: 'SIZE',
-              label: 'Width',
-              key: 'width',
-              value: '',
-              configuration: {
-                as: 'UNIT',
-              },
-            },
-            {
-              type: 'SIZE',
-              label: 'Height',
-              key: 'height',
-              value: '',
-              configuration: {
-                as: 'UNIT',
-              },
-            },
           ],
           descendants: [],
         },
@@ -374,24 +350,6 @@
               label: 'Source',
               key: 'imageSource',
               type: 'VARIABLE',
-            },
-            {
-              type: 'SIZE',
-              label: 'Width',
-              key: 'width',
-              value: '',
-              configuration: {
-                as: 'UNIT',
-              },
-            },
-            {
-              type: 'SIZE',
-              label: 'Height',
-              key: 'height',
-              value: '',
-              configuration: {
-                as: 'UNIT',
-              },
             },
           ],
           descendants: [],

@@ -14,24 +14,6 @@
           key: 'imageSource',
           type: 'VARIABLE',
         },
-        {
-          type: 'SIZE',
-          label: 'Width',
-          key: 'width',
-          value: '',
-          configuration: {
-            as: 'UNIT',
-          },
-        },
-        {
-          type: 'SIZE',
-          label: 'Height',
-          key: 'height',
-          value: '',
-          configuration: {
-            as: 'UNIT',
-          },
-        },
       ],
       descendants: [],
     },
