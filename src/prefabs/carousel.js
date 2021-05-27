@@ -135,8 +135,8 @@
         },
         {
           type: 'TOGGLE',
-          label: 'Continious loop',
-          key: 'continiousLoop',
+          label: 'Continous loop',
+          key: 'continousLoop',
           value: false,
         },
         {

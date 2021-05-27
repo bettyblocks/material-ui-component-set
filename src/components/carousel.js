@@ -18,7 +18,7 @@
       select,
       model,
       filter,
-      continiousLoop,
+      continousLoop,
       height,
       orderProperty,
       sortOrder,
@@ -91,7 +91,7 @@
         setActiveStep(prevActiveStep => {
           const nextStep = prevActiveStep + 1;
           if (nextStep > children.length - 1) {
-            if (continiousLoop) {
+            if (continousLoop) {
               return 0;
             }
             return prevActiveStep;
@@ -104,7 +104,7 @@
         setActiveStep(prevActiveStep => {
           const nextStep = prevActiveStep - 1;
           if (nextStep < 0) {
-            if (continiousLoop) {
+            if (continousLoop) {
               return children.length - 1;
             }
             return prevActiveStep;
@@ -132,7 +132,7 @@
             <IconButton
               size="small"
               onClick={handleNext}
-              disabled={continiousLoop ? false : activeStep === maxSteps - 1}
+              disabled={continousLoop ? false : activeStep === maxSteps - 1}
               classes={{ root: classes.arrowRight, label: classes.buttonLabel }}
             >
               <KeyboardArrowRight />
@@ -142,7 +142,7 @@
             <IconButton
               size="small"
               onClick={handleBack}
-              disabled={continiousLoop ? false : activeStep === 0}
+              disabled={continousLoop ? false : activeStep === 0}
               classes={{ root: classes.arrowLeft, label: classes.buttonLabel }}
             >
               <KeyboardArrowLeft />
@@ -162,7 +162,7 @@
             <Button
               size="small"
               onClick={handleNext}
-              disabled={continiousLoop ? false : activeStep === maxSteps - 1}
+              disabled={continousLoop ? false : activeStep === maxSteps - 1}
               classes={{ root: classes.stepButtonMobile }}
             >
               {buttonNextText}
@@ -173,7 +173,7 @@
             <Button
               size="small"
               onClick={handleBack}
-              disabled={continiousLoop ? false : activeStep === 0}
+              disabled={continousLoop ? false : activeStep === 0}
               classes={{ root: classes.stepButtonMobile }}
             >
               <KeyboardArrowLeft />
@@ -269,7 +269,7 @@
         setActiveStep(prevActiveStep => {
           const nextStep = prevActiveStep + 1;
           if (nextStep > maxSteps - 1) {
-            if (continiousLoop) {
+            if (continousLoop) {
               return 0;
             }
             return prevActiveStep;
@@ -282,7 +282,7 @@
         setActiveStep(prevActiveStep => {
           const nextStep = prevActiveStep - 1;
           if (nextStep < 0) {
-            if (continiousLoop) {
+            if (continousLoop) {
               return maxSteps - 1;
             }
             return prevActiveStep;
@@ -322,7 +322,7 @@
             <IconButton
               size="small"
               onClick={handleNext}
-              disabled={continiousLoop ? false : activeStep === maxSteps - 1}
+              disabled={continousLoop ? false : activeStep === maxSteps - 1}
               classes={{ root: classes.arrowRight, label: classes.buttonLabel }}
             >
               <KeyboardArrowRight />
@@ -332,7 +332,7 @@
             <IconButton
               size="small"
               onClick={handleBack}
-              disabled={continiousLoop ? false : activeStep === 0}
+              disabled={continousLoop ? false : activeStep === 0}
               classes={{ root: classes.arrowLeft, label: classes.buttonLabel }}
             >
               <KeyboardArrowLeft />
@@ -352,7 +352,7 @@
             <Button
               size="small"
               onClick={handleNext}
-              disabled={continiousLoop ? false : activeStep === maxSteps - 1}
+              disabled={continousLoop ? false : activeStep === maxSteps - 1}
               classes={{ root: classes.stepButtonMobile }}
             >
               {buttonNextText}
@@ -363,7 +363,7 @@
             <Button
               size="small"
               onClick={handleBack}
-              disabled={continiousLoop ? false : activeStep === 0}
+              disabled={continousLoop ? false : activeStep === 0}
               classes={{ root: classes.stepButtonMobile }}
             >
               <KeyboardArrowLeft />
