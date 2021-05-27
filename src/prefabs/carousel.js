@@ -71,6 +71,41 @@
           },
         },
         {
+          value: '',
+          label: 'Order by',
+          key: 'orderProperty',
+          type: 'PROPERTY',
+          configuration: {
+            dependsOn: 'model',
+            condition: {
+              type: 'SHOW',
+              option: 'select',
+              comparator: 'EQ',
+              value: 'model',
+            },
+          },
+        },
+        {
+          value: 'asc',
+          label: 'Sort order',
+          key: 'sortOrder',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Ascending', value: 'asc' },
+              { name: 'Descending', value: 'desc' },
+            ],
+            condition: {
+              type: 'HIDE',
+              option: 'orderProperty',
+              comparator: 'EQ',
+              value: '',
+            },
+          },
+        },
+        {
           type: 'NUMBER',
           label: 'Show image',
           key: 'activeStep',

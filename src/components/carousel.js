@@ -6,7 +6,7 @@
   jsx: (() => {
     const { MobileStepper, Button, IconButton } = window.MaterialUI.Core;
     const { Icons } = window.MaterialUI;
-    const { env, useText, Children, useAllQuery, useFilter } = B;
+    const { env, useText, Children, useAllQuery, useFilter, getProperty } = B;
     const {
       activeStep: stepIndex,
       allImages,
@@ -20,6 +20,8 @@
       filter,
       continiousLoop,
       height,
+      orderProperty,
+      sortOrder,
     } = options;
     const { KeyboardArrowLeft, KeyboardArrowRight } = Icons;
 
@@ -31,7 +33,31 @@
     const buttonPrevText = useText(buttonPrev);
     const numRendersRef = useRef(1);
     const [stepLabelData, setStepLabelData] = useState({});
+    let orderPropertyPath = null;
+    if (orderProperty && Array.isArray(orderProperty)) {
+      orderPropertyPath = orderProperty;
+    } else if (orderProperty && orderProperty) {
+      orderPropertyPath = [orderProperty];
+    }
     const [results, setResults] = useState([]);
+    const createSortObject = (fields, order) => {
+      const sort = fields.reduceRight((acc, property, index) => {
+        const prop = getProperty(property);
+        return index === fields.length - 1
+          ? { [prop.name]: order.toUpperCase() }
+          : { [prop.name]: acc };
+      }, {});
+
+      return sort;
+    };
+
+    const variables = orderPropertyPath
+      ? {
+          sort: {
+            relation: !isDev && createSortObject(orderPropertyPath, sortOrder),
+          },
+        }
+      : {};
 
     const ImgPlaceholder = () => (
       <div className={classes.empty}>
@@ -188,6 +214,7 @@
         model &&
         useAllQuery(model, {
           rawFilter: where,
+          variables,
           onCompleted(res) {
             const hasResult = res && res.results && res.results.length > 0;
             if (hasResult) {
