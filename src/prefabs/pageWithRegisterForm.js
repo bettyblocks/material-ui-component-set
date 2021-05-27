@@ -1,12 +1,12 @@
 (() => ({
   name: 'Register form',
   icon: 'LoginFormIcon',
+  type: 'page',
   description: 'Page with a ready to use register form and image.',
   detail: 'Page with a ready to use register form and image.',
   previewUrl: 'https://preview.betty.app/register',
   previewImage:
     'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_Register.png',
-  type: 'page',
   category: 'LAYOUT',
   beforeCreate: ({
     prefab,
