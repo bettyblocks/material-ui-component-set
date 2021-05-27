@@ -6,9 +6,9 @@
     'This is a page containing a data table with detail view, vertically oriented',
   detail:
     'This is a page containing a data table with detail view, vertically oriented',
-  previewUrl: 'https://preview.betty.app/login',
+  previewUrl: 'https://preview.betty.app/master-detail-vertical',
   previewImage:
-    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_Login.jpg',
+    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_Master_Detail_Vertical.jpg',
   category: 'LAYOUT',
   beforeCreate: ({
     components: {
