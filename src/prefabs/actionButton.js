@@ -2,7 +2,7 @@
   name: 'Action Button',
   icon: 'ButtonIcon',
   category: 'BUTTON',
-  keywords: ['Button', 'action', 'action button'],
+  keywords: ['Button', 'action'],
   structure: [
     {
       name: 'Button',
@@ -20,7 +20,7 @@
           type: 'VARIABLE',
           label: 'Button text',
           key: 'buttonText',
-          value: ['Button'],
+          value: ['Action Button'],
         },
         {
           value: '',
@@ -29,6 +29,12 @@
           type: 'ACTION',
           configuration: {
             apiVersion: 'v1',
+            condition: {
+              type: 'SHOW',
+              option: 'linkType',
+              comparator: 'EQ',
+              value: 'action',
+            },
           },
         },
         {
