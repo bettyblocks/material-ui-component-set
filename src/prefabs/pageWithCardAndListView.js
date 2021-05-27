@@ -4983,6 +4983,12 @@
                                 type: 'NUMBER',
                               },
                               {
+                                value: '',
+                                label: 'Placeholder rows',
+                                key: 'placeholderTake',
+                                type: 'NUMBER',
+                              },
+                              {
                                 type: 'CUSTOM',
                                 label: 'Type',
                                 key: 'type',
@@ -6288,6 +6294,12 @@
                                 value: '10',
                                 label: 'Rows per page (max 50)',
                                 key: 'take',
+                                type: 'NUMBER',
+                              },
+                              {
+                                value: '',
+                                label: 'Placeholder rows',
+                                key: 'placeholderTake',
                                 type: 'NUMBER',
                               },
                               {
