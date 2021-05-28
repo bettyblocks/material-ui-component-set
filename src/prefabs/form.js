@@ -18,7 +18,7 @@
       skip: !modelId,
     });
 
-    const reduceStructure = (refValue, structure) =>
+    const getDescendantByRef = (refValue, structure) =>
       structure.reduce((acc, component) => {
         if (acc) return acc;
         if (
@@ -27,7 +27,7 @@
         ) {
           return component;
         }
-        return reduceStructure(refValue, component.descendants);
+        return getDescendantByRef(refValue, component.descendants);
       }, null);
 
     const validate = () => {
@@ -54,7 +54,7 @@
         />
         <Content>
           <Field
-            label="Select model"
+            label="Model"
             error={
               validationMessage && (
                 <Text color="#e82600">{validationMessage}</Text>
@@ -79,7 +79,7 @@
           onSave={() => {
             if (validate()) {
               const newPrefab = { ...prefab };
-              const form = reduceStructure('#form', newPrefab.structure);
+              const form = getDescendantByRef('#form', newPrefab.structure);
               form.options[0].value.modelId = modelId;
               form.options[1].value = modelId;
               save(newPrefab);
