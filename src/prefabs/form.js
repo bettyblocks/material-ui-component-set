@@ -3,9 +3,98 @@
   icon: 'FormIcon',
   category: 'FORM',
   keywords: ['Form', 'input'],
+  beforeCreate: ({
+    prefab,
+    save,
+    close,
+    components: { Content, Field, Footer, Header, ModelSelector, Text },
+    helpers: { useModelQuery },
+  }) => {
+    const [modelId, setModelId] = React.useState('');
+    const [validationMessage, setValidationMessage] = React.useState('');
+
+    const { data, loading } = useModelQuery({
+      variables: { id: modelId },
+      skip: !modelId,
+    });
+
+    const reduceStructure = (refValue, structure) =>
+      structure.reduce((acc, component) => {
+        if (acc) return acc;
+        if (
+          component.ref &&
+          Object.values(component.ref).indexOf(refValue) > -1
+        ) {
+          return component;
+        }
+        return reduceStructure(refValue, component.descendants);
+      }, null);
+
+    const validate = () => {
+      if (loading) {
+        setValidationMessage(
+          'Model details are still loading, please try submitting again.',
+        );
+        return false;
+      }
+      if (!data || !data.model) {
+        setValidationMessage('Model is required.');
+        return false;
+      }
+
+      return true;
+    };
+
+    return (
+      <>
+        <Header
+          onClose={close}
+          title="Add a new"
+          subtitle="You can choose to base your form on one of your models, this will allow you to link it to existing properties and inherit their validations"
+        />
+        <Content>
+          <Field
+            label="Select model"
+            error={
+              validationMessage && (
+                <Text color="#e82600">{validationMessage}</Text>
+              )
+            }
+          >
+            <ModelSelector
+              onChange={value => {
+                setModelId(value);
+                setValidationMessage('');
+              }}
+              value={modelId}
+            />
+          </Field>
+        </Content>
+        <Footer
+          onClose={close}
+          onSkip={() => {
+            const newPrefab = { ...prefab };
+            save(newPrefab);
+          }}
+          onSave={() => {
+            if (validate()) {
+              const newPrefab = { ...prefab };
+              const form = reduceStructure('#form', newPrefab.structure);
+              form.options[0].value.modelId = modelId;
+              form.options[1].value = modelId;
+              save(newPrefab);
+            }
+          }}
+        />
+      </>
+    );
+  },
   structure: [
     {
       name: 'Form',
+      ref: {
+        id: '#form',
+      },
       options: [
         {
           value: {
