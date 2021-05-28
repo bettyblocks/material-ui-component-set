@@ -4,9 +4,9 @@
   type: 'page',
   description: 'This page contains a datatable with create dialog',
   detail: 'This page contains a datatable with create dialog',
-  previewUrl: 'https://preview.betty.app/login-and-register',
+  previewUrl: 'https://preview.betty.app/create-datatable',
   previewImage:
-    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_Login_And_Register.jpg',
+    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_Datatable_Create.jpg',
   category: 'DATA',
   beforeCreate: ({
     helpers: { useModelQuery, camelToSnakeCase },
