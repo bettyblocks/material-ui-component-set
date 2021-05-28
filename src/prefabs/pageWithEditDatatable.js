@@ -3015,6 +3015,22 @@
                                     },
                                   },
                                   {
+                                    value: 'none',
+                                    label: 'Vertical alignment',
+                                    key: 'valignment',
+                                    type: 'CUSTOM',
+                                    configuration: {
+                                      as: 'BUTTONGROUP',
+                                      dataType: 'string',
+                                      allowedInput: [
+                                        { name: 'None', value: 'none' },
+                                        { name: 'Top', value: 'flex-start' },
+                                        { name: 'Center', value: 'center' },
+                                        { name: 'Bottom', value: 'flex-end' },
+                                      ],
+                                    },
+                                  },
+                                  {
                                     value: false,
                                     label: 'Stretch (when in flex container)',
                                     key: 'stretch',
@@ -4114,6 +4130,22 @@
                                           name: 'Justified',
                                           value: 'space-between',
                                         },
+                                      ],
+                                    },
+                                  },
+                                  {
+                                    value: 'none',
+                                    label: 'Vertical alignment',
+                                    key: 'valignment',
+                                    type: 'CUSTOM',
+                                    configuration: {
+                                      as: 'BUTTONGROUP',
+                                      dataType: 'string',
+                                      allowedInput: [
+                                        { name: 'None', value: 'none' },
+                                        { name: 'Top', value: 'flex-start' },
+                                        { name: 'Center', value: 'center' },
+                                        { name: 'Bottom', value: 'flex-end' },
                                       ],
                                     },
                                   },
