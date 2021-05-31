@@ -35,7 +35,7 @@
         },
         {
           type: 'NUMBER',
-          label: 'Step',
+          label: 'Increments',
           key: 'stepNumber',
           value: 1,
         },
@@ -44,26 +44,6 @@
           label: 'Outer space',
           key: 'outerSpacing',
           type: 'SIZES',
-        },
-        {
-          type: 'CUSTOM',
-          label: 'Border',
-          key: 'border',
-          value: 'withBorder',
-          configuration: {
-            as: 'BUTTONGROUP',
-            dataType: 'string',
-            allowedInput: [
-              {
-                name: 'With Border',
-                value: 'withBorder',
-              },
-              {
-                name: 'Without Border',
-                value: 'withoutBorder',
-              },
-            ],
-          },
         },
         {
           value: false,
@@ -93,13 +73,41 @@
         },
         {
           type: 'COLOR',
+          label: 'Label color',
+          key: 'labelColor',
+          value: 'Accent3',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'styles',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          value: false,
+          label: 'Border',
+          key: 'border',
+          type: 'TOGGLE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'styles',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'COLOR',
           label: 'Border color',
           key: 'borderColor',
           value: 'Accent1',
           configuration: {
             condition: {
               type: 'SHOW',
-              option: 'styles',
+              option: 'border',
               comparator: 'EQ',
               value: true,
             },
@@ -113,7 +121,7 @@
           configuration: {
             condition: {
               type: 'SHOW',
-              option: 'styles',
+              option: 'border',
               comparator: 'EQ',
               value: true,
             },
@@ -127,21 +135,7 @@
           configuration: {
             condition: {
               type: 'SHOW',
-              option: 'styles',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
-        },
-        {
-          type: 'COLOR',
-          label: 'Label color',
-          key: 'labelColor',
-          value: 'Accent3',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'styles',
+              option: 'border',
               comparator: 'EQ',
               value: true,
             },

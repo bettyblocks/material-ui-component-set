@@ -15,6 +15,7 @@
       marks,
       border,
       disable,
+      styles,
     } = options;
     const {
       id: customModelAttributeId,
@@ -26,37 +27,40 @@
     const customModelAttribute = getCustomModelAttribute(
       customModelAttributeId,
     );
-    const withBorder = border === 'withBorder';
 
     const { name: customModelAttributeName = {} } = customModelAttribute || {};
     function setValue(_event, value) {
       setCurrentValue(value);
     }
 
+    useEffect(() => {
+      if (isDev) {
+        setCurrentValue(parseInt(defaultValue, 10) || 0);
+      }
+    }, [isDev, defaultValue]);
+
     const sliderInput = (
       <div className={classes.spacing}>
         <div
-          className={`${withBorder ? classes.root : ''} ${
+          className={`${border ? classes.root : ''} ${
             disable ? classes.disabled : ''
           }`}
         >
           {labelText && (
             <InputLabel
               classes={{
-                root: withBorder ? classes.label : classes.labelWithBorder,
+                root: border ? classes.label : classes.labelWithBorder,
               }}
             >
               <span>{labelText}</span>
             </InputLabel>
           )}
           <div
-            className={
-              withBorder ? classes.content : classes.contentWithoutBorder
-            }
+            className={border ? classes.content : classes.contentWithoutBorder}
           >
             <Slider
               name={customModelAttributeName}
-              defaultValue={currentValue}
+              value={currentValue}
               valueLabelDisplay={disable ? 'on' : 'auto'}
               step={stepNumber}
               min={startNumber}
@@ -66,7 +70,7 @@
               disabled={isDev || disable}
               classes={{
                 root: classes.sliderRoot,
-                colorPrimary: classes.slider,
+                colorPrimary: !disable || styles ? classes.slider : null,
                 thumb: classes.thumb,
                 focusVisible: classes.thumbFocusVisible,
               }}
