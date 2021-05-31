@@ -1,3 +1,11 @@
+# [1.140.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.139.0...v1.140.0) (2021-05-31)
+
+
+### Features
+
+* **ta-2259:** beforeCreate to form component to align with other forms ([7a8fe05](https://github.com/bettyblocks/material-ui-component-set/commit/7a8fe05d8ce79348f7a5b0b9ff6e1c8dba33f269))
+* **ta-2259:** beforeCreate to form component to align with other forms ([f659717](https://github.com/bettyblocks/material-ui-component-set/commit/f65971742e7ac9a8f010c238024b593fc580f36e))
+
 # [1.139.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.138.0...v1.139.0) (2021-05-28)
 
 
