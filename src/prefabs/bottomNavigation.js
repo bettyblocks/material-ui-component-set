@@ -7,7 +7,7 @@
       name: 'BottomNavigation',
       options: [
         {
-          label: 'Selected nav index',
+          label: 'Active item',
           key: 'defaultValue',
           value: '1',
           type: 'NUMBER',
