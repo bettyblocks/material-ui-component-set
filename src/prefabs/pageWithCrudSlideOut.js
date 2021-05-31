@@ -11,10 +11,12 @@
   beforeCreate: ({
     close,
     components: {
-      Content,
-      Field,
-      Footer,
       Header,
+      Content,
+      Footer,
+      Field,
+      Text,
+      CheckBox,
       ModelSelector,
       PropertiesSelector,
     },
@@ -24,7 +26,26 @@
   }) => {
     const [modelId, setModelId] = React.useState('');
     const [properties, setProperties] = React.useState([]);
-    const [createProperties, setCreateProperties] = React.useState([]);
+    const [modelValidation, setModelValidation] = React.useState(false);
+    const [propertiesValidation, setPropertiesValidation] = React.useState(
+      false,
+    );
+    const [
+      createContainsNoEditableProperties,
+      setCreateContainsNoEditableProperties,
+    ] = React.useState(false);
+    const [
+      createPropertiesValidation,
+      setCreatePropertiesValidation,
+    ] = React.useState(false);
+    const [
+      selectedCreateFormProperties,
+      setSelectedCreateFormProperties,
+    ] = React.useState([]);
+    const [
+      createFormUseDataProperties,
+      setCreateFormUseDataProperties,
+    ] = React.useState(true);
     const { data } = useModelQuery({
       variables: { id: modelId },
       skip: !modelId,
@@ -8132,19 +8153,35 @@
       <>
         <Header onClose={close} title="Configure component" />
         <Content>
-          <Field label="Model">
+          <Field
+            label="Model"
+            error={
+              modelValidation && (
+                <Text color="#e82600">Selecting a model is required</Text>
+              )
+            }
+          >
             <ModelSelector
               onChange={value => {
+                setModelValidation(false);
                 setModelId(value);
               }}
               value={modelId}
             />
           </Field>
-          <Field label="Columns in the data table">
+          <Field
+            label="Columns in the data table"
+            error={
+              propertiesValidation && (
+                <Text color="#e82600">Selecting a property is required</Text>
+              )
+            }
+          >
             <PropertiesSelector
               modelId={modelId}
               value={properties}
               disabledKinds={[
+                'BELONGS_TO',
                 'HAS_AND_BELONGS_TO_MANY',
                 'HAS_MANY',
                 'MULTI_FILE',
@@ -8152,39 +8189,130 @@
                 'COUNT',
                 'MULTI_IMAGE',
                 'PDF',
+                'RICH_TEXT',
                 'SIGNED_PDF',
                 'SUM',
+                'BOOLEAN_EXPRESSION',
+                'DATE_EXPRESSION',
+                'DATE_TIME_EXPRESSION',
+                'DECIMAL_EXPRESSION',
+                'INTEGER_EXPRESSION',
+                'MINUTES_EXPRESSION',
+                'PRICE_EXPRESSION',
+                'STRING_EXPRESSION',
+                'TEXT_EXPRESSION',
+                'MINUTES',
+                'ZIPCODE',
               ]}
               onChange={value => {
                 setProperties(value);
+                setCreateContainsNoEditableProperties(false);
               }}
             />
           </Field>
-          <Field label="Create and update form properties">
-            <PropertiesSelector
-              modelId={modelId}
-              value={createProperties}
-              disabledKinds={[
-                'HAS_AND_BELONGS_TO_MANY',
-                'HAS_MANY',
-                'MULTI_FILE',
-                'AUTO_INCREMENT',
-                'COUNT',
-                'MULTI_IMAGE',
-                'PDF',
-                'SIGNED_PDF',
-                'SUM',
-              ]}
-              disabledNames={['id', 'created_at', 'updated_at']}
-              onChange={value => {
-                setCreateProperties(value);
+          <Field label="Create & Update Form">
+            <CheckBox
+              label="Use the same properties as the data table in the create and update form"
+              checked={createFormUseDataProperties}
+              onChange={() => {
+                setCreateFormUseDataProperties(!createFormUseDataProperties);
+                setCreateContainsNoEditableProperties(false);
               }}
             />
+            <Field
+              error={
+                createContainsNoEditableProperties && (
+                  <Text color="#e82600">
+                    &quot;Id&quot;, &quot;Created at&quot; and &quot;Updated
+                    at&quot; are not editable. At least one editable property is
+                    necessary in the create form. Please select one.
+                  </Text>
+                )
+              }
+            />
+            {!createFormUseDataProperties && (
+              <Field
+                label="Input fields in the create and update form"
+                error={
+                  createPropertiesValidation && (
+                    <Text color="#e82600">
+                      Selecting a property is required
+                    </Text>
+                  )
+                }
+              >
+                <PropertiesSelector
+                  modelId={modelId}
+                  value={selectedCreateFormProperties}
+                  disabledNames={['created_at', 'updated_at', 'id']}
+                  disabledKinds={[
+                    'BELONGS_TO',
+                    'HAS_AND_BELONGS_TO_MANY',
+                    'HAS_MANY',
+                    'MULTI_FILE',
+                    'AUTO_INCREMENT',
+                    'COUNT',
+                    'MULTI_IMAGE',
+                    'PDF',
+                    'RICH_TEXT',
+                    'SIGNED_PDF',
+                    'SUM',
+                    'BOOLEAN_EXPRESSION',
+                    'DATE_EXPRESSION',
+                    'DATE_TIME_EXPRESSION',
+                    'DECIMAL_EXPRESSION',
+                    'INTEGER_EXPRESSION',
+                    'MINUTES_EXPRESSION',
+                    'PRICE_EXPRESSION',
+                    'STRING_EXPRESSION',
+                    'TEXT_EXPRESSION',
+                    'MINUTES',
+                    'ZIPCODE',
+                  ]}
+                  onChange={value => {
+                    setCreatePropertiesValidation(!value.length);
+                    setSelectedCreateFormProperties(value);
+                    setCreateContainsNoEditableProperties(!value.length);
+                  }}
+                />
+              </Field>
+            )}
           </Field>
         </Content>
         <Footer
           onClose={close}
           onSave={() => {
+            const selectedCreateFormPropertiesLength =
+              selectedCreateFormProperties.length;
+            const propertiesLength = properties.length;
+            if (
+              !modelId ||
+              (selectedCreateFormPropertiesLength < 1 &&
+                !createFormUseDataProperties) ||
+              propertiesLength < 1
+            ) {
+              setModelValidation(!modelId);
+              setCreatePropertiesValidation(
+                selectedCreateFormPropertiesLength < 1 &&
+                  !createFormUseDataProperties,
+              );
+
+              setPropertiesValidation(propertiesLength < 1);
+              return;
+            }
+            const createFormProperties = (createFormUseDataProperties
+              ? properties
+              : selectedCreateFormProperties
+            ).filter(
+              property =>
+                property.label !== 'Created at' &&
+                property.label !== 'Updated at' &&
+                property.label !== 'Id',
+            );
+            if (createFormProperties.length < 1) {
+              setCreateContainsNoEditableProperties(true);
+              return;
+            }
             const newPrefab = { ...prefab };
 
             const idProperty = data.model.properties.find(p => p.name === 'id');
@@ -15965,7 +16093,7 @@
             const createForm = getDescendantByRef('#createForm', drawerSidebar);
             const editForm = getDescendantByRef('#editForm', drawerSidebar);
             const createFormInputsArray = makeDescendantsArray(
-              createProperties,
+              createFormProperties,
             ).filter(item => item !== undefined);
             createForm.descendants = [
               ...createFormInputsArray,
@@ -15973,7 +16101,7 @@
             ];
 
             const editFormInputsArray = makeDescendantsArray(
-              createProperties,
+              createFormProperties,
               'edit',
             ).filter(item => item !== undefined);
             editForm.descendants = [
@@ -15982,7 +16110,7 @@
             ];
 
             newPrefab.actions[1].events[0].options.modelId = modelId;
-            newPrefab.actions[1].events[0].options.assign = createProperties.map(
+            newPrefab.actions[1].events[0].options.assign = createFormProperties.map(
               property => ({
                 leftHandSide: property.id[0],
                 ref: {
@@ -15994,7 +16122,7 @@
               }),
             );
 
-            newPrefab.actions[2].events[0].options.assign = createProperties.map(
+            newPrefab.actions[2].events[0].options.assign = createFormProperties.map(
               property => ({
                 leftHandSide: property.id[0],
                 ref: {
@@ -16006,7 +16134,7 @@
               }),
             );
 
-            newPrefab.actions[0].events[0].options.assign = createProperties.map(
+            newPrefab.actions[0].events[0].options.assign = createFormProperties.map(
               property => ({
                 leftHandSide: property.id[0],
                 ref: {
@@ -21028,8 +21156,7 @@
             newPrefab.variables[2].options.modelId = modelId;
             newPrefab.variables[3].options.modelId = modelId;
             newPrefab.variables[4].options.modelId = modelId;
-
-            newPrefab.structure[0].descendants = [
+            newPrefab.structure[0].descendants[0].descendants[0].descendants = [
               ...drawerSidebar,
               ...drawerContainer,
             ];
@@ -21124,24 +21251,6 @@
                 },
                 type: 'Custom',
               },
-              // {
-              //   name: 'Toggle loading state',
-              //   sourceEvent: 'onSubmit',
-              //   ref: {
-              //     targetComponentId: '#editSubmitButton',
-              //     sourceComponentId: '#editForm',
-              //   },
-              //   type: 'Custom',
-              // },
-              // {
-              //   name: 'Toggle loading state',
-              //   sourceEvent: 'onActionDone',
-              //   ref: {
-              //     targetComponentId: '#editSubmitButton',
-              //     sourceComponentId: '#editForm',
-              //   },
-              //   type: 'Custom',
-              // },
             ];
 
             newPrefab.interactions = [
@@ -21431,106 +21540,334 @@
   ],
   structure: [
     {
-      name: 'Drawer',
+      name: 'Row',
       options: [
         {
-          type: 'SIZE',
-          label: 'Drawer Width',
-          key: 'drawerWidth',
-          value: '480px',
+          type: 'CUSTOM',
+          label: 'Width',
+          key: 'maxRowWidth',
+          value: 'Full',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'S', value: 'S' },
+              { name: 'M', value: 'M' },
+              { name: 'L', value: 'L' },
+              { name: 'XL', value: 'XL' },
+              { name: 'Full', value: 'Full' },
+            ],
+          },
+        },
+        {
+          value: '100%',
+          label: 'Height',
+          key: 'rowHeight',
+          type: 'TEXT',
           configuration: {
             as: 'UNIT',
           },
         },
         {
-          value: 'temporary',
-          label: 'Drawer type',
-          key: 'drawerType',
-          type: 'CUSTOM',
-          configuration: {
-            as: 'BUTTONGROUP',
-            dataType: 'string',
-            allowedInput: [
-              { name: 'Persistent', value: 'persistent' },
-              { name: 'Temporary', value: 'temporary' },
-            ],
-          },
+          value: 'Accent1',
+          label: 'Background color',
+          key: 'backgroundColor',
+          type: 'COLOR',
         },
         {
-          value: 'sm',
-          label: 'Responsively temporary on',
-          key: 'breakpoint',
-          type: 'CUSTOM',
-          configuration: {
-            as: 'DROPDOWN',
-            dataType: 'string',
-            allowedInput: [
-              { name: 'Permanent', value: 'xs' },
-              { name: 'Mobile', value: 'sm' },
-              { name: 'Tablet portrait', value: 'md' },
-              { name: 'Tablet landscape', value: 'lg' },
-            ],
-            condition: {
-              type: 'SHOW',
-              option: 'drawerType',
-              comparator: 'EQ',
-              value: 'persistent',
-            },
-          },
-        },
-        {
-          value: 'right',
-          label: 'Alignment',
-          key: 'temporaryAnchor',
-          type: 'CUSTOM',
-          configuration: {
-            as: 'BUTTONGROUP',
-            dataType: 'string',
-            allowedInput: [
-              { name: 'Left', value: 'left' },
-              { name: 'Top', value: 'top' },
-              { name: 'Right', value: 'right' },
-              { name: 'Bottom', value: 'bottom' },
-            ],
-            condition: {
-              type: 'SHOW',
-              option: 'drawerType',
-              comparator: 'EQ',
-              value: 'temporary',
-            },
-          },
-        },
-        {
-          value: 'left',
-          label: 'Alignment',
-          key: 'persistentAnchor',
-          type: 'CUSTOM',
-          configuration: {
-            as: 'BUTTONGROUP',
-            dataType: 'string',
-            allowedInput: [
-              { name: 'Left', value: 'left' },
-              { name: 'Right', value: 'right' },
-            ],
-            condition: {
-              type: 'HIDE',
-              option: 'drawerType',
-              comparator: 'EQ',
-              value: 'temporary',
-            },
-          },
-        },
-        {
-          label: 'Toggle visibility',
-          key: 'visibility',
-          value: false,
-          type: 'TOGGLE',
-          configuration: {
-            as: 'VISIBILITY',
-          },
+          value: ['0rem', '0rem', '0rem', '0rem'],
+          label: 'Outer space',
+          key: 'outerSpacing',
+          type: 'SIZES',
         },
       ],
-      descendants: [],
+      descendants: [
+        {
+          name: 'Column',
+          options: [
+            {
+              label: 'Toggle visibility',
+              key: 'visible',
+              value: true,
+              type: 'TOGGLE',
+              configuration: {
+                as: 'VISIBILITY',
+              },
+            },
+            {
+              value: 'flexible',
+              label: 'Column width',
+              key: 'columnWidth',
+              type: 'CUSTOM',
+              configuration: {
+                as: 'DROPDOWN',
+                dataType: 'string',
+                allowedInput: [
+                  { name: 'Fit content', value: 'fitContent' },
+                  { name: 'Flexible', value: 'flexible' },
+                  { name: 'Hidden', value: 'hidden' },
+                  { name: '1', value: '1' },
+                  { name: '2', value: '2' },
+                  { name: '3', value: '3' },
+                  { name: '4', value: '4' },
+                  { name: '5', value: '5' },
+                  { name: '6', value: '6' },
+                  { name: '7', value: '7' },
+                  { name: '8', value: '8' },
+                  { name: '9', value: '9' },
+                  { name: '10', value: '10' },
+                  { name: '11', value: '11' },
+                  { name: '12', value: '12' },
+                ],
+              },
+            },
+            {
+              value: 'flexible',
+              label: 'Column width (tablet landscape)',
+              key: 'columnWidthTabletLandscape',
+              type: 'CUSTOM',
+              configuration: {
+                as: 'DROPDOWN',
+                dataType: 'string',
+                allowedInput: [
+                  { name: 'Fit content', value: 'fitContent' },
+                  { name: 'Flexible', value: 'flexible' },
+                  { name: 'Hidden', value: 'hidden' },
+                  { name: '1', value: '1' },
+                  { name: '2', value: '2' },
+                  { name: '3', value: '3' },
+                  { name: '4', value: '4' },
+                  { name: '5', value: '5' },
+                  { name: '6', value: '6' },
+                  { name: '7', value: '7' },
+                  { name: '8', value: '8' },
+                  { name: '9', value: '9' },
+                  { name: '10', value: '10' },
+                  { name: '11', value: '11' },
+                  { name: '12', value: '12' },
+                ],
+              },
+            },
+            {
+              value: 'flexible',
+              label: 'Column width (tablet portrait)',
+              key: 'columnWidthTabletPortrait',
+              type: 'CUSTOM',
+              configuration: {
+                as: 'DROPDOWN',
+                dataType: 'string',
+                allowedInput: [
+                  { name: 'Fit content', value: 'fitContent' },
+                  { name: 'Flexible', value: 'flexible' },
+                  { name: 'Hidden', value: 'hidden' },
+                  { name: '1', value: '1' },
+                  { name: '2', value: '2' },
+                  { name: '3', value: '3' },
+                  { name: '4', value: '4' },
+                  { name: '5', value: '5' },
+                  { name: '6', value: '6' },
+                  { name: '7', value: '7' },
+                  { name: '8', value: '8' },
+                  { name: '9', value: '9' },
+                  { name: '10', value: '10' },
+                  { name: '11', value: '11' },
+                  { name: '12', value: '12' },
+                ],
+              },
+            },
+            {
+              value: 'flexible',
+              label: 'Column width (mobile)',
+              key: 'columnWidthMobile',
+              type: 'CUSTOM',
+              configuration: {
+                as: 'DROPDOWN',
+                dataType: 'string',
+                allowedInput: [
+                  { name: 'Fit content', value: 'fitContent' },
+                  { name: 'Flexible', value: 'flexible' },
+                  { name: 'Hidden', value: 'hidden' },
+                  { name: '1', value: '1' },
+                  { name: '2', value: '2' },
+                  { name: '3', value: '3' },
+                  { name: '4', value: '4' },
+                  { name: '5', value: '5' },
+                  { name: '6', value: '6' },
+                  { name: '7', value: '7' },
+                  { name: '8', value: '8' },
+                  { name: '9', value: '9' },
+                  { name: '10', value: '10' },
+                  { name: '11', value: '11' },
+                  { name: '12', value: '12' },
+                ],
+              },
+            },
+            {
+              value: '',
+              label: 'Height',
+              key: 'columnHeight',
+              type: 'TEXT',
+              configuration: {
+                as: 'UNIT',
+              },
+            },
+            {
+              value: 'transparent',
+              label: 'Background color',
+              key: 'backgroundColor',
+              type: 'COLOR',
+            },
+            {
+              type: 'CUSTOM',
+              label: 'Horizontal Alignment',
+              key: 'horizontalAlignment',
+              value: 'inherit',
+              configuration: {
+                as: 'BUTTONGROUP',
+                dataType: 'string',
+                allowedInput: [
+                  { name: 'None', value: 'inherit' },
+                  { name: 'Left', value: 'flex-start' },
+                  { name: 'Center', value: 'center' },
+                  { name: 'Right', value: 'flex-end' },
+                ],
+              },
+            },
+            {
+              type: 'CUSTOM',
+              label: 'Vertical Alignment',
+              key: 'verticalAlignment',
+              value: 'inherit',
+              configuration: {
+                as: 'BUTTONGROUP',
+                dataType: 'string',
+                allowedInput: [
+                  { name: 'None', value: 'inherit' },
+                  { name: 'Top', value: 'flex-start' },
+                  { name: 'Center', value: 'center' },
+                  { name: 'Bottom', value: 'flex-end' },
+                ],
+              },
+            },
+            {
+              value: ['0rem', '0rem', '0rem', '0rem'],
+              label: 'Outer space',
+              key: 'outerSpacing',
+              type: 'SIZES',
+            },
+            {
+              value: ['0rem', '0rem', '0rem', '0rem'],
+              label: 'Inner space',
+              key: 'innerSpacing',
+              type: 'SIZES',
+            },
+          ],
+          descendants: [
+            {
+              name: 'Drawer',
+              options: [
+                {
+                  type: 'SIZE',
+                  label: 'Drawer Width',
+                  key: 'drawerWidth',
+                  value: '480px',
+                  configuration: {
+                    as: 'UNIT',
+                  },
+                },
+                {
+                  value: 'temporary',
+                  label: 'Drawer type',
+                  key: 'drawerType',
+                  type: 'CUSTOM',
+                  configuration: {
+                    as: 'BUTTONGROUP',
+                    dataType: 'string',
+                    allowedInput: [
+                      { name: 'Persistent', value: 'persistent' },
+                      { name: 'Temporary', value: 'temporary' },
+                    ],
+                  },
+                },
+                {
+                  value: 'sm',
+                  label: 'Responsively temporary on',
+                  key: 'breakpoint',
+                  type: 'CUSTOM',
+                  configuration: {
+                    as: 'DROPDOWN',
+                    dataType: 'string',
+                    allowedInput: [
+                      { name: 'Permanent', value: 'xs' },
+                      { name: 'Mobile', value: 'sm' },
+                      { name: 'Tablet portrait', value: 'md' },
+                      { name: 'Tablet landscape', value: 'lg' },
+                    ],
+                    condition: {
+                      type: 'SHOW',
+                      option: 'drawerType',
+                      comparator: 'EQ',
+                      value: 'persistent',
+                    },
+                  },
+                },
+                {
+                  value: 'right',
+                  label: 'Alignment',
+                  key: 'temporaryAnchor',
+                  type: 'CUSTOM',
+                  configuration: {
+                    as: 'BUTTONGROUP',
+                    dataType: 'string',
+                    allowedInput: [
+                      { name: 'Left', value: 'left' },
+                      { name: 'Top', value: 'top' },
+                      { name: 'Right', value: 'right' },
+                      { name: 'Bottom', value: 'bottom' },
+                    ],
+                    condition: {
+                      type: 'SHOW',
+                      option: 'drawerType',
+                      comparator: 'EQ',
+                      value: 'temporary',
+                    },
+                  },
+                },
+                {
+                  value: 'left',
+                  label: 'Alignment',
+                  key: 'persistentAnchor',
+                  type: 'CUSTOM',
+                  configuration: {
+                    as: 'BUTTONGROUP',
+                    dataType: 'string',
+                    allowedInput: [
+                      { name: 'Left', value: 'left' },
+                      { name: 'Right', value: 'right' },
+                    ],
+                    condition: {
+                      type: 'HIDE',
+                      option: 'drawerType',
+                      comparator: 'EQ',
+                      value: 'temporary',
+                    },
+                  },
+                },
+                {
+                  label: 'Toggle visibility',
+                  key: 'visibility',
+                  value: false,
+                  type: 'TOGGLE',
+                  configuration: {
+                    as: 'VISIBILITY',
+                  },
+                },
+              ],
+              descendants: [],
+            },
+          ],
+        },
+      ],
     },
   ],
 }))();
