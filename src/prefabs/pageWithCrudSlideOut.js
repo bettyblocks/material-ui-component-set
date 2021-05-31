@@ -8213,7 +8213,7 @@
           </Field>
           <Field label="Create Form">
             <CheckBox
-              label="Use the same properties as the data table in the create form"
+              label="Use the same properties as the data table in the create and update form"
               checked={createFormUseDataProperties}
               onChange={() => {
                 setCreateFormUseDataProperties(!createFormUseDataProperties);
@@ -8233,7 +8233,7 @@
             />
             {!createFormUseDataProperties && (
               <Field
-                label="Input fields in the create form"
+                label="Input fields in the create and update form"
                 error={
                   createPropertiesValidation && (
                     <Text color="#e82600">
