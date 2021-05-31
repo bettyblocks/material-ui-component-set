@@ -1,3 +1,17 @@
+# [1.139.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.138.0...v1.139.0) (2021-05-28)
+
+
+### Features
+
+* add page with edit datatable ([f4c983d](https://github.com/bettyblocks/material-ui-component-set/commit/f4c983dd9da8dd1feda57a52cc0a717ca377da39))
+
+# [1.138.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.137.1...v1.138.0) (2021-05-28)
+
+
+### Features
+
+* add page with create datatable ([73fce30](https://github.com/bettyblocks/material-ui-component-set/commit/73fce308da7fdd4dce6087b11a7a28b8d63ad30f))
+
 ## [1.137.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.137.0...v1.137.1) (2021-05-25)
 
 
