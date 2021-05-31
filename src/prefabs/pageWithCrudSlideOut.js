@@ -1,7 +1,7 @@
 (() => ({
   name: 'CRUD with slide-out panel',
   icon: 'DataTable',
-  // type: 'page',
+  type: 'page',
   description: 'This page contains a datatable with CRUD sidebar',
   detail: 'This page contains a datatable with CRUD sidebar',
   previewUrl: 'https://preview.betty.app/crud-with-slide-out',
@@ -21251,24 +21251,6 @@
                 },
                 type: 'Custom',
               },
-              // {
-              //   name: 'Toggle loading state',
-              //   sourceEvent: 'onSubmit',
-              //   ref: {
-              //     targetComponentId: '#editSubmitButton',
-              //     sourceComponentId: '#editForm',
-              //   },
-              //   type: 'Custom',
-              // },
-              // {
-              //   name: 'Toggle loading state',
-              //   sourceEvent: 'onActionDone',
-              //   ref: {
-              //     targetComponentId: '#editSubmitButton',
-              //     sourceComponentId: '#editForm',
-              //   },
-              //   type: 'Custom',
-              // },
             ];
 
             newPrefab.interactions = [
