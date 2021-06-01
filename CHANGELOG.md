@@ -1,3 +1,10 @@
+## [1.140.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.140.0...v1.140.1) (2021-06-01)
+
+
+### Bug Fixes
+
+* **ta-2564:** removes action on main delete button ([8a79736](https://github.com/bettyblocks/material-ui-component-set/commit/8a79736ff2d478ef080a22a7ec97ccfb96d47efc))
+
 # [1.140.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.139.0...v1.140.0) (2021-05-31)
 
 
