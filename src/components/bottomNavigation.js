@@ -1,7 +1,7 @@
 (() => ({
   name: 'BottomNavigation',
   type: 'BODY_COMPONENT',
-  allowedTypes: ['NAV_COMPONENT'],
+  allowedTypes: ['BOT_NAV_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { BottomNavigation } = window.MaterialUI.Core;
@@ -9,14 +9,9 @@
     const { defaultValue, activeColor, inactiveColor } = options;
     const isDev = env === 'dev';
     const [value, setValue] = useState(parseInt(defaultValue - 1, 10) || 0);
-    const [navData, setNavData] = useState({});
 
     const handleChange = (_, newValue) => {
       setValue(newValue);
-    };
-
-    const setSelectedNav = index => {
-      setValue(index);
     };
 
     useEffect(() => {
@@ -28,32 +23,17 @@
     const bottomNavComponent = (
       <div className={[isDev ? classes.dev : '', classes.root].join(' ')}>
         <BottomNavigation onChange={handleChange} value={value}>
-          {React.Children.map(children, (child, index) => {
-            navData[`label${index}`] = [`Item`];
-            navData[`icon${index}`] = 'Add';
-            const { options: childOptions = {} } = child.props || {};
-
-            if (index >= 5) {
-              return null;
-            }
-
-            return (
-              <Children
-                index={index}
-                value={value}
-                navData={navData}
-                setNavData={setNavData}
-                setSelectedNav={setSelectedNav}
-                activeColor={activeColor}
-                inactiveColor={inactiveColor}
-                maxChild={children.length <= 3}
-              >
-                {React.cloneElement(child, {
-                  ...childOptions,
-                })}
-              </Children>
-            );
-          })}
+          {React.Children.map(children, (child, index) => (
+            <Children
+              index={index}
+              value={value}
+              activeColor={activeColor}
+              inactiveColor={inactiveColor}
+              maxChild={children.length <= 3}
+            >
+              {child}
+            </Children>
+          ))}
         </BottomNavigation>
       </div>
     );

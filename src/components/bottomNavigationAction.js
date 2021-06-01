@@ -1,6 +1,6 @@
 (() => ({
   name: 'BottomNavigationAction',
-  type: 'NAV_COMPONENT',
+  type: 'BOT_NAV_COMPONENT',
   allowedTypes: [],
   orientation: 'VERTICAL',
   jsx: (() => {
@@ -21,41 +21,7 @@
     const hasExternalLink = linkToExternal && linkToExternal.id !== '';
     const linkToExternalVariable =
       (linkToExternal && useText(linkToExternal)) || '';
-    const {
-      maxChild,
-      value,
-      navData,
-      setNavData,
-      setSelectedNav,
-      index,
-    } = parent;
-
-    const doSetNav = () => {
-      setSelectedNav(index);
-    };
-
-    B.defineFunction('SelectNav', doSetNav);
-
-    const labelChanged = () => {
-      const currentLabel = navData[`label${index}`]
-        ? useText(navData[`label${index}`])
-        : '';
-      return currentLabel !== useText(label);
-    };
-
-    const iconChanged = () => navData[`icon${index}`] !== icon;
-
-    const hasChange = () => labelChanged() || iconChanged();
-
-    useEffect(() => {
-      if (setNavData && hasChange()) {
-        setNavData({
-          ...navData,
-          [`label${index}`]: label,
-          [`icon${index}`]: icon,
-        });
-      }
-    }, [index, setNavData, label, icon]);
+    const { maxChild, value, index } = parent;
 
     const generalProps = {
       tabindex: isDev && -1,
@@ -71,26 +37,16 @@
       endpoint: linkType === 'internal' && hasLink ? linkTo : undefined,
     };
 
-    function styling() {
-      let wrapper = '';
-      let buttonLabel = '';
-      let root = '';
-      if (value === index && !customStyle) {
-        wrapper = classes.activeNavigation;
-      } else {
-        wrapper = classes.inactiveColor;
-      }
-      if (customStyle) {
-        wrapper = classes.customStyle;
-        buttonLabel = classes.labelColor;
-        root = classes.navControl;
-      }
-
-      return {
-        root,
-        wrapper,
-        label: buttonLabel,
-      };
+    const styling = {};
+    if (value === index && !customStyle) {
+      styling.wrapper = classes.activeNavigation;
+    } else {
+      styling.wrapper = classes.inactiveNavigation;
+    }
+    if (customStyle) {
+      styling.wrapper = classes.customStyle;
+      styling.buttonLabel = classes.labelColor;
+      styling.root = classes.navControl;
     }
 
     const BasicButtonComponent = (
@@ -99,7 +55,7 @@
         showLabel={maxChild || value === index}
         icon={icon !== 'None' && React.createElement(Icons[icon])}
         label={label}
-        classes={styling()}
+        classes={styling}
         value={value}
       />
     );
