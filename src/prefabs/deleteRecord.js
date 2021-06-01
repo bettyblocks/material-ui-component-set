@@ -528,7 +528,6 @@
                 allowedInput: [
                   { name: 'Internal page', value: 'internal' },
                   { name: 'External page', value: 'external' },
-                  { name: 'Action', value: 'action' },
                 ],
               },
             },
@@ -558,21 +557,6 @@
                   option: 'linkType',
                   comparator: 'EQ',
                   value: 'external',
-                },
-              },
-            },
-            {
-              value: '',
-              label: 'Action',
-              key: 'actionId',
-              type: 'ACTION',
-              configuration: {
-                apiVersion: 'v1',
-                condition: {
-                  type: 'SHOW',
-                  option: 'linkType',
-                  comparator: 'EQ',
-                  value: 'action',
                 },
               },
             },
