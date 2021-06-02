@@ -14,6 +14,12 @@
           key: 'imageSource',
           type: 'VARIABLE',
         },
+        {
+          label: 'Property',
+          key: 'property',
+          type: 'PROPERTY',
+          value: '',
+        },
       ],
       descendants: [],
     },

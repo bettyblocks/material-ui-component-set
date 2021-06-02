@@ -41,21 +41,6 @@
           },
         },
         {
-          label: 'Property',
-          key: 'property',
-          type: 'PROPERTY',
-          value: '',
-          configuration: {
-            dependsOn: 'model',
-            condition: {
-              type: 'SHOW',
-              option: 'select',
-              comparator: 'EQ',
-              value: 'model',
-            },
-          },
-        },
-        {
           value: {},
           label: 'Filter',
           key: 'filter',
@@ -372,6 +357,12 @@
               key: 'imageSource',
               type: 'VARIABLE',
             },
+            {
+              label: 'Property',
+              key: 'property',
+              type: 'PROPERTY',
+              value: '',
+            },
           ],
           descendants: [],
         },
@@ -385,6 +376,12 @@
               label: 'Source',
               key: 'imageSource',
               type: 'VARIABLE',
+            },
+            {
+              label: 'Property',
+              key: 'property',
+              type: 'PROPERTY',
+              value: '',
             },
           ],
           descendants: [],

@@ -6,7 +6,16 @@
   jsx: (() => {
     const { MobileStepper, Button, IconButton } = window.MaterialUI.Core;
     const { Icons } = window.MaterialUI;
-    const { env, useText, Children, useAllQuery, useFilter, getProperty } = B;
+    const {
+      env,
+      useText,
+      Children,
+      useAllQuery,
+      useFilter,
+      getProperty,
+      // InteractionScope,
+      // ModelProvider,
+    } = B;
     const {
       activeStep: stepIndex,
       allImages,
@@ -39,6 +48,7 @@
     } else if (orderProperty && orderProperty) {
       orderPropertyPath = [orderProperty];
     }
+    // eslint-disable-next-line no-unused-vars
     const [results, setResults] = useState([]);
     const createSortObject = (fields, order) => {
       const sort = fields.reduceRight((acc, property, index) => {
@@ -59,17 +69,17 @@
         }
       : {};
 
-    const ImgPlaceholder = () => (
-      <div className={classes.empty}>
-        <div className={classes.placeholderWrapper}>
-          <svg className={classes.placeholder} width={86} height={48}>
-            <title>placeholder</title>
-            <rect x="19.5" y="8.5" rx="2" />
-            <path d="M61.1349945 29.020979v3.9160839H25v-2.5379375l6.5998225-4.9892478 5.6729048 4.2829541 13.346858-11.2981564L61.1349945 29.020979zm-22.5-10.270979c0 1.0416667-.3645833 1.9270833-1.09375 2.65625S35.9266612 22.5 34.8849945 22.5s-1.9270833-.3645833-2.65625-1.09375-1.09375-1.6145833-1.09375-2.65625.3645833-1.9270833 1.09375-2.65625S33.8433278 15 34.8849945 15s1.9270833.3645833 2.65625 1.09375 1.09375 1.6145833 1.09375 2.65625z" />
-          </svg>
-        </div>
-      </div>
-    );
+    // const ImgPlaceholder = () => (
+    //   <div className={classes.empty}>
+    //     <div className={classes.placeholderWrapper}>
+    //       <svg className={classes.placeholder} width={86} height={48}>
+    //         <title>placeholder</title>
+    //         <rect x="19.5" y="8.5" rx="2" />
+    //         <path d="M61.1349945 29.020979v3.9160839H25v-2.5379375l6.5998225-4.9892478 5.6729048 4.2829541 13.346858-11.2981564L61.1349945 29.020979zm-22.5-10.270979c0 1.0416667-.3645833 1.9270833-1.09375 2.65625S35.9266612 22.5 34.8849945 22.5s-1.9270833-.3645833-2.65625-1.09375-1.09375-1.6145833-1.09375-2.65625.3645833-1.9270833 1.09375-2.65625S33.8433278 15 34.8849945 15s1.9270833.3645833 2.65625 1.09375 1.09375 1.6145833 1.09375 2.65625z" />
+    //       </svg>
+    //     </div>
+    //   </div>
+    // );
 
     const MobileStepperCmp = () => {
       if (autoplay && !isDev) {
@@ -291,25 +301,25 @@
         });
       };
 
-      const Step = props => {
-        const { active, isFirstRender, item } = props;
-        const StepContent = (
-          <div className={classes.root}>
-            <img src={item.photo.url} alt="carousel" />
-          </div>
-        );
+      // const Step = props => {
+      //   const { active, isFirstRender, item } = props;
+      //   const StepContent = (
+      //     <div className={classes.root}>
+      //       <img src={item.photo.url} alt="carousel" />
+      //     </div>
+      //   );
 
-        const StepCmp = <>{active ? StepContent : null}</>;
+      //   const StepCmp = <>{active ? StepContent : null}</>;
 
-        useEffect(() => {
-          if (active && !isFirstRender) {
-            B.triggerEvent('OnStepActive');
-          } else if (!active && !isFirstRender) {
-            B.triggerEvent('OnStepInactive');
-          }
-        }, [active, isFirstRender]);
-        return StepCmp;
-      };
+      //   useEffect(() => {
+      //     if (active && !isFirstRender) {
+      //       B.triggerEvent('OnStepActive');
+      //     } else if (!active && !isFirstRender) {
+      //       B.triggerEvent('OnStepInactive');
+      //     }
+      //   }, [active, isFirstRender]);
+      //   return StepCmp;
+      // };
 
       const overlay = (
         <MobileStepper
@@ -372,25 +382,164 @@
           }
         />
       );
+      // const secondChildrne = [];
+
+      // results.forEach((item, index) => {
+      //   <ModelProvider key={item.id} value={item} id={model}>
+      //     <InteractionScope model={model}>
+      //       {context => children.push((context = { context }))
+      //       // React.Children.map(children, (child, index) => (
+      //       //   <Children
+      //       // stepLabelData={stepLabelData}
+      //       // setStepLabelData={setStepLabelData}
+      //       // active={index === activeStep || (isDev && allImages)}
+      //       // isFirstRender={numRendersRef.current === 1}
+      //       // parentHeight={height}
+      //       // context={context}
+      //       //   >
+      //       //     {React.cloneElement(child)}
+      //       //   </Children>
+      //       // ))
+      //       // <Children
+      //       //   // active={index === activeStep || (isDev && allImages)}
+      //       //   active
+      //       //   context={context}
+      //       //   test="ja"
+      //       // >
+      //       //   {children}
+      //       // </Children>
+      //       }
+      //     </InteractionScope>
+      //   </ModelProvider>;
+      // });
+      // const Looper = result => {
+      //   const rows = result.map(item => (
+      //     <ModelProvider key={item.id} value={item} id={model}>
+      //       <InteractionScope model={model}>
+      //         {context => (
+      //           // React.Children.map(children, (child, index) => (
+      //           //   <Children
+      //           //     stepLabelData={stepLabelData}
+      //           //     setStepLabelData={setStepLabelData}
+      //           //     active={index === activeStep || (isDev && allImages)}
+      //           //     isFirstRender={numRendersRef.current === 1}
+      //           //     parentHeight={height}
+      //           //     context={context}
+      //           //   >
+      //           //     {React.cloneElement(child)}
+      //           //   </Children>
+      //           // ))
+      //           // <Children
+      //           //   // active={index === activeStep || (isDev && allImages)}
+      //           //   active
+      //           //   context={context}
+      //           //   test="ja"
+      //           // >
+      //           //   {children}
+      //           // </Children>
+      //         )}
+      //       </InteractionScope>
+      //     </ModelProvider>
+      //   ));
+
+      //   return rows;
+      // };
 
       const carouselVariant = variant === 'mobile' ? bottom : overlay;
+      // debugger;
 
       return (
-        <div className={classes.container}>
-          {results.length === 0 || isDev ? (
-            <ImgPlaceholder />
-          ) : (
-            results.map((item, index) => (
-              <Step
-                item={item}
-                active={index === activeStep}
-                isFirstRender={numRendersRef.current === 1}
-              />
-            ))
-          )}
+        <div className={`${classes.container} ${classes.wrapper}`}>
+          {React.Children.map(children, (child, index) => (
+            <Children
+              stepLabelData={stepLabelData}
+              setStepLabelData={setStepLabelData}
+              active={index === activeStep || (isDev && allImages)}
+              isFirstRender={numRendersRef.current === 1}
+              parentHeight={height}
+            >
+              {React.cloneElement(child)}
+            </Children>
+          ))}
+          {/* {results.map(value => (
+            <ModelProvider value={value} id={model}>
+              <InteractionScope model={model}>
+                {context => (
+                  <Children
+                    stepLabelData={stepLabelData}
+                    setStepLabelData={setStepLabelData}
+                    active={
+                      context.modelData.id === activeStep ||
+                      (isDev && allImages)
+                    }
+                    isFirstRender={numRendersRef.current === 1}
+                    parentHeight={height}
+                    context={context}
+                  >
+                    {children}
+                  </Children>
+                )} */}
+          {/* {React.Children.map(children, (child, index) => (
+                  <Children
+                    stepLabelData={stepLabelData}
+                    setStepLabelData={setStepLabelData}
+                    active={index === activeStep || (isDev && allImages)}
+                    isFirstRender={numRendersRef.current === 1}
+                    parentHeight={height}
+                  >
+                    {React.cloneElement(child)}
+                  </Children>
+                ))} */}
+          {/* </InteractionScope> */}
+          {/* </ModelProvider> */}
+          {/* ))} */}
+          {/* {React.Children.map(children, (child, index) => (
+            <Children
+              stepLabelData={stepLabelData}
+              setStepLabelData={setStepLabelData}
+              active={index === activeStep || (isDev && allImages)}
+              isFirstRender={numRendersRef.current === 1}
+              parentHeight={height}
+            >
+              {React.cloneElement(child)}
+            </Children>
+          ))} */}
+          {/* // {Looper(results)} */}
           {carouselVariant}
         </div>
+        // <div className={classes.container}>
+        //   {results.map(value => (
+        //     <ModelProvider value={value} id={model}>
+        //       <InteractionScope model={model}>
+        //         {children}
+        //         {/* {context => (
+        //           <Children index={index} context={context}>
+        //             {children}
+        //           </Children>
+        //         )} */}
+        //       </InteractionScope>
+        //     </ModelProvider>
+        //   ))}
+        //   {carouselVariant}
+        // </div>
       );
+
+      // return (
+      //   <div className={classes.container}>
+      //     {results.length === 0 || isDev ? (
+      //       <ImgPlaceholder />
+      //     ) : (
+      //       results.map((item, index) => (
+      //         <Step
+      //           item={item}
+      //           active={index === activeStep}
+      //           isFirstRender={numRendersRef.current === 1}
+      //         />
+      //       ))
+      //     )}
+      //     {carouselVariant}
+      //   </div>
+      // );
     };
     const StepperComponent =
       select === 'custom' ? MobileStepperCmp() : ModelStepperCmp();
