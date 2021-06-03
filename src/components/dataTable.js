@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 (() => ({
   name: 'DataTable',
   type: 'CONTENT_COMPONENT',
@@ -180,10 +181,23 @@
         {},
       );
 
-      interactionFilters = {
-        ...interactionFilters,
-        ...reducedFilter,
-      };
+      if (Object.keys(interactionFilters).length === 0) {
+        interactionFilters = {
+          ...reducedFilter,
+        };
+      } else if (
+        Object.keys(interactionFilters).length === 1 &&
+        '_and' in interactionFilters
+      ) {
+        interactionFilters._and = [
+          ...interactionFilters._and,
+          { ...reducedFilter },
+        ];
+      } else if (Object.keys(interactionFilters).length > 0) {
+        interactionFilters = {
+          _and: [{ ...interactionFilters }, { ...reducedFilter }],
+        };
+      }
     });
 
     const searchFilter = searchProperty
@@ -201,12 +215,9 @@
         ? deepMerge(filter, searchFilter)
         : filter;
 
-    // eslint-disable-next-line no-underscore-dangle
-    if (newFilter._and) {
-      // append interactions filters to this list
-    }
-
     const newNewFilter = deepMerge(newFilter, interactionFilters);
+
+    console.log(newNewFilter);
 
     const where = useFilter(newNewFilter);
 
