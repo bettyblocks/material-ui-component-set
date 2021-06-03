@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 (() => ({
   name: 'DataTable',
   type: 'CONTENT_COMPONENT',
@@ -189,7 +188,9 @@
         Object.keys(interactionFilters).length === 1 &&
         '_and' in interactionFilters
       ) {
+        // eslint-disable-next-line no-underscore-dangle
         interactionFilters._and = [
+          // eslint-disable-next-line no-underscore-dangle
           ...interactionFilters._and,
           { ...reducedFilter },
         ];
@@ -216,8 +217,6 @@
         : filter;
 
     const newNewFilter = deepMerge(newFilter, interactionFilters);
-
-    console.log(newNewFilter);
 
     const where = useFilter(newNewFilter);
 
