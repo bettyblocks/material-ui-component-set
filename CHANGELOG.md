@@ -1,3 +1,39 @@
+## [1.140.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.140.0...v1.140.1) (2021-06-01)
+
+
+### Bug Fixes
+
+* **ta-2564:** removes action on main delete button ([8a79736](https://github.com/bettyblocks/material-ui-component-set/commit/8a79736ff2d478ef080a22a7ec97ccfb96d47efc))
+
+# [1.140.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.139.0...v1.140.0) (2021-05-31)
+
+
+### Features
+
+* **ta-2259:** beforeCreate to form component to align with other forms ([7a8fe05](https://github.com/bettyblocks/material-ui-component-set/commit/7a8fe05d8ce79348f7a5b0b9ff6e1c8dba33f269))
+* **ta-2259:** beforeCreate to form component to align with other forms ([f659717](https://github.com/bettyblocks/material-ui-component-set/commit/f65971742e7ac9a8f010c238024b593fc580f36e))
+
+# [1.139.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.138.0...v1.139.0) (2021-05-28)
+
+
+### Features
+
+* add page with edit datatable ([f4c983d](https://github.com/bettyblocks/material-ui-component-set/commit/f4c983dd9da8dd1feda57a52cc0a717ca377da39))
+
+# [1.138.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.137.1...v1.138.0) (2021-05-28)
+
+
+### Features
+
+* add page with create datatable ([73fce30](https://github.com/bettyblocks/material-ui-component-set/commit/73fce308da7fdd4dce6087b11a7a28b8d63ad30f))
+
+## [1.137.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.137.0...v1.137.1) (2021-05-25)
+
+
+### Bug Fixes
+
+* fixes action button not triggering action ([d6e458e](https://github.com/bettyblocks/material-ui-component-set/commit/d6e458ed231e4ffa5124cd6191e5b2c04dd9a146))
+
 # [1.137.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.136.0...v1.137.0) (2021-05-21)
 
 
