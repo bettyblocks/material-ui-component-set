@@ -4383,6 +4383,20 @@
                                         value: false,
                                       },
                                       {
+                                        type: 'TOGGLE',
+                                        label: 'Hide Badge when value is 0',
+                                        key: 'hideBadge',
+                                        value: false,
+                                        configuration: {
+                                          condition: {
+                                            type: 'SHOW',
+                                            option: 'addBadge',
+                                            comparator: 'EQ',
+                                            value: true,
+                                          },
+                                        },
+                                      },
+                                      {
                                         type: 'VARIABLE',
                                         label: 'Content',
                                         key: 'content',
