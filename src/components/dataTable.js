@@ -216,9 +216,9 @@
         ? deepMerge(filter, searchFilter)
         : filter;
 
-    const newNewFilter = deepMerge(newFilter, interactionFilters);
+    const completeFilter = deepMerge(newFilter, interactionFilters);
 
-    const where = useFilter(newNewFilter);
+    const where = useFilter(completeFilter);
 
     // TODO: move model to skip
     const { loading, error, data, refetch } =
