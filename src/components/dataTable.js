@@ -71,6 +71,8 @@
     const [search, setSearch] = useState('');
     const [searchTerm, setSearchTerm] = useState('');
     const [showPagination, setShowPagination] = useState(false);
+    const [interactionFilter, setInteractionFilter] = useState({});
+
     const { label: searchPropertyLabel = '{property}' } =
       getProperty(searchProperty) || {};
     let orderPropertyPath = null;
@@ -148,6 +150,57 @@
       path = [searchProperty.id].flat();
     }
 
+    /**
+     * @name Filter
+     * @param {Property} property
+     * @returns {Void}
+     */
+    B.defineFunction('Filter', ({ event, property, interactionId }) => {
+      setInteractionFilter({
+        ...interactionFilter,
+        [interactionId]: {
+          property,
+          value: event.target.value,
+        },
+      });
+    });
+
+    B.defineFunction('ResetFilter', () => {
+      setInteractionFilter({});
+    });
+
+    let interactionFilters = {};
+
+    Object.keys(interactionFilter).forEach(f => {
+      const reducedFilter = interactionFilter[f].property.id.reduceRight(
+        (acc, property, index) =>
+          index === interactionFilter[f].property.id.length - 1
+            ? { [property]: { matches: interactionFilter[f].value } }
+            : { [property]: acc },
+        {},
+      );
+
+      if (Object.keys(interactionFilters).length === 0) {
+        interactionFilters = {
+          ...reducedFilter,
+        };
+      } else if (
+        Object.keys(interactionFilters).length === 1 &&
+        '_and' in interactionFilters
+      ) {
+        // eslint-disable-next-line no-underscore-dangle
+        interactionFilters._and = [
+          // eslint-disable-next-line no-underscore-dangle
+          ...interactionFilters._and,
+          { ...reducedFilter },
+        ];
+      } else if (Object.keys(interactionFilters).length > 0) {
+        interactionFilters = {
+          _and: [{ ...interactionFilters }, { ...reducedFilter }],
+        };
+      }
+    });
+
     const searchFilter = searchProperty
       ? path.reduceRight(
           (acc, property, index) =>
@@ -163,7 +216,9 @@
         ? deepMerge(filter, searchFilter)
         : filter;
 
-    const where = useFilter(newFilter);
+    const completeFilter = deepMerge(newFilter, interactionFilters);
+
+    const where = useFilter(completeFilter);
 
     // TODO: move model to skip
     const { loading, error, data, refetch } =
