@@ -4,7 +4,7 @@
   allowedTypes: ['CONTENT_COMPONENT', 'CONTAINER_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { labelText, property } = options;
+    const { labelText, property, sideBySide } = options;
     const { env, useText, getProperty } = B;
     const labelIsEmpty = labelText.length === 0;
     const propertyIsEmpty =
@@ -43,12 +43,12 @@
       );
 
     return (
-      <div>
+      <div className={sideBySide ? classes.flex : null}>
         <Tag className={`${classes.content} ${classes.label}`}>
           {isPristine && labelIsEmpty ? (
-            <span className={classes.placeholder}>Select label</span>
+            <span className={classes.placeholder}>Select label: </span>
           ) : (
-            parsedContent
+            `${parsedContent}: `
           )}
         </Tag>
         {Content}
@@ -144,6 +144,9 @@
           styles
             ? fontWeight
             : getPath(['theme', 'typography', type, 'fontWeight'], style),
+      },
+      flex: {
+        display: 'flex',
       },
     };
   },

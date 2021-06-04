@@ -1,5 +1,5 @@
 (() => ({
-  name: 'detailViewChild',
+  name: 'Detail View Child',
   icon: 'DataContainer',
   category: 'DATA',
   structure: [
@@ -225,6 +225,12 @@
               label: 'Outer space',
               key: 'outerSpacing',
               type: 'SIZES',
+            },
+            {
+              value: false,
+              label: 'Side by Side',
+              key: 'sideBySide',
+              type: 'TOGGLE',
             },
             {
               value: true,
