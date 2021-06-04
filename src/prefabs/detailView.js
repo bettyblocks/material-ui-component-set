@@ -42,18 +42,6 @@
       }
       return returnObj;
     };
-    // const enrichVarObj = obj => {
-    //   const property = obj;
-    //   if (data && data.model) {
-    //     const model = data.model.relationships.find(
-    //       prop => prop.id === obj.id[0],
-    //     );
-    //     if (model) {
-    //       property.name = `{{ ${model.referenceModel.name}.${obj.label} }}`;
-    //     }
-    //   }
-    //   return property;
-    // };
 
     return (
       <>
