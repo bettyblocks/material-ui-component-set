@@ -40,6 +40,32 @@
           value: 1,
         },
         {
+          value: [],
+          label: 'Helper text',
+          key: 'helperText',
+          type: 'VARIABLE',
+        },
+        {
+          value: false,
+          label: 'Validation options',
+          key: 'validationOptions',
+          type: 'TOGGLE',
+        },
+        {
+          value: ['This field is required'],
+          label: 'Value required message',
+          key: 'validationValueMissing',
+          type: 'VARIABLE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'validationOptions',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
           value: ['M', '0rem', '0rem', '0rem'],
           label: 'Outer space',
           key: 'outerSpacing',
@@ -86,10 +112,10 @@
           },
         },
         {
-          value: false,
-          label: 'Border',
-          key: 'border',
-          type: 'TOGGLE',
+          type: 'COLOR',
+          label: 'Helper color',
+          key: 'helperColor',
+          value: 'Accent2',
           configuration: {
             condition: {
               type: 'SHOW',
@@ -101,41 +127,13 @@
         },
         {
           type: 'COLOR',
-          label: 'Border color',
-          key: 'borderColor',
-          value: 'Accent1',
+          label: 'Error color',
+          key: 'errorColor',
+          value: 'Danger',
           configuration: {
             condition: {
               type: 'SHOW',
-              option: 'border',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
-        },
-        {
-          type: 'COLOR',
-          label: 'Border color (hover)',
-          key: 'borderHoverColor',
-          value: 'Black',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'border',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
-        },
-        {
-          type: 'COLOR',
-          label: 'Border color (focus)',
-          key: 'borderFocusColor',
-          value: 'Primary',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'border',
+              option: 'styles',
               comparator: 'EQ',
               value: true,
             },
