@@ -124,10 +124,10 @@
         padding: '20px 0px !important',
       },
       content: {
-        padding: '0px 20px !important',
+        padding: '0px 20px',
       },
       contentWithoutBorder: {
-        padding: '0px 6px !important',
+        padding: '0px 6px',
       },
       slider: {
         color: ({ options: { sliderColor } }) => [
@@ -135,11 +135,11 @@
           '!important',
         ],
         '& .MuiSlider-thumb:hover': {
-          boxShadow: '0px 0px 0px 8px rgb(128,128,128, 0.3) !important',
+          boxShadow: '0px 0px 0px 8px rgb(128,128,128, 0.3)',
         },
       },
       thumbFocusVisible: {
-        boxShadow: '0px 0px 0px 8px rgb(128,128,128, 0.3) !important',
+        boxShadow: '0px 0px 0px 8px rgb(128,128,128, 0.3)',
       },
       label: {
         transform: 'translate(14px, -6px) scale(0.75)',
