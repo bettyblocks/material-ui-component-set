@@ -7,7 +7,7 @@
     const { Icons } = window.MaterialUI;
     const { Link, Badge } = window.MaterialUI.Core;
     const { env, useText, Link: BLink } = B;
-    const isDev = env === 'dev';
+    const isDev = env !== 'dev';
     const {
       icon,
       addBadge,
