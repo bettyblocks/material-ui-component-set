@@ -13,7 +13,6 @@
       linkTo,
       linkToExternal,
       openLinkToExternal,
-      customStyle,
     } = options;
     const { env, Link: BLink, useText } = B;
     const isDev = env === 'dev';
@@ -38,15 +37,14 @@
     };
 
     const styling = {};
-    if (value === index && !customStyle) {
-      styling.wrapper = classes.activeNavigation;
+    if (value === index) {
+      styling.wrapper = classes.activeIconColor;
+      styling.label = classes.activeLabelColor;
+      styling.root = classes.activeBackgroundColor;
     } else {
-      styling.wrapper = classes.inactiveNavigation;
-    }
-    if (customStyle) {
-      styling.wrapper = classes.customStyle;
-      styling.buttonLabel = classes.labelColor;
-      styling.root = classes.navControl;
+      styling.wrapper = classes.inactiveIconColor;
+      styling.label = classes.inactiveLabelColor;
+      styling.root = classes.inactiveBackgroundColor;
     }
 
     const BasicButtonComponent = (
@@ -69,43 +67,51 @@
   styles: B => t => {
     const { Styling } = B;
     const style = new Styling(t);
-    const convertSizes = sizes =>
-      sizes.map(size => style.getSpacing(size)).join(' ');
     return {
       wrapper: {
         '& > *': {
           pointerEvents: 'none',
         },
-        padding: ({ options: { innerSpacing } }) => convertSizes(innerSpacing),
+        width: '100%',
+        height: '100%',
       },
-      root: {
-        padding: ({ options: { innerSpacing } }) => convertSizes(innerSpacing),
-      },
-      navControl: {
-        backgroundColor: ({ options: { backgroundColor } }) => [
-          style.getColor(backgroundColor),
-          '!important',
-        ],
-      },
-      customStyle: {
+      activeIconColor: {
         '& .MuiSvgIcon-root': {
-          color: ({ options: { iconColor } }) => [
-            style.getColor(iconColor),
-            '!important',
-          ],
+          color: ({ parent: { activeIconColor } }) =>
+            style.getColor(activeIconColor),
         },
       },
-      labelColor: {
-        color: ({ options: { labelColor } }) => [
-          style.getColor(labelColor),
+      inactiveIconColor: {
+        '& .MuiSvgIcon-root': {
+          color: ({ parent: { inactiveIconColor } }) =>
+            style.getColor(inactiveIconColor),
+        },
+      },
+      activeLabelColor: {
+        color: ({ parent: { activeLabelColor } }) =>
+          style.getColor(activeLabelColor),
+      },
+      inactiveLabelColor: {
+        color: ({ parent: { inactiveLabelColor } }) =>
+          style.getColor(inactiveLabelColor),
+      },
+      activeBackgroundColor: {
+        height: '100%',
+        maxWidth: '100% !important',
+        width: '100%',
+        backgroundColor: ({ parent: { activeBackgroundColor } }) => [
+          style.getColor(activeBackgroundColor),
           '!important',
         ],
       },
-      activeNavigation: {
-        color: ({ parent: { activeColor } }) => style.getColor(activeColor),
-      },
-      inactiveNavigation: {
-        color: ({ parent: { inactiveColor } }) => style.getColor(inactiveColor),
+      inactiveBackgroundColor: {
+        height: '100%',
+        maxWidth: '100% !important',
+        width: '100%',
+        backgroundColor: ({ parent: { inactiveBackgroundColor } }) => [
+          style.getColor(inactiveBackgroundColor),
+          '!important',
+        ],
       },
     };
   },

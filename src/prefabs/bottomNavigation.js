@@ -1,5 +1,5 @@
 (() => ({
-  name: 'BottomNavigation',
+  name: 'Bottom Navigation',
   icon: 'NavbarIcon',
   category: 'NAVIGATION',
   structure: [
@@ -13,12 +13,6 @@
           type: 'NUMBER',
         },
         {
-          label: 'Background color',
-          key: 'backgroundColor',
-          value: 'Accent1',
-          type: 'COLOR',
-        },
-        {
           type: 'SIZE',
           label: 'Height',
           key: 'height',
@@ -28,16 +22,94 @@
           },
         },
         {
-          label: 'Active color',
-          key: 'activeColor',
-          value: 'Primary',
-          type: 'COLOR',
+          value: false,
+          label: 'Style',
+          key: 'style',
+          type: 'TOGGLE',
         },
         {
-          label: 'Inactive color',
-          key: 'inactiveColor',
-          value: 'Accent2',
           type: 'COLOR',
+          label: 'Active icon color',
+          key: 'activeIconColor',
+          value: 'Primary',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'style',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'COLOR',
+          label: 'Active label color',
+          key: 'activeLabelColor',
+          value: 'Primary',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'style',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'COLOR',
+          label: 'Active background color',
+          key: 'activeBackgroundColor',
+          value: 'Accent1',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'style',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'COLOR',
+          label: 'Inactive icon color',
+          key: 'inactiveIconColor',
+          value: 'Accent2',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'style',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'COLOR',
+          label: 'Inactive label color',
+          key: 'inactiveLabelColor',
+          value: 'Accent2',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'style',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'COLOR',
+          label: 'Inactive background color',
+          key: 'inactiveBackgroundColor',
+          value: 'Accent1',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'style',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
         },
       ],
       descendants: [
@@ -1395,54 +1467,6 @@
               key: 'innerSpacing',
               type: 'SIZES',
             },
-            {
-              value: false,
-              label: 'Custom style',
-              key: 'customStyle',
-              type: 'TOGGLE',
-            },
-            {
-              type: 'COLOR',
-              label: 'Icon color',
-              key: 'iconColor',
-              value: 'Primary',
-              configuration: {
-                condition: {
-                  type: 'SHOW',
-                  option: 'customStyle',
-                  comparator: 'EQ',
-                  value: true,
-                },
-              },
-            },
-            {
-              type: 'COLOR',
-              label: 'Label color',
-              key: 'labelColor',
-              value: 'Primary',
-              configuration: {
-                condition: {
-                  type: 'SHOW',
-                  option: 'customStyle',
-                  comparator: 'EQ',
-                  value: true,
-                },
-              },
-            },
-            {
-              type: 'COLOR',
-              label: 'Background color',
-              key: 'backgroundColor',
-              value: 'Accent1',
-              configuration: {
-                condition: {
-                  type: 'SHOW',
-                  option: 'customStyle',
-                  comparator: 'EQ',
-                  value: true,
-                },
-              },
-            },
           ],
           descendants: [],
         },
@@ -2800,54 +2824,6 @@
               key: 'innerSpacing',
               type: 'SIZES',
             },
-            {
-              value: false,
-              label: 'Custom style',
-              key: 'customStyle',
-              type: 'TOGGLE',
-            },
-            {
-              type: 'COLOR',
-              label: 'Icon color',
-              key: 'iconColor',
-              value: 'Primary',
-              configuration: {
-                condition: {
-                  type: 'SHOW',
-                  option: 'customStyle',
-                  comparator: 'EQ',
-                  value: true,
-                },
-              },
-            },
-            {
-              type: 'COLOR',
-              label: 'Label color',
-              key: 'labelColor',
-              value: 'Primary',
-              configuration: {
-                condition: {
-                  type: 'SHOW',
-                  option: 'customStyle',
-                  comparator: 'EQ',
-                  value: true,
-                },
-              },
-            },
-            {
-              type: 'COLOR',
-              label: 'Background color',
-              key: 'backgroundColor',
-              value: 'Accent1',
-              configuration: {
-                condition: {
-                  type: 'SHOW',
-                  option: 'customStyle',
-                  comparator: 'EQ',
-                  value: true,
-                },
-              },
-            },
           ],
           descendants: [],
         },
@@ -4204,54 +4180,6 @@
               label: 'Inner space',
               key: 'innerSpacing',
               type: 'SIZES',
-            },
-            {
-              value: false,
-              label: 'Custom style',
-              key: 'customStyle',
-              type: 'TOGGLE',
-            },
-            {
-              type: 'COLOR',
-              label: 'Icon color',
-              key: 'iconColor',
-              value: 'Primary',
-              configuration: {
-                condition: {
-                  type: 'SHOW',
-                  option: 'customStyle',
-                  comparator: 'EQ',
-                  value: true,
-                },
-              },
-            },
-            {
-              type: 'COLOR',
-              label: 'Label color',
-              key: 'labelColor',
-              value: 'Primary',
-              configuration: {
-                condition: {
-                  type: 'SHOW',
-                  option: 'customStyle',
-                  comparator: 'EQ',
-                  value: true,
-                },
-              },
-            },
-            {
-              type: 'COLOR',
-              label: 'Background color',
-              key: 'backgroundColor',
-              value: 'Accent1',
-              configuration: {
-                condition: {
-                  type: 'SHOW',
-                  option: 'customStyle',
-                  comparator: 'EQ',
-                  value: true,
-                },
-              },
             },
           ],
           descendants: [],

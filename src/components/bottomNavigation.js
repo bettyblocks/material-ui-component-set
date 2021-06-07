@@ -6,7 +6,15 @@
   jsx: (() => {
     const { BottomNavigation } = window.MaterialUI.Core;
     const { env, Children } = B;
-    const { defaultValue, activeColor, inactiveColor } = options;
+    const {
+      defaultValue,
+      activeIconColor,
+      activeLabelColor,
+      activeBackgroundColor,
+      inactiveIconColor,
+      inactiveLabelColor,
+      inactiveBackgroundColor,
+    } = options;
     const isDev = env === 'dev';
     const [value, setValue] = useState(parseInt(defaultValue - 1, 10) || 0);
 
@@ -27,8 +35,12 @@
             <Children
               index={index}
               value={value}
-              activeColor={activeColor}
-              inactiveColor={inactiveColor}
+              activeIconColor={activeIconColor}
+              activeLabelColor={activeLabelColor}
+              activeBackgroundColor={activeBackgroundColor}
+              inactiveIconColor={inactiveIconColor}
+              inactiveLabelColor={inactiveLabelColor}
+              inactiveBackgroundColor={inactiveBackgroundColor}
               maxChild={children.length <= 3}
             >
               {child}
@@ -44,40 +56,33 @@
       bottomNavComponent
     );
   })(),
-  styles: B => t => {
-    const { Styling } = B;
-    const style = new Styling(t);
-    return {
-      wrapper: {
+  styles: () => () => ({
+    wrapper: {
+      height: ({ options: { height } }) => height,
+      '& .MuiBottomNavigation-root > button': {
+        pointerEvents: 'none',
+      },
+      position: 'fixed',
+      bottom: '0px',
+      right: '0px',
+      left: '329px',
+    },
+    root: {
+      position: 'fixed',
+      bottom: '0px',
+      left: '0px',
+      width: '100%',
+      zIndex: '1201 !important',
+      '& .MuiBottomNavigation-root': {
         height: ({ options: { height } }) => height,
-        '& .MuiBottomNavigation-root > button': {
-          pointerEvents: 'none',
-        },
-        position: 'fixed',
-        bottom: '0px',
-        right: '0px',
-        left: '329px',
+        justifyContent: 'space-around',
+        alignItems: 'center',
       },
-      root: {
-        position: 'fixed',
-        bottom: '0px',
-        width: '100%',
-        zIndex: '1201 !important',
-        '& .MuiBottomNavigation-root': {
-          height: ({ options: { height } }) => height,
-          backgroundColor: ({ options: { backgroundColor } }) => [
-            style.getColor(backgroundColor),
-            '!important',
-          ],
-          justifyContent: 'space-around',
-          alignItems: 'center',
-        },
-      },
-      dev: {
-        left: '329px',
-        right: '0',
-        width: 'auto',
-      },
-    };
-  },
+    },
+    dev: {
+      left: '329px',
+      right: '0',
+      width: 'auto',
+    },
+  }),
 }))();

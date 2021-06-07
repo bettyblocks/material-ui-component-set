@@ -1,5 +1,5 @@
 (() => ({
-  name: 'BottomNavigationAction',
+  name: 'Bottom Navigation Action',
   icon: 'MenuIcon',
   category: 'NAVIGATION',
   structure: [
@@ -1349,60 +1349,6 @@
               { name: 'Current Tab', value: '_self' },
               { name: 'New Tab', value: '_blank' },
             ],
-          },
-        },
-        {
-          value: ['0rem', '0rem', '0rem', '0rem'],
-          label: 'Inner space',
-          key: 'innerSpacing',
-          type: 'SIZES',
-        },
-        {
-          value: false,
-          label: 'Custom style',
-          key: 'customStyle',
-          type: 'TOGGLE',
-        },
-        {
-          type: 'COLOR',
-          label: 'Icon color',
-          key: 'iconColor',
-          value: 'Primary',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'customStyle',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
-        },
-        {
-          type: 'COLOR',
-          label: 'Label color',
-          key: 'labelColor',
-          value: 'Primary',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'customStyle',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
-        },
-        {
-          type: 'COLOR',
-          label: 'Background color',
-          key: 'backgroundColor',
-          value: 'Accent1',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'customStyle',
-              comparator: 'EQ',
-              value: true,
-            },
           },
         },
       ],
