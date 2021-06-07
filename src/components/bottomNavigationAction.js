@@ -40,11 +40,11 @@
     if (value === index) {
       styling.wrapper = classes.activeIconColor;
       styling.label = classes.activeLabelColor;
-      styling.root = classes.activeBackgroundColor;
+      styling.root = [classes.activeBackgroundColor, classes.root].join(' ');
     } else {
       styling.wrapper = classes.inactiveIconColor;
       styling.label = classes.inactiveLabelColor;
-      styling.root = classes.inactiveBackgroundColor;
+      styling.root = [classes.inactiveBackgroundColor, classes.root].join(' ');
     }
 
     const BasicButtonComponent = (
@@ -75,6 +75,12 @@
         width: '100%',
         height: '100%',
       },
+      root: {
+        height: '100%',
+        maxWidth: '100% !important',
+        width: '100%',
+        padding: '0px !important',
+      },
       activeIconColor: {
         '& .MuiSvgIcon-root': {
           color: ({ parent: { activeIconColor } }) =>
@@ -96,18 +102,12 @@
           style.getColor(inactiveLabelColor),
       },
       activeBackgroundColor: {
-        height: '100%',
-        maxWidth: '100% !important',
-        width: '100%',
         backgroundColor: ({ parent: { activeBackgroundColor } }) => [
           style.getColor(activeBackgroundColor),
           '!important',
         ],
       },
       inactiveBackgroundColor: {
-        height: '100%',
-        maxWidth: '100% !important',
-        width: '100%',
         backgroundColor: ({ parent: { inactiveBackgroundColor } }) => [
           style.getColor(inactiveBackgroundColor),
           '!important',
