@@ -80,7 +80,7 @@
           error: oneError,
           refetch,
         } =
-          (hasFilter &&
+          (!isDev &&
             useOneQuery(model, {
               filter: getFilter(),
               onCompleted(resp) {
