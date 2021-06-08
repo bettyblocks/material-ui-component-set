@@ -8,6 +8,7 @@
     const { Icons } = window.MaterialUI;
     const {
       label,
+      hideLabel,
       icon,
       linkType,
       linkTo,
@@ -20,7 +21,7 @@
     const hasExternalLink = linkToExternal && linkToExternal.id !== '';
     const linkToExternalVariable =
       (linkToExternal && useText(linkToExternal)) || '';
-    const { maxChild, value, index } = parent;
+    const { value, index } = parent;
 
     const generalProps = {
       tabindex: isDev && -1,
@@ -50,9 +51,9 @@
     const BasicButtonComponent = (
       <BottomNavigationAction
         {...generalProps}
-        showLabel={maxChild || value === index}
+        showLabel
         icon={icon !== 'None' && React.createElement(Icons[icon])}
-        label={label}
+        label={!hideLabel && label}
         classes={styling}
         value={value}
       />

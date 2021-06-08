@@ -41,7 +41,6 @@
               inactiveIconColor={inactiveIconColor}
               inactiveLabelColor={inactiveLabelColor}
               inactiveBackgroundColor={inactiveBackgroundColor}
-              maxChild={children.length <= 3}
             >
               {child}
             </Children>

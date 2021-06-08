@@ -1289,6 +1289,12 @@
           },
         },
         {
+          value: false,
+          label: 'Hide label',
+          key: 'hideLabel',
+          type: 'TOGGLE',
+        },
+        {
           type: 'CUSTOM',
           label: 'Link to',
           key: 'linkType',
