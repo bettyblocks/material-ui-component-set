@@ -17,7 +17,7 @@
         },
         {
           type: 'TOGGLE',
-          label: 'Disable',
+          label: 'Disabled',
           key: 'disable',
           value: false,
         },
