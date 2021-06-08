@@ -82,7 +82,7 @@
         } =
           (!isDev &&
             useOneQuery(model, {
-              filter: getFilter(),
+              filter: hasFilter ? getFilter() : undefined,
               onCompleted(resp) {
                 if (resp && resp.id) {
                   B.triggerEvent('onSuccess', resp);
