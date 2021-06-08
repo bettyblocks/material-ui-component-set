@@ -5,13 +5,10 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { env, useText } = B;
-    // const { env, useText, getProperty, Property, getVariable } = B;
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
-    //  const { label, icon, imageSource, property } = options || {};
     const { label, icon, imageSource } = options || {};
     const {
-      // context,
       stepLabelData,
       setStepLabelData,
       active,
@@ -19,10 +16,6 @@
       parentHeight,
     } = parent;
     const imageSourceText = useText(imageSource);
-    // const { type, id: propertyPath } = property;
-    // const { kind, name: propertyName, label: propertyLabel } =
-    //   getProperty(imageSource) || {};
-    // debugger;
 
     const ImgPlaceholder = () => (
       <svg className={classes.placeholder} width={86} height={48}>

@@ -1,5 +1,5 @@
 (() => ({
-  name: 'CarouselImage',
+  name: 'Carousel Image',
   icon: 'StepIcon',
   category: 'NAVIGATION',
   structure: [
@@ -8,17 +8,11 @@
       options: [
         {
           value: [
-            'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=400&h=250&q=80',
+            'https://assets.bettyblocks.com/771d40f1fc49403e824cdca2fe025aeb_assets/files/image-carousel-preview',
           ],
           label: 'Source',
           key: 'imageSource',
           type: 'VARIABLE',
-        },
-        {
-          label: 'Property',
-          key: 'property',
-          type: 'PROPERTY',
-          value: '',
         },
       ],
       descendants: [],
