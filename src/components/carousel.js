@@ -561,7 +561,7 @@
       },
       skeleton: {
         width: '100%',
-        height: '100%',
+        height: '200px',
         backgroundColor: '#eee',
         borderRadius: 8,
         overflow: 'hidden',
@@ -577,6 +577,11 @@
           borderRadius: `calc(${style.getFont('Body2').Landscape} / 2)`,
           content: '""',
           animation: 'loading 1.5s infinite',
+        },
+      },
+      '@keyframes loading': {
+        to: {
+          backgroundPositionX: '-150%',
         },
       },
     };
