@@ -31,7 +31,6 @@
           loadingText,
         } = options;
         const formRef = React.createRef();
-        const [prevData, setPrevData] = useState(null);
         const parsedLoadingText = useText(loadingText);
         const displayError = showError === 'built-in';
         const displaySuccess = showSuccess === 'built-in';
