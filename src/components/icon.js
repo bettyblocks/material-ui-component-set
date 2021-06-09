@@ -11,6 +11,7 @@
     const {
       icon,
       addBadge,
+      hideBadge,
       content,
       badgeColor,
       anchorOrigin,
@@ -24,6 +25,7 @@
     const hasExternalLink = linkToExternal && linkToExternal.id !== '';
 
     const contentText = useText(content);
+    const isBadgeHidden = hideBadge && Number(contentText) === 0;
     const linkToExternalText = useText(linkToExternal);
     const anchorOriginSplit = anchorOrigin.split(',');
     const anchorOriginObj = {
@@ -68,7 +70,7 @@
       </Badge>
     );
 
-    const Component = addBadge ? BadgeComponent : Icon;
+    const Component = addBadge && !isBadgeHidden ? BadgeComponent : Icon;
 
     return isDev ? (
       <span className={classes.wrapper}>

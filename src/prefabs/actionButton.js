@@ -1,8 +1,8 @@
 (() => ({
-  name: 'Button',
+  name: 'Action Button',
   icon: 'ButtonIcon',
   category: 'BUTTON',
-  keywords: ['Button'],
+  keywords: ['Button', 'action'],
   structure: [
     {
       name: 'Button',
@@ -20,7 +20,37 @@
           type: 'VARIABLE',
           label: 'Button text',
           key: 'buttonText',
-          value: ['Button'],
+          value: ['Action Button'],
+        },
+        {
+          value: '',
+          label: 'Action',
+          key: 'actionId',
+          type: 'ACTION',
+          configuration: {
+            apiVersion: 'v1',
+            condition: {
+              type: 'SHOW',
+              option: 'linkType',
+              comparator: 'EQ',
+              value: 'action',
+            },
+          },
+        },
+        {
+          value: [],
+          label: 'Objects to pass to action',
+          key: 'actionModels',
+          type: 'ACTION_INPUT_OBJECTS',
+          configuration: {
+            apiVersion: 'v1',
+            condition: {
+              type: 'SHOW',
+              option: 'linkType',
+              comparator: 'EQ',
+              value: 'action',
+            },
+          },
         },
         {
           value: false,

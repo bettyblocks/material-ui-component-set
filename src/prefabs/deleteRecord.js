@@ -528,7 +528,6 @@
                 allowedInput: [
                   { name: 'Internal page', value: 'internal' },
                   { name: 'External page', value: 'external' },
-                  { name: 'Action', value: 'action' },
                 ],
               },
             },
@@ -558,21 +557,6 @@
                   option: 'linkType',
                   comparator: 'EQ',
                   value: 'external',
-                },
-              },
-            },
-            {
-              value: '',
-              label: 'Action',
-              key: 'actionId',
-              type: 'ACTION',
-              configuration: {
-                apiVersion: 'v1',
-                condition: {
-                  type: 'SHOW',
-                  option: 'linkType',
-                  comparator: 'EQ',
-                  value: 'action',
                 },
               },
             },
@@ -4098,6 +4082,20 @@
                                   label: 'Add Badge',
                                   key: 'addBadge',
                                   value: false,
+                                },
+                                {
+                                  type: 'TOGGLE',
+                                  label: 'Hide Badge if value is 0',
+                                  key: 'hideBadge',
+                                  value: false,
+                                  configuration: {
+                                    condition: {
+                                      type: 'SHOW',
+                                      option: 'addBadge',
+                                      comparator: 'EQ',
+                                      value: true,
+                                    },
+                                  },
                                 },
                                 {
                                   type: 'VARIABLE',
