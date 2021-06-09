@@ -14,6 +14,7 @@
           useEndpoint,
           useOneQuery,
           useMeQuery,
+          useText,
         } = B;
 
         const isEmpty = children.length === 0;
@@ -31,6 +32,7 @@
         } = options;
         const displayError = showError === 'built-in';
         const [prevData, setPrevData] = useState(null);
+        const parsedLoadingText = useText(loadingText);
         const [, setOptions] = useOptions();
 
         B.defineFunction('setCurrentRecord', value => {
@@ -76,6 +78,38 @@
         const hasFilter =
           selectedFilter && Object.keys(selectedFilter).length > 0;
 
+        const {
+          loading: oneDataLoading,
+          data: oneData,
+          error: oneError,
+          refetch,
+        } =
+          (!isDev &&
+            useOneQuery(model, {
+              filter: hasFilter ? getFilter() : undefined,
+              onCompleted(resp) {
+                if (resp && resp.id) {
+                  B.triggerEvent('onSuccess', resp);
+                } else {
+                  B.triggerEvent('onNoResults');
+                }
+              },
+              onError(resp) {
+                if (!displayError) {
+                  B.triggerEvent('onError', resp);
+                }
+              },
+            })) ||
+          {};
+
+        B.defineFunction('Refetch', () => {
+          refetch();
+        });
+
+        useEffect(() => {
+          setPrevData(oneData);
+        }, [oneData]);
+
         if (isDev) {
           return <BuilderLayout />;
         }
@@ -85,7 +119,7 @@
             return <BuilderLayout />;
           }
 
-          return <One modelId={model} />;
+          return <One />;
         };
 
         const redirect = () => {
@@ -93,36 +127,13 @@
           history.push(useEndpoint(redirectWithoutResult));
         };
 
-        const One = ({ modelId }) => {
-          const { loading, data, error, refetch } =
-            (hasFilter &&
-              useOneQuery(modelId, {
-                filter: getFilter(),
-                onCompleted(resp) {
-                  if (resp && resp.id) {
-                    B.triggerEvent('onSuccess', resp);
-                  } else {
-                    B.triggerEvent('onNoResults');
-                  }
-                },
-                onError(resp) {
-                  if (!displayError) {
-                    B.triggerEvent('onError', resp);
-                  }
-                },
-              })) ||
-            {};
-
-          B.defineFunction('Refetch', () => {
-            refetch();
-          });
-
-          if (loading && loadingType === 'default') {
-            B.triggerEvent('onLoad', loading);
-            return <span>{loadingText}</span>;
+        const One = () => {
+          if (oneDataLoading && loadingType === 'default') {
+            B.triggerEvent('onLoad', oneDataLoading);
+            return <span>{parsedLoadingText}</span>;
           }
-          if (loading && loadingType === 'showChildren') {
-            B.triggerEvent('onLoad', loading);
+          if (oneDataLoading && loadingType === 'showChildren') {
+            B.triggerEvent('onLoad', oneDataLoading);
             return (
               <ModelProvider value={prevData} id={model}>
                 {children}
@@ -130,21 +141,17 @@
             );
           }
 
-          if (data) {
-            setPrevData(data);
+          if (oneError && displayError) {
+            return <span>{oneError.message}</span>;
           }
 
-          if (error && displayError) {
-            return <span>{error.message}</span>;
-          }
-
-          if (!data && redirectWithoutResult) {
+          if (!oneData && redirectWithoutResult) {
             redirect();
           }
 
           return (
-            data && (
-              <ModelProvider value={data} id={model}>
+            oneData && (
+              <ModelProvider value={oneData} id={model}>
                 {children}
               </ModelProvider>
             )

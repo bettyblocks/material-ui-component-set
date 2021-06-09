@@ -402,23 +402,23 @@
         },
         {
           value: 'default',
-          label: 'Loading type',
+          label: 'Show on load',
           key: 'loadingType',
           type: 'CUSTOM',
           configuration: {
             as: 'BUTTONGROUP',
             dataType: 'string',
             allowedInput: [
-              { name: 'Default', value: 'default' },
-              { name: 'Show children', value: 'showChildren' },
+              { name: 'Message', value: 'default' },
+              { name: 'Content', value: 'showChildren' },
             ],
           },
         },
         {
-          value: 'Loading...',
+          value: ['Loading...'],
           label: 'Loading text',
           key: 'loadingText',
-          type: 'TEXT',
+          type: 'VARIABLE',
           configuration: {
             condition: {
               type: 'SHOW',
