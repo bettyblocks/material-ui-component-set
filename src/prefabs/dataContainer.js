@@ -375,6 +375,30 @@
           },
         },
         {
+          type: 'CUSTOM',
+          label: 'Currency',
+          key: 'currency',
+          value: '€',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              {
+                name: 'Euro',
+                value: '€',
+              },
+              {
+                name: 'Pound',
+                value: '£',
+              },
+              {
+                name: 'Dollar',
+                value: '$',
+              },
+            ],
+          },
+        },
+        {
           value: '',
           label: 'Authentication Profile',
           key: 'authProfile',

@@ -28,7 +28,7 @@
           currentRecord,
         } = options;
         const displayError = showError === 'built-in';
-
+        const [prevData, setPrevData] = useState(null);
         const [, setOptions] = useOptions();
 
         B.defineFunction('setCurrentRecord', value => {
@@ -117,8 +117,16 @@
 
           if (loading) {
             B.triggerEvent('onLoad', loading);
-            return <span>Loading...</span>;
+            return prevData !== null ? (
+              <ModelProvider value={prevData} id={model}>
+                {children}
+              </ModelProvider>
+            ) : (
+              <span>Loading...</span>
+            );
           }
+
+          setPrevData(data);
 
           if (error && displayError) {
             return <span>{error.message}</span>;
