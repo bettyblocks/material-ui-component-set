@@ -375,30 +375,6 @@
           },
         },
         {
-          type: 'CUSTOM',
-          label: 'Currency',
-          key: 'currency',
-          value: '€',
-          configuration: {
-            as: 'BUTTONGROUP',
-            dataType: 'string',
-            allowedInput: [
-              {
-                name: 'Euro',
-                value: '€',
-              },
-              {
-                name: 'Pound',
-                value: '£',
-              },
-              {
-                name: 'Dollar',
-                value: '$',
-              },
-            ],
-          },
-        },
-        {
           value: '',
           label: 'Authentication Profile',
           key: 'authProfile',
@@ -422,6 +398,34 @@
               { name: 'Built in', value: 'built-in' },
               { name: 'Interaction', value: 'interaction' },
             ],
+          },
+        },
+        {
+          value: 'default',
+          label: 'Loading type',
+          key: 'loadingType',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Default', value: 'default' },
+              { name: 'Show children', value: 'showChildren' },
+            ],
+          },
+        },
+        {
+          value: 'Loading...',
+          label: 'Loading text',
+          key: 'loadingText',
+          type: 'TEXT',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'loadingType',
+              comparator: 'EQ',
+              value: 'default',
+            },
           },
         },
       ],

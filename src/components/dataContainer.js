@@ -26,6 +26,8 @@
           redirectWithoutResult,
           showError,
           currentRecord,
+          loadingType,
+          loadingText,
         } = options;
         const displayError = showError === 'built-in';
         const [prevData, setPrevData] = useState(null);
@@ -115,18 +117,22 @@
             refetch();
           });
 
-          if (loading) {
+          if (loading && loadingType === 'default') {
             B.triggerEvent('onLoad', loading);
-            return prevData !== null ? (
+            return <span>{loadingText}</span>;
+          }
+          if (loading && loadingType === 'showChildren') {
+            B.triggerEvent('onLoad', loading);
+            return (
               <ModelProvider value={prevData} id={model}>
                 {children}
               </ModelProvider>
-            ) : (
-              <span>Loading...</span>
             );
           }
 
-          setPrevData(data);
+          if (data) {
+            setPrevData(data);
+          }
 
           if (error && displayError) {
             return <span>{error.message}</span>;
