@@ -74,6 +74,34 @@
         const hasFilter =
           selectedFilter && Object.keys(selectedFilter).length > 0;
 
+        const {
+          loading: oneDataLoading,
+          data: oneData,
+          error: oneError,
+          refetch,
+        } =
+          (!isDev &&
+            useOneQuery(model, {
+              filter: hasFilter ? getFilter() : undefined,
+              onCompleted(resp) {
+                if (resp && resp.id) {
+                  B.triggerEvent('onSuccess', resp);
+                } else {
+                  B.triggerEvent('onNoResults');
+                }
+              },
+              onError(resp) {
+                if (!displayError) {
+                  B.triggerEvent('onError', resp);
+                }
+              },
+            })) ||
+          {};
+
+        B.defineFunction('Refetch', () => {
+          refetch();
+        });
+
         if (isDev) {
           return <BuilderLayout />;
         }
@@ -83,7 +111,7 @@
             return <BuilderLayout />;
           }
 
-          return <One modelId={model} />;
+          return <One />;
         };
 
         const redirect = () => {
@@ -91,46 +119,23 @@
           history.push(useEndpoint(redirectWithoutResult));
         };
 
-        const One = ({ modelId }) => {
-          const { loading, data, error, refetch } =
-            (hasFilter &&
-              useOneQuery(modelId, {
-                filter: getFilter(),
-                onCompleted(resp) {
-                  if (resp && resp.id) {
-                    B.triggerEvent('onSuccess', resp);
-                  } else {
-                    B.triggerEvent('onNoResults');
-                  }
-                },
-                onError(resp) {
-                  if (!displayError) {
-                    B.triggerEvent('onError', resp);
-                  }
-                },
-              })) ||
-            {};
-
-          B.defineFunction('Refetch', () => {
-            refetch();
-          });
-
-          if (loading) {
-            B.triggerEvent('onLoad', loading);
+        const One = () => {
+          if (oneDataLoading) {
+            B.triggerEvent('onLoad', oneDataLoading);
             return <span>Loading...</span>;
           }
 
-          if (error && displayError) {
-            return <span>{error.message}</span>;
+          if (oneError && displayError) {
+            return <span>{oneError.message}</span>;
           }
 
-          if (!data && redirectWithoutResult) {
+          if (!oneData && redirectWithoutResult) {
             redirect();
           }
 
           return (
-            data && (
-              <ModelProvider value={data} id={model}>
+            oneData && (
+              <ModelProvider value={oneData} id={model}>
                 {children}
               </ModelProvider>
             )
