@@ -171,35 +171,16 @@
 
     let interactionFilters = {};
 
-    Object.keys(interactionFilter).forEach(f => {
-      const reducedFilter = interactionFilter[f].property.id.reduceRight(
-        (acc, property, index) =>
-          index === interactionFilter[f].property.id.length - 1
-            ? { [property]: { matches: interactionFilter[f].value } }
-            : { [property]: acc },
-        {},
-      );
+    const clauses = Object.entries(interactionFilter).map(
+      ([, { property, value }]) =>
+        property.id.reduceRight((acc, field, index, arr) => {
+          const isLast = index === arr.length - 1;
+          return { [field]: isLast ? { matches: value } : acc };
+        }, {}),
+    );
 
-      if (Object.keys(interactionFilters).length === 0) {
-        interactionFilters = {
-          ...reducedFilter,
-        };
-      } else if (
-        Object.keys(interactionFilters).length === 1 &&
-        '_and' in interactionFilters
-      ) {
-        // eslint-disable-next-line no-underscore-dangle
-        interactionFilters._and = [
-          // eslint-disable-next-line no-underscore-dangle
-          ...interactionFilters._and,
-          { ...reducedFilter },
-        ];
-      } else if (Object.keys(interactionFilters).length > 0) {
-        interactionFilters = {
-          _and: [{ ...interactionFilters }, { ...reducedFilter }],
-        };
-      }
-    });
+    interactionFilters =
+      clauses.length > 1 ? { _and: clauses } : clauses[0] || {};
 
     const searchFilter = searchProperty
       ? path.reduceRight(
