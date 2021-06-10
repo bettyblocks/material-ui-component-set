@@ -3047,6 +3047,40 @@
                                             },
                                           },
                                           {
+                                            value: 'default',
+                                            label: 'Show on load',
+                                            key: 'loadingType',
+                                            type: 'CUSTOM',
+                                            configuration: {
+                                              as: 'BUTTONGROUP',
+                                              dataType: 'string',
+                                              allowedInput: [
+                                                {
+                                                  name: 'Message',
+                                                  value: 'default',
+                                                },
+                                                {
+                                                  name: 'Content',
+                                                  value: 'showChildren',
+                                                },
+                                              ],
+                                            },
+                                          },
+                                          {
+                                            value: ['Loading...'],
+                                            label: 'Loading text',
+                                            key: 'loadingText',
+                                            type: 'VARIABLE',
+                                            configuration: {
+                                              condition: {
+                                                type: 'SHOW',
+                                                option: 'loadingType',
+                                                comparator: 'EQ',
+                                                value: 'default',
+                                              },
+                                            },
+                                          },
+                                          {
                                             value: [
                                               '0rem',
                                               '0rem',
@@ -4774,6 +4808,40 @@
                                                 option: 'showError',
                                                 comparator: 'EQ',
                                                 value: 'built-in',
+                                              },
+                                            },
+                                          },
+                                          {
+                                            value: 'default',
+                                            label: 'Show on load',
+                                            key: 'loadingType',
+                                            type: 'CUSTOM',
+                                            configuration: {
+                                              as: 'BUTTONGROUP',
+                                              dataType: 'string',
+                                              allowedInput: [
+                                                {
+                                                  name: 'Message',
+                                                  value: 'default',
+                                                },
+                                                {
+                                                  name: 'Content',
+                                                  value: 'showChildren',
+                                                },
+                                              ],
+                                            },
+                                          },
+                                          {
+                                            value: ['Loading...'],
+                                            label: 'Loading text',
+                                            key: 'loadingText',
+                                            type: 'VARIABLE',
+                                            configuration: {
+                                              condition: {
+                                                type: 'SHOW',
+                                                option: 'loadingType',
+                                                comparator: 'EQ',
+                                                value: 'default',
                                               },
                                             },
                                           },
