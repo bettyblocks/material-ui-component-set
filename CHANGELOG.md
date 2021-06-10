@@ -1,3 +1,10 @@
+# [1.142.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.141.0...v1.142.0) (2021-06-09)
+
+
+### Features
+
+* have formfields use raw values by default ([a7adfee](https://github.com/bettyblocks/material-ui-component-set/commit/a7adfee0825524e003207cf27dd6f2dce0d6813f))
+
 # [1.141.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.140.2...v1.141.0) (2021-06-04)
 
 

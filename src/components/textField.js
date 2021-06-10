@@ -58,7 +58,9 @@
       label = [],
       value: defaultValue = [],
     } = customModelAttributeObj;
-    const [currentValue, setCurrentValue] = useState(useText(defaultValue));
+    const [currentValue, setCurrentValue] = useState(
+      useText(defaultValue, { rawValue: true }),
+    );
     const labelText = useText(label);
     const customModelAttribute = getCustomModelAttribute(
       customModelAttributeId,
