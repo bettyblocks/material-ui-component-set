@@ -43,7 +43,7 @@
       linkTo && linkTo.id !== '' && useEndpoint(linkTo);
     const buttonContent = useText(buttonText);
     const tooltipText = useText(tooltipContent);
-
+    const history = isDev ? null : useHistory();
     const [isVisible, setIsVisible] = useState(visible);
     const [isLoading, setIsLoading] = useState(false);
     const [isOpen, setIsOpen] = useState(hasVisibleTooltip);
@@ -121,14 +121,8 @@
       return false;
     };
 
-    const getInternalHref = config => {
-      if (config.disabled) {
-        return false;
-      }
-      if (config.linkTo && config.linkTo.id !== '') {
-        return config.linkToInternalVariable;
-      }
-      return false;
+    const useInternalRedirect = () => {
+      history.push(linkToInternalVariable);
     };
 
     const showIndicator = isLoading || loading;
@@ -161,7 +155,7 @@
               linkToExternal,
               linkToExternalVariable,
             })
-          : getInternalHref({ linkTo, linkToInternalVariable, disabled }),
+          : null,
       target: openLinkToExternal,
       tabindex: isDev && -1,
       type: isDev ? 'button' : type,
@@ -169,7 +163,9 @@
         linkType === 'internal' && linkTo && linkTo.id ? linkTo : undefined,
       onClick: event => {
         event.stopPropagation();
-        actionCallback();
+        if (linkType === 'internal') {
+          useInternalRedirect();
+        }
       },
     };
 
