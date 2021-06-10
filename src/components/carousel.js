@@ -299,7 +299,14 @@
         const { active, isFirstRender, item } = props;
         const StepContent = (
           <div className={classes.root}>
-            <img src={item[propertyName].url} alt="carousel" />
+            <img
+              src={
+                item[propertyName].url
+                  ? item[propertyName].url
+                  : item[propertyName]
+              }
+              alt="carousel"
+            />
           </div>
         );
 
