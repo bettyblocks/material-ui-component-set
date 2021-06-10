@@ -5,7 +5,7 @@
   orientation: 'VERTICAL',
   styleType: 'BUTTON',
   jsx: (() => {
-    const { CircularProgress, Tooltip } = window.MaterialUI.Core;
+    const { CircularProgress, Tooltip, Link } = window.MaterialUI.Core;
     const { Icons } = window.MaterialUI;
     const {
       disabled,
@@ -41,9 +41,10 @@
       (linkToExternal && useText(linkToExternal)) || '';
     const linkToInternalVariable =
       linkTo && linkTo.id !== '' && useEndpoint(linkTo);
+    const hasInteralLink =
+      linkType === 'internal' && linkTo && linkTo.id !== '';
     const buttonContent = useText(buttonText);
     const tooltipText = useText(tooltipContent);
-    const history = isDev ? null : useHistory();
     const [isVisible, setIsVisible] = useState(visible);
     const [isLoading, setIsLoading] = useState(false);
     const [isOpen, setIsOpen] = useState(hasVisibleTooltip);
@@ -121,8 +122,14 @@
       return false;
     };
 
-    const useInternalRedirect = () => {
-      history.push(linkToInternalVariable);
+    const getInternalHref = config => {
+      if (config.disabled) {
+        return false;
+      }
+      if (config.linkTo && config.linkTo.id !== '') {
+        return config.linkToInternalVariable;
+      }
+      return false;
     };
 
     const showIndicator = isLoading || loading;
@@ -148,14 +155,11 @@
     };
 
     const anchorProps = {
-      href:
-        linkType === 'external'
-          ? getExternalHref({
-              disabled,
-              linkToExternal,
-              linkToExternalVariable,
-            })
-          : null,
+      href: getExternalHref({
+        disabled,
+        linkToExternal,
+        linkToExternalVariable,
+      }),
       target: openLinkToExternal,
       tabindex: isDev && -1,
       type: isDev ? 'button' : type,
@@ -163,10 +167,14 @@
         linkType === 'internal' && linkTo && linkTo.id ? linkTo : undefined,
       onClick: event => {
         event.stopPropagation();
-        if (linkType === 'internal') {
-          useInternalRedirect();
-        }
+        actionCallback();
       },
+    };
+
+    const linkProps = {
+      href: getInternalHref({ linkTo, linkToInternalVariable, disabled }),
+      component: hasInteralLink ? B.Link : undefined,
+      endpoint: hasInteralLink ? linkTo : undefined,
     };
 
     const ButtonContent = (
@@ -205,11 +213,16 @@
       </div>
     );
 
-    const AnchorElement = (
-      <a className={classes.anchor} {...anchorProps}>
-        {ButtonContent}
-      </a>
-    );
+    const LinkComponent =
+      linkType === 'internal' ? (
+        <Link className={classes.linkComponent} {...linkProps}>
+          {ButtonContent}
+        </Link>
+      ) : (
+        <a className={classes.linkComponent} {...anchorProps}>
+          {ButtonContent}
+        </a>
+      );
 
     const ButtonElement = (
       <button type="button" className={classes.button} {...buttonProps}>
@@ -217,7 +230,7 @@
       </button>
     );
 
-    const ButtonComponent = type === 'submit' ? ButtonElement : AnchorElement;
+    const ButtonComponent = type === 'submit' ? ButtonElement : LinkComponent;
 
     let tooltipProps = {
       title: tooltipText,
@@ -264,7 +277,7 @@
           pointerEvents: 'none',
         },
       },
-      anchor: {
+      linkComponent: {
         textDecoration: 'none',
         display: ({ options: { fullWidth } }) =>
           fullWidth ? 'inline-flex' : 'inline-block',
