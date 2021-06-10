@@ -399,6 +399,34 @@
             ],
           },
         },
+        {
+          value: 'default',
+          label: 'Show on load',
+          key: 'loadingType',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Message', value: 'default' },
+              { name: 'Content', value: 'showChildren' },
+            ],
+          },
+        },
+        {
+          value: ['Loading...'],
+          label: 'Loading text',
+          key: 'loadingText',
+          type: 'VARIABLE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'loadingType',
+              comparator: 'EQ',
+              value: 'default',
+            },
+          },
+        },
       ],
       descendants: [],
     },
