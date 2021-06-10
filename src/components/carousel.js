@@ -23,6 +23,7 @@
       orderProperty,
       sortOrder,
       property,
+      maxImages,
     } = options;
     const { KeyboardArrowLeft, KeyboardArrowRight } = Icons;
 
@@ -217,6 +218,7 @@
         useAllQuery(model, {
           rawFilter: where,
           variables,
+          take: maxImages,
           onCompleted(res) {
             const hasResult = res && res.results && res.results.length > 0;
             if (hasResult) {
@@ -415,7 +417,6 @@
     const isDev = env === 'dev';
     return {
       wrapper: {
-        height: ({ options: { height } }) => height,
         width: ({ options: { width } }) => width,
       },
       root: {
@@ -431,7 +432,6 @@
       },
       container: {
         width: ({ options: { width } }) => (width === '' ? '100%' : width),
-        height: ({ options: { height } }) => (height === '' ? 'auto' : height),
         position: 'relative',
         '& .MuiMobileStepper-root': {
           background: 'transparent',

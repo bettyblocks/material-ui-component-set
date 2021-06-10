@@ -301,6 +301,20 @@
         },
         {
           type: 'NUMBER',
+          label: 'Max images',
+          key: 'maxImages',
+          value: 50,
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'select',
+              comparator: 'EQ',
+              value: 'model',
+            },
+          },
+        },
+        {
+          type: 'NUMBER',
           label: 'Show image',
           key: 'activeStep',
           value: '1',
