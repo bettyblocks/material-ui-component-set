@@ -5,7 +5,7 @@
   description:
     'View your content in a grid view with card items. This also includes a custom search field.',
   detail:
-    'View your content in a grid view with card items. This also includes a custom search field.',
+    'View your content in a grid view with card items. This page template also contains a custom search functonality to filter your data.',
   previewUrl: 'https://preview.betty.app/card-view',
   previewImage:
     'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_Card_View.jpg',
