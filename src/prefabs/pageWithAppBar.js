@@ -3,7 +3,7 @@
   icon: 'NavbarIcon',
   type: 'page',
   description: 'Full height page with an app bar',
-  detail: 'Full height page with an app bar',
+  detail: 'Start with a full height page containing an App Bar on top.',
   previewUrl: 'https://preview.betty.app/app-bar',
   previewImage:
     'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_App_Bar.jpg',
