@@ -5,7 +5,7 @@
   description:
     'View your datalist in a list view, this also includes a built-in search functionality.',
   detail:
-    'View your datalist in a list view, this also includes a built-in search functionality.',
+    'View your content in a list view. This page template also contains a custom search functonality to filter your data.',
   previewUrl: 'https://preview.betty.app/list-view',
   previewImage:
     'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_List_View.jpg',
