@@ -1,3 +1,17 @@
+# [1.142.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.141.0...v1.142.0) (2021-06-09)
+
+
+### Features
+
+* have formfields use raw values by default ([a7adfee](https://github.com/bettyblocks/material-ui-component-set/commit/a7adfee0825524e003207cf27dd6f2dce0d6813f))
+
+# [1.141.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.140.2...v1.141.0) (2021-06-04)
+
+
+### Features
+
+* **ta-2546:** adds option to hide the badge if value is 0 ([0c7b00a](https://github.com/bettyblocks/material-ui-component-set/commit/0c7b00a180f3d2acc0e425f5904a86d837bc2211))
+
 ## [1.140.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.140.1...v1.140.2) (2021-06-03)
 
 

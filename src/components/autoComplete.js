@@ -66,7 +66,9 @@
     const { name: customModelAttributeName, validations: { required } = {} } =
       customModelAttribute || {};
     const { kind, values: listValues } = getProperty(property) || {};
-    const [currentValue, setCurrentValue] = useState(useText(defaultValue));
+    const [currentValue, setCurrentValue] = useState(
+      useText(defaultValue, { rawValue: true }),
+    );
     const [currentLabel, setCurrentLabel] = useState('');
     const mounted = useRef(false);
     const labelText = useText(label);
