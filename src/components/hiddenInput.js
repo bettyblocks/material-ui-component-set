@@ -19,7 +19,9 @@
     const customModelAttribute = getCustomModelAttribute(
       customModelAttributeId,
     );
-    const [currentValue, setCurrentValue] = useState(useText(defaultValue));
+    const [currentValue, setCurrentValue] = useState(
+      useText(defaultValue, { rawValue: true }),
+    );
     const { name: customModelAttributeName, validations: { required } = {} } =
       customModelAttribute || {};
     const nameAttributeValue = useText(nameAttribute);
