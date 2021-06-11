@@ -37,129 +37,169 @@
 
     return (
       <>
-        <Header title="Configure image carousel" onClose={close} />
-        <Content>
-          <Field
-            label="Select"
-            info={
+        <Header
+          title="Configure image carousel"
+          onClose={close}
+          subtitle={
+            <div style={{ marginTop: '-1rem' }}>
               <Text size="small" color="grey700">
-                Select the <b>Custom</b> option to set up the images with a URL.
-                <br />
-                Or select the <b>Model</b> option to get the images from a
-                model.
+                Select <b>URL</b> to add images via an URL or select{' '}
+                <b>Model</b> to add the images via a data model.
               </Text>
-            }
-          >
-            <ButtonGroup
-              onChange={({ target: { value } }) => {
-                setSelect(value);
-              }}
-              value={select}
-            >
-              <ButtonGroupButton label="Custom" value="custom" name="options" />
-              <ButtonGroupButton label="Model" value="model" name="options" />
-            </ButtonGroup>
-          </Field>
-          {select === 'model' ? (
-            <Field>
-              <Field label="Select model">
-                <ModelSelector
-                  onChange={value => {
-                    setModelId(value);
-                  }}
-                  value={modelId}
-                />
-              </Field>
-              <Field label="Image property">
-                <PropertySelector
-                  modelId={modelId}
-                  onChange={value => {
-                    setProperty(value);
-                  }}
-                  value={property}
-                />
-              </Field>
+            </div>
+          }
+          margin={{ top: '0px' }}
+        />
+        <Content>
+          <Box margin={{ bottom: '32px' }}>
+            <Field label="Source">
+              <ButtonGroup
+                onChange={({ target: { value } }) => {
+                  setSelect(value);
+                }}
+                value={select}
+                color="blue"
+                size="large"
+              >
+                <ButtonGroupButton label="URL" value="custom" name="options" />
+                <ButtonGroupButton label="Model" value="model" name="options" />
+              </ButtonGroup>
             </Field>
+          </Box>
+          {select === 'model' ? (
+            <Box>
+              <Box direction="column" basis="full" pad={{ bottom: '10px' }}>
+                <Field
+                  info={
+                    <Text size="small" color="grey700">
+                      Add images to the image carousel by selecting a data model
+                      and the image property.
+                    </Text>
+                  }
+                >
+                  <Text>
+                    <b>Select a model and property</b>
+                  </Text>
+                </Field>
+              </Box>
+              <Field>
+                <Field label="Select model">
+                  <ModelSelector
+                    onChange={value => {
+                      setModelId(value);
+                    }}
+                    value={modelId}
+                  />
+                </Field>
+                <Field label="Image property">
+                  <PropertySelector
+                    modelId={modelId}
+                    onChange={value => {
+                      setProperty(value);
+                    }}
+                    value={property}
+                  />
+                </Field>
+              </Field>
+            </Box>
           ) : (
             <Box direction="column">
-              <Field
-                info={
-                  <Text size="small" color="grey700">
-                    Click the <b>+ Add image</b> button to add new images to the
-                    carousel.
-                    <br />
-                    You can directly fill in the image URL.
-                  </Text>
-                }
-              >
-                <Button
-                  label="+ Add image"
-                  disabled={!maxImages}
-                  onClick={() => {
-                    if (maxImages) {
-                      setImages([
-                        ...images,
-                        {
-                          index: images.length + 1,
-                          image:
-                            'https://assets.bettyblocks.com/771d40f1fc49403e824cdca2fe025aeb_assets/files/image-carousel-preview',
-                        },
-                      ]);
+              <Box direction="row" margin={{ bottom: '25px' }}>
+                <Box direction="column" basis="full">
+                  <Field
+                    info={
+                      <Text size="small" color="grey700">
+                        Click on +Add image to add multiple images to the image
+                        carousel.
+                      </Text>
                     }
-                  }}
-                />
-              </Field>
+                  >
+                    <Text>
+                      <b>Add image</b>
+                    </Text>
+                  </Field>
+                </Box>
+                <Box
+                  direction="column"
+                  alignSelf="center"
+                  basis="auto"
+                  style={{ minWidth: '100px' }}
+                >
+                  <Button
+                    label="+ Add image"
+                    disabled={!maxImages}
+                    onClick={() => {
+                      if (maxImages) {
+                        setImages([
+                          ...images,
+                          {
+                            index: images.length + 1,
+                            image:
+                              'https://assets.bettyblocks.com/771d40f1fc49403e824cdca2fe025aeb_assets/files/image-carousel-preview',
+                          },
+                        ]);
+                      }
+                    }}
+                  />
+                </Box>
+              </Box>
               {images.map(item => (
-                <Field>
-                  <Box direction="row">
-                    <Box
-                      direction="column"
-                      basis="auto"
-                      alignSelf="center"
-                      pad={{ right: '15px' }}
-                    >
-                      <Text>Image {item.index}</Text>
-                    </Box>
-                    <Box direction="column" basis="3/4">
-                      <TextInput
-                        onChange={({ target: { value } }) => {
-                          const index = images.findIndex(
-                            currentRow => currentRow.index === item.index,
-                          );
-                          const updatedImages = images;
-                          updatedImages[index].image = value;
-                          setImages([...updatedImages]);
-                        }}
-                        value={item.image}
-                      />
-                    </Box>
-                    <Box direction="column" pad={{ left: '5px' }}>
-                      <DeleteButton
-                        label="X"
-                        value={item.index}
-                        disabled={!(images.length > 1)}
-                        onClick={event => {
-                          const newImages = [...images];
-                          const index = newImages.findIndex(
-                            currentImage =>
-                              currentImage.index ===
-                              parseInt(event.target.value, 10),
-                          );
-                          if (index !== -1) {
-                            newImages.splice(index, 1);
-
-                            newImages.map((correctImage, imageIndex) => {
-                              const newImage = correctImage;
-                              newImage.index = imageIndex + 1;
-                              return { ...newImage };
-                            });
-                            setImages([...newImages]);
-                          }
-                        }}
-                      />
-                    </Box>
+                <Box margin={{ bottom: '15px' }}>
+                  <Box
+                    direction="column"
+                    basis="auto"
+                    alignSelf="start"
+                    pad={{ right: '15px' }}
+                  >
+                    <Text size="small">IMAGE {item.index} URL</Text>
                   </Box>
-                </Field>
+                  <Field>
+                    <Box direction="row">
+                      <Box direction="column" basis="full">
+                        <TextInput
+                          onChange={({ target: { value } }) => {
+                            const index = images.findIndex(
+                              currentRow => currentRow.index === item.index,
+                            );
+                            const updatedImages = images;
+                            updatedImages[index].image = value;
+                            setImages([...updatedImages]);
+                          }}
+                          value={item.image}
+                        />
+                      </Box>
+                      <Box
+                        direction="column"
+                        pad={{ left: '4px' }}
+                        style={{ minWidth: '40px', maxWidth: '40px' }}
+                      >
+                        <DeleteButton
+                          label="X"
+                          value={item.index}
+                          disabled={!(images.length > 1)}
+                          onClick={event => {
+                            const newImages = [...images];
+                            const index = newImages.findIndex(
+                              currentImage =>
+                                currentImage.index ===
+                                parseInt(event.target.value, 10),
+                            );
+                            if (index !== -1) {
+                              newImages.splice(index, 1);
+
+                              newImages.map((correctImage, imageIndex) => {
+                                const newImage = correctImage;
+                                newImage.index = imageIndex + 1;
+                                return { ...newImage };
+                              });
+                              setImages([...newImages]);
+                            }
+                          }}
+                        />
+                      </Box>
+                    </Box>
+                  </Field>
+                </Box>
               ))}
             </Box>
           )}
@@ -204,7 +244,7 @@
       options: [
         {
           type: 'CUSTOM',
-          label: 'Select',
+          label: 'Source',
           key: 'select',
           value: 'custom',
           configuration: {
@@ -212,12 +252,12 @@
             dataType: 'string',
             allowedInput: [
               {
-                name: 'Model',
-                value: 'model',
+                name: 'URL',
+                value: 'custom',
               },
               {
-                name: 'Custom',
-                value: 'custom',
+                name: 'Model',
+                value: 'model',
               },
             ],
           },
