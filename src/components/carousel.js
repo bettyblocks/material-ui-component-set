@@ -296,7 +296,7 @@
       };
 
       const Step = props => {
-        const { active, isFirstRender, item } = props;
+        const { active, item } = props;
         const StepContent = (
           <div className={classes.root}>
             <img
@@ -310,16 +310,7 @@
           </div>
         );
 
-        const StepCmp = <>{active ? StepContent : null}</>;
-
-        useEffect(() => {
-          if (active && !isFirstRender) {
-            B.triggerEvent('OnStepActive');
-          } else if (!active && !isFirstRender) {
-            B.triggerEvent('OnStepInactive');
-          }
-        }, [active, isFirstRender]);
-        return StepCmp;
+        return <>{active ? StepContent : null}</>;
       };
 
       const overlay = (
