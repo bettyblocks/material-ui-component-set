@@ -1,3 +1,10 @@
+# [1.143.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.142.1...v1.143.0) (2021-06-11)
+
+
+### Features
+
+* added no results message to 3 page templates ([e357920](https://github.com/bettyblocks/material-ui-component-set/commit/e357920c938256722c44f40f0ac3555ca3910145))
+
 ## [1.142.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.142.0...v1.142.1) (2021-06-10)
 
 
