@@ -46,7 +46,7 @@
     const {
       id: customModelAttributeId,
       label = [],
-      required: defaultRequired,
+      required: defaultRequired = false,
     } = customModelAttributeObj;
     const labelText = useText(label);
     const customModelAttribute = getCustomModelAttribute(
