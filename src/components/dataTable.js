@@ -160,7 +160,7 @@
         ...interactionFilter,
         [interactionId]: {
           property,
-          value: event.target.value,
+          value: event.target ? event.target.value : event,
         },
       });
     });
@@ -175,7 +175,15 @@
       ([, { property, value }]) =>
         property.id.reduceRight((acc, field, index, arr) => {
           const isLast = index === arr.length - 1;
-          return { [field]: isLast ? { matches: value } : acc };
+          if (isLast) {
+            const clause = Array.isArray(value)
+              ? { _or: value.map(el => ({ matches: el })) }
+              : { matches: value };
+
+            return { [field]: clause };
+          }
+
+          return { [field]: acc };
         }, {}),
     );
 
