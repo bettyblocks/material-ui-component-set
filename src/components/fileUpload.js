@@ -43,13 +43,20 @@
       failureMessage: [],
     });
     const helper = useText(helperText);
-    const { id: customModelAttributeId, label = [] } = customModelAttributeObj;
+    const {
+      id: customModelAttributeId,
+      label = [],
+      required: defaultRequired,
+    } = customModelAttributeObj;
     const labelText = useText(label);
     const customModelAttribute = getCustomModelAttribute(
       customModelAttributeId,
     );
-    const { name: customModelAttributeName, validations: { required } = {} } =
-      customModelAttribute || {};
+    const {
+      name: customModelAttributeName,
+      validations: { attributeRequired } = {},
+    } = customModelAttribute || {};
+    const required = customModelAttribute ? attributeRequired : defaultRequired;
     const nameAttributeValue = useText(nameAttribute);
     const requiredText = required ? '*' : '';
     const [uploadedFileArray, setUploadedFileArray] = useState([]);

@@ -48,12 +48,16 @@
       id: customModelAttributeId,
       label = [],
       value: defaultValue,
+      required: defaultRequired = false,
     } = customModelAttributeObj;
     const customModelAttribute = getCustomModelAttribute(
       customModelAttributeId,
     );
-    const { name: customModelAttributeName, validations: { required } = {} } =
-      customModelAttribute || {};
+    const {
+      name: customModelAttributeName,
+      validations: { attributeRequired } = {},
+    } = customModelAttribute || {};
+    const required = customModelAttribute ? attributeRequired : defaultRequired;
     const labelText = useText(label);
     const nameAttributeValue = useText(nameAttribute);
 
