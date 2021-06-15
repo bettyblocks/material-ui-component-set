@@ -1,3 +1,31 @@
+# [1.143.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.142.1...v1.143.0) (2021-06-11)
+
+
+### Features
+
+* added no results message to 3 page templates ([e357920](https://github.com/bettyblocks/material-ui-component-set/commit/e357920c938256722c44f40f0ac3555ca3910145))
+
+## [1.142.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.142.0...v1.142.1) (2021-06-10)
+
+
+### Bug Fixes
+
+* updated the details values of page tempaltes ([0f302aa](https://github.com/bettyblocks/material-ui-component-set/commit/0f302aa77b7016c756fd6d6b9422a24f3d4f54fe))
+
+# [1.142.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.141.0...v1.142.0) (2021-06-09)
+
+
+### Features
+
+* have formfields use raw values by default ([a7adfee](https://github.com/bettyblocks/material-ui-component-set/commit/a7adfee0825524e003207cf27dd6f2dce0d6813f))
+
+# [1.141.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.140.2...v1.141.0) (2021-06-04)
+
+
+### Features
+
+* **ta-2546:** adds option to hide the badge if value is 0 ([0c7b00a](https://github.com/bettyblocks/material-ui-component-set/commit/0c7b00a180f3d2acc0e425f5904a86d837bc2211))
+
 ## [1.140.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.140.1...v1.140.2) (2021-06-03)
 
 

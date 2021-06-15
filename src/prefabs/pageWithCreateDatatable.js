@@ -1,9 +1,10 @@
 (() => ({
-  name: 'Data table with create',
+  name: 'Data table with create functionality',
   icon: 'DataTable',
   type: 'page',
   description: 'This page contains a datatable with create dialog',
-  detail: 'This page contains a datatable with create dialog',
+  detail:
+    'Connect your model to this ready to use Data Table. This also includes a modal to add records to your Data Table.',
   previewUrl: 'https://preview.betty.app/create-datatable',
   previewImage:
     'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_Datatable_Create.jpg',
@@ -4381,6 +4382,20 @@
                                         label: 'Add Badge',
                                         key: 'addBadge',
                                         value: false,
+                                      },
+                                      {
+                                        type: 'TOGGLE',
+                                        label: 'Hide Badge if value is 0',
+                                        key: 'hideBadge',
+                                        value: false,
+                                        configuration: {
+                                          condition: {
+                                            type: 'SHOW',
+                                            option: 'addBadge',
+                                            comparator: 'EQ',
+                                            value: true,
+                                          },
+                                        },
                                       },
                                       {
                                         type: 'VARIABLE',

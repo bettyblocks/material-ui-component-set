@@ -52,7 +52,7 @@
       label = [],
       value: defaultValue = [],
     } = customModelAttributeObj;
-    const strDefaultValue = useText(defaultValue);
+    const strDefaultValue = useText(defaultValue, { rawValue: true });
     const labelText = useText(label);
     const customModelAttribute = getCustomModelAttribute(
       customModelAttributeId,
