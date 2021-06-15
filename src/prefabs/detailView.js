@@ -12,7 +12,7 @@
       PropertiesSelector,
       ButtonGroup,
       ButtonGroupButton,
-      // CheckBox,
+      CheckBox,
     },
     helpers: { useCurrentPageId, camelToSnakeCase, useModelQuery },
     prefab,
@@ -22,7 +22,7 @@
     const [modelId, setModelId] = React.useState('');
     const [properties, setProperties] = React.useState([]);
     const [numberOfColumns, setNumberOfColumns] = React.useState('6');
-    // const [sideBySide, setSideBySide] = React.useState(false);
+    const [sideBySide, setSideBySide] = React.useState(false);
 
     const pageUuid = useCurrentPageId();
 
@@ -55,25 +55,27 @@
               value={modelId}
             />
           </Field>
-          {/* <Field label="Side by Side">
+          <Field label="Side by Side">
             <CheckBox
-              onChange={({ target: { value } }) => {
-                setSideBySide(value);
+              onChange={() => {
+                setSideBySide(!sideBySide);
               }}
             />
-          </Field> */}
-          <Field label="Number of columns">
-            <ButtonGroup
-              onChange={({ target: { value } }) => {
-                setNumberOfColumns(value);
-              }}
-              value={numberOfColumns}
-            >
-              <ButtonGroupButton label="1 column" value="12" name="options" />
-              <ButtonGroupButton label="2 columns" value="6" name="options" />
-              <ButtonGroupButton label="3 columns" value="4" name="options" />
-            </ButtonGroup>
           </Field>
+          {sideBySide === false && (
+            <Field label="Number of columns">
+              <ButtonGroup
+                onChange={({ target: { value } }) => {
+                  setNumberOfColumns(value);
+                }}
+                value={numberOfColumns}
+              >
+                <ButtonGroupButton label="1 column" value="12" name="options" />
+                <ButtonGroupButton label="2 columns" value="6" name="options" />
+                <ButtonGroupButton label="3 columns" value="4" name="options" />
+              </ButtonGroup>
+            </Field>
+          )}
           <Field label="Columns">
             <PropertiesSelector
               modelId={modelId}
@@ -98,9 +100,6 @@
               },
             });
             newPrefab.structure[0].options[0].value = modelId;
-
-            // Delete this const when using the side by side option.
-            const sideBySide = false;
 
             if (!sideBySide) {
               newPrefab.structure[0].descendants[0].descendants.push({
