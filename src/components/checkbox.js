@@ -19,6 +19,7 @@
 
     const [errorState, setErrorState] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
+    const mounted = useRef(false);
     const {
       id: customModelAttributeId,
       label = [],
@@ -71,8 +72,17 @@
       } else {
         B.triggerEvent('isFalse', false);
       }
-      B.triggerEvent('onChange', checked);
+      if (mounted.current) {
+        B.triggerEvent('onChange', checked);
+      }
     }, [checked]);
+
+    useEffect(() => {
+      mounted.current = true;
+      return () => {
+        mounted.current = false;
+      };
+    }, []);
 
     useEffect(() => {
       if (isDev) {

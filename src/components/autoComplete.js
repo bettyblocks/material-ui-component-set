@@ -179,6 +179,12 @@
       });
 
     useEffect(() => {
+      if (mounted.current) {
+        B.triggerEvent('onChange', currentValue);
+      }
+    }, [currentValue]);
+
+    useEffect(() => {
       mounted.current = true;
       return () => {
         mounted.current = false;
@@ -217,10 +223,6 @@
         clearTimeout(handler);
       };
     }, [searchParam]);
-
-    useEffect(() => {
-      B.triggerEvent('onChange', currentValue);
-    });
 
     const onChange = (_, newValue) => {
       if (!valueProp || !newValue) {

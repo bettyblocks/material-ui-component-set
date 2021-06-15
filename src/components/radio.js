@@ -114,15 +114,17 @@
       });
 
     useEffect(() => {
+      if (mounted.current) {
+        B.triggerEvent('onChange', value);
+      }
+    }, [value]);
+
+    useEffect(() => {
       mounted.current = true;
       return () => {
         mounted.current = false;
       };
     }, []);
-
-    useEffect(() => {
-      B.triggerEvent('onChange', value);
-    }, [value]);
 
     useEffect(() => {
       if (mounted.current && loading) {
