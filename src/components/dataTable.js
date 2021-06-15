@@ -171,21 +171,27 @@
 
     let interactionFilters = {};
 
-    const clauses = Object.entries(interactionFilter).map(
-      ([, { property, value }]) =>
+    const isEmptyValue = value =>
+      !value || (Array.isArray(value) && value.length === 0);
+
+    const clauses = Object.entries(interactionFilter)
+      .filter(([, { value }]) => !isEmptyValue(value))
+      .map(([, { property, value }]) =>
         property.id.reduceRight((acc, field, index, arr) => {
           const isLast = index === arr.length - 1;
           if (isLast) {
-            const clause = Array.isArray(value)
-              ? { _or: value.map(el => ({ matches: el })) }
-              : { matches: value };
-
-            return { [field]: clause };
+            return Array.isArray(value)
+              ? {
+                  _or: value.map(el => ({
+                    [field]: { [property.operator]: el },
+                  })),
+                }
+              : { [field]: { [property.operator]: value } };
           }
 
           return { [field]: acc };
         }, {}),
-    );
+      );
 
     interactionFilters =
       clauses.length > 1 ? { _and: clauses } : clauses[0] || {};
