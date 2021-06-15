@@ -105,14 +105,9 @@
       });
 
     useEffect(() => {
-      mounted.current = true;
-      return () => {
-        mounted.current = false;
-      };
-    }, []);
-
-    useEffect(() => {
-      B.triggerEvent('OnChange', currentValue);
+      if (mounted.current) {
+        B.triggerEvent('onChange', currentValue);
+      }
     }, [currentValue]);
 
     useEffect(() => {
@@ -120,6 +115,13 @@
         B.triggerEvent('onLoad', loading);
       }
     }, [loading]);
+
+    useEffect(() => {
+      mounted.current = true;
+      return () => {
+        mounted.current = false;
+      };
+    }, []);
 
     const { results } = data || {};
 
