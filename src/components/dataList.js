@@ -232,12 +232,6 @@
 
         useEffect(() => {
           if (!isDev && data) {
-            setPrevData(data);
-          }
-        }, [data]);
-
-        useEffect(() => {
-          if (!isDev && data) {
             switch (pagination) {
               case 'never':
                 setShowPagination(false);
@@ -251,6 +245,7 @@
               case 'always':
                 setShowPagination(true);
             }
+            setPrevData(data);
           }
         }, [data, rowsPerPage]);
 
@@ -566,7 +561,7 @@
       },
       arrowDisabled: { color: '#ccc' },
       skeleton: {
-        margin: '10px 0',
+        margin: '0.625rem 0',
         height: `calc(${style.getFont('Body1').Mobile} * 1.2)`,
         [`@media ${mediaMinWidth(600)}`]: {
           height: `calc(${style.getFont('Body1').Portrait} * 1.2)`,
