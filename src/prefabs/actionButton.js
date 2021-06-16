@@ -3,6 +3,24 @@
   icon: 'ButtonIcon',
   category: 'BUTTON',
   keywords: ['Button', 'action'],
+  actions: [
+    {
+      ref: {
+        id: '#actionId',
+        endpointId: '#endpointId',
+      },
+      useNewRuntime: false,
+      events: [
+        {
+          kind: 'create',
+          options: {
+            modelId: '',
+            assign: [],
+          },
+        },
+      ],
+    },
+  ],
   structure: [
     {
       name: 'Button',
@@ -23,7 +41,7 @@
           value: ['Action Button'],
         },
         {
-          value: '',
+          value: '#actionId',
           label: 'Action',
           key: 'actionId',
           type: 'ACTION',
