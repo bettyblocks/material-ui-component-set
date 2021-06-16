@@ -5,7 +5,7 @@
   orientation: 'VERTICAL',
   styleType: 'BUTTON',
   jsx: (() => {
-    const { CircularProgress, Tooltip } = window.MaterialUI.Core;
+    const { CircularProgress, Tooltip, Link } = window.MaterialUI.Core;
     const { Icons } = window.MaterialUI;
     const {
       disabled,
@@ -41,9 +41,10 @@
       (linkToExternal && useText(linkToExternal)) || '';
     const linkToInternalVariable =
       linkTo && linkTo.id !== '' && useEndpoint(linkTo);
+    const hasInteralLink =
+      linkType === 'internal' && linkTo && linkTo.id !== '';
     const buttonContent = useText(buttonText);
     const tooltipText = useText(tooltipContent);
-
     const [isVisible, setIsVisible] = useState(visible);
     const [isLoading, setIsLoading] = useState(false);
     const [isOpen, setIsOpen] = useState(hasVisibleTooltip);
@@ -154,14 +155,11 @@
     };
 
     const anchorProps = {
-      href:
-        linkType === 'external'
-          ? getExternalHref({
-              disabled,
-              linkToExternal,
-              linkToExternalVariable,
-            })
-          : getInternalHref({ linkTo, linkToInternalVariable, disabled }),
+      href: getExternalHref({
+        disabled,
+        linkToExternal,
+        linkToExternalVariable,
+      }),
       target: openLinkToExternal,
       tabindex: isDev && -1,
       type: isDev ? 'button' : type,
@@ -171,6 +169,12 @@
         event.stopPropagation();
         actionCallback();
       },
+    };
+
+    const linkProps = {
+      href: getInternalHref({ linkTo, linkToInternalVariable, disabled }),
+      component: hasInteralLink ? B.Link : undefined,
+      endpoint: hasInteralLink ? linkTo : undefined,
     };
 
     const ButtonContent = (
@@ -209,11 +213,16 @@
       </div>
     );
 
-    const AnchorElement = (
-      <a className={classes.anchor} {...anchorProps}>
-        {ButtonContent}
-      </a>
-    );
+    const LinkComponent =
+      linkType === 'internal' ? (
+        <Link className={classes.linkComponent} {...linkProps}>
+          {ButtonContent}
+        </Link>
+      ) : (
+        <a className={classes.linkComponent} {...anchorProps}>
+          {ButtonContent}
+        </a>
+      );
 
     const ButtonElement = (
       <button type="button" className={classes.button} {...buttonProps}>
@@ -221,7 +230,7 @@
       </button>
     );
 
-    const ButtonComponent = type === 'submit' ? ButtonElement : AnchorElement;
+    const ButtonComponent = type === 'submit' ? ButtonElement : LinkComponent;
 
     let tooltipProps = {
       title: tooltipText,
@@ -268,7 +277,7 @@
           pointerEvents: 'none',
         },
       },
-      anchor: {
+      linkComponent: {
         textDecoration: 'none',
         display: ({ options: { fullWidth } }) =>
           fullWidth ? 'inline-flex' : 'inline-block',
