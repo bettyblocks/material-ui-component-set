@@ -59,14 +59,14 @@
       id: customModelAttributeId,
       label = [],
       value: defaultValue = [],
-      require: defaultRequired = false,
+      required: defaultRequired = false,
     } = customModelAttributeObj;
     const customModelAttribute = getCustomModelAttribute(
       customModelAttributeId,
     );
     const {
       name: customModelAttributeName,
-      validations: { attributeRequired } = {},
+      validations: { required: attributeRequired } = {},
     } = customModelAttribute || {};
     const required = customModelAttribute ? attributeRequired : defaultRequired;
     const { kind, values: listValues } = getProperty(property) || {};

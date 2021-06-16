@@ -55,7 +55,7 @@
     );
     const {
       name: customModelAttributeName,
-      validations: { attributeRequired } = {},
+      validations: { required: attributeRequired } = {},
     } = customModelAttribute || {};
     const required = customModelAttribute ? attributeRequired : defaultRequired;
     const labelText = useText(label);
