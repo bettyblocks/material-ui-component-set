@@ -1,3 +1,10 @@
+## [1.144.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.144.1...v1.144.2) (2021-06-16)
+
+
+### Bug Fixes
+
+* fallback to option when attribute not available ([7531a97](https://github.com/bettyblocks/material-ui-component-set/commit/7531a975faeddf250dd17ed0a21576ad955af275))
+
 ## [1.144.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.144.0...v1.144.1) (2021-06-16)
 
 
