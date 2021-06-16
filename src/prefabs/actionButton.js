@@ -33,7 +33,9 @@
           value: ['Action Button'],
         },
         {
-          value: '#actionId',
+          ref: {
+            value: '#actionId',
+          },
           label: 'Action',
           key: 'actionId',
           type: 'ACTION',
