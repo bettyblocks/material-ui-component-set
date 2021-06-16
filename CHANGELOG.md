@@ -1,3 +1,31 @@
+# [1.144.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.143.0...v1.144.0) (2021-06-15)
+
+
+### Bug Fixes
+
+* handling of multiple or queries ([30ac459](https://github.com/bettyblocks/material-ui-component-set/commit/30ac459aa3f30fbcdf95124a85df1ca018e95aa4))
+
+
+### Features
+
+* adds filter to datatable ([b0d930b](https://github.com/bettyblocks/material-ui-component-set/commit/b0d930bac9cbc197cd62258ff24eee5f5cbcf5e8))
+* handle plain objects and arrays in filter ([e5405df](https://github.com/bettyblocks/material-ui-component-set/commit/e5405df1634ed7136e042b6b907bbcd12fbf88bf))
+* structure interaction filters in an and ([49ddcf8](https://github.com/bettyblocks/material-ui-component-set/commit/49ddcf8c3dd349d599a38baa09dda3ec30de23d8))
+
+# [1.143.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.142.1...v1.143.0) (2021-06-11)
+
+
+### Features
+
+* added no results message to 3 page templates ([e357920](https://github.com/bettyblocks/material-ui-component-set/commit/e357920c938256722c44f40f0ac3555ca3910145))
+
+## [1.142.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.142.0...v1.142.1) (2021-06-10)
+
+
+### Bug Fixes
+
+* updated the details values of page tempaltes ([0f302aa](https://github.com/bettyblocks/material-ui-component-set/commit/0f302aa77b7016c756fd6d6b9422a24f3d4f54fe))
+
 # [1.142.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.141.0...v1.142.0) (2021-06-09)
 
 
