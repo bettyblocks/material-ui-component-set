@@ -1,3 +1,11 @@
+## [1.144.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.144.0...v1.144.1) (2021-06-16)
+
+
+### Bug Fixes
+
+* ensure the ref is set correctly ([c044511](https://github.com/bettyblocks/material-ui-component-set/commit/c04451134ca7dad91cdd2004950c90ce66e81640))
+* generate the action through the prefab actions structure ([4c9bee3](https://github.com/bettyblocks/material-ui-component-set/commit/4c9bee330e1f580cd4d53b49efd7179db5ef698c))
+
 # [1.144.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.143.0...v1.144.0) (2021-06-15)
 
 
