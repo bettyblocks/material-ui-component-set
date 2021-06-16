@@ -15,6 +15,7 @@
           ModelProvider,
           useAllQuery,
           useEndpoint,
+          useText,
         } = B;
 
         const {
@@ -26,9 +27,11 @@
           showError,
           showSuccess,
           currentRecord,
+          loadingType,
+          loadingText,
         } = options;
         const formRef = React.createRef();
-
+        const parsedLoadingText = useText(loadingText);
         const displayError = showError === 'built-in';
         const displaySuccess = showSuccess === 'built-in';
         const empty = children.length === 0;
@@ -108,6 +111,7 @@
           if (data || error) {
             B.triggerEvent('onActionDone');
           }
+
           if (data) {
             B.triggerEvent('onActionSuccess', data.actionb5);
 
@@ -235,7 +239,11 @@
             }
           }
 
-          if (isFetching) return 'Loading...';
+          if (isFetching && loadingType === 'default')
+            return <span>{parsedLoadingText}</span>;
+
+          if (isFetching && loadingType === 'showChildren') return children;
+
           if (err && displayError) return err.message;
           if (!item) return children;
 

@@ -14,6 +14,7 @@
           ModelProvider,
           useAllQuery,
           useFilter,
+          useText,
         } = B;
         const [page, setPage] = useState(1);
         const [search, setSearch] = useState('');
@@ -32,6 +33,8 @@
           order,
           orderBy,
           pagination,
+          loadingType,
+          loadingText,
         } = options;
 
         const rowsPerPage = parseInt(take, 10) || 50;
@@ -39,13 +42,14 @@
         const { Search } = window.MaterialUI.Icons;
         const { label: searchPropertyLabel } =
           getProperty(searchProperty) || {};
-
+        const parsedLoadingText = useText(loadingText);
         const isEmpty = children.length === 0;
         const isDev = env === 'dev';
         const isPristine = isEmpty && isDev;
         const displayError = showError === 'built-in';
         const listRef = React.createRef();
         const [showPagination, setShowPagination] = useState(true);
+        const [prevData, setPrevData] = useState(null);
         const isInline = type === 'inline';
         const isGrid = type === 'grid';
 
@@ -241,6 +245,7 @@
               case 'always':
                 setShowPagination(true);
             }
+            setPrevData(data);
           }
         }, [data, rowsPerPage]);
 
@@ -307,7 +312,25 @@
             return builderLayout();
           }
 
-          if (loading) return <div className={classes.skeleton} />;
+          if (loading && loadingType === 'default') {
+            B.triggerEvent('onLoad', loading);
+            return <span>{parsedLoadingText}</span>;
+          }
+
+          if (loading && loadingType === 'showChildren') {
+            B.triggerEvent('onLoad', loading);
+            return (
+              <ModelProvider value={prevData} id={model}>
+                {children}
+              </ModelProvider>
+            );
+          }
+
+          if (loading && loadingType === 'skeleton') {
+            return Array.from(Array(rowsPerPage).keys()).map(idx => (
+              <div key={idx} className={classes.skeleton} />
+            ));
+          }
 
           if (error && displayError) {
             return <span>{error.message}</span>;
@@ -481,6 +504,12 @@
         marginLeft: ({ options: { outerSpacing } }) =>
           getSpacing(outerSpacing[3]),
       },
+      grid: {
+        display: 'grid',
+        gridTemplateColumns: ({ options: { sSize } }) =>
+          `repeat(${sSize}, 1fr)`,
+        gridGap: ({ options: { gap } }) => `${gap}`,
+      },
       inline: {
         display: 'inline-flex',
       },
@@ -538,6 +567,7 @@
       },
       arrowDisabled: { color: '#ccc' },
       skeleton: {
+        margin: '0.625rem 0',
         height: `calc(${style.getFont('Body1').Mobile} * 1.2)`,
         [`@media ${mediaMinWidth(600)}`]: {
           height: `calc(${style.getFont('Body1').Portrait} * 1.2)`,
@@ -576,6 +606,12 @@
           marginLeft: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[3], 'Portrait'),
         },
+        grid: {
+          display: 'grid',
+          gridTemplateColumns: ({ options: { mSize } }) =>
+            `repeat(${mSize}, 1fr)`,
+          gridGap: ({ options: { gap } }) => `${gap}`,
+        },
       },
       [`@media ${mediaMinWidth(960)}`]: {
         root: {
@@ -587,6 +623,12 @@
             getSpacing(outerSpacing[2], 'Landscape'),
           marginLeft: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[3], 'Landscape'),
+        },
+        grid: {
+          display: 'grid',
+          gridTemplateColumns: ({ options: { lSize } }) =>
+            `repeat(${lSize}, 1fr)`,
+          gridGap: ({ options: { gap } }) => `${gap}`,
         },
       },
       [`@media ${mediaMinWidth(1280)}`]: {
@@ -600,12 +642,20 @@
           marginLeft: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[3], 'Desktop'),
         },
+        grid: {
+          display: 'grid',
+          gridTemplateColumns: ({ options: { xlSize } }) =>
+            `repeat(${xlSize}, 1fr)`,
+          gridGap: ({ options: { gap } }) => `${gap}`,
+        },
       },
-      grid: {
-        display: 'grid',
-        gridTemplateColumns: ({ options: { width } }) =>
-          `repeat(auto-fit, minmax(${width}, 1fr))`,
-        gridGap: ({ options: { gap } }) => `${gap}`,
+      [`@media ${mediaMinWidth(1600)}`]: {
+        grid: {
+          display: 'grid',
+          gridTemplateColumns: ({ options: { fullSize } }) =>
+            `repeat(${fullSize}, 1fr)`,
+          gridGap: ({ options: { gap } }) => `${gap}`,
+        },
       },
       empty: {
         display: 'flex',

@@ -57,6 +57,7 @@
       id: customModelAttributeId,
       label = [],
       value: defaultValue = [],
+      required: defaultRequired = false,
     } = customModelAttributeObj;
     const [currentValue, setCurrentValue] = useState(
       useText(defaultValue, { rawValue: true }),
@@ -66,8 +67,12 @@
       customModelAttributeId,
     );
 
-    const { name: customModelAttributeName, validations: { required } = {} } =
-      customModelAttribute || {};
+    const {
+      name: customModelAttributeName,
+      validations: { attributeRequired } = {},
+    } = customModelAttribute || {};
+
+    const required = customModelAttribute ? attributeRequired : defaultRequired;
     const nameAttributeValue = useText(nameAttribute);
 
     const validPattern = pattern || null;
@@ -203,12 +208,13 @@
 
     const iconButtonOptions = {
       edge: adornmentPosition,
-      tabIndex: isDev && -1,
+      tabIndex: -1,
     };
     if (isPasswordType) {
       iconButtonOptions.ariaLabel = 'toggle password visibility';
       iconButtonOptions.onClick = handleClickShowPassword;
       iconButtonOptions.onMouseDown = handleMouseDownPassword;
+      iconButtonOptions.tabIndex = 0;
     }
 
     useEffect(() => {
@@ -238,7 +244,7 @@
           type={(isDev && type === 'number') || showPassword ? 'text' : type}
           multiline={multiline}
           rows={rows}
-          label={labelText}
+          label={labelText === '' ? undefined : labelText}
           placeholder={placeholderText}
           onKeyDown={onKeyDown}
           onChange={changeHandler}

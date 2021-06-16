@@ -19,16 +19,21 @@
 
     const [errorState, setErrorState] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
+    const mounted = useRef(false);
     const {
       id: customModelAttributeId,
       label = [],
       value: defaultValue = [],
+      required: defaultRequired = false,
     } = customModelAttributeObj;
     const customModelAttribute = getCustomModelAttribute(
       customModelAttributeId,
     );
-    const { name: customModelAttributeName, validations: { required } = {} } =
-      customModelAttribute || {};
+    const {
+      name: customModelAttributeName,
+      validations: { attributeRequired } = {},
+    } = customModelAttribute || {};
+    const required = customModelAttribute ? attributeRequired : defaultRequired;
     const labelText = useText(label);
     const componentChecked = useText(defaultValue);
     const [checked, setChecked] = useState(componentChecked === 'true');
@@ -71,8 +76,17 @@
       } else {
         B.triggerEvent('isFalse', false);
       }
-      B.triggerEvent('onChange', checked);
+      if (mounted.current) {
+        B.triggerEvent('onChange', checked);
+      }
     }, [checked]);
+
+    useEffect(() => {
+      mounted.current = true;
+      return () => {
+        mounted.current = false;
+      };
+    }, []);
 
     useEffect(() => {
       if (isDev) {
