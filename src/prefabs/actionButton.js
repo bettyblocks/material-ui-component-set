@@ -10,15 +10,7 @@
         endpointId: '#endpointId',
       },
       useNewRuntime: false,
-      events: [
-        {
-          kind: 'create',
-          options: {
-            modelId: '',
-            assign: [],
-          },
-        },
-      ],
+      events: [],
     },
   ],
   structure: [
