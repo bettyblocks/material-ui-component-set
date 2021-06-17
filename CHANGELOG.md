@@ -1,3 +1,10 @@
+## [1.144.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.144.2...v1.144.3) (2021-06-17)
+
+
+### Bug Fixes
+
+* **page-173:** fixes the onChange trigger event on first render ([843b349](https://github.com/bettyblocks/material-ui-component-set/commit/843b349eeb4434e8243485fd328737e48f4c0c77))
+
 ## [1.144.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.144.1...v1.144.2) (2021-06-16)
 
 
