@@ -105,21 +105,23 @@
       });
 
     useEffect(() => {
-      mounted.current = true;
-      return () => {
-        mounted.current = false;
-      };
-    }, []);
-
-    useEffect(() => {
-      B.triggerEvent('onChange', currentValue);
-    });
+      if (mounted.current) {
+        B.triggerEvent('onChange', currentValue);
+      }
+    }, [currentValue]);
 
     useEffect(() => {
       if (mounted.current && loading) {
         B.triggerEvent('onLoad', loading);
       }
     }, [loading]);
+
+    useEffect(() => {
+      mounted.current = true;
+      return () => {
+        mounted.current = false;
+      };
+    }, []);
 
     const { results } = data || {};
 
