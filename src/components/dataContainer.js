@@ -14,6 +14,7 @@
           useEndpoint,
           useOneQuery,
           useMeQuery,
+          useText,
         } = B;
 
         const isEmpty = children.length === 0;
@@ -26,9 +27,12 @@
           redirectWithoutResult,
           showError,
           currentRecord,
+          loadingType,
+          loadingText,
         } = options;
         const displayError = showError === 'built-in';
-
+        const [prevData, setPrevData] = useState(null);
+        const parsedLoadingText = useText(loadingText);
         const [, setOptions] = useOptions();
 
         B.defineFunction('setCurrentRecord', value => {
@@ -102,6 +106,10 @@
           refetch();
         });
 
+        useEffect(() => {
+          setPrevData(oneData);
+        }, [oneData]);
+
         if (isDev) {
           return <BuilderLayout />;
         }
@@ -120,9 +128,17 @@
         };
 
         const One = () => {
-          if (oneDataLoading) {
+          if (oneDataLoading && loadingType === 'default') {
             B.triggerEvent('onLoad', oneDataLoading);
-            return <span>Loading...</span>;
+            return <span>{parsedLoadingText}</span>;
+          }
+          if (oneDataLoading && loadingType === 'showChildren') {
+            B.triggerEvent('onLoad', oneDataLoading);
+            return (
+              <ModelProvider value={prevData} id={model}>
+                {children}
+              </ModelProvider>
+            );
           }
 
           if (oneError && displayError) {
