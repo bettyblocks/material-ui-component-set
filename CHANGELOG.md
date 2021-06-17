@@ -1,3 +1,32 @@
+## [1.144.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.144.1...v1.144.2) (2021-06-16)
+
+
+### Bug Fixes
+
+* fallback to option when attribute not available ([7531a97](https://github.com/bettyblocks/material-ui-component-set/commit/7531a975faeddf250dd17ed0a21576ad955af275))
+
+## [1.144.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.144.0...v1.144.1) (2021-06-16)
+
+
+### Bug Fixes
+
+* ensure the ref is set correctly ([c044511](https://github.com/bettyblocks/material-ui-component-set/commit/c04451134ca7dad91cdd2004950c90ce66e81640))
+* generate the action through the prefab actions structure ([4c9bee3](https://github.com/bettyblocks/material-ui-component-set/commit/4c9bee330e1f580cd4d53b49efd7179db5ef698c))
+
+# [1.144.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.143.0...v1.144.0) (2021-06-15)
+
+
+### Bug Fixes
+
+* handling of multiple or queries ([30ac459](https://github.com/bettyblocks/material-ui-component-set/commit/30ac459aa3f30fbcdf95124a85df1ca018e95aa4))
+
+
+### Features
+
+* adds filter to datatable ([b0d930b](https://github.com/bettyblocks/material-ui-component-set/commit/b0d930bac9cbc197cd62258ff24eee5f5cbcf5e8))
+* handle plain objects and arrays in filter ([e5405df](https://github.com/bettyblocks/material-ui-component-set/commit/e5405df1634ed7136e042b6b907bbcd12fbf88bf))
+* structure interaction filters in an and ([49ddcf8](https://github.com/bettyblocks/material-ui-component-set/commit/49ddcf8c3dd349d599a38baa09dda3ec30de23d8))
+
 # [1.143.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.142.1...v1.143.0) (2021-06-11)
 
 
