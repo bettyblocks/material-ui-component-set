@@ -1,6 +1,7 @@
 (() => ({
   name: 'Detail View',
-  icon: 'DataTable',
+  icon: 'DetailViewIcon',
+  keywords: ['detail', 'view', 'data', 'collection'],
   category: 'DATA',
   beforeCreate: ({
     components: {

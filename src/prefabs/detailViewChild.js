@@ -1,6 +1,7 @@
 (() => ({
   name: 'Detail View Child',
-  icon: 'DataContainer',
+  icon: 'DetailViewIcon',
+  keywords: ['detail', 'view', 'data', 'collection'],
   category: 'DATA',
   structure: [
     {
