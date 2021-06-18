@@ -1,7 +1,8 @@
 (() => ({
   name: 'Slider Input',
-  icon: 'ProgressBarIcon',
+  icon: 'SliderComponentIcon',
   category: 'FORM',
+  keywords: ['Form', 'slider', 'input', 'range'],
   structure: [
     {
       name: 'sliderInput',
