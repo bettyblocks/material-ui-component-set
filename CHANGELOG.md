@@ -1,3 +1,10 @@
+## [1.146.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.146.0...v1.146.1) (2021-06-18)
+
+
+### Bug Fixes
+
+* checkbox group onChange has no values ([f218184](https://github.com/bettyblocks/material-ui-component-set/commit/f21818491f485c3b2c39679565bb2c53cab70302))
+
 # [1.146.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.145.0...v1.146.0) (2021-06-18)
 
 
