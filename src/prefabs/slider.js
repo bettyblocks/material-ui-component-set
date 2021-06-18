@@ -1,7 +1,8 @@
 (() => ({
   name: 'Slider Input',
-  icon: 'ParagraphIcon',
-  category: 'CONTENT',
+  icon: 'SliderComponentIcon',
+  category: 'FORM',
+  keywords: ['Form', 'slider', 'input', 'range'],
   structure: [
     {
       name: 'sliderInput',
@@ -14,6 +15,12 @@
           configuration: {
             allowedTypes: ['integer'],
           },
+        },
+        {
+          type: 'TOGGLE',
+          label: 'Disabled',
+          key: 'disable',
+          value: false,
         },
         {
           type: 'NUMBER',
@@ -29,9 +36,35 @@
         },
         {
           type: 'NUMBER',
-          label: 'Step',
+          label: 'Increments',
           key: 'stepNumber',
           value: 1,
+        },
+        {
+          value: [],
+          label: 'Helper text',
+          key: 'helperText',
+          type: 'VARIABLE',
+        },
+        {
+          value: false,
+          label: 'Validation options',
+          key: 'validationOptions',
+          type: 'TOGGLE',
+        },
+        {
+          value: ['This field is required'],
+          label: 'Value required message',
+          key: 'validationValueMissing',
+          type: 'VARIABLE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'validationOptions',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
         },
         {
           value: ['M', '0rem', '0rem', '0rem'],
@@ -40,36 +73,10 @@
           type: 'SIZES',
         },
         {
-          type: 'CUSTOM',
-          label: 'Border',
-          key: 'border',
-          value: 'withBorder',
-          configuration: {
-            as: 'BUTTONGROUP',
-            dataType: 'string',
-            allowedInput: [
-              {
-                name: 'With Border',
-                value: 'withBorder',
-              },
-              {
-                name: 'Without Border',
-                value: 'withoutBorder',
-              },
-            ],
-          },
-        },
-        {
           value: false,
           label: 'Marks',
           key: 'marks',
           type: 'TOGGLE',
-        },
-        {
-          type: 'TOGGLE',
-          label: 'Disable',
-          key: 'disable',
-          value: false,
         },
         {
           value: false,
@@ -93,51 +100,37 @@
         },
         {
           type: 'COLOR',
-          label: 'Border color',
-          key: 'borderColor',
-          value: 'Accent1',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'styles',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
-        },
-        {
-          type: 'COLOR',
-          label: 'Border color (hover)',
-          key: 'borderHoverColor',
-          value: 'Black',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'styles',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
-        },
-        {
-          type: 'COLOR',
-          label: 'Border color (focus)',
-          key: 'borderFocusColor',
-          value: 'Primary',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'styles',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
-        },
-        {
-          type: 'COLOR',
           label: 'Label color',
           key: 'labelColor',
           value: 'Accent3',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'styles',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'COLOR',
+          label: 'Helper color',
+          key: 'helperColor',
+          value: 'Accent2',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'styles',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'COLOR',
+          label: 'Error color',
+          key: 'errorColor',
+          value: 'Danger',
           configuration: {
             condition: {
               type: 'SHOW',
