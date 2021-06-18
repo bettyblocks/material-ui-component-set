@@ -1,8 +1,18 @@
 (() => ({
-  name: 'Button',
+  name: 'Action Button',
   icon: 'ButtonIcon',
   category: 'BUTTON',
-  keywords: ['Button'],
+  keywords: ['Button', 'action'],
+  actions: [
+    {
+      ref: {
+        id: '#actionId',
+        endpointId: '#endpointId',
+      },
+      useNewRuntime: false,
+      events: [],
+    },
+  ],
   structure: [
     {
       name: 'Button',
@@ -20,7 +30,39 @@
           type: 'VARIABLE',
           label: 'Button text',
           key: 'buttonText',
-          value: ['Button'],
+          value: ['Action Button'],
+        },
+        {
+          ref: {
+            value: '#actionId',
+          },
+          label: 'Action',
+          key: 'actionId',
+          type: 'ACTION',
+          configuration: {
+            apiVersion: 'v1',
+            condition: {
+              type: 'SHOW',
+              option: 'linkType',
+              comparator: 'EQ',
+              value: 'action',
+            },
+          },
+        },
+        {
+          value: [],
+          label: 'Objects to pass to action',
+          key: 'actionModels',
+          type: 'ACTION_INPUT_OBJECTS',
+          configuration: {
+            apiVersion: 'v1',
+            condition: {
+              type: 'SHOW',
+              option: 'linkType',
+              comparator: 'EQ',
+              value: 'action',
+            },
+          },
         },
         {
           value: false,

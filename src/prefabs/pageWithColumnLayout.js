@@ -5,7 +5,7 @@
   description:
     'Generate your layout, columns and rows by using the column layout component.',
   detail:
-    'Generate your layout, columns and rows by using the column layout component.',
+    'The Column layout generator component helps you shape the layout of your page beforehand by filling in how many columns and rows you would like to add to the page. After generating your layout, you can start dragging your desired components onto the canvas.',
   previewImage:
     'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_Column_Layout.jpg',
   category: 'LAYOUT',

@@ -3,7 +3,8 @@
   icon: 'LoginFormIcon',
   type: 'page',
   description: 'Page with a ready to use login form, register form and image.',
-  detail: 'Page with a ready to use login form, register form and image.',
+  detail:
+    'It takes a few clicks to set up your login and register page. Connect your model to the forms and feel free to customize your image to your liking.',
   previewUrl: 'https://preview.betty.app/login-and-register',
   previewImage:
     'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_Login_And_Register.jpg',
