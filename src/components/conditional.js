@@ -6,24 +6,25 @@
   jsx: (
     <div className={children.length === 0 ? classes.empty : undefined}>
       {(() => {
+        const { left, right, compare } = options;
         const { useText, env } = B;
         const isDev = env === 'dev';
         const isPristine = isDev && children.length === 0;
         const mounted = useRef(false);
+        const [leftValue, setLeftValue] = useState(useText(left));
+        const [rightValue, setRightValue] = useState(useText(right));
 
         const evalCondition = () => {
-          const left = useText(options.left);
-          const right = useText(options.right);
-          const leftAsNumber = parseFloat(left);
-          const rightAsNumber = parseFloat(right);
+          const leftAsNumber = parseFloat(leftValue);
+          const rightAsNumber = parseFloat(rightValue);
 
-          switch (options.compare) {
+          switch (compare) {
             case 'neq':
-              return left !== right;
+              return leftValue !== rightValue;
             case 'contains':
-              return left.indexOf(right) > -1;
+              return leftValue.indexOf(rightValue) > -1;
             case 'notcontains':
-              return left.indexOf(right) < 0;
+              return leftValue.indexOf(rightValue) < 0;
             case 'gt':
               return leftAsNumber > rightAsNumber;
             case 'lt':
@@ -33,18 +34,21 @@
             case 'lteq':
               return leftAsNumber <= rightAsNumber;
             default:
-              return left === right;
+              return leftValue === rightValue;
           }
         };
+
         const checkCondition = evalCondition();
-        const initialVisibility = options.visible
-          ? checkCondition
-          : !checkCondition;
+        const initialVisibility = options.visible ? checkCondition : false;
         const [visible, setVisible] = useState(false);
 
         useEffect(() => {
+          setVisible(evalCondition());
+        }, [leftValue, rightValue]);
+
+        useEffect(() => {
           setVisible(initialVisibility);
-        }, [checkCondition]);
+        }, []);
 
         useEffect(() => {
           if (visible) {
@@ -69,6 +73,20 @@
         B.defineFunction('Show/Hide', () => setVisible(s => !s));
         B.defineFunction('Set Visibility', value => {
           if (typeof value === 'boolean') setVisible(value);
+        });
+        B.defineFunction('Set Left Value', value => {
+          if (typeof value === 'object') {
+            setLeftValue(value.map(String));
+          } else {
+            setLeftValue(value.toString());
+          }
+        });
+        B.defineFunction('Set Right Value', value => {
+          if (typeof value === 'object') {
+            setRightValue(value.map(String));
+          } else {
+            setRightValue(value.toString());
+          }
         });
 
         if (!isDev && !visible) return null;
