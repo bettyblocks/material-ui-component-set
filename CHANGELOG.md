@@ -1,3 +1,10 @@
+# [1.145.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.144.3...v1.145.0) (2021-06-18)
+
+
+### Features
+
+* image carousel component ([9f63c29](https://github.com/bettyblocks/material-ui-component-set/commit/9f63c29dfb92c489ff0ce3dab08bc0451c71af6a))
+
 ## [1.144.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.144.2...v1.144.3) (2021-06-17)
 
 
