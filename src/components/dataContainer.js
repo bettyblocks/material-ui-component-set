@@ -85,6 +85,7 @@
           refetch,
         } =
           (!isDev &&
+            model &&
             useOneQuery(model, {
               filter: hasFilter ? getFilter() : undefined,
               onCompleted(resp) {
