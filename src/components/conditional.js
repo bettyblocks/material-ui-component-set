@@ -9,6 +9,7 @@
         const { useText, env } = B;
         const isDev = env === 'dev';
         const isPristine = isDev && children.length === 0;
+        const mounted = useRef(false);
 
         const evalCondition = () => {
           const left = useText(options.left);
@@ -51,8 +52,17 @@
           } else {
             B.triggerEvent('isFalse', false);
           }
-          B.triggerEvent('onChange', visible);
+          if (mounted.current) {
+            B.triggerEvent('onChange', visible);
+          }
         }, [visible]);
+
+        useEffect(() => {
+          mounted.current = true;
+          return () => {
+            mounted.current = false;
+          };
+        }, []);
 
         B.defineFunction('Hide', () => setVisible(false));
         B.defineFunction('Show', () => setVisible(true));
