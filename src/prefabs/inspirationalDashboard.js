@@ -20558,7 +20558,7 @@
                                   },
                                 },
                                 {
-                                  value: '3',
+                                  value: '4',
                                   label: 'Column width',
                                   key: 'columnWidth',
                                   type: 'CUSTOM',
@@ -20588,7 +20588,7 @@
                                   },
                                 },
                                 {
-                                  value: '3',
+                                  value: '4',
                                   label: 'Column width (tablet landscape)',
                                   key: 'columnWidthTabletLandscape',
                                   type: 'CUSTOM',
