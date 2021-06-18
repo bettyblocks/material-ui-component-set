@@ -59,14 +59,20 @@
       id: customModelAttributeId,
       label = [],
       value: defaultValue = [],
+      required: defaultRequired = false,
     } = customModelAttributeObj;
     const customModelAttribute = getCustomModelAttribute(
       customModelAttributeId,
     );
-    const { name: customModelAttributeName, validations: { required } = {} } =
-      customModelAttribute || {};
+    const {
+      name: customModelAttributeName,
+      validations: { required: attributeRequired } = {},
+    } = customModelAttribute || {};
+    const required = customModelAttribute ? attributeRequired : defaultRequired;
     const { kind, values: listValues } = getProperty(property) || {};
-    const [currentValue, setCurrentValue] = useState(useText(defaultValue));
+    const [currentValue, setCurrentValue] = useState(
+      useText(defaultValue, { rawValue: true }),
+    );
     const [currentLabel, setCurrentLabel] = useState('');
     const mounted = useRef(false);
     const labelText = useText(label);
@@ -177,6 +183,12 @@
       });
 
     useEffect(() => {
+      if (mounted.current) {
+        B.triggerEvent('onChange', currentValue);
+      }
+    }, [currentValue]);
+
+    useEffect(() => {
       mounted.current = true;
       return () => {
         mounted.current = false;
@@ -215,10 +227,6 @@
         clearTimeout(handler);
       };
     }, [searchParam]);
-
-    useEffect(() => {
-      B.triggerEvent('onChange', currentValue);
-    });
 
     const onChange = (_, newValue) => {
       if (!valueProp || !newValue) {
