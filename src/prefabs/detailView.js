@@ -13,7 +13,6 @@
       PropertiesSelector,
       ButtonGroup,
       ButtonGroupButton,
-      CheckBox,
     },
     helpers: { useCurrentPageId, camelToSnakeCase, useModelQuery },
     prefab,
@@ -23,7 +22,7 @@
     const [modelId, setModelId] = React.useState('');
     const [properties, setProperties] = React.useState([]);
     const [numberOfColumns, setNumberOfColumns] = React.useState('6');
-    const [sideBySide, setSideBySide] = React.useState(false);
+    const sideBySide = false;
 
     const pageUuid = useCurrentPageId();
 
@@ -54,13 +53,6 @@
                 setModelId(value);
               }}
               value={modelId}
-            />
-          </Field>
-          <Field label="Side by Side">
-            <CheckBox
-              onChange={() => {
-                setSideBySide(!sideBySide);
-              }}
             />
           </Field>
           {sideBySide === false && (
@@ -1383,6 +1375,34 @@
               { name: 'Built in', value: 'built-in' },
               { name: 'Interaction', value: 'interaction' },
             ],
+          },
+        },
+        {
+          value: 'default',
+          label: 'Show on load',
+          key: 'loadingType',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Message', value: 'default' },
+              { name: 'Content', value: 'showChildren' },
+            ],
+          },
+        },
+        {
+          value: ['Loading...'],
+          label: 'Loading text',
+          key: 'loadingText',
+          type: 'VARIABLE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'loadingType',
+              comparator: 'EQ',
+              value: 'default',
+            },
           },
         },
       ],
