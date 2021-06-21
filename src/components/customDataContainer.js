@@ -12,8 +12,10 @@
 
         if (!currentRecord) return <span>no current record</span>;
 
+        console.log('THINGS', { model, currentRecord });
+
         return (
-          <B.GetAll modelId={model} filter={{ id: { eq: currentRecord } }}>
+          <B.GetAll modelId={model} filter={currentRecord}>
             {({ loading, error, data }) => <div>{JSON.stringify(data)}</div>}
           </B.GetAll>
         );
