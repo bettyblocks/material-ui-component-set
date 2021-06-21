@@ -1,3 +1,10 @@
+## [1.146.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.146.1...v1.146.2) (2021-06-21)
+
+
+### Bug Fixes
+
+* if is action will render button instead of link ([e9f9bb3](https://github.com/bettyblocks/material-ui-component-set/commit/e9f9bb3fe77e1e94cc437ebb62bd159fe2352d3d))
+
 ## [1.146.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.146.0...v1.146.1) (2021-06-18)
 
 
