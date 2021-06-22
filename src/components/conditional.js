@@ -76,14 +76,18 @@
         });
         B.defineFunction('Set Left Value', value => {
           if (typeof value === 'object') {
-            setLeftValue(value.map(String));
+            value.length == undefined
+              ? setLeftValue(value.target.value)
+              : setLeftValue(value.map(String));
           } else {
             setLeftValue(value.toString());
           }
         });
         B.defineFunction('Set Right Value', value => {
           if (typeof value === 'object') {
-            setRightValue(value.map(String));
+            value.length == undefined
+              ? setRightValue(value.target.value)
+              : setRightValue(value.map(String));
           } else {
             setRightValue(value.toString());
           }
