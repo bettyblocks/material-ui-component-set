@@ -3645,7 +3645,10 @@
                                       as: 'BUTTONGROUP',
                                       dataType: 'string',
                                       allowedInput: [
-                                        { name: 'Message', value: 'default' },
+                                        {
+                                          name: 'Message',
+                                          value: 'default',
+                                        },
                                         {
                                           name: 'Content',
                                           value: 'showChildren',
