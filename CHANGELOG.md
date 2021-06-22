@@ -1,3 +1,31 @@
+## [1.146.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.146.1...v1.146.2) (2021-06-21)
+
+
+### Bug Fixes
+
+* if is action will render button instead of link ([e9f9bb3](https://github.com/bettyblocks/material-ui-component-set/commit/e9f9bb3fe77e1e94cc437ebb62bd159fe2352d3d))
+
+## [1.146.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.146.0...v1.146.1) (2021-06-18)
+
+
+### Bug Fixes
+
+* checkbox group onChange has no values ([f218184](https://github.com/bettyblocks/material-ui-component-set/commit/f21818491f485c3b2c39679565bb2c53cab70302))
+
+# [1.146.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.145.0...v1.146.0) (2021-06-18)
+
+
+### Features
+
+* add detail view component ([4caa87f](https://github.com/bettyblocks/material-ui-component-set/commit/4caa87f259901ee94bdb99265f722ad74313e785))
+
+# [1.145.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.144.3...v1.145.0) (2021-06-18)
+
+
+### Features
+
+* image carousel component ([9f63c29](https://github.com/bettyblocks/material-ui-component-set/commit/9f63c29dfb92c489ff0ce3dab08bc0451c71af6a))
+
 ## [1.144.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.144.2...v1.144.3) (2021-06-17)
 
 
