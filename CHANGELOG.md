@@ -1,3 +1,10 @@
+## [1.146.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.146.3...v1.146.4) (2021-06-22)
+
+
+### Bug Fixes
+
+* added new form options to page templates using a form ([74e5ea8](https://github.com/bettyblocks/material-ui-component-set/commit/74e5ea8045f2b919169396929b35297896463a38))
+
 ## [1.146.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.146.2...v1.146.3) (2021-06-22)
 
 
