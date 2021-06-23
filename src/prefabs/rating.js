@@ -17,6 +17,12 @@
           },
         },
         {
+          value: false,
+          label: 'Hide label',
+          key: 'hideLabel',
+          type: 'TOGGLE',
+        },
+        {
           type: 'CUSTOM',
           label: 'Number of icons',
           key: 'numberOfIcons',
@@ -1502,20 +1508,6 @@
           label: 'Label color',
           key: 'labelColor',
           value: 'Accent3',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'styles',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
-        },
-        {
-          value: false,
-          label: 'Hide label',
-          key: 'hideLabel',
-          type: 'TOGGLE',
           configuration: {
             condition: {
               type: 'SHOW',
