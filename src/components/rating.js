@@ -81,7 +81,9 @@
     const RatingComponent = (
       <div className={classes.root}>
         <FormControl
-          classes={{ root: classes.formControl }}
+          classes={{
+            root: labelText.length !== 0 && !hideLabel && classes.formControl,
+          }}
           required={required}
           component="fieldset"
           error={errorState}
@@ -215,9 +217,7 @@
         pointerEvents: 'none',
       },
       formControl: {
-        marginTop: ({ options: { hideLabel } }) => [
-          hideLabel ? '' : '15px !important',
-        ],
+        marginTop: '15px !important',
       },
       label: {
         color: ({ options: { labelColor } }) => [

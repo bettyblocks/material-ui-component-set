@@ -1,3 +1,24 @@
+## [1.146.5](https://github.com/bettyblocks/material-ui-component-set/compare/v1.146.4...v1.146.5) (2021-06-23)
+
+
+### Bug Fixes
+
+* hide label spacing when label is empty ([a33430a](https://github.com/bettyblocks/material-ui-component-set/commit/a33430af09d90f96145d4cf11a268d860b199574))
+
+## [1.146.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.146.3...v1.146.4) (2021-06-22)
+
+
+### Bug Fixes
+
+* added new form options to page templates using a form ([74e5ea8](https://github.com/bettyblocks/material-ui-component-set/commit/74e5ea8045f2b919169396929b35297896463a38))
+
+## [1.146.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.146.2...v1.146.3) (2021-06-22)
+
+
+### Bug Fixes
+
+* added missing options to page templates ([a3bf632](https://github.com/bettyblocks/material-ui-component-set/commit/a3bf632d22aea847ee8af74cd428ad58483034ac))
+
 ## [1.146.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.146.1...v1.146.2) (2021-06-21)
 
 
