@@ -1,3 +1,10 @@
+## [1.146.5](https://github.com/bettyblocks/material-ui-component-set/compare/v1.146.4...v1.146.5) (2021-06-23)
+
+
+### Bug Fixes
+
+* hide label spacing when label is empty ([a33430a](https://github.com/bettyblocks/material-ui-component-set/commit/a33430af09d90f96145d4cf11a268d860b199574))
+
 ## [1.146.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.146.3...v1.146.4) (2021-06-22)
 
 
