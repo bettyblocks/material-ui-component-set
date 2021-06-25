@@ -135,6 +135,20 @@
           }
         };
 
+        const FormElement = (
+          <form
+            className={[
+              empty && classes.empty,
+              isPristine && classes.pristine,
+            ].join(' ')}
+          >
+            {isPristine && (
+              <span>Drag form components in the form to submit data</span>
+            )}
+            {children}
+          </form>
+        );
+
         const FormCmp = ({ item }) => {
           const [isInvalid, setIsInvalid] = useState(false);
           const handleInvalid = () => {
@@ -143,6 +157,7 @@
               B.triggerEvent('onInvalid');
             }
           };
+
           useEffect(() => {
             B.triggerEvent('onComponentRendered');
           }, []);
@@ -250,7 +265,9 @@
           return <FormCmp item={item} />;
         };
 
-        return hasFilter ? <FormWithData /> : <FormCmp />;
+        const RuntimeForm = hasFilter ? <FormWithData /> : <FormCmp />;
+
+        return isDev ? FormElement : RuntimeForm;
       })()}
     </div>
   ),

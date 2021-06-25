@@ -44,24 +44,18 @@
           }
         });
 
-        const BuilderLayout = () => {
-          B.defineFunction('Refetch', () => {});
-
-          return (
-            <>
-              <div
-                className={[
-                  isEmpty ? classes.empty : '',
-                  isPristine ? classes.pristine : '',
-                ].join(' ')}
-              >
-                {isPristine
-                  ? 'Drag a component in the data container to display the data'
-                  : children}
-              </div>
-            </>
-          );
-        };
+        const BuilderLayout = (
+          <div
+            className={[
+              isEmpty ? classes.empty : '',
+              isPristine ? classes.pristine : '',
+            ].join(' ')}
+          >
+            {isPristine
+              ? 'Drag a component in the data container to display the data'
+              : children}
+          </div>
+        );
 
         const getFilter = React.useCallback(() => {
           if (isDev || !currentRecord || !model) {
@@ -111,12 +105,12 @@
         }, [oneData]);
 
         if (isDev) {
-          return <BuilderLayout />;
+          return BuilderLayout;
         }
 
         const CanvasLayout = () => {
           if (!hasFilter) {
-            return <BuilderLayout />;
+            return BuilderLayout;
           }
 
           return <One />;
