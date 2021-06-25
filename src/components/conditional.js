@@ -74,24 +74,21 @@
         B.defineFunction('Set Visibility', value => {
           if (typeof value === 'boolean') setVisible(value);
         });
-        B.defineFunction('Set Left Value', value => {
-          if (typeof value === 'object') {
-            value.length == undefined
-              ? setLeftValue(value.target.value)
-              : setLeftValue(value.map(String));
-          } else {
-            setLeftValue(value.toString());
+
+        const getValue = evt => {
+          if (typeof evt !== 'object') {
+            return evt.toString();
           }
-        });
-        B.defineFunction('Set Right Value', value => {
-          if (typeof value === 'object') {
-            value.length == undefined
-              ? setRightValue(value.target.value)
-              : setRightValue(value.map(String));
-          } else {
-            setRightValue(value.toString());
+          if (evt.length !== undefined) {
+            return evt.map(String);
           }
-        });
+          return evt.target && evt.target.value;
+        };
+
+        B.defineFunction('Set Left Value', evt => setLeftValue(getValue(evt)));
+        B.defineFunction('Set Right Value', evt =>
+          setRightValue(getValue(evt)),
+        );
 
         if (!isDev && !visible) return null;
         return isPristine ? 'Conditional' : children;
