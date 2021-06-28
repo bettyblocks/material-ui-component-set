@@ -51,7 +51,13 @@
 
         B.defineFunction('Submit', () => {
           if (formRef.current) {
-            formRef.current.dispatchEvent(new Event('submit', { cancelable: true }));
+            if (typeof formRef.current.requestSubmit === 'function') {
+              formRef.current.requestSubmit();
+            } else {
+              formRef.current.dispatchEvent(
+                new Event('submit', { cancelable: true }),
+              );
+            }
           }
         });
 
