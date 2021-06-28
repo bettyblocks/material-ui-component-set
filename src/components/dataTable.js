@@ -150,6 +150,14 @@
       path = [searchProperty.id].flat();
     }
 
+    const transformValue = value => {
+      if (value instanceof Date) {
+        return value.toISOString();
+      }
+
+      return value;
+    };
+
     /**
      * @name Filter
      * @param {Property} property
@@ -160,7 +168,7 @@
         ...interactionFilter,
         [interactionId]: {
           property,
-          value: event.target ? event.target.value : event,
+          value: event.target ? event.target.value : transformValue(event),
         },
       });
     });

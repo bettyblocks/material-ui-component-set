@@ -67,7 +67,7 @@
     const isValidDate = date => date instanceof Date && !isNaN(date);
 
     const changeHandler = date => {
-      B.triggerEvent('OnChange', date.toISOString());
+      B.triggerEvent('OnChange', date);
       setSelectedDate(date);
     };
 
