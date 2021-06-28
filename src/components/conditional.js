@@ -75,15 +75,7 @@
           if (typeof value === 'boolean') setVisible(value);
         });
 
-        const getValue = evt => {
-          if (typeof evt !== 'object') {
-            return evt.toString();
-          }
-          if (evt.length !== undefined) {
-            return evt.map(String);
-          }
-          return evt.target && evt.target.value;
-        };
+        const getValue = evt => (evt && evt.target && evt.target.value) || evt;
 
         B.defineFunction('Set Left Value', evt => setLeftValue(getValue(evt)));
         B.defineFunction('Set Right Value', evt =>
