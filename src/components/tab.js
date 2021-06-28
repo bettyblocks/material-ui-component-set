@@ -95,22 +95,8 @@
 
     return {
       wrapper: {
-        height: config => {
-          const {
-            options: { height },
-            parent: { index, value },
-          } = config;
-
-          return index === value ? height : 0;
-        },
-        width: config => {
-          const {
-            options: { width },
-            parent: { index, value },
-          } = config;
-
-          return index === value ? width : 0;
-        },
+        height: ({ options: { height } }) => height,
+        width: ({ options: { width } }) => width,
       },
       root: {
         height: ({ options: { height } }) => (isDev ? '100%' : height),
