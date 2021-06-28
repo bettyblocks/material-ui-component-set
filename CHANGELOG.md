@@ -1,3 +1,10 @@
+## [1.147.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.147.0...v1.147.1) (2021-06-28)
+
+
+### Bug Fixes
+
+* drag datacontainer and form in builder ([aca0757](https://github.com/bettyblocks/material-ui-component-set/commit/aca0757873fd01cfe4651da9413bf98404aeb7f0))
+
 # [1.147.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.146.5...v1.147.0) (2021-06-28)
 
 
