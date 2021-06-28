@@ -1,3 +1,22 @@
+## [1.147.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.147.0...v1.147.1) (2021-06-28)
+
+
+### Bug Fixes
+
+* drag datacontainer and form in builder ([aca0757](https://github.com/bettyblocks/material-ui-component-set/commit/aca0757873fd01cfe4651da9413bf98404aeb7f0))
+
+# [1.147.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.146.5...v1.147.0) (2021-06-28)
+
+
+### Bug Fixes
+
+* default width and height in tab ([33ea065](https://github.com/bettyblocks/material-ui-component-set/commit/33ea06575d155ed4897325e77a2a3911f6448703))
+
+
+### Features
+
+* render active tab only ([0c4ccab](https://github.com/bettyblocks/material-ui-component-set/commit/0c4ccab3c2a061f3c9b4516bd2fcd7534e2e4b3b))
+
 ## [1.146.5](https://github.com/bettyblocks/material-ui-component-set/compare/v1.146.4...v1.146.5) (2021-06-23)
 
 
