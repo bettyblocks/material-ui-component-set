@@ -1,3 +1,10 @@
+## [1.147.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.147.1...v1.147.2) (2021-06-28)
+
+
+### Bug Fixes
+
+* revert hooks to components to fix me context ([8de9927](https://github.com/bettyblocks/material-ui-component-set/commit/8de992782fb3f400062d3ac030efac4fff012aed))
+
 ## [1.147.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.147.0...v1.147.1) (2021-06-28)
 
 
