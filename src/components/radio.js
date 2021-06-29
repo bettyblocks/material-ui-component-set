@@ -139,6 +139,7 @@
     const { results } = data || {};
 
     B.defineFunction('Refetch', () => refetch());
+    B.defineFunction('Reset', () => setValue(getValue(componentValue)));
 
     // renders the radio component
     const renderRadio = (optionValue, optionLabel) => (

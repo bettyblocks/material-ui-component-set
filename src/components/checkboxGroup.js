@@ -120,6 +120,9 @@
     const { results } = data || {};
 
     B.defineFunction('Refetch', () => refetch());
+    B.defineFunction('Reset', () =>
+      setValues(defaultValue ? useText(defaultValue) : []),
+    );
 
     useEffect(() => {
       if (isDev) {
