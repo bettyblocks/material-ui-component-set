@@ -3929,7 +3929,7 @@
                           },
                         },
                         {
-                          value: ['0rem', '0rem', '0rem', '0rem'],
+                          value: ['0rem', '0rem', '0rem', 'M'],
                           label: 'Outer space',
                           key: 'outerSpacing',
                           type: 'SIZES',
@@ -17679,7 +17679,7 @@
                                                   value: [
                                                     '0rem',
                                                     '0rem',
-                                                    '0rem',
+                                                    'M',
                                                     '0rem',
                                                   ],
                                                   label: 'Outer space',
@@ -18237,7 +18237,7 @@
                                                 },
                                                 {
                                                   value: [
-                                                    '0rem',
+                                                    'M',
                                                     '0rem',
                                                     '0rem',
                                                     '0rem',
@@ -18306,7 +18306,7 @@
                                                   type: 'COLOR',
                                                   label: 'Text color',
                                                   key: 'textColor',
-                                                  value: 'Black',
+                                                  value: 'Dark',
                                                   configuration: {
                                                     condition: {
                                                       type: 'SHOW',
@@ -25586,7 +25586,7 @@
                                                     },
                                                     {
                                                       value: [
-                                                        '0rem',
+                                                        'S',
                                                         '0rem',
                                                         'S',
                                                         '0rem',
@@ -26464,7 +26464,7 @@
                                                 },
                                                 {
                                                   value: [
-                                                    '0rem',
+                                                    'S',
                                                     '0rem',
                                                     '0rem',
                                                     '0rem',
@@ -28351,7 +28351,7 @@
                                                     },
                                                     {
                                                       value: [
-                                                        '0rem',
+                                                        'S',
                                                         '0rem',
                                                         'S',
                                                         '0rem',
@@ -28548,7 +28548,7 @@
                                                       value: [
                                                         '0rem',
                                                         '0rem',
-                                                        '0rem',
+                                                        'M',
                                                         '0rem',
                                                       ],
                                                       label: 'Outer space',
@@ -30217,7 +30217,7 @@
                                           type: 'COLOR',
                                           label: 'Text color',
                                           key: 'textColor',
-                                          value: 'Black',
+                                          value: 'Dark',
                                           configuration: {
                                             condition: {
                                               type: 'SHOW',
@@ -34917,83 +34917,7 @@
                                                   type: 'VARIABLE',
                                                   label: 'Button text',
                                                   key: 'buttonText',
-                                                  value: ['Add balance'],
-                                                },
-                                                {
-                                                  type: 'CUSTOM',
-                                                  label: 'Link to',
-                                                  key: 'linkType',
-                                                  value: 'internal',
-                                                  configuration: {
-                                                    as: 'BUTTONGROUP',
-                                                    dataType: 'string',
-                                                    allowedInput: [
-                                                      {
-                                                        name: 'Internal page',
-                                                        value: 'internal',
-                                                      },
-                                                      {
-                                                        name: 'External page',
-                                                        value: 'external',
-                                                      },
-                                                    ],
-                                                  },
-                                                },
-                                                {
-                                                  value: '',
-                                                  label: 'Page',
-                                                  key: 'linkTo',
-                                                  type: 'ENDPOINT',
-                                                  configuration: {
-                                                    condition: {
-                                                      type: 'SHOW',
-                                                      option: 'linkType',
-                                                      comparator: 'EQ',
-                                                      value: 'internal',
-                                                    },
-                                                  },
-                                                },
-                                                {
-                                                  value: [''],
-                                                  label: 'URL',
-                                                  key: 'linkToExternal',
-                                                  type: 'VARIABLE',
-                                                  configuration: {
-                                                    placeholder:
-                                                      'Starts with https:// or http://',
-                                                    condition: {
-                                                      type: 'SHOW',
-                                                      option: 'linkType',
-                                                      comparator: 'EQ',
-                                                      value: 'external',
-                                                    },
-                                                  },
-                                                },
-                                                {
-                                                  value: '_self',
-                                                  label: 'Open in',
-                                                  key: 'openLinkToExternal',
-                                                  type: 'CUSTOM',
-                                                  configuration: {
-                                                    condition: {
-                                                      type: 'SHOW',
-                                                      option: 'linkType',
-                                                      comparator: 'EQ',
-                                                      value: 'external',
-                                                    },
-                                                    as: 'BUTTONGROUP',
-                                                    dataType: 'string',
-                                                    allowedInput: [
-                                                      {
-                                                        name: 'Current Tab',
-                                                        value: '_self',
-                                                      },
-                                                      {
-                                                        name: 'New Tab',
-                                                        value: '_blank',
-                                                      },
-                                                    ],
-                                                  },
+                                                  value: ['Add Balance'],
                                                 },
                                                 {
                                                   value: true,
@@ -36316,7 +36240,7 @@
                                                   },
                                                 },
                                                 {
-                                                  value: 'medium',
+                                                  value: 'small',
                                                   label: 'Icon size',
                                                   key: 'size',
                                                   type: 'CUSTOM',
@@ -36325,16 +36249,16 @@
                                                     dataType: 'string',
                                                     allowedInput: [
                                                       {
-                                                        name: 'Large',
-                                                        value: 'large',
+                                                        name: 'Small',
+                                                        value: 'small',
                                                       },
                                                       {
                                                         name: 'Medium',
                                                         value: 'medium',
                                                       },
                                                       {
-                                                        name: 'Small',
-                                                        value: 'small',
+                                                        name: 'Large',
+                                                        value: 'large',
                                                       },
                                                     ],
                                                     condition: {
@@ -36353,12 +36277,6 @@
                                                   configuration: {
                                                     as: 'BUTTONGROUP',
                                                     dataType: 'string',
-                                                    condition: {
-                                                      type: 'HIDE',
-                                                      option: 'icon',
-                                                      comparator: 'EQ',
-                                                      value: 'None',
-                                                    },
                                                     allowedInput: [
                                                       {
                                                         name: 'Start',
@@ -36369,6 +36287,12 @@
                                                         value: 'end',
                                                       },
                                                     ],
+                                                    condition: {
+                                                      type: 'HIDE',
+                                                      option: 'icon',
+                                                      comparator: 'EQ',
+                                                      value: 'None',
+                                                    },
                                                   },
                                                 },
                                                 {
@@ -39358,7 +39282,7 @@
                                                           label: 'Outer Space',
                                                           key: 'margin',
                                                           value: [
-                                                            '0rem',
+                                                            'M',
                                                             '0rem',
                                                             '0rem',
                                                             '0rem',
@@ -41960,7 +41884,7 @@
                                                           label: 'Outer Space',
                                                           key: 'margin',
                                                           value: [
-                                                            '0rem',
+                                                            'M',
                                                             '0rem',
                                                             '0rem',
                                                             '0rem',
@@ -49279,9 +49203,9 @@
                                                     },
                                                     {
                                                       value: [
-                                                        'XL',
+                                                        'L',
                                                         '0rem',
-                                                        'XL',
+                                                        'L',
                                                         '0rem',
                                                       ],
                                                       label: 'Outer space',
