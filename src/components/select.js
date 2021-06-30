@@ -69,6 +69,8 @@
     const { name: labelName } = getProperty(labelProp) || {};
     const { name: propName } = getProperty(valueProp) || {};
 
+    B.defineFunction('Reset', () => setCurrentValue(useText(defaultValue)));
+
     const orderByArray = [orderBy].flat();
     const sort =
       !isDev && orderBy
