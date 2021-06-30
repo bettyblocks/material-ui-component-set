@@ -119,6 +119,14 @@
       }, {});
     };
 
+    const transformValue = value => {
+      if (value instanceof Date) {
+        return value.toISOString();
+      }
+
+      return value;
+    };
+
     const { filter } = options;
     const hasSearch = searchProp && searchProp.id;
     const hasValue = valueProp && valueProp.id;
@@ -285,7 +293,7 @@
           ...interactionFilter,
           [interactionId]: {
             property: propertyArg,
-            value: event.target ? event.target.value : event,
+            value: event.target ? event.target.value : transformValue(event),
           },
         });
       },

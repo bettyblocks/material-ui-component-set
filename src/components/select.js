@@ -70,6 +70,14 @@
     const { name: labelName } = getProperty(labelProp) || {};
     const { name: propName } = getProperty(valueProp) || {};
 
+    const transformValue = arg => {
+      if (arg instanceof Date) {
+        return arg.toISOString();
+      }
+
+      return arg;
+    };
+
     const deepMerge = (...objects) => {
       const isObject = item =>
         item && typeof item === 'object' && !Array.isArray(item);
@@ -190,7 +198,7 @@
           ...interactionFilter,
           [interactionId]: {
             property: propertyArg,
-            value: event.target ? event.target.value : event,
+            value: event.target ? event.target.value : transformValue(event),
           },
         });
       },

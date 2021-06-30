@@ -139,6 +139,14 @@
           setSearch(event.target.value);
         };
 
+        const transformValue = value => {
+          if (value instanceof Date) {
+            return value.toISOString();
+          }
+
+          return value;
+        };
+
         const deepMerge = (...objects) => {
           const isObject = item =>
             item && typeof item === 'object' && !Array.isArray(item);
@@ -304,7 +312,7 @@
             ...interactionFilter,
             [interactionId]: {
               property,
-              value: event.target ? event.target.value : event,
+              value: event.target ? event.target.value : transformValue(event),
             },
           });
         });
