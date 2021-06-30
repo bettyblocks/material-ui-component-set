@@ -6,17 +6,22 @@
   jsx: (
     <div className={children.length === 0 ? classes.empty : undefined}>
       {(() => {
-        const { left, right, compare } = options;
+        const { left, right, compare, visible: initVisibility } = options;
         const { useText, env } = B;
         const isDev = env === 'dev';
         const isPristine = isDev && children.length === 0;
         const mounted = useRef(false);
         const [leftValue, setLeftValue] = useState(useText(left));
         const [rightValue, setRightValue] = useState(useText(right));
+        const [visible, setVisible] = useState(initVisibility);
 
         const evalCondition = () => {
           const leftAsNumber = parseFloat(leftValue);
           const rightAsNumber = parseFloat(rightValue);
+
+          if (!initVisibility && leftValue === '' && rightValue === '') {
+            return false;
+          }
 
           switch (compare) {
             case 'neq':
@@ -39,16 +44,10 @@
         };
 
         const checkCondition = evalCondition();
-        const initialVisibility = options.visible ? checkCondition : false;
-        const [visible, setVisible] = useState(false);
 
         useEffect(() => {
-          setVisible(evalCondition());
-        }, [leftValue, rightValue]);
-
-        useEffect(() => {
-          setVisible(initialVisibility);
-        }, []);
+          setVisible(checkCondition);
+        }, [checkCondition]);
 
         useEffect(() => {
           if (visible) {
@@ -75,7 +74,10 @@
           if (typeof value === 'boolean') setVisible(value);
         });
 
-        const getValue = evt => (evt && evt.target && evt.target.value) || evt;
+        const getValue = evt => {
+          const value = (evt && evt.target && evt.target.value) || evt;
+          return `${value}`;
+        };
 
         B.defineFunction('Set Left Value', evt => setLeftValue(getValue(evt)));
         B.defineFunction('Set Right Value', evt =>
