@@ -15,14 +15,20 @@
     const {
       id: customModelAttributeId,
       value: defaultValue = [''],
+      required: defaultRequired = false,
     } = customModelAttributeObj;
     const customModelAttribute = getCustomModelAttribute(
       customModelAttributeId,
     );
-    const [currentValue, setCurrentValue] = useState(useText(defaultValue));
-    const { name: customModelAttributeName, validations: { required } = {} } =
-      customModelAttribute || {};
+    const [currentValue, setCurrentValue] = useState(
+      useText(defaultValue, { rawValue: true }),
+    );
+    const {
+      name: customModelAttributeName,
+      validations: { required: attributeRequired } = {},
+    } = customModelAttribute || {};
     const nameAttributeValue = useText(nameAttribute);
+    const required = customModelAttribute ? attributeRequired : defaultRequired;
 
     useEffect(() => {
       if (isDev) {

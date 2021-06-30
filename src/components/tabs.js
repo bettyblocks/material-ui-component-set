@@ -99,19 +99,21 @@
         {!hideTabs && TabsHeader}
         {React.Children.map(children, (child, index) => {
           const { options: childOptions = {} } = child.props || {};
-
-          return (
-            <Children
-              index={index}
-              value={value}
-              tabData={tabData}
-              setTabData={setTabData}
-              showAllTabs={showAllTabs}
-              setSelectedTab={setSelectedTab}
-            >
-              {React.cloneElement(child, { ...childOptions })}
-            </Children>
-          );
+          if (isDev || showAllTabs || index === value) {
+            return (
+              <Children
+                index={index}
+                value={value}
+                tabData={tabData}
+                setTabData={setTabData}
+                showAllTabs={showAllTabs}
+                setSelectedTab={setSelectedTab}
+              >
+                {React.cloneElement(child, { ...childOptions })}
+              </Children>
+            );
+          }
+          return <></>;
         })}
       </div>
     );

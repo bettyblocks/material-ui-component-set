@@ -1,9 +1,10 @@
 (() => ({
-  name: 'Data table with edit',
+  name: 'Data table with edit functionality',
   icon: 'DataTable',
   type: 'page',
   description: 'This page contains a data table with edit dialog',
-  detail: 'This page contains a datatable with create dialog',
+  detail:
+    'Connect your model to this ready to use Data Table. This also includes a modal to edit the records in your Data Table.',
   previewUrl: 'https://preview.betty.app/datatable-edit',
   previewImage:
     'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_Datatable_Edit.jpg',
@@ -4096,6 +4097,40 @@
                                                 option: 'showError',
                                                 comparator: 'EQ',
                                                 value: 'built-in',
+                                              },
+                                            },
+                                          },
+                                          {
+                                            value: 'default',
+                                            label: 'Show on load',
+                                            key: 'loadingType',
+                                            type: 'CUSTOM',
+                                            configuration: {
+                                              as: 'BUTTONGROUP',
+                                              dataType: 'string',
+                                              allowedInput: [
+                                                {
+                                                  name: 'Message',
+                                                  value: 'default',
+                                                },
+                                                {
+                                                  name: 'Content',
+                                                  value: 'showChildren',
+                                                },
+                                              ],
+                                            },
+                                          },
+                                          {
+                                            value: ['Loading...'],
+                                            label: 'Loading text',
+                                            key: 'loadingText',
+                                            type: 'VARIABLE',
+                                            configuration: {
+                                              condition: {
+                                                type: 'SHOW',
+                                                option: 'loadingType',
+                                                comparator: 'EQ',
+                                                value: 'default',
                                               },
                                             },
                                           },
