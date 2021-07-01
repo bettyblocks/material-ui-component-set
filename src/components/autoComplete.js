@@ -96,6 +96,36 @@
     const valueProp = getProperty(valueProperty) || {};
     const [searchParam, setSearchParam] = useState('');
     const [debouncedSearchParam, setDebouncedSearchParam] = useState('');
+    const [interactionFilter, setInteractionFilter] = useState({});
+
+    const deepMerge = (...objects) => {
+      const isObject = item =>
+        item && typeof item === 'object' && !Array.isArray(item);
+
+      return objects.reduce((accumulator, object) => {
+        Object.keys(object).forEach(key => {
+          const accumulatorValue = accumulator[key];
+          const value = object[key];
+
+          if (Array.isArray(accumulatorValue) && Array.isArray(value)) {
+            accumulator[key] = accumulatorValue.concat(value);
+          } else if (isObject(accumulatorValue) && isObject(value)) {
+            accumulator[key] = deepMerge(accumulatorValue, value);
+          } else {
+            accumulator[key] = value;
+          }
+        });
+        return accumulator;
+      }, {});
+    };
+
+    const transformValue = value => {
+      if (value instanceof Date) {
+        return value.toISOString();
+      }
+
+      return value;
+    };
 
     const { filter } = options;
     const hasSearch = searchProp && searchProp.id;
@@ -147,6 +177,38 @@
       setUseFilter({ filter });
     };
 
+    let interactionFilters = {};
+
+    const isEmptyValue = value =>
+      !value || (Array.isArray(value) && value.length === 0);
+
+    const clauses = Object.entries(interactionFilter)
+      .filter(([, { value }]) => !isEmptyValue(value))
+      .map(([, { property: propertyArg, value }]) =>
+        propertyArg.id.reduceRight((acc, field, index, arr) => {
+          const isLast = index === arr.length - 1;
+          if (isLast) {
+            return Array.isArray(value)
+              ? {
+                  _or: value.map(el => ({
+                    [field]: { [propertyArg.operator]: el },
+                  })),
+                }
+              : { [field]: { [propertyArg.operator]: value } };
+          }
+
+          return { [field]: acc };
+        }, {}),
+      );
+
+    interactionFilters =
+      clauses.length > 1 ? { _and: clauses } : clauses[0] || {};
+
+    const completeFilter = deepMerge(
+      useFilter.filter || {},
+      interactionFilters,
+    );
+
     const orderByArray = [orderBy].flat();
     const sort =
       !isDev && orderBy
@@ -161,7 +223,7 @@
     const { loading, error: err, data: { results } = {}, refetch } =
       model &&
       useAllQuery(model, {
-        ...useFilter,
+        filter: completeFilter,
         skip: 0,
         take: 50,
         variables: {
@@ -218,6 +280,24 @@
       setSearchParam('');
     });
     B.defineFunction('Refetch', () => refetch());
+
+    /**
+     * @name Filter
+     * @param {Property} property
+     * @returns {Void}
+     */
+    B.defineFunction(
+      'Filter',
+      ({ event, property: propertyArg, interactionId }) => {
+        setInteractionFilter({
+          ...interactionFilter,
+          [interactionId]: {
+            property: propertyArg,
+            value: event.target ? event.target.value : transformValue(event),
+          },
+        });
+      },
+    );
 
     useEffect(() => {
       const handler = setTimeout(() => {

@@ -53,6 +53,8 @@
         const isInline = type === 'inline';
         const isGrid = type === 'grid';
 
+        const [interactionFilter, setInteractionFilter] = useState({});
+
         const builderLayout = () => (
           <>
             {searchProperty && !hideSearch && (
@@ -137,6 +139,14 @@
           setSearch(event.target.value);
         };
 
+        const transformValue = value => {
+          if (value instanceof Date) {
+            return value.toISOString();
+          }
+
+          return value;
+        };
+
         const deepMerge = (...objects) => {
           const isObject = item =>
             item && typeof item === 'object' && !Array.isArray(item);
@@ -174,6 +184,33 @@
               }, {})
             : {};
 
+        let interactionFilters = {};
+
+        const isEmptyValue = value =>
+          !value || (Array.isArray(value) && value.length === 0);
+
+        const clauses = Object.entries(interactionFilter)
+          .filter(([, { value }]) => !isEmptyValue(value))
+          .map(([, { property, value }]) =>
+            property.id.reduceRight((acc, field, index, arr) => {
+              const isLast = index === arr.length - 1;
+              if (isLast) {
+                return Array.isArray(value)
+                  ? {
+                      _or: value.map(el => ({
+                        [field]: { [property.operator]: el },
+                      })),
+                    }
+                  : { [field]: { [property.operator]: value } };
+              }
+
+              return { [field]: acc };
+            }, {}),
+          );
+
+        interactionFilters =
+          clauses.length > 1 ? { _and: clauses } : clauses[0] || {};
+
         let path = [searchProperty].flat();
         if (typeof searchProperty.id !== 'undefined') {
           path = [searchProperty.id].flat();
@@ -194,7 +231,8 @@
             ? deepMerge(filter, searchFilter)
             : filter;
 
-        const where = useFilter(newFilter);
+        const completeFilter = deepMerge(newFilter, interactionFilters);
+        const where = useFilter(completeFilter);
 
         const { loading, error, data, refetch } =
           model &&
@@ -262,6 +300,21 @@
         B.defineFunction('Refetch', () => refetch());
         B.defineFunction('SetSearchValue', event => {
           setSearch(event.target.value);
+        });
+
+        /**
+         * @name Filter
+         * @param {Property} property
+         * @returns {Void}
+         */
+        B.defineFunction('Filter', ({ event, property, interactionId }) => {
+          setInteractionFilter({
+            ...interactionFilter,
+            [interactionId]: {
+              property,
+              value: event.target ? event.target.value : transformValue(event),
+            },
+          });
         });
 
         const mounted = useRef(false);
