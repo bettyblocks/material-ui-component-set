@@ -1,3 +1,11 @@
+# [1.150.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.149.0...v1.150.0) (2021-07-01)
+
+
+### Features
+
+* add filter interaction to data components ([94a6627](https://github.com/bettyblocks/material-ui-component-set/commit/94a6627cbd8c55958152b6a902f99b0376730c2b))
+* use transform value on events to handle datetime ([a7fc8fd](https://github.com/bettyblocks/material-ui-component-set/commit/a7fc8fda30eee3c1900268e43ed162f2d2c0a060))
+
 # [1.149.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.148.0...v1.149.0) (2021-07-01)
 
 
