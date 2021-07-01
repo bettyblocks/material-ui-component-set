@@ -1,3 +1,10 @@
+# [1.149.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.148.0...v1.149.0) (2021-07-01)
+
+
+### Features
+
+* add reset interaction ([e16705f](https://github.com/bettyblocks/material-ui-component-set/commit/e16705f9bc90a9ca19c23c1f82b6aed3be498d20))
+
 # [1.148.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.147.2...v1.148.0) (2021-06-30)
 
 
