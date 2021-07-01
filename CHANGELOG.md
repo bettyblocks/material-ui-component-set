@@ -1,3 +1,16 @@
+# [1.148.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.147.2...v1.148.0) (2021-06-30)
+
+
+### Bug Fixes
+
+* lower case o in trigger ([c5360c7](https://github.com/bettyblocks/material-ui-component-set/commit/c5360c7657df3757b1e311b3944b0cf6dae9ee01))
+
+
+### Features
+
+* send date object to onchange ([189aba3](https://github.com/bettyblocks/material-ui-component-set/commit/189aba3fc96285668a968baddd7aedcb961b9854))
+* transform value based on instance ([3a82bf1](https://github.com/bettyblocks/material-ui-component-set/commit/3a82bf15b334ef5b84d0df0868e7c4994ed627e8))
+
 ## [1.147.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.147.1...v1.147.2) (2021-06-28)
 
 
