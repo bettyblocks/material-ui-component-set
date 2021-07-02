@@ -1,3 +1,10 @@
+## [1.150.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.150.1...v1.150.2) (2021-07-02)
+
+
+### Bug Fixes
+
+* always pass string value to resolve type safe equal check ([3d1bad3](https://github.com/bettyblocks/material-ui-component-set/commit/3d1bad3b63738f48dfe4007e21043c394ef055f8))
+
 ## [1.150.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.150.0...v1.150.1) (2021-07-01)
 
 
