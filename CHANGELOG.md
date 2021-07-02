@@ -1,3 +1,17 @@
+## [1.150.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.150.1...v1.150.2) (2021-07-02)
+
+
+### Bug Fixes
+
+* always pass string value to resolve type safe equal check ([3d1bad3](https://github.com/bettyblocks/material-ui-component-set/commit/3d1bad3b63738f48dfe4007e21043c394ef055f8))
+
+## [1.150.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.150.0...v1.150.1) (2021-07-01)
+
+
+### Bug Fixes
+
+* make datacontainer draggable ([8e5a0df](https://github.com/bettyblocks/material-ui-component-set/commit/8e5a0df81e1354af2d0e1863133c5386adc92c92))
+
 # [1.150.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.149.0...v1.150.0) (2021-07-01)
 
 
