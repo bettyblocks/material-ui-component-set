@@ -1,3 +1,113 @@
+## [1.150.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.150.0...v1.150.1) (2021-07-01)
+
+
+### Bug Fixes
+
+* make datacontainer draggable ([8e5a0df](https://github.com/bettyblocks/material-ui-component-set/commit/8e5a0df81e1354af2d0e1863133c5386adc92c92))
+
+# [1.150.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.149.0...v1.150.0) (2021-07-01)
+
+
+### Features
+
+* add filter interaction to data components ([94a6627](https://github.com/bettyblocks/material-ui-component-set/commit/94a6627cbd8c55958152b6a902f99b0376730c2b))
+* use transform value on events to handle datetime ([a7fc8fd](https://github.com/bettyblocks/material-ui-component-set/commit/a7fc8fda30eee3c1900268e43ed162f2d2c0a060))
+
+# [1.149.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.148.0...v1.149.0) (2021-07-01)
+
+
+### Features
+
+* add reset interaction ([e16705f](https://github.com/bettyblocks/material-ui-component-set/commit/e16705f9bc90a9ca19c23c1f82b6aed3be498d20))
+
+# [1.148.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.147.2...v1.148.0) (2021-06-30)
+
+
+### Bug Fixes
+
+* lower case o in trigger ([c5360c7](https://github.com/bettyblocks/material-ui-component-set/commit/c5360c7657df3757b1e311b3944b0cf6dae9ee01))
+
+
+### Features
+
+* send date object to onchange ([189aba3](https://github.com/bettyblocks/material-ui-component-set/commit/189aba3fc96285668a968baddd7aedcb961b9854))
+* transform value based on instance ([3a82bf1](https://github.com/bettyblocks/material-ui-component-set/commit/3a82bf15b334ef5b84d0df0868e7c4994ed627e8))
+
+## [1.147.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.147.1...v1.147.2) (2021-06-28)
+
+
+### Bug Fixes
+
+* revert hooks to components to fix me context ([8de9927](https://github.com/bettyblocks/material-ui-component-set/commit/8de992782fb3f400062d3ac030efac4fff012aed))
+
+## [1.147.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.147.0...v1.147.1) (2021-06-28)
+
+
+### Bug Fixes
+
+* drag datacontainer and form in builder ([aca0757](https://github.com/bettyblocks/material-ui-component-set/commit/aca0757873fd01cfe4651da9413bf98404aeb7f0))
+
+# [1.147.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.146.5...v1.147.0) (2021-06-28)
+
+
+### Bug Fixes
+
+* default width and height in tab ([33ea065](https://github.com/bettyblocks/material-ui-component-set/commit/33ea06575d155ed4897325e77a2a3911f6448703))
+
+
+### Features
+
+* render active tab only ([0c4ccab](https://github.com/bettyblocks/material-ui-component-set/commit/0c4ccab3c2a061f3c9b4516bd2fcd7534e2e4b3b))
+
+## [1.146.5](https://github.com/bettyblocks/material-ui-component-set/compare/v1.146.4...v1.146.5) (2021-06-23)
+
+
+### Bug Fixes
+
+* hide label spacing when label is empty ([a33430a](https://github.com/bettyblocks/material-ui-component-set/commit/a33430af09d90f96145d4cf11a268d860b199574))
+
+## [1.146.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.146.3...v1.146.4) (2021-06-22)
+
+
+### Bug Fixes
+
+* added new form options to page templates using a form ([74e5ea8](https://github.com/bettyblocks/material-ui-component-set/commit/74e5ea8045f2b919169396929b35297896463a38))
+
+## [1.146.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.146.2...v1.146.3) (2021-06-22)
+
+
+### Bug Fixes
+
+* added missing options to page templates ([a3bf632](https://github.com/bettyblocks/material-ui-component-set/commit/a3bf632d22aea847ee8af74cd428ad58483034ac))
+
+## [1.146.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.146.1...v1.146.2) (2021-06-21)
+
+
+### Bug Fixes
+
+* if is action will render button instead of link ([e9f9bb3](https://github.com/bettyblocks/material-ui-component-set/commit/e9f9bb3fe77e1e94cc437ebb62bd159fe2352d3d))
+
+## [1.146.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.146.0...v1.146.1) (2021-06-18)
+
+
+### Bug Fixes
+
+* checkbox group onChange has no values ([f218184](https://github.com/bettyblocks/material-ui-component-set/commit/f21818491f485c3b2c39679565bb2c53cab70302))
+
+# [1.146.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.145.0...v1.146.0) (2021-06-18)
+
+
+### Features
+
+* add detail view component ([4caa87f](https://github.com/bettyblocks/material-ui-component-set/commit/4caa87f259901ee94bdb99265f722ad74313e785))
+
+# [1.145.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.144.3...v1.145.0) (2021-06-18)
+
+
+### Features
+
+* image carousel component ([9f63c29](https://github.com/bettyblocks/material-ui-component-set/commit/9f63c29dfb92c489ff0ce3dab08bc0451c71af6a))
+
 ## [1.144.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.144.2...v1.144.3) (2021-06-17)
 
 

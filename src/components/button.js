@@ -230,7 +230,8 @@
       </button>
     );
 
-    const ButtonComponent = type === 'submit' ? ButtonElement : LinkComponent;
+    const ButtonComponent =
+      type === 'submit' || isAction ? ButtonElement : LinkComponent;
 
     let tooltipProps = {
       title: tooltipText,
