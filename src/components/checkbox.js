@@ -92,7 +92,7 @@
 
     useEffect(() => {
       if (isDev) {
-        setChecked(useText(defaultValue) === 'true');
+        setChecked(componentChecked === 'true');
       }
     }, [isDev, defaultValue]);
 
