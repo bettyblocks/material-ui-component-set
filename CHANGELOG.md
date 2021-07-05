@@ -1,3 +1,10 @@
+# [1.151.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.150.2...v1.151.0) (2021-07-02)
+
+
+### Features
+
+* use events to handle redirects ([b822e9a](https://github.com/bettyblocks/material-ui-component-set/commit/b822e9a6eaa1d76fc8623c9de5fdab56406dc42f))
+
 ## [1.150.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.150.1...v1.150.2) (2021-07-02)
 
 
