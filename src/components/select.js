@@ -270,7 +270,7 @@
     const SelectCmp = (
       <>
         <TextField
-          select
+          select={!disabled}
           defaultValue={value}
           value={value}
           size={size}
