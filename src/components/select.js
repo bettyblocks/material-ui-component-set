@@ -40,6 +40,7 @@
     const [errorState, setErrorState] = useState(false);
     const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
+    const [interactionFilter, setInteractionFilter] = useState({});
     const mounted = useRef(false);
     const blancoText = useText(blanco);
 
@@ -69,6 +70,37 @@
     const { name: labelName } = getProperty(labelProp) || {};
     const { name: propName } = getProperty(valueProp) || {};
 
+    const transformValue = arg => {
+      if (arg instanceof Date) {
+        return arg.toISOString();
+      }
+
+      return arg;
+    };
+
+    const deepMerge = (...objects) => {
+      const isObject = item =>
+        item && typeof item === 'object' && !Array.isArray(item);
+
+      return objects.reduce((accumulator, object) => {
+        Object.keys(object).forEach(key => {
+          const accumulatorValue = accumulator[key];
+          const valueArg = object[key];
+
+          if (Array.isArray(accumulatorValue) && Array.isArray(valueArg)) {
+            accumulator[key] = accumulatorValue.concat(valueArg);
+          } else if (isObject(accumulatorValue) && isObject(valueArg)) {
+            accumulator[key] = deepMerge(accumulatorValue, valueArg);
+          } else {
+            accumulator[key] = valueArg;
+          }
+        });
+        return accumulator;
+      }, {});
+    };
+
+    B.defineFunction('Reset', () => setCurrentValue(useText(defaultValue)));
+
     const orderByArray = [orderBy].flat();
     const sort =
       !isDev && orderBy
@@ -80,10 +112,39 @@
           }, {})
         : {};
 
+    let interactionFilters = {};
+
+    const isEmptyValue = arg =>
+      !arg || (Array.isArray(arg) && arg.length === 0);
+
+    const clauses = Object.entries(interactionFilter)
+      .filter(([, { value: valueArg }]) => !isEmptyValue(valueArg))
+      .map(([, { property: propertyArg, value: valueArg }]) =>
+        propertyArg.id.reduceRight((acc, field, index, arr) => {
+          const isLast = index === arr.length - 1;
+          if (isLast) {
+            return Array.isArray(valueArg)
+              ? {
+                  _or: valueArg.map(el => ({
+                    [field]: { [propertyArg.operator]: el },
+                  })),
+                }
+              : { [field]: { [propertyArg.operator]: valueArg } };
+          }
+
+          return { [field]: acc };
+        }, {}),
+      );
+
+    interactionFilters =
+      clauses.length > 1 ? { _and: clauses } : clauses[0] || {};
+
+    const completeFilter = deepMerge(filter, interactionFilters);
+
     const { loading, error, data, refetch } =
       model &&
       useAllQuery(model, {
-        filter,
+        filter: completeFilter,
         skip: 0,
         take: 50,
         variables: {
@@ -126,6 +187,24 @@
     const { results } = data || {};
 
     B.defineFunction('Refetch', () => refetch());
+
+    /**
+     * @name Filter
+     * @param {Property} property
+     * @returns {Void}
+     */
+    B.defineFunction(
+      'Filter',
+      ({ event, property: propertyArg, interactionId }) => {
+        setInteractionFilter({
+          ...interactionFilter,
+          [interactionId]: {
+            property: propertyArg,
+            value: event.target ? event.target.value : transformValue(event),
+          },
+        });
+      },
+    );
 
     const handleValidation = () => {
       const hasError = required && !value;

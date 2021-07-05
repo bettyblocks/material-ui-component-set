@@ -96,30 +96,32 @@
           }
         });
 
-        const BuilderLayout = () => {
-          B.defineFunction('Refetch', () => {});
+        useEffect(() => {
+          if (isDev) {
+            B.defineFunction('Refetch', () => {});
+          }
+        });
 
-          return (
-            <div
-              className={[
-                isEmpty ? classes.empty : '',
-                isPristine ? classes.pristine : '',
-              ].join(' ')}
-            >
-              {isPristine
-                ? 'Drag a component in the data container to display the data'
-                : children}
-            </div>
-          );
-        };
+        const Wrapper = (
+          <div
+            className={[
+              isEmpty ? classes.empty : '',
+              isPristine ? classes.pristine : '',
+            ].join(' ')}
+          >
+            {isPristine
+              ? 'Drag a component in the data container to display the data'
+              : children}
+          </div>
+        );
 
         if (isDev) {
-          return <BuilderLayout />;
+          return Wrapper;
         }
 
         const CanvasLayout = () => {
           if (!hasFilter) {
-            return <BuilderLayout />;
+            return Wrapper;
           }
           return <DataContainer />;
         };
