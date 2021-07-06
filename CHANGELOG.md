@@ -1,3 +1,17 @@
+## [1.151.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.151.1...v1.151.2) (2021-07-06)
+
+
+### Bug Fixes
+
+* using number props in autocomplete label ([cf4b720](https://github.com/bettyblocks/material-ui-component-set/commit/cf4b720fbb5b2a70ea95e1efa66271e57ab81067))
+
+## [1.151.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.151.0...v1.151.1) (2021-07-06)
+
+
+### Bug Fixes
+
+* render tabs content to enable interactions ([c335d5b](https://github.com/bettyblocks/material-ui-component-set/commit/c335d5be8c8a8601083222595d40937c76cc3183))
+
 # [1.151.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.150.2...v1.151.0) (2021-07-02)
 
 
