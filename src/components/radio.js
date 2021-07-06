@@ -41,6 +41,7 @@
       id: customModelAttributeId,
       label = [],
       value: defaultValue = [],
+      required: defaultRequired = false,
     } = customModelAttributeObj;
     const { kind, values: listValues } = getProperty(property) || {};
     const labelText = useText(label);
@@ -50,8 +51,11 @@
     const customModelAttribute = getCustomModelAttribute(
       customModelAttributeId,
     );
-    const { name: customModelAttributeName, validations: { required } = {} } =
-      customModelAttribute || {};
+    const {
+      name: customModelAttributeName,
+      validations: { required: attributeRequired } = {},
+    } = customModelAttribute || {};
+    const required = customModelAttribute ? attributeRequired : defaultRequired;
     const nameAttributeValue = useText(nameAttribute);
 
     let componentValue = useText(defaultValue);
@@ -114,15 +118,17 @@
       });
 
     useEffect(() => {
+      if (mounted.current) {
+        B.triggerEvent('onChange', value);
+      }
+    }, [value]);
+
+    useEffect(() => {
       mounted.current = true;
       return () => {
         mounted.current = false;
       };
     }, []);
-
-    useEffect(() => {
-      B.triggerEvent('onChange', value);
-    }, [value]);
 
     useEffect(() => {
       if (mounted.current && loading) {
@@ -133,6 +139,7 @@
     const { results } = data || {};
 
     B.defineFunction('Refetch', () => refetch());
+    B.defineFunction('Reset', () => setValue(getValue(componentValue)));
 
     // renders the radio component
     const renderRadio = (optionValue, optionLabel) => (

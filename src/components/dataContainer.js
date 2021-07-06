@@ -6,19 +6,7 @@
   jsx: (
     <div>
       {(() => {
-        const {
-          env,
-          getIdProperty,
-          MeProvider,
-          ModelProvider,
-          useEndpoint,
-          useOneQuery,
-          useMeQuery,
-        } = B;
-
-        const isEmpty = children.length === 0;
-        const isDev = env === 'dev';
-        const isPristine = isEmpty && isDev;
+        const { env, getIdProperty, useEndpoint, useText, GetMe, GetOne } = B;
         const {
           filter,
           model,
@@ -26,10 +14,78 @@
           redirectWithoutResult,
           showError,
           currentRecord,
+          loadingType,
+          loadingText,
         } = options;
-        const displayError = showError === 'built-in';
 
+        const isEmpty = children.length === 0;
+        const isDev = env === 'dev';
+        const isPristine = isEmpty && isDev;
+        const displayError = showError === 'built-in';
+        const parsedLoadingText = useText(loadingText);
         const [, setOptions] = useOptions();
+
+        const getFilter = React.useCallback(() => {
+          if (isDev || !currentRecord || !model) {
+            return filter;
+          }
+          const idProperty = getIdProperty(model);
+
+          return {
+            [idProperty.id]: { eq: currentRecord },
+          };
+        }, [isDev, filter, currentRecord, model]);
+
+        const selectedFilter = getFilter();
+        const hasFilter =
+          selectedFilter && Object.keys(selectedFilter).length > 0;
+
+        const redirect = () => {
+          const history = useHistory();
+          history.push(useEndpoint(redirectWithoutResult));
+        };
+
+        const DataContainer = () => (
+          <GetOne modelId={model} filter={selectedFilter}>
+            {({ loading, error, data, refetch }) => {
+              if (!loading && data && data.id) {
+                B.triggerEvent('onSuccess', data);
+              } else {
+                B.triggerEvent('onNoResults');
+              }
+
+              if (error) {
+                if (!displayError) {
+                  B.triggerEvent('onError', error.message);
+                }
+              }
+
+              B.defineFunction('Refetch', () => {
+                refetch();
+              });
+
+              if (loading && loadingType === 'default') {
+                B.triggerEvent('onLoad', loading);
+                return <span>{parsedLoadingText}</span>;
+              }
+
+              if (loading && loadingType === 'showChildren') {
+                B.triggerEvent('onLoad', loading);
+                return <div>{children}</div>;
+              }
+
+              if (error && displayError) {
+                return <span>{error.message}</span>;
+              }
+
+              if (!data && redirectWithoutResult) {
+                redirect();
+              }
+
+              return <div>{children}</div>;
+            }}
+          </GetOne>
+        );
 
         B.defineFunction('setCurrentRecord', value => {
           const id = Number(value);
@@ -40,133 +96,55 @@
           }
         });
 
-        const BuilderLayout = () => {
-          B.defineFunction('Refetch', () => {});
-
-          return (
-            <>
-              <div
-                className={[
-                  isEmpty ? classes.empty : '',
-                  isPristine ? classes.pristine : '',
-                ].join(' ')}
-              >
-                {isPristine
-                  ? 'Drag a component in the data container to display the data'
-                  : children}
-              </div>
-            </>
-          );
-        };
-
-        const getFilter = React.useCallback(() => {
-          if (isDev || !currentRecord || !model) {
-            return filter;
+        useEffect(() => {
+          if (isDev) {
+            B.defineFunction('Refetch', () => {});
           }
-
-          const idProperty = getIdProperty(model);
-          return {
-            [idProperty.id]: { eq: currentRecord },
-          };
-        }, [isDev, filter, currentRecord, model]);
-
-        const selectedFilter = getFilter();
-        const hasFilter =
-          selectedFilter && Object.keys(selectedFilter).length > 0;
-
-        const {
-          loading: oneDataLoading,
-          data: oneData,
-          error: oneError,
-          refetch,
-        } =
-          (!isDev &&
-            useOneQuery(model, {
-              filter: hasFilter ? getFilter() : undefined,
-              onCompleted(resp) {
-                if (resp && resp.id) {
-                  B.triggerEvent('onSuccess', resp);
-                } else {
-                  B.triggerEvent('onNoResults');
-                }
-              },
-              onError(resp) {
-                if (!displayError) {
-                  B.triggerEvent('onError', resp);
-                }
-              },
-            })) ||
-          {};
-
-        B.defineFunction('Refetch', () => {
-          refetch();
         });
 
+        const Wrapper = (
+          <div
+            className={[
+              isEmpty ? classes.empty : '',
+              isPristine ? classes.pristine : '',
+            ].join(' ')}
+          >
+            {isPristine
+              ? 'Drag a component in the data container to display the data'
+              : children}
+          </div>
+        );
+
         if (isDev) {
-          return <BuilderLayout />;
+          return Wrapper;
         }
 
         const CanvasLayout = () => {
           if (!hasFilter) {
-            return <BuilderLayout />;
+            return Wrapper;
           }
-
-          return <One />;
-        };
-
-        const redirect = () => {
-          const history = useHistory();
-          history.push(useEndpoint(redirectWithoutResult));
-        };
-
-        const One = () => {
-          if (oneDataLoading) {
-            B.triggerEvent('onLoad', oneDataLoading);
-            return <span>Loading...</span>;
-          }
-
-          if (oneError && displayError) {
-            return <span>{oneError.message}</span>;
-          }
-
-          if (!oneData && redirectWithoutResult) {
-            redirect();
-          }
-
-          return (
-            oneData && (
-              <ModelProvider value={oneData} id={model}>
-                {children}
-              </ModelProvider>
-            )
-          );
-        };
-
-        const Me = ({ authenticationProfileId }) => {
-          const { data, loading, error } = useMeQuery(authenticationProfileId);
-
-          if (loading) {
-            B.triggerEvent('onUserLoad');
-          }
-          if (error) {
-            B.triggerEvent('onUserError', error);
-          }
-
-          if (data && data.id) {
-            B.triggerEvent('onUserSuccess', data);
-          } else {
-            B.triggerEvent('onNoUserResults');
-          }
-
-          return (
-            <MeProvider value={data} id={model}>
-              <CanvasLayout />
-            </MeProvider>
-          );
+          return <DataContainer />;
         };
 
         if (authProfile) {
-          return <Me authenticationProfileId={authProfile} />;
+          return (
+            <GetMe authenticationProfileId={authProfile}>
+              {({ error, loading, data }) => {
+                if (loading) {
+                  B.triggerEvent('onUserLoad');
+                }
+                if (error) {
+                  B.triggerEvent('onUserError', error);
+                }
+                if (data && data.id) {
+                  B.triggerEvent('onUserSuccess', data);
+                } else {
+                  B.triggerEvent('onNoUserResults');
+                }
+                return <CanvasLayout />;
+              }}
+            </GetMe>
+          );
         }
 
         return <CanvasLayout />;

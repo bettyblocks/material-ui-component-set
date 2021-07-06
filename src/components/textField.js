@@ -57,6 +57,7 @@
       id: customModelAttributeId,
       label = [],
       value: defaultValue = [],
+      required: defaultRequired = false,
     } = customModelAttributeObj;
     const [currentValue, setCurrentValue] = useState(
       useText(defaultValue, { rawValue: true }),
@@ -66,8 +67,12 @@
       customModelAttributeId,
     );
 
-    const { name: customModelAttributeName, validations: { required } = {} } =
-      customModelAttribute || {};
+    const {
+      name: customModelAttributeName,
+      validations: { required: attributeRequired } = {},
+    } = customModelAttribute || {};
+
+    const required = customModelAttribute ? attributeRequired : defaultRequired;
     const nameAttributeValue = useText(nameAttribute);
 
     const validPattern = pattern || null;
@@ -169,9 +174,16 @@
       handleValidation(validity);
     };
 
+    useEffect(() => {
+      B.triggerEvent('onChange', currentValue);
+    }, [currentValue]);
+
     B.defineFunction('Clear', () => setCurrentValue(''));
     B.defineFunction('Enable', () => setIsDisabled(false));
     B.defineFunction('Disable', () => setIsDisabled(true));
+    B.defineFunction('Reset', () =>
+      setCurrentValue(useText(defaultValue, { rawValue: true })),
+    );
 
     const handleClickShowPassword = () => {
       togglePassword(!showPassword);
