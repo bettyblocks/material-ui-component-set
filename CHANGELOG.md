@@ -1,3 +1,10 @@
+## [1.151.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.151.2...v1.151.3) (2021-07-07)
+
+
+### Bug Fixes
+
+* make select options inaccessable when disabled ([9a90a28](https://github.com/bettyblocks/material-ui-component-set/commit/9a90a28cfda0ac6b895bd2919b03b12e336eb951))
+
 ## [1.151.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.151.1...v1.151.2) (2021-07-06)
 
 
