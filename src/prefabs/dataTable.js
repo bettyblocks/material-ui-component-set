@@ -47,6 +47,23 @@
 
             newPrefab.structure[0].options[0].value = modelId;
             properties.forEach(property => {
+              // Remove this filter when working on PAGE-534
+              let newProperty = property;
+              const inheritFormatKinds = [
+                'DATE_TIME',
+                'DATE',
+                'TIME',
+                'INTEGER',
+                'DECIMAL',
+                'PRICE',
+              ];
+              if (inheritFormatKinds.includes(property.kind)) {
+                newProperty = {
+                  ...property,
+                  format: 'INHERIT',
+                };
+              }
+
               newPrefab.structure[0].descendants.push({
                 name: 'DataTableColumn',
                 options: [
@@ -60,7 +77,7 @@
                     },
                   },
                   {
-                    value: property,
+                    value: newProperty,
                     label: 'Property',
                     key: 'property',
                     type: 'PROPERTY',
