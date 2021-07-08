@@ -6,7 +6,7 @@
   detail: 'A simple alternative 500 error page.',
   previewUrl: 'https://preview.betty.app/500-alternative',
   previewImage:
-    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_App_Bar.jpg',
+    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_500_Alternative.jpg',
   category: 'LAYOUT',
   structure: [
     {

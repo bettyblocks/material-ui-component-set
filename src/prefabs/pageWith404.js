@@ -6,7 +6,7 @@
   detail: 'A simple 404 error page.',
   previewUrl: 'https://preview.betty.app/404',
   previewImage:
-    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_App_Bar.jpg',
+    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_404.jpg',
   category: 'LAYOUT',
   beforeCreate: ({
     prefab,
