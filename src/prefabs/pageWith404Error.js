@@ -1,5 +1,5 @@
 (() => ({
-  name: '404 error page',
+  name: 'Error page: 404',
   icon: 'NavbarIcon',
   type: 'page',
   description:
