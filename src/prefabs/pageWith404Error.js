@@ -4,9 +4,9 @@
   type: 'page',
   description: 'A simple 404 error page.',
   detail: 'A simple 404 error page.',
-  previewUrl: 'https://preview.betty.app/404',
+  previewUrl: 'https://preview.betty.app/404-styled',
   previewImage:
-    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/404_Alternative.jpg',
+    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/404_Styled.jpg',
   category: 'LAYOUT',
   beforeCreate: ({
     prefab,
@@ -24,7 +24,7 @@
       Text,
     },
   }) => {
-    const [varient, setVarient] = React.useState('404-alternative');
+    const [varient, setVarient] = React.useState('404-styled');
     const [endpoint, setEndpoint] = React.useState({
       id: '',
       pageId: '',
@@ -2712,7 +2712,7 @@
       ],
     };
 
-    const structure404Alternative = {
+    const structure404Styled = {
       name: 'Box',
       options: [
         {
@@ -6083,14 +6083,14 @@
             structure404,
           ];
           break;
-        case '404-alternative':
+        case '404-styled':
         default:
-          structure404Alternative.descendants[1].descendants[2].descendants[0].options[3].value = endpoint
+          structure404Styled.descendants[1].descendants[2].descendants[0].options[3].value = endpoint
             .id.length
             ? endpoint
             : '';
           newPrefab.structure[0].descendants[0].descendants[0].descendants = [
-            structure404Alternative,
+            structure404Styled,
           ];
           break;
       }
@@ -6109,12 +6109,12 @@
               align="center"
             />
           );
-        case '404-alternative':
+        case '404-styled':
         default:
           return (
             <Box
               pad="medium"
-              background="url(https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/404_Alternative.jpg)"
+              background="url(https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/404_Styled.jpg)"
               height="300px"
               justify="center"
               align="center"
@@ -6136,7 +6136,7 @@
             >
               <ButtonGroupButton
                 label="Styled"
-                value="404-alternative"
+                value="404-styled"
                 name="varients"
               />
               <ButtonGroupButton label="Simple" value="404" name="varients" />
