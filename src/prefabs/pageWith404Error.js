@@ -2,8 +2,10 @@
   name: '404 error page',
   icon: 'NavbarIcon',
   type: 'page',
-  description: 'A simple 404 error page.',
-  detail: 'A simple 404 error page.',
+  description:
+    'If a certain page cannot be found. You can use this page template to communicate a 404 error in your application.',
+  detail:
+    'If a certain page cannot be found. You can use this page template to communicate a 404 error in your application.',
   previewUrl: 'https://preview.betty.app/404-styled',
   previewImage:
     'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/404_Styled.jpg',

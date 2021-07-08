@@ -2,8 +2,10 @@
   name: '500 error page',
   icon: 'NavbarIcon',
   type: 'page',
-  description: 'A simple 500 error page.',
-  detail: 'A simple 500 error page.',
+  description:
+    'If there is an internal server error. You can use this page template to communicate a 500 error in your application.',
+  detail:
+    'If there is an internal server error. You can use this page template to communicate a 500 error in your application.',
   previewUrl: 'https://preview.betty.app/500-styled',
   previewImage:
     'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/500_Styled.jpg',
