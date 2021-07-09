@@ -174,9 +174,16 @@
       handleValidation(validity);
     };
 
+    useEffect(() => {
+      B.triggerEvent('onChange', currentValue);
+    }, [currentValue]);
+
     B.defineFunction('Clear', () => setCurrentValue(''));
     B.defineFunction('Enable', () => setIsDisabled(false));
     B.defineFunction('Disable', () => setIsDisabled(true));
+    B.defineFunction('Reset', () =>
+      setCurrentValue(useText(defaultValue, { rawValue: true })),
+    );
 
     const handleClickShowPassword = () => {
       togglePassword(!showPassword);
