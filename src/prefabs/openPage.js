@@ -57,7 +57,14 @@
             />
           </Field>
         </Content>
-        <Footer onClose={close} onSave={onSaveHandler} />
+        <Footer
+          onClose={close}
+          onSave={onSaveHandler}
+          onSkip={() => {
+            const newPrefab = { ...prefab };
+            save(newPrefab);
+          }}
+        />
       </>
     );
   },
