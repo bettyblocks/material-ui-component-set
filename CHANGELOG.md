@@ -1,3 +1,10 @@
+# [1.153.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.152.0...v1.153.0) (2021-07-14)
+
+
+### Features
+
+* have the datatable inherit property formats by default ([edb9139](https://github.com/bettyblocks/material-ui-component-set/commit/edb9139d6c97b20e60eae612b043652310d2fbd4))
+
 # [1.152.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.151.3...v1.152.0) (2021-07-08)
 
 
