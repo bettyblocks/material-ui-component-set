@@ -1,3 +1,10 @@
+## [1.153.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.153.0...v1.153.1) (2021-07-15)
+
+
+### Bug Fixes
+
+* fixed the width of the media component ([bdbb9e9](https://github.com/bettyblocks/material-ui-component-set/commit/bdbb9e996f2af230545467295cb8fb299c1d71ae))
+
 # [1.153.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.152.0...v1.153.0) (2021-07-14)
 
 
