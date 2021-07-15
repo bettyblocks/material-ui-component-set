@@ -1,3 +1,11 @@
+# [1.154.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.153.1...v1.154.0) (2021-07-15)
+
+
+### Features
+
+* add external page option to open page ([552d0a1](https://github.com/bettyblocks/material-ui-component-set/commit/552d0a104fc7363c41fde2274a1f310c67234da5))
+* add no configuration option to openpage button ([7ec33cd](https://github.com/bettyblocks/material-ui-component-set/commit/7ec33cd7510727d7e3514e5514cd88ffaec2d738))
+
 ## [1.153.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.153.0...v1.153.1) (2021-07-15)
 
 
