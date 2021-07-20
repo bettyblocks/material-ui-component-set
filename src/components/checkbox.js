@@ -70,6 +70,8 @@
       handleValidation(isValid);
     };
 
+    B.defineFunction('Reset', () => setChecked(componentChecked === 'true'));
+
     useEffect(() => {
       if (checked) {
         B.triggerEvent('isTrue', true);
@@ -90,7 +92,7 @@
 
     useEffect(() => {
       if (isDev) {
-        setChecked(useText(defaultValue) === 'true');
+        setChecked(componentChecked === 'true');
       }
     }, [isDev, defaultValue]);
 
