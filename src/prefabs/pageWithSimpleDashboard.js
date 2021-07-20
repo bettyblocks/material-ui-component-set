@@ -4,7 +4,8 @@
   type: 'page',
   description:
     'View your content in a data table with cards containing counters.',
-  detail: 'View your content in a data table with cards containing counters.',
+  detail:
+    'This dashboard has a configurable data table and some cards containing static data. This to spark your interest and show what things are possible with the Page builder.',
   previewUrl: 'https://preview.betty.app/simple-dashboard',
   previewImage:
     'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_Simple_Dashboard.jpg',
