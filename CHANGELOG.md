@@ -1,3 +1,10 @@
+# [1.156.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.155.0...v1.156.0) (2021-07-20)
+
+
+### Features
+
+* added page with simple dashboard ([50ed48a](https://github.com/bettyblocks/material-ui-component-set/commit/50ed48a5f11f3094f6ff1be08cc89179daebf4c4))
+
 # [1.155.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.154.0...v1.155.0) (2021-07-20)
 
 
