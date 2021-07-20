@@ -71,6 +71,8 @@
     const [search, setSearch] = useState('');
     const [searchTerm, setSearchTerm] = useState('');
     const [showPagination, setShowPagination] = useState(false);
+    const [interactionFilter, setInteractionFilter] = useState({});
+
     const { label: searchPropertyLabel = '{property}' } =
       getProperty(searchProperty) || {};
     let orderPropertyPath = null;
@@ -148,6 +150,60 @@
       path = [searchProperty.id].flat();
     }
 
+    const transformValue = value => {
+      if (value instanceof Date) {
+        return value.toISOString();
+      }
+
+      return value;
+    };
+
+    /**
+     * @name Filter
+     * @param {Property} property
+     * @returns {Void}
+     */
+    B.defineFunction('Filter', ({ event, property, interactionId }) => {
+      setInteractionFilter({
+        ...interactionFilter,
+        [interactionId]: {
+          property,
+          value: event.target ? event.target.value : transformValue(event),
+        },
+      });
+    });
+
+    B.defineFunction('ResetFilter', () => {
+      setInteractionFilter({});
+    });
+
+    let interactionFilters = {};
+
+    const isEmptyValue = value =>
+      !value || (Array.isArray(value) && value.length === 0);
+
+    const clauses = Object.entries(interactionFilter)
+      .filter(([, { value }]) => !isEmptyValue(value))
+      .map(([, { property, value }]) =>
+        property.id.reduceRight((acc, field, index, arr) => {
+          const isLast = index === arr.length - 1;
+          if (isLast) {
+            return Array.isArray(value)
+              ? {
+                  _or: value.map(el => ({
+                    [field]: { [property.operator]: el },
+                  })),
+                }
+              : { [field]: { [property.operator]: value } };
+          }
+
+          return { [field]: acc };
+        }, {}),
+      );
+
+    interactionFilters =
+      clauses.length > 1 ? { _and: clauses } : clauses[0] || {};
+
     const searchFilter = searchProperty
       ? path.reduceRight(
           (acc, property, index) =>
@@ -163,7 +219,9 @@
         ? deepMerge(filter, searchFilter)
         : filter;
 
-    const where = useFilter(newFilter);
+    const completeFilter = deepMerge(newFilter, interactionFilters);
+
+    const where = useFilter(completeFilter);
 
     // TODO: move model to skip
     const { loading, error, data, refetch } =

@@ -3,7 +3,8 @@
   icon: 'LoginFormIcon',
   type: 'page',
   description: 'Page with login form and side image',
-  detail: 'Page with login form and side image',
+  detail:
+    'It takes a few clicks to set up your login page. Connect your model to the form and feel free to customize your image to your liking.',
   previewUrl: 'https://preview.betty.app/login',
   previewImage:
     'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_Login.jpg',
@@ -7482,6 +7483,40 @@
                                               option: 'showError',
                                               comparator: 'EQ',
                                               value: 'built-in',
+                                            },
+                                          },
+                                        },
+                                        {
+                                          value: 'default',
+                                          label: 'Show on load',
+                                          key: 'loadingType',
+                                          type: 'CUSTOM',
+                                          configuration: {
+                                            as: 'BUTTONGROUP',
+                                            dataType: 'string',
+                                            allowedInput: [
+                                              {
+                                                name: 'Message',
+                                                value: 'default',
+                                              },
+                                              {
+                                                name: 'Content',
+                                                value: 'showChildren',
+                                              },
+                                            ],
+                                          },
+                                        },
+                                        {
+                                          value: ['Loading...'],
+                                          label: 'Loading text',
+                                          key: 'loadingText',
+                                          type: 'VARIABLE',
+                                          configuration: {
+                                            condition: {
+                                              type: 'SHOW',
+                                              option: 'loadingType',
+                                              comparator: 'EQ',
+                                              value: 'default',
                                             },
                                           },
                                         },

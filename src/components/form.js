@@ -15,6 +15,7 @@
           ModelProvider,
           useAllQuery,
           useEndpoint,
+          useText,
         } = B;
 
         const {
@@ -26,9 +27,11 @@
           showError,
           showSuccess,
           currentRecord,
+          loadingType,
+          loadingText,
         } = options;
         const formRef = React.createRef();
-
+        const parsedLoadingText = useText(loadingText);
         const displayError = showError === 'built-in';
         const displaySuccess = showSuccess === 'built-in';
         const empty = children.length === 0;
@@ -47,7 +50,15 @@
         const mounted = useRef(false);
 
         B.defineFunction('Submit', () => {
-          if (formRef.current) formRef.current.requestSubmit();
+          if (formRef.current) {
+            if (typeof formRef.current.requestSubmit === 'function') {
+              formRef.current.requestSubmit();
+            } else {
+              formRef.current.dispatchEvent(
+                new Event('submit', { cancelable: true }),
+              );
+            }
+          }
         });
 
         const [, setOptions] = useOptions();
@@ -131,6 +142,20 @@
           }
         };
 
+        const FormElement = (
+          <form
+            className={[
+              empty && classes.empty,
+              isPristine && classes.pristine,
+            ].join(' ')}
+          >
+            {isPristine && (
+              <span>Drag form components in the form to submit data</span>
+            )}
+            {children}
+          </form>
+        );
+
         const FormCmp = ({ item }) => {
           const [isInvalid, setIsInvalid] = useState(false);
           const handleInvalid = () => {
@@ -139,6 +164,7 @@
               B.triggerEvent('onInvalid');
             }
           };
+
           useEffect(() => {
             B.triggerEvent('onComponentRendered');
           }, []);
@@ -235,14 +261,20 @@
             }
           }
 
-          if (isFetching) return 'Loading...';
+          if (isFetching && loadingType === 'default')
+            return <span>{parsedLoadingText}</span>;
+
+          if (isFetching && loadingType === 'showChildren') return children;
+
           if (err && displayError) return err.message;
           if (!item) return children;
 
           return <FormCmp item={item} />;
         };
 
-        return hasFilter ? <FormWithData /> : <FormCmp />;
+        const RuntimeForm = hasFilter ? <FormWithData /> : <FormCmp />;
+
+        return isDev ? FormElement : RuntimeForm;
       })()}
     </div>
   ),

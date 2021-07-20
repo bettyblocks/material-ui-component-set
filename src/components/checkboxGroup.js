@@ -48,24 +48,35 @@
       id: customModelAttributeId,
       label = [],
       value: defaultValue,
+      required: defaultRequired = false,
     } = customModelAttributeObj;
     const customModelAttribute = getCustomModelAttribute(
       customModelAttributeId,
     );
-    const { name: customModelAttributeName, validations: { required } = {} } =
-      customModelAttribute || {};
+    const {
+      name: customModelAttributeName,
+      validations: { required: attributeRequired } = {},
+    } = customModelAttribute || {};
+    const required = customModelAttribute ? attributeRequired : defaultRequired;
     const labelText = useText(label);
     const nameAttributeValue = useText(nameAttribute);
 
     const getValues = () => {
       const value = defaultValue ? useText(defaultValue) : [];
       // split the string and trim spaces
-      return !Array.isArray(value)
-        ? value.split(',').map(str => str.trim())
-        : value;
+      if (Array.isArray(value)) return value;
+
+      return value
+        .split(',')
+        .filter(part => part !== '')
+        .map(str => str.trim());
     };
 
     const [values, setValues] = useState(getValues());
+
+    useEffect(() => {
+      B.triggerEvent('onChange', values);
+    }, [values]);
 
     const orderByArray = [orderBy].flat();
     const sort =
@@ -109,6 +120,9 @@
     const { results } = data || {};
 
     B.defineFunction('Refetch', () => refetch());
+    B.defineFunction('Reset', () =>
+      setValues(defaultValue ? useText(defaultValue) : []),
+    );
 
     useEffect(() => {
       if (isDev) {

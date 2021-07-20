@@ -1,73 +1,18 @@
 (() => ({
-  name: 'Open Page',
-  icon: 'OpenPageIcon',
+  name: 'Action Button',
+  icon: 'ButtonIcon',
   category: 'BUTTON',
-  keywords: ['Button', 'open', 'page', 'openpage'],
-  beforeCreate: ({
-    prefab,
-    save,
-    close,
-    components: { EndpointSelector, Header, Content, Field, Footer, Text },
-  }) => {
-    const [endpoint, setEndpoint] = React.useState({
-      id: '',
-      pageId: '',
-      params: {},
-    });
-    const [showValidation, setShowValidation] = React.useState(false);
-    const isInternalEndpoint = typeof endpoint === 'object';
-    const isExternalEndpoint = typeof endpoint === 'string';
-    const isValidEndpoint =
-      (isInternalEndpoint && endpoint.id !== '') ||
-      (isExternalEndpoint && endpoint !== '');
-
-    React.useEffect(() => {
-      if (showValidation && isValidEndpoint) setShowValidation(false);
-    }, [isValidEndpoint, showValidation, setShowValidation]);
-
-    const onSaveHandler = () => {
-      if (!isValidEndpoint) {
-        setShowValidation(true);
-        return;
-      }
-      const newPrefab = { ...prefab };
-      if (isInternalEndpoint) {
-        newPrefab.structure[0].options[3].value = endpoint;
-      } else {
-        newPrefab.structure[0].options[2].value = 'external';
-        newPrefab.structure[0].options[4].value = [endpoint];
-      }
-      save(newPrefab);
-    };
-
-    return (
-      <>
-        <Header onClose={close} title="Configure open page button" />
-        <Content>
-          <Field
-            label="Link to"
-            error={
-              showValidation && <Text color="#e82600">Page is required</Text>
-            }
-          >
-            <EndpointSelector
-              value={endpoint}
-              allowExternal
-              onChange={value => setEndpoint(value)}
-            />
-          </Field>
-        </Content>
-        <Footer
-          onClose={close}
-          onSave={onSaveHandler}
-          onSkip={() => {
-            const newPrefab = { ...prefab };
-            save(newPrefab);
-          }}
-        />
-      </>
-    );
-  },
+  keywords: ['Button', 'action'],
+  actions: [
+    {
+      ref: {
+        id: '#actionId',
+        endpointId: '#endpointId',
+      },
+      useNewRuntime: false,
+      events: [],
+    },
+  ],
   structure: [
     {
       name: 'Button',
@@ -85,69 +30,38 @@
           type: 'VARIABLE',
           label: 'Button text',
           key: 'buttonText',
-          value: ['Open page'],
+          value: ['Action Button'],
         },
         {
-          type: 'CUSTOM',
-          label: 'Link to',
-          key: 'linkType',
-          value: 'internal',
-          configuration: {
-            as: 'BUTTONGROUP',
-            dataType: 'string',
-            allowedInput: [
-              { name: 'Internal page', value: 'internal' },
-              { name: 'External page', value: 'external' },
-            ],
+          ref: {
+            value: '#actionId',
           },
-        },
-        {
-          value: '',
-          label: 'Page',
-          key: 'linkTo',
-          type: 'ENDPOINT',
+          label: 'Action',
+          key: 'actionId',
+          type: 'ACTION',
           configuration: {
+            apiVersion: 'v1',
             condition: {
               type: 'SHOW',
               option: 'linkType',
               comparator: 'EQ',
-              value: 'internal',
+              value: 'action',
             },
           },
         },
         {
-          value: [''],
-          label: 'URL',
-          key: 'linkToExternal',
-          type: 'VARIABLE',
+          value: [],
+          label: 'Objects to pass to action',
+          key: 'actionModels',
+          type: 'ACTION_INPUT_OBJECTS',
           configuration: {
-            placeholder: 'Starts with https:// or http://',
+            apiVersion: 'v1',
             condition: {
               type: 'SHOW',
               option: 'linkType',
               comparator: 'EQ',
-              value: 'external',
+              value: 'action',
             },
-          },
-        },
-        {
-          value: '_self',
-          label: 'Open in',
-          key: 'openLinkToExternal',
-          type: 'CUSTOM',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'linkType',
-              comparator: 'EQ',
-              value: 'external',
-            },
-            as: 'BUTTONGROUP',
-            dataType: 'string',
-            allowedInput: [
-              { name: 'Current Tab', value: '_self' },
-              { name: 'New Tab', value: '_blank' },
-            ],
           },
         },
         {
@@ -155,14 +69,6 @@
           label: 'Full width',
           key: 'fullWidth',
           type: 'TOGGLE',
-          configuration: {
-            condition: {
-              type: 'HIDE',
-              option: 'variant',
-              comparator: 'EQ',
-              value: 'icon',
-            },
-          },
         },
         {
           label: 'Icon',
@@ -1441,9 +1347,9 @@
             as: 'BUTTONGROUP',
             dataType: 'string',
             allowedInput: [
-              { name: 'Large', value: 'large' },
-              { name: 'Medium', value: 'medium' },
               { name: 'Small', value: 'small' },
+              { name: 'Medium', value: 'medium' },
+              { name: 'Large', value: 'large' },
             ],
             condition: {
               type: 'HIDE',
@@ -1461,16 +1367,16 @@
           configuration: {
             as: 'BUTTONGROUP',
             dataType: 'string',
+            allowedInput: [
+              { name: 'Start', value: 'start' },
+              { name: 'End', value: 'end' },
+            ],
             condition: {
               type: 'HIDE',
               option: 'icon',
               comparator: 'EQ',
               value: 'None',
             },
-            allowedInput: [
-              { name: 'Start', value: 'start' },
-              { name: 'End', value: 'end' },
-            ],
           },
         },
         {
