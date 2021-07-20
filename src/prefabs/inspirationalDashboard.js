@@ -37289,7 +37289,7 @@
                                                       },
                                                     },
                                                     {
-                                                      value: 'none',
+                                                      value: 'center',
                                                       label:
                                                         'Vertical alignment',
                                                       key: 'valignment',
@@ -39560,7 +39560,7 @@
                                                           label: 'Outer Space',
                                                           key: 'margin',
                                                           value: [
-                                                            'M',
+                                                            '0rem',
                                                             '0rem',
                                                             '0rem',
                                                             '0rem',
@@ -39710,7 +39710,7 @@
                                                         },
                                                         {
                                                           value: [
-                                                            'M',
+                                                            '0rem',
                                                             '0rem',
                                                             '0rem',
                                                             '0rem',
@@ -39891,7 +39891,7 @@
                                                       },
                                                     },
                                                     {
-                                                      value: 'none',
+                                                      value: 'center',
                                                       label:
                                                         'Vertical alignment',
                                                       key: 'valignment',
@@ -42162,7 +42162,7 @@
                                                           label: 'Outer Space',
                                                           key: 'margin',
                                                           value: [
-                                                            'M',
+                                                            '0rem',
                                                             '0rem',
                                                             '0rem',
                                                             '0rem',
@@ -42312,7 +42312,7 @@
                                                         },
                                                         {
                                                           value: [
-                                                            'M',
+                                                            '0rem',
                                                             '0rem',
                                                             '0rem',
                                                             '0rem',
