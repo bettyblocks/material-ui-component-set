@@ -1,14 +1,14 @@
 (() => ({
-  name: 'Master Detail View - Vertical',
+  name: 'Overview and detail view',
   icon: 'DataTable',
   type: 'page',
   description:
-    'This is a page containing a data table with detail view, vertically oriented',
+    'This is a page contains a data table with detail view, vertically oriented',
   detail:
-    'This is a page containing a data table with detail view, vertically oriented',
-  previewUrl: 'https://preview.betty.app/master-detail-vertical',
+    'Display your data in a Data Table by connecting a model. The details of this data is shown on the same page via a detail view (vertically oriented). This page template also contains an App Bar on top of the page.',
+  previewUrl: 'https://preview.betty.app/overview-and-detail-view',
   previewImage:
-    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_Master_Detail_Vertical.jpg',
+    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_Overview_And_Detail_View.jpg',
   category: 'LAYOUT',
   beforeCreate: ({
     components: {
@@ -2617,6 +2617,12 @@
                             },
                           },
                           {
+                            value: '',
+                            label: 'Placeholder rows',
+                            key: 'placeholderTake',
+                            type: 'NUMBER',
+                          },
+                          {
                             type: 'VARIABLE',
                             label: 'Rows per page text',
                             key: 'labelRowsPerPage',
@@ -2688,8 +2694,28 @@
                           {
                             label: 'Square',
                             key: 'square',
+                            value: true,
+                            type: 'TOGGLE',
+                          },
+                          {
+                            label: 'Striped',
+                            key: 'striped',
                             value: false,
                             type: 'TOGGLE',
+                          },
+                          {
+                            type: 'COLOR',
+                            label: 'Stripe color',
+                            key: 'stripeColor',
+                            value: 'Light',
+                            configuration: {
+                              condition: {
+                                type: 'SHOW',
+                                option: 'striped',
+                                comparator: 'EQ',
+                                value: true,
+                              },
+                            },
                           },
                           {
                             label: 'Variant',
@@ -2864,6 +2890,34 @@
                               ],
                             },
                           },
+                          {
+                            value: 'default',
+                            label: 'Show on load',
+                            key: 'loadingType',
+                            type: 'CUSTOM',
+                            configuration: {
+                              as: 'BUTTONGROUP',
+                              dataType: 'string',
+                              allowedInput: [
+                                { name: 'Message', value: 'default' },
+                                { name: 'Content', value: 'showChildren' },
+                              ],
+                            },
+                          },
+                          {
+                            value: ['Loading...'],
+                            label: 'Loading text',
+                            key: 'loadingText',
+                            type: 'VARIABLE',
+                            configuration: {
+                              condition: {
+                                type: 'SHOW',
+                                option: 'loadingType',
+                                comparator: 'EQ',
+                                value: 'default',
+                              },
+                            },
+                          },
                         ],
                         descendants: [
                           {
@@ -2872,7 +2926,7 @@
                               {
                                 label: 'Square',
                                 key: 'square',
-                                value: false,
+                                value: true,
                                 type: 'TOGGLE',
                               },
                               {
