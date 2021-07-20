@@ -1,3 +1,10 @@
+# [1.157.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.156.0...v1.157.0) (2021-07-20)
+
+
+### Features
+
+* master detail vertical ([a15110f](https://github.com/bettyblocks/material-ui-component-set/commit/a15110fc87d52fd95df7a913d648e6796f48140e))
+
 # [1.156.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.155.0...v1.156.0) (2021-07-20)
 
 
