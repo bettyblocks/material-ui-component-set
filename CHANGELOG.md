@@ -1,3 +1,25 @@
+# [1.154.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.153.1...v1.154.0) (2021-07-15)
+
+
+### Features
+
+* add external page option to open page ([552d0a1](https://github.com/bettyblocks/material-ui-component-set/commit/552d0a104fc7363c41fde2274a1f310c67234da5))
+* add no configuration option to openpage button ([7ec33cd](https://github.com/bettyblocks/material-ui-component-set/commit/7ec33cd7510727d7e3514e5514cd88ffaec2d738))
+
+## [1.153.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.153.0...v1.153.1) (2021-07-15)
+
+
+### Bug Fixes
+
+* fixed the width of the media component ([bdbb9e9](https://github.com/bettyblocks/material-ui-component-set/commit/bdbb9e996f2af230545467295cb8fb299c1d71ae))
+
+# [1.153.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.152.0...v1.153.0) (2021-07-14)
+
+
+### Features
+
+* have the datatable inherit property formats by default ([edb9139](https://github.com/bettyblocks/material-ui-component-set/commit/edb9139d6c97b20e60eae612b043652310d2fbd4))
+
 # [1.152.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.151.3...v1.152.0) (2021-07-08)
 
 
