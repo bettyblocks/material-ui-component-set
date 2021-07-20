@@ -4,7 +4,7 @@
   type: 'page',
   description: 'Page with a static dashboard for inspiration.',
   detail:
-    'This page has a static bashboard to spark your interest and show what things are possible with the pagebuilder.',
+    'This page has a static dashboard to spark your interest and show what things are possible with the pagebuilder.',
   previewUrl: 'https://preview.betty.app/inspirational-dashboard',
   previewImage:
     'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_Inspirational_Dashboard.jpg',
