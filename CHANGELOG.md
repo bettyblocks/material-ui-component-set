@@ -1,3 +1,31 @@
+# [1.158.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.157.0...v1.158.0) (2021-07-21)
+
+
+### Features
+
+* add crud page template with slideout ([1a73c7b](https://github.com/bettyblocks/material-ui-component-set/commit/1a73c7bc9b8aa308cb268408e154d005bfbdbd8a))
+
+# [1.157.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.156.0...v1.157.0) (2021-07-20)
+
+
+### Features
+
+* master detail vertical ([a15110f](https://github.com/bettyblocks/material-ui-component-set/commit/a15110fc87d52fd95df7a913d648e6796f48140e))
+
+# [1.156.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.155.0...v1.156.0) (2021-07-20)
+
+
+### Features
+
+* added page with simple dashboard ([50ed48a](https://github.com/bettyblocks/material-ui-component-set/commit/50ed48a5f11f3094f6ff1be08cc89179daebf4c4))
+
+# [1.155.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.154.0...v1.155.0) (2021-07-20)
+
+
+### Features
+
+* added-inspiration-dashboard ([a90c722](https://github.com/bettyblocks/material-ui-component-set/commit/a90c72241683e0348ef464707d5152798cf3e1db))
+
 # [1.154.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.153.1...v1.154.0) (2021-07-15)
 
 
