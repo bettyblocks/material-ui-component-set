@@ -1,3 +1,10 @@
+# [1.159.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.158.0...v1.159.0) (2021-07-22)
+
+
+### Features
+
+* added all properties to details view ([6184cee](https://github.com/bettyblocks/material-ui-component-set/commit/6184cee8582fc1f8b08bf630e09c1a689b19d2bf))
+
 # [1.158.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.157.0...v1.158.0) (2021-07-21)
 
 
