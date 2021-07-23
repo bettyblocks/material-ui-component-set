@@ -305,6 +305,10 @@
       },
     );
 
+    B.defineFunction('ResetFilter', () => {
+      setInteractionFilter({});
+    });
+
     useEffect(() => {
       const handler = setTimeout(() => {
         setDebouncedSearchParam(searchParam);
