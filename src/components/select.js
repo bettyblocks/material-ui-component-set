@@ -206,6 +206,10 @@
       },
     );
 
+    B.defineFunction('ResetFilter', () => {
+      setInteractionFilter({});
+    });
+
     const handleValidation = () => {
       const hasError = required && !value;
       setErrorState(hasError);
