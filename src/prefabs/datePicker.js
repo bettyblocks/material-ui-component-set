@@ -37,6 +37,12 @@
           value: false,
         },
         {
+          type: 'TOGGLE',
+          label: 'Disable past dates',
+          key: 'disablePastDates',
+          value: false,
+        },
+        {
           label: 'Language',
           key: 'locale',
           value: 'en',

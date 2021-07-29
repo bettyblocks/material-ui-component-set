@@ -19,6 +19,7 @@
       margin,
       helperText,
       disableToolbar,
+      disablePastDates,
       hideLabel,
       customModelAttribute: customModelAttributeObj,
       use24HourClockDateTime,
@@ -161,6 +162,7 @@
         margin={margin}
         helperText={helper}
         disableToolbar={disableToolbar}
+        disablePast={disablePastDates}
         format={format}
         PopoverProps={{
           classes: {
