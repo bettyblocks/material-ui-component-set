@@ -1,3 +1,10 @@
+# [1.160.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.159.1...v1.160.0) (2021-07-29)
+
+
+### Features
+
+* add beforeCreate to Datatable Column ([d6ef347](https://github.com/bettyblocks/material-ui-component-set/commit/d6ef3472824bcbe045a05c5b1a9ae0181e6b90aa))
+
 ## [1.159.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.159.0...v1.159.1) (2021-07-23)
 
 
