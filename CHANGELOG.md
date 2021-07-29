@@ -1,3 +1,10 @@
+## [1.159.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.159.0...v1.159.1) (2021-07-23)
+
+
+### Bug Fixes
+
+* add ResetFilter to data components ([f141b86](https://github.com/bettyblocks/material-ui-component-set/commit/f141b861e813ff197bd6f2a9c2eb7d938069130e))
+
 # [1.159.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.158.0...v1.159.0) (2021-07-22)
 
 
