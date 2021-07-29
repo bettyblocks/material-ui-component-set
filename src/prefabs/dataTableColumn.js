@@ -3,6 +3,47 @@
   icon: 'DataTableColumn',
   category: 'DATA',
   keywords: ['Data', 'table', 'column', 'datatablecolumn'],
+  beforeCreate: ({
+    components: { Content, Header, Field, Footer, PropertySelector },
+    prefab,
+    save,
+    close,
+  }) => {
+    const [property, setProperty] = React.useState('');
+
+    return (
+      <>
+        <Header
+          onClose={close}
+          title="New column"
+          subtitle="You can choose a property for your datatable here or choose to add it later by clicking 'add without configuration'"
+        />
+        <Content>
+          <Field label="Property">
+            <PropertySelector
+              onChange={value => {
+                setProperty(value);
+              }}
+              value={property}
+            />
+          </Field>
+        </Content>
+        <Footer
+          onSave={() => {
+            const newPrefab = { ...prefab };
+
+            newPrefab.structure[0].options[1].value = property;
+            save(newPrefab);
+          }}
+          onSkip={() => {
+            const newPrefab = { ...prefab };
+            save(newPrefab);
+          }}
+          onClose={close}
+        />
+      </>
+    );
+  },
   structure: [
     {
       name: 'DataTableColumn',

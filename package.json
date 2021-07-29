@@ -1,11 +1,11 @@
 {
   "name": "component-set",
-  "version": "1.159.1",
+  "version": "1.161.0",
   "main": "dist/templates.json",
   "license": "UNLICENSED",
   "private": false,
   "devDependencies": {
-    "@betty-blocks/cli": "^23.47.0",
+    "@betty-blocks/cli": "^23.48.0",
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-angular": "^11.0.0",
     "@commitlint/prompt-cli": "^11.0.0",
