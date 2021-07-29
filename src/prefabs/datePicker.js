@@ -37,6 +37,12 @@
           value: false,
         },
         {
+          type: 'TOGGLE',
+          label: 'Disable Past',
+          key: 'disablePast',
+          value: false,
+        },
+        {
           label: 'Language',
           key: 'locale',
           value: 'en',
