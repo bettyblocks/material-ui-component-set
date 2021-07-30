@@ -115,7 +115,8 @@
     let interactionFilters = {};
 
     const isEmptyValue = arg =>
-      !arg || (Array.isArray(arg) && arg.length === 0);
+      (typeof arg !== 'boolean' && !arg) ||
+      (Array.isArray(arg) && arg.length === 0);
 
     const clauses = Object.entries(interactionFilter)
       .filter(([, { value: valueArg }]) => !isEmptyValue(valueArg))
