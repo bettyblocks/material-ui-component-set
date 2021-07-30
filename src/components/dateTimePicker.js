@@ -14,6 +14,9 @@
       dateFormat,
       timeFormat,
       dateTimeFormat,
+      useMinMaxDate,
+      minDaysBefore,
+      maxDaysAhead,
       size,
       fullWidth,
       margin,
@@ -41,6 +44,52 @@
     const [selectedDate, setSelectedDate] = useState(null);
     const helper = useText(helperText);
     const placeholderText = useText(placeholder);
+    const parsedMinDate =
+      // eslint-disable-next-line no-nested-ternary
+      useMinMaxDate === 'date'
+        ? new Date(useText(options.minDate))
+        : useMinMaxDate === 'days'
+        ? useText(minDaysBefore)
+        : undefined;
+    const parsedMaxDate =
+      // eslint-disable-next-line no-nested-ternary
+      useMinMaxDate === 'date'
+        ? new Date(useText(options.maxDate))
+        : useMinMaxDate === 'days'
+        ? useText(maxDaysAhead)
+        : undefined;
+
+    const getMinDate = value => {
+      if (!value) return undefined;
+      if (useMinMaxDate === 'date') {
+        return value;
+      }
+      if (useMinMaxDate === 'days') {
+        const newMinDate = new Date();
+        newMinDate.setDate(newMinDate.getDate() - parseInt(value, 10));
+        return newMinDate;
+      }
+      return undefined;
+    };
+
+    const getMaxDate = value => {
+      if (!value) return undefined;
+      if (useMinMaxDate === 'date') {
+        return value;
+      }
+      if (useMinMaxDate === 'days') {
+        const newMinDate = new Date();
+        newMinDate.setDate(newMinDate.getDate() + parseInt(value, 10));
+        return newMinDate;
+      }
+      return undefined;
+    };
+
+    const [minDate, setMinDate] = useState(getMinDate(parsedMinDate));
+    const [maxDate, setMaxDate] = useState(getMaxDate(parsedMaxDate));
+
+    B.defineFunction('setMinDate', value => setMinDate(getMinDate(value)));
+    B.defineFunction('setMaxDate', value => setMaxDate(getMaxDate(value)));
 
     const localeMap = {
       nl: nlLocale,
@@ -170,6 +219,8 @@
         DialogProps={{
           className: classes.dialog,
         }}
+        minDate={minDate}
+        maxDate={maxDate}
         ampm={!use24HourClock}
         keyboardIcon={type === 'time' ? <AccessTime /> : <Event />}
       />

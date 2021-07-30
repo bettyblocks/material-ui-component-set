@@ -57,6 +57,77 @@
           type: 'TEXT',
         },
         {
+          label: 'Use min/max date',
+          key: 'useMinMaxDate',
+          value: 'None',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'None', value: 'none' },
+              { name: 'Date', value: 'date' },
+              { name: 'Days before/ahead', value: 'days' },
+            ],
+          },
+        },
+        {
+          value: [''],
+          label: 'Min date (format MM/dd/yyyy)',
+          key: 'minDate',
+          type: 'VARIABLE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'useMinMaxDate',
+              comparator: 'EQ',
+              value: 'date',
+            },
+          },
+        },
+        {
+          value: [''],
+          label: 'Max date (format MM/dd/yyyy)',
+          key: 'maxDate',
+          type: 'VARIABLE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'useMinMaxDate',
+              comparator: 'EQ',
+              value: 'date',
+            },
+          },
+        },
+        {
+          value: [''],
+          label: 'Min days before',
+          key: 'minDaysBefore',
+          type: 'VARIABLE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'useMinMaxDate',
+              comparator: 'EQ',
+              value: 'days',
+            },
+          },
+        },
+        {
+          value: [''],
+          label: 'Max days ahead',
+          key: 'maxDaysAhead',
+          type: 'VARIABLE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'useMinMaxDate',
+              comparator: 'EQ',
+              value: 'days',
+            },
+          },
+        },
+        {
           value: false,
           label: 'Error',
           key: 'error',
