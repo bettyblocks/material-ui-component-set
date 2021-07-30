@@ -26,6 +26,7 @@
       use24HourClockTime,
       nameAttribute,
       locale,
+      clearable,
     } = options;
     const { env, getCustomModelAttribute, useText } = B;
     const {
@@ -174,6 +175,7 @@
         }}
         ampm={!use24HourClock}
         keyboardIcon={type === 'time' ? <AccessTime /> : <Event />}
+        clearable={clearable}
       />
     );
 

@@ -139,6 +139,20 @@
           },
         },
         {
+          type: 'TOGGLE',
+          label: 'Clearable',
+          key: 'clearable',
+          value: false,
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'variant',
+              comparator: 'EQ',
+              value: 'dialog',
+            },
+          },
+        },
+        {
           label: 'Input Variant',
           key: 'inputvariant',
           value: 'outlined',
