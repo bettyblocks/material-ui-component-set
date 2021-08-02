@@ -5,6 +5,7 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const {
+      autoComplete,
       disabled,
       error,
       multiline,
@@ -250,6 +251,7 @@
           value={currentValue}
           type={(isDev && type === 'number') || showPassword ? 'text' : type}
           multiline={multiline}
+          autoComplete={autoComplete ? 'on' : 'off'}
           rows={rows}
           label={labelText === '' ? undefined : labelText}
           placeholder={placeholderText}

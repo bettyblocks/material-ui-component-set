@@ -17,6 +17,12 @@
           },
         },
         {
+          value: true,
+          label: 'Autocomplete',
+          key: 'autoComplete',
+          type: 'TOGGLE',
+        },
+        {
           value: false,
           label: 'Validation options',
           key: 'validationOptions',

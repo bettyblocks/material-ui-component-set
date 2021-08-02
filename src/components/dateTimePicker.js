@@ -140,6 +140,7 @@
       <DateTimeComponent
         name={nameAttributeValue || customModelAttributeName}
         value={selectedDate}
+        autoComplete={autoComplete ? 'on' : 'off'}
         size={size}
         classes={{ root: classes.formControl }}
         variant={variant}
