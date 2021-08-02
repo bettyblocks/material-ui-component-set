@@ -1,3 +1,10 @@
+# [1.162.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.161.0...v1.162.0) (2021-07-30)
+
+
+### Features
+
+* add clearable option to dateTimePicker dialog variant ([d7a0cc5](https://github.com/bettyblocks/material-ui-component-set/commit/d7a0cc573fcac5b78f8820c33899cee228b9f6f9))
+
 # [1.161.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.160.0...v1.161.0) (2021-07-29)
 
 

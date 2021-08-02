@@ -180,7 +180,8 @@
     let interactionFilters = {};
 
     const isEmptyValue = value =>
-      !value || (Array.isArray(value) && value.length === 0);
+      (typeof value !== 'boolean' && !value) ||
+      (Array.isArray(value) && value.length === 0);
 
     const clauses = Object.entries(interactionFilter)
       .filter(([, { value }]) => !isEmptyValue(value))
