@@ -207,6 +207,10 @@
       },
     );
 
+    B.defineFunction('ResetFilter', () => {
+      setInteractionFilter({});
+    });
+
     const handleValidation = () => {
       const hasError = required && !value;
       setErrorState(hasError);
@@ -269,7 +273,7 @@
     const SelectCmp = (
       <>
         <TextField
-          select
+          select={!disabled}
           defaultValue={value}
           value={value}
           size={size}

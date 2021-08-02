@@ -1,3 +1,121 @@
+# [1.162.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.161.0...v1.162.0) (2021-07-30)
+
+
+### Features
+
+* add clearable option to dateTimePicker dialog variant ([d7a0cc5](https://github.com/bettyblocks/material-ui-component-set/commit/d7a0cc573fcac5b78f8820c33899cee228b9f6f9))
+
+# [1.161.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.160.0...v1.161.0) (2021-07-29)
+
+
+### Features
+
+* add disable past dates option to dateTimePicker ([c449a32](https://github.com/bettyblocks/material-ui-component-set/commit/c449a329714af462919b77a1787c9eb99e54833a))
+
+# [1.160.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.159.1...v1.160.0) (2021-07-29)
+
+
+### Features
+
+* add beforeCreate to Datatable Column ([d6ef347](https://github.com/bettyblocks/material-ui-component-set/commit/d6ef3472824bcbe045a05c5b1a9ae0181e6b90aa))
+
+## [1.159.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.159.0...v1.159.1) (2021-07-23)
+
+
+### Bug Fixes
+
+* add ResetFilter to data components ([f141b86](https://github.com/bettyblocks/material-ui-component-set/commit/f141b861e813ff197bd6f2a9c2eb7d938069130e))
+
+# [1.159.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.158.0...v1.159.0) (2021-07-22)
+
+
+### Features
+
+* added all properties to details view ([6184cee](https://github.com/bettyblocks/material-ui-component-set/commit/6184cee8582fc1f8b08bf630e09c1a689b19d2bf))
+
+# [1.158.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.157.0...v1.158.0) (2021-07-21)
+
+
+### Features
+
+* add crud page template with slideout ([1a73c7b](https://github.com/bettyblocks/material-ui-component-set/commit/1a73c7bc9b8aa308cb268408e154d005bfbdbd8a))
+
+# [1.157.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.156.0...v1.157.0) (2021-07-20)
+
+
+### Features
+
+* master detail vertical ([a15110f](https://github.com/bettyblocks/material-ui-component-set/commit/a15110fc87d52fd95df7a913d648e6796f48140e))
+
+# [1.156.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.155.0...v1.156.0) (2021-07-20)
+
+
+### Features
+
+* added page with simple dashboard ([50ed48a](https://github.com/bettyblocks/material-ui-component-set/commit/50ed48a5f11f3094f6ff1be08cc89179daebf4c4))
+
+# [1.155.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.154.0...v1.155.0) (2021-07-20)
+
+
+### Features
+
+* added-inspiration-dashboard ([a90c722](https://github.com/bettyblocks/material-ui-component-set/commit/a90c72241683e0348ef464707d5152798cf3e1db))
+
+# [1.154.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.153.1...v1.154.0) (2021-07-15)
+
+
+### Features
+
+* add external page option to open page ([552d0a1](https://github.com/bettyblocks/material-ui-component-set/commit/552d0a104fc7363c41fde2274a1f310c67234da5))
+* add no configuration option to openpage button ([7ec33cd](https://github.com/bettyblocks/material-ui-component-set/commit/7ec33cd7510727d7e3514e5514cd88ffaec2d738))
+
+## [1.153.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.153.0...v1.153.1) (2021-07-15)
+
+
+### Bug Fixes
+
+* fixed the width of the media component ([bdbb9e9](https://github.com/bettyblocks/material-ui-component-set/commit/bdbb9e996f2af230545467295cb8fb299c1d71ae))
+
+# [1.153.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.152.0...v1.153.0) (2021-07-14)
+
+
+### Features
+
+* have the datatable inherit property formats by default ([edb9139](https://github.com/bettyblocks/material-ui-component-set/commit/edb9139d6c97b20e60eae612b043652310d2fbd4))
+
+# [1.152.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.151.3...v1.152.0) (2021-07-08)
+
+
+### Features
+
+* add 404 alternative page template ([e7fd77e](https://github.com/bettyblocks/material-ui-component-set/commit/e7fd77e49984b9ed4676a4a48e08b0d5508aacdb))
+* add 404 page template ([265a473](https://github.com/bettyblocks/material-ui-component-set/commit/265a4735931d96226bee7634352f635f45195119))
+* add 500 alternative page template ([adb4e1e](https://github.com/bettyblocks/material-ui-component-set/commit/adb4e1ea3f0ac1ae8bb0e6205c4f060187d4cb1c))
+* add 500 page template ([90354b0](https://github.com/bettyblocks/material-ui-component-set/commit/90354b058ec98c18d785ca7b2de50ed14e8996c4))
+* add combined 500 error page templates ([826cdbd](https://github.com/bettyblocks/material-ui-component-set/commit/826cdbd232013d71e9b7ad89314df2350db5d90b))
+* combined 404 pages to single one ([303f2f1](https://github.com/bettyblocks/material-ui-component-set/commit/303f2f13e8453961c4cc3411b81e11584c8f687b))
+
+## [1.151.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.151.2...v1.151.3) (2021-07-07)
+
+
+### Bug Fixes
+
+* make select options inaccessable when disabled ([9a90a28](https://github.com/bettyblocks/material-ui-component-set/commit/9a90a28cfda0ac6b895bd2919b03b12e336eb951))
+
+## [1.151.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.151.1...v1.151.2) (2021-07-06)
+
+
+### Bug Fixes
+
+* using number props in autocomplete label ([cf4b720](https://github.com/bettyblocks/material-ui-component-set/commit/cf4b720fbb5b2a70ea95e1efa66271e57ab81067))
+
+## [1.151.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.151.0...v1.151.1) (2021-07-06)
+
+
+### Bug Fixes
+
+* render tabs content to enable interactions ([c335d5b](https://github.com/bettyblocks/material-ui-component-set/commit/c335d5be8c8a8601083222595d40937c76cc3183))
+
 # [1.151.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.150.2...v1.151.0) (2021-07-02)
 
 

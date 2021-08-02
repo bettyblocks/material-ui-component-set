@@ -132,9 +132,15 @@
     const hasValue = valueProp && valueProp.id;
 
     if (hasSearch && debouncedSearchParam !== '') {
-      filter[searchProp.id] = {
-        regex: debouncedSearchParam,
-      };
+      if (['serial', 'minutes', 'count', 'integer'].includes(searchProp.kind)) {
+        filter[searchProp.id] = {
+          eq: parseInt(debouncedSearchParam, 10),
+        };
+      } else {
+        filter[searchProp.id] = {
+          regex: debouncedSearchParam,
+        };
+      }
     } else if (hasSearch && debouncedSearchParam === '') {
       delete filter[searchProp.id];
     }
@@ -299,6 +305,10 @@
         });
       },
     );
+
+    B.defineFunction('ResetFilter', () => {
+      setInteractionFilter({});
+    });
 
     useEffect(() => {
       const handler = setTimeout(() => {

@@ -213,6 +213,7 @@
         height: ({ options: { height } }) => height,
       },
       outerSpacing: {
+        width: ({ options: { width } }) => width,
         marginTop: ({ options: { outerSpacing } }) =>
           getSpacing(outerSpacing[0]),
         marginRight: ({ options: { outerSpacing } }) =>

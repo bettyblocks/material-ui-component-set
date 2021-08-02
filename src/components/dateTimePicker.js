@@ -19,12 +19,14 @@
       margin,
       helperText,
       disableToolbar,
+      disablePastDates,
       hideLabel,
       customModelAttribute: customModelAttributeObj,
       use24HourClockDateTime,
       use24HourClockTime,
       nameAttribute,
       locale,
+      clearable,
     } = options;
     const { env, getCustomModelAttribute, useText } = B;
     const {
@@ -161,6 +163,7 @@
         margin={margin}
         helperText={helper}
         disableToolbar={disableToolbar}
+        disablePast={disablePastDates}
         format={format}
         PopoverProps={{
           classes: {
@@ -172,6 +175,7 @@
         }}
         ampm={!use24HourClock}
         keyboardIcon={type === 'time' ? <AccessTime /> : <Event />}
+        clearable={clearable}
       />
     );
 

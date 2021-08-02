@@ -37,6 +37,12 @@
           value: false,
         },
         {
+          type: 'TOGGLE',
+          label: 'Disable past dates',
+          key: 'disablePastDates',
+          value: false,
+        },
+        {
           label: 'Language',
           key: 'locale',
           value: 'en',
@@ -93,6 +99,20 @@
               { name: 'Inline', value: 'inline' },
               { name: 'Static', value: 'static' },
             ],
+          },
+        },
+        {
+          type: 'TOGGLE',
+          label: 'Clearable',
+          key: 'clearable',
+          value: false,
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'variant',
+              comparator: 'EQ',
+              value: 'dialog',
+            },
           },
         },
         {

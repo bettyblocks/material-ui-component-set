@@ -318,6 +318,10 @@
           });
         });
 
+        B.defineFunction('ResetFilter', () => {
+          setInteractionFilter({});
+        });
+
         const mounted = useRef(false);
 
         useEffect(() => {
