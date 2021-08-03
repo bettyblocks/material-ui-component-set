@@ -5153,6 +5153,26 @@
                         value: false,
                       },
                       {
+                        type: 'TOGGLE',
+                        label: 'Disable past dates',
+                        key: 'disablePastDates',
+                        value: false,
+                      },
+                      {
+                        label: 'Language',
+                        key: 'locale',
+                        value: 'en',
+                        type: 'CUSTOM',
+                        configuration: {
+                          as: 'BUTTONGROUP',
+                          dataType: 'string',
+                          allowedInput: [
+                            { name: 'English', value: 'en' },
+                            { name: 'Dutch', value: 'nl' },
+                          ],
+                        },
+                      },
+                      {
                         value: 'MM/dd/yyyy',
                         label: 'Format',
                         key: 'dateFormat',
@@ -5195,6 +5215,20 @@
                             { name: 'Inline', value: 'inline' },
                             { name: 'Static', value: 'static' },
                           ],
+                        },
+                      },
+                      {
+                        type: 'TOGGLE',
+                        label: 'Clearable',
+                        key: 'clearable',
+                        value: false,
+                        configuration: {
+                          condition: {
+                            type: 'SHOW',
+                            option: 'variant',
+                            comparator: 'EQ',
+                            value: 'dialog',
+                          },
                         },
                       },
                       {
@@ -5477,6 +5511,26 @@
                         value: false,
                       },
                       {
+                        type: 'TOGGLE',
+                        label: 'Disable past dates',
+                        key: 'disablePastDates',
+                        value: false,
+                      },
+                      {
+                        label: 'Language',
+                        key: 'locale',
+                        value: 'en',
+                        type: 'CUSTOM',
+                        configuration: {
+                          as: 'BUTTONGROUP',
+                          dataType: 'string',
+                          allowedInput: [
+                            { name: 'English', value: 'en' },
+                            { name: 'Dutch', value: 'nl' },
+                          ],
+                        },
+                      },
+                      {
                         value: 'MM/dd/yyyy HH:mm:ss',
                         label: 'Format',
                         key: 'dateTimeFormat',
@@ -5556,6 +5610,20 @@
                             { name: 'Inline', value: 'inline' },
                             { name: 'Static', value: 'static' },
                           ],
+                        },
+                      },
+                      {
+                        type: 'TOGGLE',
+                        label: 'Clearable',
+                        key: 'clearable',
+                        value: false,
+                        configuration: {
+                          condition: {
+                            type: 'SHOW',
+                            option: 'variant',
+                            comparator: 'EQ',
+                            value: 'dialog',
+                          },
                         },
                       },
                       {
@@ -5886,6 +5954,20 @@
                             { name: 'Inline', value: 'inline' },
                             { name: 'Static', value: 'static' },
                           ],
+                        },
+                      },
+                      {
+                        type: 'TOGGLE',
+                        label: 'Clearable',
+                        key: 'clearable',
+                        value: false,
+                        configuration: {
+                          condition: {
+                            type: 'SHOW',
+                            option: 'variant',
+                            comparator: 'EQ',
+                            value: 'dialog',
+                          },
                         },
                       },
                       {
