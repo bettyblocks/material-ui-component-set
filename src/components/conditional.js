@@ -11,8 +11,10 @@
         const isDev = env === 'dev';
         const isPristine = isDev && children.length === 0;
         const mounted = useRef(false);
-        const [leftValue, setLeftValue] = useState(useText(left));
-        const [rightValue, setRightValue] = useState(useText(right));
+        const leftText = useText(left);
+        const rightText = useText(right);
+        const [leftValue, setLeftValue] = useState(leftText);
+        const [rightValue, setRightValue] = useState(rightText);
         const [visible, setVisible] = useState(initVisibility);
 
         const evalCondition = () => {
@@ -44,6 +46,11 @@
         };
 
         const checkCondition = evalCondition();
+
+        useEffect(() => {
+          setLeftValue(leftText);
+          setRightValue(rightText);
+        }, [leftText, rightText, setLeftValue, setRightValue]);
 
         useEffect(() => {
           setVisible(checkCondition);
