@@ -37,6 +37,12 @@
           },
         },
         {
+          value: true,
+          label: 'Autocomplete',
+          key: 'autoComplete',
+          type: 'TOGGLE',
+        },
+        {
           type: 'TOGGLE',
           label: 'Disable Toolbar',
           key: 'disableToolbar',

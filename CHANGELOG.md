@@ -1,3 +1,10 @@
+## [1.162.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.162.0...v1.162.1) (2021-08-04)
+
+
+### Bug Fixes
+
+* left and right values are now getting updated ([a7fcd72](https://github.com/bettyblocks/material-ui-component-set/commit/a7fcd727e600f5b5e8f133fe640151c64453a61f))
+
 # [1.162.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.161.0...v1.162.0) (2021-07-30)
 
 

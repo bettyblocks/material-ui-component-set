@@ -152,6 +152,12 @@
                         },
                       },
                       {
+                        value: true,
+                        label: 'Autocomplete',
+                        key: 'autoComplete',
+                        type: 'TOGGLE',
+                      },
+                      {
                         value: false,
                         label: 'Autocomplete',
                         key: 'autoComplete',

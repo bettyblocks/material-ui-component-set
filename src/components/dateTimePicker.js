@@ -5,6 +5,7 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const {
+      autoComplete,
       disabled,
       error,
       placeholder,
@@ -142,6 +143,7 @@
         value={selectedDate}
         autoComplete={autoComplete ? 'on' : 'off'}
         size={size}
+        autoComplete={autoComplete ? 'on' : 'off'}
         classes={{ root: classes.formControl }}
         variant={variant}
         placeholder={placeholderText}
