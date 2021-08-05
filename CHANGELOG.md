@@ -1,3 +1,95 @@
+## [1.162.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.162.0...v1.162.1) (2021-08-04)
+
+
+### Bug Fixes
+
+* left and right values are now getting updated ([a7fcd72](https://github.com/bettyblocks/material-ui-component-set/commit/a7fcd727e600f5b5e8f133fe640151c64453a61f))
+
+# [1.162.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.161.0...v1.162.0) (2021-07-30)
+
+
+### Features
+
+* add clearable option to dateTimePicker dialog variant ([d7a0cc5](https://github.com/bettyblocks/material-ui-component-set/commit/d7a0cc573fcac5b78f8820c33899cee228b9f6f9))
+
+# [1.161.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.160.0...v1.161.0) (2021-07-29)
+
+
+### Features
+
+* add disable past dates option to dateTimePicker ([c449a32](https://github.com/bettyblocks/material-ui-component-set/commit/c449a329714af462919b77a1787c9eb99e54833a))
+
+# [1.160.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.159.1...v1.160.0) (2021-07-29)
+
+
+### Features
+
+* add beforeCreate to Datatable Column ([d6ef347](https://github.com/bettyblocks/material-ui-component-set/commit/d6ef3472824bcbe045a05c5b1a9ae0181e6b90aa))
+
+## [1.159.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.159.0...v1.159.1) (2021-07-23)
+
+
+### Bug Fixes
+
+* add ResetFilter to data components ([f141b86](https://github.com/bettyblocks/material-ui-component-set/commit/f141b861e813ff197bd6f2a9c2eb7d938069130e))
+
+# [1.159.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.158.0...v1.159.0) (2021-07-22)
+
+
+### Features
+
+* added all properties to details view ([6184cee](https://github.com/bettyblocks/material-ui-component-set/commit/6184cee8582fc1f8b08bf630e09c1a689b19d2bf))
+
+# [1.158.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.157.0...v1.158.0) (2021-07-21)
+
+
+### Features
+
+* add crud page template with slideout ([1a73c7b](https://github.com/bettyblocks/material-ui-component-set/commit/1a73c7bc9b8aa308cb268408e154d005bfbdbd8a))
+
+# [1.157.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.156.0...v1.157.0) (2021-07-20)
+
+
+### Features
+
+* master detail vertical ([a15110f](https://github.com/bettyblocks/material-ui-component-set/commit/a15110fc87d52fd95df7a913d648e6796f48140e))
+
+# [1.156.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.155.0...v1.156.0) (2021-07-20)
+
+
+### Features
+
+* added page with simple dashboard ([50ed48a](https://github.com/bettyblocks/material-ui-component-set/commit/50ed48a5f11f3094f6ff1be08cc89179daebf4c4))
+
+# [1.155.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.154.0...v1.155.0) (2021-07-20)
+
+
+### Features
+
+* added-inspiration-dashboard ([a90c722](https://github.com/bettyblocks/material-ui-component-set/commit/a90c72241683e0348ef464707d5152798cf3e1db))
+
+# [1.154.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.153.1...v1.154.0) (2021-07-15)
+
+
+### Features
+
+* add external page option to open page ([552d0a1](https://github.com/bettyblocks/material-ui-component-set/commit/552d0a104fc7363c41fde2274a1f310c67234da5))
+* add no configuration option to openpage button ([7ec33cd](https://github.com/bettyblocks/material-ui-component-set/commit/7ec33cd7510727d7e3514e5514cd88ffaec2d738))
+
+## [1.153.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.153.0...v1.153.1) (2021-07-15)
+
+
+### Bug Fixes
+
+* fixed the width of the media component ([bdbb9e9](https://github.com/bettyblocks/material-ui-component-set/commit/bdbb9e996f2af230545467295cb8fb299c1d71ae))
+
+# [1.153.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.152.0...v1.153.0) (2021-07-14)
+
+
+### Features
+
+* have the datatable inherit property formats by default ([edb9139](https://github.com/bettyblocks/material-ui-component-set/commit/edb9139d6c97b20e60eae612b043652310d2fbd4))
+
 # [1.152.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.151.3...v1.152.0) (2021-07-08)
 
 

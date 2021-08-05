@@ -8609,10 +8609,24 @@
                           value: false,
                         },
                         {
-                          value: true,
-                          label: 'Auto close on select',
-                          key: 'autoOk',
                           type: 'TOGGLE',
+                          label: 'Disable past dates',
+                          key: 'disablePastDates',
+                          value: false,
+                        },
+                        {
+                          label: 'Language',
+                          key: 'locale',
+                          value: 'en',
+                          type: 'CUSTOM',
+                          configuration: {
+                            as: 'BUTTONGROUP',
+                            dataType: 'string',
+                            allowedInput: [
+                              { name: 'English', value: 'en' },
+                              { name: 'Dutch', value: 'nl' },
+                            ],
+                          },
                         },
                         {
                           value: 'MM/dd/yyyy',
@@ -8657,6 +8671,20 @@
                               { name: 'Inline', value: 'inline' },
                               { name: 'Static', value: 'static' },
                             ],
+                          },
+                        },
+                        {
+                          type: 'TOGGLE',
+                          label: 'Clearable',
+                          key: 'clearable',
+                          value: false,
+                          configuration: {
+                            condition: {
+                              type: 'SHOW',
+                              option: 'variant',
+                              comparator: 'EQ',
+                              value: 'dialog',
+                            },
                           },
                         },
                         {
@@ -8939,10 +8967,24 @@
                           value: false,
                         },
                         {
-                          value: true,
-                          label: 'Auto close on select',
-                          key: 'autoOk',
                           type: 'TOGGLE',
+                          label: 'Disable past dates',
+                          key: 'disablePastDates',
+                          value: false,
+                        },
+                        {
+                          label: 'Language',
+                          key: 'locale',
+                          value: 'en',
+                          type: 'CUSTOM',
+                          configuration: {
+                            as: 'BUTTONGROUP',
+                            dataType: 'string',
+                            allowedInput: [
+                              { name: 'English', value: 'en' },
+                              { name: 'Dutch', value: 'nl' },
+                            ],
+                          },
                         },
                         {
                           value: 'MM/dd/yyyy HH:mm:ss',
@@ -9024,6 +9066,20 @@
                               { name: 'Inline', value: 'inline' },
                               { name: 'Static', value: 'static' },
                             ],
+                          },
+                        },
+                        {
+                          type: 'TOGGLE',
+                          label: 'Clearable',
+                          key: 'clearable',
+                          value: false,
+                          configuration: {
+                            condition: {
+                              type: 'SHOW',
+                              option: 'variant',
+                              comparator: 'EQ',
+                              value: 'dialog',
+                            },
                           },
                         },
                         {
@@ -9306,12 +9362,6 @@
                           value: false,
                         },
                         {
-                          value: true,
-                          label: 'Auto close on select',
-                          key: 'autoOk',
-                          type: 'TOGGLE',
-                        },
-                        {
                           value: 'HH:mm:ss',
                           label: 'Format',
                           key: 'timeFormat',
@@ -9360,6 +9410,20 @@
                               { name: 'Inline', value: 'inline' },
                               { name: 'Static', value: 'static' },
                             ],
+                          },
+                        },
+                        {
+                          type: 'TOGGLE',
+                          label: 'Clearable',
+                          key: 'clearable',
+                          value: false,
+                          configuration: {
+                            condition: {
+                              type: 'SHOW',
+                              option: 'variant',
+                              comparator: 'EQ',
+                              value: 'dialog',
+                            },
                           },
                         },
                         {
