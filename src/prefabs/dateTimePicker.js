@@ -17,12 +17,6 @@
           },
         },
         {
-          value: true,
-          label: 'Autocomplete',
-          key: 'autoComplete',
-          type: 'TOGGLE',
-        },
-        {
           label: 'Type',
           key: 'type',
           value: 'datetime',
@@ -35,6 +29,12 @@
               value: false,
             },
           },
+        },
+        {
+          value: true,
+          label: 'Autocomplete',
+          key: 'autoComplete',
+          type: 'TOGGLE',
         },
         {
           type: 'TOGGLE',
