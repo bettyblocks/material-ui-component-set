@@ -134,10 +134,10 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@betty-blocks/cli@^23.47.0":
-  version "23.47.0"
-  resolved "https://registry.npmjs.org/@betty-blocks/cli/-/cli-23.47.0.tgz"
-  integrity sha512-tHFPPr6aMNJ9Myp4HVJvZV0w8SJUJWYZISGhbY9Cw7Ru6j4LCkRkozIo4e938KSahXKKL7IJ0NHeNIMuThWtyw==
+"@betty-blocks/cli@^23.48.0":
+  version "23.48.0"
+  resolved "https://registry.yarnpkg.com/@betty-blocks/cli/-/cli-23.48.0.tgz#b444b330812987dd6b540a3524d8520d1843a3b7"
+  integrity sha512-vIsuB1Xh4WXDFCKtRXNL+pXKjQpJ9SbzRRBh8xGvUqGmFpRHdTr6AGjvjr2nvSJDE+Y2HXmAdbm0OcTCHFrN4Q==
   dependencies:
     "@azure/ms-rest-js" "^2.0.4"
     "@azure/storage-blob" "^10.3.0"
@@ -165,6 +165,7 @@
     fs-extra "^8.1.0"
     joi "^17.2.1"
     jsdoc-api "^7.0.0"
+    jsonschema "^1.4.0"
     lodash "^4.17.20"
     minimist "^1.2.5"
     node-fetch "^2.6.0"
@@ -5610,6 +5611,11 @@ jsonparse@^1.2.0:
   version "1.3.1"
   resolved "https://registry.npmjs.org/jsonparse/-/jsonparse-1.3.1.tgz"
   integrity sha1-P02uSpH6wxX3EGL4UhzCOfE2YoA=
+
+jsonschema@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/jsonschema/-/jsonschema-1.4.0.tgz#1afa34c4bc22190d8e42271ec17ac8b3404f87b2"
+  integrity sha512-/YgW6pRMr6M7C+4o8kS+B/2myEpHCrxO4PEWnqJNBFMjn7EWXqlQ4tGwL6xTHeRplwuZmcAncdvfOad1nT2yMw==
 
 jsprim@^1.2.2:
   version "1.4.1"
