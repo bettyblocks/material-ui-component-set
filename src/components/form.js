@@ -34,9 +34,9 @@
         const parsedLoadingText = useText(loadingText);
         const displayError = showError === 'built-in';
         const displaySuccess = showSuccess === 'built-in';
-        const empty = children.length === 0;
+        const isEmpty = children.length === 0;
         const isDev = env === 'dev';
-        const isPristine = empty && isDev;
+        const isPristine = isEmpty && isDev;
         const hasRedirect = redirect && redirect.id !== '';
         const redirectTo =
           env === 'prod' && hasRedirect && useEndpoint(redirect);
@@ -143,13 +143,15 @@
           }
         };
 
+        const classNames = [
+          isEmpty ? classes.empty : '',
+          isPristine ? classes.pristine : '',
+        ]
+          .join(' ')
+          .trim();
+
         const FormElement = (
-          <form
-            className={[
-              empty && classes.empty,
-              isPristine && classes.pristine,
-            ].join(' ')}
-          >
+          <form className={classNames || undefined}>
             {isPristine && (
               <span>Drag form components in the form to submit data</span>
             )}
@@ -194,7 +196,7 @@
                     }}
                     ref={formRef}
                     className={[
-                      empty && classes.empty,
+                      isEmpty && classes.empty,
                       isPristine && classes.pristine,
                     ].join(' ')}
                   >
