@@ -61,6 +61,12 @@
           value: false,
         },
         {
+          value: true,
+          label: 'Autocomplete',
+          key: 'autoComplete',
+          type: 'TOGGLE',
+        },
+        {
           value: [],
           label: 'Placeholder',
           key: 'placeholder',
