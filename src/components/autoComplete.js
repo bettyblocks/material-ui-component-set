@@ -429,6 +429,7 @@
       return (
         <Autocomplete
           id="combo-box-demo"
+          disabled={disabled}
           options={selectValues}
           value={currentValue}
           PopoverProps={{
@@ -494,6 +495,7 @@
 
     return (
       <Autocomplete
+        disabled={disabled}
         multiple={multiple}
         freeSolo={freeSolo}
         options={results}
