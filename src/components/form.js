@@ -195,10 +195,7 @@
                       handleSubmit(evt, callAction, item);
                     }}
                     ref={formRef}
-                    className={[
-                      isEmpty && classes.empty,
-                      isPristine && classes.pristine,
-                    ].join(' ')}
+                    className={classNames || undefined}
                   >
                     {isPristine && (
                       <span>
