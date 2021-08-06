@@ -1,3 +1,17 @@
+## [1.162.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.162.2...v1.162.3) (2021-08-06)
+
+
+### Bug Fixes
+
+* overflow legend in text field component ([14ee294](https://github.com/bettyblocks/material-ui-component-set/commit/14ee29418a321a46ebc304de57ed14750fa9652e))
+
+## [1.162.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.162.1...v1.162.2) (2021-08-05)
+
+
+### Bug Fixes
+
+* update package manager info ([2c31a94](https://github.com/bettyblocks/material-ui-component-set/commit/2c31a94a5930a2fb61fa66f7323075cd93d4b952))
+
 ## [1.162.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.162.0...v1.162.1) (2021-08-04)
 
 
