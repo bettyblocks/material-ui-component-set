@@ -5,6 +5,7 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const {
+      autoComplete,
       disabled,
       error,
       placeholder,
@@ -141,6 +142,7 @@
         name={nameAttributeValue || customModelAttributeName}
         value={selectedDate}
         size={size}
+        autoComplete={autoComplete ? 'on' : 'off'}
         classes={{ root: classes.formControl }}
         variant={variant}
         placeholder={placeholderText}
