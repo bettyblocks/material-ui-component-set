@@ -226,29 +226,32 @@
           }, {})
         : {};
 
-    const { loading, error: err, data: { results } = {}, refetch } =
-      model &&
-      useAllQuery(model, {
-        filter: completeFilter,
-        skip: 0,
-        take: 50,
-        variables: {
-          ...(orderBy ? { sort: { relation: sort } } : {}),
-        },
-        onCompleted(res) {
-          const hasResult = res && res.results && res.results.length > 0;
-          if (hasResult) {
-            B.triggerEvent('onSuccess', res.results);
-          } else {
-            B.triggerEvent('onNoResults');
-          }
-        },
-        onError(resp) {
-          if (!displayError) {
-            B.triggerEvent('onError', resp);
-          }
-        },
-      });
+    const {
+      loading,
+      error: err,
+      data: { results } = {},
+      refetch,
+    } = useAllQuery(model, {
+      filter: completeFilter,
+      skip: !model,
+      take: 50,
+      variables: {
+        ...(orderBy ? { sort: { relation: sort } } : {}),
+      },
+      onCompleted(res) {
+        const hasResult = res && res.results && res.results.length > 0;
+        if (hasResult) {
+          B.triggerEvent('onSuccess', res.results);
+        } else {
+          B.triggerEvent('onNoResults');
+        }
+      },
+      onError(resp) {
+        if (!displayError) {
+          B.triggerEvent('onError', resp);
+        }
+      },
+    });
 
     useEffect(() => {
       if (mounted.current) {

@@ -229,14 +229,16 @@
 
           const applyFilter = modelId && getFilter();
 
-          const { loading: isFetching, data: records, error: err, refetch } =
-            (applyFilter &&
-              useAllQuery(modelId, {
-                filter: applyFilter,
-                skip: 0,
-                take: 1,
-              })) ||
-            {};
+          const {
+            loading: isFetching,
+            data: records,
+            error: err,
+            refetch,
+          } = useAllQuery(modelId, {
+            filter: applyFilter,
+            skip: !applyFilter,
+            take: 1,
+          });
 
           B.defineFunction('Refetch', () => refetch());
 
