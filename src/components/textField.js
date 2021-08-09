@@ -381,6 +381,7 @@
           '& legend': {
             display: ({ options: { hideLabel } }) =>
               hideLabel ? ['none', '!important'] : null,
+            overflow: 'hidden',
           },
           '& input': {
             '&::placeholder': {
