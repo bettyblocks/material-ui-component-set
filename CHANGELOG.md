@@ -1,3 +1,10 @@
+## [1.162.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.162.3...v1.162.4) (2021-08-09)
+
+
+### Bug Fixes
+
+* autocomplete disabled option ([e24ec4d](https://github.com/bettyblocks/material-ui-component-set/commit/e24ec4d35a5b387e5c7a96def12365f830575fbe))
+
 ## [1.162.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.162.2...v1.162.3) (2021-08-06)
 
 
