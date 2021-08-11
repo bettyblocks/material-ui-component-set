@@ -225,27 +225,25 @@
     const where = useFilter(completeFilter);
 
     // TODO: move model to skip
-    const { loading, error, data, refetch } =
-      model &&
-      useAllQuery(model, {
-        rawFilter: where,
-        variables,
-        skip: loadOnScroll ? skip : page * rowsPerPage,
-        take: loadOnScroll ? autoLoadTakeAmountNum : rowsPerPage,
-        onCompleted(res) {
-          const hasResult = res && res.results && res.results.length > 0;
-          if (hasResult) {
-            B.triggerEvent('onSuccess', res.results);
-          } else {
-            B.triggerEvent('onNoResults');
-          }
-        },
-        onError(err) {
-          if (!displayError) {
-            B.triggerEvent('onError', err);
-          }
-        },
-      });
+    const { loading, error, data, refetch } = useAllQuery(model, {
+      rawFilter: where,
+      variables,
+      skip: !model || loadOnScroll ? skip : page * rowsPerPage,
+      take: loadOnScroll ? autoLoadTakeAmountNum : rowsPerPage,
+      onCompleted(res) {
+        const hasResult = res && res.results && res.results.length > 0;
+        if (hasResult) {
+          B.triggerEvent('onSuccess', res.results);
+        } else {
+          B.triggerEvent('onNoResults');
+        }
+      },
+      onError(err) {
+        if (!displayError) {
+          B.triggerEvent('onError', err);
+        }
+      },
+    });
 
     useEffect(() => {
       if (!isDev && data) {
