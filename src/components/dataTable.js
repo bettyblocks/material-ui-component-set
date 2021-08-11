@@ -223,11 +223,11 @@
 
     const where = useFilter(completeFilter);
 
-    // TODO: move model to skip
+    const skipPage = page ? (page - 1) * rowsPerPage : 0;
     const { loading, error, data, refetch } = useAllQuery(model, {
       rawFilter: where,
       variables,
-      skip: !model || loadOnScroll ? skip : page * rowsPerPage,
+      skip: !model || loadOnScroll ? skip : skipPage,
       take: loadOnScroll ? autoLoadTakeAmountNum : rowsPerPage,
       onCompleted(res) {
         const hasResult = res && res.results && res.results.length > 0;
