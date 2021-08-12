@@ -30,6 +30,8 @@
       validationValueMissing,
       validationTooLong,
       validationTooShort,
+      validationBelowMinimum,
+      validationAboveMaximum,
       hideLabel,
       customModelAttribute: customModelAttributeObj,
       nameAttribute,
@@ -105,6 +107,12 @@
       }
       if (validityObject.tooShort && validationTooShort) {
         return useText(validationTooShort);
+      }
+      if (validityObject.rangeUnderflow && validationBelowMinimum) {
+        return useText(validationBelowMinimum);
+      }
+      if (validityObject.rangeOverflow && validationAboveMaximum) {
+        return useText(validationAboveMaximum);
       }
       return '';
     };

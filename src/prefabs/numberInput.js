@@ -100,9 +100,9 @@
           },
         },
         {
-          value: ['This value is too short'],
-          label: 'Value too short message',
-          key: 'validationTooShort',
+          value: ['This value is below the set minimum'],
+          label: 'Value below minimum message',
+          key: 'validationBelowMinimum',
           type: 'VARIABLE',
           configuration: {
             condition: {
@@ -114,9 +114,9 @@
           },
         },
         {
-          value: ['This value is too long'],
-          label: 'Value too long message',
-          key: 'validationTooLong',
+          value: ['This value is above the set maximum'],
+          label: 'Value above maximun',
+          key: 'validationAboveMaximum',
           type: 'VARIABLE',
           configuration: {
             condition: {
