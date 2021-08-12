@@ -44,8 +44,8 @@
           },
         },
         {
-          label: 'Min length',
-          key: 'minlength',
+          label: 'Min value',
+          key: 'minvalue',
           value: '',
           type: 'NUMBER',
           configuration: {
@@ -58,8 +58,8 @@
           },
         },
         {
-          label: 'Max length',
-          key: 'maxlength',
+          label: 'Max value',
+          key: 'maxvalue',
           value: '',
           type: 'NUMBER',
           configuration: {

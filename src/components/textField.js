@@ -23,6 +23,8 @@
       pattern,
       minlength,
       maxlength,
+      minvalue,
+      maxvalue,
       validationTypeMismatch,
       validationPatternMismatch,
       validationValueMissing,
@@ -79,6 +81,8 @@
     const validPattern = pattern || null;
     const validMinlength = minlength || null;
     const validMaxlength = maxlength || null;
+    const validMinvalue = minvalue || null;
+    const validMaxvalue = maxvalue || null;
 
     const validationMessage = validityObject => {
       if (validityObject.customError && validationPatternMismatch) {
@@ -286,6 +290,8 @@
             pattern: validPattern,
             minlength: validMinlength,
             maxlength: validMaxlength,
+            min: validMinvalue,
+            max: validMaxvalue,
             tabIndex: isDev && -1,
           }}
         />
