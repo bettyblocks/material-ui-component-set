@@ -44,45 +44,33 @@
     const [selectedDate, setSelectedDate] = useState(null);
     const helper = useText(helperText);
     const placeholderText = useText(placeholder);
-    const parsedMinDate =
-      // eslint-disable-next-line no-nested-ternary
-      useMinMaxDate === 'date'
+    const hasDateMinMax = useMinMaxDate && useMinMaxDate !== 'none';
+    let parsedMinDate;
+    let parsedMaxDate;
+    if (useMinMaxDate === 'date') {
+      parsedMinDate = useText(options.minDate)
         ? new Date(useText(options.minDate))
-        : useMinMaxDate === 'days'
-        ? useText(minDaysBefore)
         : undefined;
-    const parsedMaxDate =
-      // eslint-disable-next-line no-nested-ternary
-      useMinMaxDate === 'date'
+      parsedMaxDate = useText(options.maxDate)
         ? new Date(useText(options.maxDate))
-        : useMinMaxDate === 'days'
-        ? useText(maxDaysAhead)
         : undefined;
+    } else if (useMinMaxDate === 'days') {
+      parsedMinDate = useText(minDaysBefore);
+      parsedMaxDate = useText(maxDaysAhead);
+    }
 
     const getMinDate = value => {
-      if (!value) return undefined;
-      if (useMinMaxDate === 'date') {
-        return value;
-      }
-      if (useMinMaxDate === 'days') {
-        const newMinDate = new Date();
-        newMinDate.setDate(newMinDate.getDate() - parseInt(value, 10));
-        return newMinDate;
-      }
-      return undefined;
+      if (!value || !hasDateMinMax) return undefined;
+      if (useMinMaxDate === 'date') return value;
+      const newMinDate = new Date();
+      return newMinDate.setDate(newMinDate.getDate() - parseInt(value, 10));
     };
 
     const getMaxDate = value => {
-      if (!value) return undefined;
-      if (useMinMaxDate === 'date') {
-        return value;
-      }
-      if (useMinMaxDate === 'days') {
-        const newMinDate = new Date();
-        newMinDate.setDate(newMinDate.getDate() + parseInt(value, 10));
-        return newMinDate;
-      }
-      return undefined;
+      if (!value || !hasDateMinMax) return undefined;
+      if (useMinMaxDate === 'date') return value;
+      const newMaxDate = new Date();
+      return newMaxDate.setDate(newMaxDate.getDate() + parseInt(value, 10));
     };
 
     const [minDate, setMinDate] = useState(getMinDate(parsedMinDate));
