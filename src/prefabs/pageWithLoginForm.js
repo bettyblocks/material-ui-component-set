@@ -162,6 +162,12 @@
                           },
                         },
                         {
+                          value: true,
+                          label: 'Autocomplete',
+                          key: 'autoComplete',
+                          type: 'TOGGLE',
+                        },
+                        {
                           value: false,
                           label: 'Autocomplete',
                           key: 'autoComplete',
@@ -2266,6 +2272,12 @@
                           configuration: {
                             allowedTypes: ['string'],
                           },
+                        },
+                        {
+                          value: true,
+                          label: 'Autocomplete',
+                          key: 'autoComplete',
+                          type: 'TOGGLE',
                         },
                         {
                           value: false,
