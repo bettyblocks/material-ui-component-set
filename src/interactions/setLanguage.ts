@@ -1,4 +1,4 @@
-function setLocale({ event }: { event: Event }): void {
+function setLanguage({ event }: { event: Event }): void {
   if (typeof event !== 'string') {
     return;
   }
