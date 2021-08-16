@@ -1,3 +1,10 @@
+# [1.163.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.162.6...v1.163.0) (2021-08-13)
+
+
+### Features
+
+* add min and max value to number input ([ab566d4](https://github.com/bettyblocks/material-ui-component-set/commit/ab566d4948be40f2f0e2ccbdf252ddde78e42567))
+
 ## [1.162.6](https://github.com/bettyblocks/material-ui-component-set/compare/v1.162.5...v1.162.6) (2021-08-11)
 
 
