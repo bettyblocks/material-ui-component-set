@@ -47,6 +47,9 @@
       FormHelperText,
     } = window.MaterialUI.Core;
 
+    B.defineFunction('Uncheck', () => setChecked(false));
+    B.defineFunction('Check', () => setChecked(true));
+
     const handleValidation = isValid => {
       setErrorState(!isValid);
       const message = useText(!isValid ? validationValueMissing : helperText);
