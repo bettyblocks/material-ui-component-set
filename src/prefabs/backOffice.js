@@ -1,7 +1,7 @@
 (() => ({
   name: 'Back office',
   icon: 'DrawerIcon',
-  // type: 'page',
+  type: 'page',
   description: '--',
   detail: '--',
   previewUrl: 'https://preview.betty.app/app-bar',
@@ -2780,7 +2780,7 @@
                           type: 'CUSTOM',
                           label: 'Link to',
                           key: 'linkType',
-                          value: 'internal',
+                          value: 'external',
                           configuration: {
                             as: 'BUTTONGROUP',
                             dataType: 'string',
@@ -2811,7 +2811,7 @@
                           },
                         },
                         {
-                          value: [''],
+                          value: [propertyInput],
                           label: 'URL',
                           key: 'linkToExternal',
                           type: 'VARIABLE',
@@ -2923,7 +2923,10 @@
                           type: 'CUSTOM',
                           label: 'Link to',
                           key: 'linkType',
-                          value: 'internal',
+                          value:
+                            propertyInput.kind === 'FILE'
+                              ? 'external'
+                              : 'internal',
                           configuration: {
                             as: 'BUTTONGROUP',
                             dataType: 'string',
@@ -2948,7 +2951,10 @@
                           },
                         },
                         {
-                          value: [''],
+                          value:
+                            propertyInput.kind === 'FILE'
+                              ? [propertyInput]
+                              : [''],
                           label: 'URL',
                           key: 'linkToExternal',
                           type: 'VARIABLE',
