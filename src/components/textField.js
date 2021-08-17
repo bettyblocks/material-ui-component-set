@@ -72,6 +72,8 @@
       customModelAttributeId,
     );
 
+    const mounted = useRef(false);
+
     const {
       name: customModelAttributeName,
       validations: { required: attributeRequired } = {},
@@ -188,8 +190,17 @@
     };
 
     useEffect(() => {
-      B.triggerEvent('onChange', currentValue);
+      if (mounted.current) {
+        B.triggerEvent('onChange', currentValue);
+      }
     }, [currentValue]);
+
+    useEffect(() => {
+      mounted.current = true;
+      return () => {
+        mounted.current = false;
+      };
+    }, []);
 
     B.defineFunction('Clear', () => setCurrentValue(''));
     B.defineFunction('Enable', () => setIsDisabled(false));
