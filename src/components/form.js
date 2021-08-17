@@ -234,11 +234,15 @@
             data: records,
             error: err,
             refetch,
-          } = useAllQuery(modelId, {
-            filter: applyFilter,
-            skip: !applyFilter,
-            take: 1,
-          });
+          } = useAllQuery(
+            modelId,
+            {
+              filter: applyFilter,
+              skip: !applyFilter,
+              take: 1,
+            },
+            !modelId,
+          );
 
           B.defineFunction('Refetch', () => refetch());
 
