@@ -49,6 +49,7 @@
 
     B.defineFunction('Uncheck', () => setChecked(false));
     B.defineFunction('Check', () => setChecked(true));
+    B.defineFunction('Check/Uncheck', () => setChecked(prev => !prev));
 
     const handleValidation = isValid => {
       setErrorState(!isValid);
