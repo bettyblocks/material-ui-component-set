@@ -28,6 +28,10 @@
     const [propertiesValidation, setPropertiesValidation] = React.useState(
       false,
     );
+    const [
+      detailPropertiesValidation,
+      setDetailPropertiesValidation,
+    ] = React.useState(false);
     const [detailProperties, setDetailProperties] = React.useState([]);
     const getDescendantByRef = (refValue, structure) =>
       structure.reduce((acc, component) => {
@@ -8143,18 +8147,21 @@
             descendants: [
               {
                 name: 'ListItem',
+                ref: {
+                  id: '#sidebarTitle',
+                },
                 options: [
                   {
                     type: 'VARIABLE',
                     label: 'Primary text',
                     key: 'primaryText',
-                    value: ['Title'],
+                    value: [''],
                   },
                   {
                     type: 'VARIABLE',
                     label: 'Secondary text',
                     key: 'secondaryText',
-                    value: ['Secondary text'],
+                    value: ['Your text here'],
                   },
                   {
                     type: 'COLOR',
@@ -14429,7 +14436,7 @@
                                     },
                                   },
                                   {
-                                    value: false,
+                                    value: true,
                                     label: 'Auto load on scroll',
                                     key: 'autoLoadOnScroll',
                                     type: 'TOGGLE',
@@ -14443,7 +14450,7 @@
                                     },
                                   },
                                   {
-                                    value: '50',
+                                    value: '25',
                                     label: 'Number of records to auto load',
                                     key: 'autoLoadTakeAmount',
                                     type: 'CUSTOM',
@@ -14710,9 +14717,135 @@
       },
     ];
 
+    const errorAlert = (ref, errorText) => ({
+      name: 'Alert',
+      ref: {
+        id: ref,
+      },
+      options: [
+        {
+          value: false,
+          label: 'Toggle visibility',
+          key: 'visible',
+          type: 'TOGGLE',
+          configuration: {
+            as: 'VISIBILITY',
+          },
+        },
+        {
+          type: 'VARIABLE',
+          label: 'Body text',
+          key: 'bodyText',
+          value: [errorText],
+          configuration: {
+            dependsOn: 'model',
+          },
+        },
+        {
+          label: 'Allow to overwrite by the server response',
+          key: 'allowTextServerResponse',
+          value: false,
+          type: 'TOGGLE',
+        },
+        {
+          type: 'VARIABLE',
+          label: 'Title text',
+          key: 'titleText',
+          value: ['Error'],
+        },
+        {
+          label: 'Allow to overwrite by the server response',
+          key: 'allowTitleServerResponse',
+          value: false,
+          type: 'TOGGLE',
+        },
+        {
+          value: 'White',
+          label: 'Text color',
+          key: 'textColor',
+          type: 'COLOR',
+        },
+        {
+          value: 'White',
+          label: 'Icon color',
+          key: 'iconColor',
+          type: 'COLOR',
+        },
+        {
+          value: 'Danger',
+          label: 'Background color',
+          key: 'background',
+          type: 'COLOR',
+        },
+        {
+          value: 'Transparent',
+          label: 'Border color',
+          key: 'borderColor',
+          type: 'COLOR',
+        },
+        {
+          label: 'Icon',
+          key: 'icon',
+          value: 'None',
+          type: 'CUSTOM',
+          configuration: iconConfiguration,
+        },
+        {
+          value: false,
+          label: 'Collapsable',
+          key: 'collapsable',
+          type: 'TOGGLE',
+        },
+        {
+          type: 'CUSTOM',
+          label: 'Horizontal Alignment',
+          key: 'horizontalAlignment',
+          value: 'flex-start',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Left', value: 'flex-start' },
+              { name: 'Center', value: 'center' },
+              { name: 'Right', value: 'flex-end' },
+            ],
+            condition: {
+              type: 'HIDE',
+              option: 'collapsable',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'CUSTOM',
+          label: 'Vertical Alignment',
+          key: 'verticalAlignment',
+          value: 'stretch',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Top', value: 'flex-start' },
+              { name: 'Center', value: 'center' },
+              { name: 'Bottom', value: 'flex-end' },
+              { name: 'Justified', value: 'stretch' },
+            ],
+          },
+        },
+        {
+          value: ['M', 'M', 'M', 'M'],
+          label: 'Outer space',
+          key: 'outerSpacing',
+          type: 'SIZES',
+        },
+      ],
+      descendants: [],
+    });
+
     return (
       <>
-        <Header title="Configure data table" onClose={close} />
+        <Header title="Configure Backoffice" onClose={close} />
         <Content>
           <Field
             label="Model"
@@ -14731,7 +14864,7 @@
             />
           </Field>
           <Field
-            label="Columns"
+            label="Properties shown in overview"
             error={
               propertiesValidation && (
                 <Text color="#e82600">Selecting a property is required</Text>
@@ -14745,6 +14878,15 @@
                 setProperties(value);
               }}
             />
+          </Field>
+          <Field
+            label="Properties shown in detailview and forms"
+            error={
+              detailPropertiesValidation && (
+                <Text color="#e82600">Selecting a property is required</Text>
+              )
+            }
+          >
             <PropertiesSelector
               modelId={modelId}
               value={detailProperties}
@@ -14756,9 +14898,9 @@
         </Content>
         <Footer
           onSave={() => {
-            if (!modelId || !properties.length) {
+            if (!modelId || !properties.length || !detailProperties.length) {
               setModelValidation(!modelId);
-
+              setDetailPropertiesValidation(!detailProperties.length);
               setPropertiesValidation(!properties.length);
               return;
             }
@@ -14766,7 +14908,51 @@
             const prop = data.model.properties.find(
               property => property.name === 'id',
             );
+            const sideBar = getDescendantByRef(
+              '#sidebarTitle',
+              prefabStructure,
+            );
+            sideBar.options[0].value = [
+              `${data.model.label.charAt(0).toUpperCase() +
+                data.model.label.slice(1)}`,
+            ];
             const interactions = [
+              {
+                name: 'Show',
+                sourceEvent: 'OnActionError',
+                ref: {
+                  targetComponentId: '#createError',
+                  sourceComponentId: '#createForm',
+                },
+                type: 'Custom',
+              },
+              {
+                name: 'Show',
+                sourceEvent: 'OnActionError',
+                ref: {
+                  targetComponentId: '#editError',
+                  sourceComponentId: '#editForm',
+                },
+                type: 'Custom',
+              },
+              {
+                name: 'Hide',
+                sourceEvent: 'OnSubmit',
+                ref: {
+                  targetComponentId: '#editError',
+                  sourceComponentId: '#editForm',
+                },
+                type: 'Custom',
+              },
+              {
+                name: 'Hide',
+                sourceEvent: 'OnSubmit',
+                ref: {
+                  targetComponentId: '#createError',
+                  sourceComponentId: '#createForm',
+                },
+                type: 'Custom',
+              },
               {
                 name: 'setCurrentRecord',
                 sourceEvent: 'OnRowClick',
@@ -14900,6 +15086,15 @@
                 name: 'Refetch',
                 sourceEvent: 'onActionSuccess',
                 ref: {
+                  targetComponentId: '#detailsDataContainer',
+                  sourceComponentId: '#editForm',
+                },
+                type: 'Custom',
+              },
+              {
+                name: 'Refetch',
+                sourceEvent: 'onActionSuccess',
+                ref: {
                   targetComponentId: '#dataTable',
                   sourceComponentId: '#deleteButton',
                 },
@@ -14987,7 +15182,7 @@
                 type: 'Custom',
               },
             ];
-            // Details
+
             const dataTable = getDescendantByRef('#dataTable', prefabStructure);
             dataTable.options[0].value = modelId;
             properties.filter(property => property.kind !== 'SERIAL');
@@ -15102,9 +15297,7 @@
             );
 
             detailsDataContainer.descendants.push({ ...detailsRecordCard });
-            // End Details
 
-            // Create
             const createTab = getDescendantByRef('#createTab', prefabStructure);
             const createCard = tabCard(`${data.model.label}`);
             const createRecordForm = createForm();
@@ -15549,12 +15742,14 @@
                   descendants: [],
                 },
               ]),
+              errorAlert(
+                '#createError',
+                `Something went wrong while creating new record`,
+              ),
               ...createCard,
             ];
             createTab.descendants = [...createRecordForm];
-            // End Create
 
-            // Edit
             const editTab = getDescendantByRef('#editTab', prefabStructure);
             const editCard = tabCard(`${data.model.label}`);
             const editRecordForm = editForm();
@@ -15988,6 +16183,10 @@
                   descendants: [],
                 },
               ]),
+              errorAlert(
+                '#editError',
+                `Something went wrong while updating record`,
+              ),
               ...editCard,
             ];
             editTab.descendants[0].descendants[0].descendants[0].descendants = [
