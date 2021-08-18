@@ -1,7 +1,7 @@
 (() => ({
   name: 'Back office',
   icon: 'DrawerIcon',
-  type: 'page',
+  // type: 'page',
   description: '--',
   detail: '--',
   previewUrl: 'https://preview.betty.app/app-bar',
@@ -4952,7 +4952,7 @@
                 {
                   label: 'Currency',
                   key: 'adornment',
-                  value: 'Ã¢â€šÂ¬',
+                  value: '',
                   type: 'TEXT',
                 },
                 {
@@ -15299,19 +15299,18 @@
                 propertyInput.label !== 'Id',
             );
             detailsRecordCard.descendants[1].descendants = makeDetailsArray(
-              detailsInfoProperties,
+              detailProperties,
             );
-
             detailsDataContainer.descendants.push({ ...detailsRecordCard });
 
             const createTab = getDescendantByRef('#createTab', prefabStructure);
             const createCard = tabCard(`${data.model.label}`);
             const createRecordForm = createForm();
             createCard.descendants[1].descendants = makeInputDescendantsArray(
-              detailProperties,
-            ).filter(item => item !== undefined);
+              detailsInfoProperties,
+            );
             newPrefab.actions[1].events[0].options.modelId = modelId;
-            newPrefab.actions[1].events[0].options.assign = detailProperties.map(
+            newPrefab.actions[1].events[0].options.assign = detailsInfoProperties.map(
               property => ({
                 leftHandSide: property.id[0],
                 ref: {
@@ -15760,7 +15759,7 @@
             const editCard = tabCard(`${data.model.label}`);
             const editRecordForm = editForm();
             editCard.descendants[1].descendants = makeInputDescendantsArray(
-              detailProperties,
+              detailsInfoProperties,
               'edit',
             ).filter(item => item !== undefined);
             editRecordForm.descendants = [
@@ -16199,7 +16198,7 @@
               ...editRecordForm,
             ];
 
-            newPrefab.actions[2].events[0].options.assign = detailProperties.map(
+            newPrefab.actions[2].events[0].options.assign = detailsInfoProperties.map(
               property => ({
                 leftHandSide: property.id[0],
                 ref: {
@@ -16211,7 +16210,7 @@
               }),
             );
 
-            newPrefab.actions[0].events[0].options.assign = detailProperties.map(
+            newPrefab.actions[0].events[0].options.assign = detailsInfoProperties.map(
               property => ({
                 leftHandSide: property.id[0],
                 ref: {
