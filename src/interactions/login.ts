@@ -9,10 +9,6 @@ interface Page {
   url: string;
 }
 
-interface History {
-  push(url: string): string;
-}
-
 function login({
   event,
   redirectTo,
@@ -26,6 +22,6 @@ function login({
   if (isValid) {
     localStorage.setItem('TOKEN', jwtToken);
     localStorage.setItem('REFRESH_TOKEN', refreshToken);
-    history.push(url);
+    window.location.href = url;
   }
 }
