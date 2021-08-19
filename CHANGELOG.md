@@ -1,3 +1,39 @@
+## [1.162.6](https://github.com/bettyblocks/material-ui-component-set/compare/v1.162.5...v1.162.6) (2021-08-11)
+
+
+### Bug Fixes
+
+* add missing star outline icon ([78bec82](https://github.com/bettyblocks/material-ui-component-set/commit/78bec82e5ad723ce5caca2ec96432b0a7f78f3f4))
+
+## [1.162.5](https://github.com/bettyblocks/material-ui-component-set/compare/v1.162.4...v1.162.5) (2021-08-09)
+
+
+### Bug Fixes
+
+* remove redundant classnames in form ([42d6461](https://github.com/bettyblocks/material-ui-component-set/commit/42d6461c15231339461dbb79093d90cb0d9753cd))
+* remove redundant classnames in runtime version as well ([56467a8](https://github.com/bettyblocks/material-ui-component-set/commit/56467a87f6f9537b2d5e3b995d3d2383963daca9))
+
+## [1.162.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.162.3...v1.162.4) (2021-08-09)
+
+
+### Bug Fixes
+
+* autocomplete disabled option ([e24ec4d](https://github.com/bettyblocks/material-ui-component-set/commit/e24ec4d35a5b387e5c7a96def12365f830575fbe))
+
+## [1.162.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.162.2...v1.162.3) (2021-08-06)
+
+
+### Bug Fixes
+
+* overflow legend in text field component ([14ee294](https://github.com/bettyblocks/material-ui-component-set/commit/14ee29418a321a46ebc304de57ed14750fa9652e))
+
+## [1.162.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.162.1...v1.162.2) (2021-08-05)
+
+
+### Bug Fixes
+
+* update package manager info ([2c31a94](https://github.com/bettyblocks/material-ui-component-set/commit/2c31a94a5930a2fb61fa66f7323075cd93d4b952))
+
 ## [1.162.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.162.0...v1.162.1) (2021-08-04)
 
 
