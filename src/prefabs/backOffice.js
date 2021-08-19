@@ -1,7 +1,7 @@
 (() => ({
   name: 'Back office',
   icon: 'DrawerIcon',
-  // type: 'page',
+  type: 'page',
   description: '--',
   detail: '--',
   previewUrl: 'https://preview.betty.app/app-bar',
