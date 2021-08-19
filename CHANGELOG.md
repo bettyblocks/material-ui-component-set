@@ -1,3 +1,10 @@
+## [1.164.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.164.1...v1.164.2) (2021-08-19)
+
+
+### Bug Fixes
+
+* textfield fires onchange Trigger on first render ([933e481](https://github.com/bettyblocks/material-ui-component-set/commit/933e4816e2f9c455ea06e970e0dac826d1efb940))
+
 ## [1.164.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.164.0...v1.164.1) (2021-08-19)
 
 
