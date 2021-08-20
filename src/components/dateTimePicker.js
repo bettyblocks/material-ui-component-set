@@ -83,7 +83,7 @@
         datevalue = convertToDate(date);
       }
       B.triggerEvent('onChange', datevalue);
-      setSelectedDate(datevalue);
+      setSelectedDate(date);
     };
 
     const setDefaultDate = (defaultFormat, givenFormat) => {
@@ -116,7 +116,6 @@
         format = dateFormat || 'dd/MM/yyyy';
 
         setDefaultDate('yyyy-MM-dd', format);
-
         resultString = isValidDate(selectedDate)
           ? DateFns.format(selectedDate, 'yyyy-MM-dd')
           : null;
