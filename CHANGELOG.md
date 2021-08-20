@@ -1,3 +1,15 @@
+# [1.165.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.164.2...v1.165.0) (2021-08-20)
+
+
+### Bug Fixes
+
+* rename setLocale to setLanguage for better understanding ([6bcff37](https://github.com/bettyblocks/material-ui-component-set/commit/6bcff375beca851541e48d3b2e0159644e583635))
+
+
+### Features
+
+* **PAGE-542:** add global interaction for setting locale ([3de1c5f](https://github.com/bettyblocks/material-ui-component-set/commit/3de1c5f8326661852afa98bbe81936a4ca46fadc))
+
 ## [1.164.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.164.1...v1.164.2) (2021-08-19)
 
 
