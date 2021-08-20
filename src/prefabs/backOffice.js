@@ -2,11 +2,13 @@
   name: 'Back office',
   icon: 'DrawerIcon',
   type: 'page',
-  description: '--',
-  detail: '--',
-  previewUrl: 'https://preview.betty.app/app-bar',
+  description:
+    'This page contains a datatable and all you need to manage your records.',
+  detail:
+    'In this ready to use Data Table, it is possible to create, display (read), update and delete records. These functionalities are shown in a slide-out panel.',
+  previewUrl: 'https://preview.betty.app/back-office',
   previewImage:
-    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_App_Bar.jpg',
+    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_Back_Office.jpg',
   category: 'LAYOUT',
   beforeCreate: ({
     components: {
@@ -15215,7 +15217,7 @@
                     type: 'TOGGLE',
                     label: 'Sortable',
                     key: 'sortable',
-                    value: false,
+                    value: true,
                   },
                   {
                     type: 'VARIABLE',
