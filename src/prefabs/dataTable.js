@@ -50,12 +50,17 @@
               // Remove this filter when working on PAGE-534
               let newProperty = property;
               const inheritFormatKinds = [
-                'DATE_TIME',
                 'DATE',
-                'TIME',
-                'INTEGER',
+                'DATE_EXPRESSION',
+                'DATE_TIME',
+                'DATE_TIME_EXPRESSION',
                 'DECIMAL',
+                'DECIMAL_EXPRESSION',
+                'INTEGER',
+                'INTEGER_EXPRESSION',
                 'PRICE',
+                'PRICE_EXPRESSION',
+                'TIME',
               ];
               if (inheritFormatKinds.includes(property.kind)) {
                 newProperty = {
