@@ -160,7 +160,7 @@
     "@babel/helper-validator-identifier" "^7.14.9"
     to-fast-properties "^2.0.0"
 
-"@betty-blocks/cli@^23.48.0":
+"@betty-blocks/cli@^23.50.0":
   version "23.50.0"
   resolved "https://registry.yarnpkg.com/@betty-blocks/cli/-/cli-23.50.0.tgz#7c16badc3488ad9f77babf9d2c21acd97cc0e2f4"
   integrity sha512-bG6AqLLjxLEH/rJgPCvJHcDoTyiO+Em5jFlOXCKZ9GVJGFVoiMSOrobXjg1dW7JKiAo+8wyMpo0cV1wotHu0ug==
@@ -5707,14 +5707,6 @@ js-yaml@^3.13.0:
   version "3.13.1"
   resolved "https://registry.npmjs.org/js-yaml/-/js-yaml-3.13.1.tgz"
   integrity sha512-YfbcO7jXDdyj0DGxYVSlSeQNHbD7XPWvrVWeVUujrQEoZzWJIRrCPoyk6kL6IAjAG2IolMK4T0hNUe0HOUs5Jw==
-  dependencies:
-    argparse "^1.0.7"
-    esprima "^4.0.0"
-
-js-yaml@^3.13.1, js-yaml@^3.14.0:
-  version "3.14.1"
-  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.14.1.tgz#dae812fdb3825fa306609a8717383c50c36a0537"
-  integrity sha512-okMH7OXXJ7YrN9Ok3/SXrnu4iX9yOk+25nqX4imS2npuvTYDmo/QEZoqwZkYaIDk3jVvBOTOIEgEhaLOynBS9g==
   dependencies:
     argparse "^1.0.7"
     esprima "^4.0.0"
