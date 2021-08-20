@@ -3086,8 +3086,8 @@
                   },
                 },
                 {
-                  label: 'Min length',
-                  key: 'minlength',
+                  label: 'Min value',
+                  key: 'minvalue',
                   value: '',
                   type: 'NUMBER',
                   configuration: {
@@ -3100,8 +3100,8 @@
                   },
                 },
                 {
-                  label: 'Max length',
-                  key: 'maxlength',
+                  label: 'Max value',
+                  key: 'maxvalue',
                   value: '',
                   type: 'NUMBER',
                   configuration: {
@@ -3142,9 +3142,9 @@
                   },
                 },
                 {
-                  value: ['This value is too short'],
-                  label: 'Value too short message',
-                  key: 'validationTooShort',
+                  value: ['This value is below the set minimum'],
+                  label: 'Value below minimum message',
+                  key: 'validationBelowMinimum',
                   type: 'VARIABLE',
                   configuration: {
                     condition: {
@@ -3156,9 +3156,9 @@
                   },
                 },
                 {
-                  value: ['This value is too long'],
-                  label: 'Value too long message',
-                  key: 'validationTooLong',
+                  value: ['This value is above the set maximum'],
+                  label: 'Value above maximun',
+                  key: 'validationAboveMaximum',
                   type: 'VARIABLE',
                   configuration: {
                     condition: {
