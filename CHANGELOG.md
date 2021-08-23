@@ -1,3 +1,58 @@
+## [1.165.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.165.0...v1.165.1) (2021-08-20)
+
+
+### Bug Fixes
+
+* send US date format to server in the right way ([8a47b62](https://github.com/bettyblocks/material-ui-component-set/commit/8a47b62d942957d4dcec61ffed1f4f56e5fe6a9e))
+
+# [1.165.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.164.2...v1.165.0) (2021-08-20)
+
+
+### Bug Fixes
+
+* rename setLocale to setLanguage for better understanding ([6bcff37](https://github.com/bettyblocks/material-ui-component-set/commit/6bcff375beca851541e48d3b2e0159644e583635))
+
+
+### Features
+
+* **PAGE-542:** add global interaction for setting locale ([3de1c5f](https://github.com/bettyblocks/material-ui-component-set/commit/3de1c5f8326661852afa98bbe81936a4ca46fadc))
+
+## [1.164.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.164.1...v1.164.2) (2021-08-19)
+
+
+### Bug Fixes
+
+* textfield fires onchange Trigger on first render ([933e481](https://github.com/bettyblocks/material-ui-component-set/commit/933e4816e2f9c455ea06e970e0dac826d1efb940))
+
+## [1.164.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.164.0...v1.164.1) (2021-08-19)
+
+
+### Bug Fixes
+
+* date picker sending date time value ([ab1c6c3](https://github.com/bettyblocks/material-ui-component-set/commit/ab1c6c3cbdb4847d2d59b4375aaab573ba78291f))
+* swapped month and day ([5d70dbf](https://github.com/bettyblocks/material-ui-component-set/commit/5d70dbfd80efa047456cbcf3a1481aa1944d4c9c))
+
+# [1.164.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.163.0...v1.164.0) (2021-08-18)
+
+
+### Features
+
+* inherit datatable beforecreate formatting for expressions ([ff4cc80](https://github.com/bettyblocks/material-ui-component-set/commit/ff4cc80b0cdc2234b91ce3c94b5306d05db7e914))
+
+# [1.163.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.162.6...v1.163.0) (2021-08-13)
+
+
+### Features
+
+* add min and max value to number input ([ab566d4](https://github.com/bettyblocks/material-ui-component-set/commit/ab566d4948be40f2f0e2ccbdf252ddde78e42567))
+
+## [1.162.6](https://github.com/bettyblocks/material-ui-component-set/compare/v1.162.5...v1.162.6) (2021-08-11)
+
+
+### Bug Fixes
+
+* add missing star outline icon ([78bec82](https://github.com/bettyblocks/material-ui-component-set/commit/78bec82e5ad723ce5caca2ec96432b0a7f78f3f4))
+
 ## [1.162.5](https://github.com/bettyblocks/material-ui-component-set/compare/v1.162.4...v1.162.5) (2021-08-09)
 
 
