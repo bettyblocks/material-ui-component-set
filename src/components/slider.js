@@ -62,6 +62,10 @@
     }
 
     useEffect(() => {
+      B.triggerEvent('onChange', currentValue.toString());
+    }, [currentValue]);
+
+    useEffect(() => {
       if (isDev) {
         setCurrentValue(parseInt(defaultValue, 10) || 0);
       }
