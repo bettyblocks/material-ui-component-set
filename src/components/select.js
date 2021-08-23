@@ -144,27 +144,30 @@
 
     const completeFilter = deepMerge(filter, interactionFilters);
 
-    const { loading, error, data, refetch } = useAllQuery(model, {
-      filter: completeFilter,
-      skip: !model,
-      take: 50,
-      variables: {
-        ...(orderBy ? { sort: { relation: sort } } : {}),
+    const { loading, error, data, refetch } = useAllQuery(
+      model,
+      {
+        filter: completeFilter,
+        take: 50,
+        variables: {
+          ...(orderBy ? { sort: { relation: sort } } : {}),
+        },
+        onCompleted(res) {
+          const hasResult = res && res.results && res.results.length > 0;
+          if (hasResult) {
+            B.triggerEvent('onSuccess', res.results);
+          } else {
+            B.triggerEvent('onNoResults');
+          }
+        },
+        onError(resp) {
+          if (!displayError) {
+            B.triggerEvent('onError', resp);
+          }
+        },
       },
-      onCompleted(res) {
-        const hasResult = res && res.results && res.results.length > 0;
-        if (hasResult) {
-          B.triggerEvent('onSuccess', res.results);
-        } else {
-          B.triggerEvent('onNoResults');
-        }
-      },
-      onError(resp) {
-        if (!displayError) {
-          B.triggerEvent('onError', resp);
-        }
-      },
-    });
+      !model,
+    );
 
     useEffect(() => {
       if (mounted.current) {

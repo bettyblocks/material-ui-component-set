@@ -235,27 +235,31 @@
         const completeFilter = deepMerge(newFilter, interactionFilters);
         const where = useFilter(completeFilter);
 
-        const { loading, error, data, refetch } = useAllQuery(model, {
-          rawFilter: where,
-          skip: !model || page ? (page - 1) * rowsPerPage : 0,
-          take: rowsPerPage,
-          variables: {
-            ...(orderByPath ? { sort: { relation: sort } } : {}),
+        const { loading, error, data, refetch } = useAllQuery(
+          model,
+          {
+            rawFilter: where,
+            skip: page ? (page - 1) * rowsPerPage : 0,
+            take: rowsPerPage,
+            variables: {
+              ...(orderByPath ? { sort: { relation: sort } } : {}),
+            },
+            onCompleted(res) {
+              const hasResult = res && res.results && res.results.length > 0;
+              if (hasResult) {
+                B.triggerEvent('onSuccess', res.results);
+              } else {
+                B.triggerEvent('onNoResults');
+              }
+            },
+            onError(resp) {
+              if (!displayError) {
+                B.triggerEvent('onError', resp);
+              }
+            },
           },
-          onCompleted(res) {
-            const hasResult = res && res.results && res.results.length > 0;
-            if (hasResult) {
-              B.triggerEvent('onSuccess', res.results);
-            } else {
-              B.triggerEvent('onNoResults');
-            }
-          },
-          onError(resp) {
-            if (!displayError) {
-              B.triggerEvent('onError', resp);
-            }
-          },
-        });
+          !model,
+        );
 
         useEffect(() => {
           if (isDev) {

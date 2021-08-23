@@ -89,27 +89,30 @@
           }, {})
         : {};
 
-    const { loading, error: err, data, refetch } = useAllQuery(model, {
-      skip: !model,
-      filter,
-      take: 50,
-      variables: {
-        ...(orderBy ? { sort: { relation: sort } } : {}),
+    const { loading, error: err, data, refetch } = useAllQuery(
+      model,
+      {
+        filter,
+        take: 50,
+        variables: {
+          ...(orderBy ? { sort: { relation: sort } } : {}),
+        },
+        onCompleted(res) {
+          const hasResult = res && res.result && res.result.length > 0;
+          if (hasResult) {
+            B.triggerEvent('onSuccess', res.results);
+          } else {
+            B.triggerEvent('onNoResults');
+          }
+        },
+        onError(resp) {
+          if (!displayError) {
+            B.triggerEvent('onError', resp);
+          }
+        },
       },
-      onCompleted(res) {
-        const hasResult = res && res.result && res.result.length > 0;
-        if (hasResult) {
-          B.triggerEvent('onSuccess', res.results);
-        } else {
-          B.triggerEvent('onNoResults');
-        }
-      },
-      onError(resp) {
-        if (!displayError) {
-          B.triggerEvent('onError', resp);
-        }
-      },
-    });
+      !model,
+    );
 
     if (loading) {
       B.triggerEvent('onLoad', loading);
