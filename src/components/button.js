@@ -5,7 +5,7 @@
   orientation: 'VERTICAL',
   styleType: 'BUTTON',
   jsx: (() => {
-    const { CircularProgress, Tooltip } = window.MaterialUI.Core;
+    const { CircularProgress, Tooltip, Link } = window.MaterialUI.Core;
     const { Icons } = window.MaterialUI;
     const {
       disabled,
@@ -36,17 +36,20 @@
       useEndpoint,
     } = B;
     const isDev = env === 'dev';
-    const isAction = linkType === 'action';
+    const isAction = linkType === 'action' || !!actionId;
     const linkToExternalVariable =
       (linkToExternal && useText(linkToExternal)) || '';
     const linkToInternalVariable =
       linkTo && linkTo.id !== '' && useEndpoint(linkTo);
+    const hasInteralLink =
+      linkType === 'internal' && linkTo && linkTo.id !== '';
     const buttonContent = useText(buttonText);
     const tooltipText = useText(tooltipContent);
-
     const [isVisible, setIsVisible] = useState(visible);
     const [isLoading, setIsLoading] = useState(false);
     const [isOpen, setIsOpen] = useState(hasVisibleTooltip);
+    const [, setOptions] = useOptions();
+    const [isDisabled, setIsDisabled] = useState(disabled);
 
     const camelToSnakeCase = str =>
       str[0].toLowerCase() +
@@ -88,10 +91,20 @@
       setIsOpen(hasVisibleTooltip);
     }, [visible, hasVisibleTooltip]);
 
+    useEffect(
+      () =>
+        setOptions({
+          disabled: isDisabled,
+        }),
+      [isDisabled],
+    );
+
     B.defineFunction('Show', () => setIsVisible(true));
     B.defineFunction('Hide', () => setIsVisible(false));
     B.defineFunction('Show/Hide', () => setIsVisible(s => !s));
     B.defineFunction('Toggle loading state', () => setIsLoading(s => !s));
+    B.defineFunction('Enable', () => setIsDisabled(false));
+    B.defineFunction('Disable', () => setIsDisabled(true));
 
     useEffect(() => {
       if (loading) {
@@ -142,14 +155,11 @@
     };
 
     const anchorProps = {
-      href:
-        linkType === 'external'
-          ? getExternalHref({
-              disabled,
-              linkToExternal,
-              linkToExternalVariable,
-            })
-          : getInternalHref({ linkTo, linkToInternalVariable, disabled }),
+      href: getExternalHref({
+        disabled,
+        linkToExternal,
+        linkToExternalVariable,
+      }),
       target: openLinkToExternal,
       tabindex: isDev && -1,
       type: isDev ? 'button' : type,
@@ -159,6 +169,12 @@
         event.stopPropagation();
         actionCallback();
       },
+    };
+
+    const linkProps = {
+      href: getInternalHref({ linkTo, linkToInternalVariable, disabled }),
+      component: hasInteralLink ? B.Link : undefined,
+      endpoint: hasInteralLink ? linkTo : undefined,
     };
 
     const ButtonContent = (
@@ -197,11 +213,16 @@
       </div>
     );
 
-    const AnchorElement = (
-      <a className={classes.anchor} {...anchorProps}>
-        {ButtonContent}
-      </a>
-    );
+    const LinkComponent =
+      linkType === 'internal' ? (
+        <Link className={classes.linkComponent} {...linkProps}>
+          {ButtonContent}
+        </Link>
+      ) : (
+        <a className={classes.linkComponent} {...anchorProps}>
+          {ButtonContent}
+        </a>
+      );
 
     const ButtonElement = (
       <button type="button" className={classes.button} {...buttonProps}>
@@ -209,7 +230,8 @@
       </button>
     );
 
-    const ButtonComponent = type === 'submit' ? ButtonElement : AnchorElement;
+    const ButtonComponent =
+      type === 'submit' || isAction ? ButtonElement : LinkComponent;
 
     let tooltipProps = {
       title: tooltipText,
@@ -256,7 +278,7 @@
           pointerEvents: 'none',
         },
       },
-      anchor: {
+      linkComponent: {
         textDecoration: 'none',
         display: ({ options: { fullWidth } }) =>
           fullWidth ? 'inline-flex' : 'inline-block',

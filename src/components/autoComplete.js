@@ -59,14 +59,20 @@
       id: customModelAttributeId,
       label = [],
       value: defaultValue = [],
+      required: defaultRequired = false,
     } = customModelAttributeObj;
     const customModelAttribute = getCustomModelAttribute(
       customModelAttributeId,
     );
-    const { name: customModelAttributeName, validations: { required } = {} } =
-      customModelAttribute || {};
+    const {
+      name: customModelAttributeName,
+      validations: { required: attributeRequired } = {},
+    } = customModelAttribute || {};
+    const required = customModelAttribute ? attributeRequired : defaultRequired;
     const { kind, values: listValues } = getProperty(property) || {};
-    const [currentValue, setCurrentValue] = useState(useText(defaultValue));
+    const [currentValue, setCurrentValue] = useState(
+      useText(defaultValue, { rawValue: true }),
+    );
     const [currentLabel, setCurrentLabel] = useState('');
     const mounted = useRef(false);
     const labelText = useText(label);
@@ -90,15 +96,51 @@
     const valueProp = getProperty(valueProperty) || {};
     const [searchParam, setSearchParam] = useState('');
     const [debouncedSearchParam, setDebouncedSearchParam] = useState('');
+    const [interactionFilter, setInteractionFilter] = useState({});
+
+    const deepMerge = (...objects) => {
+      const isObject = item =>
+        item && typeof item === 'object' && !Array.isArray(item);
+
+      return objects.reduce((accumulator, object) => {
+        Object.keys(object).forEach(key => {
+          const accumulatorValue = accumulator[key];
+          const value = object[key];
+
+          if (Array.isArray(accumulatorValue) && Array.isArray(value)) {
+            accumulator[key] = accumulatorValue.concat(value);
+          } else if (isObject(accumulatorValue) && isObject(value)) {
+            accumulator[key] = deepMerge(accumulatorValue, value);
+          } else {
+            accumulator[key] = value;
+          }
+        });
+        return accumulator;
+      }, {});
+    };
+
+    const transformValue = value => {
+      if (value instanceof Date) {
+        return value.toISOString();
+      }
+
+      return value;
+    };
 
     const { filter } = options;
     const hasSearch = searchProp && searchProp.id;
     const hasValue = valueProp && valueProp.id;
 
     if (hasSearch && debouncedSearchParam !== '') {
-      filter[searchProp.id] = {
-        regex: debouncedSearchParam,
-      };
+      if (['serial', 'minutes', 'count', 'integer'].includes(searchProp.kind)) {
+        filter[searchProp.id] = {
+          eq: parseInt(debouncedSearchParam, 10),
+        };
+      } else {
+        filter[searchProp.id] = {
+          regex: debouncedSearchParam,
+        };
+      }
     } else if (hasSearch && debouncedSearchParam === '') {
       delete filter[searchProp.id];
     }
@@ -141,6 +183,38 @@
       setUseFilter({ filter });
     };
 
+    let interactionFilters = {};
+
+    const isEmptyValue = value =>
+      !value || (Array.isArray(value) && value.length === 0);
+
+    const clauses = Object.entries(interactionFilter)
+      .filter(([, { value }]) => !isEmptyValue(value))
+      .map(([, { property: propertyArg, value }]) =>
+        propertyArg.id.reduceRight((acc, field, index, arr) => {
+          const isLast = index === arr.length - 1;
+          if (isLast) {
+            return Array.isArray(value)
+              ? {
+                  _or: value.map(el => ({
+                    [field]: { [propertyArg.operator]: el },
+                  })),
+                }
+              : { [field]: { [propertyArg.operator]: value } };
+          }
+
+          return { [field]: acc };
+        }, {}),
+      );
+
+    interactionFilters =
+      clauses.length > 1 ? { _and: clauses } : clauses[0] || {};
+
+    const completeFilter = deepMerge(
+      useFilter.filter || {},
+      interactionFilters,
+    );
+
     const orderByArray = [orderBy].flat();
     const sort =
       !isDev && orderBy
@@ -155,7 +229,7 @@
     const { loading, error: err, data: { results } = {}, refetch } =
       model &&
       useAllQuery(model, {
-        ...useFilter,
+        filter: completeFilter,
         skip: 0,
         take: 50,
         variables: {
@@ -175,6 +249,12 @@
           }
         },
       });
+
+    useEffect(() => {
+      if (mounted.current) {
+        B.triggerEvent('onChange', currentValue);
+      }
+    }, [currentValue]);
 
     useEffect(() => {
       mounted.current = true;
@@ -207,6 +287,28 @@
     });
     B.defineFunction('Refetch', () => refetch());
 
+    /**
+     * @name Filter
+     * @param {Property} property
+     * @returns {Void}
+     */
+    B.defineFunction(
+      'Filter',
+      ({ event, property: propertyArg, interactionId }) => {
+        setInteractionFilter({
+          ...interactionFilter,
+          [interactionId]: {
+            property: propertyArg,
+            value: event.target ? event.target.value : transformValue(event),
+          },
+        });
+      },
+    );
+
+    B.defineFunction('ResetFilter', () => {
+      setInteractionFilter({});
+    });
+
     useEffect(() => {
       const handler = setTimeout(() => {
         setDebouncedSearchParam(searchParam);
@@ -215,10 +317,6 @@
         clearTimeout(handler);
       };
     }, [searchParam]);
-
-    useEffect(() => {
-      B.triggerEvent('onChange', currentValue);
-    });
 
     const onChange = (_, newValue) => {
       if (!valueProp || !newValue) {
@@ -330,6 +428,7 @@
       return (
         <Autocomplete
           id="combo-box-demo"
+          disabled={disabled}
           options={selectValues}
           value={currentValue}
           PopoverProps={{
@@ -395,6 +494,7 @@
 
     return (
       <Autocomplete
+        disabled={disabled}
         multiple={multiple}
         freeSolo={freeSolo}
         options={results}

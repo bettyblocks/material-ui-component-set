@@ -147,6 +147,12 @@
                         },
                       },
                       {
+                        value: true,
+                        label: 'Autocomplete',
+                        key: 'autoComplete',
+                        type: 'TOGGLE',
+                      },
+                      {
                         value: false,
                         label: 'Validation options',
                         key: 'validationOptions',
@@ -168,8 +174,8 @@
                         },
                       },
                       {
-                        label: 'Min length',
-                        key: 'minlength',
+                        label: 'Min value',
+                        key: 'minvalue',
                         value: '',
                         type: 'NUMBER',
                         configuration: {
@@ -182,8 +188,8 @@
                         },
                       },
                       {
-                        label: 'Max length',
-                        key: 'maxlength',
+                        label: 'Max value',
+                        key: 'maxvalue',
                         value: '',
                         type: 'NUMBER',
                         configuration: {
@@ -224,9 +230,9 @@
                         },
                       },
                       {
-                        value: ['This value is too short'],
-                        label: 'Value too short message',
-                        key: 'validationTooShort',
+                        value: ['This value is below the set minimum'],
+                        label: 'Value below minimum message',
+                        key: 'validationBelowMinimum',
                         type: 'VARIABLE',
                         configuration: {
                           condition: {
@@ -238,9 +244,9 @@
                         },
                       },
                       {
-                        value: ['This value is too long'],
-                        label: 'Value too long message',
-                        key: 'validationTooLong',
+                        value: ['This value is above the set maximum'],
+                        label: 'Value above maximun',
+                        key: 'validationAboveMaximum',
                         type: 'VARIABLE',
                         configuration: {
                           condition: {
@@ -5147,6 +5153,26 @@
                         value: false,
                       },
                       {
+                        type: 'TOGGLE',
+                        label: 'Disable past dates',
+                        key: 'disablePastDates',
+                        value: false,
+                      },
+                      {
+                        label: 'Language',
+                        key: 'locale',
+                        value: 'en',
+                        type: 'CUSTOM',
+                        configuration: {
+                          as: 'BUTTONGROUP',
+                          dataType: 'string',
+                          allowedInput: [
+                            { name: 'English', value: 'en' },
+                            { name: 'Dutch', value: 'nl' },
+                          ],
+                        },
+                      },
+                      {
                         value: 'MM/dd/yyyy',
                         label: 'Format',
                         key: 'dateFormat',
@@ -5189,6 +5215,20 @@
                             { name: 'Inline', value: 'inline' },
                             { name: 'Static', value: 'static' },
                           ],
+                        },
+                      },
+                      {
+                        type: 'TOGGLE',
+                        label: 'Clearable',
+                        key: 'clearable',
+                        value: false,
+                        configuration: {
+                          condition: {
+                            type: 'SHOW',
+                            option: 'variant',
+                            comparator: 'EQ',
+                            value: 'dialog',
+                          },
                         },
                       },
                       {
@@ -5471,6 +5511,26 @@
                         value: false,
                       },
                       {
+                        type: 'TOGGLE',
+                        label: 'Disable past dates',
+                        key: 'disablePastDates',
+                        value: false,
+                      },
+                      {
+                        label: 'Language',
+                        key: 'locale',
+                        value: 'en',
+                        type: 'CUSTOM',
+                        configuration: {
+                          as: 'BUTTONGROUP',
+                          dataType: 'string',
+                          allowedInput: [
+                            { name: 'English', value: 'en' },
+                            { name: 'Dutch', value: 'nl' },
+                          ],
+                        },
+                      },
+                      {
                         value: 'MM/dd/yyyy HH:mm:ss',
                         label: 'Format',
                         key: 'dateTimeFormat',
@@ -5550,6 +5610,20 @@
                             { name: 'Inline', value: 'inline' },
                             { name: 'Static', value: 'static' },
                           ],
+                        },
+                      },
+                      {
+                        type: 'TOGGLE',
+                        label: 'Clearable',
+                        key: 'clearable',
+                        value: false,
+                        configuration: {
+                          condition: {
+                            type: 'SHOW',
+                            option: 'variant',
+                            comparator: 'EQ',
+                            value: 'dialog',
+                          },
                         },
                       },
                       {
@@ -5880,6 +5954,20 @@
                             { name: 'Inline', value: 'inline' },
                             { name: 'Static', value: 'static' },
                           ],
+                        },
+                      },
+                      {
+                        type: 'TOGGLE',
+                        label: 'Clearable',
+                        key: 'clearable',
+                        value: false,
+                        configuration: {
+                          condition: {
+                            type: 'SHOW',
+                            option: 'variant',
+                            comparator: 'EQ',
+                            value: 'dialog',
+                          },
                         },
                       },
                       {
@@ -13018,6 +13106,34 @@
               option: 'showError',
               comparator: 'EQ',
               value: 'built-in',
+            },
+          },
+        },
+        {
+          value: 'default',
+          label: 'Show on load',
+          key: 'loadingType',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Message', value: 'default' },
+              { name: 'Content', value: 'showChildren' },
+            ],
+          },
+        },
+        {
+          value: ['Loading...'],
+          label: 'Loading text',
+          key: 'loadingText',
+          type: 'VARIABLE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'loadingType',
+              comparator: 'EQ',
+              value: 'default',
             },
           },
         },

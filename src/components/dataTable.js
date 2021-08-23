@@ -32,6 +32,7 @@
     const isDev = env === 'dev';
     const {
       take,
+      placeholderTake,
       size,
       model,
       authProfile,
@@ -70,11 +71,16 @@
     const [search, setSearch] = useState('');
     const [searchTerm, setSearchTerm] = useState('');
     const [showPagination, setShowPagination] = useState(false);
+    const [interactionFilter, setInteractionFilter] = useState({});
+
     const { label: searchPropertyLabel = '{property}' } =
       getProperty(searchProperty) || {};
-    const orderPropertyPath = Array.isArray(orderProperty.id)
-      ? orderProperty.id
-      : null;
+    let orderPropertyPath = null;
+    if (orderProperty && Array.isArray(orderProperty.id)) {
+      orderPropertyPath = orderProperty.id;
+    } else if (orderProperty && orderProperty.id) {
+      orderPropertyPath = [orderProperty.id];
+    }
     const [orderBy, setOrderBy] = React.useState({
       field: orderPropertyPath,
       order: orderProperty ? sortOrder : null,
@@ -144,6 +150,60 @@
       path = [searchProperty.id].flat();
     }
 
+    const transformValue = value => {
+      if (value instanceof Date) {
+        return value.toISOString();
+      }
+
+      return value;
+    };
+
+    /**
+     * @name Filter
+     * @param {Property} property
+     * @returns {Void}
+     */
+    B.defineFunction('Filter', ({ event, property, interactionId }) => {
+      setInteractionFilter({
+        ...interactionFilter,
+        [interactionId]: {
+          property,
+          value: event.target ? event.target.value : transformValue(event),
+        },
+      });
+    });
+
+    B.defineFunction('ResetFilter', () => {
+      setInteractionFilter({});
+    });
+
+    let interactionFilters = {};
+
+    const isEmptyValue = value =>
+      !value || (Array.isArray(value) && value.length === 0);
+
+    const clauses = Object.entries(interactionFilter)
+      .filter(([, { value }]) => !isEmptyValue(value))
+      .map(([, { property, value }]) =>
+        property.id.reduceRight((acc, field, index, arr) => {
+          const isLast = index === arr.length - 1;
+          if (isLast) {
+            return Array.isArray(value)
+              ? {
+                  _or: value.map(el => ({
+                    [field]: { [property.operator]: el },
+                  })),
+                }
+              : { [field]: { [property.operator]: value } };
+          }
+
+          return { [field]: acc };
+        }, {}),
+      );
+
+    interactionFilters =
+      clauses.length > 1 ? { _and: clauses } : clauses[0] || {};
+
     const searchFilter = searchProperty
       ? path.reduceRight(
           (acc, property, index) =>
@@ -159,7 +219,9 @@
         ? deepMerge(filter, searchFilter)
         : filter;
 
-    const where = useFilter(newFilter);
+    const completeFilter = deepMerge(newFilter, interactionFilters);
+
+    const where = useFilter(completeFilter);
 
     // TODO: move model to skip
     const { loading, error, data, refetch } =
@@ -246,13 +308,14 @@
 
     useEffect(() => {
       if (!isDev) return;
+      const placeholders = placeholderTake || amountOfRows;
       const repeat = () => {
         if (!repeaterRef.current) return;
         if (repeaterRef.current.previousElementSibling.children.length === 0) {
           return;
         }
         repeaterRef.current.innerHTML = '';
-        for (let i = 0, j = amountOfRows - 1; i < j; i += 1) {
+        for (let i = 0, j = placeholders - 1; i < j; i += 1) {
           repeaterRef.current.innerHTML +=
             repeaterRef.current.previousElementSibling.children[0].outerHTML;
         }

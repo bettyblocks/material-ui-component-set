@@ -99,7 +99,6 @@
         {!hideTabs && TabsHeader}
         {React.Children.map(children, (child, index) => {
           const { options: childOptions = {} } = child.props || {};
-
           return (
             <Children
               index={index}

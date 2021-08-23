@@ -3,6 +3,10 @@
   icon: 'NavbarIcon',
   type: 'page',
   description: 'Full height page with an app bar',
+  detail: 'Start with a full height page containing an App Bar on top.',
+  previewUrl: 'https://preview.betty.app/app-bar',
+  previewImage:
+    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_App_Bar.jpg',
   category: 'LAYOUT',
   structure: [
     {
@@ -44,10 +48,6 @@
                           {
                             name: 'External page',
                             value: 'external',
-                          },
-                          {
-                            name: 'Action',
-                            value: 'action',
                           },
                         ],
                         apiVersion: 'v1',
@@ -109,21 +109,6 @@
                           { name: 'New Tab', value: '_blank' },
                         ],
                       },
-                    },
-                    {
-                      configuration: {
-                        apiVersion: 'v1',
-                        condition: {
-                          comparator: 'EQ',
-                          option: 'linkType',
-                          type: 'SHOW',
-                          value: 'action',
-                        },
-                      },
-                      key: 'actionId',
-                      label: 'Action',
-                      type: 'ACTION',
-                      value: '',
                     },
                     {
                       configuration: {
@@ -1637,10 +1622,6 @@
                             name: 'External page',
                             value: 'external',
                           },
-                          {
-                            name: 'Action',
-                            value: 'action',
-                          },
                         ],
                         apiVersion: 'v1',
                         as: 'BUTTONGROUP',
@@ -1701,21 +1682,6 @@
                           { name: 'New Tab', value: '_blank' },
                         ],
                       },
-                    },
-                    {
-                      configuration: {
-                        apiVersion: 'v1',
-                        condition: {
-                          comparator: 'EQ',
-                          option: 'linkType',
-                          type: 'SHOW',
-                          value: 'action',
-                        },
-                      },
-                      key: 'actionId',
-                      label: 'Action',
-                      type: 'ACTION',
-                      value: '',
                     },
                     {
                       configuration: {
@@ -3448,7 +3414,7 @@
                   key: 'square',
                   label: 'Square',
                   type: 'TOGGLE',
-                  value: false,
+                  value: true,
                 },
                 {
                   configuration: {

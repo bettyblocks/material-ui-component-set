@@ -15,18 +15,28 @@
       params: {},
     });
     const [showValidation, setShowValidation] = React.useState(false);
+    const isInternalEndpoint = typeof endpoint === 'object';
+    const isExternalEndpoint = typeof endpoint === 'string';
+    const isValidEndpoint =
+      (isInternalEndpoint && endpoint.id !== '') ||
+      (isExternalEndpoint && endpoint !== '');
 
     React.useEffect(() => {
-      if (showValidation && endpoint.id.length) setShowValidation(false);
-    }, [endpoint, showValidation, setShowValidation]);
+      if (showValidation && isValidEndpoint) setShowValidation(false);
+    }, [isValidEndpoint, showValidation, setShowValidation]);
 
     const onSaveHandler = () => {
-      if (!endpoint.id.length) {
+      if (!isValidEndpoint) {
         setShowValidation(true);
         return;
       }
       const newPrefab = { ...prefab };
-      newPrefab.structure[0].options[3].value = endpoint;
+      if (isInternalEndpoint) {
+        newPrefab.structure[0].options[3].value = endpoint;
+      } else {
+        newPrefab.structure[0].options[2].value = 'external';
+        newPrefab.structure[0].options[4].value = [endpoint];
+      }
       save(newPrefab);
     };
 
@@ -42,11 +52,19 @@
           >
             <EndpointSelector
               value={endpoint}
+              allowExternal
               onChange={value => setEndpoint(value)}
             />
           </Field>
         </Content>
-        <Footer onClose={close} onSave={onSaveHandler} />
+        <Footer
+          onClose={close}
+          onSave={onSaveHandler}
+          onSkip={() => {
+            const newPrefab = { ...prefab };
+            save(newPrefab);
+          }}
+        />
       </>
     );
   },
@@ -80,7 +98,6 @@
             allowedInput: [
               { name: 'Internal page', value: 'internal' },
               { name: 'External page', value: 'external' },
-              { name: 'Action', value: 'action' },
             ],
           },
         },
@@ -131,36 +148,6 @@
               { name: 'Current Tab', value: '_self' },
               { name: 'New Tab', value: '_blank' },
             ],
-          },
-        },
-        {
-          value: '',
-          label: 'Action',
-          key: 'actionId',
-          type: 'ACTION',
-          configuration: {
-            apiVersion: 'v1',
-            condition: {
-              type: 'SHOW',
-              option: 'linkType',
-              comparator: 'EQ',
-              value: 'action',
-            },
-          },
-        },
-        {
-          value: [],
-          label: 'Objects to pass to action',
-          key: 'actionModels',
-          type: 'ACTION_INPUT_OBJECTS',
-          configuration: {
-            apiVersion: 'v1',
-            condition: {
-              type: 'SHOW',
-              option: 'linkType',
-              comparator: 'EQ',
-              value: 'action',
-            },
           },
         },
         {

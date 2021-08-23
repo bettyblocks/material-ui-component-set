@@ -43,13 +43,20 @@
       failureMessage: [],
     });
     const helper = useText(helperText);
-    const { id: customModelAttributeId, label = [] } = customModelAttributeObj;
+    const {
+      id: customModelAttributeId,
+      label = [],
+      required: defaultRequired = false,
+    } = customModelAttributeObj;
     const labelText = useText(label);
     const customModelAttribute = getCustomModelAttribute(
       customModelAttributeId,
     );
-    const { name: customModelAttributeName, validations: { required } = {} } =
-      customModelAttribute || {};
+    const {
+      name: customModelAttributeName,
+      validations: { required: attributeRequired } = {},
+    } = customModelAttribute || {};
+    const required = customModelAttribute ? attributeRequired : defaultRequired;
     const nameAttributeValue = useText(nameAttribute);
     const requiredText = required ? '*' : '';
     const [uploadedFileArray, setUploadedFileArray] = useState([]);
@@ -114,6 +121,12 @@
             <div>{`File: ${d.name} failed with error: ${d.url}`}</div>
           ));
 
+          setUploads({
+            ...uploads,
+            data: multiple ? data.concat(succeededData) : succeededData,
+            failureMessage: formattedFailedData,
+          });
+
           if (succeededData.length > 0) {
             B.triggerEvent('onSuccess', succeededData);
           } else {
@@ -122,11 +135,6 @@
           if (failedData.length > 0) {
             B.triggerEvent('onError', formattedFailedData);
           }
-          setUploads({
-            ...uploads,
-            data: multiple ? data.concat(succeededData) : succeededData,
-            failureMessage: formattedFailedData,
-          });
         },
       },
     });

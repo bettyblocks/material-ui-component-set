@@ -61,6 +61,12 @@
           value: false,
         },
         {
+          value: true,
+          label: 'Autocomplete',
+          key: 'autoComplete',
+          type: 'TOGGLE',
+        },
+        {
           value: [],
           label: 'Placeholder',
           key: 'placeholder',
@@ -85,6 +91,20 @@
               { name: 'Inline', value: 'inline' },
               { name: 'Static', value: 'static' },
             ],
+          },
+        },
+        {
+          type: 'TOGGLE',
+          label: 'Clearable',
+          key: 'clearable',
+          value: false,
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'variant',
+              comparator: 'EQ',
+              value: 'dialog',
+            },
           },
         },
         {

@@ -31,9 +31,21 @@
           },
         },
         {
+          value: true,
+          label: 'Autocomplete',
+          key: 'autoComplete',
+          type: 'TOGGLE',
+        },
+        {
           type: 'TOGGLE',
           label: 'Disable Toolbar',
           key: 'disableToolbar',
+          value: false,
+        },
+        {
+          type: 'TOGGLE',
+          label: 'Disable past dates',
+          key: 'disablePastDates',
           value: false,
         },
         {
@@ -93,6 +105,20 @@
               { name: 'Inline', value: 'inline' },
               { name: 'Static', value: 'static' },
             ],
+          },
+        },
+        {
+          type: 'TOGGLE',
+          label: 'Clearable',
+          key: 'clearable',
+          value: false,
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'variant',
+              comparator: 'EQ',
+              value: 'dialog',
+            },
           },
         },
         {

@@ -5,6 +5,7 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const {
+      autoComplete,
       disabled,
       error,
       placeholder,
@@ -19,12 +20,14 @@
       margin,
       helperText,
       disableToolbar,
+      disablePastDates,
       hideLabel,
       customModelAttribute: customModelAttributeObj,
       use24HourClockDateTime,
       use24HourClockTime,
       nameAttribute,
       locale,
+      clearable,
     } = options;
     const { env, getCustomModelAttribute, useText } = B;
     const {
@@ -51,18 +54,35 @@
       id: customModelAttributeId,
       label = [],
       value: defaultValue = [],
+      required: defaultRequired = false,
     } = customModelAttributeObj;
-    const strDefaultValue = useText(defaultValue);
+    const strDefaultValue = useText(defaultValue, { rawValue: true });
     const labelText = useText(label);
     const customModelAttribute = getCustomModelAttribute(
       customModelAttributeId,
     );
-    const { name: customModelAttributeName, validations: { required } = {} } =
-      customModelAttribute || {};
+    const {
+      name: customModelAttributeName,
+      validations: { required: attributeRequired } = {},
+    } = customModelAttribute || {};
+    const required = customModelAttribute ? attributeRequired : defaultRequired;
     const nameAttributeValue = useText(nameAttribute);
     const isValidDate = date => date instanceof Date && !isNaN(date);
 
+    const convertToDate = date => {
+      const dateString = `${date.getFullYear()}-${String(
+        date.getMonth() + 1,
+      ).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+
+      return dateString;
+    };
+
     const changeHandler = date => {
+      let datevalue = date;
+      if (type === 'date') {
+        datevalue = convertToDate(date);
+      }
+      B.triggerEvent('onChange', datevalue);
       setSelectedDate(date);
     };
 
@@ -96,7 +116,6 @@
         format = dateFormat || 'dd/MM/yyyy';
 
         setDefaultDate('yyyy-MM-dd', format);
-
         resultString = isValidDate(selectedDate)
           ? DateFns.format(selectedDate, 'yyyy-MM-dd')
           : null;
@@ -134,6 +153,7 @@
         name={nameAttributeValue || customModelAttributeName}
         value={selectedDate}
         size={size}
+        autoComplete={autoComplete ? 'on' : 'off'}
         classes={{ root: classes.formControl }}
         variant={variant}
         placeholder={placeholderText}
@@ -156,6 +176,7 @@
         margin={margin}
         helperText={helper}
         disableToolbar={disableToolbar}
+        disablePast={disablePastDates}
         format={format}
         PopoverProps={{
           classes: {
@@ -167,6 +188,7 @@
         }}
         ampm={!use24HourClock}
         keyboardIcon={type === 'time' ? <AccessTime /> : <Event />}
+        clearable={clearable}
       />
     );
 

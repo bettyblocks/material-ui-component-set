@@ -94,6 +94,12 @@
           type: 'NUMBER',
         },
         {
+          value: '',
+          label: 'Placeholder rows',
+          key: 'placeholderTake',
+          type: 'NUMBER',
+        },
+        {
           type: 'CUSTOM',
           label: 'Type',
           key: 'type',
@@ -165,6 +171,35 @@
               { name: 'Built in', value: 'built-in' },
               { name: 'Interaction', value: 'interaction' },
             ],
+          },
+        },
+        {
+          value: 'default',
+          label: 'Show on load',
+          key: 'loadingType',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Message', value: 'default' },
+              { name: 'Content', value: 'showChildren' },
+              { name: 'Skeleton', value: 'skeleton' },
+            ],
+          },
+        },
+        {
+          value: ['Loading...'],
+          label: 'Loading text',
+          key: 'loadingText',
+          type: 'VARIABLE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'loadingType',
+              comparator: 'EQ',
+              value: 'default',
+            },
           },
         },
       ],

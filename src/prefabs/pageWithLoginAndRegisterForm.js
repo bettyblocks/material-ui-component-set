@@ -3,6 +3,11 @@
   icon: 'LoginFormIcon',
   type: 'page',
   description: 'Page with a ready to use login form, register form and image.',
+  detail:
+    'It takes a few clicks to set up your login and register page. Connect your model to the forms and feel free to customize your image to your liking.',
+  previewUrl: 'https://preview.betty.app/login-and-register',
+  previewImage:
+    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_Login_And_Register.jpg',
   category: 'LAYOUT',
   beforeCreate: ({
     prefab,
@@ -2323,6 +2328,7 @@
                                     key: 'imageSource',
                                     type: 'VARIABLE',
                                     configuration: {
+                                      as: 'MULTILINE',
                                       condition: {
                                         type: 'SHOW',
                                         option: 'type',
@@ -2337,6 +2343,7 @@
                                     key: 'videoSource',
                                     type: 'VARIABLE',
                                     configuration: {
+                                      as: 'MULTILINE',
                                       condition: {
                                         type: 'SHOW',
                                         option: 'type',
@@ -2351,11 +2358,68 @@
                                     key: 'iframeSource',
                                     type: 'VARIABLE',
                                     configuration: {
+                                      as: 'MULTILINE',
                                       condition: {
                                         type: 'SHOW',
                                         option: 'type',
                                         comparator: 'EQ',
                                         value: 'iframe',
+                                      },
+                                    },
+                                  },
+                                  {
+                                    type: 'CUSTOM',
+                                    label: 'Link to',
+                                    key: 'linkType',
+                                    value: 'internal',
+                                    configuration: {
+                                      as: 'BUTTONGROUP',
+                                      dataType: 'string',
+                                      allowedInput: [
+                                        {
+                                          name: 'Internal page',
+                                          value: 'internal',
+                                        },
+                                        {
+                                          name: 'External page',
+                                          value: 'external',
+                                        },
+                                      ],
+                                      condition: {
+                                        type: 'SHOW',
+                                        option: 'type',
+                                        comparator: 'EQ',
+                                        value: 'img',
+                                      },
+                                    },
+                                  },
+                                  {
+                                    value: '',
+                                    label: 'Page',
+                                    key: 'linkTo',
+                                    type: 'ENDPOINT',
+                                    configuration: {
+                                      condition: {
+                                        type: 'SHOW',
+                                        option: 'linkType',
+                                        comparator: 'EQ',
+                                        value: 'internal',
+                                      },
+                                    },
+                                  },
+                                  {
+                                    value: [''],
+                                    label: 'URL',
+                                    key: 'linkToExternal',
+                                    type: 'VARIABLE',
+                                    configuration: {
+                                      placeholder:
+                                        'Starts with https:// or http://',
+                                      condition: {
+                                        type: 'SHOW',
+                                        option: 'linkType',
+                                        comparator: 'EQ',
+                                        value: 'external',
                                       },
                                     },
                                   },
@@ -2984,6 +3048,40 @@
                                             },
                                           },
                                           {
+                                            value: 'default',
+                                            label: 'Show on load',
+                                            key: 'loadingType',
+                                            type: 'CUSTOM',
+                                            configuration: {
+                                              as: 'BUTTONGROUP',
+                                              dataType: 'string',
+                                              allowedInput: [
+                                                {
+                                                  name: 'Message',
+                                                  value: 'default',
+                                                },
+                                                {
+                                                  name: 'Content',
+                                                  value: 'showChildren',
+                                                },
+                                              ],
+                                            },
+                                          },
+                                          {
+                                            value: ['Loading...'],
+                                            label: 'Loading text',
+                                            key: 'loadingText',
+                                            type: 'VARIABLE',
+                                            configuration: {
+                                              condition: {
+                                                type: 'SHOW',
+                                                option: 'loadingType',
+                                                comparator: 'EQ',
+                                                value: 'default',
+                                              },
+                                            },
+                                          },
+                                          {
                                             value: [
                                               '0rem',
                                               '0rem',
@@ -3550,10 +3648,6 @@
                                                           name: 'External page',
                                                           value: 'external',
                                                         },
-                                                        {
-                                                          name: 'Action',
-                                                          value: 'action',
-                                                        },
                                                       ],
                                                     },
                                                   },
@@ -3611,38 +3705,6 @@
                                                           value: '_blank',
                                                         },
                                                       ],
-                                                    },
-                                                  },
-                                                  {
-                                                    value: '',
-                                                    label: 'Action',
-                                                    key: 'actionId',
-                                                    type: 'ACTION',
-                                                    configuration: {
-                                                      apiVersion: 'v1',
-                                                      condition: {
-                                                        type: 'SHOW',
-                                                        option: 'linkType',
-                                                        comparator: 'EQ',
-                                                        value: 'action',
-                                                      },
-                                                    },
-                                                  },
-                                                  {
-                                                    value: [],
-                                                    label:
-                                                      'Objects to pass to action',
-                                                    key: 'actionModels',
-                                                    type:
-                                                      'ACTION_INPUT_OBJECTS',
-                                                    configuration: {
-                                                      apiVersion: 'v1',
-                                                      condition: {
-                                                        type: 'SHOW',
-                                                        option: 'linkType',
-                                                        comparator: 'EQ',
-                                                        value: 'action',
-                                                      },
                                                     },
                                                   },
                                                   {
@@ -4751,6 +4813,40 @@
                                             },
                                           },
                                           {
+                                            value: 'default',
+                                            label: 'Show on load',
+                                            key: 'loadingType',
+                                            type: 'CUSTOM',
+                                            configuration: {
+                                              as: 'BUTTONGROUP',
+                                              dataType: 'string',
+                                              allowedInput: [
+                                                {
+                                                  name: 'Message',
+                                                  value: 'default',
+                                                },
+                                                {
+                                                  name: 'Content',
+                                                  value: 'showChildren',
+                                                },
+                                              ],
+                                            },
+                                          },
+                                          {
+                                            value: ['Loading...'],
+                                            label: 'Loading text',
+                                            key: 'loadingText',
+                                            type: 'VARIABLE',
+                                            configuration: {
+                                              condition: {
+                                                type: 'SHOW',
+                                                option: 'loadingType',
+                                                comparator: 'EQ',
+                                                value: 'default',
+                                              },
+                                            },
+                                          },
+                                          {
                                             value: [
                                               '0rem',
                                               '0rem',
@@ -5655,6 +5751,12 @@
                       },
                     },
                     {
+                      value: true,
+                      label: 'Autocomplete',
+                      key: 'autoComplete',
+                      type: 'TOGGLE',
+                    },
+                    {
                       value: false,
                       label: 'Validation options',
                       key: 'validationOptions',
@@ -6500,6 +6602,12 @@
                       },
                     },
                     {
+                      value: true,
+                      label: 'Autocomplete',
+                      key: 'autoComplete',
+                      type: 'TOGGLE',
+                    },
+                    {
                       value: false,
                       label: 'Validation options',
                       key: 'validationOptions',
@@ -7066,6 +7174,12 @@
                       configuration: {
                         allowedTypes: ['string'],
                       },
+                    },
+                    {
+                      value: true,
+                      label: 'Autocomplete',
+                      key: 'autoComplete',
+                      type: 'TOGGLE',
                     },
                     {
                       value: false,
@@ -9165,6 +9279,12 @@
                       configuration: {
                         allowedTypes: ['string'],
                       },
+                    },
+                    {
+                      value: true,
+                      label: 'Autocomplete',
+                      key: 'autoComplete',
+                      type: 'TOGGLE',
                     },
                     {
                       value: false,

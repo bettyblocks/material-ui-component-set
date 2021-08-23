@@ -5,6 +5,7 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const {
+      autoComplete,
       disabled,
       error,
       multiline,
@@ -22,11 +23,15 @@
       pattern,
       minlength,
       maxlength,
+      minvalue,
+      maxvalue,
       validationTypeMismatch,
       validationPatternMismatch,
       validationValueMissing,
       validationTooLong,
       validationTooShort,
+      validationBelowMinimum,
+      validationAboveMaximum,
       hideLabel,
       customModelAttribute: customModelAttributeObj,
       nameAttribute,
@@ -57,20 +62,29 @@
       id: customModelAttributeId,
       label = [],
       value: defaultValue = [],
+      required: defaultRequired = false,
     } = customModelAttributeObj;
-    const [currentValue, setCurrentValue] = useState(useText(defaultValue));
+    const [currentValue, setCurrentValue] = useState(
+      useText(defaultValue, { rawValue: true }),
+    );
     const labelText = useText(label);
     const customModelAttribute = getCustomModelAttribute(
       customModelAttributeId,
     );
 
-    const { name: customModelAttributeName, validations: { required } = {} } =
-      customModelAttribute || {};
+    const {
+      name: customModelAttributeName,
+      validations: { required: attributeRequired } = {},
+    } = customModelAttribute || {};
+
+    const required = customModelAttribute ? attributeRequired : defaultRequired;
     const nameAttributeValue = useText(nameAttribute);
 
     const validPattern = pattern || null;
     const validMinlength = minlength || null;
     const validMaxlength = maxlength || null;
+    const validMinvalue = minvalue || null;
+    const validMaxvalue = maxvalue || null;
 
     const validationMessage = validityObject => {
       if (validityObject.customError && validationPatternMismatch) {
@@ -93,6 +107,12 @@
       }
       if (validityObject.tooShort && validationTooShort) {
         return useText(validationTooShort);
+      }
+      if (validityObject.rangeUnderflow && validationBelowMinimum) {
+        return useText(validationBelowMinimum);
+      }
+      if (validityObject.rangeOverflow && validationAboveMaximum) {
+        return useText(validationAboveMaximum);
       }
       return '';
     };
@@ -140,7 +160,9 @@
       if (afterFirstInvalidation) {
         handleValidation(validation);
       }
-      setCurrentValue(isNumberType ? numberValue : eventValue);
+      const value = isNumberType ? numberValue : eventValue;
+      setCurrentValue(value);
+      B.triggerEvent('onChange', value);
     };
 
     const blurHandler = event => {
@@ -168,7 +190,11 @@
     };
 
     B.defineFunction('Clear', () => setCurrentValue(''));
+    B.defineFunction('Enable', () => setIsDisabled(false));
     B.defineFunction('Disable', () => setIsDisabled(true));
+    B.defineFunction('Reset', () =>
+      setCurrentValue(useText(defaultValue, { rawValue: true })),
+    );
 
     const handleClickShowPassword = () => {
       togglePassword(!showPassword);
@@ -234,6 +260,7 @@
           value={currentValue}
           type={(isDev && type === 'number') || showPassword ? 'text' : type}
           multiline={multiline}
+          autoComplete={autoComplete ? 'on' : 'off'}
           rows={rows}
           label={labelText}
           placeholder={placeholderText}
@@ -269,6 +296,8 @@
             pattern: validPattern,
             minlength: validMinlength,
             maxlength: validMaxlength,
+            min: validMinvalue,
+            max: validMaxvalue,
             tabIndex: isDev && -1,
           }}
         />
@@ -364,6 +393,7 @@
           '& legend': {
             display: ({ options: { hideLabel } }) =>
               hideLabel ? ['none', '!important'] : null,
+            overflow: 'hidden',
           },
           '& input': {
             '&::placeholder': {
