@@ -141,11 +141,10 @@
 
     const completeFilter = deepMerge(filter, interactionFilters);
 
-    const { loading, error, data, refetch } =
-      model &&
-      useAllQuery(model, {
+    const { loading, error, data, refetch } = useAllQuery(
+      model,
+      {
         filter: completeFilter,
-        skip: 0,
         take: 50,
         variables: {
           ...(orderBy ? { sort: { relation: sort } } : {}),
@@ -163,7 +162,9 @@
             B.triggerEvent('onError', resp);
           }
         },
-      });
+      },
+      !model,
+    );
 
     useEffect(() => {
       if (mounted.current) {
