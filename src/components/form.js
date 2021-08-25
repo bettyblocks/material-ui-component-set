@@ -150,14 +150,17 @@
           .join(' ')
           .trim();
 
-        const FormElement = (
-          <form className={classNames || undefined}>
-            {isPristine && (
-              <span>Drag form components in the form to submit data</span>
-            )}
-            {children}
-          </form>
-        );
+        const FormElement = () => {
+          B.defineFunction('Refetch', () => {});
+          return (
+            <form className={classNames || undefined}>
+              {isPristine && (
+                <span>Drag form components in the form to submit data</span>
+              )}
+              {children}
+            </form>
+          );
+        };
 
         const FormCmp = ({ item }) => {
           const [isInvalid, setIsInvalid] = useState(false);
@@ -167,6 +170,8 @@
               B.triggerEvent('onInvalid');
             }
           };
+
+          B.defineFunction('Refetch', () => {});
 
           useEffect(() => {
             B.triggerEvent('onComponentRendered');
@@ -239,10 +244,10 @@
             modelId,
             {
               filter: applyFilter,
-              skip: !applyFilter,
+              skip: 0,
               take: 1,
             },
-            !modelId,
+            !applyFilter,
           );
 
           B.defineFunction('Refetch', () => refetch());
@@ -280,7 +285,7 @@
 
         const RuntimeForm = hasFilter ? <FormWithData /> : <FormCmp />;
 
-        return isDev ? FormElement : RuntimeForm;
+        return isDev ? <FormElement /> : RuntimeForm;
       })()}
     </div>
   ),
