@@ -1,3 +1,20 @@
+## [1.165.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.165.2...v1.165.3) (2021-08-24)
+
+
+### Bug Fixes
+
+* **page-756:** fixes data container show content on load in form ([9e8e405](https://github.com/bettyblocks/material-ui-component-set/commit/9e8e4052a2520c2af711fedcb353f3bd31c8e0a4))
+
+## [1.165.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.165.1...v1.165.2) (2021-08-23)
+
+
+### Bug Fixes
+
+* change to new skip param ([b701b49](https://github.com/bettyblocks/material-ui-component-set/commit/b701b49335e1eb9311e2eada7daee22a67cf0906))
+* prevent first page being skipped ([299e1b2](https://github.com/bettyblocks/material-ui-component-set/commit/299e1b2f7ab559919a1696141d6cea1d13c99fc9))
+* remove condition query hooks ([3ed1340](https://github.com/bettyblocks/material-ui-component-set/commit/3ed13407aee63aef810e6508e8e8b227c9939f8c))
+* undo page change ([2e79286](https://github.com/bettyblocks/material-ui-component-set/commit/2e792866767874da4a40040bda6386ca62b17521))
+
 ## [1.165.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.165.0...v1.165.1) (2021-08-20)
 
 
