@@ -1,3 +1,10 @@
+## [1.165.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.165.2...v1.165.3) (2021-08-24)
+
+
+### Bug Fixes
+
+* **page-756:** fixes data container show content on load in form ([9e8e405](https://github.com/bettyblocks/material-ui-component-set/commit/9e8e4052a2520c2af711fedcb353f3bd31c8e0a4))
+
 ## [1.165.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.165.1...v1.165.2) (2021-08-23)
 
 
