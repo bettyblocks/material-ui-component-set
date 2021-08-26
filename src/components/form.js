@@ -61,16 +61,6 @@
           }
         });
 
-        const [, setOptions] = useOptions();
-
-        B.defineFunction('setCurrentRecord', value => {
-          if (typeof value === 'number') {
-            setOptions({
-              currentRecord: value,
-            });
-          }
-        });
-
         useEffect(() => {
           mounted.current = true;
           return () => {
