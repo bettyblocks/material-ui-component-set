@@ -1,7 +1,7 @@
 (() => ({
   name: 'Page With Homepage Layout',
   icon: 'ContainerIcon',
-  type: 'page',
+  // type: 'page',
   description: 'This is a page with a static Homepage-layout.',
   category: 'LAYOUT',
   beforeCreate: ({ prefab, save }) => {
@@ -1812,7 +1812,6 @@
                                       name: 'External page',
                                       value: 'external',
                                     },
-                                    { name: 'Action', value: 'action' },
                                   ],
                                 },
                               },
@@ -1867,25 +1866,18 @@
                                 },
                               },
                               {
-                                value: '',
-                                label: 'Action',
-                                key: 'actionId',
-                                type: 'ACTION',
-                                configuration: {
-                                  apiVersion: 'v1',
-                                  condition: {
-                                    type: 'SHOW',
-                                    option: 'linkType',
-                                    comparator: 'EQ',
-                                    value: 'action',
-                                  },
-                                },
-                              },
-                              {
                                 value: false,
                                 label: 'Full width',
                                 key: 'fullWidth',
                                 type: 'TOGGLE',
+                                configuration: {
+                                  condition: {
+                                    type: 'HIDE',
+                                    option: 'variant',
+                                    comparator: 'EQ',
+                                    value: 'icon',
+                                  },
+                                },
                               },
                               {
                                 label: 'Icon',
@@ -2102,7 +2094,6 @@
                                       name: 'External page',
                                       value: 'external',
                                     },
-                                    { name: 'Action', value: 'action' },
                                   ],
                                 },
                               },
@@ -2157,25 +2148,18 @@
                                 },
                               },
                               {
-                                value: '',
-                                label: 'Action',
-                                key: 'actionId',
-                                type: 'ACTION',
-                                configuration: {
-                                  apiVersion: 'v1',
-                                  condition: {
-                                    type: 'SHOW',
-                                    option: 'linkType',
-                                    comparator: 'EQ',
-                                    value: 'action',
-                                  },
-                                },
-                              },
-                              {
                                 value: false,
                                 label: 'Full width',
                                 key: 'fullWidth',
                                 type: 'TOGGLE',
+                                configuration: {
+                                  condition: {
+                                    type: 'HIDE',
+                                    option: 'variant',
+                                    comparator: 'EQ',
+                                    value: 'icon',
+                                  },
+                                },
                               },
                               {
                                 label: 'Icon',
@@ -2392,7 +2376,6 @@
                                       name: 'External page',
                                       value: 'external',
                                     },
-                                    { name: 'Action', value: 'action' },
                                   ],
                                 },
                               },
@@ -2447,25 +2430,18 @@
                                 },
                               },
                               {
-                                value: '',
-                                label: 'Action',
-                                key: 'actionId',
-                                type: 'ACTION',
-                                configuration: {
-                                  apiVersion: 'v1',
-                                  condition: {
-                                    type: 'SHOW',
-                                    option: 'linkType',
-                                    comparator: 'EQ',
-                                    value: 'action',
-                                  },
-                                },
-                              },
-                              {
                                 value: false,
                                 label: 'Full width',
                                 key: 'fullWidth',
                                 type: 'TOGGLE',
+                                configuration: {
+                                  condition: {
+                                    type: 'HIDE',
+                                    option: 'variant',
+                                    comparator: 'EQ',
+                                    value: 'icon',
+                                  },
+                                },
                               },
                               {
                                 label: 'Icon',
@@ -3510,15 +3486,8 @@
                           as: 'BUTTONGROUP',
                           dataType: 'string',
                           allowedInput: [
-                            {
-                              name: 'Internal page',
-                              value: 'internal',
-                            },
-                            {
-                              name: 'External page',
-                              value: 'external',
-                            },
-                            { name: 'Action', value: 'action' },
+                            { name: 'Internal page', value: 'internal' },
+                            { name: 'External page', value: 'external' },
                           ],
                         },
                       },
@@ -3572,25 +3541,18 @@
                         },
                       },
                       {
-                        value: '',
-                        label: 'Action',
-                        key: 'actionId',
-                        type: 'ACTION',
-                        configuration: {
-                          apiVersion: 'v1',
-                          condition: {
-                            type: 'SHOW',
-                            option: 'linkType',
-                            comparator: 'EQ',
-                            value: 'action',
-                          },
-                        },
-                      },
-                      {
                         value: false,
                         label: 'Full width',
                         key: 'fullWidth',
                         type: 'TOGGLE',
+                        configuration: {
+                          condition: {
+                            type: 'HIDE',
+                            option: 'variant',
+                            comparator: 'EQ',
+                            value: 'icon',
+                          },
+                        },
                       },
                       {
                         label: 'Icon',
@@ -4255,15 +4217,8 @@
                       as: 'BUTTONGROUP',
                       dataType: 'string',
                       allowedInput: [
-                        {
-                          name: 'Internal page',
-                          value: 'internal',
-                        },
-                        {
-                          name: 'External page',
-                          value: 'external',
-                        },
-                        { name: 'Action', value: 'action' },
+                        { name: 'Internal page', value: 'internal' },
+                        { name: 'External page', value: 'external' },
                       ],
                     },
                   },
@@ -4317,25 +4272,18 @@
                     },
                   },
                   {
-                    value: '',
-                    label: 'Action',
-                    key: 'actionId',
-                    type: 'ACTION',
-                    configuration: {
-                      apiVersion: 'v1',
-                      condition: {
-                        type: 'SHOW',
-                        option: 'linkType',
-                        comparator: 'EQ',
-                        value: 'action',
-                      },
-                    },
-                  },
-                  {
                     value: false,
                     label: 'Full width',
                     key: 'fullWidth',
                     type: 'TOGGLE',
+                    configuration: {
+                      condition: {
+                        type: 'HIDE',
+                        option: 'variant',
+                        comparator: 'EQ',
+                        value: 'icon',
+                      },
+                    },
                   },
                   {
                     label: 'Icon',
@@ -10744,7 +10692,6 @@
                                           name: 'External page',
                                           value: 'external',
                                         },
-                                        { name: 'Action', value: 'action' },
                                       ],
                                     },
                                   },
@@ -10793,30 +10740,9 @@
                                       as: 'BUTTONGROUP',
                                       dataType: 'string',
                                       allowedInput: [
-                                        {
-                                          name: 'Current Tab',
-                                          value: '_self',
-                                        },
-                                        {
-                                          name: 'New Tab',
-                                          value: '_blank',
-                                        },
+                                        { name: 'Current Tab', value: '_self' },
+                                        { name: 'New Tab', value: '_blank' },
                                       ],
-                                    },
-                                  },
-                                  {
-                                    value: '',
-                                    label: 'Action',
-                                    key: 'actionId',
-                                    type: 'ACTION',
-                                    configuration: {
-                                      apiVersion: 'v1',
-                                      condition: {
-                                        type: 'SHOW',
-                                        option: 'linkType',
-                                        comparator: 'EQ',
-                                        value: 'action',
-                                      },
                                     },
                                   },
                                   {
@@ -10824,6 +10750,14 @@
                                     label: 'Full width',
                                     key: 'fullWidth',
                                     type: 'TOGGLE',
+                                    configuration: {
+                                      condition: {
+                                        type: 'HIDE',
+                                        option: 'variant',
+                                        comparator: 'EQ',
+                                        value: 'icon',
+                                      },
+                                    },
                                   },
                                   {
                                     label: 'Icon',
@@ -12043,7 +11977,6 @@
                                           name: 'External page',
                                           value: 'external',
                                         },
-                                        { name: 'Action', value: 'action' },
                                       ],
                                     },
                                   },
@@ -12092,30 +12025,9 @@
                                       as: 'BUTTONGROUP',
                                       dataType: 'string',
                                       allowedInput: [
-                                        {
-                                          name: 'Current Tab',
-                                          value: '_self',
-                                        },
-                                        {
-                                          name: 'New Tab',
-                                          value: '_blank',
-                                        },
+                                        { name: 'Current Tab', value: '_self' },
+                                        { name: 'New Tab', value: '_blank' },
                                       ],
-                                    },
-                                  },
-                                  {
-                                    value: '',
-                                    label: 'Action',
-                                    key: 'actionId',
-                                    type: 'ACTION',
-                                    configuration: {
-                                      apiVersion: 'v1',
-                                      condition: {
-                                        type: 'SHOW',
-                                        option: 'linkType',
-                                        comparator: 'EQ',
-                                        value: 'action',
-                                      },
                                     },
                                   },
                                   {
@@ -12123,6 +12035,14 @@
                                     label: 'Full width',
                                     key: 'fullWidth',
                                     type: 'TOGGLE',
+                                    configuration: {
+                                      condition: {
+                                        type: 'HIDE',
+                                        option: 'variant',
+                                        comparator: 'EQ',
+                                        value: 'icon',
+                                      },
+                                    },
                                   },
                                   {
                                     label: 'Icon',
@@ -13342,7 +13262,6 @@
                                           name: 'External page',
                                           value: 'external',
                                         },
-                                        { name: 'Action', value: 'action' },
                                       ],
                                     },
                                   },
@@ -13391,30 +13310,9 @@
                                       as: 'BUTTONGROUP',
                                       dataType: 'string',
                                       allowedInput: [
-                                        {
-                                          name: 'Current Tab',
-                                          value: '_self',
-                                        },
-                                        {
-                                          name: 'New Tab',
-                                          value: '_blank',
-                                        },
+                                        { name: 'Current Tab', value: '_self' },
+                                        { name: 'New Tab', value: '_blank' },
                                       ],
-                                    },
-                                  },
-                                  {
-                                    value: '',
-                                    label: 'Action',
-                                    key: 'actionId',
-                                    type: 'ACTION',
-                                    configuration: {
-                                      apiVersion: 'v1',
-                                      condition: {
-                                        type: 'SHOW',
-                                        option: 'linkType',
-                                        comparator: 'EQ',
-                                        value: 'action',
-                                      },
                                     },
                                   },
                                   {
@@ -13422,6 +13320,14 @@
                                     label: 'Full width',
                                     key: 'fullWidth',
                                     type: 'TOGGLE',
+                                    configuration: {
+                                      condition: {
+                                        type: 'HIDE',
+                                        option: 'variant',
+                                        comparator: 'EQ',
+                                        value: 'icon',
+                                      },
+                                    },
                                   },
                                   {
                                     label: 'Icon',
@@ -23219,15 +23125,8 @@
                           as: 'BUTTONGROUP',
                           dataType: 'string',
                           allowedInput: [
-                            {
-                              name: 'Internal page',
-                              value: 'internal',
-                            },
-                            {
-                              name: 'External page',
-                              value: 'external',
-                            },
-                            { name: 'Action', value: 'action' },
+                            { name: 'Internal page', value: 'internal' },
+                            { name: 'External page', value: 'external' },
                           ],
                         },
                       },
@@ -23275,30 +23174,9 @@
                           as: 'BUTTONGROUP',
                           dataType: 'string',
                           allowedInput: [
-                            {
-                              name: 'Current Tab',
-                              value: '_self',
-                            },
-                            {
-                              name: 'New Tab',
-                              value: '_blank',
-                            },
+                            { name: 'Current Tab', value: '_self' },
+                            { name: 'New Tab', value: '_blank' },
                           ],
-                        },
-                      },
-                      {
-                        value: '',
-                        label: 'Action',
-                        key: 'actionId',
-                        type: 'ACTION',
-                        configuration: {
-                          apiVersion: 'v1',
-                          condition: {
-                            type: 'SHOW',
-                            option: 'linkType',
-                            comparator: 'EQ',
-                            value: 'action',
-                          },
                         },
                       },
                       {
@@ -23306,6 +23184,14 @@
                         label: 'Full width',
                         key: 'fullWidth',
                         type: 'TOGGLE',
+                        configuration: {
+                          condition: {
+                            type: 'HIDE',
+                            option: 'variant',
+                            comparator: 'EQ',
+                            value: 'icon',
+                          },
+                        },
                       },
                       {
                         label: 'Icon',
