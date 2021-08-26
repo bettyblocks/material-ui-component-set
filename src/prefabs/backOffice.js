@@ -23,7 +23,7 @@
       Button,
       Text,
     },
-    helpers: { useModelQuery },
+    helpers: { useModelQuery, useCurrentPageId },
     prefab,
     save,
     close,
@@ -41,6 +41,9 @@
       setDetailPropertiesValidation,
     ] = React.useState(false);
     const [detailProperties, setDetailProperties] = React.useState([]);
+
+    const pageId = useCurrentPageId();
+
     const getDescendantByRef = (refValue, structure) =>
       structure.reduce((acc, component) => {
         if (acc) return acc;
@@ -20290,6 +20293,7 @@
         ];
 
         const dataTable = getDescendantByRef('#dataTable', prefabStructure);
+        dataTable.options[27].value = { id: pageId, params: {} };
         dataTable.options[0].value = modelId;
         properties.filter(property => property.kind !== 'SERIAL');
         properties.forEach(property => {
