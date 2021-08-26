@@ -1,7 +1,7 @@
 (() => ({
   name: 'Page With Homepage Layout',
   icon: 'ContainerIcon',
-  // type: 'page',
+  type: 'page',
   description: 'This is a page with a static Homepage-layout.',
   category: 'LAYOUT',
   beforeCreate: ({ prefab, save }) => {
