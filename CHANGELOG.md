@@ -1,3 +1,12 @@
+## [1.165.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.165.3...v1.165.4) (2021-08-27)
+
+
+### Bug Fixes
+
+* pass refetch function ([5101efa](https://github.com/bettyblocks/material-ui-component-set/commit/5101efa067246733086a7a8b589d6ec8fa9a3aa7))
+* refetch interaction missing ([ab11a76](https://github.com/bettyblocks/material-ui-component-set/commit/ab11a76ee50ff9085d7dd20a946b2a6098c207f7))
+* use skip query param ([5706830](https://github.com/bettyblocks/material-ui-component-set/commit/5706830604063c7d43d0903f672dd6787a430ef0))
+
 ## [1.165.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.165.2...v1.165.3) (2021-08-24)
 
 
