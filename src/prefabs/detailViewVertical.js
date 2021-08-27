@@ -76,6 +76,12 @@
                 name: 'detailViewVerticalChild',
                 options: [
                   {
+                    type: 'TEXT',
+                    label: 'Label',
+                    key: 'label',
+                    value: newProperty.label,
+                  },
+                  {
                     type: 'PROPERTY',
                     label: 'Property',
                     key: 'property',

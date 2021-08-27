@@ -31,7 +31,7 @@
           onSave={() => {
             const newPrefab = { ...prefab };
 
-            newPrefab.structure[0].options[0].value = property;
+            newPrefab.structure[0].options[1].value = property;
             save(newPrefab);
           }}
           onSkip={() => {
@@ -47,6 +47,12 @@
     {
       name: 'detailViewVerticalChild',
       options: [
+        {
+          type: 'TEXT',
+          label: 'Label',
+          key: 'label',
+          value: '',
+        },
         {
           type: 'PROPERTY',
           label: 'Property',

@@ -4,7 +4,7 @@
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { property } = options;
+    const { property, label } = options;
     const { Property, getProperty } = B;
     const { kind, name } = getProperty(property) || {};
     const emptyProperty = property.id === '' || property === '';
@@ -24,10 +24,20 @@
       return <Property id={property} />;
     };
 
+    const Label = () => {
+      if (label) {
+        return label;
+      }
+      if (name) {
+        return name;
+      }
+      return 'label';
+    };
+
     return (
       <tr className={classes.parent}>
         <td className={classes.firstElement}>
-          {emptyProperty ? 'label' : name}
+          <Label />
         </td>
         <td>
           <Value />
