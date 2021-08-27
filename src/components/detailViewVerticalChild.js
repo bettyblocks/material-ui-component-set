@@ -1,6 +1,6 @@
 (() => ({
   name: 'detailViewVerticalChild',
-  type: 'STEP_COMPONENT',
+  type: 'DETAIL_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {

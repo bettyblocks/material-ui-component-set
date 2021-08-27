@@ -1,7 +1,7 @@
 (() => ({
   name: 'detailViewVertical',
   type: 'BODY_COMPONENT',
-  allowedTypes: ['STEP_COMPONENT'],
+  allowedTypes: ['DETAIL_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { GetOne, env, getIdProperty, Children } = B;
