@@ -160,7 +160,9 @@
       if (afterFirstInvalidation) {
         handleValidation(validation);
       }
-      setCurrentValue(isNumberType ? numberValue : eventValue);
+      const value = isNumberType ? numberValue : eventValue;
+      setCurrentValue(value);
+      B.triggerEvent('onChange', value);
     };
 
     const blurHandler = event => {
@@ -186,10 +188,6 @@
       setAfterFirstInvalidation(!isValid);
       handleValidation(validity);
     };
-
-    useEffect(() => {
-      B.triggerEvent('onChange', currentValue);
-    }, [currentValue]);
 
     B.defineFunction('Clear', () => setCurrentValue(''));
     B.defineFunction('Enable', () => setIsDisabled(false));

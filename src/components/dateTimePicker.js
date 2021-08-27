@@ -69,8 +69,20 @@
     const nameAttributeValue = useText(nameAttribute);
     const isValidDate = date => date instanceof Date && !isNaN(date);
 
+    const convertToDate = date => {
+      const dateString = `${date.getFullYear()}-${String(
+        date.getMonth() + 1,
+      ).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+
+      return dateString;
+    };
+
     const changeHandler = date => {
-      B.triggerEvent('onChange', date);
+      let datevalue = date;
+      if (type === 'date') {
+        datevalue = convertToDate(date);
+      }
+      B.triggerEvent('onChange', datevalue);
       setSelectedDate(date);
     };
 
@@ -104,7 +116,6 @@
         format = dateFormat || 'dd/MM/yyyy';
 
         setDefaultDate('yyyy-MM-dd', format);
-
         resultString = isValidDate(selectedDate)
           ? DateFns.format(selectedDate, 'yyyy-MM-dd')
           : null;
