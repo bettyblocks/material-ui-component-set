@@ -48,10 +48,10 @@
       name: 'detailViewVerticalChild',
       options: [
         {
-          type: 'TEXT',
+          type: 'VARIABLE',
           label: 'Label',
           key: 'label',
-          value: '',
+          value: [''],
         },
         {
           type: 'PROPERTY',

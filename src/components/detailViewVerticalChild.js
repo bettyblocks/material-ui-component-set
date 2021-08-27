@@ -5,7 +5,7 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { property, label } = options;
-    const { Property, getProperty } = B;
+    const { Property, getProperty, useText } = B;
     const { kind, name } = getProperty(property) || {};
     const emptyProperty = property.id === '' || property === '';
     const { data } = parent || {};
@@ -25,8 +25,8 @@
     };
 
     const Label = () => {
-      if (label) {
-        return label;
+      if (useText(label).length !== 0) {
+        return useText(label);
       }
       if (name) {
         return name;
