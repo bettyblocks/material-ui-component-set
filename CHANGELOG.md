@@ -1,3 +1,48 @@
+## [1.165.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.165.3...v1.165.4) (2021-08-27)
+
+
+### Bug Fixes
+
+* pass refetch function ([5101efa](https://github.com/bettyblocks/material-ui-component-set/commit/5101efa067246733086a7a8b589d6ec8fa9a3aa7))
+* refetch interaction missing ([ab11a76](https://github.com/bettyblocks/material-ui-component-set/commit/ab11a76ee50ff9085d7dd20a946b2a6098c207f7))
+* use skip query param ([5706830](https://github.com/bettyblocks/material-ui-component-set/commit/5706830604063c7d43d0903f672dd6787a430ef0))
+
+## [1.165.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.165.2...v1.165.3) (2021-08-24)
+
+
+### Bug Fixes
+
+* **page-756:** fixes data container show content on load in form ([9e8e405](https://github.com/bettyblocks/material-ui-component-set/commit/9e8e4052a2520c2af711fedcb353f3bd31c8e0a4))
+
+## [1.165.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.165.1...v1.165.2) (2021-08-23)
+
+
+### Bug Fixes
+
+* change to new skip param ([b701b49](https://github.com/bettyblocks/material-ui-component-set/commit/b701b49335e1eb9311e2eada7daee22a67cf0906))
+* prevent first page being skipped ([299e1b2](https://github.com/bettyblocks/material-ui-component-set/commit/299e1b2f7ab559919a1696141d6cea1d13c99fc9))
+* remove condition query hooks ([3ed1340](https://github.com/bettyblocks/material-ui-component-set/commit/3ed13407aee63aef810e6508e8e8b227c9939f8c))
+* undo page change ([2e79286](https://github.com/bettyblocks/material-ui-component-set/commit/2e792866767874da4a40040bda6386ca62b17521))
+
+## [1.165.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.165.0...v1.165.1) (2021-08-20)
+
+
+### Bug Fixes
+
+* send US date format to server in the right way ([8a47b62](https://github.com/bettyblocks/material-ui-component-set/commit/8a47b62d942957d4dcec61ffed1f4f56e5fe6a9e))
+
+# [1.165.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.164.2...v1.165.0) (2021-08-20)
+
+
+### Bug Fixes
+
+* rename setLocale to setLanguage for better understanding ([6bcff37](https://github.com/bettyblocks/material-ui-component-set/commit/6bcff375beca851541e48d3b2e0159644e583635))
+
+
+### Features
+
+* **PAGE-542:** add global interaction for setting locale ([3de1c5f](https://github.com/bettyblocks/material-ui-component-set/commit/3de1c5f8326661852afa98bbe81936a4ca46fadc))
+
 ## [1.164.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.164.1...v1.164.2) (2021-08-19)
 
 
