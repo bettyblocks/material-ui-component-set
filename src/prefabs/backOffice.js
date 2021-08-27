@@ -31,6 +31,7 @@
     const [modelId, setModelId] = React.useState('');
     const [properties, setProperties] = React.useState([]);
     const [modelValidation, setModelValidation] = React.useState(false);
+    const [searchValidation, setSearchValidation] = React.useState(false);
     const [stepNumber, setStepNumber] = React.useState(1);
     const [searchProperty, setSearchProperty] = React.useState('');
     const [propertiesValidation, setPropertiesValidation] = React.useState(
@@ -19926,7 +19927,16 @@
                   value={modelId}
                 />
               </Field>
-              <Field label="Overview search property">
+              <Field
+                label="Overview search property"
+                error={
+                  searchValidation && (
+                    <Text color="#e82600">
+                      Selecting a search value is required
+                    </Text>
+                  )
+                }
+              >
                 <PropertySelector
                   modelId={modelId}
                   onChange={value => {
@@ -19980,10 +19990,16 @@
         );
       },
       onSave: () => {
-        if (!modelId || !properties.length || !detailProperties.length) {
+        if (
+          !modelId ||
+          !properties.length ||
+          !detailProperties.length ||
+          !searchProperty.id
+        ) {
           setModelValidation(!modelId);
           setDetailPropertiesValidation(!detailProperties.length);
           setPropertiesValidation(!properties.length);
+          setSearchValidation(!searchProperty.id);
           return;
         }
         const newPrefab = { ...prefab };
