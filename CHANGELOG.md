@@ -1,3 +1,10 @@
+## [1.165.5](https://github.com/bettyblocks/material-ui-component-set/compare/v1.165.4...v1.165.5) (2021-08-27)
+
+
+### Bug Fixes
+
+* redirect interaction uses react router ([467559e](https://github.com/bettyblocks/material-ui-component-set/commit/467559e4854039b6e1b38125d5a80afd133a1df6))
+
 ## [1.165.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.165.3...v1.165.4) (2021-08-27)
 
 
