@@ -152,7 +152,7 @@
           );
         };
 
-        const FormCmp = ({ item }) => {
+        const FormCmp = ({ item, refetch }) => {
           const [isInvalid, setIsInvalid] = useState(false);
           const handleInvalid = () => {
             if (!isInvalid) {
@@ -161,7 +161,9 @@
             }
           };
 
-          B.defineFunction('Refetch', () => {});
+          B.defineFunction('Refetch', () => {
+            if (refetch) refetch();
+          });
 
           useEffect(() => {
             B.triggerEvent('onComponentRendered');
@@ -270,7 +272,7 @@
           if (err && displayError) return err.message;
           if (!item) return children;
 
-          return <FormCmp item={item} />;
+          return <FormCmp item={item} refetch={refetch} />;
         };
 
         const RuntimeForm = hasFilter ? <FormWithData /> : <FormCmp />;
