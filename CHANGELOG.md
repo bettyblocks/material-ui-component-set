@@ -1,3 +1,97 @@
+## [1.165.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.165.2...v1.165.3) (2021-08-24)
+
+
+### Bug Fixes
+
+* **page-756:** fixes data container show content on load in form ([9e8e405](https://github.com/bettyblocks/material-ui-component-set/commit/9e8e4052a2520c2af711fedcb353f3bd31c8e0a4))
+
+## [1.165.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.165.1...v1.165.2) (2021-08-23)
+
+
+### Bug Fixes
+
+* change to new skip param ([b701b49](https://github.com/bettyblocks/material-ui-component-set/commit/b701b49335e1eb9311e2eada7daee22a67cf0906))
+* prevent first page being skipped ([299e1b2](https://github.com/bettyblocks/material-ui-component-set/commit/299e1b2f7ab559919a1696141d6cea1d13c99fc9))
+* remove condition query hooks ([3ed1340](https://github.com/bettyblocks/material-ui-component-set/commit/3ed13407aee63aef810e6508e8e8b227c9939f8c))
+* undo page change ([2e79286](https://github.com/bettyblocks/material-ui-component-set/commit/2e792866767874da4a40040bda6386ca62b17521))
+
+## [1.165.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.165.0...v1.165.1) (2021-08-20)
+
+
+### Bug Fixes
+
+* send US date format to server in the right way ([8a47b62](https://github.com/bettyblocks/material-ui-component-set/commit/8a47b62d942957d4dcec61ffed1f4f56e5fe6a9e))
+
+# [1.165.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.164.2...v1.165.0) (2021-08-20)
+
+
+### Bug Fixes
+
+* rename setLocale to setLanguage for better understanding ([6bcff37](https://github.com/bettyblocks/material-ui-component-set/commit/6bcff375beca851541e48d3b2e0159644e583635))
+
+
+### Features
+
+* **PAGE-542:** add global interaction for setting locale ([3de1c5f](https://github.com/bettyblocks/material-ui-component-set/commit/3de1c5f8326661852afa98bbe81936a4ca46fadc))
+
+## [1.164.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.164.1...v1.164.2) (2021-08-19)
+
+
+### Bug Fixes
+
+* textfield fires onchange Trigger on first render ([933e481](https://github.com/bettyblocks/material-ui-component-set/commit/933e4816e2f9c455ea06e970e0dac826d1efb940))
+
+## [1.164.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.164.0...v1.164.1) (2021-08-19)
+
+
+### Bug Fixes
+
+* date picker sending date time value ([ab1c6c3](https://github.com/bettyblocks/material-ui-component-set/commit/ab1c6c3cbdb4847d2d59b4375aaab573ba78291f))
+* swapped month and day ([5d70dbf](https://github.com/bettyblocks/material-ui-component-set/commit/5d70dbfd80efa047456cbcf3a1481aa1944d4c9c))
+
+# [1.164.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.163.0...v1.164.0) (2021-08-18)
+
+
+### Features
+
+* inherit datatable beforecreate formatting for expressions ([ff4cc80](https://github.com/bettyblocks/material-ui-component-set/commit/ff4cc80b0cdc2234b91ce3c94b5306d05db7e914))
+
+# [1.163.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.162.6...v1.163.0) (2021-08-13)
+
+
+### Features
+
+* add min and max value to number input ([ab566d4](https://github.com/bettyblocks/material-ui-component-set/commit/ab566d4948be40f2f0e2ccbdf252ddde78e42567))
+
+## [1.162.6](https://github.com/bettyblocks/material-ui-component-set/compare/v1.162.5...v1.162.6) (2021-08-11)
+
+
+### Bug Fixes
+
+* add missing star outline icon ([78bec82](https://github.com/bettyblocks/material-ui-component-set/commit/78bec82e5ad723ce5caca2ec96432b0a7f78f3f4))
+
+## [1.162.5](https://github.com/bettyblocks/material-ui-component-set/compare/v1.162.4...v1.162.5) (2021-08-09)
+
+
+### Bug Fixes
+
+* remove redundant classnames in form ([42d6461](https://github.com/bettyblocks/material-ui-component-set/commit/42d6461c15231339461dbb79093d90cb0d9753cd))
+* remove redundant classnames in runtime version as well ([56467a8](https://github.com/bettyblocks/material-ui-component-set/commit/56467a87f6f9537b2d5e3b995d3d2383963daca9))
+
+## [1.162.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.162.3...v1.162.4) (2021-08-09)
+
+
+### Bug Fixes
+
+* autocomplete disabled option ([e24ec4d](https://github.com/bettyblocks/material-ui-component-set/commit/e24ec4d35a5b387e5c7a96def12365f830575fbe))
+
+## [1.162.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.162.2...v1.162.3) (2021-08-06)
+
+
+### Bug Fixes
+
+* overflow legend in text field component ([14ee294](https://github.com/bettyblocks/material-ui-component-set/commit/14ee29418a321a46ebc304de57ed14750fa9652e))
+
 ## [1.162.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.162.1...v1.162.2) (2021-08-05)
 
 

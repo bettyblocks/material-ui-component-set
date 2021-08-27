@@ -23,11 +23,15 @@
       pattern,
       minlength,
       maxlength,
+      minvalue,
+      maxvalue,
       validationTypeMismatch,
       validationPatternMismatch,
       validationValueMissing,
       validationTooLong,
       validationTooShort,
+      validationBelowMinimum,
+      validationAboveMaximum,
       hideLabel,
       customModelAttribute: customModelAttributeObj,
       nameAttribute,
@@ -79,6 +83,8 @@
     const validPattern = pattern || null;
     const validMinlength = minlength || null;
     const validMaxlength = maxlength || null;
+    const validMinvalue = minvalue || null;
+    const validMaxvalue = maxvalue || null;
 
     const validationMessage = validityObject => {
       if (validityObject.customError && validationPatternMismatch) {
@@ -101,6 +107,12 @@
       }
       if (validityObject.tooShort && validationTooShort) {
         return useText(validationTooShort);
+      }
+      if (validityObject.rangeUnderflow && validationBelowMinimum) {
+        return useText(validationBelowMinimum);
+      }
+      if (validityObject.rangeOverflow && validationAboveMaximum) {
+        return useText(validationAboveMaximum);
       }
       return '';
     };
@@ -148,7 +160,9 @@
       if (afterFirstInvalidation) {
         handleValidation(validation);
       }
-      setCurrentValue(isNumberType ? numberValue : eventValue);
+      const value = isNumberType ? numberValue : eventValue;
+      setCurrentValue(value);
+      B.triggerEvent('onChange', value);
     };
 
     const blurHandler = event => {
@@ -174,10 +188,6 @@
       setAfterFirstInvalidation(!isValid);
       handleValidation(validity);
     };
-
-    useEffect(() => {
-      B.triggerEvent('onChange', currentValue);
-    }, [currentValue]);
 
     B.defineFunction('Clear', () => setCurrentValue(''));
     B.defineFunction('Enable', () => setIsDisabled(false));
@@ -286,6 +296,8 @@
             pattern: validPattern,
             minlength: validMinlength,
             maxlength: validMaxlength,
+            min: validMinvalue,
+            max: validMaxvalue,
             tabIndex: isDev && -1,
           }}
         />
@@ -381,6 +393,7 @@
           '& legend': {
             display: ({ options: { hideLabel } }) =>
               hideLabel ? ['none', '!important'] : null,
+            overflow: 'hidden',
           },
           '& input': {
             '&::placeholder': {

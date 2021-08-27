@@ -226,11 +226,15 @@
           }, {})
         : {};
 
-    const { loading, error: err, data: { results } = {}, refetch } =
-      model &&
-      useAllQuery(model, {
+    const {
+      loading,
+      error: err,
+      data: { results } = {},
+      refetch,
+    } = useAllQuery(
+      model,
+      {
         filter: completeFilter,
-        skip: 0,
         take: 50,
         variables: {
           ...(orderBy ? { sort: { relation: sort } } : {}),
@@ -248,7 +252,9 @@
             B.triggerEvent('onError', resp);
           }
         },
-      });
+      },
+      !model,
+    );
 
     useEffect(() => {
       if (mounted.current) {
@@ -428,6 +434,7 @@
       return (
         <Autocomplete
           id="combo-box-demo"
+          disabled={disabled}
           options={selectValues}
           value={currentValue}
           PopoverProps={{
@@ -493,6 +500,7 @@
 
     return (
       <Autocomplete
+        disabled={disabled}
         multiple={multiple}
         freeSolo={freeSolo}
         options={results}

@@ -34,9 +34,9 @@
         const parsedLoadingText = useText(loadingText);
         const displayError = showError === 'built-in';
         const displaySuccess = showSuccess === 'built-in';
-        const empty = children.length === 0;
+        const isEmpty = children.length === 0;
         const isDev = env === 'dev';
-        const isPristine = empty && isDev;
+        const isPristine = isEmpty && isDev;
         const hasRedirect = redirect && redirect.id !== '';
         const redirectTo =
           env === 'prod' && hasRedirect && useEndpoint(redirect);
@@ -142,13 +142,15 @@
           }
         };
 
+        const classNames = [
+          isEmpty ? classes.empty : '',
+          isPristine ? classes.pristine : '',
+        ]
+          .join(' ')
+          .trim();
+
         const FormElement = (
-          <form
-            className={[
-              empty && classes.empty,
-              isPristine && classes.pristine,
-            ].join(' ')}
-          >
+          <form className={classNames || undefined}>
             {isPristine && (
               <span>Drag form components in the form to submit data</span>
             )}
@@ -192,10 +194,7 @@
                       handleSubmit(evt, callAction, item);
                     }}
                     ref={formRef}
-                    className={[
-                      empty && classes.empty,
-                      isPristine && classes.pristine,
-                    ].join(' ')}
+                    className={classNames || undefined}
                   >
                     {isPristine && (
                       <span>
@@ -230,14 +229,20 @@
 
           const applyFilter = modelId && getFilter();
 
-          const { loading: isFetching, data: records, error: err, refetch } =
-            (applyFilter &&
-              useAllQuery(modelId, {
-                filter: applyFilter,
-                skip: 0,
-                take: 1,
-              })) ||
-            {};
+          const {
+            loading: isFetching,
+            data: records,
+            error: err,
+            refetch,
+          } = useAllQuery(
+            modelId,
+            {
+              filter: applyFilter,
+              skip: !applyFilter,
+              take: 1,
+            },
+            !modelId,
+          );
 
           B.defineFunction('Refetch', () => refetch());
 
