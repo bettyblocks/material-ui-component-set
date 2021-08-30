@@ -23,7 +23,6 @@
         const isPristine = isEmpty && isDev;
         const displayError = showError === 'built-in';
         const parsedLoadingText = useText(loadingText);
-        const [, setOptions] = useOptions();
 
         const getFilter = React.useCallback(() => {
           if (isDev || !currentRecord || !model) {
@@ -71,7 +70,8 @@
 
               if (loading && loadingType === 'showChildren') {
                 B.triggerEvent('onLoad', loading);
-                return <div>{children}</div>;
+                // key attribute forces a rerender after loading
+                return <div key={`data-loading-${loading}`}>{children}</div>;
               }
 
               if (error && displayError) {
@@ -86,15 +86,6 @@
             }}
           </GetOne>
         );
-
-        B.defineFunction('setCurrentRecord', value => {
-          const id = Number(value);
-          if (typeof id === 'number') {
-            setOptions({
-              currentRecord: id,
-            });
-          }
-        });
 
         useEffect(() => {
           if (isDev) {
