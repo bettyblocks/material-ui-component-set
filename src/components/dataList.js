@@ -234,9 +234,9 @@
         const completeFilter = deepMerge(newFilter, interactionFilters);
         const where = useFilter(completeFilter);
 
-        const { loading, error, data, refetch } =
-          model &&
-          useAllQuery(model, {
+        const { loading, error, data, refetch } = useAllQuery(
+          model,
+          {
             rawFilter: where,
             skip: page ? (page - 1) * rowsPerPage : 0,
             take: rowsPerPage,
@@ -256,7 +256,9 @@
                 B.triggerEvent('onError', resp);
               }
             },
-          });
+          },
+          !model,
+        );
 
         useEffect(() => {
           if (isDev) {

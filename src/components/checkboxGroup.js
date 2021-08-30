@@ -89,11 +89,10 @@
           }, {})
         : {};
 
-    const { loading, error: err, data, refetch } =
-      model &&
-      useAllQuery(model, {
+    const { loading, error: err, data, refetch } = useAllQuery(
+      model,
+      {
         filter,
-        skip: 0,
         take: 50,
         variables: {
           ...(orderBy ? { sort: { relation: sort } } : {}),
@@ -111,7 +110,9 @@
             B.triggerEvent('onError', resp);
           }
         },
-      });
+      },
+      !model,
+    );
 
     if (loading) {
       B.triggerEvent('onLoad', loading);
