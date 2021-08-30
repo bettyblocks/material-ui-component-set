@@ -224,9 +224,9 @@
     const where = useFilter(completeFilter);
 
     // TODO: move model to skip
-    const { loading, error, data, refetch } =
-      model &&
-      useAllQuery(model, {
+    const { loading, error, data, refetch } = useAllQuery(
+      model,
+      {
         rawFilter: where,
         variables,
         skip: loadOnScroll ? skip : page * rowsPerPage,
@@ -244,7 +244,9 @@
             B.triggerEvent('onError', err);
           }
         },
-      });
+      },
+      !model,
+    );
 
     useEffect(() => {
       if (!isDev && data) {
