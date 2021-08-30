@@ -1,3 +1,10 @@
+## [1.166.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.166.0...v1.166.1) (2021-08-30)
+
+
+### Bug Fixes
+
+* autoComplete captures context for onChange ([1763ef9](https://github.com/bettyblocks/material-ui-component-set/commit/1763ef97a759a34c6fbd0dcee8f320d1f261c4c3))
+
 # [1.166.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.165.5...v1.166.0) (2021-08-30)
 
 
