@@ -3,6 +3,11 @@
   icon: 'ContainerIcon',
   type: 'page',
   description: 'This is a page with a static Homepage-layout.',
+  detail:
+    'This page has a static homepage to spark your interest and show what things are possible with the pagebuilder.',
+  previewUrl: 'https://preview.betty.app/homepage',
+  previewImage:
+    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_Homepage.jpg',
   category: 'LAYOUT',
   beforeCreate: ({ prefab, save }) => {
     const iconConfiguration = [
@@ -2836,7 +2841,7 @@
           },
           {
             value: [
-              'https://assets.bettyblocks.com/771d40f1fc49403e824cdca2fe025aeb_assets/files/homepage-background.jpeg',
+              'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/homepage-background.jpg',
             ],
             label: 'Background url',
             key: 'backgroundUrl',
@@ -26793,7 +26798,7 @@
                                     type: 'CUSTOM',
                                     label: 'Link to',
                                     key: 'linkType',
-                                    value: 'internal',
+                                    value: 'external',
                                     configuration: {
                                       as: 'BUTTONGROUP',
                                       dataType: 'string',
@@ -26824,7 +26829,7 @@
                                     },
                                   },
                                   {
-                                    value: [],
+                                    value: ['https://www.facebook.com/'],
                                     label: 'URL',
                                     key: 'linkToExternal',
                                     type: 'VARIABLE',
@@ -27103,7 +27108,7 @@
                                     type: 'CUSTOM',
                                     label: 'Link to',
                                     key: 'linkType',
-                                    value: 'internal',
+                                    value: 'external',
                                     configuration: {
                                       as: 'BUTTONGROUP',
                                       dataType: 'string',
@@ -27134,7 +27139,7 @@
                                     },
                                   },
                                   {
-                                    value: [],
+                                    value: ['https://www.twitter.com/'],
                                     label: 'URL',
                                     key: 'linkToExternal',
                                     type: 'VARIABLE',
@@ -27413,7 +27418,7 @@
                                     type: 'CUSTOM',
                                     label: 'Link to',
                                     key: 'linkType',
-                                    value: 'internal',
+                                    value: 'external',
                                     configuration: {
                                       as: 'BUTTONGROUP',
                                       dataType: 'string',
@@ -27444,7 +27449,7 @@
                                     },
                                   },
                                   {
-                                    value: [],
+                                    value: ['https://www.instagram.com/'],
                                     label: 'URL',
                                     key: 'linkToExternal',
                                     type: 'VARIABLE',
