@@ -1,7 +1,7 @@
 (() => ({
   name: 'Carousel',
   icon: 'ImageCarouselIcon',
-  category: 'NAVIGATION',
+  category: 'CONTENT',
   keywords: ['image', 'carousel', 'image carousel', 'slideshow'],
   beforeCreate: ({
     components: {

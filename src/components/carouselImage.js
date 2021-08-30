@@ -1,8 +1,8 @@
 (() => ({
   name: 'CarouselImage',
-  type: 'STEP_COMPONENT',
-  allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
-  orientation: 'HORIZONTAL',
+  type: 'CAROUSEL_COMPONENT',
+  allowedTypes: [],
+  orientation: 'VERTICAL',
   jsx: (() => {
     const { env, useText } = B;
     const isDev = env === 'dev';
