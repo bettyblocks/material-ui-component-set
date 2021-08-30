@@ -1,3 +1,10 @@
+# [1.166.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.165.5...v1.166.0) (2021-08-30)
+
+
+### Features
+
+* removes setCurrentRecord custom functions ([08a6e7e](https://github.com/bettyblocks/material-ui-component-set/commit/08a6e7e5e64a4d9aac4afc441c75e80b17fcdba5))
+
 ## [1.165.5](https://github.com/bettyblocks/material-ui-component-set/compare/v1.165.4...v1.165.5) (2021-08-27)
 
 
