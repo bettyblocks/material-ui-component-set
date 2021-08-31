@@ -1,7 +1,7 @@
 (() => ({
   name: 'Carousel',
   type: 'CONTAINER_COMPONENT',
-  allowedTypes: ['STEP_COMPONENT'],
+  allowedTypes: ['CAROUSEL_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { MobileStepper, Button, IconButton } = window.MaterialUI.Core;
@@ -213,24 +213,23 @@
     const ModelStepperCmp = () => {
       let maxSteps = 0;
       const where = useFilter(filter);
-      const { loading, error, data, refetch } =
-        model &&
-        useAllQuery(model, {
-          rawFilter: where,
-          variables,
-          take: maxImages,
-          onCompleted(res) {
-            const hasResult = res && res.results && res.results.length > 0;
-            if (hasResult) {
-              B.triggerEvent('onSuccess', res.results);
-            } else {
-              B.triggerEvent('onNoResults');
-            }
-          },
-          onError(err) {
-            B.triggerEvent('onError', err);
-          },
-        });
+      const { loading, error, data, refetch } = useAllQuery(model, {
+        skip: !model,
+        rawFilter: where,
+        variables,
+        take: maxImages,
+        onCompleted(res) {
+          const hasResult = res && res.results && res.results.length > 0;
+          if (hasResult) {
+            B.triggerEvent('onSuccess', res.results);
+          } else {
+            B.triggerEvent('onNoResults');
+          }
+        },
+        onError(err) {
+          B.triggerEvent('onError', err);
+        },
+      });
       useEffect(() => {
         if (!isDev && data) {
           setResults(data.results);
