@@ -4,6 +4,10 @@ interface Page {
   url: string;
 }
 
+interface History {
+  push(url: string): string;
+}
+
 function redirect({
   event,
   redirectTo,
@@ -21,5 +25,5 @@ function redirect({
     url = redirectTo.resolvePath(event as any);
   }
 
-  window.location.href = url;
+  history.push(url);
 }

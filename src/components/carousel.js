@@ -1,7 +1,7 @@
 (() => ({
   name: 'Carousel',
   type: 'CONTAINER_COMPONENT',
-  allowedTypes: ['STEP_COMPONENT'],
+  allowedTypes: ['CAROUSEL_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { MobileStepper, Button, IconButton } = window.MaterialUI.Core;

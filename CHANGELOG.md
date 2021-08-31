@@ -1,3 +1,33 @@
+## [1.166.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.166.0...v1.166.1) (2021-08-30)
+
+
+### Bug Fixes
+
+* autoComplete captures context for onChange ([1763ef9](https://github.com/bettyblocks/material-ui-component-set/commit/1763ef97a759a34c6fbd0dcee8f320d1f261c4c3))
+
+# [1.166.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.165.5...v1.166.0) (2021-08-30)
+
+
+### Features
+
+* removes setCurrentRecord custom functions ([08a6e7e](https://github.com/bettyblocks/material-ui-component-set/commit/08a6e7e5e64a4d9aac4afc441c75e80b17fcdba5))
+
+## [1.165.5](https://github.com/bettyblocks/material-ui-component-set/compare/v1.165.4...v1.165.5) (2021-08-27)
+
+
+### Bug Fixes
+
+* redirect interaction uses react router ([467559e](https://github.com/bettyblocks/material-ui-component-set/commit/467559e4854039b6e1b38125d5a80afd133a1df6))
+
+## [1.165.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.165.3...v1.165.4) (2021-08-27)
+
+
+### Bug Fixes
+
+* pass refetch function ([5101efa](https://github.com/bettyblocks/material-ui-component-set/commit/5101efa067246733086a7a8b589d6ec8fa9a3aa7))
+* refetch interaction missing ([ab11a76](https://github.com/bettyblocks/material-ui-component-set/commit/ab11a76ee50ff9085d7dd20a946b2a6098c207f7))
+* use skip query param ([5706830](https://github.com/bettyblocks/material-ui-component-set/commit/5706830604063c7d43d0903f672dd6787a430ef0))
+
 ## [1.165.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.165.2...v1.165.3) (2021-08-24)
 
 
