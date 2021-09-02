@@ -267,7 +267,7 @@
                   },
                   {
                     type: 'VARIABLE',
-                    label: 'test attribute',
+                    label: 'Test attribute',
                     key: 'dataComponentAttribute',
                     value: ['Row'],
                     configuration: {
@@ -498,7 +498,7 @@
                     },
                     {
                       type: 'VARIABLE',
-                      label: 'test attribute',
+                      label: 'Test attribute',
                       key: 'dataComponentAttribute',
                       value: ['Column'],
                       configuration: {
@@ -578,7 +578,7 @@
         },
         {
           type: 'VARIABLE',
-          label: 'test attribute',
+          label: 'Test attribute',
           key: 'dataComponentAttribute',
           value: ['Row'],
           configuration: {
@@ -782,7 +782,7 @@
             },
             {
               type: 'VARIABLE',
-              label: 'test attribute',
+              label: 'Test attribute',
               key: 'dataComponentAttribute',
               value: ['Column'],
               configuration: {
@@ -1000,7 +1000,7 @@
                 },
                 {
                   type: 'VARIABLE',
-                  label: 'test attribute',
+                  label: 'Test attribute',
                   key: 'dataComponentAttribute',
                   value: ['AppBar'],
                   configuration: {
@@ -2589,7 +2589,7 @@
                     },
                     {
                       type: 'VARIABLE',
-                      label: 'test attribute',
+                      label: 'Test attribute',
                       key: 'dataComponentAttribute',
                       value: ['Button'],
                       configuration: {
@@ -4179,7 +4179,7 @@
                     },
                     {
                       type: 'VARIABLE',
-                      label: 'test attribute',
+                      label: 'Test attribute',
                       key: 'dataComponentAttribute',
                       value: ['Button'],
                       configuration: {

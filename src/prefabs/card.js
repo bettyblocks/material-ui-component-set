@@ -83,7 +83,7 @@
         },
         {
           type: 'VARIABLE',
-          label: 'test attribute',
+          label: 'Test attribute',
           key: 'dataComponentAttribute',
           value: ['Card'],
           configuration: {
@@ -146,7 +146,7 @@
             },
             {
               type: 'VARIABLE',
-              label: 'test attribute',
+              label: 'Test attribute',
               key: 'dataComponentAttribute',
               value: ['CardHeader'],
               configuration: {
@@ -237,7 +237,7 @@
             },
             {
               type: 'VARIABLE',
-              label: 'test attribute',
+              label: 'Test attribute',
               key: 'dataComponentAttribute',
               value: ['CardMedia'],
               configuration: {
@@ -263,7 +263,7 @@
             },
             {
               type: 'VARIABLE',
-              label: 'test attribute',
+              label: 'Test attribute',
               key: 'dataComponentAttribute',
               value: ['CardContent'],
               configuration: {
@@ -367,7 +367,7 @@
                 },
                 {
                   type: 'VARIABLE',
-                  label: 'test attribute',
+                  label: 'Test attribute',
                   key: 'dataComponentAttribute',
                   value: ['Text'],
                   configuration: {
@@ -472,7 +472,7 @@
                 },
                 {
                   type: 'VARIABLE',
-                  label: 'test attribute',
+                  label: 'Test attribute',
                   key: 'dataComponentAttribute',
                   value: ['Text'],
                   configuration: {
@@ -530,7 +530,7 @@
             },
             {
               type: 'VARIABLE',
-              label: 'test attribute',
+              label: 'Test attribute',
               key: 'dataComponentAttribute',
               value: ['CardActions'],
               configuration: {
@@ -2022,7 +2022,7 @@
                 },
                 {
                   type: 'VARIABLE',
-                  label: 'test attribute',
+                  label: 'Test attribute',
                   key: 'dataComponentAttribute',
                   value: ['Button'],
                   configuration: {

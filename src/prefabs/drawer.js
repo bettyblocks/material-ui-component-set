@@ -111,7 +111,7 @@
         },
         {
           type: 'VARIABLE',
-          label: 'test attribute',
+          label: 'Test attribute',
           key: 'dataComponentAttribute',
           value: ['Drawer'],
           configuration: {
@@ -154,7 +154,7 @@
             },
             {
               type: 'VARIABLE',
-              label: 'test attribute',
+              label: 'Test attribute',
               key: 'dataComponentAttribute',
               value: ['DrawerSidebar'],
               configuration: {
@@ -218,7 +218,7 @@
                 },
                 {
                   type: 'VARIABLE',
-                  label: 'test attribute',
+                  label: 'Test attribute',
                   key: 'dataComponentAttribute',
                   value: ['List'],
                   configuration: {
@@ -1611,7 +1611,7 @@
                     },
                     {
                       type: 'VARIABLE',
-                      label: 'test attribute',
+                      label: 'Test attribute',
                       key: 'dataComponentAttribute',
                       value: ['ListItem'],
                       configuration: {
@@ -1659,7 +1659,7 @@
             },
             {
               type: 'VARIABLE',
-              label: 'test attribute',
+              label: 'Test attribute',
               key: 'dataComponentAttribute',
               value: ['DrawerContainer'],
               configuration: {

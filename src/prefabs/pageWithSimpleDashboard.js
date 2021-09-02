@@ -1734,7 +1734,7 @@
           },
           {
             type: 'VARIABLE',
-            label: 'test attribute',
+            label: 'Test attribute',
             key: 'dataComponentAttribute',
             value: ['Grid'],
             configuration: {
@@ -2165,7 +2165,7 @@
               },
               {
                 type: 'VARIABLE',
-                label: 'test attribute',
+                label: 'Test attribute',
                 key: 'dataComponentAttribute',
                 value: ['Grid'],
                 configuration: {
@@ -2559,7 +2559,7 @@
                   },
                   {
                     type: 'VARIABLE',
-                    label: 'test attribute',
+                    label: 'Test attribute',
                     key: 'dataComponentAttribute',
                     value: ['Box'],
                     configuration: {
@@ -2622,7 +2622,7 @@
                       },
                       {
                         type: 'VARIABLE',
-                        label: 'test attribute',
+                        label: 'Test attribute',
                         key: 'dataComponentAttribute',
                         value: ['Row'],
                         configuration: {
@@ -2823,7 +2823,7 @@
                           },
                           {
                             type: 'VARIABLE',
-                            label: 'test attribute',
+                            label: 'Test attribute',
                             key: 'dataComponentAttribute',
                             value: ['Column'],
                             configuration: {
@@ -3041,7 +3041,7 @@
                               },
                               {
                                 type: 'VARIABLE',
-                                label: 'test attribute',
+                                label: 'Test attribute',
                                 key: 'dataComponentAttribute',
                                 value: ['AppBar'],
                                 configuration: {
@@ -3330,7 +3330,7 @@
                                   },
                                   {
                                     type: 'VARIABLE',
-                                    label: 'test attribute',
+                                    label: 'Test attribute',
                                     key: 'dataComponentAttribute',
                                     value: ['Button'],
                                     configuration: {
@@ -3620,7 +3620,7 @@
                                   },
                                   {
                                     type: 'VARIABLE',
-                                    label: 'test attribute',
+                                    label: 'Test attribute',
                                     key: 'dataComponentAttribute',
                                     value: ['Button'],
                                     configuration: {
@@ -4023,7 +4023,7 @@
                   },
                   {
                     type: 'VARIABLE',
-                    label: 'test attribute',
+                    label: 'Test attribute',
                     key: 'dataComponentAttribute',
                     value: ['Box'],
                     configuration: {
@@ -4086,7 +4086,7 @@
                       },
                       {
                         type: 'VARIABLE',
-                        label: 'test attribute',
+                        label: 'Test attribute',
                         key: 'dataComponentAttribute',
                         value: ['Row'],
                         configuration: {
@@ -4287,7 +4287,7 @@
                           },
                           {
                             type: 'VARIABLE',
-                            label: 'test attribute',
+                            label: 'Test attribute',
                             key: 'dataComponentAttribute',
                             value: ['Column'],
                             configuration: {
@@ -4451,7 +4451,7 @@
                               },
                               {
                                 type: 'VARIABLE',
-                                label: 'test attribute',
+                                label: 'Test attribute',
                                 key: 'dataComponentAttribute',
                                 value: ['Text'],
                                 configuration: {
@@ -4655,7 +4655,7 @@
                           },
                           {
                             type: 'VARIABLE',
-                            label: 'test attribute',
+                            label: 'Test attribute',
                             key: 'dataComponentAttribute',
                             value: ['Column'],
                             configuration: {
@@ -4718,7 +4718,7 @@
                               },
                               {
                                 type: 'VARIABLE',
-                                label: 'test attribute',
+                                label: 'Test attribute',
                                 key: 'dataComponentAttribute',
                                 value: ['Row'],
                                 configuration: {
@@ -4931,7 +4931,7 @@
                                   },
                                   {
                                     type: 'VARIABLE',
-                                    label: 'test attribute',
+                                    label: 'Test attribute',
                                     key: 'dataComponentAttribute',
                                     value: ['Column'],
                                     configuration: {
@@ -5386,7 +5386,7 @@
                                       },
                                       {
                                         type: 'VARIABLE',
-                                        label: 'test attribute',
+                                        label: 'Test attribute',
                                         key: 'dataComponentAttribute',
                                         value: ['Box'],
                                         configuration: {
@@ -5893,7 +5893,7 @@
                                           },
                                           {
                                             type: 'VARIABLE',
-                                            label: 'test attribute',
+                                            label: 'Test attribute',
                                             key: 'dataComponentAttribute',
                                             value: ['Box'],
                                             configuration: {
@@ -6144,7 +6144,7 @@
                                               },
                                               {
                                                 type: 'VARIABLE',
-                                                label: 'test attribute',
+                                                label: 'Test attribute',
                                                 key: 'dataComponentAttribute',
                                                 value: ['Avatar'],
                                                 configuration: {
@@ -6322,7 +6322,7 @@
                                           },
                                           {
                                             type: 'VARIABLE',
-                                            label: 'test attribute',
+                                            label: 'Test attribute',
                                             key: 'dataComponentAttribute',
                                             value: ['Text'],
                                             configuration: {
@@ -6501,7 +6501,7 @@
                                           },
                                           {
                                             type: 'VARIABLE',
-                                            label: 'test attribute',
+                                            label: 'Test attribute',
                                             key: 'dataComponentAttribute',
                                             value: ['Text'],
                                             configuration: {
@@ -6719,7 +6719,7 @@
                                   },
                                   {
                                     type: 'VARIABLE',
-                                    label: 'test attribute',
+                                    label: 'Test attribute',
                                     key: 'dataComponentAttribute',
                                     value: ['Column'],
                                     configuration: {
@@ -7174,7 +7174,7 @@
                                       },
                                       {
                                         type: 'VARIABLE',
-                                        label: 'test attribute',
+                                        label: 'Test attribute',
                                         key: 'dataComponentAttribute',
                                         value: ['Box'],
                                         configuration: {
@@ -7681,7 +7681,7 @@
                                           },
                                           {
                                             type: 'VARIABLE',
-                                            label: 'test attribute',
+                                            label: 'Test attribute',
                                             key: 'dataComponentAttribute',
                                             value: ['Box'],
                                             configuration: {
@@ -7932,7 +7932,7 @@
                                               },
                                               {
                                                 type: 'VARIABLE',
-                                                label: 'test attribute',
+                                                label: 'Test attribute',
                                                 key: 'dataComponentAttribute',
                                                 value: ['Avatar'],
                                                 configuration: {
@@ -8110,7 +8110,7 @@
                                           },
                                           {
                                             type: 'VARIABLE',
-                                            label: 'test attribute',
+                                            label: 'Test attribute',
                                             key: 'dataComponentAttribute',
                                             value: ['Text'],
                                             configuration: {
@@ -8289,7 +8289,7 @@
                                           },
                                           {
                                             type: 'VARIABLE',
-                                            label: 'test attribute',
+                                            label: 'Test attribute',
                                             key: 'dataComponentAttribute',
                                             value: ['Text'],
                                             configuration: {
@@ -8507,7 +8507,7 @@
                                   },
                                   {
                                     type: 'VARIABLE',
-                                    label: 'test attribute',
+                                    label: 'Test attribute',
                                     key: 'dataComponentAttribute',
                                     value: ['Column'],
                                     configuration: {
@@ -8962,7 +8962,7 @@
                                       },
                                       {
                                         type: 'VARIABLE',
-                                        label: 'test attribute',
+                                        label: 'Test attribute',
                                         key: 'dataComponentAttribute',
                                         value: ['Box'],
                                         configuration: {
@@ -9469,7 +9469,7 @@
                                           },
                                           {
                                             type: 'VARIABLE',
-                                            label: 'test attribute',
+                                            label: 'Test attribute',
                                             key: 'dataComponentAttribute',
                                             value: ['Box'],
                                             configuration: {
@@ -9720,7 +9720,7 @@
                                               },
                                               {
                                                 type: 'VARIABLE',
-                                                label: 'test attribute',
+                                                label: 'Test attribute',
                                                 key: 'dataComponentAttribute',
                                                 value: ['Avatar'],
                                                 configuration: {
@@ -9898,7 +9898,7 @@
                                           },
                                           {
                                             type: 'VARIABLE',
-                                            label: 'test attribute',
+                                            label: 'Test attribute',
                                             key: 'dataComponentAttribute',
                                             value: ['Text'],
                                             configuration: {
@@ -10077,7 +10077,7 @@
                                           },
                                           {
                                             type: 'VARIABLE',
-                                            label: 'test attribute',
+                                            label: 'Test attribute',
                                             key: 'dataComponentAttribute',
                                             value: ['Text'],
                                             configuration: {
@@ -10295,7 +10295,7 @@
                                   },
                                   {
                                     type: 'VARIABLE',
-                                    label: 'test attribute',
+                                    label: 'Test attribute',
                                     key: 'dataComponentAttribute',
                                     value: ['Column'],
                                     configuration: {
@@ -10750,7 +10750,7 @@
                                       },
                                       {
                                         type: 'VARIABLE',
-                                        label: 'test attribute',
+                                        label: 'Test attribute',
                                         key: 'dataComponentAttribute',
                                         value: ['Box'],
                                         configuration: {
@@ -11257,7 +11257,7 @@
                                           },
                                           {
                                             type: 'VARIABLE',
-                                            label: 'test attribute',
+                                            label: 'Test attribute',
                                             key: 'dataComponentAttribute',
                                             value: ['Box'],
                                             configuration: {
@@ -11508,7 +11508,7 @@
                                               },
                                               {
                                                 type: 'VARIABLE',
-                                                label: 'test attribute',
+                                                label: 'Test attribute',
                                                 key: 'dataComponentAttribute',
                                                 value: ['Avatar'],
                                                 configuration: {
@@ -11686,7 +11686,7 @@
                                           },
                                           {
                                             type: 'VARIABLE',
-                                            label: 'test attribute',
+                                            label: 'Test attribute',
                                             key: 'dataComponentAttribute',
                                             value: ['Text'],
                                             configuration: {
@@ -11865,7 +11865,7 @@
                                           },
                                           {
                                             type: 'VARIABLE',
-                                            label: 'test attribute',
+                                            label: 'Test attribute',
                                             key: 'dataComponentAttribute',
                                             value: ['Text'],
                                             configuration: {
@@ -12086,7 +12086,7 @@
                                   },
                                   {
                                     type: 'VARIABLE',
-                                    label: 'test attribute',
+                                    label: 'Test attribute',
                                     key: 'dataComponentAttribute',
                                     value: ['Column'],
                                     configuration: {
@@ -12541,7 +12541,7 @@
                                       },
                                       {
                                         type: 'VARIABLE',
-                                        label: 'test attribute',
+                                        label: 'Test attribute',
                                         key: 'dataComponentAttribute',
                                         value: ['Box'],
                                         configuration: {
@@ -13043,7 +13043,7 @@
                                           },
                                           {
                                             type: 'VARIABLE',
-                                            label: 'test attribute',
+                                            label: 'Test attribute',
                                             key: 'dataComponentAttribute',
                                             value: ['Box'],
                                             configuration: {
@@ -13567,7 +13567,7 @@
                                               },
                                               {
                                                 type: 'VARIABLE',
-                                                label: 'test attribute',
+                                                label: 'Test attribute',
                                                 key: 'dataComponentAttribute',
                                                 value: ['Box'],
                                                 configuration: {
@@ -13775,7 +13775,7 @@
                                                   },
                                                   {
                                                     type: 'VARIABLE',
-                                                    label: 'test attribute',
+                                                    label: 'Test attribute',
                                                     key:
                                                       'dataComponentAttribute',
                                                     value: ['Text'],
@@ -14304,7 +14304,7 @@
                                               },
                                               {
                                                 type: 'VARIABLE',
-                                                label: 'test attribute',
+                                                label: 'Test attribute',
                                                 key: 'dataComponentAttribute',
                                                 value: ['Box'],
                                                 configuration: {
@@ -14557,7 +14557,7 @@
                                                   },
                                                   {
                                                     type: 'VARIABLE',
-                                                    label: 'test attribute',
+                                                    label: 'Test attribute',
                                                     key:
                                                       'dataComponentAttribute',
                                                     value: ['Button'],
@@ -15066,7 +15066,7 @@
                                           },
                                           {
                                             type: 'VARIABLE',
-                                            label: 'test attribute',
+                                            label: 'Test attribute',
                                             key: 'dataComponentAttribute',
                                             value: ['Box'],
                                             configuration: {
@@ -15508,7 +15508,7 @@
                                               },
                                               {
                                                 type: 'VARIABLE',
-                                                label: 'test attribute',
+                                                label: 'Test attribute',
                                                 key: 'dataComponentAttribute',
                                                 value: ['DataTable'],
                                                 configuration: {
@@ -15917,7 +15917,7 @@
                   },
                   {
                     type: 'VARIABLE',
-                    label: 'test attribute',
+                    label: 'Test attribute',
                     key: 'dataComponentAttribute',
                     value: ['Box'],
                     configuration: {
@@ -15980,7 +15980,7 @@
                       },
                       {
                         type: 'VARIABLE',
-                        label: 'test attribute',
+                        label: 'Test attribute',
                         key: 'dataComponentAttribute',
                         value: ['Row'],
                         configuration: {
@@ -16181,7 +16181,7 @@
                           },
                           {
                             type: 'VARIABLE',
-                            label: 'test attribute',
+                            label: 'Test attribute',
                             key: 'dataComponentAttribute',
                             value: ['Column'],
                             configuration: {
@@ -16347,7 +16347,7 @@
                               },
                               {
                                 type: 'VARIABLE',
-                                label: 'test attribute',
+                                label: 'Test attribute',
                                 key: 'dataComponentAttribute',
                                 value: ['Text'],
                                 configuration: {
@@ -16556,7 +16556,7 @@
                   },
                   {
                     type: 'VARIABLE',
-                    label: 'test attribute',
+                    label: 'Test attribute',
                     key: 'dataComponentAttribute',
                     value: ['DataTableColumn'],
                     configuration: {
@@ -16733,7 +16733,7 @@
                             },
                             {
                               type: 'VARIABLE',
-                              label: 'test attribute',
+                              label: 'Test attribute',
                               key: 'dataComponentAttribute',
                               value: ['Media'],
                               configuration: {
@@ -16839,7 +16839,7 @@
         },
         {
           type: 'VARIABLE',
-          label: 'test attribute',
+          label: 'Test attribute',
           key: 'dataComponentAttribute',
           value: ['Row'],
           configuration: {
@@ -17040,7 +17040,7 @@
             },
             {
               type: 'VARIABLE',
-              label: 'test attribute',
+              label: 'Test attribute',
               key: 'dataComponentAttribute',
               value: ['Column'],
               configuration: {

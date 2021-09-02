@@ -1392,7 +1392,7 @@
         },
         {
           type: 'VARIABLE',
-          label: 'test attribute',
+          label: 'Test attribute',
           key: 'dataComponentAttribute',
           value: ['Breadcrumbs'],
           configuration: {
@@ -2723,7 +2723,7 @@
             },
             {
               type: 'VARIABLE',
-              label: 'test attribute',
+              label: 'Test attribute',
               key: 'dataComponentAttribute',
               value: ['BreadcrumbItem'],
               configuration: {
@@ -4055,7 +4055,7 @@
             },
             {
               type: 'VARIABLE',
-              label: 'test attribute',
+              label: 'Test attribute',
               key: 'dataComponentAttribute',
               value: ['BreadcrumbItem'],
               configuration: {
