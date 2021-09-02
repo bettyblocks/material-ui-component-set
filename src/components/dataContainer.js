@@ -71,7 +71,8 @@
 
               if (loading && loadingType === 'showChildren') {
                 B.triggerEvent('onLoad', loading);
-                return <div>{children}</div>;
+                // key attribute forces a rerender after loading
+                return <div key={`data-loading-${loading}`}>{children}</div>;
               }
 
               if (error && displayError) {

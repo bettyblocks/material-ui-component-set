@@ -3,6 +3,10 @@ interface Page {
   url: string;
 }
 
+interface History {
+  push(url: string): string;
+}
+
 function logout({
   event,
   redirectTo,
@@ -14,6 +18,6 @@ function logout({
   localStorage.removeItem('TOKEN');
   localStorage.removeItem('REFRESH_TOKEN');
   if (url) {
-    window.location.href = url;
+    history.push(url);
   }
 }
