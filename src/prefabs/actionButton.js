@@ -1504,6 +1504,26 @@
             },
           },
         },
+        {
+          value: false,
+          label: 'Advanced settings',
+          key: 'advancedSettings',
+          type: 'TOGGLE',
+        },
+        {
+          type: 'VARIABLE',
+          label: 'test attribute',
+          key: 'dataComponentAttribute',
+          value: ['Button'],
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'advancedSettings',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
       ],
       descendants: [],
     },

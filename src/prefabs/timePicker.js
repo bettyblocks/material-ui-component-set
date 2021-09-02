@@ -337,6 +337,20 @@
             },
           },
         },
+        {
+          type: 'VARIABLE',
+          label: 'test attribute',
+          key: 'dataComponentAttribute',
+          value: ['DateTimePicker'],
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'advancedSettings',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
       ],
       descendants: [],
     },

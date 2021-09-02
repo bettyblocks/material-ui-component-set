@@ -1783,6 +1783,20 @@
                     },
                   },
                 },
+                {
+                  type: 'VARIABLE',
+                  label: 'test attribute',
+                  key: 'dataComponentAttribute',
+                  value: ['TextField'],
+                  configuration: {
+                    condition: {
+                      type: 'SHOW',
+                      option: 'advancedSettings',
+                      comparator: 'EQ',
+                      value: true,
+                    },
+                  },
+                },
               ],
               descendants: [],
             };
@@ -2221,6 +2235,20 @@
                     },
                   },
                 },
+                {
+                  type: 'VARIABLE',
+                  label: 'test attribute',
+                  key: 'dataComponentAttribute',
+                  value: ['TextField'],
+                  configuration: {
+                    condition: {
+                      type: 'SHOW',
+                      option: 'advancedSettings',
+                      comparator: 'EQ',
+                      value: true,
+                    },
+                  },
+                },
               ],
               descendants: [],
             };
@@ -2635,6 +2663,20 @@
                   label: 'name attribute',
                   key: 'nameAttribute',
                   value: [],
+                  configuration: {
+                    condition: {
+                      type: 'SHOW',
+                      option: 'advancedSettings',
+                      comparator: 'EQ',
+                      value: true,
+                    },
+                  },
+                },
+                {
+                  type: 'VARIABLE',
+                  label: 'test attribute',
+                  key: 'dataComponentAttribute',
+                  value: ['TextField'],
                   configuration: {
                     condition: {
                       type: 'SHOW',
@@ -3074,6 +3116,20 @@
                     },
                   },
                 },
+                {
+                  type: 'VARIABLE',
+                  label: 'test attribute',
+                  key: 'dataComponentAttribute',
+                  value: ['TextField'],
+                  configuration: {
+                    condition: {
+                      type: 'SHOW',
+                      option: 'advancedSettings',
+                      comparator: 'EQ',
+                      value: true,
+                    },
+                  },
+                },
               ],
               descendants: [],
             };
@@ -3488,6 +3544,20 @@
                   label: 'name attribute',
                   key: 'nameAttribute',
                   value: [],
+                  configuration: {
+                    condition: {
+                      type: 'SHOW',
+                      option: 'advancedSettings',
+                      comparator: 'EQ',
+                      value: true,
+                    },
+                  },
+                },
+                {
+                  type: 'VARIABLE',
+                  label: 'test attribute',
+                  key: 'dataComponentAttribute',
+                  value: ['TextField'],
                   configuration: {
                     condition: {
                       type: 'SHOW',
@@ -3916,6 +3986,20 @@
                     },
                   },
                 },
+                {
+                  type: 'VARIABLE',
+                  label: 'test attribute',
+                  key: 'dataComponentAttribute',
+                  value: ['TextField'],
+                  configuration: {
+                    condition: {
+                      type: 'SHOW',
+                      option: 'advancedSettings',
+                      comparator: 'EQ',
+                      value: true,
+                    },
+                  },
+                },
               ],
               descendants: [],
             };
@@ -4280,6 +4364,20 @@
                   label: 'name attribute',
                   key: 'nameAttribute',
                   value: [],
+                  configuration: {
+                    condition: {
+                      type: 'SHOW',
+                      option: 'advancedSettings',
+                      comparator: 'EQ',
+                      value: true,
+                    },
+                  },
+                },
+                {
+                  type: 'VARIABLE',
+                  label: 'test attribute',
+                  key: 'dataComponentAttribute',
+                  value: ['DateTimePicker'],
                   configuration: {
                     condition: {
                       type: 'SHOW',
@@ -4699,6 +4797,20 @@
                     },
                   },
                 },
+                {
+                  type: 'VARIABLE',
+                  label: 'test attribute',
+                  key: 'dataComponentAttribute',
+                  value: ['DateTimePicker'],
+                  configuration: {
+                    condition: {
+                      type: 'SHOW',
+                      option: 'advancedSettings',
+                      comparator: 'EQ',
+                      value: true,
+                    },
+                  },
+                },
               ],
               descendants: [],
             };
@@ -5049,6 +5161,20 @@
                   label: 'name attribute',
                   key: 'nameAttribute',
                   value: [],
+                  configuration: {
+                    condition: {
+                      type: 'SHOW',
+                      option: 'advancedSettings',
+                      comparator: 'EQ',
+                      value: true,
+                    },
+                  },
+                },
+                {
+                  type: 'VARIABLE',
+                  label: 'test attribute',
+                  key: 'dataComponentAttribute',
+                  value: ['DateTimePicker'],
                   configuration: {
                     condition: {
                       type: 'SHOW',
@@ -6605,6 +6731,20 @@
                     },
                   },
                 },
+                {
+                  type: 'VARIABLE',
+                  label: 'test attribute',
+                  key: 'dataComponentAttribute',
+                  value: ['FileUpload'],
+                  configuration: {
+                    condition: {
+                      type: 'SHOW',
+                      option: 'advancedSettings',
+                      comparator: 'EQ',
+                      value: true,
+                    },
+                  },
+                },
               ],
               descendants: [],
             };
@@ -6786,6 +6926,20 @@
                   label: 'name attribute',
                   key: 'nameAttribute',
                   value: [],
+                  configuration: {
+                    condition: {
+                      type: 'SHOW',
+                      option: 'advancedSettings',
+                      comparator: 'EQ',
+                      value: true,
+                    },
+                  },
+                },
+                {
+                  type: 'VARIABLE',
+                  label: 'test attribute',
+                  key: 'dataComponentAttribute',
+                  value: ['Checkbox'],
                   configuration: {
                     condition: {
                       type: 'SHOW',
@@ -7226,6 +7380,20 @@
                     },
                   },
                 },
+                {
+                  type: 'VARIABLE',
+                  label: 'test attribute',
+                  key: 'dataComponentAttribute',
+                  value: ['Select'],
+                  configuration: {
+                    condition: {
+                      type: 'SHOW',
+                      option: 'advancedSettings',
+                      comparator: 'EQ',
+                      value: true,
+                    },
+                  },
+                },
               ],
               descendants: [],
             };
@@ -7645,6 +7813,20 @@
                     },
                   },
                 },
+                {
+                  type: 'VARIABLE',
+                  label: 'test attribute',
+                  key: 'dataComponentAttribute',
+                  value: ['TextField'],
+                  configuration: {
+                    condition: {
+                      type: 'SHOW',
+                      option: 'advancedSettings',
+                      comparator: 'EQ',
+                      value: true,
+                    },
+                  },
+                },
               ],
               descendants: [],
             };
@@ -7812,6 +7994,26 @@
                   key: 'outerSpacing',
                   type: 'SIZES',
                 },
+                {
+                  value: false,
+                  label: 'Advanced settings',
+                  key: 'advancedSettings',
+                  type: 'TOGGLE',
+                },
+                {
+                  type: 'VARIABLE',
+                  label: 'test attribute',
+                  key: 'dataComponentAttribute',
+                  value: ['Media'],
+                  configuration: {
+                    condition: {
+                      type: 'SHOW',
+                      option: 'advancedSettings',
+                      comparator: 'EQ',
+                      value: true,
+                    },
+                  },
+                },
               ],
               descendants: [],
             }
@@ -7945,6 +8147,26 @@
                     condition: {
                       type: 'SHOW',
                       option: 'styles',
+                      comparator: 'EQ',
+                      value: true,
+                    },
+                  },
+                },
+                {
+                  value: false,
+                  label: 'Advanced settings',
+                  key: 'advancedSettings',
+                  type: 'TOGGLE',
+                },
+                {
+                  type: 'VARIABLE',
+                  label: 'test attribute',
+                  key: 'dataComponentAttribute',
+                  value: ['Text'],
+                  configuration: {
+                    condition: {
+                      type: 'SHOW',
+                      option: 'advancedSettings',
                       comparator: 'EQ',
                       value: true,
                     },
@@ -8326,6 +8548,26 @@
                 },
               },
             },
+            {
+              value: false,
+              label: 'Advanced settings',
+              key: 'advancedSettings',
+              type: 'TOGGLE',
+            },
+            {
+              type: 'VARIABLE',
+              label: 'test attribute',
+              key: 'dataComponentAttribute',
+              value: ['Box'],
+              configuration: {
+                condition: {
+                  type: 'SHOW',
+                  option: 'advancedSettings',
+                  comparator: 'EQ',
+                  value: true,
+                },
+              },
+            },
           ],
           descendants: [
             {
@@ -8458,6 +8700,26 @@
                     condition: {
                       type: 'SHOW',
                       option: 'styles',
+                      comparator: 'EQ',
+                      value: true,
+                    },
+                  },
+                },
+                {
+                  value: false,
+                  label: 'Advanced settings',
+                  key: 'advancedSettings',
+                  type: 'TOGGLE',
+                },
+                {
+                  type: 'VARIABLE',
+                  label: 'test attribute',
+                  key: 'dataComponentAttribute',
+                  value: ['Text'],
+                  configuration: {
+                    condition: {
+                      type: 'SHOW',
+                      option: 'advancedSettings',
                       comparator: 'EQ',
                       value: true,
                     },
@@ -8669,6 +8931,26 @@
                     label: 'Inner space',
                     key: 'innerSpacing',
                     type: 'SIZES',
+                  },
+                  {
+                    value: false,
+                    label: 'Advanced settings',
+                    key: 'advancedSettings',
+                    type: 'TOGGLE',
+                  },
+                  {
+                    type: 'VARIABLE',
+                    label: 'test attribute',
+                    key: 'dataComponentAttribute',
+                    value: ['DrawerSidebar'],
+                    configuration: {
+                      condition: {
+                        type: 'SHOW',
+                        option: 'advancedSettings',
+                        comparator: 'EQ',
+                        value: true,
+                      },
+                    },
                   },
                 ],
                 descendants: [
@@ -9023,6 +9305,26 @@
                           },
                         },
                       },
+                      {
+                        value: false,
+                        label: 'Advanced settings',
+                        key: 'advancedSettings',
+                        type: 'TOGGLE',
+                      },
+                      {
+                        type: 'VARIABLE',
+                        label: 'test attribute',
+                        key: 'dataComponentAttribute',
+                        value: ['Box'],
+                        configuration: {
+                          condition: {
+                            type: 'SHOW',
+                            option: 'advancedSettings',
+                            comparator: 'EQ',
+                            value: true,
+                          },
+                        },
+                      },
                     ],
                     descendants: [
                       {
@@ -9149,6 +9451,26 @@
                             value: true,
                             type: 'TOGGLE',
                           },
+                          {
+                            value: false,
+                            label: 'Advanced settings',
+                            key: 'advancedSettings',
+                            type: 'TOGGLE',
+                          },
+                          {
+                            type: 'VARIABLE',
+                            label: 'test attribute',
+                            key: 'dataComponentAttribute',
+                            value: ['Tabs'],
+                            configuration: {
+                              condition: {
+                                type: 'SHOW',
+                                option: 'advancedSettings',
+                                comparator: 'EQ',
+                                value: true,
+                              },
+                            },
+                          },
                         ],
                         descendants: [
                           {
@@ -9221,6 +9543,26 @@
                                 label: 'Disable ripple',
                                 key: 'disableRipple',
                                 value: false,
+                              },
+                              {
+                                value: false,
+                                label: 'Advanced settings',
+                                key: 'advancedSettings',
+                                type: 'TOGGLE',
+                              },
+                              {
+                                type: 'VARIABLE',
+                                label: 'test attribute',
+                                key: 'dataComponentAttribute',
+                                value: ['Tab'],
+                                configuration: {
+                                  condition: {
+                                    type: 'SHOW',
+                                    option: 'advancedSettings',
+                                    comparator: 'EQ',
+                                    value: true,
+                                  },
+                                },
                               },
                             ],
                             descendants: [
@@ -9366,6 +9708,26 @@
                                       },
                                     },
                                   },
+                                  {
+                                    value: false,
+                                    label: 'Advanced settings',
+                                    key: 'advancedSettings',
+                                    type: 'TOGGLE',
+                                  },
+                                  {
+                                    type: 'VARIABLE',
+                                    label: 'test attribute',
+                                    key: 'dataComponentAttribute',
+                                    value: ['Text'],
+                                    configuration: {
+                                      condition: {
+                                        type: 'SHOW',
+                                        option: 'advancedSettings',
+                                        comparator: 'EQ',
+                                        value: true,
+                                      },
+                                    },
+                                  },
                                 ],
                                 descendants: [],
                               },
@@ -9497,6 +9859,26 @@
                                     key: 'outerSpacing',
                                     type: 'SIZES',
                                   },
+                                  {
+                                    value: false,
+                                    label: 'Advanced settings',
+                                    key: 'advancedSettings',
+                                    type: 'TOGGLE',
+                                  },
+                                  {
+                                    type: 'VARIABLE',
+                                    label: 'test attribute',
+                                    key: 'dataComponentAttribute',
+                                    value: ['Alert'],
+                                    configuration: {
+                                      condition: {
+                                        type: 'SHOW',
+                                        option: 'advancedSettings',
+                                        comparator: 'EQ',
+                                        value: true,
+                                      },
+                                    },
+                                  },
                                 ],
                                 descendants: [],
                               },
@@ -9625,6 +10007,26 @@
                                     label: 'Outer space',
                                     key: 'outerSpacing',
                                     type: 'SIZES',
+                                  },
+                                  {
+                                    value: false,
+                                    label: 'Advanced settings',
+                                    key: 'advancedSettings',
+                                    type: 'TOGGLE',
+                                  },
+                                  {
+                                    type: 'VARIABLE',
+                                    label: 'test attribute',
+                                    key: 'dataComponentAttribute',
+                                    value: ['Alert'],
+                                    configuration: {
+                                      condition: {
+                                        type: 'SHOW',
+                                        option: 'advancedSettings',
+                                        comparator: 'EQ',
+                                        value: true,
+                                      },
+                                    },
                                   },
                                 ],
                                 descendants: [],
@@ -9794,6 +10196,26 @@
                                     label: 'Redirect after succesful submit',
                                     key: 'redirect',
                                     type: 'ENDPOINT',
+                                  },
+                                  {
+                                    value: false,
+                                    label: 'Advanced settings',
+                                    key: 'advancedSettings',
+                                    type: 'TOGGLE',
+                                  },
+                                  {
+                                    type: 'VARIABLE',
+                                    label: 'test attribute',
+                                    key: 'dataComponentAttribute',
+                                    value: ['Form'],
+                                    configuration: {
+                                      condition: {
+                                        type: 'SHOW',
+                                        option: 'advancedSettings',
+                                        comparator: 'EQ',
+                                        value: true,
+                                      },
+                                    },
                                   },
                                 ],
                                 descendants: [
@@ -10130,6 +10552,26 @@
                                           },
                                         },
                                       },
+                                      {
+                                        value: false,
+                                        label: 'Advanced settings',
+                                        key: 'advancedSettings',
+                                        type: 'TOGGLE',
+                                      },
+                                      {
+                                        type: 'VARIABLE',
+                                        label: 'test attribute',
+                                        key: 'dataComponentAttribute',
+                                        value: ['Box'],
+                                        configuration: {
+                                          condition: {
+                                            type: 'SHOW',
+                                            option: 'advancedSettings',
+                                            comparator: 'EQ',
+                                            value: true,
+                                          },
+                                        },
+                                      },
                                     ],
                                     descendants: [
                                       {
@@ -10355,6 +10797,26 @@
                                               condition: {
                                                 type: 'SHOW',
                                                 option: 'addTooltip',
+                                                comparator: 'EQ',
+                                                value: true,
+                                              },
+                                            },
+                                          },
+                                          {
+                                            value: false,
+                                            label: 'Advanced settings',
+                                            key: 'advancedSettings',
+                                            type: 'TOGGLE',
+                                          },
+                                          {
+                                            type: 'VARIABLE',
+                                            label: 'test attribute',
+                                            key: 'dataComponentAttribute',
+                                            value: ['Button'],
+                                            configuration: {
+                                              condition: {
+                                                type: 'SHOW',
+                                                option: 'advancedSettings',
                                                 comparator: 'EQ',
                                                 value: true,
                                               },
@@ -10603,6 +11065,26 @@
                                               },
                                             },
                                           },
+                                          {
+                                            value: false,
+                                            label: 'Advanced settings',
+                                            key: 'advancedSettings',
+                                            type: 'TOGGLE',
+                                          },
+                                          {
+                                            type: 'VARIABLE',
+                                            label: 'test attribute',
+                                            key: 'dataComponentAttribute',
+                                            value: ['Button'],
+                                            configuration: {
+                                              condition: {
+                                                type: 'SHOW',
+                                                option: 'advancedSettings',
+                                                comparator: 'EQ',
+                                                value: true,
+                                              },
+                                            },
+                                          },
                                         ],
                                         descendants: [],
                                       },
@@ -10682,6 +11164,26 @@
                                 label: 'Disable ripple',
                                 key: 'disableRipple',
                                 value: false,
+                              },
+                              {
+                                value: false,
+                                label: 'Advanced settings',
+                                key: 'advancedSettings',
+                                type: 'TOGGLE',
+                              },
+                              {
+                                type: 'VARIABLE',
+                                label: 'test attribute',
+                                key: 'dataComponentAttribute',
+                                value: ['Tab'],
+                                configuration: {
+                                  condition: {
+                                    type: 'SHOW',
+                                    option: 'advancedSettings',
+                                    comparator: 'EQ',
+                                    value: true,
+                                  },
+                                },
                               },
                             ],
                             descendants: [
@@ -10827,6 +11329,26 @@
                                       },
                                     },
                                   },
+                                  {
+                                    value: false,
+                                    label: 'Advanced settings',
+                                    key: 'advancedSettings',
+                                    type: 'TOGGLE',
+                                  },
+                                  {
+                                    type: 'VARIABLE',
+                                    label: 'test attribute',
+                                    key: 'dataComponentAttribute',
+                                    value: ['Text'],
+                                    configuration: {
+                                      condition: {
+                                        type: 'SHOW',
+                                        option: 'advancedSettings',
+                                        comparator: 'EQ',
+                                        value: true,
+                                      },
+                                    },
+                                  },
                                 ],
                                 descendants: [],
                               },
@@ -10923,6 +11445,26 @@
                                         option: 'loadingType',
                                         comparator: 'EQ',
                                         value: 'default',
+                                      },
+                                    },
+                                  },
+                                  {
+                                    value: false,
+                                    label: 'Advanced settings',
+                                    key: 'advancedSettings',
+                                    type: 'TOGGLE',
+                                  },
+                                  {
+                                    type: 'VARIABLE',
+                                    label: 'test attribute',
+                                    key: 'dataComponentAttribute',
+                                    value: ['DataContainer'],
+                                    configuration: {
+                                      condition: {
+                                        type: 'SHOW',
+                                        option: 'advancedSettings',
+                                        comparator: 'EQ',
+                                        value: true,
                                       },
                                     },
                                   },
@@ -11137,6 +11679,26 @@
                                       },
                                     },
                                   },
+                                  {
+                                    value: false,
+                                    label: 'Advanced settings',
+                                    key: 'advancedSettings',
+                                    type: 'TOGGLE',
+                                  },
+                                  {
+                                    type: 'VARIABLE',
+                                    label: 'test attribute',
+                                    key: 'dataComponentAttribute',
+                                    value: ['Button'],
+                                    configuration: {
+                                      condition: {
+                                        type: 'SHOW',
+                                        option: 'advancedSettings',
+                                        comparator: 'EQ',
+                                        value: true,
+                                      },
+                                    },
+                                  },
                                 ],
                                 descendants: [],
                               },
@@ -11212,6 +11774,26 @@
                                 label: 'Disable ripple',
                                 key: 'disableRipple',
                                 value: false,
+                              },
+                              {
+                                value: false,
+                                label: 'Advanced settings',
+                                key: 'advancedSettings',
+                                type: 'TOGGLE',
+                              },
+                              {
+                                type: 'VARIABLE',
+                                label: 'test attribute',
+                                key: 'dataComponentAttribute',
+                                value: ['Tab'],
+                                configuration: {
+                                  condition: {
+                                    type: 'SHOW',
+                                    option: 'advancedSettings',
+                                    comparator: 'EQ',
+                                    value: true,
+                                  },
+                                },
                               },
                             ],
                             descendants: [
@@ -11357,6 +11939,26 @@
                                       },
                                     },
                                   },
+                                  {
+                                    value: false,
+                                    label: 'Advanced settings',
+                                    key: 'advancedSettings',
+                                    type: 'TOGGLE',
+                                  },
+                                  {
+                                    type: 'VARIABLE',
+                                    label: 'test attribute',
+                                    key: 'dataComponentAttribute',
+                                    value: ['Text'],
+                                    configuration: {
+                                      condition: {
+                                        type: 'SHOW',
+                                        option: 'advancedSettings',
+                                        comparator: 'EQ',
+                                        value: true,
+                                      },
+                                    },
+                                  },
                                 ],
                                 descendants: [],
                               },
@@ -11488,6 +12090,26 @@
                                     key: 'outerSpacing',
                                     type: 'SIZES',
                                   },
+                                  {
+                                    value: false,
+                                    label: 'Advanced settings',
+                                    key: 'advancedSettings',
+                                    type: 'TOGGLE',
+                                  },
+                                  {
+                                    type: 'VARIABLE',
+                                    label: 'test attribute',
+                                    key: 'dataComponentAttribute',
+                                    value: ['Alert'],
+                                    configuration: {
+                                      condition: {
+                                        type: 'SHOW',
+                                        option: 'advancedSettings',
+                                        comparator: 'EQ',
+                                        value: true,
+                                      },
+                                    },
+                                  },
                                 ],
                                 descendants: [],
                               },
@@ -11616,6 +12238,26 @@
                                     label: 'Outer space',
                                     key: 'outerSpacing',
                                     type: 'SIZES',
+                                  },
+                                  {
+                                    value: false,
+                                    label: 'Advanced settings',
+                                    key: 'advancedSettings',
+                                    type: 'TOGGLE',
+                                  },
+                                  {
+                                    type: 'VARIABLE',
+                                    label: 'test attribute',
+                                    key: 'dataComponentAttribute',
+                                    value: ['Alert'],
+                                    configuration: {
+                                      condition: {
+                                        type: 'SHOW',
+                                        option: 'advancedSettings',
+                                        comparator: 'EQ',
+                                        value: true,
+                                      },
+                                    },
                                   },
                                 ],
                                 descendants: [],
@@ -11792,6 +12434,26 @@
                                     label: 'Redirect after succesful submit',
                                     key: 'redirect',
                                     type: 'ENDPOINT',
+                                  },
+                                  {
+                                    value: false,
+                                    label: 'Advanced settings',
+                                    key: 'advancedSettings',
+                                    type: 'TOGGLE',
+                                  },
+                                  {
+                                    type: 'VARIABLE',
+                                    label: 'test attribute',
+                                    key: 'dataComponentAttribute',
+                                    value: ['Form'],
+                                    configuration: {
+                                      condition: {
+                                        type: 'SHOW',
+                                        option: 'advancedSettings',
+                                        comparator: 'EQ',
+                                        value: true,
+                                      },
+                                    },
                                   },
                                 ],
                                 descendants: [
@@ -12228,6 +12890,26 @@
                                           },
                                         },
                                       },
+                                      {
+                                        value: false,
+                                        label: 'Advanced settings',
+                                        key: 'advancedSettings',
+                                        type: 'TOGGLE',
+                                      },
+                                      {
+                                        type: 'VARIABLE',
+                                        label: 'test attribute',
+                                        key: 'dataComponentAttribute',
+                                        value: ['Box'],
+                                        configuration: {
+                                          condition: {
+                                            type: 'SHOW',
+                                            option: 'advancedSettings',
+                                            comparator: 'EQ',
+                                            value: true,
+                                          },
+                                        },
+                                      },
                                     ],
                                     descendants: [
                                       {
@@ -12453,6 +13135,26 @@
                                               condition: {
                                                 type: 'SHOW',
                                                 option: 'addTooltip',
+                                                comparator: 'EQ',
+                                                value: true,
+                                              },
+                                            },
+                                          },
+                                          {
+                                            value: false,
+                                            label: 'Advanced settings',
+                                            key: 'advancedSettings',
+                                            type: 'TOGGLE',
+                                          },
+                                          {
+                                            type: 'VARIABLE',
+                                            label: 'test attribute',
+                                            key: 'dataComponentAttribute',
+                                            value: ['Button'],
+                                            configuration: {
+                                              condition: {
+                                                type: 'SHOW',
+                                                option: 'advancedSettings',
                                                 comparator: 'EQ',
                                                 value: true,
                                               },
@@ -12701,6 +13403,26 @@
                                               },
                                             },
                                           },
+                                          {
+                                            value: false,
+                                            label: 'Advanced settings',
+                                            key: 'advancedSettings',
+                                            type: 'TOGGLE',
+                                          },
+                                          {
+                                            type: 'VARIABLE',
+                                            label: 'test attribute',
+                                            key: 'dataComponentAttribute',
+                                            value: ['Button'],
+                                            configuration: {
+                                              condition: {
+                                                type: 'SHOW',
+                                                option: 'advancedSettings',
+                                                comparator: 'EQ',
+                                                value: true,
+                                              },
+                                            },
+                                          },
                                         ],
                                         descendants: [],
                                       },
@@ -12739,6 +13461,26 @@
                     label: 'Inner space',
                     key: 'innerSpacing',
                     type: 'SIZES',
+                  },
+                  {
+                    value: false,
+                    label: 'Advanced settings',
+                    key: 'advancedSettings',
+                    type: 'TOGGLE',
+                  },
+                  {
+                    type: 'VARIABLE',
+                    label: 'test attribute',
+                    key: 'dataComponentAttribute',
+                    value: ['DrawerContainer'],
+                    configuration: {
+                      condition: {
+                        type: 'SHOW',
+                        option: 'advancedSettings',
+                        comparator: 'EQ',
+                        value: true,
+                      },
+                    },
                   },
                 ],
                 descendants: [
@@ -12936,6 +13678,26 @@
                               value: 'dense',
                             },
                           ],
+                        },
+                      },
+                      {
+                        value: false,
+                        label: 'Advanced settings',
+                        key: 'advancedSettings',
+                        type: 'TOGGLE',
+                      },
+                      {
+                        type: 'VARIABLE',
+                        label: 'test attribute',
+                        key: 'dataComponentAttribute',
+                        value: ['AppBar'],
+                        configuration: {
+                          condition: {
+                            type: 'SHOW',
+                            option: 'advancedSettings',
+                            comparator: 'EQ',
+                            value: true,
+                          },
                         },
                       },
                     ],
@@ -13203,6 +13965,26 @@
                               condition: {
                                 type: 'SHOW',
                                 option: 'addTooltip',
+                                comparator: 'EQ',
+                                value: true,
+                              },
+                            },
+                          },
+                          {
+                            value: false,
+                            label: 'Advanced settings',
+                            key: 'advancedSettings',
+                            type: 'TOGGLE',
+                          },
+                          {
+                            type: 'VARIABLE',
+                            label: 'test attribute',
+                            key: 'dataComponentAttribute',
+                            value: ['Button'],
+                            configuration: {
+                              condition: {
+                                type: 'SHOW',
+                                option: 'advancedSettings',
                                 comparator: 'EQ',
                                 value: true,
                               },
@@ -13479,6 +14261,26 @@
                               },
                             },
                           },
+                          {
+                            value: false,
+                            label: 'Advanced settings',
+                            key: 'advancedSettings',
+                            type: 'TOGGLE',
+                          },
+                          {
+                            type: 'VARIABLE',
+                            label: 'test attribute',
+                            key: 'dataComponentAttribute',
+                            value: ['Button'],
+                            configuration: {
+                              condition: {
+                                type: 'SHOW',
+                                option: 'advancedSettings',
+                                comparator: 'EQ',
+                                value: true,
+                              },
+                            },
+                          },
                         ],
                         descendants: [],
                       },
@@ -13524,6 +14326,26 @@
                         label: 'Outer space',
                         key: 'outerSpacing',
                         type: 'SIZES',
+                      },
+                      {
+                        value: false,
+                        label: 'Advanced settings',
+                        key: 'advancedSettings',
+                        type: 'TOGGLE',
+                      },
+                      {
+                        type: 'VARIABLE',
+                        label: 'test attribute',
+                        key: 'dataComponentAttribute',
+                        value: ['Row'],
+                        configuration: {
+                          condition: {
+                            type: 'SHOW',
+                            option: 'advancedSettings',
+                            comparator: 'EQ',
+                            value: true,
+                          },
+                        },
                       },
                     ],
                     descendants: [
@@ -13705,6 +14527,26 @@
                             label: 'Inner space',
                             key: 'innerSpacing',
                             type: 'SIZES',
+                          },
+                          {
+                            value: false,
+                            label: 'Advanced settings',
+                            key: 'advancedSettings',
+                            type: 'TOGGLE',
+                          },
+                          {
+                            type: 'VARIABLE',
+                            label: 'test attribute',
+                            key: 'dataComponentAttribute',
+                            value: ['Column'],
+                            configuration: {
+                              condition: {
+                                type: 'SHOW',
+                                option: 'advancedSettings',
+                                comparator: 'EQ',
+                                value: true,
+                              },
+                            },
                           },
                         ],
                         descendants: [
@@ -14101,6 +14943,26 @@
                                   },
                                 },
                               },
+                              {
+                                value: false,
+                                label: 'Advanced settings',
+                                key: 'advancedSettings',
+                                type: 'TOGGLE',
+                              },
+                              {
+                                type: 'VARIABLE',
+                                label: 'test attribute',
+                                key: 'dataComponentAttribute',
+                                value: ['Box'],
+                                configuration: {
+                                  condition: {
+                                    type: 'SHOW',
+                                    option: 'advancedSettings',
+                                    comparator: 'EQ',
+                                    value: true,
+                                  },
+                                },
+                              },
                             ],
                             descendants: [
                               {
@@ -14143,6 +15005,26 @@
                                     label: 'Outer space',
                                     key: 'outerSpacing',
                                     type: 'SIZES',
+                                  },
+                                  {
+                                    value: false,
+                                    label: 'Advanced settings',
+                                    key: 'advancedSettings',
+                                    type: 'TOGGLE',
+                                  },
+                                  {
+                                    type: 'VARIABLE',
+                                    label: 'test attribute',
+                                    key: 'dataComponentAttribute',
+                                    value: ['Row'],
+                                    configuration: {
+                                      condition: {
+                                        type: 'SHOW',
+                                        option: 'advancedSettings',
+                                        comparator: 'EQ',
+                                        value: true,
+                                      },
+                                    },
                                   },
                                 ],
                                 descendants: [
@@ -14362,6 +15244,26 @@
                                         key: 'innerSpacing',
                                         type: 'SIZES',
                                       },
+                                      {
+                                        value: false,
+                                        label: 'Advanced settings',
+                                        key: 'advancedSettings',
+                                        type: 'TOGGLE',
+                                      },
+                                      {
+                                        type: 'VARIABLE',
+                                        label: 'test attribute',
+                                        key: 'dataComponentAttribute',
+                                        value: ['Column'],
+                                        configuration: {
+                                          condition: {
+                                            type: 'SHOW',
+                                            option: 'advancedSettings',
+                                            comparator: 'EQ',
+                                            value: true,
+                                          },
+                                        },
+                                      },
                                     ],
                                     descendants: [
                                       {
@@ -14432,6 +15334,26 @@
                                             label: 'Right',
                                             key: 'right',
                                             value: [],
+                                          },
+                                          {
+                                            value: false,
+                                            label: 'Advanced settings',
+                                            key: 'advancedSettings',
+                                            type: 'TOGGLE',
+                                          },
+                                          {
+                                            type: 'VARIABLE',
+                                            label: 'test attribute',
+                                            key: 'dataComponentAttribute',
+                                            value: ['Conditional'],
+                                            configuration: {
+                                              condition: {
+                                                type: 'SHOW',
+                                                option: 'advancedSettings',
+                                                comparator: 'EQ',
+                                                value: true,
+                                              },
+                                            },
                                           },
                                         ],
                                         descendants: [
@@ -14902,6 +15824,26 @@
                                                   },
                                                 },
                                               },
+                                              {
+                                                value: false,
+                                                label: 'Advanced settings',
+                                                key: 'advancedSettings',
+                                                type: 'TOGGLE',
+                                              },
+                                              {
+                                                type: 'VARIABLE',
+                                                label: 'test attribute',
+                                                key: 'dataComponentAttribute',
+                                                value: ['Box'],
+                                                configuration: {
+                                                  condition: {
+                                                    type: 'SHOW',
+                                                    option: 'advancedSettings',
+                                                    comparator: 'EQ',
+                                                    value: true,
+                                                  },
+                                                },
+                                              },
                                             ],
                                             descendants: [
                                               {
@@ -15084,6 +16026,28 @@
                                                       condition: {
                                                         type: 'SHOW',
                                                         option: 'styles',
+                                                        comparator: 'EQ',
+                                                        value: true,
+                                                      },
+                                                    },
+                                                  },
+                                                  {
+                                                    value: false,
+                                                    label: 'Advanced settings',
+                                                    key: 'advancedSettings',
+                                                    type: 'TOGGLE',
+                                                  },
+                                                  {
+                                                    type: 'VARIABLE',
+                                                    label: 'test attribute',
+                                                    key:
+                                                      'dataComponentAttribute',
+                                                    value: ['Text'],
+                                                    configuration: {
+                                                      condition: {
+                                                        type: 'SHOW',
+                                                        option:
+                                                          'advancedSettings',
                                                         comparator: 'EQ',
                                                         value: true,
                                                       },
@@ -15272,6 +16236,28 @@
                                                       condition: {
                                                         type: 'SHOW',
                                                         option: 'styles',
+                                                        comparator: 'EQ',
+                                                        value: true,
+                                                      },
+                                                    },
+                                                  },
+                                                  {
+                                                    value: false,
+                                                    label: 'Advanced settings',
+                                                    key: 'advancedSettings',
+                                                    type: 'TOGGLE',
+                                                  },
+                                                  {
+                                                    type: 'VARIABLE',
+                                                    label: 'test attribute',
+                                                    key:
+                                                      'dataComponentAttribute',
+                                                    value: ['Text'],
+                                                    configuration: {
+                                                      condition: {
+                                                        type: 'SHOW',
+                                                        option:
+                                                          'advancedSettings',
                                                         comparator: 'EQ',
                                                         value: true,
                                                       },
@@ -15501,6 +16487,26 @@
                                         label: 'Inner space',
                                         key: 'innerSpacing',
                                         type: 'SIZES',
+                                      },
+                                      {
+                                        value: false,
+                                        label: 'Advanced settings',
+                                        key: 'advancedSettings',
+                                        type: 'TOGGLE',
+                                      },
+                                      {
+                                        type: 'VARIABLE',
+                                        label: 'test attribute',
+                                        key: 'dataComponentAttribute',
+                                        value: ['Column'],
+                                        configuration: {
+                                          condition: {
+                                            type: 'SHOW',
+                                            option: 'advancedSettings',
+                                            comparator: 'EQ',
+                                            value: true,
+                                          },
+                                        },
                                       },
                                     ],
                                     descendants: [
@@ -15954,6 +16960,26 @@
                                               },
                                             },
                                           },
+                                          {
+                                            value: false,
+                                            label: 'Advanced settings',
+                                            key: 'advancedSettings',
+                                            type: 'TOGGLE',
+                                          },
+                                          {
+                                            type: 'VARIABLE',
+                                            label: 'test attribute',
+                                            key: 'dataComponentAttribute',
+                                            value: ['Box'],
+                                            configuration: {
+                                              condition: {
+                                                type: 'SHOW',
+                                                option: 'advancedSettings',
+                                                comparator: 'EQ',
+                                                value: true,
+                                              },
+                                            },
+                                          },
                                         ],
                                         descendants: [
                                           {
@@ -16141,6 +17167,26 @@
                                                   condition: {
                                                     type: 'SHOW',
                                                     option: 'styles',
+                                                    comparator: 'EQ',
+                                                    value: true,
+                                                  },
+                                                },
+                                              },
+                                              {
+                                                value: false,
+                                                label: 'Advanced settings',
+                                                key: 'advancedSettings',
+                                                type: 'TOGGLE',
+                                              },
+                                              {
+                                                type: 'VARIABLE',
+                                                label: 'test attribute',
+                                                key: 'dataComponentAttribute',
+                                                value: ['Text'],
+                                                configuration: {
+                                                  condition: {
+                                                    type: 'SHOW',
+                                                    option: 'advancedSettings',
                                                     comparator: 'EQ',
                                                     value: true,
                                                   },
@@ -16367,6 +17413,26 @@
                                                   condition: {
                                                     type: 'SHOW',
                                                     option: 'addTooltip',
+                                                    comparator: 'EQ',
+                                                    value: true,
+                                                  },
+                                                },
+                                              },
+                                              {
+                                                value: false,
+                                                label: 'Advanced settings',
+                                                key: 'advancedSettings',
+                                                type: 'TOGGLE',
+                                              },
+                                              {
+                                                type: 'VARIABLE',
+                                                label: 'test attribute',
+                                                key: 'dataComponentAttribute',
+                                                value: ['Button'],
+                                                configuration: {
+                                                  condition: {
+                                                    type: 'SHOW',
+                                                    option: 'advancedSettings',
                                                     comparator: 'EQ',
                                                     value: true,
                                                   },
@@ -16787,6 +17853,26 @@
                                               ],
                                             },
                                           },
+                                          {
+                                            value: false,
+                                            label: 'Advanced settings',
+                                            key: 'advancedSettings',
+                                            type: 'TOGGLE',
+                                          },
+                                          {
+                                            type: 'VARIABLE',
+                                            label: 'test attribute',
+                                            key: 'dataComponentAttribute',
+                                            value: ['DataTable'],
+                                            configuration: {
+                                              condition: {
+                                                type: 'SHOW',
+                                                option: 'advancedSettings',
+                                                comparator: 'EQ',
+                                                value: true,
+                                              },
+                                            },
+                                          },
                                         ],
                                         descendants: [],
                                       },
@@ -16955,6 +18041,26 @@
                     key: 'borderColor',
                     value: 'Light',
                   },
+                  {
+                    value: false,
+                    label: 'Advanced settings',
+                    key: 'advancedSettings',
+                    type: 'TOGGLE',
+                  },
+                  {
+                    type: 'VARIABLE',
+                    label: 'test attribute',
+                    key: 'dataComponentAttribute',
+                    value: ['DataTableColumn'],
+                    configuration: {
+                      condition: {
+                        type: 'SHOW',
+                        option: 'advancedSettings',
+                        comparator: 'EQ',
+                        value: true,
+                      },
+                    },
+                  },
                 ],
                 descendants:
                   property.kind === 'IMAGE'
@@ -17115,6 +18221,26 @@
                               key: 'outerSpacing',
                               type: 'SIZES',
                             },
+                            {
+                              value: false,
+                              label: 'Advanced settings',
+                              key: 'advancedSettings',
+                              type: 'TOGGLE',
+                            },
+                            {
+                              type: 'VARIABLE',
+                              label: 'test attribute',
+                              key: 'dataComponentAttribute',
+                              value: ['Media'],
+                              configuration: {
+                                condition: {
+                                  type: 'SHOW',
+                                  option: 'advancedSettings',
+                                  comparator: 'EQ',
+                                  value: true,
+                                },
+                              },
+                            },
                           ],
                           descendants: [],
                         },
@@ -17208,6 +18334,26 @@
                   label: 'Border color',
                   key: 'borderColor',
                   value: 'Light',
+                },
+                {
+                  value: false,
+                  label: 'Advanced settings',
+                  key: 'advancedSettings',
+                  type: 'TOGGLE',
+                },
+                {
+                  type: 'VARIABLE',
+                  label: 'test attribute',
+                  key: 'dataComponentAttribute',
+                  value: ['DataTableColumn'],
+                  configuration: {
+                    condition: {
+                      type: 'SHOW',
+                      option: 'advancedSettings',
+                      comparator: 'EQ',
+                      value: true,
+                    },
+                  },
                 },
               ],
               descendants: [
@@ -17583,6 +18729,26 @@
                         },
                       },
                     },
+                    {
+                      value: false,
+                      label: 'Advanced settings',
+                      key: 'advancedSettings',
+                      type: 'TOGGLE',
+                    },
+                    {
+                      type: 'VARIABLE',
+                      label: 'test attribute',
+                      key: 'dataComponentAttribute',
+                      value: ['Box'],
+                      configuration: {
+                        condition: {
+                          type: 'SHOW',
+                          option: 'advancedSettings',
+                          comparator: 'EQ',
+                          value: true,
+                        },
+                      },
+                    },
                   ],
                   descendants: [
                     {
@@ -17788,6 +18954,26 @@
                             condition: {
                               type: 'SHOW',
                               option: 'addTooltip',
+                              comparator: 'EQ',
+                              value: true,
+                            },
+                          },
+                        },
+                        {
+                          value: false,
+                          label: 'Advanced settings',
+                          key: 'advancedSettings',
+                          type: 'TOGGLE',
+                        },
+                        {
+                          type: 'VARIABLE',
+                          label: 'test attribute',
+                          key: 'dataComponentAttribute',
+                          value: ['Button'],
+                          configuration: {
+                            condition: {
+                              type: 'SHOW',
+                              option: 'advancedSettings',
                               comparator: 'EQ',
                               value: true,
                             },
@@ -17999,6 +19185,26 @@
                             condition: {
                               type: 'SHOW',
                               option: 'addTooltip',
+                              comparator: 'EQ',
+                              value: true,
+                            },
+                          },
+                        },
+                        {
+                          value: false,
+                          label: 'Advanced settings',
+                          key: 'advancedSettings',
+                          type: 'TOGGLE',
+                        },
+                        {
+                          type: 'VARIABLE',
+                          label: 'test attribute',
+                          key: 'dataComponentAttribute',
+                          value: ['Button'],
+                          configuration: {
+                            condition: {
+                              type: 'SHOW',
+                              option: 'advancedSettings',
                               comparator: 'EQ',
                               value: true,
                             },
@@ -18379,6 +19585,26 @@
                             },
                           },
                         },
+                        {
+                          value: false,
+                          label: 'Advanced settings',
+                          key: 'advancedSettings',
+                          type: 'TOGGLE',
+                        },
+                        {
+                          type: 'VARIABLE',
+                          label: 'test attribute',
+                          key: 'dataComponentAttribute',
+                          value: ['Box'],
+                          configuration: {
+                            condition: {
+                              type: 'SHOW',
+                              option: 'advancedSettings',
+                              comparator: 'EQ',
+                              value: true,
+                            },
+                          },
+                        },
                       ],
                       descendants: [
                         {
@@ -18589,6 +19815,26 @@
                                 },
                               },
                             },
+                            {
+                              value: false,
+                              label: 'Advanced settings',
+                              key: 'advancedSettings',
+                              type: 'TOGGLE',
+                            },
+                            {
+                              type: 'VARIABLE',
+                              label: 'test attribute',
+                              key: 'dataComponentAttribute',
+                              value: ['Button'],
+                              configuration: {
+                                condition: {
+                                  type: 'SHOW',
+                                  option: 'advancedSettings',
+                                  comparator: 'EQ',
+                                  value: true,
+                                },
+                              },
+                            },
                           ],
                           descendants: [],
                         },
@@ -18634,6 +19880,26 @@
                                   { name: 'Large', value: 'lg' },
                                   { name: 'Extra-large', value: 'xl' },
                                 ],
+                              },
+                            },
+                            {
+                              value: false,
+                              label: 'Advanced settings',
+                              key: 'advancedSettings',
+                              type: 'TOGGLE',
+                            },
+                            {
+                              type: 'VARIABLE',
+                              label: 'test attribute',
+                              key: 'dataComponentAttribute',
+                              value: ['Dialog'],
+                              configuration: {
+                                condition: {
+                                  type: 'SHOW',
+                                  option: 'advancedSettings',
+                                  comparator: 'EQ',
+                                  value: true,
+                                },
                               },
                             },
                           ],
@@ -18710,6 +19976,26 @@
                                   key: 'outerSpacing',
                                   type: 'SIZES',
                                 },
+                                {
+                                  value: false,
+                                  label: 'Advanced settings',
+                                  key: 'advancedSettings',
+                                  type: 'TOGGLE',
+                                },
+                                {
+                                  type: 'VARIABLE',
+                                  label: 'test attribute',
+                                  key: 'dataComponentAttribute',
+                                  value: ['Paper'],
+                                  configuration: {
+                                    condition: {
+                                      type: 'SHOW',
+                                      option: 'advancedSettings',
+                                      comparator: 'EQ',
+                                      value: true,
+                                    },
+                                  },
+                                },
                               ],
                               descendants: [
                                 {
@@ -18752,6 +20038,26 @@
                                       label: 'Outer space',
                                       key: 'outerSpacing',
                                       type: 'SIZES',
+                                    },
+                                    {
+                                      value: false,
+                                      label: 'Advanced settings',
+                                      key: 'advancedSettings',
+                                      type: 'TOGGLE',
+                                    },
+                                    {
+                                      type: 'VARIABLE',
+                                      label: 'test attribute',
+                                      key: 'dataComponentAttribute',
+                                      value: ['Row'],
+                                      configuration: {
+                                        condition: {
+                                          type: 'SHOW',
+                                          option: 'advancedSettings',
+                                          comparator: 'EQ',
+                                          value: true,
+                                        },
+                                      },
                                     },
                                   ],
                                   descendants: [
@@ -19001,6 +20307,26 @@
                                           key: 'innerSpacing',
                                           type: 'SIZES',
                                         },
+                                        {
+                                          value: false,
+                                          label: 'Advanced settings',
+                                          key: 'advancedSettings',
+                                          type: 'TOGGLE',
+                                        },
+                                        {
+                                          type: 'VARIABLE',
+                                          label: 'test attribute',
+                                          key: 'dataComponentAttribute',
+                                          value: ['Column'],
+                                          configuration: {
+                                            condition: {
+                                              type: 'SHOW',
+                                              option: 'advancedSettings',
+                                              comparator: 'EQ',
+                                              value: true,
+                                            },
+                                          },
+                                        },
                                       ],
                                       descendants: [
                                         {
@@ -19102,6 +20428,26 @@
                                                   option: 'loadingType',
                                                   comparator: 'EQ',
                                                   value: 'default',
+                                                },
+                                              },
+                                            },
+                                            {
+                                              value: false,
+                                              label: 'Advanced settings',
+                                              key: 'advancedSettings',
+                                              type: 'TOGGLE',
+                                            },
+                                            {
+                                              type: 'VARIABLE',
+                                              label: 'test attribute',
+                                              key: 'dataComponentAttribute',
+                                              value: ['DataContainer'],
+                                              configuration: {
+                                                condition: {
+                                                  type: 'SHOW',
+                                                  option: 'advancedSettings',
+                                                  comparator: 'EQ',
+                                                  value: true,
                                                 },
                                               },
                                             },
@@ -19506,6 +20852,27 @@
                                                     },
                                                   },
                                                 },
+                                                {
+                                                  value: false,
+                                                  label: 'Advanced settings',
+                                                  key: 'advancedSettings',
+                                                  type: 'TOGGLE',
+                                                },
+                                                {
+                                                  type: 'VARIABLE',
+                                                  label: 'test attribute',
+                                                  key: 'dataComponentAttribute',
+                                                  value: ['Box'],
+                                                  configuration: {
+                                                    condition: {
+                                                      type: 'SHOW',
+                                                      option:
+                                                        'advancedSettings',
+                                                      comparator: 'EQ',
+                                                      value: true,
+                                                    },
+                                                  },
+                                                },
                                               ],
                                               descendants: [
                                                 {
@@ -19630,6 +20997,29 @@
                                                         condition: {
                                                           type: 'SHOW',
                                                           option: 'styles',
+                                                          comparator: 'EQ',
+                                                          value: true,
+                                                        },
+                                                      },
+                                                    },
+                                                    {
+                                                      value: false,
+                                                      label:
+                                                        'Advanced settings',
+                                                      key: 'advancedSettings',
+                                                      type: 'TOGGLE',
+                                                    },
+                                                    {
+                                                      type: 'VARIABLE',
+                                                      label: 'test attribute',
+                                                      key:
+                                                        'dataComponentAttribute',
+                                                      value: ['Text'],
+                                                      configuration: {
+                                                        condition: {
+                                                          type: 'SHOW',
+                                                          option:
+                                                            'advancedSettings',
                                                           comparator: 'EQ',
                                                           value: true,
                                                         },
@@ -19864,6 +21254,29 @@
                                                         },
                                                       },
                                                     },
+                                                    {
+                                                      value: false,
+                                                      label:
+                                                        'Advanced settings',
+                                                      key: 'advancedSettings',
+                                                      type: 'TOGGLE',
+                                                    },
+                                                    {
+                                                      type: 'VARIABLE',
+                                                      label: 'test attribute',
+                                                      key:
+                                                        'dataComponentAttribute',
+                                                      value: ['Button'],
+                                                      configuration: {
+                                                        condition: {
+                                                          type: 'SHOW',
+                                                          option:
+                                                            'advancedSettings',
+                                                          comparator: 'EQ',
+                                                          value: true,
+                                                        },
+                                                      },
+                                                    },
                                                   ],
                                                   descendants: [],
                                                 },
@@ -19920,6 +21333,27 @@
                                                   label: 'Outer space',
                                                   key: 'outerSpacing',
                                                   type: 'SIZES',
+                                                },
+                                                {
+                                                  value: false,
+                                                  label: 'Advanced settings',
+                                                  key: 'advancedSettings',
+                                                  type: 'TOGGLE',
+                                                },
+                                                {
+                                                  type: 'VARIABLE',
+                                                  label: 'test attribute',
+                                                  key: 'dataComponentAttribute',
+                                                  value: ['Row'],
+                                                  configuration: {
+                                                    condition: {
+                                                      type: 'SHOW',
+                                                      option:
+                                                        'advancedSettings',
+                                                      comparator: 'EQ',
+                                                      value: true,
+                                                    },
+                                                  },
                                                 },
                                               ],
                                               descendants: [
@@ -20325,6 +21759,29 @@
                                                       key: 'innerSpacing',
                                                       type: 'SIZES',
                                                     },
+                                                    {
+                                                      value: false,
+                                                      label:
+                                                        'Advanced settings',
+                                                      key: 'advancedSettings',
+                                                      type: 'TOGGLE',
+                                                    },
+                                                    {
+                                                      type: 'VARIABLE',
+                                                      label: 'test attribute',
+                                                      key:
+                                                        'dataComponentAttribute',
+                                                      value: ['Column'],
+                                                      configuration: {
+                                                        condition: {
+                                                          type: 'SHOW',
+                                                          option:
+                                                            'advancedSettings',
+                                                          comparator: 'EQ',
+                                                          value: true,
+                                                        },
+                                                      },
+                                                    },
                                                   ],
                                                   descendants: [
                                                     {
@@ -20452,6 +21909,31 @@
                                                             condition: {
                                                               type: 'SHOW',
                                                               option: 'styles',
+                                                              comparator: 'EQ',
+                                                              value: true,
+                                                            },
+                                                          },
+                                                        },
+                                                        {
+                                                          value: false,
+                                                          label:
+                                                            'Advanced settings',
+                                                          key:
+                                                            'advancedSettings',
+                                                          type: 'TOGGLE',
+                                                        },
+                                                        {
+                                                          type: 'VARIABLE',
+                                                          label:
+                                                            'test attribute',
+                                                          key:
+                                                            'dataComponentAttribute',
+                                                          value: ['Text'],
+                                                          configuration: {
+                                                            condition: {
+                                                              type: 'SHOW',
+                                                              option:
+                                                                'advancedSettings',
                                                               comparator: 'EQ',
                                                               value: true,
                                                             },
@@ -20858,6 +22340,27 @@
                                                     },
                                                   },
                                                 },
+                                                {
+                                                  value: false,
+                                                  label: 'Advanced settings',
+                                                  key: 'advancedSettings',
+                                                  type: 'TOGGLE',
+                                                },
+                                                {
+                                                  type: 'VARIABLE',
+                                                  label: 'test attribute',
+                                                  key: 'dataComponentAttribute',
+                                                  value: ['Box'],
+                                                  configuration: {
+                                                    condition: {
+                                                      type: 'SHOW',
+                                                      option:
+                                                        'advancedSettings',
+                                                      comparator: 'EQ',
+                                                      value: true,
+                                                    },
+                                                  },
+                                                },
                                               ],
                                               descendants: [
                                                 {
@@ -21089,6 +22592,29 @@
                                                         condition: {
                                                           type: 'SHOW',
                                                           option: 'addTooltip',
+                                                          comparator: 'EQ',
+                                                          value: true,
+                                                        },
+                                                      },
+                                                    },
+                                                    {
+                                                      value: false,
+                                                      label:
+                                                        'Advanced settings',
+                                                      key: 'advancedSettings',
+                                                      type: 'TOGGLE',
+                                                    },
+                                                    {
+                                                      type: 'VARIABLE',
+                                                      label: 'test attribute',
+                                                      key:
+                                                        'dataComponentAttribute',
+                                                      value: ['Button'],
+                                                      configuration: {
+                                                        condition: {
+                                                          type: 'SHOW',
+                                                          option:
+                                                            'advancedSettings',
                                                           comparator: 'EQ',
                                                           value: true,
                                                         },
@@ -21352,6 +22878,29 @@
                                                         condition: {
                                                           type: 'SHOW',
                                                           option: 'addTooltip',
+                                                          comparator: 'EQ',
+                                                          value: true,
+                                                        },
+                                                      },
+                                                    },
+                                                    {
+                                                      value: false,
+                                                      label:
+                                                        'Advanced settings',
+                                                      key: 'advancedSettings',
+                                                      type: 'TOGGLE',
+                                                    },
+                                                    {
+                                                      type: 'VARIABLE',
+                                                      label: 'test attribute',
+                                                      key:
+                                                        'dataComponentAttribute',
+                                                      value: ['Button'],
+                                                      configuration: {
+                                                        condition: {
+                                                          type: 'SHOW',
+                                                          option:
+                                                            'advancedSettings',
                                                           comparator: 'EQ',
                                                           value: true,
                                                         },
@@ -21922,6 +23471,26 @@
           type: 'TOGGLE',
           configuration: {
             as: 'VISIBILITY',
+          },
+        },
+        {
+          value: false,
+          label: 'Advanced settings',
+          key: 'advancedSettings',
+          type: 'TOGGLE',
+        },
+        {
+          type: 'VARIABLE',
+          label: 'test attribute',
+          key: 'dataComponentAttribute',
+          value: ['Drawer'],
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'advancedSettings',
+              comparator: 'EQ',
+              value: true,
+            },
           },
         },
       ],

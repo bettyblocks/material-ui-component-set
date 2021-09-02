@@ -174,6 +174,20 @@
             },
           },
         },
+        {
+          type: 'VARIABLE',
+          label: 'test attribute',
+          key: 'dataComponentAttribute',
+          value: ['Checkbox'],
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'advancedSettings',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
       ],
       descendants: [],
     },

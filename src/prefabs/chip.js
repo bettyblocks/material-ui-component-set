@@ -1378,6 +1378,26 @@
           key: 'margin',
           value: ['M', 'M', 'M', 'M'],
         },
+        {
+          value: false,
+          label: 'Advanced settings',
+          key: 'advancedSettings',
+          type: 'TOGGLE',
+        },
+        {
+          type: 'VARIABLE',
+          label: 'test attribute',
+          key: 'dataComponentAttribute',
+          value: ['Chip'],
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'advancedSettings',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
       ],
       descendants: [],
     },

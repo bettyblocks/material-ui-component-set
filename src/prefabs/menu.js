@@ -1460,6 +1460,26 @@
           value: false,
           type: 'TOGGLE',
         },
+        {
+          value: false,
+          label: 'Advanced settings',
+          key: 'advancedSettings',
+          type: 'TOGGLE',
+        },
+        {
+          type: 'VARIABLE',
+          label: 'test attribute',
+          key: 'dataComponentAttribute',
+          value: ['Menu'],
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'advancedSettings',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
       ],
       descendants: [
         {
@@ -2851,6 +2871,26 @@
               label: 'Divider',
               key: 'divider',
               value: false,
+            },
+            {
+              value: false,
+              label: 'Advanced settings',
+              key: 'advancedSettings',
+              type: 'TOGGLE',
+            },
+            {
+              type: 'VARIABLE',
+              label: 'test attribute',
+              key: 'dataComponentAttribute',
+              value: ['MenuItem'],
+              configuration: {
+                condition: {
+                  type: 'SHOW',
+                  option: 'advancedSettings',
+                  comparator: 'EQ',
+                  value: true,
+                },
+              },
             },
           ],
           descendants: [],

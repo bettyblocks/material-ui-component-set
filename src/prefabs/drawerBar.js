@@ -25,6 +25,26 @@
           key: 'innerSpacing',
           type: 'SIZES',
         },
+        {
+          value: false,
+          label: 'Advanced settings',
+          key: 'advancedSettings',
+          type: 'TOGGLE',
+        },
+        {
+          type: 'VARIABLE',
+          label: 'test attribute',
+          key: 'dataComponentAttribute',
+          value: ['DrawerSidebar'],
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'advancedSettings',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
       ],
       descendants: [
         {
@@ -68,6 +88,26 @@
               label: 'Dense',
               key: 'dense',
               value: false,
+            },
+            {
+              value: false,
+              label: 'Advanced settings',
+              key: 'advancedSettings',
+              type: 'TOGGLE',
+            },
+            {
+              type: 'VARIABLE',
+              label: 'test attribute',
+              key: 'dataComponentAttribute',
+              value: ['List'],
+              configuration: {
+                condition: {
+                  type: 'SHOW',
+                  option: 'advancedSettings',
+                  comparator: 'EQ',
+                  value: true,
+                },
+              },
             },
           ],
           descendants: [
@@ -1441,6 +1481,26 @@
                   label: 'Selected',
                   key: 'selected',
                   value: false,
+                },
+                {
+                  value: false,
+                  label: 'Advanced settings',
+                  key: 'advancedSettings',
+                  type: 'TOGGLE',
+                },
+                {
+                  type: 'VARIABLE',
+                  label: 'test attribute',
+                  key: 'dataComponentAttribute',
+                  value: ['ListItem'],
+                  configuration: {
+                    condition: {
+                      type: 'SHOW',
+                      option: 'advancedSettings',
+                      comparator: 'EQ',
+                      value: true,
+                    },
+                  },
                 },
               ],
               descendants: [],
