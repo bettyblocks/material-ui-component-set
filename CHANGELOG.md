@@ -1,3 +1,12 @@
+## [1.166.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.166.1...v1.166.2) (2021-08-31)
+
+
+### Bug Fixes
+
+* login interaction uses react router ([962bf22](https://github.com/bettyblocks/material-ui-component-set/commit/962bf22952c27610a58b8a05abc05bdcdc652519))
+* logout uses react router dom ([8d556e2](https://github.com/bettyblocks/material-ui-component-set/commit/8d556e27faead2e95dd1d65872015a0a069fc32d))
+* make sure onlu one interaction is in pull request ([b4ea93b](https://github.com/bettyblocks/material-ui-component-set/commit/b4ea93b35fc442ede4429f2e522c73520035aec8))
+
 ## [1.166.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.166.0...v1.166.1) (2021-08-30)
 
 

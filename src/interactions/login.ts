@@ -1,5 +1,5 @@
 interface Event {
-  isValid?: boolean;
+  isValid: boolean;
   jwtToken: string;
   refreshToken: string;
 }
@@ -9,6 +9,10 @@ interface Page {
   url: string;
 }
 
+interface History {
+  push(url: string): string;
+}
+
 function login({
   event,
   redirectTo,
@@ -16,12 +20,12 @@ function login({
   event: Event;
   redirectTo: Page;
 }): void {
-  if (!event?.isValid) return;
-
-  const { jwtToken, refreshToken } = event;
+  const { isValid, jwtToken, refreshToken } = event;
   const { url } = redirectTo;
 
-  localStorage.setItem('TOKEN', jwtToken);
-  localStorage.setItem('REFRESH_TOKEN', refreshToken);
-  window.location.href = url;
+  if (isValid) {
+    localStorage.setItem('TOKEN', jwtToken);
+    localStorage.setItem('REFRESH_TOKEN', refreshToken);
+    history.push(url);
+  }
 }
