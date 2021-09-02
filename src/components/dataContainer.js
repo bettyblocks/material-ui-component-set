@@ -16,6 +16,7 @@
           currentRecord,
           loadingType,
           loadingText,
+          dataComponentAttribute,
         } = options;
 
         const isEmpty = children.length === 0;
@@ -66,24 +67,47 @@
 
               if (loading && loadingType === 'default') {
                 B.triggerEvent('onLoad', loading);
-                return <span>{parsedLoadingText}</span>;
+                return (
+                  <span
+                    data-component={dataComponentAttribute || 'DataContainer'}
+                  >
+                    {parsedLoadingText}
+                  </span>
+                );
               }
 
               if (loading && loadingType === 'showChildren') {
                 B.triggerEvent('onLoad', loading);
                 // key attribute forces a rerender after loading
-                return <div key={`data-loading-${loading}`}>{children}</div>;
+                return (
+                  <div
+                    key={`data-loading-${loading}`}
+                    data-component={dataComponentAttribute || 'DataContainer'}
+                  >
+                    {children}
+                  </div>
+                );
               }
 
               if (error && displayError) {
-                return <span>{error.message}</span>;
+                return (
+                  <span
+                    data-component={dataComponentAttribute || 'DataContainer'}
+                  >
+                    {error.message}
+                  </span>
+                );
               }
 
               if (!data && redirectWithoutResult) {
                 redirect();
               }
 
-              return <div>{children}</div>;
+              return (
+                <div data-component={dataComponentAttribute || 'DataContainer'}>
+                  {children}
+                </div>
+              );
             }}
           </GetOne>
         );
@@ -109,6 +133,7 @@
               isEmpty ? classes.empty : '',
               isPristine ? classes.pristine : '',
             ].join(' ')}
+            data-component={dataComponentAttribute || 'DataContainer'}
           >
             {isPristine
               ? 'Drag a component in the data container to display the data'

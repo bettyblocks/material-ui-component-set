@@ -6,7 +6,10 @@
   jsx: (
     <div className={classes.root}>
       <div className={B.env === 'dev' ? classes.clickSpace : ''}>
-        <hr className={classes.divider} />
+        <hr
+          className={classes.divider}
+          data-component={options.dataComponentAttribute || 'Divider'}
+        />
       </div>
     </div>
   ),

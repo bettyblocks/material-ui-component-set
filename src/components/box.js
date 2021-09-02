@@ -13,6 +13,7 @@
       backgroundColor,
       borderColor,
       backgroundUrl,
+      dataComponentAttribute,
     } = options;
     const isDev = env === 'dev';
     const hasBackgroundColor = backgroundColor !== 'Transparent';
@@ -39,6 +40,7 @@
       justifyContent: alignment !== 'none' && alignment,
       flexDirection: isFlex && 'row',
       alignItems: valignment !== 'none' && valignment,
+      'data-component': dataComponentAttribute || 'Box',
     };
 
     const handleClick = () => {

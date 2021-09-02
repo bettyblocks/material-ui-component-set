@@ -14,6 +14,7 @@
       temporaryAnchor,
       breakpoint,
       visibility,
+      dataComponentAttribute,
     } = options;
 
     const isTemporary = drawerType === 'temporary';
@@ -36,6 +37,7 @@
           isEmpty ? classes.empty : '',
           isPristine ? classes.pristine : '',
         ].join(' ')}
+        data-component={dataComponentAttribute || 'Drawer'}
       >
         {isPristine ? (
           'Drawer'

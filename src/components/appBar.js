@@ -22,6 +22,7 @@
       toolbarVariant,
       square,
       elevation,
+      dataComponentAttribute,
     } = options;
     const { Link, env, useText } = B;
     const isDev = env === 'dev';
@@ -53,6 +54,7 @@
         variant={appBarVariant}
         square={square}
         elevation={appBarVariant === 'flat' ? 0 : elevation}
+        data-component={dataComponentAttribute || 'AppBar'}
       >
         <Toolbar variant={toolbarVariant} classes={{ root: classes.toolbar }}>
           {logo.length > 0 && LogoComponent}

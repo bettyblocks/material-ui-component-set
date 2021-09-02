@@ -23,6 +23,7 @@
       allSteps,
       buttonNext,
       buttonPrev,
+      dataComponentAttribute,
     } = options;
 
     const isDev = env === 'dev';
@@ -75,6 +76,7 @@
           activeStep={activeStep}
           orientation={type}
           classes={{ root: classes.root }}
+          data-component={dataComponentAttribute || 'Stepper'}
         >
           {React.Children.map(children, (child, index) => {
             const { options: childOptions = {} } = child.props || {};
@@ -217,6 +219,7 @@
               {buttonPrevText}
             </Button>
           }
+          data-component={dataComponentAttribute || 'Stepper'}
         />
       </>
     );

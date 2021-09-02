@@ -180,7 +180,7 @@
           type: 'VARIABLE',
           label: 'Test attribute',
           key: 'dataComponentAttribute',
-          value: ['Steper'],
+          value: ['Stepper'],
           configuration: {
             condition: {
               type: 'SHOW',

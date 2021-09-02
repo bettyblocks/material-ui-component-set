@@ -7,7 +7,14 @@
     const { Typography, Box } = window.MaterialUI.Core;
     const { env } = B;
     const isDev = env === 'dev';
-    const { label, icon, disabled, disableRipple, iconAlignment } = options;
+    const {
+      label,
+      icon,
+      disabled,
+      disableRipple,
+      iconAlignment,
+      dataComponentAttribute,
+    } = options;
     const {
       value,
       tabData,
@@ -40,6 +47,7 @@
         hidden={!isActive}
         aria-labelledby="tabs"
         classes={{ root: classes.root }}
+        data-component={dataComponentAttribute || 'Tab'}
       >
         {children.length === 0 ? <EmptyBox /> : children}
       </Typography>

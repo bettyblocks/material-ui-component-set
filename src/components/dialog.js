@@ -10,6 +10,7 @@
       isFullscreen,
       width,
       disableClick: disableBackdropClick,
+      dataComponentAttribute,
     } = options;
     const { Dialog } = window.MaterialUI.Core;
     const isDev = env === 'dev';
@@ -50,6 +51,7 @@
         aria-labelledby="modal-dialog"
         keepMounted
         disableBackdropClick={disableBackdropClick}
+        data-component={dataComponentAttribute || 'Dialog'}
       >
         {children}
       </Dialog>

@@ -15,6 +15,7 @@
       maxItems,
       itemsAfterCollapse,
       itemsBeforeCollapse,
+      dataComponentAttribute,
     } = options;
 
     const isEmpty = children.length === 0;
@@ -37,6 +38,7 @@
       separator,
       itemsAfterCollapse: parseInt(itemsAfterCollapse, 10),
       itemsBeforeCollapse: parseInt(itemsBeforeCollapse, 10),
+      'data-component': dataComponentAttribute || 'Breadcrumbs',
     };
     if (!isDev && maxItems !== '0') {
       breadcrumbsOptions.maxItems = parseInt(maxItems, 10);

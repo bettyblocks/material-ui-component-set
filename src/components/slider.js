@@ -24,6 +24,7 @@
       helperText,
       error,
       hideLabel,
+      dataComponentAttribute,
     } = options;
     const {
       id: customModelAttributeId,
@@ -102,6 +103,7 @@
                 thumb: classes.thumb,
                 focusVisible: classes.thumbFocusVisible,
               }}
+              data-component={dataComponentAttribute || 'Slider'}
             />
           </div>
           {helper && (
