@@ -93,7 +93,7 @@
     B.defineFunction('Set Left Value', evt => setLeftValue(getValue(evt)));
     B.defineFunction('Set Right Value', evt => setRightValue(getValue(evt)));
 
-    if (!isDev && !visible) return null;
+    if (!isDev && !visible) return <></>;
     return (
       <div
         className={children.length === 0 ? classes.empty : undefined}
