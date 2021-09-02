@@ -1,7 +1,7 @@
 (() => ({
   name: 'Rating',
   icon: 'RatingIcon',
-  category: 'CONTENT',
+  category: 'FORM',
   keywords: ['form', 'input', 'rating'],
   structure: [
     {

@@ -1,7 +1,7 @@
 (() => ({
   name: 'Carousel Image',
   icon: 'ImageIcon',
-  category: 'NAVIGATION',
+  category: 'CONTENT',
   keywords: ['image', 'carousel', 'image carousel'],
   structure: [
     {
