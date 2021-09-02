@@ -55,6 +55,7 @@
       showError,
       autoLoadOnScroll,
       autoLoadTakeAmount,
+      dataComponentAttribute,
     } = options;
     const repeaterRef = React.createRef();
     const tableRef = React.createRef();
@@ -592,7 +593,10 @@
     }, [showPagination, hasToolbar]);
 
     return (
-      <div className={classes.root}>
+      <div
+        className={classes.root}
+        data-component={dataComponentAttribute || 'DataTable'}
+      >
         <Paper
           classes={{ root: classes.paper }}
           square={square}

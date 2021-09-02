@@ -26,6 +26,7 @@
       order,
       orderBy,
       validationValueMissing,
+      dataComponentAttribute,
     } = options;
 
     const {
@@ -215,7 +216,12 @@
         {labelText && !hideLabel && (
           <FormLabel component="legend">{labelText}</FormLabel>
         )}
-        <FormGroup row={row}>{renderCheckBoxes()}</FormGroup>
+        <FormGroup
+          row={row}
+          data-component={dataComponentAttribute || 'CheckboxGroup'}
+        >
+          {renderCheckBoxes()}
+        </FormGroup>
         {helper && <FormHelperText>{helper}</FormHelperText>}
       </FormControl>
     );

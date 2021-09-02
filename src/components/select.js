@@ -26,6 +26,7 @@
       order,
       orderBy,
       blanco,
+      dataComponentAttribute,
     } = options;
     const {
       env,
@@ -288,6 +289,7 @@
           inputProps={{
             name: nameAttributeValue || customModelAttributeName,
             tabIndex: isDev ? -1 : 0,
+            'data-component': dataComponentAttribute || 'Select',
           }}
           required={required}
           disabled={disabled}

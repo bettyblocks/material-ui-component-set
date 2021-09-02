@@ -45,6 +45,26 @@
           key: 'outerSpacing',
           type: 'SIZES',
         },
+        {
+          value: false,
+          label: 'Advanced settings',
+          key: 'advancedSettings',
+          type: 'TOGGLE',
+        },
+        {
+          type: 'VARIABLE',
+          label: 'Test attribute',
+          key: 'dataComponentAttribute',
+          value: ['Row'],
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'advancedSettings',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
       ],
       descendants: [
         {
@@ -226,6 +246,26 @@
               key: 'innerSpacing',
               type: 'SIZES',
             },
+            {
+              value: false,
+              label: 'Advanced settings',
+              key: 'advancedSettings',
+              type: 'TOGGLE',
+            },
+            {
+              type: 'VARIABLE',
+              label: 'Test attribute',
+              key: 'dataComponentAttribute',
+              value: ['Column'],
+              configuration: {
+                condition: {
+                  type: 'SHOW',
+                  option: 'advancedSettings',
+                  comparator: 'EQ',
+                  value: true,
+                },
+              },
+            },
           ],
           descendants: [],
         },
@@ -414,6 +454,26 @@
               key: 'overflow',
               value: false,
             },
+            {
+              value: false,
+              label: 'Advanced settings',
+              key: 'advancedSettings',
+              type: 'TOGGLE',
+            },
+            {
+              type: 'VARIABLE',
+              label: 'Test attribute',
+              key: 'dataComponentAttribute',
+              value: ['Column'],
+              configuration: {
+                condition: {
+                  type: 'SHOW',
+                  option: 'advancedSettings',
+                  comparator: 'EQ',
+                  value: true,
+                },
+              },
+            },
           ],
           descendants: [],
         },
@@ -595,6 +655,26 @@
               label: 'Inner space',
               key: 'innerSpacing',
               type: 'SIZES',
+            },
+            {
+              value: false,
+              label: 'Advanced settings',
+              key: 'advancedSettings',
+              type: 'TOGGLE',
+            },
+            {
+              type: 'VARIABLE',
+              label: 'Test attribute',
+              key: 'dataComponentAttribute',
+              value: ['Column'],
+              configuration: {
+                condition: {
+                  type: 'SHOW',
+                  option: 'advancedSettings',
+                  comparator: 'EQ',
+                  value: true,
+                },
+              },
             },
           ],
           descendants: [],
@@ -783,6 +863,26 @@
               label: 'Allow overflow',
               key: 'overflow',
               value: false,
+            },
+            {
+              value: false,
+              label: 'Advanced settings',
+              key: 'advancedSettings',
+              type: 'TOGGLE',
+            },
+            {
+              type: 'VARIABLE',
+              label: 'Test attribute',
+              key: 'dataComponentAttribute',
+              value: ['Column'],
+              configuration: {
+                condition: {
+                  type: 'SHOW',
+                  option: 'advancedSettings',
+                  comparator: 'EQ',
+                  value: true,
+                },
+              },
             },
           ],
           descendants: [],

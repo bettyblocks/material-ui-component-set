@@ -5,7 +5,7 @@
   orientation: 'VERTICAL',
   jsx: (() => {
     const { ListSubheader } = window.MaterialUI.Core;
-    const { text, inset } = options;
+    const { text, inset, dataComponentAttribute } = options;
     const { env, useText } = B;
     const isDev = env === 'dev';
 
@@ -20,7 +20,11 @@
       );
 
     return (
-      <ListSubheader className={classes.root} inset={inset}>
+      <ListSubheader
+        className={classes.root}
+        inset={inset}
+        data-component={dataComponentAttribute || 'ListHeader'}
+      >
         {ItemText}
       </ListSubheader>
     );

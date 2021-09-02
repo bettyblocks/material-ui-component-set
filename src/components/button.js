@@ -25,6 +25,7 @@
       hasVisibleTooltip,
       tooltipContent,
       tooltipPlacement,
+      dataComponentAttribute,
     } = options;
     const {
       env,
@@ -152,6 +153,7 @@
       type: isDev ? 'button' : type,
       endpoint:
         linkType === 'internal' && linkTo && linkTo.id ? linkTo : undefined,
+      'data-component': dataComponentAttribute || 'Button',
     };
 
     const anchorProps = {

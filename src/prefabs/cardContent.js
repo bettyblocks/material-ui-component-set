@@ -6,7 +6,28 @@
   structure: [
     {
       name: 'CardContent',
-      options: [],
+      options: [
+        {
+          value: false,
+          label: 'Advanced settings',
+          key: 'advancedSettings',
+          type: 'TOGGLE',
+        },
+        {
+          type: 'VARIABLE',
+          label: 'Test attribute',
+          key: 'dataComponentAttribute',
+          value: ['CardContent'],
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'advancedSettings',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+      ],
       descendants: [
         {
           name: 'Text',
@@ -87,6 +108,26 @@
                   option: 'linkType',
                   comparator: 'EQ',
                   value: 'external',
+                },
+              },
+            },
+            {
+              value: false,
+              label: 'Advanced settings',
+              key: 'advancedSettings',
+              type: 'TOGGLE',
+            },
+            {
+              type: 'VARIABLE',
+              label: 'Test attribute',
+              key: 'dataComponentAttribute',
+              value: ['Text'],
+              configuration: {
+                condition: {
+                  type: 'SHOW',
+                  option: 'advancedSettings',
+                  comparator: 'EQ',
+                  value: true,
                 },
               },
             },
@@ -172,6 +213,26 @@
                   option: 'linkType',
                   comparator: 'EQ',
                   value: 'external',
+                },
+              },
+            },
+            {
+              value: false,
+              label: 'Advanced settings',
+              key: 'advancedSettings',
+              type: 'TOGGLE',
+            },
+            {
+              type: 'VARIABLE',
+              label: 'Test attribute',
+              key: 'dataComponentAttribute',
+              value: ['Text'],
+              configuration: {
+                condition: {
+                  type: 'SHOW',
+                  option: 'advancedSettings',
+                  comparator: 'EQ',
+                  value: true,
                 },
               },
             },

@@ -28,6 +28,7 @@
       nameAttribute,
       order,
       orderBy,
+      dataComponentAttribute,
     } = options;
     const { Autocomplete } = window.MaterialUI.Lab;
     const {
@@ -93,6 +94,7 @@
       margin,
       helperText: helper,
       classes: { root: classes.formControl },
+      'data-component': dataComponentAttribute || 'AutoComplete',
     };
 
     const searchProp = getProperty(searchProperty) || {};

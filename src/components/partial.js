@@ -7,6 +7,7 @@
     <div className={classes.root}>
       {(() => {
         const { env, getPartial } = B;
+        const { dataComponentAttribute } = options;
         if (env === 'prod') {
           const { partialReferenceId } = options;
 
@@ -17,10 +18,20 @@
             return React.createElement(
               // eslint-disable-next-line
               React.lazy(() => System.import(`./assets/partials/${asset}`)),
+              {
+                'data-component': dataComponentAttribute || 'Partial',
+              },
             );
           }
         }
-        return <div className={classes.root}>{children}</div>;
+        return (
+          <div
+            className={classes.root}
+            data-component={dataComponentAttribute || 'Partial'}
+          >
+            {children}
+          </div>
+        );
       })()}
     </div>
   ),

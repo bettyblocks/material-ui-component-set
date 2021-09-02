@@ -7,7 +7,7 @@
     const { env } = B;
     const { CardActions } = window.MaterialUI.Core;
     const isDev = env === 'dev';
-    const { disableSpacing } = options;
+    const { disableSpacing, dataComponentAttribute } = options;
     const isEmpty = children.length === 0;
     const isPristine = isEmpty && isDev;
     const PlaceHolder = (
@@ -23,6 +23,7 @@
       <CardActions
         classes={{ root: classes.root }}
         disableSpacing={disableSpacing}
+        data-component={dataComponentAttribute || 'CardActions'}
       >
         {isEmpty ? PlaceHolder : children}
       </CardActions>

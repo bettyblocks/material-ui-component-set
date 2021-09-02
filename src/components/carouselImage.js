@@ -7,7 +7,7 @@
     const { env, useText } = B;
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
-    const { label, icon, imageSource } = options || {};
+    const { label, icon, imageSource, dataComponentAttribute } = options || {};
     const {
       stepLabelData,
       setStepLabelData,
@@ -18,7 +18,12 @@
     const imageSourceText = useText(imageSource);
 
     const ImgPlaceholder = () => (
-      <svg className={classes.placeholder} width={86} height={48}>
+      <svg
+        className={classes.placeholder}
+        width={86}
+        height={48}
+        data-component={dataComponentAttribute || 'CarouselImage'}
+      >
         <title>placeholder</title>
         <rect x="19.5" y="8.5" rx="2" />
         <path d="M61.1349945 29.020979v3.9160839H25v-2.5379375l6.5998225-4.9892478 5.6729048 4.2829541 13.346858-11.2981564L61.1349945 29.020979zm-22.5-10.270979c0 1.0416667-.3645833 1.9270833-1.09375 2.65625S35.9266612 22.5 34.8849945 22.5s-1.9270833-.3645833-2.65625-1.09375-1.09375-1.6145833-1.09375-2.65625.3645833-1.9270833 1.09375-2.65625S33.8433278 15 34.8849945 15s1.9270833.3645833 2.65625 1.09375 1.09375 1.6145833 1.09375 2.65625z" />
@@ -34,7 +39,11 @@
         </div>
       ) : (
         <div className={classes.root} style={{ height: parentHeight }}>
-          <img src={imageSourceText} alt="carousel" />
+          <img
+            src={imageSourceText}
+            alt="carousel"
+            data-component={dataComponentAttribute || 'CarouselImage'}
+          />
         </div>
       );
 

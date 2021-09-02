@@ -22,6 +22,7 @@
       square,
       variant,
       elevation,
+      dataComponentAttribute,
     } = options;
     const Variant = {
       Title1: 'h1',
@@ -74,6 +75,7 @@
       variant,
       elevation: variant === 'flat' ? 0 : elevation,
       expanded,
+      'data-component': dataComponentAttribute || 'ExpansionPanel',
     };
 
     const panelSummaryOptions = {

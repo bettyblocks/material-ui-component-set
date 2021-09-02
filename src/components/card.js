@@ -14,7 +14,7 @@
   jsx: (() => {
     const { env } = B;
     const { Card } = window.MaterialUI.Core;
-    const { variant, elevation, square } = options;
+    const { variant, elevation, square, dataComponentAttribute } = options;
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
     const isPristine = isEmpty && isDev;
@@ -33,6 +33,7 @@
         square={square}
         elevation={elevation}
         classes={{ root: classes.root }}
+        data-component={dataComponentAttribute || 'Card'}
       >
         {isEmpty ? PlaceHolder : children}
       </Card>

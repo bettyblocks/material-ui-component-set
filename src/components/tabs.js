@@ -15,6 +15,7 @@
       alignment,
       showAllTabs,
       hideTabs,
+      dataComponentAttribute,
     } = options;
 
     const orientation =
@@ -95,7 +96,10 @@
     );
 
     const TabGroup = (
-      <div className={classes.tabs}>
+      <div
+        className={classes.tabs}
+        data-component={dataComponentAttribute || 'Tabs'}
+      >
         {!hideTabs && TabsHeader}
         {React.Children.map(children, (child, index) => {
           const { options: childOptions = {} } = child.props || {};

@@ -6,7 +6,7 @@
   jsx: (() => {
     const { env } = B;
     const { Paper } = window.MaterialUI.Core;
-    const { elevation, variant, square } = options;
+    const { elevation, variant, square, dataComponentAttribute } = options;
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
     const isPristine = isEmpty && isDev;
@@ -25,6 +25,7 @@
         variant={variant}
         elevation={variant === 'flat' ? 0 : elevation}
         square={square}
+        data-component={dataComponentAttribute || 'Paper'}
       >
         {isEmpty ? PlaceHolder : children}
       </Paper>

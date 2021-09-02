@@ -27,6 +27,7 @@
       visibility,
       repeatedItems,
       showError,
+      dataComponentAttribute,
     } = options;
     const isEmpty = children.length === 0;
     const isContainer = type === 'container';
@@ -76,6 +77,7 @@
       md: sizes.md,
       lg: sizes.lg,
       xl: sizes.xl,
+      'data-component': dataComponentAttribute || 'DataTableColumn',
     };
 
     const gridRef = React.createRef();

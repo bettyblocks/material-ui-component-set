@@ -4,7 +4,7 @@
   allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'VERTICAL',
   jsx: (() => {
-    const { visible } = options;
+    const { visible, dataComponentAttribute } = options;
     const { env } = B;
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
@@ -25,6 +25,7 @@
           classes.column,
           isVisible || isDev ? '' : classes.hide,
         ].join(' ')}
+        data-component={dataComponentAttribute || 'Column'}
       >
         {(() =>
           children.length !== 0 ? (

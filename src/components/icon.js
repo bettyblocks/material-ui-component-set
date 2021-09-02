@@ -19,6 +19,7 @@
       linkTo,
       linkToExternal,
       linkType,
+      dataComponentAttribute,
     } = options;
 
     const hasLink = linkTo && linkTo.id !== '';
@@ -34,6 +35,7 @@
     };
     const IconComponent = React.createElement(Icons[icon], {
       className: classes.root,
+      'data-component': dataComponentAttribute || 'DataTableColumn',
     });
 
     const IconWithoutLink = (

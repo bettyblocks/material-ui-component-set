@@ -29,6 +29,7 @@
           currentRecord,
           loadingType,
           loadingText,
+          dataComponentAttribute,
         } = options;
         const formRef = React.createRef();
         const parsedLoadingText = useText(loadingText);
@@ -153,7 +154,10 @@
         const FormElement = () => {
           B.defineFunction('Refetch', () => {});
           return (
-            <form className={classNames || undefined}>
+            <form
+              className={classNames || undefined}
+              data-component={dataComponentAttribute || 'Form'}
+            >
               {isPristine && (
                 <span>Drag form components in the form to submit data</span>
               )}
@@ -203,6 +207,7 @@
                     }}
                     ref={formRef}
                     className={classNames || undefined}
+                    data-component={dataComponentAttribute || 'Form'}
                   >
                     {isPristine && (
                       <span>

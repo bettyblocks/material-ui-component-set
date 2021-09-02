@@ -19,6 +19,7 @@
       linkType,
       openLinkToExternal,
       primaryText,
+      dataComponentAttribute,
     } = options;
     const { onClick } = parent;
     const {
@@ -102,6 +103,7 @@
           if (onClick) onClick(e);
           actionCallback();
         }}
+        data-component={dataComponentAttribute || 'MenuItem'}
       >
         {icon !== 'None' &&
           iconPosition === 'start' &&

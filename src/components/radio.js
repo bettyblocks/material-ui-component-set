@@ -26,6 +26,7 @@
       nameAttribute,
       order,
       orderBy,
+      dataComponentAttribute,
     } = options;
     const {
       env,
@@ -218,6 +219,7 @@
           onChange={handleChange}
           onBlur={validationHandler}
           aria-label={labelText}
+          data-component={dataComponentAttribute || 'Radio'}
         >
           {renderRadios()}
         </RadioGroup>

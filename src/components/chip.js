@@ -16,6 +16,7 @@
       imgUrl,
       avatartype,
       size,
+      dataComponentAttribute,
     } = options;
     const isDev = env === 'dev';
 
@@ -45,6 +46,7 @@
         }
         avatar={AvatarComponent}
         size={size}
+        data-component={dataComponentAttribute || 'Chip'}
       />
     );
     return isDev ? (

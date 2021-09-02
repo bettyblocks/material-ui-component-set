@@ -170,6 +170,26 @@
             },
           },
         },
+        {
+          value: false,
+          label: 'Advanced settings',
+          key: 'advancedSettings',
+          type: 'TOGGLE',
+        },
+        {
+          type: 'VARIABLE',
+          label: 'Test attribute',
+          key: 'dataComponentAttribute',
+          value: ['Stepper'],
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'advancedSettings',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
       ],
       descendants: [
         {
@@ -1447,6 +1467,26 @@
                     value: 'Work',
                   },
                 ],
+              },
+            },
+            {
+              value: false,
+              label: 'Advanced settings',
+              key: 'advancedSettings',
+              type: 'TOGGLE',
+            },
+            {
+              type: 'VARIABLE',
+              label: 'Test attribute',
+              key: 'dataComponentAttribute',
+              value: ['Step'],
+              configuration: {
+                condition: {
+                  type: 'SHOW',
+                  option: 'advancedSettings',
+                  comparator: 'EQ',
+                  value: true,
+                },
               },
             },
           ],
@@ -2727,6 +2767,26 @@
                     value: 'Work',
                   },
                 ],
+              },
+            },
+            {
+              value: false,
+              label: 'Advanced settings',
+              key: 'advancedSettings',
+              type: 'TOGGLE',
+            },
+            {
+              type: 'VARIABLE',
+              label: 'Test attribute',
+              key: 'dataComponentAttribute',
+              value: ['Step'],
+              configuration: {
+                condition: {
+                  type: 'SHOW',
+                  option: 'advancedSettings',
+                  comparator: 'EQ',
+                  value: true,
+                },
               },
             },
           ],
