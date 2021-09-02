@@ -21925,7 +21925,7 @@
                                                         {
                                                           type: 'VARIABLE',
                                                           label:
-                                                            'Test attribute',,
+                                                            'Test attribute',
                                                           key:
                                                             'dataComponentAttribute',
                                                           value: ['Text'],

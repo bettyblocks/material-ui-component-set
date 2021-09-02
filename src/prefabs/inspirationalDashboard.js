@@ -21785,7 +21785,7 @@
                                                         {
                                                           type: 'VARIABLE',
                                                           label:
-                                                            'Test attribute',,
+                                                            'Test attribute',
                                                           key:
                                                             'dataComponentAttribute',
                                                           value: ['Icon'],
@@ -22004,7 +22004,7 @@
                                                         {
                                                           type: 'VARIABLE',
                                                           label:
-                                                            'Test attribute',,
+                                                            'Test attribute',
                                                           key:
                                                             'dataComponentAttribute',
                                                           value: ['Text'],
@@ -41764,7 +41764,7 @@
                                                         {
                                                           type: 'VARIABLE',
                                                           label:
-                                                            'Test attribute',,
+                                                            'Test attribute',
                                                           key:
                                                             'dataComponentAttribute',
                                                           value: ['Avatar'],
@@ -41983,7 +41983,7 @@
                                                         {
                                                           type: 'VARIABLE',
                                                           label:
-                                                            'Test attribute',,
+                                                            'Test attribute',
                                                           key:
                                                             'dataComponentAttribute',
                                                           value: ['Text'],
@@ -44439,7 +44439,7 @@
                                                         {
                                                           type: 'VARIABLE',
                                                           label:
-                                                            'Test attribute',,
+                                                            'Test attribute',
                                                           key:
                                                             'dataComponentAttribute',
                                                           value: ['Avatar'],
@@ -44658,7 +44658,7 @@
                                                         {
                                                           type: 'VARIABLE',
                                                           label:
-                                                            'Test attribute',,
+                                                            'Test attribute',
                                                           key:
                                                             'dataComponentAttribute',
                                                           value: ['Text'],
@@ -53060,7 +53060,7 @@
                                                         {
                                                           type: 'VARIABLE',
                                                           label:
-                                                            'Test attribute',,
+                                                            'Test attribute',
                                                           key:
                                                             'dataComponentAttribute',
                                                           value: ['Text'],
@@ -53279,7 +53279,7 @@
                                                         {
                                                           type: 'VARIABLE',
                                                           label:
-                                                            'Test attribute',,
+                                                            'Test attribute',
                                                           key:
                                                             'dataComponentAttribute',
                                                           value: ['Text'],
@@ -56284,7 +56284,7 @@
                                                         {
                                                           type: 'VARIABLE',
                                                           label:
-                                                            'Test attribute',,
+                                                            'Test attribute',
                                                           key:
                                                             'dataComponentAttribute',
                                                           value: ['Text'],
@@ -56503,7 +56503,7 @@
                                                         {
                                                           type: 'VARIABLE',
                                                           label:
-                                                            'Test attribute',,
+                                                            'Test attribute',
                                                           key:
                                                             'dataComponentAttribute',
                                                           value: ['Text'],
