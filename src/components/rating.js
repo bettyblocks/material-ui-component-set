@@ -82,7 +82,7 @@
     const RatingComponent = (
       <div
         className={classes.root}
-        data-component={dataComponentAttribute || 'Rating'}
+        data-component={useText(dataComponentAttribute) || 'Rating'}
       >
         <FormControl
           classes={{

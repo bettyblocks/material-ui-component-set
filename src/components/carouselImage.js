@@ -22,7 +22,7 @@
         className={classes.placeholder}
         width={86}
         height={48}
-        data-component={dataComponentAttribute || 'CarouselImage'}
+        data-component={useText(dataComponentAttribute) || 'CarouselImage'}
       >
         <title>placeholder</title>
         <rect x="19.5" y="8.5" rx="2" />
@@ -42,7 +42,7 @@
           <img
             src={imageSourceText}
             alt="carousel"
-            data-component={dataComponentAttribute || 'CarouselImage'}
+            data-component={useText(dataComponentAttribute) || 'CarouselImage'}
           />
         </div>
       );

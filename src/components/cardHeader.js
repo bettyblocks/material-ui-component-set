@@ -34,7 +34,7 @@
           isEmpty ? classes.empty : '',
           isPristine ? classes.pristine : '',
         ].join(' ')}
-        data-component={dataComponentAttribute || 'CardHeader'}
+        data-component={useText(dataComponentAttribute) || 'CardHeader'}
       />
     );
 

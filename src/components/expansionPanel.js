@@ -75,7 +75,7 @@
       variant,
       elevation: variant === 'flat' ? 0 : elevation,
       expanded,
-      'data-component': dataComponentAttribute || 'ExpansionPanel',
+      'data-component': useText(dataComponentAttribute) || 'ExpansionPanel',
     };
 
     const panelSummaryOptions = {

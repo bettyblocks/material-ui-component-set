@@ -179,7 +179,7 @@
         disableToolbar={disableToolbar}
         disablePast={disablePastDates}
         format={format}
-        data-component={dataComponentAttribute || 'DateTimePicker'}
+        data-component={useText(dataComponentAttribute) || 'DateTimePicker'}
         PopoverProps={{
           classes: {
             root: classes.popover,

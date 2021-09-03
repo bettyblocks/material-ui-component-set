@@ -50,14 +50,14 @@
       <Link
         className={[classes.content, classes.link].join(' ')}
         endpoint={endpoint}
-        data-component={dataComponentAttribute || 'BreadcrumbItem'}
+        data-component={useText(dataComponentAttribute) || 'BreadcrumbItem'}
       >
         {BreadcrumbChildren}
       </Link>
     ) : (
       <Typography
         className={classes.content}
-        data-component={dataComponentAttribute || 'BreadcrumbItem'}
+        data-component={useText(dataComponentAttribute) || 'BreadcrumbItem'}
       >
         {BreadcrumbChildren}
       </Typography>

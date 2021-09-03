@@ -94,7 +94,7 @@
       margin,
       helperText: helper,
       classes: { root: classes.formControl },
-      'data-component': dataComponentAttribute || 'AutoComplete',
+      'data-component': useText(dataComponentAttribute) || 'AutoComplete',
     };
 
     const searchProp = getProperty(searchProperty) || {};

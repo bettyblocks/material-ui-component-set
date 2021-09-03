@@ -12,7 +12,7 @@
   ],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { env } = B;
+    const { env, useText } = B;
     const { Card } = window.MaterialUI.Core;
     const { variant, elevation, square, dataComponentAttribute } = options;
     const isDev = env === 'dev';
@@ -33,7 +33,7 @@
         square={square}
         elevation={elevation}
         classes={{ root: classes.root }}
-        data-component={dataComponentAttribute || 'Card'}
+        data-component={useText(dataComponentAttribute) || 'Card'}
       >
         {isEmpty ? PlaceHolder : children}
       </Card>

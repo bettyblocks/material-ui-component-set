@@ -45,7 +45,7 @@
         value={isDev ? currentValue || '{{ hidden input }}' : currentValue}
         required={required}
         disabled={disabled}
-        data-component={dataComponentAttribute || 'HiddenInput'}
+        data-component={useText(dataComponentAttribute) || 'HiddenInput'}
       />
     );
 

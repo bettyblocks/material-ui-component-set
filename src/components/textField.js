@@ -302,7 +302,7 @@
             max: validMaxvalue,
             tabIndex: isDev && -1,
           }}
-          data-component={dataComponentAttribute || 'TextField'}
+          data-component={useText(dataComponentAttribute) || 'TextField'}
         />
         {helper && (
           <FormHelperText classes={{ root: classes.helper }}>

@@ -4,7 +4,7 @@
   allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { env } = B;
+    const { env, useText } = B;
     const { dataComponentAttribute } = options;
     const { CardContent } = window.MaterialUI.Core;
     const isDev = env === 'dev';
@@ -20,7 +20,9 @@
     );
 
     const CardContentComponent = (
-      <CardContent data-component={dataComponentAttribute || 'CardContent'}>
+      <CardContent
+        data-component={useText(dataComponentAttribute) || 'CardContent'}
+      >
         {isEmpty ? PlaceHolder : children}
       </CardContent>
     );

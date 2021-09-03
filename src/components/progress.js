@@ -66,7 +66,7 @@
         valueBuffer={currentValueBuffer}
         thickness={useText(thickness)}
         size={useText(size)}
-        data-component={dataComponentAttribute || 'Progress'}
+        data-component={useText(dataComponentAttribute) || 'Progress'}
       />
     );
 

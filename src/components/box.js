@@ -40,7 +40,7 @@
       justifyContent: alignment !== 'none' && alignment,
       flexDirection: isFlex && 'row',
       alignItems: valignment !== 'none' && valignment,
-      'data-component': dataComponentAttribute || 'Box',
+      'data-component': useText(dataComponentAttribute) || 'Box',
     };
 
     const handleClick = () => {

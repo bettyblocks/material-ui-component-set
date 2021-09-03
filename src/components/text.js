@@ -56,12 +56,12 @@
       <Tag
         className={classes.content}
         dangerouslySetInnerHTML={{ __html: linkedContent }}
-        data-component={dataComponentAttribute || 'Text'}
+        data-component={useText(dataComponentAttribute) || 'Text'}
       />
     ) : (
       <Tag
         className={classes.content}
-        data-component={dataComponentAttribute || 'Text'}
+        data-component={useText(dataComponentAttribute) || 'Text'}
       >
         {!isEmpty && linkedContent}
         {isPristine && (

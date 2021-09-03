@@ -4,7 +4,7 @@
   allowedTypes: ['BREADCRUMB_ITEM'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { env } = B;
+    const { env, useText } = B;
     const isDev = env === 'dev';
     const { Breadcrumbs } = window.MaterialUI.Core;
     const { Icons } = window.MaterialUI;
@@ -38,7 +38,7 @@
       separator,
       itemsAfterCollapse: parseInt(itemsAfterCollapse, 10),
       itemsBeforeCollapse: parseInt(itemsBeforeCollapse, 10),
-      'data-component': dataComponentAttribute || 'Breadcrumbs',
+      'data-component': useText(dataComponentAttribute) || 'Breadcrumbs',
     };
     if (!isDev && maxItems !== '0') {
       breadcrumbsOptions.maxItems = parseInt(maxItems, 10);

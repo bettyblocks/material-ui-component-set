@@ -103,7 +103,7 @@
                 thumb: classes.thumb,
                 focusVisible: classes.thumbFocusVisible,
               }}
-              data-component={dataComponentAttribute || 'Slider'}
+              data-component={useText(dataComponentAttribute) || 'Slider'}
             />
           </div>
           {helper && (

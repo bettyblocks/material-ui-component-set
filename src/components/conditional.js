@@ -97,7 +97,7 @@
     return (
       <div
         className={children.length === 0 ? classes.empty : undefined}
-        data-component={dataComponentAttribute || 'Conditional'}
+        data-component={useText(dataComponentAttribute) || 'Conditional'}
       >
         {isPristine ? 'Conditional' : children}
       </div>

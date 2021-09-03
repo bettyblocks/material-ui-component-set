@@ -54,7 +54,7 @@
         variant={appBarVariant}
         square={square}
         elevation={appBarVariant === 'flat' ? 0 : elevation}
-        data-component={dataComponentAttribute || 'AppBar'}
+        data-component={useText(dataComponentAttribute) || 'AppBar'}
       >
         <Toolbar variant={toolbarVariant} classes={{ root: classes.toolbar }}>
           {logo.length > 0 && LogoComponent}

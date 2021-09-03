@@ -23,7 +23,7 @@
       <ListSubheader
         className={classes.root}
         inset={inset}
-        data-component={dataComponentAttribute || 'ListHeader'}
+        data-component={useText(dataComponentAttribute) || 'ListHeader'}
       >
         {ItemText}
       </ListSubheader>

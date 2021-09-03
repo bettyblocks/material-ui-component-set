@@ -57,7 +57,7 @@
         const [interactionFilter, setInteractionFilter] = useState({});
 
         const builderLayout = () => (
-          <div data-component={dataComponentAttribute || 'DataList'}>
+          <div data-component={useText(dataComponentAttribute) || 'DataList'}>
             {searchProperty && !hideSearch && (
               <div className={classes.header}>
                 <SearchComponent label={searchPropertyLabel} />
@@ -395,7 +395,11 @@
 
           if (error && displayError) {
             return (
-              <span data-component={dataComponentAttribute || 'DataContainer'}>
+              <span
+                data-component={
+                  useText(dataComponentAttribute) || 'DataContainer'
+                }
+              >
                 {error.message}
               </span>
             );
@@ -405,7 +409,11 @@
           const resultCount = results && results.length;
 
           return (
-            <div data-component={dataComponentAttribute || 'DataContainer'}>
+            <div
+              data-component={
+                useText(dataComponentAttribute) || 'DataContainer'
+              }
+            >
               {searchProperty && !hideSearch && (
                 <div className={classes.header}>
                   <SearchComponent

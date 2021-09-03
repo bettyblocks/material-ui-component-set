@@ -4,7 +4,7 @@
   allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'VERTICAL',
   jsx: (() => {
-    const { env } = B;
+    const { env, useText } = B;
     const {
       isVisible,
       isFullscreen,
@@ -51,7 +51,7 @@
         aria-labelledby="modal-dialog"
         keepMounted
         disableBackdropClick={disableBackdropClick}
-        data-component={dataComponentAttribute || 'Dialog'}
+        data-component={useText(dataComponentAttribute) || 'Dialog'}
       >
         {children}
       </Dialog>
