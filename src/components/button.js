@@ -114,22 +114,22 @@
 
     const getExternalHref = config => {
       if (config.disabled) {
-        return false;
+        return undefined;
       }
       if (config.linkToExternal && config.linkToExternal.id !== '') {
         return config.linkToExternalVariable;
       }
-      return false;
+      return undefined;
     };
 
     const getInternalHref = config => {
       if (config.disabled) {
-        return false;
+        return undefined;
       }
       if (config.linkTo && config.linkTo.id !== '') {
         return config.linkToInternalVariable;
       }
-      return false;
+      return undefined;
     };
 
     const showIndicator = isLoading || loading;
