@@ -98,7 +98,7 @@
     const TabGroup = (
       <div
         className={classes.tabs}
-        data-component={dataComponentAttribute || 'Tabs'}
+        data-component={useText(dataComponentAttribute) || 'Tabs'}
       >
         {!hideTabs && TabsHeader}
         {React.Children.map(children, (child, index) => {

@@ -286,7 +286,7 @@
           inputProps={{
             name: nameAttributeValue || customModelAttributeName,
             tabIndex: isDev ? -1 : 0,
-            'data-component': dataComponentAttribute || 'Select',
+            'data-component': useText(dataComponentAttribute) || 'Select',
           }}
           required={required}
           disabled={disabled}

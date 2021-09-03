@@ -103,7 +103,7 @@
           if (onClick) onClick(e);
           actionCallback();
         }}
-        data-component={dataComponentAttribute || 'MenuItem'}
+        data-component={useText(dataComponentAttribute) || 'MenuItem'}
       >
         {icon !== 'None' &&
           iconPosition === 'start' &&

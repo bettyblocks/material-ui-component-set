@@ -79,7 +79,7 @@
         selected={selected}
         className={classes.root}
         dense={dense}
-        data-component={dataComponentAttribute || 'ListItem'}
+        data-component={useText(dataComponentAttribute) || 'ListItem'}
       >
         {avatarOrIcon === 'avatar' || (avatarOrIcon === 'icon' && avatar)
           ? AvatarComponent

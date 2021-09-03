@@ -594,7 +594,7 @@
     return (
       <div
         className={classes.root}
-        data-component={dataComponentAttribute || 'DataTable'}
+        data-component={useText(dataComponentAttribute) || 'DataTable'}
       >
         <Paper
           classes={{ root: classes.paper }}

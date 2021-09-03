@@ -4,7 +4,7 @@
   allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { env } = B;
+    const { env, useText } = B;
     const { CardActions } = window.MaterialUI.Core;
     const isDev = env === 'dev';
     const { disableSpacing, dataComponentAttribute } = options;
@@ -23,7 +23,7 @@
       <CardActions
         classes={{ root: classes.root }}
         disableSpacing={disableSpacing}
-        data-component={dataComponentAttribute || 'CardActions'}
+        data-component={useText(dataComponentAttribute) || 'CardActions'}
       >
         {isEmpty ? PlaceHolder : children}
       </CardActions>

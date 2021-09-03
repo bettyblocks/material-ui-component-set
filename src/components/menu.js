@@ -190,7 +190,7 @@
     );
 
     const MenuComp = (
-      <div data-component={dataComponentAttribute || 'Menu'}>
+      <div data-component={useText(dataComponentAttribute) || 'Menu'}>
         {ButtonComponent}
         {!isDev ? (
           <Popper

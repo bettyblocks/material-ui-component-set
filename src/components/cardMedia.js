@@ -73,7 +73,7 @@
     let MediaComponent = () => (
       <div
         className={(isEmpty || variableDev) && classes.empty}
-        data-component={dataComponentAttribute || 'CardMedia'}
+        data-component={useText(dataComponentAttribute) || 'CardMedia'}
       >
         <div className={classes.placeholderWrapper}>
           <Placeholder />
@@ -88,7 +88,7 @@
           src={imgUrl}
           title={titleText}
           alt={titleText}
-          data-component={dataComponentAttribute || 'CardMedia'}
+          data-component={useText(dataComponentAttribute) || 'CardMedia'}
         />
       );
     } else if (isVideo) {
@@ -99,7 +99,7 @@
           src={videoUrl}
           title={titleText}
           controls
-          data-component={dataComponentAttribute || 'CardMedia'}
+          data-component={useText(dataComponentAttribute) || 'CardMedia'}
         />
       );
     } else if (isIframe) {
@@ -108,7 +108,7 @@
           className={classes.media}
           title={titleText}
           src={iframeUrl}
-          data-component={dataComponentAttribute || 'CardMedia'}
+          data-component={useText(dataComponentAttribute) || 'CardMedia'}
         />
       );
     }

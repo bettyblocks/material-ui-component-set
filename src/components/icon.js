@@ -35,7 +35,7 @@
     };
     const IconComponent = React.createElement(Icons[icon], {
       className: classes.root,
-      'data-component': dataComponentAttribute || 'DataTableColumn',
+      'data-component': useText(dataComponentAttribute) || 'DataTableColumn',
     });
 
     const IconWithoutLink = (

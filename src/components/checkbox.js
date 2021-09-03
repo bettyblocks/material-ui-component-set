@@ -107,7 +107,7 @@
       size,
       tabIndex: isDev && -1,
       value: 'on',
-      'data-component': dataComponentAttribute || 'Checkbox',
+      'data-component': useText(dataComponentAttribute) || 'Checkbox',
     };
 
     const Checkbox = <MUICheckbox {...props} />;

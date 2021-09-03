@@ -124,7 +124,9 @@
             <TableCell
               align={horizontalAlignment}
               component="div"
-              data-component={dataComponentAttribute || 'DataTableColumn'}
+              data-component={
+                useText(dataComponentAttribute) || 'DataTableColumn'
+              }
             >
               {Header}
             </TableCell>
@@ -139,7 +141,7 @@
         classes={{ root: classes.root }}
         align={horizontalAlignment}
         onClick={() => handleRowClick && handleRowClick(myEndpoint, context)}
-        data-component={dataComponentAttribute || 'DataTableColumn'}
+        data-component={useText(dataComponentAttribute) || 'DataTableColumn'}
       >
         {headerOnly ? Header : Content}
       </TableCell>

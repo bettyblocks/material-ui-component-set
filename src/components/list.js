@@ -5,7 +5,7 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { List } = window.MaterialUI.Core;
-    const { env } = B;
+    const { env, useText } = B;
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
     const isPristine = children.length === 0 && isDev;
@@ -28,7 +28,7 @@
         classes={{ root: classes.root }}
         disablePadding={disablePadding}
         dense={dense}
-        data-component={dataComponentAttribute || 'List'}
+        data-component={useText(dataComponentAttribute) || 'List'}
       >
         {renderData()}
       </List>

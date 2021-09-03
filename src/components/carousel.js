@@ -196,7 +196,7 @@
       return (
         <div
           className={`${classes.container} ${classes.wrapper}`}
-          data-component={dataComponentAttribute || 'Carousel'}
+          data-component={useText(dataComponentAttribute) || 'Carousel'}
         >
           {React.Children.map(children, (child, index) => (
             <Children
@@ -383,7 +383,7 @@
       return (
         <div
           className={classes.container}
-          data-component={dataComponentAttribute || 'Carousel'}
+          data-component={useText(dataComponentAttribute) || 'Carousel'}
         >
           {results.length === 0 || isDev ? (
             <ImgPlaceholder />

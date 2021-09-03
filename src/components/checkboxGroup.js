@@ -218,7 +218,7 @@
         )}
         <FormGroup
           row={row}
-          data-component={dataComponentAttribute || 'CheckboxGroup'}
+          data-component={useText(dataComponentAttribute) || 'CheckboxGroup'}
         >
           {renderCheckBoxes()}
         </FormGroup>

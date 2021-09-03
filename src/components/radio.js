@@ -219,7 +219,7 @@
           onChange={handleChange}
           onBlur={validationHandler}
           aria-label={labelText}
-          data-component={dataComponentAttribute || 'Radio'}
+          data-component={useText(dataComponentAttribute) || 'Radio'}
         >
           {renderRadios()}
         </RadioGroup>

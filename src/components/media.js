@@ -101,7 +101,7 @@
         src={imgUrl}
         title={titleText}
         alt={imgAlt}
-        data-component={dataComponentAttribute || 'Media'}
+        data-component={useText(dataComponentAttribute) || 'Media'}
       />
     );
 
@@ -137,7 +137,7 @@
           src={videoUrl}
           title={titleText}
           controls
-          data-component={dataComponentAttribute || 'Media'}
+          data-component={useText(dataComponentAttribute) || 'Media'}
         />
       );
     } else if (isIframe) {
@@ -146,7 +146,7 @@
           className={classes.media}
           title={titleText}
           src={iframeUrl}
-          data-component={dataComponentAttribute || 'Media'}
+          data-component={useText(dataComponentAttribute) || 'Media'}
         />
       );
     }

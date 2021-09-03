@@ -20,7 +20,7 @@
       isPersistent,
       breakpoint,
     } = parent;
-    const { env } = B;
+    const { env, useText } = B;
     const { dataComponentAttribute } = options;
 
     const isEmpty = children.length === 0;
@@ -43,7 +43,7 @@
         onClose={toggleDrawer}
         classes={{ paper: classes.paper }}
         ModalProps={{ keepMounted: true }}
-        data-component={dataComponentAttribute || 'DrawerBar'}
+        data-component={useText(dataComponentAttribute) || 'DrawerBar'}
       >
         {children}
       </Drawer>
@@ -66,7 +66,7 @@
             open={isOpen}
             anchor={anchor}
             classes={{ paper: classes.paper }}
-            data-component={dataComponentAttribute || 'Drawer'}
+            data-component={useText(dataComponentAttribute) || 'Drawer'}
           >
             {children}
           </Drawer>
@@ -91,7 +91,7 @@
             classes={{
               paper: [classes.paper, classes.paperDev],
             }}
-            data-component={dataComponentAttribute || 'Drawer'}
+            data-component={useText(dataComponentAttribute) || 'Drawer'}
           >
             {children}
           </Drawer>
@@ -102,7 +102,7 @@
               isEmpty ? classes.empty : '',
               isPristine ? classes.pristine : '',
             ].join(' ')}
-            data-component={dataComponentAttribute || 'Drawer'}
+            data-component={useText(dataComponentAttribute) || 'Drawer'}
           >
             Drawer Sidebar
           </div>

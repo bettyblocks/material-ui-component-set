@@ -91,7 +91,7 @@
         </IconButton>
       ),
       classes: { root: isDev && classes.root },
-      'data-component': dataComponentAttribute || 'Snackbar',
+      'data-component': useText(dataComponentAttribute) || 'Snackbar',
     };
 
     if (isEmpty) {

@@ -5,7 +5,7 @@
   orientation: 'VERTICAL',
   jsx: (() => {
     const { visible, dataComponentAttribute } = options;
-    const { env } = B;
+    const { env, useText } = B;
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
     const isPristine = isEmpty && isDev;
@@ -25,7 +25,7 @@
           classes.column,
           isVisible || isDev ? '' : classes.hide,
         ].join(' ')}
-        data-component={dataComponentAttribute || 'Column'}
+        data-component={useText(dataComponentAttribute) || 'Column'}
       >
         {(() =>
           children.length !== 0 ? (

@@ -86,7 +86,7 @@
             </IconButton>
           ) : null
         }
-        data-component={dataComponentAttribute || 'Alert'}
+        data-component={useText(dataComponentAttribute) || 'Alert'}
       >
         {(title || titleFromServer) && (
           <AlertTitle>

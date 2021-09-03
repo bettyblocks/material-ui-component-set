@@ -4,7 +4,7 @@
   allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { env } = B;
+    const { env, useText } = B;
     const { Paper } = window.MaterialUI.Core;
     const { elevation, variant, square, dataComponentAttribute } = options;
     const isDev = env === 'dev';
@@ -25,7 +25,7 @@
         variant={variant}
         elevation={variant === 'flat' ? 0 : elevation}
         square={square}
-        data-component={dataComponentAttribute || 'Paper'}
+        data-component={useText(dataComponentAttribute) || 'Paper'}
       >
         {isEmpty ? PlaceHolder : children}
       </Paper>

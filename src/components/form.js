@@ -155,7 +155,7 @@
           return (
             <form
               className={classNames || undefined}
-              data-component={dataComponentAttribute || 'Form'}
+              data-component={useText(dataComponentAttribute) || 'Form'}
             >
               {isPristine && (
                 <span>Drag form components in the form to submit data</span>
@@ -206,7 +206,7 @@
                     }}
                     ref={formRef}
                     className={classNames || undefined}
-                    data-component={dataComponentAttribute || 'Form'}
+                    data-component={useText(dataComponentAttribute) || 'Form'}
                   >
                     {isPristine && (
                       <span>

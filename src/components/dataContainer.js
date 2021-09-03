@@ -69,7 +69,9 @@
                 B.triggerEvent('onLoad', loading);
                 return (
                   <span
-                    data-component={dataComponentAttribute || 'DataContainer'}
+                    data-component={
+                      useText(dataComponentAttribute) || 'DataContainer'
+                    }
                   >
                     {parsedLoadingText}
                   </span>
@@ -82,7 +84,9 @@
                 return (
                   <div
                     key={`data-loading-${loading}`}
-                    data-component={dataComponentAttribute || 'DataContainer'}
+                    data-component={
+                      useText(dataComponentAttribute) || 'DataContainer'
+                    }
                   >
                     {children}
                   </div>
@@ -92,7 +96,9 @@
               if (error && displayError) {
                 return (
                   <span
-                    data-component={dataComponentAttribute || 'DataContainer'}
+                    data-component={
+                      useText(dataComponentAttribute) || 'DataContainer'
+                    }
                   >
                     {error.message}
                   </span>
@@ -104,7 +110,11 @@
               }
 
               return (
-                <div data-component={dataComponentAttribute || 'DataContainer'}>
+                <div
+                  data-component={
+                    useText(dataComponentAttribute) || 'DataContainer'
+                  }
+                >
                   {children}
                 </div>
               );
@@ -133,7 +143,7 @@
               isEmpty ? classes.empty : '',
               isPristine ? classes.pristine : '',
             ].join(' ')}
-            data-component={dataComponentAttribute || 'DataContainer'}
+            data-component={useText(dataComponentAttribute) || 'DataContainer'}
           >
             {isPristine
               ? 'Drag a component in the data container to display the data'

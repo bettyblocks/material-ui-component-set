@@ -4,7 +4,7 @@
   allowedTypes: ['BODY_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { env, Text } = B;
+    const { env, Text, useText } = B;
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
     const isPristine = isEmpty && isDev;
@@ -12,7 +12,7 @@
     return (
       <div
         className={classes.panel}
-        data-component={options.dataComponentAttribute || 'Panel'}
+        data-component={useText(options.dataComponentAttribute) || 'Panel'}
       >
         {options.panelTitle && (
           <div className={classes.title}>

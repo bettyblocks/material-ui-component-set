@@ -5,7 +5,7 @@
   orientation: 'VERTICAL',
   jsx: (() => {
     const { Typography, Box } = window.MaterialUI.Core;
-    const { env } = B;
+    const { env, useText } = B;
     const isDev = env === 'dev';
     const {
       label,
@@ -47,7 +47,7 @@
         hidden={!isActive}
         aria-labelledby="tabs"
         classes={{ root: classes.root }}
-        data-component={dataComponentAttribute || 'Tab'}
+        data-component={useText(dataComponentAttribute) || 'Tab'}
       >
         {children.length === 0 ? <EmptyBox /> : children}
       </Typography>

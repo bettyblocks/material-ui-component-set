@@ -153,7 +153,7 @@
         className={[classes.control, fullWidth ? classes.fullwidth : ''].join(
           ' ',
         )}
-        data-component={dataComponentAttribute || 'FileUpload'}
+        data-component={useText(dataComponentAttribute) || 'FileUpload'}
       >
         <input
           accept={acceptedValue}

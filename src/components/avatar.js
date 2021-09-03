@@ -41,7 +41,7 @@
         src={isImage && imgSrc}
         className={classes.avatar}
         style={styleOptions}
-        data-component={dataComponentAttribute || 'Avatar'}
+        data-component={useText(dataComponentAttribute) || 'Avatar'}
       >
         {isLetter && useText(letter)}
         {isIcon && IconComponent}

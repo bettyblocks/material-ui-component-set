@@ -46,7 +46,7 @@
         }
         avatar={AvatarComponent}
         size={size}
-        data-component={dataComponentAttribute || 'Chip'}
+        data-component={useText(dataComponentAttribute) || 'Chip'}
       />
     );
     return isDev ? (
