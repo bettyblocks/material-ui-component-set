@@ -1,3 +1,10 @@
+## [1.166.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.166.2...v1.166.3) (2021-09-06)
+
+
+### Bug Fixes
+
+* autoselect doesn't crash when clearing the textfield ([96f8c18](https://github.com/bettyblocks/material-ui-component-set/commit/96f8c1841afa8694c0573eb5da88cd13eb483af5))
+
 ## [1.166.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.166.1...v1.166.2) (2021-08-31)
 
 
