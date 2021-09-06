@@ -165,13 +165,15 @@
      * @returns {Void}
      */
     B.defineFunction('Filter', ({ event, property, interactionId }) => {
-      setInteractionFilter({
-        ...interactionFilter,
-        [interactionId]: {
-          property,
-          value: event.target ? event.target.value : transformValue(event),
-        },
-      });
+      if (event) {
+        setInteractionFilter({
+          ...interactionFilter,
+          [interactionId]: {
+            property,
+            value: event.target ? event.target.value : transformValue(event),
+          },
+        });
+      }
     });
 
     B.defineFunction('ResetFilter', () => {
