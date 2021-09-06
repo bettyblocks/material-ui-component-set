@@ -4,7 +4,7 @@
   allowedTypes: ['DRAWER_SIDEBAR', 'DRAWER_CONTAINER'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { Children, env } = B;
+    const { Children, env, useText } = B;
     const isEmpty = children.length === 0;
     const isPristine = isEmpty && env === 'dev';
     const {
@@ -14,6 +14,7 @@
       temporaryAnchor,
       breakpoint,
       visibility,
+      dataComponentAttribute,
     } = options;
 
     const isTemporary = drawerType === 'temporary';
@@ -36,6 +37,7 @@
           isEmpty ? classes.empty : '',
           isPristine ? classes.pristine : '',
         ].join(' ')}
+        data-component={useText(dataComponentAttribute) || 'Drawer'}
       >
         {isPristine ? (
           'Drawer'

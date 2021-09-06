@@ -12,6 +12,7 @@
       property,
       content,
       sortable,
+      dataComponentAttribute,
     } = options;
     const { headerOnly, handleSort, orderBy, linkTo, handleRowClick, context } =
       parent || {};
@@ -120,7 +121,13 @@
           ].join(' ')}
         >
           {headerOnly ? (
-            <TableCell align={horizontalAlignment} component="div">
+            <TableCell
+              align={horizontalAlignment}
+              component="div"
+              data-component={
+                useText(dataComponentAttribute) || 'DataTableColumn'
+              }
+            >
               {Header}
             </TableCell>
           ) : (
@@ -134,6 +141,7 @@
         classes={{ root: classes.root }}
         align={horizontalAlignment}
         onClick={() => handleRowClick && handleRowClick(myEndpoint, context)}
+        data-component={useText(dataComponentAttribute) || 'DataTableColumn'}
       >
         {headerOnly ? Header : Content}
       </TableCell>

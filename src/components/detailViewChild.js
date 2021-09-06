@@ -4,7 +4,7 @@
   allowedTypes: ['CONTENT_COMPONENT', 'CONTAINER_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { labelText, property, sideBySide } = options;
+    const { labelText, property, sideBySide, dataComponentAttribute } = options;
     const { env, useText, getProperty } = B;
     const labelIsEmpty = labelText.length === 0;
     const propertyIsEmpty =
@@ -44,7 +44,10 @@
 
     return (
       <div className={sideBySide ? classes.flex : null}>
-        <Tag className={`${classes.content} ${classes.label}`}>
+        <Tag
+          className={`${classes.content} ${classes.label}`}
+          data-component={useText(dataComponentAttribute) || 'DetailViewChild'}
+        >
           {isPristine && labelIsEmpty ? (
             <span className={classes.placeholder}>Select label: </span>
           ) : (

@@ -9,7 +9,8 @@
   ],
   orientation: 'VERTICAL',
   jsx: (() => {
-    const { env } = B;
+    const { env, useText } = B;
+    const { dataComponentAttribute } = options;
     const isEmpty = children.length === 0;
     const isDev = env === 'dev';
     const isPristine = isEmpty && isDev;
@@ -28,6 +29,7 @@
             showDrawer && breakpoint === 'md' ? classes.rootShiftmd : '',
             showDrawer && breakpoint === 'lg' ? classes.rootShiftlg : '',
           ].join(' ')}
+          data-component={useText(dataComponentAttribute) || 'DrawerContainer'}
         >
           {isPristine ? 'Page content' : children}
         </div>

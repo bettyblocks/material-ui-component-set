@@ -18,6 +18,7 @@
       maxValue,
       thickness,
       size,
+      dataComponentAttribute,
     } = options;
 
     const [open, setOpen] = useState(visible);
@@ -65,6 +66,7 @@
         valueBuffer={currentValueBuffer}
         thickness={useText(thickness)}
         size={useText(size)}
+        data-component={useText(dataComponentAttribute) || 'Progress'}
       />
     );
 

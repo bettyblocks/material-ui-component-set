@@ -6,7 +6,8 @@
   jsx: (
     <div className={classes.root}>
       {(() => {
-        const { env, getPartial } = B;
+        const { env, getPartial, useText } = B;
+        const { dataComponentAttribute } = options;
         if (env === 'prod') {
           const { partialReferenceId } = options;
 
@@ -17,10 +18,20 @@
             return React.createElement(
               // eslint-disable-next-line
               React.lazy(() => System.import(`./assets/partials/${asset}`)),
+              {
+                'data-component': useText(dataComponentAttribute) || 'Partial',
+              },
             );
           }
         }
-        return <div className={classes.root}>{children}</div>;
+        return (
+          <div
+            className={classes.root}
+            data-component={useText(dataComponentAttribute) || 'Partial'}
+          >
+            {children}
+          </div>
+        );
       })()}
     </div>
   ),

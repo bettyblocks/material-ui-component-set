@@ -6,7 +6,8 @@
   jsx: (
     <div className={classes.container}>
       {(() => {
-        const { env } = B;
+        const { env, useText } = B;
+        const { dataComponentAttribute } = options;
         const isDev = env === 'dev';
         const isEmpty = children.length === 0;
         const isPristine = isEmpty && isDev;
@@ -18,6 +19,7 @@
               isEmpty ? classes.empty : '',
               isPristine ? classes.pristine : '',
             ].join(' ')}
+            data-component={useText(dataComponentAttribute) || 'Row'}
           >
             {isPristine ? 'Row' : children}
           </section>

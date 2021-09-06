@@ -5,11 +5,11 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { List } = window.MaterialUI.Core;
-    const { env } = B;
+    const { env, useText } = B;
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
     const isPristine = children.length === 0 && isDev;
-    const { disablePadding, dense } = options;
+    const { disablePadding, dense, dataComponentAttribute } = options;
 
     const renderData = () =>
       isEmpty ? (
@@ -28,6 +28,7 @@
         classes={{ root: classes.root }}
         disablePadding={disablePadding}
         dense={dense}
+        data-component={useText(dataComponentAttribute) || 'List'}
       >
         {renderData()}
       </List>

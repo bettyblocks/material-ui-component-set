@@ -24,6 +24,7 @@
       sortOrder,
       property,
       maxImages,
+      dataComponentAttribute,
     } = options;
     const { KeyboardArrowLeft, KeyboardArrowRight } = Icons;
 
@@ -193,7 +194,10 @@
       numRendersRef.current += 1;
 
       return (
-        <div className={`${classes.container} ${classes.wrapper}`}>
+        <div
+          className={`${classes.container} ${classes.wrapper}`}
+          data-component={useText(dataComponentAttribute) || 'Carousel'}
+        >
           {React.Children.map(children, (child, index) => (
             <Children
               stepLabelData={stepLabelData}
@@ -377,7 +381,10 @@
       const carouselVariant = variant === 'mobile' ? bottom : overlay;
 
       return (
-        <div className={classes.container}>
+        <div
+          className={classes.container}
+          data-component={useText(dataComponentAttribute) || 'Carousel'}
+        >
           {results.length === 0 || isDev ? (
             <ImgPlaceholder />
           ) : (
