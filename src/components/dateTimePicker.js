@@ -28,6 +28,7 @@
       nameAttribute,
       locale,
       clearable,
+      dataComponentAttribute,
     } = options;
     const { env, getCustomModelAttribute, useText } = B;
     const {
@@ -178,6 +179,7 @@
         disableToolbar={disableToolbar}
         disablePast={disablePastDates}
         format={format}
+        data-component={useText(dataComponentAttribute) || 'DateTimePicker'}
         PopoverProps={{
           classes: {
             root: classes.popover,

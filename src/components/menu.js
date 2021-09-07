@@ -27,6 +27,7 @@
       size,
       type,
       variant,
+      dataComponentAttribute,
     } = options;
 
     const { Children, env, useText } = B;
@@ -189,7 +190,7 @@
     );
 
     const MenuComp = (
-      <>
+      <div data-component={useText(dataComponentAttribute) || 'Menu'}>
         {ButtonComponent}
         {!isDev ? (
           <Popper
@@ -224,7 +225,7 @@
             </Paper>
           )
         )}
-      </>
+      </div>
     );
 
     return !isDev ? (

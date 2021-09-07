@@ -35,6 +35,7 @@
       hideLabel,
       customModelAttribute: customModelAttributeObj,
       nameAttribute,
+      dataComponentAttribute,
     } = options;
 
     const {
@@ -300,6 +301,7 @@
             max: validMaxvalue,
             tabIndex: isDev && -1,
           }}
+          data-component={useText(dataComponentAttribute) || 'TextField'}
         />
         {helper && (
           <FormHelperText classes={{ root: classes.helper }}>

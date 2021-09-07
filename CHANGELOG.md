@@ -1,3 +1,26 @@
+# [1.167.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.166.3...v1.167.0) (2021-09-06)
+
+
+### Bug Fixes
+
+* add useText hook to resolve data option ([bfc2088](https://github.com/bettyblocks/material-ui-component-set/commit/bfc2088e34366428022fcd754c81b66ce2552e2d))
+* case of option label ([5da6b95](https://github.com/bettyblocks/material-ui-component-set/commit/5da6b95e5827928564d7e4d1a25cbb84d733a377))
+* change null into fragment ([a3e7354](https://github.com/bettyblocks/material-ui-component-set/commit/a3e7354fb2ee7a5f64931553cc3e73f43467b7ab))
+* global replacement errors ([68efb20](https://github.com/bettyblocks/material-ui-component-set/commit/68efb204a500815b73b17d3bf0150965aa14cdce))
+
+
+### Features
+
+* add data attribute to components ([d9fcf7d](https://github.com/bettyblocks/material-ui-component-set/commit/d9fcf7da759e78ab5da46520aad5270705dda3ae))
+* add option to all prefabs ([5c95631](https://github.com/bettyblocks/material-ui-component-set/commit/5c95631fcf580442e41dbc1942fd07e6fc296b5b))
+
+## [1.166.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.166.2...v1.166.3) (2021-09-06)
+
+
+### Bug Fixes
+
+* autoselect doesn't crash when clearing the textfield ([96f8c18](https://github.com/bettyblocks/material-ui-component-set/commit/96f8c1841afa8694c0573eb5da88cd13eb483af5))
+
 ## [1.166.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.166.1...v1.166.2) (2021-08-31)
 
 

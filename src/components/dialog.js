@@ -4,12 +4,13 @@
   allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'VERTICAL',
   jsx: (() => {
-    const { env } = B;
+    const { env, useText } = B;
     const {
       isVisible,
       isFullscreen,
       width,
       disableClick: disableBackdropClick,
+      dataComponentAttribute,
     } = options;
     const { Dialog } = window.MaterialUI.Core;
     const isDev = env === 'dev';
@@ -50,6 +51,7 @@
         aria-labelledby="modal-dialog"
         keepMounted
         disableBackdropClick={disableBackdropClick}
+        data-component={useText(dataComponentAttribute) || 'Dialog'}
       >
         {children}
       </Dialog>

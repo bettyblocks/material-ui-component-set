@@ -4,12 +4,12 @@
   allowedTypes: ['CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { env } = B;
+    const { env, useText } = B;
     const { Container } = window.MaterialUI.Core;
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
     const isPristine = isDev && isEmpty;
-    const { maxWidth, disableGutters } = options;
+    const { maxWidth, disableGutters, dataComponentAttribute } = options;
     const hasMaxWidth = maxWidth !== 'false';
     const ContainerCmp = (
       <Container
@@ -20,6 +20,7 @@
           isEmpty ? classes.empty : '',
           isPristine ? classes.pristine : '',
         ].join(' ')}
+        data-component={useText(dataComponentAttribute) || 'Container'}
       >
         {isPristine ? 'Container' : children}
       </Container>

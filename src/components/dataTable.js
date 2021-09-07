@@ -55,6 +55,7 @@
       showError,
       autoLoadOnScroll,
       autoLoadTakeAmount,
+      dataComponentAttribute,
     } = options;
     const repeaterRef = React.createRef();
     const tableRef = React.createRef();
@@ -164,13 +165,15 @@
      * @returns {Void}
      */
     B.defineFunction('Filter', ({ event, property, interactionId }) => {
-      setInteractionFilter({
-        ...interactionFilter,
-        [interactionId]: {
-          property,
-          value: event.target ? event.target.value : transformValue(event),
-        },
-      });
+      if (event) {
+        setInteractionFilter({
+          ...interactionFilter,
+          [interactionId]: {
+            property,
+            value: event.target ? event.target.value : transformValue(event),
+          },
+        });
+      }
     });
 
     B.defineFunction('ResetFilter', () => {
@@ -591,7 +594,10 @@
     }, [showPagination, hasToolbar]);
 
     return (
-      <div className={classes.root}>
+      <div
+        className={classes.root}
+        data-component={useText(dataComponentAttribute) || 'DataTable'}
+      >
         <Paper
           classes={{ root: classes.paper }}
           square={square}

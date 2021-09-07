@@ -17,6 +17,7 @@
       linkTo,
       linkToExternal,
       linkType,
+      dataComponentAttribute,
     } = options;
 
     const titleText = useText(title);
@@ -100,6 +101,7 @@
         src={imgUrl}
         title={titleText}
         alt={imgAlt}
+        data-component={useText(dataComponentAttribute) || 'Media'}
       />
     );
 
@@ -135,11 +137,17 @@
           src={videoUrl}
           title={titleText}
           controls
+          data-component={useText(dataComponentAttribute) || 'Media'}
         />
       );
     } else if (isIframe) {
       MediaComponent = () => (
-        <iframe className={classes.media} title={titleText} src={iframeUrl} />
+        <iframe
+          className={classes.media}
+          title={titleText}
+          src={iframeUrl}
+          data-component={useText(dataComponentAttribute) || 'Media'}
+        />
       );
     }
 
