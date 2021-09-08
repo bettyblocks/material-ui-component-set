@@ -744,6 +744,15 @@
             '!important',
           ],
         },
+
+        '& > div > .MuiTableCell-head, & > .MuiTableCell-head': {
+          textOverflow: ({ options: { hideTextOverflow } }) =>
+            hideTextOverflow ? 'ellipsis' : 'clip',
+          overflow: ({ options: { hideTextOverflow } }) =>
+            hideTextOverflow ? 'hidden' : 'visible',
+          whiteSpace: ({ options: { hideTextOverflow } }) =>
+            hideTextOverflow ? 'nowrap' : 'normal',
+        },
       },
       bodyRow: {
         cursor: ({ options: { linkTo } }) =>
@@ -756,6 +765,14 @@
           backgroundColor: ({ options: { striped, stripeColor } }) => [
             striped ? style.getColor(stripeColor) : 'transparent',
           ],
+        },
+        '& > .MuiTableCell-root, & ~ .MuiTableCell-root': {
+          textOverflow: ({ options: { hideTextOverflow } }) =>
+            hideTextOverflow ? 'ellipsis' : 'clip',
+          overflow: ({ options: { hideTextOverflow } }) =>
+            hideTextOverflow ? 'hidden' : 'visible',
+          whiteSpace: ({ options: { hideTextOverflow } }) =>
+            hideTextOverflow ? 'nowrap' : 'normal',
         },
       },
       searchField: {
