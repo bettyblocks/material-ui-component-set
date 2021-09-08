@@ -1,3 +1,10 @@
+## [1.167.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.167.0...v1.167.1) (2021-09-08)
+
+
+### Bug Fixes
+
+* convert date only when its a valid date ([dadfd99](https://github.com/bettyblocks/material-ui-component-set/commit/dadfd9979107baffbc7d0e4345eacfeafe4fba8c))
+
 # [1.167.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.166.3...v1.167.0) (2021-09-06)
 
 
