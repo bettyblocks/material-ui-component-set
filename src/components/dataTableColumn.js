@@ -49,6 +49,8 @@
       <>{!isBooleanProperty ? <Property id={property} /> : checkboxStatus}</>
     );
 
+    let tooltipText = isDev ? `{{ ${propertyName} }}` : useText([property]);
+
     let columnText = propertyName ? propContent : contentPlaceholder;
     if (type === 'ME_PROPERTY') {
       columnText = isDev ? `{{ ${propertyName} }}` : useText([property]);
@@ -56,6 +58,7 @@
 
     if (bodyText) {
       columnText = bodyText;
+      tooltipText = bodyText;
     }
 
     const header = useText(headerText);
@@ -85,7 +88,9 @@
       children.length > 0 ? (
         children
       ) : (
-        <span className={classes.content}>{columnText}</span>
+        <span className={classes.content} title={tooltipText}>
+          {columnText}
+        </span>
       );
 
     const Header = isSortable ? (
