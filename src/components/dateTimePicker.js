@@ -70,6 +70,13 @@
     const nameAttributeValue = useText(nameAttribute);
     const isValidDate = date => date instanceof Date && !isNaN(date);
 
+    const getLocalDate = value => {
+      const date = new Date(value);
+      const offset = date.getTimezoneOffset() * 60 * 1000;
+      const correctedDate = date - offset;
+      return new Date(correctedDate);
+    };
+
     const convertToDate = date => {
       if (isValidDate(date)) {
         const dateString = `${date.getFullYear()}-${String(
@@ -82,7 +89,7 @@
     };
 
     const changeHandler = date => {
-      let datevalue = date;
+      let datevalue = getLocalDate(date);
       if (type === 'date') {
         datevalue = convertToDate(date);
       }
