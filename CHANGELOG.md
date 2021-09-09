@@ -1,3 +1,10 @@
+# [1.168.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.167.1...v1.168.0) (2021-09-08)
+
+
+### Features
+
+* add toggle to hide text overflow for datatable ([2bc3fb2](https://github.com/bettyblocks/material-ui-component-set/commit/2bc3fb2344c3b4144f93f3349a91fbae821ab932))
+
 ## [1.167.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.167.0...v1.167.1) (2021-09-08)
 
 
