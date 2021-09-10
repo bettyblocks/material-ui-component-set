@@ -14,6 +14,7 @@
       autoHideDuration,
       content,
       allowTextServerResponse,
+      dataComponentAttribute,
     } = options;
     const { env, useText } = B;
     const isDev = env === 'dev';
@@ -90,6 +91,7 @@
         </IconButton>
       ),
       classes: { root: isDev && classes.root },
+      'data-component': useText(dataComponentAttribute) || 'Snackbar',
     };
 
     if (isEmpty) {

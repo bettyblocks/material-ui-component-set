@@ -55,6 +55,7 @@
       showError,
       autoLoadOnScroll,
       autoLoadTakeAmount,
+      dataComponentAttribute,
     } = options;
     const repeaterRef = React.createRef();
     const tableRef = React.createRef();
@@ -164,13 +165,15 @@
      * @returns {Void}
      */
     B.defineFunction('Filter', ({ event, property, interactionId }) => {
-      setInteractionFilter({
-        ...interactionFilter,
-        [interactionId]: {
-          property,
-          value: event.target ? event.target.value : transformValue(event),
-        },
-      });
+      if (event) {
+        setInteractionFilter({
+          ...interactionFilter,
+          [interactionId]: {
+            property,
+            value: event.target ? event.target.value : transformValue(event),
+          },
+        });
+      }
     });
 
     B.defineFunction('ResetFilter', () => {
@@ -224,9 +227,9 @@
     const where = useFilter(completeFilter);
 
     // TODO: move model to skip
-    const { loading, error, data, refetch } =
-      model &&
-      useAllQuery(model, {
+    const { loading, error, data, refetch } = useAllQuery(
+      model,
+      {
         rawFilter: where,
         variables,
         skip: loadOnScroll ? skip : page * rowsPerPage,
@@ -244,7 +247,9 @@
             B.triggerEvent('onError', err);
           }
         },
-      });
+      },
+      !model,
+    );
 
     useEffect(() => {
       if (!isDev && data) {
@@ -589,7 +594,10 @@
     }, [showPagination, hasToolbar]);
 
     return (
-      <div className={classes.root}>
+      <div
+        className={classes.root}
+        data-component={useText(dataComponentAttribute) || 'DataTable'}
+      >
         <Paper
           classes={{ root: classes.paper }}
           square={square}
@@ -735,6 +743,15 @@
             '!important',
           ],
         },
+
+        '& > div > .MuiTableCell-head, & > .MuiTableCell-head': {
+          textOverflow: ({ options: { hideTextOverflow } }) =>
+            hideTextOverflow ? 'ellipsis' : 'clip',
+          overflow: ({ options: { hideTextOverflow } }) =>
+            hideTextOverflow ? 'hidden' : 'visible',
+          whiteSpace: ({ options: { hideTextOverflow } }) =>
+            hideTextOverflow ? 'nowrap' : 'normal',
+        },
       },
       bodyRow: {
         cursor: ({ options: { linkTo } }) =>
@@ -747,6 +764,14 @@
           backgroundColor: ({ options: { striped, stripeColor } }) => [
             striped ? style.getColor(stripeColor) : 'transparent',
           ],
+        },
+        '& > .MuiTableCell-root, & ~ .MuiTableCell-root': {
+          textOverflow: ({ options: { hideTextOverflow } }) =>
+            hideTextOverflow ? 'ellipsis' : 'clip',
+          overflow: ({ options: { hideTextOverflow } }) =>
+            hideTextOverflow ? 'hidden' : 'visible',
+          whiteSpace: ({ options: { hideTextOverflow } }) =>
+            hideTextOverflow ? 'nowrap' : 'normal',
         },
       },
       searchField: {

@@ -1,7 +1,7 @@
 (() => ({
   name: 'Carousel',
   type: 'CONTAINER_COMPONENT',
-  allowedTypes: ['STEP_COMPONENT'],
+  allowedTypes: ['CAROUSEL_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { MobileStepper, Button, IconButton } = window.MaterialUI.Core;
@@ -24,6 +24,7 @@
       sortOrder,
       property,
       maxImages,
+      dataComponentAttribute,
     } = options;
     const { KeyboardArrowLeft, KeyboardArrowRight } = Icons;
 
@@ -193,7 +194,10 @@
       numRendersRef.current += 1;
 
       return (
-        <div className={`${classes.container} ${classes.wrapper}`}>
+        <div
+          className={`${classes.container} ${classes.wrapper}`}
+          data-component={useText(dataComponentAttribute) || 'Carousel'}
+        >
           {React.Children.map(children, (child, index) => (
             <Children
               stepLabelData={stepLabelData}
@@ -213,24 +217,23 @@
     const ModelStepperCmp = () => {
       let maxSteps = 0;
       const where = useFilter(filter);
-      const { loading, error, data, refetch } =
-        model &&
-        useAllQuery(model, {
-          rawFilter: where,
-          variables,
-          take: maxImages,
-          onCompleted(res) {
-            const hasResult = res && res.results && res.results.length > 0;
-            if (hasResult) {
-              B.triggerEvent('onSuccess', res.results);
-            } else {
-              B.triggerEvent('onNoResults');
-            }
-          },
-          onError(err) {
-            B.triggerEvent('onError', err);
-          },
-        });
+      const { loading, error, data, refetch } = useAllQuery(model, {
+        skip: !model,
+        rawFilter: where,
+        variables,
+        take: maxImages,
+        onCompleted(res) {
+          const hasResult = res && res.results && res.results.length > 0;
+          if (hasResult) {
+            B.triggerEvent('onSuccess', res.results);
+          } else {
+            B.triggerEvent('onNoResults');
+          }
+        },
+        onError(err) {
+          B.triggerEvent('onError', err);
+        },
+      });
       useEffect(() => {
         if (!isDev && data) {
           setResults(data.results);
@@ -378,7 +381,10 @@
       const carouselVariant = variant === 'mobile' ? bottom : overlay;
 
       return (
-        <div className={classes.container}>
+        <div
+          className={classes.container}
+          data-component={useText(dataComponentAttribute) || 'Carousel'}
+        >
           {results.length === 0 || isDev ? (
             <ImgPlaceholder />
           ) : (

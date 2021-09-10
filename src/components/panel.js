@@ -3,35 +3,34 @@
   type: 'CONTAINER_COMPONENT',
   allowedTypes: ['BODY_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
-  jsx: (
-    <div className={classes.panel}>
-      {(() => {
-        const { env, Text } = B;
-        const isDev = env === 'dev';
-        const isEmpty = children.length === 0;
-        const isPristine = isEmpty && isDev;
+  jsx: (() => {
+    const { env, Text, useText } = B;
+    const isDev = env === 'dev';
+    const isEmpty = children.length === 0;
+    const isPristine = isEmpty && isDev;
 
-        return (
-          <>
-            {options.panelTitle && (
-              <div className={classes.title}>
-                <Text value={options.panelTitle} />
-              </div>
-            )}
-            <div
-              className={[
-                classes.content,
-                isEmpty ? classes.empty : '',
-                isPristine ? classes.pristine : '',
-              ].join(' ')}
-            >
-              {isPristine ? 'Panel' : children}
-            </div>
-          </>
-        );
-      })()}
-    </div>
-  ),
+    return (
+      <div
+        className={classes.panel}
+        data-component={useText(options.dataComponentAttribute) || 'Panel'}
+      >
+        {options.panelTitle && (
+          <div className={classes.title}>
+            <Text value={options.panelTitle} />
+          </div>
+        )}
+        <div
+          className={[
+            classes.content,
+            isEmpty ? classes.empty : '',
+            isPristine ? classes.pristine : '',
+          ].join(' ')}
+        >
+          {isPristine ? 'Panel' : children}
+        </div>
+      </div>
+    );
+  })(),
   styles: B => theme => {
     const { mediaMinWidth, Styling } = B;
     const style = new Styling(theme);

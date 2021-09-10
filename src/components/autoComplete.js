@@ -28,6 +28,7 @@
       nameAttribute,
       order,
       orderBy,
+      dataComponentAttribute,
     } = options;
     const { Autocomplete } = window.MaterialUI.Lab;
     const {
@@ -44,6 +45,8 @@
     } = window.MaterialUI.Icons;
     const {
       env,
+      ModelProvider,
+      InteractionScope,
       getCustomModelAttribute,
       getProperty,
       useAllQuery,
@@ -74,6 +77,7 @@
       useText(defaultValue, { rawValue: true }),
     );
     const [currentLabel, setCurrentLabel] = useState('');
+    const changeContext = useRef(null);
     const mounted = useRef(false);
     const labelText = useText(label);
 
@@ -90,6 +94,7 @@
       margin,
       helperText: helper,
       classes: { root: classes.formControl },
+      'data-component': useText(dataComponentAttribute) || 'AutoComplete',
     };
 
     const searchProp = getProperty(searchProperty) || {};
@@ -226,11 +231,15 @@
           }, {})
         : {};
 
-    const { loading, error: err, data: { results } = {}, refetch } =
-      model &&
-      useAllQuery(model, {
+    const {
+      loading,
+      error: err,
+      data: { results } = {},
+      refetch,
+    } = useAllQuery(
+      model,
+      {
         filter: completeFilter,
-        skip: 0,
         take: 50,
         variables: {
           ...(orderBy ? { sort: { relation: sort } } : {}),
@@ -248,11 +257,13 @@
             B.triggerEvent('onError', resp);
           }
         },
-      });
+      },
+      !model,
+    );
 
     useEffect(() => {
       if (mounted.current) {
-        B.triggerEvent('onChange', currentValue);
+        B.triggerEvent('onChange', currentValue, changeContext.current);
       }
     }, [currentValue]);
 
@@ -439,7 +450,9 @@
           onInputChange={(_, inputValue) => {
             setSearchParam(inputValue);
           }}
-          onChange={onPropertyListChange}
+          onChange={(event, value) => {
+            onPropertyListChange(event, value);
+          }}
           getOptionLabel={option => option}
           renderInput={params => (
             <TextField
@@ -493,56 +506,68 @@
     }
 
     return (
-      <Autocomplete
-        disabled={disabled}
-        multiple={multiple}
-        freeSolo={freeSolo}
-        options={results}
-        value={record}
-        inputValue={currentInputValue}
-        getOptionLabel={renderLabel}
-        getOptionSelected={(option, value) => value.id === option.id}
-        PopoverProps={{
-          classes: {
-            root: classes.popover,
-          },
-        }}
-        onInputChange={(event, inputValue) => {
-          if (event) setSearchParam(inputValue);
-        }}
-        onChange={onChange}
-        disableCloseOnSelect={!closeOnSelect}
-        renderOption={renderCheckboxes && renderOption}
-        renderInput={params => (
-          <>
-            <input
-              type="hidden"
-              key={currentValue ? 'hasValue' : 'isEmpty'}
-              name={nameAttributeValue || customModelAttributeName}
-              value={currentValue}
-            />
-            <TextField
-              {...params}
-              {...textFieldProps}
-              required={
-                required && (!currentValue || currentValue.length === 0)
-              }
-              loading={loading}
-              InputProps={{
-                ...params.InputProps,
-                endAdornment: (
+      <ModelProvider value={record} id={model}>
+        <InteractionScope model={model}>
+          {ctx => {
+            changeContext.current = ctx;
+
+            return (
+              <Autocomplete
+                disabled={disabled}
+                multiple={multiple}
+                freeSolo={freeSolo}
+                options={results}
+                value={record}
+                inputValue={currentInputValue}
+                getOptionLabel={renderLabel}
+                getOptionSelected={(option, value) => value.id === option.id}
+                PopoverProps={{
+                  classes: {
+                    root: classes.popover,
+                  },
+                }}
+                onInputChange={(event, inputValue) => {
+                  if (event) setSearchParam(inputValue);
+                }}
+                onChange={(event, value) => {
+                  onChange(event, value);
+                }}
+                disableCloseOnSelect={!closeOnSelect}
+                renderOption={renderCheckboxes && renderOption}
+                renderInput={params => (
                   <>
-                    {loading ? (
-                      <CircularProgress color="inherit" size={20} />
-                    ) : null}
-                    {params.InputProps.endAdornment}
+                    <input
+                      type="hidden"
+                      key={currentValue ? 'hasValue' : 'isEmpty'}
+                      name={nameAttributeValue || customModelAttributeName}
+                      value={currentValue}
+                    />
+                    <TextField
+                      {...params}
+                      {...textFieldProps}
+                      required={
+                        required && (!currentValue || currentValue.length === 0)
+                      }
+                      loading={loading}
+                      InputProps={{
+                        ...params.InputProps,
+                        endAdornment: (
+                          <>
+                            {loading ? (
+                              <CircularProgress color="inherit" size={20} />
+                            ) : null}
+                            {params.InputProps.endAdornment}
+                          </>
+                        ),
+                      }}
+                    />
                   </>
-                ),
-              }}
-            />
-          </>
-        )}
-      />
+                )}
+              />
+            );
+          }}
+        </InteractionScope>
+      </ModelProvider>
     );
   })(),
   styles: B => t => {

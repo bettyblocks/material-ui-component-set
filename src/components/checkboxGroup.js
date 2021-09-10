@@ -26,6 +26,7 @@
       order,
       orderBy,
       validationValueMissing,
+      dataComponentAttribute,
     } = options;
 
     const {
@@ -89,11 +90,10 @@
           }, {})
         : {};
 
-    const { loading, error: err, data, refetch } =
-      model &&
-      useAllQuery(model, {
+    const { loading, error: err, data, refetch } = useAllQuery(
+      model,
+      {
         filter,
-        skip: 0,
         take: 50,
         variables: {
           ...(orderBy ? { sort: { relation: sort } } : {}),
@@ -111,7 +111,9 @@
             B.triggerEvent('onError', resp);
           }
         },
-      });
+      },
+      !model,
+    );
 
     if (loading) {
       B.triggerEvent('onLoad', loading);
@@ -214,7 +216,12 @@
         {labelText && !hideLabel && (
           <FormLabel component="legend">{labelText}</FormLabel>
         )}
-        <FormGroup row={row}>{renderCheckBoxes()}</FormGroup>
+        <FormGroup
+          row={row}
+          data-component={useText(dataComponentAttribute) || 'CheckboxGroup'}
+        >
+          {renderCheckBoxes()}
+        </FormGroup>
         {helper && <FormHelperText>{helper}</FormHelperText>}
       </FormControl>
     );

@@ -8,7 +8,13 @@
     const isDev = env === 'dev';
     const { Typography } = window.MaterialUI.Core;
     const { Icons } = window.MaterialUI;
-    const { endpoint, breadcrumbContent, icon, iconPosition } = options;
+    const {
+      endpoint,
+      breadcrumbContent,
+      icon,
+      iconPosition,
+      dataComponentAttribute,
+    } = options;
     const content = useText(breadcrumbContent);
     const hasEndpoint = endpoint && endpoint.id !== '';
 
@@ -44,11 +50,17 @@
       <Link
         className={[classes.content, classes.link].join(' ')}
         endpoint={endpoint}
+        data-component={useText(dataComponentAttribute) || 'BreadcrumbItem'}
       >
         {BreadcrumbChildren}
       </Link>
     ) : (
-      <Typography className={classes.content}>{BreadcrumbChildren}</Typography>
+      <Typography
+        className={classes.content}
+        data-component={useText(dataComponentAttribute) || 'BreadcrumbItem'}
+      >
+        {BreadcrumbChildren}
+      </Typography>
     );
 
     return isDev ? (

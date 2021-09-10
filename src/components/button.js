@@ -25,6 +25,7 @@
       hasVisibleTooltip,
       tooltipContent,
       tooltipPlacement,
+      dataComponentAttribute,
     } = options;
     const {
       env,
@@ -152,6 +153,7 @@
       type: isDev ? 'button' : type,
       endpoint:
         linkType === 'internal' && linkTo && linkTo.id ? linkTo : undefined,
+      'data-component': useText(dataComponentAttribute) || 'Button',
     };
 
     const anchorProps = {
@@ -169,12 +171,14 @@
         event.stopPropagation();
         actionCallback();
       },
+      'data-component': useText(dataComponentAttribute) || 'Button',
     };
 
     const linkProps = {
       href: getInternalHref({ linkTo, linkToInternalVariable, disabled }),
       component: hasInteralLink ? B.Link : undefined,
       endpoint: hasInteralLink ? linkTo : undefined,
+      'data-component': useText(dataComponentAttribute) || 'Button',
     };
 
     const ButtonContent = (

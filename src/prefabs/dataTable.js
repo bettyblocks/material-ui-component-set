@@ -156,6 +156,26 @@
                     key: 'borderColor',
                     value: 'Light',
                   },
+                  {
+                    value: false,
+                    label: 'Advanced settings',
+                    key: 'advancedSettings',
+                    type: 'TOGGLE',
+                  },
+                  {
+                    type: 'VARIABLE',
+                    label: 'Test attribute',
+                    key: 'dataComponentAttribute',
+                    value: ['DataTableColumn'],
+                    configuration: {
+                      condition: {
+                        type: 'SHOW',
+                        option: 'advancedSettings',
+                        comparator: 'EQ',
+                        value: true,
+                      },
+                    },
+                  },
                 ],
                 descendants: [],
               });
@@ -229,6 +249,12 @@
           value: '',
           label: 'Hide built-in search field',
           key: 'hideSearch',
+          type: 'TOGGLE',
+        },
+        {
+          value: '',
+          label: 'Hide text-overflow',
+          key: 'hideTextOverflow',
           type: 'TOGGLE',
         },
         {
@@ -534,6 +560,26 @@
               { name: 'Built in', value: 'built-in' },
               { name: 'Interaction', value: 'interaction' },
             ],
+          },
+        },
+        {
+          value: false,
+          label: 'Advanced settings',
+          key: 'advancedSettings',
+          type: 'TOGGLE',
+        },
+        {
+          type: 'VARIABLE',
+          label: 'Test attribute',
+          key: 'dataComponentAttribute',
+          value: ['DataTable'],
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'advancedSettings',
+              comparator: 'EQ',
+              value: true,
+            },
           },
         },
       ],

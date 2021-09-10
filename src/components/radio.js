@@ -26,6 +26,7 @@
       nameAttribute,
       order,
       orderBy,
+      dataComponentAttribute,
     } = options;
     const {
       env,
@@ -93,11 +94,10 @@
           }, {})
         : {};
 
-    const { loading, error: err, data, refetch } =
-      model &&
-      useAllQuery(model, {
+    const { loading, error: err, data, refetch } = useAllQuery(
+      model,
+      {
         filter,
-        skip: 0,
         take: 50,
         variables: {
           ...(orderBy ? { sort: { relation: sort } } : {}),
@@ -115,7 +115,9 @@
             B.triggerEvent('onError', resp);
           }
         },
-      });
+      },
+      !model,
+    );
 
     useEffect(() => {
       if (mounted.current) {
@@ -217,6 +219,7 @@
           onChange={handleChange}
           onBlur={validationHandler}
           aria-label={labelText}
+          data-component={useText(dataComponentAttribute) || 'Radio'}
         >
           {renderRadios()}
         </RadioGroup>

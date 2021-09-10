@@ -24,6 +24,7 @@
       validationValueMissing,
       error,
       helperText,
+      dataComponentAttribute,
     } = options;
 
     const {
@@ -79,7 +80,10 @@
     }, [isDev, defaultValue, helperText]);
 
     const RatingComponent = (
-      <div className={classes.root}>
+      <div
+        className={classes.root}
+        data-component={useText(dataComponentAttribute) || 'Rating'}
+      >
         <FormControl
           classes={{
             root: labelText.length !== 0 && !hideLabel && classes.formControl,
@@ -96,8 +100,8 @@
           <Rating
             className={classes.ratingIcon}
             name={nameAttributeValue || customModelAttributeName}
-            value={value}
-            defaultValue={customModelAttributeObj.value}
+            value={useText(defaultValue)}
+            defaultValue={useText(defaultValue)}
             precision={precision}
             size={size === 'custom' ? customSize : size}
             onChange={handleChange}

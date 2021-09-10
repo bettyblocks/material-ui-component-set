@@ -1,7 +1,7 @@
 (() => ({
   name: 'Rating',
   icon: 'RatingIcon',
-  category: 'CONTENT',
+  category: 'FORM',
   keywords: ['form', 'input', 'rating'],
   structure: [
     {
@@ -1528,6 +1528,20 @@
           label: 'name attribute',
           key: 'nameAttribute',
           value: [],
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'advancedSettings',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'VARIABLE',
+          label: 'Test attribute',
+          key: 'dataComponentAttribute',
+          value: ['Rating'],
           configuration: {
             condition: {
               type: 'SHOW',

@@ -1,3 +1,103 @@
+## [1.168.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.168.0...v1.168.1) (2021-09-10)
+
+
+### Bug Fixes
+
+* remove apiVersion where possible ([ecac22f](https://github.com/bettyblocks/material-ui-component-set/commit/ecac22fa470a183293f2660bb0d57466cd210beb))
+
+# [1.168.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.167.1...v1.168.0) (2021-09-08)
+
+
+### Features
+
+* add toggle to hide text overflow for datatable ([2bc3fb2](https://github.com/bettyblocks/material-ui-component-set/commit/2bc3fb2344c3b4144f93f3349a91fbae821ab932))
+
+## [1.167.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.167.0...v1.167.1) (2021-09-08)
+
+
+### Bug Fixes
+
+* convert date only when its a valid date ([dadfd99](https://github.com/bettyblocks/material-ui-component-set/commit/dadfd9979107baffbc7d0e4345eacfeafe4fba8c))
+
+# [1.167.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.166.3...v1.167.0) (2021-09-06)
+
+
+### Bug Fixes
+
+* add useText hook to resolve data option ([bfc2088](https://github.com/bettyblocks/material-ui-component-set/commit/bfc2088e34366428022fcd754c81b66ce2552e2d))
+* case of option label ([5da6b95](https://github.com/bettyblocks/material-ui-component-set/commit/5da6b95e5827928564d7e4d1a25cbb84d733a377))
+* change null into fragment ([a3e7354](https://github.com/bettyblocks/material-ui-component-set/commit/a3e7354fb2ee7a5f64931553cc3e73f43467b7ab))
+* global replacement errors ([68efb20](https://github.com/bettyblocks/material-ui-component-set/commit/68efb204a500815b73b17d3bf0150965aa14cdce))
+
+
+### Features
+
+* add data attribute to components ([d9fcf7d](https://github.com/bettyblocks/material-ui-component-set/commit/d9fcf7da759e78ab5da46520aad5270705dda3ae))
+* add option to all prefabs ([5c95631](https://github.com/bettyblocks/material-ui-component-set/commit/5c95631fcf580442e41dbc1942fd07e6fc296b5b))
+
+## [1.166.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.166.2...v1.166.3) (2021-09-06)
+
+
+### Bug Fixes
+
+* autoselect doesn't crash when clearing the textfield ([96f8c18](https://github.com/bettyblocks/material-ui-component-set/commit/96f8c1841afa8694c0573eb5da88cd13eb483af5))
+
+## [1.166.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.166.1...v1.166.2) (2021-08-31)
+
+
+### Bug Fixes
+
+* login interaction uses react router ([962bf22](https://github.com/bettyblocks/material-ui-component-set/commit/962bf22952c27610a58b8a05abc05bdcdc652519))
+* logout uses react router dom ([8d556e2](https://github.com/bettyblocks/material-ui-component-set/commit/8d556e27faead2e95dd1d65872015a0a069fc32d))
+* make sure onlu one interaction is in pull request ([b4ea93b](https://github.com/bettyblocks/material-ui-component-set/commit/b4ea93b35fc442ede4429f2e522c73520035aec8))
+
+## [1.166.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.166.0...v1.166.1) (2021-08-30)
+
+
+### Bug Fixes
+
+* autoComplete captures context for onChange ([1763ef9](https://github.com/bettyblocks/material-ui-component-set/commit/1763ef97a759a34c6fbd0dcee8f320d1f261c4c3))
+
+# [1.166.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.165.5...v1.166.0) (2021-08-30)
+
+
+### Features
+
+* removes setCurrentRecord custom functions ([08a6e7e](https://github.com/bettyblocks/material-ui-component-set/commit/08a6e7e5e64a4d9aac4afc441c75e80b17fcdba5))
+
+## [1.165.5](https://github.com/bettyblocks/material-ui-component-set/compare/v1.165.4...v1.165.5) (2021-08-27)
+
+
+### Bug Fixes
+
+* redirect interaction uses react router ([467559e](https://github.com/bettyblocks/material-ui-component-set/commit/467559e4854039b6e1b38125d5a80afd133a1df6))
+
+## [1.165.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.165.3...v1.165.4) (2021-08-27)
+
+
+### Bug Fixes
+
+* pass refetch function ([5101efa](https://github.com/bettyblocks/material-ui-component-set/commit/5101efa067246733086a7a8b589d6ec8fa9a3aa7))
+* refetch interaction missing ([ab11a76](https://github.com/bettyblocks/material-ui-component-set/commit/ab11a76ee50ff9085d7dd20a946b2a6098c207f7))
+* use skip query param ([5706830](https://github.com/bettyblocks/material-ui-component-set/commit/5706830604063c7d43d0903f672dd6787a430ef0))
+
+## [1.165.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.165.2...v1.165.3) (2021-08-24)
+
+
+### Bug Fixes
+
+* **page-756:** fixes data container show content on load in form ([9e8e405](https://github.com/bettyblocks/material-ui-component-set/commit/9e8e4052a2520c2af711fedcb353f3bd31c8e0a4))
+
+## [1.165.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.165.1...v1.165.2) (2021-08-23)
+
+
+### Bug Fixes
+
+* change to new skip param ([b701b49](https://github.com/bettyblocks/material-ui-component-set/commit/b701b49335e1eb9311e2eada7daee22a67cf0906))
+* prevent first page being skipped ([299e1b2](https://github.com/bettyblocks/material-ui-component-set/commit/299e1b2f7ab559919a1696141d6cea1d13c99fc9))
+* remove condition query hooks ([3ed1340](https://github.com/bettyblocks/material-ui-component-set/commit/3ed13407aee63aef810e6508e8e8b227c9939f8c))
+* undo page change ([2e79286](https://github.com/bettyblocks/material-ui-component-set/commit/2e792866767874da4a40040bda6386ca62b17521))
+
 ## [1.165.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.165.0...v1.165.1) (2021-08-20)
 
 

@@ -35,6 +35,7 @@
           pagination,
           loadingType,
           loadingText,
+          dataComponentAttribute,
         } = options;
 
         const rowsPerPage = parseInt(take, 10) || 50;
@@ -56,7 +57,7 @@
         const [interactionFilter, setInteractionFilter] = useState({});
 
         const builderLayout = () => (
-          <>
+          <div data-component={useText(dataComponentAttribute) || 'DataList'}>
             {searchProperty && !hideSearch && (
               <div className={classes.header}>
                 <SearchComponent label={searchPropertyLabel} />
@@ -89,7 +90,7 @@
                 />
               </div>
             )}
-          </>
+          </div>
         );
 
         useEffect(() => {
@@ -234,9 +235,9 @@
         const completeFilter = deepMerge(newFilter, interactionFilters);
         const where = useFilter(completeFilter);
 
-        const { loading, error, data, refetch } =
-          model &&
-          useAllQuery(model, {
+        const { loading, error, data, refetch } = useAllQuery(
+          model,
+          {
             rawFilter: where,
             skip: page ? (page - 1) * rowsPerPage : 0,
             take: rowsPerPage,
@@ -256,7 +257,9 @@
                 B.triggerEvent('onError', resp);
               }
             },
-          });
+          },
+          !model,
+        );
 
         useEffect(() => {
           if (isDev) {
@@ -390,14 +393,26 @@
           }
 
           if (error && displayError) {
-            return <span>{error.message}</span>;
+            return (
+              <span
+                data-component={
+                  useText(dataComponentAttribute) || 'DataContainer'
+                }
+              >
+                {error.message}
+              </span>
+            );
           }
 
           const { results = [], totalCount } = data || {};
           const resultCount = results && results.length;
 
           return (
-            <>
+            <div
+              data-component={
+                useText(dataComponentAttribute) || 'DataContainer'
+              }
+            >
               {searchProperty && !hideSearch && (
                 <div className={classes.header}>
                   <SearchComponent
@@ -425,7 +440,7 @@
                   />
                 </div>
               )}
-            </>
+            </div>
           );
         };
 
