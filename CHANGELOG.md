@@ -1,3 +1,10 @@
+## [1.168.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.168.0...v1.168.1) (2021-09-10)
+
+
+### Bug Fixes
+
+* remove apiVersion where possible ([ecac22f](https://github.com/bettyblocks/material-ui-component-set/commit/ecac22fa470a183293f2660bb0d57466cd210beb))
+
 # [1.168.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.167.1...v1.168.0) (2021-09-08)
 
 
