@@ -295,8 +295,8 @@
           }
           inputProps={{
             pattern: validPattern,
-            minlength: validMinlength,
-            maxlength: validMaxlength,
+            minLength: validMinlength,
+            maxLength: validMaxlength,
             min: validMinvalue,
             max: validMaxvalue,
             tabIndex: isDev && -1,

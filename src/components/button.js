@@ -144,7 +144,7 @@
 
     const buttonProps = {
       disabled: disabled || isLoading || loading,
-      tabindex: isDev && -1,
+      tabIndex: isDev && -1,
       onClick: event => {
         event.stopPropagation();
         actionCallback();
@@ -163,7 +163,7 @@
         linkToExternalVariable,
       }),
       target: openLinkToExternal,
-      tabindex: isDev && -1,
+      tabIndex: isDev && -1,
       type: isDev ? 'button' : type,
       endpoint:
         linkType === 'internal' && linkTo && linkTo.id ? linkTo : undefined,
