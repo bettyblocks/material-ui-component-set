@@ -3,7 +3,7 @@
   icon: 'DrawerIcon',
   type: 'page',
   description:
-    'v3 This page contains a datatable and all you need to manage your records.',
+    'This page contains a datatable and all you need to manage your records.',
   detail:
     'In this ready to use Data Table, it is possible to create, display (read), update and delete records. These functionalities are shown in a slide-out panel.',
   previewUrl: 'https://preview.betty.app/back-office',
