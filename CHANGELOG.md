@@ -1,3 +1,10 @@
+## [1.168.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.168.1...v1.168.2) (2021-09-13)
+
+
+### Bug Fixes
+
+* use right casing for css props ([0e226ee](https://github.com/bettyblocks/material-ui-component-set/commit/0e226eeda8aa6e78f3d4f11ce1c481454d3ad4d9))
+
 ## [1.168.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.168.0...v1.168.1) (2021-09-10)
 
 
