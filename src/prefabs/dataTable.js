@@ -266,7 +266,7 @@
           },
         },
         {
-          value: '',
+          value: true,
           label: 'Hide text-overflow',
           key: 'hideTextOverflow',
           type: 'TOGGLE',
