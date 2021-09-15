@@ -1,3 +1,10 @@
+## [1.168.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.168.2...v1.168.3) (2021-09-15)
+
+
+### Bug Fixes
+
+* autocomplete filter assignment and css props ([28f468d](https://github.com/bettyblocks/material-ui-component-set/commit/28f468dcb0210d4b04884b9d82e7f81c6726266f))
+
 ## [1.168.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.168.1...v1.168.2) (2021-09-13)
 
 
