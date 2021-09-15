@@ -15168,6 +15168,12 @@
                                               },
                                               {
                                                 value: '',
+                                                label: 'Hide text-overflow',
+                                                key: 'hideTextOverflow',
+                                                type: 'TOGGLE',
+                                              },
+                                              {
+                                                value: '',
                                                 label: 'Authentication Profile',
                                                 key: 'authProfile',
                                                 type: 'AUTHENTICATION_PROFILE',

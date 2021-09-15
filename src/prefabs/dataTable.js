@@ -252,12 +252,6 @@
           type: 'TOGGLE',
         },
         {
-          value: '',
-          label: 'Hide text-overflow',
-          key: 'hideTextOverflow',
-          type: 'TOGGLE',
-        },
-        {
           type: 'VARIABLE',
           label: 'Search on text',
           key: 'labelSearchOn',
@@ -270,6 +264,12 @@
               value: true,
             },
           },
+        },
+        {
+          value: '',
+          label: 'Hide text-overflow',
+          key: 'hideTextOverflow',
+          type: 'TOGGLE',
         },
         {
           value: '',
