@@ -50,7 +50,7 @@
         classes={{ root: classes.root, indicator: classes.indicator }}
       >
         {React.Children.map(children, (child, index) => {
-          const { options } = child.props;
+          const { options = {} } = child.props;
           const {
             label = tabData[`label${index}`] || [`Tab`],
             icon = tabData[`icon${index}`] || 'None',
