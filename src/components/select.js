@@ -285,7 +285,7 @@
           onBlur={validationHandler}
           inputProps={{
             name: nameAttributeValue || customModelAttributeName,
-            tabIndex: isDev ? -1 : 0,
+            tabIndex: isDev ? -1 : undefined,
             'data-component': useText(dataComponentAttribute) || 'Select',
           }}
           required={required}
@@ -304,7 +304,7 @@
           type="text"
           tabIndex="-1"
           required={required}
-          value={value}
+          defaultValue={value}
         />
       </>
     );
