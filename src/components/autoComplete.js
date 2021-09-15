@@ -132,7 +132,7 @@
       return value;
     };
 
-    const { filter } = options;
+    const filter = { ...options.filter };
     const hasSearch = searchProp && searchProp.id;
     const hasValue = valueProp && valueProp.id;
 
@@ -442,11 +442,6 @@
           disabled={disabled}
           options={selectValues}
           value={currentValue}
-          PopoverProps={{
-            classes: {
-              root: classes.popover,
-            },
-          }}
           onInputChange={(_, inputValue) => {
             setSearchParam(inputValue);
           }}
@@ -521,11 +516,6 @@
                 inputValue={currentInputValue}
                 getOptionLabel={renderLabel}
                 getOptionSelected={(option, value) => value.id === option.id}
-                PopoverProps={{
-                  classes: {
-                    root: classes.popover,
-                  },
-                }}
                 onInputChange={(event, inputValue) => {
                   if (event) setSearchParam(inputValue);
                 }}
@@ -548,7 +538,6 @@
                       required={
                         required && (!currentValue || currentValue.length === 0)
                       }
-                      loading={loading}
                       InputProps={{
                         ...params.InputProps,
                         endAdornment: (
