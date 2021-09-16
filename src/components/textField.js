@@ -227,7 +227,7 @@
 
     const iconButtonOptions = {
       edge: adornmentPosition,
-      tabIndex: -1,
+      tabIndex: isDev ? -1 : undefined,
     };
     if (isPasswordType) {
       iconButtonOptions.ariaLabel = 'toggle password visibility';
@@ -300,7 +300,7 @@
             maxLength: validMaxlength,
             min: validMinvalue,
             max: validMaxvalue,
-            tabIndex: isDev && -1,
+            tabIndex: isDev ? -1 : undefined,
           }}
           data-component={useText(dataComponentAttribute) || 'TextField'}
         />
