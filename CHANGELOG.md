@@ -1,3 +1,17 @@
+## [1.169.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.169.0...v1.169.1) (2021-09-17)
+
+
+### Bug Fixes
+
+* using translations will break the page ([77cf101](https://github.com/bettyblocks/material-ui-component-set/commit/77cf1013298b6baa2d456ad9cf09a4554c290360))
+
+# [1.169.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.168.3...v1.169.0) (2021-09-16)
+
+
+### Features
+
+* add text-overflow checkbox to all datatables ([162312f](https://github.com/bettyblocks/material-ui-component-set/commit/162312fc08ccecc377759cd6cba0aafab34d95ca))
+
 ## [1.168.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.168.2...v1.168.3) (2021-09-15)
 
 
