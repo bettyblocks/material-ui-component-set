@@ -84,7 +84,7 @@
                       ? React.createElement(Icons[icon])
                       : undefined}
                   </div>
-                  <div>{useText(label)}</div>
+                  <div>{label}</div>
                 </div>
               }
               disabled={disabled}

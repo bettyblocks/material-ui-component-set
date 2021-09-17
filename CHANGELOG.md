@@ -1,3 +1,10 @@
+# [1.169.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.168.3...v1.169.0) (2021-09-16)
+
+
+### Features
+
+* add text-overflow checkbox to all datatables ([162312f](https://github.com/bettyblocks/material-ui-component-set/commit/162312fc08ccecc377759cd6cba0aafab34d95ca))
+
 ## [1.168.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.168.2...v1.168.3) (2021-09-15)
 
 
