@@ -24,7 +24,7 @@
       index,
     } = parent;
     const isActive = value === index || showAllTabs;
-
+    const parsedLabel = useText(label);
     const doSetTab = () => {
       setSelectedTab(index);
     };
@@ -54,7 +54,8 @@
     );
 
     const labelChanged = () =>
-      JSON.stringify(tabData[`label${index}`] || '') !== JSON.stringify(label);
+      JSON.stringify(tabData[`label${index}`] || '') !==
+      JSON.stringify(parsedLabel);
 
     const iconChanged = () => tabData[`icon${index}`] !== icon;
 
@@ -77,7 +78,7 @@
       if (setTabData && hasChange()) {
         setTabData({
           ...tabData,
-          [`label${index}`]: label,
+          [`label${index}`]: parsedLabel,
           [`icon${index}`]: icon,
           [`disabled${index}`]: disabled,
           [`disableRipple${index}`]: disableRipple,
