@@ -22,7 +22,7 @@
       Button,
       Text,
     },
-    helpers: { useModelQuery, useCurrentPageId },
+    helpers: { useModelQuery },
     prefab,
     save,
     close,
@@ -39,8 +39,6 @@
       setDetailPropertiesValidation,
     ] = React.useState(false);
     const [detailProperties, setDetailProperties] = React.useState([]);
-
-    const pageId = useCurrentPageId();
 
     const getDescendantByRef = (refValue, structure) =>
       structure.reduce((acc, component) => {
@@ -7890,26 +7888,6 @@
                     },
                   },
                 },
-                {
-                  value: false,
-                  label: 'Advanced settings',
-                  key: 'advancedSettings',
-                  type: 'TOGGLE',
-                },
-                {
-                  type: 'VARIABLE',
-                  label: 'Test attribute',
-                  key: 'dataComponentAttribute',
-                  value: ['Text'],
-                  configuration: {
-                    condition: {
-                      type: 'SHOW',
-                      option: 'advancedSettings',
-                      comparator: 'EQ',
-                      value: true,
-                    },
-                  },
-                },
               ],
               descendants: [],
             };
@@ -8091,20 +8069,6 @@
                   label: 'name attribute',
                   key: 'nameAttribute',
                   value: [],
-                  configuration: {
-                    condition: {
-                      type: 'SHOW',
-                      option: 'advancedSettings',
-                      comparator: 'EQ',
-                      value: true,
-                    },
-                  },
-                },
-                {
-                  type: 'VARIABLE',
-                  label: 'Test attribute',
-                  key: 'dataComponentAttribute',
-                  value: ['Checkbox'],
                   configuration: {
                     condition: {
                       type: 'SHOW',
@@ -10260,7 +10224,7 @@
                           },
                           {
                             value: [
-                              'https://assets.bettyblocks.com/1e9019bb1c5c4af2ba799c2ee1761af0_assets/files/placeholder-logo',
+                              'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Your_Logo_-_B.svg',
                             ],
                             label: 'Source',
                             key: 'imageSource',
@@ -10932,7 +10896,7 @@
                                 type: 'COLOR',
                                 label: 'Background color',
                                 key: 'backgroundColor',
-                                value: 'Accent1',
+                                value: 'White',
                               },
                               {
                                 type: 'CUSTOM',
@@ -11090,7 +11054,7 @@
                                 type: 'TOGGLE',
                                 label: 'Selected',
                                 key: 'selected',
-                                value: false,
+                                value: true,
                               },
                               {
                                 value: false,
@@ -18249,6 +18213,12 @@
                                     },
                                   },
                                   {
+                                    value: true,
+                                    label: 'Hide text-overflow',
+                                    key: 'hideTextOverflow',
+                                    type: 'TOGGLE',
+                                  },
+                                  {
                                     value: '',
                                     label: 'Authentication Profile',
                                     key: 'authProfile',
@@ -19120,7 +19090,6 @@
         ];
 
         const dataTable = getDescendantByRef('#dataTable', prefabStructure);
-        dataTable.options[27].value = { id: pageId, params: {} };
         dataTable.options[0].value = modelId;
         properties.filter(property => property.kind !== 'SERIAL');
         properties.forEach(property => {
@@ -19236,6 +19205,8 @@
           });
         });
 
+        const sidebarItem = getDescendantByRef('#sideBarItem', prefabStructure);
+        sidebarItem.options[0].value = [`${data.model.label}`];
         const detailsDataContainer = getDescendantByRef(
           '#detailsDataContainer',
           prefabStructure,
@@ -22834,6 +22805,8 @@
       },
       stepAmount: 2,
     };
+
+    // const pageId = useCurrentPageId();
 
     return (
       <>
