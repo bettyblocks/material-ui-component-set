@@ -25,6 +25,7 @@
     } = parent;
     const isActive = value === index || showAllTabs;
     const parsedLabel = useText(label);
+
     const doSetTab = () => {
       setSelectedTab(index);
     };
