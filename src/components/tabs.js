@@ -84,7 +84,9 @@
                       ? React.createElement(Icons[icon])
                       : undefined}
                   </div>
-                  <div>{useText(label)}</div>
+                  <div>
+                    {typeof label === 'string' ? label : useText(label)}
+                  </div>
                 </div>
               }
               disabled={disabled}

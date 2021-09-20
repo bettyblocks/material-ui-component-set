@@ -1,3 +1,24 @@
+## [1.169.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.169.2...v1.169.3) (2021-09-20)
+
+
+### Bug Fixes
+
+* autocomplete not showing more than 50 options ([b73bed8](https://github.com/bettyblocks/material-ui-component-set/commit/b73bed8345ebf2cdc5aa1c2e991ded57d0f56367))
+
+## [1.169.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.169.1...v1.169.2) (2021-09-20)
+
+
+### Bug Fixes
+
+* added extra condition to make sure the label is parsed ([bffb177](https://github.com/bettyblocks/material-ui-component-set/commit/bffb1775fa30cf6d0c98d5f89b6ff5d24b071290))
+
+## [1.169.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.169.0...v1.169.1) (2021-09-17)
+
+
+### Bug Fixes
+
+* using translations will break the page ([77cf101](https://github.com/bettyblocks/material-ui-component-set/commit/77cf1013298b6baa2d456ad9cf09a4554c290360))
+
 # [1.169.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.168.3...v1.169.0) (2021-09-16)
 
 

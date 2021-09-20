@@ -132,7 +132,7 @@
       return value;
     };
 
-    const filter = { ...options.filter };
+    const { filter = {} } = options;
     const hasSearch = searchProp && searchProp.id;
     const hasValue = valueProp && valueProp.id;
 
