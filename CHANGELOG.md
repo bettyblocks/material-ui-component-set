@@ -1,3 +1,10 @@
+## [1.169.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.169.2...v1.169.3) (2021-09-20)
+
+
+### Bug Fixes
+
+* autocomplete not showing more than 50 options ([b73bed8](https://github.com/bettyblocks/material-ui-component-set/commit/b73bed8345ebf2cdc5aa1c2e991ded57d0f56367))
+
 ## [1.169.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.169.1...v1.169.2) (2021-09-20)
 
 
