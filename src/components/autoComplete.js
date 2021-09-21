@@ -261,6 +261,21 @@
       !model,
     );
 
+    const {
+      error: selectedErr,
+      data: { results: selectedResults } = {},
+    } = useAllQuery(
+      model,
+      {
+        rawFilter: rawFilter.rawFilter,
+        take: 50,
+        variables: {
+          ...(orderBy ? { sort: { relation: sort } } : {}),
+        },
+      },
+      !model,
+    );
+
     useEffect(() => {
       if (mounted.current) {
         B.triggerEvent('onChange', currentValue, changeContext.current);
@@ -355,7 +370,7 @@
     };
 
     const record = React.useMemo(() => {
-      if (!currentValue || !results) {
+      if (!currentValue || !results || !selectedResults) {
         return multiple ? [] : null;
       }
       let currentRecordsKeys = currentValue;
@@ -364,24 +379,26 @@
           ? currentValue.toString().split(',')
           : [currentValue];
       }
-      const currentRecords = results.reduce((acc, cv) => {
-        const searchStr = cv[valueProp.name]
-          ? cv[valueProp.name].toString()
-          : '';
-        const search = cv[valueProp.name] || '';
-        if (
-          currentRecordsKeys.indexOf(searchStr) > -1 ||
-          currentRecordsKeys.indexOf(search) > -1
-        ) {
-          acc.push(cv);
-        }
-        return acc;
-      }, []);
+      const currentRecords = results
+        .concat(selectedResults)
+        .reduce((acc, cv) => {
+          const searchStr = cv[valueProp.name]
+            ? cv[valueProp.name].toString()
+            : '';
+          const search = cv[valueProp.name] || '';
+          if (
+            currentRecordsKeys.indexOf(searchStr) > -1 ||
+            currentRecordsKeys.indexOf(search) > -1
+          ) {
+            acc.push(cv);
+          }
+          return acc;
+        }, []);
 
       const singleRecord = currentRecords[0] ? { ...currentRecords[0] } : null;
 
       return multiple ? currentRecords : singleRecord;
-    }, [currentValue, results]);
+    }, [currentValue, results, selectedResults]);
 
     useEffect(() => {
       if (!multiple) {
@@ -478,8 +495,8 @@
       );
     }
 
-    if (err && displayError) return <span>{err.message}</span>;
-    if (!results || hasNoProp) {
+    if ((err || selectedErr) && displayError) return <span>{err.message}</span>;
+    if (!results || !selectedResults || hasNoProp) {
       return (
         <TextField
           {...textFieldProps}
@@ -511,7 +528,7 @@
                 disabled={disabled}
                 multiple={multiple}
                 freeSolo={freeSolo}
-                options={results}
+                options={results.concat(selectedResults)}
                 value={record}
                 inputValue={currentInputValue}
                 getOptionLabel={renderLabel}
