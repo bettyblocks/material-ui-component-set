@@ -1,3 +1,10 @@
+## [1.169.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.169.3...v1.169.4) (2021-09-21)
+
+
+### Bug Fixes
+
+* **page-882:** fixes the autocomplete freesolo multiple combi ([303f069](https://github.com/bettyblocks/material-ui-component-set/commit/303f0691ae19a55b04d507b04866ad99380bdb9c))
+
 ## [1.169.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.169.2...v1.169.3) (2021-09-20)
 
 
