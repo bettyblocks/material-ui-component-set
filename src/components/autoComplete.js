@@ -9,7 +9,6 @@
       error,
       placeholder,
       variant,
-      type,
       size,
       fullWidth,
       margin,
@@ -30,6 +29,7 @@
       orderBy,
       dataComponentAttribute,
     } = options;
+
     const { Autocomplete } = window.MaterialUI.Lab;
     const {
       TextField,
@@ -87,7 +87,6 @@
       label: !hideLabel && labelText,
       fullWidth,
       size,
-      type,
       required,
       error,
       placeholder: placeholderText,
