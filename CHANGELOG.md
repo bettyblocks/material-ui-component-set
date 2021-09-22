@@ -1,3 +1,10 @@
+# [1.170.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.169.4...v1.170.0) (2021-09-22)
+
+
+### Features
+
+* add AutoCompleteSingle component ([779bdd8](https://github.com/bettyblocks/material-ui-component-set/commit/779bdd8f2250f7fe42b4a328091c711a33a85774))
+
 ## [1.169.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.169.3...v1.169.4) (2021-09-21)
 
 
