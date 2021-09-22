@@ -7,7 +7,7 @@
     const { Autocomplete } = window.MaterialUI.Lab;
     const { TextField } = window.MaterialUI.Core;
     const { ExpandMore } = window.MaterialUI.Icons;
-    const { env, useText } = B;
+    const { env, getProperty, useText } = B;
     const {
       closeOnSelect,
       dataComponentAttribute: dataComponentAttributeRaw,
@@ -20,6 +20,7 @@
       margin,
       nameAttribute: nameAttributeRaw,
       placeholder: placeholderRaw,
+      property,
       showError,
       size,
       variant,
@@ -64,13 +65,15 @@
 
     if (error && displayError) return <span>{error.message}</span>;
 
+    const { values } = getProperty(property) || {};
+
     return (
       <Autocomplete
         autoSelect={freeSolo}
         disableCloseOnSelect={!closeOnSelect}
         disabled={disabled}
         freeSolo={freeSolo}
-        options={['1', '2']}
+        options={values.map(({ value }) => value)}
         renderInput={params => (
           <TextField
             {...params}

@@ -8,6 +8,34 @@
       name: 'AutoCompleteSingle',
       options: [
         {
+          label: 'Option type',
+          key: 'optionType',
+          value: 'model',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Model', value: 'model' },
+              { name: 'Property', value: 'property' },
+            ],
+          },
+        },
+        {
+          value: '',
+          label: 'Property',
+          key: 'property',
+          type: 'PROPERTY',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'optionType',
+              comparator: 'EQ',
+              value: 'property',
+            },
+          },
+        },
+        {
           type: 'TOGGLE',
           label: 'Close dropdown after select',
           key: 'closeOnSelect',
