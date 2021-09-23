@@ -5,9 +5,15 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { Autocomplete } = window.MaterialUI.Lab;
-    const { TextField } = window.MaterialUI.Core;
+    const { CircularProgress, TextField } = window.MaterialUI.Core;
     const { ExpandMore } = window.MaterialUI.Icons;
-    const { env, getCustomModelAttribute, getProperty, useText } = B;
+    const {
+      env,
+      getCustomModelAttribute,
+      getProperty,
+      useAllQuery,
+      useText,
+    } = B;
     const {
       closeOnSelect,
       customModelAttribute: customModelAttributeRaw,
@@ -23,7 +29,7 @@
       optionType,
       placeholder: placeholderRaw,
       property,
-      // model,
+      model,
       showError,
       searchProperty,
       size,
@@ -71,6 +77,10 @@
 
     switch (optionType) {
       case 'model': {
+        if (!model) {
+          message = 'No model selected';
+          break;
+        }
         if (!hasSearch && !hasValue) {
           message = 'No property selected';
           break;
@@ -107,8 +117,13 @@
       }
     }
 
-    // TODO: Remove when dynamic request is added
-    const error = false;
+    const { loading, error, data: { results = [] } = {} } = useAllQuery(
+      model,
+      {
+        take: 50,
+      },
+      !valid,
+    );
 
     if (isDev || !valid) {
       let inputValue;
@@ -151,8 +166,12 @@
     if (error && displayError) return <span>{error.message}</span>;
 
     const getOptions = () => {
-      if (isListProperty) {
+      if (optionType === 'property') {
         return propertyValues.map(propertyValue => propertyValue.value);
+      }
+
+      if (optionType === 'model') {
+        return results;
       }
 
       return [];
@@ -164,6 +183,9 @@
         disableCloseOnSelect={!closeOnSelect}
         disabled={disabled}
         freeSolo={freeSolo}
+        {...(optionType === 'model' && {
+          getOptionLabel: option => option[searchProp.name],
+        })}
         onChange={(_, newValue) => {
           setValue(newValue);
         }}
@@ -173,7 +195,14 @@
             {...params}
             InputProps={{
               ...params.InputProps,
-              endAdornment: params.InputProps.endAdornment,
+              endAdornment: (
+                <>
+                  {loading ? (
+                    <CircularProgress color="inherit" size={20} />
+                  ) : null}
+                  {params.InputProps.endAdornment}
+                </>
+              ),
             }}
             classes={{ root: classes.formControl }}
             dataComponent={dataComponentAttribute}
