@@ -132,7 +132,7 @@
             }}
             classes={{ root: classes.formControl }}
             dataComponent={dataComponentAttribute}
-            disabled={disabled}
+            disabled={disabled || !valid}
             error={showError}
             fullWidth={fullWidth}
             helperText={helperText}
