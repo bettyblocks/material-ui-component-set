@@ -1,3 +1,31 @@
+# [1.170.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.169.4...v1.170.0) (2021-09-22)
+
+
+### Features
+
+* add AutoCompleteSingle component ([779bdd8](https://github.com/bettyblocks/material-ui-component-set/commit/779bdd8f2250f7fe42b4a328091c711a33a85774))
+
+## [1.169.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.169.3...v1.169.4) (2021-09-21)
+
+
+### Bug Fixes
+
+* **page-882:** fixes the autocomplete freesolo multiple combi ([303f069](https://github.com/bettyblocks/material-ui-component-set/commit/303f0691ae19a55b04d507b04866ad99380bdb9c))
+
+## [1.169.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.169.2...v1.169.3) (2021-09-20)
+
+
+### Bug Fixes
+
+* autocomplete not showing more than 50 options ([b73bed8](https://github.com/bettyblocks/material-ui-component-set/commit/b73bed8345ebf2cdc5aa1c2e991ded57d0f56367))
+
+## [1.169.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.169.1...v1.169.2) (2021-09-20)
+
+
+### Bug Fixes
+
+* added extra condition to make sure the label is parsed ([bffb177](https://github.com/bettyblocks/material-ui-component-set/commit/bffb1775fa30cf6d0c98d5f89b6ff5d24b071290))
+
 ## [1.169.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.169.0...v1.169.1) (2021-09-17)
 
 
