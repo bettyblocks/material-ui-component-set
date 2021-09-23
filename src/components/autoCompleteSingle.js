@@ -20,10 +20,14 @@
       hideLabel,
       margin,
       nameAttribute: nameAttributeRaw,
+      optionType,
       placeholder: placeholderRaw,
       property,
+      // model,
       showError,
+      searchProperty,
       size,
+      valueProperty,
       variant,
     } = options;
 
@@ -39,19 +43,84 @@
       id,
       label: labelRaw = [],
       value: valueRaw = [],
-      required = false,
+      required: defaultRequired = false,
     } = customModelAttributeRaw;
-    const { name, validations: { required: attributeRequired = false } = {} } =
-      getCustomModelAttribute(id) || {};
+    const {
+      name,
+      validations: { required: customAttributeRequired = false } = {},
+    } = getCustomModelAttribute(id) || {};
+
+    const required = customAttributeRequired || defaultRequired;
 
     const label = useText(labelRaw);
+    // TODO: discuss default value behaviour this doesnt seem to work at the moment for a list property
     const defaultValue = useText(valueRaw, { rawValue: true });
     const [value, setValue] = useState(defaultValue);
+
+    const { kind: propertyKind = '', values: propertyValues } =
+      getProperty(property) || {};
+    const isListProperty = propertyKind.toLowerCase() === 'list';
+
+    const searchProp = getProperty(searchProperty) || {};
+    const valueProp = getProperty(valueProperty) || {};
+    const hasSearch = searchProp && searchProp.id;
+    const hasValue = valueProp && valueProp.id;
+
+    let valid = false;
+    let message = '';
+
+    switch (optionType) {
+      case 'model': {
+        if (!hasSearch && !hasValue) {
+          message = 'No property selected';
+          break;
+        }
+        if (!hasValue) {
+          message = 'No value propery selected';
+          break;
+        }
+        if (!hasSearch) {
+          message = 'No label property selected';
+          break;
+        }
+
+        valid = true;
+        break;
+      }
+      case 'property': {
+        if (!propertyKind) {
+          message = 'No property selected';
+          break;
+        }
+
+        if (!isListProperty) {
+          message = 'No List property selected';
+          break;
+        }
+
+        valid = true;
+        break;
+      }
+      default: {
+        message = 'Invalid value for optionType option';
+        break;
+      }
+    }
 
     // TODO: Remove when dynamic request is added
     const error = false;
 
-    if (isDev) {
+    if (isDev || !valid) {
+      let inputValue;
+
+      if (!valid) {
+        inputValue = message;
+      }
+      // TODO: disscus with anton!
+      if (isDev) {
+        inputValue = defaultValue;
+      }
+
       return (
         <div className={classes.root}>
           <TextField
@@ -70,8 +139,9 @@
             label={!hideLabel && label}
             margin={margin}
             placeholder={placeholder}
+            required={required && !value}
             size={size}
-            value={defaultValue}
+            value={inputValue}
             variant={variant}
           />
         </div>
@@ -80,7 +150,13 @@
 
     if (error && displayError) return <span>{error.message}</span>;
 
-    const { values: propertyValues } = getProperty(property) || {};
+    const getOptions = () => {
+      if (isListProperty) {
+        return propertyValues.map(propertyValue => propertyValue.value);
+      }
+
+      return [];
+    };
 
     return (
       <Autocomplete
@@ -91,7 +167,7 @@
         onChange={(_, newValue) => {
           setValue(newValue);
         }}
-        options={propertyValues.map(propertyValue => propertyValue.value)}
+        options={getOptions()}
         renderInput={params => (
           <TextField
             {...params}
@@ -110,6 +186,7 @@
             margin={margin}
             name={nameAttribute || name}
             placeholder={placeholder}
+            required={required && !value}
             size={size}
             variant={variant}
           />

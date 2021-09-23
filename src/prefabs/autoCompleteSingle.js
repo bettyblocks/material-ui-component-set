@@ -45,6 +45,48 @@
           },
         },
         {
+          value: '',
+          label: 'Model',
+          key: 'model',
+          type: 'MODEL',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'optionType',
+              comparator: 'EQ',
+              value: 'model',
+            },
+          },
+        },
+        {
+          value: '',
+          label: 'Label property',
+          key: 'searchProperty',
+          type: 'PROPERTY',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'optionType',
+              comparator: 'EQ',
+              value: 'model',
+            },
+          },
+        },
+        {
+          value: '',
+          label: 'Value property',
+          key: 'valueProperty',
+          type: 'PROPERTY',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'optionType',
+              comparator: 'EQ',
+              value: 'model',
+            },
+          },
+        },
+        {
           type: 'TOGGLE',
           label: 'Close dropdown after select',
           key: 'closeOnSelect',
