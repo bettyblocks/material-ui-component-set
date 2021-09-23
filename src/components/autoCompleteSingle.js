@@ -7,9 +7,10 @@
     const { Autocomplete } = window.MaterialUI.Lab;
     const { TextField } = window.MaterialUI.Core;
     const { ExpandMore } = window.MaterialUI.Icons;
-    const { env, getProperty, useText } = B;
+    const { env, getCustomModelAttribute, getProperty, useText } = B;
     const {
       closeOnSelect,
+      customModelAttribute: customModelAttributeRaw,
       dataComponentAttribute: dataComponentAttributeRaw,
       disabled,
       errorType,
@@ -34,6 +35,19 @@
     const dataComponentAttribute =
       useText(dataComponentAttributeRaw) || 'AutoComplete';
 
+    const {
+      id,
+      label: labelRaw = [],
+      value: valueRaw = [],
+      required = false,
+    } = customModelAttributeRaw;
+    const { name, validations: { required: attributeRequired = false } = {} } =
+      getCustomModelAttribute(id) || {};
+
+    const label = useText(labelRaw);
+    const defaultValue = useText(valueRaw, { rawValue: true });
+    const [value, setValue] = useState(defaultValue);
+
     // TODO: Remove when dynamic request is added
     const error = false;
 
@@ -53,10 +67,11 @@
             error={showError}
             fullWidth={fullWidth}
             helperText={helperText}
-            label={!hideLabel}
+            label={!hideLabel && label}
             margin={margin}
             placeholder={placeholder}
             size={size}
+            value={defaultValue}
             variant={variant}
           />
         </div>
@@ -65,7 +80,7 @@
 
     if (error && displayError) return <span>{error.message}</span>;
 
-    const { values } = getProperty(property) || {};
+    const { values: propertyValues } = getProperty(property) || {};
 
     return (
       <Autocomplete
@@ -73,7 +88,10 @@
         disableCloseOnSelect={!closeOnSelect}
         disabled={disabled}
         freeSolo={freeSolo}
-        options={values.map(({ value }) => value)}
+        onChange={(_, newValue) => {
+          setValue(newValue);
+        }}
+        options={propertyValues.map(propertyValue => propertyValue.value)}
         renderInput={params => (
           <TextField
             {...params}
@@ -87,14 +105,16 @@
             error={showError}
             fullWidth={fullWidth}
             helperText={helperText}
-            label={!hideLabel}
+            key={value ? 'hasValue' : 'isEmpty'}
+            label={!hideLabel && label}
             margin={margin}
-            name={nameAttribute}
+            name={nameAttribute || name}
             placeholder={placeholder}
             size={size}
             variant={variant}
           />
         )}
+        value={value}
       />
     );
   })(),

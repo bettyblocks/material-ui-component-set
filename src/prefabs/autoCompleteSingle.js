@@ -8,6 +8,15 @@
       name: 'AutoCompleteSingle',
       options: [
         {
+          value: { label: ['Autocomplete'], value: [] },
+          label: 'Label',
+          key: 'customModelAttribute',
+          type: 'CUSTOM_MODEL_ATTRIBUTE',
+          configuration: {
+            allowedTypes: ['string'],
+          },
+        },
+        {
           label: 'Option type',
           key: 'optionType',
           value: 'model',
