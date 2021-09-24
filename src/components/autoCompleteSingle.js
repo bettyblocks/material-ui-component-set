@@ -168,8 +168,6 @@
       );
     }
 
-    // if (error && displayError) return <span>{error.message}</span>;
-
     const getOptions = () => {
       if (optionType === 'property') {
         return propertyValues.map(propertyValue => propertyValue.value);
