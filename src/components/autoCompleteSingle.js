@@ -122,7 +122,7 @@
       {
         take: 50,
       },
-      !valid,
+      optionType === 'property' || !valid,
     );
 
     if (error && displayError) {
@@ -189,41 +189,59 @@
         disabled={disabled}
         freeSolo={freeSolo}
         {...(optionType === 'model' && {
-          getOptionLabel: option => option[searchProp.name] || '-- empty --',
+          getOptionLabel: option => {
+            const optionLabel = option[searchProp.name];
+
+            return optionLabel === '' || optionLabel === null
+              ? '-- empty --'
+              : optionLabel;
+          },
         })}
         onChange={(_, newValue) => {
           setValue(newValue);
         }}
         options={getOptions()}
         renderInput={params => (
-          <TextField
-            {...params}
-            InputProps={{
-              ...params.InputProps,
-              endAdornment: (
-                <>
-                  {loading ? (
-                    <CircularProgress color="inherit" size={20} />
-                  ) : null}
-                  {params.InputProps.endAdornment}
-                </>
-              ),
-            }}
-            classes={{ root: classes.formControl }}
-            dataComponent={dataComponentAttribute}
-            disabled={disabled}
-            error={showError}
-            fullWidth={fullWidth}
-            helperText={helperText}
-            key={value ? 'hasValue' : 'isEmpty'}
-            label={!hideLabel && label}
-            margin={margin}
-            name={nameAttribute || name}
-            placeholder={placeholder}
-            required={required && !value}
-            size={size}
-            variant={variant}
-          />
+          <>
+            {optionType === 'model' && (
+              <input
+                type="hidden"
+                key={value[valueProp.name] ? 'hasValue' : 'isEmpty'}
+                name={nameAttribute || name}
+                value={value[valueProp.name]}
+              />
+            )}
+            <TextField
+              {...params}
+              InputProps={{
+                ...params.InputProps,
+                endAdornment: (
+                  <>
+                    {loading ? (
+                      <CircularProgress color="inherit" size={20} />
+                    ) : null}
+                    {params.InputProps.endAdornment}
+                  </>
+                ),
+              }}
+              classes={{ root: classes.formControl }}
+              dataComponent={dataComponentAttribute}
+              disabled={disabled}
+              error={showError}
+              fullWidth={fullWidth}
+              helperText={helperText}
+              key={value ? 'hasValue' : 'isEmpty'}
+              label={!hideLabel && label}
+              margin={margin}
+              {...(optionType === 'property' && {
+                name: nameAttribute || name,
+              })}
+              placeholder={placeholder}
+              required={required && !value}
+              size={size}
+              variant={variant}
+            />
+          </>
         )}
         value={value}
       />
