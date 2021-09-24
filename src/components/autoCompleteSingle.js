@@ -125,6 +125,11 @@
       !valid,
     );
 
+    if (error && displayError) {
+      valid = false;
+      message = 'Something went wrong while loading.';
+    }
+
     if (isDev || !valid) {
       let inputValue;
 
@@ -163,7 +168,7 @@
       );
     }
 
-    if (error && displayError) return <span>{error.message}</span>;
+    // if (error && displayError) return <span>{error.message}</span>;
 
     const getOptions = () => {
       if (optionType === 'property') {
@@ -184,7 +189,7 @@
         disabled={disabled}
         freeSolo={freeSolo}
         {...(optionType === 'model' && {
-          getOptionLabel: option => option[searchProp.name],
+          getOptionLabel: option => option[searchProp.name] || '-- empty --',
         })}
         onChange={(_, newValue) => {
           setValue(newValue);
