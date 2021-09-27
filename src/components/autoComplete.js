@@ -155,7 +155,7 @@
 
     let inputProps = {
       inputProps: {
-        tabIndex: isDev && -1,
+        tabIndex: isDev ? -1 : undefined,
       },
       endAdornment: (
         <>
@@ -188,8 +188,6 @@
       setUseFilter({ filter });
     };
 
-    let interactionFilters = {};
-
     const isEmptyValue = value =>
       !value || (Array.isArray(value) && value.length === 0);
 
@@ -212,7 +210,7 @@
         }, {}),
       );
 
-    interactionFilters =
+    const interactionFilters =
       clauses.length > 1 ? { _and: clauses } : clauses[0] || {};
 
     const completeFilter = deepMerge(
@@ -329,7 +327,7 @@
       };
     }, [searchParam]);
 
-    const onChange = (_, newValue) => {
+    const onChange = newValue => {
       if (!valueProp || !newValue) {
         setCurrentValue(newValue || '');
         setCurrentLabel(newValue || '');
@@ -351,6 +349,7 @@
       if (multiple) {
         newCurrentValue = newValue.map(rec => rec[valueProp.name] || rec);
       }
+
       setCurrentValue(newCurrentValue);
     };
 
@@ -364,16 +363,17 @@
           ? currentValue.toString().split(',')
           : [currentValue];
       }
-      const currentRecords = results.reduce((acc, cv) => {
-        const searchStr = cv[valueProp.name]
-          ? cv[valueProp.name].toString()
-          : '';
-        const search = cv[valueProp.name] || '';
-        if (
-          currentRecordsKeys.indexOf(searchStr) > -1 ||
-          currentRecordsKeys.indexOf(search) > -1
-        ) {
-          acc.push(cv);
+
+      const currentRecords = currentRecordsKeys.reduce((acc, cr) => {
+        const result = results.find(
+          res =>
+            res[valueProp.name] === cr || res[valueProp.name].toString() === cr,
+        );
+
+        if (result) {
+          acc.push(result);
+        } else if (multiple && freeSolo) {
+          acc.push(cr);
         }
         return acc;
       }, []);
@@ -413,7 +413,6 @@
         {renderLabel(option)}
       </>
     );
-
     if (isDev) {
       return (
         <div className={classes.root}>
@@ -427,7 +426,7 @@
     }
 
     if (kind === 'list' || kind === 'LIST') {
-      const onPropertyListChange = (_, newValue) => {
+      const onPropertyListChange = newValue => {
         setCurrentValue(newValue);
       };
 
@@ -445,8 +444,8 @@
           onInputChange={(_, inputValue) => {
             setSearchParam(inputValue);
           }}
-          onChange={(event, value) => {
-            onPropertyListChange(event, value);
+          onChange={(_, value) => {
+            onPropertyListChange(value);
           }}
           getOptionLabel={option => option}
           renderInput={params => (
@@ -515,13 +514,20 @@
                 value={record}
                 inputValue={currentInputValue}
                 getOptionLabel={renderLabel}
-                getOptionSelected={(option, value) => value.id === option.id}
+                getOptionSelected={(option, value) =>
+                  value.id !== undefined &&
+                  option.id !== undefined &&
+                  value.id === option.id
+                }
                 onInputChange={(event, inputValue) => {
-                  if (event) setSearchParam(inputValue);
+                  if (event) {
+                    setSearchParam(inputValue);
+                  }
                 }}
-                onChange={(event, value) => {
-                  onChange(event, value);
+                onChange={(_, value) => {
+                  onChange(value);
                 }}
+                autoSelect={freeSolo}
                 disableCloseOnSelect={!closeOnSelect}
                 renderOption={renderCheckboxes && renderOption}
                 renderInput={params => (
