@@ -71,8 +71,6 @@
     const { name: labelName } = getProperty(labelProp) || {};
     const { name: propName } = getProperty(valueProp) || {};
 
-    B.defineFunction('Reset', () => setCurrentValue(useText(defaultValue)));
-
     const transformValue = arg => {
       if (arg instanceof Date) {
         return arg.toISOString();
@@ -118,8 +116,7 @@
     let interactionFilters = {};
 
     const isEmptyValue = arg =>
-      (typeof arg !== 'boolean' && !arg) ||
-      (Array.isArray(arg) && arg.length === 0);
+      !arg || (Array.isArray(arg) && arg.length === 0);
 
     const clauses = Object.entries(interactionFilter)
       .filter(([, { value: valueArg }]) => !isEmptyValue(valueArg))
@@ -288,7 +285,7 @@
           onBlur={validationHandler}
           inputProps={{
             name: nameAttributeValue || customModelAttributeName,
-            tabIndex: isDev ? -1 : undefined,
+            tabIndex: isDev ? -1 : 0,
             'data-component': useText(dataComponentAttribute) || 'Select',
           }}
           required={required}
@@ -307,7 +304,7 @@
           type="text"
           tabIndex="-1"
           required={required}
-          defaultValue={value}
+          value={value}
         />
       </>
     );
