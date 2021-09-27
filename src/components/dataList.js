@@ -188,8 +188,7 @@
         let interactionFilters = {};
 
         const isEmptyValue = value =>
-          (typeof value !== 'boolean' && !value) ||
-          (Array.isArray(value) && value.length === 0);
+          !value || (Array.isArray(value) && value.length === 0);
 
         const clauses = Object.entries(interactionFilter)
           .filter(([, { value }]) => !isEmptyValue(value))
@@ -577,12 +576,6 @@
         marginLeft: ({ options: { outerSpacing } }) =>
           getSpacing(outerSpacing[3]),
       },
-      grid: {
-        display: 'grid',
-        gridTemplateColumns: ({ options: { sSize } }) =>
-          `repeat(${sSize}, 1fr)`,
-        gridGap: ({ options: { gap } }) => `${gap}`,
-      },
       inline: {
         display: 'inline-flex',
       },
@@ -679,12 +672,6 @@
           marginLeft: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[3], 'Portrait'),
         },
-        grid: {
-          display: 'grid',
-          gridTemplateColumns: ({ options: { mSize } }) =>
-            `repeat(${mSize}, 1fr)`,
-          gridGap: ({ options: { gap } }) => `${gap}`,
-        },
       },
       [`@media ${mediaMinWidth(960)}`]: {
         root: {
@@ -696,12 +683,6 @@
             getSpacing(outerSpacing[2], 'Landscape'),
           marginLeft: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[3], 'Landscape'),
-        },
-        grid: {
-          display: 'grid',
-          gridTemplateColumns: ({ options: { lSize } }) =>
-            `repeat(${lSize}, 1fr)`,
-          gridGap: ({ options: { gap } }) => `${gap}`,
         },
       },
       [`@media ${mediaMinWidth(1280)}`]: {
@@ -715,20 +696,12 @@
           marginLeft: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[3], 'Desktop'),
         },
-        grid: {
-          display: 'grid',
-          gridTemplateColumns: ({ options: { xlSize } }) =>
-            `repeat(${xlSize}, 1fr)`,
-          gridGap: ({ options: { gap } }) => `${gap}`,
-        },
       },
-      [`@media ${mediaMinWidth(1600)}`]: {
-        grid: {
-          display: 'grid',
-          gridTemplateColumns: ({ options: { fullSize } }) =>
-            `repeat(${fullSize}, 1fr)`,
-          gridGap: ({ options: { gap } }) => `${gap}`,
-        },
+      grid: {
+        display: 'grid',
+        gridTemplateColumns: ({ options: { width } }) =>
+          `repeat(auto-fit, minmax(${width}, 1fr))`,
+        gridGap: ({ options: { gap } }) => `${gap}`,
       },
       empty: {
         display: 'flex',

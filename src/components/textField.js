@@ -233,7 +233,6 @@
       iconButtonOptions.ariaLabel = 'toggle password visibility';
       iconButtonOptions.onClick = handleClickShowPassword;
       iconButtonOptions.onMouseDown = handleMouseDownPassword;
-      iconButtonOptions.tabIndex = 0;
     }
 
     useEffect(() => {
@@ -264,7 +263,7 @@
           multiline={multiline}
           autoComplete={autoComplete ? 'on' : 'off'}
           rows={rows}
-          label={labelText === '' ? undefined : labelText}
+          label={labelText}
           placeholder={placeholderText}
           onKeyDown={onKeyDown}
           onChange={changeHandler}
