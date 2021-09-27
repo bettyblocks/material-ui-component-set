@@ -17,6 +17,7 @@
       bodyText,
       allowTextServerResponse,
       allowTitleServerResponse,
+      dataComponentAttribute,
     } = options;
     const title = useText(titleText);
     const body = useText(bodyText);
@@ -85,6 +86,7 @@
             </IconButton>
           ) : null
         }
+        data-component={useText(dataComponentAttribute) || 'Alert'}
       >
         {(title || titleFromServer) && (
           <AlertTitle>

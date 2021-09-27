@@ -1,3 +1,103 @@
+# [1.170.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.169.4...v1.170.0) (2021-09-22)
+
+
+### Features
+
+* add AutoCompleteSingle component ([779bdd8](https://github.com/bettyblocks/material-ui-component-set/commit/779bdd8f2250f7fe42b4a328091c711a33a85774))
+
+## [1.169.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.169.3...v1.169.4) (2021-09-21)
+
+
+### Bug Fixes
+
+* **page-882:** fixes the autocomplete freesolo multiple combi ([303f069](https://github.com/bettyblocks/material-ui-component-set/commit/303f0691ae19a55b04d507b04866ad99380bdb9c))
+
+## [1.169.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.169.2...v1.169.3) (2021-09-20)
+
+
+### Bug Fixes
+
+* autocomplete not showing more than 50 options ([b73bed8](https://github.com/bettyblocks/material-ui-component-set/commit/b73bed8345ebf2cdc5aa1c2e991ded57d0f56367))
+
+## [1.169.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.169.1...v1.169.2) (2021-09-20)
+
+
+### Bug Fixes
+
+* added extra condition to make sure the label is parsed ([bffb177](https://github.com/bettyblocks/material-ui-component-set/commit/bffb1775fa30cf6d0c98d5f89b6ff5d24b071290))
+
+## [1.169.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.169.0...v1.169.1) (2021-09-17)
+
+
+### Bug Fixes
+
+* using translations will break the page ([77cf101](https://github.com/bettyblocks/material-ui-component-set/commit/77cf1013298b6baa2d456ad9cf09a4554c290360))
+
+# [1.169.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.168.3...v1.169.0) (2021-09-16)
+
+
+### Features
+
+* add text-overflow checkbox to all datatables ([162312f](https://github.com/bettyblocks/material-ui-component-set/commit/162312fc08ccecc377759cd6cba0aafab34d95ca))
+
+## [1.168.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.168.2...v1.168.3) (2021-09-15)
+
+
+### Bug Fixes
+
+* autocomplete filter assignment and css props ([28f468d](https://github.com/bettyblocks/material-ui-component-set/commit/28f468dcb0210d4b04884b9d82e7f81c6726266f))
+
+## [1.168.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.168.1...v1.168.2) (2021-09-13)
+
+
+### Bug Fixes
+
+* use right casing for css props ([0e226ee](https://github.com/bettyblocks/material-ui-component-set/commit/0e226eeda8aa6e78f3d4f11ce1c481454d3ad4d9))
+
+## [1.168.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.168.0...v1.168.1) (2021-09-10)
+
+
+### Bug Fixes
+
+* remove apiVersion where possible ([ecac22f](https://github.com/bettyblocks/material-ui-component-set/commit/ecac22fa470a183293f2660bb0d57466cd210beb))
+
+# [1.168.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.167.1...v1.168.0) (2021-09-08)
+
+
+### Features
+
+* add toggle to hide text overflow for datatable ([2bc3fb2](https://github.com/bettyblocks/material-ui-component-set/commit/2bc3fb2344c3b4144f93f3349a91fbae821ab932))
+
+## [1.167.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.167.0...v1.167.1) (2021-09-08)
+
+
+### Bug Fixes
+
+* convert date only when its a valid date ([dadfd99](https://github.com/bettyblocks/material-ui-component-set/commit/dadfd9979107baffbc7d0e4345eacfeafe4fba8c))
+
+# [1.167.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.166.3...v1.167.0) (2021-09-06)
+
+
+### Bug Fixes
+
+* add useText hook to resolve data option ([bfc2088](https://github.com/bettyblocks/material-ui-component-set/commit/bfc2088e34366428022fcd754c81b66ce2552e2d))
+* case of option label ([5da6b95](https://github.com/bettyblocks/material-ui-component-set/commit/5da6b95e5827928564d7e4d1a25cbb84d733a377))
+* change null into fragment ([a3e7354](https://github.com/bettyblocks/material-ui-component-set/commit/a3e7354fb2ee7a5f64931553cc3e73f43467b7ab))
+* global replacement errors ([68efb20](https://github.com/bettyblocks/material-ui-component-set/commit/68efb204a500815b73b17d3bf0150965aa14cdce))
+
+
+### Features
+
+* add data attribute to components ([d9fcf7d](https://github.com/bettyblocks/material-ui-component-set/commit/d9fcf7da759e78ab5da46520aad5270705dda3ae))
+* add option to all prefabs ([5c95631](https://github.com/bettyblocks/material-ui-component-set/commit/5c95631fcf580442e41dbc1942fd07e6fc296b5b))
+
+## [1.166.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.166.2...v1.166.3) (2021-09-06)
+
+
+### Bug Fixes
+
+* autoselect doesn't crash when clearing the textfield ([96f8c18](https://github.com/bettyblocks/material-ui-component-set/commit/96f8c1841afa8694c0573eb5da88cd13eb483af5))
+
 ## [1.166.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.166.1...v1.166.2) (2021-08-31)
 
 

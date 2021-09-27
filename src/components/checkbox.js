@@ -13,6 +13,7 @@
       validationValueMissing,
       nameAttribute,
       isSwitch,
+      dataComponentAttribute,
     } = options;
     const { env, useText, getCustomModelAttribute } = B;
     const isDev = env === 'dev';
@@ -106,6 +107,7 @@
       size,
       tabIndex: isDev && -1,
       value: 'on',
+      'data-component': useText(dataComponentAttribute) || 'Checkbox',
     };
 
     const Checkbox = <MUICheckbox {...props} />;

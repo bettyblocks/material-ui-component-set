@@ -35,6 +35,7 @@
       hideLabel,
       customModelAttribute: customModelAttributeObj,
       nameAttribute,
+      dataComponentAttribute,
     } = options;
 
     const {
@@ -294,12 +295,13 @@
           }
           inputProps={{
             pattern: validPattern,
-            minlength: validMinlength,
-            maxlength: validMaxlength,
+            minLength: validMinlength,
+            maxLength: validMaxlength,
             min: validMinvalue,
             max: validMaxvalue,
             tabIndex: isDev && -1,
           }}
+          data-component={useText(dataComponentAttribute) || 'TextField'}
         />
         {helper && (
           <FormHelperText classes={{ root: classes.helper }}>

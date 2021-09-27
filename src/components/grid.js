@@ -4,7 +4,7 @@
   allowedTypes: ['CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { env, GetAll, InteractionScope, ModelProvider } = B;
+    const { env, GetAll, InteractionScope, ModelProvider, useText } = B;
     const { Grid, Hidden } = window.MaterialUI.Core;
     const isDev = env === 'dev';
     const {
@@ -27,6 +27,7 @@
       visibility,
       repeatedItems,
       showError,
+      dataComponentAttribute,
     } = options;
     const isEmpty = children.length === 0;
     const isContainer = type === 'container';
@@ -76,6 +77,7 @@
       md: sizes.md,
       lg: sizes.lg,
       xl: sizes.xl,
+      'data-component': useText(dataComponentAttribute) || 'DataTableColumn',
     };
 
     const gridRef = React.createRef();

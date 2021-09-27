@@ -15,6 +15,7 @@
       alignment,
       showAllTabs,
       hideTabs,
+      dataComponentAttribute,
     } = options;
 
     const orientation =
@@ -49,7 +50,7 @@
         classes={{ root: classes.root, indicator: classes.indicator }}
       >
         {React.Children.map(children, (child, index) => {
-          const { options } = child.props;
+          const { options = {} } = child.props;
           const {
             label = tabData[`label${index}`] || [`Tab`],
             icon = tabData[`icon${index}`] || 'None',
@@ -83,7 +84,9 @@
                       ? React.createElement(Icons[icon])
                       : undefined}
                   </div>
-                  <div>{useText(label)}</div>
+                  <div>
+                    {typeof label === 'string' ? label : useText(label)}
+                  </div>
                 </div>
               }
               disabled={disabled}
@@ -95,7 +98,10 @@
     );
 
     const TabGroup = (
-      <div className={classes.tabs}>
+      <div
+        className={classes.tabs}
+        data-component={useText(dataComponentAttribute) || 'Tabs'}
+      >
         {!hideTabs && TabsHeader}
         {React.Children.map(children, (child, index) => {
           const { options: childOptions = {} } = child.props || {};
