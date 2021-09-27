@@ -155,7 +155,7 @@
 
     let inputProps = {
       inputProps: {
-        tabIndex: isDev ? -1 : undefined,
+        tabIndex: isDev && -1,
       },
       endAdornment: (
         <>
@@ -188,9 +188,10 @@
       setUseFilter({ filter });
     };
 
+    let interactionFilters = {};
+
     const isEmptyValue = value =>
-      (typeof value !== 'boolean' && !value) ||
-      (Array.isArray(value) && value.length === 0);
+      !value || (Array.isArray(value) && value.length === 0);
 
     const clauses = Object.entries(interactionFilter)
       .filter(([, { value }]) => !isEmptyValue(value))
@@ -211,7 +212,7 @@
         }, {}),
       );
 
-    const interactionFilters =
+    interactionFilters =
       clauses.length > 1 ? { _and: clauses } : clauses[0] || {};
 
     const completeFilter = deepMerge(
@@ -328,7 +329,7 @@
       };
     }, [searchParam]);
 
-    const onChange = newValue => {
+    const onChange = (_, newValue) => {
       if (!valueProp || !newValue) {
         setCurrentValue(newValue || '');
         setCurrentLabel(newValue || '');
@@ -350,7 +351,6 @@
       if (multiple) {
         newCurrentValue = newValue.map(rec => rec[valueProp.name] || rec);
       }
-
       setCurrentValue(newCurrentValue);
     };
 
@@ -364,17 +364,16 @@
           ? currentValue.toString().split(',')
           : [currentValue];
       }
-
-      const currentRecords = currentRecordsKeys.reduce((acc, cr) => {
-        const result = results.find(
-          res =>
-            res[valueProp.name] === cr || res[valueProp.name].toString() === cr,
-        );
-
-        if (result) {
-          acc.push(result);
-        } else if (multiple && freeSolo) {
-          acc.push(cr);
+      const currentRecords = results.reduce((acc, cv) => {
+        const searchStr = cv[valueProp.name]
+          ? cv[valueProp.name].toString()
+          : '';
+        const search = cv[valueProp.name] || '';
+        if (
+          currentRecordsKeys.indexOf(searchStr) > -1 ||
+          currentRecordsKeys.indexOf(search) > -1
+        ) {
+          acc.push(cv);
         }
         return acc;
       }, []);
@@ -414,6 +413,7 @@
         {renderLabel(option)}
       </>
     );
+
     if (isDev) {
       return (
         <div className={classes.root}>
@@ -427,7 +427,7 @@
     }
 
     if (kind === 'list' || kind === 'LIST') {
-      const onPropertyListChange = newValue => {
+      const onPropertyListChange = (_, newValue) => {
         setCurrentValue(newValue);
       };
 
@@ -445,8 +445,8 @@
           onInputChange={(_, inputValue) => {
             setSearchParam(inputValue);
           }}
-          onChange={(_, value) => {
-            onPropertyListChange(value);
+          onChange={(event, value) => {
+            onPropertyListChange(event, value);
           }}
           getOptionLabel={option => option}
           renderInput={params => (
@@ -515,20 +515,13 @@
                 value={record}
                 inputValue={currentInputValue}
                 getOptionLabel={renderLabel}
-                getOptionSelected={(option, value) =>
-                  value.id !== undefined &&
-                  option.id !== undefined &&
-                  value.id === option.id
-                }
+                getOptionSelected={(option, value) => value.id === option.id}
                 onInputChange={(event, inputValue) => {
-                  if (event) {
-                    setSearchParam(inputValue);
-                  }
+                  if (event) setSearchParam(inputValue);
                 }}
-                onChange={(_, value) => {
-                  onChange(value);
+                onChange={(event, value) => {
+                  onChange(event, value);
                 }}
-                autoSelect={freeSolo}
                 disableCloseOnSelect={!closeOnSelect}
                 renderOption={renderCheckboxes && renderOption}
                 renderInput={params => (

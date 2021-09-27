@@ -165,7 +165,7 @@
         control={
           <MUICheckbox
             required={required && !isValid}
-            tabIndex={isDev ? -1 : undefined}
+            tabIndex={isDev && -1}
             size={size}
           />
         }

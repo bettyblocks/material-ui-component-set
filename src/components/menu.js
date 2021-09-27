@@ -125,7 +125,7 @@
     const generalProps = {
       disabled,
       size,
-      tabIndex: isDev ? -1 : undefined,
+      tabIndex: isDev && -1,
     };
 
     const iconButtonProps = {

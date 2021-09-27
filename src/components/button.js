@@ -144,7 +144,7 @@
 
     const buttonProps = {
       disabled: disabled || isLoading || loading,
-      tabIndex: isDev ? -1 : undefined,
+      tabIndex: isDev && -1,
       onClick: event => {
         event.stopPropagation();
         actionCallback();
@@ -163,7 +163,7 @@
         linkToExternalVariable,
       }),
       target: openLinkToExternal,
-      tabIndex: isDev ? -1 : undefined,
+      tabIndex: isDev && -1,
       type: isDev ? 'button' : type,
       endpoint:
         linkType === 'internal' && linkTo && linkTo.id ? linkTo : undefined,
@@ -271,10 +271,8 @@
   styles: B => t => {
     const { mediaMinWidth, Styling } = B;
     const newStyling = new Styling(t);
-    const getSpacing = (idx, device = 'Mobile') => [
-      idx === '0' ? '0rem' : newStyling.getSpacing(idx, device),
-      '!important',
-    ];
+    const getSpacing = (idx, device = 'Mobile') =>
+      idx === '0' ? '0rem' : newStyling.getSpacing(idx, device);
     return {
       wrapper: {
         display: ({ options: { fullWidth } }) =>

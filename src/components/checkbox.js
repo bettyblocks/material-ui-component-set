@@ -105,7 +105,7 @@
       name: nameAttributeValue || customModelAttributeName,
       disabled,
       size,
-      tabIndex: isDev ? -1 : undefined,
+      tabIndex: isDev && -1,
       value: 'on',
       'data-component': useText(dataComponentAttribute) || 'Checkbox',
     };
