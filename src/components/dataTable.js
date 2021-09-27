@@ -183,7 +183,8 @@
     let interactionFilters = {};
 
     const isEmptyValue = value =>
-      !value || (Array.isArray(value) && value.length === 0);
+      (typeof value !== 'boolean' && !value) ||
+      (Array.isArray(value) && value.length === 0);
 
     const clauses = Object.entries(interactionFilter)
       .filter(([, { value }]) => !isEmptyValue(value))
@@ -438,8 +439,9 @@
         ));
       }
 
-      const rows = results.map(value => (
-        <ModelProvider value={value} id={model}>
+      const rows = results.map((value, index) => (
+        // eslint-disable-next-line react/no-array-index-key
+        <ModelProvider key={`provider_${index}`} value={value} id={model}>
           <InteractionScope model={model}>
             {context => (
               <TableRow

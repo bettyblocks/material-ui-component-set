@@ -449,6 +449,12 @@
               type: 'SIZES',
             },
             {
+              type: 'TOGGLE',
+              label: 'Allow overflow',
+              key: 'overflow',
+              value: false,
+            },
+            {
               value: false,
               label: 'Advanced settings',
               key: 'advancedSettings',

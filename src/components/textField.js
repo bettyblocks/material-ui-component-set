@@ -227,12 +227,13 @@
 
     const iconButtonOptions = {
       edge: adornmentPosition,
-      tabIndex: isDev && -1,
+      tabIndex: isDev ? -1 : undefined,
     };
     if (isPasswordType) {
       iconButtonOptions.ariaLabel = 'toggle password visibility';
       iconButtonOptions.onClick = handleClickShowPassword;
       iconButtonOptions.onMouseDown = handleMouseDownPassword;
+      iconButtonOptions.tabIndex = 0;
     }
 
     useEffect(() => {
@@ -263,7 +264,7 @@
           multiline={multiline}
           autoComplete={autoComplete ? 'on' : 'off'}
           rows={rows}
-          label={labelText}
+          label={labelText === '' ? undefined : labelText}
           placeholder={placeholderText}
           onKeyDown={onKeyDown}
           onChange={changeHandler}
@@ -299,7 +300,7 @@
             maxLength: validMaxlength,
             min: validMinvalue,
             max: validMaxvalue,
-            tabIndex: isDev && -1,
+            tabIndex: isDev ? -1 : undefined,
           }}
           data-component={useText(dataComponentAttribute) || 'TextField'}
         />
