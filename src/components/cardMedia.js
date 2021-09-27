@@ -7,7 +7,14 @@
     const { env, useText } = B;
     const { CardMedia } = window.MaterialUI.Core;
     const isDev = env === 'dev';
-    const { type, imageSource, videoSource, iframeSource, title } = options;
+    const {
+      type,
+      imageSource,
+      videoSource,
+      iframeSource,
+      title,
+      dataComponentAttribute,
+    } = options;
 
     const titleText = useText(title);
     const imgUrl = useText(imageSource);
@@ -64,7 +71,10 @@
     };
 
     let MediaComponent = () => (
-      <div className={(isEmpty || variableDev) && classes.empty}>
+      <div
+        className={(isEmpty || variableDev) && classes.empty}
+        data-component={useText(dataComponentAttribute) || 'CardMedia'}
+      >
         <div className={classes.placeholderWrapper}>
           <Placeholder />
           {variable && <span>{imgUrl}</span>}
@@ -78,6 +88,7 @@
           src={imgUrl}
           title={titleText}
           alt={titleText}
+          data-component={useText(dataComponentAttribute) || 'CardMedia'}
         />
       );
     } else if (isVideo) {
@@ -88,11 +99,17 @@
           src={videoUrl}
           title={titleText}
           controls
+          data-component={useText(dataComponentAttribute) || 'CardMedia'}
         />
       );
     } else if (isIframe) {
       MediaComponent = () => (
-        <iframe className={classes.media} title={titleText} src={iframeUrl} />
+        <iframe
+          className={classes.media}
+          title={titleText}
+          src={iframeUrl}
+          data-component={useText(dataComponentAttribute) || 'CardMedia'}
+        />
       );
     }
 

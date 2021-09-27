@@ -33,6 +33,7 @@
       nameAttribute,
       type,
       showImagePreview,
+      dataComponentAttribute,
     } = options;
 
     const isDev = env === 'dev';
@@ -152,6 +153,7 @@
         className={[classes.control, fullWidth ? classes.fullwidth : ''].join(
           ' ',
         )}
+        data-component={useText(dataComponentAttribute) || 'FileUpload'}
       >
         <input
           accept={acceptedValue}

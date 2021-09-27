@@ -35,6 +35,7 @@
           pagination,
           loadingType,
           loadingText,
+          dataComponentAttribute,
         } = options;
 
         const rowsPerPage = parseInt(take, 10) || 50;
@@ -56,7 +57,7 @@
         const [interactionFilter, setInteractionFilter] = useState({});
 
         const builderLayout = () => (
-          <>
+          <div data-component={useText(dataComponentAttribute) || 'DataList'}>
             {searchProperty && !hideSearch && (
               <div className={classes.header}>
                 <SearchComponent label={searchPropertyLabel} />
@@ -89,7 +90,7 @@
                 />
               </div>
             )}
-          </>
+          </div>
         );
 
         useEffect(() => {
@@ -392,14 +393,26 @@
           }
 
           if (error && displayError) {
-            return <span>{error.message}</span>;
+            return (
+              <span
+                data-component={
+                  useText(dataComponentAttribute) || 'DataContainer'
+                }
+              >
+                {error.message}
+              </span>
+            );
           }
 
           const { results = [], totalCount } = data || {};
           const resultCount = results && results.length;
 
           return (
-            <>
+            <div
+              data-component={
+                useText(dataComponentAttribute) || 'DataContainer'
+              }
+            >
               {searchProperty && !hideSearch && (
                 <div className={classes.header}>
                   <SearchComponent
@@ -427,7 +440,7 @@
                   />
                 </div>
               )}
-            </>
+            </div>
           );
         };
 

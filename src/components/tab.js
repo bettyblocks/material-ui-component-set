@@ -5,9 +5,16 @@
   orientation: 'VERTICAL',
   jsx: (() => {
     const { Typography, Box } = window.MaterialUI.Core;
-    const { env } = B;
+    const { env, useText } = B;
     const isDev = env === 'dev';
-    const { label, icon, disabled, disableRipple, iconAlignment } = options;
+    const {
+      label,
+      icon,
+      disabled,
+      disableRipple,
+      iconAlignment,
+      dataComponentAttribute,
+    } = options;
     const {
       value,
       tabData,
@@ -17,6 +24,7 @@
       index,
     } = parent;
     const isActive = value === index || showAllTabs;
+    const parsedLabel = useText(label);
 
     const doSetTab = () => {
       setSelectedTab(index);
@@ -40,13 +48,15 @@
         hidden={!isActive}
         aria-labelledby="tabs"
         classes={{ root: classes.root }}
+        data-component={useText(dataComponentAttribute) || 'Tab'}
       >
         {children.length === 0 ? <EmptyBox /> : children}
       </Typography>
     );
 
     const labelChanged = () =>
-      JSON.stringify(tabData[`label${index}`] || '') !== JSON.stringify(label);
+      JSON.stringify(tabData[`label${index}`] || '') !==
+      JSON.stringify(parsedLabel);
 
     const iconChanged = () => tabData[`icon${index}`] !== icon;
 
@@ -69,7 +79,7 @@
       if (setTabData && hasChange()) {
         setTabData({
           ...tabData,
-          [`label${index}`]: label,
+          [`label${index}`]: parsedLabel,
           [`icon${index}`]: icon,
           [`disabled${index}`]: disabled,
           [`disableRipple${index}`]: disableRipple,

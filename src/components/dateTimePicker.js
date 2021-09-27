@@ -28,6 +28,7 @@
       nameAttribute,
       locale,
       clearable,
+      dataComponentAttribute,
     } = options;
     const { env, getCustomModelAttribute, useText } = B;
     const {
@@ -70,11 +71,14 @@
     const isValidDate = date => date instanceof Date && !isNaN(date);
 
     const convertToDate = date => {
-      const dateString = `${date.getFullYear()}-${String(
-        date.getMonth() + 1,
-      ).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+      if (isValidDate(date)) {
+        const dateString = `${date.getFullYear()}-${String(
+          date.getMonth() + 1,
+        ).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
 
-      return dateString;
+        return dateString;
+      }
+      return '';
     };
 
     const changeHandler = date => {
@@ -178,6 +182,7 @@
         disableToolbar={disableToolbar}
         disablePast={disablePastDates}
         format={format}
+        data-component={useText(dataComponentAttribute) || 'DateTimePicker'}
         PopoverProps={{
           classes: {
             root: classes.popover,

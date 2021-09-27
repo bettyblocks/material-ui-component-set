@@ -16,6 +16,7 @@
       variant,
       width,
       height,
+      dataComponentAttribute,
     } = options;
 
     const isDev = env === 'dev';
@@ -40,6 +41,7 @@
         src={isImage && imgSrc}
         className={classes.avatar}
         style={styleOptions}
+        data-component={useText(dataComponentAttribute) || 'Avatar'}
       >
         {isLetter && useText(letter)}
         {isIcon && IconComponent}

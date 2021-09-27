@@ -151,7 +151,6 @@
           value: '',
           configuration: {
             dependsOn: 'model',
-            apiVersion: 'v1',
             condition: {
               type: 'SHOW',
               option: 'optionType',
@@ -381,6 +380,20 @@
           label: 'name attribute',
           key: 'nameAttribute',
           value: [],
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'advancedSettings',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'VARIABLE',
+          label: 'Test attribute',
+          key: 'dataComponentAttribute',
+          value: ['CheckboxGroup'],
           configuration: {
             condition: {
               type: 'SHOW',

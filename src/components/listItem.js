@@ -28,6 +28,7 @@
       linkTo,
       linkToExternal,
       dense,
+      dataComponentAttribute,
     } = options;
     const { env, useText, Link } = B;
     const isDev = env === 'dev';
@@ -78,6 +79,7 @@
         selected={selected}
         className={classes.root}
         dense={dense}
+        data-component={useText(dataComponentAttribute) || 'ListItem'}
       >
         {avatarOrIcon === 'avatar' || (avatarOrIcon === 'icon' && avatar)
           ? AvatarComponent

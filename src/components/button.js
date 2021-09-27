@@ -25,6 +25,7 @@
       hasVisibleTooltip,
       tooltipContent,
       tooltipPlacement,
+      dataComponentAttribute,
     } = options;
     const {
       env,
@@ -114,22 +115,22 @@
 
     const getExternalHref = config => {
       if (config.disabled) {
-        return false;
+        return undefined;
       }
       if (config.linkToExternal && config.linkToExternal.id !== '') {
         return config.linkToExternalVariable;
       }
-      return false;
+      return undefined;
     };
 
     const getInternalHref = config => {
       if (config.disabled) {
-        return false;
+        return undefined;
       }
       if (config.linkTo && config.linkTo.id !== '') {
         return config.linkToInternalVariable;
       }
-      return false;
+      return undefined;
     };
 
     const showIndicator = isLoading || loading;
@@ -143,7 +144,7 @@
 
     const buttonProps = {
       disabled: disabled || isLoading || loading,
-      tabindex: isDev && -1,
+      tabIndex: isDev && -1,
       onClick: event => {
         event.stopPropagation();
         actionCallback();
@@ -152,6 +153,7 @@
       type: isDev ? 'button' : type,
       endpoint:
         linkType === 'internal' && linkTo && linkTo.id ? linkTo : undefined,
+      'data-component': useText(dataComponentAttribute) || 'Button',
     };
 
     const anchorProps = {
@@ -161,7 +163,7 @@
         linkToExternalVariable,
       }),
       target: openLinkToExternal,
-      tabindex: isDev && -1,
+      tabIndex: isDev && -1,
       type: isDev ? 'button' : type,
       endpoint:
         linkType === 'internal' && linkTo && linkTo.id ? linkTo : undefined,
@@ -169,12 +171,14 @@
         event.stopPropagation();
         actionCallback();
       },
+      'data-component': useText(dataComponentAttribute) || 'Button',
     };
 
     const linkProps = {
       href: getInternalHref({ linkTo, linkToInternalVariable, disabled }),
       component: hasInteralLink ? B.Link : undefined,
       endpoint: hasInteralLink ? linkTo : undefined,
+      'data-component': useText(dataComponentAttribute) || 'Button',
     };
 
     const ButtonContent = (

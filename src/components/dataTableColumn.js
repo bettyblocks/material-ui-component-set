@@ -12,6 +12,7 @@
       property,
       content,
       sortable,
+      dataComponentAttribute,
     } = options;
     const { headerOnly, handleSort, orderBy, linkTo, handleRowClick, context } =
       parent || {};
@@ -48,6 +49,8 @@
       <>{!isBooleanProperty ? <Property id={property} /> : checkboxStatus}</>
     );
 
+    let tooltipText = isDev ? `{{ ${propertyName} }}` : useText([property]);
+
     let columnText = propertyName ? propContent : contentPlaceholder;
     if (type === 'ME_PROPERTY') {
       columnText = isDev ? `{{ ${propertyName} }}` : useText([property]);
@@ -55,6 +58,7 @@
 
     if (bodyText) {
       columnText = bodyText;
+      tooltipText = bodyText;
     }
 
     const header = useText(headerText);
@@ -84,7 +88,9 @@
       children.length > 0 ? (
         children
       ) : (
-        <span className={classes.content}>{columnText}</span>
+        <span className={classes.content} title={tooltipText}>
+          {columnText}
+        </span>
       );
 
     const Header = isSortable ? (
@@ -120,7 +126,13 @@
           ].join(' ')}
         >
           {headerOnly ? (
-            <TableCell align={horizontalAlignment} component="div">
+            <TableCell
+              align={horizontalAlignment}
+              component="div"
+              data-component={
+                useText(dataComponentAttribute) || 'DataTableColumn'
+              }
+            >
               {Header}
             </TableCell>
           ) : (
@@ -134,6 +146,7 @@
         classes={{ root: classes.root }}
         align={horizontalAlignment}
         onClick={() => handleRowClick && handleRowClick(myEndpoint, context)}
+        data-component={useText(dataComponentAttribute) || 'DataTableColumn'}
       >
         {headerOnly ? Header : Content}
       </TableCell>
