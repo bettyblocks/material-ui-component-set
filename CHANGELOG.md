@@ -1,3 +1,12 @@
+## [1.171.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.171.0...v1.171.1) (2021-09-27)
+
+
+### Bug Fixes
+
+* free solo multi combo in autocomplete ([1e0107c](https://github.com/bettyblocks/material-ui-component-set/commit/1e0107c39f36b4274fa9bbd55247059559c5ccf3))
+* redo tabindex fix ([89487b7](https://github.com/bettyblocks/material-ui-component-set/commit/89487b7c9c17cc2ebf0cf5f94fa939cb5ee020fb))
+* reset to master ([7bbf78d](https://github.com/bettyblocks/material-ui-component-set/commit/7bbf78dec367a73ffe7b0864a80b94a68bdcfe86))
+
 # [1.171.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.170.0...v1.171.0) (2021-09-27)
 
 
