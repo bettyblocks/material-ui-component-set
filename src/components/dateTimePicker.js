@@ -167,11 +167,11 @@
         InputProps={{
           inputProps: {
             name: nameAttributeValue || customModelAttributeName,
-            tabIndex: isDev && -1,
+            tabIndex: isDev ? -1 : undefined,
           },
         }}
         KeyboardButtonProps={{
-          tabIndex: isDev && -1,
+          tabIndex: isDev ? -1 : undefined,
         }}
         required={required}
         disabled={disabled}

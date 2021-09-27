@@ -148,7 +148,7 @@
       <MUIFormControlLabel
         disabled={disabled}
         value={optionValue}
-        control={<Radio tabIndex={isDev && -1} size={size} />}
+        control={<Radio tabIndex={isDev ? -1 : undefined} size={size} />}
         label={optionLabel}
         labelPlacement={position}
       />
