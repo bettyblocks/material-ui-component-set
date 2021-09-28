@@ -4,7 +4,7 @@ interface History {
 
 function navigateToOutputUrl({ event }: { event: Event }): void {
   if (typeof event !== 'string') {
-    console.warn('Event passed to actionRedirect is not a string');
+    console.warn('Event passed to navigateToOutputUrl is not a string');
     return;
   }
 
@@ -16,5 +16,7 @@ function navigateToOutputUrl({ event }: { event: Event }): void {
     history.push(event);
   }
 
-  console.warn('Event passed to actionRedirect is not a valid url or path');
+  console.warn(
+    'Event passed to navigateToOutputUrl is not a valid url or path',
+  );
 }
