@@ -8,7 +8,7 @@ function navigateToOutputUrl({ event }: { event: Event }): void {
     return;
   }
 
-  if ((event as string).match('http://')) {
+  if ((event as string).match(/https?:\/\//)) {
     window.location.href = event;
   }
 
