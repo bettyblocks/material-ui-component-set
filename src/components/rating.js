@@ -100,8 +100,8 @@
           <Rating
             className={classes.ratingIcon}
             name={nameAttributeValue || customModelAttributeName}
-            value={useText(defaultValue)}
-            defaultValue={useText(defaultValue)}
+            value={value}
+            defaultValue={customModelAttributeObj.value}
             precision={precision}
             size={size === 'custom' ? customSize : size}
             onChange={handleChange}
