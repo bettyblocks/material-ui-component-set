@@ -1,14 +1,13 @@
 (() => ({
-  name: 'Error page: 404',
+  name: 'Error pages: 403/404',
   icon: 'NavbarIcon',
   type: 'page',
-  description:
-    'If a certain page cannot be found. You can use this page template to communicate a 404 error in your application.',
+  description: 'Configure a 403 or 404 error page for your application.',
   detail:
-    'If a certain page cannot be found. You can use this page template to communicate a 404 error in your application.',
+    'You can choose between a 403 page for unauthorized access or a 404 page for when a page could not be found.',
   previewUrl: 'https://preview.betty.app/404-styled',
   previewImage:
-    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/404_Styled.jpg',
+    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_400_Pages.png',
   category: 'LAYOUT',
   beforeCreate: ({
     prefab,
@@ -26,14 +25,54 @@
       Text,
     },
   }) => {
-    const [varient, setVarient] = React.useState('404-styled');
+    const [errorType, setErrorType] = React.useState('403');
+    const [varient, setVarient] = React.useState('styled');
     const [endpoint, setEndpoint] = React.useState({
       id: '',
       pageId: '',
       params: {},
     });
+    const [renderValues, setRenderValues] = React.useState({
+      image:
+        'https://assets.bettyblocks.com/771d40f1fc49403e824cdca2fe025aeb_assets/files/404.svg',
+      errorCode: '404',
+      errorMessage: 'Page not found.',
+      subMessage: "We can't seem to find that one.",
+    });
 
-    const structure404 = {
+    React.useEffect(() => {
+      switch (errorType) {
+        case '403':
+          setRenderValues({
+            image:
+              'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/403.svg',
+            errorCode: '403',
+            errorMessage: 'Unauthorized.',
+            subMessage: 'You do not have access to this page.',
+            defaultPreviewImage:
+              'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_403.jpg',
+            styledPreviewImage:
+              'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_403_Styled.jpg',
+          });
+          break;
+        case '404':
+        default:
+          setRenderValues({
+            image:
+              'https://assets.bettyblocks.com/771d40f1fc49403e824cdca2fe025aeb_assets/files/404.svg',
+            errorCode: '404',
+            errorMessage: 'Page not found.',
+            subMessage: "We can't seem to find that one.",
+            defaultPreviewImage:
+              'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_404_.jpg',
+            styledPreviewImage:
+              'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_404_Styled_.jpg',
+          });
+          break;
+      }
+    }, [errorType]);
+
+    const structureDefault = {
       name: 'Box',
       options: [
         {
@@ -434,7 +473,7 @@
               type: 'VARIABLE',
               label: 'Content',
               key: 'content',
-              value: ['404'],
+              value: [`${renderValues.errorCode}`],
               configuration: {
                 as: 'MULTILINE',
               },
@@ -510,7 +549,7 @@
               },
             },
             {
-              value: false,
+              value: true,
               label: 'Styles',
               key: 'styles',
               type: 'TOGGLE',
@@ -586,7 +625,7 @@
               type: 'VARIABLE',
               label: 'Content',
               key: 'content',
-              value: ['Page not found.'],
+              value: [`${renderValues.errorMessage}`],
               configuration: {
                 as: 'MULTILINE',
               },
@@ -738,7 +777,7 @@
               type: 'VARIABLE',
               label: 'Content',
               key: 'content',
-              value: ['You might want to try a different page ...'],
+              value: [`${renderValues.subMessage}`],
               configuration: {
                 as: 'MULTILINE',
               },
@@ -1279,6 +1318,14 @@
           descendants: [
             {
               name: 'Button',
+              style: {
+                overwrite: {
+                  boxShadow: 'none',
+                  padding: ['0.6875rem', '1.375rem'],
+                  fontWeight: '400',
+                  textTransform: 'none',
+                },
+              },
               options: [
                 {
                   label: 'Toggle visibility',
@@ -2834,7 +2881,7 @@
       ],
     };
 
-    const structure404Styled = {
+    const structureStyled = {
       name: 'Box',
       options: [
         {
@@ -3430,9 +3477,7 @@
               },
             },
             {
-              value: [
-                'https://assets.bettyblocks.com/771d40f1fc49403e824cdca2fe025aeb_assets/files/404.svg',
-              ],
+              value: [`${renderValues.image}`],
               label: 'Background url',
               key: 'backgroundUrl',
               type: 'VARIABLE',
@@ -4038,7 +4083,7 @@
                   type: 'VARIABLE',
                   label: 'Content',
                   key: 'content',
-                  value: ['Page not found.'],
+                  value: [`${renderValues.errorMessage}`],
                   configuration: {
                     as: 'MULTILINE',
                   },
@@ -4196,7 +4241,7 @@
                   type: 'VARIABLE',
                   label: 'Content',
                   key: 'content',
-                  value: ["We can't seem to find that one."],
+                  value: [`${renderValues.subMessage}`],
                   configuration: {
                     as: 'MULTILINE',
                   },
@@ -4767,6 +4812,14 @@
               descendants: [
                 {
                   name: 'Button',
+                  style: {
+                    overwrite: {
+                      boxShadow: 'none',
+                      padding: ['0.6875rem', '1.375rem'],
+                      fontWeight: '400',
+                      textTransform: 'none',
+                    },
+                  },
                   options: [
                     {
                       label: 'Toggle visibility',
@@ -6336,23 +6389,23 @@
     const onSaveHandler = () => {
       const newPrefab = { ...prefab };
       switch (varient) {
-        case '404':
-          structure404.descendants[3].descendants[0].options[3].value = endpoint
+        case 'default':
+          structureDefault.descendants[3].descendants[0].options[3].value = endpoint
             .id.length
             ? endpoint
             : '';
           newPrefab.structure[0].descendants[0].descendants[0].descendants = [
-            structure404,
+            structureDefault,
           ];
           break;
-        case '404-styled':
+        case 'styled':
         default:
-          structure404Styled.descendants[1].descendants[2].descendants[0].options[3].value = endpoint
+          structureStyled.descendants[1].descendants[2].descendants[0].options[3].value = endpoint
             .id.length
             ? endpoint
             : '';
           newPrefab.structure[0].descendants[0].descendants[0].descendants = [
-            structure404Styled,
+            structureStyled,
           ];
           break;
       }
@@ -6361,22 +6414,22 @@
 
     const renderPreview = () => {
       switch (varient) {
-        case '404':
+        case 'default':
           return (
             <Box
               pad="medium"
-              background="url(https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/404.jpg)"
+              background={`url(${renderValues.defaultPreviewImage})`}
               height="300px"
               justify="center"
               align="center"
             />
           );
-        case '404-styled':
+        case 'styled':
         default:
           return (
             <Box
               pad="medium"
-              background="url(https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/404_Styled.jpg)"
+              background={`url(${renderValues.styledPreviewImage})`}
               height="300px"
               justify="center"
               align="center"
@@ -6389,21 +6442,39 @@
       <>
         <Header onClose={close} title="Configure 404 error page" />
         <Content>
-          <Field label="Select template version">
-            <ButtonGroup
-              onChange={({ target: { value } }) => {
-                setVarient(value);
-              }}
-              value={varient}
-            >
-              <ButtonGroupButton
-                label="Styled"
-                value="404-styled"
-                name="varients"
-              />
-              <ButtonGroupButton label="Simple" value="404" name="varients" />
-            </ButtonGroup>
-          </Field>
+          <Box direction="row" gap="small">
+            <Field label="Select error type">
+              <ButtonGroup
+                onChange={({ target: { value } }) => {
+                  setErrorType(value);
+                }}
+                value={errorType}
+              >
+                <ButtonGroupButton label="403" value="403" name="types" />
+                <ButtonGroupButton label="404" value="404" name="types" />
+              </ButtonGroup>
+            </Field>
+            <Field label="Select template version">
+              <ButtonGroup
+                onChange={({ target: { value } }) => {
+                  setVarient(value);
+                }}
+                value={varient}
+              >
+                <ButtonGroupButton
+                  label="Styled"
+                  value="styled"
+                  name="varients"
+                />
+                <ButtonGroupButton
+                  label="Simple"
+                  value="default"
+                  name="varients"
+                />
+              </ButtonGroup>
+            </Field>
+          </Box>
+
           <Box direction="column">
             <Field
               info={
