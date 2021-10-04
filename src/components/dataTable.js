@@ -165,6 +165,7 @@
      * @returns {Void}
      */
     B.defineFunction('Filter', ({ event, property, interactionId }) => {
+      if (typeof event === 'undefined') return;
       setInteractionFilter({
         ...interactionFilter,
         [interactionId]: {
