@@ -1,3 +1,15 @@
+# [1.172.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.171.1...v1.172.0) (2021-10-04)
+
+
+### Features
+
+* ignore non values in filter ([cc0461e](https://github.com/bettyblocks/material-ui-component-set/commit/cc0461ea8e59a563a238dab854cf24232785b1e1))
+
+
+### Reverts
+
+* Revert "fix: autoselect doesn't crash when clearing the textfield" ([29ab81c](https://github.com/bettyblocks/material-ui-component-set/commit/29ab81cdd1183bd87e3ee46c5d02fd654e81c626))
+
 ## [1.171.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.171.0...v1.171.1) (2021-09-27)
 
 
