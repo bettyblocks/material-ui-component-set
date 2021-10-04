@@ -1,3 +1,10 @@
+# [1.174.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.173.0...v1.174.0) (2021-10-04)
+
+
+### Features
+
+* added 403 page to old 404 configurator ([dc6dccb](https://github.com/bettyblocks/material-ui-component-set/commit/dc6dccb303ed7de12c13cbde16bcd2e2a6f204c0))
+
 # [1.173.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.172.0...v1.173.0) (2021-10-04)
 
 
