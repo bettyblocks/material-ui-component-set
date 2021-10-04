@@ -218,14 +218,14 @@
     );
 
     const LinkComponent =
-      linkType === 'internal' ? (
-        <Link className={classes.linkComponent} {...linkProps}>
-          {ButtonContent}
-        </Link>
+      linkType === 'internal' && !isDev ? (
+        <div className={classes.linkComponent}>
+          <Link {...linkProps}>{ButtonContent}</Link>
+        </div>
       ) : (
-        <a className={classes.linkComponent} {...anchorProps}>
-          {ButtonContent}
-        </a>
+        <div className={classes.linkComponent}>
+          <a {...anchorProps}>{ButtonContent}</a>
+        </div>
       );
 
     const ButtonElement = (
@@ -276,77 +276,81 @@
     return {
       wrapper: {
         display: ({ options: { fullWidth } }) =>
-          fullWidth ? 'flex' : 'inline-block',
+          fullWidth ? 'block' : 'inline-block',
         minHeight: '1rem',
         '& > *': {
           pointerEvents: 'none',
         },
       },
       linkComponent: {
-        textDecoration: 'none',
         display: ({ options: { fullWidth } }) =>
-          fullWidth ? 'inline-flex' : 'inline-block',
-        width: ({ options: { fullWidth, outerSpacing } }) =>
-          !fullWidth
-            ? 'auto'
-            : `calc(100% - ${getSpacing(outerSpacing[1])} - ${getSpacing(
-                outerSpacing[3],
-              )})`,
-        marginTop: ({ options: { outerSpacing } }) =>
-          getSpacing(outerSpacing[0]),
-        marginRight: ({ options: { outerSpacing } }) =>
-          getSpacing(outerSpacing[1]),
-        marginBottom: ({ options: { outerSpacing } }) =>
-          getSpacing(outerSpacing[2]),
-        marginLeft: ({ options: { outerSpacing } }) =>
-          getSpacing(outerSpacing[3]),
-        [`@media ${mediaMinWidth(600)}`]: {
-          width: ({ options: { fullWidth, outerSpacing } }) => {
-            if (!fullWidth) return 'auto';
-            const marginRight = getSpacing(outerSpacing[1], 'Portrait');
-            const marginLeft = getSpacing(outerSpacing[3], 'Portrait');
-            return `calc(100% - ${marginRight} - ${marginLeft})`;
-          },
+          fullWidth ? 'block' : 'inline-block',
+        '& a': {
+          textDecoration: 'none',
+          display: ({ options: { fullWidth } }) =>
+            fullWidth ? 'inline-flex' : 'inline-block',
+          width: ({ options: { fullWidth, outerSpacing } }) =>
+            !fullWidth
+              ? 'auto'
+              : `calc(100% - ${getSpacing(outerSpacing[1])} - ${getSpacing(
+                  outerSpacing[3],
+                )})`,
           marginTop: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[0], 'Portrait'),
+            getSpacing(outerSpacing[0]),
           marginRight: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[1], 'Portrait'),
+            getSpacing(outerSpacing[1]),
           marginBottom: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[2], 'Portrait'),
+            getSpacing(outerSpacing[2]),
           marginLeft: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[3], 'Portrait'),
-        },
-        [`@media ${mediaMinWidth(960)}`]: {
-          width: ({ options: { fullWidth, outerSpacing } }) => {
-            if (!fullWidth) return 'auto';
-            const marginRight = getSpacing(outerSpacing[1], 'Landscape');
-            const marginLeft = getSpacing(outerSpacing[3], 'Landscape');
-            return `calc(100% - ${marginRight} - ${marginLeft})`;
+            getSpacing(outerSpacing[3]),
+          [`@media ${mediaMinWidth(600)}`]: {
+            width: ({ options: { fullWidth, outerSpacing } }) => {
+              if (!fullWidth) return 'auto';
+              const marginRight = getSpacing(outerSpacing[1], 'Portrait');
+              const marginLeft = getSpacing(outerSpacing[3], 'Portrait');
+              return `calc(100% - ${marginRight} - ${marginLeft})`;
+            },
+            marginTop: ({ options: { outerSpacing } }) =>
+              getSpacing(outerSpacing[0], 'Portrait'),
+            marginRight: ({ options: { outerSpacing } }) =>
+              getSpacing(outerSpacing[1], 'Portrait'),
+            marginBottom: ({ options: { outerSpacing } }) =>
+              getSpacing(outerSpacing[2], 'Portrait'),
+            marginLeft: ({ options: { outerSpacing } }) =>
+              getSpacing(outerSpacing[3], 'Portrait'),
           },
-          marginTop: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[0], 'Landscape'),
-          marginRight: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[1], 'Landscape'),
-          marginBottom: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[2], 'Landscape'),
-          marginLeft: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[3], 'Landscape'),
-        },
-        [`@media ${mediaMinWidth(1280)}`]: {
-          width: ({ options: { fullWidth, outerSpacing } }) => {
-            if (!fullWidth) return 'auto';
-            const marginRight = getSpacing(outerSpacing[1], 'Desktop');
-            const marginLeft = getSpacing(outerSpacing[3], 'Desktop');
-            return `calc(100% - ${marginRight} - ${marginLeft})`;
+          [`@media ${mediaMinWidth(960)}`]: {
+            width: ({ options: { fullWidth, outerSpacing } }) => {
+              if (!fullWidth) return 'auto';
+              const marginRight = getSpacing(outerSpacing[1], 'Landscape');
+              const marginLeft = getSpacing(outerSpacing[3], 'Landscape');
+              return `calc(100% - ${marginRight} - ${marginLeft})`;
+            },
+            marginTop: ({ options: { outerSpacing } }) =>
+              getSpacing(outerSpacing[0], 'Landscape'),
+            marginRight: ({ options: { outerSpacing } }) =>
+              getSpacing(outerSpacing[1], 'Landscape'),
+            marginBottom: ({ options: { outerSpacing } }) =>
+              getSpacing(outerSpacing[2], 'Landscape'),
+            marginLeft: ({ options: { outerSpacing } }) =>
+              getSpacing(outerSpacing[3], 'Landscape'),
           },
-          marginTop: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[0], 'Desktop'),
-          marginRight: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[1], 'Desktop'),
-          marginBottom: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[2], 'Desktop'),
-          marginLeft: ({ options: { outerSpacing } }) =>
-            getSpacing(outerSpacing[3], 'Desktop'),
+          [`@media ${mediaMinWidth(1280)}`]: {
+            width: ({ options: { fullWidth, outerSpacing } }) => {
+              if (!fullWidth) return 'auto';
+              const marginRight = getSpacing(outerSpacing[1], 'Desktop');
+              const marginLeft = getSpacing(outerSpacing[3], 'Desktop');
+              return `calc(100% - ${marginRight} - ${marginLeft})`;
+            },
+            marginTop: ({ options: { outerSpacing } }) =>
+              getSpacing(outerSpacing[0], 'Desktop'),
+            marginRight: ({ options: { outerSpacing } }) =>
+              getSpacing(outerSpacing[1], 'Desktop'),
+            marginBottom: ({ options: { outerSpacing } }) =>
+              getSpacing(outerSpacing[2], 'Desktop'),
+            marginLeft: ({ options: { outerSpacing } }) =>
+              getSpacing(outerSpacing[3], 'Desktop'),
+          },
         },
       },
       button: {
