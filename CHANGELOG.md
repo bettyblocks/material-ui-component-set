@@ -1,3 +1,10 @@
+# [1.173.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.172.0...v1.173.0) (2021-10-04)
+
+
+### Features
+
+* updated appbar page to header and footer ([0965a97](https://github.com/bettyblocks/material-ui-component-set/commit/0965a97c219f590e7d043b0b3b7c4c907fe6e1fe))
+
 # [1.172.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.171.1...v1.172.0) (2021-10-04)
 
 
