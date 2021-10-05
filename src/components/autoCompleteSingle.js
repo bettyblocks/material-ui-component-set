@@ -150,7 +150,7 @@
     const { loading, error, data: { results = [] } = {} } = useAllQuery(
       model,
       {
-        take: 1,
+        take: 50,
         rawFilter: filter,
       },
       optionType === 'property' || !valid,
