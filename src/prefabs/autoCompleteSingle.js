@@ -59,6 +59,21 @@
           },
         },
         {
+          value: {},
+          label: 'Filter',
+          key: 'filter',
+          type: 'FILTER',
+          configuration: {
+            dependsOn: 'model',
+            condition: {
+              type: 'SHOW',
+              option: 'optionType',
+              comparator: 'EQ',
+              value: 'model',
+            },
+          },
+        },
+        {
           value: '',
           label: 'Label property',
           key: 'searchProperty',

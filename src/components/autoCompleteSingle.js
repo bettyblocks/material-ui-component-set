@@ -12,6 +12,7 @@
       getCustomModelAttribute,
       getProperty,
       useAllQuery,
+      useFilter,
       useText,
     } = B;
     const {
@@ -20,6 +21,7 @@
       dataComponentAttribute: dataComponentAttributeRaw,
       disabled,
       errorType,
+      filter: filterRaw,
       freeSolo,
       fullWidth,
       helperText: helperTextRaw,
@@ -62,6 +64,8 @@
     // TODO: discuss default value behaviour this doesnt seem to work at the moment for a list property
     const defaultValue = useText(valueRaw, { rawValue: true });
     const [value, setValue] = useState(defaultValue);
+    const [inputValue, setInputValue] = useState('');
+    const [debouncedInputValue, setDebouncedInputValue] = useState('');
 
     const { kind: propertyKind = '', values: propertyValues } =
       getProperty(property) || {};
@@ -104,7 +108,7 @@
         }
 
         if (!isListProperty) {
-          message = 'No List property selected';
+          message = 'No property of type "List" selected';
           break;
         }
 
@@ -117,10 +121,37 @@
       }
     }
 
+    useEffect(() => {
+      let debounceInput;
+
+      if (optionType === 'model') {
+        debounceInput = setTimeout(() => {
+          setDebouncedInputValue(inputValue);
+        }, 250);
+      }
+
+      return () => {
+        if (optionType === 'model') {
+          clearTimeout(debounceInput);
+        }
+      };
+    }, [inputValue]);
+
+    const filter = useFilter(filterRaw || {});
+
+    if (debouncedInputValue) {
+      if (optionType === 'model') {
+        filter[searchProp.name] = {
+          regex: debouncedInputValue,
+        };
+      }
+    }
+
     const { loading, error, data: { results = [] } = {} } = useAllQuery(
       model,
       {
-        take: 50,
+        take: 1,
+        rawFilter: filter,
       },
       optionType === 'property' || !valid,
     );
@@ -131,14 +162,14 @@
     }
 
     if (isDev || !valid) {
-      let inputValue;
+      let designTimeValue;
 
       if (!valid) {
-        inputValue = message;
+        designTimeValue = message;
       }
       // TODO: disscus with anton!
       if (isDev) {
-        inputValue = defaultValue;
+        designTimeValue = defaultValue;
       }
 
       return (
@@ -161,7 +192,7 @@
             placeholder={placeholder}
             required={required && !value}
             size={size}
-            value={inputValue}
+            value={designTimeValue}
             variant={variant}
           />
         </div>
@@ -195,8 +226,14 @@
               : optionLabel;
           },
         })}
+        inputValue={inputValue}
         onChange={(_, newValue) => {
-          setValue(newValue);
+          setValue(newValue || '');
+        }}
+        onInputChange={(event, newValue) => {
+          if (event) {
+            setInputValue(newValue);
+          }
         }}
         options={getOptions()}
         renderInput={params => (
