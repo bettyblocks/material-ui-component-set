@@ -140,11 +140,9 @@
     const filter = useFilter(filterRaw || {});
 
     if (debouncedInputValue) {
-      if (optionType === 'model') {
-        filter[searchProp.name] = {
-          regex: debouncedInputValue,
-        };
-      }
+      filter[searchProp.name] = {
+        regex: debouncedInputValue,
+      };
     }
 
     const { loading, error, data: { results = [] } = {} } = useAllQuery(
