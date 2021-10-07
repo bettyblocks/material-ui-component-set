@@ -1,3 +1,10 @@
+# [1.175.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.174.0...v1.175.0) (2021-10-06)
+
+
+### Features
+
+* adds navigateToOutputUrl global interaction ([f6f1faa](https://github.com/bettyblocks/material-ui-component-set/commit/f6f1faac5eb6cda1fe1b877cb0777c238118d75a))
+
 # [1.174.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.173.0...v1.174.0) (2021-10-04)
 
 
