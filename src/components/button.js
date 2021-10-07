@@ -271,9 +271,8 @@
   styles: B => t => {
     const { mediaMinWidth, Styling } = B;
     const newStyling = new Styling(t);
-    const getSpacing = (idx, device = 'Mobile') => {
-      return idx === '0' ? '0rem' : newStyling.getSpacing(idx, device);
-    };
+    const getSpacing = (idx, device = 'Mobile') =>
+      idx === '0' ? '0rem' : newStyling.getSpacing(idx, device);
     return {
       wrapper: {
         display: ({ options: { fullWidth } }) =>
