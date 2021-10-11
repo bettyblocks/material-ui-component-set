@@ -1,3 +1,10 @@
+## [1.175.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.175.0...v1.175.1) (2021-10-11)
+
+
+### Bug Fixes
+
+* more specific css selector for outerspace button component ([8b3db59](https://github.com/bettyblocks/material-ui-component-set/commit/8b3db5925b71b9934c28275f166bd4984a4e24f9))
+
 # [1.175.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.174.0...v1.175.0) (2021-10-06)
 
 
