@@ -199,8 +199,9 @@
     useEffect(() => {
       if (isDev) {
         setValue(useText(defaultValue));
+        setHelper(useText(helperText));
       }
-    }, [isDev, defaultValue]);
+    }, [isDev, defaultValue, helperText]);
 
     const FormControl = (
       <MUIFormControl
