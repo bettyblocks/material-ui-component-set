@@ -1,3 +1,10 @@
+## [1.175.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.175.1...v1.175.2) (2021-10-11)
+
+
+### Bug Fixes
+
+* fixes helper text in development ([2dfc789](https://github.com/bettyblocks/material-ui-component-set/commit/2dfc789cb4a8e2bfc54a6b9bf17e5b273152289e))
+
 ## [1.175.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.175.0...v1.175.1) (2021-10-11)
 
 
