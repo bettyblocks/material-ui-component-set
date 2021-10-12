@@ -29,6 +29,8 @@
       margin,
       nameAttribute: nameAttributeRaw,
       optionType,
+      order,
+      orderBy,
       placeholder: placeholderRaw,
       property,
       model,
@@ -145,11 +147,36 @@
       };
     }
 
+    const idOrPath = typeof orderBy.id !== 'undefined' ? orderBy.id : orderBy;
+    const orderByPath = typeof idOrPath === 'string' ? [idOrPath] : idOrPath;
+
+    let sort = {};
+
+    if (!isDev) {
+      if (orderByPath.length === 1 && orderByPath[0] !== '') {
+        sort = {
+          field: getProperty(orderByPath[0]).name,
+          order: order.toUpperCase(),
+        };
+      } else if (orderByPath.length > 1) {
+        sort = orderByPath.reduceRight((acc, propertyId, index) => {
+          const orderProperty = getProperty(propertyId);
+
+          return index === orderByPath.length - 1
+            ? { [orderProperty.name]: order.toUpperCase() }
+            : { relation: { [orderProperty.name]: acc } };
+        }, {});
+      }
+    }
+
     const { loading, error, data: { results = [] } = {} } = useAllQuery(
       model,
       {
         take: 20,
         rawFilter: filter,
+        variables: {
+          sort,
+        },
       },
       optionType === 'property' || !valid,
     );
