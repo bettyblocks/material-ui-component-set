@@ -6440,7 +6440,7 @@
 
     return (
       <>
-        <Header onClose={close} title="Configure 404 error page" />
+        <Header onClose={close} title="Configure 400 error page" />
         <Content>
           <Box direction="row" gap="small">
             <Field label="Select error type">
