@@ -66,8 +66,10 @@
     // TODO: discuss default value behaviour this doesnt seem to work at the moment for a list property
     const defaultValue = useText(valueRaw, { rawValue: true });
     const [value, setValue] = useState(defaultValue);
-    const [inputValue, setInputValue] = useState('');
-    const [debouncedInputValue, setDebouncedInputValue] = useState('');
+    const [inputValue, setInputValue] = useState(defaultValue);
+    const [debouncedInputValue, setDebouncedInputValue] = useState(
+      defaultValue,
+    );
 
     const { kind: propertyKind = '', values: propertyValues } =
       getProperty(property) || {};
@@ -141,16 +143,23 @@
 
     const filter = useFilter(filterRaw || {});
 
+    let customFilter;
+
     if (debouncedInputValue) {
-      filter[searchProp.name] = {
-        regex: debouncedInputValue,
+      // TODO: what if this is a relation?
+      customFilter = {
+        // We need to do this, because options.filter is not immutable
+        ...filter,
+        [searchProp.name]: {
+          regex: debouncedInputValue,
+        },
       };
     }
 
     const idOrPath = typeof orderBy.id !== 'undefined' ? orderBy.id : orderBy;
     const orderByPath = typeof idOrPath === 'string' ? [idOrPath] : idOrPath;
 
-    let sort = {};
+    let sort;
 
     if (!isDev) {
       if (orderByPath.length === 1 && orderByPath[0] !== '') {
@@ -169,11 +178,12 @@
       }
     }
 
-    const { loading, error, data: { results = [] } = {} } = useAllQuery(
+    const { loading, error, data: { results } = {} } = useAllQuery(
       model,
       {
+        // TODO: terugzetten
         take: 20,
-        rawFilter: filter,
+        rawFilter: customFilter || filter,
         variables: {
           sort,
         },
@@ -202,7 +212,7 @@
           <TextField
             InputProps={{
               inputProps: {
-                tabIndex: isDev && -1,
+                tabIndex: isDev ? -1 : undefined,
               },
               endAdornment: <>{!freeSolo && <ExpandMore />}</>,
             }}
@@ -224,13 +234,25 @@
       );
     }
 
+    const getValue = () => {
+      if (!results) {
+        return null;
+      }
+
+      if (optionType === 'model') {
+        return results.find(result => result[valueProp.name] === value);
+      }
+
+      return value;
+    };
+
     const getOptions = () => {
       if (optionType === 'property') {
         return propertyValues.map(propertyValue => propertyValue.value);
       }
 
       if (optionType === 'model') {
-        return results;
+        return results || [];
       }
 
       return [];
@@ -252,6 +274,7 @@
           },
         })}
         inputValue={inputValue}
+        loading={loading}
         onChange={(_, newValue) => {
           setValue(newValue || '');
         }}
@@ -285,12 +308,11 @@
                 ),
               }}
               classes={{ root: classes.formControl }}
-              dataComponent={dataComponentAttribute}
+              data-component={dataComponentAttribute}
               disabled={disabled}
               error={showError}
               fullWidth={fullWidth}
               helperText={helperText}
-              key={value ? 'hasValue' : 'isEmpty'}
               label={!hideLabel && label}
               margin={margin}
               {...(optionType === 'property' && {
@@ -303,7 +325,7 @@
             />
           </>
         )}
-        value={value}
+        value={getValue()}
       />
     );
   })(),
