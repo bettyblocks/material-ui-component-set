@@ -178,10 +178,9 @@
       }
     }
 
-    const { loading, error, data: { results } = {} } = useAllQuery(
+    const { loading, error, data: { results } = {}, refetch } = useAllQuery(
       model,
       {
-        // TODO: terugzetten
         take: 20,
         rawFilter: customFilter || filter,
         variables: {
@@ -195,6 +194,14 @@
       valid = false;
       message = 'Something went wrong while loading.';
     }
+
+    B.defineFunction('Clear', () => {
+      setValue('');
+      // TODO check if we need this with freesolo
+      // setInputValue('');
+    });
+
+    B.defineFunction('Refetch', () => refetch());
 
     if (isDev || !valid) {
       let designTimeValue;
