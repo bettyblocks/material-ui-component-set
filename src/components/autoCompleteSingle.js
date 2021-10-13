@@ -8,6 +8,8 @@
     const { CircularProgress, TextField } = window.MaterialUI.Core;
     const { ExpandMore } = window.MaterialUI.Icons;
     const {
+      InteractionScope,
+      ModelProvider,
       env,
       getCustomModelAttribute,
       getProperty,
@@ -46,6 +48,7 @@
     const placeholder = useText(placeholderRaw);
     const helperText = useText(helperTextRaw);
     const nameAttribute = useText(nameAttributeRaw);
+    const changeContext = useRef(null);
     const dataComponentAttribute =
       useText(dataComponentAttributeRaw) || 'AutoComplete';
 
@@ -186,9 +189,26 @@
         variables: {
           sort,
         },
+        onCompleted(res) {
+          const hasResult = res && res.results && res.results.length > 0;
+          if (hasResult) {
+            B.triggerEvent('onSuccess', res.results);
+          } else {
+            B.triggerEvent('onNoResults');
+          }
+        },
+        onError(resp) {
+          if (!displayError) {
+            B.triggerEvent('onError', resp);
+          }
+        },
       },
       optionType === 'property' || !valid,
     );
+
+    if (loading) {
+      B.triggerEvent('onLoad', loading);
+    }
 
     if (error && displayError) {
       valid = false;
@@ -274,74 +294,91 @@
     const currentValue = getValue();
 
     return (
-      <Autocomplete
-        autoSelect={freeSolo}
-        disableCloseOnSelect={!closeOnSelect}
-        disabled={disabled}
-        freeSolo={freeSolo}
-        {...(optionType === 'model' && {
-          getOptionLabel: option => {
-            const optionLabel = option[searchProp.name];
+      // TODO: Is this needed? Check with Benjamin
+      <ModelProvider value={currentValue} id={model}>
+        <InteractionScope model={model}>
+          {ctx => {
+            changeContext.current = ctx;
 
-            return optionLabel === '' || optionLabel === null
-              ? '-- empty --'
-              : optionLabel;
-          },
-        })}
-        inputValue={inputValue}
-        loading={loading}
-        onChange={(_, newValue) => {
-          setValue(newValue || '');
-        }}
-        onInputChange={(event, newValue) => {
-          if (event) {
-            setInputValue(newValue);
-          }
-        }}
-        options={getOptions()}
-        renderInput={params => (
-          <>
-            {optionType === 'model' && (
-              <input
-                type="hidden"
-                key={value[valueProp.name] ? 'hasValue' : 'isEmpty'}
-                name={nameAttribute || name}
-                value={currentValue ? currentValue[valueProp.name] : ''}
-              />
-            )}
-            <TextField
-              {...params}
-              InputProps={{
-                ...params.InputProps,
-                endAdornment: (
+            return (
+              <Autocomplete
+                autoSelect={freeSolo}
+                disableCloseOnSelect={!closeOnSelect}
+                disabled={disabled}
+                freeSolo={freeSolo}
+                {...(optionType === 'model' && {
+                  getOptionLabel: option => {
+                    const optionLabel = option[searchProp.name];
+
+                    return optionLabel === '' || optionLabel === null
+                      ? '-- empty --'
+                      : optionLabel;
+                  },
+                })}
+                inputValue={inputValue}
+                loading={loading}
+                onChange={(_, newValue) => {
+                  setValue(newValue || '');
+
+                  B.triggerEvent(
+                    'onChange',
+                    newValue ? newValue[valueProp.name] : '',
+                    changeContext.current,
+                  );
+                }}
+                onInputChange={(event, newValue) => {
+                  if (event) {
+                    setInputValue(newValue);
+                  }
+                }}
+                options={getOptions()}
+                renderInput={params => (
                   <>
-                    {loading ? (
-                      <CircularProgress color="inherit" size={20} />
-                    ) : null}
-                    {params.InputProps.endAdornment}
+                    {optionType === 'model' && (
+                      <input
+                        type="hidden"
+                        key={value[valueProp.name] ? 'hasValue' : 'isEmpty'}
+                        name={nameAttribute || name}
+                        value={currentValue ? currentValue[valueProp.name] : ''}
+                      />
+                    )}
+                    <TextField
+                      {...params}
+                      InputProps={{
+                        ...params.InputProps,
+                        endAdornment: (
+                          <>
+                            {loading ? (
+                              <CircularProgress color="inherit" size={20} />
+                            ) : null}
+                            {params.InputProps.endAdornment}
+                          </>
+                        ),
+                      }}
+                      classes={{ root: classes.formControl }}
+                      data-component={dataComponentAttribute}
+                      disabled={disabled}
+                      error={showError}
+                      fullWidth={fullWidth}
+                      helperText={helperText}
+                      label={!hideLabel && label}
+                      margin={margin}
+                      {...(optionType === 'property' && {
+                        name: nameAttribute || name,
+                      })}
+                      placeholder={placeholder}
+                      required={required && !value}
+                      size={size}
+                      variant={variant}
+                    />
                   </>
-                ),
-              }}
-              classes={{ root: classes.formControl }}
-              data-component={dataComponentAttribute}
-              disabled={disabled}
-              error={showError}
-              fullWidth={fullWidth}
-              helperText={helperText}
-              label={!hideLabel && label}
-              margin={margin}
-              {...(optionType === 'property' && {
-                name: nameAttribute || name,
-              })}
-              placeholder={placeholder}
-              required={required && !value}
-              size={size}
-              variant={variant}
-            />
-          </>
-        )}
-        value={currentValue}
-      />
+                )}
+                value={currentValue}
+              />
+            );
+          }}
+        </InteractionScope>
+      </ModelProvider>
     );
   })(),
   styles: B => t => {
