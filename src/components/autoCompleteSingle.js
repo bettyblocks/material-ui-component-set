@@ -240,7 +240,13 @@
       }
 
       if (optionType === 'model') {
-        return results.find(result => result[valueProp.name] === value);
+        return results.find(result => {
+          if (typeof value === 'string') {
+            return result[valueProp.name] === value;
+          }
+
+          return result[valueProp.name] === value[valueProp.name];
+        });
       }
 
       return value;
@@ -257,6 +263,8 @@
 
       return [];
     };
+
+    const currentValue = getValue();
 
     return (
       <Autocomplete
@@ -291,7 +299,7 @@
                 type="hidden"
                 key={value[valueProp.name] ? 'hasValue' : 'isEmpty'}
                 name={nameAttribute || name}
-                value={value[valueProp.name]}
+                value={currentValue ? currentValue[valueProp.name] : ''}
               />
             )}
             <TextField
@@ -325,7 +333,7 @@
             />
           </>
         )}
-        value={getValue()}
+        value={currentValue}
       />
     );
   })(),
