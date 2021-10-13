@@ -1,3 +1,10 @@
+## [1.175.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.175.2...v1.175.3) (2021-10-13)
+
+
+### Bug Fixes
+
+* renamed header of before create 400 page template TMPLT 919 ([498ed21](https://github.com/bettyblocks/material-ui-component-set/commit/498ed21d1e85a4a479b70912e7230447746d2fdf))
+
 ## [1.175.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.175.1...v1.175.2) (2021-10-11)
 
 
