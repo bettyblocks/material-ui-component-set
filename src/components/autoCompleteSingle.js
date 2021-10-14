@@ -199,7 +199,6 @@
       }
       /* eslint-enable no-underscore-dangle */
     } else if (debouncedInputValue) {
-      // TODO: what if this is a relation?
       customFilter[searchProp.name] = {
         regex: debouncedInputValue,
       };
@@ -263,8 +262,8 @@
 
     B.defineFunction('Clear', () => {
       setValue(multiple ? [] : '');
-      // TODO check if we need this with freesolo
-      // setInputValue('');
+      setInputValue('');
+      setDebouncedInputValue('');
     });
 
     B.defineFunction('Refetch', () => refetch());
