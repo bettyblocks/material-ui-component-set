@@ -422,14 +422,32 @@
                 onChange={(_, newValue) => {
                   setValue(newValue || (multiple ? [] : ''));
 
+                  let triggerEventValue;
+
                   if (multiple) {
                     setDebouncedInputValue('');
+
+                    if (freeSolo) {
+                      triggerEventValue =
+                        newValue.length === 0 ? '' : newValue.join(',');
+                    } else {
+                      triggerEventValue =
+                        newValue.length === 0
+                          ? ''
+                          : newValue.map(x => x[valueProp.name]).join(',');
+                    }
+                  } else if (freeSolo) {
+                    triggerEventValue = newValue || '';
+                  } else {
+                    triggerEventValue = newValue
+                      ? newValue[valueProp.name]
+                      : '';
                   }
 
-                  // TODO: fixen voor multiple
+                  // TODO: ask Benjamin how to get the value in this interaction
                   B.triggerEvent(
                     'onChange',
-                    newValue ? newValue[valueProp.name] : '',
+                    triggerEventValue,
                     changeContext.current,
                   );
                 }}
