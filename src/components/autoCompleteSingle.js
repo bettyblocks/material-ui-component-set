@@ -70,9 +70,18 @@
 
     const label = useText(labelRaw);
     const defaultValue = useText(valueRaw, { rawValue: true });
-    const [value, setValue] = useState(
-      multiple ? defaultValue.trim().split(',') : defaultValue,
-    );
+
+    let initalValue = defaultValue;
+
+    if (multiple) {
+      if (defaultValue.trim() === '') {
+        initalValue = [];
+      } else {
+        initalValue = defaultValue.trim().split(',');
+      }
+    }
+
+    const [value, setValue] = useState(initalValue);
     const [inputValue, setInputValue] = useState(multiple ? '' : defaultValue);
     const [debouncedInputValue, setDebouncedInputValue] = useState(
       multiple ? '' : defaultValue,
@@ -152,12 +161,11 @@
 
     const filter = useFilter(filterRaw || {});
 
-    // TODO: when all nuggets are removed an error occurs
     // We need to do this, because options.filter is not immutable
     const customFilter = { ...filter };
 
     /* eslint-disable no-underscore-dangle */
-    if (multiple) {
+    if (multiple && value.length > 0) {
       if (customFilter._or) {
         customFilter._or = [
           ...customFilter._or,
