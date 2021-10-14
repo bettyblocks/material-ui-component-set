@@ -5,8 +5,17 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { Autocomplete } = window.MaterialUI.Lab;
-    const { Chip, CircularProgress, TextField } = window.MaterialUI.Core;
-    const { ExpandMore } = window.MaterialUI.Icons;
+    const {
+      Checkbox,
+      Chip,
+      CircularProgress,
+      TextField,
+    } = window.MaterialUI.Core;
+    const {
+      CheckBox: CheckBoxIcon,
+      CheckBoxOutlineBlank,
+      ExpandMore,
+    } = window.MaterialUI.Icons;
     const {
       InteractionScope,
       ModelProvider,
@@ -37,6 +46,7 @@
       placeholder: placeholderRaw,
       property,
       model,
+      renderCheckboxes,
       showError,
       searchProperty,
       size,
@@ -392,6 +402,14 @@
 
     const currentValue = getValue();
 
+    const renderLabel = option => {
+      const optionLabel = option[searchProp.name];
+
+      return optionLabel === '' || optionLabel === null
+        ? '-- empty --'
+        : optionLabel;
+    };
+
     return (
       // TODO: Is this needed? Check with Benjamin
       <ModelProvider value={currentValue} id={model}>
@@ -408,13 +426,7 @@
                 {...(optionType === 'model' &&
                   // If freeSolo is turned on the value and options are strings instead of objects
                   !freeSolo && {
-                    getOptionLabel: option => {
-                      const optionLabel = option[searchProp.name];
-
-                      return optionLabel === '' || optionLabel === null
-                        ? '-- empty --'
-                        : optionLabel;
-                    },
+                    getOptionLabel: renderLabel,
                   })}
                 inputValue={inputValue}
                 loading={loading}
@@ -498,6 +510,20 @@
                     />
                   </>
                 )}
+                {...(renderCheckboxes && {
+                  renderOption: (option, { selected }) => (
+                    <>
+                      <Checkbox
+                        classes={{ root: classes.checkbox }}
+                        icon={<CheckBoxOutlineBlank fontSize="small" />}
+                        checkedIcon={<CheckBoxIcon fontSize="small" />}
+                        style={{ marginRight: 8 }}
+                        checked={selected}
+                      />
+                      {renderLabel(option)}
+                    </>
+                  ),
+                })}
                 value={currentValue}
               />
             );
@@ -507,8 +533,9 @@
     );
   })(),
   styles: B => t => {
-    const { Styling } = B;
+    const { Styling, color } = B;
     const style = new Styling(t);
+    const getOpacColor = (col, val) => color.alpha(col, val);
 
     return {
       root: {
@@ -516,6 +543,18 @@
           fullWidth ? 'block' : 'inline-block',
         '& > *': {
           pointerEvents: 'none',
+        },
+      },
+      checkbox: {
+        color: ({ options: { checkboxColor } }) => [
+          style.getColor(checkboxColor),
+          '!important',
+        ],
+        '&.MuiCheckbox-root.Mui-checked:hover, &.MuiIconButton-root:hover': {
+          backgroundColor: ({ options: { checkboxColor } }) => [
+            getOpacColor(style.getColor(checkboxColor), 0.04),
+            '!important',
+          ],
         },
       },
       formControl: {
