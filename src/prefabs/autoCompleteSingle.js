@@ -138,15 +138,29 @@
         },
         {
           type: 'TOGGLE',
-          label: 'Close dropdown after select',
-          key: 'closeOnSelect',
-          value: true,
-        },
-        {
-          type: 'TOGGLE',
           label: 'Free solo',
           key: 'freeSolo',
           value: false,
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'optionType',
+              comparator: 'EQ',
+              value: 'model',
+            },
+          },
+        },
+        {
+          type: 'TOGGLE',
+          label: 'Allow multiple values',
+          key: 'multiple',
+          value: false,
+        },
+        {
+          type: 'TOGGLE',
+          label: 'Close dropdown after select',
+          key: 'closeOnSelect',
+          value: true,
         },
         {
           value: false,

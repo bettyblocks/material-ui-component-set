@@ -5,7 +5,7 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { Autocomplete } = window.MaterialUI.Lab;
-    const { CircularProgress, TextField } = window.MaterialUI.Core;
+    const { Chip, CircularProgress, TextField } = window.MaterialUI.Core;
     const { ExpandMore } = window.MaterialUI.Icons;
     const {
       InteractionScope,
@@ -29,6 +29,7 @@
       helperText: helperTextRaw,
       hideLabel,
       margin,
+      multiple,
       nameAttribute: nameAttributeRaw,
       optionType,
       order,
@@ -68,12 +69,13 @@
     const required = customAttributeRequired || defaultRequired;
 
     const label = useText(labelRaw);
-    // TODO: discuss default value behaviour this doesnt seem to work at the moment for a list property
     const defaultValue = useText(valueRaw, { rawValue: true });
-    const [value, setValue] = useState(defaultValue);
-    const [inputValue, setInputValue] = useState(defaultValue);
+    const [value, setValue] = useState(
+      multiple ? defaultValue.trim().split(',') : defaultValue,
+    );
+    const [inputValue, setInputValue] = useState(multiple ? '' : defaultValue);
     const [debouncedInputValue, setDebouncedInputValue] = useState(
-      defaultValue,
+      multiple ? '' : defaultValue,
     );
 
     const { kind: propertyKind = '', values: propertyValues } =
@@ -134,9 +136,11 @@
       let debounceInput;
 
       if (optionType === 'model') {
-        debounceInput = setTimeout(() => {
-          setDebouncedInputValue(inputValue);
-        }, 250);
+        if (inputValue !== debouncedInputValue) {
+          debounceInput = setTimeout(() => {
+            setDebouncedInputValue(inputValue);
+          }, 250);
+        }
       }
 
       return () => {
@@ -148,16 +152,48 @@
 
     const filter = useFilter(filterRaw || {});
 
-    let customFilter;
+    // TODO: when all nuggets are removed an error occurs
+    // We need to do this, because options.filter is not immutable
+    const customFilter = { ...filter };
 
-    if (debouncedInputValue) {
+    /* eslint-disable no-underscore-dangle */
+    if (multiple) {
+      if (customFilter._or) {
+        customFilter._or = [
+          ...customFilter._or,
+          ...value.map(x => ({
+            [valueProp.name]: {
+              regex: typeof x === 'string' ? x : x[valueProp.name],
+            },
+          })),
+          ...(debouncedInputValue && {
+            [valueProp.name]: {
+              regex: debouncedInputValue,
+            },
+          }),
+        ];
+      }
+
+      customFilter._or = [
+        ...value.map(x => ({
+          [valueProp.name]: {
+            regex: typeof x === 'string' ? x : x[valueProp.name],
+          },
+        })),
+      ];
+
+      if (debouncedInputValue) {
+        customFilter._or.push({
+          [valueProp.name]: {
+            regex: debouncedInputValue,
+          },
+        });
+      }
+      /* eslint-enable no-underscore-dangle */
+    } else if (debouncedInputValue) {
       // TODO: what if this is a relation?
-      customFilter = {
-        // We need to do this, because options.filter is not immutable
-        ...filter,
-        [searchProp.name]: {
-          regex: debouncedInputValue,
-        },
+      customFilter[searchProp.name] = {
+        regex: debouncedInputValue,
       };
     }
 
@@ -218,7 +254,7 @@
     }
 
     B.defineFunction('Clear', () => {
-      setValue('');
+      setValue(multiple ? [] : '');
       // TODO check if we need this with freesolo
       // setInputValue('');
     });
@@ -244,6 +280,16 @@
                 tabIndex: isDev ? -1 : undefined,
               },
               endAdornment: <>{!freeSolo && <ExpandMore />}</>,
+              startAdornment: (
+                <>
+                  {multiple ? (
+                    <>
+                      <Chip label="Chip 1" onDelete={() => {}} />
+                      <Chip label="Chip 2" onDelete={() => {}} />
+                    </>
+                  ) : null}
+                </>
+              ),
             }}
             classes={{ root: classes.formControl }}
             dataComponent={dataComponentAttribute}
@@ -256,7 +302,7 @@
             placeholder={placeholder}
             required={required && !value}
             size={size}
-            value={designTimeValue}
+            value={multiple ? '' : designTimeValue}
             variant={variant}
           />
         </div>
@@ -265,13 +311,25 @@
 
     const getValue = () => {
       if (!results) {
-        return null;
+        return multiple ? [] : null;
       }
 
       if (optionType === 'model') {
         // If freeSolo is turned on the value and options are strings instead of objects
         if (freeSolo) {
           return value;
+        }
+
+        if (multiple) {
+          return value.map(x =>
+            results.find(result => {
+              if (typeof x === 'string') {
+                return result[valueProp.name] === x;
+              }
+
+              return result[valueProp.name] === x[valueProp.name];
+            }),
+          );
         }
 
         return results.find(result => {
@@ -293,6 +351,13 @@
 
       if (typeof currentValue === 'string') {
         return currentValue;
+      }
+
+      // TODO: gebruik valueProp en searchProp nalopen
+      if (multiple) {
+        return currentValue
+          .map(x => (typeof x === 'string' ? x : x[valueProp.name]))
+          .join(',');
       }
 
       return currentValue[valueProp.name];
@@ -338,7 +403,7 @@
                   // If freeSolo is turned on the value and options are strings instead of objects
                   !freeSolo && {
                     getOptionLabel: option => {
-                      const optionLabel = option[searchProp.name];
+                      const optionLabel = option[valueProp.name];
 
                       return optionLabel === '' || optionLabel === null
                         ? '-- empty --'
@@ -347,9 +412,15 @@
                   })}
                 inputValue={inputValue}
                 loading={loading}
+                multiple={multiple}
                 onChange={(_, newValue) => {
-                  setValue(newValue || '');
+                  setValue(newValue || (multiple ? [] : ''));
 
+                  if (multiple) {
+                    setDebouncedInputValue('');
+                  }
+
+                  // TODO: fixen voor multiple
                   B.triggerEvent(
                     'onChange',
                     newValue ? newValue[valueProp.name] : '',
