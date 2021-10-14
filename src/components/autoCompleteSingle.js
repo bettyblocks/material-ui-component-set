@@ -170,12 +170,12 @@
         customFilter._or = [
           ...customFilter._or,
           ...value.map(x => ({
-            [valueProp.name]: {
-              regex: typeof x === 'string' ? x : x[valueProp.name],
+            [searchProp.name]: {
+              regex: typeof x === 'string' ? x : x[searchProp.name],
             },
           })),
           ...(debouncedInputValue && {
-            [valueProp.name]: {
+            [searchProp.name]: {
               regex: debouncedInputValue,
             },
           }),
@@ -184,15 +184,15 @@
 
       customFilter._or = [
         ...value.map(x => ({
-          [valueProp.name]: {
-            regex: typeof x === 'string' ? x : x[valueProp.name],
+          [searchProp.name]: {
+            regex: typeof x === 'string' ? x : x[searchProp.name],
           },
         })),
       ];
 
       if (debouncedInputValue) {
         customFilter._or.push({
-          [valueProp.name]: {
+          [searchProp.name]: {
             regex: debouncedInputValue,
           },
         });
@@ -274,7 +274,7 @@
       if (!valid) {
         designTimeValue = message;
       }
-      // TODO: disscus with anton!
+
       if (isDev) {
         designTimeValue = defaultValue;
       }
@@ -360,7 +360,6 @@
         return currentValue;
       }
 
-      // TODO: gebruik valueProp en searchProp nalopen
       if (multiple) {
         return currentValue
           .map(x => (typeof x === 'string' ? x : x[valueProp.name]))
@@ -410,7 +409,7 @@
                   // If freeSolo is turned on the value and options are strings instead of objects
                   !freeSolo && {
                     getOptionLabel: option => {
-                      const optionLabel = option[valueProp.name];
+                      const optionLabel = option[searchProp.name];
 
                       return optionLabel === '' || optionLabel === null
                         ? '-- empty --'
