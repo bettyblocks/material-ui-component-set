@@ -43,6 +43,8 @@
       variant,
     } = options;
 
+    // TODO: comment on every part of this component
+
     const isDev = env === 'dev';
     const displayError = errorType === 'built-in';
     const placeholder = useText(placeholderRaw);
@@ -267,6 +269,11 @@
       }
 
       if (optionType === 'model') {
+        // If freeSolo is turned on the value and options are strings instead of objects
+        if (freeSolo) {
+          return value;
+        }
+
         return results.find(result => {
           if (typeof value === 'string') {
             return result[valueProp.name] === value;
@@ -279,13 +286,34 @@
       return value;
     };
 
+    const getHiddenValue = currentValue => {
+      if (!currentValue) {
+        return '';
+      }
+
+      if (typeof currentValue === 'string') {
+        return currentValue;
+      }
+
+      return currentValue[valueProp.name];
+    };
+
     const getOptions = () => {
       if (optionType === 'property') {
         return propertyValues.map(propertyValue => propertyValue.value);
       }
 
       if (optionType === 'model') {
-        return results || [];
+        if (!results) {
+          return [];
+        }
+
+        // If freeSolo is turned on the value and options are strings instead of objects
+        if (freeSolo) {
+          return results.map(result => result[valueProp.name]);
+        }
+
+        return results;
       }
 
       return [];
@@ -306,15 +334,17 @@
                 disableCloseOnSelect={!closeOnSelect}
                 disabled={disabled}
                 freeSolo={freeSolo}
-                {...(optionType === 'model' && {
-                  getOptionLabel: option => {
-                    const optionLabel = option[searchProp.name];
+                {...(optionType === 'model' &&
+                  // If freeSolo is turned on the value and options are strings instead of objects
+                  !freeSolo && {
+                    getOptionLabel: option => {
+                      const optionLabel = option[searchProp.name];
 
-                    return optionLabel === '' || optionLabel === null
-                      ? '-- empty --'
-                      : optionLabel;
-                  },
-                })}
+                      return optionLabel === '' || optionLabel === null
+                        ? '-- empty --'
+                        : optionLabel;
+                    },
+                  })}
                 inputValue={inputValue}
                 loading={loading}
                 onChange={(_, newValue) => {
@@ -339,7 +369,7 @@
                         type="hidden"
                         key={value[valueProp.name] ? 'hasValue' : 'isEmpty'}
                         name={nameAttribute || name}
-                        value={currentValue ? currentValue[valueProp.name] : ''}
+                        value={getHiddenValue(currentValue)}
                       />
                     )}
                     <TextField
