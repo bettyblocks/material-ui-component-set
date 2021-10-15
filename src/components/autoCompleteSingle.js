@@ -54,6 +54,8 @@
       variant,
     } = options;
 
+    // TODO: make sure to support number values in searchProp and valueProp
+
     /*
      * To understand this component it is important to know what the following options are used for:
      *
@@ -120,6 +122,11 @@
       multiple ? '' : defaultValue,
     );
 
+    /*
+     * Keep state of interaction filters coming from other components
+     */
+    const [interactionFilter, setInteractionFilter] = useState({});
+
     const { kind: propertyKind = '', values: propertyValues } =
       getProperty(property) || {};
     const isListProperty = propertyKind.toLowerCase() === 'list';
@@ -131,6 +138,30 @@
 
     let valid = false;
     let message = '';
+
+    /*
+     * Merges interaction filters with local filters
+     */
+    const mergeFilters = (...filters) => {
+      const isObject = item =>
+        item && typeof item === 'object' && !Array.isArray(item);
+
+      return filters.reduce((acc, object) => {
+        Object.entries(object).forEach(([key, filterValue]) => {
+          const accValue = acc[key];
+
+          if (Array.isArray(accValue) && Array.isArray(filterValue)) {
+            acc[key] = accValue.concat(filterValue);
+          } else if (isObject(accValue) && isObject(filterValue)) {
+            acc[key] = mergeFilters(accValue, filterValue);
+          } else {
+            acc[key] = filterValue;
+          }
+        });
+
+        return acc;
+      }, {});
+    };
 
     /*
      * We do some validations that checks if all required options are set. We do this in one place to prevent clutter further on
@@ -195,10 +226,10 @@
       };
     }, [inputValue]);
 
-    const filter = useFilter(filterRaw || {});
+    const optionFilter = useFilter(filterRaw || {});
 
     // We need to do this, because options.filter is not immutable
-    const customFilter = { ...filter };
+    const filter = { ...optionFilter };
 
     /*
      * We extend the option filter with the value of the `value` state and the value of the `inputValue` state.
@@ -207,12 +238,12 @@
      */
     /* eslint-disable no-underscore-dangle */
     if (multiple && value.length > 0) {
-      if (!customFilter._or) {
-        customFilter._or = [];
+      if (!filter._or) {
+        filter._or = [];
       }
 
       value.forEach(x => {
-        customFilter._or.push({
+        filter._or.push({
           [searchProp.name]: {
             regex: typeof x === 'string' ? x : x[searchProp.name],
           },
@@ -220,7 +251,7 @@
       });
 
       if (debouncedInputValue) {
-        customFilter._or.push({
+        filter._or.push({
           [searchProp.name]: {
             regex: debouncedInputValue,
           },
@@ -228,10 +259,41 @@
       }
       /* eslint-enable no-underscore-dangle */
     } else if (debouncedInputValue) {
-      customFilter[searchProp.name] = {
+      filter[searchProp.name] = {
         regex: debouncedInputValue,
       };
     }
+
+    /*
+     * Merge external filters (from interactions) into local filters
+     */
+    const externalFilters = Object.values(interactionFilter)
+      .filter(
+        ({ value: eventValue }) =>
+          !eventValue || (Array.isArray(eventValue) && eventValue.length === 0),
+      )
+      .map(({ property: propertyArg, value: eventValue }) =>
+        propertyArg.id.reduceRight((acc, field, index, arr) => {
+          if (index === arr.length - 1) {
+            return Array.isArray(eventValue)
+              ? {
+                  _or: eventValue.map(el => ({
+                    [field]: { [propertyArg.operator]: el },
+                  })),
+                }
+              : { [field]: { [propertyArg.operator]: eventValue } };
+          }
+
+          return { [field]: acc };
+        }, {}),
+      );
+
+    const externalFiltersObject =
+      externalFilters.length > 1
+        ? { _and: externalFilters }
+        : externalFilters[0] || {};
+
+    const resolvedExternalFiltersObject = useFilter(externalFiltersObject);
 
     /*
      * Build up order object to pass to request
@@ -262,7 +324,7 @@
       model,
       {
         take: 20,
-        rawFilter: customFilter || filter,
+        rawFilter: mergeFilters(filter, resolvedExternalFiltersObject),
         variables: {
           sort,
         },
@@ -299,6 +361,33 @@
     });
 
     B.defineFunction('Refetch', () => refetch());
+
+    B.defineFunction(
+      'Filter',
+      ({ event, property: propertyArg, interactionId }) => {
+        let eventValue;
+
+        if (event.target) {
+          eventValue = event.target.value;
+        } else if (event instanceof Date) {
+          eventValue = value.toISOString();
+        } else {
+          eventValue = event;
+        }
+
+        setInteractionFilter({
+          ...interactionFilter,
+          [interactionId]: {
+            property: propertyArg,
+            value: eventValue,
+          },
+        });
+      },
+    );
+
+    B.defineFunction('ResetFilter', () => {
+      setInteractionFilter({});
+    });
 
     /*
      * Show a TextField in design time
@@ -447,7 +536,6 @@
     };
 
     return (
-      // TODO: Is this needed? Check with Benjamin
       <ModelProvider value={currentValue} id={model}>
         <InteractionScope model={model}>
           {ctx => {
@@ -492,7 +580,6 @@
                       : '';
                   }
 
-                  // TODO: ask Benjamin how to get the value in this interaction
                   B.triggerEvent(
                     'onChange',
                     triggerEventValue,
