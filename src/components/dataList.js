@@ -63,7 +63,7 @@
                 <SearchComponent label={searchPropertyLabel} />
               </div>
             )}
-            <div ref={listRef} className={isGrid && classes.grid}>
+            <div ref={listRef} className={isGrid ? classes.grid : undefined}>
               <div
                 className={
                   [
@@ -350,7 +350,7 @@
                 {context => (
                   <div
                     role="none"
-                    className={isInline && classes.inline}
+                    className={isInline ? classes.inline : undefined}
                     onClick={event => handleClick(event, context)}
                   >
                     {children}
