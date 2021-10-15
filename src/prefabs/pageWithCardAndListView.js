@@ -1727,6 +1727,26 @@
             descendants: [
               {
                 name: 'Button',
+                style: {
+                  overwrite: {
+                    backgroundColor: {
+                      type: 'THEME_COLOR',
+                      value: 'primary',
+                    },
+                    boxShadow: 'none',
+                    color: {
+                      type: 'THEME_COLOR',
+                      value: 'white',
+                    },
+                    fontFamily: 'Roboto',
+                    fontSize: '0.875rem',
+                    fontStyle: 'none',
+                    fontWeight: '400',
+                    padding: ['0.6875rem', '1.375rem'],
+                    textDecoration: 'none',
+                    textTransform: 'none',
+                  },
+                },
                 options: [
                   {
                     label: 'Toggle visibility',
@@ -2010,6 +2030,26 @@
               },
               {
                 name: 'Button',
+                style: {
+                  overwrite: {
+                    backgroundColor: {
+                      type: 'THEME_COLOR',
+                      value: 'primary',
+                    },
+                    boxShadow: 'none',
+                    color: {
+                      type: 'THEME_COLOR',
+                      value: 'white',
+                    },
+                    fontFamily: 'Roboto',
+                    fontSize: '0.875rem',
+                    fontStyle: 'none',
+                    fontWeight: '400',
+                    padding: ['0.6875rem', '1.375rem'],
+                    textDecoration: 'none',
+                    textTransform: 'none',
+                  },
+                },
                 options: [
                   {
                     label: 'Toggle visibility',
@@ -3951,6 +3991,33 @@
                                     ref: {
                                       id: '#listBtnId',
                                     },
+                                    style: {
+                                      overwrite: {
+                                        backgroundColor: {
+                                          type: 'STATIC',
+                                          value: 'transparent',
+                                        },
+                                        borderColor: {
+                                          type: 'THEME_COLOR',
+                                          value: 'primary',
+                                        },
+                                        borderRadius: ['0.25rem'],
+                                        borderStyle: 'solid',
+                                        borderWidth: ['0.0625rem'],
+                                        boxShadow: 'none',
+                                        color: {
+                                          type: 'THEME_COLOR',
+                                          value: 'primary',
+                                        },
+                                        fontFamily: 'Roboto',
+                                        fontSize: '0.875rem',
+                                        fontStyle: 'none',
+                                        fontWeight: '400',
+                                        padding: ['0.625rem', '1.3125rem'],
+                                        textDecoration: 'none',
+                                        textTransform: 'none',
+                                      },
+                                    },
                                     options: [
                                       {
                                         label: 'Toggle visibility',
@@ -4181,6 +4248,33 @@
                                     name: 'Button',
                                     ref: {
                                       id: '#gridBtnId',
+                                    },
+                                    style: {
+                                      overwrite: {
+                                        backgroundColor: {
+                                          type: 'STATIC',
+                                          value: 'transparent',
+                                        },
+                                        borderColor: {
+                                          type: 'THEME_COLOR',
+                                          value: 'primary',
+                                        },
+                                        borderRadius: ['0.25rem'],
+                                        borderStyle: 'solid',
+                                        borderWidth: ['0.0625rem'],
+                                        boxShadow: 'none',
+                                        color: {
+                                          type: 'THEME_COLOR',
+                                          value: 'primary',
+                                        },
+                                        fontFamily: 'Roboto',
+                                        fontSize: '0.875rem',
+                                        fontStyle: 'none',
+                                        fontWeight: '400',
+                                        padding: ['0.625rem', '1.3125rem'],
+                                        textDecoration: 'none',
+                                        textTransform: 'none',
+                                      },
                                     },
                                     options: [
                                       {
@@ -6326,6 +6420,26 @@
                                     descendants: [
                                       {
                                         name: 'Button',
+                                        style: {
+                                          overwrite: {
+                                            backgroundColor: {
+                                              type: 'THEME_COLOR',
+                                              value: 'primary',
+                                            },
+                                            boxShadow: 'none',
+                                            color: {
+                                              type: 'THEME_COLOR',
+                                              value: 'white',
+                                            },
+                                            fontFamily: 'Roboto',
+                                            fontSize: '0.875rem',
+                                            fontStyle: 'none',
+                                            fontWeight: '400',
+                                            padding: ['0.6875rem', '1.375rem'],
+                                            textDecoration: 'none',
+                                            textTransform: 'none',
+                                          },
+                                        },
                                         options: [
                                           {
                                             label: 'Toggle visibility',
@@ -10331,6 +10445,29 @@
                                                 descendants: [
                                                   {
                                                     name: 'Button',
+                                                    style: {
+                                                      overwrite: {
+                                                        backgroundColor: {
+                                                          type: 'THEME_COLOR',
+                                                          value: 'primary',
+                                                        },
+                                                        boxShadow: 'none',
+                                                        color: {
+                                                          type: 'THEME_COLOR',
+                                                          value: 'white',
+                                                        },
+                                                        fontFamily: 'Roboto',
+                                                        fontSize: '0.875rem',
+                                                        fontStyle: 'none',
+                                                        fontWeight: '400',
+                                                        padding: [
+                                                          '0.6875rem',
+                                                          '1.375rem',
+                                                        ],
+                                                        textDecoration: 'none',
+                                                        textTransform: 'none',
+                                                      },
+                                                    },
                                                     options: [
                                                       {
                                                         label:
