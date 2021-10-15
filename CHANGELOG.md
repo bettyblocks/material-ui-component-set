@@ -1,3 +1,110 @@
+## [1.175.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.175.3...v1.175.4) (2021-10-13)
+
+
+### Bug Fixes
+
+* fixes integer static options ([989d8c4](https://github.com/bettyblocks/material-ui-component-set/commit/989d8c49d6daa3b148026eff5dcad106841b212f))
+
+## [1.175.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.175.2...v1.175.3) (2021-10-13)
+
+
+### Bug Fixes
+
+* renamed header of before create 400 page template TMPLT 919 ([498ed21](https://github.com/bettyblocks/material-ui-component-set/commit/498ed21d1e85a4a479b70912e7230447746d2fdf))
+
+## [1.175.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.175.1...v1.175.2) (2021-10-11)
+
+
+### Bug Fixes
+
+* fixes helper text in development ([2dfc789](https://github.com/bettyblocks/material-ui-component-set/commit/2dfc789cb4a8e2bfc54a6b9bf17e5b273152289e))
+
+## [1.175.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.175.0...v1.175.1) (2021-10-11)
+
+
+### Bug Fixes
+
+* more specific css selector for outerspace button component ([8b3db59](https://github.com/bettyblocks/material-ui-component-set/commit/8b3db5925b71b9934c28275f166bd4984a4e24f9))
+
+# [1.175.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.174.0...v1.175.0) (2021-10-06)
+
+
+### Features
+
+* adds navigateToOutputUrl global interaction ([f6f1faa](https://github.com/bettyblocks/material-ui-component-set/commit/f6f1faac5eb6cda1fe1b877cb0777c238118d75a))
+
+# [1.174.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.173.0...v1.174.0) (2021-10-04)
+
+
+### Features
+
+* added 403 page to old 404 configurator ([dc6dccb](https://github.com/bettyblocks/material-ui-component-set/commit/dc6dccb303ed7de12c13cbde16bcd2e2a6f204c0))
+
+# [1.173.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.172.0...v1.173.0) (2021-10-04)
+
+
+### Features
+
+* updated appbar page to header and footer ([0965a97](https://github.com/bettyblocks/material-ui-component-set/commit/0965a97c219f590e7d043b0b3b7c4c907fe6e1fe))
+
+# [1.172.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.171.1...v1.172.0) (2021-10-04)
+
+
+### Features
+
+* ignore non values in filter ([cc0461e](https://github.com/bettyblocks/material-ui-component-set/commit/cc0461ea8e59a563a238dab854cf24232785b1e1))
+
+
+### Reverts
+
+* Revert "fix: autoselect doesn't crash when clearing the textfield" ([29ab81c](https://github.com/bettyblocks/material-ui-component-set/commit/29ab81cdd1183bd87e3ee46c5d02fd654e81c626))
+
+## [1.171.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.171.0...v1.171.1) (2021-09-27)
+
+
+### Bug Fixes
+
+* free solo multi combo in autocomplete ([1e0107c](https://github.com/bettyblocks/material-ui-component-set/commit/1e0107c39f36b4274fa9bbd55247059559c5ccf3))
+* redo tabindex fix ([89487b7](https://github.com/bettyblocks/material-ui-component-set/commit/89487b7c9c17cc2ebf0cf5f94fa939cb5ee020fb))
+* reset to master ([7bbf78d](https://github.com/bettyblocks/material-ui-component-set/commit/7bbf78dec367a73ffe7b0864a80b94a68bdcfe86))
+
+# [1.171.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.170.0...v1.171.0) (2021-09-27)
+
+
+### Bug Fixes
+
+* added !important to overwritten styling ([db07898](https://github.com/bettyblocks/material-ui-component-set/commit/db078988f1310c852cceb9c81e1cd88d32d3cfa0))
+* autocomplete disabled option ([5fa8d1d](https://github.com/bettyblocks/material-ui-component-set/commit/5fa8d1d6d29f1253c66f76fa56f20fdbbd03259c))
+* deleted dataTable page ([d77305d](https://github.com/bettyblocks/material-ui-component-set/commit/d77305de7871fa18e3d5c66fc989ef6810958115))
+* ensure the ref is set correctly ([#1218](https://github.com/bettyblocks/material-ui-component-set/issues/1218)) ([6f5e459](https://github.com/bettyblocks/material-ui-component-set/commit/6f5e45962e019a09f2dedabca4c65a10160fcaf8))
+* file upload long file names no wrap ([3319fbd](https://github.com/bettyblocks/material-ui-component-set/commit/3319fbdd1e5d769079e80bdc6488b036084e74a5))
+* filtering on false boolean values ([4fcce1e](https://github.com/bettyblocks/material-ui-component-set/commit/4fcce1e6294281aaba8357edd01c36a5d7246ee9))
+* handle duplicate file ([f3fcf7e](https://github.com/bettyblocks/material-ui-component-set/commit/f3fcf7e58d31a27155061807c52c4091c40a00e9))
+* handle duplicate file ([41cc116](https://github.com/bettyblocks/material-ui-component-set/commit/41cc116a343e4874938c55882cfc51b6346d183f))
+* handle duplicate file ([e44711a](https://github.com/bettyblocks/material-ui-component-set/commit/e44711a8bc1af2eb919cbc473b1be1184c1a2279))
+* make select options inaccessable when disabled ([782e59f](https://github.com/bettyblocks/material-ui-component-set/commit/782e59f801ab2b336f1ed691a3d9213aaffc0795))
+* remove double option after conflicts ([04e0c9f](https://github.com/bettyblocks/material-ui-component-set/commit/04e0c9f5c423a48e237dccee67576e1849acca54))
+* removed interaction prefab ([eadd4b5](https://github.com/bettyblocks/material-ui-component-set/commit/eadd4b55d4d132291f14655550cd4d7ccea72b6b))
+* tabindex css prop value ([c813b19](https://github.com/bettyblocks/material-ui-component-set/commit/c813b19291e31f52e6ee5870cdf23550fb7fd484))
+* update yarn lock ([0ac24c5](https://github.com/bettyblocks/material-ui-component-set/commit/0ac24c55948e8e6704113cc9f1b5ab2d5ce13d5d))
+
+
+### Features
+
+* add responsiveness ([f02dd20](https://github.com/bettyblocks/material-ui-component-set/commit/f02dd20326d8c0812e0855e7154d5457c881398f))
+* added details view to backoffice template ([4c01c5c](https://github.com/bettyblocks/material-ui-component-set/commit/4c01c5c3fdb6359c880e8e266dfb4aca76e5fed3))
+* bump revert commit ([1c3ab4f](https://github.com/bettyblocks/material-ui-component-set/commit/1c3ab4fd8b1206360977dfc85516dfb732e34b8e))
+* **tmplt-401:** build Homepage Layout page template ([e4d2b9c](https://github.com/bettyblocks/material-ui-component-set/commit/e4d2b9cf2b0b59ac433c69f141b32c680f20849b))
+* **tmplt-401:** update outdated components ([ef19460](https://github.com/bettyblocks/material-ui-component-set/commit/ef194608d895defbf8628bea2fc695e8a4da2bc6))
+* crud-with-slide-out-panel ([f1b887c](https://github.com/bettyblocks/material-ui-component-set/commit/f1b887c14eb8b357079313ac611dec8191c48f4a))
+* have the datatable inherit property formats by default ([#1284](https://github.com/bettyblocks/material-ui-component-set/issues/1284)) ([65bda56](https://github.com/bettyblocks/material-ui-component-set/commit/65bda5666ff801769767024dc40d126addfce028))
+* pie chart ([3570b36](https://github.com/bettyblocks/material-ui-component-set/commit/3570b362a70e13057b88acf805cf21bb564d6354))
+
+
+### Reverts
+
+* Revert "feat: add AutoCompleteSingle component" ([2458b2a](https://github.com/bettyblocks/material-ui-component-set/commit/2458b2a9b5fe649937f26989d4c0254e18ab908c))
+
 # [1.170.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.169.4...v1.170.0) (2021-09-22)
 
 

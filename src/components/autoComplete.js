@@ -154,7 +154,7 @@
 
     let inputProps = {
       inputProps: {
-        tabIndex: isDev && -1,
+        tabIndex: isDev ? -1 : undefined,
       },
       endAdornment: (
         <>

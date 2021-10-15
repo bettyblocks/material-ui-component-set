@@ -94,8 +94,9 @@
     useEffect(() => {
       if (isDev) {
         setChecked(componentChecked === 'true');
+        setHelper(useText(helperText));
       }
-    }, [isDev, defaultValue]);
+    }, [isDev, defaultValue, helperText]);
 
     const props = {
       checked,
@@ -105,7 +106,7 @@
       name: nameAttributeValue || customModelAttributeName,
       disabled,
       size,
-      tabIndex: isDev && -1,
+      tabIndex: isDev ? -1 : undefined,
       value: 'on',
       'data-component': useText(dataComponentAttribute) || 'Checkbox',
     };
