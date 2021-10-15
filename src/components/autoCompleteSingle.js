@@ -362,6 +362,11 @@
 
     B.defineFunction('Refetch', () => refetch());
 
+    /**
+     * @name Filter
+     * @param {Property} property
+     * @returns {Void}
+     */
     B.defineFunction(
       'Filter',
       ({ event, property: propertyArg, interactionId }) => {
