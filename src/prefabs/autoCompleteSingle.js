@@ -158,6 +158,20 @@
         },
         {
           type: 'TOGGLE',
+          label: 'Add checkboxes',
+          key: 'renderCheckboxes',
+          value: false,
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'multiple',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'TOGGLE',
           label: 'Close dropdown after select',
           key: 'closeOnSelect',
           value: true,
@@ -345,6 +359,20 @@
           label: 'Text color',
           key: 'textColor',
           value: 'Black',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'styles',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'COLOR',
+          label: 'Checkbox color',
+          key: 'checkboxColor',
+          value: 'Accent3',
           configuration: {
             condition: {
               type: 'SHOW',
