@@ -138,6 +138,20 @@
         },
         {
           type: 'TOGGLE',
+          label: 'Free solo',
+          key: 'freeSolo',
+          value: false,
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'optionType',
+              comparator: 'EQ',
+              value: 'model',
+            },
+          },
+        },
+        {
+          type: 'TOGGLE',
           label: 'Allow multiple values',
           key: 'multiple',
           value: false,
@@ -147,6 +161,14 @@
           label: 'Add checkboxes',
           key: 'renderCheckboxes',
           value: false,
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'multiple',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
         },
         {
           type: 'TOGGLE',
@@ -155,21 +177,15 @@
           value: true,
         },
         {
-          type: 'TOGGLE',
-          label: 'Free solo',
-          key: 'freeSolo',
-          value: false,
-        },
-        {
           value: false,
           label: 'Error',
-          key: 'error',
+          key: 'showError',
           type: 'TOGGLE',
         },
         {
           value: 'built-in',
           label: 'Error message',
-          key: 'showError',
+          key: 'errorType',
           type: 'CUSTOM',
           configuration: {
             as: 'BUTTONGROUP',
@@ -343,34 +359,6 @@
           label: 'Text color',
           key: 'textColor',
           value: 'Black',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'styles',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
-        },
-        {
-          type: 'COLOR',
-          label: 'Background color chip',
-          key: 'backgroundColorChip',
-          value: 'Light',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'styles',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
-        },
-        {
-          type: 'COLOR',
-          label: 'Text color chip',
-          key: 'textColorChip',
-          value: 'Accent3',
           configuration: {
             condition: {
               type: 'SHOW',

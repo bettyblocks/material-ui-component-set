@@ -4,242 +4,329 @@
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const {
-      disabled,
-      error,
-      placeholder,
-      variant,
-      size,
-      fullWidth,
-      margin,
-      helperText,
-      model,
-      multiple,
-      freeSolo,
-      searchProperty,
-      valueProperty,
-      closeOnSelect,
-      renderCheckboxes,
-      showError,
-      hideLabel,
-      customModelAttribute: customModelAttributeObj,
-      property,
-      nameAttribute,
-      order,
-      orderBy,
-      dataComponentAttribute,
-    } = options;
-
     const { Autocomplete } = window.MaterialUI.Lab;
     const {
-      TextField,
-      CircularProgress,
-      Chip,
       Checkbox,
+      Chip,
+      CircularProgress,
+      TextField,
     } = window.MaterialUI.Core;
     const {
-      ExpandMore,
-      Close,
-      CheckBox,
+      CheckBox: CheckBoxIcon,
       CheckBoxOutlineBlank,
+      ExpandMore,
     } = window.MaterialUI.Icons;
     const {
-      env,
-      ModelProvider,
       InteractionScope,
+      ModelProvider,
+      env,
       getCustomModelAttribute,
       getProperty,
       useAllQuery,
+      useFilter,
       useText,
     } = B;
-    const isDev = env === 'dev';
-    const displayError = showError === 'built-in';
-    const placeholderText = useText(placeholder);
-    const helper = useText(helperText);
-    const nameAttributeValue = useText(nameAttribute);
-
     const {
-      id: customModelAttributeId,
-      label = [],
-      value: defaultValue = [],
-      required: defaultRequired = false,
-    } = customModelAttributeObj;
-    const customModelAttribute = getCustomModelAttribute(
-      customModelAttributeId,
-    );
-    const {
-      name: customModelAttributeName,
-      validations: { required: attributeRequired } = {},
-    } = customModelAttribute || {};
-    const required = customModelAttribute ? attributeRequired : defaultRequired;
-    const { kind, values: listValues } = getProperty(property) || {};
-    const [currentValue, setCurrentValue] = useState(
-      useText(defaultValue, { rawValue: true }),
-    );
-    const [currentLabel, setCurrentLabel] = useState('');
-    const changeContext = useRef(null);
-    const mounted = useRef(false);
-    const labelText = useText(label);
-
-    const textFieldProps = {
+      closeOnSelect,
+      customModelAttribute: customModelAttributeRaw,
+      dataComponentAttribute: dataComponentAttributeRaw,
       disabled,
-      variant,
-      label: !hideLabel && labelText,
+      errorType,
+      filter: filterRaw,
+      freeSolo,
       fullWidth,
-      size,
-      required,
-      error,
-      placeholder: placeholderText,
+      helperText: helperTextRaw,
+      hideLabel,
       margin,
-      helperText: helper,
-      classes: { root: classes.formControl },
-      'data-component': useText(dataComponentAttribute) || 'AutoComplete',
-    };
+      multiple,
+      nameAttribute: nameAttributeRaw,
+      optionType,
+      order,
+      orderBy,
+      placeholder: placeholderRaw,
+      property,
+      model,
+      renderCheckboxes,
+      showError,
+      searchProperty,
+      size,
+      valueProperty,
+      variant,
+    } = options;
+
+    // TODO: make sure to support number values in searchProp and valueProp
+
+    /*
+     * To understand this component it is important to know what the following options are used for:
+     *
+     * customModelAttribute: To label how the data will be send to an action when a form is submitted. Also to get the default value when used in an update form.
+     * freeSolo: Allows any value to be submitted from the Autocomplete. Normally only values rendered as options in the dropdown can be selected and submitted.
+     * multiple: Allows multiple values to be selected. Will be send to the backend as a string with comma separated values
+     * optionType: Is one of two values: `property` or `model`. When the value is `property` we're working with a list property to show a list of selectable values, otherwise we're working with a model.
+     *
+     */
+
+    const isDev = env === 'dev';
+    const displayError = errorType === 'built-in';
+    const placeholder = useText(placeholderRaw);
+    const helperText = useText(helperTextRaw);
+    const nameAttribute = useText(nameAttributeRaw);
+    const changeContext = useRef(null);
+    const dataComponentAttribute =
+      useText(dataComponentAttributeRaw) || 'AutoComplete';
+
+    const {
+      id,
+      label: labelRaw = [],
+      value: valueRaw = [],
+      required: defaultRequired = false,
+    } = customModelAttributeRaw;
+    const {
+      name,
+      validations: { required: customAttributeRequired = false } = {},
+    } = getCustomModelAttribute(id) || {};
+
+    const required = customAttributeRequired || defaultRequired;
+
+    const label = useText(labelRaw);
+    const defaultValue = useText(valueRaw, { rawValue: true });
+
+    let initalValue = defaultValue;
+
+    if (multiple) {
+      if (defaultValue.trim() === '') {
+        initalValue = [];
+      } else {
+        initalValue = defaultValue.trim().split(',');
+      }
+    }
+
+    /*
+     * Selected value of the autocomplete.
+     *
+     * It is an object or and array of objects (in case of multiple). The object being a one on one copy of the result of the request.
+     * In case of freeSolo the type is string or and array of strings.
+     *
+     */
+    const [value, setValue] = useState(initalValue);
+
+    /*
+     * User input in the autocomplete. In case of freeSolo this is the same as `value`
+     */
+    const [inputValue, setInputValue] = useState(multiple ? '' : defaultValue);
+
+    /*
+     * Debounced user input to only send a request every 250ms
+     */
+    const [debouncedInputValue, setDebouncedInputValue] = useState(
+      multiple ? '' : defaultValue,
+    );
+
+    /*
+     * Keep state of interaction filters coming from other components
+     */
+    const [interactionFilter, setInteractionFilter] = useState({});
+
+    const { kind: propertyKind = '', values: propertyValues } =
+      getProperty(property) || {};
+    const isListProperty = propertyKind.toLowerCase() === 'list';
 
     const searchProp = getProperty(searchProperty) || {};
     const valueProp = getProperty(valueProperty) || {};
-    const [searchParam, setSearchParam] = useState('');
-    const [debouncedSearchParam, setDebouncedSearchParam] = useState('');
-    const [interactionFilter, setInteractionFilter] = useState({});
-
-    const deepMerge = (...objects) => {
-      const isObject = item =>
-        item && typeof item === 'object' && !Array.isArray(item);
-
-      return objects.reduce((accumulator, object) => {
-        Object.keys(object).forEach(key => {
-          const accumulatorValue = accumulator[key];
-          const value = object[key];
-
-          if (Array.isArray(accumulatorValue) && Array.isArray(value)) {
-            accumulator[key] = accumulatorValue.concat(value);
-          } else if (isObject(accumulatorValue) && isObject(value)) {
-            accumulator[key] = deepMerge(accumulatorValue, value);
-          } else {
-            accumulator[key] = value;
-          }
-        });
-        return accumulator;
-      }, {});
-    };
-
-    const transformValue = value => {
-      if (value instanceof Date) {
-        return value.toISOString();
-      }
-
-      return value;
-    };
-
-    const { filter = {} } = options;
     const hasSearch = searchProp && searchProp.id;
     const hasValue = valueProp && valueProp.id;
 
-    if (hasSearch && debouncedSearchParam !== '') {
-      if (['serial', 'minutes', 'count', 'integer'].includes(searchProp.kind)) {
-        filter[searchProp.id] = {
-          eq: parseInt(debouncedSearchParam, 10),
-        };
-      } else {
-        filter[searchProp.id] = {
-          regex: debouncedSearchParam,
-        };
-      }
-    } else if (hasSearch && debouncedSearchParam === '') {
-      delete filter[searchProp.id];
-    }
+    let valid = false;
+    let message = '';
 
-    const hasNoProp = !hasSearch || !hasValue;
-    const reason = hasNoProp ? 'No property selected' : 'No data';
+    /*
+     * Merges interaction filters with local filters
+     */
+    const mergeFilters = (...filters) => {
+      const isObject = item =>
+        item && typeof item === 'object' && !Array.isArray(item);
 
-    let inputProps = {
-      inputProps: {
-        tabIndex: isDev ? -1 : undefined,
-      },
-      endAdornment: (
-        <>
-          {currentValue && <Close />}
-          {!freeSolo && <ExpandMore />}
-        </>
-      ),
+      return filters.reduce((acc, object) => {
+        Object.entries(object).forEach(([key, filterValue]) => {
+          const accValue = acc[key];
+
+          if (Array.isArray(accValue) && Array.isArray(filterValue)) {
+            acc[key] = accValue.concat(filterValue);
+          } else if (isObject(accValue) && isObject(filterValue)) {
+            acc[key] = mergeFilters(accValue, filterValue);
+          } else {
+            acc[key] = filterValue;
+          }
+        });
+
+        return acc;
+      }, {});
     };
 
-    if (multiple && currentValue) {
-      inputProps = {
-        ...inputProps,
-        startAdornment: <Chip label={currentValue} onDelete={() => {}} />,
+    /*
+     * We do some validations that checks if all required options are set. We do this in one place to prevent clutter further on
+     */
+    switch (optionType) {
+      case 'model': {
+        if (!model) {
+          message = 'No model selected';
+          break;
+        }
+        if (!hasSearch && !hasValue) {
+          message = 'No property selected';
+          break;
+        }
+        if (!hasValue) {
+          message = 'No value propery selected';
+          break;
+        }
+        if (!hasSearch) {
+          message = 'No label property selected';
+          break;
+        }
+
+        valid = true;
+        break;
+      }
+      case 'property': {
+        if (!propertyKind) {
+          message = 'No property selected';
+          break;
+        }
+
+        if (!isListProperty) {
+          message = 'No property of type "List" selected';
+          break;
+        }
+
+        valid = true;
+        break;
+      }
+      default: {
+        message = 'Invalid value for optionType option';
+        break;
+      }
+    }
+
+    useEffect(() => {
+      let debounceInput;
+
+      if (optionType === 'model') {
+        if (inputValue !== debouncedInputValue) {
+          debounceInput = setTimeout(() => {
+            setDebouncedInputValue(inputValue);
+          }, 250);
+        }
+      }
+
+      return () => {
+        if (optionType === 'model') {
+          clearTimeout(debounceInput);
+        }
+      };
+    }, [inputValue]);
+
+    const optionFilter = useFilter(filterRaw || {});
+
+    // We need to do this, because options.filter is not immutable
+    const filter = { ...optionFilter };
+
+    /*
+     * We extend the option filter with the value of the `value` state and the value of the `inputValue` state.
+     *
+     * Those values always need to be returned in the results of the request
+     */
+    /* eslint-disable no-underscore-dangle */
+    if (multiple && value.length > 0) {
+      if (!filter._or) {
+        filter._or = [];
+      }
+
+      value.forEach(x => {
+        filter._or.push({
+          [searchProp.name]: {
+            regex: typeof x === 'string' ? x : x[searchProp.name],
+          },
+        });
+      });
+
+      if (debouncedInputValue) {
+        filter._or.push({
+          [searchProp.name]: {
+            regex: debouncedInputValue,
+          },
+        });
+      }
+      /* eslint-enable no-underscore-dangle */
+    } else if (debouncedInputValue) {
+      filter[searchProp.name] = {
+        regex: debouncedInputValue,
       };
     }
 
-    const valueArray = currentValue ? currentValue.toString().split(',') : [];
-
-    const rawFilter = {
-      rawFilter: {
-        [valueProp.name]: { in: valueArray },
-      },
-    };
-
-    const [useFilter, setUseFilter] = useState(
-      currentValue ? rawFilter : filter,
-    );
-
-    const resetFilter = () => {
-      setUseFilter({ filter });
-    };
-
-    const isEmptyValue = value =>
-      !value || (Array.isArray(value) && value.length === 0);
-
-    const clauses = Object.entries(interactionFilter)
-      .filter(([, { value }]) => !isEmptyValue(value))
-      .map(([, { property: propertyArg, value }]) =>
+    /*
+     * Merge external filters (from interactions) into local filters
+     */
+    const externalFilters = Object.values(interactionFilter)
+      .filter(
+        ({ value: eventValue }) =>
+          (Array.isArray(eventValue) && eventValue.length > 0) || eventValue,
+      )
+      .map(({ property: propertyArg, value: eventValue }) =>
         propertyArg.id.reduceRight((acc, field, index, arr) => {
-          const isLast = index === arr.length - 1;
-          if (isLast) {
-            return Array.isArray(value)
+          if (index === arr.length - 1) {
+            return Array.isArray(eventValue)
               ? {
-                  _or: value.map(el => ({
+                  _or: eventValue.map(el => ({
                     [field]: { [propertyArg.operator]: el },
                   })),
                 }
-              : { [field]: { [propertyArg.operator]: value } };
+              : { [field]: { [propertyArg.operator]: eventValue } };
           }
 
           return { [field]: acc };
         }, {}),
       );
 
-    const interactionFilters =
-      clauses.length > 1 ? { _and: clauses } : clauses[0] || {};
+    const externalFiltersObject =
+      externalFilters.length > 1
+        ? { _and: externalFilters }
+        : externalFilters[0] || {};
 
-    const completeFilter = deepMerge(
-      useFilter.filter || {},
-      interactionFilters,
-    );
+    const resolvedExternalFiltersObject = useFilter(externalFiltersObject);
 
-    const orderByArray = [orderBy].flat();
-    const sort =
-      !isDev && orderBy
-        ? orderByArray.reduceRight((acc, orderByProperty, index) => {
-            const prop = getProperty(orderByProperty);
-            return index === orderByArray.length - 1
-              ? { [prop.name]: order.toUpperCase() }
-              : { [prop.name]: acc };
-          }, {})
-        : {};
+    /*
+     * Build up order object to pass to request
+     */
+    const idOrPath = typeof orderBy.id !== 'undefined' ? orderBy.id : orderBy;
+    const orderByPath = typeof idOrPath === 'string' ? [idOrPath] : idOrPath;
 
-    const {
-      loading,
-      error: err,
-      data: { results } = {},
-      refetch,
-    } = useAllQuery(
+    let sort;
+
+    if (!isDev) {
+      if (orderByPath.length === 1 && orderByPath[0] !== '') {
+        sort = {
+          field: getProperty(orderByPath[0]).name,
+          order: order.toUpperCase(),
+        };
+      } else if (orderByPath.length > 1) {
+        sort = orderByPath.reduceRight((acc, propertyId, index) => {
+          const orderProperty = getProperty(propertyId);
+
+          return index === orderByPath.length - 1
+            ? { [orderProperty.name]: order.toUpperCase() }
+            : { relation: { [orderProperty.name]: acc } };
+        }, {});
+      }
+    }
+
+    const { loading, error, data: { results } = {}, refetch } = useAllQuery(
       model,
       {
-        filter: completeFilter,
-        take: 50,
+        take: 20,
+        rawFilter: mergeFilters(filter, resolvedExternalFiltersObject),
         variables: {
-          ...(orderBy ? { sort: { relation: sort } } : {}),
+          sort,
         },
         onCompleted(res) {
           const hasResult = res && res.results && res.results.length > 0;
@@ -255,44 +342,24 @@
           }
         },
       },
-      !model,
+      optionType === 'property' || !valid,
     );
 
-    useEffect(() => {
-      if (mounted.current) {
-        B.triggerEvent('onChange', currentValue, changeContext.current);
-      }
-    }, [currentValue]);
+    if (loading) {
+      B.triggerEvent('onLoad', loading);
+    }
 
-    useEffect(() => {
-      mounted.current = true;
-      return () => {
-        mounted.current = false;
-      };
-    }, []);
-
-    useEffect(() => {
-      if (!isDev && results) {
-        resetFilter();
-      }
-    }, [results]);
-
-    useEffect(() => {
-      if (mounted.current && loading) {
-        B.triggerEvent('onLoad', loading);
-      }
-    }, [loading]);
-
-    useEffect(() => {
-      if (isDev) {
-        setCurrentValue(useText(defaultValue));
-      }
-    }, [isDev, defaultValue]);
+    if (error && displayError) {
+      valid = false;
+      message = 'Something went wrong while loading.';
+    }
 
     B.defineFunction('Clear', () => {
-      setCurrentValue(multiple ? [] : null);
-      setSearchParam('');
+      setValue(multiple ? [] : '');
+      setInputValue('');
+      setDebouncedInputValue('');
     });
+
     B.defineFunction('Refetch', () => refetch());
 
     /**
@@ -303,11 +370,21 @@
     B.defineFunction(
       'Filter',
       ({ event, property: propertyArg, interactionId }) => {
+        let eventValue;
+
+        if (event.target) {
+          eventValue = event.target.value;
+        } else if (event instanceof Date) {
+          eventValue = value.toISOString();
+        } else {
+          eventValue = event;
+        }
+
         setInteractionFilter({
           ...interactionFilter,
           [interactionId]: {
             property: propertyArg,
-            value: event.target ? event.target.value : transformValue(event),
+            value: eventValue,
           },
         });
       },
@@ -317,232 +394,221 @@
       setInteractionFilter({});
     });
 
-    useEffect(() => {
-      const handler = setTimeout(() => {
-        setDebouncedSearchParam(searchParam);
-      }, 1000);
-      return () => {
-        clearTimeout(handler);
-      };
-    }, [searchParam]);
+    /*
+     * Show a TextField in design time
+     */
+    if (isDev || !valid) {
+      let designTimeValue;
 
-    const onChange = newValue => {
-      if (!valueProp || !newValue) {
-        setCurrentValue(newValue || '');
-        setCurrentLabel(newValue || '');
-        return;
+      if (!valid) {
+        designTimeValue = message;
       }
 
-      const isPropDefined = newValue[valueProp.name] !== undefined;
-      const propValue = isPropDefined ? newValue[valueProp.name] || '' : '';
-      let newCurrentValue = isPropDefined ? propValue : newValue;
-      if (typeof newValue === 'string') {
-        if (currentLabel === newValue) {
-          newCurrentValue = currentValue;
+      if (isDev) {
+        designTimeValue = defaultValue;
+      }
+
+      return (
+        <div className={classes.root}>
+          <TextField
+            InputProps={{
+              inputProps: {
+                tabIndex: isDev ? -1 : undefined,
+              },
+              endAdornment: <>{!freeSolo && <ExpandMore />}</>,
+              startAdornment: (
+                <>
+                  {multiple ? (
+                    <>
+                      <Chip label="Chip 1" onDelete={() => {}} />
+                      <Chip label="Chip 2" onDelete={() => {}} />
+                    </>
+                  ) : null}
+                </>
+              ),
+            }}
+            classes={{ root: classes.formControl }}
+            dataComponent={dataComponentAttribute}
+            disabled={disabled || !valid}
+            error={showError}
+            fullWidth={fullWidth}
+            helperText={helperText}
+            label={!hideLabel && label}
+            margin={margin}
+            placeholder={placeholder}
+            required={required && !value}
+            size={size}
+            value={multiple ? '' : designTimeValue}
+            variant={variant}
+          />
+        </div>
+      );
+    }
+
+    /*
+     * Convert `value` state into something the `value` prop of the `Autocomplete` component will accept with the right settings
+     */
+    const getValue = () => {
+      if (!results) {
+        return multiple ? [] : null;
+      }
+
+      if (optionType === 'model') {
+        // If freeSolo is turned on the value and options are strings instead of objects
+        if (freeSolo) {
+          return value;
         }
-      } else if (searchProp) {
-        const newLabelValue = newValue[searchProp.name];
-        setCurrentLabel(newLabelValue || '');
+
+        if (multiple) {
+          return value.map(x =>
+            results.find(result => {
+              if (typeof x === 'string') {
+                return result[valueProp.name] === x;
+              }
+
+              return result[valueProp.name] === x[valueProp.name];
+            }),
+          );
+        }
+
+        return results.find(result => {
+          if (typeof value === 'string') {
+            return result[valueProp.name] === value;
+          }
+
+          return result[valueProp.name] === value[valueProp.name];
+        });
+      }
+
+      return value;
+    };
+
+    /*
+     * Convert `Autocomplete` `value` into a value the hidden input accepts (a string)
+     */
+    const getHiddenValue = currentValue => {
+      if (!currentValue) {
+        return '';
+      }
+
+      if (typeof currentValue === 'string') {
+        return currentValue;
       }
 
       if (multiple) {
-        newCurrentValue = newValue.map(rec => rec[valueProp.name] || rec);
+        return currentValue
+          .map(x => (typeof x === 'string' ? x : x[valueProp.name]))
+          .join(',');
       }
 
-      setCurrentValue(newCurrentValue);
+      return currentValue[valueProp.name];
     };
 
-    const record = React.useMemo(() => {
-      if (!currentValue || !results) {
-        return multiple ? [] : null;
-      }
-      let currentRecordsKeys = currentValue;
-      if (!Array.isArray(currentValue)) {
-        currentRecordsKeys = multiple
-          ? currentValue.toString().split(',')
-          : [currentValue];
+    /*
+     * Prepare a list of options that can be passed to the `Autocomplete` `options` prop.
+     *
+     * The hidden input is used when `optionType` is set to `model`. Then the `valueProperty` options is used to determine what is send to the backend when a from is submitted.
+     */
+    const getOptions = () => {
+      if (optionType === 'property') {
+        return propertyValues.map(propertyValue => propertyValue.value);
       }
 
-      const currentRecords = currentRecordsKeys.reduce((acc, cr) => {
-        const result = results.find(
-          res =>
-            res[valueProp.name] === cr || res[valueProp.name].toString() === cr,
-        );
-
-        if (result) {
-          acc.push(result);
-        } else if (multiple && freeSolo) {
-          acc.push(cr);
+      if (optionType === 'model') {
+        if (!results) {
+          return [];
         }
-        return acc;
-      }, []);
 
-      const singleRecord = currentRecords[0] ? { ...currentRecords[0] } : null;
+        // If freeSolo is turned on the value and options are strings instead of objects
+        if (freeSolo) {
+          return results.map(result => result[valueProp.name]);
+        }
 
-      return multiple ? currentRecords : singleRecord;
-    }, [currentValue, results]);
-
-    useEffect(() => {
-      if (!multiple) {
-        setCurrentLabel(
-          (record && searchProp && record[searchProp.name]) || '',
-        );
+        return results;
       }
-    }, [record]);
+
+      return [];
+    };
+
+    const currentValue = getValue();
 
     const renderLabel = option => {
       const optionLabel = option[searchProp.name];
-      const isEmptyLabel =
-        optionLabel !== undefined &&
-        (optionLabel === '' || optionLabel === null);
-      return isEmptyLabel
+
+      return optionLabel === '' || optionLabel === null
         ? '-- empty --'
-        : (optionLabel && optionLabel.toString()) || option;
+        : optionLabel;
     };
 
-    const renderOption = (option, { selected }) => (
-      <>
-        <Checkbox
-          classes={{ root: classes.checkbox }}
-          icon={<CheckBoxOutlineBlank fontSize="small" />}
-          checkedIcon={<CheckBox fontSize="small" />}
-          style={{ marginRight: 8 }}
-          checked={selected}
-        />
-        {renderLabel(option)}
-      </>
-    );
-    if (isDev) {
-      return (
-        <div className={classes.root}>
-          <TextField
-            {...textFieldProps}
-            value={multiple ? '' : currentValue}
-            InputProps={inputProps}
-          />
-        </div>
-      );
-    }
-
-    if (kind === 'list' || kind === 'LIST') {
-      const onPropertyListChange = newValue => {
-        setCurrentValue(newValue);
-      };
-
-      const selectValues =
-        listValues
-          .map(({ value }) => value)
-          .filter(e => e.startsWith(searchParam)) || [];
-
-      return (
-        <Autocomplete
-          id="combo-box-demo"
-          disabled={disabled}
-          options={selectValues}
-          value={currentValue}
-          onInputChange={(_, inputValue) => {
-            setSearchParam(inputValue);
-          }}
-          onChange={(_, value) => {
-            onPropertyListChange(value);
-          }}
-          getOptionLabel={option => option}
-          renderInput={params => (
-            <TextField
-              {...params}
-              {...textFieldProps}
-              name={nameAttributeValue || customModelAttributeName}
-              key={currentValue ? 'hasValue' : 'isEmpty'}
-              required={required && !currentValue}
-              InputProps={{
-                ...params.InputProps,
-                endAdornment: params.InputProps.endAdornment,
-              }}
-            />
-          )}
-        />
-      );
-    }
-
-    if (!model) {
-      return (
-        <div className={classes.root}>
-          <TextField
-            {...textFieldProps}
-            value={multiple ? '' : currentValue}
-            InputProps={inputProps}
-          />
-        </div>
-      );
-    }
-
-    if (err && displayError) return <span>{err.message}</span>;
-    if (!results || hasNoProp) {
-      return (
-        <TextField
-          {...textFieldProps}
-          defaultValue={reason}
-          disabled
-          InputProps={{
-            endAdornment: <CircularProgress color="inherit" size={20} />,
-          }}
-        />
-      );
-    }
-
-    let currentInputValue = searchParam;
-    if (!searchParam && record) {
-      currentInputValue = currentLabel;
-    }
-    if (!currentInputValue) {
-      currentInputValue = '';
-    }
-
     return (
-      <ModelProvider value={record} id={model}>
+      <ModelProvider value={currentValue} id={model}>
         <InteractionScope model={model}>
           {ctx => {
             changeContext.current = ctx;
 
             return (
               <Autocomplete
-                disabled={disabled}
-                multiple={multiple}
-                freeSolo={freeSolo}
-                options={results}
-                value={record}
-                inputValue={currentInputValue}
-                getOptionLabel={renderLabel}
-                getOptionSelected={(option, value) =>
-                  value.id !== undefined &&
-                  option.id !== undefined &&
-                  value.id === option.id
-                }
-                onInputChange={(event, inputValue) => {
-                  if (event) {
-                    setSearchParam(inputValue);
-                  }
-                }}
-                onChange={(_, value) => {
-                  onChange(value);
-                }}
                 autoSelect={freeSolo}
                 disableCloseOnSelect={!closeOnSelect}
-                renderOption={renderCheckboxes && renderOption}
+                disabled={disabled}
+                freeSolo={freeSolo}
+                {...(optionType === 'model' &&
+                  // If freeSolo is turned on the value and options are strings instead of objects
+                  !freeSolo && {
+                    getOptionLabel: renderLabel,
+                  })}
+                inputValue={inputValue}
+                loading={loading}
+                multiple={multiple}
+                onChange={(_, newValue) => {
+                  setValue(newValue || (multiple ? [] : ''));
+
+                  let triggerEventValue;
+
+                  if (multiple) {
+                    setDebouncedInputValue('');
+
+                    if (freeSolo) {
+                      triggerEventValue =
+                        newValue.length === 0 ? '' : newValue.join(',');
+                    } else {
+                      triggerEventValue =
+                        newValue.length === 0
+                          ? ''
+                          : newValue.map(x => x[valueProp.name]).join(',');
+                    }
+                  } else if (freeSolo) {
+                    triggerEventValue = newValue || '';
+                  } else {
+                    triggerEventValue = newValue
+                      ? newValue[valueProp.name]
+                      : '';
+                  }
+
+                  B.triggerEvent(
+                    'onChange',
+                    triggerEventValue,
+                    changeContext.current,
+                  );
+                }}
+                onInputChange={(event, newValue) => {
+                  if (event) {
+                    setInputValue(newValue);
+                  }
+                }}
+                options={getOptions()}
                 renderInput={params => (
                   <>
-                    <input
-                      type="hidden"
-                      key={currentValue ? 'hasValue' : 'isEmpty'}
-                      name={nameAttributeValue || customModelAttributeName}
-                      value={currentValue}
-                    />
+                    {optionType === 'model' && (
+                      <input
+                        type="hidden"
+                        key={value[valueProp.name] ? 'hasValue' : 'isEmpty'}
+                        name={nameAttribute || name}
+                        value={getHiddenValue(currentValue)}
+                      />
+                    )}
                     <TextField
                       {...params}
-                      {...textFieldProps}
-                      required={
-                        required && (!currentValue || currentValue.length === 0)
-                      }
                       InputProps={{
                         ...params.InputProps,
                         endAdornment: (
@@ -554,9 +620,39 @@
                           </>
                         ),
                       }}
+                      classes={{ root: classes.formControl }}
+                      data-component={dataComponentAttribute}
+                      disabled={disabled}
+                      error={showError}
+                      fullWidth={fullWidth}
+                      helperText={helperText}
+                      label={!hideLabel && label}
+                      margin={margin}
+                      {...(optionType === 'property' && {
+                        name: nameAttribute || name,
+                      })}
+                      placeholder={placeholder}
+                      required={required && !value}
+                      size={size}
+                      variant={variant}
                     />
                   </>
                 )}
+                {...(renderCheckboxes && {
+                  renderOption: (option, { selected }) => (
+                    <>
+                      <Checkbox
+                        classes={{ root: classes.checkbox }}
+                        icon={<CheckBoxOutlineBlank fontSize="small" />}
+                        checkedIcon={<CheckBoxIcon fontSize="small" />}
+                        style={{ marginRight: 8 }}
+                        checked={selected}
+                      />
+                      {renderLabel(option)}
+                    </>
+                  ),
+                })}
+                value={currentValue}
               />
             );
           }}
@@ -565,9 +661,10 @@
     );
   })(),
   styles: B => t => {
-    const { color: colorFunc, Styling } = B;
+    const { Styling, color } = B;
     const style = new Styling(t);
-    const getOpacColor = (col, val) => colorFunc.alpha(col, val);
+    const getOpacColor = (col, val) => color.alpha(col, val);
+
     return {
       root: {
         display: ({ options: { fullWidth } }) =>
@@ -668,16 +765,6 @@
           '&.Mui-disabled': {
             pointerEvents: 'none',
             opacity: '0.7',
-          },
-          '& .MuiChip-root': {
-            color: ({ options: { textColorChip } }) => [
-              style.getColor(textColorChip),
-              '!important',
-            ],
-            backgroundColor: ({ options: { backgroundColorChip } }) => [
-              style.getColor(backgroundColorChip),
-              '!important',
-            ],
           },
         },
         '& .MuiIconButton-root': {
