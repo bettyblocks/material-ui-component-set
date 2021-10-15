@@ -54,7 +54,15 @@
       variant,
     } = options;
 
-    // TODO: comment on every part of this component
+    /*
+     * To understand this component it is important to know what the following options are used for:
+     *
+     * customModelAttribute: To label how the data will be send to an action when a form is submitted. Also to get the default value when used in an update form.
+     * freeSolo: Allows any value to be submitted from the Autocomplete. Normally only values rendered as options in the dropdown can be selected and submitted.
+     * multiple: Allows multiple values to be selected. Will be send to the backend as a string with comma separated values
+     * optionType: Is one of two values: `property` or `model`. When the value is `property` we're working with a list property to show a list of selectable values, otherwise we're working with a model.
+     *
+     */
 
     const isDev = env === 'dev';
     const displayError = errorType === 'built-in';
@@ -91,8 +99,23 @@
       }
     }
 
+    /*
+     * Selected value of the autocomplete.
+     *
+     * It is an object or and array of objects (in case of multiple). The object being a one on one copy of the result of the request.
+     * In case of freeSolo the type is string or and array of strings.
+     *
+     */
     const [value, setValue] = useState(initalValue);
+
+    /*
+     * User input in the autocomplete. In case of freeSolo this is the same as `value`
+     */
     const [inputValue, setInputValue] = useState(multiple ? '' : defaultValue);
+
+    /*
+     * Debounced user input to only send a request every 250ms
+     */
     const [debouncedInputValue, setDebouncedInputValue] = useState(
       multiple ? '' : defaultValue,
     );
@@ -109,6 +132,9 @@
     let valid = false;
     let message = '';
 
+    /*
+     * We do some validations that checks if all required options are set. We do this in one place to prevent clutter further on
+     */
     switch (optionType) {
       case 'model': {
         if (!model) {
@@ -174,31 +200,24 @@
     // We need to do this, because options.filter is not immutable
     const customFilter = { ...filter };
 
+    /*
+     * We extend the option filter with the value of the `value` state and the value of the `inputValue` state.
+     *
+     * Those values always need to be returned in the results of the request
+     */
     /* eslint-disable no-underscore-dangle */
     if (multiple && value.length > 0) {
-      if (customFilter._or) {
-        customFilter._or = [
-          ...customFilter._or,
-          ...value.map(x => ({
-            [searchProp.name]: {
-              regex: typeof x === 'string' ? x : x[searchProp.name],
-            },
-          })),
-          ...(debouncedInputValue && {
-            [searchProp.name]: {
-              regex: debouncedInputValue,
-            },
-          }),
-        ];
+      if (!customFilter._or) {
+        customFilter._or = [];
       }
 
-      customFilter._or = [
-        ...value.map(x => ({
+      value.forEach(x => {
+        customFilter._or.push({
           [searchProp.name]: {
             regex: typeof x === 'string' ? x : x[searchProp.name],
           },
-        })),
-      ];
+        });
+      });
 
       if (debouncedInputValue) {
         customFilter._or.push({
@@ -214,6 +233,9 @@
       };
     }
 
+    /*
+     * Build up order object to pass to request
+     */
     const idOrPath = typeof orderBy.id !== 'undefined' ? orderBy.id : orderBy;
     const orderByPath = typeof idOrPath === 'string' ? [idOrPath] : idOrPath;
 
@@ -278,6 +300,9 @@
 
     B.defineFunction('Refetch', () => refetch());
 
+    /*
+     * Show a TextField in design time
+     */
     if (isDev || !valid) {
       let designTimeValue;
 
@@ -326,6 +351,9 @@
       );
     }
 
+    /*
+     * Convert `value` state into something the `value` prop of the `Autocomplete` component will accept with the right settings
+     */
     const getValue = () => {
       if (!results) {
         return multiple ? [] : null;
@@ -361,6 +389,9 @@
       return value;
     };
 
+    /*
+     * Convert `Autocomplete` `value` into a value the hidden input accepts (a string)
+     */
     const getHiddenValue = currentValue => {
       if (!currentValue) {
         return '';
@@ -379,6 +410,11 @@
       return currentValue[valueProp.name];
     };
 
+    /*
+     * Prepare a list of options that can be passed to the `Autocomplete` `options` prop.
+     *
+     * The hidden input is used when `optionType` is set to `model`. Then the `valueProperty` options is used to determine what is send to the backend when a from is submitted.
+     */
     const getOptions = () => {
       if (optionType === 'property') {
         return propertyValues.map(propertyValue => propertyValue.value);
