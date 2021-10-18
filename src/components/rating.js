@@ -34,6 +34,13 @@
     } = customModelAttributeObj;
     const labelText = useText(label);
 
+    const [currentValue, setCurrentValue] = useState(useText(defaultValue));
+
+    const value = useText(defaultValue);
+    useEffect(() => {
+      setCurrentValue(value);
+    }, [value]);
+
     const customModelAttribute = getCustomModelAttribute(
       customModelAttributeId,
     );
@@ -41,8 +48,6 @@
     const [errorState, setErrorState] = useState(error);
     const [helper, setHelper] = useState(useText(helperText));
     const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
-    const [currentValue, setCurrentValue] = useState(useText(defaultValue));
-    const value = currentValue;
 
     const IconComponent = React.createElement(Icons[icon], {
       className: classes.ratingIcon,
@@ -53,14 +58,14 @@
     const nameAttributeValue = useText(nameAttribute);
 
     const handleValidation = () => {
-      const hasError = required && !value;
+      const hasError = required && !currentValue;
       setErrorState(hasError);
       const message = useText(hasError ? validationValueMissing : helperText);
       setHelper(message);
     };
 
     const validationHandler = () => {
-      const hasError = required && !value;
+      const hasError = required && !currentValue;
       setAfterFirstInvalidation(hasError);
       handleValidation();
     };
@@ -100,8 +105,7 @@
           <Rating
             className={classes.ratingIcon}
             name={nameAttributeValue || customModelAttributeName}
-            value={useText(defaultValue)}
-            defaultValue={useText(defaultValue)}
+            value={currentValue}
             precision={precision}
             size={size === 'custom' ? customSize : size}
             onChange={handleChange}
@@ -123,7 +127,7 @@
             type="text"
             tabIndex="-1"
             required={required}
-            value={value}
+            value={currentValue}
           />
         </FormControl>
       </div>
