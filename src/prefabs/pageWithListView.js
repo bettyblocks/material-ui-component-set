@@ -41,7 +41,9 @@
     const enrichVarObj = obj => {
       const returnObject = obj;
       if (data && data.model) {
-        const property = data.model.properties.find(prop => prop.id === obj.id);
+        const property = data.model.properties.find(
+          prop => prop.id === obj.id[0],
+        );
         if (property) {
           returnObject.name = `{{ ${data.model.name}.${property.name} }}`;
         }
