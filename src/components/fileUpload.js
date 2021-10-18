@@ -142,12 +142,7 @@
     };
 
     const UploadComponent = () => (
-      <div
-        className={[classes.control, fullWidth ? classes.fullwidth : ''].join(
-          ' ',
-        )}
-        data-component={useText(dataComponentAttribute) || 'FileUpload'}
-      >
+      <div data-component={useText(dataComponentAttribute) || 'FileUpload'}>
         <input
           accept={acceptedValue}
           className={classes.input}
@@ -425,10 +420,6 @@
       },
       input: {
         display: 'none',
-      },
-      control: {
-        display: 'inline-flex',
-        alignItems: 'center',
       },
       fullwidth: {
         display: 'flex',
