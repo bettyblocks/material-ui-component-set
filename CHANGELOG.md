@@ -1,3 +1,10 @@
+# [1.176.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.175.4...v1.176.0) (2021-10-18)
+
+
+### Features
+
+* separate button from file input to enable style editor ([d5fe6ee](https://github.com/bettyblocks/material-ui-component-set/commit/d5fe6eed32d14e4b2905adb23c46c588957baf05))
+
 ## [1.175.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.175.3...v1.175.4) (2021-10-13)
 
 
