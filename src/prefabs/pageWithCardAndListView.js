@@ -6425,19 +6425,19 @@
                                         style: {
                                           overwrite: {
                                             backgroundColor: {
-                                              type: 'THEME_COLOR',
-                                              value: 'primary',
+                                              type: 'STATIC',
+                                              value: 'transparent',
                                             },
                                             boxShadow: 'none',
                                             color: {
                                               type: 'THEME_COLOR',
-                                              value: 'white',
+                                              value: 'primary',
                                             },
                                             fontFamily: 'Roboto',
                                             fontSize: '0.875rem',
                                             fontStyle: 'none',
                                             fontWeight: '400',
-                                            padding: ['0.6875rem', '1.375rem'],
+                                            padding: ['0.6875rem', '0.6875rem'],
                                             textDecoration: 'none',
                                             textTransform: 'none',
                                           },
@@ -6472,7 +6472,7 @@
                                             configuration: iconConfiguration,
                                           },
                                           {
-                                            value: 'small',
+                                            value: 'medium',
                                             label: 'Icon Size',
                                             key: 'size',
                                             type: 'CUSTOM',
@@ -10450,13 +10450,13 @@
                                                     style: {
                                                       overwrite: {
                                                         backgroundColor: {
-                                                          type: 'THEME_COLOR',
-                                                          value: 'primary',
+                                                          type: 'STATIC',
+                                                          value: 'transparent',
                                                         },
                                                         boxShadow: 'none',
                                                         color: {
                                                           type: 'THEME_COLOR',
-                                                          value: 'white',
+                                                          value: 'primary',
                                                         },
                                                         fontFamily: 'Roboto',
                                                         fontSize: '0.875rem',
@@ -10464,7 +10464,7 @@
                                                         fontWeight: '400',
                                                         padding: [
                                                           '0.6875rem',
-                                                          '1.375rem',
+                                                          '0.6875rem',
                                                         ],
                                                         textDecoration: 'none',
                                                         textTransform: 'none',
@@ -10501,7 +10501,7 @@
                                                         configuration: iconConfiguration,
                                                       },
                                                       {
-                                                        value: 'small',
+                                                        value: 'medium',
                                                         label: 'Icon size',
                                                         key: 'size',
                                                         type: 'CUSTOM',
