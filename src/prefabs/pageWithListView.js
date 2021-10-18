@@ -6457,7 +6457,7 @@
                   background={
                     imageProperty.id
                       ? '#F0F1F5'
-                      : 'url(https://material-ui.com/static/images/cards/contemplative-reptile.jpg)'
+                      : 'url(https://assets.bettyblocks.com/771d40f1fc49403e824cdca2fe025aeb_assets/files/contemplative_lizard)'
                   }
                   width="110px"
                   justify="center"
