@@ -1,3 +1,17 @@
+## [1.175.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.175.3...v1.175.4) (2021-10-13)
+
+
+### Bug Fixes
+
+* fixes integer static options ([989d8c4](https://github.com/bettyblocks/material-ui-component-set/commit/989d8c49d6daa3b148026eff5dcad106841b212f))
+
+## [1.175.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.175.2...v1.175.3) (2021-10-13)
+
+
+### Bug Fixes
+
+* renamed header of before create 400 page template TMPLT 919 ([498ed21](https://github.com/bettyblocks/material-ui-component-set/commit/498ed21d1e85a4a479b70912e7230447746d2fdf))
+
 ## [1.175.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.175.1...v1.175.2) (2021-10-11)
 
 
