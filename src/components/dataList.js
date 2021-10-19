@@ -9,7 +9,6 @@
         const {
           env,
           getProperty,
-          GetMe,
           InteractionScope,
           ModelProvider,
           useAllQuery,

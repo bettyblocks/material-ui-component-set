@@ -8,7 +8,6 @@
       Children,
       env,
       getProperty,
-      GetMe,
       InteractionScope,
       ModelProvider,
       useAllQuery,
