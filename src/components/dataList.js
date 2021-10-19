@@ -26,7 +26,6 @@
           filter,
           type,
           model,
-          authProfile,
           showError,
           hideSearch,
           searchProperty,
@@ -343,8 +342,8 @@
           B.triggerEvent('OnItemClick', event, context);
         };
 
-        const Looper = results => {
-          const rows = results.map(item => (
+        const Looper = results =>
+          results.map(item => (
             <ModelProvider key={item.id} value={item} id={model}>
               <InteractionScope model={model}>
                 {context => (
@@ -359,13 +358,6 @@
               </InteractionScope>
             </ModelProvider>
           ));
-
-          if (authProfile) {
-            return <GetMe authenticationProfileId={authProfile}>{rows}</GetMe>;
-          }
-
-          return rows;
-        };
 
         const canvasLayout = () => {
           if (!model) {

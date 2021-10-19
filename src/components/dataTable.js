@@ -35,7 +35,6 @@
       placeholderTake,
       size,
       model,
-      authProfile,
       filter,
       searchProperty,
       hideSearch,
@@ -437,7 +436,7 @@
         ));
       }
 
-      const rows = results.map(value => (
+      return results.map(value => (
         <ModelProvider value={value} id={model}>
           <InteractionScope model={model}>
             {context => (
@@ -458,12 +457,6 @@
           </InteractionScope>
         </ModelProvider>
       ));
-
-      if (authProfile) {
-        return <GetMe authenticationProfileId={authProfile}>{rows}</GetMe>;
-      }
-
-      return rows;
     };
 
     const renderTableContent = () => {
