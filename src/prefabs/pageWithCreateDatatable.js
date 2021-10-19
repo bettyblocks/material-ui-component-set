@@ -3295,12 +3295,6 @@
                     type: 'TOGGLE',
                   },
                   {
-                    value: '',
-                    label: 'Authentication Profile',
-                    key: 'authProfile',
-                    type: 'AUTHENTICATION_PROFILE',
-                  },
-                  {
                     type: 'VARIABLE',
                     label: 'Title',
                     key: 'title',
