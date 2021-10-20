@@ -20,6 +20,12 @@
           type: 'TOGGLE',
         },
         {
+          label: 'Load tabs on activation',
+          key: 'loadOnActive',
+          value: false,
+          type: 'TOGGLE',
+        },
+        {
           type: 'SIZE',
           label: 'Height',
           key: 'height',
