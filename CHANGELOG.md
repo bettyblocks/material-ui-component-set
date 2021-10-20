@@ -1,3 +1,10 @@
+# [1.177.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.176.0...v1.177.0) (2021-10-19)
+
+
+### Features
+
+* remove underline from open page button ([785dc29](https://github.com/bettyblocks/material-ui-component-set/commit/785dc2961ba613fca1ff9de572245156a141c92a))
+
 # [1.176.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.175.4...v1.176.0) (2021-10-18)
 
 
