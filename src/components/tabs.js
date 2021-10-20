@@ -16,6 +16,7 @@
       showAllTabs,
       hideTabs,
       dataComponentAttribute,
+      loadOnActive,
     } = options;
 
     const orientation =
@@ -103,21 +104,42 @@
         data-component={useText(dataComponentAttribute) || 'Tabs'}
       >
         {!hideTabs && TabsHeader}
-        {React.Children.map(children, (child, index) => {
-          const { options: childOptions = {} } = child.props || {};
-          return (
-            <Children
-              index={index}
-              value={value}
-              tabData={tabData}
-              setTabData={setTabData}
-              showAllTabs={showAllTabs}
-              setSelectedTab={setSelectedTab}
-            >
-              {React.cloneElement(child, { ...childOptions })}
-            </Children>
-          );
-        })}
+        {React.Children.map(
+          children,
+          (child, index) => {
+            const { options: childOptions = {} } = child.props || {};
+            if (loadOnActive) {
+              if (isDev || showAllTabs || index === value) {
+                return (
+                  <Children
+                    index={index}
+                    value={value}
+                    tabData={tabData}
+                    setTabData={setTabData}
+                    showAllTabs={showAllTabs}
+                    setSelectedTab={setSelectedTab}
+                  >
+                    {React.cloneElement(child, { ...childOptions })}
+                  </Children>
+                );
+              }
+              return <></>;
+            }
+            return (
+              <Children
+                index={index}
+                value={value}
+                tabData={tabData}
+                setTabData={setTabData}
+                showAllTabs={showAllTabs}
+                setSelectedTab={setSelectedTab}
+              >
+                {React.cloneElement(child, { ...childOptions })}
+              </Children>
+            );
+          },
+          {},
+        )}
       </div>
     );
     return isDev ? (
