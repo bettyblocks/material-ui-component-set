@@ -68,6 +68,7 @@
 
     return (
       <ListItem
+        onClick={() => B.triggerEvent('onClick')}
         button={hasLink || linkToExternalVariable}
         href={hasExternalLink ? linkToExternalVariable : undefined}
         component={linkComponent}
