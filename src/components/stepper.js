@@ -138,7 +138,6 @@
                 {type === 'vertical' && (
                   <StepContent>
                     <Children
-                      stepLabelData={stepLabelData}
                       setStepLabelData={setStepLabelData}
                       active={isActive}
                       isFirstRender={numRendersRef.current === 1}

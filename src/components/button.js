@@ -219,7 +219,7 @@
 
     const LinkComponent =
       linkType === 'internal' ? (
-        <Link className={classes.linkComponent} {...linkProps}>
+        <Link className={classes.linkComponent} {...linkProps} underline="none">
           {ButtonContent}
         </Link>
       ) : (
