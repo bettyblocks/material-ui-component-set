@@ -3868,12 +3868,6 @@
                         type: 'TOGGLE',
                       },
                       {
-                        value: '',
-                        label: 'Authentication Profile',
-                        key: 'authProfile',
-                        type: 'AUTHENTICATION_PROFILE',
-                      },
-                      {
                         label: 'Pagination',
                         key: 'pagination',
                         value: 'always',
