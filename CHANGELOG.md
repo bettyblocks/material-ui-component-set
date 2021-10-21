@@ -1,3 +1,11 @@
+## [1.177.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.177.2...v1.177.3) (2021-10-21)
+
+
+### Bug Fixes
+
+* remove auth profile option in lists and tables ([e75f468](https://github.com/bettyblocks/material-ui-component-set/commit/e75f4683a6aebd8cf69db694123c18a2bf5471be))
+* remove unused getme helper ([b1a0ed5](https://github.com/bettyblocks/material-ui-component-set/commit/b1a0ed5d7c44b671a9eb1fb46537dc6f4d1d8b88))
+
 ## [1.177.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.177.1...v1.177.2) (2021-10-21)
 
 
