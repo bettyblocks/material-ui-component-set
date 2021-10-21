@@ -1,3 +1,10 @@
+## [1.177.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.177.1...v1.177.2) (2021-10-21)
+
+
+### Bug Fixes
+
+* put a onclick trigger on listitem ([cf15e51](https://github.com/bettyblocks/material-ui-component-set/commit/cf15e5140c9abe2ec221d49a2f5c1bb7d0188393))
+
 ## [1.177.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.177.0...v1.177.1) (2021-10-20)
 
 
