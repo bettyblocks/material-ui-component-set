@@ -473,7 +473,9 @@
           return value.map(x =>
             results.find(result => {
               if (typeof x === 'string') {
-                return result[valueProp.name] === x;
+                return typeof result[valueProp.name] === 'string'
+                  ? result[valueProp.name] === x
+                  : result[valueProp.name].toString() === x;
               }
 
               return result[valueProp.name] === x[valueProp.name];
@@ -483,7 +485,9 @@
 
         return results.find(result => {
           if (typeof value === 'string') {
-            return result[valueProp.name] === value;
+            return typeof result[valueProp.name] === 'string'
+              ? result[valueProp.name] === value
+              : result[valueProp.name].toString() === value;
           }
 
           return result[valueProp.name] === value[valueProp.name];
@@ -543,7 +547,7 @@
     const currentValue = getValue();
 
     const renderLabel = option => {
-      const optionLabel = option[searchProp.name];
+      const optionLabel = option ? option[searchProp.name] : '';
 
       return optionLabel === '' || optionLabel === null
         ? '-- empty --'
