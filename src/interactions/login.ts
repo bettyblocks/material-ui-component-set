@@ -24,6 +24,11 @@ function login({
   const { url } = redirectTo;
 
   if (isValid) {
+    const decodedToken = JSON.parse(window.atob(jwtToken.split('.')[1]));
+    if (decodedToken && decodedToken.locale) {
+      document.cookie = `BBLocale=${decodedToken.locale}`;
+    }
+
     localStorage.setItem('TOKEN', jwtToken);
     localStorage.setItem('REFRESH_TOKEN', refreshToken);
     history.push(url);
