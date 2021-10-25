@@ -1,3 +1,39 @@
+## [1.177.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.177.2...v1.177.3) (2021-10-21)
+
+
+### Bug Fixes
+
+* remove auth profile option in lists and tables ([e75f468](https://github.com/bettyblocks/material-ui-component-set/commit/e75f4683a6aebd8cf69db694123c18a2bf5471be))
+* remove unused getme helper ([b1a0ed5](https://github.com/bettyblocks/material-ui-component-set/commit/b1a0ed5d7c44b671a9eb1fb46537dc6f4d1d8b88))
+
+## [1.177.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.177.1...v1.177.2) (2021-10-21)
+
+
+### Bug Fixes
+
+* put a onclick trigger on listitem ([cf15e51](https://github.com/bettyblocks/material-ui-component-set/commit/cf15e5140c9abe2ec221d49a2f5c1bb7d0188393))
+
+## [1.177.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.177.0...v1.177.1) (2021-10-20)
+
+
+### Bug Fixes
+
+* stepper name not being updated on first render ([fa0c83d](https://github.com/bettyblocks/material-ui-component-set/commit/fa0c83dd0189d0362a13a774fe8f19773779cb10))
+
+# [1.177.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.176.0...v1.177.0) (2021-10-19)
+
+
+### Features
+
+* remove underline from open page button ([785dc29](https://github.com/bettyblocks/material-ui-component-set/commit/785dc2961ba613fca1ff9de572245156a141c92a))
+
+# [1.176.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.175.4...v1.176.0) (2021-10-18)
+
+
+### Features
+
+* separate button from file input to enable style editor ([d5fe6ee](https://github.com/bettyblocks/material-ui-component-set/commit/d5fe6eed32d14e4b2905adb23c46c588957baf05))
+
 ## [1.175.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.175.3...v1.175.4) (2021-10-13)
 
 

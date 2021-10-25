@@ -5610,12 +5610,6 @@
                                 type: 'TOGGLE',
                               },
                               {
-                                value: '',
-                                label: 'Authentication Profile',
-                                key: 'authProfile',
-                                type: 'AUTHENTICATION_PROFILE',
-                              },
-                              {
                                 label: 'Pagination',
                                 key: 'pagination',
                                 value: 'always',
@@ -7585,12 +7579,6 @@
                                 label: 'Hide built-in search field',
                                 key: 'hideSearch',
                                 type: 'TOGGLE',
-                              },
-                              {
-                                value: '',
-                                label: 'Authentication Profile',
-                                key: 'authProfile',
-                                type: 'AUTHENTICATION_PROFILE',
                               },
                               {
                                 label: 'Pagination',
