@@ -4660,13 +4660,13 @@
                                 },
                               },
                               {
-                                value: ['0rem', '0rem', '0rem', '0rem'],
+                                value: ['XL', '0rem', '0rem', '0rem'],
                                 label: 'Outer space',
                                 key: 'outerSpacing',
                                 type: 'SIZES',
                               },
                               {
-                                value: ['0rem', '0rem', '0rem', '0rem'],
+                                value: ['XL', '0rem', '0rem', '0rem'],
                                 label: 'Inner space',
                                 key: 'innerSpacing',
                                 type: 'SIZES',

@@ -5548,7 +5548,7 @@
                                 type: 'COLOR',
                                 label: 'Background',
                                 key: 'background',
-                                value: 'Transparent',
+                                value: 'White',
                               },
                               {
                                 type: 'COLOR',
