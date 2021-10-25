@@ -6704,9 +6704,9 @@
                                                         style: {
                                                           overwrite: {
                                                             backgroundColor: {
-                                                              type: 'STATIC',
-                                                              value:
-                                                                'transparent',
+                                                              type:
+                                                                'THEME_COLOR',
+                                                              value: 'white',
                                                             },
                                                             borderColor: {
                                                               type:
@@ -7050,9 +7050,9 @@
                                                         style: {
                                                           overwrite: {
                                                             backgroundColor: {
-                                                              type: 'STATIC',
-                                                              value:
-                                                                'transparent',
+                                                              type:
+                                                                'THEME_COLOR',
+                                                              value: 'white',
                                                             },
                                                             borderColor: {
                                                               type:
