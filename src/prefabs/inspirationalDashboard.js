@@ -334,13 +334,15 @@
                 {
                   label: 'Title',
                   key: 'title',
-                  value: ['App Bar'],
+                  value: [''],
                   type: 'VARIABLE',
                 },
                 {
                   label: 'Logo',
                   key: 'logoSource',
-                  value: [],
+                  value: [
+                    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Your_Logo_-_W.svg',
+                  ],
                   type: 'VARIABLE',
                 },
                 {
@@ -37218,7 +37220,7 @@
                                                 {
                                                   label: 'Icon',
                                                   key: 'icon',
-                                                  value: 'Add',
+                                                  value: 'None',
                                                   type: 'CUSTOM',
                                                   configuration: {
                                                     as: 'DROPDOWN',
