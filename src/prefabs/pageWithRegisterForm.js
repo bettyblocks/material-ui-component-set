@@ -3280,31 +3280,6 @@
                                 descendants: [
                                   {
                                     name: 'Button',
-                                    style: {
-                                      overwrite: {
-                                        backgroundColor: {
-                                          type: 'STATIC',
-                                          value: 'transparent',
-                                        },
-                                        boxShadow: 'none',
-                                        color: {
-                                          type: 'THEME_COLOR',
-                                          value: 'dark',
-                                        },
-                                        fontFamily: 'Roboto',
-                                        fontSize: '0.875rem',
-                                        fontStyle: 'none',
-                                        fontWeight: '500',
-                                        padding: [
-                                          '0.6875rem',
-                                          '1.375rem',
-                                          '0.6875rem',
-                                          '0rem',
-                                        ],
-                                        textDecoration: 'none',
-                                        textTransform: 'none',
-                                      },
-                                    },
                                     options: [
                                       {
                                         label: 'Toggle visibility',
@@ -4343,26 +4318,6 @@
                                         name: 'Button',
                                         ref: {
                                           id: '#registerBtn',
-                                        },
-                                        style: {
-                                          overwrite: {
-                                            backgroundColor: {
-                                              type: 'THEME_COLOR',
-                                              value: 'primary',
-                                            },
-                                            boxShadow: 'none',
-                                            color: {
-                                              type: 'THEME_COLOR',
-                                              value: 'white',
-                                            },
-                                            fontFamily: 'Roboto',
-                                            fontSize: '0.875rem',
-                                            fontStyle: 'none',
-                                            fontWeight: '400',
-                                            padding: ['0.6875rem', '1.375rem'],
-                                            textDecoration: 'none',
-                                            textTransform: 'none',
-                                          },
                                         },
                                         options: [
                                           {

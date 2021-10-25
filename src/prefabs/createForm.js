@@ -13747,26 +13747,6 @@
               ref: {
                 id: '#btnId',
               },
-              style: {
-                overwrite: {
-                  backgroundColor: {
-                    type: 'THEME_COLOR',
-                    value: 'primary',
-                  },
-                  boxShadow: 'none',
-                  color: {
-                    type: 'THEME_COLOR',
-                    value: 'white',
-                  },
-                  fontFamily: 'Roboto',
-                  fontSize: '0.875rem',
-                  fontStyle: 'none',
-                  fontWeight: '400',
-                  padding: ['0.6875rem', '1.375rem'],
-                  textDecoration: 'none',
-                  textTransform: 'none',
-                },
-              },
               options: [
                 {
                   label: 'Toggle visibility',
@@ -15113,7 +15093,7 @@
                   },
                 },
                 {
-                  value: ['0rem', '0rem', '0rem', '0rem'],
+                  value: ['0rem', 'M', '0rem', '0rem'],
                   label: 'Outer space',
                   key: 'outerSpacing',
                   type: 'SIZES',
