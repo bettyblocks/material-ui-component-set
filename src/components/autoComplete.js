@@ -95,7 +95,10 @@
       if (defaultValue.trim() === '') {
         initalValue = [];
       } else {
-        initalValue = defaultValue.trim().split(',');
+        initalValue = defaultValue
+          .trim()
+          .split(',')
+          .map(x => x.trim());
       }
     }
 
@@ -470,17 +473,19 @@
         }
 
         if (multiple) {
-          return value.map(x =>
-            results.find(result => {
-              if (typeof x === 'string') {
-                return typeof result[valueProp.name] === 'string'
-                  ? result[valueProp.name] === x
-                  : result[valueProp.name].toString() === x;
-              }
+          return value
+            .map(x =>
+              results.find(result => {
+                if (typeof x === 'string') {
+                  return typeof result[valueProp.name] === 'string'
+                    ? result[valueProp.name] === x
+                    : result[valueProp.name].toString() === x;
+                }
 
-              return result[valueProp.name] === x[valueProp.name];
-            }),
-          );
+                return result[valueProp.name] === x[valueProp.name];
+              }),
+            )
+            .filter(x => x !== undefined);
         }
 
         return results.find(result => {
@@ -511,6 +516,7 @@
 
       if (multiple) {
         return currentValue
+          .filter(x => x !== undefined)
           .map(x => (typeof x === 'string' ? x : x[valueProp.name]))
           .join(',');
       }
