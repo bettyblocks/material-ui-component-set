@@ -8,7 +8,7 @@
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
     const { label, icon, dataComponentAttribute } = options || {};
-    const { stepLabelData, setStepLabelData, active, isFirstRender } = parent;
+    const { setStepLabelData, active, isFirstRender } = parent;
 
     const StepContent =
       isEmpty && isDev ? <div className={classes.empty}>Step</div> : children;
@@ -29,11 +29,11 @@
 
     useEffect(() => {
       if (setStepLabelData) {
-        setStepLabelData({
-          ...stepLabelData,
+        setStepLabelData(prev => ({
+          ...prev,
           [`label${index}`]: label,
           [`icon${index}`]: icon,
-        });
+        }));
       }
     }, [setStepLabelData, index, label, icon]);
 
