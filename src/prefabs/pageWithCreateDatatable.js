@@ -1629,26 +1629,6 @@
         descendants: [
           {
             name: 'Button',
-            style: {
-              overwrite: {
-                backgroundColor: {
-                  type: 'THEME_COLOR',
-                  value: 'primary',
-                },
-                boxShadow: 'none',
-                color: {
-                  type: 'THEME_COLOR',
-                  value: 'white',
-                },
-                fontFamily: 'Roboto',
-                fontSize: '0.875rem',
-                fontStyle: 'none',
-                fontWeight: '400',
-                padding: ['0.6875rem', '1.375rem'],
-                textDecoration: 'none',
-                textTransform: 'none',
-              },
-            },
             options: [
               {
                 label: 'Toggle visibility',
@@ -1932,26 +1912,6 @@
           },
           {
             name: 'Button',
-            style: {
-              overwrite: {
-                backgroundColor: {
-                  type: 'THEME_COLOR',
-                  value: 'primary',
-                },
-                boxShadow: 'none',
-                color: {
-                  type: 'THEME_COLOR',
-                  value: 'white',
-                },
-                fontFamily: 'Roboto',
-                fontSize: '0.875rem',
-                fontStyle: 'none',
-                fontWeight: '400',
-                padding: ['0.6875rem', '1.375rem'],
-                textDecoration: 'none',
-                textTransform: 'none',
-              },
-            },
             options: [
               {
                 label: 'Toggle visibility',
@@ -2876,26 +2836,6 @@
                     name: 'Button',
                     ref: {
                       id: '#openCreateDialogBtn',
-                    },
-                    style: {
-                      overwrite: {
-                        backgroundColor: {
-                          type: 'THEME_COLOR',
-                          value: 'primary',
-                        },
-                        boxShadow: 'none',
-                        color: {
-                          type: 'THEME_COLOR',
-                          value: 'white',
-                        },
-                        fontFamily: 'Roboto',
-                        fontSize: '0.875rem',
-                        fontStyle: 'none',
-                        fontWeight: '400',
-                        padding: ['0.6875rem', '1.375rem'],
-                        textDecoration: 'none',
-                        textTransform: 'none',
-                      },
                     },
                     options: [
                       {
@@ -4637,51 +4577,11 @@
                                     descendants: [],
                                   },
                                   {
-                                    name: 'Button',
+                                    name: 'Icon',
                                     ref: {
                                       id: '#closeDialogBtn',
                                     },
-                                    style: {
-                                      overwrite: {
-                                        backgroundColor: {
-                                          type: 'STATIC',
-                                          value: 'transparent',
-                                        },
-                                        boxShadow: 'none',
-                                        color: {
-                                          type: 'THEME_COLOR',
-                                          value: 'light',
-                                        },
-                                        padding: [
-                                          '0rem',
-                                          '0.6875rem',
-                                          '0.6875rem',
-                                          '0.6875rem',
-                                        ],
-                                      },
-                                    },
                                     options: [
-                                      {
-                                        label: 'Toggle visibility',
-                                        key: 'visible',
-                                        value: true,
-                                        type: 'TOGGLE',
-                                        configuration: {
-                                          as: 'VISIBILITY',
-                                        },
-                                      },
-                                      {
-                                        type: 'VARIABLE',
-                                        label: 'Button text',
-                                        key: 'buttonText',
-                                        value: [''],
-                                      },
-                                      {
-                                        value: false,
-                                        label: 'Full width',
-                                        key: 'fullWidth',
-                                        type: 'TOGGLE',
-                                      },
                                       {
                                         label: 'Icon',
                                         key: 'icon',
@@ -4690,74 +4590,88 @@
                                         configuration: iconConfiguration,
                                       },
                                       {
-                                        value: 'medium',
-                                        label: 'Icon size',
+                                        value: 'S',
+                                        label: 'Size',
                                         key: 'size',
+                                        type: 'SIZE',
+                                      },
+                                      {
+                                        type: 'COLOR',
+                                        label: 'Color',
+                                        key: 'color',
+                                        value: 'Accent1',
+                                      },
+                                      {
                                         type: 'CUSTOM',
+                                        label: 'Link to',
+                                        key: 'linkType',
+                                        value: 'internal',
                                         configuration: {
                                           as: 'BUTTONGROUP',
                                           dataType: 'string',
                                           allowedInput: [
-                                            { name: 'Small', value: 'small' },
-                                            { name: 'Medium', value: 'medium' },
-                                            { name: 'Large', value: 'large' },
+                                            {
+                                              name: 'Internal page',
+                                              value: 'internal',
+                                            },
+                                            {
+                                              name: 'External page',
+                                              value: 'external',
+                                            },
                                           ],
-                                          condition: {
-                                            type: 'HIDE',
-                                            option: 'icon',
-                                            comparator: 'EQ',
-                                            value: 'None',
-                                          },
                                         },
                                       },
                                       {
-                                        type: 'CUSTOM',
-                                        label: 'Icon position',
-                                        key: 'iconPosition',
-                                        value: 'start',
+                                        value: '',
+                                        label: 'Page',
+                                        key: 'linkTo',
+                                        type: 'ENDPOINT',
                                         configuration: {
-                                          as: 'BUTTONGROUP',
-                                          dataType: 'string',
-                                          allowedInput: [
-                                            { name: 'Start', value: 'start' },
-                                            { name: 'End', value: 'end' },
-                                          ],
                                           condition: {
-                                            type: 'HIDE',
-                                            option: 'icon',
+                                            type: 'SHOW',
+                                            option: 'linkType',
                                             comparator: 'EQ',
-                                            value: 'None',
+                                            value: 'internal',
                                           },
                                         },
                                       },
                                       {
-                                        value: ['0rem', '0rem', '0rem', '0rem'],
+                                        value: [''],
+                                        label: 'URL',
+                                        key: 'linkToExternal',
+                                        type: 'VARIABLE',
+                                        configuration: {
+                                          placeholder:
+                                            'Starts with https:// or http://',
+                                          condition: {
+                                            type: 'SHOW',
+                                            option: 'linkType',
+                                            comparator: 'EQ',
+                                            value: 'external',
+                                          },
+                                        },
+                                      },
+                                      {
+                                        value: ['0rem', 'M', '0rem', '0rem'],
                                         label: 'Outer space',
                                         key: 'outerSpacing',
                                         type: 'SIZES',
                                       },
                                       {
-                                        label: 'Disabled',
-                                        key: 'disabled',
-                                        value: false,
                                         type: 'TOGGLE',
+                                        label: 'Add Badge',
+                                        key: 'addBadge',
+                                        value: false,
                                       },
                                       {
-                                        label: 'Add Tooltip',
-                                        key: 'addTooltip',
+                                        type: 'TOGGLE',
+                                        label: 'Hide Badge if value is 0',
+                                        key: 'hideBadge',
                                         value: false,
-                                        type: 'TOGGLE',
-                                      },
-                                      {
-                                        label: 'Toggle tooltip visibility',
-                                        key: 'hasVisibleTooltip',
-                                        value: true,
-                                        type: 'TOGGLE',
                                         configuration: {
-                                          as: 'VISIBILITY',
                                           condition: {
                                             type: 'SHOW',
-                                            option: 'addTooltip',
+                                            option: 'addBadge',
                                             comparator: 'EQ',
                                             value: true,
                                           },
@@ -4765,91 +4679,99 @@
                                       },
                                       {
                                         type: 'VARIABLE',
-                                        label: 'Tooltip Content',
-                                        key: 'tooltipContent',
-                                        value: ['Tips'],
+                                        label: 'Content',
+                                        key: 'content',
+                                        value: ['1'],
                                         configuration: {
+                                          as: 'MULTILINE',
                                           condition: {
                                             type: 'SHOW',
-                                            option: 'addTooltip',
+                                            option: 'addBadge',
                                             comparator: 'EQ',
                                             value: true,
                                           },
                                         },
                                       },
                                       {
-                                        label: 'Tooltip Placement',
-                                        key: 'tooltipPlacement',
-                                        value: 'bottom',
+                                        label: 'Badge Color',
+                                        key: 'badgeColor',
+                                        value: 'Secondary',
+                                        type: 'COLOR',
+                                        configuration: {
+                                          condition: {
+                                            type: 'SHOW',
+                                            option: 'addBadge',
+                                            comparator: 'EQ',
+                                            value: true,
+                                          },
+                                        },
+                                      },
+                                      {
+                                        label: 'Anchor Origin',
+                                        key: 'anchorOrigin',
+                                        value: 'right,top',
                                         type: 'CUSTOM',
                                         configuration: {
-                                          as: 'DROPDOWN',
+                                          as: 'BUTTONGROUP',
                                           dataType: 'string',
                                           allowedInput: [
                                             {
-                                              name: 'Top Start',
-                                              value: 'top-start',
+                                              name: 'Top Right',
+                                              value: 'right,top',
                                             },
                                             {
-                                              name: 'Top',
-                                              value: 'top',
+                                              name: 'Top Left',
+                                              value: 'left,top',
                                             },
                                             {
-                                              name: 'Top End',
-                                              value: 'top-end',
+                                              name: 'Bottom Right',
+                                              value: 'right,bottom',
                                             },
                                             {
-                                              name: 'Right',
-                                              value: 'right',
-                                            },
-                                            {
-                                              name: 'Left',
-                                              value: 'left',
-                                            },
-                                            {
-                                              name: 'Botttom Start',
-                                              value: 'bottom-start',
-                                            },
-                                            {
-                                              name: 'Bottom',
-                                              value: 'bottom',
-                                            },
-                                            {
-                                              name: 'Bottom End',
-                                              value: 'bottom-end',
+                                              name: 'Bottom Left',
+                                              value: 'left,bottom',
                                             },
                                           ],
                                           condition: {
                                             type: 'SHOW',
-                                            option: 'addTooltip',
+                                            option: 'addBadge',
                                             comparator: 'EQ',
                                             value: true,
                                           },
                                         },
                                       },
                                       {
-                                        type: 'COLOR',
-                                        label: 'Tooltip Background',
-                                        key: 'tooltipBackground',
-                                        value: 'Medium',
+                                        label: 'Variant',
+                                        key: 'variant',
+                                        value: 'standard',
+                                        type: 'CUSTOM',
                                         configuration: {
+                                          as: 'BUTTONGROUP',
+                                          dataType: 'string',
+                                          allowedInput: [
+                                            {
+                                              name: 'Standard',
+                                              value: 'standard',
+                                            },
+                                            { name: 'Dot', value: 'dot' },
+                                          ],
                                           condition: {
                                             type: 'SHOW',
-                                            option: 'addTooltip',
+                                            option: 'addBadge',
                                             comparator: 'EQ',
                                             value: true,
                                           },
                                         },
                                       },
                                       {
-                                        type: 'COLOR',
-                                        label: 'Tooltip Text',
-                                        key: 'tooltipText',
-                                        value: 'Black',
+                                        type: 'SIZES',
+                                        label: 'Outer Space',
+                                        key: 'margin',
+                                        value: ['S', 'S', 'S', 'S'],
                                         configuration: {
                                           condition: {
                                             type: 'SHOW',
-                                            option: 'addTooltip',
+                                            option: 'addBadge',
                                             comparator: 'EQ',
                                             value: true,
                                           },
@@ -4865,7 +4787,7 @@
                                         type: 'VARIABLE',
                                         label: 'Test attribute',
                                         key: 'dataComponentAttribute',
-                                        value: ['Button'],
+                                        value: ['Icon'],
                                         configuration: {
                                           condition: {
                                             type: 'SHOW',
@@ -5774,33 +5696,6 @@
                                     ref: {
                                       id: '#cancelDialogBtn',
                                     },
-                                    style: {
-                                      overwrite: {
-                                        backgroundColor: {
-                                          type: 'STATIC',
-                                          value: 'transparent',
-                                        },
-                                        borderColor: {
-                                          type: 'THEME_COLOR',
-                                          value: 'primary',
-                                        },
-                                        borderRadius: ['0.25rem'],
-                                        borderStyle: 'solid',
-                                        borderWidth: ['0.0625rem'],
-                                        boxShadow: 'none',
-                                        color: {
-                                          type: 'THEME_COLOR',
-                                          value: 'primary',
-                                        },
-                                        fontFamily: 'Roboto',
-                                        fontSize: '0.875rem',
-                                        fontStyle: 'none',
-                                        fontWeight: '400',
-                                        padding: ['0.625rem', '1.3125rem'],
-                                        textDecoration: 'none',
-                                        textTransform: 'none',
-                                      },
-                                    },
                                     options: [
                                       {
                                         label: 'Toggle visibility',
@@ -6122,26 +6017,6 @@
                                     name: 'Button',
                                     ref: {
                                       id: '#submitBtn',
-                                    },
-                                    style: {
-                                      overwrite: {
-                                        backgroundColor: {
-                                          type: 'THEME_COLOR',
-                                          value: 'primary',
-                                        },
-                                        boxShadow: 'none',
-                                        color: {
-                                          type: 'THEME_COLOR',
-                                          value: 'white',
-                                        },
-                                        fontFamily: 'Roboto',
-                                        fontSize: '0.875rem',
-                                        fontStyle: 'none',
-                                        fontWeight: '400',
-                                        padding: ['0.6875rem', '1.375rem'],
-                                        textDecoration: 'none',
-                                        textTransform: 'none',
-                                      },
                                     },
                                     options: [
                                       {

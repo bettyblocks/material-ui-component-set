@@ -41,9 +41,7 @@
     const enrichVarObj = obj => {
       const returnObj = obj;
       if (data && data.model) {
-        const property = data.model.properties.find(
-          prop => prop.id === obj.id[0],
-        );
+        const property = data.model.properties.find(prop => prop.id === obj.id);
         if (property) {
           returnObj.name = `{{ ${data.model.name}.${property.name} }}`;
         }
@@ -1729,26 +1727,6 @@
             descendants: [
               {
                 name: 'Button',
-                style: {
-                  overwrite: {
-                    backgroundColor: {
-                      type: 'THEME_COLOR',
-                      value: 'primary',
-                    },
-                    boxShadow: 'none',
-                    color: {
-                      type: 'THEME_COLOR',
-                      value: 'white',
-                    },
-                    fontFamily: 'Roboto',
-                    fontSize: '0.875rem',
-                    fontStyle: 'none',
-                    fontWeight: '400',
-                    padding: ['0.6875rem', '1.375rem'],
-                    textDecoration: 'none',
-                    textTransform: 'none',
-                  },
-                },
                 options: [
                   {
                     label: 'Toggle visibility',
@@ -2032,26 +2010,6 @@
               },
               {
                 name: 'Button',
-                style: {
-                  overwrite: {
-                    backgroundColor: {
-                      type: 'THEME_COLOR',
-                      value: 'primary',
-                    },
-                    boxShadow: 'none',
-                    color: {
-                      type: 'THEME_COLOR',
-                      value: 'white',
-                    },
-                    fontFamily: 'Roboto',
-                    fontSize: '0.875rem',
-                    fontStyle: 'none',
-                    fontWeight: '400',
-                    padding: ['0.6875rem', '1.375rem'],
-                    textDecoration: 'none',
-                    textTransform: 'none',
-                  },
-                },
                 options: [
                   {
                     label: 'Toggle visibility',
@@ -4558,26 +4516,6 @@
                             descendants: [
                               {
                                 name: 'Button',
-                                style: {
-                                  overwrite: {
-                                    backgroundColor: {
-                                      type: 'STATIC',
-                                      value: 'transparent',
-                                    },
-                                    boxShadow: 'none',
-                                    color: {
-                                      type: 'THEME_COLOR',
-                                      value: 'primary',
-                                    },
-                                    fontFamily: 'Roboto',
-                                    fontSize: '0.875rem',
-                                    fontStyle: 'none',
-                                    fontWeight: '400',
-                                    padding: ['0.6875rem', '0.6875rem'],
-                                    textDecoration: 'none',
-                                    textTransform: 'none',
-                                  },
-                                },
                                 options: [
                                   {
                                     label: 'Toggle visibility',
@@ -4678,7 +4616,7 @@
                                     configuration: iconConfiguration,
                                   },
                                   {
-                                    value: 'medium',
+                                    value: 'small',
                                     label: 'Size',
                                     key: 'size',
                                     type: 'CUSTOM',
@@ -4989,7 +4927,7 @@
                   background={
                     imageProperty.id
                       ? '#F0F1F5'
-                      : 'url(https://assets.bettyblocks.com/771d40f1fc49403e824cdca2fe025aeb_assets/files/contemplative_lizard)'
+                      : 'url(https://material-ui.com/static/images/cards/contemplative-reptile.jpg)'
                   }
                   flex={{ grow: '30' }}
                   justify="center"
