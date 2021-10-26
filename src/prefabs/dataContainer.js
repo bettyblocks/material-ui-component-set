@@ -376,6 +376,35 @@
         },
         {
           value: '',
+          label: 'Order by',
+          key: 'orderProperty',
+          type: 'PROPERTY',
+          configuration: {
+            dependsOn: 'model',
+          },
+        },
+        {
+          value: 'asc',
+          label: 'Sort order',
+          key: 'sortOrder',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Ascending', value: 'asc' },
+              { name: 'Descending', value: 'desc' },
+            ],
+            condition: {
+              type: 'HIDE',
+              option: 'orderProperty',
+              comparator: 'EQ',
+              value: '',
+            },
+          },
+        },
+        {
+          value: '',
           label: 'Authentication Profile',
           key: 'authProfile',
           type: 'AUTHENTICATION_PROFILE',

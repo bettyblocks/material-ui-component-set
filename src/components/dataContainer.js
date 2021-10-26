@@ -6,7 +6,16 @@
   jsx: (
     <div>
       {(() => {
-        const { env, getIdProperty, useEndpoint, useText, GetMe, GetOne } = B;
+        const {
+          env,
+          getIdProperty,
+          useEndpoint,
+          useText,
+          GetMe,
+          getProperty,
+          GetOne,
+          useFilter,
+        } = B;
         const {
           filter,
           model,
@@ -17,6 +26,8 @@
           loadingType,
           loadingText,
           dataComponentAttribute,
+          orderProperty,
+          sortOrder,
         } = options;
 
         const isEmpty = children.length === 0;
@@ -25,10 +36,15 @@
         const displayError = showError === 'built-in';
         const parsedLoadingText = useText(loadingText);
         const [, setOptions] = useOptions();
-
+        let orderPropertyPath = null;
+        if (orderProperty && Array.isArray(orderProperty.id)) {
+          orderPropertyPath = orderProperty.id;
+        } else if (orderProperty && orderProperty.id) {
+          orderPropertyPath = [orderProperty.id];
+        }
         const getFilter = React.useCallback(() => {
           if (isDev || !currentRecord || !model) {
-            return filter;
+            return useFilter(filter);
           }
           const idProperty = getIdProperty(model);
 
@@ -46,8 +62,33 @@
           history.push(useEndpoint(redirectWithoutResult));
         };
 
+        const createSortObject = (fields, order) => {
+          const sort = fields.reduceRight((acc, property, index) => {
+            const prop = getProperty(property);
+            return index === fields.length - 1
+              ? { [prop.name]: order.toUpperCase() }
+              : { [prop.name]: acc };
+          }, {});
+
+          return sort;
+        };
+
+        const variables = {
+          ...selectedFilter,
+          sort: {
+            relation: !isDev && createSortObject(orderPropertyPath, sortOrder),
+          },
+        };
+
         const DataContainer = () => (
-          <GetOne modelId={model} filter={selectedFilter}>
+          <GetOne
+            modelId={model}
+            rawFilter={variables}
+            variables={{
+              relation:
+                !isDev && createSortObject(orderPropertyPath, sortOrder),
+            }}
+          >
             {({ loading, error, data, refetch }) => {
               if (!loading && data && data.id) {
                 B.triggerEvent('onSuccess', data);
