@@ -74,7 +74,6 @@
         };
 
         const variables = {
-          ...selectedFilter,
           sort: {
             relation: !isDev && createSortObject(orderPropertyPath, sortOrder),
           },
@@ -83,11 +82,8 @@
         const DataContainer = () => (
           <GetOne
             modelId={model}
-            rawFilter={variables}
-            variables={{
-              relation:
-                !isDev && createSortObject(orderPropertyPath, sortOrder),
-            }}
+            rawFilter={selectedFilter}
+            variables={variables}
           >
             {({ loading, error, data, refetch }) => {
               if (!loading && data && data.id) {
