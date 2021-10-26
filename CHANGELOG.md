@@ -1,3 +1,10 @@
+## [1.177.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.177.3...v1.177.4) (2021-10-25)
+
+
+### Bug Fixes
+
+* rating componet refetch and clickable fix ([44fe07a](https://github.com/bettyblocks/material-ui-component-set/commit/44fe07ad3a43fa5bce5443818c24cc5ac7e9e05a))
+
 ## [1.177.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.177.2...v1.177.3) (2021-10-21)
 
 
