@@ -334,13 +334,15 @@
                 {
                   label: 'Title',
                   key: 'title',
-                  value: ['App Bar'],
+                  value: [''],
                   type: 'VARIABLE',
                 },
                 {
                   label: 'Logo',
                   key: 'logoSource',
-                  value: [],
+                  value: [
+                    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Your_Logo_-_W.svg',
+                  ],
                   type: 'VARIABLE',
                 },
                 {
@@ -494,6 +496,26 @@
               descendants: [
                 {
                   name: 'Button',
+                  style: {
+                    overwrite: {
+                      backgroundColor: {
+                        type: 'THEME_COLOR',
+                        value: 'primary',
+                      },
+                      boxShadow: 'none',
+                      color: {
+                        type: 'THEME_COLOR',
+                        value: 'white',
+                      },
+                      fontFamily: 'Roboto',
+                      fontSize: '0.875rem',
+                      fontStyle: 'none',
+                      fontWeight: '400',
+                      padding: ['0.6875rem', '1.375rem'],
+                      textDecoration: 'none',
+                      textTransform: 'none',
+                    },
+                  },
                   options: [
                     {
                       label: 'Toggle visibility',
@@ -2038,6 +2060,26 @@
                 },
                 {
                   name: 'Button',
+                  style: {
+                    overwrite: {
+                      backgroundColor: {
+                        type: 'THEME_COLOR',
+                        value: 'primary',
+                      },
+                      boxShadow: 'none',
+                      color: {
+                        type: 'THEME_COLOR',
+                        value: 'white',
+                      },
+                      fontFamily: 'Roboto',
+                      fontSize: '0.875rem',
+                      fontStyle: 'none',
+                      fontWeight: '400',
+                      padding: ['0.6875rem', '1.375rem'],
+                      textDecoration: 'none',
+                      textTransform: 'none',
+                    },
+                  },
                   options: [
                     {
                       label: 'Toggle visibility',
@@ -37193,6 +37235,29 @@
                                             },
                                             {
                                               name: 'Button',
+                                              style: {
+                                                overwrite: {
+                                                  backgroundColor: {
+                                                    type: 'THEME_COLOR',
+                                                    value: 'primary',
+                                                  },
+                                                  boxShadow: 'none',
+                                                  color: {
+                                                    type: 'THEME_COLOR',
+                                                    value: 'white',
+                                                  },
+                                                  fontFamily: 'Roboto',
+                                                  fontSize: '0.875rem',
+                                                  fontStyle: 'none',
+                                                  fontWeight: '400',
+                                                  padding: [
+                                                    '0.6875rem',
+                                                    '1.375rem',
+                                                  ],
+                                                  textDecoration: 'none',
+                                                  textTransform: 'none',
+                                                },
+                                              },
                                               options: [
                                                 {
                                                   label: 'Toggle visibility',
