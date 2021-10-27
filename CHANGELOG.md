@@ -1,3 +1,10 @@
+# [1.178.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.177.5...v1.178.0) (2021-10-27)
+
+
+### Features
+
+* update dev dependencies and fix new eslint error ([d606a40](https://github.com/bettyblocks/material-ui-component-set/commit/d606a4096ed282014b32350cfd75120cc24d30d3))
+
 ## [1.177.5](https://github.com/bettyblocks/material-ui-component-set/compare/v1.177.4...v1.177.5) (2021-10-27)
 
 
