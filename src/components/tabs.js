@@ -16,7 +16,7 @@
       showAllTabs,
       hideTabs,
       dataComponentAttribute,
-      loadOnActive,
+      preLoadTabs,
     } = options;
 
     const orientation =
@@ -29,7 +29,7 @@
     const handleChange = (_, newValue) => {
       setValue(newValue);
       if (!activeTabs.includes(newValue)) {
-        setActiveTabs([...activeTabs, newValue]);
+        setActiveTabs(prevActiveTabs => [...prevActiveTabs, newValue]);
       }
     };
     const setSelectedTab = index => {
@@ -110,7 +110,7 @@
           children,
           (child, index) => {
             const { options: childOptions = {} } = child.props || {};
-            if (loadOnActive) {
+            if (!preLoadTabs) {
               if (isDev || showAllTabs || activeTabs.indexOf(index) !== -1) {
                 return (
                   <Children
