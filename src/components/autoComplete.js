@@ -53,6 +53,7 @@
       valueProperty,
       variant,
     } = options;
+    const numberPropTypes = ['serial', 'minutes', 'count', 'integer'];
 
     /*
      * To understand this component it is important to know what the following options are used for:
@@ -95,7 +96,10 @@
       if (defaultValue.trim() === '') {
         initalValue = [];
       } else {
-        initalValue = defaultValue.trim().split(',');
+        initalValue = defaultValue
+          .trim()
+          .split(',')
+          .map(x => x.trim());
       }
     }
 
@@ -229,12 +233,8 @@
     // We need to do this, because options.filter is not immutable
     const filter = { ...optionFilter };
 
-    const searchPropIsNumber = [
-      'serial',
-      'minutes',
-      'count',
-      'integer',
-    ].includes(searchProp.kind);
+    const searchPropIsNumber = numberPropTypes.includes(searchProp.kind);
+    const valuePropIsNumber = numberPropTypes.includes(valueProp.kind);
 
     /*
      * We extend the option filter with the value of the `value` state and the value of the `inputValue` state.
@@ -249,9 +249,9 @@
 
       value.forEach(x => {
         filter._or.push({
-          [searchProp.name]: {
-            [searchPropIsNumber ? 'eq' : 'regex']:
-              typeof x === 'string' ? x : x[searchProp.name],
+          [valueProp.name]: {
+            [valuePropIsNumber ? 'eq' : 'regex']:
+              typeof x === 'string' ? x : x[valueProp.name],
           },
         });
       });
@@ -470,17 +470,19 @@
         }
 
         if (multiple) {
-          return value.map(x =>
-            results.find(result => {
-              if (typeof x === 'string') {
-                return typeof result[valueProp.name] === 'string'
-                  ? result[valueProp.name] === x
-                  : result[valueProp.name].toString() === x;
-              }
+          return value
+            .map(x =>
+              results.find(result => {
+                if (typeof x === 'string') {
+                  return typeof result[valueProp.name] === 'string'
+                    ? result[valueProp.name] === x
+                    : result[valueProp.name].toString() === x;
+                }
 
-              return result[valueProp.name] === x[valueProp.name];
-            }),
-          );
+                return result[valueProp.name] === x[valueProp.name];
+              }),
+            )
+            .filter(x => x !== undefined);
         }
 
         return results.find(result => {
@@ -511,6 +513,7 @@
 
       if (multiple) {
         return currentValue
+          .filter(x => x !== undefined)
           .map(x => (typeof x === 'string' ? x : x[valueProp.name]))
           .join(',');
       }
