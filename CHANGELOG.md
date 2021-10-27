@@ -1,3 +1,10 @@
+## [1.177.5](https://github.com/bettyblocks/material-ui-component-set/compare/v1.177.4...v1.177.5) (2021-10-27)
+
+
+### Bug Fixes
+
+* remove prompt cli not sure if we really use it ([1969539](https://github.com/bettyblocks/material-ui-component-set/commit/1969539c83a02566b4d11a8d7eebaad6af21df98))
+
 ## [1.177.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.177.3...v1.177.4) (2021-10-25)
 
 
