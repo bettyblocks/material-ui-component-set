@@ -55,12 +55,12 @@
       handleValidation();
     };
 
-    function setValue(_event, value) {
+    const setValue = (_event, value) => {
       setCurrentValue(value);
       if (afterFirstInvalidation) {
         handleValidation();
       }
-    }
+    };
 
     useEffect(() => {
       if (isDev) {
