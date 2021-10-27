@@ -53,6 +53,7 @@
       valueProperty,
       variant,
     } = options;
+    const numberPropTypes = ['serial', 'minutes', 'count', 'integer'];
 
     /*
      * To understand this component it is important to know what the following options are used for:
@@ -232,12 +233,8 @@
     // We need to do this, because options.filter is not immutable
     const filter = { ...optionFilter };
 
-    const searchPropIsNumber = [
-      'serial',
-      'minutes',
-      'count',
-      'integer',
-    ].includes(searchProp.kind);
+    const searchPropIsNumber = numberPropTypes.includes(searchProp.kind);
+    const valuePropIsNumber = numberPropTypes.includes(valueProp.kind);
 
     /*
      * We extend the option filter with the value of the `value` state and the value of the `inputValue` state.
@@ -252,9 +249,9 @@
 
       value.forEach(x => {
         filter._or.push({
-          [searchProp.name]: {
-            [searchPropIsNumber ? 'eq' : 'regex']:
-              typeof x === 'string' ? x : x[searchProp.name],
+          [valueProp.name]: {
+            [valuePropIsNumber ? 'eq' : 'regex']:
+              typeof x === 'string' ? x : x[valueProp.name],
           },
         });
       });
