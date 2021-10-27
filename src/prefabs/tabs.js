@@ -20,12 +20,6 @@
           type: 'TOGGLE',
         },
         {
-          label: 'Load tabs on activation',
-          key: 'loadOnActive',
-          value: false,
-          type: 'TOGGLE',
-        },
-        {
           type: 'SIZE',
           label: 'Height',
           key: 'height',
@@ -139,6 +133,20 @@
           label: 'Advanced settings',
           key: 'advancedSettings',
           type: 'TOGGLE',
+        },
+        {
+          label: 'Preload data in all tabs',
+          key: 'preLoadTabs',
+          value: true,
+          type: 'TOGGLE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'advancedSettings',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
         },
         {
           type: 'VARIABLE',
