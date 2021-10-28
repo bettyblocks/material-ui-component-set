@@ -155,6 +155,14 @@
           label: 'Allow multiple values',
           key: 'multiple',
           value: false,
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'optionType',
+              comparator: 'EQ',
+              value: 'model',
+            },
+          },
         },
         {
           type: 'TOGGLE',

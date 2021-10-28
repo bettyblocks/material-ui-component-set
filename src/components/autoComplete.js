@@ -459,11 +459,11 @@
      * Convert `value` state into something the `value` prop of the `Autocomplete` component will accept with the right settings
      */
     const getValue = () => {
-      if (!results) {
-        return multiple ? [] : null;
-      }
-
       if (optionType === 'model') {
+        if (!results) {
+          return multiple ? [] : null;
+        }
+
         // If freeSolo is turned on the value and options are strings instead of objects
         if (freeSolo) {
           return value;
@@ -557,125 +557,130 @@
         : optionLabel.toString();
     };
 
-    return (
-      <ModelProvider value={currentValue} id={model}>
-        <InteractionScope model={model}>
-          {ctx => {
-            changeContext.current = ctx;
+    const MuiAutocomplete = (
+      <Autocomplete
+        autoSelect={freeSolo}
+        disableCloseOnSelect={!closeOnSelect}
+        disabled={disabled}
+        freeSolo={freeSolo}
+        {...(optionType === 'model' &&
+          // If freeSolo is turned on the value and options are strings instead of objects
+          !freeSolo && {
+            getOptionLabel: renderLabel,
+          })}
+        inputValue={inputValue}
+        loading={loading}
+        multiple={multiple}
+        onChange={(_, newValue) => {
+          setValue(newValue || (multiple ? [] : ''));
 
-            return (
-              <Autocomplete
-                autoSelect={freeSolo}
-                disableCloseOnSelect={!closeOnSelect}
-                disabled={disabled}
-                freeSolo={freeSolo}
-                {...(optionType === 'model' &&
-                  // If freeSolo is turned on the value and options are strings instead of objects
-                  !freeSolo && {
-                    getOptionLabel: renderLabel,
-                  })}
-                inputValue={inputValue}
-                loading={loading}
-                multiple={multiple}
-                onChange={(_, newValue) => {
-                  setValue(newValue || (multiple ? [] : ''));
+          if (optionType === 'model') {
+            let triggerEventValue;
 
-                  let triggerEventValue;
+            if (multiple) {
+              setDebouncedInputValue('');
 
-                  if (multiple) {
-                    setDebouncedInputValue('');
+              if (freeSolo) {
+                triggerEventValue =
+                  newValue.length === 0 ? '' : newValue.join(',');
+              } else {
+                triggerEventValue =
+                  newValue.length === 0
+                    ? ''
+                    : newValue.map(x => x[valueProp.name]).join(',');
+              }
+            } else if (freeSolo) {
+              triggerEventValue = newValue || '';
+            } else {
+              triggerEventValue = newValue ? newValue[valueProp.name] : '';
+            }
 
-                    if (freeSolo) {
-                      triggerEventValue =
-                        newValue.length === 0 ? '' : newValue.join(',');
-                    } else {
-                      triggerEventValue =
-                        newValue.length === 0
-                          ? ''
-                          : newValue.map(x => x[valueProp.name]).join(',');
-                    }
-                  } else if (freeSolo) {
-                    triggerEventValue = newValue || '';
-                  } else {
-                    triggerEventValue = newValue
-                      ? newValue[valueProp.name]
-                      : '';
-                  }
-
-                  B.triggerEvent(
-                    'onChange',
-                    triggerEventValue,
-                    changeContext.current,
-                  );
-                }}
-                onInputChange={(event, newValue) => {
-                  if (event) {
-                    setInputValue(newValue);
-                  }
-                }}
-                options={getOptions()}
-                renderInput={params => (
-                  <>
-                    {optionType === 'model' && (
-                      <input
-                        type="hidden"
-                        key={value[valueProp.name] ? 'hasValue' : 'isEmpty'}
-                        name={nameAttribute || name}
-                        value={getHiddenValue(currentValue)}
-                      />
-                    )}
-                    <TextField
-                      {...params}
-                      InputProps={{
-                        ...params.InputProps,
-                        endAdornment: (
-                          <>
-                            {loading ? (
-                              <CircularProgress color="inherit" size={20} />
-                            ) : null}
-                            {params.InputProps.endAdornment}
-                          </>
-                        ),
-                      }}
-                      classes={{ root: classes.formControl }}
-                      data-component={dataComponentAttribute}
-                      disabled={disabled}
-                      error={showError}
-                      fullWidth={fullWidth}
-                      helperText={helperText}
-                      label={!hideLabel && label}
-                      margin={margin}
-                      {...(optionType === 'property' && {
-                        name: nameAttribute || name,
-                      })}
-                      placeholder={placeholder}
-                      required={required && !value}
-                      size={size}
-                      variant={variant}
-                    />
-                  </>
-                )}
-                {...(renderCheckboxes && {
-                  renderOption: (option, { selected }) => (
-                    <>
-                      <Checkbox
-                        classes={{ root: classes.checkbox }}
-                        icon={<CheckBoxOutlineBlank fontSize="small" />}
-                        checkedIcon={<CheckBoxIcon fontSize="small" />}
-                        style={{ marginRight: 8 }}
-                        checked={selected}
-                      />
-                      {renderLabel(option)}
-                    </>
-                  ),
-                })}
-                value={currentValue}
-              />
+            B.triggerEvent(
+              'onChange',
+              triggerEventValue,
+              changeContext.current,
             );
-          }}
-        </InteractionScope>
-      </ModelProvider>
+          }
+        }}
+        onInputChange={(event, newValue) => {
+          if (event) {
+            setInputValue(newValue);
+          }
+        }}
+        options={getOptions()}
+        renderInput={params => (
+          <>
+            {optionType === 'model' && (
+              <input
+                type="hidden"
+                key={value[valueProp.name] ? 'hasValue' : 'isEmpty'}
+                name={nameAttribute || name}
+                value={getHiddenValue(currentValue)}
+              />
+            )}
+            <TextField
+              {...params}
+              InputProps={{
+                ...params.InputProps,
+                endAdornment: (
+                  <>
+                    {loading ? (
+                      <CircularProgress color="inherit" size={20} />
+                    ) : null}
+                    {params.InputProps.endAdornment}
+                  </>
+                ),
+              }}
+              classes={{ root: classes.formControl }}
+              data-component={dataComponentAttribute}
+              disabled={disabled}
+              error={showError}
+              fullWidth={fullWidth}
+              helperText={helperText}
+              label={!hideLabel && label}
+              margin={margin}
+              {...(optionType === 'property' && {
+                name: nameAttribute || name,
+              })}
+              placeholder={placeholder}
+              required={required && !value}
+              size={size}
+              variant={variant}
+            />
+          </>
+        )}
+        {...(renderCheckboxes && {
+          renderOption: (option, { selected }) => (
+            <>
+              <Checkbox
+                classes={{ root: classes.checkbox }}
+                icon={<CheckBoxOutlineBlank fontSize="small" />}
+                checkedIcon={<CheckBoxIcon fontSize="small" />}
+                style={{ marginRight: 8 }}
+                checked={selected}
+              />
+              {renderLabel(option)}
+            </>
+          ),
+        })}
+        value={currentValue}
+      />
     );
+
+    if (optionType === 'model') {
+      return (
+        <ModelProvider value={getValue()} id={model}>
+          <InteractionScope model={model}>
+            {ctx => {
+              changeContext.current = ctx;
+              return MuiAutocomplete;
+            }}
+          </InteractionScope>
+        </ModelProvider>
+      );
+    }
+
+    return MuiAutocomplete;
   })(),
   styles: B => t => {
     const { Styling, color } = B;
