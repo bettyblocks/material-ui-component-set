@@ -1,3 +1,16 @@
+# [1.179.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.178.0...v1.179.0) (2021-10-28)
+
+
+### Bug Fixes
+
+* naming option, state update asynchronously ([6fa830b](https://github.com/bettyblocks/material-ui-component-set/commit/6fa830b54d995c2cd0fefbcdf0eafb470f84ebb7))
+* update lock file to correctly match ([d6b4979](https://github.com/bettyblocks/material-ui-component-set/commit/d6b4979aeb5f279e654e38572031ea6c31dc2e4a))
+
+
+### Features
+
+* loadOnActive with only load once ([8ff7894](https://github.com/bettyblocks/material-ui-component-set/commit/8ff7894d18bc57ba372cab5d98be445d6b7bcc65))
+
 # [1.178.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.177.5...v1.178.0) (2021-10-27)
 
 
