@@ -16,6 +16,7 @@
       showAllTabs,
       hideTabs,
       dataComponentAttribute,
+      preLoadTabs,
     } = options;
 
     const orientation =
@@ -23,15 +24,17 @@
     const isDev = env === 'dev';
     const [value, setValue] = useState(parseInt(defaultValue - 1, 10) || 0);
     const [tabData, setTabData] = useState({});
+    const [activeTabs, setActiveTabs] = useState([value]);
 
     const handleChange = (_, newValue) => {
       setValue(newValue);
+      if (!activeTabs.includes(newValue)) {
+        setActiveTabs(prevActiveTabs => [...prevActiveTabs, newValue]);
+      }
     };
-
     const setSelectedTab = index => {
       setValue(index);
     };
-
     useEffect(() => {
       if (isDev) {
         setValue(parseInt(defaultValue - 1, 10));
@@ -103,21 +106,42 @@
         data-component={useText(dataComponentAttribute) || 'Tabs'}
       >
         {!hideTabs && TabsHeader}
-        {React.Children.map(children, (child, index) => {
-          const { options: childOptions = {} } = child.props || {};
-          return (
-            <Children
-              index={index}
-              value={value}
-              tabData={tabData}
-              setTabData={setTabData}
-              showAllTabs={showAllTabs}
-              setSelectedTab={setSelectedTab}
-            >
-              {React.cloneElement(child, { ...childOptions })}
-            </Children>
-          );
-        })}
+        {React.Children.map(
+          children,
+          (child, index) => {
+            const { options: childOptions = {} } = child.props || {};
+            if (!preLoadTabs) {
+              if (isDev || showAllTabs || activeTabs.indexOf(index) !== -1) {
+                return (
+                  <Children
+                    index={index}
+                    value={value}
+                    tabData={tabData}
+                    setTabData={setTabData}
+                    showAllTabs={showAllTabs}
+                    setSelectedTab={setSelectedTab}
+                  >
+                    {React.cloneElement(child, { ...childOptions })}
+                  </Children>
+                );
+              }
+              return <></>;
+            }
+            return (
+              <Children
+                index={index}
+                value={value}
+                tabData={tabData}
+                setTabData={setTabData}
+                showAllTabs={showAllTabs}
+                setSelectedTab={setSelectedTab}
+              >
+                {React.cloneElement(child, { ...childOptions })}
+              </Children>
+            );
+          },
+          {},
+        )}
       </div>
     );
     return isDev ? (
