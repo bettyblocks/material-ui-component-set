@@ -47,7 +47,11 @@
         };
 
         const DataContainer = () => (
-          <GetOne modelId={model} filter={selectedFilter}>
+          <GetOne
+            modelId={model}
+            filter={selectedFilter}
+            fetchPolicy="cache-and-network"
+          >
             {({ loading, error, data, refetch }) => {
               if (!loading && data && data.id) {
                 B.triggerEvent('onSuccess', data);
