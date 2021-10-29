@@ -1,3 +1,10 @@
+## [1.179.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.179.0...v1.179.1) (2021-10-29)
+
+
+### Bug Fixes
+
+* show selected value when outside of take amount ([7e8b428](https://github.com/bettyblocks/material-ui-component-set/commit/7e8b428b95d591c381a86a4658f745f3beb06703))
+
 # [1.179.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.178.0...v1.179.0) (2021-10-28)
 
 
