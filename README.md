@@ -47,6 +47,6 @@ https://github.com/bettyblocks/cli/wiki/Usage#start-the-development-server
 ## Commit messages
 
 Commit messages should be descriptive in what kind of problem it solves or feature it implements.
-Like `fix: this solves this bug` or `feat: implemented this feature`
+Like `fix: this solves this bug` or `feat: add this feature`
 
 Further guidelines about git messages are available here: https://github.com/conventional-changelog/commitlint/tree/master/@commitlint/config-conventional
