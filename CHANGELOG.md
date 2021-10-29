@@ -1,3 +1,148 @@
+## [1.179.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.179.1...v1.179.2) (2021-10-29)
+
+
+### Bug Fixes
+
+* version bump ([fd47d23](https://github.com/bettyblocks/material-ui-component-set/commit/fd47d237fe7ed1966f88d6a310ffcc9e3631541b))
+
+## [1.179.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.179.0...v1.179.1) (2021-10-29)
+
+
+### Bug Fixes
+
+* show selected value when outside of take amount ([7e8b428](https://github.com/bettyblocks/material-ui-component-set/commit/7e8b428b95d591c381a86a4658f745f3beb06703))
+
+# [1.179.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.178.0...v1.179.0) (2021-10-28)
+
+
+### Bug Fixes
+
+* naming option, state update asynchronously ([6fa830b](https://github.com/bettyblocks/material-ui-component-set/commit/6fa830b54d995c2cd0fefbcdf0eafb470f84ebb7))
+* update lock file to correctly match ([d6b4979](https://github.com/bettyblocks/material-ui-component-set/commit/d6b4979aeb5f279e654e38572031ea6c31dc2e4a))
+
+
+### Features
+
+* loadOnActive with only load once ([8ff7894](https://github.com/bettyblocks/material-ui-component-set/commit/8ff7894d18bc57ba372cab5d98be445d6b7bcc65))
+
+# [1.178.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.177.5...v1.178.0) (2021-10-27)
+
+
+### Features
+
+* update dev dependencies and fix new eslint error ([d606a40](https://github.com/bettyblocks/material-ui-component-set/commit/d606a4096ed282014b32350cfd75120cc24d30d3))
+
+## [1.177.5](https://github.com/bettyblocks/material-ui-component-set/compare/v1.177.4...v1.177.5) (2021-10-27)
+
+
+### Bug Fixes
+
+* remove prompt cli not sure if we really use it ([1969539](https://github.com/bettyblocks/material-ui-component-set/commit/1969539c83a02566b4d11a8d7eebaad6af21df98))
+
+## [1.177.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.177.3...v1.177.4) (2021-10-25)
+
+
+### Bug Fixes
+
+* rating componet refetch and clickable fix ([44fe07a](https://github.com/bettyblocks/material-ui-component-set/commit/44fe07ad3a43fa5bce5443818c24cc5ac7e9e05a))
+
+## [1.177.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.177.2...v1.177.3) (2021-10-21)
+
+
+### Bug Fixes
+
+* remove auth profile option in lists and tables ([e75f468](https://github.com/bettyblocks/material-ui-component-set/commit/e75f4683a6aebd8cf69db694123c18a2bf5471be))
+* remove unused getme helper ([b1a0ed5](https://github.com/bettyblocks/material-ui-component-set/commit/b1a0ed5d7c44b671a9eb1fb46537dc6f4d1d8b88))
+
+## [1.177.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.177.1...v1.177.2) (2021-10-21)
+
+
+### Bug Fixes
+
+* put a onclick trigger on listitem ([cf15e51](https://github.com/bettyblocks/material-ui-component-set/commit/cf15e5140c9abe2ec221d49a2f5c1bb7d0188393))
+
+## [1.177.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.177.0...v1.177.1) (2021-10-20)
+
+
+### Bug Fixes
+
+* stepper name not being updated on first render ([fa0c83d](https://github.com/bettyblocks/material-ui-component-set/commit/fa0c83dd0189d0362a13a774fe8f19773779cb10))
+
+# [1.177.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.176.0...v1.177.0) (2021-10-19)
+
+
+### Features
+
+* remove underline from open page button ([785dc29](https://github.com/bettyblocks/material-ui-component-set/commit/785dc2961ba613fca1ff9de572245156a141c92a))
+
+# [1.176.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.175.4...v1.176.0) (2021-10-18)
+
+
+### Features
+
+* separate button from file input to enable style editor ([d5fe6ee](https://github.com/bettyblocks/material-ui-component-set/commit/d5fe6eed32d14e4b2905adb23c46c588957baf05))
+
+## [1.175.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.175.3...v1.175.4) (2021-10-13)
+
+
+### Bug Fixes
+
+* fixes integer static options ([989d8c4](https://github.com/bettyblocks/material-ui-component-set/commit/989d8c49d6daa3b148026eff5dcad106841b212f))
+
+## [1.175.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.175.2...v1.175.3) (2021-10-13)
+
+
+### Bug Fixes
+
+* renamed header of before create 400 page template TMPLT 919 ([498ed21](https://github.com/bettyblocks/material-ui-component-set/commit/498ed21d1e85a4a479b70912e7230447746d2fdf))
+
+## [1.175.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.175.1...v1.175.2) (2021-10-11)
+
+
+### Bug Fixes
+
+* fixes helper text in development ([2dfc789](https://github.com/bettyblocks/material-ui-component-set/commit/2dfc789cb4a8e2bfc54a6b9bf17e5b273152289e))
+
+## [1.175.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.175.0...v1.175.1) (2021-10-11)
+
+
+### Bug Fixes
+
+* more specific css selector for outerspace button component ([8b3db59](https://github.com/bettyblocks/material-ui-component-set/commit/8b3db5925b71b9934c28275f166bd4984a4e24f9))
+
+# [1.175.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.174.0...v1.175.0) (2021-10-06)
+
+
+### Features
+
+* adds navigateToOutputUrl global interaction ([f6f1faa](https://github.com/bettyblocks/material-ui-component-set/commit/f6f1faac5eb6cda1fe1b877cb0777c238118d75a))
+
+# [1.174.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.173.0...v1.174.0) (2021-10-04)
+
+
+### Features
+
+* added 403 page to old 404 configurator ([dc6dccb](https://github.com/bettyblocks/material-ui-component-set/commit/dc6dccb303ed7de12c13cbde16bcd2e2a6f204c0))
+
+# [1.173.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.172.0...v1.173.0) (2021-10-04)
+
+
+### Features
+
+* updated appbar page to header and footer ([0965a97](https://github.com/bettyblocks/material-ui-component-set/commit/0965a97c219f590e7d043b0b3b7c4c907fe6e1fe))
+
+# [1.172.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.171.1...v1.172.0) (2021-10-04)
+
+
+### Features
+
+* ignore non values in filter ([cc0461e](https://github.com/bettyblocks/material-ui-component-set/commit/cc0461ea8e59a563a238dab854cf24232785b1e1))
+
+
+### Reverts
+
+* Revert "fix: autoselect doesn't crash when clearing the textfield" ([29ab81c](https://github.com/bettyblocks/material-ui-component-set/commit/29ab81cdd1183bd87e3ee46c5d02fd654e81c626))
+
 ## [1.171.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.171.0...v1.171.1) (2021-09-27)
 
 

@@ -161,7 +161,7 @@
       }
       if (optionType === 'static') {
         radioValues = radioData.map(option => option);
-        return radioData.map(option => renderRadio(option, option));
+        return radioData.map(option => renderRadio(getValue(option), option));
       }
       if (isDev) return renderRadio('value', 'Placeholder');
       if (loading) return <span>Loading...</span>;
@@ -199,8 +199,9 @@
     useEffect(() => {
       if (isDev) {
         setValue(useText(defaultValue));
+        setHelper(useText(helperText));
       }
-    }, [isDev, defaultValue]);
+    }, [isDev, defaultValue, helperText]);
 
     const FormControl = (
       <MUIFormControl

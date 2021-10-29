@@ -8,7 +8,6 @@
       Children,
       env,
       getProperty,
-      GetMe,
       InteractionScope,
       ModelProvider,
       useAllQuery,
@@ -35,7 +34,6 @@
       placeholderTake,
       size,
       model,
-      authProfile,
       filter,
       searchProperty,
       hideSearch,
@@ -165,15 +163,14 @@
      * @returns {Void}
      */
     B.defineFunction('Filter', ({ event, property, interactionId }) => {
-      if (event) {
-        setInteractionFilter({
-          ...interactionFilter,
-          [interactionId]: {
-            property,
-            value: event.target ? event.target.value : transformValue(event),
-          },
-        });
-      }
+      if (typeof event === 'undefined') return;
+      setInteractionFilter({
+        ...interactionFilter,
+        [interactionId]: {
+          property,
+          value: event.target ? event.target.value : transformValue(event),
+        },
+      });
     });
 
     B.defineFunction('ResetFilter', () => {
@@ -438,7 +435,7 @@
         ));
       }
 
-      const rows = results.map(value => (
+      return results.map(value => (
         <ModelProvider value={value} id={model}>
           <InteractionScope model={model}>
             {context => (
@@ -459,12 +456,6 @@
           </InteractionScope>
         </ModelProvider>
       ));
-
-      if (authProfile) {
-        return <GetMe authenticationProfileId={authProfile}>{rows}</GetMe>;
-      }
-
-      return rows;
     };
 
     const renderTableContent = () => {
