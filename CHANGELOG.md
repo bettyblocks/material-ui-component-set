@@ -1,3 +1,61 @@
+# [1.180.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.179.2...v1.180.0) (2021-10-29)
+
+
+### Bug Fixes
+
+* data container refetch re-render ([c70e707](https://github.com/bettyblocks/material-ui-component-set/commit/c70e70765c7e8f304bbc8d80c4d660806d120ffb))
+* naming option, state update asynchronously ([d806ca6](https://github.com/bettyblocks/material-ui-component-set/commit/d806ca6951abbd8ab2f418b077c77cae557d068b))
+* rating componet refetch and clickable fix ([c31eb54](https://github.com/bettyblocks/material-ui-component-set/commit/c31eb541794bad823c08ca4ec7803b28ef2cd328))
+* remove prompt cli not sure if we really use it ([18ca501](https://github.com/bettyblocks/material-ui-component-set/commit/18ca501318787cb36731bd61e16bb4ec0f79db04))
+* show selected value when outside of take amount ([48f48b3](https://github.com/bettyblocks/material-ui-component-set/commit/48f48b346cec4c030f91b473fda0c781f5fa1449))
+
+
+### Features
+
+* loadOnActive with only load once ([7db4fce](https://github.com/bettyblocks/material-ui-component-set/commit/7db4fceeb6216c24422b6ca9c0d9d3e74ebb0d5d))
+* update dev dependencies and fix new eslint error ([2230006](https://github.com/bettyblocks/material-ui-component-set/commit/2230006bd6cbad018c4e9101020512dfd075cd67))
+
+## [1.179.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.179.1...v1.179.2) (2021-10-29)
+
+
+### Bug Fixes
+
+* version bump ([fd47d23](https://github.com/bettyblocks/material-ui-component-set/commit/fd47d237fe7ed1966f88d6a310ffcc9e3631541b))
+
+## [1.179.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.179.0...v1.179.1) (2021-10-29)
+
+
+### Bug Fixes
+
+* show selected value when outside of take amount ([7e8b428](https://github.com/bettyblocks/material-ui-component-set/commit/7e8b428b95d591c381a86a4658f745f3beb06703))
+
+# [1.179.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.178.0...v1.179.0) (2021-10-28)
+
+
+### Bug Fixes
+
+* naming option, state update asynchronously ([6fa830b](https://github.com/bettyblocks/material-ui-component-set/commit/6fa830b54d995c2cd0fefbcdf0eafb470f84ebb7))
+* update lock file to correctly match ([d6b4979](https://github.com/bettyblocks/material-ui-component-set/commit/d6b4979aeb5f279e654e38572031ea6c31dc2e4a))
+
+
+### Features
+
+* loadOnActive with only load once ([8ff7894](https://github.com/bettyblocks/material-ui-component-set/commit/8ff7894d18bc57ba372cab5d98be445d6b7bcc65))
+
+# [1.178.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.177.5...v1.178.0) (2021-10-27)
+
+
+### Features
+
+* update dev dependencies and fix new eslint error ([d606a40](https://github.com/bettyblocks/material-ui-component-set/commit/d606a4096ed282014b32350cfd75120cc24d30d3))
+
+## [1.177.5](https://github.com/bettyblocks/material-ui-component-set/compare/v1.177.4...v1.177.5) (2021-10-27)
+
+
+### Bug Fixes
+
+* remove prompt cli not sure if we really use it ([1969539](https://github.com/bettyblocks/material-ui-component-set/commit/1969539c83a02566b4d11a8d7eebaad6af21df98))
+
 ## [1.177.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.177.3...v1.177.4) (2021-10-25)
 
 
