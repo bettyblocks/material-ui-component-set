@@ -1,3 +1,19 @@
+# [1.180.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.179.2...v1.180.0) (2021-10-29)
+
+
+### Bug Fixes
+
+* naming option, state update asynchronously ([d806ca6](https://github.com/bettyblocks/material-ui-component-set/commit/d806ca6951abbd8ab2f418b077c77cae557d068b))
+* rating componet refetch and clickable fix ([c31eb54](https://github.com/bettyblocks/material-ui-component-set/commit/c31eb541794bad823c08ca4ec7803b28ef2cd328))
+* remove prompt cli not sure if we really use it ([18ca501](https://github.com/bettyblocks/material-ui-component-set/commit/18ca501318787cb36731bd61e16bb4ec0f79db04))
+* show selected value when outside of take amount ([48f48b3](https://github.com/bettyblocks/material-ui-component-set/commit/48f48b346cec4c030f91b473fda0c781f5fa1449))
+
+
+### Features
+
+* loadOnActive with only load once ([7db4fce](https://github.com/bettyblocks/material-ui-component-set/commit/7db4fceeb6216c24422b6ca9c0d9d3e74ebb0d5d))
+* update dev dependencies and fix new eslint error ([2230006](https://github.com/bettyblocks/material-ui-component-set/commit/2230006bd6cbad018c4e9101020512dfd075cd67))
+
 ## [1.179.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.179.1...v1.179.2) (2021-10-29)
 
 
