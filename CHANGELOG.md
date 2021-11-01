@@ -3,6 +3,7 @@
 
 ### Bug Fixes
 
+* data container refetch re-render ([c70e707](https://github.com/bettyblocks/material-ui-component-set/commit/c70e70765c7e8f304bbc8d80c4d660806d120ffb))
 * naming option, state update asynchronously ([d806ca6](https://github.com/bettyblocks/material-ui-component-set/commit/d806ca6951abbd8ab2f418b077c77cae557d068b))
 * rating componet refetch and clickable fix ([c31eb54](https://github.com/bettyblocks/material-ui-component-set/commit/c31eb541794bad823c08ca4ec7803b28ef2cd328))
 * remove prompt cli not sure if we really use it ([18ca501](https://github.com/bettyblocks/material-ui-component-set/commit/18ca501318787cb36731bd61e16bb4ec0f79db04))
