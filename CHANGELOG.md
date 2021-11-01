@@ -1,3 +1,10 @@
+## [1.180.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.180.0...v1.180.1) (2021-11-01)
+
+
+### Bug Fixes
+
+* data container refetch re-render ([c70e707](https://github.com/bettyblocks/material-ui-component-set/commit/c70e70765c7e8f304bbc8d80c4d660806d120ffb))
+
 # [1.180.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.179.2...v1.180.0) (2021-10-29)
 
 
