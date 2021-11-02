@@ -2847,11 +2847,24 @@
                                                   name: 'Button',
                                                   style: {
                                                     overwrite: {
+                                                      backgroundColor: {
+                                                        type: 'STATIC',
+                                                        value: 'transparent',
+                                                      },
                                                       boxShadow: 'none',
+                                                      color: {
+                                                        type: 'THEME_COLOR',
+                                                        value: 'white',
+                                                      },
+                                                      fontFamily: 'Roboto',
+                                                      fontSize: '0.875rem',
+                                                      fontStyle: 'none',
+                                                      fontWeight: '400',
                                                       padding: [
                                                         '0.6875rem',
                                                         '1.375rem',
                                                       ],
+                                                      textDecoration: 'none',
                                                       textTransform: 'none',
                                                     },
                                                   },
@@ -2870,7 +2883,7 @@
                                                       type: 'VARIABLE',
                                                       label: 'Button text',
                                                       key: 'buttonText',
-                                                      value: ['Item 1'],
+                                                      value: ['Menu 1'],
                                                     },
                                                     {
                                                       type: 'CUSTOM',
@@ -4594,11 +4607,26 @@
                                                   name: 'Button',
                                                   style: {
                                                     overwrite: {
+                                                      backgroundColor: {
+                                                        type: 'STATIC',
+                                                        value: 'transparent',
+                                                      },
                                                       boxShadow: 'none',
+                                                      color: {
+                                                        type: 'THEME_COLOR',
+                                                        value: 'white',
+                                                      },
+                                                      fontFamily: 'Roboto',
+                                                      fontSize: '0.875rem',
+                                                      fontStyle: 'none',
+                                                      fontWeight: '400',
                                                       padding: [
+                                                        '0.6875rem',
+                                                        '0rem',
                                                         '0.6875rem',
                                                         '1.375rem',
                                                       ],
+                                                      textDecoration: 'none',
                                                       textTransform: 'none',
                                                     },
                                                   },
@@ -4617,7 +4645,7 @@
                                                       type: 'VARIABLE',
                                                       label: 'Button text',
                                                       key: 'buttonText',
-                                                      value: ['Item 2'],
+                                                      value: ['Menu 2'],
                                                     },
                                                     {
                                                       type: 'CUSTOM',

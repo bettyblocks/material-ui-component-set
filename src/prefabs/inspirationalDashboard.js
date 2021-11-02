@@ -499,8 +499,8 @@
                   style: {
                     overwrite: {
                       backgroundColor: {
-                        type: 'THEME_COLOR',
-                        value: 'primary',
+                        type: 'STATIC',
+                        value: 'transparent',
                       },
                       boxShadow: 'none',
                       color: {
@@ -2063,8 +2063,8 @@
                   style: {
                     overwrite: {
                       backgroundColor: {
-                        type: 'THEME_COLOR',
-                        value: 'primary',
+                        type: 'STATIC',
+                        value: 'transparent',
                       },
                       boxShadow: 'none',
                       color: {

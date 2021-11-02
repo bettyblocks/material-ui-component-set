@@ -3278,8 +3278,8 @@
                                     style: {
                                       overwrite: {
                                         backgroundColor: {
-                                          type: 'THEME_COLOR',
-                                          value: 'primary',
+                                          type: 'STATIC',
+                                          value: 'transparent',
                                         },
                                         boxShadow: 'none',
                                         color: {
@@ -3649,8 +3649,8 @@
                                     style: {
                                       overwrite: {
                                         backgroundColor: {
-                                          type: 'THEME_COLOR',
-                                          value: 'primary',
+                                          type: 'STATIC',
+                                          value: 'transparent',
                                         },
                                         boxShadow: 'none',
                                         color: {
@@ -3661,7 +3661,12 @@
                                         fontSize: '0.875rem',
                                         fontStyle: 'none',
                                         fontWeight: '400',
-                                        padding: ['0.6875rem', '1.375rem'],
+                                        padding: [
+                                          '0.6875rem',
+                                          '0rem',
+                                          '0.6875rem',
+                                          '1.375rem',
+                                        ],
                                         textDecoration: 'none',
                                         textTransform: 'none',
                                       },
@@ -4493,7 +4498,7 @@
                                 },
                               },
                               {
-                                value: 'flexible',
+                                value: '12',
                                 label: 'Column width',
                                 key: 'columnWidth',
                                 type: 'CUSTOM',
@@ -4523,7 +4528,7 @@
                                 },
                               },
                               {
-                                value: 'flexible',
+                                value: '12',
                                 label: 'Column width (tablet landscape)',
                                 key: 'columnWidthTabletLandscape',
                                 type: 'CUSTOM',
@@ -4553,7 +4558,7 @@
                                 },
                               },
                               {
-                                value: 'flexible',
+                                value: '12',
                                 label: 'Column width (tablet portrait)',
                                 key: 'columnWidthTabletPortrait',
                                 type: 'CUSTOM',
@@ -4583,7 +4588,7 @@
                                 },
                               },
                               {
-                                value: 'flexible',
+                                value: '12',
                                 label: 'Column width (mobile)',
                                 key: 'columnWidthMobile',
                                 type: 'CUSTOM',
@@ -4660,13 +4665,13 @@
                                 },
                               },
                               {
-                                value: ['XL', '0rem', '0rem', '0rem'],
+                                value: ['0rem', '0rem', '0rem', '0rem'],
                                 label: 'Outer space',
                                 key: 'outerSpacing',
                                 type: 'SIZES',
                               },
                               {
-                                value: ['XL', '0rem', '0rem', '0rem'],
+                                value: ['L', 'L', 'L', 'L'],
                                 label: 'Inner space',
                                 key: 'innerSpacing',
                                 type: 'SIZES',

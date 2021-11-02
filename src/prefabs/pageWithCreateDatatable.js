@@ -3165,8 +3165,8 @@
                                 style: {
                                   overwrite: {
                                     backgroundColor: {
-                                      type: 'THEME_COLOR',
-                                      value: 'primary',
+                                      type: 'STATIC',
+                                      value: 'transparent',
                                     },
                                     boxShadow: 'none',
                                     color: {
@@ -3536,8 +3536,8 @@
                                 style: {
                                   overwrite: {
                                     backgroundColor: {
-                                      type: 'THEME_COLOR',
-                                      value: 'primary',
+                                      type: 'STATIC',
+                                      value: 'transparent',
                                     },
                                     boxShadow: 'none',
                                     color: {
@@ -3548,7 +3548,12 @@
                                     fontSize: '0.875rem',
                                     fontStyle: 'none',
                                     fontWeight: '400',
-                                    padding: ['0.6875rem', '1.375rem'],
+                                    padding: [
+                                      '0.6875rem',
+                                      '0rem',
+                                      '0.6875rem',
+                                      '1.375rem',
+                                    ],
                                     textDecoration: 'none',
                                     textTransform: 'none',
                                   },
@@ -4541,7 +4546,7 @@
                             type: 'SIZES',
                           },
                           {
-                            value: ['M', 'M', 'M', 'M'],
+                            value: ['L', 'L', 'L', 'L'],
                             label: 'Inner space',
                             key: 'innerSpacing',
                             type: 'SIZES',
@@ -5585,7 +5590,7 @@
                               {
                                 label: 'Variant',
                                 key: 'variant',
-                                value: 'elevation',
+                                value: 'flat',
                                 type: 'CUSTOM',
                                 configuration: {
                                   as: 'BUTTONGROUP',
