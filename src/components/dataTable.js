@@ -71,6 +71,8 @@
     const [searchTerm, setSearchTerm] = useState('');
     const [showPagination, setShowPagination] = useState(false);
     const [interactionFilter, setInteractionFilter] = useState({});
+    const perPageLabel = useText(labelRowsPerPage);
+    const numOfPagesLabel = useText(labelNumberOfPages);
 
     const { label: searchPropertyLabel = '{property}' } =
       getProperty(searchProperty) || {};
@@ -642,9 +644,9 @@
               ref={paginationRef}
               classes={{ root: classes.pagination }}
               rowsPerPageOptions={[5, 10, 25, 50, 100]}
-              labelRowsPerPage={useText(labelRowsPerPage)}
+              labelRowsPerPage={perPageLabel}
               labelDisplayedRows={({ from, to, count }) =>
-                `${from}-${to} ${useText(labelNumberOfPages)} ${count}`
+                `${from}-${to} ${numOfPagesLabel} ${count}`
               }
               component="div"
               count={model ? totalCount : takeNum}
