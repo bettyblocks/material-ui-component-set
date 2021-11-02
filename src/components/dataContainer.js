@@ -50,7 +50,7 @@
           <GetOne
             modelId={model}
             filter={selectedFilter}
-            fetchPolicy="cache-and-network"
+            fetchPolicy="network-only"
           >
             {({ loading, error, data, refetch }) => {
               if (!loading && data && data.id) {
