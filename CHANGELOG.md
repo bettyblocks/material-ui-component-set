@@ -1,3 +1,10 @@
+## [1.180.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.180.0...v1.180.1) (2021-11-02)
+
+
+### Bug Fixes
+
+* using hooks in pagination of datatable component ([8caf715](https://github.com/bettyblocks/material-ui-component-set/commit/8caf715c2a14552b45a773a5780a82c58a383a0f))
+
 # [1.180.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.179.2...v1.180.0) (2021-11-01)
 
 
