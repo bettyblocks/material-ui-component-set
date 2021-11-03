@@ -30,7 +30,7 @@
       dense,
       dataComponentAttribute,
     } = options;
-    const { env, useText, Link } = B;
+    const { env, useText, Link, useProperty } = B;
     const isDev = env === 'dev';
 
     const hasLink = linkTo && linkTo.id !== '';
@@ -39,8 +39,18 @@
     const linkToExternalVariable =
       (linkToExternal && useText(linkToExternal)) || '';
 
-    const primary = useText(primaryText);
+    let primary = useText(primaryText);
     const secondary = useText(secondaryText);
+
+    // When selected in the before create, the property is not fetched yet
+    if (
+      !primary &&
+      primaryText &&
+      primaryText.length === 1 &&
+      primaryText[0].type === 'PROPERTY'
+    ) {
+      primary = useProperty(primaryText[0].id);
+    }
 
     const IconComponent = icon !== 'None' && (
       <ListItemIcon>{React.createElement(Icons[icon])}</ListItemIcon>
