@@ -18,7 +18,7 @@
   }) => {
     const [modelId, setModelId] = React.useState('');
     const [property, setProperty] = React.useState('');
-    const [path, setPath] = React.useState('');
+
     const reduceStructure = (refValue, structure) =>
       structure.reduce((acc, component) => {
         if (acc) return acc;
@@ -48,7 +48,6 @@
               onChange={value => {
                 setProperty(value);
               }}
-              onPathChange={value => setPath(value)}
               modelId={modelId}
               value={property}
             />
@@ -62,9 +61,7 @@
             dataList.options[0].value = modelId;
 
             const listItem = reduceStructure('#listItem', newPrefab.structure);
-            if (property && path) {
-              listItem.options[0].value = [{ ...property, name: path }];
-            }
+            listItem.options[0].value = [property];
 
             save(newPrefab);
           }}
