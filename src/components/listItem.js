@@ -43,13 +43,14 @@
     const secondary = useText(secondaryText);
 
     // When selected in the before create, the property is not fetched yet
-    if (
-      !primary &&
+    const primaryIsProperty =
       primaryText &&
       primaryText.length === 1 &&
-      primaryText[0].type === 'PROPERTY'
-    ) {
-      primary = useProperty(primaryText[0].id);
+      primaryText[0].type === 'PROPERTY';
+    const propertyId = primaryIsProperty ? primaryText[0].id : '0';
+    const primaryFallback = useProperty(propertyId);
+    if (!primary && primaryIsProperty) {
+      primary = primaryFallback;
     }
 
     const IconComponent = icon !== 'None' && (
