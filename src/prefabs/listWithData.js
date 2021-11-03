@@ -12,12 +12,16 @@
       ModelSelector,
       PropertySelector,
     },
+    helpers: { usePath },
     prefab,
     save,
     close,
   }) => {
     const [modelId, setModelId] = React.useState('');
     const [property, setProperty] = React.useState('');
+
+    const { data } = usePath(property.id);
+
     const reduceStructure = (refValue, structure) =>
       structure.reduce((acc, component) => {
         if (acc) return acc;
@@ -60,7 +64,11 @@
             dataList.options[0].value = modelId;
 
             const listItem = reduceStructure('#listItem', newPrefab.structure);
-            listItem.options[0].value = [property];
+            if (data && property) {
+              listItem.options[0].value = [
+                { ...property, name: `{{ ${data} }}` },
+              ];
+            }
 
             save(newPrefab);
           }}
