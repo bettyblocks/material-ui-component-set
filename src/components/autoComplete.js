@@ -56,7 +56,7 @@
     const numberPropTypes = ['serial', 'minutes', 'count', 'integer'];
 
     /*
-     * To understand this component it is important to know what the following options are used for:
+     * To understand how this component works it is important to know what the following options are used for:
      *
      * customModelAttribute: To label how the data will be send to an action when a form is submitted. Also to get the default value when used in an update form.
      * freeSolo: Allows any value to be submitted from the Autocomplete. Normally only values rendered as options in the dropdown can be selected and submitted.
