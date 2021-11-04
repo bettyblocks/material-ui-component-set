@@ -15884,8 +15884,8 @@
                                                         fontStyle: 'none',
                                                         fontWeight: '400',
                                                         padding: [
-                                                          '0.6875rem',
-                                                          '1.375rem',
+                                                          '0rem',
+                                                          '0rem',
                                                         ],
                                                         textDecoration: 'none',
                                                         textTransform: 'none',
@@ -16119,9 +16119,9 @@
                                                       {
                                                         value: [
                                                           '0rem',
+                                                          'M',
                                                           '0rem',
-                                                          '0rem',
-                                                          '0rem',
+                                                          'M',
                                                         ],
                                                         label: 'Outer space',
                                                         key: 'outerSpacing',
@@ -16306,10 +16306,8 @@
                                                         fontStyle: 'none',
                                                         fontWeight: '400',
                                                         padding: [
-                                                          '0.6875rem',
                                                           '0rem',
-                                                          '0.6875rem',
-                                                          '1.375rem',
+                                                          '0rem',
                                                         ],
                                                         textDecoration: 'none',
                                                         textTransform: 'none',
@@ -16545,7 +16543,7 @@
                                                           '0rem',
                                                           '0rem',
                                                           '0rem',
-                                                          '0rem',
+                                                          'M',
                                                         ],
                                                         label: 'Outer space',
                                                         key: 'outerSpacing',
