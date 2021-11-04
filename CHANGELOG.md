@@ -1,3 +1,10 @@
+## [1.181.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.181.0...v1.181.1) (2021-11-04)
+
+
+### Bug Fixes
+
+* autocomplete default value with ids ([9bad643](https://github.com/bettyblocks/material-ui-component-set/commit/9bad64311b53d45de294ffe139329cae5688e36a))
+
 # [1.181.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.180.1...v1.181.0) (2021-11-02)
 
 
