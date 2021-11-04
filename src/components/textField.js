@@ -58,7 +58,8 @@
     const [showPassword, togglePassword] = useState(false);
     const [errorState, setErrorState] = useState(error);
     const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
-    const [helper, setHelper] = useState(useText(helperText));
+    const helperTextValue = useText(helperText);
+    const [helper, setHelper] = useState(helperTextValue);
     const {
       id: customModelAttributeId,
       label = [],
@@ -87,33 +88,53 @@
     const validMinvalue = minvalue || null;
     const validMaxvalue = maxvalue || null;
 
+    const validationMessages = {
+      validationTypeMismatch: validationTypeMismatch
+        ? useText(validationTypeMismatch)
+        : '',
+      validationPatternMismatch: validationPatternMismatch
+        ? useText(validationPatternMismatch)
+        : '',
+      validationValueMissing: validationValueMissing
+        ? useText(validationValueMissing)
+        : '',
+      validationTooLong: validationTooLong ? useText(validationTooLong) : '',
+      validationTooShort: validationTooShort ? useText(validationTooShort) : '',
+      validationBelowMinimum: validationBelowMinimum
+        ? useText(validationBelowMinimum)
+        : '',
+      validationAboveMaximum: validationAboveMaximum
+        ? useText(validationAboveMaximum)
+        : '',
+    };
+
     const validationMessage = validityObject => {
       if (validityObject.customError && validationPatternMismatch) {
-        return useText(validationPatternMismatch);
+        return validationMessages.validationPatternMismatch;
       }
       if (validityObject.valid) {
         return '';
       }
       if (validityObject.typeMismatch && validationTypeMismatch) {
-        return useText(validationTypeMismatch);
+        return validationMessages.validationTypeMismatch;
       }
       if (validityObject.patternMismatch && validationPatternMismatch) {
-        return useText(validationPatternMismatch);
+        return validationMessages.validationPatternMismatch;
       }
       if (validityObject.valueMissing && validationValueMissing) {
-        return useText(validationValueMissing);
+        return validationMessages.validationValueMissing;
       }
       if (validityObject.tooLong && validationTooLong) {
-        return useText(validationTooLong);
+        return validationMessages.validationTooLong;
       }
       if (validityObject.tooShort && validationTooShort) {
-        return useText(validationTooShort);
+        return validationMessages.validationTooShort;
       }
       if (validityObject.rangeUnderflow && validationBelowMinimum) {
-        return useText(validationBelowMinimum);
+        return validationMessages.validationBelowMinimum;
       }
       if (validityObject.rangeOverflow && validationAboveMaximum) {
-        return useText(validationAboveMaximum);
+        return validationMessages.validationAboveMaximum;
       }
       return '';
     };
@@ -122,7 +143,7 @@
 
     const handleValidation = validation => {
       setErrorState(!validation.valid);
-      const message = validationMessage(validation) || useText(helperText);
+      const message = validationMessage(validation) || helperTextValue;
       setHelper(message);
     };
 
