@@ -34,6 +34,9 @@
     };
     const setSelectedTab = index => {
       setValue(index);
+      if (!activeTabs.includes(index)) {
+        setActiveTabs(prevActiveTabs => [...prevActiveTabs, index]);
+      }
     };
     useEffect(() => {
       if (isDev) {
@@ -110,23 +113,6 @@
           children,
           (child, index) => {
             const { options: childOptions = {} } = child.props || {};
-            if (!preLoadTabs) {
-              if (isDev || showAllTabs || activeTabs.indexOf(index) !== -1) {
-                return (
-                  <Children
-                    index={index}
-                    value={value}
-                    tabData={tabData}
-                    setTabData={setTabData}
-                    showAllTabs={showAllTabs}
-                    setSelectedTab={setSelectedTab}
-                  >
-                    {React.cloneElement(child, { ...childOptions })}
-                  </Children>
-                );
-              }
-              return <></>;
-            }
             return (
               <Children
                 index={index}
@@ -135,6 +121,8 @@
                 setTabData={setTabData}
                 showAllTabs={showAllTabs}
                 setSelectedTab={setSelectedTab}
+                activeTabs={activeTabs}
+                preLoadTabs={preLoadTabs}
               >
                 {React.cloneElement(child, { ...childOptions })}
               </Children>

@@ -119,7 +119,6 @@
     const [inputValue, setInputValue] = useState(
       optionType === 'property' ? defaultValue : '',
     );
-
     /*
      * Debounced user input to only send a request every 250ms
      */
@@ -484,9 +483,9 @@
           .map(x =>
             results.find(result => {
               if (typeof x === 'string') {
-                return typeof result[valueProp.name] === 'string'
-                  ? result[valueProp.name] === x
-                  : result[valueProp.name].toString() === x;
+                return valuePropIsNumber
+                  ? result[valueProp.name] === parseInt(x, 10)
+                  : result[valueProp.name] === x;
               }
 
               return result[valueProp.name] === x[valueProp.name];
