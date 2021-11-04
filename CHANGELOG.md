@@ -1,3 +1,12 @@
+## [1.181.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.181.1...v1.181.2) (2021-11-04)
+
+
+### Bug Fixes
+
+* autocomplete default value with id's ([8b8d2a0](https://github.com/bettyblocks/material-ui-component-set/commit/8b8d2a06a45a725b463be9d551e02f4684cb6984))
+* conditional hook in listwithdata component ([b92cae5](https://github.com/bettyblocks/material-ui-component-set/commit/b92cae5bee9a68b1eecafb0065185c53c64acc95))
+* show property name in builder in listwithdata component ([ac37695](https://github.com/bettyblocks/material-ui-component-set/commit/ac37695ef9a23620f78534c47ff005f86a6f76f8))
+
 ## [1.181.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.181.0...v1.181.1) (2021-11-04)
 
 ### Bug Fixes
