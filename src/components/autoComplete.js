@@ -38,7 +38,7 @@
       helperText: helperTextRaw,
       hideLabel,
       margin,
-      multiple,
+      multiple: multipleRaw,
       nameAttribute: nameAttributeRaw,
       optionType,
       order,
@@ -66,6 +66,7 @@
      */
 
     const isDev = env === 'dev';
+    const multiple = optionType === 'model' && multipleRaw;
     const displayError = errorType === 'built-in';
     const placeholder = useText(placeholderRaw);
     const helperText = useText(helperTextRaw);
@@ -115,14 +116,13 @@
     /*
      * User input in the autocomplete. In case of freeSolo this is the same as `value`
      */
-    const [inputValue, setInputValue] = useState(multiple ? '' : defaultValue);
-
+    const [inputValue, setInputValue] = useState(
+      optionType === 'property' ? defaultValue : '',
+    );
     /*
      * Debounced user input to only send a request every 250ms
      */
-    const [debouncedInputValue, setDebouncedInputValue] = useState(
-      multiple ? '' : defaultValue,
-    );
+    const [debouncedInputValue, setDebouncedInputValue] = useState();
 
     /*
      * Keep state of interaction filters coming from other components
@@ -271,6 +271,12 @@
         [searchPropIsNumber ? 'eq' : 'regex']: searchPropIsNumber
           ? parseInt(debouncedInputValue, 10)
           : debouncedInputValue,
+      };
+    } else {
+      filter[valueProp.name] = {
+        [valuePropIsNumber ? 'eq' : 'regex']: valuePropIsNumber
+          ? parseInt(value, 10)
+          : value,
       };
     }
 
@@ -459,44 +465,44 @@
      * Convert `value` state into something the `value` prop of the `Autocomplete` component will accept with the right settings
      */
     const getValue = () => {
-      if (optionType === 'model') {
-        if (!results) {
-          return multiple ? [] : null;
-        }
-
-        // If freeSolo is turned on the value and options are strings instead of objects
-        if (freeSolo) {
-          return value;
-        }
-
-        if (multiple) {
-          return value
-            .map(x =>
-              results.find(result => {
-                if (typeof x === 'string') {
-                  return typeof result[valueProp.name] === 'string'
-                    ? result[valueProp.name] === x
-                    : result[valueProp.name].toString() === x;
-                }
-
-                return result[valueProp.name] === x[valueProp.name];
-              }),
-            )
-            .filter(x => x !== undefined);
-        }
-
-        return results.find(result => {
-          if (typeof value === 'string') {
-            return typeof result[valueProp.name] === 'string'
-              ? result[valueProp.name] === value
-              : result[valueProp.name].toString() === value;
-          }
-
-          return result[valueProp.name] === value[valueProp.name];
-        });
+      if (optionType === 'property') {
+        return value;
       }
 
-      return value;
+      if (!results) {
+        return multiple ? [] : null;
+      }
+
+      // If freeSolo is turned on the value and options are strings instead of objects
+      if (freeSolo) {
+        return value;
+      }
+
+      if (multiple) {
+        return value
+          .map(x =>
+            results.find(result => {
+              if (typeof x === 'string') {
+                return valuePropIsNumber
+                  ? result[valueProp.name] === parseInt(x, 10)
+                  : result[valueProp.name] === x;
+              }
+
+              return result[valueProp.name] === x[valueProp.name];
+            }),
+          )
+          .filter(x => x !== undefined);
+      }
+
+      return results.find(result => {
+        if (typeof value === 'string') {
+          return valuePropIsNumber
+            ? result[valueProp.name] === parseInt(value, 10)
+            : result[valueProp.name] === value;
+        }
+
+        return result[valueProp.name] === value[valueProp.name];
+      });
     };
 
     /*
@@ -548,6 +554,10 @@
     };
 
     const currentValue = getValue();
+
+    if (!multiple && !inputValue && currentValue) {
+      setInputValue(currentValue[searchProp.name]);
+    }
 
     const renderLabel = option => {
       const optionLabel = option ? option[searchProp.name] : '';
