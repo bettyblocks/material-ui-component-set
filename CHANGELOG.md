@@ -1,3 +1,10 @@
+# [1.182.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.181.2...v1.182.0) (2021-11-05)
+
+
+### Features
+
+* use new icon picker for button components ([4cf764e](https://github.com/bettyblocks/material-ui-component-set/commit/4cf764e87a2d08c3bc09081c945b0f68ee26a2e5))
+
 ## [1.181.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.181.1...v1.181.2) (2021-11-04)
 
 
