@@ -91,7 +91,7 @@
     const label = useText(labelRaw);
     const defaultValue = useText(valueRaw, { rawValue: true });
 
-    let initalValue = defaultValue;
+    let initalValue = defaultValue.replace(/\n/g, '');
 
     if (multiple) {
       if (defaultValue.trim() === '') {
@@ -119,6 +119,7 @@
     const [inputValue, setInputValue] = useState(
       optionType === 'property' ? defaultValue : '',
     );
+
     /*
      * Debounced user input to only send a request every 250ms
      */
@@ -264,21 +265,61 @@
               : debouncedInputValue,
           },
         });
+      } else {
+        filter._or.push({
+          [valueProp.name]: {
+            neq:
+              typeof value[0] === 'string'
+                ? value[0]
+                : value[0][valueProp.name],
+          },
+        });
       }
-      /* eslint-enable no-underscore-dangle */
-    } else if (debouncedInputValue) {
-      filter[searchProp.name] = {
-        [searchPropIsNumber ? 'eq' : 'regex']: searchPropIsNumber
-          ? parseInt(debouncedInputValue, 10)
-          : debouncedInputValue,
-      };
-    } else {
-      filter[valueProp.name] = {
-        [valuePropIsNumber ? 'eq' : 'regex']: valuePropIsNumber
-          ? parseInt(value, 10)
-          : value,
-      };
+    } else if (!multiple) {
+      if (
+        debouncedInputValue &&
+        debouncedInputValue ===
+          (typeof value === 'string' ? value : value[searchProp.name])
+      ) {
+        filter._or = [
+          {
+            [searchProp.name]: {
+              [searchPropIsNumber ? 'eq' : 'regex']: searchPropIsNumber
+                ? parseInt(debouncedInputValue, 10)
+                : debouncedInputValue,
+            },
+          },
+          {
+            [valueProp.name]: {
+              neq: valuePropIsNumber
+                ? parseInt(value[valueProp.name], 10)
+                : value[valueProp.name],
+            },
+          },
+        ];
+      } else if (debouncedInputValue) {
+        filter[searchProp.name] = {
+          [searchPropIsNumber ? 'eq' : 'regex']: searchPropIsNumber
+            ? parseInt(debouncedInputValue, 10)
+            : debouncedInputValue,
+        };
+      } else {
+        filter._or = [
+          {
+            [valueProp.name]: {
+              [valuePropIsNumber ? 'eq' : 'regex']:
+                typeof value === 'string' ? value : value[valueProp.name],
+            },
+          },
+          {
+            [valueProp.name]: {
+              neq: typeof value === 'string' ? value : value[valueProp.name],
+            },
+          },
+        ];
+      }
     }
+    /* eslint-enable no-underscore-dangle */
 
     /*
      * Merge external filters (from interactions) into local filters
@@ -461,6 +502,64 @@
       );
     }
 
+    const getOptions = () => {
+      if (optionType === 'property') {
+        return propertyValues.map(propertyValue => propertyValue.value);
+      }
+
+      if (optionType === 'model') {
+        if (!results) {
+          return [];
+        }
+
+        // If freeSolo is turned on the value and options are strings instead of objects
+        if (freeSolo) {
+          return results.map(result => result[valueProp.name]);
+        }
+
+        if (multiple) {
+          const nonFetchedOptions = [];
+          value.forEach(x => {
+            if (
+              !results.some(result => {
+                if (typeof x === 'string') {
+                  return valuePropIsNumber
+                    ? result[valueProp.name] === parseInt(x, 10)
+                    : result[valueProp.name] === x;
+                }
+
+                return result[valueProp.name] === x[valueProp.name];
+              })
+            ) {
+              nonFetchedOptions.push(x);
+            }
+          });
+
+          return [...nonFetchedOptions, ...results];
+        }
+
+        if (
+          !results.some(result => {
+            if (typeof value === 'string') {
+              return valuePropIsNumber
+                ? result[valueProp.name] === parseInt(value, 10)
+                : result[valueProp.name] === value;
+            }
+
+            return result[valueProp.name] === value[valueProp.name];
+          })
+        ) {
+          return [value, ...results];
+        }
+
+        return results;
+      }
+
+      return [];
+    };
+
+    const currentOptions = getOptions();
+
     /*
      * Convert `value` state into something the `value` prop of the `Autocomplete` component will accept with the right settings
      */
@@ -469,7 +568,7 @@
         return value;
       }
 
-      if (!results) {
+      if (currentOptions.length === 0) {
         return multiple ? [] : null;
       }
 
@@ -481,27 +580,27 @@
       if (multiple) {
         return value
           .map(x =>
-            results.find(result => {
+            currentOptions.find(option => {
               if (typeof x === 'string') {
                 return valuePropIsNumber
-                  ? result[valueProp.name] === parseInt(x, 10)
-                  : result[valueProp.name] === x;
+                  ? option[valueProp.name] === parseInt(x, 10)
+                  : option[valueProp.name] === x;
               }
 
-              return result[valueProp.name] === x[valueProp.name];
+              return option[valueProp.name] === x[valueProp.name];
             }),
           )
           .filter(x => x !== undefined);
       }
 
-      return results.find(result => {
+      return currentOptions.find(option => {
         if (typeof value === 'string') {
           return valuePropIsNumber
-            ? result[valueProp.name] === parseInt(value, 10)
-            : result[valueProp.name] === value;
+            ? option[valueProp.name] === parseInt(value, 10)
+            : option[valueProp.name] === value;
         }
 
-        return result[valueProp.name] === value[valueProp.name];
+        return option[valueProp.name] === value[valueProp.name];
       });
     };
 
@@ -532,30 +631,12 @@
      *
      * The hidden input is used when `optionType` is set to `model`. Then the `valueProperty` options is used to determine what is send to the backend when a from is submitted.
      */
-    const getOptions = () => {
-      if (optionType === 'property') {
-        return propertyValues.map(propertyValue => propertyValue.value);
-      }
-
-      if (optionType === 'model') {
-        if (!results) {
-          return [];
-        }
-
-        // If freeSolo is turned on the value and options are strings instead of objects
-        if (freeSolo) {
-          return results.map(result => result[valueProp.name]);
-        }
-
-        return results;
-      }
-
-      return [];
-    };
 
     const currentValue = getValue();
 
+    // In the first render we want to make sure to convert the default value
     if (!multiple && !inputValue && currentValue) {
+      setValue(currentValue);
       setInputValue(currentValue[searchProp.name]);
     }
 
@@ -617,7 +698,7 @@
             setInputValue(newValue);
           }
         }}
-        options={getOptions()}
+        options={currentOptions}
         renderInput={params => (
           <>
             {optionType === 'model' && (
