@@ -6,7 +6,6 @@
   styleType: 'BUTTON',
   jsx: (() => {
     const { CircularProgress, Tooltip, Link } = window.MaterialUI.Core;
-    const { Icons } = window.MaterialUI;
     const {
       disabled,
       size,
@@ -35,6 +34,7 @@
       useAction,
       useProperty,
       useEndpoint,
+      Icon,
     } = B;
     const isDev = env === 'dev';
     const isAction = linkType === 'action' || !!actionId;
@@ -195,7 +195,7 @@
                   display: 'flex',
                 }}
               >
-                {React.createElement(Icons[icon], { fontSize: size })}
+                <Icon name={icon} fontSize={size} />
               </span>
             )}
             {buttonContent !== '' ? buttonContent : emptySpace}
@@ -206,7 +206,7 @@
                   display: 'flex',
                 }}
               >
-                {React.createElement(Icons[icon], { fontSize: size })}
+                <Icon name={icon} fontSize={size} />
               </span>
             )}
           </>

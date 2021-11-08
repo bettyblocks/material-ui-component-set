@@ -22,6 +22,8 @@
       showAllTabs,
       setSelectedTab,
       index,
+      activeTabs,
+      preLoadTabs,
     } = parent;
     const isActive = value === index || showAllTabs;
     const parsedLabel = useText(label);
@@ -50,7 +52,12 @@
         classes={{ root: classes.root }}
         data-component={useText(dataComponentAttribute) || 'Tab'}
       >
-        {children.length === 0 ? <EmptyBox /> : children}
+        {children.length > 0 &&
+        (activeTabs.indexOf(index) !== -1 || showAllTabs || preLoadTabs) ? (
+          children
+        ) : (
+          <EmptyBox />
+        )}
       </Typography>
     );
 
