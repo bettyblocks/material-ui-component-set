@@ -303,7 +303,7 @@
             ? parseInt(debouncedInputValue, 10)
             : debouncedInputValue,
         };
-      } else {
+      } else if (value !== '') {
         filter._or = [
           {
             [valueProp.name]: {
@@ -694,8 +694,11 @@
           }
         }}
         onInputChange={(event, newValue) => {
-          if (event) {
+          if (event && (event.type === 'change' || event.type === 'keydown')) {
             setInputValue(newValue);
+          } else if (event && event.type === 'click') {
+            setInputValue(newValue);
+            setDebouncedInputValue(newValue);
           }
         }}
         options={currentOptions}
