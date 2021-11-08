@@ -1,3 +1,11 @@
+## [1.182.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.182.0...v1.182.1) (2021-11-08)
+
+
+### Bug Fixes
+
+* missing-prefabs-pageWithLoginAndRigisterForm ([b8248b4](https://github.com/bettyblocks/material-ui-component-set/commit/b8248b469fbcd9a0d598916c0ed0acf772592cbc))
+* tabs-preload-data-interactions-and-prefabs ([d7c6485](https://github.com/bettyblocks/material-ui-component-set/commit/d7c6485874e63454b1f67937a3f18845b9926dbd))
+
 # [1.182.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.181.2...v1.182.0) (2021-11-05)
 
 
