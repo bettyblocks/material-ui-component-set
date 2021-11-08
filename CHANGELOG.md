@@ -1,3 +1,10 @@
+## [1.182.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.182.1...v1.182.2) (2021-11-08)
+
+
+### Bug Fixes
+
+* undo failing property fetching in listitem ([b4221d6](https://github.com/bettyblocks/material-ui-component-set/commit/b4221d6f1ea3440ce55721703484773e29ed2507))
+
 ## [1.182.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.182.0...v1.182.1) (2021-11-08)
 
 
