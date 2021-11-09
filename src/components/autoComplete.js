@@ -244,20 +244,26 @@
      */
     /* eslint-disable no-underscore-dangle */
     if (multiple && value.length > 0) {
-      if (!filter._or) {
-        filter._or = [];
+      if (!freeSolo) {
+        if (!filter._or) {
+          filter._or = [];
+        }
+
+        value.forEach(x => {
+          filter._or.push({
+            [valueProp.name]: {
+              [valuePropIsNumber ? 'eq' : 'regex']:
+                typeof x === 'string' ? x : x[valueProp.name],
+            },
+          });
+        });
       }
 
-      value.forEach(x => {
-        filter._or.push({
-          [valueProp.name]: {
-            [valuePropIsNumber ? 'eq' : 'regex']:
-              typeof x === 'string' ? x : x[valueProp.name],
-          },
-        });
-      });
-
       if (debouncedInputValue) {
+        if (!filter._or) {
+          filter._or = [];
+        }
+
         filter._or.push({
           [searchProp.name]: {
             [searchPropIsNumber ? 'eq' : 'regex']: searchPropIsNumber
@@ -265,7 +271,11 @@
               : debouncedInputValue,
           },
         });
-      } else {
+      } else if (!freeSolo) {
+        if (!filter._or) {
+          filter._or = [];
+        }
+
         filter._or.push({
           [valueProp.name]: {
             neq:
@@ -514,7 +524,7 @@
 
         // If freeSolo is turned on the value and options are strings instead of objects
         if (freeSolo) {
-          return results.map(result => result[valueProp.name]);
+          return results.map(result => result[searchProp.name]);
         }
 
         if (multiple) {
@@ -568,13 +578,13 @@
         return value;
       }
 
-      if (currentOptions.length === 0) {
-        return multiple ? [] : null;
-      }
-
       // If freeSolo is turned on the value and options are strings instead of objects
       if (freeSolo) {
         return value;
+      }
+
+      if (currentOptions.length === 0) {
+        return multiple ? [] : null;
       }
 
       if (multiple) {
