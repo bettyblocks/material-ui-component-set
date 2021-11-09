@@ -48,9 +48,8 @@
       InputAdornment,
       IconButton,
     } = window.MaterialUI.Core;
-    const { Icons } = window.MaterialUI;
 
-    const { env, getCustomModelAttribute, useText } = B;
+    const { env, getCustomModelAttribute, useText, Icon } = B;
     const isDev = env === 'dev';
     const isNumberType = type === 'number';
     const isPasswordType = type === 'password';
@@ -219,11 +218,7 @@
       ? adornment && hasIcon
       : adornment || hasIcon;
 
-    const IconCmp =
-      hasIcon &&
-      React.createElement(Icons[inputIcon], {
-        fontSize: size,
-      });
+    const IconCmp = hasIcon && <Icon name={inputIcon} fontSize={size} />;
 
     const iconButtonOptions = {
       edge: adornmentPosition,
