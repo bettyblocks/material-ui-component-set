@@ -678,9 +678,9 @@
         onChange={(_, newValue) => {
           setValue(newValue || (multiple ? [] : ''));
 
-          if (optionType === 'model') {
-            let triggerEventValue;
+          let triggerEventValue;
 
+          if (optionType === 'model') {
             if (multiple) {
               setDebouncedInputValue('');
 
@@ -698,13 +698,11 @@
             } else {
               triggerEventValue = newValue ? newValue[valueProp.name] : '';
             }
-
-            B.triggerEvent(
-              'onChange',
-              triggerEventValue,
-              changeContext.current,
-            );
+          } else if (optionType === 'property') {
+            triggerEventValue = newValue || '';
           }
+
+          B.triggerEvent('onChange', triggerEventValue, changeContext.current);
         }}
         onInputChange={(event, newValue) => {
           if (event && (event.type === 'change' || event.type === 'keydown')) {
