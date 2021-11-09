@@ -6,9 +6,8 @@
   jsx: (() => {
     const { Alert, AlertTitle } = window.MaterialUI.Lab;
     const { Close } = window.MaterialUI.Icons;
-    const { Icons } = window.MaterialUI;
     const { IconButton } = window.MaterialUI.Core;
-    const { env, useText } = B;
+    const { env, useText, Icon } = B;
     const {
       visible,
       icon,
@@ -72,7 +71,7 @@
           root: classes.root,
         }}
         className={open || isDev ? '' : classes.hide}
-        icon={icon !== 'None' ? React.createElement(Icons[icon]) : null}
+        icon={icon !== 'None' ? <Icon name={icon} /> : null}
         action={
           collapsable ? (
             <IconButton

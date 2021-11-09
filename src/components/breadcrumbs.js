@@ -4,10 +4,9 @@
   allowedTypes: ['BREADCRUMB_ITEM'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { env, useText } = B;
+    const { env, useText, Icon } = B;
     const isDev = env === 'dev';
     const { Breadcrumbs } = window.MaterialUI.Core;
-    const { Icons } = window.MaterialUI;
     const {
       separatorType,
       separatorText,
@@ -31,7 +30,7 @@
 
     let separator = separatorText;
     if (separatorType === 'icon') {
-      separator = React.createElement(Icons[separatorIcon]);
+      separator = <Icon name={separatorIcon} />;
     }
 
     const breadcrumbsOptions = {
