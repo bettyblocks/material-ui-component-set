@@ -117,7 +117,9 @@
      * User input in the autocomplete. In case of freeSolo this is the same as `value`
      */
     const [inputValue, setInputValue] = useState(
-      optionType === 'property' ? defaultValue : '',
+      optionType === 'property' || (optionType === 'model' && freeSolo)
+        ? defaultValue
+        : '',
     );
 
     /*
@@ -289,7 +291,8 @@
       if (
         debouncedInputValue &&
         debouncedInputValue ===
-          (typeof value === 'string' ? value : value[searchProp.name])
+          (typeof value === 'string' ? value : value[searchProp.name]) &&
+        !freeSolo
       ) {
         filter._or = [
           {
@@ -313,7 +316,7 @@
             ? parseInt(debouncedInputValue, 10)
             : debouncedInputValue,
         };
-      } else if (value !== '') {
+      } else if (value !== '' && !freeSolo) {
         filter._or = [
           {
             [valueProp.name]: {
