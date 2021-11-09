@@ -4,15 +4,13 @@
   allowedTypes: ['CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { env, getCustomModelAttribute, useFileUpload, useText } = B;
+    const { env, getCustomModelAttribute, useFileUpload, useText, Icon } = B;
     const {
       FormControl,
       FormHelperText,
       Typography,
       IconButton,
     } = window.MaterialUI.Core;
-    const { Icons } = window.MaterialUI;
-    const { Delete, CloudUpload } = Icons;
     const {
       hideDefaultError,
       disabled,
@@ -178,7 +176,7 @@
             }
           }}
         >
-          <Delete className={classes.deleteIcon} fontSize="small" />
+          <Icon name="Delete" className={classes.deleteIcon} fontSize="small" />
         </IconButton>
       </div>
     );
@@ -299,7 +297,7 @@
               <div className={classes.gridItem}>
                 {showImagePreview && (
                   <div className={classes.gridUploadingImage}>
-                    <CloudUpload />
+                    <Icon name="CloudUpload" />
                   </div>
                 )}
                 <div className={classes.gridItemDetails}>
@@ -316,7 +314,7 @@
               <div className={classes.listView}>
                 {showImagePreview && (
                   <div className={classes.uploadingImage}>
-                    <CloudUpload />
+                    <Icon name="CloudUpload" />
                   </div>
                 )}
                 <div className={classes.fileDetails}>
