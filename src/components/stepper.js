@@ -13,8 +13,7 @@
       MobileStepper,
       Button,
     } = window.MaterialUI.Core;
-    const { Icons } = window.MaterialUI;
-    const { env, useText, Children } = B;
+    const { env, useText, Children, Icon } = B;
     const {
       activeStep: stepIndex,
       variant,
@@ -98,13 +97,15 @@
             }
 
             const IconCmp = () =>
-              hasIcon &&
-              React.createElement(Icons[icon], {
-                className: [
-                  classes.stepIcon,
-                  isActive ? classes.stepIconActive : '',
-                ].join(' '),
-              });
+              hasIcon && (
+                <Icon
+                  name={icon}
+                  className={[
+                    classes.stepIcon,
+                    isActive ? classes.stepIconActive : '',
+                  ].join(' ')}
+                />
+              );
 
             if (hasIcon) {
               labelProps = {
@@ -174,8 +175,6 @@
       </>
     );
 
-    const { KeyboardArrowLeft, KeyboardArrowRight } = Icons;
-
     const maxSteps = children.length;
 
     const MobileStepperCmp = (
@@ -204,7 +203,7 @@
               classes={{ root: classes.stepButtonMobile }}
             >
               {buttonNextText}
-              <KeyboardArrowRight />
+              <Icon name="KeyboardArrowRight" />
             </Button>
           }
           backButton={
@@ -214,7 +213,7 @@
               disabled={activeStep === 0}
               classes={{ root: classes.stepButtonMobile }}
             >
-              <KeyboardArrowLeft />
+              <Icon name="KeyboardArrowLeft" />
               {buttonPrevText}
             </Button>
           }

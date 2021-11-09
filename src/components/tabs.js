@@ -5,8 +5,7 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { Tabs, Tab } = window.MaterialUI.Core;
-    const { Icons } = window.MaterialUI;
-    const { Children, env, useText } = B;
+    const { Children, env, useText, Icon } = B;
     const {
       defaultValue,
       variant,
@@ -86,9 +85,7 @@
                   style={{ flexDirection: getFlexDirection() }}
                 >
                   <div className={classes.iconWrapper}>
-                    {icon && icon !== 'None'
-                      ? React.createElement(Icons[icon])
-                      : undefined}
+                    {icon && icon !== 'None' ? <Icon name={icon} /> : undefined}
                   </div>
                   <div>
                     {typeof label === 'string' ? label : useText(label)}

@@ -10,13 +10,13 @@
       error,
       multiline,
       rows,
-      placeholder,
+      placeholder = [''],
       variant,
       type,
       size,
       fullWidth,
       margin,
-      helperText,
+      helperText = [''],
       adornment,
       adornmentIcon,
       adornmentPosition,
@@ -25,17 +25,17 @@
       maxlength,
       minvalue,
       maxvalue,
-      validationTypeMismatch,
-      validationPatternMismatch,
-      validationValueMissing,
-      validationTooLong,
-      validationTooShort,
-      validationBelowMinimum,
-      validationAboveMaximum,
+      validationTypeMismatch = [''],
+      validationPatternMismatch = [''],
+      validationValueMissing = [''],
+      validationTooLong = [''],
+      validationTooShort = [''],
+      validationBelowMinimum = [''],
+      validationAboveMaximum = [''],
       hideLabel,
       customModelAttribute: customModelAttributeObj,
       nameAttribute,
-      dataComponentAttribute,
+      dataComponentAttribute = ['TextField'],
     } = options;
 
     const {
@@ -48,9 +48,8 @@
       InputAdornment,
       IconButton,
     } = window.MaterialUI.Core;
-    const { Icons } = window.MaterialUI;
 
-    const { env, getCustomModelAttribute, useText } = B;
+    const { env, getCustomModelAttribute, useText, Icon } = B;
     const isDev = env === 'dev';
     const isNumberType = type === 'number';
     const isPasswordType = type === 'password';
@@ -87,42 +86,53 @@
     const validMinvalue = minvalue || null;
     const validMaxvalue = maxvalue || null;
 
+    const patternMismatchMessage = useText(validationPatternMismatch);
+    const typeMismatchMessage = useText(validationTypeMismatch);
+    const valueMissingMessage = useText(validationValueMissing);
+    const tooLongMessage = useText(validationTooLong);
+    const tooShortMessage = useText(validationTooShort);
+    const belowMinimumMessage = useText(validationBelowMinimum);
+    const aboveMaximumMessage = useText(validationAboveMaximum);
+    const placeholderText = useText(placeholder);
+    const helperTextResolved = useText(helperText);
+    const defaultValueRawText = useText(defaultValue, { rawValue: true });
+    const defaultValueText = useText(defaultValue);
+    const dataComponentAttributeValue = useText(dataComponentAttribute);
+
     const validationMessage = validityObject => {
-      if (validityObject.customError && validationPatternMismatch) {
-        return useText(validationPatternMismatch);
+      if (validityObject.customError && patternMismatchMessage) {
+        return patternMismatchMessage;
       }
       if (validityObject.valid) {
         return '';
       }
-      if (validityObject.typeMismatch && validationTypeMismatch) {
-        return useText(validationTypeMismatch);
+      if (validityObject.typeMismatch && typeMismatchMessage) {
+        return typeMismatchMessage;
       }
-      if (validityObject.patternMismatch && validationPatternMismatch) {
-        return useText(validationPatternMismatch);
+      if (validityObject.patternMismatch && patternMismatchMessage) {
+        return patternMismatchMessage;
       }
-      if (validityObject.valueMissing && validationValueMissing) {
-        return useText(validationValueMissing);
+      if (validityObject.valueMissing && valueMissingMessage) {
+        return valueMissingMessage;
       }
-      if (validityObject.tooLong && validationTooLong) {
-        return useText(validationTooLong);
+      if (validityObject.tooLong && tooLongMessage) {
+        return tooLongMessage;
       }
-      if (validityObject.tooShort && validationTooShort) {
-        return useText(validationTooShort);
+      if (validityObject.tooShort && tooShortMessage) {
+        return tooShortMessage;
       }
-      if (validityObject.rangeUnderflow && validationBelowMinimum) {
-        return useText(validationBelowMinimum);
+      if (validityObject.rangeUnderflow && belowMinimumMessage) {
+        return belowMinimumMessage;
       }
-      if (validityObject.rangeOverflow && validationAboveMaximum) {
-        return useText(validationAboveMaximum);
+      if (validityObject.rangeOverflow && aboveMaximumMessage) {
+        return aboveMaximumMessage;
       }
       return '';
     };
 
-    const placeholderText = useText(placeholder);
-
     const handleValidation = validation => {
       setErrorState(!validation.valid);
-      const message = validationMessage(validation) || useText(helperText);
+      const message = validationMessage(validation) || helperTextResolved;
       setHelper(message);
     };
 
@@ -193,9 +203,7 @@
     B.defineFunction('Clear', () => setCurrentValue(''));
     B.defineFunction('Enable', () => setIsDisabled(false));
     B.defineFunction('Disable', () => setIsDisabled(true));
-    B.defineFunction('Reset', () =>
-      setCurrentValue(useText(defaultValue, { rawValue: true })),
-    );
+    B.defineFunction('Reset', () => setCurrentValue(defaultValueRawText));
 
     const handleClickShowPassword = () => {
       togglePassword(!showPassword);
@@ -219,11 +227,7 @@
       ? adornment && hasIcon
       : adornment || hasIcon;
 
-    const IconCmp =
-      hasIcon &&
-      React.createElement(Icons[inputIcon], {
-        fontSize: size,
-      });
+    const IconCmp = hasIcon && <Icon name={inputIcon} fontSize={size} />;
 
     const iconButtonOptions = {
       edge: adornmentPosition,
@@ -237,10 +241,10 @@
 
     useEffect(() => {
       if (isDev) {
-        setCurrentValue(useText(defaultValue));
-        setHelper(useText(helperText));
+        setCurrentValue(defaultValueText);
+        setHelper(helperTextResolved);
       }
-    }, [isDev, defaultValue, helperText]);
+    }, [isDev, defaultValueText, helperTextResolved]);
 
     const TextFieldCmp = (
       <FormControl
@@ -301,7 +305,7 @@
             max: validMaxvalue,
             tabIndex: isDev ? -1 : undefined,
           }}
-          data-component={useText(dataComponentAttribute) || 'TextField'}
+          data-component={dataComponentAttributeValue}
         />
         {helper && (
           <FormHelperText classes={{ root: classes.helper }}>

@@ -4,15 +4,13 @@
   allowedTypes: ['CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { env, getCustomModelAttribute, useFileUpload, useText } = B;
+    const { env, getCustomModelAttribute, useFileUpload, useText, Icon } = B;
     const {
       FormControl,
       FormHelperText,
       Typography,
       IconButton,
     } = window.MaterialUI.Core;
-    const { Icons } = window.MaterialUI;
-    const { Delete, CloudUpload } = Icons;
     const {
       hideDefaultError,
       disabled,
@@ -26,7 +24,7 @@
       nameAttribute,
       type,
       showImagePreview,
-      dataComponentAttribute,
+      dataComponentAttribute = ['FileUpload'],
     } = options;
 
     const isDev = env === 'dev';
@@ -54,6 +52,7 @@
     const nameAttributeValue = useText(nameAttribute);
     const requiredText = required ? '*' : '';
     const [uploadedFileArray, setUploadedFileArray] = useState([]);
+    const dataComponentAttributeValue = useText(dataComponentAttribute);
 
     const formatBytes = bytes => {
       if (bytes === 0) return '0 Bytes';
@@ -142,7 +141,7 @@
     };
 
     const UploadComponent = () => (
-      <div data-component={useText(dataComponentAttribute) || 'FileUpload'}>
+      <div data-component={dataComponentAttributeValue}>
         <input
           accept={acceptedValue}
           className={classes.input}
@@ -178,7 +177,7 @@
             }
           }}
         >
-          <Delete className={classes.deleteIcon} fontSize="small" />
+          <Icon name="Delete" className={classes.deleteIcon} fontSize="small" />
         </IconButton>
       </div>
     );
@@ -299,7 +298,7 @@
               <div className={classes.gridItem}>
                 {showImagePreview && (
                   <div className={classes.gridUploadingImage}>
-                    <CloudUpload />
+                    <Icon name="CloudUpload" />
                   </div>
                 )}
                 <div className={classes.gridItemDetails}>
@@ -316,7 +315,7 @@
               <div className={classes.listView}>
                 {showImagePreview && (
                   <div className={classes.uploadingImage}>
-                    <CloudUpload />
+                    <Icon name="CloudUpload" />
                   </div>
                 )}
                 <div className={classes.fileDetails}>
