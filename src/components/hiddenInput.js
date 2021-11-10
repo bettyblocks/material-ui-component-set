@@ -8,7 +8,7 @@
       disabled,
       customModelAttribute: customModelAttributeObj,
       nameAttribute,
-      dataComponentAttribute,
+      dataComponentAttribute = 'HiddenInput',
     } = options;
 
     const { useText, env, getCustomModelAttribute } = B;
@@ -30,6 +30,7 @@
     } = customModelAttribute || {};
     const nameAttributeValue = useText(nameAttribute);
     const required = customModelAttribute ? attributeRequired : defaultRequired;
+    const dataComponentAttributeValue = useText(dataComponentAttribute);
 
     useEffect(() => {
       if (isDev) {
@@ -45,7 +46,7 @@
         value={isDev ? currentValue || '{{ hidden input }}' : currentValue}
         required={required}
         disabled={disabled}
-        data-component={useText(dataComponentAttribute) || 'HiddenInput'}
+        data-component={dataComponentAttributeValue}
       />
     );
 

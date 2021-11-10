@@ -8,12 +8,12 @@
       disabled,
       position,
       size,
-      helperText,
+      helperText = [''],
       customModelAttribute: customModelAttributeObj,
-      validationValueMissing,
+      validationValueMissing = [''],
       nameAttribute,
       isSwitch,
-      dataComponentAttribute,
+      dataComponentAttribute = ['Checkbox'],
     } = options;
     const { env, useText, getCustomModelAttribute } = B;
     const isDev = env === 'dev';
@@ -39,6 +39,9 @@
     const componentChecked = useText(defaultValue);
     const [checked, setChecked] = useState(componentChecked === 'true');
     const nameAttributeValue = useText(nameAttribute);
+    const dataComponentAttributeValue = useText(dataComponentAttribute);
+    const helperTextResolved = useText(helperText);
+    const validationValueMissingText = useText(validationValueMissing);
 
     const {
       Checkbox: MUICheckbox,
@@ -54,7 +57,9 @@
 
     const handleValidation = isValid => {
       setErrorState(!isValid);
-      const message = useText(!isValid ? validationValueMissing : helperText);
+      const message = !isValid
+        ? validationValueMissingText
+        : helperTextResolved;
       setHelper(message);
     };
 
@@ -98,9 +103,9 @@
     useEffect(() => {
       if (isDev) {
         setChecked(componentChecked === 'true');
-        setHelper(useText(helperText));
+        setHelper(helperTextResolved);
       }
-    }, [isDev, defaultValue, helperText]);
+    }, [isDev, defaultValue, helperTextResolved]);
 
     const props = {
       checked,
@@ -112,7 +117,7 @@
       size,
       tabIndex: isDev ? -1 : undefined,
       value: 'on',
-      'data-component': useText(dataComponentAttribute) || 'Checkbox',
+      'data-component': dataComponentAttributeValue,
     };
 
     const Checkbox = <MUICheckbox {...props} />;
