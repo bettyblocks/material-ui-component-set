@@ -26,7 +26,7 @@
       nameAttribute,
       type,
       showImagePreview,
-      dataComponentAttribute = 'FileUpload',
+      dataComponentAttribute = ['FileUpload'],
     } = options;
 
     const isDev = env === 'dev';

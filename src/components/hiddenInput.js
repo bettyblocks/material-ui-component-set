@@ -8,7 +8,7 @@
       disabled,
       customModelAttribute: customModelAttributeObj,
       nameAttribute,
-      dataComponentAttribute = 'HiddenInput',
+      dataComponentAttribute = ['HiddenInput'],
     } = options;
 
     const { useText, env, getCustomModelAttribute } = B;
