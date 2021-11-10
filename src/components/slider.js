@@ -20,11 +20,11 @@
       marks,
       disable,
       styles,
-      validationValueMissing,
-      helperText,
+      validationValueMissing = [''],
+      helperText = [''],
       error,
       hideLabel,
-      dataComponentAttribute,
+      dataComponentAttribute = ['Slider'],
     } = options;
     const {
       id: customModelAttributeId,
@@ -41,11 +41,16 @@
     );
     const { name: customModelAttributeName, validations: { required } = {} } =
       customModelAttribute || {};
+    const dataComponentAttributeValue = useText(dataComponentAttribute);
+    const helperTextResolved = useText(helperText);
+    const validationValueMissingText = useText(validationValueMissing);
 
     const handleValidation = () => {
       const hasError = required && !currentValue;
       setErrorState(hasError);
-      const message = useText(hasError ? validationValueMissing : helperText);
+      const message = hasError
+        ? validationValueMissingText
+        : helperTextResolved;
       setHelper(message);
     };
 
@@ -69,9 +74,9 @@
     }, [isDev, defaultValue]);
     useEffect(() => {
       if (isDev) {
-        setHelper(useText(helperText));
+        setHelper(helperTextResolved);
       }
-    }, [isDev, helperText]);
+    }, [isDev, helperTextResolved]);
 
     const sliderInput = (
       <div className={classes.root}>
@@ -103,7 +108,7 @@
                 thumb: classes.thumb,
                 focusVisible: classes.thumbFocusVisible,
               }}
-              data-component={useText(dataComponentAttribute) || 'Slider'}
+              data-component={dataComponentAttributeValue}
             />
           </div>
           {helper && (
