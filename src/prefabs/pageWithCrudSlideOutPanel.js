@@ -22263,7 +22263,7 @@
                                                 },
                                               },
                                               {
-                                                value: 'flexible',
+                                                value: '12',
                                                 label: 'Column width',
                                                 key: 'columnWidth',
                                                 type: 'CUSTOM',
@@ -22299,7 +22299,7 @@
                                                 },
                                               },
                                               {
-                                                value: 'flexible',
+                                                value: '12',
                                                 label:
                                                   'Column width (tablet landscape)',
                                                 key:
@@ -22337,7 +22337,7 @@
                                                 },
                                               },
                                               {
-                                                value: 'flexible',
+                                                value: '12',
                                                 label:
                                                   'Column width (tablet portrait)',
                                                 key:
@@ -22375,7 +22375,7 @@
                                                 },
                                               },
                                               {
-                                                value: 'flexible',
+                                                value: '12',
                                                 label: 'Column width (mobile)',
                                                 key: 'columnWidthMobile',
                                                 type: 'CUSTOM',
@@ -22493,12 +22493,7 @@
                                                 type: 'SIZES',
                                               },
                                               {
-                                                value: [
-                                                  '0rem',
-                                                  '0rem',
-                                                  '0rem',
-                                                  '0rem',
-                                                ],
+                                                value: ['L', 'L', 'L', 'L'],
                                                 label: 'Inner space',
                                                 key: 'innerSpacing',
                                                 type: 'SIZES',
@@ -22633,10 +22628,10 @@
                                                   },
                                                   {
                                                     value: [
-                                                      'XL',
-                                                      'M',
-                                                      'M',
-                                                      'M',
+                                                      '0rem',
+                                                      '0rem',
+                                                      '0rem',
+                                                      '0rem',
                                                     ],
                                                     label: 'Inner space',
                                                     key: 'innerSpacing',
