@@ -102,7 +102,7 @@
       return rowOption;
     };
 
-    const columnOptions = (innerSpace, columnWidth) => {
+    const columnOptions = (innerSpace, columnWidth, visibility) => {
       const innerSpaceOption = innerSpace || ['M', 'M', 'M', 'M'];
       const columnWidthOptions = columnWidth || [
         'flexible',
@@ -110,16 +110,17 @@
         'flexible',
         'flexible',
       ];
-      const columnOption = [
-        {
-          label: 'Toggle visibility',
-          key: 'visible',
-          value: true,
-          type: 'TOGGLE',
-          configuration: {
-            as: 'VISIBILITY',
-          },
+      const visibilityOption = visibility || {
+        label: 'Toggle visibility',
+        key: 'visible',
+        value: true,
+        type: 'TOGGLE',
+        configuration: {
+          as: 'VISIBILITY',
         },
+      };
+      const columnOption = [
+        visibilityOption,
         {
           value: columnWidthOptions[0],
           label: 'Column width',
@@ -4052,9 +4053,21 @@
                             descendants: [
                               {
                                 name: 'Column',
+                                ref: {
+                                  id: '#detailsColumn',
+                                },
                                 options: columnOptions(
                                   ['M', 'L', 'L', 'L'],
                                   ['12', '12', '12', '12'],
+                                  {
+                                    label: 'Toggle visibility',
+                                    key: 'visible',
+                                    value: false,
+                                    type: 'TOGGLE',
+                                    configuration: {
+                                      as: 'VISIBILITY',
+                                    },
+                                  },
                                 ),
                                 descendants: [
                                   {
@@ -5960,6 +5973,21 @@
             },
             targetOptionName: 'currentRecord',
             type: 'Global',
+          },
+          {
+            name: 'Show',
+            sourceEvent: 'OnRowClick',
+            parameters: [
+              {
+                parameter: 'argument',
+                id: [idProperty.id],
+              },
+            ],
+            ref: {
+              targetComponentId: '#detailsColumn',
+              sourceComponentId: '#dataTable',
+            },
+            type: 'Custom',
           },
         ];
 
