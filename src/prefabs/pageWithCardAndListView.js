@@ -3453,8 +3453,7 @@
                                         label: 'Icon',
                                         key: 'icon',
                                         value: 'None',
-                                        type: 'CUSTOM',
-                                        configuration: iconConfiguration,
+                                        type: 'ICON',
                                       },
                                       {
                                         type: 'CUSTOM',
@@ -3824,8 +3823,7 @@
                                         label: 'Icon',
                                         key: 'icon',
                                         value: 'None',
-                                        type: 'CUSTOM',
-                                        configuration: iconConfiguration,
+                                        type: 'ICON',
                                       },
                                       {
                                         type: 'CUSTOM',
@@ -6781,8 +6779,7 @@
                                                             label: 'Icon',
                                                             key: 'icon',
                                                             value: 'List',
-                                                            type: 'CUSTOM',
-                                                            configuration: iconConfiguration,
+                                                            type: 'ICON',
                                                           },
                                                           {
                                                             value: 'small',
@@ -7117,8 +7114,7 @@
                                                             label: 'Icon',
                                                             key: 'icon',
                                                             value: 'Apps',
-                                                            type: 'CUSTOM',
-                                                            configuration: iconConfiguration,
+                                                            type: 'ICON',
                                                           },
                                                           {
                                                             value: 'small',
@@ -10036,8 +10032,7 @@
                                                                 key: 'icon',
                                                                 value:
                                                                   'ChevronRight',
-                                                                type: 'CUSTOM',
-                                                                configuration: iconConfiguration,
+                                                                type: 'ICON',
                                                               },
                                                               {
                                                                 value: 'medium',
@@ -16057,8 +16052,7 @@
                                                                             value:
                                                                               'ChevronRight',
                                                                             type:
-                                                                              'CUSTOM',
-                                                                            configuration: iconConfiguration,
+                                                                              'ICON',
                                                                           },
                                                                           {
                                                                             value:

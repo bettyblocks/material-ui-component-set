@@ -7362,8 +7362,7 @@
                                                             label: 'Icon',
                                                             key: 'icon',
                                                             value: 'None',
-                                                            type: 'CUSTOM',
-                                                            configuration: iconConfiguration,
+                                                            type: 'ICON',
                                                           },
                                                           {
                                                             type: 'CUSTOM',
@@ -7735,9 +7734,8 @@
                                                       {
                                                         label: 'Icon',
                                                         key: 'icon',
-                                                        value: 'DoubleArrow',
-                                                        type: 'CUSTOM',
-                                                        configuration: iconConfiguration,
+                                                        value: 'None',
+                                                        type: 'ICON',
                                                       },
                                                       {
                                                         type: 'CUSTOM',
@@ -8391,9 +8389,8 @@
                                                       {
                                                         label: 'Icon',
                                                         key: 'icon',
-                                                        value: 'VerifiedUser',
-                                                        type: 'CUSTOM',
-                                                        configuration: iconConfiguration,
+                                                        value: 'None',
+                                                        type: 'ICON',
                                                       },
                                                       {
                                                         type: 'CUSTOM',

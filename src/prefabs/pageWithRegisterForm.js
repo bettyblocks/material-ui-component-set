@@ -6703,8 +6703,7 @@
                                                 label: 'Icon',
                                                 key: 'icon',
                                                 value: 'ChevronLeft',
-                                                type: 'CUSTOM',
-                                                configuration: iconConfiguration,
+                                                type: 'ICON',
                                               },
                                               {
                                                 value: 'medium',
@@ -7607,8 +7606,7 @@
                                                     label: 'Icon',
                                                     key: 'icon',
                                                     value: 'None',
-                                                    type: 'CUSTOM',
-                                                    configuration: iconConfiguration,
+                                                    type: 'ICON',
                                                   },
                                                   {
                                                     value: 'medium',

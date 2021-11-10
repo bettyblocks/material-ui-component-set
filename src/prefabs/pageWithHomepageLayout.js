@@ -4246,12 +4246,7 @@
                                                         label: 'Icon',
                                                         key: 'icon',
                                                         value: 'None',
-                                                        type: 'CUSTOM',
-                                                        configuration: {
-                                                          as: 'DROPDOWN',
-                                                          dataType: 'string',
-                                                          allowedInput: iconConfiguration,
-                                                        },
+                                                        type: 'ICON',
                                                       },
                                                       {
                                                         value: 'small',
@@ -4613,12 +4608,7 @@
                                                         label: 'Icon',
                                                         key: 'icon',
                                                         value: 'None',
-                                                        type: 'CUSTOM',
-                                                        configuration: {
-                                                          as: 'DROPDOWN',
-                                                          dataType: 'string',
-                                                          allowedInput: iconConfiguration,
-                                                        },
+                                                        type: 'ICON',
                                                       },
                                                       {
                                                         value: 'small',
@@ -4980,12 +4970,7 @@
                                                         label: 'Icon',
                                                         key: 'icon',
                                                         value: 'None',
-                                                        type: 'CUSTOM',
-                                                        configuration: {
-                                                          as: 'DROPDOWN',
-                                                          dataType: 'string',
-                                                          allowedInput: iconConfiguration,
-                                                        },
+                                                        type: 'ICON',
                                                       },
                                                       {
                                                         value: 'small',
@@ -6740,12 +6725,7 @@
                                             label: 'Icon',
                                             key: 'icon',
                                             value: 'None',
-                                            type: 'CUSTOM',
-                                            configuration: {
-                                              as: 'DROPDOWN',
-                                              dataType: 'string',
-                                              allowedInput: iconConfiguration,
-                                            },
+                                            type: 'ICON',
                                           },
                                           {
                                             value: 'small',
@@ -7623,12 +7603,7 @@
                                         label: 'Icon',
                                         key: 'icon',
                                         value: 'None',
-                                        type: 'CUSTOM',
-                                        configuration: {
-                                          as: 'DROPDOWN',
-                                          dataType: 'string',
-                                          allowedInput: iconConfiguration,
-                                        },
+                                        type: 'ICON',
                                       },
                                       {
                                         value: 'small',
@@ -15622,12 +15597,7 @@
                                                         label: 'Icon',
                                                         key: 'icon',
                                                         value: 'None',
-                                                        type: 'CUSTOM',
-                                                        configuration: {
-                                                          as: 'DROPDOWN',
-                                                          dataType: 'string',
-                                                          allowedInput: iconConfiguration,
-                                                        },
+                                                        type: 'ICON',
                                                       },
                                                       {
                                                         value: 'small',
@@ -17401,12 +17371,7 @@
                                                         label: 'Icon',
                                                         key: 'icon',
                                                         value: 'None',
-                                                        type: 'CUSTOM',
-                                                        configuration: {
-                                                          as: 'DROPDOWN',
-                                                          dataType: 'string',
-                                                          allowedInput: iconConfiguration,
-                                                        },
+                                                        type: 'ICON',
                                                       },
                                                       {
                                                         value: 'small',
@@ -19180,12 +19145,7 @@
                                                         label: 'Icon',
                                                         key: 'icon',
                                                         value: 'None',
-                                                        type: 'CUSTOM',
-                                                        configuration: {
-                                                          as: 'DROPDOWN',
-                                                          dataType: 'string',
-                                                          allowedInput: iconConfiguration,
-                                                        },
+                                                        type: 'ICON',
                                                       },
                                                       {
                                                         value: 'small',
@@ -32652,12 +32612,7 @@
                                             label: 'Icon',
                                             key: 'icon',
                                             value: 'None',
-                                            type: 'CUSTOM',
-                                            configuration: {
-                                              as: 'DROPDOWN',
-                                              dataType: 'string',
-                                              allowedInput: iconConfiguration,
-                                            },
+                                            type: 'ICON',
                                           },
                                           {
                                             value: 'small',
