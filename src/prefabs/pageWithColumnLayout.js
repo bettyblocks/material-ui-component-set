@@ -3137,7 +3137,7 @@
                                           value: 'Primary',
                                         },
                                         {
-                                          value: ['0rem', 'M', '0rem', 'M'],
+                                          value: ['0rem', '0rem', '0rem', 'M'],
                                           label: 'Outer space',
                                           key: 'outerSpacing',
                                           type: 'SIZES',
@@ -3938,7 +3938,7 @@
                                   type: 'SIZES',
                                 },
                                 {
-                                  value: ['L', 'L', 'L', 'L'],
+                                  value: ['S', 'S', 'S', 'S'],
                                   label: 'Inner space',
                                   key: 'innerSpacing',
                                   type: 'SIZES',
