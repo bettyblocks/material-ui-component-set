@@ -685,13 +685,12 @@
               setDebouncedInputValue('');
 
               if (freeSolo) {
-                triggerEventValue =
-                  newValue.length === 0 ? '' : newValue.join(',');
+                triggerEventValue = newValue || [];
               } else {
                 triggerEventValue =
                   newValue.length === 0
-                    ? ''
-                    : newValue.map(x => x[valueProp.name]).join(',');
+                    ? []
+                    : newValue.map(x => x[valueProp.name]);
               }
             } else if (freeSolo) {
               triggerEventValue = newValue || '';
