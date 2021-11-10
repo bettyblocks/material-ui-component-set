@@ -8,7 +8,7 @@
       disabled,
       position,
       size,
-      helperText,
+      helperText = [''],
       row,
       checkboxOptions,
       model,
@@ -25,8 +25,8 @@
       nameAttribute,
       order,
       orderBy,
-      validationValueMissing,
-      dataComponentAttribute,
+      validationValueMissing = [''],
+      dataComponentAttribute = ['CheckboxGroup'],
     } = options;
 
     const {
@@ -61,9 +61,13 @@
     const required = customModelAttribute ? attributeRequired : defaultRequired;
     const labelText = useText(label);
     const nameAttributeValue = useText(nameAttribute);
+    const dataComponentAttributeValue = useText(dataComponentAttribute);
+    const validationValueMissingText = useText(validationValueMissing);
+    const helperTextResolved = useText(helperText);
+    const defaultValueText = useText(defaultValue);
 
     const getValues = () => {
-      const value = defaultValue ? useText(defaultValue) : [];
+      const value = defaultValueText || [];
       // split the string and trim spaces
       if (Array.isArray(value)) return value;
 
@@ -122,16 +126,14 @@
     const { results } = data || {};
 
     B.defineFunction('Refetch', () => refetch());
-    B.defineFunction('Reset', () =>
-      setValues(defaultValue ? useText(defaultValue) : []),
-    );
+    B.defineFunction('Reset', () => setValues(defaultValueText || []));
 
     useEffect(() => {
       if (isDev) {
         setValues(getValues());
-        setHelper(useText(helperText));
+        setHelper(helperTextResolved);
       }
-    }, [isDev, defaultValue, helperText]);
+    }, [isDev, defaultValueText, helperTextResolved]);
 
     const {
       Checkbox: MUICheckbox,
@@ -199,7 +201,9 @@
 
     useEffect(() => {
       if (afterFirstInvalidation) {
-        const message = useText(hasError ? validationValueMissing : helperText);
+        const message = hasError
+          ? validationValueMissingText
+          : helperTextResolved;
         setHelper(message);
       }
     }, [errorState, values, required, afterFirstInvalidation]);
@@ -216,10 +220,7 @@
         {labelText && !hideLabel && (
           <FormLabel component="legend">{labelText}</FormLabel>
         )}
-        <FormGroup
-          row={row}
-          data-component={useText(dataComponentAttribute) || 'CheckboxGroup'}
-        >
+        <FormGroup row={row} data-component={dataComponentAttributeValue}>
           {renderCheckBoxes()}
         </FormGroup>
         {helper && <FormHelperText>{helper}</FormHelperText>}

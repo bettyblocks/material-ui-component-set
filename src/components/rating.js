@@ -21,10 +21,10 @@
       precision,
       icon,
       nameAttribute,
-      validationValueMissing,
+      validationValueMissing = [''],
       error,
-      helperText,
-      dataComponentAttribute,
+      helperText = [''],
+      dataComponentAttribute = ['Rating'],
     } = options;
 
     const {
@@ -57,10 +57,15 @@
       customModelAttribute || {};
     const nameAttributeValue = useText(nameAttribute);
 
+    const defaultValueText = useText(defaultValue);
+    const helperTextResolved = useText(helperText);
+    const validationMessageText = useText(validationValueMissing);
+    const dataComponentAttributeValue = useText(dataComponentAttribute);
+
     const handleValidation = () => {
       const hasError = required && !currentValue;
       setErrorState(hasError);
-      const message = useText(hasError ? validationValueMissing : helperText);
+      const message = hasError ? validationMessageText : helperTextResolved;
       setHelper(message);
     };
 
@@ -79,15 +84,15 @@
 
     useEffect(() => {
       if (isDev) {
-        setCurrentValue(useText(defaultValue));
-        setHelper(useText(helperText));
+        setCurrentValue(defaultValueText);
+        setHelper(helperTextResolved);
       }
-    }, [isDev, defaultValue, helperText]);
+    }, [isDev, defaultValueText, helperTextResolved]);
 
     const RatingComponent = (
       <div
         className={classes.root}
-        data-component={useText(dataComponentAttribute) || 'Rating'}
+        data-component={dataComponentAttributeValue}
       >
         <FormControl
           classes={{

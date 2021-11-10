@@ -7,7 +7,7 @@
     const {
       disabled,
       row,
-      helperText,
+      helperText = [''],
       radioOptions,
       model,
       optionType,
@@ -22,11 +22,11 @@
       hideLabel,
       customModelAttribute: customModelAttributeObj,
       property,
-      validationValueMissing,
+      validationValueMissing = [''],
       nameAttribute,
       order,
       orderBy,
-      dataComponentAttribute,
+      dataComponentAttribute = ['Radio'],
     } = options;
     const {
       env,
@@ -73,6 +73,11 @@
     const [helper, setHelper] = useState(useText(helperText));
     const mounted = useRef(false);
     let radioValues = [];
+
+    const validationValueMissingText = useText(validationValueMissing);
+    const helperTextResolved = useText(helperText);
+    const dataComponentAttributeValue = useText(dataComponentAttribute);
+    const defaultValueText = useText(defaultValue);
 
     const {
       FormControl: MUIFormControl,
@@ -177,8 +182,8 @@
       const hasError = required && !radioValues.includes(value);
       setErrorState(hasError);
       const message = hasError
-        ? useText(validationValueMissing)
-        : useText(helperText);
+        ? validationValueMissingText
+        : helperTextResolved;
       setHelper(message);
     };
 
@@ -198,10 +203,10 @@
 
     useEffect(() => {
       if (isDev) {
-        setValue(useText(defaultValue));
-        setHelper(useText(helperText));
+        setValue(defaultValueText);
+        setHelper(helperTextResolved);
       }
-    }, [isDev, defaultValue, helperText]);
+    }, [isDev, defaultValueText, helperTextResolved]);
 
     const FormControl = (
       <MUIFormControl
@@ -220,7 +225,7 @@
           onChange={handleChange}
           onBlur={validationHandler}
           aria-label={labelText}
-          data-component={useText(dataComponentAttribute) || 'Radio'}
+          data-component={dataComponentAttributeValue}
         >
           {renderRadios()}
         </RadioGroup>
