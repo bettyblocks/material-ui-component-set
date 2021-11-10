@@ -28,7 +28,7 @@
       linkTo,
       linkToExternal,
       dense,
-      dataComponentAttribute,
+      dataComponentAttribute = ['ListItem'],
     } = options;
     const { env, useText, Link } = B;
     const isDev = env === 'dev';
@@ -41,6 +41,7 @@
 
     const primary = useText(primaryText);
     const secondary = useText(secondaryText);
+    const dataComponentAttributeValue = useText(dataComponentAttribute);
 
     const IconComponent = icon !== 'None' && (
       <ListItemIcon>{React.createElement(Icons[icon])}</ListItemIcon>
@@ -63,8 +64,9 @@
     const itemText = isEmpty && isDev ? 'Empty content' : primary;
 
     let linkComponent = 'li';
-    if (linkType === 'internal' && hasLink) linkComponent = Link;
-    if (linkType === 'external' && hasExternalLink) linkComponent = 'a';
+    if (linkType === 'internal' && hasLink && !isDev) linkComponent = Link;
+    if (linkType === 'external' && hasExternalLink && !isDev)
+      linkComponent = 'a';
 
     return (
       <ListItem
@@ -72,7 +74,9 @@
         button={hasLink || linkToExternalVariable}
         href={hasExternalLink ? linkToExternalVariable : undefined}
         component={linkComponent}
-        endpoint={linkType === 'internal' && hasLink ? linkTo : undefined}
+        endpoint={
+          linkType === 'internal' && hasLink && !isDev ? linkTo : undefined
+        }
         alignItems={alignItems}
         disabled={disabled}
         disableGutters={disableGutters}
@@ -80,7 +84,7 @@
         selected={selected}
         className={classes.root}
         dense={dense}
-        data-component={useText(dataComponentAttribute) || 'ListItem'}
+        data-component={dataComponentAttributeValue}
       >
         {avatarOrIcon === 'avatar' || (avatarOrIcon === 'icon' && avatar)
           ? AvatarComponent
@@ -95,6 +99,8 @@
   })(),
   styles: B => t => {
     const { Styling } = B;
+    const { env } = B;
+    const isDev = env === 'dev';
     const style = new Styling(t);
     return {
       root: {
@@ -120,6 +126,9 @@
         },
         '& .MuiListItemIcon-root': {
           color: ({ options: { iconColor } }) => style.getColor(iconColor),
+        },
+        '& .MuiTouchRipple-root': {
+          display: isDev ? 'none' : undefined,
         },
       },
       placeholder: {
