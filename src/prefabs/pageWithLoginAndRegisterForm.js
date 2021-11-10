@@ -6259,6 +6259,20 @@
                                             type: 'TOGGLE',
                                           },
                                           {
+                                            label: 'Preload data in all tabs',
+                                            key: 'preLoadTabs',
+                                            value: true,
+                                            type: 'TOGGLE',
+                                            configuration: {
+                                              condition: {
+                                                type: 'SHOW',
+                                                option: 'advancedSettings',
+                                                comparator: 'EQ',
+                                                value: true,
+                                              },
+                                            },
+                                          },
+                                          {
                                             type: 'VARIABLE',
                                             label: 'Test attribute',
                                             key: 'dataComponentAttribute',
