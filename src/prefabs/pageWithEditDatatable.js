@@ -4469,7 +4469,7 @@
                             type: 'SIZES',
                           },
                           {
-                            value: ['XL', 'M', 'M', 'M'],
+                            value: ['L', 'L', 'L', 'L'],
                             label: 'Inner space',
                             key: 'innerSpacing',
                             type: 'SIZES',
