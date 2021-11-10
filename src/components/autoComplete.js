@@ -287,50 +287,62 @@
           },
         });
       }
-    } else if (!multiple) {
-      if (
-        debouncedInputValue &&
-        debouncedInputValue ===
-          (typeof value === 'string' ? value : value[searchProp.name]) &&
-        !freeSolo
-      ) {
-        filter._or = [
-          {
-            [searchProp.name]: {
-              [searchPropIsNumber ? 'eq' : 'regex']: searchPropIsNumber
-                ? parseInt(debouncedInputValue, 10)
-                : debouncedInputValue,
-            },
+    } else if (multiple) {
+      if (debouncedInputValue) {
+        if (!filter._or) {
+          filter._or = [];
+        }
+
+        filter._or.push({
+          [searchProp.name]: {
+            [searchPropIsNumber ? 'eq' : 'regex']: searchPropIsNumber
+              ? parseInt(debouncedInputValue, 10)
+              : debouncedInputValue,
           },
-          {
-            [valueProp.name]: {
-              neq: valuePropIsNumber
-                ? parseInt(value[valueProp.name], 10)
-                : value[valueProp.name],
-            },
-          },
-        ];
-      } else if (debouncedInputValue) {
-        filter[searchProp.name] = {
-          [searchPropIsNumber ? 'eq' : 'regex']: searchPropIsNumber
-            ? parseInt(debouncedInputValue, 10)
-            : debouncedInputValue,
-        };
-      } else if (value !== '' && !freeSolo) {
-        filter._or = [
-          {
-            [valueProp.name]: {
-              [valuePropIsNumber ? 'eq' : 'regex']:
-                typeof value === 'string' ? value : value[valueProp.name],
-            },
-          },
-          {
-            [valueProp.name]: {
-              neq: typeof value === 'string' ? value : value[valueProp.name],
-            },
-          },
-        ];
+        });
       }
+    } else if (
+      debouncedInputValue &&
+      debouncedInputValue ===
+        (typeof value === 'string' ? value : value[searchProp.name]) &&
+      !freeSolo
+    ) {
+      filter._or = [
+        {
+          [searchProp.name]: {
+            [searchPropIsNumber ? 'eq' : 'regex']: searchPropIsNumber
+              ? parseInt(debouncedInputValue, 10)
+              : debouncedInputValue,
+          },
+        },
+        {
+          [valueProp.name]: {
+            neq: valuePropIsNumber
+              ? parseInt(value[valueProp.name], 10)
+              : value[valueProp.name],
+          },
+        },
+      ];
+    } else if (debouncedInputValue) {
+      filter[searchProp.name] = {
+        [searchPropIsNumber ? 'eq' : 'regex']: searchPropIsNumber
+          ? parseInt(debouncedInputValue, 10)
+          : debouncedInputValue,
+      };
+    } else if (value !== '' && !freeSolo) {
+      filter._or = [
+        {
+          [valueProp.name]: {
+            [valuePropIsNumber ? 'eq' : 'regex']:
+              typeof value === 'string' ? value : value[valueProp.name],
+          },
+        },
+        {
+          [valueProp.name]: {
+            neq: typeof value === 'string' ? value : value[valueProp.name],
+          },
+        },
+      ];
     }
     /* eslint-enable no-underscore-dangle */
 
@@ -685,13 +697,12 @@
               setDebouncedInputValue('');
 
               if (freeSolo) {
-                triggerEventValue =
-                  newValue.length === 0 ? '' : newValue.join(',');
+                triggerEventValue = newValue || [];
               } else {
                 triggerEventValue =
                   newValue.length === 0
-                    ? ''
-                    : newValue.map(x => x[valueProp.name]).join(',');
+                    ? []
+                    : newValue.map(x => x[valueProp.name]);
               }
             } else if (freeSolo) {
               triggerEventValue = newValue || '';
