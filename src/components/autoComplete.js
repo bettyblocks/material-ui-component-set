@@ -117,7 +117,8 @@
      * User input in the autocomplete. In case of freeSolo this is the same as `value`
      */
     const [inputValue, setInputValue] = useState(
-      optionType === 'property' || (optionType === 'model' && freeSolo)
+      optionType === 'property' ||
+        (optionType === 'model' && freeSolo && !multiple)
         ? defaultValue
         : '',
     );
@@ -303,7 +304,9 @@
       }
     } else if (
       debouncedInputValue &&
-      debouncedInputValue ===
+      (searchPropIsNumber
+        ? parseInt(debouncedInputValue, 10)
+        : debouncedInputValue) ===
         (typeof value === 'string' ? value : value[searchProp.name]) &&
       !freeSolo
     ) {
@@ -662,11 +665,19 @@
     // In the first render we want to make sure to convert the default value
     if (!multiple && !inputValue && currentValue) {
       setValue(currentValue);
-      setInputValue(currentValue[searchProp.name]);
+      setInputValue(currentValue[searchProp.name].toString());
     }
 
     const renderLabel = option => {
-      const optionLabel = option ? option[searchProp.name] : '';
+      if (freeSolo) {
+        return option ? option.toString() : '';
+      }
+
+      let optionLabel = '';
+
+      if (option && option[searchProp.name]) {
+        optionLabel = option[searchProp.name];
+      }
 
       return optionLabel === '' || optionLabel === null
         ? '-- empty --'
@@ -679,11 +690,9 @@
         disableCloseOnSelect={!closeOnSelect}
         disabled={disabled}
         freeSolo={freeSolo}
-        {...(optionType === 'model' &&
-          // If freeSolo is turned on the value and options are strings instead of objects
-          !freeSolo && {
-            getOptionLabel: renderLabel,
-          })}
+        {...(optionType === 'model' && {
+          getOptionLabel: renderLabel,
+        })}
         inputValue={inputValue}
         loading={loading}
         multiple={multiple}
