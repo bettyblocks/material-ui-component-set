@@ -91,7 +91,7 @@
     const label = useText(labelRaw);
     const defaultValue = useText(valueRaw, { rawValue: true });
 
-    let initalValue = defaultValue;
+    let initalValue = defaultValue.replace(/\n/g, '');
 
     if (multiple) {
       if (defaultValue.trim() === '') {
@@ -117,8 +117,12 @@
      * User input in the autocomplete. In case of freeSolo this is the same as `value`
      */
     const [inputValue, setInputValue] = useState(
-      optionType === 'property' ? defaultValue : '',
+      optionType === 'property' ||
+        (optionType === 'model' && freeSolo && !multiple)
+        ? defaultValue
+        : '',
     );
+
     /*
      * Debounced user input to only send a request every 250ms
      */
@@ -243,20 +247,53 @@
      */
     /* eslint-disable no-underscore-dangle */
     if (multiple && value.length > 0) {
-      if (!filter._or) {
-        filter._or = [];
+      if (!freeSolo) {
+        if (!filter._or) {
+          filter._or = [];
+        }
+
+        value.forEach(x => {
+          filter._or.push({
+            [valueProp.name]: {
+              [valuePropIsNumber ? 'eq' : 'regex']:
+                typeof x === 'string' ? x : x[valueProp.name],
+            },
+          });
+        });
       }
 
-      value.forEach(x => {
+      if (debouncedInputValue) {
+        if (!filter._or) {
+          filter._or = [];
+        }
+
         filter._or.push({
-          [valueProp.name]: {
-            [valuePropIsNumber ? 'eq' : 'regex']:
-              typeof x === 'string' ? x : x[valueProp.name],
+          [searchProp.name]: {
+            [searchPropIsNumber ? 'eq' : 'regex']: searchPropIsNumber
+              ? parseInt(debouncedInputValue, 10)
+              : debouncedInputValue,
           },
         });
-      });
+      } else if (!freeSolo) {
+        if (!filter._or) {
+          filter._or = [];
+        }
 
+        filter._or.push({
+          [valueProp.name]: {
+            neq:
+              typeof value[0] === 'string'
+                ? value[0]
+                : value[0][valueProp.name],
+          },
+        });
+      }
+    } else if (multiple) {
       if (debouncedInputValue) {
+        if (!filter._or) {
+          filter._or = [];
+        }
+
         filter._or.push({
           [searchProp.name]: {
             [searchPropIsNumber ? 'eq' : 'regex']: searchPropIsNumber
@@ -265,20 +302,52 @@
           },
         });
       }
-      /* eslint-enable no-underscore-dangle */
+    } else if (
+      debouncedInputValue &&
+      (searchPropIsNumber
+        ? parseInt(debouncedInputValue, 10)
+        : debouncedInputValue) ===
+        (typeof value === 'string' ? value : value[searchProp.name]) &&
+      !freeSolo
+    ) {
+      filter._or = [
+        {
+          [searchProp.name]: {
+            [searchPropIsNumber ? 'eq' : 'regex']: searchPropIsNumber
+              ? parseInt(debouncedInputValue, 10)
+              : debouncedInputValue,
+          },
+        },
+        {
+          [valueProp.name]: {
+            neq: valuePropIsNumber
+              ? parseInt(value[valueProp.name], 10)
+              : value[valueProp.name],
+          },
+        },
+      ];
     } else if (debouncedInputValue) {
       filter[searchProp.name] = {
         [searchPropIsNumber ? 'eq' : 'regex']: searchPropIsNumber
           ? parseInt(debouncedInputValue, 10)
           : debouncedInputValue,
       };
-    } else {
-      filter[valueProp.name] = {
-        [valuePropIsNumber ? 'eq' : 'regex']: valuePropIsNumber
-          ? parseInt(value, 10)
-          : value,
-      };
+    } else if (value !== '' && !freeSolo) {
+      filter._or = [
+        {
+          [valueProp.name]: {
+            [valuePropIsNumber ? 'eq' : 'regex']:
+              typeof value === 'string' ? value : value[valueProp.name],
+          },
+        },
+        {
+          [valueProp.name]: {
+            neq: typeof value === 'string' ? value : value[valueProp.name],
+          },
+        },
+      ];
     }
+    /* eslint-enable no-underscore-dangle */
 
     /*
      * Merge external filters (from interactions) into local filters
@@ -461,6 +530,64 @@
       );
     }
 
+    const getOptions = () => {
+      if (optionType === 'property') {
+        return propertyValues.map(propertyValue => propertyValue.value);
+      }
+
+      if (optionType === 'model') {
+        if (!results) {
+          return [];
+        }
+
+        // If freeSolo is turned on the value and options are strings instead of objects
+        if (freeSolo) {
+          return results.map(result => result[searchProp.name]);
+        }
+
+        if (multiple) {
+          const nonFetchedOptions = [];
+          value.forEach(x => {
+            if (
+              !results.some(result => {
+                if (typeof x === 'string') {
+                  return valuePropIsNumber
+                    ? result[valueProp.name] === parseInt(x, 10)
+                    : result[valueProp.name] === x;
+                }
+
+                return result[valueProp.name] === x[valueProp.name];
+              })
+            ) {
+              nonFetchedOptions.push(x);
+            }
+          });
+
+          return [...nonFetchedOptions, ...results];
+        }
+
+        if (
+          !results.some(result => {
+            if (typeof value === 'string') {
+              return valuePropIsNumber
+                ? result[valueProp.name] === parseInt(value, 10)
+                : result[valueProp.name] === value;
+            }
+
+            return result[valueProp.name] === value[valueProp.name];
+          })
+        ) {
+          return [value, ...results];
+        }
+
+        return results;
+      }
+
+      return [];
+    };
+
+    const currentOptions = getOptions();
+
     /*
      * Convert `value` state into something the `value` prop of the `Autocomplete` component will accept with the right settings
      */
@@ -469,39 +596,39 @@
         return value;
       }
 
-      if (!results) {
-        return multiple ? [] : null;
-      }
-
       // If freeSolo is turned on the value and options are strings instead of objects
       if (freeSolo) {
         return value;
       }
 
+      if (currentOptions.length === 0) {
+        return multiple ? [] : null;
+      }
+
       if (multiple) {
         return value
           .map(x =>
-            results.find(result => {
+            currentOptions.find(option => {
               if (typeof x === 'string') {
                 return valuePropIsNumber
-                  ? result[valueProp.name] === parseInt(x, 10)
-                  : result[valueProp.name] === x;
+                  ? option[valueProp.name] === parseInt(x, 10)
+                  : option[valueProp.name] === x;
               }
 
-              return result[valueProp.name] === x[valueProp.name];
+              return option[valueProp.name] === x[valueProp.name];
             }),
           )
           .filter(x => x !== undefined);
       }
 
-      return results.find(result => {
+      return currentOptions.find(option => {
         if (typeof value === 'string') {
           return valuePropIsNumber
-            ? result[valueProp.name] === parseInt(value, 10)
-            : result[valueProp.name] === value;
+            ? option[valueProp.name] === parseInt(value, 10)
+            : option[valueProp.name] === value;
         }
 
-        return result[valueProp.name] === value[valueProp.name];
+        return option[valueProp.name] === value[valueProp.name];
       });
     };
 
@@ -532,35 +659,25 @@
      *
      * The hidden input is used when `optionType` is set to `model`. Then the `valueProperty` options is used to determine what is send to the backend when a from is submitted.
      */
-    const getOptions = () => {
-      if (optionType === 'property') {
-        return propertyValues.map(propertyValue => propertyValue.value);
-      }
-
-      if (optionType === 'model') {
-        if (!results) {
-          return [];
-        }
-
-        // If freeSolo is turned on the value and options are strings instead of objects
-        if (freeSolo) {
-          return results.map(result => result[valueProp.name]);
-        }
-
-        return results;
-      }
-
-      return [];
-    };
 
     const currentValue = getValue();
 
+    // In the first render we want to make sure to convert the default value
     if (!multiple && !inputValue && currentValue) {
-      setInputValue(currentValue[searchProp.name]);
+      setValue(currentValue);
+      setInputValue(currentValue[searchProp.name].toString());
     }
 
     const renderLabel = option => {
-      const optionLabel = option ? option[searchProp.name] : '';
+      if (freeSolo) {
+        return option ? option.toString() : '';
+      }
+
+      let optionLabel = '';
+
+      if (option && option[searchProp.name]) {
+        optionLabel = option[searchProp.name];
+      }
 
       return optionLabel === '' || optionLabel === null
         ? '-- empty --'
@@ -573,51 +690,49 @@
         disableCloseOnSelect={!closeOnSelect}
         disabled={disabled}
         freeSolo={freeSolo}
-        {...(optionType === 'model' &&
-          // If freeSolo is turned on the value and options are strings instead of objects
-          !freeSolo && {
-            getOptionLabel: renderLabel,
-          })}
+        {...(optionType === 'model' && {
+          getOptionLabel: renderLabel,
+        })}
         inputValue={inputValue}
         loading={loading}
         multiple={multiple}
         onChange={(_, newValue) => {
           setValue(newValue || (multiple ? [] : ''));
 
-          if (optionType === 'model') {
-            let triggerEventValue;
+          let triggerEventValue;
 
+          if (optionType === 'model') {
             if (multiple) {
               setDebouncedInputValue('');
 
               if (freeSolo) {
-                triggerEventValue =
-                  newValue.length === 0 ? '' : newValue.join(',');
+                triggerEventValue = newValue || [];
               } else {
                 triggerEventValue =
                   newValue.length === 0
-                    ? ''
-                    : newValue.map(x => x[valueProp.name]).join(',');
+                    ? []
+                    : newValue.map(x => x[valueProp.name]);
               }
             } else if (freeSolo) {
               triggerEventValue = newValue || '';
             } else {
               triggerEventValue = newValue ? newValue[valueProp.name] : '';
             }
-
-            B.triggerEvent(
-              'onChange',
-              triggerEventValue,
-              changeContext.current,
-            );
+          } else if (optionType === 'property') {
+            triggerEventValue = newValue || '';
           }
+
+          B.triggerEvent('onChange', triggerEventValue, changeContext.current);
         }}
         onInputChange={(event, newValue) => {
-          if (event) {
+          if (event && (event.type === 'change' || event.type === 'keydown')) {
             setInputValue(newValue);
+          } else if (event && event.type === 'click') {
+            setInputValue(newValue);
+            setDebouncedInputValue(newValue);
           }
         }}
-        options={getOptions()}
+        options={currentOptions}
         renderInput={params => (
           <>
             {optionType === 'model' && (
