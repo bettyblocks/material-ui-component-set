@@ -1,3 +1,17 @@
+## [1.182.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.182.3...v1.182.4) (2021-11-12)
+
+
+### Bug Fixes
+
+* also fire onchange interaction for list properties ([cc82c7b](https://github.com/bettyblocks/material-ui-component-set/commit/cc82c7b6039168938e19e1d9a6f95db326ad82e6))
+* fetch options for multiple with empty value ([832a0eb](https://github.com/bettyblocks/material-ui-component-set/commit/832a0eb31bd74a26a8b486cc0d6880af03706b94))
+* filter error when no default value is set ([51ce34a](https://github.com/bettyblocks/material-ui-component-set/commit/51ce34a9fc0bddcc4aa59badb4295a13f65558dc))
+* free solo ([297e200](https://github.com/bettyblocks/material-ui-component-set/commit/297e200c145fd0b54db47801f87867eb5465fb53))
+* free solo with default value ([816e2b0](https://github.com/bettyblocks/material-ui-component-set/commit/816e2b0428ba852623e18665b4c34391fe401243))
+* issues ([54ab676](https://github.com/bettyblocks/material-ui-component-set/commit/54ab67677cb7a6d1bfa406046e53a74d40c3eb62))
+* send array with values to interaction ([4a33d05](https://github.com/bettyblocks/material-ui-component-set/commit/4a33d05d4c0b1db28f2ddf09041820a674d49f61))
+* show multiple values in dropdown when value selected ([b08117a](https://github.com/bettyblocks/material-ui-component-set/commit/b08117afc2378b8530a34bf38ae81b131581e250))
+
 ## [1.182.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.182.2...v1.182.3) (2021-11-10)
 
 
