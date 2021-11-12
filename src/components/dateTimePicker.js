@@ -8,7 +8,7 @@
       autoComplete,
       disabled,
       error,
-      placeholder,
+      placeholder = [''],
       variant,
       inputvariant,
       type,
@@ -18,7 +18,7 @@
       size,
       fullWidth,
       margin,
-      helperText,
+      helperText = [''],
       disableToolbar,
       disablePastDates,
       hideLabel,
@@ -28,7 +28,7 @@
       nameAttribute,
       locale,
       clearable,
-      dataComponentAttribute,
+      dataComponentAttribute = ['DateTimePicker'],
     } = options;
     const { env, getCustomModelAttribute, useText } = B;
     const {
@@ -45,6 +45,7 @@
     const [selectedDate, setSelectedDate] = useState(null);
     const helper = useText(helperText);
     const placeholderText = useText(placeholder);
+    const dataComponentAttributeValue = useText(dataComponentAttribute);
 
     const localeMap = {
       nl: nlLocale,
@@ -182,7 +183,7 @@
         disableToolbar={disableToolbar}
         disablePast={disablePastDates}
         format={format}
-        data-component={useText(dataComponentAttribute) || 'DateTimePicker'}
+        data-component={dataComponentAttributeValue}
         PopoverProps={{
           classes: {
             root: classes.popover,

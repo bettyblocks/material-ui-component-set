@@ -26,7 +26,7 @@
       nameAttribute,
       type,
       showImagePreview,
-      dataComponentAttribute,
+      dataComponentAttribute = ['FileUpload'],
     } = options;
 
     const isDev = env === 'dev';
@@ -54,6 +54,7 @@
     const nameAttributeValue = useText(nameAttribute);
     const requiredText = required ? '*' : '';
     const [uploadedFileArray, setUploadedFileArray] = useState([]);
+    const dataComponentAttributeValue = useText(dataComponentAttribute);
 
     const formatBytes = bytes => {
       if (bytes === 0) return '0 Bytes';
@@ -142,7 +143,7 @@
     };
 
     const UploadComponent = () => (
-      <div data-component={useText(dataComponentAttribute) || 'FileUpload'}>
+      <div data-component={dataComponentAttributeValue}>
         <input
           accept={acceptedValue}
           className={classes.input}

@@ -1,3 +1,26 @@
+## [1.182.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.182.2...v1.182.3) (2021-11-10)
+
+
+### Bug Fixes
+
+* default value as array in hidden input and file upload ([4ca45c7](https://github.com/bettyblocks/material-ui-component-set/commit/4ca45c79a45319d79fbd21aa6f8e1b9fe6c2e697))
+* resolve conditional hooks in formfields ([33b6472](https://github.com/bettyblocks/material-ui-component-set/commit/33b64724d7e37bae82859034e432fa3e1abdb00c))
+
+## [1.182.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.182.1...v1.182.2) (2021-11-08)
+
+
+### Bug Fixes
+
+* undo failing property fetching in listitem ([b4221d6](https://github.com/bettyblocks/material-ui-component-set/commit/b4221d6f1ea3440ce55721703484773e29ed2507))
+
+## [1.182.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.182.0...v1.182.1) (2021-11-08)
+
+
+### Bug Fixes
+
+* missing-prefabs-pageWithLoginAndRigisterForm ([b8248b4](https://github.com/bettyblocks/material-ui-component-set/commit/b8248b469fbcd9a0d598916c0ed0acf772592cbc))
+* tabs-preload-data-interactions-and-prefabs ([d7c6485](https://github.com/bettyblocks/material-ui-component-set/commit/d7c6485874e63454b1f67937a3f18845b9926dbd))
+
 # [1.182.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.181.2...v1.182.0) (2021-11-05)
 
 

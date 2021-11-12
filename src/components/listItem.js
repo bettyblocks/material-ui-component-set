@@ -30,7 +30,7 @@
       dense,
       dataComponentAttribute,
     } = options;
-    const { env, useText, Link, useProperty } = B;
+    const { env, useText, Link } = B;
     const isDev = env === 'dev';
 
     const hasLink = linkTo && linkTo.id !== '';
@@ -39,19 +39,8 @@
     const linkToExternalVariable =
       (linkToExternal && useText(linkToExternal)) || '';
 
-    let primary = useText(primaryText);
+    const primary = useText(primaryText);
     const secondary = useText(secondaryText);
-
-    // When selected in the before create, the property is not fetched yet
-    const primaryIsProperty =
-      primaryText &&
-      primaryText.length === 1 &&
-      primaryText[0].type === 'PROPERTY';
-    const propertyId = primaryIsProperty ? primaryText[0].id : '0';
-    const primaryFallback = useProperty(propertyId);
-    if (!primary && primaryIsProperty) {
-      primary = primaryFallback;
-    }
 
     const IconComponent = icon !== 'None' && (
       <ListItemIcon>{React.createElement(Icons[icon])}</ListItemIcon>
