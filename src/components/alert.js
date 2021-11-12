@@ -5,7 +5,6 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { Alert, AlertTitle } = window.MaterialUI.Lab;
-    const { Close } = window.MaterialUI.Icons;
     const { IconButton } = window.MaterialUI.Core;
     const { env, useText, Icon } = B;
     const {
@@ -81,7 +80,7 @@
                 setOpen(false);
               }}
             >
-              <Close />
+              <Icon name="Close" />
             </IconButton>
           ) : null
         }
