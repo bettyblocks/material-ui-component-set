@@ -12,11 +12,6 @@
       TextField,
     } = window.MaterialUI.Core;
     const {
-      CheckBox: CheckBoxIcon,
-      CheckBoxOutlineBlank,
-      ExpandMore,
-    } = window.MaterialUI.Icons;
-    const {
       InteractionScope,
       ModelProvider,
       env,
@@ -25,6 +20,7 @@
       useAllQuery,
       useFilter,
       useText,
+      Icon,
     } = B;
     const {
       closeOnSelect,
@@ -500,7 +496,7 @@
               inputProps: {
                 tabIndex: isDev ? -1 : undefined,
               },
-              endAdornment: <>{!freeSolo && <ExpandMore />}</>,
+              endAdornment: <>{!freeSolo && <Icon name="ExpandMore" />}</>,
               startAdornment: (
                 <>
                   {multiple ? (
@@ -779,8 +775,8 @@
             <>
               <Checkbox
                 classes={{ root: classes.checkbox }}
-                icon={<CheckBoxOutlineBlank fontSize="small" />}
-                checkedIcon={<CheckBoxIcon fontSize="small" />}
+                icon={<Icon name="CheckBoxOutlineBlank" fontSize="small" />}
+                checkedIcon={<Icon name="CheckBox" fontSize="small" />}
                 style={{ marginRight: 8 }}
                 checked={selected}
               />
