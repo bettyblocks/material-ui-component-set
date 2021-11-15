@@ -4,9 +4,8 @@
   allowedTypes: [],
   orientation: 'VERTICAL',
   jsx: (() => {
-    const { Icons } = window.MaterialUI;
     const { Link, Badge } = window.MaterialUI.Core;
-    const { env, useText, Link: BLink } = B;
+    const { env, useText, Link: BLink, Icon } = B;
     const isDev = env === 'dev';
     const {
       icon,
@@ -33,14 +32,16 @@
       horizontal: anchorOriginSplit[0],
       vertical: anchorOriginSplit[1],
     };
-    const IconComponent = React.createElement(Icons[icon], {
-      className: classes.root,
-      'data-component': useText(dataComponentAttribute) || 'DataTableColumn',
-    });
 
     const IconWithoutLink = (
       // eslint-disable-next-line
-      <span onClick={() => B.defineFunction('Click')}>{IconComponent}</span>
+      <span onClick={() => B.defineFunction('Click')}>
+        <Icon
+          name={icon}
+          className={classes.root}
+          data-component={useText(dataComponentAttribute) || 'DataTableColumn'}
+        />
+      </span>
     );
 
     const href =
@@ -53,11 +54,15 @@
         component={linkType === 'internal' && hasLink ? BLink : undefined}
         endpoint={linkType === 'internal' && hasLink ? linkTo : undefined}
       >
-        {IconComponent}
+        <Icon
+          name={icon}
+          className={classes.root}
+          data-component={useText(dataComponentAttribute) || 'DataTableColumn'}
+        />
       </Link>
     );
 
-    const Icon = hasLink ? LinkComponent : IconWithoutLink;
+    const IconComponent = hasLink ? LinkComponent : IconWithoutLink;
 
     const BadgeComponent = (
       <Badge
@@ -68,11 +73,12 @@
         variant={variant}
         overlap={variant === 'dot' ? 'circle' : 'rectangle'}
       >
-        {Icon}
+        {IconComponent}
       </Badge>
     );
 
-    const Component = addBadge && !isBadgeHidden ? BadgeComponent : Icon;
+    const Component =
+      addBadge && !isBadgeHidden ? BadgeComponent : IconComponent;
 
     return isDev ? (
       <span className={classes.wrapper}>

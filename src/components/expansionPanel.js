@@ -10,8 +10,7 @@
       ExpansionPanelDetails,
       Typography,
     } = window.MaterialUI.Core;
-    const { ExpandMore } = window.MaterialUI.Icons;
-    const { useText, env } = B;
+    const { useText, env, Icon } = B;
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
     const isPristine = isEmpty && isDev;
@@ -80,7 +79,7 @@
 
     const panelSummaryOptions = {
       onClick,
-      expandIcon: <ExpandMore />,
+      expandIcon: <Icon name="ExpandMore" />,
     };
 
     const ExpansionPanelComponent = (
