@@ -133,7 +133,7 @@
      */
     const [interactionFilter, setInteractionFilter] = useState({});
 
-    const ref = useRef(false);
+    const defaultValueEvaluatedRef = useRef(false);
 
     const { kind: propertyKind = '', values: propertyValues } =
       getProperty(property) || {};
@@ -276,7 +276,7 @@
               : debouncedInputValue,
           },
         });
-      } else if (!freeSolo && ref.current) {
+      } else if (!freeSolo && defaultValueEvaluatedRef.current) {
         if (!filter._or) {
           filter._or = [];
         }
@@ -344,7 +344,7 @@
         },
       ];
 
-      if (ref.current) {
+      if (defaultValueEvaluatedRef.current) {
         filter._or.push({
           [valueProp.name]: {
             neq: typeof value === 'string' ? value : value[valueProp.name],
@@ -445,7 +445,13 @@
     }
 
     // If the default value is a value that lives outside the take range of the query we should fetch the values before we continue.
-    if (!isDev && !ref.current && !freeSolo && results) {
+    if (
+      !isDev &&
+      !defaultValueEvaluatedRef.current &&
+      !freeSolo &&
+      value &&
+      results
+    ) {
       setValue(prev => {
         if (multiple) {
           return prev.map(val =>
@@ -464,7 +470,7 @@
         );
       });
 
-      ref.current = true;
+      defaultValueEvaluatedRef.current = true;
     }
 
     B.defineFunction('Clear', () => {
