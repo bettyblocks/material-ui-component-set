@@ -11,7 +11,6 @@
       ListItemAvatar,
       Avatar,
     } = window.MaterialUI.Core;
-    const { Icons } = window.MaterialUI;
     const {
       alignItems,
       disabled,
@@ -30,7 +29,7 @@
       dense,
       dataComponentAttribute = ['ListItem'],
     } = options;
-    const { env, useText, Link } = B;
+    const { env, useText, Link, Icon } = B;
     const isDev = env === 'dev';
 
     const hasLink = linkTo && linkTo.id !== '';
@@ -44,13 +43,15 @@
     const dataComponentAttributeValue = useText(dataComponentAttribute);
 
     const IconComponent = icon !== 'None' && (
-      <ListItemIcon>{React.createElement(Icons[icon])}</ListItemIcon>
+      <ListItemIcon>
+        <Icon name={icon} />
+      </ListItemIcon>
     );
 
     const AvatarComponent = (
       <ListItemAvatar>
         <Avatar src={avatarOrIcon === 'avatar' && avatarUrl}>
-          {avatarOrIcon === 'icon' && React.createElement(Icons[icon])}
+          {avatarOrIcon === 'icon' && <Icon name={icon} />}
         </Avatar>
       </ListItemAvatar>
     );

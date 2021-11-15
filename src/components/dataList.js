@@ -14,6 +14,7 @@
           useAllQuery,
           useFilter,
           useText,
+          Icon,
         } = B;
         const [page, setPage] = useState(1);
         const [search, setSearch] = useState('');
@@ -38,7 +39,6 @@
 
         const rowsPerPage = parseInt(take, 10) || 50;
         const { TextField, InputAdornment } = window.MaterialUI.Core;
-        const { Search } = window.MaterialUI.Icons;
         const { label: searchPropertyLabel } =
           getProperty(searchProperty) || {};
         const parsedLoadingText = useText(loadingText);
@@ -461,7 +461,7 @@
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <Search />
+                      <Icon name="Search" />
                     </InputAdornment>
                   ),
                 }}
