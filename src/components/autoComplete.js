@@ -473,9 +473,9 @@
           ) || ''
         );
       });
-
-      defaultValueEvaluatedRef.current = true;
     }
+
+    defaultValueEvaluatedRef.current = true;
 
     B.defineFunction('Clear', () => {
       setValue(multiple ? [] : '');
