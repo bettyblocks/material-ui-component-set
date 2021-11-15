@@ -30,7 +30,7 @@
       clearable,
       dataComponentAttribute = ['DateTimePicker'],
     } = options;
-    const { env, getCustomModelAttribute, useText } = B;
+    const { env, getCustomModelAttribute, useText, Icon } = B;
     const {
       MuiPickersUtilsProvider,
       KeyboardTimePicker,
@@ -39,7 +39,6 @@
     } = window.MaterialUI.Pickers;
     const { DateFnsUtils } = window.MaterialUI;
     const { nlLocale, enLocale } = window.MaterialUI.DateLocales;
-    const { AccessTime, Event } = window.MaterialUI.Icons;
     const DateFns = new DateFnsUtils();
     const isDev = env === 'dev';
     const [selectedDate, setSelectedDate] = useState(null);
@@ -193,7 +192,9 @@
           className: classes.dialog,
         }}
         ampm={!use24HourClock}
-        keyboardIcon={type === 'time' ? <AccessTime /> : <Event />}
+        keyboardIcon={
+          type === 'time' ? <Icon name="AccessTime" /> : <Icon name="Event" />
+        }
         clearable={clearable}
       />
     );
