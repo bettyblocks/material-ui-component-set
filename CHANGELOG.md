@@ -1,3 +1,10 @@
+# [1.183.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.182.4...v1.183.0) (2021-11-15)
+
+
+### Features
+
+* **tmplt-972:** add new icon option to all components ([33f0dc5](https://github.com/bettyblocks/material-ui-component-set/commit/33f0dc52df3edea5b82900f3c21bf8b7ba4740ea))
+
 ## [1.182.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.182.3...v1.182.4) (2021-11-12)
 
 

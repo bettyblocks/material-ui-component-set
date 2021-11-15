@@ -313,8 +313,16 @@
                     {
                       label: 'Icon',
                       key: 'icon',
-                      value: 'None',
+                      value: 'Person',
                       type: 'ICON',
+                      configuration: {
+                        condition: {
+                          type: 'SHOW',
+                          option: 'avatarOrIcon',
+                          comparator: 'EQ',
+                          value: 'icon',
+                        },
+                      },
                     },
                     {
                       type: 'COLOR',
