@@ -454,19 +454,23 @@
     ) {
       setValue(prev => {
         if (multiple) {
-          return prev.map(val =>
-            results.find(
-              result =>
-                result[valueProp.name] ===
-                (valuePropIsNumber ? parseInt(val, 10) : val),
-            ),
-          );
+          return prev
+            .map(val =>
+              results.find(
+                result =>
+                  result[valueProp.name] ===
+                  (valuePropIsNumber ? parseInt(val, 10) : val),
+              ),
+            )
+            .filter(x => typeof x !== 'undefined');
         }
 
-        return results.find(result =>
-          result[valueProp.name] === valuePropIsNumber
-            ? parseInt(prev, 10)
-            : prev,
+        return (
+          results.find(result =>
+            result[valueProp.name] === valuePropIsNumber
+              ? parseInt(prev, 10)
+              : prev,
+          ) || ''
         );
       });
 
