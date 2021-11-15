@@ -4,10 +4,9 @@
   allowedTypes: [],
   orientation: 'VERTICAL',
   jsx: (() => {
-    const { Icons } = window.MaterialUI;
     const { FormControl, FormHelperText, InputLabel } = window.MaterialUI.Core;
     const { Rating } = window.MaterialUI.Lab;
-    const { env, getCustomModelAttribute, useText } = B;
+    const { env, getCustomModelAttribute, useText, Icon } = B;
     const isDev = env === 'dev';
 
     const {
@@ -49,9 +48,7 @@
     const [helper, setHelper] = useState(useText(helperText));
     const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
 
-    const IconComponent = React.createElement(Icons[icon], {
-      className: classes.ratingIcon,
-    });
+    const IconComponent = <Icon name={icon} className={classes.ratingIcon} />;
 
     const { name: customModelAttributeName, validations: { required } = {} } =
       customModelAttribute || {};
