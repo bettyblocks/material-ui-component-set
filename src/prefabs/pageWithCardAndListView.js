@@ -3278,8 +3278,8 @@
                                     style: {
                                       overwrite: {
                                         backgroundColor: {
-                                          type: 'THEME_COLOR',
-                                          value: 'primary',
+                                          type: 'STATIC',
+                                          value: 'transparent',
                                         },
                                         boxShadow: 'none',
                                         color: {
@@ -3290,7 +3290,7 @@
                                         fontSize: '0.875rem',
                                         fontStyle: 'none',
                                         fontWeight: '400',
-                                        padding: ['0.6875rem', '1.375rem'],
+                                        padding: ['0rem', '0rem'],
                                         textDecoration: 'none',
                                         textTransform: 'none',
                                       },
@@ -3453,8 +3453,7 @@
                                         label: 'Icon',
                                         key: 'icon',
                                         value: 'None',
-                                        type: 'CUSTOM',
-                                        configuration: iconConfiguration,
+                                        type: 'ICON',
                                       },
                                       {
                                         type: 'CUSTOM',
@@ -3497,7 +3496,7 @@
                                         value: 'Primary',
                                       },
                                       {
-                                        value: ['0rem', '0rem', '0rem', '0rem'],
+                                        value: ['0rem', 'M', '0rem', 'M'],
                                         label: 'Outer space',
                                         key: 'outerSpacing',
                                         type: 'SIZES',
@@ -3649,8 +3648,8 @@
                                     style: {
                                       overwrite: {
                                         backgroundColor: {
-                                          type: 'THEME_COLOR',
-                                          value: 'primary',
+                                          type: 'STATIC',
+                                          value: 'transparent',
                                         },
                                         boxShadow: 'none',
                                         color: {
@@ -3661,7 +3660,7 @@
                                         fontSize: '0.875rem',
                                         fontStyle: 'none',
                                         fontWeight: '400',
-                                        padding: ['0.6875rem', '1.375rem'],
+                                        padding: ['0rem', '0rem'],
                                         textDecoration: 'none',
                                         textTransform: 'none',
                                       },
@@ -3824,8 +3823,7 @@
                                         label: 'Icon',
                                         key: 'icon',
                                         value: 'None',
-                                        type: 'CUSTOM',
-                                        configuration: iconConfiguration,
+                                        type: 'ICON',
                                       },
                                       {
                                         type: 'CUSTOM',
@@ -3868,7 +3866,7 @@
                                         value: 'Primary',
                                       },
                                       {
-                                        value: ['0rem', '0rem', '0rem', '0rem'],
+                                        value: ['0rem', '0rem', '0rem', 'M'],
                                         label: 'Outer space',
                                         key: 'outerSpacing',
                                         type: 'SIZES',
@@ -4424,7 +4422,7 @@
                             type: 'CUSTOM',
                             label: 'Width',
                             key: 'maxRowWidth',
-                            value: 'Full',
+                            value: 'XL',
                             configuration: {
                               as: 'BUTTONGROUP',
                               dataType: 'string',
@@ -4660,13 +4658,13 @@
                                 },
                               },
                               {
-                                value: ['XL', '0rem', '0rem', '0rem'],
+                                value: ['0rem', '0rem', '0rem', '0rem'],
                                 label: 'Outer space',
                                 key: 'outerSpacing',
                                 type: 'SIZES',
                               },
                               {
-                                value: ['XL', 'M', 'M', 'M'],
+                                value: ['L', 'L', 'L', 'L'],
                                 label: 'Inner space',
                                 key: 'innerSpacing',
                                 type: 'SIZES',
@@ -6781,8 +6779,7 @@
                                                             label: 'Icon',
                                                             key: 'icon',
                                                             value: 'List',
-                                                            type: 'CUSTOM',
-                                                            configuration: iconConfiguration,
+                                                            type: 'ICON',
                                                           },
                                                           {
                                                             value: 'small',
@@ -7117,8 +7114,7 @@
                                                             label: 'Icon',
                                                             key: 'icon',
                                                             value: 'Apps',
-                                                            type: 'CUSTOM',
-                                                            configuration: iconConfiguration,
+                                                            type: 'ICON',
                                                           },
                                                           {
                                                             value: 'small',
@@ -10050,8 +10046,7 @@
                                                                 key: 'icon',
                                                                 value:
                                                                   'ChevronRight',
-                                                                type: 'CUSTOM',
-                                                                configuration: iconConfiguration,
+                                                                type: 'ICON',
                                                               },
                                                               {
                                                                 value: 'medium',
@@ -16071,8 +16066,7 @@
                                                                             value:
                                                                               'ChevronRight',
                                                                             type:
-                                                                              'CUSTOM',
-                                                                            configuration: iconConfiguration,
+                                                                              'ICON',
                                                                           },
                                                                           {
                                                                             value:
