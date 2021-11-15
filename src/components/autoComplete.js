@@ -129,6 +129,8 @@
      */
     const [interactionFilter, setInteractionFilter] = useState({});
 
+    const defaultValueEvaluatedRef = useRef(false);
+
     const { kind: propertyKind = '', values: propertyValues } =
       getProperty(property) || {};
     const isListProperty = propertyKind.toLowerCase() === 'list';
@@ -270,7 +272,7 @@
               : debouncedInputValue,
           },
         });
-      } else if (!freeSolo) {
+      } else if (!freeSolo && defaultValueEvaluatedRef.current) {
         if (!filter._or) {
           filter._or = [];
         }
@@ -336,12 +338,15 @@
               typeof value === 'string' ? value : value[valueProp.name],
           },
         },
-        {
+      ];
+
+      if (defaultValueEvaluatedRef.current) {
+        filter._or.push({
           [valueProp.name]: {
             neq: typeof value === 'string' ? value : value[valueProp.name],
           },
-        },
-      ];
+        });
+      }
     }
     /* eslint-enable no-underscore-dangle */
 
@@ -433,6 +438,35 @@
     if (error && displayError) {
       valid = false;
       message = 'Something went wrong while loading.';
+    }
+
+    // If the default value is a value that lives outside the take range of the query we should fetch the values before we continue.
+    if (
+      !isDev &&
+      !defaultValueEvaluatedRef.current &&
+      !freeSolo &&
+      value &&
+      results
+    ) {
+      setValue(prev => {
+        if (multiple) {
+          return prev.map(val =>
+            results.find(
+              result =>
+                result[valueProp.name] ===
+                (valuePropIsNumber ? parseInt(val, 10) : val),
+            ),
+          );
+        }
+
+        return results.find(result =>
+          result[valueProp.name] === valuePropIsNumber
+            ? parseInt(prev, 10)
+            : prev,
+        );
+      });
+
+      defaultValueEvaluatedRef.current = true;
     }
 
     B.defineFunction('Clear', () => {
