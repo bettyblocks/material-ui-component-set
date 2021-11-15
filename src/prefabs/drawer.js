@@ -230,7 +230,7 @@
                       type: 'VARIABLE',
                       label: 'Secondary text',
                       key: 'secondaryText',
-                      value: [''],
+                      value: ['Secondary text'],
                     },
                     {
                       type: 'COLOR',
