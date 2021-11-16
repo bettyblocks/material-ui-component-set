@@ -1,3 +1,11 @@
+## [1.184.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.184.0...v1.184.1) (2021-11-16)
+
+
+### Bug Fixes
+
+* add secondary title default value to list items ([71422ac](https://github.com/bettyblocks/material-ui-component-set/commit/71422acb35aecd0c050597ac93b87960db869af6))
+* update list and list item in drawer component ([fb1b556](https://github.com/bettyblocks/material-ui-component-set/commit/fb1b55697017d4376b67e8dd0f6e85906bed0949))
+
 # [1.184.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.183.0...v1.184.0) (2021-11-15)
 
 
