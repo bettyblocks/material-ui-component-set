@@ -28846,8 +28846,8 @@
                               },
                               boxShadow: 'none',
                               color: {
-                                type: 'THEME_COLOR',
-                                value: 'primary',
+                                type: 'STATIC',
+                                value: 'red',
                               },
                               fontFamily: 'Roboto',
                               fontSize: '0.875rem',
@@ -31925,8 +31925,8 @@
                                                   style: {
                                                     overwrite: {
                                                       backgroundColor: {
-                                                        type: 'THEME_COLOR',
-                                                        value: 'primary',
+                                                        type: 'STATIC',
+                                                        value: 'red',
                                                       },
                                                       boxShadow: 'none',
                                                       color: {
