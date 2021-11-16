@@ -1,3 +1,10 @@
+## [1.184.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.184.1...v1.184.2) (2021-11-16)
+
+
+### Bug Fixes
+
+* default value is out of take range ([386cde5](https://github.com/bettyblocks/material-ui-component-set/commit/386cde50266b403b91af3248f07da202610ba11e))
+
 ## [1.184.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.184.0...v1.184.1) (2021-11-16)
 
 
