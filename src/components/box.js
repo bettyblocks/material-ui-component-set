@@ -154,6 +154,8 @@
           getSpacing(innerSpacing[2]),
         paddingLeft: ({ options: { innerSpacing } }) =>
           getSpacing(innerSpacing[3]),
+        overflow: ({ options: { backgroundAttachment } }) =>
+          backgroundAttachment === 'inherit' ? 'inherit' : 'scroll',
         [`@media ${mediaMinWidth(600)}`]: {
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Portrait'),
