@@ -4,10 +4,9 @@
   allowedTypes: [],
   orientation: 'VERTICAL',
   jsx: (() => {
-    const { Link, useText, env } = B;
+    const { Link, useText, env, Icon } = B;
     const isDev = env === 'dev';
     const { Typography } = window.MaterialUI.Core;
-    const { Icons } = window.MaterialUI;
     const {
       endpoint,
       breadcrumbContent,
@@ -29,11 +28,9 @@
       />
     );
 
-    const IconComponent =
-      icon !== 'None' &&
-      React.createElement(Icons[icon], {
-        className: classes[`icon${iconPosition}`],
-      });
+    const IconComponent = icon !== 'None' && (
+      <Icon name={icon} className={classes[`icon${iconPosition}`]} />
+    );
 
     const ItemContent = (
       <>

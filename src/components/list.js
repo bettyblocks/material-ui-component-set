@@ -9,7 +9,13 @@
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
     const isPristine = children.length === 0 && isDev;
-    const { disablePadding, dense, dataComponentAttribute } = options;
+    const {
+      disablePadding,
+      dense,
+      dataComponentAttribute = ['List'],
+    } = options;
+
+    const dataComponentAttributeValue = useText(dataComponentAttribute);
 
     const renderData = () =>
       isEmpty ? (
@@ -28,7 +34,7 @@
         classes={{ root: classes.root }}
         disablePadding={disablePadding}
         dense={dense}
-        data-component={useText(dataComponentAttribute) || 'List'}
+        data-component={dataComponentAttributeValue}
       >
         {renderData()}
       </List>

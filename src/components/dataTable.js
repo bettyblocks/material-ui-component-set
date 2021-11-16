@@ -13,6 +13,7 @@
       useAllQuery,
       useFilter,
       useText,
+      Icon,
     } = B;
     const {
       Table,
@@ -27,7 +28,6 @@
       TextField,
       InputAdornment,
     } = window.MaterialUI.Core;
-    const { Search } = window.MaterialUI.Icons;
     const isDev = env === 'dev';
     const {
       take,
@@ -609,7 +609,7 @@
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
-                        <Search />
+                        <Icon name="Search" />
                       </InputAdornment>
                     ),
                   }}

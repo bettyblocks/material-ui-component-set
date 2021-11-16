@@ -1,3 +1,35 @@
+## [1.184.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.184.0...v1.184.1) (2021-11-16)
+
+
+### Bug Fixes
+
+* add secondary title default value to list items ([71422ac](https://github.com/bettyblocks/material-ui-component-set/commit/71422acb35aecd0c050597ac93b87960db869af6))
+* update list and list item in drawer component ([fb1b556](https://github.com/bettyblocks/material-ui-component-set/commit/fb1b55697017d4376b67e8dd0f6e85906bed0949))
+
+# [1.184.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.183.0...v1.184.0) (2021-11-15)
+
+
+### Bug Fixes
+
+* hide detailview if no row selected on OverviewDetailView template ([910aa0e](https://github.com/bettyblocks/material-ui-component-set/commit/910aa0e32739574118e157c61b49c07896dca8c1))
+
+
+### Features
+
+* add new icon-option for buttons in page templates ([37e1432](https://github.com/bettyblocks/material-ui-component-set/commit/37e143207d2f0851f29c56fd0fafa6a398d7cd03))
+* rework login form template ([52450c3](https://github.com/bettyblocks/material-ui-component-set/commit/52450c37aabb5ecb3d06771436b2ea5e68c849ea))
+* rework register form template ([497df90](https://github.com/bettyblocks/material-ui-component-set/commit/497df90da526a4b9afe65f21e3219a9dec082d4c))
+* update fileUploads in page templates ([a53bf79](https://github.com/bettyblocks/material-ui-component-set/commit/a53bf790dbf447d1c908242f5002b149d387c364))
+* update homepageLayout and loginAndRegister templates ([a316523](https://github.com/bettyblocks/material-ui-component-set/commit/a3165232e0998f46357da0b154c446a1f8b01558))
+* update page-template button styling ([349037d](https://github.com/bettyblocks/material-ui-component-set/commit/349037daaa4d043a87065ae74f8b7a5036f6195d))
+
+# [1.183.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.182.4...v1.183.0) (2021-11-15)
+
+
+### Features
+
+* **tmplt-972:** add new icon option to all components ([33f0dc5](https://github.com/bettyblocks/material-ui-component-set/commit/33f0dc52df3edea5b82900f3c21bf8b7ba4740ea))
+
 ## [1.182.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.182.3...v1.182.4) (2021-11-12)
 
 
