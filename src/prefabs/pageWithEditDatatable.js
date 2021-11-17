@@ -17482,26 +17482,19 @@
                           style: {
                             overwrite: {
                               backgroundColor: {
-                                type: 'STATIC',
-                                value: 'transparent',
-                              },
-                              borderColor: {
                                 type: 'THEME_COLOR',
                                 value: 'primary',
                               },
-                              borderRadius: ['0.25rem'],
-                              borderStyle: 'solid',
-                              borderWidth: ['0.0625rem'],
                               boxShadow: 'none',
                               color: {
                                 type: 'THEME_COLOR',
-                                value: 'primary',
+                                value: 'white',
                               },
                               fontFamily: 'Roboto',
                               fontSize: '0.875rem',
                               fontStyle: 'none',
                               fontWeight: '400',
-                              padding: ['0.625rem', '1.3125rem'],
+                              padding: ['0.6875rem', '1.375rem'],
                               textDecoration: 'none',
                               textTransform: 'none',
                             },
@@ -17531,7 +17524,7 @@
                             {
                               label: 'Icon',
                               key: 'icon',
-                              value: 'FileCopy',
+                              value: 'None',
                               type: 'ICON',
                             },
                             {
@@ -17961,26 +17954,19 @@
                           style: {
                             overwrite: {
                               backgroundColor: {
-                                type: 'STATIC',
-                                value: 'transparent',
-                              },
-                              borderColor: {
                                 type: 'THEME_COLOR',
                                 value: 'primary',
                               },
-                              borderRadius: ['0.25rem'],
-                              borderStyle: 'solid',
-                              borderWidth: ['0.0625rem'],
                               boxShadow: 'none',
                               color: {
                                 type: 'THEME_COLOR',
-                                value: 'primary',
+                                value: 'white',
                               },
                               fontFamily: 'Roboto',
                               fontSize: '0.875rem',
                               fontStyle: 'none',
                               fontWeight: '400',
-                              padding: ['0.625rem', '1.3125rem'],
+                              padding: ['0.6875rem', '1.375rem'],
                               textDecoration: 'none',
                               textTransform: 'none',
                             },
@@ -18010,7 +17996,7 @@
                             {
                               label: 'Icon',
                               key: 'icon',
-                              value: 'Image',
+                              value: 'None',
                               type: 'ICON',
                             },
                             {
