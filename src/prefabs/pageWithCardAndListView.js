@@ -15903,6 +15903,42 @@
                 dataList.descendants[0].descendants[0].descendants[0].descendants[0].descendants[1].descendants[0].options[0].value = [
                   enrichVarObj(titleProperty),
                 ];
+                newPrefab.interactions.push(
+                  {
+                    name: 'Filter',
+                    sourceEvent: 'onChange',
+                    parameters: [
+                      {
+                        parameter: 'property',
+                        id: [...titleProperty.id],
+                        operator: 'regex',
+                        resolveValue: false,
+                      },
+                    ],
+                    ref: {
+                      targetComponentId: '#dataGrid',
+                      sourceComponentId: '#searchGrid',
+                    },
+                    type: 'Custom',
+                  },
+                  {
+                    name: 'Filter',
+                    sourceEvent: 'onChange',
+                    parameters: [
+                      {
+                        parameter: 'property',
+                        id: [...titleProperty.id],
+                        operator: 'regex',
+                        resolveValue: false,
+                      },
+                    ],
+                    ref: {
+                      targetComponentId: '#dataList',
+                      sourceComponentId: '#listSearch',
+                    },
+                    type: 'Custom',
+                  },
+                );
               }
               if (subheaderProperty.id) {
                 dataList.descendants[0].descendants[0].descendants[0].descendants[0].descendants[1].descendants[1].options[0].value = [
@@ -15941,24 +15977,6 @@
       ref: {
         targetComponentId: '#gridTabId',
         sourceComponentId: '#gridBtnId',
-      },
-      type: 'Custom',
-    },
-    {
-      name: 'SetSearchValue',
-      sourceEvent: 'Change',
-      ref: {
-        targetComponentId: '#dataGrid',
-        sourceComponentId: '#searchGrid',
-      },
-      type: 'Custom',
-    },
-    {
-      name: 'SetSearchValue',
-      sourceEvent: 'Change',
-      ref: {
-        targetComponentId: '#dataList',
-        sourceComponentId: '#listSearch',
       },
       type: 'Custom',
     },

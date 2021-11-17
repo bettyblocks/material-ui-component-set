@@ -6402,7 +6402,7 @@
                   parameters: [
                     {
                       parameter: 'property',
-                      id: titleProperty.id,
+                      id: [...titleProperty.id],
                       operator: 'regex',
                       resolveValue: false,
                     },
