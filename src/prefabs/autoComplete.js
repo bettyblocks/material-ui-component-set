@@ -378,6 +378,34 @@
         },
         {
           type: 'COLOR',
+          label: 'Background color chip',
+          key: 'backgroundColorChip',
+          value: 'Light',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'styles',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'COLOR',
+          label: 'Text color chip',
+          key: 'textColorChip',
+          value: 'Accent3',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'styles',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'COLOR',
           label: 'Checkbox color',
           key: 'checkboxColor',
           value: 'Accent3',

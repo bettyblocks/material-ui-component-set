@@ -947,6 +947,16 @@
             pointerEvents: 'none',
             opacity: '0.7',
           },
+          '& .MuiChip-root': {
+            color: ({ options: { textColorChip } }) => [
+              style.getColor(textColorChip),
+              '!important',
+            ],
+            backgroundColor: ({ options: { backgroundColorChip } }) => [
+              style.getColor(backgroundColorChip),
+              '!important',
+            ],
+          },
         },
         '& .MuiIconButton-root': {
           color: ({ options: { textColor } }) => [
