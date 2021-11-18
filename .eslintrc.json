@@ -23,6 +23,7 @@
     "parent": "readonly",
     "options": "readonly",
     "React": "readonly",
+    "relationOptions": "readonly",
     "state": "readonly",
     "setState": "readonly",
     "useCallback": "readonly",
