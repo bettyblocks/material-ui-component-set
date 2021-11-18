@@ -1,3 +1,10 @@
+## [1.184.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.184.2...v1.184.3) (2021-11-18)
+
+
+### Bug Fixes
+
+* **autocomplete:** add chip text and background color styling ([d0ac118](https://github.com/bettyblocks/material-ui-component-set/commit/d0ac1180817b1f987fe02834cb9bf5e8d9ee6881))
+
 ## [1.184.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.184.1...v1.184.2) (2021-11-16)
 
 
