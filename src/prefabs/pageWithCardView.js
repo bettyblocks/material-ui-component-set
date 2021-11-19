@@ -6396,6 +6396,23 @@
                 dataGrid.descendants[0].descendants[1].options[2].value = [
                   enrichVarObj(titleProperty),
                 ];
+                newPrefab.interactions.push({
+                  name: 'Filter',
+                  sourceEvent: 'onChange',
+                  parameters: [
+                    {
+                      parameter: 'property',
+                      id: [...titleProperty.id],
+                      operator: 'regex',
+                      resolveValue: false,
+                    },
+                  ],
+                  ref: {
+                    targetComponentId: '#dataList',
+                    sourceComponentId: '#searchField',
+                  },
+                  type: 'Custom',
+                });
               }
               if (subheaderProperty.id) {
                 dataGrid.descendants[0].descendants[1].options[3].value = [
@@ -6419,15 +6436,6 @@
   variables: [],
   actions: [],
   interactions: [
-    {
-      name: 'SetSearchValue',
-      sourceEvent: 'Change',
-      ref: {
-        targetComponentId: '#dataList',
-        sourceComponentId: '#searchField',
-      },
-      type: 'Custom',
-    },
     {
       name: 'Show',
       sourceEvent: 'onNoResults',
