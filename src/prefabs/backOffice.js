@@ -21999,16 +21999,14 @@
         </Box>
       ),
       progressBar: (titles) => {
-        const titlesArray = titles;
         return (
           <Box
             justify="center"
             margin={{ bottom: '2rem', left: '2rem', top: '-1rem' }}
           >
             <Text size="medium" weight="bold">
-              {`Step: ${stepNumber} / ${
-              stepper.stepAmount
-                titlesArray[stepNumber - 1]
+              {`Step: ${stepNumber} / ${stepper.stepAmount} - ${
+                titles[stepNumber - 1]
               }`}
             </Text>
           </Box>
