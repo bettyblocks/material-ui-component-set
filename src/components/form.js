@@ -64,7 +64,7 @@
 
         const [, setOptions] = useOptions();
 
-        B.defineFunction('setCurrentRecord', value => {
+        B.defineFunction('setCurrentRecord', (value) => {
           if (typeof value === 'number') {
             setOptions({
               currentRecord: value,
@@ -150,7 +150,7 @@
           .join(' ')
           .trim();
 
-        const FormElement = () => {
+        const FormElement = function () {
           B.defineFunction('Refetch', () => {});
           return (
             <form
@@ -165,7 +165,7 @@
           );
         };
 
-        const FormCmp = ({ item, refetch }) => {
+        const FormCmp = function ({ item, refetch }) {
           const [isInvalid, setIsInvalid] = useState(false);
           const handleInvalid = () => {
             if (!isInvalid) {
@@ -200,7 +200,7 @@
 
                   <form
                     onInvalid={handleInvalid}
-                    onSubmit={evt => {
+                    onSubmit={(evt) => {
                       setIsInvalid(false);
                       handleSubmit(evt, callAction, item);
                     }}
@@ -227,7 +227,7 @@
           );
         };
 
-        const FormWithData = () => {
+        const FormWithData = function () {
           const getFilter = React.useCallback(() => {
             if (isDev || !currentRecord || !modelId) {
               return filter;
@@ -291,7 +291,7 @@
       })()}
     </div>
   ),
-  styles: B => t => {
+  styles: (B) => (t) => {
     const { Styling } = B;
     const style = new Styling(t);
 

@@ -15,7 +15,7 @@
     function serializeParameters(obj) {
       return Object.entries(obj).map(([name, entry]) => ({
         name,
-        value: entry.map(v => JSON.stringify(v)),
+        value: entry.map((v) => JSON.stringify(v)),
       }));
     }
 

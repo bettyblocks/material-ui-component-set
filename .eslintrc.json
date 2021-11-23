@@ -1,11 +1,14 @@
 {
-  "extends": ["airbnb", "prettier", "prettier/react"],
-  "plugins": ["prettier"],
+  "extends": ["airbnb", "airbnb/hooks", "plugin:prettier/recommended"],
+  "plugins": [],
   "env": {
     "browser": true,
     "jasmine": true
   },
   "rules": {
+    "react/destructuring-assignment": 0,
+    "react-hooks/exhaustive-deps": 0,
+    "react/prefer-exact-props": 0,
     "react/jsx-filename-extension": [1, { "extensions": [".js"] }],
     "react/jsx-no-undef": [2, { "allowGlobals": true }],
     "react/prop-types": 0,
@@ -23,6 +26,7 @@
     "parent": "readonly",
     "options": "readonly",
     "React": "readonly",
+    "relationOptions": "readonly",
     "state": "readonly",
     "setState": "readonly",
     "useCallback": "readonly",

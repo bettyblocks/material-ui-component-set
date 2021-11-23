@@ -96,7 +96,7 @@
         const currentHTML = gridRef.current.innerHTML;
         const newDiv = document.createElement('div');
         newDiv.innerHTML = currentHTML;
-        Array.from(newDiv.children).forEach(child => {
+        Array.from(newDiv.children).forEach((child) => {
           child.classList.add(classes.opac);
         });
         for (let i = 0; i < take - 1; i += 1) {
@@ -148,7 +148,7 @@
 
           return (
             <Grid {...gridOptions}>
-              {results.map(item => (
+              {results.map((item) => (
                 <ModelProvider key={item.id} value={item} id={model}>
                   <InteractionScope>{children}</InteractionScope>
                 </ModelProvider>
@@ -164,7 +164,7 @@
 
     B.defineFunction('Show', () => setIsVisible(true));
     B.defineFunction('Hide', () => setIsVisible(false));
-    B.defineFunction('Show/Hide', () => setIsVisible(s => !s));
+    B.defineFunction('Show/Hide', () => setIsVisible((s) => !s));
 
     return isDev ? (
       <div
@@ -179,11 +179,11 @@
       RuntimeCmp
     );
   })(),
-  styles: B => theme => {
+  styles: (B) => (theme) => {
     const { env, mediaMinWidth, Styling } = B;
     const isDev = env === 'dev';
     const style = new Styling(theme);
-    const getWidth = value => {
+    const getWidth = (value) => {
       if (value === 'false') {
         return null;
       }
@@ -195,7 +195,7 @@
       }
       return `${Math.round((parseInt(value, 10) / 12) * 10e7) / 10e5}%`;
     };
-    const getFlexBasis = value => {
+    const getFlexBasis = (value) => {
       if (value === 'false') {
         return null;
       }
@@ -207,7 +207,7 @@
       }
       return `${Math.round((parseInt(value, 10) / 12) * 10e7) / 10e5}%`;
     };
-    const getFlexGrow = value => {
+    const getFlexGrow = (value) => {
       if (value === 'false') {
         return null;
       }

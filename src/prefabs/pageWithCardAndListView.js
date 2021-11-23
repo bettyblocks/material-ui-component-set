@@ -38,11 +38,11 @@
       skip: !modelId,
     });
 
-    const enrichVarObj = obj => {
+    const enrichVarObj = (obj) => {
       const returnObj = obj;
       if (data && data.model) {
         const property = data.model.properties.find(
-          prop => prop.id === obj.id[0],
+          (prop) => prop.id === obj.id[0],
         );
         if (property) {
           returnObj.name = `{{ ${data.model.name}.${property.name} }}`;
@@ -4983,8 +4983,7 @@
                                                   {
                                                     type: 'VARIABLE',
                                                     label: 'Test attribute',
-                                                    key:
-                                                      'dataComponentAttribute',
+                                                    key: 'dataComponentAttribute',
                                                     value: ['Row'],
                                                     configuration: {
                                                       condition: {
@@ -5021,8 +5020,7 @@
                                                           dataType: 'string',
                                                           allowedInput: [
                                                             {
-                                                              name:
-                                                                'Fit content',
+                                                              name: 'Fit content',
                                                               value:
                                                                 'fitContent',
                                                             },
@@ -5089,16 +5087,14 @@
                                                         value: 'fitContent',
                                                         label:
                                                           'Column width (tablet landscape)',
-                                                        key:
-                                                          'columnWidthTabletLandscape',
+                                                        key: 'columnWidthTabletLandscape',
                                                         type: 'CUSTOM',
                                                         configuration: {
                                                           as: 'DROPDOWN',
                                                           dataType: 'string',
                                                           allowedInput: [
                                                             {
-                                                              name:
-                                                                'Fit content',
+                                                              name: 'Fit content',
                                                               value:
                                                                 'fitContent',
                                                             },
@@ -5165,16 +5161,14 @@
                                                         value: 'fitContent',
                                                         label:
                                                           'Column width (tablet portrait)',
-                                                        key:
-                                                          'columnWidthTabletPortrait',
+                                                        key: 'columnWidthTabletPortrait',
                                                         type: 'CUSTOM',
                                                         configuration: {
                                                           as: 'DROPDOWN',
                                                           dataType: 'string',
                                                           allowedInput: [
                                                             {
-                                                              name:
-                                                                'Fit content',
+                                                              name: 'Fit content',
                                                               value:
                                                                 'fitContent',
                                                             },
@@ -5241,16 +5235,14 @@
                                                         value: 'hidden',
                                                         label:
                                                           'Column width (mobile)',
-                                                        key:
-                                                          'columnWidthMobile',
+                                                        key: 'columnWidthMobile',
                                                         type: 'CUSTOM',
                                                         configuration: {
                                                           as: 'DROPDOWN',
                                                           dataType: 'string',
                                                           allowedInput: [
                                                             {
-                                                              name:
-                                                                'Fit content',
+                                                              name: 'Fit content',
                                                               value:
                                                                 'fitContent',
                                                             },
@@ -5333,8 +5325,7 @@
                                                         type: 'CUSTOM',
                                                         label:
                                                           'Horizontal Alignment',
-                                                        key:
-                                                          'horizontalAlignment',
+                                                        key: 'horizontalAlignment',
                                                         value: 'inherit',
                                                         configuration: {
                                                           as: 'BUTTONGROUP',
@@ -5364,8 +5355,7 @@
                                                         type: 'CUSTOM',
                                                         label:
                                                           'Vertical Alignment',
-                                                        key:
-                                                          'verticalAlignment',
+                                                        key: 'verticalAlignment',
                                                         value: 'inherit',
                                                         configuration: {
                                                           as: 'BUTTONGROUP',
@@ -5423,8 +5413,7 @@
                                                       {
                                                         type: 'VARIABLE',
                                                         label: 'Test attribute',
-                                                        key:
-                                                          'dataComponentAttribute',
+                                                        key: 'dataComponentAttribute',
                                                         value: ['Column'],
                                                         configuration: {
                                                           condition: {
@@ -5446,13 +5435,11 @@
                                                         style: {
                                                           overwrite: {
                                                             backgroundColor: {
-                                                              type:
-                                                                'THEME_COLOR',
+                                                              type: 'THEME_COLOR',
                                                               value: 'white',
                                                             },
                                                             borderColor: {
-                                                              type:
-                                                                'THEME_COLOR',
+                                                              type: 'THEME_COLOR',
                                                               value: 'primary',
                                                             },
                                                             borderRadius: [
@@ -5465,8 +5452,7 @@
                                                             ],
                                                             boxShadow: 'none',
                                                             color: {
-                                                              type:
-                                                                'THEME_COLOR',
+                                                              type: 'THEME_COLOR',
                                                               value: 'primary',
                                                             },
                                                             fontFamily:
@@ -5541,8 +5527,7 @@
                                                                     'large',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'Medium',
+                                                                  name: 'Medium',
                                                                   value:
                                                                     'medium',
                                                                 },
@@ -5619,8 +5604,7 @@
                                                           {
                                                             label:
                                                               'Toggle tooltip visibility',
-                                                            key:
-                                                              'hasVisibleTooltip',
+                                                            key: 'hasVisibleTooltip',
                                                             value: true,
                                                             type: 'TOGGLE',
                                                             configuration: {
@@ -5639,8 +5623,7 @@
                                                             type: 'VARIABLE',
                                                             label:
                                                               'Tooltip Content',
-                                                            key:
-                                                              'tooltipContent',
+                                                            key: 'tooltipContent',
                                                             value: ['Tips'],
                                                             configuration: {
                                                               condition: {
@@ -5656,8 +5639,7 @@
                                                           {
                                                             label:
                                                               'Tooltip Placement',
-                                                            key:
-                                                              'tooltipPlacement',
+                                                            key: 'tooltipPlacement',
                                                             value: 'bottom',
                                                             type: 'CUSTOM',
                                                             configuration: {
@@ -5666,8 +5648,7 @@
                                                                 'string',
                                                               allowedInput: [
                                                                 {
-                                                                  name:
-                                                                    'Top Start',
+                                                                  name: 'Top Start',
                                                                   value:
                                                                     'top-start',
                                                                 },
@@ -5676,8 +5657,7 @@
                                                                   value: 'top',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'Top End',
+                                                                  name: 'Top End',
                                                                   value:
                                                                     'top-end',
                                                                 },
@@ -5691,20 +5671,17 @@
                                                                   value: 'left',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'Botttom Start',
+                                                                  name: 'Botttom Start',
                                                                   value:
                                                                     'bottom-start',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'Bottom',
+                                                                  name: 'Bottom',
                                                                   value:
                                                                     'bottom',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'Bottom End',
+                                                                  name: 'Bottom End',
                                                                   value:
                                                                     'bottom-end',
                                                                 },
@@ -5723,8 +5700,7 @@
                                                             type: 'COLOR',
                                                             label:
                                                               'Tooltip Background',
-                                                            key:
-                                                              'tooltipBackground',
+                                                            key: 'tooltipBackground',
                                                             value: 'Medium',
                                                             configuration: {
                                                               condition: {
@@ -5758,16 +5734,14 @@
                                                             value: false,
                                                             label:
                                                               'Advanced settings',
-                                                            key:
-                                                              'advancedSettings',
+                                                            key: 'advancedSettings',
                                                             type: 'TOGGLE',
                                                           },
                                                           {
                                                             type: 'VARIABLE',
                                                             label:
                                                               'Test attribute',
-                                                            key:
-                                                              'dataComponentAttribute',
+                                                            key: 'dataComponentAttribute',
                                                             value: ['Button'],
                                                             configuration: {
                                                               condition: {
@@ -5791,13 +5765,11 @@
                                                         style: {
                                                           overwrite: {
                                                             backgroundColor: {
-                                                              type:
-                                                                'THEME_COLOR',
+                                                              type: 'THEME_COLOR',
                                                               value: 'white',
                                                             },
                                                             borderColor: {
-                                                              type:
-                                                                'THEME_COLOR',
+                                                              type: 'THEME_COLOR',
                                                               value: 'primary',
                                                             },
                                                             borderRadius: [
@@ -5810,8 +5782,7 @@
                                                             ],
                                                             boxShadow: 'none',
                                                             color: {
-                                                              type:
-                                                                'THEME_COLOR',
+                                                              type: 'THEME_COLOR',
                                                               value: 'primary',
                                                             },
                                                             fontFamily:
@@ -5876,8 +5847,7 @@
                                                                     'large',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'Medium',
+                                                                  name: 'Medium',
                                                                   value:
                                                                     'medium',
                                                                 },
@@ -5954,8 +5924,7 @@
                                                           {
                                                             label:
                                                               'Toggle tooltip visibility',
-                                                            key:
-                                                              'hasVisibleTooltip',
+                                                            key: 'hasVisibleTooltip',
                                                             value: true,
                                                             type: 'TOGGLE',
                                                             configuration: {
@@ -5974,8 +5943,7 @@
                                                             type: 'VARIABLE',
                                                             label:
                                                               'Tooltip Content',
-                                                            key:
-                                                              'tooltipContent',
+                                                            key: 'tooltipContent',
                                                             value: ['Tips'],
                                                             configuration: {
                                                               condition: {
@@ -5991,8 +5959,7 @@
                                                           {
                                                             label:
                                                               'Tooltip Placement',
-                                                            key:
-                                                              'tooltipPlacement',
+                                                            key: 'tooltipPlacement',
                                                             value: 'bottom',
                                                             type: 'CUSTOM',
                                                             configuration: {
@@ -6001,8 +5968,7 @@
                                                                 'string',
                                                               allowedInput: [
                                                                 {
-                                                                  name:
-                                                                    'Top Start',
+                                                                  name: 'Top Start',
                                                                   value:
                                                                     'top-start',
                                                                 },
@@ -6011,8 +5977,7 @@
                                                                   value: 'top',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'Top End',
+                                                                  name: 'Top End',
                                                                   value:
                                                                     'top-end',
                                                                 },
@@ -6026,20 +5991,17 @@
                                                                   value: 'left',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'Botttom Start',
+                                                                  name: 'Botttom Start',
                                                                   value:
                                                                     'bottom-start',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'Bottom',
+                                                                  name: 'Bottom',
                                                                   value:
                                                                     'bottom',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'Bottom End',
+                                                                  name: 'Bottom End',
                                                                   value:
                                                                     'bottom-end',
                                                                 },
@@ -6058,8 +6020,7 @@
                                                             type: 'COLOR',
                                                             label:
                                                               'Tooltip Background',
-                                                            key:
-                                                              'tooltipBackground',
+                                                            key: 'tooltipBackground',
                                                             value: 'Medium',
                                                             configuration: {
                                                               condition: {
@@ -6093,16 +6054,14 @@
                                                             value: false,
                                                             label:
                                                               'Advanced settings',
-                                                            key:
-                                                              'advancedSettings',
+                                                            key: 'advancedSettings',
                                                             type: 'TOGGLE',
                                                           },
                                                           {
                                                             type: 'VARIABLE',
                                                             label:
                                                               'Test attribute',
-                                                            key:
-                                                              'dataComponentAttribute',
+                                                            key: 'dataComponentAttribute',
                                                             value: ['Button'],
                                                             configuration: {
                                                               condition: {
@@ -6465,8 +6424,7 @@
                                                     },
                                                     label: 'Label',
                                                     key: 'customModelAttribute',
-                                                    type:
-                                                      'CUSTOM_MODEL_ATTRIBUTE',
+                                                    type: 'CUSTOM_MODEL_ATTRIBUTE',
                                                     configuration: {
                                                       allowedTypes: ['string'],
                                                     },
@@ -6536,8 +6494,7 @@
                                                     ],
                                                     label:
                                                       'Value required message',
-                                                    key:
-                                                      'validationValueMissing',
+                                                    key: 'validationValueMissing',
                                                     type: 'VARIABLE',
                                                     configuration: {
                                                       condition: {
@@ -6553,8 +6510,7 @@
                                                     value: ['Invalid value'],
                                                     label:
                                                       'Pattern mismatch message',
-                                                    key:
-                                                      'validationPatternMismatch',
+                                                    key: 'validationPatternMismatch',
                                                     type: 'VARIABLE',
                                                     configuration: {
                                                       condition: {
@@ -6898,8 +6854,7 @@
                                                   {
                                                     type: 'VARIABLE',
                                                     label: 'Test attribute',
-                                                    key:
-                                                      'dataComponentAttribute',
+                                                    key: 'dataComponentAttribute',
                                                     value: ['TextField'],
                                                     configuration: {
                                                       condition: {
@@ -6984,8 +6939,7 @@
                                                   {
                                                     type: 'VARIABLE',
                                                     label: 'Test attribute',
-                                                    key:
-                                                      'dataComponentAttribute',
+                                                    key: 'dataComponentAttribute',
                                                     value: ['Row'],
                                                     configuration: {
                                                       condition: {
@@ -7002,8 +6956,7 @@
                                                   {
                                                     name: 'Column',
                                                     ref: {
-                                                      id:
-                                                        '#noResultsGridColumn',
+                                                      id: '#noResultsGridColumn',
                                                     },
                                                     options: [
                                                       {
@@ -7026,8 +6979,7 @@
                                                           dataType: 'string',
                                                           allowedInput: [
                                                             {
-                                                              name:
-                                                                'Fit content',
+                                                              name: 'Fit content',
                                                               value:
                                                                 'fitContent',
                                                             },
@@ -7094,16 +7046,14 @@
                                                         value: 'flexible',
                                                         label:
                                                           'Column width (tablet landscape)',
-                                                        key:
-                                                          'columnWidthTabletLandscape',
+                                                        key: 'columnWidthTabletLandscape',
                                                         type: 'CUSTOM',
                                                         configuration: {
                                                           as: 'DROPDOWN',
                                                           dataType: 'string',
                                                           allowedInput: [
                                                             {
-                                                              name:
-                                                                'Fit content',
+                                                              name: 'Fit content',
                                                               value:
                                                                 'fitContent',
                                                             },
@@ -7170,16 +7120,14 @@
                                                         value: 'flexible',
                                                         label:
                                                           'Column width (tablet portrait)',
-                                                        key:
-                                                          'columnWidthTabletPortrait',
+                                                        key: 'columnWidthTabletPortrait',
                                                         type: 'CUSTOM',
                                                         configuration: {
                                                           as: 'DROPDOWN',
                                                           dataType: 'string',
                                                           allowedInput: [
                                                             {
-                                                              name:
-                                                                'Fit content',
+                                                              name: 'Fit content',
                                                               value:
                                                                 'fitContent',
                                                             },
@@ -7246,16 +7194,14 @@
                                                         value: 'flexible',
                                                         label:
                                                           'Column width (mobile)',
-                                                        key:
-                                                          'columnWidthMobile',
+                                                        key: 'columnWidthMobile',
                                                         type: 'CUSTOM',
                                                         configuration: {
                                                           as: 'DROPDOWN',
                                                           dataType: 'string',
                                                           allowedInput: [
                                                             {
-                                                              name:
-                                                                'Fit content',
+                                                              name: 'Fit content',
                                                               value:
                                                                 'fitContent',
                                                             },
@@ -7338,8 +7284,7 @@
                                                         type: 'CUSTOM',
                                                         label:
                                                           'Horizontal Alignment',
-                                                        key:
-                                                          'horizontalAlignment',
+                                                        key: 'horizontalAlignment',
                                                         value: 'inherit',
                                                         configuration: {
                                                           as: 'BUTTONGROUP',
@@ -7369,8 +7314,7 @@
                                                         type: 'CUSTOM',
                                                         label:
                                                           'Vertical Alignment',
-                                                        key:
-                                                          'verticalAlignment',
+                                                        key: 'verticalAlignment',
                                                         value: 'inherit',
                                                         configuration: {
                                                           as: 'BUTTONGROUP',
@@ -7428,8 +7372,7 @@
                                                       {
                                                         type: 'VARIABLE',
                                                         label: 'Test attribute',
-                                                        key:
-                                                          'dataComponentAttribute',
+                                                        key: 'dataComponentAttribute',
                                                         value: ['Column'],
                                                         configuration: {
                                                           condition: {
@@ -7474,8 +7417,7 @@
                                                             type: 'CUSTOM',
                                                             label:
                                                               'Text Alignment',
-                                                            key:
-                                                              'textAlignment',
+                                                            key: 'textAlignment',
                                                             value: 'left',
                                                             configuration: {
                                                               as: 'BUTTONGROUP',
@@ -7487,8 +7429,7 @@
                                                                   value: 'left',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'Center',
+                                                                  name: 'Center',
                                                                   value:
                                                                     'center',
                                                                 },
@@ -7523,14 +7464,12 @@
                                                                 'string',
                                                               allowedInput: [
                                                                 {
-                                                                  name:
-                                                                    'Internal page',
+                                                                  name: 'Internal page',
                                                                   value:
                                                                     'internal',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'External page',
+                                                                  name: 'External page',
                                                                   value:
                                                                     'external',
                                                                 },
@@ -7557,8 +7496,7 @@
                                                           {
                                                             value: [''],
                                                             label: 'URL',
-                                                            key:
-                                                              'linkToExternal',
+                                                            key: 'linkToExternal',
                                                             type: 'VARIABLE',
                                                             configuration: {
                                                               placeholder:
@@ -7658,16 +7596,14 @@
                                                             value: false,
                                                             label:
                                                               'Advanced settings',
-                                                            key:
-                                                              'advancedSettings',
+                                                            key: 'advancedSettings',
                                                             type: 'TOGGLE',
                                                           },
                                                           {
                                                             type: 'VARIABLE',
                                                             label:
                                                               'Test attribute',
-                                                            key:
-                                                              'dataComponentAttribute',
+                                                            key: 'dataComponentAttribute',
                                                             value: ['Text'],
                                                             configuration: {
                                                               condition: {
@@ -39984,8 +39920,7 @@
                                                     label:
                                                       'Authentication Profile',
                                                     key: 'authProfile',
-                                                    type:
-                                                      'AUTHENTICATION_PROFILE',
+                                                    type: 'AUTHENTICATION_PROFILE',
                                                   },
                                                   {
                                                     label: 'Pagination',
@@ -40163,8 +40098,7 @@
                                                   {
                                                     type: 'VARIABLE',
                                                     label: 'Test attribute',
-                                                    key:
-                                                      'dataComponentAttribute',
+                                                    key: 'dataComponentAttribute',
                                                     value: ['DataList'],
                                                     configuration: {
                                                       condition: {
@@ -40343,8 +40277,7 @@
                                                       {
                                                         type: 'VARIABLE',
                                                         label: 'Test attribute',
-                                                        key:
-                                                          'dataComponentAttribute',
+                                                        key: 'dataComponentAttribute',
                                                         value: ['Card'],
                                                         configuration: {
                                                           condition: {
@@ -40381,8 +40314,7 @@
                                                                     'video',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'I-frame',
+                                                                  name: 'I-frame',
                                                                   value:
                                                                     'iframe',
                                                                 },
@@ -40446,16 +40378,14 @@
                                                             value: false,
                                                             label:
                                                               'Advanced settings',
-                                                            key:
-                                                              'advancedSettings',
+                                                            key: 'advancedSettings',
                                                             type: 'TOGGLE',
                                                           },
                                                           {
                                                             type: 'VARIABLE',
                                                             label:
                                                               'Test attribute',
-                                                            key:
-                                                              'dataComponentAttribute',
+                                                            key: 'dataComponentAttribute',
                                                             value: [
                                                               'CardMedia',
                                                             ],
@@ -40531,16 +40461,14 @@
                                                             value: false,
                                                             label:
                                                               'Advanced settings',
-                                                            key:
-                                                              'advancedSettings',
+                                                            key: 'advancedSettings',
                                                             type: 'TOGGLE',
                                                           },
                                                           {
                                                             type: 'VARIABLE',
                                                             label:
                                                               'Test attribute',
-                                                            key:
-                                                              'dataComponentAttribute',
+                                                            key: 'dataComponentAttribute',
                                                             value: [
                                                               'CardHeader',
                                                             ],
@@ -40565,16 +40493,14 @@
                                                             value: false,
                                                             label:
                                                               'Advanced settings',
-                                                            key:
-                                                              'advancedSettings',
+                                                            key: 'advancedSettings',
                                                             type: 'TOGGLE',
                                                           },
                                                           {
                                                             type: 'VARIABLE',
                                                             label:
                                                               'Test attribute',
-                                                            key:
-                                                              'dataComponentAttribute',
+                                                            key: 'dataComponentAttribute',
                                                             value: [
                                                               'CardContent',
                                                             ],
@@ -40595,8 +40521,7 @@
                                                             name: 'Text',
                                                             options: [
                                                               {
-                                                                type:
-                                                                  'VARIABLE',
+                                                                type: 'VARIABLE',
                                                                 label:
                                                                   'Content',
                                                                 key: 'content',
@@ -40604,16 +40529,14 @@
                                                                   'Description',
                                                                 ],
                                                                 configuration: {
-                                                                  as:
-                                                                    'MULTILINE',
+                                                                  as: 'MULTILINE',
                                                                 },
                                                               },
                                                               {
                                                                 type: 'TOGGLE',
                                                                 label:
                                                                   'Display Rich Text',
-                                                                key:
-                                                                  'useInnerHtml',
+                                                                key: 'useInnerHtml',
                                                                 value: false,
                                                               },
                                                               {
@@ -40626,34 +40549,30 @@
                                                                 type: 'CUSTOM',
                                                                 label:
                                                                   'Text Alignment',
-                                                                key:
-                                                                  'textAlignment',
+                                                                key: 'textAlignment',
                                                                 value: 'left',
                                                                 configuration: {
-                                                                  as:
-                                                                    'BUTTONGROUP',
+                                                                  as: 'BUTTONGROUP',
                                                                   dataType:
                                                                     'string',
-                                                                  allowedInput: [
-                                                                    {
-                                                                      name:
-                                                                        'Left',
-                                                                      value:
-                                                                        'left',
-                                                                    },
-                                                                    {
-                                                                      name:
-                                                                        'Center',
-                                                                      value:
-                                                                        'center',
-                                                                    },
-                                                                    {
-                                                                      name:
-                                                                        'Right',
-                                                                      value:
-                                                                        'right',
-                                                                    },
-                                                                  ],
+                                                                  allowedInput:
+                                                                    [
+                                                                      {
+                                                                        name: 'Left',
+                                                                        value:
+                                                                          'left',
+                                                                      },
+                                                                      {
+                                                                        name: 'Center',
+                                                                        value:
+                                                                          'center',
+                                                                      },
+                                                                      {
+                                                                        name: 'Right',
+                                                                        value:
+                                                                          'right',
+                                                                      },
+                                                                    ],
                                                                 },
                                                               },
                                                               {
@@ -40665,8 +40584,7 @@
                                                                 ],
                                                                 label:
                                                                   'Outer space',
-                                                                key:
-                                                                  'outerSpacing',
+                                                                key: 'outerSpacing',
                                                                 type: 'SIZES',
                                                               },
                                                               {
@@ -40677,36 +40595,32 @@
                                                                 value:
                                                                   'internal',
                                                                 configuration: {
-                                                                  as:
-                                                                    'BUTTONGROUP',
+                                                                  as: 'BUTTONGROUP',
                                                                   dataType:
                                                                     'string',
-                                                                  allowedInput: [
-                                                                    {
-                                                                      name:
-                                                                        'Internal page',
-                                                                      value:
-                                                                        'internal',
-                                                                    },
-                                                                    {
-                                                                      name:
-                                                                        'External page',
-                                                                      value:
-                                                                        'external',
-                                                                    },
-                                                                  ],
+                                                                  allowedInput:
+                                                                    [
+                                                                      {
+                                                                        name: 'Internal page',
+                                                                        value:
+                                                                          'internal',
+                                                                      },
+                                                                      {
+                                                                        name: 'External page',
+                                                                        value:
+                                                                          'external',
+                                                                      },
+                                                                    ],
                                                                 },
                                                               },
                                                               {
                                                                 value: '',
                                                                 label: 'Page',
                                                                 key: 'linkTo',
-                                                                type:
-                                                                  'ENDPOINT',
+                                                                type: 'ENDPOINT',
                                                                 configuration: {
                                                                   condition: {
-                                                                    type:
-                                                                      'SHOW',
+                                                                    type: 'SHOW',
                                                                     option:
                                                                       'linkType',
                                                                     comparator:
@@ -40719,16 +40633,13 @@
                                                               {
                                                                 value: [''],
                                                                 label: 'URL',
-                                                                key:
-                                                                  'linkToExternal',
-                                                                type:
-                                                                  'VARIABLE',
+                                                                key: 'linkToExternal',
+                                                                type: 'VARIABLE',
                                                                 configuration: {
                                                                   placeholder:
                                                                     'Starts with https:// or http://',
                                                                   condition: {
-                                                                    type:
-                                                                      'SHOW',
+                                                                    type: 'SHOW',
                                                                     option:
                                                                       'linkType',
                                                                     comparator:
@@ -40748,13 +40659,11 @@
                                                                 type: 'COLOR',
                                                                 label:
                                                                   'Text color',
-                                                                key:
-                                                                  'textColor',
+                                                                key: 'textColor',
                                                                 value: 'Black',
                                                                 configuration: {
                                                                   condition: {
-                                                                    type:
-                                                                      'SHOW',
+                                                                    type: 'SHOW',
                                                                     option:
                                                                       'styles',
                                                                     comparator:
@@ -40767,73 +40676,62 @@
                                                                 type: 'CUSTOM',
                                                                 label:
                                                                   'Font weight',
-                                                                key:
-                                                                  'fontWeight',
+                                                                key: 'fontWeight',
                                                                 value: '400',
                                                                 configuration: {
-                                                                  as:
-                                                                    'DROPDOWN',
+                                                                  as: 'DROPDOWN',
                                                                   dataType:
                                                                     'string',
-                                                                  allowedInput: [
-                                                                    {
-                                                                      name:
-                                                                        '100',
-                                                                      value:
-                                                                        '100',
-                                                                    },
-                                                                    {
-                                                                      name:
-                                                                        '200',
-                                                                      value:
-                                                                        '200',
-                                                                    },
-                                                                    {
-                                                                      name:
-                                                                        '300',
-                                                                      value:
-                                                                        '300',
-                                                                    },
-                                                                    {
-                                                                      name:
-                                                                        '400',
-                                                                      value:
-                                                                        '400',
-                                                                    },
-                                                                    {
-                                                                      name:
-                                                                        '500',
-                                                                      value:
-                                                                        '500',
-                                                                    },
-                                                                    {
-                                                                      name:
-                                                                        '600',
-                                                                      value:
-                                                                        '600',
-                                                                    },
-                                                                    {
-                                                                      name:
-                                                                        '700',
-                                                                      value:
-                                                                        '700',
-                                                                    },
-                                                                    {
-                                                                      name:
-                                                                        '800',
-                                                                      value:
-                                                                        '800',
-                                                                    },
-                                                                    {
-                                                                      name:
-                                                                        '900',
-                                                                      value:
-                                                                        '900',
-                                                                    },
-                                                                  ],
+                                                                  allowedInput:
+                                                                    [
+                                                                      {
+                                                                        name: '100',
+                                                                        value:
+                                                                          '100',
+                                                                      },
+                                                                      {
+                                                                        name: '200',
+                                                                        value:
+                                                                          '200',
+                                                                      },
+                                                                      {
+                                                                        name: '300',
+                                                                        value:
+                                                                          '300',
+                                                                      },
+                                                                      {
+                                                                        name: '400',
+                                                                        value:
+                                                                          '400',
+                                                                      },
+                                                                      {
+                                                                        name: '500',
+                                                                        value:
+                                                                          '500',
+                                                                      },
+                                                                      {
+                                                                        name: '600',
+                                                                        value:
+                                                                          '600',
+                                                                      },
+                                                                      {
+                                                                        name: '700',
+                                                                        value:
+                                                                          '700',
+                                                                      },
+                                                                      {
+                                                                        name: '800',
+                                                                        value:
+                                                                          '800',
+                                                                      },
+                                                                      {
+                                                                        name: '900',
+                                                                        value:
+                                                                          '900',
+                                                                      },
+                                                                    ],
                                                                   condition: {
-                                                                    type:
-                                                                      'SHOW',
+                                                                    type: 'SHOW',
                                                                     option:
                                                                       'styles',
                                                                     comparator:
@@ -40846,22 +40744,18 @@
                                                                 value: false,
                                                                 label:
                                                                   'Advanced settings',
-                                                                key:
-                                                                  'advancedSettings',
+                                                                key: 'advancedSettings',
                                                                 type: 'TOGGLE',
                                                               },
                                                               {
-                                                                type:
-                                                                  'VARIABLE',
+                                                                type: 'VARIABLE',
                                                                 label:
                                                                   'Test attribute',
-                                                                key:
-                                                                  'dataComponentAttribute',
+                                                                key: 'dataComponentAttribute',
                                                                 value: ['Text'],
                                                                 configuration: {
                                                                   condition: {
-                                                                    type:
-                                                                      'SHOW',
+                                                                    type: 'SHOW',
                                                                     option:
                                                                       'advancedSettings',
                                                                     comparator:
@@ -40894,8 +40788,7 @@
                                                                     'flex-start',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'Center',
+                                                                  name: 'Center',
                                                                   value:
                                                                     'center',
                                                                 },
@@ -40911,24 +40804,21 @@
                                                             type: 'TOGGLE',
                                                             label:
                                                               'Disable spacing',
-                                                            key:
-                                                              'disableSpacing',
+                                                            key: 'disableSpacing',
                                                             value: false,
                                                           },
                                                           {
                                                             value: false,
                                                             label:
                                                               'Advanced settings',
-                                                            key:
-                                                              'advancedSettings',
+                                                            key: 'advancedSettings',
                                                             type: 'TOGGLE',
                                                           },
                                                           {
                                                             type: 'VARIABLE',
                                                             label:
                                                               'Test attribute',
-                                                            key:
-                                                              'dataComponentAttribute',
+                                                            key: 'dataComponentAttribute',
                                                             value: [
                                                               'CardActions',
                                                             ],
@@ -40949,17 +40839,16 @@
                                                             name: 'Button',
                                                             style: {
                                                               overwrite: {
-                                                                backgroundColor: {
-                                                                  type:
-                                                                    'STATIC',
-                                                                  value:
-                                                                    'transparent',
-                                                                },
+                                                                backgroundColor:
+                                                                  {
+                                                                    type: 'STATIC',
+                                                                    value:
+                                                                      'transparent',
+                                                                  },
                                                                 boxShadow:
                                                                   'none',
                                                                 color: {
-                                                                  type:
-                                                                    'THEME_COLOR',
+                                                                  type: 'THEME_COLOR',
                                                                   value:
                                                                     'primary',
                                                                 },
@@ -40989,25 +40878,21 @@
                                                                 value: true,
                                                                 type: 'TOGGLE',
                                                                 configuration: {
-                                                                  as:
-                                                                    'VISIBILITY',
+                                                                  as: 'VISIBILITY',
                                                                 },
                                                               },
                                                               {
-                                                                type:
-                                                                  'VARIABLE',
+                                                                type: 'VARIABLE',
                                                                 label:
                                                                   'Button text',
-                                                                key:
-                                                                  'buttonText',
+                                                                key: 'buttonText',
                                                                 value: [''],
                                                               },
                                                               {
                                                                 value: false,
                                                                 label:
                                                                   'Full width',
-                                                                key:
-                                                                  'fullWidth',
+                                                                key: 'fullWidth',
                                                                 type: 'TOGGLE',
                                                               },
                                                               {
@@ -41024,33 +40909,29 @@
                                                                 key: 'size',
                                                                 type: 'CUSTOM',
                                                                 configuration: {
-                                                                  as:
-                                                                    'BUTTONGROUP',
+                                                                  as: 'BUTTONGROUP',
                                                                   dataType:
                                                                     'string',
-                                                                  allowedInput: [
-                                                                    {
-                                                                      name:
-                                                                        'Large',
-                                                                      value:
-                                                                        'large',
-                                                                    },
-                                                                    {
-                                                                      name:
-                                                                        'Medium',
-                                                                      value:
-                                                                        'medium',
-                                                                    },
-                                                                    {
-                                                                      name:
-                                                                        'Small',
-                                                                      value:
-                                                                        'small',
-                                                                    },
-                                                                  ],
+                                                                  allowedInput:
+                                                                    [
+                                                                      {
+                                                                        name: 'Large',
+                                                                        value:
+                                                                          'large',
+                                                                      },
+                                                                      {
+                                                                        name: 'Medium',
+                                                                        value:
+                                                                          'medium',
+                                                                      },
+                                                                      {
+                                                                        name: 'Small',
+                                                                        value:
+                                                                          'small',
+                                                                      },
+                                                                    ],
                                                                   condition: {
-                                                                    type:
-                                                                      'HIDE',
+                                                                    type: 'HIDE',
                                                                     option:
                                                                       'icon',
                                                                     comparator:
@@ -41064,17 +40945,14 @@
                                                                 type: 'CUSTOM',
                                                                 label:
                                                                   'Icon position',
-                                                                key:
-                                                                  'iconPosition',
+                                                                key: 'iconPosition',
                                                                 value: 'start',
                                                                 configuration: {
-                                                                  as:
-                                                                    'BUTTONGROUP',
+                                                                  as: 'BUTTONGROUP',
                                                                   dataType:
                                                                     'string',
                                                                   condition: {
-                                                                    type:
-                                                                      'HIDE',
+                                                                    type: 'HIDE',
                                                                     option:
                                                                       'icon',
                                                                     comparator:
@@ -41082,20 +40960,19 @@
                                                                     value:
                                                                       'None',
                                                                   },
-                                                                  allowedInput: [
-                                                                    {
-                                                                      name:
-                                                                        'Start',
-                                                                      value:
-                                                                        'start',
-                                                                    },
-                                                                    {
-                                                                      name:
-                                                                        'End',
-                                                                      value:
-                                                                        'end',
-                                                                    },
-                                                                  ],
+                                                                  allowedInput:
+                                                                    [
+                                                                      {
+                                                                        name: 'Start',
+                                                                        value:
+                                                                          'start',
+                                                                      },
+                                                                      {
+                                                                        name: 'End',
+                                                                        value:
+                                                                          'end',
+                                                                      },
+                                                                    ],
                                                                 },
                                                               },
                                                               {
@@ -41107,8 +40984,7 @@
                                                                 ],
                                                                 label:
                                                                   'Outer space',
-                                                                key:
-                                                                  'outerSpacing',
+                                                                key: 'outerSpacing',
                                                                 type: 'SIZES',
                                                               },
                                                               {
@@ -41121,28 +40997,23 @@
                                                               {
                                                                 label:
                                                                   'Add Tooltip',
-                                                                key:
-                                                                  'addTooltip',
+                                                                key: 'addTooltip',
                                                                 value: false,
                                                                 type: 'TOGGLE',
                                                                 configuration: {
-                                                                  as:
-                                                                    'VISIBILITY',
+                                                                  as: 'VISIBILITY',
                                                                 },
                                                               },
                                                               {
                                                                 label:
                                                                   'Toggle tooltip visibility',
-                                                                key:
-                                                                  'visibleTooltip',
+                                                                key: 'visibleTooltip',
                                                                 value: true,
                                                                 type: 'TOGGLE',
                                                                 configuration: {
-                                                                  as:
-                                                                    'VISIBILITY',
+                                                                  as: 'VISIBILITY',
                                                                   condition: {
-                                                                    type:
-                                                                      'SHOW',
+                                                                    type: 'SHOW',
                                                                     option:
                                                                       'addTooltip',
                                                                     comparator:
@@ -41152,17 +41023,14 @@
                                                                 },
                                                               },
                                                               {
-                                                                type:
-                                                                  'VARIABLE',
+                                                                type: 'VARIABLE',
                                                                 label:
                                                                   'Tooltip Content',
-                                                                key:
-                                                                  'tooltipContent',
+                                                                key: 'tooltipContent',
                                                                 value: ['Tips'],
                                                                 configuration: {
                                                                   condition: {
-                                                                    type:
-                                                                      'SHOW',
+                                                                    type: 'SHOW',
                                                                     option:
                                                                       'addTooltip',
                                                                     comparator:
@@ -41174,68 +41042,58 @@
                                                               {
                                                                 label:
                                                                   'Tooltip Placement',
-                                                                key:
-                                                                  'tooltipPlacement',
+                                                                key: 'tooltipPlacement',
                                                                 value: 'bottom',
                                                                 type: 'CUSTOM',
                                                                 configuration: {
-                                                                  as:
-                                                                    'DROPDOWN',
+                                                                  as: 'DROPDOWN',
                                                                   dataType:
                                                                     'string',
-                                                                  allowedInput: [
-                                                                    {
-                                                                      name:
-                                                                        'Top Start',
-                                                                      value:
-                                                                        'top-start',
-                                                                    },
-                                                                    {
-                                                                      name:
-                                                                        'Top',
-                                                                      value:
-                                                                        'top',
-                                                                    },
-                                                                    {
-                                                                      name:
-                                                                        'Top End',
-                                                                      value:
-                                                                        'top-end',
-                                                                    },
-                                                                    {
-                                                                      name:
-                                                                        'Right',
-                                                                      value:
-                                                                        'right',
-                                                                    },
-                                                                    {
-                                                                      name:
-                                                                        'Left',
-                                                                      value:
-                                                                        'left',
-                                                                    },
-                                                                    {
-                                                                      name:
-                                                                        'Botttom Start',
-                                                                      value:
-                                                                        'bottom-start',
-                                                                    },
-                                                                    {
-                                                                      name:
-                                                                        'Bottom',
-                                                                      value:
-                                                                        'bottom',
-                                                                    },
-                                                                    {
-                                                                      name:
-                                                                        'Bottom End',
-                                                                      value:
-                                                                        'bottom-end',
-                                                                    },
-                                                                  ],
+                                                                  allowedInput:
+                                                                    [
+                                                                      {
+                                                                        name: 'Top Start',
+                                                                        value:
+                                                                          'top-start',
+                                                                      },
+                                                                      {
+                                                                        name: 'Top',
+                                                                        value:
+                                                                          'top',
+                                                                      },
+                                                                      {
+                                                                        name: 'Top End',
+                                                                        value:
+                                                                          'top-end',
+                                                                      },
+                                                                      {
+                                                                        name: 'Right',
+                                                                        value:
+                                                                          'right',
+                                                                      },
+                                                                      {
+                                                                        name: 'Left',
+                                                                        value:
+                                                                          'left',
+                                                                      },
+                                                                      {
+                                                                        name: 'Botttom Start',
+                                                                        value:
+                                                                          'bottom-start',
+                                                                      },
+                                                                      {
+                                                                        name: 'Bottom',
+                                                                        value:
+                                                                          'bottom',
+                                                                      },
+                                                                      {
+                                                                        name: 'Bottom End',
+                                                                        value:
+                                                                          'bottom-end',
+                                                                      },
+                                                                    ],
                                                                   condition: {
-                                                                    type:
-                                                                      'SHOW',
+                                                                    type: 'SHOW',
                                                                     option:
                                                                       'addTooltip',
                                                                     comparator:
@@ -41248,13 +41106,11 @@
                                                                 type: 'COLOR',
                                                                 label:
                                                                   'Tooltip Background',
-                                                                key:
-                                                                  'tooltipBackground',
+                                                                key: 'tooltipBackground',
                                                                 value: 'Medium',
                                                                 configuration: {
                                                                   condition: {
-                                                                    type:
-                                                                      'SHOW',
+                                                                    type: 'SHOW',
                                                                     option:
                                                                       'addTooltip',
                                                                     comparator:
@@ -41267,13 +41123,11 @@
                                                                 type: 'COLOR',
                                                                 label:
                                                                   'Tooltip Text',
-                                                                key:
-                                                                  'tooltipText',
+                                                                key: 'tooltipText',
                                                                 value: 'Black',
                                                                 configuration: {
                                                                   condition: {
-                                                                    type:
-                                                                      'SHOW',
+                                                                    type: 'SHOW',
                                                                     option:
                                                                       'addTooltip',
                                                                     comparator:
@@ -41286,24 +41140,20 @@
                                                                 value: false,
                                                                 label:
                                                                   'Advanced settings',
-                                                                key:
-                                                                  'advancedSettings',
+                                                                key: 'advancedSettings',
                                                                 type: 'TOGGLE',
                                                               },
                                                               {
-                                                                type:
-                                                                  'VARIABLE',
+                                                                type: 'VARIABLE',
                                                                 label:
                                                                   'Test attribute',
-                                                                key:
-                                                                  'dataComponentAttribute',
+                                                                key: 'dataComponentAttribute',
                                                                 value: [
                                                                   'Button',
                                                                 ],
                                                                 configuration: {
                                                                   condition: {
-                                                                    type:
-                                                                      'SHOW',
+                                                                    type: 'SHOW',
                                                                     option:
                                                                       'advancedSettings',
                                                                     comparator:
@@ -41440,8 +41290,7 @@
                                                     },
                                                     label: 'Label',
                                                     key: 'customModelAttribute',
-                                                    type:
-                                                      'CUSTOM_MODEL_ATTRIBUTE',
+                                                    type: 'CUSTOM_MODEL_ATTRIBUTE',
                                                     configuration: {
                                                       allowedTypes: ['string'],
                                                     },
@@ -41511,8 +41360,7 @@
                                                     ],
                                                     label:
                                                       'Value required message',
-                                                    key:
-                                                      'validationValueMissing',
+                                                    key: 'validationValueMissing',
                                                     type: 'VARIABLE',
                                                     configuration: {
                                                       condition: {
@@ -41528,8 +41376,7 @@
                                                     value: ['Invalid value'],
                                                     label:
                                                       'Pattern mismatch message',
-                                                    key:
-                                                      'validationPatternMismatch',
+                                                    key: 'validationPatternMismatch',
                                                     type: 'VARIABLE',
                                                     configuration: {
                                                       condition: {
@@ -41873,8 +41720,7 @@
                                                   {
                                                     type: 'VARIABLE',
                                                     label: 'Test attribute',
-                                                    key:
-                                                      'dataComponentAttribute',
+                                                    key: 'dataComponentAttribute',
                                                     value: ['TextField'],
                                                     configuration: {
                                                       condition: {
@@ -41959,8 +41805,7 @@
                                                   {
                                                     type: 'VARIABLE',
                                                     label: 'Test attribute',
-                                                    key:
-                                                      'dataComponentAttribute',
+                                                    key: 'dataComponentAttribute',
                                                     value: ['Row'],
                                                     configuration: {
                                                       condition: {
@@ -41977,8 +41822,7 @@
                                                   {
                                                     name: 'Column',
                                                     ref: {
-                                                      id:
-                                                        '#noResultsListColumn',
+                                                      id: '#noResultsListColumn',
                                                     },
                                                     options: [
                                                       {
@@ -42001,8 +41845,7 @@
                                                           dataType: 'string',
                                                           allowedInput: [
                                                             {
-                                                              name:
-                                                                'Fit content',
+                                                              name: 'Fit content',
                                                               value:
                                                                 'fitContent',
                                                             },
@@ -42069,16 +41912,14 @@
                                                         value: 'flexible',
                                                         label:
                                                           'Column width (tablet landscape)',
-                                                        key:
-                                                          'columnWidthTabletLandscape',
+                                                        key: 'columnWidthTabletLandscape',
                                                         type: 'CUSTOM',
                                                         configuration: {
                                                           as: 'DROPDOWN',
                                                           dataType: 'string',
                                                           allowedInput: [
                                                             {
-                                                              name:
-                                                                'Fit content',
+                                                              name: 'Fit content',
                                                               value:
                                                                 'fitContent',
                                                             },
@@ -42145,16 +41986,14 @@
                                                         value: 'flexible',
                                                         label:
                                                           'Column width (tablet portrait)',
-                                                        key:
-                                                          'columnWidthTabletPortrait',
+                                                        key: 'columnWidthTabletPortrait',
                                                         type: 'CUSTOM',
                                                         configuration: {
                                                           as: 'DROPDOWN',
                                                           dataType: 'string',
                                                           allowedInput: [
                                                             {
-                                                              name:
-                                                                'Fit content',
+                                                              name: 'Fit content',
                                                               value:
                                                                 'fitContent',
                                                             },
@@ -42221,16 +42060,14 @@
                                                         value: 'flexible',
                                                         label:
                                                           'Column width (mobile)',
-                                                        key:
-                                                          'columnWidthMobile',
+                                                        key: 'columnWidthMobile',
                                                         type: 'CUSTOM',
                                                         configuration: {
                                                           as: 'DROPDOWN',
                                                           dataType: 'string',
                                                           allowedInput: [
                                                             {
-                                                              name:
-                                                                'Fit content',
+                                                              name: 'Fit content',
                                                               value:
                                                                 'fitContent',
                                                             },
@@ -42313,8 +42150,7 @@
                                                         type: 'CUSTOM',
                                                         label:
                                                           'Horizontal Alignment',
-                                                        key:
-                                                          'horizontalAlignment',
+                                                        key: 'horizontalAlignment',
                                                         value: 'inherit',
                                                         configuration: {
                                                           as: 'BUTTONGROUP',
@@ -42344,8 +42180,7 @@
                                                         type: 'CUSTOM',
                                                         label:
                                                           'Vertical Alignment',
-                                                        key:
-                                                          'verticalAlignment',
+                                                        key: 'verticalAlignment',
                                                         value: 'inherit',
                                                         configuration: {
                                                           as: 'BUTTONGROUP',
@@ -42403,8 +42238,7 @@
                                                       {
                                                         type: 'VARIABLE',
                                                         label: 'Test attribute',
-                                                        key:
-                                                          'dataComponentAttribute',
+                                                        key: 'dataComponentAttribute',
                                                         value: ['Column'],
                                                         configuration: {
                                                           condition: {
@@ -42449,8 +42283,7 @@
                                                             type: 'CUSTOM',
                                                             label:
                                                               'Text Alignment',
-                                                            key:
-                                                              'textAlignment',
+                                                            key: 'textAlignment',
                                                             value: 'left',
                                                             configuration: {
                                                               as: 'BUTTONGROUP',
@@ -42462,8 +42295,7 @@
                                                                   value: 'left',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'Center',
+                                                                  name: 'Center',
                                                                   value:
                                                                     'center',
                                                                 },
@@ -42498,14 +42330,12 @@
                                                                 'string',
                                                               allowedInput: [
                                                                 {
-                                                                  name:
-                                                                    'Internal page',
+                                                                  name: 'Internal page',
                                                                   value:
                                                                     'internal',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'External page',
+                                                                  name: 'External page',
                                                                   value:
                                                                     'external',
                                                                 },
@@ -42532,8 +42362,7 @@
                                                           {
                                                             value: [''],
                                                             label: 'URL',
-                                                            key:
-                                                              'linkToExternal',
+                                                            key: 'linkToExternal',
                                                             type: 'VARIABLE',
                                                             configuration: {
                                                               placeholder:
@@ -42633,16 +42462,14 @@
                                                             value: false,
                                                             label:
                                                               'Advanced settings',
-                                                            key:
-                                                              'advancedSettings',
+                                                            key: 'advancedSettings',
                                                             type: 'TOGGLE',
                                                           },
                                                           {
                                                             type: 'VARIABLE',
                                                             label:
                                                               'Test attribute',
-                                                            key:
-                                                              'dataComponentAttribute',
+                                                            key: 'dataComponentAttribute',
                                                             value: ['Text'],
                                                             configuration: {
                                                               condition: {
@@ -42743,8 +42570,7 @@
                                                     label:
                                                       'Authentication Profile',
                                                     key: 'authProfile',
-                                                    type:
-                                                      'AUTHENTICATION_PROFILE',
+                                                    type: 'AUTHENTICATION_PROFILE',
                                                   },
                                                   {
                                                     label: 'Pagination',
@@ -42922,8 +42748,7 @@
                                                   {
                                                     type: 'VARIABLE',
                                                     label: 'Test attribute',
-                                                    key:
-                                                      'dataComponentAttribute',
+                                                    key: 'dataComponentAttribute',
                                                     value: ['DataList'],
                                                     configuration: {
                                                       condition: {
@@ -43009,8 +42834,7 @@
                                                       {
                                                         type: 'VARIABLE',
                                                         label: 'Test attribute',
-                                                        key:
-                                                          'dataComponentAttribute',
+                                                        key: 'dataComponentAttribute',
                                                         value: ['Row'],
                                                         configuration: {
                                                           condition: {
@@ -43049,20 +42873,17 @@
                                                                 'string',
                                                               allowedInput: [
                                                                 {
-                                                                  name:
-                                                                    'Fit content',
+                                                                  name: 'Fit content',
                                                                   value:
                                                                     'fitContent',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'Flexible',
+                                                                  name: 'Flexible',
                                                                   value:
                                                                     'flexible',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'Hidden',
+                                                                  name: 'Hidden',
                                                                   value:
                                                                     'hidden',
                                                                 },
@@ -43121,8 +42942,7 @@
                                                             value: 'flexible',
                                                             label:
                                                               'Column width (tablet landscape)',
-                                                            key:
-                                                              'columnWidthTabletLandscape',
+                                                            key: 'columnWidthTabletLandscape',
                                                             type: 'CUSTOM',
                                                             configuration: {
                                                               as: 'DROPDOWN',
@@ -43130,20 +42950,17 @@
                                                                 'string',
                                                               allowedInput: [
                                                                 {
-                                                                  name:
-                                                                    'Fit content',
+                                                                  name: 'Fit content',
                                                                   value:
                                                                     'fitContent',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'Flexible',
+                                                                  name: 'Flexible',
                                                                   value:
                                                                     'flexible',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'Hidden',
+                                                                  name: 'Hidden',
                                                                   value:
                                                                     'hidden',
                                                                 },
@@ -43202,8 +43019,7 @@
                                                             value: 'flexible',
                                                             label:
                                                               'Column width (tablet portrait)',
-                                                            key:
-                                                              'columnWidthTabletPortrait',
+                                                            key: 'columnWidthTabletPortrait',
                                                             type: 'CUSTOM',
                                                             configuration: {
                                                               as: 'DROPDOWN',
@@ -43211,20 +43027,17 @@
                                                                 'string',
                                                               allowedInput: [
                                                                 {
-                                                                  name:
-                                                                    'Fit content',
+                                                                  name: 'Fit content',
                                                                   value:
                                                                     'fitContent',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'Flexible',
+                                                                  name: 'Flexible',
                                                                   value:
                                                                     'flexible',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'Hidden',
+                                                                  name: 'Hidden',
                                                                   value:
                                                                     'hidden',
                                                                 },
@@ -43283,8 +43096,7 @@
                                                             value: 'flexible',
                                                             label:
                                                               'Column width (mobile)',
-                                                            key:
-                                                              'columnWidthMobile',
+                                                            key: 'columnWidthMobile',
                                                             type: 'CUSTOM',
                                                             configuration: {
                                                               as: 'DROPDOWN',
@@ -43292,20 +43104,17 @@
                                                                 'string',
                                                               allowedInput: [
                                                                 {
-                                                                  name:
-                                                                    'Fit content',
+                                                                  name: 'Fit content',
                                                                   value:
                                                                     'fitContent',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'Flexible',
+                                                                  name: 'Flexible',
                                                                   value:
                                                                     'flexible',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'Hidden',
+                                                                  name: 'Hidden',
                                                                   value:
                                                                     'hidden',
                                                                 },
@@ -43374,16 +43183,14 @@
                                                               'transparent',
                                                             label:
                                                               'Background color',
-                                                            key:
-                                                              'backgroundColor',
+                                                            key: 'backgroundColor',
                                                             type: 'COLOR',
                                                           },
                                                           {
                                                             type: 'CUSTOM',
                                                             label:
                                                               'Horizontal Alignment',
-                                                            key:
-                                                              'horizontalAlignment',
+                                                            key: 'horizontalAlignment',
                                                             value: 'inherit',
                                                             configuration: {
                                                               as: 'BUTTONGROUP',
@@ -43401,8 +43208,7 @@
                                                                     'flex-start',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'Center',
+                                                                  name: 'Center',
                                                                   value:
                                                                     'center',
                                                                 },
@@ -43418,8 +43224,7 @@
                                                             type: 'CUSTOM',
                                                             label:
                                                               'Vertical Alignment',
-                                                            key:
-                                                              'verticalAlignment',
+                                                            key: 'verticalAlignment',
                                                             value: 'inherit',
                                                             configuration: {
                                                               as: 'BUTTONGROUP',
@@ -43437,14 +43242,12 @@
                                                                     'flex-start',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'Center',
+                                                                  name: 'Center',
                                                                   value:
                                                                     'center',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'Bottom',
+                                                                  name: 'Bottom',
                                                                   value:
                                                                     'flex-end',
                                                                 },
@@ -43479,16 +43282,14 @@
                                                             value: false,
                                                             label:
                                                               'Advanced settings',
-                                                            key:
-                                                              'advancedSettings',
+                                                            key: 'advancedSettings',
                                                             type: 'TOGGLE',
                                                           },
                                                           {
                                                             type: 'VARIABLE',
                                                             label:
                                                               'Test attribute',
-                                                            key:
-                                                              'dataComponentAttribute',
+                                                            key: 'dataComponentAttribute',
                                                             value: ['Column'],
                                                             configuration: {
                                                               condition: {
@@ -43520,184 +43321,164 @@
                                                                   'outlined',
                                                                 type: 'CUSTOM',
                                                                 configuration: {
-                                                                  as:
-                                                                    'BUTTONGROUP',
+                                                                  as: 'BUTTONGROUP',
                                                                   dataType:
                                                                     'string',
-                                                                  allowedInput: [
-                                                                    {
-                                                                      name:
-                                                                        'Flat',
-                                                                      value:
-                                                                        'flat',
-                                                                    },
-                                                                    {
-                                                                      name:
-                                                                        'Elevation',
-                                                                      value:
-                                                                        'elevation',
-                                                                    },
-                                                                    {
-                                                                      name:
-                                                                        'Outlined',
-                                                                      value:
-                                                                        'outlined',
-                                                                    },
-                                                                  ],
+                                                                  allowedInput:
+                                                                    [
+                                                                      {
+                                                                        name: 'Flat',
+                                                                        value:
+                                                                          'flat',
+                                                                      },
+                                                                      {
+                                                                        name: 'Elevation',
+                                                                        value:
+                                                                          'elevation',
+                                                                      },
+                                                                      {
+                                                                        name: 'Outlined',
+                                                                        value:
+                                                                          'outlined',
+                                                                      },
+                                                                    ],
                                                                 },
                                                               },
                                                               {
                                                                 label:
                                                                   'Elevation',
-                                                                key:
-                                                                  'elevation',
+                                                                key: 'elevation',
                                                                 value: '1',
                                                                 type: 'CUSTOM',
                                                                 configuration: {
-                                                                  as:
-                                                                    'DROPDOWN',
+                                                                  as: 'DROPDOWN',
                                                                   dataType:
                                                                     'string',
-                                                                  allowedInput: [
-                                                                    {
-                                                                      name: '1',
-                                                                      value:
-                                                                        '1',
-                                                                    },
-                                                                    {
-                                                                      name: '2',
-                                                                      value:
-                                                                        '2',
-                                                                    },
-                                                                    {
-                                                                      name: '3',
-                                                                      value:
-                                                                        '3',
-                                                                    },
-                                                                    {
-                                                                      name: '4',
-                                                                      value:
-                                                                        '4',
-                                                                    },
-                                                                    {
-                                                                      name: '5',
-                                                                      value:
-                                                                        '5',
-                                                                    },
-                                                                    {
-                                                                      name: '6',
-                                                                      value:
-                                                                        '6',
-                                                                    },
-                                                                    {
-                                                                      name: '7',
-                                                                      value:
-                                                                        '7',
-                                                                    },
-                                                                    {
-                                                                      name: '8',
-                                                                      value:
-                                                                        '8',
-                                                                    },
-                                                                    {
-                                                                      name: '9',
-                                                                      value:
-                                                                        '9',
-                                                                    },
-                                                                    {
-                                                                      name:
-                                                                        '10',
-                                                                      value:
-                                                                        '10',
-                                                                    },
-                                                                    {
-                                                                      name:
-                                                                        '11',
-                                                                      value:
-                                                                        '11',
-                                                                    },
-                                                                    {
-                                                                      name:
-                                                                        '12',
-                                                                      value:
-                                                                        '12',
-                                                                    },
-                                                                    {
-                                                                      name:
-                                                                        '13',
-                                                                      value:
-                                                                        '13',
-                                                                    },
-                                                                    {
-                                                                      name:
-                                                                        '14',
-                                                                      value:
-                                                                        '14',
-                                                                    },
-                                                                    {
-                                                                      name:
-                                                                        '15',
-                                                                      value:
-                                                                        '15',
-                                                                    },
-                                                                    {
-                                                                      name:
-                                                                        '16',
-                                                                      value:
-                                                                        '16',
-                                                                    },
-                                                                    {
-                                                                      name:
-                                                                        '17',
-                                                                      value:
-                                                                        '17',
-                                                                    },
-                                                                    {
-                                                                      name:
-                                                                        '18',
-                                                                      value:
-                                                                        '18',
-                                                                    },
-                                                                    {
-                                                                      name:
-                                                                        '19',
-                                                                      value:
-                                                                        '19',
-                                                                    },
-                                                                    {
-                                                                      name:
-                                                                        '20',
-                                                                      value:
-                                                                        '20',
-                                                                    },
-                                                                    {
-                                                                      name:
-                                                                        '21',
-                                                                      value:
-                                                                        '21',
-                                                                    },
-                                                                    {
-                                                                      name:
-                                                                        '22',
-                                                                      value:
-                                                                        '22',
-                                                                    },
-                                                                    {
-                                                                      name:
-                                                                        '23',
-                                                                      value:
-                                                                        '23',
-                                                                    },
-                                                                    {
-                                                                      name:
-                                                                        '24',
-                                                                      value:
-                                                                        '24',
-                                                                    },
-                                                                  ],
+                                                                  allowedInput:
+                                                                    [
+                                                                      {
+                                                                        name: '1',
+                                                                        value:
+                                                                          '1',
+                                                                      },
+                                                                      {
+                                                                        name: '2',
+                                                                        value:
+                                                                          '2',
+                                                                      },
+                                                                      {
+                                                                        name: '3',
+                                                                        value:
+                                                                          '3',
+                                                                      },
+                                                                      {
+                                                                        name: '4',
+                                                                        value:
+                                                                          '4',
+                                                                      },
+                                                                      {
+                                                                        name: '5',
+                                                                        value:
+                                                                          '5',
+                                                                      },
+                                                                      {
+                                                                        name: '6',
+                                                                        value:
+                                                                          '6',
+                                                                      },
+                                                                      {
+                                                                        name: '7',
+                                                                        value:
+                                                                          '7',
+                                                                      },
+                                                                      {
+                                                                        name: '8',
+                                                                        value:
+                                                                          '8',
+                                                                      },
+                                                                      {
+                                                                        name: '9',
+                                                                        value:
+                                                                          '9',
+                                                                      },
+                                                                      {
+                                                                        name: '10',
+                                                                        value:
+                                                                          '10',
+                                                                      },
+                                                                      {
+                                                                        name: '11',
+                                                                        value:
+                                                                          '11',
+                                                                      },
+                                                                      {
+                                                                        name: '12',
+                                                                        value:
+                                                                          '12',
+                                                                      },
+                                                                      {
+                                                                        name: '13',
+                                                                        value:
+                                                                          '13',
+                                                                      },
+                                                                      {
+                                                                        name: '14',
+                                                                        value:
+                                                                          '14',
+                                                                      },
+                                                                      {
+                                                                        name: '15',
+                                                                        value:
+                                                                          '15',
+                                                                      },
+                                                                      {
+                                                                        name: '16',
+                                                                        value:
+                                                                          '16',
+                                                                      },
+                                                                      {
+                                                                        name: '17',
+                                                                        value:
+                                                                          '17',
+                                                                      },
+                                                                      {
+                                                                        name: '18',
+                                                                        value:
+                                                                          '18',
+                                                                      },
+                                                                      {
+                                                                        name: '19',
+                                                                        value:
+                                                                          '19',
+                                                                      },
+                                                                      {
+                                                                        name: '20',
+                                                                        value:
+                                                                          '20',
+                                                                      },
+                                                                      {
+                                                                        name: '21',
+                                                                        value:
+                                                                          '21',
+                                                                      },
+                                                                      {
+                                                                        name: '22',
+                                                                        value:
+                                                                          '22',
+                                                                      },
+                                                                      {
+                                                                        name: '23',
+                                                                        value:
+                                                                          '23',
+                                                                      },
+                                                                      {
+                                                                        name: '24',
+                                                                        value:
+                                                                          '24',
+                                                                      },
+                                                                    ],
                                                                   condition: {
-                                                                    type:
-                                                                      'SHOW',
+                                                                    type: 'SHOW',
                                                                     option:
                                                                       'variant',
                                                                     comparator:
@@ -43716,32 +43497,27 @@
                                                                 ],
                                                                 label:
                                                                   'Outer space',
-                                                                key:
-                                                                  'outerSpacing',
+                                                                key: 'outerSpacing',
                                                                 type: 'SIZES',
                                                               },
                                                               {
                                                                 value: false,
                                                                 label:
                                                                   'Advanced settings',
-                                                                key:
-                                                                  'advancedSettings',
+                                                                key: 'advancedSettings',
                                                                 type: 'TOGGLE',
                                                               },
                                                               {
-                                                                type:
-                                                                  'VARIABLE',
+                                                                type: 'VARIABLE',
                                                                 label:
                                                                   'Test attribute',
-                                                                key:
-                                                                  'dataComponentAttribute',
+                                                                key: 'dataComponentAttribute',
                                                                 value: [
                                                                   'Paper',
                                                                 ],
                                                                 configuration: {
                                                                   condition: {
-                                                                    type:
-                                                                      'SHOW',
+                                                                    type: 'SHOW',
                                                                     option:
                                                                       'advancedSettings',
                                                                     comparator:
@@ -43756,75 +43532,65 @@
                                                                 name: 'Row',
                                                                 options: [
                                                                   {
-                                                                    type:
-                                                                      'CUSTOM',
+                                                                    type: 'CUSTOM',
                                                                     label:
                                                                       'Width',
-                                                                    key:
-                                                                      'maxRowWidth',
+                                                                    key: 'maxRowWidth',
                                                                     value:
                                                                       'Full',
-                                                                    configuration: {
-                                                                      as:
-                                                                        'BUTTONGROUP',
-                                                                      dataType:
-                                                                        'string',
-                                                                      allowedInput: [
-                                                                        {
-                                                                          name:
-                                                                            'S',
-                                                                          value:
-                                                                            'S',
-                                                                        },
-                                                                        {
-                                                                          name:
-                                                                            'M',
-                                                                          value:
-                                                                            'M',
-                                                                        },
-                                                                        {
-                                                                          name:
-                                                                            'L',
-                                                                          value:
-                                                                            'L',
-                                                                        },
-                                                                        {
-                                                                          name:
-                                                                            'XL',
-                                                                          value:
-                                                                            'XL',
-                                                                        },
-                                                                        {
-                                                                          name:
-                                                                            'Full',
-                                                                          value:
-                                                                            'Full',
-                                                                        },
-                                                                      ],
-                                                                    },
+                                                                    configuration:
+                                                                      {
+                                                                        as: 'BUTTONGROUP',
+                                                                        dataType:
+                                                                          'string',
+                                                                        allowedInput:
+                                                                          [
+                                                                            {
+                                                                              name: 'S',
+                                                                              value:
+                                                                                'S',
+                                                                            },
+                                                                            {
+                                                                              name: 'M',
+                                                                              value:
+                                                                                'M',
+                                                                            },
+                                                                            {
+                                                                              name: 'L',
+                                                                              value:
+                                                                                'L',
+                                                                            },
+                                                                            {
+                                                                              name: 'XL',
+                                                                              value:
+                                                                                'XL',
+                                                                            },
+                                                                            {
+                                                                              name: 'Full',
+                                                                              value:
+                                                                                'Full',
+                                                                            },
+                                                                          ],
+                                                                      },
                                                                   },
                                                                   {
                                                                     value: '',
                                                                     label:
                                                                       'Height',
-                                                                    key:
-                                                                      'rowHeight',
-                                                                    type:
-                                                                      'TEXT',
-                                                                    configuration: {
-                                                                      as:
-                                                                        'UNIT',
-                                                                    },
+                                                                    key: 'rowHeight',
+                                                                    type: 'TEXT',
+                                                                    configuration:
+                                                                      {
+                                                                        as: 'UNIT',
+                                                                      },
                                                                   },
                                                                   {
                                                                     value:
                                                                       'transparent',
                                                                     label:
                                                                       'Background color',
-                                                                    key:
-                                                                      'backgroundColor',
-                                                                    type:
-                                                                      'COLOR',
+                                                                    key: 'backgroundColor',
+                                                                    type: 'COLOR',
                                                                   },
                                                                   {
                                                                     value: [
@@ -43835,600 +43601,514 @@
                                                                     ],
                                                                     label:
                                                                       'Outer space',
-                                                                    key:
-                                                                      'outerSpacing',
-                                                                    type:
-                                                                      'SIZES',
+                                                                    key: 'outerSpacing',
+                                                                    type: 'SIZES',
                                                                   },
                                                                   {
                                                                     value: false,
                                                                     label:
                                                                       'Advanced settings',
-                                                                    key:
-                                                                      'advancedSettings',
-                                                                    type:
-                                                                      'TOGGLE',
+                                                                    key: 'advancedSettings',
+                                                                    type: 'TOGGLE',
                                                                   },
                                                                   {
-                                                                    type:
-                                                                      'VARIABLE',
+                                                                    type: 'VARIABLE',
                                                                     label:
                                                                       'Test attribute',
-                                                                    key:
-                                                                      'dataComponentAttribute',
+                                                                    key: 'dataComponentAttribute',
                                                                     value: [
                                                                       'Row',
                                                                     ],
-                                                                    configuration: {
-                                                                      condition: {
-                                                                        type:
-                                                                          'SHOW',
-                                                                        option:
-                                                                          'advancedSettings',
-                                                                        comparator:
-                                                                          'EQ',
-                                                                        value: true,
+                                                                    configuration:
+                                                                      {
+                                                                        condition:
+                                                                          {
+                                                                            type: 'SHOW',
+                                                                            option:
+                                                                              'advancedSettings',
+                                                                            comparator:
+                                                                              'EQ',
+                                                                            value: true,
+                                                                          },
                                                                       },
-                                                                    },
                                                                   },
                                                                 ],
                                                                 descendants: [
                                                                   {
-                                                                    name:
-                                                                      'Column',
+                                                                    name: 'Column',
                                                                     options: [
                                                                       {
                                                                         label:
                                                                           'Toggle visibility',
-                                                                        key:
-                                                                          'visible',
+                                                                        key: 'visible',
                                                                         value: true,
-                                                                        type:
-                                                                          'TOGGLE',
-                                                                        configuration: {
-                                                                          as:
-                                                                            'VISIBILITY',
-                                                                        },
+                                                                        type: 'TOGGLE',
+                                                                        configuration:
+                                                                          {
+                                                                            as: 'VISIBILITY',
+                                                                          },
                                                                       },
                                                                       {
                                                                         value:
                                                                           '3',
                                                                         label:
                                                                           'Column width',
-                                                                        key:
-                                                                          'columnWidth',
-                                                                        type:
-                                                                          'CUSTOM',
-                                                                        configuration: {
-                                                                          as:
-                                                                            'DROPDOWN',
-                                                                          dataType:
-                                                                            'string',
-                                                                          allowedInput: [
-                                                                            {
-                                                                              name:
-                                                                                'Fit content',
-                                                                              value:
-                                                                                'fitContent',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                'Flexible',
-                                                                              value:
-                                                                                'flexible',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                'Hidden',
-                                                                              value:
-                                                                                'hidden',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '1',
-                                                                              value:
-                                                                                '1',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '2',
-                                                                              value:
-                                                                                '2',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '3',
-                                                                              value:
-                                                                                '3',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '4',
-                                                                              value:
-                                                                                '4',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '5',
-                                                                              value:
-                                                                                '5',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '6',
-                                                                              value:
-                                                                                '6',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '7',
-                                                                              value:
-                                                                                '7',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '8',
-                                                                              value:
-                                                                                '8',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '9',
-                                                                              value:
-                                                                                '9',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '10',
-                                                                              value:
-                                                                                '10',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '11',
-                                                                              value:
-                                                                                '11',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '12',
-                                                                              value:
-                                                                                '12',
-                                                                            },
-                                                                          ],
-                                                                        },
+                                                                        key: 'columnWidth',
+                                                                        type: 'CUSTOM',
+                                                                        configuration:
+                                                                          {
+                                                                            as: 'DROPDOWN',
+                                                                            dataType:
+                                                                              'string',
+                                                                            allowedInput:
+                                                                              [
+                                                                                {
+                                                                                  name: 'Fit content',
+                                                                                  value:
+                                                                                    'fitContent',
+                                                                                },
+                                                                                {
+                                                                                  name: 'Flexible',
+                                                                                  value:
+                                                                                    'flexible',
+                                                                                },
+                                                                                {
+                                                                                  name: 'Hidden',
+                                                                                  value:
+                                                                                    'hidden',
+                                                                                },
+                                                                                {
+                                                                                  name: '1',
+                                                                                  value:
+                                                                                    '1',
+                                                                                },
+                                                                                {
+                                                                                  name: '2',
+                                                                                  value:
+                                                                                    '2',
+                                                                                },
+                                                                                {
+                                                                                  name: '3',
+                                                                                  value:
+                                                                                    '3',
+                                                                                },
+                                                                                {
+                                                                                  name: '4',
+                                                                                  value:
+                                                                                    '4',
+                                                                                },
+                                                                                {
+                                                                                  name: '5',
+                                                                                  value:
+                                                                                    '5',
+                                                                                },
+                                                                                {
+                                                                                  name: '6',
+                                                                                  value:
+                                                                                    '6',
+                                                                                },
+                                                                                {
+                                                                                  name: '7',
+                                                                                  value:
+                                                                                    '7',
+                                                                                },
+                                                                                {
+                                                                                  name: '8',
+                                                                                  value:
+                                                                                    '8',
+                                                                                },
+                                                                                {
+                                                                                  name: '9',
+                                                                                  value:
+                                                                                    '9',
+                                                                                },
+                                                                                {
+                                                                                  name: '10',
+                                                                                  value:
+                                                                                    '10',
+                                                                                },
+                                                                                {
+                                                                                  name: '11',
+                                                                                  value:
+                                                                                    '11',
+                                                                                },
+                                                                                {
+                                                                                  name: '12',
+                                                                                  value:
+                                                                                    '12',
+                                                                                },
+                                                                              ],
+                                                                          },
                                                                       },
                                                                       {
                                                                         value:
                                                                           '3',
                                                                         label:
                                                                           'Column width (tablet landscape)',
-                                                                        key:
-                                                                          'columnWidthTabletLandscape',
-                                                                        type:
-                                                                          'CUSTOM',
-                                                                        configuration: {
-                                                                          as:
-                                                                            'DROPDOWN',
-                                                                          dataType:
-                                                                            'string',
-                                                                          allowedInput: [
-                                                                            {
-                                                                              name:
-                                                                                'Fit content',
-                                                                              value:
-                                                                                'fitContent',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                'Flexible',
-                                                                              value:
-                                                                                'flexible',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                'Hidden',
-                                                                              value:
-                                                                                'hidden',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '1',
-                                                                              value:
-                                                                                '1',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '2',
-                                                                              value:
-                                                                                '2',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '3',
-                                                                              value:
-                                                                                '3',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '4',
-                                                                              value:
-                                                                                '4',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '5',
-                                                                              value:
-                                                                                '5',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '6',
-                                                                              value:
-                                                                                '6',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '7',
-                                                                              value:
-                                                                                '7',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '8',
-                                                                              value:
-                                                                                '8',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '9',
-                                                                              value:
-                                                                                '9',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '10',
-                                                                              value:
-                                                                                '10',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '11',
-                                                                              value:
-                                                                                '11',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '12',
-                                                                              value:
-                                                                                '12',
-                                                                            },
-                                                                          ],
-                                                                        },
+                                                                        key: 'columnWidthTabletLandscape',
+                                                                        type: 'CUSTOM',
+                                                                        configuration:
+                                                                          {
+                                                                            as: 'DROPDOWN',
+                                                                            dataType:
+                                                                              'string',
+                                                                            allowedInput:
+                                                                              [
+                                                                                {
+                                                                                  name: 'Fit content',
+                                                                                  value:
+                                                                                    'fitContent',
+                                                                                },
+                                                                                {
+                                                                                  name: 'Flexible',
+                                                                                  value:
+                                                                                    'flexible',
+                                                                                },
+                                                                                {
+                                                                                  name: 'Hidden',
+                                                                                  value:
+                                                                                    'hidden',
+                                                                                },
+                                                                                {
+                                                                                  name: '1',
+                                                                                  value:
+                                                                                    '1',
+                                                                                },
+                                                                                {
+                                                                                  name: '2',
+                                                                                  value:
+                                                                                    '2',
+                                                                                },
+                                                                                {
+                                                                                  name: '3',
+                                                                                  value:
+                                                                                    '3',
+                                                                                },
+                                                                                {
+                                                                                  name: '4',
+                                                                                  value:
+                                                                                    '4',
+                                                                                },
+                                                                                {
+                                                                                  name: '5',
+                                                                                  value:
+                                                                                    '5',
+                                                                                },
+                                                                                {
+                                                                                  name: '6',
+                                                                                  value:
+                                                                                    '6',
+                                                                                },
+                                                                                {
+                                                                                  name: '7',
+                                                                                  value:
+                                                                                    '7',
+                                                                                },
+                                                                                {
+                                                                                  name: '8',
+                                                                                  value:
+                                                                                    '8',
+                                                                                },
+                                                                                {
+                                                                                  name: '9',
+                                                                                  value:
+                                                                                    '9',
+                                                                                },
+                                                                                {
+                                                                                  name: '10',
+                                                                                  value:
+                                                                                    '10',
+                                                                                },
+                                                                                {
+                                                                                  name: '11',
+                                                                                  value:
+                                                                                    '11',
+                                                                                },
+                                                                                {
+                                                                                  name: '12',
+                                                                                  value:
+                                                                                    '12',
+                                                                                },
+                                                                              ],
+                                                                          },
                                                                       },
                                                                       {
                                                                         value:
                                                                           '3',
                                                                         label:
                                                                           'Column width (tablet portrait)',
-                                                                        key:
-                                                                          'columnWidthTabletPortrait',
-                                                                        type:
-                                                                          'CUSTOM',
-                                                                        configuration: {
-                                                                          as:
-                                                                            'DROPDOWN',
-                                                                          dataType:
-                                                                            'string',
-                                                                          allowedInput: [
-                                                                            {
-                                                                              name:
-                                                                                'Fit content',
-                                                                              value:
-                                                                                'fitContent',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                'Flexible',
-                                                                              value:
-                                                                                'flexible',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                'Hidden',
-                                                                              value:
-                                                                                'hidden',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '1',
-                                                                              value:
-                                                                                '1',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '2',
-                                                                              value:
-                                                                                '2',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '3',
-                                                                              value:
-                                                                                '3',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '4',
-                                                                              value:
-                                                                                '4',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '5',
-                                                                              value:
-                                                                                '5',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '6',
-                                                                              value:
-                                                                                '6',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '7',
-                                                                              value:
-                                                                                '7',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '8',
-                                                                              value:
-                                                                                '8',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '9',
-                                                                              value:
-                                                                                '9',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '10',
-                                                                              value:
-                                                                                '10',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '11',
-                                                                              value:
-                                                                                '11',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '12',
-                                                                              value:
-                                                                                '12',
-                                                                            },
-                                                                          ],
-                                                                        },
+                                                                        key: 'columnWidthTabletPortrait',
+                                                                        type: 'CUSTOM',
+                                                                        configuration:
+                                                                          {
+                                                                            as: 'DROPDOWN',
+                                                                            dataType:
+                                                                              'string',
+                                                                            allowedInput:
+                                                                              [
+                                                                                {
+                                                                                  name: 'Fit content',
+                                                                                  value:
+                                                                                    'fitContent',
+                                                                                },
+                                                                                {
+                                                                                  name: 'Flexible',
+                                                                                  value:
+                                                                                    'flexible',
+                                                                                },
+                                                                                {
+                                                                                  name: 'Hidden',
+                                                                                  value:
+                                                                                    'hidden',
+                                                                                },
+                                                                                {
+                                                                                  name: '1',
+                                                                                  value:
+                                                                                    '1',
+                                                                                },
+                                                                                {
+                                                                                  name: '2',
+                                                                                  value:
+                                                                                    '2',
+                                                                                },
+                                                                                {
+                                                                                  name: '3',
+                                                                                  value:
+                                                                                    '3',
+                                                                                },
+                                                                                {
+                                                                                  name: '4',
+                                                                                  value:
+                                                                                    '4',
+                                                                                },
+                                                                                {
+                                                                                  name: '5',
+                                                                                  value:
+                                                                                    '5',
+                                                                                },
+                                                                                {
+                                                                                  name: '6',
+                                                                                  value:
+                                                                                    '6',
+                                                                                },
+                                                                                {
+                                                                                  name: '7',
+                                                                                  value:
+                                                                                    '7',
+                                                                                },
+                                                                                {
+                                                                                  name: '8',
+                                                                                  value:
+                                                                                    '8',
+                                                                                },
+                                                                                {
+                                                                                  name: '9',
+                                                                                  value:
+                                                                                    '9',
+                                                                                },
+                                                                                {
+                                                                                  name: '10',
+                                                                                  value:
+                                                                                    '10',
+                                                                                },
+                                                                                {
+                                                                                  name: '11',
+                                                                                  value:
+                                                                                    '11',
+                                                                                },
+                                                                                {
+                                                                                  name: '12',
+                                                                                  value:
+                                                                                    '12',
+                                                                                },
+                                                                              ],
+                                                                          },
                                                                       },
                                                                       {
                                                                         value:
                                                                           '12',
                                                                         label:
                                                                           'Column width (mobile)',
-                                                                        key:
-                                                                          'columnWidthMobile',
-                                                                        type:
-                                                                          'CUSTOM',
-                                                                        configuration: {
-                                                                          as:
-                                                                            'DROPDOWN',
-                                                                          dataType:
-                                                                            'string',
-                                                                          allowedInput: [
-                                                                            {
-                                                                              name:
-                                                                                'Fit content',
-                                                                              value:
-                                                                                'fitContent',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                'Flexible',
-                                                                              value:
-                                                                                'flexible',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                'Hidden',
-                                                                              value:
-                                                                                'hidden',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '1',
-                                                                              value:
-                                                                                '1',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '2',
-                                                                              value:
-                                                                                '2',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '3',
-                                                                              value:
-                                                                                '3',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '4',
-                                                                              value:
-                                                                                '4',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '5',
-                                                                              value:
-                                                                                '5',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '6',
-                                                                              value:
-                                                                                '6',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '7',
-                                                                              value:
-                                                                                '7',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '8',
-                                                                              value:
-                                                                                '8',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '9',
-                                                                              value:
-                                                                                '9',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '10',
-                                                                              value:
-                                                                                '10',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '11',
-                                                                              value:
-                                                                                '11',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '12',
-                                                                              value:
-                                                                                '12',
-                                                                            },
-                                                                          ],
-                                                                        },
+                                                                        key: 'columnWidthMobile',
+                                                                        type: 'CUSTOM',
+                                                                        configuration:
+                                                                          {
+                                                                            as: 'DROPDOWN',
+                                                                            dataType:
+                                                                              'string',
+                                                                            allowedInput:
+                                                                              [
+                                                                                {
+                                                                                  name: 'Fit content',
+                                                                                  value:
+                                                                                    'fitContent',
+                                                                                },
+                                                                                {
+                                                                                  name: 'Flexible',
+                                                                                  value:
+                                                                                    'flexible',
+                                                                                },
+                                                                                {
+                                                                                  name: 'Hidden',
+                                                                                  value:
+                                                                                    'hidden',
+                                                                                },
+                                                                                {
+                                                                                  name: '1',
+                                                                                  value:
+                                                                                    '1',
+                                                                                },
+                                                                                {
+                                                                                  name: '2',
+                                                                                  value:
+                                                                                    '2',
+                                                                                },
+                                                                                {
+                                                                                  name: '3',
+                                                                                  value:
+                                                                                    '3',
+                                                                                },
+                                                                                {
+                                                                                  name: '4',
+                                                                                  value:
+                                                                                    '4',
+                                                                                },
+                                                                                {
+                                                                                  name: '5',
+                                                                                  value:
+                                                                                    '5',
+                                                                                },
+                                                                                {
+                                                                                  name: '6',
+                                                                                  value:
+                                                                                    '6',
+                                                                                },
+                                                                                {
+                                                                                  name: '7',
+                                                                                  value:
+                                                                                    '7',
+                                                                                },
+                                                                                {
+                                                                                  name: '8',
+                                                                                  value:
+                                                                                    '8',
+                                                                                },
+                                                                                {
+                                                                                  name: '9',
+                                                                                  value:
+                                                                                    '9',
+                                                                                },
+                                                                                {
+                                                                                  name: '10',
+                                                                                  value:
+                                                                                    '10',
+                                                                                },
+                                                                                {
+                                                                                  name: '11',
+                                                                                  value:
+                                                                                    '11',
+                                                                                },
+                                                                                {
+                                                                                  name: '12',
+                                                                                  value:
+                                                                                    '12',
+                                                                                },
+                                                                              ],
+                                                                          },
                                                                       },
                                                                       {
                                                                         value:
                                                                           '',
                                                                         label:
                                                                           'Height',
-                                                                        key:
-                                                                          'columnHeight',
-                                                                        type:
-                                                                          'TEXT',
-                                                                        configuration: {
-                                                                          as:
-                                                                            'UNIT',
-                                                                        },
+                                                                        key: 'columnHeight',
+                                                                        type: 'TEXT',
+                                                                        configuration:
+                                                                          {
+                                                                            as: 'UNIT',
+                                                                          },
                                                                       },
                                                                       {
                                                                         value:
                                                                           'transparent',
                                                                         label:
                                                                           'Background color',
-                                                                        key:
-                                                                          'backgroundColor',
-                                                                        type:
-                                                                          'COLOR',
+                                                                        key: 'backgroundColor',
+                                                                        type: 'COLOR',
                                                                       },
                                                                       {
-                                                                        type:
-                                                                          'CUSTOM',
+                                                                        type: 'CUSTOM',
                                                                         label:
                                                                           'Horizontal Alignment',
-                                                                        key:
-                                                                          'horizontalAlignment',
+                                                                        key: 'horizontalAlignment',
                                                                         value:
                                                                           'inherit',
-                                                                        configuration: {
-                                                                          as:
-                                                                            'BUTTONGROUP',
-                                                                          dataType:
-                                                                            'string',
-                                                                          allowedInput: [
-                                                                            {
-                                                                              name:
-                                                                                'None',
-                                                                              value:
-                                                                                'inherit',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                'Left',
-                                                                              value:
-                                                                                'flex-start',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                'Center',
-                                                                              value:
-                                                                                'center',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                'Right',
-                                                                              value:
-                                                                                'flex-end',
-                                                                            },
-                                                                          ],
-                                                                        },
+                                                                        configuration:
+                                                                          {
+                                                                            as: 'BUTTONGROUP',
+                                                                            dataType:
+                                                                              'string',
+                                                                            allowedInput:
+                                                                              [
+                                                                                {
+                                                                                  name: 'None',
+                                                                                  value:
+                                                                                    'inherit',
+                                                                                },
+                                                                                {
+                                                                                  name: 'Left',
+                                                                                  value:
+                                                                                    'flex-start',
+                                                                                },
+                                                                                {
+                                                                                  name: 'Center',
+                                                                                  value:
+                                                                                    'center',
+                                                                                },
+                                                                                {
+                                                                                  name: 'Right',
+                                                                                  value:
+                                                                                    'flex-end',
+                                                                                },
+                                                                              ],
+                                                                          },
                                                                       },
                                                                       {
-                                                                        type:
-                                                                          'CUSTOM',
+                                                                        type: 'CUSTOM',
                                                                         label:
                                                                           'Vertical Alignment',
-                                                                        key:
-                                                                          'verticalAlignment',
+                                                                        key: 'verticalAlignment',
                                                                         value:
                                                                           'center',
-                                                                        configuration: {
-                                                                          as:
-                                                                            'BUTTONGROUP',
-                                                                          dataType:
-                                                                            'string',
-                                                                          allowedInput: [
-                                                                            {
-                                                                              name:
-                                                                                'None',
-                                                                              value:
-                                                                                'inherit',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                'Top',
-                                                                              value:
-                                                                                'flex-start',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                'Center',
-                                                                              value:
-                                                                                'center',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                'Bottom',
-                                                                              value:
-                                                                                'flex-end',
-                                                                            },
-                                                                          ],
-                                                                        },
+                                                                        configuration:
+                                                                          {
+                                                                            as: 'BUTTONGROUP',
+                                                                            dataType:
+                                                                              'string',
+                                                                            allowedInput:
+                                                                              [
+                                                                                {
+                                                                                  name: 'None',
+                                                                                  value:
+                                                                                    'inherit',
+                                                                                },
+                                                                                {
+                                                                                  name: 'Top',
+                                                                                  value:
+                                                                                    'flex-start',
+                                                                                },
+                                                                                {
+                                                                                  name: 'Center',
+                                                                                  value:
+                                                                                    'center',
+                                                                                },
+                                                                                {
+                                                                                  name: 'Bottom',
+                                                                                  value:
+                                                                                    'flex-end',
+                                                                                },
+                                                                              ],
+                                                                          },
                                                                       },
                                                                       {
                                                                         value: [
@@ -44439,10 +44119,8 @@
                                                                         ],
                                                                         label:
                                                                           'Outer space',
-                                                                        key:
-                                                                          'outerSpacing',
-                                                                        type:
-                                                                          'SIZES',
+                                                                        key: 'outerSpacing',
+                                                                        type: 'SIZES',
                                                                       },
                                                                       {
                                                                         value: [
@@ -44453,906 +44131,803 @@
                                                                         ],
                                                                         label:
                                                                           'Inner space',
-                                                                        key:
-                                                                          'innerSpacing',
-                                                                        type:
-                                                                          'SIZES',
+                                                                        key: 'innerSpacing',
+                                                                        type: 'SIZES',
                                                                       },
                                                                       {
                                                                         value: false,
                                                                         label:
                                                                           'Advanced settings',
-                                                                        key:
-                                                                          'advancedSettings',
-                                                                        type:
-                                                                          'TOGGLE',
+                                                                        key: 'advancedSettings',
+                                                                        type: 'TOGGLE',
                                                                       },
                                                                       {
-                                                                        type:
-                                                                          'VARIABLE',
+                                                                        type: 'VARIABLE',
                                                                         label:
                                                                           'Test attribute',
-                                                                        key:
-                                                                          'dataComponentAttribute',
+                                                                        key: 'dataComponentAttribute',
                                                                         value: [
                                                                           'Column',
                                                                         ],
-                                                                        configuration: {
-                                                                          condition: {
-                                                                            type:
-                                                                              'SHOW',
-                                                                            option:
-                                                                              'advancedSettings',
-                                                                            comparator:
-                                                                              'EQ',
-                                                                            value: true,
-                                                                          },
-                                                                        },
-                                                                      },
-                                                                    ],
-                                                                    descendants: [
-                                                                      {
-                                                                        name:
-                                                                          'Media',
-                                                                        options: [
+                                                                        configuration:
                                                                           {
-                                                                            label:
-                                                                              'Media type',
-                                                                            key:
-                                                                              'type',
-                                                                            value:
-                                                                              'img',
-                                                                            type:
-                                                                              'CUSTOM',
-                                                                            configuration: {
-                                                                              as:
-                                                                                'BUTTONGROUP',
-                                                                              dataType:
-                                                                                'string',
-                                                                              allowedInput: [
-                                                                                {
-                                                                                  name:
-                                                                                    'Image',
-                                                                                  value:
-                                                                                    'img',
-                                                                                },
-                                                                                {
-                                                                                  name:
-                                                                                    'Video',
-                                                                                  value:
-                                                                                    'video',
-                                                                                },
-                                                                                {
-                                                                                  name:
-                                                                                    'I-frame',
-                                                                                  value:
-                                                                                    'iframe',
-                                                                                },
-                                                                              ],
-                                                                            },
-                                                                          },
-                                                                          {
-                                                                            value: [
-                                                                              'https://assets.bettyblocks.com/771d40f1fc49403e824cdca2fe025aeb_assets/files/contemplative_lizard',
-                                                                            ],
-                                                                            label:
-                                                                              'Source',
-                                                                            key:
-                                                                              'imageSource',
-                                                                            type:
-                                                                              'VARIABLE',
-                                                                            configuration: {
-                                                                              as:
-                                                                                'MULTILINE',
-                                                                              condition: {
-                                                                                type:
-                                                                                  'SHOW',
-                                                                                option:
-                                                                                  'type',
-                                                                                comparator:
-                                                                                  'EQ',
-                                                                                value:
-                                                                                  'img',
-                                                                              },
-                                                                            },
-                                                                          },
-                                                                          {
-                                                                            value: [],
-                                                                            label:
-                                                                              'Source',
-                                                                            key:
-                                                                              'videoSource',
-                                                                            type:
-                                                                              'VARIABLE',
-                                                                            configuration: {
-                                                                              as:
-                                                                                'MULTILINE',
-                                                                              condition: {
-                                                                                type:
-                                                                                  'SHOW',
-                                                                                option:
-                                                                                  'type',
-                                                                                comparator:
-                                                                                  'EQ',
-                                                                                value:
-                                                                                  'video',
-                                                                              },
-                                                                            },
-                                                                          },
-                                                                          {
-                                                                            value: [],
-                                                                            label:
-                                                                              'Source',
-                                                                            key:
-                                                                              'iframeSource',
-                                                                            type:
-                                                                              'VARIABLE',
-                                                                            configuration: {
-                                                                              as:
-                                                                                'MULTILINE',
-                                                                              condition: {
-                                                                                type:
-                                                                                  'SHOW',
-                                                                                option:
-                                                                                  'type',
-                                                                                comparator:
-                                                                                  'EQ',
-                                                                                value:
-                                                                                  'iframe',
-                                                                              },
-                                                                            },
-                                                                          },
-                                                                          {
-                                                                            type:
-                                                                              'CUSTOM',
-                                                                            label:
-                                                                              'Link to',
-                                                                            key:
-                                                                              'linkType',
-                                                                            value:
-                                                                              'internal',
-                                                                            configuration: {
-                                                                              as:
-                                                                                'BUTTONGROUP',
-                                                                              dataType:
-                                                                                'string',
-                                                                              allowedInput: [
-                                                                                {
-                                                                                  name:
-                                                                                    'Internal page',
-                                                                                  value:
-                                                                                    'internal',
-                                                                                },
-                                                                                {
-                                                                                  name:
-                                                                                    'External page',
-                                                                                  value:
-                                                                                    'external',
-                                                                                },
-                                                                              ],
-                                                                              condition: {
-                                                                                type:
-                                                                                  'SHOW',
-                                                                                option:
-                                                                                  'type',
-                                                                                comparator:
-                                                                                  'EQ',
-                                                                                value:
-                                                                                  'img',
-                                                                              },
-                                                                            },
-                                                                          },
-                                                                          {
-                                                                            value:
-                                                                              '',
-                                                                            label:
-                                                                              'Page',
-                                                                            key:
-                                                                              'linkTo',
-                                                                            type:
-                                                                              'ENDPOINT',
-                                                                            configuration: {
-                                                                              condition: {
-                                                                                type:
-                                                                                  'SHOW',
-                                                                                option:
-                                                                                  'linkType',
-                                                                                comparator:
-                                                                                  'EQ',
-                                                                                value:
-                                                                                  'internal',
-                                                                              },
-                                                                            },
-                                                                          },
-                                                                          {
-                                                                            value: [
-                                                                              '',
-                                                                            ],
-                                                                            label:
-                                                                              'URL',
-                                                                            key:
-                                                                              'linkToExternal',
-                                                                            type:
-                                                                              'VARIABLE',
-                                                                            configuration: {
-                                                                              placeholder:
-                                                                                'Starts with https:// or http://',
-                                                                              condition: {
-                                                                                type:
-                                                                                  'SHOW',
-                                                                                option:
-                                                                                  'linkType',
-                                                                                comparator:
-                                                                                  'EQ',
-                                                                                value:
-                                                                                  'external',
-                                                                              },
-                                                                            },
-                                                                          },
-                                                                          {
-                                                                            value: [],
-                                                                            label:
-                                                                              'Image Alternative Text',
-                                                                            key:
-                                                                              'imgAlt',
-                                                                            type:
-                                                                              'VARIABLE',
-                                                                            configuration: {
-                                                                              condition: {
-                                                                                type:
-                                                                                  'SHOW',
-                                                                                option:
-                                                                                  'type',
-                                                                                comparator:
-                                                                                  'EQ',
-                                                                                value:
-                                                                                  'img',
-                                                                              },
-                                                                            },
-                                                                          },
-                                                                          {
-                                                                            value: [],
-                                                                            label:
-                                                                              'Title',
-                                                                            key:
-                                                                              'title',
-                                                                            type:
-                                                                              'VARIABLE',
-                                                                          },
-                                                                          {
-                                                                            type:
-                                                                              'SIZE',
-                                                                            label:
-                                                                              'Width',
-                                                                            key:
-                                                                              'width',
-                                                                            value:
-                                                                              '100%',
-                                                                            configuration: {
-                                                                              as:
-                                                                                'UNIT',
-                                                                            },
-                                                                          },
-                                                                          {
-                                                                            type:
-                                                                              'SIZE',
-                                                                            label:
-                                                                              'Height',
-                                                                            key:
-                                                                              'height',
-                                                                            value:
-                                                                              '',
-                                                                            configuration: {
-                                                                              as:
-                                                                                'UNIT',
-                                                                            },
-                                                                          },
-                                                                          {
-                                                                            value: [
-                                                                              '0rem',
-                                                                              '0rem',
-                                                                              '0rem',
-                                                                              '0rem',
-                                                                            ],
-                                                                            label:
-                                                                              'Outer space',
-                                                                            key:
-                                                                              'outerSpacing',
-                                                                            type:
-                                                                              'SIZES',
-                                                                          },
-                                                                          {
-                                                                            value: false,
-                                                                            label:
-                                                                              'Advanced settings',
-                                                                            key:
-                                                                              'advancedSettings',
-                                                                            type:
-                                                                              'TOGGLE',
-                                                                          },
-                                                                          {
-                                                                            type:
-                                                                              'VARIABLE',
-                                                                            label:
-                                                                              'Test attribute',
-                                                                            key:
-                                                                              'dataComponentAttribute',
-                                                                            value: [
-                                                                              'Media',
-                                                                            ],
-                                                                            configuration: {
-                                                                              condition: {
-                                                                                type:
-                                                                                  'SHOW',
+                                                                            condition:
+                                                                              {
+                                                                                type: 'SHOW',
                                                                                 option:
                                                                                   'advancedSettings',
                                                                                 comparator:
                                                                                   'EQ',
                                                                                 value: true,
                                                                               },
-                                                                            },
                                                                           },
-                                                                        ],
-                                                                        descendants: [],
                                                                       },
                                                                     ],
+                                                                    descendants:
+                                                                      [
+                                                                        {
+                                                                          name: 'Media',
+                                                                          options:
+                                                                            [
+                                                                              {
+                                                                                label:
+                                                                                  'Media type',
+                                                                                key: 'type',
+                                                                                value:
+                                                                                  'img',
+                                                                                type: 'CUSTOM',
+                                                                                configuration:
+                                                                                  {
+                                                                                    as: 'BUTTONGROUP',
+                                                                                    dataType:
+                                                                                      'string',
+                                                                                    allowedInput:
+                                                                                      [
+                                                                                        {
+                                                                                          name: 'Image',
+                                                                                          value:
+                                                                                            'img',
+                                                                                        },
+                                                                                        {
+                                                                                          name: 'Video',
+                                                                                          value:
+                                                                                            'video',
+                                                                                        },
+                                                                                        {
+                                                                                          name: 'I-frame',
+                                                                                          value:
+                                                                                            'iframe',
+                                                                                        },
+                                                                                      ],
+                                                                                  },
+                                                                              },
+                                                                              {
+                                                                                value:
+                                                                                  [
+                                                                                    'https://assets.bettyblocks.com/771d40f1fc49403e824cdca2fe025aeb_assets/files/contemplative_lizard',
+                                                                                  ],
+                                                                                label:
+                                                                                  'Source',
+                                                                                key: 'imageSource',
+                                                                                type: 'VARIABLE',
+                                                                                configuration:
+                                                                                  {
+                                                                                    as: 'MULTILINE',
+                                                                                    condition:
+                                                                                      {
+                                                                                        type: 'SHOW',
+                                                                                        option:
+                                                                                          'type',
+                                                                                        comparator:
+                                                                                          'EQ',
+                                                                                        value:
+                                                                                          'img',
+                                                                                      },
+                                                                                  },
+                                                                              },
+                                                                              {
+                                                                                value:
+                                                                                  [],
+                                                                                label:
+                                                                                  'Source',
+                                                                                key: 'videoSource',
+                                                                                type: 'VARIABLE',
+                                                                                configuration:
+                                                                                  {
+                                                                                    as: 'MULTILINE',
+                                                                                    condition:
+                                                                                      {
+                                                                                        type: 'SHOW',
+                                                                                        option:
+                                                                                          'type',
+                                                                                        comparator:
+                                                                                          'EQ',
+                                                                                        value:
+                                                                                          'video',
+                                                                                      },
+                                                                                  },
+                                                                              },
+                                                                              {
+                                                                                value:
+                                                                                  [],
+                                                                                label:
+                                                                                  'Source',
+                                                                                key: 'iframeSource',
+                                                                                type: 'VARIABLE',
+                                                                                configuration:
+                                                                                  {
+                                                                                    as: 'MULTILINE',
+                                                                                    condition:
+                                                                                      {
+                                                                                        type: 'SHOW',
+                                                                                        option:
+                                                                                          'type',
+                                                                                        comparator:
+                                                                                          'EQ',
+                                                                                        value:
+                                                                                          'iframe',
+                                                                                      },
+                                                                                  },
+                                                                              },
+                                                                              {
+                                                                                type: 'CUSTOM',
+                                                                                label:
+                                                                                  'Link to',
+                                                                                key: 'linkType',
+                                                                                value:
+                                                                                  'internal',
+                                                                                configuration:
+                                                                                  {
+                                                                                    as: 'BUTTONGROUP',
+                                                                                    dataType:
+                                                                                      'string',
+                                                                                    allowedInput:
+                                                                                      [
+                                                                                        {
+                                                                                          name: 'Internal page',
+                                                                                          value:
+                                                                                            'internal',
+                                                                                        },
+                                                                                        {
+                                                                                          name: 'External page',
+                                                                                          value:
+                                                                                            'external',
+                                                                                        },
+                                                                                      ],
+                                                                                    condition:
+                                                                                      {
+                                                                                        type: 'SHOW',
+                                                                                        option:
+                                                                                          'type',
+                                                                                        comparator:
+                                                                                          'EQ',
+                                                                                        value:
+                                                                                          'img',
+                                                                                      },
+                                                                                  },
+                                                                              },
+                                                                              {
+                                                                                value:
+                                                                                  '',
+                                                                                label:
+                                                                                  'Page',
+                                                                                key: 'linkTo',
+                                                                                type: 'ENDPOINT',
+                                                                                configuration:
+                                                                                  {
+                                                                                    condition:
+                                                                                      {
+                                                                                        type: 'SHOW',
+                                                                                        option:
+                                                                                          'linkType',
+                                                                                        comparator:
+                                                                                          'EQ',
+                                                                                        value:
+                                                                                          'internal',
+                                                                                      },
+                                                                                  },
+                                                                              },
+                                                                              {
+                                                                                value:
+                                                                                  [
+                                                                                    '',
+                                                                                  ],
+                                                                                label:
+                                                                                  'URL',
+                                                                                key: 'linkToExternal',
+                                                                                type: 'VARIABLE',
+                                                                                configuration:
+                                                                                  {
+                                                                                    placeholder:
+                                                                                      'Starts with https:// or http://',
+                                                                                    condition:
+                                                                                      {
+                                                                                        type: 'SHOW',
+                                                                                        option:
+                                                                                          'linkType',
+                                                                                        comparator:
+                                                                                          'EQ',
+                                                                                        value:
+                                                                                          'external',
+                                                                                      },
+                                                                                  },
+                                                                              },
+                                                                              {
+                                                                                value:
+                                                                                  [],
+                                                                                label:
+                                                                                  'Image Alternative Text',
+                                                                                key: 'imgAlt',
+                                                                                type: 'VARIABLE',
+                                                                                configuration:
+                                                                                  {
+                                                                                    condition:
+                                                                                      {
+                                                                                        type: 'SHOW',
+                                                                                        option:
+                                                                                          'type',
+                                                                                        comparator:
+                                                                                          'EQ',
+                                                                                        value:
+                                                                                          'img',
+                                                                                      },
+                                                                                  },
+                                                                              },
+                                                                              {
+                                                                                value:
+                                                                                  [],
+                                                                                label:
+                                                                                  'Title',
+                                                                                key: 'title',
+                                                                                type: 'VARIABLE',
+                                                                              },
+                                                                              {
+                                                                                type: 'SIZE',
+                                                                                label:
+                                                                                  'Width',
+                                                                                key: 'width',
+                                                                                value:
+                                                                                  '100%',
+                                                                                configuration:
+                                                                                  {
+                                                                                    as: 'UNIT',
+                                                                                  },
+                                                                              },
+                                                                              {
+                                                                                type: 'SIZE',
+                                                                                label:
+                                                                                  'Height',
+                                                                                key: 'height',
+                                                                                value:
+                                                                                  '',
+                                                                                configuration:
+                                                                                  {
+                                                                                    as: 'UNIT',
+                                                                                  },
+                                                                              },
+                                                                              {
+                                                                                value:
+                                                                                  [
+                                                                                    '0rem',
+                                                                                    '0rem',
+                                                                                    '0rem',
+                                                                                    '0rem',
+                                                                                  ],
+                                                                                label:
+                                                                                  'Outer space',
+                                                                                key: 'outerSpacing',
+                                                                                type: 'SIZES',
+                                                                              },
+                                                                              {
+                                                                                value: false,
+                                                                                label:
+                                                                                  'Advanced settings',
+                                                                                key: 'advancedSettings',
+                                                                                type: 'TOGGLE',
+                                                                              },
+                                                                              {
+                                                                                type: 'VARIABLE',
+                                                                                label:
+                                                                                  'Test attribute',
+                                                                                key: 'dataComponentAttribute',
+                                                                                value:
+                                                                                  [
+                                                                                    'Media',
+                                                                                  ],
+                                                                                configuration:
+                                                                                  {
+                                                                                    condition:
+                                                                                      {
+                                                                                        type: 'SHOW',
+                                                                                        option:
+                                                                                          'advancedSettings',
+                                                                                        comparator:
+                                                                                          'EQ',
+                                                                                        value: true,
+                                                                                      },
+                                                                                  },
+                                                                              },
+                                                                            ],
+                                                                          descendants:
+                                                                            [],
+                                                                        },
+                                                                      ],
                                                                   },
                                                                   {
-                                                                    name:
-                                                                      'Column',
+                                                                    name: 'Column',
                                                                     options: [
                                                                       {
                                                                         label:
                                                                           'Toggle visibility',
-                                                                        key:
-                                                                          'visible',
+                                                                        key: 'visible',
                                                                         value: true,
-                                                                        type:
-                                                                          'TOGGLE',
-                                                                        configuration: {
-                                                                          as:
-                                                                            'VISIBILITY',
-                                                                        },
+                                                                        type: 'TOGGLE',
+                                                                        configuration:
+                                                                          {
+                                                                            as: 'VISIBILITY',
+                                                                          },
                                                                       },
                                                                       {
                                                                         value:
                                                                           '8',
                                                                         label:
                                                                           'Column width',
-                                                                        key:
-                                                                          'columnWidth',
-                                                                        type:
-                                                                          'CUSTOM',
-                                                                        configuration: {
-                                                                          as:
-                                                                            'DROPDOWN',
-                                                                          dataType:
-                                                                            'string',
-                                                                          allowedInput: [
-                                                                            {
-                                                                              name:
-                                                                                'Fit content',
-                                                                              value:
-                                                                                'fitContent',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                'Flexible',
-                                                                              value:
-                                                                                'flexible',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                'Hidden',
-                                                                              value:
-                                                                                'hidden',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '1',
-                                                                              value:
-                                                                                '1',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '2',
-                                                                              value:
-                                                                                '2',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '3',
-                                                                              value:
-                                                                                '3',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '4',
-                                                                              value:
-                                                                                '4',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '5',
-                                                                              value:
-                                                                                '5',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '6',
-                                                                              value:
-                                                                                '6',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '7',
-                                                                              value:
-                                                                                '7',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '8',
-                                                                              value:
-                                                                                '8',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '9',
-                                                                              value:
-                                                                                '9',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '10',
-                                                                              value:
-                                                                                '10',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '11',
-                                                                              value:
-                                                                                '11',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '12',
-                                                                              value:
-                                                                                '12',
-                                                                            },
-                                                                          ],
-                                                                        },
+                                                                        key: 'columnWidth',
+                                                                        type: 'CUSTOM',
+                                                                        configuration:
+                                                                          {
+                                                                            as: 'DROPDOWN',
+                                                                            dataType:
+                                                                              'string',
+                                                                            allowedInput:
+                                                                              [
+                                                                                {
+                                                                                  name: 'Fit content',
+                                                                                  value:
+                                                                                    'fitContent',
+                                                                                },
+                                                                                {
+                                                                                  name: 'Flexible',
+                                                                                  value:
+                                                                                    'flexible',
+                                                                                },
+                                                                                {
+                                                                                  name: 'Hidden',
+                                                                                  value:
+                                                                                    'hidden',
+                                                                                },
+                                                                                {
+                                                                                  name: '1',
+                                                                                  value:
+                                                                                    '1',
+                                                                                },
+                                                                                {
+                                                                                  name: '2',
+                                                                                  value:
+                                                                                    '2',
+                                                                                },
+                                                                                {
+                                                                                  name: '3',
+                                                                                  value:
+                                                                                    '3',
+                                                                                },
+                                                                                {
+                                                                                  name: '4',
+                                                                                  value:
+                                                                                    '4',
+                                                                                },
+                                                                                {
+                                                                                  name: '5',
+                                                                                  value:
+                                                                                    '5',
+                                                                                },
+                                                                                {
+                                                                                  name: '6',
+                                                                                  value:
+                                                                                    '6',
+                                                                                },
+                                                                                {
+                                                                                  name: '7',
+                                                                                  value:
+                                                                                    '7',
+                                                                                },
+                                                                                {
+                                                                                  name: '8',
+                                                                                  value:
+                                                                                    '8',
+                                                                                },
+                                                                                {
+                                                                                  name: '9',
+                                                                                  value:
+                                                                                    '9',
+                                                                                },
+                                                                                {
+                                                                                  name: '10',
+                                                                                  value:
+                                                                                    '10',
+                                                                                },
+                                                                                {
+                                                                                  name: '11',
+                                                                                  value:
+                                                                                    '11',
+                                                                                },
+                                                                                {
+                                                                                  name: '12',
+                                                                                  value:
+                                                                                    '12',
+                                                                                },
+                                                                              ],
+                                                                          },
                                                                       },
                                                                       {
                                                                         value:
                                                                           '8',
                                                                         label:
                                                                           'Column width (tablet landscape)',
-                                                                        key:
-                                                                          'columnWidthTabletLandscape',
-                                                                        type:
-                                                                          'CUSTOM',
-                                                                        configuration: {
-                                                                          as:
-                                                                            'DROPDOWN',
-                                                                          dataType:
-                                                                            'string',
-                                                                          allowedInput: [
-                                                                            {
-                                                                              name:
-                                                                                'Fit content',
-                                                                              value:
-                                                                                'fitContent',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                'Flexible',
-                                                                              value:
-                                                                                'flexible',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                'Hidden',
-                                                                              value:
-                                                                                'hidden',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '1',
-                                                                              value:
-                                                                                '1',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '2',
-                                                                              value:
-                                                                                '2',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '3',
-                                                                              value:
-                                                                                '3',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '4',
-                                                                              value:
-                                                                                '4',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '5',
-                                                                              value:
-                                                                                '5',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '6',
-                                                                              value:
-                                                                                '6',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '7',
-                                                                              value:
-                                                                                '7',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '8',
-                                                                              value:
-                                                                                '8',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '9',
-                                                                              value:
-                                                                                '9',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '10',
-                                                                              value:
-                                                                                '10',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '11',
-                                                                              value:
-                                                                                '11',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '12',
-                                                                              value:
-                                                                                '12',
-                                                                            },
-                                                                          ],
-                                                                        },
+                                                                        key: 'columnWidthTabletLandscape',
+                                                                        type: 'CUSTOM',
+                                                                        configuration:
+                                                                          {
+                                                                            as: 'DROPDOWN',
+                                                                            dataType:
+                                                                              'string',
+                                                                            allowedInput:
+                                                                              [
+                                                                                {
+                                                                                  name: 'Fit content',
+                                                                                  value:
+                                                                                    'fitContent',
+                                                                                },
+                                                                                {
+                                                                                  name: 'Flexible',
+                                                                                  value:
+                                                                                    'flexible',
+                                                                                },
+                                                                                {
+                                                                                  name: 'Hidden',
+                                                                                  value:
+                                                                                    'hidden',
+                                                                                },
+                                                                                {
+                                                                                  name: '1',
+                                                                                  value:
+                                                                                    '1',
+                                                                                },
+                                                                                {
+                                                                                  name: '2',
+                                                                                  value:
+                                                                                    '2',
+                                                                                },
+                                                                                {
+                                                                                  name: '3',
+                                                                                  value:
+                                                                                    '3',
+                                                                                },
+                                                                                {
+                                                                                  name: '4',
+                                                                                  value:
+                                                                                    '4',
+                                                                                },
+                                                                                {
+                                                                                  name: '5',
+                                                                                  value:
+                                                                                    '5',
+                                                                                },
+                                                                                {
+                                                                                  name: '6',
+                                                                                  value:
+                                                                                    '6',
+                                                                                },
+                                                                                {
+                                                                                  name: '7',
+                                                                                  value:
+                                                                                    '7',
+                                                                                },
+                                                                                {
+                                                                                  name: '8',
+                                                                                  value:
+                                                                                    '8',
+                                                                                },
+                                                                                {
+                                                                                  name: '9',
+                                                                                  value:
+                                                                                    '9',
+                                                                                },
+                                                                                {
+                                                                                  name: '10',
+                                                                                  value:
+                                                                                    '10',
+                                                                                },
+                                                                                {
+                                                                                  name: '11',
+                                                                                  value:
+                                                                                    '11',
+                                                                                },
+                                                                                {
+                                                                                  name: '12',
+                                                                                  value:
+                                                                                    '12',
+                                                                                },
+                                                                              ],
+                                                                          },
                                                                       },
                                                                       {
                                                                         value:
                                                                           '8',
                                                                         label:
                                                                           'Column width (tablet portrait)',
-                                                                        key:
-                                                                          'columnWidthTabletPortrait',
-                                                                        type:
-                                                                          'CUSTOM',
-                                                                        configuration: {
-                                                                          as:
-                                                                            'DROPDOWN',
-                                                                          dataType:
-                                                                            'string',
-                                                                          allowedInput: [
-                                                                            {
-                                                                              name:
-                                                                                'Fit content',
-                                                                              value:
-                                                                                'fitContent',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                'Flexible',
-                                                                              value:
-                                                                                'flexible',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                'Hidden',
-                                                                              value:
-                                                                                'hidden',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '1',
-                                                                              value:
-                                                                                '1',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '2',
-                                                                              value:
-                                                                                '2',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '3',
-                                                                              value:
-                                                                                '3',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '4',
-                                                                              value:
-                                                                                '4',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '5',
-                                                                              value:
-                                                                                '5',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '6',
-                                                                              value:
-                                                                                '6',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '7',
-                                                                              value:
-                                                                                '7',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '8',
-                                                                              value:
-                                                                                '8',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '9',
-                                                                              value:
-                                                                                '9',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '10',
-                                                                              value:
-                                                                                '10',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '11',
-                                                                              value:
-                                                                                '11',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '12',
-                                                                              value:
-                                                                                '12',
-                                                                            },
-                                                                          ],
-                                                                        },
+                                                                        key: 'columnWidthTabletPortrait',
+                                                                        type: 'CUSTOM',
+                                                                        configuration:
+                                                                          {
+                                                                            as: 'DROPDOWN',
+                                                                            dataType:
+                                                                              'string',
+                                                                            allowedInput:
+                                                                              [
+                                                                                {
+                                                                                  name: 'Fit content',
+                                                                                  value:
+                                                                                    'fitContent',
+                                                                                },
+                                                                                {
+                                                                                  name: 'Flexible',
+                                                                                  value:
+                                                                                    'flexible',
+                                                                                },
+                                                                                {
+                                                                                  name: 'Hidden',
+                                                                                  value:
+                                                                                    'hidden',
+                                                                                },
+                                                                                {
+                                                                                  name: '1',
+                                                                                  value:
+                                                                                    '1',
+                                                                                },
+                                                                                {
+                                                                                  name: '2',
+                                                                                  value:
+                                                                                    '2',
+                                                                                },
+                                                                                {
+                                                                                  name: '3',
+                                                                                  value:
+                                                                                    '3',
+                                                                                },
+                                                                                {
+                                                                                  name: '4',
+                                                                                  value:
+                                                                                    '4',
+                                                                                },
+                                                                                {
+                                                                                  name: '5',
+                                                                                  value:
+                                                                                    '5',
+                                                                                },
+                                                                                {
+                                                                                  name: '6',
+                                                                                  value:
+                                                                                    '6',
+                                                                                },
+                                                                                {
+                                                                                  name: '7',
+                                                                                  value:
+                                                                                    '7',
+                                                                                },
+                                                                                {
+                                                                                  name: '8',
+                                                                                  value:
+                                                                                    '8',
+                                                                                },
+                                                                                {
+                                                                                  name: '9',
+                                                                                  value:
+                                                                                    '9',
+                                                                                },
+                                                                                {
+                                                                                  name: '10',
+                                                                                  value:
+                                                                                    '10',
+                                                                                },
+                                                                                {
+                                                                                  name: '11',
+                                                                                  value:
+                                                                                    '11',
+                                                                                },
+                                                                                {
+                                                                                  name: '12',
+                                                                                  value:
+                                                                                    '12',
+                                                                                },
+                                                                              ],
+                                                                          },
                                                                       },
                                                                       {
                                                                         value:
                                                                           '10',
                                                                         label:
                                                                           'Column width (mobile)',
-                                                                        key:
-                                                                          'columnWidthMobile',
-                                                                        type:
-                                                                          'CUSTOM',
-                                                                        configuration: {
-                                                                          as:
-                                                                            'DROPDOWN',
-                                                                          dataType:
-                                                                            'string',
-                                                                          allowedInput: [
-                                                                            {
-                                                                              name:
-                                                                                'Fit content',
-                                                                              value:
-                                                                                'fitContent',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                'Flexible',
-                                                                              value:
-                                                                                'flexible',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                'Hidden',
-                                                                              value:
-                                                                                'hidden',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '1',
-                                                                              value:
-                                                                                '1',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '2',
-                                                                              value:
-                                                                                '2',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '3',
-                                                                              value:
-                                                                                '3',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '4',
-                                                                              value:
-                                                                                '4',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '5',
-                                                                              value:
-                                                                                '5',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '6',
-                                                                              value:
-                                                                                '6',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '7',
-                                                                              value:
-                                                                                '7',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '8',
-                                                                              value:
-                                                                                '8',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '9',
-                                                                              value:
-                                                                                '9',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '10',
-                                                                              value:
-                                                                                '10',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '11',
-                                                                              value:
-                                                                                '11',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '12',
-                                                                              value:
-                                                                                '12',
-                                                                            },
-                                                                          ],
-                                                                        },
+                                                                        key: 'columnWidthMobile',
+                                                                        type: 'CUSTOM',
+                                                                        configuration:
+                                                                          {
+                                                                            as: 'DROPDOWN',
+                                                                            dataType:
+                                                                              'string',
+                                                                            allowedInput:
+                                                                              [
+                                                                                {
+                                                                                  name: 'Fit content',
+                                                                                  value:
+                                                                                    'fitContent',
+                                                                                },
+                                                                                {
+                                                                                  name: 'Flexible',
+                                                                                  value:
+                                                                                    'flexible',
+                                                                                },
+                                                                                {
+                                                                                  name: 'Hidden',
+                                                                                  value:
+                                                                                    'hidden',
+                                                                                },
+                                                                                {
+                                                                                  name: '1',
+                                                                                  value:
+                                                                                    '1',
+                                                                                },
+                                                                                {
+                                                                                  name: '2',
+                                                                                  value:
+                                                                                    '2',
+                                                                                },
+                                                                                {
+                                                                                  name: '3',
+                                                                                  value:
+                                                                                    '3',
+                                                                                },
+                                                                                {
+                                                                                  name: '4',
+                                                                                  value:
+                                                                                    '4',
+                                                                                },
+                                                                                {
+                                                                                  name: '5',
+                                                                                  value:
+                                                                                    '5',
+                                                                                },
+                                                                                {
+                                                                                  name: '6',
+                                                                                  value:
+                                                                                    '6',
+                                                                                },
+                                                                                {
+                                                                                  name: '7',
+                                                                                  value:
+                                                                                    '7',
+                                                                                },
+                                                                                {
+                                                                                  name: '8',
+                                                                                  value:
+                                                                                    '8',
+                                                                                },
+                                                                                {
+                                                                                  name: '9',
+                                                                                  value:
+                                                                                    '9',
+                                                                                },
+                                                                                {
+                                                                                  name: '10',
+                                                                                  value:
+                                                                                    '10',
+                                                                                },
+                                                                                {
+                                                                                  name: '11',
+                                                                                  value:
+                                                                                    '11',
+                                                                                },
+                                                                                {
+                                                                                  name: '12',
+                                                                                  value:
+                                                                                    '12',
+                                                                                },
+                                                                              ],
+                                                                          },
                                                                       },
                                                                       {
                                                                         value:
                                                                           '',
                                                                         label:
                                                                           'Height',
-                                                                        key:
-                                                                          'columnHeight',
-                                                                        type:
-                                                                          'TEXT',
-                                                                        configuration: {
-                                                                          as:
-                                                                            'UNIT',
-                                                                        },
+                                                                        key: 'columnHeight',
+                                                                        type: 'TEXT',
+                                                                        configuration:
+                                                                          {
+                                                                            as: 'UNIT',
+                                                                          },
                                                                       },
                                                                       {
                                                                         value:
                                                                           'transparent',
                                                                         label:
                                                                           'Background color',
-                                                                        key:
-                                                                          'backgroundColor',
-                                                                        type:
-                                                                          'COLOR',
+                                                                        key: 'backgroundColor',
+                                                                        type: 'COLOR',
                                                                       },
                                                                       {
-                                                                        type:
-                                                                          'CUSTOM',
+                                                                        type: 'CUSTOM',
                                                                         label:
                                                                           'Horizontal Alignment',
-                                                                        key:
-                                                                          'horizontalAlignment',
+                                                                        key: 'horizontalAlignment',
                                                                         value:
                                                                           'inherit',
-                                                                        configuration: {
-                                                                          as:
-                                                                            'BUTTONGROUP',
-                                                                          dataType:
-                                                                            'string',
-                                                                          allowedInput: [
-                                                                            {
-                                                                              name:
-                                                                                'None',
-                                                                              value:
-                                                                                'inherit',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                'Left',
-                                                                              value:
-                                                                                'flex-start',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                'Center',
-                                                                              value:
-                                                                                'center',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                'Right',
-                                                                              value:
-                                                                                'flex-end',
-                                                                            },
-                                                                          ],
-                                                                        },
+                                                                        configuration:
+                                                                          {
+                                                                            as: 'BUTTONGROUP',
+                                                                            dataType:
+                                                                              'string',
+                                                                            allowedInput:
+                                                                              [
+                                                                                {
+                                                                                  name: 'None',
+                                                                                  value:
+                                                                                    'inherit',
+                                                                                },
+                                                                                {
+                                                                                  name: 'Left',
+                                                                                  value:
+                                                                                    'flex-start',
+                                                                                },
+                                                                                {
+                                                                                  name: 'Center',
+                                                                                  value:
+                                                                                    'center',
+                                                                                },
+                                                                                {
+                                                                                  name: 'Right',
+                                                                                  value:
+                                                                                    'flex-end',
+                                                                                },
+                                                                              ],
+                                                                          },
                                                                       },
                                                                       {
-                                                                        type:
-                                                                          'CUSTOM',
+                                                                        type: 'CUSTOM',
                                                                         label:
                                                                           'Vertical Alignment',
-                                                                        key:
-                                                                          'verticalAlignment',
+                                                                        key: 'verticalAlignment',
                                                                         value:
                                                                           'inherit',
-                                                                        configuration: {
-                                                                          as:
-                                                                            'BUTTONGROUP',
-                                                                          dataType:
-                                                                            'string',
-                                                                          allowedInput: [
-                                                                            {
-                                                                              name:
-                                                                                'None',
-                                                                              value:
-                                                                                'inherit',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                'Top',
-                                                                              value:
-                                                                                'flex-start',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                'Center',
-                                                                              value:
-                                                                                'center',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                'Bottom',
-                                                                              value:
-                                                                                'flex-end',
-                                                                            },
-                                                                          ],
-                                                                        },
+                                                                        configuration:
+                                                                          {
+                                                                            as: 'BUTTONGROUP',
+                                                                            dataType:
+                                                                              'string',
+                                                                            allowedInput:
+                                                                              [
+                                                                                {
+                                                                                  name: 'None',
+                                                                                  value:
+                                                                                    'inherit',
+                                                                                },
+                                                                                {
+                                                                                  name: 'Top',
+                                                                                  value:
+                                                                                    'flex-start',
+                                                                                },
+                                                                                {
+                                                                                  name: 'Center',
+                                                                                  value:
+                                                                                    'center',
+                                                                                },
+                                                                                {
+                                                                                  name: 'Bottom',
+                                                                                  value:
+                                                                                    'flex-end',
+                                                                                },
+                                                                              ],
+                                                                          },
                                                                       },
                                                                       {
                                                                         value: [
@@ -45363,10 +44938,8 @@
                                                                         ],
                                                                         label:
                                                                           'Outer space',
-                                                                        key:
-                                                                          'outerSpacing',
-                                                                        type:
-                                                                          'SIZES',
+                                                                        key: 'outerSpacing',
+                                                                        type: 'SIZES',
                                                                       },
                                                                       {
                                                                         value: [
@@ -45377,1532 +44950,1363 @@
                                                                         ],
                                                                         label:
                                                                           'Inner space',
-                                                                        key:
-                                                                          'innerSpacing',
-                                                                        type:
-                                                                          'SIZES',
+                                                                        key: 'innerSpacing',
+                                                                        type: 'SIZES',
                                                                       },
                                                                       {
                                                                         value: false,
                                                                         label:
                                                                           'Advanced settings',
-                                                                        key:
-                                                                          'advancedSettings',
-                                                                        type:
-                                                                          'TOGGLE',
+                                                                        key: 'advancedSettings',
+                                                                        type: 'TOGGLE',
                                                                       },
                                                                       {
-                                                                        type:
-                                                                          'VARIABLE',
+                                                                        type: 'VARIABLE',
                                                                         label:
                                                                           'Test attribute',
-                                                                        key:
-                                                                          'dataComponentAttribute',
+                                                                        key: 'dataComponentAttribute',
                                                                         value: [
                                                                           'Column',
                                                                         ],
-                                                                        configuration: {
-                                                                          condition: {
-                                                                            type:
-                                                                              'SHOW',
-                                                                            option:
-                                                                              'advancedSettings',
-                                                                            comparator:
-                                                                              'EQ',
-                                                                            value: true,
+                                                                        configuration:
+                                                                          {
+                                                                            condition:
+                                                                              {
+                                                                                type: 'SHOW',
+                                                                                option:
+                                                                                  'advancedSettings',
+                                                                                comparator:
+                                                                                  'EQ',
+                                                                                value: true,
+                                                                              },
                                                                           },
+                                                                      },
+                                                                    ],
+                                                                    descendants:
+                                                                      [
+                                                                        {
+                                                                          name: 'Text',
+                                                                          options:
+                                                                            [
+                                                                              {
+                                                                                type: 'VARIABLE',
+                                                                                label:
+                                                                                  'Content',
+                                                                                key: 'content',
+                                                                                value:
+                                                                                  [
+                                                                                    'Title',
+                                                                                  ],
+                                                                                configuration:
+                                                                                  {
+                                                                                    as: 'MULTILINE',
+                                                                                  },
+                                                                              },
+                                                                              {
+                                                                                type: 'TOGGLE',
+                                                                                label:
+                                                                                  'Display Rich Text',
+                                                                                key: 'useInnerHtml',
+                                                                                value: false,
+                                                                              },
+                                                                              {
+                                                                                value:
+                                                                                  'Title4',
+                                                                                label:
+                                                                                  'Type',
+                                                                                key: 'type',
+                                                                                type: 'FONT',
+                                                                              },
+                                                                              {
+                                                                                type: 'CUSTOM',
+                                                                                label:
+                                                                                  'Text Alignment',
+                                                                                key: 'textAlignment',
+                                                                                value:
+                                                                                  'left',
+                                                                                configuration:
+                                                                                  {
+                                                                                    as: 'BUTTONGROUP',
+                                                                                    dataType:
+                                                                                      'string',
+                                                                                    allowedInput:
+                                                                                      [
+                                                                                        {
+                                                                                          name: 'Left',
+                                                                                          value:
+                                                                                            'left',
+                                                                                        },
+                                                                                        {
+                                                                                          name: 'Center',
+                                                                                          value:
+                                                                                            'center',
+                                                                                        },
+                                                                                        {
+                                                                                          name: 'Right',
+                                                                                          value:
+                                                                                            'right',
+                                                                                        },
+                                                                                      ],
+                                                                                  },
+                                                                              },
+                                                                              {
+                                                                                value:
+                                                                                  [
+                                                                                    '0rem',
+                                                                                    '0rem',
+                                                                                    '0rem',
+                                                                                    '0rem',
+                                                                                  ],
+                                                                                label:
+                                                                                  'Outer space',
+                                                                                key: 'outerSpacing',
+                                                                                type: 'SIZES',
+                                                                              },
+                                                                              {
+                                                                                type: 'CUSTOM',
+                                                                                label:
+                                                                                  'Link to',
+                                                                                key: 'linkType',
+                                                                                value:
+                                                                                  'internal',
+                                                                                configuration:
+                                                                                  {
+                                                                                    as: 'BUTTONGROUP',
+                                                                                    dataType:
+                                                                                      'string',
+                                                                                    allowedInput:
+                                                                                      [
+                                                                                        {
+                                                                                          name: 'Internal page',
+                                                                                          value:
+                                                                                            'internal',
+                                                                                        },
+                                                                                        {
+                                                                                          name: 'External page',
+                                                                                          value:
+                                                                                            'external',
+                                                                                        },
+                                                                                      ],
+                                                                                  },
+                                                                              },
+                                                                              {
+                                                                                value:
+                                                                                  '',
+                                                                                label:
+                                                                                  'Page',
+                                                                                key: 'linkTo',
+                                                                                type: 'ENDPOINT',
+                                                                                configuration:
+                                                                                  {
+                                                                                    condition:
+                                                                                      {
+                                                                                        type: 'SHOW',
+                                                                                        option:
+                                                                                          'linkType',
+                                                                                        comparator:
+                                                                                          'EQ',
+                                                                                        value:
+                                                                                          'internal',
+                                                                                      },
+                                                                                  },
+                                                                              },
+                                                                              {
+                                                                                value:
+                                                                                  [
+                                                                                    '',
+                                                                                  ],
+                                                                                label:
+                                                                                  'URL',
+                                                                                key: 'linkToExternal',
+                                                                                type: 'VARIABLE',
+                                                                                configuration:
+                                                                                  {
+                                                                                    placeholder:
+                                                                                      'Starts with https:// or http://',
+                                                                                    condition:
+                                                                                      {
+                                                                                        type: 'SHOW',
+                                                                                        option:
+                                                                                          'linkType',
+                                                                                        comparator:
+                                                                                          'EQ',
+                                                                                        value:
+                                                                                          'external',
+                                                                                      },
+                                                                                  },
+                                                                              },
+                                                                              {
+                                                                                value: false,
+                                                                                label:
+                                                                                  'Styles',
+                                                                                key: 'styles',
+                                                                                type: 'TOGGLE',
+                                                                              },
+                                                                              {
+                                                                                type: 'COLOR',
+                                                                                label:
+                                                                                  'Text color',
+                                                                                key: 'textColor',
+                                                                                value:
+                                                                                  'Black',
+                                                                                configuration:
+                                                                                  {
+                                                                                    condition:
+                                                                                      {
+                                                                                        type: 'SHOW',
+                                                                                        option:
+                                                                                          'styles',
+                                                                                        comparator:
+                                                                                          'EQ',
+                                                                                        value: true,
+                                                                                      },
+                                                                                  },
+                                                                              },
+                                                                              {
+                                                                                type: 'CUSTOM',
+                                                                                label:
+                                                                                  'Font weight',
+                                                                                key: 'fontWeight',
+                                                                                value:
+                                                                                  '400',
+                                                                                configuration:
+                                                                                  {
+                                                                                    as: 'DROPDOWN',
+                                                                                    dataType:
+                                                                                      'string',
+                                                                                    allowedInput:
+                                                                                      [
+                                                                                        {
+                                                                                          name: '100',
+                                                                                          value:
+                                                                                            '100',
+                                                                                        },
+                                                                                        {
+                                                                                          name: '200',
+                                                                                          value:
+                                                                                            '200',
+                                                                                        },
+                                                                                        {
+                                                                                          name: '300',
+                                                                                          value:
+                                                                                            '300',
+                                                                                        },
+                                                                                        {
+                                                                                          name: '400',
+                                                                                          value:
+                                                                                            '400',
+                                                                                        },
+                                                                                        {
+                                                                                          name: '500',
+                                                                                          value:
+                                                                                            '500',
+                                                                                        },
+                                                                                        {
+                                                                                          name: '600',
+                                                                                          value:
+                                                                                            '600',
+                                                                                        },
+                                                                                        {
+                                                                                          name: '700',
+                                                                                          value:
+                                                                                            '700',
+                                                                                        },
+                                                                                        {
+                                                                                          name: '800',
+                                                                                          value:
+                                                                                            '800',
+                                                                                        },
+                                                                                        {
+                                                                                          name: '900',
+                                                                                          value:
+                                                                                            '900',
+                                                                                        },
+                                                                                      ],
+                                                                                    condition:
+                                                                                      {
+                                                                                        type: 'SHOW',
+                                                                                        option:
+                                                                                          'styles',
+                                                                                        comparator:
+                                                                                          'EQ',
+                                                                                        value: true,
+                                                                                      },
+                                                                                  },
+                                                                              },
+                                                                              {
+                                                                                value: false,
+                                                                                label:
+                                                                                  'Advanced settings',
+                                                                                key: 'advancedSettings',
+                                                                                type: 'TOGGLE',
+                                                                              },
+                                                                              {
+                                                                                type: 'VARIABLE',
+                                                                                label:
+                                                                                  'Test attribute',
+                                                                                key: 'dataComponentAttribute',
+                                                                                value:
+                                                                                  [
+                                                                                    'Text',
+                                                                                  ],
+                                                                                configuration:
+                                                                                  {
+                                                                                    condition:
+                                                                                      {
+                                                                                        type: 'SHOW',
+                                                                                        option:
+                                                                                          'advancedSettings',
+                                                                                        comparator:
+                                                                                          'EQ',
+                                                                                        value: true,
+                                                                                      },
+                                                                                  },
+                                                                              },
+                                                                            ],
+                                                                          descendants:
+                                                                            [],
                                                                         },
-                                                                      },
-                                                                    ],
-                                                                    descendants: [
-                                                                      {
-                                                                        name:
-                                                                          'Text',
-                                                                        options: [
-                                                                          {
-                                                                            type:
-                                                                              'VARIABLE',
-                                                                            label:
-                                                                              'Content',
-                                                                            key:
-                                                                              'content',
-                                                                            value: [
-                                                                              'Title',
-                                                                            ],
-                                                                            configuration: {
-                                                                              as:
-                                                                                'MULTILINE',
-                                                                            },
-                                                                          },
-                                                                          {
-                                                                            type:
-                                                                              'TOGGLE',
-                                                                            label:
-                                                                              'Display Rich Text',
-                                                                            key:
-                                                                              'useInnerHtml',
-                                                                            value: false,
-                                                                          },
-                                                                          {
-                                                                            value:
-                                                                              'Title4',
-                                                                            label:
-                                                                              'Type',
-                                                                            key:
-                                                                              'type',
-                                                                            type:
-                                                                              'FONT',
-                                                                          },
-                                                                          {
-                                                                            type:
-                                                                              'CUSTOM',
-                                                                            label:
-                                                                              'Text Alignment',
-                                                                            key:
-                                                                              'textAlignment',
-                                                                            value:
-                                                                              'left',
-                                                                            configuration: {
-                                                                              as:
-                                                                                'BUTTONGROUP',
-                                                                              dataType:
-                                                                                'string',
-                                                                              allowedInput: [
-                                                                                {
-                                                                                  name:
-                                                                                    'Left',
-                                                                                  value:
-                                                                                    'left',
-                                                                                },
-                                                                                {
-                                                                                  name:
-                                                                                    'Center',
-                                                                                  value:
-                                                                                    'center',
-                                                                                },
-                                                                                {
-                                                                                  name:
-                                                                                    'Right',
-                                                                                  value:
-                                                                                    'right',
-                                                                                },
-                                                                              ],
-                                                                            },
-                                                                          },
-                                                                          {
-                                                                            value: [
-                                                                              '0rem',
-                                                                              '0rem',
-                                                                              '0rem',
-                                                                              '0rem',
-                                                                            ],
-                                                                            label:
-                                                                              'Outer space',
-                                                                            key:
-                                                                              'outerSpacing',
-                                                                            type:
-                                                                              'SIZES',
-                                                                          },
-                                                                          {
-                                                                            type:
-                                                                              'CUSTOM',
-                                                                            label:
-                                                                              'Link to',
-                                                                            key:
-                                                                              'linkType',
-                                                                            value:
-                                                                              'internal',
-                                                                            configuration: {
-                                                                              as:
-                                                                                'BUTTONGROUP',
-                                                                              dataType:
-                                                                                'string',
-                                                                              allowedInput: [
-                                                                                {
-                                                                                  name:
-                                                                                    'Internal page',
-                                                                                  value:
-                                                                                    'internal',
-                                                                                },
-                                                                                {
-                                                                                  name:
-                                                                                    'External page',
-                                                                                  value:
-                                                                                    'external',
-                                                                                },
-                                                                              ],
-                                                                            },
-                                                                          },
-                                                                          {
-                                                                            value:
-                                                                              '',
-                                                                            label:
-                                                                              'Page',
-                                                                            key:
-                                                                              'linkTo',
-                                                                            type:
-                                                                              'ENDPOINT',
-                                                                            configuration: {
-                                                                              condition: {
-                                                                                type:
-                                                                                  'SHOW',
-                                                                                option:
-                                                                                  'linkType',
-                                                                                comparator:
-                                                                                  'EQ',
+                                                                        {
+                                                                          name: 'Text',
+                                                                          options:
+                                                                            [
+                                                                              {
+                                                                                type: 'VARIABLE',
+                                                                                label:
+                                                                                  'Content',
+                                                                                key: 'content',
+                                                                                value:
+                                                                                  [
+                                                                                    'Subheader',
+                                                                                  ],
+                                                                                configuration:
+                                                                                  {
+                                                                                    as: 'MULTILINE',
+                                                                                  },
+                                                                              },
+                                                                              {
+                                                                                type: 'TOGGLE',
+                                                                                label:
+                                                                                  'Display Rich Text',
+                                                                                key: 'useInnerHtml',
+                                                                                value: false,
+                                                                              },
+                                                                              {
+                                                                                value:
+                                                                                  'Body1',
+                                                                                label:
+                                                                                  'Type',
+                                                                                key: 'type',
+                                                                                type: 'FONT',
+                                                                              },
+                                                                              {
+                                                                                type: 'CUSTOM',
+                                                                                label:
+                                                                                  'Text Alignment',
+                                                                                key: 'textAlignment',
+                                                                                value:
+                                                                                  'left',
+                                                                                configuration:
+                                                                                  {
+                                                                                    as: 'BUTTONGROUP',
+                                                                                    dataType:
+                                                                                      'string',
+                                                                                    allowedInput:
+                                                                                      [
+                                                                                        {
+                                                                                          name: 'Left',
+                                                                                          value:
+                                                                                            'left',
+                                                                                        },
+                                                                                        {
+                                                                                          name: 'Center',
+                                                                                          value:
+                                                                                            'center',
+                                                                                        },
+                                                                                        {
+                                                                                          name: 'Right',
+                                                                                          value:
+                                                                                            'right',
+                                                                                        },
+                                                                                      ],
+                                                                                  },
+                                                                              },
+                                                                              {
+                                                                                value:
+                                                                                  [
+                                                                                    '0rem',
+                                                                                    '0rem',
+                                                                                    'S',
+                                                                                    '0rem',
+                                                                                  ],
+                                                                                label:
+                                                                                  'Outer space',
+                                                                                key: 'outerSpacing',
+                                                                                type: 'SIZES',
+                                                                              },
+                                                                              {
+                                                                                type: 'CUSTOM',
+                                                                                label:
+                                                                                  'Link to',
+                                                                                key: 'linkType',
                                                                                 value:
                                                                                   'internal',
+                                                                                configuration:
+                                                                                  {
+                                                                                    as: 'BUTTONGROUP',
+                                                                                    dataType:
+                                                                                      'string',
+                                                                                    allowedInput:
+                                                                                      [
+                                                                                        {
+                                                                                          name: 'Internal page',
+                                                                                          value:
+                                                                                            'internal',
+                                                                                        },
+                                                                                        {
+                                                                                          name: 'External page',
+                                                                                          value:
+                                                                                            'external',
+                                                                                        },
+                                                                                      ],
+                                                                                  },
                                                                               },
-                                                                            },
-                                                                          },
-                                                                          {
-                                                                            value: [
-                                                                              '',
-                                                                            ],
-                                                                            label:
-                                                                              'URL',
-                                                                            key:
-                                                                              'linkToExternal',
-                                                                            type:
-                                                                              'VARIABLE',
-                                                                            configuration: {
-                                                                              placeholder:
-                                                                                'Starts with https:// or http://',
-                                                                              condition: {
-                                                                                type:
-                                                                                  'SHOW',
-                                                                                option:
-                                                                                  'linkType',
-                                                                                comparator:
-                                                                                  'EQ',
+                                                                              {
                                                                                 value:
-                                                                                  'external',
+                                                                                  '',
+                                                                                label:
+                                                                                  'Page',
+                                                                                key: 'linkTo',
+                                                                                type: 'ENDPOINT',
+                                                                                configuration:
+                                                                                  {
+                                                                                    condition:
+                                                                                      {
+                                                                                        type: 'SHOW',
+                                                                                        option:
+                                                                                          'linkType',
+                                                                                        comparator:
+                                                                                          'EQ',
+                                                                                        value:
+                                                                                          'internal',
+                                                                                      },
+                                                                                  },
                                                                               },
-                                                                            },
-                                                                          },
-                                                                          {
-                                                                            value: false,
-                                                                            label:
-                                                                              'Styles',
-                                                                            key:
-                                                                              'styles',
-                                                                            type:
-                                                                              'TOGGLE',
-                                                                          },
-                                                                          {
-                                                                            type:
-                                                                              'COLOR',
-                                                                            label:
-                                                                              'Text color',
-                                                                            key:
-                                                                              'textColor',
-                                                                            value:
-                                                                              'Black',
-                                                                            configuration: {
-                                                                              condition: {
-                                                                                type:
-                                                                                  'SHOW',
-                                                                                option:
-                                                                                  'styles',
-                                                                                comparator:
-                                                                                  'EQ',
+                                                                              {
+                                                                                value:
+                                                                                  [
+                                                                                    '',
+                                                                                  ],
+                                                                                label:
+                                                                                  'URL',
+                                                                                key: 'linkToExternal',
+                                                                                type: 'VARIABLE',
+                                                                                configuration:
+                                                                                  {
+                                                                                    placeholder:
+                                                                                      'Starts with https:// or http://',
+                                                                                    condition:
+                                                                                      {
+                                                                                        type: 'SHOW',
+                                                                                        option:
+                                                                                          'linkType',
+                                                                                        comparator:
+                                                                                          'EQ',
+                                                                                        value:
+                                                                                          'external',
+                                                                                      },
+                                                                                  },
+                                                                              },
+                                                                              {
                                                                                 value: true,
+                                                                                label:
+                                                                                  'Styles',
+                                                                                key: 'styles',
+                                                                                type: 'TOGGLE',
                                                                               },
-                                                                            },
-                                                                          },
-                                                                          {
-                                                                            type:
-                                                                              'CUSTOM',
-                                                                            label:
-                                                                              'Font weight',
-                                                                            key:
-                                                                              'fontWeight',
-                                                                            value:
-                                                                              '400',
-                                                                            configuration: {
-                                                                              as:
-                                                                                'DROPDOWN',
-                                                                              dataType:
-                                                                                'string',
-                                                                              allowedInput: [
-                                                                                {
-                                                                                  name:
-                                                                                    '100',
-                                                                                  value:
-                                                                                    '100',
-                                                                                },
-                                                                                {
-                                                                                  name:
-                                                                                    '200',
-                                                                                  value:
-                                                                                    '200',
-                                                                                },
-                                                                                {
-                                                                                  name:
-                                                                                    '300',
-                                                                                  value:
-                                                                                    '300',
-                                                                                },
-                                                                                {
-                                                                                  name:
-                                                                                    '400',
-                                                                                  value:
-                                                                                    '400',
-                                                                                },
-                                                                                {
-                                                                                  name:
-                                                                                    '500',
-                                                                                  value:
-                                                                                    '500',
-                                                                                },
-                                                                                {
-                                                                                  name:
-                                                                                    '600',
-                                                                                  value:
-                                                                                    '600',
-                                                                                },
-                                                                                {
-                                                                                  name:
-                                                                                    '700',
-                                                                                  value:
-                                                                                    '700',
-                                                                                },
-                                                                                {
-                                                                                  name:
-                                                                                    '800',
-                                                                                  value:
-                                                                                    '800',
-                                                                                },
-                                                                                {
-                                                                                  name:
-                                                                                    '900',
-                                                                                  value:
-                                                                                    '900',
-                                                                                },
-                                                                              ],
-                                                                              condition: {
-                                                                                type:
-                                                                                  'SHOW',
-                                                                                option:
-                                                                                  'styles',
-                                                                                comparator:
-                                                                                  'EQ',
-                                                                                value: true,
+                                                                              {
+                                                                                type: 'COLOR',
+                                                                                label:
+                                                                                  'Text color',
+                                                                                key: 'textColor',
+                                                                                value:
+                                                                                  'Accent3',
+                                                                                configuration:
+                                                                                  {
+                                                                                    condition:
+                                                                                      {
+                                                                                        type: 'SHOW',
+                                                                                        option:
+                                                                                          'styles',
+                                                                                        comparator:
+                                                                                          'EQ',
+                                                                                        value: true,
+                                                                                      },
+                                                                                  },
                                                                               },
-                                                                            },
-                                                                          },
-                                                                          {
-                                                                            value: false,
-                                                                            label:
-                                                                              'Advanced settings',
-                                                                            key:
-                                                                              'advancedSettings',
-                                                                            type:
-                                                                              'TOGGLE',
-                                                                          },
-                                                                          {
-                                                                            type:
-                                                                              'VARIABLE',
-                                                                            label:
-                                                                              'Test attribute',
-                                                                            key:
-                                                                              'dataComponentAttribute',
-                                                                            value: [
-                                                                              'Text',
-                                                                            ],
-                                                                            configuration: {
-                                                                              condition: {
-                                                                                type:
-                                                                                  'SHOW',
-                                                                                option:
-                                                                                  'advancedSettings',
-                                                                                comparator:
-                                                                                  'EQ',
-                                                                                value: true,
+                                                                              {
+                                                                                type: 'CUSTOM',
+                                                                                label:
+                                                                                  'Font weight',
+                                                                                key: 'fontWeight',
+                                                                                value:
+                                                                                  '400',
+                                                                                configuration:
+                                                                                  {
+                                                                                    as: 'DROPDOWN',
+                                                                                    dataType:
+                                                                                      'string',
+                                                                                    allowedInput:
+                                                                                      [
+                                                                                        {
+                                                                                          name: '100',
+                                                                                          value:
+                                                                                            '100',
+                                                                                        },
+                                                                                        {
+                                                                                          name: '200',
+                                                                                          value:
+                                                                                            '200',
+                                                                                        },
+                                                                                        {
+                                                                                          name: '300',
+                                                                                          value:
+                                                                                            '300',
+                                                                                        },
+                                                                                        {
+                                                                                          name: '400',
+                                                                                          value:
+                                                                                            '400',
+                                                                                        },
+                                                                                        {
+                                                                                          name: '500',
+                                                                                          value:
+                                                                                            '500',
+                                                                                        },
+                                                                                        {
+                                                                                          name: '600',
+                                                                                          value:
+                                                                                            '600',
+                                                                                        },
+                                                                                        {
+                                                                                          name: '700',
+                                                                                          value:
+                                                                                            '700',
+                                                                                        },
+                                                                                        {
+                                                                                          name: '800',
+                                                                                          value:
+                                                                                            '800',
+                                                                                        },
+                                                                                        {
+                                                                                          name: '900',
+                                                                                          value:
+                                                                                            '900',
+                                                                                        },
+                                                                                      ],
+                                                                                    condition:
+                                                                                      {
+                                                                                        type: 'SHOW',
+                                                                                        option:
+                                                                                          'styles',
+                                                                                        comparator:
+                                                                                          'EQ',
+                                                                                        value: true,
+                                                                                      },
+                                                                                  },
                                                                               },
-                                                                            },
-                                                                          },
-                                                                        ],
-                                                                        descendants: [],
-                                                                      },
-                                                                      {
-                                                                        name:
-                                                                          'Text',
-                                                                        options: [
-                                                                          {
-                                                                            type:
-                                                                              'VARIABLE',
-                                                                            label:
-                                                                              'Content',
-                                                                            key:
-                                                                              'content',
-                                                                            value: [
-                                                                              'Subheader',
+                                                                              {
+                                                                                value: false,
+                                                                                label:
+                                                                                  'Advanced settings',
+                                                                                key: 'advancedSettings',
+                                                                                type: 'TOGGLE',
+                                                                              },
+                                                                              {
+                                                                                type: 'VARIABLE',
+                                                                                label:
+                                                                                  'Test attribute',
+                                                                                key: 'dataComponentAttribute',
+                                                                                value:
+                                                                                  [
+                                                                                    'Text',
+                                                                                  ],
+                                                                                configuration:
+                                                                                  {
+                                                                                    condition:
+                                                                                      {
+                                                                                        type: 'SHOW',
+                                                                                        option:
+                                                                                          'advancedSettings',
+                                                                                        comparator:
+                                                                                          'EQ',
+                                                                                        value: true,
+                                                                                      },
+                                                                                  },
+                                                                              },
                                                                             ],
-                                                                            configuration: {
-                                                                              as:
-                                                                                'MULTILINE',
-                                                                            },
-                                                                          },
-                                                                          {
-                                                                            type:
-                                                                              'TOGGLE',
-                                                                            label:
-                                                                              'Display Rich Text',
-                                                                            key:
-                                                                              'useInnerHtml',
-                                                                            value: false,
-                                                                          },
-                                                                          {
-                                                                            value:
-                                                                              'Body1',
-                                                                            label:
-                                                                              'Type',
-                                                                            key:
-                                                                              'type',
-                                                                            type:
-                                                                              'FONT',
-                                                                          },
-                                                                          {
-                                                                            type:
-                                                                              'CUSTOM',
-                                                                            label:
-                                                                              'Text Alignment',
-                                                                            key:
-                                                                              'textAlignment',
-                                                                            value:
-                                                                              'left',
-                                                                            configuration: {
-                                                                              as:
-                                                                                'BUTTONGROUP',
-                                                                              dataType:
-                                                                                'string',
-                                                                              allowedInput: [
-                                                                                {
-                                                                                  name:
-                                                                                    'Left',
-                                                                                  value:
-                                                                                    'left',
-                                                                                },
-                                                                                {
-                                                                                  name:
-                                                                                    'Center',
-                                                                                  value:
-                                                                                    'center',
-                                                                                },
-                                                                                {
-                                                                                  name:
-                                                                                    'Right',
-                                                                                  value:
-                                                                                    'right',
-                                                                                },
-                                                                              ],
-                                                                            },
-                                                                          },
-                                                                          {
-                                                                            value: [
-                                                                              '0rem',
-                                                                              '0rem',
-                                                                              'S',
-                                                                              '0rem',
-                                                                            ],
-                                                                            label:
-                                                                              'Outer space',
-                                                                            key:
-                                                                              'outerSpacing',
-                                                                            type:
-                                                                              'SIZES',
-                                                                          },
-                                                                          {
-                                                                            type:
-                                                                              'CUSTOM',
-                                                                            label:
-                                                                              'Link to',
-                                                                            key:
-                                                                              'linkType',
-                                                                            value:
-                                                                              'internal',
-                                                                            configuration: {
-                                                                              as:
-                                                                                'BUTTONGROUP',
-                                                                              dataType:
-                                                                                'string',
-                                                                              allowedInput: [
-                                                                                {
-                                                                                  name:
-                                                                                    'Internal page',
-                                                                                  value:
-                                                                                    'internal',
-                                                                                },
-                                                                                {
-                                                                                  name:
-                                                                                    'External page',
-                                                                                  value:
-                                                                                    'external',
-                                                                                },
-                                                                              ],
-                                                                            },
-                                                                          },
-                                                                          {
-                                                                            value:
-                                                                              '',
-                                                                            label:
-                                                                              'Page',
-                                                                            key:
-                                                                              'linkTo',
-                                                                            type:
-                                                                              'ENDPOINT',
-                                                                            configuration: {
-                                                                              condition: {
-                                                                                type:
-                                                                                  'SHOW',
-                                                                                option:
-                                                                                  'linkType',
-                                                                                comparator:
-                                                                                  'EQ',
+                                                                          descendants:
+                                                                            [],
+                                                                        },
+                                                                        {
+                                                                          name: 'Text',
+                                                                          options:
+                                                                            [
+                                                                              {
+                                                                                type: 'VARIABLE',
+                                                                                label:
+                                                                                  'Content',
+                                                                                key: 'content',
+                                                                                value:
+                                                                                  [
+                                                                                    'Description',
+                                                                                  ],
+                                                                                configuration:
+                                                                                  {
+                                                                                    as: 'MULTILINE',
+                                                                                  },
+                                                                              },
+                                                                              {
+                                                                                type: 'TOGGLE',
+                                                                                label:
+                                                                                  'Display Rich Text',
+                                                                                key: 'useInnerHtml',
+                                                                                value: false,
+                                                                              },
+                                                                              {
+                                                                                value:
+                                                                                  'Body2',
+                                                                                label:
+                                                                                  'Type',
+                                                                                key: 'type',
+                                                                                type: 'FONT',
+                                                                              },
+                                                                              {
+                                                                                type: 'CUSTOM',
+                                                                                label:
+                                                                                  'Text Alignment',
+                                                                                key: 'textAlignment',
+                                                                                value:
+                                                                                  'left',
+                                                                                configuration:
+                                                                                  {
+                                                                                    as: 'BUTTONGROUP',
+                                                                                    dataType:
+                                                                                      'string',
+                                                                                    allowedInput:
+                                                                                      [
+                                                                                        {
+                                                                                          name: 'Left',
+                                                                                          value:
+                                                                                            'left',
+                                                                                        },
+                                                                                        {
+                                                                                          name: 'Center',
+                                                                                          value:
+                                                                                            'center',
+                                                                                        },
+                                                                                        {
+                                                                                          name: 'Right',
+                                                                                          value:
+                                                                                            'right',
+                                                                                        },
+                                                                                      ],
+                                                                                  },
+                                                                              },
+                                                                              {
+                                                                                value:
+                                                                                  [
+                                                                                    '0rem',
+                                                                                    '0rem',
+                                                                                    '0rem',
+                                                                                    '0rem',
+                                                                                  ],
+                                                                                label:
+                                                                                  'Outer space',
+                                                                                key: 'outerSpacing',
+                                                                                type: 'SIZES',
+                                                                              },
+                                                                              {
+                                                                                type: 'CUSTOM',
+                                                                                label:
+                                                                                  'Link to',
+                                                                                key: 'linkType',
                                                                                 value:
                                                                                   'internal',
+                                                                                configuration:
+                                                                                  {
+                                                                                    as: 'BUTTONGROUP',
+                                                                                    dataType:
+                                                                                      'string',
+                                                                                    allowedInput:
+                                                                                      [
+                                                                                        {
+                                                                                          name: 'Internal page',
+                                                                                          value:
+                                                                                            'internal',
+                                                                                        },
+                                                                                        {
+                                                                                          name: 'External page',
+                                                                                          value:
+                                                                                            'external',
+                                                                                        },
+                                                                                      ],
+                                                                                  },
                                                                               },
-                                                                            },
-                                                                          },
-                                                                          {
-                                                                            value: [
-                                                                              '',
-                                                                            ],
-                                                                            label:
-                                                                              'URL',
-                                                                            key:
-                                                                              'linkToExternal',
-                                                                            type:
-                                                                              'VARIABLE',
-                                                                            configuration: {
-                                                                              placeholder:
-                                                                                'Starts with https:// or http://',
-                                                                              condition: {
-                                                                                type:
-                                                                                  'SHOW',
-                                                                                option:
-                                                                                  'linkType',
-                                                                                comparator:
-                                                                                  'EQ',
+                                                                              {
                                                                                 value:
-                                                                                  'external',
+                                                                                  '',
+                                                                                label:
+                                                                                  'Page',
+                                                                                key: 'linkTo',
+                                                                                type: 'ENDPOINT',
+                                                                                configuration:
+                                                                                  {
+                                                                                    condition:
+                                                                                      {
+                                                                                        type: 'SHOW',
+                                                                                        option:
+                                                                                          'linkType',
+                                                                                        comparator:
+                                                                                          'EQ',
+                                                                                        value:
+                                                                                          'internal',
+                                                                                      },
+                                                                                  },
                                                                               },
-                                                                            },
-                                                                          },
-                                                                          {
-                                                                            value: true,
-                                                                            label:
-                                                                              'Styles',
-                                                                            key:
-                                                                              'styles',
-                                                                            type:
-                                                                              'TOGGLE',
-                                                                          },
-                                                                          {
-                                                                            type:
-                                                                              'COLOR',
-                                                                            label:
-                                                                              'Text color',
-                                                                            key:
-                                                                              'textColor',
-                                                                            value:
-                                                                              'Accent3',
-                                                                            configuration: {
-                                                                              condition: {
-                                                                                type:
-                                                                                  'SHOW',
-                                                                                option:
-                                                                                  'styles',
-                                                                                comparator:
-                                                                                  'EQ',
-                                                                                value: true,
-                                                                              },
-                                                                            },
-                                                                          },
-                                                                          {
-                                                                            type:
-                                                                              'CUSTOM',
-                                                                            label:
-                                                                              'Font weight',
-                                                                            key:
-                                                                              'fontWeight',
-                                                                            value:
-                                                                              '400',
-                                                                            configuration: {
-                                                                              as:
-                                                                                'DROPDOWN',
-                                                                              dataType:
-                                                                                'string',
-                                                                              allowedInput: [
-                                                                                {
-                                                                                  name:
-                                                                                    '100',
-                                                                                  value:
-                                                                                    '100',
-                                                                                },
-                                                                                {
-                                                                                  name:
-                                                                                    '200',
-                                                                                  value:
-                                                                                    '200',
-                                                                                },
-                                                                                {
-                                                                                  name:
-                                                                                    '300',
-                                                                                  value:
-                                                                                    '300',
-                                                                                },
-                                                                                {
-                                                                                  name:
-                                                                                    '400',
-                                                                                  value:
-                                                                                    '400',
-                                                                                },
-                                                                                {
-                                                                                  name:
-                                                                                    '500',
-                                                                                  value:
-                                                                                    '500',
-                                                                                },
-                                                                                {
-                                                                                  name:
-                                                                                    '600',
-                                                                                  value:
-                                                                                    '600',
-                                                                                },
-                                                                                {
-                                                                                  name:
-                                                                                    '700',
-                                                                                  value:
-                                                                                    '700',
-                                                                                },
-                                                                                {
-                                                                                  name:
-                                                                                    '800',
-                                                                                  value:
-                                                                                    '800',
-                                                                                },
-                                                                                {
-                                                                                  name:
-                                                                                    '900',
-                                                                                  value:
-                                                                                    '900',
-                                                                                },
-                                                                              ],
-                                                                              condition: {
-                                                                                type:
-                                                                                  'SHOW',
-                                                                                option:
-                                                                                  'styles',
-                                                                                comparator:
-                                                                                  'EQ',
-                                                                                value: true,
-                                                                              },
-                                                                            },
-                                                                          },
-                                                                          {
-                                                                            value: false,
-                                                                            label:
-                                                                              'Advanced settings',
-                                                                            key:
-                                                                              'advancedSettings',
-                                                                            type:
-                                                                              'TOGGLE',
-                                                                          },
-                                                                          {
-                                                                            type:
-                                                                              'VARIABLE',
-                                                                            label:
-                                                                              'Test attribute',
-                                                                            key:
-                                                                              'dataComponentAttribute',
-                                                                            value: [
-                                                                              'Text',
-                                                                            ],
-                                                                            configuration: {
-                                                                              condition: {
-                                                                                type:
-                                                                                  'SHOW',
-                                                                                option:
-                                                                                  'advancedSettings',
-                                                                                comparator:
-                                                                                  'EQ',
-                                                                                value: true,
-                                                                              },
-                                                                            },
-                                                                          },
-                                                                        ],
-                                                                        descendants: [],
-                                                                      },
-                                                                      {
-                                                                        name:
-                                                                          'Text',
-                                                                        options: [
-                                                                          {
-                                                                            type:
-                                                                              'VARIABLE',
-                                                                            label:
-                                                                              'Content',
-                                                                            key:
-                                                                              'content',
-                                                                            value: [
-                                                                              'Description',
-                                                                            ],
-                                                                            configuration: {
-                                                                              as:
-                                                                                'MULTILINE',
-                                                                            },
-                                                                          },
-                                                                          {
-                                                                            type:
-                                                                              'TOGGLE',
-                                                                            label:
-                                                                              'Display Rich Text',
-                                                                            key:
-                                                                              'useInnerHtml',
-                                                                            value: false,
-                                                                          },
-                                                                          {
-                                                                            value:
-                                                                              'Body2',
-                                                                            label:
-                                                                              'Type',
-                                                                            key:
-                                                                              'type',
-                                                                            type:
-                                                                              'FONT',
-                                                                          },
-                                                                          {
-                                                                            type:
-                                                                              'CUSTOM',
-                                                                            label:
-                                                                              'Text Alignment',
-                                                                            key:
-                                                                              'textAlignment',
-                                                                            value:
-                                                                              'left',
-                                                                            configuration: {
-                                                                              as:
-                                                                                'BUTTONGROUP',
-                                                                              dataType:
-                                                                                'string',
-                                                                              allowedInput: [
-                                                                                {
-                                                                                  name:
-                                                                                    'Left',
-                                                                                  value:
-                                                                                    'left',
-                                                                                },
-                                                                                {
-                                                                                  name:
-                                                                                    'Center',
-                                                                                  value:
-                                                                                    'center',
-                                                                                },
-                                                                                {
-                                                                                  name:
-                                                                                    'Right',
-                                                                                  value:
-                                                                                    'right',
-                                                                                },
-                                                                              ],
-                                                                            },
-                                                                          },
-                                                                          {
-                                                                            value: [
-                                                                              '0rem',
-                                                                              '0rem',
-                                                                              '0rem',
-                                                                              '0rem',
-                                                                            ],
-                                                                            label:
-                                                                              'Outer space',
-                                                                            key:
-                                                                              'outerSpacing',
-                                                                            type:
-                                                                              'SIZES',
-                                                                          },
-                                                                          {
-                                                                            type:
-                                                                              'CUSTOM',
-                                                                            label:
-                                                                              'Link to',
-                                                                            key:
-                                                                              'linkType',
-                                                                            value:
-                                                                              'internal',
-                                                                            configuration: {
-                                                                              as:
-                                                                                'BUTTONGROUP',
-                                                                              dataType:
-                                                                                'string',
-                                                                              allowedInput: [
-                                                                                {
-                                                                                  name:
-                                                                                    'Internal page',
-                                                                                  value:
-                                                                                    'internal',
-                                                                                },
-                                                                                {
-                                                                                  name:
-                                                                                    'External page',
-                                                                                  value:
-                                                                                    'external',
-                                                                                },
-                                                                              ],
-                                                                            },
-                                                                          },
-                                                                          {
-                                                                            value:
-                                                                              '',
-                                                                            label:
-                                                                              'Page',
-                                                                            key:
-                                                                              'linkTo',
-                                                                            type:
-                                                                              'ENDPOINT',
-                                                                            configuration: {
-                                                                              condition: {
-                                                                                type:
-                                                                                  'SHOW',
-                                                                                option:
-                                                                                  'linkType',
-                                                                                comparator:
-                                                                                  'EQ',
+                                                                              {
                                                                                 value:
-                                                                                  'internal',
+                                                                                  [
+                                                                                    '',
+                                                                                  ],
+                                                                                label:
+                                                                                  'URL',
+                                                                                key: 'linkToExternal',
+                                                                                type: 'VARIABLE',
+                                                                                configuration:
+                                                                                  {
+                                                                                    placeholder:
+                                                                                      'Starts with https:// or http://',
+                                                                                    condition:
+                                                                                      {
+                                                                                        type: 'SHOW',
+                                                                                        option:
+                                                                                          'linkType',
+                                                                                        comparator:
+                                                                                          'EQ',
+                                                                                        value:
+                                                                                          'external',
+                                                                                      },
+                                                                                  },
                                                                               },
-                                                                            },
-                                                                          },
-                                                                          {
-                                                                            value: [
-                                                                              '',
-                                                                            ],
-                                                                            label:
-                                                                              'URL',
-                                                                            key:
-                                                                              'linkToExternal',
-                                                                            type:
-                                                                              'VARIABLE',
-                                                                            configuration: {
-                                                                              placeholder:
-                                                                                'Starts with https:// or http://',
-                                                                              condition: {
-                                                                                type:
-                                                                                  'SHOW',
-                                                                                option:
-                                                                                  'linkType',
-                                                                                comparator:
-                                                                                  'EQ',
+                                                                              {
+                                                                                value: false,
+                                                                                label:
+                                                                                  'Styles',
+                                                                                key: 'styles',
+                                                                                type: 'TOGGLE',
+                                                                              },
+                                                                              {
+                                                                                type: 'COLOR',
+                                                                                label:
+                                                                                  'Text color',
+                                                                                key: 'textColor',
                                                                                 value:
-                                                                                  'external',
+                                                                                  'Black',
+                                                                                configuration:
+                                                                                  {
+                                                                                    condition:
+                                                                                      {
+                                                                                        type: 'SHOW',
+                                                                                        option:
+                                                                                          'styles',
+                                                                                        comparator:
+                                                                                          'EQ',
+                                                                                        value: true,
+                                                                                      },
+                                                                                  },
                                                                               },
-                                                                            },
-                                                                          },
-                                                                          {
-                                                                            value: false,
-                                                                            label:
-                                                                              'Styles',
-                                                                            key:
-                                                                              'styles',
-                                                                            type:
-                                                                              'TOGGLE',
-                                                                          },
-                                                                          {
-                                                                            type:
-                                                                              'COLOR',
-                                                                            label:
-                                                                              'Text color',
-                                                                            key:
-                                                                              'textColor',
-                                                                            value:
-                                                                              'Black',
-                                                                            configuration: {
-                                                                              condition: {
-                                                                                type:
-                                                                                  'SHOW',
-                                                                                option:
-                                                                                  'styles',
-                                                                                comparator:
-                                                                                  'EQ',
-                                                                                value: true,
+                                                                              {
+                                                                                type: 'CUSTOM',
+                                                                                label:
+                                                                                  'Font weight',
+                                                                                key: 'fontWeight',
+                                                                                value:
+                                                                                  '400',
+                                                                                configuration:
+                                                                                  {
+                                                                                    as: 'DROPDOWN',
+                                                                                    dataType:
+                                                                                      'string',
+                                                                                    allowedInput:
+                                                                                      [
+                                                                                        {
+                                                                                          name: '100',
+                                                                                          value:
+                                                                                            '100',
+                                                                                        },
+                                                                                        {
+                                                                                          name: '200',
+                                                                                          value:
+                                                                                            '200',
+                                                                                        },
+                                                                                        {
+                                                                                          name: '300',
+                                                                                          value:
+                                                                                            '300',
+                                                                                        },
+                                                                                        {
+                                                                                          name: '400',
+                                                                                          value:
+                                                                                            '400',
+                                                                                        },
+                                                                                        {
+                                                                                          name: '500',
+                                                                                          value:
+                                                                                            '500',
+                                                                                        },
+                                                                                        {
+                                                                                          name: '600',
+                                                                                          value:
+                                                                                            '600',
+                                                                                        },
+                                                                                        {
+                                                                                          name: '700',
+                                                                                          value:
+                                                                                            '700',
+                                                                                        },
+                                                                                        {
+                                                                                          name: '800',
+                                                                                          value:
+                                                                                            '800',
+                                                                                        },
+                                                                                        {
+                                                                                          name: '900',
+                                                                                          value:
+                                                                                            '900',
+                                                                                        },
+                                                                                      ],
+                                                                                    condition:
+                                                                                      {
+                                                                                        type: 'SHOW',
+                                                                                        option:
+                                                                                          'styles',
+                                                                                        comparator:
+                                                                                          'EQ',
+                                                                                        value: true,
+                                                                                      },
+                                                                                  },
                                                                               },
-                                                                            },
-                                                                          },
-                                                                          {
-                                                                            type:
-                                                                              'CUSTOM',
-                                                                            label:
-                                                                              'Font weight',
-                                                                            key:
-                                                                              'fontWeight',
-                                                                            value:
-                                                                              '400',
-                                                                            configuration: {
-                                                                              as:
-                                                                                'DROPDOWN',
-                                                                              dataType:
-                                                                                'string',
-                                                                              allowedInput: [
-                                                                                {
-                                                                                  name:
-                                                                                    '100',
-                                                                                  value:
-                                                                                    '100',
-                                                                                },
-                                                                                {
-                                                                                  name:
-                                                                                    '200',
-                                                                                  value:
-                                                                                    '200',
-                                                                                },
-                                                                                {
-                                                                                  name:
-                                                                                    '300',
-                                                                                  value:
-                                                                                    '300',
-                                                                                },
-                                                                                {
-                                                                                  name:
-                                                                                    '400',
-                                                                                  value:
-                                                                                    '400',
-                                                                                },
-                                                                                {
-                                                                                  name:
-                                                                                    '500',
-                                                                                  value:
-                                                                                    '500',
-                                                                                },
-                                                                                {
-                                                                                  name:
-                                                                                    '600',
-                                                                                  value:
-                                                                                    '600',
-                                                                                },
-                                                                                {
-                                                                                  name:
-                                                                                    '700',
-                                                                                  value:
-                                                                                    '700',
-                                                                                },
-                                                                                {
-                                                                                  name:
-                                                                                    '800',
-                                                                                  value:
-                                                                                    '800',
-                                                                                },
-                                                                                {
-                                                                                  name:
-                                                                                    '900',
-                                                                                  value:
-                                                                                    '900',
-                                                                                },
-                                                                              ],
-                                                                              condition: {
-                                                                                type:
-                                                                                  'SHOW',
-                                                                                option:
-                                                                                  'styles',
-                                                                                comparator:
-                                                                                  'EQ',
-                                                                                value: true,
+                                                                              {
+                                                                                value: false,
+                                                                                label:
+                                                                                  'Advanced settings',
+                                                                                key: 'advancedSettings',
+                                                                                type: 'TOGGLE',
                                                                               },
-                                                                            },
-                                                                          },
-                                                                          {
-                                                                            value: false,
-                                                                            label:
-                                                                              'Advanced settings',
-                                                                            key:
-                                                                              'advancedSettings',
-                                                                            type:
-                                                                              'TOGGLE',
-                                                                          },
-                                                                          {
-                                                                            type:
-                                                                              'VARIABLE',
-                                                                            label:
-                                                                              'Test attribute',
-                                                                            key:
-                                                                              'dataComponentAttribute',
-                                                                            value: [
-                                                                              'Text',
+                                                                              {
+                                                                                type: 'VARIABLE',
+                                                                                label:
+                                                                                  'Test attribute',
+                                                                                key: 'dataComponentAttribute',
+                                                                                value:
+                                                                                  [
+                                                                                    'Text',
+                                                                                  ],
+                                                                                configuration:
+                                                                                  {
+                                                                                    condition:
+                                                                                      {
+                                                                                        type: 'SHOW',
+                                                                                        option:
+                                                                                          'advancedSettings',
+                                                                                        comparator:
+                                                                                          'EQ',
+                                                                                        value: true,
+                                                                                      },
+                                                                                  },
+                                                                              },
                                                                             ],
-                                                                            configuration: {
-                                                                              condition: {
-                                                                                type:
-                                                                                  'SHOW',
-                                                                                option:
-                                                                                  'advancedSettings',
-                                                                                comparator:
-                                                                                  'EQ',
-                                                                                value: true,
-                                                                              },
-                                                                            },
-                                                                          },
-                                                                        ],
-                                                                        descendants: [],
-                                                                      },
-                                                                    ],
+                                                                          descendants:
+                                                                            [],
+                                                                        },
+                                                                      ],
                                                                   },
                                                                   {
-                                                                    name:
-                                                                      'Column',
+                                                                    name: 'Column',
                                                                     options: [
                                                                       {
                                                                         label:
                                                                           'Toggle visibility',
-                                                                        key:
-                                                                          'visible',
+                                                                        key: 'visible',
                                                                         value: true,
-                                                                        type:
-                                                                          'TOGGLE',
-                                                                        configuration: {
-                                                                          as:
-                                                                            'VISIBILITY',
-                                                                        },
+                                                                        type: 'TOGGLE',
+                                                                        configuration:
+                                                                          {
+                                                                            as: 'VISIBILITY',
+                                                                          },
                                                                       },
                                                                       {
                                                                         value:
                                                                           '1',
                                                                         label:
                                                                           'Column width',
-                                                                        key:
-                                                                          'columnWidth',
-                                                                        type:
-                                                                          'CUSTOM',
-                                                                        configuration: {
-                                                                          as:
-                                                                            'DROPDOWN',
-                                                                          dataType:
-                                                                            'string',
-                                                                          allowedInput: [
-                                                                            {
-                                                                              name:
-                                                                                'Fit content',
-                                                                              value:
-                                                                                'fitContent',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                'Flexible',
-                                                                              value:
-                                                                                'flexible',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                'Hidden',
-                                                                              value:
-                                                                                'hidden',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '1',
-                                                                              value:
-                                                                                '1',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '2',
-                                                                              value:
-                                                                                '2',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '3',
-                                                                              value:
-                                                                                '3',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '4',
-                                                                              value:
-                                                                                '4',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '5',
-                                                                              value:
-                                                                                '5',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '6',
-                                                                              value:
-                                                                                '6',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '7',
-                                                                              value:
-                                                                                '7',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '8',
-                                                                              value:
-                                                                                '8',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '9',
-                                                                              value:
-                                                                                '9',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '10',
-                                                                              value:
-                                                                                '10',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '11',
-                                                                              value:
-                                                                                '11',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '12',
-                                                                              value:
-                                                                                '12',
-                                                                            },
-                                                                          ],
-                                                                        },
+                                                                        key: 'columnWidth',
+                                                                        type: 'CUSTOM',
+                                                                        configuration:
+                                                                          {
+                                                                            as: 'DROPDOWN',
+                                                                            dataType:
+                                                                              'string',
+                                                                            allowedInput:
+                                                                              [
+                                                                                {
+                                                                                  name: 'Fit content',
+                                                                                  value:
+                                                                                    'fitContent',
+                                                                                },
+                                                                                {
+                                                                                  name: 'Flexible',
+                                                                                  value:
+                                                                                    'flexible',
+                                                                                },
+                                                                                {
+                                                                                  name: 'Hidden',
+                                                                                  value:
+                                                                                    'hidden',
+                                                                                },
+                                                                                {
+                                                                                  name: '1',
+                                                                                  value:
+                                                                                    '1',
+                                                                                },
+                                                                                {
+                                                                                  name: '2',
+                                                                                  value:
+                                                                                    '2',
+                                                                                },
+                                                                                {
+                                                                                  name: '3',
+                                                                                  value:
+                                                                                    '3',
+                                                                                },
+                                                                                {
+                                                                                  name: '4',
+                                                                                  value:
+                                                                                    '4',
+                                                                                },
+                                                                                {
+                                                                                  name: '5',
+                                                                                  value:
+                                                                                    '5',
+                                                                                },
+                                                                                {
+                                                                                  name: '6',
+                                                                                  value:
+                                                                                    '6',
+                                                                                },
+                                                                                {
+                                                                                  name: '7',
+                                                                                  value:
+                                                                                    '7',
+                                                                                },
+                                                                                {
+                                                                                  name: '8',
+                                                                                  value:
+                                                                                    '8',
+                                                                                },
+                                                                                {
+                                                                                  name: '9',
+                                                                                  value:
+                                                                                    '9',
+                                                                                },
+                                                                                {
+                                                                                  name: '10',
+                                                                                  value:
+                                                                                    '10',
+                                                                                },
+                                                                                {
+                                                                                  name: '11',
+                                                                                  value:
+                                                                                    '11',
+                                                                                },
+                                                                                {
+                                                                                  name: '12',
+                                                                                  value:
+                                                                                    '12',
+                                                                                },
+                                                                              ],
+                                                                          },
                                                                       },
                                                                       {
                                                                         value:
                                                                           '1',
                                                                         label:
                                                                           'Column width (tablet landscape)',
-                                                                        key:
-                                                                          'columnWidthTabletLandscape',
-                                                                        type:
-                                                                          'CUSTOM',
-                                                                        configuration: {
-                                                                          as:
-                                                                            'DROPDOWN',
-                                                                          dataType:
-                                                                            'string',
-                                                                          allowedInput: [
-                                                                            {
-                                                                              name:
-                                                                                'Fit content',
-                                                                              value:
-                                                                                'fitContent',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                'Flexible',
-                                                                              value:
-                                                                                'flexible',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                'Hidden',
-                                                                              value:
-                                                                                'hidden',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '1',
-                                                                              value:
-                                                                                '1',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '2',
-                                                                              value:
-                                                                                '2',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '3',
-                                                                              value:
-                                                                                '3',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '4',
-                                                                              value:
-                                                                                '4',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '5',
-                                                                              value:
-                                                                                '5',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '6',
-                                                                              value:
-                                                                                '6',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '7',
-                                                                              value:
-                                                                                '7',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '8',
-                                                                              value:
-                                                                                '8',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '9',
-                                                                              value:
-                                                                                '9',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '10',
-                                                                              value:
-                                                                                '10',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '11',
-                                                                              value:
-                                                                                '11',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '12',
-                                                                              value:
-                                                                                '12',
-                                                                            },
-                                                                          ],
-                                                                        },
+                                                                        key: 'columnWidthTabletLandscape',
+                                                                        type: 'CUSTOM',
+                                                                        configuration:
+                                                                          {
+                                                                            as: 'DROPDOWN',
+                                                                            dataType:
+                                                                              'string',
+                                                                            allowedInput:
+                                                                              [
+                                                                                {
+                                                                                  name: 'Fit content',
+                                                                                  value:
+                                                                                    'fitContent',
+                                                                                },
+                                                                                {
+                                                                                  name: 'Flexible',
+                                                                                  value:
+                                                                                    'flexible',
+                                                                                },
+                                                                                {
+                                                                                  name: 'Hidden',
+                                                                                  value:
+                                                                                    'hidden',
+                                                                                },
+                                                                                {
+                                                                                  name: '1',
+                                                                                  value:
+                                                                                    '1',
+                                                                                },
+                                                                                {
+                                                                                  name: '2',
+                                                                                  value:
+                                                                                    '2',
+                                                                                },
+                                                                                {
+                                                                                  name: '3',
+                                                                                  value:
+                                                                                    '3',
+                                                                                },
+                                                                                {
+                                                                                  name: '4',
+                                                                                  value:
+                                                                                    '4',
+                                                                                },
+                                                                                {
+                                                                                  name: '5',
+                                                                                  value:
+                                                                                    '5',
+                                                                                },
+                                                                                {
+                                                                                  name: '6',
+                                                                                  value:
+                                                                                    '6',
+                                                                                },
+                                                                                {
+                                                                                  name: '7',
+                                                                                  value:
+                                                                                    '7',
+                                                                                },
+                                                                                {
+                                                                                  name: '8',
+                                                                                  value:
+                                                                                    '8',
+                                                                                },
+                                                                                {
+                                                                                  name: '9',
+                                                                                  value:
+                                                                                    '9',
+                                                                                },
+                                                                                {
+                                                                                  name: '10',
+                                                                                  value:
+                                                                                    '10',
+                                                                                },
+                                                                                {
+                                                                                  name: '11',
+                                                                                  value:
+                                                                                    '11',
+                                                                                },
+                                                                                {
+                                                                                  name: '12',
+                                                                                  value:
+                                                                                    '12',
+                                                                                },
+                                                                              ],
+                                                                          },
                                                                       },
                                                                       {
                                                                         value:
                                                                           '1',
                                                                         label:
                                                                           'Column width (tablet portrait)',
-                                                                        key:
-                                                                          'columnWidthTabletPortrait',
-                                                                        type:
-                                                                          'CUSTOM',
-                                                                        configuration: {
-                                                                          as:
-                                                                            'DROPDOWN',
-                                                                          dataType:
-                                                                            'string',
-                                                                          allowedInput: [
-                                                                            {
-                                                                              name:
-                                                                                'Fit content',
-                                                                              value:
-                                                                                'fitContent',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                'Flexible',
-                                                                              value:
-                                                                                'flexible',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                'Hidden',
-                                                                              value:
-                                                                                'hidden',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '1',
-                                                                              value:
-                                                                                '1',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '2',
-                                                                              value:
-                                                                                '2',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '3',
-                                                                              value:
-                                                                                '3',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '4',
-                                                                              value:
-                                                                                '4',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '5',
-                                                                              value:
-                                                                                '5',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '6',
-                                                                              value:
-                                                                                '6',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '7',
-                                                                              value:
-                                                                                '7',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '8',
-                                                                              value:
-                                                                                '8',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '9',
-                                                                              value:
-                                                                                '9',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '10',
-                                                                              value:
-                                                                                '10',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '11',
-                                                                              value:
-                                                                                '11',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '12',
-                                                                              value:
-                                                                                '12',
-                                                                            },
-                                                                          ],
-                                                                        },
+                                                                        key: 'columnWidthTabletPortrait',
+                                                                        type: 'CUSTOM',
+                                                                        configuration:
+                                                                          {
+                                                                            as: 'DROPDOWN',
+                                                                            dataType:
+                                                                              'string',
+                                                                            allowedInput:
+                                                                              [
+                                                                                {
+                                                                                  name: 'Fit content',
+                                                                                  value:
+                                                                                    'fitContent',
+                                                                                },
+                                                                                {
+                                                                                  name: 'Flexible',
+                                                                                  value:
+                                                                                    'flexible',
+                                                                                },
+                                                                                {
+                                                                                  name: 'Hidden',
+                                                                                  value:
+                                                                                    'hidden',
+                                                                                },
+                                                                                {
+                                                                                  name: '1',
+                                                                                  value:
+                                                                                    '1',
+                                                                                },
+                                                                                {
+                                                                                  name: '2',
+                                                                                  value:
+                                                                                    '2',
+                                                                                },
+                                                                                {
+                                                                                  name: '3',
+                                                                                  value:
+                                                                                    '3',
+                                                                                },
+                                                                                {
+                                                                                  name: '4',
+                                                                                  value:
+                                                                                    '4',
+                                                                                },
+                                                                                {
+                                                                                  name: '5',
+                                                                                  value:
+                                                                                    '5',
+                                                                                },
+                                                                                {
+                                                                                  name: '6',
+                                                                                  value:
+                                                                                    '6',
+                                                                                },
+                                                                                {
+                                                                                  name: '7',
+                                                                                  value:
+                                                                                    '7',
+                                                                                },
+                                                                                {
+                                                                                  name: '8',
+                                                                                  value:
+                                                                                    '8',
+                                                                                },
+                                                                                {
+                                                                                  name: '9',
+                                                                                  value:
+                                                                                    '9',
+                                                                                },
+                                                                                {
+                                                                                  name: '10',
+                                                                                  value:
+                                                                                    '10',
+                                                                                },
+                                                                                {
+                                                                                  name: '11',
+                                                                                  value:
+                                                                                    '11',
+                                                                                },
+                                                                                {
+                                                                                  name: '12',
+                                                                                  value:
+                                                                                    '12',
+                                                                                },
+                                                                              ],
+                                                                          },
                                                                       },
                                                                       {
                                                                         value:
                                                                           '2',
                                                                         label:
                                                                           'Column width (mobile)',
-                                                                        key:
-                                                                          'columnWidthMobile',
-                                                                        type:
-                                                                          'CUSTOM',
-                                                                        configuration: {
-                                                                          as:
-                                                                            'DROPDOWN',
-                                                                          dataType:
-                                                                            'string',
-                                                                          allowedInput: [
-                                                                            {
-                                                                              name:
-                                                                                'Fit content',
-                                                                              value:
-                                                                                'fitContent',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                'Flexible',
-                                                                              value:
-                                                                                'flexible',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                'Hidden',
-                                                                              value:
-                                                                                'hidden',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '1',
-                                                                              value:
-                                                                                '1',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '2',
-                                                                              value:
-                                                                                '2',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '3',
-                                                                              value:
-                                                                                '3',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '4',
-                                                                              value:
-                                                                                '4',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '5',
-                                                                              value:
-                                                                                '5',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '6',
-                                                                              value:
-                                                                                '6',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '7',
-                                                                              value:
-                                                                                '7',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '8',
-                                                                              value:
-                                                                                '8',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '9',
-                                                                              value:
-                                                                                '9',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '10',
-                                                                              value:
-                                                                                '10',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '11',
-                                                                              value:
-                                                                                '11',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                '12',
-                                                                              value:
-                                                                                '12',
-                                                                            },
-                                                                          ],
-                                                                        },
+                                                                        key: 'columnWidthMobile',
+                                                                        type: 'CUSTOM',
+                                                                        configuration:
+                                                                          {
+                                                                            as: 'DROPDOWN',
+                                                                            dataType:
+                                                                              'string',
+                                                                            allowedInput:
+                                                                              [
+                                                                                {
+                                                                                  name: 'Fit content',
+                                                                                  value:
+                                                                                    'fitContent',
+                                                                                },
+                                                                                {
+                                                                                  name: 'Flexible',
+                                                                                  value:
+                                                                                    'flexible',
+                                                                                },
+                                                                                {
+                                                                                  name: 'Hidden',
+                                                                                  value:
+                                                                                    'hidden',
+                                                                                },
+                                                                                {
+                                                                                  name: '1',
+                                                                                  value:
+                                                                                    '1',
+                                                                                },
+                                                                                {
+                                                                                  name: '2',
+                                                                                  value:
+                                                                                    '2',
+                                                                                },
+                                                                                {
+                                                                                  name: '3',
+                                                                                  value:
+                                                                                    '3',
+                                                                                },
+                                                                                {
+                                                                                  name: '4',
+                                                                                  value:
+                                                                                    '4',
+                                                                                },
+                                                                                {
+                                                                                  name: '5',
+                                                                                  value:
+                                                                                    '5',
+                                                                                },
+                                                                                {
+                                                                                  name: '6',
+                                                                                  value:
+                                                                                    '6',
+                                                                                },
+                                                                                {
+                                                                                  name: '7',
+                                                                                  value:
+                                                                                    '7',
+                                                                                },
+                                                                                {
+                                                                                  name: '8',
+                                                                                  value:
+                                                                                    '8',
+                                                                                },
+                                                                                {
+                                                                                  name: '9',
+                                                                                  value:
+                                                                                    '9',
+                                                                                },
+                                                                                {
+                                                                                  name: '10',
+                                                                                  value:
+                                                                                    '10',
+                                                                                },
+                                                                                {
+                                                                                  name: '11',
+                                                                                  value:
+                                                                                    '11',
+                                                                                },
+                                                                                {
+                                                                                  name: '12',
+                                                                                  value:
+                                                                                    '12',
+                                                                                },
+                                                                              ],
+                                                                          },
                                                                       },
                                                                       {
                                                                         value:
                                                                           '',
                                                                         label:
                                                                           'Height',
-                                                                        key:
-                                                                          'columnHeight',
-                                                                        type:
-                                                                          'TEXT',
-                                                                        configuration: {
-                                                                          as:
-                                                                            'UNIT',
-                                                                        },
+                                                                        key: 'columnHeight',
+                                                                        type: 'TEXT',
+                                                                        configuration:
+                                                                          {
+                                                                            as: 'UNIT',
+                                                                          },
                                                                       },
                                                                       {
                                                                         value:
                                                                           'transparent',
                                                                         label:
                                                                           'Background color',
-                                                                        key:
-                                                                          'backgroundColor',
-                                                                        type:
-                                                                          'COLOR',
+                                                                        key: 'backgroundColor',
+                                                                        type: 'COLOR',
                                                                       },
                                                                       {
-                                                                        type:
-                                                                          'CUSTOM',
+                                                                        type: 'CUSTOM',
                                                                         label:
                                                                           'Horizontal Alignment',
-                                                                        key:
-                                                                          'horizontalAlignment',
+                                                                        key: 'horizontalAlignment',
                                                                         value:
                                                                           'center',
-                                                                        configuration: {
-                                                                          as:
-                                                                            'BUTTONGROUP',
-                                                                          dataType:
-                                                                            'string',
-                                                                          allowedInput: [
-                                                                            {
-                                                                              name:
-                                                                                'None',
-                                                                              value:
-                                                                                'inherit',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                'Left',
-                                                                              value:
-                                                                                'flex-start',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                'Center',
-                                                                              value:
-                                                                                'center',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                'Right',
-                                                                              value:
-                                                                                'flex-end',
-                                                                            },
-                                                                          ],
-                                                                        },
+                                                                        configuration:
+                                                                          {
+                                                                            as: 'BUTTONGROUP',
+                                                                            dataType:
+                                                                              'string',
+                                                                            allowedInput:
+                                                                              [
+                                                                                {
+                                                                                  name: 'None',
+                                                                                  value:
+                                                                                    'inherit',
+                                                                                },
+                                                                                {
+                                                                                  name: 'Left',
+                                                                                  value:
+                                                                                    'flex-start',
+                                                                                },
+                                                                                {
+                                                                                  name: 'Center',
+                                                                                  value:
+                                                                                    'center',
+                                                                                },
+                                                                                {
+                                                                                  name: 'Right',
+                                                                                  value:
+                                                                                    'flex-end',
+                                                                                },
+                                                                              ],
+                                                                          },
                                                                       },
                                                                       {
-                                                                        type:
-                                                                          'CUSTOM',
+                                                                        type: 'CUSTOM',
                                                                         label:
                                                                           'Vertical Alignment',
-                                                                        key:
-                                                                          'verticalAlignment',
+                                                                        key: 'verticalAlignment',
                                                                         value:
                                                                           'center',
-                                                                        configuration: {
-                                                                          as:
-                                                                            'BUTTONGROUP',
-                                                                          dataType:
-                                                                            'string',
-                                                                          allowedInput: [
-                                                                            {
-                                                                              name:
-                                                                                'None',
-                                                                              value:
-                                                                                'inherit',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                'Top',
-                                                                              value:
-                                                                                'flex-start',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                'Center',
-                                                                              value:
-                                                                                'center',
-                                                                            },
-                                                                            {
-                                                                              name:
-                                                                                'Bottom',
-                                                                              value:
-                                                                                'flex-end',
-                                                                            },
-                                                                          ],
-                                                                        },
+                                                                        configuration:
+                                                                          {
+                                                                            as: 'BUTTONGROUP',
+                                                                            dataType:
+                                                                              'string',
+                                                                            allowedInput:
+                                                                              [
+                                                                                {
+                                                                                  name: 'None',
+                                                                                  value:
+                                                                                    'inherit',
+                                                                                },
+                                                                                {
+                                                                                  name: 'Top',
+                                                                                  value:
+                                                                                    'flex-start',
+                                                                                },
+                                                                                {
+                                                                                  name: 'Center',
+                                                                                  value:
+                                                                                    'center',
+                                                                                },
+                                                                                {
+                                                                                  name: 'Bottom',
+                                                                                  value:
+                                                                                    'flex-end',
+                                                                                },
+                                                                              ],
+                                                                          },
                                                                       },
                                                                       {
                                                                         value: [
@@ -46913,10 +46317,8 @@
                                                                         ],
                                                                         label:
                                                                           'Outer space',
-                                                                        key:
-                                                                          'outerSpacing',
-                                                                        type:
-                                                                          'SIZES',
+                                                                        key: 'outerSpacing',
+                                                                        type: 'SIZES',
                                                                       },
                                                                       {
                                                                         value: [
@@ -46927,439 +46329,405 @@
                                                                         ],
                                                                         label:
                                                                           'Inner space',
-                                                                        key:
-                                                                          'innerSpacing',
-                                                                        type:
-                                                                          'SIZES',
+                                                                        key: 'innerSpacing',
+                                                                        type: 'SIZES',
                                                                       },
                                                                       {
                                                                         value: false,
                                                                         label:
                                                                           'Advanced settings',
-                                                                        key:
-                                                                          'advancedSettings',
-                                                                        type:
-                                                                          'TOGGLE',
+                                                                        key: 'advancedSettings',
+                                                                        type: 'TOGGLE',
                                                                       },
                                                                       {
-                                                                        type:
-                                                                          'VARIABLE',
+                                                                        type: 'VARIABLE',
                                                                         label:
                                                                           'Test attribute',
-                                                                        key:
-                                                                          'dataComponentAttribute',
+                                                                        key: 'dataComponentAttribute',
                                                                         value: [
                                                                           'Column',
                                                                         ],
-                                                                        configuration: {
-                                                                          condition: {
-                                                                            type:
-                                                                              'SHOW',
-                                                                            option:
-                                                                              'advancedSettings',
-                                                                            comparator:
-                                                                              'EQ',
-                                                                            value: true,
-                                                                          },
-                                                                        },
-                                                                      },
-                                                                    ],
-                                                                    descendants: [
-                                                                      {
-                                                                        name:
-                                                                          'Button',
-                                                                        style: {
-                                                                          overwrite: {
-                                                                            backgroundColor: {
-                                                                              type:
-                                                                                'STATIC',
-                                                                              value:
-                                                                                'transparent',
-                                                                            },
-                                                                            boxShadow:
-                                                                              'none',
-                                                                            color: {
-                                                                              type:
-                                                                                'THEME_COLOR',
-                                                                              value:
-                                                                                'primary',
-                                                                            },
-                                                                            fontFamily:
-                                                                              'Roboto',
-                                                                            fontSize:
-                                                                              '0.875rem',
-                                                                            fontStyle:
-                                                                              'none',
-                                                                            fontWeight:
-                                                                              '400',
-                                                                            padding: [
-                                                                              '0.6875rem',
-                                                                              '0.6875rem',
-                                                                            ],
-                                                                            textDecoration:
-                                                                              'none',
-                                                                            textTransform:
-                                                                              'none',
-                                                                          },
-                                                                        },
-                                                                        options: [
+                                                                        configuration:
                                                                           {
-                                                                            label:
-                                                                              'Toggle visibility',
-                                                                            key:
-                                                                              'visible',
-                                                                            value: true,
-                                                                            type:
-                                                                              'TOGGLE',
-                                                                            configuration: {
-                                                                              as:
-                                                                                'VISIBILITY',
-                                                                            },
-                                                                          },
-                                                                          {
-                                                                            type:
-                                                                              'VARIABLE',
-                                                                            label:
-                                                                              'Button text',
-                                                                            key:
-                                                                              'buttonText',
-                                                                            value: [
-                                                                              '',
-                                                                            ],
-                                                                          },
-                                                                          {
-                                                                            value: false,
-                                                                            label:
-                                                                              'Full width',
-                                                                            key:
-                                                                              'fullWidth',
-                                                                            type:
-                                                                              'TOGGLE',
-                                                                          },
-                                                                          {
-                                                                            label:
-                                                                              'Icon',
-                                                                            key:
-                                                                              'icon',
-                                                                            value:
-                                                                              'ChevronRight',
-                                                                            type:
-                                                                              'ICON',
-                                                                          },
-                                                                          {
-                                                                            value:
-                                                                              'medium',
-                                                                            label:
-                                                                              'Icon size',
-                                                                            key:
-                                                                              'size',
-                                                                            type:
-                                                                              'CUSTOM',
-                                                                            configuration: {
-                                                                              as:
-                                                                                'BUTTONGROUP',
-                                                                              dataType:
-                                                                                'string',
-                                                                              allowedInput: [
-                                                                                {
-                                                                                  name:
-                                                                                    'Large',
-                                                                                  value:
-                                                                                    'large',
-                                                                                },
-                                                                                {
-                                                                                  name:
-                                                                                    'Medium',
-                                                                                  value:
-                                                                                    'medium',
-                                                                                },
-                                                                                {
-                                                                                  name:
-                                                                                    'Small',
-                                                                                  value:
-                                                                                    'small',
-                                                                                },
-                                                                              ],
-                                                                              condition: {
-                                                                                type:
-                                                                                  'HIDE',
-                                                                                option:
-                                                                                  'icon',
-                                                                                comparator:
-                                                                                  'EQ',
-                                                                                value:
-                                                                                  'None',
-                                                                              },
-                                                                            },
-                                                                          },
-                                                                          {
-                                                                            type:
-                                                                              'CUSTOM',
-                                                                            label:
-                                                                              'Icon position',
-                                                                            key:
-                                                                              'iconPosition',
-                                                                            value:
-                                                                              'start',
-                                                                            configuration: {
-                                                                              as:
-                                                                                'BUTTONGROUP',
-                                                                              dataType:
-                                                                                'string',
-                                                                              allowedInput: [
-                                                                                {
-                                                                                  name:
-                                                                                    'Start',
-                                                                                  value:
-                                                                                    'start',
-                                                                                },
-                                                                                {
-                                                                                  name:
-                                                                                    'End',
-                                                                                  value:
-                                                                                    'end',
-                                                                                },
-                                                                              ],
-                                                                              condition: {
-                                                                                type:
-                                                                                  'HIDE',
-                                                                                option:
-                                                                                  'icon',
-                                                                                comparator:
-                                                                                  'EQ',
-                                                                                value:
-                                                                                  'None',
-                                                                              },
-                                                                            },
-                                                                          },
-                                                                          {
-                                                                            value: [
-                                                                              '0rem',
-                                                                              '0rem',
-                                                                              '0rem',
-                                                                              '0rem',
-                                                                            ],
-                                                                            label:
-                                                                              'Outer space',
-                                                                            key:
-                                                                              'outerSpacing',
-                                                                            type:
-                                                                              'SIZES',
-                                                                          },
-                                                                          {
-                                                                            label:
-                                                                              'Disabled',
-                                                                            key:
-                                                                              'disabled',
-                                                                            value: false,
-                                                                            type:
-                                                                              'TOGGLE',
-                                                                          },
-                                                                          {
-                                                                            label:
-                                                                              'Add Tooltip',
-                                                                            key:
-                                                                              'addTooltip',
-                                                                            value: false,
-                                                                            type:
-                                                                              'TOGGLE',
-                                                                          },
-                                                                          {
-                                                                            label:
-                                                                              'Toggle tooltip visibility',
-                                                                            key:
-                                                                              'hasVisibleTooltip',
-                                                                            value: true,
-                                                                            type:
-                                                                              'TOGGLE',
-                                                                            configuration: {
-                                                                              as:
-                                                                                'VISIBILITY',
-                                                                              condition: {
-                                                                                type:
-                                                                                  'SHOW',
-                                                                                option:
-                                                                                  'addTooltip',
-                                                                                comparator:
-                                                                                  'EQ',
-                                                                                value: true,
-                                                                              },
-                                                                            },
-                                                                          },
-                                                                          {
-                                                                            type:
-                                                                              'VARIABLE',
-                                                                            label:
-                                                                              'Tooltip Content',
-                                                                            key:
-                                                                              'tooltipContent',
-                                                                            value: [
-                                                                              'Tips',
-                                                                            ],
-                                                                            configuration: {
-                                                                              condition: {
-                                                                                type:
-                                                                                  'SHOW',
-                                                                                option:
-                                                                                  'addTooltip',
-                                                                                comparator:
-                                                                                  'EQ',
-                                                                                value: true,
-                                                                              },
-                                                                            },
-                                                                          },
-                                                                          {
-                                                                            label:
-                                                                              'Tooltip Placement',
-                                                                            key:
-                                                                              'tooltipPlacement',
-                                                                            value:
-                                                                              'bottom',
-                                                                            type:
-                                                                              'CUSTOM',
-                                                                            configuration: {
-                                                                              as:
-                                                                                'DROPDOWN',
-                                                                              dataType:
-                                                                                'string',
-                                                                              allowedInput: [
-                                                                                {
-                                                                                  name:
-                                                                                    'Top Start',
-                                                                                  value:
-                                                                                    'top-start',
-                                                                                },
-                                                                                {
-                                                                                  name:
-                                                                                    'Top',
-                                                                                  value:
-                                                                                    'top',
-                                                                                },
-                                                                                {
-                                                                                  name:
-                                                                                    'Top End',
-                                                                                  value:
-                                                                                    'top-end',
-                                                                                },
-                                                                                {
-                                                                                  name:
-                                                                                    'Right',
-                                                                                  value:
-                                                                                    'right',
-                                                                                },
-                                                                                {
-                                                                                  name:
-                                                                                    'Left',
-                                                                                  value:
-                                                                                    'left',
-                                                                                },
-                                                                                {
-                                                                                  name:
-                                                                                    'Botttom Start',
-                                                                                  value:
-                                                                                    'bottom-start',
-                                                                                },
-                                                                                {
-                                                                                  name:
-                                                                                    'Bottom',
-                                                                                  value:
-                                                                                    'bottom',
-                                                                                },
-                                                                                {
-                                                                                  name:
-                                                                                    'Bottom End',
-                                                                                  value:
-                                                                                    'bottom-end',
-                                                                                },
-                                                                              ],
-                                                                              condition: {
-                                                                                type:
-                                                                                  'SHOW',
-                                                                                option:
-                                                                                  'addTooltip',
-                                                                                comparator:
-                                                                                  'EQ',
-                                                                                value: true,
-                                                                              },
-                                                                            },
-                                                                          },
-                                                                          {
-                                                                            type:
-                                                                              'COLOR',
-                                                                            label:
-                                                                              'Tooltip Background',
-                                                                            key:
-                                                                              'tooltipBackground',
-                                                                            value:
-                                                                              'Medium',
-                                                                            configuration: {
-                                                                              condition: {
-                                                                                type:
-                                                                                  'SHOW',
-                                                                                option:
-                                                                                  'addTooltip',
-                                                                                comparator:
-                                                                                  'EQ',
-                                                                                value: true,
-                                                                              },
-                                                                            },
-                                                                          },
-                                                                          {
-                                                                            type:
-                                                                              'COLOR',
-                                                                            label:
-                                                                              'Tooltip Text',
-                                                                            key:
-                                                                              'tooltipText',
-                                                                            value:
-                                                                              'Black',
-                                                                            configuration: {
-                                                                              condition: {
-                                                                                type:
-                                                                                  'SHOW',
-                                                                                option:
-                                                                                  'addTooltip',
-                                                                                comparator:
-                                                                                  'EQ',
-                                                                                value: true,
-                                                                              },
-                                                                            },
-                                                                          },
-                                                                          {
-                                                                            value: false,
-                                                                            label:
-                                                                              'Advanced settings',
-                                                                            key:
-                                                                              'advancedSettings',
-                                                                            type:
-                                                                              'TOGGLE',
-                                                                          },
-                                                                          {
-                                                                            type:
-                                                                              'VARIABLE',
-                                                                            label:
-                                                                              'Test attribute',
-                                                                            key:
-                                                                              'dataComponentAttribute',
-                                                                            value: [
-                                                                              'Button',
-                                                                            ],
-                                                                            configuration: {
-                                                                              condition: {
-                                                                                type:
-                                                                                  'SHOW',
+                                                                            condition:
+                                                                              {
+                                                                                type: 'SHOW',
                                                                                 option:
                                                                                   'advancedSettings',
                                                                                 comparator:
                                                                                   'EQ',
                                                                                 value: true,
                                                                               },
-                                                                            },
                                                                           },
-                                                                        ],
-                                                                        descendants: [],
                                                                       },
                                                                     ],
+                                                                    descendants:
+                                                                      [
+                                                                        {
+                                                                          name: 'Button',
+                                                                          style:
+                                                                            {
+                                                                              overwrite:
+                                                                                {
+                                                                                  backgroundColor:
+                                                                                    {
+                                                                                      type: 'STATIC',
+                                                                                      value:
+                                                                                        'transparent',
+                                                                                    },
+                                                                                  boxShadow:
+                                                                                    'none',
+                                                                                  color:
+                                                                                    {
+                                                                                      type: 'THEME_COLOR',
+                                                                                      value:
+                                                                                        'primary',
+                                                                                    },
+                                                                                  fontFamily:
+                                                                                    'Roboto',
+                                                                                  fontSize:
+                                                                                    '0.875rem',
+                                                                                  fontStyle:
+                                                                                    'none',
+                                                                                  fontWeight:
+                                                                                    '400',
+                                                                                  padding:
+                                                                                    [
+                                                                                      '0.6875rem',
+                                                                                      '0.6875rem',
+                                                                                    ],
+                                                                                  textDecoration:
+                                                                                    'none',
+                                                                                  textTransform:
+                                                                                    'none',
+                                                                                },
+                                                                            },
+                                                                          options:
+                                                                            [
+                                                                              {
+                                                                                label:
+                                                                                  'Toggle visibility',
+                                                                                key: 'visible',
+                                                                                value: true,
+                                                                                type: 'TOGGLE',
+                                                                                configuration:
+                                                                                  {
+                                                                                    as: 'VISIBILITY',
+                                                                                  },
+                                                                              },
+                                                                              {
+                                                                                type: 'VARIABLE',
+                                                                                label:
+                                                                                  'Button text',
+                                                                                key: 'buttonText',
+                                                                                value:
+                                                                                  [
+                                                                                    '',
+                                                                                  ],
+                                                                              },
+                                                                              {
+                                                                                value: false,
+                                                                                label:
+                                                                                  'Full width',
+                                                                                key: 'fullWidth',
+                                                                                type: 'TOGGLE',
+                                                                              },
+                                                                              {
+                                                                                label:
+                                                                                  'Icon',
+                                                                                key: 'icon',
+                                                                                value:
+                                                                                  'ChevronRight',
+                                                                                type: 'ICON',
+                                                                              },
+                                                                              {
+                                                                                value:
+                                                                                  'medium',
+                                                                                label:
+                                                                                  'Icon size',
+                                                                                key: 'size',
+                                                                                type: 'CUSTOM',
+                                                                                configuration:
+                                                                                  {
+                                                                                    as: 'BUTTONGROUP',
+                                                                                    dataType:
+                                                                                      'string',
+                                                                                    allowedInput:
+                                                                                      [
+                                                                                        {
+                                                                                          name: 'Large',
+                                                                                          value:
+                                                                                            'large',
+                                                                                        },
+                                                                                        {
+                                                                                          name: 'Medium',
+                                                                                          value:
+                                                                                            'medium',
+                                                                                        },
+                                                                                        {
+                                                                                          name: 'Small',
+                                                                                          value:
+                                                                                            'small',
+                                                                                        },
+                                                                                      ],
+                                                                                    condition:
+                                                                                      {
+                                                                                        type: 'HIDE',
+                                                                                        option:
+                                                                                          'icon',
+                                                                                        comparator:
+                                                                                          'EQ',
+                                                                                        value:
+                                                                                          'None',
+                                                                                      },
+                                                                                  },
+                                                                              },
+                                                                              {
+                                                                                type: 'CUSTOM',
+                                                                                label:
+                                                                                  'Icon position',
+                                                                                key: 'iconPosition',
+                                                                                value:
+                                                                                  'start',
+                                                                                configuration:
+                                                                                  {
+                                                                                    as: 'BUTTONGROUP',
+                                                                                    dataType:
+                                                                                      'string',
+                                                                                    allowedInput:
+                                                                                      [
+                                                                                        {
+                                                                                          name: 'Start',
+                                                                                          value:
+                                                                                            'start',
+                                                                                        },
+                                                                                        {
+                                                                                          name: 'End',
+                                                                                          value:
+                                                                                            'end',
+                                                                                        },
+                                                                                      ],
+                                                                                    condition:
+                                                                                      {
+                                                                                        type: 'HIDE',
+                                                                                        option:
+                                                                                          'icon',
+                                                                                        comparator:
+                                                                                          'EQ',
+                                                                                        value:
+                                                                                          'None',
+                                                                                      },
+                                                                                  },
+                                                                              },
+                                                                              {
+                                                                                value:
+                                                                                  [
+                                                                                    '0rem',
+                                                                                    '0rem',
+                                                                                    '0rem',
+                                                                                    '0rem',
+                                                                                  ],
+                                                                                label:
+                                                                                  'Outer space',
+                                                                                key: 'outerSpacing',
+                                                                                type: 'SIZES',
+                                                                              },
+                                                                              {
+                                                                                label:
+                                                                                  'Disabled',
+                                                                                key: 'disabled',
+                                                                                value: false,
+                                                                                type: 'TOGGLE',
+                                                                              },
+                                                                              {
+                                                                                label:
+                                                                                  'Add Tooltip',
+                                                                                key: 'addTooltip',
+                                                                                value: false,
+                                                                                type: 'TOGGLE',
+                                                                              },
+                                                                              {
+                                                                                label:
+                                                                                  'Toggle tooltip visibility',
+                                                                                key: 'hasVisibleTooltip',
+                                                                                value: true,
+                                                                                type: 'TOGGLE',
+                                                                                configuration:
+                                                                                  {
+                                                                                    as: 'VISIBILITY',
+                                                                                    condition:
+                                                                                      {
+                                                                                        type: 'SHOW',
+                                                                                        option:
+                                                                                          'addTooltip',
+                                                                                        comparator:
+                                                                                          'EQ',
+                                                                                        value: true,
+                                                                                      },
+                                                                                  },
+                                                                              },
+                                                                              {
+                                                                                type: 'VARIABLE',
+                                                                                label:
+                                                                                  'Tooltip Content',
+                                                                                key: 'tooltipContent',
+                                                                                value:
+                                                                                  [
+                                                                                    'Tips',
+                                                                                  ],
+                                                                                configuration:
+                                                                                  {
+                                                                                    condition:
+                                                                                      {
+                                                                                        type: 'SHOW',
+                                                                                        option:
+                                                                                          'addTooltip',
+                                                                                        comparator:
+                                                                                          'EQ',
+                                                                                        value: true,
+                                                                                      },
+                                                                                  },
+                                                                              },
+                                                                              {
+                                                                                label:
+                                                                                  'Tooltip Placement',
+                                                                                key: 'tooltipPlacement',
+                                                                                value:
+                                                                                  'bottom',
+                                                                                type: 'CUSTOM',
+                                                                                configuration:
+                                                                                  {
+                                                                                    as: 'DROPDOWN',
+                                                                                    dataType:
+                                                                                      'string',
+                                                                                    allowedInput:
+                                                                                      [
+                                                                                        {
+                                                                                          name: 'Top Start',
+                                                                                          value:
+                                                                                            'top-start',
+                                                                                        },
+                                                                                        {
+                                                                                          name: 'Top',
+                                                                                          value:
+                                                                                            'top',
+                                                                                        },
+                                                                                        {
+                                                                                          name: 'Top End',
+                                                                                          value:
+                                                                                            'top-end',
+                                                                                        },
+                                                                                        {
+                                                                                          name: 'Right',
+                                                                                          value:
+                                                                                            'right',
+                                                                                        },
+                                                                                        {
+                                                                                          name: 'Left',
+                                                                                          value:
+                                                                                            'left',
+                                                                                        },
+                                                                                        {
+                                                                                          name: 'Botttom Start',
+                                                                                          value:
+                                                                                            'bottom-start',
+                                                                                        },
+                                                                                        {
+                                                                                          name: 'Bottom',
+                                                                                          value:
+                                                                                            'bottom',
+                                                                                        },
+                                                                                        {
+                                                                                          name: 'Bottom End',
+                                                                                          value:
+                                                                                            'bottom-end',
+                                                                                        },
+                                                                                      ],
+                                                                                    condition:
+                                                                                      {
+                                                                                        type: 'SHOW',
+                                                                                        option:
+                                                                                          'addTooltip',
+                                                                                        comparator:
+                                                                                          'EQ',
+                                                                                        value: true,
+                                                                                      },
+                                                                                  },
+                                                                              },
+                                                                              {
+                                                                                type: 'COLOR',
+                                                                                label:
+                                                                                  'Tooltip Background',
+                                                                                key: 'tooltipBackground',
+                                                                                value:
+                                                                                  'Medium',
+                                                                                configuration:
+                                                                                  {
+                                                                                    condition:
+                                                                                      {
+                                                                                        type: 'SHOW',
+                                                                                        option:
+                                                                                          'addTooltip',
+                                                                                        comparator:
+                                                                                          'EQ',
+                                                                                        value: true,
+                                                                                      },
+                                                                                  },
+                                                                              },
+                                                                              {
+                                                                                type: 'COLOR',
+                                                                                label:
+                                                                                  'Tooltip Text',
+                                                                                key: 'tooltipText',
+                                                                                value:
+                                                                                  'Black',
+                                                                                configuration:
+                                                                                  {
+                                                                                    condition:
+                                                                                      {
+                                                                                        type: 'SHOW',
+                                                                                        option:
+                                                                                          'addTooltip',
+                                                                                        comparator:
+                                                                                          'EQ',
+                                                                                        value: true,
+                                                                                      },
+                                                                                  },
+                                                                              },
+                                                                              {
+                                                                                value: false,
+                                                                                label:
+                                                                                  'Advanced settings',
+                                                                                key: 'advancedSettings',
+                                                                                type: 'TOGGLE',
+                                                                              },
+                                                                              {
+                                                                                type: 'VARIABLE',
+                                                                                label:
+                                                                                  'Test attribute',
+                                                                                key: 'dataComponentAttribute',
+                                                                                value:
+                                                                                  [
+                                                                                    'Button',
+                                                                                  ],
+                                                                                configuration:
+                                                                                  {
+                                                                                    condition:
+                                                                                      {
+                                                                                        type: 'SHOW',
+                                                                                        option:
+                                                                                          'advancedSettings',
+                                                                                        comparator:
+                                                                                          'EQ',
+                                                                                        value: true,
+                                                                                      },
+                                                                                  },
+                                                                              },
+                                                                            ],
+                                                                          descendants:
+                                                                            [],
+                                                                        },
+                                                                      ],
                                                                   },
                                                                 ],
                                                               },
@@ -47962,7 +47330,7 @@
                 }
               >
                 <ModelSelector
-                  onChange={value => {
+                  onChange={(value) => {
                     setShowValidation(false);
                     setModelId(value);
                     setImageProperty('');
@@ -47976,7 +47344,7 @@
               <Field label="Image property">
                 <PropertySelector
                   modelId={modelId}
-                  onChange={value => {
+                  onChange={(value) => {
                     setImageProperty(value);
                   }}
                   value={imageProperty}
@@ -47989,7 +47357,7 @@
                 </Text>
                 <PropertySelector
                   modelId={modelId}
-                  onChange={value => {
+                  onChange={(value) => {
                     setTitleProperty(value);
                   }}
                   value={titleProperty}
@@ -47999,7 +47367,7 @@
               <Field label="Subheader property">
                 <PropertySelector
                   modelId={modelId}
-                  onChange={value => {
+                  onChange={(value) => {
                     setSubheaderProperty(value);
                   }}
                   value={subheaderProperty}
@@ -48009,7 +47377,7 @@
               <Field label="Description property">
                 <PropertySelector
                   modelId={modelId}
-                  onChange={value => {
+                  onChange={(value) => {
                     setDescriptionProperty(value);
                   }}
                   value={descriptionProperty}
@@ -48125,22 +47493,19 @@
                 ];
               }
               if (descriptionProperty.id) {
-                dataGrid.descendants[0].descendants[2].descendants[0].options[0].value = [
-                  enrichVarObj(descriptionProperty),
-                ];
+                dataGrid.descendants[0].descendants[2].descendants[0].options[0].value =
+                  [enrichVarObj(descriptionProperty)];
               }
 
               const dataList = getDescendantByRef('#dataList', prefabStructure);
               dataList.options[0].value = modelId;
               if (imageProperty.id) {
-                dataList.descendants[0].descendants[0].descendants[0].descendants[0].descendants[0].descendants[0].options[1].value = [
-                  enrichVarObj(imageProperty),
-                ];
+                dataList.descendants[0].descendants[0].descendants[0].descendants[0].descendants[0].descendants[0].options[1].value =
+                  [enrichVarObj(imageProperty)];
               }
               if (titleProperty.id) {
-                dataList.descendants[0].descendants[0].descendants[0].descendants[0].descendants[1].descendants[0].options[0].value = [
-                  enrichVarObj(titleProperty),
-                ];
+                dataList.descendants[0].descendants[0].descendants[0].descendants[0].descendants[1].descendants[0].options[0].value =
+                  [enrichVarObj(titleProperty)];
                 newPrefab.interactions.push(
                   {
                     name: 'Filter',
@@ -48179,14 +47544,12 @@
                 );
               }
               if (subheaderProperty.id) {
-                dataList.descendants[0].descendants[0].descendants[0].descendants[0].descendants[1].descendants[1].options[0].value = [
-                  enrichVarObj(subheaderProperty),
-                ];
+                dataList.descendants[0].descendants[0].descendants[0].descendants[0].descendants[1].descendants[1].options[0].value =
+                  [enrichVarObj(subheaderProperty)];
               }
               if (descriptionProperty.id) {
-                dataList.descendants[0].descendants[0].descendants[0].descendants[0].descendants[1].descendants[2].options[0].value = [
-                  enrichVarObj(descriptionProperty),
-                ];
+                dataList.descendants[0].descendants[0].descendants[0].descendants[0].descendants[1].descendants[2].options[0].value =
+                  [enrichVarObj(descriptionProperty)];
               }
 
               newPrefab.structure[0].descendants = prefabStructure;

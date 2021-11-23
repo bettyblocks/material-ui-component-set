@@ -29,13 +29,8 @@
       dataComponentAttribute = ['CheckboxGroup'],
     } = options;
 
-    const {
-      env,
-      getCustomModelAttribute,
-      getProperty,
-      useAllQuery,
-      useText,
-    } = B;
+    const { env, getCustomModelAttribute, getProperty, useAllQuery, useText } =
+      B;
     const displayError = showError === 'built-in';
     const isDev = env === 'dev';
     const [errorState, setErrorState] = useState(false);
@@ -73,8 +68,8 @@
 
       return value
         .split(',')
-        .filter(part => part !== '')
-        .map(str => str.trim());
+        .filter((part) => part !== '')
+        .map((str) => str.trim());
     };
 
     const [values, setValues] = useState(getValues());
@@ -94,7 +89,12 @@
           }, {})
         : {};
 
-    const { loading, error: err, data, refetch } = useAllQuery(
+    const {
+      loading,
+      error: err,
+      data,
+      refetch,
+    } = useAllQuery(
       model,
       {
         filter,
@@ -144,16 +144,16 @@
       FormLabel,
     } = window.MaterialUI.Core;
 
-    const handleChange = evt => {
+    const handleChange = (evt) => {
       const { checked, value } = evt.target;
       setErrorState(false);
-      setValues(state => {
+      setValues((state) => {
         if (checked) return state.concat(value);
-        return state.filter(v => v !== value);
+        return state.filter((v) => v !== value);
       });
     };
 
-    const invalidHandler = event => {
+    const invalidHandler = (event) => {
       event.preventDefault();
       setAfterFirstInvalidation(true);
       setErrorState(true);
@@ -189,12 +189,12 @@
       if (optionType === 'static') {
         return (checkboxOptions || '')
           .split('\n')
-          .map(opt => renderCheckbox(opt, opt));
+          .map((opt) => renderCheckbox(opt, opt));
       }
       if (isDev) return renderCheckbox('Placeholder', false);
       if (loading) return <span>Loading...</span>;
       if (err && displayError) return <span>{err.message}</span>;
-      return results.map(item =>
+      return results.map((item) =>
         renderCheckbox(item[labelProperty.name], `${item[valueProperty.name]}`),
       );
     };
@@ -228,7 +228,7 @@
     );
     return isDev ? <div className={classes.root}>{Control}</div> : Control;
   })(),
-  styles: B => t => {
+  styles: (B) => (t) => {
     const { color: colorFunc, Styling } = B;
     const style = new Styling(t);
     const getOpacColor = (col, val) => colorFunc.alpha(col, val);

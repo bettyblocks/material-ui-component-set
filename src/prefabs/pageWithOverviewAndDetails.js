@@ -31,13 +31,12 @@
     const [properties, setProperties] = React.useState([]);
     const [detailProperties, setDetailProperties] = React.useState([]);
     const [modelValidation, setModelValidation] = React.useState(false);
-    const [propertiesValidation, setPropertiesValidation] = React.useState(
-      false,
-    );
+    const [propertiesValidation, setPropertiesValidation] =
+      React.useState(false);
     const [detailsValidation, setDetailsValidation] = React.useState(false);
     const [stepNumber, setStepNumber] = React.useState(1);
 
-    const rowOptions = width => {
+    const rowOptions = (width) => {
       const widthOption = width || 'XL';
       const rowOption = [
         {
@@ -390,11 +389,11 @@
       skip: !modelId,
     });
 
-    const enrichVarObj = obj => {
+    const enrichVarObj = (obj) => {
       const returnObj = obj;
       if (data && data.model) {
         const property = data.model.properties.find(
-          prop => prop.id === obj.id[0],
+          (prop) => prop.id === obj.id[0],
         );
         if (property) {
           returnObj.name = `{{ ${data.model.name}.${property.name} }}`;
@@ -404,7 +403,7 @@
     };
 
     const stepper = {
-      setStep: step => {
+      setStep: (step) => {
         if (step === 1) {
           return (
             <>
@@ -417,7 +416,7 @@
                 }
               >
                 <ModelSelector
-                  onChange={value => {
+                  onChange={(value) => {
                     setModelValidation(false);
                     setModelId(value);
                     setPropertiesValidation(false);
@@ -450,7 +449,7 @@
                     'SIGNED_PDF',
                     'SUM',
                   ]}
-                  onChange={value => {
+                  onChange={(value) => {
                     setPropertiesValidation(!value.length);
                     setProperties(value);
                   }}
@@ -474,7 +473,7 @@
             <PropertiesSelector
               modelId={modelId}
               value={detailProperties}
-              onChange={value => {
+              onChange={(value) => {
                 setDetailsValidation(!value.length);
                 setDetailProperties(value);
               }}
@@ -4391,13 +4390,11 @@
                                                           dataType: 'string',
                                                           allowedInput: [
                                                             {
-                                                              name:
-                                                                'Internal page',
+                                                              name: 'Internal page',
                                                               value: 'internal',
                                                             },
                                                             {
-                                                              name:
-                                                                'External page',
+                                                              name: 'External page',
                                                               value: 'external',
                                                             },
                                                           ],
@@ -4517,8 +4514,7 @@
                                                       {
                                                         type: 'VARIABLE',
                                                         label: 'Test attribute',
-                                                        key:
-                                                          'dataComponentAttribute',
+                                                        key: 'dataComponentAttribute',
                                                         value: ['Text'],
                                                         configuration: {
                                                           condition: {
@@ -5149,7 +5145,7 @@
         ];
 
         const dataTable = getDescendantByRef('#dataTable', prefabStructure);
-        properties.forEach(property => {
+        properties.forEach((property) => {
           dataTable.descendants.push({
             name: 'DataTableColumn',
             options: [
@@ -5964,7 +5960,7 @@
         };
 
         detailProperties.forEach((detail, detailIndex) => {
-          const isOdd = num => num % 2;
+          const isOdd = (num) => num % 2;
           if (isOdd(detailIndex)) {
             newDetail(2, detail);
           } else {
@@ -5973,7 +5969,7 @@
         });
 
         const idProperty = data.model.properties.find(
-          property => property.name === 'id',
+          (property) => property.name === 'id',
         );
 
         const interactions = [
@@ -6059,16 +6055,19 @@
           </Box>
         </Box>
       ),
-      progressBar: titles => {
+      progressBar: (titles) => {
         const titlesArray = titles;
         return (
           <Box
             justify="center"
             margin={{ bottom: '2rem', left: '2rem', top: '-1rem' }}
           >
-            <Text size="medium" weight="bold">{`Step: ${stepNumber} / ${
+            <Text size="medium" weight="bold">
+              {`Step: ${stepNumber} / ${
               stepper.stepAmount
-            } - ${titlesArray[stepNumber - 1]}`}</Text>
+                titlesArray[stepNumber - 1]
+              }`}
+            </Text>
           </Box>
         );
       },

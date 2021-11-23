@@ -27,7 +27,7 @@
     save,
   }) => {
     const [rows, setRows] = React.useState([{ index: 1, columns: 2 }]);
-    const createElements = n => {
+    const createElements = (n) => {
       const elements = [];
       for (let i = 0; i < n; i += 1) {
         elements.push(
@@ -72,14 +72,12 @@
               <Box direction="column" basis="2/3">
                 <Field
                   info={
-                    <>
-                      <Text size="small" color="grey700">
-                        Click the <b>+ Add row</b> button to add a new row to
-                        the page.
-                        <br />
-                        You can specify the amount of columns per row.
-                      </Text>
-                    </>
+                    <Text size="small" color="grey700">
+                      Click the <b>+ Add row</b> button to add a new row to the
+                      page.
+                      <br />
+                      You can specify the amount of columns per row.
+                    </Text>
                   }
                 >
                   <Button
@@ -95,7 +93,7 @@
                     }}
                   />
                 </Field>
-                {rows.map(row => (
+                {rows.map((row) => (
                   <Field>
                     <Box direction="row">
                       <Box
@@ -104,13 +102,16 @@
                         alignSelf="center"
                         pad={{ right: '15px' }}
                       >
-                        <Text>Row {row.index}</Text>
+                        <Text>
+                          Row
+                          {row.index}
+                        </Text>
                       </Box>
                       <Box direction="column" basis="auto">
                         <ButtonGroup
                           onChange={({ target: { value } }) => {
                             const index = rows.findIndex(
-                              currentRow => currentRow.index === row.index,
+                              (currentRow) => currentRow.index === row.index,
                             );
                             const updatedRows = rows;
                             updatedRows[index].columns = parseInt(value, 10);
@@ -159,10 +160,10 @@
                           label="X"
                           value={row.index}
                           disabled={!(rows.length > 1)}
-                          onClick={event => {
+                          onClick={(event) => {
                             const newRows = [...rows];
                             const index = newRows.findIndex(
-                              currentRow =>
+                              (currentRow) =>
                                 currentRow.index ===
                                 parseInt(event.target.value, 10),
                             );
@@ -185,7 +186,7 @@
               </Box>
               <Box direction="column" basis="1/3" margin={{ top: '11%' }}>
                 <Text color="#666d85">Preview:</Text>
-                {rows.map(row => (
+                {rows.map((row) => (
                   <Box
                     border={{
                       color: '#AFB5C8',
@@ -217,7 +218,7 @@
           onClose={close}
           onSave={() => {
             const newPrefab = { ...prefab };
-            rows.forEach(row => {
+            rows.forEach((row) => {
               const newRow = {
                 name: 'Row',
                 options: [

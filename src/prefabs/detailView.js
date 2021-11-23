@@ -30,11 +30,11 @@
       variables: { id: modelId },
     });
 
-    const enrichVarObj = obj => {
+    const enrichVarObj = (obj) => {
       const returnObj = obj;
       if (data && data.model) {
         const property = data.model.properties.find(
-          prop => prop.id === returnObj.id[0],
+          (prop) => prop.id === returnObj.id[0],
         );
         if (property) {
           returnObj.name = `{{ ${data.model.name}.${property.name} }}`;
@@ -49,7 +49,7 @@
         <Content>
           <Field label="Model">
             <ModelSelector
-              onChange={value => {
+              onChange={(value) => {
                 setModelId(value);
               }}
               value={modelId}
@@ -73,7 +73,7 @@
             <PropertiesSelector
               modelId={modelId}
               value={properties}
-              onChange={value => {
+              onChange={(value) => {
                 setProperties(value);
               }}
             />
@@ -160,7 +160,7 @@
                 descendants: [],
               });
 
-              properties.forEach(property => {
+              properties.forEach((property) => {
                 newPrefab.structure[0].descendants[0].descendants[0].descendants.push(
                   {
                     name: 'Column',
