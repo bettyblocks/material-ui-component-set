@@ -109,6 +109,21 @@
      */
     const [value, setValue] = useState(initalValue);
 
+    useEffect(() => {
+      if (isDev && typeof value === 'string') {
+        if (value.trim() === '') {
+          setValue([]);
+        } else {
+          setValue(
+            value
+              .trim()
+              .split(',')
+              .map(x => x.trim()),
+          );
+        }
+      }
+    }, [multiple]);
+
     /*
      * User input in the autocomplete. In case of freeSolo this is the same as `value`
      */
