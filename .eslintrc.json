@@ -6,6 +6,7 @@
     "jasmine": true
   },
   "rules": {
+    "react/jsx-props-no-spreading": 0,
     "react/destructuring-assignment": 0,
     "react-hooks/exhaustive-deps": 0,
     "react/prefer-exact-props": 0,
