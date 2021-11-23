@@ -469,9 +469,11 @@
           ) || ''
         );
       });
-    }
 
-    defaultValueEvaluatedRef.current = true;
+      defaultValueEvaluatedRef.current = true;
+    } else if (!isDev && !defaultValueEvaluatedRef.current && freeSolo) {
+      defaultValueEvaluatedRef.current = true;
+    }
 
     B.defineFunction('Clear', () => {
       setValue(multiple ? [] : '');
