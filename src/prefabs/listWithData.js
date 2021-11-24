@@ -39,7 +39,6 @@
               onChange={value => {
                 setModelId(value);
               }}
-              scopedModels
               value={modelId}
             />
           </Field>
