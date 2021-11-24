@@ -14,12 +14,6 @@
           type: 'MODEL',
         },
         {
-          value: '',
-          label: 'ModelTest',
-          key: 'modelTest',
-          type: 'MODEL',
-        },
-        {
           value: {},
           label: 'Filter',
           key: 'filter',
