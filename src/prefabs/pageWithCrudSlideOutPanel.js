@@ -17480,6 +17480,7 @@
                                             configuration: {
                                               as: 'BUTTONGROUP',
                                               dataType: 'string',
+                                              dependsOn: 'model',
                                               allowedInput: [
                                                 {
                                                   name: 'Ascending',
@@ -17615,6 +17616,7 @@
                                             configuration: {
                                               as: 'DROPDOWN',
                                               dataType: 'string',
+                                              dependsOn: 'model',
                                               allowedInput: [
                                                 { name: '5', value: '5' },
                                                 { name: '10', value: '10' },

@@ -3840,6 +3840,7 @@
                         configuration: {
                           as: 'BUTTONGROUP',
                           dataType: 'string',
+                          dependsOn: 'model',
                           condition: {
                             type: 'HIDE',
                             option: 'orderBy',
@@ -3887,6 +3888,9 @@
                         label: 'Rows per page (max 50)',
                         key: 'take',
                         type: 'NUMBER',
+                        configuration: {
+                          dependsOn: 'model',
+                        },
                       },
                       {
                         value: '',
