@@ -1,3 +1,10 @@
+## [1.184.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.184.3...v1.184.4) (2021-11-25)
+
+
+### Bug Fixes
+
+* **form:** use useOneQuery instead of useAllQuery to load a record ([1213cc1](https://github.com/bettyblocks/material-ui-component-set/commit/1213cc16fed025133504f1824c2cbe733c425b6b))
+
 ## [1.184.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.184.2...v1.184.3) (2021-11-18)
 
 
