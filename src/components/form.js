@@ -13,7 +13,7 @@
           getActionInput,
           getIdProperty,
           ModelProvider,
-          useAllQuery,
+          useOneQuery,
           useEndpoint,
           useText,
         } = B;
@@ -243,15 +243,13 @@
 
           const {
             loading: isFetching,
-            data: records,
+            data: item,
             error: err,
             refetch,
-          } = useAllQuery(
+          } = useOneQuery(
             modelId,
             {
               filter: applyFilter,
-              skip: 0,
-              take: 1,
             },
             !applyFilter,
           );
@@ -267,8 +265,6 @@
           if (err) {
             B.triggerEvent('onDataError', err);
           }
-
-          const item = records && records.results[0];
 
           if (item) {
             if (item.id) {
