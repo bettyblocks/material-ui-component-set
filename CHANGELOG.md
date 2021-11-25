@@ -1,3 +1,11 @@
+## [1.184.5](https://github.com/bettyblocks/material-ui-component-set/compare/v1.184.4...v1.184.5) (2021-11-25)
+
+
+### Bug Fixes
+
+* component broke error when checking multiple option ([062511d](https://github.com/bettyblocks/material-ui-component-set/commit/062511df543c86167a15fe5ccb6333a493ae5b02))
+* default value out of take ([9869540](https://github.com/bettyblocks/material-ui-component-set/commit/9869540ea3c26346a06a6e8f6dd72387e30f4031))
+
 ## [1.184.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.184.3...v1.184.4) (2021-11-25)
 
 
