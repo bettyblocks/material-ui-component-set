@@ -50,7 +50,6 @@
           <GetOne
             modelId={model}
             filter={selectedFilter}
-            relationOptions={relationOptions}
             fetchPolicy="cache-and-network"
           >
             {({ loading, error, data, refetch }) => {

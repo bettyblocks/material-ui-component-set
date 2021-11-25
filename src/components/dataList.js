@@ -263,7 +263,6 @@
             },
           },
           !model,
-          relationOptions,
         );
 
         const { hasResults, data: relationData } = useRelation(
