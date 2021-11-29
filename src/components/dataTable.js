@@ -263,7 +263,11 @@
           setPreviousSearchTerm(searchTerm);
           setNewSearch(true);
         } else {
-          if (newSearch || (!autoLoadOnScroll && skipAppend.current)) {
+          if (
+            newSearch ||
+            (!autoLoadOnScroll && skipAppend.current) ||
+            pagination === 'never'
+          ) {
             setResults(data.results);
           } else {
             setResults(prev => [...prev, ...data.results]);
