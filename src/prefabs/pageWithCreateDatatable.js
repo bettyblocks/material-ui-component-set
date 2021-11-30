@@ -4085,6 +4085,7 @@
                                 configuration: {
                                   as: 'BUTTONGROUP',
                                   dataType: 'string',
+                                  dependsOn: 'model',
                                   allowedInput: [
                                     { name: 'Ascending', value: 'asc' },
                                     { name: 'Descending', value: 'desc' },
@@ -4207,6 +4208,7 @@
                                 configuration: {
                                   as: 'DROPDOWN',
                                   dataType: 'string',
+                                  dependsOn: 'model',
                                   allowedInput: [
                                     { name: '5', value: '5' },
                                     { name: '10', value: '10' },

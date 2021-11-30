@@ -9,7 +9,7 @@
       Header,
       Field,
       Footer,
-      ModelSelector,
+      ModelRelationSelector,
       PropertySelector,
     },
     prefab,
@@ -36,7 +36,7 @@
         <Header title="Configure a list with data" onClose={close} />
         <Content>
           <Field label="Model">
-            <ModelSelector
+            <ModelRelationSelector
               onChange={value => {
                 setModelId(value);
               }}
@@ -158,6 +158,7 @@
               configuration: {
                 as: 'BUTTONGROUP',
                 dataType: 'string',
+                dependsOn: 'model',
                 condition: {
                   type: 'HIDE',
                   option: 'orderBy',
@@ -205,6 +206,9 @@
               label: 'Rows per page (max 50)',
               key: 'take',
               type: 'NUMBER',
+              configuration: {
+                dependsOn: 'model',
+              },
             },
             {
               value: '',

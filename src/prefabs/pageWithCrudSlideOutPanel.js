@@ -25726,6 +25726,8 @@
                                                                     'BUTTONGROUP',
                                                                   dataType:
                                                                     'string',
+                                                                  dependsOn:
+                                                                    'model',
                                                                   allowedInput: [
                                                                     {
                                                                       name:
@@ -25936,6 +25938,8 @@
                                                                     'DROPDOWN',
                                                                   dataType:
                                                                     'string',
+                                                                  dependsOn:
+                                                                    'model',
                                                                   allowedInput: [
                                                                     {
                                                                       name: '5',

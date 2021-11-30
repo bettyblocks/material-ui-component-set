@@ -16116,6 +16116,7 @@
                                                 ],
                                               },
                                               {
+<<<<<<< HEAD
                                                 name: 'Box',
                                                 options: [
                                                   {
@@ -16271,6 +16272,20 @@
                                                         comparator: 'EQ',
                                                         value: true,
                                                       },
+=======
+                                                value: 'asc',
+                                                label: 'Sort order',
+                                                key: 'sortOrder',
+                                                type: 'CUSTOM',
+                                                configuration: {
+                                                  as: 'BUTTONGROUP',
+                                                  dataType: 'string',
+                                                  dependsOn: 'model',
+                                                  allowedInput: [
+                                                    {
+                                                      name: 'Ascending',
+                                                      value: 'asc',
+>>>>>>> feat/add-modelrelation-selector-to-listwthdata
                                                     },
                                                   },
                                                   {
@@ -16546,6 +16561,7 @@
                                                       },
                                                     },
                                                   },
+<<<<<<< HEAD
                                                   {
                                                     value: 'Transparent',
                                                     label: 'Border color',
@@ -16559,6 +16575,27 @@
                                                         comparator: 'EQ',
                                                         value: true,
                                                       },
+=======
+                                                },
+                                              },
+                                              {
+                                                value: '5',
+                                                label: 'Rows per page',
+                                                key: 'take',
+                                                type: 'CUSTOM',
+                                                configuration: {
+                                                  as: 'DROPDOWN',
+                                                  dataType: 'string',
+                                                  dependsOn: 'model',
+                                                  allowedInput: [
+                                                    { name: '5', value: '5' },
+                                                    { name: '10', value: '10' },
+                                                    { name: '25', value: '25' },
+                                                    { name: '50', value: '50' },
+                                                    {
+                                                      name: '100',
+                                                      value: '100',
+>>>>>>> feat/add-modelrelation-selector-to-listwthdata
                                                     },
                                                   },
                                                   {
@@ -16690,6 +16727,7 @@
                                                         configuration: {
                                                           as: 'BUTTONGROUP',
                                                           dataType: 'string',
+                                                          dependsOn: 'model',
                                                           allowedInput: [
                                                             {
                                                               name: 'Ascending',
@@ -16852,6 +16890,7 @@
                                                         configuration: {
                                                           as: 'DROPDOWN',
                                                           dataType: 'string',
+                                                          dependsOn: 'model',
                                                           allowedInput: [
                                                             {
                                                               name: '5',
