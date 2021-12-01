@@ -5,8 +5,7 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { Tabs, Tab } = window.MaterialUI.Core;
-    const { Icons } = window.MaterialUI;
-    const { Children, env, useText } = B;
+    const { Children, env, useText, Icon } = B;
     const {
       defaultValue,
       variant,
@@ -34,6 +33,9 @@
     };
     const setSelectedTab = index => {
       setValue(index);
+      if (!activeTabs.includes(index)) {
+        setActiveTabs(prevActiveTabs => [...prevActiveTabs, index]);
+      }
     };
     useEffect(() => {
       if (isDev) {
@@ -83,9 +85,7 @@
                   style={{ flexDirection: getFlexDirection() }}
                 >
                   <div className={classes.iconWrapper}>
-                    {icon && icon !== 'None'
-                      ? React.createElement(Icons[icon])
-                      : undefined}
+                    {icon && icon !== 'None' ? <Icon name={icon} /> : undefined}
                   </div>
                   <div>
                     {typeof label === 'string' ? label : useText(label)}
@@ -110,23 +110,6 @@
           children,
           (child, index) => {
             const { options: childOptions = {} } = child.props || {};
-            if (!preLoadTabs) {
-              if (isDev || showAllTabs || activeTabs.indexOf(index) !== -1) {
-                return (
-                  <Children
-                    index={index}
-                    value={value}
-                    tabData={tabData}
-                    setTabData={setTabData}
-                    showAllTabs={showAllTabs}
-                    setSelectedTab={setSelectedTab}
-                  >
-                    {React.cloneElement(child, { ...childOptions })}
-                  </Children>
-                );
-              }
-              return <></>;
-            }
             return (
               <Children
                 index={index}
@@ -135,6 +118,8 @@
                 setTabData={setTabData}
                 showAllTabs={showAllTabs}
                 setSelectedTab={setSelectedTab}
+                activeTabs={activeTabs}
+                preLoadTabs={preLoadTabs}
               >
                 {React.cloneElement(child, { ...childOptions })}
               </Children>
