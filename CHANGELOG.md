@@ -1,3 +1,10 @@
+## [1.184.6](https://github.com/bettyblocks/material-ui-component-set/compare/v1.184.5...v1.184.6) (2021-12-01)
+
+
+### Bug Fixes
+
+* able to filter with "never" pagination ([ca9a075](https://github.com/bettyblocks/material-ui-component-set/commit/ca9a075129327d9795aaeb44c388957286f7e5e2))
+
 ## [1.184.5](https://github.com/bettyblocks/material-ui-component-set/compare/v1.184.4...v1.184.5) (2021-11-25)
 
 
