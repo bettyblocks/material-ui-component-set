@@ -185,6 +185,9 @@
               label: 'Hide built-in search field',
               key: 'hideSearch',
               type: 'TOGGLE',
+              configuration: {
+                dependsOn: 'model',
+              },
             },
             {
               label: 'Pagination',
@@ -194,6 +197,7 @@
               configuration: {
                 as: 'BUTTONGROUP',
                 dataType: 'string',
+                dependsOn: 'model',
                 allowedInput: [
                   { name: 'Always', value: 'always' },
                   { name: 'When needed', value: 'whenNeeded' },
@@ -284,6 +288,7 @@
               configuration: {
                 as: 'BUTTONGROUP',
                 dataType: 'string',
+                dependsOn: 'model',
                 allowedInput: [
                   { name: 'Built in', value: 'built-in' },
                   { name: 'Interaction', value: 'interaction' },
@@ -298,6 +303,7 @@
               configuration: {
                 as: 'BUTTONGROUP',
                 dataType: 'string',
+                dependsOn: 'model',
                 allowedInput: [
                   { name: 'Message', value: 'default' },
                   { name: 'Content', value: 'showChildren' },
@@ -311,6 +317,7 @@
               key: 'loadingText',
               type: 'VARIABLE',
               configuration: {
+                dependsOn: 'model',
                 condition: {
                   type: 'SHOW',
                   option: 'loadingType',

@@ -251,6 +251,9 @@
           label: 'Hide built-in search field',
           key: 'hideSearch',
           type: 'TOGGLE',
+          configuration: {
+            dependsOn: 'model',
+          },
         },
         {
           type: 'VARIABLE',
@@ -258,6 +261,7 @@
           key: 'labelSearchOn',
           value: ['Search on'],
           configuration: {
+            dependsOn: 'model',
             condition: {
               type: 'HIDE',
               option: 'hideSearch',
@@ -292,6 +296,7 @@
           configuration: {
             as: 'BUTTONGROUP',
             dataType: 'string',
+            dependsOn: 'model',
             allowedInput: [
               { name: 'Always', value: 'always' },
               { name: 'When needed', value: 'whenNeeded' },
@@ -305,6 +310,7 @@
           key: 'autoLoadOnScroll',
           type: 'TOGGLE',
           configuration: {
+            dependsOn: 'model',
             condition: {
               type: 'SHOW',
               option: 'pagination',
@@ -319,6 +325,7 @@
           key: 'autoLoadTakeAmount',
           type: 'CUSTOM',
           configuration: {
+            dependsOn: 'model',
             as: 'DROPDOWN',
             dataType: 'string',
             allowedInput: [
@@ -550,6 +557,7 @@
           key: 'showError',
           type: 'CUSTOM',
           configuration: {
+            dependsOn: 'model',
             as: 'BUTTONGROUP',
             dataType: 'string',
             allowedInput: [

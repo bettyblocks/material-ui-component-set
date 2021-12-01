@@ -4597,6 +4597,9 @@
                                     label: 'Hide built-in search field',
                                     key: 'hideSearch',
                                     type: 'TOGGLE',
+                                    configuration: {
+                                      dependsOn: 'model',
+                                    },
                                   },
                                   {
                                     label: 'Pagination',
@@ -4606,6 +4609,7 @@
                                     configuration: {
                                       as: 'BUTTONGROUP',
                                       dataType: 'string',
+                                      dependsOn: 'model',
                                       allowedInput: [
                                         { name: 'Always', value: 'always' },
                                         {
@@ -4699,6 +4703,7 @@
                                     configuration: {
                                       as: 'BUTTONGROUP',
                                       dataType: 'string',
+                                      dependsOn: 'model',
                                       allowedInput: [
                                         { name: 'Built in', value: 'built-in' },
                                         {
@@ -4716,6 +4721,7 @@
                                     configuration: {
                                       as: 'BUTTONGROUP',
                                       dataType: 'string',
+                                      dependsOn: 'model',
                                       allowedInput: [
                                         { name: 'Message', value: 'default' },
                                         {
@@ -4732,6 +4738,7 @@
                                     key: 'loadingText',
                                     type: 'VARIABLE',
                                     configuration: {
+                                      dependsOn: 'model',
                                       condition: {
                                         type: 'SHOW',
                                         option: 'loadingType',

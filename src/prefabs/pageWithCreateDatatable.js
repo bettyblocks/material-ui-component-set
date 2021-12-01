@@ -4112,6 +4112,9 @@
                                 label: 'Hide built-in search field',
                                 key: 'hideSearch',
                                 type: 'TOGGLE',
+                                configuration: {
+                                  dependsOn: 'model',
+                                },
                               },
                               {
                                 type: 'VARIABLE',
@@ -4119,6 +4122,7 @@
                                 key: 'labelSearchOn',
                                 value: ['Search on'],
                                 configuration: {
+                                  dependsOn: 'model',
                                   condition: {
                                     type: 'HIDE',
                                     option: 'hideSearch',
@@ -4153,6 +4157,7 @@
                                 configuration: {
                                   as: 'BUTTONGROUP',
                                   dataType: 'string',
+                                  dependsOn: 'model',
                                   allowedInput: [
                                     { name: 'Always', value: 'always' },
                                     {
@@ -4169,6 +4174,7 @@
                                 key: 'autoLoadOnScroll',
                                 type: 'TOGGLE',
                                 configuration: {
+                                  dependsOn: 'model',
                                   condition: {
                                     type: 'SHOW',
                                     option: 'pagination',
@@ -4185,6 +4191,7 @@
                                 configuration: {
                                   as: 'DROPDOWN',
                                   dataType: 'string',
+                                  dependsOn: 'model',
                                   allowedInput: [
                                     { name: '5', value: '5' },
                                     { name: '10', value: '10' },
@@ -4416,6 +4423,7 @@
                                 configuration: {
                                   as: 'BUTTONGROUP',
                                   dataType: 'string',
+                                  dependsOn: 'model',
                                   allowedInput: [
                                     { name: 'Built in', value: 'built-in' },
                                     {
