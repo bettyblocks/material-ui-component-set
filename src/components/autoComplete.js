@@ -109,6 +109,21 @@
      */
     const [value, setValue] = useState(initalValue);
 
+    useEffect(() => {
+      if (isDev && typeof value === 'string') {
+        if (value.trim() === '') {
+          setValue([]);
+        } else {
+          setValue(
+            value
+              .trim()
+              .split(',')
+              .map(x => x.trim()),
+          );
+        }
+      }
+    }, [multiple]);
+
     /*
      * User input in the autocomplete. In case of freeSolo this is the same as `value`
      */
@@ -128,6 +143,8 @@
      * Keep state of interaction filters coming from other components
      */
     const [interactionFilter, setInteractionFilter] = useState({});
+
+    const defaultValueEvaluatedRef = useRef(false);
 
     const { kind: propertyKind = '', values: propertyValues } =
       getProperty(property) || {};
@@ -270,7 +287,7 @@
               : debouncedInputValue,
           },
         });
-      } else if (!freeSolo) {
+      } else if (!freeSolo && defaultValueEvaluatedRef.current) {
         if (!filter._or) {
           filter._or = [];
         }
@@ -336,12 +353,15 @@
               typeof value === 'string' ? value : value[valueProp.name],
           },
         },
-        {
+      ];
+
+      if (defaultValueEvaluatedRef.current) {
+        filter._or.push({
           [valueProp.name]: {
             neq: typeof value === 'string' ? value : value[valueProp.name],
           },
-        },
-      ];
+        });
+      }
     }
     /* eslint-enable no-underscore-dangle */
 
@@ -433,6 +453,41 @@
     if (error && displayError) {
       valid = false;
       message = 'Something went wrong while loading.';
+    }
+
+    // If the default value is a value that lives outside the take range of the query we should fetch the values before we continue.
+    if (
+      !isDev &&
+      !defaultValueEvaluatedRef.current &&
+      !freeSolo &&
+      value &&
+      results
+    ) {
+      setValue(prev => {
+        if (multiple) {
+          return prev
+            .map(val =>
+              results.find(
+                result =>
+                  result[valueProp.name] ===
+                  (valuePropIsNumber ? parseInt(val, 10) : val),
+              ),
+            )
+            .filter(x => typeof x !== 'undefined');
+        }
+
+        return (
+          results.find(result =>
+            result[valueProp.name] === valuePropIsNumber
+              ? parseInt(prev, 10)
+              : prev,
+          ) || ''
+        );
+      });
+
+      defaultValueEvaluatedRef.current = true;
+    } else if (!isDev && !defaultValueEvaluatedRef.current && freeSolo) {
+      defaultValueEvaluatedRef.current = true;
     }
 
     B.defineFunction('Clear', () => {
@@ -908,6 +963,16 @@
           '&.Mui-disabled': {
             pointerEvents: 'none',
             opacity: '0.7',
+          },
+          '& .MuiChip-root': {
+            color: ({ options: { textColorChip } }) => [
+              style.getColor(textColorChip),
+              '!important',
+            ],
+            backgroundColor: ({ options: { backgroundColorChip } }) => [
+              style.getColor(backgroundColorChip),
+              '!important',
+            ],
           },
         },
         '& .MuiIconButton-root': {

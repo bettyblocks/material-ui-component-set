@@ -1,3 +1,47 @@
+## [1.184.6](https://github.com/bettyblocks/material-ui-component-set/compare/v1.184.5...v1.184.6) (2021-12-01)
+
+
+### Bug Fixes
+
+* able to filter with "never" pagination ([ca9a075](https://github.com/bettyblocks/material-ui-component-set/commit/ca9a075129327d9795aaeb44c388957286f7e5e2))
+
+## [1.184.5](https://github.com/bettyblocks/material-ui-component-set/compare/v1.184.4...v1.184.5) (2021-11-25)
+
+
+### Bug Fixes
+
+* component broke error when checking multiple option ([062511d](https://github.com/bettyblocks/material-ui-component-set/commit/062511df543c86167a15fe5ccb6333a493ae5b02))
+* default value out of take ([9869540](https://github.com/bettyblocks/material-ui-component-set/commit/9869540ea3c26346a06a6e8f6dd72387e30f4031))
+
+## [1.184.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.184.3...v1.184.4) (2021-11-25)
+
+
+### Bug Fixes
+
+* **form:** use useOneQuery instead of useAllQuery to load a record ([1213cc1](https://github.com/bettyblocks/material-ui-component-set/commit/1213cc16fed025133504f1824c2cbe733c425b6b))
+
+## [1.184.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.184.2...v1.184.3) (2021-11-18)
+
+
+### Bug Fixes
+
+* **autocomplete:** add chip text and background color styling ([d0ac118](https://github.com/bettyblocks/material-ui-component-set/commit/d0ac1180817b1f987fe02834cb9bf5e8d9ee6881))
+
+## [1.184.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.184.1...v1.184.2) (2021-11-16)
+
+
+### Bug Fixes
+
+* default value is out of take range ([386cde5](https://github.com/bettyblocks/material-ui-component-set/commit/386cde50266b403b91af3248f07da202610ba11e))
+
+## [1.184.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.184.0...v1.184.1) (2021-11-16)
+
+
+### Bug Fixes
+
+* add secondary title default value to list items ([71422ac](https://github.com/bettyblocks/material-ui-component-set/commit/71422acb35aecd0c050597ac93b87960db869af6))
+* update list and list item in drawer component ([fb1b556](https://github.com/bettyblocks/material-ui-component-set/commit/fb1b55697017d4376b67e8dd0f6e85906bed0949))
+
 # [1.184.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.183.0...v1.184.0) (2021-11-15)
 
 
