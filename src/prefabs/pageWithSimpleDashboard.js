@@ -16769,7 +16769,7 @@
                                                       {
                                                         label: 'Pagination',
                                                         key: 'pagination',
-                                                        value: 'always',
+                                                        value: 'never',
                                                         type: 'CUSTOM',
                                                         configuration: {
                                                           as: 'BUTTONGROUP',
