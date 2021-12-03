@@ -114,7 +114,7 @@
             value
               .trim()
               .split(',')
-              .map(x => x.trim()),
+              .map((x) => x.trim()),
           );
         }
       }
