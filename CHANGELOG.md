@@ -1,3 +1,11 @@
+## [1.184.7](https://github.com/bettyblocks/material-ui-component-set/compare/v1.184.6...v1.184.7) (2021-12-03)
+
+
+### Bug Fixes
+
+* add missing semantic release dependencies ([b1ed7ec](https://github.com/bettyblocks/material-ui-component-set/commit/b1ed7ecbdf24821f961a3fdaf4574d4711e53a62))
+* add onChange trigger to rating component ([5d4c3bb](https://github.com/bettyblocks/material-ui-component-set/commit/5d4c3bbeec91d9786e01bbd95ac7fddf0a96f540))
+
 ## [1.184.6](https://github.com/bettyblocks/material-ui-component-set/compare/v1.184.5...v1.184.6) (2021-12-01)
 
 
