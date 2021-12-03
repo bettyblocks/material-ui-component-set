@@ -77,6 +77,7 @@
       if (afterFirstInvalidation) {
         handleValidation();
       }
+      B.triggerEvent('onChange', newValue);
     };
 
     useEffect(() => {
