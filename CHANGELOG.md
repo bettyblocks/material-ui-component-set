@@ -1,3 +1,10 @@
+# [1.185.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.184.7...v1.185.0) (2021-12-03)
+
+
+### Features
+
+* update webpack to latest ([2aefdea](https://github.com/bettyblocks/material-ui-component-set/commit/2aefdeaf20d684875060a488c945b1dc99e2c3d0))
+
 ## [1.184.7](https://github.com/bettyblocks/material-ui-component-set/compare/v1.184.6...v1.184.7) (2021-12-03)
 
 
