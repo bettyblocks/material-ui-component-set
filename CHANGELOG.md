@@ -1,3 +1,10 @@
+# [1.187.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.186.0...v1.187.0) (2021-12-06)
+
+
+### Features
+
+* add ability to use data from many relations ([cd59b29](https://github.com/bettyblocks/material-ui-component-set/commit/cd59b298b1eaf0681deeba7e18ad32f74c7d0a6c))
+
 # [1.186.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.185.0...v1.186.0) (2021-12-06)
 
 
