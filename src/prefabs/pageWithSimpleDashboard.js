@@ -16690,6 +16690,7 @@
                                                         configuration: {
                                                           as: 'BUTTONGROUP',
                                                           dataType: 'string',
+                                                          dependsOn: 'model',
                                                           allowedInput: [
                                                             {
                                                               name: 'Ascending',
@@ -16726,6 +16727,9 @@
                                                           'Hide built-in search field',
                                                         key: 'hideSearch',
                                                         type: 'TOGGLE',
+                                                        configuration: {
+                                                          dependsOn: 'model',
+                                                        },
                                                       },
                                                       {
                                                         type: 'VARIABLE',
@@ -16733,6 +16737,7 @@
                                                         key: 'labelSearchOn',
                                                         value: ['Search on'],
                                                         configuration: {
+                                                          dependsOn: 'model',
                                                           condition: {
                                                             type: 'HIDE',
                                                             option:
@@ -16769,6 +16774,7 @@
                                                         configuration: {
                                                           as: 'BUTTONGROUP',
                                                           dataType: 'string',
+                                                          dependsOn: 'model',
                                                           allowedInput: [
                                                             {
                                                               name: 'Always',
@@ -16794,6 +16800,7 @@
                                                         key: 'autoLoadOnScroll',
                                                         type: 'TOGGLE',
                                                         configuration: {
+                                                          dependsOn: 'model',
                                                           condition: {
                                                             type: 'SHOW',
                                                             option:
@@ -16813,6 +16820,7 @@
                                                         configuration: {
                                                           as: 'DROPDOWN',
                                                           dataType: 'string',
+                                                          dependsOn: 'model',
                                                           allowedInput: [
                                                             {
                                                               name: '5',
@@ -16852,6 +16860,7 @@
                                                         configuration: {
                                                           as: 'DROPDOWN',
                                                           dataType: 'string',
+                                                          dependsOn: 'model',
                                                           allowedInput: [
                                                             {
                                                               name: '5',
@@ -17179,6 +17188,7 @@
                                                         configuration: {
                                                           as: 'BUTTONGROUP',
                                                           dataType: 'string',
+                                                          dependsOn: 'model',
                                                           allowedInput: [
                                                             {
                                                               name: 'Built in',
