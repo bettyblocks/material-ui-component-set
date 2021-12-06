@@ -1,3 +1,12 @@
+# [1.186.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.185.0...v1.186.0) (2021-12-06)
+
+
+### Features
+
+* added dependsonconfig for filter variables ([03ca0bd](https://github.com/bettyblocks/material-ui-component-set/commit/03ca0bd281f5f28cb5e6d1bd296641e10828d0f0))
+* change pagination type default on never ([12aa67c](https://github.com/bettyblocks/material-ui-component-set/commit/12aa67c6c62b8a69b7e93653664795ccf003db02))
+* implement modelrelationselector for listwithdata ([a5d0cf6](https://github.com/bettyblocks/material-ui-component-set/commit/a5d0cf6d51aee89d43968caccef56719a661f566))
+
 # [1.185.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.184.7...v1.185.0) (2021-12-03)
 
 
