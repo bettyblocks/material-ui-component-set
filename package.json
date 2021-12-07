@@ -1,6 +1,6 @@
 {
   "name": "component-set",
-  "version": "1.184.6",
+  "version": "1.187.0",
   "main": "dist/templates.json",
   "license": "UNLICENSED",
   "private": false,
@@ -8,6 +8,8 @@
     "@betty-blocks/cli": "^25.9.0",
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-angular": "^11.0.0",
+    "@semantic-release/changelog": "^5.0.1",
+    "@semantic-release/git": "^9.0.0",
     "eslint": "^5.9.0",
     "eslint-config-airbnb": "17.1.0",
     "eslint-config-prettier": "^3.3.0",
