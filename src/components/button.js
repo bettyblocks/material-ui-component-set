@@ -217,13 +217,17 @@
       </div>
     );
 
+    const handleClick = e => {
+      e.stopPropagation();
+    };
+
     const LinkComponent =
       linkType === 'internal' ? (
         <Link
           className={classes.linkComponent}
           {...linkProps}
           underline="none"
-          onClick={e => e.stopPropagation()}
+          onClick={handleClick}
         >
           {ButtonContent}
         </Link>
@@ -231,8 +235,10 @@
         <a
           className={classes.linkComponent}
           {...anchorProps}
-          onClick={e => e.stopPropagation()}
-          aria-hidden="true"
+          onClick={handleClick}
+          onKeyDown={handleClick}
+          role="button"
+          tabIndex="0"
         >
           {ButtonContent}
         </a>
