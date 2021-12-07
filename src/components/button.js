@@ -219,11 +219,21 @@
 
     const LinkComponent =
       linkType === 'internal' ? (
-        <Link className={classes.linkComponent} {...linkProps} underline="none">
+        <Link
+          className={classes.linkComponent}
+          {...linkProps}
+          underline="none"
+          onClick={e => e.stopPropagation()}
+        >
           {ButtonContent}
         </Link>
       ) : (
-        <a className={classes.linkComponent} {...anchorProps}>
+        <a
+          className={classes.linkComponent}
+          {...anchorProps}
+          onClick={e => e.stopPropagation()}
+          aria-hidden="true"
+        >
           {ButtonContent}
         </a>
       );
