@@ -365,6 +365,8 @@
     }
     /* eslint-enable no-underscore-dangle */
 
+    console.log('new auto complete');
+
     /*
      * Merge external filters (from interactions) into local filters
      */
@@ -375,6 +377,17 @@
       )
       .map(({ property: propertyArg, value: eventValue }) =>
         propertyArg.id.reduceRight((acc, field, index, arr) => {
+          if (
+            Array.isArray(eventValue) &&
+            B.getProperty(field).kind === 'belongs_to'
+          ) {
+            const operator = Object.keys(acc)[0];
+            return {
+              [operator]: [
+                ...acc[operator].map(entry => ({ [field]: { ...entry } })),
+              ],
+            };
+          }
           if (index === arr.length - 1) {
             return Array.isArray(eventValue)
               ? {
@@ -385,7 +398,7 @@
               : { [field]: { [propertyArg.operator]: eventValue } };
           }
 
-          return { [field]: acc };
+          return { [field]: acc }; // keep building tree
         }, {}),
       );
 
