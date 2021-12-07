@@ -379,7 +379,7 @@
             Array.isArray(eventValue) &&
             B.getProperty(field).kind === 'belongs_to'
           ) {
-            const operator = Object.keys(acc)[0];
+            const [operator] = Object.keys(acc);
             return {
               [operator]: [
                 ...acc[operator].map(entry => ({ [field]: { ...entry } })),
