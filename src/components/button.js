@@ -236,7 +236,7 @@
           className={classes.linkComponent}
           {...anchorProps}
           onClick={handleClick}
-          onKeyDown={handleClick}
+          onKeyUp={handleClick}
           role="button"
           tabIndex="0"
         >
