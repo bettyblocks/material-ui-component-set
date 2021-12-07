@@ -365,8 +365,6 @@
     }
     /* eslint-enable no-underscore-dangle */
 
-    console.log('new auto complete');
-
     /*
      * Merge external filters (from interactions) into local filters
      */
