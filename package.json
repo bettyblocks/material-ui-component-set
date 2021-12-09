@@ -1,6 +1,6 @@
 {
   "name": "component-set",
-  "version": "1.184.7",
+  "version": "1.187.0",
   "main": "dist/templates.json",
   "license": "UNLICENSED",
   "private": false,
@@ -21,8 +21,8 @@
     "nodemon": "^1.19.1",
     "prettier": "^1.15.3",
     "semantic-release": "^17.2.3",
-    "webpack": "^4.42.1",
-    "webpack-cli": "^3.3.11"
+    "webpack": "^5.64.4",
+    "webpack-cli": "^4.9.1"
   },
   "husky": {
     "hooks": {

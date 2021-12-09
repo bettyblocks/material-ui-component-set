@@ -13,6 +13,7 @@
           ModelProvider,
           useAllQuery,
           useFilter,
+          useRelation,
           useText,
           Icon,
         } = B;
@@ -233,7 +234,12 @@
         const completeFilter = deepMerge(newFilter, interactionFilters);
         const where = useFilter(completeFilter);
 
-        const { loading, error, data, refetch } = useAllQuery(
+        const {
+          loading: queryLoading,
+          error,
+          data: queryData,
+          refetch,
+        } = useAllQuery(
           model,
           {
             rawFilter: where,
@@ -258,6 +264,15 @@
           },
           !model,
         );
+
+        const { hasResults, data: relationData } = useRelation(
+          model,
+          {},
+          model === 'string',
+        );
+
+        const data = hasResults ? relationData : queryData;
+        const loading = hasResults ? false : queryLoading;
 
         useEffect(() => {
           if (isDev) {
@@ -286,7 +301,7 @@
             }
             setPrevData(data);
           }
-        }, [data, rowsPerPage]);
+        }, [queryData, rowsPerPage]);
 
         useEffect(() => {
           const handler = setTimeout(() => {
