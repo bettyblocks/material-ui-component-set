@@ -1,3 +1,12 @@
+## [1.187.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.187.0...v1.187.1) (2021-12-09)
+
+
+### Bug Fixes
+
+* better handle linting ([6985c99](https://github.com/bettyblocks/material-ui-component-set/commit/6985c99c580e99788afe8d4efd067705198a03f1))
+* onKeyUp rather than onKeyDown ([164df40](https://github.com/bettyblocks/material-ui-component-set/commit/164df40e3e268b02fd98a02bd199aa48a9673295))
+* stopPropagation when clicking links too ([3300a03](https://github.com/bettyblocks/material-ui-component-set/commit/3300a03ffd75bd4d5196055f44ac0ae41c1de655))
+
 # [1.187.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.186.0...v1.187.0) (2021-12-06)
 
 
