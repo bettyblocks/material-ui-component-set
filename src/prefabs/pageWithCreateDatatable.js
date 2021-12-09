@@ -7932,9 +7932,6 @@
                                     label: 'Body text',
                                     key: 'bodyText',
                                     value: ['New model created successfully'],
-                                    configuration: {
-                                      dependsOn: 'model',
-                                    },
                                   },
                                   {
                                     label:
