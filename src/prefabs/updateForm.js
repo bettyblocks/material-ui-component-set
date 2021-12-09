@@ -5421,9 +5421,6 @@
                     label: 'Body text',
                     key: 'bodyText',
                     value: ['Record successfully updated'],
-                    configuration: {
-                      dependsOn: 'model',
-                    },
                   },
                   {
                     label: 'Allow to overwrite by the server response',
@@ -5568,9 +5565,6 @@
                     label: 'Body text',
                     key: 'bodyText',
                     value: ['*Dynamic value from the Action response*'],
-                    configuration: {
-                      dependsOn: 'model',
-                    },
                   },
                   {
                     label: 'Allow to overwrite by the server response',
