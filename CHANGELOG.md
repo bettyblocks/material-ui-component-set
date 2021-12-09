@@ -1,3 +1,10 @@
+# [1.188.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.187.2...v1.188.0) (2021-12-09)
+
+
+### Features
+
+* remove dependsonmodel on alert comp ([6767666](https://github.com/bettyblocks/material-ui-component-set/commit/67676660127e9ba11c75eca42caccb759eaa2736))
+
 ## [1.187.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.187.1...v1.187.2) (2021-12-09)
 
 
