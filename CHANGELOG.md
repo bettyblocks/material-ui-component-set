@@ -1,3 +1,12 @@
+## [1.187.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.187.1...v1.187.2) (2021-12-09)
+
+
+### Bug Fixes
+
+* belongs_to multi value filtering ([e9a259d](https://github.com/bettyblocks/material-ui-component-set/commit/e9a259d07adc9dacd47222e847b7678445e8ca9a))
+* code style ([42eab13](https://github.com/bettyblocks/material-ui-component-set/commit/42eab13c7a28f39df1acebe8e18accd012453375))
+* console.log ([0242394](https://github.com/bettyblocks/material-ui-component-set/commit/02423949c52e633679c64fd9b716c1932be95dc5))
+
 ## [1.187.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.187.0...v1.187.1) (2021-12-09)
 
 
