@@ -17572,9 +17572,6 @@
           label: 'Body text',
           key: 'bodyText',
           value: [errorText],
-          configuration: {
-            dependsOn: 'model',
-          },
         },
         {
           label: 'Allow to overwrite by the server response',

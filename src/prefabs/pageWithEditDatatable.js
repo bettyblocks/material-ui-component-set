@@ -7037,9 +7037,6 @@
                                     label: 'Body text',
                                     key: 'bodyText',
                                     value: ['Model updated successfully'],
-                                    configuration: {
-                                      dependsOn: 'model',
-                                    },
                                   },
                                   {
                                     label:
