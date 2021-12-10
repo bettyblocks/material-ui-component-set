@@ -34,6 +34,8 @@
     const [activeStep, setActiveStep] = useState(activeStepIndex);
     const buttonNextText = useText(buttonNext);
     const buttonPrevText = useText(buttonPrev);
+    const dataComponentAttributeText =
+      useText(dataComponentAttribute) || 'Carousel';
     const numRendersRef = useRef(1);
     const [stepLabelData, setStepLabelData] = useState({});
     let orderPropertyPath = null;
@@ -77,10 +79,29 @@
       );
     };
 
+    const Step = function (props) {
+      const { active, item } = props;
+      const StepContent = (
+        <div className={classes.root}>
+          <img
+            src={
+              item[propertyName].url
+                ? item[propertyName].url
+                : item[propertyName]
+            }
+            alt="carousel"
+          />
+        </div>
+      );
+
+      return <>{active ? StepContent : null}</>;
+    };
+
     const MobileStepperCmp = function () {
-      if (autoplay && !isDev) {
-        useEffect(() => {
-          const interval = setInterval(() => {
+      useEffect(() => {
+        let interval;
+        if (autoplay && !isDev) {
+          interval = setInterval(() => {
             setActiveStep((prevActiveStep) => {
               const nextStep = prevActiveStep + 1;
               if (nextStep > children.length - 1) {
@@ -89,9 +110,13 @@
               return nextStep;
             });
           }, duration);
-          return () => clearInterval(interval);
-        }, [activeStep]);
-      }
+        }
+        return () => {
+          if (interval) {
+            clearInterval(interval);
+          }
+        };
+      }, [autoplay, isDev, activeStep]);
 
       const handleNext = () => {
         setActiveStep((prevActiveStep) => {
@@ -247,9 +272,10 @@
         maxSteps = totalCount;
       }
 
-      if (autoplay && !isDev) {
-        useEffect(() => {
-          const interval = setInterval(() => {
+      useEffect(() => {
+        let interval;
+        if (autoplay && !isDev) {
+          interval = setInterval(() => {
             setActiveStep((prevActiveStep) => {
               const nextStep = prevActiveStep + 1;
               if (nextStep > maxSteps - 1) {
@@ -258,9 +284,13 @@
               return nextStep;
             });
           }, duration);
-          return () => clearInterval(interval);
-        });
-      }
+        }
+        return () => {
+          if (interval) {
+            clearInterval(interval);
+          }
+        };
+      }, [autoplay, isDev]);
 
       if (loading) {
         return <div className={classes.skeleton} />;
@@ -298,24 +328,6 @@
           }
           return nextStep;
         });
-      };
-
-      const Step = function (props) {
-        const { active, item } = props;
-        const StepContent = (
-          <div className={classes.root}>
-            <img
-              src={
-                item[propertyName].url
-                  ? item[propertyName].url
-                  : item[propertyName]
-              }
-              alt="carousel"
-            />
-          </div>
-        );
-
-        return <>{active ? StepContent : null}</>;
       };
 
       const overlay = (
@@ -385,7 +397,7 @@
       return (
         <div
           className={classes.container}
-          data-component={useText(dataComponentAttribute) || 'Carousel'}
+          data-component={dataComponentAttributeText}
         >
           {results.length === 0 || isDev ? (
             <ImgPlaceholder />
