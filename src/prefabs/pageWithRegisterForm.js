@@ -9695,9 +9695,6 @@
                       value: [
                         'Your account has been created, you can now login',
                       ],
-                      configuration: {
-                        dependsOn: 'model',
-                      },
                     },
                     {
                       label: 'Allow to overwrite by the server response',
@@ -9842,9 +9839,6 @@
                       label: 'Body text',
                       key: 'bodyText',
                       value: ['*Dynamic value from the Action response*'],
-                      configuration: {
-                        dependsOn: 'model',
-                      },
                     },
                     {
                       label: 'Allow to overwrite by the server response',

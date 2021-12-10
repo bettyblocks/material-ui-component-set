@@ -4596,6 +4596,9 @@
                                     label: 'Hide built-in search field',
                                     key: 'hideSearch',
                                     type: 'TOGGLE',
+                                    configuration: {
+                                      dependsOn: 'model',
+                                    },
                                   },
                                   {
                                     label: 'Pagination',
@@ -4605,6 +4608,7 @@
                                     configuration: {
                                       as: 'BUTTONGROUP',
                                       dataType: 'string',
+                                      dependsOn: 'model',
                                       allowedInput: [
                                         { name: 'Always', value: 'always' },
                                         {
@@ -4620,6 +4624,9 @@
                                     label: 'Rows per page (max 50)',
                                     key: 'take',
                                     type: 'NUMBER',
+                                    configuration: {
+                                      dependsOn: 'model',
+                                    },
                                   },
                                   {
                                     value: '',
@@ -4695,6 +4702,7 @@
                                     configuration: {
                                       as: 'BUTTONGROUP',
                                       dataType: 'string',
+                                      dependsOn: 'model',
                                       allowedInput: [
                                         { name: 'Built in', value: 'built-in' },
                                         {
@@ -4712,6 +4720,7 @@
                                     configuration: {
                                       as: 'BUTTONGROUP',
                                       dataType: 'string',
+                                      dependsOn: 'model',
                                       allowedInput: [
                                         { name: 'Message', value: 'default' },
                                         {
@@ -4728,6 +4737,7 @@
                                     key: 'loadingText',
                                     type: 'VARIABLE',
                                     configuration: {
+                                      dependsOn: 'model',
                                       condition: {
                                         type: 'SHOW',
                                         option: 'loadingType',

@@ -21,9 +21,6 @@
           label: 'Body text',
           key: 'bodyText',
           value: ['Type your content here...'],
-          configuration: {
-            dependsOn: 'model',
-          },
         },
         {
           label: 'Allow to overwrite by the server response',

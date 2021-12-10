@@ -1,3 +1,51 @@
+# [1.188.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.187.2...v1.188.0) (2021-12-09)
+
+
+### Features
+
+* remove dependsonmodel on alert comp ([6767666](https://github.com/bettyblocks/material-ui-component-set/commit/67676660127e9ba11c75eca42caccb759eaa2736))
+
+## [1.187.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.187.1...v1.187.2) (2021-12-09)
+
+
+### Bug Fixes
+
+* belongs_to multi value filtering ([e9a259d](https://github.com/bettyblocks/material-ui-component-set/commit/e9a259d07adc9dacd47222e847b7678445e8ca9a))
+* code style ([42eab13](https://github.com/bettyblocks/material-ui-component-set/commit/42eab13c7a28f39df1acebe8e18accd012453375))
+* console.log ([0242394](https://github.com/bettyblocks/material-ui-component-set/commit/02423949c52e633679c64fd9b716c1932be95dc5))
+
+## [1.187.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.187.0...v1.187.1) (2021-12-09)
+
+
+### Bug Fixes
+
+* better handle linting ([6985c99](https://github.com/bettyblocks/material-ui-component-set/commit/6985c99c580e99788afe8d4efd067705198a03f1))
+* onKeyUp rather than onKeyDown ([164df40](https://github.com/bettyblocks/material-ui-component-set/commit/164df40e3e268b02fd98a02bd199aa48a9673295))
+* stopPropagation when clicking links too ([3300a03](https://github.com/bettyblocks/material-ui-component-set/commit/3300a03ffd75bd4d5196055f44ac0ae41c1de655))
+
+# [1.187.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.186.0...v1.187.0) (2021-12-06)
+
+
+### Features
+
+* add ability to use data from many relations ([cd59b29](https://github.com/bettyblocks/material-ui-component-set/commit/cd59b298b1eaf0681deeba7e18ad32f74c7d0a6c))
+
+# [1.186.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.185.0...v1.186.0) (2021-12-06)
+
+
+### Features
+
+* added dependsonconfig for filter variables ([03ca0bd](https://github.com/bettyblocks/material-ui-component-set/commit/03ca0bd281f5f28cb5e6d1bd296641e10828d0f0))
+* change pagination type default on never ([12aa67c](https://github.com/bettyblocks/material-ui-component-set/commit/12aa67c6c62b8a69b7e93653664795ccf003db02))
+* implement modelrelationselector for listwithdata ([a5d0cf6](https://github.com/bettyblocks/material-ui-component-set/commit/a5d0cf6d51aee89d43968caccef56719a661f566))
+
+# [1.185.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.184.7...v1.185.0) (2021-12-03)
+
+
+### Features
+
+* update webpack to latest ([2aefdea](https://github.com/bettyblocks/material-ui-component-set/commit/2aefdeaf20d684875060a488c945b1dc99e2c3d0))
+
 ## [1.184.7](https://github.com/bettyblocks/material-ui-component-set/compare/v1.184.6...v1.184.7) (2021-12-03)
 
 
