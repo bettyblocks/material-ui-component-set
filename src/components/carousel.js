@@ -79,7 +79,7 @@
       if (autoplay && !isDev) {
         useEffect(() => {
           const interval = setInterval(() => {
-            setActiveStep(prevActiveStep => {
+            setActiveStep((prevActiveStep) => {
               const nextStep = prevActiveStep + 1;
               if (nextStep > children.length - 1) {
                 return 0;
@@ -92,7 +92,7 @@
       }
 
       const handleNext = () => {
-        setActiveStep(prevActiveStep => {
+        setActiveStep((prevActiveStep) => {
           const nextStep = prevActiveStep + 1;
           if (nextStep > children.length - 1) {
             if (continousLoop) {
@@ -105,7 +105,7 @@
       };
 
       const handleBack = () => {
-        setActiveStep(prevActiveStep => {
+        setActiveStep((prevActiveStep) => {
           const nextStep = prevActiveStep - 1;
           if (nextStep < 0) {
             if (continousLoop) {
@@ -248,7 +248,7 @@
       if (autoplay && !isDev) {
         useEffect(() => {
           const interval = setInterval(() => {
-            setActiveStep(prevActiveStep => {
+            setActiveStep((prevActiveStep) => {
               const nextStep = prevActiveStep + 1;
               if (nextStep > maxSteps - 1) {
                 return 0;
@@ -273,7 +273,7 @@
       });
 
       const handleNext = () => {
-        setActiveStep(prevActiveStep => {
+        setActiveStep((prevActiveStep) => {
           const nextStep = prevActiveStep + 1;
           if (nextStep > maxSteps - 1) {
             if (continousLoop) {
@@ -286,7 +286,7 @@
       };
 
       const handleBack = () => {
-        setActiveStep(prevActiveStep => {
+        setActiveStep((prevActiveStep) => {
           const nextStep = prevActiveStep - 1;
           if (nextStep < 0) {
             if (continousLoop) {
@@ -298,7 +298,7 @@
         });
       };
 
-      const Step = props => {
+      const Step = (props) => {
         const { active, item } = props;
         const StepContent = (
           <div className={classes.root}>
@@ -415,7 +415,7 @@
       StepperComponent
     );
   })(),
-  styles: B => t => {
+  styles: (B) => (t) => {
     const { env, Styling } = B;
     const style = new Styling(t);
     const isDev = env === 'dev';

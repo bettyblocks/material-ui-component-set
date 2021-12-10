@@ -31,13 +31,10 @@
     const [properties, setProperties] = React.useState([]);
     const [modelValidation, setModelValidation] = React.useState(false);
     const [stepNumber, setStepNumber] = React.useState(1);
-    const [propertiesValidation, setPropertiesValidation] = React.useState(
-      false,
-    );
-    const [
-      detailPropertiesValidation,
-      setDetailPropertiesValidation,
-    ] = React.useState(false);
+    const [propertiesValidation, setPropertiesValidation] =
+      React.useState(false);
+    const [detailPropertiesValidation, setDetailPropertiesValidation] =
+      React.useState(false);
     const [detailProperties, setDetailProperties] = React.useState([]);
 
     const getDescendantByRef = (refValue, structure) =>
@@ -925,7 +922,7 @@
       ],
     });
 
-    const tabCard = headerTitle => ({
+    const tabCard = (headerTitle) => ({
       name: 'Card',
       options: [
         {
@@ -1495,8 +1492,8 @@
       descendants: [],
     });
 
-    const makeDetailsArray = propertiesInput => {
-      const descendants = propertiesInput.map(propertyInput => ({
+    const makeDetailsArray = (propertiesInput) => {
+      const descendants = propertiesInput.map((propertyInput) => ({
         name: 'Row',
         options: [
           {
@@ -2476,7 +2473,7 @@
     };
 
     const makeInputDescendantsArray = (propertiesInput, kind) => {
-      const descendants = propertiesInput.map(property => {
+      const descendants = propertiesInput.map((property) => {
         switch (property.kind) {
           case 'INTEGER': {
             return {
@@ -17695,7 +17692,7 @@
     });
 
     const stepper = {
-      setStep: step => {
+      setStep: (step) => {
         if (step === 1) {
           return (
             <>
@@ -17708,7 +17705,7 @@
                 }
               >
                 <ModelSelector
-                  onChange={value => {
+                  onChange={(value) => {
                     setModelValidation(false);
                     setModelId(value);
                   }}
@@ -17728,7 +17725,7 @@
                 <PropertiesSelector
                   modelId={modelId}
                   value={properties}
-                  onChange={value => {
+                  onChange={(value) => {
                     setProperties(value);
                   }}
                   disabledKinds={disabledKinds}
@@ -17750,7 +17747,7 @@
               <PropertiesSelector
                 modelId={modelId}
                 value={detailProperties}
-                onChange={value => {
+                onChange={(value) => {
                   setDetailPropertiesValidation(false);
                   setDetailProperties(value);
                 }}
@@ -17767,7 +17764,7 @@
         }
         const newPrefab = { ...prefab };
         const prop = data.model.properties.find(
-          property => property.name === 'id',
+          (property) => property.name === 'id',
         );
 
         const variables = [
@@ -18157,8 +18154,8 @@
 
         const dataTable = getDescendantByRef('#dataTable', prefabStructure);
         dataTable.options[0].value = modelId;
-        properties.filter(property => property.kind !== 'SERIAL');
-        properties.forEach(property => {
+        properties.filter((property) => property.kind !== 'SERIAL');
+        properties.forEach((property) => {
           dataTable.descendants.push({
             name: 'DataTableColumn',
             options: [
@@ -18281,14 +18278,13 @@
 
         const detailsRecordCard = tabCard(`${data.model.label}`);
         const detailsInfoProperties = detailProperties.filter(
-          propertyInput =>
+          (propertyInput) =>
             propertyInput.label !== 'Created at' &&
             propertyInput.label !== 'Updated at' &&
             propertyInput.label !== 'Id',
         );
-        detailsRecordCard.descendants[1].descendants = makeDetailsArray(
-          detailProperties,
-        );
+        detailsRecordCard.descendants[1].descendants =
+          makeDetailsArray(detailProperties);
         detailsDataContainer.descendants.push({ ...detailsRecordCard });
 
         const createTab = getDescendantByRef('#createTab', prefabStructure);
@@ -18298,14 +18294,13 @@
           detailsInfoProperties,
         );
         newPrefab.actions[1].events[0].options.modelId = modelId;
-        newPrefab.actions[1].events[0].options.assign = detailsInfoProperties.map(
-          property => ({
+        newPrefab.actions[1].events[0].options.assign =
+          detailsInfoProperties.map((property) => ({
             leftHandSide: property.id[0],
             ref: {
               path: ['#customModelVariableId', `#attribute_${property.id[0]}`],
             },
-          }),
-        );
+          }));
         createRecordForm.descendants = [
           errorAlert(
             '#createError',
@@ -18833,7 +18828,7 @@
         editCard.descendants[1].descendants = makeInputDescendantsArray(
           detailsInfoProperties,
           'edit',
-        ).filter(item => item !== undefined);
+        ).filter((item) => item !== undefined);
         editRecordForm.descendants = [
           errorAlert(
             '#editError',
@@ -21934,8 +21929,8 @@
           },
         ];
 
-        newPrefab.actions[2].events[0].options.assign = detailsInfoProperties.map(
-          property => ({
+        newPrefab.actions[2].events[0].options.assign =
+          detailsInfoProperties.map((property) => ({
             leftHandSide: property.id[0],
             ref: {
               path: [
@@ -21943,11 +21938,10 @@
                 `#edit_attribute_${property.id[0]}`,
               ],
             },
-          }),
-        );
+          }));
 
-        newPrefab.actions[0].events[0].options.assign = detailsInfoProperties.map(
-          property => ({
+        newPrefab.actions[0].events[0].options.assign =
+          detailsInfoProperties.map((property) => ({
             leftHandSide: property.id[0],
             ref: {
               path: [
@@ -21955,8 +21949,7 @@
                 `#attribute_${property.id[0]}`,
               ],
             },
-          }),
-        );
+          }));
 
         if (data.model.label) {
           variables[0].name = data.model.label;
@@ -22007,7 +22000,7 @@
           </Box>
         </Box>
       ),
-      progressBar: titles => {
+      progressBar: (titles) => {
         const titlesArray = titles;
         return (
           <Box

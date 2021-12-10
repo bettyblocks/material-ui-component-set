@@ -27,7 +27,7 @@
       })()}
     </div>
   ),
-  styles: B => theme => {
+  styles: (B) => (theme) => {
     const { mediaMinWidth, Styling } = B;
     const style = new Styling(theme);
     const width = {

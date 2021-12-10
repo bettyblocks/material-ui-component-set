@@ -126,7 +126,7 @@
           </GetOne>
         );
 
-        B.defineFunction('setCurrentRecord', value => {
+        B.defineFunction('setCurrentRecord', (value) => {
           const id = Number(value);
           if (typeof id === 'number') {
             setOptions({

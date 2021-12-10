@@ -24,7 +24,7 @@
 
     const closeDrawer = () => setIsOpen(false);
     const openDrawer = () => setIsOpen(true);
-    const toggleDrawer = () => setIsOpen(s => !s);
+    const toggleDrawer = () => setIsOpen((s) => !s);
 
     useEffect(() => {
       setIsOpen(visibility);

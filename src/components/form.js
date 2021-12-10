@@ -64,7 +64,7 @@
 
         const [, setOptions] = useOptions();
 
-        B.defineFunction('setCurrentRecord', value => {
+        B.defineFunction('setCurrentRecord', (value) => {
           if (typeof value === 'number') {
             setOptions({
               currentRecord: value,
@@ -200,7 +200,7 @@
 
                   <form
                     onInvalid={handleInvalid}
-                    onSubmit={evt => {
+                    onSubmit={(evt) => {
                       setIsInvalid(false);
                       handleSubmit(evt, callAction, item);
                     }}
@@ -291,7 +291,7 @@
       })()}
     </div>
   ),
-  styles: B => t => {
+  styles: (B) => (t) => {
     const { Styling } = B;
     const style = new Styling(t);
 

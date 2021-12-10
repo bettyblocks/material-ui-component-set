@@ -5,12 +5,8 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { env, getCustomModelAttribute, useFileUpload, useText, Icon } = B;
-    const {
-      FormControl,
-      FormHelperText,
-      Typography,
-      IconButton,
-    } = window.MaterialUI.Core;
+    const { FormControl, FormHelperText, Typography, IconButton } =
+      window.MaterialUI.Core;
     const {
       hideDefaultError,
       disabled,
@@ -54,7 +50,7 @@
     const [uploadedFileArray, setUploadedFileArray] = useState([]);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
 
-    const formatBytes = bytes => {
+    const formatBytes = (bytes) => {
       if (bytes === 0) return '0 Bytes';
       const k = 1024;
       const sizes = ['Bytes', 'KB', 'MB'];
@@ -62,15 +58,15 @@
       return `${parseFloat(bytes / k ** i).toFixed()} ${sizes[i]}`;
     };
 
-    const handleChange = e => {
-      setUploadedFileArray(prev => [...prev, ...e.target.files]);
+    const handleChange = (e) => {
+      setUploadedFileArray((prev) => [...prev, ...e.target.files]);
       setUploads({
         ...uploads,
         files: e.target.files,
       });
     };
 
-    const clearFiles = e => {
+    const clearFiles = (e) => {
       if (e && e.preventDefault) e.preventDefault();
       setUploads({
         files: [],
@@ -82,7 +78,7 @@
     const { files, data, failureMessage } = uploads;
 
     const acceptedValue = useText(accept) || 'image/*';
-    const acceptList = acceptedValue.split(',').map(item => item.trim());
+    const acceptList = acceptedValue.split(',').map((item) => item.trim());
     const helperValue =
       !hideDefaultError && failureMessage.length > 0 ? failureMessage : helper;
 
@@ -92,14 +88,14 @@
           fileList: Array.from(files),
           mimeType: acceptList,
         },
-        onError: errorData => {
+        onError: (errorData) => {
           B.triggerEvent('onError', errorData);
           setUploads({
             ...uploads,
             failureMessage: [errorData.message],
           });
         },
-        onCompleted: uploadData => {
+        onCompleted: (uploadData) => {
           const { uploadFiles } = uploadData;
 
           const [succeededData, failedData] = uploadFiles.reduce(
@@ -110,7 +106,7 @@
             [[], []],
           );
 
-          const formattedFailedData = failedData.map(d => (
+          const formattedFailedData = failedData.map((d) => (
             <div>{`File: ${d.name} failed with error: ${d.url}`}</div>
           ));
 
@@ -132,8 +128,8 @@
       },
     });
 
-    const removeFileFromList = fileUrl => {
-      const newList = data.filter(d => d.url !== fileUrl);
+    const removeFileFromList = (fileUrl) => {
+      const newList = data.filter((d) => d.url !== fileUrl);
       setUploads({
         ...uploads,
         data: newList,
@@ -155,7 +151,7 @@
           <input
             type="hidden"
             name={nameAttributeValue || customModelAttributeName}
-            value={data.map(d => d.url).join(',')}
+            value={data.map((d) => d.url).join(',')}
           />
         )}
       </div>
@@ -231,7 +227,7 @@
 
     const UploadedFile = ({ file }) => {
       const uploadedFile = uploadedFileArray.find(
-        item => item.name === file.name,
+        (item) => item.name === file.name,
       );
 
       if (!multiple) {
@@ -347,7 +343,7 @@
         <div className={classes.messageContainer}>
           {data &&
             data.length > 0 &&
-            data.map(file => <UploadedFile file={file} />)}
+            data.map((file) => <UploadedFile file={file} />)}
           {loading && <UploadingFile />}
         </div>
       </FormControl>
@@ -365,7 +361,7 @@
       }
     }, [files]);
 
-    B.defineFunction('clearFileUpload', e => clearFiles(e));
+    B.defineFunction('clearFileUpload', (e) => clearFiles(e));
 
     return isDev ? (
       <div>
@@ -378,7 +374,7 @@
       <Control />
     );
   })(),
-  styles: B => t => {
+  styles: (B) => (t) => {
     const { color: colorFunc, Styling } = B;
     const style = new Styling(t);
     const getOpacColor = (col, val) => colorFunc.alpha(col, val);

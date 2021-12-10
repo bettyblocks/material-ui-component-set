@@ -127,11 +127,11 @@
     const [stylesProps, setStylesProps] = useState(null);
 
     const deepMerge = (...objects) => {
-      const isObject = item =>
+      const isObject = (item) =>
         item && typeof item === 'object' && !Array.isArray(item);
 
       return objects.reduce((accumulator, object) => {
-        Object.keys(object).forEach(key => {
+        Object.keys(object).forEach((key) => {
           const accumulatorValue = accumulator[key];
           const value = object[key];
 
@@ -152,7 +152,7 @@
       path = [searchProperty.id].flat();
     }
 
-    const transformValue = value => {
+    const transformValue = (value) => {
       if (value instanceof Date) {
         return value.toISOString();
       }
@@ -182,7 +182,7 @@
 
     let interactionFilters = {};
 
-    const isEmptyValue = value =>
+    const isEmptyValue = (value) =>
       !value || (Array.isArray(value) && value.length === 0);
 
     const clauses = Object.entries(interactionFilter)
@@ -193,7 +193,7 @@
           if (isLast) {
             return Array.isArray(value)
               ? {
-                  _or: value.map(el => ({
+                  _or: value.map((el) => ({
                     [field]: { [property.operator]: el },
                   })),
                 }
@@ -284,7 +284,7 @@
           ) {
             setResults(data.results);
           } else {
-            setResults(prev => [...prev, ...data.results]);
+            setResults((prev) => [...prev, ...data.results]);
           }
           fetchingNextSet.current = false;
           setNewSearch(false);
@@ -324,7 +324,7 @@
       }
     });
 
-    B.defineFunction('SetSearchValue', event => {
+    B.defineFunction('SetSearchValue', (event) => {
       setSearch(event.target.value);
     });
 
@@ -345,7 +345,7 @@
           const childrenLenght = children.length;
           const collection = Array.from(repeaterRef.current.children);
           collection
-            .filter(item => item.tagName === 'DIV')
+            .filter((item) => item.tagName === 'DIV')
             .forEach((item, index) => {
               if (
                 ((Math.ceil((index + 1) / childrenLenght) * childrenLenght) /
@@ -396,7 +396,7 @@
       setPage(newPage);
     };
 
-    const handleChangeRowsPerPage = event => {
+    const handleChangeRowsPerPage = (event) => {
       if (loading || error) return;
       setRowsPerPage(parseInt(event.target.value, 10));
       setPage(0);
@@ -412,7 +412,7 @@
       });
     };
 
-    const handleSearch = event => {
+    const handleSearch = (event) => {
       setSearch(event.target.value);
     };
 
@@ -427,7 +427,7 @@
 
     const renderTableHead = () => {
       if ((loading && !loadOnScroll) || error) {
-        return Array.from(Array(children.length).keys()).map(colIdx => (
+        return Array.from(Array(children.length).keys()).map((colIdx) => (
           <TableCell key={colIdx}>
             <div className={classes.skeleton}>
               {error && displayError && error.message}
@@ -444,9 +444,9 @@
 
     const tableContentModel = () => {
       if ((loading && !loadOnScroll) || error) {
-        return Array.from(Array(rowsPerPage).keys()).map(idx => (
+        return Array.from(Array(rowsPerPage).keys()).map((idx) => (
           <TableRow key={idx} classes={{ root: classes.bodyRow }}>
-            {Array.from(Array(children.length).keys()).map(colIdx => (
+            {Array.from(Array(children.length).keys()).map((colIdx) => (
               <TableCell key={colIdx}>
                 <div className={classes.skeleton} />
               </TableCell>
@@ -455,10 +455,10 @@
         ));
       }
 
-      return results.map(value => (
+      return results.map((value) => (
         <ModelProvider value={value} id={model}>
           <InteractionScope model={model}>
-            {context => (
+            {(context) => (
               <TableRow
                 key={value[0]}
                 classes={{ root: classes.bodyRow }}
@@ -489,7 +489,7 @@
         return tableContentModel();
       }
 
-      return Array.from(Array(amountOfRows).keys()).map(idx => (
+      return Array.from(Array(amountOfRows).keys()).map((idx) => (
         <TableRow key={idx} classes={{ root: classes.bodyRow }}>
           {children}
         </TableRow>
@@ -501,7 +501,7 @@
         const fetchNextSet = () => {
           fetchingNextSet.current = true;
           if (!initialRender.current) {
-            setSkip(prev => prev + autoLoadTakeAmountNum);
+            setSkip((prev) => prev + autoLoadTakeAmountNum);
           }
           initialRender.current = false;
         };
@@ -514,10 +514,10 @@
             tableContainerElement.scrollHeight <= parent.clientHeight &&
             initialTimesFetched < 5
           ) {
-            setInitialTimesFetched(prev => prev + 1);
+            setInitialTimesFetched((prev) => prev + 1);
             fetchNextSet();
           }
-          const scrollEvent = e => {
+          const scrollEvent = (e) => {
             const { scrollTop, clientHeight, scrollHeight } = e.target;
             const offset = scrollHeight / 5;
             const hitBottom = scrollTop + clientHeight >= scrollHeight - offset;
@@ -680,7 +680,7 @@
       </div>
     );
   })(),
-  styles: B => theme => {
+  styles: (B) => (theme) => {
     const { env, mediaMinWidth, Styling } = B;
     const style = new Styling(theme);
     const isDev = env === 'dev';

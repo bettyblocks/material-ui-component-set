@@ -25,7 +25,7 @@
 
     B.defineFunction('Show', openDialog);
     B.defineFunction('Hide', closeDialog);
-    B.defineFunction('Show/Hide', () => setIsOpen(s => !s));
+    B.defineFunction('Show/Hide', () => setIsOpen((s) => !s));
 
     const isEmpty = !children.length;
 

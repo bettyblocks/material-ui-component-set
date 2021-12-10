@@ -52,11 +52,11 @@
     const [, setOptions] = useOptions();
     const [isDisabled, setIsDisabled] = useState(disabled);
 
-    const camelToSnakeCase = str =>
+    const camelToSnakeCase = (str) =>
       str[0].toLowerCase() +
       str
         .slice(1, str.length)
-        .replace(/[A-Z]/g, letter => `_${letter.toLowerCase()}`);
+        .replace(/[A-Z]/g, (letter) => `_${letter.toLowerCase()}`);
 
     const input =
       !isDev && actionModels
@@ -102,8 +102,8 @@
 
     B.defineFunction('Show', () => setIsVisible(true));
     B.defineFunction('Hide', () => setIsVisible(false));
-    B.defineFunction('Show/Hide', () => setIsVisible(s => !s));
-    B.defineFunction('Toggle loading state', () => setIsLoading(s => !s));
+    B.defineFunction('Show/Hide', () => setIsVisible((s) => !s));
+    B.defineFunction('Toggle loading state', () => setIsLoading((s) => !s));
     B.defineFunction('Enable', () => setIsDisabled(false));
     B.defineFunction('Disable', () => setIsDisabled(true));
 
@@ -113,7 +113,7 @@
       }
     }, [loading]);
 
-    const getExternalHref = config => {
+    const getExternalHref = (config) => {
       if (config.disabled) {
         return undefined;
       }
@@ -123,7 +123,7 @@
       return undefined;
     };
 
-    const getInternalHref = config => {
+    const getInternalHref = (config) => {
       if (config.disabled) {
         return undefined;
       }
@@ -145,7 +145,7 @@
     const buttonProps = {
       disabled: disabled || isLoading || loading,
       tabIndex: isDev ? -1 : undefined,
-      onClick: event => {
+      onClick: (event) => {
         event.stopPropagation();
         actionCallback();
       },
@@ -167,7 +167,7 @@
       type: isDev ? 'button' : type,
       endpoint:
         linkType === 'internal' && linkTo && linkTo.id ? linkTo : undefined,
-      onClick: event => {
+      onClick: (event) => {
         event.stopPropagation();
         actionCallback();
       },
@@ -217,7 +217,7 @@
       </div>
     );
 
-    const handleClick = e => {
+    const handleClick = (e) => {
       e.stopPropagation();
     };
 
@@ -284,7 +284,7 @@
 
     return <div className={classes.wrapper}>{Button}</div>;
   })(),
-  styles: B => t => {
+  styles: (B) => (t) => {
     const { mediaMinWidth, Styling } = B;
     const newStyling = new Styling(t);
     const getSpacing = (idx, device = 'Mobile') =>

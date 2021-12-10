@@ -34,7 +34,7 @@
             info="Small note: If you can't select any models try to place the button inside a component where an object is available."
           >
             <ModelSelector
-              onChange={id => {
+              onChange={(id) => {
                 setModelId(id);
               }}
               value={modelId}
@@ -46,11 +46,11 @@
         <Footer
           onClose={close}
           onSave={() => {
-            const camelToSnakeCase = str =>
+            const camelToSnakeCase = (str) =>
               str[0].toLowerCase() +
               str
                 .slice(1, str.length)
-                .replace(/[A-Z]/g, letter => `_${letter.toLowerCase()}`);
+                .replace(/[A-Z]/g, (letter) => `_${letter.toLowerCase()}`);
 
             if (!modelId || !data || !data.model) {
               setShowValidation(true);
@@ -60,9 +60,8 @@
             if (data && data.model) {
               newPrefab.variables[0].name = camelToSnakeCase(data.model.name);
             }
-            newPrefab.structure[0].descendants[1].descendants[0].descendants[0].descendants[0].descendants[2].descendants[1].options[6].value = [
-              modelId,
-            ];
+            newPrefab.structure[0].descendants[1].descendants[0].descendants[0].descendants[0].descendants[2].descendants[1].options[6].value =
+              [modelId];
             newPrefab.variables[0].options.modelId = modelId;
 
             save(newPrefab);

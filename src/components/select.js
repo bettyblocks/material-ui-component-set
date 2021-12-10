@@ -28,14 +28,8 @@
       blanco,
       dataComponentAttribute = ['Select'],
     } = options;
-    const {
-      env,
-      getCustomModelAttribute,
-      getProperty,
-      useAllQuery,
-      useRelation,
-      useText,
-    } = B;
+    const { env, getCustomModelAttribute, getProperty, useAllQuery, useRelation, useText } =
+      B;
     const { TextField, MenuItem } = window.MaterialUI.Core;
     const displayError = showError === 'built-in';
     const isDev = env === 'dev';
@@ -77,7 +71,7 @@
     const validationMessageText = useText(validationValueMissing);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
 
-    const transformValue = arg => {
+    const transformValue = (arg) => {
       if (arg instanceof Date) {
         return arg.toISOString();
       }
@@ -86,11 +80,11 @@
     };
 
     const deepMerge = (...objects) => {
-      const isObject = item =>
+      const isObject = (item) =>
         item && typeof item === 'object' && !Array.isArray(item);
 
       return objects.reduce((accumulator, object) => {
-        Object.keys(object).forEach(key => {
+        Object.keys(object).forEach((key) => {
           const accumulatorValue = accumulator[key];
           const valueArg = object[key];
 
@@ -121,7 +115,7 @@
 
     let interactionFilters = {};
 
-    const isEmptyValue = arg =>
+    const isEmptyValue = (arg) =>
       !arg || (Array.isArray(arg) && arg.length === 0);
 
     const clauses = Object.entries(interactionFilter)
@@ -132,7 +126,7 @@
           if (isLast) {
             return Array.isArray(valueArg)
               ? {
-                  _or: valueArg.map(el => ({
+                  _or: valueArg.map((el) => ({
                     [field]: { [propertyArg.operator]: el },
                   })),
                 }
@@ -239,7 +233,7 @@
       setHelper(message);
     };
 
-    const handleChange = event => {
+    const handleChange = (event) => {
       const {
         target: { value: eventValue },
       } = event;
@@ -272,7 +266,7 @@
         ));
       }
       if (optionType === 'static') {
-        return selectOptions.split('\n').map(option => (
+        return selectOptions.split('\n').map((option) => (
           <MenuItem key={option} value={option}>
             {option}
           </MenuItem>
@@ -281,7 +275,7 @@
       if (loading) return <span>Loading...</span>;
       if (error && displayError) return <span>{error.message}</span>;
       return (results || []).map(
-        item =>
+        (item) =>
           propName &&
           labelName && (
             <MenuItem key={item.id} value={item[propName]}>
@@ -331,7 +325,7 @@
 
     return isDev ? <div className={classes.root}>{SelectCmp}</div> : SelectCmp;
   })(),
-  styles: B => t => {
+  styles: (B) => (t) => {
     const { Styling } = B;
     const style = new Styling(t);
     return {
@@ -397,20 +391,22 @@
             '!important',
           ],
           '&:hover': {
-            '& .MuiOutlinedInput-notchedOutline, & .MuiFilledInput-underline, & .MuiInput-underline': {
-              borderColor: ({ options: { borderHoverColor } }) => [
-                style.getColor(borderHoverColor),
-                '!important',
-              ],
-            },
+            '& .MuiOutlinedInput-notchedOutline, & .MuiFilledInput-underline, & .MuiInput-underline':
+              {
+                borderColor: ({ options: { borderHoverColor } }) => [
+                  style.getColor(borderHoverColor),
+                  '!important',
+                ],
+              },
           },
           '&.Mui-focused, &.Mui-focused:hover': {
-            '& .MuiOutlinedInput-notchedOutline, & .MuiFilledInput-underline, & .MuiInput-underline': {
-              borderColor: ({ options: { borderFocusColor } }) => [
-                style.getColor(borderFocusColor),
-                '!important',
-              ],
-            },
+            '& .MuiOutlinedInput-notchedOutline, & .MuiFilledInput-underline, & .MuiInput-underline':
+              {
+                borderColor: ({ options: { borderFocusColor } }) => [
+                  style.getColor(borderFocusColor),
+                  '!important',
+                ],
+              },
           },
           '& fieldset': {
             top: ({ options: { hideLabel } }) => (hideLabel ? 0 : null),
@@ -430,12 +426,13 @@
             '!important',
           ],
         },
-        '& .MuiOutlinedInput-notchedOutline, & .MuiFilledInput-underline, & .MuiInput-underline': {
-          borderColor: ({ options: { borderColor } }) => [
-            style.getColor(borderColor),
-            '!important',
-          ],
-        },
+        '& .MuiOutlinedInput-notchedOutline, & .MuiFilledInput-underline, & .MuiInput-underline':
+          {
+            borderColor: ({ options: { borderColor } }) => [
+              style.getColor(borderColor),
+              '!important',
+            ],
+          },
         '& .MuiInput-underline, & .MuiFilledInput-underline': {
           '&::before, &::after': {
             borderColor: ({ options: { borderColor } }) => [
@@ -451,43 +448,47 @@
               ],
             },
           },
-          '&.Mui-focused::before, &.Mui-focused::after, &.Mui-focused:hover::before, &.Mui-focused:hover::after': {
-            borderColor: ({ options: { borderFocusColor } }) => [
-              style.getColor(borderFocusColor),
-              '!important',
-            ],
-          },
-        },
-        '& .MuiInputBase-root.Mui-error, & .MuiInputBase-root.Mui-error:hover, & .MuiInputBase-root.Mui-error.Mui-focused, & .MuiInputBase-root.Mui-error.Mui-focused:hover': {
-          '& .MuiOutlinedInput-notchedOutline, & .MuiFilledInput-underline, & .MuiInput-underline': {
-            borderColor: ({ options: { errorColor } }) => [
-              style.getColor(errorColor),
-              '!important',
-            ],
-          },
-          '&.MuiInput-underline, &.MuiFilledInput-underline': {
-            '&::before, &::after': {
-              borderColor: ({ options: { errorColor } }) => [
-                style.getColor(errorColor),
+          '&.Mui-focused::before, &.Mui-focused::after, &.Mui-focused:hover::before, &.Mui-focused:hover::after':
+            {
+              borderColor: ({ options: { borderFocusColor } }) => [
+                style.getColor(borderFocusColor),
                 '!important',
               ],
             },
-            '&:hover': {
+        },
+        '& .MuiInputBase-root.Mui-error, & .MuiInputBase-root.Mui-error:hover, & .MuiInputBase-root.Mui-error.Mui-focused, & .MuiInputBase-root.Mui-error.Mui-focused:hover':
+          {
+            '& .MuiOutlinedInput-notchedOutline, & .MuiFilledInput-underline, & .MuiInput-underline':
+              {
+                borderColor: ({ options: { errorColor } }) => [
+                  style.getColor(errorColor),
+                  '!important',
+                ],
+              },
+            '&.MuiInput-underline, &.MuiFilledInput-underline': {
               '&::before, &::after': {
                 borderColor: ({ options: { errorColor } }) => [
                   style.getColor(errorColor),
                   '!important',
                 ],
               },
-            },
-            '&.Mui-focused::before, &.Mui-focused::after, &.Mui-focused:hover::before, &.Mui-focused:hover::after': {
-              borderColor: ({ options: { errorColor } }) => [
-                style.getColor(errorColor),
-                '!important',
-              ],
+              '&:hover': {
+                '&::before, &::after': {
+                  borderColor: ({ options: { errorColor } }) => [
+                    style.getColor(errorColor),
+                    '!important',
+                  ],
+                },
+              },
+              '&.Mui-focused::before, &.Mui-focused::after, &.Mui-focused:hover::before, &.Mui-focused:hover::after':
+                {
+                  borderColor: ({ options: { errorColor } }) => [
+                    style.getColor(errorColor),
+                    '!important',
+                  ],
+                },
             },
           },
-        },
       },
     };
   },

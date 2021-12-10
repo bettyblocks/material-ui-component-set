@@ -28,13 +28,13 @@
     const handleChange = (_, newValue) => {
       setValue(newValue);
       if (!activeTabs.includes(newValue)) {
-        setActiveTabs(prevActiveTabs => [...prevActiveTabs, newValue]);
+        setActiveTabs((prevActiveTabs) => [...prevActiveTabs, newValue]);
       }
     };
-    const setSelectedTab = index => {
+    const setSelectedTab = (index) => {
       setValue(index);
       if (!activeTabs.includes(index)) {
-        setActiveTabs(prevActiveTabs => [...prevActiveTabs, index]);
+        setActiveTabs((prevActiveTabs) => [...prevActiveTabs, index]);
       }
     };
     useEffect(() => {
@@ -142,7 +142,7 @@
       TabGroup
     );
   })(),
-  styles: B => t => {
+  styles: (B) => (t) => {
     const { env, Styling } = B;
     const style = new Styling(t);
     const isDev = env === 'dev';

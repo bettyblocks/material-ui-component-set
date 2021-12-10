@@ -38,11 +38,11 @@
       skip: !modelId,
     });
 
-    const enrichVarObj = obj => {
+    const enrichVarObj = (obj) => {
       const returnObj = obj;
       if (data && data.model) {
         const property = data.model.properties.find(
-          prop => prop.id === obj.id[0],
+          (prop) => prop.id === obj.id[0],
         );
         if (property) {
           returnObj.name = `{{ ${data.model.name}.${property.name} }}`;
@@ -6251,7 +6251,7 @@
                 }
               >
                 <ModelSelector
-                  onChange={value => {
+                  onChange={(value) => {
                     setShowValidation(false);
                     setModelId(value);
                     setImageProperty('');
@@ -6265,7 +6265,7 @@
               <Field label="Image property">
                 <PropertySelector
                   modelId={modelId}
-                  onChange={value => {
+                  onChange={(value) => {
                     setImageProperty(value);
                   }}
                   value={imageProperty}
@@ -6278,7 +6278,7 @@
                 </Text>
                 <PropertySelector
                   modelId={modelId}
-                  onChange={value => {
+                  onChange={(value) => {
                     setTitleProperty(value);
                   }}
                   value={titleProperty}
@@ -6288,7 +6288,7 @@
               <Field label="Subheader property">
                 <PropertySelector
                   modelId={modelId}
-                  onChange={value => {
+                  onChange={(value) => {
                     setSubheaderProperty(value);
                   }}
                   value={subheaderProperty}
@@ -6298,7 +6298,7 @@
               <Field label="Description property">
                 <PropertySelector
                   modelId={modelId}
-                  onChange={value => {
+                  onChange={(value) => {
                     setDescriptionProperty(value);
                   }}
                   value={descriptionProperty}
@@ -6431,9 +6431,8 @@
                 ];
               }
               if (descriptionProperty.id) {
-                dataGrid.descendants[0].descendants[2].descendants[0].options[0].value = [
-                  enrichVarObj(descriptionProperty),
-                ];
+                dataGrid.descendants[0].descendants[2].descendants[0].options[0].value =
+                  [enrichVarObj(descriptionProperty)];
               }
 
               newPrefab.structure[0].descendants = prefabStructure;

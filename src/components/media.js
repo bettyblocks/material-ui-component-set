@@ -30,7 +30,7 @@
       setImgUrl(imageSourceText);
     }, [imageSourceText]);
 
-    B.defineFunction('SetCustomImage', url => {
+    B.defineFunction('SetCustomImage', (url) => {
       setImgUrl(url);
     });
 
@@ -43,7 +43,7 @@
     const isIframe = type === 'iframe' && iframeUrl;
     const isEmpty = !isImage && !isVideo && !isIframe;
 
-    const variable = imageSource && imageSource.findIndex(v => v.name) !== -1;
+    const variable = imageSource && imageSource.findIndex((v) => v.name) !== -1;
     const variableDev = env === 'dev' && (variable || !imgUrl);
 
     const hasInteralLink =
@@ -163,7 +163,7 @@
       </div>
     );
   })(),
-  styles: B => theme => {
+  styles: (B) => (theme) => {
     const { mediaMinWidth, Styling } = B;
     const style = new Styling(theme);
     const getSpacing = (idx, device = 'Mobile') =>

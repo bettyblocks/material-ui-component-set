@@ -28,14 +28,8 @@
       orderBy,
       dataComponentAttribute = ['Radio'],
     } = options;
-    const {
-      env,
-      getCustomModelAttribute,
-      getProperty,
-      useAllQuery,
-      useRelation,
-      useText,
-    } = B;
+    const { env, getCustomModelAttribute, getProperty, useAllQuery, useRelation, useText } =
+      B;
     const isDev = env === 'dev';
     const displayError = showError === 'built-in';
 
@@ -67,7 +61,7 @@
       : Number(componentValue);
 
     // maintain the type of the value
-    const getValue = val => (isNaN(Number(val)) ? val : Number(val));
+    const getValue = (val) => (isNaN(Number(val)) ? val : Number(val));
     const [value, setValue] = useState(getValue(componentValue));
     const [errorState, setErrorState] = useState(false);
     const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
@@ -180,15 +174,15 @@
         return listValues.map(({ value: v }) => renderRadio(v, v));
       }
       if (optionType === 'static') {
-        radioValues = radioData.map(option => option);
-        return radioData.map(option => renderRadio(getValue(option), option));
+        radioValues = radioData.map((option) => option);
+        return radioData.map((option) => renderRadio(getValue(option), option));
       }
       if (isDev) return renderRadio('value', 'Placeholder');
       if (loading) return <span>Loading...</span>;
       if (err && displayError) return <span>{err.message}</span>;
 
-      radioValues = results.map(item => item[valueProperty.name]);
-      return results.map(item =>
+      radioValues = results.map((item) => item[valueProperty.name]);
+      return results.map((item) =>
         renderRadio(item[valueProperty.name], item[labelProperty.name]),
       );
     };
@@ -202,7 +196,7 @@
       setHelper(message);
     };
 
-    const handleChange = evt => {
+    const handleChange = (evt) => {
       if (afterFirstInvalidation) {
         handleValidation();
       }
@@ -262,7 +256,7 @@
       FormControl
     );
   })(),
-  styles: B => t => {
+  styles: (B) => (t) => {
     const { color: colorFunc, Styling } = B;
     const style = new Styling(t);
     const getOpacColor = (col, val) => colorFunc.alpha(col, val);
