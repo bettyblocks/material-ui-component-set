@@ -12,6 +12,7 @@
       ModelProvider,
       useAllQuery,
       useFilter,
+      useRelation,
       useText,
       Icon,
     } = B;
@@ -226,7 +227,12 @@
     const where = useFilter(completeFilter);
 
     // TODO: move model to skip
-    const { loading, error, data, refetch } = useAllQuery(
+    const {
+      loading: queryLoading,
+      error,
+      data: queryData,
+      refetch,
+    } = useAllQuery(
       model,
       {
         rawFilter: where,
@@ -249,6 +255,14 @@
       },
       !model,
     );
+
+    const { hasResults, data: relationData } = useRelation(
+      model,
+      {},
+      model === 'string',
+    );
+    const data = hasResults ? relationData : queryData;
+    const loading = hasResults ? false : queryLoading;
 
     useEffect(() => {
       if (!isDev && data) {

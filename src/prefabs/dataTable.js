@@ -196,7 +196,7 @@
           value: '',
           label: 'Model',
           key: 'model',
-          type: 'MODEL',
+          type: 'MODEL_AND_RELATION',
         },
         {
           value: {},

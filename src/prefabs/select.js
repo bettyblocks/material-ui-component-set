@@ -52,7 +52,7 @@
           },
         },
         {
-          type: 'MODEL',
+          type: 'MODEL_AND_RELATION',
           label: 'Model',
           key: 'model',
           value: '',
