@@ -29,17 +29,19 @@
 
     const isEmpty = !children.length;
 
-    const EmptyCmp = () => (
-      <div
-        className={[
-          classes.dialog,
-          isEmpty ? classes.empty : classes.dirty,
-          isFullscreen ? classes.fullScreen : classes.windowed,
-        ].join(' ')}
-      >
-        {!isEmpty ? children : 'Dialog Content'}
-      </div>
-    );
+    const EmptyCmp = function () {
+      return (
+        <div
+          className={[
+            classes.dialog,
+            isEmpty ? classes.empty : classes.dirty,
+            isFullscreen ? classes.fullScreen : classes.windowed,
+          ].join(' ')}
+        >
+          {!isEmpty ? children : 'Dialog Content'}
+        </div>
+      );
+    };
 
     const DialogCmp = (
       <Dialog

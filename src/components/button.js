@@ -186,30 +186,28 @@
         className={[classes.root, disabled ? classes.disabled : ''].join(' ')}
       >
         <span className={classes.innerRoot}>
-          <>
-            &#8203;
-            {icon !== 'None' && iconPosition === 'start' && (
-              <span
-                style={{
-                  marginRight: buttonContent ? '5px' : 0,
-                  display: 'flex',
-                }}
-              >
-                <Icon name={icon} fontSize={size} />
-              </span>
-            )}
-            {buttonContent !== '' ? buttonContent : emptySpace}
-            {icon !== 'None' && iconPosition === 'end' && (
-              <span
-                style={{
-                  marginLeft: buttonContent ? '5px' : 0,
-                  display: 'flex',
-                }}
-              >
-                <Icon name={icon} fontSize={size} />
-              </span>
-            )}
-          </>
+          &#8203;
+          {icon !== 'None' && iconPosition === 'start' && (
+            <span
+              style={{
+                marginRight: buttonContent ? '5px' : 0,
+                display: 'flex',
+              }}
+            >
+              <Icon name={icon} fontSize={size} />
+            </span>
+          )}
+          {buttonContent !== '' ? buttonContent : emptySpace}
+          {icon !== 'None' && iconPosition === 'end' && (
+            <span
+              style={{
+                marginLeft: buttonContent ? '5px' : 0,
+                display: 'flex',
+              }}
+            >
+              <Icon name={icon} fontSize={size} />
+            </span>
+          )}
           {showIndicator && (
             <CircularProgress size={16} className={classes.loader} />
           )}

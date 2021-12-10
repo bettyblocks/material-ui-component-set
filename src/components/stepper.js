@@ -96,16 +96,19 @@
               };
             }
 
-            const IconCmp = () =>
-              hasIcon && (
-                <Icon
-                  name={icon}
-                  className={[
-                    classes.stepIcon,
-                    isActive ? classes.stepIconActive : '',
-                  ].join(' ')}
-                />
+            const IconCmp = function () {
+              return (
+                hasIcon && (
+                  <Icon
+                    name={icon}
+                    className={[
+                      classes.stepIcon,
+                      isActive ? classes.stepIconActive : '',
+                    ].join(' ')}
+                  />
+                )
               );
+            };
 
             if (hasIcon) {
               labelProps = {

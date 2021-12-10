@@ -34,7 +34,7 @@
 
     B.defineFunction('Select', doSetTab);
 
-    const EmptyBox = () => {
+    const EmptyBox = function () {
       if (!isDev) return null;
       return (
         <Box className={classes.empty} p={3}>

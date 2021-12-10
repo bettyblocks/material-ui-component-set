@@ -63,19 +63,21 @@
         }
       : {};
 
-    const ImgPlaceholder = () => (
-      <div className={classes.empty}>
-        <div className={classes.placeholderWrapper}>
-          <svg className={classes.placeholder} width={86} height={48}>
-            <title>placeholder</title>
-            <rect x="19.5" y="8.5" rx="2" />
-            <path d="M61.1349945 29.020979v3.9160839H25v-2.5379375l6.5998225-4.9892478 5.6729048 4.2829541 13.346858-11.2981564L61.1349945 29.020979zm-22.5-10.270979c0 1.0416667-.3645833 1.9270833-1.09375 2.65625S35.9266612 22.5 34.8849945 22.5s-1.9270833-.3645833-2.65625-1.09375-1.09375-1.6145833-1.09375-2.65625.3645833-1.9270833 1.09375-2.65625S33.8433278 15 34.8849945 15s1.9270833.3645833 2.65625 1.09375 1.09375 1.6145833 1.09375 2.65625z" />
-          </svg>
+    const ImgPlaceholder = function () {
+      return (
+        <div className={classes.empty}>
+          <div className={classes.placeholderWrapper}>
+            <svg className={classes.placeholder} width={86} height={48}>
+              <title>placeholder</title>
+              <rect x="19.5" y="8.5" rx="2" />
+              <path d="M61.1349945 29.020979v3.9160839H25v-2.5379375l6.5998225-4.9892478 5.6729048 4.2829541 13.346858-11.2981564L61.1349945 29.020979zm-22.5-10.270979c0 1.0416667-.3645833 1.9270833-1.09375 2.65625S35.9266612 22.5 34.8849945 22.5s-1.9270833-.3645833-2.65625-1.09375-1.09375-1.6145833-1.09375-2.65625.3645833-1.9270833 1.09375-2.65625S33.8433278 15 34.8849945 15s1.9270833.3645833 2.65625 1.09375 1.09375 1.6145833 1.09375 2.65625z" />
+            </svg>
+          </div>
         </div>
-      </div>
-    );
+      );
+    };
 
-    const MobileStepperCmp = () => {
+    const MobileStepperCmp = function () {
       if (autoplay && !isDev) {
         useEffect(() => {
           const interval = setInterval(() => {
@@ -214,7 +216,7 @@
       );
     };
 
-    const ModelStepperCmp = () => {
+    const ModelStepperCmp = function () {
       let maxSteps = 0;
       const where = useFilter(filter);
       const { loading, error, data, refetch } = useAllQuery(model, {
@@ -298,7 +300,7 @@
         });
       };
 
-      const Step = (props) => {
+      const Step = function (props) {
         const { active, item } = props;
         const StepContent = (
           <div className={classes.root}>

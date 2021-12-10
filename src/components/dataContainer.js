@@ -46,48 +46,76 @@
           history.push(useEndpoint(redirectWithoutResult));
         };
 
-        const DataContainer = () => (
-          <GetOne
-            modelId={model}
-            filter={selectedFilter}
-            fetchPolicy="cache-and-network"
-          >
-            {({ loading, error, data, refetch }) => {
-              if (!loading && data && data.id) {
-                B.triggerEvent('onSuccess', data);
-              } else {
-                B.triggerEvent('onNoResults');
-              }
-
-              if (error) {
-                if (!displayError) {
-                  B.triggerEvent('onError', error.message);
+        const DataContainer = function () {
+          return (
+            <GetOne
+              modelId={model}
+              filter={selectedFilter}
+              fetchPolicy="cache-and-network"
+            >
+              {({ loading, error, data, refetch }) => {
+                if (!loading && data && data.id) {
+                  B.triggerEvent('onSuccess', data);
+                } else {
+                  B.triggerEvent('onNoResults');
                 }
-              }
 
-              B.defineFunction('Refetch', () => {
-                refetch();
-              });
+                if (error) {
+                  if (!displayError) {
+                    B.triggerEvent('onError', error.message);
+                  }
+                }
 
-              if (loading && loadingType === 'default') {
-                B.triggerEvent('onLoad', loading);
-                return (
-                  <span
-                    data-component={
-                      useText(dataComponentAttribute) || 'DataContainer'
-                    }
-                  >
-                    {parsedLoadingText}
-                  </span>
-                );
-              }
+                B.defineFunction('Refetch', () => {
+                  refetch();
+                });
 
-              if (loading && loadingType === 'showChildren') {
-                B.triggerEvent('onLoad', loading);
-                // key attribute forces a rerender after loading
+                if (loading && loadingType === 'default') {
+                  B.triggerEvent('onLoad', loading);
+                  return (
+                    <span
+                      data-component={
+                        useText(dataComponentAttribute) || 'DataContainer'
+                      }
+                    >
+                      {parsedLoadingText}
+                    </span>
+                  );
+                }
+
+                if (loading && loadingType === 'showChildren') {
+                  B.triggerEvent('onLoad', loading);
+                  // key attribute forces a rerender after loading
+                  return (
+                    <div
+                      key={`data-loading-${loading}`}
+                      data-component={
+                        useText(dataComponentAttribute) || 'DataContainer'
+                      }
+                    >
+                      {children}
+                    </div>
+                  );
+                }
+
+                if (error && displayError) {
+                  return (
+                    <span
+                      data-component={
+                        useText(dataComponentAttribute) || 'DataContainer'
+                      }
+                    >
+                      {error.message}
+                    </span>
+                  );
+                }
+
+                if (!data && redirectWithoutResult) {
+                  redirect();
+                }
+
                 return (
                   <div
-                    key={`data-loading-${loading}`}
                     data-component={
                       useText(dataComponentAttribute) || 'DataContainer'
                     }
@@ -95,36 +123,10 @@
                     {children}
                   </div>
                 );
-              }
-
-              if (error && displayError) {
-                return (
-                  <span
-                    data-component={
-                      useText(dataComponentAttribute) || 'DataContainer'
-                    }
-                  >
-                    {error.message}
-                  </span>
-                );
-              }
-
-              if (!data && redirectWithoutResult) {
-                redirect();
-              }
-
-              return (
-                <div
-                  data-component={
-                    useText(dataComponentAttribute) || 'DataContainer'
-                  }
-                >
-                  {children}
-                </div>
-              );
-            }}
-          </GetOne>
-        );
+              }}
+            </GetOne>
+          );
+        };
 
         B.defineFunction('setCurrentRecord', (value) => {
           const id = Number(value);
@@ -159,7 +161,7 @@
           return Wrapper;
         }
 
-        const CanvasLayout = () => {
+        const CanvasLayout = function () {
           if (!hasFilter) {
             return Wrapper;
           }

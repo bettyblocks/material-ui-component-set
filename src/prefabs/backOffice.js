@@ -17735,26 +17735,24 @@
           );
         }
         return (
-          <>
-            <Field
-              label="Properties shown in detailview and forms"
-              error={
-                detailPropertiesValidation && (
-                  <Text color="#e82600">Selecting a property is required</Text>
-                )
-              }
-            >
-              <PropertiesSelector
-                modelId={modelId}
-                value={detailProperties}
-                onChange={(value) => {
-                  setDetailPropertiesValidation(false);
-                  setDetailProperties(value);
-                }}
-                disabledKinds={disabledKinds}
-              />
-            </Field>
-          </>
+          <Field
+            label="Properties shown in detailview and forms"
+            error={
+              detailPropertiesValidation && (
+                <Text color="#e82600">Selecting a property is required</Text>
+              )
+            }
+          >
+            <PropertiesSelector
+              modelId={modelId}
+              value={detailProperties}
+              onChange={(value) => {
+                setDetailPropertiesValidation(false);
+                setDetailProperties(value);
+              }}
+              disabledKinds={disabledKinds}
+            />
+          </Field>
         );
       },
       onSave: () => {

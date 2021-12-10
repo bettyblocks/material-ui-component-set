@@ -452,7 +452,7 @@
 
         /* SubComponents */
 
-        function SearchComponent({
+        const SearchComponent = function ({
           label,
           onChange,
           value,
@@ -488,9 +488,9 @@
               />
             </div>
           );
-        }
+        };
 
-        function Pagination({ totalCount, resultCount, currentPage }) {
+        const Pagination = function ({ totalCount, resultCount, currentPage }) {
           const firstItem = currentPage ? (currentPage - 1) * rowsPerPage : 0;
 
           useEffect(() => {
@@ -559,7 +559,7 @@
               </div>
             </>
           );
-        }
+        };
 
         return isDev ? builderLayout() : canvasLayout();
       })()}

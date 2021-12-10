@@ -136,65 +136,77 @@
       });
     };
 
-    const UploadComponent = () => (
-      <div data-component={dataComponentAttributeValue}>
-        <input
-          accept={acceptedValue}
-          className={classes.input}
-          multiple={multiple}
-          type="file"
-          onChange={handleChange}
-          ref={inputRef}
-        />
-        {children}
-        {data.length > 0 && (
+    const UploadComponent = function () {
+      return (
+        <div data-component={dataComponentAttributeValue}>
           <input
-            type="hidden"
-            name={nameAttributeValue || customModelAttributeName}
-            value={data.map((d) => d.url).join(',')}
+            accept={acceptedValue}
+            className={classes.input}
+            multiple={multiple}
+            type="file"
+            onChange={handleChange}
+            ref={inputRef}
           />
-        )}
-      </div>
-    );
-
-    const Hr = () => <hr className={classes.hr} />;
-
-    const DeleteButton = ({ file }) => (
-      <div className={classes.deleteButtonWrapper}>
-        <IconButton
-          size="small"
-          className={classes.remove}
-          onClick={() => {
-            if (file) {
-              removeFileFromList(file.url);
-              if (!multiple) {
-                B.triggerEvent('onFileRemove');
-              }
-            }
-          }}
-        >
-          <Icon name="Delete" className={classes.deleteIcon} fontSize="small" />
-        </IconButton>
-      </div>
-    );
-    const FileDetails = ({ file, fileType, fileSize }) => (
-      <div className={classes.fileDetails}>
-        <Typography variant="body1" noWrap className={classes.span}>
-          {file ? file.name : 'File name'}
-        </Typography>
-        <div className={classes.fileDetailList}>
-          <p className={classes.fileDetail}>
-            {isDev ? 'Size' : formatBytes(fileSize)}
-          </p>
-          <div className={classes.divider} />
-          <p className={classes.fileDetail}>
-            {isDev ? 'Type' : fileType.replace('image/', '.')}
-          </p>
+          {children}
+          {data.length > 0 && (
+            <input
+              type="hidden"
+              name={nameAttributeValue || customModelAttributeName}
+              value={data.map((d) => d.url).join(',')}
+            />
+          )}
         </div>
-      </div>
-    );
+      );
+    };
 
-    const DevUploadedFile = () => {
+    const Hr = function () {
+      return <hr className={classes.hr} />;
+    };
+
+    const DeleteButton = function ({ file }) {
+      return (
+        <div className={classes.deleteButtonWrapper}>
+          <IconButton
+            size="small"
+            className={classes.remove}
+            onClick={() => {
+              if (file) {
+                removeFileFromList(file.url);
+                if (!multiple) {
+                  B.triggerEvent('onFileRemove');
+                }
+              }
+            }}
+          >
+            <Icon
+              name="Delete"
+              className={classes.deleteIcon}
+              fontSize="small"
+            />
+          </IconButton>
+        </div>
+      );
+    };
+    const FileDetails = function ({ file, fileType, fileSize }) {
+      return (
+        <div className={classes.fileDetails}>
+          <Typography variant="body1" noWrap className={classes.span}>
+            {file ? file.name : 'File name'}
+          </Typography>
+          <div className={classes.fileDetailList}>
+            <p className={classes.fileDetail}>
+              {isDev ? 'Size' : formatBytes(fileSize)}
+            </p>
+            <div className={classes.divider} />
+            <p className={classes.fileDetail}>
+              {isDev ? 'Type' : fileType.replace('image/', '.')}
+            </p>
+          </div>
+        </div>
+      );
+    };
+
+    const DevUploadedFile = function () {
       switch (type) {
         case 'grid':
           return (
@@ -225,7 +237,7 @@
       }
     };
 
-    const UploadedFile = ({ file }) => {
+    const UploadedFile = function ({ file }) {
       const uploadedFile = uploadedFileArray.find(
         (item) => item.name === file.name,
       );
@@ -286,7 +298,7 @@
       }
     };
 
-    const UploadingFile = () => {
+    const UploadingFile = function () {
       switch (type) {
         case 'grid':
           return (
@@ -325,29 +337,31 @@
 
     const Label = isDev ? 'div' : 'label';
 
-    const Control = () => (
-      <FormControl
-        fullWidth={fullWidth}
-        required={required}
-        error={!hideDefaultError && failureMessage.length > 0}
-        disabled={disabled}
-        margin={margin}
-      >
-        <Label className={classes.label}>
-          {hideLabel ? '' : `${labelText}${requiredText}`}
-          <UploadComponent />
-        </Label>
-        <FormHelperText classes={{ root: classes.helper }}>
-          {helperValue}
-        </FormHelperText>
-        <div className={classes.messageContainer}>
-          {data &&
-            data.length > 0 &&
-            data.map((file) => <UploadedFile file={file} />)}
-          {loading && <UploadingFile />}
-        </div>
-      </FormControl>
-    );
+    const Control = function () {
+      return (
+        <FormControl
+          fullWidth={fullWidth}
+          required={required}
+          error={!hideDefaultError && failureMessage.length > 0}
+          disabled={disabled}
+          margin={margin}
+        >
+          <Label className={classes.label}>
+            {hideLabel ? '' : `${labelText}${requiredText}`}
+            <UploadComponent />
+          </Label>
+          <FormHelperText classes={{ root: classes.helper }}>
+            {helperValue}
+          </FormHelperText>
+          <div className={classes.messageContainer}>
+            {data &&
+              data.length > 0 &&
+              data.map((file) => <UploadedFile file={file} />)}
+            {loading && <UploadingFile />}
+          </div>
+        </FormControl>
+      );
+    };
 
     useEffect(() => {
       if (loading) {
