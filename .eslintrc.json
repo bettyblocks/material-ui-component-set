@@ -12,14 +12,15 @@
   },
   "rules": {
     "jsx-a11y/media-has-caption": 0,
-    "react/jsx-props-no-spreading": 0,
     "react/destructuring-assignment": 0,
-    "react-hooks/exhaustive-deps": 0,
-    "react/prefer-exact-props": 0,
+    "react/display-name": 0,
+    "react/jsx-props-no-spreading": 0,
     "react/jsx-no-useless-fragment": [2, {"allowExpressions":  true}],
     "react/jsx-filename-extension": [1, { "extensions": [".js"] }],
     "react/jsx-no-undef": [2, { "allowGlobals": true }],
+    "react/prefer-exact-props": 0,
     "react/prop-types": 0,
+    "react-hooks/exhaustive-deps": 0,
     "no-restricted-globals": 0,
     "prettier/prettier": [
       "error",

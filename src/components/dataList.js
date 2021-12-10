@@ -295,8 +295,8 @@
                   setShowPagination(false);
                 }
                 break;
-              default:
               case 'always':
+              default:
                 setShowPagination(true);
             }
             setPrevData(data);

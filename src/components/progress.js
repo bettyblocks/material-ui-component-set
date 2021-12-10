@@ -70,7 +70,7 @@
       />
     );
 
-    if (!isDev && !open) return <></>;
+    if (!isDev && !open) return null;
 
     return isDev ? (
       <div className={classes.wrapper}>{ProgressCmp}</div>

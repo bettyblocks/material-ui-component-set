@@ -153,9 +153,7 @@
       >
         {headerOnly ? Header : Content}
       </TableCell>
-    ) : (
-      <></>
-    );
+    ) : null;
   })(),
   styles: (B) => (theme) => {
     const { env, mediaMinWidth, Styling } = B;

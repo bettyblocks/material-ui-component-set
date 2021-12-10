@@ -404,6 +404,7 @@
           ) : (
             results.map((item, index) => (
               <Step
+                key={item}
                 item={item}
                 active={index === activeStep}
                 isFirstRender={numRendersRef.current === 1}
