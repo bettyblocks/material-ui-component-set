@@ -220,6 +220,7 @@
                 backgroundColorAlpha / 100,
               ),
         backgroundImage: ({ options: { backgroundUrl } }) => {
+          // eslint-disable-next-line react-hooks/rules-of-hooks
           const image = useText(backgroundUrl);
           return image && `url("${image}")`;
         },
