@@ -24,6 +24,8 @@
         const isPristine = isEmpty && isDev;
         const displayError = showError === 'built-in';
         const parsedLoadingText = useText(loadingText);
+        const dataComponentAttributeText =
+          useText(dataComponentAttribute) || 'DataContainer';
         const [, setOptions] = useOptions();
 
         const getFilter = React.useCallback(() => {
@@ -41,9 +43,11 @@
         const hasFilter =
           selectedFilter && Object.keys(selectedFilter).length > 0;
 
+        const history = useHistory();
+        const endpoint = useEndpoint(redirectWithoutResult);
+
         const redirect = () => {
-          const history = useHistory();
-          history.push(useEndpoint(redirectWithoutResult));
+          history.push(endpoint);
         };
 
         const DataContainer = function () {
@@ -73,11 +77,7 @@
                 if (loading && loadingType === 'default') {
                   B.triggerEvent('onLoad', loading);
                   return (
-                    <span
-                      data-component={
-                        useText(dataComponentAttribute) || 'DataContainer'
-                      }
-                    >
+                    <span data-component={dataComponentAttributeText}>
                       {parsedLoadingText}
                     </span>
                   );
@@ -89,9 +89,7 @@
                   return (
                     <div
                       key={`data-loading-${loading}`}
-                      data-component={
-                        useText(dataComponentAttribute) || 'DataContainer'
-                      }
+                      data-component={dataComponentAttributeText}
                     >
                       {children}
                     </div>
@@ -100,11 +98,7 @@
 
                 if (error && displayError) {
                   return (
-                    <span
-                      data-component={
-                        useText(dataComponentAttribute) || 'DataContainer'
-                      }
-                    >
+                    <span data-component={dataComponentAttributeText}>
                       {error.message}
                     </span>
                   );
@@ -115,11 +109,7 @@
                 }
 
                 return (
-                  <div
-                    data-component={
-                      useText(dataComponentAttribute) || 'DataContainer'
-                    }
-                  >
+                  <div data-component={dataComponentAttributeText}>
                     {children}
                   </div>
                 );
