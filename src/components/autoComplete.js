@@ -378,7 +378,7 @@
             const [operator] = Object.keys(acc);
             return {
               [operator]: [
-                ...acc[operator].map(entry => ({ [field]: { ...entry } })),
+                ...acc[operator].map((entry) => ({ [field]: { ...entry } })),
               ],
             };
           }

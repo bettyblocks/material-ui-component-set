@@ -215,7 +215,7 @@
       </div>
     );
 
-    const handleClick = e => {
+    const handleClick = (e) => {
       e.stopPropagation();
     };
 
