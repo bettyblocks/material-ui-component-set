@@ -160,7 +160,7 @@
     );
 
     const ConditionalGrid = <Hidden only={only}>{GridComp}</Hidden>;
-    const RuntimeCmp = isVisible ? ConditionalGrid : <></>;
+    const RuntimeCmp = isVisible ? ConditionalGrid : null;
 
     B.defineFunction('Show', () => setIsVisible(true));
     B.defineFunction('Hide', () => setIsVisible(false));

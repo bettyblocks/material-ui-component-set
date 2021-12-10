@@ -456,7 +456,7 @@
       }
 
       return results.map((value) => (
-        <ModelProvider value={value} id={model}>
+        <ModelProvider key={model} value={value} id={model}>
           <InteractionScope model={model}>
             {(context) => (
               <TableRow
@@ -576,8 +576,8 @@
               setShowPagination(true);
             }
             break;
-          default:
           case 'always':
+          default:
             setShowPagination(true);
             break;
         }

@@ -145,7 +145,7 @@
                 </Box>
               </Box>
               {images.map((item) => (
-                <Box margin={{ bottom: '15px' }}>
+                <Box key={item.index} margin={{ bottom: '15px' }}>
                   <Box
                     direction="column"
                     basis="auto"

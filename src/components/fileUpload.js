@@ -107,7 +107,9 @@
           );
 
           const formattedFailedData = failedData.map((d) => (
-            <div>{`File: ${d.name} failed with error: ${d.url}`}</div>
+            <div
+              key={d.name}
+            >{`File: ${d.name} failed with error: ${d.url}`}</div>
           ));
 
           setUploads({
@@ -356,7 +358,7 @@
           <div className={classes.messageContainer}>
             {data &&
               data.length > 0 &&
-              data.map((file) => <UploadedFile file={file} />)}
+              data.map((file) => <UploadedFile key={file.url} file={file} />)}
             {loading && <UploadingFile />}
           </div>
         </FormControl>

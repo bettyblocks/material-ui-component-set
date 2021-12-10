@@ -75,7 +75,7 @@
                 />
               </Field>
               {rows.map((row) => (
-                <Field>
+                <Field key={row.index}>
                   <Box direction="row">
                     <Box
                       direction="column"
@@ -162,6 +162,7 @@
               <Text color="#666d85">Preview:</Text>
               {rows.map((row) => (
                 <Box
+                  key={row.index}
                   border={{
                     color: '#AFB5C8',
                     size: 'xsmall',
