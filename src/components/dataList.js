@@ -43,6 +43,7 @@
         const { label: searchPropertyLabel } =
           getProperty(searchProperty) || {};
         const parsedLoadingText = useText(loadingText);
+        const dataComponentAttributeText = useText(dataComponentAttribute);
         const isEmpty = children.length === 0;
         const isDev = env === 'dev';
         const isPristine = isEmpty && isDev;
@@ -56,7 +57,7 @@
         const [interactionFilter, setInteractionFilter] = useState({});
 
         const builderLayout = () => (
-          <div data-component={useText(dataComponentAttribute) || 'DataList'}>
+          <div data-component={dataComponentAttributeText || 'DataList'}>
             {searchProperty && !hideSearch && (
               <div className={classes.header}>
                 <SearchComponent label={searchPropertyLabel} />
@@ -401,9 +402,7 @@
           if (error && displayError) {
             return (
               <span
-                data-component={
-                  useText(dataComponentAttribute) || 'DataContainer'
-                }
+                data-component={dataComponentAttributeText || 'DataContainer'}
               >
                 {error.message}
               </span>
@@ -414,11 +413,7 @@
           const resultCount = results && results.length;
 
           return (
-            <div
-              data-component={
-                useText(dataComponentAttribute) || 'DataContainer'
-              }
-            >
+            <div data-component={dataComponentAttributeText || 'DataContainer'}>
               {searchProperty && !hideSearch && (
                 <div className={classes.header}>
                   <SearchComponent

@@ -43,6 +43,10 @@
           env === 'prod' && hasRedirect && useEndpoint(redirect);
         const { actionId, modelId, variableId, objectVariableId } = formData;
         const formVariable = getActionInput(variableId);
+        const history = useHistory();
+        const location = useLocation();
+        const dataComponentAttributeText =
+          useText(dataComponentAttribute) || 'Form';
 
         const hasFilter =
           modelId &&
@@ -124,8 +128,6 @@
             B.triggerEvent('onActionSuccess', data.actionb5);
 
             if (!isDev && hasRedirect) {
-              const history = useHistory();
-              const location = useLocation();
               if (redirectTo === location.pathname) {
                 history.go(0);
               } else {
@@ -155,7 +157,7 @@
           return (
             <form
               className={classNames || undefined}
-              data-component={useText(dataComponentAttribute) || 'Form'}
+              data-component={dataComponentAttributeText}
             >
               {isPristine && (
                 <span>Drag form components in the form to submit data</span>
@@ -206,7 +208,7 @@
                     }}
                     ref={formRef}
                     className={classNames || undefined}
-                    data-component={useText(dataComponentAttribute) || 'Form'}
+                    data-component={dataComponentAttributeText}
                   >
                     {isPristine && (
                       <span>
