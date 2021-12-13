@@ -7,15 +7,27 @@
     const { actionId } = options;
     const { Form } = B;
 
+    const FormComponent = () => (
+      <Form actionId={actionId}>
+        <fieldset className={classes.fieldset}>{children}</fieldset>
+      </Form>
+    );
+
     if (B.env !== 'prod') {
       return (
         <div>
-          <Form actionId={actionId}>{children}</Form>
+          <FormComponent />
         </div>
       );
     }
 
-    return <Form actionId={actionId}>{children}</Form>;
+    return FormComponent;
   })(),
-  styles: () => ({}),
+  styles: () => ({
+    fieldset: {
+      border: 0,
+      margin: 0,
+      padding: 0,
+    },
+  }),
 }))();

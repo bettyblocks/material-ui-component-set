@@ -1,7 +1,7 @@
 (() => ({
   category: 'FORM',
-  icon: 'TextInputIcon',
-  name: 'TextInput',
+  icon: 'CheckboxIcon',
+  name: 'CheckboxInput',
   structure: [
     {
       name: 'TextInput',
@@ -10,7 +10,7 @@
           key: 'name',
           label: 'Name',
           type: 'TEXT',
-          value: '',
+          value: 'CheckboxInput',
         },
         {
           key: 'label',
@@ -22,7 +22,7 @@
           key: 'type',
           label: 'Type',
           type: 'TEXT',
-          value: '',
+          value: 'checkbox',
         },
       ],
       descendants: [],
