@@ -32,6 +32,7 @@
       value: defaultValue = [],
     } = customModelAttributeObj;
     const [currentValue, setCurrentValue] = useState(useText(defaultValue));
+    const [interactionFilter, setInteractionFilter] = useState({});
     const [errorState, setErrorState] = useState(error);
     const [helper, setHelper] = useState(useText(helperText));
     const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
@@ -44,6 +45,7 @@
     const dataComponentAttributeValue = useText(dataComponentAttribute);
     const helperTextResolved = useText(helperText);
     const validationValueMissingText = useText(validationValueMissing);
+    const mounted = useRef(false);
 
     const handleValidation = () => {
       const hasError = required && !currentValue;
@@ -60,10 +62,17 @@
       handleValidation();
     };
 
-    const setValue = (_event, value) => {
-      setCurrentValue(value);
-      if (afterFirstInvalidation) {
-        handleValidation();
+    const changeHandler = (_event, value) => {
+      if (!isDev) {
+        if (afterFirstInvalidation) {
+          handleValidation();
+        }
+        setCurrentValue(value);
+      }
+    };
+    const changeCommitHandler = () => {
+      if (mounted.current && !isDev) {
+        B.triggerEvent('onChange', currentValue);
       }
     };
 
@@ -77,6 +86,38 @@
         setHelper(helperTextResolved);
       }
     }, [isDev, helperTextResolved]);
+    useEffect(() => {
+      mounted.current = true;
+      return () => {
+        if (!isDev) {
+          mounted.current = false;
+        }
+      };
+    }, []);
+
+    /**
+     * @name Filter
+     * @param {Property} property
+     * @returns {Void}
+     */
+    B.defineFunction(
+      'Filter',
+      ({ event, property: propertyArg, interactionId }) => {
+        setInteractionFilter({
+          ...interactionFilter,
+          [interactionId]: {
+            property: propertyArg,
+            value: event.target ? event.target.value : event,
+          },
+        });
+      },
+    );
+
+    B.defineFunction('ResetFilter', () => {
+      setInteractionFilter({});
+    });
+
+    B.defineFunction('Reset', () => setCurrentValue(useText(defaultValue)));
 
     const sliderInput = (
       <div className={classes.root}>
@@ -100,7 +141,8 @@
               min={startNumber}
               max={endNumber}
               marks={stepNumber ? marks : false}
-              onChange={setValue}
+              onChange={changeHandler}
+              onChangeCommitted={changeCommitHandler}
               disabled={isDev || disable}
               classes={{
                 root: classes.sliderRoot,
