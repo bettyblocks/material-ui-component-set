@@ -185,7 +185,6 @@
           key: 'labelProp',
           value: '',
           configuration: {
-            dependsOn: 'model',
             condition: {
               type: 'SHOW',
               option: 'optionType',
@@ -200,7 +199,6 @@
           key: 'valueProp',
           value: '',
           configuration: {
-            dependsOn: 'model',
             condition: {
               type: 'SHOW',
               option: 'optionType',

@@ -128,7 +128,7 @@
     const { hasResults, data: relationData } = useRelation(
       model,
       {},
-      model === 'string',
+      typeof model === 'string' || !model,
     );
 
     const data = hasResults ? relationData : queryData;
