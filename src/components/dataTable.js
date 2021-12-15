@@ -259,7 +259,7 @@
     const { hasResults, data: relationData } = useRelation(
       model,
       {},
-      model === 'string',
+      typeof model === 'string' || !model,
     );
     const data = hasResults ? relationData : queryData;
     const loading = hasResults ? false : queryLoading;
@@ -584,12 +584,14 @@
       }
     }, [data, rowsPerPage]);
 
+    const isRelation = !isDev && typeof model !== 'string';
+
     useEffect(() => {
       let amount = 0;
       if (hasToolbar) {
         amount += toolbarRef.current.clientHeight;
       }
-      if (showPagination) {
+      if (showPagination && !isRelation) {
         amount += paginationRef.current.clientHeight;
       }
       let style;
@@ -657,7 +659,7 @@
               )}
             </Table>
           </TableContainer>
-          {showPagination && (
+          {showPagination && !isRelation && (
             <TablePagination
               ref={paginationRef}
               classes={{ root: classes.pagination }}
