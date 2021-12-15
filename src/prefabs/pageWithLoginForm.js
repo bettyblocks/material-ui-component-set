@@ -10072,9 +10072,6 @@
                       label: 'Body text',
                       key: 'bodyText',
                       value: ['*Dynamic value from the Action response*'],
-                      configuration: {
-                        dependsOn: 'model',
-                      },
                     },
                     {
                       label: 'Allow to overwrite by the server response',
