@@ -34,6 +34,7 @@
       getCustomModelAttribute,
       getProperty,
       useAllQuery,
+      useRelation,
       useText,
     } = B;
     const displayError = showError === 'built-in';
@@ -94,7 +95,12 @@
           }, {})
         : {};
 
-    const { loading, error: err, data, refetch } = useAllQuery(
+    const {
+      loading: queryLoading,
+      error: err,
+      data: queryData,
+      refetch,
+    } = useAllQuery(
       model,
       {
         filter,
@@ -118,6 +124,15 @@
       },
       !model,
     );
+
+    const { hasResults, data: relationData } = useRelation(
+      model,
+      {},
+      typeof model === 'string' || !model,
+    );
+
+    const data = hasResults ? relationData : queryData;
+    const loading = hasResults ? false : queryLoading;
 
     if (loading) {
       B.triggerEvent('onLoad', loading);

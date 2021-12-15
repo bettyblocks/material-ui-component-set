@@ -33,6 +33,7 @@
       getCustomModelAttribute,
       getProperty,
       useAllQuery,
+      useRelation,
       useText,
     } = B;
     const { TextField, MenuItem } = window.MaterialUI.Core;
@@ -147,7 +148,12 @@
 
     const completeFilter = deepMerge(filter, interactionFilters);
 
-    const { loading, error, data, refetch } = useAllQuery(
+    const {
+      loading: queryLoading,
+      error,
+      data: queryData,
+      refetch,
+    } = useAllQuery(
       model,
       {
         filter: completeFilter,
@@ -171,6 +177,15 @@
       },
       !model,
     );
+
+    const { hasResults, data: relationData } = useRelation(
+      model,
+      {},
+      typeof model === 'string' || !model,
+    );
+
+    const data = hasResults ? relationData : queryData;
+    const loading = hasResults ? false : queryLoading;
 
     useEffect(() => {
       if (mounted.current) {
