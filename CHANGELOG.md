@@ -1,3 +1,10 @@
+# [1.189.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.188.0...v1.189.0) (2021-12-14)
+
+
+### Features
+
+* add onchange and onchangecommit to slider ([4641dc5](https://github.com/bettyblocks/material-ui-component-set/commit/4641dc59ad3310019bcc4fe7d66e932c3aae320e))
+
 # [1.188.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.187.2...v1.188.0) (2021-12-09)
 
 
