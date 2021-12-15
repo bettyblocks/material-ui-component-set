@@ -1,5 +1,5 @@
 (() => ({
-  name: 'TextInput',
+  name: 'NumberInput',
   type: 'FORM_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
@@ -10,7 +10,7 @@
       <div className={classes.formField}>
         <label htmlFor={name}>{label}</label>
 
-        <input className={classes.input} id={name} name={name} type={'text'} />
+        <input className={classes.input} id={name} name={name} type="number" />
       </div>
     );
 

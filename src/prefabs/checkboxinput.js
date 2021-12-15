@@ -4,7 +4,7 @@
   name: 'CheckboxInput',
   structure: [
     {
-      name: 'TextInput',
+      name: 'CheckboxInput',
       options: [
         {
           key: 'name',
@@ -16,13 +16,13 @@
           key: 'label',
           label: 'Label',
           type: 'TEXT',
-          value: '',
+          value: 'Checkbox',
         },
         {
-          key: 'type',
-          label: 'Type',
+          key: 'actionVariableId',
+          label: 'Action Variable Id',
           type: 'TEXT',
-          value: 'checkbox',
+          value: '',
         },
       ],
       descendants: [],

@@ -4,7 +4,7 @@
   name: 'NumberInput',
   structure: [
     {
-      name: 'TextInput',
+      name: 'NumberInput',
       options: [
         {
           key: 'name',
@@ -16,13 +16,13 @@
           key: 'label',
           label: 'Label',
           type: 'TEXT',
-          value: '',
+          value: 'Number',
         },
         {
-          key: 'type',
-          label: 'Type',
+          key: 'actionVariableId',
+          label: 'Action Variable Id',
           type: 'TEXT',
-          value: 'number',
+          value: '',
         },
       ],
       descendants: [],
