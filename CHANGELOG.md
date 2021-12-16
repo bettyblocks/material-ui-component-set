@@ -1,3 +1,24 @@
+# [1.190.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.189.0...v1.190.0) (2021-12-15)
+
+
+### Bug Fixes
+
+* label and value property hidden on select ([3b8a2ae](https://github.com/bettyblocks/material-ui-component-set/commit/3b8a2aed282f004bd58fe3ae49233478a82648f3))
+* radio not showing label and value property ([3882784](https://github.com/bettyblocks/material-ui-component-set/commit/3882784d0a74f8f449ec12cdd4d018c5756cd686))
+* skip condition for the userelation and hide pagination on datatable ([06d6d26](https://github.com/bettyblocks/material-ui-component-set/commit/06d6d26b4f5e6ad6ee2acb5371e0dd44663a3b04))
+
+
+### Features
+
+* updated other components ([8447d8b](https://github.com/bettyblocks/material-ui-component-set/commit/8447d8b4a02264db23e941d958a9c0d323092681))
+
+# [1.189.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.188.0...v1.189.0) (2021-12-14)
+
+
+### Features
+
+* add onchange and onchangecommit to slider ([4641dc5](https://github.com/bettyblocks/material-ui-component-set/commit/4641dc59ad3310019bcc4fe7d66e932c3aae320e))
+
 # [1.188.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.187.2...v1.188.0) (2021-12-09)
 
 

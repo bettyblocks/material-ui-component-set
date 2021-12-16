@@ -33,6 +33,7 @@
       getCustomModelAttribute,
       getProperty,
       useAllQuery,
+      useRelation,
       useText,
     } = B;
     const isDev = env === 'dev';
@@ -99,7 +100,12 @@
           }, {})
         : {};
 
-    const { loading, error: err, data, refetch } = useAllQuery(
+    const {
+      loading: queryLoading,
+      error: err,
+      data: queryData,
+      refetch,
+    } = useAllQuery(
       model,
       {
         filter,
@@ -123,6 +129,15 @@
       },
       !model,
     );
+
+    const { hasResults, data: relationData } = useRelation(
+      model,
+      {},
+      typeof model === 'string' || !model,
+    );
+
+    const data = hasResults ? relationData : queryData;
+    const loading = hasResults ? false : queryLoading;
 
     useEffect(() => {
       if (mounted.current) {

@@ -116,7 +116,7 @@
           },
         },
         {
-          type: 'MODEL',
+          type: 'MODEL_AND_RELATION',
           label: 'Model',
           key: 'model',
           value: '',
@@ -185,7 +185,6 @@
           key: 'labelProp',
           value: '',
           configuration: {
-            dependsOn: 'model',
             condition: {
               type: 'SHOW',
               option: 'optionType',
@@ -200,7 +199,6 @@
           key: 'valueProp',
           value: '',
           configuration: {
-            dependsOn: 'model',
             condition: {
               type: 'SHOW',
               option: 'optionType',

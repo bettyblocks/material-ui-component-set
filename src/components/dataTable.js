@@ -12,6 +12,7 @@
       ModelProvider,
       useAllQuery,
       useFilter,
+      useRelation,
       useText,
       Icon,
     } = B;
@@ -226,7 +227,12 @@
     const where = useFilter(completeFilter);
 
     // TODO: move model to skip
-    const { loading, error, data, refetch } = useAllQuery(
+    const {
+      loading: queryLoading,
+      error,
+      data: queryData,
+      refetch,
+    } = useAllQuery(
       model,
       {
         rawFilter: where,
@@ -249,6 +255,14 @@
       },
       !model,
     );
+
+    const { hasResults, data: relationData } = useRelation(
+      model,
+      {},
+      typeof model === 'string' || !model,
+    );
+    const data = hasResults ? relationData : queryData;
+    const loading = hasResults ? false : queryLoading;
 
     useEffect(() => {
       if (!isDev && data) {
@@ -570,12 +584,14 @@
       }
     }, [data, rowsPerPage]);
 
+    const isRelation = !isDev && typeof model !== 'string';
+
     useEffect(() => {
       let amount = 0;
       if (hasToolbar) {
         amount += toolbarRef.current.clientHeight;
       }
-      if (showPagination) {
+      if (showPagination && !isRelation) {
         amount += paginationRef.current.clientHeight;
       }
       let style;
@@ -643,7 +659,7 @@
               )}
             </Table>
           </TableContainer>
-          {showPagination && (
+          {showPagination && !isRelation && (
             <TablePagination
               ref={paginationRef}
               classes={{ root: classes.pagination }}
