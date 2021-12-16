@@ -25,6 +25,19 @@
           value: '',
         },
       ],
+      $onUpdate: [
+        {
+          query: 'UpdateActionVariable',
+          input: {
+            id: {
+              ref: ['options', 'actionVariableId'],
+            },
+            name: {
+              ref: ['options', 'name'],
+            },
+          },
+        },
+      ],
       descendants: [],
     },
   ],
