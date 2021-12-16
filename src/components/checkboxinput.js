@@ -5,9 +5,10 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { name, label } = options;
+    const isDev = B.env === 'dev';
 
     const Input = () => (
-      <div className={classes.formField}>
+      <div className={[classes.formField, isDev ? classes.dev : ''].join(' ')}>
         <label htmlFor={name}>{label}</label>
 
         <input
@@ -30,13 +31,15 @@
     return <Input />;
   })(),
   styles: () => ({
+    dev: {
+      '& > *': {
+        pointerEvents: 'none',
+      },
+    },
     formField: {
       display: 'flex',
       flexDirection: 'column',
       marginTop: '0.75rem',
-      '& > *': {
-        pointerEvents: 'none',
-      },
     },
     input: {
       border: '1px solid #DDD',
