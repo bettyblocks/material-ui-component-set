@@ -27,7 +27,7 @@
       );
     }
 
-    return FormComponent;
+    return <FormComponent />;
   })(),
   styles: () => ({
     fieldset: {
