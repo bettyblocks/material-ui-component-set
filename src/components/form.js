@@ -44,6 +44,7 @@
         const { actionId, modelId, variableId, objectVariableId } = formData;
         const formVariable = getActionInput(variableId);
         const history = isDev ? null : useHistory();
+        const location = isDev ? null : useLocation();
 
         const dataComponentAttributeText =
           useText(dataComponentAttribute) || 'Form';
@@ -128,8 +129,6 @@
             B.triggerEvent('onActionSuccess', data.actionb5);
 
             if (!isDev && hasRedirect) {
-              // eslint-disable-next-line react-hooks/rules-of-hooks
-              const location = useLocation();
               if (redirectTo === location.pathname) {
                 history.go(0);
               } else {
