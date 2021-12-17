@@ -28,8 +28,14 @@
       blanco,
       dataComponentAttribute = ['Select'],
     } = options;
-    const { env, getCustomModelAttribute, getProperty, useAllQuery, useRelation, useText } =
-      B;
+    const {
+      env,
+      getCustomModelAttribute,
+      getProperty,
+      useAllQuery,
+      useRelation,
+      useText,
+    } = B;
     const { TextField, MenuItem } = window.MaterialUI.Core;
     const displayError = showError === 'built-in';
     const isDev = env === 'dev';

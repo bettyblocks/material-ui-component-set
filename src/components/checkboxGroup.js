@@ -29,8 +29,14 @@
       dataComponentAttribute = ['CheckboxGroup'],
     } = options;
 
-    const { env, getCustomModelAttribute, getProperty, useAllQuery, useRelation, useText } =
-      B;
+    const {
+      env,
+      getCustomModelAttribute,
+      getProperty,
+      useAllQuery,
+      useRelation,
+      useText,
+    } = B;
     const displayError = showError === 'built-in';
     const isDev = env === 'dev';
     const [errorState, setErrorState] = useState(false);

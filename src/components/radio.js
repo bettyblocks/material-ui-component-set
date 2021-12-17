@@ -28,8 +28,14 @@
       orderBy,
       dataComponentAttribute = ['Radio'],
     } = options;
-    const { env, getCustomModelAttribute, getProperty, useAllQuery, useRelation, useText } =
-      B;
+    const {
+      env,
+      getCustomModelAttribute,
+      getProperty,
+      useAllQuery,
+      useRelation,
+      useText,
+    } = B;
     const isDev = env === 'dev';
     const displayError = showError === 'built-in';
 
