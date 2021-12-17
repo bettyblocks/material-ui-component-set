@@ -27,9 +27,8 @@
     const [authProfile, setAuthProfile] = React.useState(null);
     const [redirectTo, setRedirectTo] = React.useState('');
     const [showAuthValidation, setShowAuthValidation] = React.useState(false);
-    const [showEndpointValidation, setShowEndpointValidation] = React.useState(
-      false,
-    );
+    const [showEndpointValidation, setShowEndpointValidation] =
+      React.useState(false);
 
     const getDescendantByRef = (refValue, structure) =>
       structure.reduce((acc, component) => {
@@ -47,7 +46,7 @@
     function serializeParameters(obj) {
       return Object.entries(obj).map(([name, entry]) => ({
         name,
-        value: entry.map(v => JSON.stringify(v)),
+        value: entry.map((v) => JSON.stringify(v)),
       }));
     }
 
@@ -5778,8 +5777,7 @@
                                                   {
                                                     type: 'VARIABLE',
                                                     label: 'Test attribute',
-                                                    key:
-                                                      'dataComponentAttribute',
+                                                    key: 'dataComponentAttribute',
                                                     value: ['Button'],
                                                     configuration: {
                                                       condition: {
@@ -6203,8 +6201,7 @@
                                                   {
                                                     type: 'VARIABLE',
                                                     label: 'Test attribute',
-                                                    key:
-                                                      'dataComponentAttribute',
+                                                    key: 'dataComponentAttribute',
                                                     value: ['Box'],
                                                     configuration: {
                                                       condition: {
@@ -6274,13 +6271,11 @@
                                                           dataType: 'string',
                                                           allowedInput: [
                                                             {
-                                                              name:
-                                                                'Internal page',
+                                                              name: 'Internal page',
                                                               value: 'internal',
                                                             },
                                                             {
-                                                              name:
-                                                                'External page',
+                                                              name: 'External page',
                                                               value: 'external',
                                                             },
                                                           ],
@@ -6319,8 +6314,7 @@
                                                       {
                                                         value: '_self',
                                                         label: 'Open in',
-                                                        key:
-                                                          'openLinkToExternal',
+                                                        key: 'openLinkToExternal',
                                                         type: 'CUSTOM',
                                                         configuration: {
                                                           condition: {
@@ -6333,8 +6327,7 @@
                                                           dataType: 'string',
                                                           allowedInput: [
                                                             {
-                                                              name:
-                                                                'Current Tab',
+                                                              name: 'Current Tab',
                                                               value: '_self',
                                                             },
                                                             {
@@ -6446,8 +6439,7 @@
                                                       {
                                                         label:
                                                           'Toggle tooltip visibility',
-                                                        key:
-                                                          'hasVisibleTooltip',
+                                                        key: 'hasVisibleTooltip',
                                                         value: true,
                                                         type: 'TOGGLE',
                                                         configuration: {
@@ -6509,8 +6501,7 @@
                                                               value: 'left',
                                                             },
                                                             {
-                                                              name:
-                                                                'Botttom Start',
+                                                              name: 'Botttom Start',
                                                               value:
                                                                 'bottom-start',
                                                             },
@@ -6519,8 +6510,7 @@
                                                               value: 'bottom',
                                                             },
                                                             {
-                                                              name:
-                                                                'Bottom End',
+                                                              name: 'Bottom End',
                                                               value:
                                                                 'bottom-end',
                                                             },
@@ -6538,8 +6528,7 @@
                                                         type: 'COLOR',
                                                         label:
                                                           'Tooltip Background',
-                                                        key:
-                                                          'tooltipBackground',
+                                                        key: 'tooltipBackground',
                                                         value: 'Medium',
                                                         configuration: {
                                                           condition: {
@@ -6576,8 +6565,7 @@
                                                       {
                                                         type: 'VARIABLE',
                                                         label: 'Test attribute',
-                                                        key:
-                                                          'dataComponentAttribute',
+                                                        key: 'dataComponentAttribute',
                                                         value: ['Button'],
                                                         configuration: {
                                                           condition: {
@@ -6648,13 +6636,11 @@
                                                           dataType: 'string',
                                                           allowedInput: [
                                                             {
-                                                              name:
-                                                                'Internal page',
+                                                              name: 'Internal page',
                                                               value: 'internal',
                                                             },
                                                             {
-                                                              name:
-                                                                'External page',
+                                                              name: 'External page',
                                                               value: 'external',
                                                             },
                                                           ],
@@ -6693,8 +6679,7 @@
                                                       {
                                                         value: '_self',
                                                         label: 'Open in',
-                                                        key:
-                                                          'openLinkToExternal',
+                                                        key: 'openLinkToExternal',
                                                         type: 'CUSTOM',
                                                         configuration: {
                                                           condition: {
@@ -6707,8 +6692,7 @@
                                                           dataType: 'string',
                                                           allowedInput: [
                                                             {
-                                                              name:
-                                                                'Current Tab',
+                                                              name: 'Current Tab',
                                                               value: '_self',
                                                             },
                                                             {
@@ -6812,8 +6796,7 @@
                                                       {
                                                         label:
                                                           'Toggle tooltip visibility',
-                                                        key:
-                                                          'hasVisibleTooltip',
+                                                        key: 'hasVisibleTooltip',
                                                         value: true,
                                                         type: 'TOGGLE',
                                                         configuration: {
@@ -6875,8 +6858,7 @@
                                                               value: 'left',
                                                             },
                                                             {
-                                                              name:
-                                                                'Botttom Start',
+                                                              name: 'Botttom Start',
                                                               value:
                                                                 'bottom-start',
                                                             },
@@ -6885,8 +6867,7 @@
                                                               value: 'bottom',
                                                             },
                                                             {
-                                                              name:
-                                                                'Bottom End',
+                                                              name: 'Bottom End',
                                                               value:
                                                                 'bottom-end',
                                                             },
@@ -6904,8 +6885,7 @@
                                                         type: 'COLOR',
                                                         label:
                                                           'Tooltip Background',
-                                                        key:
-                                                          'tooltipBackground',
+                                                        key: 'tooltipBackground',
                                                         value: 'Medium',
                                                         configuration: {
                                                           condition: {
@@ -6942,8 +6922,7 @@
                                                       {
                                                         type: 'VARIABLE',
                                                         label: 'Test attribute',
-                                                        key:
-                                                          'dataComponentAttribute',
+                                                        key: 'dataComponentAttribute',
                                                         value: ['Button'],
                                                         configuration: {
                                                           condition: {
@@ -6982,7 +6961,7 @@
       },
     ];
 
-    const isEmptyRedirect = value =>
+    const isEmptyRedirect = (value) =>
       !value || Object.keys(value).length === 0 || value.id === '';
 
     return (
@@ -7017,7 +6996,7 @@
             }
           >
             <EndpointSelector
-              onChange={value => {
+              onChange={(value) => {
                 setShowEndpointValidation(isEmptyRedirect(value));
                 setRedirectTo(value);
               }}
@@ -7043,7 +7022,8 @@
             if (authProfile) {
               const { loginModel, properties, id } = authProfile;
               const formPrefab = getDescendantByRef('#formId', prefabStructure);
-              newPrefab.actions[1].events[0].options.authenticationProfileId = id;
+              newPrefab.actions[1].events[0].options.authenticationProfileId =
+                id;
               formPrefab.options[0].value.modelId = loginModel;
               formPrefab.options[1].value = loginModel;
               newPrefab.variables[0].options.modelId = loginModel;
@@ -7056,7 +7036,7 @@
                 },
               ];
               newPrefab.actions[0].events[0].options.assign = properties.map(
-                property => {
+                (property) => {
                   const isPassword = property.kind === 'PASSWORD';
                   return {
                     ref: {
@@ -7075,7 +7055,7 @@
               const descendants = properties.sort((a, b) =>
                 a.kind.localeCompare(b.kind),
               );
-              const descendantsArray = descendants.map(property => {
+              const descendantsArray = descendants.map((property) => {
                 switch (property.kind) {
                   case 'EMAIL_ADDRESS': {
                     return {

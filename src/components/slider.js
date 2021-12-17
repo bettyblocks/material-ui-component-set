@@ -4,12 +4,8 @@
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const {
-      Slider,
-      InputLabel,
-      FormHelperText,
-      FormControl,
-    } = window.MaterialUI.Core;
+    const { Slider, InputLabel, FormHelperText, FormControl } =
+      window.MaterialUI.Core;
     const { env, getCustomModelAttribute, useText } = B;
     const isDev = env === 'dev';
     const {
@@ -175,7 +171,7 @@
       <div className={classes.dev}>{sliderInput}</div>
     );
   })(),
-  styles: B => t => {
+  styles: (B) => (t) => {
     const { mediaMinWidth, Styling } = B;
     const style = new Styling(t);
     const getSpacing = (idx, device = 'Mobile') =>

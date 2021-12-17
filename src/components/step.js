@@ -29,7 +29,7 @@
 
     useEffect(() => {
       if (setStepLabelData) {
-        setStepLabelData(prev => ({
+        setStepLabelData((prev) => ({
           ...prev,
           [`label${index}`]: label,
           [`icon${index}`]: icon,

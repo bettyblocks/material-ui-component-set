@@ -17,8 +17,11 @@
     const { headerOnly, handleSort, orderBy, linkTo, handleRowClick, context } =
       parent || {};
     const { type, id: propertyPath } = property;
-    const { kind, name: propertyName, label: propertyLabel } =
-      getProperty(property) || {};
+    const {
+      kind,
+      name: propertyName,
+      label: propertyLabel,
+    } = getProperty(property) || {};
     const { field, order = 'asc' } = orderBy || {};
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
@@ -69,12 +72,12 @@
 
     const isSortable = propertyName && sortable;
 
-    const createSortHandler = prop => {
+    const createSortHandler = (prop) => {
       const sortOrder = order === 'asc' ? 'desc' : 'asc';
       handleSort(prop, sortOrder);
     };
 
-    const isFilterSelected = fields => {
+    const isFilterSelected = (fields) => {
       if (!fields || fields.length !== propertyPath.length) return false;
 
       for (let index = 0; index < fields.length; index += 1) {
@@ -114,7 +117,7 @@
 
     B.defineFunction('Hide', () => setVisible(false));
     B.defineFunction('Show', () => setVisible(true));
-    B.defineFunction('Show/Hide', () => setVisible(s => !s));
+    B.defineFunction('Show/Hide', () => setVisible((s) => !s));
 
     if (isDev) {
       return (
@@ -150,11 +153,9 @@
       >
         {headerOnly ? Header : Content}
       </TableCell>
-    ) : (
-      <></>
-    );
+    ) : null;
   })(),
-  styles: B => theme => {
+  styles: (B) => (theme) => {
     const { env, mediaMinWidth, Styling } = B;
     const style = new Styling(theme);
     const isDev = env === 'dev';

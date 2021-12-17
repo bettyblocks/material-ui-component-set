@@ -80,20 +80,20 @@
 
     B.defineFunction('Hide', () => setVisible(false));
     B.defineFunction('Show', () => setVisible(true));
-    B.defineFunction('Show/Hide', () => setVisible(s => !s));
-    B.defineFunction('Set Visibility', value => {
+    B.defineFunction('Show/Hide', () => setVisible((s) => !s));
+    B.defineFunction('Set Visibility', (value) => {
       if (typeof value === 'boolean') setVisible(value);
     });
 
-    const getValue = evt => {
+    const getValue = (evt) => {
       const value = (evt && evt.target && evt.target.value) || evt;
       return `${value}`;
     };
 
-    B.defineFunction('Set Left Value', evt => setLeftValue(getValue(evt)));
-    B.defineFunction('Set Right Value', evt => setRightValue(getValue(evt)));
+    B.defineFunction('Set Left Value', (evt) => setLeftValue(getValue(evt)));
+    B.defineFunction('Set Right Value', (evt) => setRightValue(getValue(evt)));
 
-    if (!isDev && !visible) return <></>;
+    if (!isDev && !visible) return null;
     return (
       <div
         className={children.length === 0 ? classes.empty : undefined}

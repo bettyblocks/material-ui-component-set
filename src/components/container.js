@@ -32,7 +32,7 @@
       ContainerCmp
     );
   })(),
-  styles: B => theme => {
+  styles: (B) => (theme) => {
     const { env, Styling } = B;
     const isDev = env === 'dev';
     const style = new Styling(theme);

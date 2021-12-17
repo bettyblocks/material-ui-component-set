@@ -29,7 +29,7 @@
 
     B.defineFunction('Show', () => setOpen(true));
     B.defineFunction('Hide', () => setOpen(false));
-    B.defineFunction('Show/Hide', () => setOpen(s => !s));
+    B.defineFunction('Show/Hide', () => setOpen((s) => !s));
 
     const min = parseInt(useText(minValue), 10) || 0;
     const max = parseInt(useText(maxValue), 10) || 100;
@@ -37,7 +37,7 @@
       parseInt(useText(value), 10) || (env === 'dev' ? 50 : 0);
     const currentValueBuffer = parseInt(useText(valueBuffer), 10) || 0;
 
-    const normalise = v => ((v - min) * 100) / (max - min);
+    const normalise = (v) => ((v - min) * 100) / (max - min);
 
     const Progress = type === 'linear' ? LinearProgress : CircularProgress;
     const variant = type === 'linear' ? linearVariant : circularVariant;
@@ -70,7 +70,7 @@
       />
     );
 
-    if (!isDev && !open) return <></>;
+    if (!isDev && !open) return null;
 
     return isDev ? (
       <div className={classes.wrapper}>{ProgressCmp}</div>
@@ -78,7 +78,7 @@
       ProgressCmp
     );
   })(),
-  styles: B => t => {
+  styles: (B) => (t) => {
     const { color: colorFunc, mediaMinWidth, Styling } = B;
     const style = new Styling(t);
     const getSpacing = (idx, device = 'Mobile') =>

@@ -38,9 +38,8 @@
 
     const [validationMessage, setValidationMessage] = React.useState('');
 
-    const [buttonGroupValue, setButtonGroupValue] = React.useState(
-      'anotherPage',
-    );
+    const [buttonGroupValue, setButtonGroupValue] =
+      React.useState('anotherPage');
     const pageUuid = useCurrentPageId();
     const { data, loading } = useModelQuery({
       variables: { id: modelId },
@@ -102,7 +101,7 @@
       if (validate()) {
         const newPrefab = { ...prefab };
         const idProperty = data.model.properties.find(
-          property => property.name === 'id',
+          (property) => property.name === 'id',
         );
         const variableName = `${camelToSnakeCase(data.model.label)}_id`;
         newPrefab.variables.push({
@@ -133,7 +132,7 @@
       if (validate()) {
         const newPrefab = { ...prefab };
         const idProperty = data.model.properties.find(
-          property => property.name === 'id',
+          (property) => property.name === 'id',
         );
         newPrefab.structure[0].options[0].value = thisPageState.modelId;
         newPrefab.interactions.push({
@@ -229,8 +228,8 @@
               }
             >
               <ModelSelector
-                onChange={id => {
-                  setAnotherPageState(prevState => ({
+                onChange={(id) => {
+                  setAnotherPageState((prevState) => ({
                     ...prevState,
                     modelId: id,
                   }));
@@ -257,13 +256,13 @@
               }
             >
               <ComponentSelector
-                onChange={component => {
+                onChange={(component) => {
                   const foundModelId = Object.values(component.options).reduce(
                     (acc, option) =>
                       option.type === 'MODEL' ? option.value : acc,
                     null,
                   );
-                  setThisPageState(prevState => ({
+                  setThisPageState((prevState) => ({
                     ...prevState,
                     modelId: foundModelId,
                     component,
@@ -296,7 +295,7 @@
               <AuthenticationProfileSelector
                 allowCustomAuthProfile
                 onChange={(id, authProfileObject) => {
-                  setLoggedInUserState(prevState => ({
+                  setLoggedInUserState((prevState) => ({
                     ...prevState,
                     authenticationProfile: authProfileObject,
                   }));

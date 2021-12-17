@@ -142,7 +142,7 @@
       RatingComponent
     );
   })(),
-  styles: B => t => {
+  styles: (B) => (t) => {
     const { mediaMinWidth, Styling } = B;
     const style = new Styling(t);
     const getSpacing = (idx, device = 'Mobile') =>

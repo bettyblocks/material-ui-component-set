@@ -34,6 +34,8 @@
     const [activeStep, setActiveStep] = useState(activeStepIndex);
     const buttonNextText = useText(buttonNext);
     const buttonPrevText = useText(buttonPrev);
+    const dataComponentAttributeText =
+      useText(dataComponentAttribute) || 'Carousel';
     const numRendersRef = useRef(1);
     const [stepLabelData, setStepLabelData] = useState({});
     let orderPropertyPath = null;
@@ -63,23 +65,44 @@
         }
       : {};
 
-    const ImgPlaceholder = () => (
-      <div className={classes.empty}>
-        <div className={classes.placeholderWrapper}>
-          <svg className={classes.placeholder} width={86} height={48}>
-            <title>placeholder</title>
-            <rect x="19.5" y="8.5" rx="2" />
-            <path d="M61.1349945 29.020979v3.9160839H25v-2.5379375l6.5998225-4.9892478 5.6729048 4.2829541 13.346858-11.2981564L61.1349945 29.020979zm-22.5-10.270979c0 1.0416667-.3645833 1.9270833-1.09375 2.65625S35.9266612 22.5 34.8849945 22.5s-1.9270833-.3645833-2.65625-1.09375-1.09375-1.6145833-1.09375-2.65625.3645833-1.9270833 1.09375-2.65625S33.8433278 15 34.8849945 15s1.9270833.3645833 2.65625 1.09375 1.09375 1.6145833 1.09375 2.65625z" />
-          </svg>
+    const ImgPlaceholder = function () {
+      return (
+        <div className={classes.empty}>
+          <div className={classes.placeholderWrapper}>
+            <svg className={classes.placeholder} width={86} height={48}>
+              <title>placeholder</title>
+              <rect x="19.5" y="8.5" rx="2" />
+              <path d="M61.1349945 29.020979v3.9160839H25v-2.5379375l6.5998225-4.9892478 5.6729048 4.2829541 13.346858-11.2981564L61.1349945 29.020979zm-22.5-10.270979c0 1.0416667-.3645833 1.9270833-1.09375 2.65625S35.9266612 22.5 34.8849945 22.5s-1.9270833-.3645833-2.65625-1.09375-1.09375-1.6145833-1.09375-2.65625.3645833-1.9270833 1.09375-2.65625S33.8433278 15 34.8849945 15s1.9270833.3645833 2.65625 1.09375 1.09375 1.6145833 1.09375 2.65625z" />
+            </svg>
+          </div>
         </div>
-      </div>
-    );
+      );
+    };
 
-    const MobileStepperCmp = () => {
-      if (autoplay && !isDev) {
-        useEffect(() => {
-          const interval = setInterval(() => {
-            setActiveStep(prevActiveStep => {
+    const Step = function (props) {
+      const { active, item } = props;
+      const StepContent = (
+        <div className={classes.root}>
+          <img
+            src={
+              item[propertyName].url
+                ? item[propertyName].url
+                : item[propertyName]
+            }
+            alt="carousel"
+          />
+        </div>
+      );
+
+      return <>{active ? StepContent : null}</>;
+    };
+
+    const MobileStepperCmp = function () {
+      useEffect(() => {
+        let interval;
+        if (autoplay && !isDev) {
+          interval = setInterval(() => {
+            setActiveStep((prevActiveStep) => {
               const nextStep = prevActiveStep + 1;
               if (nextStep > children.length - 1) {
                 return 0;
@@ -87,12 +110,16 @@
               return nextStep;
             });
           }, duration);
-          return () => clearInterval(interval);
-        }, [activeStep]);
-      }
+        }
+        return () => {
+          if (interval) {
+            clearInterval(interval);
+          }
+        };
+      }, [autoplay, isDev, activeStep]);
 
       const handleNext = () => {
-        setActiveStep(prevActiveStep => {
+        setActiveStep((prevActiveStep) => {
           const nextStep = prevActiveStep + 1;
           if (nextStep > children.length - 1) {
             if (continousLoop) {
@@ -105,7 +132,7 @@
       };
 
       const handleBack = () => {
-        setActiveStep(prevActiveStep => {
+        setActiveStep((prevActiveStep) => {
           const nextStep = prevActiveStep - 1;
           if (nextStep < 0) {
             if (continousLoop) {
@@ -214,7 +241,7 @@
       );
     };
 
-    const ModelStepperCmp = () => {
+    const ModelStepperCmp = function () {
       let maxSteps = 0;
       const where = useFilter(filter);
       const { loading, error, data, refetch } = useAllQuery(model, {
@@ -245,10 +272,11 @@
         maxSteps = totalCount;
       }
 
-      if (autoplay && !isDev) {
-        useEffect(() => {
-          const interval = setInterval(() => {
-            setActiveStep(prevActiveStep => {
+      useEffect(() => {
+        let interval;
+        if (autoplay && !isDev) {
+          interval = setInterval(() => {
+            setActiveStep((prevActiveStep) => {
               const nextStep = prevActiveStep + 1;
               if (nextStep > maxSteps - 1) {
                 return 0;
@@ -256,9 +284,13 @@
               return nextStep;
             });
           }, duration);
-          return () => clearInterval(interval);
-        });
-      }
+        }
+        return () => {
+          if (interval) {
+            clearInterval(interval);
+          }
+        };
+      }, [autoplay, isDev]);
 
       if (loading) {
         return <div className={classes.skeleton} />;
@@ -273,7 +305,7 @@
       });
 
       const handleNext = () => {
-        setActiveStep(prevActiveStep => {
+        setActiveStep((prevActiveStep) => {
           const nextStep = prevActiveStep + 1;
           if (nextStep > maxSteps - 1) {
             if (continousLoop) {
@@ -286,7 +318,7 @@
       };
 
       const handleBack = () => {
-        setActiveStep(prevActiveStep => {
+        setActiveStep((prevActiveStep) => {
           const nextStep = prevActiveStep - 1;
           if (nextStep < 0) {
             if (continousLoop) {
@@ -296,24 +328,6 @@
           }
           return nextStep;
         });
-      };
-
-      const Step = props => {
-        const { active, item } = props;
-        const StepContent = (
-          <div className={classes.root}>
-            <img
-              src={
-                item[propertyName].url
-                  ? item[propertyName].url
-                  : item[propertyName]
-              }
-              alt="carousel"
-            />
-          </div>
-        );
-
-        return <>{active ? StepContent : null}</>;
       };
 
       const overlay = (
@@ -383,13 +397,14 @@
       return (
         <div
           className={classes.container}
-          data-component={useText(dataComponentAttribute) || 'Carousel'}
+          data-component={dataComponentAttributeText}
         >
           {results.length === 0 || isDev ? (
             <ImgPlaceholder />
           ) : (
             results.map((item, index) => (
               <Step
+                key={item}
                 item={item}
                 active={index === activeStep}
                 isFirstRender={numRendersRef.current === 1}
@@ -415,7 +430,7 @@
       StepperComponent
     );
   })(),
-  styles: B => t => {
+  styles: (B) => (t) => {
     const { env, Styling } = B;
     const style = new Styling(t);
     const isDev = env === 'dev';
