@@ -42,10 +42,9 @@
         const selectedFilter = getFilter();
         const hasFilter =
           selectedFilter && Object.keys(selectedFilter).length > 0;
+        const history = isDev ? null : useHistory();
 
         const redirect = () => {
-          // eslint-disable-next-line react-hooks/rules-of-hooks
-          const history = useHistory();
           // eslint-disable-next-line react-hooks/rules-of-hooks
           history.push(useEndpoint(redirectWithoutResult));
         };

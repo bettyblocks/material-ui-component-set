@@ -15,7 +15,7 @@
     "react/destructuring-assignment": 0,
     "react/display-name": 0,
     "react/jsx-props-no-spreading": 0,
-    "react/jsx-no-useless-fragment": [2, {"allowExpressions":  true}],
+    "react/jsx-no-useless-fragment": 0,
     "react/jsx-filename-extension": [1, { "extensions": [".js"] }],
     "react/jsx-no-undef": [2, { "allowGlobals": true }],
     "react/prefer-exact-props": 0,

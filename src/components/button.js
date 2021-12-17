@@ -275,7 +275,7 @@
 
     if (!isDev) {
       if (!isVisible) {
-        return null;
+        return <></>;
       }
       return Button;
     }
