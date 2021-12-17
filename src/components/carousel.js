@@ -111,11 +111,12 @@
             });
           }, duration);
         }
-        return () => {
-          if (interval) {
+        if (interval) {
+          return () => {
             clearInterval(interval);
-          }
-        };
+          };
+        }
+        return undefined;
       }, [autoplay, isDev, activeStep]);
 
       const handleNext = () => {
@@ -285,19 +286,24 @@
             });
           }, duration);
         }
-        return () => {
-          if (interval) {
+        if (interval) {
+          return () => {
             clearInterval(interval);
-          }
-        };
-      }, [autoplay, isDev]);
+          };
+        }
+        return undefined;
+      }, [autoplay, isDev, activeStep, maxSteps]);
 
       if (loading) {
         return <div className={classes.skeleton} />;
       }
 
       if (error) {
-        return <div>Something whent wrong.</div>;
+        return (
+          <span data-component={dataComponentAttributeText}>
+            {error.message}
+          </span>
+        );
       }
 
       B.defineFunction('Refetch', () => {
