@@ -299,7 +299,11 @@
       }
 
       if (error) {
-        return <div>Something whent wrong.</div>;
+        return (
+          <span data-component={dataComponentAttributeText}>
+            {error.message}
+          </span>
+        );
       }
 
       B.defineFunction('Refetch', () => {
