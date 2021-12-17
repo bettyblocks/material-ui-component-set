@@ -43,11 +43,11 @@
         const hasFilter =
           selectedFilter && Object.keys(selectedFilter).length > 0;
 
-        const history = useHistory();
-        const endpoint = useEndpoint(redirectWithoutResult);
-
         const redirect = () => {
-          history.push(endpoint);
+          // eslint-disable-next-line react-hooks/rules-of-hooks
+          const history = useHistory();
+          // eslint-disable-next-line react-hooks/rules-of-hooks
+          history.push(useEndpoint(redirectWithoutResult));
         };
 
         const DataContainer = function () {
