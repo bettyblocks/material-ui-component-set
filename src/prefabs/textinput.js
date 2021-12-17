@@ -2,6 +2,24 @@
   category: 'FORM',
   icon: 'TextInputIcon',
   name: 'TextInput',
+  beforeCreate: ({
+    close,
+    components: { CreateFormInputWizard },
+    prefab,
+    save,
+  }) => {
+    return (
+      <CreateFormInputWizard
+        actionVariableOption="actionVariableId"
+        actionVariableType="String"
+        close={close}
+        labelOptionKey="label"
+        nameOptionKey="name"
+        prefab={prefab}
+        save={save}
+      />
+    );
+  },
   structure: [
     {
       name: 'TextInput',

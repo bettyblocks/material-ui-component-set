@@ -2,6 +2,24 @@
   category: 'FORM',
   icon: 'NumberInputIcon',
   name: 'NumberInput',
+  beforeCreate: ({
+    close,
+    components: { CreateFormInputWizard },
+    prefab,
+    save,
+  }) => {
+    return (
+      <CreateFormInputWizard
+        actionVariableOption="actionVariableId"
+        actionVariableType="Integer"
+        close={close}
+        labelOptionKey="label"
+        nameOptionKey="name"
+        prefab={prefab}
+        save={save}
+      />
+    );
+  },
   structure: [
     {
       name: 'NumberInput',

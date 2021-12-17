@@ -2,6 +2,24 @@
   category: 'FORM',
   icon: 'CheckboxIcon',
   name: 'CheckboxInput',
+  beforeCreate: ({
+    close,
+    components: { CreateFormInputWizard },
+    prefab,
+    save,
+  }) => {
+    return (
+      <CreateFormInputWizard
+        actionVariableOption="actionVariableId"
+        actionVariableType="Boolean"
+        close={close}
+        labelOptionKey="label"
+        nameOptionKey="name"
+        prefab={prefab}
+        save={save}
+      />
+    );
+  },
   structure: [
     {
       name: 'CheckboxInput',
