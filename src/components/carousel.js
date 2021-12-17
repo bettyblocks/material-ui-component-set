@@ -111,11 +111,12 @@
             });
           }, duration);
         }
-        return () => {
-          if (interval) {
+        if (interval) {
+          return () => {
             clearInterval(interval);
-          }
-        };
+          };
+        }
+        return undefined;
       }, [autoplay, isDev, activeStep]);
 
       const handleNext = () => {
@@ -285,12 +286,13 @@
             });
           }, duration);
         }
-        return () => {
-          if (interval) {
+        if (interval) {
+          return () => {
             clearInterval(interval);
-          }
-        };
-      }, [autoplay, isDev]);
+          };
+        }
+        return undefined;
+      }, [autoplay, isDev, activeStep, maxSteps]);
 
       if (loading) {
         return <div className={classes.skeleton} />;
