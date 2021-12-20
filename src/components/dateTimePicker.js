@@ -45,6 +45,7 @@
     const helper = useText(helperText);
     const placeholderText = useText(placeholder);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
+    const mounted = useRef(false);
 
     const localeMap = {
       nl: nlLocale,
@@ -82,13 +83,25 @@
     };
 
     const changeHandler = date => {
-      let datevalue = date;
-      if (type === 'date') {
-        datevalue = convertToDate(date);
-      }
-      B.triggerEvent('onChange', datevalue);
       setSelectedDate(date);
     };
+
+    useEffect(() => {
+      if (mounted.current) {
+        let datevalue = selectedDate;
+        if (type === 'date') {
+          datevalue = convertToDate(selectedDate);
+        }
+        B.triggerEvent('onChange', datevalue);
+      }
+    }, [selectedDate]);
+
+    useEffect(() => {
+      mounted.current = true;
+      return () => {
+        mounted.current = false;
+      };
+    }, []);
 
     const setDefaultDate = (defaultFormat, givenFormat) => {
       if (!selectedDate && strDefaultValue) {
