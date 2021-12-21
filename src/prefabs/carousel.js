@@ -287,7 +287,7 @@
           value: '',
           label: 'Model',
           key: 'model',
-          type: 'MODEL',
+          type: 'MODEL_AND_RELATION',
           configuration: {
             condition: {
               type: 'SHOW',
@@ -303,6 +303,7 @@
           type: 'PROPERTY',
           value: '',
           configuration: {
+            dependsOn: 'model',
             condition: {
               type: 'SHOW',
               option: 'select',
@@ -317,7 +318,6 @@
           key: 'filter',
           type: 'FILTER',
           configuration: {
-            dependsOn: 'model',
             condition: {
               type: 'SHOW',
               option: 'select',
