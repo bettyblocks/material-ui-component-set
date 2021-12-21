@@ -62,7 +62,7 @@
             }
           >
             <ModelSelector
-              onChange={value => {
+              onChange={(value) => {
                 setModelId(value);
                 setValidationMessage('');
               }}

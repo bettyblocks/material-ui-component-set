@@ -38,12 +38,12 @@
 
     const closePanel = () => setExpanded(false);
     const openPanel = () => setExpanded(true);
-    const togglePanel = () => setExpanded(s => !s);
+    const togglePanel = () => setExpanded((s) => !s);
 
     B.defineFunction('Expand', openPanel);
     B.defineFunction('Collapse', closePanel);
     B.defineFunction('Expand/Collapse', togglePanel);
-    B.defineFunction('Set Expansion Panel', value => {
+    B.defineFunction('Set Expansion Panel', (value) => {
       if (typeof value === 'boolean') setExpanded(value);
     });
 
@@ -97,7 +97,7 @@
 
     return <div className={classes.panel}>{ExpansionPanelComponent}</div>;
   })(),
-  styles: B => theme => {
+  styles: (B) => (theme) => {
     const { mediaMinWidth, Styling } = B;
     const style = new Styling(theme);
     const getSpacing = (idx, device = 'Mobile') =>

@@ -5,12 +5,8 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { Autocomplete } = window.MaterialUI.Lab;
-    const {
-      Checkbox,
-      Chip,
-      CircularProgress,
-      TextField,
-    } = window.MaterialUI.Core;
+    const { Checkbox, Chip, CircularProgress, TextField } =
+      window.MaterialUI.Core;
     const {
       InteractionScope,
       ModelProvider,
@@ -96,7 +92,7 @@
         initalValue = defaultValue
           .trim()
           .split(',')
-          .map(x => x.trim());
+          .map((x) => x.trim());
       }
     }
 
@@ -118,7 +114,7 @@
             value
               .trim()
               .split(',')
-              .map(x => x.trim()),
+              .map((x) => x.trim()),
           );
         }
       }
@@ -162,7 +158,7 @@
      * Merges interaction filters with local filters
      */
     const mergeFilters = (...filters) => {
-      const isObject = item =>
+      const isObject = (item) =>
         item && typeof item === 'object' && !Array.isArray(item);
 
       return filters.reduce((acc, object) => {
@@ -265,7 +261,7 @@
           filter._or = [];
         }
 
-        value.forEach(x => {
+        value.forEach((x) => {
           filter._or.push({
             [valueProp.name]: {
               [valuePropIsNumber ? 'eq' : 'regex']:
@@ -382,14 +378,14 @@
             const [operator] = Object.keys(acc);
             return {
               [operator]: [
-                ...acc[operator].map(entry => ({ [field]: { ...entry } })),
+                ...acc[operator].map((entry) => ({ [field]: { ...entry } })),
               ],
             };
           }
           if (index === arr.length - 1) {
             return Array.isArray(eventValue)
               ? {
-                  _or: eventValue.map(el => ({
+                  _or: eventValue.map((el) => ({
                     [field]: { [propertyArg.operator]: el },
                   })),
                 }
@@ -432,7 +428,12 @@
       }
     }
 
-    const { loading, error, data: { results } = {}, refetch } = useAllQuery(
+    const {
+      loading,
+      error,
+      data: { results } = {},
+      refetch,
+    } = useAllQuery(
       model,
       {
         take: 20,
@@ -474,21 +475,21 @@
       value &&
       results
     ) {
-      setValue(prev => {
+      setValue((prev) => {
         if (multiple) {
           return prev
-            .map(val =>
+            .map((val) =>
               results.find(
-                result =>
+                (result) =>
                   result[valueProp.name] ===
                   (valuePropIsNumber ? parseInt(val, 10) : val),
               ),
             )
-            .filter(x => typeof x !== 'undefined');
+            .filter((x) => typeof x !== 'undefined');
         }
 
         return (
-          results.find(result =>
+          results.find((result) =>
             result[valueProp.name] === valuePropIsNumber
               ? parseInt(prev, 10)
               : prev,
@@ -594,7 +595,7 @@
 
     const getOptions = () => {
       if (optionType === 'property') {
-        return propertyValues.map(propertyValue => propertyValue.value);
+        return propertyValues.map((propertyValue) => propertyValue.value);
       }
 
       if (optionType === 'model') {
@@ -604,14 +605,14 @@
 
         // If freeSolo is turned on the value and options are strings instead of objects
         if (freeSolo) {
-          return results.map(result => result[searchProp.name]);
+          return results.map((result) => result[searchProp.name]);
         }
 
         if (multiple) {
           const nonFetchedOptions = [];
-          value.forEach(x => {
+          value.forEach((x) => {
             if (
-              !results.some(result => {
+              !results.some((result) => {
                 if (typeof x === 'string') {
                   return valuePropIsNumber
                     ? result[valueProp.name] === parseInt(x, 10)
@@ -629,7 +630,7 @@
         }
 
         if (
-          !results.some(result => {
+          !results.some((result) => {
             if (typeof value === 'string') {
               return valuePropIsNumber
                 ? result[valueProp.name] === parseInt(value, 10)
@@ -669,8 +670,8 @@
 
       if (multiple) {
         return value
-          .map(x =>
-            currentOptions.find(option => {
+          .map((x) =>
+            currentOptions.find((option) => {
               if (typeof x === 'string') {
                 return valuePropIsNumber
                   ? option[valueProp.name] === parseInt(x, 10)
@@ -680,10 +681,10 @@
               return option[valueProp.name] === x[valueProp.name];
             }),
           )
-          .filter(x => x !== undefined);
+          .filter((x) => x !== undefined);
       }
 
-      return currentOptions.find(option => {
+      return currentOptions.find((option) => {
         if (typeof value === 'string') {
           return valuePropIsNumber
             ? option[valueProp.name] === parseInt(value, 10)
@@ -697,7 +698,7 @@
     /*
      * Convert `Autocomplete` `value` into a value the hidden input accepts (a string)
      */
-    const getHiddenValue = currentValue => {
+    const getHiddenValue = (currentValue) => {
       if (!currentValue) {
         return '';
       }
@@ -708,8 +709,8 @@
 
       if (multiple) {
         return currentValue
-          .filter(x => x !== undefined)
-          .map(x => (typeof x === 'string' ? x : x[valueProp.name]))
+          .filter((x) => x !== undefined)
+          .map((x) => (typeof x === 'string' ? x : x[valueProp.name]))
           .join(',');
       }
 
@@ -730,7 +731,7 @@
       setInputValue(currentValue[searchProp.name].toString());
     }
 
-    const renderLabel = option => {
+    const renderLabel = (option) => {
       if (freeSolo) {
         return option ? option.toString() : '';
       }
@@ -773,7 +774,7 @@
                 triggerEventValue =
                   newValue.length === 0
                     ? []
-                    : newValue.map(x => x[valueProp.name]);
+                    : newValue.map((x) => x[valueProp.name]);
               }
             } else if (freeSolo) {
               triggerEventValue = newValue || '';
@@ -795,7 +796,7 @@
           }
         }}
         options={currentOptions}
-        renderInput={params => (
+        renderInput={(params) => (
           <>
             {optionType === 'model' && (
               <input
@@ -858,7 +859,7 @@
       return (
         <ModelProvider value={getValue()} id={model}>
           <InteractionScope model={model}>
-            {ctx => {
+            {(ctx) => {
               changeContext.current = ctx;
               return MuiAutocomplete;
             }}
@@ -869,7 +870,7 @@
 
     return MuiAutocomplete;
   })(),
-  styles: B => t => {
+  styles: (B) => (t) => {
     const { Styling, color } = B;
     const style = new Styling(t);
     const getOpacColor = (col, val) => color.alpha(col, val);
@@ -941,20 +942,22 @@
             '!important',
           ],
           '&:hover': {
-            '& .MuiOutlinedInput-notchedOutline, & .MuiFilledInput-underline, & .MuiInput-underline': {
-              borderColor: ({ options: { borderHoverColor } }) => [
-                style.getColor(borderHoverColor),
-                '!important',
-              ],
-            },
+            '& .MuiOutlinedInput-notchedOutline, & .MuiFilledInput-underline, & .MuiInput-underline':
+              {
+                borderColor: ({ options: { borderHoverColor } }) => [
+                  style.getColor(borderHoverColor),
+                  '!important',
+                ],
+              },
           },
           '&.Mui-focused, &.Mui-focused:hover': {
-            '& .MuiOutlinedInput-notchedOutline, & .MuiFilledInput-underline, & .MuiInput-underline': {
-              borderColor: ({ options: { borderFocusColor } }) => [
-                style.getColor(borderFocusColor),
-                '!important',
-              ],
-            },
+            '& .MuiOutlinedInput-notchedOutline, & .MuiFilledInput-underline, & .MuiInput-underline':
+              {
+                borderColor: ({ options: { borderFocusColor } }) => [
+                  style.getColor(borderFocusColor),
+                  '!important',
+                ],
+              },
           },
           '& fieldset': {
             top: ({ options: { hideLabel } }) => (hideLabel ? 0 : null),
@@ -992,12 +995,13 @@
             '!important',
           ],
         },
-        '& .MuiOutlinedInput-notchedOutline, & .MuiFilledInput-underline, & .MuiInput-underline': {
-          borderColor: ({ options: { borderColor } }) => [
-            style.getColor(borderColor),
-            '!important',
-          ],
-        },
+        '& .MuiOutlinedInput-notchedOutline, & .MuiFilledInput-underline, & .MuiInput-underline':
+          {
+            borderColor: ({ options: { borderColor } }) => [
+              style.getColor(borderColor),
+              '!important',
+            ],
+          },
         '& .MuiInput-underline, & .MuiFilledInput-underline': {
           '&::before, &::after': {
             borderColor: ({ options: { borderColor } }) => [
@@ -1013,43 +1017,47 @@
               ],
             },
           },
-          '&.Mui-focused::before, &.Mui-focused::after, &.Mui-focused:hover::before, &.Mui-focused:hover::after': {
-            borderColor: ({ options: { borderFocusColor } }) => [
-              style.getColor(borderFocusColor),
-              '!important',
-            ],
-          },
-        },
-        '& .MuiInputBase-root.Mui-error, & .MuiInputBase-root.Mui-error:hover, & .MuiInputBase-root.Mui-error.Mui-focused, & .MuiInputBase-root.Mui-error.Mui-focused:hover': {
-          '& .MuiOutlinedInput-notchedOutline, & .MuiFilledInput-underline, & .MuiInput-underline': {
-            borderColor: ({ options: { errorColor } }) => [
-              style.getColor(errorColor),
-              '!important',
-            ],
-          },
-          '&.MuiInput-underline, &.MuiFilledInput-underline': {
-            '&::before, &::after': {
-              borderColor: ({ options: { errorColor } }) => [
-                style.getColor(errorColor),
+          '&.Mui-focused::before, &.Mui-focused::after, &.Mui-focused:hover::before, &.Mui-focused:hover::after':
+            {
+              borderColor: ({ options: { borderFocusColor } }) => [
+                style.getColor(borderFocusColor),
                 '!important',
               ],
             },
-            '&:hover': {
+        },
+        '& .MuiInputBase-root.Mui-error, & .MuiInputBase-root.Mui-error:hover, & .MuiInputBase-root.Mui-error.Mui-focused, & .MuiInputBase-root.Mui-error.Mui-focused:hover':
+          {
+            '& .MuiOutlinedInput-notchedOutline, & .MuiFilledInput-underline, & .MuiInput-underline':
+              {
+                borderColor: ({ options: { errorColor } }) => [
+                  style.getColor(errorColor),
+                  '!important',
+                ],
+              },
+            '&.MuiInput-underline, &.MuiFilledInput-underline': {
               '&::before, &::after': {
                 borderColor: ({ options: { errorColor } }) => [
                   style.getColor(errorColor),
                   '!important',
                 ],
               },
-            },
-            '&.Mui-focused::before, &.Mui-focused::after, &.Mui-focused:hover::before, &.Mui-focused:hover::after': {
-              borderColor: ({ options: { errorColor } }) => [
-                style.getColor(errorColor),
-                '!important',
-              ],
+              '&:hover': {
+                '&::before, &::after': {
+                  borderColor: ({ options: { errorColor } }) => [
+                    style.getColor(errorColor),
+                    '!important',
+                  ],
+                },
+              },
+              '&.Mui-focused::before, &.Mui-focused::after, &.Mui-focused:hover::before, &.Mui-focused:hover::after':
+                {
+                  borderColor: ({ options: { errorColor } }) => [
+                    style.getColor(errorColor),
+                    '!important',
+                  ],
+                },
             },
           },
-        },
       },
     };
   },
