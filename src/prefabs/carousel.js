@@ -318,12 +318,7 @@
           key: 'filter',
           type: 'FILTER',
           configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'select',
-              comparator: 'EQ',
-              value: 'model',
-            },
+            dependsOn: 'model',
           },
         },
         {
@@ -332,12 +327,7 @@
           key: 'orderProperty',
           type: 'PROPERTY',
           configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'select',
-              comparator: 'EQ',
-              value: 'model',
-            },
+            dependsOn: 'model',
           },
         },
         {
@@ -346,6 +336,7 @@
           key: 'sortOrder',
           type: 'CUSTOM',
           configuration: {
+            dependsOn: 'model',
             as: 'BUTTONGROUP',
             dataType: 'string',
             allowedInput: [
