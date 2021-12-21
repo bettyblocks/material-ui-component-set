@@ -17,7 +17,7 @@
     } = options;
     const { env, useText, getCustomModelAttribute } = B;
     const isDev = env === 'dev';
-
+    const [isDisabled, setIsDisabled] = useState(disabled);
     const [errorState, setErrorState] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
     const mounted = useRef(false);
@@ -80,6 +80,8 @@
       handleValidation(isValid);
     };
 
+    B.defineFunction('Enable', () => setIsDisabled(false));
+    B.defineFunction('Disable', () => setIsDisabled(true));
     B.defineFunction('Reset', () => setChecked(componentChecked === 'true'));
 
     useEffect(() => {
@@ -113,7 +115,7 @@
       onInvalid: invalidHandler,
       onChange: handleChange,
       name: nameAttributeValue || customModelAttributeName,
-      disabled,
+      disabled: isDisabled,
       size,
       tabIndex: isDev ? -1 : undefined,
       value: 'on',
