@@ -69,9 +69,9 @@
     } = customModelAttribute || {};
     const required = customModelAttribute ? attributeRequired : defaultRequired;
     const nameAttributeValue = useText(nameAttribute);
-    const isValidDate = date => date instanceof Date && !isNaN(date);
+    const isValidDate = (date) => date instanceof Date && !isNaN(date);
 
-    const convertToDate = date => {
+    const convertToDate = (date) => {
       if (isValidDate(date)) {
         const dateString = `${date.getFullYear()}-${String(
           date.getMonth() + 1,
@@ -82,7 +82,7 @@
       return '';
     };
 
-    const changeHandler = date => {
+    const changeHandler = (date) => {
       setSelectedDate(date);
     };
 
@@ -240,7 +240,7 @@
       </MuiPickersUtilsProvider>
     );
   })(),
-  styles: B => t => {
+  styles: (B) => (t) => {
     const { Styling } = B;
     const style = new Styling(t);
     return {
@@ -321,20 +321,22 @@
             '!important',
           ],
           '&:hover': {
-            '& .MuiOutlinedInput-notchedOutline, & .MuiFilledInput-underline, & .MuiInput-underline': {
-              borderColor: ({ options: { borderHoverColor } }) => [
-                style.getColor(borderHoverColor),
-                '!important',
-              ],
-            },
+            '& .MuiOutlinedInput-notchedOutline, & .MuiFilledInput-underline, & .MuiInput-underline':
+              {
+                borderColor: ({ options: { borderHoverColor } }) => [
+                  style.getColor(borderHoverColor),
+                  '!important',
+                ],
+              },
           },
           '&.Mui-focused, &.Mui-focused:hover': {
-            '& .MuiOutlinedInput-notchedOutline, & .MuiFilledInput-underline, & .MuiInput-underline': {
-              borderColor: ({ options: { borderFocusColor } }) => [
-                style.getColor(borderFocusColor),
-                '!important',
-              ],
-            },
+            '& .MuiOutlinedInput-notchedOutline, & .MuiFilledInput-underline, & .MuiInput-underline':
+              {
+                borderColor: ({ options: { borderFocusColor } }) => [
+                  style.getColor(borderFocusColor),
+                  '!important',
+                ],
+              },
           },
           '& fieldset': {
             top: ({ options: { hideLabel } }) => (hideLabel ? 0 : null),
@@ -362,12 +364,13 @@
             '!important',
           ],
         },
-        '& .MuiOutlinedInput-notchedOutline, & .MuiFilledInput-underline, & .MuiInput-underline': {
-          borderColor: ({ options: { borderColor } }) => [
-            style.getColor(borderColor),
-            '!important',
-          ],
-        },
+        '& .MuiOutlinedInput-notchedOutline, & .MuiFilledInput-underline, & .MuiInput-underline':
+          {
+            borderColor: ({ options: { borderColor } }) => [
+              style.getColor(borderColor),
+              '!important',
+            ],
+          },
         '& .MuiInput-underline, & .MuiFilledInput-underline': {
           '&::before, &::after': {
             borderColor: ({ options: { borderColor } }) => [
@@ -383,43 +386,47 @@
               ],
             },
           },
-          '&.Mui-focused::before, &.Mui-focused::after, &.Mui-focused:hover::before, &.Mui-focused:hover::after': {
-            borderColor: ({ options: { borderFocusColor } }) => [
-              style.getColor(borderFocusColor),
-              '!important',
-            ],
-          },
-        },
-        '& .MuiInputBase-root.Mui-error, & .MuiInputBase-root.Mui-error:hover, & .MuiInputBase-root.Mui-error.Mui-focused, & .MuiInputBase-root.Mui-error.Mui-focused:hover': {
-          '& .MuiOutlinedInput-notchedOutline, & .MuiFilledInput-underline, & .MuiInput-underline': {
-            borderColor: ({ options: { errorColor } }) => [
-              style.getColor(errorColor),
-              '!important',
-            ],
-          },
-          '&.MuiInput-underline, &.MuiFilledInput-underline': {
-            '&::before, &::after': {
-              borderColor: ({ options: { errorColor } }) => [
-                style.getColor(errorColor),
+          '&.Mui-focused::before, &.Mui-focused::after, &.Mui-focused:hover::before, &.Mui-focused:hover::after':
+            {
+              borderColor: ({ options: { borderFocusColor } }) => [
+                style.getColor(borderFocusColor),
                 '!important',
               ],
             },
-            '&:hover': {
+        },
+        '& .MuiInputBase-root.Mui-error, & .MuiInputBase-root.Mui-error:hover, & .MuiInputBase-root.Mui-error.Mui-focused, & .MuiInputBase-root.Mui-error.Mui-focused:hover':
+          {
+            '& .MuiOutlinedInput-notchedOutline, & .MuiFilledInput-underline, & .MuiInput-underline':
+              {
+                borderColor: ({ options: { errorColor } }) => [
+                  style.getColor(errorColor),
+                  '!important',
+                ],
+              },
+            '&.MuiInput-underline, &.MuiFilledInput-underline': {
               '&::before, &::after': {
                 borderColor: ({ options: { errorColor } }) => [
                   style.getColor(errorColor),
                   '!important',
                 ],
               },
-            },
-            '&.Mui-focused::before, &.Mui-focused::after, &.Mui-focused:hover::before, &.Mui-focused:hover::after': {
-              borderColor: ({ options: { errorColor } }) => [
-                style.getColor(errorColor),
-                '!important',
-              ],
+              '&:hover': {
+                '&::before, &::after': {
+                  borderColor: ({ options: { errorColor } }) => [
+                    style.getColor(errorColor),
+                    '!important',
+                  ],
+                },
+              },
+              '&.Mui-focused::before, &.Mui-focused::after, &.Mui-focused:hover::before, &.Mui-focused:hover::after':
+                {
+                  borderColor: ({ options: { errorColor } }) => [
+                    style.getColor(errorColor),
+                    '!important',
+                  ],
+                },
             },
           },
-        },
       },
       static: {
         '& .MuiPickersStaticWrapper-staticWrapperRoot': {

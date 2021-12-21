@@ -32,7 +32,7 @@
     );
     return isDev ? <div>{PaperComponent}</div> : PaperComponent;
   })(),
-  styles: B => theme => {
+  styles: (B) => (theme) => {
     const { mediaMinWidth, Styling } = B;
     const style = new Styling(theme);
     const getSpacing = (idx, device = 'Mobile') =>

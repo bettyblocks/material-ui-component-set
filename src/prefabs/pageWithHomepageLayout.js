@@ -2342,8 +2342,7 @@
                                                 value: 'flexible',
                                                 label:
                                                   'Column width (tablet landscape)',
-                                                key:
-                                                  'columnWidthTabletLandscape',
+                                                key: 'columnWidthTabletLandscape',
                                                 type: 'CUSTOM',
                                                 configuration: {
                                                   as: 'DROPDOWN',
@@ -2380,8 +2379,7 @@
                                                 value: 'flexible',
                                                 label:
                                                   'Column width (tablet portrait)',
-                                                key:
-                                                  'columnWidthTabletPortrait',
+                                                key: 'columnWidthTabletPortrait',
                                                 type: 'CUSTOM',
                                                 configuration: {
                                                   as: 'DROPDOWN',
@@ -2844,8 +2842,7 @@
                                                   {
                                                     type: 'VARIABLE',
                                                     label: 'Test attribute',
-                                                    key:
-                                                      'dataComponentAttribute',
+                                                    key: 'dataComponentAttribute',
                                                     value: ['AppBar'],
                                                     configuration: {
                                                       condition: {
@@ -2911,13 +2908,11 @@
                                                           dataType: 'string',
                                                           allowedInput: [
                                                             {
-                                                              name:
-                                                                'Internal page',
+                                                              name: 'Internal page',
                                                               value: 'internal',
                                                             },
                                                             {
-                                                              name:
-                                                                'External page',
+                                                              name: 'External page',
                                                               value: 'external',
                                                             },
                                                           ],
@@ -2956,8 +2951,7 @@
                                                       {
                                                         value: '_self',
                                                         label: 'Open in',
-                                                        key:
-                                                          'openLinkToExternal',
+                                                        key: 'openLinkToExternal',
                                                         type: 'CUSTOM',
                                                         configuration: {
                                                           condition: {
@@ -2970,8 +2964,7 @@
                                                           dataType: 'string',
                                                           allowedInput: [
                                                             {
-                                                              name:
-                                                                'Current Tab',
+                                                              name: 'Current Tab',
                                                               value: '_self',
                                                             },
                                                             {
@@ -3075,8 +3068,7 @@
                                                       {
                                                         label:
                                                           'Toggle tooltip visibility',
-                                                        key:
-                                                          'hasVisibleTooltip',
+                                                        key: 'hasVisibleTooltip',
                                                         value: true,
                                                         type: 'TOGGLE',
                                                         configuration: {
@@ -3138,8 +3130,7 @@
                                                               value: 'left',
                                                             },
                                                             {
-                                                              name:
-                                                                'Botttom Start',
+                                                              name: 'Botttom Start',
                                                               value:
                                                                 'bottom-start',
                                                             },
@@ -3148,8 +3139,7 @@
                                                               value: 'bottom',
                                                             },
                                                             {
-                                                              name:
-                                                                'Bottom End',
+                                                              name: 'Bottom End',
                                                               value:
                                                                 'bottom-end',
                                                             },
@@ -3167,8 +3157,7 @@
                                                         type: 'COLOR',
                                                         label:
                                                           'Tooltip Background',
-                                                        key:
-                                                          'tooltipBackground',
+                                                        key: 'tooltipBackground',
                                                         value: 'Medium',
                                                         configuration: {
                                                           condition: {
@@ -3205,8 +3194,7 @@
                                                       {
                                                         type: 'VARIABLE',
                                                         label: 'Test attribute',
-                                                        key:
-                                                          'dataComponentAttribute',
+                                                        key: 'dataComponentAttribute',
                                                         value: ['Button'],
                                                         configuration: {
                                                           condition: {
@@ -3273,13 +3261,11 @@
                                                           dataType: 'string',
                                                           allowedInput: [
                                                             {
-                                                              name:
-                                                                'Internal page',
+                                                              name: 'Internal page',
                                                               value: 'internal',
                                                             },
                                                             {
-                                                              name:
-                                                                'External page',
+                                                              name: 'External page',
                                                               value: 'external',
                                                             },
                                                           ],
@@ -3318,8 +3304,7 @@
                                                       {
                                                         value: '_self',
                                                         label: 'Open in',
-                                                        key:
-                                                          'openLinkToExternal',
+                                                        key: 'openLinkToExternal',
                                                         type: 'CUSTOM',
                                                         configuration: {
                                                           condition: {
@@ -3332,8 +3317,7 @@
                                                           dataType: 'string',
                                                           allowedInput: [
                                                             {
-                                                              name:
-                                                                'Current Tab',
+                                                              name: 'Current Tab',
                                                               value: '_self',
                                                             },
                                                             {
@@ -3437,8 +3421,7 @@
                                                       {
                                                         label:
                                                           'Toggle tooltip visibility',
-                                                        key:
-                                                          'hasVisibleTooltip',
+                                                        key: 'hasVisibleTooltip',
                                                         value: true,
                                                         type: 'TOGGLE',
                                                         configuration: {
@@ -3500,8 +3483,7 @@
                                                               value: 'left',
                                                             },
                                                             {
-                                                              name:
-                                                                'Botttom Start',
+                                                              name: 'Botttom Start',
                                                               value:
                                                                 'bottom-start',
                                                             },
@@ -3510,8 +3492,7 @@
                                                               value: 'bottom',
                                                             },
                                                             {
-                                                              name:
-                                                                'Bottom End',
+                                                              name: 'Bottom End',
                                                               value:
                                                                 'bottom-end',
                                                             },
@@ -3529,8 +3510,7 @@
                                                         type: 'COLOR',
                                                         label:
                                                           'Tooltip Background',
-                                                        key:
-                                                          'tooltipBackground',
+                                                        key: 'tooltipBackground',
                                                         value: 'Medium',
                                                         configuration: {
                                                           condition: {
@@ -3567,8 +3547,7 @@
                                                       {
                                                         type: 'VARIABLE',
                                                         label: 'Test attribute',
-                                                        key:
-                                                          'dataComponentAttribute',
+                                                        key: 'dataComponentAttribute',
                                                         value: ['Button'],
                                                         configuration: {
                                                           condition: {
@@ -3635,13 +3614,11 @@
                                                           dataType: 'string',
                                                           allowedInput: [
                                                             {
-                                                              name:
-                                                                'Internal page',
+                                                              name: 'Internal page',
                                                               value: 'internal',
                                                             },
                                                             {
-                                                              name:
-                                                                'External page',
+                                                              name: 'External page',
                                                               value: 'external',
                                                             },
                                                           ],
@@ -3680,8 +3657,7 @@
                                                       {
                                                         value: '_self',
                                                         label: 'Open in',
-                                                        key:
-                                                          'openLinkToExternal',
+                                                        key: 'openLinkToExternal',
                                                         type: 'CUSTOM',
                                                         configuration: {
                                                           condition: {
@@ -3694,8 +3670,7 @@
                                                           dataType: 'string',
                                                           allowedInput: [
                                                             {
-                                                              name:
-                                                                'Current Tab',
+                                                              name: 'Current Tab',
                                                               value: '_self',
                                                             },
                                                             {
@@ -3799,8 +3774,7 @@
                                                       {
                                                         label:
                                                           'Toggle tooltip visibility',
-                                                        key:
-                                                          'hasVisibleTooltip',
+                                                        key: 'hasVisibleTooltip',
                                                         value: true,
                                                         type: 'TOGGLE',
                                                         configuration: {
@@ -3862,8 +3836,7 @@
                                                               value: 'left',
                                                             },
                                                             {
-                                                              name:
-                                                                'Botttom Start',
+                                                              name: 'Botttom Start',
                                                               value:
                                                                 'bottom-start',
                                                             },
@@ -3872,8 +3845,7 @@
                                                               value: 'bottom',
                                                             },
                                                             {
-                                                              name:
-                                                                'Bottom End',
+                                                              name: 'Bottom End',
                                                               value:
                                                                 'bottom-end',
                                                             },
@@ -3891,8 +3863,7 @@
                                                         type: 'COLOR',
                                                         label:
                                                           'Tooltip Background',
-                                                        key:
-                                                          'tooltipBackground',
+                                                        key: 'tooltipBackground',
                                                         value: 'Medium',
                                                         configuration: {
                                                           condition: {
@@ -3929,8 +3900,7 @@
                                                       {
                                                         type: 'VARIABLE',
                                                         label: 'Test attribute',
-                                                        key:
-                                                          'dataComponentAttribute',
+                                                        key: 'dataComponentAttribute',
                                                         value: ['Button'],
                                                         configuration: {
                                                           condition: {
@@ -13347,8 +13317,7 @@
                                                   {
                                                     type: 'VARIABLE',
                                                     label: 'Test attribute',
-                                                    key:
-                                                      'dataComponentAttribute',
+                                                    key: 'dataComponentAttribute',
                                                     value: ['Text'],
                                                     configuration: {
                                                       condition: {
@@ -13557,8 +13526,7 @@
                                                   {
                                                     type: 'VARIABLE',
                                                     label: 'Test attribute',
-                                                    key:
-                                                      'dataComponentAttribute',
+                                                    key: 'dataComponentAttribute',
                                                     value: ['Text'],
                                                     configuration: {
                                                       condition: {
@@ -14157,8 +14125,7 @@
                                                   {
                                                     type: 'VARIABLE',
                                                     label: 'Test attribute',
-                                                    key:
-                                                      'dataComponentAttribute',
+                                                    key: 'dataComponentAttribute',
                                                     value: ['Box'],
                                                     configuration: {
                                                       condition: {
@@ -14224,13 +14191,11 @@
                                                           dataType: 'string',
                                                           allowedInput: [
                                                             {
-                                                              name:
-                                                                'Internal page',
+                                                              name: 'Internal page',
                                                               value: 'internal',
                                                             },
                                                             {
-                                                              name:
-                                                                'External page',
+                                                              name: 'External page',
                                                               value: 'external',
                                                             },
                                                           ],
@@ -14269,8 +14234,7 @@
                                                       {
                                                         value: '_self',
                                                         label: 'Open in',
-                                                        key:
-                                                          'openLinkToExternal',
+                                                        key: 'openLinkToExternal',
                                                         type: 'CUSTOM',
                                                         configuration: {
                                                           condition: {
@@ -14283,8 +14247,7 @@
                                                           dataType: 'string',
                                                           allowedInput: [
                                                             {
-                                                              name:
-                                                                'Current Tab',
+                                                              name: 'Current Tab',
                                                               value: '_self',
                                                             },
                                                             {
@@ -14396,8 +14359,7 @@
                                                       {
                                                         label:
                                                           'Toggle tooltip visibility',
-                                                        key:
-                                                          'hasVisibleTooltip',
+                                                        key: 'hasVisibleTooltip',
                                                         value: true,
                                                         type: 'TOGGLE',
                                                         configuration: {
@@ -14459,8 +14421,7 @@
                                                               value: 'left',
                                                             },
                                                             {
-                                                              name:
-                                                                'Botttom Start',
+                                                              name: 'Botttom Start',
                                                               value:
                                                                 'bottom-start',
                                                             },
@@ -14469,8 +14430,7 @@
                                                               value: 'bottom',
                                                             },
                                                             {
-                                                              name:
-                                                                'Bottom End',
+                                                              name: 'Bottom End',
                                                               value:
                                                                 'bottom-end',
                                                             },
@@ -14488,8 +14448,7 @@
                                                         type: 'COLOR',
                                                         label:
                                                           'Tooltip Background',
-                                                        key:
-                                                          'tooltipBackground',
+                                                        key: 'tooltipBackground',
                                                         value: 'Medium',
                                                         configuration: {
                                                           condition: {
@@ -14526,8 +14485,7 @@
                                                       {
                                                         type: 'VARIABLE',
                                                         label: 'Test attribute',
-                                                        key:
-                                                          'dataComponentAttribute',
+                                                        key: 'dataComponentAttribute',
                                                         value: ['Button'],
                                                         configuration: {
                                                           condition: {
@@ -15121,8 +15079,7 @@
                                                   {
                                                     type: 'VARIABLE',
                                                     label: 'Test attribute',
-                                                    key:
-                                                      'dataComponentAttribute',
+                                                    key: 'dataComponentAttribute',
                                                     value: ['Text'],
                                                     configuration: {
                                                       condition: {
@@ -15331,8 +15288,7 @@
                                                   {
                                                     type: 'VARIABLE',
                                                     label: 'Test attribute',
-                                                    key:
-                                                      'dataComponentAttribute',
+                                                    key: 'dataComponentAttribute',
                                                     value: ['Text'],
                                                     configuration: {
                                                       condition: {
@@ -15931,8 +15887,7 @@
                                                   {
                                                     type: 'VARIABLE',
                                                     label: 'Test attribute',
-                                                    key:
-                                                      'dataComponentAttribute',
+                                                    key: 'dataComponentAttribute',
                                                     value: ['Box'],
                                                     configuration: {
                                                       condition: {
@@ -15998,13 +15953,11 @@
                                                           dataType: 'string',
                                                           allowedInput: [
                                                             {
-                                                              name:
-                                                                'Internal page',
+                                                              name: 'Internal page',
                                                               value: 'internal',
                                                             },
                                                             {
-                                                              name:
-                                                                'External page',
+                                                              name: 'External page',
                                                               value: 'external',
                                                             },
                                                           ],
@@ -16043,8 +15996,7 @@
                                                       {
                                                         value: '_self',
                                                         label: 'Open in',
-                                                        key:
-                                                          'openLinkToExternal',
+                                                        key: 'openLinkToExternal',
                                                         type: 'CUSTOM',
                                                         configuration: {
                                                           condition: {
@@ -16057,8 +16009,7 @@
                                                           dataType: 'string',
                                                           allowedInput: [
                                                             {
-                                                              name:
-                                                                'Current Tab',
+                                                              name: 'Current Tab',
                                                               value: '_self',
                                                             },
                                                             {
@@ -16170,8 +16121,7 @@
                                                       {
                                                         label:
                                                           'Toggle tooltip visibility',
-                                                        key:
-                                                          'hasVisibleTooltip',
+                                                        key: 'hasVisibleTooltip',
                                                         value: true,
                                                         type: 'TOGGLE',
                                                         configuration: {
@@ -16233,8 +16183,7 @@
                                                               value: 'left',
                                                             },
                                                             {
-                                                              name:
-                                                                'Botttom Start',
+                                                              name: 'Botttom Start',
                                                               value:
                                                                 'bottom-start',
                                                             },
@@ -16243,8 +16192,7 @@
                                                               value: 'bottom',
                                                             },
                                                             {
-                                                              name:
-                                                                'Bottom End',
+                                                              name: 'Bottom End',
                                                               value:
                                                                 'bottom-end',
                                                             },
@@ -16262,8 +16210,7 @@
                                                         type: 'COLOR',
                                                         label:
                                                           'Tooltip Background',
-                                                        key:
-                                                          'tooltipBackground',
+                                                        key: 'tooltipBackground',
                                                         value: 'Medium',
                                                         configuration: {
                                                           condition: {
@@ -16300,8 +16247,7 @@
                                                       {
                                                         type: 'VARIABLE',
                                                         label: 'Test attribute',
-                                                        key:
-                                                          'dataComponentAttribute',
+                                                        key: 'dataComponentAttribute',
                                                         value: ['Button'],
                                                         configuration: {
                                                           condition: {
@@ -16895,8 +16841,7 @@
                                                   {
                                                     type: 'VARIABLE',
                                                     label: 'Test attribute',
-                                                    key:
-                                                      'dataComponentAttribute',
+                                                    key: 'dataComponentAttribute',
                                                     value: ['Text'],
                                                     configuration: {
                                                       condition: {
@@ -17105,8 +17050,7 @@
                                                   {
                                                     type: 'VARIABLE',
                                                     label: 'Test attribute',
-                                                    key:
-                                                      'dataComponentAttribute',
+                                                    key: 'dataComponentAttribute',
                                                     value: ['Text'],
                                                     configuration: {
                                                       condition: {
@@ -17705,8 +17649,7 @@
                                                   {
                                                     type: 'VARIABLE',
                                                     label: 'Test attribute',
-                                                    key:
-                                                      'dataComponentAttribute',
+                                                    key: 'dataComponentAttribute',
                                                     value: ['Box'],
                                                     configuration: {
                                                       condition: {
@@ -17772,13 +17715,11 @@
                                                           dataType: 'string',
                                                           allowedInput: [
                                                             {
-                                                              name:
-                                                                'Internal page',
+                                                              name: 'Internal page',
                                                               value: 'internal',
                                                             },
                                                             {
-                                                              name:
-                                                                'External page',
+                                                              name: 'External page',
                                                               value: 'external',
                                                             },
                                                           ],
@@ -17817,8 +17758,7 @@
                                                       {
                                                         value: '_self',
                                                         label: 'Open in',
-                                                        key:
-                                                          'openLinkToExternal',
+                                                        key: 'openLinkToExternal',
                                                         type: 'CUSTOM',
                                                         configuration: {
                                                           condition: {
@@ -17831,8 +17771,7 @@
                                                           dataType: 'string',
                                                           allowedInput: [
                                                             {
-                                                              name:
-                                                                'Current Tab',
+                                                              name: 'Current Tab',
                                                               value: '_self',
                                                             },
                                                             {
@@ -17944,8 +17883,7 @@
                                                       {
                                                         label:
                                                           'Toggle tooltip visibility',
-                                                        key:
-                                                          'hasVisibleTooltip',
+                                                        key: 'hasVisibleTooltip',
                                                         value: true,
                                                         type: 'TOGGLE',
                                                         configuration: {
@@ -18007,8 +17945,7 @@
                                                               value: 'left',
                                                             },
                                                             {
-                                                              name:
-                                                                'Botttom Start',
+                                                              name: 'Botttom Start',
                                                               value:
                                                                 'bottom-start',
                                                             },
@@ -18017,8 +17954,7 @@
                                                               value: 'bottom',
                                                             },
                                                             {
-                                                              name:
-                                                                'Bottom End',
+                                                              name: 'Bottom End',
                                                               value:
                                                                 'bottom-end',
                                                             },
@@ -18036,8 +17972,7 @@
                                                         type: 'COLOR',
                                                         label:
                                                           'Tooltip Background',
-                                                        key:
-                                                          'tooltipBackground',
+                                                        key: 'tooltipBackground',
                                                         value: 'Medium',
                                                         configuration: {
                                                           condition: {
@@ -18074,8 +18009,7 @@
                                                       {
                                                         type: 'VARIABLE',
                                                         label: 'Test attribute',
-                                                        key:
-                                                          'dataComponentAttribute',
+                                                        key: 'dataComponentAttribute',
                                                         value: ['Button'],
                                                         configuration: {
                                                           condition: {
@@ -19409,8 +19343,7 @@
                                                   {
                                                     type: 'VARIABLE',
                                                     label: 'Test attribute',
-                                                    key:
-                                                      'dataComponentAttribute',
+                                                    key: 'dataComponentAttribute',
                                                     value: ['Text'],
                                                     configuration: {
                                                       condition: {
@@ -19619,8 +19552,7 @@
                                                   {
                                                     type: 'VARIABLE',
                                                     label: 'Test attribute',
-                                                    key:
-                                                      'dataComponentAttribute',
+                                                    key: 'dataComponentAttribute',
                                                     value: ['Text'],
                                                     configuration: {
                                                       condition: {
@@ -19645,8 +19577,7 @@
                                                     },
                                                     label: 'Label',
                                                     key: 'customModelAttribute',
-                                                    type:
-                                                      'CUSTOM_MODEL_ATTRIBUTE',
+                                                    type: 'CUSTOM_MODEL_ATTRIBUTE',
                                                     configuration: {
                                                       allowedTypes: ['decimal'],
                                                     },
@@ -19721,8 +19652,7 @@
                                                     ],
                                                     label:
                                                       'Value required message',
-                                                    key:
-                                                      'validationValueMissing',
+                                                    key: 'validationValueMissing',
                                                     type: 'VARIABLE',
                                                     configuration: {
                                                       condition: {
@@ -19932,8 +19862,7 @@
                                                   {
                                                     type: 'VARIABLE',
                                                     label: 'Test attribute',
-                                                    key:
-                                                      'dataComponentAttribute',
+                                                    key: 'dataComponentAttribute',
                                                     value: ['Rating'],
                                                     configuration: {
                                                       condition: {
@@ -20475,8 +20404,7 @@
                                                   {
                                                     type: 'VARIABLE',
                                                     label: 'Test attribute',
-                                                    key:
-                                                      'dataComponentAttribute',
+                                                    key: 'dataComponentAttribute',
                                                     value: ['Box'],
                                                     configuration: {
                                                       condition: {
@@ -20614,8 +20542,7 @@
                                                         value: false,
                                                         label:
                                                           'Show positioning options',
-                                                        key:
-                                                          'positioningOptions',
+                                                        key: 'positioningOptions',
                                                         type: 'TOGGLE',
                                                       },
                                                       {
@@ -20726,8 +20653,7 @@
                                                         value: false,
                                                         label:
                                                           'Show background options',
-                                                        key:
-                                                          'backgroundOptions',
+                                                        key: 'backgroundOptions',
                                                         type: 'TOGGLE',
                                                       },
                                                       {
@@ -20750,8 +20676,7 @@
                                                         value: 100,
                                                         label:
                                                           'Background color opacity',
-                                                        key:
-                                                          'backgroundColorAlpha',
+                                                        key: 'backgroundColorAlpha',
                                                         type: 'NUMBER',
                                                         configuration: {
                                                           condition: {
@@ -20814,8 +20739,7 @@
                                                         value: 'center center',
                                                         label:
                                                           'Background position',
-                                                        key:
-                                                          'backgroundPosition',
+                                                        key: 'backgroundPosition',
                                                         type: 'CUSTOM',
                                                         configuration: {
                                                           as: 'DROPDOWN',
@@ -20826,32 +20750,27 @@
                                                               value: 'left top',
                                                             },
                                                             {
-                                                              name:
-                                                                'Left center',
+                                                              name: 'Left center',
                                                               value:
                                                                 'left center',
                                                             },
                                                             {
-                                                              name:
-                                                                'Left bottom',
+                                                              name: 'Left bottom',
                                                               value:
                                                                 'left bottom',
                                                             },
                                                             {
-                                                              name:
-                                                                'Center top',
+                                                              name: 'Center top',
                                                               value:
                                                                 'center top',
                                                             },
                                                             {
-                                                              name:
-                                                                'Center center',
+                                                              name: 'Center center',
                                                               value:
                                                                 'center center',
                                                             },
                                                             {
-                                                              name:
-                                                                'Center bottom',
+                                                              name: 'Center bottom',
                                                               value:
                                                                 'center bottom',
                                                             },
@@ -20861,14 +20780,12 @@
                                                                 'right top',
                                                             },
                                                             {
-                                                              name:
-                                                                'Right center',
+                                                              name: 'Right center',
                                                               value:
                                                                 'right center',
                                                             },
                                                             {
-                                                              name:
-                                                                'Right bottom',
+                                                              name: 'Right bottom',
                                                               value:
                                                                 'right bottom',
                                                             },
@@ -20923,8 +20840,7 @@
                                                         value: 'inherit',
                                                         label:
                                                           'Background attachment',
-                                                        key:
-                                                          'backgroundAttachment',
+                                                        key: 'backgroundAttachment',
                                                         type: 'CUSTOM',
                                                         configuration: {
                                                           as: 'BUTTONGROUP',
@@ -21045,8 +20961,7 @@
                                                       {
                                                         type: 'VARIABLE',
                                                         label: 'Test attribute',
-                                                        key:
-                                                          'dataComponentAttribute',
+                                                        key: 'dataComponentAttribute',
                                                         value: ['Box'],
                                                         configuration: {
                                                           condition: {
@@ -21078,8 +20993,7 @@
                                                                   value: 'img',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'Letter',
+                                                                  name: 'Letter',
                                                                   value:
                                                                     'letter',
                                                                 },
@@ -21164,20 +21078,17 @@
                                                                 'string',
                                                               allowedInput: [
                                                                 {
-                                                                  name:
-                                                                    'Circle',
+                                                                  name: 'Circle',
                                                                   value:
                                                                     'circle',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'Rounded',
+                                                                  name: 'Rounded',
                                                                   value:
                                                                     'rounded',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'Square',
+                                                                  name: 'Square',
                                                                   value:
                                                                     'square',
                                                                 },
@@ -21188,8 +21099,7 @@
                                                             type: 'COLOR',
                                                             label:
                                                               'Background color',
-                                                            key:
-                                                              'backgroundColor',
+                                                            key: 'backgroundColor',
                                                             value: 'Accent1',
                                                             configuration: {
                                                               condition: {
@@ -21332,16 +21242,14 @@
                                                             value: false,
                                                             label:
                                                               'Advanced settings',
-                                                            key:
-                                                              'advancedSettings',
+                                                            key: 'advancedSettings',
                                                             type: 'TOGGLE',
                                                           },
                                                           {
                                                             type: 'VARIABLE',
                                                             label:
                                                               'Test attribute',
-                                                            key:
-                                                              'dataComponentAttribute',
+                                                            key: 'dataComponentAttribute',
                                                             value: ['Avatar'],
                                                             configuration: {
                                                               condition: {
@@ -21483,8 +21391,7 @@
                                                         value: false,
                                                         label:
                                                           'Show positioning options',
-                                                        key:
-                                                          'positioningOptions',
+                                                        key: 'positioningOptions',
                                                         type: 'TOGGLE',
                                                       },
                                                       {
@@ -21595,8 +21502,7 @@
                                                         value: false,
                                                         label:
                                                           'Show background options',
-                                                        key:
-                                                          'backgroundOptions',
+                                                        key: 'backgroundOptions',
                                                         type: 'TOGGLE',
                                                       },
                                                       {
@@ -21619,8 +21525,7 @@
                                                         value: 100,
                                                         label:
                                                           'Background color opacity',
-                                                        key:
-                                                          'backgroundColorAlpha',
+                                                        key: 'backgroundColorAlpha',
                                                         type: 'NUMBER',
                                                         configuration: {
                                                           condition: {
@@ -21683,8 +21588,7 @@
                                                         value: 'center center',
                                                         label:
                                                           'Background position',
-                                                        key:
-                                                          'backgroundPosition',
+                                                        key: 'backgroundPosition',
                                                         type: 'CUSTOM',
                                                         configuration: {
                                                           as: 'DROPDOWN',
@@ -21695,32 +21599,27 @@
                                                               value: 'left top',
                                                             },
                                                             {
-                                                              name:
-                                                                'Left center',
+                                                              name: 'Left center',
                                                               value:
                                                                 'left center',
                                                             },
                                                             {
-                                                              name:
-                                                                'Left bottom',
+                                                              name: 'Left bottom',
                                                               value:
                                                                 'left bottom',
                                                             },
                                                             {
-                                                              name:
-                                                                'Center top',
+                                                              name: 'Center top',
                                                               value:
                                                                 'center top',
                                                             },
                                                             {
-                                                              name:
-                                                                'Center center',
+                                                              name: 'Center center',
                                                               value:
                                                                 'center center',
                                                             },
                                                             {
-                                                              name:
-                                                                'Center bottom',
+                                                              name: 'Center bottom',
                                                               value:
                                                                 'center bottom',
                                                             },
@@ -21730,14 +21629,12 @@
                                                                 'right top',
                                                             },
                                                             {
-                                                              name:
-                                                                'Right center',
+                                                              name: 'Right center',
                                                               value:
                                                                 'right center',
                                                             },
                                                             {
-                                                              name:
-                                                                'Right bottom',
+                                                              name: 'Right bottom',
                                                               value:
                                                                 'right bottom',
                                                             },
@@ -21792,8 +21689,7 @@
                                                         value: 'inherit',
                                                         label:
                                                           'Background attachment',
-                                                        key:
-                                                          'backgroundAttachment',
+                                                        key: 'backgroundAttachment',
                                                         type: 'CUSTOM',
                                                         configuration: {
                                                           as: 'BUTTONGROUP',
@@ -21914,8 +21810,7 @@
                                                       {
                                                         type: 'VARIABLE',
                                                         label: 'Test attribute',
-                                                        key:
-                                                          'dataComponentAttribute',
+                                                        key: 'dataComponentAttribute',
                                                         value: ['Box'],
                                                         configuration: {
                                                           condition: {
@@ -21958,8 +21853,7 @@
                                                             type: 'CUSTOM',
                                                             label:
                                                               'Text Alignment',
-                                                            key:
-                                                              'textAlignment',
+                                                            key: 'textAlignment',
                                                             value: 'left',
                                                             configuration: {
                                                               as: 'BUTTONGROUP',
@@ -21971,8 +21865,7 @@
                                                                   value: 'left',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'Center',
+                                                                  name: 'Center',
                                                                   value:
                                                                     'center',
                                                                 },
@@ -22007,14 +21900,12 @@
                                                                 'string',
                                                               allowedInput: [
                                                                 {
-                                                                  name:
-                                                                    'Internal page',
+                                                                  name: 'Internal page',
                                                                   value:
                                                                     'internal',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'External page',
+                                                                  name: 'External page',
                                                                   value:
                                                                     'external',
                                                                 },
@@ -22041,8 +21932,7 @@
                                                           {
                                                             value: [''],
                                                             label: 'URL',
-                                                            key:
-                                                              'linkToExternal',
+                                                            key: 'linkToExternal',
                                                             type: 'VARIABLE',
                                                             configuration: {
                                                               placeholder:
@@ -22142,16 +22032,14 @@
                                                             value: false,
                                                             label:
                                                               'Advanced settings',
-                                                            key:
-                                                              'advancedSettings',
+                                                            key: 'advancedSettings',
                                                             type: 'TOGGLE',
                                                           },
                                                           {
                                                             type: 'VARIABLE',
                                                             label:
                                                               'Test attribute',
-                                                            key:
-                                                              'dataComponentAttribute',
+                                                            key: 'dataComponentAttribute',
                                                             value: ['Text'],
                                                             configuration: {
                                                               condition: {
@@ -22198,8 +22086,7 @@
                                                             type: 'CUSTOM',
                                                             label:
                                                               'Text Alignment',
-                                                            key:
-                                                              'textAlignment',
+                                                            key: 'textAlignment',
                                                             value: 'left',
                                                             configuration: {
                                                               as: 'BUTTONGROUP',
@@ -22211,8 +22098,7 @@
                                                                   value: 'left',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'Center',
+                                                                  name: 'Center',
                                                                   value:
                                                                     'center',
                                                                 },
@@ -22247,14 +22133,12 @@
                                                                 'string',
                                                               allowedInput: [
                                                                 {
-                                                                  name:
-                                                                    'Internal page',
+                                                                  name: 'Internal page',
                                                                   value:
                                                                     'internal',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'External page',
+                                                                  name: 'External page',
                                                                   value:
                                                                     'external',
                                                                 },
@@ -22281,8 +22165,7 @@
                                                           {
                                                             value: [''],
                                                             label: 'URL',
-                                                            key:
-                                                              'linkToExternal',
+                                                            key: 'linkToExternal',
                                                             type: 'VARIABLE',
                                                             configuration: {
                                                               placeholder:
@@ -22382,16 +22265,14 @@
                                                             value: false,
                                                             label:
                                                               'Advanced settings',
-                                                            key:
-                                                              'advancedSettings',
+                                                            key: 'advancedSettings',
                                                             type: 'TOGGLE',
                                                           },
                                                           {
                                                             type: 'VARIABLE',
                                                             label:
                                                               'Test attribute',
-                                                            key:
-                                                              'dataComponentAttribute',
+                                                            key: 'dataComponentAttribute',
                                                             value: ['Text'],
                                                             configuration: {
                                                               condition: {
@@ -23294,8 +23175,7 @@
                                                   {
                                                     type: 'VARIABLE',
                                                     label: 'Test attribute',
-                                                    key:
-                                                      'dataComponentAttribute',
+                                                    key: 'dataComponentAttribute',
                                                     value: ['Text'],
                                                     configuration: {
                                                       condition: {
@@ -23504,8 +23384,7 @@
                                                   {
                                                     type: 'VARIABLE',
                                                     label: 'Test attribute',
-                                                    key:
-                                                      'dataComponentAttribute',
+                                                    key: 'dataComponentAttribute',
                                                     value: ['Text'],
                                                     configuration: {
                                                       condition: {
@@ -23530,8 +23409,7 @@
                                                     },
                                                     label: 'Label',
                                                     key: 'customModelAttribute',
-                                                    type:
-                                                      'CUSTOM_MODEL_ATTRIBUTE',
+                                                    type: 'CUSTOM_MODEL_ATTRIBUTE',
                                                     configuration: {
                                                       allowedTypes: ['decimal'],
                                                     },
@@ -23606,8 +23484,7 @@
                                                     ],
                                                     label:
                                                       'Value required message',
-                                                    key:
-                                                      'validationValueMissing',
+                                                    key: 'validationValueMissing',
                                                     type: 'VARIABLE',
                                                     configuration: {
                                                       condition: {
@@ -23817,8 +23694,7 @@
                                                   {
                                                     type: 'VARIABLE',
                                                     label: 'Test attribute',
-                                                    key:
-                                                      'dataComponentAttribute',
+                                                    key: 'dataComponentAttribute',
                                                     value: ['Rating'],
                                                     configuration: {
                                                       condition: {
@@ -24360,8 +24236,7 @@
                                                   {
                                                     type: 'VARIABLE',
                                                     label: 'Test attribute',
-                                                    key:
-                                                      'dataComponentAttribute',
+                                                    key: 'dataComponentAttribute',
                                                     value: ['Box'],
                                                     configuration: {
                                                       condition: {
@@ -24499,8 +24374,7 @@
                                                         value: false,
                                                         label:
                                                           'Show positioning options',
-                                                        key:
-                                                          'positioningOptions',
+                                                        key: 'positioningOptions',
                                                         type: 'TOGGLE',
                                                       },
                                                       {
@@ -24611,8 +24485,7 @@
                                                         value: false,
                                                         label:
                                                           'Show background options',
-                                                        key:
-                                                          'backgroundOptions',
+                                                        key: 'backgroundOptions',
                                                         type: 'TOGGLE',
                                                       },
                                                       {
@@ -24635,8 +24508,7 @@
                                                         value: 100,
                                                         label:
                                                           'Background color opacity',
-                                                        key:
-                                                          'backgroundColorAlpha',
+                                                        key: 'backgroundColorAlpha',
                                                         type: 'NUMBER',
                                                         configuration: {
                                                           condition: {
@@ -24699,8 +24571,7 @@
                                                         value: 'center center',
                                                         label:
                                                           'Background position',
-                                                        key:
-                                                          'backgroundPosition',
+                                                        key: 'backgroundPosition',
                                                         type: 'CUSTOM',
                                                         configuration: {
                                                           as: 'DROPDOWN',
@@ -24711,32 +24582,27 @@
                                                               value: 'left top',
                                                             },
                                                             {
-                                                              name:
-                                                                'Left center',
+                                                              name: 'Left center',
                                                               value:
                                                                 'left center',
                                                             },
                                                             {
-                                                              name:
-                                                                'Left bottom',
+                                                              name: 'Left bottom',
                                                               value:
                                                                 'left bottom',
                                                             },
                                                             {
-                                                              name:
-                                                                'Center top',
+                                                              name: 'Center top',
                                                               value:
                                                                 'center top',
                                                             },
                                                             {
-                                                              name:
-                                                                'Center center',
+                                                              name: 'Center center',
                                                               value:
                                                                 'center center',
                                                             },
                                                             {
-                                                              name:
-                                                                'Center bottom',
+                                                              name: 'Center bottom',
                                                               value:
                                                                 'center bottom',
                                                             },
@@ -24746,14 +24612,12 @@
                                                                 'right top',
                                                             },
                                                             {
-                                                              name:
-                                                                'Right center',
+                                                              name: 'Right center',
                                                               value:
                                                                 'right center',
                                                             },
                                                             {
-                                                              name:
-                                                                'Right bottom',
+                                                              name: 'Right bottom',
                                                               value:
                                                                 'right bottom',
                                                             },
@@ -24808,8 +24672,7 @@
                                                         value: 'inherit',
                                                         label:
                                                           'Background attachment',
-                                                        key:
-                                                          'backgroundAttachment',
+                                                        key: 'backgroundAttachment',
                                                         type: 'CUSTOM',
                                                         configuration: {
                                                           as: 'BUTTONGROUP',
@@ -24930,8 +24793,7 @@
                                                       {
                                                         type: 'VARIABLE',
                                                         label: 'Test attribute',
-                                                        key:
-                                                          'dataComponentAttribute',
+                                                        key: 'dataComponentAttribute',
                                                         value: ['Box'],
                                                         configuration: {
                                                           condition: {
@@ -24963,8 +24825,7 @@
                                                                   value: 'img',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'Letter',
+                                                                  name: 'Letter',
                                                                   value:
                                                                     'letter',
                                                                 },
@@ -25049,20 +24910,17 @@
                                                                 'string',
                                                               allowedInput: [
                                                                 {
-                                                                  name:
-                                                                    'Circle',
+                                                                  name: 'Circle',
                                                                   value:
                                                                     'circle',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'Rounded',
+                                                                  name: 'Rounded',
                                                                   value:
                                                                     'rounded',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'Square',
+                                                                  name: 'Square',
                                                                   value:
                                                                     'square',
                                                                 },
@@ -25073,8 +24931,7 @@
                                                             type: 'COLOR',
                                                             label:
                                                               'Background color',
-                                                            key:
-                                                              'backgroundColor',
+                                                            key: 'backgroundColor',
                                                             value: 'Accent1',
                                                             configuration: {
                                                               condition: {
@@ -25217,16 +25074,14 @@
                                                             value: false,
                                                             label:
                                                               'Advanced settings',
-                                                            key:
-                                                              'advancedSettings',
+                                                            key: 'advancedSettings',
                                                             type: 'TOGGLE',
                                                           },
                                                           {
                                                             type: 'VARIABLE',
                                                             label:
                                                               'Test attribute',
-                                                            key:
-                                                              'dataComponentAttribute',
+                                                            key: 'dataComponentAttribute',
                                                             value: ['Avatar'],
                                                             configuration: {
                                                               condition: {
@@ -25368,8 +25223,7 @@
                                                         value: false,
                                                         label:
                                                           'Show positioning options',
-                                                        key:
-                                                          'positioningOptions',
+                                                        key: 'positioningOptions',
                                                         type: 'TOGGLE',
                                                       },
                                                       {
@@ -25480,8 +25334,7 @@
                                                         value: false,
                                                         label:
                                                           'Show background options',
-                                                        key:
-                                                          'backgroundOptions',
+                                                        key: 'backgroundOptions',
                                                         type: 'TOGGLE',
                                                       },
                                                       {
@@ -25504,8 +25357,7 @@
                                                         value: 100,
                                                         label:
                                                           'Background color opacity',
-                                                        key:
-                                                          'backgroundColorAlpha',
+                                                        key: 'backgroundColorAlpha',
                                                         type: 'NUMBER',
                                                         configuration: {
                                                           condition: {
@@ -25568,8 +25420,7 @@
                                                         value: 'center center',
                                                         label:
                                                           'Background position',
-                                                        key:
-                                                          'backgroundPosition',
+                                                        key: 'backgroundPosition',
                                                         type: 'CUSTOM',
                                                         configuration: {
                                                           as: 'DROPDOWN',
@@ -25580,32 +25431,27 @@
                                                               value: 'left top',
                                                             },
                                                             {
-                                                              name:
-                                                                'Left center',
+                                                              name: 'Left center',
                                                               value:
                                                                 'left center',
                                                             },
                                                             {
-                                                              name:
-                                                                'Left bottom',
+                                                              name: 'Left bottom',
                                                               value:
                                                                 'left bottom',
                                                             },
                                                             {
-                                                              name:
-                                                                'Center top',
+                                                              name: 'Center top',
                                                               value:
                                                                 'center top',
                                                             },
                                                             {
-                                                              name:
-                                                                'Center center',
+                                                              name: 'Center center',
                                                               value:
                                                                 'center center',
                                                             },
                                                             {
-                                                              name:
-                                                                'Center bottom',
+                                                              name: 'Center bottom',
                                                               value:
                                                                 'center bottom',
                                                             },
@@ -25615,14 +25461,12 @@
                                                                 'right top',
                                                             },
                                                             {
-                                                              name:
-                                                                'Right center',
+                                                              name: 'Right center',
                                                               value:
                                                                 'right center',
                                                             },
                                                             {
-                                                              name:
-                                                                'Right bottom',
+                                                              name: 'Right bottom',
                                                               value:
                                                                 'right bottom',
                                                             },
@@ -25677,8 +25521,7 @@
                                                         value: 'inherit',
                                                         label:
                                                           'Background attachment',
-                                                        key:
-                                                          'backgroundAttachment',
+                                                        key: 'backgroundAttachment',
                                                         type: 'CUSTOM',
                                                         configuration: {
                                                           as: 'BUTTONGROUP',
@@ -25799,8 +25642,7 @@
                                                       {
                                                         type: 'VARIABLE',
                                                         label: 'Test attribute',
-                                                        key:
-                                                          'dataComponentAttribute',
+                                                        key: 'dataComponentAttribute',
                                                         value: ['Box'],
                                                         configuration: {
                                                           condition: {
@@ -25843,8 +25685,7 @@
                                                             type: 'CUSTOM',
                                                             label:
                                                               'Text Alignment',
-                                                            key:
-                                                              'textAlignment',
+                                                            key: 'textAlignment',
                                                             value: 'left',
                                                             configuration: {
                                                               as: 'BUTTONGROUP',
@@ -25856,8 +25697,7 @@
                                                                   value: 'left',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'Center',
+                                                                  name: 'Center',
                                                                   value:
                                                                     'center',
                                                                 },
@@ -25892,14 +25732,12 @@
                                                                 'string',
                                                               allowedInput: [
                                                                 {
-                                                                  name:
-                                                                    'Internal page',
+                                                                  name: 'Internal page',
                                                                   value:
                                                                     'internal',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'External page',
+                                                                  name: 'External page',
                                                                   value:
                                                                     'external',
                                                                 },
@@ -25926,8 +25764,7 @@
                                                           {
                                                             value: [''],
                                                             label: 'URL',
-                                                            key:
-                                                              'linkToExternal',
+                                                            key: 'linkToExternal',
                                                             type: 'VARIABLE',
                                                             configuration: {
                                                               placeholder:
@@ -26027,16 +25864,14 @@
                                                             value: false,
                                                             label:
                                                               'Advanced settings',
-                                                            key:
-                                                              'advancedSettings',
+                                                            key: 'advancedSettings',
                                                             type: 'TOGGLE',
                                                           },
                                                           {
                                                             type: 'VARIABLE',
                                                             label:
                                                               'Test attribute',
-                                                            key:
-                                                              'dataComponentAttribute',
+                                                            key: 'dataComponentAttribute',
                                                             value: ['Text'],
                                                             configuration: {
                                                               condition: {
@@ -26083,8 +25918,7 @@
                                                             type: 'CUSTOM',
                                                             label:
                                                               'Text Alignment',
-                                                            key:
-                                                              'textAlignment',
+                                                            key: 'textAlignment',
                                                             value: 'left',
                                                             configuration: {
                                                               as: 'BUTTONGROUP',
@@ -26096,8 +25930,7 @@
                                                                   value: 'left',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'Center',
+                                                                  name: 'Center',
                                                                   value:
                                                                     'center',
                                                                 },
@@ -26132,14 +25965,12 @@
                                                                 'string',
                                                               allowedInput: [
                                                                 {
-                                                                  name:
-                                                                    'Internal page',
+                                                                  name: 'Internal page',
                                                                   value:
                                                                     'internal',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'External page',
+                                                                  name: 'External page',
                                                                   value:
                                                                     'external',
                                                                 },
@@ -26166,8 +25997,7 @@
                                                           {
                                                             value: [''],
                                                             label: 'URL',
-                                                            key:
-                                                              'linkToExternal',
+                                                            key: 'linkToExternal',
                                                             type: 'VARIABLE',
                                                             configuration: {
                                                               placeholder:
@@ -26267,16 +26097,14 @@
                                                             value: false,
                                                             label:
                                                               'Advanced settings',
-                                                            key:
-                                                              'advancedSettings',
+                                                            key: 'advancedSettings',
                                                             type: 'TOGGLE',
                                                           },
                                                           {
                                                             type: 'VARIABLE',
                                                             label:
                                                               'Test attribute',
-                                                            key:
-                                                              'dataComponentAttribute',
+                                                            key: 'dataComponentAttribute',
                                                             value: ['Text'],
                                                             configuration: {
                                                               condition: {
@@ -27179,8 +27007,7 @@
                                                   {
                                                     type: 'VARIABLE',
                                                     label: 'Test attribute',
-                                                    key:
-                                                      'dataComponentAttribute',
+                                                    key: 'dataComponentAttribute',
                                                     value: ['Text'],
                                                     configuration: {
                                                       condition: {
@@ -27389,8 +27216,7 @@
                                                   {
                                                     type: 'VARIABLE',
                                                     label: 'Test attribute',
-                                                    key:
-                                                      'dataComponentAttribute',
+                                                    key: 'dataComponentAttribute',
                                                     value: ['Text'],
                                                     configuration: {
                                                       condition: {
@@ -27415,8 +27241,7 @@
                                                     },
                                                     label: 'Label',
                                                     key: 'customModelAttribute',
-                                                    type:
-                                                      'CUSTOM_MODEL_ATTRIBUTE',
+                                                    type: 'CUSTOM_MODEL_ATTRIBUTE',
                                                     configuration: {
                                                       allowedTypes: ['decimal'],
                                                     },
@@ -27491,8 +27316,7 @@
                                                     ],
                                                     label:
                                                       'Value required message',
-                                                    key:
-                                                      'validationValueMissing',
+                                                    key: 'validationValueMissing',
                                                     type: 'VARIABLE',
                                                     configuration: {
                                                       condition: {
@@ -27702,8 +27526,7 @@
                                                   {
                                                     type: 'VARIABLE',
                                                     label: 'Test attribute',
-                                                    key:
-                                                      'dataComponentAttribute',
+                                                    key: 'dataComponentAttribute',
                                                     value: ['Rating'],
                                                     configuration: {
                                                       condition: {
@@ -28245,8 +28068,7 @@
                                                   {
                                                     type: 'VARIABLE',
                                                     label: 'Test attribute',
-                                                    key:
-                                                      'dataComponentAttribute',
+                                                    key: 'dataComponentAttribute',
                                                     value: ['Box'],
                                                     configuration: {
                                                       condition: {
@@ -28384,8 +28206,7 @@
                                                         value: false,
                                                         label:
                                                           'Show positioning options',
-                                                        key:
-                                                          'positioningOptions',
+                                                        key: 'positioningOptions',
                                                         type: 'TOGGLE',
                                                       },
                                                       {
@@ -28496,8 +28317,7 @@
                                                         value: false,
                                                         label:
                                                           'Show background options',
-                                                        key:
-                                                          'backgroundOptions',
+                                                        key: 'backgroundOptions',
                                                         type: 'TOGGLE',
                                                       },
                                                       {
@@ -28520,8 +28340,7 @@
                                                         value: 100,
                                                         label:
                                                           'Background color opacity',
-                                                        key:
-                                                          'backgroundColorAlpha',
+                                                        key: 'backgroundColorAlpha',
                                                         type: 'NUMBER',
                                                         configuration: {
                                                           condition: {
@@ -28584,8 +28403,7 @@
                                                         value: 'center center',
                                                         label:
                                                           'Background position',
-                                                        key:
-                                                          'backgroundPosition',
+                                                        key: 'backgroundPosition',
                                                         type: 'CUSTOM',
                                                         configuration: {
                                                           as: 'DROPDOWN',
@@ -28596,32 +28414,27 @@
                                                               value: 'left top',
                                                             },
                                                             {
-                                                              name:
-                                                                'Left center',
+                                                              name: 'Left center',
                                                               value:
                                                                 'left center',
                                                             },
                                                             {
-                                                              name:
-                                                                'Left bottom',
+                                                              name: 'Left bottom',
                                                               value:
                                                                 'left bottom',
                                                             },
                                                             {
-                                                              name:
-                                                                'Center top',
+                                                              name: 'Center top',
                                                               value:
                                                                 'center top',
                                                             },
                                                             {
-                                                              name:
-                                                                'Center center',
+                                                              name: 'Center center',
                                                               value:
                                                                 'center center',
                                                             },
                                                             {
-                                                              name:
-                                                                'Center bottom',
+                                                              name: 'Center bottom',
                                                               value:
                                                                 'center bottom',
                                                             },
@@ -28631,14 +28444,12 @@
                                                                 'right top',
                                                             },
                                                             {
-                                                              name:
-                                                                'Right center',
+                                                              name: 'Right center',
                                                               value:
                                                                 'right center',
                                                             },
                                                             {
-                                                              name:
-                                                                'Right bottom',
+                                                              name: 'Right bottom',
                                                               value:
                                                                 'right bottom',
                                                             },
@@ -28693,8 +28504,7 @@
                                                         value: 'inherit',
                                                         label:
                                                           'Background attachment',
-                                                        key:
-                                                          'backgroundAttachment',
+                                                        key: 'backgroundAttachment',
                                                         type: 'CUSTOM',
                                                         configuration: {
                                                           as: 'BUTTONGROUP',
@@ -28815,8 +28625,7 @@
                                                       {
                                                         type: 'VARIABLE',
                                                         label: 'Test attribute',
-                                                        key:
-                                                          'dataComponentAttribute',
+                                                        key: 'dataComponentAttribute',
                                                         value: ['Box'],
                                                         configuration: {
                                                           condition: {
@@ -28848,8 +28657,7 @@
                                                                   value: 'img',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'Letter',
+                                                                  name: 'Letter',
                                                                   value:
                                                                     'letter',
                                                                 },
@@ -28934,20 +28742,17 @@
                                                                 'string',
                                                               allowedInput: [
                                                                 {
-                                                                  name:
-                                                                    'Circle',
+                                                                  name: 'Circle',
                                                                   value:
                                                                     'circle',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'Rounded',
+                                                                  name: 'Rounded',
                                                                   value:
                                                                     'rounded',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'Square',
+                                                                  name: 'Square',
                                                                   value:
                                                                     'square',
                                                                 },
@@ -28958,8 +28763,7 @@
                                                             type: 'COLOR',
                                                             label:
                                                               'Background color',
-                                                            key:
-                                                              'backgroundColor',
+                                                            key: 'backgroundColor',
                                                             value: 'Accent1',
                                                             configuration: {
                                                               condition: {
@@ -29102,16 +28906,14 @@
                                                             value: false,
                                                             label:
                                                               'Advanced settings',
-                                                            key:
-                                                              'advancedSettings',
+                                                            key: 'advancedSettings',
                                                             type: 'TOGGLE',
                                                           },
                                                           {
                                                             type: 'VARIABLE',
                                                             label:
                                                               'Test attribute',
-                                                            key:
-                                                              'dataComponentAttribute',
+                                                            key: 'dataComponentAttribute',
                                                             value: ['Avatar'],
                                                             configuration: {
                                                               condition: {
@@ -29253,8 +29055,7 @@
                                                         value: false,
                                                         label:
                                                           'Show positioning options',
-                                                        key:
-                                                          'positioningOptions',
+                                                        key: 'positioningOptions',
                                                         type: 'TOGGLE',
                                                       },
                                                       {
@@ -29365,8 +29166,7 @@
                                                         value: false,
                                                         label:
                                                           'Show background options',
-                                                        key:
-                                                          'backgroundOptions',
+                                                        key: 'backgroundOptions',
                                                         type: 'TOGGLE',
                                                       },
                                                       {
@@ -29389,8 +29189,7 @@
                                                         value: 100,
                                                         label:
                                                           'Background color opacity',
-                                                        key:
-                                                          'backgroundColorAlpha',
+                                                        key: 'backgroundColorAlpha',
                                                         type: 'NUMBER',
                                                         configuration: {
                                                           condition: {
@@ -29453,8 +29252,7 @@
                                                         value: 'center center',
                                                         label:
                                                           'Background position',
-                                                        key:
-                                                          'backgroundPosition',
+                                                        key: 'backgroundPosition',
                                                         type: 'CUSTOM',
                                                         configuration: {
                                                           as: 'DROPDOWN',
@@ -29465,32 +29263,27 @@
                                                               value: 'left top',
                                                             },
                                                             {
-                                                              name:
-                                                                'Left center',
+                                                              name: 'Left center',
                                                               value:
                                                                 'left center',
                                                             },
                                                             {
-                                                              name:
-                                                                'Left bottom',
+                                                              name: 'Left bottom',
                                                               value:
                                                                 'left bottom',
                                                             },
                                                             {
-                                                              name:
-                                                                'Center top',
+                                                              name: 'Center top',
                                                               value:
                                                                 'center top',
                                                             },
                                                             {
-                                                              name:
-                                                                'Center center',
+                                                              name: 'Center center',
                                                               value:
                                                                 'center center',
                                                             },
                                                             {
-                                                              name:
-                                                                'Center bottom',
+                                                              name: 'Center bottom',
                                                               value:
                                                                 'center bottom',
                                                             },
@@ -29500,14 +29293,12 @@
                                                                 'right top',
                                                             },
                                                             {
-                                                              name:
-                                                                'Right center',
+                                                              name: 'Right center',
                                                               value:
                                                                 'right center',
                                                             },
                                                             {
-                                                              name:
-                                                                'Right bottom',
+                                                              name: 'Right bottom',
                                                               value:
                                                                 'right bottom',
                                                             },
@@ -29562,8 +29353,7 @@
                                                         value: 'inherit',
                                                         label:
                                                           'Background attachment',
-                                                        key:
-                                                          'backgroundAttachment',
+                                                        key: 'backgroundAttachment',
                                                         type: 'CUSTOM',
                                                         configuration: {
                                                           as: 'BUTTONGROUP',
@@ -29684,8 +29474,7 @@
                                                       {
                                                         type: 'VARIABLE',
                                                         label: 'Test attribute',
-                                                        key:
-                                                          'dataComponentAttribute',
+                                                        key: 'dataComponentAttribute',
                                                         value: ['Box'],
                                                         configuration: {
                                                           condition: {
@@ -29728,8 +29517,7 @@
                                                             type: 'CUSTOM',
                                                             label:
                                                               'Text Alignment',
-                                                            key:
-                                                              'textAlignment',
+                                                            key: 'textAlignment',
                                                             value: 'left',
                                                             configuration: {
                                                               as: 'BUTTONGROUP',
@@ -29741,8 +29529,7 @@
                                                                   value: 'left',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'Center',
+                                                                  name: 'Center',
                                                                   value:
                                                                     'center',
                                                                 },
@@ -29777,14 +29564,12 @@
                                                                 'string',
                                                               allowedInput: [
                                                                 {
-                                                                  name:
-                                                                    'Internal page',
+                                                                  name: 'Internal page',
                                                                   value:
                                                                     'internal',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'External page',
+                                                                  name: 'External page',
                                                                   value:
                                                                     'external',
                                                                 },
@@ -29811,8 +29596,7 @@
                                                           {
                                                             value: [''],
                                                             label: 'URL',
-                                                            key:
-                                                              'linkToExternal',
+                                                            key: 'linkToExternal',
                                                             type: 'VARIABLE',
                                                             configuration: {
                                                               placeholder:
@@ -29912,16 +29696,14 @@
                                                             value: false,
                                                             label:
                                                               'Advanced settings',
-                                                            key:
-                                                              'advancedSettings',
+                                                            key: 'advancedSettings',
                                                             type: 'TOGGLE',
                                                           },
                                                           {
                                                             type: 'VARIABLE',
                                                             label:
                                                               'Test attribute',
-                                                            key:
-                                                              'dataComponentAttribute',
+                                                            key: 'dataComponentAttribute',
                                                             value: ['Text'],
                                                             configuration: {
                                                               condition: {
@@ -29968,8 +29750,7 @@
                                                             type: 'CUSTOM',
                                                             label:
                                                               'Text Alignment',
-                                                            key:
-                                                              'textAlignment',
+                                                            key: 'textAlignment',
                                                             value: 'left',
                                                             configuration: {
                                                               as: 'BUTTONGROUP',
@@ -29981,8 +29762,7 @@
                                                                   value: 'left',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'Center',
+                                                                  name: 'Center',
                                                                   value:
                                                                     'center',
                                                                 },
@@ -30017,14 +29797,12 @@
                                                                 'string',
                                                               allowedInput: [
                                                                 {
-                                                                  name:
-                                                                    'Internal page',
+                                                                  name: 'Internal page',
                                                                   value:
                                                                     'internal',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'External page',
+                                                                  name: 'External page',
                                                                   value:
                                                                     'external',
                                                                 },
@@ -30051,8 +29829,7 @@
                                                           {
                                                             value: [''],
                                                             label: 'URL',
-                                                            key:
-                                                              'linkToExternal',
+                                                            key: 'linkToExternal',
                                                             type: 'VARIABLE',
                                                             configuration: {
                                                               placeholder:
@@ -30152,16 +29929,14 @@
                                                             value: false,
                                                             label:
                                                               'Advanced settings',
-                                                            key:
-                                                              'advancedSettings',
+                                                            key: 'advancedSettings',
                                                             type: 'TOGGLE',
                                                           },
                                                           {
                                                             type: 'VARIABLE',
                                                             label:
                                                               'Test attribute',
-                                                            key:
-                                                              'dataComponentAttribute',
+                                                            key: 'dataComponentAttribute',
                                                             value: ['Text'],
                                                             configuration: {
                                                               condition: {
@@ -32658,8 +32433,7 @@
                                                   {
                                                     type: 'VARIABLE',
                                                     label: 'Test attribute',
-                                                    key:
-                                                      'dataComponentAttribute',
+                                                    key: 'dataComponentAttribute',
                                                     value: ['Text'],
                                                     configuration: {
                                                       condition: {
@@ -32866,8 +32640,7 @@
                                                   {
                                                     type: 'VARIABLE',
                                                     label: 'Test attribute',
-                                                    key:
-                                                      'dataComponentAttribute',
+                                                    key: 'dataComponentAttribute',
                                                     value: ['Text'],
                                                     configuration: {
                                                       condition: {
@@ -33074,8 +32847,7 @@
                                                   {
                                                     type: 'VARIABLE',
                                                     label: 'Test attribute',
-                                                    key:
-                                                      'dataComponentAttribute',
+                                                    key: 'dataComponentAttribute',
                                                     value: ['Text'],
                                                     configuration: {
                                                       condition: {
@@ -33282,8 +33054,7 @@
                                                   {
                                                     type: 'VARIABLE',
                                                     label: 'Test attribute',
-                                                    key:
-                                                      'dataComponentAttribute',
+                                                    key: 'dataComponentAttribute',
                                                     value: ['Text'],
                                                     configuration: {
                                                       condition: {
@@ -33490,8 +33261,7 @@
                                                   {
                                                     type: 'VARIABLE',
                                                     label: 'Test attribute',
-                                                    key:
-                                                      'dataComponentAttribute',
+                                                    key: 'dataComponentAttribute',
                                                     value: ['Text'],
                                                     configuration: {
                                                       condition: {
@@ -33700,8 +33470,7 @@
                                                   {
                                                     type: 'VARIABLE',
                                                     label: 'Test attribute',
-                                                    key:
-                                                      'dataComponentAttribute',
+                                                    key: 'dataComponentAttribute',
                                                     value: ['Text'],
                                                     configuration: {
                                                       condition: {
@@ -33908,8 +33677,7 @@
                                                   {
                                                     type: 'VARIABLE',
                                                     label: 'Test attribute',
-                                                    key:
-                                                      'dataComponentAttribute',
+                                                    key: 'dataComponentAttribute',
                                                     value: ['Text'],
                                                     configuration: {
                                                       condition: {
@@ -34807,8 +34575,7 @@
                                                   {
                                                     type: 'VARIABLE',
                                                     label: 'Test attribute',
-                                                    key:
-                                                      'dataComponentAttribute',
+                                                    key: 'dataComponentAttribute',
                                                     value: ['Text'],
                                                     configuration: {
                                                       condition: {
@@ -35017,8 +34784,7 @@
                                                   {
                                                     type: 'VARIABLE',
                                                     label: 'Test attribute',
-                                                    key:
-                                                      'dataComponentAttribute',
+                                                    key: 'dataComponentAttribute',
                                                     value: ['Text'],
                                                     configuration: {
                                                       condition: {
@@ -35225,8 +34991,7 @@
                                                   {
                                                     type: 'VARIABLE',
                                                     label: 'Test attribute',
-                                                    key:
-                                                      'dataComponentAttribute',
+                                                    key: 'dataComponentAttribute',
                                                     value: ['Text'],
                                                     configuration: {
                                                       condition: {
@@ -36124,8 +35889,7 @@
                                                   {
                                                     type: 'VARIABLE',
                                                     label: 'Test attribute',
-                                                    key:
-                                                      'dataComponentAttribute',
+                                                    key: 'dataComponentAttribute',
                                                     value: ['Text'],
                                                     configuration: {
                                                       condition: {
@@ -36181,8 +35945,7 @@
                                                   {
                                                     type: 'VARIABLE',
                                                     label: 'Test attribute',
-                                                    key:
-                                                      'dataComponentAttribute',
+                                                    key: 'dataComponentAttribute',
                                                     value: ['List'],
                                                     configuration: {
                                                       condition: {
@@ -36228,13 +35991,11 @@
                                                           dataType: 'string',
                                                           allowedInput: [
                                                             {
-                                                              name:
-                                                                'Internal page',
+                                                              name: 'Internal page',
                                                               value: 'internal',
                                                             },
                                                             {
-                                                              name:
-                                                                'External page',
+                                                              name: 'External page',
                                                               value: 'external',
                                                             },
                                                           ],
@@ -36595,8 +36356,7 @@
                                                       {
                                                         type: 'VARIABLE',
                                                         label: 'Test attribute',
-                                                        key:
-                                                          'dataComponentAttribute',
+                                                        key: 'dataComponentAttribute',
                                                         value: ['ListItem'],
                                                         configuration: {
                                                           condition: {
@@ -36643,13 +36403,11 @@
                                                           dataType: 'string',
                                                           allowedInput: [
                                                             {
-                                                              name:
-                                                                'Internal page',
+                                                              name: 'Internal page',
                                                               value: 'internal',
                                                             },
                                                             {
-                                                              name:
-                                                                'External page',
+                                                              name: 'External page',
                                                               value: 'external',
                                                             },
                                                           ],
@@ -37010,8 +36768,7 @@
                                                       {
                                                         type: 'VARIABLE',
                                                         label: 'Test attribute',
-                                                        key:
-                                                          'dataComponentAttribute',
+                                                        key: 'dataComponentAttribute',
                                                         value: ['ListItem'],
                                                         configuration: {
                                                           condition: {
@@ -37058,13 +36815,11 @@
                                                           dataType: 'string',
                                                           allowedInput: [
                                                             {
-                                                              name:
-                                                                'Internal page',
+                                                              name: 'Internal page',
                                                               value: 'internal',
                                                             },
                                                             {
-                                                              name:
-                                                                'External page',
+                                                              name: 'External page',
                                                               value: 'external',
                                                             },
                                                           ],
@@ -37425,8 +37180,7 @@
                                                       {
                                                         type: 'VARIABLE',
                                                         label: 'Test attribute',
-                                                        key:
-                                                          'dataComponentAttribute',
+                                                        key: 'dataComponentAttribute',
                                                         value: ['ListItem'],
                                                         configuration: {
                                                           condition: {

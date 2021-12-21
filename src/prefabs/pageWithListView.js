@@ -38,11 +38,11 @@
       skip: !modelId,
     });
 
-    const enrichVarObj = obj => {
+    const enrichVarObj = (obj) => {
       const returnObject = obj;
       if (data && data.model) {
         const property = data.model.properties.find(
-          prop => prop.id === obj.id[0],
+          (prop) => prop.id === obj.id[0],
         );
         if (property) {
           returnObject.name = `{{ ${data.model.name}.${property.name} }}`;
@@ -5282,8 +5282,7 @@
                                                   {
                                                     type: 'VARIABLE',
                                                     label: 'Test attribute',
-                                                    key:
-                                                      'dataComponentAttribute',
+                                                    key: 'dataComponentAttribute',
                                                     value: ['Row'],
                                                     configuration: {
                                                       condition: {
@@ -5320,8 +5319,7 @@
                                                           dataType: 'string',
                                                           allowedInput: [
                                                             {
-                                                              name:
-                                                                'Fit content',
+                                                              name: 'Fit content',
                                                               value:
                                                                 'fitContent',
                                                             },
@@ -5388,16 +5386,14 @@
                                                         value: '3',
                                                         label:
                                                           'Column width (tablet landscape)',
-                                                        key:
-                                                          'columnWidthTabletLandscape',
+                                                        key: 'columnWidthTabletLandscape',
                                                         type: 'CUSTOM',
                                                         configuration: {
                                                           as: 'DROPDOWN',
                                                           dataType: 'string',
                                                           allowedInput: [
                                                             {
-                                                              name:
-                                                                'Fit content',
+                                                              name: 'Fit content',
                                                               value:
                                                                 'fitContent',
                                                             },
@@ -5464,16 +5460,14 @@
                                                         value: '3',
                                                         label:
                                                           'Column width (tablet portrait)',
-                                                        key:
-                                                          'columnWidthTabletPortrait',
+                                                        key: 'columnWidthTabletPortrait',
                                                         type: 'CUSTOM',
                                                         configuration: {
                                                           as: 'DROPDOWN',
                                                           dataType: 'string',
                                                           allowedInput: [
                                                             {
-                                                              name:
-                                                                'Fit content',
+                                                              name: 'Fit content',
                                                               value:
                                                                 'fitContent',
                                                             },
@@ -5540,16 +5534,14 @@
                                                         value: '12',
                                                         label:
                                                           'Column width (mobile)',
-                                                        key:
-                                                          'columnWidthMobile',
+                                                        key: 'columnWidthMobile',
                                                         type: 'CUSTOM',
                                                         configuration: {
                                                           as: 'DROPDOWN',
                                                           dataType: 'string',
                                                           allowedInput: [
                                                             {
-                                                              name:
-                                                                'Fit content',
+                                                              name: 'Fit content',
                                                               value:
                                                                 'fitContent',
                                                             },
@@ -5632,8 +5624,7 @@
                                                         type: 'CUSTOM',
                                                         label:
                                                           'Horizontal Alignment',
-                                                        key:
-                                                          'horizontalAlignment',
+                                                        key: 'horizontalAlignment',
                                                         value: 'inherit',
                                                         configuration: {
                                                           as: 'BUTTONGROUP',
@@ -5663,8 +5654,7 @@
                                                         type: 'CUSTOM',
                                                         label:
                                                           'Vertical Alignment',
-                                                        key:
-                                                          'verticalAlignment',
+                                                        key: 'verticalAlignment',
                                                         value: 'center',
                                                         configuration: {
                                                           as: 'BUTTONGROUP',
@@ -5722,8 +5712,7 @@
                                                       {
                                                         type: 'VARIABLE',
                                                         label: 'Test attribute',
-                                                        key:
-                                                          'dataComponentAttribute',
+                                                        key: 'dataComponentAttribute',
                                                         value: ['Column'],
                                                         configuration: {
                                                           condition: {
@@ -5760,8 +5749,7 @@
                                                                     'video',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'I-frame',
+                                                                  name: 'I-frame',
                                                                   value:
                                                                     'iframe',
                                                                 },
@@ -5829,14 +5817,12 @@
                                                                 'string',
                                                               allowedInput: [
                                                                 {
-                                                                  name:
-                                                                    'Internal page',
+                                                                  name: 'Internal page',
                                                                   value:
                                                                     'internal',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'External page',
+                                                                  name: 'External page',
                                                                   value:
                                                                     'external',
                                                                 },
@@ -5870,8 +5856,7 @@
                                                           {
                                                             value: [''],
                                                             label: 'URL',
-                                                            key:
-                                                              'linkToExternal',
+                                                            key: 'linkToExternal',
                                                             type: 'VARIABLE',
                                                             configuration: {
                                                               placeholder:
@@ -5943,16 +5928,14 @@
                                                             value: false,
                                                             label:
                                                               'Advanced settings',
-                                                            key:
-                                                              'advancedSettings',
+                                                            key: 'advancedSettings',
                                                             type: 'TOGGLE',
                                                           },
                                                           {
                                                             type: 'VARIABLE',
                                                             label:
                                                               'Test attribute',
-                                                            key:
-                                                              'dataComponentAttribute',
+                                                            key: 'dataComponentAttribute',
                                                             value: ['Media'],
                                                             configuration: {
                                                               condition: {
@@ -5993,8 +5976,7 @@
                                                           dataType: 'string',
                                                           allowedInput: [
                                                             {
-                                                              name:
-                                                                'Fit content',
+                                                              name: 'Fit content',
                                                               value:
                                                                 'fitContent',
                                                             },
@@ -6061,16 +6043,14 @@
                                                         value: '8',
                                                         label:
                                                           'Column width (tablet landscape)',
-                                                        key:
-                                                          'columnWidthTabletLandscape',
+                                                        key: 'columnWidthTabletLandscape',
                                                         type: 'CUSTOM',
                                                         configuration: {
                                                           as: 'DROPDOWN',
                                                           dataType: 'string',
                                                           allowedInput: [
                                                             {
-                                                              name:
-                                                                'Fit content',
+                                                              name: 'Fit content',
                                                               value:
                                                                 'fitContent',
                                                             },
@@ -6137,16 +6117,14 @@
                                                         value: '8',
                                                         label:
                                                           'Column width (tablet portrait)',
-                                                        key:
-                                                          'columnWidthTabletPortrait',
+                                                        key: 'columnWidthTabletPortrait',
                                                         type: 'CUSTOM',
                                                         configuration: {
                                                           as: 'DROPDOWN',
                                                           dataType: 'string',
                                                           allowedInput: [
                                                             {
-                                                              name:
-                                                                'Fit content',
+                                                              name: 'Fit content',
                                                               value:
                                                                 'fitContent',
                                                             },
@@ -6213,16 +6191,14 @@
                                                         value: '10',
                                                         label:
                                                           'Column width (mobile)',
-                                                        key:
-                                                          'columnWidthMobile',
+                                                        key: 'columnWidthMobile',
                                                         type: 'CUSTOM',
                                                         configuration: {
                                                           as: 'DROPDOWN',
                                                           dataType: 'string',
                                                           allowedInput: [
                                                             {
-                                                              name:
-                                                                'Fit content',
+                                                              name: 'Fit content',
                                                               value:
                                                                 'fitContent',
                                                             },
@@ -6305,8 +6281,7 @@
                                                         type: 'CUSTOM',
                                                         label:
                                                           'Horizontal Alignment',
-                                                        key:
-                                                          'horizontalAlignment',
+                                                        key: 'horizontalAlignment',
                                                         value: 'inherit',
                                                         configuration: {
                                                           as: 'BUTTONGROUP',
@@ -6336,8 +6311,7 @@
                                                         type: 'CUSTOM',
                                                         label:
                                                           'Vertical Alignment',
-                                                        key:
-                                                          'verticalAlignment',
+                                                        key: 'verticalAlignment',
                                                         value: 'inherit',
                                                         configuration: {
                                                           as: 'BUTTONGROUP',
@@ -6395,8 +6369,7 @@
                                                       {
                                                         type: 'VARIABLE',
                                                         label: 'Test attribute',
-                                                        key:
-                                                          'dataComponentAttribute',
+                                                        key: 'dataComponentAttribute',
                                                         value: ['Column'],
                                                         configuration: {
                                                           condition: {
@@ -6439,8 +6412,7 @@
                                                             type: 'CUSTOM',
                                                             label:
                                                               'Text Alignment',
-                                                            key:
-                                                              'textAlignment',
+                                                            key: 'textAlignment',
                                                             value: 'left',
                                                             configuration: {
                                                               as: 'BUTTONGROUP',
@@ -6452,8 +6424,7 @@
                                                                   value: 'left',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'Center',
+                                                                  name: 'Center',
                                                                   value:
                                                                     'center',
                                                                 },
@@ -6488,14 +6459,12 @@
                                                                 'string',
                                                               allowedInput: [
                                                                 {
-                                                                  name:
-                                                                    'Internal page',
+                                                                  name: 'Internal page',
                                                                   value:
                                                                     'internal',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'External page',
+                                                                  name: 'External page',
                                                                   value:
                                                                     'external',
                                                                 },
@@ -6522,8 +6491,7 @@
                                                           {
                                                             value: [''],
                                                             label: 'URL',
-                                                            key:
-                                                              'linkToExternal',
+                                                            key: 'linkToExternal',
                                                             type: 'VARIABLE',
                                                             configuration: {
                                                               placeholder:
@@ -6623,16 +6591,14 @@
                                                             value: false,
                                                             label:
                                                               'Advanced settings',
-                                                            key:
-                                                              'advancedSettings',
+                                                            key: 'advancedSettings',
                                                             type: 'TOGGLE',
                                                           },
                                                           {
                                                             type: 'VARIABLE',
                                                             label:
                                                               'Test attribute',
-                                                            key:
-                                                              'dataComponentAttribute',
+                                                            key: 'dataComponentAttribute',
                                                             value: ['Text'],
                                                             configuration: {
                                                               condition: {
@@ -6679,8 +6645,7 @@
                                                             type: 'CUSTOM',
                                                             label:
                                                               'Text Alignment',
-                                                            key:
-                                                              'textAlignment',
+                                                            key: 'textAlignment',
                                                             value: 'left',
                                                             configuration: {
                                                               as: 'BUTTONGROUP',
@@ -6692,8 +6657,7 @@
                                                                   value: 'left',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'Center',
+                                                                  name: 'Center',
                                                                   value:
                                                                     'center',
                                                                 },
@@ -6728,14 +6692,12 @@
                                                                 'string',
                                                               allowedInput: [
                                                                 {
-                                                                  name:
-                                                                    'Internal page',
+                                                                  name: 'Internal page',
                                                                   value:
                                                                     'internal',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'External page',
+                                                                  name: 'External page',
                                                                   value:
                                                                     'external',
                                                                 },
@@ -6762,8 +6724,7 @@
                                                           {
                                                             value: [''],
                                                             label: 'URL',
-                                                            key:
-                                                              'linkToExternal',
+                                                            key: 'linkToExternal',
                                                             type: 'VARIABLE',
                                                             configuration: {
                                                               placeholder:
@@ -6863,16 +6824,14 @@
                                                             value: false,
                                                             label:
                                                               'Advanced settings',
-                                                            key:
-                                                              'advancedSettings',
+                                                            key: 'advancedSettings',
                                                             type: 'TOGGLE',
                                                           },
                                                           {
                                                             type: 'VARIABLE',
                                                             label:
                                                               'Test attribute',
-                                                            key:
-                                                              'dataComponentAttribute',
+                                                            key: 'dataComponentAttribute',
                                                             value: ['Text'],
                                                             configuration: {
                                                               condition: {
@@ -6919,8 +6878,7 @@
                                                             type: 'CUSTOM',
                                                             label:
                                                               'Text Alignment',
-                                                            key:
-                                                              'textAlignment',
+                                                            key: 'textAlignment',
                                                             value: 'left',
                                                             configuration: {
                                                               as: 'BUTTONGROUP',
@@ -6932,8 +6890,7 @@
                                                                   value: 'left',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'Center',
+                                                                  name: 'Center',
                                                                   value:
                                                                     'center',
                                                                 },
@@ -6968,14 +6925,12 @@
                                                                 'string',
                                                               allowedInput: [
                                                                 {
-                                                                  name:
-                                                                    'Internal page',
+                                                                  name: 'Internal page',
                                                                   value:
                                                                     'internal',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'External page',
+                                                                  name: 'External page',
                                                                   value:
                                                                     'external',
                                                                 },
@@ -7002,8 +6957,7 @@
                                                           {
                                                             value: [''],
                                                             label: 'URL',
-                                                            key:
-                                                              'linkToExternal',
+                                                            key: 'linkToExternal',
                                                             type: 'VARIABLE',
                                                             configuration: {
                                                               placeholder:
@@ -7103,16 +7057,14 @@
                                                             value: false,
                                                             label:
                                                               'Advanced settings',
-                                                            key:
-                                                              'advancedSettings',
+                                                            key: 'advancedSettings',
                                                             type: 'TOGGLE',
                                                           },
                                                           {
                                                             type: 'VARIABLE',
                                                             label:
                                                               'Test attribute',
-                                                            key:
-                                                              'dataComponentAttribute',
+                                                            key: 'dataComponentAttribute',
                                                             value: ['Text'],
                                                             configuration: {
                                                               condition: {
@@ -7153,8 +7105,7 @@
                                                           dataType: 'string',
                                                           allowedInput: [
                                                             {
-                                                              name:
-                                                                'Fit content',
+                                                              name: 'Fit content',
                                                               value:
                                                                 'fitContent',
                                                             },
@@ -7221,16 +7172,14 @@
                                                         value: '1',
                                                         label:
                                                           'Column width (tablet landscape)',
-                                                        key:
-                                                          'columnWidthTabletLandscape',
+                                                        key: 'columnWidthTabletLandscape',
                                                         type: 'CUSTOM',
                                                         configuration: {
                                                           as: 'DROPDOWN',
                                                           dataType: 'string',
                                                           allowedInput: [
                                                             {
-                                                              name:
-                                                                'Fit content',
+                                                              name: 'Fit content',
                                                               value:
                                                                 'fitContent',
                                                             },
@@ -7297,16 +7246,14 @@
                                                         value: '1',
                                                         label:
                                                           'Column width (tablet portrait)',
-                                                        key:
-                                                          'columnWidthTabletPortrait',
+                                                        key: 'columnWidthTabletPortrait',
                                                         type: 'CUSTOM',
                                                         configuration: {
                                                           as: 'DROPDOWN',
                                                           dataType: 'string',
                                                           allowedInput: [
                                                             {
-                                                              name:
-                                                                'Fit content',
+                                                              name: 'Fit content',
                                                               value:
                                                                 'fitContent',
                                                             },
@@ -7373,16 +7320,14 @@
                                                         value: '2',
                                                         label:
                                                           'Column width (mobile)',
-                                                        key:
-                                                          'columnWidthMobile',
+                                                        key: 'columnWidthMobile',
                                                         type: 'CUSTOM',
                                                         configuration: {
                                                           as: 'DROPDOWN',
                                                           dataType: 'string',
                                                           allowedInput: [
                                                             {
-                                                              name:
-                                                                'Fit content',
+                                                              name: 'Fit content',
                                                               value:
                                                                 'fitContent',
                                                             },
@@ -7465,8 +7410,7 @@
                                                         type: 'CUSTOM',
                                                         label:
                                                           'Horizontal Alignment',
-                                                        key:
-                                                          'horizontalAlignment',
+                                                        key: 'horizontalAlignment',
                                                         value: 'center',
                                                         configuration: {
                                                           as: 'BUTTONGROUP',
@@ -7496,8 +7440,7 @@
                                                         type: 'CUSTOM',
                                                         label:
                                                           'Vertical Alignment',
-                                                        key:
-                                                          'verticalAlignment',
+                                                        key: 'verticalAlignment',
                                                         value: 'center',
                                                         configuration: {
                                                           as: 'BUTTONGROUP',
@@ -7555,8 +7498,7 @@
                                                       {
                                                         type: 'VARIABLE',
                                                         label: 'Test attribute',
-                                                        key:
-                                                          'dataComponentAttribute',
+                                                        key: 'dataComponentAttribute',
                                                         value: ['Column'],
                                                         configuration: {
                                                           condition: {
@@ -7581,8 +7523,7 @@
                                                             },
                                                             boxShadow: 'none',
                                                             color: {
-                                                              type:
-                                                                'THEME_COLOR',
+                                                              type: 'THEME_COLOR',
                                                               value: 'primary',
                                                             },
                                                             fontFamily:
@@ -7648,8 +7589,7 @@
                                                                     'large',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'Medium',
+                                                                  name: 'Medium',
                                                                   value:
                                                                     'medium',
                                                                 },
@@ -7726,8 +7666,7 @@
                                                           {
                                                             label:
                                                               'Toggle tooltip visibility',
-                                                            key:
-                                                              'hasVisibleTooltip',
+                                                            key: 'hasVisibleTooltip',
                                                             value: true,
                                                             type: 'TOGGLE',
                                                             configuration: {
@@ -7746,8 +7685,7 @@
                                                             type: 'VARIABLE',
                                                             label:
                                                               'Tooltip Content',
-                                                            key:
-                                                              'tooltipContent',
+                                                            key: 'tooltipContent',
                                                             value: ['Tips'],
                                                             configuration: {
                                                               condition: {
@@ -7763,8 +7701,7 @@
                                                           {
                                                             label:
                                                               'Tooltip Placement',
-                                                            key:
-                                                              'tooltipPlacement',
+                                                            key: 'tooltipPlacement',
                                                             value: 'bottom',
                                                             type: 'CUSTOM',
                                                             configuration: {
@@ -7773,8 +7710,7 @@
                                                                 'string',
                                                               allowedInput: [
                                                                 {
-                                                                  name:
-                                                                    'Top Start',
+                                                                  name: 'Top Start',
                                                                   value:
                                                                     'top-start',
                                                                 },
@@ -7783,8 +7719,7 @@
                                                                   value: 'top',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'Top End',
+                                                                  name: 'Top End',
                                                                   value:
                                                                     'top-end',
                                                                 },
@@ -7798,20 +7733,17 @@
                                                                   value: 'left',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'Botttom Start',
+                                                                  name: 'Botttom Start',
                                                                   value:
                                                                     'bottom-start',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'Bottom',
+                                                                  name: 'Bottom',
                                                                   value:
                                                                     'bottom',
                                                                 },
                                                                 {
-                                                                  name:
-                                                                    'Bottom End',
+                                                                  name: 'Bottom End',
                                                                   value:
                                                                     'bottom-end',
                                                                 },
@@ -7830,8 +7762,7 @@
                                                             type: 'COLOR',
                                                             label:
                                                               'Tooltip Background',
-                                                            key:
-                                                              'tooltipBackground',
+                                                            key: 'tooltipBackground',
                                                             value: 'Medium',
                                                             configuration: {
                                                               condition: {
@@ -7865,16 +7796,14 @@
                                                             value: false,
                                                             label:
                                                               'Advanced settings',
-                                                            key:
-                                                              'advancedSettings',
+                                                            key: 'advancedSettings',
                                                             type: 'TOGGLE',
                                                           },
                                                           {
                                                             type: 'VARIABLE',
                                                             label:
                                                               'Test attribute',
-                                                            key:
-                                                              'dataComponentAttribute',
+                                                            key: 'dataComponentAttribute',
                                                             value: ['Button'],
                                                             configuration: {
                                                               condition: {
@@ -8485,7 +8414,7 @@
                 }
               >
                 <ModelSelector
-                  onChange={value => {
+                  onChange={(value) => {
                     setShowValidation(false);
                     setModelId(value);
                     setImageProperty('');
@@ -8499,7 +8428,7 @@
               <Field label="Image property">
                 <PropertySelector
                   modelId={modelId}
-                  onChange={value => {
+                  onChange={(value) => {
                     setImageProperty(value);
                   }}
                   value={imageProperty}
@@ -8509,7 +8438,7 @@
               <Field label="Title property">
                 <PropertySelector
                   modelId={modelId}
-                  onChange={value => {
+                  onChange={(value) => {
                     setTitleProperty(value);
                   }}
                   value={titleProperty}
@@ -8519,7 +8448,7 @@
               <Field label="Subheader property">
                 <PropertySelector
                   modelId={modelId}
-                  onChange={value => {
+                  onChange={(value) => {
                     setSubheaderProperty(value);
                   }}
                   value={subheaderProperty}
@@ -8529,7 +8458,7 @@
               <Field label="Description property">
                 <PropertySelector
                   modelId={modelId}
-                  onChange={value => {
+                  onChange={(value) => {
                     setDescriptionProperty(value);
                   }}
                   value={descriptionProperty}
@@ -8636,14 +8565,12 @@
               const dataList = getDescendantByRef('#dataList', prefabStructure);
               dataList.options[0].value = modelId;
               if (imageProperty.id) {
-                dataList.descendants[0].descendants[0].descendants[0].descendants[0].descendants[0].descendants[0].options[1].value = [
-                  enrichVarObj(imageProperty),
-                ];
+                dataList.descendants[0].descendants[0].descendants[0].descendants[0].descendants[0].descendants[0].options[1].value =
+                  [enrichVarObj(imageProperty)];
               }
               if (titleProperty.id) {
-                dataList.descendants[0].descendants[0].descendants[0].descendants[0].descendants[1].descendants[0].options[0].value = [
-                  enrichVarObj(titleProperty),
-                ];
+                dataList.descendants[0].descendants[0].descendants[0].descendants[0].descendants[1].descendants[0].options[0].value =
+                  [enrichVarObj(titleProperty)];
                 dataList.options[4].value = titleProperty.id;
                 newPrefab.interactions.push({
                   name: 'Filter',
@@ -8664,14 +8591,12 @@
                 });
               }
               if (subheaderProperty.id) {
-                dataList.descendants[0].descendants[0].descendants[0].descendants[0].descendants[1].descendants[1].options[0].value = [
-                  enrichVarObj(subheaderProperty),
-                ];
+                dataList.descendants[0].descendants[0].descendants[0].descendants[0].descendants[1].descendants[1].options[0].value =
+                  [enrichVarObj(subheaderProperty)];
               }
               if (descriptionProperty.id) {
-                dataList.descendants[0].descendants[0].descendants[0].descendants[0].descendants[1].descendants[2].options[0].value = [
-                  enrichVarObj(descriptionProperty),
-                ];
+                dataList.descendants[0].descendants[0].descendants[0].descendants[0].descendants[1].descendants[2].options[0].value =
+                  [enrichVarObj(descriptionProperty)];
               }
 
               newPrefab.structure[0].descendants = prefabStructure;

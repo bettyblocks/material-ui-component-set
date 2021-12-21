@@ -3866,20 +3866,16 @@
       const newPrefab = { ...prefab };
       switch (varient) {
         case 'default':
-          structureDefault.descendants[3].descendants[0].options[3].value = endpoint
-            .id.length
-            ? endpoint
-            : '';
+          structureDefault.descendants[3].descendants[0].options[3].value =
+            endpoint.id.length ? endpoint : '';
           newPrefab.structure[0].descendants[0].descendants[0].descendants = [
             structureDefault,
           ];
           break;
         case 'styled':
         default:
-          structureStyled.descendants[1].descendants[2].descendants[0].options[3].value = endpoint
-            .id.length
-            ? endpoint
-            : '';
+          structureStyled.descendants[1].descendants[2].descendants[0].options[3].value =
+            endpoint.id.length ? endpoint : '';
           newPrefab.structure[0].descendants[0].descendants[0].descendants = [
             structureStyled,
           ];
@@ -3978,7 +3974,7 @@
               <Field label="Link to page (optional)">
                 <EndpointSelector
                   value={endpoint}
-                  onChange={value => setEndpoint(value)}
+                  onChange={(value) => setEndpoint(value)}
                 />
               </Field>
             </Box>
