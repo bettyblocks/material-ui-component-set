@@ -9,7 +9,7 @@
       Header,
       Field,
       Footer,
-      ModelSelector,
+      ModelRelationSelector,
       PropertiesSelector,
     },
     prefab,
@@ -24,7 +24,7 @@
         <Header title="Configure data table" onClose={close} />
         <Content>
           <Field label="Model">
-            <ModelSelector
+            <ModelRelationSelector
               onChange={value => {
                 setModelId(value);
               }}
