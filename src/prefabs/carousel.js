@@ -287,7 +287,7 @@
           value: '',
           label: 'Model',
           key: 'model',
-          type: 'MODEL',
+          type: 'MODEL_AND_RELATION',
           configuration: {
             condition: {
               type: 'SHOW',
@@ -303,6 +303,7 @@
           type: 'PROPERTY',
           value: '',
           configuration: {
+            dependsOn: 'model',
             condition: {
               type: 'SHOW',
               option: 'select',
@@ -318,12 +319,6 @@
           type: 'FILTER',
           configuration: {
             dependsOn: 'model',
-            condition: {
-              type: 'SHOW',
-              option: 'select',
-              comparator: 'EQ',
-              value: 'model',
-            },
           },
         },
         {
@@ -332,12 +327,7 @@
           key: 'orderProperty',
           type: 'PROPERTY',
           configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'select',
-              comparator: 'EQ',
-              value: 'model',
-            },
+            dependsOn: 'model',
           },
         },
         {
@@ -346,6 +336,7 @@
           key: 'sortOrder',
           type: 'CUSTOM',
           configuration: {
+            dependsOn: 'model',
             as: 'BUTTONGROUP',
             dataType: 'string',
             allowedInput: [

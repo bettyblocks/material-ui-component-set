@@ -1,3 +1,11 @@
+## [1.191.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.191.1...v1.191.2) (2021-12-22)
+
+
+### Bug Fixes
+
+* added model relation option type to carousel ([20e666a](https://github.com/bettyblocks/material-ui-component-set/commit/20e666a2a5a6fd228e634dd7f89762bfbac20926))
+* show and hiding of model options ([321ac82](https://github.com/bettyblocks/material-ui-component-set/commit/321ac828d67a61f6dd654043fce1dcd9412bf237))
+
 ## [1.191.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.191.0...v1.191.1) (2021-12-22)
 
 
