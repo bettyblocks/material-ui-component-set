@@ -5,7 +5,7 @@
   "license": "UNLICENSED",
   "private": true,
   "devDependencies": {
-    "@betty-blocks/cli": "^25.12.0",
+    "@betty-blocks/cli": "^25.14.1",
     "eslint": "^5.9.0",
     "eslint-config-airbnb": "17.1.0",
     "eslint-config-prettier": "^3.3.0",
@@ -24,8 +24,6 @@
     "preview": "bb components preview",
     "lint": "eslint --ext js ./src"
   },
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "dependencies": {}
 }
