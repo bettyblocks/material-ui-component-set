@@ -21,7 +21,7 @@
         <Content>
           <Field label="Property">
             <PropertySelector
-              onChange={value => {
+              onChange={(value) => {
                 setProperty(value);
               }}
               value={property}

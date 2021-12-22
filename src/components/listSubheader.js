@@ -29,7 +29,7 @@
       </ListSubheader>
     );
   })(),
-  styles: B => t => {
+  styles: (B) => (t) => {
     const { Styling } = B;
     const style = new Styling(t);
     return {

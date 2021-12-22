@@ -17,7 +17,7 @@
 
     B.defineFunction('Hide', () => setIsVisible(false));
     B.defineFunction('Show', () => setIsVisible(true));
-    B.defineFunction('Show/Hide', () => setIsVisible(s => !s));
+    B.defineFunction('Show/Hide', () => setIsVisible((s) => !s));
 
     const ColumnComponent = (
       <div
@@ -44,7 +44,7 @@
     );
     return ColumnComponent;
   })(),
-  styles: B => theme => {
+  styles: (B) => (theme) => {
     const { env, mediaMinWidth, Styling } = B;
     const isDev = env === 'dev';
     const style = new Styling(theme);
@@ -89,8 +89,9 @@
           const marginRight = getSpacing(outerSpacing[1]);
           const marginLeft = getSpacing(outerSpacing[3]);
 
-          return `calc(${(columnWidthMobile / 12) *
-            100}% - ${marginRight} - ${marginLeft})`;
+          return `calc(${
+            (columnWidthMobile / 12) * 100
+          }% - ${marginRight} - ${marginLeft})`;
         },
         marginTop: ({ options: { outerSpacing } }) =>
           getSpacing(outerSpacing[0]),
@@ -159,8 +160,9 @@
             const marginRight = getSpacing(outerSpacing[1], 'Portrait');
             const marginLeft = getSpacing(outerSpacing[3], 'Portrait');
 
-            return `calc(${(columnWidthTabletPortrait / 12) *
-              100}% - ${marginRight} - ${marginLeft})`;
+            return `calc(${
+              (columnWidthTabletPortrait / 12) * 100
+            }% - ${marginRight} - ${marginLeft})`;
           },
           maxWidth: '100%',
           marginTop: ({ options: { outerSpacing } }) =>
@@ -215,8 +217,9 @@
             const marginRight = getSpacing(outerSpacing[1], 'Landscape');
             const marginLeft = getSpacing(outerSpacing[3], 'Landscape');
 
-            return `calc(${(columnWidthTabletLandscape / 12) *
-              100}% - ${marginRight} - ${marginLeft})`;
+            return `calc(${
+              (columnWidthTabletLandscape / 12) * 100
+            }% - ${marginRight} - ${marginLeft})`;
           },
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Landscape'),
@@ -258,8 +261,9 @@
             const marginRight = getSpacing(outerSpacing[1], 'Desktop');
             const marginLeft = getSpacing(outerSpacing[3], 'Desktop');
 
-            return `calc(${(columnWidth / 12) *
-              100}% - ${marginRight} - ${marginLeft})`;
+            return `calc(${
+              (columnWidth / 12) * 100
+            }% - ${marginRight} - ${marginLeft})`;
           },
           marginTop: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[0], 'Desktop'),

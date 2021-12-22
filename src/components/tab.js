@@ -34,7 +34,7 @@
 
     B.defineFunction('Select', doSetTab);
 
-    const EmptyBox = () => {
+    const EmptyBox = function () {
       if (!isDev) return null;
       return (
         <Box className={classes.empty} p={3}>
@@ -106,7 +106,7 @@
 
     return isDev ? <div className={classes.wrapper}>{TabPanel}</div> : TabPanel;
   })(),
-  styles: B => () => {
+  styles: (B) => () => {
     const { env } = B;
     const isDev = env === 'dev';
 

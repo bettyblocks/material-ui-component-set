@@ -86,7 +86,7 @@
               <Field>
                 <Field label="Select model">
                   <ModelRelationSelector
-                    onChange={value => {
+                    onChange={(value) => {
                       setModelId(value);
                     }}
                     value={modelId}
@@ -95,7 +95,7 @@
                 <Field label="Image property">
                   <PropertySelector
                     modelId={modelId}
-                    onChange={value => {
+                    onChange={(value) => {
                       setProperty(value);
                     }}
                     value={property}
@@ -144,8 +144,8 @@
                   />
                 </Box>
               </Box>
-              {images.map(item => (
-                <Box margin={{ bottom: '15px' }}>
+              {images.map((item) => (
+                <Box key={item.index} margin={{ bottom: '15px' }}>
                   <Box
                     direction="column"
                     basis="auto"
@@ -160,7 +160,7 @@
                         <TextInput
                           onChange={({ target: { value } }) => {
                             const index = images.findIndex(
-                              currentRow => currentRow.index === item.index,
+                              (currentRow) => currentRow.index === item.index,
                             );
                             const updatedImages = images;
                             updatedImages[index].image = value;
@@ -178,10 +178,10 @@
                           label="X"
                           value={item.index}
                           disabled={!(images.length > 1)}
-                          onClick={event => {
+                          onClick={(event) => {
                             const newImages = [...images];
                             const index = newImages.findIndex(
-                              currentImage =>
+                              (currentImage) =>
                                 currentImage.index ===
                                 parseInt(event.target.value, 10),
                             );
@@ -212,7 +212,7 @@
             newPrefab.structure[0].options[0].value = select;
 
             if (select === 'custom') {
-              images.forEach(item => {
+              images.forEach((item) => {
                 newPrefab.structure[0].descendants.push({
                   name: 'CarouselImage',
                   options: [

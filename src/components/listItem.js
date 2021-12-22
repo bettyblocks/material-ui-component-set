@@ -4,13 +4,8 @@
   allowedTypes: ['CONTENT_COMPONENT', 'CONTAINER_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const {
-      ListItem,
-      ListItemText,
-      ListItemIcon,
-      ListItemAvatar,
-      Avatar,
-    } = window.MaterialUI.Core;
+    const { ListItem, ListItemText, ListItemIcon, ListItemAvatar, Avatar } =
+      window.MaterialUI.Core;
     const {
       alignItems,
       disabled,
@@ -98,7 +93,7 @@
       </ListItem>
     );
   })(),
-  styles: B => t => {
+  styles: (B) => (t) => {
     const { Styling } = B;
     const { env } = B;
     const isDev = env === 'dev';
@@ -108,13 +103,14 @@
         color: ({ options: { titleColor } }) => style.getColor(titleColor),
         backgroundColor: ({ options: { backgroundColor } }) =>
           style.getColor(backgroundColor),
-        '&.MuiButtonBase-root, &.MuiListItem-button, .MuiListItem-button:hover': {
-          color: ({ options: { titleColor } }) => style.getColor(titleColor),
-          backgroundColor: ({ options: { backgroundColor } }) => [
-            style.getColor(backgroundColor),
-            '!important',
-          ],
-        },
+        '&.MuiButtonBase-root, &.MuiListItem-button, .MuiListItem-button:hover':
+          {
+            color: ({ options: { titleColor } }) => style.getColor(titleColor),
+            backgroundColor: ({ options: { backgroundColor } }) => [
+              style.getColor(backgroundColor),
+              '!important',
+            ],
+          },
         '& .MuiListItemText-primary': {
           fontSize: ({ options: { titleSize } }) => titleSize,
           fontWeight: ({ options: { titleWeight } }) => titleWeight,

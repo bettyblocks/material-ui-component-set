@@ -36,7 +36,7 @@
     const [stepLabelData, setStepLabelData] = useState({});
 
     const handleNext = () => {
-      setActiveStep(prevActiveStep => {
+      setActiveStep((prevActiveStep) => {
         const nextStep = prevActiveStep + 1;
         if (nextStep > children.length - 1) {
           return prevActiveStep;
@@ -46,7 +46,7 @@
     };
 
     const handleBack = () => {
-      setActiveStep(prevActiveStep => {
+      setActiveStep((prevActiveStep) => {
         const nextStep = prevActiveStep - 1;
         if (nextStep < 0) {
           return prevActiveStep;
@@ -55,7 +55,7 @@
       });
     };
 
-    const handleStep = step => () => {
+    const handleStep = (step) => () => {
       if (step < children.length && step > -1) {
         setActiveStep(step);
       }
@@ -96,16 +96,19 @@
               };
             }
 
-            const IconCmp = () =>
-              hasIcon && (
-                <Icon
-                  name={icon}
-                  className={[
-                    classes.stepIcon,
-                    isActive ? classes.stepIconActive : '',
-                  ].join(' ')}
-                />
+            const IconCmp = function () {
+              return (
+                hasIcon && (
+                  <Icon
+                    name={icon}
+                    className={[
+                      classes.stepIcon,
+                      isActive ? classes.stepIconActive : '',
+                    ].join(' ')}
+                  />
+                )
               );
+            };
 
             if (hasIcon) {
               labelProps = {
@@ -239,7 +242,7 @@
       StepperComponent
     );
   })(),
-  styles: B => t => {
+  styles: (B) => (t) => {
     const { env, Styling } = B;
     const style = new Styling(t);
     const isDev = env === 'dev';

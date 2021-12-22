@@ -53,7 +53,7 @@
             <EndpointSelector
               value={endpoint}
               allowExternal
-              onChange={value => setEndpoint(value)}
+              onChange={(value) => setEndpoint(value)}
             />
           </Field>
         </Content>

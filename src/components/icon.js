@@ -88,11 +88,11 @@
       Component
     );
   })(),
-  styles: B => t => {
+  styles: (B) => (t) => {
     const { mediaMinWidth, Styling } = B;
     const style = new Styling(t);
-    const convertSizes = sizes =>
-      sizes.map(size => style.getSpacing(size)).join(' ');
+    const convertSizes = (sizes) =>
+      sizes.map((size) => style.getSpacing(size)).join(' ');
     const getSpacing = (idx, device = 'Mobile') =>
       idx === '0' ? '0rem' : style.getSpacing(idx, device);
 
