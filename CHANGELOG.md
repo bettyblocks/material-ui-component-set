@@ -1,3 +1,10 @@
+# [1.192.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.191.2...v1.192.0) (2021-12-22)
+
+
+### Features
+
+* add modelrelation selector in before create ([38bd082](https://github.com/bettyblocks/material-ui-component-set/commit/38bd082abeccfa2bb0c14aae066aef5b2b074fc0))
+
 ## [1.191.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.191.1...v1.191.2) (2021-12-22)
 
 
