@@ -25,7 +25,7 @@
         <Content>
           <Field label="Model">
             <ModelRelationSelector
-              onChange={value => {
+              onChange={(value) => {
                 setModelId(value);
               }}
               value={modelId}
@@ -35,7 +35,7 @@
             <PropertiesSelector
               modelId={modelId}
               value={properties}
-              onChange={value => {
+              onChange={(value) => {
                 setProperties(value);
               }}
             />
@@ -46,7 +46,7 @@
             const newPrefab = { ...prefab };
 
             newPrefab.structure[0].options[0].value = modelId;
-            properties.forEach(property => {
+            properties.forEach((property) => {
               // Remove this filter when working on PAGE-534
               let newProperty = property;
               const inheritFormatKinds = [
