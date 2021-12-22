@@ -4,14 +4,8 @@
   allowedTypes: ['CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const {
-      AppBar,
-      Toolbar,
-      IconButton,
-      Typography,
-      Menu,
-      MenuItem,
-    } = window.MaterialUI.Core;
+    const { AppBar, Toolbar, IconButton, Typography, Menu, MenuItem } =
+      window.MaterialUI.Core;
     const {
       position,
       title,
@@ -29,7 +23,7 @@
     const isOpen = !!anchorEl;
     const titleText = useText(title);
 
-    const handleMenu = event => {
+    const handleMenu = (event) => {
       setAnchorEl(event.currentTarget);
     };
 
@@ -80,7 +74,7 @@
                   onClose={handleClose}
                   classes={{ paper: classes.paper }}
                 >
-                  {React.Children.map(children, child => (
+                  {React.Children.map(children, (child) => (
                     <MenuItem
                       className={classes.menuItem}
                       onTouchEnd={handleClose}
@@ -101,7 +95,7 @@
 
     return isDev ? <div>{AppBarComponent}</div> : AppBarComponent;
   })(),
-  styles: B => t => {
+  styles: (B) => (t) => {
     const { mediaMinWidth, Styling } = B;
     const style = new Styling(t);
     return {
