@@ -1,3 +1,10 @@
+## [1.191.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.191.0...v1.191.1) (2021-12-22)
+
+
+### Bug Fixes
+
+* onchange now submits the new value PAGE-1363 ([e2a049b](https://github.com/bettyblocks/material-ui-component-set/commit/e2a049b09bf5c85866fc25bb761bfc045e08d974))
+
 # [1.191.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.190.0...v1.191.0) (2021-12-21)
 
 
