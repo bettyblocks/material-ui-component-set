@@ -9,7 +9,7 @@
       Header,
       Field,
       Footer,
-      ModelSelector,
+      ModelRelationSelector,
       ButtonGroup,
       ButtonGroupButton,
       PropertySelector,
@@ -85,7 +85,7 @@
               </Box>
               <Field>
                 <Field label="Select model">
-                  <ModelSelector
+                  <ModelRelationSelector
                     onChange={(value) => {
                       setModelId(value);
                     }}
