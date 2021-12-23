@@ -43,7 +43,6 @@
           value: '',
         },
       ],
-<<<<<<< HEAD
       // $onUpdate: [
       //   {
       //     query: 'UpdateActionVariable',
@@ -57,20 +56,6 @@
       //     },
       //   },
       // ],
-=======
-      $onUpdate: [
-        {
-          query: 'UpdateActionVariable',
-          input: {
-            id: {
-              ref: ['options', 'actionVariableId'],
-            },
-            name: {
-              ref: ['options', 'label'],
-            },
-          },
-        },
-      ],
       $afterDelete: [
         {
           query: 'DeleteActionVariable',
@@ -81,7 +66,6 @@
           },
         },
       ],
->>>>>>> 831f7cf817a2245d034caee4b57978de30a9acdc
       descendants: [],
     },
   ],
