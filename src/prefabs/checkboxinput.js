@@ -38,24 +38,24 @@
         },
         {
           key: 'actionVariableId',
-          label: 'Action Variable Id',
-          type: 'TEXT',
+          label: 'Action variable',
+          type: 'ACTION_JS_VARIABLE',
           value: '',
         },
       ],
-      $onUpdate: [
-        {
-          query: 'UpdateActionVariable',
-          input: {
-            id: {
-              ref: ['options', 'actionVariableId'],
-            },
-            name: {
-              ref: ['options', 'label'],
-            },
-          },
-        },
-      ],
+      // $onUpdate: [
+      //   {
+      //     query: 'UpdateActionVariable',
+      //     input: {
+      //       id: {
+      //         ref: ['options', 'actionVariableId'],
+      //       },
+      //       name: {
+      //         ref: ['options', 'label'],
+      //       },
+      //     },
+      //   },
+      // ],
       descendants: [],
     },
   ],
