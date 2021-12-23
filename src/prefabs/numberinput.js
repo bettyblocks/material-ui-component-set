@@ -56,6 +56,16 @@
       //     },
       //   },
       // ],
+      $afterDelete: [
+        {
+          query: 'DeleteActionVariable',
+          input: {
+            id: {
+              ref: ['options', 'actionVariableId'],
+            },
+          },
+        },
+      ],
       descendants: [],
     },
   ],
