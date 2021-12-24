@@ -36,7 +36,7 @@
         <Content>
           <Field label="Model">
             <ModelRelationSelector
-              onChange={value => {
+              onChange={(value) => {
                 setModelId(value);
               }}
               value={modelId}
@@ -44,7 +44,7 @@
           </Field>
           <Field label="Property">
             <PropertySelector
-              onChange={value => {
+              onChange={(value) => {
                 setProperty(value);
               }}
               modelId={modelId}

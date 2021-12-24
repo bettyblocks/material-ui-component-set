@@ -41,9 +41,7 @@
         icon={
           avatartype === 'icon' && startIcon !== 'None' ? (
             <Icon name={startIcon} />
-          ) : (
-            undefined
-          )
+          ) : undefined
         }
         avatar={AvatarComponent}
         size={size}
@@ -56,11 +54,11 @@
       ChipComponent
     );
   })(),
-  styles: B => theme => {
+  styles: (B) => (theme) => {
     const { Styling } = B;
     const style = new Styling(theme);
-    const convertSizes = sizes =>
-      sizes.map(size => style.getSpacing(size)).join(' ');
+    const convertSizes = (sizes) =>
+      sizes.map((size) => style.getSpacing(size)).join(' ');
     return {
       wrapper: {
         display: 'inline-block',

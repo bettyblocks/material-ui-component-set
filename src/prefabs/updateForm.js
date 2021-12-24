@@ -42,7 +42,7 @@
             }
           >
             <ModelSelector
-              onChange={id => {
+              onChange={(id) => {
                 setShowValidation(false);
                 setModelId(id);
               }}
@@ -55,7 +55,7 @@
             info="Small note: After you have created the Update record form, you must apply the model filtering on the form component yourself (manually). By providing a filter, the form will fetch one record on page load. This record is used to Update. Soon this will be part of the form creation process."
           >
             <PropertiesSelector
-              onChange={value => {
+              onChange={(value) => {
                 setProperties(value);
               }}
               value={properties}
@@ -93,11 +93,11 @@
         <Footer
           onClose={close}
           onSave={() => {
-            const camelToSnakeCase = str =>
+            const camelToSnakeCase = (str) =>
               str[0].toLowerCase() +
               str
                 .slice(1, str.length)
-                .replace(/[A-Z]/g, letter => `_${letter.toLowerCase()}`);
+                .replace(/[A-Z]/g, (letter) => `_${letter.toLowerCase()}`);
 
             if (!modelId || !data || !data.model) {
               setShowValidation(true);
@@ -113,7 +113,7 @@
             newPrefab.variables[0].options.modelId = modelId;
             newPrefab.variables[1].options.modelId = modelId;
             newPrefab.actions[0].events[0].options.assign = properties.map(
-              property => ({
+              (property) => ({
                 leftHandSide: property.id[0],
                 ref: {
                   path: [
@@ -124,7 +124,7 @@
               }),
             );
 
-            const descendantsArray = properties.map(property => {
+            const descendantsArray = properties.map((property) => {
               switch (property.kind) {
                 case 'INTEGER': {
                   return {

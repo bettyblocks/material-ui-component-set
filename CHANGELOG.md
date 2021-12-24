@@ -1,3 +1,37 @@
+# [1.192.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.191.2...v1.192.0) (2021-12-22)
+
+
+### Features
+
+* add modelrelation selector in before create ([38bd082](https://github.com/bettyblocks/material-ui-component-set/commit/38bd082abeccfa2bb0c14aae066aef5b2b074fc0))
+
+## [1.191.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.191.1...v1.191.2) (2021-12-22)
+
+
+### Bug Fixes
+
+* added model relation option type to carousel ([20e666a](https://github.com/bettyblocks/material-ui-component-set/commit/20e666a2a5a6fd228e634dd7f89762bfbac20926))
+* show and hiding of model options ([321ac82](https://github.com/bettyblocks/material-ui-component-set/commit/321ac828d67a61f6dd654043fce1dcd9412bf237))
+
+## [1.191.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.191.0...v1.191.1) (2021-12-22)
+
+
+### Bug Fixes
+
+* onchange now submits the new value PAGE-1363 ([e2a049b](https://github.com/bettyblocks/material-ui-component-set/commit/e2a049b09bf5c85866fc25bb761bfc045e08d974))
+
+# [1.191.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.190.0...v1.191.0) (2021-12-21)
+
+
+### Bug Fixes
+
+* improve error handling in carousel ([2d45909](https://github.com/bettyblocks/material-ui-component-set/commit/2d459093a33015657638b96bd21416d5b8b0ee81))
+
+
+### Features
+
+* update linter and formatter ([4161e0a](https://github.com/bettyblocks/material-ui-component-set/commit/4161e0a226a7f71d0722e8d8dd2aa17e816fc168))
+
 # [1.190.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.189.0...v1.190.0) (2021-12-15)
 
 

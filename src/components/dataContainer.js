@@ -24,6 +24,8 @@
         const isPristine = isEmpty && isDev;
         const displayError = showError === 'built-in';
         const parsedLoadingText = useText(loadingText);
+        const dataComponentAttributeText =
+          useText(dataComponentAttribute) || 'DataContainer';
         const [, setOptions] = useOptions();
 
         const getFilter = React.useCallback(() => {
@@ -40,93 +42,82 @@
         const selectedFilter = getFilter();
         const hasFilter =
           selectedFilter && Object.keys(selectedFilter).length > 0;
+        const history = isDev ? null : useHistory();
 
         const redirect = () => {
-          const history = useHistory();
+          // eslint-disable-next-line react-hooks/rules-of-hooks
           history.push(useEndpoint(redirectWithoutResult));
         };
 
-        const DataContainer = () => (
-          <GetOne
-            modelId={model}
-            filter={selectedFilter}
-            fetchPolicy="cache-and-network"
-          >
-            {({ loading, error, data, refetch }) => {
-              if (!loading && data && data.id) {
-                B.triggerEvent('onSuccess', data);
-              } else {
-                B.triggerEvent('onNoResults');
-              }
-
-              if (error) {
-                if (!displayError) {
-                  B.triggerEvent('onError', error.message);
+        const DataContainer = function () {
+          return (
+            <GetOne
+              modelId={model}
+              filter={selectedFilter}
+              fetchPolicy="cache-and-network"
+            >
+              {({ loading, error, data, refetch }) => {
+                if (!loading && data && data.id) {
+                  B.triggerEvent('onSuccess', data);
+                } else {
+                  B.triggerEvent('onNoResults');
                 }
-              }
 
-              B.defineFunction('Refetch', () => {
-                refetch();
-              });
+                if (error) {
+                  if (!displayError) {
+                    B.triggerEvent('onError', error.message);
+                  }
+                }
 
-              if (loading && loadingType === 'default') {
-                B.triggerEvent('onLoad', loading);
+                B.defineFunction('Refetch', () => {
+                  refetch();
+                });
+
+                if (loading && loadingType === 'default') {
+                  B.triggerEvent('onLoad', loading);
+                  return (
+                    <span data-component={dataComponentAttributeText}>
+                      {parsedLoadingText}
+                    </span>
+                  );
+                }
+
+                if (loading && loadingType === 'showChildren') {
+                  B.triggerEvent('onLoad', loading);
+                  // key attribute forces a rerender after loading
+                  return (
+                    <div
+                      key={`data-loading-${loading}`}
+                      data-component={dataComponentAttributeText}
+                    >
+                      {children}
+                    </div>
+                  );
+                }
+
+                if (error && displayError) {
+                  return (
+                    <span data-component={dataComponentAttributeText}>
+                      {error.message}
+                    </span>
+                  );
+                }
+
+                if (!data && redirectWithoutResult) {
+                  redirect();
+                }
+
                 return (
-                  <span
-                    data-component={
-                      useText(dataComponentAttribute) || 'DataContainer'
-                    }
-                  >
-                    {parsedLoadingText}
-                  </span>
-                );
-              }
-
-              if (loading && loadingType === 'showChildren') {
-                B.triggerEvent('onLoad', loading);
-                // key attribute forces a rerender after loading
-                return (
-                  <div
-                    key={`data-loading-${loading}`}
-                    data-component={
-                      useText(dataComponentAttribute) || 'DataContainer'
-                    }
-                  >
+                  <div data-component={dataComponentAttributeText}>
                     {children}
                   </div>
                 );
-              }
+              }}
+            </GetOne>
+          );
+        };
 
-              if (error && displayError) {
-                return (
-                  <span
-                    data-component={
-                      useText(dataComponentAttribute) || 'DataContainer'
-                    }
-                  >
-                    {error.message}
-                  </span>
-                );
-              }
-
-              if (!data && redirectWithoutResult) {
-                redirect();
-              }
-
-              return (
-                <div
-                  data-component={
-                    useText(dataComponentAttribute) || 'DataContainer'
-                  }
-                >
-                  {children}
-                </div>
-              );
-            }}
-          </GetOne>
-        );
-
-        B.defineFunction('setCurrentRecord', value => {
+        B.defineFunction('setCurrentRecord', (value) => {
           const id = Number(value);
           if (typeof id === 'number') {
             setOptions({
@@ -159,7 +150,7 @@
           return Wrapper;
         }
 
-        const CanvasLayout = () => {
+        const CanvasLayout = function () {
           if (!hasFilter) {
             return Wrapper;
           }

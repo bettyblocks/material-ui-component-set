@@ -26,10 +26,8 @@
     const [modelId, setModelId] = React.useState('');
     const [showModelValidation, setShowModelValidation] = React.useState(false);
     const [properties, setProperties] = React.useState([]);
-    const [
-      showPropertiesValidation,
-      setShowPropertiesValidation,
-    ] = React.useState(false);
+    const [showPropertiesValidation, setShowPropertiesValidation] =
+      React.useState(false);
 
     const getDescendantByRef = (refValue, structure) =>
       structure.reduce((acc, component) => {
@@ -6551,8 +6549,7 @@
                                                   {
                                                     type: 'VARIABLE',
                                                     label: 'Test attribute',
-                                                    key:
-                                                      'dataComponentAttribute',
+                                                    key: 'dataComponentAttribute',
                                                     value: ['Button'],
                                                     configuration: {
                                                       condition: {
@@ -6589,7 +6586,7 @@
       },
     ];
 
-    const isEmpty = value =>
+    const isEmpty = (value) =>
       !value || Object.keys(value).length === 0 || value.id === '';
 
     return (
@@ -6605,7 +6602,7 @@
             }
           >
             <ModelSelector
-              onChange={value => {
+              onChange={(value) => {
                 setShowModelValidation(false);
                 setModelId(value);
               }}
@@ -6632,7 +6629,7 @@
             <PropertiesSelector
               modelId={modelId}
               value={properties}
-              onChange={value => {
+              onChange={(value) => {
                 setProperties(value);
                 setShowPropertiesValidation(isEmpty(value));
               }}
@@ -6685,7 +6682,7 @@
               newPrefab.variables[0].options.modelId = modelId;
               newPrefab.actions[0].events[0].options.modelId = modelId;
               newPrefab.actions[0].events[0].options.assign = properties.map(
-                property => ({
+                (property) => ({
                   leftHandSide: property.id[0],
                   ref: {
                     path: [
@@ -6696,7 +6693,7 @@
                 }),
               );
 
-              const descendantsArray = properties.map(property => {
+              const descendantsArray = properties.map((property) => {
                 switch (property.kind) {
                   case 'EMAIL_ADDRESS': {
                     return {

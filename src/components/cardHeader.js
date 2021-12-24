@@ -7,13 +7,8 @@
     const { env, useText } = B;
     const isDev = env === 'dev';
     const { CardHeader, Avatar } = window.MaterialUI.Core;
-    const {
-      avatar,
-      avatarType,
-      title,
-      subheader,
-      dataComponentAttribute,
-    } = options;
+    const { avatar, avatarType, title, subheader, dataComponentAttribute } =
+      options;
 
     const avatarSource = useText(avatar);
     const avatarTitle = useText(title);
