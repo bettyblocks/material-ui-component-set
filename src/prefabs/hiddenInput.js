@@ -21,8 +21,8 @@
         {
           key: 'value',
           label: 'Value',
-          type: 'VARIABLE',
-          value: [],
+          type: 'PROPERTY',
+          value: '',
         },
       ],
       // $onUpdate: [

@@ -6,21 +6,24 @@
   jsx: (() => {
     const { name, value } = options;
     const isDev = B.env === 'dev';
-    const valueText = B.useText(value);
+
+    if (isDev) {
+      return <div className={classes.dev}>Hidden input</div>;
+    }
+
+    console.log(value);
+
+    const valueProperty = B.useProperty(value);
 
     const Input = () => (
       <input
         className={[isDev ? classes.dev : ''].join(' ')}
-        defaultValue={valueText}
+        defaultValue={parseInt(valueProperty, 10)}
         id={name}
         name={name}
         type="hidden"
       />
     );
-
-    if (isDev) {
-      return <div className={classes.dev}>Hidden input</div>;
-    }
 
     return <Input />;
   })(),
