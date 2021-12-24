@@ -10,7 +10,7 @@
           key: 'name',
           label: 'Name',
           type: 'TEXT',
-          value: 'NumberInput',
+          value: 'id',
         },
         {
           key: 'actionVariableId',

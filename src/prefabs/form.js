@@ -1,7 +1,7 @@
 (() => ({
   category: 'FORM',
   icon: 'CreateFormIcon',
-  name: 'Form',
+  name: 'CreateForm',
   beforeCreate: ({
     close,
     components: { CreateFormWizard },
@@ -27,6 +27,21 @@
           label: 'Action',
           type: 'ACTION_JS',
           value: '',
+        },
+        {
+          key: 'modelId',
+          label: 'Model',
+          type: 'MODEL',
+          value: '',
+        },
+        {
+          value: {},
+          label: 'Filter',
+          key: 'filter',
+          type: 'FILTER',
+          configuration: {
+            dependsOn: 'modelId',
+          },
         },
       ],
       descendants: [],
