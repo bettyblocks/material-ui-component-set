@@ -1,22 +1,16 @@
 (() => ({
   category: 'FORM',
-  icon: 'CheckboxIcon',
-  name: 'CheckboxInput',
+  icon: 'HiddenInputIcon',
+  name: 'HiddenInput',
   structure: [
     {
-      name: 'CheckboxInput',
+      name: 'HiddenInput',
       options: [
-        {
-          key: 'label',
-          label: 'Label',
-          type: 'TEXT',
-          value: 'Checkbox',
-        },
         {
           key: 'name',
           label: 'Name',
           type: 'TEXT',
-          value: 'CheckboxInput',
+          value: 'NumberInput',
         },
         {
           key: 'actionVariableId',
@@ -39,7 +33,7 @@
       //         ref: ['options', 'actionVariableId'],
       //       },
       //       name: {
-      //         ref: ['options', 'label'],
+      //         ref: ['options', 'name'],
       //       },
       //     },
       //   },

@@ -4,15 +4,16 @@
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { name, label } = options;
+    const { value, name, label } = options;
     const isDev = B.env === 'dev';
+    const valueText = B.useText(value);
 
     const Input = () => (
       <div className={[classes.formField, isDev ? classes.dev : ''].join(' ')}>
         <label htmlFor={name}>{label}</label>
-
         <input
           className={classes.input}
+          checked={valueText === 'true'}
           id={name}
           name={name}
           type="checkbox"

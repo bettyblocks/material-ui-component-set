@@ -2,34 +2,10 @@
   category: 'FORM',
   icon: 'TextInputIcon',
   name: 'TextInput',
-  beforeCreate: ({
-    close,
-    components: { CreateFormInputWizard },
-    prefab,
-    save,
-  }) => {
-    return (
-      <CreateFormInputWizard
-        actionVariableOption="actionVariableId"
-        actionVariableType="String"
-        close={close}
-        labelOptionKey="label"
-        nameOptionKey="name"
-        prefab={prefab}
-        save={save}
-      />
-    );
-  },
   structure: [
     {
       name: 'TextInput',
       options: [
-        {
-          key: 'name',
-          label: 'Name',
-          type: 'TEXT',
-          value: 'TextInput',
-        },
         {
           key: 'label',
           label: 'Label',
@@ -37,10 +13,22 @@
           value: 'Text',
         },
         {
+          key: 'name',
+          label: 'Name',
+          type: 'TEXT',
+          value: 'TextInput',
+        },
+        {
           key: 'actionVariableId',
-          label: 'Action variable',
+          label: 'Key',
           type: 'ACTION_JS_VARIABLE',
           value: '',
+        },
+        {
+          key: 'value',
+          label: 'Value',
+          type: 'VARIABLE',
+          value: [],
         },
       ],
       // $onUpdate: [

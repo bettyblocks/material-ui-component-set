@@ -2,34 +2,10 @@
   category: 'FORM',
   icon: 'NumberInputIcon',
   name: 'NumberInput',
-  beforeCreate: ({
-    close,
-    components: { CreateFormInputWizard },
-    prefab,
-    save,
-  }) => {
-    return (
-      <CreateFormInputWizard
-        actionVariableOption="actionVariableId"
-        actionVariableType="Integer"
-        close={close}
-        labelOptionKey="label"
-        nameOptionKey="name"
-        prefab={prefab}
-        save={save}
-      />
-    );
-  },
   structure: [
     {
       name: 'NumberInput',
       options: [
-        {
-          key: 'name',
-          label: 'Name',
-          type: 'TEXT',
-          value: 'NumberInput',
-        },
         {
           key: 'label',
           label: 'Label',
@@ -37,10 +13,22 @@
           value: 'Number',
         },
         {
+          key: 'name',
+          label: 'Name',
+          type: 'TEXT',
+          value: 'NumberInput',
+        },
+        {
           key: 'actionVariableId',
-          label: 'Action variable',
+          label: 'Key',
           type: 'ACTION_JS_VARIABLE',
           value: '',
+        },
+        {
+          key: 'value',
+          label: 'Value',
+          type: 'VARIABLE',
+          value: [],
         },
       ],
       // $onUpdate: [
