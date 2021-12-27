@@ -38,11 +38,11 @@
       skip: !modelId,
     });
 
-    const enrichVarObj = obj => {
+    const enrichVarObj = (obj) => {
       const returnObj = obj;
       if (data && data.model) {
         const property = data.model.properties.find(
-          prop => prop.id === obj.id[0],
+          (prop) => prop.id === obj.id[0],
         );
         if (property) {
           returnObj.name = `{{ ${data.model.name}.${property.name} }}`;
@@ -4570,6 +4570,7 @@
                                     configuration: {
                                       as: 'BUTTONGROUP',
                                       dataType: 'string',
+                                      dependsOn: 'model',
                                       condition: {
                                         type: 'HIDE',
                                         option: 'orderBy',
@@ -4596,15 +4597,19 @@
                                     label: 'Hide built-in search field',
                                     key: 'hideSearch',
                                     type: 'TOGGLE',
+                                    configuration: {
+                                      dependsOn: 'model',
+                                    },
                                   },
                                   {
                                     label: 'Pagination',
                                     key: 'pagination',
-                                    value: 'always',
+                                    value: 'never',
                                     type: 'CUSTOM',
                                     configuration: {
                                       as: 'BUTTONGROUP',
                                       dataType: 'string',
+                                      dependsOn: 'model',
                                       allowedInput: [
                                         { name: 'Always', value: 'always' },
                                         {
@@ -4620,6 +4625,9 @@
                                     label: 'Rows per page (max 50)',
                                     key: 'take',
                                     type: 'NUMBER',
+                                    configuration: {
+                                      dependsOn: 'model',
+                                    },
                                   },
                                   {
                                     value: '6',
@@ -4695,6 +4703,7 @@
                                     configuration: {
                                       as: 'BUTTONGROUP',
                                       dataType: 'string',
+                                      dependsOn: 'model',
                                       allowedInput: [
                                         { name: 'Built in', value: 'built-in' },
                                         {
@@ -4712,6 +4721,7 @@
                                     configuration: {
                                       as: 'BUTTONGROUP',
                                       dataType: 'string',
+                                      dependsOn: 'model',
                                       allowedInput: [
                                         { name: 'Message', value: 'default' },
                                         {
@@ -4728,6 +4738,7 @@
                                     key: 'loadingText',
                                     type: 'VARIABLE',
                                     configuration: {
+                                      dependsOn: 'model',
                                       condition: {
                                         type: 'SHOW',
                                         option: 'loadingType',
@@ -6240,7 +6251,7 @@
                 }
               >
                 <ModelSelector
-                  onChange={value => {
+                  onChange={(value) => {
                     setShowValidation(false);
                     setModelId(value);
                     setImageProperty('');
@@ -6254,7 +6265,7 @@
               <Field label="Image property">
                 <PropertySelector
                   modelId={modelId}
-                  onChange={value => {
+                  onChange={(value) => {
                     setImageProperty(value);
                   }}
                   value={imageProperty}
@@ -6267,7 +6278,7 @@
                 </Text>
                 <PropertySelector
                   modelId={modelId}
-                  onChange={value => {
+                  onChange={(value) => {
                     setTitleProperty(value);
                   }}
                   value={titleProperty}
@@ -6277,7 +6288,7 @@
               <Field label="Subheader property">
                 <PropertySelector
                   modelId={modelId}
-                  onChange={value => {
+                  onChange={(value) => {
                     setSubheaderProperty(value);
                   }}
                   value={subheaderProperty}
@@ -6287,7 +6298,7 @@
               <Field label="Description property">
                 <PropertySelector
                   modelId={modelId}
-                  onChange={value => {
+                  onChange={(value) => {
                     setDescriptionProperty(value);
                   }}
                   value={descriptionProperty}
@@ -6420,9 +6431,8 @@
                 ];
               }
               if (descriptionProperty.id) {
-                dataGrid.descendants[0].descendants[2].descendants[0].options[0].value = [
-                  enrichVarObj(descriptionProperty),
-                ];
+                dataGrid.descendants[0].descendants[2].descendants[0].options[0].value =
+                  [enrichVarObj(descriptionProperty)];
               }
 
               newPrefab.structure[0].descendants = prefabStructure;

@@ -52,7 +52,7 @@
           },
         },
         {
-          type: 'MODEL',
+          type: 'MODEL_AND_RELATION',
           label: 'Model',
           key: 'model',
           value: '',
@@ -121,7 +121,6 @@
           key: 'labelProperty',
           value: '',
           configuration: {
-            dependsOn: 'model',
             condition: {
               type: 'SHOW',
               option: 'optionType',
@@ -136,7 +135,6 @@
           key: 'valueProperty',
           type: 'PROPERTY',
           configuration: {
-            dependsOn: 'model',
             condition: {
               type: 'SHOW',
               option: 'optionType',

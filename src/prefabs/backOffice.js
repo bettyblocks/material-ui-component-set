@@ -31,13 +31,10 @@
     const [properties, setProperties] = React.useState([]);
     const [modelValidation, setModelValidation] = React.useState(false);
     const [stepNumber, setStepNumber] = React.useState(1);
-    const [propertiesValidation, setPropertiesValidation] = React.useState(
-      false,
-    );
-    const [
-      detailPropertiesValidation,
-      setDetailPropertiesValidation,
-    ] = React.useState(false);
+    const [propertiesValidation, setPropertiesValidation] =
+      React.useState(false);
+    const [detailPropertiesValidation, setDetailPropertiesValidation] =
+      React.useState(false);
     const [detailProperties, setDetailProperties] = React.useState([]);
 
     const getDescendantByRef = (refValue, structure) =>
@@ -925,7 +922,7 @@
       ],
     });
 
-    const tabCard = headerTitle => ({
+    const tabCard = (headerTitle) => ({
       name: 'Card',
       options: [
         {
@@ -1495,8 +1492,8 @@
       descendants: [],
     });
 
-    const makeDetailsArray = propertiesInput => {
-      const descendants = propertiesInput.map(propertyInput => ({
+    const makeDetailsArray = (propertiesInput) => {
+      const descendants = propertiesInput.map((propertyInput) => ({
         name: 'Row',
         options: [
           {
@@ -2476,7 +2473,7 @@
     };
 
     const makeInputDescendantsArray = (propertiesInput, kind) => {
-      const descendants = propertiesInput.map(property => {
+      const descendants = propertiesInput.map((property) => {
         switch (property.kind) {
           case 'INTEGER': {
             return {
@@ -17163,6 +17160,7 @@
                                     configuration: {
                                       as: 'BUTTONGROUP',
                                       dataType: 'string',
+                                      dependsOn: 'model',
                                       allowedInput: [
                                         { name: 'Ascending', value: 'asc' },
                                         { name: 'Descending', value: 'desc' },
@@ -17189,6 +17187,9 @@
                                     label: 'Hide built-in search field',
                                     key: 'hideSearch',
                                     type: 'TOGGLE',
+                                    configuration: {
+                                      dependsOn: 'model',
+                                    },
                                   },
                                   {
                                     type: 'VARIABLE',
@@ -17196,6 +17197,7 @@
                                     key: 'labelSearchOn',
                                     value: ['Search on'],
                                     configuration: {
+                                      dependsOn: 'model',
                                       condition: {
                                         type: 'HIDE',
                                         option: 'hideSearch',
@@ -17230,6 +17232,7 @@
                                     configuration: {
                                       as: 'BUTTONGROUP',
                                       dataType: 'string',
+                                      dependsOn: 'model',
                                       allowedInput: [
                                         { name: 'Always', value: 'always' },
                                         {
@@ -17246,6 +17249,7 @@
                                     key: 'autoLoadOnScroll',
                                     type: 'TOGGLE',
                                     configuration: {
+                                      dependsOn: 'model',
                                       condition: {
                                         type: 'SHOW',
                                         option: 'pagination',
@@ -17262,6 +17266,7 @@
                                     configuration: {
                                       as: 'DROPDOWN',
                                       dataType: 'string',
+                                      dependsOn: 'model',
                                       allowedInput: [
                                         { name: '5', value: '5' },
                                         { name: '10', value: '10' },
@@ -17285,6 +17290,7 @@
                                     configuration: {
                                       as: 'DROPDOWN',
                                       dataType: 'string',
+                                      dependsOn: 'model',
                                       allowedInput: [
                                         { name: '5', value: '5' },
                                         { name: '10', value: '10' },
@@ -17312,6 +17318,7 @@
                                     key: 'labelRowsPerPage',
                                     value: ['Rows per page'],
                                     configuration: {
+                                      dependsOn: 'model',
                                       condition: {
                                         type: 'HIDE',
                                         option: 'pagination',
@@ -17495,6 +17502,7 @@
                                     configuration: {
                                       as: 'BUTTONGROUP',
                                       dataType: 'string',
+                                      dependsOn: 'model',
                                       allowedInput: [
                                         { name: 'Built in', value: 'built-in' },
                                         {
@@ -17561,9 +17569,6 @@
           label: 'Body text',
           key: 'bodyText',
           value: [errorText],
-          configuration: {
-            dependsOn: 'model',
-          },
         },
         {
           label: 'Allow to overwrite by the server response',
@@ -17687,7 +17692,7 @@
     });
 
     const stepper = {
-      setStep: step => {
+      setStep: (step) => {
         if (step === 1) {
           return (
             <>
@@ -17700,7 +17705,7 @@
                 }
               >
                 <ModelSelector
-                  onChange={value => {
+                  onChange={(value) => {
                     setModelValidation(false);
                     setModelId(value);
                   }}
@@ -17720,7 +17725,7 @@
                 <PropertiesSelector
                   modelId={modelId}
                   value={properties}
-                  onChange={value => {
+                  onChange={(value) => {
                     setProperties(value);
                   }}
                   disabledKinds={disabledKinds}
@@ -17730,26 +17735,24 @@
           );
         }
         return (
-          <>
-            <Field
-              label="Properties shown in detailview and forms"
-              error={
-                detailPropertiesValidation && (
-                  <Text color="#e82600">Selecting a property is required</Text>
-                )
-              }
-            >
-              <PropertiesSelector
-                modelId={modelId}
-                value={detailProperties}
-                onChange={value => {
-                  setDetailPropertiesValidation(false);
-                  setDetailProperties(value);
-                }}
-                disabledKinds={disabledKinds}
-              />
-            </Field>
-          </>
+          <Field
+            label="Properties shown in detailview and forms"
+            error={
+              detailPropertiesValidation && (
+                <Text color="#e82600">Selecting a property is required</Text>
+              )
+            }
+          >
+            <PropertiesSelector
+              modelId={modelId}
+              value={detailProperties}
+              onChange={(value) => {
+                setDetailPropertiesValidation(false);
+                setDetailProperties(value);
+              }}
+              disabledKinds={disabledKinds}
+            />
+          </Field>
         );
       },
       onSave: () => {
@@ -17759,7 +17762,7 @@
         }
         const newPrefab = { ...prefab };
         const prop = data.model.properties.find(
-          property => property.name === 'id',
+          (property) => property.name === 'id',
         );
 
         const variables = [
@@ -18149,8 +18152,8 @@
 
         const dataTable = getDescendantByRef('#dataTable', prefabStructure);
         dataTable.options[0].value = modelId;
-        properties.filter(property => property.kind !== 'SERIAL');
-        properties.forEach(property => {
+        properties.filter((property) => property.kind !== 'SERIAL');
+        properties.forEach((property) => {
           dataTable.descendants.push({
             name: 'DataTableColumn',
             options: [
@@ -18273,14 +18276,13 @@
 
         const detailsRecordCard = tabCard(`${data.model.label}`);
         const detailsInfoProperties = detailProperties.filter(
-          propertyInput =>
+          (propertyInput) =>
             propertyInput.label !== 'Created at' &&
             propertyInput.label !== 'Updated at' &&
             propertyInput.label !== 'Id',
         );
-        detailsRecordCard.descendants[1].descendants = makeDetailsArray(
-          detailProperties,
-        );
+        detailsRecordCard.descendants[1].descendants =
+          makeDetailsArray(detailProperties);
         detailsDataContainer.descendants.push({ ...detailsRecordCard });
 
         const createTab = getDescendantByRef('#createTab', prefabStructure);
@@ -18290,14 +18292,13 @@
           detailsInfoProperties,
         );
         newPrefab.actions[1].events[0].options.modelId = modelId;
-        newPrefab.actions[1].events[0].options.assign = detailsInfoProperties.map(
-          property => ({
+        newPrefab.actions[1].events[0].options.assign =
+          detailsInfoProperties.map((property) => ({
             leftHandSide: property.id[0],
             ref: {
               path: ['#customModelVariableId', `#attribute_${property.id[0]}`],
             },
-          }),
-        );
+          }));
         createRecordForm.descendants = [
           errorAlert(
             '#createError',
@@ -18825,7 +18826,7 @@
         editCard.descendants[1].descendants = makeInputDescendantsArray(
           detailsInfoProperties,
           'edit',
-        ).filter(item => item !== undefined);
+        ).filter((item) => item !== undefined);
         editRecordForm.descendants = [
           errorAlert(
             '#editError',
@@ -21926,8 +21927,8 @@
           },
         ];
 
-        newPrefab.actions[2].events[0].options.assign = detailsInfoProperties.map(
-          property => ({
+        newPrefab.actions[2].events[0].options.assign =
+          detailsInfoProperties.map((property) => ({
             leftHandSide: property.id[0],
             ref: {
               path: [
@@ -21935,11 +21936,10 @@
                 `#edit_attribute_${property.id[0]}`,
               ],
             },
-          }),
-        );
+          }));
 
-        newPrefab.actions[0].events[0].options.assign = detailsInfoProperties.map(
-          property => ({
+        newPrefab.actions[0].events[0].options.assign =
+          detailsInfoProperties.map((property) => ({
             leftHandSide: property.id[0],
             ref: {
               path: [
@@ -21947,8 +21947,7 @@
                 `#attribute_${property.id[0]}`,
               ],
             },
-          }),
-        );
+          }));
 
         if (data.model.label) {
           variables[0].name = data.model.label;
@@ -21999,7 +21998,7 @@
           </Box>
         </Box>
       ),
-      progressBar: titles => {
+      progressBar: (titles) => {
         const titlesArray = titles;
         return (
           <Box

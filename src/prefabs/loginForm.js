@@ -21,18 +21,17 @@
     const [redirectTo, setRedirectTo] = React.useState({});
     const [authProfile, setAuthProfile] = React.useState(null);
     const [showAuthValidation, setShowAuthValidation] = React.useState(false);
-    const [showEndpointValidation, setShowEndpointValidation] = React.useState(
-      false,
-    );
+    const [showEndpointValidation, setShowEndpointValidation] =
+      React.useState(false);
 
     function serializeParameters(obj) {
       return Object.entries(obj).map(([name, entry]) => ({
         name,
-        value: entry.map(v => JSON.stringify(v)),
+        value: entry.map((v) => JSON.stringify(v)),
       }));
     }
 
-    const isEmptyRedirect = value =>
+    const isEmptyRedirect = (value) =>
       !value || Object.keys(value).length === 0 || value.id === '';
 
     return (
@@ -69,7 +68,7 @@
             <EndpointSelector
               value={redirectTo}
               size="large"
-              onChange={value => {
+              onChange={(value) => {
                 setShowEndpointValidation(isEmptyRedirect(value));
                 setRedirectTo(value);
               }}
@@ -100,12 +99,13 @@
                   parameters: serializeParameters(redirectTo.params),
                 },
               ];
-              newPrefab.actions[1].events[0].options.authenticationProfileId = id;
+              newPrefab.actions[1].events[0].options.authenticationProfileId =
+                id;
               newPrefab.structure[0].options[0].value.modelId = loginModel;
               newPrefab.structure[0].options[1].value = loginModel;
               newPrefab.variables[0].options.modelId = loginModel;
               newPrefab.actions[0].events[0].options.assign = properties.map(
-                property => {
+                (property) => {
                   const isPassword = property.kind === 'PASSWORD';
                   return {
                     ref: {
@@ -125,7 +125,7 @@
                 a.kind.localeCompare(b.kind),
               );
 
-              const descendantsArray = descendants.map(property => {
+              const descendantsArray = descendants.map((property) => {
                 switch (property.kind) {
                   case 'EMAIL_ADDRESS': {
                     return {
@@ -1452,9 +1452,6 @@
                       label: 'Body text',
                       key: 'bodyText',
                       value: ['*Dynamic value from the Action response*'],
-                      configuration: {
-                        dependsOn: 'model',
-                      },
                     },
                     {
                       label: 'Allow to overwrite by the server response',

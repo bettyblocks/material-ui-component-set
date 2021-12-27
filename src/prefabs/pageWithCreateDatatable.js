@@ -28,18 +28,13 @@
     const [modelId, setModelId] = React.useState('');
     const [properties, setProperties] = React.useState([]);
     const [modelValidation, setModelValidation] = React.useState(false);
-    const [propertiesValidation, setPropertiesValidation] = React.useState(
-      false,
-    );
-    const [
-      createPropertiesValidation,
-      setCreatePropertiesValidation,
-    ] = React.useState(false);
+    const [propertiesValidation, setPropertiesValidation] =
+      React.useState(false);
+    const [createPropertiesValidation, setCreatePropertiesValidation] =
+      React.useState(false);
     const [createFormProperties, setCreateFormProperties] = React.useState([]);
-    const [
-      createFormUseDataProperties,
-      setCreateFormUseDataProperties,
-    ] = React.useState(true);
+    const [createFormUseDataProperties, setCreateFormUseDataProperties] =
+      React.useState(true);
 
     const { data } = useModelQuery({
       variables: { id: modelId },
@@ -4085,6 +4080,7 @@
                                 configuration: {
                                   as: 'BUTTONGROUP',
                                   dataType: 'string',
+                                  dependsOn: 'model',
                                   allowedInput: [
                                     { name: 'Ascending', value: 'asc' },
                                     { name: 'Descending', value: 'desc' },
@@ -4111,6 +4107,9 @@
                                 label: 'Hide built-in search field',
                                 key: 'hideSearch',
                                 type: 'TOGGLE',
+                                configuration: {
+                                  dependsOn: 'model',
+                                },
                               },
                               {
                                 type: 'VARIABLE',
@@ -4118,6 +4117,7 @@
                                 key: 'labelSearchOn',
                                 value: ['Search on'],
                                 configuration: {
+                                  dependsOn: 'model',
                                   condition: {
                                     type: 'HIDE',
                                     option: 'hideSearch',
@@ -4152,6 +4152,7 @@
                                 configuration: {
                                   as: 'BUTTONGROUP',
                                   dataType: 'string',
+                                  dependsOn: 'model',
                                   allowedInput: [
                                     { name: 'Always', value: 'always' },
                                     {
@@ -4168,6 +4169,7 @@
                                 key: 'autoLoadOnScroll',
                                 type: 'TOGGLE',
                                 configuration: {
+                                  dependsOn: 'model',
                                   condition: {
                                     type: 'SHOW',
                                     option: 'pagination',
@@ -4184,6 +4186,7 @@
                                 configuration: {
                                   as: 'DROPDOWN',
                                   dataType: 'string',
+                                  dependsOn: 'model',
                                   allowedInput: [
                                     { name: '5', value: '5' },
                                     { name: '10', value: '10' },
@@ -4207,6 +4210,7 @@
                                 configuration: {
                                   as: 'DROPDOWN',
                                   dataType: 'string',
+                                  dependsOn: 'model',
                                   allowedInput: [
                                     { name: '5', value: '5' },
                                     { name: '10', value: '10' },
@@ -4414,6 +4418,7 @@
                                 configuration: {
                                   as: 'BUTTONGROUP',
                                   dataType: 'string',
+                                  dependsOn: 'model',
                                   allowedInput: [
                                     { name: 'Built in', value: 'built-in' },
                                     {
@@ -5659,8 +5664,7 @@
                                                   {
                                                     type: 'VARIABLE',
                                                     label: 'Test attribute',
-                                                    key:
-                                                      'dataComponentAttribute',
+                                                    key: 'dataComponentAttribute',
                                                     value: ['Text'],
                                                     configuration: {
                                                       condition: {
@@ -5923,8 +5927,7 @@
                                                   {
                                                     type: 'VARIABLE',
                                                     label: 'Test attribute',
-                                                    key:
-                                                      'dataComponentAttribute',
+                                                    key: 'dataComponentAttribute',
                                                     value: ['Button'],
                                                     configuration: {
                                                       condition: {
@@ -6100,8 +6103,7 @@
                                                     value: 'flexible',
                                                     label:
                                                       'Column width (tablet landscape)',
-                                                    key:
-                                                      'columnWidthTabletLandscape',
+                                                    key: 'columnWidthTabletLandscape',
                                                     type: 'CUSTOM',
                                                     configuration: {
                                                       as: 'DROPDOWN',
@@ -6174,8 +6176,7 @@
                                                     value: 'flexible',
                                                     label:
                                                       'Column width (tablet portrait)',
-                                                    key:
-                                                      'columnWidthTabletPortrait',
+                                                    key: 'columnWidthTabletPortrait',
                                                     type: 'CUSTOM',
                                                     configuration: {
                                                       as: 'DROPDOWN',
@@ -6415,8 +6416,7 @@
                                                   {
                                                     type: 'VARIABLE',
                                                     label: 'Test attribute',
-                                                    key:
-                                                      'dataComponentAttribute',
+                                                    key: 'dataComponentAttribute',
                                                     value: ['Column'],
                                                     configuration: {
                                                       condition: {
@@ -6510,8 +6510,7 @@
                                                               value: 'built-in',
                                                             },
                                                             {
-                                                              name:
-                                                                'Interaction',
+                                                              name: 'Interaction',
                                                               value:
                                                                 'interaction',
                                                             },
@@ -6523,8 +6522,7 @@
                                                           'Thanks for submitting the form!',
                                                         label:
                                                           'Success message',
-                                                        key:
-                                                          'formSuccessMessage',
+                                                        key: 'formSuccessMessage',
                                                         type: 'TEXT',
                                                         configuration: {
                                                           condition: {
@@ -6550,8 +6548,7 @@
                                                               value: 'built-in',
                                                             },
                                                             {
-                                                              name:
-                                                                'Interaction',
+                                                              name: 'Interaction',
                                                               value:
                                                                 'interaction',
                                                             },
@@ -6637,8 +6634,7 @@
                                                       {
                                                         type: 'VARIABLE',
                                                         label: 'Test attribute',
-                                                        key:
-                                                          'dataComponentAttribute',
+                                                        key: 'dataComponentAttribute',
                                                         value: ['Form'],
                                                         configuration: {
                                                           condition: {
@@ -7407,8 +7403,7 @@
                                                   {
                                                     type: 'VARIABLE',
                                                     label: 'Test attribute',
-                                                    key:
-                                                      'dataComponentAttribute',
+                                                    key: 'dataComponentAttribute',
                                                     value: ['Button'],
                                                     configuration: {
                                                       condition: {
@@ -7759,8 +7754,7 @@
                                                   {
                                                     type: 'VARIABLE',
                                                     label: 'Test attribute',
-                                                    key:
-                                                      'dataComponentAttribute',
+                                                    key: 'dataComponentAttribute',
                                                     value: ['Button'],
                                                     configuration: {
                                                       condition: {
@@ -7922,9 +7916,6 @@
                                     label: 'Body text',
                                     key: 'bodyText',
                                     value: ['New model created successfully'],
-                                    configuration: {
-                                      dependsOn: 'model',
-                                    },
                                   },
                                   {
                                     label:
@@ -8654,7 +8645,7 @@
             }
           >
             <ModelSelector
-              onChange={value => {
+              onChange={(value) => {
                 setModelValidation(false);
                 setModelId(value);
               }}
@@ -8673,7 +8664,7 @@
               modelId={modelId}
               value={properties}
               disabledKinds={disabledKinds}
-              onChange={value => {
+              onChange={(value) => {
                 setProperties(value);
               }}
             />
@@ -8702,7 +8693,7 @@
                   value={createFormProperties}
                   disabledNames={['created_at', 'updated_at', 'id']}
                   disabledKinds={disabledKinds}
-                  onChange={value => {
+                  onChange={(value) => {
                     setCreatePropertiesValidation(!value.length);
                     setCreateFormProperties(value);
                   }}
@@ -8734,8 +8725,8 @@
             const dataTable = getDescendantByRef('#dataTable', prefabStructure);
             dataTable.options[0].value = modelId;
             newPrefab.variables[1].options.modelId = modelId;
-            properties.filter(property => property.kind !== 'SERIAL');
-            properties.forEach(property => {
+            properties.filter((property) => property.kind !== 'SERIAL');
+            properties.forEach((property) => {
               dataTable.descendants.push({
                 name: 'DataTableColumn',
                 options: [
@@ -9031,12 +9022,12 @@
 
             function makeDescendantsArray(propertiesInput) {
               const filteredPropertiesInput = propertiesInput.filter(
-                property =>
+                (property) =>
                   property.label !== 'Created at' &&
                   property.label !== 'Updated at',
               );
 
-              const descendants = filteredPropertiesInput.map(property => {
+              const descendants = filteredPropertiesInput.map((property) => {
                 switch (property.kind) {
                   case 'INTEGER': {
                     return {
@@ -20894,12 +20885,11 @@
 
             const createFormInputsArray = makeDescendantsArray(
               createFormUseDataProperties ? properties : createFormProperties,
-            ).filter(item => item !== undefined);
+            ).filter((item) => item !== undefined);
             createForm.descendants = [...createFormInputsArray];
-            newPrefab.actions[0].events[0].options.assign = (createFormUseDataProperties
-              ? properties
-              : createFormProperties
-            ).map(property => ({
+            newPrefab.actions[0].events[0].options.assign = (
+              createFormUseDataProperties ? properties : createFormProperties
+            ).map((property) => ({
               leftHandSide: property.id[0],
               ref: {
                 path: [

@@ -9,7 +9,7 @@
       Header,
       Field,
       Footer,
-      ModelSelector,
+      ModelRelationSelector,
       PropertySelector,
     },
     prefab,
@@ -35,8 +35,8 @@
         <Header title="Configure a list with data" onClose={close} />
         <Content>
           <Field label="Model">
-            <ModelSelector
-              onChange={value => {
+            <ModelRelationSelector
+              onChange={(value) => {
                 setModelId(value);
               }}
               value={modelId}
@@ -44,7 +44,7 @@
           </Field>
           <Field label="Property">
             <PropertySelector
-              onChange={value => {
+              onChange={(value) => {
                 setProperty(value);
               }}
               modelId={modelId}
@@ -157,6 +157,7 @@
               configuration: {
                 as: 'BUTTONGROUP',
                 dataType: 'string',
+                dependsOn: 'model',
                 condition: {
                   type: 'HIDE',
                   option: 'orderBy',
@@ -183,6 +184,9 @@
               label: 'Hide built-in search field',
               key: 'hideSearch',
               type: 'TOGGLE',
+              configuration: {
+                dependsOn: 'model',
+              },
             },
             {
               label: 'Pagination',
@@ -192,6 +196,7 @@
               configuration: {
                 as: 'BUTTONGROUP',
                 dataType: 'string',
+                dependsOn: 'model',
                 allowedInput: [
                   { name: 'Always', value: 'always' },
                   { name: 'When needed', value: 'whenNeeded' },
@@ -204,6 +209,9 @@
               label: 'Rows per page (max 50)',
               key: 'take',
               type: 'NUMBER',
+              configuration: {
+                dependsOn: 'model',
+              },
             },
             {
               value: '',
@@ -279,6 +287,7 @@
               configuration: {
                 as: 'BUTTONGROUP',
                 dataType: 'string',
+                dependsOn: 'model',
                 allowedInput: [
                   { name: 'Built in', value: 'built-in' },
                   { name: 'Interaction', value: 'interaction' },
@@ -293,6 +302,7 @@
               configuration: {
                 as: 'BUTTONGROUP',
                 dataType: 'string',
+                dependsOn: 'model',
                 allowedInput: [
                   { name: 'Message', value: 'default' },
                   { name: 'Content', value: 'showChildren' },
@@ -306,6 +316,7 @@
               key: 'loadingText',
               type: 'VARIABLE',
               configuration: {
+                dependsOn: 'model',
                 condition: {
                   type: 'SHOW',
                   option: 'loadingType',

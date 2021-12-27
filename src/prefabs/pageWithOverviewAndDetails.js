@@ -31,13 +31,12 @@
     const [properties, setProperties] = React.useState([]);
     const [detailProperties, setDetailProperties] = React.useState([]);
     const [modelValidation, setModelValidation] = React.useState(false);
-    const [propertiesValidation, setPropertiesValidation] = React.useState(
-      false,
-    );
+    const [propertiesValidation, setPropertiesValidation] =
+      React.useState(false);
     const [detailsValidation, setDetailsValidation] = React.useState(false);
     const [stepNumber, setStepNumber] = React.useState(1);
 
-    const rowOptions = width => {
+    const rowOptions = (width) => {
       const widthOption = width || 'XL';
       const rowOption = [
         {
@@ -390,11 +389,11 @@
       skip: !modelId,
     });
 
-    const enrichVarObj = obj => {
+    const enrichVarObj = (obj) => {
       const returnObj = obj;
       if (data && data.model) {
         const property = data.model.properties.find(
-          prop => prop.id === obj.id[0],
+          (prop) => prop.id === obj.id[0],
         );
         if (property) {
           returnObj.name = `{{ ${data.model.name}.${property.name} }}`;
@@ -404,7 +403,7 @@
     };
 
     const stepper = {
-      setStep: step => {
+      setStep: (step) => {
         if (step === 1) {
           return (
             <>
@@ -417,7 +416,7 @@
                 }
               >
                 <ModelSelector
-                  onChange={value => {
+                  onChange={(value) => {
                     setModelValidation(false);
                     setModelId(value);
                     setPropertiesValidation(false);
@@ -450,7 +449,7 @@
                     'SIGNED_PDF',
                     'SUM',
                   ]}
-                  onChange={value => {
+                  onChange={(value) => {
                     setPropertiesValidation(!value.length);
                     setProperties(value);
                   }}
@@ -474,7 +473,7 @@
             <PropertiesSelector
               modelId={modelId}
               value={detailProperties}
-              onChange={value => {
+              onChange={(value) => {
                 setDetailsValidation(!value.length);
                 setDetailProperties(value);
               }}
@@ -3699,6 +3698,9 @@
                                         label: 'Hide built-in search field',
                                         key: 'hideSearch',
                                         type: 'TOGGLE',
+                                        configuration: {
+                                          dependsOn: 'model',
+                                        },
                                       },
                                       {
                                         type: 'VARIABLE',
@@ -3706,6 +3708,7 @@
                                         key: 'labelSearchOn',
                                         value: ['Search on'],
                                         configuration: {
+                                          dependsOn: 'model',
                                           condition: {
                                             type: 'HIDE',
                                             option: 'hideSearch',
@@ -3740,6 +3743,7 @@
                                         configuration: {
                                           as: 'BUTTONGROUP',
                                           dataType: 'string',
+                                          dependsOn: 'model',
                                           allowedInput: [
                                             { name: 'Always', value: 'always' },
                                             {
@@ -3756,6 +3760,7 @@
                                         key: 'autoLoadOnScroll',
                                         type: 'TOGGLE',
                                         configuration: {
+                                          dependsOn: 'model',
                                           condition: {
                                             type: 'SHOW',
                                             option: 'pagination',
@@ -3772,6 +3777,7 @@
                                         configuration: {
                                           as: 'DROPDOWN',
                                           dataType: 'string',
+                                          dependsOn: 'model',
                                           allowedInput: [
                                             { name: '5', value: '5' },
                                             { name: '10', value: '10' },
@@ -3795,6 +3801,7 @@
                                         configuration: {
                                           as: 'DROPDOWN',
                                           dataType: 'string',
+                                          dependsOn: 'model',
                                           allowedInput: [
                                             { name: '5', value: '5' },
                                             { name: '10', value: '10' },
@@ -4008,6 +4015,7 @@
                                         configuration: {
                                           as: 'BUTTONGROUP',
                                           dataType: 'string',
+                                          dependsOn: 'model',
                                           allowedInput: [
                                             {
                                               name: 'Built in',
@@ -4382,13 +4390,11 @@
                                                           dataType: 'string',
                                                           allowedInput: [
                                                             {
-                                                              name:
-                                                                'Internal page',
+                                                              name: 'Internal page',
                                                               value: 'internal',
                                                             },
                                                             {
-                                                              name:
-                                                                'External page',
+                                                              name: 'External page',
                                                               value: 'external',
                                                             },
                                                           ],
@@ -4508,8 +4514,7 @@
                                                       {
                                                         type: 'VARIABLE',
                                                         label: 'Test attribute',
-                                                        key:
-                                                          'dataComponentAttribute',
+                                                        key: 'dataComponentAttribute',
                                                         value: ['Text'],
                                                         configuration: {
                                                           condition: {
@@ -4582,6 +4587,7 @@
                             configuration: {
                               as: 'BUTTONGROUP',
                               dataType: 'string',
+                              dependsOn: 'model',
                               allowedInput: [
                                 { name: 'None', value: 'none' },
                                 { name: 'Top', value: 'flex-start' },
@@ -4667,7 +4673,16 @@
                             key: 'top',
                             value: '',
                             configuration: {
-                              as: 'UNIT',
+                              as: 'DROPDOWN',
+                              dataType: 'string',
+                              dependsOn: 'model',
+                              allowedInput: [
+                                { name: '5', value: '5' },
+                                { name: '10', value: '10' },
+                                { name: '25', value: '25' },
+                                { name: '50', value: '50' },
+                                { name: '100', value: '100' },
+                              ],
                               condition: {
                                 type: 'SHOW',
                                 option: 'positioningOptions',
@@ -5130,7 +5145,7 @@
         ];
 
         const dataTable = getDescendantByRef('#dataTable', prefabStructure);
-        properties.forEach(property => {
+        properties.forEach((property) => {
           dataTable.descendants.push({
             name: 'DataTableColumn',
             options: [
@@ -5945,7 +5960,7 @@
         };
 
         detailProperties.forEach((detail, detailIndex) => {
-          const isOdd = num => num % 2;
+          const isOdd = (num) => num % 2;
           if (isOdd(detailIndex)) {
             newDetail(2, detail);
           } else {
@@ -5954,7 +5969,7 @@
         });
 
         const idProperty = data.model.properties.find(
-          property => property.name === 'id',
+          (property) => property.name === 'id',
         );
 
         const interactions = [
@@ -6040,7 +6055,7 @@
           </Box>
         </Box>
       ),
-      progressBar: titles => {
+      progressBar: (titles) => {
         const titlesArray = titles;
         return (
           <Box

@@ -28,7 +28,7 @@
       setOpen(visible);
     }, [visible]);
 
-    const formatError = err => {
+    const formatError = (err) => {
       const errorMessage =
         (err.graphQLErrors &&
           err.graphQLErrors[0] &&
@@ -42,7 +42,7 @@
       return [errorTitle, errorMessage];
     };
 
-    const cleanUpMessage = message =>
+    const cleanUpMessage = (message) =>
       message &&
       JSON.stringify(message)
         .replace(/[{}[\]_"]/g, ' ')
@@ -51,7 +51,7 @@
         .replace(/ ,/g, ',')
         .trim();
 
-    B.defineFunction('Show', showMessage => {
+    B.defineFunction('Show', (showMessage) => {
       if (typeof showMessage === 'string') setTextFromServer(showMessage);
       if (typeof showMessage === 'object' && showMessage !== null) {
         const [errorTitle, errorMessage] = formatError(showMessage);
@@ -62,7 +62,7 @@
     });
 
     B.defineFunction('Hide', () => setOpen(false));
-    B.defineFunction('Show/Hide', () => setOpen(s => !s));
+    B.defineFunction('Show/Hide', () => setOpen((s) => !s));
 
     const AlertPanel = (
       <Alert
@@ -102,7 +102,7 @@
       AlertPanel
     );
   })(),
-  styles: B => theme => {
+  styles: (B) => (theme) => {
     const { Styling } = B;
     const style = new Styling(theme);
     const getSpacing = (idx, device = 'Mobile') =>

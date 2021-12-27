@@ -41,7 +41,7 @@
 
     return isDev ? <div>{CardComponent}</div> : CardComponent;
   })(),
-  styles: B => theme => {
+  styles: (B) => (theme) => {
     const { Styling } = B;
     const style = new Styling(theme);
     const getSpacing = (idx, device = 'Mobile') =>

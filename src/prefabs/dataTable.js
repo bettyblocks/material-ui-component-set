@@ -9,7 +9,7 @@
       Header,
       Field,
       Footer,
-      ModelSelector,
+      ModelRelationSelector,
       PropertiesSelector,
     },
     prefab,
@@ -24,8 +24,8 @@
         <Header title="Configure data table" onClose={close} />
         <Content>
           <Field label="Model">
-            <ModelSelector
-              onChange={value => {
+            <ModelRelationSelector
+              onChange={(value) => {
                 setModelId(value);
               }}
               value={modelId}
@@ -35,7 +35,7 @@
             <PropertiesSelector
               modelId={modelId}
               value={properties}
-              onChange={value => {
+              onChange={(value) => {
                 setProperties(value);
               }}
             />
@@ -46,7 +46,7 @@
             const newPrefab = { ...prefab };
 
             newPrefab.structure[0].options[0].value = modelId;
-            properties.forEach(property => {
+            properties.forEach((property) => {
               // Remove this filter when working on PAGE-534
               let newProperty = property;
               const inheritFormatKinds = [
@@ -196,7 +196,7 @@
           value: '',
           label: 'Model',
           key: 'model',
-          type: 'MODEL',
+          type: 'MODEL_AND_RELATION',
         },
         {
           value: {},
@@ -224,6 +224,7 @@
           configuration: {
             as: 'BUTTONGROUP',
             dataType: 'string',
+            dependsOn: 'model',
             allowedInput: [
               { name: 'Ascending', value: 'asc' },
               { name: 'Descending', value: 'desc' },
@@ -250,6 +251,9 @@
           label: 'Hide built-in search field',
           key: 'hideSearch',
           type: 'TOGGLE',
+          configuration: {
+            dependsOn: 'model',
+          },
         },
         {
           type: 'VARIABLE',
@@ -257,6 +261,7 @@
           key: 'labelSearchOn',
           value: ['Search on'],
           configuration: {
+            dependsOn: 'model',
             condition: {
               type: 'HIDE',
               option: 'hideSearch',
@@ -291,6 +296,7 @@
           configuration: {
             as: 'BUTTONGROUP',
             dataType: 'string',
+            dependsOn: 'model',
             allowedInput: [
               { name: 'Always', value: 'always' },
               { name: 'When needed', value: 'whenNeeded' },
@@ -304,6 +310,7 @@
           key: 'autoLoadOnScroll',
           type: 'TOGGLE',
           configuration: {
+            dependsOn: 'model',
             condition: {
               type: 'SHOW',
               option: 'pagination',
@@ -318,6 +325,7 @@
           key: 'autoLoadTakeAmount',
           type: 'CUSTOM',
           configuration: {
+            dependsOn: 'model',
             as: 'DROPDOWN',
             dataType: 'string',
             allowedInput: [
@@ -343,6 +351,7 @@
           configuration: {
             as: 'DROPDOWN',
             dataType: 'string',
+            dependsOn: 'model',
             allowedInput: [
               { name: '5', value: '5' },
               { name: '10', value: '10' },
@@ -548,6 +557,7 @@
           key: 'showError',
           type: 'CUSTOM',
           configuration: {
+            dependsOn: 'model',
             as: 'BUTTONGROUP',
             dataType: 'string',
             allowedInput: [

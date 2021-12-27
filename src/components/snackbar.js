@@ -32,7 +32,7 @@
       setOpen(false);
     };
 
-    const formatError = err => {
+    const formatError = (err) => {
       const errorMessage =
         (err.graphQLErrors &&
           err.graphQLErrors[0] &&
@@ -41,7 +41,7 @@
       return errorMessage;
     };
 
-    const cleanUpMessage = message =>
+    const cleanUpMessage = (message) =>
       message &&
       JSON.stringify(message)
         .replace(/[{}[\]_"]/g, ' ')
@@ -50,7 +50,7 @@
         .replace(/ ,/g, ',')
         .trim();
 
-    B.defineFunction('Show', showMessage => {
+    B.defineFunction('Show', (showMessage) => {
       if (typeof showMessage === 'string') setTextFromServer(showMessage);
       if (typeof showMessage === 'object' && showMessage !== null) {
         const errorMessage = formatError(showMessage);
@@ -60,7 +60,7 @@
     });
 
     B.defineFunction('Hide', () => setOpen(false));
-    B.defineFunction('Show/Hide', () => setOpen(s => !s));
+    B.defineFunction('Show/Hide', () => setOpen((s) => !s));
 
     useEffect(() => {
       setOpen(visible);
