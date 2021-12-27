@@ -1,3 +1,10 @@
+## [1.192.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.192.0...v1.192.1) (2021-12-27)
+
+
+### Bug Fixes
+
+* left align tab ([9edeeee](https://github.com/bettyblocks/material-ui-component-set/commit/9edeeeee786f99df67d00a5b24914130d915629d))
+
 # [1.192.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.191.2...v1.192.0) (2021-12-22)
 
 
