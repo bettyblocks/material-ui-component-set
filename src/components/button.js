@@ -106,6 +106,7 @@
     B.defineFunction('Toggle loading state', () => setIsLoading(s => !s));
     B.defineFunction('Enable', () => setIsDisabled(false));
     B.defineFunction('Disable', () => setIsDisabled(true));
+    B.defineFunction('RunActionButton', () => actionCallback());
 
     useEffect(() => {
       if (loading) {
