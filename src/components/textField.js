@@ -7,6 +7,7 @@
     const {
       autoComplete,
       disabled,
+      spellCheck,
       error,
       multiline,
       rows,
@@ -304,6 +305,7 @@
             min: validMinvalue,
             max: validMaxvalue,
             tabIndex: isDev ? -1 : undefined,
+            spellCheck,
           }}
           data-component={dataComponentAttributeValue}
         />
