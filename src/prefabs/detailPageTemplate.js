@@ -22703,10 +22703,10 @@
           '#goBackButton',
           prefabStructure,
         );
-        if (endpoint.id) {
+        if (endpoint) {
           goBackButtonPrefab.options.find(
             option => option.label === 'Page',
-          ).value = endpoint.id;
+          ).value = endpoint;
         }
 
         const titlePrefab = getDescendantByRef('#title', prefabStructure);
@@ -22750,7 +22750,7 @@
             '#keyPointOne',
             '#keyPointOneLabel',
             keyPointOne,
-            data.model.assignable,
+            data.model.properties,
           );
         }
         if (keyPointTwo && keyPointTwo.id.length > 0) {
@@ -22758,7 +22758,7 @@
             '#keyPointTwo',
             '#keyPointTwoLabel',
             keyPointTwo,
-            data.model.assignable,
+            data.model.properties,
           );
         }
         if (keyPointThree && keyPointThree.id.length > 0) {
@@ -22766,7 +22766,7 @@
             '#keyPointThree',
             '#keyPointThreeLabel',
             keyPointThree,
-            data.model.assignable,
+            data.model.properties,
           );
         }
 
@@ -40576,14 +40576,14 @@
               size="large"
               disabled={stepNumber === stepper.stepAmount}
               onClick={() => {
-                // if (!modelId) {
-                //   setModelValidation(true);
-                //   return;
-                // }
-                // if (!properties.length) {
-                //   setPropertiesValidation(true);
-                //   return;
-                // }
+                if (!modelId) {
+                  setModelValidation(true);
+                  return;
+                }
+                if (stepNumber === 2 && !properties.length) {
+                  setPropertiesValidation(true);
+                  return;
+                }
                 const newStepnumber = stepNumber + 1;
                 setStepNumber(newStepnumber);
               }}
