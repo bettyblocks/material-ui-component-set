@@ -13,14 +13,8 @@
           value: 'Text',
         },
         {
-          key: 'name',
-          label: 'Name',
-          type: 'TEXT',
-          value: 'TextInput',
-        },
-        {
           key: 'actionVariableId',
-          label: 'Key',
+          label: 'Name',
           type: 'ACTION_JS_VARIABLE',
           value: '',
         },
@@ -49,7 +43,7 @@
           query: 'DeleteActionVariable',
           input: {
             id: {
-              ref: ['options', 'actionVariableId'],
+              ref: ['options', 'name'],
             },
           },
         },

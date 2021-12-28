@@ -4,14 +4,12 @@
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { name, value } = options;
+    const { actionVariableId: name, value } = options;
     const isDev = B.env === 'dev';
 
     if (isDev) {
       return <div className={classes.dev}>Hidden input</div>;
     }
-
-    console.log(value);
 
     const valueProperty = B.useProperty(value);
 

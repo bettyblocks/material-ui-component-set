@@ -4,7 +4,7 @@
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { value, name, label } = options;
+    const { actionVariableId: value, name, label } = options;
     const isDev = B.env === 'dev';
     const valueText = B.useText(value);
 

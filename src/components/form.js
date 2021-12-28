@@ -27,11 +27,15 @@
       );
     }
 
-    return (
-      <B.GetOne modelId={modelId} filter={filter}>
-        <FormComponent />
-      </B.GetOne>
-    );
+    if (modelId) {
+      return (
+        <B.GetOne modelId={modelId} filter={filter}>
+          <FormComponent />
+        </B.GetOne>
+      );
+    }
+
+    return <FormComponent />;
   })(),
   styles: () => ({
     fieldset: {
