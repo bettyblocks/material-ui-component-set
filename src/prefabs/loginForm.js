@@ -20,7 +20,7 @@
   },
   structure: [
     {
-      name: 'Form',
+      name: 'LoginForm',
       options: [
         {
           key: 'actionId',
