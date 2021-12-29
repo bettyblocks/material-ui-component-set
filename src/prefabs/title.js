@@ -71,6 +71,20 @@
           },
         },
         {
+          value: '_self',
+          label: 'Open in',
+          key: 'linkTarget',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Current Tab', value: '_self' },
+              { name: 'New Tab', value: '_blank' },
+            ],
+          },
+        },
+        {
           value: '',
           label: 'Page',
           key: 'linkTo',
