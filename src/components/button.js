@@ -15,7 +15,7 @@
       linkType,
       linkTo,
       linkToExternal,
-      openLinkToExternal,
+      linkTarget,
       visible,
       actionId,
       buttonText,
@@ -156,13 +156,18 @@
       'data-component': useText(dataComponentAttribute) || 'Button',
     };
 
+    const targetProps = {
+      target: linkTarget,
+      rel: linkTarget === '_blank' ? 'noopener' : '',
+    };
+
     const anchorProps = {
+      ...targetProps,
       href: getExternalHref({
         disabled,
         linkToExternal,
         linkToExternalVariable,
       }),
-      target: openLinkToExternal,
       tabIndex: isDev ? -1 : undefined,
       type: isDev ? 'button' : type,
       endpoint:
@@ -175,6 +180,7 @@
     };
 
     const linkProps = {
+      ...targetProps,
       href: getInternalHref({ linkTo, linkToInternalVariable, disabled }),
       component: hasInteralLink ? B.Link : undefined,
       endpoint: hasInteralLink ? linkTo : undefined,

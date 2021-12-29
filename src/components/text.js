@@ -9,6 +9,7 @@
       linkType,
       linkTo,
       linkToExternal,
+      linkTarget,
       useInnerHtml,
       dataComponentAttribute,
     } = options;
@@ -44,6 +45,8 @@
         <Link
           className={classes.link}
           href={hasExternalLink ? linkToExternalText : undefined}
+          target={linkTarget}
+          rel={linkTarget === '_blank' ? 'noopener' : ''}
           component={hasLink ? BLink : undefined}
           endpoint={hasLink ? linkTo : undefined}
         >
