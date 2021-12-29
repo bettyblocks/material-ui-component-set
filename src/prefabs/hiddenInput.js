@@ -1,17 +1,11 @@
 (() => ({
   category: 'FORM',
-  icon: 'CheckboxIcon',
-  name: 'CheckboxInput',
+  icon: 'HiddenInputIcon',
+  name: 'HiddenInput',
   structure: [
     {
-      name: 'CheckboxInput',
+      name: 'HiddenInput',
       options: [
-        {
-          key: 'label',
-          label: 'Label',
-          type: 'TEXT',
-          value: 'Checkbox',
-        },
         {
           key: 'actionVariableId',
           label: 'Name',
@@ -21,8 +15,8 @@
         {
           key: 'value',
           label: 'Value',
-          type: 'VARIABLE',
-          value: [],
+          type: 'PROPERTY',
+          value: '',
         },
       ],
       // $onUpdate: [
@@ -33,7 +27,7 @@
       //         ref: ['options', 'actionVariableId'],
       //       },
       //       name: {
-      //         ref: ['options', 'label'],
+      //         ref: ['options', 'name'],
       //       },
       //     },
       //   },

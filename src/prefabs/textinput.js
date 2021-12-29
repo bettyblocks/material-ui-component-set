@@ -2,34 +2,10 @@
   category: 'FORM',
   icon: 'TextInputIcon',
   name: 'TextInput',
-  beforeCreate: ({
-    close,
-    components: { CreateFormInputWizard },
-    prefab,
-    save,
-  }) => {
-    return (
-      <CreateFormInputWizard
-        actionVariableOption="actionVariableId"
-        actionVariableType="String"
-        close={close}
-        labelOptionKey="label"
-        nameOptionKey="name"
-        prefab={prefab}
-        save={save}
-      />
-    );
-  },
   structure: [
     {
       name: 'TextInput',
       options: [
-        {
-          key: 'name',
-          label: 'Name',
-          type: 'TEXT',
-          value: 'TextInput',
-        },
         {
           key: 'label',
           label: 'Label',
@@ -38,30 +14,36 @@
         },
         {
           key: 'actionVariableId',
-          label: 'Action Variable Id',
-          type: 'TEXT',
+          label: 'Name',
+          type: 'ACTION_JS_VARIABLE',
           value: '',
         },
-      ],
-      $onUpdate: [
         {
-          query: 'UpdateActionVariable',
-          input: {
-            id: {
-              ref: ['options', 'actionVariableId'],
-            },
-            name: {
-              ref: ['options', 'name'],
-            },
-          },
+          key: 'value',
+          label: 'Value',
+          type: 'VARIABLE',
+          value: [],
         },
       ],
+      // $onUpdate: [
+      //   {
+      //     query: 'UpdateActionVariable',
+      //     input: {
+      //       id: {
+      //         ref: ['options', 'actionVariableId'],
+      //       },
+      //       name: {
+      //         ref: ['options', 'name'],
+      //       },
+      //     },
+      //   },
+      // ],
       $afterDelete: [
         {
           query: 'DeleteActionVariable',
           input: {
             id: {
-              ref: ['options', 'actionVariableId'],
+              ref: ['options', 'name'],
             },
           },
         },

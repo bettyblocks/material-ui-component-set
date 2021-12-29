@@ -4,7 +4,7 @@
   allowedTypes: ['FORM_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { actionId } = options;
+    const { actionId, modelId, filter } = options;
     const { Form } = B;
 
     if (B.env !== 'prod' && children.length === 0) {
@@ -24,6 +24,14 @@
         <div>
           <FormComponent />
         </div>
+      );
+    }
+
+    if (modelId) {
+      return (
+        <B.GetOne modelId={modelId} filter={filter}>
+          <FormComponent />
+        </B.GetOne>
       );
     }
 

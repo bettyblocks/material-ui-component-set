@@ -4,18 +4,24 @@
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { name, label } = options;
+    const { actionVariableId: value, name, label } = options;
     const isDev = B.env === 'dev';
+    const valueText = B.useText(value);
 
     const Input = () => (
       <div className={[classes.formField, isDev ? classes.dev : ''].join(' ')}>
         <label htmlFor={name}>{label}</label>
-
-        <input className={classes.input} id={name} name={name} type="number" />
+        <input
+          className={classes.input}
+          defaultValue={parseInt(valueText, 10)}
+          id={name}
+          name={name}
+          type="number"
+        />
       </div>
     );
 
-    if (B.env !== 'prod') {
+    if (isDev) {
       return (
         <div>
           <Input />
