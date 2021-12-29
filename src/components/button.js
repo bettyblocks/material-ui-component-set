@@ -159,6 +159,7 @@
     const targetProps = {
       target: linkTarget,
       rel: linkTarget === '_blank' ? 'noopener' : '',
+      'data-component': useText(dataComponentAttribute) || 'Button',
     };
 
     const anchorProps = {
@@ -176,7 +177,6 @@
         event.stopPropagation();
         actionCallback();
       },
-      'data-component': useText(dataComponentAttribute) || 'Button',
     };
 
     const linkProps = {
@@ -184,7 +184,6 @@
       href: getInternalHref({ linkTo, linkToInternalVariable, disabled }),
       component: hasInteralLink ? B.Link : undefined,
       endpoint: hasInteralLink ? linkTo : undefined,
-      'data-component': useText(dataComponentAttribute) || 'Button',
     };
 
     const ButtonContent = (
