@@ -32,10 +32,10 @@
       }
       const newPrefab = { ...prefab };
       if (isInternalEndpoint) {
-        newPrefab.structure[0].options[3].value = endpoint;
+        newPrefab.structure[0].options[4].value = endpoint;
       } else {
         newPrefab.structure[0].options[2].value = 'external';
-        newPrefab.structure[0].options[4].value = [endpoint];
+        newPrefab.structure[0].options[5].value = [endpoint];
       }
       save(newPrefab);
     };
