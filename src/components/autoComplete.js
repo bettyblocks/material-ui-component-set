@@ -640,7 +640,7 @@
             return result[valueProp.name] === value[valueProp.name];
           })
         ) {
-          return [value, ...results];
+          return value !== '' ? [value, ...results] : [...results];
         }
 
         return results;
