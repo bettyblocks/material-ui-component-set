@@ -30,8 +30,20 @@
       useProperty,
       useText,
       Icon,
+      useEndpoint,
     } = B;
     const [isLoading, setIsLoading] = useState(false);
+
+    const internalUrl = linkTo && linkTo.id !== '' && useEndpoint(linkTo);
+    const locationPath = window.location.pathname;
+    const locationUrl = window.location.href.split('?')[0];
+    const internalUrlWithoutQueryParams = internalUrl
+      ? internalUrl.split('?')[0]
+      : '';
+
+    const isSelected =
+      internalUrlWithoutQueryParams === locationPath ||
+      internalUrlWithoutQueryParams === locationUrl;
 
     const isDev = env === 'dev';
     const isAction = linkType === 'action';
@@ -45,11 +57,11 @@
     if (!isDev && hasExternalLink) menuItemComponent = 'a';
     const primary = useText(primaryText);
 
-    const camelToSnakeCase = (str) =>
+    const camelToSnakeCase = str =>
       str[0].toLowerCase() +
       str
         .slice(1, str.length)
-        .replace(/[A-Z]/g, (letter) => `_${letter.toLowerCase()}`);
+        .replace(/[A-Z]/g, letter => `_${letter.toLowerCase()}`);
 
     const input =
       !isDev && actionModels
@@ -80,7 +92,7 @@
         },
       })) || [() => {}, { loading: false }];
 
-    B.defineFunction('Toggle loading state', () => setIsLoading((s) => !s));
+    B.defineFunction('Toggle loading state', () => setIsLoading(s => !s));
 
     useEffect(() => {
       if (loading) {
@@ -99,10 +111,11 @@
         href={hasExternalLink ? linkToExternalVariable : undefined}
         endpoint={hasLink ? linkTo : undefined}
         target={hasExternalLink ? openLinkToExternal : undefined}
-        onClick={(e) => {
+        onClick={e => {
           if (onClick) onClick(e);
           actionCallback();
         }}
+        selected={isSelected}
         data-component={useText(dataComponentAttribute) || 'MenuItem'}
       >
         {icon !== 'None' && iconPosition === 'start' && <Icon name={icon} />}
@@ -112,7 +125,7 @@
       </MenuItem>
     );
   })(),
-  styles: (B) => (t) => {
+  styles: B => t => {
     const { env, Styling } = B;
     const style = new Styling(t);
     const isDev = env === 'dev';
@@ -126,6 +139,10 @@
           !disabled ? style.getColor(textColor) : 'rgba(0, 0, 0, 0.26)',
           '!important',
         ],
+        '&.Mui-selected': {
+          borderBottom: '0.0625rem solid',
+          backgroundColor: 'aqua !important',
+        },
         '& .MuiSvgIcon-root': {
           ...({ options: { iconPosition } }) => ({
             marginRight: iconPosition === 'start' ? '0.5rem' : '',
