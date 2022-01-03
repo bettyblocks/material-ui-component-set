@@ -49,11 +49,11 @@
 
     return isDev ? <div>{AvatarComponent}</div> : AvatarComponent;
   })(),
-  styles: B => t => {
+  styles: (B) => (t) => {
     const { Styling } = B;
     const style = new Styling(t);
-    const convertSizes = sizes =>
-      sizes.map(size => style.getSpacing(size)).join(' ');
+    const convertSizes = (sizes) =>
+      sizes.map((size) => style.getSpacing(size)).join(' ');
     return {
       avatar: {
         margin: ({ options: { margin } }) => convertSizes(margin),

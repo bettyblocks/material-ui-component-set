@@ -2892,13 +2892,11 @@
                                                         dataType: 'string',
                                                         allowedInput: [
                                                           {
-                                                            name:
-                                                              'Internal page',
+                                                            name: 'Internal page',
                                                             value: 'internal',
                                                           },
                                                           {
-                                                            name:
-                                                              'External page',
+                                                            name: 'External page',
                                                             value: 'external',
                                                           },
                                                         ],
@@ -3112,8 +3110,7 @@
                                                             value: 'left',
                                                           },
                                                           {
-                                                            name:
-                                                              'Botttom Start',
+                                                            name: 'Botttom Start',
                                                             value:
                                                               'bottom-start',
                                                           },
@@ -3173,8 +3170,7 @@
                                                     {
                                                       type: 'VARIABLE',
                                                       label: 'Test attribute',
-                                                      key:
-                                                        'dataComponentAttribute',
+                                                      key: 'dataComponentAttribute',
                                                       value: ['Button'],
                                                       configuration: {
                                                         condition: {
@@ -3238,13 +3234,11 @@
                                                         dataType: 'string',
                                                         allowedInput: [
                                                           {
-                                                            name:
-                                                              'Internal page',
+                                                            name: 'Internal page',
                                                             value: 'internal',
                                                           },
                                                           {
-                                                            name:
-                                                              'External page',
+                                                            name: 'External page',
                                                             value: 'external',
                                                           },
                                                         ],
@@ -3458,8 +3452,7 @@
                                                             value: 'left',
                                                           },
                                                           {
-                                                            name:
-                                                              'Botttom Start',
+                                                            name: 'Botttom Start',
                                                             value:
                                                               'bottom-start',
                                                           },
@@ -3519,8 +3512,7 @@
                                                     {
                                                       type: 'VARIABLE',
                                                       label: 'Test attribute',
-                                                      key:
-                                                        'dataComponentAttribute',
+                                                      key: 'dataComponentAttribute',
                                                       value: ['Button'],
                                                       configuration: {
                                                         condition: {

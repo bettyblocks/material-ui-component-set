@@ -51,7 +51,7 @@
       FormHelperText,
     } = window.MaterialUI.Core;
 
-    const handleValidation = isValid => {
+    const handleValidation = (isValid) => {
       setErrorState(!isValid);
       const message = !isValid
         ? validationValueMissingText
@@ -59,14 +59,14 @@
       setHelper(message);
     };
 
-    const handleChange = evt => {
+    const handleChange = (evt) => {
       const isChecked = evt.target.checked;
       const isValid = (isChecked && required) || !required;
       handleValidation(isValid);
       setChecked(evt.target.checked);
     };
 
-    const invalidHandler = event => {
+    const invalidHandler = (event) => {
       event.preventDefault();
       const {
         target: {
@@ -151,7 +151,7 @@
     );
     return isDev ? <div className={classes.root}>{Control}</div> : Control;
   })(),
-  styles: B => t => {
+  styles: (B) => (t) => {
     const { color: colorFunc, Styling } = B;
     const style = new Styling(t);
     const getOpacColor = (col, val) => colorFunc.alpha(col, val);

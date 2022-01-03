@@ -1,3 +1,64 @@
+# [1.194.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.193.0...v1.194.0) (2021-12-29)
+
+
+### Bug Fixes
+
+* add button on canvas due to wrong option index ([7e4f616](https://github.com/bettyblocks/material-ui-component-set/commit/7e4f6162d722669023930135ba641b118734b6f7))
+* group duplicate props ([e56363a](https://github.com/bettyblocks/material-ui-component-set/commit/e56363a650fc1693b91aa38b3f5fcb961da7fa36))
+
+
+### Features
+
+* open internal page in new tab ([405f794](https://github.com/bettyblocks/material-ui-component-set/commit/405f794bdfd945698a046fa7a90fb57cb211905d))
+
+# [1.193.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.192.1...v1.193.0) (2021-12-27)
+
+
+### Features
+
+* spellcheck attribute can be configured ([75a2869](https://github.com/bettyblocks/material-ui-component-set/commit/75a28692938a62a7fa950629c78356c463b81db7))
+
+## [1.192.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.192.0...v1.192.1) (2021-12-27)
+
+
+### Bug Fixes
+
+* left align tab ([9edeeee](https://github.com/bettyblocks/material-ui-component-set/commit/9edeeeee786f99df67d00a5b24914130d915629d))
+
+# [1.192.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.191.2...v1.192.0) (2021-12-22)
+
+
+### Features
+
+* add modelrelation selector in before create ([38bd082](https://github.com/bettyblocks/material-ui-component-set/commit/38bd082abeccfa2bb0c14aae066aef5b2b074fc0))
+
+## [1.191.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.191.1...v1.191.2) (2021-12-22)
+
+
+### Bug Fixes
+
+* added model relation option type to carousel ([20e666a](https://github.com/bettyblocks/material-ui-component-set/commit/20e666a2a5a6fd228e634dd7f89762bfbac20926))
+* show and hiding of model options ([321ac82](https://github.com/bettyblocks/material-ui-component-set/commit/321ac828d67a61f6dd654043fce1dcd9412bf237))
+
+## [1.191.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.191.0...v1.191.1) (2021-12-22)
+
+
+### Bug Fixes
+
+* onchange now submits the new value PAGE-1363 ([e2a049b](https://github.com/bettyblocks/material-ui-component-set/commit/e2a049b09bf5c85866fc25bb761bfc045e08d974))
+
+# [1.191.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.190.0...v1.191.0) (2021-12-21)
+
+
+### Bug Fixes
+
+* improve error handling in carousel ([2d45909](https://github.com/bettyblocks/material-ui-component-set/commit/2d459093a33015657638b96bd21416d5b8b0ee81))
+
+
+### Features
+
+* update linter and formatter ([4161e0a](https://github.com/bettyblocks/material-ui-component-set/commit/4161e0a226a7f71d0722e8d8dd2aa17e816fc168))
+
 # [1.190.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.189.0...v1.190.0) (2021-12-15)
 
 

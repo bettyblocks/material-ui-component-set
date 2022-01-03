@@ -150,10 +150,10 @@
     const handleToggle = () => {
       if (isDev) return;
 
-      setIsOpen(prevOpen => !prevOpen);
+      setIsOpen((prevOpen) => !prevOpen);
     };
 
-    const handleClose = e => {
+    const handleClose = (e) => {
       if (isDev || (anchorEl && anchorEl.contains(e.target))) {
         return;
       }
@@ -176,7 +176,7 @@
           iconPosition === 'end' && <Icon name={icon} />
         }
         onClick={handleToggle}
-        onTouchEnd={e => e.stopPropagation()}
+        onTouchEnd={(e) => e.stopPropagation()}
       >
         {isIcon && (
           <Icon name={icon === 'None' ? 'Error' : icon} fontSize={size} />
@@ -230,7 +230,7 @@
       <div className={classes.wrapper}>{MenuComp}</div>
     );
   })(),
-  styles: B => t => {
+  styles: (B) => (t) => {
     const { env, mediaMinWidth, Styling } = B;
     const style = new Styling(t);
     const getSpacing = (idx, device = 'Mobile') =>

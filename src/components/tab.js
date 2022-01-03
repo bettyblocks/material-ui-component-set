@@ -34,7 +34,7 @@
 
     B.defineFunction('Select', doSetTab);
 
-    const EmptyBox = () => {
+    const EmptyBox = function () {
       if (!isDev) return null;
       return (
         <Box className={classes.empty} p={3}>
@@ -104,9 +104,17 @@
       disableRipple,
     ]);
 
-    return isDev ? <div className={classes.wrapper}>{TabPanel}</div> : TabPanel;
+    return isDev ? (
+      <div
+        className={[classes.root, !isActive ? classes.hidden : ''].join(' ')}
+      >
+        {TabPanel}
+      </div>
+    ) : (
+      TabPanel
+    );
   })(),
-  styles: B => () => {
+  styles: (B) => () => {
     const { env } = B;
     const isDev = env === 'dev';
 
@@ -114,6 +122,9 @@
       wrapper: {
         height: ({ options: { height } }) => height,
         width: ({ options: { width } }) => width,
+      },
+      hidden: {
+        display: 'none',
       },
       root: {
         height: ({ options: { height } }) => (isDev ? '100%' : height),

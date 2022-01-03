@@ -43,6 +43,11 @@
           env === 'prod' && hasRedirect && useEndpoint(redirect);
         const { actionId, modelId, variableId, objectVariableId } = formData;
         const formVariable = getActionInput(variableId);
+        const history = isDev ? null : useHistory();
+        const location = isDev ? null : useLocation();
+
+        const dataComponentAttributeText =
+          useText(dataComponentAttribute) || 'Form';
 
         const hasFilter =
           modelId &&
@@ -64,7 +69,7 @@
 
         const [, setOptions] = useOptions();
 
-        B.defineFunction('setCurrentRecord', value => {
+        B.defineFunction('setCurrentRecord', (value) => {
           if (typeof value === 'number') {
             setOptions({
               currentRecord: value,
@@ -124,8 +129,6 @@
             B.triggerEvent('onActionSuccess', data.actionb5);
 
             if (!isDev && hasRedirect) {
-              const history = useHistory();
-              const location = useLocation();
               if (redirectTo === location.pathname) {
                 history.go(0);
               } else {
@@ -150,12 +153,12 @@
           .join(' ')
           .trim();
 
-        const FormElement = () => {
+        const FormElement = function () {
           B.defineFunction('Refetch', () => {});
           return (
             <form
               className={classNames || undefined}
-              data-component={useText(dataComponentAttribute) || 'Form'}
+              data-component={dataComponentAttributeText}
             >
               {isPristine && (
                 <span>Drag form components in the form to submit data</span>
@@ -165,7 +168,7 @@
           );
         };
 
-        const FormCmp = ({ item, refetch }) => {
+        const FormCmp = function ({ item, refetch }) {
           const [isInvalid, setIsInvalid] = useState(false);
           const handleInvalid = () => {
             if (!isInvalid) {
@@ -200,13 +203,13 @@
 
                   <form
                     onInvalid={handleInvalid}
-                    onSubmit={evt => {
+                    onSubmit={(evt) => {
                       setIsInvalid(false);
                       handleSubmit(evt, callAction, item);
                     }}
                     ref={formRef}
                     className={classNames || undefined}
-                    data-component={useText(dataComponentAttribute) || 'Form'}
+                    data-component={dataComponentAttributeText}
                   >
                     {isPristine && (
                       <span>
@@ -227,7 +230,7 @@
           );
         };
 
-        const FormWithData = () => {
+        const FormWithData = function () {
           const getFilter = React.useCallback(() => {
             if (isDev || !currentRecord || !modelId) {
               return filter;
@@ -291,7 +294,7 @@
       })()}
     </div>
   ),
-  styles: B => t => {
+  styles: (B) => (t) => {
     const { Styling } = B;
     const style = new Styling(t);
 

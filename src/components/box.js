@@ -27,7 +27,7 @@
     const [opacity, setOpacity] = useState(opac);
     const [interactionBackground, setInteractionBackground] = useState('');
 
-    B.defineFunction('setCustomBackgroundImage', url => {
+    B.defineFunction('setCustomBackgroundImage', (url) => {
       setInteractionBackground(`url("${url}")`);
     });
 
@@ -93,7 +93,7 @@
 
     return isDev ? <div className={classes.wrapper}>{BoxCmp}</div> : BoxCmp;
   })(),
-  styles: B => theme => {
+  styles: (B) => (theme) => {
     const { color: colorFunc, env, mediaMinWidth, Styling, useText } = B;
     const style = new Styling(theme);
     const isDev = env === 'dev';
@@ -220,6 +220,7 @@
                 backgroundColorAlpha / 100,
               ),
         backgroundImage: ({ options: { backgroundUrl } }) => {
+          // eslint-disable-next-line react-hooks/rules-of-hooks
           const image = useText(backgroundUrl);
           return image && `url("${image}")`;
         },
