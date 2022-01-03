@@ -1,3 +1,10 @@
+# [1.195.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.194.0...v1.195.0) (2022-01-03)
+
+
+### Features
+
+* add enable and disable interactions ([4a49434](https://github.com/bettyblocks/material-ui-component-set/commit/4a494342fecafadafaece7f48e2f1d01b61357af))
+
 # [1.194.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.193.0...v1.194.0) (2021-12-29)
 
 
