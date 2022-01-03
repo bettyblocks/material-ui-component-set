@@ -1,3 +1,37 @@
+# [1.195.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.194.0...v1.195.0) (2022-01-03)
+
+
+### Features
+
+* add enable and disable interactions ([4a49434](https://github.com/bettyblocks/material-ui-component-set/commit/4a494342fecafadafaece7f48e2f1d01b61357af))
+
+# [1.194.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.193.0...v1.194.0) (2021-12-29)
+
+
+### Bug Fixes
+
+* add button on canvas due to wrong option index ([7e4f616](https://github.com/bettyblocks/material-ui-component-set/commit/7e4f6162d722669023930135ba641b118734b6f7))
+* group duplicate props ([e56363a](https://github.com/bettyblocks/material-ui-component-set/commit/e56363a650fc1693b91aa38b3f5fcb961da7fa36))
+
+
+### Features
+
+* open internal page in new tab ([405f794](https://github.com/bettyblocks/material-ui-component-set/commit/405f794bdfd945698a046fa7a90fb57cb211905d))
+
+# [1.193.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.192.1...v1.193.0) (2021-12-27)
+
+
+### Features
+
+* spellcheck attribute can be configured ([75a2869](https://github.com/bettyblocks/material-ui-component-set/commit/75a28692938a62a7fa950629c78356c463b81db7))
+
+## [1.192.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.192.0...v1.192.1) (2021-12-27)
+
+
+### Bug Fixes
+
+* left align tab ([9edeeee](https://github.com/bettyblocks/material-ui-component-set/commit/9edeeeee786f99df67d00a5b24914130d915629d))
+
 # [1.192.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.191.2...v1.192.0) (2021-12-22)
 
 

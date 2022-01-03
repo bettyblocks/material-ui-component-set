@@ -32,10 +32,10 @@
       }
       const newPrefab = { ...prefab };
       if (isInternalEndpoint) {
-        newPrefab.structure[0].options[3].value = endpoint;
+        newPrefab.structure[0].options[4].value = endpoint;
       } else {
         newPrefab.structure[0].options[2].value = 'external';
-        newPrefab.structure[0].options[4].value = [endpoint];
+        newPrefab.structure[0].options[5].value = [endpoint];
       }
       save(newPrefab);
     };
@@ -102,6 +102,20 @@
           },
         },
         {
+          value: '_self',
+          label: 'Open in',
+          key: 'linkTarget',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Current Tab', value: '_self' },
+              { name: 'New Tab', value: '_blank' },
+            ],
+          },
+        },
+        {
           value: '',
           label: 'Page',
           key: 'linkTo',
@@ -128,26 +142,6 @@
               comparator: 'EQ',
               value: 'external',
             },
-          },
-        },
-        {
-          value: '_self',
-          label: 'Open in',
-          key: 'openLinkToExternal',
-          type: 'CUSTOM',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'linkType',
-              comparator: 'EQ',
-              value: 'external',
-            },
-            as: 'BUTTONGROUP',
-            dataType: 'string',
-            allowedInput: [
-              { name: 'Current Tab', value: '_self' },
-              { name: 'New Tab', value: '_blank' },
-            ],
           },
         },
         {
