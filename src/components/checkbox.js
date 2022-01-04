@@ -17,7 +17,7 @@
     } = options;
     const { env, useText, getCustomModelAttribute } = B;
     const isDev = env === 'dev';
-
+    const [isDisabled, setIsDisabled] = useState(disabled);
     const [errorState, setErrorState] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
     const mounted = useRef(false);
@@ -51,7 +51,7 @@
       FormHelperText,
     } = window.MaterialUI.Core;
 
-    const handleValidation = isValid => {
+    const handleValidation = (isValid) => {
       setErrorState(!isValid);
       const message = !isValid
         ? validationValueMissingText
@@ -59,14 +59,14 @@
       setHelper(message);
     };
 
-    const handleChange = evt => {
+    const handleChange = (evt) => {
       const isChecked = evt.target.checked;
       const isValid = (isChecked && required) || !required;
       handleValidation(isValid);
       setChecked(evt.target.checked);
     };
 
-    const invalidHandler = event => {
+    const invalidHandler = (event) => {
       event.preventDefault();
       const {
         target: {
@@ -76,6 +76,8 @@
       handleValidation(isValid);
     };
 
+    B.defineFunction('Enable', () => setIsDisabled(false));
+    B.defineFunction('Disable', () => setIsDisabled(true));
     B.defineFunction('Reset', () => setChecked(componentChecked === 'true'));
 
     useEffect(() => {
@@ -109,7 +111,7 @@
       onInvalid: invalidHandler,
       onChange: handleChange,
       name: nameAttributeValue || customModelAttributeName,
-      disabled,
+      disabled: isDisabled,
       size,
       tabIndex: isDev ? -1 : undefined,
       value: 'on',
@@ -149,7 +151,7 @@
     );
     return isDev ? <div className={classes.root}>{Control}</div> : Control;
   })(),
-  styles: B => t => {
+  styles: (B) => (t) => {
     const { color: colorFunc, Styling } = B;
     const style = new Styling(t);
     const getOpacColor = (col, val) => colorFunc.alpha(col, val);

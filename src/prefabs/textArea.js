@@ -122,6 +122,12 @@
           },
         },
         {
+          value: true,
+          label: 'Spellcheck',
+          key: 'spellCheck',
+          type: 'TOGGLE',
+        },
+        {
           value: false,
           label: 'Disabled',
           key: 'disabled',

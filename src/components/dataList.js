@@ -43,6 +43,7 @@
         const { label: searchPropertyLabel } =
           getProperty(searchProperty) || {};
         const parsedLoadingText = useText(loadingText);
+        const dataComponentAttributeText = useText(dataComponentAttribute);
         const isEmpty = children.length === 0;
         const isDev = env === 'dev';
         const isPristine = isEmpty && isDev;
@@ -56,7 +57,7 @@
         const [interactionFilter, setInteractionFilter] = useState({});
 
         const builderLayout = () => (
-          <div data-component={useText(dataComponentAttribute) || 'DataList'}>
+          <div data-component={dataComponentAttributeText || 'DataList'}>
             {searchProperty && !hideSearch && (
               <div className={classes.header}>
                 <SearchComponent label={searchPropertyLabel} />
@@ -135,11 +136,11 @@
           repeat();
         });
 
-        const handleSearch = event => {
+        const handleSearch = (event) => {
           setSearch(event.target.value);
         };
 
-        const transformValue = value => {
+        const transformValue = (value) => {
           if (value instanceof Date) {
             return value.toISOString();
           }
@@ -148,11 +149,11 @@
         };
 
         const deepMerge = (...objects) => {
-          const isObject = item =>
+          const isObject = (item) =>
             item && typeof item === 'object' && !Array.isArray(item);
 
           return objects.reduce((accumulator, object) => {
-            Object.keys(object).forEach(key => {
+            Object.keys(object).forEach((key) => {
               const accumulatorValue = accumulator[key];
               const value = object[key];
 
@@ -186,7 +187,7 @@
 
         let interactionFilters = {};
 
-        const isEmptyValue = value =>
+        const isEmptyValue = (value) =>
           !value || (Array.isArray(value) && value.length === 0);
 
         const clauses = Object.entries(interactionFilter)
@@ -197,7 +198,7 @@
               if (isLast) {
                 return Array.isArray(value)
                   ? {
-                      _or: value.map(el => ({
+                      _or: value.map((el) => ({
                         [field]: { [property.operator]: el },
                       })),
                     }
@@ -268,7 +269,7 @@
         const { hasResults, data: relationData } = useRelation(
           model,
           {},
-          model === 'string',
+          typeof model === 'string' || !model,
         );
 
         const data = hasResults ? relationData : queryData;
@@ -295,8 +296,8 @@
                   setShowPagination(false);
                 }
                 break;
-              default:
               case 'always':
+              default:
                 setShowPagination(true);
             }
             setPrevData(data);
@@ -314,7 +315,7 @@
         }, [search]);
 
         B.defineFunction('Refetch', () => refetch());
-        B.defineFunction('SetSearchValue', event => {
+        B.defineFunction('SetSearchValue', (event) => {
           setSearch(event.target.value);
         });
 
@@ -356,15 +357,15 @@
           B.triggerEvent('OnItemClick', event, context);
         };
 
-        const Looper = results =>
-          results.map(item => (
+        const Looper = (results) =>
+          results.map((item) => (
             <ModelProvider key={item.id} value={item} id={model}>
               <InteractionScope model={model}>
-                {context => (
+                {(context) => (
                   <div
                     role="none"
                     className={isInline ? classes.inline : undefined}
-                    onClick={event => handleClick(event, context)}
+                    onClick={(event) => handleClick(event, context)}
                   >
                     {children}
                   </div>
@@ -393,7 +394,7 @@
           }
 
           if (loading && loadingType === 'skeleton') {
-            return Array.from(Array(rowsPerPage).keys()).map(idx => (
+            return Array.from(Array(rowsPerPage).keys()).map((idx) => (
               <div key={idx} className={classes.skeleton} />
             ));
           }
@@ -401,9 +402,7 @@
           if (error && displayError) {
             return (
               <span
-                data-component={
-                  useText(dataComponentAttribute) || 'DataContainer'
-                }
+                data-component={dataComponentAttributeText || 'DataContainer'}
               >
                 {error.message}
               </span>
@@ -414,11 +413,7 @@
           const resultCount = results && results.length;
 
           return (
-            <div
-              data-component={
-                useText(dataComponentAttribute) || 'DataContainer'
-              }
-            >
+            <div data-component={dataComponentAttributeText || 'DataContainer'}>
               {searchProperty && !hideSearch && (
                 <div className={classes.header}>
                   <SearchComponent
@@ -452,7 +447,7 @@
 
         /* SubComponents */
 
-        function SearchComponent({
+        const SearchComponent = function ({
           label,
           onChange,
           value,
@@ -488,9 +483,9 @@
               />
             </div>
           );
-        }
+        };
 
-        function Pagination({ totalCount, resultCount, currentPage }) {
+        const Pagination = function ({ totalCount, resultCount, currentPage }) {
           const firstItem = currentPage ? (currentPage - 1) * rowsPerPage : 0;
 
           useEffect(() => {
@@ -516,7 +511,7 @@
                   <button
                     className={classes.button}
                     type="button"
-                    onClick={() => setPage(v => v - 1)}
+                    onClick={() => setPage((v) => v - 1)}
                   >
                     <span
                       className={[classes.arrow, 'zmdi zmdi-chevron-left'].join(
@@ -538,7 +533,7 @@
                   <button
                     className={classes.button}
                     type="button"
-                    onClick={() => setPage(v => v + 1)}
+                    onClick={() => setPage((v) => v + 1)}
                   >
                     <span
                       className={[
@@ -559,13 +554,13 @@
               </div>
             </>
           );
-        }
+        };
 
         return isDev ? builderLayout() : canvasLayout();
       })()}
     </div>
   ),
-  styles: B => theme => {
+  styles: (B) => (theme) => {
     const { mediaMinWidth, Styling } = B;
     const style = new Styling(theme);
     const getSpacing = (idx, device = 'Mobile') =>
