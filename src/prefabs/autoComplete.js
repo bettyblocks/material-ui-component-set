@@ -138,20 +138,6 @@
         },
         {
           type: 'TOGGLE',
-          label: 'Free solo',
-          key: 'freeSolo',
-          value: false,
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'optionType',
-              comparator: 'EQ',
-              value: 'model',
-            },
-          },
-        },
-        {
-          type: 'TOGGLE',
           label: 'Allow multiple values',
           key: 'multiple',
           value: false,
