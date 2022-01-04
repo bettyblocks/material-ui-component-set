@@ -1,10 +1,10 @@
 (() => ({
-  name: 'NumberInput',
+  name: 'PasswordInput',
   type: 'FORM_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { actionVariableId: name, label, value } = options;
+    const { actionVariableId: name, value, label } = options;
     const isDev = B.env === 'dev';
     const valueText = B.useText(value);
 
@@ -13,10 +13,10 @@
         <label htmlFor={name}>{label}</label>
         <input
           className={classes.input}
-          defaultValue={parseInt(valueText, 10)}
+          defaultValue={valueText}
           id={name}
           name={name}
-          type="number"
+          type="password"
         />
       </div>
     );

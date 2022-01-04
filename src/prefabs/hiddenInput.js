@@ -37,7 +37,7 @@
           query: 'DeleteActionVariable',
           input: {
             id: {
-              ref: ['options', 'name'],
+              ref: ['options', 'actionVariableId'],
             },
           },
         },
