@@ -169,7 +169,7 @@
               </Box>
               <Box margin={{ top: '20px' }}>
                 <Field label="Keypoints">
-                  <Box direction="row">
+                  <Box direction="row" pad={{ top: '5px' }}>
                     <Box direction="column" basis="1/3">
                       <Field label="Keypoint 1">
                         <PropertySelector
@@ -244,7 +244,10 @@
         }
         return (
           <>
-            <Field label="Add second tab">
+            <Field
+              label="Add second tab"
+              info="Small note: After you have created the detail page template, you must create a new page variable and apply this to  the model filtering on the data container yourself (manually). By providing a filter, the data container will fetch one record on page load."
+            >
               <CheckBox
                 checked={secondTab}
                 label="Do you want to add a second tab"
@@ -38970,18 +38973,25 @@
                 },
               }),
             );
-            // const idProperty = data.model.properties.find(
-            //   property => property.name === 'id',
-            // );
-            // !!!filter moet nog ingesteld worden.
-            // editFormPrefab.options[2].value = {
-            //   [idProperty.id]: {
-            //     eq: {
-            //       name: idProperty.name,
-            //       type: 'PROPTERTY',
-            //     },
-            //   },
-            // };
+            const idProperty = data.model.properties.find(
+              property => property.name === 'id',
+            );
+            newPrefab.interactions.push({
+              name: 'setCurrentRecord',
+              sourceEvent: 'Click',
+              targetOptionName: 'currentRecord',
+              parameters: [
+                {
+                  id: [idProperty.id],
+                  parameter: 'argument',
+                },
+              ],
+              ref: {
+                sourceComponentId: '#editInformationButton',
+                targetComponentId: '#editForm',
+              },
+              type: 'Global',
+            });
           }
         }
 
