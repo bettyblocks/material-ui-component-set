@@ -1,3 +1,10 @@
+## [1.195.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.195.1...v1.195.2) (2022-01-04)
+
+
+### Bug Fixes
+
+* use unique key for media provider in data table rows ([d491cd4](https://github.com/bettyblocks/material-ui-component-set/commit/d491cd479b84df49e6c9d03d1060cf7a7909d464))
+
 ## [1.195.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.195.0...v1.195.1) (2022-01-04)
 
 
