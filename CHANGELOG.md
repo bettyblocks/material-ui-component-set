@@ -1,3 +1,10 @@
+## [1.195.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.195.0...v1.195.1) (2022-01-04)
+
+
+### Bug Fixes
+
+* prevent empty option based on the default prefab empty string ([01b3ce3](https://github.com/bettyblocks/material-ui-component-set/commit/01b3ce39bcdde9166b42562fbdd7829f9eb4d9bc))
+
 # [1.195.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.194.0...v1.195.0) (2022-01-03)
 
 
