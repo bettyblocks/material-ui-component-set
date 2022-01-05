@@ -4,7 +4,15 @@
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { actionVariableId: name, value, label } = options;
+    const {
+      actionVariableId: name,
+      value,
+      label,
+      required,
+      pattern,
+      minlength,
+      maxlength,
+    } = options;
     const isDev = B.env === 'dev';
     const valueText = B.useText(value);
 
@@ -17,6 +25,10 @@
           id={name}
           name={name}
           type="text"
+          pattern={pattern}
+          minLength={minlength}
+          maxLength={maxlength}
+          required={required}
         />
       </div>
     );
