@@ -6,7 +6,15 @@
   jsx: (
     <div>
       {(() => {
-        const { env, getIdProperty, useEndpoint, useText, GetMe, GetOne } = B;
+        const {
+          env,
+          getIdProperty,
+          useEndpoint,
+          useText,
+          GetMe,
+          GetOne,
+          useFilter,
+        } = B;
         const {
           filter,
           model,
@@ -28,6 +36,8 @@
           useText(dataComponentAttribute) || 'DataContainer';
         const [, setOptions] = useOptions();
 
+        const [interactionFilter, setInteractionFilter] = useState({});
+
         const getFilter = React.useCallback(() => {
           if (isDev || !currentRecord || !model) {
             return filter;
@@ -41,7 +51,8 @@
 
         const selectedFilter = getFilter();
         const hasFilter =
-          selectedFilter && Object.keys(selectedFilter).length > 0;
+          (selectedFilter && Object.keys(selectedFilter).length > 0) ||
+          Object.keys(interactionFilter).length > 0;
         const history = isDev ? null : useHistory();
 
         const redirect = () => {
@@ -49,11 +60,70 @@
           history.push(useEndpoint(redirectWithoutResult));
         };
 
+        const transformValue = (value) => {
+          if (value instanceof Date) {
+            return value.toISOString();
+          }
+
+          return value;
+        };
+
+        const deepMerge = (...objects) => {
+          const isObject = (item) =>
+            item && typeof item === 'object' && !Array.isArray(item);
+
+          return objects.reduce((accumulator, object) => {
+            Object.keys(object).forEach((key) => {
+              const accumulatorValue = accumulator[key];
+              const value = object[key];
+
+              if (Array.isArray(accumulatorValue) && Array.isArray(value)) {
+                accumulator[key] = accumulatorValue.concat(value);
+              } else if (isObject(accumulatorValue) && isObject(value)) {
+                accumulator[key] = deepMerge(accumulatorValue, value);
+              } else {
+                accumulator[key] = value;
+              }
+            });
+            return accumulator;
+          }, {});
+        };
+
+        let interactionFilters = {};
+
+        const isEmptyValue = (value) =>
+          !value || (Array.isArray(value) && value.length === 0);
+
+        const clauses = Object.entries(interactionFilter)
+          .filter(([, { value }]) => !isEmptyValue(value))
+          .map(([, { property, value }]) =>
+            property.id.reduceRight((acc, field, index, arr) => {
+              const isLast = index === arr.length - 1;
+              if (isLast) {
+                return Array.isArray(value)
+                  ? {
+                      _or: value.map((el) => ({
+                        [field]: { [property.operator]: el },
+                      })),
+                    }
+                  : { [field]: { [property.operator]: value } };
+              }
+
+              return { [field]: acc };
+            }, {}),
+          );
+
+        interactionFilters =
+          clauses.length > 1 ? { _and: clauses } : clauses[0] || {};
+
+        const completeFilter = deepMerge(selectedFilter, interactionFilters);
+        const where = useFilter(completeFilter);
+
         const DataContainer = function () {
           return (
             <GetOne
               modelId={model}
-              filter={selectedFilter}
+              rawFilter={where}
               fetchPolicy="cache-and-network"
             >
               {({ loading, error, data, refetch }) => {
@@ -124,6 +194,25 @@
               currentRecord: id,
             });
           }
+        });
+
+        /**
+         * @name Filter
+         * @param {Property} property
+         * @returns {Void}
+         */
+        B.defineFunction('Filter', ({ event, property, interactionId }) => {
+          setInteractionFilter({
+            ...interactionFilter,
+            [interactionId]: {
+              property,
+              value: event.target ? event.target.value : transformValue(event),
+            },
+          });
+        });
+
+        B.defineFunction('ResetFilter', () => {
+          setInteractionFilter({});
         });
 
         useEffect(() => {
