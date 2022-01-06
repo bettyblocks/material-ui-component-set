@@ -2532,12 +2532,6 @@
                   },
                 },
                 {
-                  value: true,
-                  label: 'Autocomplete',
-                  key: 'autoComplete',
-                  type: 'TOGGLE',
-                },
-                {
                   value: false,
                   label: 'Validation options',
                   key: 'validationOptions',
@@ -2643,6 +2637,18 @@
                   },
                 },
                 {
+                  value: true,
+                  label: 'Spellcheck',
+                  key: 'spellCheck',
+                  type: 'TOGGLE',
+                },
+                {
+                  value: true,
+                  label: 'Autocomplete',
+                  key: 'autoComplete',
+                  type: 'TOGGLE',
+                },
+                {
                   type: 'TOGGLE',
                   label: 'Disabled',
                   key: 'disabled',
@@ -2669,14 +2675,8 @@
                     as: 'BUTTONGROUP',
                     dataType: 'string',
                     allowedInput: [
-                      {
-                        name: 'Standard',
-                        value: 'standard',
-                      },
-                      {
-                        name: 'Outlined',
-                        value: 'outlined',
-                      },
+                      { name: 'Standard', value: 'standard' },
+                      { name: 'Outlined', value: 'outlined' },
                       { name: 'Filled', value: 'filled' },
                     ],
                   },
@@ -2969,12 +2969,6 @@
                   },
                 },
                 {
-                  value: true,
-                  label: 'Autocomplete',
-                  key: 'autoComplete',
-                  type: 'TOGGLE',
-                },
-                {
                   value: false,
                   label: 'Validation options',
                   key: 'validationOptions',
@@ -3092,6 +3086,18 @@
                       value: true,
                     },
                   },
+                },
+                {
+                  value: true,
+                  label: 'Spellcheck',
+                  key: 'spellCheck',
+                  type: 'TOGGLE',
+                },
+                {
+                  value: true,
+                  label: 'Autocomplete',
+                  key: 'autoComplete',
+                  type: 'TOGGLE',
                 },
                 {
                   type: 'TOGGLE',
@@ -3420,12 +3426,6 @@
                   },
                 },
                 {
-                  value: true,
-                  label: 'Autocomplete',
-                  key: 'autoComplete',
-                  type: 'TOGGLE',
-                },
-                {
                   value: false,
                   label: 'Validation options',
                   key: 'validationOptions',
@@ -3529,6 +3529,18 @@
                       value: true,
                     },
                   },
+                },
+                {
+                  value: true,
+                  label: 'Spellcheck',
+                  key: 'spellCheck',
+                  type: 'TOGGLE',
+                },
+                {
+                  value: true,
+                  label: 'Autocomplete',
+                  key: 'autoComplete',
+                  type: 'TOGGLE',
                 },
                 {
                   type: 'TOGGLE',
@@ -3851,12 +3863,6 @@
                   },
                 },
                 {
-                  value: true,
-                  label: 'Autocomplete',
-                  key: 'autoComplete',
-                  type: 'TOGGLE',
-                },
-                {
                   value: false,
                   label: 'Validation options',
                   key: 'validationOptions',
@@ -3960,6 +3966,18 @@
                       value: true,
                     },
                   },
+                },
+                {
+                  value: true,
+                  label: 'Spellcheck',
+                  key: 'spellCheck',
+                  type: 'TOGGLE',
+                },
+                {
+                  value: true,
+                  label: 'Autocomplete',
+                  key: 'autoComplete',
+                  type: 'TOGGLE',
                 },
                 {
                   value: false,
@@ -4294,12 +4312,6 @@
                   },
                 },
                 {
-                  value: true,
-                  label: 'Autocomplete',
-                  key: 'autoComplete',
-                  type: 'TOGGLE',
-                },
-                {
                   value: false,
                   label: 'Validation options',
                   key: 'validationOptions',
@@ -4403,6 +4415,18 @@
                       value: true,
                     },
                   },
+                },
+                                {
+                  value: true,
+                  label: 'Spellcheck',
+                  key: 'spellCheck',
+                  type: 'TOGGLE',
+                },
+                {
+                  value: true,
+                  label: 'Autocomplete',
+                  key: 'autoComplete',
+                  type: 'TOGGLE',
                 },
                 {
                   type: 'TOGGLE',
@@ -4838,6 +4862,18 @@
                   },
                 },
                 {
+                  value: true,
+                  label: 'Spellcheck',
+                  key: 'spellCheck',
+                  type: 'TOGGLE',
+                },
+                {
+                  value: true,
+                  label: 'Autocomplete',
+                  key: 'autoComplete',
+                  type: 'TOGGLE',
+                },
+                {
                   type: 'TOGGLE',
                   label: 'Disabled',
                   key: 'disabled',
@@ -4864,14 +4900,8 @@
                     as: 'BUTTONGROUP',
                     dataType: 'string',
                     allowedInput: [
-                      {
-                        name: 'Standard',
-                        value: 'standard',
-                      },
-                      {
-                        name: 'Outlined',
-                        value: 'outlined',
-                      },
+                      { name: 'Standard', value: 'standard' },
+                      { name: 'Outlined', value: 'outlined' },
                       { name: 'Filled', value: 'filled' },
                     ],
                   },
@@ -4938,19 +4968,19 @@
                   },
                 },
                 {
-                  label: 'Type',
-                  key: 'type',
-                  value: 'password',
-                  type: 'TEXT',
-                  configuration: {
-                    condition: {
-                      type: 'SHOW',
-                      option: 'adornmentPosition',
-                      comparator: 'EQ',
-                      value: 0,
-                    },
+                label: 'Type',
+                key: 'type',
+                value: 'password',
+                type: 'TEXT',
+                configuration: {
+                  condition: {
+                    type: 'SHOW',
+                    option: 'adornmentPosition',
+                    comparator: 'EQ',
+                    value: 0,
                   },
                 },
+              },
                 {
                   value: false,
                   label: 'Styles',
@@ -7450,12 +7480,6 @@
                   },
                 },
                 {
-                  value: true,
-                  label: 'Autocomplete',
-                  key: 'autoComplete',
-                  type: 'TOGGLE',
-                },
-                {
                   value: false,
                   label: 'Validation options',
                   key: 'validationOptions',
@@ -7559,6 +7583,18 @@
                       value: true,
                     },
                   },
+                },
+                {
+                  value: true,
+                  label: 'Spellcheck',
+                  key: 'spellCheck',
+                  type: 'TOGGLE',
+                },
+                {
+                  value: true,
+                  label: 'Autocomplete',
+                  key: 'autoComplete',
+                  type: 'TOGGLE',
                 },
                 {
                   type: 'TOGGLE',
