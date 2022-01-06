@@ -1817,6 +1817,20 @@
                     },
                   },
                   {
+                    value: '_self',
+                    label: 'Open in',
+                    key: 'linkTarget',
+                    type: 'CUSTOM',
+                    configuration: {
+                      as: 'BUTTONGROUP',
+                      dataType: 'string',
+                      allowedInput: [
+                        { name: 'Current Tab', value: '_self' },
+                        { name: 'New Tab', value: '_blank' },
+                      ],
+                    },
+                  },
+                  {
                     value: '',
                     label: 'Page',
                     key: 'linkTo',
@@ -2360,6 +2374,20 @@
                             allowedInput: [
                               { name: 'Internal page', value: 'internal' },
                               { name: 'External page', value: 'external' },
+                            ],
+                          },
+                        },
+                        {
+                          value: '_self',
+                          label: 'Open in',
+                          key: 'linkTarget',
+                          type: 'CUSTOM',
+                          configuration: {
+                            as: 'BUTTONGROUP',
+                            dataType: 'string',
+                            allowedInput: [
+                              { name: 'Current Tab', value: '_self' },
+                              { name: 'New Tab', value: '_blank' },
                             ],
                           },
                         },
@@ -7012,7 +7040,7 @@
                   },
                 },
                 {
-                  type: 'MODEL',
+                  type: 'MODEL_AND_RELATION',
                   label: 'Model',
                   key: 'model',
                   value: '',
@@ -17132,7 +17160,7 @@
                                     value: '',
                                     label: 'Model',
                                     key: 'model',
-                                    type: 'MODEL',
+                                    type: 'MODEL_AND_RELATION',
                                   },
                                   {
                                     value: {},
@@ -20116,6 +20144,12 @@
                                     },
                                   },
                                   {
+                                    type: 'TOGGLE',
+                                    label: 'Display Rich Text',
+                                    key: 'useInnerHtml',
+                                    value: false,
+                                  },
+                                  {
                                     value: 'Title4',
                                     label: 'Type',
                                     key: 'type',
@@ -20141,6 +20175,70 @@
                                     label: 'Outer space',
                                     key: 'outerSpacing',
                                     type: 'SIZES',
+                                  },
+                                  {
+                                    type: 'CUSTOM',
+                                    label: 'Link to',
+                                    key: 'linkType',
+                                    value: 'internal',
+                                    configuration: {
+                                      as: 'BUTTONGROUP',
+                                      dataType: 'string',
+                                      allowedInput: [
+                                        {
+                                          name: 'Internal page',
+                                          value: 'internal',
+                                        },
+                                        {
+                                          name: 'External page',
+                                          value: 'external',
+                                        },
+                                      ],
+                                    },
+                                  },
+                                  {
+                                    value: '_self',
+                                    label: 'Open in',
+                                    key: 'linkTarget',
+                                    type: 'CUSTOM',
+                                    configuration: {
+                                      as: 'BUTTONGROUP',
+                                      dataType: 'string',
+                                      allowedInput: [
+                                        { name: 'Current Tab', value: '_self' },
+                                        { name: 'New Tab', value: '_blank' },
+                                      ],
+                                    },
+                                  },
+                                  {
+                                    value: '',
+                                    label: 'Page',
+                                    key: 'linkTo',
+                                    type: 'ENDPOINT',
+                                    configuration: {
+                                      condition: {
+                                        type: 'SHOW',
+                                        option: 'linkType',
+                                        comparator: 'EQ',
+                                        value: 'internal',
+                                      },
+                                    },
+                                  },
+                                  {
+                                    value: [''],
+                                    label: 'URL',
+                                    key: 'linkToExternal',
+                                    type: 'VARIABLE',
+                                    configuration: {
+                                      placeholder:
+                                        'Starts with https:// or http://',
+                                      condition: {
+                                        type: 'SHOW',
+                                        option: 'linkType',
+                                        comparator: 'EQ',
+                                        value: 'external',
+                                      },
+                                    },
                                   },
                                   {
                                     value: false,
@@ -20746,6 +20844,12 @@
                                         },
                                       },
                                       {
+                                        type: 'TOGGLE',
+                                        label: 'Display Rich Text',
+                                        key: 'useInnerHtml',
+                                        value: false,
+                                      },
+                                      {
                                         value: 'Body1',
                                         label: 'Type',
                                         key: 'type',
@@ -20771,6 +20875,76 @@
                                         label: 'Outer space',
                                         key: 'outerSpacing',
                                         type: 'SIZES',
+                                      },
+                                      {
+                                        type: 'CUSTOM',
+                                        label: 'Link to',
+                                        key: 'linkType',
+                                        value: 'internal',
+                                        configuration: {
+                                          as: 'BUTTONGROUP',
+                                          dataType: 'string',
+                                          allowedInput: [
+                                            {
+                                              name: 'Internal page',
+                                              value: 'internal',
+                                            },
+                                            {
+                                              name: 'External page',
+                                              value: 'external',
+                                            },
+                                          ],
+                                        },
+                                      },
+                                      {
+                                        value: '_self',
+                                        label: 'Open in',
+                                        key: 'linkTarget',
+                                        type: 'CUSTOM',
+                                        configuration: {
+                                          as: 'BUTTONGROUP',
+                                          dataType: 'string',
+                                          allowedInput: [
+                                            {
+                                              name: 'Current Tab',
+                                              value: '_self',
+                                            },
+                                            {
+                                              name: 'New Tab',
+                                              value: '_blank',
+                                            },
+                                          ],
+                                        },
+                                      },
+                                      {
+                                        value: '',
+                                        label: 'Page',
+                                        key: 'linkTo',
+                                        type: 'ENDPOINT',
+                                        configuration: {
+                                          condition: {
+                                            type: 'SHOW',
+                                            option: 'linkType',
+                                            comparator: 'EQ',
+                                            value: 'internal',
+                                          },
+                                        },
+                                      },
+                                      {
+                                        value: [''],
+                                        label: 'URL',
+                                        key: 'linkToExternal',
+                                        type: 'VARIABLE',
+                                        configuration: {
+                                          placeholder:
+                                            'Starts with https:// or http://',
+                                          condition: {
+                                            type: 'SHOW',
+                                            option: 'linkType',
+                                            comparator: 'EQ',
+                                            value: 'external',
+                                          },
+                                        },
                                       },
                                       {
                                         value: false,
