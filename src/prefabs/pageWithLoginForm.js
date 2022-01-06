@@ -9744,7 +9744,7 @@
                               value: false,
                             },
                             {
-                              value: [],
+                              value: [property.label],
                               label: 'Placeholder',
                               key: 'placeholder',
                               type: 'VARIABLE',
