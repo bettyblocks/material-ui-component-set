@@ -7,7 +7,7 @@ function setLanguage({ event }: { event: Event }): void {
   const BBLocaleIndex = currentCookies.indexOf(`BBLocale=${locale}`);
   const hasCookie = BBLocaleIndex > -1;
   if (!hasCookie) {
-    document.cookie = `BBLocale = ${locale}`;
+    document.cookie = `BBLocale=${locale};path=/`;
     window.location.reload();
   }
 }
