@@ -727,13 +727,17 @@
 
     useEffect(() => {
       currentValue = getValue();
-    }, [value, currentOptions, getValue]);
+    }, [value, currentOptions]);
 
     // In the first render we want to make sure to convert the default value
-    if (!multiple && !inputValue && currentValue) {
-      setValue(currentValue);
-      setInputValue(currentValue[searchProp.name].toString());
-    }
+    useEffect(() => {
+      currentValue = getValue();
+
+      if (!multiple && !inputValue && currentValue) {
+        setValue(currentValue);
+        setInputValue(currentValue[searchProp.name].toString());
+      }
+    }, []);
 
     const renderLabel = (option) => {
       if (freeSolo) {
