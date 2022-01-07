@@ -1,3 +1,18 @@
+## [1.195.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.195.3...v1.195.4) (2022-01-07)
+
+
+### Bug Fixes
+
+* set cookie path in login interaction ([5d07bb2](https://github.com/bettyblocks/material-ui-component-set/commit/5d07bb2211762f4390f1a6dde7725b85a9131d25))
+* set path for locale cookie ([7032237](https://github.com/bettyblocks/material-ui-component-set/commit/703223783b70c3bde9fa0c6d6133b52ffcbf55bc))
+
+## [1.195.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.195.2...v1.195.3) (2022-01-06)
+
+
+### Bug Fixes
+
+* prettier fixes ([251ee2b](https://github.com/bettyblocks/material-ui-component-set/commit/251ee2b304a4c2b47c4198dccc932d085c7244b2))
+
 ## [1.195.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.195.1...v1.195.2) (2022-01-04)
 
 
