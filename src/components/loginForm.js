@@ -7,16 +7,39 @@
     const { actionId, modelId, filter } = options;
     const { Form } = B;
 
+    const [errors, setErrors] = useState([]);
+
     if (B.env !== 'prod' && children.length === 0) {
       return (
         <div className={[classes.empty, classes.pristine].join(' ')}>Form</div>
       );
     }
 
-    const onSubmitSuccess = data => {
+    const onSubmitSuccess = response => {
       /* eslint-disable-next-line */
-      console.log(data);
-      B.triggerEvent('onSubmitSuccess', data);
+      if (response.errors) {
+        const messages = response.errors.flatMap(error =>
+          error.message.errors.map(inner => inner.message),
+        );
+
+        B.triggerEvent('onSubmitError', new Error(messages.join(', ')));
+
+        setErrors(messages);
+        return;
+      }
+
+      const {
+        data: {
+          action: {
+            results: { jwtToken },
+          },
+        },
+      } = response;
+
+      localStorage.setItem('TOKEN', jwtToken);
+      B.triggerEvent('onSubmitSuccess', response);
+
+      setErrors([]);
     };
 
     const onSubmitError = error => {
@@ -32,6 +55,11 @@
         onSubmitError={onSubmitError}
       >
         <fieldset className={classes.fieldset}>{children}</fieldset>
+        <ul>
+          {errors.map(error => (
+            <li>{error}</li>
+          ))}
+        </ul>
       </Form>
     );
 
