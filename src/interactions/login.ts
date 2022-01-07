@@ -26,7 +26,7 @@ function login({
   if (isValid) {
     const decodedToken = JSON.parse(window.atob(jwtToken.split('.')[1]));
     if (decodedToken && decodedToken.locale) {
-      document.cookie = `BBLocale=${decodedToken.locale}`;
+      document.cookie = `BBLocale=${decodedToken.locale};path=/`;
     }
 
     localStorage.setItem('TOKEN', jwtToken);
