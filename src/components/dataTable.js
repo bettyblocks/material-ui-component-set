@@ -456,7 +456,7 @@
       }
 
       return results.map((value) => (
-        <ModelProvider key={model} value={value} id={model}>
+        <ModelProvider key={value.id} value={value} id={model}>
           <InteractionScope model={model}>
             {(context) => (
               <TableRow
