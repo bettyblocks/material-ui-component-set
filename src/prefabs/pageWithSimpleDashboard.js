@@ -3575,6 +3575,20 @@
                                         },
                                       },
                                       {
+                                        value: '_self',
+                                        label: 'Open in',
+                                        key: 'linkTarget',
+                                        type: 'CUSTOM',
+                                        configuration: {
+                                          as: 'BUTTONGROUP',
+                                          dataType: 'string',
+                                          allowedInput: [
+                                            { name: 'Current Tab', value: '_self' },
+                                            { name: 'New Tab', value: '_blank' },
+                                          ],
+                                        },
+                                      },
+                                      {
                                         value: '',
                                         label: 'Page',
                                         key: 'linkTo',
@@ -5628,6 +5642,20 @@
                                                     },
                                                   },
                                                   {
+                                                    value: '_self',
+                                                    label: 'Open in',
+                                                    key: 'linkTarget',
+                                                    type: 'CUSTOM',
+                                                    configuration: {
+                                                      as: 'BUTTONGROUP',
+                                                      dataType: 'string',
+                                                      allowedInput: [
+                                                        { name: 'Current Tab', value: '_self' },
+                                                        { name: 'New Tab', value: '_blank' },
+                                                      ],
+                                                    },
+                                                  },
+                                                  {
                                                     value: '',
                                                     label: 'Page',
                                                     key: 'linkTo',
@@ -5834,6 +5862,20 @@
                                                           name: 'External page',
                                                           value: 'external',
                                                         },
+                                                      ],
+                                                    },
+                                                  },
+                                                  {
+                                                    value: '_self',
+                                                    label: 'Open in',
+                                                    key: 'linkTarget',
+                                                    type: 'CUSTOM',
+                                                    configuration: {
+                                                      as: 'BUTTONGROUP',
+                                                      dataType: 'string',
+                                                      allowedInput: [
+                                                        { name: 'Current Tab', value: '_self' },
+                                                        { name: 'New Tab', value: '_blank' },
                                                       ],
                                                     },
                                                   },
@@ -7645,6 +7687,20 @@
                                                     },
                                                   },
                                                   {
+                                                    value: '_self',
+                                                    label: 'Open in',
+                                                    key: 'linkTarget',
+                                                    type: 'CUSTOM',
+                                                    configuration: {
+                                                      as: 'BUTTONGROUP',
+                                                      dataType: 'string',
+                                                      allowedInput: [
+                                                        { name: 'Current Tab', value: '_self' },
+                                                        { name: 'New Tab', value: '_blank' },
+                                                      ],
+                                                    },
+                                                  },
+                                                  {
                                                     value: '',
                                                     label: 'Page',
                                                     key: 'linkTo',
@@ -7851,6 +7907,20 @@
                                                           name: 'External page',
                                                           value: 'external',
                                                         },
+                                                      ],
+                                                    },
+                                                  },
+                                                  {
+                                                    value: '_self',
+                                                    label: 'Open in',
+                                                    key: 'linkTarget',
+                                                    type: 'CUSTOM',
+                                                    configuration: {
+                                                      as: 'BUTTONGROUP',
+                                                      dataType: 'string',
+                                                      allowedInput: [
+                                                        { name: 'Current Tab', value: '_self' },
+                                                        { name: 'New Tab', value: '_blank' },
                                                       ],
                                                     },
                                                   },
@@ -9662,6 +9732,20 @@
                                                     },
                                                   },
                                                   {
+                                                    value: '_self',
+                                                    label: 'Open in',
+                                                    key: 'linkTarget',
+                                                    type: 'CUSTOM',
+                                                    configuration: {
+                                                      as: 'BUTTONGROUP',
+                                                      dataType: 'string',
+                                                      allowedInput: [
+                                                        { name: 'Current Tab', value: '_self' },
+                                                        { name: 'New Tab', value: '_blank' },
+                                                      ],
+                                                    },
+                                                  },
+                                                  {
                                                     value: '',
                                                     label: 'Page',
                                                     key: 'linkTo',
@@ -9870,6 +9954,20 @@
                                                           name: 'External page',
                                                           value: 'external',
                                                         },
+                                                      ],
+                                                    },
+                                                  },
+                                                  {
+                                                    value: '_self',
+                                                    label: 'Open in',
+                                                    key: 'linkTarget',
+                                                    type: 'CUSTOM',
+                                                    configuration: {
+                                                      as: 'BUTTONGROUP',
+                                                      dataType: 'string',
+                                                      allowedInput: [
+                                                        { name: 'Current Tab', value: '_self' },
+                                                        { name: 'New Tab', value: '_blank' },
                                                       ],
                                                     },
                                                   },
@@ -11681,6 +11779,20 @@
                                                     },
                                                   },
                                                   {
+                                                    value: '_self',
+                                                    label: 'Open in',
+                                                    key: 'linkTarget',
+                                                    type: 'CUSTOM',
+                                                    configuration: {
+                                                      as: 'BUTTONGROUP',
+                                                      dataType: 'string',
+                                                      allowedInput: [
+                                                        { name: 'Current Tab', value: '_self' },
+                                                        { name: 'New Tab', value: '_blank' },
+                                                      ],
+                                                    },
+                                                  },
+                                                  {
                                                     value: '',
                                                     label: 'Page',
                                                     key: 'linkTo',
@@ -11887,6 +11999,20 @@
                                                           name: 'External page',
                                                           value: 'external',
                                                         },
+                                                      ],
+                                                    },
+                                                  },
+                                                  {
+                                                    value: '_self',
+                                                    label: 'Open in',
+                                                    key: 'linkTarget',
+                                                    type: 'CUSTOM',
+                                                    configuration: {
+                                                      as: 'BUTTONGROUP',
+                                                      dataType: 'string',
+                                                      allowedInput: [
+                                                        { name: 'Current Tab', value: '_self' },
+                                                        { name: 'New Tab', value: '_blank' },
                                                       ],
                                                     },
                                                   },
@@ -14004,6 +14130,20 @@
                                                             },
                                                           },
                                                           {
+                                                            value: '_self',
+                                                            label: 'Open in',
+                                                            key: 'linkTarget',
+                                                            type: 'CUSTOM',
+                                                            configuration: {
+                                                              as: 'BUTTONGROUP',
+                                                              dataType: 'string',
+                                                              allowedInput: [
+                                                                { name: 'Current Tab', value: '_self' },
+                                                                { name: 'New Tab', value: '_blank' },
+                                                              ],
+                                                            },
+                                                          },
+                                                          {
                                                             value: '',
                                                             label: 'Page',
                                                             key: 'linkTo',
@@ -15591,12 +15731,6 @@
                                                         },
                                                       },
                                                       {
-                                                        value: true,
-                                                        label: 'Autocomplete',
-                                                        key: 'autoComplete',
-                                                        type: 'TOGGLE',
-                                                      },
-                                                      {
                                                         value: false,
                                                         label:
                                                           'Validation options',
@@ -15722,6 +15856,18 @@
                                                             value: true,
                                                           },
                                                         },
+                                                      },
+                                                      {
+                                                        value: true,
+                                                        label: 'Spellcheck',
+                                                        key: 'spellCheck',
+                                                        type: 'TOGGLE',
+                                                      },
+                                                      {
+                                                        value: true,
+                                                        label: 'Autocomplete',
+                                                        key: 'autoComplete',
+                                                        type: 'TOGGLE',
                                                       },
                                                       {
                                                         type: 'TOGGLE',
@@ -16586,7 +16732,7 @@
                                                         value: '',
                                                         label: 'Model',
                                                         key: 'model',
-                                                        type: 'MODEL',
+                                                        type: 'MODEL_AND_RELATION',
                                                       },
                                                       {
                                                         value: {},
@@ -17626,6 +17772,20 @@
                               name: 'External page',
                               value: 'external',
                             },
+                          ],
+                        },
+                      },
+                      {
+                        value: '_self',
+                        label: 'Open in',
+                        key: 'linkTarget',
+                        type: 'CUSTOM',
+                        configuration: {
+                          as: 'BUTTONGROUP',
+                          dataType: 'string',
+                          allowedInput: [
+                            { name: 'Current Tab', value: '_self' },
+                            { name: 'New Tab', value: '_blank' },
                           ],
                         },
                       },
