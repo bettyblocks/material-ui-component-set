@@ -9,6 +9,7 @@
       autoComplete,
       disabled,
       error,
+      label,
       multiline,
       rows,
       placeholder = [''],
@@ -59,7 +60,7 @@
     const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
     const [currentValue, setCurrentValue] = useState('');
-    const labelText = isDev ? '' : name;
+    const labelText = label || name;
 
     const validPattern = pattern || null;
     const validMinlength = minlength || null;
