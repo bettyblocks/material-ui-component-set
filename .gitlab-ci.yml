@@ -9,7 +9,7 @@ build:
   only:
     - master
   script:
-    - npm run build
+    - yarn && yarn build
   artifacts:
     paths:
       - dist
