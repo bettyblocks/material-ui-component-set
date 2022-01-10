@@ -490,7 +490,7 @@
 
         return (
           results.find((result) =>
-            result[valueProp.name] && searchPropIsNumber
+            result[valueProp.name] && valuePropIsNumber
               ? parseInt(prev[valueProp.name], 10) === result[valueProp.name]
               : prev[valueProp.name] === result[valueProp.name],
           ) || ''
