@@ -34,7 +34,6 @@ deploy_edge:
     - az storage blob upload-batch --destination=$AZURE_STORAGE_CONTAINER_NAME --destination-path=/ --source=dist/
   tags:
     - kubernetes
-  when: manual
 
 deploy_prod:
   stage: deploy_prod
