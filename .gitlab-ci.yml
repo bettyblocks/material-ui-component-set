@@ -30,6 +30,7 @@ deploy_edge:
     name: edge
     url: $EDGE_URL
   script:
+    - az storage container create -n $AZURE_STORAGE_CONTAINER_NAME --public-access blob
     - az storage blob delete-batch --source=$AZURE_STORAGE_CONTAINER_NAME --pattern=*
     - az storage blob upload-batch --destination=$AZURE_STORAGE_CONTAINER_NAME --destination-path=/ --source=dist/
   tags:
@@ -49,6 +50,7 @@ deploy_prod:
     name: prod
     url: $PROD_URL
   script:
+    - az storage container create -n $AZURE_STORAGE_CONTAINER_NAME --public-access blob
     - az storage blob delete-batch --source=$AZURE_STORAGE_CONTAINER_NAME --pattern=*
     - az storage blob upload-batch --destination=$AZURE_STORAGE_CONTAINER_NAME --destination-path=/ --source=dist/
   tags:
