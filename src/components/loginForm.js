@@ -4,15 +4,25 @@
   allowedTypes: ['FORM_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { actionId, modelId, filter } = options;
-    const { Form } = B;
+    const { actionId, modelId, filter, redirectTo } = options;
+    const { Form, useEndpoint } = B;
 
     const [errors, setErrors] = useState([]);
 
-    if (B.env !== 'prod' && children.length === 0) {
+    const isDev = B.env !== 'prod';
+
+    if (isDev && children.length === 0) {
       return (
         <div className={[classes.empty, classes.pristine].join(' ')}>Form</div>
       );
+    }
+
+    let endpointUrl;
+    let history;
+
+    if (!isDev) {
+      endpointUrl = useEndpoint(redirectTo);
+      history = useHistory();
     }
 
     const onSubmitSuccess = response => {
@@ -38,6 +48,10 @@
 
       localStorage.setItem('TOKEN', jwtToken);
       B.triggerEvent('onSubmitSuccess', response);
+
+      if (redirectTo) {
+        history.push(endpointUrl);
+      }
 
       setErrors([]);
     };
