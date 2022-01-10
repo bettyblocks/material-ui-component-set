@@ -1,0 +1,56 @@
+stages:
+  - build
+  - deploy_edge
+  - deploy_prod
+
+build:
+  stage: build
+  image: node:14.17-slim
+  only:
+    - master
+  script:
+    - npm run build
+  artifacts:
+    paths:
+      - dist
+    expire_in: 1 week
+  tags:
+    - kubernetes
+
+deploy_edge:
+  stage: deploy_edge
+  image: mcr.microsoft.com/azure-cli
+  only:
+    - master
+  variables:
+    AZURE_STORAGE_ACCOUNT: $EDGE_AZURE_STORAGE_ACCOUNT
+    AZURE_STORAGE_CONTAINER_NAME: $EDGE_AZURE_STORAGE_CONTAINER_NAME
+    AZURE_STORAGE_KEY: $EDGE_AZURE_STORAGE_KEY
+  environment:
+    name: edge
+    url: $EDGE_URL
+  script:
+    - az storage blob delete-batch --source=$AZURE_STORAGE_CONTAINER_NAME --pattern=*
+    - az storage blob upload-batch --destination=$AZURE_STORAGE_CONTAINER_NAME --destination-path=/ --source=dist/
+  tags:
+    - kubernetes
+  when: manual
+
+deploy_prod:
+  stage: deploy_prod
+  image: mcr.microsoft.com/azure-cli
+  only:
+    - master
+  variables:
+    AZURE_STORAGE_ACCOUNT: $PROD_AZURE_STORAGE_ACCOUNT
+    AZURE_STORAGE_CONTAINER_NAME: $PROD_AZURE_STORAGE_CONTAINER_NAME
+    AZURE_STORAGE_KEY: $PROD_AZURE_STORAGE_KEY
+  environment:
+    name: prod
+    url: $PROD_URL
+  script:
+    - az storage blob delete-batch --source=$AZURE_STORAGE_CONTAINER_NAME --pattern=*
+    - az storage blob upload-batch --destination=$AZURE_STORAGE_CONTAINER_NAME --destination-path=/ --source=dist/
+  tags:
+    - kubernetes
+  when: manual
