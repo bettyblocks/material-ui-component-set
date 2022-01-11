@@ -7,10 +7,10 @@
       name: 'TextInput',
       options: [
         {
-          key: 'label',
+          type: 'VARIABLE',
           label: 'Label',
-          type: 'TEXT',
-          value: 'Text Input',
+          key: 'label',
+          value: [],
         },
         {
           key: 'actionVariableId',

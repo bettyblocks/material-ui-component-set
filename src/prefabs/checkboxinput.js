@@ -7,10 +7,10 @@
       name: 'CheckboxInput',
       options: [
         {
-          key: 'label',
+          type: 'VARIABLE',
           label: 'Label',
-          type: 'TEXT',
-          value: 'Checkbox',
+          key: 'label',
+          value: ['Checkbox'],
         },
         {
           key: 'actionVariableId',
