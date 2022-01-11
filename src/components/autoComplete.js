@@ -489,10 +489,10 @@
         }
 
         return (
-          results.find((result) =>
-            result[valueProp.name] === valuePropIsNumber
-              ? parseInt(prev, 10)
-              : prev,
+          results.find(
+            (result) =>
+              result[valueProp.name] &&
+              prev[valueProp.name] === result[valueProp.name],
           ) || ''
         );
       });
@@ -723,21 +723,13 @@
      * The hidden input is used when `optionType` is set to `model`. Then the `valueProperty` options is used to determine what is send to the backend when a from is submitted.
      */
 
-    let currentValue = getValue();
-
-    useEffect(() => {
-      currentValue = getValue();
-    }, [value, currentOptions]);
+    const currentValue = getValue();
 
     // In the first render we want to make sure to convert the default value
-    useEffect(() => {
-      currentValue = getValue();
-
-      if (!multiple && !inputValue && currentValue) {
-        setValue(currentValue);
-        setInputValue(currentValue[searchProp.name].toString());
-      }
-    }, []);
+    if (!multiple && !inputValue && currentValue) {
+      setValue(currentValue);
+      setInputValue(currentValue[searchProp.name].toString());
+    }
 
     const renderLabel = (option) => {
       if (freeSolo) {
