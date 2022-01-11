@@ -723,11 +723,7 @@
      * The hidden input is used when `optionType` is set to `model`. Then the `valueProperty` options is used to determine what is send to the backend when a from is submitted.
      */
 
-    let currentValue;
-
-    useEffect(() => {
-      currentValue = getValue();
-    }, [getValue]);
+    const currentValue = getValue();
 
     // In the first render we want to make sure to convert the default value
     if (!multiple && !inputValue && currentValue) {
