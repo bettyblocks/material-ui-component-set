@@ -18,9 +18,23 @@
       />
     );
   },
+  interactions: [
+    {
+      name: 'login',
+      sourceEvent: 'onActionSuccess',
+      ref: {
+        sourceComponentId: '#formId',
+      },
+      parameters: [],
+      type: 'Global',
+    },
+  ],
   structure: [
     {
       name: 'LoginForm',
+      ref: {
+        id: '#formId',
+      },
       options: [
         {
           key: 'actionId',

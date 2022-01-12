@@ -32,33 +32,22 @@
           error.message.errors.map(inner => inner.message),
         );
 
-        B.triggerEvent('onSubmitError', new Error(messages.join(', ')));
+        B.triggerEvent('onActionError', new Error(messages.join(', ')));
 
         setErrors(messages);
         return;
       }
 
-      const {
-        data: {
-          action: {
-            results: { jwtToken },
-          },
-        },
-      } = response;
+      const event = response.data.action.results;
 
-      localStorage.setItem('TOKEN', jwtToken);
-      B.triggerEvent('onSubmitSuccess', response);
-
-      if (redirectTo) {
-        history.push(endpointUrl);
-      }
+      B.triggerEvent('onActionSuccess', event);
 
       setErrors([]);
     };
 
     const onSubmitError = error => {
       setErrors([error.message || error.toString()]);
-      B.triggerEvent('onSubmitError', error);
+      B.triggerEvent('onActionError', error);
     };
 
     const FormComponent = () => (

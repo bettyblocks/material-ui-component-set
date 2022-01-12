@@ -20,15 +20,23 @@
         },
         {
           value: false,
-          label: 'Required',
-          key: 'required',
+          label: 'Validation options',
+          key: 'validationOptions',
           type: 'TOGGLE',
         },
         {
           value: false,
-          label: 'Validation options',
-          key: 'validationOptions',
+          label: 'Required',
+          key: 'required',
           type: 'TOGGLE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'validationOptions',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
         },
         {
           label: 'Validation pattern',
@@ -390,20 +398,6 @@
           label: 'Advanced settings',
           key: 'advancedSettings',
           type: 'TOGGLE',
-        },
-        {
-          type: 'VARIABLE',
-          label: 'name attribute',
-          key: 'nameAttribute',
-          value: [],
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'advancedSettings',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
         },
         {
           type: 'VARIABLE',
