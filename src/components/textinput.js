@@ -60,7 +60,8 @@
     const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
     const [currentValue, setCurrentValue] = useState('');
-    const labelText = label || name;
+    const parsedLabel = useText(label);
+    const labelText = parsedLabel || name;
 
     const validPattern = pattern || null;
     const validMinlength = minlength || null;

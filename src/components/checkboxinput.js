@@ -23,7 +23,8 @@
     const [helper, setHelper] = useState(useText(helperText));
 
     const mounted = useRef(false);
-    const labelText = label;
+    const parsedLabel = useText(label);
+    const labelText = parsedLabel || name;
     const componentChecked = 'false';
     const [checked, setChecked] = useState(componentChecked === 'true');
     const dataComponentAttributeValue = useText(dataComponentAttribute);

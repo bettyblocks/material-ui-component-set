@@ -57,8 +57,7 @@
     };
 
     const onSubmitError = error => {
-      /* eslint-disable-next-line */
-      console.log(error);
+      setErrors([error.message || error.toString()]);
       B.triggerEvent('onSubmitError', error);
     };
 
