@@ -1,3 +1,21 @@
+# [1.197.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.196.0...v1.197.0) (2022-01-13)
+
+
+### Bug Fixes
+
+* first value bug ([e76a819](https://github.com/bettyblocks/material-ui-component-set/commit/e76a819edab20749f2e23ad497ada65cf9ee05dc))
+
+
+### Features
+
+* remove autoselect ([fd8141a](https://github.com/bettyblocks/material-ui-component-set/commit/fd8141ae96b30d71af1c3ac1ef06543b6684bf01))
+
+
+### Reverts
+
+* Revert "fix: use UseEffect to ensure the hiddeninput value is updated" ([fb072b8](https://github.com/bettyblocks/material-ui-component-set/commit/fb072b82612c28dea99755cf53da44f1a16647df))
+* Revert "fix: ensure the hidden input is updated when the currentValue changes" ([3045e61](https://github.com/bettyblocks/material-ui-component-set/commit/3045e61eb9ffbc277f5e8be840904dcb9d20013b))
+
 # [1.196.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.195.4...v1.196.0) (2022-01-13)
 
 
