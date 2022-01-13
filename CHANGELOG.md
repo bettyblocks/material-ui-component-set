@@ -1,3 +1,10 @@
+# [1.196.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.195.4...v1.196.0) (2022-01-13)
+
+
+### Features
+
+* restore free solo ([c8a2682](https://github.com/bettyblocks/material-ui-component-set/commit/c8a26821124735bca93d397011a3d9f835bde0cc))
+
 ## [1.195.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.195.3...v1.195.4) (2022-01-07)
 
 
