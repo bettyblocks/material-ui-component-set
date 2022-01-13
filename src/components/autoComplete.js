@@ -749,7 +749,6 @@
 
     const MuiAutocomplete = (
       <Autocomplete
-        autoSelect={freeSolo}
         disableCloseOnSelect={!closeOnSelect}
         disabled={disabled}
         freeSolo={freeSolo}
