@@ -1,3 +1,10 @@
+# [1.197.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.196.0...v1.197.0) (2022-01-13)
+
+
+### Features
+
+* remove autoselect ([fd8141a](https://github.com/bettyblocks/material-ui-component-set/commit/fd8141ae96b30d71af1c3ac1ef06543b6684bf01))
+
 # [1.196.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.195.4...v1.196.0) (2022-01-13)
 
 
