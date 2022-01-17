@@ -758,6 +758,9 @@
         inputValue={inputValue}
         loading={loading}
         multiple={multiple}
+        onClose={() => {
+          B.triggerEvent('onClose');
+        }}
         onChange={(_, newValue) => {
           setValue(newValue || (multiple ? [] : ''));
 
