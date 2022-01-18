@@ -4409,8 +4409,14 @@
                                                           as: 'BUTTONGROUP',
                                                           dataType: 'string',
                                                           allowedInput: [
-                                                            { name: 'Current Tab', value: '_self' },
-                                                            { name: 'New Tab', value: '_blank' },
+                                                            {
+                                                              name: 'Current Tab',
+                                                              value: '_self',
+                                                            },
+                                                            {
+                                                              name: 'New Tab',
+                                                              value: '_blank',
+                                                            },
                                                           ],
                                                         },
                                                       },

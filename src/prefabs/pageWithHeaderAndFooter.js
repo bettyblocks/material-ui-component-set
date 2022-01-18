@@ -4402,7 +4402,7 @@
                                   { name: 'New Tab', value: '_blank' },
                                 ],
                               },
-                            },                    
+                            },
                             {
                               value: '',
                               label: 'Page',

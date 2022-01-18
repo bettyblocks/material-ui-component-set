@@ -3787,13 +3787,24 @@
                                               dataType: 'string',
                                               allowedInput: [
                                                 { name: 'Left', value: 'left' },
-                                                { name: 'Center', value: 'center' },
-                                                { name: 'Right', value: 'right' },
+                                                {
+                                                  name: 'Center',
+                                                  value: 'center',
+                                                },
+                                                {
+                                                  name: 'Right',
+                                                  value: 'right',
+                                                },
                                               ],
                                             },
                                           },
                                           {
-                                            value: ['0rem', '0rem', '0rem', '0rem'],
+                                            value: [
+                                              '0rem',
+                                              '0rem',
+                                              '0rem',
+                                              '0rem',
+                                            ],
                                             label: 'Outer space',
                                             key: 'outerSpacing',
                                             type: 'SIZES',
@@ -3807,8 +3818,14 @@
                                               as: 'BUTTONGROUP',
                                               dataType: 'string',
                                               allowedInput: [
-                                                { name: 'Internal page', value: 'internal' },
-                                                { name: 'External page', value: 'external' },
+                                                {
+                                                  name: 'Internal page',
+                                                  value: 'internal',
+                                                },
+                                                {
+                                                  name: 'External page',
+                                                  value: 'external',
+                                                },
                                               ],
                                             },
                                           },
@@ -3821,8 +3838,14 @@
                                               as: 'BUTTONGROUP',
                                               dataType: 'string',
                                               allowedInput: [
-                                                { name: 'Current Tab', value: '_self' },
-                                                { name: 'New Tab', value: '_blank' },
+                                                {
+                                                  name: 'Current Tab',
+                                                  value: '_self',
+                                                },
+                                                {
+                                                  name: 'New Tab',
+                                                  value: '_blank',
+                                                },
                                               ],
                                             },
                                           },
@@ -3846,7 +3869,8 @@
                                             key: 'linkToExternal',
                                             type: 'VARIABLE',
                                             configuration: {
-                                              placeholder: 'Starts with https:// or http://',
+                                              placeholder:
+                                                'Starts with https:// or http://',
                                               condition: {
                                                 type: 'SHOW',
                                                 option: 'linkType',

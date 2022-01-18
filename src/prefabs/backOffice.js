@@ -4416,7 +4416,7 @@
                     },
                   },
                 },
-                                {
+                {
                   value: true,
                   label: 'Spellcheck',
                   key: 'spellCheck',
@@ -4968,19 +4968,19 @@
                   },
                 },
                 {
-                label: 'Type',
-                key: 'type',
-                value: 'password',
-                type: 'TEXT',
-                configuration: {
-                  condition: {
-                    type: 'SHOW',
-                    option: 'adornmentPosition',
-                    comparator: 'EQ',
-                    value: 0,
+                  label: 'Type',
+                  key: 'type',
+                  value: 'password',
+                  type: 'TEXT',
+                  configuration: {
+                    condition: {
+                      type: 'SHOW',
+                      option: 'adornmentPosition',
+                      comparator: 'EQ',
+                      value: 0,
+                    },
                   },
                 },
-              },
                 {
                   value: false,
                   label: 'Styles',
