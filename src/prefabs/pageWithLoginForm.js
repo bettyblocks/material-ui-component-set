@@ -7098,9 +7098,12 @@
                 },
               );
 
-              const descendants = properties.sort((a, b) =>
-                a.kind.localeCompare(b.kind),
-              );
+              const descendants = properties.sort((a, b) => {
+                if (a.kind === b.kind) return 0;
+                if (a.kind === 'PASSWORD') return 1;
+                if (b.kind === 'PASSWORD') return -1;
+                return a.kind.localeCompare(b.kind);
+              });
               const descendantsArray = descendants.map((property) => {
                 switch (property.kind) {
                   case 'EMAIL_ADDRESS': {
@@ -9853,7 +9856,7 @@
                               value: false,
                             },
                             {
-                              value: [],
+                              value: [property.label],
                               label: 'Placeholder',
                               key: 'placeholder',
                               type: 'VARIABLE',
