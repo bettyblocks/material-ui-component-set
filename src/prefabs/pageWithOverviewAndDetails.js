@@ -4141,7 +4141,6 @@
                                           },
                                         },
                                       },
-                              
                                       {
                                         value: '',
                                         label: 'Redirect when no result',
