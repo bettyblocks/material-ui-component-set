@@ -10907,9 +10907,31 @@
                             options: [
                               {
                                 value: '',
+                                label: 'Authentication Profile',
+                                key: 'authProfile',
+                                type: 'AUTHENTICATION_PROFILE',
+                                configuration: {
+                                  condition: {
+                                    type: 'SHOW',
+                                    option: 'model',
+                                    comparator: 'EQ',
+                                    value: '',
+                                  },
+                                },
+                              },
+                              {
+                                value: '',
                                 label: 'Model',
                                 key: 'model',
                                 type: 'MODEL',
+                                configuration: {
+                                  condition: {
+                                    type: 'SHOW',
+                                    option: 'authProfile',
+                                    comparator: 'EQ',
+                                    value: '',
+                                  },
+                                },
                               },
                               {
                                 value: '',
@@ -10932,13 +10954,13 @@
                                 type: 'FILTER',
                                 configuration: {
                                   dependsOn: 'model',
+                                  condition: {
+                                    type: 'SHOW',
+                                    option: 'authProfile',
+                                    comparator: 'EQ',
+                                    value: '',
+                                  },
                                 },
-                              },
-                              {
-                                value: '',
-                                label: 'Authentication Profile',
-                                key: 'authProfile',
-                                type: 'AUTHENTICATION_PROFILE',
                               },
                               {
                                 value: '',
@@ -18272,7 +18294,10 @@
           '#detailsDataContainer',
           prefabStructure,
         );
-        detailsDataContainer.options[0].value = modelId;
+        const modelOption = detailsDataContainer.options.find(
+          (o) => o.key === 'model',
+        );
+        modelOption.value = modelId;
 
         const detailsRecordCard = tabCard(`${data.model.label}`);
         const detailsInfoProperties = detailProperties.filter(
@@ -21508,10 +21533,32 @@
                                 },
                                 options: [
                                   {
-                                    value: modelId,
+                                    value: '',
+                                    label: 'Authentication Profile',
+                                    key: 'authProfile',
+                                    type: 'AUTHENTICATION_PROFILE',
+                                    configuration: {
+                                      condition: {
+                                        type: 'SHOW',
+                                        option: 'model',
+                                        comparator: 'EQ',
+                                        value: '',
+                                      },
+                                    },
+                                  },
+                                  {
+                                    value: '',
                                     label: 'Model',
                                     key: 'model',
                                     type: 'MODEL',
+                                    configuration: {
+                                      condition: {
+                                        type: 'SHOW',
+                                        option: 'authProfile',
+                                        comparator: 'EQ',
+                                        value: '',
+                                      },
+                                    },
                                   },
                                   {
                                     value: '',
@@ -21534,13 +21581,13 @@
                                     type: 'FILTER',
                                     configuration: {
                                       dependsOn: 'model',
+                                      condition: {
+                                        type: 'SHOW',
+                                        option: 'authProfile',
+                                        comparator: 'EQ',
+                                        value: '',
+                                      },
                                     },
-                                  },
-                                  {
-                                    value: '',
-                                    label: 'Authentication Profile',
-                                    key: 'authProfile',
-                                    type: 'AUTHENTICATION_PROFILE',
                                   },
                                   {
                                     value: '',

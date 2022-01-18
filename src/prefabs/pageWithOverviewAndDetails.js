@@ -4085,10 +4085,32 @@
                                     },
                                     options: [
                                       {
+                                        value: '',
+                                        label: 'Authentication Profile',
+                                        key: 'authProfile',
+                                        type: 'AUTHENTICATION_PROFILE',
+                                        configuration: {
+                                          condition: {
+                                            type: 'SHOW',
+                                            option: 'model',
+                                            comparator: 'EQ',
+                                            value: '',
+                                          },
+                                        },
+                                      },
+                                      {
                                         value: modelId,
                                         label: 'Model',
                                         key: 'model',
                                         type: 'MODEL',
+                                        configuration: {
+                                          condition: {
+                                            type: 'SHOW',
+                                            option: 'authProfile',
+                                            comparator: 'EQ',
+                                            value: '',
+                                          },
+                                        },
                                       },
                                       {
                                         value: '',
@@ -4111,14 +4133,15 @@
                                         type: 'FILTER',
                                         configuration: {
                                           dependsOn: 'model',
+                                          condition: {
+                                            type: 'SHOW',
+                                            option: 'authProfile',
+                                            comparator: 'EQ',
+                                            value: '',
+                                          },
                                         },
                                       },
-                                      {
-                                        value: '',
-                                        label: 'Authentication Profile',
-                                        key: 'authProfile',
-                                        type: 'AUTHENTICATION_PROFILE',
-                                      },
+                              
                                       {
                                         value: '',
                                         label: 'Redirect when no result',
