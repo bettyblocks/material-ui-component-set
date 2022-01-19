@@ -50,9 +50,6 @@
         }, [isDev, filter, currentRecord, model]);
 
         const selectedFilter = getFilter();
-        const hasFilter =
-          (selectedFilter && Object.keys(selectedFilter).length > 0) ||
-          Object.keys(interactionFilter).length > 0;
         const history = isDev ? null : useHistory();
 
         const redirect = () => {
@@ -196,66 +193,70 @@
           );
         }
 
-        return (
-          <GetOne
-            modelId={model}
-            rawFilter={where}
-            fetchPolicy="cache-and-network"
-          >
-            {({ loading, error, data, refetch }) => {
-              if (!loading && data && data.id) {
-                B.triggerEvent('onSuccess', data);
-              } else {
-                B.triggerEvent('onNoResults');
-              }
-
-              if (error) {
-                if (!displayError) {
-                  B.triggerEvent('onError', error.message);
+        if (model) {
+          return (
+            <GetOne
+              modelId={model}
+              rawFilter={where}
+              fetchPolicy="cache-and-network"
+            >
+              {({ loading, error, data, refetch }) => {
+                if (!loading && data && data.id) {
+                  B.triggerEvent('onSuccess', data);
+                } else {
+                  B.triggerEvent('onNoResults');
                 }
-              }
 
-              B.defineFunction('Refetch', () => {
-                refetch();
-              });
+                if (error) {
+                  if (!displayError) {
+                    B.triggerEvent('onError', error.message);
+                  }
+                }
 
-              if (loading && loadingType === 'default') {
-                B.triggerEvent('onLoad', loading);
-                return (
-                  <span data-component={dataComponentAttributeText}>
-                    {parsedLoadingText}
-                  </span>
-                );
-              }
+                B.defineFunction('Refetch', () => {
+                  refetch();
+                });
 
-              if (loading && loadingType === 'showChildren') {
-                B.triggerEvent('onLoad', loading);
-                // key attribute forces a rerender after loading
-                return (
-                  <div
-                    key={`data-loading-${loading}`}
-                    data-component={dataComponentAttributeText}
-                  >
-                    {children}
-                  </div>
-                );
-              }
+                if (loading && loadingType === 'default') {
+                  B.triggerEvent('onLoad', loading);
+                  return (
+                    <span data-component={dataComponentAttributeText}>
+                      {parsedLoadingText}
+                    </span>
+                  );
+                }
 
-              if (error && displayError) {
-                return (
-                  <span data-component={dataComponentAttributeText}>
-                    {error.message}
-                  </span>
-                );
-              }
+                if (loading && loadingType === 'showChildren') {
+                  B.triggerEvent('onLoad', loading);
+                  // key attribute forces a rerender after loading
+                  return (
+                    <div
+                      key={`data-loading-${loading}`}
+                      data-component={dataComponentAttributeText}
+                    >
+                      {children}
+                    </div>
+                  );
+                }
 
-              if (!data && redirectWithoutResult) {
-                redirect();
-              }
-              return DataContainer;
-            }}
-          </GetOne>
-        );
+                if (error && displayError) {
+                  return (
+                    <span data-component={dataComponentAttributeText}>
+                      {error.message}
+                    </span>
+                  );
+                }
+
+                if (!data && redirectWithoutResult) {
+                  redirect();
+                }
+                return DataContainer;
+              }}
+            </GetOne>
+          );
+        }
+
+        return DataContainer;
       })()}
     </div>
   ),
