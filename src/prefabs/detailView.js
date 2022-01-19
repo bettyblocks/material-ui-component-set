@@ -1509,7 +1509,7 @@
           type: 'MODEL',
         },
         {
-          value: '0',
+          value: '',
           label: 'Current Record',
           key: 'currentRecord',
           type: 'NUMBER',
