@@ -190,7 +190,7 @@
                 } else {
                   B.triggerEvent('onNoUserResults');
                 }
-                return hasFilter ? DataContainer : Wrapper;
+                return DataContainer;
               }}
             </GetMe>
           );
@@ -252,7 +252,7 @@
               if (!data && redirectWithoutResult) {
                 redirect();
               }
-              return hasFilter ? DataContainer : Wrapper;
+              return DataContainer;
             }}
           </GetOne>
         );
