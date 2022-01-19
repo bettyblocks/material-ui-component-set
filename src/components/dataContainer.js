@@ -119,74 +119,6 @@
         const completeFilter = deepMerge(selectedFilter, interactionFilters);
         const where = useFilter(completeFilter);
 
-        const DataContainer = function () {
-          return (
-            <GetOne
-              modelId={model}
-              rawFilter={where}
-              fetchPolicy="cache-and-network"
-            >
-              {({ loading, error, data, refetch }) => {
-                if (!loading && data && data.id) {
-                  B.triggerEvent('onSuccess', data);
-                } else {
-                  B.triggerEvent('onNoResults');
-                }
-
-                if (error) {
-                  if (!displayError) {
-                    B.triggerEvent('onError', error.message);
-                  }
-                }
-
-                B.defineFunction('Refetch', () => {
-                  refetch();
-                });
-
-                if (loading && loadingType === 'default') {
-                  B.triggerEvent('onLoad', loading);
-                  return (
-                    <span data-component={dataComponentAttributeText}>
-                      {parsedLoadingText}
-                    </span>
-                  );
-                }
-
-                if (loading && loadingType === 'showChildren') {
-                  B.triggerEvent('onLoad', loading);
-                  // key attribute forces a rerender after loading
-                  return (
-                    <div
-                      key={`data-loading-${loading}`}
-                      data-component={dataComponentAttributeText}
-                    >
-                      {children}
-                    </div>
-                  );
-                }
-
-                if (error && displayError) {
-                  return (
-                    <span data-component={dataComponentAttributeText}>
-                      {error.message}
-                    </span>
-                  );
-                }
-
-                if (!data && redirectWithoutResult) {
-                  redirect();
-                }
-
-                return (
-                  <div data-component={dataComponentAttributeText}>
-                    {children}
-                  </div>
-                );
-              }}
-            </GetOne>
-          );
-        };
-
         B.defineFunction('setCurrentRecord', (value) => {
           const id = Number(value);
           if (typeof id === 'number') {
@@ -221,6 +153,10 @@
           }
         });
 
+        const DataContainer = (
+          <div data-component={dataComponentAttributeText}>{children}</div>
+        );
+
         const Wrapper = (
           <div
             className={[
@@ -239,13 +175,6 @@
           return Wrapper;
         }
 
-        const CanvasLayout = function () {
-          if (!hasFilter) {
-            return Wrapper;
-          }
-          return <DataContainer />;
-        };
-
         if (authProfile) {
           return (
             <GetMe authenticationProfileId={authProfile}>
@@ -261,13 +190,72 @@
                 } else {
                   B.triggerEvent('onNoUserResults');
                 }
-                return <CanvasLayout />;
+                return hasFilter ? DataContainer : Wrapper;
               }}
             </GetMe>
           );
         }
 
-        return <CanvasLayout />;
+        return (
+          <GetOne
+            modelId={model}
+            rawFilter={where}
+            fetchPolicy="cache-and-network"
+          >
+            {({ loading, error, data, refetch }) => {
+              if (!loading && data && data.id) {
+                B.triggerEvent('onSuccess', data);
+              } else {
+                B.triggerEvent('onNoResults');
+              }
+
+              if (error) {
+                if (!displayError) {
+                  B.triggerEvent('onError', error.message);
+                }
+              }
+
+              B.defineFunction('Refetch', () => {
+                refetch();
+              });
+
+              if (loading && loadingType === 'default') {
+                B.triggerEvent('onLoad', loading);
+                return (
+                  <span data-component={dataComponentAttributeText}>
+                    {parsedLoadingText}
+                  </span>
+                );
+              }
+
+              if (loading && loadingType === 'showChildren') {
+                B.triggerEvent('onLoad', loading);
+                // key attribute forces a rerender after loading
+                return (
+                  <div
+                    key={`data-loading-${loading}`}
+                    data-component={dataComponentAttributeText}
+                  >
+                    {children}
+                  </div>
+                );
+              }
+
+              if (error && displayError) {
+                return (
+                  <span data-component={dataComponentAttributeText}>
+                    {error.message}
+                  </span>
+                );
+              }
+
+              if (!data && redirectWithoutResult) {
+                redirect();
+              }
+              return hasFilter ? DataContainer : Wrapper;
+            }}
+          </GetOne>
+        );
       })()}
     </div>
   ),
