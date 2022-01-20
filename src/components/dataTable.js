@@ -75,7 +75,7 @@
     const perPageLabel = useText(labelRowsPerPage);
     const numOfPagesLabel = useText(labelNumberOfPages);
 
-    const { label: searchPropertyLabel = '{property}' } =
+    const { label: searchPropertyLabel = '{property}', kind } =
       getProperty(searchProperty) || {};
     let orderPropertyPath = null;
     if (orderProperty && Array.isArray(orderProperty.id)) {
@@ -207,11 +207,14 @@
     interactionFilters =
       clauses.length > 1 ? { _and: clauses } : clauses[0] || {};
 
+    const searchOperator =
+      kind === 'serial' || kind === 'integer' ? 'eq' : 'matches';
+
     const searchFilter = searchProperty
       ? path.reduceRight(
           (acc, property, index) =>
             index === path.length - 1
-              ? { [property]: { matches: searchTerm } }
+              ? { [property]: { [searchOperator]: searchTerm } }
               : { [property]: acc },
           {},
         )
