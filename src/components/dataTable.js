@@ -620,22 +620,25 @@
           {hasToolbar && (
             <Toolbar ref={toolbarRef} classes={{ root: classes.toolbar }}>
               {titleText && <span className={classes.title}>{titleText}</span>}
-              {searchProperty && !hideSearch && (
-                <TextField
-                  classes={{ root: classes.searchField }}
-                  placeholder={`${useText(
-                    labelSearchOn,
-                  )} ${searchPropertyLabel}`}
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <Icon name="Search" />
-                      </InputAdornment>
-                    ),
-                  }}
-                  onChange={handleSearch}
-                />
-              )}
+              {searchProperty &&
+                searchProperty.id &&
+                searchProperty.id !== '' &&
+                !hideSearch && (
+                  <TextField
+                    classes={{ root: classes.searchField }}
+                    placeholder={`${useText(
+                      labelSearchOn,
+                    )} ${searchPropertyLabel}`}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <Icon name="Search" />
+                        </InputAdornment>
+                      ),
+                    }}
+                    onChange={handleSearch}
+                  />
+                )}
             </Toolbar>
           )}
           <TableContainer
