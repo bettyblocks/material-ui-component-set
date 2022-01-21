@@ -84,36 +84,36 @@
     }, [isDev, helperTextResolved]);
     useEffect(() => {
       mounted.current = true;
+
+      /**
+       * @name Filter
+       * @param {Property} property
+       * @returns {Void}
+       */
+      B.defineFunction(
+        'Filter',
+        ({ event, property: propertyArg, interactionId }) => {
+          setInteractionFilter((s) => ({
+            ...s,
+            [interactionId]: {
+              property: propertyArg,
+              value: event.target ? event.target.value : event,
+            },
+          }));
+        },
+      );
+
+      B.defineFunction('ResetFilter', () => {
+        setInteractionFilter({});
+      });
+
+      B.defineFunction('Reset', () => setCurrentValue(useText(defaultValue)));
       return () => {
         if (!isDev) {
           mounted.current = false;
         }
       };
     }, []);
-
-    /**
-     * @name Filter
-     * @param {Property} property
-     * @returns {Void}
-     */
-    B.defineFunction(
-      'Filter',
-      ({ event, property: propertyArg, interactionId }) => {
-        setInteractionFilter({
-          ...interactionFilter,
-          [interactionId]: {
-            property: propertyArg,
-            value: event.target ? event.target.value : event,
-          },
-        });
-      },
-    );
-
-    B.defineFunction('ResetFilter', () => {
-      setInteractionFilter({});
-    });
-
-    B.defineFunction('Reset', () => setCurrentValue(useText(defaultValue)));
 
     const sliderInput = (
       <div className={classes.root}>

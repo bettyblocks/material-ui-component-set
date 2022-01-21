@@ -51,18 +51,20 @@
         .replace(/ ,/g, ',')
         .trim();
 
-    B.defineFunction('Show', (showMessage) => {
-      if (typeof showMessage === 'string') setTextFromServer(showMessage);
-      if (typeof showMessage === 'object' && showMessage !== null) {
-        const [errorTitle, errorMessage] = formatError(showMessage);
-        setTextFromServer(cleanUpMessage(errorMessage));
-        setTitleFromServer(errorTitle);
-      }
-      setOpen(true);
-    });
+    useEffect(() => {
+      B.defineFunction('Show', (showMessage) => {
+        if (typeof showMessage === 'string') setTextFromServer(showMessage);
+        if (typeof showMessage === 'object' && showMessage !== null) {
+          const [errorTitle, errorMessage] = formatError(showMessage);
+          setTextFromServer(cleanUpMessage(errorMessage));
+          setTitleFromServer(errorTitle);
+        }
+        setOpen(true);
+      });
 
-    B.defineFunction('Hide', () => setOpen(false));
-    B.defineFunction('Show/Hide', () => setOpen((s) => !s));
+      B.defineFunction('Hide', () => setOpen(false));
+      B.defineFunction('Show/Hide', () => setOpen((s) => !s));
+    }, []);
 
     const AlertPanel = (
       <Alert

@@ -314,29 +314,33 @@
           };
         }, [search]);
 
-        B.defineFunction('Refetch', () => refetch());
-        B.defineFunction('SetSearchValue', (event) => {
-          setSearch(event.target.value);
-        });
-
-        /**
-         * @name Filter
-         * @param {Property} property
-         * @returns {Void}
-         */
-        B.defineFunction('Filter', ({ event, property, interactionId }) => {
-          setInteractionFilter({
-            ...interactionFilter,
-            [interactionId]: {
-              property,
-              value: event.target ? event.target.value : transformValue(event),
-            },
+        useEffect(() => {
+          B.defineFunction('Refetch', () => refetch());
+          B.defineFunction('SetSearchValue', (event) => {
+            setSearch(event.target.value);
           });
-        });
 
-        B.defineFunction('ResetFilter', () => {
-          setInteractionFilter({});
-        });
+          /**
+           * @name Filter
+           * @param {Property} property
+           * @returns {Void}
+           */
+          B.defineFunction('Filter', ({ event, property, interactionId }) => {
+            setInteractionFilter((s) => ({
+              ...s,
+              [interactionId]: {
+                property,
+                value: event.target
+                  ? event.target.value
+                  : transformValue(event),
+              },
+            }));
+          });
+
+          B.defineFunction('ResetFilter', () => {
+            setInteractionFilter({});
+          });
+        }, []);
 
         const mounted = useRef(false);
 

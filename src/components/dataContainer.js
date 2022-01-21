@@ -187,33 +187,37 @@
           );
         };
 
-        B.defineFunction('setCurrentRecord', (value) => {
-          const id = Number(value);
-          if (typeof id === 'number') {
-            setOptions({
-              currentRecord: id,
-            });
-          }
-        });
-
-        /**
-         * @name Filter
-         * @param {Property} property
-         * @returns {Void}
-         */
-        B.defineFunction('Filter', ({ event, property, interactionId }) => {
-          setInteractionFilter({
-            ...interactionFilter,
-            [interactionId]: {
-              property,
-              value: event.target ? event.target.value : transformValue(event),
-            },
+        useEffect(() => {
+          B.defineFunction('setCurrentRecord', (value) => {
+            const id = Number(value);
+            if (typeof id === 'number') {
+              setOptions({
+                currentRecord: id,
+              });
+            }
           });
-        });
 
-        B.defineFunction('ResetFilter', () => {
-          setInteractionFilter({});
-        });
+          /**
+           * @name Filter
+           * @param {Property} property
+           * @returns {Void}
+           */
+          B.defineFunction('Filter', ({ event, property, interactionId }) => {
+            setInteractionFilter((s) => ({
+              ...s,
+              [interactionId]: {
+                property,
+                value: event.target
+                  ? event.target.value
+                  : transformValue(event),
+              },
+            }));
+          });
+
+          B.defineFunction('ResetFilter', () => {
+            setInteractionFilter({});
+          });
+        }, []);
 
         useEffect(() => {
           if (isDev) {
