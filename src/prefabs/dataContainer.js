@@ -100,6 +100,12 @@
     const saveAnotherPage = () => {
       if (validate()) {
         const newPrefab = { ...prefab };
+        const modelOption = newPrefab.structure[0].options.find(
+          (o) => o.key === 'model',
+        );
+        const filterOption = newPrefab.structure[0].options.find(
+          (o) => o.key === 'filter',
+        );
         const idProperty = data.model.properties.find(
           (property) => property.name === 'id',
         );
@@ -113,9 +119,9 @@
           },
         });
 
-        newPrefab.structure[0].options[0].value = anotherPageState.modelId;
+        modelOption.value = anotherPageState.modelId;
 
-        newPrefab.structure[0].options[2].value = {
+        filterOption.value = {
           [idProperty.id]: {
             eq: {
               ref: { id: '#idVariable' },
@@ -131,10 +137,13 @@
     const saveThisPage = () => {
       if (validate()) {
         const newPrefab = { ...prefab };
+        const modelOption = newPrefab.structure[0].options.find(
+          (o) => o.key === 'model',
+        );
         const idProperty = data.model.properties.find(
           (property) => property.name === 'id',
         );
-        newPrefab.structure[0].options[0].value = thisPageState.modelId;
+        modelOption.value = thisPageState.modelId;
         newPrefab.interactions.push({
           name: 'setCurrentRecord',
           sourceEvent:
@@ -161,12 +170,11 @@
     const saveLoggedInUser = () => {
       if (validate()) {
         const newPrefab = { ...prefab };
+        const authProfileOption = newPrefab.structure[0].options.find(
+          (o) => o.key === 'authProfile',
+        );
 
-        newPrefab.structure[0].options[0].value =
-          loggedInUserState.authenticationProfile.loginModel;
-
-        newPrefab.structure[0].options[3].value =
-          loggedInUserState.authenticationProfile.id;
+        authProfileOption.value = loggedInUserState.authenticationProfile.id;
 
         save(newPrefab);
       }
@@ -346,9 +354,31 @@
       options: [
         {
           value: '',
+          label: 'Authentication Profile',
+          key: 'authProfile',
+          type: 'AUTHENTICATION_PROFILE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'model',
+              comparator: 'EQ',
+              value: '',
+            },
+          },
+        },
+        {
+          value: '',
           label: 'Model',
           key: 'model',
           type: 'MODEL',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'authProfile',
+              comparator: 'EQ',
+              value: '',
+            },
+          },
         },
         {
           value: '',
@@ -371,13 +401,13 @@
           type: 'FILTER',
           configuration: {
             dependsOn: 'model',
+            condition: {
+              type: 'SHOW',
+              option: 'authProfile',
+              comparator: 'EQ',
+              value: '',
+            },
           },
-        },
-        {
-          value: '',
-          label: 'Authentication Profile',
-          key: 'authProfile',
-          type: 'AUTHENTICATION_PROFILE',
         },
         {
           value: '',

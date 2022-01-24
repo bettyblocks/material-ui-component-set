@@ -70,6 +70,15 @@
     const [rowsPerPage, setRowsPerPage] = useState(takeNum);
     const [search, setSearch] = useState('');
     const [searchTerm, setSearchTerm] = useState('');
+    const [interactionSearchTerm, setInteractionSearchTerm] = useState('');
+    const [interactionSearchProperty, setInteractionSearchProperty] =
+      useState('');
+    const [previousInteractionSearchTerm, setPreviousInteractionSearchTerm] =
+      useState('');
+    const [
+      previousInteractionSearchProperty,
+      setPreviousInteractionSearchProperty,
+    ] = useState('');
     const [showPagination, setShowPagination] = useState(false);
     const [interactionFilter, setInteractionFilter] = useState({});
     const perPageLabel = useText(labelRowsPerPage);
@@ -174,10 +183,16 @@
           value: event.target ? event.target.value : transformValue(event),
         },
       });
+      setInteractionSearchTerm(
+        event.target ? event.target.value : transformValue(event),
+      );
+      setInteractionSearchProperty(property ? property.id : '');
     });
 
     B.defineFunction('ResetFilter', () => {
       setInteractionFilter({});
+      setInteractionSearchTerm('');
+      setInteractionSearchProperty('');
     });
 
     let interactionFilters = {};
@@ -274,16 +289,22 @@
           setTotalCount(data.totalCount);
           return;
         }
-        if (searchTerm !== previousSearchTerm) {
+        if (
+          searchTerm !== previousSearchTerm ||
+          interactionSearchTerm !== previousInteractionSearchTerm ||
+          interactionSearchProperty !== previousInteractionSearchProperty
+        ) {
           setSkip(0);
           setInitialTimesFetched(0);
           setPreviousSearchTerm(searchTerm);
+          setPreviousInteractionSearchTerm(interactionSearchTerm);
+          setPreviousInteractionSearchProperty(interactionSearchProperty);
           setNewSearch(true);
         } else {
           if (
             newSearch ||
             (!autoLoadOnScroll && skipAppend.current) ||
-            pagination === 'never'
+            (pagination === 'never' && !autoLoadOnScroll)
           ) {
             setResults(data.results);
           } else {
@@ -295,7 +316,7 @@
         skipAppend.current = false;
         setTotalCount(data.totalCount);
       }
-    }, [data, searchTerm]);
+    }, [data, searchTerm, interactionSearchTerm, interactionSearchProperty]);
 
     useEffect(() => {
       const handler = setTimeout(() => {
