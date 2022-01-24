@@ -1,3 +1,28 @@
+## [1.198.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.198.0...v1.198.1) (2022-01-19)
+
+
+### Bug Fixes
+
+* dateTimePicker breaks on keyboard input ([a6ff026](https://github.com/bettyblocks/material-ui-component-set/commit/a6ff026d194b789d83fe7ed6a22fabf33394f1ef))
+
+# [1.198.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.197.0...v1.198.0) (2022-01-18)
+
+
+### Bug Fixes
+
+* first value bug ([e76a819](https://github.com/bettyblocks/material-ui-component-set/commit/e76a819edab20749f2e23ad497ada65cf9ee05dc))
+
+
+### Features
+
+* combine 400 and 500 error page templates ([fcf1243](https://github.com/bettyblocks/material-ui-component-set/commit/fcf1243159b7451d749cdd41285fe41f450f8802))
+
+
+### Reverts
+
+* Revert "fix: use UseEffect to ensure the hiddeninput value is updated" ([fb072b8](https://github.com/bettyblocks/material-ui-component-set/commit/fb072b82612c28dea99755cf53da44f1a16647df))
+* Revert "fix: ensure the hidden input is updated when the currentValue changes" ([3045e61](https://github.com/bettyblocks/material-ui-component-set/commit/3045e61eb9ffbc277f5e8be840904dcb9d20013b))
+
 # [1.197.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.196.0...v1.197.0) (2022-01-13)
 
 ### Bug Fixes
