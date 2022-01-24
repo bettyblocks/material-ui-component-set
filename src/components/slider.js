@@ -28,7 +28,7 @@
       value: defaultValue = [],
     } = customModelAttributeObj;
     const [currentValue, setCurrentValue] = useState(useText(defaultValue));
-    const [interactionFilter, setInteractionFilter] = useState({});
+    const [, setInteractionFilter] = useState({});
     const [errorState, setErrorState] = useState(error);
     const [helper, setHelper] = useState(useText(helperText));
     const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
