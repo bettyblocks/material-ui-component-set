@@ -1,3 +1,27 @@
+## [1.198.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.198.3...v1.198.4) (2022-01-24)
+
+
+### Bug Fixes
+
+* filter operator based on property kind ([918f190](https://github.com/bettyblocks/material-ui-component-set/commit/918f1907c497d0cebf3eb84e04cde3e543b4c4e9))
+
+## [1.198.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.198.2...v1.198.3) (2022-01-24)
+
+
+### Bug Fixes
+
+* disable having both model and auth profile in datacontainer ([db0c67b](https://github.com/bettyblocks/material-ui-component-set/commit/db0c67b98b68ce878ad9f049c62f4917cb6ed106))
+* just use one dataprovider in datacontainer ([27fa3cb](https://github.com/bettyblocks/material-ui-component-set/commit/27fa3cbfaf8eaf9262a8b603da9e4fd5dfa414a1))
+* remove filter condition in datacontainer runtime rendering ([083ee0a](https://github.com/bettyblocks/material-ui-component-set/commit/083ee0aed9d603c86994d55591e166795c3200bf))
+* remove filter dependency in datacontainer ([de6d29f](https://github.com/bettyblocks/material-ui-component-set/commit/de6d29fde745c3c6f4e51acd2aaea0ef880b3ade))
+
+## [1.198.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.198.1...v1.198.2) (2022-01-24)
+
+
+### Bug Fixes
+
+* rendering datatable when pagination never ([4ed7946](https://github.com/bettyblocks/material-ui-component-set/commit/4ed7946aec45352e09146e7f8d740e1b672c7b38))
+
 ## [1.198.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.198.0...v1.198.1) (2022-01-19)
 
 
