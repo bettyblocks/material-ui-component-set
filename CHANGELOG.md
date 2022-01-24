@@ -1,3 +1,10 @@
+## [1.198.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.198.1...v1.198.2) (2022-01-24)
+
+
+### Bug Fixes
+
+* rendering datatable when pagination never ([4ed7946](https://github.com/bettyblocks/material-ui-component-set/commit/4ed7946aec45352e09146e7f8d740e1b672c7b38))
+
 ## [1.198.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.198.0...v1.198.1) (2022-01-19)
 
 
