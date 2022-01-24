@@ -27,13 +27,15 @@
     const [opacity, setOpacity] = useState(opac);
     const [interactionBackground, setInteractionBackground] = useState('');
 
-    B.defineFunction('setCustomBackgroundImage', (url) => {
-      setInteractionBackground(`url("${url}")`);
-    });
+    useEffect(() => {
+      B.defineFunction('setCustomBackgroundImage', (url) => {
+        setInteractionBackground(`url("${url}")`);
+      });
 
-    B.defineFunction('removeCustomBackgroundImage', () => {
-      setInteractionBackground('');
-    });
+      B.defineFunction('removeCustomBackgroundImage', () => {
+        setInteractionBackground('');
+      });
+    }, []);
 
     const boxOptions = {
       display: isFlex && 'flex',

@@ -30,13 +30,15 @@
       setImgUrl(imageSourceText);
     }, [imageSourceText]);
 
-    B.defineFunction('SetCustomImage', (url) => {
-      setImgUrl(url);
-    });
+    useEffect(() => {
+      B.defineFunction('SetCustomImage', (url) => {
+        setImgUrl(url);
+      });
 
-    B.defineFunction('RemoveCustomImage', () => {
-      setImgUrl(imageSourceText);
-    });
+      B.defineFunction('RemoveCustomImage', () => {
+        setImgUrl(imageSourceText);
+      });
+    }, []);
 
     const isImage = type === 'img' && imgUrl;
     const isVideo = type === 'video' && videoUrl;
