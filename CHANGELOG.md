@@ -1,3 +1,13 @@
+## [1.198.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.198.2...v1.198.3) (2022-01-24)
+
+
+### Bug Fixes
+
+* disable having both model and auth profile in datacontainer ([db0c67b](https://github.com/bettyblocks/material-ui-component-set/commit/db0c67b98b68ce878ad9f049c62f4917cb6ed106))
+* just use one dataprovider in datacontainer ([27fa3cb](https://github.com/bettyblocks/material-ui-component-set/commit/27fa3cbfaf8eaf9262a8b603da9e4fd5dfa414a1))
+* remove filter condition in datacontainer runtime rendering ([083ee0a](https://github.com/bettyblocks/material-ui-component-set/commit/083ee0aed9d603c86994d55591e166795c3200bf))
+* remove filter dependency in datacontainer ([de6d29f](https://github.com/bettyblocks/material-ui-component-set/commit/de6d29fde745c3c6f4e51acd2aaea0ef880b3ade))
+
 ## [1.198.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.198.1...v1.198.2) (2022-01-24)
 
 
