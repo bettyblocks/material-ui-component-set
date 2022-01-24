@@ -377,7 +377,9 @@
       }
     }, [files]);
 
-    B.defineFunction('clearFileUpload', (e) => clearFiles(e));
+    useEffect(() => {
+      B.defineFunction('clearFileUpload', (e) => clearFiles(e));
+    }, []);
 
     return isDev ? (
       <div>

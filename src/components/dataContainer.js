@@ -116,39 +116,41 @@
         const completeFilter = deepMerge(selectedFilter, interactionFilters);
         const where = useFilter(completeFilter);
 
-        B.defineFunction('setCurrentRecord', (value) => {
-          const id = Number(value);
-          if (typeof id === 'number') {
-            setOptions({
-              currentRecord: id,
-            });
-          }
-        });
-
-        /**
-         * @name Filter
-         * @param {Property} property
-         * @returns {Void}
-         */
-        B.defineFunction('Filter', ({ event, property, interactionId }) => {
-          setInteractionFilter({
-            ...interactionFilter,
-            [interactionId]: {
-              property,
-              value: event.target ? event.target.value : transformValue(event),
-            },
-          });
-        });
-
-        B.defineFunction('ResetFilter', () => {
-          setInteractionFilter({});
-        });
-
         useEffect(() => {
           if (isDev) {
             B.defineFunction('Refetch', () => {});
           }
-        });
+
+          B.defineFunction('setCurrentRecord', (value) => {
+            const id = Number(value);
+            if (typeof id === 'number') {
+              setOptions({
+                currentRecord: id,
+              });
+            }
+          });
+
+          /**
+           * @name Filter
+           * @param {Property} property
+           * @returns {Void}
+           */
+          B.defineFunction('Filter', ({ event, property, interactionId }) => {
+            setInteractionFilter({
+              ...interactionFilter,
+              [interactionId]: {
+                property,
+                value: event.target
+                  ? event.target.value
+                  : transformValue(event),
+              },
+            });
+          });
+
+          B.defineFunction('ResetFilter', () => {
+            setInteractionFilter({});
+          });
+        }, []);
 
         const DataContainer = (
           <div data-component={dataComponentAttributeText}>{children}</div>
