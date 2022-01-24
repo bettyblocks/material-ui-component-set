@@ -1,3 +1,10 @@
+## [1.198.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.198.3...v1.198.4) (2022-01-24)
+
+
+### Bug Fixes
+
+* filter operator based on property kind ([918f190](https://github.com/bettyblocks/material-ui-component-set/commit/918f1907c497d0cebf3eb84e04cde3e543b4c4e9))
+
 ## [1.198.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.198.2...v1.198.3) (2022-01-24)
 
 
