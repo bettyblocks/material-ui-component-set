@@ -644,7 +644,7 @@
           {hasToolbar && (
             <Toolbar ref={toolbarRef} classes={{ root: classes.toolbar }}>
               {titleText && <span className={classes.title}>{titleText}</span>}
-              {searchProperty && !hideSearch && (
+              {searchProperty && searchProperty.id && !hideSearch && (
                 <TextField
                   classes={{ root: classes.searchField }}
                   placeholder={`${useText(
