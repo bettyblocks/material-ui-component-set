@@ -150,7 +150,7 @@
           B.defineFunction('ResetFilter', () => {
             setInteractionFilter({});
           });
-        }, []);
+        });
 
         const DataContainer = (
           <div data-component={dataComponentAttributeText}>{children}</div>
