@@ -15,9 +15,11 @@
       setIsVisible(visible);
     }, []);
 
-    B.defineFunction('Hide', () => setIsVisible(false));
-    B.defineFunction('Show', () => setIsVisible(true));
-    B.defineFunction('Show/Hide', () => setIsVisible((s) => !s));
+    useEffect(() => {
+      B.defineFunction('Hide', () => setIsVisible(false));
+      B.defineFunction('Show', () => setIsVisible(true));
+      B.defineFunction('Show/Hide', () => setIsVisible((s) => !s));
+    }, []);
 
     const ColumnComponent = (
       <div

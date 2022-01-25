@@ -50,9 +50,6 @@
         }, [isDev, filter, currentRecord, model]);
 
         const selectedFilter = getFilter();
-        const hasFilter =
-          (selectedFilter && Object.keys(selectedFilter).length > 0) ||
-          Object.keys(interactionFilter).length > 0;
         const history = isDev ? null : useHistory();
 
         const redirect = () => {
@@ -119,7 +116,86 @@
         const completeFilter = deepMerge(selectedFilter, interactionFilters);
         const where = useFilter(completeFilter);
 
-        const DataContainer = function () {
+        useEffect(() => {
+          B.defineFunction('setCurrentRecord', (value) => {
+            const id = Number(value);
+            if (typeof id === 'number') {
+              setOptions({
+                currentRecord: id,
+              });
+            }
+          });
+
+          /**
+           * @name Filter
+           * @param {Property} property
+           * @returns {Void}
+           */
+          B.defineFunction('Filter', ({ event, property, interactionId }) => {
+            setInteractionFilter((s) => ({
+              ...s,
+              [interactionId]: {
+                property,
+                value: event.target
+                  ? event.target.value
+                  : transformValue(event),
+              },
+            }));
+          });
+
+          B.defineFunction('ResetFilter', () => {
+            setInteractionFilter({});
+          });
+
+          if (isDev) {
+            B.defineFunction('Refetch', () => {});
+          }
+        }, []);
+
+        const DataContainer = (
+          <div data-component={dataComponentAttributeText}>{children}</div>
+        );
+
+        const Wrapper = (
+          <div
+            className={[
+              isEmpty ? classes.empty : '',
+              isPristine ? classes.pristine : '',
+            ].join(' ')}
+            data-component={useText(dataComponentAttribute) || 'DataContainer'}
+          >
+            {isPristine
+              ? 'Drag a component in the data container to display the data'
+              : children}
+          </div>
+        );
+
+        if (isDev) {
+          return Wrapper;
+        }
+
+        if (authProfile) {
+          return (
+            <GetMe authenticationProfileId={authProfile}>
+              {({ error, loading, data }) => {
+                if (loading) {
+                  B.triggerEvent('onUserLoad');
+                }
+                if (error) {
+                  B.triggerEvent('onUserError', error);
+                }
+                if (data && data.id) {
+                  B.triggerEvent('onUserSuccess', data);
+                } else {
+                  B.triggerEvent('onNoUserResults');
+                }
+                return DataContainer;
+              }}
+            </GetMe>
+          );
+        }
+
+        if (model) {
           return (
             <GetOne
               modelId={model}
@@ -176,98 +252,13 @@
                 if (!data && redirectWithoutResult) {
                   redirect();
                 }
-
-                return (
-                  <div data-component={dataComponentAttributeText}>
-                    {children}
-                  </div>
-                );
+                return DataContainer;
               }}
             </GetOne>
           );
-        };
-
-        B.defineFunction('setCurrentRecord', (value) => {
-          const id = Number(value);
-          if (typeof id === 'number') {
-            setOptions({
-              currentRecord: id,
-            });
-          }
-        });
-
-        /**
-         * @name Filter
-         * @param {Property} property
-         * @returns {Void}
-         */
-        B.defineFunction('Filter', ({ event, property, interactionId }) => {
-          setInteractionFilter({
-            ...interactionFilter,
-            [interactionId]: {
-              property,
-              value: event.target ? event.target.value : transformValue(event),
-            },
-          });
-        });
-
-        B.defineFunction('ResetFilter', () => {
-          setInteractionFilter({});
-        });
-
-        useEffect(() => {
-          if (isDev) {
-            B.defineFunction('Refetch', () => {});
-          }
-        });
-
-        const Wrapper = (
-          <div
-            className={[
-              isEmpty ? classes.empty : '',
-              isPristine ? classes.pristine : '',
-            ].join(' ')}
-            data-component={useText(dataComponentAttribute) || 'DataContainer'}
-          >
-            {isPristine
-              ? 'Drag a component in the data container to display the data'
-              : children}
-          </div>
-        );
-
-        if (isDev) {
-          return Wrapper;
         }
 
-        const CanvasLayout = function () {
-          if (!hasFilter) {
-            return Wrapper;
-          }
-          return <DataContainer />;
-        };
-
-        if (authProfile) {
-          return (
-            <GetMe authenticationProfileId={authProfile}>
-              {({ error, loading, data }) => {
-                if (loading) {
-                  B.triggerEvent('onUserLoad');
-                }
-                if (error) {
-                  B.triggerEvent('onUserError', error);
-                }
-                if (data && data.id) {
-                  B.triggerEvent('onUserSuccess', data);
-                } else {
-                  B.triggerEvent('onNoUserResults');
-                }
-                return <CanvasLayout />;
-              }}
-            </GetMe>
-          );
-        }
-
-        return <CanvasLayout />;
+        return DataContainer;
       })()}
     </div>
   ),

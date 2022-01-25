@@ -76,9 +76,11 @@
       handleValidation(isValid);
     };
 
-    B.defineFunction('Enable', () => setIsDisabled(false));
-    B.defineFunction('Disable', () => setIsDisabled(true));
-    B.defineFunction('Reset', () => setChecked(componentChecked === 'true'));
+    useEffect(() => {
+      B.defineFunction('Enable', () => setIsDisabled(false));
+      B.defineFunction('Disable', () => setIsDisabled(true));
+      B.defineFunction('Reset', () => setChecked(componentChecked === 'true'));
+    }, [componentChecked]);
 
     useEffect(() => {
       if (checked) {
