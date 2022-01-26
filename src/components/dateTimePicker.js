@@ -91,8 +91,18 @@
         let datevalue = selectedDate;
         if (type === 'date') {
           datevalue = convertToDate(selectedDate);
+          B.triggerEvent('onChange', datevalue);
+          return;
         }
-        B.triggerEvent('onChange', datevalue);
+
+        if (!datevalue) {
+          B.triggerEvent('onChange', '');
+          return;
+        }
+
+        if (DateFns.isValid(datevalue)) {
+          B.triggerEvent('onChange', datevalue);
+        }
       }
     }, [selectedDate]);
 

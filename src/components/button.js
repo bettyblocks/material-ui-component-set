@@ -100,14 +100,14 @@
       [isDisabled],
     );
 
-    B.defineFunction('Show', () => setIsVisible(true));
-    B.defineFunction('Hide', () => setIsVisible(false));
-    B.defineFunction('Show/Hide', () => setIsVisible((s) => !s));
-    B.defineFunction('Toggle loading state', () => setIsLoading((s) => !s));
-    B.defineFunction('Enable', () => setIsDisabled(false));
-    B.defineFunction('Disable', () => setIsDisabled(true));
-
     useEffect(() => {
+      B.defineFunction('Show', () => setIsVisible(true));
+      B.defineFunction('Hide', () => setIsVisible(false));
+      B.defineFunction('Show/Hide', () => setIsVisible((s) => !s));
+      B.defineFunction('Toggle loading state', () => setIsLoading((s) => !s));
+      B.defineFunction('Enable', () => setIsDisabled(false));
+      B.defineFunction('Disable', () => setIsDisabled(true));
+
       if (loading) {
         B.triggerEvent('onActionLoad', loading);
       }

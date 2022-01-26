@@ -489,10 +489,10 @@
         }
 
         return (
-          results.find((result) =>
-            result[valueProp.name] === valuePropIsNumber
-              ? parseInt(prev, 10)
-              : prev,
+          results.find(
+            (result) =>
+              result[valueProp.name] &&
+              prev[valueProp.name] === result[valueProp.name],
           ) || ''
         );
       });
@@ -749,7 +749,6 @@
 
     const MuiAutocomplete = (
       <Autocomplete
-        autoSelect={freeSolo}
         disableCloseOnSelect={!closeOnSelect}
         disabled={disabled}
         freeSolo={freeSolo}
