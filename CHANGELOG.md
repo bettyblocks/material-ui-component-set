@@ -1,3 +1,25 @@
+# [1.199.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.198.6...v1.199.0) (2022-01-26)
+
+
+### Features
+
+* create variable in right context in datacontainer ([8eda37e](https://github.com/bettyblocks/material-ui-component-set/commit/8eda37ee599b09583b69213780af59b59f3aaf80))
+
+## [1.198.6](https://github.com/bettyblocks/material-ui-component-set/compare/v1.198.5...v1.198.6) (2022-01-25)
+
+
+### Bug Fixes
+
+* dialog no showing when inside datacontainer ([c783cf8](https://github.com/bettyblocks/material-ui-component-set/commit/c783cf8fb0150f80081ac57ad57461a39fa8ffff))
+
+## [1.198.5](https://github.com/bettyblocks/material-ui-component-set/compare/v1.198.4...v1.198.5) (2022-01-24)
+
+
+### Bug Fixes
+
+* lint unused variable ([df942e9](https://github.com/bettyblocks/material-ui-component-set/commit/df942e9889a7f2d3359c24f22082c545223dafc2))
+* move custom functions under useEffect ([8ae2620](https://github.com/bettyblocks/material-ui-component-set/commit/8ae2620ad9a5cb560c7ff91aaa31be8a06b8d517))
+
 ## [1.198.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.198.3...v1.198.4) (2022-01-24)
 
 
