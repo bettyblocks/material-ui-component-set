@@ -1,3 +1,74 @@
+# [1.199.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.198.6...v1.199.0) (2022-01-26)
+
+
+### Features
+
+* create variable in right context in datacontainer ([8eda37e](https://github.com/bettyblocks/material-ui-component-set/commit/8eda37ee599b09583b69213780af59b59f3aaf80))
+
+## [1.198.6](https://github.com/bettyblocks/material-ui-component-set/compare/v1.198.5...v1.198.6) (2022-01-25)
+
+
+### Bug Fixes
+
+* dialog no showing when inside datacontainer ([c783cf8](https://github.com/bettyblocks/material-ui-component-set/commit/c783cf8fb0150f80081ac57ad57461a39fa8ffff))
+
+## [1.198.5](https://github.com/bettyblocks/material-ui-component-set/compare/v1.198.4...v1.198.5) (2022-01-24)
+
+
+### Bug Fixes
+
+* lint unused variable ([df942e9](https://github.com/bettyblocks/material-ui-component-set/commit/df942e9889a7f2d3359c24f22082c545223dafc2))
+* move custom functions under useEffect ([8ae2620](https://github.com/bettyblocks/material-ui-component-set/commit/8ae2620ad9a5cb560c7ff91aaa31be8a06b8d517))
+
+## [1.198.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.198.3...v1.198.4) (2022-01-24)
+
+
+### Bug Fixes
+
+* filter operator based on property kind ([918f190](https://github.com/bettyblocks/material-ui-component-set/commit/918f1907c497d0cebf3eb84e04cde3e543b4c4e9))
+
+## [1.198.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.198.2...v1.198.3) (2022-01-24)
+
+
+### Bug Fixes
+
+* disable having both model and auth profile in datacontainer ([db0c67b](https://github.com/bettyblocks/material-ui-component-set/commit/db0c67b98b68ce878ad9f049c62f4917cb6ed106))
+* just use one dataprovider in datacontainer ([27fa3cb](https://github.com/bettyblocks/material-ui-component-set/commit/27fa3cbfaf8eaf9262a8b603da9e4fd5dfa414a1))
+* remove filter condition in datacontainer runtime rendering ([083ee0a](https://github.com/bettyblocks/material-ui-component-set/commit/083ee0aed9d603c86994d55591e166795c3200bf))
+* remove filter dependency in datacontainer ([de6d29f](https://github.com/bettyblocks/material-ui-component-set/commit/de6d29fde745c3c6f4e51acd2aaea0ef880b3ade))
+
+## [1.198.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.198.1...v1.198.2) (2022-01-24)
+
+
+### Bug Fixes
+
+* rendering datatable when pagination never ([4ed7946](https://github.com/bettyblocks/material-ui-component-set/commit/4ed7946aec45352e09146e7f8d740e1b672c7b38))
+
+## [1.198.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.198.0...v1.198.1) (2022-01-19)
+
+
+### Bug Fixes
+
+* dateTimePicker breaks on keyboard input ([a6ff026](https://github.com/bettyblocks/material-ui-component-set/commit/a6ff026d194b789d83fe7ed6a22fabf33394f1ef))
+
+# [1.198.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.197.0...v1.198.0) (2022-01-18)
+
+
+### Bug Fixes
+
+* first value bug ([e76a819](https://github.com/bettyblocks/material-ui-component-set/commit/e76a819edab20749f2e23ad497ada65cf9ee05dc))
+
+
+### Features
+
+* combine 400 and 500 error page templates ([fcf1243](https://github.com/bettyblocks/material-ui-component-set/commit/fcf1243159b7451d749cdd41285fe41f450f8802))
+
+
+### Reverts
+
+* Revert "fix: use UseEffect to ensure the hiddeninput value is updated" ([fb072b8](https://github.com/bettyblocks/material-ui-component-set/commit/fb072b82612c28dea99755cf53da44f1a16647df))
+* Revert "fix: ensure the hidden input is updated when the currentValue changes" ([3045e61](https://github.com/bettyblocks/material-ui-component-set/commit/3045e61eb9ffbc277f5e8be840904dcb9d20013b))
+
 # [1.197.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.196.0...v1.197.0) (2022-01-13)
 
 ### Bug Fixes
