@@ -82,7 +82,9 @@
         <Footer
           onSave={() => {
             const newPrefab = { ...prefab };
-
+            const modelOption = newPrefab.structure[0].options.find(
+              (o) => o.key === 'model',
+            );
             const variableName = `${camelToSnakeCase(data.model.label)}_id`;
             newPrefab.variables.push({
               kind: 'integer',
@@ -92,7 +94,7 @@
                 id: '#idVariable',
               },
             });
-            newPrefab.structure[0].options[0].value = modelId;
+            modelOption.value = modelId;
 
             if (!sideBySide) {
               newPrefab.structure[0].descendants[0].descendants.push({
@@ -1504,9 +1506,31 @@
       options: [
         {
           value: '',
+          label: 'Authentication Profile',
+          key: 'authProfile',
+          type: 'AUTHENTICATION_PROFILE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'model',
+              comparator: 'EQ',
+              value: '',
+            },
+          },
+        },
+        {
+          value: '',
           label: 'Model',
           key: 'model',
           type: 'MODEL',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'authProfile',
+              comparator: 'EQ',
+              value: '',
+            },
+          },
         },
         {
           value: '',
@@ -1529,13 +1553,13 @@
           type: 'FILTER',
           configuration: {
             dependsOn: 'model',
+            condition: {
+              type: 'SHOW',
+              option: 'authProfile',
+              comparator: 'EQ',
+              value: '',
+            },
           },
-        },
-        {
-          value: '',
-          label: 'Authentication Profile',
-          key: 'authProfile',
-          type: 'AUTHENTICATION_PROFILE',
         },
         {
           value: '',

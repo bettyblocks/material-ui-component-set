@@ -162,9 +162,11 @@
     const ConditionalGrid = <Hidden only={only}>{GridComp}</Hidden>;
     const RuntimeCmp = isVisible ? ConditionalGrid : <></>;
 
-    B.defineFunction('Show', () => setIsVisible(true));
-    B.defineFunction('Hide', () => setIsVisible(false));
-    B.defineFunction('Show/Hide', () => setIsVisible((s) => !s));
+    useEffect(() => {
+      B.defineFunction('Show', () => setIsVisible(true));
+      B.defineFunction('Hide', () => setIsVisible(false));
+      B.defineFunction('Show/Hide', () => setIsVisible((s) => !s));
+    }, []);
 
     return isDev ? (
       <div

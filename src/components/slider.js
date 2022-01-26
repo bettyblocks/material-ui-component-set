@@ -28,7 +28,7 @@
       value: defaultValue = [],
     } = customModelAttributeObj;
     const [currentValue, setCurrentValue] = useState(useText(defaultValue));
-    const [interactionFilter, setInteractionFilter] = useState({});
+    const [, setInteractionFilter] = useState({});
     const [errorState, setErrorState] = useState(error);
     const [helper, setHelper] = useState(useText(helperText));
     const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
@@ -84,36 +84,36 @@
     }, [isDev, helperTextResolved]);
     useEffect(() => {
       mounted.current = true;
+
+      /**
+       * @name Filter
+       * @param {Property} property
+       * @returns {Void}
+       */
+      B.defineFunction(
+        'Filter',
+        ({ event, property: propertyArg, interactionId }) => {
+          setInteractionFilter((s) => ({
+            ...s,
+            [interactionId]: {
+              property: propertyArg,
+              value: event.target ? event.target.value : event,
+            },
+          }));
+        },
+      );
+
+      B.defineFunction('ResetFilter', () => {
+        setInteractionFilter({});
+      });
+
+      B.defineFunction('Reset', () => setCurrentValue(useText(defaultValue)));
       return () => {
         if (!isDev) {
           mounted.current = false;
         }
       };
     }, []);
-
-    /**
-     * @name Filter
-     * @param {Property} property
-     * @returns {Void}
-     */
-    B.defineFunction(
-      'Filter',
-      ({ event, property: propertyArg, interactionId }) => {
-        setInteractionFilter({
-          ...interactionFilter,
-          [interactionId]: {
-            property: propertyArg,
-            value: event.target ? event.target.value : event,
-          },
-        });
-      },
-    );
-
-    B.defineFunction('ResetFilter', () => {
-      setInteractionFilter({});
-    });
-
-    B.defineFunction('Reset', () => setCurrentValue(useText(defaultValue)));
 
     const sliderInput = (
       <div className={classes.root}>

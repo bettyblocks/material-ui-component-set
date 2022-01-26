@@ -1,3 +1,49 @@
+# [1.199.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.198.6...v1.199.0) (2022-01-26)
+
+
+### Features
+
+* create variable in right context in datacontainer ([8eda37e](https://github.com/bettyblocks/material-ui-component-set/commit/8eda37ee599b09583b69213780af59b59f3aaf80))
+
+## [1.198.6](https://github.com/bettyblocks/material-ui-component-set/compare/v1.198.5...v1.198.6) (2022-01-25)
+
+
+### Bug Fixes
+
+* dialog no showing when inside datacontainer ([c783cf8](https://github.com/bettyblocks/material-ui-component-set/commit/c783cf8fb0150f80081ac57ad57461a39fa8ffff))
+
+## [1.198.5](https://github.com/bettyblocks/material-ui-component-set/compare/v1.198.4...v1.198.5) (2022-01-24)
+
+
+### Bug Fixes
+
+* lint unused variable ([df942e9](https://github.com/bettyblocks/material-ui-component-set/commit/df942e9889a7f2d3359c24f22082c545223dafc2))
+* move custom functions under useEffect ([8ae2620](https://github.com/bettyblocks/material-ui-component-set/commit/8ae2620ad9a5cb560c7ff91aaa31be8a06b8d517))
+
+## [1.198.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.198.3...v1.198.4) (2022-01-24)
+
+
+### Bug Fixes
+
+* filter operator based on property kind ([918f190](https://github.com/bettyblocks/material-ui-component-set/commit/918f1907c497d0cebf3eb84e04cde3e543b4c4e9))
+
+## [1.198.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.198.2...v1.198.3) (2022-01-24)
+
+
+### Bug Fixes
+
+* disable having both model and auth profile in datacontainer ([db0c67b](https://github.com/bettyblocks/material-ui-component-set/commit/db0c67b98b68ce878ad9f049c62f4917cb6ed106))
+* just use one dataprovider in datacontainer ([27fa3cb](https://github.com/bettyblocks/material-ui-component-set/commit/27fa3cbfaf8eaf9262a8b603da9e4fd5dfa414a1))
+* remove filter condition in datacontainer runtime rendering ([083ee0a](https://github.com/bettyblocks/material-ui-component-set/commit/083ee0aed9d603c86994d55591e166795c3200bf))
+* remove filter dependency in datacontainer ([de6d29f](https://github.com/bettyblocks/material-ui-component-set/commit/de6d29fde745c3c6f4e51acd2aaea0ef880b3ade))
+
+## [1.198.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.198.1...v1.198.2) (2022-01-24)
+
+
+### Bug Fixes
+
+* rendering datatable when pagination never ([4ed7946](https://github.com/bettyblocks/material-ui-component-set/commit/4ed7946aec45352e09146e7f8d740e1b672c7b38))
+
 ## [1.198.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.198.0...v1.198.1) (2022-01-19)
 
 
