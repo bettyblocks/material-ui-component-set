@@ -627,6 +627,7 @@
               event &&
               (event.type === 'change' || event.type === 'keydown')
             ) {
+              setValue(newValue);
               setInputValue(newValue);
             } else if (event && event.type === 'click') {
               setInputValue(newValue);
