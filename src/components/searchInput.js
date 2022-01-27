@@ -90,6 +90,9 @@
     const helperTextResolved = useText(helperTextRaw);
 
     const validationMessage = (validityObject) => {
+      if (!validityObject) {
+        return '';
+      }
       if (validityObject.customError && patternMismatchMessage) {
         return patternMismatchMessage;
       }
@@ -118,7 +121,9 @@
     };
 
     const handleValidation = (validation) => {
-      setErrorState(!validation.valid);
+      if (validation) {
+        setErrorState(!validation.valid);
+      }
       const message = validationMessage(validation) || helperTextResolved;
       setHelper(message);
     };
@@ -571,7 +576,11 @@
     // In the first render we want to make sure to convert the default value
     if (!inputValue && currentValue) {
       setValue(currentValue);
-      setInputValue(currentValue[searchProp.name].toString());
+      if (typeof currentValue === 'object') {
+        setInputValue(currentValue[searchProp.name].toString());
+      } else {
+        setInputValue(currentValue);
+      }
     }
 
     const renderLabel = (option) => {
