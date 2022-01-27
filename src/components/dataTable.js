@@ -128,7 +128,8 @@
     );
 
     const titleText = useText(title);
-    const hasToolbar = titleText || (searchProperty && !hideSearch);
+    const hasSearchProperty = searchProperty && searchProperty.id;
+    const hasToolbar = titleText || (hasSearchProperty && !hideSearch);
     const elevationLevel = variant === 'flat' ? 0 : elevation;
     const hasLink = linkTo && linkTo.id !== '';
     const toolbarRef = React.createRef();
@@ -644,7 +645,7 @@
           {hasToolbar && (
             <Toolbar ref={toolbarRef} classes={{ root: classes.toolbar }}>
               {titleText && <span className={classes.title}>{titleText}</span>}
-              {searchProperty && searchProperty.id && !hideSearch && (
+              {hasSearchProperty && !hideSearch && (
                 <TextField
                   classes={{ root: classes.searchField }}
                   placeholder={`${useText(
