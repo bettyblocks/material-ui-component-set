@@ -116,20 +116,6 @@
           },
         },
         {
-          value: ['This value is too long'],
-          label: 'Value too long message',
-          key: 'validationTooLong',
-          type: 'VARIABLE',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'validationOptions',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
-        },
-        {
           label: 'Option type',
           key: 'optionType',
           value: 'model',
