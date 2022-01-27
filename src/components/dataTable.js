@@ -70,7 +70,6 @@
     const [rowsPerPage, setRowsPerPage] = useState(takeNum);
     const [search, setSearch] = useState('');
     const [searchTerm, setSearchTerm] = useState('');
-    const [showToolbar, setShowToolbar] = useState(true);
     const [showPagination, setShowPagination] = useState(false);
     const [interactionFilter, setInteractionFilter] = useState({});
     const perPageLabel = useText(labelRowsPerPage);
@@ -120,8 +119,8 @@
     );
 
     const titleText = useText(title);
-    const hasSearchProperty = !!searchProperty && searchProperty.id;
-    const hasToolbar = titleText || !hideSearch;
+    const hasSearchProperty = searchProperty && searchProperty.id;
+    const hasToolbar = titleText || (hasSearchProperty && !hideSearch);
     const elevationLevel = variant === 'flat' ? 0 : elevation;
     const hasLink = linkTo && linkTo.id !== '';
     const toolbarRef = React.createRef();
@@ -608,12 +607,6 @@
       }
     }, [showPagination, hasToolbar]);
 
-    useEffect(() => {
-      if (!titleText && !hasSearchProperty) {
-        setShowToolbar(false);
-      }
-    }, [hasSearchProperty, titleText]);
-
     return (
       <div
         className={classes.root}
@@ -625,10 +618,10 @@
           variant={variant}
           elevation={elevationLevel}
         >
-          {showToolbar && (
+          {hasToolbar && (
             <Toolbar ref={toolbarRef} classes={{ root: classes.toolbar }}>
               {titleText && <span className={classes.title}>{titleText}</span>}
-              {!hideSearch && hasSearchProperty && (
+              {hasSearchProperty && !hideSearch && (
                 <TextField
                   classes={{ root: classes.searchField }}
                   placeholder={`${useText(
