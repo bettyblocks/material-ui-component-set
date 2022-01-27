@@ -3641,7 +3641,7 @@
                                         value: modelId,
                                         label: 'Model',
                                         key: 'model',
-                                        type: 'MODEL',
+                                        type: 'MODEL_AND_RELATION',
                                       },
                                       {
                                         value: {},
@@ -4085,10 +4085,32 @@
                                     },
                                     options: [
                                       {
+                                        value: '',
+                                        label: 'Authentication Profile',
+                                        key: 'authProfile',
+                                        type: 'AUTHENTICATION_PROFILE',
+                                        configuration: {
+                                          condition: {
+                                            type: 'SHOW',
+                                            option: 'model',
+                                            comparator: 'EQ',
+                                            value: '',
+                                          },
+                                        },
+                                      },
+                                      {
                                         value: modelId,
                                         label: 'Model',
                                         key: 'model',
                                         type: 'MODEL',
+                                        configuration: {
+                                          condition: {
+                                            type: 'SHOW',
+                                            option: 'authProfile',
+                                            comparator: 'EQ',
+                                            value: '',
+                                          },
+                                        },
                                       },
                                       {
                                         value: '',
@@ -4111,13 +4133,13 @@
                                         type: 'FILTER',
                                         configuration: {
                                           dependsOn: 'model',
+                                          condition: {
+                                            type: 'SHOW',
+                                            option: 'authProfile',
+                                            comparator: 'EQ',
+                                            value: '',
+                                          },
                                         },
-                                      },
-                                      {
-                                        value: '',
-                                        label: 'Authentication Profile',
-                                        key: 'authProfile',
-                                        type: 'AUTHENTICATION_PROFILE',
                                       },
                                       {
                                         value: '',
@@ -4396,6 +4418,26 @@
                                                             {
                                                               name: 'External page',
                                                               value: 'external',
+                                                            },
+                                                          ],
+                                                        },
+                                                      },
+                                                      {
+                                                        value: '_self',
+                                                        label: 'Open in',
+                                                        key: 'linkTarget',
+                                                        type: 'CUSTOM',
+                                                        configuration: {
+                                                          as: 'BUTTONGROUP',
+                                                          dataType: 'string',
+                                                          allowedInput: [
+                                                            {
+                                                              name: 'Current Tab',
+                                                              value: '_self',
+                                                            },
+                                                            {
+                                                              name: 'New Tab',
+                                                              value: '_blank',
                                                             },
                                                           ],
                                                         },
@@ -5035,6 +5077,20 @@
                                 },
                               },
                               {
+                                value: '_self',
+                                label: 'Open in',
+                                key: 'linkTarget',
+                                type: 'CUSTOM',
+                                configuration: {
+                                  as: 'BUTTONGROUP',
+                                  dataType: 'string',
+                                  allowedInput: [
+                                    { name: 'Current Tab', value: '_self' },
+                                    { name: 'New Tab', value: '_blank' },
+                                  ],
+                                },
+                              },
+                              {
                                 value: '',
                                 label: 'Page',
                                 key: 'linkTo',
@@ -5513,6 +5569,20 @@
                         },
                       },
                       {
+                        value: '_self',
+                        label: 'Open in',
+                        key: 'linkTarget',
+                        type: 'CUSTOM',
+                        configuration: {
+                          as: 'BUTTONGROUP',
+                          dataType: 'string',
+                          allowedInput: [
+                            { name: 'Current Tab', value: '_self' },
+                            { name: 'New Tab', value: '_blank' },
+                          ],
+                        },
+                      },
+                      {
                         value: '',
                         label: 'Page',
                         key: 'linkTo',
@@ -5850,6 +5920,20 @@
                                   name: 'External page',
                                   value: 'external',
                                 },
+                              ],
+                            },
+                          },
+                          {
+                            value: '_self',
+                            label: 'Open in',
+                            key: 'linkTarget',
+                            type: 'CUSTOM',
+                            configuration: {
+                              as: 'BUTTONGROUP',
+                              dataType: 'string',
+                              allowedInput: [
+                                { name: 'Current Tab', value: '_self' },
+                                { name: 'New Tab', value: '_blank' },
                               ],
                             },
                           },

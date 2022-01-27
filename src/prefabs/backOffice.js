@@ -1817,6 +1817,20 @@
                     },
                   },
                   {
+                    value: '_self',
+                    label: 'Open in',
+                    key: 'linkTarget',
+                    type: 'CUSTOM',
+                    configuration: {
+                      as: 'BUTTONGROUP',
+                      dataType: 'string',
+                      allowedInput: [
+                        { name: 'Current Tab', value: '_self' },
+                        { name: 'New Tab', value: '_blank' },
+                      ],
+                    },
+                  },
+                  {
                     value: '',
                     label: 'Page',
                     key: 'linkTo',
@@ -2364,6 +2378,20 @@
                           },
                         },
                         {
+                          value: '_self',
+                          label: 'Open in',
+                          key: 'linkTarget',
+                          type: 'CUSTOM',
+                          configuration: {
+                            as: 'BUTTONGROUP',
+                            dataType: 'string',
+                            allowedInput: [
+                              { name: 'Current Tab', value: '_self' },
+                              { name: 'New Tab', value: '_blank' },
+                            ],
+                          },
+                        },
+                        {
                           value: '',
                           label: 'Page',
                           key: 'linkTo',
@@ -2504,12 +2532,6 @@
                   },
                 },
                 {
-                  value: true,
-                  label: 'Autocomplete',
-                  key: 'autoComplete',
-                  type: 'TOGGLE',
-                },
-                {
                   value: false,
                   label: 'Validation options',
                   key: 'validationOptions',
@@ -2615,6 +2637,18 @@
                   },
                 },
                 {
+                  value: true,
+                  label: 'Spellcheck',
+                  key: 'spellCheck',
+                  type: 'TOGGLE',
+                },
+                {
+                  value: true,
+                  label: 'Autocomplete',
+                  key: 'autoComplete',
+                  type: 'TOGGLE',
+                },
+                {
                   type: 'TOGGLE',
                   label: 'Disabled',
                   key: 'disabled',
@@ -2641,14 +2675,8 @@
                     as: 'BUTTONGROUP',
                     dataType: 'string',
                     allowedInput: [
-                      {
-                        name: 'Standard',
-                        value: 'standard',
-                      },
-                      {
-                        name: 'Outlined',
-                        value: 'outlined',
-                      },
+                      { name: 'Standard', value: 'standard' },
+                      { name: 'Outlined', value: 'outlined' },
                       { name: 'Filled', value: 'filled' },
                     ],
                   },
@@ -2941,12 +2969,6 @@
                   },
                 },
                 {
-                  value: true,
-                  label: 'Autocomplete',
-                  key: 'autoComplete',
-                  type: 'TOGGLE',
-                },
-                {
                   value: false,
                   label: 'Validation options',
                   key: 'validationOptions',
@@ -3064,6 +3086,18 @@
                       value: true,
                     },
                   },
+                },
+                {
+                  value: true,
+                  label: 'Spellcheck',
+                  key: 'spellCheck',
+                  type: 'TOGGLE',
+                },
+                {
+                  value: true,
+                  label: 'Autocomplete',
+                  key: 'autoComplete',
+                  type: 'TOGGLE',
                 },
                 {
                   type: 'TOGGLE',
@@ -3392,12 +3426,6 @@
                   },
                 },
                 {
-                  value: true,
-                  label: 'Autocomplete',
-                  key: 'autoComplete',
-                  type: 'TOGGLE',
-                },
-                {
                   value: false,
                   label: 'Validation options',
                   key: 'validationOptions',
@@ -3501,6 +3529,18 @@
                       value: true,
                     },
                   },
+                },
+                {
+                  value: true,
+                  label: 'Spellcheck',
+                  key: 'spellCheck',
+                  type: 'TOGGLE',
+                },
+                {
+                  value: true,
+                  label: 'Autocomplete',
+                  key: 'autoComplete',
+                  type: 'TOGGLE',
                 },
                 {
                   type: 'TOGGLE',
@@ -3823,12 +3863,6 @@
                   },
                 },
                 {
-                  value: true,
-                  label: 'Autocomplete',
-                  key: 'autoComplete',
-                  type: 'TOGGLE',
-                },
-                {
                   value: false,
                   label: 'Validation options',
                   key: 'validationOptions',
@@ -3932,6 +3966,18 @@
                       value: true,
                     },
                   },
+                },
+                {
+                  value: true,
+                  label: 'Spellcheck',
+                  key: 'spellCheck',
+                  type: 'TOGGLE',
+                },
+                {
+                  value: true,
+                  label: 'Autocomplete',
+                  key: 'autoComplete',
+                  type: 'TOGGLE',
                 },
                 {
                   value: false,
@@ -4266,12 +4312,6 @@
                   },
                 },
                 {
-                  value: true,
-                  label: 'Autocomplete',
-                  key: 'autoComplete',
-                  type: 'TOGGLE',
-                },
-                {
                   value: false,
                   label: 'Validation options',
                   key: 'validationOptions',
@@ -4375,6 +4415,18 @@
                       value: true,
                     },
                   },
+                },
+                {
+                  value: true,
+                  label: 'Spellcheck',
+                  key: 'spellCheck',
+                  type: 'TOGGLE',
+                },
+                {
+                  value: true,
+                  label: 'Autocomplete',
+                  key: 'autoComplete',
+                  type: 'TOGGLE',
                 },
                 {
                   type: 'TOGGLE',
@@ -4810,6 +4862,18 @@
                   },
                 },
                 {
+                  value: true,
+                  label: 'Spellcheck',
+                  key: 'spellCheck',
+                  type: 'TOGGLE',
+                },
+                {
+                  value: true,
+                  label: 'Autocomplete',
+                  key: 'autoComplete',
+                  type: 'TOGGLE',
+                },
+                {
                   type: 'TOGGLE',
                   label: 'Disabled',
                   key: 'disabled',
@@ -4836,14 +4900,8 @@
                     as: 'BUTTONGROUP',
                     dataType: 'string',
                     allowedInput: [
-                      {
-                        name: 'Standard',
-                        value: 'standard',
-                      },
-                      {
-                        name: 'Outlined',
-                        value: 'outlined',
-                      },
+                      { name: 'Standard', value: 'standard' },
+                      { name: 'Outlined', value: 'outlined' },
                       { name: 'Filled', value: 'filled' },
                     ],
                   },
@@ -7012,7 +7070,7 @@
                   },
                 },
                 {
-                  type: 'MODEL',
+                  type: 'MODEL_AND_RELATION',
                   label: 'Model',
                   key: 'model',
                   value: '',
@@ -7422,12 +7480,6 @@
                   },
                 },
                 {
-                  value: true,
-                  label: 'Autocomplete',
-                  key: 'autoComplete',
-                  type: 'TOGGLE',
-                },
-                {
                   value: false,
                   label: 'Validation options',
                   key: 'validationOptions',
@@ -7531,6 +7583,18 @@
                       value: true,
                     },
                   },
+                },
+                {
+                  value: true,
+                  label: 'Spellcheck',
+                  key: 'spellCheck',
+                  type: 'TOGGLE',
+                },
+                {
+                  value: true,
+                  label: 'Autocomplete',
+                  key: 'autoComplete',
+                  type: 'TOGGLE',
                 },
                 {
                   type: 'TOGGLE',
@@ -10907,9 +10971,31 @@
                             options: [
                               {
                                 value: '',
+                                label: 'Authentication Profile',
+                                key: 'authProfile',
+                                type: 'AUTHENTICATION_PROFILE',
+                                configuration: {
+                                  condition: {
+                                    type: 'SHOW',
+                                    option: 'model',
+                                    comparator: 'EQ',
+                                    value: '',
+                                  },
+                                },
+                              },
+                              {
+                                value: '',
                                 label: 'Model',
                                 key: 'model',
                                 type: 'MODEL',
+                                configuration: {
+                                  condition: {
+                                    type: 'SHOW',
+                                    option: 'authProfile',
+                                    comparator: 'EQ',
+                                    value: '',
+                                  },
+                                },
                               },
                               {
                                 value: '',
@@ -10932,13 +11018,13 @@
                                 type: 'FILTER',
                                 configuration: {
                                   dependsOn: 'model',
+                                  condition: {
+                                    type: 'SHOW',
+                                    option: 'authProfile',
+                                    comparator: 'EQ',
+                                    value: '',
+                                  },
                                 },
-                              },
-                              {
-                                value: '',
-                                label: 'Authentication Profile',
-                                key: 'authProfile',
-                                type: 'AUTHENTICATION_PROFILE',
                               },
                               {
                                 value: '',
@@ -17132,7 +17218,7 @@
                                     value: '',
                                     label: 'Model',
                                     key: 'model',
-                                    type: 'MODEL',
+                                    type: 'MODEL_AND_RELATION',
                                   },
                                   {
                                     value: {},
@@ -18272,7 +18358,10 @@
           '#detailsDataContainer',
           prefabStructure,
         );
-        detailsDataContainer.options[0].value = modelId;
+        const modelOption = detailsDataContainer.options.find(
+          (o) => o.key === 'model',
+        );
+        modelOption.value = modelId;
 
         const detailsRecordCard = tabCard(`${data.model.label}`);
         const detailsInfoProperties = detailProperties.filter(
@@ -20116,6 +20205,12 @@
                                     },
                                   },
                                   {
+                                    type: 'TOGGLE',
+                                    label: 'Display Rich Text',
+                                    key: 'useInnerHtml',
+                                    value: false,
+                                  },
+                                  {
                                     value: 'Title4',
                                     label: 'Type',
                                     key: 'type',
@@ -20141,6 +20236,70 @@
                                     label: 'Outer space',
                                     key: 'outerSpacing',
                                     type: 'SIZES',
+                                  },
+                                  {
+                                    type: 'CUSTOM',
+                                    label: 'Link to',
+                                    key: 'linkType',
+                                    value: 'internal',
+                                    configuration: {
+                                      as: 'BUTTONGROUP',
+                                      dataType: 'string',
+                                      allowedInput: [
+                                        {
+                                          name: 'Internal page',
+                                          value: 'internal',
+                                        },
+                                        {
+                                          name: 'External page',
+                                          value: 'external',
+                                        },
+                                      ],
+                                    },
+                                  },
+                                  {
+                                    value: '_self',
+                                    label: 'Open in',
+                                    key: 'linkTarget',
+                                    type: 'CUSTOM',
+                                    configuration: {
+                                      as: 'BUTTONGROUP',
+                                      dataType: 'string',
+                                      allowedInput: [
+                                        { name: 'Current Tab', value: '_self' },
+                                        { name: 'New Tab', value: '_blank' },
+                                      ],
+                                    },
+                                  },
+                                  {
+                                    value: '',
+                                    label: 'Page',
+                                    key: 'linkTo',
+                                    type: 'ENDPOINT',
+                                    configuration: {
+                                      condition: {
+                                        type: 'SHOW',
+                                        option: 'linkType',
+                                        comparator: 'EQ',
+                                        value: 'internal',
+                                      },
+                                    },
+                                  },
+                                  {
+                                    value: [''],
+                                    label: 'URL',
+                                    key: 'linkToExternal',
+                                    type: 'VARIABLE',
+                                    configuration: {
+                                      placeholder:
+                                        'Starts with https:// or http://',
+                                      condition: {
+                                        type: 'SHOW',
+                                        option: 'linkType',
+                                        comparator: 'EQ',
+                                        value: 'external',
+                                      },
+                                    },
                                   },
                                   {
                                     value: false,
@@ -20746,6 +20905,12 @@
                                         },
                                       },
                                       {
+                                        type: 'TOGGLE',
+                                        label: 'Display Rich Text',
+                                        key: 'useInnerHtml',
+                                        value: false,
+                                      },
+                                      {
                                         value: 'Body1',
                                         label: 'Type',
                                         key: 'type',
@@ -20771,6 +20936,76 @@
                                         label: 'Outer space',
                                         key: 'outerSpacing',
                                         type: 'SIZES',
+                                      },
+                                      {
+                                        type: 'CUSTOM',
+                                        label: 'Link to',
+                                        key: 'linkType',
+                                        value: 'internal',
+                                        configuration: {
+                                          as: 'BUTTONGROUP',
+                                          dataType: 'string',
+                                          allowedInput: [
+                                            {
+                                              name: 'Internal page',
+                                              value: 'internal',
+                                            },
+                                            {
+                                              name: 'External page',
+                                              value: 'external',
+                                            },
+                                          ],
+                                        },
+                                      },
+                                      {
+                                        value: '_self',
+                                        label: 'Open in',
+                                        key: 'linkTarget',
+                                        type: 'CUSTOM',
+                                        configuration: {
+                                          as: 'BUTTONGROUP',
+                                          dataType: 'string',
+                                          allowedInput: [
+                                            {
+                                              name: 'Current Tab',
+                                              value: '_self',
+                                            },
+                                            {
+                                              name: 'New Tab',
+                                              value: '_blank',
+                                            },
+                                          ],
+                                        },
+                                      },
+                                      {
+                                        value: '',
+                                        label: 'Page',
+                                        key: 'linkTo',
+                                        type: 'ENDPOINT',
+                                        configuration: {
+                                          condition: {
+                                            type: 'SHOW',
+                                            option: 'linkType',
+                                            comparator: 'EQ',
+                                            value: 'internal',
+                                          },
+                                        },
+                                      },
+                                      {
+                                        value: [''],
+                                        label: 'URL',
+                                        key: 'linkToExternal',
+                                        type: 'VARIABLE',
+                                        configuration: {
+                                          placeholder:
+                                            'Starts with https:// or http://',
+                                          condition: {
+                                            type: 'SHOW',
+                                            option: 'linkType',
+                                            comparator: 'EQ',
+                                            value: 'external',
+                                          },
+                                        },
                                       },
                                       {
                                         value: false,
@@ -21508,10 +21743,32 @@
                                 },
                                 options: [
                                   {
-                                    value: modelId,
+                                    value: '',
+                                    label: 'Authentication Profile',
+                                    key: 'authProfile',
+                                    type: 'AUTHENTICATION_PROFILE',
+                                    configuration: {
+                                      condition: {
+                                        type: 'SHOW',
+                                        option: 'model',
+                                        comparator: 'EQ',
+                                        value: '',
+                                      },
+                                    },
+                                  },
+                                  {
+                                    value: '',
                                     label: 'Model',
                                     key: 'model',
                                     type: 'MODEL',
+                                    configuration: {
+                                      condition: {
+                                        type: 'SHOW',
+                                        option: 'authProfile',
+                                        comparator: 'EQ',
+                                        value: '',
+                                      },
+                                    },
                                   },
                                   {
                                     value: '',
@@ -21534,13 +21791,13 @@
                                     type: 'FILTER',
                                     configuration: {
                                       dependsOn: 'model',
+                                      condition: {
+                                        type: 'SHOW',
+                                        option: 'authProfile',
+                                        comparator: 'EQ',
+                                        value: '',
+                                      },
                                     },
-                                  },
-                                  {
-                                    value: '',
-                                    label: 'Authentication Profile',
-                                    key: 'authProfile',
-                                    type: 'AUTHENTICATION_PROFILE',
                                   },
                                   {
                                     value: '',

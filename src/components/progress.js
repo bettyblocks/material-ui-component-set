@@ -27,9 +27,11 @@
       setOpen(visible);
     }, [visible]);
 
-    B.defineFunction('Show', () => setOpen(true));
-    B.defineFunction('Hide', () => setOpen(false));
-    B.defineFunction('Show/Hide', () => setOpen((s) => !s));
+    useEffect(() => {
+      B.defineFunction('Show', () => setOpen(true));
+      B.defineFunction('Hide', () => setOpen(false));
+      B.defineFunction('Show/Hide', () => setOpen((s) => !s));
+    }, []);
 
     const min = parseInt(useText(minValue), 10) || 0;
     const max = parseInt(useText(maxValue), 10) || 100;

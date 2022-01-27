@@ -23,10 +23,11 @@
       setIsOpen(isVisible);
     }, [isVisible]);
 
-    B.defineFunction('Show', openDialog);
-    B.defineFunction('Hide', closeDialog);
-    B.defineFunction('Show/Hide', () => setIsOpen((s) => !s));
-
+    useEffect(() => {
+      B.defineFunction('Show', openDialog);
+      B.defineFunction('Hide', closeDialog);
+      B.defineFunction('Show/Hide', () => setIsOpen((s) => !s));
+    }, []);
     const isEmpty = !children.length;
 
     const EmptyCmp = function () {

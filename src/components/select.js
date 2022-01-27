@@ -106,7 +106,9 @@
       }, {});
     };
 
-    B.defineFunction('Reset', () => setCurrentValue(defaultValueText));
+    useEffect(() => {
+      B.defineFunction('Reset', () => setCurrentValue(defaultValueText));
+    }, []);
 
     const orderByArray = [orderBy].flat();
     const sort =
@@ -208,29 +210,31 @@
 
     const { results } = data || {};
 
-    B.defineFunction('Refetch', () => refetch());
+    useEffect(() => {
+      B.defineFunction('Refetch', () => refetch());
 
-    /**
-     * @name Filter
-     * @param {Property} property
-     * @returns {Void}
-     */
-    B.defineFunction(
-      'Filter',
-      ({ event, property: propertyArg, interactionId }) => {
-        setInteractionFilter({
-          ...interactionFilter,
-          [interactionId]: {
-            property: propertyArg,
-            value: event.target ? event.target.value : transformValue(event),
-          },
-        });
-      },
-    );
+      /**
+       * @name Filter
+       * @param {Property} property
+       * @returns {Void}
+       */
+      B.defineFunction(
+        'Filter',
+        ({ event, property: propertyArg, interactionId }) => {
+          setInteractionFilter((s) => ({
+            ...s,
+            [interactionId]: {
+              property: propertyArg,
+              value: event.target ? event.target.value : transformValue(event),
+            },
+          }));
+        },
+      );
 
-    B.defineFunction('ResetFilter', () => {
-      setInteractionFilter({});
-    });
+      B.defineFunction('ResetFilter', () => {
+        setInteractionFilter({});
+      });
+    }, []);
 
     const handleValidation = () => {
       const hasError = required && !value;
