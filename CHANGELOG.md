@@ -1,3 +1,16 @@
+# [1.201.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.200.0...v1.201.0) (2022-01-27)
+
+
+### Bug Fixes
+
+* added extra condition to conditionally show or hide search field ([c264dcb](https://github.com/bettyblocks/material-ui-component-set/commit/c264dcba2079741df8b493c579d5738416ed3827))
+* hide toolbar when no search ([0a8e6d2](https://github.com/bettyblocks/material-ui-component-set/commit/0a8e6d2f854b9f298d80e99524ddce042f2ae3ca))
+
+
+### Features
+
+* wip hiding toolbar when there is no search property or title set ([943c43a](https://github.com/bettyblocks/material-ui-component-set/commit/943c43a6faf0824516270e1ac6c0a8337bef9804))
+
 # [1.200.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.199.0...v1.200.0) (2022-01-27)
 
 
