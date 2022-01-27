@@ -1,3 +1,24 @@
+# [1.200.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.199.0...v1.200.0) (2022-01-27)
+
+
+### Bug Fixes
+
+* push to pull from another decive ([181e1c7](https://github.com/bettyblocks/material-ui-component-set/commit/181e1c743dea8f4004761d518143f8b1f97021fc))
+* pushing data to pull from another device ([094ae0c](https://github.com/bettyblocks/material-ui-component-set/commit/094ae0c05b49f31dfe66c6f56439991b78cbd9e4))
+* removed eslint errors ([f53d030](https://github.com/bettyblocks/material-ui-component-set/commit/f53d030e4c20b4116363c51522ba085fd3c4aee5))
+
+
+### Features
+
+* updated page templates ([cf44f65](https://github.com/bettyblocks/material-ui-component-set/commit/cf44f65ab0536439362501467e90b91a8463880f))
+
+# [1.199.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.198.6...v1.199.0) (2022-01-26)
+
+
+### Features
+
+* create variable in right context in datacontainer ([8eda37e](https://github.com/bettyblocks/material-ui-component-set/commit/8eda37ee599b09583b69213780af59b59f3aaf80))
+
 ## [1.198.6](https://github.com/bettyblocks/material-ui-component-set/compare/v1.198.5...v1.198.6) (2022-01-25)
 
 

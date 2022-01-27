@@ -19,7 +19,12 @@
       ModelSelector,
       Text,
     },
-    helpers: { useCurrentPageId, camelToSnakeCase, useModelQuery },
+    helpers: {
+      useCurrentPageId,
+      useCurrentPartialId,
+      camelToSnakeCase,
+      useModelQuery,
+    },
   }) => {
     const [anotherPageState, setAnotherPageState] = React.useState({
       modelId: '',
@@ -40,7 +45,8 @@
 
     const [buttonGroupValue, setButtonGroupValue] =
       React.useState('anotherPage');
-    const pageUuid = useCurrentPageId();
+    const pageId = useCurrentPageId();
+    const partialId = useCurrentPartialId();
     const { data, loading } = useModelQuery({
       variables: { id: modelId },
     });
@@ -110,10 +116,12 @@
           (property) => property.name === 'id',
         );
         const variableName = `${camelToSnakeCase(data.model.label)}_id`;
+        const context = pageId ? { pageId } : { partialId };
+
         newPrefab.variables.push({
+          ...context,
           kind: 'integer',
           name: variableName,
-          pageId: pageUuid,
           ref: {
             id: '#idVariable',
           },
