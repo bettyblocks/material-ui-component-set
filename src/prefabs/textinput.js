@@ -1,7 +1,7 @@
 (() => ({
   category: 'FORM',
   icon: 'TextInputIcon',
-  name: 'TextInput',
+  name: 'TextInputOld',
   structure: [
     {
       name: 'TextInput',

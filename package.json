@@ -4,6 +4,9 @@
   "main": "dist/templates.json",
   "license": "UNLICENSED",
   "private": true,
+  "dependencies": {
+    "@betty-blocks/component-sdk": "^1.1.0"
+  },
   "devDependencies": {
     "@betty-blocks/cli": "^25.14.2",
     "eslint": "^5.9.0",
@@ -24,6 +27,7 @@
     "preview": "bb components preview",
     "lint": "eslint --ext js ./src"
   },
-  "files": ["dist"],
-  "dependencies": {}
+  "files": [
+    "dist"
+  ]
 }
