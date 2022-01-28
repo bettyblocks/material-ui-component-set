@@ -394,7 +394,7 @@
 
     if (error && displayError) {
       valid = false;
-      message = 'Something went wrong while loading.';
+      message = error;
     }
 
     // If the default value is a value that lives outside the take range of the query we should fetch the values before we continue.
@@ -476,12 +476,14 @@
                 tabIndex: isDev ? -1 : undefined,
               },
               endAdornment: <Icon name="ExpandMore" />,
-              startAdornment: (
-                <>
-                  <Chip label="Chip 1" onDelete={() => {}} />
-                  <Chip label="Chip 2" onDelete={() => {}} />
-                </>
-              ),
+              ...(!designTimeValue && {
+                startAdornment: (
+                  <>
+                    <Chip label="Chip 1" onDelete={() => {}} />
+                    <Chip label="Chip 2" onDelete={() => {}} />
+                  </>
+                ),
+              }),
             }}
             classes={{ root: classes.formControl }}
             dataComponent={dataComponentAttribute}
@@ -494,7 +496,7 @@
             placeholder={placeholder}
             required={required && !value}
             size={size}
-            value={multiple ? '' : designTimeValue}
+            value={designTimeValue}
             variant={variant}
           />
         </div>

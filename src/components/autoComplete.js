@@ -5,8 +5,7 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { Autocomplete } = window.MaterialUI.Lab;
-    const { Checkbox, Chip, CircularProgress, TextField } =
-      window.MaterialUI.Core;
+    const { CircularProgress, TextField } = window.MaterialUI.Core;
     const {
       InteractionScope,
       ModelProvider,
@@ -25,12 +24,10 @@
       disabled,
       errorType,
       filter: filterRaw,
-      freeSolo,
       fullWidth,
       helperText: helperTextRaw,
       hideLabel,
       margin,
-      multiple: multipleRaw,
       nameAttribute: nameAttributeRaw,
       optionType,
       order,
@@ -38,7 +35,6 @@
       placeholder: placeholderRaw,
       property,
       model,
-      renderCheckboxes,
       showError,
       searchProperty,
       size,
@@ -51,14 +47,11 @@
      * To understand how this component works it is important to know what the following options are used for:
      *
      * customModelAttribute: To label how the data will be send to an action when a form is submitted. Also to get the default value when used in an update form.
-     * freeSolo: Allows any value to be submitted from the Autocomplete. Normally only values rendered as options in the dropdown can be selected and submitted.
-     * multiple: Allows multiple values to be selected. Will be send to the backend as a string with comma separated values
      * optionType: Is one of two values: `property` or `model`. When the value is `property` we're working with a list property to show a list of selectable values, otherwise we're working with a model.
      *
      */
 
     const isDev = env === 'dev';
-    const multiple = optionType === 'model' && multipleRaw;
     const displayError = errorType === 'built-in';
     const placeholder = useText(placeholderRaw);
     const helperText = useText(helperTextRaw);
@@ -83,51 +76,18 @@
     const label = useText(labelRaw);
     const defaultValue = useText(valueRaw, { rawValue: true });
 
-    let initalValue = defaultValue.replace(/\n/g, '');
-
-    if (multiple) {
-      if (defaultValue.trim() === '') {
-        initalValue = [];
-      } else {
-        initalValue = defaultValue
-          .trim()
-          .split(',')
-          .map((x) => x.trim());
-      }
-    }
+    const initalValue = defaultValue.replace(/\n/g, '');
 
     /*
      * Selected value of the autocomplete.
-     *
-     * It is an object or and array of objects (in case of multiple). The object being a one on one copy of the result of the request.
-     * In case of freeSolo the type is string or and array of strings.
-     *
      */
     const [value, setValue] = useState(initalValue);
 
-    useEffect(() => {
-      if (isDev && typeof value === 'string') {
-        if (value.trim() === '') {
-          setValue([]);
-        } else {
-          setValue(
-            value
-              .trim()
-              .split(',')
-              .map((x) => x.trim()),
-          );
-        }
-      }
-    }, [multiple]);
-
     /*
-     * User input in the autocomplete. In case of freeSolo this is the same as `value`
+     * User input in the autocomplete
      */
     const [inputValue, setInputValue] = useState(
-      optionType === 'property' ||
-        (optionType === 'model' && freeSolo && !multiple)
-        ? defaultValue
-        : '',
+      optionType === 'property' ? defaultValue : '',
     );
 
     /*
@@ -255,69 +215,12 @@
      * Those values always need to be returned in the results of the request
      */
     /* eslint-disable no-underscore-dangle */
-    if (multiple && value.length > 0) {
-      if (!freeSolo) {
-        if (!filter._or) {
-          filter._or = [];
-        }
-
-        value.forEach((x) => {
-          filter._or.push({
-            [valueProp.name]: {
-              [valuePropIsNumber ? 'eq' : 'regex']:
-                typeof x === 'string' ? x : x[valueProp.name],
-            },
-          });
-        });
-      }
-
-      if (debouncedInputValue) {
-        if (!filter._or) {
-          filter._or = [];
-        }
-
-        filter._or.push({
-          [searchProp.name]: {
-            [searchPropIsNumber ? 'eq' : 'regex']: searchPropIsNumber
-              ? parseInt(debouncedInputValue, 10)
-              : debouncedInputValue,
-          },
-        });
-      } else if (!freeSolo && defaultValueEvaluatedRef.current) {
-        if (!filter._or) {
-          filter._or = [];
-        }
-
-        filter._or.push({
-          [valueProp.name]: {
-            neq:
-              typeof value[0] === 'string'
-                ? value[0]
-                : value[0][valueProp.name],
-          },
-        });
-      }
-    } else if (multiple) {
-      if (debouncedInputValue) {
-        if (!filter._or) {
-          filter._or = [];
-        }
-
-        filter._or.push({
-          [searchProp.name]: {
-            [searchPropIsNumber ? 'eq' : 'regex']: searchPropIsNumber
-              ? parseInt(debouncedInputValue, 10)
-              : debouncedInputValue,
-          },
-        });
-      }
-    } else if (
+    if (
       debouncedInputValue &&
       (searchPropIsNumber
         ? parseInt(debouncedInputValue, 10)
         : debouncedInputValue) ===
-        (typeof value === 'string' ? value : value[searchProp.name]) &&
-      !freeSolo
+        (typeof value === 'string' ? value : value[searchProp.name])
     ) {
       filter._or = [
         {
@@ -341,7 +244,7 @@
           ? parseInt(debouncedInputValue, 10)
           : debouncedInputValue,
       };
-    } else if (value !== '' && !freeSolo) {
+    } else if (value !== '') {
       filter._or = [
         {
           [valueProp.name]: {
@@ -464,30 +367,12 @@
 
     if (error && displayError) {
       valid = false;
-      message = 'Something went wrong while loading.';
+      message = error;
     }
 
     // If the default value is a value that lives outside the take range of the query we should fetch the values before we continue.
-    if (
-      !isDev &&
-      !defaultValueEvaluatedRef.current &&
-      !freeSolo &&
-      value &&
-      results
-    ) {
+    if (!isDev && !defaultValueEvaluatedRef.current && value && results) {
       setValue((prev) => {
-        if (multiple) {
-          return prev
-            .map((val) =>
-              results.find(
-                (result) =>
-                  result[valueProp.name] ===
-                  (valuePropIsNumber ? parseInt(val, 10) : val),
-              ),
-            )
-            .filter((x) => typeof x !== 'undefined');
-        }
-
         return (
           results.find(
             (result) =>
@@ -498,12 +383,10 @@
       });
 
       defaultValueEvaluatedRef.current = true;
-    } else if (!isDev && !defaultValueEvaluatedRef.current && freeSolo) {
-      defaultValueEvaluatedRef.current = true;
     }
 
     B.defineFunction('Clear', () => {
-      setValue(multiple ? [] : '');
+      setValue('');
       setInputValue('');
       setDebouncedInputValue('');
     });
@@ -563,17 +446,7 @@
               inputProps: {
                 tabIndex: isDev ? -1 : undefined,
               },
-              endAdornment: <>{!freeSolo && <Icon name="ExpandMore" />}</>,
-              startAdornment: (
-                <>
-                  {multiple ? (
-                    <>
-                      <Chip label="Chip 1" onDelete={() => {}} />
-                      <Chip label="Chip 2" onDelete={() => {}} />
-                    </>
-                  ) : null}
-                </>
-              ),
+              endAdornment: <Icon name="ExpandMore" />,
             }}
             classes={{ root: classes.formControl }}
             dataComponent={dataComponentAttribute}
@@ -586,7 +459,7 @@
             placeholder={placeholder}
             required={required && !value}
             size={size}
-            value={multiple ? '' : designTimeValue}
+            value={designTimeValue}
             variant={variant}
           />
         </div>
@@ -601,32 +474,6 @@
       if (optionType === 'model') {
         if (!results) {
           return [];
-        }
-
-        // If freeSolo is turned on the value and options are strings instead of objects
-        if (freeSolo) {
-          return results.map((result) => result[searchProp.name]);
-        }
-
-        if (multiple) {
-          const nonFetchedOptions = [];
-          value.forEach((x) => {
-            if (
-              !results.some((result) => {
-                if (typeof x === 'string') {
-                  return valuePropIsNumber
-                    ? result[valueProp.name] === parseInt(x, 10)
-                    : result[valueProp.name] === x;
-                }
-
-                return result[valueProp.name] === x[valueProp.name];
-              })
-            ) {
-              nonFetchedOptions.push(x);
-            }
-          });
-
-          return [...nonFetchedOptions, ...results];
         }
 
         if (
@@ -659,29 +506,8 @@
         return value;
       }
 
-      // If freeSolo is turned on the value and options are strings instead of objects
-      if (freeSolo) {
-        return value;
-      }
-
       if (currentOptions.length === 0) {
-        return multiple ? [] : null;
-      }
-
-      if (multiple) {
-        return value
-          .map((x) =>
-            currentOptions.find((option) => {
-              if (typeof x === 'string') {
-                return valuePropIsNumber
-                  ? option[valueProp.name] === parseInt(x, 10)
-                  : option[valueProp.name] === x;
-              }
-
-              return option[valueProp.name] === x[valueProp.name];
-            }),
-          )
-          .filter((x) => x !== undefined);
+        return null;
       }
 
       return currentOptions.find((option) => {
@@ -707,13 +533,6 @@
         return currentValue;
       }
 
-      if (multiple) {
-        return currentValue
-          .filter((x) => x !== undefined)
-          .map((x) => (typeof x === 'string' ? x : x[valueProp.name]))
-          .join(',');
-      }
-
       return currentValue[valueProp.name];
     };
 
@@ -726,16 +545,12 @@
     const currentValue = getValue();
 
     // In the first render we want to make sure to convert the default value
-    if (!multiple && !inputValue && currentValue) {
+    if (!inputValue && currentValue) {
       setValue(currentValue);
       setInputValue(currentValue[searchProp.name].toString());
     }
 
     const renderLabel = (option) => {
-      if (freeSolo) {
-        return option ? option.toString() : '';
-      }
-
       let optionLabel = '';
 
       if (option && option[searchProp.name]) {
@@ -751,38 +566,21 @@
       <Autocomplete
         disableCloseOnSelect={!closeOnSelect}
         disabled={disabled}
-        freeSolo={freeSolo}
         {...(optionType === 'model' && {
           getOptionLabel: renderLabel,
         })}
         inputValue={inputValue}
         loading={loading}
-        multiple={multiple}
         onClose={() => {
           B.triggerEvent('onClose');
         }}
         onChange={(_, newValue) => {
-          setValue(newValue || (multiple ? [] : ''));
+          setValue(newValue || '');
 
           let triggerEventValue;
 
           if (optionType === 'model') {
-            if (multiple) {
-              setDebouncedInputValue('');
-
-              if (freeSolo) {
-                triggerEventValue = newValue || [];
-              } else {
-                triggerEventValue =
-                  newValue.length === 0
-                    ? []
-                    : newValue.map((x) => x[valueProp.name]);
-              }
-            } else if (freeSolo) {
-              triggerEventValue = newValue || '';
-            } else {
-              triggerEventValue = newValue ? newValue[valueProp.name] : '';
-            }
+            triggerEventValue = newValue ? newValue[valueProp.name] : '';
           } else if (optionType === 'property') {
             triggerEventValue = newValue || '';
           }
@@ -839,20 +637,6 @@
             />
           </>
         )}
-        {...(renderCheckboxes && {
-          renderOption: (option, { selected }) => (
-            <>
-              <Checkbox
-                classes={{ root: classes.checkbox }}
-                icon={<Icon name="CheckBoxOutlineBlank" fontSize="small" />}
-                checkedIcon={<Icon name="CheckBox" fontSize="small" />}
-                style={{ marginRight: 8 }}
-                checked={selected}
-              />
-              {renderLabel(option)}
-            </>
-          ),
-        })}
         value={currentValue}
       />
     );
@@ -873,9 +657,8 @@
     return MuiAutocomplete;
   })(),
   styles: (B) => (t) => {
-    const { Styling, color } = B;
+    const { Styling } = B;
     const style = new Styling(t);
-    const getOpacColor = (col, val) => color.alpha(col, val);
 
     return {
       root: {
@@ -883,18 +666,6 @@
           fullWidth ? 'block' : 'inline-block',
         '& > *': {
           pointerEvents: 'none',
-        },
-      },
-      checkbox: {
-        color: ({ options: { checkboxColor } }) => [
-          style.getColor(checkboxColor),
-          '!important',
-        ],
-        '&.MuiCheckbox-root.Mui-checked:hover, &.MuiIconButton-root:hover': {
-          backgroundColor: ({ options: { checkboxColor } }) => [
-            getOpacColor(style.getColor(checkboxColor), 0.04),
-            '!important',
-          ],
         },
       },
       formControl: {
