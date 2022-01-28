@@ -32,7 +32,6 @@
       type,
       minlength,
       minvalue,
-      maxvalue,
       model,
       nameAttribute: nameAttributeRaw,
       optionType,
@@ -44,7 +43,6 @@
       searchProperty,
       showError,
       size,
-      validationAboveMaximum = [''],
       validationBelowMinimum = [''],
       validationPatternMismatch = [''],
       validationTooLong = [''],
@@ -82,7 +80,6 @@
     const validMinlength = minlength || null;
     const validMaxlength = maxlength || null;
     const validMinvalue = minvalue || null;
-    const validMaxvalue = maxvalue || null;
 
     const patternMismatchMessage = useText(validationPatternMismatch);
     const typeMismatchMessage = useText(validationTypeMismatch);
@@ -90,10 +87,12 @@
     const tooLongMessage = useText(validationTooLong);
     const tooShortMessage = useText(validationTooShort);
     const belowMinimumMessage = useText(validationBelowMinimum);
-    const aboveMaximumMessage = useText(validationAboveMaximum);
     const helperTextResolved = useText(helperTextRaw);
 
     const validationMessage = (validityObject) => {
+      if (!validityObject) {
+        return '';
+      }
       if (validityObject.customError && patternMismatchMessage) {
         return patternMismatchMessage;
       }
@@ -118,14 +117,13 @@
       if (validityObject.rangeUnderflow && belowMinimumMessage) {
         return belowMinimumMessage;
       }
-      if (validityObject.rangeOverflow && aboveMaximumMessage) {
-        return aboveMaximumMessage;
-      }
       return '';
     };
 
     const handleValidation = (validation) => {
-      setErrorState(!validation.valid);
+      if (validation) {
+        setErrorState(!validation.valid);
+      }
       const message = validationMessage(validation) || helperTextResolved;
       setHelper(message);
     };
@@ -519,7 +517,7 @@
             label={!hideLabel && label}
             margin={margin}
             placeholder={placeholder}
-            required={required && !value}
+            required={required}
             size={size}
             value={designTimeValue}
             variant={variant}
@@ -578,7 +576,11 @@
     // In the first render we want to make sure to convert the default value
     if (!inputValue && currentValue) {
       setValue(currentValue);
-      setInputValue(currentValue[searchProp.name].toString());
+      if (typeof currentValue === 'object') {
+        setInputValue(currentValue[searchProp.name].toString());
+      } else {
+        setInputValue(currentValue);
+      }
     }
 
     const renderLabel = (option) => {
@@ -591,7 +593,7 @@
         variant={variant}
         size={size}
         fullWidth={fullWidth}
-        required={required}
+        required={required && !value}
         margin={margin}
         error={errorState}
       >
@@ -604,6 +606,14 @@
           })}
           inputValue={inputValue}
           loading={loading}
+          onBlur={(event) => {
+            let validation = event.target.validity;
+
+            if (isNumberType) {
+              validation = customPatternValidation(event.target);
+            }
+            handleValidation(validation);
+          }}
           onChange={(_, newValue) => {
             setValue(newValue || '');
 
@@ -656,11 +666,14 @@
                   ...params.InputProps,
                   inputProps: {
                     ...params.inputProps,
+                    onInvalid: (e) => {
+                      e.preventDefault();
+                      handleValidation(e.target.validity);
+                    },
                     pattern: validPattern,
                     minLength: validMinlength,
                     maxLength: validMaxlength,
                     min: validMinvalue,
-                    max: validMaxvalue,
                   },
                   endAdornment: (
                     <>
@@ -682,7 +695,7 @@
                   name: nameAttribute || name,
                 })}
                 placeholder={placeholder}
-                required={required && !value}
+                required={required}
                 size={size}
                 variant={variant}
               />
