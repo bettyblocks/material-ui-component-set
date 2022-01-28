@@ -367,7 +367,7 @@
 
     if (error && displayError) {
       valid = false;
-      message = 'Something went wrong while loading.';
+      message = error;
     }
 
     // If the default value is a value that lives outside the take range of the query we should fetch the values before we continue.
