@@ -1,5 +1,5 @@
 (() => ({
-  name: 'FreeMultiAutocomplete',
+  name: 'Multi. & Custom',
   icon: 'AutoCompleteIcon',
   category: 'FORM',
   keywords: ['Form', 'input', 'auto', 'complete', 'autocomplete'],

@@ -1,5 +1,5 @@
 (() => ({
-  name: 'Single Autocomplete',
+  name: 'Single value',
   icon: 'AutoCompleteIcon',
   category: 'FORM',
   keywords: ['Form', 'input', 'auto', 'complete', 'autocomplete'],

@@ -1,5 +1,5 @@
 (() => ({
-  name: 'SearchInput',
+  name: 'SingleFreeSoloAutocomplete',
   type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
