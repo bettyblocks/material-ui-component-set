@@ -1,11 +1,11 @@
 (() => ({
-  name: 'Autocomplete',
+  name: 'Single Autocomplete',
   icon: 'AutoCompleteIcon',
   category: 'FORM',
   keywords: ['Form', 'input', 'auto', 'complete', 'autocomplete'],
   structure: [
     {
-      name: 'AutoComplete',
+      name: 'SingleAutoComplete',
       options: [
         {
           value: { label: ['Autocomplete'], value: [] },
@@ -133,48 +133,6 @@
               option: 'optionType',
               comparator: 'EQ',
               value: 'model',
-            },
-          },
-        },
-        {
-          type: 'TOGGLE',
-          label: 'Free solo',
-          key: 'freeSolo',
-          value: false,
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'optionType',
-              comparator: 'EQ',
-              value: 'model',
-            },
-          },
-        },
-        {
-          type: 'TOGGLE',
-          label: 'Allow multiple values',
-          key: 'multiple',
-          value: false,
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'optionType',
-              comparator: 'EQ',
-              value: 'model',
-            },
-          },
-        },
-        {
-          type: 'TOGGLE',
-          label: 'Add checkboxes',
-          key: 'renderCheckboxes',
-          value: false,
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'multiple',
-              comparator: 'EQ',
-              value: true,
             },
           },
         },
@@ -394,20 +352,6 @@
           type: 'COLOR',
           label: 'Text color chip',
           key: 'textColorChip',
-          value: 'Accent3',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'styles',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
-        },
-        {
-          type: 'COLOR',
-          label: 'Checkbox color',
-          key: 'checkboxColor',
           value: 'Accent3',
           configuration: {
             condition: {
