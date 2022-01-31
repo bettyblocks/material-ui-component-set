@@ -1,11 +1,11 @@
 (() => ({
-  name: 'AutoComplete',
+  name: 'SingleFreeSoloAutocomplete',
   type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { Autocomplete } = window.MaterialUI.Lab;
-    const { Checkbox, Chip, CircularProgress, TextField } =
+    const { CircularProgress, TextField, FormControl, FormHelperText } =
       window.MaterialUI.Core;
     const {
       InteractionScope,
@@ -16,7 +16,6 @@
       useAllQuery,
       useFilter,
       useText,
-      Icon,
     } = B;
     const {
       closeOnSelect,
@@ -25,30 +24,38 @@
       disabled,
       errorType,
       filter: filterRaw,
-      freeSolo,
       fullWidth,
       helperText: helperTextRaw,
       hideLabel,
       margin,
-      multiple: multipleRaw,
+      maxlength,
+      type,
+      minlength,
+      minvalue,
+      model,
       nameAttribute: nameAttributeRaw,
       optionType,
       order,
       orderBy,
+      pattern,
       placeholder: placeholderRaw,
       property,
-      model,
-      renderCheckboxes,
-      showError,
       searchProperty,
+      showError,
       size,
+      validationBelowMinimum = [''],
+      validationPatternMismatch = [''],
+      validationTooLong = [''],
+      validationTooShort = [''],
+      validationTypeMismatch = [''],
+      validationValueMissing = [''],
       valueProperty,
       variant,
     } = options;
     const numberPropTypes = ['serial', 'minutes', 'count', 'integer'];
 
     /*
-     * To understand how this component works it is important to know what the following options are used for:
+     * To understand this component it is important to know what the following options are used for:
      *
      * customModelAttribute: To label how the data will be send to an action when a form is submitted. Also to get the default value when used in an update form.
      * freeSolo: Allows any value to be submitted from the Autocomplete. Normally only values rendered as options in the dropdown can be selected and submitted.
@@ -57,15 +64,84 @@
      *
      */
 
+    const freeSolo = true;
     const isDev = env === 'dev';
-    const multiple = optionType === 'model' && multipleRaw;
     const displayError = errorType === 'built-in';
     const placeholder = useText(placeholderRaw);
-    const helperText = useText(helperTextRaw);
+    const [helper, setHelper] = useState(useText(helperTextRaw));
     const nameAttribute = useText(nameAttributeRaw);
     const changeContext = useRef(null);
     const dataComponentAttribute =
       useText(dataComponentAttributeRaw) || 'AutoComplete';
+    const [errorState, setErrorState] = useState(showError);
+    const isNumberType = type === 'number';
+
+    const validPattern = pattern || null;
+    const validMinlength = minlength || null;
+    const validMaxlength = maxlength || null;
+    const validMinvalue = minvalue || null;
+
+    const patternMismatchMessage = useText(validationPatternMismatch);
+    const typeMismatchMessage = useText(validationTypeMismatch);
+    const valueMissingMessage = useText(validationValueMissing);
+    const tooLongMessage = useText(validationTooLong);
+    const tooShortMessage = useText(validationTooShort);
+    const belowMinimumMessage = useText(validationBelowMinimum);
+    const helperTextResolved = useText(helperTextRaw);
+
+    const validationMessage = (validityObject) => {
+      if (!validityObject) {
+        return '';
+      }
+      if (validityObject.customError && patternMismatchMessage) {
+        return patternMismatchMessage;
+      }
+      if (validityObject.valid) {
+        return '';
+      }
+      if (validityObject.typeMismatch && typeMismatchMessage) {
+        return typeMismatchMessage;
+      }
+      if (validityObject.patternMismatch && patternMismatchMessage) {
+        return patternMismatchMessage;
+      }
+      if (validityObject.valueMissing && valueMissingMessage) {
+        return valueMissingMessage;
+      }
+      if (validityObject.tooLong && tooLongMessage) {
+        return tooLongMessage;
+      }
+      if (validityObject.tooShort && tooShortMessage) {
+        return tooShortMessage;
+      }
+      if (validityObject.rangeUnderflow && belowMinimumMessage) {
+        return belowMinimumMessage;
+      }
+      return '';
+    };
+
+    const handleValidation = (validation) => {
+      if (validation) {
+        setErrorState(!validation.valid);
+      }
+      const message = validationMessage(validation) || helperTextResolved;
+      setHelper(message);
+    };
+
+    const customPatternValidation = (target) => {
+      const { value: eventValue, validity } = target;
+      if (!pattern) {
+        return validity;
+      }
+      const patternRegex = RegExp(`^${pattern}$`);
+      const isValid = patternRegex.test(eventValue);
+      target.setCustomValidity(isValid ? '' : 'Invalid field.');
+      return {
+        ...validity,
+        valid: isValid,
+        patternMismatch: !isValid,
+      };
+    };
 
     const {
       id,
@@ -83,18 +159,7 @@
     const label = useText(labelRaw);
     const defaultValue = useText(valueRaw, { rawValue: true });
 
-    let initalValue = defaultValue.replace(/\n/g, '');
-
-    if (multiple) {
-      if (defaultValue.trim() === '') {
-        initalValue = [];
-      } else {
-        initalValue = defaultValue
-          .trim()
-          .split(',')
-          .map((x) => x.trim());
-      }
-    }
+    const initalValue = defaultValue.replace(/\n/g, '');
 
     /*
      * Selected value of the autocomplete.
@@ -105,27 +170,11 @@
      */
     const [value, setValue] = useState(initalValue);
 
-    useEffect(() => {
-      if (isDev && typeof value === 'string') {
-        if (value.trim() === '') {
-          setValue([]);
-        } else {
-          setValue(
-            value
-              .trim()
-              .split(',')
-              .map((x) => x.trim()),
-          );
-        }
-      }
-    }, [multiple]);
-
     /*
      * User input in the autocomplete. In case of freeSolo this is the same as `value`
      */
     const [inputValue, setInputValue] = useState(
-      optionType === 'property' ||
-        (optionType === 'model' && freeSolo && !multiple)
+      optionType === 'property' || (optionType === 'model' && freeSolo)
         ? defaultValue
         : '',
     );
@@ -255,63 +304,7 @@
      * Those values always need to be returned in the results of the request
      */
     /* eslint-disable no-underscore-dangle */
-    if (multiple && value.length > 0) {
-      if (!freeSolo) {
-        if (!filter._or) {
-          filter._or = [];
-        }
-
-        value.forEach((x) => {
-          filter._or.push({
-            [valueProp.name]: {
-              [valuePropIsNumber ? 'eq' : 'regex']:
-                typeof x === 'string' ? x : x[valueProp.name],
-            },
-          });
-        });
-      }
-
-      if (debouncedInputValue) {
-        if (!filter._or) {
-          filter._or = [];
-        }
-
-        filter._or.push({
-          [searchProp.name]: {
-            [searchPropIsNumber ? 'eq' : 'regex']: searchPropIsNumber
-              ? parseInt(debouncedInputValue, 10)
-              : debouncedInputValue,
-          },
-        });
-      } else if (!freeSolo && defaultValueEvaluatedRef.current) {
-        if (!filter._or) {
-          filter._or = [];
-        }
-
-        filter._or.push({
-          [valueProp.name]: {
-            neq:
-              typeof value[0] === 'string'
-                ? value[0]
-                : value[0][valueProp.name],
-          },
-        });
-      }
-    } else if (multiple) {
-      if (debouncedInputValue) {
-        if (!filter._or) {
-          filter._or = [];
-        }
-
-        filter._or.push({
-          [searchProp.name]: {
-            [searchPropIsNumber ? 'eq' : 'regex']: searchPropIsNumber
-              ? parseInt(debouncedInputValue, 10)
-              : debouncedInputValue,
-          },
-        });
-      }
-    } else if (
+    if (
       debouncedInputValue &&
       (searchPropIsNumber
         ? parseInt(debouncedInputValue, 10)
@@ -341,23 +334,6 @@
           ? parseInt(debouncedInputValue, 10)
           : debouncedInputValue,
       };
-    } else if (value !== '' && !freeSolo) {
-      filter._or = [
-        {
-          [valueProp.name]: {
-            [valuePropIsNumber ? 'eq' : 'regex']:
-              typeof value === 'string' ? value : value[valueProp.name],
-          },
-        },
-      ];
-
-      if (defaultValueEvaluatedRef.current) {
-        filter._or.push({
-          [valueProp.name]: {
-            neq: typeof value === 'string' ? value : value[valueProp.name],
-          },
-        });
-      }
     }
     /* eslint-enable no-underscore-dangle */
 
@@ -468,42 +444,12 @@
     }
 
     // If the default value is a value that lives outside the take range of the query we should fetch the values before we continue.
-    if (
-      !isDev &&
-      !defaultValueEvaluatedRef.current &&
-      !freeSolo &&
-      value &&
-      results
-    ) {
-      setValue((prev) => {
-        if (multiple) {
-          return prev
-            .map((val) =>
-              results.find(
-                (result) =>
-                  result[valueProp.name] ===
-                  (valuePropIsNumber ? parseInt(val, 10) : val),
-              ),
-            )
-            .filter((x) => typeof x !== 'undefined');
-        }
-
-        return (
-          results.find(
-            (result) =>
-              result[valueProp.name] &&
-              prev[valueProp.name] === result[valueProp.name],
-          ) || ''
-        );
-      });
-
-      defaultValueEvaluatedRef.current = true;
-    } else if (!isDev && !defaultValueEvaluatedRef.current && freeSolo) {
+    if (!isDev && !defaultValueEvaluatedRef.current && freeSolo) {
       defaultValueEvaluatedRef.current = true;
     }
 
     B.defineFunction('Clear', () => {
-      setValue(multiple ? [] : '');
+      setValue('');
       setInputValue('');
       setDebouncedInputValue('');
     });
@@ -563,30 +509,17 @@
               inputProps: {
                 tabIndex: isDev ? -1 : undefined,
               },
-              endAdornment: <>{!freeSolo && <Icon name="ExpandMore" />}</>,
-              startAdornment: (
-                <>
-                  {multiple ? (
-                    <>
-                      <Chip label="Chip 1" onDelete={() => {}} />
-                      <Chip label="Chip 2" onDelete={() => {}} />
-                    </>
-                  ) : null}
-                </>
-              ),
             }}
-            classes={{ root: classes.formControl }}
             dataComponent={dataComponentAttribute}
             disabled={disabled || !valid}
-            error={showError}
+            error={errorState}
             fullWidth={fullWidth}
-            helperText={helperText}
             label={!hideLabel && label}
             margin={margin}
             placeholder={placeholder}
-            required={required && !value}
+            required={required}
             size={size}
-            value={multiple ? '' : designTimeValue}
+            value={designTimeValue}
             variant={variant}
           />
         </div>
@@ -602,48 +535,7 @@
         if (!results) {
           return [];
         }
-
-        // If freeSolo is turned on the value and options are strings instead of objects
-        if (freeSolo) {
-          return results.map((result) => result[searchProp.name]);
-        }
-
-        if (multiple) {
-          const nonFetchedOptions = [];
-          value.forEach((x) => {
-            if (
-              !results.some((result) => {
-                if (typeof x === 'string') {
-                  return valuePropIsNumber
-                    ? result[valueProp.name] === parseInt(x, 10)
-                    : result[valueProp.name] === x;
-                }
-
-                return result[valueProp.name] === x[valueProp.name];
-              })
-            ) {
-              nonFetchedOptions.push(x);
-            }
-          });
-
-          return [...nonFetchedOptions, ...results];
-        }
-
-        if (
-          !results.some((result) => {
-            if (typeof value === 'string') {
-              return valuePropIsNumber
-                ? result[valueProp.name] === parseInt(value, 10)
-                : result[valueProp.name] === value;
-            }
-
-            return result[valueProp.name] === value[valueProp.name];
-          })
-        ) {
-          return value !== '' ? [value, ...results] : [...results];
-        }
-
-        return results;
+        return results.map((result) => result[searchProp.name]);
       }
 
       return [];
@@ -655,44 +547,7 @@
      * Convert `value` state into something the `value` prop of the `Autocomplete` component will accept with the right settings
      */
     const getValue = () => {
-      if (optionType === 'property') {
-        return value;
-      }
-
-      // If freeSolo is turned on the value and options are strings instead of objects
-      if (freeSolo) {
-        return value;
-      }
-
-      if (currentOptions.length === 0) {
-        return multiple ? [] : null;
-      }
-
-      if (multiple) {
-        return value
-          .map((x) =>
-            currentOptions.find((option) => {
-              if (typeof x === 'string') {
-                return valuePropIsNumber
-                  ? option[valueProp.name] === parseInt(x, 10)
-                  : option[valueProp.name] === x;
-              }
-
-              return option[valueProp.name] === x[valueProp.name];
-            }),
-          )
-          .filter((x) => x !== undefined);
-      }
-
-      return currentOptions.find((option) => {
-        if (typeof value === 'string') {
-          return valuePropIsNumber
-            ? option[valueProp.name] === parseInt(value, 10)
-            : option[valueProp.name] === value;
-        }
-
-        return option[valueProp.name] === value[valueProp.name];
-      });
+      return value;
     };
 
     /*
@@ -707,13 +562,6 @@
         return currentValue;
       }
 
-      if (multiple) {
-        return currentValue
-          .filter((x) => x !== undefined)
-          .map((x) => (typeof x === 'string' ? x : x[valueProp.name]))
-          .join(',');
-      }
-
       return currentValue[valueProp.name];
     };
 
@@ -726,135 +574,141 @@
     const currentValue = getValue();
 
     // In the first render we want to make sure to convert the default value
-    if (!multiple && !inputValue && currentValue) {
+    if (!inputValue && currentValue) {
       setValue(currentValue);
-      setInputValue(currentValue[searchProp.name].toString());
+      if (typeof currentValue === 'object') {
+        setInputValue(currentValue[searchProp.name].toString());
+      } else {
+        setInputValue(currentValue);
+      }
     }
 
     const renderLabel = (option) => {
-      if (freeSolo) {
-        return option ? option.toString() : '';
-      }
-
-      let optionLabel = '';
-
-      if (option && option[searchProp.name]) {
-        optionLabel = option[searchProp.name];
-      }
-
-      return optionLabel === '' || optionLabel === null
-        ? '-- empty --'
-        : optionLabel.toString();
+      return option ? option.toString() : '';
     };
 
     const MuiAutocomplete = (
-      <Autocomplete
-        disableCloseOnSelect={!closeOnSelect}
-        disabled={disabled}
-        freeSolo={freeSolo}
-        {...(optionType === 'model' && {
-          getOptionLabel: renderLabel,
-        })}
-        inputValue={inputValue}
-        loading={loading}
-        onClose={() => {
-          B.triggerEvent('onClose');
-        }}
-        multiple={multiple}
-        onChange={(_, newValue) => {
-          setValue(newValue || (multiple ? [] : ''));
+      <FormControl
+        classes={{ root: classes.formControl }}
+        variant={variant}
+        size={size}
+        fullWidth={fullWidth}
+        required={required && !value}
+        margin={margin}
+        error={errorState}
+      >
+        <Autocomplete
+          disableCloseOnSelect={!closeOnSelect}
+          disabled={disabled}
+          freeSolo={freeSolo}
+          {...(optionType === 'model' && {
+            getOptionLabel: renderLabel,
+          })}
+          inputValue={inputValue}
+          loading={loading}
+          onBlur={(event) => {
+            let validation = event.target.validity;
 
-          let triggerEventValue;
-
-          if (optionType === 'model') {
-            if (multiple) {
-              setDebouncedInputValue('');
-
-              if (freeSolo) {
-                triggerEventValue = newValue || [];
-              } else {
-                triggerEventValue =
-                  newValue.length === 0
-                    ? []
-                    : newValue.map((x) => x[valueProp.name]);
-              }
-            } else if (freeSolo) {
-              triggerEventValue = newValue || '';
-            } else {
-              triggerEventValue = newValue ? newValue[valueProp.name] : '';
+            if (isNumberType) {
+              validation = customPatternValidation(event.target);
             }
-          } else if (optionType === 'property') {
-            triggerEventValue = newValue || '';
-          }
+            handleValidation(validation);
+          }}
+          onChange={(_, newValue) => {
+            setValue(newValue || '');
 
-          B.triggerEvent('onChange', triggerEventValue, changeContext.current);
-        }}
-        onInputChange={(event, newValue) => {
-          if (event && (event.type === 'change' || event.type === 'keydown')) {
-            setInputValue(newValue);
-          } else if (event && event.type === 'click') {
-            setInputValue(newValue);
-            setDebouncedInputValue(newValue);
-          }
-        }}
-        options={currentOptions}
-        renderInput={(params) => (
-          <>
-            {optionType === 'model' && (
-              <input
-                type="hidden"
-                key={value[valueProp.name] ? 'hasValue' : 'isEmpty'}
-                name={nameAttribute || name}
-                value={getHiddenValue(currentValue)}
-              />
-            )}
-            <TextField
-              {...params}
-              InputProps={{
-                ...params.InputProps,
-                endAdornment: (
-                  <>
-                    {loading ? (
-                      <CircularProgress color="inherit" size={20} />
-                    ) : null}
-                    {params.InputProps.endAdornment}
-                  </>
-                ),
-              }}
-              classes={{ root: classes.formControl }}
-              data-component={dataComponentAttribute}
-              disabled={disabled}
-              error={showError}
-              fullWidth={fullWidth}
-              helperText={helperText}
-              label={!hideLabel && label}
-              margin={margin}
-              {...(optionType === 'property' && {
-                name: nameAttribute || name,
-              })}
-              placeholder={placeholder}
-              required={required && !value}
-              size={size}
-              variant={variant}
-            />
-          </>
-        )}
-        {...(renderCheckboxes && {
-          renderOption: (option, { selected }) => (
+            let triggerEventValue;
+
+            if (optionType === 'model') {
+              triggerEventValue = newValue || '';
+            } else if (optionType === 'property') {
+              triggerEventValue = newValue || '';
+            }
+
+            B.triggerEvent(
+              'onChange',
+              triggerEventValue,
+              changeContext.current,
+            );
+          }}
+          onInputChange={(event, newValue) => {
+            if (
+              event &&
+              (event.type === 'change' || event.type === 'keydown')
+            ) {
+              setValue(newValue);
+              setInputValue(newValue);
+            } else if (event && event.type === 'click') {
+              setInputValue(newValue);
+              setDebouncedInputValue(newValue);
+            }
+            let validation = event.target.validity;
+
+            if (isNumberType) {
+              validation = customPatternValidation(event.target);
+            }
+            handleValidation(validation);
+          }}
+          options={currentOptions}
+          renderInput={(params) => (
             <>
-              <Checkbox
-                classes={{ root: classes.checkbox }}
-                icon={<Icon name="CheckBoxOutlineBlank" fontSize="small" />}
-                checkedIcon={<Icon name="CheckBox" fontSize="small" />}
-                style={{ marginRight: 8 }}
-                checked={selected}
+              {optionType === 'model' && (
+                <input
+                  type="hidden"
+                  key={value[valueProp.name] ? 'hasValue' : 'isEmpty'}
+                  name={nameAttribute || name}
+                  value={getHiddenValue(currentValue)}
+                />
+              )}
+              <TextField
+                {...params}
+                InputProps={{
+                  ...params.InputProps,
+                  inputProps: {
+                    ...params.inputProps,
+                    onInvalid: (e) => {
+                      e.preventDefault();
+                      handleValidation(e.target.validity);
+                    },
+                    pattern: validPattern,
+                    minLength: validMinlength,
+                    maxLength: validMaxlength,
+                    min: validMinvalue,
+                  },
+                  endAdornment: (
+                    <>
+                      {loading ? (
+                        <CircularProgress color="inherit" size={20} />
+                      ) : null}
+                      {params.InputProps.endAdornment}
+                    </>
+                  ),
+                }}
+                classes={{ root: classes.formControl }}
+                data-component={dataComponentAttribute}
+                disabled={disabled}
+                error={errorState}
+                fullWidth={fullWidth}
+                label={!hideLabel && label}
+                margin={margin}
+                {...(optionType === 'property' && {
+                  name: nameAttribute || name,
+                })}
+                placeholder={placeholder}
+                required={required}
+                size={size}
+                variant={variant}
               />
-              {renderLabel(option)}
             </>
-          ),
-        })}
-        value={currentValue}
-      />
+          )}
+          value={currentValue}
+        />
+        {helper && (
+          <FormHelperText classes={{ root: classes.helper }}>
+            {helper}
+          </FormHelperText>
+        )}
+      </FormControl>
     );
 
     if (optionType === 'model') {
