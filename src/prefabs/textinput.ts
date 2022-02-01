@@ -42,7 +42,7 @@ const hooks = {
   $afterDelete: [deleteActionVariable],
 };
 
-const textInput = prefab('textinput', attributes, undefined, [
+const textInput = prefab('TextInput', attributes, undefined, [
   component('TextInput', { options, ...hooks }, []),
 ]);
 
