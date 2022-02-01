@@ -110,7 +110,7 @@ const advancedOptions = {
 };
 
 const variant = buttongroup('Variant', [
-  ['Standard', 'stanndard'],
+  ['Standard', 'standard'],
   ['Outlined', 'outlined'],
   ['Filled', 'filled'],
 ]);

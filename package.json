@@ -5,10 +5,11 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
-    "@betty-blocks/component-sdk": "^1.1.0"
+    "@betty-blocks/component-sdk": "^1.2.0",
+    "react": "^17.0.2"
   },
   "devDependencies": {
-    "@betty-blocks/cli": "^25.14.2",
+    "@betty-blocks/cli": "^25.16.0",
     "eslint": "^5.9.0",
     "eslint-config-airbnb": "17.1.0",
     "eslint-config-prettier": "^3.3.0",

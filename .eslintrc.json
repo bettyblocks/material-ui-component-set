@@ -6,7 +6,7 @@
     "jasmine": true
   },
   "rules": {
-    "react/jsx-filename-extension": [1, { "extensions": [".js"] }],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".tsx"] }],
     "react/jsx-no-undef": [2, { "allowGlobals": true }],
     "no-restricted-globals": 0,
     "prettier/prettier": [
