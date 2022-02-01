@@ -17,7 +17,7 @@
       name: 'Single & Custom Autocomplete',
       options: [
         {
-          value: { label: ['Search'], value: [] },
+          value: { label: ['Autocomplete'], value: [] },
           label: 'Label',
           key: 'customModelAttribute',
           type: 'CUSTOM_MODEL_ATTRIBUTE',
