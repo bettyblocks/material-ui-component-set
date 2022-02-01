@@ -12,12 +12,9 @@ import {
   showIfTrue,
 } from '@betty-blocks/component-sdk';
 
-import categories from './helpers/categories';
-import icons from './helpers/icons';
-
 const attributes = {
-  category: categories.form,
-  icon: icons.TextInputIcon,
+  category: 'FORM',
+  icon: 'TextInputIcon',
 };
 
 const validationAttrs = {
