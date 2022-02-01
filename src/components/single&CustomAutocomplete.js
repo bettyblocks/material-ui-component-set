@@ -1,11 +1,12 @@
 (() => ({
-  name: 'SingleAutoComplete',
+  name: 'Single & Custom Autocomplete',
   type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { Autocomplete } = window.MaterialUI.Lab;
-    const { CircularProgress, TextField } = window.MaterialUI.Core;
+    const { CircularProgress, TextField, FormControl, FormHelperText } =
+      window.MaterialUI.Core;
     const {
       InteractionScope,
       ModelProvider,
@@ -15,7 +16,6 @@
       useAllQuery,
       useFilter,
       useText,
-      Icon,
     } = B;
     const {
       closeOnSelect,
@@ -28,17 +28,27 @@
       helperText: helperTextRaw,
       hideLabel,
       margin,
+      maxlength,
+      type,
+      minlength,
+      minvalue,
+      model,
       nameAttribute: nameAttributeRaw,
       optionType,
       order,
       orderBy,
+      pattern,
       placeholder: placeholderRaw,
       property,
-      model,
+      suggestionsProperty,
       showError,
-      searchProperty,
       size,
-      valueProperty,
+      validationBelowMinimum = [''],
+      validationPatternMismatch = [''],
+      validationTooLong = [''],
+      validationTooShort = [''],
+      validationTypeMismatch = [''],
+      validationValueMissing = [''],
       variant,
     } = options;
     const numberPropTypes = ['serial', 'minutes', 'count', 'integer'];
@@ -47,18 +57,90 @@
      * To understand this component it is important to know what the following options are used for:
      *
      * customModelAttribute: To label how the data will be send to an action when a form is submitted. Also to get the default value when used in an update form.
+     * freeSolo: Allows any value to be submitted from the Autocomplete. Normally only values rendered as options in the dropdown can be selected and submitted.
+     * multiple: Allows multiple values to be selected. Will be send to the backend as a string with comma separated values
      * optionType: Is one of two values: `property` or `model`. When the value is `property` we're working with a list property to show a list of selectable values, otherwise we're working with a model.
      *
      */
 
+    const freeSolo = true;
     const isDev = env === 'dev';
     const displayError = errorType === 'built-in';
     const placeholder = useText(placeholderRaw);
-    const helperText = useText(helperTextRaw);
+    const [helper, setHelper] = useState(useText(helperTextRaw));
     const nameAttribute = useText(nameAttributeRaw);
     const changeContext = useRef(null);
     const dataComponentAttribute =
       useText(dataComponentAttributeRaw) || 'AutoComplete';
+    const [errorState, setErrorState] = useState(showError);
+    const isNumberType = type === 'number';
+
+    const validPattern = pattern || null;
+    const validMinlength = minlength || null;
+    const validMaxlength = maxlength || null;
+    const validMinvalue = minvalue || null;
+
+    const patternMismatchMessage = useText(validationPatternMismatch);
+    const typeMismatchMessage = useText(validationTypeMismatch);
+    const valueMissingMessage = useText(validationValueMissing);
+    const tooLongMessage = useText(validationTooLong);
+    const tooShortMessage = useText(validationTooShort);
+    const belowMinimumMessage = useText(validationBelowMinimum);
+    const helperTextResolved = useText(helperTextRaw);
+
+    const validationMessage = (validityObject) => {
+      if (!validityObject) {
+        return '';
+      }
+      if (validityObject.customError && patternMismatchMessage) {
+        return patternMismatchMessage;
+      }
+      if (validityObject.valid) {
+        return '';
+      }
+      if (validityObject.typeMismatch && typeMismatchMessage) {
+        return typeMismatchMessage;
+      }
+      if (validityObject.patternMismatch && patternMismatchMessage) {
+        return patternMismatchMessage;
+      }
+      if (validityObject.valueMissing && valueMissingMessage) {
+        return valueMissingMessage;
+      }
+      if (validityObject.tooLong && tooLongMessage) {
+        return tooLongMessage;
+      }
+      if (validityObject.tooShort && tooShortMessage) {
+        return tooShortMessage;
+      }
+      if (validityObject.rangeUnderflow && belowMinimumMessage) {
+        return belowMinimumMessage;
+      }
+      return '';
+    };
+
+    const handleValidation = (validation) => {
+      if (validation) {
+        setErrorState(!validation.valid);
+      }
+      const message = validationMessage(validation) || helperTextResolved;
+      setHelper(message);
+    };
+
+    const customPatternValidation = (target) => {
+      const { value: eventValue, validity } = target;
+      if (!pattern) {
+        return validity;
+      }
+      const patternRegex = RegExp(`^${pattern}$`);
+      const isValid = patternRegex.test(eventValue);
+      target.setCustomValidity(isValid ? '' : 'Invalid field.');
+      return {
+        ...validity,
+        valid: isValid,
+        patternMismatch: !isValid,
+      };
+    };
 
     const {
       id,
@@ -80,14 +162,20 @@
 
     /*
      * Selected value of the autocomplete.
+     *
+     * It is an object or and array of objects (in case of multiple). The object being a one on one copy of the result of the request.
+     * In case of freeSolo the type is string or and array of strings.
+     *
      */
     const [value, setValue] = useState(initalValue);
 
     /*
-     * User input in the autocomplete
+     * User input in the autocomplete. In case of freeSolo this is the same as `value`
      */
     const [inputValue, setInputValue] = useState(
-      optionType === 'property' ? defaultValue : '',
+      optionType === 'property' || (optionType === 'model' && freeSolo)
+        ? defaultValue
+        : '',
     );
 
     /*
@@ -106,10 +194,8 @@
       getProperty(property) || {};
     const isListProperty = propertyKind.toLowerCase() === 'list';
 
-    const searchProp = getProperty(searchProperty) || {};
-    const valueProp = getProperty(valueProperty) || {};
-    const hasSearch = searchProp && searchProp.id;
-    const hasValue = valueProp && valueProp.id;
+    const suggestionsProp = getProperty(suggestionsProperty) || {};
+    const hasValue = suggestionsProp && suggestionsProp.id;
 
     let valid = false;
     let message = '';
@@ -147,19 +233,10 @@
           message = 'No model selected';
           break;
         }
-        if (!hasSearch && !hasValue) {
-          message = 'No property selected';
-          break;
-        }
         if (!hasValue) {
-          message = 'No value propery selected';
+          message = 'No suggestions property selected';
           break;
         }
-        if (!hasSearch) {
-          message = 'No label property selected';
-          break;
-        }
-
         valid = true;
         break;
       }
@@ -206,8 +283,8 @@
     // We need to do this, because options.filter is not immutable
     const filter = { ...optionFilter };
 
-    const searchPropIsNumber = numberPropTypes.includes(searchProp.kind);
-    const valuePropIsNumber = numberPropTypes.includes(valueProp.kind);
+    const searchPropIsNumber = numberPropTypes.includes(suggestionsProp.kind);
+    const valuePropIsNumber = numberPropTypes.includes(suggestionsProp.kind);
 
     /*
      * We extend the option filter with the value of the `value` state and the value of the `inputValue` state.
@@ -220,47 +297,31 @@
       (searchPropIsNumber
         ? parseInt(debouncedInputValue, 10)
         : debouncedInputValue) ===
-        (typeof value === 'string' ? value : value[searchProp.name])
+        (typeof value === 'string' ? value : value[suggestionsProp.name]) &&
+      !freeSolo
     ) {
       filter._or = [
         {
-          [searchProp.name]: {
+          [suggestionsProp.name]: {
             [searchPropIsNumber ? 'eq' : 'regex']: searchPropIsNumber
               ? parseInt(debouncedInputValue, 10)
               : debouncedInputValue,
           },
         },
         {
-          [valueProp.name]: {
+          [suggestionsProp.name]: {
             neq: valuePropIsNumber
-              ? parseInt(value[valueProp.name], 10)
-              : value[valueProp.name],
+              ? parseInt(value[suggestionsProp.name], 10)
+              : value[suggestionsProp.name],
           },
         },
       ];
     } else if (debouncedInputValue) {
-      filter[searchProp.name] = {
+      filter[suggestionsProp.name] = {
         [searchPropIsNumber ? 'eq' : 'regex']: searchPropIsNumber
           ? parseInt(debouncedInputValue, 10)
           : debouncedInputValue,
       };
-    } else if (value !== '') {
-      filter._or = [
-        {
-          [valueProp.name]: {
-            [valuePropIsNumber ? 'eq' : 'regex']:
-              typeof value === 'string' ? value : value[valueProp.name],
-          },
-        },
-      ];
-
-      if (defaultValueEvaluatedRef.current) {
-        filter._or.push({
-          [valueProp.name]: {
-            neq: typeof value === 'string' ? value : value[valueProp.name],
-          },
-        });
-      }
     }
     /* eslint-enable no-underscore-dangle */
 
@@ -367,21 +428,11 @@
 
     if (error && displayError) {
       valid = false;
-      message = 'Something went wrong while loading.';
+      message = error;
     }
 
     // If the default value is a value that lives outside the take range of the query we should fetch the values before we continue.
-    if (!isDev && !defaultValueEvaluatedRef.current && value && results) {
-      setValue((prev) => {
-        return (
-          results.find(
-            (result) =>
-              result[valueProp.name] &&
-              prev[valueProp.name] === result[valueProp.name],
-          ) || ''
-        );
-      });
-
+    if (!isDev && !defaultValueEvaluatedRef.current && freeSolo) {
       defaultValueEvaluatedRef.current = true;
     }
 
@@ -446,18 +497,15 @@
               inputProps: {
                 tabIndex: isDev ? -1 : undefined,
               },
-              endAdornment: <Icon name="ExpandMore" />,
             }}
-            classes={{ root: classes.formControl }}
             dataComponent={dataComponentAttribute}
             disabled={disabled || !valid}
-            error={showError}
+            error={errorState}
             fullWidth={fullWidth}
-            helperText={helperText}
             label={!hideLabel && label}
             margin={margin}
             placeholder={placeholder}
-            required={required && !value}
+            required={required}
             size={size}
             value={designTimeValue}
             variant={variant}
@@ -475,22 +523,7 @@
         if (!results) {
           return [];
         }
-
-        if (
-          !results.some((result) => {
-            if (typeof value === 'string') {
-              return valuePropIsNumber
-                ? result[valueProp.name] === parseInt(value, 10)
-                : result[valueProp.name] === value;
-            }
-
-            return result[valueProp.name] === value[valueProp.name];
-          })
-        ) {
-          return value !== '' ? [value, ...results] : [...results];
-        }
-
-        return results;
+        return results.map((result) => result[suggestionsProp.name]);
       }
 
       return [];
@@ -502,23 +535,7 @@
      * Convert `value` state into something the `value` prop of the `Autocomplete` component will accept with the right settings
      */
     const getValue = () => {
-      if (optionType === 'property') {
-        return value;
-      }
-
-      if (currentOptions.length === 0) {
-        return null;
-      }
-
-      return currentOptions.find((option) => {
-        if (typeof value === 'string') {
-          return valuePropIsNumber
-            ? option[valueProp.name] === parseInt(value, 10)
-            : option[valueProp.name] === value;
-        }
-
-        return option[valueProp.name] === value[valueProp.name];
-      });
+      return value;
     };
 
     /*
@@ -533,7 +550,7 @@
         return currentValue;
       }
 
-      return currentValue[valueProp.name];
+      return currentValue[suggestionsProp.name];
     };
 
     /*
@@ -547,95 +564,139 @@
     // In the first render we want to make sure to convert the default value
     if (!inputValue && currentValue) {
       setValue(currentValue);
-      setInputValue(currentValue[searchProp.name].toString());
+      if (typeof currentValue === 'object') {
+        setInputValue(currentValue[suggestionsProp.name].toString());
+      } else {
+        setInputValue(currentValue);
+      }
     }
 
     const renderLabel = (option) => {
-      let optionLabel = '';
-
-      if (option && option[searchProp.name]) {
-        optionLabel = option[searchProp.name];
-      }
-
-      return optionLabel === '' || optionLabel === null
-        ? '-- empty --'
-        : optionLabel.toString();
+      return option ? option.toString() : '';
     };
 
     const MuiAutocomplete = (
-      <Autocomplete
-        disableCloseOnSelect={!closeOnSelect}
-        disabled={disabled}
-        {...(optionType === 'model' && {
-          getOptionLabel: renderLabel,
-        })}
-        inputValue={inputValue}
-        loading={loading}
-        onChange={(_, newValue) => {
-          setValue(newValue || '');
+      <FormControl
+        classes={{ root: classes.formControl }}
+        variant={variant}
+        size={size}
+        fullWidth={fullWidth}
+        required={required && !value}
+        margin={margin}
+        error={errorState}
+      >
+        <Autocomplete
+          disableCloseOnSelect={!closeOnSelect}
+          disabled={disabled}
+          freeSolo={freeSolo}
+          {...(optionType === 'model' && {
+            getOptionLabel: renderLabel,
+          })}
+          inputValue={inputValue}
+          loading={loading}
+          onBlur={(event) => {
+            let validation = event.target.validity;
 
-          let triggerEventValue;
+            if (isNumberType) {
+              validation = customPatternValidation(event.target);
+            }
+            handleValidation(validation);
+          }}
+          onChange={(_, newValue) => {
+            setValue(newValue || '');
 
-          if (optionType === 'model') {
-            triggerEventValue = newValue ? newValue[valueProp.name] : '';
-          } else if (optionType === 'property') {
-            triggerEventValue = newValue || '';
-          }
+            let triggerEventValue;
 
-          B.triggerEvent('onChange', triggerEventValue, changeContext.current);
-        }}
-        onInputChange={(event, newValue) => {
-          if (event && (event.type === 'change' || event.type === 'keydown')) {
-            setInputValue(newValue);
-          } else if (event && event.type === 'click') {
-            setInputValue(newValue);
-            setDebouncedInputValue(newValue);
-          }
-        }}
-        options={currentOptions}
-        renderInput={(params) => (
-          <>
-            {optionType === 'model' && (
-              <input
-                type="hidden"
-                key={value[valueProp.name] ? 'hasValue' : 'isEmpty'}
-                name={nameAttribute || name}
-                value={getHiddenValue(currentValue)}
+            if (optionType === 'model') {
+              triggerEventValue = newValue || '';
+            } else if (optionType === 'property') {
+              triggerEventValue = newValue || '';
+            }
+
+            B.triggerEvent(
+              'onChange',
+              triggerEventValue,
+              changeContext.current,
+            );
+          }}
+          onInputChange={(event, newValue) => {
+            if (
+              event &&
+              (event.type === 'change' || event.type === 'keydown')
+            ) {
+              setValue(newValue);
+              setInputValue(newValue);
+            } else if (event && event.type === 'click') {
+              setInputValue(newValue);
+              setDebouncedInputValue(newValue);
+            }
+            let validation = event.target.validity;
+
+            if (isNumberType) {
+              validation = customPatternValidation(event.target);
+            }
+            handleValidation(validation);
+          }}
+          options={currentOptions}
+          renderInput={(params) => (
+            <>
+              {optionType === 'model' && (
+                <input
+                  type="hidden"
+                  key={value[suggestionsProp.name] ? 'hasValue' : 'isEmpty'}
+                  name={nameAttribute || name}
+                  value={getHiddenValue(currentValue)}
+                />
+              )}
+              <TextField
+                {...params}
+                InputProps={{
+                  ...params.InputProps,
+                  inputProps: {
+                    ...params.inputProps,
+                    onInvalid: (e) => {
+                      e.preventDefault();
+                      handleValidation(e.target.validity);
+                    },
+                    pattern: validPattern,
+                    minLength: validMinlength,
+                    maxLength: validMaxlength,
+                    min: validMinvalue,
+                  },
+                  endAdornment: (
+                    <>
+                      {loading ? (
+                        <CircularProgress color="inherit" size={20} />
+                      ) : null}
+                      {params.InputProps.endAdornment}
+                    </>
+                  ),
+                }}
+                classes={{ root: classes.formControl }}
+                data-component={dataComponentAttribute}
+                disabled={disabled}
+                error={errorState}
+                fullWidth={fullWidth}
+                label={!hideLabel && label}
+                margin={margin}
+                {...(optionType === 'property' && {
+                  name: nameAttribute || name,
+                })}
+                placeholder={placeholder}
+                required={required}
+                size={size}
+                variant={variant}
               />
-            )}
-            <TextField
-              {...params}
-              InputProps={{
-                ...params.InputProps,
-                endAdornment: (
-                  <>
-                    {loading ? (
-                      <CircularProgress color="inherit" size={20} />
-                    ) : null}
-                    {params.InputProps.endAdornment}
-                  </>
-                ),
-              }}
-              classes={{ root: classes.formControl }}
-              data-component={dataComponentAttribute}
-              disabled={disabled}
-              error={showError}
-              fullWidth={fullWidth}
-              helperText={helperText}
-              label={!hideLabel && label}
-              margin={margin}
-              {...(optionType === 'property' && {
-                name: nameAttribute || name,
-              })}
-              placeholder={placeholder}
-              required={required && !value}
-              size={size}
-              variant={variant}
-            />
-          </>
+            </>
+          )}
+          value={currentValue}
+        />
+        {helper && (
+          <FormHelperText classes={{ root: classes.helper }}>
+            {helper}
+          </FormHelperText>
         )}
-        value={currentValue}
-      />
+      </FormControl>
     );
 
     if (optionType === 'model') {
@@ -654,8 +715,9 @@
     return MuiAutocomplete;
   })(),
   styles: (B) => (t) => {
-    const { Styling } = B;
+    const { Styling, color } = B;
     const style = new Styling(t);
+    const getOpacColor = (col, val) => color.alpha(col, val);
 
     return {
       root: {
@@ -663,6 +725,18 @@
           fullWidth ? 'block' : 'inline-block',
         '& > *': {
           pointerEvents: 'none',
+        },
+      },
+      checkbox: {
+        color: ({ options: { checkboxColor } }) => [
+          style.getColor(checkboxColor),
+          '!important',
+        ],
+        '&.MuiCheckbox-root.Mui-checked:hover, &.MuiIconButton-root:hover': {
+          backgroundColor: ({ options: { checkboxColor } }) => [
+            getOpacColor(style.getColor(checkboxColor), 0.04),
+            '!important',
+          ],
         },
       },
       formControl: {

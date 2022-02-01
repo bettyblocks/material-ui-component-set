@@ -1,12 +1,11 @@
 (() => ({
-  name: 'MultiAutoComplete',
+  name: 'Single Value Autocomplete',
   type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { Autocomplete } = window.MaterialUI.Lab;
-    const { Checkbox, Chip, CircularProgress, TextField } =
-      window.MaterialUI.Core;
+    const { CircularProgress, TextField } = window.MaterialUI.Core;
     const {
       InteractionScope,
       ModelProvider,
@@ -36,7 +35,6 @@
       placeholder: placeholderRaw,
       property,
       model,
-      renderCheckboxes,
       showError,
       searchProperty,
       size,
@@ -49,14 +47,11 @@
      * To understand this component it is important to know what the following options are used for:
      *
      * customModelAttribute: To label how the data will be send to an action when a form is submitted. Also to get the default value when used in an update form.
-     * freeSolo: Allows any value to be submitted from the Autocomplete. Normally only values rendered as options in the dropdown can be selected and submitted.
-     * multiple: Allows multiple values to be selected. Will be send to the backend as a string with comma separated values
      * optionType: Is one of two values: `property` or `model`. When the value is `property` we're working with a list property to show a list of selectable values, otherwise we're working with a model.
      *
      */
 
     const isDev = env === 'dev';
-    const multiple = true;
     const displayError = errorType === 'built-in';
     const placeholder = useText(placeholderRaw);
     const helperText = useText(helperTextRaw);
@@ -81,45 +76,19 @@
     const label = useText(labelRaw);
     const defaultValue = useText(valueRaw, { rawValue: true });
 
-    let initalValue = defaultValue.replace(/\n/g, '');
-
-    if (defaultValue.trim() === '') {
-      initalValue = [];
-    } else {
-      initalValue = defaultValue
-        .trim()
-        .split(',')
-        .map((x) => x.trim());
-    }
+    const initalValue = defaultValue.replace(/\n/g, '');
 
     /*
      * Selected value of the autocomplete.
-     *
-     * It is an object or and array of objects (in case of multiple). The object being a one on one copy of the result of the request.
-     * In case of freeSolo the type is string or and array of strings.
-     *
      */
     const [value, setValue] = useState(initalValue);
 
-    useEffect(() => {
-      if (isDev && typeof value === 'string') {
-        if (value.trim() === '') {
-          setValue([]);
-        } else {
-          setValue(
-            value
-              .trim()
-              .split(',')
-              .map((x) => x.trim()),
-          );
-        }
-      }
-    }, [multiple]);
-
     /*
-     * User input in the autocomplete. In case of freeSolo this is the same as `value`
+     * User input in the autocomplete
      */
-    const [inputValue, setInputValue] = useState('');
+    const [inputValue, setInputValue] = useState(
+      optionType === 'property' ? defaultValue : '',
+    );
 
     /*
      * Debounced user input to only send a request every 250ms
@@ -246,49 +215,53 @@
      * Those values always need to be returned in the results of the request
      */
     /* eslint-disable no-underscore-dangle */
-    if (value.length > 0) {
-      if (!filter._or) {
-        filter._or = [];
-      }
-
-      value.forEach((x) => {
-        filter._or.push({
-          [valueProp.name]: {
-            [valuePropIsNumber ? 'eq' : 'regex']:
-              typeof x === 'string' ? x : x[valueProp.name],
-          },
-        });
-      });
-      if (defaultValueEvaluatedRef.current) {
-        if (!filter._or) {
-          filter._or = [];
-        }
-
-        filter._or.push({
-          [valueProp.name]: {
-            neq:
-              typeof value[0] === 'string'
-                ? value[0]
-                : value[0][valueProp.name],
-          },
-        });
-      }
-    } else if (multiple) {
-      if (debouncedInputValue) {
-        if (!filter._or) {
-          filter._or = [];
-        }
-
-        filter._or.push({
+    if (
+      debouncedInputValue &&
+      (searchPropIsNumber
+        ? parseInt(debouncedInputValue, 10)
+        : debouncedInputValue) ===
+        (typeof value === 'string' ? value : value[searchProp.name])
+    ) {
+      filter._or = [
+        {
           [searchProp.name]: {
             [searchPropIsNumber ? 'eq' : 'regex']: searchPropIsNumber
               ? parseInt(debouncedInputValue, 10)
               : debouncedInputValue,
           },
+        },
+        {
+          [valueProp.name]: {
+            neq: valuePropIsNumber
+              ? parseInt(value[valueProp.name], 10)
+              : value[valueProp.name],
+          },
+        },
+      ];
+    } else if (debouncedInputValue) {
+      filter[searchProp.name] = {
+        [searchPropIsNumber ? 'eq' : 'regex']: searchPropIsNumber
+          ? parseInt(debouncedInputValue, 10)
+          : debouncedInputValue,
+      };
+    } else if (value !== '') {
+      filter._or = [
+        {
+          [valueProp.name]: {
+            [valuePropIsNumber ? 'eq' : 'regex']:
+              typeof value === 'string' ? value : value[valueProp.name],
+          },
+        },
+      ];
+
+      if (defaultValueEvaluatedRef.current) {
+        filter._or.push({
+          [valueProp.name]: {
+            neq: typeof value === 'string' ? value : value[valueProp.name],
+          },
         });
       }
     }
-
     /* eslint-enable no-underscore-dangle */
 
     /*
@@ -394,28 +367,26 @@
 
     if (error && displayError) {
       valid = false;
-      message = error;
+      message = 'Something went wrong while loading.';
     }
 
     // If the default value is a value that lives outside the take range of the query we should fetch the values before we continue.
     if (!isDev && !defaultValueEvaluatedRef.current && value && results) {
       setValue((prev) => {
-        return prev
-          .map((val) =>
-            results.find(
-              (result) =>
-                result[valueProp.name] ===
-                (valuePropIsNumber ? parseInt(val, 10) : val),
-            ),
-          )
-          .filter((x) => typeof x !== 'undefined');
+        return (
+          results.find(
+            (result) =>
+              result[valueProp.name] &&
+              prev[valueProp.name] === result[valueProp.name],
+          ) || ''
+        );
       });
 
       defaultValueEvaluatedRef.current = true;
     }
 
     B.defineFunction('Clear', () => {
-      setValue([]);
+      setValue('');
       setInputValue('');
       setDebouncedInputValue('');
     });
@@ -476,14 +447,6 @@
                 tabIndex: isDev ? -1 : undefined,
               },
               endAdornment: <Icon name="ExpandMore" />,
-              ...(!designTimeValue && {
-                startAdornment: (
-                  <>
-                    <Chip label="Chip 1" onDelete={() => {}} />
-                    <Chip label="Chip 2" onDelete={() => {}} />
-                  </>
-                ),
-              }),
             }}
             classes={{ root: classes.formControl }}
             dataComponent={dataComponentAttribute}
@@ -512,25 +475,24 @@
         if (!results) {
           return [];
         }
-        const nonFetchedOptions = [];
-        value.forEach((x) => {
-          if (
-            !results.some((result) => {
-              if (typeof x === 'string') {
-                return valuePropIsNumber
-                  ? result[valueProp.name] === parseInt(x, 10)
-                  : result[valueProp.name] === x;
-              }
 
-              return result[valueProp.name] === x[valueProp.name];
-            })
-          ) {
-            nonFetchedOptions.push(x);
-          }
-        });
+        if (
+          !results.some((result) => {
+            if (typeof value === 'string') {
+              return valuePropIsNumber
+                ? result[valueProp.name] === parseInt(value, 10)
+                : result[valueProp.name] === value;
+            }
 
-        return [...nonFetchedOptions, ...results];
+            return result[valueProp.name] === value[valueProp.name];
+          })
+        ) {
+          return value !== '' ? [value, ...results] : [...results];
+        }
+
+        return results;
       }
+
       return [];
     };
 
@@ -540,19 +502,23 @@
      * Convert `value` state into something the `value` prop of the `Autocomplete` component will accept with the right settings
      */
     const getValue = () => {
-      return value
-        .map((x) =>
-          currentOptions.find((option) => {
-            if (typeof x === 'string') {
-              return valuePropIsNumber
-                ? option[valueProp.name] === parseInt(x, 10)
-                : option[valueProp.name] === x;
-            }
+      if (optionType === 'property') {
+        return value;
+      }
 
-            return option[valueProp.name] === x[valueProp.name];
-          }),
-        )
-        .filter((x) => x !== undefined);
+      if (currentOptions.length === 0) {
+        return null;
+      }
+
+      return currentOptions.find((option) => {
+        if (typeof value === 'string') {
+          return valuePropIsNumber
+            ? option[valueProp.name] === parseInt(value, 10)
+            : option[valueProp.name] === value;
+        }
+
+        return option[valueProp.name] === value[valueProp.name];
+      });
     };
 
     /*
@@ -563,10 +529,11 @@
         return '';
       }
 
-      return currentValue
-        .filter((x) => x !== undefined)
-        .map((x) => (typeof x === 'string' ? x : x[valueProp.name]))
-        .join(',');
+      if (typeof currentValue === 'string') {
+        return currentValue;
+      }
+
+      return currentValue[valueProp.name];
     };
 
     /*
@@ -576,6 +543,12 @@
      */
 
     const currentValue = getValue();
+
+    // In the first render we want to make sure to convert the default value
+    if (!inputValue && currentValue) {
+      setValue(currentValue);
+      setInputValue(currentValue[searchProp.name].toString());
+    }
 
     const renderLabel = (option) => {
       let optionLabel = '';
@@ -598,18 +571,13 @@
         })}
         inputValue={inputValue}
         loading={loading}
-        multiple={multiple}
         onChange={(_, newValue) => {
-          setValue(newValue || (multiple ? [] : ''));
+          setValue(newValue || '');
 
           let triggerEventValue;
 
           if (optionType === 'model') {
-            setDebouncedInputValue('');
-            triggerEventValue =
-              newValue.length === 0
-                ? []
-                : newValue.map((x) => x[valueProp.name]);
+            triggerEventValue = newValue ? newValue[valueProp.name] : '';
           } else if (optionType === 'property') {
             triggerEventValue = newValue || '';
           }
@@ -666,20 +634,6 @@
             />
           </>
         )}
-        {...(renderCheckboxes && {
-          renderOption: (option, { selected }) => (
-            <>
-              <Checkbox
-                classes={{ root: classes.checkbox }}
-                icon={<Icon name="CheckBoxOutlineBlank" fontSize="small" />}
-                checkedIcon={<Icon name="CheckBox" fontSize="small" />}
-                style={{ marginRight: 8 }}
-                checked={selected}
-              />
-              {renderLabel(option)}
-            </>
-          ),
-        })}
         value={currentValue}
       />
     );
@@ -700,9 +654,8 @@
     return MuiAutocomplete;
   })(),
   styles: (B) => (t) => {
-    const { Styling, color } = B;
+    const { Styling } = B;
     const style = new Styling(t);
-    const getOpacColor = (col, val) => color.alpha(col, val);
 
     return {
       root: {
@@ -710,18 +663,6 @@
           fullWidth ? 'block' : 'inline-block',
         '& > *': {
           pointerEvents: 'none',
-        },
-      },
-      checkbox: {
-        color: ({ options: { checkboxColor } }) => [
-          style.getColor(checkboxColor),
-          '!important',
-        ],
-        '&.MuiCheckbox-root.Mui-checked:hover, &.MuiIconButton-root:hover': {
-          backgroundColor: ({ options: { checkboxColor } }) => [
-            getOpacColor(style.getColor(checkboxColor), 0.04),
-            '!important',
-          ],
         },
       },
       formControl: {

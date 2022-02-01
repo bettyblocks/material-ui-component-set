@@ -1,11 +1,11 @@
 (() => ({
-  name: 'Single value',
+  name: 'Multi. & Custom',
   icon: 'AutoCompleteIcon',
   category: 'FORM',
   keywords: ['Form', 'input', 'auto', 'complete', 'autocomplete'],
   structure: [
     {
-      name: 'SingleAutoComplete',
+      name: 'Multi & Custom Autocomplete',
       options: [
         {
           value: { label: ['Autocomplete'], value: [] },
@@ -110,8 +110,8 @@
         },
         {
           value: '',
-          label: 'Label property',
-          key: 'searchProperty',
+          label: 'suggestion(s) property',
+          key: 'suggestionsProperty',
           type: 'PROPERTY',
           configuration: {
             condition: {
@@ -123,16 +123,16 @@
           },
         },
         {
-          value: '',
-          label: 'Value property',
-          key: 'valueProperty',
-          type: 'PROPERTY',
+          type: 'TOGGLE',
+          label: 'Add checkboxes',
+          key: 'renderCheckboxes',
+          value: false,
           configuration: {
             condition: {
               type: 'SHOW',
-              option: 'optionType',
+              option: 'multiple',
               comparator: 'EQ',
-              value: 'model',
+              value: true,
             },
           },
         },
@@ -352,6 +352,20 @@
           type: 'COLOR',
           label: 'Text color chip',
           key: 'textColorChip',
+          value: 'Accent3',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'styles',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'COLOR',
+          label: 'Checkbox color',
+          key: 'checkboxColor',
           value: 'Accent3',
           configuration: {
             condition: {

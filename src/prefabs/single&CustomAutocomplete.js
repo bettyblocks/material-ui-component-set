@@ -14,7 +14,7 @@
   ],
   structure: [
     {
-      name: 'SingleFreeSoloAutocomplete',
+      name: 'Single & Custom Autocomplete',
       options: [
         {
           value: { label: ['Search'], value: [] },

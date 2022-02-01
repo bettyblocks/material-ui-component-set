@@ -1,5 +1,5 @@
 (() => ({
-  name: 'FreeMultiAutoComplete',
+  name: 'Multi & Custom Autocomplete',
   type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
