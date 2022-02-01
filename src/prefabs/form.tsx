@@ -30,7 +30,7 @@ const attributes = {
 };
 
 const options = {
-  actionId: option('CUSTOM', { label: 'Action', value: '' }),
+  actionId: option('ACTION_JS', { label: 'Action', value: '' }),
   modelId: model('Model'),
   filter: filter('Filter', { configuration: { dependsOn: 'modelId' } }),
 };
