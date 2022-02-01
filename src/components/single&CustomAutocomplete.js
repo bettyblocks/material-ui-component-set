@@ -1,5 +1,5 @@
 (() => ({
-  name: 'SingleFreeSoloAutocomplete',
+  name: 'Single & Custom Autocomplete',
   type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
@@ -40,7 +40,7 @@
       pattern,
       placeholder: placeholderRaw,
       property,
-      searchProperty,
+      suggestionsProperty,
       showError,
       size,
       validationBelowMinimum = [''],
@@ -49,7 +49,6 @@
       validationTooShort = [''],
       validationTypeMismatch = [''],
       validationValueMissing = [''],
-      valueProperty,
       variant,
     } = options;
     const numberPropTypes = ['serial', 'minutes', 'count', 'integer'];
@@ -195,10 +194,8 @@
       getProperty(property) || {};
     const isListProperty = propertyKind.toLowerCase() === 'list';
 
-    const searchProp = getProperty(searchProperty) || {};
-    const valueProp = getProperty(valueProperty) || {};
-    const hasSearch = searchProp && searchProp.id;
-    const hasValue = valueProp && valueProp.id;
+    const suggestionsProp = getProperty(suggestionsProperty) || {};
+    const hasValue = suggestionsProp && suggestionsProp.id;
 
     let valid = false;
     let message = '';
@@ -236,19 +233,10 @@
           message = 'No model selected';
           break;
         }
-        if (!hasSearch && !hasValue) {
-          message = 'No property selected';
-          break;
-        }
         if (!hasValue) {
-          message = 'No value propery selected';
+          message = 'No suggestions property selected';
           break;
         }
-        if (!hasSearch) {
-          message = 'No label property selected';
-          break;
-        }
-
         valid = true;
         break;
       }
@@ -295,8 +283,8 @@
     // We need to do this, because options.filter is not immutable
     const filter = { ...optionFilter };
 
-    const searchPropIsNumber = numberPropTypes.includes(searchProp.kind);
-    const valuePropIsNumber = numberPropTypes.includes(valueProp.kind);
+    const searchPropIsNumber = numberPropTypes.includes(suggestionsProp.kind);
+    const valuePropIsNumber = numberPropTypes.includes(suggestionsProp.kind);
 
     /*
      * We extend the option filter with the value of the `value` state and the value of the `inputValue` state.
@@ -309,27 +297,27 @@
       (searchPropIsNumber
         ? parseInt(debouncedInputValue, 10)
         : debouncedInputValue) ===
-        (typeof value === 'string' ? value : value[searchProp.name]) &&
+        (typeof value === 'string' ? value : value[suggestionsProp.name]) &&
       !freeSolo
     ) {
       filter._or = [
         {
-          [searchProp.name]: {
+          [suggestionsProp.name]: {
             [searchPropIsNumber ? 'eq' : 'regex']: searchPropIsNumber
               ? parseInt(debouncedInputValue, 10)
               : debouncedInputValue,
           },
         },
         {
-          [valueProp.name]: {
+          [suggestionsProp.name]: {
             neq: valuePropIsNumber
-              ? parseInt(value[valueProp.name], 10)
-              : value[valueProp.name],
+              ? parseInt(value[suggestionsProp.name], 10)
+              : value[suggestionsProp.name],
           },
         },
       ];
     } else if (debouncedInputValue) {
-      filter[searchProp.name] = {
+      filter[suggestionsProp.name] = {
         [searchPropIsNumber ? 'eq' : 'regex']: searchPropIsNumber
           ? parseInt(debouncedInputValue, 10)
           : debouncedInputValue,
@@ -535,7 +523,7 @@
         if (!results) {
           return [];
         }
-        return results.map((result) => result[searchProp.name]);
+        return results.map((result) => result[suggestionsProp.name]);
       }
 
       return [];
@@ -562,7 +550,7 @@
         return currentValue;
       }
 
-      return currentValue[valueProp.name];
+      return currentValue[suggestionsProp.name];
     };
 
     /*
@@ -577,7 +565,7 @@
     if (!inputValue && currentValue) {
       setValue(currentValue);
       if (typeof currentValue === 'object') {
-        setInputValue(currentValue[searchProp.name].toString());
+        setInputValue(currentValue[suggestionsProp.name].toString());
       } else {
         setInputValue(currentValue);
       }
@@ -655,7 +643,7 @@
               {optionType === 'model' && (
                 <input
                   type="hidden"
-                  key={value[valueProp.name] ? 'hasValue' : 'isEmpty'}
+                  key={value[suggestionsProp.name] ? 'hasValue' : 'isEmpty'}
                   name={nameAttribute || name}
                   value={getHiddenValue(currentValue)}
                 />

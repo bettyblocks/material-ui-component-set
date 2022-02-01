@@ -1,5 +1,5 @@
 (() => ({
-  name: 'SingleAutoComplete',
+  name: 'Single Value Autocomplete',
   type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',

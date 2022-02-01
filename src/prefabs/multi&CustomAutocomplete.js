@@ -1,11 +1,11 @@
 (() => ({
-  name: 'Multiple values',
+  name: 'Multi. & Custom',
   icon: 'AutoCompleteIcon',
   category: 'FORM',
   keywords: ['Form', 'input', 'auto', 'complete', 'autocomplete'],
   structure: [
     {
-      name: 'MultiAutoComplete',
+      name: 'Multi & Custom Autocomplete',
       options: [
         {
           value: { label: ['Autocomplete'], value: [] },
@@ -110,22 +110,8 @@
         },
         {
           value: '',
-          label: 'Label property',
-          key: 'searchProperty',
-          type: 'PROPERTY',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'optionType',
-              comparator: 'EQ',
-              value: 'model',
-            },
-          },
-        },
-        {
-          value: '',
-          label: 'Value property',
-          key: 'valueProperty',
+          label: 'suggestion(s) property',
+          key: 'suggestionsProperty',
           type: 'PROPERTY',
           configuration: {
             condition: {
@@ -141,6 +127,14 @@
           label: 'Add checkboxes',
           key: 'renderCheckboxes',
           value: false,
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'multiple',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
         },
         {
           type: 'TOGGLE',

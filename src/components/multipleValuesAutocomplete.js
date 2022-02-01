@@ -1,5 +1,5 @@
 (() => ({
-  name: 'FreeMultiAutoComplete',
+  name: 'Multible Values Autocomplete',
   type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
@@ -57,7 +57,6 @@
 
     const isDev = env === 'dev';
     const multiple = true;
-    const freeSolo = true;
     const displayError = errorType === 'built-in';
     const placeholder = useText(placeholderRaw);
     const helperText = useText(helperTextRaw);
@@ -247,7 +246,34 @@
      * Those values always need to be returned in the results of the request
      */
     /* eslint-disable no-underscore-dangle */
-    if (multiple && value.length > 0) {
+    if (value.length > 0) {
+      if (!filter._or) {
+        filter._or = [];
+      }
+
+      value.forEach((x) => {
+        filter._or.push({
+          [valueProp.name]: {
+            [valuePropIsNumber ? 'eq' : 'regex']:
+              typeof x === 'string' ? x : x[valueProp.name],
+          },
+        });
+      });
+      if (defaultValueEvaluatedRef.current) {
+        if (!filter._or) {
+          filter._or = [];
+        }
+
+        filter._or.push({
+          [valueProp.name]: {
+            neq:
+              typeof value[0] === 'string'
+                ? value[0]
+                : value[0][valueProp.name],
+          },
+        });
+      }
+    } else if (multiple) {
       if (debouncedInputValue) {
         if (!filter._or) {
           filter._or = [];
@@ -262,6 +288,7 @@
         });
       }
     }
+
     /* eslint-enable no-underscore-dangle */
 
     /*
@@ -371,7 +398,19 @@
     }
 
     // If the default value is a value that lives outside the take range of the query we should fetch the values before we continue.
-    if (!isDev && !defaultValueEvaluatedRef.current) {
+    if (!isDev && !defaultValueEvaluatedRef.current && value && results) {
+      setValue((prev) => {
+        return prev
+          .map((val) =>
+            results.find(
+              (result) =>
+                result[valueProp.name] ===
+                (valuePropIsNumber ? parseInt(val, 10) : val),
+            ),
+          )
+          .filter((x) => typeof x !== 'undefined');
+      });
+
       defaultValueEvaluatedRef.current = true;
     }
 
@@ -436,6 +475,7 @@
               inputProps: {
                 tabIndex: isDev ? -1 : undefined,
               },
+              endAdornment: <Icon name="ExpandMore" />,
               ...(!designTimeValue && {
                 startAdornment: (
                   <>
@@ -472,15 +512,25 @@
         if (!results) {
           return [];
         }
+        const nonFetchedOptions = [];
+        value.forEach((x) => {
+          if (
+            !results.some((result) => {
+              if (typeof x === 'string') {
+                return valuePropIsNumber
+                  ? result[valueProp.name] === parseInt(x, 10)
+                  : result[valueProp.name] === x;
+              }
 
-        // If freeSolo is turned on the value and options are strings instead of objects
-        if (freeSolo) {
-          return results.map((result) => result[searchProp.name]);
-        }
+              return result[valueProp.name] === x[valueProp.name];
+            })
+          ) {
+            nonFetchedOptions.push(x);
+          }
+        });
 
-        return results;
+        return [...nonFetchedOptions, ...results];
       }
-
       return [];
     };
 
@@ -490,28 +540,19 @@
      * Convert `value` state into something the `value` prop of the `Autocomplete` component will accept with the right settings
      */
     const getValue = () => {
-      if (optionType === 'property') {
-        return value;
-      }
+      return value
+        .map((x) =>
+          currentOptions.find((option) => {
+            if (typeof x === 'string') {
+              return valuePropIsNumber
+                ? option[valueProp.name] === parseInt(x, 10)
+                : option[valueProp.name] === x;
+            }
 
-      // If freeSolo is turned on the value and options are strings instead of objects
-      if (freeSolo) {
-        return value;
-      }
-
-      if (currentOptions.length === 0) {
-        return multiple ? [] : null;
-      }
-
-      return currentOptions.find((option) => {
-        if (typeof value === 'string') {
-          return valuePropIsNumber
-            ? option[valueProp.name] === parseInt(value, 10)
-            : option[valueProp.name] === value;
-        }
-
-        return option[valueProp.name] === value[valueProp.name];
-      });
+            return option[valueProp.name] === x[valueProp.name];
+          }),
+        )
+        .filter((x) => x !== undefined);
     };
 
     /*
@@ -522,18 +563,10 @@
         return '';
       }
 
-      if (typeof currentValue === 'string') {
-        return currentValue;
-      }
-
-      if (multiple) {
-        return currentValue
-          .filter((x) => x !== undefined)
-          .map((x) => (typeof x === 'string' ? x : x[valueProp.name]))
-          .join(',');
-      }
-
-      return currentValue[valueProp.name];
+      return currentValue
+        .filter((x) => x !== undefined)
+        .map((x) => (typeof x === 'string' ? x : x[valueProp.name]))
+        .join(',');
     };
 
     /*
@@ -544,21 +577,22 @@
 
     const currentValue = getValue();
 
-    // In the first render we want to make sure to convert the default value
-    if (!multiple && !inputValue && currentValue) {
-      setValue(currentValue);
-      setInputValue(currentValue[searchProp.name].toString());
-    }
-
     const renderLabel = (option) => {
-      return option ? option.toString() : '';
+      let optionLabel = '';
+
+      if (option && option[searchProp.name]) {
+        optionLabel = option[searchProp.name];
+      }
+
+      return optionLabel === '' || optionLabel === null
+        ? '-- empty --'
+        : optionLabel.toString();
     };
 
     const MuiAutocomplete = (
       <Autocomplete
         disableCloseOnSelect={!closeOnSelect}
         disabled={disabled}
-        freeSolo={freeSolo}
         {...(optionType === 'model' && {
           getOptionLabel: renderLabel,
         })}
@@ -572,15 +606,10 @@
 
           if (optionType === 'model') {
             setDebouncedInputValue('');
-
-            if (freeSolo) {
-              triggerEventValue = newValue || [];
-            } else {
-              triggerEventValue =
-                newValue.length === 0
-                  ? []
-                  : newValue.map((x) => x[valueProp.name]);
-            }
+            triggerEventValue =
+              newValue.length === 0
+                ? []
+                : newValue.map((x) => x[valueProp.name]);
           } else if (optionType === 'property') {
             triggerEventValue = newValue || '';
           }
