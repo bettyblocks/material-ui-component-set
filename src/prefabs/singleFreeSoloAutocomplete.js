@@ -210,22 +210,8 @@
         },
         {
           value: '',
-          label: 'Label property',
-          key: 'searchProperty',
-          type: 'PROPERTY',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'optionType',
-              comparator: 'EQ',
-              value: 'model',
-            },
-          },
-        },
-        {
-          value: '',
-          label: 'Value property',
-          key: 'valueProperty',
+          label: 'suggestion(s) property',
+          key: 'suggestionsProperty',
           type: 'PROPERTY',
           configuration: {
             condition: {
