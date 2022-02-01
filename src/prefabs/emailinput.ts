@@ -1,11 +1,10 @@
 import {
-  buttongroup,
-  component,
-  icon,
-  option,
   prefab,
-  toggle,
+  component,
   variable,
+  option,
+  toggle,
+  showIfTrue,
 } from '@betty-blocks/component-sdk';
 
 import { makeTextValidationOptions } from './options/makeTextValidationOptions';
@@ -16,34 +15,40 @@ import { defaultStylesOptions } from './options/defaultStylesOptions';
 import { deleteActionVariable } from './hooks/deleteActionVariable';
 
 const attributes = {
-  category: 'FORM',
-  icon: 'TextInputIcon',
+  category: 'Form',
+  icon: 'EmailInputIcon',
+  keywords: ['Form', 'email', 'input', 'emailinput'],
 };
 
-const validationOptions = makeTextValidationOptions(
-  '(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}',
-);
-const advancedOptions = makeAdvancedSettingsOptions('TextField');
+const validationOptions = {
+  ...makeTextValidationOptions('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$'),
+  validationTypeMismatch: variable('Email mismatch message', {
+    value: ['No valid value provided'],
+    configuration: {
+      condition: showIfTrue('validationOptions'),
+    },
+  }),
+};
+
+const advancedSettingsOptions = makeAdvancedSettingsOptions('TextField');
 
 const options = {
   label: variable('Label'),
   actionVariableId: option('ACTION_JS_VARIABLE', { label: 'Name', value: '' }),
-  autoComplete: toggle('Autocomplete', { value: true }),
+  autocomplete: toggle('Autocomplete', { value: true }),
   ...validationOptions,
   disabled: toggle('Disabled'),
   placeholder: variable('Placeholder'),
   helperText: variable('Helper text'),
   ...defaultInputOptions,
   ...defaultStylesOptions,
-  ...advancedOptions,
+  ...advancedSettingsOptions,
 };
 
 const hooks = {
   $afterDelete: [deleteActionVariable],
 };
 
-const textInput = prefab('textinput', attributes, undefined, [
+export default prefab('EmailInput', attributes, undefined, [
   component('TextInput', { options, ...hooks }, []),
 ]);
-
-export default textInput;

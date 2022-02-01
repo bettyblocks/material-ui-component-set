@@ -1,32 +1,30 @@
 import {
-  buttongroup,
   component,
-  icon,
-  option,
   prefab,
-  toggle,
   variable,
+  option,
+  toggle,
+  number,
+  showIf,
 } from '@betty-blocks/component-sdk';
 
-import { makeTextValidationOptions } from './options/makeTextValidationOptions';
-import { makeAdvancedSettingsOptions } from './options/makeAdvancedSettingsOptions';
+import { makeNumberValidationOptions } from './options/makeNumberValidationOptions';
 import { defaultInputOptions } from './options/defaultInputOptions';
 import { defaultStylesOptions } from './options/defaultStylesOptions';
+import { makeAdvancedSettingsOptions } from './options/makeAdvancedSettingsOptions';
 
 import { deleteActionVariable } from './hooks/deleteActionVariable';
 
 const attributes = {
   category: 'FORM',
-  icon: 'TextInputIcon',
+  icon: 'NumberInputIcon',
 };
 
-const validationOptions = makeTextValidationOptions(
-  '(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}',
-);
-const advancedOptions = makeAdvancedSettingsOptions('TextField');
+const validationOptions = makeNumberValidationOptions('[0-9]{8,}');
+const advancedSettingsOptions = makeAdvancedSettingsOptions('TextField');
 
 const options = {
-  label: variable('Label'),
+  label: variable('Label', { value: ['Number'] }),
   actionVariableId: option('ACTION_JS_VARIABLE', { label: 'Name', value: '' }),
   autoComplete: toggle('Autocomplete', { value: true }),
   ...validationOptions,
@@ -34,16 +32,18 @@ const options = {
   placeholder: variable('Placeholder'),
   helperText: variable('Helper text'),
   ...defaultInputOptions,
+  type: number('Type', {
+    value: 'number',
+    configuration: { condition: showIf('adornment', 'EQ', '0') },
+  }),
   ...defaultStylesOptions,
-  ...advancedOptions,
+  ...advancedSettingsOptions,
 };
 
 const hooks = {
   $afterDelete: [deleteActionVariable],
 };
 
-const textInput = prefab('textinput', attributes, undefined, [
+export default prefab('NumberInput', attributes, undefined, [
   component('TextInput', { options, ...hooks }, []),
 ]);
-
-export default textInput;

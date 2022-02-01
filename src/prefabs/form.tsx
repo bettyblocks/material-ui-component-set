@@ -5,6 +5,7 @@ import {
   prefab,
   model,
   filter,
+  BeforeCreateArgs,
 } from '@betty-blocks/component-sdk';
 
 const beforeCreate = ({
@@ -13,7 +14,7 @@ const beforeCreate = ({
   prefab,
   prefabs,
   save,
-}) => {
+}: BeforeCreateArgs) => {
   return (
     <CreateFormWizard
       close={close}
@@ -35,6 +36,6 @@ const options = {
   filter: filter('Filter', { configuration: { dependsOn: 'modelId' } }),
 };
 
-export default prefab('Form', attributes, beforeCreate, [
+export default prefab('CreateForm', attributes, beforeCreate, [
   component('Form', { options }, []),
 ]);
