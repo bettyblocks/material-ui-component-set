@@ -1,21 +1,33 @@
 import { buttongroup, toggle, icon } from '@betty-blocks/component-sdk';
 
-const variant = buttongroup('Variant', [
-  ['Standard', 'standard'],
-  ['Outlined', 'outlined'],
-  ['Filled', 'filled'],
-]);
+const variant = buttongroup(
+  'Variant',
+  [
+    ['Standard', 'standard'],
+    ['Outlined', 'outlined'],
+    ['Filled', 'filled'],
+  ],
+  { value: 'outlined' },
+);
 
-const size = buttongroup('Size', [
-  ['Medium', 'medium'],
-  ['Small', 'small'],
-]);
+const size = buttongroup(
+  'Size',
+  [
+    ['Medium', 'medium'],
+    ['Small', 'small'],
+  ],
+  { value: 'medium' },
+);
 
-const margin = buttongroup('Margin', [
-  ['None', 'none'],
-  ['Dense', 'dense'],
-  ['Normal', 'normal'],
-]);
+const margin = buttongroup(
+  'Margin',
+  [
+    ['None', 'none'],
+    ['Dense', 'dense'],
+    ['Normal', 'normal'],
+  ],
+  { value: 'normal' },
+);
 
 const adornmentPosition = buttongroup(
   'Position',
@@ -24,6 +36,7 @@ const adornmentPosition = buttongroup(
     ['End', 'end'],
   ],
   {
+    value: 'start',
     configuration: {
       condition: {
         type: 'HIDE',

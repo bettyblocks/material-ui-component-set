@@ -7,7 +7,7 @@ const stylesAttrs = {
 export const defaultStylesOptions = {
   styles: toggle('Styles'),
   backgroundColor: color('Background color', {
-    value: 'white',
+    value: 'White',
     ...stylesAttrs,
   }),
   borderColor: color('Border color', {

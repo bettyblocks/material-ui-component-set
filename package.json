@@ -22,7 +22,7 @@
     "rimraf": "^3.0.0"
   },
   "scripts": {
-    "start": "bb components serve",
+    "start": "bb components serve -p 5002",
     "build": "bb components build",
     "dev": "nodemon",
     "preview": "bb components preview",
