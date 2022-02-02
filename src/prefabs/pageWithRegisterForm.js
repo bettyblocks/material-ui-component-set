@@ -3819,6 +3819,26 @@
                                             },
                                           },
                                           {
+                                            value: '_self',
+                                            label: 'Open in',
+                                            key: 'linkTarget',
+                                            type: 'CUSTOM',
+                                            configuration: {
+                                              as: 'BUTTONGROUP',
+                                              dataType: 'string',
+                                              allowedInput: [
+                                                {
+                                                  name: 'Current Tab',
+                                                  value: '_self',
+                                                },
+                                                {
+                                                  name: 'New Tab',
+                                                  value: '_blank',
+                                                },
+                                              ],
+                                            },
+                                          },
+                                          {
                                             value: '',
                                             label: 'Page',
                                             key: 'linkTo',
@@ -7150,6 +7170,20 @@
                               },
                             },
                             {
+                              value: '_self',
+                              label: 'Open in',
+                              key: 'linkTarget',
+                              type: 'CUSTOM',
+                              configuration: {
+                                as: 'BUTTONGROUP',
+                                dataType: 'string',
+                                allowedInput: [
+                                  { name: 'Current Tab', value: '_self' },
+                                  { name: 'New Tab', value: '_blank' },
+                                ],
+                              },
+                            },
+                            {
                               value: '',
                               label: 'Page',
                               key: 'linkTo',
@@ -7273,12 +7307,6 @@
                               },
                             },
                             {
-                              value: true,
-                              label: 'Autocomplete',
-                              key: 'autoComplete',
-                              type: 'TOGGLE',
-                            },
-                            {
                               value: false,
                               label: 'Validation options',
                               key: 'validationOptions',
@@ -7397,6 +7425,18 @@
                                   value: true,
                                 },
                               },
+                            },
+                            {
+                              value: true,
+                              label: 'Spellcheck',
+                              key: 'spellCheck',
+                              type: 'TOGGLE',
+                            },
+                            {
+                              value: true,
+                              label: 'Autocomplete',
+                              key: 'autoComplete',
+                              type: 'TOGGLE',
                             },
                             {
                               type: 'TOGGLE',
@@ -8153,6 +8193,20 @@
                               },
                             },
                             {
+                              value: '_self',
+                              label: 'Open in',
+                              key: 'linkTarget',
+                              type: 'CUSTOM',
+                              configuration: {
+                                as: 'BUTTONGROUP',
+                                dataType: 'string',
+                                allowedInput: [
+                                  { name: 'Current Tab', value: '_self' },
+                                  { name: 'New Tab', value: '_blank' },
+                                ],
+                              },
+                            },
+                            {
                               value: '',
                               label: 'Page',
                               key: 'linkTo',
@@ -8382,6 +8436,18 @@
                                   value: true,
                                 },
                               },
+                            },
+                            {
+                              value: true,
+                              label: 'Spellcheck',
+                              key: 'spellCheck',
+                              type: 'TOGGLE',
+                            },
+                            {
+                              value: true,
+                              label: 'Autocomplete',
+                              key: 'autoComplete',
+                              type: 'TOGGLE',
                             },
                             {
                               type: 'TOGGLE',
@@ -9138,6 +9204,20 @@
                               },
                             },
                             {
+                              value: '_self',
+                              label: 'Open in',
+                              key: 'linkTarget',
+                              type: 'CUSTOM',
+                              configuration: {
+                                as: 'BUTTONGROUP',
+                                dataType: 'string',
+                                allowedInput: [
+                                  { name: 'Current Tab', value: '_self' },
+                                  { name: 'New Tab', value: '_blank' },
+                                ],
+                              },
+                            },
+                            {
                               value: '',
                               label: 'Page',
                               key: 'linkTo',
@@ -9261,12 +9341,6 @@
                               },
                             },
                             {
-                              value: true,
-                              label: 'Autocomplete',
-                              key: 'autoComplete',
-                              type: 'TOGGLE',
-                            },
-                            {
                               value: false,
                               label: 'Validation options',
                               key: 'validationOptions',
@@ -9371,6 +9445,18 @@
                                   value: true,
                                 },
                               },
+                            },
+                            {
+                              value: true,
+                              label: 'Spellcheck',
+                              key: 'spellCheck',
+                              type: 'TOGGLE',
+                            },
+                            {
+                              value: true,
+                              label: 'Autocomplete',
+                              key: 'autoComplete',
+                              type: 'TOGGLE',
                             },
                             {
                               type: 'TOGGLE',
