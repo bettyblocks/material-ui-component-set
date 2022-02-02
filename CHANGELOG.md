@@ -1,3 +1,21 @@
+# [1.202.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.201.0...v1.202.0) (2022-02-02)
+
+
+### Bug Fixes
+
+* bugfix PAGE-1533 ([1d9d8bd](https://github.com/bettyblocks/material-ui-component-set/commit/1d9d8bd0697a65a2328666a6394c4fa4c4dcb808))
+* onclear bug ([293c7e1](https://github.com/bettyblocks/material-ui-component-set/commit/293c7e1bcc172feb9e44eb37bf4e0b5d0a74c060))
+
+
+### Features
+
+* add freeMultiAutocomplete ([ab374eb](https://github.com/bettyblocks/material-ui-component-set/commit/ab374eb04fcae51d087e8e2c0f53ce8fc7f34308))
+* add multi autocomplete ([07bbcbc](https://github.com/bettyblocks/material-ui-component-set/commit/07bbcbcdecc5809f6f88aad7fd739dbd245d7d6f))
+* add single freesolo autocomplete aka searchInput ([b23c673](https://github.com/bettyblocks/material-ui-component-set/commit/b23c6734cca84a27048c8ad4039987455454ea06))
+* add singleAutocomplete component ([2932d7f](https://github.com/bettyblocks/material-ui-component-set/commit/2932d7ff46d4a9c45e47fc41bdab5547a42288ca))
+* add validation to searchInput component ([82af667](https://github.com/bettyblocks/material-ui-component-set/commit/82af667c984d69539a9001d46c3a91822b1c0d2d))
+* renamed autocompletes and removed original ([e8c3231](https://github.com/bettyblocks/material-ui-component-set/commit/e8c3231ee619c695dd3388fb2d022f6931e3a995))
+
 # [1.201.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.200.0...v1.201.0) (2022-01-27)
 
 
