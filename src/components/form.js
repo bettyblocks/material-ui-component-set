@@ -30,6 +30,7 @@
           loadingType,
           loadingText,
           dataComponentAttribute,
+          disableChildren,
         } = options;
         const formRef = React.createRef();
         const parsedLoadingText = useText(loadingText);
@@ -147,6 +148,7 @@
         };
 
         const classNames = [
+          classes.form,
           isEmpty ? classes.empty : '',
           isPristine ? classes.pristine : '',
         ]
@@ -159,6 +161,7 @@
             <form
               className={classNames || undefined}
               data-component={dataComponentAttributeText}
+              data-disable-children={disableChildren}
             >
               {isPristine && (
                 <span>Drag form components in the form to submit data</span>
@@ -295,10 +298,18 @@
     </div>
   ),
   styles: (B) => (t) => {
-    const { Styling } = B;
+    const { Styling, env } = B;
     const style = new Styling(t);
-
+    const isDev = env === 'dev';
     return {
+      form: {
+        '&[data-disable-children="true"]': {
+          pointerEvents: ({ options: { disableChildren } }) =>
+            isDev && disableChildren ? 'none' : undefined,
+          opacity: ({ options: { disableChildren } }) =>
+            isDev && disableChildren ? 0.5 : undefined,
+        },
+      },
       error: {
         color: style.getColor('Danger'),
       },

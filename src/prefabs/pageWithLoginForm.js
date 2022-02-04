@@ -5570,6 +5570,21 @@
                                                   },
                                                 },
                                               },
+                                              {
+                                                value: false,
+                                                label:
+                                                  'Disable child components',
+                                                key: 'disableChildren',
+                                                type: 'TOGGLE',
+                                                configuration: {
+                                                  condition: {
+                                                    type: 'SHOW',
+                                                    option: 'advancedSettings',
+                                                    comparator: 'EQ',
+                                                    value: true,
+                                                  },
+                                                },
+                                              },
                                             ],
                                             descendants: [
                                               {

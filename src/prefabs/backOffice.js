@@ -1293,6 +1293,20 @@
             },
           },
         },
+        {
+          value: false,
+          label: 'Disable child components',
+          key: 'disableChildren',
+          type: 'TOGGLE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'advancedSettings',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
       ],
       descendants: [],
     });
@@ -1479,6 +1493,20 @@
           label: 'Test attribute',
           key: 'dataComponentAttribute',
           value: ['Form'],
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'advancedSettings',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          value: false,
+          label: 'Disable child components',
+          key: 'disableChildren',
+          type: 'TOGGLE',
           configuration: {
             condition: {
               type: 'SHOW',
