@@ -1,3 +1,10 @@
+## [1.202.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.202.1...v1.202.2) (2022-02-08)
+
+
+### Bug Fixes
+
+* bugfix select menuitem ([9794e2e](https://github.com/bettyblocks/material-ui-component-set/commit/9794e2ebe4589132d850fde38b9d63c08fa63456))
+
 ## [1.202.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.202.0...v1.202.1) (2022-02-07)
 
 
