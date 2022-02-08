@@ -242,9 +242,6 @@
           fullWidth ? 'block' : 'inline-block',
         width: ({ options: { fullWidth } }) => fullWidth && '100%',
         minHeight: '1rem',
-        '& > *': {
-          pointerEvents: 'none',
-        },
       },
       button: {
         color: ({ options: { background, disabled, textColor, variant } }) => [
@@ -341,7 +338,7 @@
           '!important',
         ],
         ...(isDev && {
-          position: 'absolute',
+          position: 'relative',
           pointerEvents: ['unset', '!important'],
           zIndex: 9,
         }),
