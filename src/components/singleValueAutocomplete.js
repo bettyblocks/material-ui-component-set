@@ -592,6 +592,9 @@
             setDebouncedInputValue(newValue);
           }
         }}
+        onBlur={() => {
+          setInputValue('');
+        }}
         options={currentOptions}
         renderInput={(params) => (
           <>

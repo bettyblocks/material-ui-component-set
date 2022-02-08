@@ -1,3 +1,10 @@
+## [1.202.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.202.0...v1.202.1) (2022-02-07)
+
+
+### Bug Fixes
+
+* empty input onblur for non-freesolo ([a00d64f](https://github.com/bettyblocks/material-ui-component-set/commit/a00d64f915446e3d94ecf75a671fd8ef70f82acf))
+
 # [1.202.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.201.0...v1.202.0) (2022-02-02)
 
 
