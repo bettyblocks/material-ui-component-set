@@ -1,3 +1,10 @@
+# [1.203.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.202.2...v1.203.0) (2022-02-11)
+
+
+### Features
+
+* added onBlur interaction to textfield ([9c61f67](https://github.com/bettyblocks/material-ui-component-set/commit/9c61f67d31debfd7a25008652a5b3128fd731736))
+
 ## [1.202.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.202.1...v1.202.2) (2022-02-08)
 
 
