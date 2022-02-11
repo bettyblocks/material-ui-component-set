@@ -5,7 +5,8 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { Autocomplete } = window.MaterialUI.Lab;
-    const { CircularProgress, TextField } = window.MaterialUI.Core;
+    const { CircularProgress, TextField, FormControl, FormHelperText } =
+      window.MaterialUI.Core;
     const {
       InteractionScope,
       ModelProvider,
@@ -35,11 +36,21 @@
       placeholder: placeholderRaw,
       property,
       model,
-      showError,
       searchProperty,
       size,
       valueProperty,
+      validationBelowMinimum = [''],
+      validationPatternMismatch = [''],
+      validationTooLong = [''],
+      validationTooShort = [''],
+      validationTypeMismatch = [''],
+      validationValueMissing = [''],
       variant,
+      maxlength,
+      minlength,
+      pattern,
+      minvalue,
+      type,
     } = options;
     const numberPropTypes = ['serial', 'minutes', 'count', 'integer'];
 
@@ -57,6 +68,8 @@
     const helperText = useText(helperTextRaw);
     const nameAttribute = useText(nameAttributeRaw);
     const changeContext = useRef(null);
+    const [helper, setHelper] = useState(useText(helperTextRaw));
+    const [errorState, setErrorState] = useState(false);
     const dataComponentAttribute =
       useText(dataComponentAttributeRaw) || 'AutoComplete';
 
@@ -72,35 +85,84 @@
     } = getCustomModelAttribute(id) || {};
 
     const required = customAttributeRequired || defaultRequired;
-
     const label = useText(labelRaw);
     const defaultValue = useText(valueRaw, { rawValue: true });
-
     const initalValue = defaultValue.replace(/\n/g, '');
-
-    /*
-     * Selected value of the autocomplete.
-     */
     const [value, setValue] = useState(initalValue);
-
-    /*
-     * User input in the autocomplete
-     */
     const [inputValue, setInputValue] = useState(
       optionType === 'property' ? defaultValue : '',
     );
-
-    /*
-     * Debounced user input to only send a request every 250ms
-     */
     const [debouncedInputValue, setDebouncedInputValue] = useState();
-
-    /*
-     * Keep state of interaction filters coming from other components
-     */
     const [interactionFilter, setInteractionFilter] = useState({});
-
     const defaultValueEvaluatedRef = useRef(false);
+    const isNumberType = type === 'number';
+
+    const validPattern = pattern || null;
+    const validMinlength = minlength || null;
+    const validMaxlength = maxlength || null;
+    const validMinvalue = minvalue || null;
+
+    const patternMismatchMessage = useText(validationPatternMismatch);
+    const typeMismatchMessage = useText(validationTypeMismatch);
+    const valueMissingMessage = useText(validationValueMissing);
+    const tooLongMessage = useText(validationTooLong);
+    const tooShortMessage = useText(validationTooShort);
+    const belowMinimumMessage = useText(validationBelowMinimum);
+    const helperTextResolved = useText(helperTextRaw);
+
+    const validationMessage = (validityObject) => {
+      if (!validityObject) {
+        return '';
+      }
+      if (validityObject.customError && patternMismatchMessage) {
+        return patternMismatchMessage;
+      }
+      if (validityObject.valid) {
+        return '';
+      }
+      if (validityObject.typeMismatch && typeMismatchMessage) {
+        return typeMismatchMessage;
+      }
+      if (validityObject.patternMismatch && patternMismatchMessage) {
+        return patternMismatchMessage;
+      }
+      if (validityObject.valueMissing && valueMissingMessage) {
+        return valueMissingMessage;
+      }
+      if (validityObject.tooLong && tooLongMessage) {
+        return tooLongMessage;
+      }
+      if (validityObject.tooShort && tooShortMessage) {
+        return tooShortMessage;
+      }
+      if (validityObject.rangeUnderflow && belowMinimumMessage) {
+        return belowMinimumMessage;
+      }
+      return '';
+    };
+
+    const handleValidation = (validation) => {
+      if (validation) {
+        setErrorState(!validation.valid);
+      }
+      const message = validationMessage(validation) || helperTextResolved;
+      setHelper(message);
+    };
+
+    const customPatternValidation = (target) => {
+      const { value: eventValue, validity } = target;
+      if (!pattern) {
+        return validity;
+      }
+      const patternRegex = RegExp(`^${pattern}$`);
+      const isValid = patternRegex.test(eventValue);
+      target.setCustomValidity(isValid ? '' : 'Invalid field.');
+      return {
+        ...validity,
+        valid: isValid,
+        patternMismatch: !isValid,
+      };
+    };
 
     const { kind: propertyKind = '', values: propertyValues } =
       getProperty(property) || {};
@@ -451,7 +513,7 @@
             classes={{ root: classes.formControl }}
             dataComponent={dataComponentAttribute}
             disabled={disabled || !valid}
-            error={showError}
+            error={errorState}
             fullWidth={fullWidth}
             helperText={helperText}
             label={!hideLabel && label}
@@ -563,82 +625,125 @@
     };
 
     const MuiAutocomplete = (
-      <Autocomplete
-        disableCloseOnSelect={!closeOnSelect}
-        disabled={disabled}
-        {...(optionType === 'model' && {
-          getOptionLabel: renderLabel,
-        })}
-        inputValue={inputValue}
-        loading={loading}
-        onChange={(_, newValue) => {
-          setValue(newValue || '');
+      <FormControl
+        classes={{ root: classes.formControl }}
+        variant={variant}
+        size={size}
+        fullWidth={fullWidth}
+        required={required && !value}
+        margin={margin}
+        error={errorState}
+      >
+        <Autocomplete
+          disableCloseOnSelect={!closeOnSelect}
+          disabled={disabled}
+          {...(optionType === 'model' && {
+            getOptionLabel: renderLabel,
+          })}
+          inputValue={inputValue}
+          loading={loading}
+          onChange={(_, newValue) => {
+            setValue(newValue || '');
 
-          let triggerEventValue;
+            let triggerEventValue;
 
-          if (optionType === 'model') {
-            triggerEventValue = newValue ? newValue[valueProp.name] : '';
-          } else if (optionType === 'property') {
-            triggerEventValue = newValue || '';
-          }
+            if (optionType === 'model') {
+              triggerEventValue = newValue ? newValue[valueProp.name] : '';
+            } else if (optionType === 'property') {
+              triggerEventValue = newValue || '';
+            }
 
-          B.triggerEvent('onChange', triggerEventValue, changeContext.current);
-        }}
-        onInputChange={(event, newValue) => {
-          if (event && (event.type === 'change' || event.type === 'keydown')) {
-            setInputValue(newValue);
-          } else if (event && event.type === 'click') {
-            setInputValue(newValue);
-            setDebouncedInputValue(newValue);
-          }
-        }}
-        onBlur={() => {
-          setInputValue('');
-        }}
-        options={currentOptions}
-        renderInput={(params) => (
-          <>
-            {optionType === 'model' && (
-              <input
-                type="hidden"
-                key={value[valueProp.name] ? 'hasValue' : 'isEmpty'}
-                name={nameAttribute || name}
-                value={getHiddenValue(currentValue)}
+            B.triggerEvent(
+              'onChange',
+              triggerEventValue,
+              changeContext.current,
+            );
+          }}
+          onInputChange={(event, newValue) => {
+            let validation = event.target.validity;
+            if (isNumberType) {
+              validation = customPatternValidation(event.target);
+            }
+            handleValidation(validation);
+            if (
+              event &&
+              (event.type === 'change' || event.type === 'keydown')
+            ) {
+              setInputValue(newValue);
+            } else if (event && event.type === 'click') {
+              setInputValue(newValue);
+              setDebouncedInputValue(newValue);
+            }
+          }}
+          onBlur={(event) => {
+            let validation = event.target.validity;
+            if (isNumberType) {
+              validation = customPatternValidation(event.target);
+            }
+            handleValidation(validation);
+            setInputValue('');
+          }}
+          options={currentOptions}
+          renderInput={(params) => (
+            <>
+              {optionType === 'model' && (
+                <input
+                  type="hidden"
+                  key={value[valueProp.name] ? 'hasValue' : 'isEmpty'}
+                  name={nameAttribute || name}
+                  value={getHiddenValue(currentValue)}
+                />
+              )}
+              <TextField
+                {...params}
+                InputProps={{
+                  ...params.InputProps,
+                  inputProps: {
+                    ...params.inputProps,
+                    onInvalid: (e) => {
+                      e.preventDefault();
+                      handleValidation(e.target.validity);
+                    },
+                    pattern: validPattern,
+                    minLength: validMinlength,
+                    maxLength: validMaxlength,
+                    min: validMinvalue,
+                  },
+                  endAdornment: (
+                    <>
+                      {loading ? (
+                        <CircularProgress color="inherit" size={20} />
+                      ) : null}
+                      {params.InputProps.endAdornment}
+                    </>
+                  ),
+                }}
+                classes={{ root: classes.formControl }}
+                data-component={dataComponentAttribute}
+                disabled={disabled}
+                fullWidth={fullWidth}
+                helperText={helperText}
+                error={errorState}
+                label={!hideLabel && label}
+                margin={margin}
+                {...(optionType === 'property' && {
+                  name: nameAttribute || name,
+                })}
+                placeholder={placeholder}
+                required={required && !value}
+                size={size}
+                variant={variant}
               />
-            )}
-            <TextField
-              {...params}
-              InputProps={{
-                ...params.InputProps,
-                endAdornment: (
-                  <>
-                    {loading ? (
-                      <CircularProgress color="inherit" size={20} />
-                    ) : null}
-                    {params.InputProps.endAdornment}
-                  </>
-                ),
-              }}
-              classes={{ root: classes.formControl }}
-              data-component={dataComponentAttribute}
-              disabled={disabled}
-              error={showError}
-              fullWidth={fullWidth}
-              helperText={helperText}
-              label={!hideLabel && label}
-              margin={margin}
-              {...(optionType === 'property' && {
-                name: nameAttribute || name,
-              })}
-              placeholder={placeholder}
-              required={required && !value}
-              size={size}
-              variant={variant}
-            />
-          </>
+            </>
+          )}
+          value={currentValue}
+        />
+        {helper && (
+          <FormHelperText classes={{ root: classes.helper }}>
+            {helper}
+          </FormHelperText>
         )}
-        value={currentValue}
-      />
+      </FormControl>
     );
 
     if (optionType === 'model') {

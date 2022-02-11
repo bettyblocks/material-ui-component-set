@@ -5,8 +5,14 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { Autocomplete } = window.MaterialUI.Lab;
-    const { Checkbox, Chip, CircularProgress, TextField } =
-      window.MaterialUI.Core;
+    const {
+      Checkbox,
+      Chip,
+      CircularProgress,
+      TextField,
+      FormHelperText,
+      FormControl,
+    } = window.MaterialUI.Core;
     const {
       InteractionScope,
       ModelProvider,
@@ -41,6 +47,17 @@
       showError,
       size,
       variant,
+      validationBelowMinimum = [''],
+      validationPatternMismatch = [''],
+      validationTooLong = [''],
+      validationTooShort = [''],
+      validationTypeMismatch = [''],
+      validationValueMissing = [''],
+      maxlength,
+      minlength,
+      pattern,
+      minvalue,
+      type,
     } = options;
     const numberPropTypes = ['serial', 'minutes', 'count', 'integer'];
 
@@ -62,9 +79,78 @@
     const helperText = useText(helperTextRaw);
     const nameAttribute = useText(nameAttributeRaw);
     const changeContext = useRef(null);
+    const [helper, setHelper] = useState(useText(helperTextRaw));
+    const [errorState, setErrorState] = useState(false);
     const dataComponentAttribute =
       useText(dataComponentAttributeRaw) || 'AutoComplete';
 
+    const validPattern = pattern || null;
+    const validMinlength = minlength || null;
+    const validMaxlength = maxlength || null;
+    const validMinvalue = minvalue || null;
+
+    const patternMismatchMessage = useText(validationPatternMismatch);
+    const typeMismatchMessage = useText(validationTypeMismatch);
+    const valueMissingMessage = useText(validationValueMissing);
+    const tooLongMessage = useText(validationTooLong);
+    const tooShortMessage = useText(validationTooShort);
+    const belowMinimumMessage = useText(validationBelowMinimum);
+    const helperTextResolved = useText(helperTextRaw);
+    const isNumberType = type === 'number';
+
+    const validationMessage = (validityObject) => {
+      if (!validityObject) {
+        return '';
+      }
+      if (validityObject.customError && patternMismatchMessage) {
+        return patternMismatchMessage;
+      }
+      if (validityObject.valid) {
+        return '';
+      }
+      if (validityObject.typeMismatch && typeMismatchMessage) {
+        return typeMismatchMessage;
+      }
+      if (validityObject.patternMismatch && patternMismatchMessage) {
+        return patternMismatchMessage;
+      }
+      if (validityObject.valueMissing && valueMissingMessage) {
+        return valueMissingMessage;
+      }
+      if (validityObject.tooLong && tooLongMessage) {
+        return tooLongMessage;
+      }
+      if (validityObject.tooShort && tooShortMessage) {
+        return tooShortMessage;
+      }
+      if (validityObject.rangeUnderflow && belowMinimumMessage) {
+        return belowMinimumMessage;
+      }
+      return '';
+    };
+
+    const handleValidation = (validation) => {
+      if (validation) {
+        setErrorState(!validation.valid);
+      }
+      const message = validationMessage(validation) || helperTextResolved;
+      setHelper(message);
+    };
+
+    const customPatternValidation = (target) => {
+      const { value: eventValue, validity } = target;
+      if (!pattern) {
+        return validity;
+      }
+      const patternRegex = RegExp(`^${pattern}$`);
+      const isValid = patternRegex.test(eventValue);
+      target.setCustomValidity(isValid ? '' : 'Invalid field.');
+      return {
+        ...validity,
+        valid: isValid,
+        patternMismatch: !isValid,
+      };
+    };
     const {
       id,
       label: labelRaw = [],
@@ -442,7 +528,7 @@
             label={!hideLabel && label}
             margin={margin}
             placeholder={placeholder}
-            required={required && !value}
+            required={required}
             size={size}
             value={designTimeValue}
             variant={variant}
@@ -543,104 +629,151 @@
     };
 
     const MuiAutocomplete = (
-      <Autocomplete
-        disableCloseOnSelect={!closeOnSelect}
-        disabled={disabled}
-        freeSolo={freeSolo}
-        {...(optionType === 'model' && {
-          getOptionLabel: renderLabel,
-        })}
-        inputValue={inputValue}
-        loading={loading}
-        multiple={multiple}
-        onChange={(_, newValue) => {
-          setValue(newValue || (multiple ? [] : ''));
+      <FormControl
+        classes={{ root: classes.formControl }}
+        variant={variant}
+        size={size}
+        fullWidth={fullWidth}
+        required={required && !value}
+        margin={margin}
+        error={errorState}
+      >
+        <Autocomplete
+          disableCloseOnSelect={!closeOnSelect}
+          disabled={disabled}
+          freeSolo={freeSolo}
+          {...(optionType === 'model' && {
+            getOptionLabel: renderLabel,
+          })}
+          inputValue={inputValue}
+          loading={loading}
+          multiple={multiple}
+          onChange={(_, newValue) => {
+            setValue(newValue || (multiple ? [] : ''));
 
-          let triggerEventValue;
+            let triggerEventValue;
 
-          if (optionType === 'model') {
-            setDebouncedInputValue('');
+            if (optionType === 'model') {
+              setDebouncedInputValue('');
 
-            if (freeSolo) {
-              triggerEventValue = newValue || [];
-            } else {
-              triggerEventValue =
-                newValue.length === 0
-                  ? []
-                  : newValue.map((x) => x[suggestionsProp.name]);
+              if (freeSolo) {
+                triggerEventValue = newValue || [];
+              } else {
+                triggerEventValue =
+                  newValue.length === 0
+                    ? []
+                    : newValue.map((x) => x[suggestionsProp.name]);
+              }
+            } else if (optionType === 'property') {
+              triggerEventValue = newValue || '';
             }
-          } else if (optionType === 'property') {
-            triggerEventValue = newValue || '';
-          }
 
-          B.triggerEvent('onChange', triggerEventValue, changeContext.current);
-        }}
-        onInputChange={(event, newValue) => {
-          if (event && (event.type === 'change' || event.type === 'keydown')) {
-            setInputValue(newValue);
-          } else if (event && event.type === 'click') {
-            setInputValue(newValue);
-            setDebouncedInputValue(newValue);
-          }
-        }}
-        options={currentOptions}
-        renderInput={(params) => (
-          <>
-            {optionType === 'model' && (
-              <input
-                type="hidden"
-                key={value[suggestionsProp.name] ? 'hasValue' : 'isEmpty'}
-                name={nameAttribute || name}
-                value={getHiddenValue(currentValue)}
-              />
-            )}
-            <TextField
-              {...params}
-              InputProps={{
-                ...params.InputProps,
-                endAdornment: (
-                  <>
-                    {loading ? (
-                      <CircularProgress color="inherit" size={20} />
-                    ) : null}
-                    {params.InputProps.endAdornment}
-                  </>
-                ),
-              }}
-              classes={{ root: classes.formControl }}
-              data-component={dataComponentAttribute}
-              disabled={disabled}
-              error={showError}
-              fullWidth={fullWidth}
-              helperText={helperText}
-              label={!hideLabel && label}
-              margin={margin}
-              {...(optionType === 'property' && {
-                name: nameAttribute || name,
-              })}
-              placeholder={placeholder}
-              required={required && !value}
-              size={size}
-              variant={variant}
-            />
-          </>
-        )}
-        {...(renderCheckboxes && {
-          renderOption: (option, { selected }) => (
+            B.triggerEvent(
+              'onChange',
+              triggerEventValue,
+              changeContext.current,
+            );
+          }}
+          onBlur={(event) => {
+            let validation = event.target.validity;
+            if (isNumberType) {
+              validation = customPatternValidation(event.target);
+            }
+            handleValidation(validation);
+            setInputValue('');
+          }}
+          onInputChange={(event, newValue) => {
+            let validation = event.target.validity;
+            if (isNumberType) {
+              validation = customPatternValidation(event.target);
+            }
+            handleValidation(validation);
+            if (
+              event &&
+              (event.type === 'change' || event.type === 'keydown')
+            ) {
+              setInputValue(newValue);
+            } else if (event && event.type === 'click') {
+              setInputValue(newValue);
+              setDebouncedInputValue(newValue);
+            }
+          }}
+          options={currentOptions}
+          renderInput={(params) => (
             <>
-              <Checkbox
-                classes={{ root: classes.checkbox }}
-                icon={<Icon name="CheckBoxOutlineBlank" fontSize="small" />}
-                checkedIcon={<Icon name="CheckBox" fontSize="small" />}
-                style={{ marginRight: 8 }}
-                checked={selected}
+              {optionType === 'model' && (
+                <input
+                  type="hidden"
+                  key={value[suggestionsProp.name] ? 'hasValue' : 'isEmpty'}
+                  name={nameAttribute || name}
+                  value={getHiddenValue(currentValue)}
+                />
+              )}
+              <TextField
+                {...params}
+                InputProps={{
+                  ...params.InputProps,
+                  inputProps: {
+                    ...params.inputProps,
+                    onInvalid: (e) => {
+                      e.preventDefault();
+                      handleValidation(e.target.validity);
+                    },
+                    pattern: validPattern,
+                    minLength: validMinlength,
+                    maxLength: validMaxlength,
+                    min: validMinvalue,
+                    required: required && value.length === 0,
+                  },
+                  endAdornment: (
+                    <>
+                      {loading ? (
+                        <CircularProgress color="inherit" size={20} />
+                      ) : null}
+                      {params.InputProps.endAdornment}
+                    </>
+                  ),
+                }}
+                classes={{ root: classes.formControl }}
+                data-component={dataComponentAttribute}
+                disabled={disabled}
+                error={errorState}
+                fullWidth={fullWidth}
+                helperText={helperText}
+                label={!hideLabel && label}
+                margin={margin}
+                {...(optionType === 'property' && {
+                  name: nameAttribute || name,
+                })}
+                placeholder={placeholder}
+                required={required}
+                size={size}
+                variant={variant}
               />
-              {renderLabel(option)}
             </>
-          ),
-        })}
-        value={currentValue}
-      />
+          )}
+          {...(renderCheckboxes && {
+            renderOption: (option, { selected }) => (
+              <>
+                <Checkbox
+                  classes={{ root: classes.checkbox }}
+                  icon={<Icon name="CheckBoxOutlineBlank" fontSize="small" />}
+                  checkedIcon={<Icon name="CheckBox" fontSize="small" />}
+                  style={{ marginRight: 8 }}
+                  checked={selected}
+                />
+                {renderLabel(option)}
+              </>
+            ),
+          })}
+          value={currentValue}
+        />
+        {helper && (
+          <FormHelperText classes={{ root: classes.helper }}>
+            {helper}
+          </FormHelperText>
+        )}
+      </FormControl>
     );
 
     if (optionType === 'model') {
