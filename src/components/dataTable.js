@@ -723,7 +723,7 @@
         marginLeft: ({ options: { outerSpacing } }) =>
           getSpacing(outerSpacing[3]),
         height: ({ options: { height, autoLoadOnScroll } }) =>
-          autoLoadOnScroll && !height ? '500px' : height,
+          autoLoadOnScroll && !height ? '375px' : height,
       },
       paper: {
         backgroundColor: ({ options: { background } }) => [
