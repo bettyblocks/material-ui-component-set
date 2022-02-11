@@ -13,10 +13,11 @@ import { defaultInputOptions } from './options/defaultInputOptions';
 import { defaultStylesOptions } from './options/defaultStylesOptions';
 
 import { deleteActionVariable } from './hooks/deleteActionVariable';
+import { Icon } from '@betty-blocks/component-sdk';
 
 const attributes = {
   category: 'Form',
-  icon: 'EmailInputIcon',
+  icon: Icon.EmailInputIcon,
   keywords: ['Form', 'email', 'input', 'emailinput'],
 };
 

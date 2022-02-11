@@ -1,7 +1,6 @@
 import {
-  buttongroup,
   component,
-  icon,
+  Icon,
   option,
   prefab,
   toggle,
@@ -17,7 +16,7 @@ import { deleteActionVariable } from './hooks/deleteActionVariable';
 
 const attributes = {
   category: 'FORM',
-  icon: 'TextInputIcon',
+  icon: Icon.TextInputIcon,
 };
 
 const validationOptions = makeTextValidationOptions(

@@ -9,12 +9,14 @@ import {
   dropdown,
   buttongroup,
   showIfTrue,
+  ThemeColor,
+  Icon,
 } from '@betty-blocks/component-sdk';
 
 type DropdownInput = [string, string][];
 
 const attributes = {
-  icon: 'RowColumnIcon',
+  icon: Icon.RowColumnIcon,
   category: 'LAYOUT',
   keywords: ['Layout', 'column', 'columns', '1'],
 };
@@ -48,7 +50,7 @@ const advancedSettings = {
 const rowOptions = {
   maxRowWidth,
   rowHeight: text('Height', { configuration: { as: 'UNIT' } }),
-  backgroundColor: color('Background color', { value: 'transparent' }),
+  backgroundColor: color('Background color', { value: ThemeColor.TRANSPARENT }),
   outerSpacing,
   ...advancedSettings,
 };
@@ -97,7 +99,7 @@ const columnOptions = {
     value: 'flefxible',
   }),
   columnHeight: text('Height', { configuration: { as: 'UNIT' } }),
-  backgroundColor: color('Background color', { value: 'transparent' }),
+  backgroundColor: color('Background color', { value: ThemeColor.TRANSPARENT }),
   horizontalAlignment: buttongroup(
     'Horizontal Alignment',
     allowedAlignmentInput,

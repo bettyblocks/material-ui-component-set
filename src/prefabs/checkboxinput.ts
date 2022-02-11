@@ -8,12 +8,13 @@ import {
   color,
   showIfTrue,
 } from '@betty-blocks/component-sdk';
+import { Icon, ThemeColor } from '@betty-blocks/component-sdk';
 
 import { deleteActionVariable } from './hooks/deleteActionVariable';
 
 const attributes = {
   category: 'FORM',
-  icon: 'CheckboxIcon',
+  icon: Icon.CheckboxIcon,
 };
 
 const position = buttongroup(
@@ -61,18 +62,18 @@ const stylesOptions = {
   styles: toggle('Styles'),
   checkboxColor: color('Checkbox color', {
     ...stylesConfiguration,
-    value: 'Accent3',
+    value: ThemeColor.ACCENT_3,
   }),
   checkboxColorChecked: color('Checkbox color checked', {
     ...stylesConfiguration,
-    value: 'Primary',
+    value: ThemeColor.PRIMARY,
   }),
-  textColor: color('Text color', { ...stylesConfiguration, value: 'Black' }),
+  textColor: color('Text color', { ...stylesConfiguration, value: ThemeColor.BLACK }),
   helperColor: color('Helper color', {
     ...stylesConfiguration,
-    value: 'Accent2',
+    value: ThemeColor.ACCENT_2,
   }),
-  errorColor: color('Error color', { ...stylesConfiguration, value: 'Danger' }),
+  errorColor: color('Error color', { ...stylesConfiguration, value: ThemeColor.DANGER }),
 };
 
 const advancedSettingsOptions = {

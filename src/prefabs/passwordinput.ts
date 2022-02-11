@@ -6,6 +6,7 @@ import {
   variable,
   text,
   showIfTrue,
+  Icon,
 } from '@betty-blocks/component-sdk';
 
 import { makeTextValidationOptions } from './options/makeTextValidationOptions';
@@ -17,7 +18,7 @@ import { deleteActionVariable } from './hooks/deleteActionVariable';
 
 const attributes = {
   category: 'FORM',
-  icon: 'PasswordInputIcon',
+  icon: Icon.PasswordInputIcon,
 };
 
 const validationOptions = {

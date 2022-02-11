@@ -3,13 +3,14 @@ import {
   component,
   option,
   property,
+  Icon,
 } from '@betty-blocks/component-sdk';
 
 import { deleteActionVariable } from './hooks/deleteActionVariable';
 
 const attributes = {
   category: 'FORM',
-  icon: 'HiddenInputIcon',
+  icon: Icon.HiddenInputIcon,
 };
 
 const options = {

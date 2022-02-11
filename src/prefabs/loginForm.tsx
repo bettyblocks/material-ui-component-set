@@ -6,6 +6,7 @@ import {
   BeforeCreateArgs,
   PrefabInteraction,
   InteractionType,
+  Icon,
 } from '@betty-blocks/component-sdk';
 
 const beforeCreate = ({
@@ -39,7 +40,7 @@ const interactions: PrefabInteraction[] = [
 
 const attributes = {
   category: 'FORM',
-  icon: 'LoginFormIcon',
+  icon: Icon.LoginFormIcon,
   interactions,
 };
 

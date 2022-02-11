@@ -1,8 +1,8 @@
-import { prefab, component, text } from '@betty-blocks/component-sdk';
+import { prefab, component, text, Icon } from '@betty-blocks/component-sdk';
 
 const attributes = {
   category: 'FORM',
-  icon: 'ButtonIcon',
+  icon: Icon.ButtonIcon,
 };
 
 const options = {

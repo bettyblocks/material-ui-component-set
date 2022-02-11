@@ -7,6 +7,7 @@ import {
   filter,
   BeforeCreateArgs,
 } from '@betty-blocks/component-sdk';
+import { Icon } from '@betty-blocks/component-sdk';
 
 const beforeCreate = ({
   close,
@@ -27,7 +28,7 @@ const beforeCreate = ({
 
 const attributes = {
   category: 'FORM',
-  icon: 'CreateFormIcon',
+  icon: Icon.CreateFormIcon,
 };
 
 const options = {

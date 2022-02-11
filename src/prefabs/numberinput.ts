@@ -6,6 +6,7 @@ import {
   toggle,
   number,
   showIf,
+  Icon,
 } from '@betty-blocks/component-sdk';
 
 import { makeNumberValidationOptions } from './options/makeNumberValidationOptions';
@@ -17,7 +18,7 @@ import { deleteActionVariable } from './hooks/deleteActionVariable';
 
 const attributes = {
   category: 'FORM',
-  icon: 'NumberInputIcon',
+  icon: Icon.NumberInputIcon,
 };
 
 const validationOptions = makeNumberValidationOptions('[0-9]{8,}');
