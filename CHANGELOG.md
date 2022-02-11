@@ -1,3 +1,11 @@
+## [1.203.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.203.1...v1.203.2) (2022-02-11)
+
+
+### Bug Fixes
+
+* autoload onscroll fix ([f71f651](https://github.com/bettyblocks/material-ui-component-set/commit/f71f651b32d54d231060da7c48d6d028255cb5f6))
+* fixed height to match default rows ([07f5b79](https://github.com/bettyblocks/material-ui-component-set/commit/07f5b792aaaee1946b59050c822712af2271cb94))
+
 ## [1.203.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.203.0...v1.203.1) (2022-02-11)
 
 
