@@ -187,6 +187,8 @@
 
       setAfterFirstInvalidation(!validation.valid);
       handleValidation(validation);
+      const { value } = target;
+      B.triggerEvent('onBlur', value);
     };
 
     const invalidHandler = (event) => {
