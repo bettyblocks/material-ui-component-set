@@ -5,7 +5,7 @@
   keywords: ['Form', 'input', 'auto', 'complete', 'autocomplete'],
   structure: [
     {
-      name: 'Multible Values Autocomplete',
+      name: 'Multiple Values Autocomplete',
       options: [
         {
           value: { label: ['Autocomplete'], value: [] },
@@ -14,6 +14,97 @@
           type: 'CUSTOM_MODEL_ATTRIBUTE',
           configuration: {
             allowedTypes: ['string'],
+          },
+        },
+        {
+          value: false,
+          label: 'Validation options',
+          key: 'validationOptions',
+          type: 'TOGGLE',
+        },
+        {
+          label: 'Validation pattern',
+          key: 'pattern',
+          value: '',
+          type: 'TEXT',
+          configuration: {
+            placeholder: '(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}',
+            condition: {
+              type: 'SHOW',
+              option: 'validationOptions',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          label: 'Min length',
+          key: 'minlength',
+          value: '',
+          type: 'NUMBER',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'validationOptions',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          label: 'Max length',
+          key: 'maxlength',
+          value: '',
+          type: 'NUMBER',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'validationOptions',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          value: ['This field is required'],
+          label: 'Value required message',
+          key: 'validationValueMissing',
+          type: 'VARIABLE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'validationOptions',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          value: ['Invalid value'],
+          label: 'Pattern mismatch message',
+          key: 'validationPatternMismatch',
+          type: 'VARIABLE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'validationOptions',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          value: ['This value is too short'],
+          label: 'Value too short message',
+          key: 'validationTooShort',
+          type: 'VARIABLE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'validationOptions',
+              comparator: 'EQ',
+              value: true,
+            },
           },
         },
         {
