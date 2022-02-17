@@ -222,6 +222,10 @@
 
     const handleClick = (e) => {
       e.stopPropagation();
+
+      if (!isNaN(buttonText)) {
+        B.triggerEvent('sendRowsPerPage', buttonText);
+      }
     };
 
     const LinkComponent =
