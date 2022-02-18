@@ -28,7 +28,10 @@
       Toolbar,
       TextField,
       InputAdornment,
+      IconButton,
     } = window.MaterialUI.Core;
+    const { FirstPage, LastPage, KeyboardArrowLeft, KeyboardArrowRight } =
+      window.MaterialUI.Icons;
     const isDev = env === 'dev';
     const {
       take,
@@ -55,6 +58,7 @@
       autoLoadOnScroll,
       autoLoadTakeAmount,
       dataComponentAttribute,
+      enableFirstLastPageNavigation,
     } = options;
     const repeaterRef = React.createRef();
     const tableRef = React.createRef();
@@ -467,6 +471,62 @@
       );
     };
 
+    const TablePaginationActions = function () {
+      const handleFirstPageButtonClick = () => {
+        setPage(0);
+      };
+
+      const handleBackButtonClick = () => {
+        setPage(page - 1);
+      };
+
+      const handleNextButtonClick = () => {
+        setPage(page + 1);
+      };
+
+      const handleLastPageButtonClick = () => {
+        const pageNumber = Math.max(0, Math.ceil(totalCount / rowsPerPage) - 1);
+        setPage(pageNumber);
+      };
+
+      return (
+        <div className={classes.paginationActions}>
+          {enableFirstLastPageNavigation && (
+            <IconButton
+              onClick={handleFirstPageButtonClick}
+              disabled={page === 0}
+              aria-label="first page"
+            >
+              <FirstPage />
+            </IconButton>
+          )}
+          <IconButton
+            onClick={handleBackButtonClick}
+            disabled={page === 0}
+            aria-label="previous page"
+          >
+            <KeyboardArrowLeft />
+          </IconButton>
+          <IconButton
+            onClick={handleNextButtonClick}
+            disabled={page >= Math.ceil(totalCount / rowsPerPage) - 1}
+            aria-label="next page"
+          >
+            <KeyboardArrowRight />
+          </IconButton>
+          {enableFirstLastPageNavigation && (
+            <IconButton
+              onClick={handleLastPageButtonClick}
+              disabled={page >= Math.ceil(totalCount / rowsPerPage) - 1}
+              aria-label="last page"
+            >
+              <LastPage />
+            </IconButton>
+          )}
+        </div>
+      );
+    };
+
     const tableContentModel = () => {
       if ((loading && !loadOnScroll) || error) {
         return Array.from(Array(rowsPerPage).keys()).map((idx) => (
@@ -699,6 +759,7 @@
               page={page}
               onChangePage={handleChangePage}
               onChangeRowsPerPage={handleChangeRowsPerPage}
+              ActionsComponent={() => TablePaginationActions()}
             />
           )}
         </Paper>
@@ -824,6 +885,10 @@
           style.getColor(background),
           '!important',
         ],
+      },
+      paginationActions: {
+        flexShrink: 0,
+        marginLeft: '20px',
       },
       autoRepeat: {
         opacity: 0.5,
