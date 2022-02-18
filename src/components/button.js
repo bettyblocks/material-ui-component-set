@@ -19,6 +19,7 @@
       visible,
       actionId,
       buttonText,
+      buttonValue,
       actionModels,
       addTooltip,
       hasVisibleTooltip,
@@ -45,6 +46,7 @@
     const hasInteralLink =
       linkType === 'internal' && linkTo && linkTo.id !== '';
     const buttonContent = useText(buttonText);
+    const buttonContentValue = useText(buttonValue);
     const tooltipText = useText(tooltipContent);
     const [isVisible, setIsVisible] = useState(visible);
     const [isLoading, setIsLoading] = useState(false);
@@ -223,8 +225,8 @@
     const handleClick = (e) => {
       e.stopPropagation();
 
-      if (!isNaN(buttonText)) {
-        B.triggerEvent('sendRowsPerPage', buttonText);
+      if (!isNaN(buttonContentValue)) {
+        B.triggerEvent('sendRowsPerPage', buttonContentValue);
       }
     };
 

@@ -23,6 +23,12 @@
           value: ['Button'],
         },
         {
+          type: 'VARIABLE',
+          label: 'Button value',
+          key: 'buttonValue',
+          value: [''],
+        },
+        {
           value: false,
           label: 'Full width',
           key: 'fullWidth',
