@@ -782,7 +782,6 @@
                 disabled={disabled}
                 error={errorState}
                 fullWidth={fullWidth}
-                helperText={helperText}
                 label={!hideLabel && label}
                 margin={margin}
                 {...(optionType === 'property' && {

@@ -722,7 +722,6 @@
                 data-component={dataComponentAttribute}
                 disabled={disabled}
                 fullWidth={fullWidth}
-                helperText={helperText}
                 error={errorState}
                 label={!hideLabel && label}
                 margin={margin}
