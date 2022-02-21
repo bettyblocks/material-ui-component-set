@@ -1,3 +1,25 @@
+## [1.203.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.203.1...v1.203.2) (2022-02-11)
+
+
+### Bug Fixes
+
+* autoload onscroll fix ([f71f651](https://github.com/bettyblocks/material-ui-component-set/commit/f71f651b32d54d231060da7c48d6d028255cb5f6))
+* fixed height to match default rows ([07f5b79](https://github.com/bettyblocks/material-ui-component-set/commit/07f5b792aaaee1946b59050c822712af2271cb94))
+
+## [1.203.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.203.0...v1.203.1) (2022-02-11)
+
+
+### Bug Fixes
+
+* fixed validations for all autocomplete components ([bfb5671](https://github.com/bettyblocks/material-ui-component-set/commit/bfb5671e3b292be1c719d339e1ec47b9060fefd1))
+
+# [1.203.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.202.2...v1.203.0) (2022-02-11)
+
+
+### Features
+
+* added onBlur interaction to textfield ([9c61f67](https://github.com/bettyblocks/material-ui-component-set/commit/9c61f67d31debfd7a25008652a5b3128fd731736))
+
 ## [1.202.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.202.1...v1.202.2) (2022-02-08)
 
 
