@@ -18,6 +18,7 @@
   }) => {
     const [modelId, setModelId] = React.useState('');
     const [property, setProperty] = React.useState('');
+
     const reduceStructure = (refValue, structure) =>
       structure.reduce((acc, component) => {
         if (acc) return acc;
