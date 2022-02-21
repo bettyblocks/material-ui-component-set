@@ -79,6 +79,9 @@
               }
             }
           });
+
+          B.triggerEvent('onComponentRendered');
+
           return () => {
             mounted.current = false;
           };
@@ -180,10 +183,6 @@
           B.defineFunction('Refetch', () => {
             if (refetch) refetch();
           });
-
-          useEffect(() => {
-            B.triggerEvent('onComponentRendered');
-          }, []);
 
           return (
             <Action actionId={actionId}>
