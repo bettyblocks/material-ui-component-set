@@ -660,7 +660,7 @@
             );
           }}
           onInputChange={(event, newValue) => {
-            let validation = event.target.validity;
+            let validation = event ? event.target.validity : null;
             if (isNumberType) {
               validation = customPatternValidation(event.target);
             }
@@ -722,7 +722,6 @@
                 data-component={dataComponentAttribute}
                 disabled={disabled}
                 fullWidth={fullWidth}
-                helperText={helperText}
                 error={errorState}
                 label={!hideLabel && label}
                 margin={margin}

@@ -74,6 +74,7 @@
       useText(dataComponentAttributeRaw) || 'AutoComplete';
     const [errorState, setErrorState] = useState(showError);
     const isNumberType = type === 'number';
+    const helperText = useText(helperTextRaw);
 
     const validPattern = pattern || null;
     const validMinlength = minlength || null;
@@ -502,6 +503,7 @@
             disabled={disabled || !valid}
             error={errorState}
             fullWidth={fullWidth}
+            helperText={helperText}
             label={!hideLabel && label}
             margin={margin}
             placeholder={placeholder}
