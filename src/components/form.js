@@ -60,6 +60,8 @@
         useEffect(() => {
           mounted.current = true;
 
+          B.triggerEvent('onComponentRendered');
+
           B.defineFunction('setCurrentRecord', (value) => {
             if (typeof value === 'number') {
               setOptions({
@@ -180,10 +182,6 @@
           B.defineFunction('Refetch', () => {
             if (refetch) refetch();
           });
-
-          useEffect(() => {
-            B.triggerEvent('onComponentRendered');
-          }, []);
 
           return (
             <Action actionId={actionId}>
