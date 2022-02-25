@@ -60,6 +60,8 @@
         useEffect(() => {
           mounted.current = true;
 
+          B.triggerEvent('onComponentRendered');
+
           B.defineFunction('SubmitWithoutValidation', () => {
             if (formRef.current) {
               formRef.current.noValidate = true;
@@ -71,8 +73,6 @@
                 );
               }
               formRef.current.noValidate = false;
-            }
-          });
 
           B.defineFunction('Submit', () => {
             if (formRef.current) {
@@ -194,10 +194,6 @@
           B.defineFunction('Refetch', () => {
             if (refetch) refetch();
           });
-
-          useEffect(() => {
-            B.triggerEvent('onComponentRendered');
-          }, []);
 
           return (
             <Action actionId={actionId}>

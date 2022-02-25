@@ -1,3 +1,11 @@
+## [1.203.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.203.2...v1.203.3) (2022-02-22)
+
+
+### Bug Fixes
+
+* fixed autocomplete value error ([2934946](https://github.com/bettyblocks/material-ui-component-set/commit/2934946b216dea3b1c68f6996843ede944ff511c))
+* fixed helpertext bug ([9afcb0e](https://github.com/bettyblocks/material-ui-component-set/commit/9afcb0ef2d1c5db958951405adcf04f456f52e0b))
+
 ## [1.203.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.203.1...v1.203.2) (2022-02-11)
 
 
