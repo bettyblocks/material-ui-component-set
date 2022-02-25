@@ -309,6 +309,7 @@
               }
             >
               <AuthenticationProfileSelector
+                allowCustomAuthProfile
                 onChange={(id, authProfileObject) => {
                   setLoggedInUserState((prevState) => ({
                     ...prevState,
