@@ -73,6 +73,8 @@
                 );
               }
               formRef.current.noValidate = false;
+            }
+          });
 
           B.defineFunction('Submit', () => {
             if (formRef.current) {
