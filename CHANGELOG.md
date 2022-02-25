@@ -1,3 +1,10 @@
+## [1.203.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.203.3...v1.203.4) (2022-02-25)
+
+
+### Bug Fixes
+
+* placed onComponentRendered to single useEffect ([d14d1e6](https://github.com/bettyblocks/material-ui-component-set/commit/d14d1e6e9b22d7bad83b46c6d63068a1e6a371c7))
+
 ## [1.203.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.203.2...v1.203.3) (2022-02-22)
 
 
