@@ -338,6 +338,7 @@
           ...style['&:active'],
         },
         ...style,
+        cursor: 'pointer',
       }),
       linkComponent: {
         '&, &.MuiTypography-root': {
@@ -473,7 +474,6 @@
         boxSizing: 'border-box',
         display: 'flex',
         width: '100%',
-        cursor: 'pointer',
         justifyContent: 'center',
         alignItems: 'center',
       },
