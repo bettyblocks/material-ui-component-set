@@ -186,8 +186,20 @@
       endpoint: hasInteralLink ? linkTo : undefined,
     };
 
+    const additionalClasses = [
+      classes.customStyles,
+      disabled ? classes.disabled : '',
+    ];
+
+    const noop = () => {};
+
     const ButtonContent = (
-      <div className={classes.root}>
+      <div
+        className={[
+          classes.root,
+          ...(linkType === 'internal' ? additionalClasses : []),
+        ].join(' ')}
+      >
         <span className={classes.innerRoot}>
           &#8203;
           {icon !== 'None' && iconPosition === 'start' && (
@@ -225,24 +237,16 @@
     const LinkComponent =
       linkType === 'internal' ? (
         <Link
-          className={[
-            classes.linkComponent,
-            classes.customStyles,
-            disabled ? classes.disabled : '',
-          ].join(' ')}
-          {...linkProps}
+          className={classes.linkComponent}
+          {...(disabled ? {} : linkProps)}
           underline="none"
-          onClick={handleClick}
+          onClick={disabled ? noop : handleClick}
         >
           {ButtonContent}
         </Link>
       ) : (
         <a
-          className={[
-            classes.linkComponent,
-            classes.customStyles,
-            disabled ? classes.disabled : '',
-          ].join(' ')}
+          className={[classes.linkComponent, ...additionalClasses].join(' ')}
           {...anchorProps}
           onClick={handleClick}
           onKeyUp={handleClick}
@@ -256,11 +260,7 @@
     const ButtonElement = (
       <button
         type="button"
-        className={[
-          classes.button,
-          classes.customStyles,
-          disabled ? classes.disabled : '',
-        ].join(' ')}
+        className={[classes.button, ...additionalClasses].join(' ')}
         {...buttonProps}
       >
         {ButtonContent}
