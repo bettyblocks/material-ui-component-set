@@ -28,6 +28,7 @@
       Toolbar,
       TextField,
       InputAdornment,
+      Checkbox,
     } = window.MaterialUI.Core;
     const isDev = env === 'dev';
     const {
@@ -55,6 +56,7 @@
       autoLoadOnScroll,
       autoLoadTakeAmount,
       dataComponentAttribute,
+      enableRecordSelection,
     } = options;
     const repeaterRef = React.createRef();
     const tableRef = React.createRef();
@@ -100,6 +102,7 @@
     const [totalCount, setTotalCount] = useState(0);
     const [previousSearchTerm, setPreviousSearchTerm] = useState('');
     const [newSearch, setNewSearch] = useState(false);
+    const [selectedIds, setSelected] = useState([]);
     const fetchingNextSet = useRef(false);
     const [initialTimesFetched, setInitialTimesFetched] = useState(0);
     const amountOfRows = loadOnScroll ? autoLoadTakeAmountNum : rowsPerPage;
@@ -427,6 +430,34 @@
       setPage(0);
     };
 
+    const handleSelectAllClick = (event) => {
+      if (event.target.checked) {
+        const newSelectedIds = results.map((n) => n.id);
+        setSelected(newSelectedIds);
+        return;
+      }
+      setSelected([]);
+    };
+
+    const handleSelection = (event, selectionData) => {
+      const selectedIndex = selectedIds.indexOf(selectionData.id);
+      let newSelected = [];
+
+      if (selectedIndex === -1) {
+        newSelected = newSelected.concat(selectedIds, selectionData.id);
+      } else if (selectedIndex === 0) {
+        newSelected = newSelected.concat(selectedIds.slice(1));
+      } else if (selectedIndex === selectedIds.length - 1) {
+        newSelected = newSelected.concat(selectedIds.slice(0, -1));
+      } else if (selectedIndex > 0) {
+        newSelected = newSelected.concat(
+          selectedIds.slice(0, selectedIndex),
+          selectedIds.slice(selectedIndex + 1),
+        );
+      }
+      setSelected(newSelected);
+    };
+
     const handleSort = (field, newOrder) => {
       if (isDev) return;
       setOrderBy({ field, order: newOrder });
@@ -448,6 +479,45 @@
       if (hasLink) {
         history.push(endpoint);
       }
+    };
+
+    const renderTableHeadSelection = () => {
+      if (isDev) {
+        return (
+          <div>
+            <TableCell padding="checkbox" component="div">
+              <Checkbox
+                color="primary"
+                indeterminate={false}
+                checked={false}
+                size={size}
+                inputProps={{
+                  'aria-label': 'Select all records',
+                }}
+              />
+            </TableCell>
+          </div>
+        );
+      }
+
+      return (
+        <TableCell padding="checkbox">
+          <Checkbox
+            color="primary"
+            indeterminate={
+              selectedIds.length > 0 && selectedIds.length < results.length
+            }
+            checked={
+              results.length > 0 && selectedIds.length === results.length
+            }
+            size={size}
+            onChange={handleSelectAllClick}
+            inputProps={{
+              'aria-label': 'Select all records',
+            }}
+          />
+        </TableCell>
+      );
     };
 
     const renderTableHead = () => {
@@ -480,7 +550,7 @@
         ));
       }
 
-      return results.map((value) => (
+      return results.map((value, index) => (
         <ModelProvider key={value.id} value={value} id={model}>
           <InteractionScope model={model}>
             {(context) => (
@@ -489,6 +559,20 @@
                 classes={{ root: classes.bodyRow }}
                 data-id={value.id}
               >
+                {enableRecordSelection && (
+                  <TableCell padding="checkbox">
+                    <Checkbox
+                      color="primary"
+                      onChange={(e) => handleSelection(e, value)}
+                      checked={selectedIds.includes(value.id)}
+                      value={value.id}
+                      size={size}
+                      inputProps={{
+                        'aria-labelledby': `table-cell-${index}`,
+                      }}
+                    />
+                  </TableCell>
+                )}
                 <Children
                   linkTo={linkTo}
                   handleRowClick={handleRowClick}
@@ -506,7 +590,18 @@
     const renderTableContent = () => {
       if (isDev) {
         return (
-          <TableRow classes={{ root: classes.bodyRow }}>{children}</TableRow>
+          <TableRow classes={{ root: classes.bodyRow }}>
+            {enableRecordSelection && (
+              <TableCell
+                classes={{ root: classes.root }}
+                padding="checkbox"
+                component="div"
+              >
+                <Checkbox color="primary" checked={false} size={size} />
+              </TableCell>
+            )}
+            {children}
+          </TableRow>
         );
       }
 
@@ -514,8 +609,18 @@
         return tableContentModel();
       }
 
-      return Array.from(Array(amountOfRows).keys()).map((idx) => (
+      return Array.from(Array(amountOfRows).keys()).map((idx, index) => (
         <TableRow key={idx} classes={{ root: classes.bodyRow }}>
+          {enableRecordSelection && (
+            <TableCell classes={{ root: classes.root }} padding="checkbox">
+              <Checkbox
+                color="primary"
+                checked={false}
+                size={size}
+                inputProps={{ 'aria-labelledby': `table-cell-${index}` }}
+              />
+            </TableCell>
+          )}
           {children}
         </TableRow>
       ));
@@ -675,6 +780,7 @@
             >
               <TableHead>
                 <TableRow classes={{ root: classes.headerRow }}>
+                  {enableRecordSelection && renderTableHeadSelection()}
                   {renderTableHead()}
                 </TableRow>
               </TableHead>
@@ -774,6 +880,12 @@
         ],
         '& div': {
           borderBottom: `${isDev ? '0.0625rem solid #cccccc' : 0}`,
+          display: 'table-cell',
+          verticalAlign: 'middle',
+          width: ({ options: { width } }) => width || 'auto',
+          '& > div': {
+            display: 'block',
+          },
         },
         '& th, & div[role="columnheader"]': {
           borderBottom: `${isDev ? 0 : '0.0625rem solid #cccccc!important'}`,
@@ -782,7 +894,6 @@
             '!important',
           ],
         },
-
         '& > div > .MuiTableCell-head, & > .MuiTableCell-head': {
           textOverflow: ({ options: { hideTextOverflow } }) =>
             hideTextOverflow ? 'ellipsis' : 'clip',
@@ -793,6 +904,14 @@
         },
       },
       bodyRow: {
+        '& > div': {
+          display: 'table-cell',
+          verticalAlign: 'middle',
+          width: ({ options: { width } }) => width || 'auto',
+          '& > div': {
+            display: 'block',
+          },
+        },
         cursor: ({ options: { linkTo } }) =>
           linkTo && linkTo.id !== '' && 'pointer',
         '&:hover td': {
@@ -811,6 +930,20 @@
             hideTextOverflow ? 'hidden' : 'visible',
           whiteSpace: ({ options: { hideTextOverflow } }) =>
             hideTextOverflow ? 'nowrap' : 'normal',
+          borderColor: ({ options: { borderColor } }) => [
+            style.getColor(borderColor),
+            '!important',
+          ],
+        },
+        '& > .MuiTableCell-body, & ~ .MuiTableCell-body': {
+          backgroundColor: ({ options: { background } }) => [
+            style.getColor(background),
+            '!important',
+          ],
+          borderColor: ({ options: { borderColor } }) => [
+            style.getColor(borderColor),
+            '!important',
+          ],
         },
       },
       searchField: {

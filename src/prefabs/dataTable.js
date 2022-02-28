@@ -344,6 +344,12 @@
           },
         },
         {
+          type: 'TOGGLE',
+          label: 'Enable selection of record(s)',
+          key: 'enableRecordSelection',
+          value: false,
+        },
+        {
           value: '5',
           label: 'Rows per page',
           key: 'take',
@@ -441,6 +447,12 @@
           label: 'Background header',
           key: 'backgroundHeader',
           value: 'Transparent',
+        },
+        {
+          type: 'COLOR',
+          label: 'Border color',
+          key: 'borderColor',
+          value: 'Light',
         },
         {
           label: 'Square',
