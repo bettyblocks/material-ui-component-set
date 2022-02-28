@@ -57,6 +57,7 @@
       autoLoadTakeAmount,
       dataComponentAttribute,
       enableRecordSelection,
+      showSelectedRecordCount,
     } = options;
     const repeaterRef = React.createRef();
     const tableRef = React.createRef();
@@ -790,23 +791,36 @@
               )}
             </Table>
           </TableContainer>
-          {showPagination && !isRelation && (
-            <TablePagination
-              ref={paginationRef}
-              classes={{ root: classes.pagination }}
-              rowsPerPageOptions={[5, 10, 25, 50, 100]}
-              labelRowsPerPage={perPageLabel}
-              labelDisplayedRows={({ from, to, count }) =>
-                `${from}-${to} ${numOfPagesLabel} ${count}`
-              }
-              component="div"
-              count={model ? totalCount : takeNum}
-              rowsPerPage={model ? rowsPerPage : takeNum}
-              page={page}
-              onChangePage={handleChangePage}
-              onChangeRowsPerPage={handleChangeRowsPerPage}
-            />
-          )}
+          <div
+            className={enableRecordSelection ? classes.paginationContainer : ''}
+          >
+            <div className={classes.selectCount}>
+              {enableRecordSelection && showSelectedRecordCount && (
+                <div className={classes.selectCountInner}>
+                  <p className="MuiTypography-root MuiTypography-body2">
+                    Total records selected: {selectedIds.length}
+                  </p>
+                </div>
+              )}
+            </div>
+            {showPagination && !isRelation && (
+              <TablePagination
+                ref={paginationRef}
+                classes={{ root: classes.pagination }}
+                rowsPerPageOptions={[5, 10, 25, 50, 100]}
+                labelRowsPerPage={perPageLabel}
+                labelDisplayedRows={({ from, to, count }) =>
+                  `${from}-${to} ${numOfPagesLabel} ${count}`
+                }
+                component="div"
+                count={model ? totalCount : takeNum}
+                rowsPerPage={model ? rowsPerPage : takeNum}
+                page={page}
+                onChangePage={handleChangePage}
+                onChangeRowsPerPage={handleChangeRowsPerPage}
+              />
+            )}
+          </div>
         </Paper>
       </div>
     );
@@ -949,6 +963,19 @@
       searchField: {
         marginLeft: ['auto', '!important'],
         pointerEvents: isDev && 'none',
+      },
+      paginationContainer: {
+        display: 'flex',
+        justifyContent: 'space-between',
+      },
+      selectCount: {
+        overflow: 'auto',
+      },
+      selectCountInner: {
+        display: 'flex',
+        alignItems: 'center',
+        position: 'relative',
+        minHeight: '52px',
       },
       pagination: {
         borderRadius: '0.1875rem',
