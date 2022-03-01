@@ -315,31 +315,33 @@
           pointerEvents: 'none',
         },
       },
-      customStyles: ({ style }) => ({
-        '&:focus': {
-          filter:
-            style['&:hover'] && style['&:hover'].backgroundColor
-              ? 'none'
-              : 'brightness(90%)',
-          ...style['&:hover'],
-        },
-        '&:hover': {
-          filter:
-            style['&:hover'] && style['&:hover'].backgroundColor
-              ? 'none'
-              : 'brightness(90%)',
-          ...style['&:hover'],
-        },
-        '&:active': {
-          filter:
-            style['&:active'] && style['&:active'].backgroundColor
-              ? 'none'
-              : 'brightness(85%)',
-          ...style['&:active'],
-        },
-        ...style,
-        cursor: 'pointer',
-      }),
+      customStyles: ({ style }) => {
+        const hoverStyles = style['&:hover'];
+        const basisStyles = Object.entries(style).reduce(
+          (acc, [key, value]) => {
+            if (key.startsWith('&:')) {
+              return acc;
+            }
+            return { ...acc, [key]: value };
+          },
+          {},
+        );
+
+        return {
+          '&:hover, &:focus': {
+            filter:
+              hoverStyles && hoverStyles.backgroundColor
+                ? 'none'
+                : 'brightness(90%)',
+            ...hoverStyles,
+          },
+          '&:active': {
+            ...basisStyles,
+          },
+          ...basisStyles,
+          cursor: 'pointer',
+        };
+      },
       linkComponent: {
         '&, &.MuiTypography-root': {
           textDecoration: 'none',
