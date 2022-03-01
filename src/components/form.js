@@ -60,8 +60,6 @@
         useEffect(() => {
           mounted.current = true;
 
-          B.triggerEvent('onComponentRendered');
-
           B.defineFunction('setCurrentRecord', (value) => {
             if (typeof value === 'number') {
               setOptions({
@@ -81,6 +79,8 @@
               }
             }
           });
+
+          B.triggerEvent('onComponentRendered');
           return () => {
             mounted.current = false;
           };
