@@ -60,8 +60,6 @@
         useEffect(() => {
           mounted.current = true;
 
-          B.triggerEvent('onComponentRendered');
-
           B.defineFunction('SubmitWithoutValidation', () => {
             if (formRef.current) {
               formRef.current.noValidate = true;
@@ -95,6 +93,8 @@
               });
             }
           });
+
+          B.triggerEvent('onComponentRendered');
           return () => {
             mounted.current = false;
           };
