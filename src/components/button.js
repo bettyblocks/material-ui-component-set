@@ -480,9 +480,6 @@
         filter: 'grayscale(100%)',
         pointerEvents: 'none',
       },
-      selected: {
-        backgroundColor: 'red',
-      },
       loader: {
         color: 'inherit!important',
         marginLeft: '0.25rem',
