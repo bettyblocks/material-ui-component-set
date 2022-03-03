@@ -216,7 +216,7 @@
           classes.root,
           disabled ? classes.disabled : '',
           buttonState,
-          ...(linkType === 'internal' ? additionalClasses : [])
+          ...(linkType === 'internal' ? additionalClasses : []),
         ].join(' ')}
       >
         <span className={classes.innerRoot}>
