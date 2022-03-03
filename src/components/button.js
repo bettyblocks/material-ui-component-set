@@ -25,6 +25,9 @@
       tooltipContent,
       tooltipPlacement,
       dataComponentAttribute,
+      defaultState,
+      selectedType,
+      urlPath,
     } = options;
     const {
       env,
@@ -51,6 +54,10 @@
     const [isOpen, setIsOpen] = useState(hasVisibleTooltip);
     const [, setOptions] = useOptions();
     const [isDisabled, setIsDisabled] = useState(disabled);
+    const [buttonState, setButtonState] = useState(defaultState);
+    const pathMatch =
+      selectedType === 'dynamic' &&
+      useText(urlPath) === window.location.pathname;
 
     const camelToSnakeCase = (str) =>
       str[0].toLowerCase() +
@@ -99,7 +106,6 @@
         }),
       [isDisabled],
     );
-
     useEffect(() => {
       B.defineFunction('Show', () => setIsVisible(true));
       B.defineFunction('Hide', () => setIsVisible(false));
@@ -108,10 +114,21 @@
       B.defineFunction('Enable', () => setIsDisabled(false));
       B.defineFunction('Disable', () => setIsDisabled(true));
 
+      if (
+        !pathMatch &&
+        defaultState === 'selected' &&
+        selectedType === 'dynamic'
+      ) {
+        setButtonState('base');
+      }
       if (loading) {
         B.triggerEvent('onActionLoad', loading);
       }
     }, [loading]);
+
+    B.defineFunction('toggleSelected', () => {
+      setButtonState(buttonState === 'selected' ? 'base' : 'selected');
+    });
 
     const getExternalHref = (config) => {
       if (config.disabled) {
@@ -197,6 +214,8 @@
       <div
         className={[
           classes.root,
+          disabled ? classes.disabled : '',
+          buttonState,
           ...(linkType === 'internal' ? additionalClasses : []),
         ].join(' ')}
       >

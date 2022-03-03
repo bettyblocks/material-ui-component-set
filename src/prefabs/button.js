@@ -23,6 +23,64 @@
           value: ['Button'],
         },
         {
+          type: 'CUSTOM',
+          label: 'Button state',
+          key: 'defaultState',
+          value: 'basis',
+          configuration: {
+            as: 'DROPDOWN',
+            dataType: 'string',
+            allowedInput: [
+              {
+                name: 'Basis',
+                value: 'basis',
+              },
+              {
+                name: 'Selected',
+                value: 'selected',
+              },
+              {
+                name: 'Disabled',
+                value: 'disabled',
+              },
+            ],
+          },
+        },
+        {
+          value: 'static',
+          label: 'Show selected as',
+          key: 'selectedType',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Always on', value: 'static' },
+              { name: 'Dynamic', value: 'dynamic' },
+            ],
+            condition: {
+              type: 'SHOW',
+              option: 'defaultState',
+              comparator: 'EQ',
+              value: 'selected',
+            },
+          },
+        },
+        {
+          type: 'VARIABLE',
+          label: 'URL path',
+          key: 'urlPath',
+          value: [''],
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'selectedType',
+              comparator: 'EQ',
+              value: 'dynamic',
+            },
+          },
+        },
+        {
           value: false,
           label: 'Full width',
           key: 'fullWidth',

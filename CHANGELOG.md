@@ -1,3 +1,10 @@
+## [1.203.5](https://github.com/bettyblocks/material-ui-component-set/compare/v1.203.4...v1.203.5) (2022-03-01)
+
+
+### Bug Fixes
+
+* reordered onComponentRendered in useEffect ([b0ae2fd](https://github.com/bettyblocks/material-ui-component-set/commit/b0ae2fd428046fc0cd9ffb6483021c95147da797))
+
 ## [1.203.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.203.3...v1.203.4) (2022-02-25)
 
 
