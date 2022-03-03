@@ -203,12 +203,20 @@
       endpoint: hasInteralLink ? linkTo : undefined,
     };
 
+    const additionalClasses = [
+      classes.customStyles,
+      disabled ? classes.disabled : '',
+    ];
+
+    const noop = () => {};
+
     const ButtonContent = (
       <div
         className={[
           classes.root,
           disabled ? classes.disabled : '',
           buttonState,
+          ...(linkType === 'internal' ? additionalClasses : [])
         ].join(' ')}
       >
         <span className={classes.innerRoot}>
@@ -249,15 +257,15 @@
       linkType === 'internal' ? (
         <Link
           className={classes.linkComponent}
-          {...linkProps}
+          {...(disabled ? {} : linkProps)}
           underline="none"
-          onClick={handleClick}
+          onClick={disabled ? noop : handleClick}
         >
           {ButtonContent}
         </Link>
       ) : (
         <a
-          className={classes.linkComponent}
+          className={[classes.linkComponent, ...additionalClasses].join(' ')}
           {...anchorProps}
           onClick={handleClick}
           onKeyUp={handleClick}
@@ -269,7 +277,11 @@
       );
 
     const ButtonElement = (
-      <button type="button" className={classes.button} {...buttonProps}>
+      <button
+        type="button"
+        className={[classes.button, ...additionalClasses].join(' ')}
+        {...buttonProps}
+      >
         {ButtonContent}
       </button>
     );
@@ -322,6 +334,31 @@
           pointerEvents: 'none',
         },
       },
+      customStyles: ({ style }) => ({
+        '&:focus': {
+          filter:
+            style['&:hover'] && style['&:hover'].backgroundColor
+              ? 'none'
+              : 'brightness(90%)',
+          ...style['&:hover'],
+        },
+        '&:hover': {
+          filter:
+            style['&:hover'] && style['&:hover'].backgroundColor
+              ? 'none'
+              : 'brightness(90%)',
+          ...style['&:hover'],
+        },
+        '&:active': {
+          filter:
+            style['&:active'] && style['&:active'].backgroundColor
+              ? 'none'
+              : 'brightness(85%)',
+          ...style['&:active'],
+        },
+        ...style,
+        cursor: 'pointer',
+      }),
       linkComponent: {
         '&, &.MuiTypography-root': {
           textDecoration: 'none',
@@ -452,34 +489,26 @@
             getSpacing(outerSpacing[3], 'Desktop'),
         },
       },
-      root: ({ style }) => ({
-        ...style,
+      root: {
         boxSizing: 'border-box',
         display: 'flex',
         width: '100%',
-        cursor: 'pointer',
         justifyContent: 'center',
         alignItems: 'center',
-
-        '&:hover': {
-          filter: 'brightness(90%)',
-        },
-        '&:active, &:focus': {
-          filter: 'brightness(85%)',
-          outline: 'none',
-        },
-      }),
+      },
       innerRoot: {
         display: 'flex',
         alignItems: 'center',
         minHeight: '1.25rem',
       },
-      disabled: {
+      disabled: ({ style }) => ({
         opacity: '50%',
-        boxShadow: 'none',
-        filter: 'grayscale(100%)',
+        boxShadow:
+          (style['&:disabled'] && style['&:disabled'].boxShadow) || 'none',
+        filter: style['&:disabled'] ? 'none' : 'grayscale(100%)',
         pointerEvents: 'none',
-      },
+        ...style['&:disabled'],
+      }),
       loader: {
         color: 'inherit!important',
         marginLeft: '0.25rem',

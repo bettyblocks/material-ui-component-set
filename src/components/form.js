@@ -60,11 +60,17 @@
         useEffect(() => {
           mounted.current = true;
 
-          B.defineFunction('setCurrentRecord', (value) => {
-            if (typeof value === 'number') {
-              setOptions({
-                currentRecord: value,
-              });
+          B.defineFunction('SubmitWithoutValidation', () => {
+            if (formRef.current) {
+              formRef.current.noValidate = true;
+              if (typeof formRef.current.requestSubmit === 'function') {
+                formRef.current.requestSubmit();
+              } else {
+                formRef.current.dispatchEvent(
+                  new Event('submit', { cancelable: true }),
+                );
+              }
+              formRef.current.noValidate = false;
             }
           });
 
@@ -77,6 +83,14 @@
                   new Event('submit', { cancelable: true }),
                 );
               }
+            }
+          });
+
+          B.defineFunction('setCurrentRecord', (value) => {
+            if (typeof value === 'number') {
+              setOptions({
+                currentRecord: value,
+              });
             }
           });
 
