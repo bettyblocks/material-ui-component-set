@@ -111,7 +111,7 @@
       B.defineFunction('Enable', () => setIsDisabled(false));
       B.defineFunction('Disable', () => setIsDisabled(true));
 
-      if (!pathMatch && defaultState === 'selected') {
+      if (urlPath && !pathMatch && defaultState === 'selected') {
         setButtonState('base');
       }
       if (pathMatch && defaultState !== 'selected') {
