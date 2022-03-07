@@ -47,14 +47,16 @@
       linkType === 'internal' && linkTo && linkTo.id !== '';
     const buttonContent = useText(buttonText);
     const tooltipText = useText(tooltipContent);
+    const path = (urlPath && useText(urlPath)) || '';
     const [isVisible, setIsVisible] = useState(visible);
     const [isLoading, setIsLoading] = useState(false);
     const [isOpen, setIsOpen] = useState(hasVisibleTooltip);
     const [, setOptions] = useOptions();
     const [isDisabled, setIsDisabled] = useState(defaultState === 'disabled');
     const [buttonState, setButtonState] = useState(defaultState || null);
+    console.log({ urlPath, path });
     const pathMatch =
-      urlPath && window.location.pathname.includes(useText(urlPath));
+      path.length > 0 && window.location.pathname.includes(path);
 
     const camelToSnakeCase = (str) =>
       str[0].toLowerCase() +
@@ -103,6 +105,7 @@
         }),
       [isDisabled],
     );
+
     useEffect(() => {
       B.defineFunction('Show', () => setIsVisible(true));
       B.defineFunction('Hide', () => setIsVisible(false));
@@ -111,7 +114,7 @@
       B.defineFunction('Enable', () => setIsDisabled(false));
       B.defineFunction('Disable', () => setIsDisabled(true));
 
-      if (urlPath && !pathMatch && defaultState === 'selected') {
+      if (path.length > 0 && !pathMatch && defaultState === 'selected') {
         setButtonState('base');
       }
       if (pathMatch && defaultState !== 'selected') {
