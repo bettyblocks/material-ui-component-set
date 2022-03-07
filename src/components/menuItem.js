@@ -48,7 +48,7 @@
     const [buttonState, setButtonState] = useState(defaultState);
     const pathMatch =
       useText(urlPath) && window.location.pathname.includes(useText(urlPath));
-    console.log(pathMatch);
+
     const camelToSnakeCase = (str) =>
       str[0].toLowerCase() +
       str
