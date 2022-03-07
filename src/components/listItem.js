@@ -8,10 +8,8 @@
       window.MaterialUI.Core;
     const {
       alignItems,
-      disabled,
       disableGutters,
       divider,
-      selected,
       primaryText,
       secondaryText,
       icon,
@@ -22,6 +20,8 @@
       linkTo,
       linkToExternal,
       dense,
+      defaultState,
+      urlPath,
       dataComponentAttribute = ['ListItem'],
     } = options;
     const { env, useText, Link, Icon } = B;
@@ -32,7 +32,8 @@
       linkType === 'external' && linkToExternal && linkToExternal.id !== '';
     const linkToExternalVariable =
       (linkToExternal && useText(linkToExternal)) || '';
-
+    const pathMatch =
+      useText(urlPath) && window.location.pathname.includes(useText(urlPath));
     const primary = useText(primaryText);
     const secondary = useText(secondaryText);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
@@ -74,10 +75,10 @@
           linkType === 'internal' && hasLink && !isDev ? linkTo : undefined
         }
         alignItems={alignItems}
-        disabled={disabled}
+        disabled={defaultState === 'disabled'}
         disableGutters={disableGutters}
         divider={divider}
-        selected={selected}
+        selected={defaultState === 'selected' || pathMatch}
         className={classes.root}
         dense={dense}
         data-component={dataComponentAttributeValue}

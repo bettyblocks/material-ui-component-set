@@ -47,40 +47,6 @@
           },
         },
         {
-          value: 'static',
-          label: 'Show selected as',
-          key: 'selectedType',
-          type: 'CUSTOM',
-          configuration: {
-            as: 'BUTTONGROUP',
-            dataType: 'string',
-            allowedInput: [
-              { name: 'Always on', value: 'static' },
-              { name: 'Dynamic', value: 'dynamic' },
-            ],
-            condition: {
-              type: 'SHOW',
-              option: 'defaultState',
-              comparator: 'EQ',
-              value: 'selected',
-            },
-          },
-        },
-        {
-          type: 'VARIABLE',
-          label: 'URL path',
-          key: 'urlPath',
-          value: [''],
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'selectedType',
-              comparator: 'EQ',
-              value: 'dynamic',
-            },
-          },
-        },
-        {
           value: false,
           label: 'Full width',
           key: 'fullWidth',
@@ -138,12 +104,6 @@
           label: 'Outer space',
           key: 'outerSpacing',
           type: 'SIZES',
-        },
-        {
-          label: 'Disabled',
-          key: 'disabled',
-          value: false,
-          type: 'TOGGLE',
         },
         {
           label: 'Add Tooltip',

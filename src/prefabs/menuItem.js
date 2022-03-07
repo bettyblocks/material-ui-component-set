@@ -83,6 +83,36 @@
           },
         },
         {
+          type: 'CUSTOM',
+          label: 'Button state',
+          key: 'defaultState',
+          value: 'basis',
+          configuration: {
+            as: 'DROPDOWN',
+            dataType: 'string',
+            allowedInput: [
+              {
+                name: 'Basis',
+                value: 'basis',
+              },
+              {
+                name: 'Selected',
+                value: 'selected',
+              },
+              {
+                name: 'Disabled',
+                value: 'disabled',
+              },
+            ],
+          },
+        },
+        {
+          type: 'VARIABLE',
+          label: 'Selected by URL',
+          key: 'urlPath',
+          value: [''],
+        },
+        {
           label: 'Icon',
           key: 'icon',
           value: 'None',
@@ -113,12 +143,6 @@
           label: 'Text color',
           key: 'textColor',
           value: 'Primary',
-        },
-        {
-          type: 'TOGGLE',
-          label: 'Disabled',
-          key: 'disabled',
-          value: false,
         },
         {
           type: 'TOGGLE',

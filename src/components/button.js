@@ -7,7 +7,6 @@
   jsx: (() => {
     const { CircularProgress, Tooltip, Link } = window.MaterialUI.Core;
     const {
-      disabled,
       size,
       type,
       icon,
@@ -26,7 +25,6 @@
       tooltipPlacement,
       dataComponentAttribute,
       defaultState,
-      selectedType,
       urlPath,
     } = options;
     const {
@@ -53,11 +51,10 @@
     const [isLoading, setIsLoading] = useState(false);
     const [isOpen, setIsOpen] = useState(hasVisibleTooltip);
     const [, setOptions] = useOptions();
-    const [isDisabled, setIsDisabled] = useState(disabled);
-    const [buttonState, setButtonState] = useState(defaultState);
+    const [isDisabled, setIsDisabled] = useState(defaultState === 'disabled');
+    const [buttonState, setButtonState] = useState(defaultState || null);
     const pathMatch =
-      selectedType === 'dynamic' &&
-      useText(urlPath) === window.location.pathname;
+      urlPath && window.location.pathname.includes(useText(urlPath));
 
     const camelToSnakeCase = (str) =>
       str[0].toLowerCase() +
@@ -114,12 +111,11 @@
       B.defineFunction('Enable', () => setIsDisabled(false));
       B.defineFunction('Disable', () => setIsDisabled(true));
 
-      if (
-        !pathMatch &&
-        defaultState === 'selected' &&
-        selectedType === 'dynamic'
-      ) {
+      if (!pathMatch && defaultState === 'selected') {
         setButtonState('base');
+      }
+      if (pathMatch && defaultState !== 'selected') {
+        setButtonState('selected');
       }
       if (loading) {
         B.triggerEvent('onActionLoad', loading);
@@ -160,7 +156,7 @@
     };
 
     const buttonProps = {
-      disabled: disabled || isLoading || loading,
+      disabled: isDisabled || isLoading || loading,
       tabIndex: isDev ? -1 : undefined,
       onClick: (event) => {
         event.stopPropagation();
@@ -182,7 +178,7 @@
     const anchorProps = {
       ...targetProps,
       href: getExternalHref({
-        disabled,
+        isDisabled,
         linkToExternal,
         linkToExternalVariable,
       }),
@@ -198,14 +194,15 @@
 
     const linkProps = {
       ...targetProps,
-      href: getInternalHref({ linkTo, linkToInternalVariable, disabled }),
+      href: getInternalHref({ linkTo, linkToInternalVariable, isDisabled }),
       component: hasInteralLink ? B.Link : undefined,
       endpoint: hasInteralLink ? linkTo : undefined,
     };
 
     const additionalClasses = [
       classes.customStyles,
-      disabled ? classes.disabled : '',
+      isDisabled ? classes.disabled : '',
+      buttonState,
     ];
 
     const noop = () => {};
@@ -214,8 +211,7 @@
       <div
         className={[
           classes.root,
-          disabled ? classes.disabled : '',
-          buttonState,
+          isDisabled ? classes.disabled : '',
           ...(linkType === 'internal' ? additionalClasses : []),
         ].join(' ')}
       >
@@ -257,9 +253,9 @@
       linkType === 'internal' ? (
         <Link
           className={classes.linkComponent}
-          {...(disabled ? {} : linkProps)}
+          {...(isDisabled ? {} : linkProps)}
           underline="none"
-          onClick={disabled ? noop : handleClick}
+          onClick={isDisabled ? noop : handleClick}
         >
           {ButtonContent}
         </Link>
