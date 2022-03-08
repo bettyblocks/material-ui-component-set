@@ -54,7 +54,6 @@
     const [, setOptions] = useOptions();
     const [isDisabled, setIsDisabled] = useState(defaultState === 'disabled');
     const [buttonState, setButtonState] = useState(defaultState || null);
-    console.log({ urlPath, path });
     const pathMatch =
       path.length > 0 && window.location.pathname.includes(path);
 
