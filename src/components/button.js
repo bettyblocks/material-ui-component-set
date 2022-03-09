@@ -231,6 +231,7 @@
     );
 
     const handleClick = (e) => {
+      B.triggerEvent('onClick');
       e.stopPropagation();
     };
 
@@ -315,30 +316,18 @@
           pointerEvents: 'none',
         },
       },
-      customStyles: ({ style }) => {
-        const hoverStyles = style['&:hover'];
-        const basisStyles = Object.entries(style).reduce(
-          (acc, [key, value]) => {
-            if (key.startsWith('&:')) {
-              return acc;
-            }
-            return { ...acc, [key]: value };
-          },
-          {},
-        );
+      customStyles: () => {
+        const { basis, hover } = B.style(t);
 
         return {
           '&:hover, &:focus': {
-            filter:
-              hoverStyles && hoverStyles.backgroundColor
-                ? 'none'
-                : 'brightness(90%)',
-            ...hoverStyles,
+            filter: hover && hover.backgroundColor ? 'none' : 'brightness(90%)',
+            ...hover,
           },
           '&:active': {
-            ...basisStyles,
+            ...basis,
           },
-          ...basisStyles,
+          ...basis,
           cursor: 'pointer',
         };
       },
@@ -484,14 +473,19 @@
         alignItems: 'center',
         minHeight: '1.25rem',
       },
-      disabled: ({ style }) => ({
-        opacity: '50%',
-        boxShadow:
-          (style['&:disabled'] && style['&:disabled'].boxShadow) || 'none',
-        filter: style['&:disabled'] ? 'none' : 'grayscale(100%)',
-        pointerEvents: 'none',
-        ...style['&:disabled'],
-      }),
+      disabled: () => {
+        const { disabled } = B.style(t);
+        const hasDisabledBackgroundColor =
+          !!disabled && disabled.backgroundColor;
+
+        return {
+          boxShadow: (disabled && disabled.boxShadow) || 'none',
+          filter: hasDisabledBackgroundColor ? 'none' : 'grayscale(100%)',
+          opacity: hasDisabledBackgroundColor ? '1' : '0.5',
+          pointerEvents: 'none',
+          ...disabled,
+        };
+      },
       loader: {
         color: 'inherit!important',
         marginLeft: '0.25rem',
