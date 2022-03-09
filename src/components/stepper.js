@@ -16,6 +16,7 @@
     const { env, useText, Children, Icon } = B;
     const {
       activeStep: stepIndex,
+      activeDevelopmentStep,
       variant,
       type,
       alternativeLabel,
@@ -27,7 +28,8 @@
 
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
-    const activeStepIndex = parseInt(stepIndex - 1, 10) || 0;
+    const currentStep = isDev ? activeDevelopmentStep : stepIndex;
+    const activeStepIndex = parseInt(currentStep - 1, 10) || 0;
     const [activeStep, setActiveStep] = useState(activeStepIndex);
     const buttonNextText = useText(buttonNext);
     const buttonPrevText = useText(buttonPrev);
@@ -63,9 +65,9 @@
 
     useEffect(() => {
       if (isDev) {
-        setActiveStep(parseInt(stepIndex - 1, 10));
+        setActiveStep(parseInt(currentStep - 1, 10));
       }
-    }, [isDev, stepIndex]);
+    }, [isDev, currentStep]);
 
     const StepperCmp = (
       <>

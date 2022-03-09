@@ -14,6 +14,12 @@
           value: '1',
         },
         {
+          type: 'NUMBER',
+          label: 'Show development step',
+          key: 'activeDevelopmentStep',
+          value: '1',
+        },
+        {
           type: 'TOGGLE',
           label: 'Show all steps',
           key: 'allSteps',
