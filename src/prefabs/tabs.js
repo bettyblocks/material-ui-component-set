@@ -14,6 +14,12 @@
           type: 'NUMBER',
         },
         {
+          label: 'Selected development tab index',
+          key: 'defaultDevelopmentValue',
+          value: '1',
+          type: 'NUMBER',
+        },
+        {
           label: 'Show all tabs',
           key: 'showAllTabs',
           value: false,
