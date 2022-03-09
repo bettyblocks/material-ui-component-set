@@ -337,6 +337,11 @@
       }, 0);
     }
 
+    B.defineFunction('ResetOrdering', () => {
+      setOrderBy({ field: null, order: null });
+      setVariables(null);
+    });
+
     B.defineFunction('Refetch', () => {
       if (pagination === 'never') {
         clearResults();
