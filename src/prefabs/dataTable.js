@@ -344,6 +344,12 @@
           },
         },
         {
+          type: 'TOGGLE',
+          label: 'Hide rows per page',
+          key: 'hideRowsPerPage',
+          value: false,
+        },
+        {
           value: '5',
           label: 'Rows per page',
           key: 'take',
@@ -368,12 +374,6 @@
           },
         },
         {
-          value: '',
-          label: 'Placeholder rows',
-          key: 'placeholderTake',
-          type: 'NUMBER',
-        },
-        {
           type: 'VARIABLE',
           label: 'Rows per page text',
           key: 'labelRowsPerPage',
@@ -386,6 +386,12 @@
               value: 'never',
             },
           },
+        },
+        {
+          value: '',
+          label: 'Placeholder rows',
+          key: 'placeholderTake',
+          type: 'NUMBER',
         },
         {
           type: 'VARIABLE',

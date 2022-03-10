@@ -40,6 +40,7 @@
       hideSearch,
       orderProperty,
       sortOrder,
+      hideRowsPerPage,
       labelRowsPerPage,
       labelNumberOfPages,
       labelSearchOn,
@@ -693,7 +694,7 @@
             <TablePagination
               ref={paginationRef}
               classes={{ root: classes.pagination }}
-              rowsPerPageOptions={[5, 10, 25, 50, 100]}
+              rowsPerPageOptions={hideRowsPerPage ? [] : [5, 10, 25, 50, 100]}
               labelRowsPerPage={perPageLabel}
               labelDisplayedRows={({ from, to, count }) =>
                 `${from}-${to} ${numOfPagesLabel} ${count}`
