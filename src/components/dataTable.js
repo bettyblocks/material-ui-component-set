@@ -58,6 +58,8 @@
       dataComponentAttribute,
       enableRecordSelection,
       showSelectedRecordCount,
+      selectionHeaderText,
+      totalRecordsSelectedText,
     } = options;
     const repeaterRef = React.createRef();
     const tableRef = React.createRef();
@@ -174,11 +176,6 @@
       return value;
     };
 
-    /**
-     * @name Filter
-     * @param {Property} property
-     * @returns {Void}
-     */
     B.defineFunction('Filter', ({ event, property, interactionId }) => {
       if (typeof event === 'undefined') return;
       setInteractionFilter({
@@ -486,37 +483,18 @@
       if (isDev) {
         return (
           <div>
-            <TableCell padding="checkbox" component="div">
-              <Checkbox
-                color="primary"
-                indeterminate={false}
-                checked={false}
-                size={size}
-                inputProps={{
-                  'aria-label': 'Select all records',
-                }}
-              />
+            <TableCell padding="normal" component="div">
+              <span className={classes.columnHeader}>
+                {selectionHeaderText}
+              </span>
             </TableCell>
           </div>
         );
       }
 
       return (
-        <TableCell padding="checkbox">
-          <Checkbox
-            color="primary"
-            indeterminate={
-              selectedIds.length > 0 && selectedIds.length < results.length
-            }
-            checked={
-              results.length > 0 && selectedIds.length === results.length
-            }
-            size={size}
-            onChange={handleSelectAllClick}
-            inputProps={{
-              'aria-label': 'Select all records',
-            }}
-          />
+        <TableCell padding="normal">
+          <span className={classes.columnHeader}>{selectionHeaderText}</span>
         </TableCell>
       );
     };
@@ -685,6 +663,10 @@
     }, [results]);
 
     useEffect(() => {
+      B.triggerEvent('sendSelectedIds', selectedIds);
+    }, [selectedIds]);
+
+    useEffect(() => {
       if (isDev) {
         if (pagination === 'never') {
           setShowPagination(false);
@@ -798,7 +780,7 @@
               {enableRecordSelection && showSelectedRecordCount && (
                 <div className={classes.selectCountInner}>
                   <p className="MuiTypography-root MuiTypography-body2">
-                    Total records selected: {selectedIds.length}
+                    {totalRecordsSelectedText} {selectedIds.length}
                   </p>
                 </div>
               )}
@@ -915,6 +897,27 @@
             hideTextOverflow ? 'hidden' : 'visible',
           whiteSpace: ({ options: { hideTextOverflow } }) =>
             hideTextOverflow ? 'nowrap' : 'normal',
+        },
+      },
+      columnHeader: {
+        color: ({ options: { type } }) => style.getFontColor(type),
+        fontFamily: ({ options: { type } }) => style.getFontFamily(type),
+        fontSize: ({ options: { type } }) => style.getFontSize(type),
+        fontWeight: ({ options: { type } }) => style.getFontWeight(type),
+        textTransform: ({ options: { type } }) => style.getTextTransform(type),
+        letterSpacing: ({ options: { type } }) => style.getLetterSpacing(type),
+        lineHeight: '1.2',
+        [`@media ${mediaMinWidth(600)}`]: {
+          fontSize: ({ options: { type } }) =>
+            style.getFontSize(type, 'Portrait'),
+        },
+        [`@media ${mediaMinWidth(960)}`]: {
+          fontSize: ({ options: { type } }) =>
+            style.getFontSize(type, 'Landscape'),
+        },
+        [`@media ${mediaMinWidth(1280)}`]: {
+          fontSize: ({ options: { type } }) =>
+            style.getFontSize(type, 'Desktop'),
         },
       },
       bodyRow: {

@@ -350,6 +350,48 @@
           value: false,
         },
         {
+          type: 'VARIABLE',
+          label: 'Selection header text',
+          key: 'selectionHeaderText',
+          value: ['Selection'],
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'enableRecordSelection',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'TOGGLE',
+          label: 'Show count of selected record(s)',
+          key: 'showSelectedRecordCount',
+          value: false,
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'enableRecordSelection',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'VARIABLE',
+          label: 'Total records selected text',
+          key: 'totalRecordsSelectedText',
+          value: ['Total records selected:'],
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'showSelectedRecordCount',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
           value: '5',
           label: 'Rows per page',
           key: 'take',
