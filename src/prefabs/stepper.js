@@ -15,8 +15,8 @@
         },
         {
           type: 'NUMBER',
-          label: 'Show development step',
-          key: 'activeDevelopmentStep',
+          label: 'Selected design step index',
+          key: 'selectedDesignStepIndex',
           value: '1',
         },
         {
