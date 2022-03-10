@@ -3392,6 +3392,12 @@
                                 },
                               },
                               {
+                                type: 'TOGGLE',
+                                label: 'Hide rows per page',
+                                key: 'hideRowsPerPage',
+                                value: false,
+                              },
+                              {
                                 value: '5',
                                 label: 'Rows per page',
                                 key: 'take',
