@@ -24,7 +24,7 @@
         },
         {
           type: 'CUSTOM',
-          label: 'Button state',
+          label: 'State',
           key: 'defaultState',
           value: 'basis',
           configuration: {

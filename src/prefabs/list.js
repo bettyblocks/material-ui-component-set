@@ -414,7 +414,7 @@
             },
             {
               type: 'CUSTOM',
-              label: 'Defaultstate',
+              label: 'State',
               key: 'defaultState',
               value: 'basis',
               configuration: {
