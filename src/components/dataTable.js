@@ -176,6 +176,11 @@
       return value;
     };
 
+    /**
+     * @name Filter
+     * @param {Property} property
+     * @returns {Void}
+     */
     B.defineFunction('Filter', ({ event, property, interactionId }) => {
       if (typeof event === 'undefined') return;
       setInteractionFilter({
@@ -426,15 +431,6 @@
       if (loading || error) return;
       setRowsPerPage(parseInt(event.target.value, 10));
       setPage(0);
-    };
-
-    const handleSelectAllClick = (event) => {
-      if (event.target.checked) {
-        const newSelectedIds = results.map((n) => n.id);
-        setSelected(newSelectedIds);
-        return;
-      }
-      setSelected([]);
     };
 
     const handleSelection = (event, selectionData) => {
