@@ -8,7 +8,7 @@
     const { Children, env, useText, Icon } = B;
     const {
       defaultValue,
-      defaultDevelopmentValue,
+      selectedDesignTabIndex,
       variant,
       centered,
       scrollButtons,
@@ -22,7 +22,7 @@
     const orientation =
       alignment === 'top' || alignment === 'bottom' ? 'horizontal' : 'vertical';
     const isDev = env === 'dev';
-    const currentTab = isDev ? defaultDevelopmentValue : defaultValue;
+    const currentTab = isDev ? selectedDesignTabIndex : defaultValue;
     const [value, setValue] = useState(parseInt(currentTab - 1, 10) || 0);
     const [tabData, setTabData] = useState({});
     const [activeTabs, setActiveTabs] = useState([value]);

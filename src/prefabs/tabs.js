@@ -14,8 +14,8 @@
           type: 'NUMBER',
         },
         {
-          label: 'Selected development tab index',
-          key: 'defaultDevelopmentValue',
+          label: 'Selected design tab index',
+          key: 'selectedDesignTabIndex',
           value: '1',
           type: 'NUMBER',
         },
