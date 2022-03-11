@@ -70,12 +70,21 @@
     const [rowsPerPage, setRowsPerPage] = useState(takeNum);
     const [search, setSearch] = useState('');
     const [searchTerm, setSearchTerm] = useState('');
+    const [interactionSearchTerm, setInteractionSearchTerm] = useState('');
+    const [interactionSearchProperty, setInteractionSearchProperty] =
+      useState('');
+    const [previousInteractionSearchTerm, setPreviousInteractionSearchTerm] =
+      useState('');
+    const [
+      previousInteractionSearchProperty,
+      setPreviousInteractionSearchProperty,
+    ] = useState('');
     const [showPagination, setShowPagination] = useState(false);
     const [interactionFilter, setInteractionFilter] = useState({});
     const perPageLabel = useText(labelRowsPerPage);
     const numOfPagesLabel = useText(labelNumberOfPages);
 
-    const { label: searchPropertyLabel = '{property}' } =
+    const { label: searchPropertyLabel = '{property}', kind } =
       getProperty(searchProperty) || {};
     let orderPropertyPath = null;
     if (orderProperty && Array.isArray(orderProperty.id)) {
@@ -119,7 +128,8 @@
     );
 
     const titleText = useText(title);
-    const hasToolbar = titleText || (searchProperty && !hideSearch);
+    const hasSearchProperty = searchProperty && searchProperty.id;
+    const hasToolbar = titleText || (hasSearchProperty && !hideSearch);
     const elevationLevel = variant === 'flat' ? 0 : elevation;
     const hasLink = linkTo && linkTo.id !== '';
     const toolbarRef = React.createRef();
@@ -174,10 +184,16 @@
           value: event.target ? event.target.value : transformValue(event),
         },
       });
+      setInteractionSearchTerm(
+        event.target ? event.target.value : transformValue(event),
+      );
+      setInteractionSearchProperty(property ? property.id : '');
     });
 
     B.defineFunction('ResetFilter', () => {
       setInteractionFilter({});
+      setInteractionSearchTerm('');
+      setInteractionSearchProperty('');
     });
 
     let interactionFilters = {};
@@ -207,11 +223,14 @@
     interactionFilters =
       clauses.length > 1 ? { _and: clauses } : clauses[0] || {};
 
+    const searchOperator =
+      kind === 'serial' || kind === 'integer' ? 'eq' : 'matches';
+
     const searchFilter = searchProperty
       ? path.reduceRight(
           (acc, property, index) =>
             index === path.length - 1
-              ? { [property]: { matches: searchTerm } }
+              ? { [property]: { [searchOperator]: searchTerm } }
               : { [property]: acc },
           {},
         )
@@ -271,16 +290,22 @@
           setTotalCount(data.totalCount);
           return;
         }
-        if (searchTerm !== previousSearchTerm) {
+        if (
+          searchTerm !== previousSearchTerm ||
+          interactionSearchTerm !== previousInteractionSearchTerm ||
+          interactionSearchProperty !== previousInteractionSearchProperty
+        ) {
           setSkip(0);
           setInitialTimesFetched(0);
           setPreviousSearchTerm(searchTerm);
+          setPreviousInteractionSearchTerm(interactionSearchTerm);
+          setPreviousInteractionSearchProperty(interactionSearchProperty);
           setNewSearch(true);
         } else {
           if (
             newSearch ||
             (!autoLoadOnScroll && skipAppend.current) ||
-            pagination === 'never'
+            (pagination === 'never' && !autoLoadOnScroll)
           ) {
             setResults(data.results);
           } else {
@@ -292,7 +317,7 @@
         skipAppend.current = false;
         setTotalCount(data.totalCount);
       }
-    }, [data, searchTerm]);
+    }, [data, searchTerm, interactionSearchTerm, interactionSearchProperty]);
 
     useEffect(() => {
       const handler = setTimeout(() => {
@@ -620,7 +645,7 @@
           {hasToolbar && (
             <Toolbar ref={toolbarRef} classes={{ root: classes.toolbar }}>
               {titleText && <span className={classes.title}>{titleText}</span>}
-              {searchProperty && !hideSearch && (
+              {hasSearchProperty && !hideSearch && (
                 <TextField
                   classes={{ root: classes.searchField }}
                   placeholder={`${useText(
@@ -697,7 +722,8 @@
           getSpacing(outerSpacing[2]),
         marginLeft: ({ options: { outerSpacing } }) =>
           getSpacing(outerSpacing[3]),
-        height: ({ options: { height } }) => height,
+        height: ({ options: { height, autoLoadOnScroll } }) =>
+          autoLoadOnScroll && !height ? '375px' : height,
       },
       paper: {
         backgroundColor: ({ options: { background } }) => [

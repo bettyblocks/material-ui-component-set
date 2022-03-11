@@ -55,30 +55,32 @@
 
         const mounted = useRef(false);
 
-        B.defineFunction('Submit', () => {
-          if (formRef.current) {
-            if (typeof formRef.current.requestSubmit === 'function') {
-              formRef.current.requestSubmit();
-            } else {
-              formRef.current.dispatchEvent(
-                new Event('submit', { cancelable: true }),
-              );
-            }
-          }
-        });
-
         const [, setOptions] = useOptions();
-
-        B.defineFunction('setCurrentRecord', (value) => {
-          if (typeof value === 'number') {
-            setOptions({
-              currentRecord: value,
-            });
-          }
-        });
 
         useEffect(() => {
           mounted.current = true;
+
+          B.defineFunction('setCurrentRecord', (value) => {
+            if (typeof value === 'number') {
+              setOptions({
+                currentRecord: value,
+              });
+            }
+          });
+
+          B.defineFunction('Submit', () => {
+            if (formRef.current) {
+              if (typeof formRef.current.requestSubmit === 'function') {
+                formRef.current.requestSubmit();
+              } else {
+                formRef.current.dispatchEvent(
+                  new Event('submit', { cancelable: true }),
+                );
+              }
+            }
+          });
+
+          B.triggerEvent('onComponentRendered');
           return () => {
             mounted.current = false;
           };
@@ -180,10 +182,6 @@
           B.defineFunction('Refetch', () => {
             if (refetch) refetch();
           });
-
-          useEffect(() => {
-            B.triggerEvent('onComponentRendered');
-          }, []);
 
           return (
             <Action actionId={actionId}>

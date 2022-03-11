@@ -187,6 +187,8 @@
 
       setAfterFirstInvalidation(!validation.valid);
       handleValidation(validation);
+      const { value } = target;
+      B.triggerEvent('onBlur', value);
     };
 
     const invalidHandler = (event) => {
@@ -201,10 +203,12 @@
       handleValidation(validity);
     };
 
-    B.defineFunction('Clear', () => setCurrentValue(''));
-    B.defineFunction('Enable', () => setIsDisabled(false));
-    B.defineFunction('Disable', () => setIsDisabled(true));
-    B.defineFunction('Reset', () => setCurrentValue(defaultValueRawText));
+    useEffect(() => {
+      B.defineFunction('Clear', () => setCurrentValue(''));
+      B.defineFunction('Enable', () => setIsDisabled(false));
+      B.defineFunction('Disable', () => setIsDisabled(true));
+      B.defineFunction('Reset', () => setCurrentValue(defaultValueRawText));
+    }, [defaultValueRawText]);
 
     const handleClickShowPassword = () => {
       togglePassword(!showPassword);
