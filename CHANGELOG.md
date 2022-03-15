@@ -1,3 +1,32 @@
+# [1.204.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.203.5...v1.204.0) (2022-03-11)
+
+
+### Features
+
+* update dependencies ([8593903](https://github.com/bettyblocks/material-ui-component-set/commit/8593903f810fcb9abc799b0a2b9f7e92e83fef76))
+
+## [1.203.5](https://github.com/bettyblocks/material-ui-component-set/compare/v1.203.4...v1.203.5) (2022-03-01)
+
+
+### Bug Fixes
+
+* reordered onComponentRendered in useEffect ([b0ae2fd](https://github.com/bettyblocks/material-ui-component-set/commit/b0ae2fd428046fc0cd9ffb6483021c95147da797))
+
+## [1.203.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.203.3...v1.203.4) (2022-02-25)
+
+
+### Bug Fixes
+
+* placed onComponentRendered to single useEffect ([d14d1e6](https://github.com/bettyblocks/material-ui-component-set/commit/d14d1e6e9b22d7bad83b46c6d63068a1e6a371c7))
+
+## [1.203.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.203.2...v1.203.3) (2022-02-22)
+
+
+### Bug Fixes
+
+* fixed autocomplete value error ([2934946](https://github.com/bettyblocks/material-ui-component-set/commit/2934946b216dea3b1c68f6996843ede944ff511c))
+* fixed helpertext bug ([9afcb0e](https://github.com/bettyblocks/material-ui-component-set/commit/9afcb0ef2d1c5db958951405adcf04f456f52e0b))
+
 ## [1.203.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.203.1...v1.203.2) (2022-02-11)
 
 
