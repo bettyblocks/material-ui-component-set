@@ -4321,6 +4321,12 @@
                                 },
                               },
                               {
+                                type: 'TOGGLE',
+                                label: 'Enable first/last page navigation',
+                                key: 'enableFirstLastPageNavigation',
+                                value: false,
+                              },
+                              {
                                 type: 'SIZE',
                                 label: 'Height',
                                 key: 'height',
