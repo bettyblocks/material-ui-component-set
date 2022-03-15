@@ -1,3 +1,10 @@
+# [1.204.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.203.5...v1.204.0) (2022-03-11)
+
+
+### Features
+
+* update dependencies ([8593903](https://github.com/bettyblocks/material-ui-component-set/commit/8593903f810fcb9abc799b0a2b9f7e92e83fef76))
+
 ## [1.203.5](https://github.com/bettyblocks/material-ui-component-set/compare/v1.203.4...v1.203.5) (2022-03-01)
 
 
