@@ -1,3 +1,10 @@
+## [1.204.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.204.0...v1.204.1) (2022-03-16)
+
+
+### Bug Fixes
+
+* display and fontweight issues fixed ([649f011](https://github.com/bettyblocks/material-ui-component-set/commit/649f01164dbc2063dd6b765f93be8c5ac52b1b60))
+
 # [1.204.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.203.5...v1.204.0) (2022-03-11)
 
 
