@@ -104,6 +104,9 @@
       idx === '0' ? '0rem' : style.getSpacing(idx, device);
     return {
       panelTitle: {
+        '&.MuiTypography-root': {
+          fontWeight: ({ options: { titleFontWeight } }) => titleFontWeight,
+        },
         marginTop: ({ options: { titleSpacing } }) =>
           getSpacing(titleSpacing[0]),
         marginRight: ({ options: { titleSpacing } }) =>
@@ -126,6 +129,7 @@
 
       panelDetails: {
         '&.MuiExpansionPanelDetails-root': {
+          display: 'block',
           paddingTop: ({ options: { innerSpacing } }) =>
             getSpacing(innerSpacing[0]),
           paddingRight: ({ options: { innerSpacing } }) =>
