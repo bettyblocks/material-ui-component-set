@@ -225,9 +225,7 @@
     const handleClick = (e) => {
       e.stopPropagation();
 
-      if (!isNaN(buttonContentValue)) {
-        B.triggerEvent('sendRowsPerPage', buttonContentValue);
-      }
+      B.triggerEvent('OnSetRowsPerPage', buttonContentValue);
     };
 
     const LinkComponent =

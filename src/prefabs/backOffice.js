@@ -6599,6 +6599,12 @@
                       value: ['Upload'],
                     },
                     {
+                      type: 'VARIABLE',
+                      label: 'Button value',
+                      key: 'buttonValue',
+                      value: [''],
+                    },
+                    {
                       value: false,
                       label: 'Full width',
                       key: 'fullWidth',
@@ -11152,6 +11158,12 @@
                                       value: ['Close'],
                                     },
                                     {
+                                      type: 'VARIABLE',
+                                      label: 'Button value',
+                                      key: 'buttonValue',
+                                      value: [''],
+                                    },
+                                    {
                                       value: false,
                                       label: 'Full width',
                                       key: 'fullWidth',
@@ -11392,6 +11404,12 @@
                                       label: 'Button text',
                                       key: 'buttonText',
                                       value: ['Edit'],
+                                    },
+                                    {
+                                      type: 'VARIABLE',
+                                      label: 'Button value',
+                                      key: 'buttonValue',
+                                      value: [''],
                                     },
                                     {
                                       value: false,
@@ -14198,6 +14216,12 @@
                                                 value: ['Delete'],
                                               },
                                               {
+                                                type: 'VARIABLE',
+                                                label: 'Button value',
+                                                key: 'buttonValue',
+                                                value: [''],
+                                              },
+                                              {
                                                 value: false,
                                                 label: 'Full width',
                                                 key: 'fullWidth',
@@ -14978,6 +15002,12 @@
                                                 label: 'Button text',
                                                 key: 'buttonText',
                                                 value: ['Cancel'],
+                                              },
+                                              {
+                                                type: 'VARIABLE',
+                                                label: 'Button value',
+                                                key: 'buttonValue',
+                                                value: [''],
                                               },
                                               {
                                                 value: false,
@@ -16588,6 +16618,12 @@
                                       label: 'Button text',
                                       key: 'buttonText',
                                       value: ['New'],
+                                    },
+                                    {
+                                      type: 'VARIABLE',
+                                      label: 'Button value',
+                                      key: 'buttonValue',
+                                      value: [''],
                                     },
                                     {
                                       value: false,
@@ -18446,6 +18482,12 @@
                   value: ['Close'],
                 },
                 {
+                  type: 'VARIABLE',
+                  label: 'Button value',
+                  key: 'buttonValue',
+                  value: [''],
+                },
+                {
                   value: false,
                   label: 'Full width',
                   key: 'fullWidth',
@@ -18700,6 +18742,12 @@
                   label: 'Button text',
                   key: 'buttonText',
                   value: ['Save'],
+                },
+                {
+                  type: 'VARIABLE',
+                  label: 'Button value',
+                  key: 'buttonValue',
+                  value: [''],
                 },
                 {
                   value: false,
@@ -18974,6 +19022,12 @@
                   value: ['Close'],
                 },
                 {
+                  type: 'VARIABLE',
+                  label: 'Button value',
+                  key: 'buttonValue',
+                  value: [''],
+                },
+                {
                   value: false,
                   label: 'Full width',
                   key: 'fullWidth',
@@ -19228,6 +19282,12 @@
                   label: 'Button text',
                   key: 'buttonText',
                   value: ['Save'],
+                },
+                {
+                  type: 'VARIABLE',
+                  label: 'Button value',
+                  key: 'buttonValue',
+                  value: [''],
                 },
                 {
                   value: false,
@@ -20409,6 +20469,12 @@
                                     type: 'VARIABLE',
                                     label: 'Button text',
                                     key: 'buttonText',
+                                    value: [''],
+                                  },
+                                  {
+                                    type: 'VARIABLE',
+                                    label: 'Button value',
+                                    key: 'buttonValue',
                                     value: [''],
                                   },
                                   {

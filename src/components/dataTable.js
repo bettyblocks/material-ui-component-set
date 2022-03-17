@@ -197,8 +197,10 @@
     });
 
     B.defineFunction('setRowsPerPage', (val) => {
-      setRowsPerPage(parseInt(val, 10));
-      setPage(0);
+      if (!isNaN(val)) {
+        setRowsPerPage(parseInt(val, 10));
+        setPage(0);
+      }
     });
 
     let interactionFilters = {};
