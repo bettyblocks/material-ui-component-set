@@ -24144,6 +24144,12 @@
                                                   value: ['Add Balance'],
                                                 },
                                                 {
+                                                  type: 'VARIABLE',
+                                                  label: 'Button value',
+                                                  key: 'buttonValue',
+                                                  value: [''],
+                                                },
+                                                {
                                                   value: true,
                                                   label: 'Full width',
                                                   key: 'fullWidth',

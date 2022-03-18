@@ -201,6 +201,13 @@
       setInteractionSearchProperty('');
     });
 
+    B.defineFunction('setRowsPerPage', (val) => {
+      if (!isNaN(val)) {
+        setRowsPerPage(parseInt(val, 10));
+        setPage(0);
+      }
+    });
+
     let interactionFilters = {};
 
     const isEmptyValue = (value) =>

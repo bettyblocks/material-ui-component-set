@@ -6623,6 +6623,12 @@
                       },
                     },
                     {
+                      type: 'VARIABLE',
+                      label: 'Button value',
+                      key: 'buttonValue',
+                      value: [''],
+                    },
+                    {
                       value: false,
                       label: 'Full width',
                       key: 'fullWidth',
@@ -11230,6 +11236,12 @@
                                       },
                                     },
                                     {
+                                      type: 'VARIABLE',
+                                      label: 'Button value',
+                                      key: 'buttonValue',
+                                      value: [''],
+                                    },
+                                    {
                                       value: false,
                                       label: 'Full width',
                                       key: 'fullWidth',
@@ -11488,6 +11500,12 @@
                                           },
                                         ],
                                       },
+                                    },
+                                    {
+                                      type: 'VARIABLE',
+                                      label: 'Button value',
+                                      key: 'buttonValue',
+                                      value: [''],
                                     },
                                     {
                                       value: false,
@@ -14312,6 +14330,12 @@
                                                 },
                                               },
                                               {
+                                                type: 'VARIABLE',
+                                                label: 'Button value',
+                                                key: 'buttonValue',
+                                                value: [''],
+                                              },
+                                              {
                                                 value: false,
                                                 label: 'Full width',
                                                 key: 'fullWidth',
@@ -15110,6 +15134,12 @@
                                                     },
                                                   ],
                                                 },
+                                              },
+                                              {
+                                                type: 'VARIABLE',
+                                                label: 'Button value',
+                                                key: 'buttonValue',
+                                                value: [''],
                                               },
                                               {
                                                 value: false,
@@ -16738,6 +16768,12 @@
                                           },
                                         ],
                                       },
+                                    },
+                                    {
+                                      type: 'VARIABLE',
+                                      label: 'Button value',
+                                      key: 'buttonValue',
+                                      value: [''],
                                     },
                                     {
                                       value: false,
@@ -18626,6 +18662,12 @@
                   },
                 },
                 {
+                  type: 'VARIABLE',
+                  label: 'Button value',
+                  key: 'buttonValue',
+                  value: [''],
+                },
+                {
                   value: false,
                   label: 'Full width',
                   key: 'fullWidth',
@@ -18898,6 +18940,12 @@
                       },
                     ],
                   },
+                },
+                {
+                  type: 'VARIABLE',
+                  label: 'Button value',
+                  key: 'buttonValue',
+                  value: [''],
                 },
                 {
                   value: false,
@@ -19190,6 +19238,12 @@
                   },
                 },
                 {
+                  type: 'VARIABLE',
+                  label: 'Button value',
+                  key: 'buttonValue',
+                  value: [''],
+                },
+                {
                   value: false,
                   label: 'Full width',
                   key: 'fullWidth',
@@ -19462,6 +19516,12 @@
                       },
                     ],
                   },
+                },
+                {
+                  type: 'VARIABLE',
+                  label: 'Button value',
+                  key: 'buttonValue',
+                  value: [''],
                 },
                 {
                   value: false,
@@ -20662,6 +20722,12 @@
                                         },
                                       ],
                                     },
+                                  },
+                                  {
+                                    type: 'VARIABLE',
+                                    label: 'Button value',
+                                    key: 'buttonValue',
+                                    value: [''],
                                   },
                                   {
                                     value: false,

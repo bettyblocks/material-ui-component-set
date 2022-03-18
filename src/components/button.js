@@ -18,6 +18,7 @@
       visible,
       actionId,
       buttonText,
+      buttonValue,
       actionModels,
       addTooltip,
       hasVisibleTooltip,
@@ -46,6 +47,7 @@
     const hasInteralLink =
       linkType === 'internal' && linkTo && linkTo.id !== '';
     const buttonContent = useText(buttonText);
+    const buttonContentValue = useText(buttonValue);
     const tooltipText = useText(tooltipContent);
     const path = (urlPath && useText(urlPath)) || '';
     const [isVisible, setIsVisible] = useState(visible);
@@ -249,6 +251,8 @@
 
     const handleClick = (e) => {
       e.stopPropagation();
+
+      B.triggerEvent('OnSetRowsPerPage', buttonContentValue);
     };
 
     const LinkComponent =
