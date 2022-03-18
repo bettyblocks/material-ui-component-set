@@ -317,7 +317,7 @@
         },
       },
       customStyles: () => {
-        const { basis, hover } = B.style(t);
+        const { basis, hover } = B.style();
 
         return {
           '&:hover, &:focus': {
@@ -474,7 +474,7 @@
         minHeight: '1.25rem',
       },
       disabled: () => {
-        const { disabled } = B.style(t);
+        const { disabled } = B.style();
         const hasDisabledBackgroundColor =
           !!disabled && disabled.backgroundColor;
 
