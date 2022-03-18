@@ -81,7 +81,7 @@
     const helperTextResolved = useText(helperText);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
 
-    const validationMessage = validityObject => {
+    const validationMessage = (validityObject) => {
       if (validityObject.customError && patternMismatchMessage) {
         return patternMismatchMessage;
       }
@@ -112,19 +112,19 @@
       return '';
     };
 
-    const handleValidation = validation => {
+    const handleValidation = (validation) => {
       setErrorState(!validation.valid);
       const message = validationMessage(validation) || helperTextResolved;
       setHelper(message);
     };
 
-    const onKeyDown = event => {
+    const onKeyDown = (event) => {
       if (isNumberType && (event.key === '.' || event.key === ',')) {
         event.preventDefault();
       }
     };
 
-    const customPatternValidation = target => {
+    const customPatternValidation = (target) => {
       const { value: eventValue, validity } = target;
       if (!pattern) {
         return validity;
@@ -139,7 +139,7 @@
       };
     };
 
-    const changeHandler = event => {
+    const changeHandler = (event) => {
       const { target } = event;
       let { validity: validation } = target;
       const { value: eventValue } = target;
@@ -158,7 +158,7 @@
       B.triggerEvent('onChange', value);
     };
 
-    const blurHandler = event => {
+    const blurHandler = (event) => {
       const { target } = event;
       let { validity: validation } = target;
 
@@ -170,7 +170,7 @@
       handleValidation(validation);
     };
 
-    const invalidHandler = event => {
+    const invalidHandler = (event) => {
       event.preventDefault();
       const {
         target: {
@@ -191,7 +191,7 @@
       togglePassword(!showPassword);
     };
 
-    const handleMouseDownPassword = event => {
+    const handleMouseDownPassword = (event) => {
       event.preventDefault();
     };
 
@@ -306,7 +306,7 @@
       TextFieldCmp
     );
   })(),
-  styles: B => t => {
+  styles: (B) => (t) => {
     const { Styling } = B;
     const style = new Styling(t);
     return {
@@ -363,20 +363,22 @@
               '!important',
             ],
           '&:hover': {
-            '& .MuiOutlinedInput-notchedOutline, & .MuiFilledInput-underline, & .MuiInput-underline': {
-              borderColor: ({ options: { borderHoverColor } }) => [
-                style.getColor(borderHoverColor),
-                '!important',
-              ],
-            },
+            '& .MuiOutlinedInput-notchedOutline, & .MuiFilledInput-underline, & .MuiInput-underline':
+              {
+                borderColor: ({ options: { borderHoverColor } }) => [
+                  style.getColor(borderHoverColor),
+                  '!important',
+                ],
+              },
           },
           '&.Mui-focused, &.Mui-focused:hover': {
-            '& .MuiOutlinedInput-notchedOutline, & .MuiFilledInput-underline, & .MuiInput-underline': {
-              borderColor: ({ options: { borderFocusColor } }) => [
-                style.getColor(borderFocusColor),
-                '!important',
-              ],
-            },
+            '& .MuiOutlinedInput-notchedOutline, & .MuiFilledInput-underline, & .MuiInput-underline':
+              {
+                borderColor: ({ options: { borderFocusColor } }) => [
+                  style.getColor(borderFocusColor),
+                  '!important',
+                ],
+              },
           },
           '& fieldset': {
             top: ({ options: { hideLabel } }) => (hideLabel ? 0 : null),
@@ -405,12 +407,13 @@
             '!important',
           ],
         },
-        '& .MuiOutlinedInput-notchedOutline, & .MuiFilledInput-underline, & .MuiInput-underline': {
-          borderColor: ({ options: { borderColor } }) => [
-            style.getColor(borderColor),
-            '!important',
-          ],
-        },
+        '& .MuiOutlinedInput-notchedOutline, & .MuiFilledInput-underline, & .MuiInput-underline':
+          {
+            borderColor: ({ options: { borderColor } }) => [
+              style.getColor(borderColor),
+              '!important',
+            ],
+          },
         '& .MuiInput-underline, & .MuiFilledInput-underline': {
           '&::before, &::after': {
             borderColor: ({ options: { borderColor } }) => [
@@ -426,43 +429,47 @@
               ],
             },
           },
-          '&.Mui-focused::before, &.Mui-focused::after, &.Mui-focused:hover::before, &.Mui-focused:hover::after': {
-            borderColor: ({ options: { borderFocusColor } }) => [
-              style.getColor(borderFocusColor),
-              '!important',
-            ],
-          },
-        },
-        '& .MuiInputBase-root.Mui-error, & .MuiInputBase-root.Mui-error:hover, & .MuiInputBase-root.Mui-error.Mui-focused, & .MuiInputBase-root.Mui-error.Mui-focused:hover': {
-          '& .MuiOutlinedInput-notchedOutline, & .MuiFilledInput-underline, & .MuiInput-underline': {
-            borderColor: ({ options: { errorColor } }) => [
-              style.getColor(errorColor),
-              '!important',
-            ],
-          },
-          '&.MuiInput-underline, &.MuiFilledInput-underline': {
-            '&::before, &::after': {
-              borderColor: ({ options: { errorColor } }) => [
-                style.getColor(errorColor),
+          '&.Mui-focused::before, &.Mui-focused::after, &.Mui-focused:hover::before, &.Mui-focused:hover::after':
+            {
+              borderColor: ({ options: { borderFocusColor } }) => [
+                style.getColor(borderFocusColor),
                 '!important',
               ],
             },
-            '&:hover': {
+        },
+        '& .MuiInputBase-root.Mui-error, & .MuiInputBase-root.Mui-error:hover, & .MuiInputBase-root.Mui-error.Mui-focused, & .MuiInputBase-root.Mui-error.Mui-focused:hover':
+          {
+            '& .MuiOutlinedInput-notchedOutline, & .MuiFilledInput-underline, & .MuiInput-underline':
+              {
+                borderColor: ({ options: { errorColor } }) => [
+                  style.getColor(errorColor),
+                  '!important',
+                ],
+              },
+            '&.MuiInput-underline, &.MuiFilledInput-underline': {
               '&::before, &::after': {
                 borderColor: ({ options: { errorColor } }) => [
                   style.getColor(errorColor),
                   '!important',
                 ],
               },
-            },
-            '&.Mui-focused::before, &.Mui-focused::after, &.Mui-focused:hover::before, &.Mui-focused:hover::after': {
-              borderColor: ({ options: { errorColor } }) => [
-                style.getColor(errorColor),
-                '!important',
-              ],
+              '&:hover': {
+                '&::before, &::after': {
+                  borderColor: ({ options: { errorColor } }) => [
+                    style.getColor(errorColor),
+                    '!important',
+                  ],
+                },
+              },
+              '&.Mui-focused::before, &.Mui-focused::after, &.Mui-focused:hover::before, &.Mui-focused:hover::after':
+                {
+                  borderColor: ({ options: { errorColor } }) => [
+                    style.getColor(errorColor),
+                    '!important',
+                  ],
+                },
             },
           },
-        },
       },
     };
   },

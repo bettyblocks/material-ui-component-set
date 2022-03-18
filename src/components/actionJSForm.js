@@ -17,11 +17,11 @@
       );
     }
 
-    const onSubmitSuccess = response => {
+    const onSubmitSuccess = (response) => {
       /* eslint-disable-next-line */
       if (response.errors) {
-        const messages = response.errors.flatMap(error =>
-          error.message.errors.map(inner => inner.message),
+        const messages = response.errors.flatMap((error) =>
+          error.message.errors.map((inner) => inner.message),
         );
 
         B.triggerEvent('onActionError', new Error(messages.join(', ')));
@@ -37,25 +37,28 @@
       setErrors([]);
     };
 
-    const onSubmitError = error => {
+    const onSubmitError = (error) => {
       setErrors([error.message || error.toString()]);
       B.triggerEvent('onActionError', error);
     };
 
-    const FormComponent = () => (
-      <Form
-        actionId={actionId}
-        onSubmitSuccess={onSubmitSuccess}
-        onSubmitError={onSubmitError}
-      >
-        <fieldset className={classes.fieldset}>{children}</fieldset>
-        <ul>
-          {errors.map(error => (
-            <li>{error}</li>
-          ))}
-        </ul>
-      </Form>
-    );
+    const FormComponent = function () {
+      return (
+        <Form
+          actionId={actionId}
+          onSubmitSuccess={onSubmitSuccess}
+          onSubmitError={onSubmitError}
+        >
+          <fieldset className={classes.fieldset}>{children}</fieldset>
+          <ul>
+            {errors.map((error) => (
+              // eslint-disable-next-line react/jsx-key
+              <li>{error}</li>
+            ))}
+          </ul>
+        </Form>
+      );
+    };
 
     if (B.env !== 'prod') {
       return (

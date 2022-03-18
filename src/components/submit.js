@@ -6,11 +6,13 @@
   jsx: (() => {
     const { label } = options;
 
-    const Input = () => (
-      <div>
-        <input className={classes.submit} type="submit" value={label} />
-      </div>
-    );
+    const Input = function () {
+      return (
+        <div>
+          <input className={classes.submit} type="submit" value={label} />
+        </div>
+      );
+    };
 
     if (B.env !== 'prod') {
       return (
