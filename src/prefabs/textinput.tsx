@@ -40,7 +40,7 @@ const attributes = {
 
 const pattern = '[A-Za-z0-9\\.,;:!?()%&-\'\"\/ ]+$';
 
-export default prefab('Text Field', attributes, beforeCreate, [
+export default prefab('Text Field v2', attributes, beforeCreate, [
   TextInput({ label: 'Textfield', type: 'text', pattern }),
 ]);
 

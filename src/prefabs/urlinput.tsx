@@ -39,6 +39,6 @@ const attributes = {
   keywords: ['Form', 'input'],
 };
 
-export default prefab('Url', attributes, beforeCreate, [
+export default prefab('Url v2', attributes, beforeCreate, [
   TextInput({ label: 'url', type: 'url' }),
 ]);
