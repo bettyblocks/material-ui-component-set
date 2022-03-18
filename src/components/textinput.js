@@ -153,9 +153,9 @@
       if (afterFirstInvalidation) {
         handleValidation(validation);
       }
-      const value = isNumberType ? numberValue : eventValue;
-      setCurrentValue(value);
-      B.triggerEvent('onChange', value);
+      const newValue = isNumberType ? numberValue : eventValue;
+      setCurrentValue(newValue);
+      B.triggerEvent('onChange', newValue);
     };
 
     const blurHandler = (event) => {
