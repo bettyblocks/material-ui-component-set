@@ -44,7 +44,7 @@
       B.defineFunction('Clear', () => setCurrentValue(''));
       B.defineFunction('Enable', () => setIsDisabled(false));
       B.defineFunction('Disable', () => setIsDisabled(true));
-      B.defineFunction('Reset', () => setCurrentValue(currentValue));
+      B.defineFunction('Reset', () => setCurrentValue(value));
     }, [value]);
 
     const customModelAttribute = getCustomModelAttribute(
