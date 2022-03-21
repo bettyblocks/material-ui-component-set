@@ -46,10 +46,6 @@
                 value: 'basis',
               },
               {
-                name: 'Selected',
-                value: 'selected',
-              },
-              {
                 name: 'Disabled',
                 value: 'disabled',
               },
