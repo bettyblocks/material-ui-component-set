@@ -38,7 +38,7 @@
     );
     const [isDisabled, setIsDisabled] = useState(disabled);
 
-    const value = useText(defaultValue);
+    const value = useText(defaultValue, { rawValue: true });
     useEffect(() => {
       setCurrentValue(value);
       B.defineFunction('Clear', () => setCurrentValue(''));
