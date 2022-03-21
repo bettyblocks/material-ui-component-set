@@ -250,6 +250,7 @@
     );
 
     const handleClick = (e) => {
+      B.triggerEvent('onClick');
       e.stopPropagation();
 
       B.triggerEvent('OnSetRowsPerPage', buttonContentValue);
@@ -336,31 +337,21 @@
           pointerEvents: 'none',
         },
       },
-      customStyles: ({ style }) => ({
-        '&:focus': {
-          filter:
-            style['&:hover'] && style['&:hover'].backgroundColor
-              ? 'none'
-              : 'brightness(90%)',
-          ...style['&:hover'],
-        },
-        '&:hover': {
-          filter:
-            style['&:hover'] && style['&:hover'].backgroundColor
-              ? 'none'
-              : 'brightness(90%)',
-          ...style['&:hover'],
-        },
-        '&:active': {
-          filter:
-            style['&:active'] && style['&:active'].backgroundColor
-              ? 'none'
-              : 'brightness(85%)',
-          ...style['&:active'],
-        },
-        ...style,
-        cursor: 'pointer',
-      }),
+      customStyles: () => {
+        const { basis, hover } = B.style();
+
+        return {
+          '&:hover, &:focus': {
+            filter: hover && hover.backgroundColor ? 'none' : 'brightness(90%)',
+            ...hover,
+          },
+          '&:active': {
+            ...basis,
+          },
+          ...basis,
+          cursor: 'pointer',
+        };
+      },
       linkComponent: {
         '&, &.MuiTypography-root': {
           textDecoration: 'none',
@@ -503,14 +494,19 @@
         alignItems: 'center',
         minHeight: '1.25rem',
       },
-      disabled: ({ style }) => ({
-        opacity: '50%',
-        boxShadow:
-          (style['&:disabled'] && style['&:disabled'].boxShadow) || 'none',
-        filter: style['&:disabled'] ? 'none' : 'grayscale(100%)',
-        pointerEvents: 'none',
-        ...style['&:disabled'],
-      }),
+      disabled: () => {
+        const { disabled } = B.style();
+        const hasDisabledBackgroundColor =
+          !!disabled && disabled.backgroundColor;
+
+        return {
+          boxShadow: (disabled && disabled.boxShadow) || 'none',
+          filter: hasDisabledBackgroundColor ? 'none' : 'grayscale(100%)',
+          opacity: hasDisabledBackgroundColor ? '1' : '0.5',
+          pointerEvents: 'none',
+          ...disabled,
+        };
+      },
       loader: {
         color: 'inherit!important',
         marginLeft: '0.25rem',
