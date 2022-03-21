@@ -33,11 +33,18 @@
     } = customModelAttributeObj;
     const labelText = useText(label);
 
-    const [currentValue, setCurrentValue] = useState(useText(defaultValue));
+    const [currentValue, setCurrentValue] = useState(
+      useText(defaultValue, { rawValue: true }),
+    );
+    const [isDisabled, setIsDisabled] = useState(disabled);
 
     const value = useText(defaultValue);
     useEffect(() => {
       setCurrentValue(value);
+      B.defineFunction('Clear', () => setCurrentValue(''));
+      B.defineFunction('Enable', () => setIsDisabled(false));
+      B.defineFunction('Disable', () => setIsDisabled(true));
+      B.defineFunction('Reset', () => setCurrentValue(currentValue));
     }, [value]);
 
     const customModelAttribute = getCustomModelAttribute(
@@ -112,7 +119,7 @@
             precision={precision}
             size={size === 'custom' ? customSize : size}
             onChange={handleChange}
-            disabled={disabled}
+            disabled={isDisabled}
             readOnly={readonly}
             emptyIcon={IconComponent}
             icon={IconComponent}
