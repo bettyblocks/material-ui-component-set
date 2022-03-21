@@ -1189,7 +1189,7 @@
                         type: 'SIZE',
                         label: 'Width',
                         key: 'width',
-                        value: '',
+                        value: '100%',
                         configuration: {
                           as: 'UNIT',
                         },
@@ -2862,7 +2862,7 @@
                         type: 'SIZE',
                         label: 'Width',
                         key: 'width',
-                        value: '',
+                        value: '100%',
                         configuration: {
                           as: 'UNIT',
                         },
@@ -14909,7 +14909,7 @@
                         type: 'SIZE',
                         label: 'Width',
                         key: 'width',
-                        value: '',
+                        value: '100%',
                         configuration: {
                           as: 'UNIT',
                         },
