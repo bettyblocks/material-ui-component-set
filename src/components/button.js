@@ -477,7 +477,7 @@
         minHeight: '1.25rem',
       },
       disabled: () => {
-        const { disabled } = B.style(t);
+        const { disabled } = B.style();
         const hasDisabledBackgroundColor =
           !!disabled && disabled.backgroundColor;
 
