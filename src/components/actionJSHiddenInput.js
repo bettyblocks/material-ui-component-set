@@ -13,15 +13,17 @@
 
     const valueProperty = B.useProperty(value);
 
-    const Input = () => (
-      <input
-        className={[isDev ? classes.dev : ''].join(' ')}
-        defaultValue={parseInt(valueProperty, 10)}
-        id={name}
-        name={name}
-        type="hidden"
-      />
-    );
+    const Input = function () {
+      return (
+        <input
+          className={[isDev ? classes.dev : ''].join(' ')}
+          defaultValue={parseInt(valueProperty, 10)}
+          id={name}
+          name={name}
+          type="hidden"
+        />
+      );
+    };
 
     return <Input />;
   })(),
