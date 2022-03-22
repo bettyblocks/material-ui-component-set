@@ -341,12 +341,12 @@
         const { basis, hover, selected } = B.style(t);
 
         return {
+          '&.selected': {
+            ...selected,
+          },
           '&:hover, &:focus': {
             filter: hover && hover.backgroundColor ? 'none' : 'brightness(90%)',
             ...hover,
-          },
-          '.selected': {
-            ...selected,
           },
           '&:active': {
             ...basis,
