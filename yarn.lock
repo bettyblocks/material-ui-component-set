@@ -235,10 +235,10 @@
     typescript "^3.5.3"
     webhead "^1.1.3"
 
-"@betty-blocks/component-sdk@^1.5.1":
-  version "1.5.1"
-  resolved "https://registry.yarnpkg.com/@betty-blocks/component-sdk/-/component-sdk-1.5.1.tgz#accd9755f26d34402092948ad880d69eac4dcd7f"
-  integrity sha512-r04iLM2vw2dWA6Gv2FjzMzOJ4kZkn+gBxG2mipJlaFFWNjuLjPyAl0wKpZaQWlDhCB4KgIYAMk3JCpTlQYqDBg==
+"@betty-blocks/component-sdk@^1.6.0":
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/@betty-blocks/component-sdk/-/component-sdk-1.6.0.tgz#44ae860b46ca0bfd80ea73d7794eb4750ef6e148"
+  integrity sha512-/B3UnX5527jL76XyXCn1roUUIY3q9YLfD6BsdLfT1xka7mepJLjjO8D33fbIZmX5g311K9Jg6gKmlqocn1WmBQ==
 
 "@commitlint/cli@^16.1.0":
   version "16.1.0"
