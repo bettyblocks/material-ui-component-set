@@ -51,5 +51,5 @@ const hooks = {
 };
 
 export default prefab('Hidden v2', attributes, beforeCreate, [
-  component('HiddenInput', { options, ...hooks }, []),
+  component('ActionJSHiddenInput', { options, ...hooks }, []),
 ]);
