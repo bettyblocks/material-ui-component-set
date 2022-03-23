@@ -1,3 +1,19 @@
+# [1.205.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.204.1...v1.205.0) (2022-03-22)
+
+
+### Bug Fixes
+
+* lint error in hidden input ([85e0d2d](https://github.com/bettyblocks/material-ui-component-set/commit/85e0d2db62a5f1b4981707e7dc8e2aa52c12e4d7))
+* lint errors in component and prefabs ([ed6941b](https://github.com/bettyblocks/material-ui-component-set/commit/ed6941bd5aea666f18714a15e4aafe83c3252c43))
+* missing hidden input component ([ec2beec](https://github.com/bettyblocks/material-ui-component-set/commit/ec2beecea02879b60c89f1846bce79008f65f36d))
+* renamed var in textinput ([06e25ae](https://github.com/bettyblocks/material-ui-component-set/commit/06e25ae087e4cc2e2ecb69154a004d8df4b83c2a))
+* reverted url and text inut to the new name ([2ee2a99](https://github.com/bettyblocks/material-ui-component-set/commit/2ee2a995c7a1c52edbdcb49416f14754452ab2a2))
+
+
+### Features
+
+* added v2 form prefabs ([58aeb7d](https://github.com/bettyblocks/material-ui-component-set/commit/58aeb7d77836c86fb285ba5a625fc5ee56c05209))
+
 ## [1.204.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.204.0...v1.204.1) (2022-03-16)
 
 
