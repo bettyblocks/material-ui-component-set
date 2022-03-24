@@ -1,3 +1,10 @@
+# [1.208.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.207.0...v1.208.0) (2022-03-24)
+
+
+### Features
+
+* add enable and disable interaction on the checkboxgroup component ([0e2d9bd](https://github.com/bettyblocks/material-ui-component-set/commit/0e2d9bd30c6303feb55aa291303ec4388f011ee4))
+
 # [1.207.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.206.0...v1.207.0) (2022-03-23)
 
 
