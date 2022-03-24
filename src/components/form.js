@@ -216,8 +216,9 @@
                   <form
                     onInvalid={handleInvalid}
                     onSubmit={(evt) => {
-                      setIsInvalid(false);
-                      handleSubmit(evt, callAction, item);
+                      if (formRef.current.checkValidity()) {
+                        handleSubmit(evt, callAction, item);
+                      }
                     }}
                     ref={formRef}
                     className={classNames || undefined}

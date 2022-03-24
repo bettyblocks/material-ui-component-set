@@ -1,3 +1,24 @@
+# [1.207.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.206.0...v1.207.0) (2022-03-23)
+
+
+### Bug Fixes
+
+* actionJs button main export ([8b1fe5b](https://github.com/bettyblocks/material-ui-component-set/commit/8b1fe5b9ba3b7e46784cace6fe921db05c3871db))
+
+
+### Features
+
+* add actionJS button ([20a7327](https://github.com/bettyblocks/material-ui-component-set/commit/20a732727b4d971717ca7332ec5dee67ec13a098))
+* bump cli to support afterCreate ([f292831](https://github.com/bettyblocks/material-ui-component-set/commit/f29283142dd6023c08548d06910540dc988653f3))
+* consistent v2 prefab naming ([82ec058](https://github.com/bettyblocks/material-ui-component-set/commit/82ec058b3957f62577523136d53bb839a7cb22bb))
+
+# [1.206.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.205.0...v1.206.0) (2022-03-23)
+
+
+### Features
+
+* add new interactions to rating ([84d5d87](https://github.com/bettyblocks/material-ui-component-set/commit/84d5d87f2bfab7e385d875099727f86eb08f7d2a))
+
 # [1.205.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.204.1...v1.205.0) (2022-03-22)
 
 
