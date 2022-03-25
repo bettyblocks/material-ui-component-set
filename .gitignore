@@ -3,6 +3,7 @@
 
 # production
 /dist
+/.prefabs
 
 # misc
 .DS_Store

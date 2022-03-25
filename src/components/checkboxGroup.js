@@ -42,6 +42,7 @@
     const [errorState, setErrorState] = useState(false);
     const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
+    const [isDisabled, setIsDisabled] = useState(disabled);
 
     const { kind, values: listValues = [] } = getProperty(property) || {};
     const labelProperty = getProperty(labelProp);
@@ -142,6 +143,8 @@
 
     B.defineFunction('Refetch', () => refetch());
     B.defineFunction('Reset', () => setValues(defaultValueText || []));
+    B.defineFunction('Enable', () => setIsDisabled(false));
+    B.defineFunction('Disable', () => setIsDisabled(true));
 
     useEffect(() => {
       if (isDev) {
@@ -190,7 +193,7 @@
         labelPlacement={position}
         checked={values.includes(checkboxValue)}
         onChange={handleChange}
-        disabled={disabled}
+        disabled={isDisabled}
         name={nameAttributeValue || customModelAttributeName}
         value={checkboxValue}
         onInvalid={invalidHandler}
