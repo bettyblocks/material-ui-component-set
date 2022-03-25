@@ -2,7 +2,7 @@ import { prefab, component, text, Icon } from '@betty-blocks/component-sdk';
 
 const attributes = {
   category: 'FORMV2',
-  icon: Icon.ButtonIcon,
+  icon: Icon.SubmitButtonIcon,
 };
 
 const options = {
