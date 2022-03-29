@@ -1,3 +1,10 @@
+## [1.208.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.208.0...v1.208.1) (2022-03-29)
+
+
+### Bug Fixes
+
+* no model query on forms ([9606cd6](https://github.com/bettyblocks/material-ui-component-set/commit/9606cd6ef4c44d018df3f9817aa22405b0b93a1e))
+
 # [1.208.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.207.0...v1.208.0) (2022-03-24)
 
 
