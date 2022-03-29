@@ -188,13 +188,6 @@
       endpoint: hasInteralLink ? linkTo : undefined,
     };
 
-    const additionalClasses = [
-      classes.customStyles,
-      disabled ? classes.disabled : '',
-    ];
-
-    const noop = () => {};
-
     const ButtonContent = (
       <div
         className={[classes.root, disabled ? classes.disabled : ''].join(' ')}
@@ -230,7 +223,6 @@
     );
 
     const handleClick = (e) => {
-      B.triggerEvent('onClick');
       e.stopPropagation();
 
       B.triggerEvent('OnSetRowsPerPage', buttonContentValue);
@@ -240,15 +232,15 @@
       linkType === 'internal' ? (
         <Link
           className={classes.linkComponent}
-          {...(disabled ? {} : linkProps)}
+          {...linkProps}
           underline="none"
-          onClick={disabled ? noop : handleClick}
+          onClick={handleClick}
         >
           {ButtonContent}
         </Link>
       ) : (
         <a
-          className={[classes.linkComponent, ...additionalClasses].join(' ')}
+          className={classes.linkComponent}
           {...anchorProps}
           onClick={handleClick}
           onKeyUp={handleClick}
@@ -260,11 +252,7 @@
       );
 
     const ButtonElement = (
-      <button
-        type="button"
-        className={[classes.button, ...additionalClasses].join(' ')}
-        {...buttonProps}
-      >
+      <button type="button" className={classes.button} {...buttonProps}>
         {ButtonContent}
       </button>
     );
@@ -316,24 +304,6 @@
         '& > *': {
           pointerEvents: 'none',
         },
-      },
-      customStyles: () => {
-        const { basis, hover, selected } = B.style(t);
-
-        return {
-          '&.selected': {
-            ...selected,
-          },
-          '&:hover, &:focus': {
-            filter: hover && hover.backgroundColor ? 'none' : 'brightness(90%)',
-            ...hover,
-          },
-          '&:active': {
-            ...basis,
-          },
-          ...basis,
-          cursor: 'pointer',
-        };
       },
       linkComponent: {
         '&, &.MuiTypography-root': {
@@ -465,30 +435,33 @@
             getSpacing(outerSpacing[3], 'Desktop'),
         },
       },
-      root: {
+      root: ({ style }) => ({
+        ...style,
         boxSizing: 'border-box',
         display: 'flex',
         width: '100%',
+        cursor: 'pointer',
         justifyContent: 'center',
         alignItems: 'center',
-      },
+
+        '&:hover': {
+          filter: 'brightness(90%)',
+        },
+        '&:active, &:focus': {
+          filter: 'brightness(85%)',
+          outline: 'none',
+        },
+      }),
       innerRoot: {
         display: 'flex',
         alignItems: 'center',
         minHeight: '1.25rem',
       },
-      disabled: () => {
-        const { disabled } = B.style();
-        const hasDisabledBackgroundColor =
-          !!disabled && disabled.backgroundColor;
-
-        return {
-          boxShadow: (disabled && disabled.boxShadow) || 'none',
-          filter: hasDisabledBackgroundColor ? 'none' : 'grayscale(100%)',
-          opacity: hasDisabledBackgroundColor ? '1' : '0.5',
-          pointerEvents: 'none',
-          ...disabled,
-        };
+      disabled: {
+        opacity: '50%',
+        boxShadow: 'none',
+        filter: 'grayscale(100%)',
+        pointerEvents: 'none',
       },
       loader: {
         color: 'inherit!important',
