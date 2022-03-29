@@ -5,7 +5,7 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { actionId, modelId, filter } = options;
-    const { Form } = B;
+    const { Form, GetOne } = B;
 
     const [errors, setErrors] = useState([]);
 
@@ -44,19 +44,21 @@
 
     const FormComponent = function () {
       return (
-        <Form
-          actionId={actionId}
-          onSubmitSuccess={onSubmitSuccess}
-          onSubmitError={onSubmitError}
-        >
-          <fieldset className={classes.fieldset}>{children}</fieldset>
-          <ul>
-            {errors.map((error) => (
-              // eslint-disable-next-line react/jsx-key
-              <li>{error}</li>
-            ))}
-          </ul>
-        </Form>
+        <GetOne modelId={modelId}>
+          <Form
+            actionId={actionId}
+            onSubmitSuccess={onSubmitSuccess}
+            onSubmitError={onSubmitError}
+          >
+            <fieldset className={classes.fieldset}>{children}</fieldset>
+            <ul>
+              {errors.map((error) => (
+                // eslint-disable-next-line react/jsx-key
+                <li>{error}</li>
+              ))}
+            </ul>
+          </Form>
+        </GetOne>
       );
     };
 
