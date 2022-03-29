@@ -7,6 +7,7 @@
   jsx: (() => {
     const { CircularProgress, Tooltip, Link } = window.MaterialUI.Core;
     const {
+      disabled,
       size,
       type,
       icon,
@@ -25,8 +26,6 @@
       tooltipContent,
       tooltipPlacement,
       dataComponentAttribute,
-      defaultState,
-      urlPath,
     } = options;
     const {
       env,
@@ -49,15 +48,11 @@
     const buttonContent = useText(buttonText);
     const buttonContentValue = useText(buttonValue);
     const tooltipText = useText(tooltipContent);
-    const path = (urlPath && useText(urlPath)) || '';
     const [isVisible, setIsVisible] = useState(visible);
     const [isLoading, setIsLoading] = useState(false);
     const [isOpen, setIsOpen] = useState(hasVisibleTooltip);
     const [, setOptions] = useOptions();
-    const [isDisabled, setIsDisabled] = useState(defaultState === 'disabled');
-    const [buttonState, setButtonState] = useState(defaultState || null);
-    const pathMatch =
-      path.length > 0 && window.location.pathname.includes(path);
+    const [isDisabled, setIsDisabled] = useState(disabled);
 
     const camelToSnakeCase = (str) =>
       str[0].toLowerCase() +
@@ -115,20 +110,10 @@
       B.defineFunction('Enable', () => setIsDisabled(false));
       B.defineFunction('Disable', () => setIsDisabled(true));
 
-      if (path.length > 0 && !pathMatch && defaultState === 'selected') {
-        setButtonState('base');
-      }
-      if (pathMatch && defaultState !== 'selected') {
-        setButtonState('selected');
-      }
       if (loading) {
         B.triggerEvent('onActionLoad', loading);
       }
     }, [loading]);
-
-    B.defineFunction('toggleSelected', () => {
-      setButtonState(buttonState === 'selected' ? 'base' : 'selected');
-    });
 
     const getExternalHref = (config) => {
       if (config.disabled) {
@@ -160,7 +145,7 @@
     };
 
     const buttonProps = {
-      disabled: isDisabled || isLoading || loading,
+      disabled: disabled || isLoading || loading,
       tabIndex: isDev ? -1 : undefined,
       onClick: (event) => {
         event.stopPropagation();
@@ -182,7 +167,7 @@
     const anchorProps = {
       ...targetProps,
       href: getExternalHref({
-        isDisabled,
+        disabled,
         linkToExternal,
         linkToExternalVariable,
       }),
@@ -198,26 +183,21 @@
 
     const linkProps = {
       ...targetProps,
-      href: getInternalHref({ linkTo, linkToInternalVariable, isDisabled }),
+      href: getInternalHref({ linkTo, linkToInternalVariable, disabled }),
       component: hasInteralLink ? B.Link : undefined,
       endpoint: hasInteralLink ? linkTo : undefined,
     };
 
     const additionalClasses = [
       classes.customStyles,
-      isDisabled ? classes.disabled : '',
-      buttonState,
+      disabled ? classes.disabled : '',
     ];
 
     const noop = () => {};
 
     const ButtonContent = (
       <div
-        className={[
-          classes.root,
-          isDisabled ? classes.disabled : '',
-          ...(linkType === 'internal' ? additionalClasses : []),
-        ].join(' ')}
+        className={[classes.root, disabled ? classes.disabled : ''].join(' ')}
       >
         <span className={classes.innerRoot}>
           &#8203;
@@ -260,9 +240,9 @@
       linkType === 'internal' ? (
         <Link
           className={classes.linkComponent}
-          {...(isDisabled ? {} : linkProps)}
+          {...(disabled ? {} : linkProps)}
           underline="none"
-          onClick={isDisabled ? noop : handleClick}
+          onClick={disabled ? noop : handleClick}
         >
           {ButtonContent}
         </Link>

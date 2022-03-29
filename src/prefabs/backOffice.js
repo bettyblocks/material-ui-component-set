@@ -6599,36 +6599,6 @@
                       value: ['Upload'],
                     },
                     {
-                      type: 'CUSTOM',
-                      label: 'State',
-                      key: 'defaultState',
-                      value: 'basis',
-                      configuration: {
-                        as: 'DROPDOWN',
-                        dataType: 'string',
-                        allowedInput: [
-                          {
-                            name: 'Basis',
-                            value: 'basis',
-                          },
-                          {
-                            name: 'Selected',
-                            value: 'selected',
-                          },
-                          {
-                            name: 'Disabled',
-                            value: 'disabled',
-                          },
-                        ],
-                      },
-                    },
-                    {
-                      type: 'VARIABLE',
-                      label: 'Button value',
-                      key: 'buttonValue',
-                      value: [''],
-                    },
-                    {
                       value: false,
                       label: 'Full width',
                       key: 'fullWidth',
@@ -6686,6 +6656,12 @@
                       label: 'Outer space',
                       key: 'outerSpacing',
                       type: 'SIZES',
+                    },
+                    {
+                      label: 'Disabled',
+                      key: 'disabled',
+                      value: false,
+                      type: 'TOGGLE',
                     },
                     {
                       label: 'Add Tooltip',
@@ -9832,36 +9808,6 @@
                                 value: [''],
                               },
                               {
-                                type: 'CUSTOM',
-                                label: 'State',
-                                key: 'defaultState',
-                                value: 'basis',
-                                configuration: {
-                                  as: 'DROPDOWN',
-                                  dataType: 'string',
-                                  allowedInput: [
-                                    {
-                                      name: 'Basis',
-                                      value: 'basis',
-                                    },
-                                    {
-                                      name: 'Selected',
-                                      value: 'selected',
-                                    },
-                                    {
-                                      name: 'Disabled',
-                                      value: 'disabled',
-                                    },
-                                  ],
-                                },
-                              },
-                              {
-                                type: 'VARIABLE',
-                                label: 'Selected by URL',
-                                key: 'urlPath',
-                                value: [''],
-                              },
-                              {
                                 type: 'COLOR',
                                 label: 'Background color',
                                 key: 'backgroundColor',
@@ -9996,6 +9942,12 @@
                               },
                               {
                                 type: 'TOGGLE',
+                                label: 'Disabled',
+                                key: 'disabled',
+                                value: false,
+                              },
+                              {
+                                type: 'TOGGLE',
                                 label: 'Disable gutters',
                                 key: 'disableGutters',
                                 value: false,
@@ -10011,6 +9963,12 @@
                                 label: 'Divider',
                                 key: 'divider',
                                 value: false,
+                              },
+                              {
+                                type: 'TOGGLE',
+                                label: 'Selected',
+                                key: 'selected',
+                                value: true,
                               },
                               {
                                 value: false,
@@ -10169,36 +10127,6 @@
                                 value: [''],
                               },
                               {
-                                type: 'CUSTOM',
-                                label: 'State',
-                                key: 'defaultState',
-                                value: 'basis',
-                                configuration: {
-                                  as: 'DROPDOWN',
-                                  dataType: 'string',
-                                  allowedInput: [
-                                    {
-                                      name: 'Basis',
-                                      value: 'basis',
-                                    },
-                                    {
-                                      name: 'Selected',
-                                      value: 'selected',
-                                    },
-                                    {
-                                      name: 'Disabled',
-                                      value: 'disabled',
-                                    },
-                                  ],
-                                },
-                              },
-                              {
-                                type: 'VARIABLE',
-                                label: 'Selected by URL',
-                                key: 'urlPath',
-                                value: [''],
-                              },
-                              {
                                 type: 'COLOR',
                                 label: 'Background color',
                                 key: 'backgroundColor',
@@ -10333,6 +10261,12 @@
                               },
                               {
                                 type: 'TOGGLE',
+                                label: 'Disabled',
+                                key: 'disabled',
+                                value: false,
+                              },
+                              {
+                                type: 'TOGGLE',
                                 label: 'Disable gutters',
                                 key: 'disableGutters',
                                 value: false,
@@ -10347,6 +10281,12 @@
                                 type: 'TOGGLE',
                                 label: 'Divider',
                                 key: 'divider',
+                                value: false,
+                              },
+                              {
+                                type: 'TOGGLE',
+                                label: 'Selected',
+                                key: 'selected',
                                 value: false,
                               },
                               {
@@ -11212,36 +11152,6 @@
                                       value: ['Close'],
                                     },
                                     {
-                                      type: 'CUSTOM',
-                                      label: 'State',
-                                      key: 'defaultState',
-                                      value: 'basis',
-                                      configuration: {
-                                        as: 'DROPDOWN',
-                                        dataType: 'string',
-                                        allowedInput: [
-                                          {
-                                            name: 'Basis',
-                                            value: 'basis',
-                                          },
-                                          {
-                                            name: 'Selected',
-                                            value: 'selected',
-                                          },
-                                          {
-                                            name: 'Disabled',
-                                            value: 'disabled',
-                                          },
-                                        ],
-                                      },
-                                    },
-                                    {
-                                      type: 'VARIABLE',
-                                      label: 'Button value',
-                                      key: 'buttonValue',
-                                      value: [''],
-                                    },
-                                    {
                                       value: false,
                                       label: 'Full width',
                                       key: 'fullWidth',
@@ -11299,6 +11209,12 @@
                                       label: 'Outer space',
                                       key: 'outerSpacing',
                                       type: 'SIZES',
+                                    },
+                                    {
+                                      label: 'Disabled',
+                                      key: 'disabled',
+                                      value: false,
+                                      type: 'TOGGLE',
                                     },
                                     {
                                       label: 'Add Tooltip',
@@ -11478,36 +11394,6 @@
                                       value: ['Edit'],
                                     },
                                     {
-                                      type: 'CUSTOM',
-                                      label: 'State',
-                                      key: 'defaultState',
-                                      value: 'basis',
-                                      configuration: {
-                                        as: 'DROPDOWN',
-                                        dataType: 'string',
-                                        allowedInput: [
-                                          {
-                                            name: 'Basis',
-                                            value: 'basis',
-                                          },
-                                          {
-                                            name: 'Selected',
-                                            value: 'selected',
-                                          },
-                                          {
-                                            name: 'Disabled',
-                                            value: 'disabled',
-                                          },
-                                        ],
-                                      },
-                                    },
-                                    {
-                                      type: 'VARIABLE',
-                                      label: 'Button value',
-                                      key: 'buttonValue',
-                                      value: [''],
-                                    },
-                                    {
                                       value: false,
                                       label: 'Full width',
                                       key: 'fullWidth',
@@ -11565,6 +11451,12 @@
                                       label: 'Outer space',
                                       key: 'outerSpacing',
                                       type: 'SIZES',
+                                    },
+                                    {
+                                      label: 'Disabled',
+                                      key: 'disabled',
+                                      value: false,
+                                      type: 'TOGGLE',
                                     },
                                     {
                                       label: 'Add Tooltip',
@@ -14306,36 +14198,6 @@
                                                 value: ['Delete'],
                                               },
                                               {
-                                                type: 'CUSTOM',
-                                                label: 'State',
-                                                key: 'defaultState',
-                                                value: 'basis',
-                                                configuration: {
-                                                  as: 'DROPDOWN',
-                                                  dataType: 'string',
-                                                  allowedInput: [
-                                                    {
-                                                      name: 'Basis',
-                                                      value: 'basis',
-                                                    },
-                                                    {
-                                                      name: 'Selected',
-                                                      value: 'selected',
-                                                    },
-                                                    {
-                                                      name: 'Disabled',
-                                                      value: 'disabled',
-                                                    },
-                                                  ],
-                                                },
-                                              },
-                                              {
-                                                type: 'VARIABLE',
-                                                label: 'Button value',
-                                                key: 'buttonValue',
-                                                value: [''],
-                                              },
-                                              {
                                                 value: false,
                                                 label: 'Full width',
                                                 key: 'fullWidth',
@@ -14413,6 +14275,12 @@
                                                 label: 'Outer space',
                                                 key: 'outerSpacing',
                                                 type: 'SIZES',
+                                              },
+                                              {
+                                                label: 'Disabled',
+                                                key: 'disabled',
+                                                value: false,
+                                                type: 'TOGGLE',
                                               },
                                               {
                                                 label: 'Add Tooltip',
@@ -15112,36 +14980,6 @@
                                                 value: ['Cancel'],
                                               },
                                               {
-                                                type: 'CUSTOM',
-                                                label: 'State',
-                                                key: 'defaultState',
-                                                value: 'basis',
-                                                configuration: {
-                                                  as: 'DROPDOWN',
-                                                  dataType: 'string',
-                                                  allowedInput: [
-                                                    {
-                                                      name: 'Basis',
-                                                      value: 'basis',
-                                                    },
-                                                    {
-                                                      name: 'Selected',
-                                                      value: 'selected',
-                                                    },
-                                                    {
-                                                      name: 'Disabled',
-                                                      value: 'disabled',
-                                                    },
-                                                  ],
-                                                },
-                                              },
-                                              {
-                                                type: 'VARIABLE',
-                                                label: 'Button value',
-                                                key: 'buttonValue',
-                                                value: [''],
-                                              },
-                                              {
                                                 value: false,
                                                 label: 'Full width',
                                                 key: 'fullWidth',
@@ -15219,6 +15057,12 @@
                                                 label: 'Outer space',
                                                 key: 'outerSpacing',
                                                 type: 'SIZES',
+                                              },
+                                              {
+                                                label: 'Disabled',
+                                                key: 'disabled',
+                                                value: false,
+                                                type: 'TOGGLE',
                                               },
                                               {
                                                 label: 'Add Tooltip',
@@ -16746,36 +16590,6 @@
                                       value: ['New'],
                                     },
                                     {
-                                      type: 'CUSTOM',
-                                      label: 'State',
-                                      key: 'defaultState',
-                                      value: 'basis',
-                                      configuration: {
-                                        as: 'DROPDOWN',
-                                        dataType: 'string',
-                                        allowedInput: [
-                                          {
-                                            name: 'Basis',
-                                            value: 'basis',
-                                          },
-                                          {
-                                            name: 'Selected',
-                                            value: 'selected',
-                                          },
-                                          {
-                                            name: 'Disabled',
-                                            value: 'disabled',
-                                          },
-                                        ],
-                                      },
-                                    },
-                                    {
-                                      type: 'VARIABLE',
-                                      label: 'Button value',
-                                      key: 'buttonValue',
-                                      value: [''],
-                                    },
-                                    {
                                       value: false,
                                       label: 'Full width',
                                       key: 'fullWidth',
@@ -16833,6 +16647,12 @@
                                       label: 'Outer space',
                                       key: 'outerSpacing',
                                       type: 'SIZES',
+                                    },
+                                    {
+                                      label: 'Disabled',
+                                      key: 'disabled',
+                                      value: false,
+                                      type: 'TOGGLE',
                                     },
                                     {
                                       label: 'Add Tooltip',
@@ -18638,36 +18458,6 @@
                   value: ['Close'],
                 },
                 {
-                  type: 'CUSTOM',
-                  label: 'State',
-                  key: 'defaultState',
-                  value: 'basis',
-                  configuration: {
-                    as: 'DROPDOWN',
-                    dataType: 'string',
-                    allowedInput: [
-                      {
-                        name: 'Basis',
-                        value: 'basis',
-                      },
-                      {
-                        name: 'Selected',
-                        value: 'selected',
-                      },
-                      {
-                        name: 'Disabled',
-                        value: 'disabled',
-                      },
-                    ],
-                  },
-                },
-                {
-                  type: 'VARIABLE',
-                  label: 'Button value',
-                  key: 'buttonValue',
-                  value: [''],
-                },
-                {
                   value: false,
                   label: 'Full width',
                   key: 'fullWidth',
@@ -18725,6 +18515,12 @@
                   label: 'Outer space',
                   key: 'outerSpacing',
                   type: 'SIZES',
+                },
+                {
+                  label: 'Disabled',
+                  key: 'disabled',
+                  value: false,
+                  type: 'TOGGLE',
                 },
                 {
                   label: 'Add Tooltip',
@@ -18918,36 +18714,6 @@
                   value: ['Save'],
                 },
                 {
-                  type: 'CUSTOM',
-                  label: 'State',
-                  key: 'defaultState',
-                  value: 'basis',
-                  configuration: {
-                    as: 'DROPDOWN',
-                    dataType: 'string',
-                    allowedInput: [
-                      {
-                        name: 'Basis',
-                        value: 'basis',
-                      },
-                      {
-                        name: 'Selected',
-                        value: 'selected',
-                      },
-                      {
-                        name: 'Disabled',
-                        value: 'disabled',
-                      },
-                    ],
-                  },
-                },
-                {
-                  type: 'VARIABLE',
-                  label: 'Button value',
-                  key: 'buttonValue',
-                  value: [''],
-                },
-                {
                   value: false,
                   label: 'Full width',
                   key: 'fullWidth',
@@ -19005,6 +18771,12 @@
                   label: 'Outer space',
                   key: 'outerSpacing',
                   type: 'SIZES',
+                },
+                {
+                  label: 'Disabled',
+                  key: 'disabled',
+                  value: false,
+                  type: 'TOGGLE',
                 },
                 {
                   label: 'Add Tooltip',
@@ -19214,36 +18986,6 @@
                   value: ['Close'],
                 },
                 {
-                  type: 'CUSTOM',
-                  label: 'State',
-                  key: 'defaultState',
-                  value: 'basis',
-                  configuration: {
-                    as: 'DROPDOWN',
-                    dataType: 'string',
-                    allowedInput: [
-                      {
-                        name: 'Basis',
-                        value: 'basis',
-                      },
-                      {
-                        name: 'Selected',
-                        value: 'selected',
-                      },
-                      {
-                        name: 'Disabled',
-                        value: 'disabled',
-                      },
-                    ],
-                  },
-                },
-                {
-                  type: 'VARIABLE',
-                  label: 'Button value',
-                  key: 'buttonValue',
-                  value: [''],
-                },
-                {
                   value: false,
                   label: 'Full width',
                   key: 'fullWidth',
@@ -19301,6 +19043,12 @@
                   label: 'Outer space',
                   key: 'outerSpacing',
                   type: 'SIZES',
+                },
+                {
+                  label: 'Disabled',
+                  key: 'disabled',
+                  value: false,
+                  type: 'TOGGLE',
                 },
                 {
                   label: 'Add Tooltip',
@@ -19494,36 +19242,6 @@
                   value: ['Save'],
                 },
                 {
-                  type: 'CUSTOM',
-                  label: 'State',
-                  key: 'defaultState',
-                  value: 'basis',
-                  configuration: {
-                    as: 'DROPDOWN',
-                    dataType: 'string',
-                    allowedInput: [
-                      {
-                        name: 'Basis',
-                        value: 'basis',
-                      },
-                      {
-                        name: 'Selected',
-                        value: 'selected',
-                      },
-                      {
-                        name: 'Disabled',
-                        value: 'disabled',
-                      },
-                    ],
-                  },
-                },
-                {
-                  type: 'VARIABLE',
-                  label: 'Button value',
-                  key: 'buttonValue',
-                  value: [''],
-                },
-                {
                   value: false,
                   label: 'Full width',
                   key: 'fullWidth',
@@ -19581,6 +19299,12 @@
                   label: 'Outer space',
                   key: 'outerSpacing',
                   type: 'SIZES',
+                },
+                {
+                  label: 'Disabled',
+                  key: 'disabled',
+                  value: false,
+                  type: 'TOGGLE',
                 },
                 {
                   label: 'Add Tooltip',
@@ -20700,36 +20424,6 @@
                                     value: [''],
                                   },
                                   {
-                                    type: 'CUSTOM',
-                                    label: 'State',
-                                    key: 'defaultState',
-                                    value: 'basis',
-                                    configuration: {
-                                      as: 'DROPDOWN',
-                                      dataType: 'string',
-                                      allowedInput: [
-                                        {
-                                          name: 'Basis',
-                                          value: 'basis',
-                                        },
-                                        {
-                                          name: 'Selected',
-                                          value: 'selected',
-                                        },
-                                        {
-                                          name: 'Disabled',
-                                          value: 'disabled',
-                                        },
-                                      ],
-                                    },
-                                  },
-                                  {
-                                    type: 'VARIABLE',
-                                    label: 'Button value',
-                                    key: 'buttonValue',
-                                    value: [''],
-                                  },
-                                  {
                                     value: false,
                                     label: 'Full width',
                                     key: 'fullWidth',
@@ -20787,6 +20481,12 @@
                                     label: 'Outer space',
                                     key: 'outerSpacing',
                                     type: 'SIZES',
+                                  },
+                                  {
+                                    label: 'Disabled',
+                                    key: 'disabled',
+                                    value: false,
+                                    type: 'TOGGLE',
                                   },
                                   {
                                     label: 'Add Tooltip',
@@ -21776,30 +21476,6 @@
                                   },
                                   {
                                     type: 'CUSTOM',
-                                    label: 'State',
-                                    key: 'defaultState',
-                                    value: 'basis',
-                                    configuration: {
-                                      as: 'DROPDOWN',
-                                      dataType: 'string',
-                                      allowedInput: [
-                                        {
-                                          name: 'Basis',
-                                          value: 'basis',
-                                        },
-                                        {
-                                          name: 'Selected',
-                                          value: 'selected',
-                                        },
-                                        {
-                                          name: 'Disabled',
-                                          value: 'disabled',
-                                        },
-                                      ],
-                                    },
-                                  },
-                                  {
-                                    type: 'CUSTOM',
                                     label: 'Link to',
                                     key: 'linkType',
                                     value: 'internal',
@@ -21926,6 +21602,12 @@
                                     label: 'Outer space',
                                     key: 'outerSpacing',
                                     type: 'SIZES',
+                                  },
+                                  {
+                                    label: 'Disabled',
+                                    key: 'disabled',
+                                    value: false,
+                                    type: 'TOGGLE',
                                   },
                                   {
                                     label: 'Toggle tooltip visibility',
@@ -22253,30 +21935,6 @@
                                         value: ['Confirm'],
                                       },
                                       {
-                                        type: 'CUSTOM',
-                                        label: 'State',
-                                        key: 'defaultState',
-                                        value: 'basis',
-                                        configuration: {
-                                          as: 'DROPDOWN',
-                                          dataType: 'string',
-                                          allowedInput: [
-                                            {
-                                              name: 'Basis',
-                                              value: 'basis',
-                                            },
-                                            {
-                                              name: 'Selected',
-                                              value: 'selected',
-                                            },
-                                            {
-                                              name: 'Disabled',
-                                              value: 'disabled',
-                                            },
-                                          ],
-                                        },
-                                      },
-                                      {
                                         ref: {
                                           value: '#actionId',
                                         },
@@ -22381,6 +22039,12 @@
                                         label: 'Outer space',
                                         key: 'outerSpacing',
                                         type: 'SIZES',
+                                      },
+                                      {
+                                        label: 'Disabled',
+                                        key: 'disabled',
+                                        value: false,
+                                        type: 'TOGGLE',
                                       },
                                       {
                                         label: 'Add Tooltip',

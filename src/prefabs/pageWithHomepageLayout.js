@@ -36847,37 +36847,6 @@
                                                         value: [''],
                                                       },
                                                       {
-                                                        type: 'CUSTOM',
-                                                        label: 'State',
-                                                        key: 'defaultState',
-                                                        value: 'basis',
-                                                        configuration: {
-                                                          as: 'DROPDOWN',
-                                                          dataType: 'string',
-                                                          allowedInput: [
-                                                            {
-                                                              name: 'Basis',
-                                                              value: 'basis',
-                                                            },
-                                                            {
-                                                              name: 'Selected',
-                                                              value: 'selected',
-                                                            },
-                                                            {
-                                                              name: 'Disabled',
-                                                              value: 'disabled',
-                                                            },
-                                                          ],
-                                                        },
-                                                      },
-                                                      {
-                                                        type: 'VARIABLE',
-                                                        label:
-                                                          'Selected by URL',
-                                                        key: 'urlPath',
-                                                        value: [''],
-                                                      },
-                                                      {
                                                         type: 'COLOR',
                                                         label:
                                                           'Background color',
@@ -37290,37 +37259,6 @@
                                                         value: [''],
                                                       },
                                                       {
-                                                        type: 'CUSTOM',
-                                                        label: 'State',
-                                                        key: 'defaultState',
-                                                        value: 'basis',
-                                                        configuration: {
-                                                          as: 'DROPDOWN',
-                                                          dataType: 'string',
-                                                          allowedInput: [
-                                                            {
-                                                              name: 'Basis',
-                                                              value: 'basis',
-                                                            },
-                                                            {
-                                                              name: 'Selected',
-                                                              value: 'selected',
-                                                            },
-                                                            {
-                                                              name: 'Disabled',
-                                                              value: 'disabled',
-                                                            },
-                                                          ],
-                                                        },
-                                                      },
-                                                      {
-                                                        type: 'VARIABLE',
-                                                        label:
-                                                          'Selected by URL',
-                                                        key: 'urlPath',
-                                                        value: [''],
-                                                      },
-                                                      {
                                                         type: 'COLOR',
                                                         label:
                                                           'Background color',
@@ -37730,37 +37668,6 @@
                                                         type: 'VARIABLE',
                                                         label: 'Secondary text',
                                                         key: 'secondaryText',
-                                                        value: [''],
-                                                      },
-                                                      {
-                                                        type: 'CUSTOM',
-                                                        label: 'State',
-                                                        key: 'defaultState',
-                                                        value: 'basis',
-                                                        configuration: {
-                                                          as: 'DROPDOWN',
-                                                          dataType: 'string',
-                                                          allowedInput: [
-                                                            {
-                                                              name: 'Basis',
-                                                              value: 'basis',
-                                                            },
-                                                            {
-                                                              name: 'Selected',
-                                                              value: 'selected',
-                                                            },
-                                                            {
-                                                              name: 'Disabled',
-                                                              value: 'disabled',
-                                                            },
-                                                          ],
-                                                        },
-                                                      },
-                                                      {
-                                                        type: 'VARIABLE',
-                                                        label:
-                                                          'Selected by URL',
-                                                        key: 'urlPath',
                                                         value: [''],
                                                       },
                                                       {
