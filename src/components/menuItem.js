@@ -9,7 +9,6 @@
       actionId,
       actionModels,
       dense,
-      disabled,
       divider,
       icon,
       iconPosition,
@@ -19,6 +18,8 @@
       openLinkToExternal,
       primaryText,
       dataComponentAttribute,
+      defaultState,
+      urlPath,
     } = options;
     const { onClick } = parent;
     const {
@@ -44,6 +45,9 @@
     if (!isDev && hasLink) menuItemComponent = Link;
     if (!isDev && hasExternalLink) menuItemComponent = 'a';
     const primary = useText(primaryText);
+    const [buttonState, setButtonState] = useState(defaultState);
+    const pathMatch =
+      useText(urlPath) && window.location.pathname.includes(useText(urlPath));
 
     const camelToSnakeCase = (str) =>
       str[0].toLowerCase() +
@@ -87,14 +91,24 @@
         setIsLoading(loading);
         B.triggerEvent('onActionLoad', loading);
       }
+      if (!pathMatch && defaultState !== 'selected') {
+        setButtonState('base');
+      }
+      if (pathMatch) {
+        setButtonState('selected');
+      }
     }, [loading]);
+
+    B.defineFunction('toggleSelected', () => {
+      setButtonState(buttonState === 'selected' ? 'base' : 'selected');
+    });
 
     return (
       <MenuItem
-        className={classes.root}
+        className={[classes.root, buttonState].join(' ')}
         component={menuItemComponent}
         dense={dense}
-        disabled={!isDev && (disabled || isLoading)}
+        disabled={!isDev && (defaultState === 'disabled' || isLoading)}
         divider={divider}
         href={hasExternalLink ? linkToExternalVariable : undefined}
         endpoint={hasLink ? linkTo : undefined}

@@ -538,6 +538,30 @@
             },
             {
               type: 'CUSTOM',
+              label: 'State',
+              key: 'defaultState',
+              value: 'basis',
+              configuration: {
+                as: 'DROPDOWN',
+                dataType: 'string',
+                allowedInput: [
+                  {
+                    name: 'Basis',
+                    value: 'basis',
+                  },
+                  {
+                    name: 'Selected',
+                    value: 'selected',
+                  },
+                  {
+                    name: 'Disabled',
+                    value: 'disabled',
+                  },
+                ],
+              },
+            },
+            {
+              type: 'CUSTOM',
               label: 'Link to',
               key: 'linkType',
               value: 'internal',
@@ -637,12 +661,6 @@
               label: 'Outer space',
               key: 'outerSpacing',
               type: 'SIZES',
-            },
-            {
-              label: 'Disabled',
-              key: 'disabled',
-              value: false,
-              type: 'TOGGLE',
             },
             {
               label: 'Toggle tooltip visibility',
@@ -1680,6 +1698,12 @@
                                   label: 'Button text',
                                   key: 'buttonText',
                                   value: [],
+                                },
+                                {
+                                  type: 'VARIABLE',
+                                  label: 'Button value',
+                                  key: 'buttonValue',
+                                  value: [''],
                                 },
                                 {
                                   value: false,

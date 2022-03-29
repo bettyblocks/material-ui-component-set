@@ -7,7 +7,6 @@
   jsx: (() => {
     const { CircularProgress, Tooltip, Link } = window.MaterialUI.Core;
     const {
-      disabled,
       size,
       type,
       icon,
@@ -19,12 +18,15 @@
       visible,
       actionId,
       buttonText,
+      buttonValue,
       actionModels,
       addTooltip,
       hasVisibleTooltip,
       tooltipContent,
       tooltipPlacement,
       dataComponentAttribute,
+      defaultState,
+      urlPath,
     } = options;
     const {
       env,
@@ -45,12 +47,17 @@
     const hasInteralLink =
       linkType === 'internal' && linkTo && linkTo.id !== '';
     const buttonContent = useText(buttonText);
+    const buttonContentValue = useText(buttonValue);
     const tooltipText = useText(tooltipContent);
+    const path = (urlPath && useText(urlPath)) || '';
     const [isVisible, setIsVisible] = useState(visible);
     const [isLoading, setIsLoading] = useState(false);
     const [isOpen, setIsOpen] = useState(hasVisibleTooltip);
     const [, setOptions] = useOptions();
-    const [isDisabled, setIsDisabled] = useState(disabled);
+    const [isDisabled, setIsDisabled] = useState(defaultState === 'disabled');
+    const [buttonState, setButtonState] = useState(defaultState || null);
+    const pathMatch =
+      path.length > 0 && window.location.pathname.includes(path);
 
     const camelToSnakeCase = (str) =>
       str[0].toLowerCase() +
@@ -108,10 +115,20 @@
       B.defineFunction('Enable', () => setIsDisabled(false));
       B.defineFunction('Disable', () => setIsDisabled(true));
 
+      if (path.length > 0 && !pathMatch && defaultState === 'selected') {
+        setButtonState('base');
+      }
+      if (pathMatch && defaultState !== 'selected') {
+        setButtonState('selected');
+      }
       if (loading) {
         B.triggerEvent('onActionLoad', loading);
       }
     }, [loading]);
+
+    B.defineFunction('toggleSelected', () => {
+      setButtonState(buttonState === 'selected' ? 'base' : 'selected');
+    });
 
     const getExternalHref = (config) => {
       if (config.disabled) {
@@ -143,7 +160,7 @@
     };
 
     const buttonProps = {
-      disabled: disabled || isLoading || loading,
+      disabled: isDisabled || isLoading || loading,
       tabIndex: isDev ? -1 : undefined,
       onClick: (event) => {
         event.stopPropagation();
@@ -165,7 +182,7 @@
     const anchorProps = {
       ...targetProps,
       href: getExternalHref({
-        disabled,
+        isDisabled,
         linkToExternal,
         linkToExternalVariable,
       }),
@@ -181,14 +198,26 @@
 
     const linkProps = {
       ...targetProps,
-      href: getInternalHref({ linkTo, linkToInternalVariable, disabled }),
+      href: getInternalHref({ linkTo, linkToInternalVariable, isDisabled }),
       component: hasInteralLink ? B.Link : undefined,
       endpoint: hasInteralLink ? linkTo : undefined,
     };
 
+    const additionalClasses = [
+      classes.customStyles,
+      isDisabled ? classes.disabled : '',
+      buttonState,
+    ];
+
+    const noop = () => {};
+
     const ButtonContent = (
       <div
-        className={[classes.root, disabled ? classes.disabled : ''].join(' ')}
+        className={[
+          classes.root,
+          isDisabled ? classes.disabled : '',
+          ...(linkType === 'internal' ? additionalClasses : []),
+        ].join(' ')}
       >
         <span className={classes.innerRoot}>
           &#8203;
@@ -221,22 +250,25 @@
     );
 
     const handleClick = (e) => {
+      B.triggerEvent('onClick');
       e.stopPropagation();
+
+      B.triggerEvent('OnSetRowsPerPage', buttonContentValue);
     };
 
     const LinkComponent =
       linkType === 'internal' ? (
         <Link
           className={classes.linkComponent}
-          {...linkProps}
+          {...(isDisabled ? {} : linkProps)}
           underline="none"
-          onClick={handleClick}
+          onClick={isDisabled ? noop : handleClick}
         >
           {ButtonContent}
         </Link>
       ) : (
         <a
-          className={classes.linkComponent}
+          className={[classes.linkComponent, ...additionalClasses].join(' ')}
           {...anchorProps}
           onClick={handleClick}
           onKeyUp={handleClick}
@@ -248,7 +280,11 @@
       );
 
     const ButtonElement = (
-      <button type="button" className={classes.button} {...buttonProps}>
+      <button
+        type="button"
+        className={[classes.button, ...additionalClasses].join(' ')}
+        {...buttonProps}
+      >
         {ButtonContent}
       </button>
     );
@@ -300,6 +336,24 @@
         '& > *': {
           pointerEvents: 'none',
         },
+      },
+      customStyles: () => {
+        const { basis, hover, selected } = B.style(t);
+
+        return {
+          '&.selected': {
+            ...selected,
+          },
+          '&:hover, &:focus': {
+            filter: hover && hover.backgroundColor ? 'none' : 'brightness(90%)',
+            ...hover,
+          },
+          '&:active': {
+            ...basis,
+          },
+          ...basis,
+          cursor: 'pointer',
+        };
       },
       linkComponent: {
         '&, &.MuiTypography-root': {
@@ -431,33 +485,30 @@
             getSpacing(outerSpacing[3], 'Desktop'),
         },
       },
-      root: ({ style }) => ({
-        ...style,
+      root: {
         boxSizing: 'border-box',
         display: 'flex',
         width: '100%',
-        cursor: 'pointer',
         justifyContent: 'center',
         alignItems: 'center',
-
-        '&:hover': {
-          filter: 'brightness(90%)',
-        },
-        '&:active, &:focus': {
-          filter: 'brightness(85%)',
-          outline: 'none',
-        },
-      }),
+      },
       innerRoot: {
         display: 'flex',
         alignItems: 'center',
         minHeight: '1.25rem',
       },
-      disabled: {
-        opacity: '50%',
-        boxShadow: 'none',
-        filter: 'grayscale(100%)',
-        pointerEvents: 'none',
+      disabled: () => {
+        const { disabled } = B.style();
+        const hasDisabledBackgroundColor =
+          !!disabled && disabled.backgroundColor;
+
+        return {
+          boxShadow: (disabled && disabled.boxShadow) || 'none',
+          filter: hasDisabledBackgroundColor ? 'none' : 'grayscale(100%)',
+          opacity: hasDisabledBackgroundColor ? '1' : '0.5',
+          pointerEvents: 'none',
+          ...disabled,
+        };
       },
       loader: {
         color: 'inherit!important',
