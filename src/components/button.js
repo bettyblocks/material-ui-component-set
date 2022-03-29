@@ -46,7 +46,7 @@
     const hasInteralLink =
       linkType === 'internal' && linkTo && linkTo.id !== '';
     const buttonContent = useText(buttonText);
-    const buttonContentValue = useText(buttonValue);
+    const buttonContentValue = (buttonValue && useText(buttonValue)) || '';
     const tooltipText = useText(tooltipContent);
     const [isVisible, setIsVisible] = useState(visible);
     const [isLoading, setIsLoading] = useState(false);
