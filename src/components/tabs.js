@@ -8,6 +8,7 @@
     const { Children, env, useText, Icon } = B;
     const {
       defaultValue,
+      selectedDesignTabIndex,
       variant,
       centered,
       scrollButtons,
@@ -21,10 +22,10 @@
     const orientation =
       alignment === 'top' || alignment === 'bottom' ? 'horizontal' : 'vertical';
     const isDev = env === 'dev';
-    const [value, setValue] = useState(parseInt(defaultValue - 1, 10) || 0);
+    const currentTab = isDev ? selectedDesignTabIndex : defaultValue;
+    const [value, setValue] = useState(parseInt(currentTab - 1, 10) || 0);
     const [tabData, setTabData] = useState({});
     const [activeTabs, setActiveTabs] = useState([value]);
-
     const handleChange = (_, newValue) => {
       setValue(newValue);
       if (!activeTabs.includes(newValue)) {
@@ -39,9 +40,9 @@
     };
     useEffect(() => {
       if (isDev) {
-        setValue(parseInt(defaultValue - 1, 10));
+        setValue(parseInt(currentTab - 1, 10));
       }
-    }, [isDev, defaultValue]);
+    }, [isDev, currentTab]);
 
     const TabsHeader = (
       <Tabs
