@@ -1,3 +1,68 @@
+## [1.208.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.208.1...v1.208.2) (2022-03-29)
+
+
+### Bug Fixes
+
+* dev check ([8e134ae](https://github.com/bettyblocks/material-ui-component-set/commit/8e134ae54d5601150fae0411ffe7e870a631fcae))
+
+## [1.208.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.208.0...v1.208.1) (2022-03-29)
+
+
+### Bug Fixes
+
+* no model query on forms ([9606cd6](https://github.com/bettyblocks/material-ui-component-set/commit/9606cd6ef4c44d018df3f9817aa22405b0b93a1e))
+
+# [1.208.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.207.0...v1.208.0) (2022-03-24)
+
+
+### Features
+
+* add enable and disable interaction on the checkboxgroup component ([0e2d9bd](https://github.com/bettyblocks/material-ui-component-set/commit/0e2d9bd30c6303feb55aa291303ec4388f011ee4))
+
+# [1.207.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.206.0...v1.207.0) (2022-03-23)
+
+
+### Bug Fixes
+
+* actionJs button main export ([8b1fe5b](https://github.com/bettyblocks/material-ui-component-set/commit/8b1fe5b9ba3b7e46784cace6fe921db05c3871db))
+
+
+### Features
+
+* add actionJS button ([20a7327](https://github.com/bettyblocks/material-ui-component-set/commit/20a732727b4d971717ca7332ec5dee67ec13a098))
+* bump cli to support afterCreate ([f292831](https://github.com/bettyblocks/material-ui-component-set/commit/f29283142dd6023c08548d06910540dc988653f3))
+* consistent v2 prefab naming ([82ec058](https://github.com/bettyblocks/material-ui-component-set/commit/82ec058b3957f62577523136d53bb839a7cb22bb))
+
+# [1.206.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.205.0...v1.206.0) (2022-03-23)
+
+
+### Features
+
+* add new interactions to rating ([84d5d87](https://github.com/bettyblocks/material-ui-component-set/commit/84d5d87f2bfab7e385d875099727f86eb08f7d2a))
+
+# [1.205.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.204.1...v1.205.0) (2022-03-22)
+
+
+### Bug Fixes
+
+* lint error in hidden input ([85e0d2d](https://github.com/bettyblocks/material-ui-component-set/commit/85e0d2db62a5f1b4981707e7dc8e2aa52c12e4d7))
+* lint errors in component and prefabs ([ed6941b](https://github.com/bettyblocks/material-ui-component-set/commit/ed6941bd5aea666f18714a15e4aafe83c3252c43))
+* missing hidden input component ([ec2beec](https://github.com/bettyblocks/material-ui-component-set/commit/ec2beecea02879b60c89f1846bce79008f65f36d))
+* renamed var in textinput ([06e25ae](https://github.com/bettyblocks/material-ui-component-set/commit/06e25ae087e4cc2e2ecb69154a004d8df4b83c2a))
+* reverted url and text inut to the new name ([2ee2a99](https://github.com/bettyblocks/material-ui-component-set/commit/2ee2a995c7a1c52edbdcb49416f14754452ab2a2))
+
+
+### Features
+
+* added v2 form prefabs ([58aeb7d](https://github.com/bettyblocks/material-ui-component-set/commit/58aeb7d77836c86fb285ba5a625fc5ee56c05209))
+
+## [1.204.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.204.0...v1.204.1) (2022-03-16)
+
+
+### Bug Fixes
+
+* display and fontweight issues fixed ([649f011](https://github.com/bettyblocks/material-ui-component-set/commit/649f01164dbc2063dd6b765f93be8c5ac52b1b60))
+
 # [1.204.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.203.5...v1.204.0) (2022-03-11)
 
 
