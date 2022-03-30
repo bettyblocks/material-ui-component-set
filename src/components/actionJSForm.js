@@ -9,7 +9,7 @@
 
     const [errors, setErrors] = useState([]);
 
-    const isDev = B.env !== 'prod';
+    const isDev = B.env === 'dev';
 
     if (isDev && children.length === 0) {
       return (
@@ -44,25 +44,23 @@
 
     const FormComponent = function () {
       return (
-        <GetOne modelId={modelId}>
-          <Form
-            actionId={actionId}
-            onSubmitSuccess={onSubmitSuccess}
-            onSubmitError={onSubmitError}
-          >
-            <fieldset className={classes.fieldset}>{children}</fieldset>
-            <ul>
-              {errors.map((error) => (
-                // eslint-disable-next-line react/jsx-key
-                <li>{error}</li>
-              ))}
-            </ul>
-          </Form>
-        </GetOne>
+        <Form
+          actionId={actionId}
+          onSubmitSuccess={onSubmitSuccess}
+          onSubmitError={onSubmitError}
+        >
+          <fieldset className={classes.fieldset}>{children}</fieldset>
+          <ul>
+            {errors.map((error) => (
+              // eslint-disable-next-line react/jsx-key
+              <li>{error}</li>
+            ))}
+          </ul>
+        </Form>
       );
     };
 
-    if (B.env !== 'prod') {
+    if (isDev) {
       return (
         <div>
           <FormComponent />
@@ -72,9 +70,9 @@
 
     if (modelId) {
       return (
-        <B.GetOne modelId={modelId} filter={filter}>
+        <GetOne modelId={modelId} filter={filter}>
           <FormComponent />
-        </B.GetOne>
+        </GetOne>
       );
     }
 
