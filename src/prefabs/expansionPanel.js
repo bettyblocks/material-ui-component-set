@@ -176,6 +176,20 @@
           type: 'TOGGLE',
         },
         {
+          label: 'Preload data',
+          key: 'preLoadData',
+          value: true,
+          type: 'TOGGLE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'advancedSettings',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
           type: 'VARIABLE',
           label: 'Test attribute',
           key: 'dataComponentAttribute',
