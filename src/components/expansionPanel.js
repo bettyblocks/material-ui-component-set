@@ -84,7 +84,7 @@
       expandIcon: <Icon name="ExpandMore" />,
     };
 
-    const ShowChilderen = <div>{dataShown || isDev ? children : ''}</div>;
+    const ShowChilderen = <>{dataShown || isDev ? children : ''}</>;
 
     const ExpansionPanelComponent = (
       <ExpansionPanel {...panelOptions}>
