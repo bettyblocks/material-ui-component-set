@@ -1,3 +1,10 @@
+## [1.209.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.209.0...v1.209.1) (2022-04-01)
+
+
+### Bug Fixes
+
+* infinite loading state in button ([0c170b9](https://github.com/bettyblocks/material-ui-component-set/commit/0c170b986cf266b3dc741095cfd578781bd2d0ac))
+
 # [1.209.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.208.2...v1.209.0) (2022-03-30)
 
 
