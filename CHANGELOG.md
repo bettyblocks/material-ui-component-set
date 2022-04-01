@@ -1,3 +1,11 @@
+# [1.209.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.208.2...v1.209.0) (2022-03-30)
+
+
+### Features
+
+* add show development step option ([d0de605](https://github.com/bettyblocks/material-ui-component-set/commit/d0de605f372a908f6d7725a1c49d01708923817d))
+* rename option to selected design step index ([acf92c7](https://github.com/bettyblocks/material-ui-component-set/commit/acf92c79d43f2cbfe82911ea4c97e5348a0c5a41))
+
 ## [1.208.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.208.1...v1.208.2) (2022-03-29)
 
 
