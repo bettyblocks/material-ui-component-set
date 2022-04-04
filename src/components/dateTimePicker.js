@@ -21,7 +21,7 @@
       helperText = [''],
       disableToolbar,
       disablePastDates,
-      autoClose,
+      closeOnSelect,
       hideLabel,
       customModelAttribute: customModelAttributeObj,
       use24HourClockDateTime,
@@ -205,7 +205,7 @@
         helperText={helper}
         disableToolbar={disableToolbar}
         disablePast={disablePastDates}
-        autoOk={autoClose}
+        autoOk={closeOnSelect}
         format={format}
         data-component={dataComponentAttributeValue}
         PopoverProps={{

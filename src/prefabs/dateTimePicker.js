@@ -50,8 +50,8 @@
         },
         {
           type: 'TOGGLE',
-          label: 'Auto close',
-          key: 'autoClose',
+          label: 'Close picker after select',
+          key: 'closeOnSelect',
           value: true,
         },
         {
