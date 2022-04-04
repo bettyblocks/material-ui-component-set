@@ -49,6 +49,12 @@
           value: false,
         },
         {
+          type: 'TOGGLE',
+          label: 'Auto close',
+          key: 'autoClose',
+          value: true,
+        },
+        {
           label: 'Language',
           key: 'locale',
           value: 'en',
