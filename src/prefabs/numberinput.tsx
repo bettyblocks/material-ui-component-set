@@ -21,7 +21,6 @@ const beforeCreate = ({
       supportedKinds={['INTEGER', 'PRICE']}
       actionVariableOption={actionVariableOption.key}
       labelOptionKey="label"
-      actionVariableType="INTEGER"
       nameOptionKey="actionVariableId"
       close={close}
       prefab={prefab}
