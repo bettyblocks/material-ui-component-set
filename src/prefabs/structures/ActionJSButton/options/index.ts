@@ -69,6 +69,13 @@ export const options = {
     configuration: { as: 'VISIBILITY', condition: showIfTrue('addTooltip') },
   }),
 
+  tooltipContent: variable('Tooltip Content', {
+    value: ['Tips'],
+    configuration: {
+      condition: showIfTrue('addTooltip'),
+    },
+  }),
+
   tooltipPlacement: dropdown(
     'Tooltip Placement',
     [
