@@ -36,7 +36,6 @@ const beforeCreate = ({
       actionVariableOption={actionVariableOption.key}
       labelOptionKey="label"
       nameOptionKey="actionVariableId"
-      actionVariableType="BOOLEAN"
       close={close}
       prefab={prefab}
       save={save}

@@ -20,7 +20,6 @@ const beforeCreate = ({
     <CreateFormInputWizard
       supportedKinds={['DECIMAL']}
       actionVariableOption={actionVariableOption.key}
-      actionVariableType="INTEGER"
       labelOptionKey="label"
       nameOptionKey="actionVariableId"
       close={close}
