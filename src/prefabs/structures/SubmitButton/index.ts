@@ -8,7 +8,7 @@ type OptionProducer = (key: string) => PrefabComponentOption;
 export interface Configuration {
   options?: Record<string, OptionProducer>;
 }
-export const Button = (
+export const SubmitButton = (
   config: Configuration,
   children: PrefabComponent[] = [],
 ) => {

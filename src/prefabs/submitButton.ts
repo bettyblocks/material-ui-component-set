@@ -1,6 +1,6 @@
 import { Icon, prefab } from '@betty-blocks/component-sdk';
 
-import { Button } from './structures/Button';
+import { SubmitButton } from './structures/SubmitButton';
 
 const attributes = {
   category: 'FORM',
@@ -9,5 +9,5 @@ const attributes = {
 };
 
 export default prefab('Submit Button', attributes, undefined, [
-  Button({}),
+  SubmitButton({}),
 ]);

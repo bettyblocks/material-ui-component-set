@@ -1,4 +1,9 @@
-import { buttongroup, toggle, variable } from '@betty-blocks/component-sdk';
+import {
+  buttongroup,
+  showIf,
+  toggle,
+  variable,
+} from '@betty-blocks/component-sdk';
 import { advanced } from './advanced';
 import { styles } from './styles';
 
@@ -14,7 +19,10 @@ export const options = {
       ['Submit', 'submit'],
       ['Reset', 'reset'],
     ],
-    { value: 'submit' },
+    {
+      value: 'submit',
+      configuration: { condition: showIf('type', 'EQ', 'never') },
+    },
   ),
 
   buttonText: variable('Button text', { value: ['Send'] }),
