@@ -1,3 +1,16 @@
+# [1.211.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.210.1...v1.211.0) (2022-04-07)
+
+
+### Bug Fixes
+
+* hide type option in submit button ([4f6db48](https://github.com/bettyblocks/material-ui-component-set/commit/4f6db48d1e56c52162c0777d377daaabf53b48bf))
+* sync actionJS button with button ([89d703b](https://github.com/bettyblocks/material-ui-component-set/commit/89d703b5a15151fd846b04efe2961ac0ce526f92))
+
+
+### Features
+
+* migrate button prefab to typescript ([7c8761d](https://github.com/bettyblocks/material-ui-component-set/commit/7c8761d613696bc546ebfc7a764e9b7e87fd8513))
+
 ## [1.210.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.210.0...v1.210.1) (2022-04-06)
 
 
