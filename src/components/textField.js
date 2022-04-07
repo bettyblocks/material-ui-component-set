@@ -65,9 +65,17 @@
       value: defaultValue = [],
       required: defaultRequired = false,
     } = customModelAttributeObj;
-    const [currentValue, setCurrentValue] = useState(
-      useText(defaultValue, { rawValue: true }),
-    );
+
+    const textValue = useText(defaultValue, { rawValue: true });
+
+    const [currentValue, setCurrentValue] = useState(textValue);
+
+    useEffect(() => {
+      if (!isDev) {
+        setCurrentValue(textValue);
+      }
+    }, [isDev, textValue]);
+
     const labelText = useText(label);
     const customModelAttribute = getCustomModelAttribute(
       customModelAttributeId,
