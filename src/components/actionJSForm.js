@@ -5,11 +5,11 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { actionId, modelId, filter } = options;
-    const { Form } = B;
+    const { Form, GetOne } = B;
 
     const [errors, setErrors] = useState([]);
 
-    const isDev = B.env !== 'prod';
+    const isDev = B.env === 'dev';
 
     if (isDev && children.length === 0) {
       return (
@@ -60,7 +60,7 @@
       );
     };
 
-    if (B.env !== 'prod') {
+    if (isDev) {
       return (
         <div>
           <FormComponent />
@@ -70,9 +70,9 @@
 
     if (modelId) {
       return (
-        <B.GetOne modelId={modelId} filter={filter}>
+        <GetOne modelId={modelId} filter={filter}>
           <FormComponent />
-        </B.GetOne>
+        </GetOne>
       );
     }
 

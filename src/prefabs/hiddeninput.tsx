@@ -26,6 +26,15 @@ const beforeCreate = ({
 
   return (
     <CreateFormInputWizard
+      supportedKinds={[
+        'BOOLEAN',
+        'DECIMAL',
+        'INTEGER',
+        'PRICE',
+        'SERIAL',
+        'STRING',
+        'TEXT',
+      ]}
       actionVariableOption={actionVariableOption.key}
       labelOptionKey="label"
       nameOptionKey="actionVariableId"

@@ -1,3 +1,65 @@
+# [1.211.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.210.1...v1.211.0) (2022-04-07)
+
+
+### Bug Fixes
+
+* hide type option in submit button ([4f6db48](https://github.com/bettyblocks/material-ui-component-set/commit/4f6db48d1e56c52162c0777d377daaabf53b48bf))
+* sync actionJS button with button ([89d703b](https://github.com/bettyblocks/material-ui-component-set/commit/89d703b5a15151fd846b04efe2961ac0ce526f92))
+
+
+### Features
+
+* migrate button prefab to typescript ([7c8761d](https://github.com/bettyblocks/material-ui-component-set/commit/7c8761d613696bc546ebfc7a764e9b7e87fd8513))
+
+## [1.210.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.210.0...v1.210.1) (2022-04-06)
+
+
+### Bug Fixes
+
+* hidden input can't select properties ([76530c0](https://github.com/bettyblocks/material-ui-component-set/commit/76530c07cba29bb6ee6bb6d5e58a9ce1c93975d2))
+* remove expressions as propertyKinds ([25ec2ca](https://github.com/bettyblocks/material-ui-component-set/commit/25ec2cae0e8cd2dad7f324d82de9c77da7b98e91))
+
+# [1.210.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.209.1...v1.210.0) (2022-04-06)
+
+
+### Bug Fixes
+
+* removed unused interaction ([74cf6f1](https://github.com/bettyblocks/material-ui-component-set/commit/74cf6f10164138b02f1652f6bbd95f9d3673dd8f))
+
+
+### Features
+
+* added create form v2 prefab ([2a74631](https://github.com/bettyblocks/material-ui-component-set/commit/2a74631e197aa545e59b0b118a0b5aa14b9caaec))
+
+## [1.209.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.209.0...v1.209.1) (2022-04-01)
+
+
+### Bug Fixes
+
+* infinite loading state in button ([0c170b9](https://github.com/bettyblocks/material-ui-component-set/commit/0c170b986cf266b3dc741095cfd578781bd2d0ac))
+
+# [1.209.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.208.2...v1.209.0) (2022-03-30)
+
+
+### Features
+
+* add show development step option ([d0de605](https://github.com/bettyblocks/material-ui-component-set/commit/d0de605f372a908f6d7725a1c49d01708923817d))
+* rename option to selected design step index ([acf92c7](https://github.com/bettyblocks/material-ui-component-set/commit/acf92c79d43f2cbfe82911ea4c97e5348a0c5a41))
+
+## [1.208.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.208.1...v1.208.2) (2022-03-29)
+
+
+### Bug Fixes
+
+* dev check ([8e134ae](https://github.com/bettyblocks/material-ui-component-set/commit/8e134ae54d5601150fae0411ffe7e870a631fcae))
+
+## [1.208.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.208.0...v1.208.1) (2022-03-29)
+
+
+### Bug Fixes
+
+* no model query on forms ([9606cd6](https://github.com/bettyblocks/material-ui-component-set/commit/9606cd6ef4c44d018df3f9817aa22405b0b93a1e))
+
 # [1.208.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.207.0...v1.208.0) (2022-03-24)
 
 

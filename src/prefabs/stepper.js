@@ -14,6 +14,12 @@
           value: '1',
         },
         {
+          type: 'NUMBER',
+          label: 'Selected design step index',
+          key: 'selectedDesignStepIndex',
+          value: '1',
+        },
+        {
           type: 'TOGGLE',
           label: 'Show all steps',
           key: 'allSteps',
