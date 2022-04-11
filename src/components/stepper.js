@@ -24,7 +24,6 @@
       buttonNext,
       buttonPrev,
       dataComponentAttribute,
-      disableNav,
     } = options;
 
     const isDev = env === 'dev';
