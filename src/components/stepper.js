@@ -24,6 +24,7 @@
       buttonNext,
       buttonPrev,
       dataComponentAttribute,
+      disableNav,
     } = options;
 
     const isDev = env === 'dev';
@@ -284,7 +285,8 @@
         },
       },
       stepButton: {
-        pointerEvents: isDev && 'none',
+        pointerEvents:
+          (({ options: { disableNav } }) => disableNav || isDev) && 'none',
       },
       mobileRoot: {
         backgroundColor: ({ options: { backgroundColor } }) => [

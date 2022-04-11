@@ -26,6 +26,12 @@
           value: false,
         },
         {
+          type: 'TOGGLE',
+          label: 'Disable navigation',
+          key: 'disableNav',
+          value: false,
+        },
+        {
           type: 'CUSTOM',
           label: 'Type',
           key: 'type',
