@@ -1,3 +1,10 @@
+# [1.212.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.211.0...v1.212.0) (2022-04-12)
+
+
+### Features
+
+* add tsx extention to nodemon ([6810381](https://github.com/bettyblocks/material-ui-component-set/commit/68103811ccc80fb494291898d67e77f7755a096f))
+
 # [1.211.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.210.1...v1.211.0) (2022-04-07)
 
 
