@@ -36,7 +36,7 @@ const attributes = {
   keywords: ['Form', 'input'],
 };
 
-export default prefab('Phone v2', attributes, beforeCreate, [
+export default prefab('Phone Beta', attributes, beforeCreate, [
   TextInput({ label: 'Phone', type: 'tel' }),
 ]);
 
