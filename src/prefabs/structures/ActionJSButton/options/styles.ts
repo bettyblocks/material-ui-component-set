@@ -28,16 +28,6 @@ export const styles = {
   ),
   fullWidth: toggle('Full width', { value: true }),
 
-  variant: buttongroup(
-    'Variant',
-    [
-      ['Standard', 'standard'],
-      ['Outlined', 'outlined'],
-      ['Filled', 'filled'],
-    ],
-    { value: 'outlined' },
-  ),
-
   adornmentIcon: icon('Icon', {
     value: '',
   }),

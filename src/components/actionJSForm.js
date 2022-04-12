@@ -1,5 +1,5 @@
 (() => ({
-  name: 'ActionJSForm',
+  name: 'Action Form Beta',
   type: 'CONTENT_COMPONENT',
   allowedTypes: ['FORM_COMPONENT'],
   orientation: 'HORIZONTAL',
