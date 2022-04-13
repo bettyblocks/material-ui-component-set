@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 (() => ({
   name: 'Box',
   type: 'CONTAINER_COMPONENT',
@@ -231,8 +230,8 @@
         backgroundImage: ({
           options: { backgroundUrl, backgroundFallbackUrl },
         }) => {
-          // eslint-disable-next-line react-hooks/rules-of-hooks
           const image =
+            // eslint-disable-next-line react-hooks/rules-of-hooks
             useText(backgroundUrl) || useText(backgroundFallbackUrl);
           return image && `url("${image}")`;
         },
