@@ -14,16 +14,6 @@ import { showOn } from '../../../../utils';
 export const styles = {
   fullWidth: toggle('Full width', { value: false }),
 
-  variant: buttongroup(
-    'Variant',
-    [
-      ['Standard', 'standard'],
-      ['Outlined', 'outlined'],
-      ['Filled', 'filled'],
-    ],
-    { value: 'outlined' },
-  ),
-
   icon: icon('Icon', {
     value: 'None',
   }),
