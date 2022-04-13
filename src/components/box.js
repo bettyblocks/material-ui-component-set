@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 (() => ({
   name: 'Box',
   type: 'CONTAINER_COMPONENT',
