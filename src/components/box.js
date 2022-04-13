@@ -13,15 +13,21 @@
       backgroundColor,
       borderColor,
       backgroundUrl,
+      backgroundFallbackUrl,
       dataComponentAttribute,
     } = options;
     const isDev = env === 'dev';
     const hasBackgroundColor = backgroundColor !== 'Transparent';
     const hasBorderColor = borderColor !== 'Transparent';
     const hasBackgroundImage = useText(backgroundUrl) !== '';
+    const hasBackgroundImageFallback = useText(backgroundFallbackUrl) !== '';
     const isEmpty = isDev && children.length === 0;
     const isPristine =
-      isEmpty && !hasBackgroundColor && !hasBorderColor && !hasBackgroundImage;
+      isEmpty &&
+      !hasBackgroundColor &&
+      !hasBorderColor &&
+      !hasBackgroundImage &&
+      !hasBackgroundImageFallback;
     const isFlex = alignment !== 'none' || valignment !== 'none';
     const opac = transparent ? 0 : 1;
     const [opacity, setOpacity] = useState(opac);
@@ -221,9 +227,12 @@
                 style.getColor(backgroundColor),
                 backgroundColorAlpha / 100,
               ),
-        backgroundImage: ({ options: { backgroundUrl } }) => {
+        backgroundImage: ({
+          options: { backgroundUrl, backgroundFallbackUrl },
+        }) => {
           // eslint-disable-next-line react-hooks/rules-of-hooks
-          const image = useText(backgroundUrl);
+          const image =
+            useText(backgroundUrl) || useText(backgroundFallbackUrl);
           return image && `url("${image}")`;
         },
         backgroundSize: ({ options: { backgroundSize } }) => backgroundSize,

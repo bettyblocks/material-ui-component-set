@@ -220,6 +220,20 @@
           },
         },
         {
+          value: [''],
+          label: 'Default background url',
+          key: 'backgroundFallbackUrl',
+          type: 'VARIABLE',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'backgroundOptions',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
           value: 'initial',
           label: 'Background size',
           key: 'backgroundSize',
