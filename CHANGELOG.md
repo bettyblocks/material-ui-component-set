@@ -1,3 +1,10 @@
+## [1.213.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.213.0...v1.213.1) (2022-04-14)
+
+
+### Bug Fixes
+
+* added selected design tab index option to page prefabs ([3f919ee](https://github.com/bettyblocks/material-ui-component-set/commit/3f919ee549bcfd8a039e07b50929f7342fa730e5))
+
 # [1.213.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.212.0...v1.213.0) (2022-04-13)
 
 
