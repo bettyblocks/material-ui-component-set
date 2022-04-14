@@ -59,6 +59,6 @@ const hooks = {
   $afterDelete: [deleteActionVariable],
 };
 
-export default prefab('Hidden v2', attributes, beforeCreate, [
-  component('ActionJSHiddenInput', { options, ...hooks }, []),
+export default prefab('Hidden Beta', attributes, beforeCreate, [
+  component('Hidden Input Beta', { options, ...hooks }, []),
 ]);
