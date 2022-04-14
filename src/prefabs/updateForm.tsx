@@ -37,6 +37,6 @@ const options = {
   filter: filter('Filter', { configuration: { dependsOn: 'modelId' } }),
 };
 
-export default prefab('Update Form v2', attributes, beforeCreate, [
+export default prefab('Update Form Beta', attributes, beforeCreate, [
   component('Action Form Beta', { options }, []),
 ]);
