@@ -13,14 +13,14 @@
       backgroundColor,
       borderColor,
       backgroundUrl,
-      backgroundFallbackUrl,
+      defaultBackgroundUrl,
       dataComponentAttribute,
     } = options;
     const isDev = env === 'dev';
     const hasBackgroundColor = backgroundColor !== 'Transparent';
     const hasBorderColor = borderColor !== 'Transparent';
     const hasBackgroundImage = useText(backgroundUrl) !== '';
-    const hasBackgroundImageFallback = useText(backgroundFallbackUrl) !== '';
+    const hasBackgroundImageFallback = useText(defaultBackgroundUrl) !== '';
     const isEmpty = isDev && children.length === 0;
     const isPristine =
       isEmpty &&
@@ -228,11 +228,11 @@
                 backgroundColorAlpha / 100,
               ),
         backgroundImage: ({
-          options: { backgroundUrl, backgroundFallbackUrl },
+          options: { backgroundUrl, defaultBackgroundUrl },
         }) => {
           const image =
             // eslint-disable-next-line react-hooks/rules-of-hooks
-            useText(backgroundUrl) || useText(backgroundFallbackUrl);
+            useText(backgroundUrl) || useText(defaultBackgroundUrl);
           return image && `url("${image}")`;
         },
         backgroundSize: ({ options: { backgroundSize } }) => backgroundSize,

@@ -222,7 +222,7 @@
         {
           value: [''],
           label: 'Default background url',
-          key: 'backgroundFallbackUrl',
+          key: 'defaultBackgroundUrl',
           type: 'VARIABLE',
           configuration: {
             condition: {
