@@ -4881,6 +4881,12 @@
                                             type: 'NUMBER',
                                           },
                                           {
+                                            label: 'Selected design tab index',
+                                            key: 'selectedDesignTabIndex',
+                                            value: '1',
+                                            type: 'NUMBER',
+                                          },
+                                          {
                                             label: 'Show all tabs',
                                             key: 'showAllTabs',
                                             value: false,
