@@ -88,7 +88,7 @@ export const options = {
       ['Bottom', 'bottom'],
       ['Bottom End', 'bottom-end'],
     ],
-    { configuration: { condition: showIfTrue('addTooltip') } },
+    { value: 'bottom', configuration: { condition: showIfTrue('addTooltip') } },
   ),
 
   tooltipBackground: color('Tooltip Background', {
