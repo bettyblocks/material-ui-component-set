@@ -2176,8 +2176,14 @@
                                         },
                                       },
                                       {
+                                        label: 'Icon',
+                                        key: 'icon',
+                                        value: 'None',
+                                        type: 'ICON',
+                                      },
+                                      {
                                         value: 'medium',
-                                        label: 'Size',
+                                        label: 'Icon size',
                                         key: 'size',
                                         type: 'CUSTOM',
                                         configuration: {
@@ -2185,19 +2191,16 @@
                                           dataType: 'string',
                                           allowedInput: [
                                             { name: 'Large', value: 'large' },
-                                            {
-                                              name: 'Medium',
-                                              value: 'medium',
-                                            },
+                                            { name: 'Medium', value: 'medium' },
                                             { name: 'Small', value: 'small' },
                                           ],
+                                          condition: {
+                                            type: 'HIDE',
+                                            option: 'icon',
+                                            comparator: 'EQ',
+                                            value: 'None',
+                                          },
                                         },
-                                      },
-                                      {
-                                        label: 'Icon',
-                                        key: 'icon',
-                                        value: 'None',
-                                        type: 'ICON',
                                       },
                                       {
                                         type: 'CUSTOM',
@@ -2220,27 +2223,7 @@
                                         },
                                       },
                                       {
-                                        type: 'COLOR',
-                                        label: 'Text color',
-                                        key: 'textColor',
-                                        value: 'White',
-                                        configuration: {
-                                          condition: {
-                                            type: 'HIDE',
-                                            option: 'variant',
-                                            comparator: 'EQ',
-                                            value: 'icon',
-                                          },
-                                        },
-                                      },
-                                      {
-                                        type: 'COLOR',
-                                        label: 'Color',
-                                        key: 'background',
-                                        value: 'Primary',
-                                      },
-                                      {
-                                        value: ['0rem', 'M', '0rem', 'M'],
+                                        value: ['0rem', '0rem', '0rem', '0rem'],
                                         label: 'Outer space',
                                         key: 'outerSpacing',
                                         type: 'SIZES',
@@ -2546,8 +2529,14 @@
                                         },
                                       },
                                       {
+                                        label: 'Icon',
+                                        key: 'icon',
+                                        value: 'None',
+                                        type: 'ICON',
+                                      },
+                                      {
                                         value: 'medium',
-                                        label: 'Size',
+                                        label: 'Icon size',
                                         key: 'size',
                                         type: 'CUSTOM',
                                         configuration: {
@@ -2555,19 +2544,16 @@
                                           dataType: 'string',
                                           allowedInput: [
                                             { name: 'Large', value: 'large' },
-                                            {
-                                              name: 'Medium',
-                                              value: 'medium',
-                                            },
+                                            { name: 'Medium', value: 'medium' },
                                             { name: 'Small', value: 'small' },
                                           ],
+                                          condition: {
+                                            type: 'HIDE',
+                                            option: 'icon',
+                                            comparator: 'EQ',
+                                            value: 'None',
+                                          },
                                         },
-                                      },
-                                      {
-                                        label: 'Icon',
-                                        key: 'icon',
-                                        value: 'None',
-                                        type: 'ICON',
                                       },
                                       {
                                         type: 'CUSTOM',
@@ -2590,27 +2576,7 @@
                                         },
                                       },
                                       {
-                                        type: 'COLOR',
-                                        label: 'Text color',
-                                        key: 'textColor',
-                                        value: 'White',
-                                        configuration: {
-                                          condition: {
-                                            type: 'HIDE',
-                                            option: 'variant',
-                                            comparator: 'EQ',
-                                            value: 'icon',
-                                          },
-                                        },
-                                      },
-                                      {
-                                        type: 'COLOR',
-                                        label: 'Color',
-                                        key: 'background',
-                                        value: 'Primary',
-                                      },
-                                      {
-                                        value: ['0rem', 'M', '0rem', 'M'],
+                                        value: ['0rem', '0rem', '0rem', '0rem'],
                                         label: 'Outer space',
                                         key: 'outerSpacing',
                                         type: 'SIZES',
@@ -3475,7 +3441,7 @@
                                     },
                                   },
                                   {
-                                    value: ['0rem', '0rem', '0rem', '0rem'],
+                                    value: ['0rem', '0rem', 'M', '0rem'],
                                     label: 'Outer space',
                                     key: 'outerSpacing',
                                     type: 'SIZES',
@@ -3514,7 +3480,6 @@
                                       ],
                                     },
                                   },
-
                                   {
                                     value: '',
                                     label: 'Page',
@@ -3616,57 +3581,16 @@
                                 descendants: [],
                               },
                               {
-                                name: 'Divider',
-                                options: [
-                                  {
-                                    value: 'S',
-                                    label: 'Thickness',
-                                    key: 'thickness',
-                                    type: 'SIZE',
-                                  },
-                                  {
-                                    value: 'Light',
-                                    label: 'Color',
-                                    key: 'color',
-                                    type: 'COLOR',
-                                  },
-                                  {
-                                    value: ['M', '0rem', 'M', '0rem'],
-                                    label: 'Outer space',
-                                    key: 'outerSpacing',
-                                    type: 'SIZES',
-                                  },
-                                  {
-                                    value: false,
-                                    label: 'Advanced settings',
-                                    key: 'advancedSettings',
-                                    type: 'TOGGLE',
-                                  },
-                                  {
-                                    type: 'VARIABLE',
-                                    label: 'Test attribute',
-                                    key: 'dataComponentAttribute',
-                                    value: ['Divider'],
-                                    configuration: {
-                                      condition: {
-                                        type: 'SHOW',
-                                        option: 'advancedSettings',
-                                        comparator: 'EQ',
-                                        value: true,
-                                      },
-                                    },
-                                  },
-                                ],
-                                descendants: [],
-                              },
-                              {
                                 name: 'TextField',
                                 ref: {
                                   id: '#searchField',
                                 },
                                 options: [
                                   {
-                                    value: { label: ['Search'], value: [] },
+                                    value: {
+                                      label: ['Search project'],
+                                      value: [],
+                                    },
                                     label: 'Label',
                                     key: 'customModelAttribute',
                                     type: 'CUSTOM_MODEL_ATTRIBUTE',
@@ -4469,7 +4393,6 @@
                                               ],
                                             },
                                           },
-
                                           {
                                             value: '',
                                             label: 'Page',
@@ -4646,7 +4569,7 @@
                                   {
                                     label: 'Pagination',
                                     key: 'pagination',
-                                    value: 'never',
+                                    value: 'whenNeeded',
                                     type: 'CUSTOM',
                                     configuration: {
                                       as: 'BUTTONGROUP',
@@ -4663,7 +4586,7 @@
                                     },
                                   },
                                   {
-                                    value: '12',
+                                    value: '8',
                                     label: 'Rows per page (max 50)',
                                     key: 'take',
                                     type: 'NUMBER',
@@ -4672,7 +4595,7 @@
                                     },
                                   },
                                   {
-                                    value: '6',
+                                    value: '8',
                                     label: 'Placeholder rows',
                                     key: 'placeholderTake',
                                     type: 'NUMBER',
@@ -5335,7 +5258,7 @@
                                             type: 'CUSTOM',
                                             label: 'Alignment',
                                             key: 'alignment',
-                                            value: 'flex-end',
+                                            value: 'flex-start',
                                             configuration: {
                                               as: 'BUTTONGROUP',
                                               dataType: 'string',
@@ -5422,7 +5345,7 @@
                                                 type: 'VARIABLE',
                                                 label: 'Button text',
                                                 key: 'buttonText',
-                                                value: [''],
+                                                value: ['View project'],
                                               },
                                               {
                                                 type: 'CUSTOM',
@@ -5505,6 +5428,14 @@
                                                 label: 'Full width',
                                                 key: 'fullWidth',
                                                 type: 'TOGGLE',
+                                                configuration: {
+                                                  condition: {
+                                                    type: 'HIDE',
+                                                    option: 'variant',
+                                                    comparator: 'EQ',
+                                                    value: 'icon',
+                                                  },
+                                                },
                                               },
                                               {
                                                 label: 'Icon',
@@ -5514,7 +5445,7 @@
                                               },
                                               {
                                                 value: 'medium',
-                                                label: 'Size',
+                                                label: 'Icon size',
                                                 key: 'size',
                                                 type: 'CUSTOM',
                                                 configuration: {
@@ -5546,7 +5477,7 @@
                                                 type: 'CUSTOM',
                                                 label: 'Icon position',
                                                 key: 'iconPosition',
-                                                value: 'start',
+                                                value: 'end',
                                                 configuration: {
                                                   as: 'BUTTONGROUP',
                                                   dataType: 'string',
