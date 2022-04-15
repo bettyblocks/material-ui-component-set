@@ -48,6 +48,6 @@ const options = {
   actionId: option('ACTION_JS', { label: 'Action', value: '' }),
 };
 
-export default prefab('Login Form v2', attributes, beforeCreate, [
-  component('ActionJSForm', { options, ref: { id: '#formId' } }, []),
+export default prefab('Login Form Beta', attributes, beforeCreate, [
+  component('Action Form Beta', { options, ref: { id: '#formId' } }, []),
 ]);

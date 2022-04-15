@@ -38,6 +38,6 @@ const attributes = {
 
 const pattern = '[0-9]+(\\.[0-9][0-9]?)?';
 
-export default prefab('Price v2', attributes, beforeCreate, [
+export default prefab('Price Beta', attributes, beforeCreate, [
   PriceInput({ label: 'Price', type: 'decimal', pattern }),
 ]);

@@ -1,5 +1,5 @@
 (() => ({
-  name: 'ActionJSHiddenInput',
+  name: 'Hidden Input Beta',
   type: 'FORM_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
