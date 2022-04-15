@@ -20,9 +20,10 @@
     const onSubmitSuccess = (response) => {
       /* eslint-disable-next-line */
       if (response.errors) {
-        const messages = response.errors.flatMap((error) =>
-          error.message.errors.map((inner) => inner.message),
-        );
+        const messages = response.errors.flatMap((error) => {
+          if (!error || !error.messages || !error.messages.errors) return [];
+          return error.message.errors.map((inner) => inner.message);
+        });
 
         B.triggerEvent('onActionError', new Error(messages.join(', ')));
 
