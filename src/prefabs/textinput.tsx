@@ -38,9 +38,7 @@ const attributes = {
   keywords: ['Form', 'input'],
 };
 
-const pattern = '[A-Za-z0-9\\.,;:!?()%&-\'\"\/ ]+$';
-
 export default prefab('Text Field Beta', attributes, beforeCreate, [
-  TextInput({ label: 'Textfield', type: 'text', pattern }),
+  TextInput({ label: 'Textfield', type: 'text' }),
 ]);
 
