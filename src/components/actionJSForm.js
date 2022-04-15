@@ -17,7 +17,7 @@
       );
     }
 
-    const onSubmitSuccess = (response) => {
+    const onActionSuccess = (response) => {
       /* eslint-disable-next-line */
       if (response.errors) {
         const messages = response.errors.flatMap((error) => {
@@ -38,17 +38,27 @@
       setErrors([]);
     };
 
-    const onSubmitError = (error) => {
+    const onActionError = (error) => {
       setErrors([error.message || error.toString()]);
       B.triggerEvent('onActionError', error);
+    };
+
+    const onActionDone = () => {
+      B.triggerEvent('onActionDone');
+    };
+
+    const onActionLoad = (loading) => {
+      B.triggerEvent('onActionLoad', loading);
     };
 
     const FormComponent = function () {
       return (
         <Form
           actionId={actionId}
-          onSubmitSuccess={onSubmitSuccess}
-          onSubmitError={onSubmitError}
+          onActionLoad={onActionLoad}
+          onActionDone={onActionDone}
+          onActionSuccess={onActionSuccess}
+          onActionError={onActionError}
         >
           <fieldset className={classes.fieldset}>{children}</fieldset>
           <ul>
