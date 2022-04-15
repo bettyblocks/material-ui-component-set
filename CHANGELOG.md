@@ -1,3 +1,18 @@
+# [1.216.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.215.0...v1.216.0) (2022-04-15)
+
+
+### Bug Fixes
+
+* lint error ([3ee3226](https://github.com/bettyblocks/material-ui-component-set/commit/3ee322672244cdd0925d92ac1b0e380f43f9d108))
+* renamed update component name in updateForm ([23de8ab](https://github.com/bettyblocks/material-ui-component-set/commit/23de8ab536672e27fdcd2d454fa185315c516289))
+* renamed update form ([27c3a06](https://github.com/bettyblocks/material-ui-component-set/commit/27c3a06e54b53bd58ea7e8776faec5d64441552b))
+* wrong component name ([9206cac](https://github.com/bettyblocks/material-ui-component-set/commit/9206cac1782f2651a2432a138ac414b1c160aca9))
+
+
+### Features
+
+* added update form prefab ([6dee659](https://github.com/bettyblocks/material-ui-component-set/commit/6dee659cea4cf9f6362a085961bb0af70d4e1899))
+
 # [1.215.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.214.0...v1.215.0) (2022-04-15)
 
 
