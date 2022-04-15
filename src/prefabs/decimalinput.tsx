@@ -35,7 +35,7 @@ const attributes = {
   keywords: ['Form', 'input'],
 };
 
-export default prefab('Decimal v2', attributes, beforeCreate, [
+export default prefab('Decimal Beta', attributes, beforeCreate, [
   TextInput({
     label: 'Decimal',
     type: 'decimal',

@@ -1,40 +1,82 @@
 (() => ({
-  name: 'ActionJSButton',
+  name: 'Action Button Beta',
   type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'VERTICAL',
   styleType: 'BUTTON',
   jsx: (() => {
-    const { Tooltip } = window.MaterialUI.Core;
+    const { CircularProgress, Tooltip, Link } = window.MaterialUI.Core;
     const {
-      actionId,
-      property,
-      addTooltip,
-      buttonText,
-      dataComponentAttribute,
       disabled,
-      hasVisibleTooltip,
+      size,
+      type,
       icon,
       iconPosition,
-      size,
-      tooltipContent = [''],
-      tooltipPlacement,
-      type,
+      linkType,
+      linkTo,
+      linkToExternal,
+      linkTarget,
       visible,
+      actionId,
+      buttonText,
+      addTooltip,
+      hasVisibleTooltip,
+      tooltipContent,
+      tooltipPlacement,
+      dataComponentAttribute,
+      property,
     } = options;
-    const { env, getProperty, useProperty, useActionJs, useText, Icon } = B;
+    const {
+      env,
+      useText,
+      useActionJs,
+      getProperty,
+      useProperty,
+      useEndpoint,
+      Icon,
+    } = B;
     const isDev = env === 'dev';
+    const isAction = linkType === 'action' || !!actionId;
+    const linkToExternalVariable =
+      (linkToExternal && useText(linkToExternal)) || '';
+    const linkToInternalVariable =
+      linkTo && linkTo.id !== '' && useEndpoint(linkTo);
+    const hasInteralLink =
+      linkType === 'internal' && linkTo && linkTo.id !== '';
     const buttonContent = useText(buttonText);
     const tooltipText = useText(tooltipContent);
     const [isVisible, setIsVisible] = useState(visible);
+    const [isLoading, setIsLoading] = useState(false);
     const [isOpen, setIsOpen] = useState(hasVisibleTooltip);
     const [, setOptions] = useOptions();
-    const [isDisabled] = useState(disabled);
+    const [isDisabled, setIsDisabled] = useState(disabled);
 
     const [callActionJs] = useActionJs(actionId);
 
     const prop = !isDev && property && getProperty(property);
     const propValue = !isDev && property && useProperty(property.id);
+
+    const actionCallback = () => {
+      setIsLoading(true);
+      callActionJs({
+        ...(prop
+          ? {
+              variables: {
+                input: {
+                  [prop.name]: propValue,
+                },
+              },
+            }
+          : {}),
+      })
+        .then((response) => {
+          B.triggerEvent('onActionSuccess', response.data.action);
+        })
+        .catch((error) => {
+          B.triggerEvent('onActionError', error);
+        })
+        .finally(() => setIsLoading(false));
+    };
 
     useEffect(() => {
       setIsVisible(visible);
@@ -49,6 +91,41 @@
       [isDisabled],
     );
 
+    useEffect(() => {
+      B.defineFunction('Show', () => setIsVisible(true));
+      B.defineFunction('Hide', () => setIsVisible(false));
+      B.defineFunction('Show/Hide', () => setIsVisible((s) => !s));
+      B.defineFunction('Toggle loading state', () => setIsLoading((s) => !s));
+      B.defineFunction('Enable', () => setIsDisabled(false));
+      B.defineFunction('Disable', () => setIsDisabled(true));
+
+      if (isLoading) {
+        B.triggerEvent('onActionLoad', isLoading);
+      }
+    }, [isLoading]);
+
+    const getExternalHref = (config) => {
+      if (config.disabled) {
+        return undefined;
+      }
+      if (config.linkToExternal && config.linkToExternal.id !== '') {
+        return config.linkToExternalVariable;
+      }
+      return undefined;
+    };
+
+    const getInternalHref = (config) => {
+      if (config.disabled) {
+        return undefined;
+      }
+      if (config.linkTo && config.linkTo.id !== '') {
+        return config.linkToInternalVariable;
+      }
+      return undefined;
+    };
+
+    const showIndicator = isLoading;
+
     const emptySpace = () => {
       if (icon === 'None') {
         return '\xA0';
@@ -57,28 +134,47 @@
     };
 
     const buttonProps = {
-      disabled,
+      disabled: disabled || isLoading,
       tabIndex: isDev ? -1 : undefined,
       onClick: (event) => {
         event.stopPropagation();
-
-        if (actionId) {
-          callActionJs({
-            ...(prop
-              ? {
-                  variables: {
-                    input: {
-                      [prop.name]: propValue,
-                    },
-                  },
-                }
-              : {}),
-          });
-        }
+        actionCallback();
       },
       role: 'button',
       type: isDev ? 'button' : type,
+      endpoint:
+        linkType === 'internal' && linkTo && linkTo.id ? linkTo : undefined,
       'data-component': useText(dataComponentAttribute) || 'Button',
+    };
+
+    const targetProps = {
+      target: linkTarget,
+      rel: linkTarget === '_blank' ? 'noopener' : '',
+      'data-component': useText(dataComponentAttribute) || 'Button',
+    };
+
+    const anchorProps = {
+      ...targetProps,
+      href: getExternalHref({
+        disabled,
+        linkToExternal,
+        linkToExternalVariable,
+      }),
+      tabIndex: isDev ? -1 : undefined,
+      type: isDev ? 'button' : type,
+      endpoint:
+        linkType === 'internal' && linkTo && linkTo.id ? linkTo : undefined,
+      onClick: (event) => {
+        event.stopPropagation();
+        actionCallback();
+      },
+    };
+
+    const linkProps = {
+      ...targetProps,
+      href: getInternalHref({ linkTo, linkToInternalVariable, disabled }),
+      component: hasInteralLink ? B.Link : undefined,
+      endpoint: hasInteralLink ? linkTo : undefined,
     };
 
     const ButtonContent = (
@@ -108,9 +204,39 @@
               <Icon name={icon} fontSize={size} />
             </span>
           )}
+          {showIndicator && (
+            <CircularProgress size={16} className={classes.loader} />
+          )}
         </span>
       </div>
     );
+
+    const handleClick = (e) => {
+      e.stopPropagation();
+    };
+
+    const LinkComponent =
+      linkType === 'internal' ? (
+        <Link
+          className={classes.linkComponent}
+          {...linkProps}
+          underline="none"
+          onClick={handleClick}
+        >
+          {ButtonContent}
+        </Link>
+      ) : (
+        <a
+          className={classes.linkComponent}
+          {...anchorProps}
+          onClick={handleClick}
+          onKeyUp={handleClick}
+          role="button"
+          tabIndex="0"
+        >
+          {ButtonContent}
+        </a>
+      );
 
     const ButtonElement = (
       <button type="button" className={classes.button} {...buttonProps}>
@@ -118,7 +244,8 @@
       </button>
     );
 
-    const ButtonComponent = type === 'submit' || ButtonElement;
+    const ButtonComponent =
+      type === 'submit' || isAction ? ButtonElement : LinkComponent;
 
     let tooltipProps = {
       title: tooltipText,
