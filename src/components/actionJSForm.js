@@ -7,8 +7,6 @@
     const { actionId, modelId, filter } = options;
     const { Form, GetOne } = B;
 
-    const [errors, setErrors] = useState([]);
-
     const isDev = B.env === 'dev';
 
     if (isDev && children.length === 0) {
@@ -27,19 +25,17 @@
 
         B.triggerEvent('onActionError', new Error(messages.join(', ')));
 
-        setErrors(messages);
+        console.log('Errors: ', messages.join('\n   '));
         return;
       }
 
       const event = response.data.action.results;
 
       B.triggerEvent('onActionSuccess', event);
-
-      setErrors([]);
     };
 
     const onActionError = (error) => {
-      setErrors([error.message || error.toString()]);
+      console.error('Errors: %s', [error.message || error.toString()]);
       B.triggerEvent('onActionError', error);
     };
 
@@ -61,12 +57,6 @@
           onActionError={onActionError}
         >
           <fieldset className={classes.fieldset}>{children}</fieldset>
-          <ul>
-            {errors.map((error) => (
-              // eslint-disable-next-line react/jsx-key
-              <li>{error}</li>
-            ))}
-          </ul>
         </Form>
       );
     };
