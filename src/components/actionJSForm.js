@@ -44,7 +44,7 @@
     };
 
     const onActionLoad = (loading) => {
-      B.triggerEvent('onActionLoad', loading);
+      if (loading) B.triggerEvent('onActionLoad', loading);
     };
 
     const FormComponent = function () {
