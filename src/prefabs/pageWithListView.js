@@ -2075,7 +2075,7 @@
                                         type: 'VARIABLE',
                                         label: 'Button text',
                                         key: 'buttonText',
-                                        value: ['Menu 1'],
+                                        value: ['Projects 1'],
                                         configuration: {
                                           condition: {
                                             type: 'HIDE',
@@ -2196,7 +2196,7 @@
                                       {
                                         label: 'Icon',
                                         key: 'icon',
-                                        value: 'None',
+                                        value: 'Archive',
                                         type: 'ICON',
                                       },
                                       {
@@ -2445,7 +2445,7 @@
                                         type: 'VARIABLE',
                                         label: 'Button text',
                                         key: 'buttonText',
-                                        value: ['Menu 2'],
+                                        value: ['Tasks'],
                                         configuration: {
                                           condition: {
                                             type: 'HIDE',
@@ -2566,7 +2566,7 @@
                                       {
                                         label: 'Icon',
                                         key: 'icon',
-                                        value: 'None',
+                                        value: 'Assignment',
                                         type: 'ICON',
                                       },
                                       {
@@ -2610,7 +2610,747 @@
                                         value: 'Primary',
                                       },
                                       {
-                                        value: ['0rem', '0rem', '0rem', 'M'],
+                                        value: ['0rem', 'M', '0rem', 'M'],
+                                        label: 'Outer space',
+                                        key: 'outerSpacing',
+                                        type: 'SIZES',
+                                      },
+                                      {
+                                        label: 'Disabled',
+                                        key: 'disabled',
+                                        value: false,
+                                        type: 'TOGGLE',
+                                      },
+                                      {
+                                        label: 'Add Tooltip',
+                                        key: 'addTooltip',
+                                        value: false,
+                                        type: 'TOGGLE',
+                                      },
+                                      {
+                                        label: 'Toggle tooltip visibility',
+                                        key: 'hasVisibleTooltip',
+                                        value: true,
+                                        type: 'TOGGLE',
+                                        configuration: {
+                                          as: 'VISIBILITY',
+                                          condition: {
+                                            type: 'SHOW',
+                                            option: 'addTooltip',
+                                            comparator: 'EQ',
+                                            value: true,
+                                          },
+                                        },
+                                      },
+                                      {
+                                        type: 'VARIABLE',
+                                        label: 'Tooltip Content',
+                                        key: 'tooltipContent',
+                                        value: ['Tips'],
+                                        configuration: {
+                                          condition: {
+                                            type: 'SHOW',
+                                            option: 'addTooltip',
+                                            comparator: 'EQ',
+                                            value: true,
+                                          },
+                                        },
+                                      },
+                                      {
+                                        label: 'Tooltip Placement',
+                                        key: 'tooltipPlacement',
+                                        value: 'bottom',
+                                        type: 'CUSTOM',
+                                        configuration: {
+                                          as: 'DROPDOWN',
+                                          dataType: 'string',
+                                          allowedInput: [
+                                            {
+                                              name: 'Top Start',
+                                              value: 'top-start',
+                                            },
+                                            {
+                                              name: 'Top',
+                                              value: 'top',
+                                            },
+                                            {
+                                              name: 'Top End',
+                                              value: 'top-end',
+                                            },
+                                            {
+                                              name: 'Right',
+                                              value: 'right',
+                                            },
+                                            {
+                                              name: 'Left',
+                                              value: 'left',
+                                            },
+                                            {
+                                              name: 'Botttom Start',
+                                              value: 'bottom-start',
+                                            },
+                                            {
+                                              name: 'Bottom',
+                                              value: 'bottom',
+                                            },
+                                            {
+                                              name: 'Bottom End',
+                                              value: 'bottom-end',
+                                            },
+                                          ],
+                                          condition: {
+                                            type: 'SHOW',
+                                            option: 'addTooltip',
+                                            comparator: 'EQ',
+                                            value: true,
+                                          },
+                                        },
+                                      },
+                                      {
+                                        type: 'COLOR',
+                                        label: 'Tooltip Background',
+                                        key: 'tooltipBackground',
+                                        value: 'Medium',
+                                        configuration: {
+                                          condition: {
+                                            type: 'SHOW',
+                                            option: 'addTooltip',
+                                            comparator: 'EQ',
+                                            value: true,
+                                          },
+                                        },
+                                      },
+                                      {
+                                        type: 'COLOR',
+                                        label: 'Tooltip Text',
+                                        key: 'tooltipText',
+                                        value: 'Black',
+                                        configuration: {
+                                          condition: {
+                                            type: 'SHOW',
+                                            option: 'addTooltip',
+                                            comparator: 'EQ',
+                                            value: true,
+                                          },
+                                        },
+                                      },
+                                      {
+                                        value: false,
+                                        label: 'Advanced settings',
+                                        key: 'advancedSettings',
+                                        type: 'TOGGLE',
+                                      },
+                                      {
+                                        type: 'VARIABLE',
+                                        label: 'Test attribute',
+                                        key: 'dataComponentAttribute',
+                                        value: ['Button'],
+                                        configuration: {
+                                          condition: {
+                                            type: 'SHOW',
+                                            option: 'advancedSettings',
+                                            comparator: 'EQ',
+                                            value: true,
+                                          },
+                                        },
+                                      },
+                                    ],
+                                    descendants: [],
+                                  },
+                                  {
+                                    name: 'Button',
+                                    style: {
+                                      overwrite: {
+                                        backgroundColor: {
+                                          type: 'STATIC',
+                                          value: 'transparent',
+                                        },
+                                        boxShadow: 'none',
+                                        color: {
+                                          type: 'THEME_COLOR',
+                                          value: 'white',
+                                        },
+                                        fontFamily: 'Roboto',
+                                        fontSize: '0.875rem',
+                                        fontStyle: 'none',
+                                        fontWeight: '400',
+                                        padding: ['0rem', '0rem'],
+                                        textDecoration: 'none',
+                                        textTransform: 'none',
+                                      },
+                                    },
+                                    options: [
+                                      {
+                                        label: 'Toggle visibility',
+                                        key: 'visible',
+                                        value: true,
+                                        type: 'TOGGLE',
+                                        configuration: {
+                                          as: 'VISIBILITY',
+                                        },
+                                      },
+                                      {
+                                        type: 'CUSTOM',
+                                        label: 'variant',
+                                        key: 'variant',
+                                        value: 'text',
+                                        configuration: {
+                                          as: 'BUTTONGROUP',
+                                          dataType: 'string',
+                                          allowedInput: [
+                                            { name: 'Text', value: 'text' },
+                                            {
+                                              name: 'Outlined',
+                                              value: 'outlined',
+                                            },
+                                            {
+                                              name: 'Contain',
+                                              value: 'contained',
+                                            },
+                                            { name: 'Icon', value: 'icon' },
+                                          ],
+                                        },
+                                      },
+                                      {
+                                        type: 'VARIABLE',
+                                        label: 'Button text',
+                                        key: 'buttonText',
+                                        value: ['Events'],
+                                        configuration: {
+                                          condition: {
+                                            type: 'HIDE',
+                                            option: 'variant',
+                                            comparator: 'EQ',
+                                            value: 'icon',
+                                          },
+                                        },
+                                      },
+                                      {
+                                        type: 'CUSTOM',
+                                        label: 'Link to',
+                                        key: 'linkType',
+                                        value: 'internal',
+                                        configuration: {
+                                          as: 'BUTTONGROUP',
+                                          dataType: 'string',
+                                          allowedInput: [
+                                            {
+                                              name: 'Internal page',
+                                              value: 'internal',
+                                            },
+                                            {
+                                              name: 'External page',
+                                              value: 'external',
+                                            },
+                                          ],
+                                        },
+                                      },
+                                      {
+                                        value: '',
+                                        label: 'Page',
+                                        key: 'linkTo',
+                                        type: 'ENDPOINT',
+                                        configuration: {
+                                          condition: {
+                                            type: 'SHOW',
+                                            option: 'linkType',
+                                            comparator: 'EQ',
+                                            value: 'internal',
+                                          },
+                                        },
+                                      },
+                                      {
+                                        value: [''],
+                                        label: 'URL',
+                                        key: 'linkToExternal',
+                                        type: 'VARIABLE',
+                                        configuration: {
+                                          placeholder:
+                                            'Starts with https:// or http://',
+                                          condition: {
+                                            type: 'SHOW',
+                                            option: 'linkType',
+                                            comparator: 'EQ',
+                                            value: 'external',
+                                          },
+                                        },
+                                      },
+                                      {
+                                        value: '_self',
+                                        label: 'Open in',
+                                        key: 'openLinkToExternal',
+                                        type: 'CUSTOM',
+                                        configuration: {
+                                          condition: {
+                                            type: 'SHOW',
+                                            option: 'linkType',
+                                            comparator: 'EQ',
+                                            value: 'external',
+                                          },
+                                          as: 'BUTTONGROUP',
+                                          dataType: 'string',
+                                          allowedInput: [
+                                            {
+                                              name: 'Current Tab',
+                                              value: '_self',
+                                            },
+                                            {
+                                              name: 'New Tab',
+                                              value: '_blank',
+                                            },
+                                          ],
+                                        },
+                                      },
+                                      {
+                                        value: false,
+                                        label: 'Full width',
+                                        key: 'fullWidth',
+                                        type: 'TOGGLE',
+                                        configuration: {
+                                          condition: {
+                                            type: 'HIDE',
+                                            option: 'variant',
+                                            comparator: 'EQ',
+                                            value: 'icon',
+                                          },
+                                        },
+                                      },
+                                      {
+                                        value: 'medium',
+                                        label: 'Size',
+                                        key: 'size',
+                                        type: 'CUSTOM',
+                                        configuration: {
+                                          as: 'BUTTONGROUP',
+                                          dataType: 'string',
+                                          allowedInput: [
+                                            { name: 'Large', value: 'large' },
+                                            {
+                                              name: 'Medium',
+                                              value: 'medium',
+                                            },
+                                            { name: 'Small', value: 'small' },
+                                          ],
+                                        },
+                                      },
+                                      {
+                                        label: 'Icon',
+                                        key: 'icon',
+                                        value: 'CalendarToday',
+                                        type: 'ICON',
+                                      },
+                                      {
+                                        type: 'CUSTOM',
+                                        label: 'Icon position',
+                                        key: 'iconPosition',
+                                        value: 'start',
+                                        configuration: {
+                                          as: 'BUTTONGROUP',
+                                          dataType: 'string',
+                                          condition: {
+                                            type: 'HIDE',
+                                            option: 'variant',
+                                            comparator: 'EQ',
+                                            value: 'icon',
+                                          },
+                                          allowedInput: [
+                                            { name: 'Start', value: 'start' },
+                                            { name: 'End', value: 'end' },
+                                          ],
+                                        },
+                                      },
+                                      {
+                                        type: 'COLOR',
+                                        label: 'Text color',
+                                        key: 'textColor',
+                                        value: 'White',
+                                        configuration: {
+                                          condition: {
+                                            type: 'HIDE',
+                                            option: 'variant',
+                                            comparator: 'EQ',
+                                            value: 'icon',
+                                          },
+                                        },
+                                      },
+                                      {
+                                        type: 'COLOR',
+                                        label: 'Color',
+                                        key: 'background',
+                                        value: 'Primary',
+                                      },
+                                      {
+                                        value: ['0rem', 'M', '0rem', 'M'],
+                                        label: 'Outer space',
+                                        key: 'outerSpacing',
+                                        type: 'SIZES',
+                                      },
+                                      {
+                                        label: 'Disabled',
+                                        key: 'disabled',
+                                        value: false,
+                                        type: 'TOGGLE',
+                                      },
+                                      {
+                                        label: 'Add Tooltip',
+                                        key: 'addTooltip',
+                                        value: false,
+                                        type: 'TOGGLE',
+                                      },
+                                      {
+                                        label: 'Toggle tooltip visibility',
+                                        key: 'hasVisibleTooltip',
+                                        value: true,
+                                        type: 'TOGGLE',
+                                        configuration: {
+                                          as: 'VISIBILITY',
+                                          condition: {
+                                            type: 'SHOW',
+                                            option: 'addTooltip',
+                                            comparator: 'EQ',
+                                            value: true,
+                                          },
+                                        },
+                                      },
+                                      {
+                                        type: 'VARIABLE',
+                                        label: 'Tooltip Content',
+                                        key: 'tooltipContent',
+                                        value: ['Tips'],
+                                        configuration: {
+                                          condition: {
+                                            type: 'SHOW',
+                                            option: 'addTooltip',
+                                            comparator: 'EQ',
+                                            value: true,
+                                          },
+                                        },
+                                      },
+                                      {
+                                        label: 'Tooltip Placement',
+                                        key: 'tooltipPlacement',
+                                        value: 'bottom',
+                                        type: 'CUSTOM',
+                                        configuration: {
+                                          as: 'DROPDOWN',
+                                          dataType: 'string',
+                                          allowedInput: [
+                                            {
+                                              name: 'Top Start',
+                                              value: 'top-start',
+                                            },
+                                            {
+                                              name: 'Top',
+                                              value: 'top',
+                                            },
+                                            {
+                                              name: 'Top End',
+                                              value: 'top-end',
+                                            },
+                                            {
+                                              name: 'Right',
+                                              value: 'right',
+                                            },
+                                            {
+                                              name: 'Left',
+                                              value: 'left',
+                                            },
+                                            {
+                                              name: 'Botttom Start',
+                                              value: 'bottom-start',
+                                            },
+                                            {
+                                              name: 'Bottom',
+                                              value: 'bottom',
+                                            },
+                                            {
+                                              name: 'Bottom End',
+                                              value: 'bottom-end',
+                                            },
+                                          ],
+                                          condition: {
+                                            type: 'SHOW',
+                                            option: 'addTooltip',
+                                            comparator: 'EQ',
+                                            value: true,
+                                          },
+                                        },
+                                      },
+                                      {
+                                        type: 'COLOR',
+                                        label: 'Tooltip Background',
+                                        key: 'tooltipBackground',
+                                        value: 'Medium',
+                                        configuration: {
+                                          condition: {
+                                            type: 'SHOW',
+                                            option: 'addTooltip',
+                                            comparator: 'EQ',
+                                            value: true,
+                                          },
+                                        },
+                                      },
+                                      {
+                                        type: 'COLOR',
+                                        label: 'Tooltip Text',
+                                        key: 'tooltipText',
+                                        value: 'Black',
+                                        configuration: {
+                                          condition: {
+                                            type: 'SHOW',
+                                            option: 'addTooltip',
+                                            comparator: 'EQ',
+                                            value: true,
+                                          },
+                                        },
+                                      },
+                                      {
+                                        value: false,
+                                        label: 'Advanced settings',
+                                        key: 'advancedSettings',
+                                        type: 'TOGGLE',
+                                      },
+                                      {
+                                        type: 'VARIABLE',
+                                        label: 'Test attribute',
+                                        key: 'dataComponentAttribute',
+                                        value: ['Button'],
+                                        configuration: {
+                                          condition: {
+                                            type: 'SHOW',
+                                            option: 'advancedSettings',
+                                            comparator: 'EQ',
+                                            value: true,
+                                          },
+                                        },
+                                      },
+                                    ],
+                                    descendants: [],
+                                  },
+                                  {
+                                    name: 'Button',
+                                    style: {
+                                      overwrite: {
+                                        backgroundColor: {
+                                          type: 'STATIC',
+                                          value: 'transparent',
+                                        },
+                                        boxShadow: 'none',
+                                        color: {
+                                          type: 'THEME_COLOR',
+                                          value: 'white',
+                                        },
+                                        fontFamily: 'Roboto',
+                                        fontSize: '0.875rem',
+                                        fontStyle: 'none',
+                                        fontWeight: '400',
+                                        padding: ['0rem', '0rem'],
+                                        textDecoration: 'none',
+                                        textTransform: 'none',
+                                      },
+                                    },
+                                    options: [
+                                      {
+                                        label: 'Toggle visibility',
+                                        key: 'visible',
+                                        value: true,
+                                        type: 'TOGGLE',
+                                        configuration: {
+                                          as: 'VISIBILITY',
+                                        },
+                                      },
+                                      {
+                                        type: 'CUSTOM',
+                                        label: 'variant',
+                                        key: 'variant',
+                                        value: 'text',
+                                        configuration: {
+                                          as: 'BUTTONGROUP',
+                                          dataType: 'string',
+                                          allowedInput: [
+                                            { name: 'Text', value: 'text' },
+                                            {
+                                              name: 'Outlined',
+                                              value: 'outlined',
+                                            },
+                                            {
+                                              name: 'Contain',
+                                              value: 'contained',
+                                            },
+                                            { name: 'Icon', value: 'icon' },
+                                          ],
+                                        },
+                                      },
+                                      {
+                                        type: 'VARIABLE',
+                                        label: 'Button text',
+                                        key: 'buttonText',
+                                        value: ['Clients'],
+                                        configuration: {
+                                          condition: {
+                                            type: 'HIDE',
+                                            option: 'variant',
+                                            comparator: 'EQ',
+                                            value: 'icon',
+                                          },
+                                        },
+                                      },
+                                      {
+                                        type: 'CUSTOM',
+                                        label: 'Link to',
+                                        key: 'linkType',
+                                        value: 'internal',
+                                        configuration: {
+                                          as: 'BUTTONGROUP',
+                                          dataType: 'string',
+                                          allowedInput: [
+                                            {
+                                              name: 'Internal page',
+                                              value: 'internal',
+                                            },
+                                            {
+                                              name: 'External page',
+                                              value: 'external',
+                                            },
+                                          ],
+                                        },
+                                      },
+                                      {
+                                        value: '',
+                                        label: 'Page',
+                                        key: 'linkTo',
+                                        type: 'ENDPOINT',
+                                        configuration: {
+                                          condition: {
+                                            type: 'SHOW',
+                                            option: 'linkType',
+                                            comparator: 'EQ',
+                                            value: 'internal',
+                                          },
+                                        },
+                                      },
+                                      {
+                                        value: [''],
+                                        label: 'URL',
+                                        key: 'linkToExternal',
+                                        type: 'VARIABLE',
+                                        configuration: {
+                                          placeholder:
+                                            'Starts with https:// or http://',
+                                          condition: {
+                                            type: 'SHOW',
+                                            option: 'linkType',
+                                            comparator: 'EQ',
+                                            value: 'external',
+                                          },
+                                        },
+                                      },
+                                      {
+                                        value: '_self',
+                                        label: 'Open in',
+                                        key: 'openLinkToExternal',
+                                        type: 'CUSTOM',
+                                        configuration: {
+                                          condition: {
+                                            type: 'SHOW',
+                                            option: 'linkType',
+                                            comparator: 'EQ',
+                                            value: 'external',
+                                          },
+                                          as: 'BUTTONGROUP',
+                                          dataType: 'string',
+                                          allowedInput: [
+                                            {
+                                              name: 'Current Tab',
+                                              value: '_self',
+                                            },
+                                            {
+                                              name: 'New Tab',
+                                              value: '_blank',
+                                            },
+                                          ],
+                                        },
+                                      },
+                                      {
+                                        value: false,
+                                        label: 'Full width',
+                                        key: 'fullWidth',
+                                        type: 'TOGGLE',
+                                        configuration: {
+                                          condition: {
+                                            type: 'HIDE',
+                                            option: 'variant',
+                                            comparator: 'EQ',
+                                            value: 'icon',
+                                          },
+                                        },
+                                      },
+                                      {
+                                        value: 'medium',
+                                        label: 'Size',
+                                        key: 'size',
+                                        type: 'CUSTOM',
+                                        configuration: {
+                                          as: 'BUTTONGROUP',
+                                          dataType: 'string',
+                                          allowedInput: [
+                                            { name: 'Large', value: 'large' },
+                                            {
+                                              name: 'Medium',
+                                              value: 'medium',
+                                            },
+                                            { name: 'Small', value: 'small' },
+                                          ],
+                                        },
+                                      },
+                                      {
+                                        label: 'Icon',
+                                        key: 'icon',
+                                        value: 'Person',
+                                        type: 'ICON',
+                                      },
+                                      {
+                                        type: 'CUSTOM',
+                                        label: 'Icon position',
+                                        key: 'iconPosition',
+                                        value: 'start',
+                                        configuration: {
+                                          as: 'BUTTONGROUP',
+                                          dataType: 'string',
+                                          condition: {
+                                            type: 'HIDE',
+                                            option: 'variant',
+                                            comparator: 'EQ',
+                                            value: 'icon',
+                                          },
+                                          allowedInput: [
+                                            { name: 'Start', value: 'start' },
+                                            { name: 'End', value: 'end' },
+                                          ],
+                                        },
+                                      },
+                                      {
+                                        type: 'COLOR',
+                                        label: 'Text color',
+                                        key: 'textColor',
+                                        value: 'White',
+                                        configuration: {
+                                          condition: {
+                                            type: 'HIDE',
+                                            option: 'variant',
+                                            comparator: 'EQ',
+                                            value: 'icon',
+                                          },
+                                        },
+                                      },
+                                      {
+                                        type: 'COLOR',
+                                        label: 'Color',
+                                        key: 'background',
+                                        value: 'Primary',
+                                      },
+                                      {
+                                        value: ['0rem', 'M', '0rem', 'M'],
                                         label: 'Outer space',
                                         key: 'outerSpacing',
                                         type: 'SIZES',
@@ -3622,7 +4362,7 @@
                                 options: [
                                   {
                                     value: {
-                                      label: ['Search project'],
+                                      label: ['Search'],
                                       value: [],
                                     },
                                     label: 'Label',
@@ -3757,7 +4497,7 @@
                                     value: false,
                                   },
                                   {
-                                    value: [],
+                                    value: ['Search project'],
                                     label: 'Placeholder',
                                     key: 'placeholder',
                                     type: 'VARIABLE',
@@ -3845,7 +4585,7 @@
                                     },
                                   },
                                   {
-                                    value: false,
+                                    value: true,
                                     label: 'Styles',
                                     key: 'styles',
                                     type: 'TOGGLE',
@@ -3907,7 +4647,7 @@
                                     },
                                   },
                                   {
-                                    value: false,
+                                    value: true,
                                     label: 'Hide label',
                                     key: 'hideLabel',
                                     type: 'TOGGLE',
@@ -3952,7 +4692,7 @@
                                     type: 'COLOR',
                                     label: 'Placeholder color',
                                     key: 'placeholderColor',
-                                    value: 'Light',
+                                    value: 'Accent2',
                                     configuration: {
                                       condition: {
                                         type: 'SHOW',
@@ -7279,7 +8019,7 @@
                                                           },
                                                           {
                                                             value: [
-                                                              '0rem',
+                                                              'L',
                                                               '0rem',
                                                               '0rem',
                                                               '0rem',
