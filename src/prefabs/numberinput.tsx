@@ -35,7 +35,7 @@ const attributes = {
   keywords: ['Form', 'input'],
 };
 
-export default prefab('Number v2', attributes, beforeCreate, [
+export default prefab('Number Beta', attributes, beforeCreate, [
   TextInput({
     label: 'Number',
     type: 'number',

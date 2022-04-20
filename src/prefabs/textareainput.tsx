@@ -36,8 +36,6 @@ const attributes = {
   keywords: ['Form', 'input'],
 };
 
-const pattern = '[A-Za-z0-9\\.,;:!?()%&-\'\"\/ ]+$';
-
-export default prefab('Text Area v2', attributes, beforeCreate, [
-  TextArea({ label: 'Textarea', type: 'text', pattern }),
+export default prefab('Text Area Beta', attributes, beforeCreate, [
+  TextArea({ label: 'Textarea', type: 'text' }),
 ]);
