@@ -1,3 +1,10 @@
+## [1.216.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.216.1...v1.216.2) (2022-04-20)
+
+
+### Bug Fixes
+
+* loading trigger should send once ([10350b3](https://github.com/bettyblocks/material-ui-component-set/commit/10350b325ccccfd8a6330a04f96b3616c8ebc6e3))
+
 ## [1.216.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.216.0...v1.216.1) (2022-04-15)
 
 

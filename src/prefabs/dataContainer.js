@@ -275,7 +275,10 @@
                 onChange={(component) => {
                   const foundModelId = Object.values(component.options).reduce(
                     (acc, option) =>
-                      option.type === 'MODEL' ? option.value : acc,
+                      option.type === 'MODEL' ||
+                      option.type === 'MODEL_AND_RELATION'
+                        ? option.value
+                        : acc,
                     null,
                   );
                   setThisPageState((prevState) => ({
