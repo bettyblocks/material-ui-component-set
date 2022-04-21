@@ -13,154 +13,33 @@
       fullWidth,
       margin,
       helperText = [''],
-      selectOptions = '',
-      model,
-      filter,
-      optionType,
       label,
-      showError,
       required,
       hideLabel,
       validationValueMissing = [''],
       value: prefabValue,
-      order,
-      orderBy,
       blanco,
       dataComponentAttribute = ['Select'],
     } = options;
-    const { env, getProperty, useAllQuery, useRelation, useText } = B;
+    const { env, getProperty, useText } = B;
     const { TextField, MenuItem } = window.MaterialUI.Core;
-    const displayError = showError === 'built-in';
     const isDev = env === 'dev';
     const [errorState, setErrorState] = useState(false);
     const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
-    const [interactionFilter, setInteractionFilter] = useState({});
     const mounted = useRef(false);
     const blancoText = useText(blanco);
-    const { kind, values = [] } =
-      getProperty(actionProperty.modelProperty) || {};
+    const { values = [] } = getProperty(actionProperty.modelProperty) || {};
     const [currentValue, setCurrentValue] = useState(useText(prefabValue));
     const labelText = useText(label);
-    const parsedLabel = useText(label);
-    const labelName = parsedLabel || {};
-    const { name: propName } = {};
     const defaultValueText = useText(prefabValue);
     const helperTextResolved = useText(helperText);
     const validationMessageText = useText(validationValueMissing);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
 
-    const transformValue = (arg) => {
-      if (arg instanceof Date) {
-        return arg.toISOString();
-      }
-
-      return arg;
-    };
-
-    const deepMerge = (...objects) => {
-      const isObject = (item) =>
-        item && typeof item === 'object' && !Array.isArray(item);
-
-      return objects.reduce((accumulator, object) => {
-        Object.keys(object).forEach((key) => {
-          const accumulatorValue = accumulator[key];
-          const valueArg = object[key];
-
-          if (Array.isArray(accumulatorValue) && Array.isArray(valueArg)) {
-            accumulator[key] = accumulatorValue.concat(valueArg);
-          } else if (isObject(accumulatorValue) && isObject(valueArg)) {
-            accumulator[key] = deepMerge(accumulatorValue, valueArg);
-          } else {
-            accumulator[key] = valueArg;
-          }
-        });
-        return accumulator;
-      }, {});
-    };
-
     useEffect(() => {
       B.defineFunction('Reset', () => setCurrentValue(defaultValueText));
     }, []);
-
-    const orderByArray = [orderBy].flat();
-    const sort =
-      !isDev && orderBy
-        ? orderByArray.reduceRight((acc, orderByProperty, index) => {
-            const prop = getProperty(orderByProperty);
-            return index === orderByArray.length - 1
-              ? { [prop.name]: order.toUpperCase() }
-              : { [prop.name]: acc };
-          }, {})
-        : {};
-
-    let interactionFilters = {};
-
-    const isEmptyValue = (arg) =>
-      !arg || (Array.isArray(arg) && arg.length === 0);
-
-    const clauses = Object.entries(interactionFilter)
-      .filter(([, { value: valueArg }]) => !isEmptyValue(valueArg))
-      .map(([, { property: propertyArg, value: valueArg }]) =>
-        propertyArg.id.reduceRight((acc, field, index, arr) => {
-          const isLast = index === arr.length - 1;
-          if (isLast) {
-            return Array.isArray(valueArg)
-              ? {
-                  _or: valueArg.map((el) => ({
-                    [field]: { [propertyArg.operator]: el },
-                  })),
-                }
-              : { [field]: { [propertyArg.operator]: valueArg } };
-          }
-
-          return { [field]: acc };
-        }, {}),
-      );
-
-    interactionFilters =
-      clauses.length > 1 ? { _and: clauses } : clauses[0] || {};
-
-    const completeFilter = deepMerge(filter, interactionFilters);
-
-    const {
-      loading: queryLoading,
-      error,
-      data: queryData,
-      refetch,
-    } = useAllQuery(
-      model,
-      {
-        filter: completeFilter,
-        take: 50,
-        variables: {
-          ...(orderBy ? { sort: { relation: sort } } : {}),
-        },
-        onCompleted(res) {
-          const hasResult = res && res.results && res.results.length > 0;
-          if (hasResult) {
-            B.triggerEvent('onSuccess', res.results);
-          } else {
-            B.triggerEvent('onNoResults');
-          }
-        },
-        onError(resp) {
-          if (!displayError) {
-            B.triggerEvent('onError', resp);
-          }
-        },
-      },
-      !model,
-    );
-
-    const { hasResults, data: relationData } = useRelation(
-      model,
-      {},
-      typeof model === 'string' || !model,
-    );
-
-    const data = hasResults ? relationData : queryData;
-    const loading = hasResults ? false : queryLoading;
 
     useEffect(() => {
       if (mounted.current) {
@@ -169,44 +48,10 @@
     }, [currentValue]);
 
     useEffect(() => {
-      if (mounted.current && loading) {
-        B.triggerEvent('onLoad', loading);
-      }
-    }, [loading]);
-
-    useEffect(() => {
       mounted.current = true;
       return () => {
         mounted.current = false;
       };
-    }, []);
-
-    const { results } = data || {};
-
-    useEffect(() => {
-      B.defineFunction('Refetch', () => refetch());
-
-      /**
-       * @name Filter
-       * @param {Property} property
-       * @returns {Void}
-       */
-      B.defineFunction(
-        'Filter',
-        ({ event, property: propertyArg, interactionId }) => {
-          setInteractionFilter((s) => ({
-            ...s,
-            [interactionId]: {
-              property: propertyArg,
-              value: event.target ? event.target.value : transformValue(event),
-            },
-          }));
-        },
-      );
-
-      B.defineFunction('ResetFilter', () => {
-        setInteractionFilter({});
-      });
     }, []);
 
     const handleValidation = () => {
@@ -241,37 +86,17 @@
     }, [isDev, defaultValueText]);
 
     const renderOptions = () => {
-      if (kind === 'list' || kind === 'LIST') {
-        return values.map(({ value: v }) => (
-          <MenuItem key={v} value={v}>
-            {v}
-          </MenuItem>
-        ));
-      }
-      if (optionType === 'static') {
-        return selectOptions.split('\n').map((option) => (
-          <MenuItem key={option} value={option}>
-            {option}
-          </MenuItem>
-        ));
-      }
-      if (loading) return <span>Loading...</span>;
-      if (error && displayError) return <span>{error.message}</span>;
-      return (results || []).map(
-        (item) =>
-          propName &&
-          labelName && (
-            <MenuItem key={item.id} value={item[propName]}>
-              {item[labelName]}
-            </MenuItem>
-          ),
-      );
+      return values.map(({ value: v }) => (
+        <MenuItem key={v} value={v}>
+          {v}
+        </MenuItem>
+      ));
     };
 
     const SelectCmp = (
       <>
         <TextField
-          name={actionVariableId}
+          id={actionVariableId}
           select={!disabled}
           defaultValue={currentValue}
           value={currentValue}
