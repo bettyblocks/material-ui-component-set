@@ -5608,78 +5608,491 @@
                                     ],
                                     descendants: [
                                       {
-                                        name: 'CardMedia',
+                                        name: 'Box',
                                         options: [
                                           {
-                                            label: 'Media type',
-                                            key: 'type',
-                                            value: 'img',
+                                            value: 'none',
+                                            label: 'Alignment',
+                                            key: 'alignment',
                                             type: 'CUSTOM',
                                             configuration: {
                                               as: 'BUTTONGROUP',
                                               dataType: 'string',
                                               allowedInput: [
-                                                { name: 'Image', value: 'img' },
+                                                { name: 'None', value: 'none' },
                                                 {
-                                                  name: 'Video',
-                                                  value: 'video',
+                                                  name: 'Left',
+                                                  value: 'flex-start',
                                                 },
                                                 {
-                                                  name: 'I-frame',
-                                                  value: 'iframe',
+                                                  name: 'Center',
+                                                  value: 'center',
+                                                },
+                                                {
+                                                  name: 'Right',
+                                                  value: 'flex-end',
+                                                },
+                                                {
+                                                  name: 'Justified',
+                                                  value: 'space-between',
                                                 },
                                               ],
+                                            },
+                                          },
+                                          {
+                                            value: 'none',
+                                            label: 'Vertical alignment',
+                                            key: 'valignment',
+                                            type: 'CUSTOM',
+                                            configuration: {
+                                              as: 'BUTTONGROUP',
+                                              dataType: 'string',
+                                              allowedInput: [
+                                                { name: 'None', value: 'none' },
+                                                {
+                                                  name: 'Top',
+                                                  value: 'flex-start',
+                                                },
+                                                {
+                                                  name: 'Center',
+                                                  value: 'center',
+                                                },
+                                                {
+                                                  name: 'Bottom',
+                                                  value: 'flex-end',
+                                                },
+                                              ],
+                                            },
+                                          },
+                                          {
+                                            value: false,
+                                            label:
+                                              'Stretch (when in flex container)',
+                                            key: 'stretch',
+                                            type: 'TOGGLE',
+                                          },
+                                          {
+                                            value: false,
+                                            label: 'Transparent',
+                                            key: 'transparent',
+                                            type: 'TOGGLE',
+                                          },
+                                          {
+                                            type: 'SIZE',
+                                            label: 'Height',
+                                            key: 'height',
+                                            value: '220px',
+                                            configuration: {
+                                              as: 'UNIT',
+                                            },
+                                          },
+                                          {
+                                            type: 'SIZE',
+                                            label: 'Width',
+                                            key: 'width',
+                                            value: '274px',
+                                            configuration: {
+                                              as: 'UNIT',
+                                            },
+                                          },
+                                          {
+                                            value: [
+                                              '0rem',
+                                              '0rem',
+                                              '0rem',
+                                              '0rem',
+                                            ],
+                                            label: 'Outer space',
+                                            key: 'outerSpacing',
+                                            type: 'SIZES',
+                                          },
+                                          {
+                                            value: [
+                                              '0rem',
+                                              '0rem',
+                                              '0rem',
+                                              '0rem',
+                                            ],
+                                            label: 'Inner space',
+                                            key: 'innerSpacing',
+                                            type: 'SIZES',
+                                          },
+                                          {
+                                            value: false,
+                                            label: 'Show positioning options',
+                                            key: 'positioningOptions',
+                                            type: 'TOGGLE',
+                                          },
+                                          {
+                                            value: 'static',
+                                            label: 'Position',
+                                            key: 'position',
+                                            type: 'CUSTOM',
+                                            configuration: {
+                                              as: 'BUTTONGROUP',
+                                              dataType: 'string',
+                                              allowedInput: [
+                                                {
+                                                  name: 'Static',
+                                                  value: 'static',
+                                                },
+                                                {
+                                                  name: 'Relative',
+                                                  value: 'relative',
+                                                },
+                                                {
+                                                  name: 'Absolute',
+                                                  value: 'absolute',
+                                                },
+                                                {
+                                                  name: 'Fixed',
+                                                  value: 'fixed',
+                                                },
+                                                {
+                                                  name: 'Sticky',
+                                                  value: 'sticky',
+                                                },
+                                              ],
+                                              condition: {
+                                                type: 'SHOW',
+                                                option: 'positioningOptions',
+                                                comparator: 'EQ',
+                                                value: true,
+                                              },
+                                            },
+                                          },
+                                          {
+                                            type: 'SIZE',
+                                            label: 'Top position',
+                                            key: 'top',
+                                            value: '',
+                                            configuration: {
+                                              as: 'UNIT',
+                                              condition: {
+                                                type: 'SHOW',
+                                                option: 'positioningOptions',
+                                                comparator: 'EQ',
+                                                value: true,
+                                              },
+                                            },
+                                          },
+                                          {
+                                            type: 'SIZE',
+                                            label: 'Right position',
+                                            key: 'right',
+                                            value: '',
+                                            configuration: {
+                                              as: 'UNIT',
+                                              condition: {
+                                                type: 'SHOW',
+                                                option: 'positioningOptions',
+                                                comparator: 'EQ',
+                                                value: true,
+                                              },
+                                            },
+                                          },
+                                          {
+                                            type: 'SIZE',
+                                            label: 'Bottom position',
+                                            key: 'bottom',
+                                            value: '',
+                                            configuration: {
+                                              as: 'UNIT',
+                                              condition: {
+                                                type: 'SHOW',
+                                                option: 'positioningOptions',
+                                                comparator: 'EQ',
+                                                value: true,
+                                              },
+                                            },
+                                          },
+                                          {
+                                            type: 'SIZE',
+                                            label: 'Left position',
+                                            key: 'left',
+                                            value: '',
+                                            configuration: {
+                                              as: 'UNIT',
+                                              condition: {
+                                                type: 'SHOW',
+                                                option: 'positioningOptions',
+                                                comparator: 'EQ',
+                                                value: true,
+                                              },
+                                            },
+                                          },
+                                          {
+                                            value: true,
+                                            label: 'Show background options',
+                                            key: 'backgroundOptions',
+                                            type: 'TOGGLE',
+                                          },
+                                          {
+                                            value: 'Transparent',
+                                            label: 'Background color',
+                                            key: 'backgroundColor',
+                                            type: 'COLOR',
+                                            configuration: {
+                                              condition: {
+                                                type: 'SHOW',
+                                                option: 'backgroundOptions',
+                                                comparator: 'EQ',
+                                                value: true,
+                                              },
+                                            },
+                                          },
+                                          {
+                                            value: 100,
+                                            label: 'Background color opacity',
+                                            key: 'backgroundColorAlpha',
+                                            type: 'NUMBER',
+                                            configuration: {
+                                              condition: {
+                                                type: 'SHOW',
+                                                option: 'backgroundOptions',
+                                                comparator: 'EQ',
+                                                value: true,
+                                              },
                                             },
                                           },
                                           {
                                             value: [
                                               'https://assets.bettyblocks.com/771d40f1fc49403e824cdca2fe025aeb_assets/files/contemplative_lizard',
                                             ],
-                                            label: 'Source',
-                                            key: 'imageSource',
+                                            label: 'Background url',
+                                            key: 'backgroundUrl',
                                             type: 'VARIABLE',
                                             configuration: {
                                               condition: {
                                                 type: 'SHOW',
-                                                option: 'type',
+                                                option: 'backgroundOptions',
                                                 comparator: 'EQ',
-                                                value: 'img',
+                                                value: true,
                                               },
                                             },
                                           },
                                           {
-                                            value: [],
-                                            label: 'Source',
-                                            key: 'videoSource',
-                                            type: 'VARIABLE',
+                                            value: 'cover',
+                                            label: 'Background size',
+                                            key: 'backgroundSize',
+                                            type: 'CUSTOM',
+                                            configuration: {
+                                              as: 'BUTTONGROUP',
+                                              dataType: 'string',
+                                              allowedInput: [
+                                                {
+                                                  name: 'Initial',
+                                                  value: 'initial',
+                                                },
+                                                {
+                                                  name: 'Contain',
+                                                  value: 'contain',
+                                                },
+                                                {
+                                                  name: 'Cover',
+                                                  value: 'cover',
+                                                },
+                                              ],
+                                              condition: {
+                                                type: 'SHOW',
+                                                option: 'backgroundOptions',
+                                                comparator: 'EQ',
+                                                value: true,
+                                              },
+                                            },
+                                          },
+                                          {
+                                            value: 'center center',
+                                            label: 'Background position',
+                                            key: 'backgroundPosition',
+                                            type: 'CUSTOM',
+                                            configuration: {
+                                              as: 'DROPDOWN',
+                                              dataType: 'string',
+                                              allowedInput: [
+                                                {
+                                                  name: 'Left top',
+                                                  value: 'left top',
+                                                },
+                                                {
+                                                  name: 'Left center',
+                                                  value: 'left center',
+                                                },
+                                                {
+                                                  name: 'Left bottom',
+                                                  value: 'left bottom',
+                                                },
+                                                {
+                                                  name: 'Center top',
+                                                  value: 'center top',
+                                                },
+                                                {
+                                                  name: 'Center center',
+                                                  value: 'center center',
+                                                },
+                                                {
+                                                  name: 'Center bottom',
+                                                  value: 'center bottom',
+                                                },
+                                                {
+                                                  name: 'Right top',
+                                                  value: 'right top',
+                                                },
+                                                {
+                                                  name: 'Right center',
+                                                  value: 'right center',
+                                                },
+                                                {
+                                                  name: 'Right bottom',
+                                                  value: 'right bottom',
+                                                },
+                                              ],
+                                              condition: {
+                                                type: 'SHOW',
+                                                option: 'backgroundOptions',
+                                                comparator: 'EQ',
+                                                value: true,
+                                              },
+                                            },
+                                          },
+                                          {
+                                            value: 'no-repeat',
+                                            label: 'Background repeat',
+                                            key: 'backgroundRepeat',
+                                            type: 'CUSTOM',
+                                            configuration: {
+                                              as: 'BUTTONGROUP',
+                                              dataType: 'string',
+                                              allowedInput: [
+                                                {
+                                                  name: 'None',
+                                                  value: 'no-repeat',
+                                                },
+                                                {
+                                                  name: 'X',
+                                                  value: 'repeat-x',
+                                                },
+                                                {
+                                                  name: 'Y',
+                                                  value: 'repeat-y',
+                                                },
+                                                {
+                                                  name: 'All',
+                                                  value: 'repeat',
+                                                },
+                                              ],
+                                              condition: {
+                                                type: 'SHOW',
+                                                option: 'backgroundOptions',
+                                                comparator: 'EQ',
+                                                value: true,
+                                              },
+                                            },
+                                          },
+                                          {
+                                            value: 'inherit',
+                                            label: 'Background attachment',
+                                            key: 'backgroundAttachment',
+                                            type: 'CUSTOM',
+                                            configuration: {
+                                              as: 'BUTTONGROUP',
+                                              dataType: 'string',
+                                              allowedInput: [
+                                                {
+                                                  name: 'Inherit',
+                                                  value: 'inherit',
+                                                },
+                                                {
+                                                  name: 'Scroll',
+                                                  value: 'scroll',
+                                                },
+                                                {
+                                                  name: 'Fixed',
+                                                  value: 'fixed',
+                                                },
+                                              ],
+                                              condition: {
+                                                type: 'SHOW',
+                                                option: 'backgroundOptions',
+                                                comparator: 'EQ',
+                                                value: true,
+                                              },
+                                            },
+                                          },
+                                          {
+                                            value: 'Transparent',
+                                            label: 'Border color',
+                                            key: 'borderColor',
+                                            type: 'COLOR',
                                             configuration: {
                                               condition: {
                                                 type: 'SHOW',
-                                                option: 'type',
+                                                option: 'backgroundOptions',
                                                 comparator: 'EQ',
-                                                value: 'video',
+                                                value: true,
                                               },
                                             },
                                           },
                                           {
-                                            value: [],
-                                            label: 'Source',
-                                            key: 'iframeSource',
-                                            type: 'VARIABLE',
+                                            type: 'SIZE',
+                                            label: 'Border thickness',
+                                            key: 'borderWidth',
+                                            value: '',
                                             configuration: {
+                                              as: 'UNIT',
                                               condition: {
                                                 type: 'SHOW',
-                                                option: 'type',
+                                                option: 'backgroundOptions',
                                                 comparator: 'EQ',
-                                                value: 'iframe',
+                                                value: true,
                                               },
                                             },
                                           },
                                           {
-                                            value: [],
-                                            label: 'Title',
-                                            key: 'title',
-                                            type: 'VARIABLE',
+                                            value: 'solid',
+                                            label: 'Border style',
+                                            key: 'borderStyle',
+                                            type: 'CUSTOM',
+                                            configuration: {
+                                              as: 'BUTTONGROUP',
+                                              dataType: 'string',
+                                              allowedInput: [
+                                                { name: 'None', value: 'none' },
+                                                {
+                                                  name: 'Solid',
+                                                  value: 'solid',
+                                                },
+                                                {
+                                                  name: 'Dashed',
+                                                  value: 'dashed',
+                                                },
+                                                {
+                                                  name: 'Dotted',
+                                                  value: 'dotted',
+                                                },
+                                              ],
+                                              condition: {
+                                                type: 'SHOW',
+                                                option: 'backgroundOptions',
+                                                comparator: 'EQ',
+                                                value: true,
+                                              },
+                                            },
+                                          },
+                                          {
+                                            type: 'SIZE',
+                                            label: 'Border radius',
+                                            key: 'borderRadius',
+                                            value: '',
+                                            configuration: {
+                                              as: 'UNIT',
+                                              condition: {
+                                                type: 'SHOW',
+                                                option: 'backgroundOptions',
+                                                comparator: 'EQ',
+                                                value: true,
+                                              },
+                                            },
                                           },
                                           {
                                             value: false,
@@ -5691,7 +6104,7 @@
                                             type: 'VARIABLE',
                                             label: 'Test attribute',
                                             key: 'dataComponentAttribute',
-                                            value: ['CardMedia'],
+                                            value: ['Box'],
                                             configuration: {
                                               condition: {
                                                 type: 'SHOW',
@@ -7709,7 +8122,7 @@
               const dataGrid = getDescendantByRef('#dataList', prefabStructure);
               dataGrid.options[0].value = modelId;
               if (imageProperty.id) {
-                dataGrid.descendants[0].descendants[0].options[1].value = [
+                dataGrid.descendants[0].descendants[0].options[17].value = [
                   enrichVarObj(imageProperty),
                 ];
               }
@@ -7741,7 +8154,7 @@
                 ];
               }
               if (descriptionProperty.id) {
-                dataGrid.descendants[0].descendants[2].descendants[0].options[0].value =
+                dataGrid.descendants[0].descendants[2].descendants[0].descendants[0].options[0].value =
                   [enrichVarObj(descriptionProperty)];
               }
 
