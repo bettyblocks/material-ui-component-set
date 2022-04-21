@@ -4497,7 +4497,7 @@
                                     value: false,
                                   },
                                   {
-                                    value: ['Search project'],
+                                    value: [''],
                                     label: 'Placeholder',
                                     key: 'placeholder',
                                     type: 'VARIABLE',
@@ -4647,7 +4647,7 @@
                                     },
                                   },
                                   {
-                                    value: true,
+                                    value: false,
                                     label: 'Hide label',
                                     key: 'hideLabel',
                                     type: 'TOGGLE',
