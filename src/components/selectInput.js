@@ -5,6 +5,7 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const {
+      actionVariableId,
       disabled,
       variant,
       size,
@@ -15,27 +16,19 @@
       model,
       filter,
       optionType,
-      labelProperty: labelProp,
-      valueProperty: valueProp,
+      label,
       showError,
+      required,
       hideLabel,
-      customModelAttribute: customModelAttributeObj,
       property,
       validationValueMissing = [''],
-      nameAttribute,
+      value: prefabValue,
       order,
       orderBy,
       blanco,
       dataComponentAttribute = ['Select'],
     } = options;
-    const {
-      env,
-      getCustomModelAttribute,
-      getProperty,
-      useAllQuery,
-      useRelation,
-      useText,
-    } = B;
+    const { env, getProperty, useAllQuery, useRelation, useText } = B;
     const { TextField, MenuItem } = window.MaterialUI.Core;
     const displayError = showError === 'built-in';
     const isDev = env === 'dev';
@@ -45,34 +38,21 @@
     const [interactionFilter, setInteractionFilter] = useState({});
     const mounted = useRef(false);
     const blancoText = useText(blanco);
-
     const { kind, values = [] } = getProperty(property) || {};
 
-    const {
-      id: customModelAttributeId,
-      label = [],
-      value: defaultValue = [],
-      required: defaultRequired = false,
-    } = customModelAttributeObj;
-
-    const [currentValue, setCurrentValue] = useState(useText(defaultValue));
+    const [currentValue, setCurrentValue] = useState(useText(prefabValue));
     const labelText = useText(label);
-    const nameAttributeValue = useText(nameAttribute);
+    // TODO: fix nameAttributeValue
+    const nameAttributeValue = 'test';
 
-    const customModelAttribute = getCustomModelAttribute(
-      customModelAttributeId,
-    );
-    const {
-      name: customModelAttributeName,
-      validations: { required: attributeRequired } = {},
-    } = customModelAttribute || {};
-    const required = customModelAttribute ? attributeRequired : defaultRequired;
     const value = currentValue;
 
-    const { name: labelName } = getProperty(labelProp) || {};
-    const { name: propName } = getProperty(valueProp) || {};
+    const parsedLabel = useText(label);
+    const labelName = parsedLabel || {};
+    const { name: propName } = {};
 
-    const defaultValueText = useText(defaultValue);
+    // TODO: error is coming from one of these useTexts
+    const defaultValueText = useText(value);
     const helperTextResolved = useText(helperText);
     const validationMessageText = useText(validationValueMissing);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
@@ -298,6 +278,7 @@
     const SelectCmp = (
       <>
         <TextField
+          id={actionVariableId}
           select={!disabled}
           defaultValue={value}
           value={value}
@@ -308,7 +289,7 @@
           onChange={handleChange}
           onBlur={validationHandler}
           inputProps={{
-            name: nameAttributeValue || customModelAttributeName,
+            name: nameAttributeValue,
             tabIndex: isDev ? -1 : 0,
             'data-component': dataComponentAttributeValue,
           }}
@@ -323,6 +304,7 @@
           {renderOptions()}
         </TextField>
         <input
+          id={actionVariableId}
           className={classes.validationInput}
           onInvalid={validationHandler}
           type="text"
