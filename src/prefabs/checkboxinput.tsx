@@ -146,6 +146,6 @@ const hooks = {
   $afterDelete: [deleteActionVariable],
 };
 
-export default prefab('Checkbox v2', attributes, beforeCreate, [
+export default prefab('Checkbox Beta', attributes, beforeCreate, [
   component('CheckboxInput', { options, ...hooks }, []),
 ]);

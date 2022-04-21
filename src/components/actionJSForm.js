@@ -1,13 +1,11 @@
 (() => ({
-  name: 'ActionJSForm',
+  name: 'Action Form Beta',
   type: 'CONTENT_COMPONENT',
   allowedTypes: ['FORM_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { actionId, modelId, filter } = options;
     const { Form, GetOne } = B;
-
-    const [errors, setErrors] = useState([]);
 
     const isDev = B.env === 'dev';
 
@@ -17,45 +15,48 @@
       );
     }
 
-    const onSubmitSuccess = (response) => {
+    const onActionSuccess = (response) => {
       /* eslint-disable-next-line */
       if (response.errors) {
-        const messages = response.errors.flatMap((error) =>
-          error.message.errors.map((inner) => inner.message),
-        );
+        const messages = response.errors.flatMap((error) => {
+          if (!error || !error.messages || !error.messages.errors) return [];
+          return error.message.errors.map((inner) => inner.message);
+        });
 
         B.triggerEvent('onActionError', new Error(messages.join(', ')));
 
-        setErrors(messages);
+        console.log('Errors: ', messages.join('\n   '));
         return;
       }
 
       const event = response.data.action.results;
 
       B.triggerEvent('onActionSuccess', event);
-
-      setErrors([]);
     };
 
-    const onSubmitError = (error) => {
-      setErrors([error.message || error.toString()]);
+    const onActionError = (error) => {
+      console.error('Errors: %s', [error.message || error.toString()]);
       B.triggerEvent('onActionError', error);
+    };
+
+    const onActionDone = () => {
+      B.triggerEvent('onActionDone');
+    };
+
+    const onActionLoad = (loading) => {
+      if (loading) B.triggerEvent('onActionLoad', loading);
     };
 
     const FormComponent = function () {
       return (
         <Form
           actionId={actionId}
-          onSubmitSuccess={onSubmitSuccess}
-          onSubmitError={onSubmitError}
+          onActionLoad={onActionLoad}
+          onActionDone={onActionDone}
+          onActionSuccess={onActionSuccess}
+          onActionError={onActionError}
         >
           <fieldset className={classes.fieldset}>{children}</fieldset>
-          <ul>
-            {errors.map((error) => (
-              // eslint-disable-next-line react/jsx-key
-              <li>{error}</li>
-            ))}
-          </ul>
         </Form>
       );
     };

@@ -37,6 +37,6 @@ const attributes = {
 
 const pattern = '[a-z0-9._%+-]+@[a-z0-9.-]+[\\.][a-z]{2,4}$';
 
-export default prefab('Email v2', attributes, beforeCreate, [
+export default prefab('Email Beta', attributes, beforeCreate, [
   TextInput({ label: 'email', type: 'email', pattern, adornmentIcon: 'Email' }),
 ]);
