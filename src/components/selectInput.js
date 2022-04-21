@@ -5,6 +5,7 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const {
+      actionProperty,
       actionVariableId,
       disabled,
       variant,
@@ -20,7 +21,6 @@
       showError,
       required,
       hideLabel,
-      property,
       validationValueMissing = [''],
       value: prefabValue,
       order,
@@ -38,21 +38,14 @@
     const [interactionFilter, setInteractionFilter] = useState({});
     const mounted = useRef(false);
     const blancoText = useText(blanco);
-    const { kind, values = [] } = getProperty(property) || {};
-
+    const { kind, values = [] } =
+      getProperty(actionProperty.modelProperty) || {};
     const [currentValue, setCurrentValue] = useState(useText(prefabValue));
     const labelText = useText(label);
-    // TODO: fix nameAttributeValue
-    const nameAttributeValue = 'test';
-
-    const value = currentValue;
-
     const parsedLabel = useText(label);
     const labelName = parsedLabel || {};
     const { name: propName } = {};
-
-    // TODO: error is coming from one of these useTexts
-    const defaultValueText = useText(value);
+    const defaultValueText = useText(prefabValue);
     const helperTextResolved = useText(helperText);
     const validationMessageText = useText(validationValueMissing);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
@@ -217,7 +210,7 @@
     }, []);
 
     const handleValidation = () => {
-      const hasError = required && !value;
+      const hasError = required && !currentValue;
       setErrorState(hasError);
       const message = hasError ? validationMessageText : helperTextResolved;
       setHelper(message);
@@ -236,7 +229,7 @@
     };
 
     const validationHandler = () => {
-      const hasError = required && !value;
+      const hasError = required && !currentValue;
       setAfterFirstInvalidation(hasError);
       handleValidation();
     };
@@ -278,10 +271,10 @@
     const SelectCmp = (
       <>
         <TextField
-          id={actionVariableId}
+          name={actionVariableId}
           select={!disabled}
-          defaultValue={value}
-          value={value}
+          defaultValue={currentValue}
+          value={currentValue}
           size={size}
           classes={{ root: classes.formControl }}
           variant={variant}
@@ -289,7 +282,6 @@
           onChange={handleChange}
           onBlur={validationHandler}
           inputProps={{
-            name: nameAttributeValue,
             tabIndex: isDev ? -1 : 0,
             'data-component': dataComponentAttributeValue,
           }}
@@ -310,7 +302,7 @@
           type="text"
           tabIndex="-1"
           required={required}
-          value={value}
+          value={currentValue}
         />
       </>
     );
