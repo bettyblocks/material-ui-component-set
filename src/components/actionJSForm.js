@@ -7,8 +7,6 @@
     const { actionId, modelId, filter } = options;
     const { Form, GetOne } = B;
 
-    const [errors, setErrors] = useState([]);
-
     const isDev = B.env === 'dev';
 
     if (isDev && children.length === 0) {
@@ -18,28 +16,12 @@
     }
 
     const onActionSuccess = (response) => {
-      /* eslint-disable-next-line */
-      if (response.errors) {
-        const messages = response.errors.flatMap((error) => {
-          if (!error || !error.messages || !error.messages.errors) return [];
-          return error.message.errors.map((inner) => inner.message);
-        });
-
-        B.triggerEvent('onActionError', new Error(messages.join(', ')));
-
-        setErrors(messages);
-        return;
-      }
-
       const event = response.data.action.results;
 
       B.triggerEvent('onActionSuccess', event);
-
-      setErrors([]);
     };
 
     const onActionError = (error) => {
-      setErrors([error.message || error.toString()]);
       B.triggerEvent('onActionError', error);
     };
 
@@ -48,7 +30,7 @@
     };
 
     const onActionLoad = (loading) => {
-      B.triggerEvent('onActionLoad', loading);
+      if (loading) B.triggerEvent('onActionLoad', loading);
     };
 
     const FormComponent = function () {
@@ -61,12 +43,6 @@
           onActionError={onActionError}
         >
           <fieldset className={classes.fieldset}>{children}</fieldset>
-          <ul>
-            {errors.map((error) => (
-              // eslint-disable-next-line react/jsx-key
-              <li>{error}</li>
-            ))}
-          </ul>
         </Form>
       );
     };

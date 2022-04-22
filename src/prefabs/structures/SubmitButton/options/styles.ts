@@ -9,7 +9,6 @@ import {
   ThemeColor,
   toggle,
 } from '@betty-blocks/component-sdk';
-import { showOn } from '../../../../utils';
 
 export const styles = {
   fullWidth: toggle('Full width', { value: false }),
@@ -87,7 +86,7 @@ export const styles = {
       ['Bottom End', 'bottom-end'],
     ],
     {
-      value: ['bottom'],
+      value: 'bottom',
       configuration: { condition: showIfTrue('addTooltip') },
     },
   ),
