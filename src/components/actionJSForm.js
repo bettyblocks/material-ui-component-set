@@ -16,26 +16,12 @@
     }
 
     const onActionSuccess = (response) => {
-      /* eslint-disable-next-line */
-      if (response.errors) {
-        const messages = response.errors.flatMap((error) => {
-          if (!error || !error.messages || !error.messages.errors) return [];
-          return error.message.errors.map((inner) => inner.message);
-        });
-
-        B.triggerEvent('onActionError', new Error(messages.join(', ')));
-
-        console.log('Errors: ', messages.join('\n   '));
-        return;
-      }
-
       const event = response.data.action.results;
 
       B.triggerEvent('onActionSuccess', event);
     };
 
     const onActionError = (error) => {
-      console.error('Errors: %s', [error.message || error.toString()]);
       B.triggerEvent('onActionError', error);
     };
 
