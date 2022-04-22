@@ -1,3 +1,10 @@
+## [1.216.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.216.3...v1.216.4) (2022-04-22)
+
+
+### Bug Fixes
+
+* alert shows errors from actionjs ([167c335](https://github.com/bettyblocks/material-ui-component-set/commit/167c3354e11fcb5689f5d5215d642d3e3be54a17))
+
 ## [1.216.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.216.2...v1.216.3) (2022-04-21)
 
 
