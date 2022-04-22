@@ -25553,9 +25553,18 @@
                                                   as: 'BUTTONGROUP',
                                                   dataType: 'string',
                                                   allowedInput: [
-                                                    { name: 'Small', value: 'small' },
-                                                    { name: 'Medium', value: 'medium' },
-                                                    { name: 'Large', value: 'large' },
+                                                    {
+                                                      name: 'Small',
+                                                      value: 'small',
+                                                    },
+                                                    {
+                                                      name: 'Medium',
+                                                      value: 'medium',
+                                                    },
+                                                    {
+                                                      name: 'Large',
+                                                      value: 'large',
+                                                    },
                                                   ],
                                                   condition: {
                                                     type: 'HIDE',
@@ -25574,8 +25583,14 @@
                                                   as: 'BUTTONGROUP',
                                                   dataType: 'string',
                                                   allowedInput: [
-                                                    { name: 'Start', value: 'start' },
-                                                    { name: 'End', value: 'end' },
+                                                    {
+                                                      name: 'Start',
+                                                      value: 'start',
+                                                    },
+                                                    {
+                                                      name: 'End',
+                                                      value: 'end',
+                                                    },
                                                   ],
                                                   condition: {
                                                     type: 'HIDE',
@@ -25586,7 +25601,12 @@
                                                 },
                                               },
                                               {
-                                                value: ['0rem', '0rem', '0rem', '0rem'],
+                                                value: [
+                                                  '0rem',
+                                                  '0rem',
+                                                  '0rem',
+                                                  '0rem',
+                                                ],
                                                 label: 'Outer space',
                                                 key: 'outerSpacing',
                                                 type: 'SIZES',
@@ -25604,7 +25624,8 @@
                                                 type: 'TOGGLE',
                                               },
                                               {
-                                                label: 'Toggle tooltip visibility',
+                                                label:
+                                                  'Toggle tooltip visibility',
                                                 key: 'hasVisibleTooltip',
                                                 value: true,
                                                 type: 'TOGGLE',
