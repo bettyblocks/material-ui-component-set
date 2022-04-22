@@ -1,5 +1,5 @@
 (() => ({
-  name: 'CRUD with slide-out panel (local)',
+  name: 'CRUD with slide-out panel',
   icon: 'DataTable',
   type: 'page',
   description: 'This page contains a datatable with CRUD slide-out panel.',
