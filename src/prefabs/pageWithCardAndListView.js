@@ -6703,7 +6703,7 @@
                                             },
                                           },
                                           {
-                                            value: '12',
+                                            value: '10',
                                             label: 'Rows per page (max 50)',
                                             key: 'take',
                                             type: 'NUMBER',
