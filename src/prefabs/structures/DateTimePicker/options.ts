@@ -9,6 +9,7 @@ import {
   toggle,
   variable,
 } from '@betty-blocks/component-sdk';
+import { showOn } from '../../../utils';
 
 export const options = {
   actionVariableId: option('ACTION_JS_VARIABLE', {
@@ -20,6 +21,18 @@ export const options = {
   actionProperty: option('ACTION_JS_PROPERTY', {
     label: 'Property',
     value: '',
+  }),
+
+  label: variable('Label', { value: [''] }),
+  value: variable('Value', { value: [''] }),
+
+  validationOptions: toggle('Validation options'),
+
+  required: toggle('Required', showOn('validationOptions')),
+  
+  validationValueMissing: variable('Value required message', {
+    value: ['This field is required'],
+    ...showOn('required'),
   }),
 
   type: text('Type', {

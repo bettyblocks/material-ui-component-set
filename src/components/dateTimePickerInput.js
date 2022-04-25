@@ -18,20 +18,21 @@
       dateTimeFormat,
       size,
       fullWidth,
+      required,
       margin,
       helperText = [''],
       disableToolbar,
       disablePastDates,
       hideLabel,
-      customModelAttribute: customModelAttributeObj,
       use24HourClockDateTime,
       use24HourClockTime,
       nameAttribute,
+      label,
       locale,
       clearable,
       dataComponentAttribute = ['DateTimePicker'],
     } = options;
-    const { env, getCustomModelAttribute, useText, Icon } = B;
+    const { env, useText, Icon } = B;
     const {
       MuiPickersUtilsProvider,
       KeyboardTimePicker,
@@ -53,22 +54,8 @@
       en: enLocale,
     };
 
-    const {
-      id: customModelAttributeId,
-      label = [],
-      value: defaultValue = [],
-      required: defaultRequired = false,
-    } = customModelAttributeObj;
-    const strDefaultValue = useText(defaultValue, { rawValue: true });
-    const labelText = useText(label);
-    const customModelAttribute = getCustomModelAttribute(
-      customModelAttributeId,
-    );
-    const {
-      name: customModelAttributeName,
-      validations: { required: attributeRequired } = {},
-    } = customModelAttribute || {};
-    const required = customModelAttribute ? attributeRequired : defaultRequired;
+    const parsedLabel = useText(label);
+    const labelText = parsedLabel || name;
     const nameAttributeValue = useText(nameAttribute);
     const isValidDate = (date) => date instanceof Date && !isNaN(date);
 
@@ -113,24 +100,7 @@
         mounted.current = false;
       };
     }, []);
-
-    const setDefaultDate = (defaultFormat, givenFormat) => {
-      if (!selectedDate && strDefaultValue) {
-        const propDefaultParse = defaultFormat
-          ? DateFns.parse(strDefaultValue, defaultFormat)
-          : new Date(strDefaultValue);
-        const formatDefaultParse = DateFns.parse(strDefaultValue, givenFormat);
-
-        if (isValidDate(propDefaultParse)) {
-          setSelectedDate(propDefaultParse);
-        } else if (isValidDate(formatDefaultParse)) {
-          setSelectedDate(formatDefaultParse);
-        } else {
-          setSelectedDate(DateFns.parse('00:00:00', 'HH:mm:ss'));
-        }
-      }
-    };
-
+  
     B.defineFunction('Clear', () => setSelectedDate(null));
 
     let DateTimeComponent;
@@ -143,7 +113,7 @@
         DateTimeComponent = KeyboardDatePicker;
         format = dateFormat || 'dd/MM/yyyy';
 
-        setDefaultDate('yyyy-MM-dd', format);
+        // setDefaultDate('yyyy-MM-dd', format);
         resultString = isValidDate(selectedDate)
           ? DateFns.format(selectedDate, 'yyyy-MM-dd')
           : null;
@@ -154,7 +124,7 @@
         format = dateTimeFormat || 'dd/MM/yyyy HH:mm:ss';
         use24HourClock = use24HourClockDateTime;
 
-        setDefaultDate(null, format);
+        // setDefaultDate(null, format);
 
         resultString = isValidDate(selectedDate)
           ? new Date(selectedDate).toISOString()
@@ -166,7 +136,7 @@
         format = timeFormat || 'HH:mm:ss';
         use24HourClock = use24HourClockTime;
 
-        setDefaultDate('HH:mm:ss', format);
+        // setDefaultDate('HH:mm:ss', format);
 
         resultString = isValidDate(selectedDate)
           ? DateFns.format(selectedDate, 'HH:mm:ss')
@@ -178,7 +148,7 @@
 
     const DateTimeCmp = (
       <DateTimeComponent
-        name={name || nameAttributeValue || customModelAttributeName}
+        name={name || nameAttributeValue}
         value={selectedDate}
         size={size}
         autoComplete={autoComplete ? 'on' : 'off'}
@@ -190,7 +160,7 @@
         inputVariant={inputvariant}
         InputProps={{
           inputProps: {
-            name: nameAttributeValue || customModelAttributeName,
+            name: nameAttributeValue,
             tabIndex: isDev ? -1 : undefined,
           },
         }}
@@ -240,7 +210,7 @@
       <MuiPickersUtilsProvider utils={DateFnsUtils} locale={localeMap[locale]}>
         <input
           type="hidden"
-          name={nameAttributeValue || customModelAttributeName}
+          name={nameAttributeValue}
           value={resultString}
         />
         {variant === 'static' ? (
