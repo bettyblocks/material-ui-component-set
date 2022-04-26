@@ -1,3 +1,10 @@
+## [1.216.5](https://github.com/bettyblocks/material-ui-component-set/compare/v1.216.4...v1.216.5) (2022-04-26)
+
+
+### Bug Fixes
+
+* remove toggle interaction ([db35809](https://github.com/bettyblocks/material-ui-component-set/commit/db35809b4587abc151360a2edb5368c69c692699))
+
 ## [1.216.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.216.3...v1.216.4) (2022-04-22)
 
 
