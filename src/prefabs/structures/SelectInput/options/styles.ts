@@ -1,34 +1,12 @@
 import {
   buttongroup,
   color,
-  icon,
   ThemeColor,
   toggle,
 } from '@betty-blocks/component-sdk';
 import { showOn } from '../../../../utils';
 
 export const styles = {
-  variant: buttongroup(
-    'Variant',
-    [
-      ['Standard', 'standard'],
-      ['Outlined', 'outlined'],
-      ['Filled', 'filled'],
-    ],
-    { value: 'outlined' },
-  ),
-
-  fullWidth: toggle('Full width', { value: true }),
-
-  size: buttongroup(
-    'Size',
-    [
-      ['Medium', 'medium'],
-      ['Small', 'small'],
-    ],
-    { value: 'medium' },
-  ),
-
   margin: buttongroup(
     'Margin',
     [
@@ -39,7 +17,30 @@ export const styles = {
     { value: 'normal' },
   ),
 
+  size: buttongroup(
+    'Size',
+    [
+      ['Medium', 'medium'],
+      ['Small', 'small'],
+    ],
+    { value: 'medium' },
+  ),
+
+  fullWidth: toggle('Full width', { value: true }),
+
+  variant: buttongroup(
+    'Variant',
+    [
+      ['Standard', 'standard'],
+      ['Outlined', 'outlined'],
+      ['Filled', 'filled'],
+    ],
+    { value: 'outlined' },
+  ),
+
   styles: toggle('Styles'),
+
+  hideLabel: toggle('Hide label', showOn('styles')),
 
   backgroundColor: color('Background color', {
     value: ThemeColor.WHITE,
@@ -60,8 +61,6 @@ export const styles = {
     value: ThemeColor.PRIMARY,
     ...showOn('styles'),
   }),
-
-  hideLabel: toggle('Hide label', showOn('styles')),
 
   labelColor: color('Label color', {
     value: ThemeColor.ACCENT_3,
