@@ -451,7 +451,7 @@
 
         /* SubComponents */
 
-        const SearchComponent = function ({
+        function SearchComponent({
           label,
           onChange,
           value,
@@ -487,9 +487,9 @@
               />
             </div>
           );
-        };
+        }
 
-        const Pagination = function ({ totalCount, resultCount, currentPage }) {
+        function Pagination({ totalCount, resultCount, currentPage }) {
           const firstItem = currentPage ? (currentPage - 1) * rowsPerPage : 0;
 
           useEffect(() => {
@@ -558,7 +558,7 @@
               </div>
             </>
           );
-        };
+        }
 
         return isDev ? builderLayout() : canvasLayout();
       })()}
