@@ -138,7 +138,9 @@
         );
       };
     } else if (isImage && !variableDev) {
-      MediaComponent = () => ImageComponent;
+      MediaComponent = function () {
+        return ImageComponent;
+      };
     } else if (isVideo) {
       MediaComponent = function () {
         return (
