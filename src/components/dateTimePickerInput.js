@@ -100,7 +100,7 @@
         mounted.current = false;
       };
     }, []);
-  
+
     B.defineFunction('Clear', () => setSelectedDate(null));
 
     let DateTimeComponent;
@@ -113,7 +113,6 @@
         DateTimeComponent = KeyboardDatePicker;
         format = dateFormat || 'dd/MM/yyyy';
 
-        // setDefaultDate('yyyy-MM-dd', format);
         resultString = isValidDate(selectedDate)
           ? DateFns.format(selectedDate, 'yyyy-MM-dd')
           : null;
@@ -124,8 +123,6 @@
         format = dateTimeFormat || 'dd/MM/yyyy HH:mm:ss';
         use24HourClock = use24HourClockDateTime;
 
-        // setDefaultDate(null, format);
-
         resultString = isValidDate(selectedDate)
           ? new Date(selectedDate).toISOString()
           : null;
@@ -135,8 +132,6 @@
         DateTimeComponent = KeyboardTimePicker;
         format = timeFormat || 'HH:mm:ss';
         use24HourClock = use24HourClockTime;
-
-        // setDefaultDate('HH:mm:ss', format);
 
         resultString = isValidDate(selectedDate)
           ? DateFns.format(selectedDate, 'HH:mm:ss')
@@ -160,7 +155,7 @@
         inputVariant={inputvariant}
         InputProps={{
           inputProps: {
-            name: nameAttributeValue,
+            name: name || nameAttributeValue,
             tabIndex: isDev ? -1 : undefined,
           },
         }}
@@ -208,11 +203,7 @@
       </div>
     ) : (
       <MuiPickersUtilsProvider utils={DateFnsUtils} locale={localeMap[locale]}>
-        <input
-          type="hidden"
-          name={nameAttributeValue}
-          value={resultString}
-        />
+        <input type="hidden" name={nameAttributeValue} value={resultString} />
         {variant === 'static' ? (
           <div className={classes.static}>{DateTimeCmp}</div>
         ) : (

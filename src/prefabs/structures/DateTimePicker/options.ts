@@ -29,7 +29,7 @@ export const options = {
   validationOptions: toggle('Validation options'),
 
   required: toggle('Required', showOn('validationOptions')),
-  
+
   validationValueMissing: variable('Value required message', {
     value: ['This field is required'],
     ...showOn('required'),
@@ -44,7 +44,10 @@ export const options = {
 
   disableToolbar: toggle('Disable Toolbar', { value: false }),
 
-  timeFormat: text('Format', { value: 'HH:mm:ss' }),
+  timeFormat: text('Format', {
+    value: 'MM/dd/yyyy HH:mm:ss',
+    configuration: { placeholder: 'dd/MM/yyyy HH:mm:ss' },
+  }),
 
   use24HourClockTime: toggle('Use 24-hour format', { value: true }),
 
