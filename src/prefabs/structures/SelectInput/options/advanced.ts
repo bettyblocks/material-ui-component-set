@@ -3,6 +3,10 @@ import { showOn } from '../../../../utils';
 
 export const advanced = {
   advancedSettings: toggle('Advanced Settings', { value: false }),
+  blanco: variable('Blank option', {
+    value: [''],
+    ...showOn('advancedSettings'),
+  }),
   dataComponentAttribute: variable('Test attribute', {
     value: [],
     ...showOn('advancedSettings'),
