@@ -36,7 +36,7 @@ export const options = {
   }),
 
   type: text('Type', {
-    value: 'time',
+    value: 'datetime',
     configuration: {
       condition: showIf('type', 'EQ', false),
     },
