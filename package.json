@@ -37,6 +37,7 @@
     "build": "bb components build",
     "dev": "nodemon",
     "lint": "eslint --ext js ./src",
+    "lint:ci": "eslint --ext js ./src --max-warnings 0",
     "prettier:base": "prettier --single-quote",
     "prettier:check": "yarn prettier:base --list-different \"src/**/*.js\"",
     "prettier:write": "yarn prettier:base --write \"src/**/*.js\"",

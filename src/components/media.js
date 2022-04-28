@@ -93,7 +93,7 @@
       );
     }
 
-    function Placeholder() {
+    const Placeholder = function () {
       switch (type) {
         case 'img':
           return <ImgPlaceholder />;
@@ -102,7 +102,7 @@
         default:
           return <IframePlaceholder />;
       }
-    }
+    };
 
     function ImageComponent() {
       return (
