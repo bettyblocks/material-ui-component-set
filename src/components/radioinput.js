@@ -5,6 +5,7 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const {
+      actionVariableId: name,
       actionProperty,
       disabled,
       labelPosition,
@@ -126,7 +127,7 @@
         <RadioGroup
           row={row}
           value={currentValue}
-          name={label}
+          name={name}
           onChange={handleChange}
           onBlur={validationHandler}
           aria-label={labelText}

@@ -11,7 +11,6 @@ export const options = {
 
   label: variable('Label', { value: [''] }),
   value: variable('Value', { value: [''] }),
-  required: toggle('Required'),
   ...validation,
   ...styles,
   ...advanced,
