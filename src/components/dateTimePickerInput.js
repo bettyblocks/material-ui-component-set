@@ -143,7 +143,6 @@
 
     const DateTimeCmp = (
       <DateTimeComponent
-        name={name || nameAttributeValue}
         value={selectedDate}
         size={size}
         autoComplete={autoComplete ? 'on' : 'off'}
@@ -155,7 +154,6 @@
         inputVariant={inputvariant}
         InputProps={{
           inputProps: {
-            name: name || nameAttributeValue,
             tabIndex: isDev ? -1 : undefined,
           },
         }}
@@ -203,7 +201,11 @@
       </div>
     ) : (
       <MuiPickersUtilsProvider utils={DateFnsUtils} locale={localeMap[locale]}>
-        <input type="hidden" name={nameAttributeValue} value={resultString} />
+        <input
+          type="hidden"
+          name={name || nameAttributeValue}
+          value={resultString}
+        />
         {variant === 'static' ? (
           <div className={classes.static}>{DateTimeCmp}</div>
         ) : (
