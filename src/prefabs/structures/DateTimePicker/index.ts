@@ -1,5 +1,6 @@
 import { component, PrefabComponentOption } from '@betty-blocks/component-sdk';
 import { PrefabComponent } from '@betty-blocks/component-sdk/build/prefabs/types/component';
+import { updateOption } from '../../../utils';
 import { deleteActionVariable } from '../../hooks/deleteActionVariable';
 import { options as defaults } from './options';
 
@@ -8,11 +9,8 @@ type OptionProducer = (key: string) => PrefabComponentOption;
 
 export interface Configuration {
   options?: Record<string, OptionProducer>;
-  validationPattern?: string;
-  adornmentIcon?: string;
-  label?: string;
-  type?: HTMLInputElement['type'];
-  pattern?: string;
+  format?: string;
+  placeholder?: string;
 }
 
 const $afterDelete = [deleteActionVariable];
@@ -22,6 +20,17 @@ export const DateTimePicker = (
   children: PrefabComponent[] = [],
 ) => {
   const options = { ...(config.options || defaults) };
-  
+
+  if (config.format) {
+    const update = {
+      value: config.format,
+      ...(config.placeholder
+        ? { configuration: { placeholder: config.placeholder } }
+        : {}),
+    };
+
+    options.type = updateOption(options.timeFormat, update);
+  }
+
   return component('DateTimePickerInput', { options, $afterDelete }, children);
 };

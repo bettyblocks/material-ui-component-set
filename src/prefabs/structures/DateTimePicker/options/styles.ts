@@ -1,49 +1,36 @@
 import {
   buttongroup,
   color,
-  option,
   showIf,
   showIfTrue,
-  text,
   ThemeColor,
   toggle,
-  variable,
 } from '@betty-blocks/component-sdk';
 
-export const options = {
-  actionVariableId: option('ACTION_JS_VARIABLE', {
-    label: 'Name',
-    value: '',
-    configuration: { condition: showIf('actionVariableId', 'EQ', 'never') },
-  }),
+export const styles = {
 
-  actionProperty: option('ACTION_JS_PROPERTY', {
-    label: 'Property',
-    value: '',
-  }),
+ 
 
-  type: text('Type', {
-    value: 'time',
-    configuration: {
-      condition: showIf('type', 'EQ', false),
-    },
-  }),
+  margin: buttongroup(
+    'Margin',
+    [
+      ['None', 'none'],
+      ['Dense', 'dense'],
+      ['Normal', 'normal'],
+    ],
+    { value: 'normal' },
+  ),
 
-  disableToolbar: toggle('Disable Toolbar', { value: false }),
+  size: buttongroup(
+    'Size',
+    [
+      ['Medium', 'medium'],
+      ['Small', 'small'],
+    ],
+    { value: 'medium' },
+  ),
 
-  timeFormat: text('Format', { value: 'HH:mm:ss' }),
-
-  use24HourClockTime: toggle('Use 24-hour format', { value: true }),
-
-  error: toggle('Error', { value: false }),
-
-  disabled: toggle('Disabled', { value: false }),
-
-  autoComplete: toggle('Autocomplete', { value: true }),
-
-  placeholder: variable('Placeholder', { value: [] }),
-
-  helperText: variable('Helper text', { value: [] }),
+  fullWidth: toggle('Full width', { value: true }),
 
   variant: buttongroup(
     'Variant',
@@ -70,28 +57,12 @@ export const options = {
     { value: 'outlined' },
   ),
 
-  fullWidth: toggle('Full width', { value: true }),
-
-  size: buttongroup(
-    'Size',
-    [
-      ['Medium', 'medium'],
-      ['Small', 'small'],
-    ],
-    { value: 'medium' },
-  ),
-
-  margin: buttongroup(
-    'Margin',
-    [
-      ['None', 'none'],
-      ['Dense', 'dense'],
-      ['Normal', 'normal'],
-    ],
-    { value: 'normal' },
-  ),
-
   styles: toggle('Styles', { value: false }),
+
+  hideLabel: toggle('Hide label', {
+    value: false,
+    configuration: { condition: showIfTrue('true') },
+  }),
 
   backgroundColor: color('Background color', {
     value: ThemeColor.WHITE,
@@ -118,11 +89,6 @@ export const options = {
     configuration: { condition: showIfTrue('styles') },
   }),
 
-  hideLabel: toggle('Hide label', {
-    value: false,
-    configuration: { condition: showIfTrue('true') },
-  }),
-
   labelColor: color('Label color', {
     value: ThemeColor.ACCENT_3,
     configuration: { condition: showIfTrue('styles') },
@@ -146,17 +112,5 @@ export const options = {
   errorColor: color('Error color', {
     value: ThemeColor.DANGER,
     configuration: { condition: showIfTrue('styles') },
-  }),
-
-  advancedSettings: toggle('Advanced settings', { value: false }),
-
-  nameAttribute: variable('Name attribute', {
-    value: [],
-    configuration: { condition: showIfTrue('advancedSettings') },
-  }),
-
-  dataComponentAttribute: variable('Test attribute', {
-    value: ['DateTimePicker'],
-    configuration: { condition: showIfTrue('advancedSettings') },
   }),
 };
