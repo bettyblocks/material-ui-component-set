@@ -7,6 +7,7 @@
     const {
       actionVariableId: name,
       actionProperty,
+      propertyData,
       disabled,
       labelPosition,
       row,
@@ -42,7 +43,7 @@
     const helperTextResolved = useText(helperText);
     const validationMessageText = useText(validationValueMissing);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
-    const placeholders = [1, 2];
+    const { kind, values: listValues } = getProperty(propertyData) || {};
     let radioValues = [];
 
     useEffect(() => {
@@ -104,12 +105,10 @@
       />
     );
 
-    renderRadio('value', 'Placeholder');
-
     const renderRadios = () => {
-      if (isDev)
-        return placeholders.map(() => renderRadio('value', 'Placeholder'));
-
+      if (isDev && kind === 'LIST') {
+        return listValues.map((item) => renderRadio(item.value, item.value));
+      }
       radioValues = values.map((item) => item);
       return values.map((item) => renderRadio(item.value, item.value));
     };
