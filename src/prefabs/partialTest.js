@@ -1,30 +1,43 @@
 (() => ({
   name: 'Partial',
-  type: 'PARTIAL',
+  icon: 'PaperIcon',
+  category: 'LAYOUT',
+  keywords: ['Layout', 'paper'],
   beforeCreate: ({
     prefab,
     save,
     close,
     components: { Header, Content, PartialSelector, Footer },
   }) => {
-    const [partialId, setPartialId] = React.useState('');
+    const [partialRef, setPartialRef] = React.useState({ id: '', name: '' });
 
     return (
       <>
         <Header onClose={close} title="Configure open page button" />
         <Content>
           <PartialSelector
-            onChange={(value) => setPartialId(value)}
-            value={partialId}
+            onChange={(id, name) => {
+              setPartialRef({ id, name });
+            }}
+            value={partialRef.id}
+            allowedTypes={[
+              'BODY_COMPONENT',
+              'CONTAINER_COMPONENT',
+              'CONTENT_COMPONENT',
+            ]}
           />
         </Content>
         <Footer
           onclick={close}
           onSave={() => {
             const newPrefab = { ...prefab };
-            newPrefab.descendants[0].descendants[0].partialId = partialId;
-            newPrefab.descendants[0].descendants[0].options[0].value =
-              partialId;
+            const partialComponent =
+              newPrefab.structure[0].descendants[0].descendants[0];
+            partialComponent.partialId = partialRef.id;
+            partialComponent.options[0].value = partialRef.id;
+            // partialComponent.label = partialRef.name;
+            newPrefab.structure[0].descendants[0].descendants[0] =
+              partialComponent;
             save(newPrefab);
           }}
           onSkip={() => {
@@ -301,22 +314,7 @@
           ],
           descendants: [
             {
-              name: 'partial',
               type: 'PARTIAL',
-              options: [
-                {
-                  type: 'PARTIAL_REFERENCE',
-                  label: 'Partial Reference',
-                  key: 'partialReferenceId',
-                  value: '""',
-                },
-                {
-                  type: 'PARTIAL_INPUT_OBJECTS',
-                  label: 'Partial inputs',
-                  key: 'partialInputMapping',
-                  value: '{}',
-                },
-              ],
             },
           ],
         },
