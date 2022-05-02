@@ -12,4 +12,9 @@ export const advanced = {
     value: '',
     configuration: { condition: showIf('actionVariableId', 'EQ', 'never') },
   }),
+  propertyData: option('ACTION_JS_PROPERTY', {
+    label: 'propertyData',
+    value: '',
+    configuration: { condition: showIf('actionVariableId', 'EQ', 'never') },
+  }),
 };
