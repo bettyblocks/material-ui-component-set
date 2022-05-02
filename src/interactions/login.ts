@@ -1,5 +1,10 @@
 /* eslint @typescript-eslint/no-unused-vars: ["error", { "varsIgnorePattern": "login" }] */
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+interface History {
+  push(url: string): string;
+}
+
 interface Event {
   isValid: boolean;
   jwtToken: string;

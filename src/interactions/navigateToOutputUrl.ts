@@ -1,5 +1,10 @@
 /* eslint @typescript-eslint/no-unused-vars: ["error", { "varsIgnorePattern": "navigateToOutputUrl" }] */
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+interface History {
+  push(url: string): string;
+}
+
 function navigateToOutputUrl({ event }: { event: Event }): void {
   if (typeof event !== 'string') {
     // eslint-disable-next-line no-console
