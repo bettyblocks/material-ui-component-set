@@ -124,7 +124,7 @@
         use24HourClock = use24HourClockDateTime;
 
         resultString = isValidDate(selectedDate)
-          ? DateFns.format(selectedDate, 'yyyy-MM-dd HH-mm-ss')
+          ? DateFns.format(selectedDate, 'yyyy-MM-dd HH:mm:ss')
           : null;
         break;
       }
