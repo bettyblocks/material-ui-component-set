@@ -6,20 +6,20 @@ import {
   model,
   filter,
   BeforeCreateArgs,
+  Icon,
 } from '@betty-blocks/component-sdk';
-import { Icon } from '@betty-blocks/component-sdk';
 
 const beforeCreate = ({
   close,
   components: { CreateFormUpdateWizard },
-  prefab,
+  prefab: originalPrefab,
   prefabs,
   save,
 }: BeforeCreateArgs) => {
   return (
     <CreateFormUpdateWizard
       close={close}
-      prefab={prefab}
+      prefab={originalPrefab}
       prefabs={prefabs}
       save={save}
     />

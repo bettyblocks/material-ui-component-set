@@ -65,7 +65,7 @@
         }
       : {};
 
-    const ImgPlaceholder = function () {
+    function ImgPlaceholder() {
       return (
         <div className={classes.empty}>
           <div className={classes.placeholderWrapper}>
@@ -77,9 +77,9 @@
           </div>
         </div>
       );
-    };
+    }
 
-    const Step = function (props) {
+    function Step(props) {
       const { active, item } = props;
       const StepContent = (
         <div className={classes.root}>
@@ -95,9 +95,9 @@
       );
 
       return <>{active ? StepContent : null}</>;
-    };
+    }
 
-    const MobileStepperCmp = function () {
+    function MobileStepperCmp() {
       useEffect(() => {
         let interval;
         if (autoplay && !isDev) {
@@ -240,9 +240,9 @@
           {carouselVariant}
         </div>
       );
-    };
+    }
 
-    const ModelStepperCmp = function () {
+    function ModelStepperCmp() {
       let maxSteps = 0;
       const where = useFilter(filter);
       const { loading, error, data, refetch } = useAllQuery(model, {
@@ -420,7 +420,7 @@
           {carouselVariant}
         </div>
       );
-    };
+    }
     const StepperComponent =
       select === 'custom' ? MobileStepperCmp() : ModelStepperCmp();
 

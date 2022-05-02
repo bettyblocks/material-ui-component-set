@@ -5,6 +5,6 @@
     "strict": true,
     "jsx": "react",
     "esModuleInterop": true,
-    "resolveJsonModule": true,
-  },
+    "resolveJsonModule": true
+  }
 }

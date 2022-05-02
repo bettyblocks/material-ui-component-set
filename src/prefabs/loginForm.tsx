@@ -13,14 +13,14 @@ import {
 const beforeCreate = ({
   close,
   components: { CreateLoginFormWizard },
-  prefab,
+  prefab: originalPrefab,
   prefabs,
   save,
 }: BeforeCreateArgs) => {
   return (
     <CreateLoginFormWizard
       close={close}
-      prefab={prefab}
+      prefab={originalPrefab}
       prefabs={prefabs}
       save={save}
     />
