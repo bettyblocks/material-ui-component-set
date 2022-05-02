@@ -1,6 +1,7 @@
 (() => ({
   name: 'Partial',
   icon: 'PaperIcon',
+  type: 'page',
   category: 'LAYOUT',
   keywords: ['Layout', 'paper'],
   beforeCreate: ({
