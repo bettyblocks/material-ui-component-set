@@ -3798,7 +3798,7 @@
                                     value: false,
                                   },
                                   {
-                                    value: [],
+                                    value: ['Search'],
                                     label: 'Placeholder',
                                     key: 'placeholder',
                                     type: 'VARIABLE',
@@ -3886,7 +3886,7 @@
                                     },
                                   },
                                   {
-                                    value: false,
+                                    value: true,
                                     label: 'Styles',
                                     key: 'styles',
                                     type: 'TOGGLE',
@@ -3948,7 +3948,7 @@
                                     },
                                   },
                                   {
-                                    value: false,
+                                    value: true,
                                     label: 'Hide label',
                                     key: 'hideLabel',
                                     type: 'TOGGLE',
@@ -3993,7 +3993,7 @@
                                     type: 'COLOR',
                                     label: 'Placeholder color',
                                     key: 'placeholderColor',
-                                    value: 'Light',
+                                    value: 'Accent2',
                                     configuration: {
                                       condition: {
                                         type: 'SHOW',
