@@ -34,14 +34,15 @@
 
     B.defineFunction('Select', doSetTab);
 
-    const EmptyBox = function () {
+    function EmptyBox() {
       if (!isDev) return null;
+
       return (
         <Box className={classes.empty} p={3}>
           Tab
         </Box>
       );
-    };
+    }
 
     const TabPanel = (isActive || !isDev) && (
       <Typography
