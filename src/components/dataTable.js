@@ -484,7 +484,7 @@
       );
     };
 
-    const TablePaginationActions = function () {
+    function TablePaginationActions() {
       const handleFirstPageButtonClick = () => {
         setPage(0);
       };
@@ -538,7 +538,7 @@
           )}
         </div>
       );
-    };
+    }
 
     const tableContentModel = () => {
       if ((loading && !loadOnScroll) || error) {

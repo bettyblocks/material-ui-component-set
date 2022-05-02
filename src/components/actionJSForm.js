@@ -33,7 +33,7 @@
       if (loading) B.triggerEvent('onActionLoad', loading);
     };
 
-    const FormComponent = function () {
+    function FormComponent() {
       return (
         <Form
           actionId={actionId}
@@ -45,7 +45,7 @@
           <fieldset className={classes.fieldset}>{children}</fieldset>
         </Form>
       );
-    };
+    }
 
     if (isDev) {
       return (

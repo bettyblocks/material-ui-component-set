@@ -107,7 +107,6 @@
       B.defineFunction('Hide', () => setIsVisible(false));
       B.defineFunction('Show/Hide', () => setIsVisible((s) => !s));
       B.defineFunction('Toggle loading state', () => {
-        console.log('Toggling loading state');
         setIsLoading((s) => !s);
       });
       B.defineFunction('Enable', () => setIsDisabled(false));

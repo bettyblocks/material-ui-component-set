@@ -169,7 +169,7 @@
           .join(' ')
           .trim();
 
-        const FormElement = function () {
+        function FormElement() {
           B.defineFunction('Refetch', () => {});
           return (
             <form
@@ -182,9 +182,9 @@
               {children}
             </form>
           );
-        };
+        }
 
-        const FormCmp = function ({ item, refetch }) {
+        function FormCmp({ item, refetch }) {
           const [isInvalid, setIsInvalid] = useState(false);
           const handleInvalid = () => {
             if (!isInvalid) {
@@ -241,9 +241,9 @@
               )}
             </Action>
           );
-        };
+        }
 
-        const FormWithData = function () {
+        function FormWithData() {
           const getFilter = React.useCallback(() => {
             if (isDev || !currentRecord || !modelId) {
               return filter;
@@ -299,7 +299,7 @@
           if (!item) return children;
 
           return <FormCmp item={item} refetch={refetch} />;
-        };
+        }
 
         const RuntimeForm = hasFilter ? <FormWithData /> : <FormCmp />;
 

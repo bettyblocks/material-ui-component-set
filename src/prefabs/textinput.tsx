@@ -5,12 +5,11 @@ import { TextInput } from './structures/TextInput';
 const beforeCreate = ({
   close,
   components: { CreateFormInputWizard },
-  prefab,
+  prefab: originalPrefab,
   save,
 }: BeforeCreateArgs) => {
-
   // TODO: remove this code
-  const actionVariableOption = prefab.structure[0].options.find(
+  const actionVariableOption = originalPrefab.structure[0].options.find(
     (option: { type: string }) => option.type === 'ACTION_JS_VARIABLE',
   );
 
@@ -26,7 +25,7 @@ const beforeCreate = ({
       labelOptionKey="label"
       nameOptionKey="actionVariableId"
       close={close}
-      prefab={prefab}
+      prefab={originalPrefab}
       save={save}
     />
   );
@@ -41,4 +40,3 @@ const attributes = {
 export default prefab('Text Field Beta', attributes, beforeCreate, [
   TextInput({ label: 'Textfield', type: 'text' }),
 ]);
-

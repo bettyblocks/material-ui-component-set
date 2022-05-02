@@ -138,7 +138,7 @@
       });
     };
 
-    const UploadComponent = function () {
+    function UploadComponent() {
       return (
         <div data-component={dataComponentAttributeValue}>
           <input
@@ -159,13 +159,13 @@
           )}
         </div>
       );
-    };
+    }
 
-    const Hr = function () {
+    function Hr() {
       return <hr className={classes.hr} />;
-    };
+    }
 
-    const DeleteButton = function ({ file }) {
+    function DeleteButton({ file }) {
       return (
         <div className={classes.deleteButtonWrapper}>
           <IconButton
@@ -188,8 +188,9 @@
           </IconButton>
         </div>
       );
-    };
-    const FileDetails = function ({ file, fileType, fileSize }) {
+    }
+
+    function FileDetails({ file, fileType, fileSize }) {
       return (
         <div className={classes.fileDetails}>
           <Typography variant="body1" noWrap className={classes.span}>
@@ -206,9 +207,9 @@
           </div>
         </div>
       );
-    };
+    }
 
-    const DevUploadedFile = function () {
+    function DevUploadedFile() {
       switch (type) {
         case 'grid':
           return (
@@ -237,9 +238,9 @@
             </>
           );
       }
-    };
+    }
 
-    const UploadedFile = function ({ file }) {
+    function UploadedFile({ file }) {
       const uploadedFile = uploadedFileArray.find(
         (item) => item.name === file.name,
       );
@@ -298,9 +299,9 @@
             </>
           );
       }
-    };
+    }
 
-    const UploadingFile = function () {
+    function UploadingFile() {
       switch (type) {
         case 'grid':
           return (
@@ -335,11 +336,11 @@
             </>
           );
       }
-    };
+    }
 
     const Label = isDev ? 'div' : 'label';
 
-    const Control = function () {
+    function Control() {
       return (
         <FormControl
           fullWidth={fullWidth}
@@ -363,7 +364,7 @@
           </div>
         </FormControl>
       );
-    };
+    }
 
     useEffect(() => {
       if (loading) {
