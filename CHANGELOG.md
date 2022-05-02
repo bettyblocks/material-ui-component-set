@@ -1,3 +1,10 @@
+## [1.217.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.217.0...v1.217.1) (2022-05-02)
+
+
+### Bug Fixes
+
+* added model to loginForm ([9d7f073](https://github.com/bettyblocks/material-ui-component-set/commit/9d7f0737368890074d0f41ed9b16efed0938acee))
+
 # [1.217.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.216.5...v1.217.0) (2022-04-28)
 
 

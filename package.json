@@ -1,6 +1,6 @@
 {
   "name": "component-set",
-  "version": "1.217.0",
+  "version": "1.217.1",
   "main": "dist/templates.json",
   "license": "UNLICENSED",
   "private": false,
