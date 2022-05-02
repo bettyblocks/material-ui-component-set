@@ -7,6 +7,7 @@ import {
   PrefabInteraction,
   InteractionType,
   Icon,
+  model,
 } from '@betty-blocks/component-sdk';
 
 const beforeCreate = ({
@@ -46,6 +47,7 @@ const attributes = {
 
 const options = {
   actionId: option('ACTION_JS', { label: 'Action', value: '' }),
+  modelId: model('Model'),
 };
 
 export default prefab('Login Form Beta', attributes, beforeCreate, [

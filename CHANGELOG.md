@@ -1,3 +1,52 @@
+## [1.217.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.217.0...v1.217.1) (2022-05-02)
+
+
+### Bug Fixes
+
+* added model to loginForm ([9d7f073](https://github.com/bettyblocks/material-ui-component-set/commit/9d7f0737368890074d0f41ed9b16efed0938acee))
+
+# [1.217.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.216.5...v1.217.0) (2022-04-28)
+
+
+### Bug Fixes
+
+* fix value for select component ([0e07215](https://github.com/bettyblocks/material-ui-component-set/commit/0e07215be97c953c8c1471016af7c878fdd49a9e))
+* wip select rendering issue ([35f09ff](https://github.com/bettyblocks/material-ui-component-set/commit/35f09ffe79a524a8af176342e59851bd50d98db9))
+
+
+### Features
+
+* add v2 select input ([0701ce6](https://github.com/bettyblocks/material-ui-component-set/commit/0701ce616381a52836122bbd4b12eaad39d86317))
+* remove option-type related options & related code ([49421e7](https://github.com/bettyblocks/material-ui-component-set/commit/49421e72c1b09c51db4c9ab60eccab32f9f62b0f))
+
+## [1.216.5](https://github.com/bettyblocks/material-ui-component-set/compare/v1.216.4...v1.216.5) (2022-04-26)
+
+
+### Bug Fixes
+
+* remove toggle interaction ([db35809](https://github.com/bettyblocks/material-ui-component-set/commit/db35809b4587abc151360a2edb5368c69c692699))
+
+## [1.216.4](https://github.com/bettyblocks/material-ui-component-set/compare/v1.216.3...v1.216.4) (2022-04-22)
+
+
+### Bug Fixes
+
+* alert shows errors from actionjs ([167c335](https://github.com/bettyblocks/material-ui-component-set/commit/167c3354e11fcb5689f5d5215d642d3e3be54a17))
+
+## [1.216.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.216.2...v1.216.3) (2022-04-21)
+
+
+### Bug Fixes
+
+* look for model or model_and_relation option ([6d49d40](https://github.com/bettyblocks/material-ui-component-set/commit/6d49d40bb407e3df90a6e246859771d4f1d984b4))
+
+## [1.216.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.216.1...v1.216.2) (2022-04-20)
+
+
+### Bug Fixes
+
+* loading trigger should send once ([10350b3](https://github.com/bettyblocks/material-ui-component-set/commit/10350b325ccccfd8a6330a04f96b3616c8ebc6e3))
+
 ## [1.216.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.216.0...v1.216.1) (2022-04-15)
 
 
