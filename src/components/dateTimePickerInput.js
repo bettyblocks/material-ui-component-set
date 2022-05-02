@@ -124,7 +124,7 @@
         use24HourClock = use24HourClockDateTime;
 
         resultString = isValidDate(selectedDate)
-          ? new Date(selectedDate).toISOString()
+          ? DateFns.format(selectedDate, 'yyyy-MM-dd HH-mm-ss')
           : null;
         break;
       }
