@@ -38,9 +38,12 @@ export const styles = {
     { value: 'outlined' },
   ),
 
-  styles: toggle('Styles'),
+  styles: toggle('Styles', { value: false }),
 
-  hideLabel: toggle('Hide label', showOn('styles')),
+  hideLabel: toggle('Hide label', {
+    value: false,
+    ...showOn('styles'),
+  }),
 
   backgroundColor: color('Background color', {
     value: ThemeColor.WHITE,
