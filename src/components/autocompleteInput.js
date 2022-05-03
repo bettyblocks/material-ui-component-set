@@ -18,19 +18,10 @@
       hideLabel,
       label,
       margin,
-      maxlength,
-      minlength,
-      minvalue,
-      pattern,
       placeholder: placeholderRaw,
       required,
       size,
       type,
-      validationBelowMinimum = [''],
-      validationPatternMismatch = [''],
-      validationTooLong = [''],
-      validationTooShort = [''],
-      validationTypeMismatch = [''],
       validationValueMissing = [''],
       value: prefabValue,
       variant,
@@ -51,46 +42,18 @@
     const [interactionFilter, setInteractionFilter] = useState({});
     const isNumberType = type === 'number';
 
-    const validPattern = pattern || null;
-    const validMinlength = minlength || null;
-    const validMaxlength = maxlength || null;
-    const validMinvalue = minvalue || null;
-
-    const patternMismatchMessage = useText(validationPatternMismatch || []);
-    const typeMismatchMessage = useText(validationTypeMismatch || []);
     const valueMissingMessage = useText(validationValueMissing || []);
-    const tooLongMessage = useText(validationTooLong || []);
-    const tooShortMessage = useText(validationTooShort || []);
-    const belowMinimumMessage = useText(validationBelowMinimum || []);
     const helperTextResolved = useText(helperTextRaw || []);
 
     const validationMessage = (validityObject) => {
       if (!validityObject) {
         return '';
       }
-      if (validityObject.customError && patternMismatchMessage) {
-        return patternMismatchMessage;
-      }
       if (validityObject.valid) {
         return '';
       }
-      if (validityObject.typeMismatch && typeMismatchMessage) {
-        return typeMismatchMessage;
-      }
-      if (validityObject.patternMismatch && patternMismatchMessage) {
-        return patternMismatchMessage;
-      }
       if (validityObject.valueMissing && valueMissingMessage) {
         return valueMissingMessage;
-      }
-      if (validityObject.tooLong && tooLongMessage) {
-        return tooLongMessage;
-      }
-      if (validityObject.tooShort && tooShortMessage) {
-        return tooShortMessage;
-      }
-      if (validityObject.rangeUnderflow && belowMinimumMessage) {
-        return belowMinimumMessage;
       }
       return '';
     };
@@ -104,18 +67,7 @@
     };
 
     const customPatternValidation = (target) => {
-      const { value: eventValue, validity } = target;
-      if (!pattern) {
-        return validity;
-      }
-      const patternRegex = RegExp(`^${pattern}$`);
-      const isValid = patternRegex.test(eventValue);
-      target.setCustomValidity(isValid ? '' : 'Invalid field.');
-      return {
-        ...validity,
-        valid: isValid,
-        patternMismatch: !isValid,
-      };
+      return target.validity;
     };
 
     B.defineFunction('Clear', () => {
@@ -249,10 +201,6 @@
                       e.preventDefault();
                       handleValidation(e.target.validity);
                     },
-                    pattern: validPattern,
-                    minLength: validMinlength,
-                    maxLength: validMaxlength,
-                    min: validMinvalue,
                   },
                   endAdornment: <>{params.InputProps.endAdornment}</>,
                 }}
