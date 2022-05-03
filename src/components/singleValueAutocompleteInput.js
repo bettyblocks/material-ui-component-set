@@ -35,7 +35,6 @@
       value: prefabValue,
       variant,
     } = options;
-    console.log({ actionVariableId });
 
     const isDev = env === 'dev';
     const placeholder = useText(placeholderRaw || []);
@@ -47,8 +46,8 @@
     const dataComponentAttributeValue =
       useText(dataComponentAttribute || []) || 'AutoComplete';
 
-    const [value, setValue] = useState('');
-    const [inputValue, setInputValue] = useState('');
+    const [value, setValue] = useState(useText(prefabValue) || '');
+    const [inputValue, setInputValue] = useState(useText(prefabValue) || '');
     const [interactionFilter, setInteractionFilter] = useState({});
     const isNumberType = type === 'number';
 
@@ -136,8 +135,6 @@
 
         if (event.target) {
           eventValue = event.target.value;
-        } else if (event instanceof Date) {
-          eventValue = value.toISOString();
         } else {
           eventValue = event;
         }
@@ -160,11 +157,8 @@
      * Show a TextField in design time
      */
     if (isDev) {
-      const devValue =
-        (prefabValue[0] &&
-          prefabValue[0].name &&
-          prefabValue[0].name.replace(/\n/g, '')) ||
-        null;
+      const devValue = useText(prefabValue).replace(/\n/g, '') || null;
+
       return (
         <div className={classes.root}>
           <TextField

@@ -14,11 +14,11 @@ export const options = {
     value: '',
   }),
 
-  ...validation,
   label: variable('Label', { value: [''] }),
   value: variable('Value', { value: [''] }),
 
-  closeOnSelect: toggle('Close dropdown after select', { value: true }),
+  ...validation,
+
   showError: toggle('Error'),
   errorType: buttongroup(
     'Error message',

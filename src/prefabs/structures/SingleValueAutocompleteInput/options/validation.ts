@@ -40,6 +40,7 @@ export const validation = {
   }),
 
   autoComplete: toggle('Autocomplete', { value: false }),
+  closeOnSelect: toggle('Close dropdown after select', { value: true }),
   disabled: toggle('Disabled'),
   placeholder: variable('Placeholder'),
   helperText: variable('Helper text'),
