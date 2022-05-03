@@ -41,5 +41,5 @@ export default prefab(
   'Single Value Autocomplete Beta',
   attributes,
   beforeCreate,
-  [SingleValueAutocompleteInput({ label: 'Textfield', type: 'text' })],
+  [SingleValueAutocompleteInput({ label: 'Autocomplete', type: 'text' })],
 );
