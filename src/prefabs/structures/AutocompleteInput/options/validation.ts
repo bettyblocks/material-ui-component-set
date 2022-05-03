@@ -8,7 +8,6 @@ export const validation = {
     value: ['This field is required'],
     ...showOn('required'),
   }),
-  autoComplete: toggle('Autocomplete', { value: false }),
   closeOnSelect: toggle('Close dropdown after select', { value: true }),
   disabled: toggle('Disabled'),
   placeholder: variable('Placeholder'),
