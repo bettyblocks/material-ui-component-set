@@ -1,5 +1,5 @@
 (() => ({
-  name: 'Partialnew',
+  name: 'PartialTestNew',
   icon: 'PaperIcon',
   type: 'page',
   category: 'LAYOUT',
@@ -32,13 +32,11 @@
           onclick={close}
           onSave={() => {
             const newPrefab = { ...prefab };
-            const partialComponent =
-              newPrefab.structure[0].descendants[0].descendants[0];
+            const partialComponent = newPrefab.structure[0];
             partialComponent.partialId = partialRef.id;
-            partialComponent.options[0].value = partialRef.id;
-            // partialComponent.label = partialRef.name;
-            newPrefab.structure[0].descendants[0].descendants[0] =
-              partialComponent;
+            partialComponent.label = partialRef.name;
+
+            newPrefab.structure[0] = partialComponent;
             save(newPrefab);
           }}
           onSkip={() => {

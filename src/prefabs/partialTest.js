@@ -1,5 +1,5 @@
 (() => ({
-  name: 'Partial',
+  name: 'PartialTest',
   icon: 'PaperIcon',
   type: 'page',
   category: 'LAYOUT',
@@ -35,8 +35,7 @@
             const partialComponent =
               newPrefab.structure[0].descendants[0].descendants[0];
             partialComponent.partialId = partialRef.id;
-            partialComponent.options[0].value = partialRef.id;
-            // partialComponent.label = partialRef.name;
+            partialComponent.label = partialRef.name;
             newPrefab.structure[0].descendants[0].descendants[0] =
               partialComponent;
             save(newPrefab);
