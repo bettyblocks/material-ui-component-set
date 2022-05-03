@@ -98,7 +98,7 @@
               };
             }
 
-            const IconCmp = function () {
+            function IconCmp() {
               return (
                 hasIcon && (
                   <Icon
@@ -110,7 +110,7 @@
                   />
                 )
               );
-            };
+            }
 
             if (hasIcon) {
               labelProps = {
