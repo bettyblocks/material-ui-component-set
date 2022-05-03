@@ -5569,7 +5569,7 @@
                                   },
                                   {
                                     type: 'CUSTOM',
-                                    label: 'Selected tab (Design)',
+                                    label: 'Selected tab (Pagebuilder)',
                                     key: 'selectedDesignTabIndex',
                                     value: '1',
                                     configuration: {
