@@ -18,7 +18,7 @@ export interface Configuration {
 
 const $afterDelete = [deleteActionVariable];
 
-export const SingleValueAutocompleteInput = (
+export const AutocompleteInput = (
   config: Configuration,
   children: PrefabComponent[] = [],
 ) => {
@@ -54,9 +54,5 @@ export const SingleValueAutocompleteInput = (
     });
   }
 
-  return component(
-    'Single Value Autocomplete Input',
-    { options, $afterDelete },
-    children,
-  );
+  return component('AutocompleteInput', { options, $afterDelete }, children);
 };

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { BeforeCreateArgs, Icon, prefab } from '@betty-blocks/component-sdk';
-import { SingleValueAutocompleteInput } from './structures/SingleValueAutocompleteInput';
+import { AutocompleteInput } from './structures/AutocompleteInput';
 
 const beforeCreate = ({
   close,
@@ -37,9 +37,6 @@ const attributes = {
   keywords: ['Form', 'input'],
 };
 
-export default prefab(
-  'Single Value Autocomplete Beta',
-  attributes,
-  beforeCreate,
-  [SingleValueAutocompleteInput({ label: 'Autocomplete', type: 'text' })],
-);
+export default prefab('Autocomplete Beta', attributes, beforeCreate, [
+  AutocompleteInput({ label: 'Autocomplete', type: 'text' }),
+]);

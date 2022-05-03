@@ -19,7 +19,6 @@ export const options = {
 
   ...validation,
 
-  showError: toggle('Error'),
   errorType: buttongroup(
     'Error message',
     [

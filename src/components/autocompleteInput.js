@@ -1,5 +1,5 @@
 (() => ({
-  name: 'Single Value Autocomplete Input',
+  name: 'AutocompleteInput',
   type: 'FORM_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
