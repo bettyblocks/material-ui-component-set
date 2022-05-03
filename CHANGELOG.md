@@ -1,3 +1,19 @@
+# [1.218.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.217.1...v1.218.0) (2022-05-02)
+
+
+### Bug Fixes
+
+* linter errors ([246218e](https://github.com/bettyblocks/material-ui-component-set/commit/246218e60e6bd136c4e93154abf729d5cd1d3046))
+* linter warning ([159a70e](https://github.com/bettyblocks/material-ui-component-set/commit/159a70e5f678061af44b85468e30e9c49c410a45))
+* linter warnings ([b80c0f1](https://github.com/bettyblocks/material-ui-component-set/commit/b80c0f1bf9d36a4e4e958f62bd164f2d076b613b))
+* put back History type declarations and ignore linter error ([be21390](https://github.com/bettyblocks/material-ui-component-set/commit/be21390451687f1d6b788b8f3fb804b2dce9a1ac))
+
+
+### Features
+
+* add linter for TypeScript files ([0401436](https://github.com/bettyblocks/material-ui-component-set/commit/04014366d3a73b3835ea65c53dcbaf6d4a0bf2fd))
+* enforce linter warnings as errors in ci ([71b1dbc](https://github.com/bettyblocks/material-ui-component-set/commit/71b1dbc15cf2c103714df3837fff5df928e4157c))
+
 ## [1.217.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.217.0...v1.217.1) (2022-05-02)
 
 
