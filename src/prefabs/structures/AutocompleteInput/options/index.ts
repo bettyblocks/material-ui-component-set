@@ -1,11 +1,4 @@
-import {
-  option,
-  variable,
-  toggle,
-  buttongroup,
-  text,
-  showIf,
-} from '@betty-blocks/component-sdk';
+import { option, variable, buttongroup } from '@betty-blocks/component-sdk';
 
 import { advanced } from './advanced';
 import { styles } from './styles';
@@ -27,13 +20,6 @@ export const options = {
     ],
     { value: 'built-in' },
   ),
-  disabled: toggle('Disabled', { value: false }),
-  placeholder: variable('Placeholder', { value: [] }),
-  helperText: variable('Helper text', { value: [] }),
-  type: text('Type', {
-    value: '',
-    configuration: { condition: showIf('type', 'EQ', 'never') },
-  }),
   ...styles,
   ...advanced,
 };
