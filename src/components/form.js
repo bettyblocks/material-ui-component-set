@@ -58,6 +58,20 @@
         const [, setOptions] = useOptions();
 
         useEffect(() => {
+          B.defineFunction('SubmitWithoutValidation', () => {
+            if (formRef.current) {
+              formRef.current.noValidate = true;
+              if (typeof formRef.current.requestSubmit === 'function') {
+                formRef.current.requestSubmit();
+              } else {
+                formRef.current.dispatchEvent(
+                  new Event('submit', { cancelable: true }),
+                );
+              }
+              formRef.current.noValidate = false;
+            }
+          });
+
           B.defineFunction('Submit', () => {
             if (formRef.current) {
               if (typeof formRef.current.requestSubmit === 'function') {
@@ -73,6 +87,14 @@
 
         useEffect(() => {
           mounted.current = true;
+
+          B.defineFunction('setCurrentRecord', (value) => {
+            if (typeof value === 'number') {
+              setOptions({
+                currentRecord: value,
+              });
+            }
+          });
 
           B.defineFunction('setCurrentRecord', (value) => {
             if (typeof value === 'number') {

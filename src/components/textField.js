@@ -216,6 +216,7 @@
       B.defineFunction('Enable', () => setIsDisabled(false));
       B.defineFunction('Disable', () => setIsDisabled(true));
       B.defineFunction('Reset', () => setCurrentValue(defaultValueRawText));
+      B.defineFunction('setValue', (value) => setCurrentValue(value));
     }, [defaultValueRawText]);
 
     const handleClickShowPassword = () => {
