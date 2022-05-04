@@ -58,8 +58,6 @@
         const [, setOptions] = useOptions();
 
         useEffect(() => {
-          mounted.current = true;
-
           B.defineFunction('SubmitWithoutValidation', () => {
             if (formRef.current) {
               formRef.current.noValidate = true;
@@ -83,6 +81,18 @@
                   new Event('submit', { cancelable: true }),
                 );
               }
+            }
+          });
+        }, [formRef]);
+
+        useEffect(() => {
+          mounted.current = true;
+
+          B.defineFunction('setCurrentRecord', (value) => {
+            if (typeof value === 'number') {
+              setOptions({
+                currentRecord: value,
+              });
             }
           });
 
