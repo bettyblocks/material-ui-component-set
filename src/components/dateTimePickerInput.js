@@ -9,6 +9,7 @@
       autoComplete,
       disabled,
       error,
+      value,
       placeholder = [''],
       variant,
       inputvariant,
@@ -43,7 +44,8 @@
     const { nlLocale, enLocale } = window.MaterialUI.DateLocales;
     const DateFns = new DateFnsUtils();
     const isDev = env === 'dev';
-    const [selectedDate, setSelectedDate] = useState(null);
+    const parsedValue = useText(value);
+    const [selectedDate, setSelectedDate] = useState(parsedValue);
     const helper = useText(helperText);
     const placeholderText = useText(placeholder);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
@@ -73,6 +75,12 @@
     const changeHandler = (date) => {
       setSelectedDate(date);
     };
+
+    useEffect(() => {
+      if (parsedValue) {
+        setSelectedDate(parsedValue);
+      }
+    }, [parsedValue]);
 
     useEffect(() => {
       if (mounted.current) {
