@@ -42,7 +42,7 @@ import { showOn } from '../../../../utils';
   
     disableToolbar: toggle('Disable Toolbar', { value: false }),
   
-    timeFormat: text('Format', {
+    dateTimeFormat: text('Format', {
       value: 'MM/dd/yyyy HH:mm:ss',
       configuration: { placeholder: 'dd/MM/yyyy HH:mm:ss' },
     }),

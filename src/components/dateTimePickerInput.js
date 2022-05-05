@@ -39,7 +39,7 @@
       KeyboardDatePicker,
       KeyboardDateTimePicker,
     } = window.MaterialUI.Pickers;
-    const { DateFnsUtils } = window.MaterialUI;
+    const { DateFnsUtils } = B;
     const { nlLocale, enLocale } = window.MaterialUI.DateLocales;
     const DateFns = new DateFnsUtils();
     const isDev = env === 'dev';
@@ -140,6 +140,8 @@
       }
       default:
     }
+
+    console.log({ dateTimeFormat, format });
 
     const DateTimeCmp = (
       <DateTimeComponent
