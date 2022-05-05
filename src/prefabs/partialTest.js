@@ -10,17 +10,17 @@
     close,
     components: { Header, Content, PartialSelector, Footer },
   }) => {
-    const [partialRef, setPartialRef] = React.useState({ id: '', name: '' });
+    const [partialId, setPartialId] = React.useState('');
 
     return (
       <>
         <Header onClose={close} title="Configure open page button" />
         <Content>
           <PartialSelector
-            onChange={(id, name) => {
-              setPartialRef({ id, name });
+            onChange={(id) => {
+              setPartialId(id);
             }}
-            value={partialRef.id}
+            value={partialId.id}
             allowedTypes={[
               'BODY_COMPONENT',
               'CONTAINER_COMPONENT',
@@ -34,8 +34,7 @@
             const newPrefab = { ...prefab };
             const partialComponent =
               newPrefab.structure[0].descendants[0].descendants[0];
-            partialComponent.partialId = partialRef.id;
-            partialComponent.label = partialRef.name;
+            partialComponent.id = partialId;
             newPrefab.structure[0].descendants[0].descendants[0] =
               partialComponent;
             save(newPrefab);
