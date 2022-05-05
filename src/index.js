@@ -6,11 +6,11 @@ import DateFnsUtils from '@date-io/date-fns';
 import enLocale from 'date-fns/locale/en-US';
 import nlLocale from 'date-fns/locale/nl';
 
-import Icons from './icons';
+import { icons } from './icons';
 
 export default {
   Core,
-  Icons,
+  Icons: icons,
   Lab,
   Pickers,
   Styles,
