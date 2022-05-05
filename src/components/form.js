@@ -96,14 +96,6 @@
             }
           });
 
-          B.defineFunction('setCurrentRecord', (value) => {
-            if (typeof value === 'number') {
-              setOptions({
-                currentRecord: value,
-              });
-            }
-          });
-
           B.triggerEvent('onComponentRendered');
           return () => {
             mounted.current = false;
