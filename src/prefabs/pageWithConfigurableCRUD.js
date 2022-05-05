@@ -9,7 +9,39 @@
   previewUrl: 't.b.d',
   previewImage: 't.b.d',
   category: 'DATA',
-  beforeCreate: ({ components: { Footer }, prefab, save, close }) => {
+  beforeCreate: ({
+    components: {
+      Header,
+      Content,
+      Footer,
+      Field,
+      Text,
+      ModelSelector,
+      PropertiesSelector,
+    },
+    prefab,
+    save,
+    close,
+  }) => {
+    const [modelId, setModelId] = React.useState('');
+    const [properties, setProperties] = React.useState([]);
+    const [modelValidation, setModelValidation] = React.useState(false);
+    const [propertiesValidation, setPropertiesValidation] =
+      React.useState(false);
+
+    const getDescendantByRef = (refValue, structure) =>
+      structure.reduce((acc, component) => {
+        if (acc) return acc;
+        if (
+          // eslint-disable-next-line no-prototype-builtins
+          component.hasOwnProperty('ref') &&
+          Object.values(component.ref).indexOf(refValue) > -1
+        ) {
+          return component;
+        }
+        return getDescendantByRef(refValue, component.descendants);
+      }, null);
+
     const prefabStructure = [
       {
         name: 'Box',
@@ -3907,9 +3939,12 @@
                   },
                   {
                     name: 'DataTable',
+                    ref: {
+                      id: '#dataTable',
+                    },
                     options: [
                       {
-                        value: '',
+                        value: modelId,
                         label: 'Model',
                         key: 'model',
                         type: 'MODEL_AND_RELATION',
@@ -17230,8 +17265,372 @@
     ];
     return (
       <>
+        <Header onClose={close} title="Configure datatable" />
+        <Content>
+          <Field
+            label="Model"
+            error={
+              modelValidation && (
+                <Text color="#e82600">Selecting a model is required</Text>
+              )
+            }
+          >
+            <ModelSelector
+              onChange={(value) => {
+                setModelValidation(false);
+                setModelId(value);
+              }}
+              value={modelId}
+            />
+          </Field>
+          <Field
+            label="Columns in the data table"
+            error={
+              propertiesValidation && (
+                <Text color="#e82600">Selecting a property is required</Text>
+              )
+            }
+          >
+            <PropertiesSelector
+              modelId={modelId}
+              value={properties}
+              disabledKinds={[
+                'BELONGS_TO',
+                'HAS_AND_BELONGS_TO_MANY',
+                'HAS_MANY',
+                'MULTI_FILE',
+                'AUTO_INCREMENT',
+                'COUNT',
+                'MULTI_IMAGE',
+                'PDF',
+                'RICH_TEXT',
+                'SIGNED_PDF',
+                'SUM',
+                'BOOLEAN_EXPRESSION',
+                'DATE_EXPRESSION',
+                'DATE_TIME_EXPRESSION',
+                'DECIMAL_EXPRESSION',
+                'INTEGER_EXPRESSION',
+                'MINUTES_EXPRESSION',
+                'PRICE_EXPRESSION',
+                'STRING_EXPRESSION',
+                'TEXT_EXPRESSION',
+                'MINUTES',
+                'ZIPCODE',
+              ]}
+              onChange={(value) => {
+                setProperties(value);
+              }}
+            />
+          </Field>
+        </Content>
         <Footer
           onSave={() => {
+            const propertiesLength = properties.length;
+            if (!modelId || propertiesLength < 1) {
+              setModelValidation(!modelId);
+              setPropertiesValidation(propertiesLength < 1);
+              return;
+            }
+
+            const dataTable = getDescendantByRef('#dataTable', prefabStructure);
+            console.log('Datatable: ', dataTable);
+            properties.forEach((property) => {
+              dataTable.descendants.push({
+                name: 'DataTableColumn',
+                options: [
+                  {
+                    value: true,
+                    label: 'Initial visibility',
+                    key: 'visible',
+                    type: 'TOGGLE',
+                    configuration: {
+                      as: 'VISIBILITY',
+                    },
+                  },
+                  {
+                    value: property,
+                    label: 'Property',
+                    key: 'property',
+                    type: 'PROPERTY',
+                  },
+                  {
+                    type: 'TOGGLE',
+                    label: 'Sortable',
+                    key: 'sortable',
+                    value: true,
+                  },
+                  {
+                    type: 'VARIABLE',
+                    label: 'Header text',
+                    key: 'headerText',
+                    value: [''],
+                  },
+                  {
+                    value: 'Body1',
+                    label: 'Header Type',
+                    key: 'type',
+                    type: 'FONT',
+                  },
+                  {
+                    type: 'VARIABLE',
+                    label: 'Content',
+                    key: 'content',
+                    value: [''],
+                    configuration: {
+                      as: 'MULTILINE',
+                    },
+                  },
+                  {
+                    value: 'Body1',
+                    label: 'Body type',
+                    key: 'bodyType',
+                    type: 'FONT',
+                  },
+                  {
+                    type: 'CUSTOM',
+                    label: 'Column Alignment',
+                    key: 'horizontalAlignment',
+                    value: 'left',
+                    configuration: {
+                      as: 'BUTTONGROUP',
+                      dataType: 'string',
+                      allowedInput: [
+                        { name: 'Left', value: 'left' },
+                        { name: 'Center', value: 'center' },
+                        { name: 'Right', value: 'right' },
+                      ],
+                    },
+                  },
+                  {
+                    type: 'SIZE',
+                    label: 'Width',
+                    key: 'width',
+                    value: '',
+                    configuration: {
+                      as: 'UNIT',
+                    },
+                  },
+                  {
+                    type: 'COLOR',
+                    label: 'Background',
+                    key: 'background',
+                    value: 'Transparent',
+                  },
+                  {
+                    type: 'COLOR',
+                    label: 'Border color',
+                    key: 'borderColor',
+                    value: 'Light',
+                  },
+                  {
+                    value: false,
+                    label: 'Advanced settings',
+                    key: 'advancedSettings',
+                    type: 'TOGGLE',
+                  },
+                  {
+                    type: 'VARIABLE',
+                    label: 'Test attribute',
+                    key: 'dataComponentAttribute',
+                    value: ['DataTableColumn'],
+                    configuration: {
+                      condition: {
+                        type: 'SHOW',
+                        option: 'advancedSettings',
+                        comparator: 'EQ',
+                        value: true,
+                      },
+                    },
+                  },
+                ],
+                descendants:
+                  property.kind === 'IMAGE'
+                    ? [
+                        {
+                          name: 'Media',
+                          options: [
+                            {
+                              label: 'Media type',
+                              key: 'type',
+                              value: 'img',
+                              type: 'CUSTOM',
+                              configuration: {
+                                as: 'BUTTONGROUP',
+                                dataType: 'string',
+                                allowedInput: [
+                                  { name: 'Image', value: 'img' },
+                                  { name: 'Video', value: 'video' },
+                                  { name: 'I-frame', value: 'iframe' },
+                                ],
+                              },
+                            },
+                            {
+                              value: [property],
+                              label: 'Source',
+                              key: 'imageSource',
+                              type: 'VARIABLE',
+                              configuration: {
+                                as: 'MULTILINE',
+                                condition: {
+                                  type: 'SHOW',
+                                  option: 'type',
+                                  comparator: 'EQ',
+                                  value: 'img',
+                                },
+                              },
+                            },
+                            {
+                              value: [],
+                              label: 'Source',
+                              key: 'videoSource',
+                              type: 'VARIABLE',
+                              configuration: {
+                                as: 'MULTILINE',
+                                condition: {
+                                  type: 'SHOW',
+                                  option: 'type',
+                                  comparator: 'EQ',
+                                  value: 'video',
+                                },
+                              },
+                            },
+                            {
+                              value: [],
+                              label: 'Source',
+                              key: 'iframeSource',
+                              type: 'VARIABLE',
+                              configuration: {
+                                as: 'MULTILINE',
+                                condition: {
+                                  type: 'SHOW',
+                                  option: 'type',
+                                  comparator: 'EQ',
+                                  value: 'iframe',
+                                },
+                              },
+                            },
+                            {
+                              type: 'CUSTOM',
+                              label: 'Link to',
+                              key: 'linkType',
+                              value: 'internal',
+                              configuration: {
+                                as: 'BUTTONGROUP',
+                                dataType: 'string',
+                                allowedInput: [
+                                  { name: 'Internal page', value: 'internal' },
+                                  { name: 'External page', value: 'external' },
+                                ],
+                                condition: {
+                                  type: 'SHOW',
+                                  option: 'type',
+                                  comparator: 'EQ',
+                                  value: 'img',
+                                },
+                              },
+                            },
+                            {
+                              value: '',
+                              label: 'Page',
+                              key: 'linkTo',
+                              type: 'ENDPOINT',
+                              configuration: {
+                                condition: {
+                                  type: 'SHOW',
+                                  option: 'linkType',
+                                  comparator: 'EQ',
+                                  value: 'internal',
+                                },
+                              },
+                            },
+                            {
+                              value: [''],
+                              label: 'URL',
+                              key: 'linkToExternal',
+                              type: 'VARIABLE',
+                              configuration: {
+                                placeholder: 'Starts with https:// or http://',
+                                condition: {
+                                  type: 'SHOW',
+                                  option: 'linkType',
+                                  comparator: 'EQ',
+                                  value: 'external',
+                                },
+                              },
+                            },
+                            {
+                              value: [],
+                              label: 'Image Alternative Text',
+                              key: 'imgAlt',
+                              type: 'VARIABLE',
+                              configuration: {
+                                condition: {
+                                  type: 'SHOW',
+                                  option: 'type',
+                                  comparator: 'EQ',
+                                  value: 'img',
+                                },
+                              },
+                            },
+                            {
+                              value: [],
+                              label: 'Title',
+                              key: 'title',
+                              type: 'VARIABLE',
+                            },
+                            {
+                              type: 'SIZE',
+                              label: 'Width',
+                              key: 'width',
+                              value: '100%',
+                              configuration: {
+                                as: 'UNIT',
+                              },
+                            },
+                            {
+                              type: 'SIZE',
+                              label: 'Height',
+                              key: 'height',
+                              value: '',
+                              configuration: {
+                                as: 'UNIT',
+                              },
+                            },
+                            {
+                              value: ['0rem', '0rem', 'M', '0rem'],
+                              label: 'Outer space',
+                              key: 'outerSpacing',
+                              type: 'SIZES',
+                            },
+                            {
+                              value: false,
+                              label: 'Advanced settings',
+                              key: 'advancedSettings',
+                              type: 'TOGGLE',
+                            },
+                            {
+                              type: 'VARIABLE',
+                              label: 'Test attribute',
+                              key: 'dataComponentAttribute',
+                              value: ['Media'],
+                              configuration: {
+                                condition: {
+                                  type: 'SHOW',
+                                  option: 'advancedSettings',
+                                  comparator: 'EQ',
+                                  value: true,
+                                },
+                              },
+                            },
+                          ],
+                          descendants: [],
+                        },
+                      ]
+                    : [],
+              });
+            });
+
             const newPrefab = { ...prefab };
             newPrefab.structure[0].descendants[0].descendants[0].descendants[0].descendants =
               prefabStructure;
