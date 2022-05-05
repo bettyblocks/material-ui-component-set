@@ -58,7 +58,6 @@
         const [, setOptions] = useOptions();
 
         useEffect(() => {
-
           B.defineFunction('SubmitWithoutValidation', () => {
             if (formRef.current) {
               formRef.current.noValidate = true;
