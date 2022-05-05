@@ -19,6 +19,7 @@
       visible,
       actionId,
       buttonText,
+      buttonValue,
       actionModels,
       addTooltip,
       hasVisibleTooltip,
@@ -45,6 +46,7 @@
     const hasInteralLink =
       linkType === 'internal' && linkTo && linkTo.id !== '';
     const buttonContent = useText(buttonText);
+    const buttonContentValue = (buttonValue && useText(buttonValue)) || '';
     const tooltipText = useText(tooltipContent);
     const [isVisible, setIsVisible] = useState(visible);
     const [isLoading, setIsLoading] = useState(false);
@@ -105,7 +107,6 @@
       B.defineFunction('Hide', () => setIsVisible(false));
       B.defineFunction('Show/Hide', () => setIsVisible((s) => !s));
       B.defineFunction('Toggle loading state', () => {
-        console.log('Toggling loading state');
         setIsLoading((s) => !s);
       });
       B.defineFunction('Enable', () => setIsDisabled(false));
@@ -225,6 +226,8 @@
 
     const handleClick = (e) => {
       e.stopPropagation();
+
+      B.triggerEvent('OnSetRowsPerPage', buttonContentValue);
     };
 
     const LinkComponent =

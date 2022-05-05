@@ -56,7 +56,7 @@
     const linkToExternalText = useText(linkToExternal);
     const href = hasExternalLink ? linkToExternalText : undefined;
 
-    const ImgPlaceholder = function () {
+    function ImgPlaceholder() {
       return (
         <svg className={classes.placeholder} width={86} height={48}>
           <title>{titleText}</title>
@@ -64,8 +64,9 @@
           <path d="M61.1349945 29.020979v3.9160839H25v-2.5379375l6.5998225-4.9892478 5.6729048 4.2829541 13.346858-11.2981564L61.1349945 29.020979zm-22.5-10.270979c0 1.0416667-.3645833 1.9270833-1.09375 2.65625S35.9266612 22.5 34.8849945 22.5s-1.9270833-.3645833-2.65625-1.09375-1.09375-1.6145833-1.09375-2.65625.3645833-1.9270833 1.09375-2.65625S33.8433278 15 34.8849945 15s1.9270833.3645833 2.65625 1.09375 1.09375 1.6145833 1.09375 2.65625z" />
         </svg>
       );
-    };
-    const VideoPlaceholder = function () {
+    }
+
+    function VideoPlaceholder() {
       return (
         <svg className={classes.placeholder} width={48} height={31}>
           <g fill="none">
@@ -76,9 +77,9 @@
           </g>
         </svg>
       );
-    };
+    }
 
-    const IframePlaceholder = function () {
+    function IframePlaceholder() {
       return (
         <svg className={classes.placeholder} width={48} height={31}>
           <g fill="none">
@@ -90,9 +91,9 @@
           </g>
         </svg>
       );
-    };
+    }
 
-    const Placeholder = function () {
+    function Placeholder() {
       switch (type) {
         case 'img':
           return <ImgPlaceholder />;
@@ -101,20 +102,23 @@
         default:
           return <IframePlaceholder />;
       }
-    };
+    }
 
-    const ImageComponent = (
-      <img
-        className={classes.media}
-        src={imgUrl}
-        title={titleText}
-        alt={imgAlt}
-        data-component={useText(dataComponentAttribute) || 'Media'}
-      />
-    );
+    function ImageComponent() {
+      return (
+        <img
+          className={classes.media}
+          src={imgUrl}
+          title={titleText}
+          alt={imgAlt}
+          data-component={useText(dataComponentAttribute) || 'Media'}
+        />
+      );
+    }
 
-    let MediaComponent = function () {
+    function PlaceholderComponent() {
       if (!isDev) return null;
+
       return (
         <div className={[(isEmpty || variableDev) && classes.empty]}>
           <div className={classes.placeholderWrapper}>
@@ -123,47 +127,53 @@
           </div>
         </div>
       );
-    };
+    }
+
+    function LinkComponent() {
+      return (
+        <Link
+          href={href}
+          component={hasInteralLink ? B.Link : undefined}
+          endpoint={hasInteralLink ? linkTo : undefined}
+        >
+          {ImageComponent}
+        </Link>
+      );
+    }
+
+    function VideoComponent() {
+      return (
+        <video
+          className={classes.media}
+          src={videoUrl}
+          title={titleText}
+          controls
+          data-component={useText(dataComponentAttribute) || 'Media'}
+        />
+      );
+    }
+
+    function IframeComponent() {
+      return (
+        <iframe
+          className={classes.media}
+          title={titleText}
+          src={iframeUrl}
+          data-component={useText(dataComponentAttribute) || 'Media'}
+        />
+      );
+    }
+
+    let MediaComponent = PlaceholderComponent;
 
     if (isImage && !variableDev && hasLink) {
-      MediaComponent = function () {
-        return (
-          <Link
-            href={href}
-            component={hasInteralLink ? B.Link : undefined}
-            endpoint={hasInteralLink ? linkTo : undefined}
-          >
-            {ImageComponent}
-          </Link>
-        );
-      };
+      MediaComponent = LinkComponent;
     } else if (isImage && !variableDev) {
-      MediaComponent = function () {
-        return ImageComponent;
-      };
+      MediaComponent = ImageComponent;
     } else if (isVideo) {
-      MediaComponent = function () {
-        return (
-          <video
-            className={classes.media}
-            src={videoUrl}
-            title={titleText}
-            controls
-            data-component={useText(dataComponentAttribute) || 'Media'}
-          />
-        );
-      };
+      MediaComponent = VideoComponent;
     } else if (isIframe) {
-      MediaComponent = function () {
-        return (
-          <iframe
-            className={classes.media}
-            title={titleText}
-            src={iframeUrl}
-            data-component={useText(dataComponentAttribute) || 'Media'}
-          />
-        );
-      };
+      MediaComponent = IframeComponent;
     }
 
     return (

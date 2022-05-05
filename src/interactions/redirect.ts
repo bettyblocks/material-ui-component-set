@@ -1,11 +1,14 @@
+/* eslint @typescript-eslint/no-unused-vars: ["error", { "varsIgnorePattern": "redirect" }] */
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+interface History {
+  push(url: string): string;
+}
+
 interface Page {
   name: string;
   resolvePath: (input: Record<string, string>) => string;
   url: string;
-}
-
-interface History {
-  push(url: string): string;
 }
 
 function redirect({
@@ -25,5 +28,6 @@ function redirect({
     url = redirectTo.resolvePath(event as any);
   }
 
+  // eslint-disable-next-line no-restricted-globals
   history.push(url);
 }

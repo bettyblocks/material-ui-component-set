@@ -146,6 +146,7 @@ import {
   FavoriteBorder,
   FileCopy,
   FilterList,
+  FirstPage,
   Flag,
   Flare,
   Flight,
@@ -317,7 +318,7 @@ import {
   Work,
 } from '@material-ui/icons';
 
-export default {
+export const icons = {
   AcUnit,
   AccessTime,
   AccessibilityNew,
@@ -465,6 +466,7 @@ export default {
   FavoriteBorder,
   FileCopy,
   FilterList,
+  FirstPage,
   Flag,
   Flare,
   Flight,

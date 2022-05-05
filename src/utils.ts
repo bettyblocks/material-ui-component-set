@@ -10,10 +10,9 @@ export const updateOption = (
   producer: OptionProducer,
   attrs: Attributes,
 ): OptionProducer => {
-  return key => ({ ...producer(key), ...attrs });
+  return (key) => ({ ...producer(key), ...attrs });
 };
 
-
 export const showOn = (key: string) => ({
-    configuration: { condition: showIfTrue(key) },
-  })
+  configuration: { condition: showIfTrue(key) },
+});

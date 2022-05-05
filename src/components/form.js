@@ -58,13 +58,17 @@
         const [, setOptions] = useOptions();
 
         useEffect(() => {
-          mounted.current = true;
-
-          B.defineFunction('setCurrentRecord', (value) => {
-            if (typeof value === 'number') {
-              setOptions({
-                currentRecord: value,
-              });
+          B.defineFunction('SubmitWithoutValidation', () => {
+            if (formRef.current) {
+              formRef.current.noValidate = true;
+              if (typeof formRef.current.requestSubmit === 'function') {
+                formRef.current.requestSubmit();
+              } else {
+                formRef.current.dispatchEvent(
+                  new Event('submit', { cancelable: true }),
+                );
+              }
+              formRef.current.noValidate = false;
             }
           });
 
@@ -77,6 +81,26 @@
                   new Event('submit', { cancelable: true }),
                 );
               }
+            }
+          });
+        }, [formRef]);
+
+        useEffect(() => {
+          mounted.current = true;
+
+          B.defineFunction('setCurrentRecord', (value) => {
+            if (typeof value === 'number') {
+              setOptions({
+                currentRecord: value,
+              });
+            }
+          });
+
+          B.defineFunction('setCurrentRecord', (value) => {
+            if (typeof value === 'number') {
+              setOptions({
+                currentRecord: value,
+              });
             }
           });
 
@@ -155,7 +179,7 @@
           .join(' ')
           .trim();
 
-        const FormElement = function () {
+        function FormElement() {
           B.defineFunction('Refetch', () => {});
           return (
             <form
@@ -168,9 +192,9 @@
               {children}
             </form>
           );
-        };
+        }
 
-        const FormCmp = function ({ item, refetch }) {
+        function FormCmp({ item, refetch }) {
           const [isInvalid, setIsInvalid] = useState(false);
           const handleInvalid = () => {
             if (!isInvalid) {
@@ -227,9 +251,9 @@
               )}
             </Action>
           );
-        };
+        }
 
-        const FormWithData = function () {
+        function FormWithData() {
           const getFilter = React.useCallback(() => {
             if (isDev || !currentRecord || !modelId) {
               return filter;
@@ -285,7 +309,7 @@
           if (!item) return children;
 
           return <FormCmp item={item} refetch={refetch} />;
-        };
+        }
 
         const RuntimeForm = hasFilter ? <FormWithData /> : <FormCmp />;
 
