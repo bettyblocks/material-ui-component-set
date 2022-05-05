@@ -11,6 +11,7 @@ export interface Configuration {
   options?: Record<string, OptionProducer>;
   format?: string;
   placeholder?: string;
+  dataComponentAttribute?: string;
 }
 
 const $afterDelete = [deleteActionVariable];
@@ -30,6 +31,15 @@ export const DateTimePicker = (
     };
 
     options.type = updateOption(options.timeFormat, update);
+  }
+
+  if (config.dataComponentAttribute) {
+    options.dataComponentAttribute = updateOption(
+      options.dataComponentAttribute,
+      {
+        value: [config.dataComponentAttribute],
+      },
+    );
   }
 
   return component('DateTimePickerInput', { options, $afterDelete }, children);
