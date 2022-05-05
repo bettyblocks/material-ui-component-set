@@ -24,7 +24,7 @@ const beforeCreate = ({
 
   return (
     <CreateFormInputWizard
-      supportedKinds={['DATE', 'DATE_TIME']}
+      supportedKinds={['DATE_TIME']}
       actionVariableType="STRING"
       actionVariableOption={actionVariableOption.key}
       labelOptionKey="label"

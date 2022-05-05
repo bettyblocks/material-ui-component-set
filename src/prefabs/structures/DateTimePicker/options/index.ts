@@ -51,9 +51,9 @@ export const options = {
 
   error: toggle('Error', { value: false }),
 
-  disabled: toggle('Disabled', { value: false }),
-
   autoComplete: toggle('Autocomplete', { value: true }),
+
+  disabled: toggle('Disabled', { value: false }),
 
   placeholder: variable('Placeholder', { value: [] }),
 
