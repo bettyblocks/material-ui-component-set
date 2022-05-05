@@ -8,9 +8,6 @@ import {
 } from '@betty-blocks/component-sdk';
 
 export const styles = {
-
- 
-
   margin: buttongroup(
     'Margin',
     [

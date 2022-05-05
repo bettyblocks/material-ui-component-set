@@ -1,5 +1,9 @@
 import * as React from 'react';
-import { BeforeCreateArgs, Icon, prefab } from '@betty-blocks/component-sdk';
+import {
+  BeforeCreateArgs,
+  Icon,
+  prefab as makePrefab,
+} from '@betty-blocks/component-sdk';
 import { DateTimePicker } from './structures/DateTimePicker';
 
 const beforeCreate = ({
@@ -8,7 +12,6 @@ const beforeCreate = ({
   prefab,
   save,
 }: BeforeCreateArgs) => {
-
   // TODO: remove this code
   const actionVariableOption = prefab.structure[0].options.find(
     (option: { type: string }) => option.type === 'ACTION_JS_VARIABLE',
@@ -22,7 +25,7 @@ const beforeCreate = ({
   return (
     <CreateFormInputWizard
       supportedKinds={['DATE', 'DATE_TIME']}
-      actionVariableType='STRING'
+      actionVariableType="STRING"
       actionVariableOption={actionVariableOption.key}
       labelOptionKey="label"
       nameOptionKey="actionVariableId"
@@ -39,6 +42,6 @@ const attributes = {
   keywords: ['Form', 'input'],
 };
 
-export default prefab('DateTimePicker Beta', attributes, beforeCreate, [
+export default makePrefab('DateTimePicker Beta', attributes, beforeCreate, [
   DateTimePicker({}),
 ]);
