@@ -7,9 +7,15 @@ import { options as defaults } from './options';
 // TODO: export OptionProducer from the sdk
 type OptionProducer = (key: string) => PrefabComponentOption;
 
+export enum DateInputTypes {
+  DATE_TIME = 'datetime',
+  DATE = 'date',
+  TIME = 'time',
+}
+
 export interface Configuration {
   options?: Record<string, OptionProducer>;
-  format?: string;
+  inputType?: string;
   placeholder?: string;
   dataComponentAttribute?: string;
 }
@@ -22,15 +28,30 @@ export const DateTimePicker = (
 ) => {
   const options = { ...(config.options || defaults) };
 
-  if (config.format) {
+  if (config.inputType) {
+    let format;
+    switch (config.inputType) {
+      case DateInputTypes.DATE_TIME:
+        format = 'MM/dd/yyyy HH:mm:ss';
+        break;
+      case DateInputTypes.DATE:
+        format = 'MM/dd/yyyy';
+        break;
+      case DateInputTypes.TIME:
+        format = 'HH:mm:ss';
+        break;
+      default:
+        format = '';
+    }
     const update = {
-      value: config.format,
+      value: format,
       ...(config.placeholder
         ? { configuration: { placeholder: config.placeholder } }
         : {}),
     };
 
-    options.type = updateOption(options.timeFormat, update);
+    options.timeFormat = updateOption(options.timeFormat, update);
+    options.type = updateOption(options.type, { value: config.inputType });
   }
 
   if (config.dataComponentAttribute) {

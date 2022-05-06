@@ -9,11 +9,11 @@ import { DateTimePicker } from './structures/DateTimePicker';
 const beforeCreate = ({
   close,
   components: { CreateFormInputWizard },
-  prefab,
+  prefab: originalPrefab,
   save,
 }: BeforeCreateArgs) => {
   // TODO: remove this code
-  const actionVariableOption = prefab.structure[0].options.find(
+  const actionVariableOption = originalPrefab.structure[0].options.find(
     (option: { type: string }) => option.type === 'ACTION_JS_VARIABLE',
   );
 
@@ -24,13 +24,13 @@ const beforeCreate = ({
 
   return (
     <CreateFormInputWizard
-      supportedKinds={['DATE_TIME']}
+      supportedKinds={['TIME']}
       actionVariableType="STRING"
       actionVariableOption={actionVariableOption.key}
       labelOptionKey="label"
       nameOptionKey="actionVariableId"
       close={close}
-      prefab={prefab}
+      prefab={originalPrefab}
       save={save}
     />
   );
@@ -38,13 +38,10 @@ const beforeCreate = ({
 
 const attributes = {
   category: 'FORMV2',
-  icon: Icon.DateTimePickerIcon,
+  icon: Icon.TimePickerIcon,
   keywords: ['Form', 'input'],
 };
 
-export default makePrefab('DateTimePicker Beta', attributes, beforeCreate, [
-  DateTimePicker({
-    dataComponentAttribute: 'DateTime Input',
-    inputType: 'datetime',
-  }),
+export default makePrefab('TimePicker Beta', attributes, beforeCreate, [
+  DateTimePicker({ dataComponentAttribute: 'Time Input', inputType: 'time' }),
 ]);
