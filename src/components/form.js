@@ -58,16 +58,6 @@
         const [, setOptions] = useOptions();
 
         useEffect(() => {
-          mounted.current = true;
-
-          B.defineFunction('setCurrentRecord', (value) => {
-            if (typeof value === 'number') {
-              setOptions({
-                currentRecord: value,
-              });
-            }
-          });
-
           B.defineFunction('Submit', () => {
             if (formRef.current) {
               if (typeof formRef.current.requestSubmit === 'function') {
@@ -77,6 +67,18 @@
                   new Event('submit', { cancelable: true }),
                 );
               }
+            }
+          });
+        }, [formRef]);
+
+        useEffect(() => {
+          mounted.current = true;
+
+          B.defineFunction('setCurrentRecord', (value) => {
+            if (typeof value === 'number') {
+              setOptions({
+                currentRecord: value,
+              });
             }
           });
 

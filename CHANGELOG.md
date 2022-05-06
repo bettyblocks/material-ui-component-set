@@ -1,3 +1,10 @@
+## [1.218.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.218.0...v1.218.1) (2022-05-04)
+
+
+### Bug Fixes
+
+* moved submit to its own useEffect with formRef as dep ([2d1acb1](https://github.com/bettyblocks/material-ui-component-set/commit/2d1acb19f641b3aa78b4487ff03d787f9ff3cce3))
+
 # [1.218.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.217.1...v1.218.0) (2022-05-02)
 
 
