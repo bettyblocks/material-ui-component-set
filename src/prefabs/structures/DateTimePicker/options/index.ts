@@ -42,6 +42,8 @@ export const options = {
 
   disableToolbar: toggle('Disable Toolbar', { value: false }),
 
+  disablePastDates: toggle('Disable past dates', { value: false }),
+
   timeFormat: text('Format', {
     value: 'MM/dd/yyyy HH:mm:ss',
     configuration: { placeholder: 'dd/MM/yyyy HH:mm:ss' },
