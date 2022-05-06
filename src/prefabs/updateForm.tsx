@@ -11,13 +11,13 @@ import {
 
 const beforeCreate = ({
   close,
-  components: { CreateFormCreateWizard },
+  components: { CreateFormUpdateWizard },
   prefab: originalPrefab,
   prefabs,
   save,
 }: BeforeCreateArgs) => {
   return (
-    <CreateFormCreateWizard
+    <CreateFormUpdateWizard
       close={close}
       prefab={originalPrefab}
       prefabs={prefabs}
@@ -28,7 +28,7 @@ const beforeCreate = ({
 
 const attributes = {
   category: 'FORMV2',
-  icon: Icon.CreateFormIcon,
+  icon: Icon.UpdateFormIcon,
 };
 
 const options = {
@@ -37,6 +37,6 @@ const options = {
   filter: filter('Filter', { configuration: { dependsOn: 'modelId' } }),
 };
 
-export default prefab('Create Form Beta', attributes, beforeCreate, [
+export default prefab('Update Form Beta', attributes, beforeCreate, [
   component('Action Form Beta', { options }, []),
 ]);

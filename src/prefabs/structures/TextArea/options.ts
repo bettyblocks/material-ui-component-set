@@ -20,5 +20,5 @@ export const options = {
   }),
 
   ...styles,
-  ...advanced
+  ...advanced,
 };
