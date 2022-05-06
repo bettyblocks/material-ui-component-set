@@ -24,7 +24,7 @@ const beforeCreate = ({
 
   return (
     <CreateFormInputWizard
-      supportedKinds={['DATE_TIME']}
+      supportedKinds={['TIME']}
       actionVariableType="STRING"
       actionVariableOption={actionVariableOption.key}
       labelOptionKey="label"
@@ -38,13 +38,10 @@ const beforeCreate = ({
 
 const attributes = {
   category: 'FORMV2',
-  icon: Icon.DateTimePickerIcon,
+  icon: Icon.TimePickerIcon,
   keywords: ['Form', 'input'],
 };
 
-export default makePrefab('DateTimePicker Beta', attributes, beforeCreate, [
-  DateTimePicker({
-    dataComponentAttribute: 'DateTime Input',
-    inputType: 'datetime',
-  }),
+export default makePrefab('TimePicker Beta', attributes, beforeCreate, [
+  DateTimePicker({ dataComponentAttribute: 'Time Input', inputType: 'time' }),
 ]);
