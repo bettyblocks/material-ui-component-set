@@ -4,29 +4,59 @@
     "airbnb/hooks",
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
-    "plugin:prettier/recommended"],
+    "plugin:prettier/recommended"
+  ],
   "plugins": ["react", "react-hooks", "prettier"],
   "env": {
     "browser": true,
     "jasmine": true
   },
   "rules": {
-    "jsx-a11y/media-has-caption": 0,
-    "react/destructuring-assignment": 0,
-    "react/display-name": 0,
-    "react/jsx-props-no-spreading": 0,
-    "react/jsx-no-useless-fragment": 0,
-    "react/jsx-filename-extension": [1, { "extensions": [".js"] }],
-    "react/jsx-no-undef": [2, { "allowGlobals": true }],
-    "react/prefer-exact-props": 0,
-    "react/prop-types": 0,
-    "react-hooks/exhaustive-deps": 0,
-    "no-restricted-globals": 0,
+    "jsx-a11y/media-has-caption": "off",
+    "react/destructuring-assignment": "off",
+    "react/display-name": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/jsx-no-useless-fragment": "off",
+    "react/jsx-filename-extension": ["warn", { "extensions": [".js"] }],
+    "react/jsx-no-undef": ["error", { "allowGlobals": true }],
+    "react/prefer-exact-props": "off",
+    "react/prop-types": "off",
+    "react-hooks/exhaustive-deps": "off",
+    "no-restricted-globals": "off",
+    "import/no-default-export": "warn",
+    "import/prefer-default-export": "off",
     "prettier/prettier": [
       "error",
       { "singleQuote": true, "trailingComma": "all" }
     ]
   },
+  "overrides": [
+    {
+      "files": ["src/**/*.ts", "src/**/*.tsx"],
+      "extends": [
+        "airbnb",
+        "airbnb/hooks",
+        "airbnb-typescript",
+        "plugin:react/recommended",
+        "plugin:react-hooks/recommended",
+        "plugin:prettier/recommended"
+      ],
+      "parserOptions": {
+        "project": "./tsconfig.json"
+      },
+      "rules": {
+        "import/no-default-export": "warn",
+        "import/prefer-default-export": "off"
+      }
+    },
+    {
+      "files": ["src/prefabs/*.ts", "src/prefabs/*.tsx", "src/index.js"],
+      "rules": {
+        "import/no-default-export": "off",
+        "import/prefer-default-export": "error"
+      }
+    }
+  ],
   "globals": {
     "B": "readonly",
     "classes": "readonly",

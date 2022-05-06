@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { BeforeCreateArgs, Icon, prefab } from '@betty-blocks/component-sdk';
-import { TextInput } from './structures/TextInput';
+import { AutocompleteInput } from './structures/AutocompleteInput';
 
 const beforeCreate = ({
   close,
@@ -20,7 +20,7 @@ const beforeCreate = ({
 
   return (
     <CreateFormInputWizard
-      supportedKinds={['TEXT', 'URL', 'IBAN', 'STRING']}
+      supportedKinds={['LIST']}
       actionVariableOption={actionVariableOption.key}
       labelOptionKey="label"
       nameOptionKey="actionVariableId"
@@ -33,10 +33,10 @@ const beforeCreate = ({
 
 const attributes = {
   category: 'FORMV2',
-  icon: Icon.TextInputIcon,
+  icon: Icon.AutoCompleteIcon,
   keywords: ['Form', 'input'],
 };
 
-export default prefab('Text Field Beta', attributes, beforeCreate, [
-  TextInput({ label: 'Textfield', type: 'text' }),
+export default prefab('Autocomplete Beta', attributes, beforeCreate, [
+  AutocompleteInput({ label: 'Autocomplete', type: 'text' }),
 ]);

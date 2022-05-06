@@ -317,7 +317,7 @@ import {
   Work,
 } from '@material-ui/icons';
 
-export default {
+export const icons = {
   AcUnit,
   AccessTime,
   AccessibilityNew,
