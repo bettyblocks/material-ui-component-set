@@ -45,7 +45,7 @@
     const DateFns = new DateFnsUtils();
     const isDev = env === 'dev';
     const parsedValue = useText(value);
-    const [selectedDate, setSelectedDate] = useState(parsedValue);
+    const [selectedDate, setSelectedDate] = useState(null);
     const helper = useText(helperText);
     const placeholderText = useText(placeholder);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
