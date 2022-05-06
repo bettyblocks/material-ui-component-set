@@ -1,3 +1,22 @@
+# [1.220.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.219.0...v1.220.0) (2022-05-06)
+
+
+### Features
+
+* added interaction ([bf8ac30](https://github.com/bettyblocks/material-ui-component-set/commit/bf8ac3071d09dc1235155b68e1e60fcd7d42b8c9))
+
+# [1.219.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.218.1...v1.219.0) (2022-05-06)
+
+
+### Bug Fixes
+
+* linting error ([a8abc31](https://github.com/bettyblocks/material-ui-component-set/commit/a8abc31f68f5104de9a52335b4f2d7fc37a0e4d2))
+
+
+### Features
+
+* add beta single-value-autocomplete ([89eca16](https://github.com/bettyblocks/material-ui-component-set/commit/89eca162c18a332706522dfb228540bbc2d09b84))
+
 ## [1.218.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.218.0...v1.218.1) (2022-05-04)
 
 
