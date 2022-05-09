@@ -39,13 +39,8 @@ export const styles = {
     { value: 'inline' },
   ),
 
-  clearable: toggle('Clearable', {
-    value: false,
-    configuration: { condition: showIf('variant', 'EQ', 'dialog') },
-  }),
-
   inputvariant: buttongroup(
-    'Input Variant',
+    'Variant',
     [
       ['Standard', 'standard'],
       ['Outlined', 'outlined'],
@@ -54,11 +49,16 @@ export const styles = {
     { value: 'outlined' },
   ),
 
+  clearable: toggle('Clearable', {
+    value: false,
+    configuration: { condition: showIf('variant', 'EQ', 'dialog') },
+  }),
+
   styles: toggle('Styles', { value: false }),
 
   hideLabel: toggle('Hide label', {
     value: false,
-    configuration: { condition: showIfTrue('true') },
+    configuration: { condition: showIfTrue('styles') },
   }),
 
   backgroundColor: color('Background color', {
