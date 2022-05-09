@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { BeforeCreateArgs, Icon, prefab } from '@betty-blocks/component-sdk';
-import { TextInput } from './structures/TextInput';
+import { SelectInput } from './structures/SelectInput';
 
 const beforeCreate = ({
   close,
@@ -8,19 +8,17 @@ const beforeCreate = ({
   prefab: originalPrefab,
   save,
 }: BeforeCreateArgs) => {
-  // TODO: remove this code
   const actionVariableOption = originalPrefab.structure[0].options.find(
     (option: { type: string }) => option.type === 'ACTION_JS_VARIABLE',
   );
 
-  // TODO: remove this code
   if (!actionVariableOption) {
     return <div>Prefab is missing the actionVariable component option</div>;
   }
 
   return (
     <CreateFormInputWizard
-      supportedKinds={['TEXT', 'URL', 'IBAN', 'STRING']}
+      supportedKinds={['LIST']}
       actionVariableOption={actionVariableOption.key}
       labelOptionKey="label"
       nameOptionKey="actionVariableId"
@@ -33,10 +31,12 @@ const beforeCreate = ({
 
 const attributes = {
   category: 'FORMV2',
-  icon: Icon.TextInputIcon,
+  icon: Icon.SelectIcon,
   keywords: ['Form', 'input'],
 };
 
-export default prefab('Text Field Beta', attributes, beforeCreate, [
-  TextInput({ label: 'Textfield', type: 'text' }),
+export default prefab('Select Beta', attributes, beforeCreate, [
+  SelectInput({
+    label: 'Select',
+  }),
 ]);

@@ -1,7 +1,6 @@
 import {
   buttongroup,
   color,
-  icon,
   ThemeColor,
   toggle,
 } from '@betty-blocks/component-sdk';
@@ -26,33 +25,25 @@ export const styles = {
     ],
     { value: 'medium' },
   ),
+
   fullWidth: toggle('Full width', { value: true }),
 
-  adornmentIcon: icon('Icon', {
-    value: '',
-  }),
-
-  adornmentPosition: buttongroup(
-    'Position',
+  variant: buttongroup(
+    'Variant',
     [
-      ['Start', 'start'],
-      ['End', 'end'],
+      ['Standard', 'standard'],
+      ['Outlined', 'outlined'],
+      ['Filled', 'filled'],
     ],
-    {
-      value: 'end',
-      configuration: {
-        condition: {
-          type: 'HIDE',
-          option: 'adornmentIcon',
-          comparator: 'EQ',
-          value: '',
-        },
-      },
-    },
+    { value: 'outlined' },
   ),
 
-  styles: toggle('Styles'),
-  hideLabel: toggle('Hide label', showOn('styles')),
+  styles: toggle('Styles', { value: false }),
+
+  hideLabel: toggle('Hide label', {
+    value: false,
+    ...showOn('styles'),
+  }),
 
   backgroundColor: color('Background color', {
     value: ThemeColor.WHITE,
@@ -81,11 +72,6 @@ export const styles = {
 
   textColor: color('Text color', {
     value: ThemeColor.BLACK,
-    ...showOn('styles'),
-  }),
-
-  placeholderColor: color('Placeholder color', {
-    value: ThemeColor.LIGHT,
     ...showOn('styles'),
   }),
 

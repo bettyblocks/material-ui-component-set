@@ -1,3 +1,59 @@
+# [1.219.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.218.1...v1.219.0) (2022-05-06)
+
+
+### Bug Fixes
+
+* linting error ([a8abc31](https://github.com/bettyblocks/material-ui-component-set/commit/a8abc31f68f5104de9a52335b4f2d7fc37a0e4d2))
+
+
+### Features
+
+* add beta single-value-autocomplete ([89eca16](https://github.com/bettyblocks/material-ui-component-set/commit/89eca162c18a332706522dfb228540bbc2d09b84))
+
+## [1.218.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.218.0...v1.218.1) (2022-05-04)
+
+
+### Bug Fixes
+
+* moved submit to its own useEffect with formRef as dep ([2d1acb1](https://github.com/bettyblocks/material-ui-component-set/commit/2d1acb19f641b3aa78b4487ff03d787f9ff3cce3))
+
+# [1.218.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.217.1...v1.218.0) (2022-05-02)
+
+
+### Bug Fixes
+
+* linter errors ([246218e](https://github.com/bettyblocks/material-ui-component-set/commit/246218e60e6bd136c4e93154abf729d5cd1d3046))
+* linter warning ([159a70e](https://github.com/bettyblocks/material-ui-component-set/commit/159a70e5f678061af44b85468e30e9c49c410a45))
+* linter warnings ([b80c0f1](https://github.com/bettyblocks/material-ui-component-set/commit/b80c0f1bf9d36a4e4e958f62bd164f2d076b613b))
+* put back History type declarations and ignore linter error ([be21390](https://github.com/bettyblocks/material-ui-component-set/commit/be21390451687f1d6b788b8f3fb804b2dce9a1ac))
+
+
+### Features
+
+* add linter for TypeScript files ([0401436](https://github.com/bettyblocks/material-ui-component-set/commit/04014366d3a73b3835ea65c53dcbaf6d4a0bf2fd))
+* enforce linter warnings as errors in ci ([71b1dbc](https://github.com/bettyblocks/material-ui-component-set/commit/71b1dbc15cf2c103714df3837fff5df928e4157c))
+
+## [1.217.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.217.0...v1.217.1) (2022-05-02)
+
+
+### Bug Fixes
+
+* added model to loginForm ([9d7f073](https://github.com/bettyblocks/material-ui-component-set/commit/9d7f0737368890074d0f41ed9b16efed0938acee))
+
+# [1.217.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.216.5...v1.217.0) (2022-04-28)
+
+
+### Bug Fixes
+
+* fix value for select component ([0e07215](https://github.com/bettyblocks/material-ui-component-set/commit/0e07215be97c953c8c1471016af7c878fdd49a9e))
+* wip select rendering issue ([35f09ff](https://github.com/bettyblocks/material-ui-component-set/commit/35f09ffe79a524a8af176342e59851bd50d98db9))
+
+
+### Features
+
+* add v2 select input ([0701ce6](https://github.com/bettyblocks/material-ui-component-set/commit/0701ce616381a52836122bbd4b12eaad39d86317))
+* remove option-type related options & related code ([49421e7](https://github.com/bettyblocks/material-ui-component-set/commit/49421e72c1b09c51db4c9ab60eccab32f9f62b0f))
+
 ## [1.216.5](https://github.com/bettyblocks/material-ui-component-set/compare/v1.216.4...v1.216.5) (2022-04-26)
 
 

@@ -13,11 +13,11 @@ import { deleteActionVariable } from './hooks/deleteActionVariable';
 const beforeCreate = ({
   close,
   components: { CreateFormInputWizard },
-  prefab,
+  prefab: originalPrefab,
   save,
 }: BeforeCreateArgs) => {
-  const actionVariableOption = prefab.structure[0].options.find(
-    (option: { type: string }) => option.type === 'ACTION_JS_VARIABLE',
+  const actionVariableOption = originalPrefab.structure[0].options.find(
+    (o) => o.type === 'ACTION_JS_VARIABLE',
   );
 
   if (!actionVariableOption) {
@@ -39,7 +39,7 @@ const beforeCreate = ({
       labelOptionKey="label"
       nameOptionKey="actionVariableId"
       close={close}
-      prefab={prefab}
+      prefab={originalPrefab}
       save={save}
     />
   );
