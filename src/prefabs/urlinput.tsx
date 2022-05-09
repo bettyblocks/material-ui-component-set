@@ -39,5 +39,5 @@ const attributes = {
 };
 
 export default prefab('Url Beta', attributes, beforeCreate, [
-  TextInput({ label: 'url', type: 'url' }),
+  TextInput({ label: 'url', type: 'url', dataComponentAttribute: 'UrlInput' }),
 ]);

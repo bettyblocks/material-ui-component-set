@@ -43,5 +43,6 @@ export default prefab('Password Beta', attributes, beforeCreate, [
     type: 'password',
     pattern,
     adornmentIcon: 'VisibilityOff',
+    dataComponentAttribute: 'PasswordInput',
   }),
 ]);
