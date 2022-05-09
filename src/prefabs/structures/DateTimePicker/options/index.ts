@@ -40,16 +40,7 @@ export const options = {
     },
   }),
 
-  disableToolbar: toggle('Disable Toolbar', { value: false }),
-
   disablePastDates: toggle('Disable past dates', { value: false }),
-
-  timeFormat: text('Format', {
-    value: 'MM/dd/yyyy HH:mm:ss',
-    configuration: { placeholder: 'dd/MM/yyyy HH:mm:ss' },
-  }),
-
-  use24HourClockTime: toggle('Use 24-hour format', { value: true }),
 
   error: toggle('Error', { value: false }),
 
@@ -60,6 +51,13 @@ export const options = {
   placeholder: variable('Placeholder', { value: [] }),
 
   helperText: variable('Helper text', { value: [] }),
+
+  timeFormat: text('Format', {
+    value: 'MM/dd/yyyy HH:mm:ss',
+    configuration: { placeholder: 'dd/MM/yyyy HH:mm:ss' },
+  }),
+
+  use24HourClockTime: toggle('Use 24-hour format', { value: true }),
 
   ...styles,
   ...advanced,
