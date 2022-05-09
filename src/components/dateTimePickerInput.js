@@ -27,7 +27,6 @@
       hideLabel,
       use24HourClockDateTime,
       use24HourClockTime,
-      nameAttribute,
       label,
       locale,
       clearable,
@@ -58,7 +57,6 @@
 
     const parsedLabel = useText(label);
     const labelText = parsedLabel || name;
-    const nameAttributeValue = useText(nameAttribute);
     const isValidDate = (date) => date instanceof Date && !isNaN(date);
 
     const convertToDate = (date) => {
@@ -209,11 +207,7 @@
       </div>
     ) : (
       <MuiPickersUtilsProvider utils={DateFnsUtils} locale={localeMap[locale]}>
-        <input
-          type="hidden"
-          name={name || nameAttributeValue}
-          value={resultString}
-        />
+        <input type="hidden" name={name} value={resultString} />
         {variant === 'static' ? (
           <div className={classes.static}>{DateTimeCmp}</div>
         ) : (
