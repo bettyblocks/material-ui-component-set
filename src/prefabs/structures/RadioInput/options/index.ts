@@ -1,4 +1,4 @@
-import { option, toggle, variable } from '@betty-blocks/component-sdk';
+import { option, variable } from '@betty-blocks/component-sdk';
 import { advanced } from './advanced';
 import { validation } from './validation';
 import { styles } from './styles';
