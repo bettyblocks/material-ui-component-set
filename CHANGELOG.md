@@ -1,3 +1,10 @@
+# [1.220.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.219.0...v1.220.0) (2022-05-06)
+
+
+### Features
+
+* added interaction ([bf8ac30](https://github.com/bettyblocks/material-ui-component-set/commit/bf8ac3071d09dc1235155b68e1e60fcd7d42b8c9))
+
 # [1.219.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.218.1...v1.219.0) (2022-05-06)
 
 
