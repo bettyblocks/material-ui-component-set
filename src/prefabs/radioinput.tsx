@@ -1,4 +1,5 @@
 import * as React from 'react';
+// @typescript-eslint/no-shadow
 import { BeforeCreateArgs, Icon, prefab } from '@betty-blocks/component-sdk';
 import { RadioInput } from './structures/RadioInput';
 
