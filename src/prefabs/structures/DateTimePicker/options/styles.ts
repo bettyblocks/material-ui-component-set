@@ -49,6 +49,8 @@ export const styles = {
     { value: 'outlined' },
   ),
 
+  disableToolbar: toggle('Disable Toolbar', { value: false }),
+
   clearable: toggle('Clearable', {
     value: false,
     configuration: { condition: showIf('variant', 'EQ', 'dialog') },
