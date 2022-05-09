@@ -2414,15 +2414,18 @@
 
         <Content>
           <Box pad={{ bottom: '15px' }}>
-            <Text color="grey700">
-              By using a partial for the header and footer you can easily reuse
-              the same structure without having to go through every page.
-            </Text>
-          </Box>
-          <Box pad={{ bottom: '15px' }}>
-            <Text size="large" weight="bold">
-              Select partials
-            </Text>
+            <Box pad={{ bottom: '15px' }}>
+              <Text size="medium" weight="bolder">
+                Select partials
+              </Text>
+            </Box>
+            <Box pad={{ bottom: '15px' }}>
+              <Text color="grey700">
+                By using a partial for the header and footer you can easily
+                reuse the same structure without having to go through every
+                page.
+              </Text>
+            </Box>
             <Field label="HEADER PARTIAL">
               <PartialSelector
                 label="Select a partial"
@@ -2459,31 +2462,19 @@
           onClick={close}
           onSave={() => {
             const newPrefab = { ...prefabStructure };
-            console.log('partialheader 1');
+
             const partialHeader = getDescendantByRef(
               '#Menu',
               newPrefab.structure,
             );
-            console.log('partialheader 2', partialHeader);
-
             partialHeader.descendants[0].partialId = headerPartialId;
-            console.log('partialheader 3', partialHeader);
-
             newPrefab.structure[0].descendants[0].descendants[0].descendants[0].descendants[0] =
               partialHeader;
-            console.log('partialheader 4');
 
-            // const partialFooter = getDescendantByRef(
-            //   '#Footer',
-            //   newPrefab.structure[0].descendants,
-            // );
-            // partialFooter.descendants[0].partialId = footerPartialId;
-            // newPrefab.structure[0].descendants[0].descendants[0].descendants[0].descendants[2] =
-            //   partialFooter;
-
-            const partialFooter =
-              newPrefab.structure[0].descendants[0].descendants[0]
-                .descendants[0].descendants[2];
+            const partialFooter = getDescendantByRef(
+              '#Footer',
+              newPrefab.structure[0].descendants,
+            );
             partialFooter.descendants[0].partialId = footerPartialId;
             newPrefab.structure[0].descendants[0].descendants[0].descendants[0].descendants[2] =
               partialFooter;
