@@ -1,3 +1,38 @@
+# [1.221.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.220.0...v1.221.0) (2022-05-09)
+
+
+### Bug Fixes
+
+* fixed name prop and moved required to validations ([12b1022](https://github.com/bettyblocks/material-ui-component-set/commit/12b1022380c066f8835402e48242e8422a86748e))
+* fixed proper required option placement ([5f76466](https://github.com/bettyblocks/material-ui-component-set/commit/5f76466704da9685aeb10633abedbcf1fb84e22c))
+* lint errors ([a3cc7f3](https://github.com/bettyblocks/material-ui-component-set/commit/a3cc7f3e88343cedd672343ef588401b473f37a3))
+* lint errors 2 ([ee267f2](https://github.com/bettyblocks/material-ui-component-set/commit/ee267f2526ce2047284f435b189ab1b9d8103f3b))
+
+
+### Features
+
+* add radio input beta ([966df18](https://github.com/bettyblocks/material-ui-component-set/commit/966df18360a3b0ad84296ac7c8e5d55534586b8a))
+* added modeldata instead of placeholders ([d40a0e2](https://github.com/bettyblocks/material-ui-component-set/commit/d40a0e2729be77003da551d272d40ae9d4d6bcfc))
+
+# [1.220.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.219.0...v1.220.0) (2022-05-06)
+
+
+### Features
+
+* added interaction ([bf8ac30](https://github.com/bettyblocks/material-ui-component-set/commit/bf8ac3071d09dc1235155b68e1e60fcd7d42b8c9))
+
+# [1.219.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.218.1...v1.219.0) (2022-05-06)
+
+
+### Bug Fixes
+
+* linting error ([a8abc31](https://github.com/bettyblocks/material-ui-component-set/commit/a8abc31f68f5104de9a52335b4f2d7fc37a0e4d2))
+
+
+### Features
+
+* add beta single-value-autocomplete ([89eca16](https://github.com/bettyblocks/material-ui-component-set/commit/89eca162c18a332706522dfb228540bbc2d09b84))
+
 ## [1.218.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.218.0...v1.218.1) (2022-05-04)
 
 
