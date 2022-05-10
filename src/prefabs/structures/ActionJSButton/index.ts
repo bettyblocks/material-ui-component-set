@@ -18,9 +18,5 @@ export const ActionJSButton = (
 ) => {
   const options = { ...(config.options || defaults) };
 
-  return component(
-    'Action Button Beta',
-    { options, $afterCreate },
-    children,
-  );
+  return component('Action Button Beta', { options, $afterCreate }, children);
 };
