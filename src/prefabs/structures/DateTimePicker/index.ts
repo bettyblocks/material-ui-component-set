@@ -43,6 +43,7 @@ export const DateTimePicker = (
       default:
         format = '';
     }
+
     const update = {
       value: format,
       ...(config.placeholder
@@ -50,7 +51,10 @@ export const DateTimePicker = (
         : {}),
     };
 
-    options.timeFormat = updateOption(options.timeFormat, update);
+    const key = `${config.inputType}Format`;
+
+    options[key] = updateOption(options[key], update);
+
     options.type = updateOption(options.type, { value: config.inputType });
   }
 

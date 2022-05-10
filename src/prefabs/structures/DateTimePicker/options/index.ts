@@ -56,7 +56,25 @@ export const options = {
 
   timeFormat: text('Format', {
     value: 'MM/dd/yyyy HH:mm:ss',
-    configuration: { placeholder: 'dd/MM/yyyy HH:mm:ss' },
+    configuration: {
+      placeholder: 'dd/MM/yyyy HH:mm:ss',
+      condition: showIf('type', 'EQ', 'time'),
+    },
+  }),
+
+  dateFormat: text('Format', {
+    value: 'MM/dd/yyyy',
+    configuration: {
+      condition: showIf('type', 'EQ', 'date'),
+    },
+  }),
+
+  datetimeFormat: text('Format', {
+    value: 'MM/dd/yyyy HH:mm:ss',
+    configuration: {
+      placeholder: 'dd/MM/yyyy HH:mm:ss',
+      condition: showIf('type', 'EQ', 'datetime'),
+    },
   }),
 
   use24HourClockTime: toggle('Use 24-hour format', { value: true }),

@@ -18,7 +18,7 @@
       type,
       dateFormat,
       timeFormat,
-      dateTimeFormat,
+      datetimeFormat,
       size,
       fullWidth,
       required,
@@ -152,7 +152,7 @@
       }
       case 'datetime': {
         DateTimeComponent = KeyboardDateTimePicker;
-        format = dateTimeFormat || 'dd/MM/yyyy HH:mm:ss';
+        format = datetimeFormat || 'dd/MM/yyyy HH:mm:ss';
         use24HourClock = use24HourClockDateTime;
 
         resultString = isValidDate(selectedDate)
