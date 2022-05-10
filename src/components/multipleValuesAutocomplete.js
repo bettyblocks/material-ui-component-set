@@ -334,39 +334,11 @@
      * Those values always need to be returned in the results of the request
      */
     /* eslint-disable no-underscore-dangle */
-    if (value.length > 0) {
-      if (!filter._or) {
-        filter._or = [];
-      }
-
-      value.forEach((x) => {
-        filter._or.push({
-          [valueProp.name]: {
-            [valuePropIsNumber ? 'eq' : 'regex']:
-              typeof x === 'string' ? x : x[valueProp.name],
-          },
-        });
-      });
-      if (defaultValueEvaluatedRef.current) {
-        if (!filter._or) {
-          filter._or = [];
-        }
-
-        filter._or.push({
-          [valueProp.name]: {
-            neq:
-              typeof value[0] === 'string'
-                ? value[0]
-                : value[0][valueProp.name],
-          },
-        });
-      }
-    } else if (multiple) {
+    if (multiple) {
       if (debouncedInputValue) {
         if (!filter._or) {
           filter._or = [];
         }
-
         filter._or.push({
           [searchProp.name]: {
             [searchPropIsNumber ? 'eq' : 'regex']: searchPropIsNumber
