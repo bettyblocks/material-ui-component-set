@@ -17,7 +17,6 @@
       Footer,
       Field,
       Text,
-      CheckBox,
       ModelSelector,
       PropertiesSelector,
     },
@@ -27,26 +26,12 @@
   }) => {
     const [modelId, setModelId] = React.useState('');
     const [properties, setProperties] = React.useState([]);
-    const [detailProperties, setDetailProperties] = React.useState([]);
     const [modelValidation, setModelValidation] = React.useState(false);
     const [propertiesValidation, setPropertiesValidation] =
       React.useState(false);
-    const [
-      createContainsNoEditableProperties,
-      setCreateContainsNoEditableProperties,
-    ] = React.useState(false);
-    const [createPropertiesValidation, setCreatePropertiesValidation] =
-      React.useState(false);
-    const [selectedCreateFormProperties, setSelectedCreateFormProperties] =
-      React.useState([]);
-    const [createFormUseDataProperties, setCreateFormUseDataProperties] =
-      React.useState(true);
     const { data } = useModelQuery({
       variables: { id: modelId },
       skip: !modelId,
-      onCompleted: (response) => {
-        setDetailProperties(response.model.properties);
-      },
     });
 
     const getDescendantByRef = (refValue, structure) =>
@@ -12527,7 +12512,7 @@
                       type: 'VARIABLE',
                       label: 'Content',
                       key: 'content',
-                      value: [enrichDetailProperty(property)],
+                      value: [{ ...property, format: 'INHERIT' }],
                       configuration: {
                         as: 'MULTILINE',
                       },
@@ -12760,114 +12745,30 @@
               ]}
               onChange={(value) => {
                 setProperties(value);
-                setCreateContainsNoEditableProperties(false);
               }}
             />
-          </Field>
-          <Field label="Create & Update Form">
-            <CheckBox
-              label="Use the same properties as the data table in the create and update form"
-              checked={createFormUseDataProperties}
-              onChange={() => {
-                setCreateFormUseDataProperties(!createFormUseDataProperties);
-                setCreateContainsNoEditableProperties(false);
-              }}
-            />
-            <Field
-              error={
-                createContainsNoEditableProperties && (
-                  <Text color="#e82600">
-                    &quot;Id&quot;, &quot;Created at&quot; and &quot;Updated
-                    at&quot; are not editable. At least one editable property is
-                    necessary in the create form. Please select one.
-                  </Text>
-                )
-              }
-            />
-            {!createFormUseDataProperties && (
-              <Field
-                label="Input fields in the create and update form"
-                error={
-                  createPropertiesValidation && (
-                    <Text color="#e82600">
-                      Selecting a property is required
-                    </Text>
-                  )
-                }
-              >
-                <PropertiesSelector
-                  modelId={modelId}
-                  value={selectedCreateFormProperties}
-                  disabledNames={['created_at', 'updated_at', 'id']}
-                  disabledKinds={[
-                    'BELONGS_TO',
-                    'HAS_AND_BELONGS_TO_MANY',
-                    'HAS_MANY',
-                    'MULTI_FILE',
-                    'AUTO_INCREMENT',
-                    'COUNT',
-                    'MULTI_IMAGE',
-                    'PDF',
-                    'RICH_TEXT',
-                    'SIGNED_PDF',
-                    'SUM',
-                    'BOOLEAN_EXPRESSION',
-                    'DATE_EXPRESSION',
-                    'DATE_TIME_EXPRESSION',
-                    'DECIMAL_EXPRESSION',
-                    'INTEGER_EXPRESSION',
-                    'MINUTES_EXPRESSION',
-                    'PRICE_EXPRESSION',
-                    'STRING_EXPRESSION',
-                    'TEXT_EXPRESSION',
-                    'MINUTES',
-                    'ZIPCODE',
-                  ]}
-                  onChange={(value) => {
-                    setCreatePropertiesValidation(!value.length);
-                    setSelectedCreateFormProperties(value);
-                    setCreateContainsNoEditableProperties(!value.length);
-                  }}
-                />
-              </Field>
-            )}
           </Field>
         </Content>
         <Footer
           onClose={close}
           onSave={() => {
-            const selectedCreateFormPropertiesLength =
-              selectedCreateFormProperties.length;
             const propertiesLength = properties.length;
-            if (
-              !modelId ||
-              (selectedCreateFormPropertiesLength < 1 &&
-                !createFormUseDataProperties) ||
-              propertiesLength < 1
-            ) {
+            if (!modelId || propertiesLength < 1) {
               setModelValidation(!modelId);
-              setCreatePropertiesValidation(
-                selectedCreateFormPropertiesLength < 1 &&
-                  !createFormUseDataProperties,
-              );
 
               setPropertiesValidation(propertiesLength < 1);
               return;
             }
-            const createFormProperties = (
-              createFormUseDataProperties
-                ? properties
-                : selectedCreateFormProperties
-            ).filter(
+            const createFormProperties = properties.filter(
               (property) =>
                 property.label !== 'Created at' &&
                 property.label !== 'Updated at' &&
                 property.label !== 'Id',
             );
-            if (createFormProperties.length < 1) {
-              setCreateContainsNoEditableProperties(true);
-              return;
-            }
+            // if (createFormProperties.length < 1) {
+            //   setCreateContainsNoEditableProperties(true);
+            //   return;
+            // }
             const newPrefab = { ...prefab };
 
             const idProperty = data.model.properties.find(
@@ -34957,7 +34858,7 @@
               '#detailsDataContainer',
               drawerSidebar,
             );
-            detailProperties.forEach((property) => {
+            properties.forEach((property) => {
               makeDetails(property, detailDataContainer);
             });
             const dataTable = getDescendantByRef('#dataTable', drawerContainer);
@@ -34975,7 +34876,7 @@
                     },
                   },
                   {
-                    value: property,
+                    value: { ...property, format: 'INHERIT' },
                     label: 'Property',
                     key: 'property',
                     type: 'PROPERTY',
