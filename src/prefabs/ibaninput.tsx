@@ -8,7 +8,12 @@ const beforeCreate = ({
   prefab: originalPrefab,
   save,
 }: BeforeCreateArgs) => {
-  const actionVariableOption = originalPrefab.structure[0].options.find(
+  const structure = originalPrefab.structure[0];
+
+  if (structure.type !== 'COMPONENT')
+    return <div>expected component prefab, found {structure.type}</div>;
+
+  const actionVariableOption = structure.options.find(
     (option: { type: string }) => option.type === 'ACTION_JS_VARIABLE',
   );
 

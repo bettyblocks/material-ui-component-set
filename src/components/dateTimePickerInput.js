@@ -7,11 +7,13 @@
     const {
       actionVariableId: name,
       autoComplete,
+      closeOnSelect,
       disabled,
       error,
       value,
       placeholder = [''],
       variant,
+      validationValueMissing,
       inputvariant,
       type,
       dateFormat,
@@ -45,7 +47,10 @@
     const isDev = env === 'dev';
     const parsedValue = useText(value);
     const [selectedDate, setSelectedDate] = useState(null);
-    const helper = useText(helperText);
+    const [errorState, setErrorState] = useState(error);
+    const helperTextResolved = useText(helperText);
+    const [helper, setHelper] = useState(helperTextResolved);
+    const valueMissingMessage = useText(validationValueMissing);
     const placeholderText = useText(placeholder);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
     const mounted = useRef(false);
@@ -70,8 +75,29 @@
       return '';
     };
 
+    const validationMessage = (validityObject) => {
+      if (validityObject.valueMissing && valueMissingMessage) {
+        return valueMissingMessage;
+      }
+      return '';
+    };
+
+    const handleValidation = (validation) => {
+      setErrorState(!validation.valid);
+      const message = validationMessage(validation) || helperTextResolved;
+      setHelper(message);
+    };
+
     const changeHandler = (date) => {
       setSelectedDate(date);
+    };
+
+    const invalidHandler = (event) => {
+      event.preventDefault();
+      const {
+        target: { validity },
+      } = event;
+      handleValidation(validity);
     };
 
     useEffect(() => {
@@ -149,6 +175,7 @@
 
     const DateTimeCmp = (
       <DateTimeComponent
+        error={errorState}
         value={selectedDate}
         size={size}
         autoComplete={autoComplete ? 'on' : 'off'}
@@ -158,6 +185,7 @@
         fullWidth={fullWidth}
         onChange={changeHandler}
         inputVariant={inputvariant}
+        onInvalid={invalidHandler}
         InputProps={{
           inputProps: {
             tabIndex: isDev ? -1 : undefined,
@@ -169,11 +197,11 @@
         required={required}
         disabled={disabled}
         label={!hideLabel && labelText}
-        error={error}
         margin={margin}
         helperText={helper}
         disableToolbar={disableToolbar}
         disablePast={disablePastDates}
+        autoOk={closeOnSelect}
         format={format}
         data-component={dataComponentAttributeValue}
         PopoverProps={{
@@ -264,7 +292,7 @@
               '!important',
             ],
           },
-          '&.Mui-error': {
+          '&.Mui-error, &.Mui-error .Mui-error': {
             color: ({ options: { errorColor } }) => [
               style.getColor(errorColor),
               '!important',
