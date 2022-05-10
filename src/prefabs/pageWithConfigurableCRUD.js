@@ -28295,6 +28295,24 @@
                     },
                     type: 'Custom',
                   },
+                  {
+                    name: 'Hide',
+                    sourceEvent: 'onActionSuccess',
+                    ref: {
+                      targetComponentId: '#deleteDialog',
+                      sourceComponentId: '#deleteActionButton',
+                    },
+                    type: 'Custom',
+                  },
+                  {
+                    name: 'Refetch',
+                    sourceEvent: 'onActionSuccess',
+                    ref: {
+                      targetComponentId: '#dataTable',
+                      sourceComponentId: '#deleteActionButton',
+                    },
+                    type: 'Custom',
+                  },
                 );
                 newPrefab.actions.push({
                   name: 'Delete record action',
@@ -28316,7 +28334,7 @@
                 });
                 newPrefab.variables.push({
                   kind: 'object',
-                  name: 'form_object',
+                  name: `${data.model.label}`,
                   ref: {
                     id: '#objectVariableId',
                     endpointId: '#endpointId',
@@ -28577,6 +28595,9 @@
               });
               contentColumn.descendants.push({
                 name: 'Dialog',
+                ref: {
+                  id: '#createDialog',
+                },
                 options: [
                   {
                     label: 'Toggle visibility',
@@ -29641,6 +29662,9 @@
                                   },
                                   {
                                     name: 'Button',
+                                    ref: {
+                                      id: '#closeCreateDialogButton',
+                                    },
                                     style: {
                                       overwrite: {
                                         backgroundColor: {
@@ -30972,6 +30996,9 @@
                                 descendants: [
                                   {
                                     name: 'Button',
+                                    ref: {
+                                      id: '#cancelCreateDialogButton',
+                                    },
                                     style: {
                                       name: 'outline',
                                     },
@@ -31288,6 +31315,9 @@
                                   },
                                   {
                                     name: 'Button',
+                                    ref: {
+                                      id: '#submitCreateDialogButton',
+                                    },
                                     options: [
                                       {
                                         label: 'Toggle visibility',
@@ -31621,6 +31651,36 @@
               //   ...createFormProps,
               //   ...createForm.descendants,
               // ];
+
+              newPrefab.interactions.push(
+                {
+                  name: 'Show',
+                  sourceEvent: 'Click',
+                  ref: {
+                    sourceComponentId: '#createButton',
+                    targetComponentId: '#createDialog',
+                  },
+                  type: 'Custom',
+                },
+                {
+                  name: 'Hide',
+                  sourceEvent: 'Click',
+                  ref: {
+                    sourceComponentId: '#closeCreateDialogButton',
+                    targetComponentId: '#createDialog',
+                  },
+                  type: 'Custom',
+                },
+                {
+                  name: 'Hide',
+                  sourceEvent: 'Click',
+                  ref: {
+                    sourceComponentId: '#cancelCreateDialogButton',
+                    targetComponentId: '#createDialog',
+                  },
+                  type: 'Custom',
+                },
+              );
             }
 
             newPrefab.structure[0].descendants[0].descendants[0].descendants[0].descendants =
