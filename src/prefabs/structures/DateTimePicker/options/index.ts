@@ -42,6 +42,8 @@ export const options = {
 
   disablePastDates: toggle('Disable past dates', { value: false }),
 
+  closeOnSelect: toggle('Close picker after select', { value: true }),
+
   error: toggle('Error', { value: false }),
 
   autoComplete: toggle('Autocomplete', { value: true }),

@@ -7,6 +7,7 @@
     const {
       actionVariableId: name,
       autoComplete,
+      closeOnSelect,
       disabled,
       error,
       value,
@@ -174,6 +175,7 @@
         helperText={helper}
         disableToolbar={disableToolbar}
         disablePast={disablePastDates}
+        autoOk={closeOnSelect}
         format={format}
         data-component={dataComponentAttributeValue}
         PopoverProps={{
