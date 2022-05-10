@@ -321,7 +321,7 @@
      * Those values always need to be returned in the results of the request
      */
     /* eslint-disable no-underscore-dangle */
-    if (multiple && value.length > 0) {
+    if (multiple) {
       if (debouncedInputValue) {
         if (!filter._or) {
           filter._or = [];

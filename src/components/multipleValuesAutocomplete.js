@@ -700,6 +700,7 @@
               (event.type === 'change' || event.type === 'keydown')
             ) {
               setInputValue(newValue);
+              setDebouncedInputValue(newValue);
             } else if (event && event.type === 'click') {
               setInputValue(newValue);
               setDebouncedInputValue(newValue);
