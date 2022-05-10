@@ -47,7 +47,6 @@
     const isDev = env === 'dev';
     const parsedValue = useText(value);
     const [selectedDate, setSelectedDate] = useState(null);
-    // const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
     const [errorState, setErrorState] = useState(error);
     const helperTextResolved = useText(helperText);
     const [helper, setHelper] = useState(helperTextResolved);
