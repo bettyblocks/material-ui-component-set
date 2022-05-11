@@ -7,6 +7,7 @@ import {
   filter,
   BeforeCreateArgs,
   Icon,
+  InteractionType,
 } from '@betty-blocks/component-sdk';
 import { alertOptions } from './alert';
 import { boxOptions } from './box';
@@ -28,9 +29,43 @@ const beforeCreate = ({
   );
 };
 
+const interactions = [
+  {
+    name: 'Show',
+    sourceEvent: 'onActionError',
+    ref: {
+      targetComponentId: '#alertErrorId',
+      sourceComponentId: '#formId',
+    },
+    type: InteractionType.Custom,
+    parameters: [],
+  },
+  {
+    name: 'Show',
+    sourceEvent: 'onActionSuccess',
+    ref: {
+      targetComponentId: '#alertSuccessId',
+      sourceComponentId: '#formId',
+    },
+    type: InteractionType.Custom,
+    parameters: [],
+  },
+  {
+    name: 'Hide',
+    sourceEvent: 'onSubmit',
+    ref: {
+      targetComponentId: '#alertErrorId',
+      sourceComponentId: '#formId',
+    },
+    type: InteractionType.Custom,
+    parameters: [],
+  },
+];
+
 const attributes = {
   category: 'FORMV2',
   icon: Icon.FormIcon,
+  interactions: interactions,
 };
 
 const successAlertOptions = {
@@ -61,8 +96,8 @@ const options = {
 
 export default prefab('Form Beta', attributes, beforeCreate, [
   component('Box', { options: boxOptions }, [
-    component('Alert', { options: successAlertOptions}, []),
-    component('Alert', { options: errorAlertOptions}, []),
-    component('Action Form Beta', { options }, []),
+    component('Alert', { ref: {id: '#alertSuccessId'}, options: successAlertOptions}, []),
+    component('Alert', { ref: {id: '#alertErrorId'}, options: errorAlertOptions}, []),
+    component('Action Form Beta', { ref: {id: '#formId'}, options }, []),
   ]),
 ]);
