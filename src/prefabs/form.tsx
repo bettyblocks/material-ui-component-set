@@ -8,6 +8,8 @@ import {
   BeforeCreateArgs,
   Icon,
 } from '@betty-blocks/component-sdk';
+import { alertOptions } from './alert';
+import { boxOptions } from './box';
 
 const beforeCreate = ({
   close,
@@ -31,6 +33,26 @@ const attributes = {
   icon: Icon.FormIcon,
 };
 
+const successAlertOptions = {
+  ...alertOptions,
+  allowTextServerResponse: option('TOGGLE', {
+    label: 'Allow to overwrite by the server response',
+    value: true,
+  }),
+}
+
+const errorAlertOptions = {
+  ...alertOptions,
+  allowTextServerResponse: option('TOGGLE', {
+    label: 'Allow to overwrite by the server response',
+    value: true,
+  }),
+  background: option('COLOR', {
+    label: 'Background color',
+    value: 'Danger',
+  }),
+}
+
 const options = {
   actionId: option('ACTION_JS', { label: 'Action', value: '' }),
   modelId: model('Model'),
@@ -38,5 +60,9 @@ const options = {
 };
 
 export default prefab('Form Beta', attributes, beforeCreate, [
-  component('Action Form Beta', { options }, []),
+  component('Box', { options: boxOptions }, [
+    component('Alert', { options: successAlertOptions}, []),
+    component('Alert', { options: errorAlertOptions}, []),
+    component('Action Form Beta', { options }, []),
+  ]),
 ]);
