@@ -11,7 +11,6 @@ import {
   PrefabInteraction,
 } from '@betty-blocks/component-sdk';
 import { alertOptions } from './alert';
-import { boxOptions } from './box';
 
 const beforeCreate = ({
   close,
@@ -52,7 +51,16 @@ const interactions: PrefabInteraction[] = [
   {
     type: InteractionType.Custom,
     name: 'Hide',
-    sourceEvent: 'onSubmit',
+    sourceEvent: 'onActionLoad',
+    ref: {
+      targetComponentId: '#alertSuccessId',
+      sourceComponentId: '#formId',
+    },
+  },
+  {
+    type: InteractionType.Custom,
+    name: 'Hide',
+    sourceEvent: 'onActionLoad',
     ref: {
       targetComponentId: '#alertErrorId',
       sourceComponentId: '#formId',
@@ -68,7 +76,12 @@ const attributes = {
 
 const successAlertOptions = {
   ...alertOptions,
-  allowTextServerResponse: option('TOGGLE', {
+  visible: option('TOGGLE', {
+    label: 'Toggle visibility',
+    value: false,
+    configuration: { as: 'VISIBILITY' },
+  }),
+  allowTitleServerResponse: option('TOGGLE', {
     label: 'Allow to overwrite by the server response',
     value: true,
   }),
@@ -76,7 +89,12 @@ const successAlertOptions = {
 
 const errorAlertOptions = {
   ...alertOptions,
-  allowTextServerResponse: option('TOGGLE', {
+  visible: option('TOGGLE', {
+    label: 'Toggle visibility',
+    value: false,
+    configuration: { as: 'VISIBILITY' },
+  }),
+  allowTitleServerResponse: option('TOGGLE', {
     label: 'Allow to overwrite by the server response',
     value: true,
   }),
@@ -93,7 +111,7 @@ const options = {
 };
 
 export default prefab('Form Beta', attributes, beforeCreate, [
-  component('Box', { options: boxOptions }, [
+  component('Action Form Beta', { ref: { id: '#formId' }, options }, [
     component(
       'Alert',
       { ref: { id: '#alertSuccessId' }, options: successAlertOptions },
@@ -104,6 +122,5 @@ export default prefab('Form Beta', attributes, beforeCreate, [
       { ref: { id: '#alertErrorId' }, options: errorAlertOptions },
       [],
     ),
-    component('Action Form Beta', { ref: { id: '#formId' }, options }, []),
   ]),
 ]);
