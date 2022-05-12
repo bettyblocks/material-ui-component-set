@@ -299,7 +299,7 @@ export const boxOptions = {
   }),
   borderStyle: option('CUSTOM', {
     value: 'solid',
-    label: 'Border style',,
+    label: 'Border style',
     configuration: {
       as: 'BUTTONGROUP',
       dataType: 'string',
