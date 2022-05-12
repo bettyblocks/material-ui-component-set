@@ -1,3 +1,11 @@
+## [1.221.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.221.0...v1.221.1) (2022-05-11)
+
+
+### Bug Fixes
+
+* fixed multi and custom autocomplete ([05da24c](https://github.com/bettyblocks/material-ui-component-set/commit/05da24c28594366e44a743bb39e89ddbc6ddf100))
+* fixed multivalue autocomplete ([5b646f1](https://github.com/bettyblocks/material-ui-component-set/commit/5b646f18cbf0b7533aa62189f665ec722e74fede))
+
 # [1.221.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.220.0...v1.221.0) (2022-05-09)
 
 
