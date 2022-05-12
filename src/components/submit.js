@@ -6,13 +6,13 @@
   jsx: (() => {
     const { label } = options;
 
-    const Input = function () {
+    function Input() {
       return (
         <div>
           <input className={classes.submit} type="submit" value={label} />
         </div>
       );
-    };
+    }
 
     if (B.env !== 'prod') {
       return (

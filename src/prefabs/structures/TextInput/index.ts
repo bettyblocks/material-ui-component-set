@@ -53,6 +53,6 @@ export const TextInput = (
       value: config.adornmentIcon,
     });
   }
-  
+
   return component('TextInput', { options, $afterDelete }, children);
 };
