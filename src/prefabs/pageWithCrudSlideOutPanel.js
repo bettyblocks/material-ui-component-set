@@ -6809,6 +6809,12 @@
                       value: false,
                     },
                     {
+                      type: 'TOGGLE',
+                      label: 'Close picker after select',
+                      key: 'closeOnSelect',
+                      value: true,
+                    },
+                    {
                       label: 'Language',
                       key: 'locale',
                       value: 'en',
@@ -7762,6 +7768,12 @@
                       label: 'Disable past dates',
                       key: 'disablePastDates',
                       value: false,
+                    },
+                    {
+                      type: 'TOGGLE',
+                      label: 'Close picker after select',
+                      key: 'closeOnSelect',
+                      value: true,
                     },
                     {
                       label: 'Language',
@@ -8748,6 +8760,12 @@
                       label: 'Disable Toolbar',
                       key: 'disableToolbar',
                       value: false,
+                    },
+                    {
+                      type: 'TOGGLE',
+                      label: 'Close picker after select',
+                      key: 'closeOnSelect',
+                      value: true,
                     },
                     {
                       value: 'HH:mm:ss',
