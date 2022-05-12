@@ -24,9 +24,7 @@ export const options = {
   label: variable('Label', { value: [''] }),
   value: variable('Value', { value: [''] }),
 
-  validationOptions: toggle('Validation options'),
-
-  required: toggle('Required', showOn('validationOptions')),
+  required: toggle('Required'),
 
   validationValueMissing: variable('Value required message', {
     value: ['This field is required'],
@@ -39,12 +37,6 @@ export const options = {
       condition: showIf('type', 'EQ', false),
     },
   }),
-
-  disablePastDates: toggle('Disable past dates', { value: false }),
-
-  closeOnSelect: toggle('Close picker after select', { value: true }),
-
-  error: toggle('Error', { value: false }),
 
   autoComplete: toggle('Autocomplete', { value: true }),
 
@@ -78,6 +70,10 @@ export const options = {
   }),
 
   use24HourClockTime: toggle('Use 24-hour format', { value: true }),
+
+  disablePastDates: toggle('Disable past dates', { value: false }),
+
+  closeOnSelect: toggle('Close picker after select', { value: true }),
 
   ...styles,
   ...advanced,
