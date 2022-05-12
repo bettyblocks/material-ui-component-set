@@ -30,7 +30,7 @@ export const styles = {
   fullWidth: toggle('Full width', { value: true }),
 
   variant: buttongroup(
-    'Variant',
+    'Picker Variant',
     [
       ['Dialog', 'dialog'],
       ['Inline', 'inline'],
