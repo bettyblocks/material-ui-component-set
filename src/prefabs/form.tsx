@@ -8,6 +8,7 @@ import {
   BeforeCreateArgs,
   Icon,
   InteractionType,
+  PrefabInteraction,
 } from '@betty-blocks/component-sdk';
 import { alertOptions } from './alert';
 import { boxOptions } from './box';
@@ -29,36 +30,33 @@ const beforeCreate = ({
   );
 };
 
-const interactions = [
+const interactions: PrefabInteraction[] = [
   {
+    type: InteractionType.Custom,
     name: 'Show',
     sourceEvent: 'onActionError',
     ref: {
       targetComponentId: '#alertErrorId',
       sourceComponentId: '#formId',
     },
-    type: InteractionType.Custom,
-    parameters: [],
   },
   {
+    type: InteractionType.Custom,
     name: 'Show',
     sourceEvent: 'onActionSuccess',
     ref: {
       targetComponentId: '#alertSuccessId',
       sourceComponentId: '#formId',
     },
-    type: InteractionType.Custom,
-    parameters: [],
   },
   {
+    type: InteractionType.Custom,
     name: 'Hide',
     sourceEvent: 'onSubmit',
     ref: {
       targetComponentId: '#alertErrorId',
       sourceComponentId: '#formId',
     },
-    type: InteractionType.Custom,
-    parameters: [],
   },
 ];
 
