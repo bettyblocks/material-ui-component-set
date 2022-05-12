@@ -173,11 +173,22 @@
       default:
     }
 
+    const onBlurHandler = () => {
+      if (selectedDate && DateFns.isValid(selectedDate)) {
+        setErrorState(false);
+        setHelper('');
+      } else {
+        setErrorState(true);
+        setHelper('invalid input');
+      }
+    };
+
     const DateTimeCmp = (
       <DateTimeComponent
         error={errorState}
         value={selectedDate}
         size={size}
+        onBlur={onBlurHandler}
         autoComplete={autoComplete ? 'on' : 'off'}
         classes={{ root: classes.formControl }}
         variant={variant}
