@@ -90,6 +90,11 @@
 
     const changeHandler = (date) => {
       setSelectedDate(date);
+
+      if (!date || DateFns.isValid(date)) {
+        setErrorState(false);
+        setHelper('');
+      }
     };
 
     const invalidHandler = (event) => {
