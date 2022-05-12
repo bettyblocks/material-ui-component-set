@@ -11756,7 +11756,7 @@
                   },
                 },
                 {
-                  value: [property],
+                  value: [{ ...property }],
                   label: 'Source',
                   key: 'imageSource',
                   type: 'VARIABLE',
@@ -12489,7 +12489,7 @@
                       type: 'VARIABLE',
                       label: 'Content',
                       key: 'content',
-                      value: [property],
+                      value: [{ ...property }],
                       configuration: {
                         as: 'MULTILINE',
                       },
@@ -34870,7 +34870,7 @@
                     },
                   },
                   {
-                    value: { property },
+                    value: { ...property },
                     label: 'Property',
                     key: 'property',
                     type: 'PROPERTY',
