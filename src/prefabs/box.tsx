@@ -1,10 +1,4 @@
-import {
-  component,
-  option,
-  prefab,
-  Icon,
-} from '@betty-blocks/component-sdk';
-
+import { component, option, prefab, Icon } from '@betty-blocks/component-sdk';
 
 const attributes = {
   category: 'LAYOUT',

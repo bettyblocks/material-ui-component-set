@@ -65,7 +65,7 @@ const interactions = [
 const attributes = {
   category: 'FORMV2',
   icon: Icon.FormIcon,
-  interactions: interactions,
+  interactions,
 };
 
 const successAlertOptions = {
@@ -74,7 +74,7 @@ const successAlertOptions = {
     label: 'Allow to overwrite by the server response',
     value: true,
   }),
-}
+};
 
 const errorAlertOptions = {
   ...alertOptions,
@@ -86,7 +86,7 @@ const errorAlertOptions = {
     label: 'Background color',
     value: 'Danger',
   }),
-}
+};
 
 const options = {
   actionId: option('ACTION_JS', { label: 'Action', value: '' }),
@@ -96,8 +96,16 @@ const options = {
 
 export default prefab('Form Beta', attributes, beforeCreate, [
   component('Box', { options: boxOptions }, [
-    component('Alert', { ref: {id: '#alertSuccessId'}, options: successAlertOptions}, []),
-    component('Alert', { ref: {id: '#alertErrorId'}, options: errorAlertOptions}, []),
-    component('Action Form Beta', { ref: {id: '#formId'}, options }, []),
+    component(
+      'Alert',
+      { ref: { id: '#alertSuccessId' }, options: successAlertOptions },
+      [],
+    ),
+    component(
+      'Alert',
+      { ref: { id: '#alertErrorId' }, options: errorAlertOptions },
+      [],
+    ),
+    component('Action Form Beta', { ref: { id: '#formId' }, options }, []),
   ]),
 ]);
