@@ -1,37 +1,40 @@
 (() => ({
-  name: 'DateTimePicker',
-  type: 'CONTENT_COMPONENT',
+  name: 'DateTimePickerInput',
+  type: 'FORM_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const {
+      actionVariableId: name,
       autoComplete,
+      closeOnSelect,
       disabled,
       error,
+      value,
       placeholder = [''],
       variant,
+      validationValueMissing,
       inputvariant,
       type,
       dateFormat,
       timeFormat,
-      dateTimeFormat,
+      datetimeFormat,
       size,
       fullWidth,
+      required,
       margin,
       helperText = [''],
       disableToolbar,
       disablePastDates,
-      closeOnSelect,
       hideLabel,
-      customModelAttribute: customModelAttributeObj,
       use24HourClockDateTime,
       use24HourClockTime,
-      nameAttribute,
+      label,
       locale,
       clearable,
       dataComponentAttribute = ['DateTimePicker'],
     } = options;
-    const { env, getCustomModelAttribute, useText, Icon } = B;
+    const { env, useText, Icon } = B;
     const {
       MuiPickersUtilsProvider,
       KeyboardTimePicker,
@@ -42,8 +45,12 @@
     const { nlLocale, enLocale } = window.MaterialUI.DateLocales;
     const DateFns = new DateFnsUtils();
     const isDev = env === 'dev';
+    const parsedValue = useText(value);
     const [selectedDate, setSelectedDate] = useState(null);
-    const helper = useText(helperText);
+    const [errorState, setErrorState] = useState(error);
+    const helperTextResolved = useText(helperText);
+    const [helper, setHelper] = useState(helperTextResolved);
+    const valueMissingMessage = useText(validationValueMissing);
     const placeholderText = useText(placeholder);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
     const mounted = useRef(false);
@@ -53,23 +60,8 @@
       en: enLocale,
     };
 
-    const {
-      id: customModelAttributeId,
-      label = [],
-      value: defaultValue = [],
-      required: defaultRequired = false,
-    } = customModelAttributeObj;
-    const strDefaultValue = useText(defaultValue, { rawValue: true });
-    const labelText = useText(label);
-    const customModelAttribute = getCustomModelAttribute(
-      customModelAttributeId,
-    );
-    const {
-      name: customModelAttributeName,
-      validations: { required: attributeRequired } = {},
-    } = customModelAttribute || {};
-    const required = customModelAttribute ? attributeRequired : defaultRequired;
-    const nameAttributeValue = useText(nameAttribute);
+    const parsedLabel = useText(label);
+    const labelText = parsedLabel || name;
     const isValidDate = (date) => date instanceof Date && !isNaN(date);
 
     const convertToDate = (date) => {
@@ -83,9 +75,41 @@
       return '';
     };
 
+    const validationMessage = (validityObject) => {
+      if (validityObject.valueMissing && valueMissingMessage) {
+        return valueMissingMessage;
+      }
+      return '';
+    };
+
+    const handleValidation = (validation) => {
+      setErrorState(!validation.valid);
+      const message = validationMessage(validation) || helperTextResolved;
+      setHelper(message);
+    };
+
     const changeHandler = (date) => {
       setSelectedDate(date);
+
+      if (!date || DateFns.isValid(date)) {
+        setErrorState(false);
+        setHelper('');
+      }
     };
+
+    const invalidHandler = (event) => {
+      event.preventDefault();
+      const {
+        target: { validity },
+      } = event;
+      handleValidation(validity);
+    };
+
+    useEffect(() => {
+      if (parsedValue) {
+        setSelectedDate(parsedValue);
+      }
+    }, [parsedValue]);
 
     useEffect(() => {
       if (mounted.current) {
@@ -114,23 +138,6 @@
       };
     }, []);
 
-    const setDefaultDate = (defaultFormat, givenFormat) => {
-      if (!selectedDate && strDefaultValue) {
-        const propDefaultParse = defaultFormat
-          ? DateFns.parse(strDefaultValue, defaultFormat)
-          : new Date(strDefaultValue);
-        const formatDefaultParse = DateFns.parse(strDefaultValue, givenFormat);
-
-        if (isValidDate(propDefaultParse)) {
-          setSelectedDate(propDefaultParse);
-        } else if (isValidDate(formatDefaultParse)) {
-          setSelectedDate(formatDefaultParse);
-        } else {
-          setSelectedDate(DateFns.parse('00:00:00', 'HH:mm:ss'));
-        }
-      }
-    };
-
     B.defineFunction('Clear', () => setSelectedDate(null));
 
     let DateTimeComponent;
@@ -143,7 +150,6 @@
         DateTimeComponent = KeyboardDatePicker;
         format = dateFormat || 'dd/MM/yyyy';
 
-        setDefaultDate('yyyy-MM-dd', format);
         resultString = isValidDate(selectedDate)
           ? DateFns.format(selectedDate, 'yyyy-MM-dd')
           : null;
@@ -151,13 +157,11 @@
       }
       case 'datetime': {
         DateTimeComponent = KeyboardDateTimePicker;
-        format = dateTimeFormat || 'dd/MM/yyyy HH:mm:ss';
+        format = datetimeFormat || 'dd/MM/yyyy HH:mm:ss';
         use24HourClock = use24HourClockDateTime;
 
-        setDefaultDate(null, format);
-
         resultString = isValidDate(selectedDate)
-          ? new Date(selectedDate).toISOString()
+          ? DateFns.format(selectedDate, 'yyyy-MM-dd HH:mm:ss')
           : null;
         break;
       }
@@ -165,8 +169,6 @@
         DateTimeComponent = KeyboardTimePicker;
         format = timeFormat || 'HH:mm:ss';
         use24HourClock = use24HourClockTime;
-
-        setDefaultDate('HH:mm:ss', format);
 
         resultString = isValidDate(selectedDate)
           ? DateFns.format(selectedDate, 'HH:mm:ss')
@@ -176,11 +178,22 @@
       default:
     }
 
+    const onBlurHandler = () => {
+      if (selectedDate && DateFns.isValid(selectedDate)) {
+        setErrorState(false);
+        setHelper('');
+      } else {
+        setErrorState(true);
+        setHelper('invalid input');
+      }
+    };
+
     const DateTimeCmp = (
       <DateTimeComponent
-        name={nameAttributeValue || customModelAttributeName}
+        error={errorState}
         value={selectedDate}
         size={size}
+        onBlur={onBlurHandler}
         autoComplete={autoComplete ? 'on' : 'off'}
         classes={{ root: classes.formControl }}
         variant={variant}
@@ -188,9 +201,9 @@
         fullWidth={fullWidth}
         onChange={changeHandler}
         inputVariant={inputvariant}
+        onInvalid={invalidHandler}
         InputProps={{
           inputProps: {
-            name: nameAttributeValue || customModelAttributeName,
             tabIndex: isDev ? -1 : undefined,
           },
         }}
@@ -200,7 +213,6 @@
         required={required}
         disabled={disabled}
         label={!hideLabel && labelText}
-        error={error}
         margin={margin}
         helperText={helper}
         disableToolbar={disableToolbar}
@@ -239,11 +251,7 @@
       </div>
     ) : (
       <MuiPickersUtilsProvider utils={DateFnsUtils} locale={localeMap[locale]}>
-        <input
-          type="hidden"
-          name={nameAttributeValue || customModelAttributeName}
-          value={resultString}
-        />
+        <input type="hidden" name={name} value={resultString} />
         {variant === 'static' ? (
           <div className={classes.static}>{DateTimeCmp}</div>
         ) : (
@@ -300,7 +308,7 @@
               '!important',
             ],
           },
-          '&.Mui-error': {
+          '&.Mui-error, &.Mui-error .Mui-error': {
             color: ({ options: { errorColor } }) => [
               style.getColor(errorColor),
               '!important',

@@ -1,6 +1,7 @@
 import * as React from 'react';
+// @typescript-eslint/no-shadow
 import { BeforeCreateArgs, Icon, prefab } from '@betty-blocks/component-sdk';
-import { TextInput } from './structures/TextInput';
+import { RadioInput } from './structures/RadioInput';
 
 const beforeCreate = ({
   close,
@@ -23,7 +24,7 @@ const beforeCreate = ({
 
   return (
     <CreateFormInputWizard
-      supportedKinds={['IBAN']}
+      supportedKinds={['LIST']}
       actionVariableOption={actionVariableOption.key}
       labelOptionKey="label"
       nameOptionKey="actionVariableId"
@@ -36,13 +37,12 @@ const beforeCreate = ({
 
 const attributes = {
   category: 'FORMV2',
-  icon: Icon.IbanInputIcon,
+  icon: Icon.RadioButtonIcon,
   keywords: ['Form', 'input'],
 };
 
-const pattern =
-  '^([A-Z]{2}[ \\-]?[0-9]{2})(?=(?:[ \\-]?[A-Z0-9]){9,30}$)((?:[ \\-]?[A-Z0-9]{3,5}){2,7})([ \\-]?[A-Z0-9]{1,3})?$';
-
-export default prefab('IBAN Beta', attributes, beforeCreate, [
-  TextInput({ label: 'IBAN', type: 'text', pattern }),
+export default prefab('Radio Beta', attributes, beforeCreate, [
+  RadioInput({
+    label: 'Radio',
+  }),
 ]);
