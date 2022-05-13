@@ -1,5 +1,5 @@
 (() => ({
-  name: 'CRUD with slide-out panel - W.I.P.',
+  name: 'CRUD with slide-out panel',
   icon: 'DataTable',
   type: 'page',
   description: 'This page contains a datatable with CRUD slide-out panel.',
@@ -12852,7 +12852,7 @@
         return (
           <>
             <Box pad={{ bottom: '15px' }}>
-              <Box pad={{ bottom: '15px' }}>
+              <Box>
                 <Text size="medium" weight="bolder">
                   Select partials
                 </Text>
@@ -39627,7 +39627,7 @@
         return (
           <Box
             justify="center"
-            margin={{ bottom: '2rem', left: '2rem', top: '-1rem' }}
+            margin={{ left: '2rem', top: '-1rem', bottom: '-1rem' }}
           >
             <Text size="medium" weight="bold">{`Step: ${stepNumber} / ${
               stepper.stepAmount
