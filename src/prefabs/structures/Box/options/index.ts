@@ -6,6 +6,7 @@ import {
   toggle,
   variable,
   showIf,
+  buttongroup,
 } from '@betty-blocks/component-sdk';
 import { advanced } from './advanced';
 
@@ -134,20 +135,21 @@ export const options = {
       condition: showIf('backgroundOptions', 'EQ', true),
     },
   }),
-  backgroundSize: option('CUSTOM', {
-    value: 'initial',
-    label: 'Background size',
-    configuration: {
-      as: 'BUTTONGROUP',
-      dataType: 'string',
-      allowedInput: [
-        { name: 'Initial', value: 'initial' },
-        { name: 'Contain', value: 'contain' },
-        { name: 'Cover', value: 'cover' },
-      ],
-      condition: showIf('backgroundOptions', 'EQ', true),
+  backgroundSize: buttongroup(
+    'Background size',
+    [
+      ['Initial', 'initial'],
+      ['Contain', 'contain'],
+      ['Cover', 'cover'],
+    ],
+    {
+      value: 'initial',
+      configuration: {
+        dataType: 'string',
+        condition: showIf('backgroundOptions', 'EQ', true),
+      },
     },
-  }),
+  ),
   backgroundPosition: option('CUSTOM', {
     value: 'center center',
     label: 'Background position',
@@ -168,35 +170,37 @@ export const options = {
       condition: showIf('backgroundOptions', 'EQ', true),
     },
   }),
-  backgroundRepeat: option('CUSTOM', {
-    value: 'no-repeat',
-    label: 'Background repeat',
-    configuration: {
-      as: 'BUTTONGROUP',
-      dataType: 'string',
-      allowedInput: [
-        { name: 'None', value: 'no-repeat' },
-        { name: 'X', value: 'repeat-x' },
-        { name: 'Y', value: 'repeat-y' },
-        { name: 'All', value: 'repeat' },
-      ],
-      condition: showIf('backgroundOptions', 'EQ', true),
+  backgroundRepeat: buttongroup(
+    'Background repeat',
+    [
+      ['None', 'no-repeat'],
+      ['X', 'repeat-x'],
+      ['Y', 'repeat-y'],
+      ['All', 'repeat'],
+    ],
+    {
+      value: 'no-repeat',
+      configuration: {
+        dataType: 'string',
+        condition: showIf('backgroundOptions', 'EQ', true),
+      },
     },
-  }),
-  backgroundAttachment: option('CUSTOM', {
-    value: 'inherit',
-    label: 'Background attachment',
-    configuration: {
-      as: 'BUTTONGROUP',
-      dataType: 'string',
-      allowedInput: [
-        { name: 'Inherit', value: 'inherit' },
-        { name: 'Scroll', value: 'scroll' },
-        { name: 'Fixed', value: 'fixed' },
-      ],
-      condition: showIf('backgroundOptions', 'EQ', true),
+  ),
+  backgroundAttachment: buttongroup(
+    'Background attachment',
+    [
+      ['Inherit', 'inherit'],
+      ['Scroll', 'scroll'],
+      ['Fixed', 'fixed'],
+    ],
+    {
+      value: 'inherit',
+      configuration: {
+        dataType: 'string',
+        condition: showIf('backgroundOptions', 'EQ', true),
+      },
     },
-  }),
+  ),
   borderColor: color('Border color', {
     value: ThemeColor.TRANSPARENT,
     configuration: {
@@ -210,21 +214,22 @@ export const options = {
       condition: showIf('backgroundOptions', 'EQ', true),
     },
   }),
-  borderStyle: option('CUSTOM', {
-    value: 'solid',
-    label: 'Border style',
-    configuration: {
-      as: 'BUTTONGROUP',
-      dataType: 'string',
-      allowedInput: [
-        { name: 'None', value: 'none' },
-        { name: 'Solid', value: 'solid' },
-        { name: 'Dashed', value: 'dashed' },
-        { name: 'Dotted', value: 'dotted' },
-      ],
-      condition: showIf('backgroundOptions', 'EQ', true),
+  borderStyle: buttongroup(
+    'Border style',
+    [
+      ['None', 'none'],
+      ['Solid', 'solid'],
+      ['Dashed', 'dashed'],
+      ['Dotted', 'dotted'],
+    ],
+    {
+      value: 'solid',
+      configuration: {
+        dataType: 'string',
+        condition: showIf('backgroundOptions', 'EQ', true),
+      },
     },
-  }),
+  ),
   borderRadius: sizes('Border radius', {
     value: '',
     configuration: {

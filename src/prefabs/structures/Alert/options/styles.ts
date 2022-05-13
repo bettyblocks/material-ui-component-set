@@ -1,8 +1,8 @@
 import {
+  buttongroup,
   color,
   hideIf,
   icon,
-  option,
   sizes,
   ThemeColor,
   toggle,
@@ -27,34 +27,36 @@ export const styles = {
   collapsable: toggle('Collapsable', {
     value: false,
   }),
-  horizontalAlignment: option('CUSTOM', {
-    label: 'Horizontal Alignment',
-    value: 'flex-start',
-    configuration: {
-      as: 'BUTTONGROUP',
-      dataType: 'string',
-      allowedInput: [
-        { name: 'Left', value: 'flex-start' },
-        { name: 'Center', value: 'center' },
-        { name: 'Right', value: 'flex-end' },
-      ],
-      condition: hideIf('collapsable', 'EQ', true),
+  horizontalAlignment: buttongroup(
+    'Horizontal Alignment',
+    [
+      ['Left', 'flex-start'],
+      ['Center', 'center'],
+      ['Right', 'flex-end'],
+    ],
+    {
+      value: 'flex-start',
+      configuration: {
+        dataType: 'string',
+        condition: hideIf('collapsable', 'EQ', true),
+      },
     },
-  }),
-  verticalAlignment: option('CUSTOM', {
-    label: 'Vertical Alignment',
-    value: 'stretch',
-    configuration: {
-      as: 'BUTTONGROUP',
-      dataType: 'string',
-      allowedInput: [
-        { name: 'Top', value: 'flex-start' },
-        { name: 'Center', value: 'center' },
-        { name: 'Bottom', value: 'flex-end' },
-        { name: 'Justified', value: 'stretch' },
-      ],
+  ),
+  verticalAlignment: buttongroup(
+    'Vertical Alignment',
+    [
+      ['Top', 'flex-start'],
+      ['Center', 'center'],
+      ['Bottom', 'flex-end'],
+      ['Justified', 'stretch'],
+    ],
+    {
+      value: 'stretch',
+      configuration: {
+        dataType: 'string',
+      },
     },
-  }),
+  ),
   outerSpacing: sizes('Outer space', {
     value: ['0rem', '0rem', 'M', '0rem'],
   }),
