@@ -1,9 +1,11 @@
 import {
   color,
   hideIf,
+  icon,
   option,
   sizes,
   ThemeColor,
+  toggle,
 } from '@betty-blocks/component-sdk';
 
 export const styles = {
@@ -19,7 +21,12 @@ export const styles = {
   borderColor: color('Border color', {
     value: ThemeColor.TRANSPARENT,
   }),
-
+  icon: icon('Icon', {
+    value: 'None',
+  }),
+  collapsable: toggle('Collapsable', {
+    value: false,
+  }),
   horizontalAlignment: option('CUSTOM', {
     label: 'Horizontal Alignment',
     value: 'flex-start',

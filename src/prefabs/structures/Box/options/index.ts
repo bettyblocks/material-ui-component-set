@@ -5,6 +5,7 @@ import {
   ThemeColor,
   toggle,
   variable,
+  showIf,
 } from '@betty-blocks/component-sdk';
 import { advanced } from './advanced';
 
@@ -80,60 +81,35 @@ export const options = {
         { name: 'Fixed', value: 'fixed' },
         { name: 'Sticky', value: 'sticky' },
       ],
-      condition: {
-        type: 'SHOW',
-        option: 'positioningOptions',
-        comparator: 'EQ',
-        value: true,
-      },
+      condition: showIf('positioningOptions', 'EQ', true),
     },
   }),
   top: sizes('Top position', {
     value: '',
     configuration: {
       as: 'UNIT',
-      condition: {
-        type: 'SHOW',
-        option: 'positioningOptions',
-        comparator: 'EQ',
-        value: true,
-      },
+      condition: showIf('positioningOptions', 'EQ', true),
     },
   }),
   right: sizes('Right position', {
     value: '',
     configuration: {
       as: 'UNIT',
-      condition: {
-        type: 'SHOW',
-        option: 'positioningOptions',
-        comparator: 'EQ',
-        value: true,
-      },
+      condition: showIf('positioningOptions', 'EQ', true),
     },
   }),
   bottom: sizes('Bottom position', {
     value: '',
     configuration: {
       as: 'UNIT',
-      condition: {
-        type: 'SHOW',
-        option: 'positioningOptions',
-        comparator: 'EQ',
-        value: true,
-      },
+      condition: showIf('positioningOptions', 'EQ', true),
     },
   }),
   left: sizes('Left position', {
     value: '',
     configuration: {
       as: 'UNIT',
-      condition: {
-        type: 'SHOW',
-        option: 'positioningOptions',
-        comparator: 'EQ',
-        value: true,
-      },
+      condition: showIf('positioningOptions', 'EQ', true),
     },
   }),
   backgroundOptions: toggle('Show background options', {
@@ -142,35 +118,20 @@ export const options = {
   backgroundColor: color('Background color', {
     value: ThemeColor.TRANSPARENT,
     configuration: {
-      condition: {
-        type: 'SHOW',
-        option: 'backgroundOptions',
-        comparator: 'EQ',
-        value: true,
-      },
+      condition: showIf('backgroundOptions', 'EQ', true),
     },
   }),
   backgroundColorAlpha: option('NUMBER', {
     label: 'Background color opacity',
     value: 100,
     configuration: {
-      condition: {
-        type: 'SHOW',
-        option: 'backgroundOptions',
-        comparator: 'EQ',
-        value: true,
-      },
+      condition: showIf('backgroundOptions', 'EQ', true),
     },
   }),
   backgroundUrl: variable('Background url', {
     value: [''],
     configuration: {
-      condition: {
-        type: 'SHOW',
-        option: 'backgroundOptions',
-        comparator: 'EQ',
-        value: true,
-      },
+      condition: showIf('backgroundOptions', 'EQ', true),
     },
   }),
   backgroundSize: option('CUSTOM', {
@@ -184,12 +145,7 @@ export const options = {
         { name: 'Contain', value: 'contain' },
         { name: 'Cover', value: 'cover' },
       ],
-      condition: {
-        type: 'SHOW',
-        option: 'backgroundOptions',
-        comparator: 'EQ',
-        value: true,
-      },
+      condition: showIf('backgroundOptions', 'EQ', true),
     },
   }),
   backgroundPosition: option('CUSTOM', {
@@ -209,12 +165,7 @@ export const options = {
         { name: 'Right center', value: 'right center' },
         { name: 'Right bottom', value: 'right bottom' },
       ],
-      condition: {
-        type: 'SHOW',
-        option: 'backgroundOptions',
-        comparator: 'EQ',
-        value: true,
-      },
+      condition: showIf('backgroundOptions', 'EQ', true),
     },
   }),
   backgroundRepeat: option('CUSTOM', {
@@ -229,12 +180,7 @@ export const options = {
         { name: 'Y', value: 'repeat-y' },
         { name: 'All', value: 'repeat' },
       ],
-      condition: {
-        type: 'SHOW',
-        option: 'backgroundOptions',
-        comparator: 'EQ',
-        value: true,
-      },
+      condition: showIf('backgroundOptions', 'EQ', true),
     },
   }),
   backgroundAttachment: option('CUSTOM', {
@@ -248,35 +194,20 @@ export const options = {
         { name: 'Scroll', value: 'scroll' },
         { name: 'Fixed', value: 'fixed' },
       ],
-      condition: {
-        type: 'SHOW',
-        option: 'backgroundOptions',
-        comparator: 'EQ',
-        value: true,
-      },
+      condition: showIf('backgroundOptions', 'EQ', true),
     },
   }),
   borderColor: color('Border color', {
     value: ThemeColor.TRANSPARENT,
     configuration: {
-      condition: {
-        type: 'SHOW',
-        option: 'backgroundOptions',
-        comparator: 'EQ',
-        value: true,
-      },
+      condition: showIf('backgroundOptions', 'EQ', true),
     },
   }),
   borderWidth: sizes('Border thickness', {
     value: '',
     configuration: {
       as: 'UNIT',
-      condition: {
-        type: 'SHOW',
-        option: 'backgroundOptions',
-        comparator: 'EQ',
-        value: true,
-      },
+      condition: showIf('backgroundOptions', 'EQ', true),
     },
   }),
   borderStyle: option('CUSTOM', {
@@ -291,24 +222,14 @@ export const options = {
         { name: 'Dashed', value: 'dashed' },
         { name: 'Dotted', value: 'dotted' },
       ],
-      condition: {
-        type: 'SHOW',
-        option: 'backgroundOptions',
-        comparator: 'EQ',
-        value: true,
-      },
+      condition: showIf('backgroundOptions', 'EQ', true),
     },
   }),
   borderRadius: sizes('Border radius', {
     value: '',
     configuration: {
       as: 'UNIT',
-      condition: {
-        type: 'SHOW',
-        option: 'backgroundOptions',
-        comparator: 'EQ',
-        value: true,
-      },
+      condition: showIf('backgroundOptions', 'EQ', true),
     },
   }),
   ...advanced,
