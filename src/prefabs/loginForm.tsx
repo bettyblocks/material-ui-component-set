@@ -9,7 +9,7 @@ import {
   Icon,
   model,
 } from '@betty-blocks/component-sdk';
-import { alertOptions } from './alert';
+import { FormErrorAlert } from './structures/Alert';
 
 const beforeCreate = ({
   close,
@@ -64,27 +64,6 @@ const attributes = {
   interactions,
 };
 
-const errorAlertOptions = {
-  ...alertOptions,
-  visible: option('TOGGLE', {
-    label: 'Toggle visibility',
-    value: false,
-    configuration: { as: 'VISIBILITY' },
-  }),
-  allowTitleServerResponse: option('TOGGLE', {
-    label: 'Allow to overwrite by the server response',
-    value: true,
-  }),
-  allowTextServerResponse: option('TOGGLE', {
-    label: 'Allow to overwrite by the server response',
-    value: true,
-  }),
-  background: option('COLOR', {
-    label: 'Background color',
-    value: 'Danger',
-  }),
-};
-
 const options = {
   actionId: option('ACTION_JS', { label: 'Action', value: '' }),
   modelId: model('Model'),
@@ -92,10 +71,6 @@ const options = {
 
 export default prefab('Login Form Beta', attributes, beforeCreate, [
   component('Action Form Beta', { options, ref: { id: '#formId' } }, [
-    component(
-      'Alert',
-      { ref: { id: '#alertErrorId' }, options: errorAlertOptions },
-      [],
-    ),
+    FormErrorAlert({ ref: { id: '#alertErrorId' } }),
   ]),
 ]);

@@ -10,7 +10,7 @@ import {
   InteractionType,
   PrefabInteraction,
 } from '@betty-blocks/component-sdk';
-import { alertOptions } from './alert';
+import { FormErrorAlert, FormSuccessAlert } from './structures/Alert';
 
 const beforeCreate = ({
   close,
@@ -74,40 +74,6 @@ const attributes = {
   interactions,
 };
 
-const successAlertOptions = {
-  ...alertOptions,
-  visible: option('TOGGLE', {
-    label: 'Toggle visibility',
-    value: false,
-    configuration: { as: 'VISIBILITY' },
-  }),
-  allowTitleServerResponse: option('TOGGLE', {
-    label: 'Allow to overwrite by the server response',
-    value: true,
-  }),
-};
-
-const errorAlertOptions = {
-  ...alertOptions,
-  visible: option('TOGGLE', {
-    label: 'Toggle visibility',
-    value: false,
-    configuration: { as: 'VISIBILITY' },
-  }),
-  allowTitleServerResponse: option('TOGGLE', {
-    label: 'Allow to overwrite by the server response',
-    value: true,
-  }),
-  allowTextServerResponse: option('TOGGLE', {
-    label: 'Allow to overwrite by the server response',
-    value: true,
-  }),
-  background: option('COLOR', {
-    label: 'Background color',
-    value: 'Danger',
-  }),
-};
-
 const options = {
   actionId: option('ACTION_JS', { label: 'Action', value: '' }),
   modelId: model('Model'),
@@ -116,15 +82,7 @@ const options = {
 
 export default prefab('Form Beta', attributes, beforeCreate, [
   component('Action Form Beta', { ref: { id: '#formId' }, options }, [
-    component(
-      'Alert',
-      { ref: { id: '#alertSuccessId' }, options: successAlertOptions },
-      [],
-    ),
-    component(
-      'Alert',
-      { ref: { id: '#alertErrorId' }, options: errorAlertOptions },
-      [],
-    ),
+    FormSuccessAlert({ ref: { id: '#alertSuccessId' } }),
+    FormErrorAlert({ ref: { id: '#alertErrorId' } }),
   ]),
 ]);
