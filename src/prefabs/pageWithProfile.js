@@ -2,11 +2,13 @@
   name: 'Profile details',
   icon: 'NavbarIcon',
   type: 'page',
-  description: 'Page with profile details',
-  detail: 'Bla bla bla bla',
-  previewUrl: 'https://preview.betty.app/header-and-footer',
+  description:
+    'This page contains a profile page and a page to change your password.',
+  detail:
+    'Customize the form fields on the profile page to your needs, and have users upload a profile picture. This template also provides a password page where users can change their passwords.',
+  previewUrl: 'https://preview.betty.app/profile-details',
   previewImage:
-    'https://www.cdn-2.discus.nl/image/aa48bb3d-d088-4d47-8aba-a81245a4af84/6ab9ff80-de7a-11e7-8c26-88a08bd89a7b/false/jongenmetpoesje.jpg?rev=1588857951&widthParam=1002&heightParam=564&extension=webp',
+    'https://assets.bettyblocks.com/63b1c6ccc6874e0796e5cc5b7e41b3da_assets/files/Page_Template_Profile_Page.png',
   category: 'LAYOUT',
   beforeCreate: ({
     helpers: { useModelQuery, camelToSnakeCase },
@@ -14481,7 +14483,7 @@
                                           },
                                           {
                                             value: [
-                                              '0rem',
+                                              'M',
                                               '0rem',
                                               '0rem',
                                               '0rem',
@@ -14652,7 +14654,7 @@
                                           },
                                           {
                                             value: [
-                                              '0rem',
+                                              'M',
                                               '0rem',
                                               '0rem',
                                               '0rem',
@@ -15198,7 +15200,7 @@
                                           },
                                           {
                                             value: [
-                                              '0rem',
+                                              'M',
                                               '0rem',
                                               '0rem',
                                               '0rem',
@@ -15369,7 +15371,7 @@
                                           },
                                           {
                                             value: [
-                                              '0rem',
+                                              'M',
                                               '0rem',
                                               '0rem',
                                               '0rem',
@@ -16056,6 +16058,7 @@
               modelId={modelId}
               value={profileProperties}
               disabledNames={['created_at', 'updated_at', 'id']}
+              disabledKinds={['PASSWORD']}
               onChange={(value) => {
                 setProfilePropertiesValidation(!value.length);
                 setProfileProperties(value);
