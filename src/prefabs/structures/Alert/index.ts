@@ -1,18 +1,14 @@
 import {
   color,
   component,
-  PrefabComponentOption,
+  OptionProducer,
+  PrefabComponent,
+  PrefabReference,
   ThemeColor,
   toggle,
 } from '@betty-blocks/component-sdk';
-import {
-  PrefabComponent,
-  PrefabReference,
-} from '@betty-blocks/component-sdk/build/prefabs/types/component';
-import { options as defaults } from './options';
 
-// TODO: export OptionProducer from the sdk
-type OptionProducer = (key: string) => PrefabComponentOption;
+import { options as defaults } from './options';
 
 export interface Configuration {
   options?: Record<string, OptionProducer>;
