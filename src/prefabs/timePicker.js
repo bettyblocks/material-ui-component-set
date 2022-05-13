@@ -37,6 +37,12 @@
           value: false,
         },
         {
+          type: 'TOGGLE',
+          label: 'Close picker after select',
+          key: 'closeOnSelect',
+          value: true,
+        },
+        {
           value: 'HH:mm:ss',
           label: 'Format',
           key: 'timeFormat',
