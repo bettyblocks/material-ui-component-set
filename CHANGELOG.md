@@ -1,3 +1,16 @@
+# [1.223.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.222.0...v1.223.0) (2022-05-13)
+
+
+### Bug Fixes
+
+* header or footer partialid no longer required ([43927bb](https://github.com/bettyblocks/material-ui-component-set/commit/43927bb381e292f42ddea1f48d8eb305fa7ff4f8))
+* reverted cli version back to its original ([e795886](https://github.com/bettyblocks/material-ui-component-set/commit/e795886b0e458ea5f896c380f62755ff92638612))
+
+
+### Features
+
+* user can now pick partials ([8834424](https://github.com/bettyblocks/material-ui-component-set/commit/88344243c3d5295283f032cc457e3e02c17a4f07))
+
 # [1.222.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.221.1...v1.222.0) (2022-05-12)
 
 
