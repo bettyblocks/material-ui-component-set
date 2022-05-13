@@ -42,11 +42,10 @@ export const FormSuccessAlert = (config: Configuration): PrefabReference => {
     ),
   };
 
-  return component(
-    'Alert',
-    { ...config, options: { ...successAlertOptions, ...config.options } },
-    [],
-  );
+  return Alert({
+    ...config,
+    options: { ...successAlertOptions, ...config.options },
+  });
 };
 
 export const FormErrorAlert = (config: Configuration): PrefabReference => {
@@ -66,9 +65,8 @@ export const FormErrorAlert = (config: Configuration): PrefabReference => {
     background: color('Background color', { value: ThemeColor.DANGER }),
   };
 
-  return component(
-    'Alert',
-    { ...config, options: { ...errorAlertOptions, ...config.options } },
-    [],
-  );
+  return Alert({
+    ...config,
+    options: { ...errorAlertOptions, ...config.options },
+  });
 };
