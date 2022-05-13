@@ -10,7 +10,6 @@ import {
   InteractionType,
   PrefabInteraction,
 } from '@betty-blocks/component-sdk';
-import { alertOptions } from './alert';
 import { FormErrorAlert, FormSuccessAlert } from './structures/Alert';
 
 const beforeCreate = ({
