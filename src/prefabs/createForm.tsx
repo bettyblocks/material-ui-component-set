@@ -79,6 +79,10 @@ const successAlertOptions = {
     label: 'Allow to overwrite by the server response',
     value: true,
   }),
+  allowTextServerResponse: option('TOGGLE', {
+    label: 'Allow to overwrite by the server response',
+    value: true,
+  }),
 };
 
 const errorAlertOptions = {
@@ -89,6 +93,10 @@ const errorAlertOptions = {
     configuration: { as: 'VISIBILITY' },
   }),
   allowTitleServerResponse: option('TOGGLE', {
+    label: 'Allow to overwrite by the server response',
+    value: true,
+  }),
+  allowTextServerResponse: option('TOGGLE', {
     label: 'Allow to overwrite by the server response',
     value: true,
   }),

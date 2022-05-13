@@ -98,6 +98,10 @@ const errorAlertOptions = {
     label: 'Allow to overwrite by the server response',
     value: true,
   }),
+  allowTextServerResponse: option('TOGGLE', {
+    label: 'Allow to overwrite by the server response',
+    value: true,
+  }),
   background: option('COLOR', {
     label: 'Background color',
     value: 'Danger',
