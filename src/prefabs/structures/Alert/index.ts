@@ -1,4 +1,10 @@
-import { color, component, PrefabComponentOption, ThemeColor, toggle } from '@betty-blocks/component-sdk';
+import {
+  color,
+  component,
+  PrefabComponentOption,
+  ThemeColor,
+  toggle,
+} from '@betty-blocks/component-sdk';
 import {
   PrefabComponent,
   PrefabReference,

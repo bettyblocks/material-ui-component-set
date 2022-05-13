@@ -1,5 +1,12 @@
-import { sizes, color, option, ThemeColor, toggle, variable } from "@betty-blocks/component-sdk";
-import { advanced } from "./advanced";
+import {
+  sizes,
+  color,
+  option,
+  ThemeColor,
+  toggle,
+  variable,
+} from '@betty-blocks/component-sdk';
+import { advanced } from './advanced';
 
 export const options = {
   alignment: option('CUSTOM', {
@@ -304,5 +311,5 @@ export const options = {
       },
     },
   }),
-  ...advanced
+  ...advanced,
 };

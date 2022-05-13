@@ -1,4 +1,4 @@
-import { toggle, variable } from "@betty-blocks/component-sdk";
+import { toggle, variable } from '@betty-blocks/component-sdk';
 
 export const advanced = {
   advancedSettings: toggle('Advanced settings', {
@@ -15,4 +15,4 @@ export const advanced = {
       },
     },
   }),
-}
+};

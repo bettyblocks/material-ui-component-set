@@ -12,5 +12,5 @@ export interface Configuration {
 export const Box = (config: Configuration): PrefabReference => {
   const options = { ...defaults, ...config.options };
 
-  return component('Box', { options: options }, []);
+  return component('Box', { options }, []);
 };
