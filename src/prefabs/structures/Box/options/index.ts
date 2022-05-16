@@ -1,5 +1,6 @@
 import {
   sizes,
+  size,
   color,
   option,
   ThemeColor,
@@ -7,106 +8,111 @@ import {
   variable,
   showIf,
   buttongroup,
+  dropdown,
 } from '@betty-blocks/component-sdk';
 import { advanced } from './advanced';
 
 export const options = {
-  alignment: option('CUSTOM', {
-    value: 'none',
-    label: 'Alignment',
-    configuration: {
-      as: 'BUTTONGROUP',
-      dataType: 'string',
-      allowedInput: [
-        { name: 'None', value: 'none' },
-        { name: 'Left', value: 'flex-start' },
-        { name: 'Center', value: 'center' },
-        { name: 'Right', value: 'flex-end' },
-        { name: 'Justified', value: 'space-between' },
-      ],
+  alignment: buttongroup(
+    'Alignment',
+    [
+      ['None', 'none'],
+      ['Left', 'flex-start'],
+      ['Center', 'center'],
+      ['Right', 'flex-end'],
+      ['Justified', 'space-between'],
+    ],
+    {
+      value: 'none',
+      configuration: {
+        as: 'BUTTONGROUP',
+        dataType: 'string',
+      },
     },
-  }),
-  valignment: option('CUSTOM', {
-    value: 'none',
-    label: 'Vertical alignment',
-    configuration: {
-      as: 'BUTTONGROUP',
-      dataType: 'string',
-      allowedInput: [
-        { name: 'None', value: 'none' },
-        { name: 'Top', value: 'flex-start' },
-        { name: 'Center', value: 'center' },
-        { name: 'Bottom', value: 'flex-end' },
-      ],
+  ),
+  valignment: buttongroup(
+    'Vertical alignment',
+    [
+      ['None', 'none'],
+      ['Top', 'flex-start'],
+      ['Center', 'center'],
+      ['Bottom', 'flex-end'],
+    ],
+    {
+      value: 'none',
+      configuration: {
+        as: 'BUTTONGROUP',
+        dataType: 'string',
+      },
     },
-  }),
+  ),
   stretch: toggle('Stretch (when in flex container)', {
     value: false,
   }),
   transparent: toggle('Transparent', {
     value: false,
   }),
-  height: sizes('Height', {
+  height: size('Height', {
     value: '',
     configuration: {
       as: 'UNIT',
     },
   }),
-  width: sizes('Width', {
+  width: size('Width', {
     value: '',
     configuration: {
       as: 'UNIT',
     },
   }),
-  outerSpacing: option('SIZES', {
-    label: 'Outer space',
+  outerSpacing: sizes('Outer space', {
     value: ['0rem', '0rem', '0rem', '0rem'],
   }),
-  innerSpacing: option('SIZES', {
-    label: 'Inner space',
+  innerSpacing: sizes('Inner space', {
     value: ['M', 'M', 'M', 'M'],
   }),
   positioningOptions: toggle('Show positioning options', {
     value: false,
   }),
-  position: option('CUSTOM', {
-    value: 'static',
-    label: 'Position',
-    configuration: {
-      as: 'BUTTONGROUP',
-      dataType: 'string',
-      allowedInput: [
-        { name: 'Static', value: 'static' },
-        { name: 'Relative', value: 'relative' },
-        { name: 'Absolute', value: 'absolute' },
-        { name: 'Fixed', value: 'fixed' },
-        { name: 'Sticky', value: 'sticky' },
-      ],
-      condition: showIf('positioningOptions', 'EQ', true),
+  position: buttongroup(
+    'Position',
+    [
+      ['Static', 'static'],
+      ['Relative', 'relative'],
+      ['Absolute', 'absolute'],
+      ['Fixed', 'fixed'],
+      ['Sticky', 'sticky'],
+    ],
+    {
+      value: 'static',
+      configuration: {
+        as: 'BUTTONGROUP',
+        dataType: 'string',
+        condition: showIf('positioningOptions', 'EQ', true),
+      },
     },
-  }),
-  top: sizes('Top position', {
+  ),
+  top: size('Top position', {
     value: '',
     configuration: {
       as: 'UNIT',
       condition: showIf('positioningOptions', 'EQ', true),
     },
   }),
-  right: sizes('Right position', {
+  right: size('Right position', {
     value: '',
     configuration: {
       as: 'UNIT',
       condition: showIf('positioningOptions', 'EQ', true),
     },
   }),
-  bottom: sizes('Bottom position', {
+  bottom: size('Bottom position', {
     value: '',
     configuration: {
       as: 'UNIT',
       condition: showIf('positioningOptions', 'EQ', true),
     },
   }),
-  left: sizes('Left position', {
+  left: size('Left position', {
     value: '',
     configuration: {
       as: 'UNIT',
@@ -150,26 +156,28 @@ export const options = {
       },
     },
   ),
-  backgroundPosition: option('CUSTOM', {
-    value: 'center center',
-    label: 'Background position',
-    configuration: {
-      as: 'DROPDOWN',
-      dataType: 'string',
-      allowedInput: [
-        { name: 'Left top', value: 'left top' },
-        { name: 'Left center', value: 'left center' },
-        { name: 'Left bottom', value: 'left bottom' },
-        { name: 'Center top', value: 'center top' },
-        { name: 'Center center', value: 'center center' },
-        { name: 'Center bottom', value: 'center bottom' },
-        { name: 'Right top', value: 'right top' },
-        { name: 'Right center', value: 'right center' },
-        { name: 'Right bottom', value: 'right bottom' },
-      ],
-      condition: showIf('backgroundOptions', 'EQ', true),
+  backgroundPosition: dropdown(
+    'Background position',
+    [
+      ['Left top', 'left top'],
+      ['Left center', 'left center'],
+      ['Left bottom', 'left bottom'],
+      ['Center top', 'center top'],
+      ['Center center', 'center center'],
+      ['Center bottom', 'center bottom'],
+      ['Right top', 'right top'],
+      ['Right center', 'right center'],
+      ['Right bottom', 'right bottom'],
+    ],
+    {
+      value: 'center center',
+      configuration: {
+        as: 'DROPDOWN',
+        dataType: 'string',
+        condition: showIf('backgroundOptions', 'EQ', true),
+      },
     },
-  }),
+  ),
   backgroundRepeat: buttongroup(
     'Background repeat',
     [
@@ -207,7 +215,7 @@ export const options = {
       condition: showIf('backgroundOptions', 'EQ', true),
     },
   }),
-  borderWidth: sizes('Border thickness', {
+  borderWidth: size('Border thickness', {
     value: '',
     configuration: {
       as: 'UNIT',
@@ -230,7 +238,7 @@ export const options = {
       },
     },
   ),
-  borderRadius: sizes('Border radius', {
+  borderRadius: size('Border radius', {
     value: '',
     configuration: {
       as: 'UNIT',
