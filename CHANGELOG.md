@@ -1,3 +1,57 @@
+# [1.223.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.222.0...v1.223.0) (2022-05-13)
+
+
+### Bug Fixes
+
+* header or footer partialid no longer required ([43927bb](https://github.com/bettyblocks/material-ui-component-set/commit/43927bb381e292f42ddea1f48d8eb305fa7ff4f8))
+* reverted cli version back to its original ([e795886](https://github.com/bettyblocks/material-ui-component-set/commit/e795886b0e458ea5f896c380f62755ff92638612))
+
+
+### Features
+
+* user can now pick partials ([8834424](https://github.com/bettyblocks/material-ui-component-set/commit/88344243c3d5295283f032cc457e3e02c17a4f07))
+
+# [1.222.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.221.1...v1.222.0) (2022-05-12)
+
+
+### Bug Fixes
+
+* blank value from hidden input ([d21a4f8](https://github.com/bettyblocks/material-ui-component-set/commit/d21a4f88a0855fcea1d4dee522130e7cf447bb6e))
+* date inputs format ([f51eb85](https://github.com/bettyblocks/material-ui-component-set/commit/f51eb85292a85a8c492be605052f40f6b4be9b59))
+* date should not be selectable ([c65d3c6](https://github.com/bettyblocks/material-ui-component-set/commit/c65d3c638f1f8187f4556fe1352319842e9ab0b7))
+* dateTime error state ([2d37631](https://github.com/bettyblocks/material-ui-component-set/commit/2d37631330402cd85474ed3f69b1058cbd97d996))
+* datetime format ([dd26aac](https://github.com/bettyblocks/material-ui-component-set/commit/dd26aac3251cfcc28a8eb0dce1bd862216942d90))
+* datetime picker breaks in designtime ([fb7e7f7](https://github.com/bettyblocks/material-ui-component-set/commit/fb7e7f77a7a2c6928042c81eda6970557b55ccdd))
+* datetime picker input default type ([cb060ad](https://github.com/bettyblocks/material-ui-component-set/commit/cb060ad352ef5eb3aabd35669e32da6fc0c66f3d))
+* format broken on datetime input ([328c841](https://github.com/bettyblocks/material-ui-component-set/commit/328c841d367439038a104a3a573fde1c92850649))
+* no validation on formatting ([56be525](https://github.com/bettyblocks/material-ui-component-set/commit/56be525aec05255a54fab80a04625ebcd262102a))
+* no value during update ([38f5c33](https://github.com/bettyblocks/material-ui-component-set/commit/38f5c3316b3647d6f297d9ac12851525ea66ddbd))
+* re-order options ([7e8234b](https://github.com/bettyblocks/material-ui-component-set/commit/7e8234bbd62a190ba4f31175f60477327197fe48))
+* re-order options ([a03231e](https://github.com/bettyblocks/material-ui-component-set/commit/a03231e802f69b95508cad0c1294ad30c8423fa7))
+* remove defaults and add validation to datepicker ([683c2d9](https://github.com/bettyblocks/material-ui-component-set/commit/683c2d98a03a25f70624f5519fc2d2e3ce41c83b))
+* remove name attribite ([778685c](https://github.com/bettyblocks/material-ui-component-set/commit/778685c16b009aa43480d65058ca3a3431531666))
+* stray comment ([9c49458](https://github.com/bettyblocks/material-ui-component-set/commit/9c4945859946a9f4979f34aa890e017a2502beea))
+* unable to send timestamps beyond 19minutes ([2581fb4](https://github.com/bettyblocks/material-ui-component-set/commit/2581fb463a746c4481e0a43419304ed6afccaecf))
+* validate after using picker ([89c6045](https://github.com/bettyblocks/material-ui-component-set/commit/89c6045667a9b04d0ad618a34deb84800abc560d))
+
+
+### Features
+
+* add closeOnSelectOption to to the picker prefab ([8f2bb4d](https://github.com/bettyblocks/material-ui-component-set/commit/8f2bb4dd2749d75d3a5a00f2b7c8c701e448678e))
+* add datetime picker beta ([142b92f](https://github.com/bettyblocks/material-ui-component-set/commit/142b92fe6d0f80f85c132f86ab6198c447b971f4))
+* add past dates toggle ([902f4d6](https://github.com/bettyblocks/material-ui-component-set/commit/902f4d609144d3c91cd7eb7f2001afe74b36ae08))
+* added DatePicker and TimePicker Beta ([95c378a](https://github.com/bettyblocks/material-ui-component-set/commit/95c378a04016d9e794fea677551a8c5821eda3a4))
+* customise test attribute ([c6db001](https://github.com/bettyblocks/material-ui-component-set/commit/c6db001db810f3be646af7065c64bf71f65ebb19))
+* refactor datetime options structure ([fac7ac8](https://github.com/bettyblocks/material-ui-component-set/commit/fac7ac8e33e91358c36537dc9644c1bcd2106854))
+
+## [1.221.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.221.0...v1.221.1) (2022-05-11)
+
+
+### Bug Fixes
+
+* fixed multi and custom autocomplete ([05da24c](https://github.com/bettyblocks/material-ui-component-set/commit/05da24c28594366e44a743bb39e89ddbc6ddf100))
+* fixed multivalue autocomplete ([5b646f1](https://github.com/bettyblocks/material-ui-component-set/commit/5b646f18cbf0b7533aa62189f665ec722e74fede))
+
 # [1.221.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.220.0...v1.221.0) (2022-05-09)
 
 
