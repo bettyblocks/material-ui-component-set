@@ -25,7 +25,6 @@ export const options = {
     {
       value: 'none',
       configuration: {
-        as: 'BUTTONGROUP',
         dataType: 'string',
       },
     },
@@ -41,7 +40,6 @@ export const options = {
     {
       value: 'none',
       configuration: {
-        as: 'BUTTONGROUP',
         dataType: 'string',
       },
     },
@@ -85,7 +83,6 @@ export const options = {
     {
       value: 'static',
       configuration: {
-        as: 'BUTTONGROUP',
         dataType: 'string',
         condition: showIf('positioningOptions', 'EQ', true),
       },
@@ -172,7 +169,6 @@ export const options = {
     {
       value: 'center center',
       configuration: {
-        as: 'DROPDOWN',
         dataType: 'string',
         condition: showIf('backgroundOptions', 'EQ', true),
       },
