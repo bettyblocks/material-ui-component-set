@@ -29,33 +29,31 @@
       useTheme().breakpoints.up(breakpoint),
     );
     const activeTemporary = isTemporary || (isPersistent && !aboveBreakpoint);
-
-    // Window resize 
+    let drawerOpen = isOpen;
+    // Window resize
     function getWindowDimensions() {
       const { innerWidth: width, innerHeight: height } = window;
       return {
         width,
-        height
+        height,
       };
     }
 
     // Set dimensions state
-    const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
+    const [windowDimensions, setWindowDimensions] = useState(
+      getWindowDimensions(),
+    );
     useEffect(() => {
       function handleResize() {
         setWindowDimensions(getWindowDimensions());
       }
       window.addEventListener('resize', handleResize);
     }, []);
-    // End window resize 
+    // End window resize
 
-    // Check if mobile width
-    if(windowDimensions.width <= 600){
-      if(isOpen == true){ 
-        isOpen = false;
-       }else{ 
-        isOpen = true;
-       }
+    // Check if mobile view, // We check on 600px because this is also done in the css. Take a look at -> [`@media ${mediaMinWidth(600)}`]
+    if (windowDimensions.width <= 600) {
+      drawerOpen = drawerOpen ? false : true;
     }
 
     useEffect(() => {
@@ -67,7 +65,7 @@
     const TempDrawer = (
       <Drawer
         variant={activeTemporary ? 'temporary' : 'persistent'}
-        open={isOpen}
+        open={drawerOpen}
         anchor={anchor}
         onClose={toggleDrawer}
         classes={{ paper: classes.paper }}
@@ -193,7 +191,7 @@
             getSpacing(outerSpacing[2], 'Desktop'),
           marginLeft: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[3], 'Desktop'),
-        }, 
+        },
       },
       paper: {
         ...staticPositioning,
