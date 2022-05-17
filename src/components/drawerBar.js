@@ -195,9 +195,6 @@
             getSpacing(outerSpacing[3], 'Desktop'),
         }, 
       },
-      MuiDrawer: {
-        visibility: 'hidden',
-      },
       paper: {
         ...staticPositioning,
         top: ['unset', '!important'],
