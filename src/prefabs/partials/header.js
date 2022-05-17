@@ -1,7 +1,6 @@
 (() => ({
   name: 'header',
   icon: 'ContainerIcon',
-  type: 'partial',
   description: 'This is a page with a static Homepage-layout.',
   detail:
     'This page has a static homepage to spark your interest and show what things are possible with the pagebuilder.',
