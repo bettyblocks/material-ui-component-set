@@ -1,3 +1,10 @@
+# [1.224.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.223.0...v1.224.0) (2022-05-17)
+
+
+### Features
+
+* added partial selector ([5f6c608](https://github.com/bettyblocks/material-ui-component-set/commit/5f6c60863bc2ca4234f392c84e94f1d84d61a4ed))
+
 # [1.223.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.222.0...v1.223.0) (2022-05-13)
 
 
