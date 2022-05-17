@@ -22,7 +22,6 @@
     } = parent;
     const { env, useText } = B;
     const { dataComponentAttribute } = options;
-
     const isEmpty = children.length === 0;
     const isDev = env === 'dev';
     const isPristine = isEmpty && isDev;
@@ -30,6 +29,34 @@
       useTheme().breakpoints.up(breakpoint),
     );
     const activeTemporary = isTemporary || (isPersistent && !aboveBreakpoint);
+
+    // Window resize 
+    function getWindowDimensions() {
+      const { innerWidth: width, innerHeight: height } = window;
+      return {
+        width,
+        height
+      };
+    }
+
+    // Set dimensions state
+    const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
+    useEffect(() => {
+      function handleResize() {
+        setWindowDimensions(getWindowDimensions());
+      }
+      window.addEventListener('resize', handleResize);
+    }, []);
+    // End window resize 
+
+    // Check if mobile width
+    if(windowDimensions.width <= 600){
+      if(isOpen == true){ 
+        isOpen = false;
+       }else{ 
+        isOpen = true;
+       }
+    }
 
     useEffect(() => {
       B.defineFunction('Show', openDrawer);
@@ -166,7 +193,10 @@
             getSpacing(outerSpacing[2], 'Desktop'),
           marginLeft: ({ options: { outerSpacing } }) =>
             getSpacing(outerSpacing[3], 'Desktop'),
-        },
+        }, 
+      },
+      MuiDrawer: {
+        visibility: 'hidden',
       },
       paper: {
         ...staticPositioning,
