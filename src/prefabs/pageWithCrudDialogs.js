@@ -5,8 +5,9 @@
   description: 'This page contains a datatable with CRUD dialogs.',
   detail:
     'In this ready to use Data Table, it is possible to create, display (read), update and delete records. These functionalities are shown in dialogs.',
-  previewUrl: 't.b.d',
-  previewImage: 't.b.d',
+  previewUrl: 'https://preview.betty.app/crud-with-dialogs',
+  previewImage:
+    'https://assets.bettyblocks.com/63b1c6ccc6874e0796e5cc5b7e41b3da_assets/files/Page_Template_Crud_With_Dialogs',
   category: 'DATA',
   beforeCreate: ({
     components: {
