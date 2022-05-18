@@ -18862,7 +18862,7 @@
         <Header onClose={close} title="Configure component" />
         {stepper.progressBar([
           'Configure header and footer',
-          'Configure your list view',
+          'Configure your card and list view',
         ])}
         <Content>{stepper.setStep(stepNumber)}</Content>
         {stepper.buttons()}
