@@ -29,31 +29,19 @@
       useTheme().breakpoints.up(breakpoint),
     );
     const activeTemporary = isTemporary || (isPersistent && !aboveBreakpoint);
-    let drawerOpen = isOpen;
-    // Window resize
-    function getWindowDimensions() {
-      const { innerWidth: width, innerHeight: height } = window;
-      return {
-        width,
-        height,
-      };
-    }
+    let open = isOpen;
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    const maxMobileWidth = 600;
 
-    // Set dimensions state
-    const [windowDimensions, setWindowDimensions] = useState(
-      getWindowDimensions(),
-    );
     useEffect(() => {
-      function handleResize() {
-        setWindowDimensions(getWindowDimensions());
-      }
-      window.addEventListener('resize', handleResize);
+      const setWidth = () => {
+        setWindowWidth(window.innerWidth);
+      };
+      window.addEventListener('resize', setWidth);
     }, []);
-    // End window resize
 
-    // Check if mobile view, // We check on 600px because this is also done in the css. Take a look at -> [`@media ${mediaMinWidth(600)}`]
-    if (windowDimensions.width <= 600) {
-      drawerOpen = drawerOpen ? false : true;
+    if (windowWidth <= maxMobileWidth) {
+      open = !isOpen;
     }
 
     useEffect(() => {
@@ -65,8 +53,7 @@
     const TempDrawer = (
       <Drawer
         variant={activeTemporary ? 'temporary' : 'persistent'}
-        open={drawerOpen}
-        anchor={anchor}
+        open={open}
         onClose={toggleDrawer}
         classes={{ paper: classes.paper }}
         ModalProps={{ keepMounted: true }}
