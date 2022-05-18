@@ -43962,7 +43962,7 @@
           },
         },
         {
-          value: '',
+          value: '100%',
           label: 'Height',
           key: 'rowHeight',
           type: 'TEXT',
@@ -44125,7 +44125,7 @@
               },
             },
             {
-              value: '',
+              value: '100%',
               label: 'Height',
               key: 'columnHeight',
               type: 'TEXT',
