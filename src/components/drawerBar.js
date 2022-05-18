@@ -54,6 +54,7 @@
       <Drawer
         variant={activeTemporary ? 'temporary' : 'persistent'}
         open={open}
+        anchor={anchor}
         onClose={toggleDrawer}
         classes={{ paper: classes.paper }}
         ModalProps={{ keepMounted: true }}
