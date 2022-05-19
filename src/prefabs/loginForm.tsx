@@ -51,5 +51,5 @@ const options = {
 };
 
 export default prefab('Login Form Beta', attributes, beforeCreate, [
-  component('Action Form Beta', { options, ref: { id: '#formId' } }, []),
+  component('Form Beta', { options, ref: { id: '#formId' } }, []),
 ]);
