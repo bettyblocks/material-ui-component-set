@@ -6,20 +6,20 @@ import {
   model,
   filter,
   BeforeCreateArgs,
+  Icon,
 } from '@betty-blocks/component-sdk';
-import { Icon } from '@betty-blocks/component-sdk';
 
 const beforeCreate = ({
   close,
   components: { CreateFormCreateWizard },
-  prefab,
+  prefab: originalPrefab,
   prefabs,
   save,
 }: BeforeCreateArgs) => {
   return (
     <CreateFormCreateWizard
       close={close}
-      prefab={prefab}
+      prefab={originalPrefab}
       prefabs={prefabs}
       save={save}
     />
@@ -38,5 +38,5 @@ const options = {
 };
 
 export default prefab('Create Form Beta', attributes, beforeCreate, [
-  component('Action Form Beta', { options }, []),
+  component('Form Beta', { options }, []),
 ]);

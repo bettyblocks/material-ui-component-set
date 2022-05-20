@@ -1,11 +1,12 @@
 (() => ({
-  name: 'Action Form Beta',
+  name: 'Form Beta',
   type: 'CONTENT_COMPONENT',
   allowedTypes: ['FORM_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { actionId, modelId, filter } = options;
     const { Form, GetOne } = B;
+    const formRef = React.createRef();
 
     const isDev = B.env === 'dev';
 
@@ -33,7 +34,21 @@
       if (loading) B.triggerEvent('onActionLoad', loading);
     };
 
-    const FormComponent = function () {
+    useEffect(() => {
+      B.defineFunction('Submit', () => {
+        if (formRef.current) {
+          if (typeof formRef.current.requestSubmit === 'function') {
+            formRef.current.requestSubmit();
+          } else {
+            formRef.current.dispatchEvent(
+              new Event('submit', { cancelable: true }),
+            );
+          }
+        }
+      });
+    }, [formRef]);
+
+    function FormComponent() {
       return (
         <Form
           actionId={actionId}
@@ -41,11 +56,12 @@
           onActionDone={onActionDone}
           onActionSuccess={onActionSuccess}
           onActionError={onActionError}
+          ref={formRef}
         >
           <fieldset className={classes.fieldset}>{children}</fieldset>
         </Form>
       );
-    };
+    }
 
     if (isDev) {
       return (

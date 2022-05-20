@@ -49,6 +49,12 @@
           value: false,
         },
         {
+          type: 'TOGGLE',
+          label: 'Close picker after select',
+          key: 'closeOnSelect',
+          value: true,
+        },
+        {
           label: 'Language',
           key: 'locale',
           value: 'en',
