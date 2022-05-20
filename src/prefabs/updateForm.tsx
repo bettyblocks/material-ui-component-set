@@ -38,5 +38,5 @@ const options = {
 };
 
 export default prefab('Update Form Beta', attributes, beforeCreate, [
-  component('Action Form Beta', { options }, []),
+  component('Form Beta', { options }, []),
 ]);
