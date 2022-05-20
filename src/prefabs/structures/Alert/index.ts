@@ -8,6 +8,7 @@ import {
   toggle,
 } from '@betty-blocks/component-sdk';
 
+import { updateOption } from '../../../utils';
 import { options as defaults } from './options';
 
 export interface Configuration {
@@ -28,14 +29,15 @@ export const FormSuccessAlert = (config: Configuration): PrefabReference => {
       value: false,
       configuration: { as: 'VISIBILITY' },
     }),
-    allowTitleServerResponse: toggle(
-      'Allow to overwrite by the server response',
-      { value: true },
-    ),
-    allowTextServerResponse: toggle(
-      'Allow to overwrite by the server response',
-      { value: true },
-    ),
+    icon: updateOption(defaults.icon, {
+      value: 'CheckCircle',
+    }),
+    titleText: updateOption(defaults.titleText, {
+      value: ['Success'],
+    }),
+    bodyText: updateOption(defaults.bodyText, {
+      value: ['Record successfully created'],
+    }),
   };
 
   return Alert({
@@ -50,15 +52,20 @@ export const FormErrorAlert = (config: Configuration): PrefabReference => {
       value: false,
       configuration: { as: 'VISIBILITY' },
     }),
-    allowTitleServerResponse: toggle(
-      'Allow to overwrite by the server response',
-      { value: true },
-    ),
     allowTextServerResponse: toggle(
       'Allow to overwrite by the server response',
       { value: true },
     ),
     background: color('Background color', { value: ThemeColor.DANGER }),
+    icon: updateOption(defaults.icon, {
+      value: 'Error',
+    }),
+    titleText: updateOption(defaults.titleText, {
+      value: ['Error'],
+    }),
+    bodyText: updateOption(defaults.bodyText, {
+      value: ['*Dynamic value from the Action response*'],
+    }),
   };
 
   return Alert({

@@ -8,7 +8,7 @@ export const options = {
     configuration: { as: 'VISIBILITY' },
   }),
   bodyText: variable('Body text', {
-    value: ['Type your content here...'],
+    value: [''],
   }),
   allowTextServerResponse: toggle('Allow to overwrite by the server response', {
     value: false,
