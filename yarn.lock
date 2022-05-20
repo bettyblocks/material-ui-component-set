@@ -174,10 +174,10 @@
     "@babel/helper-validator-identifier" "^7.16.7"
     to-fast-properties "^2.0.0"
 
-"@betty-blocks/cli@^25.25.0":
-  version "25.25.0"
-  resolved "https://registry.yarnpkg.com/@betty-blocks/cli/-/cli-25.25.0.tgz#12c7620d77c3228944294ef399bc2a2ef7231317"
-  integrity sha512-rx5hcrsjH9WZFokuQ8kLCR0vThWnVS5Iy87Dvyo6bqiis88xmOo/eg9fQR/eRr2YxmvJWF4ZYpGrrIOiMlNkuQ==
+"@betty-blocks/cli@^25.27.1":
+  version "25.27.1"
+  resolved "https://registry.yarnpkg.com/@betty-blocks/cli/-/cli-25.27.1.tgz#c02393f0a09b7119f5a50d41dc5468cdfd0738cc"
+  integrity sha512-HKgZodZjIVmdFqgKSFePZv9Ua+XCo0tYC7wrBNRbHCTuQ03yJkXj1pUaX4TE3zvB5k6Rw1fVIoWeHVDPM6p1wg==
   dependencies:
     "@azure/ms-rest-js" "^2.0.4"
     "@azure/storage-blob" "^10.3.0"
@@ -196,6 +196,7 @@
     commander "^2.20.0"
     form-data "^4.0.0"
     fs-extra "^8.1.0"
+    glob "^7.2.0"
     joi "^17.2.1"
     jsdoc-api "^7.1.0"
     jsonschema "^1.4.0"
@@ -2473,14 +2474,7 @@ debug@^3.2.7:
   dependencies:
     ms "^2.1.1"
 
-debug@^4.1.0:
-  version "4.3.4"
-  resolved "https://registry.yarnpkg.com/debug/-/debug-4.3.4.tgz#1319f6579357f2338d3337d2cdd4914bb5dcc865"
-  integrity sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==
-  dependencies:
-    ms "2.1.2"
-
-debug@^4.1.1, debug@^4.3.2:
+debug@^4.1.0, debug@^4.1.1, debug@^4.3.2:
   version "4.3.4"
   resolved "https://registry.yarnpkg.com/debug/-/debug-4.3.4.tgz#1319f6579357f2338d3337d2cdd4914bb5dcc865"
   integrity sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==
@@ -6941,17 +6935,7 @@ ts-node@^8.8.2:
     source-map-support "^0.5.17"
     yn "3.1.1"
 
-tsconfig-paths@^3.14.1:
-  version "3.14.1"
-  resolved "https://registry.yarnpkg.com/tsconfig-paths/-/tsconfig-paths-3.14.1.tgz#ba0734599e8ea36c862798e920bcf163277b137a"
-  integrity sha512-fxDhWnFSLt3VuTwtvJt5fpwxBHg5AdKWMsgcPOOIilyjymcYVZoCQF8fvFRezCNfblEXmi+PcM1eYHeOAgXCOQ==
-  dependencies:
-    "@types/json5" "^0.0.29"
-    json5 "^1.0.1"
-    minimist "^1.2.6"
-    strip-bom "^3.0.0"
-
-tsconfig-paths@^3.9.0:
+tsconfig-paths@^3.14.1, tsconfig-paths@^3.9.0:
   version "3.14.1"
   resolved "https://registry.yarnpkg.com/tsconfig-paths/-/tsconfig-paths-3.14.1.tgz#ba0734599e8ea36c862798e920bcf163277b137a"
   integrity sha512-fxDhWnFSLt3VuTwtvJt5fpwxBHg5AdKWMsgcPOOIilyjymcYVZoCQF8fvFRezCNfblEXmi+PcM1eYHeOAgXCOQ==
