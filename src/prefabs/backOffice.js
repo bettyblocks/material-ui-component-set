@@ -78,7 +78,7 @@
           },
         },
         {
-          value: false,
+          value: true,
           label: 'Stretch (when in flex container)',
           key: 'stretch',
           type: 'TOGGLE',
