@@ -1,3 +1,25 @@
+# [1.225.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.224.1...v1.225.0) (2022-05-19)
+
+
+### Features
+
+* added partial selector and updated structure ([5ab4f21](https://github.com/bettyblocks/material-ui-component-set/commit/5ab4f212fcc2e68d47fe0412558f733d5b1ef262))
+
+## [1.224.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.224.0...v1.224.1) (2022-05-19)
+
+
+### Bug Fixes
+
+* beta checkbox is now above the submit button ([6d0cd4a](https://github.com/bettyblocks/material-ui-component-set/commit/6d0cd4a70ed724161bac8c50a188d0d2ea207de4))
+* renamed Action Form Beta to Form Beta ([03294bc](https://github.com/bettyblocks/material-ui-component-set/commit/03294bc55ca3061594baab66b5e5bc5e24308cf8))
+
+# [1.224.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.223.0...v1.224.0) (2022-05-17)
+
+
+### Features
+
+* added partial selector ([5f6c608](https://github.com/bettyblocks/material-ui-component-set/commit/5f6c60863bc2ca4234f392c84e94f1d84d61a4ed))
+
 # [1.223.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.222.0...v1.223.0) (2022-05-13)
 
 
