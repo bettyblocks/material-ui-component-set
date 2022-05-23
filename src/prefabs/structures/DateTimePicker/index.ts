@@ -14,6 +14,7 @@ export enum DateInputTypes {
 }
 
 export interface Configuration {
+  label?: string;
   options?: Record<string, OptionProducer>;
   inputType?: string;
   placeholder?: string;
@@ -67,5 +68,11 @@ export const DateTimePicker = (
     );
   }
 
-  return component('DateTimePickerInput', { options, $afterDelete }, children);
+  const { label } = config;
+
+  return component(
+    'DateTimePickerInput',
+    { label, options, $afterDelete },
+    children,
+  );
 };
