@@ -38,6 +38,19 @@
       skip: !modelId,
     });
 
+    const enrichVarObj = (obj) => {
+      const returnObj = obj;
+      if (data && data.model) {
+        const property = data.model.properties.find(
+          (prop) => prop.id === returnObj.id[0],
+        );
+        if (property) {
+          returnObj.name = `{{ ${data.model.name}.${property.name} }}`;
+        }
+      }
+      return returnObj;
+    };
+
     const getDescendantByRef = (refValue, structure) =>
       structure.reduce((acc, component) => {
         if (acc) return acc;
@@ -1097,7 +1110,7 @@
                               type: 'VARIABLE',
                               label: 'Content',
                               key: 'content',
-                              value: [propertyInput],
+                              value: [enrichVarObj(propertyInput)],
                               configuration: {
                                 as: 'MULTILINE',
                               },
@@ -2548,7 +2561,7 @@
                       },
                     },
                     {
-                      value: false,
+                      value: true,
                       label: 'Styles',
                       key: 'styles',
                       type: 'TOGGLE',
@@ -2610,7 +2623,7 @@
                       },
                     },
                     {
-                      value: false,
+                      value: true,
                       label: 'Hide label',
                       key: 'hideLabel',
                       type: 'TOGGLE',
@@ -3635,7 +3648,7 @@
                       },
                     },
                     {
-                      value: false,
+                      value: true,
                       label: 'Hide label',
                       key: 'hideLabel',
                       type: 'TOGGLE',
@@ -4640,7 +4653,7 @@
                       },
                     },
                     {
-                      value: false,
+                      value: true,
                       label: 'Hide label',
                       key: 'hideLabel',
                       type: 'TOGGLE',
@@ -5657,7 +5670,7 @@
                       },
                     },
                     {
-                      value: false,
+                      value: true,
                       label: 'Hide label',
                       key: 'hideLabel',
                       type: 'TOGGLE',
@@ -6668,7 +6681,7 @@
                       },
                     },
                     {
-                      value: false,
+                      value: true,
                       label: 'Hide label',
                       key: 'hideLabel',
                       type: 'TOGGLE',
@@ -7675,7 +7688,7 @@
                       },
                     },
                     {
-                      value: false,
+                      value: true,
                       label: 'Hide label',
                       key: 'hideLabel',
                       type: 'TOGGLE',
@@ -8624,7 +8637,7 @@
                       },
                     },
                     {
-                      value: false,
+                      value: true,
                       label: 'Hide label',
                       key: 'hideLabel',
                       type: 'TOGGLE',
@@ -9610,7 +9623,7 @@
                       },
                     },
                     {
-                      value: false,
+                      value: true,
                       label: 'Hide label',
                       key: 'hideLabel',
                       type: 'TOGGLE',
@@ -10596,7 +10609,7 @@
                       },
                     },
                     {
-                      value: false,
+                      value: true,
                       label: 'Hide label',
                       key: 'hideLabel',
                       type: 'TOGGLE',
@@ -10806,7 +10819,7 @@
                   type: 'TOGGLE',
                 },
                 {
-                  value: false,
+                  value: true,
                   label: 'Hide label',
                   key: 'hideLabel',
                   type: 'TOGGLE',
@@ -12247,7 +12260,7 @@
                       },
                     },
                     {
-                      value: false,
+                      value: true,
                       label: 'Hide label',
                       key: 'hideLabel',
                       type: 'TOGGLE',
@@ -13239,7 +13252,7 @@
                       },
                     },
                     {
-                      value: false,
+                      value: true,
                       label: 'Hide label',
                       key: 'hideLabel',
                       type: 'TOGGLE',
@@ -13387,7 +13400,7 @@
             />
           </Field>
           <Field
-            label="Columns in the data table"
+            label="Properties used in Create, Edit and View functionalities"
             error={
               propertiesValidation && (
                 <Text color="#e82600">Selecting a property is required</Text>
@@ -20483,6 +20496,10 @@
                                                 },
                                                 style: {
                                                   name: 'outline',
+                                                  overwrite: {
+                                                    fontWeight: '400',
+                                                    textTransform: 'none',
+                                                  },
                                                 },
                                                 options: [
                                                   {
@@ -20806,6 +20823,29 @@
                                                 name: 'Button',
                                                 ref: {
                                                   id: '#submitCreateDialogButton',
+                                                },
+                                                style: {
+                                                  overwrite: {
+                                                    backgroundColor: {
+                                                      type: 'THEME_COLOR',
+                                                      value: 'primary',
+                                                    },
+                                                    boxShadow: 'none',
+                                                    color: {
+                                                      type: 'THEME_COLOR',
+                                                      value: 'white',
+                                                    },
+                                                    fontFamily: 'Roboto',
+                                                    fontSize: '0.875rem',
+                                                    fontStyle: 'none',
+                                                    fontWeight: '400',
+                                                    padding: [
+                                                      '0.6875rem',
+                                                      '1.375rem',
+                                                    ],
+                                                    textDecoration: 'none',
+                                                    textTransform: 'none',
+                                                  },
                                                 },
                                                 options: [
                                                   {
@@ -23065,6 +23105,10 @@
                                                     },
                                                     style: {
                                                       name: 'outline',
+                                                      overwrite: {
+                                                        fontWeight: '400',
+                                                        textTransform: 'none',
+                                                      },
                                                     },
                                                     options: [
                                                       {
@@ -23970,6 +24014,9 @@
                                                               type: 'THEME_COLOR',
                                                               value: 'danger',
                                                             },
+                                                            fontWeight: '400',
+                                                            textTransform:
+                                                              'none',
                                                           },
                                                         },
                                                         options: [
@@ -24346,6 +24393,33 @@
                                                         name: 'Button',
                                                         ref: {
                                                           id: '#detailsDialogEditDialogButton',
+                                                        },
+                                                        style: {
+                                                          overwrite: {
+                                                            backgroundColor: {
+                                                              type: 'THEME_COLOR',
+                                                              value: 'primary',
+                                                            },
+                                                            boxShadow: 'none',
+                                                            color: {
+                                                              type: 'THEME_COLOR',
+                                                              value: 'white',
+                                                            },
+                                                            fontFamily:
+                                                              'Roboto',
+                                                            fontSize:
+                                                              '0.875rem',
+                                                            fontStyle: 'none',
+                                                            fontWeight: '400',
+                                                            padding: [
+                                                              '0.6875rem',
+                                                              '1.375rem',
+                                                            ],
+                                                            textDecoration:
+                                                              'none',
+                                                            textTransform:
+                                                              'none',
+                                                          },
                                                         },
                                                         options: [
                                                           {
@@ -27470,6 +27544,12 @@
                                                             },
                                                             style: {
                                                               name: 'outline',
+                                                              overwrite: {
+                                                                fontWeight:
+                                                                  '400',
+                                                                textTransform:
+                                                                  'none',
+                                                              },
                                                             },
                                                             options: [
                                                               {
@@ -28516,6 +28596,10 @@
                                                                       value:
                                                                         'danger',
                                                                     },
+                                                                    fontWeight:
+                                                                      '400',
+                                                                    textTransform:
+                                                                      'none',
                                                                   },
                                                                 },
                                                                 options: [
@@ -28951,6 +29035,39 @@
                                                                 name: 'Button',
                                                                 ref: {
                                                                   id: '#submitUpdateDialogButton',
+                                                                },
+                                                                style: {
+                                                                  overwrite: {
+                                                                    backgroundColor:
+                                                                      {
+                                                                        type: 'THEME_COLOR',
+                                                                        value:
+                                                                          'primary',
+                                                                      },
+                                                                    boxShadow:
+                                                                      'none',
+                                                                    color: {
+                                                                      type: 'THEME_COLOR',
+                                                                      value:
+                                                                        'white',
+                                                                    },
+                                                                    fontFamily:
+                                                                      'Roboto',
+                                                                    fontSize:
+                                                                      '0.875rem',
+                                                                    fontStyle:
+                                                                      'none',
+                                                                    fontWeight:
+                                                                      '400',
+                                                                    padding: [
+                                                                      '0.6875rem',
+                                                                      '1.375rem',
+                                                                    ],
+                                                                    textDecoration:
+                                                                      'none',
+                                                                    textTransform:
+                                                                      'none',
+                                                                  },
                                                                 },
                                                                 options: [
                                                                   {
@@ -31964,6 +32081,10 @@
                                                     },
                                                     style: {
                                                       name: 'outline',
+                                                      overwrite: {
+                                                        fontWeight: '400',
+                                                        textTransform: 'none',
+                                                      },
                                                     },
                                                     options: [
                                                       {
@@ -32621,6 +32742,771 @@
                               },
                             ],
                           },
+                          {
+                            name: 'Snackbar',
+                            ref: { id: '#createSnackbar' },
+                            options: [
+                              {
+                                label: 'Toggle visibility',
+                                key: 'visible',
+                                value: false,
+                                type: 'TOGGLE',
+                                configuration: {
+                                  as: 'VISIBILITY',
+                                },
+                              },
+                              {
+                                type: 'VARIABLE',
+                                label: 'Content',
+                                key: 'content',
+                                value: [''],
+                              },
+                              {
+                                label:
+                                  'Allow to overwrite by the server response',
+                                key: 'allowTextServerResponse',
+                                value: false,
+                                type: 'TOGGLE',
+                              },
+                              {
+                                label: 'Vertical position',
+                                key: 'anchorOriginVertical',
+                                value: 'top',
+                                type: 'CUSTOM',
+                                configuration: {
+                                  as: 'BUTTONGROUP',
+                                  dataType: 'string',
+                                  allowedInput: [
+                                    {
+                                      name: 'Top',
+                                      value: 'top',
+                                    },
+                                    {
+                                      name: 'Bottom',
+                                      value: 'bottom',
+                                    },
+                                  ],
+                                },
+                              },
+                              {
+                                label: 'Horizontal position',
+                                key: 'anchorOriginHorizontal',
+                                value: 'center',
+                                type: 'CUSTOM',
+                                configuration: {
+                                  as: 'BUTTONGROUP',
+                                  dataType: 'string',
+                                  allowedInput: [
+                                    {
+                                      name: 'Left',
+                                      value: 'left',
+                                    },
+                                    {
+                                      name: 'Center',
+                                      value: 'center',
+                                    },
+                                    {
+                                      name: 'Right',
+                                      value: 'right',
+                                    },
+                                  ],
+                                },
+                              },
+                              {
+                                type: 'TOGGLE',
+                                label: 'Auto hide',
+                                key: 'autoHide',
+                                value: true,
+                              },
+
+                              {
+                                type: 'NUMBER',
+                                label: 'Auto Hide Duration (ms)',
+                                key: 'autoHideDuration',
+                                value: 6000,
+                                configuration: {
+                                  condition: {
+                                    type: 'SHOW',
+                                    option: 'autoHide',
+                                    comparator: 'EQ',
+                                    value: true,
+                                  },
+                                },
+                              },
+                              {
+                                value: false,
+                                label: 'Advanced settings',
+                                key: 'advancedSettings',
+                                type: 'TOGGLE',
+                              },
+                              {
+                                type: 'VARIABLE',
+                                label: 'Test attribute',
+                                key: 'dataComponentAttribute',
+                                value: ['Snackbar'],
+                                configuration: {
+                                  condition: {
+                                    type: 'SHOW',
+                                    option: 'advancedSettings',
+                                    comparator: 'EQ',
+                                    value: true,
+                                  },
+                                },
+                              },
+                            ],
+                            descendants: [
+                              {
+                                name: 'Alert',
+                                options: [
+                                  {
+                                    value: true,
+                                    label: 'Toggle visibility',
+                                    key: 'visible',
+                                    type: 'TOGGLE',
+                                    configuration: {
+                                      as: 'VISIBILITY',
+                                    },
+                                  },
+                                  {
+                                    type: 'VARIABLE',
+                                    label: 'Body text',
+                                    key: 'bodyText',
+                                    value: ['Record successfully created'],
+                                  },
+                                  {
+                                    label:
+                                      'Allow to overwrite by the server response',
+                                    key: 'allowTextServerResponse',
+                                    value: false,
+                                    type: 'TOGGLE',
+                                  },
+                                  {
+                                    type: 'VARIABLE',
+                                    label: 'Title text',
+                                    key: 'titleText',
+                                    value: [''],
+                                  },
+                                  {
+                                    label:
+                                      'Allow to overwrite by the server response',
+                                    key: 'allowTitleServerResponse',
+                                    value: false,
+                                    type: 'TOGGLE',
+                                  },
+                                  {
+                                    value: 'Black',
+                                    label: 'Text color',
+                                    key: 'textColor',
+                                    type: 'COLOR',
+                                  },
+                                  {
+                                    value: 'Black',
+                                    label: 'Icon color',
+                                    key: 'iconColor',
+                                    type: 'COLOR',
+                                  },
+                                  {
+                                    value: 'Success',
+                                    label: 'Background color',
+                                    key: 'background',
+                                    type: 'COLOR',
+                                  },
+                                  {
+                                    value: 'Transparent',
+                                    label: 'Border color',
+                                    key: 'borderColor',
+                                    type: 'COLOR',
+                                  },
+                                  {
+                                    label: 'Icon',
+                                    key: 'icon',
+                                    value: 'None',
+                                    type: 'ICON',
+                                  },
+                                  {
+                                    value: false,
+                                    label: 'Collapsable',
+                                    key: 'collapsable',
+                                    type: 'TOGGLE',
+                                  },
+                                  {
+                                    type: 'CUSTOM',
+                                    label: 'Horizontal Alignment',
+                                    key: 'horizontalAlignment',
+                                    value: 'flex-start',
+                                    configuration: {
+                                      as: 'BUTTONGROUP',
+                                      dataType: 'string',
+                                      allowedInput: [
+                                        { name: 'Left', value: 'flex-start' },
+                                        { name: 'Center', value: 'center' },
+                                        { name: 'Right', value: 'flex-end' },
+                                      ],
+                                      condition: {
+                                        type: 'HIDE',
+                                        option: 'collapsable',
+                                        comparator: 'EQ',
+                                        value: true,
+                                      },
+                                    },
+                                  },
+                                  {
+                                    type: 'CUSTOM',
+                                    label: 'Vertical Alignment',
+                                    key: 'verticalAlignment',
+                                    value: 'stretch',
+                                    configuration: {
+                                      as: 'BUTTONGROUP',
+                                      dataType: 'string',
+                                      allowedInput: [
+                                        { name: 'Top', value: 'flex-start' },
+                                        { name: 'Center', value: 'center' },
+                                        { name: 'Bottom', value: 'flex-end' },
+                                        { name: 'Justified', value: 'stretch' },
+                                      ],
+                                    },
+                                  },
+                                  {
+                                    value: ['0rem', '0rem', 'M', '0rem'],
+                                    label: 'Outer space',
+                                    key: 'outerSpacing',
+                                    type: 'SIZES',
+                                  },
+                                  {
+                                    value: false,
+                                    label: 'Advanced settings',
+                                    key: 'advancedSettings',
+                                    type: 'TOGGLE',
+                                  },
+                                  {
+                                    type: 'VARIABLE',
+                                    label: 'Test attribute',
+                                    key: 'dataComponentAttribute',
+                                    value: ['Alert'],
+                                    configuration: {
+                                      condition: {
+                                        type: 'SHOW',
+                                        option: 'advancedSettings',
+                                        comparator: 'EQ',
+                                        value: true,
+                                      },
+                                    },
+                                  },
+                                ],
+                                descendants: [],
+                              },
+                            ],
+                          },
+                          {
+                            name: 'Snackbar',
+                            ref: { id: '#updateSnackbar' },
+                            options: [
+                              {
+                                label: 'Toggle visibility',
+                                key: 'visible',
+                                value: false,
+                                type: 'TOGGLE',
+                                configuration: {
+                                  as: 'VISIBILITY',
+                                },
+                              },
+                              {
+                                type: 'VARIABLE',
+                                label: 'Content',
+                                key: 'content',
+                                value: [''],
+                              },
+                              {
+                                label:
+                                  'Allow to overwrite by the server response',
+                                key: 'allowTextServerResponse',
+                                value: false,
+                                type: 'TOGGLE',
+                              },
+                              {
+                                label: 'Vertical position',
+                                key: 'anchorOriginVertical',
+                                value: 'top',
+                                type: 'CUSTOM',
+                                configuration: {
+                                  as: 'BUTTONGROUP',
+                                  dataType: 'string',
+                                  allowedInput: [
+                                    {
+                                      name: 'Top',
+                                      value: 'top',
+                                    },
+                                    {
+                                      name: 'Bottom',
+                                      value: 'bottom',
+                                    },
+                                  ],
+                                },
+                              },
+                              {
+                                label: 'Horizontal position',
+                                key: 'anchorOriginHorizontal',
+                                value: 'center',
+                                type: 'CUSTOM',
+                                configuration: {
+                                  as: 'BUTTONGROUP',
+                                  dataType: 'string',
+                                  allowedInput: [
+                                    {
+                                      name: 'Left',
+                                      value: 'left',
+                                    },
+                                    {
+                                      name: 'Center',
+                                      value: 'center',
+                                    },
+                                    {
+                                      name: 'Right',
+                                      value: 'right',
+                                    },
+                                  ],
+                                },
+                              },
+                              {
+                                type: 'TOGGLE',
+                                label: 'Auto hide',
+                                key: 'autoHide',
+                                value: true,
+                              },
+
+                              {
+                                type: 'NUMBER',
+                                label: 'Auto Hide Duration (ms)',
+                                key: 'autoHideDuration',
+                                value: 6000,
+                                configuration: {
+                                  condition: {
+                                    type: 'SHOW',
+                                    option: 'autoHide',
+                                    comparator: 'EQ',
+                                    value: true,
+                                  },
+                                },
+                              },
+                              {
+                                value: false,
+                                label: 'Advanced settings',
+                                key: 'advancedSettings',
+                                type: 'TOGGLE',
+                              },
+                              {
+                                type: 'VARIABLE',
+                                label: 'Test attribute',
+                                key: 'dataComponentAttribute',
+                                value: ['Snackbar'],
+                                configuration: {
+                                  condition: {
+                                    type: 'SHOW',
+                                    option: 'advancedSettings',
+                                    comparator: 'EQ',
+                                    value: true,
+                                  },
+                                },
+                              },
+                            ],
+                            descendants: [
+                              {
+                                name: 'Alert',
+                                options: [
+                                  {
+                                    value: true,
+                                    label: 'Toggle visibility',
+                                    key: 'visible',
+                                    type: 'TOGGLE',
+                                    configuration: {
+                                      as: 'VISIBILITY',
+                                    },
+                                  },
+                                  {
+                                    type: 'VARIABLE',
+                                    label: 'Body text',
+                                    key: 'bodyText',
+                                    value: ['Record successfully updated'],
+                                  },
+                                  {
+                                    label:
+                                      'Allow to overwrite by the server response',
+                                    key: 'allowTextServerResponse',
+                                    value: false,
+                                    type: 'TOGGLE',
+                                  },
+                                  {
+                                    type: 'VARIABLE',
+                                    label: 'Title text',
+                                    key: 'titleText',
+                                    value: [''],
+                                  },
+                                  {
+                                    label:
+                                      'Allow to overwrite by the server response',
+                                    key: 'allowTitleServerResponse',
+                                    value: false,
+                                    type: 'TOGGLE',
+                                  },
+                                  {
+                                    value: 'Black',
+                                    label: 'Text color',
+                                    key: 'textColor',
+                                    type: 'COLOR',
+                                  },
+                                  {
+                                    value: 'Black',
+                                    label: 'Icon color',
+                                    key: 'iconColor',
+                                    type: 'COLOR',
+                                  },
+                                  {
+                                    value: 'Success',
+                                    label: 'Background color',
+                                    key: 'background',
+                                    type: 'COLOR',
+                                  },
+                                  {
+                                    value: 'Transparent',
+                                    label: 'Border color',
+                                    key: 'borderColor',
+                                    type: 'COLOR',
+                                  },
+                                  {
+                                    label: 'Icon',
+                                    key: 'icon',
+                                    value: 'None',
+                                    type: 'ICON',
+                                  },
+                                  {
+                                    value: false,
+                                    label: 'Collapsable',
+                                    key: 'collapsable',
+                                    type: 'TOGGLE',
+                                  },
+                                  {
+                                    type: 'CUSTOM',
+                                    label: 'Horizontal Alignment',
+                                    key: 'horizontalAlignment',
+                                    value: 'flex-start',
+                                    configuration: {
+                                      as: 'BUTTONGROUP',
+                                      dataType: 'string',
+                                      allowedInput: [
+                                        { name: 'Left', value: 'flex-start' },
+                                        { name: 'Center', value: 'center' },
+                                        { name: 'Right', value: 'flex-end' },
+                                      ],
+                                      condition: {
+                                        type: 'HIDE',
+                                        option: 'collapsable',
+                                        comparator: 'EQ',
+                                        value: true,
+                                      },
+                                    },
+                                  },
+                                  {
+                                    type: 'CUSTOM',
+                                    label: 'Vertical Alignment',
+                                    key: 'verticalAlignment',
+                                    value: 'stretch',
+                                    configuration: {
+                                      as: 'BUTTONGROUP',
+                                      dataType: 'string',
+                                      allowedInput: [
+                                        { name: 'Top', value: 'flex-start' },
+                                        { name: 'Center', value: 'center' },
+                                        { name: 'Bottom', value: 'flex-end' },
+                                        { name: 'Justified', value: 'stretch' },
+                                      ],
+                                    },
+                                  },
+                                  {
+                                    value: ['0rem', '0rem', 'M', '0rem'],
+                                    label: 'Outer space',
+                                    key: 'outerSpacing',
+                                    type: 'SIZES',
+                                  },
+                                  {
+                                    value: false,
+                                    label: 'Advanced settings',
+                                    key: 'advancedSettings',
+                                    type: 'TOGGLE',
+                                  },
+                                  {
+                                    type: 'VARIABLE',
+                                    label: 'Test attribute',
+                                    key: 'dataComponentAttribute',
+                                    value: ['Alert'],
+                                    configuration: {
+                                      condition: {
+                                        type: 'SHOW',
+                                        option: 'advancedSettings',
+                                        comparator: 'EQ',
+                                        value: true,
+                                      },
+                                    },
+                                  },
+                                ],
+                                descendants: [],
+                              },
+                            ],
+                          },
+                          {
+                            name: 'Snackbar',
+                            ref: { id: '#deleteSnackbar' },
+                            options: [
+                              {
+                                label: 'Toggle visibility',
+                                key: 'visible',
+                                value: false,
+                                type: 'TOGGLE',
+                                configuration: {
+                                  as: 'VISIBILITY',
+                                },
+                              },
+                              {
+                                type: 'VARIABLE',
+                                label: 'Content',
+                                key: 'content',
+                                value: [''],
+                              },
+                              {
+                                label:
+                                  'Allow to overwrite by the server response',
+                                key: 'allowTextServerResponse',
+                                value: false,
+                                type: 'TOGGLE',
+                              },
+                              {
+                                label: 'Vertical position',
+                                key: 'anchorOriginVertical',
+                                value: 'top',
+                                type: 'CUSTOM',
+                                configuration: {
+                                  as: 'BUTTONGROUP',
+                                  dataType: 'string',
+                                  allowedInput: [
+                                    {
+                                      name: 'Top',
+                                      value: 'top',
+                                    },
+                                    {
+                                      name: 'Bottom',
+                                      value: 'bottom',
+                                    },
+                                  ],
+                                },
+                              },
+                              {
+                                label: 'Horizontal position',
+                                key: 'anchorOriginHorizontal',
+                                value: 'center',
+                                type: 'CUSTOM',
+                                configuration: {
+                                  as: 'BUTTONGROUP',
+                                  dataType: 'string',
+                                  allowedInput: [
+                                    {
+                                      name: 'Left',
+                                      value: 'left',
+                                    },
+                                    {
+                                      name: 'Center',
+                                      value: 'center',
+                                    },
+                                    {
+                                      name: 'Right',
+                                      value: 'right',
+                                    },
+                                  ],
+                                },
+                              },
+                              {
+                                type: 'TOGGLE',
+                                label: 'Auto hide',
+                                key: 'autoHide',
+                                value: true,
+                              },
+
+                              {
+                                type: 'NUMBER',
+                                label: 'Auto Hide Duration (ms)',
+                                key: 'autoHideDuration',
+                                value: 6000,
+                                configuration: {
+                                  condition: {
+                                    type: 'SHOW',
+                                    option: 'autoHide',
+                                    comparator: 'EQ',
+                                    value: true,
+                                  },
+                                },
+                              },
+                              {
+                                value: false,
+                                label: 'Advanced settings',
+                                key: 'advancedSettings',
+                                type: 'TOGGLE',
+                              },
+                              {
+                                type: 'VARIABLE',
+                                label: 'Test attribute',
+                                key: 'dataComponentAttribute',
+                                value: ['Snackbar'],
+                                configuration: {
+                                  condition: {
+                                    type: 'SHOW',
+                                    option: 'advancedSettings',
+                                    comparator: 'EQ',
+                                    value: true,
+                                  },
+                                },
+                              },
+                            ],
+                            descendants: [
+                              {
+                                name: 'Alert',
+                                options: [
+                                  {
+                                    value: true,
+                                    label: 'Toggle visibility',
+                                    key: 'visible',
+                                    type: 'TOGGLE',
+                                    configuration: {
+                                      as: 'VISIBILITY',
+                                    },
+                                  },
+                                  {
+                                    type: 'VARIABLE',
+                                    label: 'Body text',
+                                    key: 'bodyText',
+                                    value: ['Record successfully deleted'],
+                                  },
+                                  {
+                                    label:
+                                      'Allow to overwrite by the server response',
+                                    key: 'allowTextServerResponse',
+                                    value: false,
+                                    type: 'TOGGLE',
+                                  },
+                                  {
+                                    type: 'VARIABLE',
+                                    label: 'Title text',
+                                    key: 'titleText',
+                                    value: [''],
+                                  },
+                                  {
+                                    label:
+                                      'Allow to overwrite by the server response',
+                                    key: 'allowTitleServerResponse',
+                                    value: false,
+                                    type: 'TOGGLE',
+                                  },
+                                  {
+                                    value: 'Black',
+                                    label: 'Text color',
+                                    key: 'textColor',
+                                    type: 'COLOR',
+                                  },
+                                  {
+                                    value: 'Black',
+                                    label: 'Icon color',
+                                    key: 'iconColor',
+                                    type: 'COLOR',
+                                  },
+                                  {
+                                    value: 'Success',
+                                    label: 'Background color',
+                                    key: 'background',
+                                    type: 'COLOR',
+                                  },
+                                  {
+                                    value: 'Transparent',
+                                    label: 'Border color',
+                                    key: 'borderColor',
+                                    type: 'COLOR',
+                                  },
+                                  {
+                                    label: 'Icon',
+                                    key: 'icon',
+                                    value: 'None',
+                                    type: 'ICON',
+                                  },
+                                  {
+                                    value: false,
+                                    label: 'Collapsable',
+                                    key: 'collapsable',
+                                    type: 'TOGGLE',
+                                  },
+                                  {
+                                    type: 'CUSTOM',
+                                    label: 'Horizontal Alignment',
+                                    key: 'horizontalAlignment',
+                                    value: 'flex-start',
+                                    configuration: {
+                                      as: 'BUTTONGROUP',
+                                      dataType: 'string',
+                                      allowedInput: [
+                                        { name: 'Left', value: 'flex-start' },
+                                        { name: 'Center', value: 'center' },
+                                        { name: 'Right', value: 'flex-end' },
+                                      ],
+                                      condition: {
+                                        type: 'HIDE',
+                                        option: 'collapsable',
+                                        comparator: 'EQ',
+                                        value: true,
+                                      },
+                                    },
+                                  },
+                                  {
+                                    type: 'CUSTOM',
+                                    label: 'Vertical Alignment',
+                                    key: 'verticalAlignment',
+                                    value: 'stretch',
+                                    configuration: {
+                                      as: 'BUTTONGROUP',
+                                      dataType: 'string',
+                                      allowedInput: [
+                                        { name: 'Top', value: 'flex-start' },
+                                        { name: 'Center', value: 'center' },
+                                        { name: 'Bottom', value: 'flex-end' },
+                                        { name: 'Justified', value: 'stretch' },
+                                      ],
+                                    },
+                                  },
+                                  {
+                                    value: ['0rem', '0rem', 'M', '0rem'],
+                                    label: 'Outer space',
+                                    key: 'outerSpacing',
+                                    type: 'SIZES',
+                                  },
+                                  {
+                                    value: false,
+                                    label: 'Advanced settings',
+                                    key: 'advancedSettings',
+                                    type: 'TOGGLE',
+                                  },
+                                  {
+                                    type: 'VARIABLE',
+                                    label: 'Test attribute',
+                                    key: 'dataComponentAttribute',
+                                    value: ['Alert'],
+                                    configuration: {
+                                      condition: {
+                                        type: 'SHOW',
+                                        option: 'advancedSettings',
+                                        comparator: 'EQ',
+                                        value: true,
+                                      },
+                                    },
+                                  },
+                                ],
+                                descendants: [],
+                              },
+                            ],
+                          },
                         ],
                       },
                     ],
@@ -33203,8 +34089,14 @@
                 ],
               },
             ];
+            const formProperties = properties.filter(
+              (property) =>
+                property.label !== 'Created at' &&
+                property.label !== 'Updated at' &&
+                property.label !== 'Id',
+            );
 
-            const propertiesLength = properties.length;
+            const propertiesLength = formProperties.length;
             if (!modelId || propertiesLength < 1) {
               setModelValidation(!modelId);
               setPropertiesValidation(propertiesLength < 1);
@@ -34784,14 +35676,17 @@
               '#createForm',
               prefabStructure,
             );
-            const createFormProps = makeInputDescendantsArray(properties);
+            const createFormProps = makeInputDescendantsArray(formProperties);
             createForm.descendants = [
               ...createFormProps,
               ...createForm.descendants,
             ];
 
             const editForm = getDescendantByRef('#editForm', prefabStructure);
-            const editFormProps = makeInputDescendantsArray(properties, 'edit');
+            const editFormProps = makeInputDescendantsArray(
+              formProperties,
+              'edit',
+            );
             editForm.descendants = [...editFormProps, ...editForm.descendants];
 
             const headerMenu = getDescendantByRef(
@@ -35031,6 +35926,15 @@
                 type: 'Custom',
               },
               {
+                name: 'Show',
+                sourceEvent: 'onActionSuccess',
+                ref: {
+                  targetComponentId: '#updateSnackbar',
+                  sourceComponentId: '#editForm',
+                },
+                type: 'Custom',
+              },
+              {
                 name: 'Refetch',
                 sourceEvent: 'onActionSuccess',
                 ref: {
@@ -35045,6 +35949,15 @@
                 ref: {
                   sourceComponentId: '#deleteButton',
                   targetComponentId: '#deleteDialog',
+                },
+                type: 'Custom',
+              },
+              {
+                name: 'Show',
+                sourceEvent: 'onActionSuccess',
+                ref: {
+                  targetComponentId: '#deleteSnackbar',
+                  sourceComponentId: '#deleteActionButton',
                 },
                 type: 'Custom',
               },
@@ -35166,6 +36079,15 @@
                 sourceEvent: 'onActionDone',
                 ref: {
                   targetComponentId: '#submitCreateDialogButton',
+                  sourceComponentId: '#createForm',
+                },
+                type: 'Custom',
+              },
+              {
+                name: 'Show',
+                sourceEvent: 'onActionSuccess',
+                ref: {
+                  targetComponentId: '#createSnackbar',
                   sourceComponentId: '#createForm',
                 },
                 type: 'Custom',
