@@ -15578,7 +15578,7 @@
           type: 'CUSTOM',
           label: 'Width',
           key: 'maxRowWidth',
-          value: 'XL',
+          value: 'Full',
           configuration: {
             as: 'BUTTONGROUP',
             dataType: 'string',
