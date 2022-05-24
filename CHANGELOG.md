@@ -1,3 +1,53 @@
+# [1.227.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.226.0...v1.227.0) (2022-05-24)
+
+
+### Features
+
+* added partial folder and partials ([0cd761f](https://github.com/bettyblocks/material-ui-component-set/commit/0cd761f153a422e77d7ce6175db7499caf6147fd))
+
+# [1.226.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.225.0...v1.226.0) (2022-05-24)
+
+
+### Features
+
+* add partial selector to homepage layout ([7839b0f](https://github.com/bettyblocks/material-ui-component-set/commit/7839b0f1ea9db2e32b5e7a25d592e23e55d3a192))
+* added partial selector and updated structure ([9c7599e](https://github.com/bettyblocks/material-ui-component-set/commit/9c7599eff85a0bf7427495b4abdb4476e4e9bb59))
+
+# [1.225.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.224.1...v1.225.0) (2022-05-19)
+
+
+### Features
+
+* added partial selector and updated structure ([5ab4f21](https://github.com/bettyblocks/material-ui-component-set/commit/5ab4f212fcc2e68d47fe0412558f733d5b1ef262))
+
+## [1.224.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.224.0...v1.224.1) (2022-05-19)
+
+
+### Bug Fixes
+
+* beta checkbox is now above the submit button ([6d0cd4a](https://github.com/bettyblocks/material-ui-component-set/commit/6d0cd4a70ed724161bac8c50a188d0d2ea207de4))
+* renamed Action Form Beta to Form Beta ([03294bc](https://github.com/bettyblocks/material-ui-component-set/commit/03294bc55ca3061594baab66b5e5bc5e24308cf8))
+
+# [1.224.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.223.0...v1.224.0) (2022-05-17)
+
+
+### Features
+
+* added partial selector ([5f6c608](https://github.com/bettyblocks/material-ui-component-set/commit/5f6c60863bc2ca4234f392c84e94f1d84d61a4ed))
+
+# [1.223.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.222.0...v1.223.0) (2022-05-13)
+
+
+### Bug Fixes
+
+* header or footer partialid no longer required ([43927bb](https://github.com/bettyblocks/material-ui-component-set/commit/43927bb381e292f42ddea1f48d8eb305fa7ff4f8))
+* reverted cli version back to its original ([e795886](https://github.com/bettyblocks/material-ui-component-set/commit/e795886b0e458ea5f896c380f62755ff92638612))
+
+
+### Features
+
+* user can now pick partials ([8834424](https://github.com/bettyblocks/material-ui-component-set/commit/88344243c3d5295283f032cc457e3e02c17a4f07))
+
 # [1.222.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.221.1...v1.222.0) (2022-05-12)
 
 
