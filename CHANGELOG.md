@@ -1,3 +1,18 @@
+# [1.227.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.226.0...v1.227.0) (2022-05-24)
+
+
+### Features
+
+* added partial folder and partials ([0cd761f](https://github.com/bettyblocks/material-ui-component-set/commit/0cd761f153a422e77d7ce6175db7499caf6147fd))
+
+# [1.226.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.225.0...v1.226.0) (2022-05-24)
+
+
+### Features
+
+* add partial selector to homepage layout ([7839b0f](https://github.com/bettyblocks/material-ui-component-set/commit/7839b0f1ea9db2e32b5e7a25d592e23e55d3a192))
+* added partial selector and updated structure ([9c7599e](https://github.com/bettyblocks/material-ui-component-set/commit/9c7599eff85a0bf7427495b4abdb4476e4e9bb59))
+
 # [1.225.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.224.1...v1.225.0) (2022-05-19)
 
 
