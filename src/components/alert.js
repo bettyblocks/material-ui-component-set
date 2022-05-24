@@ -37,6 +37,7 @@
             err.errors[0].message.errors &&
             err.errors[0].message.errors[0] &&
             err.errors[0].message.errors[0].message) ||
+          (err.errors && err.errors[0] && err.errors[0].message) ||
           (err.networkError && err.networkError.message);
 
         const errorTitle =
