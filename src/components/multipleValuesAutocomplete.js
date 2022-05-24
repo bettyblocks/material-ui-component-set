@@ -329,8 +329,8 @@
 
     // We need to do this, because options.filter is not immutable
     const filter = {
-      ...optionFilter,
       ...(initalValue.length > 0 && { _or: defaultValuesFilterArray }),
+      ...optionFilter,
     };
 
     const searchPropIsNumber = numberPropTypes.includes(searchProp.kind);
