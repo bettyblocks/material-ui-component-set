@@ -1,3 +1,10 @@
+# [1.227.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.226.0...v1.227.0) (2022-05-24)
+
+
+### Features
+
+* added partial folder and partials ([0cd761f](https://github.com/bettyblocks/material-ui-component-set/commit/0cd761f153a422e77d7ce6175db7499caf6147fd))
+
 # [1.226.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.225.0...v1.226.0) (2022-05-24)
 
 
