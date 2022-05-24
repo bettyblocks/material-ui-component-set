@@ -344,10 +344,10 @@
     /* eslint-disable no-underscore-dangle */
     if (multiple) {
       if (debouncedInputValue) {
-        if (!filter._or) {
-          filter._or = [];
+        if (!filter._and) {
+          filter._and = [];
         }
-        filter._or.push({
+        filter._and.push({
           [searchProp.name]: {
             [searchPropIsNumber ? 'eq' : 'regex']: searchPropIsNumber
               ? parseInt(debouncedInputValue, 10)
