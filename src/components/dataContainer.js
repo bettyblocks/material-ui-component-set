@@ -177,7 +177,7 @@
         if (authProfile) {
           return (
             <GetMe authenticationProfileId={authProfile}>
-              {({ error, loading, data }) => {
+              {({ error, loading, data, refetch }) => {
                 if (loading) {
                   B.triggerEvent('onUserLoad');
                 }
@@ -189,6 +189,10 @@
                 } else {
                   B.triggerEvent('onNoUserResults');
                 }
+                B.defineFunction('Refetch', () => {
+                  refetch();
+                });
+
                 return DataContainer;
               }}
             </GetMe>
