@@ -22,7 +22,7 @@
       Box,
       Button,
     },
-    helpers: { useModelQuery },
+    helpers: { useModelQuery, camelToSnakeCase },
     prefab,
     save,
     close,
@@ -13513,6 +13513,10 @@
         }
 
         const idProperty = data.model.properties.find((p) => p.name === 'id');
+        if (data && data.model) {
+          newPrefab.variables[0].name = camelToSnakeCase(data.model.name);
+        }
+        newPrefab.variables[0].options.modelId = modelId;
 
         const prefabStructure = [
           {
@@ -35649,17 +35653,6 @@
 
         newPrefab.variables.push(
           {
-            kind: 'object',
-            name: `${data.model.label}`,
-            ref: {
-              id: '#objectVariableId',
-              endpointId: '#endpointId',
-            },
-            options: {
-              modelId: `${modelId}`,
-            },
-          },
-          {
             kind: 'construct',
             name: 'form_data',
             ref: {
@@ -35712,24 +35705,6 @@
         );
 
         newPrefab.actions.push(
-          {
-            name: 'Delete record action',
-            ref: {
-              id: '#actionId',
-              endpointId: '#endpointId',
-            },
-            useNewRuntime: false,
-            events: [
-              {
-                kind: 'delete',
-                options: {
-                  ref: {
-                    object: '#objectVariableId',
-                  },
-                },
-              },
-            ],
-          },
           {
             name: 'Create form action',
             ref: {
@@ -35853,8 +35828,39 @@
     );
   },
   interactions: [],
-  variables: [],
-  actions: [],
+  variables: [
+    {
+      kind: 'object',
+      name: 'form_object',
+      ref: {
+        id: '#objectVariableId',
+        endpointId: '#endpointId',
+      },
+      options: {
+        modelId: '',
+      },
+    },
+  ],
+  actions: [
+    {
+      name: 'Delete record action',
+      ref: {
+        id: '#actionId',
+        endpointId: '#endpointId',
+      },
+      useNewRuntime: false,
+      events: [
+        {
+          kind: 'delete',
+          options: {
+            ref: {
+              object: '#objectVariableId',
+            },
+          },
+        },
+      ],
+    },
+  ],
   structure: [
     {
       name: 'Row',
