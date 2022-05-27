@@ -1,3 +1,10 @@
+## [1.228.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.228.0...v1.228.1) (2022-05-27)
+
+
+### Bug Fixes
+
+* adjust form alert text for update form ([f140bd7](https://github.com/bettyblocks/material-ui-component-set/commit/f140bd7a8d0183f0e32fec0680dad4a2c9c83fcb))
+
 # [1.228.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.227.0...v1.228.0) (2022-05-24)
 
 
