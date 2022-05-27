@@ -18,17 +18,20 @@ export interface Configuration {
 
 export const Alert = (config: Configuration): PrefabReference => {
   const options = { ...defaults, ...config.options };
-  const ref = config.ref ? { ref: config.ref } : {};
 
-  return component('Alert', { ...ref, options }, []);
+  return component('Alert', { ...config, options }, []);
+};
+
+const baseFormAlertStyle = {
+  textColor: updateOption(defaults.textColor, { value: ThemeColor.WHITE }),
+  iconColor: updateOption(defaults.iconColor, { value: ThemeColor.WHITE }),
+  collapsable: updateOption(defaults.collapsable, { value: true }),
+  visible: updateOption(defaults.visible, { value: false }),
 };
 
 export const FormSuccessAlert = (config: Configuration): PrefabReference => {
   const successAlertOptions = {
-    visible: toggle('Toggle visibility', {
-      value: false,
-      configuration: { as: 'VISIBILITY' },
-    }),
+    ...baseFormAlertStyle,
     icon: updateOption(defaults.icon, {
       value: 'CheckCircle',
     }),
@@ -48,10 +51,7 @@ export const FormSuccessAlert = (config: Configuration): PrefabReference => {
 
 export const FormErrorAlert = (config: Configuration): PrefabReference => {
   const errorAlertOptions = {
-    visible: toggle('Toggle visibility', {
-      value: false,
-      configuration: { as: 'VISIBILITY' },
-    }),
+    ...baseFormAlertStyle,
     allowTextServerResponse: toggle(
       'Allow to overwrite by the server response',
       { value: true },
