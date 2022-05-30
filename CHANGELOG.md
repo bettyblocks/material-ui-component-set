@@ -1,3 +1,24 @@
+# [1.229.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.228.2...v1.229.0) (2022-05-30)
+
+
+### Features
+
+* added refetch interaction ([14259cc](https://github.com/bettyblocks/material-ui-component-set/commit/14259cc75bf84dfdd7ad9a51d8224dfa17225d01))
+
+## [1.228.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.228.1...v1.228.2) (2022-05-27)
+
+
+### Bug Fixes
+
+* undo unintended changes on the basic alert component ([5707815](https://github.com/bettyblocks/material-ui-component-set/commit/5707815e0bf1a9002f4989d4cf03b0ab38b493ec))
+
+## [1.228.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.228.0...v1.228.1) (2022-05-27)
+
+
+### Bug Fixes
+
+* adjust form alert text for update form ([f140bd7](https://github.com/bettyblocks/material-ui-component-set/commit/f140bd7a8d0183f0e32fec0680dad4a2c9c83fcb))
+
 # [1.228.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.227.0...v1.228.0) (2022-05-24)
 
 
