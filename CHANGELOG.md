@@ -1,3 +1,16 @@
+# [1.230.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.229.0...v1.230.0) (2022-05-30)
+
+
+### Bug Fixes
+
+* add search value to _and filter ([622a53f](https://github.com/bettyblocks/material-ui-component-set/commit/622a53fef0013c4df5414df95ab41082ce328da7))
+* initial values taken into account in filter ([b1c9867](https://github.com/bettyblocks/material-ui-component-set/commit/b1c98674e08ca583f01b19ae91c30ad86ef6cb99))
+
+
+### Features
+
+* give priority to the filter ([10810ee](https://github.com/bettyblocks/material-ui-component-set/commit/10810ee955d44383639c91df39c8aa1855d60add))
+
 # [1.229.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.228.2...v1.229.0) (2022-05-30)
 
 
