@@ -618,6 +618,27 @@
 
     const currentValue = getValue();
 
+    useEffect(() => {
+      let triggerEventValue;
+
+      if (optionType === 'model') {
+        setDebouncedInputValue('');
+
+        if (freeSolo) {
+          triggerEventValue = currentValue || [];
+        } else {
+          triggerEventValue =
+            currentValue.length === 0
+              ? []
+              : currentValue.map((x) => x[suggestionsProp.name]);
+        }
+      } else if (optionType === 'property') {
+        triggerEventValue = currentValue || '';
+      }
+
+      B.triggerEvent('onChange', triggerEventValue, changeContext.current);
+    }, [currentValue]);
+
     // In the first render we want to make sure to convert the default value
     if (!multiple && !inputValue && currentValue) {
       setValue(currentValue);
@@ -650,29 +671,6 @@
           multiple={multiple}
           onChange={(_, newValue) => {
             setValue(newValue || (multiple ? [] : ''));
-
-            let triggerEventValue;
-
-            if (optionType === 'model') {
-              setDebouncedInputValue('');
-
-              if (freeSolo) {
-                triggerEventValue = newValue || [];
-              } else {
-                triggerEventValue =
-                  newValue.length === 0
-                    ? []
-                    : newValue.map((x) => x[suggestionsProp.name]);
-              }
-            } else if (optionType === 'property') {
-              triggerEventValue = newValue || '';
-            }
-
-            B.triggerEvent(
-              'onChange',
-              triggerEventValue,
-              changeContext.current,
-            );
           }}
           onBlur={(event) => {
             let validation = event.target.validity;
