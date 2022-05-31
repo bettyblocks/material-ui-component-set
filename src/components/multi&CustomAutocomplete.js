@@ -323,11 +323,11 @@
     /* eslint-disable no-underscore-dangle */
     if (multiple) {
       if (debouncedInputValue) {
-        if (!filter._and) {
-          filter._and = [];
+        if (!filter._or) {
+          filter._or = [];
         }
 
-        filter._and.push({
+        filter._or.push({
           [suggestionsProp.name]: {
             [searchPropIsNumber ? 'eq' : 'regex']: searchPropIsNumber
               ? parseInt(debouncedInputValue, 10)
