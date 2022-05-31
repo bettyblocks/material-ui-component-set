@@ -1,3 +1,10 @@
+# [1.231.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.230.0...v1.231.0) (2022-05-31)
+
+
+### Features
+
+* make queries outside of initial items work again ([fafd02b](https://github.com/bettyblocks/material-ui-component-set/commit/fafd02b3821c4cb6568ed8956b8fc9fea1193a9d))
+
 # [1.230.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.229.0...v1.230.0) (2022-05-30)
 
 
