@@ -322,16 +322,8 @@
 
     const optionFilter = useFilter(filterRaw || {});
 
-    // Adds the default values to the filter
-    const defaultValuesFilterArray = initalValue.reduce((acc, next) => {
-      return [...acc, { [valueProp.name]: { eq: next } }];
-    }, []);
-
     // We need to do this, because options.filter is not immutable
-    const filter = {
-      ...(initalValue.length > 0 && { _or: defaultValuesFilterArray }),
-      ...optionFilter,
-    };
+    const filter = { ...optionFilter };
 
     const searchPropIsNumber = numberPropTypes.includes(searchProp.kind);
     const valuePropIsNumber = numberPropTypes.includes(valueProp.kind);
