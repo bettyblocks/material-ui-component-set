@@ -1,3 +1,10 @@
+## [1.231.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.231.0...v1.231.1) (2022-05-31)
+
+
+### Bug Fixes
+
+* set filters back to or ([3e46dd2](https://github.com/bettyblocks/material-ui-component-set/commit/3e46dd2cb6aa2f18760b6e9fceabcaae0963f6fe))
+
 # [1.231.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.230.0...v1.231.0) (2022-05-31)
 
 
