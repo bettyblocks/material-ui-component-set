@@ -322,8 +322,16 @@
 
     const optionFilter = useFilter(filterRaw || {});
 
+    // Adds the default values to the filter
+    const defaultValuesFilterArray = initalValue.reduce((acc, next) => {
+      return [...acc, { [valueProp.name]: { eq: next } }];
+    }, []);
+
     // We need to do this, because options.filter is not immutable
-    const filter = { ...optionFilter };
+    const filter = {
+      ...(initalValue.length > 0 && { _or: defaultValuesFilterArray }),
+      ...optionFilter,
+    };
 
     const searchPropIsNumber = numberPropTypes.includes(searchProp.kind);
     const valuePropIsNumber = numberPropTypes.includes(valueProp.kind);
@@ -336,10 +344,10 @@
     /* eslint-disable no-underscore-dangle */
     if (multiple) {
       if (debouncedInputValue) {
-        if (!filter._or) {
-          filter._or = [];
+        if (!filter._and) {
+          filter._and = [];
         }
-        filter._or.push({
+        filter._and.push({
           [searchProp.name]: {
             [searchPropIsNumber ? 'eq' : 'regex']: searchPropIsNumber
               ? parseInt(debouncedInputValue, 10)
