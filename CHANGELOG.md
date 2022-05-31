@@ -1,3 +1,37 @@
+# [1.231.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.230.0...v1.231.0) (2022-05-31)
+
+
+### Features
+
+* make queries outside of initial items work again ([fafd02b](https://github.com/bettyblocks/material-ui-component-set/commit/fafd02b3821c4cb6568ed8956b8fc9fea1193a9d))
+
+# [1.230.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.229.0...v1.230.0) (2022-05-30)
+
+
+### Bug Fixes
+
+* add search value to _and filter ([622a53f](https://github.com/bettyblocks/material-ui-component-set/commit/622a53fef0013c4df5414df95ab41082ce328da7))
+* initial values taken into account in filter ([b1c9867](https://github.com/bettyblocks/material-ui-component-set/commit/b1c98674e08ca583f01b19ae91c30ad86ef6cb99))
+
+
+### Features
+
+* give priority to the filter ([10810ee](https://github.com/bettyblocks/material-ui-component-set/commit/10810ee955d44383639c91df39c8aa1855d60add))
+
+# [1.229.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.228.2...v1.229.0) (2022-05-30)
+
+
+### Features
+
+* added refetch interaction ([14259cc](https://github.com/bettyblocks/material-ui-component-set/commit/14259cc75bf84dfdd7ad9a51d8224dfa17225d01))
+
+## [1.228.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.228.1...v1.228.2) (2022-05-27)
+
+
+### Bug Fixes
+
+* undo unintended changes on the basic alert component ([5707815](https://github.com/bettyblocks/material-ui-component-set/commit/5707815e0bf1a9002f4989d4cf03b0ab38b493ec))
+
 ## [1.228.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.228.0...v1.228.1) (2022-05-27)
 
 
