@@ -46,7 +46,7 @@
     const mounted = useRef(false);
     const blancoText = useText(blanco);
 
-    const { kind, values = [] } = getProperty(property) || {};
+    const { kind } = getProperty(property) || {};
 
     const {
       id: customModelAttributeId,
@@ -268,6 +268,7 @@
     }, [isDev, defaultValueText]);
 
     const renderOptions = () => {
+      const values = null;
       if (kind === 'list' || kind === 'LIST') {
         return values.map(({ value: v }) => (
           <MenuItem key={v} value={v}>
