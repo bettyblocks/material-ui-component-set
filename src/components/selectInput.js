@@ -14,6 +14,7 @@
       margin,
       helperText = [''],
       label,
+      labelProperty,
       required,
       hideLabel,
       validationValueMissing = [''],
@@ -21,7 +22,7 @@
       blanco,
       dataComponentAttribute = ['Select'],
     } = options;
-    const { env, getProperty, useText } = B;
+    const { env, getProperty, useText, useAllQuery } = B;
     const { TextField, MenuItem } = window.MaterialUI.Core;
     const isDev = env === 'dev';
     const [errorState, setErrorState] = useState(false);
@@ -29,13 +30,23 @@
     const [helper, setHelper] = useState(useText(helperText));
     const mounted = useRef(false);
     const blancoText = useText(blanco);
-    const { values = [] } = getProperty(actionProperty.modelProperty) || {};
+    const modelProperty = getProperty(actionProperty.modelProperty) || {};
     const [currentValue, setCurrentValue] = useState(useText(prefabValue));
     const labelText = useText(label);
     const defaultValueText = useText(prefabValue);
     const helperTextResolved = useText(helperText);
     const validationMessageText = useText(validationValueMissing);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
+
+    const {
+      referenceModelId,
+      name,
+      modelId,
+      kind,
+      values = [],
+    } = modelProperty;
+
+    const { data, loading } = useAllQuery(referenceModelId || modelId);
 
     useEffect(() => {
       B.defineFunction('Reset', () => setCurrentValue(defaultValueText));
@@ -86,11 +97,38 @@
     }, [isDev, defaultValueText]);
 
     const renderOptions = () => {
-      return values.map(({ value: v }) => (
-        <MenuItem key={v} value={v}>
-          {v}
-        </MenuItem>
-      ));
+      if (kind === 'list' || kind === 'LIST') {
+        return values.map(({ value: v }) => (
+          <MenuItem key={v} value={v}>
+            {v}
+          </MenuItem>
+        ));
+      }
+
+      if (!loading && !isDev) {
+        let finalLabelProperty;
+        if (labelProperty) {
+          finalLabelProperty = B.getProperty(labelProperty);
+        } else {
+          const model = B.getModel(referenceModelId);
+          finalLabelProperty = B.getProperty(model.labelPropertyId);
+        }
+
+        const labelKey = finalLabelProperty.name;
+
+        const rows = data.results;
+        return rows.map((row) => {
+          const value = row[kind === 'belongs_to' ? 'id' : name];
+          const itemLabel = row[labelKey];
+          return (
+            <MenuItem key={row.id} value={value}>
+              {itemLabel}
+            </MenuItem>
+          );
+        });
+      }
+
+      return <span>loading...</span>;
     };
 
     const SelectCmp = (
