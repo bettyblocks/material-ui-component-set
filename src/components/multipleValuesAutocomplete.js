@@ -322,8 +322,16 @@
 
     const optionFilter = useFilter(filterRaw || {});
 
+    // Adds the default values to the filter
+    const defaultValuesFilterArray = initalValue.reduce((acc, next) => {
+      return [...acc, { [valueProp.name]: { eq: next } }];
+    }, []);
+
     // We need to do this, because options.filter is not immutable
-    const filter = { ...optionFilter };
+    const filter = {
+      ...(initalValue.length > 0 && { _or: defaultValuesFilterArray }),
+      ...optionFilter,
+    };
 
     const searchPropIsNumber = numberPropTypes.includes(searchProp.kind);
     const valuePropIsNumber = numberPropTypes.includes(valueProp.kind);
@@ -637,21 +645,6 @@
 
     const currentValue = getValue();
 
-    useEffect(() => {
-      let triggerEventValue;
-
-      if (optionType === 'model') {
-        triggerEventValue =
-          currentValue.length === 0
-            ? []
-            : currentValue.map((x) => x[valueProp.name]);
-      } else if (optionType === 'property') {
-        triggerEventValue = currentValue || '';
-      }
-
-      B.triggerEvent('onChange', triggerEventValue, changeContext.current);
-    }, [currentValue]);
-
     const renderLabel = (option) => {
       let optionLabel = '';
 
@@ -685,6 +678,24 @@
           multiple={multiple}
           onChange={(_, newValue) => {
             setValue(newValue || (multiple ? [] : ''));
+
+            let triggerEventValue;
+
+            if (optionType === 'model') {
+              setDebouncedInputValue('');
+              triggerEventValue =
+                newValue.length === 0
+                  ? []
+                  : newValue.map((x) => x[valueProp.name]);
+            } else if (optionType === 'property') {
+              triggerEventValue = newValue || '';
+            }
+
+            B.triggerEvent(
+              'onChange',
+              triggerEventValue,
+              changeContext.current,
+            );
           }}
           onInputChange={(event, newValue) => {
             let validation = event ? event.target.validity : null;
@@ -697,8 +708,10 @@
               (event.type === 'change' || event.type === 'keydown')
             ) {
               setInputValue(newValue);
+              setDebouncedInputValue(newValue);
             } else if (event && event.type === 'click') {
               setInputValue(newValue);
+              setDebouncedInputValue(newValue);
             }
           }}
           onBlur={(event) => {
