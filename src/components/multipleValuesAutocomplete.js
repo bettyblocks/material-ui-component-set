@@ -322,8 +322,16 @@
 
     const optionFilter = useFilter(filterRaw || {});
 
+    // Adds the default values to the filter
+    const defaultValuesFilterArray = initalValue.reduce((acc, next) => {
+      return [...acc, { [valueProp.name]: { eq: next } }];
+    }, []);
+
     // We need to do this, because options.filter is not immutable
-    const filter = { ...optionFilter };
+    const filter = {
+      ...(initalValue.length > 0 && { _or: defaultValuesFilterArray }),
+      ...optionFilter,
+    };
 
     const searchPropIsNumber = numberPropTypes.includes(searchProp.kind);
     const valuePropIsNumber = numberPropTypes.includes(valueProp.kind);
@@ -334,39 +342,11 @@
      * Those values always need to be returned in the results of the request
      */
     /* eslint-disable no-underscore-dangle */
-    if (value.length > 0) {
-      if (!filter._or) {
-        filter._or = [];
-      }
-
-      value.forEach((x) => {
-        filter._or.push({
-          [valueProp.name]: {
-            [valuePropIsNumber ? 'eq' : 'regex']:
-              typeof x === 'string' ? x : x[valueProp.name],
-          },
-        });
-      });
-      if (defaultValueEvaluatedRef.current) {
-        if (!filter._or) {
-          filter._or = [];
-        }
-
-        filter._or.push({
-          [valueProp.name]: {
-            neq:
-              typeof value[0] === 'string'
-                ? value[0]
-                : value[0][valueProp.name],
-          },
-        });
-      }
-    } else if (multiple) {
+    if (multiple) {
       if (debouncedInputValue) {
         if (!filter._or) {
           filter._or = [];
         }
-
         filter._or.push({
           [searchProp.name]: {
             [searchPropIsNumber ? 'eq' : 'regex']: searchPropIsNumber
@@ -728,6 +708,7 @@
               (event.type === 'change' || event.type === 'keydown')
             ) {
               setInputValue(newValue);
+              setDebouncedInputValue(newValue);
             } else if (event && event.type === 'click') {
               setInputValue(newValue);
               setDebouncedInputValue(newValue);

@@ -41,6 +41,7 @@
       FormControlLabel,
       FormControl,
       FormHelperText,
+      FormGroup,
     } = window.MaterialUI.Core;
 
     B.defineFunction('Uncheck', () => setChecked(false));
@@ -130,18 +131,20 @@
     );
 
     const Control = (
-      <FormControl
-        required={required}
-        error={errorState}
-        classes={{ root: classes.formControl }}
-      >
-        <FormControlLabel
-          control={isSwitch ? SwitchComponent : Checkbox}
-          label={ControlLabel}
-          labelPlacement={position}
-        />
-        {!!helper && <FormHelperText>{helper}</FormHelperText>}
-      </FormControl>
+      <FormGroup>
+        <FormControl
+          required={required}
+          error={errorState}
+          classes={{ root: classes.formControl }}
+        >
+          <FormControlLabel
+            control={isSwitch ? SwitchComponent : Checkbox}
+            label={ControlLabel}
+            labelPlacement={position}
+          />
+          {!!helper && <FormHelperText>{helper}</FormHelperText>}
+        </FormControl>
+      </FormGroup>
     );
     return isDev ? <div className={classes.root}>{Control}</div> : Control;
   })(),

@@ -30,7 +30,7 @@
     }, []);
     const isEmpty = !children.length;
 
-    const EmptyCmp = function () {
+    function EmptyCmp() {
       return (
         <div
           className={[
@@ -42,7 +42,7 @@
           {!isEmpty ? children : 'Dialog Content'}
         </div>
       );
-    };
+    }
 
     const DialogCmp = (
       <Dialog

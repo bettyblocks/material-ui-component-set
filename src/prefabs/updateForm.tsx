@@ -6,29 +6,74 @@ import {
   model,
   filter,
   BeforeCreateArgs,
+  Icon,
+  InteractionType,
+  PrefabInteraction,
 } from '@betty-blocks/component-sdk';
-import { Icon } from '@betty-blocks/component-sdk';
+import { FormErrorAlert, FormSuccessAlert } from './structures/Alert';
+import { updateOption } from '../utils';
+import { options as defaults } from './structures/Alert/options';
 
 const beforeCreate = ({
   close,
   components: { CreateFormUpdateWizard },
-  prefab,
+  prefab: originalPrefab,
   prefabs,
   save,
 }: BeforeCreateArgs) => {
   return (
     <CreateFormUpdateWizard
       close={close}
-      prefab={prefab}
+      prefab={originalPrefab}
       prefabs={prefabs}
       save={save}
     />
   );
 };
 
+const interactions: PrefabInteraction[] = [
+  {
+    type: InteractionType.Custom,
+    name: 'Show',
+    sourceEvent: 'onActionError',
+    ref: {
+      targetComponentId: '#alertErrorId',
+      sourceComponentId: '#formId',
+    },
+  },
+  {
+    type: InteractionType.Custom,
+    name: 'Show',
+    sourceEvent: 'onActionSuccess',
+    ref: {
+      targetComponentId: '#alertSuccessId',
+      sourceComponentId: '#formId',
+    },
+  },
+  {
+    type: InteractionType.Custom,
+    name: 'Hide',
+    sourceEvent: 'onActionLoad',
+    ref: {
+      targetComponentId: '#alertSuccessId',
+      sourceComponentId: '#formId',
+    },
+  },
+  {
+    type: InteractionType.Custom,
+    name: 'Hide',
+    sourceEvent: 'onActionLoad',
+    ref: {
+      targetComponentId: '#alertErrorId',
+      sourceComponentId: '#formId',
+    },
+  },
+];
+
 const attributes = {
   category: 'FORMV2',
   icon: Icon.UpdateFormIcon,
+  interactions,
 };
 
 const options = {
@@ -37,6 +82,18 @@ const options = {
   filter: filter('Filter', { configuration: { dependsOn: 'modelId' } }),
 };
 
+const updateFormAlertOptions = {
+  bodyText: updateOption(defaults.bodyText, {
+    value: ['Record successfully updated'],
+  }),
+};
+
 export default prefab('Update Form Beta', attributes, beforeCreate, [
-  component('Action Form Beta', { options }, []),
+  component('Form Beta', { options, ref: { id: '#formId' } }, [
+    FormSuccessAlert({
+      options: updateFormAlertOptions,
+      ref: { id: '#alertSuccessId' },
+    }),
+    FormErrorAlert({ ref: { id: '#alertErrorId' } }),
+  ]),
 ]);
