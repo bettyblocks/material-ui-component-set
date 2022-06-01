@@ -1,8 +1,8 @@
 /**
  * A Row prefab, but with three Rows, two of them are descendants
-*/
+ */
 
-import { Icon, option, prefab, variable } from '@betty-blocks/component-sdk';
+import { Icon, prefab } from '@betty-blocks/component-sdk';
 import { Row } from './structures/Row';
 
 const attrs = {
@@ -10,5 +10,4 @@ const attrs = {
   category: 'LAYOUT',
   keywords: ['Layout', 'column', 'columns', '1'],
 };
-export default prefab('TypeScript Row', attrs, undefined, [Row({}, [Row({})])]);
-
+export default prefab('TypeScript Row', attrs, undefined, [Row({}, [])]);
