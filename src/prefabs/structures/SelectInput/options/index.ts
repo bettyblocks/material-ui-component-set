@@ -9,7 +9,7 @@ export const options = {
     value: '',
   }),
 
-  labelProperty: property('Label Property', { value: '' }),
+  labelProperty: property('Label for options', { value: '' }),
 
   label: variable('Label', { value: [''] }),
   value: variable('Value', { value: [''] }),

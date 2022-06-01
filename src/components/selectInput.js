@@ -30,7 +30,7 @@
     const [helper, setHelper] = useState(useText(helperText));
     const mounted = useRef(false);
     const blancoText = useText(blanco);
-    const getPropertyObj = getProperty(actionProperty.modelProperty) || {};
+    const modelProperty = getProperty(actionProperty.modelProperty) || {};
     const [currentValue, setCurrentValue] = useState(useText(prefabValue));
     const labelText = useText(label);
     const defaultValueText = useText(prefabValue);
@@ -44,7 +44,7 @@
       modelId,
       kind,
       values = [],
-    } = getPropertyObj;
+    } = modelProperty;
 
     const { data, loading } = useAllQuery(referenceModelId || modelId);
 
@@ -106,13 +106,18 @@
       }
 
       if (!loading && !isDev) {
-        let labelKey = 'id'; // TODO: get the models label property name
+        let finalLabelProperty;
         if (labelProperty) {
-          labelKey = getProperty(labelProperty).name;
+          finalLabelProperty = B.getProperty(labelProperty);
+        } else {
+          const model = B.getModel(referenceModelId);
+          finalLabelProperty = B.getProperty(model.labelPropertyId);
         }
 
+        const labelKey = finalLabelProperty.name;
+
         const rows = data.results;
-        return rows.map((row, i) => {
+        return rows.map((row) => {
           const value = row[kind === 'belongs_to' ? 'id' : name];
           const itemLabel = row[labelKey];
           return (
