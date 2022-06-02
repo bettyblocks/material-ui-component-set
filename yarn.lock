@@ -174,10 +174,10 @@
     "@babel/helper-validator-identifier" "^7.16.7"
     to-fast-properties "^2.0.0"
 
-"@betty-blocks/cli@^25.27.1":
-  version "25.27.1"
-  resolved "https://registry.yarnpkg.com/@betty-blocks/cli/-/cli-25.27.1.tgz#c02393f0a09b7119f5a50d41dc5468cdfd0738cc"
-  integrity sha512-HKgZodZjIVmdFqgKSFePZv9Ua+XCo0tYC7wrBNRbHCTuQ03yJkXj1pUaX4TE3zvB5k6Rw1fVIoWeHVDPM6p1wg==
+"@betty-blocks/cli@^25.30.0":
+  version "25.31.0"
+  resolved "https://registry.yarnpkg.com/@betty-blocks/cli/-/cli-25.31.0.tgz#981c49674a8800276461a329a6ab0c35711b6708"
+  integrity sha512-PCXyuRdrjOybgVKEF8TXfqFGL8uoQCAuqh7q9Su918M80ifSaggAKnQ1jPMCRwcwDINCrpXRvJNNY3Zn0ElIYg==
   dependencies:
     "@azure/ms-rest-js" "^2.0.4"
     "@azure/storage-blob" "^10.3.0"
@@ -197,6 +197,7 @@
     form-data "^4.0.0"
     fs-extra "^8.1.0"
     glob "^7.2.0"
+    isolated-vm "^4.0.0"
     joi "^17.2.1"
     jsdoc-api "^7.1.0"
     jsonschema "^1.4.0"
@@ -4116,6 +4117,11 @@ isobject@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/isobject/-/isobject-3.0.1.tgz#4e431e92b11a9731636aa1f9c8d1ccbcfdab78df"
   integrity sha1-TkMekrEalzFjaqH5yNHMvP2reN8=
+
+isolated-vm@^4.0.0:
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/isolated-vm/-/isolated-vm-4.4.1.tgz#651ce31e435e769b2a356bb03db2553a478acebe"
+  integrity sha512-5aDwxQGm78vHS+qJeUli2ILroG7OS/k3D/Mc0kcT9vyujiL4bV7PYYix1mAvuBm3v44nz2qcfAOqgAbhuACc/w==
 
 issue-parser@^6.0.0:
   version "6.0.0"
