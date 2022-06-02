@@ -11,6 +11,8 @@ import {
   PrefabInteraction,
 } from '@betty-blocks/component-sdk';
 import { FormErrorAlert, FormSuccessAlert } from './structures/Alert';
+import { updateOption } from '../utils';
+import { options as defaults } from './structures/Alert/options';
 
 const beforeCreate = ({
   close,
@@ -80,9 +82,18 @@ const options = {
   filter: filter('Filter', { configuration: { dependsOn: 'modelId' } }),
 };
 
+const updateFormAlertOptions = {
+  bodyText: updateOption(defaults.bodyText, {
+    value: ['Record successfully updated'],
+  }),
+};
+
 export default prefab('Update Form Beta', attributes, beforeCreate, [
   component('Form Beta', { options, ref: { id: '#formId' } }, [
-    FormSuccessAlert({ ref: { id: '#alertSuccessId' } }),
+    FormSuccessAlert({
+      options: updateFormAlertOptions,
+      ref: { id: '#alertSuccessId' },
+    }),
     FormErrorAlert({ ref: { id: '#alertErrorId' } }),
   ]),
 ]);

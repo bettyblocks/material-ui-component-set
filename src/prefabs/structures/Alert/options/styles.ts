@@ -10,10 +10,10 @@ import {
 
 export const styles = {
   textColor: color('Text color', {
-    value: ThemeColor.WHITE,
+    value: ThemeColor.BLACK,
   }),
   iconColor: color('Icon color', {
-    value: ThemeColor.WHITE,
+    value: ThemeColor.BLACK,
   }),
   background: color('Background color', {
     value: ThemeColor.SUCCESS,
@@ -25,7 +25,7 @@ export const styles = {
     value: 'None',
   }),
   collapsable: toggle('Collapsable', {
-    value: true,
+    value: false,
   }),
   horizontalAlignment: buttongroup(
     'Horizontal Alignment',
