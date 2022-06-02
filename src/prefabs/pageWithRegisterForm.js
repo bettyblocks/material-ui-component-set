@@ -2,6 +2,7 @@
   name: 'Register form',
   icon: 'LoginFormIcon',
   type: 'page',
+  isPublicPage: true,
   description: 'Page with a ready to use register form and image.',
   detail:
     'It takes a few clicks to set up your register page. Connect your model to the form and feel free to customize your image to your liking.',
