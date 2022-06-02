@@ -106,17 +106,16 @@
       }
 
       if (!loading && !isDev) {
-        let finalLabelProperty;
+        let labelKey = 'id';
         if (labelProperty) {
-          finalLabelProperty = B.getProperty(labelProperty);
+          labelKey = B.getProperty(labelProperty).name;
         } else {
           const model = B.getModel(referenceModelId);
-          finalLabelProperty = B.getProperty(model.labelPropertyId);
+          if (model.labelPropertyId)
+            labelKey = B.getProperty(model.labelPropertyId).name;
         }
 
-        const labelKey = finalLabelProperty.name;
-
-        const rows = data.results;
+        const rows = data ? data.results : [];
         return rows.map((row) => {
           const value = row[kind === 'belongs_to' ? 'id' : name];
           const itemLabel = row[labelKey];
@@ -126,6 +125,10 @@
             </MenuItem>
           );
         });
+      }
+
+      if (!loading && !data) {
+        return <span>unable to fetch data</span>;
       }
 
       return <span>loading...</span>;
