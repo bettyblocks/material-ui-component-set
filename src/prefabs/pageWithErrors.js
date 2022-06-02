@@ -2,7 +2,7 @@
   name: 'Error pages',
   icon: 'NavbarIcon',
   type: 'page',
-  hidePageType: true,
+  isPublicPage: true,
   description: 'Configure a 403, 404 or 500 error page for your application.',
   detail:
     'You can choose between a 403 page for unauthorized access, a 404 page for when a page could not be found or a 500 for an internal server error.',

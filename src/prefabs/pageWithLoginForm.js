@@ -2,7 +2,7 @@
   name: 'Login form with image',
   icon: 'LoginFormIcon',
   type: 'page',
-  hidePageType: true,
+  isPublicPage: true,
   description: 'Page with login form and side image',
   detail:
     'It takes a few clicks to set up your login page. Connect your model to the form and feel free to customize your image to your liking.',
