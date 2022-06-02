@@ -1,12 +1,11 @@
 import {
-  variable,
-  toggle,
   option,
   text,
   sizes,
   color,
   ThemeColor,
 } from '@betty-blocks/component-sdk';
+import { advanced } from './advanced';
 
 export const options = {
   maxRowWidth: option('CUSTOM', {
@@ -36,17 +35,5 @@ export const options = {
     value: ['0rem', '0rem', '0rem', '0rem'],
   }),
 
-  advancedSettings: toggle('Advanced settings', { value: false }),
-
-  dataComponentAttribute: variable('Test Attribute', {
-    value: ['Row'],
-    configuration: {
-      condition: {
-        type: 'SHOW',
-        option: 'advancedSettings',
-        comparator: 'EQ',
-        value: true,
-      },
-    },
-  }),
+  ...advanced,
 };
