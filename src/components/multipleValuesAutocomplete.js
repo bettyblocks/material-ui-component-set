@@ -645,21 +645,6 @@
 
     const currentValue = getValue();
 
-    useEffect(() => {
-      let triggerEventValue;
-
-      if (optionType === 'model') {
-        triggerEventValue =
-          currentValue.length === 0
-            ? []
-            : currentValue.map((x) => x[valueProp.name]);
-      } else if (optionType === 'property') {
-        triggerEventValue = currentValue || '';
-      }
-
-      B.triggerEvent('onChange', triggerEventValue, changeContext.current);
-    }, [currentValue]);
-
     const renderLabel = (option) => {
       let optionLabel = '';
 
@@ -693,6 +678,24 @@
           multiple={multiple}
           onChange={(_, newValue) => {
             setValue(newValue || (multiple ? [] : ''));
+
+            let triggerEventValue;
+
+            if (optionType === 'model') {
+              setDebouncedInputValue('');
+              triggerEventValue =
+                newValue.length === 0
+                  ? []
+                  : newValue.map((x) => x[valueProp.name]);
+            } else if (optionType === 'property') {
+              triggerEventValue = newValue || '';
+            }
+
+            B.triggerEvent(
+              'onChange',
+              triggerEventValue,
+              changeContext.current,
+            );
           }}
           onInputChange={(event, newValue) => {
             let validation = event ? event.target.validity : null;
@@ -705,8 +708,10 @@
               (event.type === 'change' || event.type === 'keydown')
             ) {
               setInputValue(newValue);
+              setDebouncedInputValue(newValue);
             } else if (event && event.type === 'click') {
               setInputValue(newValue);
+              setDebouncedInputValue(newValue);
             }
           }}
           onBlur={(event) => {
