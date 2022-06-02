@@ -35717,7 +35717,7 @@
                 kind: 'create',
                 options: {
                   modelId: `${modelId}`,
-                  assign: properties.map((property) => ({
+                  assign: formProperties.map((property) => ({
                     leftHandSide: property.id[0],
                     ref: {
                       path: [
@@ -35744,7 +35744,7 @@
                   ref: {
                     object: '#editObjectVariableId',
                   },
-                  assign: properties.map((property) => ({
+                  assign: formProperties.map((property) => ({
                     leftHandSide: property.id[0],
                     ref: {
                       path: [
