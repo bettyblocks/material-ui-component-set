@@ -2,6 +2,7 @@
   name: 'Login and register form',
   icon: 'LoginFormIcon',
   type: 'page',
+  hidePageType: true,
   description: 'Page with a ready to use login form, register form and image.',
   detail:
     'It takes a few clicks to set up your login and register page. Connect your model to the forms and feel free to customize your image to your liking.',
