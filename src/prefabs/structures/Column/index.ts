@@ -1,6 +1,9 @@
-import { component, PrefabComponentOption } from '@betty-blocks/component-sdk';
-import { PrefabComponent } from '@betty-blocks/component-sdk/build/prefabs/types/component';
-import { options as Headers } from './options';
+import {
+  component,
+  PrefabComponentOption,
+  PrefabComponent,
+} from '@betty-blocks/component-sdk';
+import { options as defaults } from './options';
 
 type OptionProducer = (key: string) => PrefabComponentOption;
 
@@ -13,6 +16,6 @@ export const Column = (
   config: Configuration,
   descendants: PrefabComponent[] = [],
 ): PrefabComponent => {
-  const options = { ...(config.options || Headers) };
+  const options = { ...(config.options || defaults) };
   return component('Column', { options }, descendants);
 };

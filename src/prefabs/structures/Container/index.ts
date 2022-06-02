@@ -8,13 +8,13 @@ import { options as defaults } from './options';
 type OptionProducer = (key: string) => PrefabComponentOption;
 
 export interface Configuration {
-  label?: string;
   options?: Record<string, OptionProducer>;
 }
-export const Row = (
+
+export const Container = (
   config: Configuration,
   descendants: PrefabComponent[] = [],
-) => {
+): PrefabComponent => {
   const options = { ...(config.options || defaults) };
-  return component('Row', { options }, descendants);
+  return component('Container', { options }, descendants);
 };
