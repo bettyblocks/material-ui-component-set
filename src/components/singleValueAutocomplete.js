@@ -606,6 +606,17 @@
 
     const currentValue = getValue();
 
+    useEffect(() => {
+      let triggerEventValue;
+
+      if (optionType === 'model') {
+        triggerEventValue = currentValue ? currentValue[valueProp.name] : '';
+      } else if (optionType === 'property') {
+        triggerEventValue = currentValue || '';
+      }
+      B.triggerEvent('onChange', triggerEventValue, changeContext.current);
+    }, [currentValue]);
+
     // In the first render we want to make sure to convert the default value
     if (!inputValue && currentValue) {
       setValue(currentValue);
@@ -644,20 +655,6 @@
           loading={loading}
           onChange={(_, newValue) => {
             setValue(newValue || '');
-
-            let triggerEventValue;
-
-            if (optionType === 'model') {
-              triggerEventValue = newValue ? newValue[valueProp.name] : '';
-            } else if (optionType === 'property') {
-              triggerEventValue = newValue || '';
-            }
-
-            B.triggerEvent(
-              'onChange',
-              triggerEventValue,
-              changeContext.current,
-            );
           }}
           onInputChange={(event, newValue) => {
             let validation = event ? event.target.validity : null;
