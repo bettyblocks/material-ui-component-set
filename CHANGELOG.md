@@ -1,3 +1,10 @@
+# [1.233.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.232.0...v1.233.0) (2022-06-03)
+
+
+### Features
+
+* updated homepage template to new design TMPLT 1412 ([a3e279f](https://github.com/bettyblocks/material-ui-component-set/commit/a3e279f83191d97653fa5d9a7b79b33a2dfecd9d))
+
 # [1.232.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.231.1...v1.232.0) (2022-06-03)
 
 
