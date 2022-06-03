@@ -1,3 +1,19 @@
+# [1.232.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.231.1...v1.232.0) (2022-06-03)
+
+
+### Bug Fixes
+
+* bump ([8346c60](https://github.com/bettyblocks/material-ui-component-set/commit/8346c600f259f442ba68323623da5f48fafa4c28))
+* react to all value changes ([48b1603](https://github.com/bettyblocks/material-ui-component-set/commit/48b1603853dfc634acd16d3572ec053e0178aa86))
+* set debouncedInputValue from useEffect ([cf63ecb](https://github.com/bettyblocks/material-ui-component-set/commit/cf63ecb4cec71265bcaaa3dc14d2791cc8d1fb4c))
+* undo changes in other autocompletes ([ecd3633](https://github.com/bettyblocks/material-ui-component-set/commit/ecd363326631f9641f2453e80dec960474ed188f))
+
+
+### Features
+
+* add CRUDWithDialogs template ([9aeaa5e](https://github.com/bettyblocks/material-ui-component-set/commit/9aeaa5ef32e4de167555d17d5e50e6fca8115248))
+* add partialSelector to CRUDwithDialogs template ([f6e5bbd](https://github.com/bettyblocks/material-ui-component-set/commit/f6e5bbd8cb2216a0187782835acd77878d0051ae))
+
 ## [1.231.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.231.1...v1.231.2) (2022-06-03)
 
 
