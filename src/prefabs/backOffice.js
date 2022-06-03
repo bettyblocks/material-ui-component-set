@@ -31181,7 +31181,7 @@
                                                                           'Content',
                                                                         key: 'content',
                                                                         value: [
-                                                                          'To toggle the sidebar you have navigate to the second drawer component and click on Toggle visibility.  In this sidebar you find the "add record", "edit record" forms and details of the selected record.',
+                                                                          'To toggle the sidebar you have to navigate to the second drawer component and click on Toggle visibility.  In this sidebar you find the "add record", "edit record" forms and details of the selected record.',
                                                                         ],
                                                                         configuration:
                                                                           {
