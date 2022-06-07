@@ -99,10 +99,7 @@
             {useText(title)}
           </Typography>
         </ExpansionPanelSummary>
-        <ExpansionPanelDetails
-          className={classes.panelDetails}
-          onClick={() => B.triggerEvent('onClick')}
-        >
+        <ExpansionPanelDetails className={classes.panelDetails}>
           {isEmpty ? PlaceHolder : children}
         </ExpansionPanelDetails>
       </ExpansionPanel>
