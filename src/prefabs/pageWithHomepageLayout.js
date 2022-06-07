@@ -6073,7 +6073,7 @@
                                 label: 'Content',
                                 key: 'content',
                                 value: [
-                                  'We are a agancy based in Europe, When we team up, you get crafted solutions that are here to stay.',
+                                  'We are an agency based in Europe. When we team up, you get crafted solutions that are here to stay.',
                                 ],
                                 configuration: {
                                   as: 'MULTILINE',
