@@ -42,7 +42,8 @@ const attributes = {
 
 export default prefab('Number Beta', attributes, beforeCreate, [
   TextInput({
-    label: 'Number',
+    label: 'Number input Beta',
+    inputLabel: 'Number',
     type: 'number',
     pattern: '^[0-9]*$',
     dataComponentAttribute: 'NumberInput',

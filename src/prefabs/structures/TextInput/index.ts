@@ -13,6 +13,7 @@ export interface Configuration {
   validationPattern?: string;
   adornmentIcon?: string;
   label?: string;
+  inputLabel?: string;
   type?: HTMLInputElement['type'];
   pattern?: string;
 }
@@ -35,8 +36,8 @@ export const TextInput = (
     });
   }
 
-  if (config.label) {
-    options.label = updateOption(options.label, { value: [config.label] });
+  if (config.inputLabel) {
+    options.label = updateOption(options.label, { value: [config.inputLabel] });
   }
 
   if (config.pattern) {
@@ -64,5 +65,9 @@ export const TextInput = (
     );
   }
 
-  return component('TextInput', { options, $afterDelete }, children);
+  return component(
+    'TextInput',
+    { label: config.label, options, $afterDelete },
+    children,
+  );
 };

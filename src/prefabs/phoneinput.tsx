@@ -43,7 +43,8 @@ const attributes = {
 
 export default prefab('Phone Beta', attributes, beforeCreate, [
   TextInput({
-    label: 'Phone',
+    label: 'Phone input Beta',
+    inputLabel: 'Phone',
     type: 'tel',
     dataComponentAttribute: 'PhoneInput',
   }),

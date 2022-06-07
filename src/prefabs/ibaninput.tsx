@@ -45,7 +45,8 @@ const pattern =
 
 export default prefab('IBAN Beta', attributes, beforeCreate, [
   TextInput({
-    label: 'IBAN',
+    label: 'IBAN input Beta',
+    inputLabel: 'IBAN',
     type: 'text',
     pattern,
     dataComponentAttribute: 'IbanInput',

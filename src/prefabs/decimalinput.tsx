@@ -42,7 +42,8 @@ const attributes = {
 
 export default prefab('Decimal Beta', attributes, beforeCreate, [
   TextInput({
-    label: 'Decimal',
+    label: 'Decimal input Beta',
+    inputLabel: 'Decimal',
     type: 'decimal',
     pattern: '^\\d+(\\.\\d{1,2})?$',
     dataComponentAttribute: 'DecimalInput',
