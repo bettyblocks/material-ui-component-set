@@ -6,6 +6,7 @@
   structure: [
     {
       name: 'TextField',
+      label: 'Number input',
       options: [
         {
           value: { label: ['Number'], value: [] },
