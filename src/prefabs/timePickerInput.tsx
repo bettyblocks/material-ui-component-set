@@ -48,7 +48,7 @@ const attributes = {
 
 export default makePrefab('TimePicker Beta', attributes, beforeCreate, [
   DateTimePicker({
-    label: 'Time picker beta',
+    label: 'Time picker Beta',
     dataComponentAttribute: 'Time Input',
     inputType: 'time',
   }),
