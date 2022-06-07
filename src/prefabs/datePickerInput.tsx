@@ -48,5 +48,9 @@ const attributes = {
 };
 
 export default makePrefab('DatePicker Beta', attributes, beforeCreate, [
-  DateTimePicker({ dataComponentAttribute: 'Date Input', inputType: 'date' }),
+  DateTimePicker({
+    label: 'DatePicker Beta',
+    dataComponentAttribute: 'Date Input',
+    inputType: 'date',
+  }),
 ]);
