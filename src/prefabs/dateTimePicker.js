@@ -6,6 +6,7 @@
   structure: [
     {
       name: 'DateTimePicker',
+      label: 'DateTimePicker',
       options: [
         {
           value: { label: ['Date time'], value: [] },
