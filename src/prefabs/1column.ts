@@ -3,7 +3,7 @@ import { Row } from './structures/Row';
 import { Column } from './structures/Column';
 
 const attrs = {
-  icon: Icon.CardActionsIcon,
+  icon: Icon.RowColumnIcon,
   category: 'LAYOUT',
   keywords: ['Layout', 'column', 'columns', '1'],
 };
