@@ -81,8 +81,12 @@ const options = {
 };
 
 export default prefab('Create Form Beta', attributes, beforeCreate, [
-  component('Form Beta', { options, ref: { id: '#formId' } }, [
-    FormSuccessAlert({ ref: { id: '#alertSuccessId' } }),
-    FormErrorAlert({ ref: { id: '#alertErrorId' } }),
-  ]),
+  component(
+    'Form Beta',
+    { label: 'Create form Beta', options, ref: { id: '#formId' } },
+    [
+      FormSuccessAlert({ ref: { id: '#alertSuccessId' } }),
+      FormErrorAlert({ ref: { id: '#alertErrorId' } }),
+    ],
+  ),
 ]);

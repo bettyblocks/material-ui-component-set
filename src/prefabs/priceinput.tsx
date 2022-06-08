@@ -45,7 +45,7 @@ const pattern = '[0-9]+(\\.[0-9][0-9]?)?';
 
 export default prefab('Price Beta', attributes, beforeCreate, [
   PriceInput({
-    label: 'Price input Beta',
+    label: 'Price field Beta',
     inputLabel: 'Price',
     type: 'decimal',
     pattern,
