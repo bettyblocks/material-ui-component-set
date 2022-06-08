@@ -117,6 +117,10 @@
         const where = useFilter(completeFilter);
 
         useEffect(() => {
+          if (isDev) {
+            B.defineFunction('Refetch', () => {});
+          }
+
           B.defineFunction('setCurrentRecord', (value) => {
             const id = Number(value);
             if (typeof id === 'number') {
@@ -132,25 +136,21 @@
            * @returns {Void}
            */
           B.defineFunction('Filter', ({ event, property, interactionId }) => {
-            setInteractionFilter((s) => ({
-              ...s,
+            setInteractionFilter({
+              ...interactionFilter,
               [interactionId]: {
                 property,
                 value: event.target
                   ? event.target.value
                   : transformValue(event),
               },
-            }));
+            });
           });
 
           B.defineFunction('ResetFilter', () => {
             setInteractionFilter({});
           });
-
-          if (isDev) {
-            B.defineFunction('Refetch', () => {});
-          }
-        }, []);
+        });
 
         const DataContainer = (
           <div data-component={dataComponentAttributeText}>{children}</div>

@@ -152,5 +152,9 @@ const hooks = {
 };
 
 export default prefab('Checkbox Beta', attributes, beforeCreate, [
-  component('CheckboxInput', { options, ...hooks }, []),
+  component(
+    'CheckboxInput',
+    { label: 'Checkbox input Beta', options, ...hooks },
+    [],
+  ),
 ]);

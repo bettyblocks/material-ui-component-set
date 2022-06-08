@@ -6,6 +6,7 @@
   structure: [
     {
       name: 'HiddenInput',
+      label: 'Hidden input',
       options: [
         {
           value: { label: ['Hidden'], value: [] },
