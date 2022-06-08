@@ -349,10 +349,6 @@
       }
     });
 
-    B.defineFunction('SetSearchValue', (event) => {
-      setSearch(event.target.value);
-    });
-
     useEffect(() => {
       if (!isDev) return;
       const placeholders = placeholderTake || amountOfRows;
