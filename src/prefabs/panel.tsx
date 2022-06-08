@@ -1,5 +1,5 @@
 import { Icon, prefab } from '@betty-blocks/component-sdk';
-import { Column } from './structures/column';
+import { Column } from './structures/Column';
 import { Panel } from './structures/Panel';
 import { Row } from './structures/Row';
 
