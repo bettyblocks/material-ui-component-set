@@ -6,7 +6,7 @@
   structure: [
     {
       name: 'TextField',
-      label: 'Password input',
+      label: 'Password field',
       options: [
         {
           value: { label: ['Password'], value: [] },

@@ -42,7 +42,7 @@ const attributes = {
 
 export default prefab('Decimal Beta', attributes, beforeCreate, [
   TextInput({
-    label: 'Decimal input Beta',
+    label: 'Decimal field Beta',
     inputLabel: 'Decimal',
     type: 'decimal',
     pattern: '^\\d+(\\.\\d{1,2})?$',

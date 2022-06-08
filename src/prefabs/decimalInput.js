@@ -6,7 +6,7 @@
   structure: [
     {
       name: 'TextField',
-      label: 'Decimal input',
+      label: 'Decimal field',
       options: [
         {
           value: { label: ['Decimal'], value: [] },

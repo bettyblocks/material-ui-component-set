@@ -6,7 +6,7 @@
   structure: [
     {
       name: 'TextField',
-      label: 'Textarea',
+      label: 'Multiline text field',
       options: [
         {
           value: { label: ['Textarea'], value: [] },

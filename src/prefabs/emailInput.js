@@ -6,7 +6,7 @@
   structure: [
     {
       name: 'TextField',
-      label: 'Email input',
+      label: 'Email field',
       options: [
         {
           value: { label: ['Email'], value: [] },
