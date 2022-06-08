@@ -183,6 +183,7 @@
     };
 
     B.defineFunction('Clear', () => setCurrentValue(''));
+    B.defineFunction('setInputValue', (data) => setCurrentValue(data));
     B.defineFunction('Enable', () => setIsDisabled(false));
     B.defineFunction('Disable', () => setIsDisabled(true));
     B.defineFunction('Reset', () => setCurrentValue(''));
