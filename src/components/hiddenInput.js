@@ -40,7 +40,7 @@
 
     useEffect(() => {
       B.defineFunction('setValue', (data) => setCurrentValue(data));
-    }, []);
+    }, [currentValue]);
 
     const InputCmp = (
       <input
