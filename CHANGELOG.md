@@ -1,3 +1,18 @@
+## [1.234.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.234.0...v1.234.1) (2022-06-08)
+
+
+### Bug Fixes
+
+* add lebel for datePicker prefab ([c670a53](https://github.com/bettyblocks/material-ui-component-set/commit/c670a5358e62a2ca9c6524518b346ea259dc728d))
+* adjust label for time picker ([2338c1a](https://github.com/bettyblocks/material-ui-component-set/commit/2338c1a04f3f73303415c104683c0369c12a11cc))
+* bump cli ([d1a7c00](https://github.com/bettyblocks/material-ui-component-set/commit/d1a7c00d51def564c2d74600cdcf133014ca5dae))
+* bump sdk ([d6b975c](https://github.com/bettyblocks/material-ui-component-set/commit/d6b975c89847dfb3f82e1780669dd09aff80fc96))
+* component label consistency ([e4854d4](https://github.com/bettyblocks/material-ui-component-set/commit/e4854d481c9e5c88f04bd4f930c3f95f91715ea3))
+* component naming consistency ([a3ccf67](https://github.com/bettyblocks/material-ui-component-set/commit/a3ccf67734ca54bde769cf066de6db618fc16d9c))
+* naming consistency ([1e5651a](https://github.com/bettyblocks/material-ui-component-set/commit/1e5651a0f56cda867274f3a18de52f0fdc90762f))
+* naming consistency ([1ac364f](https://github.com/bettyblocks/material-ui-component-set/commit/1ac364f01722f09962438e0f5e2f203677527828))
+* set component context in prefab for input fields ([2479b6d](https://github.com/bettyblocks/material-ui-component-set/commit/2479b6db34652e5a07cf2157d5569d768a6e9880))
+
 # [1.234.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.233.0...v1.234.0) (2022-06-08)
 
 
