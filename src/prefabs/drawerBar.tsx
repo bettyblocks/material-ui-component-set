@@ -9,6 +9,6 @@ const attr = {
   keywords: ['Layout', 'drawer', 'sidebar', 'drawersidebar'],
 };
 
-export default prefab('Drawer Sidebar (TS)', attr, undefined, [
+export default prefab('Drawer Sidebar', attr, undefined, [
   drawerBar({}, [List({}, [ListItem({})])]),
 ]);

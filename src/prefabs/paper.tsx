@@ -24,8 +24,7 @@ options.maxRowWidth = option('CUSTOM', {
     ],
   },
 });
-// This is the current way to change a SINGLE value in your component.
 
-export default prefab('Paper (TS)', attr, undefined, [
+export default prefab('Paper', attr, undefined, [
   Paper({}, [Row({ options }, [Column({}, [])])]),
 ]);

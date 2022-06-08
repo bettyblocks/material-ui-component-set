@@ -16,7 +16,7 @@ options.secondaryText = variable('Secondary text', {
   value: ['Secondary text'],
 });
 
-export default prefab('Drawer (TS)', attrs, undefined, [
+export default prefab('Drawer', attrs, undefined, [
   Drawer({}, [
     drawerBar({}, [List({}, [ListItem({ options })])]),
     drawerContainer({}),

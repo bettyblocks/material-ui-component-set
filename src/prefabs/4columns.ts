@@ -113,7 +113,7 @@ options.columnWidthMobile = option('CUSTOM', {
   },
 });
 
-export default prefab('4 Columns (TS)', attrs, undefined, [
+export default prefab('4 Columns', attrs, undefined, [
   Row({}, [
     Column({
       options,

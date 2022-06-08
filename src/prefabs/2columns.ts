@@ -112,6 +112,6 @@ const attrs = {
   category: 'LAYOUT',
   keywords: ['Layout', 'column', 'columns', '1'],
 };
-export default prefab('2 Columns (TS)', attrs, undefined, [
+export default prefab('2 Columns', attrs, undefined, [
   Row({}, [Column({ options }), Column({ options })]),
 ]);

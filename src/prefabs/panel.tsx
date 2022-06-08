@@ -9,6 +9,6 @@ const attr = {
   keywords: ['Layout', 'panel'],
 };
 
-export default prefab('Panel (TS)', attr, undefined, [
+export default prefab('Panel', attr, undefined, [
   Panel({}, [Row({}, [Column({}, [])])]),
 ]);

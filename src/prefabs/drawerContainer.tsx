@@ -7,6 +7,6 @@ const attr = {
   keywords: ['Layout', 'drawer', 'container', 'drawercontainer'],
 };
 
-export default prefab('Drawer Container (TS)', attr, undefined, [
+export default prefab('Drawer Container', attr, undefined, [
   drawerContainer({}, []),
 ]);

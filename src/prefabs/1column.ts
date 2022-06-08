@@ -7,6 +7,4 @@ const attrs = {
   category: 'LAYOUT',
   keywords: ['Layout', 'column', 'columns', '1'],
 };
-export default prefab('1 Column (TS)', attrs, undefined, [
-  Row({}, [Column({})]),
-]);
+export default prefab('1 Column', attrs, undefined, [Row({}, [Column({})])]);

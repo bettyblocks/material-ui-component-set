@@ -7,4 +7,4 @@ const attrs = {
   keywords: ['Layout', 'grid'],
 };
 
-export default prefab('Grid (TS)', attrs, undefined, [Grid({})]);
+export default prefab('Grid', attrs, undefined, [Grid({})]);
