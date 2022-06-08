@@ -7,4 +7,4 @@ const attributes = {
   keywords: ['Layout', 'box'],
 };
 
-export default prefab('Box', attributes, undefined, [Box({})]);
+export default prefab('Box (TS)', attributes, undefined, [Box({})]);
