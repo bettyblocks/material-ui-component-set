@@ -1,3 +1,10 @@
+## [1.234.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.234.1...v1.234.2) (2022-06-08)
+
+
+### Bug Fixes
+
+* bump cli version ([1bcd979](https://github.com/bettyblocks/material-ui-component-set/commit/1bcd9794ececda7baef85508938487dc01214b41))
+
 ## [1.234.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.234.0...v1.234.1) (2022-06-08)
 
 
