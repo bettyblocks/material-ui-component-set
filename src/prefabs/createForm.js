@@ -5862,6 +5862,7 @@
   structure: [
     {
       name: 'Form',
+      label: 'Create form',
       ref: {
         id: '#formId',
       },

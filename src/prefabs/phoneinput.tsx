@@ -42,5 +42,10 @@ const attributes = {
 };
 
 export default prefab('Phone Beta', attributes, beforeCreate, [
-  TextInput({ label: 'Phone', type: 'tel' }),
+  TextInput({
+    label: 'Phone field Beta',
+    inputLabel: 'Phone',
+    type: 'tel',
+    dataComponentAttribute: 'PhoneInput',
+  }),
 ]);

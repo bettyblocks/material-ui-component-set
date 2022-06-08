@@ -8,10 +8,12 @@ import { deleteActionVariable } from '../../hooks/deleteActionVariable';
 import { options as defaults } from './options';
 
 export interface Configuration {
+  dataComponentAttribute?: string;
   options?: Record<string, OptionProducer>;
   validationPattern?: string;
   adornmentIcon?: string;
   label?: string;
+  inputLabel?: string;
   type?: HTMLInputElement['type'];
   pattern?: string;
 }
@@ -34,8 +36,8 @@ export const TextInput = (
     });
   }
 
-  if (config.label) {
-    options.label = updateOption(options.label, { value: [config.label] });
+  if (config.inputLabel) {
+    options.label = updateOption(options.label, { value: [config.inputLabel] });
   }
 
   if (config.pattern) {
@@ -54,5 +56,18 @@ export const TextInput = (
     });
   }
 
-  return component('TextInput', { options, $afterDelete }, children);
+  if (config.dataComponentAttribute) {
+    options.dataComponentAttribute = updateOption(
+      options.dataComponentAttribute,
+      {
+        value: [config.dataComponentAttribute],
+      },
+    );
+  }
+
+  return component(
+    'TextInput',
+    { label: config.label, options, $afterDelete },
+    children,
+  );
 };
