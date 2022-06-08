@@ -1,3 +1,10 @@
+# [1.234.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.233.0...v1.234.0) (2022-06-08)
+
+
+### Features
+
+* **OL-915:** added new property for templates where page type needs to be ignored ([87a6f1c](https://github.com/bettyblocks/material-ui-component-set/commit/87a6f1ce6ff4f77bd4fe635f2df761e909dc1b8a))
+
 # [1.233.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.232.0...v1.233.0) (2022-06-03)
 
 
