@@ -1,0 +1,31 @@
+name: Publish component set for Frasers
+
+on:
+  push:
+    branches:
+      - feat/introduce-frasers-DO-6128
+    paths-ignore:
+      - 'CHANGELOG.md'
+      - 'package.json'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+      - name: Install packages
+        run: yarn install
+
+      - name: build
+        run: yarn build
+
+      - name: bundle
+        run: yarn bundle
+
+      - name: upload frasers
+        env:
+          AZURE_BLOB_ACCOUNT: ${{ secrets.AZURE_BLOB_ACCOUNT_FRASERS }}
+          AZURE_BLOB_ACCOUNT_KEY: ${{ secrets.AZURE_BLOB_ACCOUNT_KEY_FRASERS }}
+        run: yarn upload
