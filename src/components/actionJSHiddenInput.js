@@ -1,5 +1,5 @@
 (() => ({
-  name: 'ActionJSHiddenInput',
+  name: 'Hidden Input Beta',
   type: 'FORM_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
@@ -13,7 +13,7 @@
 
     const valueProperty = B.useProperty(value);
 
-    const Input = function () {
+    function Input() {
       return (
         <input
           className={[isDev ? classes.dev : ''].join(' ')}
@@ -23,7 +23,7 @@
           type="hidden"
         />
       );
-    };
+    }
 
     return <Input />;
   })(),

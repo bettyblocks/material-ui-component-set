@@ -6,6 +6,7 @@
   structure: [
     {
       name: 'DateTimePicker',
+      label: 'Date picker',
       options: [
         {
           value: { label: ['Date'], value: [] },
@@ -47,6 +48,12 @@
           label: 'Disable past dates',
           key: 'disablePastDates',
           value: false,
+        },
+        {
+          type: 'TOGGLE',
+          label: 'Close picker after select',
+          key: 'closeOnSelect',
+          value: true,
         },
         {
           label: 'Language',

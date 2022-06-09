@@ -69,6 +69,13 @@ export const options = {
     configuration: { as: 'VISIBILITY', condition: showIfTrue('addTooltip') },
   }),
 
+  tooltipContent: variable('Tooltip Content', {
+    value: ['Tips'],
+    configuration: {
+      condition: showIfTrue('addTooltip'),
+    },
+  }),
+
   tooltipPlacement: dropdown(
     'Tooltip Placement',
     [
@@ -81,7 +88,7 @@ export const options = {
       ['Bottom', 'bottom'],
       ['Bottom End', 'bottom-end'],
     ],
-    { configuration: { condition: showIfTrue('addTooltip') } },
+    { value: 'bottom', configuration: { condition: showIfTrue('addTooltip') } },
   ),
 
   tooltipBackground: color('Tooltip Background', {

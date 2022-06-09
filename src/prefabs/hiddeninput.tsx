@@ -13,11 +13,16 @@ import { deleteActionVariable } from './hooks/deleteActionVariable';
 const beforeCreate = ({
   close,
   components: { CreateFormInputWizard },
-  prefab,
+  prefab: originalPrefab,
   save,
 }: BeforeCreateArgs) => {
-  const actionVariableOption = prefab.structure[0].options.find(
-    (option: { type: string }) => option.type === 'ACTION_JS_VARIABLE',
+  const structure = originalPrefab.structure[0];
+
+  if (structure.type !== 'COMPONENT')
+    return <div>expected component prefab, found {structure.type}</div>;
+
+  const actionVariableOption = structure.options.find(
+    (o) => o.type === 'ACTION_JS_VARIABLE',
   );
 
   if (!actionVariableOption) {
@@ -26,11 +31,20 @@ const beforeCreate = ({
 
   return (
     <CreateFormInputWizard
+      supportedKinds={[
+        'BOOLEAN',
+        'DECIMAL',
+        'INTEGER',
+        'PRICE',
+        'SERIAL',
+        'STRING',
+        'TEXT',
+      ]}
       actionVariableOption={actionVariableOption.key}
       labelOptionKey="label"
       nameOptionKey="actionVariableId"
       close={close}
-      prefab={prefab}
+      prefab={originalPrefab}
       save={save}
     />
   );
@@ -50,6 +64,6 @@ const hooks = {
   $afterDelete: [deleteActionVariable],
 };
 
-export default prefab('Hidden v2', attributes, beforeCreate, [
-  component('ActionJSHiddenInput', { options, ...hooks }, []),
+export default prefab('Hidden Beta', attributes, beforeCreate, [
+  component('Hidden Input Beta', { options, ...hooks }, []),
 ]);

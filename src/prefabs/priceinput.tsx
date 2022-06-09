@@ -6,10 +6,15 @@ import { PriceInput } from './structures/PriceInput';
 const beforeCreate = ({
   close,
   components: { CreateFormInputWizard },
-  prefab,
+  prefab: originalPrefab,
   save,
 }: BeforeCreateArgs) => {
-  const actionVariableOption = prefab.structure[0].options.find(
+  const structure = originalPrefab.structure[0];
+
+  if (structure.type !== 'COMPONENT')
+    return <div>expected component prefab, found {structure.type}</div>;
+
+  const actionVariableOption = structure.options.find(
     (option: { type: string }) => option.type === 'ACTION_JS_VARIABLE',
   );
 
@@ -24,7 +29,7 @@ const beforeCreate = ({
       labelOptionKey="label"
       nameOptionKey="actionVariableId"
       close={close}
-      prefab={prefab}
+      prefab={originalPrefab}
       save={save}
     />
   );
@@ -38,6 +43,11 @@ const attributes = {
 
 const pattern = '[0-9]+(\\.[0-9][0-9]?)?';
 
-export default prefab('Price v2', attributes, beforeCreate, [
-  PriceInput({ label: 'Price', type: 'decimal', pattern }),
+export default prefab('Price Beta', attributes, beforeCreate, [
+  PriceInput({
+    label: 'Price field Beta',
+    inputLabel: 'Price',
+    type: 'decimal',
+    pattern,
+  }),
 ]);

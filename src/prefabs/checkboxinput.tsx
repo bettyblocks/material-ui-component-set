@@ -11,19 +11,24 @@ import {
   text,
   toggle,
   variable,
+  Icon,
+  ThemeColor,
 } from '@betty-blocks/component-sdk';
-import { Icon, ThemeColor } from '@betty-blocks/component-sdk';
 
 import { deleteActionVariable } from './hooks/deleteActionVariable';
 
 const beforeCreate = ({
   close,
   components: { CreateFormInputWizard },
-  prefab,
+  prefab: originalPrefab,
   save,
 }: BeforeCreateArgs) => {
-  const actionVariableOption = prefab.structure[0].options.find(
-    (option: { type: string }) => option.type === 'ACTION_JS_VARIABLE',
+  const structure = originalPrefab.structure[0];
+  if (structure.type !== 'COMPONENT')
+    return <div>expected component prefab, found {structure.type}</div>;
+
+  const actionVariableOption = structure.options.find(
+    (o) => o.type === 'ACTION_JS_VARIABLE',
   );
 
   if (!actionVariableOption) {
@@ -36,9 +41,8 @@ const beforeCreate = ({
       actionVariableOption={actionVariableOption.key}
       labelOptionKey="label"
       nameOptionKey="actionVariableId"
-      actionVariableType="BOOLEAN"
       close={close}
-      prefab={prefab}
+      prefab={originalPrefab}
       save={save}
     />
   );
@@ -147,6 +151,10 @@ const hooks = {
   $afterDelete: [deleteActionVariable],
 };
 
-export default prefab('Checkbox v2', attributes, beforeCreate, [
-  component('CheckboxInput', { options, ...hooks }, []),
+export default prefab('Checkbox Beta', attributes, beforeCreate, [
+  component(
+    'CheckboxInput',
+    { label: 'Checkbox input Beta', options, ...hooks },
+    [],
+  ),
 ]);

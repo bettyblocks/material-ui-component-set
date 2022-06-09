@@ -58,16 +58,6 @@
         const [, setOptions] = useOptions();
 
         useEffect(() => {
-          mounted.current = true;
-
-          B.defineFunction('setCurrentRecord', (value) => {
-            if (typeof value === 'number') {
-              setOptions({
-                currentRecord: value,
-              });
-            }
-          });
-
           B.defineFunction('Submit', () => {
             if (formRef.current) {
               if (typeof formRef.current.requestSubmit === 'function') {
@@ -77,6 +67,18 @@
                   new Event('submit', { cancelable: true }),
                 );
               }
+            }
+          });
+        }, [formRef]);
+
+        useEffect(() => {
+          mounted.current = true;
+
+          B.defineFunction('setCurrentRecord', (value) => {
+            if (typeof value === 'number') {
+              setOptions({
+                currentRecord: value,
+              });
             }
           });
 
@@ -155,7 +157,7 @@
           .join(' ')
           .trim();
 
-        const FormElement = function () {
+        function FormElement() {
           B.defineFunction('Refetch', () => {});
           return (
             <form
@@ -168,9 +170,9 @@
               {children}
             </form>
           );
-        };
+        }
 
-        const FormCmp = function ({ item, refetch }) {
+        function FormCmp({ item, refetch }) {
           const [isInvalid, setIsInvalid] = useState(false);
           const handleInvalid = () => {
             if (!isInvalid) {
@@ -202,8 +204,9 @@
                   <form
                     onInvalid={handleInvalid}
                     onSubmit={(evt) => {
-                      setIsInvalid(false);
-                      handleSubmit(evt, callAction, item);
+                      if (formRef.current.checkValidity()) {
+                        handleSubmit(evt, callAction, item);
+                      }
                     }}
                     ref={formRef}
                     className={classNames || undefined}
@@ -226,9 +229,9 @@
               )}
             </Action>
           );
-        };
+        }
 
-        const FormWithData = function () {
+        function FormWithData() {
           const getFilter = React.useCallback(() => {
             if (isDev || !currentRecord || !modelId) {
               return filter;
@@ -284,7 +287,7 @@
           if (!item) return children;
 
           return <FormCmp item={item} refetch={refetch} />;
-        };
+        }
 
         const RuntimeForm = hasFilter ? <FormWithData /> : <FormCmp />;
 

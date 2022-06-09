@@ -1,17 +1,18 @@
-import { component, PrefabComponentOption } from '@betty-blocks/component-sdk';
-import { PrefabComponent } from '@betty-blocks/component-sdk/build/prefabs/types/component';
+import {
+  component,
+  OptionProducer,
+  PrefabComponent,
+} from '@betty-blocks/component-sdk';
 import { updateOption } from '../../../utils';
 import { deleteActionVariable } from '../../hooks/deleteActionVariable';
 import { options as defaults } from './options';
-
-// TODO: export OptionProducer from the sdk
-type OptionProducer = (key: string) => PrefabComponentOption;
 
 export interface Configuration {
   options?: Record<string, OptionProducer>;
   validationPattern?: string;
   adornmentIcon?: string;
   label?: string;
+  inputLabel?: string;
   type?: HTMLInputElement['type'];
   pattern?: string;
 }
@@ -34,8 +35,8 @@ export const TextInput = (
     });
   }
 
-  if (config.label) {
-    options.label = updateOption(options.label, { value: [config.label] });
+  if (config.inputLabel) {
+    options.label = updateOption(options.label, { value: [config.inputLabel] });
   }
 
   if (config.pattern) {
@@ -53,6 +54,10 @@ export const TextInput = (
       value: config.adornmentIcon,
     });
   }
-  
-  return component('TextInput', { options, $afterDelete }, children);
+
+  return component(
+    'TextInput',
+    { label: config.label, options, $afterDelete },
+    children,
+  );
 };

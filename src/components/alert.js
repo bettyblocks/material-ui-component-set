@@ -29,6 +29,27 @@
     }, [visible]);
 
     const formatError = (err) => {
+      if (err.errors) {
+        const errorMessage =
+          (err.errors &&
+            err.errors[0] &&
+            err.errors[0].message &&
+            err.errors[0].message.errors &&
+            err.errors[0].message.errors[0] &&
+            err.errors[0].message.errors[0].message) ||
+          (err.errors && err.errors[0] && err.errors[0].message) ||
+          (err.networkError && err.networkError.message);
+
+        const errorTitle =
+          (err.errors &&
+            err.errors[0] &&
+            err.errors[0].extensions &&
+            (err.errors[0].extensions.error ||
+              err.errors[0].extensions.statusCode)) ||
+          err.message;
+        return [errorTitle, errorMessage];
+      }
+
       const errorMessage =
         (err.graphQLErrors &&
           err.graphQLErrors[0] &&

@@ -2,6 +2,7 @@
   name: 'Login and register form',
   icon: 'LoginFormIcon',
   type: 'page',
+  isPublicPage: true,
   description: 'Page with a ready to use login form, register form and image.',
   detail:
     'It takes a few clicks to set up your login and register page. Connect your model to the forms and feel free to customize your image to your liking.',
@@ -4877,6 +4878,12 @@
                                           {
                                             label: 'Selected tab index',
                                             key: 'defaultValue',
+                                            value: '1',
+                                            type: 'NUMBER',
+                                          },
+                                          {
+                                            label: 'Selected design tab index',
+                                            key: 'selectedDesignTabIndex',
                                             value: '1',
                                             type: 'NUMBER',
                                           },

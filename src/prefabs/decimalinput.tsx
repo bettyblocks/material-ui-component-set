@@ -5,10 +5,15 @@ import { TextInput } from './structures/TextInput';
 const beforeCreate = ({
   close,
   components: { CreateFormInputWizard },
-  prefab,
+  prefab: originalPrefab,
   save,
 }: BeforeCreateArgs) => {
-  const actionVariableOption = prefab.structure[0].options.find(
+  const structure = originalPrefab.structure[0];
+
+  if (structure.type !== 'COMPONENT')
+    return <div>expected component prefab, found {structure.type}</div>;
+
+  const actionVariableOption = structure.options.find(
     (option: { type: string }) => option.type === 'ACTION_JS_VARIABLE',
   );
 
@@ -20,11 +25,10 @@ const beforeCreate = ({
     <CreateFormInputWizard
       supportedKinds={['DECIMAL']}
       actionVariableOption={actionVariableOption.key}
-      actionVariableType="INTEGER"
       labelOptionKey="label"
       nameOptionKey="actionVariableId"
       close={close}
-      prefab={prefab}
+      prefab={originalPrefab}
       save={save}
     />
   );
@@ -36,9 +40,10 @@ const attributes = {
   keywords: ['Form', 'input'],
 };
 
-export default prefab('Decimal v2', attributes, beforeCreate, [
+export default prefab('Decimal Beta', attributes, beforeCreate, [
   TextInput({
-    label: 'Decimal',
+    label: 'Decimal field Beta',
+    inputLabel: 'Decimal',
     type: 'decimal',
     pattern: '^\\d+(\\.\\d{1,2})?$',
   }),

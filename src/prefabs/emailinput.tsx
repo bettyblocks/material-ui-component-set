@@ -5,10 +5,15 @@ import { TextInput } from './structures/TextInput';
 const beforeCreate = ({
   close,
   components: { CreateFormInputWizard },
-  prefab,
+  prefab: originalPrefab,
   save,
 }: BeforeCreateArgs) => {
-  const actionVariableOption = prefab.structure[0].options.find(
+  const structure = originalPrefab.structure[0];
+
+  if (structure.type !== 'COMPONENT')
+    return <div>expected component prefab, found {structure.type}</div>;
+
+  const actionVariableOption = structure.options.find(
     (option: { type: string }) => option.type === 'ACTION_JS_VARIABLE',
   );
 
@@ -23,7 +28,7 @@ const beforeCreate = ({
       labelOptionKey="label"
       nameOptionKey="actionVariableId"
       close={close}
-      prefab={prefab}
+      prefab={originalPrefab}
       save={save}
     />
   );
@@ -37,6 +42,12 @@ const attributes = {
 
 const pattern = '[a-z0-9._%+-]+@[a-z0-9.-]+[\\.][a-z]{2,4}$';
 
-export default prefab('Email v2', attributes, beforeCreate, [
-  TextInput({ label: 'email', type: 'email', pattern, adornmentIcon: 'Email' }),
+export default prefab('Email Beta', attributes, beforeCreate, [
+  TextInput({
+    label: 'Email field Beta',
+    inputLabel: 'email',
+    type: 'email',
+    pattern,
+    adornmentIcon: 'Email',
+  }),
 ]);

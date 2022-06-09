@@ -5,10 +5,15 @@ import { TextInput } from './structures/TextInput';
 const beforeCreate = ({
   close,
   components: { CreateFormInputWizard },
-  prefab,
+  prefab: originalPrefab,
   save,
 }: BeforeCreateArgs) => {
-  const actionVariableOption = prefab.structure[0].options.find(
+  const structure = originalPrefab.structure[0];
+
+  if (structure.type !== 'COMPONENT')
+    return <div>expected component prefab, found {structure.type}</div>;
+
+  const actionVariableOption = structure.options.find(
     (option: { type: string }) => option.type === 'ACTION_JS_VARIABLE',
   );
 
@@ -23,7 +28,7 @@ const beforeCreate = ({
       labelOptionKey="label"
       nameOptionKey="actionVariableId"
       close={close}
-      prefab={prefab}
+      prefab={originalPrefab}
       save={save}
     />
   );
@@ -38,6 +43,11 @@ const attributes = {
 const pattern =
   '^([A-Z]{2}[ \\-]?[0-9]{2})(?=(?:[ \\-]?[A-Z0-9]){9,30}$)((?:[ \\-]?[A-Z0-9]{3,5}){2,7})([ \\-]?[A-Z0-9]{1,3})?$';
 
-export default prefab('IBAN v2', attributes, beforeCreate, [
-  TextInput({ label: 'IBAN', type: 'text', pattern }),
+export default prefab('IBAN Beta', attributes, beforeCreate, [
+  TextInput({
+    label: 'IBAN input Beta',
+    inputLabel: 'IBAN',
+    type: 'text',
+    pattern,
+  }),
 ]);

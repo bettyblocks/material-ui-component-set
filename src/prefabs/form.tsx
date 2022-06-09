@@ -6,29 +6,72 @@ import {
   model,
   filter,
   BeforeCreateArgs,
+  Icon,
+  InteractionType,
+  PrefabInteraction,
 } from '@betty-blocks/component-sdk';
-import { Icon } from '@betty-blocks/component-sdk';
+import { FormErrorAlert, FormSuccessAlert } from './structures/Alert';
 
 const beforeCreate = ({
   close,
   components: { CreateFormWizard },
-  prefab,
+  prefab: originalPrefab,
   prefabs,
   save,
 }: BeforeCreateArgs) => {
   return (
     <CreateFormWizard
       close={close}
-      prefab={prefab}
+      prefab={originalPrefab}
       prefabs={prefabs}
       save={save}
     />
   );
 };
 
+const interactions: PrefabInteraction[] = [
+  {
+    type: InteractionType.Custom,
+    name: 'Show',
+    sourceEvent: 'onActionError',
+    ref: {
+      targetComponentId: '#alertErrorId',
+      sourceComponentId: '#formId',
+    },
+  },
+  {
+    type: InteractionType.Custom,
+    name: 'Show',
+    sourceEvent: 'onActionSuccess',
+    ref: {
+      targetComponentId: '#alertSuccessId',
+      sourceComponentId: '#formId',
+    },
+  },
+  {
+    type: InteractionType.Custom,
+    name: 'Hide',
+    sourceEvent: 'onActionLoad',
+    ref: {
+      targetComponentId: '#alertSuccessId',
+      sourceComponentId: '#formId',
+    },
+  },
+  {
+    type: InteractionType.Custom,
+    name: 'Hide',
+    sourceEvent: 'onActionLoad',
+    ref: {
+      targetComponentId: '#alertErrorId',
+      sourceComponentId: '#formId',
+    },
+  },
+];
+
 const attributes = {
   category: 'FORMV2',
   icon: Icon.FormIcon,
+  interactions,
 };
 
 const options = {
@@ -37,6 +80,9 @@ const options = {
   filter: filter('Filter', { configuration: { dependsOn: 'modelId' } }),
 };
 
-export default prefab('Form v2', attributes, beforeCreate, [
-  component('ActionJSForm', { options }, []),
+export default prefab('Form Beta', attributes, beforeCreate, [
+  component('Form Beta', { ref: { id: '#formId' }, options }, [
+    FormSuccessAlert({ ref: { id: '#alertSuccessId' } }),
+    FormErrorAlert({ ref: { id: '#alertErrorId' } }),
+  ]),
 ]);

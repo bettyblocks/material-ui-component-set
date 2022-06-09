@@ -6,10 +6,15 @@ import { TextInput } from './structures/TextInput';
 const beforeCreate = ({
   close,
   components: { CreateFormInputWizard },
-  prefab,
+  prefab: originalPrefab,
   save,
 }: BeforeCreateArgs) => {
-  const actionVariableOption = prefab.structure[0].options.find(
+  const structure = originalPrefab.structure[0];
+
+  if (structure.type !== 'COMPONENT')
+    return <div>expected component prefab, found {structure.type}</div>;
+
+  const actionVariableOption = structure.options.find(
     (option: { type: string }) => option.type === 'ACTION_JS_VARIABLE',
   );
 
@@ -24,7 +29,7 @@ const beforeCreate = ({
       labelOptionKey="label"
       nameOptionKey="actionVariableId"
       close={close}
-      prefab={prefab}
+      prefab={originalPrefab}
       save={save}
     />
   );
@@ -36,7 +41,10 @@ const attributes = {
   keywords: ['Form', 'input'],
 };
 
-export default prefab('Phone v2', attributes, beforeCreate, [
-  TextInput({ label: 'Phone', type: 'tel' }),
+export default prefab('Phone Beta', attributes, beforeCreate, [
+  TextInput({
+    label: 'Phone field Beta',
+    inputLabel: 'Phone',
+    type: 'tel',
+  }),
 ]);
-

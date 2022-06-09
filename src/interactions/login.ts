@@ -1,3 +1,10 @@
+/* eslint @typescript-eslint/no-unused-vars: ["error", { "varsIgnorePattern": "login" }] */
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+interface History {
+  push(url: string): string;
+}
+
 interface Event {
   isValid: boolean;
   jwtToken: string;
@@ -7,10 +14,6 @@ interface Event {
 interface Page {
   name: string;
   url: string;
-}
-
-interface History {
-  push(url: string): string;
 }
 
 function login({
@@ -31,6 +34,7 @@ function login({
 
     localStorage.setItem('TOKEN', jwtToken);
     localStorage.setItem('REFRESH_TOKEN', refreshToken);
+    // eslint-disable-next-line no-restricted-globals
     history.push(url);
   }
 }

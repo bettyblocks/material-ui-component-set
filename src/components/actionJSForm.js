@@ -1,13 +1,12 @@
 (() => ({
-  name: 'ActionJSForm',
+  name: 'Form Beta',
   type: 'CONTENT_COMPONENT',
   allowedTypes: ['FORM_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { actionId, modelId, filter } = options;
     const { Form, GetOne } = B;
-
-    const [errors, setErrors] = useState([]);
+    const formRef = React.createRef();
 
     const isDev = B.env === 'dev';
 
@@ -17,48 +16,52 @@
       );
     }
 
-    const onSubmitSuccess = (response) => {
-      /* eslint-disable-next-line */
-      if (response.errors) {
-        const messages = response.errors.flatMap((error) =>
-          error.message.errors.map((inner) => inner.message),
-        );
-
-        B.triggerEvent('onActionError', new Error(messages.join(', ')));
-
-        setErrors(messages);
-        return;
-      }
-
+    const onActionSuccess = (response) => {
       const event = response.data.action.results;
 
       B.triggerEvent('onActionSuccess', event);
-
-      setErrors([]);
     };
 
-    const onSubmitError = (error) => {
-      setErrors([error.message || error.toString()]);
+    const onActionError = (error) => {
       B.triggerEvent('onActionError', error);
     };
 
-    const FormComponent = function () {
+    const onActionDone = () => {
+      B.triggerEvent('onActionDone');
+    };
+
+    const onActionLoad = (loading) => {
+      if (loading) B.triggerEvent('onActionLoad', loading);
+    };
+
+    useEffect(() => {
+      B.defineFunction('Submit', () => {
+        if (formRef.current) {
+          if (typeof formRef.current.requestSubmit === 'function') {
+            formRef.current.requestSubmit();
+          } else {
+            formRef.current.dispatchEvent(
+              new Event('submit', { cancelable: true }),
+            );
+          }
+        }
+      });
+    }, [formRef]);
+
+    function FormComponent() {
       return (
         <Form
           actionId={actionId}
-          onSubmitSuccess={onSubmitSuccess}
-          onSubmitError={onSubmitError}
+          onActionLoad={onActionLoad}
+          onActionDone={onActionDone}
+          onActionSuccess={onActionSuccess}
+          onActionError={onActionError}
+          ref={formRef}
         >
           <fieldset className={classes.fieldset}>{children}</fieldset>
-          <ul>
-            {errors.map((error) => (
-              // eslint-disable-next-line react/jsx-key
-              <li>{error}</li>
-            ))}
-          </ul>
         </Form>
       );
-    };
+    }
 
     if (isDev) {
       return (

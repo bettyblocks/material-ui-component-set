@@ -5,10 +5,15 @@ import { TextInput } from './structures/TextInput';
 const beforeCreate = ({
   close,
   components: { CreateFormInputWizard },
-  prefab,
+  prefab: originalPrefab,
   save,
 }: BeforeCreateArgs) => {
-  const actionVariableOption = prefab.structure[0].options.find(
+  const structure = originalPrefab.structure[0];
+
+  if (structure.type !== 'COMPONENT')
+    return <div>expected component prefab, found {structure.type}</div>;
+
+  const actionVariableOption = structure.options.find(
     (option: { type: string }) => option.type === 'ACTION_JS_VARIABLE',
   );
 
@@ -21,10 +26,9 @@ const beforeCreate = ({
       supportedKinds={['INTEGER', 'PRICE']}
       actionVariableOption={actionVariableOption.key}
       labelOptionKey="label"
-      actionVariableType="INTEGER"
       nameOptionKey="actionVariableId"
       close={close}
-      prefab={prefab}
+      prefab={originalPrefab}
       save={save}
     />
   );
@@ -36,11 +40,11 @@ const attributes = {
   keywords: ['Form', 'input'],
 };
 
-export default prefab('Number v2', attributes, beforeCreate, [
+export default prefab('Number Beta', attributes, beforeCreate, [
   TextInput({
-    label: 'Number',
+    label: 'Number field Beta',
+    inputLabel: 'Number',
     type: 'number',
     pattern: '^[0-9]*$',
   }),
 ]);
-

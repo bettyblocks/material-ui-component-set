@@ -6,6 +6,7 @@
   structure: [
     {
       name: 'DateTimePicker',
+      label: 'Time picker',
       options: [
         {
           value: { label: ['Time'], value: [] },
@@ -35,6 +36,12 @@
           label: 'Disable Toolbar',
           key: 'disableToolbar',
           value: false,
+        },
+        {
+          type: 'TOGGLE',
+          label: 'Close picker after select',
+          key: 'closeOnSelect',
+          value: true,
         },
         {
           value: 'HH:mm:ss',
