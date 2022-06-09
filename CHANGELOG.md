@@ -1,3 +1,10 @@
+# [1.235.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.234.2...v1.235.0) (2022-06-09)
+
+
+### Features
+
+* pre-load-data ([11e6452](https://github.com/bettyblocks/material-ui-component-set/commit/11e64528fb8fa1430945a9f26c394c7e28f42933))
+
 ## [1.234.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.234.1...v1.234.2) (2022-06-08)
 
 
