@@ -3,10 +3,8 @@ import { Row } from './structures/Row';
 import { Column } from './structures/Column';
 
 const attrs = {
-  icon: Icon.CardActionsIcon,
+  icon: Icon.RowColumnIcon,
   category: 'LAYOUT',
   keywords: ['Layout', 'column', 'columns', '1'],
 };
-export default prefab('1 Column (TS)', attrs, undefined, [
-  Row({}, [Column({})]),
-]);
+export default prefab('1 Column', attrs, undefined, [Row({}, [Column({})])]);

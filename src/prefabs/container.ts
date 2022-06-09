@@ -7,4 +7,4 @@ const attributes = {
   keywords: ['Layout', 'container'],
 };
 
-export default prefab('Container (TS)', attributes, undefined, [Container({})]);
+export default prefab('Container', attributes, undefined, [Container({})]);
