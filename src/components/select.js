@@ -110,6 +110,10 @@
       B.defineFunction('Reset', () => setCurrentValue(defaultValueText));
     }, []);
 
+    useEffect(() => {
+      setCurrentValue(defaultValueText);
+    }, [defaultValueText]);
+
     const orderByArray = [orderBy].flat();
     const sort =
       !isDev && orderBy
