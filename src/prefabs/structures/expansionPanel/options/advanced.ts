@@ -3,6 +3,12 @@ import { showOn } from '../../../../utils';
 
 export const advanced = {
   advancedSettings: toggle('Advanced settings', { value: false }),
+  preloadData: toggle('Preload data', {
+    value: false,
+    configuration: {
+      condition: showIf('advancedSettings', 'EQ', true),
+    },
+  }),
   dataComponentAttribute: variable('Test attribute', {
     value: [],
     ...showOn('advancedSettings'),
