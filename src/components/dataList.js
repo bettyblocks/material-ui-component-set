@@ -316,9 +316,6 @@
 
         useEffect(() => {
           B.defineFunction('Refetch', () => refetch());
-          B.defineFunction('SetSearchValue', (event) => {
-            setSearch(event.target.value);
-          });
 
           /**
            * @name Filter
