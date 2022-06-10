@@ -5938,6 +5938,7 @@
   structure: [
     {
       name: 'Form',
+      label: 'Update form',
       ref: {
         id: '#formId',
       },
