@@ -38,13 +38,7 @@
     const validationMessageText = useText(validationValueMissing);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
 
-    const {
-      referenceModelId,
-      name,
-      modelId,
-      kind,
-      values = [],
-    } = modelProperty;
+    const { referenceModelId, modelId, kind, values = [] } = modelProperty;
 
     const { data, loading } = useAllQuery(referenceModelId || modelId);
 
@@ -117,7 +111,7 @@
 
         const rows = data ? data.results : [];
         return rows.map((row) => {
-          const value = row[kind === 'belongs_to' ? 'id' : name];
+          const value = row[kind === 'belongs_to' ? 'id' : labelKey];
           const itemLabel = row[labelKey];
           return (
             <MenuItem key={row.id} value={value}>
