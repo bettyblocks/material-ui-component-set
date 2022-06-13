@@ -1,8 +1,14 @@
-import { option, showIf, variable, toggle } from '@betty-blocks/component-sdk';
+import { option, showIf, toggle, variable } from '@betty-blocks/component-sdk';
 import { showOn } from '../../../../utils';
 
 export const advanced = {
   advancedSettings: toggle('Advanced settings', { value: false }),
+  preloadData: toggle('Preload data', {
+    value: false,
+    configuration: {
+      condition: showIf('advancedSettings', 'EQ', true),
+    },
+  }),
   dataComponentAttribute: variable('Test attribute', {
     value: [],
     ...showOn('advancedSettings'),
