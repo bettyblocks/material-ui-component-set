@@ -70,7 +70,9 @@ const options = {
 };
 
 export default prefab('Login Form Beta', attributes, beforeCreate, [
-  component('Form Beta', { options, ref: { id: '#formId' } }, [
-    FormErrorAlert({ ref: { id: '#alertErrorId' } }),
-  ]),
+  component(
+    'Form Beta',
+    { label: 'Login form Beta', options, ref: { id: '#formId' } },
+    [FormErrorAlert({ ref: { id: '#alertErrorId' } })],
+  ),
 ]);

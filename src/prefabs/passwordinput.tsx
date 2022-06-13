@@ -44,7 +44,8 @@ const pattern = '(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}';
 
 export default prefab('Password Beta', attributes, beforeCreate, [
   TextInput({
-    label: 'Password',
+    label: 'Password field Beta',
+    inputLabel: 'Password',
     type: 'password',
     pattern,
     adornmentIcon: 'VisibilityOff',
