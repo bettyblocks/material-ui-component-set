@@ -120,7 +120,9 @@
 
     const searchProperty = isListProperty
       ? modelProperty
-      : hasLabelProperty || hasDefaultLabelProperty || idProperty;
+      : (hasLabelProperty && labelProperty) ||
+        (hasDefaultLabelProperty && defaultLabelProperty) ||
+        idProperty;
 
     /*
      * This component only works with relational or list properties.
