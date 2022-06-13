@@ -103,8 +103,8 @@
 
     const modelId = modelProperty.referenceModelId || propertyModelId;
 
-    const { labelPropertyId: modelLabelPropertyId } = getModel(modelId);
-    const defaultLabelProperty = getProperty(modelLabelPropertyId) || {};
+    const model = getModel(modelId);
+    const defaultLabelProperty = getProperty(model.labelPropertyId || '') || {};
     const idProperty = getIdProperty(modelId) || {};
     const isListProperty =
       modelProperty.kind === 'LIST' || modelProperty.kind === 'list';
@@ -120,9 +120,7 @@
 
     const searchProperty = isListProperty
       ? modelProperty
-      : (hasLabelProperty && labelProperty) ||
-        (hasDefaultLabelProperty && defaultLabelProperty) ||
-        idProperty;
+      : hasLabelProperty || hasDefaultLabelProperty || idProperty;
 
     /*
      * This component only works with relational or list properties.
@@ -408,6 +406,8 @@
           } else {
             B.triggerEvent('onNoResults');
           }
+
+          B.triggerEvent('onActionDone');
         },
         onError(resp) {
           if (!displayError) {
