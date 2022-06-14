@@ -17,12 +17,12 @@ export const options = {
     label: 'Property',
     value: '',
   }),
+  label: variable('Label', { value: [] }),
+  value: variable('Value', { value: [] }),
   labelProperty: property('Label for options', {
     value: '',
     configuration: { condition: showIf('optionType', 'EQ', 'model') },
   }),
-  label: variable('Label', { value: [] }),
-  value: variable('Value', { value: [] }),
   optionType: buttongroup('Option type', [['Model', 'model']], {
     value: 'model',
     configuration: {
@@ -30,14 +30,14 @@ export const options = {
     },
   }),
   filter: option('FILTER', {
-    label: 'Filter',
+    label: 'Filter for options',
     value: {},
     configuration: {
       dependsOn: 'actionProperty',
       condition: showIf('optionType', 'EQ', 'model'),
     },
   }),
-  orderBy: property('Order by', {
+  orderBy: property('Order by for options', {
     value: '',
     configuration: { condition: showIf('optionType', 'EQ', 'model') },
   }),
