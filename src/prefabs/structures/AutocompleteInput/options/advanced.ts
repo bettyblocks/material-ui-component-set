@@ -6,6 +6,7 @@ export const advanced = {
   nameAttribute: variable('name attribute', {
     value: [],
     ...showOn('advancedSettings'),
+    configuration: { condition: showIf('actionVariableId', 'EQ', 'never') },
   }),
   dataComponentAttribute: variable('Test attribute', {
     value: [],
