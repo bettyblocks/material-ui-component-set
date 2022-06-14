@@ -28,7 +28,6 @@
           type,
           model,
           showError,
-          hideSearch,
           searchProperty,
           order,
           orderBy,
@@ -58,7 +57,7 @@
 
         const builderLayout = () => (
           <div data-component={dataComponentAttributeText || 'DataList'}>
-            {searchProperty && !hideSearch && (
+            {searchProperty && (
               <div className={classes.header}>
                 <SearchComponent label={searchPropertyLabel} />
               </div>
@@ -415,7 +414,7 @@
 
           return (
             <div data-component={dataComponentAttributeText || 'DataContainer'}>
-              {searchProperty && !hideSearch && (
+              {searchProperty && (
                 <div className={classes.header}>
                   <SearchComponent
                     label={searchPropertyLabel}
