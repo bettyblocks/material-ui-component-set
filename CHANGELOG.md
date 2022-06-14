@@ -1,3 +1,10 @@
+## [1.235.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.235.0...v1.235.1) (2022-06-14)
+
+
+### Bug Fixes
+
+* show multiple error messages ([e957430](https://github.com/bettyblocks/material-ui-component-set/commit/e957430fd1a149fe2a28f20d31d120be924add63))
+
 # [1.235.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.234.2...v1.235.0) (2022-06-09)
 
 
