@@ -1,5 +1,5 @@
 import { Icon, prefab } from '@betty-blocks/component-sdk';
-import { DrawerBar } from './structures/Drawerbar';
+import { DrawerBar } from './structures/DrawerBar';
 import { List } from './structures/List';
 import { ListItem } from './structures/ListItem';
 
