@@ -7,6 +7,4 @@ const attr = {
   keywords: ['Logic', 'conditional'],
 };
 
-export default prefab('Conditional tsx', attr, undefined, [
-  Conditional({}, []),
-]);
+export default prefab('Conditional', attr, undefined, [Conditional({}, [])]);
