@@ -484,47 +484,6 @@
       setInteractionFilter({});
     });
 
-    /*
-     * Show a TextField in design time
-     */
-    if (isDev || !valid) {
-      let designTimeValue;
-
-      if (!valid) {
-        designTimeValue = message;
-      }
-
-      if (isDev) {
-        designTimeValue = defaultValue;
-      }
-
-      return (
-        <div className={classes.root}>
-          <TextField
-            InputProps={{
-              inputProps: {
-                tabIndex: isDev ? -1 : undefined,
-              },
-              endAdornment: <Icon name="ExpandMore" />,
-            }}
-            classes={{ root: classes.formControl }}
-            dataComponent={dataComponentAttribute}
-            disabled={disabled || !valid}
-            error={errorState}
-            fullWidth={fullWidth}
-            helperText={helperText}
-            label={!hideLabel && label}
-            margin={margin}
-            placeholder={placeholder}
-            required={required && !value}
-            size={size}
-            value={designTimeValue}
-            variant={variant}
-          />
-        </div>
-      );
-    }
-
     const getOptions = () => {
       if (isListProperty) {
         return modelProperty.values.map((propertyValue) => propertyValue.value);
@@ -742,6 +701,47 @@
         )}
       </FormControl>
     );
+
+    /*
+     * Show a TextField in design time
+     */
+    if (isDev || !valid) {
+      let designTimeValue;
+
+      if (!valid) {
+        designTimeValue = message;
+      }
+
+      if (isDev) {
+        designTimeValue = defaultValue;
+      }
+
+      return (
+        <div className={classes.root}>
+          <TextField
+            InputProps={{
+              inputProps: {
+                tabIndex: isDev ? -1 : undefined,
+              },
+              endAdornment: <Icon name="ExpandMore" />,
+            }}
+            classes={{ root: classes.formControl }}
+            dataComponent={dataComponentAttribute}
+            disabled={disabled || !valid}
+            error={errorState}
+            fullWidth={fullWidth}
+            helperText={helperText}
+            label={!hideLabel && label}
+            margin={margin}
+            placeholder={placeholder}
+            required={required && !value}
+            size={size}
+            value={designTimeValue}
+            variant={variant}
+          />
+        </div>
+      );
+    }
 
     if (!isListProperty) {
       return (

@@ -4,7 +4,6 @@ import {
   buttongroup,
   property,
   hideIf,
-  toggle,
   showIf,
 } from '@betty-blocks/component-sdk';
 
@@ -53,11 +52,6 @@ export const options = {
       },
     },
   ),
-  showError: toggle('Error', { value: false }),
-  errorType: buttongroup('Error message', [
-    ['Built in', 'built-in'],
-    ['Interaction', 'interaction'],
-  ]),
   ...validation,
   ...styles,
   ...advanced,
