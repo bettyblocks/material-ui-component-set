@@ -7,7 +7,7 @@
     const {
       actionProperty,
       actionVariableId,
-      disabled,
+      disabled: initialIsDisabled,
       filter,
       variant,
       size,
@@ -32,6 +32,7 @@
     const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
     const [interactionFilter, setInteractionFilter] = useState({});
+    const [disabled, setIsDisabled] = useState(initialIsDisabled);
     const mounted = useRef(false);
     const blancoText = useText(blanco);
     const modelProperty = getProperty(actionProperty.modelProperty) || {};
@@ -43,6 +44,10 @@
     const dataComponentAttributeValue = useText(dataComponentAttribute);
 
     const { referenceModelId, modelId, kind, values = [] } = modelProperty;
+
+    B.defineFunction('Clear', () => setCurrentValue(''));
+    B.defineFunction('Enable', () => setIsDisabled(false));
+    B.defineFunction('Disable', () => setIsDisabled(true));
 
     const transformValue = (arg) => {
       if (arg instanceof Date) {
