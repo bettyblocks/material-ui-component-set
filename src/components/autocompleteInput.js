@@ -409,7 +409,7 @@
             B.triggerEvent('onNoResults');
           }
 
-          B.triggerEvent('onActionDone');
+          B.triggerEvent('onDone');
         },
         onError(resp) {
           if (!displayError) {
