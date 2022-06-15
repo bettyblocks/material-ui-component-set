@@ -4,7 +4,6 @@ import {
   buttongroup,
   property,
   hideIf,
-  toggle,
   showIf,
 } from '@betty-blocks/component-sdk';
 
@@ -17,12 +16,12 @@ export const options = {
     label: 'Property',
     value: '',
   }),
+  label: variable('Label', { value: [] }),
+  value: variable('Value', { value: [] }),
   labelProperty: property('Label for options', {
     value: '',
     configuration: { condition: showIf('optionType', 'EQ', 'model') },
   }),
-  label: variable('Label', { value: [] }),
-  value: variable('Value', { value: [] }),
   optionType: buttongroup('Option type', [['Model', 'model']], {
     value: 'model',
     configuration: {
@@ -30,14 +29,14 @@ export const options = {
     },
   }),
   filter: option('FILTER', {
-    label: 'Filter',
+    label: 'Filter for options',
     value: {},
     configuration: {
       dependsOn: 'actionProperty',
       condition: showIf('optionType', 'EQ', 'model'),
     },
   }),
-  orderBy: property('Order by', {
+  orderBy: property('Order by for options', {
     value: '',
     configuration: { condition: showIf('optionType', 'EQ', 'model') },
   }),
@@ -53,11 +52,6 @@ export const options = {
       },
     },
   ),
-  showError: toggle('Error', { value: false }),
-  errorType: buttongroup('Error message', [
-    ['Built in', 'built-in'],
-    ['Interaction', 'interaction'],
-  ]),
   ...validation,
   ...styles,
   ...advanced,

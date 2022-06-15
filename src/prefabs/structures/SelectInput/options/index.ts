@@ -15,13 +15,13 @@ export const options = {
     value: '',
   }),
 
+  label: variable('Label', { value: [''] }),
+  value: variable('Value', { value: [''] }),
+
   labelProperty: property('Label for options', {
     value: '',
     configuration: { condition: showIf('optionType', 'EQ', 'model') },
   }),
-
-  label: variable('Label', { value: [''] }),
-  value: variable('Value', { value: [''] }),
 
   optionType: buttongroup('Option type', [['Model', 'model']], {
     value: 'model',
