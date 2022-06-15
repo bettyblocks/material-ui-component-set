@@ -1,3 +1,10 @@
+## [1.235.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.235.1...v1.235.2) (2022-06-15)
+
+
+### Bug Fixes
+
+* removed setsearchvalue interaction ([8dd1353](https://github.com/bettyblocks/material-ui-component-set/commit/8dd13534baaeb2aa66efcf2e8f428adae56e5710))
+
 ## [1.235.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.235.0...v1.235.1) (2022-06-14)
 
 
