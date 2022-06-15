@@ -40,7 +40,6 @@
       model,
       filter,
       searchProperty,
-      hideSearch,
       orderProperty,
       sortOrder,
       hideRowsPerPage,
@@ -134,7 +133,7 @@
 
     const titleText = useText(title);
     const hasSearchProperty = searchProperty && searchProperty.id;
-    const hasToolbar = titleText || (hasSearchProperty && !hideSearch);
+    const hasToolbar = titleText || hasSearchProperty;
     const elevationLevel = variant === 'flat' ? 0 : elevation;
     const hasLink = linkTo && linkTo.id !== '';
     const toolbarRef = React.createRef();
@@ -714,7 +713,7 @@
           {hasToolbar && (
             <Toolbar ref={toolbarRef} classes={{ root: classes.toolbar }}>
               {titleText && <span className={classes.title}>{titleText}</span>}
-              {hasSearchProperty && !hideSearch && (
+              {hasSearchProperty && (
                 <TextField
                   classes={{ root: classes.searchField }}
                   placeholder={`${useText(
