@@ -25,7 +25,7 @@
       closeOnSelect,
       required: defaultRequired,
       dataComponentAttribute: dataComponentAttributeRaw,
-      disabled,
+      disabled: initialDisabled,
       errorType,
       filter: filterRaw,
       fullWidth,
@@ -68,6 +68,7 @@
     const helperText = useText(helperTextRaw);
     const nameAttribute = useText(nameAttributeRaw);
     const changeContext = useRef(null);
+    const [disabled, setIsDisabled] = useState(initialDisabled);
     const [helper, setHelper] = useState(useText(helperTextRaw));
     const [errorState, setErrorState] = useState(false);
     const dataComponentAttribute =
@@ -450,7 +451,12 @@
       setDebouncedInputValue('');
     });
 
+    B.defineFunction('Reset', () => setValue(initalValue));
+
     B.defineFunction('Refetch', () => refetch());
+
+    B.defineFunction('Enable', () => setIsDisabled(false));
+    B.defineFunction('Disable', () => setIsDisabled(true));
 
     /**
      * @name Filter
