@@ -11,7 +11,7 @@ export interface Configuration {
   label?: string;
   options?: Record<string, OptionProducer>;
 }
-export const drawerBar = (
+export const DrawerBar = (
   config: Configuration,
   descendants: PrefabComponent[] = [],
 ) => {

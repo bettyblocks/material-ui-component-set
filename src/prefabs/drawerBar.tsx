@@ -1,5 +1,5 @@
 import { Icon, prefab } from '@betty-blocks/component-sdk';
-import { drawerBar } from './structures/drawerbar';
+import { DrawerBar } from './structures/Drawerbar';
 import { List } from './structures/List';
 import { ListItem } from './structures/ListItem';
 
@@ -10,5 +10,5 @@ const attr = {
 };
 
 export default prefab('Drawer Sidebar', attr, undefined, [
-  drawerBar({}, [List({}, [ListItem({})])]),
+  DrawerBar({}, [List({}, [ListItem({})])]),
 ]);

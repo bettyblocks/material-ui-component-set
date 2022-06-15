@@ -1,7 +1,7 @@
 import { Icon, prefab, variable } from '@betty-blocks/component-sdk';
 import { Drawer } from './structures/Drawer';
-import { drawerBar } from './structures/drawerbar';
-import { drawerContainer } from './structures/drawerContainer';
+import { DrawerBar } from './structures/Drawerbar';
+import { DrawerContainer } from './structures/DrawerContainer';
 import { List } from './structures/List';
 import { ListItem } from './structures/ListItem';
 import { options } from './structures/ListItem/options';
@@ -18,7 +18,7 @@ options.secondaryText = variable('Secondary text', {
 
 export default prefab('Drawer', attrs, undefined, [
   Drawer({}, [
-    drawerBar({}, [List({}, [ListItem({ options })])]),
-    drawerContainer({}),
+    DrawerBar({}, [List({}, [ListItem({ options })])]),
+    DrawerContainer({}),
   ]),
 ]);

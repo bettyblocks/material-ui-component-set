@@ -11,7 +11,7 @@ export interface Configuration {
   label?: string;
   options?: Record<string, OptionProducer>;
 }
-export const expansionPanel = (
+export const ExpansionPanel = (
   config: Configuration,
   descendants: PrefabComponent[] = [],
 ) => {
