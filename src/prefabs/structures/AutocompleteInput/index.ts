@@ -8,6 +8,7 @@ export interface Configuration {
   options?: Record<string, OptionProducer>;
   adornmentIcon?: string;
   label?: string;
+  inputLabel?: string;
   type?: HTMLInputElement['type'];
 }
 
@@ -23,8 +24,8 @@ export const AutocompleteInput = (
     options.type = updateOption(options.type, { value: config.type });
   }
 
-  if (config.label) {
-    options.label = updateOption(options.label, { value: [config.label] });
+  if (config.inputLabel) {
+    options.label = updateOption(options.label, { value: [config.inputLabel] });
   }
 
   if (config.adornmentIcon) {

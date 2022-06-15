@@ -37,7 +37,6 @@
       model,
       filter,
       searchProperty,
-      hideSearch,
       orderProperty,
       sortOrder,
       labelRowsPerPage,
@@ -129,7 +128,7 @@
 
     const titleText = useText(title);
     const hasSearchProperty = searchProperty && searchProperty.id;
-    const hasToolbar = titleText || (hasSearchProperty && !hideSearch);
+    const hasToolbar = titleText || hasSearchProperty;
     const elevationLevel = variant === 'flat' ? 0 : elevation;
     const hasLink = linkTo && linkTo.id !== '';
     const toolbarRef = React.createRef();
@@ -347,10 +346,6 @@
       } else {
         refetch();
       }
-    });
-
-    B.defineFunction('SetSearchValue', (event) => {
-      setSearch(event.target.value);
     });
 
     useEffect(() => {
@@ -645,7 +640,7 @@
           {hasToolbar && (
             <Toolbar ref={toolbarRef} classes={{ root: classes.toolbar }}>
               {titleText && <span className={classes.title}>{titleText}</span>}
-              {hasSearchProperty && !hideSearch && (
+              {hasSearchProperty && (
                 <TextField
                   classes={{ root: classes.searchField }}
                   placeholder={`${useText(
