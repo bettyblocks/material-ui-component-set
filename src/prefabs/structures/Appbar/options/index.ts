@@ -70,7 +70,7 @@ export const options = {
     },
   }),
   endpoint: endpoint('Page', { value: '' }),
-  appBarVarient: option('CUSTOM', {
+  appBarVariant: option('CUSTOM', {
     label: 'Variant',
     value: 'flat',
     configuration: {
@@ -128,7 +128,7 @@ export const options = {
     },
   }),
   square: toggle('Square', { value: true }),
-  toolbarVarient: option('CUSTOM', {
+  toolbarVariant: option('CUSTOM', {
     label: 'Size',
     value: 'regular',
     configuration: {
