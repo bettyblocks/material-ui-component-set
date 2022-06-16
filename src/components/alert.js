@@ -76,14 +76,21 @@
       return [errorTitle, errorMessage];
     };
 
-    const cleanUpMessage = (message) =>
-      message &&
-      JSON.stringify(message)
-        .replace(/[{}[\]_"]/g, ' ')
-        .replace(/[ ]+/g, ' ')
-        .replace(/ :/g, ':')
-        .replace(/ ,/g, ',')
-        .trim();
+    const cleanUpMessage = (message) => {
+      if (Array.isArray(message)) {
+        return `${message.map((e) => e.replace(/\.$/, '')).join(',')}.`;
+      }
+
+      return (
+        message &&
+        JSON.stringify(message)
+          .replace(/[{}[\]_"]/g, ' ')
+          .replace(/[ ]+/g, ' ')
+          .replace(/ :/g, ':')
+          .replace(/ ,/g, ',')
+          .trim()
+      );
+    };
 
     useEffect(() => {
       B.defineFunction('Show', (showMessage) => {
