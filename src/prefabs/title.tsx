@@ -20,4 +20,4 @@ const attr = {
   ],
 };
 
-export default prefab('Title (TS)', attr, undefined, [Text({}, [])]);
+export default prefab('Title', attr, undefined, [Text({}, [])]);

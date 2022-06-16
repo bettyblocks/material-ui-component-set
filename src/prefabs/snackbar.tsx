@@ -15,4 +15,4 @@ const attr = {
   ],
 };
 
-export default prefab('Snackbar (TS)', attr, undefined, [Snackbar({}, [])]);
+export default prefab('Snackbar', attr, undefined, [Snackbar({}, [])]);

@@ -44,7 +44,7 @@ export const options = {
     },
   }),
   icon: icon('Icon', {
-    value: 'None',
+    value: 'Person', // There is no Icon for the MUI icons yet.
     configuration: {
       condition: showIf('type', 'EQ', 'icon'),
     },

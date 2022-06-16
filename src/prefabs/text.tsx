@@ -14,4 +14,4 @@ options.useInnerHtml = toggle('Display Rich Text', {
   value: false,
 });
 
-export default prefab('Text (TS)', attr, undefined, [Text({ options }, [])]);
+export default prefab('Text', attr, undefined, [Text({ options }, [])]);

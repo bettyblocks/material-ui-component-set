@@ -7,4 +7,4 @@ const attr = {
   keywords: ['Content', 'chip'],
 };
 
-export default prefab('Chip (TS)', attr, undefined, [Chip({}, [])]);
+export default prefab('Chip', attr, undefined, [Chip({}, [])]);

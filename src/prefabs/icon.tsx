@@ -7,4 +7,4 @@ const attributes = {
   keywords: ['Content', 'icon', 'symbol'],
 };
 
-export default prefab('Icon (TS)', attributes, undefined, [TsIcon({})]);
+export default prefab('Icon', attributes, undefined, [TsIcon({})]);

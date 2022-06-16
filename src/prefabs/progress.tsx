@@ -7,4 +7,4 @@ const attr = {
   keywords: ['Content', 'progress', 'bar', 'progressbar'],
 };
 
-export default prefab('Progress Bar (TS)', attr, undefined, [Progress({}, [])]);
+export default prefab('Progress Bar', attr, undefined, [Progress({}, [])]);

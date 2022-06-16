@@ -7,4 +7,4 @@ const attributes = {
   keywords: ['Content', 'media', 'image', 'video', 'iframe', 'picture'],
 };
 
-export default prefab('Media (TS)', attributes, undefined, [Media({})]);
+export default prefab('Media', attributes, undefined, [Media({})]);

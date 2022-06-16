@@ -7,4 +7,4 @@ const attributes = {
   keywords: ['Content', 'avatar', 'profile picture'],
 };
 
-export default prefab('Avatar (TS)', attributes, undefined, [Avatar({})]);
+export default prefab('Avatar', attributes, undefined, [Avatar({})]);

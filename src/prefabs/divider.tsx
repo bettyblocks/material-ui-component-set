@@ -7,4 +7,4 @@ const attr = {
   keywords: ['Content', 'divider', 'hr', 'hairline'],
 };
 
-export default prefab('Divider (TS)', attr, undefined, [Divider({}, [])]);
+export default prefab('Divider', attr, undefined, [Divider({}, [])]);
