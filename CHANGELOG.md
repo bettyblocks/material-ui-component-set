@@ -1,3 +1,15 @@
+# [1.236.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.235.2...v1.236.0) (2022-06-16)
+
+
+### Bug Fixes
+
+* remove onClick interaction for merge conflict ([144a085](https://github.com/bettyblocks/material-ui-component-set/commit/144a085c10fd4c1f47e7f7f9dbcd9d80e8788f7f))
+
+
+### Features
+
+* add interactions triggers to expension panel ([a0141c6](https://github.com/bettyblocks/material-ui-component-set/commit/a0141c61129af6ae7216864c902e5fd8cb20b1ac))
+
 ## [1.235.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.235.1...v1.235.2) (2022-06-15)
 
 
