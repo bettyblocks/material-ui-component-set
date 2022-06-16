@@ -1,3 +1,27 @@
+# [1.237.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.236.0...v1.237.0) (2022-06-16)
+
+
+### Bug Fixes
+
+* autocomplete crashes when related model has no label ([300109e](https://github.com/bettyblocks/material-ui-component-set/commit/300109e71e065e293093a75865bec7a385bd3137))
+* built in error option ([f960212](https://github.com/bettyblocks/material-ui-component-set/commit/f960212f96fb53b40a729fc6446ab6bfa65d6c3a))
+* detect data loading issues ([6d33fbf](https://github.com/bettyblocks/material-ui-component-set/commit/6d33fbfecd02df3fee4c962513245e511ff455a6))
+* hide name attribute option in the autocomplete ([030d4a5](https://github.com/bettyblocks/material-ui-component-set/commit/030d4a56ffab0cc8a0daef05359e524c5b262439))
+* no label selected message ([1fe3879](https://github.com/bettyblocks/material-ui-component-set/commit/1fe387951cf530cf7813db138dc3732ad53e74f0))
+* remove limit from selectInput query ([23651e4](https://github.com/bettyblocks/material-ui-component-set/commit/23651e487a02f45fbbc1943d2b315ed629a455de))
+* rename onActionDone onDone ([9aca92e](https://github.com/bettyblocks/material-ui-component-set/commit/9aca92eb08bf6c8239c693b25302691346ed649d))
+* reorder & rename labels in select and autocomplete ([5433f1d](https://github.com/bettyblocks/material-ui-component-set/commit/5433f1d2050d6cf305bb7241e48e9ef30cc3c3a2))
+
+
+### Features
+
+* add filtering and ordering to select input ([0743655](https://github.com/bettyblocks/material-ui-component-set/commit/0743655ef27636436287ef404699229b1dffc8da))
+* add interactions to autocomplete ([80d24de](https://github.com/bettyblocks/material-ui-component-set/commit/80d24dedd5a27e83cee4eb40a8c65798e1c9b59a))
+* add interactions to select component ([1ea11b5](https://github.com/bettyblocks/material-ui-component-set/commit/1ea11b5d1df0e1e1c086196a682b0d0f471441a9))
+* add label property option to selectInput ([59f2b4a](https://github.com/bettyblocks/material-ui-component-set/commit/59f2b4aaa391218d5f7b92fb74f1da5c5660c619))
+* add single autocomplete input to ActionJS forms ([26cbf20](https://github.com/bettyblocks/material-ui-component-set/commit/26cbf200c72830dcc5608a14e8e1ab2a14862a3b))
+* use property label from model options as default ([268e70f](https://github.com/bettyblocks/material-ui-component-set/commit/268e70fb4778af437996649e29f27950460dc24a))
+
 # [1.236.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.235.2...v1.236.0) (2022-06-16)
 
 
