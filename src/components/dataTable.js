@@ -192,12 +192,14 @@
         event.target ? event.target.value : transformValue(event),
       );
       setInteractionSearchProperty(property ? property.id : '');
+      setPage(0);
     });
 
     B.defineFunction('ResetFilter', () => {
       setInteractionFilter({});
       setInteractionSearchTerm('');
       setInteractionSearchProperty('');
+      setPage(0);
     });
 
     B.defineFunction('setRowsPerPage', (val) => {
@@ -451,6 +453,7 @@
 
     const handleSearch = (event) => {
       setSearch(event.target.value);
+      setPage(0);
     };
 
     const handleRowClick = (endpoint, context) => {
