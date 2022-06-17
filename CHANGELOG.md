@@ -1,3 +1,10 @@
+## [1.237.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.237.0...v1.237.1) (2022-06-17)
+
+
+### Bug Fixes
+
+* broken select component ([c95ed1e](https://github.com/bettyblocks/material-ui-component-set/commit/c95ed1e79ed8bdc49091ac6b7235252055ee156b))
+
 # [1.237.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.236.0...v1.237.0) (2022-06-16)
 
 
