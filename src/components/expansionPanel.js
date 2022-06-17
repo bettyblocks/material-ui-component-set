@@ -22,6 +22,7 @@
       variant,
       elevation,
       dataComponentAttribute,
+      preLoadData,
     } = options;
     const Variant = {
       Title1: 'h1',
@@ -35,6 +36,7 @@
     }[options.titleType || 'Body1'];
 
     const [expanded, setExpanded] = useState(defaultExpanded);
+    const [dataShown, setDataShown] = useState(defaultExpanded || preLoadData);
 
     const closePanel = () => setExpanded(false);
     const openPanel = () => setExpanded(true);
@@ -64,7 +66,17 @@
 
     const onClick = () => {
       if (isDev) return;
+      setDataShown(true);
       togglePanel();
+    };
+
+    const onChange = (_evt, expandedBool) => {
+      B.triggerEvent('onToggle', expandedBool);
+      if (expandedBool) {
+        B.triggerEvent('onExpand');
+        return;
+      }
+      B.triggerEvent('onCollapse');
     };
 
     const panelOptions = {
@@ -75,12 +87,15 @@
       elevation: variant === 'flat' ? 0 : elevation,
       expanded,
       'data-component': useText(dataComponentAttribute) || 'ExpansionPanel',
+      onChange,
     };
 
     const panelSummaryOptions = {
       onClick,
       expandIcon: <Icon name="ExpandMore" />,
     };
+
+    const ShowChilderen = <>{dataShown || isDev ? children : ''}</>;
 
     const ExpansionPanelComponent = (
       <ExpansionPanel {...panelOptions}>
@@ -90,7 +105,7 @@
           </Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails className={classes.panelDetails}>
-          {isEmpty ? PlaceHolder : children}
+          {isEmpty ? PlaceHolder : ShowChilderen}
         </ExpansionPanelDetails>
       </ExpansionPanel>
     );

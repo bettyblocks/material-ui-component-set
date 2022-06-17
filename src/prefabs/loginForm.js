@@ -1834,6 +1834,7 @@
   structure: [
     {
       name: 'Form',
+      label: 'Login form',
       ref: {
         id: '#formId',
       },

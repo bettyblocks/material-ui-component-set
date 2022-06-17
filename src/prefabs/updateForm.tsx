@@ -89,11 +89,15 @@ const updateFormAlertOptions = {
 };
 
 export default prefab('Update Form Beta', attributes, beforeCreate, [
-  component('Form Beta', { options, ref: { id: '#formId' } }, [
-    FormSuccessAlert({
-      options: updateFormAlertOptions,
-      ref: { id: '#alertSuccessId' },
-    }),
-    FormErrorAlert({ ref: { id: '#alertErrorId' } }),
-  ]),
+  component(
+    'Form Beta',
+    { label: 'Update form Beta', options, ref: { id: '#formId' } },
+    [
+      FormSuccessAlert({
+        options: updateFormAlertOptions,
+        ref: { id: '#alertSuccessId' },
+      }),
+      FormErrorAlert({ ref: { id: '#alertErrorId' } }),
+    ],
+  ),
 ]);
