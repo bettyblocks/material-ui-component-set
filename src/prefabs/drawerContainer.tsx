@@ -1,5 +1,5 @@
 import { Icon, prefab } from '@betty-blocks/component-sdk';
-import { drawerContainer } from './structures/drawerContainer';
+import { DrawerContainer } from './structures/DrawerContainer';
 
 const attr = {
   icon: Icon.RowColumnIcon,
@@ -8,5 +8,5 @@ const attr = {
 };
 
 export default prefab('Drawer Container', attr, undefined, [
-  drawerContainer({}, []),
+  DrawerContainer({}, []),
 ]);
