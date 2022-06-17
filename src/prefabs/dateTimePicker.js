@@ -51,6 +51,12 @@
         },
         {
           type: 'TOGGLE',
+          label: 'Disable Icon Button',
+          key: 'iconDisabled',
+          value: false,
+        },
+        {
+          type: 'TOGGLE',
           label: 'Close picker after select',
           key: 'closeOnSelect',
           value: true,

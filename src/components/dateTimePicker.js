@@ -7,6 +7,7 @@
     const {
       autoComplete,
       disabled,
+      iconDisabled,
       error,
       placeholder = [''],
       variant,
@@ -37,6 +38,9 @@
       KeyboardTimePicker,
       KeyboardDatePicker,
       KeyboardDateTimePicker,
+      DatePicker,
+      DateTimePicker,
+      TimePicker,
     } = window.MaterialUI.Pickers;
     const { DateFnsUtils } = window.MaterialUI;
     const { nlLocale, enLocale } = window.MaterialUI.DateLocales;
@@ -47,12 +51,10 @@
     const placeholderText = useText(placeholder);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
     const mounted = useRef(false);
-
     const localeMap = {
       nl: nlLocale,
       en: enLocale,
     };
-
     const {
       id: customModelAttributeId,
       label = [],
@@ -71,22 +73,18 @@
     const required = customModelAttribute ? attributeRequired : defaultRequired;
     const nameAttributeValue = useText(nameAttribute);
     const isValidDate = (date) => date instanceof Date && !isNaN(date);
-
     const convertToDate = (date) => {
       if (isValidDate(date)) {
         const dateString = `${date.getFullYear()}-${String(
           date.getMonth() + 1,
         ).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
-
         return dateString;
       }
       return '';
     };
-
     const changeHandler = (date) => {
       setSelectedDate(date);
     };
-
     useEffect(() => {
       if (mounted.current) {
         let datevalue = selectedDate;
@@ -95,32 +93,27 @@
           B.triggerEvent('onChange', datevalue);
           return;
         }
-
         if (!datevalue) {
           B.triggerEvent('onChange', '');
           return;
         }
-
         if (DateFns.isValid(datevalue)) {
           B.triggerEvent('onChange', datevalue);
         }
       }
     }, [selectedDate]);
-
     useEffect(() => {
       mounted.current = true;
       return () => {
         mounted.current = false;
       };
     }, []);
-
     const setDefaultDate = (defaultFormat, givenFormat) => {
       if (!selectedDate && strDefaultValue) {
         const propDefaultParse = defaultFormat
           ? DateFns.parse(strDefaultValue, defaultFormat)
           : new Date(strDefaultValue);
         const formatDefaultParse = DateFns.parse(strDefaultValue, givenFormat);
-
         if (isValidDate(propDefaultParse)) {
           setSelectedDate(propDefaultParse);
         } else if (isValidDate(formatDefaultParse)) {
@@ -130,19 +123,15 @@
         }
       }
     };
-
     B.defineFunction('Clear', () => setSelectedDate(null));
-
     let DateTimeComponent;
     let format;
     let resultString;
     let use24HourClock = true;
-
     switch (type) {
       case 'date': {
-        DateTimeComponent = KeyboardDatePicker;
+        DateTimeComponent = iconDisabled ? DatePicker : KeyboardDatePicker;
         format = dateFormat || 'dd/MM/yyyy';
-
         setDefaultDate('yyyy-MM-dd', format);
         resultString = isValidDate(selectedDate)
           ? DateFns.format(selectedDate, 'yyyy-MM-dd')
@@ -150,24 +139,22 @@
         break;
       }
       case 'datetime': {
-        DateTimeComponent = KeyboardDateTimePicker;
+        DateTimeComponent = iconDisabled
+          ? DateTimePicker
+          : KeyboardDateTimePicker;
         format = dateTimeFormat || 'dd/MM/yyyy HH:mm:ss';
         use24HourClock = use24HourClockDateTime;
-
         setDefaultDate(null, format);
-
         resultString = isValidDate(selectedDate)
           ? new Date(selectedDate).toISOString()
           : null;
         break;
       }
       case 'time': {
-        DateTimeComponent = KeyboardTimePicker;
+        DateTimeComponent = iconDisabled ? TimePicker : KeyboardTimePicker;
         format = timeFormat || 'HH:mm:ss';
         use24HourClock = use24HourClockTime;
-
         setDefaultDate('HH:mm:ss', format);
-
         resultString = isValidDate(selectedDate)
           ? DateFns.format(selectedDate, 'HH:mm:ss')
           : null;
@@ -175,7 +162,6 @@
       }
       default:
     }
-
     const DateTimeCmp = (
       <DateTimeComponent
         name={nameAttributeValue || customModelAttributeName}
@@ -223,7 +209,6 @@
         clearable={clearable}
       />
     );
-
     return isDev ? (
       <div className={classes.root}>
         <MuiPickersUtilsProvider
@@ -293,7 +278,6 @@
           ],
           zIndex: ({ options: { inputvariant } }) =>
             inputvariant === 'standard' ? 1 : null,
-
           '&.Mui-focused': {
             color: ({ options: { borderFocusColor } }) => [
               style.getColor(borderFocusColor),
