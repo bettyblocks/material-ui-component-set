@@ -50,6 +50,11 @@ export const styles = {
     ...showOn('styles'),
   }),
 
+  backgroundColorChip: color('Background color chip', {
+    value: ThemeColor.LIGHT,
+    ...showOn('styles'),
+  }),
+
   borderColor: color('Border color', {
     value: ThemeColor.ACCENT_1,
     ...showOn('styles'),
@@ -72,6 +77,16 @@ export const styles = {
 
   textColor: color('Text color', {
     value: ThemeColor.BLACK,
+    ...showOn('styles'),
+  }),
+
+  textColorChip: color('Text color chip', {
+    value: ThemeColor.ACCENT_3,
+    ...showOn('styles'),
+  }),
+
+  placeHolderColor: color('Placeholder color', {
+    value: ThemeColor.LIGHT,
     ...showOn('styles'),
   }),
 
