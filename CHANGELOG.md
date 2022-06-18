@@ -1,3 +1,16 @@
+# [1.239.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.238.0...v1.239.0) (2022-06-18)
+
+
+### Bug Fixes
+
+* icon background moves with the page now ([67edac5](https://github.com/bettyblocks/material-ui-component-set/commit/67edac5f98ef02b4ddbc008fa499f5406282cdcf))
+
+
+### Features
+
+* add partial selector to simple dashboard ([f532a48](https://github.com/bettyblocks/material-ui-component-set/commit/f532a48d9cb9bdeb4b151bba518e086d802d916f))
+* update styling page with simple dashboard TMPLT 1413 ([c3bfbf7](https://github.com/bettyblocks/material-ui-component-set/commit/c3bfbf72ec34e23b852f58ce5ffb530de05485ee))
+
 # [1.238.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.237.1...v1.238.0) (2022-06-17)
 
 
