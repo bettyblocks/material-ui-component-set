@@ -11,10 +11,11 @@ export interface Configuration {
   label?: string;
   options?: Record<string, OptionProducer>;
 }
-export const drawerBar = (
+
+export const Conditional = (
   config: Configuration,
   descendants: PrefabComponent[] = [],
 ) => {
   const options = { ...(config.options || defaults) };
-  return component('DrawerSidebar', { options }, descendants);
+  return component('Conditional', { options }, descendants);
 };

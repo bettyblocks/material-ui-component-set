@@ -23,7 +23,7 @@ const beforeCreate = ({
 
   return (
     <CreateFormInputWizard
-      supportedKinds={['LIST']}
+      supportedKinds={['LIST', 'BELONGS_TO']}
       actionVariableOption={actionVariableOption.key}
       labelOptionKey="label"
       nameOptionKey="actionVariableId"

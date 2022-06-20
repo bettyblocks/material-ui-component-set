@@ -11,10 +11,10 @@ export interface Configuration {
   label?: string;
   options?: Record<string, OptionProducer>;
 }
-export const expansionPanel = (
+export const DrawerContainer = (
   config: Configuration,
   descendants: PrefabComponent[] = [],
 ) => {
   const options = { ...(config.options || defaults) };
-  return component('ExpansionPanel', { options }, descendants);
+  return component('DrawerContainer', { options }, descendants);
 };
