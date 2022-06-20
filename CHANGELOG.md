@@ -1,3 +1,10 @@
+## [1.239.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.239.0...v1.239.1) (2022-06-20)
+
+
+### Bug Fixes
+
+* reset pagination when filtering or searching ([10c4472](https://github.com/bettyblocks/material-ui-component-set/commit/10c44720c55804231a7418d8c07d755ac29763a8))
+
 # [1.239.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.238.0...v1.239.0) (2022-06-18)
 
 
