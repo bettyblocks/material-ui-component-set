@@ -1,3 +1,10 @@
+# [1.240.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.239.1...v1.240.0) (2022-06-20)
+
+
+### Features
+
+* navigation category now using ts prefabs ([9d3fcaa](https://github.com/bettyblocks/material-ui-component-set/commit/9d3fcaa0302287aeac0dfdfeb52cda70c474e4cb))
+
 ## [1.239.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.239.0...v1.239.1) (2022-06-20)
 
 
