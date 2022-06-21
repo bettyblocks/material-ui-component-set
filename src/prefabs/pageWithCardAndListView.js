@@ -39,7 +39,7 @@
       variables: { id: modelId },
       skip: !modelId,
     });
-    console.log('teest');
+
     const [stepNumber, setStepNumber] = React.useState(1);
     const [headerPartialId, setHeaderPartialId] = React.useState('');
     const [footerPartialId, setFooterPartialId] = React.useState('');
