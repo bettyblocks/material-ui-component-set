@@ -8,7 +8,7 @@
     'Customize the form fields on the profile page to your needs, and have users upload a profile picture. This template also provides a password page where users can change their passwords.',
   previewUrl: 'https://preview.betty.app/profile-details',
   previewImage:
-    'https://assets.bettyblocks.com/63b1c6ccc6874e0796e5cc5b7e41b3da_assets/files/Page_Template_Profile_Page.png',
+    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_Profile_Page.jpg',
   category: 'LAYOUT',
   beforeCreate: ({
     helpers: { useModelQuery, camelToSnakeCase },

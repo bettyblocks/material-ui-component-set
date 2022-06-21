@@ -8,7 +8,7 @@
     'You can choose between a 403 page for unauthorized access, a 404 page for when a page could not be found or a 500 for an internal server error.',
   previewUrl: 'https://preview.betty.app/404-styled',
   previewImage:
-    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_Errors.png',
+    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_Errors.jpg',
   category: 'LAYOUT',
   beforeCreate: ({
     prefab,
