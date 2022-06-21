@@ -1,5 +1,5 @@
 (() => ({
-  name: 'Page With Homepage Layout',
+  name: 'Page with homepage layout',
   icon: 'ContainerIcon',
   type: 'page',
   description: 'This is a page with a static Homepage-layout.',
@@ -7,7 +7,7 @@
     'This page has a static homepage to spark your interest and show what things are possible with the pagebuilder.',
   previewUrl: 'https://preview.betty.app/homepage',
   previewImage:
-    'https://assets.bettyblocks.com/63b1c6ccc6874e0796e5cc5b7e41b3da_assets/files/Page_Template_Homepage',
+    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_Homepage.jpg',
   category: 'LAYOUT',
   beforeCreate: ({
     prefab,
