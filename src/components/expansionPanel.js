@@ -69,6 +69,16 @@
       setDataShown(true);
       togglePanel();
     };
+
+    const onChange = (_evt, expandedBool) => {
+      B.triggerEvent('onToggle', expandedBool);
+      if (expandedBool) {
+        B.triggerEvent('onExpand');
+        return;
+      }
+      B.triggerEvent('onCollapse');
+    };
+
     const panelOptions = {
       disabled,
       defaultExpanded,
@@ -77,6 +87,7 @@
       elevation: variant === 'flat' ? 0 : elevation,
       expanded,
       'data-component': useText(dataComponentAttribute) || 'ExpansionPanel',
+      onChange,
     };
 
     const panelSummaryOptions = {

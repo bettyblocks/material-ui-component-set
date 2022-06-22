@@ -62,15 +62,6 @@
           },
         },
         {
-          value: '',
-          label: 'Hide built-in search field',
-          key: 'hideSearch',
-          type: 'TOGGLE',
-          configuration: {
-            dependsOn: 'model',
-          },
-        },
-        {
           label: 'Pagination',
           key: 'pagination',
           value: 'never',
