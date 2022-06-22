@@ -8,7 +8,7 @@
     'This dashboard has a configurable data table and some cards containing static data. This to spark your interest and show what things are possible with the Page builder.',
   previewUrl: 'https://preview.betty.app/simple-dashboard',
   previewImage:
-    'https://assets.bettyblocks.com/63b1c6ccc6874e0796e5cc5b7e41b3da_assets/files/Page_Template_Simple_Dashboard',
+    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_Simple_Dashboard.jpg',
   category: 'DATA',
   beforeCreate: ({
     helpers: { useModelQuery },
