@@ -9,16 +9,25 @@ import { options as defaults } from './options';
 export interface Configuration {
   options?: Record<string, OptionProducer>;
   style?: PrefabComponentStyle;
-  ref?: { id: string };
 }
 
-export const Button = (
+export const ActionButton = (
   config: Configuration,
   descendants: PrefabReference[] = [],
 ) => {
   const options = { ...(config.options || defaults) };
   const style = { ...config.style };
-  const ref = config.ref ? { ...config.ref } : undefined;
+  const actions = [
+    {
+      name: '',
+      ref: {
+        id: '#actionId',
+        endpointId: '#endpointId',
+      },
+      useNewRuntime: false,
+      events: [],
+    },
+  ];
 
-  return component('Button', { options, style, ref }, descendants);
+  return component('Button', { options, style, actions }, descendants);
 };
