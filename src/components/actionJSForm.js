@@ -7,6 +7,7 @@
     const { actionId, modelId, filter } = options;
     const { Form, GetOne } = B;
     const formRef = React.createRef();
+    const [where, setWhere] = useState(filter);
 
     const isDev = B.env === 'dev';
 
@@ -33,6 +34,26 @@
     const onActionLoad = (loading) => {
       if (loading) B.triggerEvent('onActionLoad', loading);
     };
+
+    useEffect(() => {
+      B.defineFunction('setFormRecord', (id) => {
+        if (modelId) {
+          const propertyId = B.getIdProperty(modelId);
+
+          setWhere({
+            _and: [
+              {
+                [propertyId.id]: {
+                  eq: id,
+                },
+              },
+            ],
+          });
+        } else {
+          console.error('Unable to set record, no model is selected.');
+        }
+      });
+    });
 
     useEffect(() => {
       B.defineFunction('Submit', () => {
@@ -73,7 +94,7 @@
 
     if (modelId) {
       return (
-        <GetOne modelId={modelId} filter={filter}>
+        <GetOne modelId={modelId} filter={where}>
           <FormComponent />
         </GetOne>
       );
