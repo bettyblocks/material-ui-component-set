@@ -6,4 +6,4 @@ const attrs = {
   category: 'BUTTON',
   keywords: ['Button'],
 };
-export default prefab('Button (TS)', attrs, undefined, [Button({})]);
+export default prefab('Button', attrs, undefined, [Button({})]);

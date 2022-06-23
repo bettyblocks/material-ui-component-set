@@ -1,3 +1,60 @@
+## [1.240.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.240.2...v1.240.3) (2022-06-23)
+
+
+### Bug Fixes
+
+* bump github actions ([65675c1](https://github.com/bettyblocks/material-ui-component-set/commit/65675c16bded2e8bf97be537a5ac308041f9ad81))
+* image with link doesnt render ([ced7d01](https://github.com/bettyblocks/material-ui-component-set/commit/ced7d015c92c1b260b511b0dd44b43d16263fadb))
+
+## [1.240.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.240.1...v1.240.2) (2022-06-22)
+
+
+### Bug Fixes
+
+* preview urls and naming of templates ([c5d891e](https://github.com/bettyblocks/material-ui-component-set/commit/c5d891e9618b9ad9601bcdf4ba11b2b7cc1ce34e))
+* trigger pipelines ([5f1a85c](https://github.com/bettyblocks/material-ui-component-set/commit/5f1a85cc9ef3524fc7fbdd72fcac808e96afd050))
+
+## [1.240.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.240.0...v1.240.1) (2022-06-22)
+
+
+### Bug Fixes
+
+* bump github actions ([958b24f](https://github.com/bettyblocks/material-ui-component-set/commit/958b24f86793d123840407502041bad4d034a474))
+
+# [1.240.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.239.1...v1.240.0) (2022-06-20)
+
+
+### Features
+
+* navigation category now using ts prefabs ([9d3fcaa](https://github.com/bettyblocks/material-ui-component-set/commit/9d3fcaa0302287aeac0dfdfeb52cda70c474e4cb))
+
+## [1.239.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.239.0...v1.239.1) (2022-06-20)
+
+
+### Bug Fixes
+
+* reset pagination when filtering or searching ([10c4472](https://github.com/bettyblocks/material-ui-component-set/commit/10c44720c55804231a7418d8c07d755ac29763a8))
+
+# [1.239.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.238.0...v1.239.0) (2022-06-18)
+
+
+### Bug Fixes
+
+* icon background moves with the page now ([67edac5](https://github.com/bettyblocks/material-ui-component-set/commit/67edac5f98ef02b4ddbc008fa499f5406282cdcf))
+
+
+### Features
+
+* add partial selector to simple dashboard ([f532a48](https://github.com/bettyblocks/material-ui-component-set/commit/f532a48d9cb9bdeb4b151bba518e086d802d916f))
+* update styling page with simple dashboard TMPLT 1413 ([c3bfbf7](https://github.com/bettyblocks/material-ui-component-set/commit/c3bfbf72ec34e23b852f58ce5ffb530de05485ee))
+
+# [1.238.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.237.1...v1.238.0) (2022-06-17)
+
+
+### Features
+
+* converted conditional component to ts ([bb36ab1](https://github.com/bettyblocks/material-ui-component-set/commit/bb36ab1ef66bb5341adcd892f5e770f474d1ba1b))
+
 ## [1.237.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.237.0...v1.237.1) (2022-06-17)
 
 

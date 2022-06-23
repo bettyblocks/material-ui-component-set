@@ -20,13 +20,5 @@ export const Button = (
   const style = { ...config.style };
   const ref = config.ref ? { ...config.ref } : undefined;
 
-  return component(
-    'Button',
-    {
-      options,
-      style,
-      ref,
-    },
-    descendants,
-  );
+  return component('Button', { options, style, ref }, descendants);
 };
