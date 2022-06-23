@@ -4,7 +4,7 @@ import {
   prefab as makePrefab,
   BeforeCreateArgs,
 } from '@betty-blocks/component-sdk';
-import { openPageButton } from './structures/OpenPage';
+import { OpenPageButton } from './structures/OpenPage';
 
 const attrs = {
   icon: Icon.OpenPageIcon,
@@ -128,5 +128,5 @@ const beforeCreate = ({
 };
 
 export default makePrefab('Open Page', attrs, beforeCreate, [
-  openPageButton({}),
+  OpenPageButton({}),
 ]);

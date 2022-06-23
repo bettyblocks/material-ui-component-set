@@ -11,7 +11,7 @@ export interface Configuration {
   style?: PrefabComponentStyle;
 }
 
-export const actionButton = (
+export const ActionButton = (
   config: Configuration,
   descendants: PrefabReference[] = [],
 ) => {
