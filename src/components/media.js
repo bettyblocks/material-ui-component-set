@@ -136,7 +136,7 @@
           component={hasInteralLink ? B.Link : undefined}
           endpoint={hasInteralLink ? linkTo : undefined}
         >
-          {ImageComponent}
+          {ImageComponent()}
         </Link>
       );
     }
