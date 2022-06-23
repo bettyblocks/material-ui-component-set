@@ -183,19 +183,6 @@
       };
     };
 
-    // const {
-    //   id,
-    //   label: labelRaw = [],
-    //   value: valueRaw = [],
-    //   required: defaultRequired = false,
-    // } = customModelAttributeRaw;
-    // const {
-    //   name,
-    //   validations: { required: customAttributeRequired = false } = {},
-    // } = getCustomModelAttribute(id) || {};
-
-    // const required = defaultRequired;
-
     const label = useText(labelRaw);
     const defaultValue = useText(valueRaw, { rawValue: true });
 
@@ -447,12 +434,6 @@
       }
     }
 
-    console.log({
-      runQuery: optionType === 'property' || !valid,
-      optionType,
-      valid,
-    });
-
     const {
       loading,
       error,
@@ -482,8 +463,6 @@
       },
       optionType === 'property' || !valid,
     );
-
-    console.log({ loading, results, error });
 
     if (loading) {
       B.triggerEvent('onLoad', loading);
