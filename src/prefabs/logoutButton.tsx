@@ -82,7 +82,7 @@ const attrs = {
   keywords: ['Form', 'input', 'logout', 'logoutbutton'],
 };
 
-export default makePrefab('Logout button (TS)', attrs, beforeCreate, [
+export default makePrefab('Logout button', attrs, beforeCreate, [
   Button({
     ref: {
       id: '#logoutButton',

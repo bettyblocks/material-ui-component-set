@@ -6,6 +6,4 @@ const attrs = {
   category: 'BUTTON',
   keywords: ['Button'],
 };
-export default prefab('Action Button (TS)', attrs, undefined, [
-  actionButton({}),
-]);
+export default prefab('Action Button', attrs, undefined, [actionButton({})]);
