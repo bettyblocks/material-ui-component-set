@@ -1,3 +1,18 @@
+## [1.240.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.240.1...v1.240.2) (2022-06-22)
+
+
+### Bug Fixes
+
+* preview urls and naming of templates ([c5d891e](https://github.com/bettyblocks/material-ui-component-set/commit/c5d891e9618b9ad9601bcdf4ba11b2b7cc1ce34e))
+* trigger pipelines ([5f1a85c](https://github.com/bettyblocks/material-ui-component-set/commit/5f1a85cc9ef3524fc7fbdd72fcac808e96afd050))
+
+## [1.240.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.240.0...v1.240.1) (2022-06-22)
+
+
+### Bug Fixes
+
+* bump github actions ([958b24f](https://github.com/bettyblocks/material-ui-component-set/commit/958b24f86793d123840407502041bad4d034a474))
+
 # [1.240.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.239.1...v1.240.0) (2022-06-20)
 
 
