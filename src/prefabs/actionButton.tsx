@@ -4,6 +4,6 @@ import { ActionButton } from './structures/ActionButton';
 const attrs = {
   icon: Icon.ButtonIcon,
   category: 'BUTTON',
-  keywords: ['Button'],
+  keywords: ['Button', 'action'],
 };
 export default prefab('Action Button', attrs, undefined, [ActionButton({})]);
