@@ -4,7 +4,7 @@ import {
   prefab as makePrefab,
   BeforeCreateArgs,
 } from '@betty-blocks/component-sdk';
-import { openPageButton } from './structures/openPage';
+import { openPageButton } from './structures/OpenPage';
 
 const attrs = {
   icon: Icon.OpenPageIcon,
