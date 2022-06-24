@@ -202,6 +202,10 @@
     }, [loading]);
 
     useEffect(() => {
+      setCurrentValue(defaultValueText);
+    }, [defaultValueText]);
+
+    useEffect(() => {
       mounted.current = true;
       return () => {
         mounted.current = false;
