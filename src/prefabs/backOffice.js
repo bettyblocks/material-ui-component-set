@@ -16949,7 +16949,7 @@
                                             type: 'TOGGLE',
                                           },
                                           {
-                                            value: 'Transparent',
+                                            value: 'Primary',
                                             label: 'Background color',
                                             key: 'backgroundColor',
                                             type: 'COLOR',
@@ -17344,7 +17344,7 @@
                                                 type: 'COLOR',
                                                 label: 'Text color',
                                                 key: 'textColor',
-                                                value: 'Black',
+                                                value: 'White',
                                                 configuration: {
                                                   condition: {
                                                     type: 'SHOW',
@@ -17445,7 +17445,7 @@
                                                 boxShadow: 'none',
                                                 color: {
                                                   type: 'THEME_COLOR',
-                                                  value: 'medium',
+                                                  value: 'white',
                                                 },
                                                 padding: ['0rem'],
                                               },
@@ -17790,7 +17790,7 @@
                                             type: 'SIZES',
                                           },
                                           {
-                                            value: ['M', 'L', 'M', 'L'],
+                                            value: ['M', 'M', 'M', 'M'],
                                             label: 'Inner space',
                                             key: 'innerSpacing',
                                             type: 'SIZES',
@@ -20916,7 +20916,7 @@
                                             type: 'TOGGLE',
                                           },
                                           {
-                                            value: 'Transparent',
+                                            value: 'Primary',
                                             label: 'Background color',
                                             key: 'backgroundColor',
                                             type: 'COLOR',
@@ -21311,7 +21311,7 @@
                                                 type: 'COLOR',
                                                 label: 'Text color',
                                                 key: 'textColor',
-                                                value: 'Black',
+                                                value: 'White',
                                                 configuration: {
                                                   condition: {
                                                     type: 'SHOW',
@@ -21412,7 +21412,7 @@
                                                 boxShadow: 'none',
                                                 color: {
                                                   type: 'THEME_COLOR',
-                                                  value: 'medium',
+                                                  value: 'white',
                                                 },
                                                 padding: ['0rem'],
                                               },
@@ -21757,7 +21757,7 @@
                                             type: 'SIZES',
                                           },
                                           {
-                                            value: ['M', 'L', 'M', 'L'],
+                                            value: ['M', 'M', 'M', 'M'],
                                             label: 'Inner space',
                                             key: 'innerSpacing',
                                             type: 'SIZES',
@@ -24652,7 +24652,7 @@
                                             type: 'TOGGLE',
                                           },
                                           {
-                                            value: 'Transparent',
+                                            value: 'Primary',
                                             label: 'Background color',
                                             key: 'backgroundColor',
                                             type: 'COLOR',
@@ -25047,7 +25047,7 @@
                                                 type: 'COLOR',
                                                 label: 'Text color',
                                                 key: 'textColor',
-                                                value: 'Black',
+                                                value: 'White',
                                                 configuration: {
                                                   condition: {
                                                     type: 'SHOW',
@@ -25148,7 +25148,7 @@
                                                 boxShadow: 'none',
                                                 color: {
                                                   type: 'THEME_COLOR',
-                                                  value: 'medium',
+                                                  value: 'white',
                                                 },
                                                 padding: ['0rem'],
                                               },
@@ -25493,7 +25493,7 @@
                                             type: 'SIZES',
                                           },
                                           {
-                                            value: ['M', 'L', 'M', 'L'],
+                                            value: ['M', 'M', 'M', 'M'],
                                             label: 'Inner space',
                                             key: 'innerSpacing',
                                             type: 'SIZES',
@@ -40449,6 +40449,15 @@
       ref: {
         targetComponentId: '#drawerSidebar',
         sourceComponentId: '#editCancelButton',
+      },
+      type: 'Custom',
+    },
+    {
+      name: 'Hide',
+      sourceEvent: 'Click',
+      ref: {
+        targetComponentId: '#drawerSidebar',
+        sourceComponentId: '#createCancelButton',
       },
       type: 'Custom',
     },
