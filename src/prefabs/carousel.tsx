@@ -43,7 +43,6 @@ const beforeCreate = ({
         'https://assets.bettyblocks.com/771d40f1fc49403e824cdca2fe025aeb_assets/files/image-carousel-preview',
     },
   ]);
-  const [errorMessage, setErrorMessage] = React.useState('');
 
   const maxImages = images.length < 9;
   return (
@@ -235,13 +234,8 @@ const beforeCreate = ({
             return;
           }
           if (select === 'custom') {
+            structure.descendants = [];
             images.forEach((item) => {
-              if (structure.descendants[0].type !== 'COMPONENT') {
-                setErrorMessage(
-                  `expected component prefab, found ${structure.type}`,
-                );
-                throw new Error(errorMessage);
-              }
               // This currently produces 1 extra carouselImage.
               structure.descendants.push({
                 name: 'CarouselImage',

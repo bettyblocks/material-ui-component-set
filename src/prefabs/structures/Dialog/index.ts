@@ -2,19 +2,23 @@ import {
   component,
   PrefabComponentOption,
   PrefabComponent,
+  PrefabComponentStyle,
 } from '@betty-blocks/component-sdk';
 import { options as defaults } from './options';
 
 type OptionProducer = (key: string) => PrefabComponentOption;
 
 export interface Configuration {
-  label?: string;
   options?: Record<string, OptionProducer>;
+  style?: PrefabComponentStyle;
+  ref?: { id: string };
 }
 export const Dialog = (
   config: Configuration,
   descendants: PrefabComponent[] = [],
 ) => {
   const options = { ...(config.options || defaults) };
-  return component('Dialog', { options }, descendants);
+  const style = { ...config.style };
+  const ref = config.ref ? { ...config.ref } : undefined;
+  return component('Dialog', { options, style, ref }, descendants);
 };

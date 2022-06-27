@@ -5,6 +5,9 @@ import {
   sizes,
   variable,
   font,
+  icon,
+  PrefabInteraction,
+  InteractionType,
 } from '@betty-blocks/component-sdk';
 import { Box } from './structures/Box';
 import { Column } from './structures/Column';
@@ -16,6 +19,29 @@ import { options as rOptions } from './structures/Row/options';
 import { options as cOptions } from './structures/Column/options';
 import { options as bOptions } from './structures/Box/options';
 import { options as tOptions } from './structures/Text/options';
+import { options as buttonOptions } from './structures/Button/options';
+import { Button } from './structures/Button';
+
+const interactions: PrefabInteraction[] = [
+  {
+    name: 'Hide',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#dialog',
+      sourceComponentId: '#closeBtn',
+    },
+    type: InteractionType.Custom,
+  },
+  {
+    name: 'Hide',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#dialog',
+      sourceComponentId: '#cancelBtn',
+    },
+    type: InteractionType.Custom,
+  },
+];
 
 const attr = {
   icon: Icon.DialogIcon,
@@ -29,10 +55,11 @@ const attr = {
     'popover',
     'pop-over',
   ],
+  interactions,
 };
 
 export default prefab('Dialog (TS)', attr, undefined, [
-  Dialog({}, [
+  Dialog({ ref: { id: '#dialog' } }, [
     Paper({}, [
       Row(
         {
@@ -203,6 +230,33 @@ export default prefab('Dialog (TS)', attr, undefined, [
                     },
                     [],
                   ),
+                  Button(
+                    {
+                      ref: { id: '#closeBtn' },
+                      style: {
+                        overwrite: {
+                          backgroundColor: {
+                            type: 'STATIC',
+                            value: 'Transparent',
+                          },
+                          boxShadow: 'none',
+                          color: {
+                            type: 'THEME_COLOR',
+                            value: 'light',
+                          },
+                          padding: ['0rem'],
+                        },
+                      },
+                      options: {
+                        ...buttonOptions,
+                        buttonText: variable('Button text', {
+                          value: [''],
+                        }),
+                        icon: icon('Icon', { value: 'Close' }),
+                      },
+                    },
+                    [],
+                  ),
                 ],
               ),
               Box({}, [
@@ -243,7 +297,31 @@ export default prefab('Dialog (TS)', attr, undefined, [
                     }),
                   },
                 },
-                [],
+                [
+                  Button({
+                    ref: { id: '#cancelBtn' },
+                    style: {
+                      name: 'outline',
+                    },
+                    options: {
+                      ...buttonOptions,
+                      buttonText: variable('Button text', {
+                        value: ['Cancel'],
+                      }),
+                      outerSpacing: sizes('Outer space', {
+                        value: ['0rem', 'M', '0rem', '0rem'],
+                      }),
+                    },
+                  }),
+                  Button({
+                    options: {
+                      ...buttonOptions,
+                      buttonText: variable('Button text', {
+                        value: ['Submit'],
+                      }),
+                    },
+                  }),
+                ],
               ),
             ],
           ),
