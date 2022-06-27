@@ -1,3 +1,16 @@
+# [1.241.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.240.2...v1.241.0) (2022-06-27)
+
+
+### Bug Fixes
+
+* bump github actions ([65675c1](https://github.com/bettyblocks/material-ui-component-set/commit/65675c16bded2e8bf97be537a5ac308041f9ad81))
+* image with link doesnt render ([ced7d01](https://github.com/bettyblocks/material-ui-component-set/commit/ced7d015c92c1b260b511b0dd44b43d16263fadb))
+
+
+### Features
+
+* convert button components to tsx ([cf4d16e](https://github.com/bettyblocks/material-ui-component-set/commit/cf4d16e0f601edbaab0cd5985c6e60e4a9c92404))
+
 ## [1.240.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.240.2...v1.240.3) (2022-06-23)
 
 
