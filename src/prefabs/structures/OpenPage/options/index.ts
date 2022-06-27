@@ -9,7 +9,7 @@ import {
   sizes,
 } from '@betty-blocks/component-sdk';
 import { advanced } from './advanced';
-import { tooltip } from './tooltip';
+import { tooltip } from '../../Button/options/tooltip';
 
 export const options = {
   visible: toggle('Toggle visibility', {
