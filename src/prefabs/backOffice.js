@@ -35819,7 +35819,7 @@
                           },
                         },
                         {
-                          value: ['0rem', 'S', '0rem', '0rem'],
+                          value: ['0rem', '0rem', '0rem', '0rem'],
                           label: 'Outer space',
                           key: 'outerSpacing',
                           type: 'SIZES',
@@ -36069,7 +36069,7 @@
                           },
                         },
                         {
-                          value: ['0rem', 'S', '0rem', '0rem'],
+                          value: ['0rem', '0rem', '0rem', '0rem'],
                           label: 'Outer space',
                           key: 'outerSpacing',
                           type: 'SIZES',
@@ -40221,6 +40221,23 @@
               type: 'Global',
             };
 
+            const setCurrentEditOnDetailsRecord = {
+              name: 'setCurrentRecord',
+              sourceEvent: 'Click',
+              targetOptionName: 'currentRecord',
+              parameters: [
+                {
+                  id: [idProperty.id],
+                  parameter: 'argument',
+                },
+              ],
+              ref: {
+                sourceComponentId: '#detailButton',
+                targetComponentId: '#editForm',
+              },
+              type: 'Global',
+            };
+
             const setCurrentEditRecord = {
               name: 'setCurrentRecord',
               sourceEvent: 'Click',
@@ -40240,6 +40257,7 @@
 
             newPrefab.interactions.push(setCurrentDeleteRecord);
             newPrefab.interactions.push(setCurrentDetailRecord);
+            newPrefab.interactions.push(setCurrentEditOnDetailsRecord);
             newPrefab.interactions.push(setCurrentEditRecord);
 
             if (data && data.model) {
