@@ -11,7 +11,7 @@ export interface Configuration {
   style?: PrefabComponentStyle;
 }
 
-export const openPageButton = (
+export const OpenPageButton = (
   config: Configuration,
   descendants: PrefabReference[] = [],
 ) => {
