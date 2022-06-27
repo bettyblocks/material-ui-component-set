@@ -1,0 +1,11 @@
+import { Icon, prefab } from '@betty-blocks/component-sdk';
+import { Tabs } from './structures/Tabs';
+import { Tab } from './structures/Tab';
+
+const attr = {
+  icon: Icon.TabsIcon,
+  category: 'NAVIGATION',
+  keywords: ['Navigation', 'tabs'],
+};
+
+export default prefab('Tabs', attr, undefined, [Tabs({}, [Tab({}, [])])]);
