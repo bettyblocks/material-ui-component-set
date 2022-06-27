@@ -87,8 +87,8 @@
     const required = customAttributeRequired || defaultRequired;
     const label = useText(labelRaw);
     const defaultValue = useText(valueRaw, { rawValue: true });
-    const initalValue = defaultValue.replace(/\n/g, '');
-    const [value, setValue] = useState(initalValue);
+    const initialValue = defaultValue.replace(/\n/g, '');
+    const [value, setValue] = useState(initialValue);
     const [inputValue, setInputValue] = useState(
       optionType === 'property' ? defaultValue : '',
     );
@@ -557,7 +557,6 @@
 
       return [];
     };
-
     const currentOptions = getOptions();
 
     /*
@@ -616,6 +615,19 @@
       }
       B.triggerEvent('onChange', triggerEventValue, changeContext.current);
     }, [currentValue]);
+
+    useEffect(() => {
+      if (currentOptions.length !== 0) {
+        setValue(initialValue);
+        setInputValue(
+          currentOptions
+            .find((option) => {
+              return option.id === parseInt(initialValue, 10);
+            })
+            [searchProp.name].toString(),
+        );
+      }
+    }, [initialValue]);
 
     // In the first render we want to make sure to convert the default value
     if (!inputValue && currentValue) {
