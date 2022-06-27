@@ -48,6 +48,19 @@
         return getDescendantByRef(refValue, component.descendants);
       }, null);
 
+    const enrichVarObj = (obj) => {
+      const returnObject = obj;
+      if (data && data.model) {
+        const property = data.model.properties.find(
+          (prop) => prop.id === obj.id[0],
+        );
+        if (property) {
+          returnObject.name = `{{ ${data.model.name}.${property.name} }}`;
+        }
+      }
+      return returnObject;
+    };
+
     const capitalize = (s) => {
       if (typeof s !== 'string') return '';
       return s.charAt(0).toUpperCase() + s.slice(1);
@@ -12489,7 +12502,7 @@
                       type: 'VARIABLE',
                       label: 'Content',
                       key: 'content',
-                      value: [{ ...property }],
+                      value: [enrichVarObj({ ...property })],
                       configuration: {
                         as: 'MULTILINE',
                       },
