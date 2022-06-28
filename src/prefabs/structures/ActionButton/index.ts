@@ -17,6 +17,17 @@ export const ActionButton = (
 ) => {
   const options = { ...(config.options || defaults) };
   const style = { ...config.style };
+  const actions = [
+    {
+      name: '',
+      ref: {
+        id: '#actionId',
+        endpointId: '#endpointId',
+      },
+      useNewRuntime: false,
+      events: [],
+    },
+  ];
 
-  return component('Button', { options, style }, descendants);
+  return component('Button', { options, style, actions }, descendants);
 };
