@@ -1,13 +1,16 @@
 import {
-  toggle,
-  variable,
+  hideIf,
   icon,
   option,
-  hideIf,
+  showIf,
   sizes,
+  toggle,
+  variable,
+  action,
+  actionInputObjects,
 } from '@betty-blocks/component-sdk';
+import { tooltip } from '../../Button/options/tooltip';
 import { advanced } from './advanced';
-import { tooltip } from './tooltip';
 
 export const options = {
   visible: toggle('Toggle visibility', {
@@ -16,7 +19,25 @@ export const options = {
       as: 'VISIBILITY',
     },
   }),
-  buttonText: variable('Button text', { value: ['Button'] }),
+  buttonText: variable('Button text', { value: ['Action Button'] }),
+  // #region Action button
+  actionId: action('Action', {
+    ref: {
+      value: '#actionId',
+    },
+    configuration: {
+      apiVersion: 'v1',
+      condition: showIf('linkType', 'EQ', 'action'),
+    },
+  }),
+  actionModels: actionInputObjects('Objects to pass to action', {
+    value: [],
+    configuration: {
+      apiVersion: 'v1',
+      condition: showIf('linkType', 'EQ', 'action'),
+    },
+  }),
+  // #endregion
   fullWidth: toggle('Full width', { value: false }),
   icon: icon('Icon', { value: 'none' }),
   size: option('CUSTOM', {
