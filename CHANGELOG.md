@@ -1,3 +1,130 @@
+# [1.241.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.240.2...v1.241.0) (2022-06-27)
+
+
+### Bug Fixes
+
+* bump github actions ([65675c1](https://github.com/bettyblocks/material-ui-component-set/commit/65675c16bded2e8bf97be537a5ac308041f9ad81))
+* image with link doesnt render ([ced7d01](https://github.com/bettyblocks/material-ui-component-set/commit/ced7d015c92c1b260b511b0dd44b43d16263fadb))
+
+
+### Features
+
+* convert button components to tsx ([cf4d16e](https://github.com/bettyblocks/material-ui-component-set/commit/cf4d16e0f601edbaab0cd5985c6e60e4a9c92404))
+
+## [1.240.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.240.2...v1.240.3) (2022-06-23)
+
+
+### Bug Fixes
+
+* bump github actions ([65675c1](https://github.com/bettyblocks/material-ui-component-set/commit/65675c16bded2e8bf97be537a5ac308041f9ad81))
+* image with link doesnt render ([ced7d01](https://github.com/bettyblocks/material-ui-component-set/commit/ced7d015c92c1b260b511b0dd44b43d16263fadb))
+
+## [1.240.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.240.1...v1.240.2) (2022-06-22)
+
+
+### Bug Fixes
+
+* preview urls and naming of templates ([c5d891e](https://github.com/bettyblocks/material-ui-component-set/commit/c5d891e9618b9ad9601bcdf4ba11b2b7cc1ce34e))
+* trigger pipelines ([5f1a85c](https://github.com/bettyblocks/material-ui-component-set/commit/5f1a85cc9ef3524fc7fbdd72fcac808e96afd050))
+
+## [1.240.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.240.0...v1.240.1) (2022-06-22)
+
+
+### Bug Fixes
+
+* bump github actions ([958b24f](https://github.com/bettyblocks/material-ui-component-set/commit/958b24f86793d123840407502041bad4d034a474))
+
+# [1.240.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.239.1...v1.240.0) (2022-06-20)
+
+
+### Features
+
+* navigation category now using ts prefabs ([9d3fcaa](https://github.com/bettyblocks/material-ui-component-set/commit/9d3fcaa0302287aeac0dfdfeb52cda70c474e4cb))
+
+## [1.239.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.239.0...v1.239.1) (2022-06-20)
+
+
+### Bug Fixes
+
+* reset pagination when filtering or searching ([10c4472](https://github.com/bettyblocks/material-ui-component-set/commit/10c44720c55804231a7418d8c07d755ac29763a8))
+
+# [1.239.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.238.0...v1.239.0) (2022-06-18)
+
+
+### Bug Fixes
+
+* icon background moves with the page now ([67edac5](https://github.com/bettyblocks/material-ui-component-set/commit/67edac5f98ef02b4ddbc008fa499f5406282cdcf))
+
+
+### Features
+
+* add partial selector to simple dashboard ([f532a48](https://github.com/bettyblocks/material-ui-component-set/commit/f532a48d9cb9bdeb4b151bba518e086d802d916f))
+* update styling page with simple dashboard TMPLT 1413 ([c3bfbf7](https://github.com/bettyblocks/material-ui-component-set/commit/c3bfbf72ec34e23b852f58ce5ffb530de05485ee))
+
+# [1.238.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.237.1...v1.238.0) (2022-06-17)
+
+
+### Features
+
+* converted conditional component to ts ([bb36ab1](https://github.com/bettyblocks/material-ui-component-set/commit/bb36ab1ef66bb5341adcd892f5e770f474d1ba1b))
+
+## [1.237.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.237.0...v1.237.1) (2022-06-17)
+
+
+### Bug Fixes
+
+* broken select component ([c95ed1e](https://github.com/bettyblocks/material-ui-component-set/commit/c95ed1e79ed8bdc49091ac6b7235252055ee156b))
+
+# [1.237.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.236.0...v1.237.0) (2022-06-16)
+
+
+### Bug Fixes
+
+* autocomplete crashes when related model has no label ([300109e](https://github.com/bettyblocks/material-ui-component-set/commit/300109e71e065e293093a75865bec7a385bd3137))
+* built in error option ([f960212](https://github.com/bettyblocks/material-ui-component-set/commit/f960212f96fb53b40a729fc6446ab6bfa65d6c3a))
+* detect data loading issues ([6d33fbf](https://github.com/bettyblocks/material-ui-component-set/commit/6d33fbfecd02df3fee4c962513245e511ff455a6))
+* hide name attribute option in the autocomplete ([030d4a5](https://github.com/bettyblocks/material-ui-component-set/commit/030d4a56ffab0cc8a0daef05359e524c5b262439))
+* no label selected message ([1fe3879](https://github.com/bettyblocks/material-ui-component-set/commit/1fe387951cf530cf7813db138dc3732ad53e74f0))
+* remove limit from selectInput query ([23651e4](https://github.com/bettyblocks/material-ui-component-set/commit/23651e487a02f45fbbc1943d2b315ed629a455de))
+* rename onActionDone onDone ([9aca92e](https://github.com/bettyblocks/material-ui-component-set/commit/9aca92eb08bf6c8239c693b25302691346ed649d))
+* reorder & rename labels in select and autocomplete ([5433f1d](https://github.com/bettyblocks/material-ui-component-set/commit/5433f1d2050d6cf305bb7241e48e9ef30cc3c3a2))
+
+
+### Features
+
+* add filtering and ordering to select input ([0743655](https://github.com/bettyblocks/material-ui-component-set/commit/0743655ef27636436287ef404699229b1dffc8da))
+* add interactions to autocomplete ([80d24de](https://github.com/bettyblocks/material-ui-component-set/commit/80d24dedd5a27e83cee4eb40a8c65798e1c9b59a))
+* add interactions to select component ([1ea11b5](https://github.com/bettyblocks/material-ui-component-set/commit/1ea11b5d1df0e1e1c086196a682b0d0f471441a9))
+* add label property option to selectInput ([59f2b4a](https://github.com/bettyblocks/material-ui-component-set/commit/59f2b4aaa391218d5f7b92fb74f1da5c5660c619))
+* add single autocomplete input to ActionJS forms ([26cbf20](https://github.com/bettyblocks/material-ui-component-set/commit/26cbf200c72830dcc5608a14e8e1ab2a14862a3b))
+* use property label from model options as default ([268e70f](https://github.com/bettyblocks/material-ui-component-set/commit/268e70fb4778af437996649e29f27950460dc24a))
+
+# [1.236.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.235.2...v1.236.0) (2022-06-16)
+
+
+### Bug Fixes
+
+* remove onClick interaction for merge conflict ([144a085](https://github.com/bettyblocks/material-ui-component-set/commit/144a085c10fd4c1f47e7f7f9dbcd9d80e8788f7f))
+
+
+### Features
+
+* add interactions triggers to expension panel ([a0141c6](https://github.com/bettyblocks/material-ui-component-set/commit/a0141c61129af6ae7216864c902e5fd8cb20b1ac))
+
+## [1.235.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.235.1...v1.235.2) (2022-06-15)
+
+
+### Bug Fixes
+
+* removed setsearchvalue interaction ([8dd1353](https://github.com/bettyblocks/material-ui-component-set/commit/8dd13534baaeb2aa66efcf2e8f428adae56e5710))
+
+## [1.235.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.235.0...v1.235.1) (2022-06-14)
+
+
+### Bug Fixes
+
+* show multiple error messages ([e957430](https://github.com/bettyblocks/material-ui-component-set/commit/e957430fd1a149fe2a28f20d31d120be924add63))
+
 # [1.235.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.234.2...v1.235.0) (2022-06-09)
 
 

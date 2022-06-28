@@ -8,7 +8,7 @@
     'It takes a few clicks to set up your register page. Connect your model to the form and feel free to customize your image to your liking.',
   previewUrl: 'https://preview.betty.app/register',
   previewImage:
-    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_Register.png',
+    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_Register.jpg',
   category: 'LAYOUT',
   beforeCreate: ({
     prefab,
