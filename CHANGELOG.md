@@ -1,3 +1,12 @@
+## [1.241.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.241.0...v1.241.1) (2022-06-28)
+
+
+### Bug Fixes
+
+* bump cli ([201ced3](https://github.com/bettyblocks/material-ui-component-set/commit/201ced31127591d216b7a821d89d0ca228e17b70))
+* bump sdk ([512a240](https://github.com/bettyblocks/material-ui-component-set/commit/512a240547eed2aff8a23a95031ab9dbe5097128))
+* reset actionButton to js again as it was broken ([6e7156c](https://github.com/bettyblocks/material-ui-component-set/commit/6e7156ce479180ad36a62246478b35b7dd6ef6e2))
+
 # [1.241.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.240.2...v1.241.0) (2022-06-27)
 
 
