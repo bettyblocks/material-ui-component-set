@@ -1,3 +1,10 @@
+## [1.241.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.241.1...v1.241.2) (2022-06-28)
+
+
+### Bug Fixes
+
+* added interaction and fixed button spacing ([5b24858](https://github.com/bettyblocks/material-ui-component-set/commit/5b24858edb61f58723d94e66698c42f772beac5e))
+
 ## [1.241.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.241.0...v1.241.1) (2022-06-28)
 
 
