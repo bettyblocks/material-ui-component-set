@@ -58,7 +58,7 @@ const attr = {
   interactions,
 };
 
-export default prefab('Dialog (TS)', attr, undefined, [
+export default prefab('Dialog', attr, undefined, [
   Dialog({ ref: { id: '#dialog' } }, [
     Paper({}, [
       Row(

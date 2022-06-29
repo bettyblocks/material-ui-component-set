@@ -1,7 +1,6 @@
 import {
   color,
   endpoint,
-  Icon,
   icon,
   option,
   showIf,
@@ -14,7 +13,7 @@ import { badge } from './badge';
 import { advanced } from './advanced';
 
 export const options = {
-  icon: icon('Icon', { value: Icon.IconIcon }), // There is no Icon called 'AcUnit' yet.
+  icon: icon('Icon', { value: 'AcUnit' }),
   size: size('Size', { value: 'S' }),
   color: color('Color', { value: ThemeColor.BLACK }),
   linkType: option('CUSTOM', {
