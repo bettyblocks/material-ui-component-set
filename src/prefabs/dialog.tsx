@@ -8,6 +8,7 @@ import {
   icon,
   PrefabInteraction,
   InteractionType,
+  hideIf,
 } from '@betty-blocks/component-sdk';
 import { Box } from './structures/Box';
 import { Column } from './structures/Column';
@@ -251,6 +252,20 @@ export default prefab('Dialog', attr, undefined, [
                         ...buttonOptions,
                         buttonText: variable('Button text', {
                           value: [''],
+                        }),
+                        size: option('CUSTOM', {
+                          value: 'medium',
+                          label: 'Icon size',
+                          configuration: {
+                            as: 'BUTTONGROUP',
+                            dataType: 'string',
+                            allowedInput: [
+                              { name: 'Small', value: 'small' },
+                              { name: 'Medium', value: 'medium' },
+                              { name: 'Large', value: 'large' },
+                            ],
+                            condition: hideIf('icon', 'EQ', 'none'),
+                          },
                         }),
                         icon: icon('Icon', { value: 'Close' }),
                       },
