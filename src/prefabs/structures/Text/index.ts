@@ -9,14 +9,15 @@ import { options as defaults } from './options';
 export interface Configuration {
   options?: Record<string, OptionProducer>;
   style?: PrefabComponentStyle;
+  ref?: { id: string };
 }
 
-export const Box = (
+export const Text = (
   config: Configuration,
   descendants: PrefabReference[] = [],
 ) => {
   const options = { ...(config.options || defaults) };
   const style = { ...config.style };
-
-  return component('Box', { options, style }, descendants);
+  const ref = config.ref ? { ...config.ref } : undefined;
+  return component('Text', { options, ref, style }, descendants);
 };

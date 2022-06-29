@@ -11,12 +11,12 @@ export interface Configuration {
   style?: PrefabComponentStyle;
 }
 
-export const Box = (
+export const Carousel = (
   config: Configuration,
   descendants: PrefabReference[] = [],
 ) => {
   const options = { ...(config.options || defaults) };
   const style = { ...config.style };
 
-  return component('Box', { options, style }, descendants);
+  return component('Carousel', { options, style }, descendants);
 };
