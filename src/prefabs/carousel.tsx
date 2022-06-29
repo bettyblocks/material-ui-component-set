@@ -328,6 +328,6 @@ const beforeCreate = ({
     </>
   );
 };
-export default makePrefab('Carousel (TS)', attr, beforeCreate, [
+export default makePrefab('Carousel', attr, beforeCreate, [
   Carousel({}, [CarouselImage({})]),
 ]);
