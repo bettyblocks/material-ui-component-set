@@ -468,8 +468,8 @@
           padding: 8,
         },
         '& .MuiMobileStepper-dot': {
-          backgroundColor: ({ options: { incativeDotColor } }) => [
-            style.getColor(incativeDotColor),
+          backgroundColor: ({ options: { inactiveDotColor } }) => [
+            style.getColor(inactiveDotColor),
             '!important',
           ],
           width: '12px',
