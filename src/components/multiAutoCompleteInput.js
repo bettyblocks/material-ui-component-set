@@ -32,7 +32,6 @@
       dataComponentAttribute: dataComponentAttributeRaw,
       disabled,
       errorType,
-      value: valueRaw,
       label: labelRaw,
       labelProperty: labelPropertyId = '',
       filter: filterRaw,
@@ -40,6 +39,7 @@
       helperText: helperTextRaw,
       hideLabel,
       margin,
+      model: modelId,
       required,
       nameAttribute: nameAttributeRaw,
       optionType,
@@ -104,10 +104,6 @@
     const modelProperty = getProperty(actionProperty.modelProperty) || {};
 
     const labelProperty = getProperty(labelPropertyId) || {};
-
-    const { modelId: propertyModelId } = modelProperty;
-
-    const modelId = modelProperty.referenceModelId || propertyModelId;
 
     const model = getModel(modelId);
     const defaultLabelProperty = getProperty(model.labelPropertyId || '') || {};
@@ -183,32 +179,9 @@
       };
     };
 
-    // const {
-    //   id,
-    //   label: labelRaw = [],
-    //   value: valueRaw = [],
-    //   required: defaultRequired = false,
-    // } = customModelAttributeRaw;
-    // const {
-    //   name,
-    //   validations: { required: customAttributeRequired = false } = {},
-    // } = getCustomModelAttribute(id) || {};
-
-    // const required = defaultRequired;
-
     const label = useText(labelRaw);
-    const defaultValue = useText(valueRaw, { rawValue: true });
 
-    let initalValue = defaultValue.replace(/\n/g, '');
-
-    if (defaultValue.trim() === '') {
-      initalValue = [];
-    } else {
-      initalValue = defaultValue
-        .trim()
-        .split(',')
-        .map((x) => x.trim());
-    }
+    const initalValue = [];
 
     /*
      * Selected value of the autocomplete.
@@ -447,12 +420,6 @@
       }
     }
 
-    console.log({
-      runQuery: optionType === 'property' || !valid,
-      optionType,
-      valid,
-    });
-
     const {
       loading,
       error,
@@ -482,8 +449,6 @@
       },
       optionType === 'property' || !valid,
     );
-
-    console.log({ loading, results, error });
 
     if (loading) {
       B.triggerEvent('onLoad', loading);
@@ -562,7 +527,7 @@
       }
 
       if (isDev) {
-        designTimeValue = defaultValue;
+        designTimeValue = '';
       }
 
       return (
