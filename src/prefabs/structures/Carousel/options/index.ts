@@ -51,12 +51,14 @@ export const options = {
     value: {},
     configuration: {
       dependsOn: 'model',
+      condition: showIf('select', 'EQ', 'model'),
     },
   }),
   orderProperty: property('Order by', {
     value: '',
     configuration: {
       dependsOn: 'model',
+      condition: showIf('select', 'EQ', 'model'),
     },
   }),
   sortOrder: option('CUSTOM', {

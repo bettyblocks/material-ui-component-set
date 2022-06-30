@@ -1,3 +1,15 @@
+# [1.242.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.241.2...v1.242.0) (2022-06-29)
+
+
+### Bug Fixes
+
+* fixed icon and updated dialog ([62a66e0](https://github.com/bettyblocks/material-ui-component-set/commit/62a66e042bd01cc80068f0665cc28d5f0d0d4f59))
+
+
+### Features
+
+* add dialog prefab and solved carousel ([9cbac52](https://github.com/bettyblocks/material-ui-component-set/commit/9cbac528e6b5555d0e0217d6dde3fe3d90b11f0d))
+
 ## [1.241.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.241.1...v1.241.2) (2022-06-28)
 
 
