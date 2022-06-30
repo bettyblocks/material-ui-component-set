@@ -3357,19 +3357,10 @@
                                     },
                                   },
                                   {
-                                    value: titleProperty || '',
+                                    value: '',
                                     label: 'Search on property',
                                     key: 'searchProperty',
                                     type: 'PROPERTY',
-                                    configuration: {
-                                      dependsOn: 'model',
-                                    },
-                                  },
-                                  {
-                                    value: 'true',
-                                    label: 'Hide built-in search field',
-                                    key: 'hideSearch',
-                                    type: 'TOGGLE',
                                     configuration: {
                                       dependsOn: 'model',
                                     },
@@ -3724,7 +3715,7 @@
                                             type: 'SIZE',
                                             label: 'Width',
                                             key: 'width',
-                                            value: '274px',
+                                            value: '100%',
                                             configuration: {
                                               as: 'UNIT',
                                             },
