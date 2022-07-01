@@ -14,15 +14,22 @@ import { styles } from './styles';
 import { validation } from './validation';
 
 export const options = {
+<<<<<<< Updated upstream
   model: model('Related Model', {
     value: '',
     // configuration: { condition: showIf('model', 'EQ', 'never') },
   }),
+=======
+>>>>>>> Stashed changes
   actionProperty: option('ACTION_JS_PROPERTY', {
     label: 'Property',
     value: '',
   }),
   label: variable('Label', { value: [] }),
+<<<<<<< Updated upstream
+=======
+  value: variable('Value', { value: [] }),
+>>>>>>> Stashed changes
   labelProperty: property('Label for options', {
     value: '',
     configuration: { condition: showIf('optionType', 'EQ', 'model') },
