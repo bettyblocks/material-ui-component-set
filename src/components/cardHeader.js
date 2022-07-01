@@ -7,17 +7,17 @@
     const { env, useText } = B;
     const isDev = env === 'dev';
     const { CardHeader, Avatar } = window.MaterialUI.Core;
-    const { avatar, avatarType, title, subheader, dataComponentAttribute } =
+    const { avatar, avatarType, title, subHeader, dataComponentAttribute } =
       options;
 
     const avatarSource = useText(avatar);
     const avatarTitle = useText(title);
-    const avatarSubheader = useText(subheader);
+    const avatarSubheader = useText(subHeader);
     const AvatarImage = <Avatar alt="" src={avatarSource} />;
     const AvatarText = <Avatar>{avatarSource}</Avatar>;
     const AvatarComponent = avatarType === 'text' ? AvatarText : AvatarImage;
 
-    const isEmpty = !avatar && !title.length && !subheader.length;
+    const isEmpty = !avatar && !title.length && !subHeader.length;
     const isPristine = isEmpty && isDev;
 
     const CardHeaderComponent = (

@@ -1,3 +1,49 @@
+# [1.243.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.242.0...v1.243.0) (2022-07-01)
+
+
+### Bug Fixes
+
+* update actionbutton options error ([1dcff62](https://github.com/bettyblocks/material-ui-component-set/commit/1dcff62ed65bab5bcc499ee07a5b2040dd8d246c))
+
+
+### Features
+
+* actionbutton component to tsx ([e9ae197](https://github.com/bettyblocks/material-ui-component-set/commit/e9ae197c609aba41bef0f9a1f85e02ae9e8b8df0))
+
+
+### Reverts
+
+* Revert "chore: remove ts file" ([6741386](https://github.com/bettyblocks/material-ui-component-set/commit/674138668e8bf16dcc1b2a72cdbb439fb91efba2))
+* Revert "fix: reset actionButton to js again as it was broken" ([d424419](https://github.com/bettyblocks/material-ui-component-set/commit/d424419387ccaff16d84d5ee18ea7f9d34e7102f))
+
+# [1.242.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.241.2...v1.242.0) (2022-06-29)
+
+
+### Bug Fixes
+
+* fixed icon and updated dialog ([62a66e0](https://github.com/bettyblocks/material-ui-component-set/commit/62a66e042bd01cc80068f0665cc28d5f0d0d4f59))
+
+
+### Features
+
+* add dialog prefab and solved carousel ([9cbac52](https://github.com/bettyblocks/material-ui-component-set/commit/9cbac528e6b5555d0e0217d6dde3fe3d90b11f0d))
+
+## [1.241.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.241.1...v1.241.2) (2022-06-28)
+
+
+### Bug Fixes
+
+* added interaction and fixed button spacing ([5b24858](https://github.com/bettyblocks/material-ui-component-set/commit/5b24858edb61f58723d94e66698c42f772beac5e))
+
+## [1.241.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.241.0...v1.241.1) (2022-06-28)
+
+
+### Bug Fixes
+
+* bump cli ([201ced3](https://github.com/bettyblocks/material-ui-component-set/commit/201ced31127591d216b7a821d89d0ca228e17b70))
+* bump sdk ([512a240](https://github.com/bettyblocks/material-ui-component-set/commit/512a240547eed2aff8a23a95031ab9dbe5097128))
+* reset actionButton to js again as it was broken ([6e7156c](https://github.com/bettyblocks/material-ui-component-set/commit/6e7156ce479180ad36a62246478b35b7dd6ef6e2))
+
 # [1.241.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.240.2...v1.241.0) (2022-06-27)
 
 
