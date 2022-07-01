@@ -3357,19 +3357,10 @@
                                     },
                                   },
                                   {
-                                    value: titleProperty || '',
+                                    value: '',
                                     label: 'Search on property',
                                     key: 'searchProperty',
                                     type: 'PROPERTY',
-                                    configuration: {
-                                      dependsOn: 'model',
-                                    },
-                                  },
-                                  {
-                                    value: 'true',
-                                    label: 'Hide built-in search field',
-                                    key: 'hideSearch',
-                                    type: 'TOGGLE',
                                     configuration: {
                                       dependsOn: 'model',
                                     },
@@ -13436,7 +13427,6 @@
           if (titleProperty.id) {
             dataList.descendants[0].descendants[0].descendants[0].descendants[0].descendants[1].descendants[0].descendants[0].descendants[0].descendants[0].options[0].value =
               [enrichVarObj(titleProperty)];
-            dataList.options[4].value = titleProperty.id;
             newPrefab.interactions.push({
               name: 'Filter',
               sourceEvent: 'onChange',
