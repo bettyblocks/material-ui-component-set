@@ -13,12 +13,12 @@ export interface Configuration {
   style?: PrefabComponentStyle;
   ref?: { id: string };
 }
-export const ListItem = (
+export const DataList = (
   config: Configuration,
   descendants: PrefabComponent[] = [],
 ) => {
   const options = { ...(config.options || defaults) };
   const style = { ...config.style };
   const ref = config.ref ? { ...config.ref } : undefined;
-  return component('ListItem', { options, style, ref }, descendants);
+  return component('DataList', { options, style, ref }, descendants);
 };
