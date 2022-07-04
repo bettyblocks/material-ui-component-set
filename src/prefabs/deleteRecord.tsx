@@ -119,7 +119,8 @@ const beforeCreate = ({
             '#submitBtn',
             structure.descendants,
           );
-          console.log(mySubtmitButton);
+          // TODO: Once component-sdk is available in the beforeCreate
+          // make use of the tsx options
           mySubtmitButton.options[3] = {
             value: [modelId],
             label: 'Objects to pass to action',
@@ -137,7 +138,7 @@ const beforeCreate = ({
           };
           if (!newPrefab.variables) {
             throw new Error(
-              'the prefab does not have any variables available!',
+              'the prefab does not have any variables available.',
             );
           }
           newPrefab.variables[0].options = { modelId };
