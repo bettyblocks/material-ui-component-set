@@ -10,6 +10,8 @@
       label: 'outer wrapper',
       options: [
         {
+          key: '0',
+          type: 'LINKED_OPTION',
           ref: {
             value: {
               componentId: '#componentId1',
@@ -18,6 +20,8 @@
           },
         },
         {
+          key: '1',
+          type: 'LINKED_OPTION',
           ref: {
             value: {
               componentId: '#componentId2',
@@ -308,6 +312,8 @@
                   label: 'inner wrapper',
                   options: [
                     {
+                      key: '0',
+                      type: 'LINKED_OPTION',
                       ref: {
                         value: {
                           componentId: '#componentId3',
