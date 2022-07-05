@@ -119,8 +119,7 @@ const beforeCreate = ({
             '#submitBtn',
             structure.descendants,
           );
-          // TODO: Once component-sdk is available in the beforeCreate
-          // make use of the tsx options
+          // TODO: Stop making use of the JSX code.
           mySubtmitButton.options[3] = {
             value: [modelId],
             label: 'Objects to pass to action',
