@@ -1,26 +1,36 @@
 (() => ({
-  name: '3 Column Wrapper',
+  name: 'InnerWrapperPage',
   icon: 'RowColumnIcon',
   category: 'LAYOUT',
+  type: 'page',
   keywords: ['Layout', 'column', 'columns', '1'],
   structure: [
     {
       type: 'WRAPPER',
       label: 'outer wrapper',
-      // TODO support linked opts
-      // options: [
-      //   {
-      //     type: 'LINKED',
-      //     value: {
-      //       ref: {
-      //         componentId: '#componentId1',
-      //         optionId: '#componentId1OptionId1',
-      //       },
-      //     },
-      //   },
-      // ],
+      options: [
+        {
+          ref: {
+            value: {
+              componentId: '#componentId1',
+              optionId: '#componentId1OptionId1',
+            },
+          },
+        },
+        {
+          ref: {
+            value: {
+              componentId: '#componentId2',
+              optionId: '#componentId2optionId1',
+            },
+          },
+        },
+      ],
       descendants: [
         {
+          ref: {
+            id: '#componentId1',
+          },
           name: 'Row',
           options: [
             {
@@ -50,6 +60,9 @@
               },
             },
             {
+              ref: {
+                id: '#componentId1OptionId1',
+              },
               value: 'transparent',
               label: 'Background color',
               key: 'backgroundColor',
@@ -84,9 +97,15 @@
           ],
           descendants: [
             {
+              ref: {
+                id: '#componentId2',
+              },
               name: 'Column',
               options: [
                 {
+                  ref: {
+                    id: '#componentId2optionId1',
+                  },
                   label: 'Toggle visibility',
                   key: 'visible',
                   value: true,
@@ -287,6 +306,16 @@
                 {
                   type: 'WRAPPER',
                   label: 'inner wrapper',
+                  options: [
+                    {
+                      ref: {
+                        value: {
+                          componentId: '#componentId3',
+                          optionId: '#componentId3OptionId1',
+                        },
+                      },
+                    },
+                  ],
                   descendants: [
                     {
                       name: 'Row',
@@ -553,9 +582,15 @@
                           ],
                           descendants: [
                             {
+                              ref: {
+                                id: '#componentId3',
+                              },
                               name: 'Text',
                               options: [
                                 {
+                                  ref: {
+                                    id: '#componentId3OptionId1',
+                                  },
                                   type: 'VARIABLE',
                                   label: 'Content',
                                   key: 'content',
@@ -606,8 +641,14 @@
                                     as: 'BUTTONGROUP',
                                     dataType: 'string',
                                     allowedInput: [
-                                      { name: 'Internal page', value: 'internal' },
-                                      { name: 'External page', value: 'external' },
+                                      {
+                                        name: 'Internal page',
+                                        value: 'internal',
+                                      },
+                                      {
+                                        name: 'External page',
+                                        value: 'external',
+                                      },
                                     ],
                                   },
                                 },
@@ -645,7 +686,8 @@
                                   key: 'linkToExternal',
                                   type: 'VARIABLE',
                                   configuration: {
-                                    placeholder: 'Starts with https:// or http://',
+                                    placeholder:
+                                      'Starts with https:// or http://',
                                     condition: {
                                       type: 'SHOW',
                                       option: 'linkType',
@@ -723,11 +765,11 @@
                                 },
                               ],
                               descendants: [],
-                            }
+                            },
                           ],
                         },
                       ],
-                    }
+                    },
                   ],
                 },
               ],
