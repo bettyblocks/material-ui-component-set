@@ -1,3 +1,28 @@
+# [1.244.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.243.0...v1.244.0) (2022-07-04)
+
+
+### Features
+
+* convert card component prefabs to TSX ([b6927cf](https://github.com/bettyblocks/material-ui-component-set/commit/b6927cff526be5458de8d272cdacc2dae48fb7df))
+
+# [1.243.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.242.0...v1.243.0) (2022-07-01)
+
+
+### Bug Fixes
+
+* update actionbutton options error ([1dcff62](https://github.com/bettyblocks/material-ui-component-set/commit/1dcff62ed65bab5bcc499ee07a5b2040dd8d246c))
+
+
+### Features
+
+* actionbutton component to tsx ([e9ae197](https://github.com/bettyblocks/material-ui-component-set/commit/e9ae197c609aba41bef0f9a1f85e02ae9e8b8df0))
+
+
+### Reverts
+
+* Revert "chore: remove ts file" ([6741386](https://github.com/bettyblocks/material-ui-component-set/commit/674138668e8bf16dcc1b2a72cdbb439fb91efba2))
+* Revert "fix: reset actionButton to js again as it was broken" ([d424419](https://github.com/bettyblocks/material-ui-component-set/commit/d424419387ccaff16d84d5ee18ea7f9d34e7102f))
+
 # [1.242.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.241.2...v1.242.0) (2022-06-29)
 
 

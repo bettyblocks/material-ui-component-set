@@ -1,22 +1,21 @@
 import {
   component,
-  PrefabReference,
-  OptionProducer,
-  PrefabComponentStyle,
+  PrefabComponentOption,
+  PrefabComponent,
 } from '@betty-blocks/component-sdk';
 import { options as defaults } from './options';
 
+type OptionProducer = (key: string) => PrefabComponentOption;
+
 export interface Configuration {
+  label?: string;
   options?: Record<string, OptionProducer>;
-  style?: PrefabComponentStyle;
 }
 
-export const ActionButton = (
+export const Card = (
   config: Configuration,
-  descendants: PrefabReference[] = [],
+  descendants: PrefabComponent[] = [],
 ) => {
   const options = { ...(config.options || defaults) };
-  const style = { ...config.style };
-
-  return component('Button', { options, style }, descendants);
+  return component('Card', { options }, descendants);
 };
