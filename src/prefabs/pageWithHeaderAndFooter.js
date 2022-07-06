@@ -4211,7 +4211,7 @@
 
     return (
       <>
-        <Header onClose={close} title="Configure top menu and footer" />
+        <Header onClose={close} title="Configure header and footer" />
 
         <Content>
           <Box pad={{ bottom: '15px' }}>
@@ -4262,7 +4262,7 @@
           </Box>
         </Content>
         <Footer
-          onClick={close}
+          onClose={close}
           onSave={() => {
             const newPrefab = { ...prefab };
 

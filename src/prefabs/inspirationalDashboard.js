@@ -43848,10 +43848,7 @@
 
     return (
       <>
-        <Header
-          onClose={close}
-          title="Configure your top menu or footer partials"
-        />
+        <Header onClose={close} title="Configure inspirational dashboard" />
         <Content>
           <Box pad={{ bottom: '15px' }}>
             <Box pad={{ bottom: '15px' }}>
@@ -43901,7 +43898,7 @@
           </Box>
         </Content>
         <Footer
-          onClick={close}
+          onClose={close}
           onSave={() => {
             const newPrefab = { ...prefab };
 

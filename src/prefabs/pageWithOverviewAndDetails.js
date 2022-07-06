@@ -6877,7 +6877,7 @@
 
     return (
       <>
-        <Header onClose={close} title="Configure data table and details" />
+        <Header onClose={close} title="Configure overview and detail view" />
         {stepper.progressBar([
           'Configure top menu and footer',
           'Configure Data Table',

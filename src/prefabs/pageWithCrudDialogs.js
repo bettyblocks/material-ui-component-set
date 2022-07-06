@@ -36387,7 +36387,7 @@
     };
     return (
       <>
-        <Header onClose={close} title="Configure datatable" />
+        <Header onClose={close} title="Configure CRUD with dialogs" />
         {stepper.progressBar([
           'Configure top menu and footer',
           'Configure your CRUD with dialog',

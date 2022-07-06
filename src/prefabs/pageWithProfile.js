@@ -17796,7 +17796,7 @@
     };
     return (
       <>
-        <Header onClose={close} title="Configure profile page" />
+        <Header onClose={close} title="Configure profile details" />
         {stepper.progressBar([
           'Configure top menu and footer',
           'Configure your profile page',

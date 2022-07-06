@@ -12,6 +12,7 @@
   beforeCreate: ({
     prefab,
     save,
+    close,
     components: { Text, Field, Box, PartialSelector, Header, Content, Footer },
   }) => {
     const [headerPartialId, setHeaderPartialId] = React.useState('');
@@ -255,7 +256,7 @@
             {
               value: [],
               label: 'Sub header',
-              key: 'subheader',
+              key: 'subHeader',
               type: 'VARIABLE',
             },
             {
@@ -24768,8 +24769,7 @@
 
     return (
       <>
-        <Header onClose={close} title="Configure top menu and footer" />
-
+        <Header onClose={close} title="Configure homepage" />
         <Content>
           <Box pad={{ bottom: '15px' }}>
             <Box pad={{ bottom: '15px' }}>
@@ -24819,7 +24819,7 @@
           </Box>
         </Content>
         <Footer
-          onClick={close}
+          onClose={close}
           onSave={() => {
             const newPrefab = { ...prefab };
 

@@ -12680,7 +12680,7 @@
 
     return (
       <>
-        <Header onClose={close} title="Configure Backoffice" />
+        <Header onClose={close} title="Configure back office" />
         <Content>
           <Field
             label="Model"

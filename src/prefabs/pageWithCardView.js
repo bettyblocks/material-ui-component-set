@@ -8235,7 +8235,7 @@
     };
     return (
       <>
-        <Header onClose={close} title="Configure component" />
+        <Header onClose={close} title="Configure card view" />
         {stepper.progressBar([
           'Configure top menu and footer',
           'Configure your card view',
