@@ -63,7 +63,6 @@
       type,
     } = options;
     const numberPropTypes = ['serial', 'minutes', 'count', 'integer'];
-
     /*
      * To understand this component it is important to know what the following options are used for:
      *
@@ -181,7 +180,26 @@
 
     const label = useText(labelRaw);
 
-    const initalValue = [];
+    // this should be merged into the final filter
+    const finalFilter = {
+      _and: [
+        {
+          [modelProperty.inverseAssociationId]: {
+            [getIdProperty(modelProperty.modelId).id]: {
+              eq: {
+                id: [getIdProperty(modelProperty.modelId).id],
+                type: 'PROPERTY',
+              },
+            },
+          },
+        },
+      ],
+    };
+
+    // eslint-disable-next-line no-underscore-dangle
+    finalFilter._and.push(filterRaw);
+
+    const initialValue = [];
 
     /*
      * Selected value of the autocomplete.
@@ -190,7 +208,7 @@
      * In case of freeSolo the type is string or and array of strings.
      *
      */
-    const [value, setValue] = useState(initalValue);
+    const [value, setValue] = useState(initialValue);
 
     useEffect(() => {
       if (isDev && typeof value === 'string') {
@@ -314,16 +332,16 @@
       };
     }, [inputValue]);
 
-    const optionFilter = useFilter(filterRaw || {});
+    const optionFilter = useFilter(finalFilter || {});
 
     // Adds the default values to the filter
-    const defaultValuesFilterArray = initalValue.reduce((acc, next) => {
+    const defaultValuesFilterArray = initialValue.reduce((acc, next) => {
       return [...acc, { [valueProp.name]: { eq: next } }];
     }, []);
 
     // We need to do this, because options.filter is not immutable
     const filter = {
-      ...(initalValue.length > 0 && { _or: defaultValuesFilterArray }),
+      ...(initialValue.length > 0 && { _or: defaultValuesFilterArray }),
       ...optionFilter,
     };
 

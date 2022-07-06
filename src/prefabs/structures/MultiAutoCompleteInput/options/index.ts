@@ -16,7 +16,7 @@ import { validation } from './validation';
 export const options = {
   model: model('Related Model', {
     value: '',
-    // configuration: { condition: showIf('model', 'EQ', 'never') },
+    configuration: { condition: showIf('model', 'EQ', 'never') },
   }),
   actionProperty: option('ACTION_JS_PROPERTY', {
     label: 'Property',
