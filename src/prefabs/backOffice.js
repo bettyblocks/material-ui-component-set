@@ -48,6 +48,19 @@
         return getDescendantByRef(refValue, component.descendants);
       }, null);
 
+    const enrichVarObj = (obj) => {
+      const returnObject = obj;
+      if (data && data.model) {
+        const property = data.model.properties.find(
+          (prop) => prop.id === obj.id[0],
+        );
+        if (property) {
+          returnObject.name = `{{ ${data.model.name}.${property.name} }}`;
+        }
+      }
+      return returnObject;
+    };
+
     const capitalize = (s) => {
       if (typeof s !== 'string') return '';
       return s.charAt(0).toUpperCase() + s.slice(1);
@@ -12489,7 +12502,7 @@
                       type: 'VARIABLE',
                       label: 'Content',
                       key: 'content',
-                      value: [{ ...property }],
+                      value: [enrichVarObj({ ...property })],
                       configuration: {
                         as: 'MULTILINE',
                       },
@@ -16949,7 +16962,7 @@
                                             type: 'TOGGLE',
                                           },
                                           {
-                                            value: 'Transparent',
+                                            value: 'Primary',
                                             label: 'Background color',
                                             key: 'backgroundColor',
                                             type: 'COLOR',
@@ -17344,7 +17357,7 @@
                                                 type: 'COLOR',
                                                 label: 'Text color',
                                                 key: 'textColor',
-                                                value: 'Black',
+                                                value: 'White',
                                                 configuration: {
                                                   condition: {
                                                     type: 'SHOW',
@@ -17445,7 +17458,7 @@
                                                 boxShadow: 'none',
                                                 color: {
                                                   type: 'THEME_COLOR',
-                                                  value: 'medium',
+                                                  value: 'white',
                                                 },
                                                 padding: ['0rem'],
                                               },
@@ -17790,7 +17803,7 @@
                                             type: 'SIZES',
                                           },
                                           {
-                                            value: ['M', 'L', 'M', 'L'],
+                                            value: ['M', 'M', 'M', 'M'],
                                             label: 'Inner space',
                                             key: 'innerSpacing',
                                             type: 'SIZES',
@@ -20916,7 +20929,7 @@
                                             type: 'TOGGLE',
                                           },
                                           {
-                                            value: 'Transparent',
+                                            value: 'Primary',
                                             label: 'Background color',
                                             key: 'backgroundColor',
                                             type: 'COLOR',
@@ -21311,7 +21324,7 @@
                                                 type: 'COLOR',
                                                 label: 'Text color',
                                                 key: 'textColor',
-                                                value: 'Black',
+                                                value: 'White',
                                                 configuration: {
                                                   condition: {
                                                     type: 'SHOW',
@@ -21412,7 +21425,7 @@
                                                 boxShadow: 'none',
                                                 color: {
                                                   type: 'THEME_COLOR',
-                                                  value: 'medium',
+                                                  value: 'white',
                                                 },
                                                 padding: ['0rem'],
                                               },
@@ -21757,7 +21770,7 @@
                                             type: 'SIZES',
                                           },
                                           {
-                                            value: ['M', 'L', 'M', 'L'],
+                                            value: ['M', 'M', 'M', 'M'],
                                             label: 'Inner space',
                                             key: 'innerSpacing',
                                             type: 'SIZES',
@@ -24652,7 +24665,7 @@
                                             type: 'TOGGLE',
                                           },
                                           {
-                                            value: 'Transparent',
+                                            value: 'Primary',
                                             label: 'Background color',
                                             key: 'backgroundColor',
                                             type: 'COLOR',
@@ -25047,7 +25060,7 @@
                                                 type: 'COLOR',
                                                 label: 'Text color',
                                                 key: 'textColor',
-                                                value: 'Black',
+                                                value: 'White',
                                                 configuration: {
                                                   condition: {
                                                     type: 'SHOW',
@@ -25148,7 +25161,7 @@
                                                 boxShadow: 'none',
                                                 color: {
                                                   type: 'THEME_COLOR',
-                                                  value: 'medium',
+                                                  value: 'white',
                                                 },
                                                 padding: ['0rem'],
                                               },
@@ -25493,7 +25506,7 @@
                                             type: 'SIZES',
                                           },
                                           {
-                                            value: ['M', 'L', 'M', 'L'],
+                                            value: ['M', 'M', 'M', 'M'],
                                             label: 'Inner space',
                                             key: 'innerSpacing',
                                             type: 'SIZES',
@@ -35819,7 +35832,7 @@
                           },
                         },
                         {
-                          value: ['0rem', 'S', '0rem', '0rem'],
+                          value: ['0rem', '0rem', '0rem', '0rem'],
                           label: 'Outer space',
                           key: 'outerSpacing',
                           type: 'SIZES',
@@ -36069,7 +36082,7 @@
                           },
                         },
                         {
-                          value: ['0rem', 'S', '0rem', '0rem'],
+                          value: ['0rem', '0rem', '0rem', '0rem'],
                           label: 'Outer space',
                           key: 'outerSpacing',
                           type: 'SIZES',
@@ -40221,6 +40234,23 @@
               type: 'Global',
             };
 
+            const setCurrentEditOnDetailsRecord = {
+              name: 'setCurrentRecord',
+              sourceEvent: 'Click',
+              targetOptionName: 'currentRecord',
+              parameters: [
+                {
+                  id: [idProperty.id],
+                  parameter: 'argument',
+                },
+              ],
+              ref: {
+                sourceComponentId: '#detailButton',
+                targetComponentId: '#editForm',
+              },
+              type: 'Global',
+            };
+
             const setCurrentEditRecord = {
               name: 'setCurrentRecord',
               sourceEvent: 'Click',
@@ -40240,6 +40270,7 @@
 
             newPrefab.interactions.push(setCurrentDeleteRecord);
             newPrefab.interactions.push(setCurrentDetailRecord);
+            newPrefab.interactions.push(setCurrentEditOnDetailsRecord);
             newPrefab.interactions.push(setCurrentEditRecord);
 
             if (data && data.model) {
@@ -40449,6 +40480,15 @@
       ref: {
         targetComponentId: '#drawerSidebar',
         sourceComponentId: '#editCancelButton',
+      },
+      type: 'Custom',
+    },
+    {
+      name: 'Hide',
+      sourceEvent: 'Click',
+      ref: {
+        targetComponentId: '#drawerSidebar',
+        sourceComponentId: '#createCancelButton',
       },
       type: 'Custom',
     },

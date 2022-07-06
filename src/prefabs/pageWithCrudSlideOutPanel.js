@@ -12734,189 +12734,189 @@
         if (step === 1) {
           return (
             <>
-              <Field
-                label="Model"
-                error={
-                  modelValidation && (
-                    <Text color="#e82600">Selecting a model is required</Text>
-                  )
-                }
-              >
-                <ModelSelector
-                  onChange={(value) => {
-                    setModelValidation(false);
-                    setModelId(value);
-                  }}
-                  value={modelId}
-                />
-              </Field>
-              <Field
-                label="Columns in the data table"
-                error={
-                  propertiesValidation && (
-                    <Text color="#e82600">
-                      Selecting a property is required
-                    </Text>
-                  )
-                }
-              >
-                <PropertiesSelector
-                  modelId={modelId}
-                  value={properties}
-                  disabledKinds={[
-                    'BELONGS_TO',
-                    'HAS_AND_BELONGS_TO_MANY',
-                    'HAS_MANY',
-                    'MULTI_FILE',
-                    'AUTO_INCREMENT',
-                    'COUNT',
-                    'MULTI_IMAGE',
-                    'PDF',
-                    'RICH_TEXT',
-                    'SIGNED_PDF',
-                    'SUM',
-                    'BOOLEAN_EXPRESSION',
-                    'DATE_EXPRESSION',
-                    'DATE_TIME_EXPRESSION',
-                    'DECIMAL_EXPRESSION',
-                    'INTEGER_EXPRESSION',
-                    'MINUTES_EXPRESSION',
-                    'PRICE_EXPRESSION',
-                    'STRING_EXPRESSION',
-                    'TEXT_EXPRESSION',
-                    'MINUTES',
-                    'ZIPCODE',
-                  ]}
-                  onChange={(value) => {
-                    setProperties(value);
-                    setCreateContainsNoEditableProperties(false);
-                  }}
-                />
-              </Field>
-              <Field label="Create & Update Form">
-                <CheckBox
-                  label="Use the same properties as the data table in the create and update form"
-                  checked={createFormUseDataProperties}
-                  onChange={() => {
-                    setCreateFormUseDataProperties(
-                      !createFormUseDataProperties,
-                    );
-                    setCreateContainsNoEditableProperties(false);
-                  }}
-                />
-                <Field
-                  error={
-                    createContainsNoEditableProperties && (
-                      <Text color="#e82600">
-                        &quot;Id&quot;, &quot;Created at&quot; and &quot;Updated
-                        at&quot; are not editable. At least one editable
-                        property is necessary in the create form. Please select
-                        one.
-                      </Text>
-                    )
-                  }
-                />
-                {!createFormUseDataProperties && (
-                  <Field
-                    label="Input fields in the create and update form"
-                    error={
-                      createPropertiesValidation && (
-                        <Text color="#e82600">
-                          Selecting a property is required
-                        </Text>
-                      )
-                    }
-                  >
-                    <PropertiesSelector
-                      modelId={modelId}
-                      value={selectedCreateFormProperties}
-                      disabledNames={['created_at', 'updated_at', 'id']}
-                      disabledKinds={[
-                        'BELONGS_TO',
-                        'HAS_AND_BELONGS_TO_MANY',
-                        'HAS_MANY',
-                        'MULTI_FILE',
-                        'AUTO_INCREMENT',
-                        'COUNT',
-                        'MULTI_IMAGE',
-                        'PDF',
-                        'RICH_TEXT',
-                        'SIGNED_PDF',
-                        'SUM',
-                        'BOOLEAN_EXPRESSION',
-                        'DATE_EXPRESSION',
-                        'DATE_TIME_EXPRESSION',
-                        'DECIMAL_EXPRESSION',
-                        'INTEGER_EXPRESSION',
-                        'MINUTES_EXPRESSION',
-                        'PRICE_EXPRESSION',
-                        'STRING_EXPRESSION',
-                        'TEXT_EXPRESSION',
-                        'MINUTES',
-                        'ZIPCODE',
-                      ]}
-                      onChange={(value) => {
-                        setCreatePropertiesValidation(!value.length);
-                        setSelectedCreateFormProperties(value);
-                        setCreateContainsNoEditableProperties(!value.length);
-                      }}
-                    />
-                  </Field>
-                )}
-              </Field>
+              <Box pad={{ bottom: '15px' }}>
+                <Box>
+                  <Text size="medium" weight="bolder">
+                    Select partials
+                  </Text>
+                </Box>
+                <Box pad={{ bottom: '15px' }}>
+                  <Text color="grey700">
+                    By using a partial for the header and footer you can easily
+                    reuse the same structure without having to go through every
+                    page.
+                  </Text>
+                </Box>
+                <Field label="HEADER PARTIAL">
+                  <PartialSelector
+                    label="Select a partial"
+                    onChange={(headerId) => {
+                      setHeaderPartialId(headerId);
+                    }}
+                    value={headerPartialId}
+                    allowedTypes={[
+                      'BODY_COMPONENT',
+                      'CONTAINER_COMPONENT',
+                      'CONTENT_COMPONENT',
+                    ]}
+                  />
+                </Field>
+              </Box>
+              <Box pad={{ bottom: '15px' }}>
+                <Field label="FOOTER PARTIAL">
+                  <PartialSelector
+                    label="Select a partial"
+                    onChange={(footerId) => {
+                      setFooterPartialId(footerId);
+                    }}
+                    value={footerPartialId}
+                    allowedTypes={[
+                      'BODY_COMPONENT',
+                      'CONTAINER_COMPONENT',
+                      'CONTENT_COMPONENT',
+                    ]}
+                  />
+                </Field>
+              </Box>
             </>
           );
         }
         return (
           <>
-            <Box pad={{ bottom: '15px' }}>
-              <Box>
-                <Text size="medium" weight="bolder">
-                  Select partials
-                </Text>
-              </Box>
-              <Box pad={{ bottom: '15px' }}>
-                <Text color="grey700">
-                  By using a partial for the header and footer you can easily
-                  reuse the same structure without having to go through every
-                  page.
-                </Text>
-              </Box>
-              <Field label="HEADER PARTIAL">
-                <PartialSelector
-                  label="Select a partial"
-                  onChange={(headerId) => {
-                    setHeaderPartialId(headerId);
-                  }}
-                  value={headerPartialId}
-                  allowedTypes={[
-                    'BODY_COMPONENT',
-                    'CONTAINER_COMPONENT',
-                    'CONTENT_COMPONENT',
-                  ]}
-                />
-              </Field>
-            </Box>
-            <Box pad={{ bottom: '15px' }}>
-              <Field label="FOOTER PARTIAL">
-                <PartialSelector
-                  label="Select a partial"
-                  onChange={(footerId) => {
-                    setFooterPartialId(footerId);
-                  }}
-                  value={footerPartialId}
-                  allowedTypes={[
-                    'BODY_COMPONENT',
-                    'CONTAINER_COMPONENT',
-                    'CONTENT_COMPONENT',
-                  ]}
-                />
-              </Field>
-            </Box>
+            <Field
+              label="Model"
+              error={
+                modelValidation && (
+                  <Text color="#e82600">Selecting a model is required</Text>
+                )
+              }
+            >
+              <ModelSelector
+                onChange={(value) => {
+                  setModelValidation(false);
+                  setModelId(value);
+                }}
+                value={modelId}
+              />
+            </Field>
+            <Field
+              label="Columns in the data table"
+              error={
+                propertiesValidation && (
+                  <Text color="#e82600">Selecting a property is required</Text>
+                )
+              }
+            >
+              <PropertiesSelector
+                modelId={modelId}
+                value={properties}
+                disabledKinds={[
+                  'BELONGS_TO',
+                  'HAS_AND_BELONGS_TO_MANY',
+                  'HAS_MANY',
+                  'MULTI_FILE',
+                  'AUTO_INCREMENT',
+                  'COUNT',
+                  'MULTI_IMAGE',
+                  'PDF',
+                  'RICH_TEXT',
+                  'SIGNED_PDF',
+                  'SUM',
+                  'BOOLEAN_EXPRESSION',
+                  'DATE_EXPRESSION',
+                  'DATE_TIME_EXPRESSION',
+                  'DECIMAL_EXPRESSION',
+                  'INTEGER_EXPRESSION',
+                  'MINUTES_EXPRESSION',
+                  'PRICE_EXPRESSION',
+                  'STRING_EXPRESSION',
+                  'TEXT_EXPRESSION',
+                  'MINUTES',
+                  'ZIPCODE',
+                ]}
+                onChange={(value) => {
+                  setProperties(value);
+                  setCreateContainsNoEditableProperties(false);
+                }}
+              />
+            </Field>
+            <Field label="Create & Update Form">
+              <CheckBox
+                label="Use the same properties as the data table in the create and update form"
+                checked={createFormUseDataProperties}
+                onChange={() => {
+                  setCreateFormUseDataProperties(!createFormUseDataProperties);
+                  setCreateContainsNoEditableProperties(false);
+                }}
+              />
+              <Field
+                error={
+                  createContainsNoEditableProperties && (
+                    <Text color="#e82600">
+                      &quot;Id&quot;, &quot;Created at&quot; and &quot;Updated
+                      at&quot; are not editable. At least one editable property
+                      is necessary in the create form. Please select one.
+                    </Text>
+                  )
+                }
+              />
+              {!createFormUseDataProperties && (
+                <Field
+                  label="Input fields in the create and update form"
+                  error={
+                    createPropertiesValidation && (
+                      <Text color="#e82600">
+                        Selecting a property is required
+                      </Text>
+                    )
+                  }
+                >
+                  <PropertiesSelector
+                    modelId={modelId}
+                    value={selectedCreateFormProperties}
+                    disabledNames={['created_at', 'updated_at', 'id']}
+                    disabledKinds={[
+                      'BELONGS_TO',
+                      'HAS_AND_BELONGS_TO_MANY',
+                      'HAS_MANY',
+                      'MULTI_FILE',
+                      'AUTO_INCREMENT',
+                      'COUNT',
+                      'MULTI_IMAGE',
+                      'PDF',
+                      'RICH_TEXT',
+                      'SIGNED_PDF',
+                      'SUM',
+                      'BOOLEAN_EXPRESSION',
+                      'DATE_EXPRESSION',
+                      'DATE_TIME_EXPRESSION',
+                      'DECIMAL_EXPRESSION',
+                      'INTEGER_EXPRESSION',
+                      'MINUTES_EXPRESSION',
+                      'PRICE_EXPRESSION',
+                      'STRING_EXPRESSION',
+                      'TEXT_EXPRESSION',
+                      'MINUTES',
+                      'ZIPCODE',
+                    ]}
+                    onChange={(value) => {
+                      setCreatePropertiesValidation(!value.length);
+                      setSelectedCreateFormProperties(value);
+                      setCreateContainsNoEditableProperties(!value.length);
+                    }}
+                  />
+                </Field>
+              )}
+            </Field>
           </>
         );
       },
       onSave: () => {
+        if (!modelId || !properties.length) {
+          setModelValidation(!modelId);
+          setPropertiesValidation(!properties.length);
+          return;
+        }
         const selectedCreateFormPropertiesLength =
           selectedCreateFormProperties.length;
         const propertiesLength = properties.length;
@@ -39621,11 +39621,6 @@
               size="large"
               disabled={stepNumber === stepper.stepAmount}
               onClick={() => {
-                if (!modelId || !properties.length) {
-                  setModelValidation(!modelId);
-                  setPropertiesValidation(!properties.length);
-                  return;
-                }
                 const newStepnumber = stepNumber + 1;
                 setStepNumber(newStepnumber);
               }}
@@ -39658,10 +39653,10 @@
 
     return (
       <>
-        <Header onClose={close} title="Configure component" />
+        <Header onClose={close} title="Configure CRUD with slide out" />
         {stepper.progressBar([
-          'Configure Datatable',
           'Configure header and footer',
+          'Configure Datatable',
         ])}
         <Content>{stepper.setStep(stepNumber)}</Content>
         {stepper.buttons()}

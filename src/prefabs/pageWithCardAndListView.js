@@ -5456,19 +5456,10 @@
                                             },
                                           },
                                           {
-                                            value: titleProperty || '',
+                                            value: '',
                                             label: 'Search on property',
                                             key: 'searchProperty',
                                             type: 'PROPERTY',
-                                            configuration: {
-                                              dependsOn: 'model',
-                                            },
-                                          },
-                                          {
-                                            value: 'true',
-                                            label: 'Hide built-in search field',
-                                            key: 'hideSearch',
-                                            type: 'TOGGLE',
                                             configuration: {
                                               dependsOn: 'model',
                                             },
@@ -5499,7 +5490,7 @@
                                             },
                                           },
                                           {
-                                            value: '10',
+                                            value: '8',
                                             label: 'Rows per page (max 50)',
                                             key: 'take',
                                             type: 'NUMBER',
@@ -8525,19 +8516,10 @@
                                             },
                                           },
                                           {
-                                            value: titleProperty || '',
+                                            value: '',
                                             label: 'Search on property',
                                             key: 'searchProperty',
                                             type: 'PROPERTY',
-                                            configuration: {
-                                              dependsOn: 'model',
-                                            },
-                                          },
-                                          {
-                                            value: 'true',
-                                            label: 'Hide built-in search field',
-                                            key: 'hideSearch',
-                                            type: 'TOGGLE',
                                             configuration: {
                                               dependsOn: 'model',
                                             },
