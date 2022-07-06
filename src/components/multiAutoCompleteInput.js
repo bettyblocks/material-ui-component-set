@@ -32,7 +32,6 @@
       dataComponentAttribute: dataComponentAttributeRaw,
       disabled,
       errorType,
-      value: valueRaw,
       label: labelRaw,
       labelProperty: labelPropertyId = '',
       filter: filterRaw,
@@ -40,6 +39,7 @@
       helperText: helperTextRaw,
       hideLabel,
       margin,
+      model: modelId,
       required,
       nameAttribute: nameAttributeRaw,
       optionType,
@@ -63,7 +63,6 @@
       type,
     } = options;
     const numberPropTypes = ['serial', 'minutes', 'count', 'integer'];
-
     /*
      * To understand this component it is important to know what the following options are used for:
      *
@@ -104,10 +103,6 @@
     const modelProperty = getProperty(actionProperty.modelProperty) || {};
 
     const labelProperty = getProperty(labelPropertyId) || {};
-
-    const { modelId: propertyModelId } = modelProperty;
-
-    const modelId = modelProperty.referenceModelId || propertyModelId;
 
     const model = getModel(modelId);
     const defaultLabelProperty = getProperty(model.labelPropertyId || '') || {};
@@ -184,18 +179,27 @@
     };
 
     const label = useText(labelRaw);
-    const defaultValue = useText(valueRaw, { rawValue: true });
 
-    let initalValue = defaultValue.replace(/\n/g, '');
+    // this should be merged into the final filter
+    const finalFilter = {
+      _and: [
+        {
+          [modelProperty.inverseAssociationId]: {
+            [getIdProperty(modelProperty.modelId).id]: {
+              eq: {
+                id: [getIdProperty(modelProperty.modelId).id],
+                type: 'PROPERTY',
+              },
+            },
+          },
+        },
+      ],
+    };
 
-    if (defaultValue.trim() === '') {
-      initalValue = [];
-    } else {
-      initalValue = defaultValue
-        .trim()
-        .split(',')
-        .map((x) => x.trim());
-    }
+    // eslint-disable-next-line no-underscore-dangle
+    finalFilter._and.push(filterRaw);
+
+    const initialValue = [];
 
     /*
      * Selected value of the autocomplete.
@@ -204,7 +208,7 @@
      * In case of freeSolo the type is string or and array of strings.
      *
      */
-    const [value, setValue] = useState(initalValue);
+    const [value, setValue] = useState(initialValue);
 
     useEffect(() => {
       if (isDev && typeof value === 'string') {
@@ -328,16 +332,16 @@
       };
     }, [inputValue]);
 
-    const optionFilter = useFilter(filterRaw || {});
+    const optionFilter = useFilter(finalFilter || {});
 
     // Adds the default values to the filter
-    const defaultValuesFilterArray = initalValue.reduce((acc, next) => {
+    const defaultValuesFilterArray = initialValue.reduce((acc, next) => {
       return [...acc, { [valueProp.name]: { eq: next } }];
     }, []);
 
     // We need to do this, because options.filter is not immutable
     const filter = {
-      ...(initalValue.length > 0 && { _or: defaultValuesFilterArray }),
+      ...(initialValue.length > 0 && { _or: defaultValuesFilterArray }),
       ...optionFilter,
     };
 
@@ -541,7 +545,7 @@
       }
 
       if (isDev) {
-        designTimeValue = defaultValue;
+        designTimeValue = '';
       }
 
       return (
