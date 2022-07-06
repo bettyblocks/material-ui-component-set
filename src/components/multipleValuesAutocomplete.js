@@ -73,7 +73,6 @@
      */
 
     const isDev = env === 'dev';
-    const multiple = true;
     const displayError = errorType === 'built-in';
     const placeholder = useText(placeholderRaw);
     const helperText = useText(helperTextRaw);
@@ -188,21 +187,6 @@
      *
      */
     const [value, setValue] = useState(initalValue);
-
-    useEffect(() => {
-      if (isDev && typeof value === 'string') {
-        if (value.trim() === '') {
-          setValue([]);
-        } else {
-          setValue(
-            value
-              .trim()
-              .split(',')
-              .map((x) => x.trim()),
-          );
-        }
-      }
-    }, [multiple]);
 
     /*
      * User input in the autocomplete. In case of freeSolo this is the same as `value`
@@ -342,19 +326,17 @@
      * Those values always need to be returned in the results of the request
      */
     /* eslint-disable no-underscore-dangle */
-    if (multiple) {
-      if (debouncedInputValue) {
-        if (!filter._or) {
-          filter._or = [];
-        }
-        filter._or.push({
-          [searchProp.name]: {
-            [searchPropIsNumber ? 'eq' : 'regex']: searchPropIsNumber
-              ? parseInt(debouncedInputValue, 10)
-              : debouncedInputValue,
-          },
-        });
+    if (debouncedInputValue) {
+      if (!filter._or) {
+        filter._or = [];
       }
+      filter._or.push({
+        [searchProp.name]: {
+          [searchPropIsNumber ? 'eq' : 'regex']: searchPropIsNumber
+            ? parseInt(debouncedInputValue, 10)
+            : debouncedInputValue,
+        },
+      });
     }
 
     /* eslint-enable no-underscore-dangle */
@@ -675,9 +657,9 @@
           })}
           inputValue={inputValue}
           loading={loading}
-          multiple={multiple}
+          multiple
           onChange={(_, newValue) => {
-            setValue(newValue || (multiple ? [] : ''));
+            setValue(newValue || []);
 
             let triggerEventValue;
 
