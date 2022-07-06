@@ -197,6 +197,11 @@
   resolved "https://registry.yarnpkg.com/@betty-blocks/component-sdk/-/component-sdk-1.15.1.tgz#3c931063bbca813371cb44c551ac662c3a4c03a3"
   integrity sha512-lR249+TU3pbYpUVcH+qvfZcNRJUYLyvDvuq3zH8PmrLBMcQguM2oS2L2sJxgUBDt0dwHv9605dzkilu3d1G9Hw==
 
+"@betty-blocks/component-sdk@^1.15.2":
+  version "1.15.2"
+  resolved "https://registry.yarnpkg.com/@betty-blocks/component-sdk/-/component-sdk-1.15.2.tgz#9278a2180a322d9480dcfc3117088858bd5b0e66"
+  integrity sha512-lxfkbyqpkceKrCJA97YL5pG3BZil7M9HR0vzbQZpDkULuGKCGWjZGfE0suFQo8Nj0wkeSCrXVcMXj7LzO1dSPQ==
+
 "@colors/colors@1.5.0":
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/@colors/colors/-/colors-1.5.0.tgz#bb504579c1cae923e6576a4f5da43d25f97bdbd9"
