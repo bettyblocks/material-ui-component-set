@@ -1,3 +1,10 @@
+# [1.244.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.243.0...v1.244.0) (2022-07-04)
+
+
+### Features
+
+* convert card component prefabs to TSX ([b6927cf](https://github.com/bettyblocks/material-ui-component-set/commit/b6927cff526be5458de8d272cdacc2dae48fb7df))
+
 # [1.243.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.242.0...v1.243.0) (2022-07-01)
 
 
