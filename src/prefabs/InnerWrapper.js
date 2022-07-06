@@ -11,8 +11,8 @@
         {
           key: '0',
           type: 'LINKED_OPTION',
-          ref: {
-            value: {
+          value: {
+            ref: {
               componentId: '#componentId1',
               optionId: '#componentId1OptionId1',
             },
@@ -21,8 +21,8 @@
         {
           key: '1',
           type: 'LINKED_OPTION',
-          ref: {
-            value: {
+          value: {
+            ref: {
               componentId: '#componentId2',
               optionId: '#componentId2optionId1',
             },
@@ -313,8 +313,8 @@
                     {
                       key: '0',
                       type: 'LINKED_OPTION',
-                      ref: {
-                        value: {
+                      value: {
+                        ref: {
                           componentId: '#componentId3',
                           optionId: '#componentId3OptionId1',
                         },

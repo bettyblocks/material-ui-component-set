@@ -51,32 +51,32 @@ export default prefab('InnerWrapperTSX', attributes, undefined, [
       label: 'outer wrapper',
       options: [
         linked('linked1', {
-          ref: {
-            value: {
+          value: {
+            ref: {
               componentId: '#component1',
               optionId: '#AlertOption1',
             },
           },
         }),
         linked('linked1', {
-          ref: {
-            value: {
+          value: {
+            ref: {
               componentId: '#component1',
               optionId: '#AlertOption2',
             },
           },
         }),
         linked('linked1', {
-          ref: {
-            value: {
+          value: {
+            ref: {
               componentId: '#component1',
               optionId: '#AlertOption3',
             },
           },
         }),
         linked('linked1', {
-          ref: {
-            value: {
+          value: {
+            ref: {
               componentId: '#component1',
               optionId: '#AlertOption4',
             },
