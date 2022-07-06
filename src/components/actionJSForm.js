@@ -1,7 +1,7 @@
 (() => ({
   name: 'Form Beta',
-  type: 'CONTENT_COMPONENT',
-  allowedTypes: ['FORM_COMPONENT'],
+  type: 'CONTAINER_COMPONENT',
+  allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { actionId, modelId, filter } = options;
