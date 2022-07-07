@@ -235,7 +235,7 @@ export default makePrefab('Delete Record (TS)', attr, beforeCreate, [
     {
       options: {
         ...boxOptions,
-        innerWidth: sizes('Inner space', {
+        innerSpacing: sizes('Inner space', {
           value: ['0rem', '0rem', '0rem', '0rem'],
         }),
       },
