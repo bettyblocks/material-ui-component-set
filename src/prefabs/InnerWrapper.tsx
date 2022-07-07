@@ -86,7 +86,7 @@ export default prefab('InnerWrapperTSX', attributes, undefined, [
     },
     [
       Alert({
-        ref: { id: '#Component1' },
+        ref: { id: '#component1' },
         options: optionRefs,
       }),
     ],
