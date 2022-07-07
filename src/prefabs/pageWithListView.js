@@ -8,7 +8,7 @@
     'View your content in a list view. This page template also contains a custom search functonality to filter your data.',
   previewUrl: 'https://preview.betty.app/list-view',
   previewImage:
-    'https://assets.bettyblocks.com/63b1c6ccc6874e0796e5cc5b7e41b3da_assets/files/Page_Template_List_View.jpg',
+    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_List_View.jpg',
   category: 'LAYOUT',
   beforeCreate: ({
     helpers: { useModelQuery },
@@ -3357,19 +3357,10 @@
                                     },
                                   },
                                   {
-                                    value: titleProperty || '',
+                                    value: '',
                                     label: 'Search on property',
                                     key: 'searchProperty',
                                     type: 'PROPERTY',
-                                    configuration: {
-                                      dependsOn: 'model',
-                                    },
-                                  },
-                                  {
-                                    value: 'true',
-                                    label: 'Hide built-in search field',
-                                    key: 'hideSearch',
-                                    type: 'TOGGLE',
                                     configuration: {
                                       dependsOn: 'model',
                                     },
@@ -13436,7 +13427,6 @@
           if (titleProperty.id) {
             dataList.descendants[0].descendants[0].descendants[0].descendants[0].descendants[1].descendants[0].descendants[0].descendants[0].descendants[0].options[0].value =
               [enrichVarObj(titleProperty)];
-            dataList.options[4].value = titleProperty.id;
             newPrefab.interactions.push({
               name: 'Filter',
               sourceEvent: 'onChange',

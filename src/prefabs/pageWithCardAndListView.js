@@ -8,7 +8,7 @@
     'Display your data in different views such as a list or a card view via a toggle. This page template also contains a custom search functionality to filter your data.',
   previewUrl: 'https://preview.betty.app/card-and-list-view',
   previewImage:
-    'https://assets.bettyblocks.com/63b1c6ccc6874e0796e5cc5b7e41b3da_assets/files/Page_Template_Card_And_List_View_new.png',
+    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_Card_And_List_View.jpg',
   category: 'LAYOUT',
   beforeCreate: ({
     helpers: { useModelQuery },
@@ -5456,19 +5456,10 @@
                                             },
                                           },
                                           {
-                                            value: titleProperty || '',
+                                            value: '',
                                             label: 'Search on property',
                                             key: 'searchProperty',
                                             type: 'PROPERTY',
-                                            configuration: {
-                                              dependsOn: 'model',
-                                            },
-                                          },
-                                          {
-                                            value: 'true',
-                                            label: 'Hide built-in search field',
-                                            key: 'hideSearch',
-                                            type: 'TOGGLE',
                                             configuration: {
                                               dependsOn: 'model',
                                             },
@@ -5499,7 +5490,7 @@
                                             },
                                           },
                                           {
-                                            value: '10',
+                                            value: '8',
                                             label: 'Rows per page (max 50)',
                                             key: 'take',
                                             type: 'NUMBER',
@@ -8525,19 +8516,10 @@
                                             },
                                           },
                                           {
-                                            value: titleProperty || '',
+                                            value: '',
                                             label: 'Search on property',
                                             key: 'searchProperty',
                                             type: 'PROPERTY',
-                                            configuration: {
-                                              dependsOn: 'model',
-                                            },
-                                          },
-                                          {
-                                            value: 'true',
-                                            label: 'Hide built-in search field',
-                                            key: 'hideSearch',
-                                            type: 'TOGGLE',
                                             configuration: {
                                               dependsOn: 'model',
                                             },

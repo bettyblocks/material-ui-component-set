@@ -13,7 +13,7 @@
       startIcon,
       avatar,
       imgUrl,
-      avatartype,
+      avatarType,
       size,
       dataComponentAttribute,
     } = options;
@@ -23,9 +23,9 @@
     const AvatarImage = <Avatar alt="" src={imgSrc} />;
     const AvatarText = <Avatar>{avatar}</Avatar>;
     let AvatarComponent;
-    if (avatartype === 'text') {
+    if (avatarType === 'text') {
       AvatarComponent = AvatarText;
-    } else if (avatartype === 'image') {
+    } else if (avatarType === 'image') {
       AvatarComponent = AvatarImage;
     }
 
@@ -39,7 +39,7 @@
         disabled={disabled}
         variant={variant}
         icon={
-          avatartype === 'icon' && startIcon !== 'None' ? (
+          avatarType === 'icon' && startIcon !== 'None' ? (
             <Icon name={startIcon} />
           ) : undefined
         }

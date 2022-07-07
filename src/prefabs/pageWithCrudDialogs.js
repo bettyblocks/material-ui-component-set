@@ -7,7 +7,7 @@
     'In this ready to use Data Table, it is possible to create, display (read), update and delete records. These functionalities are shown in dialogs.',
   previewUrl: 'https://preview.betty.app/crud-with-dialogs',
   previewImage:
-    'https://assets.bettyblocks.com/63b1c6ccc6874e0796e5cc5b7e41b3da_assets/files/Page_Template_Crud_With_Dialogs',
+    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_Crud_With_Dialogs.jpg',
   category: 'DATA',
   beforeCreate: ({
     components: {
