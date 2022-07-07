@@ -58,7 +58,7 @@ export default prefab('InnerWrapperTSX', attributes, undefined, [
             },
           },
         }),
-        linked('linked1', {
+        linked('linked2', {
           value: {
             ref: {
               componentId: '#component1',
@@ -66,7 +66,7 @@ export default prefab('InnerWrapperTSX', attributes, undefined, [
             },
           },
         }),
-        linked('linked1', {
+        linked('linked3', {
           value: {
             ref: {
               componentId: '#component1',
@@ -74,7 +74,7 @@ export default prefab('InnerWrapperTSX', attributes, undefined, [
             },
           },
         }),
-        linked('linked1', {
+        linked('linked4', {
           value: {
             ref: {
               componentId: '#component1',
