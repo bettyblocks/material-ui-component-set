@@ -1,3 +1,10 @@
+# [1.246.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.245.1...v1.246.0) (2022-07-07)
+
+
+### Features
+
+* added pre selector to partial selectors on page tempaltes ([eec652c](https://github.com/bettyblocks/material-ui-component-set/commit/eec652c13cfdc9310190fa8ec96a5a689855f8af))
+
 ## [1.245.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.245.0...v1.245.1) (2022-07-07)
 
 
