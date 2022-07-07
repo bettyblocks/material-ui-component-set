@@ -192,10 +192,10 @@
     typescript "^3.5.3"
     webhead "^1.1.3"
 
-"@betty-blocks/component-sdk@^1.15.2":
-  version "1.15.2"
-  resolved "https://registry.yarnpkg.com/@betty-blocks/component-sdk/-/component-sdk-1.15.2.tgz#9278a2180a322d9480dcfc3117088858bd5b0e66"
-  integrity sha512-lxfkbyqpkceKrCJA97YL5pG3BZil7M9HR0vzbQZpDkULuGKCGWjZGfE0suFQo8Nj0wkeSCrXVcMXj7LzO1dSPQ==
+"@betty-blocks/component-sdk@^1.16.0":
+  version "1.16.0"
+  resolved "https://registry.yarnpkg.com/@betty-blocks/component-sdk/-/component-sdk-1.16.0.tgz#9882d4662d793cbb6374a0f9f6ccb435fa83401d"
+  integrity sha512-LtjLAar+3zuk158LUVhgCkm1Lr+2JZU+Fn8ZDUY5Vtj1jG8bBbFvuOqiTBQicEFNcnZjtjQOjiBkRHlMu6ivcw==
 
 "@colors/colors@1.5.0":
   version "1.5.0"
