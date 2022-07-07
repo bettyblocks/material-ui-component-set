@@ -194,8 +194,8 @@ const beforeCreate = ({
               id: [idProperty.id],
             },
           ],
+          sourceComponentId: thisPageState.component.id,
           ref: {
-            sourceComponentId: thisPageState.component.id,
             targetComponentId: '#dataContainer',
           },
           type: 'Global',
