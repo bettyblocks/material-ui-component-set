@@ -40081,7 +40081,7 @@
     };
     return (
       <>
-        <Header onClose={close} title="Configure Backoffice" />
+        <Header onClose={close} title="Configure back office" />
         {stepper.progressBar([
           'Configure header and footer',
           'Configure your back-office',

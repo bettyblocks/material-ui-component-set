@@ -12,6 +12,7 @@
   beforeCreate: ({
     prefab,
     save,
+    close,
     components: { Text, Field, Box, PartialSelector, Header, Content, Footer },
   }) => {
     const [headerPartialId, setHeaderPartialId] = React.useState('');
@@ -255,7 +256,7 @@
             {
               value: [],
               label: 'Sub header',
-              key: 'subheader',
+              key: 'subHeader',
               type: 'VARIABLE',
             },
             {
@@ -24768,8 +24769,7 @@
 
     return (
       <>
-        <Header onClose={close} title="Configure header and footer" />
-
+        <Header onClose={close} title="Configure homepage" />
         <Content>
           <Box pad={{ bottom: '15px' }}>
             <Box pad={{ bottom: '15px' }}>
@@ -24779,17 +24779,18 @@
             </Box>
             <Box pad={{ bottom: '15px' }}>
               <Text color="grey700">
-                By using a partial for the header and footer you can easily
+                By using a partial for the top menu and footer you can easily
                 reuse the same structure without having to go through every
                 page.
               </Text>
             </Box>
-            <Field label="HEADER PARTIAL">
+            <Field label="TOP MENU PARTIAL">
               <PartialSelector
                 label="Select a partial"
                 onChange={(headerId) => {
                   setHeaderPartialId(headerId);
                 }}
+                preSelected="Top menu"
                 value={headerPartialId}
                 allowedTypes={[
                   'BODY_COMPONENT',
@@ -24806,6 +24807,7 @@
                 onChange={(footerId) => {
                   setFooterPartialId(footerId);
                 }}
+                preSelected="Footer"
                 value={footerPartialId}
                 allowedTypes={[
                   'BODY_COMPONENT',
@@ -24817,7 +24819,7 @@
           </Box>
         </Content>
         <Footer
-          onClick={close}
+          onClose={close}
           onSave={() => {
             const newPrefab = { ...prefab };
 
