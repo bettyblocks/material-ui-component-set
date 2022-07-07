@@ -323,8 +323,7 @@
         onCompleted(res) {
           const hasResult = res && res.results && res.results.length > 0;
           if (hasResult) {
-            const relatedIds = res.results.map(({ id }) => id);
-            setValue(relatedIds);
+            setValue(res.results);
           }
         },
         onError(resp) {
