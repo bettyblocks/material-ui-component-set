@@ -1,10 +1,9 @@
 (() => ({
-  name: 'Header',
+  name: 'Top menu',
   icon: 'ContainerIcon',
-  description: 'This is a header partial.',
+  description: 'This is a top menu partial.',
   detail:
     'This partial is used to display the header of the page. It has a logo and a menu.',
-  // previewUrl: 'https://preview.betty.app/homepage',
   previewImage:
     'https://assets.bettyblocks.com/bea59bf27f2a414a9ca069afa6524a2b_assets/files/Header',
   category: 'LAYOUT',
