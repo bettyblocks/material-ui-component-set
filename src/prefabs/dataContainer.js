@@ -324,6 +324,7 @@
                     ? loggedInUserState.authenticationProfile.id
                     : ''
                 }
+                allowCustomAuthProfile
               />
             </Field>
           )}
