@@ -1,3 +1,42 @@
+## [1.246.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.246.1...v1.246.2) (2022-07-07)
+
+
+### Bug Fixes
+
+* update cli version to 25.36.0 ([0dd9db8](https://github.com/bettyblocks/material-ui-component-set/commit/0dd9db87c7af0c80193663e681e1317e9b63b2ab))
+
+## [1.246.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.246.0...v1.246.1) (2022-07-07)
+
+
+### Bug Fixes
+
+* trigger pipeline ([30c450f](https://github.com/bettyblocks/material-ui-component-set/commit/30c450ff89a735dd3d52fe2c951c0b1922f6b208))
+
+# [1.246.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.245.1...v1.246.0) (2022-07-07)
+
+
+### Features
+
+* added pre selector to partial selectors on page tempaltes ([eec652c](https://github.com/bettyblocks/material-ui-component-set/commit/eec652c13cfdc9310190fa8ec96a5a689855f8af))
+
+## [1.245.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.245.0...v1.245.1) (2022-07-07)
+
+
+### Bug Fixes
+
+* bump cli ([dabf629](https://github.com/bettyblocks/material-ui-component-set/commit/dabf62903adf6493540065606a38a0908504de1f))
+* bump cli and sdk ([3758362](https://github.com/bettyblocks/material-ui-component-set/commit/3758362e4a8583a0f76422e2a87a01b02cec6303))
+* bump sdk ([aeeb500](https://github.com/bettyblocks/material-ui-component-set/commit/aeeb5009c3e697d0a20f99854245d7db6fead158))
+* bump sdk version ([059d7f3](https://github.com/bettyblocks/material-ui-component-set/commit/059d7f300ac662f5d803da34fb5ab7ce9bd6081d))
+* ensure the typing is set properly for the updateOption util function ([87a7b35](https://github.com/bettyblocks/material-ui-component-set/commit/87a7b35dcb186647aa6801103ebb0a36a2a81260))
+
+# [1.245.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.244.0...v1.245.0) (2022-07-07)
+
+
+### Features
+
+* add partial selector and preselect backoffice ([24ba879](https://github.com/bettyblocks/material-ui-component-set/commit/24ba879199220c778ce3b4631e99afa79e2efa77))
+
 # [1.244.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.243.0...v1.244.0) (2022-07-04)
 
 
