@@ -78,7 +78,7 @@
 
     const cleanUpMessage = (message) =>
       message &&
-      JSON.stringify(message)
+      JSON.stringify(message.map((m) => m.replace(/\.$/, '')))
         .replace(/[{}[\]_"]/g, ' ')
         .replace(/[ ]+/g, ' ')
         .replace(/ :/g, ':')
