@@ -181,7 +181,7 @@
     const label = useText(labelRaw);
 
     // this should be merged into the final filter
-    const finalFilter = {
+    const valuesFilter = {
       _and: [
         {
           [modelProperty.inverseAssociationId]: {
@@ -196,9 +196,9 @@
       ],
     };
 
-    // eslint-disable-next-line no-underscore-dangle
-    finalFilter._and.push(filterRaw);
+    const valueFilter = useFilter(valuesFilter);
 
+    // eslint-disable-next-line no-underscore-dangle
     const initialValue = [];
 
     /*
@@ -314,6 +314,28 @@
       }
     }
 
+    useAllQuery(
+      modelId,
+      {
+        take: 20,
+        rawFilter: valueFilter,
+        variables: {},
+        onCompleted(res) {
+          const hasResult = res && res.results && res.results.length > 0;
+          if (hasResult) {
+            const relatedIds = res.results.map(({ id }) => id);
+            setValue(relatedIds);
+          }
+        },
+        onError(resp) {
+          if (!displayError) {
+            B.triggerEvent('onError', resp);
+          }
+        },
+      },
+      optionType === 'property' || !valid,
+    );
+
     useEffect(() => {
       let debounceInput;
 
@@ -332,7 +354,7 @@
       };
     }, [inputValue]);
 
-    const optionFilter = useFilter(finalFilter || {});
+    const optionFilter = useFilter(filterRaw || {});
 
     // Adds the default values to the filter
     const defaultValuesFilterArray = initialValue.reduce((acc, next) => {
