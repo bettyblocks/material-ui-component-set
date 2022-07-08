@@ -180,24 +180,6 @@
 
     const label = useText(labelRaw);
 
-    // this should be merged into the final filter
-    const valuesFilter = {
-      _and: [
-        {
-          [modelProperty.inverseAssociationId]: {
-            [getIdProperty(modelProperty.modelId).id]: {
-              eq: {
-                id: [getIdProperty(modelProperty.modelId).id],
-                type: 'PROPERTY',
-              },
-            },
-          },
-        },
-      ],
-    };
-
-    const valueFilter = useFilter(valuesFilter);
-
     // eslint-disable-next-line no-underscore-dangle
     const initialValue = [];
 
@@ -239,8 +221,6 @@
      * Keep state of interaction filters coming from other components
      */
     const [interactionFilter, setInteractionFilter] = useState({});
-
-    const defaultValueEvaluatedRef = useRef(false);
 
     const searchProp = searchProperty || {};
     const valueProp = valueProperty || {};
@@ -314,6 +294,28 @@
       }
     }
 
+    const parentIdProperty = getIdProperty(modelProperty.modelId).id;
+    const parentIdValue = B.useProperty(parentIdProperty);
+    const queryWasResolvable = !!parentIdValue;
+
+    // this should be merged into the final filter
+    const valuesFilter = {
+      _and: [
+        {
+          [modelProperty.inverseAssociationId]: {
+            [parentIdProperty]: {
+              eq: {
+                id: [parentIdProperty],
+                type: 'PROPERTY',
+              },
+            },
+          },
+        },
+      ],
+    };
+
+    const valueFilter = useFilter(valuesFilter);
+
     useAllQuery(
       modelId,
       {
@@ -332,7 +334,7 @@
           }
         },
       },
-      optionType === 'property' || !valid,
+      optionType === 'property' || !valid || !queryWasResolvable,
     );
 
     useEffect(() => {
@@ -496,23 +498,6 @@
     if (error && displayError) {
       valid = false;
       message = error;
-    }
-
-    // If the default value is a value that lives outside the take range of the query we should fetch the values before we continue.
-    if (!isDev && !defaultValueEvaluatedRef.current && value && results) {
-      setValue((prev) => {
-        return prev
-          .map((val) =>
-            results.find(
-              (result) =>
-                result[valueProp.name] ===
-                (valuePropIsNumber ? parseInt(val, 10) : val),
-            ),
-          )
-          .filter((x) => typeof x !== 'undefined');
-      });
-
-      defaultValueEvaluatedRef.current = true;
     }
 
     B.defineFunction('Clear', () => {
