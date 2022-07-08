@@ -95,7 +95,7 @@ const attrs = {
   keywords: ['Data', 'list', 'listwithdata', 'collection'],
 };
 
-export default makePrefab('List With Data (TS)', attrs, beforeCreate, [
+export default makePrefab('List With Data', attrs, beforeCreate, [
   List({}, [
     DataList(
       {

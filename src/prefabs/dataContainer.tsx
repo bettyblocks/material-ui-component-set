@@ -399,7 +399,7 @@ const attrs = {
   keywords: ['Data', 'container', 'datacontainer', 'object', 'record'],
 };
 
-export default makePrefab('DataContainer (TS)', attrs, beforeCreate, [
+export default makePrefab('DataContainer', attrs, beforeCreate, [
   DataContainer({
     ref: {
       id: '#dataContainer',

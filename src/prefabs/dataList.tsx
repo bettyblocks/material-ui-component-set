@@ -7,4 +7,4 @@ const attrs = {
   keywords: ['Data', 'list', 'datalist', 'collection'],
 };
 
-export default prefab('Datalist (TS)', attrs, undefined, [DataList({})]);
+export default prefab('Datalist', attrs, undefined, [DataList({})]);
