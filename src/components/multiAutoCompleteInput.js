@@ -1,6 +1,6 @@
 (() => ({
   name: 'Multi Autocomplete Beta',
-  type: 'FORM_COMPONENT',
+  type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {
