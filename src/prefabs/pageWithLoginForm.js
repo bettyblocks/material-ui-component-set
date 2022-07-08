@@ -22,6 +22,7 @@
       Field,
       Footer,
       Text,
+      Box,
     },
   }) => {
     const [authProfileId, setAuthProfileId] = React.useState('');
@@ -7038,6 +7039,14 @@
     return (
       <>
         <Header onClose={close} title="Configure login form" />
+        <Box
+          justify="center"
+          margin={{ bottom: '2rem', left: '2rem', top: '-1rem' }}
+        >
+          <Text size="medium" weight="bold">
+            Step: 2 / 2
+          </Text>
+        </Box>
         <Content>
           <Field
             label="Select an authentication profile"
