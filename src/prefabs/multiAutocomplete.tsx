@@ -24,7 +24,7 @@ const beforeCreate = ({
 
   return (
     <CreateFormInputWizard
-      supportedKinds={['LIST', 'HAS_AND_BELONGS_TO_MANY', 'HAS_MANY']}
+      supportedKinds={['HAS_AND_BELONGS_TO_MANY', 'HAS_MANY']}
       actionVariableOption={actionVariableOption.key}
       labelOptionKey="label"
       nameOptionKey="actionVariableId"
