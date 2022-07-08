@@ -466,7 +466,7 @@
           return (
             <>
               <Field
-                label="Model"
+                label="Model for data table"
                 error={
                   modelValidation && (
                     <Text color="#e82600">Selecting a model is required</Text>
@@ -6859,16 +6859,15 @@
           </Box>
         </Box>
       ),
-      progressBar: (titles) => {
-        const titlesArray = titles;
+      progressBar: () => {
         return (
           <Box
             justify="center"
             margin={{ bottom: '2rem', left: '2rem', top: '-1rem' }}
           >
-            <Text size="medium" weight="bold">{`Step: ${stepNumber} / ${
-              stepper.stepAmount
-            } - ${titlesArray[stepNumber - 1]}`}</Text>
+            <Text size="medium" weight="bold">{`Step: ${stepNumber + 1} / ${
+              stepper.stepAmount + 1
+            }`}</Text>
           </Box>
         );
       },
@@ -6878,11 +6877,7 @@
     return (
       <>
         <Header onClose={close} title="Configure overview and detail view" />
-        {stepper.progressBar([
-          'Configure top menu and footer',
-          'Configure Data Table',
-          'Configure Details',
-        ])}
+        {stepper.progressBar()}
         <Content>{stepper.setStep(stepNumber)}</Content>
         {stepper.buttons()}
       </>

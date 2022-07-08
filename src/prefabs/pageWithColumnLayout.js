@@ -66,6 +66,14 @@
     return (
       <>
         <Header onClose={close} title="Configure Layout" />
+        <Box
+          justify="center"
+          margin={{ bottom: '2rem', left: '2rem', top: '-1rem' }}
+        >
+          <Text size="medium" weight="bold">
+            Step: 2 / 2
+          </Text>
+        </Box>
         <Content>
           <>
             <Box direction="row">

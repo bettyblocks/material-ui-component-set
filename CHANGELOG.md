@@ -1,3 +1,18 @@
+# [1.247.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.246.3...v1.247.0) (2022-07-08)
+
+
+### Features
+
+* **tmplt-1555:** update stepper on page templates ([edec2da](https://github.com/bettyblocks/material-ui-component-set/commit/edec2da5c0c31d200753fd3dab18c789ecfb2b41))
+
+## [1.246.3](https://github.com/bettyblocks/material-ui-component-set/compare/v1.246.2...v1.246.3) (2022-07-07)
+
+
+### Bug Fixes
+
+* bump cli ([ee54917](https://github.com/bettyblocks/material-ui-component-set/commit/ee5491795799c82f6ef37860a4ffc0e2d6405019))
+* bump sdk ([a378bf7](https://github.com/bettyblocks/material-ui-component-set/commit/a378bf7b2cda5ec1dbad7a8cd233dca973a3da37))
+
 ## [1.246.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.246.1...v1.246.2) (2022-07-07)
 
 
