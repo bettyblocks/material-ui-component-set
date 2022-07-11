@@ -16,69 +16,44 @@ const attr = {
   keywords: ['List'],
 };
 
+const customListItemOptions = (iconValue: string) => ({
+  ...listItemOptions,
+  primaryText: variable('Primary text', { value: ['First List Item'] }),
+  secondaryText: variable('Secondary text', {
+    value: ['Secondary text'],
+  }),
+  avatarOrIcon: option('CUSTOM', {
+    label: 'Visual',
+    value: 'icon',
+    configuration: {
+      as: 'BUTTONGROUP',
+      dataType: 'string',
+      allowedInput: [
+        { name: 'None', value: 'none' },
+        { name: 'Icon', value: 'icon' },
+        { name: 'Avatar', value: 'avatar' },
+      ],
+    },
+  }),
+  icon: icon('Icon', {
+    value: iconValue,
+    configuration: {
+      condition: showIf('avatarOrIcon', 'EQ', 'icon'),
+    },
+  }),
+});
+
 export default prefab('List', attr, undefined, [
   List({}, [
     ListItem(
       {
-        options: {
-          ...listItemOptions,
-          primaryText: variable('Primary text', { value: ['First List Item'] }),
-          secondaryText: variable('Secondary text', {
-            value: ['Secondary text'],
-          }),
-          avatarOrIcon: option('CUSTOM', {
-            label: 'Visual',
-            value: 'icon',
-            configuration: {
-              as: 'BUTTONGROUP',
-              dataType: 'string',
-              allowedInput: [
-                { name: 'None', value: 'none' },
-                { name: 'Icon', value: 'icon' },
-                { name: 'Avatar', value: 'avatar' },
-              ],
-            },
-          }),
-          icon: icon('Icon', {
-            value: 'Apartment',
-            configuration: {
-              condition: showIf('avatarOrIcon', 'EQ', 'icon'),
-            },
-          }),
-        },
+        options: customListItemOptions('Apartment'),
       },
       [],
     ),
     ListItem(
       {
-        options: {
-          ...listItemOptions,
-          primaryText: variable('Primary text', {
-            value: ['Second List Item'],
-          }),
-          secondaryText: variable('Secondary text', {
-            value: ['Secondary text'],
-          }),
-          avatarOrIcon: option('CUSTOM', {
-            label: 'Visual',
-            value: 'icon',
-            configuration: {
-              as: 'BUTTONGROUP',
-              dataType: 'string',
-              allowedInput: [
-                { name: 'None', value: 'none' },
-                { name: 'Icon', value: 'icon' },
-                { name: 'Avatar', value: 'avatar' },
-              ],
-            },
-          }),
-          icon: icon('Icon', {
-            value: 'Person',
-            configuration: {
-              condition: showIf('avatarOrIcon', 'EQ', 'icon'),
-            },
-          }),
-        },
+        options: customListItemOptions('Person'),
       },
       [],
     ),
