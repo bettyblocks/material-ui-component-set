@@ -3,7 +3,8 @@ import { Row } from './structures/Row';
 import { Column } from './structures/Column';
 import { options } from './structures/Column/options';
 
-options.columnWidth = option('CUSTOM', {
+const columnOptions = { ...options };
+columnOptions.columnWidth = option('CUSTOM', {
   label: 'Column width',
   value: '6',
   configuration: {
@@ -29,7 +30,7 @@ options.columnWidth = option('CUSTOM', {
   },
 });
 
-options.columnWidthTabletLandscape = option('CUSTOM', {
+columnOptions.columnWidthTabletLandscape = option('CUSTOM', {
   label: 'Column width (tablet landscape)',
   value: '6',
   configuration: {
@@ -55,7 +56,7 @@ options.columnWidthTabletLandscape = option('CUSTOM', {
   },
 });
 
-options.columnWidthTabletPortrait = option('CUSTOM', {
+columnOptions.columnWidthTabletPortrait = option('CUSTOM', {
   label: 'Column width (tablet portrait)',
   value: '12',
   configuration: {
@@ -81,7 +82,7 @@ options.columnWidthTabletPortrait = option('CUSTOM', {
   },
 });
 
-options.columnWidthMobile = option('CUSTOM', {
+columnOptions.columnWidthMobile = option('CUSTOM', {
   label: 'Column width (obile)',
   value: '12',
   configuration: {
@@ -113,5 +114,8 @@ const attrs = {
   keywords: ['Layout', 'column', 'columns', '1'],
 };
 export default prefab('2 Columns', attrs, undefined, [
-  Row({}, [Column({ options }), Column({ options })]),
+  Row({}, [
+    Column({ options: columnOptions }),
+    Column({ options: columnOptions }),
+  ]),
 ]);
