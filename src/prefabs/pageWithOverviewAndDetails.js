@@ -421,17 +421,18 @@
                 </Box>
                 <Box pad={{ bottom: '15px' }}>
                   <Text color="grey700">
-                    By using a partial for the header and footer you can easily
-                    reuse the same structure without having to go through every
-                    page.
+                    By using a partial for the top menu and footer you can
+                    easily reuse the same structure without having to go through
+                    every page.
                   </Text>
                 </Box>
-                <Field label="HEADER PARTIAL">
+                <Field label="TOP MENU PARTIAL">
                   <PartialSelector
                     label="Select a partial"
                     onChange={(headerId) => {
                       setHeaderPartialId(headerId);
                     }}
+                    preSelected="Top menu"
                     value={headerPartialId}
                     allowedTypes={[
                       'BODY_COMPONENT',
@@ -448,6 +449,7 @@
                     onChange={(footerId) => {
                       setFooterPartialId(footerId);
                     }}
+                    preSelected="Footer"
                     value={footerPartialId}
                     allowedTypes={[
                       'BODY_COMPONENT',
@@ -464,7 +466,7 @@
           return (
             <>
               <Field
-                label="Model"
+                label="Model for data table"
                 error={
                   modelValidation && (
                     <Text color="#e82600">Selecting a model is required</Text>
@@ -6857,16 +6859,15 @@
           </Box>
         </Box>
       ),
-      progressBar: (titles) => {
-        const titlesArray = titles;
+      progressBar: () => {
         return (
           <Box
             justify="center"
             margin={{ bottom: '2rem', left: '2rem', top: '-1rem' }}
           >
-            <Text size="medium" weight="bold">{`Step: ${stepNumber} / ${
-              stepper.stepAmount
-            } - ${titlesArray[stepNumber - 1]}`}</Text>
+            <Text size="medium" weight="bold">{`Step: ${stepNumber + 1} / ${
+              stepper.stepAmount + 1
+            }`}</Text>
           </Box>
         );
       },
@@ -6875,12 +6876,8 @@
 
     return (
       <>
-        <Header onClose={close} title="Configure data table and details" />
-        {stepper.progressBar([
-          'Configure header and footer',
-          'Configure Data Table',
-          'Configure Details',
-        ])}
+        <Header onClose={close} title="Configure overview and detail view" />
+        {stepper.progressBar()}
         <Content>{stepper.setStep(stepNumber)}</Content>
         {stepper.buttons()}
       </>
