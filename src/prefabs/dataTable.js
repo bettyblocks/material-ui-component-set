@@ -199,6 +199,12 @@
           type: 'MODEL_AND_RELATION',
         },
         {
+          value: '',
+          label: 'Reconfigure',
+          key: 'reconfigure',
+          type: 'RECONFIGURE',
+        },
+        {
           value: {},
           label: 'Filter',
           key: 'filter',
