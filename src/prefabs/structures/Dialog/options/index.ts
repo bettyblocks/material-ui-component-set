@@ -3,13 +3,13 @@ import { advanced } from './advanced';
 
 export const options = {
   isVisible: toggle('Toggle visibility', {
-    value: true,
+    value: false,
     configuration: { as: 'VISIBILITY' },
   }),
   isFullscreen: toggle('Fullscreen', {
     value: false,
   }),
-  disableClick: toggle('Diable backdrop click', {
+  disableClick: toggle('Disable backdrop click', {
     value: false,
   }),
   width: option('CUSTOM', {
