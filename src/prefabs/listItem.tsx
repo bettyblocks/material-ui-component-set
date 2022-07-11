@@ -7,4 +7,4 @@ const attr = {
   keywords: ['List', 'item', 'listitem'],
 };
 
-export default prefab('List item (TS)', attr, undefined, [ListItem({}, [])]);
+export default prefab('List item', attr, undefined, [ListItem({}, [])]);

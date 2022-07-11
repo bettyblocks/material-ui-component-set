@@ -20,5 +20,5 @@ export const ListSubHeader = (
   const options = { ...(config.options || defaults) };
   const style = { ...config.style };
   const ref = config.ref ? { ...config.ref } : undefined;
-  return component('ListSubheader', { options, style, ref }, descendants);
+  return component('ListSubHeader', { options, style, ref }, descendants);
 };

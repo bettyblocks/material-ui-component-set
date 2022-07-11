@@ -7,6 +7,6 @@ const attr = {
   keywords: ['List', 'sub', 'header', 'subheader', 'listsubheader'],
 };
 
-export default prefab('List subheader (TS)', attr, undefined, [
+export default prefab('List subheader', attr, undefined, [
   ListSubHeader({}, []),
 ]);
