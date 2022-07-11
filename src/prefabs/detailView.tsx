@@ -33,7 +33,7 @@ const beforeCreate = ({
   close,
 }: BeforeCreateArgs) => {
   const [modelId, setModelId] = React.useState('');
-  const [properties, setProperties] = React.useState([
+  const [properties, setProperties] = React.useState<any>([
     // {
     //   defaultValue: '',
     //   id: [''],
@@ -156,7 +156,8 @@ const beforeCreate = ({
               'COMPONENT'
           ) {
             if (!sideBySide) {
-              properties.forEach((property) => {
+              // TODO: Find out what the type is of 'property'
+              properties.forEach((property: any) => {
                 if (
                   newPrefab.structure[0].type === 'COMPONENT' &&
                   newPrefab.structure[0].descendants[0].type === 'COMPONENT' &&
@@ -685,7 +686,8 @@ const beforeCreate = ({
                 }
               });
             } else {
-              properties.forEach((property, index) => {
+              // TODO: Find out what the type is of 'property'
+              properties.forEach((property: any, index: number) => {
                 if (structure.descendants[0].type === 'COMPONENT')
                   structure.descendants[0].descendants.push({
                     name: 'Row',
