@@ -15002,9 +15002,9 @@
                 </Box>
                 <Box pad={{ bottom: '15px' }}>
                   <Text color="grey700">
-                    By using a partial for the header and footer you can easily
-                    reuse the same structure without having to go through every
-                    page.
+                    By using a partial for the side menu and footer you can
+                    easily reuse the same structure without having to go through
+                    every page.
                   </Text>
                 </Box>
                 <Field label="SIDEMENU PARTIAL">
@@ -40064,16 +40064,15 @@
           </Box>
         </Box>
       ),
-      progressBar: (titles) => {
-        const titlesArray = titles;
+      progressBar: () => {
         return (
           <Box
             justify="center"
             margin={{ left: '2rem', top: '-1rem', bottom: '-1rem' }}
           >
-            <Text size="medium" weight="bold">{`Step: ${stepNumber} / ${
-              stepper.stepAmount
-            } - ${titlesArray[stepNumber - 1]}`}</Text>
+            <Text size="medium" weight="bold">{`Step: ${stepNumber + 1} / ${
+              stepper.stepAmount + 1
+            }`}</Text>
           </Box>
         );
       },
@@ -40081,11 +40080,8 @@
     };
     return (
       <>
-        <Header onClose={close} title="Configure Backoffice" />
-        {stepper.progressBar([
-          'Configure header and footer',
-          'Configure your back-office',
-        ])}
+        <Header onClose={close} title="Configure back office" />
+        {stepper.progressBar()}
         <Content>{stepper.setStep(stepNumber)}</Content>
         {stepper.buttons()}
       </>
