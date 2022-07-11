@@ -6,7 +6,6 @@ import {
   endpoint,
   showIf,
   icon,
-  Icon,
   toggle,
 } from '@betty-blocks/component-sdk';
 import { advanced } from './advanced';
@@ -67,7 +66,7 @@ export const options = {
     },
   }),
   icon: icon('Icon', {
-    value: Icon.AvatarIcon, // Has to be a Person Icon
+    value: 'Person',
     configuration: {
       condition: showIf('avatarOrIcon', 'EQ', 'icon'),
     },

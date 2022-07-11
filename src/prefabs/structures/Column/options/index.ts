@@ -92,7 +92,7 @@ export const options = {
   }),
   columnWidthMobile: option('CUSTOM', {
     value: 'flexible',
-    label: 'Column width (mobile)',
+    label: 'Pappel width (mobile)',
     configuration: {
       as: 'DROPDOWN',
       dataType: 'string',
