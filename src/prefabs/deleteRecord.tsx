@@ -148,6 +148,7 @@ const beforeCreate = ({
     </>
   );
 };
+
 const interactions = [
   {
     name: 'Show',
@@ -198,8 +199,8 @@ const variables = [
     options: {
       modelId: '',
     },
-  } as PrefabVariable,
-];
+  },
+] as PrefabVariable[];
 
 const actions = [
   {
@@ -221,6 +222,7 @@ const actions = [
     ],
   },
 ] as PrefabAction[];
+
 const attr = {
   icon: Icon.DeleteRecordIcon,
   category: 'BUTTON',
