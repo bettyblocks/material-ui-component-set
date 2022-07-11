@@ -133,10 +133,10 @@ const beforeCreate = ({
       const filterOption = structure.options.find(
         (o) => o.key === 'filter',
       ) as ValueDefault;
-      const idProperty = data.model.properties.find(
+      const idProperty = data?.model.properties.find(
         (property: any) => property.name === 'id', // property comes from a source. This is not typed anywhere. what type is this property?
       );
-      const variableName = `${camelToSnakeCase(data.model.label)}_id`;
+      const variableName = `${camelToSnakeCase(data?.model.label)}_id`;
       const context = pageId ? { pageId } : { partialId };
 
       newPrefab.variables = [];
@@ -175,7 +175,7 @@ const beforeCreate = ({
       const modelOption = structure.options.find(
         (o) => o.key === 'model',
       ) as ValueDefault;
-      const idProperty = data.model.properties.find(
+      const idProperty = data?.model.properties.find(
         (property: any) => property.name === 'id',
       );
       modelOption.value = thisPageState.modelId;
@@ -362,6 +362,7 @@ const beforeCreate = ({
                   ? loggedInUserState.authenticationProfile // loggedInUserState.authenticationProfile.id
                   : ''
               }
+              allowCustomAuthProfile
             />
           </Field>
         )}
