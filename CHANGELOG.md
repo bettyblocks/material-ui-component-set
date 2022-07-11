@@ -1,3 +1,10 @@
+# [1.249.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.248.0...v1.249.0) (2022-07-11)
+
+
+### Features
+
+* converted list prefabs to tsx and fixed column issue ([3a9f2b2](https://github.com/bettyblocks/material-ui-component-set/commit/3a9f2b28fedaa56c6c23a08b93c051fb396bd2e7))
+
 # [1.248.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.247.0...v1.248.0) (2022-07-11)
 
 
