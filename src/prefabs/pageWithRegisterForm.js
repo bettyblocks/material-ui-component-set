@@ -20,6 +20,7 @@
       Field,
       Footer,
       Text,
+      Box,
       ModelSelector,
       PropertiesSelector,
     },
@@ -6613,6 +6614,14 @@
     return (
       <>
         <Header onClose={close} title="Configure register form" />
+        <Box
+          justify="center"
+          margin={{ bottom: '2rem', left: '2rem', top: '-1rem' }}
+        >
+          <Text size="medium" weight="bold">
+            Step: 2 / 2
+          </Text>
+        </Box>
         <Content>
           <Field
             label="Select model"

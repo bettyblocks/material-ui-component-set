@@ -36333,7 +36333,6 @@
           prefabStructure;
         save(newPrefab);
       },
-
       buttons: () => (
         <Box direction="row" justify="between">
           <Box direction="row" margin="2rem">
@@ -36370,16 +36369,15 @@
           </Box>
         </Box>
       ),
-      progressBar: (titles) => {
-        const titlesArray = titles;
+      progressBar: () => {
         return (
           <Box
             justify="center"
             margin={{ left: '2rem', top: '-1rem', bottom: '-1rem' }}
           >
-            <Text size="medium" weight="bold">{`Step: ${stepNumber} / ${
-              stepper.stepAmount
-            } - ${titlesArray[stepNumber - 1]}`}</Text>
+            <Text size="medium" weight="bold">{`Step: ${stepNumber + 1} / ${
+              stepper.stepAmount + 1
+            }`}</Text>
           </Box>
         );
       },
@@ -36388,10 +36386,7 @@
     return (
       <>
         <Header onClose={close} title="Configure CRUD with dialogs" />
-        {stepper.progressBar([
-          'Configure top menu and footer',
-          'Configure your CRUD with dialog',
-        ])}
+        {stepper.progressBar()}
         <Content>{stepper.setStep(stepNumber)}</Content>
         {stepper.buttons()}
       </>
