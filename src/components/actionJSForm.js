@@ -50,6 +50,7 @@
             ],
           });
         } else {
+          // eslint-disable-next-line no-console
           console.error('Unable to set record, no model is selected.');
         }
       });
