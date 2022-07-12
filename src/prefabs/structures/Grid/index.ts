@@ -1,7 +1,7 @@
 import {
   PrefabComponentOption,
-  PrefabComponent,
   component,
+  PrefabReference,
 } from '@betty-blocks/component-sdk';
 import { options as defaults } from './options';
 
@@ -13,7 +13,7 @@ export interface Configuration {
 
 export const Grid = (
   config: Configuration,
-  descendants: PrefabComponent[] = [],
+  descendants: PrefabReference[] = [],
 ) => {
   const options = { ...(config.options || defaults) };
   return component('Grid', { options }, descendants);

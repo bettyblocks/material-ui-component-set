@@ -13,6 +13,7 @@ import {
   PrefabReference,
   BeforeCreateArgs,
   wrapper,
+  linked,
 } from '@betty-blocks/component-sdk';
 import { Box as prefabBox } from './structures/Box';
 import { options as boxOptions } from './structures/Box/options';
@@ -2201,13 +2202,13 @@ const beforeCreate = ({
           if (headerPartialId) {
             prefabHeader.descendants[0].partialId = headerPartialId;
           } else {
-            prefabHeader.descendants.push(defaultHeaderstructure);
+            prefabHeader.descendants = defaultHeaderstructure;
           }
 
           if (footerPartialId) {
             prefabFooter.descendants[0].partialId = footerPartialId;
           } else {
-            prefabFooter.descendants.push(defaultFooterStructure);
+            prefabFooter.descendants = defaultFooterStructure;
           }
 
           save(newPrefab);
@@ -2222,8 +2223,8 @@ const beforeCreate = ({
             '#Header',
             newPrefab.structure,
           );
-          prefabHeader.descendants.push(defaultHeaderstructure);
-          prefabFooter.descendants.push(defaultFooterStructure);
+          prefabHeader.descendants = defaultHeaderstructure;
+          prefabFooter.descendants = defaultFooterStructure;
           save(newPrefab);
         }}
       />
@@ -2319,7 +2320,12 @@ export default makePrefab('TSX Header & Footer', attrs, beforeCreate, [
                         }),
                       },
                     },
-                    [],
+                    [
+                      {
+                        type: 'PARTIAL',
+                        partialId: '',
+                      },
+                    ],
                   ),
                   prefabBox(
                     {
@@ -2357,12 +2363,17 @@ export default makePrefab('TSX Header & Footer', attrs, beforeCreate, [
                   wrapper(
                     {
                       label: 'Footer wrapper',
-                      value: {
-                        ref: {
-                          componentId: '#Footer',
-                          optionId: '#footerBoxInnerSpacing',
-                        },
-                      },
+                      options: [
+                        linked({
+                          label: 'Box innerspace option',
+                          value: {
+                            ref: {
+                              componentId: '#Footer',
+                              optionId: '#footerBoxInnerSpacing',
+                            },
+                          },
+                        }),
+                      ],
                     },
                     [
                       prefabBox(
@@ -2403,7 +2414,12 @@ export default makePrefab('TSX Header & Footer', attrs, beforeCreate, [
                             }),
                           },
                         },
-                        [],
+                        [
+                          {
+                            type: 'PARTIAL',
+                            partialId: '',
+                          },
+                        ],
                       ),
                     ],
                   ),
