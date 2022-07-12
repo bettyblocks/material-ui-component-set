@@ -1,3 +1,10 @@
+## [1.250.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.250.0...v1.250.1) (2022-07-12)
+
+
+### Bug Fixes
+
+* broken min/max val in beta text input ([24cc1f6](https://github.com/bettyblocks/material-ui-component-set/commit/24cc1f6a141d55d6e2d4d472e726879dd0426ce4))
+
 # [1.250.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.249.0...v1.250.0) (2022-07-11)
 
 
