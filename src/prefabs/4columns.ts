@@ -8,8 +8,8 @@ const attrs = {
   category: 'LAYOUT',
   keywords: ['Layout', 'column', 'columns', '1'],
 };
-
-options.columnWidth = option('CUSTOM', {
+const columnOptions = { ...options };
+columnOptions.columnWidth = option('CUSTOM', {
   label: 'Column width',
   value: '3',
   configuration: {
@@ -35,7 +35,7 @@ options.columnWidth = option('CUSTOM', {
   },
 });
 
-options.columnWidthTabletLandscape = option('CUSTOM', {
+columnOptions.columnWidthTabletLandscape = option('CUSTOM', {
   label: 'Column width (tablet landscape)',
   value: '6',
   configuration: {
@@ -61,7 +61,7 @@ options.columnWidthTabletLandscape = option('CUSTOM', {
   },
 });
 
-options.columnWidthTabletPortrait = option('CUSTOM', {
+columnOptions.columnWidthTabletPortrait = option('CUSTOM', {
   label: 'Column width (tablet portrait)',
   value: '6',
   configuration: {
@@ -87,7 +87,7 @@ options.columnWidthTabletPortrait = option('CUSTOM', {
   },
 });
 
-options.columnWidthMobile = option('CUSTOM', {
+columnOptions.columnWidthMobile = option('CUSTOM', {
   label: 'Column width (obile)',
   value: '6',
   configuration: {
@@ -116,16 +116,16 @@ options.columnWidthMobile = option('CUSTOM', {
 export default prefab('4 Columns', attrs, undefined, [
   Row({}, [
     Column({
-      options,
+      options: columnOptions,
     }),
     Column({
-      options,
+      options: columnOptions,
     }),
     Column({
-      options,
+      options: columnOptions,
     }),
     Column({
-      options,
+      options: columnOptions,
     }),
   ]),
 ]);
