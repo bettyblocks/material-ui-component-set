@@ -232,7 +232,7 @@ const attr = {
   actions,
 };
 
-export default makePrefab('Delete Record (TS)', attr, beforeCreate, [
+export default makePrefab('Delete Record', attr, beforeCreate, [
   Box(
     {
       options: {
