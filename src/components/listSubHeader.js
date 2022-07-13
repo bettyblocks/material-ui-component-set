@@ -1,5 +1,5 @@
 (() => ({
-  name: 'ListSubheader',
+  name: 'ListSubHeader',
   type: 'LIST_SUBHEADER',
   allowedTypes: [],
   orientation: 'VERTICAL',

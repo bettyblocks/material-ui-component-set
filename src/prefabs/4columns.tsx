@@ -3,9 +3,15 @@ import { Row } from './structures/Row';
 import { Column } from './structures/Column';
 import { options } from './structures/Column/options';
 
-options.columnWidth = option('CUSTOM', {
+const attrs = {
+  icon: Icon.Layout3333Icon,
+  category: 'LAYOUT',
+  keywords: ['Layout', 'column', 'columns', '1'],
+};
+const columnOptions = { ...options };
+columnOptions.columnWidth = option('CUSTOM', {
   label: 'Column width',
-  value: '4',
+  value: '3',
   configuration: {
     as: 'DROPDOWN',
     dataType: 'string',
@@ -29,9 +35,9 @@ options.columnWidth = option('CUSTOM', {
   },
 });
 
-options.columnWidthTabletLandscape = option('CUSTOM', {
+columnOptions.columnWidthTabletLandscape = option('CUSTOM', {
   label: 'Column width (tablet landscape)',
-  value: '4',
+  value: '6',
   configuration: {
     as: 'DROPDOWN',
     dataType: 'string',
@@ -55,9 +61,9 @@ options.columnWidthTabletLandscape = option('CUSTOM', {
   },
 });
 
-options.columnWidthTabletPortrait = option('CUSTOM', {
+columnOptions.columnWidthTabletPortrait = option('CUSTOM', {
   label: 'Column width (tablet portrait)',
-  value: '12',
+  value: '6',
   configuration: {
     as: 'DROPDOWN',
     dataType: 'string',
@@ -81,7 +87,7 @@ options.columnWidthTabletPortrait = option('CUSTOM', {
   },
 });
 
-options.columnWidthMobile = option('CUSTOM', {
+columnOptions.columnWidthMobile = option('CUSTOM', {
   label: 'Column width (obile)',
   value: '12',
   configuration: {
@@ -107,17 +113,19 @@ options.columnWidthMobile = option('CUSTOM', {
   },
 });
 
-const attrs = {
-  icon: Icon.Layout444Icon,
-  category: 'LAYOUT',
-  keywords: ['Layout', 'column', 'columns', '1'],
-};
-export default prefab('3 Columns', attrs, undefined, [
+export default prefab('4 Columns', attrs, undefined, [
   Row({}, [
     Column({
-      options,
+      options: columnOptions,
     }),
-    Column({ options }),
-    Column({ options }),
+    Column({
+      options: columnOptions,
+    }),
+    Column({
+      options: columnOptions,
+    }),
+    Column({
+      options: columnOptions,
+    }),
   ]),
 ]);
