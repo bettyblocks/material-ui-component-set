@@ -95,15 +95,14 @@
         } else {
           setFormatError(null);
         }
+      } else {
+        setFormatError(null);
       }
     };
     useEffect(() => {
       validateFormat();
-    }, [dateFormat, dateTimeFormat, defaultValue]);
-    useEffect(() => {
-      validateFormat();
-    }, []);
-    validateFormat();
+    }, [newFormat]);
+    // validateFormat();
     const convertToDate = (date) => {
       if (isValidDate(date)) {
         const dateString = `${date.getFullYear()}-${String(
@@ -254,6 +253,7 @@
         clearable={clearable}
       />
     );
+
     return isDev ? (
       <div className={classes.root}>
         {formatError && (
@@ -283,21 +283,23 @@
             {formatError}
           </div>
         )}
-        <MuiPickersUtilsProvider
-          utils={DateFnsUtils}
-          locale={localeMap[locale]}
-        >
-          <input
-            type="hidden"
-            name={nameAttributeValue || customModelAttributeName}
-            value={resultString}
-          />
-          {variant === 'static' ? (
-            <div className={classes.static}>{DateTimeCmp}</div>
-          ) : (
-            DateTimeCmp
-          )}
-        </MuiPickersUtilsProvider>
+        {!formatError && (
+          <MuiPickersUtilsProvider
+            utils={DateFnsUtils}
+            locale={localeMap[locale]}
+          >
+            <input
+              type="hidden"
+              name={nameAttributeValue || customModelAttributeName}
+              value={resultString}
+            />
+            {variant === 'static' ? (
+              <div className={classes.static}>{DateTimeCmp}</div>
+            ) : (
+              DateTimeCmp
+            )}
+          </MuiPickersUtilsProvider>
+        )}
       </>
     );
   })(),
