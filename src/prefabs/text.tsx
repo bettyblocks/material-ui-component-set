@@ -3,7 +3,7 @@ import { Text } from './structures/Text';
 import { options as baseOptions } from './structures/Text/options';
 
 const attr = {
-  icon: Icon.TitleIcon,
+  icon: Icon.ParagraphIcon,
   category: 'CONTENT',
   keywords: ['Content', 'text', 'type', 'typography', 'body', 'paragraph'],
 };
