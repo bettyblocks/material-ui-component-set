@@ -1,8 +1,8 @@
 import {
   component,
   PrefabComponentOption,
-  PrefabComponent,
   PrefabComponentStyle,
+  PrefabReference,
 } from '@betty-blocks/component-sdk';
 import { options as defaults } from './options';
 
@@ -15,7 +15,7 @@ export interface Configuration {
 }
 export const Box = (
   config: Configuration,
-  descendants: PrefabComponent[] = [],
+  descendants: PrefabReference[] = [],
 ) => {
   const options = { ...(config.options || defaults) };
   const style = { ...config.style };
