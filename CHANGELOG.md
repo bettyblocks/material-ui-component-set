@@ -1,3 +1,25 @@
+## [1.250.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.250.0...v1.250.1) (2022-07-12)
+
+
+### Bug Fixes
+
+* broken min/max val in beta text input ([24cc1f6](https://github.com/bettyblocks/material-ui-component-set/commit/24cc1f6a141d55d6e2d4d472e726879dd0426ce4))
+
+# [1.250.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.249.0...v1.250.0) (2022-07-11)
+
+
+### Features
+
+* add delete button to tsx prefabs ([95e148c](https://github.com/bettyblocks/material-ui-component-set/commit/95e148c35f934fda610dab10bb67d1cdc2325cd1))
+* add delete button to tsx prefabs ([2911c54](https://github.com/bettyblocks/material-ui-component-set/commit/2911c54fce6f7b276271c3cb283393b2ccab5306))
+
+# [1.249.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.248.0...v1.249.0) (2022-07-11)
+
+
+### Features
+
+* converted list prefabs to tsx and fixed column issue ([3a9f2b2](https://github.com/bettyblocks/material-ui-component-set/commit/3a9f2b28fedaa56c6c23a08b93c051fb396bd2e7))
+
 # [1.248.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.247.0...v1.248.0) (2022-07-11)
 
 

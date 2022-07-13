@@ -3,15 +3,10 @@ import { Row } from './structures/Row';
 import { Column } from './structures/Column';
 import { options } from './structures/Column/options';
 
-const attrs = {
-  icon: Icon.Layout3333Icon,
-  category: 'LAYOUT',
-  keywords: ['Layout', 'column', 'columns', '1'],
-};
-
-options.columnWidth = option('CUSTOM', {
+const columnOptions = { ...options };
+columnOptions.columnWidth = option('CUSTOM', {
   label: 'Column width',
-  value: '3',
+  value: '4',
   configuration: {
     as: 'DROPDOWN',
     dataType: 'string',
@@ -35,9 +30,9 @@ options.columnWidth = option('CUSTOM', {
   },
 });
 
-options.columnWidthTabletLandscape = option('CUSTOM', {
+columnOptions.columnWidthTabletLandscape = option('CUSTOM', {
   label: 'Column width (tablet landscape)',
-  value: '6',
+  value: '4',
   configuration: {
     as: 'DROPDOWN',
     dataType: 'string',
@@ -61,9 +56,9 @@ options.columnWidthTabletLandscape = option('CUSTOM', {
   },
 });
 
-options.columnWidthTabletPortrait = option('CUSTOM', {
+columnOptions.columnWidthTabletPortrait = option('CUSTOM', {
   label: 'Column width (tablet portrait)',
-  value: '6',
+  value: '12',
   configuration: {
     as: 'DROPDOWN',
     dataType: 'string',
@@ -89,7 +84,7 @@ options.columnWidthTabletPortrait = option('CUSTOM', {
 
 options.columnWidthMobile = option('CUSTOM', {
   label: 'Column width (mobile)',
-  value: '6',
+  value: '12',
   configuration: {
     as: 'DROPDOWN',
     dataType: 'string',
@@ -113,19 +108,17 @@ options.columnWidthMobile = option('CUSTOM', {
   },
 });
 
-export default prefab('4 Columns', attrs, undefined, [
+const attrs = {
+  icon: Icon.Layout444Icon,
+  category: 'LAYOUT',
+  keywords: ['Layout', 'column', 'columns', '1'],
+};
+export default prefab('3 Columns', attrs, undefined, [
   Row({}, [
     Column({
-      options,
+      options: columnOptions,
     }),
-    Column({
-      options,
-    }),
-    Column({
-      options,
-    }),
-    Column({
-      options,
-    }),
+    Column({ options: columnOptions }),
+    Column({ options: columnOptions }),
   ]),
 ]);
