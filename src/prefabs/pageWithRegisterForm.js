@@ -8,7 +8,7 @@
     'It takes a few clicks to set up your register page. Connect your model to the form and feel free to customize your image to your liking.',
   previewUrl: 'https://preview.betty.app/register',
   previewImage:
-    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_Register.png',
+    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_Register.jpg',
   category: 'LAYOUT',
   beforeCreate: ({
     prefab,
@@ -20,6 +20,7 @@
       Field,
       Footer,
       Text,
+      Box,
       ModelSelector,
       PropertiesSelector,
     },
@@ -6613,6 +6614,14 @@
     return (
       <>
         <Header onClose={close} title="Configure register form" />
+        <Box
+          justify="center"
+          margin={{ bottom: '2rem', left: '2rem', top: '-1rem' }}
+        >
+          <Text size="medium" weight="bold">
+            Step: 2 / 2
+          </Text>
+        </Box>
         <Content>
           <Field
             label="Select model"

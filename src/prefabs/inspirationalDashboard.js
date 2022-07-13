@@ -1,5 +1,5 @@
 (() => ({
-  name: 'Inspirational Dashboard',
+  name: 'Inspirational dashboard',
   icon: 'LoginFormIcon',
   type: 'page',
   description: 'Page with a static dashboard for inspiration.',
@@ -7,7 +7,7 @@
     'This page has a static dashboard to spark your interest and show what things are possible with the pagebuilder.',
   previewUrl: 'https://preview.betty.app/inspirational-dashboard',
   previewImage:
-    'https://assets.bettyblocks.com/63b1c6ccc6874e0796e5cc5b7e41b3da_assets/files/Page_Template_Inspirational_Dashboard.jpg',
+    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_Inspirational_Dashboard.jpg',
   category: 'LAYOUT',
   beforeCreate: ({
     save,
@@ -43848,10 +43848,15 @@
 
     return (
       <>
-        <Header
-          onClose={close}
-          title="Configure your header or footer partials"
-        />
+        <Header onClose={close} title="Configure inspirational dashboard" />
+        <Box
+          justify="center"
+          margin={{ bottom: '2rem', left: '2rem', top: '-1rem' }}
+        >
+          <Text size="medium" weight="bold">
+            Step: 2 / 2
+          </Text>
+        </Box>
         <Content>
           <Box pad={{ bottom: '15px' }}>
             <Box pad={{ bottom: '15px' }}>
@@ -43861,17 +43866,18 @@
             </Box>
             <Box pad={{ bottom: '15px' }}>
               <Text color="grey700">
-                By using a partial for the header and footer you can easily
+                By using a partial for the top menu and footer you can easily
                 reuse the same structure without having to go through every
                 page.
               </Text>
             </Box>
-            <Field label="HEADER PARTIAL">
+            <Field label="TOP MENU PARTIAL">
               <PartialSelector
                 label="Select a partial"
                 onChange={(headerId) => {
                   setHeaderPartialId(headerId);
                 }}
+                preSelected="Top menu"
                 value={headerPartialId}
                 allowedTypes={[
                   'BODY_COMPONENT',
@@ -43888,6 +43894,7 @@
                 onChange={(footerId) => {
                   setFooterPartialId(footerId);
                 }}
+                preSelected="Footer"
                 value={footerPartialId}
                 allowedTypes={[
                   'BODY_COMPONENT',
@@ -43899,7 +43906,7 @@
           </Box>
         </Content>
         <Footer
-          onClick={close}
+          onClose={close}
           onSave={() => {
             const newPrefab = { ...prefab };
 

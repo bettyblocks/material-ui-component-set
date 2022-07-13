@@ -253,15 +253,6 @@
           },
         },
         {
-          value: '',
-          label: 'Hide built-in search field',
-          key: 'hideSearch',
-          type: 'TOGGLE',
-          configuration: {
-            dependsOn: 'model',
-          },
-        },
-        {
           type: 'VARIABLE',
           label: 'Search on text',
           key: 'labelSearchOn',

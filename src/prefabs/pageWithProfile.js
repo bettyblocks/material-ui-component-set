@@ -8,7 +8,7 @@
     'Customize the form fields on the profile page to your needs, and have users upload a profile picture. This template also provides a password page where users can change their passwords.',
   previewUrl: 'https://preview.betty.app/profile-details',
   previewImage:
-    'https://assets.bettyblocks.com/63b1c6ccc6874e0796e5cc5b7e41b3da_assets/files/Page_Template_Profile_Page.png',
+    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_Profile_Page.jpg',
   category: 'LAYOUT',
   beforeCreate: ({
     helpers: { useModelQuery, camelToSnakeCase },
@@ -15571,6 +15571,7 @@
         ],
       },
     ];
+
     const defaultHeaderstructure = {
       name: 'Row',
       options: [
@@ -16966,6 +16967,7 @@
         },
       ],
     };
+
     const defaultFooterStructure = {
       name: 'Text',
       options: [
@@ -17206,9 +17208,9 @@
                 </Box>
                 <Box pad={{ bottom: '15px' }}>
                   <Text color="grey700">
-                    By using a partial for the header and footer you can easily
-                    reuse the same structure without having to go through every
-                    page.
+                    By using a partial for the top menu and footer you can
+                    easily reuse the same structure without having to go through
+                    every page.
                   </Text>
                 </Box>
                 <Field label="HEADER PARTIAL">
@@ -17217,6 +17219,7 @@
                     onChange={(headerId) => {
                       setHeaderPartialId(headerId);
                     }}
+                    preSelected="Top menu"
                     value={headerPartialId}
                     allowedTypes={[
                       'BODY_COMPONENT',
@@ -17233,6 +17236,7 @@
                     onChange={(footerId) => {
                       setFooterPartialId(footerId);
                     }}
+                    preSelected="Footer"
                     value={footerPartialId}
                     allowedTypes={[
                       'BODY_COMPONENT',
@@ -17777,16 +17781,15 @@
           </Box>
         </Box>
       ),
-      progressBar: (titles) => {
-        const titlesArray = titles;
+      progressBar: () => {
         return (
           <Box
             justify="center"
             margin={{ left: '2rem', top: '-1rem', bottom: '-1rem' }}
           >
-            <Text size="medium" weight="bold">{`Step: ${stepNumber} / ${
-              stepper.stepAmount
-            } - ${titlesArray[stepNumber - 1]}`}</Text>
+            <Text size="medium" weight="bold">{`Step: ${stepNumber + 1} / ${
+              stepper.stepAmount + 1
+            }`}</Text>
           </Box>
         );
       },
@@ -17794,11 +17797,8 @@
     };
     return (
       <>
-        <Header onClose={close} title="Configure profile page" />
-        {stepper.progressBar([
-          'Configure header and footer',
-          'Configure your profile page',
-        ])}
+        <Header onClose={close} title="Configure profile details" />
+        {stepper.progressBar()}
         <Content>{stepper.setStep(stepNumber)}</Content>
         {stepper.buttons()}
       </>
