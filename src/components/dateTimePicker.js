@@ -71,7 +71,39 @@
     const required = customModelAttribute ? attributeRequired : defaultRequired;
     const nameAttributeValue = useText(nameAttribute);
     const isValidDate = (date) => date instanceof Date && !isNaN(date);
+    const [formatError, setFormatError] = useState(null);
+    const newFormat = dateFormat || dateTimeFormat;
 
+    const validateFormat = () => {
+      if (!formatError) {
+        if (newFormat.indexOf('YYYY') !== -1) {
+          setFormatError(
+            'Use `yyyy` instead of `YYYY` for formatting years; see: https://git.io/fxCyr',
+          );
+        } else if (newFormat.indexOf('YY') !== -1) {
+          setFormatError(
+            'Use `yy` instead of `YY` for formatting years; see: https://git.io/fxCyr',
+          );
+        } else if (newFormat.indexOf('D') !== -1) {
+          setFormatError(
+            'Use `d` instead of `D` for formatting days of the month; see: https://git.io/fxCyr',
+          );
+        } else if (newFormat.indexOf('DD') !== -1) {
+          setFormatError(
+            'Use `dd` instead of `DD` for formatting days of the month; see: https://git.io/fxCyr',
+          );
+        } else {
+          setFormatError(null);
+        }
+      }
+    };
+    useEffect(() => {
+      validateFormat();
+    }, [dateFormat, dateTimeFormat, defaultValue]);
+    useEffect(() => {
+      validateFormat();
+    }, []);
+    validateFormat();
     const convertToDate = (date) => {
       if (isValidDate(date)) {
         const dateString = `${date.getFullYear()}-${String(
@@ -120,7 +152,6 @@
           ? DateFns.parse(strDefaultValue, defaultFormat)
           : new Date(strDefaultValue);
         const formatDefaultParse = DateFns.parse(strDefaultValue, givenFormat);
-
         if (isValidDate(propDefaultParse)) {
           setSelectedDate(propDefaultParse);
         } else if (isValidDate(formatDefaultParse)) {
@@ -223,33 +254,51 @@
         clearable={clearable}
       />
     );
-
     return isDev ? (
       <div className={classes.root}>
+        {formatError && (
+          <div className={classes.error}>
+            <h5>Date/DateTime component</h5>
+            {formatError}
+          </div>
+        )}
+        {!formatError && (
+          <MuiPickersUtilsProvider
+            utils={DateFnsUtils}
+            locale={localeMap[locale]}
+          >
+            {variant === 'static' ? (
+              <div className={classes.static}>{DateTimeCmp}</div>
+            ) : (
+              DateTimeCmp
+            )}
+          </MuiPickersUtilsProvider>
+        )}
+      </div>
+    ) : (
+      <>
+        {formatError && (
+          <div className={classes.error}>
+            <h5>Date/DateTime component</h5>
+            {formatError}
+          </div>
+        )}
         <MuiPickersUtilsProvider
           utils={DateFnsUtils}
           locale={localeMap[locale]}
         >
+          <input
+            type="hidden"
+            name={nameAttributeValue || customModelAttributeName}
+            value={resultString}
+          />
           {variant === 'static' ? (
             <div className={classes.static}>{DateTimeCmp}</div>
           ) : (
             DateTimeCmp
           )}
         </MuiPickersUtilsProvider>
-      </div>
-    ) : (
-      <MuiPickersUtilsProvider utils={DateFnsUtils} locale={localeMap[locale]}>
-        <input
-          type="hidden"
-          name={nameAttributeValue || customModelAttributeName}
-          value={resultString}
-        />
-        {variant === 'static' ? (
-          <div className={classes.static}>{DateTimeCmp}</div>
-        ) : (
-          DateTimeCmp
-        )}
-      </MuiPickersUtilsProvider>
+      </>
     );
   })(),
   styles: (B) => (t) => {
@@ -284,6 +333,12 @@
             '!important',
           ],
         },
+      },
+      error: {
+        color: ({ options: { errorColor } }) => [
+          style.getColor(errorColor),
+          '!important',
+        ],
       },
       formControl: {
         '& > label': {
