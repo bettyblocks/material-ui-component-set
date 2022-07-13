@@ -1,5 +1,5 @@
 (() => ({
-  name: 'Page With Homepage Layout',
+  name: 'Page with homepage layout',
   icon: 'ContainerIcon',
   type: 'page',
   description: 'This is a page with a static Homepage-layout.',
@@ -7,11 +7,12 @@
     'This page has a static homepage to spark your interest and show what things are possible with the pagebuilder.',
   previewUrl: 'https://preview.betty.app/homepage',
   previewImage:
-    'https://assets.bettyblocks.com/63b1c6ccc6874e0796e5cc5b7e41b3da_assets/files/Page_Template_Homepage',
+    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_Homepage.jpg',
   category: 'LAYOUT',
   beforeCreate: ({
     prefab,
     save,
+    close,
     components: { Text, Field, Box, PartialSelector, Header, Content, Footer },
   }) => {
     const [headerPartialId, setHeaderPartialId] = React.useState('');
@@ -255,7 +256,7 @@
             {
               value: [],
               label: 'Sub header',
-              key: 'subheader',
+              key: 'subHeader',
               type: 'VARIABLE',
             },
             {
@@ -6073,7 +6074,7 @@
                                 label: 'Content',
                                 key: 'content',
                                 value: [
-                                  'We are a agancy based in Europe, When we team up, you get crafted solutions that are here to stay.',
+                                  'We are an agency based in Europe. When we team up, you get crafted solutions that are here to stay.',
                                 ],
                                 configuration: {
                                   as: 'MULTILINE',
@@ -7463,7 +7464,7 @@
                                 label: 'Content',
                                 key: 'content',
                                 value: [
-                                  'Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. User generated content in real-time will have multiple touchpoints for offshoring.',
+                                  'We bring win-win survival strategies to the table to ensure proactive domination. At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. User generated content in real-time will have multiple touchpoints for offshoring.',
                                 ],
                                 configuration: {
                                   as: 'MULTILINE',
@@ -18944,7 +18945,7 @@
                                     type: 'CUSTOM',
                                     label: 'Title Font weight',
                                     key: 'titleWeight',
-                                    value: '400',
+                                    value: '500',
                                     configuration: {
                                       as: 'DROPDOWN',
                                       dataType: 'string',
@@ -24768,8 +24769,15 @@
 
     return (
       <>
-        <Header onClose={close} title="Configure header and footer" />
-
+        <Header onClose={close} title="Configure homepage" />
+        <Box
+          justify="center"
+          margin={{ bottom: '2rem', left: '2rem', top: '-1rem' }}
+        >
+          <Text size="medium" weight="bold">
+            Step: 2 / 2
+          </Text>
+        </Box>
         <Content>
           <Box pad={{ bottom: '15px' }}>
             <Box pad={{ bottom: '15px' }}>
@@ -24779,17 +24787,18 @@
             </Box>
             <Box pad={{ bottom: '15px' }}>
               <Text color="grey700">
-                By using a partial for the header and footer you can easily
+                By using a partial for the top menu and footer you can easily
                 reuse the same structure without having to go through every
                 page.
               </Text>
             </Box>
-            <Field label="HEADER PARTIAL">
+            <Field label="TOP MENU PARTIAL">
               <PartialSelector
                 label="Select a partial"
                 onChange={(headerId) => {
                   setHeaderPartialId(headerId);
                 }}
+                preSelected="Top menu"
                 value={headerPartialId}
                 allowedTypes={[
                   'BODY_COMPONENT',
@@ -24806,6 +24815,7 @@
                 onChange={(footerId) => {
                   setFooterPartialId(footerId);
                 }}
+                preSelected="Footer"
                 value={footerPartialId}
                 allowedTypes={[
                   'BODY_COMPONENT',
@@ -24817,7 +24827,7 @@
           </Box>
         </Content>
         <Footer
-          onClick={close}
+          onClose={close}
           onSave={() => {
             const newPrefab = { ...prefab };
 

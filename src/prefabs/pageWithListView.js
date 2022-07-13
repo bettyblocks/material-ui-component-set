@@ -8,7 +8,7 @@
     'View your content in a list view. This page template also contains a custom search functonality to filter your data.',
   previewUrl: 'https://preview.betty.app/list-view',
   previewImage:
-    'https://assets.bettyblocks.com/63b1c6ccc6874e0796e5cc5b7e41b3da_assets/files/Page_Template_List_View.jpg',
+    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_List_View.jpg',
   category: 'LAYOUT',
   beforeCreate: ({
     helpers: { useModelQuery },
@@ -3357,19 +3357,10 @@
                                     },
                                   },
                                   {
-                                    value: titleProperty || '',
+                                    value: '',
                                     label: 'Search on property',
                                     key: 'searchProperty',
                                     type: 'PROPERTY',
-                                    configuration: {
-                                      dependsOn: 'model',
-                                    },
-                                  },
-                                  {
-                                    value: 'true',
-                                    label: 'Hide built-in search field',
-                                    key: 'hideSearch',
-                                    type: 'TOGGLE',
                                     configuration: {
                                       dependsOn: 'model',
                                     },
@@ -11145,6 +11136,7 @@
         ],
       },
     ];
+
     const defaultHeaderstructure = {
       name: 'Column',
       options: [
@@ -13232,17 +13224,18 @@
                 </Box>
                 <Box pad={{ bottom: '15px' }}>
                   <Text color="grey700">
-                    By using a partial for the header and footer you can easily
-                    reuse the same structure without having to go through every
-                    page.
+                    By using a partial for the top menu and footer you can
+                    easily reuse the same structure without having to go through
+                    every page.
                   </Text>
                 </Box>
-                <Field label="HEADER PARTIAL">
+                <Field label="TOP MENU PARTIAL">
                   <PartialSelector
                     label="Select a partial"
                     onChange={(headerId) => {
                       setHeaderPartialId(headerId);
                     }}
+                    preSelected="Top menu"
                     value={headerPartialId}
                     allowedTypes={[
                       'BODY_COMPONENT',
@@ -13259,6 +13252,7 @@
                     onChange={(footerId) => {
                       setFooterPartialId(footerId);
                     }}
+                    preSelected="Footer"
                     value={footerPartialId}
                     allowedTypes={[
                       'BODY_COMPONENT',
@@ -13436,7 +13430,6 @@
           if (titleProperty.id) {
             dataList.descendants[0].descendants[0].descendants[0].descendants[0].descendants[1].descendants[0].descendants[0].descendants[0].descendants[0].options[0].value =
               [enrichVarObj(titleProperty)];
-            dataList.options[4].value = titleProperty.id;
             newPrefab.interactions.push({
               name: 'Filter',
               sourceEvent: 'onChange',
@@ -13480,8 +13473,6 @@
           save(newPrefab);
         }
       },
-      // #endregion
-
       buttons: () => (
         <Box direction="row" justify="between">
           <Box direction="row" margin="2rem">
@@ -13541,17 +13532,15 @@
           </Box>
         </Box>
       ),
-
-      progressBar: (titles) => {
-        const titlesArray = titles;
+      progressBar: () => {
         return (
           <Box
             justify="center"
             margin={{ left: '2rem', top: '-1rem', bottom: '-1rem' }}
           >
-            <Text size="medium" weight="bold">{`Step: ${stepNumber} / ${
-              stepper.stepAmount
-            } - ${titlesArray[stepNumber - 1]}`}</Text>
+            <Text size="medium" weight="bold">{`Step: ${stepNumber + 1} / ${
+              stepper.stepAmount + 1
+            }`}</Text>
           </Box>
         );
       },
@@ -13559,11 +13548,8 @@
     };
     return (
       <>
-        <Header onClose={close} title="Configure component" />
-        {stepper.progressBar([
-          'Configure header and footer',
-          'Configure your list view',
-        ])}
+        <Header onClose={close} title="Configure list view" />
+        {stepper.progressBar()}
         <Content>{stepper.setStep(stepNumber)}</Content>
         {stepper.buttons()}
       </>

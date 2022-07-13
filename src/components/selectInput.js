@@ -7,11 +7,14 @@
     const {
       actionProperty,
       actionVariableId,
-      disabled,
+      disabled: initialIsDisabled,
+      filter,
       variant,
       size,
       fullWidth,
       margin,
+      order,
+      orderBy,
       helperText = [''],
       label,
       labelProperty,
@@ -28,6 +31,8 @@
     const [errorState, setErrorState] = useState(false);
     const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
+    const [interactionFilter, setInteractionFilter] = useState({});
+    const [disabled, setIsDisabled] = useState(initialIsDisabled);
     const mounted = useRef(false);
     const blancoText = useText(blanco);
     const modelProperty = getProperty(actionProperty.modelProperty) || {};
@@ -40,7 +45,114 @@
 
     const { referenceModelId, modelId, kind, values = [] } = modelProperty;
 
-    const { data, loading } = useAllQuery(referenceModelId || modelId);
+    B.defineFunction('Clear', () => setCurrentValue(''));
+    B.defineFunction('Enable', () => setIsDisabled(false));
+    B.defineFunction('Disable', () => setIsDisabled(true));
+
+    const transformValue = (arg) => {
+      if (arg instanceof Date) {
+        return arg.toISOString();
+      }
+
+      return arg;
+    };
+
+    const deepMerge = (...objects) => {
+      const isObject = (item) =>
+        item && typeof item === 'object' && !Array.isArray(item);
+
+      return objects.reduce((accumulator, object) => {
+        Object.keys(object).forEach((key) => {
+          const accumulatorValue = accumulator[key];
+          const valueArg = object[key];
+
+          if (Array.isArray(accumulatorValue) && Array.isArray(valueArg)) {
+            accumulator[key] = accumulatorValue.concat(valueArg);
+          } else if (isObject(accumulatorValue) && isObject(valueArg)) {
+            accumulator[key] = deepMerge(accumulatorValue, valueArg);
+          } else {
+            accumulator[key] = valueArg;
+          }
+        });
+        return accumulator;
+      }, {});
+    };
+
+    const orderByArray = [orderBy].flat();
+    const sort =
+      !isDev && orderBy
+        ? orderByArray.reduceRight((acc, orderByProperty, index) => {
+            const prop = getProperty(orderByProperty);
+            return index === orderByArray.length - 1
+              ? { [prop.name]: order.toUpperCase() }
+              : { [prop.name]: acc };
+          }, {})
+        : {};
+
+    let interactionFilters = {};
+
+    const isEmptyValue = (arg) =>
+      !arg || (Array.isArray(arg) && arg.length === 0);
+
+    const clauses = Object.entries(interactionFilter)
+      .filter(([, { value: valueArg }]) => !isEmptyValue(valueArg))
+      .map(([, { property: propertyArg, value: valueArg }]) =>
+        propertyArg.id.reduceRight((acc, field, index, arr) => {
+          const isLast = index === arr.length - 1;
+          if (isLast) {
+            return Array.isArray(valueArg)
+              ? {
+                  _or: valueArg.map((el) => ({
+                    [field]: { [propertyArg.operator]: el },
+                  })),
+                }
+              : { [field]: { [propertyArg.operator]: valueArg } };
+          }
+
+          return { [field]: acc };
+        }, {}),
+      );
+
+    interactionFilters =
+      clauses.length > 1 ? { _and: clauses } : clauses[0] || {};
+
+    const completeFilter = deepMerge(filter, interactionFilters);
+
+    const { data, loading, refetch } = useAllQuery(
+      referenceModelId || modelId,
+      {
+        filter: completeFilter,
+        variables: {
+          ...(orderBy ? { sort: { relation: sort } } : {}),
+        },
+      },
+    );
+
+    useEffect(() => {
+      B.defineFunction('Refetch', () => refetch());
+
+      /**
+       * @name Filter
+       * @param {Property} property
+       * @returns {Void}
+       */
+      B.defineFunction(
+        'Filter',
+        ({ event, property: propertyArg, interactionId }) => {
+          setInteractionFilter((s) => ({
+            ...s,
+            [interactionId]: {
+              property: propertyArg,
+              value: event.target ? event.target.value : transformValue(event),
+            },
+          }));
+        },
+      );
+
+      B.defineFunction('ResetFilter', () => {
+        setInteractionFilter({});
+      });
+    }, []);
 
     useEffect(() => {
       B.defineFunction('Reset', () => setCurrentValue(defaultValueText));

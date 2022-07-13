@@ -2,6 +2,7 @@
   name: 'Login form with image',
   icon: 'LoginFormIcon',
   type: 'page',
+  isPublicPage: true,
   description: 'Page with login form and side image',
   detail:
     'It takes a few clicks to set up your login page. Connect your model to the form and feel free to customize your image to your liking.',
@@ -21,6 +22,7 @@
       Field,
       Footer,
       Text,
+      Box,
     },
   }) => {
     const [authProfileId, setAuthProfileId] = React.useState('');
@@ -7037,6 +7039,14 @@
     return (
       <>
         <Header onClose={close} title="Configure login form" />
+        <Box
+          justify="center"
+          margin={{ bottom: '2rem', left: '2rem', top: '-1rem' }}
+        >
+          <Text size="medium" weight="bold">
+            Step: 2 / 2
+          </Text>
+        </Box>
         <Content>
           <Field
             label="Select an authentication profile"

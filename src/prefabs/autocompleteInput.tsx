@@ -42,5 +42,9 @@ const attributes = {
 };
 
 export default prefab('Autocomplete Beta', attributes, beforeCreate, [
-  AutocompleteInput({ label: 'Autocomplete', type: 'text' }),
+  AutocompleteInput({
+    label: 'Autocomplete Beta',
+    inputLabel: 'Autocomplete',
+    type: 'text',
+  }),
 ]);

@@ -2,6 +2,7 @@
   name: 'Login and register form',
   icon: 'LoginFormIcon',
   type: 'page',
+  isPublicPage: true,
   description: 'Page with a ready to use login form, register form and image.',
   detail:
     'It takes a few clicks to set up your login and register page. Connect your model to the forms and feel free to customize your image to your liking.',
@@ -14147,16 +14148,15 @@
           </Box>
         </Box>
       ),
-      progressBar: (titles) => {
-        const titlesArray = titles;
+      progressBar: () => {
         return (
           <Box
             justify="center"
             margin={{ bottom: '2rem', left: '2rem', top: '-1rem' }}
           >
-            <Text size="medium" weight="bold">{`Step: ${stepNumber} / ${
-              stepper.stepAmount
-            } - ${titlesArray[stepNumber - 1]}`}</Text>
+            <Text size="medium" weight="bold">{`Step: ${stepNumber + 1} / ${
+              stepper.stepAmount + 1
+            }`}</Text>
           </Box>
         );
       },
@@ -14166,10 +14166,7 @@
     return (
       <>
         <Header onClose={close} title="Configure login and register form" />
-        {stepper.progressBar([
-          'Configure Login Form',
-          'Configure Register Form',
-        ])}
+        {stepper.progressBar()}
         <Content>{stepper.setStep(stepNumber)}</Content>
         {stepper.buttons()}
       </>

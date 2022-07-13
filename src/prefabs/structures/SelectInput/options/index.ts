@@ -1,5 +1,7 @@
 import {
   buttongroup,
+  filter,
+  hideIf,
   option,
   property,
   showIf,
@@ -29,6 +31,30 @@ export const options = {
       condition: showIf('optionType', 'EQ', 'never'),
     },
   }),
+  filter: filter('Filter', {
+    value: {},
+    configuration: {
+      dependsOn: 'actionProperty',
+      condition: showIf('optionType', 'EQ', 'model'),
+    },
+  }),
+
+  orderBy: property('Order by', {
+    value: '',
+    configuration: {
+      condition: showIf('optionType', 'EQ', 'model'),
+    },
+  }),
+
+  order: buttongroup(
+    'Sort order',
+    [
+      ['Ascending', 'asc'],
+      ['Descending', 'desc'],
+    ],
+    { value: 'asc', configuration: { condition: hideIf('orderBy', 'EQ', '') } },
+  ),
+
   ...validation,
   ...styles,
   ...advanced,

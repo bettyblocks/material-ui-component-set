@@ -2,12 +2,13 @@
   name: 'Error pages',
   icon: 'NavbarIcon',
   type: 'page',
+  isPublicPage: true,
   description: 'Configure a 403, 404 or 500 error page for your application.',
   detail:
     'You can choose between a 403 page for unauthorized access, a 404 page for when a page could not be found or a 500 for an internal server error.',
   previewUrl: 'https://preview.betty.app/404-styled',
   previewImage:
-    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_Errors.png',
+    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_Errors.jpg',
   category: 'LAYOUT',
   beforeCreate: ({
     prefab,
@@ -6395,6 +6396,14 @@
     return (
       <>
         <Header onClose={close} title="Configure error page" />
+        <Box
+          justify="center"
+          margin={{ bottom: '2rem', left: '2rem', top: '-1rem' }}
+        >
+          <Text size="medium" weight="bold">
+            Step: 2 / 2
+          </Text>
+        </Box>
         <Content>
           <Box direction="row" gap="small">
             <Field label="Select error type">

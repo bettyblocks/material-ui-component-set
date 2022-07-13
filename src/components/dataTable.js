@@ -37,7 +37,6 @@
       model,
       filter,
       searchProperty,
-      hideSearch,
       orderProperty,
       sortOrder,
       labelRowsPerPage,
@@ -129,7 +128,7 @@
 
     const titleText = useText(title);
     const hasSearchProperty = searchProperty && searchProperty.id;
-    const hasToolbar = titleText || (hasSearchProperty && !hideSearch);
+    const hasToolbar = titleText || hasSearchProperty;
     const elevationLevel = variant === 'flat' ? 0 : elevation;
     const hasLink = linkTo && linkTo.id !== '';
     const toolbarRef = React.createRef();
@@ -188,12 +187,14 @@
         event.target ? event.target.value : transformValue(event),
       );
       setInteractionSearchProperty(property ? property.id : '');
+      setPage(0);
     });
 
     B.defineFunction('ResetFilter', () => {
       setInteractionFilter({});
       setInteractionSearchTerm('');
       setInteractionSearchProperty('');
+      setPage(0);
     });
 
     let interactionFilters = {};
@@ -349,10 +350,6 @@
       }
     });
 
-    B.defineFunction('SetSearchValue', (event) => {
-      setSearch(event.target.value);
-    });
-
     useEffect(() => {
       if (!isDev) return;
       const placeholders = placeholderTake || amountOfRows;
@@ -439,6 +436,7 @@
 
     const handleSearch = (event) => {
       setSearch(event.target.value);
+      setPage(0);
     };
 
     const handleRowClick = (endpoint, context) => {
@@ -645,7 +643,7 @@
           {hasToolbar && (
             <Toolbar ref={toolbarRef} classes={{ root: classes.toolbar }}>
               {titleText && <span className={classes.title}>{titleText}</span>}
-              {hasSearchProperty && !hideSearch && (
+              {hasSearchProperty && (
                 <TextField
                   classes={{ root: classes.searchField }}
                   placeholder={`${useText(
