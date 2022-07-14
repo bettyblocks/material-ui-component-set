@@ -15129,6 +15129,7 @@
         const sideMenu = [
           {
             name: 'DrawerSidebar',
+            label: 'Backoffice - Side menu',
             ref: {
               id: '#Menu',
             },
@@ -15180,6 +15181,7 @@
           },
           {
             name: 'DrawerContainer',
+            label: 'Backoffice - Content',
             options: [
               {
                 type: 'COLOR',
@@ -15222,127 +15224,209 @@
             ],
             descendants: [
               {
-                name: 'Drawer',
-                ref: { id: '#contentContainer' },
+                type: 'WRAPPER',
+                label: 'Overview + Record view',
                 options: [
                   {
-                    type: 'SIZE',
-                    label: 'Drawer Width',
-                    key: 'drawerWidth',
-                    value: '480px',
-                    configuration: {
-                      as: 'UNIT',
-                    },
-                  },
-                  {
-                    value: 'temporary',
-                    label: 'Drawer type',
-                    key: 'drawerType',
-                    type: 'CUSTOM',
-                    configuration: {
-                      as: 'BUTTONGROUP',
-                      dataType: 'string',
-                      allowedInput: [
-                        { name: 'Persistent', value: 'persistent' },
-                        { name: 'Temporary', value: 'temporary' },
-                      ],
-                    },
-                  },
-                  {
-                    value: 'sm',
-                    label: 'Responsively temporary on',
-                    key: 'breakpoint',
-                    type: 'CUSTOM',
-                    configuration: {
-                      as: 'DROPDOWN',
-                      dataType: 'string',
-                      allowedInput: [
-                        { name: 'Permanent', value: 'xs' },
-                        { name: 'Mobile', value: 'sm' },
-                        { name: 'Tablet portrait', value: 'md' },
-                        { name: 'Tablet landscape', value: 'lg' },
-                      ],
-                      condition: {
-                        type: 'SHOW',
-                        option: 'drawerType',
-                        comparator: 'EQ',
-                        value: 'persistent',
-                      },
-                    },
-                  },
-                  {
-                    value: 'right',
-                    label: 'Alignment',
-                    key: 'temporaryAnchor',
-                    type: 'CUSTOM',
-                    configuration: {
-                      as: 'BUTTONGROUP',
-                      dataType: 'string',
-                      allowedInput: [
-                        { name: 'Left', value: 'left' },
-                        { name: 'Top', value: 'top' },
-                        { name: 'Right', value: 'right' },
-                        { name: 'Bottom', value: 'bottom' },
-                      ],
-                      condition: {
-                        type: 'SHOW',
-                        option: 'drawerType',
-                        comparator: 'EQ',
-                        value: 'temporary',
-                      },
-                    },
-                  },
-                  {
-                    value: 'left',
-                    label: 'Alignment',
-                    key: 'persistentAnchor',
-                    type: 'CUSTOM',
-                    configuration: {
-                      as: 'BUTTONGROUP',
-                      dataType: 'string',
-                      allowedInput: [
-                        { name: 'Left', value: 'left' },
-                        { name: 'Right', value: 'right' },
-                      ],
-                      condition: {
-                        type: 'HIDE',
-                        option: 'drawerType',
-                        comparator: 'EQ',
-                        value: 'temporary',
-                      },
-                    },
-                  },
-                  {
-                    label: 'Toggle visibility',
                     key: 'visibility',
-                    value: false,
-                    type: 'TOGGLE',
-                    configuration: {
-                      as: 'VISIBILITY',
+                    type: 'LINKED_OPTION',
+                    value: {
+                      ref: {
+                        componentId: '#contentContainer',
+                        optionId: '#contentContainerVisibility',
+                      },
                     },
                   },
                   {
-                    value: false,
-                    label: 'Advanced settings',
-                    key: 'advancedSettings',
-                    type: 'TOGGLE',
+                    key: 'shownTab',
+                    type: 'LINKED_OPTION',
+                    value: {
+                      ref: {
+                        componentId: '#drawerTabs',
+                        optionId: '#drawerTabsSelectedDesingTabIndex',
+                      },
+                    },
                   },
                   {
-                    type: 'VARIABLE',
-                    label: 'Test attribute',
-                    key: 'dataComponentAttribute',
-                    value: ['Drawer'],
+                    key: 'headerColour',
+                    type: 'LINKED_OPTION',
+                    value: {
+                      ref: {
+                        componentId: '#headerBox',
+                        optionId: '#headerBoxBackgroundColor',
+                      },
+                    },
+                  },
+                  {
+                    key: 'editButton',
+                    type: 'LINKED_OPTION',
+                    value: {
+                      ref: {
+                        componentId: '#detailCancelButton',
+                        optionId: '#detailCancelButtonText',
+                      },
+                    },
                     configuration: {
                       condition: {
                         type: 'SHOW',
-                        option: 'advancedSettings',
+                        option: 'shownTab',
                         comparator: 'EQ',
-                        value: true,
+                        value: '2',
                       },
                     },
                   },
                 ],
-                descendants: [],
+                descendants: [
+                  {
+                    name: 'Drawer',
+                    ref: { id: '#contentContainer' },
+                    options: [
+                      {
+                        type: 'SIZE',
+                        label: 'Drawer Width',
+                        key: 'drawerWidth',
+                        value: '480px',
+                        configuration: {
+                          as: 'UNIT',
+                        },
+                      },
+                      {
+                        value: 'temporary',
+                        label: 'Drawer type',
+                        key: 'drawerType',
+                        type: 'CUSTOM',
+                        configuration: {
+                          as: 'BUTTONGROUP',
+                          dataType: 'string',
+                          allowedInput: [
+                            { name: 'Persistent', value: 'persistent' },
+                            { name: 'Temporary', value: 'temporary' },
+                          ],
+                        },
+                      },
+                      {
+                        value: 'sm',
+                        label: 'Responsively temporary on',
+                        key: 'breakpoint',
+                        type: 'CUSTOM',
+                        configuration: {
+                          as: 'DROPDOWN',
+                          dataType: 'string',
+                          allowedInput: [
+                            { name: 'Permanent', value: 'xs' },
+                            { name: 'Mobile', value: 'sm' },
+                            { name: 'Tablet portrait', value: 'md' },
+                            { name: 'Tablet landscape', value: 'lg' },
+                          ],
+                          condition: {
+                            type: 'SHOW',
+                            option: 'drawerType',
+                            comparator: 'EQ',
+                            value: 'persistent',
+                          },
+                        },
+                      },
+                      {
+                        value: 'right',
+                        label: 'Alignment',
+                        key: 'temporaryAnchor',
+                        type: 'CUSTOM',
+                        configuration: {
+                          as: 'BUTTONGROUP',
+                          dataType: 'string',
+                          allowedInput: [
+                            { name: 'Left', value: 'left' },
+                            { name: 'Top', value: 'top' },
+                            { name: 'Right', value: 'right' },
+                            { name: 'Bottom', value: 'bottom' },
+                          ],
+                          condition: {
+                            type: 'SHOW',
+                            option: 'drawerType',
+                            comparator: 'EQ',
+                            value: 'temporary',
+                          },
+                        },
+                      },
+                      {
+                        value: 'left',
+                        label: 'Alignment',
+                        key: 'persistentAnchor',
+                        type: 'CUSTOM',
+                        configuration: {
+                          as: 'BUTTONGROUP',
+                          dataType: 'string',
+                          allowedInput: [
+                            { name: 'Left', value: 'left' },
+                            { name: 'Right', value: 'right' },
+                          ],
+                          condition: {
+                            type: 'HIDE',
+                            option: 'drawerType',
+                            comparator: 'EQ',
+                            value: 'temporary',
+                          },
+                        },
+                      },
+                      {
+                        ref: {
+                          id: '#contentContainerVisibility',
+                        },
+                        label: 'Toggle visibility',
+                        key: 'visibility',
+                        value: false,
+                        type: 'TOGGLE',
+                        configuration: {
+                          as: 'VISIBILITY',
+                        },
+                      },
+                      // {
+                      //   ref: {
+                      //     id: '#contentContainerVisibility',
+                      //   },
+                      //   type: 'CUSTOM',
+                      //   label: 'Page view',
+                      //   key: 'visibility',
+                      //   value: false,
+                      //   configuration: {
+                      //     as: 'BUTTONGROUP',
+                      //     dataType: 'boolean',
+                      //     allowedInput: [
+                      //       {
+                      //         name: 'Overview',
+                      //         value: false,
+                      //       },
+                      //       {
+                      //         name: 'Record view',
+                      //         value: true,
+                      //       },
+                      //     ],
+                      //   },
+                      // },
+                      {
+                        value: false,
+                        label: 'Advanced settings',
+                        key: 'advancedSettings',
+                        type: 'TOGGLE',
+                      },
+                      {
+                        type: 'VARIABLE',
+                        label: 'Test attribute',
+                        key: 'dataComponentAttribute',
+                        value: ['Drawer'],
+                        configuration: {
+                          condition: {
+                            type: 'SHOW',
+                            option: 'advancedSettings',
+                            comparator: 'EQ',
+                            value: true,
+                          },
+                        },
+                      },
+                    ],
+                    descendants: [],
+                  },
+                ],
               },
             ],
           },
@@ -15769,6 +15853,9 @@
                 descendants: [
                   {
                     name: 'Tabs',
+                    ref: {
+                      id: '#drawerTabs',
+                    },
                     options: [
                       {
                         label: 'Selected tab index',
@@ -15777,21 +15864,24 @@
                         type: 'NUMBER',
                       },
                       {
+                        ref: {
+                          id: '#drawerTabsSelectedDesingTabIndex',
+                        },
                         type: 'CUSTOM',
                         label: 'Selected design tab index',
                         key: 'selectedDesignTabIndex',
-                        value: '1',
+                        value: '2',
                         configuration: {
                           as: 'BUTTONGROUP',
                           dataType: 'string',
                           allowedInput: [
                             {
-                              name: 'Create tab',
-                              value: '1',
-                            },
-                            {
                               name: 'Detail tab',
                               value: '2',
+                            },
+                            {
+                              name: 'Create tab',
+                              value: '1',
                             },
                             {
                               name: 'Update tab',
@@ -16999,6 +17089,9 @@
                                 ],
                                 descendants: [
                                   {
+                                    ref: {
+                                      id: '#headerBox',
+                                    },
                                     name: 'Box',
                                     options: [
                                       {
@@ -17209,6 +17302,9 @@
                                         type: 'TOGGLE',
                                       },
                                       {
+                                        ref: {
+                                          id: '#headerBoxBackgroundColor',
+                                        },
                                         value: 'Primary',
                                         label: 'Background color',
                                         key: 'backgroundColor',
@@ -23077,6 +23173,9 @@
                                             },
                                           },
                                           {
+                                            ref: {
+                                              id: '#detailCancelButtonText',
+                                            },
                                             type: 'VARIABLE',
                                             label: 'Button text',
                                             key: 'buttonText',
@@ -39928,7 +40027,7 @@
           defaultHeaderstructure.descendants,
         );
         sidebarItem.options[0].value = [`${data.model.label}`];
-        sideMenu[1].descendants[0].descendants.push(
+        sideMenu[1].descendants[0].descendants[0].descendants.push(
           ...drawerSidebar,
           ...drawerContainer,
         );
@@ -40436,6 +40535,7 @@
   structure: [
     {
       name: 'Drawer',
+      label: 'Backoffice',
       options: [
         {
           type: 'SIZE',
