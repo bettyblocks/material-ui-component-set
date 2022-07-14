@@ -67,6 +67,6 @@ const attrs = {
   keywords: ['Data', 'table', 'column', 'datatablecolumn'],
 };
 
-export default makePrefab('DataTable Column', attrs, beforeCreate, [
+export default makePrefab('Datatable Column', attrs, beforeCreate, [
   DataTableColumn({}),
 ]);

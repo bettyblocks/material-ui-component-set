@@ -218,4 +218,4 @@ const beforeCreate = ({
   );
 };
 
-export default makePrefab('DataTable', attrs, beforeCreate, [DataTable({})]);
+export default makePrefab('Datatable', attrs, beforeCreate, [DataTable({})]);
