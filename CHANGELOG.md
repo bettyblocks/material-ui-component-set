@@ -1,3 +1,15 @@
+# [1.252.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.251.0...v1.252.0) (2022-07-14)
+
+
+### Bug Fixes
+
+* submit button no working ([4916a56](https://github.com/bettyblocks/material-ui-component-set/commit/4916a56f2af814855bd5b0156e0eff5a4f3e5e53))
+
+
+### Features
+
+* update submit button tmplt-1563 ([7fbeca5](https://github.com/bettyblocks/material-ui-component-set/commit/7fbeca5c638aca2b083a7b88f0a25dc0d1ff16ac))
+
 # [1.251.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.250.1...v1.251.0) (2022-07-14)
 
 
