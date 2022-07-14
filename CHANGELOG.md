@@ -1,3 +1,53 @@
+# [1.251.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.250.1...v1.251.0) (2022-07-14)
+
+
+### Bug Fixes
+
+* blank values on load ([407d93b](https://github.com/bettyblocks/material-ui-component-set/commit/407d93bacc572a22ef220d8149b2ad6bf4c8f2fa))
+* load multi relation values when filter is set ([4bfee90](https://github.com/bettyblocks/material-ui-component-set/commit/4bfee907efccd3cf56d8f9c9f047e8e55f5cb7a8))
+* load multi-relational data in mutliautocomplete ([82d6d81](https://github.com/bettyblocks/material-ui-component-set/commit/82d6d8196a8f7347adb0dd2719a87552aea95de2))
+* multi autocomplete is not draggable in columns ([87273c4](https://github.com/bettyblocks/material-ui-component-set/commit/87273c44123bed47ee77e745da0f11793d808cb3))
+* remove console logs ([59761b6](https://github.com/bettyblocks/material-ui-component-set/commit/59761b6aff06598672e62867c51d426e02426e44))
+* remove list from multiautocomplete types ([167c8f4](https://github.com/bettyblocks/material-ui-component-set/commit/167c8f45293e860f284803a46789df03a15753bd))
+* run separate query for value field ([96fa9d7](https://github.com/bettyblocks/material-ui-component-set/commit/96fa9d79e5c5aca8445301e9cf1f96444a8c266f))
+* stray conflic markers ([8f7e954](https://github.com/bettyblocks/material-ui-component-set/commit/8f7e954d4da22724fbb13c19e208a515b6e22d4c))
+
+
+### Features
+
+* add multi auto complete ([4c5cd37](https://github.com/bettyblocks/material-ui-component-set/commit/4c5cd37fb87bbb8949eda561acd253c3d0d67999))
+* remove value option use model option ([1796753](https://github.com/bettyblocks/material-ui-component-set/commit/17967535e506d620b529d1f17a0f67cbb96970a4))
+* use model and filter on multiautocomplete ([ec2b07f](https://github.com/bettyblocks/material-ui-component-set/commit/ec2b07f296b2daa2fed990221125ba3772f111f8))
+
+## [1.250.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.250.0...v1.250.1) (2022-07-12)
+
+
+### Bug Fixes
+
+* broken min/max val in beta text input ([24cc1f6](https://github.com/bettyblocks/material-ui-component-set/commit/24cc1f6a141d55d6e2d4d472e726879dd0426ce4))
+
+# [1.250.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.249.0...v1.250.0) (2022-07-11)
+
+
+### Features
+
+* add delete button to tsx prefabs ([95e148c](https://github.com/bettyblocks/material-ui-component-set/commit/95e148c35f934fda610dab10bb67d1cdc2325cd1))
+* add delete button to tsx prefabs ([2911c54](https://github.com/bettyblocks/material-ui-component-set/commit/2911c54fce6f7b276271c3cb283393b2ccab5306))
+
+# [1.249.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.248.0...v1.249.0) (2022-07-11)
+
+
+### Features
+
+* converted list prefabs to tsx and fixed column issue ([3a9f2b2](https://github.com/bettyblocks/material-ui-component-set/commit/3a9f2b28fedaa56c6c23a08b93c051fb396bd2e7))
+
+# [1.248.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.247.0...v1.248.0) (2022-07-11)
+
+
+### Features
+
+* allowed custom auth profile datacontainer ([f3d596e](https://github.com/bettyblocks/material-ui-component-set/commit/f3d596e4239533ad2c5ba1b8cff1e4d2c4bd18ee))
+
 # [1.247.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.246.3...v1.247.0) (2022-07-08)
 
 
