@@ -71,7 +71,8 @@
       );
     }
 
-    if (modelId) {
+    const isFilterEmpty = Object.keys(filter).length === 0;
+    if (modelId && !isFilterEmpty) {
       return (
         <GetOne modelId={modelId} filter={filter}>
           <FormComponent />
