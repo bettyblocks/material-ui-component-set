@@ -1,3 +1,10 @@
+## [1.252.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.252.1...v1.252.2) (2022-07-18)
+
+
+### Bug Fixes
+
+* undefined actionJS filter ([59b1b50](https://github.com/bettyblocks/material-ui-component-set/commit/59b1b50753f687c6fc1f875521055e61aabbef62))
+
 ## [1.252.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.252.0...v1.252.1) (2022-07-18)
 
 
