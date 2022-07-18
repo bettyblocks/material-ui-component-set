@@ -4,7 +4,7 @@
   allowedTypes: ['FORM_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { actionId, modelId, filter } = options;
+    const { actionId, modelId, filter = {} } = options;
     const { Form, GetOne } = B;
     const formRef = React.createRef();
 
@@ -71,7 +71,7 @@
       );
     }
 
-    const isFilterEmpty = Object.keys(filter).length === 0;
+    const isFilterEmpty = !!filter && Object.keys(filter).length === 0;
     if (modelId && !isFilterEmpty) {
       return (
         <GetOne modelId={modelId} filter={!filter ? {} : filter}>
