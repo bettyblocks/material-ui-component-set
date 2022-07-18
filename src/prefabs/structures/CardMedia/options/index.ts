@@ -4,35 +4,64 @@ import { advanced } from './advanced';
 export const options = {
   type: option('CUSTOM', {
     label: 'Media type',
-    value: 'img',
+    value: 'url',
     configuration: {
       as: 'BUTTONGROUP',
       dataType: 'string',
       allowedInput: [
         { name: 'Image', value: 'img' },
         { name: 'Video', value: 'video' },
+        { name: 'URL', value: 'url' },
         { name: 'I-frame', value: 'iframe' },
       ],
     },
   }),
-  imageSource: variable('Source', {
+  imageFileSource: option('PUBLIC_FILE', {
+    label: 'Image',
+    value: '',
+    configuration: {
+      mediaType: 'IMAGE',
+      allowedExtensions: ['image/*'],
+      condition: showIf('type', 'EQ', 'img'),
+    },
+  }),
+  urlFileSource: variable('Source', {
     value: [
       'https://material-ui.com/static/images/cards/contemplative-reptile.jpg',
     ],
     configuration: {
-      condition: showIf('type', 'EQ', 'img'),
+      placeholder: 'Starts with https:// or http://',
+      as: 'MULTILINE',
+      condition: showIf('type', 'EQ', 'url'),
     },
   }),
-  videoSource: variable('Source', {
-    value: [],
+  videoFileSource: option('PUBLIC_FILE', {
+    label: 'Video',
+    value: '',
     configuration: {
+      mediaType: 'VIDEO',
+      allowedExtensions: ['video/*'],
       condition: showIf('type', 'EQ', 'video'),
     },
   }),
   iframeSource: variable('Source', {
     value: [],
     configuration: {
+      as: 'MULTILINE',
       condition: showIf('type', 'EQ', 'iframe'),
+    },
+  }),
+  urlSourceType: option('CUSTOM', {
+    label: 'Type ',
+    value: 'image',
+    configuration: {
+      as: 'BUTTONGROUP',
+      dataType: 'string',
+      allowedInput: [
+        { name: 'Image', value: 'image' },
+        { name: 'Video page', value: 'video' },
+      ],
+      condition: showIf('type', 'EQ', 'url'),
     },
   }),
   title: variable('Title', {

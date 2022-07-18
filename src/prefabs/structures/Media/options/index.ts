@@ -18,21 +18,34 @@ export const options = {
       allowedInput: [
         { name: 'Image', value: 'img' },
         { name: 'Video', value: 'video' },
+        { name: 'URL', value: 'url' },
         { name: 'I-frame', value: 'iframe' },
       ],
     },
   }),
-  imageSource: variable('Source', {
-    value: [],
+  imageFileSource: option('PUBLIC_FILE', {
+    label: 'Image',
+    value: '',
     configuration: {
-      as: 'MULTILINE',
+      mediaType: 'IMAGE',
+      allowedExtensions: ['image/*'],
       condition: showIf('type', 'EQ', 'img'),
     },
   }),
-  videoSource: variable('Source', {
-    value: [],
+  urlFileSource: variable('Source', {
+    value: [''],
     configuration: {
+      placeholder: 'Starts with https:// or http://',
       as: 'MULTILINE',
+      condition: showIf('type', 'EQ', 'url'),
+    },
+  }),
+  videoFileSource: option('PUBLIC_FILE', {
+    label: 'Video',
+    value: '',
+    configuration: {
+      mediaType: 'VIDEO',
+      allowedExtensions: ['video/*'],
       condition: showIf('type', 'EQ', 'video'),
     },
   }),
@@ -41,6 +54,19 @@ export const options = {
     configuration: {
       as: 'MULTILINE',
       condition: showIf('type', 'EQ', 'iframe'),
+    },
+  }),
+  urlSourceType: option('CUSTOM', {
+    label: 'Type ',
+    value: 'image',
+    configuration: {
+      as: 'BUTTONGROUP',
+      dataType: 'string',
+      allowedInput: [
+        { name: 'Image', value: 'image' },
+        { name: 'Video page', value: 'video' },
+      ],
+      condition: showIf('type', 'EQ', 'url'),
     },
   }),
   linkType: option('CUSTOM', {

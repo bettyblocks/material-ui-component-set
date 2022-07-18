@@ -4,14 +4,16 @@
   allowedTypes: [],
   orientation: 'VERTICAL',
   jsx: (() => {
-    const { env, useText } = B;
+    const { env, useText, usePublicFile } = B;
     const { Link } = window.MaterialUI.Core;
     const isDev = env === 'dev';
     const {
       type,
-      imageSource,
-      videoSource,
+      imageFileSource,
+      videoFileSource,
+      urlFileSource,
       iframeSource,
+      urlSourceType,
       imgAlt,
       title,
       linkTo,
@@ -21,14 +23,23 @@
     } = options;
 
     const titleText = useText(title);
-    const videoUrl = useText(videoSource);
     const iframeUrl = useText(iframeSource);
-    const imageSourceText = useText(imageSource);
-    const [imgUrl, setImgUrl] = useState(imageSourceText);
+    const { url: imgSource = '', name: imgName = 'image' } =
+      usePublicFile(imageFileSource) || {};
+    const { url: videoSource = '#', name: videoName = 'video' } =
+      usePublicFile(videoFileSource) || {};
+
+    const isUrlImg = type === 'url' && urlSourceType === 'image';
+    const isURLVideo = type === 'url' && urlSourceType === 'video';
+    const isImage = type === 'img' || isUrlImg;
+    const isVideo = type === 'video' || isURLVideo;
+    const isIframe = type === 'iframe' && iframeUrl;
+    const inputUrl = isUrlImg ? useText(urlFileSource) : imgSource;
+    const [imgUrl, setImgUrl] = useState(inputUrl);
 
     useEffect(() => {
-      setImgUrl(imageSourceText);
-    }, [imageSourceText]);
+      setImgUrl(imgSource);
+    }, [imgSource]);
 
     useEffect(() => {
       B.defineFunction('SetCustomImage', (url) => {
@@ -36,17 +47,16 @@
       });
 
       B.defineFunction('RemoveCustomImage', () => {
-        setImgUrl(imageSourceText);
+        setImgUrl(imgSource);
       });
     }, []);
 
-    const isImage = type === 'img' && imgUrl;
-    const isVideo = type === 'video' && videoUrl;
-    const isIframe = type === 'iframe' && iframeUrl;
     const isEmpty = !isImage && !isVideo && !isIframe;
 
-    const variable = imageSource && imageSource.findIndex((v) => v.name) !== -1;
-    const variableDev = env === 'dev' && (variable || !imgUrl);
+    const variable = urlFileSource.findIndex((v) => v.name) !== -1;
+    const variableDev = env === 'dev' && (variable || imgUrl === '');
+
+    console.log({ imgUrl, variable, variableDev });
 
     const hasInteralLink =
       linkType === 'internal' && linkTo && linkTo.id !== '';
@@ -94,10 +104,10 @@
     }
 
     function Placeholder() {
-      switch (type) {
-        case 'img':
+      switch (true) {
+        case isImage:
           return <ImgPlaceholder />;
-        case 'video':
+        case isVideo:
           return <VideoPlaceholder />;
         default:
           return <IframePlaceholder />;
@@ -109,8 +119,8 @@
         <img
           className={classes.media}
           src={imgUrl}
-          title={titleText}
-          alt={imgAlt}
+          title={titleText || variable || imgName}
+          alt={imgAlt || imgName}
           data-component={useText(dataComponentAttribute) || 'Media'}
         />
       );
@@ -145,8 +155,8 @@
       return (
         <video
           className={classes.media}
-          src={videoUrl}
-          title={titleText}
+          src={videoSource}
+          title={titleText || videoName}
           controls
           data-component={useText(dataComponentAttribute) || 'Media'}
         />
