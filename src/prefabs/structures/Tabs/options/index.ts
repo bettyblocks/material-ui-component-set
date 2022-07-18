@@ -10,8 +10,8 @@ import {
 import { advanced } from './advanced';
 
 export const options = {
-  defaultValue: childSelector('Selected tab index', { value: '1' }),
-  selectedDesignTabIndex: childSelector('Selected design tab index', {
+  defaultValue: childSelector('Selected tab (runtime)', { value: '1' }),
+  selectedDesignTabIndex: childSelector('Selected tab (design)', {
     value: '1',
   }),
   showAllTabs: toggle('Show all tabs', { value: false }),
