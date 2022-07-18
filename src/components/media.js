@@ -34,8 +34,10 @@
     const isImage = type === 'img' || isUrlImg;
     const isVideo = type === 'video' || isURLVideo;
     const isIframe = type === 'iframe' && iframeUrl;
-    const inputUrl = isUrlImg ? useText(urlFileSource) : imgSource;
-    const [imgUrl, setImgUrl] = useState(inputUrl);
+    const urlInputUrl = useText(urlFileSource);
+    const imgInputUrl = isUrlImg ? urlInputUrl : imgSource;
+    const videoUrl = isURLVideo ? urlInputUrl : videoSource;
+    const [imgUrl, setImgUrl] = useState(imgInputUrl);
 
     useEffect(() => {
       setImgUrl(imgSource);
@@ -55,8 +57,6 @@
 
     const variable = urlFileSource.findIndex((v) => v.name) !== -1;
     const variableDev = env === 'dev' && (variable || imgUrl === '');
-
-    console.log({ imgUrl, variable, variableDev });
 
     const hasInteralLink =
       linkType === 'internal' && linkTo && linkTo.id !== '';
@@ -155,7 +155,7 @@
       return (
         <video
           className={classes.media}
-          src={videoSource}
+          src={videoUrl}
           title={titleText || videoName}
           controls
           data-component={useText(dataComponentAttribute) || 'Media'}

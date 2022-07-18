@@ -31,7 +31,9 @@
     const isVideo = type === 'video' || isURLVideo;
     const isIframe = type === 'iframe' && iframeUrl;
     const isEmpty = !isImage && !isVideo && !isIframe;
-    const imgUrl = isUrlImg ? useText(urlFileSource) : imgSource;
+    const urlInputUrl = useText(urlFileSource);
+    const imgUrl = isUrlImg ? urlInputUrl : imgSource;
+    const videoUrl = isURLVideo ? urlInputUrl : videoSource;
 
     const variable = urlFileSource.findIndex((v) => v.name) !== -1;
     const variableDev = env === 'dev' && (variable || imgUrl === '');
@@ -114,7 +116,7 @@
       return (
         <video
           className={classes.media}
-          src={videoSource}
+          src={videoUrl}
           title={titleText || videoName}
           controls
           data-component={useText(dataComponentAttribute) || 'Media'}
@@ -136,14 +138,10 @@
     let MediaComponent = PlaceholderComponent;
 
     if (isImage && !variableDev) {
-      console.log('isImage');
-      console.log({ variable, variableDev, urlFileSource });
       MediaComponent = ImageComponent;
     } else if (isVideo) {
-      console.log('isVideo');
       MediaComponent = VideoComponent;
     } else if (isIframe) {
-      console.log('isIframe');
       MediaComponent = IframeComponent;
     }
 
