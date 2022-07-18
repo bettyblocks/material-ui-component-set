@@ -1,3 +1,10 @@
+## [1.252.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.252.0...v1.252.1) (2022-07-18)
+
+
+### Bug Fixes
+
+* beta login form breaking when a filter was set ([a7009b1](https://github.com/bettyblocks/material-ui-component-set/commit/a7009b13bbc61762cad74fcaaa6903f33457e5a5))
+
 # [1.252.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.251.0...v1.252.0) (2022-07-14)
 
 
