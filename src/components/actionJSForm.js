@@ -74,7 +74,7 @@
     const isFilterEmpty = Object.keys(filter).length === 0;
     if (modelId && !isFilterEmpty) {
       return (
-        <GetOne modelId={modelId} filter={filter}>
+        <GetOne modelId={modelId} filter={!filter ? {} : filter}>
           <FormComponent />
         </GetOne>
       );
