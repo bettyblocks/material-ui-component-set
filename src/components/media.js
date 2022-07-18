@@ -55,7 +55,8 @@
 
     const isEmpty = !isImage && !isVideo && !isIframe;
 
-    const variable = urlFileSource.findIndex((v) => v.name) !== -1;
+    const variable =
+      urlFileSource && urlFileSource.findIndex((v) => v.name) !== -1;
     const variableDev = env === 'dev' && (variable || imgUrl === '');
 
     const hasInteralLink =

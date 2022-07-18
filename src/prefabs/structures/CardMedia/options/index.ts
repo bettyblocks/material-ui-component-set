@@ -59,7 +59,7 @@ export const options = {
       dataType: 'string',
       allowedInput: [
         { name: 'Image', value: 'image' },
-        { name: 'Video page', value: 'video' },
+        { name: 'Video', value: 'video' },
       ],
       condition: showIf('type', 'EQ', 'url'),
     },

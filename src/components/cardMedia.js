@@ -35,7 +35,8 @@
     const imgUrl = isUrlImg ? urlInputUrl : imgSource;
     const videoUrl = isURLVideo ? urlInputUrl : videoSource;
 
-    const variable = urlFileSource.findIndex((v) => v.name) !== -1;
+    const variable =
+      urlFileSource && urlFileSource.findIndex((v) => v.name) !== -1;
     const variableDev = env === 'dev' && (variable || imgUrl === '');
 
     function ImgPlaceholder() {
