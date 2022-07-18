@@ -2,7 +2,6 @@ import {
   ThemeColor,
   childSelector,
   color,
-  number,
   option,
   showIf,
   size,
@@ -11,7 +10,7 @@ import {
 import { advanced } from './advanced';
 
 export const options = {
-  defaultValue: number('Selected tab index', { value: '1' }),
+  defaultValue: childSelector('Selected tab index', { value: '1' }),
   selectedDesignTabIndex: childSelector('Selected design tab index', {
     value: '1',
   }),

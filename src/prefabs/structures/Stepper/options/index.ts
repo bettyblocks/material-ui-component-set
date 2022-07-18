@@ -3,7 +3,6 @@ import {
   childSelector,
   color,
   hideIf,
-  number,
   option,
   showIf,
   toggle,
@@ -12,7 +11,7 @@ import {
 import { advanced } from './advanced';
 
 export const options = {
-  activeStep: number('Show step', { value: '1' }),
+  activeStep: childSelector('Show step', { value: '1' }),
   selectedDesignStepIndex: childSelector('Selected design step index', {
     value: '1',
   }),
