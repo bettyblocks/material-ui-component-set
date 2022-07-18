@@ -11,8 +11,8 @@ import {
 import { advanced } from './advanced';
 
 export const options = {
-  activeStep: childSelector('Show step', { value: '1' }),
-  selectedDesignStepIndex: childSelector('Selected design step index', {
+  activeStep: childSelector('Selected step (runtime)', { value: '1' }),
+  selectedDesignStepIndex: childSelector('Selected step (design)', {
     value: '1',
   }),
   allSteps: toggle('Show all steps', { value: false }),
