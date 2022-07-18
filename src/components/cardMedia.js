@@ -4,30 +4,40 @@
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { env, useText } = B;
+    const { env, useText, usePublicFile } = B;
     const { CardMedia } = window.MaterialUI.Core;
     const isDev = env === 'dev';
     const {
       type,
-      imageSource,
-      videoSource,
+      imageFileSource,
+      videoFileSource,
+      urlFileSource,
       iframeSource,
+      urlSourceType,
       title,
       dataComponentAttribute,
     } = options;
 
     const titleText = useText(title);
-    const imgUrl = useText(imageSource);
-    const videoUrl = useText(videoSource);
     const iframeUrl = useText(iframeSource);
+    const { url: imgSource = '', name: imgName = 'image' } =
+      usePublicFile(imageFileSource) || {};
+    const { url: videoSource = '#', name: videoName = 'video' } =
+      usePublicFile(videoFileSource) || {};
 
-    const isImage = type === 'img' && imgUrl;
-    const isVideo = type === 'video' && videoUrl;
+    const isUrlImg = type === 'url' && urlSourceType === 'image';
+    const isURLVideo = type === 'url' && urlSourceType === 'video';
+    const isImage = type === 'img' || isUrlImg;
+    const isVideo = type === 'video' || isURLVideo;
     const isIframe = type === 'iframe' && iframeUrl;
     const isEmpty = !isImage && !isVideo && !isIframe;
+    const urlInputUrl = useText(urlFileSource);
+    const imgUrl = isUrlImg ? urlInputUrl : imgSource;
+    const videoUrl = isURLVideo ? urlInputUrl : videoSource;
 
-    const variable = imageSource && imageSource.findIndex((v) => v.name) !== -1;
-    const variableDev = env === 'dev' && (variable || !imgUrl);
+    const variable =
+      urlFileSource && urlFileSource.findIndex((v) => v.name) !== -1;
+    const variableDev = env === 'dev' && (variable || imgUrl === '');
 
     function ImgPlaceholder() {
       return (
@@ -96,9 +106,9 @@
         <img
           className={classes.media}
           src={imgUrl}
-          title={titleText}
-          alt={titleText}
-          data-component={useText(dataComponentAttribute) || 'CardMedia'}
+          title={titleText || imgName}
+          alt={titleText || imgName}
+          data-component={useText(dataComponentAttribute) || 'Media'}
         />
       );
     }
@@ -108,12 +118,13 @@
         <video
           className={classes.media}
           src={videoUrl}
-          title={titleText}
+          title={titleText || videoName}
           controls
-          data-component={useText(dataComponentAttribute) || 'CardMedia'}
+          data-component={useText(dataComponentAttribute) || 'Media'}
         />
       );
     }
+
     function IframeComponent() {
       return (
         <iframe
