@@ -5,6 +5,7 @@ import {
   endpoint,
   size,
   sizes,
+  property,
 } from '@betty-blocks/component-sdk';
 import { advanced } from './advanced';
 
@@ -18,6 +19,7 @@ export const options = {
       allowedInput: [
         { name: 'Image', value: 'img' },
         { name: 'Video', value: 'video' },
+        { name: 'Data', value: 'data' },
         { name: 'URL', value: 'url' },
         { name: 'I-frame', value: 'iframe' },
       ],
@@ -30,6 +32,12 @@ export const options = {
       mediaType: 'IMAGE',
       allowedExtensions: ['image/*'],
       condition: showIf('type', 'EQ', 'img'),
+    },
+  }),
+  propertyFileSource: property('Property', {
+    value: '',
+    configuration: {
+      condition: showIf('type', 'EQ', 'data'),
     },
   }),
   urlFileSource: variable('Source', {
