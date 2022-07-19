@@ -4,12 +4,13 @@
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { env, useText, usePublicFile } = B;
+    const { env, useText, usePublicFile, useProperty } = B;
     const { CardMedia } = window.MaterialUI.Core;
     const isDev = env === 'dev';
     const {
       type,
       imageFileSource,
+      propertyFileSource,
       videoFileSource,
       urlFileSource,
       iframeSource,
@@ -20,6 +21,8 @@
 
     const titleText = useText(title);
     const iframeUrl = useText(iframeSource);
+    const propValue =
+      !isDev && propertyFileSource && useProperty(propertyFileSource.id);
     const { url: imgSource = '', name: imgName = 'image' } =
       usePublicFile(imageFileSource) || {};
     const { url: videoSource = '#', name: videoName = 'video' } =
@@ -27,17 +30,25 @@
 
     const isUrlImg = type === 'url' && urlSourceType === 'image';
     const isURLVideo = type === 'url' && urlSourceType === 'video';
-    const isImage = type === 'img' || isUrlImg;
+    const isDataUrl = type === 'data';
+    const isImage = type === 'img' || isUrlImg || isDataUrl;
     const isVideo = type === 'video' || isURLVideo;
     const isIframe = type === 'iframe' && iframeUrl;
     const isEmpty = !isImage && !isVideo && !isIframe;
     const urlInputUrl = useText(urlFileSource);
-    const imgUrl = isUrlImg ? urlInputUrl : imgSource;
+    const imgInputUrl = isUrlImg ? urlInputUrl : imgSource;
     const videoUrl = isURLVideo ? urlInputUrl : videoSource;
+    const [imgUrl, setImgUrl] = useState(imgInputUrl);
 
     const variable =
       urlFileSource && urlFileSource.findIndex((v) => v.name) !== -1;
     const variableDev = env === 'dev' && (variable || imgUrl === '');
+
+    useEffect(() => {
+      if (isDataUrl && propValue) {
+        setImgUrl(propValue[propertyFileSource.useKey]);
+      }
+    }, [propValue]);
 
     function ImgPlaceholder() {
       return (
@@ -77,10 +88,10 @@
     }
 
     function Placeholder() {
-      switch (type) {
-        case 'img':
+      switch (true) {
+        case isImage:
           return <ImgPlaceholder />;
-        case 'video':
+        case isVideo:
           return <VideoPlaceholder />;
         default:
           return <IframePlaceholder />;
