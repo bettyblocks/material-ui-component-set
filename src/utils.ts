@@ -4,15 +4,15 @@ import {
   showIfTrue,
 } from '@betty-blocks/component-sdk';
 
-type Attributes = Partial<PrefabComponentOption>;
-
 export type PartialBy<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
 
-export const updateOption = (
-  producer: OptionProducer,
-  attrs: Attributes,
+export const updateOption = <T extends PrefabComponentOption>(
+  producer: (key: string) => T,
+  attrs: Partial<T>,
 ): OptionProducer => {
-  return (key) => ({ ...producer(key), ...attrs });
+  return (key) => {
+    return { ...producer(key), ...attrs };
+  };
 };
 
 export const showOn = (key: string) => ({

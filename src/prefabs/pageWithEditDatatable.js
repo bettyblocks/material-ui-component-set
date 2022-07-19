@@ -7753,6 +7753,14 @@
     return (
       <>
         <Header title="Configure data table" onClose={close} />
+        <Box
+          justify="center"
+          margin={{ bottom: '2rem', left: '2rem', top: '-1rem' }}
+        >
+          <Text size="medium" weight="bold">
+            Step: 2 / 2
+          </Text>
+        </Box>
         <Content>
           <Field
             label="Model"
