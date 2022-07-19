@@ -46,5 +46,6 @@ export default prefab('Decimal Beta', attributes, beforeCreate, [
     inputLabel: 'Decimal',
     type: 'decimal',
     pattern: '^\\d+(\\.\\d{1,2})?$',
+    dataComponentAttribute: 'DecimalInput',
   }),
 ]);

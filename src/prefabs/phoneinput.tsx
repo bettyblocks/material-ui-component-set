@@ -46,5 +46,6 @@ export default prefab('Phone Beta', attributes, beforeCreate, [
     label: 'Phone field Beta',
     inputLabel: 'Phone',
     type: 'tel',
+    dataComponentAttribute: 'PhoneInput',
   }),
 ]);

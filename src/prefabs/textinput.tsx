@@ -46,5 +46,6 @@ export default prefab('Text Field Beta', attributes, beforeCreate, [
     label: 'Text field Beta',
     inputLabel: 'Textfield',
     type: 'text',
+    dataComponentAttribute: 'TextInput',
   }),
 ]);

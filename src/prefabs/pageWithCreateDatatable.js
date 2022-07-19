@@ -4204,6 +4204,12 @@
                                 },
                               },
                               {
+                                type: 'TOGGLE',
+                                label: 'Hide rows per page',
+                                key: 'hideRowsPerPage',
+                                value: false,
+                              },
+                              {
                                 value: '5',
                                 label: 'Rows per page',
                                 key: 'take',
@@ -4260,6 +4266,12 @@
                                     value: 'never',
                                   },
                                 },
+                              },
+                              {
+                                type: 'TOGGLE',
+                                label: 'Enable first/last page navigation',
+                                key: 'enableFirstLastPageNavigation',
+                                value: false,
                               },
                               {
                                 type: 'SIZE',

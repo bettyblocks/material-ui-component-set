@@ -46,5 +46,6 @@ export default prefab('Text Area Beta', attributes, beforeCreate, [
     label: 'Multiline text field Beta',
     inputLabel: 'Textarea',
     type: 'text',
+    dataComponentAttribute: 'TextAreaInput',
   }),
 ]);

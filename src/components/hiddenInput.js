@@ -38,6 +38,10 @@
       }
     }, [isDev, defaultValue]);
 
+    useEffect(() => {
+      B.defineFunction('setValue', (data) => setCurrentValue(data));
+    }, [currentValue]);
+
     const InputCmp = (
       <input
         className={isDev && classes.pristine}

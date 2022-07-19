@@ -8,6 +8,7 @@ import { deleteActionVariable } from '../../hooks/deleteActionVariable';
 import { options as defaults } from './options';
 
 export interface Configuration {
+  dataComponentAttribute?: string;
   options?: Record<string, OptionProducer>;
   validationPattern?: string;
   adornmentIcon?: string;
@@ -53,6 +54,15 @@ export const TextInput = (
     options.adornmentIcon = updateOption(options.adornmentIcon, {
       value: config.adornmentIcon,
     });
+  }
+
+  if (config.dataComponentAttribute) {
+    options.dataComponentAttribute = updateOption(
+      options.dataComponentAttribute,
+      {
+        value: [config.dataComponentAttribute],
+      },
+    );
   }
 
   return component(
