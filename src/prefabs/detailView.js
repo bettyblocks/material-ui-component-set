@@ -511,7 +511,7 @@
                                     {
                                       value: [property],
                                       label: 'Source',
-                                      key: 'imageSource',
+                                      key: 'urlFileSource',
                                       type: 'VARIABLE',
                                       configuration: {
                                         condition: {

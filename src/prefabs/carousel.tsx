@@ -243,7 +243,7 @@ const beforeCreate = ({
                   {
                     value: [item.image],
                     label: 'Source',
-                    key: 'imageSource',
+                    key: 'urlFileSource',
                     type: 'VARIABLE',
                   },
                   {

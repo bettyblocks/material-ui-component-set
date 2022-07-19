@@ -2672,7 +2672,7 @@
                                               'https://assets.bettyblocks.com/373317d12bf04d5496079adc02aab34a_assets/files/Your_Logo_-_B.svg',
                                             ],
                                             label: 'Source',
-                                            key: 'imageSource',
+                                            key: 'urlFileSourcece',
                                             type: 'VARIABLE',
                                             configuration: {
                                               as: 'MULTILINE',

@@ -6036,7 +6036,7 @@
                         {
                           value: [property],
                           label: 'Source',
-                          key: 'imageSource',
+                          key: 'urlFileSourcece',
                           type: 'VARIABLE',
                           configuration: {
                             condition: {
@@ -6405,7 +6405,7 @@
                           {
                             value: [enrichVarObj(detail)],
                             label: 'Source',
-                            key: 'imageSource',
+                            key: 'urlFileSourcece',
                             type: 'VARIABLE',
                             configuration: {
                               condition: {

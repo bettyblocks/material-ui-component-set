@@ -1575,7 +1575,7 @@
                         {
                           value: [propertyInput],
                           label: 'Source',
-                          key: 'imageSource',
+                          key: 'urlFileSource',
                           type: 'VARIABLE',
                           configuration: {
                             as: 'MULTILINE',
@@ -34342,7 +34342,7 @@
                         {
                           value: [property],
                           label: 'Source',
-                          key: 'imageSource',
+                          key: 'urlFileSource',
                           type: 'VARIABLE',
                           configuration: {
                             as: 'MULTILINE',
