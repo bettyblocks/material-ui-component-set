@@ -18,8 +18,8 @@ export const options = {
       dataType: 'string',
       allowedInput: [
         { name: 'Image', value: 'img' },
-        { name: 'Video', value: 'video' },
         { name: 'Data', value: 'data' },
+        { name: 'Video', value: 'video' },
         { name: 'URL', value: 'url' },
         { name: 'I-frame', value: 'iframe' },
       ],
@@ -40,14 +40,6 @@ export const options = {
       condition: showIf('type', 'EQ', 'data'),
     },
   }),
-  urlFileSource: variable('Source', {
-    value: [''],
-    configuration: {
-      placeholder: 'Starts with https:// or http://',
-      as: 'MULTILINE',
-      condition: showIf('type', 'EQ', 'url'),
-    },
-  }),
   videoFileSource: option('PUBLIC_FILE', {
     label: 'Video',
     value: '',
@@ -55,6 +47,14 @@ export const options = {
       mediaType: 'VIDEO',
       allowedExtensions: ['video/*'],
       condition: showIf('type', 'EQ', 'video'),
+    },
+  }),
+  urlFileSource: variable('Source', {
+    value: [''],
+    configuration: {
+      placeholder: 'Starts with https:// or http://',
+      as: 'MULTILINE',
+      condition: showIf('type', 'EQ', 'url'),
     },
   }),
   iframeSource: variable('Source', {
