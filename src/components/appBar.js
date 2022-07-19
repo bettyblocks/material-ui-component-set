@@ -17,7 +17,7 @@
       elevation,
       dataComponentAttribute,
     } = options;
-    const { Link, env, useText, Icon } = B;
+    const { Link, Icon, env, useText, usePublicFile } = B;
     const isDev = env === 'dev';
     const [anchorEl, setAnchorEl] = useState(null);
     const isOpen = !!anchorEl;
@@ -31,8 +31,11 @@
       setAnchorEl(null);
     };
 
-    const logo = useText(logoSource);
-    const LogoCmp = logo && <img src={logo} className={classes.logo} alt="" />;
+    const { url: logoUrl = '', name: alt = '' } =
+      usePublicFile(logoSource) || {};
+    const LogoCmp = logoUrl !== '' && (
+      <img src={logoUrl} className={classes.logo} alt={alt} />
+    );
     const LogoComponent = endpoint.id ? (
       // eslint-disable-next-line jsx-a11y/anchor-is-valid
       <Link endpoint={endpoint}>{LogoCmp}</Link>
@@ -50,7 +53,7 @@
         data-component={useText(dataComponentAttribute) || 'AppBar'}
       >
         <Toolbar variant={toolbarVariant} classes={{ root: classes.toolbar }}>
-          {logo.length > 0 && LogoComponent}
+          {logoUrl !== '' && LogoComponent}
           <Typography
             variant="h6"
             noWrap
