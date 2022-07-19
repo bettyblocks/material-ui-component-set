@@ -8001,7 +8001,7 @@
                             {
                               value: [property],
                               label: 'Source',
-                              key: 'imageSource',
+                              key: 'urlFileSourcece',
                               type: 'VARIABLE',
                               configuration: {
                                 condition: {

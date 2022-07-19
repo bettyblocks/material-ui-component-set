@@ -5,6 +5,7 @@ import {
   endpoint,
   size,
   sizes,
+  property,
 } from '@betty-blocks/component-sdk';
 import { advanced } from './advanced';
 
@@ -17,6 +18,7 @@ export const options = {
       dataType: 'string',
       allowedInput: [
         { name: 'Image', value: 'img' },
+        { name: 'Data', value: 'data' },
         { name: 'Video', value: 'video' },
         { name: 'URL', value: 'url' },
         { name: 'I-frame', value: 'iframe' },
@@ -32,12 +34,10 @@ export const options = {
       condition: showIf('type', 'EQ', 'img'),
     },
   }),
-  urlFileSource: variable('Source', {
-    value: [''],
+  propertyFileSource: property('Property', {
+    value: '',
     configuration: {
-      placeholder: 'Starts with https:// or http://',
-      as: 'MULTILINE',
-      condition: showIf('type', 'EQ', 'url'),
+      condition: showIf('type', 'EQ', 'data'),
     },
   }),
   videoFileSource: option('PUBLIC_FILE', {
@@ -47,6 +47,14 @@ export const options = {
       mediaType: 'VIDEO',
       allowedExtensions: ['video/*'],
       condition: showIf('type', 'EQ', 'video'),
+    },
+  }),
+  urlFileSource: variable('Source', {
+    value: [''],
+    configuration: {
+      placeholder: 'Starts with https:// or http://',
+      as: 'MULTILINE',
+      condition: showIf('type', 'EQ', 'url'),
     },
   }),
   iframeSource: variable('Source', {

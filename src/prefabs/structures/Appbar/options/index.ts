@@ -46,7 +46,14 @@ export const options = {
     },
   }),
   title: variable('Title', { value: ['App Bar'] }),
-  logoSource: variable('Logo', { value: [] }),
+  logoSource: option('PUBLIC_FILE', {
+    label: 'Logo',
+    value: '',
+    configuration: {
+      mediaType: 'IMAGE',
+      allowedExtensions: ['image/*'],
+    },
+  }),
   logoWidth: size('Logo Width', {
     value: '150px',
     configuration: { as: 'UNIT' },

@@ -843,7 +843,7 @@
                     'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Your_Logo_-_W.svg',
                   ],
                   label: 'Source',
-                  key: 'imageSource',
+                  key: 'urlFileSourcecece',
                   type: 'VARIABLE',
                   configuration: {
                     as: 'MULTILINE',

@@ -4,12 +4,13 @@
   allowedTypes: [],
   orientation: 'VERTICAL',
   jsx: (() => {
-    const { env, useText, usePublicFile } = B;
+    const { env, useText, usePublicFile, useProperty } = B;
     const { Link } = window.MaterialUI.Core;
     const isDev = env === 'dev';
     const {
       type,
       imageFileSource,
+      propertyFileSource,
       videoFileSource,
       urlFileSource,
       iframeSource,
@@ -24,6 +25,8 @@
 
     const titleText = useText(title);
     const iframeUrl = useText(iframeSource);
+    const propValue =
+      !isDev && propertyFileSource && useProperty(propertyFileSource.id);
     const { url: imgSource = '', name: imgName = 'image' } =
       usePublicFile(imageFileSource) || {};
     const { url: videoSource = '#', name: videoName = 'video' } =
@@ -31,17 +34,21 @@
 
     const isUrlImg = type === 'url' && urlSourceType === 'image';
     const isURLVideo = type === 'url' && urlSourceType === 'video';
-    const isImage = type === 'img' || isUrlImg;
+    const isDataUrl = type === 'data';
+    const isImage = type === 'img' || isUrlImg || isDataUrl;
     const isVideo = type === 'video' || isURLVideo;
     const isIframe = type === 'iframe' && iframeUrl;
     const urlInputUrl = useText(urlFileSource);
-    const imgInputUrl = isUrlImg ? urlInputUrl : imgSource;
     const videoUrl = isURLVideo ? urlInputUrl : videoSource;
-    const [imgUrl, setImgUrl] = useState(imgInputUrl);
+    const [imgUrl, setImgUrl] = useState(imgSource);
 
     useEffect(() => {
-      setImgUrl(imgSource);
-    }, [imgSource]);
+      if (isDataUrl && propValue) {
+        setImgUrl(propValue[propertyFileSource.useKey]);
+      } else if (isImage) {
+        setImgUrl(imgSource);
+      }
+    }, [imgSource, propValue]);
 
     useEffect(() => {
       B.defineFunction('SetCustomImage', (url) => {
