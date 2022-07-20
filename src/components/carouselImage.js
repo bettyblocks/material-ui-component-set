@@ -12,7 +12,7 @@
       icon,
       type,
       imageFileSource,
-      imageUrlSource,
+      urlFileSource,
       dataComponentAttribute,
     } = options || {};
     const {
@@ -24,7 +24,7 @@
     } = parent;
     const { url: publicFileUrl = '', name: publicFileName = '' } =
       usePublicFile(imageFileSource) || {};
-    const imageUrlSourceText = useText(imageUrlSource);
+    const imageUrlSourceText = useText(urlFileSource);
     const imgUrl = type === 'url' ? imageUrlSourceText : publicFileUrl;
     const alt = `carousel-${publicFileName || ''}`;
 

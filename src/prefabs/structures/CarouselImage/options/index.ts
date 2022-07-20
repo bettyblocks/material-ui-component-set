@@ -23,7 +23,7 @@ export const options = {
       condition: showIf('type', 'EQ', 'publicFile'),
     },
   }),
-  imageUrlSource: variable('Source', {
+  urlFileSource: variable('Source', {
     value: [
       'https://assets.bettyblocks.com/771d40f1fc49403e824cdca2fe025aeb_assets/files/image-carousel-preview',
     ],
