@@ -1,18 +1,20 @@
 import {
-  number,
-  option,
-  toggle,
-  hideIf,
-  color,
   ThemeColor,
+  childSelector,
+  color,
+  hideIf,
+  option,
   showIf,
+  toggle,
   variable,
 } from '@betty-blocks/component-sdk';
 import { advanced } from './advanced';
 
 export const options = {
-  activeStep: number('Show step', { value: '1' }),
-  selectedDesignStepIndex: number('Selected design step index', { value: '1' }),
+  activeStep: childSelector('Selected step (runtime)', { value: '1' }),
+  selectedDesignStepIndex: childSelector('Selected step (design)', {
+    value: '1',
+  }),
   allSteps: toggle('Show all steps', { value: false }),
   type: option('CUSTOM', {
     label: 'Type',
