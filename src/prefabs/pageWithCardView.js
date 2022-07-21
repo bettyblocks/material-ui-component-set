@@ -1541,7 +1541,7 @@
                   },
                   {
                     type: 'WRAPPER',
-                    label: 'List view',
+                    label: 'Card view',
                     options: [
                       {
                         key: '0',
