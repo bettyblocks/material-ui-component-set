@@ -13486,7 +13486,7 @@
                             type: 'SIZE',
                             label: 'Height',
                             key: 'height',
-                            value: '100%',
+                            value: '100vh',
                             configuration: {
                               as: 'UNIT',
                             },
