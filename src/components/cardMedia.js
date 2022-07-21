@@ -35,10 +35,25 @@
     const isVideo = type === 'video' || isURLVideo;
     const isIframe = type === 'iframe' && iframeUrl;
     const isEmpty = !isImage && !isVideo && !isIframe;
-    const urlInputUrl = useText(urlFileSource);
-    const imgInputUrl = isUrlImg ? urlInputUrl : imgSource;
-    const videoUrl = isURLVideo ? urlInputUrl : videoSource;
-    const [imgUrl, setImgUrl] = useState(imgInputUrl);
+    const urlFileSourceText = useText(urlFileSource);
+    const videoUrl = isURLVideo ? urlFileSourceText : videoSource;
+
+    function getImgUrl() {
+      switch (true) {
+        case isDataUrl && propValue:
+          return propValue[propertyFileSource.useKey];
+        case isUrlImg:
+          return urlFileSourceText;
+        default:
+          return imgSource;
+      }
+    }
+
+    const [imgUrl, setImgUrl] = useState(getImgUrl());
+
+    useEffect(() => {
+      setImgUrl(getImgUrl());
+    }, [imgSource, propValue, urlFileSourceText]);
 
     const variable =
       urlFileSource && urlFileSource.findIndex((v) => v.name) !== -1;

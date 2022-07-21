@@ -22,11 +22,12 @@
       isFirstRender,
       parentHeight,
     } = parent;
-    const { url: publicFileUrl = '', name: publicFileName = '' } =
+    const { url: publicFileUrl = '', name: publicFileName = 'carousel' } =
       usePublicFile(imageFileSource) || {};
-    const imageUrlSourceText = useText(urlFileSource);
-    const imgUrl = type === 'url' ? imageUrlSourceText : publicFileUrl;
-    const alt = `carousel-${publicFileName || ''}`;
+    const urlFileSourceText = useText(urlFileSource) || '';
+
+    const isUrl = type === 'url';
+    const imgUrl = isUrl ? urlFileSourceText : publicFileUrl;
 
     function ImgPlaceholder() {
       return (
@@ -54,7 +55,7 @@
         <div className={classes.root} style={{ height: parentHeight }}>
           <img
             src={imgUrl}
-            alt={alt}
+            alt={publicFileName}
             data-component={useText(dataComponentAttribute) || 'CarouselImage'}
           />
         </div>

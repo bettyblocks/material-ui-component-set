@@ -38,17 +38,25 @@
     const isImage = type === 'img' || isUrlImg || isDataUrl;
     const isVideo = type === 'video' || isURLVideo;
     const isIframe = type === 'iframe' && iframeUrl;
-    const urlInputUrl = useText(urlFileSource);
-    const videoUrl = isURLVideo ? urlInputUrl : videoSource;
-    const [imgUrl, setImgUrl] = useState(imgSource);
+    const urlFileSourceText = useText(urlFileSource);
+    const videoUrl = isURLVideo ? urlFileSourceText : videoSource;
+
+    function getImgUrl() {
+      switch (true) {
+        case isDataUrl && propValue:
+          return propValue[propertyFileSource.useKey];
+        case isUrlImg:
+          return urlFileSourceText;
+        default:
+          return imgSource;
+      }
+    }
+
+    const [imgUrl, setImgUrl] = useState(getImgUrl());
 
     useEffect(() => {
-      if (isDataUrl && propValue) {
-        setImgUrl(propValue[propertyFileSource.useKey]);
-      } else if (isImage) {
-        setImgUrl(imgSource);
-      }
-    }, [imgSource, propValue]);
+      setImgUrl(getImgUrl());
+    }, [imgSource, propValue, urlFileSourceText]);
 
     useEffect(() => {
       B.defineFunction('SetCustomImage', (url) => {
