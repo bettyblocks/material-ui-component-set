@@ -13383,7 +13383,7 @@
                       {
                         key: '0',
                         type: 'LINKED_OPTION',
-                        label: 'Toggle between overview and record view',
+                        label: 'Toggle overview and record view',
                         value: {
                           ref: {
                             componentId: '#mainDrawer',
@@ -13410,6 +13410,28 @@
                           ref: {
                             componentId: '#createTabTitle',
                             optionId: '#createTabTitleOption',
+                          },
+                        },
+                      },
+                      {
+                        key: '3',
+                        type: 'LINKED_OPTION',
+                        label: 'Update tab title',
+                        value: {
+                          ref: {
+                            componentId: '#updateTabTitle',
+                            optionId: '#updateTabTitleOption',
+                          },
+                        },
+                      },
+                      {
+                        key: '4',
+                        type: 'LINKED_OPTION',
+                        label: 'Details tab title',
+                        value: {
+                          ref: {
+                            componentId: '#detailsTabTitle',
+                            optionId: '#detailsTabTitleOption',
                           },
                         },
                       },
@@ -19098,9 +19120,15 @@
                                         ],
                                         descendants: [
                                           {
+                                            ref: {
+                                              id: '#detailsTabTitle',
+                                            },
                                             name: 'Text',
                                             options: [
                                               {
+                                                ref: {
+                                                  id: '#detailsTabTitleOption',
+                                                },
                                                 type: 'VARIABLE',
                                                 label: 'Content',
                                                 key: 'content',
@@ -22545,9 +22573,15 @@
                                         ],
                                         descendants: [
                                           {
+                                            ref: {
+                                              id: '#updateTabTitle',
+                                            },
                                             name: 'Text',
                                             options: [
                                               {
+                                                ref: {
+                                                  id: '#updateTabTitleOption',
+                                                },
                                                 type: 'VARIABLE',
                                                 label: 'Content',
                                                 key: 'content',
@@ -40143,7 +40177,7 @@
         {
           key: '0',
           type: 'LINKED_OPTION',
-          label: 'Toggle between overview and record view',
+          label: 'Toggle overview and record view',
           value: {
             ref: {
               componentId: '#mainDrawer',
