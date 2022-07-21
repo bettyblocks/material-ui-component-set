@@ -515,7 +515,7 @@ const beforeCreate = ({
                                       {
                                         value: [property],
                                         label: 'Source',
-                                        key: 'imageSource',
+                                        key: 'urlFileSource',
                                         type: 'VARIABLE',
                                         configuration: {
                                           condition: {
@@ -529,7 +529,7 @@ const beforeCreate = ({
                                       {
                                         value: [],
                                         label: 'Source',
-                                        key: 'videoSource',
+                                        key: 'videoFileSource',
                                         type: 'VARIABLE',
                                         configuration: {
                                           condition: {
