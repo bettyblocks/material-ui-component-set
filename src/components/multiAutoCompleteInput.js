@@ -1,52 +1,61 @@
 (() => ({
-  name: 'AutocompleteInput',
+  name: 'Multi Autocomplete Beta',
   type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { Autocomplete } = window.MaterialUI.Lab;
-    const { CircularProgress, TextField, FormControl, FormHelperText } =
-      window.MaterialUI.Core;
+    const {
+      Checkbox,
+      Chip,
+      CircularProgress,
+      TextField,
+      FormControl,
+      FormHelperText,
+    } = window.MaterialUI.Core;
     const {
       InteractionScope,
       ModelProvider,
       env,
-      getIdProperty,
-      getModel,
       getProperty,
       useAllQuery,
       useFilter,
       useText,
       Icon,
+      getModel,
+      getIdProperty,
     } = B;
     const {
       actionProperty,
       actionVariableId: name,
       closeOnSelect,
-      required: defaultRequired,
       dataComponentAttribute: dataComponentAttributeRaw,
-      disabled: initialDisabled,
+      disabled,
       errorType,
+      label: labelRaw,
+      labelProperty: labelPropertyId = '',
       filter: filterRaw,
       fullWidth,
       helperText: helperTextRaw,
       hideLabel,
-      label: labelRaw,
-      labelProperty: labelPropertyId = '',
       margin,
+      model: modelId,
+      required,
       nameAttribute: nameAttributeRaw,
+      optionType,
       order,
       orderBy,
       placeholder: placeholderRaw,
+      renderCheckboxes,
+      showError,
       size,
-      value: valueRaw,
+      variant,
       validationBelowMinimum = [''],
       validationPatternMismatch = [''],
       validationTooLong = [''],
       validationTooShort = [''],
       validationTypeMismatch = [''],
       validationValueMissing = [''],
-      variant,
       maxlength,
       minlength,
       pattern,
@@ -54,34 +63,28 @@
       type,
     } = options;
     const numberPropTypes = ['serial', 'minutes', 'count', 'integer'];
-
     /*
      * To understand this component it is important to know what the following options are used for:
      *
-     * optionType: Is one of two values: `property` or `model`. When the value is `property` we're working with a list property to show a list of selectable values,
-     * otherwise we're working with a model.
+     * customModelAttribute: To label how the data will be send to an action when a form is submitted. Also to get the default value when used in an update form.
+     * freeSolo: Allows any value to be submitted from the Autocomplete. Normally only values rendered as options in the dropdown can be selected and submitted.
+     * multiple: Allows multiple values to be selected. Will be send to the backend as a string with comma separated values
+     * optionType: Is one of two values: `property` or `model`. When the value is `property` we're working with a list property to show a list of selectable values, otherwise we're working with a model.
      *
      */
+
     const isDev = env === 'dev';
+    const multiple = true;
     const displayError = errorType === 'built-in';
     const placeholder = useText(placeholderRaw);
     const helperText = useText(helperTextRaw);
     const nameAttribute = useText(nameAttributeRaw);
-    const changeContext = useRef(null);
-    const [disabled, setIsDisabled] = useState(initialDisabled);
     const [helper, setHelper] = useState(useText(helperTextRaw));
     const [errorState, setErrorState] = useState(false);
+    const changeContext = useRef(null);
     const dataComponentAttribute =
       useText(dataComponentAttributeRaw) || 'AutoComplete';
 
-    const required = defaultRequired;
-    const label = useText(labelRaw);
-    const defaultValue = useText(valueRaw, { rawValue: true });
-    const initalValue = defaultValue.replace(/\n/g, '');
-    const [value, setValue] = useState(initalValue);
-    const [debouncedInputValue, setDebouncedInputValue] = useState();
-    const [interactionFilter, setInteractionFilter] = useState({});
-    const defaultValueEvaluatedRef = useRef(false);
     const isNumberType = type === 'number';
 
     const validPattern = pattern || null;
@@ -98,21 +101,15 @@
     const helperTextResolved = useText(helperTextRaw);
 
     const modelProperty = getProperty(actionProperty.modelProperty) || {};
+
     const labelProperty = getProperty(labelPropertyId) || {};
-
-    const { modelId: propertyModelId } = modelProperty;
-
-    const modelId = modelProperty.referenceModelId || propertyModelId;
 
     const model = getModel(modelId);
     const defaultLabelProperty = getProperty(model.labelPropertyId || '') || {};
-    const idProperty = getIdProperty(modelId) || {};
+    const idProperty = getIdProperty(modelId || '') || {};
+
     const isListProperty =
       modelProperty.kind === 'LIST' || modelProperty.kind === 'list';
-
-    const [inputValue, setInputValue] = useState(
-      isListProperty ? defaultValue : '',
-    );
 
     const hasLabelProperty = !!(labelProperty && labelProperty.id);
     const hasDefaultLabelProperty = !!(
@@ -125,11 +122,6 @@
         (hasDefaultLabelProperty && defaultLabelProperty) ||
         idProperty;
 
-    /*
-     * This component only works with relational or list properties.
-     * the value of a list property is the list item itself.
-     * the value of a related property is the id of the related record.
-     */
     const valueProperty = isListProperty ? modelProperty : idProperty;
 
     const validationMessage = (validityObject) => {
@@ -186,10 +178,57 @@
       };
     };
 
+    const label = useText(labelRaw);
+
+    // eslint-disable-next-line no-underscore-dangle
+    const initialValue = [];
+
+    /*
+     * Selected value of the autocomplete.
+     *
+     * It is an object or and array of objects (in case of multiple). The object being a one on one copy of the result of the request.
+     * In case of freeSolo the type is string or and array of strings.
+     *
+     */
+    const [value, setValue] = useState(initialValue);
+
+    useEffect(() => {
+      if (isDev && typeof value === 'string') {
+        if (value.trim() === '') {
+          setValue([]);
+        } else {
+          setValue(
+            value
+              .trim()
+              .split(',')
+              .map((x) => x.trim()),
+          );
+        }
+      }
+    }, [multiple]);
+
+    /*
+     * User input in the autocomplete. In case of freeSolo this is the same as `value`
+     */
+    const [inputValue, setInputValue] = useState('');
+
+    /*
+     * Debounced user input to only send a request every 250ms
+     */
+    const [debouncedInputValue, setDebouncedInputValue] = useState();
+
+    /*
+     * Keep state of interaction filters coming from other components
+     */
+    const [interactionFilter, setInteractionFilter] = useState({});
+
     const searchProp = searchProperty || {};
     const valueProp = valueProperty || {};
     const hasSearch = searchProp && searchProp.id;
     const hasValue = !!(valueProp && valueProp.id);
+
+    let valid = false;
+    let message = '';
 
     /*
      * Merges interaction filters with local filters
@@ -218,33 +257,90 @@
     /*
      * We do some validations that checks if all required options are set. We do this in one place to prevent clutter further on
      */
+    switch (optionType) {
+      case 'model': {
+        if (!model) {
+          message = 'No model selected';
+          break;
+        }
+        if (!hasSearch && !hasValue) {
+          message = 'No property selected';
+          break;
+        }
+        if (!hasValue) {
+          message = 'No value property selected';
+          break;
+        }
+        if (!hasSearch) {
+          message = 'No label property selected';
+          break;
+        }
 
-    let valid = true;
-    let message = '';
+        valid = true;
+        break;
+      }
+      case 'property': {
+        if (!isListProperty) {
+          message = 'No property of type "List" selected';
+          break;
+        }
 
-    if (!isListProperty && !isDev) {
-      if (!modelId) {
-        message = 'No model selected';
-        valid = false;
+        valid = true;
+        break;
       }
-      if (!hasSearch && !hasValue) {
-        message = 'No property selected';
-        valid = false;
-      }
-      if (!hasValue) {
-        message = 'No value propery selected';
-        valid = false;
-      }
-      if (!hasSearch) {
-        message = 'No label property selected';
-        valid = false;
+      default: {
+        message = 'Invalid value for optionType option';
+        break;
       }
     }
+
+    const parentIdProperty = getIdProperty(modelProperty.modelId).id;
+    const parentIdValue = B.useProperty(parentIdProperty);
+    const queryWasResolvable = !!parentIdValue;
+
+    // this should be merged into the final filter
+    const valuesFilter = {
+      _and: [
+        {
+          [modelProperty.inverseAssociationId]: {
+            [parentIdProperty]: {
+              eq: {
+                id: [parentIdProperty],
+                type: 'PROPERTY',
+              },
+            },
+          },
+        },
+      ],
+    };
+
+    const valueFilter = useFilter(valuesFilter);
+
+    useAllQuery(
+      modelId,
+      {
+        take: 20,
+        rawFilter: valueFilter,
+        variables: {},
+        onCompleted(res) {
+          const hasResult = res && res.results && res.results.length > 0;
+          if (hasResult) {
+            setValue(res.results);
+          }
+        },
+        onError(resp) {
+          if (!displayError) {
+            B.triggerEvent('onError', resp);
+          }
+        },
+      },
+      optionType === 'property' || !valid || !queryWasResolvable,
+    );
 
     useEffect(() => {
       let debounceInput;
 
-      if (!isListProperty) {
+      if (optionType === 'model') {
         if (inputValue !== debouncedInputValue) {
           debounceInput = setTimeout(() => {
             setDebouncedInputValue(inputValue);
@@ -253,7 +349,7 @@
       }
 
       return () => {
-        if (!isListProperty) {
+        if (optionType === 'model') {
           clearTimeout(debounceInput);
         }
       };
@@ -261,8 +357,16 @@
 
     const optionFilter = useFilter(filterRaw || {});
 
+    // Adds the default values to the filter
+    const defaultValuesFilterArray = initialValue.reduce((acc, next) => {
+      return [...acc, { [valueProp.name]: { eq: next } }];
+    }, []);
+
     // We need to do this, because options.filter is not immutable
-    const filter = { ...optionFilter };
+    const filter = {
+      ...(initialValue.length > 0 && { _or: defaultValuesFilterArray }),
+      ...optionFilter,
+    };
 
     const searchPropIsNumber = numberPropTypes.includes(searchProp.kind);
     const valuePropIsNumber = numberPropTypes.includes(valueProp.kind);
@@ -273,53 +377,21 @@
      * Those values always need to be returned in the results of the request
      */
     /* eslint-disable no-underscore-dangle */
-    if (
-      debouncedInputValue &&
-      (searchPropIsNumber
-        ? parseInt(debouncedInputValue, 10)
-        : debouncedInputValue) ===
-        (typeof value === 'string' ? value : value[searchProp.name])
-    ) {
-      filter._or = [
-        {
+    if (multiple) {
+      if (debouncedInputValue) {
+        if (!filter._or) {
+          filter._or = [];
+        }
+        filter._or.push({
           [searchProp.name]: {
             [searchPropIsNumber ? 'eq' : 'regex']: searchPropIsNumber
               ? parseInt(debouncedInputValue, 10)
               : debouncedInputValue,
           },
-        },
-        {
-          [valueProp.name]: {
-            neq: valuePropIsNumber
-              ? parseInt(value[valueProp.name], 10)
-              : value[valueProp.name],
-          },
-        },
-      ];
-    } else if (debouncedInputValue) {
-      filter[searchProp.name] = {
-        [searchPropIsNumber ? 'eq' : 'regex']: searchPropIsNumber
-          ? parseInt(debouncedInputValue, 10)
-          : debouncedInputValue,
-      };
-    } else if (value !== '') {
-      filter._or = [
-        {
-          [valueProp.name]: {
-            [valuePropIsNumber ? 'eq' : 'regex']:
-              typeof value === 'string' ? value : value[valueProp.name],
-          },
-        },
-      ];
-
-      if (defaultValueEvaluatedRef.current) {
-        filter._or.push({
-          [valueProp.name]: {
-            neq: typeof value === 'string' ? value : value[valueProp.name],
-          },
         });
       }
     }
+
     /* eslint-enable no-underscore-dangle */
 
     /*
@@ -334,7 +406,7 @@
         propertyArg.id.reduceRight((acc, field, index, arr) => {
           if (
             Array.isArray(eventValue) &&
-            B.getProperty(field).kind === 'belongs_to'
+            B.getProperty(field || '').kind === 'belongs_to'
           ) {
             const [operator] = Object.keys(acc);
             return {
@@ -380,7 +452,7 @@
         };
       } else if (orderByPath.length > 1) {
         sort = orderByPath.reduceRight((acc, propertyId, index) => {
-          const orderProperty = getProperty(propertyId);
+          const orderProperty = getProperty(propertyId || '');
 
           return index === orderByPath.length - 1
             ? { [orderProperty.name]: order.toUpperCase() }
@@ -409,8 +481,6 @@
           } else {
             B.triggerEvent('onNoResults');
           }
-
-          B.triggerEvent('onDone');
         },
         onError(resp) {
           if (!displayError) {
@@ -418,7 +488,7 @@
           }
         },
       },
-      isListProperty || !valid,
+      optionType === 'property' || !valid,
     );
 
     if (loading) {
@@ -427,36 +497,16 @@
 
     if (error && displayError) {
       valid = false;
-      message = 'Something went wrong while loading.';
-    }
-
-    // If the default value is a value that lives outside the take range of the query we should fetch the values before we continue.
-    if (!isDev && !defaultValueEvaluatedRef.current && value && results) {
-      setValue((prev) => {
-        return (
-          results.find(
-            (result) =>
-              result[valueProp.name] &&
-              prev[valueProp.name] === result[valueProp.name],
-          ) || ''
-        );
-      });
-
-      defaultValueEvaluatedRef.current = true;
+      message = error;
     }
 
     B.defineFunction('Clear', () => {
-      setValue('');
+      setValue([]);
       setInputValue('');
       setDebouncedInputValue('');
     });
 
-    B.defineFunction('Reset', () => setValue(initalValue));
-
     B.defineFunction('Refetch', () => refetch());
-
-    B.defineFunction('Enable', () => setIsDisabled(false));
-    B.defineFunction('Disable', () => setIsDisabled(true));
 
     /**
      * @name Filter
@@ -490,33 +540,83 @@
       setInteractionFilter({});
     });
 
+    /*
+     * Show a TextField in design time
+     */
+    if (isDev || !valid) {
+      let designTimeValue;
+
+      if (!valid) {
+        designTimeValue = message;
+      }
+
+      if (isDev) {
+        designTimeValue = '';
+      }
+
+      return (
+        <div className={classes.root}>
+          <TextField
+            InputProps={{
+              inputProps: {
+                tabIndex: isDev ? -1 : undefined,
+              },
+              endAdornment: <Icon name="ExpandMore" />,
+              ...(!designTimeValue && {
+                startAdornment: (
+                  <>
+                    <Chip label="Chip 1" onDelete={() => {}} />
+                    <Chip label="Chip 2" onDelete={() => {}} />
+                  </>
+                ),
+              }),
+            }}
+            classes={{ root: classes.formControl }}
+            dataComponent={dataComponentAttribute}
+            disabled={disabled || !valid}
+            error={showError}
+            fullWidth={fullWidth}
+            helperText={helperText}
+            label={!hideLabel && label}
+            margin={margin}
+            placeholder={placeholder}
+            required={required}
+            size={size}
+            value={designTimeValue}
+            variant={variant}
+          />
+        </div>
+      );
+    }
+
     const getOptions = () => {
-      if (isListProperty) {
+      if (optionType === 'property') {
         return modelProperty.values.map((propertyValue) => propertyValue.value);
       }
 
-      if (!isListProperty) {
+      if (optionType === 'model') {
         if (!results) {
           return [];
         }
+        const nonFetchedOptions = [];
+        value.forEach((x) => {
+          if (
+            !results.some((result) => {
+              if (typeof x === 'string') {
+                return valuePropIsNumber
+                  ? result[valueProp.name] === parseInt(x, 10)
+                  : result[valueProp.name] === x;
+              }
 
-        if (
-          !results.some((result) => {
-            if (typeof value === 'string') {
-              return valuePropIsNumber
-                ? result[valueProp.name] === parseInt(value, 10)
-                : result[valueProp.name] === value;
-            }
+              return result[valueProp.name] === x[valueProp.name];
+            })
+          ) {
+            nonFetchedOptions.push(x);
+          }
+        });
 
-            return result[valueProp.name] === value[valueProp.name];
-          })
-        ) {
-          return value !== '' ? [value, ...results] : [...results];
-        }
-
-        return results;
+        return [...nonFetchedOptions, ...results];
       }
-
       return [];
     };
 
@@ -526,23 +626,19 @@
      * Convert `value` state into something the `value` prop of the `Autocomplete` component will accept with the right settings
      */
     const getValue = () => {
-      if (isListProperty) {
-        return value;
-      }
+      return value
+        .map((x) =>
+          currentOptions.find((option) => {
+            if (typeof x === 'string') {
+              return valuePropIsNumber
+                ? option[valueProp.name] === parseInt(x, 10)
+                : option[valueProp.name] === x;
+            }
 
-      if (currentOptions.length === 0) {
-        return null;
-      }
-
-      return currentOptions.find((option) => {
-        if (typeof value === 'string') {
-          return valuePropIsNumber
-            ? option[valueProp.name] === parseInt(value, 10)
-            : option[valueProp.name] === value;
-        }
-
-        return option[valueProp.name] === value[valueProp.name];
-      });
+            return option[valueProp.name] === x[valueProp.name];
+          }),
+        )
+        .filter((x) => x !== undefined);
     };
 
     /*
@@ -553,11 +649,10 @@
         return '';
       }
 
-      if (typeof currentValue === 'string') {
-        return currentValue;
-      }
-
-      return currentValue[valueProp.name];
+      return currentValue
+        .filter((x) => x !== undefined)
+        .map((x) => (typeof x === 'string' ? x : x[valueProp.name]))
+        .join(',');
     };
 
     /*
@@ -567,27 +662,6 @@
      */
 
     const currentValue = getValue();
-
-    useEffect(() => {
-      let triggerEventValue;
-
-      if (!isListProperty) {
-        triggerEventValue = currentValue ? currentValue[valueProp.name] : '';
-      } else if (isListProperty) {
-        triggerEventValue = currentValue || '';
-      }
-      B.triggerEvent('onChange', triggerEventValue, changeContext.current);
-    }, [currentValue]);
-
-    // In the first render we want to make sure to convert the default value
-    if (!inputValue && currentValue) {
-      setValue(currentValue);
-      if (isListProperty) {
-        setInputValue(currentValue);
-      } else {
-        setInputValue(currentValue[searchProp.name].toString());
-      }
-    }
 
     const renderLabel = (option) => {
       let optionLabel = '';
@@ -614,13 +688,32 @@
         <Autocomplete
           disableCloseOnSelect={!closeOnSelect}
           disabled={disabled}
-          {...(!isListProperty && {
+          {...(optionType === 'model' && {
             getOptionLabel: renderLabel,
           })}
           inputValue={inputValue}
           loading={loading}
+          multiple={multiple}
           onChange={(_, newValue) => {
-            setValue(newValue || '');
+            setValue(newValue || (multiple ? [] : ''));
+
+            let triggerEventValue;
+
+            if (optionType === 'model') {
+              setDebouncedInputValue('');
+              triggerEventValue =
+                newValue.length === 0
+                  ? []
+                  : newValue.map((x) => x[valueProp.name]);
+            } else if (optionType === 'property') {
+              triggerEventValue = newValue || '';
+            }
+
+            B.triggerEvent(
+              'onChange',
+              triggerEventValue,
+              changeContext.current,
+            );
           }}
           onInputChange={(event, newValue) => {
             let validation = event ? event.target.validity : null;
@@ -633,6 +726,7 @@
               (event.type === 'change' || event.type === 'keydown')
             ) {
               setInputValue(newValue);
+              setDebouncedInputValue(newValue);
             } else if (event && event.type === 'click') {
               setInputValue(newValue);
               setDebouncedInputValue(newValue);
@@ -649,7 +743,7 @@
           options={currentOptions}
           renderInput={(params) => (
             <>
-              {!isListProperty && (
+              {optionType === 'model' && (
                 <input
                   type="hidden"
                   key={value[valueProp.name] ? 'hasValue' : 'isEmpty'}
@@ -671,6 +765,7 @@
                     minLength: validMinlength,
                     maxLength: validMaxlength,
                     min: validMinvalue,
+                    required: required && value.length === 0,
                   },
                   endAdornment: (
                     <>
@@ -684,20 +779,34 @@
                 classes={{ root: classes.formControl }}
                 data-component={dataComponentAttribute}
                 disabled={disabled}
-                fullWidth={fullWidth}
                 error={errorState}
+                fullWidth={fullWidth}
                 label={!hideLabel && label}
                 margin={margin}
-                {...(isListProperty && {
+                {...(optionType === 'property' && {
                   name: nameAttribute || name,
                 })}
                 placeholder={placeholder}
-                required={required && !value}
+                required={required}
                 size={size}
                 variant={variant}
               />
             </>
           )}
+          {...(renderCheckboxes && {
+            renderOption: (option, { selected }) => (
+              <>
+                <Checkbox
+                  classes={{ root: classes.checkbox }}
+                  icon={<Icon name="CheckBoxOutlineBlank" fontSize="small" />}
+                  checkedIcon={<Icon name="CheckBox" fontSize="small" />}
+                  style={{ marginRight: 8 }}
+                  checked={selected}
+                />
+                {renderLabel(option)}
+              </>
+            ),
+          })}
           value={currentValue}
         />
         {helper && (
@@ -708,51 +817,10 @@
       </FormControl>
     );
 
-    /*
-     * Show a TextField in design time
-     */
-    if (isDev || !valid) {
-      let designTimeValue;
-
-      if (!valid) {
-        designTimeValue = message;
-      }
-
-      if (isDev) {
-        designTimeValue = defaultValue;
-      }
-
+    if (optionType === 'model') {
       return (
-        <div className={classes.root}>
-          <TextField
-            InputProps={{
-              inputProps: {
-                tabIndex: isDev ? -1 : undefined,
-              },
-              endAdornment: <Icon name="ExpandMore" />,
-            }}
-            classes={{ root: classes.formControl }}
-            dataComponent={dataComponentAttribute}
-            disabled={disabled || !valid}
-            error={errorState}
-            fullWidth={fullWidth}
-            helperText={helperText}
-            label={!hideLabel && label}
-            margin={margin}
-            placeholder={placeholder}
-            required={required && !value}
-            size={size}
-            value={designTimeValue}
-            variant={variant}
-          />
-        </div>
-      );
-    }
-
-    if (!isListProperty) {
-      return (
-        <ModelProvider value={getValue()} id={modelId}>
-          <InteractionScope model={modelId}>
+        <ModelProvider value={getValue()} id={model}>
+          <InteractionScope model={model}>
             {(ctx) => {
               changeContext.current = ctx;
               return MuiAutocomplete;
@@ -765,8 +833,9 @@
     return MuiAutocomplete;
   })(),
   styles: (B) => (t) => {
-    const { Styling } = B;
+    const { Styling, color } = B;
     const style = new Styling(t);
+    const getOpacColor = (col, val) => color.alpha(col, val);
 
     return {
       root: {
@@ -774,6 +843,18 @@
           fullWidth ? 'block' : 'inline-block',
         '& > *': {
           pointerEvents: 'none',
+        },
+      },
+      checkbox: {
+        color: ({ options: { checkboxColor } }) => [
+          style.getColor(checkboxColor),
+          '!important',
+        ],
+        '&.MuiCheckbox-root.Mui-checked:hover, &.MuiIconButton-root:hover': {
+          backgroundColor: ({ options: { checkboxColor } }) => [
+            getOpacColor(style.getColor(checkboxColor), 0.04),
+            '!important',
+          ],
         },
       },
       formControl: {
