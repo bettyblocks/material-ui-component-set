@@ -1142,7 +1142,7 @@
                       {
                         key: '1',
                         type: 'LINKED_OPTION',
-                        label: 'Shown design tab',
+                        label: 'Show design tab',
                         value: {
                           ref: {
                             componentId: '#tabsComponent',
