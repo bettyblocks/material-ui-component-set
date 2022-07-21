@@ -39777,7 +39777,6 @@
             partialFooter;
         }
 
-        console.log(newPrefab);
         // #endregion
         save(newPrefab);
       },
