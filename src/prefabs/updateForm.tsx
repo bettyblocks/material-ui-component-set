@@ -22,6 +22,12 @@ const beforeCreate = ({
     Field,
     Footer,
     PropertiesSelector,
+    ButtonGroup,
+    ButtonGroupButton,
+    GrommetAlertIcon,
+    Text,
+    Box,
+    ComponentSelector,
   },
   prefab: originalPrefab,
   prefabs,
@@ -35,47 +41,127 @@ const beforeCreate = ({
     makeBettyInput,
     PropertyKind,
     BettyPrefabs,
+    useModelQuery,
   } = helpers;
   const [modelId, setModelId] = React.useState('');
   const [model, setModel] = React.useState(null);
   const [idProperty, setIdProperty] = React.useState('');
   const [properties, setProperties] = React.useState([]);
+  const [hasErrors, setHasErrors] = React.useState(false);
+  const [thisPageState, setThisPageState] = React.useState({
+    modelId: null,
+    component: null,
+  });
+  const [buttonGroupValue, setButtonGroupValue] = React.useState('anotherPage');
   // const [hasErrors, setHasErrors] = React.useState(false);
   const componentId = createUuid();
+  const skipModelQuery = !modelId || !!(model && model.id === modelId);
+
+  const { data } = useModelQuery({
+    variables: { id: modelId },
+    skip: skipModelQuery,
+    onCompleted: (result) => {
+      setModel(result.model);
+      setIdProperty(result.model.properties.find(({ name }) => name === 'id'));
+    },
+  });
 
   return (
     <>
-      <Header onClose={close} title="CreateFormWizard.title" />
-      {/* {hasErrors && (
+      <Header onClose={close} title="Configure form" />
+      {hasErrors && (
         <Box>
           <GrommetAlertIcon />
           <Text color="orange">An error has occured, contact support</Text>
         </Box>
-      )} */}
+      )}
       <Content>
-        <Field label="CreateFormWizard.selectModel">
-          <ModelSelector
-            onQueryCompleted={({
-              model: { properties: allProperties },
-              model: selectedModel,
-            }): void => {
-              setIdProperty(
-                allProperties.find((property) => {
-                  return property.name === 'id';
-                }),
-              );
-
-              setModel(selectedModel);
+        <Field
+          label="where is the data coming from?"
+          info={
+            <Text size="small" color="grey700">
+              {buttonGroupValue === 'anotherPage' &&
+                'Link from another page to this page, and pass the ID property of the model.'}
+              {buttonGroupValue === 'thisPage' &&
+                `A component on this page is passing the data to this ${originalPrefab.name}.`}
+              {buttonGroupValue === 'loggedInUser' &&
+                `Data from the logged in user can be used inside this ${originalPrefab.name}`}
+            </Text>
+          }
+        >
+          <ButtonGroup
+            onChange={({ target: { value } }): void => {
+              setButtonGroupValue(value);
+              setModelId('');
             }}
-            onChange={(newId): void => {
-              setModelId(newId);
-              setProperties([]);
-            }}
-            scopedModels={false}
-            value={modelId}
-          />
+            value={buttonGroupValue}
+            size="large"
+          >
+            <ButtonGroupButton
+              label="another page"
+              value="anotherPage"
+              name="dataSourceSelect"
+            />
+            <ButtonGroupButton
+              label="this page"
+              value="thisPage"
+              name="dataSourceSelect"
+            />
+          </ButtonGroup>
         </Field>
-        <Field label="CreateFormWizard.selectProperties">
+
+        <Field label="select model">
+          {buttonGroupValue === 'anotherPage' && (
+            <ModelSelector
+              onQueryCompleted={({
+                model: { properties: allProperties },
+                model: selectedModel,
+              }): void => {
+                setIdProperty(
+                  allProperties.find((property) => {
+                    return property.name === 'id';
+                  }),
+                );
+
+                setModel(selectedModel);
+              }}
+              onChange={(newId): void => {
+                setModelId(newId);
+                setProperties([]);
+              }}
+              scopedModels={false}
+              value={modelId}
+            />
+          )}
+          {buttonGroupValue === 'thisPage' && (
+            <ComponentSelector
+              onChange={(component): void => {
+                const foundModelId = Object.values<any>(
+                  component.options,
+                ).reduce(
+                  (acc, componentOption) =>
+                    componentOption.type === 'MODEL' ||
+                    componentOption.type === 'MODEL_AND_RELATION'
+                      ? componentOption.value
+                      : acc,
+                  null,
+                );
+                setIdProperty(foundModelId);
+                setThisPageState((prevState) => ({
+                  ...prevState,
+                  modelId: foundModelId,
+                  component,
+                }));
+                setModelId(foundModelId as string);
+                setProperties([]);
+              }}
+              value={thisPageState.component ? thisPageState.component.id : ''}
+              placeholder="No components available."
+              allowedComponents={['DataTable', 'DataList']}
+            />
+          )}
+        </Field>
+        <Field label="select properties">
           <PropertiesSelector
             allowRelations
             disabledKinds={[]}
@@ -300,6 +386,32 @@ const beforeCreate = ({
             cloneStructure(prefabs, BettyPrefabs.SUBMIT_BUTTON),
           );
 
+          let interaction;
+          if (buttonGroupValue === 'thisPage') {
+            const inheritComponent = thisPageState.component;
+            interaction = {
+              id: null,
+              sourceEvent:
+                inheritComponent.name === 'DataTable'
+                  ? 'sendRowId'
+                  : 'sendItemId',
+              name: 'setFormRecord',
+              parameters: [
+                {
+                  id: componentId,
+                  parameter: 'argument',
+                },
+              ],
+              type: 'Custom',
+              sourceComponentId: inheritComponent.id,
+              targetComponentId: componentId,
+            };
+          }
+
+          if (interaction) {
+            originalPrefab.interactions.push(interaction);
+          }
+
           save(originalPrefab);
         }}
       />
@@ -349,7 +461,7 @@ const interactions: PrefabInteraction[] = [
 const attributes = {
   category: 'FORMV2',
   icon: Icon.UpdateFormIcon,
-  interactions,
+  interactions: [],
 };
 
 const options = {
