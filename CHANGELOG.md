@@ -1,3 +1,87 @@
+# [1.253.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.252.2...v1.253.0) (2022-07-21)
+
+
+### Bug Fixes
+
+* bump version ([ea344ff](https://github.com/bettyblocks/material-ui-component-set/commit/ea344ffd67dfc362dd9a48b475ff9c47af309f74))
+
+
+### Features
+
+* added new child selector option to tabs and stepper ([daad29a](https://github.com/bettyblocks/material-ui-component-set/commit/daad29a23594fe5c8483b4e0765496bddb0822e2))
+* change droptypes to support layouts for beta forms ([250d031](https://github.com/bettyblocks/material-ui-component-set/commit/250d0318a46a14bbb6cfeb0229ea235144d051ba))
+* implement wrapper in card view ([1895f24](https://github.com/bettyblocks/material-ui-component-set/commit/1895f24e65a664cb588f76adfd73c22591bfe590))
+* implement wrapper in list view ([680c407](https://github.com/bettyblocks/material-ui-component-set/commit/680c407c1ba8b4e7778fc05417b21c5d24b876d4))
+
+# [1.253.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.252.2...v1.253.0) (2022-07-21)
+
+
+### Bug Fixes
+
+* bump version ([ea344ff](https://github.com/bettyblocks/material-ui-component-set/commit/ea344ffd67dfc362dd9a48b475ff9c47af309f74))
+
+
+### Features
+
+* added new child selector option to tabs and stepper ([daad29a](https://github.com/bettyblocks/material-ui-component-set/commit/daad29a23594fe5c8483b4e0765496bddb0822e2))
+* change droptypes to support layouts for beta forms ([250d031](https://github.com/bettyblocks/material-ui-component-set/commit/250d0318a46a14bbb6cfeb0229ea235144d051ba))
+* implement wrapper in list view ([680c407](https://github.com/bettyblocks/material-ui-component-set/commit/680c407c1ba8b4e7778fc05417b21c5d24b876d4))
+
+# [1.253.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.252.2...v1.253.0) (2022-07-20)
+
+
+### Features
+
+* added new child selector option to tabs and stepper ([daad29a](https://github.com/bettyblocks/material-ui-component-set/commit/daad29a23594fe5c8483b4e0765496bddb0822e2))
+* change droptypes to support layouts for beta forms ([250d031](https://github.com/bettyblocks/material-ui-component-set/commit/250d0318a46a14bbb6cfeb0229ea235144d051ba))
+
+## [1.252.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.252.1...v1.252.2) (2022-07-18)
+
+
+### Bug Fixes
+
+* undefined actionJS filter ([59b1b50](https://github.com/bettyblocks/material-ui-component-set/commit/59b1b50753f687c6fc1f875521055e61aabbef62))
+
+## [1.252.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.252.0...v1.252.1) (2022-07-18)
+
+
+### Bug Fixes
+
+* beta login form breaking when a filter was set ([a7009b1](https://github.com/bettyblocks/material-ui-component-set/commit/a7009b13bbc61762cad74fcaaa6903f33457e5a5))
+
+# [1.252.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.251.0...v1.252.0) (2022-07-14)
+
+
+### Bug Fixes
+
+* submit button no working ([4916a56](https://github.com/bettyblocks/material-ui-component-set/commit/4916a56f2af814855bd5b0156e0eff5a4f3e5e53))
+
+
+### Features
+
+* update submit button tmplt-1563 ([7fbeca5](https://github.com/bettyblocks/material-ui-component-set/commit/7fbeca5c638aca2b083a7b88f0a25dc0d1ff16ac))
+
+# [1.251.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.250.1...v1.251.0) (2022-07-14)
+
+
+### Bug Fixes
+
+* blank values on load ([407d93b](https://github.com/bettyblocks/material-ui-component-set/commit/407d93bacc572a22ef220d8149b2ad6bf4c8f2fa))
+* load multi relation values when filter is set ([4bfee90](https://github.com/bettyblocks/material-ui-component-set/commit/4bfee907efccd3cf56d8f9c9f047e8e55f5cb7a8))
+* load multi-relational data in mutliautocomplete ([82d6d81](https://github.com/bettyblocks/material-ui-component-set/commit/82d6d8196a8f7347adb0dd2719a87552aea95de2))
+* multi autocomplete is not draggable in columns ([87273c4](https://github.com/bettyblocks/material-ui-component-set/commit/87273c44123bed47ee77e745da0f11793d808cb3))
+* remove console logs ([59761b6](https://github.com/bettyblocks/material-ui-component-set/commit/59761b6aff06598672e62867c51d426e02426e44))
+* remove list from multiautocomplete types ([167c8f4](https://github.com/bettyblocks/material-ui-component-set/commit/167c8f45293e860f284803a46789df03a15753bd))
+* run separate query for value field ([96fa9d7](https://github.com/bettyblocks/material-ui-component-set/commit/96fa9d79e5c5aca8445301e9cf1f96444a8c266f))
+* stray conflic markers ([8f7e954](https://github.com/bettyblocks/material-ui-component-set/commit/8f7e954d4da22724fbb13c19e208a515b6e22d4c))
+
+
+### Features
+
+* add multi auto complete ([4c5cd37](https://github.com/bettyblocks/material-ui-component-set/commit/4c5cd37fb87bbb8949eda561acd253c3d0d67999))
+* remove value option use model option ([1796753](https://github.com/bettyblocks/material-ui-component-set/commit/17967535e506d620b529d1f17a0f67cbb96970a4))
+* use model and filter on multiautocomplete ([ec2b07f](https://github.com/bettyblocks/material-ui-component-set/commit/ec2b07f296b2daa2fed990221125ba3772f111f8))
+
 ## [1.250.1](https://github.com/bettyblocks/material-ui-component-set/compare/v1.250.0...v1.250.1) (2022-07-12)
 
 
