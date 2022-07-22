@@ -241,10 +241,48 @@ const beforeCreate = ({
                 name: 'CarouselImage',
                 options: [
                   {
+                    value: 'url',
+                    label: 'Media type',
+                    type: 'CUSTOM',
+                    key: 'type',
+                    configuration: {
+                      as: 'BUTTONGROUP',
+                      dataType: 'string',
+                      allowedInput: [
+                        { name: 'Public File', value: 'publicFile' },
+                        { name: 'URL', value: 'url' },
+                      ],
+                    },
+                  },
+                  {
+                    value: '',
+                    label: 'Image',
+                    key: 'imageFileSource',
+                    type: 'PUBLIC_FILE',
+                    configuration: {
+                      mediaType: 'IMAGE',
+                      allowedExtensions: ['image/*'],
+                      condition: {
+                        type: 'SHOW',
+                        option: 'type',
+                        comparator: 'EQ',
+                        value: 'publicFile',
+                      },
+                    },
+                  },
+                  {
                     value: [item.image],
                     label: 'Source',
                     key: 'urlFileSource',
                     type: 'VARIABLE',
+                    configuration: {
+                      condition: {
+                        type: 'SHOW',
+                        option: 'type',
+                        comparator: 'EQ',
+                        value: 'url',
+                      },
+                    },
                   },
                   {
                     value: false,
