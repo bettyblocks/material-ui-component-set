@@ -8,13 +8,13 @@
     const { Link } = window.MaterialUI.Core;
     const isDev = env === 'dev';
     const {
-      type,
+      type = 'url',
       imageFileSource,
       propertyFileSource,
       videoFileSource,
       urlFileSource,
       iframeSource,
-      urlSourceType,
+      urlSourceType = 'image',
       imgAlt,
       title,
       linkTo,
@@ -52,11 +52,12 @@
       }
     }
 
-    const [imgUrl, setImgUrl] = useState(getImgUrl());
+    const initialImg = getImgUrl();
+    const [imgUrl, setImgUrl] = useState(initialImg);
 
     useEffect(() => {
       setImgUrl(getImgUrl());
-    }, [imgSource, propValue, urlFileSourceText]);
+    }, [propValue, urlFileSourceText]);
 
     useEffect(() => {
       B.defineFunction('SetCustomImage', (url) => {
@@ -64,7 +65,7 @@
       });
 
       B.defineFunction('RemoveCustomImage', () => {
-        setImgUrl(imgSource);
+        setImgUrl(initialImg);
       });
     }, []);
 

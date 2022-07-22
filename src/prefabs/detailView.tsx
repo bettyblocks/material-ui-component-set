@@ -497,13 +497,13 @@ const beforeCreate = ({
                                       {
                                         label: 'Media type',
                                         key: 'type',
-                                        value: 'img',
+                                        value: 'url',
                                         type: 'CUSTOM',
                                         configuration: {
                                           as: 'BUTTONGROUP',
                                           dataType: 'string',
                                           allowedInput: [
-                                            { name: 'Image', value: 'img' },
+                                            { name: 'Image', value: 'url' },
                                             { name: 'Video', value: 'video' },
                                             {
                                               name: 'I-frame',
@@ -522,7 +522,7 @@ const beforeCreate = ({
                                             type: 'SHOW',
                                             option: 'type',
                                             comparator: 'EQ',
-                                            value: 'img',
+                                            value: 'url',
                                           },
                                         },
                                       },
