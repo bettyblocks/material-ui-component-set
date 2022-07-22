@@ -75,6 +75,12 @@ export const options = {
       as: 'VISIBILITY',
     },
   }),
+  responsiveVisibility: toggle('Toggle responsive visibility', {
+    value: true,
+    configuration: {
+      as: 'VISIBILITY',
+    },
+  }),
 
   ...advanced,
 };

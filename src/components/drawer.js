@@ -5,6 +5,7 @@
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { Children, env, useText } = B;
+    const { useMediaQuery, useTheme } = window.MaterialUI.Core;
     const isEmpty = children.length === 0;
     const isPristine = isEmpty && env === 'dev';
     const {
@@ -14,8 +15,13 @@
       temporaryAnchor,
       breakpoint,
       visibility,
+      responsiveVisibility,
       dataComponentAttribute,
     } = options;
+
+    const downBreakpoint = useMediaQuery(
+      useTheme().breakpoints.down(breakpoint),
+    );
 
     const isTemporary = drawerType === 'temporary';
     const anchor = isTemporary ? temporaryAnchor : persistentAnchor;
@@ -27,8 +33,12 @@
     const toggleDrawer = () => setIsOpen((s) => !s);
 
     useEffect(() => {
-      setIsOpen(visibility);
-    }, [visibility]);
+      if (downBreakpoint) {
+        setIsOpen(responsiveVisibility);
+      } else {
+        setIsOpen(visibility);
+      }
+    }, [visibility, responsiveVisibility, downBreakpoint]);
 
     return (
       <div
