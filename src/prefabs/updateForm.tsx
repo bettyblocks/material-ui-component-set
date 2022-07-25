@@ -16,18 +16,18 @@ import { options as defaults } from './structures/Alert/options';
 const beforeCreate = ({
   close,
   components: {
-    ModelSelector,
-    Header,
+    Box,
+    ButtonGroup,
+    ButtonGroupButton,
+    ComponentSelector,
     Content,
     Field,
     Footer,
-    PropertiesSelector,
-    ButtonGroup,
-    ButtonGroupButton,
     GrommetAlertIcon,
+    Header,
+    ModelSelector,
+    PropertiesSelector,
     Text,
-    Box,
-    ComponentSelector,
   },
   prefab: originalPrefab,
   prefabs,
@@ -35,12 +35,14 @@ const beforeCreate = ({
   helpers,
 }: any) => {
   const {
-    prepareAction,
-    createUuid,
-    cloneStructure,
-    makeBettyInput,
-    PropertyKind,
     BettyPrefabs,
+    PropertyKind,
+    cloneStructure,
+    createUuid,
+    makeBettyInput,
+    prepareAction,
+    useCreateEndpointVariable,
+    useEndpointVariable,
     useModelQuery,
   } = helpers;
   const [modelId, setModelId] = React.useState('');
@@ -56,6 +58,30 @@ const beforeCreate = ({
   // const [hasErrors, setHasErrors] = React.useState(false);
   const componentId = createUuid();
   const skipModelQuery = !modelId || !!(model && model.id === modelId);
+
+  let modelName;
+  if (model) {
+    modelName = `${model.label.toLowerCase()}_id`;
+  }
+  const endpointVariablesData = useEndpointVariable(model);
+  console.log('endpointVariablesData', endpointVariablesData);
+  const existingEndpointVariable = endpointVariablesData.find(
+    (item) => item.name === modelName,
+  );
+
+  console.log('before calling helper');
+  const [mutation, { data: endpointVariableData, error, loading }] =
+    useCreateEndpointVariable({
+      onComplete: (data) => {
+        if (!data.endpointVariable) {
+          mutation(modelId);
+        }
+      },
+    });
+
+  if (!loading && !error) {
+    console.log('endpointVariableData', endpointVariableData);
+  }
 
   const { data } = useModelQuery({
     variables: { id: modelId },
@@ -217,6 +243,25 @@ const beforeCreate = ({
               disabled: true,
             },
           }));
+
+          if (buttonGroupValue === 'anotherPage') {
+            // const ifRefactor = !!filter.__or;
+            // let finalFilter;
+            // if (ifRefactor) {
+            //     finalFilter = {
+            //         __and: [
+            //             where,
+            //             ...filter.__or;
+            //         ]
+            //     }
+            // } else {
+            //   finalFilter = [...filter.__and, where]
+            // }
+            // setOption(structure, 'filter', (option) => ({
+            //   ...option,
+            //   value: filter as any,
+            // }));
+          }
 
           // possible helper: given property kind returns prefab name
           Object.values(result.variables).map(([property, variable]) => {
@@ -390,7 +435,6 @@ const beforeCreate = ({
           if (buttonGroupValue === 'thisPage') {
             const inheritComponent = thisPageState.component;
             interaction = {
-              id: null,
               sourceEvent:
                 inheritComponent.name === 'DataTable'
                   ? 'sendRowId'

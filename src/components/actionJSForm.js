@@ -7,6 +7,9 @@
     const { actionId, modelId, filter = {} } = options;
     const { Form, GetOne } = B;
     const formRef = React.createRef();
+    const [where, setWhere] = useState(filter);
+    console.log('FILTER normaal', filter);
+    console.log('filter where', where);
 
     const isDev = B.env === 'dev';
 
@@ -15,6 +18,37 @@
         <div className={[classes.empty, classes.pristine].join(' ')}>Form</div>
       );
     }
+
+    // const test = await prepareEndpointVariable(model);
+    // console.log('test123', test);
+
+    // const newFilter = {
+    //   _and: [
+    //     {
+    //       [idProperty.id]: {
+    //         eq: {
+    //           id: data.createInputVariable.id,
+    //           type: data.createInputVariable.type,
+    //           name: data.createInputVariable.name,
+    //         },
+    //       },
+    //     },
+    //   ],
+    // };
+
+    // const ifRefactor = !!filter.__or;
+
+    // let finalFilter;
+    // if (ifRefactor) {
+    //   finalFilter = {
+    //     __and: [
+    //       where,
+    //         ...filter.__or,
+    //         ]
+    //     }
+    // } else {
+    //   finalFilter = [...filter.__and, where]
+    // }
 
     const onActionSuccess = (response) => {
       const event = response.data.action.results;
@@ -33,6 +67,26 @@
     const onActionLoad = (loading) => {
       if (loading) B.triggerEvent('onActionLoad', loading);
     };
+
+    useEffect(() => {
+      B.defineFunction('setFormRecord', (id) => {
+        if (modelId) {
+          const propertyId = B.getIdProperty(modelId);
+
+          setWhere({
+            _and: [
+              {
+                [propertyId.id]: {
+                  eq: id,
+                },
+              },
+            ],
+          });
+        } else {
+          console.error('Unable to set record, no model is selected.');
+        }
+      });
+    });
 
     useEffect(() => {
       B.defineFunction('Submit', () => {
