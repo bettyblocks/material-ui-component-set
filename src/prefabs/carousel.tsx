@@ -256,7 +256,7 @@ const beforeCreate = ({
                   },
                   {
                     value: '',
-                    label: 'Image',
+                    label: 'Select image',
                     key: 'imageFileSource',
                     type: 'PUBLIC_FILE',
                     configuration: {

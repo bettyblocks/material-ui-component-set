@@ -15,7 +15,7 @@ export const options = {
     },
   }),
   imageFileSource: option('PUBLIC_FILE', {
-    label: 'Image',
+    label: 'Select image',
     value: '',
     configuration: {
       mediaType: 'IMAGE',

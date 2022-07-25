@@ -23,7 +23,7 @@ export const options = {
     },
   }),
   imageFileSource: option('PUBLIC_FILE', {
-    label: 'Image',
+    label: 'Select image',
     value: '',
     configuration: {
       mediaType: 'IMAGE',
@@ -38,7 +38,7 @@ export const options = {
     },
   }),
   videoFileSource: option('PUBLIC_FILE', {
-    label: 'Video',
+    label: 'Select video',
     value: '',
     configuration: {
       mediaType: 'VIDEO',

@@ -857,8 +857,8 @@
               name: 'Media',
               options: [
                 {
-                  label: 'Media type',
                   key: 'type',
+                  label: 'Media type',
                   value: 'img',
                   type: 'CUSTOM',
                   configuration: {
@@ -866,9 +866,43 @@
                     dataType: 'string',
                     allowedInput: [
                       { name: 'Image', value: 'img' },
+                      { name: 'Data', value: 'data' },
                       { name: 'Video', value: 'video' },
+                      { name: 'URL', value: 'url' },
                       { name: 'I-frame', value: 'iframe' },
                     ],
+                  },
+                },
+                {
+                  key: 'imageFileSource',
+                  label: 'Select image',
+                  value: '',
+                  type: 'PUBLIC_FILE',
+                  configuration: {
+                    mediaType: 'IMAGE',
+                    allowedExtensions: ['image/*'],
+                    condition: {
+                      type: 'SHOW',
+                      option: 'type',
+                      comparator: 'EQ',
+                      value: 'img',
+                    },
+                  },
+                },
+                {
+                  key: 'videoFileSource',
+                  label: 'Select video',
+                  value: '',
+                  type: 'PUBLIC_FILE',
+                  configuration: {
+                    mediaType: 'Video',
+                    allowedExtensions: ['video/*'],
+                    condition: {
+                      type: 'SHOW',
+                      option: 'type',
+                      comparator: 'EQ',
+                      value: 'video',
+                    },
                   },
                 },
                 {
@@ -879,27 +913,33 @@
                   key: 'urlFileSource',
                   type: 'VARIABLE',
                   configuration: {
+                    placeholder: 'Starts with https:// or http://',
                     as: 'MULTILINE',
                     condition: {
                       type: 'SHOW',
                       option: 'type',
                       comparator: 'EQ',
-                      value: 'img',
+                      value: 'url',
                     },
                   },
                 },
                 {
-                  value: [],
-                  label: 'Source',
-                  key: 'videoSource',
-                  type: 'VARIABLE',
+                  value: 'image',
+                  label: 'Type',
+                  type: 'CUSTOM',
+                  key: 'urlSourceType',
                   configuration: {
-                    as: 'MULTILINE',
+                    as: 'BUTTONGROUP',
+                    dataType: 'string',
+                    allowedInput: [
+                      { name: 'Image', value: 'image' },
+                      { name: 'Video', value: 'video' },
+                    ],
                     condition: {
                       type: 'SHOW',
                       option: 'type',
                       comparator: 'EQ',
-                      value: 'video',
+                      value: 'url',
                     },
                   },
                 },
@@ -14067,13 +14107,13 @@
                 {
                   label: 'Media type',
                   key: 'type',
-                  value: 'img',
+                  value: 'url',
                   type: 'CUSTOM',
                   configuration: {
                     as: 'BUTTONGROUP',
                     dataType: 'string',
                     allowedInput: [
-                      { name: 'Image', value: 'img' },
+                      { name: 'Image', value: 'url' },
                       { name: 'Video', value: 'video' },
                       { name: 'I-frame', value: 'iframe' },
                     ],
@@ -14090,7 +14130,7 @@
                       type: 'SHOW',
                       option: 'type',
                       comparator: 'EQ',
-                      value: 'img',
+                      value: 'url',
                     },
                   },
                 },
@@ -34769,13 +34809,13 @@
                         {
                           label: 'Media type',
                           key: 'type',
-                          value: 'img',
+                          value: 'url',
                           type: 'CUSTOM',
                           configuration: {
                             as: 'BUTTONGROUP',
                             dataType: 'string',
                             allowedInput: [
-                              { name: 'Image', value: 'img' },
+                              { name: 'Image', value: 'url' },
                               { name: 'Video', value: 'video' },
                               { name: 'I-frame', value: 'iframe' },
                             ],
@@ -34792,7 +34832,7 @@
                               type: 'SHOW',
                               option: 'type',
                               comparator: 'EQ',
-                              value: 'img',
+                              value: 'url',
                             },
                           },
                         },
