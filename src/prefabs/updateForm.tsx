@@ -5,7 +5,7 @@ import {
   InteractionType,
   PrefabInteraction,
   option,
-  model,
+  model as modelOption,
   filter,
   component,
 } from '@betty-blocks/component-sdk';
@@ -42,7 +42,7 @@ const beforeCreate = ({
     makeBettyInput,
     prepareAction,
     useCreateEndpointVariable,
-    useEndpointVariable,
+    useEndpointVariables,
     useModelQuery,
   } = helpers;
   const [modelId, setModelId] = React.useState('');
@@ -72,6 +72,10 @@ const beforeCreate = ({
       setIdProperty(result.model.properties.find(({ name }) => name === 'id'));
     },
   });
+
+  if (modelRequest.loading || createEndpointVarRequest.loading || endpointVarsRequest.loading) {
+    return <span>loading...</span>;
+  }
 
   return (
     <>
@@ -185,6 +189,22 @@ const beforeCreate = ({
         onClose={close}
         canSave={modelId && properties.length !== 0}
         onSave={async (): Promise<void> => {
+          console.log('onSave');
+          if (buttonGroupValue === 'anotherPage') {
+            let endpointVariable;
+            if (endpointVarsRequest.data.length > 0) {
+              endpointVariable = endpointVarsRequest.data.find(
+                ({ name }) => name === model.name,
+              );
+            }
+
+            if (!endpointVariable) {
+              console.log({ model });
+              const mutationResult = await mutation(model);
+
+              console.log({ mutationResult });
+            }
+          }
           // eslint-disable-next-line no-param-reassign
           originalPrefab.structure[0].id = componentId;
           const result = await prepareAction(
@@ -491,7 +511,7 @@ const attributes = {
 
 const options = {
   actionId: option('ACTION_JS', { label: 'Action', value: '' }),
-  modelId: model('Model'),
+  modelId: modelOption('Model'),
   filter: filter('Filter', { configuration: { dependsOn: 'modelId' } }),
 };
 
