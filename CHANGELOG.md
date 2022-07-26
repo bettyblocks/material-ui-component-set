@@ -1,3 +1,19 @@
+# [1.254.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.253.0...v1.254.0) (2022-07-26)
+
+
+### Bug Fixes
+
+* bump version ([ea344ff](https://github.com/bettyblocks/material-ui-component-set/commit/ea344ffd67dfc362dd9a48b475ff9c47af309f74))
+* semantic versioning info ([9ff88ef](https://github.com/bettyblocks/material-ui-component-set/commit/9ff88efa2c5223bc4649b44b77ac239494725926))
+
+
+### Features
+
+* added new child selector option to tabs and stepper ([daad29a](https://github.com/bettyblocks/material-ui-component-set/commit/daad29a23594fe5c8483b4e0765496bddb0822e2))
+* implement wrapper in card and list view ([842c718](https://github.com/bettyblocks/material-ui-component-set/commit/842c7183bb870fc4d8503d54c2d31d2d04cc62cf))
+* implement wrapper in card view ([1895f24](https://github.com/bettyblocks/material-ui-component-set/commit/1895f24e65a664cb588f76adfd73c22591bfe590))
+* implement wrapper in list view ([680c407](https://github.com/bettyblocks/material-ui-component-set/commit/680c407c1ba8b4e7778fc05417b21c5d24b876d4))
+
 # [1.254.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.253.0...v1.254.0) (2022-07-21)
 
 
