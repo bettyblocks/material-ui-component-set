@@ -55,35 +55,16 @@ const beforeCreate = ({
     component: null,
   });
   const [buttonGroupValue, setButtonGroupValue] = React.useState('anotherPage');
-  // const [hasErrors, setHasErrors] = React.useState(false);
   const componentId = createUuid();
   const skipModelQuery = !modelId || !!(model && model.id === modelId);
 
-  let modelName;
-  if (model) {
-    modelName = `${model.label.toLowerCase()}_id`;
-  }
-  const endpointVariablesData = useEndpointVariable(model);
-  console.log('endpointVariablesData', endpointVariablesData);
-  const existingEndpointVariable = endpointVariablesData.find(
-    (item) => item.name === modelName,
-  );
+  const endpointVarsRequest = useEndpointVariables();
+  const [
+    mutation,
+    createEndpointVarRequest,
+  ] = useCreateEndpointVariable();
 
-  console.log('before calling helper');
-  const [mutation, { data: endpointVariableData, error, loading }] =
-    useCreateEndpointVariable({
-      onComplete: (data) => {
-        if (!data.endpointVariable) {
-          mutation(modelId);
-        }
-      },
-    });
-
-  if (!loading && !error) {
-    console.log('endpointVariableData', endpointVariableData);
-  }
-
-  const { data } = useModelQuery({
+  const modelRequest = useModelQuery({
     variables: { id: modelId },
     skip: skipModelQuery,
     onCompleted: (result) => {
