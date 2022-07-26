@@ -1,3 +1,20 @@
+# [2.0.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.252.2...v2.0.0) (2022-07-26)
+
+
+### chore
+
+* reset to last stable version ([9bacbf8](https://github.com/bettyblocks/material-ui-component-set/commit/9bacbf8c6ac35aec356e2eff5b9624ea8ada0ebe))
+
+
+### Features
+
+* change droptypes to support layouts for beta forms ([2aba468](https://github.com/bettyblocks/material-ui-component-set/commit/2aba468ab6b4f9808e32cd6c7adab5b36c4ba64a))
+
+
+### BREAKING CHANGES
+
+* fix version numbering
+
 ## [1.252.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.252.1...v1.252.2) (2022-07-18)
 
 
