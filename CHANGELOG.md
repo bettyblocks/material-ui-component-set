@@ -1,3 +1,10 @@
+# [2.3.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.2.0...v2.3.0) (2022-07-26)
+
+
+### Features
+
+* implement wrapper in card and list view ([0698092](https://github.com/bettyblocks/material-ui-component-set/commit/0698092a876dcc39bb52889c4e22932eacb1f9d0))
+
 # [2.2.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.1.0...v2.2.0) (2022-07-26)
 
 
