@@ -1,17 +1,19 @@
 import {
-  number,
+  ThemeColor,
+  childSelector,
+  color,
   option,
+  showIf,
   size,
   toggle,
-  showIf,
-  color,
-  ThemeColor,
 } from '@betty-blocks/component-sdk';
 import { advanced } from './advanced';
 
 export const options = {
-  defaultValue: number('Selected tab index', { value: '1' }),
-  selectedDesignTabIndex: number('Selected design tab index', { value: '1' }),
+  defaultValue: childSelector('Selected tab (runtime)', { value: '1' }),
+  selectedDesignTabIndex: childSelector('Selected tab (design)', {
+    value: '1',
+  }),
   showAllTabs: toggle('Show all tabs', { value: false }),
   height: size('Height', {
     value: '',
