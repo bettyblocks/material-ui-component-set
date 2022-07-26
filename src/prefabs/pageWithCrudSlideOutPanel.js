@@ -38356,17 +38356,6 @@
           },
         },
         {
-          key: 'updateTabTitle',
-          type: 'LINKED_OPTION',
-          label: 'Update tab title',
-          value: {
-            ref: {
-              componentId: '#updateTabTitle',
-              optionId: '#updateTabTitleContent',
-            },
-          },
-        },
-        {
           key: 'detailsTabTitle',
           type: 'LINKED_OPTION',
           label: 'Detail tab title',
@@ -38374,6 +38363,17 @@
             ref: {
               componentId: '#detailsTabTitle',
               optionId: '#detailsTabTitleContent',
+            },
+          },
+        },
+        {
+          key: 'updateTabTitle',
+          type: 'LINKED_OPTION',
+          label: 'Update tab title',
+          value: {
+            ref: {
+              componentId: '#updateTabTitle',
+              optionId: '#updateTabTitleContent',
             },
           },
         },
