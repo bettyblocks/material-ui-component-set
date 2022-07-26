@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.0.0...v2.1.0) (2022-07-26)
+
+
+### Features
+
+* added new child selector option to tabs and stepper ([aec53ba](https://github.com/bettyblocks/material-ui-component-set/commit/aec53baa9b979532a831641e2bb241246639acad))
+
 # [2.0.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.252.2...v2.0.0) (2022-07-26)
 
 
