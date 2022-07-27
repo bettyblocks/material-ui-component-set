@@ -208,6 +208,10 @@
       };
     }, []);
 
+    useEffect(() => {
+      setCurrentValue(defaultValueText);
+    }, [defaultValueText]);
+
     const { results } = data || {};
 
     useEffect(() => {
