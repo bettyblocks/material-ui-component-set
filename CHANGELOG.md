@@ -1,3 +1,10 @@
+## [2.8.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.8.0...v2.8.1) (2022-07-27)
+
+
+### Bug Fixes
+
+* use correct datatypes for default value in tabs and stepper ([7e2cdf8](https://github.com/bettyblocks/material-ui-component-set/commit/7e2cdf82325c8f71d7ef794f4dccf47de985472e))
+
 # [2.8.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.7.0...v2.8.0) (2022-07-27)
 
 
