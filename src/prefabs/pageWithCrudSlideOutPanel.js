@@ -34501,10 +34501,13 @@
                     {
                       name: 'Dialog',
                       ref: {
-                        id: '#dialog',
+                        id: '#deleteDialog',
                       },
                       options: [
                         {
+                          ref: {
+                            id: '#deleteDialogVisibility',
+                          },
                           label: 'Toggle visibility',
                           key: 'isVisible',
                           value: false,
@@ -35529,8 +35532,14 @@
                                           descendants: [
                                             {
                                               name: 'Text',
+                                              ref: {
+                                                id: '#deleteDialogTitle',
+                                              },
                                               options: [
                                                 {
+                                                  ref: {
+                                                    id: '#deleteDialogTitleContent',
+                                                  },
                                                   type: 'VARIABLE',
                                                   label: 'Content',
                                                   key: 'content',
@@ -37983,7 +37992,7 @@
       name: 'Show',
       sourceEvent: 'Click',
       ref: {
-        targetComponentId: '#dialog',
+        targetComponentId: '#deleteDialog',
         sourceComponentId: '#deleteButton',
       },
       type: 'Custom',
@@ -37992,7 +38001,7 @@
       name: 'Hide',
       sourceEvent: 'Click',
       ref: {
-        targetComponentId: '#dialog',
+        targetComponentId: '#deleteDialog',
         sourceComponentId: '#closeBtn',
       },
       type: 'Custom',
@@ -38001,7 +38010,7 @@
       name: 'Hide',
       sourceEvent: 'Click',
       ref: {
-        targetComponentId: '#dialog',
+        targetComponentId: '#deleteDialog',
         sourceComponentId: '#cancelBtn',
       },
       type: 'Custom',
@@ -38010,7 +38019,7 @@
       name: 'Hide',
       sourceEvent: 'onActionSuccess',
       ref: {
-        targetComponentId: '#dialog',
+        targetComponentId: '#deleteDialog',
         sourceComponentId: '#deleteActionButton',
       },
       type: 'Custom',
@@ -38308,206 +38317,132 @@
   ],
   structure: [
     {
-      type: 'WRAPPER',
-      label: 'Overview + Record view',
+      name: 'Drawer',
+      ref: {
+        id: '#contentContainer',
+      },
       options: [
         {
-          key: 'visibility',
-          type: 'LINKED_OPTION',
-          label: 'Show/hide record view',
-          value: {
-            ref: {
-              componentId: '#contentContainer',
-              optionId: '#contentContainerVisibility',
+          type: 'SIZE',
+          label: 'Drawer Width',
+          key: 'drawerWidth',
+          value: '480px',
+          configuration: {
+            as: 'UNIT',
+          },
+        },
+        {
+          value: 'temporary',
+          label: 'Drawer type',
+          key: 'drawerType',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Persistent', value: 'persistent' },
+              { name: 'Temporary', value: 'temporary' },
+            ],
+          },
+        },
+        {
+          value: 'sm',
+          label: 'Responsively temporary on',
+          key: 'breakpoint',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'DROPDOWN',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Permanent', value: 'xs' },
+              { name: 'Mobile', value: 'sm' },
+              { name: 'Tablet portrait', value: 'md' },
+              { name: 'Tablet landscape', value: 'lg' },
+            ],
+            condition: {
+              type: 'SHOW',
+              option: 'drawerType',
+              comparator: 'EQ',
+              value: 'persistent',
             },
           },
         },
         {
-          key: 'pageTitle',
-          type: 'LINKED_OPTION',
-          label: 'Page title',
-          value: {
-            ref: {
-              componentId: '#dataTableTitle',
-              optionId: '#dataTableTitleContent',
-            },
-          },
-        },
-        {
-          key: 'shownTab',
-          type: 'LINKED_OPTION',
-          label: 'Show design tab',
-          value: {
-            ref: {
-              componentId: '#drawerTabs',
-              optionId: '#drawerTabsSelectedDesignTabIndex',
-            },
-          },
-        },
-        {
-          key: 'createTabTitle',
-          type: 'LINKED_OPTION',
-          label: 'Create tab title',
-          value: {
-            ref: {
-              componentId: '#createTabTitle',
-              optionId: '#createTabTitleContent',
-            },
-          },
-        },
-        {
-          key: 'detailsTabTitle',
-          type: 'LINKED_OPTION',
-          label: 'Detail tab title',
-          value: {
-            ref: {
-              componentId: '#detailsTabTitle',
-              optionId: '#detailsTabTitleContent',
-            },
-          },
-        },
-        {
-          key: 'updateTabTitle',
-          type: 'LINKED_OPTION',
-          label: 'Update tab title',
-          value: {
-            ref: {
-              componentId: '#updateTabTitle',
-              optionId: '#updateTabTitleContent',
-            },
-          },
-        },
-      ],
-      descendants: [
-        {
-          name: 'Drawer',
-          ref: {
-            id: '#contentContainer',
-          },
-          options: [
-            {
-              type: 'SIZE',
-              label: 'Drawer Width',
-              key: 'drawerWidth',
-              value: '480px',
-              configuration: {
-                as: 'UNIT',
-              },
-            },
-            {
+          value: 'right',
+          label: 'Alignment',
+          key: 'temporaryAnchor',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Left', value: 'left' },
+              { name: 'Top', value: 'top' },
+              { name: 'Right', value: 'right' },
+              { name: 'Bottom', value: 'bottom' },
+            ],
+            condition: {
+              type: 'SHOW',
+              option: 'drawerType',
+              comparator: 'EQ',
               value: 'temporary',
-              label: 'Drawer type',
-              key: 'drawerType',
-              type: 'CUSTOM',
-              configuration: {
-                as: 'BUTTONGROUP',
-                dataType: 'string',
-                allowedInput: [
-                  { name: 'Persistent', value: 'persistent' },
-                  { name: 'Temporary', value: 'temporary' },
-                ],
-              },
             },
-            {
-              value: 'sm',
-              label: 'Responsively temporary on',
-              key: 'breakpoint',
-              type: 'CUSTOM',
-              configuration: {
-                as: 'DROPDOWN',
-                dataType: 'string',
-                allowedInput: [
-                  { name: 'Permanent', value: 'xs' },
-                  { name: 'Mobile', value: 'sm' },
-                  { name: 'Tablet portrait', value: 'md' },
-                  { name: 'Tablet landscape', value: 'lg' },
-                ],
-                condition: {
-                  type: 'SHOW',
-                  option: 'drawerType',
-                  comparator: 'EQ',
-                  value: 'persistent',
-                },
-              },
+          },
+        },
+        {
+          value: 'left',
+          label: 'Alignment',
+          key: 'persistentAnchor',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Left', value: 'left' },
+              { name: 'Right', value: 'right' },
+            ],
+            condition: {
+              type: 'HIDE',
+              option: 'drawerType',
+              comparator: 'EQ',
+              value: 'temporary',
             },
-            {
-              value: 'right',
-              label: 'Alignment',
-              key: 'temporaryAnchor',
-              type: 'CUSTOM',
-              configuration: {
-                as: 'BUTTONGROUP',
-                dataType: 'string',
-                allowedInput: [
-                  { name: 'Left', value: 'left' },
-                  { name: 'Top', value: 'top' },
-                  { name: 'Right', value: 'right' },
-                  { name: 'Bottom', value: 'bottom' },
-                ],
-                condition: {
-                  type: 'SHOW',
-                  option: 'drawerType',
-                  comparator: 'EQ',
-                  value: 'temporary',
-                },
-              },
+          },
+        },
+        {
+          ref: {
+            id: '#contentContainerVisibility',
+          },
+          label: 'Toggle visibility',
+          key: 'visibility',
+          value: false,
+          type: 'TOGGLE',
+          configuration: {
+            as: 'VISIBILITY',
+          },
+        },
+        {
+          value: false,
+          label: 'Advanced settings',
+          key: 'advancedSettings',
+          type: 'TOGGLE',
+        },
+        {
+          type: 'VARIABLE',
+          label: 'Test attribute',
+          key: 'dataComponentAttribute',
+          value: ['Drawer'],
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'advancedSettings',
+              comparator: 'EQ',
+              value: true,
             },
-            {
-              value: 'left',
-              label: 'Alignment',
-              key: 'persistentAnchor',
-              type: 'CUSTOM',
-              configuration: {
-                as: 'BUTTONGROUP',
-                dataType: 'string',
-                allowedInput: [
-                  { name: 'Left', value: 'left' },
-                  { name: 'Right', value: 'right' },
-                ],
-                condition: {
-                  type: 'HIDE',
-                  option: 'drawerType',
-                  comparator: 'EQ',
-                  value: 'temporary',
-                },
-              },
-            },
-            {
-              ref: {
-                id: '#contentContainerVisibility',
-              },
-              label: 'Toggle visibility',
-              key: 'visibility',
-              value: false,
-              type: 'TOGGLE',
-              configuration: {
-                as: 'VISIBILITY',
-              },
-            },
-            {
-              value: false,
-              label: 'Advanced settings',
-              key: 'advancedSettings',
-              type: 'TOGGLE',
-            },
-            {
-              type: 'VARIABLE',
-              label: 'Test attribute',
-              key: 'dataComponentAttribute',
-              value: ['Drawer'],
-              configuration: {
-                condition: {
-                  type: 'SHOW',
-                  option: 'advancedSettings',
-                  comparator: 'EQ',
-                  value: true,
-                },
-              },
-            },
-          ],
-          descendants: [],
+          },
         },
       ],
+      descendants: [],
     },
   ],
 }))();
