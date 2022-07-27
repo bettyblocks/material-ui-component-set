@@ -43,7 +43,7 @@
 
     function getImgUrl() {
       switch (true) {
-        case isDataUrl && propValue:
+        case isDataUrl && propValue !== {}:
           return propValue[propertyFileSource.useKey];
         case isUrlImg:
           return urlFileSourceText;
