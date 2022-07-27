@@ -1,3 +1,10 @@
+# [2.7.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.6.0...v2.7.0) (2022-07-27)
+
+
+### Features
+
+* updated delete record buttons ([92b700f](https://github.com/bettyblocks/material-ui-component-set/commit/92b700fb3a98d57c8011a9d7f363725cad20e15b))
+
 # [2.6.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.5.1...v2.6.0) (2022-07-27)
 
 
