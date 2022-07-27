@@ -1,3 +1,31 @@
+# [2.6.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.5.1...v2.6.0) (2022-07-27)
+
+
+### Features
+
+* implement wrapper in backoffice ([3d653e7](https://github.com/bettyblocks/material-ui-component-set/commit/3d653e7070716321f505b1ee0634c6610d0a407a))
+
+## [2.5.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.5.0...v2.5.1) (2022-07-27)
+
+
+### Bug Fixes
+
+* select and single autocomplete update value on parent refetch ([5cadc0d](https://github.com/bettyblocks/material-ui-component-set/commit/5cadc0ddff1556ea02866f90ed03510450438f0f))
+
+# [2.5.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.4.0...v2.5.0) (2022-07-27)
+
+
+### Features
+
+* implement wrapper in crud with slide-out TMPLT-1599 ([a01d94c](https://github.com/bettyblocks/material-ui-component-set/commit/a01d94c7f3bf9921c4a7169a026de9c2676b5fef))
+
+# [2.4.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.3.0...v2.4.0) (2022-07-26)
+
+
+### Features
+
+* implement wrapper in crud with dialogs ([7516292](https://github.com/bettyblocks/material-ui-component-set/commit/75162927915c840e43a633d61e6a0fe545ac0480))
+
 # [2.3.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.2.0...v2.3.0) (2022-07-26)
 
 
