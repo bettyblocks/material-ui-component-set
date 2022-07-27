@@ -1,3 +1,10 @@
+# [2.4.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.3.0...v2.4.0) (2022-07-26)
+
+
+### Features
+
+* implement wrapper in crud with dialogs ([7516292](https://github.com/bettyblocks/material-ui-component-set/commit/75162927915c840e43a633d61e6a0fe545ac0480))
+
 # [2.3.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.2.0...v2.3.0) (2022-07-26)
 
 
