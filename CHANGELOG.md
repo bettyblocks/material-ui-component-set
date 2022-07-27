@@ -1,24 +1,84 @@
-# [1.254.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.253.0...v1.254.0) (2022-07-21)
+# [2.8.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.7.0...v2.8.0) (2022-07-27)
+
+
+### Features
+
+* added wrapper to profile and login/register page ([a098224](https://github.com/bettyblocks/material-ui-component-set/commit/a098224fdb46753ba0b9f5e404d1edefab9e125e))
+* removed wrapper from card view and list view ([af8b628](https://github.com/bettyblocks/material-ui-component-set/commit/af8b628c054689df4c0215ad7f84b501f338022b))
+
+# [2.7.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.6.0...v2.7.0) (2022-07-27)
+
+
+### Features
+
+* updated delete record buttons ([92b700f](https://github.com/bettyblocks/material-ui-component-set/commit/92b700fb3a98d57c8011a9d7f363725cad20e15b))
+
+# [2.6.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.5.1...v2.6.0) (2022-07-27)
+
+
+### Features
+
+* implement wrapper in backoffice ([3d653e7](https://github.com/bettyblocks/material-ui-component-set/commit/3d653e7070716321f505b1ee0634c6610d0a407a))
+
+## [2.5.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.5.0...v2.5.1) (2022-07-27)
 
 
 ### Bug Fixes
 
-* bump version ([ea344ff](https://github.com/bettyblocks/material-ui-component-set/commit/ea344ffd67dfc362dd9a48b475ff9c47af309f74))
+* select and single autocomplete update value on parent refetch ([5cadc0d](https://github.com/bettyblocks/material-ui-component-set/commit/5cadc0ddff1556ea02866f90ed03510450438f0f))
+
+# [2.5.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.4.0...v2.5.0) (2022-07-27)
 
 
 ### Features
 
-* added new child selector option to tabs and stepper ([daad29a](https://github.com/bettyblocks/material-ui-component-set/commit/daad29a23594fe5c8483b4e0765496bddb0822e2))
-* implement wrapper in card and list view ([842c718](https://github.com/bettyblocks/material-ui-component-set/commit/842c7183bb870fc4d8503d54c2d31d2d04cc62cf))
-* implement wrapper in card view ([1895f24](https://github.com/bettyblocks/material-ui-component-set/commit/1895f24e65a664cb588f76adfd73c22591bfe590))
-* implement wrapper in list view ([680c407](https://github.com/bettyblocks/material-ui-component-set/commit/680c407c1ba8b4e7778fc05417b21c5d24b876d4))
+* implement wrapper in crud with slide-out TMPLT-1599 ([a01d94c](https://github.com/bettyblocks/material-ui-component-set/commit/a01d94c7f3bf9921c4a7169a026de9c2676b5fef))
 
-# [1.253.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.252.2...v1.253.0) (2022-07-20)
+# [2.4.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.3.0...v2.4.0) (2022-07-26)
 
 
 ### Features
 
-* change droptypes to support layouts for beta forms ([250d031](https://github.com/bettyblocks/material-ui-component-set/commit/250d0318a46a14bbb6cfeb0229ea235144d051ba))
+* implement wrapper in crud with dialogs ([7516292](https://github.com/bettyblocks/material-ui-component-set/commit/75162927915c840e43a633d61e6a0fe545ac0480))
+
+# [2.3.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.2.0...v2.3.0) (2022-07-26)
+
+
+### Features
+
+* implement wrapper in card and list view ([0698092](https://github.com/bettyblocks/material-ui-component-set/commit/0698092a876dcc39bb52889c4e22932eacb1f9d0))
+
+# [2.2.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.1.0...v2.2.0) (2022-07-26)
+
+
+### Features
+
+* implement wrapper in card view ([f62fef0](https://github.com/bettyblocks/material-ui-component-set/commit/f62fef0892e8ee97fe1f9053bfe9036c0cb11a6e))
+* implement wrapper in list view ([cc9bd9e](https://github.com/bettyblocks/material-ui-component-set/commit/cc9bd9e291d6aa10f1ded8ced6f995fcf915fc75))
+
+# [2.1.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.0.0...v2.1.0) (2022-07-26)
+
+
+### Features
+
+* added new child selector option to tabs and stepper ([aec53ba](https://github.com/bettyblocks/material-ui-component-set/commit/aec53baa9b979532a831641e2bb241246639acad))
+
+# [2.0.0](https://github.com/bettyblocks/material-ui-component-set/compare/v1.252.2...v2.0.0) (2022-07-26)
+
+
+### chore
+
+* reset to last stable version ([9bacbf8](https://github.com/bettyblocks/material-ui-component-set/commit/9bacbf8c6ac35aec356e2eff5b9624ea8ada0ebe))
+
+
+### Features
+
+* change droptypes to support layouts for beta forms ([2aba468](https://github.com/bettyblocks/material-ui-component-set/commit/2aba468ab6b4f9808e32cd6c7adab5b36c4ba64a))
+
+
+### BREAKING CHANGES
+
+* fix version numbering
 
 ## [1.252.2](https://github.com/bettyblocks/material-ui-component-set/compare/v1.252.1...v1.252.2) (2022-07-18)
 
