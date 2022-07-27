@@ -15129,6 +15129,7 @@
         const sideMenu = [
           {
             name: 'DrawerSidebar',
+            label: 'Backoffice - Side menu',
             ref: {
               id: '#Menu',
             },
@@ -15180,6 +15181,7 @@
           },
           {
             name: 'DrawerContainer',
+            label: 'Backoffice - Content',
             options: [
               {
                 type: 'COLOR',
@@ -15222,127 +15224,226 @@
             ],
             descendants: [
               {
-                name: 'Drawer',
-                ref: { id: '#contentContainer' },
+                type: 'WRAPPER',
+                label: 'Overview + Record view',
                 options: [
                   {
-                    type: 'SIZE',
-                    label: 'Drawer Width',
-                    key: 'drawerWidth',
-                    value: '480px',
-                    configuration: {
-                      as: 'UNIT',
-                    },
-                  },
-                  {
-                    value: 'temporary',
-                    label: 'Drawer type',
-                    key: 'drawerType',
-                    type: 'CUSTOM',
-                    configuration: {
-                      as: 'BUTTONGROUP',
-                      dataType: 'string',
-                      allowedInput: [
-                        { name: 'Persistent', value: 'persistent' },
-                        { name: 'Temporary', value: 'temporary' },
-                      ],
-                    },
-                  },
-                  {
-                    value: 'sm',
-                    label: 'Responsively temporary on',
-                    key: 'breakpoint',
-                    type: 'CUSTOM',
-                    configuration: {
-                      as: 'DROPDOWN',
-                      dataType: 'string',
-                      allowedInput: [
-                        { name: 'Permanent', value: 'xs' },
-                        { name: 'Mobile', value: 'sm' },
-                        { name: 'Tablet portrait', value: 'md' },
-                        { name: 'Tablet landscape', value: 'lg' },
-                      ],
-                      condition: {
-                        type: 'SHOW',
-                        option: 'drawerType',
-                        comparator: 'EQ',
-                        value: 'persistent',
-                      },
-                    },
-                  },
-                  {
-                    value: 'right',
-                    label: 'Alignment',
-                    key: 'temporaryAnchor',
-                    type: 'CUSTOM',
-                    configuration: {
-                      as: 'BUTTONGROUP',
-                      dataType: 'string',
-                      allowedInput: [
-                        { name: 'Left', value: 'left' },
-                        { name: 'Top', value: 'top' },
-                        { name: 'Right', value: 'right' },
-                        { name: 'Bottom', value: 'bottom' },
-                      ],
-                      condition: {
-                        type: 'SHOW',
-                        option: 'drawerType',
-                        comparator: 'EQ',
-                        value: 'temporary',
-                      },
-                    },
-                  },
-                  {
-                    value: 'left',
-                    label: 'Alignment',
-                    key: 'persistentAnchor',
-                    type: 'CUSTOM',
-                    configuration: {
-                      as: 'BUTTONGROUP',
-                      dataType: 'string',
-                      allowedInput: [
-                        { name: 'Left', value: 'left' },
-                        { name: 'Right', value: 'right' },
-                      ],
-                      condition: {
-                        type: 'HIDE',
-                        option: 'drawerType',
-                        comparator: 'EQ',
-                        value: 'temporary',
-                      },
-                    },
-                  },
-                  {
-                    label: 'Toggle visibility',
                     key: 'visibility',
-                    value: false,
-                    type: 'TOGGLE',
-                    configuration: {
-                      as: 'VISIBILITY',
+                    type: 'LINKED_OPTION',
+                    label: 'Show/hide record view',
+                    value: {
+                      ref: {
+                        componentId: '#contentContainer',
+                        optionId: '#contentContainerVisibility',
+                      },
                     },
                   },
                   {
-                    value: false,
-                    label: 'Advanced settings',
-                    key: 'advancedSettings',
-                    type: 'TOGGLE',
+                    key: 'pageTitle',
+                    type: 'LINKED_OPTION',
+                    label: 'Page title',
+                    value: {
+                      ref: {
+                        componentId: '#dataTableTitle',
+                        optionId: '#dataTableTitleContent',
+                      },
+                    },
                   },
                   {
-                    type: 'VARIABLE',
-                    label: 'Test attribute',
-                    key: 'dataComponentAttribute',
-                    value: ['Drawer'],
-                    configuration: {
-                      condition: {
-                        type: 'SHOW',
-                        option: 'advancedSettings',
-                        comparator: 'EQ',
-                        value: true,
+                    key: 'shownTab',
+                    type: 'LINKED_OPTION',
+                    label: 'Show design tab',
+                    value: {
+                      ref: {
+                        componentId: '#drawerTabs',
+                        optionId: '#drawerTabsSelectedDesignTabIndex',
+                      },
+                    },
+                  },
+                  {
+                    key: 'createTabTitle',
+                    type: 'LINKED_OPTION',
+                    label: 'Create tab title',
+                    value: {
+                      ref: {
+                        componentId: '#createTabTitle',
+                        optionId: '#createTabTitleContent',
+                      },
+                    },
+                  },
+                  {
+                    key: 'detailsTabTitle',
+                    type: 'LINKED_OPTION',
+                    label: 'Details tab title',
+                    value: {
+                      ref: {
+                        componentId: '#detailsTabTitle',
+                        optionId: '#detailsTabTitleContent',
+                      },
+                    },
+                  },
+                  {
+                    key: 'updateTabTitle',
+                    type: 'LINKED_OPTION',
+                    label: 'Update tab title',
+                    value: {
+                      ref: {
+                        componentId: '#updateTabTitle',
+                        optionId: '#updateTabTitleContent',
+                      },
+                    },
+                  },
+                  {
+                    key: 'deleteDialogVisibility',
+                    type: 'LINKED_OPTION',
+                    label: 'Show/hide delete dialog',
+                    value: {
+                      ref: {
+                        componentId: '#deleteDialog',
+                        optionId: '#deleteDialogVisibility',
+                      },
+                    },
+                  },
+                  {
+                    key: 'deleteDialogTitle',
+                    type: 'LINKED_OPTION',
+                    label: 'Delete dialog title',
+                    value: {
+                      ref: {
+                        componentId: '#deleteDialogTitle',
+                        optionId: '#deleteDialogTitleContent',
                       },
                     },
                   },
                 ],
-                descendants: [],
+                descendants: [
+                  {
+                    name: 'Drawer',
+                    ref: { id: '#contentContainer' },
+                    options: [
+                      {
+                        type: 'SIZE',
+                        label: 'Drawer Width',
+                        key: 'drawerWidth',
+                        value: '480px',
+                        configuration: {
+                          as: 'UNIT',
+                        },
+                      },
+                      {
+                        value: 'temporary',
+                        label: 'Drawer type',
+                        key: 'drawerType',
+                        type: 'CUSTOM',
+                        configuration: {
+                          as: 'BUTTONGROUP',
+                          dataType: 'string',
+                          allowedInput: [
+                            { name: 'Persistent', value: 'persistent' },
+                            { name: 'Temporary', value: 'temporary' },
+                          ],
+                        },
+                      },
+                      {
+                        value: 'sm',
+                        label: 'Responsively temporary on',
+                        key: 'breakpoint',
+                        type: 'CUSTOM',
+                        configuration: {
+                          as: 'DROPDOWN',
+                          dataType: 'string',
+                          allowedInput: [
+                            { name: 'Permanent', value: 'xs' },
+                            { name: 'Mobile', value: 'sm' },
+                            { name: 'Tablet portrait', value: 'md' },
+                            { name: 'Tablet landscape', value: 'lg' },
+                          ],
+                          condition: {
+                            type: 'SHOW',
+                            option: 'drawerType',
+                            comparator: 'EQ',
+                            value: 'persistent',
+                          },
+                        },
+                      },
+                      {
+                        value: 'right',
+                        label: 'Alignment',
+                        key: 'temporaryAnchor',
+                        type: 'CUSTOM',
+                        configuration: {
+                          as: 'BUTTONGROUP',
+                          dataType: 'string',
+                          allowedInput: [
+                            { name: 'Left', value: 'left' },
+                            { name: 'Top', value: 'top' },
+                            { name: 'Right', value: 'right' },
+                            { name: 'Bottom', value: 'bottom' },
+                          ],
+                          condition: {
+                            type: 'SHOW',
+                            option: 'drawerType',
+                            comparator: 'EQ',
+                            value: 'temporary',
+                          },
+                        },
+                      },
+                      {
+                        value: 'left',
+                        label: 'Alignment',
+                        key: 'persistentAnchor',
+                        type: 'CUSTOM',
+                        configuration: {
+                          as: 'BUTTONGROUP',
+                          dataType: 'string',
+                          allowedInput: [
+                            { name: 'Left', value: 'left' },
+                            { name: 'Right', value: 'right' },
+                          ],
+                          condition: {
+                            type: 'HIDE',
+                            option: 'drawerType',
+                            comparator: 'EQ',
+                            value: 'temporary',
+                          },
+                        },
+                      },
+                      {
+                        ref: {
+                          id: '#contentContainerVisibility',
+                        },
+                        label: 'Toggle visibility',
+                        key: 'visibility',
+                        value: false,
+                        type: 'TOGGLE',
+                        configuration: {
+                          as: 'VISIBILITY',
+                        },
+                      },
+                      {
+                        value: false,
+                        label: 'Advanced settings',
+                        key: 'advancedSettings',
+                        type: 'TOGGLE',
+                      },
+                      {
+                        type: 'VARIABLE',
+                        label: 'Test attribute',
+                        key: 'dataComponentAttribute',
+                        value: ['Drawer'],
+                        configuration: {
+                          condition: {
+                            type: 'SHOW',
+                            option: 'advancedSettings',
+                            comparator: 'EQ',
+                            value: true,
+                          },
+                        },
+                      },
+                    ],
+                    descendants: [],
+                  },
+                ],
               },
             ],
           },
@@ -15769,6 +15870,9 @@
                 descendants: [
                   {
                     name: 'Tabs',
+                    ref: {
+                      id: '#drawerTabs',
+                    },
                     options: [
                       {
                         label: 'Selected tab index',
@@ -15777,8 +15881,11 @@
                         type: 'NUMBER',
                       },
                       {
+                        ref: {
+                          id: '#drawerTabsSelectedDesignTabIndex',
+                        },
                         type: 'CUSTOM',
-                        label: 'Selected design tab index',
+                        label: 'Show design tab',
                         key: 'selectedDesignTabIndex',
                         value: '1',
                         configuration: {
@@ -17467,8 +17574,14 @@
                                     descendants: [
                                       {
                                         name: 'Text',
+                                        ref: {
+                                          id: '#createTabTitle',
+                                        },
                                         options: [
                                           {
+                                            ref: {
+                                              id: '#createTabTitleContent',
+                                            },
                                             type: 'VARIABLE',
                                             label: 'Content',
                                             key: 'content',
@@ -21409,8 +21522,14 @@
                                     descendants: [
                                       {
                                         name: 'Text',
+                                        ref: {
+                                          id: '#detailsTabTitle',
+                                        },
                                         options: [
                                           {
+                                            ref: {
+                                              id: '#detailsTabTitleContent',
+                                            },
                                             type: 'VARIABLE',
                                             label: 'Content',
                                             key: 'content',
@@ -25120,8 +25239,14 @@
                                     descendants: [
                                       {
                                         name: 'Text',
+                                        ref: {
+                                          id: '#updateTabTitle',
+                                        },
                                         options: [
                                           {
+                                            ref: {
+                                              id: '#updateTabTitleContent',
+                                            },
                                             type: 'VARIABLE',
                                             label: 'Content',
                                             key: 'content',
@@ -32882,6 +33007,9 @@
                                                             },
                                                             options: [
                                                               {
+                                                                ref: {
+                                                                  id: '#dataTableTitleContent',
+                                                                },
                                                                 type: 'VARIABLE',
                                                                 label:
                                                                   'Content',
@@ -36595,11 +36723,15 @@
                     },
                     {
                       name: 'Dialog',
+                      label: 'Delete dialog',
                       ref: {
-                        id: '#dialog',
+                        id: '#deleteDialog',
                       },
                       options: [
                         {
+                          ref: {
+                            id: '#deleteDialogVisibility',
+                          },
                           label: 'Toggle visibility',
                           key: 'isVisible',
                           value: false,
@@ -37624,8 +37756,14 @@
                                           descendants: [
                                             {
                                               name: 'Text',
+                                              ref: {
+                                                id: '#deleteDialogTitle',
+                                              },
                                               options: [
                                                 {
+                                                  ref: {
+                                                    id: '#deleteDialogTitleContent',
+                                                  },
                                                   type: 'VARIABLE',
                                                   label: 'Content',
                                                   key: 'content',
@@ -39928,7 +40066,7 @@
           defaultHeaderstructure.descendants,
         );
         sidebarItem.options[0].value = [`${data.model.label}`];
-        sideMenu[1].descendants[0].descendants.push(
+        sideMenu[1].descendants[0].descendants[0].descendants.push(
           ...drawerSidebar,
           ...drawerContainer,
         );
@@ -40092,7 +40230,7 @@
       name: 'Show',
       sourceEvent: 'Click',
       ref: {
-        targetComponentId: '#dialog',
+        targetComponentId: '#deleteDialog',
         sourceComponentId: '#deleteButton',
       },
       type: 'Custom',
@@ -40101,7 +40239,7 @@
       name: 'Hide',
       sourceEvent: 'Click',
       ref: {
-        targetComponentId: '#dialog',
+        targetComponentId: '#deleteDialog',
         sourceComponentId: '#closeBtn',
       },
       type: 'Custom',
@@ -40110,7 +40248,7 @@
       name: 'Hide',
       sourceEvent: 'Click',
       ref: {
-        targetComponentId: '#dialog',
+        targetComponentId: '#deleteDialog',
         sourceComponentId: '#cancelBtn',
       },
       type: 'Custom',
@@ -40119,7 +40257,7 @@
       name: 'Hide',
       sourceEvent: 'onActionSuccess',
       ref: {
-        targetComponentId: '#dialog',
+        targetComponentId: '#deleteDialog',
         sourceComponentId: '#deleteActionButton',
       },
       type: 'Custom',
@@ -40436,6 +40574,7 @@
   structure: [
     {
       name: 'Drawer',
+      label: 'Backoffice',
       options: [
         {
           type: 'SIZE',
