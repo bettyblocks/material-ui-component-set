@@ -47,8 +47,10 @@
           return propValue[propertyFileSource.useKey];
         case isUrlImg:
           return urlFileSourceText;
-        default:
+        case type === 'img':
           return imgSource;
+        default:
+          return '';
       }
     }
 
@@ -57,7 +59,7 @@
 
     useEffect(() => {
       setImgUrl(getImgUrl());
-    }, [propValue, urlFileSourceText]);
+    }, [propValue, urlFileSourceText, imgSource, type]);
 
     useEffect(() => {
       B.defineFunction('SetCustomImage', (url) => {
@@ -72,8 +74,10 @@
     const isEmpty = !isImage && !isVideo && !isIframe;
 
     const variable =
-      urlFileSource && urlFileSource.findIndex((v) => v.name) !== -1;
-    const variableDev = env === 'dev' && (variable || imgUrl === '');
+      (isUrlImg || isURLVideo) &&
+      urlFileSource &&
+      urlFileSource.findIndex((v) => v.name) !== -1;
+    const variableDev = env === 'dev' && imgUrl === '';
 
     const hasInteralLink =
       linkType === 'internal' && linkTo && linkTo.id !== '';
