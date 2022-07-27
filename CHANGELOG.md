@@ -1,3 +1,10 @@
+# [2.5.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.4.0...v2.5.0) (2022-07-27)
+
+
+### Features
+
+* implement wrapper in crud with slide-out TMPLT-1599 ([a01d94c](https://github.com/bettyblocks/material-ui-component-set/commit/a01d94c7f3bf9921c4a7169a026de9c2676b5fef))
+
 # [2.4.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.3.0...v2.4.0) (2022-07-26)
 
 
