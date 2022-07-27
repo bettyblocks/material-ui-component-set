@@ -34501,10 +34501,13 @@
                     {
                       name: 'Dialog',
                       ref: {
-                        id: '#dialog',
+                        id: '#deleteDialog',
                       },
                       options: [
                         {
+                          ref: {
+                            id: '#deleteDialogVisibility',
+                          },
                           label: 'Toggle visibility',
                           key: 'isVisible',
                           value: false,
@@ -35529,8 +35532,14 @@
                                           descendants: [
                                             {
                                               name: 'Text',
+                                              ref: {
+                                                id: '#deleteDialogTitle',
+                                              },
                                               options: [
                                                 {
+                                                  ref: {
+                                                    id: '#deleteDialogTitleContent',
+                                                  },
                                                   type: 'VARIABLE',
                                                   label: 'Content',
                                                   key: 'content',
@@ -37983,7 +37992,7 @@
       name: 'Show',
       sourceEvent: 'Click',
       ref: {
-        targetComponentId: '#dialog',
+        targetComponentId: '#deleteDialog',
         sourceComponentId: '#deleteButton',
       },
       type: 'Custom',
@@ -37992,7 +38001,7 @@
       name: 'Hide',
       sourceEvent: 'Click',
       ref: {
-        targetComponentId: '#dialog',
+        targetComponentId: '#deleteDialog',
         sourceComponentId: '#closeBtn',
       },
       type: 'Custom',
@@ -38001,7 +38010,7 @@
       name: 'Hide',
       sourceEvent: 'Click',
       ref: {
-        targetComponentId: '#dialog',
+        targetComponentId: '#deleteDialog',
         sourceComponentId: '#cancelBtn',
       },
       type: 'Custom',
@@ -38010,7 +38019,7 @@
       name: 'Hide',
       sourceEvent: 'onActionSuccess',
       ref: {
-        targetComponentId: '#dialog',
+        targetComponentId: '#deleteDialog',
         sourceComponentId: '#deleteActionButton',
       },
       type: 'Custom',
@@ -38312,17 +38321,6 @@
       label: 'Overview + Record view',
       options: [
         {
-          key: 'visibility',
-          type: 'LINKED_OPTION',
-          label: 'Show/hide record view',
-          value: {
-            ref: {
-              componentId: '#contentContainer',
-              optionId: '#contentContainerVisibility',
-            },
-          },
-        },
-        {
           key: 'pageTitle',
           type: 'LINKED_OPTION',
           label: 'Page title',
@@ -38330,6 +38328,17 @@
             ref: {
               componentId: '#dataTableTitle',
               optionId: '#dataTableTitleContent',
+            },
+          },
+        },
+        {
+          key: 'visibility',
+          type: 'LINKED_OPTION',
+          label: 'Show/hide record view',
+          value: {
+            ref: {
+              componentId: '#contentContainer',
+              optionId: '#contentContainerVisibility',
             },
           },
         },
@@ -38374,6 +38383,28 @@
             ref: {
               componentId: '#updateTabTitle',
               optionId: '#updateTabTitleContent',
+            },
+          },
+        },
+        {
+          key: 'deleteDialogVisibility',
+          type: 'LINKED_OPTION',
+          label: 'Show/hide delete dialog',
+          value: {
+            ref: {
+              componentId: '#deleteDialog',
+              optionId: '#deleteDialogVisibility',
+            },
+          },
+        },
+        {
+          key: 'deleteDialogTitle',
+          type: 'LINKED_OPTION',
+          label: 'Delete dialog title',
+          value: {
+            ref: {
+              componentId: '#deleteDialogTitle',
+              optionId: '#deleteDialogTitleContent',
             },
           },
         },
