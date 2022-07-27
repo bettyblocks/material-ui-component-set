@@ -1,3 +1,11 @@
+# [2.8.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.7.0...v2.8.0) (2022-07-27)
+
+
+### Features
+
+* added wrapper to profile and login/register page ([a098224](https://github.com/bettyblocks/material-ui-component-set/commit/a098224fdb46753ba0b9f5e404d1edefab9e125e))
+* removed wrapper from card view and list view ([af8b628](https://github.com/bettyblocks/material-ui-component-set/commit/af8b628c054689df4c0215ad7f84b501f338022b))
+
 # [2.7.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.6.0...v2.7.0) (2022-07-27)
 
 
