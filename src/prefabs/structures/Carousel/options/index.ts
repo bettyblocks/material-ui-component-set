@@ -82,7 +82,7 @@ export const options = {
     },
   }),
   activeStep: number('Show image', {
-    value: '1',
+    value: 1,
     configuration: {
       condition: showIf('select', 'EQ', 'custom'),
     },
@@ -96,7 +96,7 @@ export const options = {
   continuousLoop: toggle('Continuous loop', { value: false }),
   autoplay: toggle('Autoplay', { value: false }),
   duration: number('Autoplay duration (ms)', {
-    value: '5000',
+    value: 5000,
     configuration: {
       condition: showIfTrue('autoplay'),
     },
