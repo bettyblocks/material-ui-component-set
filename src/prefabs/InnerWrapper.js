@@ -7,6 +7,7 @@
     {
       type: 'WRAPPER',
       label: 'outer wrapper',
+      optionCategories: [{ label: 'FOO', members: ['0'] }],
       options: [
         {
           key: '0',

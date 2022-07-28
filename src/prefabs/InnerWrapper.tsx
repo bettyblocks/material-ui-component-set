@@ -49,8 +49,9 @@ export default prefab('InnerWrapperTSX', attributes, undefined, [
   wrapper(
     {
       label: 'outer wrapper',
-      options: [
-        linked({
+      optionCategories: [{ label: 'Foo', members: ['foo'] }],
+      options: {
+        foo: linked({
           label: 'linkedOptionLabel1',
           value: {
             ref: {
@@ -59,7 +60,7 @@ export default prefab('InnerWrapperTSX', attributes, undefined, [
             },
           },
         }),
-        linked({
+        asd: linked({
           label: 'linkedOptionLabel2',
           value: {
             ref: {
@@ -68,7 +69,7 @@ export default prefab('InnerWrapperTSX', attributes, undefined, [
             },
           },
         }),
-        linked({
+        asdasdsad: linked({
           value: {
             ref: {
               componentId: '#component1',
@@ -76,7 +77,7 @@ export default prefab('InnerWrapperTSX', attributes, undefined, [
             },
           },
         }),
-        linked({
+        sss: linked({
           value: {
             ref: {
               componentId: '#component1',
@@ -84,11 +85,14 @@ export default prefab('InnerWrapperTSX', attributes, undefined, [
             },
           },
         }),
-      ],
+      },
     },
     [
       Alert({
         ref: { id: '#component1' },
+        optionCategories: [
+          { label: 'Styles', members: ['background'], expanded: true },
+        ],
         options: optionRefs,
       }),
     ],

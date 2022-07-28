@@ -1,6 +1,7 @@
 import {
   color,
   component,
+  OptionCategory,
   OptionProducer,
   PrefabComponent,
   PrefabReference,
@@ -12,6 +13,7 @@ import { updateOption } from '../../../utils';
 import { options as defaults } from './options';
 
 export interface Configuration {
+  optionCategories?: OptionCategory[];
   options?: Record<string, OptionProducer>;
   ref?: PrefabComponent['ref'];
 }
