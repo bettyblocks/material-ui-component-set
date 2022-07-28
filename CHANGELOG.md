@@ -1,3 +1,10 @@
+# [2.9.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.8.1...v2.9.0) (2022-07-27)
+
+
+### Features
+
+* removed wrapper from page templates ([6f564fc](https://github.com/bettyblocks/material-ui-component-set/commit/6f564fcfb982590091d138e95738c44432a1e92c))
+
 ## [2.8.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.8.0...v2.8.1) (2022-07-27)
 
 
