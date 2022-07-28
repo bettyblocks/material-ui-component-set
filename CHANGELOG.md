@@ -1,3 +1,10 @@
+## [2.9.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.9.0...v2.9.1) (2022-07-28)
+
+
+### Bug Fixes
+
+* correct datatype in number options carousel component ([35876a2](https://github.com/bettyblocks/material-ui-component-set/commit/35876a206d277da93149e364e8e70b9917b0248d))
+
 # [2.9.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.8.1...v2.9.0) (2022-07-27)
 
 

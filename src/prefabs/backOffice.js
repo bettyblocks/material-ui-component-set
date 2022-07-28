@@ -38240,7 +38240,7 @@
           defaultHeaderstructure.descendants,
         );
         sidebarItem.options[0].value = [`${data.model.label}`];
-        sideMenu[1].descendants[0].descendants[0].descendants.push(
+        sideMenu[1].descendants[0].descendants.push(
           ...drawerSidebar,
           ...drawerContainer,
         );
