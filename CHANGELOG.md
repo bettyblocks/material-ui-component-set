@@ -1,3 +1,10 @@
+## [2.9.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.9.1...v2.9.2) (2022-07-28)
+
+
+### Bug Fixes
+
+* fixed wrong reference in backoffice template ([3e03f55](https://github.com/bettyblocks/material-ui-component-set/commit/3e03f559ea2989e9800c38f364b97355b4798c97))
+
 ## [2.9.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.9.0...v2.9.1) (2022-07-28)
 
 
