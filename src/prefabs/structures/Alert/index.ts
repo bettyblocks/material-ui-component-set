@@ -1,25 +1,25 @@
 import {
   color,
   component,
-  OptionProducer,
-  PrefabComponent,
   PrefabReference,
   ThemeColor,
   toggle,
 } from '@betty-blocks/component-sdk';
 
 import { updateOption } from '../../../utils';
+import { Configuration } from '../Configuration';
 import { options as defaults } from './options';
 
-export interface Configuration {
-  options?: Record<string, OptionProducer>;
-  ref?: PrefabComponent['ref'];
-}
+export const Alert = (
+  config: Configuration,
+  descendants: PrefabReference[] = [],
+) => {
+  const options = { ...(config.options || defaults) };
+  const style = { ...config.style };
+  const ref = config.ref ? { ...config.ref } : undefined;
+  const label = config.label ? config.label : undefined;
 
-export const Alert = (config: Configuration): PrefabReference => {
-  const options = { ...defaults, ...config.options };
-
-  return component('Alert', { ...config, options }, []);
+  return component('Alert', { options, style, ref, label }, descendants);
 };
 
 const baseFormAlertStyle = {
