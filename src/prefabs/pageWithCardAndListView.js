@@ -1788,8 +1788,14 @@
                             { name: 'Left center', value: 'left center' },
                             { name: 'Left bottom', value: 'left bottom' },
                             { name: 'Center top', value: 'center top' },
-                            { name: 'Center center', value: 'center center' },
-                            { name: 'Center bottom', value: 'center bottom' },
+                            {
+                              name: 'Center center',
+                              value: 'center center',
+                            },
+                            {
+                              name: 'Center bottom',
+                              value: 'center bottom',
+                            },
                             { name: 'Right top', value: 'right top' },
                             { name: 'Right center', value: 'right center' },
                             { name: 'Right bottom', value: 'right bottom' },
@@ -2701,8 +2707,14 @@
                                 descendants: [
                                   {
                                     name: 'Text',
+                                    ref: {
+                                      id: '#titleComponent',
+                                    },
                                     options: [
                                       {
+                                        ref: {
+                                          id: '#titleValue',
+                                        },
                                         type: 'VARIABLE',
                                         label: 'Content',
                                         key: 'content',
@@ -2733,8 +2745,14 @@
                                           dataType: 'string',
                                           allowedInput: [
                                             { name: 'Left', value: 'left' },
-                                            { name: 'Center', value: 'center' },
-                                            { name: 'Right', value: 'right' },
+                                            {
+                                              name: 'Center',
+                                              value: 'center',
+                                            },
+                                            {
+                                              name: 'Right',
+                                              value: 'right',
+                                            },
                                           ],
                                         },
                                       },
@@ -4355,6 +4373,9 @@
                               },
                               {
                                 name: 'Tabs',
+                                ref: {
+                                  id: '#tabsComponent',
+                                },
                                 options: [
                                   {
                                     type: 'CUSTOM',
@@ -4377,6 +4398,9 @@
                                     },
                                   },
                                   {
+                                    ref: {
+                                      id: '#tabsValue',
+                                    },
                                     type: 'CUSTOM',
                                     label: 'Selected tab (Pagebuilder)',
                                     key: 'selectedDesignTabIndex',
@@ -5456,19 +5480,10 @@
                                             },
                                           },
                                           {
-                                            value: titleProperty || '',
+                                            value: '',
                                             label: 'Search on property',
                                             key: 'searchProperty',
                                             type: 'PROPERTY',
-                                            configuration: {
-                                              dependsOn: 'model',
-                                            },
-                                          },
-                                          {
-                                            value: 'true',
-                                            label: 'Hide built-in search field',
-                                            key: 'hideSearch',
-                                            type: 'TOGGLE',
                                             configuration: {
                                               dependsOn: 'model',
                                             },
@@ -5499,7 +5514,7 @@
                                             },
                                           },
                                           {
-                                            value: '10',
+                                            value: '8',
                                             label: 'Rows per page (max 50)',
                                             key: 'take',
                                             type: 'NUMBER',
@@ -6420,7 +6435,7 @@
                                                   {
                                                     value: ['Subheader'],
                                                     label: 'Sub header',
-                                                    key: 'subheader',
+                                                    key: 'subHeader',
                                                     type: 'VARIABLE',
                                                   },
                                                   {
@@ -8525,19 +8540,10 @@
                                             },
                                           },
                                           {
-                                            value: titleProperty || '',
+                                            value: '',
                                             label: 'Search on property',
                                             key: 'searchProperty',
                                             type: 'PROPERTY',
-                                            configuration: {
-                                              dependsOn: 'model',
-                                            },
-                                          },
-                                          {
-                                            value: 'true',
-                                            label: 'Hide built-in search field',
-                                            key: 'hideSearch',
-                                            type: 'TOGGLE',
                                             configuration: {
                                               dependsOn: 'model',
                                             },
@@ -8737,10 +8743,22 @@
                                                   as: 'BUTTONGROUP',
                                                   dataType: 'string',
                                                   allowedInput: [
-                                                    { name: 'S', value: 'S' },
-                                                    { name: 'M', value: 'M' },
-                                                    { name: 'L', value: 'L' },
-                                                    { name: 'XL', value: 'XL' },
+                                                    {
+                                                      name: 'S',
+                                                      value: 'S',
+                                                    },
+                                                    {
+                                                      name: 'M',
+                                                      value: 'M',
+                                                    },
+                                                    {
+                                                      name: 'L',
+                                                      value: 'L',
+                                                    },
+                                                    {
+                                                      name: 'XL',
+                                                      value: 'XL',
+                                                    },
                                                     {
                                                       name: 'Full',
                                                       value: 'Full',
@@ -18482,17 +18500,18 @@
                 </Box>
                 <Box pad={{ bottom: '15px' }}>
                   <Text color="grey700">
-                    By using a partial for the header and footer you can easily
-                    reuse the same structure without having to go through every
-                    page.
+                    By using a partial for the top menu and footer you can
+                    easily reuse the same structure without having to go through
+                    every page.
                   </Text>
                 </Box>
-                <Field label="HEADER PARTIAL">
+                <Field label="TOP MENU PARTIAL">
                   <PartialSelector
                     label="Select a partial"
                     onChange={(headerId) => {
                       setHeaderPartialId(headerId);
                     }}
+                    preSelected="Top menu"
                     value={headerPartialId}
                     allowedTypes={[
                       'BODY_COMPONENT',
@@ -18509,6 +18528,7 @@
                     onChange={(footerId) => {
                       setFooterPartialId(footerId);
                     }}
+                    preSelected="Footer"
                     value={footerPartialId}
                     allowedTypes={[
                       'BODY_COMPONENT',
@@ -18842,16 +18862,15 @@
           </Box>
         </Box>
       ),
-      progressBar: (titles) => {
-        const titlesArray = titles;
+      progressBar: () => {
         return (
           <Box
             justify="center"
             margin={{ left: '2rem', top: '-1rem', bottom: '-1rem' }}
           >
-            <Text size="medium" weight="bold">{`Step: ${stepNumber} / ${
-              stepper.stepAmount
-            } - ${titlesArray[stepNumber - 1]}`}</Text>
+            <Text size="medium" weight="bold">{`Step: ${stepNumber + 1} / ${
+              stepper.stepAmount + 1
+            }`}</Text>
           </Box>
         );
       },
@@ -18859,11 +18878,8 @@
     };
     return (
       <>
-        <Header onClose={close} title="Configure component" />
-        {stepper.progressBar([
-          'Configure header and footer',
-          'Configure your card and list view',
-        ])}
+        <Header onClose={close} title="Configure card and list view" />
+        {stepper.progressBar()}
         <Content>{stepper.setStep(stepNumber)}</Content>
         {stepper.buttons()}
       </>

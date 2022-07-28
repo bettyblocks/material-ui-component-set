@@ -9,6 +9,7 @@ import { options as defaults } from './options';
 export interface Configuration {
   options?: Record<string, OptionProducer>;
   style?: PrefabComponentStyle;
+  ref?: { id: string };
 }
 
 export const ActionButton = (
@@ -17,17 +18,6 @@ export const ActionButton = (
 ) => {
   const options = { ...(config.options || defaults) };
   const style = { ...config.style };
-  const actions = [
-    {
-      name: '',
-      ref: {
-        id: '#actionId',
-        endpointId: '#endpointId',
-      },
-      useNewRuntime: false,
-      events: [],
-    },
-  ];
-
-  return component('Button', { options, style, actions }, descendants);
+  const ref = config.ref ? { ...config.ref } : undefined;
+  return component('Button', { options, style, ref }, descendants);
 };

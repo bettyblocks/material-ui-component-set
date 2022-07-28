@@ -1375,8 +1375,14 @@
                             { name: 'Left center', value: 'left center' },
                             { name: 'Left bottom', value: 'left bottom' },
                             { name: 'Center top', value: 'center top' },
-                            { name: 'Center center', value: 'center center' },
-                            { name: 'Center bottom', value: 'center bottom' },
+                            {
+                              name: 'Center center',
+                              value: 'center center',
+                            },
+                            {
+                              name: 'Center bottom',
+                              value: 'center bottom',
+                            },
                             { name: 'Right top', value: 'right top' },
                             { name: 'Right center', value: 'right center' },
                             { name: 'Right bottom', value: 'right bottom' },
@@ -1788,9 +1794,15 @@
                                       dataType: 'string',
                                       allowedInput: [
                                         { name: 'None', value: 'none' },
-                                        { name: 'Left', value: 'flex-start' },
+                                        {
+                                          name: 'Left',
+                                          value: 'flex-start',
+                                        },
                                         { name: 'Center', value: 'center' },
-                                        { name: 'Right', value: 'flex-end' },
+                                        {
+                                          name: 'Right',
+                                          value: 'flex-end',
+                                        },
                                         {
                                           name: 'Justified',
                                           value: 'space-between',
@@ -1808,9 +1820,15 @@
                                       dataType: 'string',
                                       allowedInput: [
                                         { name: 'None', value: 'none' },
-                                        { name: 'Top', value: 'flex-start' },
+                                        {
+                                          name: 'Top',
+                                          value: 'flex-start',
+                                        },
                                         { name: 'Center', value: 'center' },
-                                        { name: 'Bottom', value: 'flex-end' },
+                                        {
+                                          name: 'Bottom',
+                                          value: 'flex-end',
+                                        },
                                       ],
                                     },
                                   },
@@ -1872,8 +1890,14 @@
                                       dataType: 'string',
                                       allowedInput: [
                                         { name: 'Static', value: 'static' },
-                                        { name: 'Relative', value: 'relative' },
-                                        { name: 'Absolute', value: 'absolute' },
+                                        {
+                                          name: 'Relative',
+                                          value: 'relative',
+                                        },
+                                        {
+                                          name: 'Absolute',
+                                          value: 'absolute',
+                                        },
                                         { name: 'Fixed', value: 'fixed' },
                                         { name: 'Sticky', value: 'sticky' },
                                       ],
@@ -2002,8 +2026,14 @@
                                       as: 'BUTTONGROUP',
                                       dataType: 'string',
                                       allowedInput: [
-                                        { name: 'Initial', value: 'initial' },
-                                        { name: 'Contain', value: 'contain' },
+                                        {
+                                          name: 'Initial',
+                                          value: 'initial',
+                                        },
+                                        {
+                                          name: 'Contain',
+                                          value: 'contain',
+                                        },
                                         { name: 'Cover', value: 'cover' },
                                       ],
                                       condition: {
@@ -2023,7 +2053,10 @@
                                       as: 'DROPDOWN',
                                       dataType: 'string',
                                       allowedInput: [
-                                        { name: 'Left top', value: 'left top' },
+                                        {
+                                          name: 'Left top',
+                                          value: 'left top',
+                                        },
                                         {
                                           name: 'Left center',
                                           value: 'left center',
@@ -2074,7 +2107,10 @@
                                       as: 'BUTTONGROUP',
                                       dataType: 'string',
                                       allowedInput: [
-                                        { name: 'None', value: 'no-repeat' },
+                                        {
+                                          name: 'None',
+                                          value: 'no-repeat',
+                                        },
                                         { name: 'X', value: 'repeat-x' },
                                         { name: 'Y', value: 'repeat-y' },
                                         { name: 'All', value: 'repeat' },
@@ -2096,7 +2132,10 @@
                                       as: 'BUTTONGROUP',
                                       dataType: 'string',
                                       allowedInput: [
-                                        { name: 'Inherit', value: 'inherit' },
+                                        {
+                                          name: 'Inherit',
+                                          value: 'inherit',
+                                        },
                                         { name: 'Scroll', value: 'scroll' },
                                         { name: 'Fixed', value: 'fixed' },
                                       ],
@@ -2213,7 +2252,10 @@
                                               name: 'Left',
                                               value: 'flex-start',
                                             },
-                                            { name: 'Center', value: 'center' },
+                                            {
+                                              name: 'Center',
+                                              value: 'center',
+                                            },
                                             {
                                               name: 'Right',
                                               value: 'flex-end',
@@ -2239,7 +2281,10 @@
                                               name: 'Top',
                                               value: 'flex-start',
                                             },
-                                            { name: 'Center', value: 'center' },
+                                            {
+                                              name: 'Center',
+                                              value: 'center',
+                                            },
                                             {
                                               name: 'Bottom',
                                               value: 'flex-end',
@@ -2305,7 +2350,10 @@
                                           as: 'BUTTONGROUP',
                                           dataType: 'string',
                                           allowedInput: [
-                                            { name: 'Static', value: 'static' },
+                                            {
+                                              name: 'Static',
+                                              value: 'static',
+                                            },
                                             {
                                               name: 'Relative',
                                               value: 'relative',
@@ -2314,8 +2362,14 @@
                                               name: 'Absolute',
                                               value: 'absolute',
                                             },
-                                            { name: 'Fixed', value: 'fixed' },
-                                            { name: 'Sticky', value: 'sticky' },
+                                            {
+                                              name: 'Fixed',
+                                              value: 'fixed',
+                                            },
+                                            {
+                                              name: 'Sticky',
+                                              value: 'sticky',
+                                            },
                                           ],
                                           condition: {
                                             type: 'SHOW',
@@ -2450,7 +2504,10 @@
                                               name: 'Contain',
                                               value: 'contain',
                                             },
-                                            { name: 'Cover', value: 'cover' },
+                                            {
+                                              name: 'Cover',
+                                              value: 'cover',
+                                            },
                                           ],
                                           condition: {
                                             type: 'SHOW',
@@ -2527,9 +2584,18 @@
                                               name: 'None',
                                               value: 'no-repeat',
                                             },
-                                            { name: 'X', value: 'repeat-x' },
-                                            { name: 'Y', value: 'repeat-y' },
-                                            { name: 'All', value: 'repeat' },
+                                            {
+                                              name: 'X',
+                                              value: 'repeat-x',
+                                            },
+                                            {
+                                              name: 'Y',
+                                              value: 'repeat-y',
+                                            },
+                                            {
+                                              name: 'All',
+                                              value: 'repeat',
+                                            },
                                           ],
                                           condition: {
                                             type: 'SHOW',
@@ -2552,8 +2618,14 @@
                                               name: 'Inherit',
                                               value: 'inherit',
                                             },
-                                            { name: 'Scroll', value: 'scroll' },
-                                            { name: 'Fixed', value: 'fixed' },
+                                            {
+                                              name: 'Scroll',
+                                              value: 'scroll',
+                                            },
+                                            {
+                                              name: 'Fixed',
+                                              value: 'fixed',
+                                            },
                                           ],
                                           condition: {
                                             type: 'SHOW',
@@ -2602,9 +2674,18 @@
                                           dataType: 'string',
                                           allowedInput: [
                                             { name: 'None', value: 'none' },
-                                            { name: 'Solid', value: 'solid' },
-                                            { name: 'Dashed', value: 'dashed' },
-                                            { name: 'Dotted', value: 'dotted' },
+                                            {
+                                              name: 'Solid',
+                                              value: 'solid',
+                                            },
+                                            {
+                                              name: 'Dashed',
+                                              value: 'dashed',
+                                            },
+                                            {
+                                              name: 'Dotted',
+                                              value: 'dotted',
+                                            },
                                           ],
                                           condition: {
                                             type: 'SHOW',
@@ -2663,7 +2744,10 @@
                                               as: 'BUTTONGROUP',
                                               dataType: 'string',
                                               allowedInput: [
-                                                { name: 'Image', value: 'img' },
+                                                {
+                                                  name: 'Image',
+                                                  value: 'img',
+                                                },
                                                 {
                                                   name: 'Video',
                                                   value: 'video',
@@ -2869,7 +2953,10 @@
                                               name: 'Left',
                                               value: 'flex-start',
                                             },
-                                            { name: 'Center', value: 'center' },
+                                            {
+                                              name: 'Center',
+                                              value: 'center',
+                                            },
                                             {
                                               name: 'Right',
                                               value: 'flex-end',
@@ -2895,7 +2982,10 @@
                                               name: 'Top',
                                               value: 'flex-start',
                                             },
-                                            { name: 'Center', value: 'center' },
+                                            {
+                                              name: 'Center',
+                                              value: 'center',
+                                            },
                                             {
                                               name: 'Bottom',
                                               value: 'flex-end',
@@ -2961,7 +3051,10 @@
                                           as: 'BUTTONGROUP',
                                           dataType: 'string',
                                           allowedInput: [
-                                            { name: 'Static', value: 'static' },
+                                            {
+                                              name: 'Static',
+                                              value: 'static',
+                                            },
                                             {
                                               name: 'Relative',
                                               value: 'relative',
@@ -2970,8 +3063,14 @@
                                               name: 'Absolute',
                                               value: 'absolute',
                                             },
-                                            { name: 'Fixed', value: 'fixed' },
-                                            { name: 'Sticky', value: 'sticky' },
+                                            {
+                                              name: 'Fixed',
+                                              value: 'fixed',
+                                            },
+                                            {
+                                              name: 'Sticky',
+                                              value: 'sticky',
+                                            },
                                           ],
                                           condition: {
                                             type: 'SHOW',
@@ -3106,7 +3205,10 @@
                                               name: 'Contain',
                                               value: 'contain',
                                             },
-                                            { name: 'Cover', value: 'cover' },
+                                            {
+                                              name: 'Cover',
+                                              value: 'cover',
+                                            },
                                           ],
                                           condition: {
                                             type: 'SHOW',
@@ -3183,9 +3285,18 @@
                                               name: 'None',
                                               value: 'no-repeat',
                                             },
-                                            { name: 'X', value: 'repeat-x' },
-                                            { name: 'Y', value: 'repeat-y' },
-                                            { name: 'All', value: 'repeat' },
+                                            {
+                                              name: 'X',
+                                              value: 'repeat-x',
+                                            },
+                                            {
+                                              name: 'Y',
+                                              value: 'repeat-y',
+                                            },
+                                            {
+                                              name: 'All',
+                                              value: 'repeat',
+                                            },
                                           ],
                                           condition: {
                                             type: 'SHOW',
@@ -3208,8 +3319,14 @@
                                               name: 'Inherit',
                                               value: 'inherit',
                                             },
-                                            { name: 'Scroll', value: 'scroll' },
-                                            { name: 'Fixed', value: 'fixed' },
+                                            {
+                                              name: 'Scroll',
+                                              value: 'scroll',
+                                            },
+                                            {
+                                              name: 'Fixed',
+                                              value: 'fixed',
+                                            },
                                           ],
                                           condition: {
                                             type: 'SHOW',
@@ -3258,9 +3375,18 @@
                                           dataType: 'string',
                                           allowedInput: [
                                             { name: 'None', value: 'none' },
-                                            { name: 'Solid', value: 'solid' },
-                                            { name: 'Dashed', value: 'dashed' },
-                                            { name: 'Dotted', value: 'dotted' },
+                                            {
+                                              name: 'Solid',
+                                              value: 'solid',
+                                            },
+                                            {
+                                              name: 'Dashed',
+                                              value: 'dashed',
+                                            },
+                                            {
+                                              name: 'Dotted',
+                                              value: 'dotted',
+                                            },
                                           ],
                                           condition: {
                                             type: 'SHOW',
@@ -3325,7 +3451,10 @@
                                               name: 'Left',
                                               value: 'flex-start',
                                             },
-                                            { name: 'Center', value: 'center' },
+                                            {
+                                              name: 'Center',
+                                              value: 'center',
+                                            },
                                             {
                                               name: 'Right',
                                               value: 'flex-end',
@@ -3351,7 +3480,10 @@
                                               name: 'Top',
                                               value: 'flex-start',
                                             },
-                                            { name: 'Center', value: 'center' },
+                                            {
+                                              name: 'Center',
+                                              value: 'center',
+                                            },
                                             {
                                               name: 'Bottom',
                                               value: 'flex-end',
@@ -3417,7 +3549,10 @@
                                           as: 'BUTTONGROUP',
                                           dataType: 'string',
                                           allowedInput: [
-                                            { name: 'Static', value: 'static' },
+                                            {
+                                              name: 'Static',
+                                              value: 'static',
+                                            },
                                             {
                                               name: 'Relative',
                                               value: 'relative',
@@ -3426,8 +3561,14 @@
                                               name: 'Absolute',
                                               value: 'absolute',
                                             },
-                                            { name: 'Fixed', value: 'fixed' },
-                                            { name: 'Sticky', value: 'sticky' },
+                                            {
+                                              name: 'Fixed',
+                                              value: 'fixed',
+                                            },
+                                            {
+                                              name: 'Sticky',
+                                              value: 'sticky',
+                                            },
                                           ],
                                           condition: {
                                             type: 'SHOW',
@@ -3562,7 +3703,10 @@
                                               name: 'Contain',
                                               value: 'contain',
                                             },
-                                            { name: 'Cover', value: 'cover' },
+                                            {
+                                              name: 'Cover',
+                                              value: 'cover',
+                                            },
                                           ],
                                           condition: {
                                             type: 'SHOW',
@@ -3639,9 +3783,18 @@
                                               name: 'None',
                                               value: 'no-repeat',
                                             },
-                                            { name: 'X', value: 'repeat-x' },
-                                            { name: 'Y', value: 'repeat-y' },
-                                            { name: 'All', value: 'repeat' },
+                                            {
+                                              name: 'X',
+                                              value: 'repeat-x',
+                                            },
+                                            {
+                                              name: 'Y',
+                                              value: 'repeat-y',
+                                            },
+                                            {
+                                              name: 'All',
+                                              value: 'repeat',
+                                            },
                                           ],
                                           condition: {
                                             type: 'SHOW',
@@ -3664,8 +3817,14 @@
                                               name: 'Inherit',
                                               value: 'inherit',
                                             },
-                                            { name: 'Scroll', value: 'scroll' },
-                                            { name: 'Fixed', value: 'fixed' },
+                                            {
+                                              name: 'Scroll',
+                                              value: 'scroll',
+                                            },
+                                            {
+                                              name: 'Fixed',
+                                              value: 'fixed',
+                                            },
                                           ],
                                           condition: {
                                             type: 'SHOW',
@@ -3714,9 +3873,18 @@
                                           dataType: 'string',
                                           allowedInput: [
                                             { name: 'None', value: 'none' },
-                                            { name: 'Solid', value: 'solid' },
-                                            { name: 'Dashed', value: 'dashed' },
-                                            { name: 'Dotted', value: 'dotted' },
+                                            {
+                                              name: 'Solid',
+                                              value: 'solid',
+                                            },
+                                            {
+                                              name: 'Dashed',
+                                              value: 'dashed',
+                                            },
+                                            {
+                                              name: 'Dotted',
+                                              value: 'dotted',
+                                            },
                                           ],
                                           condition: {
                                             type: 'SHOW',
@@ -3765,8 +3933,14 @@
                                     descendants: [
                                       {
                                         name: 'Text',
+                                        ref: {
+                                          id: '#titleComponent',
+                                        },
                                         options: [
                                           {
+                                            ref: {
+                                              id: '#titleValue',
+                                            },
                                             type: 'VARIABLE',
                                             label: 'Content',
                                             key: 'content',
@@ -3796,7 +3970,10 @@
                                               as: 'BUTTONGROUP',
                                               dataType: 'string',
                                               allowedInput: [
-                                                { name: 'Left', value: 'left' },
+                                                {
+                                                  name: 'Left',
+                                                  value: 'left',
+                                                },
                                                 {
                                                   name: 'Center',
                                                   value: 'center',
@@ -3918,15 +4095,42 @@
                                               as: 'DROPDOWN',
                                               dataType: 'string',
                                               allowedInput: [
-                                                { name: '100', value: '100' },
-                                                { name: '200', value: '200' },
-                                                { name: '300', value: '300' },
-                                                { name: '400', value: '400' },
-                                                { name: '500', value: '500' },
-                                                { name: '600', value: '600' },
-                                                { name: '700', value: '700' },
-                                                { name: '800', value: '800' },
-                                                { name: '900', value: '900' },
+                                                {
+                                                  name: '100',
+                                                  value: '100',
+                                                },
+                                                {
+                                                  name: '200',
+                                                  value: '200',
+                                                },
+                                                {
+                                                  name: '300',
+                                                  value: '300',
+                                                },
+                                                {
+                                                  name: '400',
+                                                  value: '400',
+                                                },
+                                                {
+                                                  name: '500',
+                                                  value: '500',
+                                                },
+                                                {
+                                                  name: '600',
+                                                  value: '600',
+                                                },
+                                                {
+                                                  name: '700',
+                                                  value: '700',
+                                                },
+                                                {
+                                                  name: '800',
+                                                  value: '800',
+                                                },
+                                                {
+                                                  name: '900',
+                                                  value: '900',
+                                                },
                                               ],
                                               condition: {
                                                 type: 'SHOW',
@@ -3978,7 +4182,10 @@
                                               name: 'Left',
                                               value: 'flex-start',
                                             },
-                                            { name: 'Center', value: 'center' },
+                                            {
+                                              name: 'Center',
+                                              value: 'center',
+                                            },
                                             {
                                               name: 'Right',
                                               value: 'flex-end',
@@ -4004,7 +4211,10 @@
                                               name: 'Top',
                                               value: 'flex-start',
                                             },
-                                            { name: 'Center', value: 'center' },
+                                            {
+                                              name: 'Center',
+                                              value: 'center',
+                                            },
                                             {
                                               name: 'Bottom',
                                               value: 'flex-end',
@@ -4070,7 +4280,10 @@
                                           as: 'BUTTONGROUP',
                                           dataType: 'string',
                                           allowedInput: [
-                                            { name: 'Static', value: 'static' },
+                                            {
+                                              name: 'Static',
+                                              value: 'static',
+                                            },
                                             {
                                               name: 'Relative',
                                               value: 'relative',
@@ -4079,8 +4292,14 @@
                                               name: 'Absolute',
                                               value: 'absolute',
                                             },
-                                            { name: 'Fixed', value: 'fixed' },
-                                            { name: 'Sticky', value: 'sticky' },
+                                            {
+                                              name: 'Fixed',
+                                              value: 'fixed',
+                                            },
+                                            {
+                                              name: 'Sticky',
+                                              value: 'sticky',
+                                            },
                                           ],
                                           condition: {
                                             type: 'SHOW',
@@ -4215,7 +4434,10 @@
                                               name: 'Contain',
                                               value: 'contain',
                                             },
-                                            { name: 'Cover', value: 'cover' },
+                                            {
+                                              name: 'Cover',
+                                              value: 'cover',
+                                            },
                                           ],
                                           condition: {
                                             type: 'SHOW',
@@ -4292,9 +4514,18 @@
                                               name: 'None',
                                               value: 'no-repeat',
                                             },
-                                            { name: 'X', value: 'repeat-x' },
-                                            { name: 'Y', value: 'repeat-y' },
-                                            { name: 'All', value: 'repeat' },
+                                            {
+                                              name: 'X',
+                                              value: 'repeat-x',
+                                            },
+                                            {
+                                              name: 'Y',
+                                              value: 'repeat-y',
+                                            },
+                                            {
+                                              name: 'All',
+                                              value: 'repeat',
+                                            },
                                           ],
                                           condition: {
                                             type: 'SHOW',
@@ -4317,8 +4548,14 @@
                                               name: 'Inherit',
                                               value: 'inherit',
                                             },
-                                            { name: 'Scroll', value: 'scroll' },
-                                            { name: 'Fixed', value: 'fixed' },
+                                            {
+                                              name: 'Scroll',
+                                              value: 'scroll',
+                                            },
+                                            {
+                                              name: 'Fixed',
+                                              value: 'fixed',
+                                            },
                                           ],
                                           condition: {
                                             type: 'SHOW',
@@ -4367,9 +4604,18 @@
                                           dataType: 'string',
                                           allowedInput: [
                                             { name: 'None', value: 'none' },
-                                            { name: 'Solid', value: 'solid' },
-                                            { name: 'Dashed', value: 'dashed' },
-                                            { name: 'Dotted', value: 'dotted' },
+                                            {
+                                              name: 'Solid',
+                                              value: 'solid',
+                                            },
+                                            {
+                                              name: 'Dashed',
+                                              value: 'dashed',
+                                            },
+                                            {
+                                              name: 'Dotted',
+                                              value: 'dotted',
+                                            },
                                           ],
                                           condition: {
                                             type: 'SHOW',
@@ -4434,7 +4680,10 @@
                                               name: 'Left',
                                               value: 'flex-start',
                                             },
-                                            { name: 'Center', value: 'center' },
+                                            {
+                                              name: 'Center',
+                                              value: 'center',
+                                            },
                                             {
                                               name: 'Right',
                                               value: 'flex-end',
@@ -4460,7 +4709,10 @@
                                               name: 'Top',
                                               value: 'flex-start',
                                             },
-                                            { name: 'Center', value: 'center' },
+                                            {
+                                              name: 'Center',
+                                              value: 'center',
+                                            },
                                             {
                                               name: 'Bottom',
                                               value: 'flex-end',
@@ -4526,7 +4778,10 @@
                                           as: 'BUTTONGROUP',
                                           dataType: 'string',
                                           allowedInput: [
-                                            { name: 'Static', value: 'static' },
+                                            {
+                                              name: 'Static',
+                                              value: 'static',
+                                            },
                                             {
                                               name: 'Relative',
                                               value: 'relative',
@@ -4535,8 +4790,14 @@
                                               name: 'Absolute',
                                               value: 'absolute',
                                             },
-                                            { name: 'Fixed', value: 'fixed' },
-                                            { name: 'Sticky', value: 'sticky' },
+                                            {
+                                              name: 'Fixed',
+                                              value: 'fixed',
+                                            },
+                                            {
+                                              name: 'Sticky',
+                                              value: 'sticky',
+                                            },
                                           ],
                                           condition: {
                                             type: 'SHOW',
@@ -4671,7 +4932,10 @@
                                               name: 'Contain',
                                               value: 'contain',
                                             },
-                                            { name: 'Cover', value: 'cover' },
+                                            {
+                                              name: 'Cover',
+                                              value: 'cover',
+                                            },
                                           ],
                                           condition: {
                                             type: 'SHOW',
@@ -4748,9 +5012,18 @@
                                               name: 'None',
                                               value: 'no-repeat',
                                             },
-                                            { name: 'X', value: 'repeat-x' },
-                                            { name: 'Y', value: 'repeat-y' },
-                                            { name: 'All', value: 'repeat' },
+                                            {
+                                              name: 'X',
+                                              value: 'repeat-x',
+                                            },
+                                            {
+                                              name: 'Y',
+                                              value: 'repeat-y',
+                                            },
+                                            {
+                                              name: 'All',
+                                              value: 'repeat',
+                                            },
                                           ],
                                           condition: {
                                             type: 'SHOW',
@@ -4773,8 +5046,14 @@
                                               name: 'Inherit',
                                               value: 'inherit',
                                             },
-                                            { name: 'Scroll', value: 'scroll' },
-                                            { name: 'Fixed', value: 'fixed' },
+                                            {
+                                              name: 'Scroll',
+                                              value: 'scroll',
+                                            },
+                                            {
+                                              name: 'Fixed',
+                                              value: 'fixed',
+                                            },
                                           ],
                                           condition: {
                                             type: 'SHOW',
@@ -4823,9 +5102,18 @@
                                           dataType: 'string',
                                           allowedInput: [
                                             { name: 'None', value: 'none' },
-                                            { name: 'Solid', value: 'solid' },
-                                            { name: 'Dashed', value: 'dashed' },
-                                            { name: 'Dotted', value: 'dotted' },
+                                            {
+                                              name: 'Solid',
+                                              value: 'solid',
+                                            },
+                                            {
+                                              name: 'Dashed',
+                                              value: 'dashed',
+                                            },
+                                            {
+                                              name: 'Dotted',
+                                              value: 'dotted',
+                                            },
                                           ],
                                           condition: {
                                             type: 'SHOW',
@@ -4873,6 +5161,9 @@
                                     ],
                                     descendants: [
                                       {
+                                        ref: {
+                                          id: '#tabsComponent',
+                                        },
                                         name: 'Tabs',
                                         options: [
                                           {
@@ -4882,10 +5173,27 @@
                                             type: 'NUMBER',
                                           },
                                           {
+                                            ref: {
+                                              id: '#tabsValue',
+                                            },
                                             label: 'Selected design tab index',
                                             key: 'selectedDesignTabIndex',
                                             value: '1',
-                                            type: 'NUMBER',
+                                            type: 'CUSTOM',
+                                            configuration: {
+                                              as: 'BUTTONGROUP',
+                                              dataType: 'string',
+                                              allowedInput: [
+                                                {
+                                                  name: 'Login tab',
+                                                  value: '1',
+                                                },
+                                                {
+                                                  name: 'Register tab',
+                                                  value: '2',
+                                                },
+                                              ],
+                                            },
                                           },
                                           {
                                             label: 'Show all tabs',
@@ -4920,8 +5228,14 @@
                                               as: 'BUTTONGROUP',
                                               dataType: 'string',
                                               allowedInput: [
-                                                { name: 'Left', value: 'left' },
-                                                { name: 'Top', value: 'top' },
+                                                {
+                                                  name: 'Left',
+                                                  value: 'left',
+                                                },
+                                                {
+                                                  name: 'Top',
+                                                  value: 'top',
+                                                },
                                                 {
                                                   name: 'Right',
                                                   value: 'right',
@@ -4966,13 +5280,22 @@
                                               as: 'BUTTONGROUP',
                                               dataType: 'string',
                                               allowedInput: [
-                                                { name: 'Auto', value: 'auto' },
+                                                {
+                                                  name: 'Auto',
+                                                  value: 'auto',
+                                                },
                                                 {
                                                   name: 'Desktop',
                                                   value: 'desktop',
                                                 },
-                                                { name: 'Always', value: 'on' },
-                                                { name: 'Never', value: 'off' },
+                                                {
+                                                  name: 'Always',
+                                                  value: 'on',
+                                                },
+                                                {
+                                                  name: 'Never',
+                                                  value: 'off',
+                                                },
                                               ],
                                               condition: {
                                                 type: 'SHOW',
@@ -14148,16 +14471,15 @@
           </Box>
         </Box>
       ),
-      progressBar: (titles) => {
-        const titlesArray = titles;
+      progressBar: () => {
         return (
           <Box
             justify="center"
             margin={{ bottom: '2rem', left: '2rem', top: '-1rem' }}
           >
-            <Text size="medium" weight="bold">{`Step: ${stepNumber} / ${
-              stepper.stepAmount
-            } - ${titlesArray[stepNumber - 1]}`}</Text>
+            <Text size="medium" weight="bold">{`Step: ${stepNumber + 1} / ${
+              stepper.stepAmount + 1
+            }`}</Text>
           </Box>
         );
       },
@@ -14167,10 +14489,7 @@
     return (
       <>
         <Header onClose={close} title="Configure login and register form" />
-        {stepper.progressBar([
-          'Configure Login Form',
-          'Configure Register Form',
-        ])}
+        {stepper.progressBar()}
         <Content>{stepper.setStep(stepNumber)}</Content>
         {stepper.buttons()}
       </>

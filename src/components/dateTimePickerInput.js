@@ -1,6 +1,6 @@
 (() => ({
   name: 'DateTimePickerInput',
-  type: 'FORM_COMPONENT',
+  type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {

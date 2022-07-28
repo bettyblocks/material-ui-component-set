@@ -1,6 +1,6 @@
 (() => ({
   name: 'TextInput',
-  type: 'FORM_COMPONENT',
+  type: 'CONTENT_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {
@@ -23,8 +23,8 @@
       adornmentIcon,
       adornmentPosition,
       pattern,
-      minlength,
-      maxlength,
+      minLength,
+      maxLength,
       minvalue,
       maxvalue,
       validationTypeMismatch = [''],
@@ -65,8 +65,8 @@
     const labelText = parsedLabel || name;
 
     const validPattern = pattern || null;
-    const validMinlength = minlength || null;
-    const validMaxlength = maxlength || null;
+    const validMinlength = minLength || null;
+    const validMaxlength = maxLength || null;
     const validMinvalue = minvalue || null;
     const validMaxvalue = maxvalue || null;
 
