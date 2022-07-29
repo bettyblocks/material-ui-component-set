@@ -87,9 +87,9 @@ columnOptions.columnWidthTabletPortrait = option('CUSTOM', {
   },
 });
 
-columnOptions.columnWidthMobile = option('CUSTOM', {
-  label: 'Column width (obile)',
-  value: '12',
+options.columnWidthMobile = option('CUSTOM', {
+  label: 'Column width (mobile)',
+  value: '6',
   configuration: {
     as: 'DROPDOWN',
     dataType: 'string',

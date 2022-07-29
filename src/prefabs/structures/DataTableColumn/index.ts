@@ -1,8 +1,8 @@
 import {
   component,
   PrefabComponentOption,
+  PrefabComponent,
   PrefabComponentStyle,
-  PrefabReference,
 } from '@betty-blocks/component-sdk';
 import { options as defaults } from './options';
 
@@ -13,14 +13,12 @@ export interface Configuration {
   style?: PrefabComponentStyle;
   ref?: { id: string };
 }
-
-export const Row = (
+export const DataTableColumn = (
   config: Configuration,
-  descendants: PrefabReference[] = [],
+  descendants: PrefabComponent[] = [],
 ) => {
   const options = { ...(config.options || defaults) };
   const style = { ...config.style };
   const ref = config.ref ? { ...config.ref } : undefined;
-
-  return component('Row', { options, style, ref }, descendants);
+  return component('DataTableColumn', { options, style, ref }, descendants);
 };
