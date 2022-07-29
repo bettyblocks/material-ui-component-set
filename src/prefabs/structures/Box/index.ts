@@ -1,18 +1,7 @@
-import {
-  component,
-  PrefabComponentOption,
-  PrefabComponentStyle,
-  PrefabReference,
-} from '@betty-blocks/component-sdk';
+import { component, PrefabReference } from '@betty-blocks/component-sdk';
+import { Configuration } from '../Configuration';
 import { options as defaults } from './options';
 
-type OptionProducer = (key: string) => PrefabComponentOption;
-
-export interface Configuration {
-  options?: Record<string, OptionProducer>;
-  style?: PrefabComponentStyle;
-  ref?: { id: string };
-}
 export const Box = (
   config: Configuration,
   descendants: PrefabReference[] = [],
@@ -20,5 +9,6 @@ export const Box = (
   const options = { ...(config.options || defaults) };
   const style = { ...config.style };
   const ref = config.ref ? { ...config.ref } : undefined;
-  return component('Box', { options, style, ref }, descendants);
+  const label = config.label ? config.label : undefined;
+  return component('Box', { options, style, ref, label }, descendants);
 };

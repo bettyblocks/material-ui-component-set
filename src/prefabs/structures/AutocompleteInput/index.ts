@@ -1,24 +1,19 @@
-import { component, OptionProducer } from '@betty-blocks/component-sdk';
-import { PrefabComponent } from '@betty-blocks/component-sdk/build/prefabs/types/component';
+import { component, PrefabReference } from '@betty-blocks/component-sdk';
 import { updateOption } from '../../../utils';
 import { deleteActionVariable } from '../../hooks/deleteActionVariable';
+import { Configuration } from '../Configuration';
 import { options as defaults } from './options';
-
-export interface Configuration {
-  options?: Record<string, OptionProducer>;
-  adornmentIcon?: string;
-  label?: string;
-  inputLabel?: string;
-  type?: HTMLInputElement['type'];
-}
 
 const $afterDelete = [deleteActionVariable];
 
 export const AutocompleteInput = (
   config: Configuration,
-  children: PrefabComponent[] = [],
+  descendants: PrefabReference[] = [],
 ) => {
   const options = { ...(config.options || defaults) };
+  const style = { ...config.style };
+  const ref = config.ref ? { ...config.ref } : undefined;
+  const label = config.label ? config.label : undefined;
 
   if (config.type) {
     options.type = updateOption(options.type, { value: config.type });
@@ -34,5 +29,9 @@ export const AutocompleteInput = (
     });
   }
 
-  return component('AutocompleteInput', { options, $afterDelete }, children);
+  return component(
+    'AutocompleteInput',
+    { options, $afterDelete, style, ref, label },
+    descendants,
+  );
 };

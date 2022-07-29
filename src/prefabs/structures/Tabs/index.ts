@@ -1,15 +1,6 @@
-import {
-  component,
-  PrefabReference,
-  OptionProducer,
-  PrefabComponentStyle,
-} from '@betty-blocks/component-sdk';
+import { component, PrefabReference } from '@betty-blocks/component-sdk';
+import { Configuration } from '../Configuration';
 import { options as defaults } from './options';
-
-export interface Configuration {
-  options?: Record<string, OptionProducer>;
-  style?: PrefabComponentStyle;
-}
 
 export const Tabs = (
   config: Configuration,
@@ -17,6 +8,7 @@ export const Tabs = (
 ) => {
   const options = { ...(config.options || defaults) };
   const style = { ...config.style };
-
-  return component('Tabs', { options, style }, descendants);
+  const ref = config.ref ? { ...config.ref } : undefined;
+  const label = config.label ? config.label : undefined;
+  return component('Tabs', { options, style, ref, label }, descendants);
 };
