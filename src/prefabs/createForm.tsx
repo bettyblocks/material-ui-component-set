@@ -82,7 +82,6 @@ const beforeCreate = ({
             properties,
             'update',
           );
-          console.log('result', result);
           return originalPrefab;
         }}
       />

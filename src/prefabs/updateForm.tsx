@@ -4,14 +4,8 @@ import {
   Icon,
   InteractionType,
   PrefabInteraction,
-  option,
-  model as modelOption,
-  filter,
-  component,
 } from '@betty-blocks/component-sdk';
-import { FormErrorAlert, FormSuccessAlert } from './structures/Alert';
-import { updateOption } from '../utils';
-import { options as defaults } from './structures/Alert/options';
+import { Form } from './structures/ActionJSForm';
 
 const beforeCreate = ({
   close,
@@ -32,6 +26,7 @@ const beforeCreate = ({
   prefab: originalPrefab,
   prefabs,
   save,
+  helpers: { setOption, camelToSnakeCase },
   helpers,
 }: any) => {
   const {
@@ -41,13 +36,14 @@ const beforeCreate = ({
     createUuid,
     makeBettyInput,
     prepareAction,
-    useCreateEndpointVariable,
-    useEndpointVariables,
+    useCurrentPartialId,
+    useCurrentPageId,
+
     useModelQuery,
   } = helpers;
-  const [modelId, setModelId] = React.useState('');
+  const [modelId, setModelId] = React.useState(null);
   const [model, setModel] = React.useState(null);
-  const [idProperty, setIdProperty] = React.useState('');
+  const [idProperty, setIdProperty] = React.useState(null);
   const [properties, setProperties] = React.useState([]);
   const [hasErrors, setHasErrors] = React.useState(false);
   const [thisPageState, setThisPageState] = React.useState({
@@ -55,25 +51,148 @@ const beforeCreate = ({
     component: null,
   });
   const [buttonGroupValue, setButtonGroupValue] = React.useState('anotherPage');
-  const componentId = createUuid();
-  const skipModelQuery = !modelId || !!(model && model.id === modelId);
+  const skipModelQuery =
+    !modelId || !!(model && modelId && model.id === modelId);
 
-  const endpointVarsRequest = useEndpointVariables();
-  const [
-    mutation,
-    createEndpointVarRequest,
-  ] = useCreateEndpointVariable();
+  const [validationMessage, setValidationMessage] = React.useState('');
+  const [anotherPageState, setAnotherPageState] = React.useState({
+    modelId: '',
+  });
+  const pageId = useCurrentPageId();
+  const partialId = useCurrentPartialId();
+  const componentId = createUuid();
 
   const modelRequest = useModelQuery({
     variables: { id: modelId },
-    skip: skipModelQuery,
     onCompleted: (result) => {
       setModel(result.model);
       setIdProperty(result.model.properties.find(({ name }) => name === 'id'));
     },
   });
 
-  if (modelRequest.loading || createEndpointVarRequest.loading || endpointVarsRequest.loading) {
+  const data = modelRequest.data;
+
+  React.useEffect(() => {
+    setValidationMessage('');
+  }, [buttonGroupValue]);
+
+  const validate = () => {
+    if (modelRequest.loading) {
+      setValidationMessage(
+        'Model details are still loading, please try submitting again.',
+      );
+      return false;
+    }
+
+    switch (buttonGroupValue) {
+      case 'anotherPage':
+        if (!data || !data.model) {
+          setValidationMessage('Model is required.');
+          return false;
+        }
+        if (!anotherPageState.modelId) {
+          setValidationMessage('Model id is required.');
+          return false;
+        }
+        break;
+      case 'thisPage':
+        if (!thisPageState.component) {
+          setValidationMessage('Component is required.');
+          return false;
+        }
+        if (!data || !data.model) {
+          setValidationMessage('Model is required.');
+          return false;
+        }
+        if (!thisPageState.modelId) {
+          setValidationMessage('The selected component does not have a model.');
+          return false;
+        }
+        break;
+
+      default:
+        break;
+    }
+    return true;
+  };
+
+  const saveAnotherPage = () => {
+    if (validate()) {
+      const newPrefab = { ...originalPrefab };
+      const variableName = `${camelToSnakeCase(data.model.label)}_id`;
+      const context = pageId ? { pageId } : { partialId };
+
+      newPrefab.variables.push({
+        ...context,
+        kind: 'integer',
+        name: variableName,
+        ref: {
+          id: '#idVariable',
+        },
+      });
+
+      setOption(newPrefab.structure[0], 'model', (option) => ({
+        ...option,
+        value: anotherPageState.modelId,
+      }));
+
+      setOption(newPrefab.structure[0], 'filter', (option) => ({
+        ...option,
+        value: {
+          [idProperty.id]: {
+            eq: {
+              ref: { id: '#idVariable' },
+              name: variableName,
+              type: 'VARIABLE',
+            },
+          },
+        },
+      }));
+
+      save(newPrefab);
+    }
+  };
+
+  function saveThisPage() {
+    let sourceEvent;
+    switch (thisPageState.component.name) {
+      case 'DataTable': {
+        sourceEvent = 'OnRowClick';
+        break;
+      }
+      case 'DataList': {
+        sourceEvent = 'sendItemId';
+        break;
+      }
+
+      default: {
+        sourceEvent = 'OnItemClick';
+      }
+    }
+    const inheritComponent = thisPageState.component;
+    const interaction = {
+      name: 'Filter',
+      sourceEvent,
+      parameters: [
+        {
+          id: [idProperty.id],
+          parameter: 'property',
+          resolveValue: false,
+          operator: 'eq',
+        },
+      ],
+      sourceComponentId: thisPageState.component.id,
+      ref: {
+        targetComponentId: '#formId',
+      },
+      type: 'Custom',
+    };
+
+    originalPrefab.interactions.push(interaction);
+    save(originalPrefab);
+  }
+
+  if (modelRequest.loading) {
     return <span>loading...</span>;
   }
 
@@ -88,90 +207,104 @@ const beforeCreate = ({
       )}
       <Content>
         <Field
-          label="where is the data coming from?"
+          label="Where is the data coming from?"
           info={
             <Text size="small" color="grey700">
               {buttonGroupValue === 'anotherPage' &&
                 'Link from another page to this page, and pass the ID property of the model.'}
               {buttonGroupValue === 'thisPage' &&
-                `A component on this page is passing the data to this ${originalPrefab.name}.`}
-              {buttonGroupValue === 'loggedInUser' &&
-                `Data from the logged in user can be used inside this ${originalPrefab.name}`}
+                'A component on this page is passing the data to this DataContainer.'}
             </Text>
           }
         >
           <ButtonGroup
-            onChange={({ target: { value } }): void => {
+            onChange={({ target: { value } }) => {
               setButtonGroupValue(value);
-              setModelId('');
             }}
             value={buttonGroupValue}
             size="large"
           >
             <ButtonGroupButton
-              label="another page"
+              label="Another page"
               value="anotherPage"
               name="dataSourceSelect"
             />
             <ButtonGroupButton
-              label="this page"
+              label="This page"
               value="thisPage"
               name="dataSourceSelect"
             />
           </ButtonGroup>
         </Field>
-
-        <Field label="select model">
-          {buttonGroupValue === 'anotherPage' && (
+        {buttonGroupValue === 'anotherPage' && (
+          <Field
+            label="Model"
+            error={
+              validationMessage && (
+                <Text color="#e82600">{validationMessage}</Text>
+              )
+            }
+            info={
+              <Text size="small" color="grey700">
+                Select the model where you want to show the data from.
+              </Text>
+            }
+          >
             <ModelSelector
-              onQueryCompleted={({
-                model: { properties: allProperties },
-                model: selectedModel,
-              }): void => {
-                setIdProperty(
-                  allProperties.find((property) => {
-                    return property.name === 'id';
-                  }),
-                );
-
-                setModel(selectedModel);
+              onChange={(id) => {
+                setAnotherPageState((prevState) => ({
+                  ...prevState,
+                  modelId: id,
+                }));
+                setModelId(id);
               }}
-              onChange={(newId): void => {
-                setModelId(newId);
-                setProperties([]);
-              }}
-              scopedModels={false}
-              value={modelId}
+              margin
+              value={anotherPageState.modelId}
             />
-          )}
-          {buttonGroupValue === 'thisPage' && (
+          </Field>
+        )}
+        {buttonGroupValue === 'thisPage' && (
+          <Field
+            label="Component"
+            error={
+              validationMessage && (
+                <Text color="#e82600">{validationMessage}</Text>
+              )
+            }
+            info={
+              <Text size="small" color="grey700">
+                Select a component that contains a collection of data, for
+                example DataList or DataTable.
+              </Text>
+            }
+          >
             <ComponentSelector
-              onChange={(component): void => {
+              onChange={(component) => {
                 const foundModelId = Object.values<any>(
                   component.options,
                 ).reduce(
-                  (acc, componentOption) =>
-                    componentOption.type === 'MODEL' ||
-                    componentOption.type === 'MODEL_AND_RELATION'
-                      ? componentOption.value
+                  (acc, option) =>
+                    option.type === 'MODEL' ||
+                    option.type === 'MODEL_AND_RELATION'
+                      ? option.value
                       : acc,
                   null,
                 );
-                setIdProperty(foundModelId);
                 setThisPageState((prevState) => ({
                   ...prevState,
                   modelId: foundModelId,
                   component,
                 }));
-                setModelId(foundModelId as string);
-                setProperties([]);
+                setModelId(foundModelId);
               }}
               value={thisPageState.component ? thisPageState.component.id : ''}
               placeholder="No components available."
               allowedComponents={['DataTable', 'DataList']}
             />
-          )}
-        </Field>
+          </Field>
+        )}
+      </Content>
+      <Content>
         <Field label="select properties">
           <PropertiesSelector
             allowRelations
@@ -189,22 +322,6 @@ const beforeCreate = ({
         onClose={close}
         canSave={modelId && properties.length !== 0}
         onSave={async (): Promise<void> => {
-          console.log('onSave');
-          if (buttonGroupValue === 'anotherPage') {
-            let endpointVariable;
-            if (endpointVarsRequest.data.length > 0) {
-              endpointVariable = endpointVarsRequest.data.find(
-                ({ name }) => name === model.name,
-              );
-            }
-
-            if (!endpointVariable) {
-              console.log({ model });
-              const mutationResult = await mutation(model);
-
-              console.log({ mutationResult });
-            }
-          }
           // eslint-disable-next-line no-param-reassign
           originalPrefab.structure[0].id = componentId;
           const result = await prepareAction(
@@ -244,25 +361,6 @@ const beforeCreate = ({
               disabled: true,
             },
           }));
-
-          if (buttonGroupValue === 'anotherPage') {
-            // const ifRefactor = !!filter.__or;
-            // let finalFilter;
-            // if (ifRefactor) {
-            //     finalFilter = {
-            //         __and: [
-            //             where,
-            //             ...filter.__or;
-            //         ]
-            //     }
-            // } else {
-            //   finalFilter = [...filter.__and, where]
-            // }
-            // setOption(structure, 'filter', (option) => ({
-            //   ...option,
-            //   value: filter as any,
-            // }));
-          }
 
           // possible helper: given property kind returns prefab name
           Object.values(result.variables).map(([property, variable]) => {
@@ -432,32 +530,17 @@ const beforeCreate = ({
             cloneStructure(prefabs, BettyPrefabs.SUBMIT_BUTTON),
           );
 
-          let interaction;
-          if (buttonGroupValue === 'thisPage') {
-            const inheritComponent = thisPageState.component;
-            interaction = {
-              sourceEvent:
-                inheritComponent.name === 'DataTable'
-                  ? 'sendRowId'
-                  : 'sendItemId',
-              name: 'setFormRecord',
-              parameters: [
-                {
-                  id: componentId,
-                  parameter: 'argument',
-                },
-              ],
-              type: 'Custom',
-              sourceComponentId: inheritComponent.id,
-              targetComponentId: componentId,
-            };
+          setValidationMessage('');
+          switch (buttonGroupValue) {
+            case 'anotherPage':
+              saveAnotherPage();
+              break;
+            case 'thisPage':
+              saveThisPage();
+              break;
+            default:
+              break;
           }
-
-          if (interaction) {
-            originalPrefab.interactions.push(interaction);
-          }
-
-          save(originalPrefab);
         }}
       />
     </>
@@ -507,30 +590,7 @@ const attributes = {
   category: 'FORMV2',
   icon: Icon.UpdateFormIcon,
   interactions: [],
+  variables: [],
 };
 
-const options = {
-  actionId: option('ACTION_JS', { label: 'Action', value: '' }),
-  modelId: modelOption('Model'),
-  filter: filter('Filter', { configuration: { dependsOn: 'modelId' } }),
-};
-
-const updateFormAlertOptions = {
-  bodyText: updateOption(defaults.bodyText, {
-    value: ['Record successfully updated'],
-  }),
-};
-
-export default prefab('Update Form Beta', attributes, beforeCreate, [
-  component(
-    'Form Beta',
-    { label: 'Update form Beta', options, ref: { id: '#formId' } },
-    [
-      FormSuccessAlert({
-        options: updateFormAlertOptions,
-        ref: { id: '#alertSuccessId' },
-      }),
-      FormErrorAlert({ ref: { id: '#alertErrorId' } }),
-    ],
-  ),
-]);
+export default prefab('Update Form Beta', attributes, beforeCreate, [Form()]);
