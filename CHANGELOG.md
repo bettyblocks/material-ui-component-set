@@ -1,3 +1,10 @@
+## [2.10.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.10.0...v2.10.1) (2022-07-29)
+
+
+### Bug Fixes
+
+* removed a single descendants ([1bb9798](https://github.com/bettyblocks/material-ui-component-set/commit/1bb9798e64308cc2f011b7fe57ef6f96e04062e3))
+
 # [2.10.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.9.2...v2.10.0) (2022-07-28)
 
 
