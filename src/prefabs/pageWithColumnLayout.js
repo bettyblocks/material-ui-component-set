@@ -25,7 +25,6 @@
     },
     prefab,
     save,
-    helpers,
   }) => {
     const [rows, setRows] = React.useState([{ index: 1, columns: 2 }]);
     const createElements = (n) => {
