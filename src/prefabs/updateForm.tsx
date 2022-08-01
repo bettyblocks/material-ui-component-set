@@ -45,7 +45,6 @@ const beforeCreate = ({
   const [model, setModel] = React.useState(null);
   const [idProperty, setIdProperty] = React.useState(null);
   const [properties, setProperties] = React.useState([]);
-  const [hasErrors, setHasErrors] = React.useState(false);
   const [thisPageState, setThisPageState] = React.useState({
     modelId: null,
     component: null,
@@ -193,12 +192,6 @@ const beforeCreate = ({
   return (
     <>
       <Header onClose={close} title="Configure form" />
-      {hasErrors && (
-        <Box>
-          <GrommetAlertIcon />
-          <Text color="orange">An error has occured, contact support</Text>
-        </Box>
-      )}
       <Content>
         <Field
           label="Where is the data coming from?"
