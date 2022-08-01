@@ -51,8 +51,6 @@ const beforeCreate = ({
     component: null,
   });
   const [buttonGroupValue, setButtonGroupValue] = React.useState('anotherPage');
-  const skipModelQuery =
-    !modelId || !!(model && modelId && model.id === modelId);
 
   const [validationMessage, setValidationMessage] = React.useState('');
   const [anotherPageState, setAnotherPageState] = React.useState({
@@ -70,7 +68,7 @@ const beforeCreate = ({
     },
   });
 
-  const data = modelRequest.data;
+  const { data } = modelRequest;
 
   React.useEffect(() => {
     setValidationMessage('');
@@ -169,7 +167,7 @@ const beforeCreate = ({
         sourceEvent = 'OnItemClick';
       }
     }
-    const inheritComponent = thisPageState.component;
+
     const interaction = {
       name: 'Filter',
       sourceEvent,
@@ -328,22 +326,6 @@ const beforeCreate = ({
           );
           const structure = originalPrefab.structure[0];
 
-          const setOption = (structure, key, transform): void => {
-            const index = structure.options.findIndex(
-              (option) => option.key === key,
-            );
-            if (index === -1) {
-              console.warn(
-                `unable to set option. option '${key}' is missing on ${structure.name}`,
-              );
-
-              return;
-            }
-
-            // eslint-disable-next-line no-param-reassign
-            structure.options[index] = transform(structure.options[index]);
-          };
-
           setOption(structure, 'actionId', (option) => ({
             ...option,
             value: result.action.actionId,
@@ -360,7 +342,7 @@ const beforeCreate = ({
 
           // possible helper: given property kind returns prefab name
           Object.values(result.variables).map(([property, variable]) => {
-            const kind = property.kind;
+            const { kind } = property;
             switch (kind) {
               case PropertyKind.BELONGS_TO: {
                 structure.descendants.push(
@@ -511,6 +493,8 @@ const beforeCreate = ({
                   ),
                 );
             }
+            // eslint-disable-next-line no-console
+            return console.warn('PropertyKind not found');
           });
 
           structure.descendants.push(
@@ -585,7 +569,7 @@ const interactions: PrefabInteraction[] = [
 const attributes = {
   category: 'FORMV2',
   icon: Icon.UpdateFormIcon,
-  interactions: [],
+  interactions,
   variables: [],
 };
 
