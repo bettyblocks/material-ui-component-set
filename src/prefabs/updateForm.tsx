@@ -26,7 +26,6 @@ const beforeCreate = ({
   prefab: originalPrefab,
   prefabs,
   save,
-  helpers: { setOption, camelToSnakeCase },
   helpers,
 }: any) => {
   const {
@@ -38,9 +37,11 @@ const beforeCreate = ({
     prepareAction,
     useCurrentPartialId,
     useCurrentPageId,
-
+    setOption,
+    camelToSnakeCase,
     useModelQuery,
   } = helpers;
+
   const [modelId, setModelId] = React.useState(null);
   const [model, setModel] = React.useState(null);
   const [idProperty, setIdProperty] = React.useState(null);
@@ -190,10 +191,6 @@ const beforeCreate = ({
 
     originalPrefab.interactions.push(interaction);
     save(originalPrefab);
-  }
-
-  if (modelRequest.loading) {
-    return <span>loading...</span>;
   }
 
   return (
@@ -527,7 +524,7 @@ const beforeCreate = ({
           );
 
           structure.descendants.push(
-            cloneStructure(prefabs, BettyPrefabs.SUBMIT_BUTTON),
+            cloneStructure(BettyPrefabs.SUBMIT_BUTTON),
           );
 
           setValidationMessage('');
