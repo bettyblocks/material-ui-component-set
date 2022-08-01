@@ -24,7 +24,6 @@ const beforeCreate = ({
     Text,
   },
   prefab: originalPrefab,
-  prefabs,
   save,
   helpers,
 }: any) => {
@@ -306,7 +305,7 @@ const beforeCreate = ({
           <PropertiesSelector
             allowRelations
             disabledKinds={[]}
-            disabledNames={['created_at', 'updated_at']}
+            disabledNames={['id', 'created_at', 'updated_at']}
             // TODO: check if component id is needed here
             modelId={modelId}
             onChange={setProperties as any /* these types are wild man */}

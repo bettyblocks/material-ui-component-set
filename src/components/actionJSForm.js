@@ -152,10 +152,9 @@
       );
     }
 
-    const isFilterEmpty = !!where && Object.keys(where).length === 0;
-    if (modelId && !isFilterEmpty) {
+    if (modelId) {
       return (
-        <GetOne modelId={modelId} filter={!where ? {} : where}>
+        <GetOne modelId={modelId} rawFilter={where}>
           <FormComponent />
         </GetOne>
       );
