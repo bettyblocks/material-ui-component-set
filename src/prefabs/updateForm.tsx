@@ -10,14 +10,12 @@ import { Form } from './structures/ActionJSForm';
 const beforeCreate = ({
   close,
   components: {
-    Box,
     ButtonGroup,
     ButtonGroupButton,
     ComponentSelector,
     Content,
     Field,
     Footer,
-    GrommetAlertIcon,
     Header,
     ModelSelector,
     PropertiesSelector,
