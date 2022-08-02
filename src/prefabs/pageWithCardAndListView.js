@@ -1788,8 +1788,14 @@
                             { name: 'Left center', value: 'left center' },
                             { name: 'Left bottom', value: 'left bottom' },
                             { name: 'Center top', value: 'center top' },
-                            { name: 'Center center', value: 'center center' },
-                            { name: 'Center bottom', value: 'center bottom' },
+                            {
+                              name: 'Center center',
+                              value: 'center center',
+                            },
+                            {
+                              name: 'Center bottom',
+                              value: 'center bottom',
+                            },
                             { name: 'Right top', value: 'right top' },
                             { name: 'Right center', value: 'right center' },
                             { name: 'Right bottom', value: 'right bottom' },
@@ -2701,8 +2707,14 @@
                                 descendants: [
                                   {
                                     name: 'Text',
+                                    ref: {
+                                      id: '#titleComponent',
+                                    },
                                     options: [
                                       {
+                                        ref: {
+                                          id: '#titleValue',
+                                        },
                                         type: 'VARIABLE',
                                         label: 'Content',
                                         key: 'content',
@@ -2733,8 +2745,14 @@
                                           dataType: 'string',
                                           allowedInput: [
                                             { name: 'Left', value: 'left' },
-                                            { name: 'Center', value: 'center' },
-                                            { name: 'Right', value: 'right' },
+                                            {
+                                              name: 'Center',
+                                              value: 'center',
+                                            },
+                                            {
+                                              name: 'Right',
+                                              value: 'right',
+                                            },
                                           ],
                                         },
                                       },
@@ -4355,6 +4373,9 @@
                               },
                               {
                                 name: 'Tabs',
+                                ref: {
+                                  id: '#tabsComponent',
+                                },
                                 options: [
                                   {
                                     type: 'CUSTOM',
@@ -4377,6 +4398,9 @@
                                     },
                                   },
                                   {
+                                    ref: {
+                                      id: '#tabsValue',
+                                    },
                                     type: 'CUSTOM',
                                     label: 'Selected tab (Pagebuilder)',
                                     key: 'selectedDesignTabIndex',
@@ -8719,10 +8743,22 @@
                                                   as: 'BUTTONGROUP',
                                                   dataType: 'string',
                                                   allowedInput: [
-                                                    { name: 'S', value: 'S' },
-                                                    { name: 'M', value: 'M' },
-                                                    { name: 'L', value: 'L' },
-                                                    { name: 'XL', value: 'XL' },
+                                                    {
+                                                      name: 'S',
+                                                      value: 'S',
+                                                    },
+                                                    {
+                                                      name: 'M',
+                                                      value: 'M',
+                                                    },
+                                                    {
+                                                      name: 'L',
+                                                      value: 'L',
+                                                    },
+                                                    {
+                                                      name: 'XL',
+                                                      value: 'XL',
+                                                    },
                                                     {
                                                       name: 'Full',
                                                       value: 'Full',

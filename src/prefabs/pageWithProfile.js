@@ -9468,8 +9468,14 @@
             descendants: [
               {
                 name: 'Text',
+                ref: {
+                  id: '#pageTitle',
+                },
                 options: [
                   {
+                    ref: {
+                      id: '#pageTitleContent',
+                    },
                     type: 'VARIABLE',
                     label: 'Content',
                     key: 'content',
@@ -13755,6 +13761,9 @@
                             descendants: [
                               {
                                 name: 'Tabs',
+                                ref: {
+                                  id: '#profileTabs',
+                                },
                                 options: [
                                   {
                                     label: 'Selected tab index',
@@ -13777,6 +13786,9 @@
                                     },
                                   },
                                   {
+                                    ref: {
+                                      id: '#profileTabsSelectedDesingTabIndex',
+                                    },
                                     label: 'Show design tab',
                                     key: 'selectedDesignTabIndex',
                                     value: '1',

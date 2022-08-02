@@ -25,8 +25,6 @@ import { options as buttonOptions } from './structures/Button/options';
 import { Column } from './structures/Column';
 import { options as columnOptions } from './structures/Column/options';
 import { Dialog } from './structures/Dialog';
-import { OpenPageButton } from './structures/OpenPage';
-import { options as openPageButtonOptions } from './structures/OpenPage/options';
 import { Paper } from './structures/Paper';
 import { Row } from './structures/Row';
 import { options as rowOptions } from './structures/Row/options';
@@ -243,16 +241,13 @@ export default makePrefab('Delete Record', attr, beforeCreate, [
       },
     },
     [
-      OpenPageButton(
+      Button(
         {
           ref: { id: '#deleteButton' },
           options: {
-            ...openPageButtonOptions,
+            ...buttonOptions,
             buttonText: variable('Button text', { value: ['Delete'] }),
             icon: icon('Icon', { value: 'Delete' }),
-            outerSpacing: sizes('Outer space', {
-              value: ['0rem', 'M', '0rem', '0rem'],
-            }),
           },
         },
         [],
@@ -507,14 +502,14 @@ export default makePrefab('Delete Record', attr, beforeCreate, [
                       },
                     },
                     [
-                      OpenPageButton(
+                      Button(
                         {
                           ref: { id: '#cancelBtn' },
                           style: {
-                            name: 'outliine',
+                            name: 'outline',
                           },
                           options: {
-                            ...openPageButtonOptions,
+                            ...buttonOptions,
                             buttonText: variable('Button text', {
                               value: ['Cancel'],
                             }),
