@@ -14,12 +14,17 @@ import { options as defaults } from './options';
 export interface Configuration {
   options?: Record<string, OptionProducer>;
   ref?: PrefabComponent['ref'];
+  label?: string;
 }
 
-export const Alert = (config: Configuration): PrefabReference => {
+export const Alert = (
+  config: Configuration,
+  descendants: PrefabReference[] = [],
+) => {
   const options = { ...defaults, ...config.options };
+  const label = config.label ? config.label : undefined;
 
-  return component('Alert', { ...config, options }, []);
+  return component('Alert', { ...config, options, label }, descendants);
 };
 
 const baseFormAlertStyle = {
