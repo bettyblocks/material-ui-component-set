@@ -1,3 +1,10 @@
+## [2.10.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.10.2...v2.10.3) (2022-08-02)
+
+
+### Bug Fixes
+
+* set global config file and implement config options into prefabs ([19b79fa](https://github.com/bettyblocks/material-ui-component-set/commit/19b79faaec162344fb5523684602e8a164aa2833))
+
 ## [2.10.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.10.1...v2.10.2) (2022-07-29)
 
 
