@@ -1,15 +1,6 @@
-import {
-  component,
-  PrefabReference,
-  OptionProducer,
-  PrefabComponentStyle,
-} from '@betty-blocks/component-sdk';
+import { component, PrefabReference } from '@betty-blocks/component-sdk';
+import { Configuration } from '../Configuration';
 import { options as defaults } from './options';
-
-export interface Configuration {
-  options?: Record<string, OptionProducer>;
-  style?: PrefabComponentStyle;
-}
 
 export const BreadcrumbItem = (
   config: Configuration,
@@ -17,6 +8,12 @@ export const BreadcrumbItem = (
 ) => {
   const options = { ...(config.options || defaults) };
   const style = { ...config.style };
+  const ref = config.ref ? { ...config.ref } : undefined;
+  const label = config.label ? config.label : undefined;
 
-  return component('BreadcrumbItem', { options, style }, descendants);
+  return component(
+    'BreadcrumbItem',
+    { options, style, ref, label },
+    descendants,
+  );
 };
