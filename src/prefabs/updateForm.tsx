@@ -149,38 +149,24 @@ const beforeCreate = ({
   };
 
   function saveThisPage() {
-    let sourceEvent;
-    switch (thisPageState.component.name) {
-      case 'DataTable': {
-        sourceEvent = 'OnRowClick';
-        break;
-      }
-      case 'DataList': {
-        sourceEvent = 'sendItemId';
-        break;
-      }
-
-      default: {
-        sourceEvent = 'OnItemClick';
-      }
-    }
-
     const interaction = {
-      name: 'Filter',
-      sourceEvent,
+      name: 'setCurrentRecord',
+      sourceEvent:
+        thisPageState.component.name === 'DataTable'
+          ? 'OnRowClick'
+          : 'OnItemClick',
+      targetOptionName: 'currentRecord',
       parameters: [
         {
           id: [idProperty.id],
-          parameter: 'property',
-          resolveValue: false,
-          operator: 'eq',
+          parameter: 'argument',
         },
       ],
       sourceComponentId: thisPageState.component.id,
       ref: {
         targetComponentId: '#formId',
       },
-      type: 'Custom',
+      type: 'Global',
     };
 
     originalPrefab.interactions.push(interaction);
@@ -323,7 +309,7 @@ const beforeCreate = ({
             configuration: { disabled: true },
           }));
 
-          setOption(structure, 'modelId', (option) => ({
+          setOption(structure, 'model', (option) => ({
             ...option,
             value: modelId,
             configuration: {
@@ -493,7 +479,7 @@ const beforeCreate = ({
               BettyPrefabs.HIDDEN,
               model,
               idProperty,
-              result.resultVariable,
+              result.recordInputVariable,
             ),
           );
 
