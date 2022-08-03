@@ -4,14 +4,26 @@
   allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { actionId, modelId, filter = {} } = options;
-    const { Form, GetOne, useFilter } = B;
+    const { actionId, model, currentRecord, filter = {} } = options;
+    const { Form, GetOne, useFilter, getIdProperty } = B;
     const formRef = React.createRef();
     const [interactionFilter, setInteractionFilter] = useState({});
-
-    const selectedFilter = filter;
+    const [, setOptions] = useOptions();
 
     const isDev = B.env === 'dev';
+
+    const getFilter = React.useCallback(() => {
+      if (isDev || !currentRecord || !model) {
+        return filter;
+      }
+      const idProperty = getIdProperty(model);
+
+      return {
+        [idProperty.id]: { eq: currentRecord },
+      };
+    }, [isDev, filter, currentRecord, model]);
+
+    const selectedFilter = getFilter();
 
     if (isDev && children.length === 0) {
       return (
@@ -58,6 +70,15 @@
 
       return value;
     };
+
+    B.defineFunction('setCurrentRecord', (value) => {
+      const id = Number(value);
+      if (typeof id === 'number') {
+        setOptions({
+          currentRecord: id,
+        });
+      }
+    });
 
     /**
      * @name Filter
@@ -152,9 +173,9 @@
       );
     }
 
-    if (modelId) {
+    if (model) {
       return (
-        <GetOne modelId={modelId} rawFilter={where}>
+        <GetOne modelId={model} rawFilter={where}>
           <FormComponent />
         </GetOne>
       );
