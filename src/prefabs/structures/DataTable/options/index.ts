@@ -15,11 +15,13 @@ import {
   ThemeColor,
   endpoint,
   sizes,
+  reconfigure,
 } from '@betty-blocks/component-sdk';
 import { advanced } from './advanced';
 
 export const options = {
   model: model('Model', { value: '' }),
+  reconfigure: reconfigure('Reconfigure', { value: '' }),
   filter: filter('Filter', {
     value: {},
     configuration: {
