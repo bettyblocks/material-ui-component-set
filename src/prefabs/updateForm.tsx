@@ -564,4 +564,6 @@ const attributes = {
   variables: [],
 };
 
-export default prefab('Update Form Beta', attributes, beforeCreate, [Form()]);
+export default prefab('Update Form Beta', attributes, beforeCreate, [
+  Form('Update Form Beta'),
+]);
