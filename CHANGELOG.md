@@ -1,3 +1,10 @@
+## [2.11.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.11.1...v2.11.2) (2022-08-03)
+
+
+### Bug Fixes
+
+* added general prefab import ([a3276a0](https://github.com/bettyblocks/material-ui-component-set/commit/a3276a078c8c8b40657620b64c654084de1c797f))
+
 ## [2.11.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.11.0...v2.11.1) (2022-08-03)
 
 
