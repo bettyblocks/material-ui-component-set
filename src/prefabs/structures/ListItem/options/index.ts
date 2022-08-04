@@ -8,10 +8,38 @@ import {
   icon,
   toggle,
 } from '@betty-blocks/component-sdk';
-import { advanced } from './advanced';
+import { advanced } from '../../advanced';
 import { styles } from './styles';
 
-export const options = {
+export const categories = [
+  {
+    label: 'State',
+    expanded: false,
+    members: ['disabled', 'disableGutters'],
+  },
+  {
+    label: 'Styles',
+    expanded: false,
+    members: [
+      'dense',
+      'divider',
+      'selected',
+      'titleSize',
+      'titleColor',
+      'titleWeight',
+      'subtitleSize',
+      'subtitleColor',
+      'subtitleWeight',
+    ],
+  },
+  {
+    label: 'Advanced settings',
+    expanded: false,
+    members: ['dataComponentAttribute'],
+  },
+];
+
+export const listItemOptions = {
   primaryText: variable('Primary text', { value: ['Title'] }),
   secondaryText: variable('Secondary text', { value: [''] }),
   backgroundColor: color('Background color', { value: ThemeColor.TRANSPARENT }),
@@ -97,5 +125,5 @@ export const options = {
 
   ...styles,
 
-  ...advanced,
+  ...advanced('List item'),
 };
