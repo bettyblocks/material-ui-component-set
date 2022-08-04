@@ -13,18 +13,100 @@ import { FormErrorAlert } from './structures/Alert';
 
 const beforeCreate = ({
   close,
-  components: { CreateLoginFormWizard },
+  components: {
+    AuthenticationProfileSelector,
+    Content,
+    EndpointSelector,
+    Field,
+    Footer,
+    Header,
+    Text,
+  },
   prefab: originalPrefab,
-  prefabs,
-  save,
-}: BeforeCreateArgs) => {
+  helpers,
+}: any) => {
+  const { createUuid, prepareAction } = helpers;
+
+  const componentId = createUuid();
+  const [authProfileId, setAuthProfileId] = React.useState('');
+  const [authProfile, setAuthProfile] = React.useState(null);
+  const [authProfileInvalid, setAuthProfileInvalid] = React.useState(false);
+  console.log('authProfile Prefab', authProfile);
+
+  const [endpoint, setEndpoint] = React.useState(null);
+  const [endpointInvalid, setEndpointInvalid] = React.useState(false);
   return (
-    <CreateLoginFormWizard
-      close={close}
-      prefab={originalPrefab}
-      prefabs={prefabs}
-      save={save}
-    />
+    <>
+      <Header onClose={close} title="CreateFormLoginWizard.title" />
+      <Content>
+        <Field
+          label="CreateFormWizard.selectAuthenticationProfile"
+          error={
+            authProfileInvalid && (
+              <Text color="#e82600">
+                CreateFormWizard.selectAuthenticationProfileError
+              </Text>
+            )
+          }
+        >
+          <AuthenticationProfileSelector
+            onChange={(
+              authenticationProfileId,
+              authenticationProfileObject,
+            ): void => {
+              setAuthProfileInvalid(false);
+              setAuthProfileId(authenticationProfileId);
+              setAuthProfile(authenticationProfileObject);
+            }}
+            value={authProfileId}
+          />
+        </Field>
+        <Field
+          label="CreateFormWizard.selectPage"
+          error={
+            endpointInvalid && (
+              <Text color="#e82600">CreateFormWizard.selectPageError</Text>
+            )
+          }
+        >
+          <EndpointSelector
+            value={endpoint || ''}
+            size="large"
+            onChange={(value): void => {
+              // setEndpointInvalid(isEmptyEndpoint(value));
+              setEndpointInvalid(value);
+              setEndpoint(value);
+            }}
+          />
+        </Field>
+      </Content>
+      <Footer
+        onClose={close}
+        onSave={async (): Promise<void> => {
+          if (!authProfileId) {
+            setAuthProfileInvalid(true);
+            return;
+          }
+          console.log('auth in onSave', authProfile);
+
+          // if (isEmptyEndpoint(endpoint)) {
+          //   setEndpointInvalid(true);
+          //   return;
+          // }
+          // eslint-disable-next-line no-param-reassign
+          originalPrefab.structure[0].id = componentId;
+          const result = await prepareAction(
+            componentId,
+            null,
+            null,
+            'login',
+            authProfile,
+          );
+
+          console.log('result', result);
+        }}
+      />
+    </>
   );
 };
 
