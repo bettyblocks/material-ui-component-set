@@ -20,8 +20,8 @@ import {
 import { advanced } from './advanced';
 
 export const options = {
-  model: model('Model', { value: '' }),
   reconfigure: reconfigure('Reconfigure', { value: '' }),
+  model: model('Model', { value: '' }),
   filter: filter('Filter', {
     value: {},
     configuration: {
