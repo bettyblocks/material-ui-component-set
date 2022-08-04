@@ -2,7 +2,7 @@ import { component, PrefabReference } from '@betty-blocks/component-sdk';
 import { Configuration } from '../Configuration';
 import { options as defaults } from './options';
 
-export const appBar = (
+export const AppBar = (
   config: Configuration,
   descendants: PrefabReference[] = [],
 ) => {

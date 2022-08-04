@@ -1,3 +1,17 @@
+## [2.11.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.11.1...v2.11.2) (2022-08-03)
+
+
+### Bug Fixes
+
+* added general prefab import ([a3276a0](https://github.com/bettyblocks/material-ui-component-set/commit/a3276a078c8c8b40657620b64c654084de1c797f))
+
+## [2.11.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.11.0...v2.11.1) (2022-08-03)
+
+
+### Bug Fixes
+
+* add global advanced file for tsx prefabs ([7f37957](https://github.com/bettyblocks/material-ui-component-set/commit/7f37957fc22b7f5044e4db2cbf7722046dad354f))
+
 # [2.11.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.10.3...v2.11.0) (2022-08-02)
 
 
