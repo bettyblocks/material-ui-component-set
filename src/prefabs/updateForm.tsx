@@ -25,6 +25,31 @@ const beforeCreate = ({
   save,
   helpers,
 }: any) => {
+  const disabledKinds = [
+    'AUTO_INCREMENT',
+    'BOOLEAN_EXPRESSION',
+    'COUNT',
+    'DATE_EXPRESSION',
+    'DATE_TIME_EXPRESSION',
+    'DECIMAL_EXPRESSION',
+    'FILE',
+    'IMAGE',
+    'INTEGER_EXPRESSION',
+    'LOGIN_TOKEN',
+    'MINUTES_EXPRESSION',
+    'MULTI_FILE',
+    'MULTI_IMAGE',
+    'PDF',
+    'PRICE_EXPRESSION',
+    'RICH_TEXT',
+    'SERIAL',
+    'SIGNED_PDF',
+    'STRING_EXPRESSION',
+    'SUM',
+    'TEXT_EXPRESSION',
+    'ZIPCODE',
+  ];
+
   const {
     BettyPrefabs,
     PropertyKind,
@@ -279,7 +304,7 @@ const beforeCreate = ({
         <Field label="select properties">
           <PropertiesSelector
             allowRelations
-            disabledKinds={[]}
+            disabledKinds={disabledKinds}
             disabledNames={['id', 'created_at', 'updated_at']}
             // TODO: check if component id is needed here
             modelId={modelId}
