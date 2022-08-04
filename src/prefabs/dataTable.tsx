@@ -4,7 +4,7 @@ import {
   prefab as makePrefab,
   BeforeCreateArgs,
 } from '@betty-blocks/component-sdk';
-import { DataTable } from './structures/DataTable';
+import { DataTable } from './structures';
 
 const attrs = {
   icon: Icon.DataTable,
@@ -21,7 +21,9 @@ const beforeCreate = ({
     ModelRelationSelector,
     PropertiesSelector,
   },
+  // helpers: { cloneStructure },
   prefab,
+  // prefabs,
   save,
   close,
 }: BeforeCreateArgs) => {
@@ -98,6 +100,12 @@ const beforeCreate = ({
               }
               // TODO: Start making use of the component-sdk prefab, instead of inserting JSX
               // example: structure.descendants.push(DataTableColumn({}, []))
+              // const dataTableColumnStructure = cloneStructure(
+              //   prefabs,
+              //   'DataTableColumn',
+              // );
+              // setOption(dataTableColumnStructure, 'property', newProperty);
+              // structure.descendants.push(dataTableColumnStructure);
               structure.descendants.push({
                 name: 'DataTableColumn',
                 options: [
