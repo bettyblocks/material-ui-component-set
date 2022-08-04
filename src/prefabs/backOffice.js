@@ -924,7 +924,7 @@
                   value: [
                     'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Your_Logo_-_W.svg',
                   ],
-                  label: 'Source',
+                  label: 'URL source',
                   key: 'urlFileSource',
                   type: 'VARIABLE',
                   configuration: {
@@ -960,7 +960,7 @@
                 },
                 {
                   value: [],
-                  label: 'Source',
+                  label: 'I-frame source',
                   key: 'iframeSource',
                   type: 'VARIABLE',
                   configuration: {
@@ -14169,7 +14169,7 @@
                   },
                 },
                 {
-                  value: property.id,
+                  value: property,
                   type: 'PROPERTY',
                   label: 'Property',
                   key: 'propertyFileSource',
@@ -14186,7 +14186,7 @@
                   value: [
                     'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Your_Logo_-_W.svg',
                   ],
-                  label: 'Source',
+                  label: 'URL source',
                   key: 'urlFileSource',
                   type: 'VARIABLE',
                   configuration: {
@@ -14222,7 +14222,7 @@
                 },
                 {
                   value: [],
-                  label: 'Source',
+                  label: 'I-frame source',
                   key: 'iframeSource',
                   type: 'VARIABLE',
                   configuration: {
@@ -34933,7 +34933,7 @@
                           },
                         },
                         {
-                          value: property.id,
+                          value: property,
                           type: 'PROPERTY',
                           label: 'Property',
                           key: 'propertyFileSource',
@@ -34950,7 +34950,7 @@
                           value: [
                             'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Your_Logo_-_W.svg',
                           ],
-                          label: 'Source',
+                          label: 'URL source',
                           key: 'urlFileSource',
                           type: 'VARIABLE',
                           configuration: {
@@ -34986,7 +34986,7 @@
                         },
                         {
                           value: [],
-                          label: 'Source',
+                          label: 'I-frame source',
                           key: 'iframeSource',
                           type: 'VARIABLE',
                           configuration: {
