@@ -25,12 +25,12 @@ export const categories = [
     members: ['height', 'backgroundColor', 'spacing'],
   },
   {
-    label: 'Responsive options',
+    label: 'Responsiveness',
     expanded: false,
     members: ['xsWidth', 'smWidth', 'mdWidth', 'lgWidth', 'xlWidth'],
   },
   {
-    label: 'Advanced options',
+    label: 'Advanced settings',
     expanded: false,
     members: ['zeroMinWidth', 'dataComponentAttribute'],
   },

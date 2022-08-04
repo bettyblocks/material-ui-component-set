@@ -14,7 +14,7 @@ import { advanced } from '../../advanced';
 export const categories = [
   {
     label: 'Alignment',
-    expanded: false,
+    expanded: true,
     members: ['alignment', 'valignment', 'stretch'],
   },
   {
@@ -23,12 +23,12 @@ export const categories = [
     members: ['innerSpacing', 'outerSpacing', 'transparent', 'height', 'width'],
   },
   {
-    label: 'Positioning options',
+    label: 'Positioning',
     expanded: false,
     members: ['position', 'top', 'right', 'bottom', 'left'],
   },
   {
-    label: 'Background options',
+    label: 'Background',
     expanded: false,
     members: [
       'backgroundColor',
@@ -45,7 +45,7 @@ export const categories = [
     ],
   },
   {
-    label: 'Advanced options',
+    label: 'Advanced settings',
     expanded: false,
     members: ['dataComponentAttribute'],
   },

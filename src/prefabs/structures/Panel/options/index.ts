@@ -8,7 +8,7 @@ import { advanced } from '../../advanced';
 
 export const categories = [
   {
-    label: 'Advanced options',
+    label: 'Advanced settings',
     expanded: false,
     members: ['dataComponentAttribute'],
   },

@@ -1,8 +1,8 @@
 import { Icon, option, prefab } from '@betty-blocks/component-sdk';
-import { Column, Row, columnOptions as options } from './structures';
+import { Column, Row, columnOptions } from './structures';
 
-const columnOptions = { ...options };
-columnOptions.columnWidth = option('CUSTOM', {
+const defaultOptions = { ...columnOptions };
+defaultOptions.columnWidth = option('CUSTOM', {
   label: 'Column width',
   value: '6',
   configuration: {
@@ -28,7 +28,7 @@ columnOptions.columnWidth = option('CUSTOM', {
   },
 });
 
-columnOptions.columnWidthTabletLandscape = option('CUSTOM', {
+defaultOptions.columnWidthTabletLandscape = option('CUSTOM', {
   label: 'Column width (tablet landscape)',
   value: '6',
   configuration: {
@@ -54,7 +54,7 @@ columnOptions.columnWidthTabletLandscape = option('CUSTOM', {
   },
 });
 
-columnOptions.columnWidthTabletPortrait = option('CUSTOM', {
+defaultOptions.columnWidthTabletPortrait = option('CUSTOM', {
   label: 'Column width (tablet portrait)',
   value: '12',
   configuration: {
@@ -80,7 +80,7 @@ columnOptions.columnWidthTabletPortrait = option('CUSTOM', {
   },
 });
 
-options.columnWidthMobile = option('CUSTOM', {
+defaultOptions.columnWidthMobile = option('CUSTOM', {
   label: 'Column width (mobile)',
   value: '12',
   configuration: {
@@ -113,7 +113,7 @@ const attrs = {
 };
 export default prefab('2 Columns', attrs, undefined, [
   Row({}, [
-    Column({ options: columnOptions }),
-    Column({ options: columnOptions }),
+    Column({ options: defaultOptions }),
+    Column({ options: defaultOptions }),
   ]),
 ]);

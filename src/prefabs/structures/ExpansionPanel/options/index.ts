@@ -10,12 +10,12 @@ import { advanced } from '../../advanced';
 
 export const categories = [
   {
-    label: 'Title options',
+    label: 'Title styles',
     expanded: false,
     members: ['titleType', 'titleTextColor', 'titleFontWeight', 'titleSpacing'],
   },
   {
-    label: 'Advanced options',
+    label: 'Advanced settings',
     expanded: false,
     members: ['preloadData', 'dataComponentAttribute'],
   },
