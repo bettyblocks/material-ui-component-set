@@ -107,7 +107,24 @@
 
     useEffect(() => {
       if (parsedValue) {
-        setSelectedDate(parsedValue);
+        switch (type) {
+          case 'date': {
+            setSelectedDate(DateFns.parse(parsedValue, 'yyyy-MM-dd'));
+            break;
+          }
+
+          case 'datetime': {
+            setSelectedDate(DateFns.parse(parsedValue, 'yyyy-MM-dd HH:mm:ss'));
+            break;
+          }
+
+          case 'time': {
+            setSelectedDate(DateFns.parse(parsedValue, 'HH:mm:ss'));
+            break;
+          }
+
+          default:
+        }
       }
     }, [parsedValue]);
 
