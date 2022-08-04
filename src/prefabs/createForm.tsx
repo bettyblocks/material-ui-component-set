@@ -105,20 +105,6 @@ const beforeCreate = ({
           );
           const structure = originalPrefab.structure[0];
 
-          setOption(structure, 'actionId', (option) => ({
-            ...option,
-            value: result.action.actionId,
-            configuration: { disabled: true },
-          }));
-
-          setOption(structure, 'modelId', (option) => ({
-            ...option,
-            value: modelId,
-            configuration: {
-              disabled: true,
-            },
-          }));
-
           Object.values(result.variables).map(([property, variable]) => {
             const { kind } = property;
 
@@ -285,9 +271,18 @@ const beforeCreate = ({
           if (validate()) {
             const newPrefab = { ...originalPrefab };
 
+            setOption(newPrefab.structure[0], 'actionId', (option) => ({
+              ...option,
+              value: result.action.actionId,
+              configuration: { disabled: true },
+            }));
+
             setOption(newPrefab.structure[0], 'model', (option) => ({
               ...option,
               value: modelId,
+              configuration: {
+                disabled: true,
+              },
             }));
 
             save(newPrefab);
