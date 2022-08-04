@@ -10,9 +10,29 @@ import {
   actionInputObjects,
 } from '@betty-blocks/component-sdk';
 import { tooltip } from '../../Button/options/tooltip';
-import { advanced } from './advanced';
+import { advanced } from '../../advanced';
 
-export const options = {
+export const categories = [
+  {
+    label: 'Tooltip',
+    expanded: false,
+    members: [
+      'addTooltip',
+      'hasVisibleTooltip',
+      'tooltipContent',
+      'tooltipPlacement',
+      'tooltipBackground',
+      'tooltipText',
+    ],
+  },
+  {
+    label: 'Advanced options',
+    expanded: false,
+    members: ['dataComponentAttribute'],
+  },
+];
+
+export const actionButtonOptions = {
   visible: toggle('Toggle visibility', {
     value: true,
     configuration: {
@@ -74,5 +94,5 @@ export const options = {
 
   ...tooltip,
 
-  ...advanced,
+  ...advanced('Button'),
 };

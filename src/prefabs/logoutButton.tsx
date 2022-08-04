@@ -7,7 +7,7 @@ import {
   variable,
 } from '@betty-blocks/component-sdk';
 import { Button } from './structures/Button';
-import { options } from './structures/Button/options';
+import { buttonOptions } from './structures/Button/options';
 
 const beforeCreate = ({
   prefab,
@@ -88,7 +88,7 @@ export default makePrefab('Logout button', attrs, beforeCreate, [
       id: '#logoutButton',
     },
     options: {
-      ...options,
+      ...buttonOptions,
       buttonText: variable('Button text', { value: ['Logout'] }),
     },
   }),

@@ -20,7 +20,7 @@ import { options as rOptions } from './structures/Row/options';
 import { options as cOptions } from './structures/Column/options';
 import { options as bOptions } from './structures/Box/options';
 import { options as tOptions } from './structures/Text/options';
-import { options as buttonOptions } from './structures/Button/options';
+import { buttonOptions } from './structures/Button/options';
 import { Button } from './structures/Button';
 
 const interactions: PrefabInteraction[] = [

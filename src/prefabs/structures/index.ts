@@ -60,7 +60,7 @@ import { TextArea } from './TextArea';
 import { TextInput } from './TextInput';
 
 // Import all prefab options here
-import { options as actionButtonOptions } from './ActionButton/options';
+import { actionButtonOptions } from './ActionButton/options';
 import { options as actionJSButtonOptions } from './ActionJSButton/options';
 import { options as alertOptions } from './Alert/options';
 import { options as appBarOptions } from './Appbar/options';
@@ -69,7 +69,7 @@ import { options as avatarOptions } from './Avatar/options';
 import { options as boxOptions } from './Box/options';
 import { options as breadcrumbItemOptions } from './BreadcrumbItem/options';
 import { options as breadcrumbsOptions } from './Breadcrumbs/options';
-import { options as buttonOptions } from './Button/options';
+import { buttonOptions } from './Button/options';
 import { options as cardOptions } from './Card/options';
 import { options as cardActionsOptions } from './CardActions/options';
 import { options as cardContentOptions } from './CardContent/options';
@@ -102,7 +102,7 @@ import { options as mediaOptions } from './Media/options';
 import { options as menuOptions } from './Menu/options';
 import { options as menuItemOptions } from './MenuItem/options';
 import { options as multiAutocompleteOptions } from './MultiAutoCompleteInput/options';
-import { options as openPageButtonOptions } from './OpenPage/options';
+import { openPageButtonOptions } from './OpenPage/options';
 import { options as panelOptions } from './Panel/options';
 import { options as paperOptions } from './Paper/options';
 import { options as priceInputOptions } from './PriceInput/options';

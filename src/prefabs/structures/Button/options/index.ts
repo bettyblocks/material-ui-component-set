@@ -6,10 +6,30 @@ import {
   hideIf,
   sizes,
 } from '@betty-blocks/component-sdk';
-import { advanced } from './advanced';
+import { advanced } from '../../advanced';
 import { tooltip } from './tooltip';
 
-export const options = {
+export const categories = [
+  {
+    label: 'Tooltip',
+    expanded: false,
+    members: [
+      'addTooltip',
+      'hasVisibleTooltip',
+      'tooltipContent',
+      'tooltipPlacement',
+      'tooltipBackground',
+      'tooltipText',
+    ],
+  },
+  {
+    label: 'Advanced options',
+    expanded: false,
+    members: ['dataComponentAttribute'],
+  },
+];
+
+export const buttonOptions = {
   visible: toggle('Toggle visibility', {
     value: true,
     configuration: {
@@ -53,5 +73,5 @@ export const options = {
 
   ...tooltip,
 
-  ...advanced,
+  ...advanced('Button'),
 };
