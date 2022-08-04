@@ -16,23 +16,25 @@ import {
   font,
   showIfTrue,
 } from '@betty-blocks/component-sdk';
-import { Box as prefabBox } from './structures/Box';
-import { options as boxOptions } from './structures/Box/options';
-import { Column } from './structures/Column';
-import { options as columnOptions } from './structures/Column/options';
-import { Grid } from './structures/Grid';
-import { options as gridOptions } from './structures/Grid/options';
-import { Row } from './structures/Row';
-import { options as rowOptions } from './structures/Row/options';
-import { Text as TextPrefab } from './structures/Text';
-import { options as textOptions } from './structures/Text/options';
-import { appBar } from './structures/Appbar';
-import { options as appBarOptions } from './structures/Appbar/options';
-import { OpenPageButton } from './structures/OpenPage';
-import { options as openPageOptions } from './structures/Button/options';
+import {
+  Box as prefabBox,
+  Column,
+  boxOptions,
+  columnOptions,
+  Grid,
+  gridOptions,
+  Row,
+  rowOptions,
+  Text as TextPrefab,
+  textOptions,
+  AppBar,
+  appBarOptions,
+  OpenPageButton,
+  openPageButtonOptions,
+} from './structures';
 
 const attrs = {
-  name: 'Header and footer',
+  name: 'Header and footer new',
   icon: Icon.NavbarIcon,
   type: 'page',
   description: 'Full height page with a header and footer',
@@ -293,7 +295,7 @@ export default makePrefab('TSX Header & Footer', attrs, beforeCreate, [
                                     },
                                   },
                                   [
-                                    appBar(
+                                    AppBar(
                                       {
                                         options: {
                                           ...appBarOptions,
@@ -331,7 +333,7 @@ export default makePrefab('TSX Header & Footer', attrs, beforeCreate, [
                                               },
                                             },
                                             options: {
-                                              ...openPageOptions,
+                                              ...openPageButtonOptions,
                                               buttonText: variable(
                                                 'Button text',
                                                 { value: ['Menu 1'] },
@@ -374,7 +376,7 @@ export default makePrefab('TSX Header & Footer', attrs, beforeCreate, [
                                               },
                                             },
                                             options: {
-                                              ...openPageOptions,
+                                              ...openPageButtonOptions,
                                               buttonText: variable(
                                                 'Button text',
                                                 { value: ['Menu 2'] },
@@ -469,41 +471,51 @@ export default makePrefab('TSX Header & Footer', attrs, beforeCreate, [
                       },
                     },
                     [
-                      TextPrefab(
+                      prefabBox(
                         {
                           options: {
-                            ...textOptions,
-                            content: variable('Content', {
-                              value: ['Powered by Bettyblocks'],
-                              configuration: { as: 'MULTILINE' },
-                            }),
-                            textAlignment: option('CUSTOM', {
-                              label: 'Text Alignment',
-                              value: 'center',
-                              configuration: {
-                                as: 'BUTTONGROUP',
-                                dataType: 'string',
-                                allowedInput: [
-                                  { name: 'Left', value: 'left' },
-                                  { name: 'Center', value: 'center' },
-                                  { name: 'Right', value: 'right' },
-                                ],
-                              },
-                            }),
-                            type: font('Font', { value: ['Body1'] }),
-                            outerSpacing: sizes('Outer space', {
+                            ...boxOptions,
+                            innerSpacing: sizes('Inner space', {
+                              ref: { id: '#footerBoxInnerSpacing' },
                               value: ['L', 'L', 'L', 'L'],
-                            }),
-                            styles: toggle('Styles', { value: false }),
-                            textColor: color('Text color', {
-                              value: ThemeColor.MEDIUM,
-                              configuration: {
-                                condition: showIfTrue('styles'),
-                              },
                             }),
                           },
                         },
-                        [],
+                        [
+                          TextPrefab(
+                            {
+                              options: {
+                                ...textOptions,
+                                content: variable('Content', {
+                                  value: ['Powered by Bettyblocks'],
+                                  configuration: { as: 'MULTILINE' },
+                                }),
+                                textAlignment: option('CUSTOM', {
+                                  label: 'Text Alignment',
+                                  value: 'center',
+                                  configuration: {
+                                    as: 'BUTTONGROUP',
+                                    dataType: 'string',
+                                    allowedInput: [
+                                      { name: 'Left', value: 'left' },
+                                      { name: 'Center', value: 'center' },
+                                      { name: 'Right', value: 'right' },
+                                    ],
+                                  },
+                                }),
+                                type: font('Font', { value: ['Body1'] }),
+                                styles: toggle('Styles', { value: true }),
+                                textColor: color('Text color', {
+                                  value: ThemeColor.MEDIUM,
+                                  configuration: {
+                                    condition: showIfTrue('styles'),
+                                  },
+                                }),
+                              },
+                            },
+                            [],
+                          ),
+                        ],
                       ),
                     ],
                   ),
