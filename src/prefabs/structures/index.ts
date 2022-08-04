@@ -79,7 +79,7 @@ import { options as carouselOptions } from './Carousel/options';
 import { options as carouselImageOptions } from './CarouselImage/options';
 import { options as chipOptions } from './Chip/options';
 import { options as columnOptions } from './Column/options';
-import { options as conditionalOptions } from './Conditional/options';
+import { conditionalOptions } from './Conditional/options';
 import { options as containerOptions } from './Container/options';
 import { options as dataContainerOptions } from './DataContainer/options';
 import { options as dataListOptions } from './DataList/options';
