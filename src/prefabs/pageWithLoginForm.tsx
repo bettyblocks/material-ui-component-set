@@ -1,3 +1,4 @@
+import * as React from 'react';
 import {
   BeforeCreateArgs,
   Icon,
@@ -15,8 +16,10 @@ import {
   toggle,
   ThemeColor,
   color,
+  variable,
+  font,
+  buttongroup,
 } from '@betty-blocks/component-sdk';
-import React from 'react';
 import { updateOption } from '../utils';
 import {
   alertOptions,
@@ -29,9 +32,11 @@ import {
   Grid,
   gridOptions,
   Media,
+  mediaOptions,
   Row,
   rowOptions,
   Text as TextComponent,
+  textOptions,
 } from './structures';
 
 const attrs = {
@@ -216,7 +221,7 @@ const prefabStructure: PrefabComponent[] = [
             options: {
               ...gridOptions,
               height: size('Height', {
-                value: '',
+                value: '100%',
                 configuration: {
                   as: 'UNIT',
                 },
@@ -227,8 +232,9 @@ const prefabStructure: PrefabComponent[] = [
             Grid(
               {
                 options: {
+                  ...gridOptions,
                   direction: option('CUSTOM', {
-                    value: 'row',
+                    value: 'column',
                     label: 'Direction',
                     configuration: {
                       as: 'BUTTONGROUP',
@@ -253,6 +259,32 @@ const prefabStructure: PrefabComponent[] = [
                       innerSpacing: sizes('Inner space', {
                         value: ['0rem', '0rem', '0rem', '0rem'],
                       }),
+                      backgroundOptions: toggle('Show background options', {
+                        value: true,
+                      }),
+                      backgroundUrl: variable('Background url', {
+                        value: [
+                          'https://assets.bettyblocks.com/1e9019bb1c5c4af2ba799c2ee1761af0_assets/files/login-background',
+                        ],
+                        configuration: {
+                          condition: showIf('backgroundOptions', 'EQ', true),
+                        },
+                      }),
+                      backgroundSize: buttongroup(
+                        'Background size',
+                        [
+                          ['Initial', 'initial'],
+                          ['Contain', 'contain'],
+                          ['Cover', 'cover'],
+                        ],
+                        {
+                          value: 'cover',
+                          configuration: {
+                            dataType: 'string',
+                            condition: showIf('backgroundOptions', 'EQ', true),
+                          },
+                        },
+                      ),
                     },
                   },
                   [
@@ -407,13 +439,114 @@ const prefabStructure: PrefabComponent[] = [
                           },
                           [
                             BoxComponent({}, [
-                              BoxComponent({}, [Media({}, [])]),
-                              BoxComponent({}, []),
-                              BoxComponent({}, [TextComponent({}, [])]),
-                              BoxComponent({}, []),
                               BoxComponent({}, [
-                                BoxComponent({}, [BetaForm()]),
+                                Media(
+                                  {
+                                    options: {
+                                      ...mediaOptions,
+                                      imageSource: variable('Source', {
+                                        value: [
+                                          'https://assets.bettyblocks.com/373317d12bf04d5496079adc02aab34a_assets/files/Your_Logo_-_B.svg',
+                                        ],
+                                        configuration: {
+                                          as: 'MULTILINE',
+                                          condition: showIf(
+                                            'type',
+                                            'EQ',
+                                            'img',
+                                          ),
+                                        },
+                                      }),
+                                      width: size('Width', {
+                                        value: '',
+                                        configuration: {
+                                          as: 'UNIT',
+                                        },
+                                      }),
+                                    },
+                                  },
+                                  [],
+                                ),
                               ]),
+                              BoxComponent(
+                                {
+                                  options: {
+                                    ...boxOptions,
+                                    height: size('Height', {
+                                      value: '6vh',
+                                      configuration: {
+                                        as: 'UNIT',
+                                      },
+                                    }),
+                                    width: size('Width', {
+                                      value: '100%',
+                                      configuration: {
+                                        as: 'UNIT',
+                                      },
+                                    }),
+                                    innerSpacing: sizes('Inner space', {
+                                      value: ['0rem', '0rem', '0rem', '0rem'],
+                                    }),
+                                  },
+                                },
+                                [],
+                              ),
+                              BoxComponent(
+                                {
+                                  options: {
+                                    ...boxOptions,
+                                    innerSpacing: sizes('Inner space', {
+                                      value: ['0rem', '0rem', '0rem', '0rem'],
+                                    }),
+                                  },
+                                },
+                                [
+                                  TextComponent(
+                                    {
+                                      options: {
+                                        ...textOptions,
+                                        content: variable('Content', {
+                                          value: ['Login'],
+                                          configuration: { as: 'MULTILINE' },
+                                        }),
+                                        type: font('Font', {
+                                          value: ['Title4'],
+                                        }),
+                                      },
+                                    },
+                                    [],
+                                  ),
+                                ],
+                              ),
+                              BoxComponent({ options: boxOptions }, []),
+                              BoxComponent(
+                                {
+                                  options: {
+                                    ...boxOptions,
+                                    innerSpacing: sizes('Inner space', {
+                                      value: ['0rem', '0rem', '0rem', '0rem'],
+                                    }),
+                                  },
+                                },
+                                [
+                                  BoxComponent(
+                                    {
+                                      options: {
+                                        ...boxOptions,
+                                        innerSpacing: sizes('Inner space', {
+                                          value: [
+                                            '0rem',
+                                            '0rem',
+                                            '0rem',
+                                            '0rem',
+                                          ],
+                                        }),
+                                      },
+                                    },
+                                    [BetaForm()],
+                                  ),
+                                ],
+                              ),
                             ]),
                           ],
                         ),
@@ -3786,6 +3919,6 @@ const beforeCreate = ({
 export default prefab(
   'Login form with image (TS)',
   attrs,
-  beforeCreate,
+  undefined,
   prefabStructure,
 );
