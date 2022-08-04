@@ -6,9 +6,22 @@ import {
   sizes,
 } from '@betty-blocks/component-sdk';
 import { styles } from './styles';
-import { advanced } from './advanced';
+import { advanced } from '../../advanced';
 
-export const options = {
+export const categories = [
+  {
+    label: 'Title options',
+    expanded: false,
+    members: ['titleType', 'titleTextColor', 'titleFontWeight', 'titleSpacing'],
+  },
+  {
+    label: 'Advanced options',
+    expanded: false,
+    members: ['preloadData', 'dataComponentAttribute'],
+  },
+];
+
+export const expansionPanelOptions = {
   title: variable('Title', { value: ['Title'] }),
   defaultExpanded: toggle('Default expanded', { value: true }),
   square: toggle('Square', { value: false }),
@@ -20,8 +33,8 @@ export const options = {
       dataType: 'string',
       allowedInput: [
         { name: 'Flat', value: 'flat' },
-        { name: 'Outlined', value: 'outlined' },
         { name: 'Elevation', value: 'elevation' },
+        { name: 'Outlined', value: 'outlined' },
       ],
     },
   }),
@@ -69,5 +82,8 @@ export const options = {
     value: ['M', 'M', 'M', 'M'],
   }),
 
-  ...advanced,
+  preloadData: toggle('Preload data', {
+    value: false,
+  }),
+  ...advanced('Expansion Panel'),
 };

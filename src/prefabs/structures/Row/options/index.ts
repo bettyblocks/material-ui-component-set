@@ -5,9 +5,17 @@ import {
   color,
   ThemeColor,
 } from '@betty-blocks/component-sdk';
-import { advanced } from './advanced';
+import { advanced } from '../../advanced';
 
-export const options = {
+export const categories = [
+  {
+    label: 'Advanced options',
+    expanded: false,
+    members: ['dataComponentAttribute'],
+  },
+];
+
+export const rowOptions = {
   maxRowWidth: option('CUSTOM', {
     label: 'Width',
     value: 'XL',
@@ -35,5 +43,5 @@ export const options = {
     value: ['0rem', '0rem', '0rem', '0rem'],
   }),
 
-  ...advanced,
+  ...advanced('Row'),
 };

@@ -1,6 +1,5 @@
 import { Icon, prefab } from '@betty-blocks/component-sdk';
-import { Row } from './structures/Row';
-import { Column } from './structures/Column';
+import { Column, Row } from './structures';
 
 const attrs = {
   icon: Icon.RowColumnIcon,

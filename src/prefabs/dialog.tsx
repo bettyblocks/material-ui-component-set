@@ -10,18 +10,20 @@ import {
   InteractionType,
   hideIf,
 } from '@betty-blocks/component-sdk';
-import { Box } from './structures/Box';
-import { Column } from './structures/Column';
-import { Dialog } from './structures/Dialog';
-import { Paper } from './structures/Paper';
-import { Row } from './structures/Row';
-import { Text } from './structures/Text';
-import { options as rOptions } from './structures/Row/options';
-import { options as cOptions } from './structures/Column/options';
-import { options as bOptions } from './structures/Box/options';
-import { options as tOptions } from './structures/Text/options';
-import { options as buttonOptions } from './structures/Button/options';
-import { Button } from './structures/Button';
+import {
+  Box,
+  Column,
+  Dialog,
+  Paper,
+  Row,
+  Text,
+  rowOptions,
+  columnOptions,
+  boxOptions,
+  textOptions,
+  buttonOptions,
+  Button,
+} from './structures';
 
 const interactions: PrefabInteraction[] = [
   {
@@ -65,7 +67,7 @@ export default prefab('Dialog', attr, undefined, [
       Row(
         {
           options: {
-            ...rOptions,
+            ...rowOptions,
             maxRowWidth: option('CUSTOM', {
               label: 'Width',
               value: 'Full',
@@ -87,7 +89,7 @@ export default prefab('Dialog', attr, undefined, [
           Column(
             {
               options: {
-                ...cOptions,
+                ...columnOptions,
                 columnWidth: option('CUSTOM', {
                   value: 'flexible',
                   label: 'Column width',
@@ -194,7 +196,7 @@ export default prefab('Dialog', attr, undefined, [
               Box(
                 {
                   options: {
-                    ...bOptions,
+                    ...boxOptions,
                     alignment: option('CUSTOM', {
                       value: 'space-between',
                       label: 'Alignment',
@@ -219,7 +221,7 @@ export default prefab('Dialog', attr, undefined, [
                   Text(
                     {
                       options: {
-                        ...tOptions,
+                        ...textOptions,
                         content: variable('Content', {
                           value: ['Dialog'],
                           configuration: {
@@ -278,7 +280,7 @@ export default prefab('Dialog', attr, undefined, [
                 Text(
                   {
                     options: {
-                      ...tOptions,
+                      ...textOptions,
                       content: variable('Content', {
                         value: [
                           'To start using the dialog, please drag or remove components to your liking.',
@@ -294,7 +296,7 @@ export default prefab('Dialog', attr, undefined, [
               Box(
                 {
                   options: {
-                    ...bOptions,
+                    ...boxOptions,
                     alignment: option('CUSTOM', {
                       value: 'flex-end',
                       label: 'Alignment',

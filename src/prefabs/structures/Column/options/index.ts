@@ -6,9 +6,42 @@ import {
   ThemeColor,
   sizes,
 } from '@betty-blocks/component-sdk';
-import { advanced } from './advanced';
+import { advanced } from '../../advanced';
 
-export const options = {
+export const categories = [
+  {
+    label: 'Column widths',
+    expanded: false,
+    members: [
+      'columnWidth',
+      'columnWidthTabletLandscape',
+      'columnWidthTabletPortrait',
+      'columnWidthMobile',
+    ],
+  },
+  {
+    label: 'Alignment',
+    expanded: false,
+    members: ['horizontalAlignment', 'verticalAlignment'],
+  },
+  {
+    label: 'Styling',
+    expanded: false,
+    members: [
+      'innerSpacing',
+      'outerSpacing',
+      'columnHeight',
+      'backgroundColor',
+    ],
+  },
+  {
+    label: 'Advanced options',
+    expanded: false,
+    members: ['dataComponentAttribute'],
+  },
+];
+
+export const columnOptions = {
   visible: toggle('Toggle visibility', {
     value: true,
     configuration: {
@@ -157,5 +190,5 @@ export const options = {
     value: ['M', 'M', 'M', 'M'],
   }),
 
-  ...advanced,
+  ...advanced('Column'),
 };

@@ -1,7 +1,5 @@
 import { Icon, option, prefab } from '@betty-blocks/component-sdk';
-import { Row } from './structures/Row';
-import { Column } from './structures/Column';
-import { options } from './structures/Column/options';
+import { Column, Row, columnOptions as options } from './structures';
 
 const attrs = {
   icon: Icon.Layout3333Icon,
