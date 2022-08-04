@@ -3,7 +3,6 @@ import {
   component,
   option,
   prefab,
-  BeforeCreateArgs,
   PrefabInteraction,
   InteractionType,
   Icon,
@@ -23,28 +22,39 @@ const beforeCreate = ({
     Text,
   },
   prefab: originalPrefab,
+  save,
   helpers,
 }: any) => {
-  const { createUuid, prepareAction } = helpers;
+  const {
+    createUuid,
+    prepareAction,
+    PropertyKind,
+    makeBettyInput,
+    BettyPrefabs,
+    setOption,
+    cloneStructure,
+  } = helpers;
 
   const componentId = createUuid();
   const [authProfileId, setAuthProfileId] = React.useState('');
   const [authProfile, setAuthProfile] = React.useState(null);
   const [authProfileInvalid, setAuthProfileInvalid] = React.useState(false);
-  console.log('authProfile Prefab', authProfile);
 
   const [endpoint, setEndpoint] = React.useState(null);
   const [endpointInvalid, setEndpointInvalid] = React.useState(false);
+
+  const isEmptyEndpoint = (value): boolean =>
+    !value || Object.keys(value).length === 0 || value.id === '';
   return (
     <>
-      <Header onClose={close} title="CreateFormLoginWizard.title" />
+      <Header onClose={close} title="Configure login form" />
       <Content>
         <Field
-          label="CreateFormWizard.selectAuthenticationProfile"
+          label="Authentication profile"
           error={
             authProfileInvalid && (
               <Text color="#e82600">
-                CreateFormWizard.selectAuthenticationProfileError
+                Selecting an authentication profile is required
               </Text>
             )
           }
@@ -62,10 +72,10 @@ const beforeCreate = ({
           />
         </Field>
         <Field
-          label="CreateFormWizard.selectPage"
+          label="Redirect page"
           error={
             endpointInvalid && (
-              <Text color="#e82600">CreateFormWizard.selectPageError</Text>
+              <Text color="#e82600">Selecting a page is required</Text>
             )
           }
         >
@@ -73,8 +83,7 @@ const beforeCreate = ({
             value={endpoint || ''}
             size="large"
             onChange={(value): void => {
-              // setEndpointInvalid(isEmptyEndpoint(value));
-              setEndpointInvalid(value);
+              setEndpointInvalid(isEmptyEndpoint(value));
               setEndpoint(value);
             }}
           />
@@ -87,12 +96,12 @@ const beforeCreate = ({
             setAuthProfileInvalid(true);
             return;
           }
-          console.log('auth in onSave', authProfile);
 
-          // if (isEmptyEndpoint(endpoint)) {
-          //   setEndpointInvalid(true);
-          //   return;
-          // }
+          if (isEmptyEndpoint(endpoint)) {
+            setEndpointInvalid(true);
+            return;
+          }
+
           // eslint-disable-next-line no-param-reassign
           originalPrefab.structure[0].id = componentId;
           const result = await prepareAction(
@@ -103,7 +112,71 @@ const beforeCreate = ({
             authProfile,
           );
 
-          console.log('result', result);
+          const structure = originalPrefab.structure[0];
+
+          // possible helper: given property kind returns prefab name
+          // TODO: add or remove model parameter
+          Object.values(result.variables).map(([property, variable]) => {
+            const { kind } = property;
+            switch (kind) {
+              case PropertyKind.EMAIL_ADDRESS:
+                structure.descendants.push(
+                  makeBettyInput(
+                    BettyPrefabs.EMAIL_ADDRESS,
+                    model,
+                    property,
+                    variable,
+                  ),
+                );
+                break;
+              case PropertyKind.PASSWORD:
+                structure.descendants.push(
+                  makeBettyInput(
+                    BettyPrefabs.PASSWORD,
+                    model,
+                    property,
+                    variable,
+                  ),
+                );
+                break;
+              case PropertyKind.STRING:
+                structure.descendants.push(
+                  makeBettyInput(
+                    BettyPrefabs.STRING,
+                    model,
+                    property,
+                    variable,
+                  ),
+                );
+                break;
+              default:
+                structure.descendants.push(
+                  makeBettyInput(
+                    BettyPrefabs.STRING,
+                    model,
+                    property,
+                    variable,
+                  ),
+                );
+            }
+            // eslint-disable-next-line no-console
+            return console.warn('PropertyKind not found');
+          });
+
+          structure.descendants.push(
+            cloneStructure(BettyPrefabs.SUBMIT_BUTTON),
+          );
+
+          const newPrefab = { ...originalPrefab };
+
+          // eslint-disable-next-line @typescript-eslint/no-shadow
+          setOption(newPrefab.structure[0], 'actionId', (option) => ({
+            ...option,
+            value: result.action.actionId,
+            configuration: { disabled: true },
+          }));
+
+          save(newPrefab);
         }}
       />
     </>
