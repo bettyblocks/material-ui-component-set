@@ -31,7 +31,6 @@
       use24HourClockTime,
       label,
       locale,
-      clearable,
       dataComponentAttribute = ['DateTimePicker'],
     } = options;
     const { env, useText, Icon } = B;
@@ -54,6 +53,7 @@
     const placeholderText = useText(placeholder);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
     const mounted = useRef(false);
+    const clearable = true;
 
     const localeMap = {
       nl: nlLocale,
@@ -114,7 +114,19 @@
           }
 
           case 'datetime': {
-            setSelectedDate(DateFns.parse(parsedValue, 'yyyy-MM-dd HH:mm:ss'));
+            const formatDefaultParse = DateFns.parse(
+              parsedValue,
+              'yyyy-MM-dd HH:mm:ss',
+            );
+
+            if (!parsedValue) return;
+
+            if (isValidDate(formatDefaultParse)) {
+              setSelectedDate(formatDefaultParse);
+            } else {
+              setSelectedDate(new Date(parsedValue));
+            }
+
             break;
           }
 
@@ -196,6 +208,7 @@
     }
 
     const onBlurHandler = () => {
+      if (!selectedDate) return;
       if (selectedDate && DateFns.isValid(selectedDate)) {
         setErrorState(false);
         setHelper('');
