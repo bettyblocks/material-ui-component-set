@@ -77,7 +77,7 @@ import { options as cardHeaderOptions } from './CardHeader/options';
 import { options as cardMediaOptions } from './CardMedia/options';
 import { options as carouselOptions } from './Carousel/options';
 import { options as carouselImageOptions } from './CarouselImage/options';
-import { options as chipOptions } from './Chip/options';
+import { chipOptions } from './Chip/options';
 import { options as columnOptions } from './Column/options';
 import { options as conditionalOptions } from './Conditional/options';
 import { options as containerOptions } from './Container/options';
