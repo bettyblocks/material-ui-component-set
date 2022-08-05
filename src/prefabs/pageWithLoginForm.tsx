@@ -37,6 +37,12 @@ import {
   rowOptions,
   Text as TextComponent,
   textOptions,
+  TextInput,
+  textInputOptions,
+  SubmitButton,
+  submitButtonOptions,
+  OpenPageButton,
+  openPageButtonOptions,
 } from './structures';
 
 const attrs = {
@@ -205,6 +211,138 @@ const BetaForm = (): PrefabReference => {
         ref: { id: '#alertSuccessId' },
       }),
       FormErrorAlert({ ref: { id: '#alertErrorId' } }),
+      TextInput(
+        {
+          options: {
+            ...textInputOptions,
+            label: variable('Label', { value: ['Username'] }),
+          },
+        },
+        [],
+      ),
+      TextInput(
+        {
+          options: {
+            ...textInputOptions,
+            label: variable('Label', { value: ['Password'] }),
+          },
+        },
+        [],
+      ),
+      BoxComponent(
+        {
+          options: {
+            ...boxOptions,
+            innerSpacing: sizes('Inner space', {
+              value: ['0rem', '0rem', '0rem', '0rem'],
+            }),
+          },
+        },
+        [
+          SubmitButton(
+            {
+              options: {
+                ...submitButtonOptions,
+                fullWidth: toggle('Full width', { value: true }),
+                outerSpacing: sizes('Outer space', {
+                  value: ['M', '0rem', '0rem', '0rem'],
+                }),
+              },
+            },
+            [],
+          ),
+          BoxComponent(
+            {
+              options: {
+                ...boxOptions,
+                innerSpacing: sizes('Inner space', {
+                  value: ['0rem', '0rem', '0rem', '0rem'],
+                }),
+                alignment: buttongroup(
+                  'Alignment',
+                  [
+                    ['None', 'none'],
+                    ['Left', 'flex-start'],
+                    ['Center', 'center'],
+                    ['Right', 'flex-end'],
+                    ['Justified', 'space-between'],
+                  ],
+                  {
+                    value: 'space-between',
+                    configuration: {
+                      dataType: 'string',
+                    },
+                  },
+                ),
+              },
+            },
+            [
+              OpenPageButton(
+                {
+                  options: {
+                    ...openPageButtonOptions,
+                    buttonText: variable('Button text', {
+                      value: ['Register new account'],
+                    }),
+                  },
+                  style: {
+                    overwrite: {
+                      backgroundColor: {
+                        type: 'STATIC',
+                        value: 'transparent',
+                      },
+                      boxShadow: 'none',
+                      color: {
+                        type: 'THEME_COLOR',
+                        value: 'dark',
+                      },
+                      fontFamily: 'Roboto',
+                      fontSize: '0.875rem',
+                      fontStyle: 'none',
+                      fontWeight: '500',
+                      padding: ['0.6875rem', '1.375rem', '0.6875rem', '0rem'],
+                      textDecoration: 'none',
+                      textTransform: 'none',
+                    },
+                  },
+                },
+                [],
+              ),
+              OpenPageButton(
+                {
+                  options: {
+                    ...openPageButtonOptions,
+                    buttonText: variable('Button text', {
+                      value: ['I forgot my password'],
+                    }),
+                  },
+                  style: {
+                    overwrite: {
+                      backgroundColor: {
+                        type: 'STATIC',
+                        value: 'transparent',
+                      },
+                      boxShadow: 'none',
+                      color: {
+                        type: 'THEME_COLOR',
+                        value: 'dark',
+                      },
+                      fontFamily: 'Roboto',
+                      fontSize: '0.875rem',
+                      fontStyle: 'none',
+                      fontWeight: '500',
+                      padding: ['0.6875rem', '1.375rem', '0.6875rem', '0rem'],
+                      textDecoration: 'none',
+                      textTransform: 'none',
+                    },
+                  },
+                },
+                [],
+              ),
+            ],
+          ),
+        ],
+      ),
     ],
   );
 };
@@ -518,7 +656,23 @@ const prefabStructure: PrefabComponent[] = [
                                   ),
                                 ],
                               ),
-                              BoxComponent({ options: boxOptions }, []),
+                              BoxComponent(
+                                {
+                                  options: {
+                                    ...boxOptions,
+                                    height: size('Height', {
+                                      value: '2vh',
+                                      configuration: {
+                                        as: 'UNIT',
+                                      },
+                                    }),
+                                    innerSpacing: sizes('Inner space', {
+                                      value: ['0rem', '0rem', '0rem', '0rem'],
+                                    }),
+                                  },
+                                },
+                                [],
+                              ),
                               BoxComponent(
                                 {
                                   options: {
@@ -568,7 +722,7 @@ const beforeCreate = ({
   save,
   close,
   components: {
-    AuthenticationProfileSelector,
+    // AuthenticationProfileSelector,
     EndpointSelector,
     Header,
     Content,
@@ -578,31 +732,31 @@ const beforeCreate = ({
     Box,
   },
 }: BeforeCreateArgs) => {
-  const [authProfileId, setAuthProfileId] = React.useState('');
-  const [authProfile, setAuthProfile] = React.useState(null);
+  // const [authProfileId, setAuthProfileId] = React.useState('');
+  // const [authProfile, setAuthProfile] = React.useState(null);
   const [redirectTo, setRedirectTo] = React.useState('');
-  const [showAuthValidation, setShowAuthValidation] = React.useState(false);
+  // const [showAuthValidation, setShowAuthValidation] = React.useState(false);
   const [showEndpointValidation, setShowEndpointValidation] =
     React.useState(false);
 
-  const getDescendantByRef = (refValue: string, structure: any) =>
-    structure.reduce((acc: string, comp: PrefabReference) => {
-      if (acc) return acc;
-      if (
-        comp.type === 'COMPONENT' &&
-        // eslint-disable-next-line no-prototype-builtins
-        comp.ref
-          ? Object.values(comp.ref).indexOf(refValue) > -1
-          : undefined
-      ) {
-        return component;
-      }
-      if (comp.type === 'PARTIAL') {
-        return acc;
-      }
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      return getDescendantByRef(refValue, comp.descendants);
-    }, null);
+  // const getDescendantByRef = (refValue: string, structure: any) =>
+  //   structure.reduce((acc: string, comp: PrefabReference) => {
+  //     if (acc) return acc;
+  //     if (
+  //       comp.type === 'COMPONENT' &&
+  //       // eslint-disable-next-line no-prototype-builtins
+  //       comp.ref
+  //         ? Object.values(comp.ref).indexOf(refValue) > -1
+  //         : undefined
+  //     ) {
+  //       return component;
+  //     }
+  //     if (comp.type === 'PARTIAL') {
+  //       return acc;
+  //     }
+  //     // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  //     return getDescendantByRef(refValue, comp.descendants);
+  //   }, null);
 
   // function serializeParameters(obj) {
   //   return Object.entries(obj).map(([name, entry]) => ({
@@ -629,21 +783,22 @@ const beforeCreate = ({
         <Field
           label="Select an authentication profile"
           error={
-            showAuthValidation && (
-              <Text color="#e82600">
-                Selecting an authentication profile is required
-              </Text>
-            )
+            'error'
+            // showAuthValidation && (
+            //   <Text color="#e82600">
+            //     Selecting an authentication profile is required
+            //   </Text>
+            // )
           }
         >
-          <AuthenticationProfileSelector
+          {/* <AuthenticationProfileSelector
             onChange={(id: string, authProfileObject: any) => {
               setShowAuthValidation(false);
               setAuthProfileId(id);
-              setAuthProfile(authProfileObject);
+              // setAuthProfile(authProfileObject);
             }}
             value={authProfileId}
-          />
+          /> */}
         </Field>
         <Field
           label="Redirect after successful login"
@@ -654,7 +809,7 @@ const beforeCreate = ({
           }
         >
           <EndpointSelector
-            onChange={(value) => {
+            onChange={(value: any) => {
               setShowEndpointValidation(isEmptyRedirect(value));
               setRedirectTo(value);
             }}
@@ -666,10 +821,10 @@ const beforeCreate = ({
       <Footer
         onClose={close}
         onSave={() => {
-          if (!authProfileId) {
-            setShowAuthValidation(true);
-            return;
-          }
+          // if (!authProfileId) {
+          //   setShowAuthValidation(true);
+          //   return;
+          // }
 
           if (isEmptyRedirect(redirectTo)) {
             setShowEndpointValidation(true);
@@ -3908,7 +4063,7 @@ const beforeCreate = ({
           //   ];
 
           //   newPrefab.structure[0].descendants = prefabStructure;
-          //   save(newPrefab);
+          save(newPrefab);
           // }
         }}
       />
@@ -3919,6 +4074,6 @@ const beforeCreate = ({
 export default prefab(
   'Login form with image (TS)',
   attrs,
-  undefined,
+  beforeCreate,
   prefabStructure,
 );

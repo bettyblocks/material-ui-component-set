@@ -8,7 +8,7 @@ import {
   color,
   ThemeColor,
   showIf,
-  PrefabReference,
+  // PrefabReference,
 } from '@betty-blocks/component-sdk';
 import { Box } from './structures/Box';
 import { options as boxOptions } from './structures/Box/options';
@@ -63,24 +63,24 @@ const beforeCreate = ({
     return returnObj;
   };
 
-  const getDescendantByRef = (refValue: string, structure: any) =>
-    structure.reduce((acc: string, component: PrefabReference) => {
-      if (acc) return acc;
-      if (
-        component.type === 'COMPONENT' &&
-        // eslint-disable-next-line no-prototype-builtins
-        component.ref
-          ? Object.values(component.ref).indexOf(refValue) > -1
-          : undefined
-      ) {
-        return component;
-      }
-      if (component.type === 'PARTIAL') {
-        return acc;
-      }
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      return getDescendantByRef(refValue, component.descendants);
-    }, null);
+  // const getDescendantByRef = (refValue: string, structure: any) =>
+  //   structure.reduce((acc: string, component: PrefabReference) => {
+  //     if (acc) return acc;
+  //     if (
+  //       component.type === 'COMPONENT' &&
+  //       // eslint-disable-next-line no-prototype-builtins
+  //       component.ref
+  //         ? Object.values(component.ref).indexOf(refValue) > -1
+  //         : undefined
+  //     ) {
+  //       return component;
+  //     }
+  //     if (component.type === 'PARTIAL') {
+  //       return acc;
+  //     }
+  //     // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  //     return getDescendantByRef(refValue, component.descendants);
+  //   }, null);
 
   return (
     <>
