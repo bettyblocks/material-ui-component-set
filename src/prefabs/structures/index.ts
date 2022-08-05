@@ -106,7 +106,7 @@ import { options as openPageButtonOptions } from './OpenPage/options';
 import { options as panelOptions } from './Panel/options';
 import { options as paperOptions } from './Paper/options';
 import { options as priceInputOptions } from './PriceInput/options';
-import { options as progressOptions } from './Progress/options';
+import { progressOptions } from './Progress/options';
 import { options as radioInputOptions } from './RadioInput/options';
 import { options as rowOptions } from './Row/options';
 import { options as selectInputOptions } from './SelectInput/options';
