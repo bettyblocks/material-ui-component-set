@@ -5,9 +5,17 @@ import {
   number,
   showIfTrue,
 } from '@betty-blocks/component-sdk';
-import { advanced } from './advanced';
+import { advanced } from '../../advanced';
 
-export const options = {
+export const categories = [
+  {
+    label: 'Advanced settings',
+    expanded: false,
+    members: ['dataComponentAttribute'],
+  },
+];
+
+export const snackbarOptions = {
   visible: toggle('Toggle visibility', {
     value: true,
     configuration: {
@@ -68,5 +76,5 @@ export const options = {
     },
   }),
 
-  ...advanced,
+  ...advanced('snackbar'),
 };
