@@ -94,7 +94,7 @@ import { options as drawerBarOptions } from './DrawerBar/options';
 import { options as drawerContainerOptions } from './DrawerContainer/options';
 import { options as expansionPanelOptions } from './ExpansionPanel/options';
 import { options as gridOptions } from './Grid/options';
-import { options as iconOptions } from './Icon/options';
+import { iconOptions } from './Icon/options';
 import { options as listOptions } from './List/options';
 import { options as listItemOptions } from './ListItem/options';
 import { options as listSubHeaderOptions } from './ListSubHeader/options';
