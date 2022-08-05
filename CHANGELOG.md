@@ -1,3 +1,52 @@
+# [2.12.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.11.2...v2.12.0) (2022-08-05)
+
+
+### Features
+
+* bump cli and sdk versions ([9c6bf52](https://github.com/bettyblocks/material-ui-component-set/commit/9c6bf525006766e592320098137551a783f85dff))
+
+## [2.11.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.11.1...v2.11.2) (2022-08-03)
+
+
+### Bug Fixes
+
+* added general prefab import ([a3276a0](https://github.com/bettyblocks/material-ui-component-set/commit/a3276a078c8c8b40657620b64c654084de1c797f))
+
+## [2.11.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.11.0...v2.11.1) (2022-08-03)
+
+
+### Bug Fixes
+
+* add global advanced file for tsx prefabs ([7f37957](https://github.com/bettyblocks/material-ui-component-set/commit/7f37957fc22b7f5044e4db2cbf7722046dad354f))
+
+# [2.11.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.10.3...v2.11.0) (2022-08-02)
+
+
+### Bug Fixes
+
+* remove reconfigure option ([4c21e06](https://github.com/bettyblocks/material-ui-component-set/commit/4c21e06cb76c50edb0d776418c6a998fa057b46e))
+
+
+### Features
+
+* add new dataTable option and update cli ([27b3458](https://github.com/bettyblocks/material-ui-component-set/commit/27b3458240dd057fce8364efce2e0673652c06a6))
+* change droptypes to support layouts for beta forms ([250d031](https://github.com/bettyblocks/material-ui-component-set/commit/250d0318a46a14bbb6cfeb0229ea235144d051ba))
+* converted data category to tsx ([7deb17a](https://github.com/bettyblocks/material-ui-component-set/commit/7deb17aefcbd6ac502491bfafba470c799f81b78))
+
+## [2.10.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.10.2...v2.10.3) (2022-08-02)
+
+
+### Bug Fixes
+
+* set global config file and implement config options into prefabs ([19b79fa](https://github.com/bettyblocks/material-ui-component-set/commit/19b79faaec162344fb5523684602e8a164aa2833))
+
+## [2.10.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.10.1...v2.10.2) (2022-07-29)
+
+
+### Bug Fixes
+
+* bump cli ([6f31aa9](https://github.com/bettyblocks/material-ui-component-set/commit/6f31aa9683716e3679ae4d430b9958be953da44d))
+
 ## [2.10.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.10.0...v2.10.1) (2022-07-29)
 
 
