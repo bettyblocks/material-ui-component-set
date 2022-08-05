@@ -19,7 +19,7 @@ import { Text } from './structures/Text';
 import { options as rOptions } from './structures/Row/options';
 import { options as cOptions } from './structures/Column/options';
 import { options as bOptions } from './structures/Box/options';
-import { options as tOptions } from './structures/Text/options';
+import { textOptions } from './structures/Text/options';
 import { options as buttonOptions } from './structures/Button/options';
 import { Button } from './structures/Button';
 
@@ -219,7 +219,7 @@ export default prefab('Dialog', attr, undefined, [
                   Text(
                     {
                       options: {
-                        ...tOptions,
+                        ...textOptions,
                         content: variable('Content', {
                           value: ['Dialog'],
                           configuration: {
@@ -278,7 +278,7 @@ export default prefab('Dialog', attr, undefined, [
                 Text(
                   {
                     options: {
-                      ...tOptions,
+                      ...textOptions,
                       content: variable('Content', {
                         value: [
                           'To start using the dialog, please drag or remove components to your liking.',

@@ -116,7 +116,7 @@ import { options as stepperOptions } from './Stepper/options';
 import { options as submitButtonOptions } from './SubmitButton/options';
 import { options as tabOptions } from './Tab/options';
 import { options as tabsOptions } from './Tabs/options';
-import { options as textOptions } from './Text/options';
+import { textOptions } from './Text/options';
 import { options as textAreaOptions } from './TextArea/options';
 import { options as textInputOptions } from './TextInput/options';
 

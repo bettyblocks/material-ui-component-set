@@ -1,7 +1,7 @@
 import { font, Icon, prefab, toggle } from '@betty-blocks/component-sdk';
 import { CardContent } from './structures/CardContent';
 import { Text } from './structures/Text';
-import { options as textOptions } from './structures/Text/options/index';
+import { textOptions } from './structures/Text/options/index';
 
 const attr = {
   icon: Icon.CardContentIcon,

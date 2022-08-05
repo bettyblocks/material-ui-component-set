@@ -29,7 +29,7 @@ import { Paper } from './structures/Paper';
 import { Row } from './structures/Row';
 import { options as rowOptions } from './structures/Row/options';
 import { Text as TextPrefab } from './structures/Text';
-import { options as textOptions } from './structures/Text/options';
+import { textOptions } from './structures/Text/options';
 
 const beforeCreate = ({
   prefab,

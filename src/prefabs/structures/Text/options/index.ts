@@ -8,10 +8,23 @@ import {
   toggle,
   showIfTrue,
 } from '@betty-blocks/component-sdk';
-import { advanced } from './advanced';
+import { advanced } from '../../advanced';
 import { styles } from './styles';
 
-export const options = {
+export const categories = [
+  {
+    label: 'Styling',
+    expanded: false,
+    members: ['styles'],
+  },
+  {
+    label: 'Advanced settings',
+    expanded: false,
+    members: ['dataComponentAttribute'],
+  },
+];
+
+export const textOptions = {
   content: variable('Content', {
     value: [],
     configuration: { as: 'MULTILINE' },
@@ -80,5 +93,5 @@ export const options = {
 
   ...styles,
 
-  ...advanced,
+  ...advanced('Text'),
 };

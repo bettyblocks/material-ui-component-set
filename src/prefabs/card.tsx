@@ -12,7 +12,7 @@ import { CardHeader } from './structures/CardHeader';
 import { CardMedia } from './structures/CardMedia';
 import { Text } from './structures/Text';
 import { OpenPageButton } from './structures/OpenPage';
-import { options as textOptions } from './structures/Text/options/index';
+import { textOptions } from './structures/Text/options/index';
 import { options as openPageButtonOptions } from './structures/OpenPage/options/index';
 
 const attr = {
