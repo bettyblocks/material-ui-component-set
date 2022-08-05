@@ -1,7 +1,15 @@
 import { option, toggle } from '@betty-blocks/component-sdk';
-import { advanced } from './advanced';
+import { advanced } from '../../advanced';
 
-export const options = {
+export const categories = [
+  {
+    label: 'Advanced settings',
+    expanded: false,
+    members: ['dataComponentAttribute'],
+  },
+];
+
+export const cardActionsOptions = {
   alignment: option('CUSTOM', {
     label: 'Alignment',
     value: 'flex-start',
@@ -17,5 +25,5 @@ export const options = {
   }),
   disableSpacing: toggle('Disable spacing', { value: false }),
 
-  ...advanced,
+  ...advanced('Card actions'),
 };
