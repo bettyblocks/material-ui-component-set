@@ -98,7 +98,7 @@ import { iconOptions } from './Icon/options';
 import { options as listOptions } from './List/options';
 import { options as listItemOptions } from './ListItem/options';
 import { options as listSubHeaderOptions } from './ListSubHeader/options';
-import { options as mediaOptions } from './Media/options';
+import { mediaOptions } from './Media/options';
 import { options as menuOptions } from './Menu/options';
 import { options as menuItemOptions } from './MenuItem/options';
 import { options as multiAutocompleteOptions } from './MultiAutoCompleteInput/options';
