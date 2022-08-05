@@ -8,9 +8,37 @@ import {
   showIf,
   toggle,
 } from '@betty-blocks/component-sdk';
-import { advanced } from './advanced';
+import { advanced } from '../../advanced';
 
-export const options = {
+export const categories = [
+  {
+    label: 'Logo',
+    expanded: true,
+    members: ['logoSource', 'logoWidth', 'endpoint'],
+  },
+  {
+    label: 'Styling',
+    expanded: false,
+    members: [
+      'position',
+      'height',
+      'appBarVariant',
+      'elevation',
+      'square',
+      'toolbarVariant',
+      'alignItems',
+      'backgroundColor',
+      'color',
+    ],
+  },
+  {
+    label: 'Advanced settings',
+    expanded: false,
+    members: ['dataComponentAttribute'],
+  },
+];
+
+export const appBarOptions = {
   backgroundColor: color('Background color', { value: ThemeColor.PRIMARY }),
   color: color('Text color', { value: ThemeColor.WHITE }),
   height: size('Height', { value: '', configuration: { as: 'UNIT' } }),
@@ -47,7 +75,7 @@ export const options = {
   }),
   title: variable('Title', { value: ['App Bar'] }),
   logoSource: option('PUBLIC_FILE', {
-    label: 'Logo',
+    label: 'Logo source',
     value: '',
     configuration: {
       mediaType: 'IMAGE',
@@ -76,7 +104,7 @@ export const options = {
       ],
     },
   }),
-  endpoint: endpoint('Page', { value: '' }),
+  endpoint: endpoint('Logo links to', { value: '' }),
   appBarVariant: option('CUSTOM', {
     label: 'Variant',
     value: 'flat',
@@ -131,7 +159,7 @@ export const options = {
         { name: '23', value: '23' },
         { name: '24', value: '24' },
       ],
-      condition: showIf('appBarVarient', 'EQ', 'elevation'),
+      condition: showIf('appBarVariant', 'EQ', 'elevation'),
     },
   }),
   square: toggle('Square', { value: true }),
@@ -154,5 +182,5 @@ export const options = {
     },
   }),
 
-  ...advanced,
+  ...advanced('AppBar'),
 };
