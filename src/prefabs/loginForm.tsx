@@ -1,14 +1,11 @@
 import * as React from 'react';
 import {
-  component,
-  option,
   prefab,
   PrefabInteraction,
   InteractionType,
   Icon,
-  model,
 } from '@betty-blocks/component-sdk';
-import { FormErrorAlert } from './structures/Alert';
+import { Form } from './structures/ActionJSForm';
 
 const beforeCreate = ({
   close,
@@ -33,6 +30,7 @@ const beforeCreate = ({
     BettyPrefabs,
     setOption,
     cloneStructure,
+    useModelQuery,
   } = helpers;
 
   const componentId = createUuid();
@@ -43,8 +41,21 @@ const beforeCreate = ({
   const [endpoint, setEndpoint] = React.useState(null);
   const [endpointInvalid, setEndpointInvalid] = React.useState(false);
 
+  const [model, setModel] = React.useState(null);
+
   const isEmptyEndpoint = (value): boolean =>
     !value || Object.keys(value).length === 0 || value.id === '';
+
+  const modelId = (authProfile && authProfile.loginModel) || '';
+
+  useModelQuery({
+    skip: !modelId,
+    variables: { id: modelId },
+    onCompleted: (result) => {
+      setModel(result.model);
+    },
+  });
+
   return (
     <>
       <Header onClose={close} title="Configure login form" />
@@ -102,6 +113,10 @@ const beforeCreate = ({
             return;
           }
 
+          if (!model) {
+            console.warn('Model not found');
+          }
+
           // eslint-disable-next-line no-param-reassign
           originalPrefab.structure[0].id = componentId;
           const result = await prepareAction(
@@ -114,10 +129,16 @@ const beforeCreate = ({
 
           const structure = originalPrefab.structure[0];
 
-          // possible helper: given property kind returns prefab name
-          // TODO: add or remove model parameter
-          Object.values(result.variables).map(([property, variable]) => {
-            const { kind } = property;
+          if (authProfile.properties[0].kind === 'PASSWORD') {
+            authProfile.properties.reverse();
+          }
+
+          authProfile.properties.forEach((property) => {
+            const { kind, name } = property;
+            const variable = result.variables.find(
+              (variable) => variable.name === name,
+            );
+
             switch (kind) {
               case PropertyKind.EMAIL_ADDRESS:
                 structure.descendants.push(
@@ -150,14 +171,7 @@ const beforeCreate = ({
                 );
                 break;
               default:
-                structure.descendants.push(
-                  makeBettyInput(
-                    BettyPrefabs.STRING,
-                    model,
-                    property,
-                    variable,
-                  ),
-                );
+                break;
             }
             // eslint-disable-next-line no-console
             return console.warn('PropertyKind not found');
@@ -175,6 +189,16 @@ const beforeCreate = ({
             value: result.action.actionId,
             configuration: { disabled: true },
           }));
+
+          if (authProfile) {
+            setOption(newPrefab.structure[0], 'modelId', (option) => ({
+              ...option,
+              value: authProfile.loginModel,
+              configuration: {
+                disabled: true,
+              },
+            }));
+          }
 
           save(newPrefab);
         }}
@@ -219,15 +243,6 @@ const attributes = {
   interactions,
 };
 
-const options = {
-  actionId: option('ACTION_JS', { label: 'Action', value: '' }),
-  modelId: model('Model'),
-};
-
 export default prefab('Login Form Beta', attributes, beforeCreate, [
-  component(
-    'Form Beta',
-    { label: 'Login form Beta', options, ref: { id: '#formId' } },
-    [FormErrorAlert({ ref: { id: '#alertErrorId' } })],
-  ),
+  Form('Login Form Beta'),
 ]);
