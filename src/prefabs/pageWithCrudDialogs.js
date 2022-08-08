@@ -13992,7 +13992,7 @@
                     onChange={(footerId) => {
                       setFooterPartialId(footerId);
                     }}
-                    preSelected="Button"
+                    preSelected="Footer"
                     value={footerPartialId}
                     allowedTypes={[
                       'BODY_COMPONENT',
