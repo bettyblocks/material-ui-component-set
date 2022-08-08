@@ -11806,9 +11806,9 @@
               name: 'Media',
               options: [
                 {
-                  label: 'Media type',
                   key: 'type',
-                  value: 'img',
+                  label: 'Media type',
+                  value: 'data',
                   type: 'CUSTOM',
                   configuration: {
                     as: 'BUTTONGROUP',
@@ -11823,12 +11823,13 @@
                   },
                 },
                 {
-                  value: [enrichDetailProperty(property)],
-                  label: 'Source',
-                  key: 'imageSource',
-                  type: 'VARIABLE',
+                  key: 'imageFileSource',
+                  label: 'Select image',
+                  value: '',
+                  type: 'PUBLIC_FILE',
                   configuration: {
-                    as: 'MULTILINE',
+                    mediaType: 'IMAGE',
+                    allowedExtensions: ['image/*'],
                     condition: {
                       type: 'SHOW',
                       option: 'type',
@@ -11838,12 +11839,13 @@
                   },
                 },
                 {
-                  value: [],
-                  label: 'Source',
-                  key: 'videoSource',
-                  type: 'VARIABLE',
+                  key: 'videoFileSource',
+                  label: 'Select video',
+                  value: '',
+                  type: 'PUBLIC_FILE',
                   configuration: {
-                    as: 'MULTILINE',
+                    mediaType: 'Video',
+                    allowedExtensions: ['video/*'],
                     condition: {
                       type: 'SHOW',
                       option: 'type',
@@ -11852,8 +11854,9 @@
                     },
                   },
                 },
+
                 {
-                  value: '',
+                  value: enrichDetailProperty(property),
                   type: 'PROPERTY',
                   label: 'Property',
                   key: 'propertyFileSource',
@@ -11867,8 +11870,46 @@
                   },
                 },
                 {
+                  value: [
+                    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Your_Logo_-_W.svg',
+                  ],
+                  label: 'URL source',
+                  key: 'urlFileSource',
+                  type: 'VARIABLE',
+                  configuration: {
+                    placeholder: 'Starts with https:// or http://',
+                    as: 'MULTILINE',
+                    condition: {
+                      type: 'SHOW',
+                      option: 'type',
+                      comparator: 'EQ',
+                      value: 'url',
+                    },
+                  },
+                },
+                {
+                  value: 'image',
+                  label: 'Type',
+                  type: 'CUSTOM',
+                  key: 'urlSourceType',
+                  configuration: {
+                    as: 'BUTTONGROUP',
+                    dataType: 'string',
+                    allowedInput: [
+                      { name: 'Image', value: 'image' },
+                      { name: 'Video', value: 'video' },
+                    ],
+                    condition: {
+                      type: 'SHOW',
+                      option: 'type',
+                      comparator: 'EQ',
+                      value: 'url',
+                    },
+                  },
+                },
+                {
                   value: [],
-                  label: 'Source',
+                  label: 'I-frame source',
                   key: 'iframeSource',
                   type: 'VARIABLE',
                   configuration: {
@@ -11890,8 +11931,14 @@
                     as: 'BUTTONGROUP',
                     dataType: 'string',
                     allowedInput: [
-                      { name: 'Internal page', value: 'internal' },
-                      { name: 'External page', value: 'external' },
+                      {
+                        name: 'Internal page',
+                        value: 'internal',
+                      },
+                      {
+                        name: 'External page',
+                        value: 'external',
+                      },
                     ],
                     condition: {
                       type: 'SHOW',
@@ -32684,248 +32731,248 @@
             descendants:
               property.kind === 'IMAGE'
                 ? [
-                  {
-                    name: 'Media',
-                    options: [
-                      {
-                        key: 'type',
-                        label: 'Media type',
-                        value: 'data',
-                        type: 'CUSTOM',
-                        configuration: {
-                          as: 'BUTTONGROUP',
-                          dataType: 'string',
-                          allowedInput: [
-                            { name: 'Image', value: 'img' },
-                            { name: 'Data', value: 'data' },
-                            { name: 'Video', value: 'video' },
-                            { name: 'URL', value: 'url' },
-                            { name: 'I-frame', value: 'iframe' },
+                    {
+                      name: 'Media',
+                      options: [
+                        {
+                          key: 'type',
+                          label: 'Media type',
+                          value: 'data',
+                          type: 'CUSTOM',
+                          configuration: {
+                            as: 'BUTTONGROUP',
+                            dataType: 'string',
+                            allowedInput: [
+                              { name: 'Image', value: 'img' },
+                              { name: 'Data', value: 'data' },
+                              { name: 'Video', value: 'video' },
+                              { name: 'URL', value: 'url' },
+                              { name: 'I-frame', value: 'iframe' },
+                            ],
+                          },
+                        },
+                        {
+                          key: 'imageFileSource',
+                          label: 'Select image',
+                          value: '',
+                          type: 'PUBLIC_FILE',
+                          configuration: {
+                            mediaType: 'IMAGE',
+                            allowedExtensions: ['image/*'],
+                            condition: {
+                              type: 'SHOW',
+                              option: 'type',
+                              comparator: 'EQ',
+                              value: 'img',
+                            },
+                          },
+                        },
+                        {
+                          key: 'videoFileSource',
+                          label: 'Select video',
+                          value: '',
+                          type: 'PUBLIC_FILE',
+                          configuration: {
+                            mediaType: 'Video',
+                            allowedExtensions: ['video/*'],
+                            condition: {
+                              type: 'SHOW',
+                              option: 'type',
+                              comparator: 'EQ',
+                              value: 'video',
+                            },
+                          },
+                        },
+
+                        {
+                          value: property,
+                          type: 'PROPERTY',
+                          label: 'Property',
+                          key: 'propertyFileSource',
+                          configuration: {
+                            condition: {
+                              type: 'SHOW',
+                              option: 'type',
+                              comparator: 'EQ',
+                              value: 'data',
+                            },
+                          },
+                        },
+                        {
+                          value: [
+                            'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Your_Logo_-_W.svg',
                           ],
-                        },
-                      },
-                      {
-                        key: 'imageFileSource',
-                        label: 'Select image',
-                        value: '',
-                        type: 'PUBLIC_FILE',
-                        configuration: {
-                          mediaType: 'IMAGE',
-                          allowedExtensions: ['image/*'],
-                          condition: {
-                            type: 'SHOW',
-                            option: 'type',
-                            comparator: 'EQ',
-                            value: 'img',
+                          label: 'URL source',
+                          key: 'urlFileSource',
+                          type: 'VARIABLE',
+                          configuration: {
+                            placeholder: 'Starts with https:// or http://',
+                            as: 'MULTILINE',
+                            condition: {
+                              type: 'SHOW',
+                              option: 'type',
+                              comparator: 'EQ',
+                              value: 'url',
+                            },
                           },
                         },
-                      },
-                      {
-                        key: 'videoFileSource',
-                        label: 'Select video',
-                        value: '',
-                        type: 'PUBLIC_FILE',
-                        configuration: {
-                          mediaType: 'Video',
-                          allowedExtensions: ['video/*'],
-                          condition: {
-                            type: 'SHOW',
-                            option: 'type',
-                            comparator: 'EQ',
-                            value: 'video',
+                        {
+                          value: 'image',
+                          label: 'Type',
+                          type: 'CUSTOM',
+                          key: 'urlSourceType',
+                          configuration: {
+                            as: 'BUTTONGROUP',
+                            dataType: 'string',
+                            allowedInput: [
+                              { name: 'Image', value: 'image' },
+                              { name: 'Video', value: 'video' },
+                            ],
+                            condition: {
+                              type: 'SHOW',
+                              option: 'type',
+                              comparator: 'EQ',
+                              value: 'url',
+                            },
                           },
                         },
-                      },
-      
-                      {
-                        value: property,
-                        type: 'PROPERTY',
-                        label: 'Property',
-                        key: 'propertyFileSource',
-                        configuration: {
-                          condition: {
-                            type: 'SHOW',
-                            option: 'type',
-                            comparator: 'EQ',
-                            value: 'data',
+                        {
+                          value: [],
+                          label: 'I-frame source',
+                          key: 'iframeSource',
+                          type: 'VARIABLE',
+                          configuration: {
+                            as: 'MULTILINE',
+                            condition: {
+                              type: 'SHOW',
+                              option: 'type',
+                              comparator: 'EQ',
+                              value: 'iframe',
+                            },
                           },
                         },
-                      },
-                      {
-                        value: [
-                          'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Your_Logo_-_W.svg',
-                        ],
-                        label: 'URL source',
-                        key: 'urlFileSource',
-                        type: 'VARIABLE',
-                        configuration: {
-                          placeholder: 'Starts with https:// or http://',
-                          as: 'MULTILINE',
-                          condition: {
-                            type: 'SHOW',
-                            option: 'type',
-                            comparator: 'EQ',
-                            value: 'url',
+                        {
+                          type: 'CUSTOM',
+                          label: 'Link to',
+                          key: 'linkType',
+                          value: 'internal',
+                          configuration: {
+                            as: 'BUTTONGROUP',
+                            dataType: 'string',
+                            allowedInput: [
+                              {
+                                name: 'Internal page',
+                                value: 'internal',
+                              },
+                              {
+                                name: 'External page',
+                                value: 'external',
+                              },
+                            ],
+                            condition: {
+                              type: 'SHOW',
+                              option: 'type',
+                              comparator: 'EQ',
+                              value: 'img',
+                            },
                           },
                         },
-                      },
-                      {
-                        value: 'image',
-                        label: 'Type',
-                        type: 'CUSTOM',
-                        key: 'urlSourceType',
-                        configuration: {
-                          as: 'BUTTONGROUP',
-                          dataType: 'string',
-                          allowedInput: [
-                            { name: 'Image', value: 'image' },
-                            { name: 'Video', value: 'video' },
-                          ],
-                          condition: {
-                            type: 'SHOW',
-                            option: 'type',
-                            comparator: 'EQ',
-                            value: 'url',
-                          },
-                        },
-                      },
-                      {
-                        value: [],
-                        label: 'I-frame source',
-                        key: 'iframeSource',
-                        type: 'VARIABLE',
-                        configuration: {
-                          as: 'MULTILINE',
-                          condition: {
-                            type: 'SHOW',
-                            option: 'type',
-                            comparator: 'EQ',
-                            value: 'iframe',
-                          },
-                        },
-                      },
-                      {
-                        type: 'CUSTOM',
-                        label: 'Link to',
-                        key: 'linkType',
-                        value: 'internal',
-                        configuration: {
-                          as: 'BUTTONGROUP',
-                          dataType: 'string',
-                          allowedInput: [
-                            {
-                              name: 'Internal page',
+                        {
+                          value: '',
+                          label: 'Page',
+                          key: 'linkTo',
+                          type: 'ENDPOINT',
+                          configuration: {
+                            condition: {
+                              type: 'SHOW',
+                              option: 'linkType',
+                              comparator: 'EQ',
                               value: 'internal',
                             },
-                            {
-                              name: 'External page',
+                          },
+                        },
+                        {
+                          value: [''],
+                          label: 'URL',
+                          key: 'linkToExternal',
+                          type: 'VARIABLE',
+                          configuration: {
+                            placeholder: 'Starts with https:// or http://',
+                            condition: {
+                              type: 'SHOW',
+                              option: 'linkType',
+                              comparator: 'EQ',
                               value: 'external',
                             },
-                          ],
-                          condition: {
-                            type: 'SHOW',
-                            option: 'type',
-                            comparator: 'EQ',
-                            value: 'img',
                           },
                         },
-                      },
-                      {
-                        value: '',
-                        label: 'Page',
-                        key: 'linkTo',
-                        type: 'ENDPOINT',
-                        configuration: {
-                          condition: {
-                            type: 'SHOW',
-                            option: 'linkType',
-                            comparator: 'EQ',
-                            value: 'internal',
+                        {
+                          value: [],
+                          label: 'Image Alternative Text',
+                          key: 'imgAlt',
+                          type: 'VARIABLE',
+                          configuration: {
+                            condition: {
+                              type: 'SHOW',
+                              option: 'type',
+                              comparator: 'EQ',
+                              value: 'img',
+                            },
                           },
                         },
-                      },
-                      {
-                        value: [''],
-                        label: 'URL',
-                        key: 'linkToExternal',
-                        type: 'VARIABLE',
-                        configuration: {
-                          placeholder: 'Starts with https:// or http://',
-                          condition: {
-                            type: 'SHOW',
-                            option: 'linkType',
-                            comparator: 'EQ',
-                            value: 'external',
+                        {
+                          value: [],
+                          label: 'Title',
+                          key: 'title',
+                          type: 'VARIABLE',
+                        },
+                        {
+                          type: 'SIZE',
+                          label: 'Width',
+                          key: 'width',
+                          value: '100%',
+                          configuration: {
+                            as: 'UNIT',
                           },
                         },
-                      },
-                      {
-                        value: [],
-                        label: 'Image Alternative Text',
-                        key: 'imgAlt',
-                        type: 'VARIABLE',
-                        configuration: {
-                          condition: {
-                            type: 'SHOW',
-                            option: 'type',
-                            comparator: 'EQ',
-                            value: 'img',
+                        {
+                          type: 'SIZE',
+                          label: 'Height',
+                          key: 'height',
+                          value: '',
+                          configuration: {
+                            as: 'UNIT',
                           },
                         },
-                      },
-                      {
-                        value: [],
-                        label: 'Title',
-                        key: 'title',
-                        type: 'VARIABLE',
-                      },
-                      {
-                        type: 'SIZE',
-                        label: 'Width',
-                        key: 'width',
-                        value: '100%',
-                        configuration: {
-                          as: 'UNIT',
+                        {
+                          value: ['0rem', '0rem', 'M', '0rem'],
+                          label: 'Outer space',
+                          key: 'outerSpacing',
+                          type: 'SIZES',
                         },
-                      },
-                      {
-                        type: 'SIZE',
-                        label: 'Height',
-                        key: 'height',
-                        value: '',
-                        configuration: {
-                          as: 'UNIT',
+                        {
+                          value: false,
+                          label: 'Advanced settings',
+                          key: 'advancedSettings',
+                          type: 'TOGGLE',
                         },
-                      },
-                      {
-                        value: ['0rem', '0rem', 'M', '0rem'],
-                        label: 'Outer space',
-                        key: 'outerSpacing',
-                        type: 'SIZES',
-                      },
-                      {
-                        value: false,
-                        label: 'Advanced settings',
-                        key: 'advancedSettings',
-                        type: 'TOGGLE',
-                      },
-                      {
-                        type: 'VARIABLE',
-                        label: 'Test attribute',
-                        key: 'dataComponentAttribute',
-                        value: ['Media'],
-                        configuration: {
-                          condition: {
-                            type: 'SHOW',
-                            option: 'advancedSettings',
-                            comparator: 'EQ',
-                            value: true,
+                        {
+                          type: 'VARIABLE',
+                          label: 'Test attribute',
+                          key: 'dataComponentAttribute',
+                          value: ['Media'],
+                          configuration: {
+                            condition: {
+                              type: 'SHOW',
+                              option: 'advancedSettings',
+                              comparator: 'EQ',
+                              value: true,
+                            },
                           },
                         },
-                      },
-                    ],
-                    descendants: [],
-                  },
+                      ],
+                      descendants: [],
+                    },
                   ]
                 : [],
           });
