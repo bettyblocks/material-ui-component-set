@@ -271,14 +271,14 @@ const beforeCreate = ({
           if (validate()) {
             const newPrefab = { ...originalPrefab };
 
-            setOption(newPrefab.structure[0], 'actionId', (option) => ({
-              ...option,
+            setOption(newPrefab.structure[0], 'actionId', (options) => ({
+              ...options,
               value: result.action.actionId,
               configuration: { disabled: true },
             }));
 
-            setOption(newPrefab.structure[0], 'model', (option) => ({
-              ...option,
+            setOption(newPrefab.structure[0], 'model', (options) => ({
+              ...options,
               value: modelId,
               configuration: {
                 disabled: true,
@@ -339,5 +339,5 @@ const attributes = {
 };
 
 export default prefab('Create Form Beta', attributes, beforeCreate, [
-  Form('Create Form Beta'),
+  Form('Create Form Beta', true),
 ]);

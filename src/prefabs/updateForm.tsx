@@ -611,5 +611,5 @@ const attributes = {
 };
 
 export default prefab('Update Form Beta', attributes, beforeCreate, [
-  Form('Update Form Beta'),
+  Form('Update Form Beta', true),
 ]);
