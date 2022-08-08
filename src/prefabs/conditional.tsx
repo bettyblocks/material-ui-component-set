@@ -1,5 +1,5 @@
 import { Icon, prefab } from '@betty-blocks/component-sdk';
-import { Conditional } from './structures/Conditional';
+import { Conditional } from './structures';
 
 const attr = {
   icon: Icon.ConditionalIcon,

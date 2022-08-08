@@ -1,5 +1,5 @@
 import { prefab, Icon } from '@betty-blocks/component-sdk';
-import { ListItem } from './structures/ListItem';
+import { ListItem } from './structures';
 
 const attr = {
   icon: Icon.ListItemIcon,
