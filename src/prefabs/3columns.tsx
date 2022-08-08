@@ -1,6 +1,12 @@
 import { Icon, option, prefab } from '@betty-blocks/component-sdk';
 import { Column, Row, columnOptions } from './structures';
 
+const attrs = {
+  icon: Icon.Layout444Icon,
+  category: 'LAYOUT',
+  keywords: ['Layout', 'column', 'columns', '3'],
+};
+
 const defaultOptions = { ...columnOptions };
 defaultOptions.columnWidth = option('CUSTOM', {
   label: 'Column width',
@@ -106,11 +112,6 @@ defaultOptions.columnWidthMobile = option('CUSTOM', {
   },
 });
 
-const attrs = {
-  icon: Icon.Layout444Icon,
-  category: 'LAYOUT',
-  keywords: ['Layout', 'column', 'columns', '1'],
-};
 export default prefab('3 Columns', attrs, undefined, [
   Row({}, [
     Column({ options: defaultOptions }),

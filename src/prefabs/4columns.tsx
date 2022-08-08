@@ -4,8 +4,9 @@ import { Column, Row, columnOptions } from './structures';
 const attrs = {
   icon: Icon.Layout3333Icon,
   category: 'LAYOUT',
-  keywords: ['Layout', 'column', 'columns', '1'],
+  keywords: ['Layout', 'column', 'columns', '4'],
 };
+
 const defaultOptions = { ...columnOptions };
 defaultOptions.columnWidth = option('CUSTOM', {
   label: 'Column width',
