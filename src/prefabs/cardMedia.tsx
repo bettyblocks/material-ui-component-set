@@ -1,5 +1,5 @@
 import { Icon, prefab } from '@betty-blocks/component-sdk';
-import { CardMedia } from './structures/CardMedia';
+import { CardMedia } from './structures';
 
 const attr = {
   icon: Icon.CardMediaIcon,
