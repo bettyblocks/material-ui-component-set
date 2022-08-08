@@ -2655,19 +2655,21 @@
                                         name: 'Media',
                                         options: [
                                           {
-                                            label: 'Media type',
                                             key: 'type',
-                                            value: 'img',
+                                            label: 'Media type',
+                                            value: 'url',
                                             type: 'CUSTOM',
                                             configuration: {
                                               as: 'BUTTONGROUP',
                                               dataType: 'string',
                                               allowedInput: [
                                                 { name: 'Image', value: 'img' },
+                                                { name: 'Data', value: 'data' },
                                                 {
                                                   name: 'Video',
                                                   value: 'video',
                                                 },
+                                                { name: 'URL', value: 'url' },
                                                 {
                                                   name: 'I-frame',
                                                   value: 'iframe',
@@ -2676,14 +2678,13 @@
                                             },
                                           },
                                           {
-                                            value: [
-                                              'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Your_Logo_-_B.svg',
-                                            ],
-                                            label: 'Source',
-                                            key: 'urlFileSourcece',
-                                            type: 'VARIABLE',
+                                            key: 'imageFileSource',
+                                            label: 'Select image',
+                                            value: '',
+                                            type: 'PUBLIC_FILE',
                                             configuration: {
-                                              as: 'MULTILINE',
+                                              mediaType: 'IMAGE',
+                                              allowedExtensions: ['image/*'],
                                               condition: {
                                                 type: 'SHOW',
                                                 option: 'type',
@@ -2693,12 +2694,13 @@
                                             },
                                           },
                                           {
-                                            value: [],
-                                            label: 'Source',
-                                            key: 'videoSource',
-                                            type: 'VARIABLE',
+                                            key: 'videoFileSource',
+                                            label: 'Select video',
+                                            value: '',
+                                            type: 'PUBLIC_FILE',
                                             configuration: {
-                                              as: 'MULTILINE',
+                                              mediaType: 'Video',
+                                              allowedExtensions: ['video/*'],
                                               condition: {
                                                 type: 'SHOW',
                                                 option: 'type',
@@ -2708,8 +2710,67 @@
                                             },
                                           },
                                           {
+                                            value: '',
+                                            type: 'PROPERTY',
+                                            label: 'Property',
+                                            key: 'propertyFileSource',
+                                            configuration: {
+                                              condition: {
+                                                type: 'SHOW',
+                                                option: 'type',
+                                                comparator: 'EQ',
+                                                value: 'data',
+                                              },
+                                            },
+                                          },
+                                          {
+                                            value: [
+                                              'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Your_Logo_-_B.svg',
+                                            ],
+                                            label: 'URL source',
+                                            key: 'urlFileSource',
+                                            type: 'VARIABLE',
+                                            configuration: {
+                                              placeholder:
+                                                'Starts with https:// or http://',
+                                              as: 'MULTILINE',
+                                              condition: {
+                                                type: 'SHOW',
+                                                option: 'type',
+                                                comparator: 'EQ',
+                                                value: 'url',
+                                              },
+                                            },
+                                          },
+                                          {
+                                            value: 'image',
+                                            label: 'Type',
+                                            type: 'CUSTOM',
+                                            key: 'urlSourceType',
+                                            configuration: {
+                                              as: 'BUTTONGROUP',
+                                              dataType: 'string',
+                                              allowedInput: [
+                                                {
+                                                  name: 'Image',
+                                                  value: 'image',
+                                                },
+                                                {
+                                                  name: 'Video',
+                                                  value: 'video',
+                                                },
+                                              ],
+                                              condition: {
+                                                type: 'SHOW',
+                                                option: 'type',
+                                                comparator: 'EQ',
+                                                value: 'url',
+                                              },
+                                            },
+                                          },
+                                          {
                                             value: [],
-                                            label: 'Source',
+                                            label: 'I-frame source',
                                             key: 'iframeSource',
                                             type: 'VARIABLE',
                                             configuration: {
@@ -2802,7 +2863,7 @@
                                             type: 'SIZE',
                                             label: 'Width',
                                             key: 'width',
-                                            value: '',
+                                            value: '100%',
                                             configuration: {
                                               as: 'UNIT',
                                             },
@@ -2820,7 +2881,7 @@
                                             value: [
                                               '0rem',
                                               '0rem',
-                                              '0rem',
+                                              'M',
                                               '0rem',
                                             ],
                                             label: 'Outer space',
