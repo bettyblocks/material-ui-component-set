@@ -42,9 +42,6 @@ const beforeCreate = ({
   ): void => {
     const index = structure.options.findIndex((option) => option.key === key);
     if (index === -1) {
-      console.warn(
-        `unable to set option. option '${key}' is missing on ${structure.name}`,
-      );
       return;
     }
     // eslint-disable-next-line no-param-reassign
