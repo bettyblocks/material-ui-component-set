@@ -9,6 +9,7 @@ import {
   prefab,
 } from '@betty-blocks/component-sdk';
 import { FormErrorAlert } from './structures/Alert';
+import { Form } from './structures/ActionJSForm';
 
 const beforeCreate = ({
   close,
@@ -247,15 +248,6 @@ const attributes = {
   interactions,
 };
 
-const options = {
-  actionId: option('ACTION_JS', { label: 'Action', value: '' }),
-  modelId: modelSDK('Model'),
-};
-
 export default prefab('Login Form Beta', attributes, beforeCreate, [
-  component(
-    'Form Beta',
-    { label: 'Login form Beta', options, ref: { id: '#formId' } },
-    [FormErrorAlert({ ref: { id: '#alertErrorId' } })],
-  ),
+  Form('Login Form Beta'),
 ]);

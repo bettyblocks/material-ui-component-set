@@ -9,7 +9,7 @@ import {
   filter,
   component,
 } from '@betty-blocks/component-sdk';
-import { FormErrorAlert, FormSuccessAlert } from './structures/Alert';
+import { Form } from './structures/ActionJSForm';
 
 const beforeCreate = ({
   close,
@@ -342,19 +342,6 @@ const attributes = {
   interactions,
 };
 
-const options = {
-  actionId: option('ACTION_JS', { label: 'Action', value: '' }),
-  modelId: modelSdk('Model'),
-  filter: filter('Filter', { configuration: { dependsOn: 'modelId' } }),
-};
-
 export default prefab('Create Form Beta', attributes, beforeCreate, [
-  component(
-    'Form Beta',
-    { label: 'Create form Beta', options, ref: { id: '#formId' } },
-    [
-      FormSuccessAlert({ ref: { id: '#alertSuccessId' } }),
-      FormErrorAlert({ ref: { id: '#alertErrorId' } }),
-    ],
-  ),
+  Form('Create Form Beta', true),
 ]);
