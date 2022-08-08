@@ -1,5 +1,4 @@
 import {
-  model,
   filter,
   property,
   option,
@@ -16,12 +15,13 @@ import {
   endpoint,
   sizes,
   reconfigure,
+  modelAndRelation,
 } from '@betty-blocks/component-sdk';
 import { advanced } from './advanced';
 
 export const options = {
   reconfigure: reconfigure('Reconfigure', { value: '' }),
-  model: model('Model', { value: '' }),
+  model: modelAndRelation('Model', { value: '' }),
   filter: filter('Filter', {
     value: {},
     configuration: {

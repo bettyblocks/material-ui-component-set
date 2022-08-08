@@ -1,6 +1,5 @@
 import {
   filter,
-  model,
   property,
   option,
   hideIf,
@@ -11,11 +10,12 @@ import {
   variable,
   toggle,
   showIfTrue,
+  modelAndRelation,
 } from '@betty-blocks/component-sdk';
 import { advanced } from './advanced';
 
 export const options = {
-  model: model('Model', { value: '' }),
+  model: modelAndRelation('Model', { value: '' }),
   filter: filter('Filter', {
     value: {},
     configuration: {
