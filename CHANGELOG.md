@@ -1,3 +1,10 @@
+# [2.14.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.13.0...v2.14.0) (2022-08-08)
+
+
+### Features
+
+* add option categories to logic components TMPLT-1635 ([9cdc737](https://github.com/bettyblocks/material-ui-component-set/commit/9cdc7376208d4b090c46f66d6fe0d3c5d5744670))
+
 # [2.13.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.12.0...v2.13.0) (2022-08-08)
 
 
