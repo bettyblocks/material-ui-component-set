@@ -1,3 +1,10 @@
+# [2.15.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.14.0...v2.15.0) (2022-08-08)
+
+
+### Features
+
+* add option categories to card components TMPLT-1634 ([54e95e9](https://github.com/bettyblocks/material-ui-component-set/commit/54e95e9d7f245e6fc20dc0a5eb09a01cc7156559))
+
 # [2.14.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.13.0...v2.14.0) (2022-08-08)
 
 
