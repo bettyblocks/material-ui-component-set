@@ -1,7 +1,9 @@
 import { Icon, prefab, variable } from '@betty-blocks/component-sdk';
-import { CardActions } from './structures/CardActions';
-import { OpenPageButton } from './structures/OpenPage';
-import { openPageButtonOptions } from './structures/OpenPage/options/index';
+import {
+  CardActions,
+  OpenPageButton,
+  openPageButtonOptions,
+} from './structures';
 
 const attr = {
   icon: Icon.CardActionsIcon,

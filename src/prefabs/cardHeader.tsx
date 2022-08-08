@@ -1,5 +1,5 @@
 import { Icon, prefab } from '@betty-blocks/component-sdk';
-import { CardHeader } from './structures/CardHeader';
+import { CardHeader } from './structures';
 
 const attr = {
   icon: Icon.CardHeaderIcon,

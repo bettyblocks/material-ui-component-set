@@ -1,22 +1,19 @@
 import { Icon, prefab, variable } from '@betty-blocks/component-sdk';
-import { AppBar } from './structures/Appbar';
-import { OpenPageButton } from './structures/OpenPage';
-import { openPageButtonOptions } from './structures/OpenPage/options';
+import { AppBar, OpenPageButton, openPageButtonOptions } from './structures';
 
 const attr = {
   icon: Icon.NavbarIcon,
   category: 'NAVIGATION',
   keywords: ['Navigation', 'bar', 'navigationbar', 'menu', 'navbar', 'appbar'],
 };
-const optionsA = { ...openPageButtonOptions };
-const optionsB = { ...openPageButtonOptions };
-optionsA.buttonText = variable('Button text', { value: ['Menu 1'] });
-optionsB.buttonText = variable('Button text', { value: ['Menu 2'] });
 
 export default prefab('Navigation Bar', attr, undefined, [
   AppBar({}, [
     OpenPageButton({
-      options: optionsA,
+      options: {
+        ...openPageButtonOptions,
+        buttonText: variable('Button text', { value: ['Menu 1'] }),
+      },
       style: {
         overwrite: {
           boxShadow: 'none',
@@ -26,7 +23,10 @@ export default prefab('Navigation Bar', attr, undefined, [
       },
     }),
     OpenPageButton({
-      options: optionsB,
+      options: {
+        ...openPageButtonOptions,
+        buttonText: variable('Button text', { value: ['Menu 2'] }),
+      },
       style: {
         overwrite: {
           boxShadow: 'none',

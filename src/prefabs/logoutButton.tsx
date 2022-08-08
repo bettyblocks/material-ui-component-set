@@ -6,8 +6,7 @@ import {
   PrefabInteraction,
   variable,
 } from '@betty-blocks/component-sdk';
-import { Button } from './structures/Button';
-import { buttonOptions } from './structures/Button/options';
+import { Button, buttonOptions } from './structures';
 
 const beforeCreate = ({
   prefab,
