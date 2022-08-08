@@ -1,10 +1,12 @@
 import { Icon, prefab, variable } from '@betty-blocks/component-sdk';
-import { Drawer } from './structures/Drawer';
-import { DrawerBar } from './structures/DrawerBar';
-import { DrawerContainer } from './structures/DrawerContainer';
-import { List } from './structures/List';
-import { ListItem } from './structures/ListItem';
-import { options } from './structures/ListItem/options';
+import {
+  Drawer,
+  DrawerBar,
+  DrawerContainer,
+  List,
+  ListItem,
+  listItemOptions,
+} from './structures';
 
 const attrs = {
   icon: Icon.DrawerIcon,
@@ -12,13 +14,20 @@ const attrs = {
   keywords: ['Layout', 'drawer', 'sidebar'],
 };
 
-options.secondaryText = variable('Secondary text', {
-  value: ['Secondary text'],
-});
-
 export default prefab('Drawer', attrs, undefined, [
   Drawer({}, [
-    DrawerBar({}, [List({}, [ListItem({ options })])]),
+    DrawerBar({}, [
+      List({}, [
+        ListItem({
+          options: {
+            ...listItemOptions,
+            secondaryText: variable('Secondary text', {
+              value: ['Secondary text'],
+            }),
+          },
+        }),
+      ]),
+    ]),
     DrawerContainer({}),
   ]),
 ]);

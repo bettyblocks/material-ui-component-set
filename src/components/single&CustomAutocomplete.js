@@ -159,7 +159,7 @@
     const label = useText(labelRaw);
     const defaultValue = useText(valueRaw, { rawValue: true });
 
-    const initalValue = defaultValue.replace(/\n/g, '');
+    const initialValue = defaultValue.replace(/\n/g, '');
 
     /*
      * Selected value of the autocomplete.
@@ -168,7 +168,7 @@
      * In case of freeSolo the type is string or and array of strings.
      *
      */
-    const [value, setValue] = useState(initalValue);
+    const [value, setValue] = useState(initialValue);
 
     /*
      * User input in the autocomplete. In case of freeSolo this is the same as `value`
@@ -539,6 +539,13 @@
     const getValue = () => {
       return value;
     };
+
+    useEffect(() => {
+      if (currentOptions.length !== 0) {
+        setValue(initialValue);
+        setInputValue(initialValue);
+      }
+    }, [initialValue]);
 
     /*
      * Convert `Autocomplete` `value` into a value the hidden input accepts (a string)

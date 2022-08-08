@@ -17579,6 +17579,9 @@
                             },
                             options: [
                               {
+                                ref: {
+                                  id: '#dataTableTitleContent',
+                                },
                                 type: 'VARIABLE',
                                 label: 'Content',
                                 key: 'content',
@@ -18433,8 +18436,12 @@
                         ref: {
                           id: '#createDialog',
                         },
+                        label: 'Create dialog',
                         options: [
                           {
+                            ref: {
+                              id: '#createDialogVisibility',
+                            },
                             label: 'Toggle visibility',
                             key: 'isVisible',
                             value: false,
@@ -19359,8 +19366,14 @@
                                         descendants: [
                                           {
                                             name: 'Text',
+                                            ref: {
+                                              id: '#createDialogTitle',
+                                            },
                                             options: [
                                               {
+                                                ref: {
+                                                  id: '#createDialogTitleContent',
+                                                },
                                                 type: 'VARIABLE',
                                                 label: 'Content',
                                                 key: 'content',
@@ -21736,8 +21749,12 @@
                         ref: {
                           id: '#detailsDialog',
                         },
+                        label: 'Details dialog',
                         options: [
                           {
+                            ref: {
+                              id: '#detailsDialogVisibility',
+                            },
                             label: 'Toggle visibility',
                             key: 'isVisible',
                             value: false,
@@ -22662,8 +22679,14 @@
                                         descendants: [
                                           {
                                             name: 'Text',
+                                            ref: {
+                                              id: '#detailsDialogTitle',
+                                            },
                                             options: [
                                               {
+                                                ref: {
+                                                  id: '#detailsDialogTitleContent',
+                                                },
                                                 type: 'VARIABLE',
                                                 label: 'Content',
                                                 key: 'content',
@@ -25221,8 +25244,12 @@
                         ref: {
                           id: '#updateDialog',
                         },
+                        label: 'Update dialog',
                         options: [
                           {
+                            ref: {
+                              id: '#updateDialogVisibility',
+                            },
                             label: 'Toggle visibility',
                             key: 'isVisible',
                             value: false,
@@ -26147,8 +26174,14 @@
                                         descendants: [
                                           {
                                             name: 'Text',
+                                            ref: {
+                                              id: '#updateDialogTitle',
+                                            },
                                             options: [
                                               {
+                                                ref: {
+                                                  id: '#updateDialogTitleContent',
+                                                },
                                                 type: 'VARIABLE',
                                                 label: 'Content',
                                                 key: 'content',
@@ -29659,8 +29692,12 @@
                         ref: {
                           id: '#deleteDialog',
                         },
+                        label: 'Delete dialog',
                         options: [
                           {
+                            ref: {
+                              id: '#deleteDialogVisibility',
+                            },
                             label: 'Toggle visibility',
                             key: 'isVisible',
                             value: false,
@@ -30744,8 +30781,14 @@
                                             descendants: [
                                               {
                                                 name: 'Text',
+                                                ref: {
+                                                  id: '#deleteDialogTitle',
+                                                },
                                                 options: [
                                                   {
+                                                    ref: {
+                                                      id: '#deleteDialogTitleContent',
+                                                    },
                                                     type: 'VARIABLE',
                                                     label: 'Content',
                                                     key: 'content',
