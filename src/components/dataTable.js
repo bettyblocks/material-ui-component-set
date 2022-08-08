@@ -443,7 +443,6 @@
       if (isDev) return;
       B.triggerEvent('OnRowClick', endpoint, context);
 
-      B.triggerEvent('sendRowId', context.modelData.id);
       if (hasLink) {
         history.push(endpoint);
       }
