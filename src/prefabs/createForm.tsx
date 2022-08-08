@@ -4,10 +4,6 @@ import {
   Icon,
   InteractionType,
   PrefabInteraction,
-  option,
-  model as modelSdk,
-  filter,
-  component,
 } from '@betty-blocks/component-sdk';
 import { Form } from './structures/ActionJSForm';
 

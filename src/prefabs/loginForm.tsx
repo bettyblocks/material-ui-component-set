@@ -3,12 +3,8 @@ import {
   Icon,
   InteractionType,
   PrefabInteraction,
-  component,
-  model as modelSDK,
-  option,
   prefab,
 } from '@betty-blocks/component-sdk';
-import { FormErrorAlert } from './structures/Alert';
 import { Form } from './structures/ActionJSForm';
 
 const beforeCreate = ({
