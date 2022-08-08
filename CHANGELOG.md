@@ -1,3 +1,17 @@
+# [2.13.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.12.0...v2.13.0) (2022-08-08)
+
+
+### Features
+
+* add option category to list category components TMPLT-1633 ([d82d153](https://github.com/bettyblocks/material-ui-component-set/commit/d82d1530c07555425c6e4eed1eebdc973ebbbc7e))
+
+# [2.12.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.11.2...v2.12.0) (2022-08-05)
+
+
+### Features
+
+* bump cli and sdk versions ([9c6bf52](https://github.com/bettyblocks/material-ui-component-set/commit/9c6bf525006766e592320098137551a783f85dff))
+
 ## [2.11.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.11.1...v2.11.2) (2022-08-03)
 
 
