@@ -1,5 +1,5 @@
 import { prefab, Icon } from '@betty-blocks/component-sdk';
-import { ListSubHeader } from './structures/ListSubHeader';
+import { ListSubHeader } from './structures';
 
 const attr = {
   icon: Icon.OrderedListIcon,
