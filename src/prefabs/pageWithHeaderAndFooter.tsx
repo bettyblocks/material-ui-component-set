@@ -34,7 +34,7 @@ import {
 } from './structures';
 
 const attrs = {
-  name: 'Header and footer new',
+  name: 'Header and footer',
   icon: Icon.NavbarIcon,
   type: 'page',
   description: 'Full height page with a header and footer',
