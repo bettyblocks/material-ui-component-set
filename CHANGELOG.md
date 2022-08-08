@@ -1,3 +1,10 @@
+# [2.18.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.17.0...v2.18.0) (2022-08-08)
+
+
+### Features
+
+* add option category to navigation components TMPLT-1629 ([09f9565](https://github.com/bettyblocks/material-ui-component-set/commit/09f956525f3be620dadf7270218f26f221d048d5))
+
 # [2.17.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.16.0...v2.17.0) (2022-08-08)
 
 
