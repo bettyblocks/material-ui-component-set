@@ -4,8 +4,13 @@ import {
   Icon,
   InteractionType,
   PrefabInteraction,
+  option,
+  model,
+  filter,
+  component,
 } from '@betty-blocks/component-sdk';
 import { Form } from './structures/ActionJSForm';
+import { FormErrorAlert, FormSuccessAlert } from './structures/Alert';
 
 const beforeCreate = ({
   close,
@@ -338,6 +343,19 @@ const attributes = {
   interactions,
 };
 
+const options = {
+  actionId: option('ACTION_JS', { label: 'Action', value: '' }),
+  modelId: model('Model'),
+  filter: filter('Filter', { configuration: { dependsOn: 'modelId' } }),
+};
+
 export default prefab('Create Form Beta', attributes, beforeCreate, [
-  Form('Create Form Beta'),
+  component(
+    'Form Beta',
+    { label: 'Create form Beta', options, ref: { id: '#formId' } },
+    [
+      FormSuccessAlert({ ref: { id: '#alertSuccessId' } }),
+      FormErrorAlert({ ref: { id: '#alertErrorId' } }),
+    ],
+  ),
 ]);

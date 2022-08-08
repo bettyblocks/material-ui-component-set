@@ -1,11 +1,14 @@
 import * as React from 'react';
 import {
-  prefab,
-  PrefabInteraction,
-  InteractionType,
   Icon,
+  InteractionType,
+  PrefabInteraction,
+  component,
+  model,
+  option,
+  prefab,
 } from '@betty-blocks/component-sdk';
-import { Form } from './structures/ActionJSForm';
+import { FormErrorAlert } from './structures/Alert';
 
 const beforeCreate = ({
   close,
@@ -244,6 +247,15 @@ const attributes = {
   interactions,
 };
 
+const options = {
+  actionId: option('ACTION_JS', { label: 'Action', value: '' }),
+  modelId: model('Model'),
+};
+
 export default prefab('Login Form Beta', attributes, beforeCreate, [
-  Form('Login Form Beta'),
+  component(
+    'Form Beta',
+    { label: 'Login form Beta', options, ref: { id: '#formId' } },
+    [FormErrorAlert({ ref: { id: '#alertErrorId' } })],
+  ),
 ]);
