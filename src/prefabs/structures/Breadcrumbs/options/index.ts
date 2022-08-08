@@ -5,9 +5,17 @@ import {
   showIf,
   icon,
 } from '@betty-blocks/component-sdk';
-import { advanced } from './advanced';
+import { advanced } from '../../advanced';
 
-export const options = {
+export const categories = [
+  {
+    label: 'Advanced settings',
+    expanded: false,
+    members: ['dataComponentAttribute'],
+  },
+];
+
+export const breadcrumbsOptions = {
   maxItems: option('CUSTOM', {
     label: 'Max Items',
     value: '0',
@@ -96,5 +104,5 @@ export const options = {
     },
   }),
 
-  ...advanced,
+  ...advanced('Breadcrumbs'),
 };
