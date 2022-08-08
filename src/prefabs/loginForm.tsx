@@ -114,6 +114,7 @@ const beforeCreate = ({
           }
 
           if (!model) {
+            // eslint-disable-next-line no-console
             console.warn('Model not found');
           }
 
@@ -136,7 +137,7 @@ const beforeCreate = ({
           authProfile.properties.forEach((property) => {
             const { kind, name } = property;
             const variable = result.variables.find(
-              (variable) => variable.name === name,
+              (foundVariable) => foundVariable.name === name,
             );
 
             switch (kind) {
