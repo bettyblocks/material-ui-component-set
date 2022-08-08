@@ -55,7 +55,7 @@ const beforeCreate = ({
     PropertyKind,
     cloneStructure,
     createUuid,
-    makeBettyInput,
+    makeBettyUpdateInput,
     prepareAction,
     useCurrentPartialId,
     useCurrentPageId,
@@ -348,7 +348,7 @@ const beforeCreate = ({
             switch (kind) {
               case PropertyKind.BELONGS_TO: {
                 structure.descendants.push(
-                  makeBettyInput(
+                  makeBettyUpdateInput(
                     BettyPrefabs.AUTO_COMPLETE,
                     model,
                     property,
@@ -361,7 +361,7 @@ const beforeCreate = ({
               case PropertyKind.HAS_MANY:
               case PropertyKind.HAS_AND_BELONGS_TO_MANY:
                 structure.descendants.push(
-                  makeBettyInput(
+                  makeBettyUpdateInput(
                     BettyPrefabs.MULTI_AUTO_COMPLETE,
                     model,
                     property,
@@ -372,7 +372,7 @@ const beforeCreate = ({
                 break;
               case PropertyKind.DATE_TIME:
                 structure.descendants.push(
-                  makeBettyInput(
+                  makeBettyUpdateInput(
                     BettyPrefabs.DATE_TIME,
                     model,
                     property,
@@ -382,17 +382,27 @@ const beforeCreate = ({
                 break;
               case PropertyKind.DATE:
                 structure.descendants.push(
-                  makeBettyInput(BettyPrefabs.DATE, model, property, variable),
+                  makeBettyUpdateInput(
+                    BettyPrefabs.DATE,
+                    model,
+                    property,
+                    variable,
+                  ),
                 );
                 break;
               case PropertyKind.TIME:
                 structure.descendants.push(
-                  makeBettyInput(BettyPrefabs.TIME, model, property, variable),
+                  makeBettyUpdateInput(
+                    BettyPrefabs.TIME,
+                    model,
+                    property,
+                    variable,
+                  ),
                 );
                 break;
               case PropertyKind.DECIMAL:
                 structure.descendants.push(
-                  makeBettyInput(
+                  makeBettyUpdateInput(
                     BettyPrefabs.DECIMAL,
                     model,
                     property,
@@ -402,7 +412,7 @@ const beforeCreate = ({
                 break;
               case PropertyKind.EMAIL_ADDRESS:
                 structure.descendants.push(
-                  makeBettyInput(
+                  makeBettyUpdateInput(
                     BettyPrefabs.EMAIL_ADDRESS,
                     model,
                     property,
@@ -412,17 +422,27 @@ const beforeCreate = ({
                 break;
               case PropertyKind.IBAN:
                 structure.descendants.push(
-                  makeBettyInput(BettyPrefabs.IBAN, model, property, variable),
+                  makeBettyUpdateInput(
+                    BettyPrefabs.IBAN,
+                    model,
+                    property,
+                    variable,
+                  ),
                 );
                 break;
               case PropertyKind.LIST:
                 structure.descendants.push(
-                  makeBettyInput(BettyPrefabs.LIST, model, property, variable),
+                  makeBettyUpdateInput(
+                    BettyPrefabs.LIST,
+                    model,
+                    property,
+                    variable,
+                  ),
                 );
                 break;
               case PropertyKind.PASSWORD:
                 structure.descendants.push(
-                  makeBettyInput(
+                  makeBettyUpdateInput(
                     BettyPrefabs.PASSWORD,
                     model,
                     property,
@@ -432,7 +452,7 @@ const beforeCreate = ({
                 break;
               case PropertyKind.PHONE_NUMBER:
                 structure.descendants.push(
-                  makeBettyInput(
+                  makeBettyUpdateInput(
                     BettyPrefabs.PHONE_NUMBER,
                     model,
                     property,
@@ -442,17 +462,27 @@ const beforeCreate = ({
                 break;
               case PropertyKind.PRICE:
                 structure.descendants.push(
-                  makeBettyInput(BettyPrefabs.PRICE, model, property, variable),
+                  makeBettyUpdateInput(
+                    BettyPrefabs.PRICE,
+                    model,
+                    property,
+                    variable,
+                  ),
                 );
                 break;
               case PropertyKind.URL:
                 structure.descendants.push(
-                  makeBettyInput(BettyPrefabs.URL, model, property, variable),
+                  makeBettyUpdateInput(
+                    BettyPrefabs.URL,
+                    model,
+                    property,
+                    variable,
+                  ),
                 );
                 break;
               case PropertyKind.STRING:
                 structure.descendants.push(
-                  makeBettyInput(
+                  makeBettyUpdateInput(
                     BettyPrefabs.STRING,
                     model,
                     property,
@@ -462,12 +492,17 @@ const beforeCreate = ({
                 break;
               case PropertyKind.TEXT:
                 structure.descendants.push(
-                  makeBettyInput(BettyPrefabs.TEXT, model, property, variable),
+                  makeBettyUpdateInput(
+                    BettyPrefabs.TEXT,
+                    model,
+                    property,
+                    variable,
+                  ),
                 );
                 break;
               case PropertyKind.INTEGER:
                 structure.descendants.push(
-                  makeBettyInput(
+                  makeBettyUpdateInput(
                     BettyPrefabs.INTEGER,
                     model,
                     property,
@@ -477,7 +512,7 @@ const beforeCreate = ({
                 break;
               case PropertyKind.BOOLEAN:
                 structure.descendants.push(
-                  makeBettyInput(
+                  makeBettyUpdateInput(
                     BettyPrefabs.BOOLEAN,
                     model,
                     property,
@@ -487,7 +522,7 @@ const beforeCreate = ({
                 break;
               default:
                 structure.descendants.push(
-                  makeBettyInput(
+                  makeBettyUpdateInput(
                     BettyPrefabs.STRING,
                     model,
                     property,
@@ -500,7 +535,7 @@ const beforeCreate = ({
           });
 
           structure.descendants.push(
-            makeBettyInput(
+            makeBettyUpdateInput(
               BettyPrefabs.HIDDEN,
               model,
               idProperty,
