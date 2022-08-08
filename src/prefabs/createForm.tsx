@@ -5,11 +5,10 @@ import {
   InteractionType,
   PrefabInteraction,
   option,
-  model,
+  model as modelSdk,
   filter,
   component,
 } from '@betty-blocks/component-sdk';
-import { Form } from './structures/ActionJSForm';
 import { FormErrorAlert, FormSuccessAlert } from './structures/Alert';
 
 const beforeCreate = ({
@@ -276,14 +275,14 @@ const beforeCreate = ({
           if (validate()) {
             const newPrefab = { ...originalPrefab };
 
-            setOption(newPrefab.structure[0], 'actionId', (option) => ({
-              ...option,
+            setOption(newPrefab.structure[0], 'actionId', (options) => ({
+              ...options,
               value: result.action.actionId,
               configuration: { disabled: true },
             }));
 
-            setOption(newPrefab.structure[0], 'model', (option) => ({
-              ...option,
+            setOption(newPrefab.structure[0], 'model', (options) => ({
+              ...options,
               value: modelId,
               configuration: {
                 disabled: true,
@@ -345,7 +344,7 @@ const attributes = {
 
 const options = {
   actionId: option('ACTION_JS', { label: 'Action', value: '' }),
-  modelId: model('Model'),
+  modelId: modelSdk('Model'),
   filter: filter('Filter', { configuration: { dependsOn: 'modelId' } }),
 };
 

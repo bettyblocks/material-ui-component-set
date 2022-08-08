@@ -4,7 +4,7 @@ import {
   InteractionType,
   PrefabInteraction,
   component,
-  model,
+  model as modelSDK,
   option,
   prefab,
 } from '@betty-blocks/component-sdk';
@@ -188,15 +188,15 @@ const beforeCreate = ({
           const newPrefab = { ...originalPrefab };
 
           // eslint-disable-next-line @typescript-eslint/no-shadow
-          setOption(newPrefab.structure[0], 'actionId', (option) => ({
-            ...option,
+          setOption(newPrefab.structure[0], 'actionId', (options) => ({
+            ...options,
             value: result.action.actionId,
             configuration: { disabled: true },
           }));
 
           if (authProfile) {
-            setOption(newPrefab.structure[0], 'modelId', (option) => ({
-              ...option,
+            setOption(newPrefab.structure[0], 'modelId', (options) => ({
+              ...options,
               value: authProfile.loginModel,
               configuration: {
                 disabled: true,
@@ -249,7 +249,7 @@ const attributes = {
 
 const options = {
   actionId: option('ACTION_JS', { label: 'Action', value: '' }),
-  modelId: model('Model'),
+  modelId: modelSDK('Model'),
 };
 
 export default prefab('Login Form Beta', attributes, beforeCreate, [
