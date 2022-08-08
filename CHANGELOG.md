@@ -1,3 +1,10 @@
+# [2.16.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.15.0...v2.16.0) (2022-08-08)
+
+
+### Features
+
+* datalist using model and relation factory type ([0eca92c](https://github.com/bettyblocks/material-ui-component-set/commit/0eca92cb28380b41614cf97bf98428611f933ced))
+
 # [2.15.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.14.0...v2.15.0) (2022-08-08)
 
 
