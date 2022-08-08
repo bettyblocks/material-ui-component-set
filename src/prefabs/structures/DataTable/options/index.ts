@@ -1,5 +1,4 @@
 import {
-  model,
   filter,
   property,
   option,
@@ -15,6 +14,7 @@ import {
   ThemeColor,
   endpoint,
   sizes,
+  modelAndRelation,
 } from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
 
@@ -68,7 +68,7 @@ export const categories = [
 ];
 
 export const dataTableOptions = {
-  model: model('Model', { value: '' }),
+  model: modelAndRelation('Model', { value: '' }),
   filter: filter('Filter', {
     value: {},
     configuration: {
