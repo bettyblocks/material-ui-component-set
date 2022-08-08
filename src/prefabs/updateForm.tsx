@@ -12,7 +12,7 @@ import {
 } from '@betty-blocks/component-sdk';
 import { FormErrorAlert, FormSuccessAlert } from './structures/Alert';
 import { updateOption } from '../utils';
-import { options as defaults } from './structures/Alert/options';
+import { alertOptions as defaults } from './structures/Alert/options';
 
 const beforeCreate = ({
   close,
