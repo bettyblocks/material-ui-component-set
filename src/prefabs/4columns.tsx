@@ -7,7 +7,7 @@ const attrs = {
   keywords: ['Layout', 'column', 'columns', '1'],
 };
 const defaultOptions = { ...columnOptions };
-columnOptions.columnWidth = option('CUSTOM', {
+defaultOptions.columnWidth = option('CUSTOM', {
   label: 'Column width',
   value: '3',
   configuration: {
@@ -113,17 +113,9 @@ defaultOptions.columnWidthMobile = option('CUSTOM', {
 
 export default prefab('4 Columns', attrs, undefined, [
   Row({}, [
-    Column({
-      options: defaultOptions,
-    }),
-    Column({
-      options: defaultOptions,
-    }),
-    Column({
-      options: defaultOptions,
-    }),
-    Column({
-      options: defaultOptions,
-    }),
+    Column({ options: defaultOptions }),
+    Column({ options: defaultOptions }),
+    Column({ options: defaultOptions }),
+    Column({ options: defaultOptions }),
   ]),
 ]);

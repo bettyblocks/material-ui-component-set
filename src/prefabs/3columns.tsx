@@ -113,9 +113,7 @@ const attrs = {
 };
 export default prefab('3 Columns', attrs, undefined, [
   Row({}, [
-    Column({
-      options: columnOptions,
-    }),
+    Column({ options: defaultOptions }),
     Column({ options: defaultOptions }),
     Column({ options: defaultOptions }),
   ]),
