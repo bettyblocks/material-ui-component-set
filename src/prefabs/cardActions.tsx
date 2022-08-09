@@ -11,10 +11,16 @@ const attr = {
   keywords: ['Cards', 'card', 'actions', 'cardactions'],
 };
 
-openPageButtonOptions.buttonText = variable('Button text', {
-  value: ['Button'],
-});
-
 export default prefab('Card Actions', attr, undefined, [
-  CardActions({}, [OpenPageButton({ options: openPageButtonOptions }, [])]),
+  CardActions({}, [
+    OpenPageButton(
+      {
+        options: {
+          ...openPageButtonOptions,
+          buttonText: variable('Button text', { value: ['Button'] }),
+        },
+      },
+      [],
+    ),
+  ]),
 ]);

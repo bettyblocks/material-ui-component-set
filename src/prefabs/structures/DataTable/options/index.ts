@@ -1,5 +1,4 @@
 import {
-  model,
   filter,
   property,
   option,
@@ -15,11 +14,12 @@ import {
   ThemeColor,
   endpoint,
   sizes,
+  modelAndRelation,
 } from '@betty-blocks/component-sdk';
 import { advanced } from './advanced';
 
 export const options = {
-  model: model('Model', { value: '' }),
+  model: modelAndRelation('Model', { value: '' }),
   filter: filter('Filter', {
     value: {},
     configuration: {

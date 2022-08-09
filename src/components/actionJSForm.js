@@ -4,11 +4,26 @@
   allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { actionId, modelId, filter = {} } = options;
-    const { Form, GetOne } = B;
+    const { actionId, model, currentRecord, filter = {} } = options;
+    const { Form, GetOne, useFilter, getIdProperty } = B;
     const formRef = React.createRef();
+    const [interactionFilter, setInteractionFilter] = useState({});
+    const [, setOptions] = useOptions();
 
     const isDev = B.env === 'dev';
+
+    const getFilter = React.useCallback(() => {
+      if (isDev || !currentRecord || !model) {
+        return filter;
+      }
+      const idProperty = getIdProperty(model);
+
+      return {
+        [idProperty.id]: { eq: currentRecord },
+      };
+    }, [isDev, filter, currentRecord, model]);
+
+    const selectedFilter = getFilter();
 
     if (isDev && children.length === 0) {
       return (
@@ -48,6 +63,93 @@
       });
     }, [formRef]);
 
+    const transformValue = (value) => {
+      if (value instanceof Date) {
+        return value.toISOString();
+      }
+
+      return value;
+    };
+
+    B.defineFunction('setCurrentRecord', (value) => {
+      const id = Number(value);
+      if (typeof id === 'number') {
+        setOptions({
+          currentRecord: id,
+        });
+      }
+    });
+
+    /**
+     * @name Filter
+     * @param {Property} property
+     * @returns {Void}
+     */
+    B.defineFunction('Filter', ({ event, property, interactionId }) => {
+      setInteractionFilter((s) => ({
+        ...s,
+        [interactionId]: {
+          property,
+          value: event.target ? event.target.value : transformValue(event),
+        },
+      }));
+    });
+
+    B.defineFunction('ResetFilter', () => {
+      setInteractionFilter({});
+    });
+
+    const deepMerge = (...objects) => {
+      const isObject = (item) =>
+        item && typeof item === 'object' && !Array.isArray(item);
+
+      return objects.reduce((accumulator, object) => {
+        Object.keys(object).forEach((key) => {
+          const accumulatorValue = accumulator[key];
+          const value = object[key];
+
+          if (Array.isArray(accumulatorValue) && Array.isArray(value)) {
+            accumulator[key] = accumulatorValue.concat(value);
+          } else if (isObject(accumulatorValue) && isObject(value)) {
+            accumulator[key] = deepMerge(accumulatorValue, value);
+          } else {
+            accumulator[key] = value;
+          }
+        });
+        return accumulator;
+      }, {});
+    };
+
+    let interactionFilters = {};
+
+    const isEmptyValue = (value) =>
+      !value || (Array.isArray(value) && value.length === 0);
+
+    const clauses = Object.entries(interactionFilter)
+      .filter(([, { value }]) => !isEmptyValue(value))
+      .map(([, { property, value }]) =>
+        property.id.reduceRight((acc, field, index, arr) => {
+          const isLast = index === arr.length - 1;
+          if (isLast) {
+            return Array.isArray(value)
+              ? {
+                  _or: value.map((el) => ({
+                    [field]: { [property.operator]: el },
+                  })),
+                }
+              : { [field]: { [property.operator]: value } };
+          }
+
+          return { [field]: acc };
+        }, {}),
+      );
+
+    interactionFilters =
+      clauses.length > 1 ? { _and: clauses } : clauses[0] || {};
+
+    const completeFilter = deepMerge(selectedFilter, interactionFilters);
+    const where = useFilter(completeFilter);
+
     function FormComponent() {
       return (
         <Form
@@ -71,10 +173,9 @@
       );
     }
 
-    const isFilterEmpty = !!filter && Object.keys(filter).length === 0;
-    if (modelId && !isFilterEmpty) {
+    if (model) {
       return (
-        <GetOne modelId={modelId} filter={!filter ? {} : filter}>
+        <GetOne modelId={model} rawFilter={where}>
           <FormComponent />
         </GetOne>
       );
