@@ -1,3 +1,43 @@
+# [2.18.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.17.0...v2.18.0) (2022-08-08)
+
+
+### Features
+
+* add option category to navigation components TMPLT-1629 ([09f9565](https://github.com/bettyblocks/material-ui-component-set/commit/09f956525f3be620dadf7270218f26f221d048d5))
+
+# [2.17.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.16.0...v2.17.0) (2022-08-08)
+
+
+### Bug Fixes
+
+* bump version ([ea344ff](https://github.com/bettyblocks/material-ui-component-set/commit/ea344ffd67dfc362dd9a48b475ff9c47af309f74))
+* datetime input failing on blank initial value ([a5597c5](https://github.com/bettyblocks/material-ui-component-set/commit/a5597c540cfa1659770c9465f4718bf030f9f8e2))
+* disable unsurported kinds ([af8bf22](https://github.com/bettyblocks/material-ui-component-set/commit/af8bf226169ec6b4722c66b2d2321b119e671c41))
+* form filter breaking in compile time ([6872243](https://github.com/bettyblocks/material-ui-component-set/commit/68722430b527c34d3a704ba67a3a83605f642e75))
+* initial date sends a blank value ([19962de](https://github.com/bettyblocks/material-ui-component-set/commit/19962dee56d26d13ea6642dc7007f652ef2e220b))
+* remove error header from form ([46af766](https://github.com/bettyblocks/material-ui-component-set/commit/46af7666645a32d101256333e2d7e7e43cd6cfee))
+* remove old code and fixed lint errors ([9cd57f3](https://github.com/bettyblocks/material-ui-component-set/commit/9cd57f304c68906285a080d72f687ffc70dbfe06))
+* remove unused custom interactions ([93701bd](https://github.com/bettyblocks/material-ui-component-set/commit/93701bd7d5a41ae17d335ecc5a50140153fa0b51))
+* restore previous create form ([65c98fb](https://github.com/bettyblocks/material-ui-component-set/commit/65c98fbbf634e9418cafc913a74bd90495330e37))
+* unused import ([bf08004](https://github.com/bettyblocks/material-ui-component-set/commit/bf080044d1f7e19e3ea98886ecbe0c07cec1dbec))
+* update form sends correct arguments ([6b9f961](https://github.com/bettyblocks/material-ui-component-set/commit/6b9f961953d8158cc991f468ea5c2fcde2b697c8))
+* use new makeUpdateBettyInput ([7cda5f8](https://github.com/bettyblocks/material-ui-component-set/commit/7cda5f871454d70588fa110853c6ca7b472d6c0e))
+
+
+### Features
+
+*  another page context ([3d9ae0f](https://github.com/bettyblocks/material-ui-component-set/commit/3d9ae0ff1e7bc9d5a6ef8a9c39aaaab1a5f86804))
+* add filter interaction ([349c762](https://github.com/bettyblocks/material-ui-component-set/commit/349c76238edcd1a6dfb5953d7f5860ffa84670ca))
+* add loading state ([33e907e](https://github.com/bettyblocks/material-ui-component-set/commit/33e907e415583ffb87c266469761031bcb3abdb6))
+* added new child selector option to tabs and stepper ([daad29a](https://github.com/bettyblocks/material-ui-component-set/commit/daad29a23594fe5c8483b4e0765496bddb0822e2))
+* added prepareAction helper in the beta create form ([47b42d8](https://github.com/bettyblocks/material-ui-component-set/commit/47b42d82f648c612fc75e62150f08559257d7f40))
+* fix hidden prefab ([fdf26d7](https://github.com/bettyblocks/material-ui-component-set/commit/fdf26d7648c57b9e10fa5d17935921e7f2373d74))
+* fix update form not creating endpoint variables ([1a0b8be](https://github.com/bettyblocks/material-ui-component-set/commit/1a0b8bedb48142bbe160dd60132c321d06ae2748))
+* implement wrapper in card view ([1895f24](https://github.com/bettyblocks/material-ui-component-set/commit/1895f24e65a664cb588f76adfd73c22591bfe590))
+* implement wrapper in list view ([680c407](https://github.com/bettyblocks/material-ui-component-set/commit/680c407c1ba8b4e7778fc05417b21c5d24b876d4))
+* switch to setCurrentRecord for updare form ([d89136d](https://github.com/bettyblocks/material-ui-component-set/commit/d89136dfbea7dbebce597d821962370ba8810360))
+* update form with context ([961d785](https://github.com/bettyblocks/material-ui-component-set/commit/961d78588c1af963a790ec144eadb87bf46e5934))
+
 # [2.16.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.15.0...v2.16.0) (2022-08-08)
 
 
