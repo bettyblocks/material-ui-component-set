@@ -1,4 +1,5 @@
 import {
+  OptionCategory,
   OptionProducer,
   PrefabComponentStyle,
 } from '@betty-blocks/component-sdk';
@@ -14,4 +15,5 @@ export interface Configuration {
   inputType?: string;
   placeholder?: string;
   dataComponentAttribute?: string;
+  optionCategories?: OptionCategory[];
 }

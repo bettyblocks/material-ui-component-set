@@ -5,15 +5,17 @@ import {
   toggle,
   variable,
 } from '@betty-blocks/component-sdk';
-import { Card } from './structures/Card';
-import { CardActions } from './structures/CardActions';
-import { CardContent } from './structures/CardContent';
-import { CardHeader } from './structures/CardHeader';
-import { CardMedia } from './structures/CardMedia';
-import { Text } from './structures/Text';
-import { OpenPageButton } from './structures/OpenPage';
-import { options as textOptions } from './structures/Text/options/index';
-import { options as openPageButtonOptions } from './structures/OpenPage/options/index';
+import {
+  Card,
+  CardActions,
+  CardContent,
+  CardHeader,
+  CardMedia,
+  OpenPageButton,
+  Text,
+  openPageButtonOptions,
+  textOptions,
+} from './structures';
 
 const attr = {
   icon: Icon.CardIcon,
