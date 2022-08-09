@@ -16,5 +16,5 @@ export const dividerOptions = {
     value: ['M', '0rem', 'M', '0rem'],
   }),
 
-  ...advanced('divider'),
+  ...advanced('Divider'),
 };

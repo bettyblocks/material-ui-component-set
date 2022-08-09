@@ -76,5 +76,5 @@ export const snackbarOptions = {
     },
   }),
 
-  ...advanced('snackbar'),
+  ...advanced('Snackbar'),
 };

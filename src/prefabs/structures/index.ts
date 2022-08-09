@@ -62,7 +62,7 @@ import { TextInput } from './TextInput';
 // Import all prefab options here
 import { options as actionButtonOptions } from './ActionButton/options';
 import { options as actionJSButtonOptions } from './ActionJSButton/options';
-import { options as alertOptions } from './Alert/options';
+import { alertOptions } from './Alert/options';
 import { options as appBarOptions } from './Appbar/options';
 import { options as autocompleteInputOptions } from './AutocompleteInput/options';
 import { avatarOptions } from './Avatar/options';
@@ -87,7 +87,7 @@ import { options as dataTableOptions } from './DataTable/options';
 import { options as dataTableColumnOptions } from './DataTableColumn/options';
 import { options as dateTimePickerOptions } from './DateTimePicker/options';
 import { options as detailViewChildOptions } from './DetailViewChild/options';
-import { options as dialogOptions } from './Dialog/options';
+import { dialogOptions } from './Dialog/options';
 import { dividerOptions } from './Divider/options';
 import { options as drawerOptions } from './Drawer/options';
 import { options as drawerBarOptions } from './DrawerBar/options';
