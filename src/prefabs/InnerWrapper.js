@@ -7,10 +7,30 @@
     {
       type: 'WRAPPER',
       label: 'outer wrapper',
-      optionCategories: [{ label: 'FOO', members: ['0'] }],
+      optionCategories: [
+        {
+          label: 'FOO',
+          members: ['0'],
+          // condition: {
+          //   type: 'SHOW',
+          //   option: '1',
+          //   comparator: 'EQ',
+          //   value: true,
+          // },
+        },
+      ],
       options: [
         {
           key: '0',
+          label: 'link_one',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: '1',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
           type: 'LINKED_OPTION',
           value: {
             ref: {
@@ -22,6 +42,7 @@
         {
           key: '1',
           type: 'LINKED_OPTION',
+          label: 'link_two',
           value: {
             ref: {
               componentId: '#componentId2',
@@ -64,9 +85,6 @@
               },
             },
             {
-              ref: {
-                id: '#componentId1OptionId1',
-              },
               value: 'transparent',
               label: 'Background color',
               key: 'backgroundColor',
@@ -85,6 +103,9 @@
               type: 'TOGGLE',
             },
             {
+              ref: {
+                id: '#componentId1OptionId1',
+              },
               type: 'VARIABLE',
               label: 'Test attribute',
               key: 'dataComponentAttribute',
