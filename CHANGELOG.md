@@ -1,3 +1,10 @@
+# [2.19.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.18.0...v2.19.0) (2022-08-09)
+
+
+### Features
+
+* add optioncategories to button category ([d9fd813](https://github.com/bettyblocks/material-ui-component-set/commit/d9fd8133934d88d74d88a832730e09671dcaa282))
+
 # [2.18.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.17.0...v2.18.0) (2022-08-08)
 
 

@@ -1,5 +1,5 @@
 import { Icon, prefab } from '@betty-blocks/component-sdk';
-import { ActionButton } from './structures/ActionButton';
+import { ActionButton } from './structures';
 
 const actions = [
   {
