@@ -192,7 +192,7 @@ const beforeCreate = ({
           }));
 
           if (authProfile) {
-            setOption(newPrefab.structure[0], 'modelId', (options) => ({
+            setOption(newPrefab.structure[0], 'model', (options) => ({
               ...options,
               value: authProfile.loginModel,
               configuration: {
