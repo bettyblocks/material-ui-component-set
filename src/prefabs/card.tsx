@@ -11,10 +11,10 @@ import {
   CardContent,
   CardHeader,
   CardMedia,
-  OpenPageButton,
   Text,
-  openPageButtonOptions,
+  OpenPageButton,
   textOptions,
+  openPageButtonOptions,
 } from './structures';
 
 const attr = {
