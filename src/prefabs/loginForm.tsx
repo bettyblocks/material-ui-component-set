@@ -56,6 +56,13 @@ const beforeCreate = ({
     },
   });
 
+  function serializeParameters(obj: Object) {
+    return Object.entries(obj).map(([name, entry]) => ({
+      name,
+      value: entry.map((v) => JSON.stringify(v)),
+    }));
+  }
+
   return (
     <>
       <Header onClose={close} title="Configure login form" />
@@ -183,6 +190,15 @@ const beforeCreate = ({
           );
 
           const newPrefab = { ...originalPrefab };
+
+          newPrefab.interactions[0].parameters = [
+            {
+              parameter: 'redirectTo',
+              pageId: endpoint.pageId,
+              endpointId: endpoint.id,
+              parameters: serializeParameters(endpoint.params),
+            },
+          ];
 
           // eslint-disable-next-line @typescript-eslint/no-shadow
           setOption(newPrefab.structure[0], 'actionId', (options) => ({
