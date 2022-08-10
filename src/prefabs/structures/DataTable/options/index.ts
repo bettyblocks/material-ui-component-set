@@ -14,7 +14,6 @@ import {
   ThemeColor,
   endpoint,
   sizes,
-  reconfigure,
   modelAndRelation,
   reconfigure,
 } from '@betty-blocks/component-sdk';
