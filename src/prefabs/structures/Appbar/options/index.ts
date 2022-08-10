@@ -46,12 +46,33 @@ export const options = {
     },
   }),
   title: variable('Title', { value: ['App Bar'] }),
+  type: option('CUSTOM', {
+    label: 'Media type',
+    value: 'url',
+    configuration: {
+      as: 'BUTTONGROUP',
+      dataType: 'string',
+      allowedInput: [
+        { name: 'Image', value: 'img' },
+        { name: 'URL', value: 'url' },
+      ],
+    },
+  }),
   logoSource: option('PUBLIC_FILE', {
     label: 'Logo',
     value: '',
     configuration: {
       mediaType: 'IMAGE',
       allowedExtensions: ['image/*'],
+      condition: showIf('type', 'EQ', 'img'),
+    },
+  }),
+  urlFileSource: variable('Source', {
+    value: [''],
+    configuration: {
+      placeholder: 'Starts with https:// or http://',
+      as: 'MULTILINE',
+      condition: showIf('type', 'EQ', 'url'),
     },
   }),
   logoWidth: size('Logo Width', {

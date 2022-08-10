@@ -10,7 +10,9 @@
       position,
       title,
       logoSource,
+      urlFileSource,
       endpoint,
+      type,
       appBarVariant,
       toolbarVariant,
       square,
@@ -36,12 +38,36 @@
     const LogoCmp = logoUrl !== '' && (
       <img src={logoUrl} className={classes.logo} alt={alt} />
     );
-    const LogoComponent = endpoint.id ? (
-      // eslint-disable-next-line jsx-a11y/anchor-is-valid
-      <Link endpoint={endpoint}>{LogoCmp}</Link>
-    ) : (
-      LogoCmp
-    );
+    const logo = useText(urlFileSource);
+    const LogoComp = logo && <img src={logo} className={classes.logo} alt="" />;
+
+    const LogoComponent =
+      type === 'img' && endpoint.id ? (
+        // eslint-disable-next-line jsx-a11y/anchor-is-valid
+        <Link endpoint={endpoint}>{LogoCmp}</Link>
+      ) : (
+        LogoCmp
+      );
+    const LogoComponentUrl =
+      type === 'url' && endpoint.id ? (
+        // eslint-disable-next-line jsx-a11y/anchor-is-valid
+        <Link endpoint={endpoint}>{LogoComp}</Link>
+      ) : (
+        LogoComp
+      );
+
+    function getLogo() {
+      switch (true) {
+        case type === 'img':
+          return LogoComponent;
+        case type === 'url':
+          return LogoComponentUrl;
+        default:
+          return '';
+      }
+    }
+
+    const initialLogo = getLogo();
 
     const AppBarComponent = (
       <AppBar
@@ -53,7 +79,7 @@
         data-component={useText(dataComponentAttribute) || 'AppBar'}
       >
         <Toolbar variant={toolbarVariant} classes={{ root: classes.toolbar }}>
-          {logoUrl !== '' && LogoComponent}
+          {initialLogo}
           <Typography
             variant="h6"
             noWrap
