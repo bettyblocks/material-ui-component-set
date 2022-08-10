@@ -61,7 +61,7 @@ const beforeCreate = ({
             );
             throw new Error(errorMessage);
           }
-          structure.options[1] = {
+          structure.options[0] = {
             value: modelId,
             label: 'Model',
             key: 'model',
