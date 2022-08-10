@@ -1,3 +1,10 @@
+# [2.21.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.20.0...v2.21.0) (2022-08-10)
+
+
+### Features
+
+* added reconfigure option to data table ([e4dc73b](https://github.com/bettyblocks/material-ui-component-set/commit/e4dc73b7f73475754d20afc7716a2bae094fadbd))
+
 # [2.20.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.19.0...v2.20.0) (2022-08-10)
 
 
