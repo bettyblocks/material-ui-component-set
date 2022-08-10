@@ -1,5 +1,5 @@
 import { Icon, prefab } from '@betty-blocks/component-sdk';
-import { Step } from './structures/Step';
+import { Step } from './structures';
 
 const attr = {
   icon: Icon.StepIcon,

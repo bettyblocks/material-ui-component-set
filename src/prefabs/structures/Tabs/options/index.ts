@@ -7,9 +7,22 @@ import {
   size,
   toggle,
 } from '@betty-blocks/component-sdk';
-import { advanced } from './advanced';
+import { advanced } from '../../advanced';
 
-export const options = {
+export const categories = [
+  {
+    label: 'Styling',
+    expanded: false,
+    members: ['height', 'width', 'appBarColor', 'textColor', 'indicatorColor'],
+  },
+  {
+    label: 'Advanced settings',
+    expanded: false,
+    members: ['preLoadTabs', 'dataComponentAttribute'],
+  },
+];
+
+export const tabsOptions = {
   defaultValue: childSelector('Selected tab (runtime)', { value: 1 }),
   selectedDesignTabIndex: childSelector('Selected tab (design)', {
     value: 1,
@@ -79,6 +92,9 @@ export const options = {
   textColor: color('Text color', { value: ThemeColor.WHITE }),
   indicatorColor: color('Indicator color', { value: ThemeColor.SUCCESS }),
   hideTabs: toggle('Hide visual tabs', { value: false }),
+  preLoadTabs: toggle('Preload data in all tabs', {
+    value: true,
+  }),
 
-  ...advanced,
+  ...advanced('Tabs'),
 };
