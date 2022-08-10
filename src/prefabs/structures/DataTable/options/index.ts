@@ -16,6 +16,7 @@ import {
   sizes,
   reconfigure,
   modelAndRelation,
+  reconfigure,
 } from '@betty-blocks/component-sdk';
 import { advanced } from './advanced';
 
