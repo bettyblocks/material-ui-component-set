@@ -66,7 +66,7 @@ import { options as alertOptions } from './Alert/options';
 import { appBarOptions } from './Appbar/options';
 import { options as autocompleteInputOptions } from './AutocompleteInput/options';
 import { options as avatarOptions } from './Avatar/options';
-import { boxOptions } from './Box/options';
+import { options as boxOptions } from './Box/options';
 import { breadcrumbItemOptions } from './BreadcrumbItem/options';
 import { breadcrumbsOptions } from './Breadcrumbs/options';
 import { buttonOptions } from './Button/options';
