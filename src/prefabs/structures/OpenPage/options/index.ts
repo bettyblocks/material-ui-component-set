@@ -8,10 +8,30 @@ import {
   hideIf,
   sizes,
 } from '@betty-blocks/component-sdk';
-import { advanced } from './advanced';
+import { advanced } from '../../advanced';
 import { tooltip } from '../../Button/options/tooltip';
 
-export const options = {
+export const categories = [
+  {
+    label: 'Tooltip',
+    expanded: false,
+    members: [
+      'addTooltip',
+      'hasVisibleTooltip',
+      'tooltipContent',
+      'tooltipPlacement',
+      'tooltipBackground',
+      'tooltipText',
+    ],
+  },
+  {
+    label: 'Advanced settings',
+    expanded: false,
+    members: ['dataComponentAttribute'],
+  },
+];
+
+export const openPageButtonOptions = {
   visible: toggle('Toggle visibility', {
     value: true,
     configuration: {
@@ -97,5 +117,5 @@ export const options = {
 
   ...tooltip,
 
-  ...advanced,
+  ...advanced('Button'),
 };

@@ -1,3 +1,29 @@
+# [2.21.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.20.0...v2.21.0) (2022-08-10)
+
+
+### Features
+
+* added reconfigure option to data table ([e4dc73b](https://github.com/bettyblocks/material-ui-component-set/commit/e4dc73b7f73475754d20afc7716a2bae094fadbd))
+
+# [2.20.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.19.0...v2.20.0) (2022-08-10)
+
+
+### Bug Fixes
+
+* remove lock file that shouldn't be used ([2ca16bb](https://github.com/bettyblocks/material-ui-component-set/commit/2ca16bb3dce33d4ae8a7ed39328c8b028d85e836))
+
+
+### Features
+
+* combine dialogs in crud with dialogs template TMPLT-1617 ([261f199](https://github.com/bettyblocks/material-ui-component-set/commit/261f19926d92bc20dd5b8082d1b1dc99bed26209))
+
+# [2.19.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.18.0...v2.19.0) (2022-08-09)
+
+
+### Features
+
+* add optioncategories to button category ([d9fd813](https://github.com/bettyblocks/material-ui-component-set/commit/d9fd8133934d88d74d88a832730e09671dcaa282))
+
 # [2.18.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.17.0...v2.18.0) (2022-08-08)
 
 
