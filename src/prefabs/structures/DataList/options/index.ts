@@ -12,9 +12,27 @@ import {
   showIfTrue,
   modelAndRelation,
 } from '@betty-blocks/component-sdk';
-import { advanced } from './advanced';
+import { advanced } from '../../advanced';
 
-export const options = {
+export const categories = [
+  {
+    label: 'Pagination',
+    expanded: false,
+    members: ['pagination', 'take', 'placeholderTake'],
+  },
+  {
+    label: 'Messages',
+    expanded: false,
+    members: ['showError', 'loadingType', 'loadingText'],
+  },
+  {
+    label: 'Advanced settings',
+    expanded: false,
+    members: ['dataComponentAttribute'],
+  },
+];
+
+export const dataListOptions = {
   model: modelAndRelation('Model', { value: '' }),
   filter: filter('Filter', {
     value: {},
@@ -155,5 +173,5 @@ export const options = {
     },
   }),
 
-  ...advanced,
+  ...advanced('DataList'),
 };
