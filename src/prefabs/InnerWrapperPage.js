@@ -24,6 +24,7 @@
               'BODY_COMPONENT',
               'CONTAINER_COMPONENT',
               'CONTENT_COMPONENT',
+              'LAYOUT_COMPONENT',
             ]}
           />
         </Content>
