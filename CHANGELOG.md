@@ -1,3 +1,10 @@
+# [2.23.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.22.0...v2.23.0) (2022-08-11)
+
+
+### Features
+
+* add option categories to data components TMPLT-1632 ([60db294](https://github.com/bettyblocks/material-ui-component-set/commit/60db294e48f586eb19bae8198495db55b6702d69))
+
 # [2.22.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.21.1...v2.22.0) (2022-08-11)
 
 
