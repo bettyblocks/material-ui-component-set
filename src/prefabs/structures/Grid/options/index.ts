@@ -11,9 +11,32 @@ import {
   hideIf,
 } from '@betty-blocks/component-sdk';
 import { responsive } from './responsive';
-import { advanced } from './advanced';
+import { advanced } from '../../advanced';
 
-export const options = {
+export const categories = [
+  {
+    label: 'Alignment',
+    expanded: false,
+    members: ['alignItems', 'alignContent', 'justify', 'wrap'],
+  },
+  {
+    label: 'Styling',
+    expanded: false,
+    members: ['height', 'backgroundColor', 'spacing'],
+  },
+  {
+    label: 'Responsiveness',
+    expanded: false,
+    members: ['xsWidth', 'smWidth', 'mdWidth', 'lgWidth', 'xlWidth'],
+  },
+  {
+    label: 'Advanced settings',
+    expanded: false,
+    members: ['zeroMinWidth', 'dataComponentAttribute'],
+  },
+];
+
+export const gridOptions = {
   visibility: toggle('Toggle visibility', {
     value: true,
     configuration: {
@@ -174,5 +197,5 @@ export const options = {
       ],
     },
   }),
-  ...advanced,
+  ...advanced('Grid'),
 };
