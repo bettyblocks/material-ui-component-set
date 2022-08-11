@@ -1,26 +1,17 @@
 import {
   font,
-  toggle,
   color,
   ThemeColor,
   dropdown,
   sizes,
-  showIfTrue,
 } from '@betty-blocks/component-sdk';
 
 export const styles = {
-  titleStyles: toggle('Title styles', { value: false }),
   titleType: font('Title type', {
     value: 'Body1',
-    configuration: {
-      condition: showIfTrue('titleStyles'),
-    },
   }),
   titleTextColor: color('Title text color', {
     value: ThemeColor.BLACK,
-    configuration: {
-      condition: showIfTrue('titleStyles'),
-    },
   }),
   titleFontWeight: dropdown(
     'Title font weight',
@@ -37,13 +28,9 @@ export const styles = {
     ],
     {
       value: '400',
-      configuration: { condition: showIfTrue('titleStyles') },
     },
   ),
   titleSpacing: sizes('Title outer space', {
     value: ['0rem', '0rem', '0rem', '0rem'],
-    configuration: {
-      condition: showIfTrue('titleStyles'),
-    },
   }),
 };

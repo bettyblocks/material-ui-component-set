@@ -5,9 +5,17 @@ import {
   ThemeColor,
   text,
 } from '@betty-blocks/component-sdk';
-import { advanced } from './advanced';
+import { advanced } from '../../advanced';
 
-export const options = {
+export const categories = [
+  {
+    label: 'Advanced settings',
+    expanded: false,
+    members: ['dataComponentAttribute'],
+  },
+];
+
+export const containerOptions = {
   maxWidth: option('CUSTOM', {
     label: 'Max width',
     value: 'lg',
@@ -34,5 +42,5 @@ export const options = {
       as: 'UNIT',
     },
   }),
-  ...advanced,
+  ...advanced('Container'),
 };

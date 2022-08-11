@@ -1,7 +1,15 @@
 import { color, ThemeColor, sizes } from '@betty-blocks/component-sdk';
-import { advanced } from './advanced';
+import { advanced } from '../../advanced';
 
-export const options = {
+export const categories = [
+  {
+    label: 'Advanced settings',
+    expanded: false,
+    members: ['dataComponentAttribute'],
+  },
+];
+
+export const drawerContainerOptions = {
   themeBgColor: color('Theme background color', {
     value: ThemeColor.TRANSPARENT,
   }),
@@ -12,5 +20,5 @@ export const options = {
     value: ['M', 'M', 'M', 'M'],
   }),
 
-  ...advanced,
+  ...advanced('Drawer Container'),
 };
