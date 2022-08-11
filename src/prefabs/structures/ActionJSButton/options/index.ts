@@ -27,6 +27,15 @@ export const options = {
       disabled: true,
     },
   }),
+  // actionVariableId: option('ACTION_JS_VARIABLE', {
+  //   label: 'Name',
+  //   value: '',
+  //   configuration: { condition: showIf('actionVariableId', 'EQ', 'never') },
+  // }),
+  actionVariableId: option('ACTION_JS_VARIABLE', {
+    label: 'Action js varable',
+    value: '',
+  }),
 
   property: property('Pass value to action'),
   buttonText: variable('Button text', { value: ['Button'] }),
