@@ -1,7 +1,9 @@
 import { Icon, prefab, variable } from '@betty-blocks/component-sdk';
-import { CardActions } from './structures/CardActions';
-import { OpenPageButton } from './structures/OpenPage';
-import { options as openPageButtonOptions } from './structures/OpenPage/options/index';
+import {
+  CardActions,
+  OpenPageButton,
+  openPageButtonOptions,
+} from './structures';
 
 const attr = {
   icon: Icon.CardActionsIcon,
@@ -9,10 +11,16 @@ const attr = {
   keywords: ['Cards', 'card', 'actions', 'cardactions'],
 };
 
-openPageButtonOptions.buttonText = variable('Button text', {
-  value: ['Button'],
-});
-
 export default prefab('Card Actions', attr, undefined, [
-  CardActions({}, [OpenPageButton({ options: openPageButtonOptions }, [])]),
+  CardActions({}, [
+    OpenPageButton(
+      {
+        options: {
+          ...openPageButtonOptions,
+          buttonText: variable('Button text', { value: ['Button'] }),
+        },
+      },
+      [],
+    ),
+  ]),
 ]);

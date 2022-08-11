@@ -37819,7 +37819,7 @@
         newPrefab.variables[2].options.modelId = modelId;
         newPrefab.variables[3].options.modelId = modelId;
         newPrefab.variables[4].options.modelId = modelId;
-        newPrefab.structure[0].descendants[0].descendants = [
+        newPrefab.structure[0].descendants = [
           ...drawerSidebar,
           ...drawerContainer,
         ];

@@ -1,26 +1,21 @@
 import {
   color,
   option,
-  showIfTrue,
   ThemeColor,
   toggle,
   variable,
 } from '@betty-blocks/component-sdk';
 
 export const tooltip = {
-  addTooltip: toggle('Add Tooltip', { value: false }),
+  addTooltip: toggle('Toggle tooltip', { value: false }),
   hasVisibleTooltip: toggle('Toggle tooltip visibility', {
     value: true,
     configuration: {
       as: 'VISIBILITY',
-      condition: showIfTrue('addTooltip'),
     },
   }),
   tooltipContent: variable('Tooltip Content', {
     value: ['Tips'],
-    configuration: {
-      condition: showIfTrue('addTooltip'),
-    },
   }),
   tooltipPlacement: option('CUSTOM', {
     label: 'Tooltip Placement',
@@ -62,19 +57,12 @@ export const tooltip = {
           value: 'bottom-end',
         },
       ],
-      condition: showIfTrue('addTooltip'),
     },
   }),
   tooltipBackground: color('Tooltip Background', {
     value: ThemeColor.MEDIUM,
-    configuration: {
-      condition: showIfTrue('addTooltip'),
-    },
   }),
   tooltipText: color('Tooltip Text', {
     value: ThemeColor.BLACK,
-    configuration: {
-      condition: showIfTrue('addTooltip'),
-    },
   }),
 };

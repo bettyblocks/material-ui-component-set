@@ -1,5 +1,5 @@
 import { Icon, prefab } from '@betty-blocks/component-sdk';
-import { BreadcrumbItem } from './structures/BreadcrumbItem';
+import { BreadcrumbItem } from './structures';
 
 const attr = {
   icon: Icon.BreadcrumbIcon,
