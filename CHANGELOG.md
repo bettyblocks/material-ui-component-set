@@ -1,3 +1,24 @@
+# [2.24.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.23.0...v2.24.0) (2022-08-11)
+
+
+### Bug Fixes
+
+* added missing parameters in login interaction ([83a6e93](https://github.com/bettyblocks/material-ui-component-set/commit/83a6e93efdeca9565d0021878314382e17269835))
+* implement makeBettyInput in loginForm ([e7a9a12](https://github.com/bettyblocks/material-ui-component-set/commit/e7a9a1206ea3d964f10258842e25a1c70811bddb))
+* lint errors ([5fc849d](https://github.com/bettyblocks/material-ui-component-set/commit/5fc849df7a7e7adb93ef4cbcbf803f7a0f1f9935))
+* lint errors ([af0b431](https://github.com/bettyblocks/material-ui-component-set/commit/af0b4317538e7d86cd9f786252c29410f9b1e070))
+* other way of creating forms ([1d68611](https://github.com/bettyblocks/material-ui-component-set/commit/1d686111fb6ea51c410a7df85f36bf291047ec8e))
+* remove unused imports ([83b2dc0](https://github.com/bettyblocks/material-ui-component-set/commit/83b2dc0185233cb2eda2d1d8e258d5d4c835f337))
+* use model instead of modelid to fill in model ([def7a55](https://github.com/bettyblocks/material-ui-component-set/commit/def7a55358b6cd24f17fcd97c9ab6a3c54247988))
+* use structure in actionJS form ([365f6e6](https://github.com/bettyblocks/material-ui-component-set/commit/365f6e6e458c07e201226b8b18224246f13d1db5))
+* use update helper in the update form ([bcf7538](https://github.com/bettyblocks/material-ui-component-set/commit/bcf75389881591e31174301de256bba37b9f8e30))
+
+
+### Features
+
+* add create beta form prefab and use generic success alert message ([40ae731](https://github.com/bettyblocks/material-ui-component-set/commit/40ae7314432c1503ec03191409d459525ed820d7))
+* added login form using pro coder api ([54ace84](https://github.com/bettyblocks/material-ui-component-set/commit/54ace8479a5cd898604d351962a3902ed18786b3))
+
 # [2.23.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.22.0...v2.23.0) (2022-08-11)
 
 
