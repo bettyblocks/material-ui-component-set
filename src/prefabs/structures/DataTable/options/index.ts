@@ -16,9 +16,58 @@ import {
   sizes,
   modelAndRelation,
 } from '@betty-blocks/component-sdk';
-import { advanced } from './advanced';
+import { advanced } from '../../advanced';
 
-export const options = {
+export const categories = [
+  {
+    label: 'Search',
+    expanded: false,
+    members: ['searchProperty', 'labelSearchOn'],
+  },
+  {
+    label: 'Title',
+    expanded: false,
+    members: ['title', 'titleType'],
+  },
+  {
+    label: 'Pagination',
+    expanded: false,
+    members: [
+      'pagination',
+      'labelNumberOfPages',
+      'labelRowsPerPage',
+      'take',
+      'placeholderTake',
+    ],
+  },
+  {
+    label: 'Styling',
+    expanded: false,
+    members: [
+      'height',
+      'stickyHeader',
+      'size',
+      'background',
+      'backgroundHeader',
+      'square',
+      'striped',
+      'variant',
+      'elevation',
+    ],
+  },
+  {
+    label: 'Spacing',
+    expanded: false,
+    members: ['outerSpacing'],
+  },
+  {
+    label: 'Advanced settings',
+    expanded: false,
+    members: ['dataComponentAttribute'],
+  },
+];
+
+export const dataTableOptions = {
   model: modelAndRelation('Model', { value: '' }),
   filter: filter('Filter', {
     value: {},
@@ -121,7 +170,7 @@ export const options = {
       condition: hideIf('autoLoadOnScroll', 'EQ', true),
     },
   }),
-  placeholderTake: number('Placeholder rows', { value: '' }),
+  placeholderTake: number('Placeholder rows', { value: '1' }),
   labelRowsPerPage: variable('Rows per page text', {
     value: ['Rows per page'],
     configuration: {
@@ -154,7 +203,9 @@ export const options = {
     },
   }),
   background: color('Background', { value: ThemeColor.TRANSPARENT }),
-  backgroundHeader: color('Background', { value: ThemeColor.TRANSPARENT }),
+  backgroundHeader: color('Background header', {
+    value: ThemeColor.TRANSPARENT,
+  }),
   square: toggle('Square', { value: false }),
   striped: toggle('Striped', { value: false }),
   stripeColor: color('Stripe color', {
@@ -233,5 +284,5 @@ export const options = {
     },
   }),
 
-  ...advanced,
+  ...advanced('DataTable'),
 };
