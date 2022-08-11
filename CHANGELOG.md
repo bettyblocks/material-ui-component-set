@@ -1,3 +1,15 @@
+# [2.22.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.21.1...v2.22.0) (2022-08-11)
+
+
+### Bug Fixes
+
+* bump cli version ([7d1dec6](https://github.com/bettyblocks/material-ui-component-set/commit/7d1dec66f4949b17551636cc64bb65a4895c33c3))
+
+
+### Features
+
+* add optioncategories and changed names of const options ([8bd76e4](https://github.com/bettyblocks/material-ui-component-set/commit/8bd76e4a982779c1d51f73a0a2eff829a6aa8ddc))
+
 ## [2.21.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.21.0...v2.21.1) (2022-08-10)
 
 ### Bug Fixes
