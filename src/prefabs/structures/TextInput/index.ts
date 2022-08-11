@@ -1,7 +1,7 @@
 import {
   component,
   OptionProducer,
-  PrefabComponent,
+  PrefabReference,
 } from '@betty-blocks/component-sdk';
 import { updateOption } from '../../../utils';
 import { deleteActionVariable } from '../../hooks/deleteActionVariable';
@@ -21,7 +21,7 @@ const $afterDelete = [deleteActionVariable];
 
 export const TextInput = (
   config: Configuration,
-  children: PrefabComponent[] = [],
+  children: PrefabReference[] = [],
 ) => {
   const options = { ...(config.options || defaults) };
 

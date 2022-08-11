@@ -355,7 +355,6 @@
 
         const handleClick = (event, context) => {
           B.triggerEvent('OnItemClick', event, context);
-          B.triggerEvent('sendItemId', context.modelData.id);
         };
 
         const Looper = (results) =>
