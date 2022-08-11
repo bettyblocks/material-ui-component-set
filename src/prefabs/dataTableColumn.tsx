@@ -4,7 +4,7 @@ import {
   prefab as makePrefab,
   BeforeCreateArgs,
 } from '@betty-blocks/component-sdk';
-import { DataTableColumn } from './structures/DataTableColumn';
+import { DataTableColumn } from './structures';
 
 const beforeCreate = ({
   components: { Content, Header, Field, Footer, PropertySelector },
