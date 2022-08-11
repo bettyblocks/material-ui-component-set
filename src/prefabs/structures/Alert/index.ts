@@ -44,7 +44,7 @@ export const FormSuccessAlert = (config: Configuration): PrefabReference => {
       value: ['Success'],
     }),
     bodyText: updateOption(defaults.bodyText, {
-      value: ['Record successfully created'],
+      value: ['Form has been submitted successfully.'],
     }),
   };
 
