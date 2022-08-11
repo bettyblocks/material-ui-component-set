@@ -8,9 +8,29 @@ import {
   toggle,
   variable,
 } from '@betty-blocks/component-sdk';
-import { advanced } from './advanced';
+import { advanced } from '../../advanced';
 
-export const options = {
+export const categories = [
+  {
+    label: 'Styling',
+    expanded: false,
+    members: [
+      'activeColor',
+      'inactiveColor',
+      'activeLabelColor',
+      'inactiveLabelColor',
+      'backgroundColor',
+      'connectorColor',
+    ],
+  },
+  {
+    label: 'Advanced settings',
+    expanded: false,
+    members: ['dataComponentAttribute'],
+  },
+];
+
+export const stepperOptions = {
   activeStep: childSelector('Selected step (runtime)', { value: 1 }),
   selectedDesignStepIndex: childSelector('Selected step (design)', {
     value: 1,
@@ -88,5 +108,5 @@ export const options = {
     },
   }),
 
-  ...advanced,
+  ...advanced('Stepper'),
 };
