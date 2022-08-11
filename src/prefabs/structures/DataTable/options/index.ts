@@ -15,6 +15,7 @@ import {
   endpoint,
   sizes,
   modelAndRelation,
+  reconfigure,
 } from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
 
@@ -68,6 +69,7 @@ export const categories = [
 ];
 
 export const dataTableOptions = {
+  reconfigure: reconfigure('Reconfigure', { value: '' }),
   model: modelAndRelation('Model', { value: '' }),
   filter: filter('Filter', {
     value: {},
