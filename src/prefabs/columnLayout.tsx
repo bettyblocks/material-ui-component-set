@@ -30,7 +30,6 @@ const beforeCreate = ({
   },
   helpers: { cloneStructure },
   prefab,
-  prefabs,
   save,
 }: BeforeCreateArgs) => {
   const [rows, setRows] = React.useState([{ index: 1, columns: 2 }]);
@@ -219,7 +218,7 @@ const beforeCreate = ({
         onSave={() => {
           const newPrefab = { ...prefab };
           rows.forEach((row) => {
-            const newRow = cloneStructure(prefabs, '1 Column');
+            const newRow = cloneStructure('1 Column');
             if (newRow.type !== 'COMPONENT') {
               throw new Error(
                 `Expected a component, but instead got ${newRow.type}`,

@@ -8,6 +8,7 @@ import { DataTableColumn } from './structures';
 
 const beforeCreate = ({
   components: { Content, Header, Field, Footer, PropertySelector },
+  helpers: { setOption },
   prefab,
   save,
   close,
@@ -44,12 +45,13 @@ const beforeCreate = ({
             throw new Error(errorMessage);
           }
 
-          structure.options[1] = {
-            value: property,
-            label: 'Property',
-            key: 'property',
-            type: 'PROPERTY',
-          };
+          setOption(structure, 'property', (originalOption) => {
+            return {
+              ...originalOption,
+              value: property,
+            };
+          });
+
           save(newPrefab);
         }}
         onSkip={() => {
