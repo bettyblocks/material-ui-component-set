@@ -21,9 +21,8 @@ const beforeCreate = ({
     ModelRelationSelector,
     PropertiesSelector,
   },
-  // helpers: { cloneStructure },
+  helpers: { cloneStructure, setOption },
   prefab,
-  // prefabs,
   save,
   close,
 }: BeforeCreateArgs) => {
@@ -98,126 +97,27 @@ const beforeCreate = ({
                   format: 'INHERIT',
                 };
               }
-              // TODO: remove structure.descendants.push with commented code when the setOption is available
-              // const dataTableColumnStructure = cloneStructure(
-              //   prefabs,
-              //   'DataTableColumn',
-              // );
-              // setOption(dataTableColumnStructure, 'property', newProperty);
-              // structure.descendants.push(dataTableColumnStructure);
-              structure.descendants.push({
-                name: 'DataTableColumn',
-                optionCategories: [
-                  {
-                    label: 'Styling',
-                    expanded: false,
-                    members: [
-                      'horizontalAlignment',
-                      'width',
-                      'background',
-                      'borderColor',
-                    ],
-                  },
-                  {
-                    label: 'Advanced settings',
-                    expanded: false,
-                    members: ['dataComponentAttribute'],
-                  },
-                ],
-                options: [
-                  {
-                    value: true,
-                    label: 'Initial visibility',
-                    key: 'visible',
-                    type: 'TOGGLE',
-                    configuration: {
-                      as: 'VISIBILITY',
-                    },
-                  },
-                  {
+
+              const dataTableColumnStructure =
+                cloneStructure('Datatable Column');
+              if (dataTableColumnStructure.type !== 'COMPONENT') {
+                setErrorMessage(
+                  `expected component prefab, found ${dataTableColumnStructure.type}`,
+                );
+                throw new Error(errorMessage);
+              }
+
+              setOption(
+                dataTableColumnStructure,
+                'property',
+                (originalOption) => {
+                  return {
+                    ...originalOption,
                     value: newProperty,
-                    label: 'Property',
-                    key: 'property',
-                    type: 'PROPERTY',
-                  },
-                  {
-                    type: 'TOGGLE',
-                    label: 'Sortable',
-                    key: 'sortable',
-                    value: false,
-                  },
-                  {
-                    type: 'VARIABLE',
-                    label: 'Header text',
-                    key: 'headerText',
-                    value: [''],
-                  },
-                  {
-                    value: 'Body1',
-                    label: 'Header Type',
-                    key: 'type',
-                    type: 'FONT',
-                  },
-                  {
-                    type: 'VARIABLE',
-                    label: 'Content',
-                    key: 'content',
-                    value: [''],
-                    configuration: {
-                      as: 'MULTILINE',
-                    },
-                  },
-                  {
-                    value: 'Body1',
-                    label: 'Body type',
-                    key: 'bodyType',
-                    type: 'FONT',
-                  },
-                  {
-                    type: 'CUSTOM',
-                    label: 'Column Alignment',
-                    key: 'horizontalAlignment',
-                    value: 'left',
-                    configuration: {
-                      as: 'BUTTONGROUP',
-                      dataType: 'string',
-                      allowedInput: [
-                        { name: 'Left', value: 'left' },
-                        { name: 'Center', value: 'center' },
-                        { name: 'Right', value: 'right' },
-                      ],
-                    },
-                  },
-                  {
-                    type: 'SIZE',
-                    label: 'Width',
-                    key: 'width',
-                    value: '',
-                    configuration: {
-                      as: 'UNIT',
-                    },
-                  },
-                  {
-                    type: 'COLOR',
-                    label: 'Background',
-                    key: 'background',
-                    value: 'Transparent',
-                  },
-                  {
-                    type: 'COLOR',
-                    label: 'Border color',
-                    key: 'borderColor',
-                    value: 'Light',
-                  },
-                  {
-                    type: 'VARIABLE',
-                    label: 'Test attribute',
-                    key: 'dataComponentAttribute',
-                    value: ['DataTableColumn'],
-                  },
-                ],
-                descendants: [],
-              });
+                  };
+                },
+              );
+              structure.descendants.push(dataTableColumnStructure);
             },
           );
           save(newPrefab);
