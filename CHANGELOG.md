@@ -1,3 +1,10 @@
+# [2.25.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.24.0...v2.25.0) (2022-08-11)
+
+
+### Features
+
+* add reconfigure ([c73810a](https://github.com/bettyblocks/material-ui-component-set/commit/c73810a8ed58fca911197a97df5c8c47fc0892eb))
+
 # [2.24.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.23.0...v2.24.0) (2022-08-11)
 
 
