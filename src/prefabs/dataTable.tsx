@@ -4,7 +4,7 @@ import {
   prefab as makePrefab,
   BeforeCreateArgs,
 } from '@betty-blocks/component-sdk';
-import { DataTable } from './structures/DataTable';
+import { DataTable } from './structures';
 
 const attrs = {
   icon: Icon.DataTable,
@@ -21,7 +21,9 @@ const beforeCreate = ({
     ModelRelationSelector,
     PropertiesSelector,
   },
+  // helpers: { cloneStructure },
   prefab,
+  // prefabs,
   save,
   close,
 }: BeforeCreateArgs) => {
@@ -61,7 +63,7 @@ const beforeCreate = ({
             );
             throw new Error(errorMessage);
           }
-          structure.options[0] = {
+          structure.options[1] = {
             value: modelId,
             label: 'Model',
             key: 'model',
@@ -96,10 +98,32 @@ const beforeCreate = ({
                   format: 'INHERIT',
                 };
               }
-              // TODO: Start making use of the component-sdk prefab, instead of inserting JSX
-              // example: structure.descendants.push(DataTableColumn({}, []))
+              // TODO: remove structure.descendants.push with commented code when the setOption is available
+              // const dataTableColumnStructure = cloneStructure(
+              //   prefabs,
+              //   'DataTableColumn',
+              // );
+              // setOption(dataTableColumnStructure, 'property', newProperty);
+              // structure.descendants.push(dataTableColumnStructure);
               structure.descendants.push({
                 name: 'DataTableColumn',
+                optionCategories: [
+                  {
+                    label: 'Styling',
+                    expanded: false,
+                    members: [
+                      'horizontalAlignment',
+                      'width',
+                      'background',
+                      'borderColor',
+                    ],
+                  },
+                  {
+                    label: 'Advanced settings',
+                    expanded: false,
+                    members: ['dataComponentAttribute'],
+                  },
+                ],
                 options: [
                   {
                     value: true,
@@ -186,24 +210,10 @@ const beforeCreate = ({
                     value: 'Light',
                   },
                   {
-                    value: false,
-                    label: 'Advanced settings',
-                    key: 'advancedSettings',
-                    type: 'TOGGLE',
-                  },
-                  {
                     type: 'VARIABLE',
                     label: 'Test attribute',
                     key: 'dataComponentAttribute',
                     value: ['DataTableColumn'],
-                    configuration: {
-                      condition: {
-                        type: 'SHOW',
-                        option: 'advancedSettings',
-                        comparator: 'EQ',
-                        value: true,
-                      },
-                    },
                   },
                 ],
                 descendants: [],

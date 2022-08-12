@@ -1,5 +1,5 @@
 import { Icon, prefab } from '@betty-blocks/component-sdk';
-import { Grid } from './structures/Grid';
+import { Grid } from './structures';
 
 const attrs = {
   icon: Icon.GridIcon,
