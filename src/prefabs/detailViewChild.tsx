@@ -1,7 +1,5 @@
 import { color, Icon, prefab, ThemeColor } from '@betty-blocks/component-sdk';
-import { Column } from './structures/Column';
-import { options as columnOptions } from './structures/Column/options';
-import { DetailViewChild } from './structures/DetailViewChild';
+import { Column, columnOptions, DetailViewChild } from './structures';
 
 const attrs = {
   icon: Icon.DetailViewIcon,

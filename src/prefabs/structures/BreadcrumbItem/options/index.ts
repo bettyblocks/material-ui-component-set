@@ -7,9 +7,17 @@ import {
   ThemeColor,
   variable,
 } from '@betty-blocks/component-sdk';
-import { advanced } from './advanced';
+import { advanced } from '../../advanced';
 
-export const options = {
+export const categories = [
+  {
+    label: 'Advanced settings',
+    expanded: false,
+    members: ['dataComponentAttribute'],
+  },
+];
+
+export const breadcrumbItemOptions = {
   breadcrumbContent: variable('Content', { value: ['Breadcrumb Item'] }),
   endpoint: endpoint('Page', { value: '' }),
   textColor: color('Text Color', { value: ThemeColor.BLACK }),
@@ -28,5 +36,5 @@ export const options = {
     },
   }),
 
-  ...advanced,
+  ...advanced('Breadcrumb item'),
 };

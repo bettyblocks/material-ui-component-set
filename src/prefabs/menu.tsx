@@ -1,6 +1,5 @@
 import { prefab, Icon } from '@betty-blocks/component-sdk';
-import { Menu } from './structures/Menu';
-import { MenuItem } from './structures/MenuItem';
+import { Menu, MenuItem } from './structures';
 
 const attr = {
   icon: Icon.MenuIcon,

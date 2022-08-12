@@ -8,9 +8,22 @@ import {
   color,
   ThemeColor,
 } from '@betty-blocks/component-sdk';
-import { advanced } from './advanced';
+import { advanced } from '../../advanced';
 
-export const options = {
+export const categories = [
+  {
+    label: 'Styling',
+    expanded: false,
+    members: ['horizontalAlignment', 'width', 'background', 'borderColor'],
+  },
+  {
+    label: 'Advanced settings',
+    expanded: false,
+    members: ['dataComponentAttribute'],
+  },
+];
+
+export const dataTableColumnOptions = {
   visible: toggle('Initial visibility', {
     value: true,
     configuration: {
@@ -50,5 +63,5 @@ export const options = {
   background: color('Background', { value: ThemeColor.TRANSPARENT }),
   borderColor: color('Border color', { value: ThemeColor.LIGHT }),
 
-  ...advanced,
+  ...advanced('DataTableColumn'),
 };

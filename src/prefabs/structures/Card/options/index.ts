@@ -1,7 +1,15 @@
 import { option, showIf, sizes, toggle } from '@betty-blocks/component-sdk';
-import { advanced } from './advanced';
+import { advanced } from '../../advanced';
 
-export const options = {
+export const categories = [
+  {
+    label: 'Advanced settings',
+    expanded: false,
+    members: ['dataComponentAttribute'],
+  },
+];
+
+export const cardOptions = {
   square: toggle('Square', { value: false }),
   variant: option('CUSTOM', {
     value: 'elevation',
@@ -53,5 +61,6 @@ export const options = {
   outerSpacing: sizes('Outer space', {
     value: ['0rem', '0rem', '0rem', '0rem'],
   }),
-  ...advanced,
+
+  ...advanced('Card'),
 };

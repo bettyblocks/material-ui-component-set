@@ -6,9 +6,7 @@ import {
   showIf,
   icon,
 } from '@betty-blocks/component-sdk';
-import { List } from './structures/List';
-import { ListItem } from './structures/ListItem';
-import { options as listItemOptions } from './structures/ListItem/options';
+import { List, ListItem, listItemOptions } from './structures';
 
 const attr = {
   icon: Icon.OrderedListIcon,

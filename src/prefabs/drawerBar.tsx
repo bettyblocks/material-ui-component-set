@@ -1,7 +1,5 @@
-import { Icon, prefab } from '@betty-blocks/component-sdk';
-import { DrawerBar } from './structures/DrawerBar';
-import { List } from './structures/List';
-import { ListItem } from './structures/ListItem';
+import { Icon, prefab, variable } from '@betty-blocks/component-sdk';
+import { DrawerBar, List, ListItem, listItemOptions } from './structures';
 
 const attr = {
   icon: Icon.RowColumnIcon,
@@ -10,5 +8,16 @@ const attr = {
 };
 
 export default prefab('Drawer Sidebar', attr, undefined, [
-  DrawerBar({}, [List({}, [ListItem({})])]),
+  DrawerBar({}, [
+    List({}, [
+      ListItem({
+        options: {
+          ...listItemOptions,
+          secondaryText: variable('Secondary text', {
+            value: ['Secondary text'],
+          }),
+        },
+      }),
+    ]),
+  ]),
 ]);

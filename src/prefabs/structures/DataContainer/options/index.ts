@@ -8,9 +8,22 @@ import {
   variable,
   authenticationProfile,
 } from '@betty-blocks/component-sdk';
-import { advanced } from './advanced';
+import { advanced } from '../../advanced';
 
-export const options = {
+export const categories = [
+  {
+    label: 'Messages',
+    expanded: false,
+    members: ['showError', 'loadingType', 'loadingText'],
+  },
+  {
+    label: 'Advanced settings',
+    expanded: false,
+    members: ['dataComponentAttribute'],
+  },
+];
+
+export const dataContainerOptions = {
   authProfile: authenticationProfile('Authentication Profile', {
     value: '',
     configuration: {
@@ -68,5 +81,5 @@ export const options = {
     },
   }),
 
-  ...advanced,
+  ...advanced('DataContainer'),
 };
