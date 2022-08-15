@@ -503,6 +503,15 @@ export default makePrefab('TSX Header & Footer', attrs, beforeCreate, [
                               value: {
                                 ref: {
                                   componentId: '#1stDataTable',
+                                  optionId: '#reconfigure1',
+                                },
+                              },
+                            }),
+                            otherKeyname: linked({
+                              label: 'Foo',
+                              value: {
+                                ref: {
+                                  componentId: '#1stDataTable',
                                   optionId: '#something',
                                 },
                               },
