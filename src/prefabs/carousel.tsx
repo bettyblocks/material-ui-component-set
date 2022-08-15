@@ -32,6 +32,7 @@ const beforeCreate = ({
   prefab: originalPrefab,
   save,
   close,
+  helpers: { cloneStructure, setOption },
 }: BeforeCreateArgs) => {
   const [modelId, setModelId] = React.useState('');
   const [property, setProperty] = React.useState('');
@@ -235,40 +236,19 @@ const beforeCreate = ({
           }
           if (select === 'custom') {
             structure.descendants = [];
+
+            const carouselImage = cloneStructure('Carousel image');
             images.forEach((item) => {
-              // This currently produces 1 extra carouselImage.
-              structure.descendants.push({
-                name: 'CarouselImage',
-                options: [
-                  {
-                    value: [item.image],
-                    label: 'Source',
-                    key: 'imageSource',
-                    type: 'VARIABLE',
-                  },
-                  {
-                    value: false,
-                    label: 'Advanced settings',
-                    key: 'advancedSettings',
-                    type: 'TOGGLE',
-                  },
-                  {
-                    type: 'VARIABLE',
-                    label: 'Test attribute',
-                    key: 'dataComponentAttribute',
-                    value: ['CarouselImage'],
-                    configuration: {
-                      condition: {
-                        type: 'SHOW',
-                        option: 'advancedSettings',
-                        comparator: 'EQ',
-                        value: true,
-                      },
-                    },
-                  },
-                ],
-                descendants: [],
-              });
+              if (carouselImage.type !== 'COMPONENT') {
+                throw new Error(
+                  `Expected a component, but instead got ${carouselImage.type}`,
+                );
+              }
+              setOption(carouselImage, 'imageSource', (option) => ({
+                ...option,
+                value: [item.image],
+              }));
+              structure.descendants.push(carouselImage);
             });
           } else {
             structure.options[0] = {
