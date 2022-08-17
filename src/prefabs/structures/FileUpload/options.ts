@@ -17,7 +17,14 @@ export const options = {
   label: variable('Label', { value: ['Select file(s)...'] }),
   value: variable('Value', { value: [''] }),
   required: toggle('Required', { value: false }),
+  requiredMessage: variable('Required message', {
+    value: ['file is required'],
+    configuration: { condition: showIfTrue('required') },
+  }),
   maxFileSize: text('Max file size (mb)', { value: '' }),
+  maxFileSizeMessage: variable('Filesize message', {
+    value: ['maximum size exceeded'],
+  }),
   hideDefaultError: toggle('Hide default error', { value: false }),
   disabled: toggle('Disabled', { value: false }),
   helperText: variable('Helper text', { value: [] }),

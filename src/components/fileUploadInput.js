@@ -4,7 +4,7 @@
   allowedTypes: ['CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { env, useFileUpload, useText, Icon } = B;
+    const { env, useText, Icon } = B;
     const { FormControl, FormHelperText, Typography, IconButton } =
       window.MaterialUI.Core;
     const {
@@ -15,6 +15,9 @@
       label,
       helperText,
       fullWidth,
+      requiredMessage: requiredMessageRaw,
+      maxFileSize,
+      maxFileSizeMessage: maxFileSizeMessageRaw,
       accept,
       margin,
       multiple,
@@ -27,14 +30,18 @@
     const isDev = env === 'dev';
     const inputRef = React.createRef();
     const [uploads, setUploads] = useState({
-      files: [],
-      data: [],
+      // is updated by the html element and mutations
+      files: [], // html element
+      data: [], // mutation
       failureMessage: [],
     });
+    const [, setUploadedFileArray] = useState([]); // is updated only by the file html element
     const helper = useText(helperText);
     const labelText = useText(label);
+    const [validationMessage, setValidationMessage] = React.useState('');
+    const requiredMessage = useText(requiredMessageRaw);
+    const maxFileSizeMessage = useText(maxFileSizeMessageRaw);
     const requiredText = required ? '*' : '';
-    const [uploadedFileArray, setUploadedFileArray] = useState([]);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
 
     const formatBytes = (bytes) => {
@@ -45,12 +52,35 @@
       return `${parseFloat(bytes / k ** i).toFixed()} ${sizes[i]}`;
     };
 
+    const validateFiles = (files) => {
+      const filesArray = files ? Array.from(files) : [];
+
+      if (required) {
+        if (filesArray.length === 0) {
+          setValidationMessage(requiredMessage);
+          return false;
+        }
+      }
+
+      if (maxFileSize > 0) {
+        const isFileSizeExceeded = filesArray.some(
+          (file) => file.size / 1000000 > maxFileSize,
+        );
+        if (isFileSizeExceeded) {
+          setValidationMessage(maxFileSizeMessage);
+          return false;
+        }
+      }
+    };
+
     const handleChange = (e) => {
       setUploadedFileArray((prev) => [...prev, ...e.target.files]);
       setUploads({
         ...uploads,
         files: e.target.files,
       });
+
+      validateFiles(e.target.files);
     };
 
     const clearFiles = (e) => {
@@ -62,60 +92,14 @@
       });
     };
 
-    const { files, data, failureMessage } = uploads;
+    const { files, failureMessage } = uploads;
+
+    const data = [];
 
     const acceptedValue = useText(accept) || 'image/*';
     const acceptList = acceptedValue.split(',').map((item) => item.trim());
     const helperValue =
       !hideDefaultError && failureMessage.length > 0 ? failureMessage : helper;
-
-    const [uploadFile, { loading } = {}] = useFileUpload({
-      options: {
-        variables: {
-          fileList: Array.from(files),
-          mimeType: acceptList,
-        },
-        onError: (errorData) => {
-          B.triggerEvent('onError', errorData);
-          setUploads({
-            ...uploads,
-            failureMessage: [errorData.message],
-          });
-        },
-        onCompleted: (uploadData) => {
-          const { uploadFiles } = uploadData;
-
-          const [succeededData, failedData] = uploadFiles.reduce(
-            (result, d) => {
-              result[d.url.startsWith('http') ? 0 : 1].push(d);
-              return result;
-            },
-            [[], []],
-          );
-
-          const formattedFailedData = failedData.map((d) => (
-            <div
-              key={d.name}
-            >{`File: ${d.name} failed with error: ${d.url}`}</div>
-          ));
-
-          setUploads({
-            ...uploads,
-            data: multiple ? data.concat(succeededData) : succeededData,
-            failureMessage: formattedFailedData,
-          });
-
-          if (succeededData.length > 0) {
-            B.triggerEvent('onSuccess', succeededData);
-          } else {
-            B.triggerEvent('onNoResults');
-          }
-          if (failedData.length > 0) {
-            B.triggerEvent('onError', formattedFailedData);
-          }
-        },
-      },
-    });
 
     const removeFileFromList = (fileUrl) => {
       const newList = data.filter((d) => d.url !== fileUrl);
@@ -126,6 +110,7 @@
     };
 
     function UploadComponent() {
+      // Renders the button and the files you select
       return (
         <div data-component={dataComponentAttributeValue}>
           <input
@@ -135,14 +120,12 @@
             type="file"
             onChange={handleChange}
             ref={inputRef}
+            required={required}
+            value={files && files.length > 0 ? 'something' : ''}
           />
           {children}
-          {data.length > 0 && (
-            <input
-              type="hidden"
-              name={name}
-              value={data.map((d) => d.url).join(',')}
-            />
+          {files && ( // TODO: change to showing only what is from the html element
+            <input type="hidden" name={name} value={files} />
           )}
         </div>
       );
@@ -228,14 +211,6 @@
     }
 
     function UploadedFile({ file }) {
-      const uploadedFile = uploadedFileArray.find(
-        (item) => item.name === file.name,
-      );
-
-      if (!multiple) {
-        B.triggerEvent('onFileUpload', file.url);
-      }
-
       switch (type) {
         case 'grid':
           return (
@@ -252,8 +227,8 @@
                 <div className={classes.gridItemDetails}>
                   <FileDetails
                     file={file}
-                    fileType={uploadedFile.type}
-                    fileSize={uploadedFile.size}
+                    fileType={file.type}
+                    fileSize={file.size}
                   />
                   <DeleteButton file={file} />
                 </div>
@@ -277,8 +252,8 @@
                   )}
                   <FileDetails
                     file={file}
-                    fileType={uploadedFile.type}
-                    fileSize={uploadedFile.size}
+                    fileType={file.type}
+                    fileSize={file.size}
                   />
                 </div>
                 <DeleteButton file={file} />
@@ -328,11 +303,12 @@
     const Label = isDev ? 'div' : 'label';
 
     function Control() {
+      const filesArray = files ? Array.from(files) : [];
       return (
         <FormControl
           fullWidth={fullWidth}
           required={required}
-          error={!hideDefaultError && failureMessage.length > 0}
+          error={!!validationMessage}
           disabled={disabled}
           margin={margin}
         >
@@ -341,29 +317,18 @@
             <UploadComponent />
           </Label>
           <FormHelperText classes={{ root: classes.helper }}>
-            {helperValue}
+            {validationMessage}
           </FormHelperText>
           <div className={classes.messageContainer}>
-            {data &&
-              data.length > 0 &&
-              data.map((file) => <UploadedFile key={file.url} file={file} />)}
-            {loading && <UploadingFile />}
+            {filesArray && // TODO: show only files form the html element
+              filesArray.length > 0 &&
+              filesArray.map((file) => (
+                <UploadedFile key={file.name} file={file} />
+              ))}
           </div>
         </FormControl>
       );
     }
-
-    useEffect(() => {
-      if (loading) {
-        B.triggerEvent('onLoad');
-      }
-    }, [loading]);
-
-    useEffect(() => {
-      if (files.length > 0) {
-        uploadFile();
-      }
-    }, [files]);
 
     useEffect(() => {
       B.defineFunction('clearFileUpload', (e) => clearFiles(e));
