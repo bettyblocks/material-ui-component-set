@@ -3,7 +3,6 @@ import {
   Icon,
   BeforeCreateArgs,
   prefab as makePrefab,
-  PrefabComponent,
   PrefabComponentOption,
 } from '@betty-blocks/component-sdk';
 import { Column, Row } from './structures';
@@ -28,24 +27,12 @@ const beforeCreate = ({
     Text,
     DeleteButton,
   },
-  helpers: { cloneStructure },
+  helpers: { cloneStructure, setOption },
   prefab,
   save,
 }: BeforeCreateArgs) => {
   const [rows, setRows] = React.useState([{ index: 1, columns: 2 }]);
 
-  const setOption = (
-    structure: PrefabComponent,
-    key: string,
-    transform: any,
-  ): void => {
-    const index = structure.options.findIndex((option) => option.key === key);
-    if (index === -1) {
-      return;
-    }
-    // eslint-disable-next-line no-param-reassign
-    structure.options[index] = transform(structure.options[index]);
-  };
   const createElements = (n: number) => {
     const elements = [];
     for (let i = 0; i < n; i += 1) {

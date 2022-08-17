@@ -1,3 +1,10 @@
+# [2.26.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.25.0...v2.26.0) (2022-08-12)
+
+
+### Features
+
+* implement new cloneStructure and setOption ([1dc4a0a](https://github.com/bettyblocks/material-ui-component-set/commit/1dc4a0a0bc546406e55e01aac4306ba9be70d0e6))
+
 # [2.25.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.24.0...v2.25.0) (2022-08-11)
 
 ### Features
