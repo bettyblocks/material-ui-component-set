@@ -40,6 +40,67 @@ import {
 } from './structures';
 import { options as defaults } from './structures/ActionJSForm/options';
 
+// interface AuthenticationProfile = 				{
+//   "__typename": string,
+//   "default": boolean,
+//   "id": "f4c1373425dd4ff9aaf2286457513197",
+//   "kind": "usernamePassword",
+//   "loginModel": "f01c3e73b2f949bfbbdc3fad2a26b214",
+//   "name": "Current webuser",
+//   "options": {
+//     "__typename": "AuthenticationProfileOptions",
+//     "loginVariable": "3d33ea66bfa0445396202d2fedf9aa0c"
+//   }
+// }
+
+interface AuthenticationProfile {
+  __typename: string;
+  default: boolean;
+  id: string;
+  kind: 'usernamePassword';
+  loginModel: string;
+  name: string;
+  options: {
+    __typename: 'AuthenticationProfileOptions';
+    loginVariable: string;
+  };
+  properties?: Array<any>;
+}
+
+interface Endpoint {
+  __typename: string;
+  authenticationProfileId: string;
+  cache: boolean;
+  cachedFullPath: string;
+  contentType: string;
+  debugMode: boolean;
+  description?: string;
+  id: 'dbf8e21da4c24f04b399218ad81787f0';
+  online: true;
+  options: {
+    __typename: 'EndpointOptions';
+    componentSetUrl?: string;
+    runtimeTarget: string;
+    showDefaultComponentSet: boolean;
+  };
+  page: {
+    __typename: string;
+    description: string;
+    id: string;
+    name: string;
+    rootId: string;
+    title: string;
+    type: string;
+  };
+  pageId: string;
+  redirectUrl: string;
+  redirectUrlForLogin: string;
+  requestMethod: string;
+  template: string;
+  url: string;
+  params?: { [key: string]: any };
+}
+
 const interactions: PrefabInteraction[] = [
   {
     type: InteractionType.Global,
@@ -81,6 +142,7 @@ const attrs = {
     'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_Login.jpg',
   category: 'FORM',
   interactions,
+  isPublicPage: true,
 };
 
 const newColumnOptions = {
@@ -881,10 +943,10 @@ const beforeCreate = ({
 
   const componentId = createUuid();
   const [authProfileId, setAuthProfileId] = React.useState('');
-  const [authProfile, setAuthProfile] = React.useState(null);
+  const [authProfile, setAuthProfile] = React.useState<AuthenticationProfile>();
   const [authProfileInvalid, setAuthProfileInvalid] = React.useState(false);
 
-  const [endpoint, setEndpoint] = React.useState(null);
+  const [endpoint, setEndpoint] = React.useState<Endpoint>();
   const [endpointInvalid, setEndpointInvalid] = React.useState(false);
 
   const [modelProp, setModel] = React.useState(null);
@@ -997,67 +1059,79 @@ const beforeCreate = ({
             'login',
             authProfile,
           );
-
-          if (authProfile.properties[0].kind === 'PASSWORD') {
-            authProfile.properties.reverse();
-          }
-
-          const formBox = getDescendantByRef(
-            '#formBoxRef',
-            newPrefab.structure,
-          );
-
-          authProfile.properties.forEach((prop) => {
-            const { kind, name } = prop;
-            const vari = result.variables.find(
-              (foundVariable: any) => foundVariable.name === name,
-            );
-
-            switch (kind) {
-              case PropertyKind.EMAIL_ADDRESS:
-                formBox.descendants.push(
-                  makeBettyInput(
-                    BettyPrefabs.EMAIL_ADDRESS,
-                    modelProp,
-                    prop,
-                    vari,
-                  ),
-                );
-                break;
-              case PropertyKind.PASSWORD:
-                formBox.descendants.push(
-                  makeBettyInput(BettyPrefabs.PASSWORD, modelProp, prop, vari),
-                );
-                break;
-              case PropertyKind.STRING:
-                formBox.descendants.push(
-                  makeBettyInput(BettyPrefabs.STRING, modelProp, prop, vari),
-                );
-                break;
-              default:
-                break;
-            }
-            // eslint-disable-next-line no-console
-            return console.warn('PropertyKind not found');
-          });
-
-          newPrefab.interactions[0].parameters = [
-            {
-              parameter: 'redirectTo',
-              pageId: endpoint.pageId,
-              endpointId: endpoint.id,
-              parameters: serializeParameters(endpoint.params),
-            },
-          ];
-
-          // eslint-disable-next-line @typescript-eslint/no-shadow
-          setOption(formObject, 'actionId', (options: any) => ({
-            ...options,
-            value: result.action.actionId,
-            configuration: { disabled: true },
-          }));
-
           if (authProfile) {
+            if (authProfile.properties) {
+              if (authProfile.properties[0].kind === 'PASSWORD') {
+                authProfile.properties.reverse();
+              }
+
+              const formBox = getDescendantByRef(
+                '#formBoxRef',
+                newPrefab.structure,
+              );
+
+              authProfile.properties.forEach((prop: any) => {
+                const { kind, name } = prop;
+                const vari = result.variables.find(
+                  (foundVariable: any) => foundVariable.name === name,
+                );
+
+                switch (kind) {
+                  case PropertyKind.EMAIL_ADDRESS:
+                    formBox.descendants.push(
+                      makeBettyInput(
+                        BettyPrefabs.EMAIL_ADDRESS,
+                        modelProp,
+                        prop,
+                        vari,
+                      ),
+                    );
+                    break;
+                  case PropertyKind.PASSWORD:
+                    formBox.descendants.push(
+                      makeBettyInput(
+                        BettyPrefabs.PASSWORD,
+                        modelProp,
+                        prop,
+                        vari,
+                      ),
+                    );
+                    break;
+                  case PropertyKind.STRING:
+                    formBox.descendants.push(
+                      makeBettyInput(
+                        BettyPrefabs.STRING,
+                        modelProp,
+                        prop,
+                        vari,
+                      ),
+                    );
+                    break;
+                  default:
+                    break;
+                }
+                // eslint-disable-next-line no-console
+                return console.warn('PropertyKind not found');
+              });
+            }
+            if (endpoint && endpoint.params) {
+              newPrefab.interactions[0].parameters = [
+                {
+                  parameter: 'redirectTo',
+                  pageId: endpoint.pageId,
+                  endpointId: endpoint.id,
+                  parameters: serializeParameters(endpoint.params),
+                },
+              ];
+            }
+
+            // eslint-disable-next-line @typescript-eslint/no-shadow
+            setOption(formObject, 'actionId', (options: any) => ({
+              ...options,
+              value: result.action.actionId,
+              configuration: { disabled: true },
+            }));
+
             setOption(formObject, 'model', (options: any) => ({
               ...options,
               value: authProfile.loginModel,
@@ -1075,7 +1149,7 @@ const beforeCreate = ({
 };
 
 export default prefab(
-  'Login form with image (TS)',
+  'Login form with image',
   attrs,
   beforeCreate,
   prefabStructure,
