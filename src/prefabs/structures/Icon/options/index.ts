@@ -4,7 +4,6 @@ import {
   icon,
   option,
   showIf,
-  showIfTrue,
   size,
   sizes,
   ThemeColor,
@@ -69,22 +68,15 @@ export const iconOptions = {
   addBadge: toggle('Add Badge', { value: false }),
   hideBadge: toggle('Hide badge if value is 0', {
     value: false,
-    configuration: {
-      condition: showIfTrue('addBadge'),
-    },
   }),
   content: variable('Content', {
     value: ['1'],
     configuration: {
       as: 'MULTILINE',
-      condition: showIfTrue('addBadge'),
     },
   }),
   badgeColor: color('Badge Color', {
     value: ThemeColor.SECONDARY,
-    configuration: {
-      condition: showIfTrue('addBadge'),
-    },
   }),
   anchorOrigin: option('CUSTOM', {
     label: 'Anchor Origin',
@@ -110,7 +102,6 @@ export const iconOptions = {
           value: 'left,bottom',
         },
       ],
-      condition: showIfTrue('addBadge'),
     },
   }),
   variant: option('CUSTOM', {
@@ -123,14 +114,10 @@ export const iconOptions = {
         { name: 'Standard', value: 'standard' },
         { name: 'Dot', value: 'dot' },
       ],
-      condition: showIfTrue('addBadge'),
     },
   }),
   margin: sizes('Outer Space', {
     value: ['S', 'S', 'S', 'S'],
-    configuration: {
-      condition: showIfTrue('addBadge'),
-    },
   }),
 
   ...advanced('Icon'),

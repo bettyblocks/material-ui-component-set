@@ -237,8 +237,8 @@ const beforeCreate = ({
           if (select === 'custom') {
             structure.descendants = [];
 
-            const carouselImage = cloneStructure('Carousel image');
-            images.forEach((item) => {
+            images.forEach(({ image }) => {
+              const carouselImage = cloneStructure('Carousel image');
               if (carouselImage.type !== 'COMPONENT') {
                 throw new Error(
                   `Expected a component, but instead got ${carouselImage.type}`,
@@ -246,60 +246,23 @@ const beforeCreate = ({
               }
               setOption(carouselImage, 'imageSource', (option) => ({
                 ...option,
-                value: [item.image],
+                value: [image],
               }));
               structure.descendants.push(carouselImage);
             });
           } else {
-            structure.options[0] = {
-              type: 'CUSTOM',
-              label: 'Source',
-              key: 'select',
+            setOption(structure, 'select', (option) => ({
+              ...option,
               value: 'model',
-              configuration: {
-                as: 'BUTTONGROUP',
-                dataType: 'string',
-                allowedInput: [
-                  {
-                    name: 'URL',
-                    value: 'custom',
-                  },
-                  {
-                    name: 'Model',
-                    value: 'model',
-                  },
-                ],
-              },
-            };
-            structure.options[1] = {
+            }));
+            setOption(structure, 'model', (option) => ({
+              ...option,
               value: modelId,
-              label: 'Model',
-              key: 'model',
-              type: 'MODEL_AND_RELATION',
-              configuration: {
-                condition: {
-                  type: 'SHOW',
-                  option: 'select',
-                  comparator: 'EQ',
-                  value: 'model',
-                },
-              },
-            };
-            structure.options[2] = {
-              label: 'Property',
-              key: 'property',
-              type: 'PROPERTY',
+            }));
+            setOption(structure, 'property', (option) => ({
+              ...option,
               value: property,
-              configuration: {
-                dependsOn: 'model',
-                condition: {
-                  type: 'SHOW',
-                  option: 'select',
-                  comparator: 'EQ',
-                  value: 'model',
-                },
-              },
-            };
+            }));
           }
           save(newPrefab);
         }}

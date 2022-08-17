@@ -1,5 +1,5 @@
 import { prefab, Icon } from '@betty-blocks/component-sdk';
-import { Icon as TsIcon } from './structures/Icon';
+import { Icon as TsIcon } from './structures';
 
 const attributes = {
   category: 'CONTENT',
