@@ -93,9 +93,6 @@ export const textOptions = {
   }),
   textColor: color('Text color', {
     value: ThemeColor.BLACK,
-    configuration: {
-      condition: showIfTrue('styles'),
-    },
   }),
 
   fontWeight: option('CUSTOM', {
@@ -115,7 +112,6 @@ export const textOptions = {
         { name: '800', value: '800' },
         { name: '900', value: '900' },
       ],
-      condition: showIfTrue('styles'),
     },
   }),
 
