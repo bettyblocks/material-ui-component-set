@@ -1,3 +1,10 @@
+# [2.27.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.26.0...v2.27.0) (2022-08-17)
+
+
+### Features
+
+* replaced setOption in column layout TMPLT-1653 ([14e3403](https://github.com/bettyblocks/material-ui-component-set/commit/14e3403395523a6676c5a230f68274a7f06a137c))
+
 # [2.26.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.25.0...v2.26.0) (2022-08-12)
 
 
