@@ -2,6 +2,7 @@ import {
   buttongroup,
   color,
   option,
+  showIf,
   showIfTrue,
   text,
   ThemeColor,
@@ -67,5 +68,10 @@ export const options = {
   dataComponentAttribute: variable('Test attribute', {
     value: ['FileUpload'],
     configuration: { condition: showIfTrue('advancedSettings') },
+  }),
+  actionVariableId: option('ACTION_JS_VARIABLE', {
+    label: 'Name',
+    value: '',
+    configuration: { condition: showIf('actionVariableId', 'EQ', 'never') },
   }),
 };

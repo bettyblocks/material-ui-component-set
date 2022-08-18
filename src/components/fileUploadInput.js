@@ -4,7 +4,7 @@
   allowedTypes: ['CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { env, useText, Icon } = B;
+    const { env, useText, Icon, usePresignedUpload } = B;
     const { FormControl, FormHelperText, Typography, IconButton } =
       window.MaterialUI.Core;
     const {
@@ -120,8 +120,6 @@
             type="file"
             onChange={handleChange}
             ref={inputRef}
-            required={required}
-            value={files && files.length > 0 ? 'something' : ''}
           />
           {children}
           {files && ( // TODO: change to showing only what is from the html element
