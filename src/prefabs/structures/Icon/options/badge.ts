@@ -29,6 +29,12 @@ export const badge = {
       condition: showIfTrue('addBadge'),
     },
   }),
+  badgeTextColor: color('Badge Text Color', {
+    value: ThemeColor.BLACK,
+    configuration: {
+      condition: showIfTrue('addBadge'),
+    },
+  }),
   anchorOrigin: option('CUSTOM', {
     label: 'Anchor Origin',
     value: 'right,top',
