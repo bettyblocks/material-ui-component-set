@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {
   prefab,
   Icon,
@@ -23,6 +22,7 @@ import {
   DrawerContainer,
   drawerOptions,
   Grid,
+  gridOptions,
   List,
   ListItem,
   listItemOptions,
@@ -31,6 +31,7 @@ import {
   mediaOptions,
   SubmitButton,
   Tab,
+  tabOptions,
   Tabs,
   tabsOptions,
   Text,
@@ -221,36 +222,118 @@ const drawerContainer = DrawerContainer({}, [
                   as: 'UNIT',
                 },
               }),
+              hideTabs: toggle('Hide visual tabs', { value: false }),
             },
           },
           [
-            Tab({}, [
-              Grid({}, [
-                Grid({}, [
-                  Box({}, [Text({}, []), Button({}, [])]),
-                  Box({}, [Alert({}, []) /* Create Form */]),
-                  Box({}, [Button({}, []), SubmitButton({}, [])]),
-                ]),
-              ]),
-            ]),
-            Tab({}, [
-              Grid({}, [
-                Grid({}, [
-                  Box({}, [Text({}, []), Button({}, [])]),
-                  Box({}, [Alert({}, []) /* Detail Tab */]),
-                  Box({}, [Button({}, []), SubmitButton({}, [])]),
-                ]),
-              ]),
-            ]),
-            Tab({}, [
-              Grid({}, [
-                Grid({}, [
-                  Box({}, [Text({}, []), Button({}, [])]),
-                  Box({}, [Alert({}, []) /* Update Form */]),
-                  Box({}, [Button({}, []), SubmitButton({}, [])]),
-                ]),
-              ]),
-            ]),
+            Tab(
+              {
+                options: {
+                  ...tabOptions,
+                  label: variable('Tab label', { value: ['Create tab'] }),
+                  height: size('Height', {
+                    value: '100%',
+                    configuration: {
+                      as: 'UNIT',
+                    },
+                  }),
+                },
+              },
+              [
+                Grid(
+                  {
+                    options: {
+                      ...gridOptions,
+                      height: size('Height', {
+                        value: '100%',
+                        configuration: {
+                          as: 'UNIT',
+                        },
+                      }),
+                    },
+                  },
+                  [
+                    Grid({}, [
+                      Box({}, [Text({}, []), Button({}, [])]),
+                      Box({}, [Alert({}, []) /* Create Form */]),
+                      Box({}, [Button({}, []), SubmitButton({}, [])]),
+                    ]),
+                  ],
+                ),
+              ],
+            ),
+            Tab(
+              {
+                options: {
+                  ...tabOptions,
+                  label: variable('Tab label', { value: ['Create tab'] }),
+                  height: size('Height', {
+                    value: '100%',
+                    configuration: {
+                      as: 'UNIT',
+                    },
+                  }),
+                },
+              },
+              [
+                Grid(
+                  {
+                    options: {
+                      ...gridOptions,
+                      height: size('Height', {
+                        value: '100%',
+                        configuration: {
+                          as: 'UNIT',
+                        },
+                      }),
+                    },
+                  },
+                  [
+                    Grid({}, [
+                      Box({}, [Text({}, []), Button({}, [])]),
+                      Box({}, [Alert({}, []) /* Detail Tab */]),
+                      Box({}, [Button({}, []), SubmitButton({}, [])]),
+                    ]),
+                  ],
+                ),
+              ],
+            ),
+            Tab(
+              {
+                options: {
+                  ...tabOptions,
+                  label: variable('Tab label', { value: ['Create tab'] }),
+                  height: size('Height', {
+                    value: '100%',
+                    configuration: {
+                      as: 'UNIT',
+                    },
+                  }),
+                },
+              },
+              [
+                Grid(
+                  {
+                    options: {
+                      ...gridOptions,
+                      height: size('Height', {
+                        value: '100%',
+                        configuration: {
+                          as: 'UNIT',
+                        },
+                      }),
+                    },
+                  },
+                  [
+                    Grid({}, [
+                      Box({}, [Text({}, []), Button({}, [])]),
+                      Box({}, [Alert({}, []) /* Update Form */]),
+                      Box({}, [Button({}, []), SubmitButton({}, [])]),
+                    ]),
+                  ],
+                ),
+              ],
+            ),
           ],
         ),
       ]),
