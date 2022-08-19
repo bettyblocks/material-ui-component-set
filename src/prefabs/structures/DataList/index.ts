@@ -1,24 +1,22 @@
-import {
-  component,
-  PrefabComponentOption,
-  PrefabComponent,
-  PrefabComponentStyle,
-} from '@betty-blocks/component-sdk';
-import { options as defaults } from './options';
+import { component, PrefabComponent } from '@betty-blocks/component-sdk';
+import { Configuration } from '../Configuration';
+import { dataListOptions, categories as defaultCategories } from './options';
 
-type OptionProducer = (key: string) => PrefabComponentOption;
-
-export interface Configuration {
-  options?: Record<string, OptionProducer>;
-  style?: PrefabComponentStyle;
-  ref?: { id: string };
-}
 export const DataList = (
   config: Configuration,
   descendants: PrefabComponent[] = [],
 ) => {
-  const options = { ...(config.options || defaults) };
+  const options = { ...(config.options || dataListOptions) };
   const style = { ...config.style };
   const ref = config.ref ? { ...config.ref } : undefined;
-  return component('DataList', { options, style, ref }, descendants);
+  const label = config.label ? config.label : undefined;
+  const optionCategories = config.optionCategories
+    ? config.optionCategories
+    : defaultCategories;
+
+  return component(
+    'DataList',
+    { options, style, ref, label, optionCategories },
+    descendants,
+  );
 };

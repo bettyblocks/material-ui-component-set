@@ -1,3 +1,64 @@
+# [2.27.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.26.0...v2.27.0) (2022-08-17)
+
+
+### Features
+
+* replaced setOption in column layout TMPLT-1653 ([14e3403](https://github.com/bettyblocks/material-ui-component-set/commit/14e3403395523a6676c5a230f68274a7f06a137c))
+
+# [2.26.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.25.0...v2.26.0) (2022-08-12)
+
+
+### Features
+
+* implement new cloneStructure and setOption ([1dc4a0a](https://github.com/bettyblocks/material-ui-component-set/commit/1dc4a0a0bc546406e55e01aac4306ba9be70d0e6))
+
+# [2.25.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.24.0...v2.25.0) (2022-08-11)
+
+
+### Features
+
+* add reconfigure ([c73810a](https://github.com/bettyblocks/material-ui-component-set/commit/c73810a8ed58fca911197a97df5c8c47fc0892eb))
+
+# [2.24.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.23.0...v2.24.0) (2022-08-11)
+
+
+### Bug Fixes
+
+* added missing parameters in login interaction ([83a6e93](https://github.com/bettyblocks/material-ui-component-set/commit/83a6e93efdeca9565d0021878314382e17269835))
+* implement makeBettyInput in loginForm ([e7a9a12](https://github.com/bettyblocks/material-ui-component-set/commit/e7a9a1206ea3d964f10258842e25a1c70811bddb))
+* lint errors ([5fc849d](https://github.com/bettyblocks/material-ui-component-set/commit/5fc849df7a7e7adb93ef4cbcbf803f7a0f1f9935))
+* lint errors ([af0b431](https://github.com/bettyblocks/material-ui-component-set/commit/af0b4317538e7d86cd9f786252c29410f9b1e070))
+* other way of creating forms ([1d68611](https://github.com/bettyblocks/material-ui-component-set/commit/1d686111fb6ea51c410a7df85f36bf291047ec8e))
+* remove unused imports ([83b2dc0](https://github.com/bettyblocks/material-ui-component-set/commit/83b2dc0185233cb2eda2d1d8e258d5d4c835f337))
+* use model instead of modelid to fill in model ([def7a55](https://github.com/bettyblocks/material-ui-component-set/commit/def7a55358b6cd24f17fcd97c9ab6a3c54247988))
+* use structure in actionJS form ([365f6e6](https://github.com/bettyblocks/material-ui-component-set/commit/365f6e6e458c07e201226b8b18224246f13d1db5))
+* use update helper in the update form ([bcf7538](https://github.com/bettyblocks/material-ui-component-set/commit/bcf75389881591e31174301de256bba37b9f8e30))
+
+
+### Features
+
+* add create beta form prefab and use generic success alert message ([40ae731](https://github.com/bettyblocks/material-ui-component-set/commit/40ae7314432c1503ec03191409d459525ed820d7))
+* added login form using pro coder api ([54ace84](https://github.com/bettyblocks/material-ui-component-set/commit/54ace8479a5cd898604d351962a3902ed18786b3))
+
+# [2.23.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.22.0...v2.23.0) (2022-08-11)
+
+
+### Features
+
+* add option categories to data components TMPLT-1632 ([60db294](https://github.com/bettyblocks/material-ui-component-set/commit/60db294e48f586eb19bae8198495db55b6702d69))
+
+# [2.22.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.21.1...v2.22.0) (2022-08-11)
+
+
+### Bug Fixes
+
+* bump cli version ([7d1dec6](https://github.com/bettyblocks/material-ui-component-set/commit/7d1dec66f4949b17551636cc64bb65a4895c33c3))
+
+
+### Features
+
+* add optioncategories and changed names of const options ([8bd76e4](https://github.com/bettyblocks/material-ui-component-set/commit/8bd76e4a982779c1d51f73a0a2eff829a6aa8ddc))
+
 ## [2.21.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.21.0...v2.21.1) (2022-08-10)
 
 ### Bug Fixes
