@@ -14,7 +14,7 @@ import { advanced } from '../../advanced';
 
 export const categories = [
   {
-    label: 'Badging',
+    label: 'Badge',
     expanded: false,
     members: [
       'addBadge',
