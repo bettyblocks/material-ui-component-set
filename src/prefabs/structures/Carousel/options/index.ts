@@ -13,9 +13,29 @@ import {
   ThemeColor,
   variable,
 } from '@betty-blocks/component-sdk';
-import { advanced } from './advanced';
+import { advanced } from '../../advanced';
 
-export const options = {
+export const categories = [
+  {
+    label: 'Styling',
+    expanded: false,
+    members: [
+      'width',
+      'height',
+      'dotColor',
+      'inactiveDotColor',
+      'buttonBackgroundColor',
+      'buttonColor',
+    ],
+  },
+  {
+    label: 'Advanced settings',
+    expanded: false,
+    members: ['dataComponentAttribute'],
+  },
+];
+
+export const carouselOptions = {
   select: option('CUSTOM', {
     label: 'Source',
     value: 'custom',
@@ -203,5 +223,5 @@ export const options = {
     },
   }),
 
-  ...advanced,
+  ...advanced('Carousel'),
 };
