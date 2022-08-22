@@ -5,9 +5,17 @@ import {
   hideIf,
   toggle,
 } from '@betty-blocks/component-sdk';
-import { advanced } from './advanced';
+import { advanced } from '../../advanced';
 
-export const options = {
+export const categories = [
+  {
+    label: 'Advanced settings',
+    expanded: false,
+    members: ['dataComponentAttribute'],
+  },
+];
+
+export const drawerOptions = {
   drawerWidth: size('Drawer Width', {
     value: '200px',
     configuration: {
@@ -76,5 +84,5 @@ export const options = {
     },
   }),
 
-  ...advanced,
+  ...advanced('Drawer'),
 };

@@ -7,10 +7,7 @@ import {
   toggle,
   PrefabComponent,
 } from '@betty-blocks/component-sdk';
-import { DataList } from './structures/DataList';
-import { List } from './structures/List';
-import { ListItem } from './structures/ListItem';
-import { options } from './structures/DataList/options';
+import { DataList, List, ListItem, dataListOptions } from './structures';
 
 const beforeCreate = ({
   components: {
@@ -101,7 +98,7 @@ export default makePrefab('List with data', attrs, beforeCreate, [
       {
         ref: { id: '#dataList' },
         options: {
-          ...options,
+          ...dataListOptions,
           type: option('CUSTOM', {
             label: 'Type',
             value: 'inline',

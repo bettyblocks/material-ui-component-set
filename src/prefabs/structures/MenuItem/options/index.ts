@@ -9,9 +9,27 @@ import {
   toggle,
   hideIf,
 } from '@betty-blocks/component-sdk';
-import { advanced } from './advanced';
+import { advanced } from '../../advanced';
 
-export const options = {
+export const categories = [
+  {
+    label: 'State',
+    expanded: false,
+    members: ['disabled'],
+  },
+  {
+    label: 'Styling',
+    expanded: false,
+    members: ['backgroundColor', 'textColor', 'dense', 'divider'],
+  },
+  {
+    label: 'Advanced settings',
+    expanded: false,
+    members: ['dataComponentAttribute'],
+  },
+];
+
+export const menuItemOptions = {
   primaryText: variable('Primary text', { value: ['Menu Item'] }),
   backgroundColor: color('Background color', { value: ThemeColor.TRANSPARENT }),
   linkType: option('CUSTOM', {
@@ -71,5 +89,5 @@ export const options = {
   dense: toggle('Dense', { value: false }),
   divider: toggle('Divider', { value: false }),
 
-  ...advanced,
+  ...advanced('Menu item'),
 };

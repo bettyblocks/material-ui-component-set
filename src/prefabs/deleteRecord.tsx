@@ -16,20 +16,22 @@ import {
   sizes,
   variable,
 } from '@betty-blocks/component-sdk';
-import { ActionButton } from './structures/ActionButton';
-import { options as actionButtonOptions } from './structures/ActionButton/options';
-import { Box } from './structures/Box';
-import { options as boxOptions } from './structures/Box/options';
-import { Button } from './structures/Button';
-import { options as buttonOptions } from './structures/Button/options';
-import { Column } from './structures/Column';
-import { options as columnOptions } from './structures/Column/options';
-import { Dialog } from './structures/Dialog';
-import { Paper } from './structures/Paper';
-import { Row } from './structures/Row';
-import { options as rowOptions } from './structures/Row/options';
-import { Text as TextPrefab } from './structures/Text';
-import { textOptions } from './structures/Text/options';
+import {
+  ActionButton,
+  actionButtonOptions,
+  Box,
+  boxOptions,
+  Button,
+  buttonOptions,
+  Column,
+  columnOptions,
+  Dialog,
+  Paper,
+  Row,
+  rowOptions,
+  Text as TextPrefab,
+  textOptions,
+} from './structures';
 
 const beforeCreate = ({
   prefab,

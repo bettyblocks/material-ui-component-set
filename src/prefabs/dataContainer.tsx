@@ -8,7 +8,7 @@ import {
   PrefabInteraction,
   ValueConfig,
 } from '@betty-blocks/component-sdk';
-import { DataContainer } from './structures/DataContainer';
+import { DataContainer } from './structures';
 
 const beforeCreate = ({
   prefab,
