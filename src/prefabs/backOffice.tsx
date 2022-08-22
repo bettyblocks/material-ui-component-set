@@ -17,9 +17,11 @@ import {
   showIfTrue,
   hideIf,
   text,
-  BeforeCreateArgs,
+  PrefabReference,
+  component,
 } from '@betty-blocks/component-sdk';
 
+import { Property } from '@betty-blocks/component-sdk/build/prefabs/types/property';
 import {
   Alert,
   alertOptions,
@@ -31,12 +33,14 @@ import {
   columnOptions,
   Conditional,
   conditionalOptions,
+  DataTable,
   Drawer,
   DrawerBar,
   drawerBarOptions,
   DrawerContainer,
   drawerContainerOptions,
   drawerOptions,
+  FormErrorAlert,
   Grid,
   gridOptions,
   List,
@@ -56,6 +60,7 @@ import {
   Text,
   textOptions,
 } from './structures';
+import { options as defaults } from './structures/ActionJSForm/options';
 
 const attributes = {
   category: 'FORMV2',
@@ -428,6 +433,9 @@ const drawerContainer = DrawerContainer(
                                             value: ['Create'],
                                             configuration: { as: 'MULTILINE' },
                                           }),
+                                          styles: toggle('Styles', {
+                                            value: true,
+                                          }),
                                           type: font('Font', {
                                             value: ['Title5'],
                                           }),
@@ -494,38 +502,29 @@ const drawerContainer = DrawerContainer(
                                       innerSpacing: sizes('Inner space', {
                                         value: ['0rem', '0rem', '0rem', '0rem'],
                                       }),
+                                      stretch: toggle(
+                                        'Stretch (when in flex container)',
+                                        {
+                                          value: true,
+                                        },
+                                      ),
                                     },
                                     ref: { id: '#createFormBox' },
                                   },
                                   [
-                                    Alert(
+                                    component(
+                                      'Form Beta',
                                       {
-                                        options: {
-                                          ...alertOptions,
-                                          bodyText: variable('Body text', {
-                                            value: [
-                                              'Something went wrong while creating your record',
-                                            ],
-                                          }),
-                                          textColor: color('Text color', {
-                                            value: ThemeColor.WHITE,
-                                          }),
-                                          iconColor: color('Icon color', {
-                                            value: ThemeColor.WHITE,
-                                          }),
-                                          background: color(
-                                            'Background color',
-                                            {
-                                              value: ThemeColor.DANGER,
-                                            },
-                                          ),
-                                          icon: icon('Icon', {
-                                            value: 'Warning',
-                                          }),
-                                        },
+                                        label: 'Create Form Beta',
+                                        options: defaults,
+                                        ref: { id: '#createForm' },
                                       },
-                                      [],
-                                    ) /* Create Form */,
+                                      [
+                                        FormErrorAlert({
+                                          ref: { id: '#createAlertErrorId' },
+                                        }),
+                                      ],
+                                    ),
                                   ],
                                 ),
                                 Box(
@@ -699,6 +698,10 @@ const drawerContainer = DrawerContainer(
                                           type: font('Font', {
                                             value: ['Title5'],
                                           }),
+                                          styles: toggle('Styles', {
+                                            value: true,
+                                          }),
+
                                           textColor: color('Text color', {
                                             value: ThemeColor.WHITE,
                                             configuration: {
@@ -752,8 +755,71 @@ const drawerContainer = DrawerContainer(
                                     ),
                                   ],
                                 ),
-                                Box({}, [Alert({}, []) /* Detail Tab */]),
-                                Box({}, [Button({}, []), SubmitButton({}, [])]),
+                                Box(
+                                  {
+                                    options: {
+                                      ...boxOptions,
+                                      stretch: toggle(
+                                        'Stretch (when in flex container)',
+                                        {
+                                          value: true,
+                                        },
+                                      ),
+                                    },
+                                    ref: { id: '#detailBox' },
+                                  },
+                                  [
+                                    /* Detail Tab */
+                                  ],
+                                ),
+                                Box(
+                                  {
+                                    options: {
+                                      ...boxOptions,
+                                      alignment: buttongroup(
+                                        'Alignment',
+                                        [
+                                          ['None', 'none'],
+                                          ['Left', 'flex-start'],
+                                          ['Center', 'center'],
+                                          ['Right', 'flex-end'],
+                                          ['Justified', 'space-between'],
+                                        ],
+                                        {
+                                          value: 'space-between',
+                                          configuration: {
+                                            dataType: 'string',
+                                          },
+                                        },
+                                      ),
+                                    },
+                                  },
+                                  [
+                                    Button(
+                                      {
+                                        options: {
+                                          ...buttonOptions,
+                                          buttonText: variable('Button text', {
+                                            value: ['Cancel'],
+                                          }),
+                                        },
+                                      },
+                                      [],
+                                    ),
+                                    Button(
+                                      {
+                                        options: {
+                                          ...buttonOptions,
+                                          buttonText: variable('Button text', {
+                                            value: ['Edit'],
+                                          }),
+                                          icon: icon('Icon', { value: 'Edit' }),
+                                        },
+                                      },
+                                      [],
+                                    ),
+                                  ],
+                                ),
                               ],
                             ),
                           ],
@@ -861,8 +927,11 @@ const drawerContainer = DrawerContainer(
                                         options: {
                                           ...textOptions,
                                           content: variable('Content', {
-                                            value: ['Create'],
+                                            value: ['Update'],
                                             configuration: { as: 'MULTILINE' },
+                                          }),
+                                          styles: toggle('Styles', {
+                                            value: true,
                                           }),
                                           type: font('Font', {
                                             value: ['Title5'],
@@ -930,38 +999,28 @@ const drawerContainer = DrawerContainer(
                                       innerSpacing: sizes('Inner space', {
                                         value: ['0rem', '0rem', '0rem', '0rem'],
                                       }),
+                                      stretch: toggle(
+                                        'Stretch (when in flex container)',
+                                        {
+                                          value: true,
+                                        },
+                                      ),
                                     },
-                                    ref: { id: '#editFormBox' },
                                   },
                                   [
-                                    Alert(
+                                    component(
+                                      'Form Beta',
                                       {
-                                        options: {
-                                          ...alertOptions,
-                                          bodyText: variable('Body text', {
-                                            value: [
-                                              'Something went wrong while updating your record',
-                                            ],
-                                          }),
-                                          textColor: color('Text color', {
-                                            value: ThemeColor.WHITE,
-                                          }),
-                                          iconColor: color('Icon color', {
-                                            value: ThemeColor.WHITE,
-                                          }),
-                                          background: color(
-                                            'Background color',
-                                            {
-                                              value: ThemeColor.DANGER,
-                                            },
-                                          ),
-                                          icon: icon('Icon', {
-                                            value: 'Warning',
-                                          }),
-                                        },
+                                        label: 'Update Form Beta',
+                                        options: defaults,
+                                        ref: { id: '#editForm' },
                                       },
-                                      [],
-                                    ) /* Update Form */,
+                                      [
+                                        FormErrorAlert({
+                                          ref: { id: '#editAlertErrorId' },
+                                        }),
+                                      ],
+                                    ),
                                   ],
                                 ),
                                 Box(
@@ -1786,14 +1845,14 @@ const drawerContainer = DrawerContainer(
                                                                 },
                                                               },
                                                             ),
-                                                          outerSpacing: sizes(
+                                                          innerSpacing: sizes(
                                                             'Outer space',
                                                             {
                                                               value: [
                                                                 '0rem',
                                                                 '0rem',
-                                                                '0rem',
                                                                 'XL',
+                                                                '0rem',
                                                               ],
                                                             },
                                                           ),
@@ -1804,16 +1863,6 @@ const drawerContainer = DrawerContainer(
                                                           {
                                                             options: {
                                                               ...textOptions,
-                                                              content: variable(
-                                                                'Content',
-                                                                {
-                                                                  value: [],
-                                                                  configuration:
-                                                                    {
-                                                                      as: 'MULTILINE',
-                                                                    },
-                                                                },
-                                                              ),
                                                               type: font(
                                                                 'Font',
                                                                 {
@@ -1853,6 +1902,14 @@ const drawerContainer = DrawerContainer(
                                                           [],
                                                         ),
                                                       ],
+                                                    ),
+                                                    DataTable(
+                                                      {
+                                                        ref: {
+                                                          id: '#dataTable',
+                                                        },
+                                                      },
+                                                      [],
                                                     ),
                                                   ],
                                                 ),
@@ -1945,19 +2002,32 @@ const beforeCreate = ({
     ModelRelationSelector,
     PropertiesSelector,
     PartialSelector,
-    ModelSelector,
-    Text: TextComp
+    // ModelSelector,
+    Text: TextComp,
     Box: BoxComp,
+    Button: Buttoncomp,
   },
-  helpers: { cloneStructure, setOption, useModelQuery, prepareAction },
+  helpers: {
+    useModelQuery,
+    prepareAction,
+    cloneStructure,
+    setOption,
+    createUuid,
+    makeBettyInput,
+    makeBettyUpdateInput,
+    PropertyKind,
+    BettyPrefabs,
+  },
   prefab: originalPrefab,
   save,
   close,
-}: BeforeCreateArgs) => {
+}: any) => {
   const [modelId, setModelId] = React.useState('');
+  const [model, setModel] = React.useState(null);
   const [properties, setProperties] = React.useState([]);
   const [modelValidation, setModelValidation] = React.useState(false);
   const [propertiesValidation, setPropertiesValidation] = React.useState(false);
+  const [idProperty, setIdProperty] = React.useState<Property>();
   const { data } = useModelQuery({
     variables: { id: modelId },
     skip: !modelId,
@@ -1966,6 +2036,117 @@ const beforeCreate = ({
   const [headerPartialId, setHeaderPartialId] = React.useState('');
   const [footerPartialId, setFooterPartialId] = React.useState('');
 
+  const createFormId = createUuid();
+  const editFormId = createUuid();
+
+  const getDescendantByRef = (refValue: string, structure: any) =>
+    structure.reduce((acc: string, comp: PrefabReference) => {
+      if (acc) return acc;
+      if (
+        comp.type === 'COMPONENT' &&
+        // eslint-disable-next-line no-prototype-builtins
+        comp.ref
+          ? Object.values(comp.ref).indexOf(refValue) > -1
+          : undefined
+      ) {
+        return comp;
+      }
+      if (comp.type === 'PARTIAL') {
+        return acc;
+      }
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      return getDescendantByRef(refValue, comp.descendants);
+    }, null);
+
+  const enrichVarObj = (obj) => {
+    const returnObject = obj;
+    if (data && data.model) {
+      const property = data.model.properties.find(
+        (prop) => prop.id === obj.id[0],
+      );
+      if (property) {
+        returnObject.name = `{{ ${data.model.name}.${property.name} }}`;
+      }
+    }
+    return returnObject;
+  };
+
+  const makeDetail = (prop) => {
+    debugger;
+    const mediaComponent = cloneStructure('Media');
+    setOption(mediaComponent, 'imageSource', (opt: any) => ({
+      ...opt,
+      value: [{ ...prop }],
+      configuration: {
+        as: 'BUTTONGROUP',
+        dataType: 'string',
+        allowedInput: [
+          { name: 'Image', value: 'img' },
+          { name: 'Video', value: 'video' },
+          { name: 'I-frame', value: 'iframe' },
+        ],
+      },
+    }));
+
+    const detailComponent = cloneStructure('Box');
+    setOption(detailComponent, 'outerSpace', (opt: any) => ({
+      ...opt,
+      value: ['0rem', '0rem', 'M', '0rem'],
+    }));
+    setOption(detailComponent, 'backgroundColor', (opt: any) => ({
+      ...opt,
+      value: 'Accent1',
+    }));
+    setOption(detailComponent, 'backgroundColorAlpha', (opt: any) => ({
+      ...opt,
+      value: '20',
+    }));
+    const labelText = cloneStructure('Text');
+    setOption(labelText, 'content', (opt: any) => ({
+      ...opt,
+      value: [`${[prop.label]}:`],
+      configuration: { as: 'MULTILINE' },
+    }));
+    setOption(labelText, 'type', (opt: any) => ({
+      ...opt,
+      value: 'Body1',
+    }));
+    setOption(labelText, 'Styles', (opt: any) => ({
+      ...opt,
+      value: true,
+    }));
+    setOption(labelText, 'fontWeight', (opt: any) => ({
+      ...opt,
+      value: '500',
+      configuration: {
+        as: 'DROPDOWN',
+        dataType: 'string',
+        allowedInput: [
+          { name: '100', value: '100' },
+          { name: '200', value: '200' },
+          { name: '300', value: '300' },
+          { name: '400', value: '400' },
+          { name: '500', value: '500' },
+          { name: '600', value: '600' },
+          { name: '700', value: '700' },
+          { name: '800', value: '800' },
+          { name: '900', value: '900' },
+        ],
+      },
+    }));
+
+    const valueText = cloneStructure('Text');
+    setOption(valueText, 'content', (opt: any) => ({
+      ...opt,
+      value: [enrichVarObj({ ...prop })],
+      configuration: { as: 'MULTILINE' },
+    }));
+
+    detailComponent.descendants = [labelText, valueText];
+
+    return prop.kind === 'IMAGE' ? mediaComponent : detailComponent;
+  };
+
   const modelRequest = useModelQuery({
     variables: { id: modelId },
     onCompleted: (result) => {
@@ -1973,7 +2154,6 @@ const beforeCreate = ({
       setIdProperty(result.model.properties.find(({ name }) => name === 'id'));
     },
   });
-
 
   const stepper = {
     setStep: (step: any) => {
@@ -2036,12 +2216,14 @@ const beforeCreate = ({
             label="Model"
             error={
               modelValidation && (
-                <TextComp color="#e82600">Selecting a model is required</TextComp>
+                <TextComp color="#e82600">
+                  Selecting a model is required
+                </TextComp>
               )
             }
           >
-            <ModelSelector
-              onChange={(value) => {
+            <ModelRelationSelector
+              onChange={(value: any) => {
                 setModelValidation(false);
                 setModelId(value);
               }}
@@ -2052,7 +2234,9 @@ const beforeCreate = ({
             label="Properties used in Backoffice"
             error={
               propertiesValidation && (
-                <TextComp color="#e82600">Selecting a property is required</TextComp>
+                <TextComp color="#e82600">
+                  Selecting a property is required
+                </TextComp>
               )
             }
           >
@@ -2091,22 +2275,1018 @@ const beforeCreate = ({
         </>
       );
     },
-    onSave: () => {
-        const newPrefab = { ...originalPrefab };
+    onSave: async () => {
+      const newPrefab = { ...originalPrefab };
+
+      // set title prop
+      const titleComponent = getDescendantByRef(
+        '#titleText',
+        newPrefab.structure,
+      );
+      titleComponent.options[0].value = [data?.model.label];
+
+      // set datatable
+      const dataTable = getDescendantByRef('#dataTable', newPrefab.structure);
+
+      dataTable.options[1] = {
+        value: modelId,
+        label: 'Model',
+        key: 'model',
+        type: 'MODEL_AND_RELATION',
+      };
+
+      properties.forEach(
+        (property: {
+          defaultValue: null;
+          id: string[];
+          kind: string;
+          labonSael: string;
+          type: string;
+          format: string;
+        }) => {
+          let newProperty = property;
+          const inheritFormatKinds = [
+            'DATE',
+            'DATE_EXPRESSION',
+            'DATE_TIME',
+            'DATE_TIME_EXPRESSION',
+            'DECIMAL',
+            'DECIMAL_EXPRESSION',
+            'INTEGER',
+            'INTEGER_EXPRESSION',
+            'PRICE',
+            'PRICE_EXPRESSION',
+            'TIME',
+          ];
+          if (inheritFormatKinds.includes(property.kind)) {
+            newProperty = {
+              ...property,
+              format: 'INHERIT',
+            };
+          }
+
+          const dataTableColumnStructure = cloneStructure('Datatable Column');
+          if (dataTableColumnStructure.type !== 'COMPONENT') {
+            throw new Error(
+              `expected component prefab, found ${dataTableColumnStructure.type}`,
+            );
+          }
+
+          setOption(
+            dataTableColumnStructure,
+            'property',
+            (originalOption: any) => {
+              return {
+                ...originalOption,
+                value: newProperty,
+              };
+            },
+          );
+          dataTable.descendants.push(dataTableColumnStructure);
+        },
+      );
+
+      const buttonColumn = cloneStructure('Datatable Column');
+      const detailButton = cloneStructure('Button');
+      detailButton.style = {
+        overwrite: {
+          backgroundColor: {
+            type: 'STATIC',
+            value: 'transparent',
+          },
+          boxShadow: 'none',
+          color: {
+            type: 'THEME_COLOR',
+            value: 'primary',
+          },
+          fontFamily: 'Roboto',
+          fontSize: '0.875rem',
+          fontStyle: 'none',
+          fontWeight: '400',
+          padding: ['0.6875rem', '0.6875rem'],
+          textDecoration: 'none',
+          textTransform: 'none',
+        },
+      };
+
+      detailButton.options = [
+        {
+          label: 'Toggle visibility',
+          key: 'visible',
+          value: true,
+          type: 'TOGGLE',
+          configuration: {
+            as: 'VISIBILITY',
+          },
+        },
+        {
+          type: 'VARIABLE',
+          label: 'Button text',
+          key: 'buttonText',
+          value: [''],
+        },
+        {
+          value: false,
+          label: 'Full width',
+          key: 'fullWidth',
+          type: 'TOGGLE',
+          configuration: {
+            condition: {
+              type: 'HIDE',
+              option: 'variant',
+              comparator: 'EQ',
+              value: 'icon',
+            },
+          },
+        },
+        {
+          label: 'Icon',
+          key: 'icon',
+          value: 'Info',
+          type: 'ICON',
+        },
+        {
+          value: 'small',
+          label: 'Icon size',
+          key: 'size',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Small', value: 'small' },
+              { name: 'Medium', value: 'medium' },
+              { name: 'Large', value: 'large' },
+            ],
+            condition: {
+              type: 'HIDE',
+              option: 'icon',
+              comparator: 'EQ',
+              value: 'None',
+            },
+          },
+        },
+        {
+          type: 'CUSTOM',
+          label: 'Icon position',
+          key: 'iconPosition',
+          value: 'start',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            condition: {
+              type: 'HIDE',
+              option: 'icon',
+              comparator: 'EQ',
+              value: 'None',
+            },
+            allowedInput: [
+              { name: 'Start', value: 'start' },
+              { name: 'End', value: 'end' },
+            ],
+          },
+        },
+        {
+          value: ['0rem', '0rem', '0rem', '0rem'],
+          label: 'Outer space',
+          key: 'outerSpacing',
+          type: 'SIZES',
+        },
+        {
+          label: 'Disabled',
+          key: 'disabled',
+          value: false,
+          type: 'TOGGLE',
+        },
+        {
+          label: 'Add Tooltip',
+          key: 'addTooltip',
+          value: false,
+          type: 'TOGGLE',
+        },
+        {
+          label: 'Toggle tooltip visibility',
+          key: 'hasVisibleTooltip',
+          value: true,
+          type: 'TOGGLE',
+          configuration: {
+            as: 'VISIBILITY',
+            condition: {
+              type: 'SHOW',
+              option: 'addTooltip',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'VARIABLE',
+          label: 'Tooltip Content',
+          key: 'tooltipContent',
+          value: ['Tips'],
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'addTooltip',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          label: 'Tooltip Placement',
+          key: 'tooltipPlacement',
+          value: 'bottom',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'DROPDOWN',
+            dataType: 'string',
+            allowedInput: [
+              {
+                name: 'Top Start',
+                value: 'top-start',
+              },
+              {
+                name: 'Top',
+                value: 'top',
+              },
+              {
+                name: 'Top End',
+                value: 'top-end',
+              },
+              {
+                name: 'Right',
+                value: 'right',
+              },
+              {
+                name: 'Left',
+                value: 'left',
+              },
+              {
+                name: 'Botttom Start',
+                value: 'bottom-start',
+              },
+              {
+                name: 'Bottom',
+                value: 'bottom',
+              },
+              {
+                name: 'Bottom End',
+                value: 'bottom-end',
+              },
+            ],
+            condition: {
+              type: 'SHOW',
+              option: 'addTooltip',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'COLOR',
+          label: 'Tooltip Background',
+          key: 'tooltipBackground',
+          value: 'Medium',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'addTooltip',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'COLOR',
+          label: 'Tooltip Text',
+          key: 'tooltipText',
+          value: 'Black',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'addTooltip',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          value: false,
+          label: 'Advanced settings',
+          key: 'advancedSettings',
+          type: 'TOGGLE',
+        },
+        {
+          type: 'VARIABLE',
+          label: 'Test attribute',
+          key: 'dataComponentAttribute',
+          value: ['Button'],
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'advancedSettings',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+      ];
+
+      detailButton.ref = { id: '#detailButton' };
+
+      const editButton = cloneStructure('Button');
+      editButton.style = {
+        overwrite: {
+          backgroundColor: {
+            type: 'STATIC',
+            value: 'transparent',
+          },
+          boxShadow: 'none',
+          color: {
+            type: 'THEME_COLOR',
+            value: 'primary',
+          },
+          fontFamily: 'Roboto',
+          fontSize: '0.875rem',
+          fontStyle: 'none',
+          fontWeight: '400',
+          padding: ['0.6875rem', '0.6875rem'],
+          textDecoration: 'none',
+          textTransform: 'none',
+        },
+      };
+
+      editButton.options = [
+        {
+          label: 'Toggle visibility',
+          key: 'visible',
+          value: true,
+          type: 'TOGGLE',
+          configuration: {
+            as: 'VISIBILITY',
+          },
+        },
+        {
+          type: 'VARIABLE',
+          label: 'Button text',
+          key: 'buttonText',
+          value: [''],
+        },
+        {
+          value: false,
+          label: 'Full width',
+          key: 'fullWidth',
+          type: 'TOGGLE',
+          configuration: {
+            condition: {
+              type: 'HIDE',
+              option: 'variant',
+              comparator: 'EQ',
+              value: 'icon',
+            },
+          },
+        },
+        {
+          label: 'Icon',
+          key: 'icon',
+          value: 'Edit',
+          type: 'ICON',
+        },
+        {
+          value: 'small',
+          label: 'Icon size',
+          key: 'size',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Small', value: 'small' },
+              { name: 'Medium', value: 'medium' },
+              { name: 'Large', value: 'large' },
+            ],
+            condition: {
+              type: 'HIDE',
+              option: 'icon',
+              comparator: 'EQ',
+              value: 'None',
+            },
+          },
+        },
+        {
+          type: 'CUSTOM',
+          label: 'Icon position',
+          key: 'iconPosition',
+          value: 'start',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            condition: {
+              type: 'HIDE',
+              option: 'icon',
+              comparator: 'EQ',
+              value: 'None',
+            },
+            allowedInput: [
+              { name: 'Start', value: 'start' },
+              { name: 'End', value: 'end' },
+            ],
+          },
+        },
+        {
+          value: ['0rem', '0rem', '0rem', '0rem'],
+          label: 'Outer space',
+          key: 'outerSpacing',
+          type: 'SIZES',
+        },
+        {
+          label: 'Disabled',
+          key: 'disabled',
+          value: false,
+          type: 'TOGGLE',
+        },
+        {
+          label: 'Add Tooltip',
+          key: 'addTooltip',
+          value: false,
+          type: 'TOGGLE',
+        },
+        {
+          label: 'Toggle tooltip visibility',
+          key: 'hasVisibleTooltip',
+          value: true,
+          type: 'TOGGLE',
+          configuration: {
+            as: 'VISIBILITY',
+            condition: {
+              type: 'SHOW',
+              option: 'addTooltip',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'VARIABLE',
+          label: 'Tooltip Content',
+          key: 'tooltipContent',
+          value: ['Tips'],
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'addTooltip',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          label: 'Tooltip Placement',
+          key: 'tooltipPlacement',
+          value: 'bottom',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'DROPDOWN',
+            dataType: 'string',
+            allowedInput: [
+              {
+                name: 'Top Start',
+                value: 'top-start',
+              },
+              {
+                name: 'Top',
+                value: 'top',
+              },
+              {
+                name: 'Top End',
+                value: 'top-end',
+              },
+              {
+                name: 'Right',
+                value: 'right',
+              },
+              {
+                name: 'Left',
+                value: 'left',
+              },
+              {
+                name: 'Botttom Start',
+                value: 'bottom-start',
+              },
+              {
+                name: 'Bottom',
+                value: 'bottom',
+              },
+              {
+                name: 'Bottom End',
+                value: 'bottom-end',
+              },
+            ],
+            condition: {
+              type: 'SHOW',
+              option: 'addTooltip',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'COLOR',
+          label: 'Tooltip Background',
+          key: 'tooltipBackground',
+          value: 'Medium',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'addTooltip',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          type: 'COLOR',
+          label: 'Tooltip Text',
+          key: 'tooltipText',
+          value: 'Black',
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'addTooltip',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+        {
+          value: false,
+          label: 'Advanced settings',
+          key: 'advancedSettings',
+          type: 'TOGGLE',
+        },
+        {
+          type: 'VARIABLE',
+          label: 'Test attribute',
+          key: 'dataComponentAttribute',
+          value: ['Button'],
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'advancedSettings',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
+        },
+      ];
+
+      editButton.ref = { id: '#editButton' };
+
+      // buttonColumn.descendants = [];
+
+      // set create form
+      if (idProperty && model) {
+        const createForm = getDescendantByRef(
+          '#createForm',
+          newPrefab.structure,
+        );
+        createForm.id = createFormId;
 
         const result = await prepareAction(
-            componentId,
-            idProperty,
-            properties,
-            'create',
-          );
+          createFormId,
+          idProperty,
+          properties,
+          'create',
+        );
 
-        save(newPrefab);
+        Object.values(result.variables).map(([property, propVariable]) => {
+          const { kind } = property;
+
+          switch (kind) {
+            case PropertyKind.BELONGS_TO: {
+              createForm.descendants.push(
+                makeBettyInput(
+                  BettyPrefabs.AUTO_COMPLETE,
+                  model,
+                  property,
+                  propVariable,
+                  result.relatedIdProperties,
+                ),
+              );
+              break;
+            }
+            case PropertyKind.HAS_MANY:
+            case PropertyKind.HAS_AND_BELONGS_TO_MANY:
+              createForm.descendants.push(
+                makeBettyInput(
+                  BettyPrefabs.MULTI_AUTO_COMPLETE,
+                  model,
+                  property,
+                  propVariable,
+                  result.relatedIdProperties,
+                ),
+              );
+              break;
+            case PropertyKind.DATE_TIME:
+              createForm.descendants.push(
+                makeBettyInput(
+                  BettyPrefabs.DATE_TIME,
+                  model,
+                  property,
+                  propVariable,
+                ),
+              );
+              break;
+            case PropertyKind.DATE:
+              createForm.descendants.push(
+                makeBettyInput(
+                  BettyPrefabs.DATE,
+                  model,
+                  property,
+                  propVariable,
+                ),
+              );
+              break;
+            case PropertyKind.TIME:
+              createForm.descendants.push(
+                makeBettyInput(
+                  BettyPrefabs.TIME,
+                  model,
+                  property,
+                  propVariable,
+                ),
+              );
+              break;
+            case PropertyKind.DECIMAL:
+              createForm.descendants.push(
+                makeBettyInput(
+                  BettyPrefabs.DECIMAL,
+                  model,
+                  property,
+                  propVariable,
+                ),
+              );
+              break;
+            case PropertyKind.EMAIL_ADDRESS:
+              createForm.descendants.push(
+                makeBettyInput(
+                  BettyPrefabs.EMAIL_ADDRESS,
+                  model,
+                  property,
+                  propVariable,
+                ),
+              );
+              break;
+            case PropertyKind.IBAN:
+              createForm.descendants.push(
+                makeBettyInput(
+                  BettyPrefabs.IBAN,
+                  model,
+                  property,
+                  propVariable,
+                ),
+              );
+              break;
+            case PropertyKind.LIST:
+              createForm.descendants.push(
+                makeBettyInput(
+                  BettyPrefabs.LIST,
+                  model,
+                  property,
+                  propVariable,
+                ),
+              );
+              break;
+            case PropertyKind.PASSWORD:
+              createForm.descendants.push(
+                makeBettyInput(
+                  BettyPrefabs.PASSWORD,
+                  model,
+                  property,
+                  propVariable,
+                ),
+              );
+              break;
+            case PropertyKind.PHONE_NUMBER:
+              createForm.descendants.push(
+                makeBettyInput(
+                  BettyPrefabs.PHONE_NUMBER,
+                  model,
+                  property,
+                  propVariable,
+                ),
+              );
+              break;
+            case PropertyKind.PRICE:
+              createForm.descendants.push(
+                makeBettyInput(
+                  BettyPrefabs.PRICE,
+                  model,
+                  property,
+                  propVariable,
+                ),
+              );
+              break;
+            case PropertyKind.URL:
+              createForm.descendants.push(
+                makeBettyInput(BettyPrefabs.URL, model, property, propVariable),
+              );
+              break;
+            case PropertyKind.STRING:
+              createForm.descendants.push(
+                makeBettyInput(
+                  BettyPrefabs.STRING,
+                  model,
+                  property,
+                  propVariable,
+                ),
+              );
+              break;
+            case PropertyKind.TEXT:
+              createForm.descendants.push(
+                makeBettyInput(
+                  BettyPrefabs.TEXT,
+                  model,
+                  property,
+                  propVariable,
+                ),
+              );
+              break;
+            case PropertyKind.INTEGER:
+              createForm.descendants.push(
+                makeBettyInput(
+                  BettyPrefabs.INTEGER,
+                  model,
+                  property,
+                  propVariable,
+                ),
+              );
+              break;
+            case PropertyKind.BOOLEAN:
+              createForm.descendants.push(
+                makeBettyInput(
+                  BettyPrefabs.BOOLEAN,
+                  model,
+                  property,
+                  propVariable,
+                ),
+              );
+              break;
+            default:
+              createForm.descendants.push(
+                makeBettyInput(
+                  BettyPrefabs.STRING,
+                  model,
+                  property,
+                  propVariable,
+                ),
+              );
+          }
+          // eslint-disable-next-line no-console
+          return console.warn('PropertyKind not found');
+        });
+
+        setOption(createForm, 'actionId', (opts) => ({
+          ...opts,
+          value: result.action.actionId,
+          configuration: { disabled: true },
+        }));
+
+        setOption(createForm, 'model', (opts) => ({
+          ...opts,
+          value: modelId,
+          configuration: {
+            disabled: true,
+          },
+        }));
+      }
+
+      // set detail tab
+      const detailBox = getDescendantByRef('#detailBox', newPrefab.structure);
+      properties.map((prop) => detailBox.descendants.push(makeDetail(prop)));
+
+      // set edit form
+      const editForm = getDescendantByRef('#editForm', newPrefab.structure);
+      editForm.id = editFormId;
+      if (idProperty && model) {
+        const result = await prepareAction(
+          editFormId,
+          idProperty,
+          properties,
+          'update',
+        );
+        setOption(editForm, 'actionId', (opts) => ({
+          ...opts,
+          value: result.action.actionId,
+          configuration: { disabled: true },
+        }));
+        setOption(editForm, 'model', (opts) => ({
+          ...opts,
+          value: modelId,
+          configuration: {
+            disabled: true,
+          },
+        }));
+
+        Object.values(result.variables).map(([property, variable]) => {
+          const { kind } = property;
+          switch (kind) {
+            case PropertyKind.BELONGS_TO: {
+              editForm.descendants.push(
+                makeBettyUpdateInput(
+                  BettyPrefabs.AUTO_COMPLETE,
+                  model,
+                  property,
+                  variable,
+                  result.relatedIdProperties,
+                ),
+              );
+              break;
+            }
+            case PropertyKind.HAS_MANY:
+            case PropertyKind.HAS_AND_BELONGS_TO_MANY:
+              editForm.descendants.push(
+                makeBettyUpdateInput(
+                  BettyPrefabs.MULTI_AUTO_COMPLETE,
+                  model,
+                  property,
+                  variable,
+                  result.relatedIdProperties,
+                ),
+              );
+              break;
+            case PropertyKind.DATE_TIME:
+              editForm.descendants.push(
+                makeBettyUpdateInput(
+                  BettyPrefabs.DATE_TIME,
+                  model,
+                  property,
+                  variable,
+                ),
+              );
+              break;
+            case PropertyKind.DATE:
+              editForm.descendants.push(
+                makeBettyUpdateInput(
+                  BettyPrefabs.DATE,
+                  model,
+                  property,
+                  variable,
+                ),
+              );
+              break;
+            case PropertyKind.TIME:
+              editForm.descendants.push(
+                makeBettyUpdateInput(
+                  BettyPrefabs.TIME,
+                  model,
+                  property,
+                  variable,
+                ),
+              );
+              break;
+            case PropertyKind.DECIMAL:
+              editForm.descendants.push(
+                makeBettyUpdateInput(
+                  BettyPrefabs.DECIMAL,
+                  model,
+                  property,
+                  variable,
+                ),
+              );
+              break;
+            case PropertyKind.EMAIL_ADDRESS:
+              editForm.descendants.push(
+                makeBettyUpdateInput(
+                  BettyPrefabs.EMAIL_ADDRESS,
+                  model,
+                  property,
+                  variable,
+                ),
+              );
+              break;
+            case PropertyKind.IBAN:
+              editForm.descendants.push(
+                makeBettyUpdateInput(
+                  BettyPrefabs.IBAN,
+                  model,
+                  property,
+                  variable,
+                ),
+              );
+              break;
+            case PropertyKind.LIST:
+              editForm.descendants.push(
+                makeBettyUpdateInput(
+                  BettyPrefabs.LIST,
+                  model,
+                  property,
+                  variable,
+                ),
+              );
+              break;
+            case PropertyKind.PASSWORD:
+              editForm.descendants.push(
+                makeBettyUpdateInput(
+                  BettyPrefabs.PASSWORD,
+                  model,
+                  property,
+                  variable,
+                ),
+              );
+              break;
+            case PropertyKind.PHONE_NUMBER:
+              editForm.descendants.push(
+                makeBettyUpdateInput(
+                  BettyPrefabs.PHONE_NUMBER,
+                  model,
+                  property,
+                  variable,
+                ),
+              );
+              break;
+            case PropertyKind.PRICE:
+              editForm.descendants.push(
+                makeBettyUpdateInput(
+                  BettyPrefabs.PRICE,
+                  model,
+                  property,
+                  variable,
+                ),
+              );
+              break;
+            case PropertyKind.URL:
+              editForm.descendants.push(
+                makeBettyUpdateInput(
+                  BettyPrefabs.URL,
+                  model,
+                  property,
+                  variable,
+                ),
+              );
+              break;
+            case PropertyKind.STRING:
+              editForm.descendants.push(
+                makeBettyUpdateInput(
+                  BettyPrefabs.STRING,
+                  model,
+                  property,
+                  variable,
+                ),
+              );
+              break;
+            case PropertyKind.TEXT:
+              editForm.descendants.push(
+                makeBettyUpdateInput(
+                  BettyPrefabs.TEXT,
+                  model,
+                  property,
+                  variable,
+                ),
+              );
+              break;
+            case PropertyKind.INTEGER:
+              editForm.descendants.push(
+                makeBettyUpdateInput(
+                  BettyPrefabs.INTEGER,
+                  model,
+                  property,
+                  variable,
+                ),
+              );
+              break;
+            case PropertyKind.BOOLEAN:
+              editForm.descendants.push(
+                makeBettyUpdateInput(
+                  BettyPrefabs.BOOLEAN,
+                  model,
+                  property,
+                  variable,
+                ),
+              );
+              break;
+            default:
+              editForm.descendants.push(
+                makeBettyUpdateInput(
+                  BettyPrefabs.STRING,
+                  model,
+                  property,
+                  variable,
+                ),
+              );
+          }
+          // eslint-disable-next-line no-console
+          return console.warn('PropertyKind not found');
+        });
+      }
+
+      save(newPrefab);
     },
     buttons: () => (
-      <Box direction="row" justify="between">
-        <Box direction="row" margin="2rem">
-          <Button
+      <BoxComp direction="row" justify="between">
+        <BoxComp direction="row" margin="2rem">
+          <Buttoncomp
             label="Previous"
             size="large"
             background={{ color: '#f0f1f5' }}
@@ -2120,7 +3300,7 @@ const beforeCreate = ({
             margin={{ right: '5px' }}
             disabled={stepNumber === 1}
           />
-          <Button
+          <Buttoncomp
             label="Next"
             size="large"
             disabled={stepNumber === stepper.stepAmount}
@@ -2130,14 +3310,14 @@ const beforeCreate = ({
             }}
             primary
           />
-        </Box>
-        <Box>
+        </BoxComp>
+        <BoxComp>
           <Footer
             onClose={close}
             onSave={stepNumber === stepper.stepAmount && stepper.onSave}
           />
-        </Box>
-      </Box>
+        </BoxComp>
+      </BoxComp>
     ),
     progressBar: () => {
       return (
@@ -2163,4 +3343,9 @@ const beforeCreate = ({
   );
 };
 
-export default prefab('Backoffice(TS)', attributes, undefined, prefabStructure);
+export default prefab(
+  'Backoffice(TS)',
+  attributes,
+  beforeCreate,
+  prefabStructure,
+);
