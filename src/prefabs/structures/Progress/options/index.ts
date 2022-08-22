@@ -8,9 +8,27 @@ import {
   text,
   sizes,
 } from '@betty-blocks/component-sdk';
-import { advanced } from './advanced';
+import { advanced } from '../../advanced';
 
-export const options = {
+export const categories = [
+  {
+    label: 'Styling',
+    expanded: false,
+    members: ['color', 'thickness', 'size'],
+  },
+  {
+    label: 'Spacing',
+    expanded: false,
+    members: ['outerSpacing'],
+  },
+  {
+    label: 'Advanced settings',
+    expanded: false,
+    members: ['dataComponentAttribute'],
+  },
+];
+
+export const progressOptions = {
   visible: toggle('Toggle visibility', {
     value: true,
     configuration: {
@@ -98,5 +116,5 @@ export const options = {
     value: ['M', '0rem', 'M', '0rem'],
   }),
 
-  ...advanced,
+  ...advanced('Progress'),
 };

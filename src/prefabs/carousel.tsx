@@ -32,6 +32,7 @@ const beforeCreate = ({
   prefab: originalPrefab,
   save,
   close,
+  helpers: { cloneStructure, setOption },
 }: BeforeCreateArgs) => {
   const [modelId, setModelId] = React.useState('');
   const [property, setProperty] = React.useState('');
@@ -235,129 +236,33 @@ const beforeCreate = ({
           }
           if (select === 'custom') {
             structure.descendants = [];
-            images.forEach((item) => {
-              // This currently produces 1 extra carouselImage.
-              structure.descendants.push({
-                name: 'CarouselImage',
-                options: [
-                  {
-                    value: 'url',
-                    label: 'Media type',
-                    type: 'CUSTOM',
-                    key: 'type',
-                    configuration: {
-                      as: 'BUTTONGROUP',
-                      dataType: 'string',
-                      allowedInput: [
-                        { name: 'Public File', value: 'publicFile' },
-                        { name: 'URL', value: 'url' },
-                      ],
-                    },
-                  },
-                  {
-                    value: '',
-                    label: 'Image',
-                    key: 'imageFileSource',
-                    type: 'PUBLIC_FILE',
-                    configuration: {
-                      mediaType: 'IMAGE',
-                      allowedExtensions: ['image/*'],
-                      condition: {
-                        type: 'SHOW',
-                        option: 'type',
-                        comparator: 'EQ',
-                        value: 'publicFile',
-                      },
-                    },
-                  },
-                  {
-                    value: [item.image],
-                    label: 'Source',
-                    key: 'urlFileSource',
-                    type: 'VARIABLE',
-                    configuration: {
-                      condition: {
-                        type: 'SHOW',
-                        option: 'type',
-                        comparator: 'EQ',
-                        value: 'url',
-                      },
-                    },
-                  },
-                  {
-                    value: false,
-                    label: 'Advanced settings',
-                    key: 'advancedSettings',
-                    type: 'TOGGLE',
-                  },
-                  {
-                    type: 'VARIABLE',
-                    label: 'Test attribute',
-                    key: 'dataComponentAttribute',
-                    value: ['CarouselImage'],
-                    configuration: {
-                      condition: {
-                        type: 'SHOW',
-                        option: 'advancedSettings',
-                        comparator: 'EQ',
-                        value: true,
-                      },
-                    },
-                  },
-                ],
-                descendants: [],
-              });
+
+            images.forEach(({ image }) => {
+              const carouselImage = cloneStructure('Carousel image');
+              if (carouselImage.type !== 'COMPONENT') {
+                throw new Error(
+                  `Expected a component, but instead got ${carouselImage.type}`,
+                );
+              }
+              setOption(carouselImage, 'imageSource', (option) => ({
+                ...option,
+                value: [image],
+              }));
+              structure.descendants.push(carouselImage);
             });
           } else {
-            structure.options[0] = {
-              type: 'CUSTOM',
-              label: 'Source',
-              key: 'select',
+            setOption(structure, 'select', (option) => ({
+              ...option,
               value: 'model',
-              configuration: {
-                as: 'BUTTONGROUP',
-                dataType: 'string',
-                allowedInput: [
-                  {
-                    name: 'URL',
-                    value: 'custom',
-                  },
-                  {
-                    name: 'Model',
-                    value: 'model',
-                  },
-                ],
-              },
-            };
-            structure.options[1] = {
+            }));
+            setOption(structure, 'model', (option) => ({
+              ...option,
               value: modelId,
-              label: 'Model',
-              key: 'model',
-              type: 'MODEL_AND_RELATION',
-              configuration: {
-                condition: {
-                  type: 'SHOW',
-                  option: 'select',
-                  comparator: 'EQ',
-                  value: 'model',
-                },
-              },
-            };
-            structure.options[2] = {
-              label: 'Property',
-              key: 'property',
-              type: 'PROPERTY',
+            }));
+            setOption(structure, 'property', (option) => ({
+              ...option,
               value: property,
-              configuration: {
-                dependsOn: 'model',
-                condition: {
-                  type: 'SHOW',
-                  option: 'select',
-                  comparator: 'EQ',
-                  value: 'model',
-                },
-              },
-            };
+            }));
           }
           save(newPrefab);
         }}
