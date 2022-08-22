@@ -1,3 +1,26 @@
+# [2.28.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.27.0...v2.28.0) (2022-08-22)
+
+
+### Bug Fixes
+
+* carousel and icon prefab ([2a55666](https://github.com/bettyblocks/material-ui-component-set/commit/2a55666ea0e8825254e04f5c90ee3f408d040ed0))
+* remove style check on text component ([53a76f6](https://github.com/bettyblocks/material-ui-component-set/commit/53a76f6da41c628b8a418531f017d9dd03724300))
+* small changes ([2fb81ee](https://github.com/bettyblocks/material-ui-component-set/commit/2fb81ee9d950a16c3face9802dfd8c601f090d06))
+
+
+### Features
+
+* add new options to text ([eca41a3](https://github.com/bettyblocks/material-ui-component-set/commit/eca41a32012eeafc9279acb66111635a5fb42275))
+* add option carousel ([ea3d009](https://github.com/bettyblocks/material-ui-component-set/commit/ea3d0093047f8a6a82d1565aeb6f0a8eb7701229))
+* add option to avatar/carousel/carouselimage/ ([9753359](https://github.com/bettyblocks/material-ui-component-set/commit/97533596b56c57dd1929de2fe374fb9f3c366312))
+* add options to alert ([f4ba13d](https://github.com/bettyblocks/material-ui-component-set/commit/f4ba13d9108c0d2339b2921f9d1b82360dfc0753))
+* add options to chip component ([075c3e2](https://github.com/bettyblocks/material-ui-component-set/commit/075c3e2ee2498b450f7e534ec6e149c9178896c1))
+* add options to divider and snackbar ([266c18f](https://github.com/bettyblocks/material-ui-component-set/commit/266c18ff1b13e8b5ba6e02f5c5b080fc43606876))
+* add options to icon ([5573eff](https://github.com/bettyblocks/material-ui-component-set/commit/5573eff849e2a4979d6444ee1899672589540c82))
+* add options to media component ([f957c81](https://github.com/bettyblocks/material-ui-component-set/commit/f957c81c86c009bff1c7f11b8a68411aa4f3aa57))
+* add options to progress ([722ad56](https://github.com/bettyblocks/material-ui-component-set/commit/722ad56e1319459426dea3227515659367666cba))
+* add options to text prefab ([0421210](https://github.com/bettyblocks/material-ui-component-set/commit/04212106c0f4eb0f5aa00a93fa1e2b67fb65fb74))
+
 # [2.27.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.26.0...v2.27.0) (2022-08-17)
 
 
