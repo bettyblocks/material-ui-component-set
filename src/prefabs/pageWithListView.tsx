@@ -40,6 +40,7 @@ import {
   textInputOptions,
   DataList,
   Paper,
+  paperOptions,
   Button as ButtonPrefab,
   buttonOptions,
   dataListOptions,
@@ -459,7 +460,8 @@ const beforeCreate = ({
               const newPrefab = { ...prefab };
               save(newPrefab);
             }}
-            onSave={stepNumber === stepper.stepAmount && stepper.onSave}
+            canSave={stepNumber === stepper.stepAmount}
+            onSave={stepper.onSave}
           />
         </Box>
       </Box>
@@ -488,7 +490,7 @@ const beforeCreate = ({
   );
 };
 
-export default makePrefab('TSX Header & Footer', attrs, beforeCreate, [
+export default makePrefab('List view', attrs, beforeCreate, [
   Row(
     {
       options: {
@@ -1012,1117 +1014,1139 @@ export default makePrefab('TSX Header & Footer', attrs, beforeCreate, [
                                         },
                                       },
                                       [
-                                        Paper({}, [
-                                          Row(
-                                            {
-                                              options: {
-                                                ...rowOptions,
-                                                maxRowWidth: option('CUSTOM', {
-                                                  label: 'Width',
-                                                  value: 'Full',
-                                                  configuration: {
-                                                    as: 'BUTTONGROUP',
-                                                    dataType: 'string',
-                                                    allowedInput: [
-                                                      { name: 'S', value: 'S' },
-                                                      { name: 'M', value: 'M' },
-                                                      { name: 'L', value: 'L' },
-                                                      {
-                                                        name: 'XL',
-                                                        value: 'XL',
-                                                      },
-                                                      {
-                                                        name: 'Full',
-                                                        value: 'Full',
-                                                      },
-                                                    ],
-                                                  },
-                                                }),
-                                              },
+                                        Paper(
+                                          {
+                                            options: {
+                                              ...paperOptions,
+                                              variant: option('CUSTOM', {
+                                                label: 'Variant',
+                                                value: 'outlined',
+                                                configuration: {
+                                                  as: 'BUTTONGROUP',
+                                                  dataType: 'string',
+                                                  allowedInput: [
+                                                    {
+                                                      name: 'Flat',
+                                                      value: 'flat',
+                                                    },
+                                                    {
+                                                      name: 'Elevation',
+                                                      value: 'elevation',
+                                                    },
+                                                    {
+                                                      name: 'Outlined',
+                                                      value: 'outlined',
+                                                    },
+                                                  ],
+                                                },
+                                              }),
                                             },
-                                            [
-                                              Column(
-                                                {
-                                                  options: {
-                                                    ...columnOptions,
-                                                    columnWidth: option(
-                                                      'CUSTOM',
-                                                      {
-                                                        label: 'Column width',
-                                                        value: '3',
-                                                        configuration: {
-                                                          as: 'DROPDOWN',
-                                                          dataType: 'string',
-                                                          allowedInput: [
-                                                            {
-                                                              name: 'Fit content',
-                                                              value:
-                                                                'fitContent',
-                                                            },
-                                                            {
-                                                              name: 'Flexible',
-                                                              value: 'flexible',
-                                                            },
-                                                            {
-                                                              name: 'Hidden',
-                                                              value: 'hidden',
-                                                            },
-                                                            {
-                                                              name: '1',
-                                                              value: '1',
-                                                            },
-                                                            {
-                                                              name: '2',
-                                                              value: '2',
-                                                            },
-                                                            {
-                                                              name: '3',
-                                                              value: '3',
-                                                            },
-                                                            {
-                                                              name: '4',
-                                                              value: '4',
-                                                            },
-                                                            {
-                                                              name: '5',
-                                                              value: '5',
-                                                            },
-                                                            {
-                                                              name: '6',
-                                                              value: '6',
-                                                            },
-                                                            {
-                                                              name: '7',
-                                                              value: '7',
-                                                            },
-                                                            {
-                                                              name: '8',
-                                                              value: '8',
-                                                            },
-                                                            {
-                                                              name: '9',
-                                                              value: '9',
-                                                            },
-                                                            {
-                                                              name: '10',
-                                                              value: '10',
-                                                            },
-                                                            {
-                                                              name: '11',
-                                                              value: '11',
-                                                            },
-                                                            {
-                                                              name: '12',
-                                                              value: '12',
-                                                            },
-                                                          ],
-                                                        },
-                                                      },
-                                                    ),
-                                                    columnWidthTabletLandscape:
-                                                      option('CUSTOM', {
-                                                        label:
-                                                          'Column width (tablet landscape)',
-                                                        value: '3',
-                                                        configuration: {
-                                                          as: 'DROPDOWN',
-                                                          dataType: 'string',
-                                                          allowedInput: [
-                                                            {
-                                                              name: 'Fit content',
-                                                              value:
-                                                                'fitContent',
-                                                            },
-                                                            {
-                                                              name: 'Flexible',
-                                                              value: 'flexible',
-                                                            },
-                                                            {
-                                                              name: 'Hidden',
-                                                              value: 'hidden',
-                                                            },
-                                                            {
-                                                              name: '1',
-                                                              value: '1',
-                                                            },
-                                                            {
-                                                              name: '2',
-                                                              value: '2',
-                                                            },
-                                                            {
-                                                              name: '3',
-                                                              value: '3',
-                                                            },
-                                                            {
-                                                              name: '4',
-                                                              value: '4',
-                                                            },
-                                                            {
-                                                              name: '5',
-                                                              value: '5',
-                                                            },
-                                                            {
-                                                              name: '6',
-                                                              value: '6',
-                                                            },
-                                                            {
-                                                              name: '7',
-                                                              value: '7',
-                                                            },
-                                                            {
-                                                              name: '8',
-                                                              value: '8',
-                                                            },
-                                                            {
-                                                              name: '9',
-                                                              value: '9',
-                                                            },
-                                                            {
-                                                              name: '10',
-                                                              value: '10',
-                                                            },
-                                                            {
-                                                              name: '11',
-                                                              value: '11',
-                                                            },
-                                                            {
-                                                              name: '12',
-                                                              value: '12',
-                                                            },
-                                                          ],
-                                                        },
-                                                      }),
-                                                    columnWidthTabletPortrait:
-                                                      option('CUSTOM', {
-                                                        value: '3',
-                                                        label:
-                                                          'Column width (tablet portrait)',
-                                                        configuration: {
-                                                          as: 'DROPDOWN',
-                                                          dataType: 'string',
-                                                          allowedInput: [
-                                                            {
-                                                              name: 'Fit content',
-                                                              value:
-                                                                'fitContent',
-                                                            },
-                                                            {
-                                                              name: 'Flexible',
-                                                              value: 'flexible',
-                                                            },
-                                                            {
-                                                              name: 'Hidden',
-                                                              value: 'hidden',
-                                                            },
-                                                            {
-                                                              name: '1',
-                                                              value: '1',
-                                                            },
-                                                            {
-                                                              name: '2',
-                                                              value: '2',
-                                                            },
-                                                            {
-                                                              name: '3',
-                                                              value: '3',
-                                                            },
-                                                            {
-                                                              name: '4',
-                                                              value: '4',
-                                                            },
-                                                            {
-                                                              name: '5',
-                                                              value: '5',
-                                                            },
-                                                            {
-                                                              name: '6',
-                                                              value: '6',
-                                                            },
-                                                            {
-                                                              name: '7',
-                                                              value: '7',
-                                                            },
-                                                            {
-                                                              name: '8',
-                                                              value: '8',
-                                                            },
-                                                            {
-                                                              name: '9',
-                                                              value: '9',
-                                                            },
-                                                            {
-                                                              name: '10',
-                                                              value: '10',
-                                                            },
-                                                            {
-                                                              name: '11',
-                                                              value: '11',
-                                                            },
-                                                            {
-                                                              name: '12',
-                                                              value: '12',
-                                                            },
-                                                          ],
-                                                        },
-                                                      }),
-                                                    columnWidthMobile: option(
-                                                      'CUSTOM',
-                                                      {
-                                                        value: '3',
-                                                        label:
-                                                          'Column width (mobile)',
-                                                        configuration: {
-                                                          as: 'DROPDOWN',
-                                                          dataType: 'string',
-                                                          allowedInput: [
-                                                            {
-                                                              name: 'Fit content',
-                                                              value:
-                                                                'fitContent',
-                                                            },
-                                                            {
-                                                              name: 'Flexible',
-                                                              value: 'flexible',
-                                                            },
-                                                            {
-                                                              name: 'Hidden',
-                                                              value: 'hidden',
-                                                            },
-                                                            {
-                                                              name: '1',
-                                                              value: '1',
-                                                            },
-                                                            {
-                                                              name: '2',
-                                                              value: '2',
-                                                            },
-                                                            {
-                                                              name: '3',
-                                                              value: '3',
-                                                            },
-                                                            {
-                                                              name: '4',
-                                                              value: '4',
-                                                            },
-                                                            {
-                                                              name: '5',
-                                                              value: '5',
-                                                            },
-                                                            {
-                                                              name: '6',
-                                                              value: '6',
-                                                            },
-                                                            {
-                                                              name: '7',
-                                                              value: '7',
-                                                            },
-                                                            {
-                                                              name: '8',
-                                                              value: '8',
-                                                            },
-                                                            {
-                                                              name: '9',
-                                                              value: '9',
-                                                            },
-                                                            {
-                                                              name: '10',
-                                                              value: '10',
-                                                            },
-                                                            {
-                                                              name: '11',
-                                                              value: '11',
-                                                            },
-                                                            {
-                                                              name: '12',
-                                                              value: '12',
-                                                            },
-                                                          ],
-                                                        },
-                                                      },
-                                                    ),
-                                                    innerSpacing: sizes(
-                                                      'Inner space',
-                                                      {
-                                                        value: [
-                                                          '0rem',
-                                                          '0rem',
-                                                          '0rem',
-                                                          '0rem',
+                                          },
+                                          [
+                                            Row(
+                                              {
+                                                options: {
+                                                  ...rowOptions,
+                                                  maxRowWidth: option(
+                                                    'CUSTOM',
+                                                    {
+                                                      label: 'Width',
+                                                      value: 'Full',
+                                                      configuration: {
+                                                        as: 'BUTTONGROUP',
+                                                        dataType: 'string',
+                                                        allowedInput: [
+                                                          {
+                                                            name: 'S',
+                                                            value: 'S',
+                                                          },
+                                                          {
+                                                            name: 'M',
+                                                            value: 'M',
+                                                          },
+                                                          {
+                                                            name: 'L',
+                                                            value: 'L',
+                                                          },
+                                                          {
+                                                            name: 'XL',
+                                                            value: 'XL',
+                                                          },
+                                                          {
+                                                            name: 'Full',
+                                                            value: 'Full',
+                                                          },
                                                         ],
                                                       },
-                                                    ),
-                                                  },
-                                                },
-                                                [
-                                                  prefabBox(
-                                                    {
-                                                      ref: { id: '#BoxImage' },
-                                                      options: {
-                                                        ...boxOptions,
-                                                        height: size('Height', {
-                                                          value: '220px',
-                                                          configuration: {
-                                                            as: 'UNIT',
-                                                          },
-                                                        }),
-                                                        width: size('Width', {
-                                                          value: '100%',
-                                                          configuration: {
-                                                            as: 'UNIT',
-                                                          },
-                                                        }),
-                                                        innerSpacing: sizes(
-                                                          'Inner space',
-                                                          {
-                                                            value: [
-                                                              '0rem',
-                                                              '0rem',
-                                                              '0rem',
-                                                              '0rem',
-                                                            ],
-                                                          },
-                                                        ),
-                                                        backgroundUrl: variable(
-                                                          'Background url',
-                                                          {
-                                                            value: [
-                                                              'https://assets.bettyblocks.com/771d40f1fc49403e824cdca2fe025aeb_assets/files/contemplative_lizard',
-                                                            ],
-                                                          },
-                                                        ),
-                                                        backgroundSize:
-                                                          buttongroup(
-                                                            'Background size',
-                                                            [
-                                                              [
-                                                                'Initial',
-                                                                'initial',
-                                                              ],
-                                                              [
-                                                                'Contain',
-                                                                'contain',
-                                                              ],
-                                                              [
-                                                                'Cover',
-                                                                'cover',
-                                                              ],
-                                                            ],
-                                                            {
-                                                              value: 'cover',
-                                                              configuration: {
-                                                                dataType:
-                                                                  'string',
-                                                              },
-                                                            },
-                                                          ),
-                                                      },
                                                     },
-                                                    [],
                                                   ),
-                                                ],
-                                              ),
-                                              Column(
-                                                {
-                                                  options: {
-                                                    ...columnOptions,
-                                                    columnWidth: option(
-                                                      'CUSTOM',
-                                                      {
-                                                        label: 'Column width',
-                                                        value: '9',
-                                                        configuration: {
-                                                          as: 'DROPDOWN',
-                                                          dataType: 'string',
-                                                          allowedInput: [
-                                                            {
-                                                              name: 'Fit content',
-                                                              value:
-                                                                'fitContent',
-                                                            },
-                                                            {
-                                                              name: 'Flexible',
-                                                              value: 'flexible',
-                                                            },
-                                                            {
-                                                              name: 'Hidden',
-                                                              value: 'hidden',
-                                                            },
-                                                            {
-                                                              name: '1',
-                                                              value: '1',
-                                                            },
-                                                            {
-                                                              name: '2',
-                                                              value: '2',
-                                                            },
-                                                            {
-                                                              name: '3',
-                                                              value: '3',
-                                                            },
-                                                            {
-                                                              name: '4',
-                                                              value: '4',
-                                                            },
-                                                            {
-                                                              name: '5',
-                                                              value: '5',
-                                                            },
-                                                            {
-                                                              name: '6',
-                                                              value: '6',
-                                                            },
-                                                            {
-                                                              name: '7',
-                                                              value: '7',
-                                                            },
-                                                            {
-                                                              name: '8',
-                                                              value: '8',
-                                                            },
-                                                            {
-                                                              name: '9',
-                                                              value: '9',
-                                                            },
-                                                            {
-                                                              name: '10',
-                                                              value: '10',
-                                                            },
-                                                            {
-                                                              name: '11',
-                                                              value: '11',
-                                                            },
-                                                            {
-                                                              name: '12',
-                                                              value: '12',
-                                                            },
-                                                          ],
-                                                        },
-                                                      },
-                                                    ),
-                                                    columnWidthTabletLandscape:
-                                                      option('CUSTOM', {
-                                                        label:
-                                                          'Column width (tablet landscape)',
-                                                        value: '9',
-                                                        configuration: {
-                                                          as: 'DROPDOWN',
-                                                          dataType: 'string',
-                                                          allowedInput: [
-                                                            {
-                                                              name: 'Fit content',
-                                                              value:
-                                                                'fitContent',
-                                                            },
-                                                            {
-                                                              name: 'Flexible',
-                                                              value: 'flexible',
-                                                            },
-                                                            {
-                                                              name: 'Hidden',
-                                                              value: 'hidden',
-                                                            },
-                                                            {
-                                                              name: '1',
-                                                              value: '1',
-                                                            },
-                                                            {
-                                                              name: '2',
-                                                              value: '2',
-                                                            },
-                                                            {
-                                                              name: '3',
-                                                              value: '3',
-                                                            },
-                                                            {
-                                                              name: '4',
-                                                              value: '4',
-                                                            },
-                                                            {
-                                                              name: '5',
-                                                              value: '5',
-                                                            },
-                                                            {
-                                                              name: '6',
-                                                              value: '6',
-                                                            },
-                                                            {
-                                                              name: '7',
-                                                              value: '7',
-                                                            },
-                                                            {
-                                                              name: '8',
-                                                              value: '8',
-                                                            },
-                                                            {
-                                                              name: '9',
-                                                              value: '9',
-                                                            },
-                                                            {
-                                                              name: '10',
-                                                              value: '10',
-                                                            },
-                                                            {
-                                                              name: '11',
-                                                              value: '11',
-                                                            },
-                                                            {
-                                                              name: '12',
-                                                              value: '12',
-                                                            },
-                                                          ],
-                                                        },
-                                                      }),
-                                                    columnWidthTabletPortrait:
-                                                      option('CUSTOM', {
-                                                        value: '9',
-                                                        label:
-                                                          'Column width (tablet portrait)',
-                                                        configuration: {
-                                                          as: 'DROPDOWN',
-                                                          dataType: 'string',
-                                                          allowedInput: [
-                                                            {
-                                                              name: 'Fit content',
-                                                              value:
-                                                                'fitContent',
-                                                            },
-                                                            {
-                                                              name: 'Flexible',
-                                                              value: 'flexible',
-                                                            },
-                                                            {
-                                                              name: 'Hidden',
-                                                              value: 'hidden',
-                                                            },
-                                                            {
-                                                              name: '1',
-                                                              value: '1',
-                                                            },
-                                                            {
-                                                              name: '2',
-                                                              value: '2',
-                                                            },
-                                                            {
-                                                              name: '3',
-                                                              value: '3',
-                                                            },
-                                                            {
-                                                              name: '4',
-                                                              value: '4',
-                                                            },
-                                                            {
-                                                              name: '5',
-                                                              value: '5',
-                                                            },
-                                                            {
-                                                              name: '6',
-                                                              value: '6',
-                                                            },
-                                                            {
-                                                              name: '7',
-                                                              value: '7',
-                                                            },
-                                                            {
-                                                              name: '8',
-                                                              value: '8',
-                                                            },
-                                                            {
-                                                              name: '9',
-                                                              value: '9',
-                                                            },
-                                                            {
-                                                              name: '10',
-                                                              value: '10',
-                                                            },
-                                                            {
-                                                              name: '11',
-                                                              value: '11',
-                                                            },
-                                                            {
-                                                              name: '12',
-                                                              value: '12',
-                                                            },
-                                                          ],
-                                                        },
-                                                      }),
-                                                    columnWidthMobile: option(
-                                                      'CUSTOM',
-                                                      {
-                                                        value: '9',
-                                                        label:
-                                                          'Column width (mobile)',
-                                                        configuration: {
-                                                          as: 'DROPDOWN',
-                                                          dataType: 'string',
-                                                          allowedInput: [
-                                                            {
-                                                              name: 'Fit content',
-                                                              value:
-                                                                'fitContent',
-                                                            },
-                                                            {
-                                                              name: 'Flexible',
-                                                              value: 'flexible',
-                                                            },
-                                                            {
-                                                              name: 'Hidden',
-                                                              value: 'hidden',
-                                                            },
-                                                            {
-                                                              name: '1',
-                                                              value: '1',
-                                                            },
-                                                            {
-                                                              name: '2',
-                                                              value: '2',
-                                                            },
-                                                            {
-                                                              name: '3',
-                                                              value: '3',
-                                                            },
-                                                            {
-                                                              name: '4',
-                                                              value: '4',
-                                                            },
-                                                            {
-                                                              name: '5',
-                                                              value: '5',
-                                                            },
-                                                            {
-                                                              name: '6',
-                                                              value: '6',
-                                                            },
-                                                            {
-                                                              name: '7',
-                                                              value: '7',
-                                                            },
-                                                            {
-                                                              name: '8',
-                                                              value: '8',
-                                                            },
-                                                            {
-                                                              name: '9',
-                                                              value: '9',
-                                                            },
-                                                            {
-                                                              name: '10',
-                                                              value: '10',
-                                                            },
-                                                            {
-                                                              name: '11',
-                                                              value: '11',
-                                                            },
-                                                            {
-                                                              name: '12',
-                                                              value: '12',
-                                                            },
-                                                          ],
-                                                        },
-                                                      },
-                                                    ),
-                                                    innerSpacing: sizes(
-                                                      'Inner space',
-                                                      {
-                                                        value: [
-                                                          'S',
-                                                          'M',
-                                                          'S',
-                                                          'M',
-                                                        ],
-                                                      },
-                                                    ),
-                                                  },
                                                 },
-                                                [
-                                                  Grid(
-                                                    {
-                                                      options: {
-                                                        ...gridOptions,
-                                                        height: size('Height', {
-                                                          value: '100%',
+                                              },
+                                              [
+                                                Column(
+                                                  {
+                                                    options: {
+                                                      ...columnOptions,
+                                                      columnWidth: option(
+                                                        'CUSTOM',
+                                                        {
+                                                          label: 'Column width',
+                                                          value: '3',
                                                           configuration: {
-                                                            as: 'UNIT',
+                                                            as: 'DROPDOWN',
+                                                            dataType: 'string',
+                                                            allowedInput: [
+                                                              {
+                                                                name: 'Fit content',
+                                                                value:
+                                                                  'fitContent',
+                                                              },
+                                                              {
+                                                                name: 'Flexible',
+                                                                value:
+                                                                  'flexible',
+                                                              },
+                                                              {
+                                                                name: 'Hidden',
+                                                                value: 'hidden',
+                                                              },
+                                                              {
+                                                                name: '1',
+                                                                value: '1',
+                                                              },
+                                                              {
+                                                                name: '2',
+                                                                value: '2',
+                                                              },
+                                                              {
+                                                                name: '3',
+                                                                value: '3',
+                                                              },
+                                                              {
+                                                                name: '4',
+                                                                value: '4',
+                                                              },
+                                                              {
+                                                                name: '5',
+                                                                value: '5',
+                                                              },
+                                                              {
+                                                                name: '6',
+                                                                value: '6',
+                                                              },
+                                                              {
+                                                                name: '7',
+                                                                value: '7',
+                                                              },
+                                                              {
+                                                                name: '8',
+                                                                value: '8',
+                                                              },
+                                                              {
+                                                                name: '9',
+                                                                value: '9',
+                                                              },
+                                                              {
+                                                                name: '10',
+                                                                value: '10',
+                                                              },
+                                                              {
+                                                                name: '11',
+                                                                value: '11',
+                                                              },
+                                                              {
+                                                                name: '12',
+                                                                value: '12',
+                                                              },
+                                                            ],
+                                                          },
+                                                        },
+                                                      ),
+                                                      columnWidthTabletLandscape:
+                                                        option('CUSTOM', {
+                                                          label:
+                                                            'Column width (tablet landscape)',
+                                                          value: '3',
+                                                          configuration: {
+                                                            as: 'DROPDOWN',
+                                                            dataType: 'string',
+                                                            allowedInput: [
+                                                              {
+                                                                name: 'Fit content',
+                                                                value:
+                                                                  'fitContent',
+                                                              },
+                                                              {
+                                                                name: 'Flexible',
+                                                                value:
+                                                                  'flexible',
+                                                              },
+                                                              {
+                                                                name: 'Hidden',
+                                                                value: 'hidden',
+                                                              },
+                                                              {
+                                                                name: '1',
+                                                                value: '1',
+                                                              },
+                                                              {
+                                                                name: '2',
+                                                                value: '2',
+                                                              },
+                                                              {
+                                                                name: '3',
+                                                                value: '3',
+                                                              },
+                                                              {
+                                                                name: '4',
+                                                                value: '4',
+                                                              },
+                                                              {
+                                                                name: '5',
+                                                                value: '5',
+                                                              },
+                                                              {
+                                                                name: '6',
+                                                                value: '6',
+                                                              },
+                                                              {
+                                                                name: '7',
+                                                                value: '7',
+                                                              },
+                                                              {
+                                                                name: '8',
+                                                                value: '8',
+                                                              },
+                                                              {
+                                                                name: '9',
+                                                                value: '9',
+                                                              },
+                                                              {
+                                                                name: '10',
+                                                                value: '10',
+                                                              },
+                                                              {
+                                                                name: '11',
+                                                                value: '11',
+                                                              },
+                                                              {
+                                                                name: '12',
+                                                                value: '12',
+                                                              },
+                                                            ],
                                                           },
                                                         }),
-                                                      },
-                                                    },
-                                                    [
-                                                      Grid(
+                                                      columnWidthTabletPortrait:
+                                                        option('CUSTOM', {
+                                                          value: '3',
+                                                          label:
+                                                            'Column width (tablet portrait)',
+                                                          configuration: {
+                                                            as: 'DROPDOWN',
+                                                            dataType: 'string',
+                                                            allowedInput: [
+                                                              {
+                                                                name: 'Fit content',
+                                                                value:
+                                                                  'fitContent',
+                                                              },
+                                                              {
+                                                                name: 'Flexible',
+                                                                value:
+                                                                  'flexible',
+                                                              },
+                                                              {
+                                                                name: 'Hidden',
+                                                                value: 'hidden',
+                                                              },
+                                                              {
+                                                                name: '1',
+                                                                value: '1',
+                                                              },
+                                                              {
+                                                                name: '2',
+                                                                value: '2',
+                                                              },
+                                                              {
+                                                                name: '3',
+                                                                value: '3',
+                                                              },
+                                                              {
+                                                                name: '4',
+                                                                value: '4',
+                                                              },
+                                                              {
+                                                                name: '5',
+                                                                value: '5',
+                                                              },
+                                                              {
+                                                                name: '6',
+                                                                value: '6',
+                                                              },
+                                                              {
+                                                                name: '7',
+                                                                value: '7',
+                                                              },
+                                                              {
+                                                                name: '8',
+                                                                value: '8',
+                                                              },
+                                                              {
+                                                                name: '9',
+                                                                value: '9',
+                                                              },
+                                                              {
+                                                                name: '10',
+                                                                value: '10',
+                                                              },
+                                                              {
+                                                                name: '11',
+                                                                value: '11',
+                                                              },
+                                                              {
+                                                                name: '12',
+                                                                value: '12',
+                                                              },
+                                                            ],
+                                                          },
+                                                        }),
+                                                      columnWidthMobile: option(
+                                                        'CUSTOM',
                                                         {
-                                                          options: {
-                                                            ...gridOptions,
-                                                            direction: option(
-                                                              'CUSTOM',
+                                                          value: '3',
+                                                          label:
+                                                            'Column width (mobile)',
+                                                          configuration: {
+                                                            as: 'DROPDOWN',
+                                                            dataType: 'string',
+                                                            allowedInput: [
                                                               {
-                                                                value: 'column',
-                                                                label:
-                                                                  'Direction',
-                                                                configuration: {
-                                                                  as: 'BUTTONGROUP',
-                                                                  dataType:
-                                                                    'string',
-                                                                  allowedInput:
-                                                                    [
-                                                                      {
-                                                                        name: 'Horizontal',
-                                                                        value:
-                                                                          'row',
-                                                                      },
-                                                                      {
-                                                                        name: 'Vertical',
-                                                                        value:
-                                                                          'column',
-                                                                      },
-                                                                    ],
-                                                                  condition:
-                                                                    showIf(
-                                                                      'type',
-                                                                      'EQ',
-                                                                      'container',
-                                                                    ),
-                                                                },
+                                                                name: 'Fit content',
+                                                                value:
+                                                                  'fitContent',
                                                               },
-                                                            ),
-                                                            wrap: option(
-                                                              'CUSTOM',
                                                               {
-                                                                value: 'nowrap',
-                                                                label: 'Wrap',
-                                                                configuration: {
-                                                                  as: 'BUTTONGROUP',
-                                                                  dataType:
-                                                                    'string',
-                                                                  allowedInput:
-                                                                    [
-                                                                      {
-                                                                        name: 'No wrap',
-                                                                        value:
-                                                                          'nowrap',
-                                                                      },
-                                                                      {
-                                                                        name: 'Wrap',
-                                                                        value:
-                                                                          'wrap',
-                                                                      },
-                                                                      {
-                                                                        name: 'Wrap reverse',
-                                                                        value:
-                                                                          'wrap-reverse',
-                                                                      },
-                                                                    ],
-                                                                },
+                                                                name: 'Flexible',
+                                                                value:
+                                                                  'flexible',
                                                               },
-                                                            ),
+                                                              {
+                                                                name: 'Hidden',
+                                                                value: 'hidden',
+                                                              },
+                                                              {
+                                                                name: '1',
+                                                                value: '1',
+                                                              },
+                                                              {
+                                                                name: '2',
+                                                                value: '2',
+                                                              },
+                                                              {
+                                                                name: '3',
+                                                                value: '3',
+                                                              },
+                                                              {
+                                                                name: '4',
+                                                                value: '4',
+                                                              },
+                                                              {
+                                                                name: '5',
+                                                                value: '5',
+                                                              },
+                                                              {
+                                                                name: '6',
+                                                                value: '6',
+                                                              },
+                                                              {
+                                                                name: '7',
+                                                                value: '7',
+                                                              },
+                                                              {
+                                                                name: '8',
+                                                                value: '8',
+                                                              },
+                                                              {
+                                                                name: '9',
+                                                                value: '9',
+                                                              },
+                                                              {
+                                                                name: '10',
+                                                                value: '10',
+                                                              },
+                                                              {
+                                                                name: '11',
+                                                                value: '11',
+                                                              },
+                                                              {
+                                                                name: '12',
+                                                                value: '12',
+                                                              },
+                                                            ],
                                                           },
                                                         },
-                                                        [
-                                                          prefabBox(
+                                                      ),
+                                                      innerSpacing: sizes(
+                                                        'Inner space',
+                                                        {
+                                                          value: [
+                                                            '0rem',
+                                                            '0rem',
+                                                            '0rem',
+                                                            '0rem',
+                                                          ],
+                                                        },
+                                                      ),
+                                                    },
+                                                  },
+                                                  [
+                                                    prefabBox(
+                                                      {
+                                                        ref: {
+                                                          id: '#BoxImage',
+                                                        },
+                                                        options: {
+                                                          ...boxOptions,
+                                                          height: size(
+                                                            'Height',
                                                             {
-                                                              options: {
-                                                                ...boxOptions,
-                                                                innerSpacing:
-                                                                  sizes(
-                                                                    'Inner space',
-                                                                    {
-                                                                      value: [
-                                                                        '0rem',
-                                                                        '0rem',
-                                                                        '0rem',
-                                                                        '0rem',
-                                                                      ],
-                                                                    },
-                                                                  ),
+                                                              value: '220px',
+                                                              configuration: {
+                                                                as: 'UNIT',
                                                               },
                                                             },
-                                                            [
-                                                              TextPrefab(
-                                                                {
-                                                                  ref: {
-                                                                    id: '#Title',
-                                                                  },
-                                                                  options: {
-                                                                    ...textOptions,
-                                                                    content:
-                                                                      variable(
-                                                                        'Content',
-                                                                        {
-                                                                          value:
-                                                                            [
-                                                                              'Title',
-                                                                            ],
-                                                                          configuration:
-                                                                            {
-                                                                              as: 'MULTILINE',
-                                                                            },
-                                                                        },
-                                                                      ),
-                                                                    type: font(
-                                                                      'Font',
-                                                                      {
-                                                                        value: [
-                                                                          'Title4',
-                                                                        ],
-                                                                      },
-                                                                    ),
-                                                                  },
-                                                                },
-                                                                [],
-                                                              ),
-                                                              TextPrefab(
-                                                                {
-                                                                  ref: {
-                                                                    id: '#SubHeader',
-                                                                  },
-                                                                  options: {
-                                                                    ...textOptions,
-                                                                    content:
-                                                                      variable(
-                                                                        'Content',
-                                                                        {
-                                                                          value:
-                                                                            [
-                                                                              'Subheader',
-                                                                            ],
-                                                                          configuration:
-                                                                            {
-                                                                              as: 'MULTILINE',
-                                                                            },
-                                                                        },
-                                                                      ),
-                                                                    type: font(
-                                                                      'Font',
-                                                                      {
-                                                                        value: [
-                                                                          'Body1',
-                                                                        ],
-                                                                      },
-                                                                    ),
-                                                                    outerSpacing:
-                                                                      sizes(
-                                                                        'Outer space',
-                                                                        {
-                                                                          value:
-                                                                            [
-                                                                              '0rem',
-                                                                              '0rem',
-                                                                              'S',
-                                                                              '0rem',
-                                                                            ],
-                                                                        },
-                                                                      ),
-                                                                  },
-                                                                },
-                                                                [],
-                                                              ),
-                                                            ],
                                                           ),
-                                                          prefabBox(
-                                                            {
-                                                              options: {
-                                                                ...boxOptions,
-                                                                stretch: toggle(
-                                                                  'Stretch (when in flex container)',
-                                                                  {
-                                                                    value: true,
-                                                                  },
-                                                                ),
-
-                                                                width: size(
-                                                                  'Width',
-                                                                  {
-                                                                    value:
-                                                                      '100%',
-                                                                    configuration:
-                                                                      {
-                                                                        as: 'UNIT',
-                                                                      },
-                                                                  },
-                                                                ),
-
-                                                                innerSpacing:
-                                                                  sizes(
-                                                                    'Inner space',
-                                                                    {
-                                                                      value: [
-                                                                        '0rem',
-                                                                        '0rem',
-                                                                        '0rem',
-                                                                        '0rem',
-                                                                      ],
-                                                                    },
-                                                                  ),
-                                                              },
+                                                          width: size('Width', {
+                                                            value: '100%',
+                                                            configuration: {
+                                                              as: 'UNIT',
                                                             },
-                                                            [
-                                                              TextPrefab(
-                                                                {
-                                                                  ref: {
-                                                                    id: '#Description',
-                                                                  },
-                                                                  options: {
-                                                                    ...textOptions,
-                                                                    content:
-                                                                      variable(
-                                                                        'Content',
-                                                                        {
-                                                                          value:
-                                                                            [
-                                                                              'Description',
-                                                                            ],
-                                                                          configuration:
-                                                                            {
-                                                                              as: 'MULTILINE',
-                                                                            },
-                                                                        },
-                                                                      ),
-                                                                    type: font(
-                                                                      'Font',
-                                                                      {
-                                                                        value: [
-                                                                          'Body2',
-                                                                        ],
-                                                                      },
-                                                                    ),
-                                                                  },
-                                                                },
-                                                                [],
-                                                              ),
-                                                            ],
+                                                          }),
+                                                          innerSpacing: sizes(
+                                                            'Inner space',
+                                                            {
+                                                              value: [
+                                                                '0rem',
+                                                                '0rem',
+                                                                '0rem',
+                                                                '0rem',
+                                                              ],
+                                                            },
                                                           ),
-                                                          prefabBox(
+                                                          backgroundUrl:
+                                                            variable(
+                                                              'Background url',
+                                                              {
+                                                                value: [
+                                                                  'https://assets.bettyblocks.com/771d40f1fc49403e824cdca2fe025aeb_assets/files/contemplative_lizard',
+                                                                ],
+                                                              },
+                                                            ),
+                                                          backgroundSize:
+                                                            buttongroup(
+                                                              'Background size',
+                                                              [
+                                                                [
+                                                                  'Initial',
+                                                                  'initial',
+                                                                ],
+                                                                [
+                                                                  'Contain',
+                                                                  'contain',
+                                                                ],
+                                                                [
+                                                                  'Cover',
+                                                                  'cover',
+                                                                ],
+                                                              ],
+                                                              {
+                                                                value: 'cover',
+                                                                configuration: {
+                                                                  dataType:
+                                                                    'string',
+                                                                },
+                                                              },
+                                                            ),
+                                                        },
+                                                      },
+                                                      [],
+                                                    ),
+                                                  ],
+                                                ),
+                                                Column(
+                                                  {
+                                                    options: {
+                                                      ...columnOptions,
+                                                      columnWidth: option(
+                                                        'CUSTOM',
+                                                        {
+                                                          label: 'Column width',
+                                                          value: '9',
+                                                          configuration: {
+                                                            as: 'DROPDOWN',
+                                                            dataType: 'string',
+                                                            allowedInput: [
+                                                              {
+                                                                name: 'Fit content',
+                                                                value:
+                                                                  'fitContent',
+                                                              },
+                                                              {
+                                                                name: 'Flexible',
+                                                                value:
+                                                                  'flexible',
+                                                              },
+                                                              {
+                                                                name: 'Hidden',
+                                                                value: 'hidden',
+                                                              },
+                                                              {
+                                                                name: '1',
+                                                                value: '1',
+                                                              },
+                                                              {
+                                                                name: '2',
+                                                                value: '2',
+                                                              },
+                                                              {
+                                                                name: '3',
+                                                                value: '3',
+                                                              },
+                                                              {
+                                                                name: '4',
+                                                                value: '4',
+                                                              },
+                                                              {
+                                                                name: '5',
+                                                                value: '5',
+                                                              },
+                                                              {
+                                                                name: '6',
+                                                                value: '6',
+                                                              },
+                                                              {
+                                                                name: '7',
+                                                                value: '7',
+                                                              },
+                                                              {
+                                                                name: '8',
+                                                                value: '8',
+                                                              },
+                                                              {
+                                                                name: '9',
+                                                                value: '9',
+                                                              },
+                                                              {
+                                                                name: '10',
+                                                                value: '10',
+                                                              },
+                                                              {
+                                                                name: '11',
+                                                                value: '11',
+                                                              },
+                                                              {
+                                                                name: '12',
+                                                                value: '12',
+                                                              },
+                                                            ],
+                                                          },
+                                                        },
+                                                      ),
+                                                      columnWidthTabletLandscape:
+                                                        option('CUSTOM', {
+                                                          label:
+                                                            'Column width (tablet landscape)',
+                                                          value: '9',
+                                                          configuration: {
+                                                            as: 'DROPDOWN',
+                                                            dataType: 'string',
+                                                            allowedInput: [
+                                                              {
+                                                                name: 'Fit content',
+                                                                value:
+                                                                  'fitContent',
+                                                              },
+                                                              {
+                                                                name: 'Flexible',
+                                                                value:
+                                                                  'flexible',
+                                                              },
+                                                              {
+                                                                name: 'Hidden',
+                                                                value: 'hidden',
+                                                              },
+                                                              {
+                                                                name: '1',
+                                                                value: '1',
+                                                              },
+                                                              {
+                                                                name: '2',
+                                                                value: '2',
+                                                              },
+                                                              {
+                                                                name: '3',
+                                                                value: '3',
+                                                              },
+                                                              {
+                                                                name: '4',
+                                                                value: '4',
+                                                              },
+                                                              {
+                                                                name: '5',
+                                                                value: '5',
+                                                              },
+                                                              {
+                                                                name: '6',
+                                                                value: '6',
+                                                              },
+                                                              {
+                                                                name: '7',
+                                                                value: '7',
+                                                              },
+                                                              {
+                                                                name: '8',
+                                                                value: '8',
+                                                              },
+                                                              {
+                                                                name: '9',
+                                                                value: '9',
+                                                              },
+                                                              {
+                                                                name: '10',
+                                                                value: '10',
+                                                              },
+                                                              {
+                                                                name: '11',
+                                                                value: '11',
+                                                              },
+                                                              {
+                                                                name: '12',
+                                                                value: '12',
+                                                              },
+                                                            ],
+                                                          },
+                                                        }),
+                                                      columnWidthTabletPortrait:
+                                                        option('CUSTOM', {
+                                                          value: '9',
+                                                          label:
+                                                            'Column width (tablet portrait)',
+                                                          configuration: {
+                                                            as: 'DROPDOWN',
+                                                            dataType: 'string',
+                                                            allowedInput: [
+                                                              {
+                                                                name: 'Fit content',
+                                                                value:
+                                                                  'fitContent',
+                                                              },
+                                                              {
+                                                                name: 'Flexible',
+                                                                value:
+                                                                  'flexible',
+                                                              },
+                                                              {
+                                                                name: 'Hidden',
+                                                                value: 'hidden',
+                                                              },
+                                                              {
+                                                                name: '1',
+                                                                value: '1',
+                                                              },
+                                                              {
+                                                                name: '2',
+                                                                value: '2',
+                                                              },
+                                                              {
+                                                                name: '3',
+                                                                value: '3',
+                                                              },
+                                                              {
+                                                                name: '4',
+                                                                value: '4',
+                                                              },
+                                                              {
+                                                                name: '5',
+                                                                value: '5',
+                                                              },
+                                                              {
+                                                                name: '6',
+                                                                value: '6',
+                                                              },
+                                                              {
+                                                                name: '7',
+                                                                value: '7',
+                                                              },
+                                                              {
+                                                                name: '8',
+                                                                value: '8',
+                                                              },
+                                                              {
+                                                                name: '9',
+                                                                value: '9',
+                                                              },
+                                                              {
+                                                                name: '10',
+                                                                value: '10',
+                                                              },
+                                                              {
+                                                                name: '11',
+                                                                value: '11',
+                                                              },
+                                                              {
+                                                                name: '12',
+                                                                value: '12',
+                                                              },
+                                                            ],
+                                                          },
+                                                        }),
+                                                      columnWidthMobile: option(
+                                                        'CUSTOM',
+                                                        {
+                                                          value: '9',
+                                                          label:
+                                                            'Column width (mobile)',
+                                                          configuration: {
+                                                            as: 'DROPDOWN',
+                                                            dataType: 'string',
+                                                            allowedInput: [
+                                                              {
+                                                                name: 'Fit content',
+                                                                value:
+                                                                  'fitContent',
+                                                              },
+                                                              {
+                                                                name: 'Flexible',
+                                                                value:
+                                                                  'flexible',
+                                                              },
+                                                              {
+                                                                name: 'Hidden',
+                                                                value: 'hidden',
+                                                              },
+                                                              {
+                                                                name: '1',
+                                                                value: '1',
+                                                              },
+                                                              {
+                                                                name: '2',
+                                                                value: '2',
+                                                              },
+                                                              {
+                                                                name: '3',
+                                                                value: '3',
+                                                              },
+                                                              {
+                                                                name: '4',
+                                                                value: '4',
+                                                              },
+                                                              {
+                                                                name: '5',
+                                                                value: '5',
+                                                              },
+                                                              {
+                                                                name: '6',
+                                                                value: '6',
+                                                              },
+                                                              {
+                                                                name: '7',
+                                                                value: '7',
+                                                              },
+                                                              {
+                                                                name: '8',
+                                                                value: '8',
+                                                              },
+                                                              {
+                                                                name: '9',
+                                                                value: '9',
+                                                              },
+                                                              {
+                                                                name: '10',
+                                                                value: '10',
+                                                              },
+                                                              {
+                                                                name: '11',
+                                                                value: '11',
+                                                              },
+                                                              {
+                                                                name: '12',
+                                                                value: '12',
+                                                              },
+                                                            ],
+                                                          },
+                                                        },
+                                                      ),
+                                                      innerSpacing: sizes(
+                                                        'Inner space',
+                                                        {
+                                                          value: [
+                                                            'S',
+                                                            'M',
+                                                            'S',
+                                                            'M',
+                                                          ],
+                                                        },
+                                                      ),
+                                                    },
+                                                  },
+                                                  [
+                                                    Grid(
+                                                      {
+                                                        options: {
+                                                          ...gridOptions,
+                                                          height: size(
+                                                            'Height',
                                                             {
-                                                              options: {
-                                                                ...boxOptions,
-
-                                                                width: size(
-                                                                  'Width',
-                                                                  {
-                                                                    value:
-                                                                      '100%',
-                                                                    configuration:
-                                                                      {
-                                                                        as: 'UNIT',
-                                                                      },
-                                                                  },
-                                                                ),
-
-                                                                innerSpacing:
-                                                                  sizes(
-                                                                    'Inner space',
-                                                                    {
-                                                                      value: [
-                                                                        '0rem',
-                                                                        '0rem',
-                                                                        '0rem',
-                                                                        '0rem',
-                                                                      ],
-                                                                    },
-                                                                  ),
+                                                              value: '100%',
+                                                              configuration: {
+                                                                as: 'UNIT',
                                                               },
                                                             },
-                                                            [
-                                                              ButtonPrefab(
+                                                          ),
+                                                        },
+                                                      },
+                                                      [
+                                                        Grid(
+                                                          {
+                                                            options: {
+                                                              ...gridOptions,
+                                                              direction: option(
+                                                                'CUSTOM',
                                                                 {
-                                                                  style: {
-                                                                    overwrite: {
-                                                                      backgroundColor:
-                                                                        {
-                                                                          type: 'STATIC',
-                                                                          value:
-                                                                            'transparent',
-                                                                        },
-                                                                      boxShadow:
-                                                                        'none',
-                                                                      color: {
-                                                                        type: 'THEME_COLOR',
-                                                                        value:
-                                                                          'primary',
-                                                                      },
-                                                                      fontFamily:
-                                                                        'Roboto',
-                                                                      fontSize:
-                                                                        '0.875rem',
-                                                                      fontStyle:
-                                                                        'none',
-                                                                      fontWeight:
-                                                                        '400',
-                                                                      padding: [
-                                                                        '0.6875rem',
-                                                                        '0.6875rem',
-                                                                      ],
-                                                                      textDecoration:
-                                                                        'none',
-                                                                      textTransform:
-                                                                        'none',
-                                                                    },
-                                                                  },
-
-                                                                  options: {
-                                                                    ...buttonOptions,
-                                                                    buttonText:
-                                                                      variable(
-                                                                        'Button text',
-                                                                        {
-                                                                          value:
-                                                                            [
-                                                                              'View',
-                                                                            ],
-                                                                        },
-                                                                      ),
-                                                                    size: option(
-                                                                      'CUSTOM',
-                                                                      {
-                                                                        value:
-                                                                          'medium',
-                                                                        label:
-                                                                          'Icon size',
-                                                                        configuration:
+                                                                  value:
+                                                                    'column',
+                                                                  label:
+                                                                    'Direction',
+                                                                  configuration:
+                                                                    {
+                                                                      as: 'BUTTONGROUP',
+                                                                      dataType:
+                                                                        'string',
+                                                                      allowedInput:
+                                                                        [
                                                                           {
-                                                                            as: 'BUTTONGROUP',
-                                                                            dataType:
-                                                                              'string',
-                                                                            allowedInput:
-                                                                              [
-                                                                                {
-                                                                                  name: 'Small',
-                                                                                  value:
-                                                                                    'small',
-                                                                                },
-                                                                                {
-                                                                                  name: 'Medium',
-                                                                                  value:
-                                                                                    'medium',
-                                                                                },
-                                                                                {
-                                                                                  name: 'Large',
-                                                                                  value:
-                                                                                    'large',
-                                                                                },
-                                                                              ],
-                                                                            condition:
-                                                                              hideIf(
-                                                                                'icon',
-                                                                                'EQ',
-                                                                                'none',
-                                                                              ),
+                                                                            name: 'Horizontal',
+                                                                            value:
+                                                                              'row',
                                                                           },
+                                                                          {
+                                                                            name: 'Vertical',
+                                                                            value:
+                                                                              'column',
+                                                                          },
+                                                                        ],
+                                                                      condition:
+                                                                        showIf(
+                                                                          'type',
+                                                                          'EQ',
+                                                                          'container',
+                                                                        ),
+                                                                    },
+                                                                },
+                                                              ),
+                                                              wrap: option(
+                                                                'CUSTOM',
+                                                                {
+                                                                  value:
+                                                                    'nowrap',
+                                                                  label: 'Wrap',
+                                                                  configuration:
+                                                                    {
+                                                                      as: 'BUTTONGROUP',
+                                                                      dataType:
+                                                                        'string',
+                                                                      allowedInput:
+                                                                        [
+                                                                          {
+                                                                            name: 'No wrap',
+                                                                            value:
+                                                                              'nowrap',
+                                                                          },
+                                                                          {
+                                                                            name: 'Wrap',
+                                                                            value:
+                                                                              'wrap',
+                                                                          },
+                                                                          {
+                                                                            name: 'Wrap reverse',
+                                                                            value:
+                                                                              'wrap-reverse',
+                                                                          },
+                                                                        ],
+                                                                    },
+                                                                },
+                                                              ),
+                                                            },
+                                                          },
+                                                          [
+                                                            prefabBox(
+                                                              {
+                                                                options: {
+                                                                  ...boxOptions,
+                                                                  innerSpacing:
+                                                                    sizes(
+                                                                      'Inner space',
+                                                                      {
+                                                                        value: [
+                                                                          '0rem',
+                                                                          '0rem',
+                                                                          '0rem',
+                                                                          '0rem',
+                                                                        ],
                                                                       },
                                                                     ),
-                                                                    icon: icon(
-                                                                      'Icon',
+                                                                },
+                                                              },
+                                                              [
+                                                                TextPrefab(
+                                                                  {
+                                                                    ref: {
+                                                                      id: '#Title',
+                                                                    },
+                                                                    options: {
+                                                                      ...textOptions,
+                                                                      content:
+                                                                        variable(
+                                                                          'Content',
+                                                                          {
+                                                                            value:
+                                                                              [
+                                                                                'Title',
+                                                                              ],
+                                                                            configuration:
+                                                                              {
+                                                                                as: 'MULTILINE',
+                                                                              },
+                                                                          },
+                                                                        ),
+                                                                      type: font(
+                                                                        'Font',
+                                                                        {
+                                                                          value:
+                                                                            [
+                                                                              'Title4',
+                                                                            ],
+                                                                        },
+                                                                      ),
+                                                                    },
+                                                                  },
+                                                                  [],
+                                                                ),
+                                                                TextPrefab(
+                                                                  {
+                                                                    ref: {
+                                                                      id: '#SubHeader',
+                                                                    },
+                                                                    options: {
+                                                                      ...textOptions,
+                                                                      content:
+                                                                        variable(
+                                                                          'Content',
+                                                                          {
+                                                                            value:
+                                                                              [
+                                                                                'Subheader',
+                                                                              ],
+                                                                            configuration:
+                                                                              {
+                                                                                as: 'MULTILINE',
+                                                                              },
+                                                                          },
+                                                                        ),
+                                                                      type: font(
+                                                                        'Font',
+                                                                        {
+                                                                          value:
+                                                                            [
+                                                                              'Body1',
+                                                                            ],
+                                                                        },
+                                                                      ),
+                                                                      outerSpacing:
+                                                                        sizes(
+                                                                          'Outer space',
+                                                                          {
+                                                                            value:
+                                                                              [
+                                                                                '0rem',
+                                                                                '0rem',
+                                                                                'S',
+                                                                                '0rem',
+                                                                              ],
+                                                                          },
+                                                                        ),
+                                                                    },
+                                                                  },
+                                                                  [],
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            prefabBox(
+                                                              {
+                                                                options: {
+                                                                  ...boxOptions,
+                                                                  stretch:
+                                                                    toggle(
+                                                                      'Stretch (when in flex container)',
                                                                       {
                                                                         value:
-                                                                          'ChevronRight',
+                                                                          true,
                                                                       },
                                                                     ),
-                                                                    iconPosition:
-                                                                      option(
+
+                                                                  width: size(
+                                                                    'Width',
+                                                                    {
+                                                                      value:
+                                                                        '100%',
+                                                                      configuration:
+                                                                        {
+                                                                          as: 'UNIT',
+                                                                        },
+                                                                    },
+                                                                  ),
+
+                                                                  innerSpacing:
+                                                                    sizes(
+                                                                      'Inner space',
+                                                                      {
+                                                                        value: [
+                                                                          '0rem',
+                                                                          '0rem',
+                                                                          '0rem',
+                                                                          '0rem',
+                                                                        ],
+                                                                      },
+                                                                    ),
+                                                                },
+                                                              },
+                                                              [
+                                                                TextPrefab(
+                                                                  {
+                                                                    ref: {
+                                                                      id: '#Description',
+                                                                    },
+                                                                    options: {
+                                                                      ...textOptions,
+                                                                      content:
+                                                                        variable(
+                                                                          'Content',
+                                                                          {
+                                                                            value:
+                                                                              [
+                                                                                'Description',
+                                                                              ],
+                                                                            configuration:
+                                                                              {
+                                                                                as: 'MULTILINE',
+                                                                              },
+                                                                          },
+                                                                        ),
+                                                                      type: font(
+                                                                        'Font',
+                                                                        {
+                                                                          value:
+                                                                            [
+                                                                              'Body2',
+                                                                            ],
+                                                                        },
+                                                                      ),
+                                                                    },
+                                                                  },
+                                                                  [],
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            prefabBox(
+                                                              {
+                                                                options: {
+                                                                  ...boxOptions,
+
+                                                                  width: size(
+                                                                    'Width',
+                                                                    {
+                                                                      value:
+                                                                        '100%',
+                                                                      configuration:
+                                                                        {
+                                                                          as: 'UNIT',
+                                                                        },
+                                                                    },
+                                                                  ),
+
+                                                                  innerSpacing:
+                                                                    sizes(
+                                                                      'Inner space',
+                                                                      {
+                                                                        value: [
+                                                                          '0rem',
+                                                                          '0rem',
+                                                                          '0rem',
+                                                                          '0rem',
+                                                                        ],
+                                                                      },
+                                                                    ),
+                                                                },
+                                                              },
+                                                              [
+                                                                ButtonPrefab(
+                                                                  {
+                                                                    style: {
+                                                                      overwrite:
+                                                                        {
+                                                                          backgroundColor:
+                                                                            {
+                                                                              type: 'STATIC',
+                                                                              value:
+                                                                                'transparent',
+                                                                            },
+                                                                          boxShadow:
+                                                                            'none',
+                                                                          color:
+                                                                            {
+                                                                              type: 'THEME_COLOR',
+                                                                              value:
+                                                                                'primary',
+                                                                            },
+                                                                          fontFamily:
+                                                                            'Roboto',
+                                                                          fontSize:
+                                                                            '0.875rem',
+                                                                          fontStyle:
+                                                                            'none',
+                                                                          fontWeight:
+                                                                            '400',
+                                                                          padding:
+                                                                            [
+                                                                              '0.6875rem',
+                                                                              '0.6875rem',
+                                                                            ],
+                                                                          textDecoration:
+                                                                            'none',
+                                                                          textTransform:
+                                                                            'none',
+                                                                        },
+                                                                    },
+
+                                                                    options: {
+                                                                      ...buttonOptions,
+                                                                      buttonText:
+                                                                        variable(
+                                                                          'Button text',
+                                                                          {
+                                                                            value:
+                                                                              [
+                                                                                'View',
+                                                                              ],
+                                                                          },
+                                                                        ),
+                                                                      size: option(
                                                                         'CUSTOM',
                                                                         {
-                                                                          label:
-                                                                            'Icon position',
                                                                           value:
-                                                                            'end',
+                                                                            'medium',
+                                                                          label:
+                                                                            'Icon size',
                                                                           configuration:
                                                                             {
                                                                               as: 'BUTTONGROUP',
@@ -2131,14 +2155,19 @@ export default makePrefab('TSX Header & Footer', attrs, beforeCreate, [
                                                                               allowedInput:
                                                                                 [
                                                                                   {
-                                                                                    name: 'Start',
+                                                                                    name: 'Small',
                                                                                     value:
-                                                                                      'start',
+                                                                                      'small',
                                                                                   },
                                                                                   {
-                                                                                    name: 'End',
+                                                                                    name: 'Medium',
                                                                                     value:
-                                                                                      'end',
+                                                                                      'medium',
+                                                                                  },
+                                                                                  {
+                                                                                    name: 'Large',
+                                                                                    value:
+                                                                                      'large',
                                                                                   },
                                                                                 ],
                                                                               condition:
@@ -2150,34 +2179,77 @@ export default makePrefab('TSX Header & Footer', attrs, beforeCreate, [
                                                                             },
                                                                         },
                                                                       ),
-                                                                    outerSpacing:
-                                                                      sizes(
-                                                                        'Outer space',
+                                                                      icon: icon(
+                                                                        'Icon',
                                                                         {
                                                                           value:
-                                                                            [
-                                                                              'L',
-                                                                              '0rem',
-                                                                              '0rem',
-                                                                              '0rem',
-                                                                            ],
+                                                                            'ChevronRight',
                                                                         },
                                                                       ),
+                                                                      iconPosition:
+                                                                        option(
+                                                                          'CUSTOM',
+                                                                          {
+                                                                            label:
+                                                                              'Icon position',
+                                                                            value:
+                                                                              'end',
+                                                                            configuration:
+                                                                              {
+                                                                                as: 'BUTTONGROUP',
+                                                                                dataType:
+                                                                                  'string',
+                                                                                allowedInput:
+                                                                                  [
+                                                                                    {
+                                                                                      name: 'Start',
+                                                                                      value:
+                                                                                        'start',
+                                                                                    },
+                                                                                    {
+                                                                                      name: 'End',
+                                                                                      value:
+                                                                                        'end',
+                                                                                    },
+                                                                                  ],
+                                                                                condition:
+                                                                                  hideIf(
+                                                                                    'icon',
+                                                                                    'EQ',
+                                                                                    'none',
+                                                                                  ),
+                                                                              },
+                                                                          },
+                                                                        ),
+                                                                      outerSpacing:
+                                                                        sizes(
+                                                                          'Outer space',
+                                                                          {
+                                                                            value:
+                                                                              [
+                                                                                'L',
+                                                                                '0rem',
+                                                                                '0rem',
+                                                                                '0rem',
+                                                                              ],
+                                                                          },
+                                                                        ),
+                                                                    },
                                                                   },
-                                                                },
-                                                                [],
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        ]),
+                                                                  [],
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
                                       ],
                                     ),
                                   ],
