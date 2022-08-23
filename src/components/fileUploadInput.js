@@ -9,6 +9,7 @@
       window.MaterialUI.Core;
     const {
       actionVariableId: name,
+      actionProperty,
       hideDefaultError,
       required,
       disabled,
@@ -43,6 +44,16 @@
     const maxFileSizeMessage = useText(maxFileSizeMessageRaw);
     const requiredText = required ? '*' : '';
     const dataComponentAttributeValue = useText(dataComponentAttribute);
+    const modelProperty = actionProperty.modelProperty;
+    
+    const getPropertyId = (property) => {
+      const {id} = property;
+
+      return Array.isArray(id) ? id[0] : id
+    }
+
+    const propertyId = getPropertyId(modelProperty);
+    const [upload, { error, status, data: fileReference}] = usePresignedUpload({propertyId })
 
     const formatBytes = (bytes) => {
       if (bytes === 0) return '0 Bytes';
@@ -71,6 +82,8 @@
           return false;
         }
       }
+
+      return true
     };
 
     const handleChange = (e) => {
@@ -80,7 +93,12 @@
         files: e.target.files,
       });
 
-      validateFiles(e.target.files);
+      const isValidFile = validateFiles(e.target.files);
+      const file = e.target.files[0];
+      if (isValidFile) {
+        // file.mime is the mimetype of the file
+        upload(file.mime, file.name);
+      }
     };
 
     const clearFiles = (e) => {

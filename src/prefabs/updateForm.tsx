@@ -32,7 +32,6 @@ const beforeCreate = ({
     'DATE_EXPRESSION',
     'DATE_TIME_EXPRESSION',
     'DECIMAL_EXPRESSION',
-    'FILE',
     'IMAGE',
     'INTEGER_EXPRESSION',
     'LOGIN_TOKEN',
