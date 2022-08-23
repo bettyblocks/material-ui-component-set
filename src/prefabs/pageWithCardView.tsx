@@ -57,8 +57,8 @@ const interactions: PrefabInteraction[] = [
     name: 'Show',
     sourceEvent: 'onNoResults',
     ref: {
-      targetComponentId: '#noResultsColumn',
-      sourceComponentId: '#dataGrid',
+      targetComponentId: '#noresults',
+      sourceComponentId: '#datalist',
     },
     type: InteractionType.Custom,
   },
@@ -66,8 +66,8 @@ const interactions: PrefabInteraction[] = [
     name: 'Hide',
     sourceEvent: 'onSuccess',
     ref: {
-      targetComponentId: '#noResultsColumn',
-      sourceComponentId: '#dataGrid',
+      targetComponentId: '#noresults',
+      sourceComponentId: '#datalist',
     },
     type: InteractionType.Custom,
   },
@@ -117,7 +117,6 @@ const beforeCreate = ({
     variables: { id: modelId },
     skip: !modelId,
   });
-
   const [stepNumber, setStepNumber] = React.useState(1);
   const [headerPartialId, setHeaderPartialId] = React.useState('');
   const [footerPartialId, setFooterPartialId] = React.useState('');
@@ -362,7 +361,7 @@ const beforeCreate = ({
       }
       const newPrefab = { ...prefab };
       if (modelId) {
-        const dataList = getDescendantByRef('#dataGrid', newPrefab.structure);
+        const dataList = getDescendantByRef('#datalist', newPrefab.structure);
         dataList.options[0].value = modelId;
         if (imageProperty.id) {
           const imageBoxStructure = getDescendantByRef(
@@ -378,20 +377,19 @@ const beforeCreate = ({
           );
           titleStructure.options[2].value = [enrichVarObj(titleProperty)];
           if (newPrefab.interactions) {
-            // console.log({ titleProperty });
             newPrefab.interactions.push({
               name: 'Filter',
               sourceEvent: 'onChange',
               parameters: [
                 {
-                  parameter: 'property',
-                  operator: 'regex',
-                  resolveValue: false,
                   id: [...titleProperty.id],
+                  operator: 'regex',
+                  parameter: 'property',
+                  resolveValue: false,
                 },
               ],
               ref: {
-                targetComponentId: '#dataGrid',
+                targetComponentId: '#datalist',
                 sourceComponentId: '#searchField',
               },
               type: 'Custom',
@@ -948,10 +946,6 @@ export default makePrefab('', attrs, beforeCreate, [
                                   placeholder: variable('Placeholder', {
                                     value: ['Search'],
                                   }),
-                                  hideLabel: toggle('Hide label', {
-                                    value: true,
-                                    ...showOn('styles'),
-                                  }),
 
                                   autoComplete: toggle('Autocomplete', {
                                     value: true,
@@ -977,7 +971,12 @@ export default makePrefab('', attrs, beforeCreate, [
                                       },
                                     },
                                   ),
-                                  styles: toggle('Styles'),
+                                  styles: toggle('Styles', { value: true }),
+                                  hideLabel: toggle('Hide label', {
+                                    value: true,
+                                    ...showOn('styles'),
+                                  }),
+
                                   placeholderColor: color('Placeholder color', {
                                     value: ThemeColor.ACCENT_2,
                                     ...showOn('styles'),
@@ -990,7 +989,7 @@ export default makePrefab('', attrs, beforeCreate, [
                               Column(
                                 {
                                   ref: {
-                                    id: '#noResultsColumn',
+                                    id: '#noresults',
                                   },
                                 },
                                 [
@@ -1014,7 +1013,7 @@ export default makePrefab('', attrs, beforeCreate, [
                             ]),
                             DataList(
                               {
-                                ref: { id: '#dataGrid' },
+                                ref: { id: '#datalist' },
                                 options: {
                                   ...dataListOptions,
                                   pagination: option('CUSTOM', {

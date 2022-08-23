@@ -11,6 +11,7 @@ export const TextInput = (
   children: PrefabReference[] = [],
 ) => {
   const options = { ...(config.options || defaults) };
+  const ref = config.ref ? { ...config.ref } : undefined;
 
   if (config.type) {
     options.type = updateOption(options.type, { value: config.type });
@@ -44,7 +45,7 @@ export const TextInput = (
 
   return component(
     'TextInput',
-    { label: config.label, options, $afterDelete },
+    { label: config.label, options, ref, $afterDelete },
     children,
   );
 };
