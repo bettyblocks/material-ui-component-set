@@ -1,21 +1,8 @@
-import {
-  component,
-  OptionProducer,
-  PrefabReference,
-} from '@betty-blocks/component-sdk';
+import { component, PrefabReference } from '@betty-blocks/component-sdk';
 import { updateOption } from '../../../utils';
 import { deleteActionVariable } from '../../hooks/deleteActionVariable';
+import { Configuration } from '../Configuration';
 import { options as defaults } from './options';
-
-export interface Configuration {
-  options?: Record<string, OptionProducer>;
-  validationPattern?: string;
-  adornmentIcon?: string;
-  label?: string;
-  inputLabel?: string;
-  type?: HTMLInputElement['type'];
-  pattern?: string;
-}
 
 const $afterDelete = [deleteActionVariable];
 
