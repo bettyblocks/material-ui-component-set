@@ -158,7 +158,7 @@ const beforeCreate = ({
   );
 };
 
-export default makePrefab('TSX Header & Footer', attrs, beforeCreate, [
+export default makePrefab('Header & Footer', attrs, beforeCreate, [
   Row(
     {
       options: {
@@ -452,7 +452,6 @@ export default makePrefab('TSX Header & Footer', attrs, beforeCreate, [
                           },
                         }),
                         innerSpacing: sizes('Inner space', {
-                          ref: { id: '#footerBoxInnerSpacing' },
                           value: ['0rem', '0rem', '0rem', '0rem'],
                         }),
                         backgroundColor: color('Background color', {
@@ -476,7 +475,6 @@ export default makePrefab('TSX Header & Footer', attrs, beforeCreate, [
                           options: {
                             ...boxOptions,
                             innerSpacing: sizes('Inner space', {
-                              ref: { id: '#footerBoxInnerSpacing' },
                               value: ['L', 'L', 'L', 'L'],
                             }),
                           },
