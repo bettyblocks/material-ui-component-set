@@ -1,3 +1,10 @@
+# [2.29.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.28.0...v2.29.0) (2022-08-24)
+
+
+### Features
+
+* converted header and footer to tsx ([bb03686](https://github.com/bettyblocks/material-ui-component-set/commit/bb0368674f5964d05ea529649f35ab838cc24e81))
+
 # [2.28.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.27.0...v2.28.0) (2022-08-22)
 
 
