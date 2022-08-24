@@ -46,6 +46,7 @@ const beforeCreate = ({
       close={close}
       prefab={originalPrefab}
       save={save}
+      skip
     />
   );
 };
