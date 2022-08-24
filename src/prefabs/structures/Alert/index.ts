@@ -1,80 +1,90 @@
 import {
   color,
   component,
-  OptionProducer,
-  PrefabComponent,
   PrefabReference,
   ThemeColor,
   toggle,
 } from '@betty-blocks/component-sdk';
 
 import { updateOption } from '../../../utils';
-import { options as defaults } from './options';
-
-export interface Configuration {
-  options?: Record<string, OptionProducer>;
-  ref?: PrefabComponent['ref'];
-  label?: string;
-}
+import {
+  alertOptions as defaultOptions,
+  categories as defaultCategories,
+} from './options';
+import { Configuration } from '../Configuration';
 
 export const Alert = (
   config: Configuration,
   descendants: PrefabReference[] = [],
 ) => {
-  const options = { ...defaults, ...config.options };
+  const options = { ...(config.options || defaultOptions) };
   const label = config.label ? config.label : undefined;
+  const ref = config.ref ? { ...config.ref } : undefined;
+  const optionCategories = config.optionCategories
+    ? { ...config.optionCategories }
+    : defaultCategories;
 
-  return component('Alert', { ...config, options, label }, descendants);
+  return component(
+    'Alert',
+    { options, label, ref, optionCategories },
+    descendants,
+  );
 };
 
 const baseFormAlertStyle = {
-  textColor: updateOption(defaults.textColor, { value: ThemeColor.WHITE }),
-  iconColor: updateOption(defaults.iconColor, { value: ThemeColor.WHITE }),
-  collapsable: updateOption(defaults.collapsable, { value: true }),
-  visible: updateOption(defaults.visible, { value: false }),
+  textColor: updateOption(defaultOptions.textColor, {
+    value: ThemeColor.WHITE,
+  }),
+  iconColor: updateOption(defaultOptions.iconColor, {
+    value: ThemeColor.WHITE,
+  }),
+  collapsable: updateOption(defaultOptions.collapsable, { value: true }),
+  visible: updateOption(defaultOptions.visible, { value: false }),
 };
 
 export const FormSuccessAlert = (config: Configuration): PrefabReference => {
   const successAlertOptions = {
+    ...defaultOptions,
     ...baseFormAlertStyle,
-    icon: updateOption(defaults.icon, {
+    icon: updateOption(defaultOptions.icon, {
       value: 'CheckCircle',
     }),
-    titleText: updateOption(defaults.titleText, {
+    titleText: updateOption(defaultOptions.titleText, {
       value: ['Success'],
     }),
-    bodyText: updateOption(defaults.bodyText, {
-      value: ['Record successfully created'],
+    bodyText: updateOption(defaultOptions.bodyText, {
+      value: ['Form has been submitted successfully.'],
     }),
   };
 
   return Alert({
     ...config,
-    options: { ...successAlertOptions, ...config.options },
+    options: { ...successAlertOptions },
   });
 };
 
 export const FormErrorAlert = (config: Configuration): PrefabReference => {
   const errorAlertOptions = {
+    ...defaultOptions,
     ...baseFormAlertStyle,
     allowTextServerResponse: toggle(
       'Allow to overwrite by the server response',
       { value: true },
     ),
     background: color('Background color', { value: ThemeColor.DANGER }),
-    icon: updateOption(defaults.icon, {
+    icon: updateOption(defaultOptions.icon, {
       value: 'Error',
     }),
-    titleText: updateOption(defaults.titleText, {
+    titleText: updateOption(defaultOptions.titleText, {
       value: ['Error'],
     }),
-    bodyText: updateOption(defaults.bodyText, {
+    bodyText: updateOption(defaultOptions.bodyText, {
       value: ['*Dynamic value from the Action response*'],
     }),
   };
 
   return Alert({
     ...config,
-    options: { ...errorAlertOptions, ...config.options },
+    options: { ...errorAlertOptions },
   });
 };

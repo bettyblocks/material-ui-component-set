@@ -1,7 +1,15 @@
 import { toggle, option, showIf, sizes } from '@betty-blocks/component-sdk';
-import { advanced } from './advanced';
+import { advanced } from '../../advanced';
 
-export const options = {
+export const categories = [
+  {
+    label: 'Advanced settings',
+    expanded: false,
+    members: ['dataComponentAttribute'],
+  },
+];
+
+export const paperOptions = {
   square: toggle('Square', { value: false }),
   variant: option('CUSTOM', {
     label: 'Variant',
@@ -54,5 +62,5 @@ export const options = {
   outerSpacing: sizes('Outer space', {
     value: ['0rem', '0rem', '0rem', '0rem'],
   }),
-  ...advanced,
+  ...advanced('Paper'),
 };

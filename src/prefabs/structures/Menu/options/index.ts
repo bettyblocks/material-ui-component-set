@@ -8,9 +8,39 @@ import {
   ThemeColor,
   sizes,
 } from '@betty-blocks/component-sdk';
-import { advanced } from './advanced';
+import { advanced } from '../../advanced';
 
-export const options = {
+export const categories = [
+  {
+    label: 'Position',
+    expanded: false,
+    members: ['placement'],
+  },
+  {
+    label: 'State',
+    expanded: false,
+    members: ['disabled'],
+  },
+  {
+    label: 'Styling',
+    expanded: false,
+    members: [
+      'size',
+      'fullWidth',
+      'outerSpacing',
+      'textColor',
+      'background',
+      'menuColor',
+    ],
+  },
+  {
+    label: 'Advanced settings',
+    expanded: false,
+    members: ['dataComponentAttribute'],
+  },
+];
+
+export const menuOptions = {
   isMenuListVisible: toggle('Toggle menu', {
     value: true,
     configuration: { as: 'VISIBILITY' },
@@ -138,5 +168,5 @@ export const options = {
   }),
   disabled: toggle('Disabled', { value: false }),
 
-  ...advanced,
+  ...advanced('Menu'),
 };

@@ -1,6 +1,5 @@
 import { Icon, prefab } from '@betty-blocks/component-sdk';
-import { Tabs } from './structures/Tabs';
-import { Tab } from './structures/Tab';
+import { Tab, Tabs } from './structures';
 
 const attr = {
   icon: Icon.TabsIcon,
