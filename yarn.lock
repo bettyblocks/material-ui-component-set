@@ -151,10 +151,10 @@
     "@babel/helper-validator-identifier" "^7.18.6"
     to-fast-properties "^2.0.0"
 
-"@betty-blocks/cli@^25.38.0":
-  version "25.38.0"
-  resolved "https://registry.yarnpkg.com/@betty-blocks/cli/-/cli-25.38.0.tgz#8ca8fd4ff229d7c19b9838a71508dc01e0dc1e55"
-  integrity sha512-h9M3tFSTe2BMsuE9aySJCreP8EN/YbnPbKepTtxZN/jwh6BU3kQFOhKVYmTyjcTUf6Z74JrHuLtaa2I7fmm2iA==
+"@betty-blocks/cli@^25.41.0":
+  version "25.42.2"
+  resolved "https://registry.yarnpkg.com/@betty-blocks/cli/-/cli-25.42.2.tgz#d422c871d19bfc5e9f267eae15b8088c79e37193"
+  integrity sha512-+mYB1GwqD+I/vFUi3xA3G+FRdnVzcj6ZvtDgiuPcUnd13DUqtFgBHF55dqpqKUL1M1euC75adqbi6oWASsUSDA==
   dependencies:
     "@azure/ms-rest-js" "^2.0.4"
     "@azure/storage-blob" "^10.3.0"
@@ -164,7 +164,7 @@
     "@babel/types" "^7.5.5"
     "@types/adm-zip" "^0.4.33"
     "@types/hapi__joi" "^16.0.0"
-    "@types/prompts" "^2.0.8"
+    "@types/prompts" "^2.0.14"
     "@types/react" "^16.9.9"
     "@types/serve-handler" "^6.1.0"
     adm-zip "^0.5.3"
@@ -183,7 +183,7 @@
     node-fetch "^2.6.0"
     ora "^5.0.0"
     prismjs "^1.25.0"
-    prompts "^2.3.2"
+    prompts "^2.4.2"
     semver "^6.3.0"
     serve "^11.1.0"
     serve-handler "^6.1.2"
@@ -192,10 +192,10 @@
     typescript "^3.5.3"
     webhead "^1.1.3"
 
-"@betty-blocks/component-sdk@^1.19.0":
-  version "1.19.0"
-  resolved "https://registry.yarnpkg.com/@betty-blocks/component-sdk/-/component-sdk-1.19.0.tgz#78cedd1142f451eced63d275921f028026d8b37e"
-  integrity sha512-Mhmu59hBNtV9eXg/xZJXwocHRPJEWiDkgqLOznzJtRRP9Pq94UztfDXw2jb0qHQs3aDvOAUWP8M1QbBNIfnqVQ==
+"@betty-blocks/component-sdk@^1.25.0":
+  version "1.25.0"
+  resolved "https://registry.yarnpkg.com/@betty-blocks/component-sdk/-/component-sdk-1.25.0.tgz#4a651848ee98ecb019887e532c534da540e1411a"
+  integrity sha512-KaFVoPo+sQqhW5CX7vv3vQIXS2bdxlSH2pTvBNQnpOJAOAFgNQFRp6m2vPpj9kgnsECa7pttbxLovXQDhS9eFQ==
 
 "@colors/colors@1.5.0":
   version "1.5.0"
@@ -1107,7 +1107,7 @@
   resolved "https://registry.yarnpkg.com/@types/parse-json/-/parse-json-4.0.0.tgz#2f8bb441434d163b35fb8ffdccd7138927ffb8c0"
   integrity sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==
 
-"@types/prompts@^2.0.8":
+"@types/prompts@^2.0.14":
   version "2.0.14"
   resolved "https://registry.yarnpkg.com/@types/prompts/-/prompts-2.0.14.tgz#10cb8899844bb0771cabe57c1becaaaca9a3b521"
   integrity sha512-HZBd99fKxRWpYCErtm2/yxUZv6/PBI9J7N4TNFffl5JbrYMHBwF25DjQGTW3b3jmXq+9P6/8fCIb2ee57BFfYA==
@@ -5470,7 +5470,7 @@ promise-retry@^2.0.1:
     err-code "^2.0.2"
     retry "^0.12.0"
 
-prompts@^2.3.2:
+prompts@^2.4.2:
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/prompts/-/prompts-2.4.2.tgz#7b57e73b3a48029ad10ebd44f74b01722a4cb069"
   integrity sha512-NxNv/kLguCA7p3jE8oL2aEBsrJWgAakBpgmgK6lpPWV+WuOmY6r2/zbAVnP+T8bQlA0nzHXSJSJW0Hq7ylaD2Q==
@@ -5886,10 +5886,10 @@ schema-utils@^3.1.0, schema-utils@^3.1.1:
     ajv "^6.12.5"
     ajv-keywords "^3.5.2"
 
-semantic-release@^19.0.2:
-  version "19.0.3"
-  resolved "https://registry.yarnpkg.com/semantic-release/-/semantic-release-19.0.3.tgz#9291053ad9890052f28e7c5921d4741530d516fd"
-  integrity sha512-HaFbydST1cDKZHuFZxB8DTrBLJVK/AnDExpK0s3EqLIAAUAHUgnd+VSJCUtTYQKkAkauL8G9CucODrVCc7BuAA==
+semantic-release@^19.0.3:
+  version "19.0.5"
+  resolved "https://registry.yarnpkg.com/semantic-release/-/semantic-release-19.0.5.tgz#d7fab4b33fc20f1288eafd6c441e5d0938e5e174"
+  integrity sha512-NMPKdfpXTnPn49FDogMBi36SiBfXkSOJqCkk0E4iWOY1tusvvgBwqUmxTX1kmlT6kIYed9YwNKD1sfPpqa5yaA==
   dependencies:
     "@semantic-release/commit-analyzer" "^9.0.2"
     "@semantic-release/error" "^3.0.0"

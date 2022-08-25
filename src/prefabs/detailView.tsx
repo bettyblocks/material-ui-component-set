@@ -10,11 +10,7 @@ import {
   showIf,
   PrefabReference,
 } from '@betty-blocks/component-sdk';
-import { Box } from './structures/Box';
-import { options as boxOptions } from './structures/Box/options';
-import { DataContainer } from './structures/DataContainer';
-import { Row } from './structures/Row';
-import { options as rowOptions } from './structures/Row/options';
+import { Box, boxOptions, DataContainer, Row, rowOptions } from './structures';
 
 const beforeCreate = ({
   components: {

@@ -1,10 +1,7 @@
-import {
-  component,
-  OptionProducer,
-  PrefabComponent,
-} from '@betty-blocks/component-sdk';
+import { component, PrefabReference } from '@betty-blocks/component-sdk';
 import { updateOption } from '../../../utils';
 import { deleteActionVariable } from '../../hooks/deleteActionVariable';
+import { Configuration } from '../Configuration';
 import { options as defaults } from './options';
 
 export enum DateInputTypes {
@@ -13,21 +10,16 @@ export enum DateInputTypes {
   TIME = 'time',
 }
 
-export interface Configuration {
-  label?: string;
-  options?: Record<string, OptionProducer>;
-  inputType?: string;
-  placeholder?: string;
-  dataComponentAttribute?: string;
-}
-
 const $afterDelete = [deleteActionVariable];
 
 export const DateTimePicker = (
   config: Configuration,
-  children: PrefabComponent[] = [],
+  descendants: PrefabReference[] = [],
 ) => {
   const options = { ...(config.options || defaults) };
+  const style = { ...config.style };
+  const ref = config.ref ? { ...config.ref } : undefined;
+  const label = config.label ? config.label : undefined;
 
   if (config.inputType) {
     let format;
@@ -68,11 +60,9 @@ export const DateTimePicker = (
     );
   }
 
-  const { label } = config;
-
   return component(
     'DateTimePickerInput',
-    { label, options, $afterDelete },
-    children,
+    { options, style, ref, label, $afterDelete },
+    descendants,
   );
 };

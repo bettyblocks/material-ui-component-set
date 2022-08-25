@@ -16,22 +16,22 @@ import {
   sizes,
   variable,
 } from '@betty-blocks/component-sdk';
-import { ActionButton } from './structures/ActionButton';
-import { options as actionButtonOptions } from './structures/ActionButton/options';
-import { Box } from './structures/Box';
-import { options as boxOptions } from './structures/Box/options';
-import { Button } from './structures/Button';
-import { options as buttonOptions } from './structures/Button/options';
-import { Column } from './structures/Column';
-import { options as columnOptions } from './structures/Column/options';
-import { Dialog } from './structures/Dialog';
-import { OpenPageButton } from './structures/OpenPage';
-import { options as openPageButtonOptions } from './structures/OpenPage/options';
-import { Paper } from './structures/Paper';
-import { Row } from './structures/Row';
-import { options as rowOptions } from './structures/Row/options';
-import { Text as TextPrefab } from './structures/Text';
-import { options as textOptions } from './structures/Text/options';
+import {
+  ActionButton,
+  actionButtonOptions,
+  Box,
+  boxOptions,
+  Button,
+  buttonOptions,
+  Column,
+  columnOptions,
+  Dialog,
+  Paper,
+  Row,
+  rowOptions,
+  Text as TextPrefab,
+  textOptions,
+} from './structures';
 
 const beforeCreate = ({
   prefab,
@@ -243,16 +243,13 @@ export default makePrefab('Delete Record', attr, beforeCreate, [
       },
     },
     [
-      OpenPageButton(
+      Button(
         {
           ref: { id: '#deleteButton' },
           options: {
-            ...openPageButtonOptions,
+            ...buttonOptions,
             buttonText: variable('Button text', { value: ['Delete'] }),
             icon: icon('Icon', { value: 'Delete' }),
-            outerSpacing: sizes('Outer space', {
-              value: ['0rem', 'M', '0rem', '0rem'],
-            }),
           },
         },
         [],
@@ -507,14 +504,14 @@ export default makePrefab('Delete Record', attr, beforeCreate, [
                       },
                     },
                     [
-                      OpenPageButton(
+                      Button(
                         {
                           ref: { id: '#cancelBtn' },
                           style: {
-                            name: 'outliine',
+                            name: 'outline',
                           },
                           options: {
-                            ...openPageButtonOptions,
+                            ...buttonOptions,
                             buttonText: variable('Button text', {
                               value: ['Cancel'],
                             }),

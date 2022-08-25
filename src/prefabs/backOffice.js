@@ -15244,6 +15244,7 @@
         const sideMenu = [
           {
             name: 'DrawerSidebar',
+            label: 'Backoffice - Side menu',
             ref: {
               id: '#Menu',
             },
@@ -15295,6 +15296,7 @@
           },
           {
             name: 'DrawerContainer',
+            label: 'Backoffice - Content',
             options: [
               {
                 type: 'COLOR',
@@ -15428,6 +15430,9 @@
                     },
                   },
                   {
+                    ref: {
+                      id: '#contentContainerVisibility',
+                    },
                     label: 'Toggle visibility',
                     key: 'visibility',
                     value: false,
@@ -15884,6 +15889,9 @@
                 descendants: [
                   {
                     name: 'Tabs',
+                    ref: {
+                      id: '#drawerTabs',
+                    },
                     options: [
                       {
                         label: 'Selected tab index',
@@ -15892,8 +15900,11 @@
                         type: 'NUMBER',
                       },
                       {
+                        ref: {
+                          id: '#drawerTabsSelectedDesignTabIndex',
+                        },
                         type: 'CUSTOM',
-                        label: 'Selected design tab index',
+                        label: 'Show design tab',
                         key: 'selectedDesignTabIndex',
                         value: '1',
                         configuration: {
@@ -17582,8 +17593,14 @@
                                     descendants: [
                                       {
                                         name: 'Text',
+                                        ref: {
+                                          id: '#createTabTitle',
+                                        },
                                         options: [
                                           {
+                                            ref: {
+                                              id: '#createTabTitleContent',
+                                            },
                                             type: 'VARIABLE',
                                             label: 'Content',
                                             key: 'content',
@@ -21524,8 +21541,14 @@
                                     descendants: [
                                       {
                                         name: 'Text',
+                                        ref: {
+                                          id: '#detailsTabTitle',
+                                        },
                                         options: [
                                           {
+                                            ref: {
+                                              id: '#detailsTabTitleContent',
+                                            },
                                             type: 'VARIABLE',
                                             label: 'Content',
                                             key: 'content',
@@ -25235,8 +25258,14 @@
                                     descendants: [
                                       {
                                         name: 'Text',
+                                        ref: {
+                                          id: '#updateTabTitle',
+                                        },
                                         options: [
                                           {
+                                            ref: {
+                                              id: '#updateTabTitleContent',
+                                            },
                                             type: 'VARIABLE',
                                             label: 'Content',
                                             key: 'content',
@@ -32997,6 +33026,9 @@
                                                             },
                                                             options: [
                                                               {
+                                                                ref: {
+                                                                  id: '#dataTableTitleContent',
+                                                                },
                                                                 type: 'VARIABLE',
                                                                 label:
                                                                   'Content',
@@ -36770,11 +36802,15 @@
                     },
                     {
                       name: 'Dialog',
+                      label: 'Delete dialog',
                       ref: {
-                        id: '#dialog',
+                        id: '#deleteDialog',
                       },
                       options: [
                         {
+                          ref: {
+                            id: '#deleteDialogVisibility',
+                          },
                           label: 'Toggle visibility',
                           key: 'isVisible',
                           value: false,
@@ -37799,8 +37835,14 @@
                                           descendants: [
                                             {
                                               name: 'Text',
+                                              ref: {
+                                                id: '#deleteDialogTitle',
+                                              },
                                               options: [
                                                 {
+                                                  ref: {
+                                                    id: '#deleteDialogTitleContent',
+                                                  },
                                                   type: 'VARIABLE',
                                                   label: 'Content',
                                                   key: 'content',
@@ -40267,7 +40309,7 @@
       name: 'Show',
       sourceEvent: 'Click',
       ref: {
-        targetComponentId: '#dialog',
+        targetComponentId: '#deleteDialog',
         sourceComponentId: '#deleteButton',
       },
       type: 'Custom',
@@ -40276,7 +40318,7 @@
       name: 'Hide',
       sourceEvent: 'Click',
       ref: {
-        targetComponentId: '#dialog',
+        targetComponentId: '#deleteDialog',
         sourceComponentId: '#closeBtn',
       },
       type: 'Custom',
@@ -40285,7 +40327,7 @@
       name: 'Hide',
       sourceEvent: 'Click',
       ref: {
-        targetComponentId: '#dialog',
+        targetComponentId: '#deleteDialog',
         sourceComponentId: '#cancelBtn',
       },
       type: 'Custom',
@@ -40294,7 +40336,7 @@
       name: 'Hide',
       sourceEvent: 'onActionSuccess',
       ref: {
-        targetComponentId: '#dialog',
+        targetComponentId: '#deleteDialog',
         sourceComponentId: '#deleteActionButton',
       },
       type: 'Custom',
@@ -40611,6 +40653,7 @@
   structure: [
     {
       name: 'Drawer',
+      label: 'Backoffice',
       options: [
         {
           type: 'SIZE',

@@ -1,12 +1,20 @@
 import {
   option,
-  property,
   showIf,
   variable,
+  property,
 } from '@betty-blocks/component-sdk';
-import { advanced } from './advanced';
+import { advanced } from '../../advanced';
 
-export const options = {
+export const categories = [
+  {
+    label: 'Advanced settings',
+    expanded: false,
+    members: ['dataComponentAttribute'],
+  },
+];
+
+export const cardMediaOptions = {
   type: option('CUSTOM', {
     label: 'Media type',
     value: 'url',
@@ -79,5 +87,6 @@ export const options = {
   title: variable('Title', {
     value: [],
   }),
-  ...advanced,
+
+  ...advanced('Card media'),
 };

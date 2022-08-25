@@ -13,9 +13,29 @@ import {
   ThemeColor,
   variable,
 } from '@betty-blocks/component-sdk';
-import { advanced } from './advanced';
+import { advanced } from '../../advanced';
 
-export const options = {
+export const categories = [
+  {
+    label: 'Styling',
+    expanded: false,
+    members: [
+      'width',
+      'height',
+      'dotColor',
+      'inactiveDotColor',
+      'buttonBackgroundColor',
+      'buttonColor',
+    ],
+  },
+  {
+    label: 'Advanced settings',
+    expanded: false,
+    members: ['dataComponentAttribute'],
+  },
+];
+
+export const carouselOptions = {
   select: option('CUSTOM', {
     label: 'Source',
     value: 'custom',
@@ -82,7 +102,7 @@ export const options = {
     },
   }),
   activeStep: number('Show image', {
-    value: '1',
+    value: 1,
     configuration: {
       condition: showIf('select', 'EQ', 'custom'),
     },
@@ -96,7 +116,7 @@ export const options = {
   continuousLoop: toggle('Continuous loop', { value: false }),
   autoplay: toggle('Autoplay', { value: false }),
   duration: number('Autoplay duration (ms)', {
-    value: '5000',
+    value: 5000,
     configuration: {
       condition: showIfTrue('autoplay'),
     },
@@ -203,5 +223,5 @@ export const options = {
     },
   }),
 
-  ...advanced,
+  ...advanced('Carousel'),
 };

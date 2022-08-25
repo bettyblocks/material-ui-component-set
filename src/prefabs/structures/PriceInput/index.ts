@@ -1,12 +1,14 @@
-import { PrefabComponent } from '@betty-blocks/component-sdk/build/prefabs/types/component';
+import { PrefabReference } from '@betty-blocks/component-sdk';
 import { updateOption } from '../../../utils';
-import { Configuration, TextInput } from '../TextInput';
+import { TextInput } from '../TextInput';
 import { options } from './options';
+import { Configuration } from '../Configuration';
 
 export const PriceInput = (
   config: Configuration,
-  children: PrefabComponent[] = [],
+  descendants: PrefabReference[] = [],
 ) => {
+  const label = config.label ? config.label : undefined;
   options.adornmentPosition = updateOption(options.adornmentPosition, {
     value: 'start',
   });
@@ -17,5 +19,5 @@ export const PriceInput = (
     },
   );
 
-  return TextInput({ ...config, options }, children);
+  return TextInput({ ...config, options, label }, descendants);
 };

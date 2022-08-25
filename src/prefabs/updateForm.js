@@ -5770,7 +5770,7 @@
                     type: 'CUSTOM',
                     label: 'Font weight',
                     key: 'fontWeight',
-                    value: '400',
+                    value: '300',
                     configuration: {
                       as: 'DROPDOWN',
                       dataType: 'string',
