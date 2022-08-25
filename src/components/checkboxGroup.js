@@ -42,6 +42,7 @@
     const [errorState, setErrorState] = useState(false);
     const [afterFirstInvalidation, setAfterFirstInvalidation] = useState(false);
     const [helper, setHelper] = useState(useText(helperText));
+    const mounted = useRef(false);
     const [isDisabled, setIsDisabled] = useState(disabled);
 
     const { kind, values: listValues = [] } = getProperty(property) || {};
@@ -82,8 +83,17 @@
     const [values, setValues] = useState(getValues());
 
     useEffect(() => {
-      B.triggerEvent('onChange', values);
+      if (mounted.current) {
+        B.triggerEvent('onChange', values);
+      }
     }, [values]);
+
+    useEffect(() => {
+      mounted.current = true;
+      return () => {
+        mounted.current = false;
+      };
+    }, []);
 
     const orderByArray = [orderBy].flat();
     const sort =
