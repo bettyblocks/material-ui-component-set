@@ -74,7 +74,7 @@ const interactions: PrefabInteraction[] = [
 ];
 
 const attrs = {
-  name: 'Card view (TS)',
+  name: 'Card view',
   icon: Icon.GridIcon,
   type: 'page',
   description:
@@ -514,7 +514,7 @@ const beforeCreate = ({
   );
 };
 
-export default makePrefab('', attrs, beforeCreate, [
+export default makePrefab('Card view', attrs, beforeCreate, [
   Row(
     {
       options: {
