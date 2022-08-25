@@ -419,6 +419,16 @@ const beforeCreate = ({
                   ),
                 );
                 break;
+              case PropertyKind.FILE:
+                structure.descendants.push(
+                  makeBettyUpdateInput(
+                    BettyPrefabs.FILE,
+                    model,
+                    property,
+                    variable,
+                  ),
+                );
+                break;
               case PropertyKind.IBAN:
                 structure.descendants.push(
                   makeBettyUpdateInput(

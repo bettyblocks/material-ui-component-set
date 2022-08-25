@@ -8,24 +8,25 @@
     const { FormControl, FormHelperText, Typography, IconButton } =
       window.MaterialUI.Core;
     const {
-      actionVariableId: name,
+      accept,
       actionProperty,
-      hideDefaultError,
-      required,
+      actionVariableId: name,
+      dataComponentAttribute = ['FileUpload'],
       disabled,
-      label,
-      helperText,
       fullWidth,
-      requiredMessage: requiredMessageRaw,
+      helperText,
+      hideDefaultError,
+      hideLabel,
+      label,
+      margin,
       maxFileSize,
       maxFileSizeMessage: maxFileSizeMessageRaw,
-      accept,
-      margin,
       multiple,
-      hideLabel,
-      type,
+      required,
+      requiredMessage: requiredMessageRaw,
       showImagePreview,
-      dataComponentAttribute = ['FileUpload'],
+      type,
+      value,
     } = options;
 
     const isDev = env === 'dev';
@@ -53,9 +54,8 @@
     };
 
     const propertyId = getPropertyId(modelProperty);
-    const [upload, { error, status, data: fileReference }] = usePresignedUpload(
-      { propertyId },
-    );
+    const [upload, { error, loading, data: fileReference }] =
+      usePresignedUpload({ propertyId });
 
     const formatBytes = (bytes) => {
       if (bytes === 0) return '0 Bytes';
@@ -98,21 +98,10 @@
       const isValidFile = validateFiles(e.target.files);
       const file = e.target.files[0];
 
-      // if (isValidFile) {
-      // file.mime is the mimetype of the file
-      upload('image/png', file);
-      // }
+      if (isValidFile) {
+        upload(file.type, file);
+      }
     };
-
-    // useEffect(() => {
-    //   if (fileReference) {
-    //     console.log('DONE!!');
-
-    //     console.log('error', error);
-    //     console.log('status', status);
-    //     console.log('fileRef', fileReference);
-    //   }
-    // }, [fileReference]);
 
     const clearFiles = (e) => {
       if (e && e.preventDefault) e.preventDefault();
@@ -125,18 +114,16 @@
 
     const { files, failureMessage } = uploads;
 
-    const data = [];
-
     const acceptedValue = useText(accept) || 'image/*';
     const acceptList = acceptedValue.split(',').map((item) => item.trim());
     const helperValue =
       !hideDefaultError && failureMessage.length > 0 ? failureMessage : helper;
 
-    const removeFileFromList = (fileUrl) => {
-      const newList = data.filter((d) => d.url !== fileUrl);
+    const removeFileFromList = () => {
       setUploads({
-        ...uploads,
-        data: newList,
+        files: [],
+        data: [],
+        failureMessage: [],
       });
     };
 
@@ -349,11 +336,13 @@
             {validationMessage}
           </FormHelperText>
           <div className={classes.messageContainer}>
-            {filesArray && // TODO: show only files form the html element
+            {filesArray &&
+              !loading && // TODO: show only files form the html element
               filesArray.length > 0 &&
               filesArray.map((file) => (
                 <UploadedFile key={file.name} file={file} />
               ))}
+            {loading && <UploadingFile />}
           </div>
         </FormControl>
       );
