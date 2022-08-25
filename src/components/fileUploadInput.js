@@ -26,7 +26,6 @@
       requiredMessage: requiredMessageRaw,
       showImagePreview,
       type,
-      value,
     } = options;
 
     const isDev = env === 'dev';
@@ -75,14 +74,12 @@
         }
       }
 
-      if (maxFileSize > 0) {
-        const isFileSizeExceeded = filesArray.some(
-          (file) => file.size / 1000000 > maxFileSize,
-        );
-        if (isFileSizeExceeded) {
-          setValidationMessage(maxFileSizeMessage);
-          return false;
-        }
+      const isFileSizeExceeded = filesArray.some((file) => {
+        return file.size / 1000000 > (maxFileSize || 20);
+      });
+      if (isFileSizeExceeded) {
+        setValidationMessage(maxFileSizeMessage);
+        return false;
       }
 
       return true;
@@ -101,6 +98,14 @@
       if (isValidFile) {
         upload(file.type, file);
       }
+
+      if (!loading && fileReference) {
+        B.triggerEvent('onSuccess', fileReference);
+      }
+
+      if (error) {
+        B.triggerEvent('onError', error);
+      }
     };
 
     const clearFiles = (e) => {
@@ -110,6 +115,7 @@
         data: [],
         failureMessage: [],
       });
+      setValidationMessage('');
     };
 
     const { files, failureMessage } = uploads;
@@ -125,6 +131,7 @@
         data: [],
         failureMessage: [],
       });
+      setValidationMessage('');
     };
 
     function UploadComponent() {
