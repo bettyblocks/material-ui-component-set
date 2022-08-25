@@ -18,6 +18,7 @@ import {
   buttongroup,
   PrefabInteraction,
   InteractionType,
+  PrefabComponentOption,
 } from '@betty-blocks/component-sdk';
 import {
   Box as BoxComponent,
@@ -39,19 +40,6 @@ import {
   openPageButtonOptions,
 } from './structures';
 import { options as defaults } from './structures/ActionJSForm/options';
-
-// interface AuthenticationProfile = 				{
-//   "__typename": string,
-//   "default": boolean,
-//   "id": "f4c1373425dd4ff9aaf2286457513197",
-//   "kind": "usernamePassword",
-//   "loginModel": "f01c3e73b2f949bfbbdc3fad2a26b214",
-//   "name": "Current webuser",
-//   "options": {
-//     "__typename": "AuthenticationProfileOptions",
-//     "loginVariable": "3d33ea66bfa0445396202d2fedf9aa0c"
-//   }
-// }
 
 interface AuthenticationProfile {
   __typename: string;
@@ -939,6 +927,7 @@ const beforeCreate = ({
     BettyPrefabs,
     setOption,
     useModelQuery,
+    cloneStructure,
   } = helpers;
 
   const componentId = createUuid();
@@ -1035,6 +1024,50 @@ const beforeCreate = ({
         onSave={async () => {
           const newPrefab = { ...originalPrefab };
 
+          const inputStructure = (
+            textValue: string,
+            inputPrefab: PrefabReference,
+          ): PrefabReference => {
+            const boxPrefab = cloneStructure('Box');
+            setOption(
+              boxPrefab,
+              'innerSpacing',
+              (options: PrefabComponentOption[]) => ({
+                ...options,
+                value: ['M', '0rem', '0rem', '0rem'],
+              }),
+            );
+            const textPrefab = cloneStructure('Text');
+            setOption(
+              textPrefab,
+              'content',
+              (options: PrefabComponentOption[]) => ({
+                ...options,
+                value: [textValue],
+                configuration: { as: 'MULTILINE' },
+              }),
+            );
+            setOption(
+              textPrefab,
+              'type',
+              (options: PrefabComponentOption[]) => ({
+                ...options,
+                value: ['Body1'],
+              }),
+            );
+            setOption(
+              textPrefab,
+              'outerSpacing',
+              (options: PrefabComponentOption[]) => ({
+                ...options,
+                value: ['0rem', '0rem', 'S', '0rem'],
+              }),
+            );
+            boxPrefab.descendants.push(textPrefab);
+            boxPrefab.descendants.push(inputPrefab);
+            return boxPrefab;
+          };
+
           if (!authProfileId) {
             setAuthProfileInvalid(true);
             // eslint-disable-next-line no-useless-return
@@ -1076,42 +1109,56 @@ const beforeCreate = ({
                   (foundVariable: any) => foundVariable.name === name,
                 );
 
-                switch (kind) {
-                  case PropertyKind.EMAIL_ADDRESS:
-                    formBox.descendants.push(
-                      makeBettyInput(
-                        BettyPrefabs.EMAIL_ADDRESS,
-                        modelProp,
-                        prop,
-                        vari,
-                      ),
-                    );
-                    break;
-                  case PropertyKind.PASSWORD:
-                    formBox.descendants.push(
-                      makeBettyInput(
-                        BettyPrefabs.PASSWORD,
-                        modelProp,
-                        prop,
-                        vari,
-                      ),
-                    );
-                    break;
-                  case PropertyKind.STRING:
-                    formBox.descendants.push(
-                      makeBettyInput(
-                        BettyPrefabs.STRING,
-                        modelProp,
-                        prop,
-                        vari,
-                      ),
-                    );
-                    break;
-                  default:
-                    break;
+                const inputPrefabs = () => {
+                  switch (kind) {
+                    case PropertyKind.EMAIL_ADDRESS:
+                      return inputStructure(
+                        prop.label,
+                        makeBettyInput(
+                          BettyPrefabs.EMAIL_ADDRESS,
+                          modelProp,
+                          prop,
+                          vari,
+                        ),
+                      );
+                    case PropertyKind.PASSWORD:
+                      return inputStructure(
+                        prop.label,
+                        makeBettyInput(
+                          BettyPrefabs.PASSWORD,
+                          modelProp,
+                          prop,
+                          vari,
+                        ),
+                      );
+                    default:
+                      return inputStructure(
+                        prop.label,
+                        makeBettyInput(
+                          BettyPrefabs.STRING,
+                          modelProp,
+                          prop,
+                          vari,
+                        ),
+                      );
+                  }
+                };
+                const formInputPrefabs = inputPrefabs();
+                if (formInputPrefabs.type === 'COMPONENT') {
+                  setOption(
+                    formInputPrefabs.descendants[1],
+                    'margin',
+                    (options: PrefabComponentOption) => ({
+                      ...options,
+                      value: 'none',
+                    }),
+                  );
                 }
-                // eslint-disable-next-line no-console
-                return console.warn('PropertyKind not found');
+                formBox.descendants.push(formInputPrefabs);
+                if (!kind) {
+                  // eslint-disable-next-line no-console
+                  console.warn('PropertyKind not found');
+                }
               });
             }
             if (endpoint && endpoint.params) {
