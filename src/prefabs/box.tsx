@@ -1,5 +1,5 @@
 import { prefab, Icon } from '@betty-blocks/component-sdk';
-import { Box } from './structures/Box';
+import { Box } from './structures';
 
 const attributes = {
   category: 'LAYOUT',

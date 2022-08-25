@@ -1,21 +1,22 @@
-import {
-  component,
-  PrefabComponentOption,
-  PrefabComponent,
-} from '@betty-blocks/component-sdk';
-import { options as defaults } from './options';
-
-type OptionProducer = (key: string) => PrefabComponentOption;
-
-export interface Configuration {
-  label?: string;
-  options?: Record<string, OptionProducer>;
-}
+import { component, PrefabReference } from '@betty-blocks/component-sdk';
+import { Configuration } from '../Configuration';
+import { cardOptions, categories as defaultCategories } from './options';
 
 export const Card = (
   config: Configuration,
-  descendants: PrefabComponent[] = [],
+  descendants: PrefabReference[] = [],
 ) => {
-  const options = { ...(config.options || defaults) };
-  return component('Card', { options }, descendants);
+  const options = { ...(config.options || cardOptions) };
+  const style = { ...config.style };
+  const ref = config.ref ? { ...config.ref } : undefined;
+  const label = config.label ? config.label : undefined;
+  const optionCategories = config.optionCategories
+    ? config.optionCategories
+    : defaultCategories;
+
+  return component(
+    'Card',
+    { options, style, ref, label, optionCategories },
+    descendants,
+  );
 };

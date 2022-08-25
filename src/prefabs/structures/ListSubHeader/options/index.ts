@@ -4,13 +4,21 @@ import {
   color,
   ThemeColor,
 } from '@betty-blocks/component-sdk';
-import { advanced } from './advanced';
+import { advanced } from '../../advanced';
 
-export const options = {
+export const categories = [
+  {
+    label: 'Advanced settings',
+    expanded: false,
+    members: ['dataComponentAttribute'],
+  },
+];
+
+export const listSubHeaderOptions = {
   text: variable('Sub header', { value: ['Header'] }),
   inset: toggle('Inset', { value: true }),
   backgroundColor: color('Background color', { value: ThemeColor.TRANSPARENT }),
   textColor: color('Text color', { value: ThemeColor.BLACK }),
 
-  ...advanced,
+  ...advanced('List sub header'),
 };

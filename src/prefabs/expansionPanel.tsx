@@ -1,5 +1,5 @@
 import { Icon, prefab } from '@betty-blocks/component-sdk';
-import { ExpansionPanel } from './structures/ExpansionPanel';
+import { ExpansionPanel } from './structures';
 
 const attrs = {
   icon: Icon.AccordionItemIcon,

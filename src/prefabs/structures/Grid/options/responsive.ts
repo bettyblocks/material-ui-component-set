@@ -1,9 +1,6 @@
-import { toggle, option } from '@betty-blocks/component-sdk';
+import { option } from '@betty-blocks/component-sdk';
 
 export const responsive = {
-  responsiveOptions: toggle('Show responsive options', {
-    value: false,
-  }),
   xsWidth: option('CUSTOM', {
     value: 'true',
     label: 'XS width',
@@ -28,12 +25,6 @@ export const responsive = {
         { name: '11', value: '11' },
         { name: '12', value: '12' },
       ],
-      condition: {
-        type: 'SHOW',
-        option: 'responsiveOptions',
-        comparator: 'EQ',
-        value: true,
-      },
     },
   }),
   smWidth: option('CUSTOM', {
@@ -60,12 +51,6 @@ export const responsive = {
         { name: '11', value: '11' },
         { name: '12', value: '12' },
       ],
-      condition: {
-        type: 'SHOW',
-        option: 'responsiveOptions',
-        comparator: 'EQ',
-        value: true,
-      },
     },
   }),
   mdWidth: option('CUSTOM', {
@@ -92,12 +77,6 @@ export const responsive = {
         { name: '11', value: '11' },
         { name: '12', value: '12' },
       ],
-      condition: {
-        type: 'SHOW',
-        option: 'responsiveOptions',
-        comparator: 'EQ',
-        value: true,
-      },
     },
   }),
   lgWidth: option('CUSTOM', {
@@ -124,12 +103,6 @@ export const responsive = {
         { name: '11', value: '11' },
         { name: '12', value: '12' },
       ],
-      condition: {
-        type: 'SHOW',
-        option: 'responsiveOptions',
-        comparator: 'EQ',
-        value: true,
-      },
     },
   }),
   xlWidth: option('CUSTOM', {
@@ -156,12 +129,6 @@ export const responsive = {
         { name: '11', value: '11' },
         { name: '12', value: '12' },
       ],
-      condition: {
-        type: 'SHOW',
-        option: 'responsiveOptions',
-        comparator: 'EQ',
-        value: true,
-      },
     },
   }),
 };
