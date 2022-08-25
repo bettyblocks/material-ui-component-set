@@ -4,6 +4,7 @@ import {
   icon,
   option,
   showIf,
+  showIfTrue,
   size,
   sizes,
   ThemeColor,
@@ -76,7 +77,16 @@ export const iconOptions = {
     },
   }),
   badgeColor: color('Badge Color', {
-    value: ThemeColor.SECONDARY,
+    value: ThemeColor.DANGER,
+    configuration: {
+      condition: showIfTrue('addBadge'),
+    },
+  }),
+  badgeTextColor: color('Badge Text Color', {
+    value: ThemeColor.WHITE,
+    configuration: {
+      condition: showIfTrue('addBadge'),
+    },
   }),
   anchorOrigin: option('CUSTOM', {
     label: 'Anchor Origin',
