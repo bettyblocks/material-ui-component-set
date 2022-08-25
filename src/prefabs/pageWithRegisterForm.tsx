@@ -114,19 +114,6 @@ const interactions: PrefabInteraction[] = [
   },
 ];
 
-interface x {
-  id: string[];
-  kind: string;
-  label: string;
-  type: string;
-}
-interface y {
-  id: string;
-  kind: string;
-  name: string;
-  options: string;
-  scope: string;
-}
 const attrs = {
   name: 'Register form',
   icon: Icon.LoginFormIcon,
