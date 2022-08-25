@@ -24,13 +24,13 @@ export const badge = {
     },
   }),
   badgeColor: color('Badge Color', {
-    value: ThemeColor.SECONDARY,
+    value: ThemeColor.DANGER,
     configuration: {
       condition: showIfTrue('addBadge'),
     },
   }),
   badgeTextColor: color('Badge Text Color', {
-    value: ThemeColor.BLACK,
+    value: ThemeColor.WHITE,
     configuration: {
       condition: showIfTrue('addBadge'),
     },
