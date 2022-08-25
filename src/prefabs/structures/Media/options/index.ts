@@ -6,9 +6,32 @@ import {
   size,
   sizes,
 } from '@betty-blocks/component-sdk';
-import { advanced } from './advanced';
+import { advanced } from '../../advanced';
 
-export const options = {
+export const categories = [
+  {
+    label: 'Styling',
+    expanded: false,
+    members: ['width', 'height'],
+  },
+  {
+    label: 'Spacing',
+    expanded: false,
+    members: ['outerSpacing'],
+  },
+  {
+    label: 'Alternative names',
+    expanded: false,
+    members: ['title', 'imgAlt'],
+  },
+  {
+    label: 'Advanced settings',
+    expanded: false,
+    members: ['dataComponentAttribute'],
+  },
+];
+
+export const mediaOptions = {
   type: option('CUSTOM', {
     label: 'Media type',
     value: 'img',
@@ -94,5 +117,5 @@ export const options = {
     value: ['0rem', '0rem', 'M', '0rem'],
   }),
 
-  ...advanced,
+  ...advanced('Media'),
 };
