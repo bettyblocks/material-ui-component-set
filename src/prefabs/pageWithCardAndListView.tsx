@@ -116,7 +116,7 @@ const interactions: PrefabInteraction[] = [
 ];
 
 const attrs = {
-  name: 'Card and list view (TS)',
+  name: 'Card and list view',
   icon: Icon.DataList,
   type: 'page',
   description:
@@ -583,7 +583,7 @@ const beforeCreate = ({
   );
 };
 
-export default makePrefab('', attrs, beforeCreate, [
+export default makePrefab('Card and List view', attrs, beforeCreate, [
   Row(
     {
       options: {
@@ -1261,6 +1261,12 @@ export default makePrefab('', attrs, beforeCreate, [
                                                 type: font('Font', {
                                                   value: ['Body1'],
                                                 }),
+                                                useInnerHtml: toggle(
+                                                  'Display Rich Text',
+                                                  {
+                                                    value: false,
+                                                  },
+                                                ),
                                               },
                                             },
                                             [],
@@ -1482,6 +1488,12 @@ export default makePrefab('', attrs, beforeCreate, [
                                                         type: font('Font', {
                                                           value: ['Body2'],
                                                         }),
+                                                        useInnerHtml: toggle(
+                                                          'Display Rich Text',
+                                                          {
+                                                            value: false,
+                                                          },
+                                                        ),
                                                       },
                                                     },
                                                     [],
@@ -1622,6 +1634,12 @@ export default makePrefab('', attrs, beforeCreate, [
                                                 type: font('Font', {
                                                   value: ['Body1'],
                                                 }),
+                                                useInnerHtml: toggle(
+                                                  'Display Rich Text',
+                                                  {
+                                                    value: false,
+                                                  },
+                                                ),
                                               },
                                             },
                                             [],
@@ -2732,6 +2750,15 @@ export default makePrefab('', attrs, beforeCreate, [
                                                                                     ],
                                                                                 },
                                                                               ),
+                                                                              useInnerHtml:
+                                                                                toggle(
+                                                                                  'Display Rich Text',
+                                                                                  {
+                                                                                    value:
+                                                                                      false,
+                                                                                  },
+                                                                                ),
+
                                                                               outerSpacing:
                                                                                 sizes(
                                                                                   'Outer space',
@@ -2824,6 +2851,14 @@ export default makePrefab('', attrs, beforeCreate, [
                                                                                     ],
                                                                                 },
                                                                               ),
+                                                                              useInnerHtml:
+                                                                                toggle(
+                                                                                  'Display Rich Text',
+                                                                                  {
+                                                                                    value:
+                                                                                      false,
+                                                                                  },
+                                                                                ),
                                                                             },
                                                                         },
                                                                         [],
@@ -3105,6 +3140,9 @@ export default makePrefab('', attrs, beforeCreate, [
                                   },
                                 }),
                                 type: font('Font', { value: ['Body1'] }),
+                                useInnerHtml: toggle('Display Rich Text', {
+                                  value: false,
+                                }),
                                 styles: toggle('Styles', { value: true }),
                                 textColor: color('Text color', {
                                   value: ThemeColor.MEDIUM,
