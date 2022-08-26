@@ -1,8 +1,8 @@
 import { PrefabReference } from '@betty-blocks/component-sdk';
 import { updateOption } from '../../../utils';
 import { TextInput } from '../TextInput';
-import { Configuration } from '../Configuration';
 import { options } from './options';
+import { Configuration } from '../Configuration';
 
 export const PriceInput = (
   config: Configuration,
