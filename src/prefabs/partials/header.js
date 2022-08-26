@@ -1497,12 +1497,57 @@
                                   type: 'VARIABLE',
                                 },
                                 {
+                                  label: 'Media type',
+                                  value: 'url',
+                                  key: 'type',
+                                  type: 'CUSTOM',
+                                  configuration: {
+                                    as: 'BUTTONGROUP',
+                                    dataType: 'string',
+                                    allowedInput: [
+                                      {
+                                        name: 'Image',
+                                        value: 'img',
+                                      },
+                                      {
+                                        name: 'URL',
+                                        value: 'url',
+                                      },
+                                    ],
+                                  },
+                                },
+                                {
+                                  value: '',
+                                  type: 'PUBLIC_FILE',
                                   label: 'Logo',
                                   key: 'logoSource',
+                                  configuration: {
+                                    condition: {
+                                      type: 'SHOW',
+                                      option: 'type',
+                                      comparator: 'EQ',
+                                      value: 'img',
+                                    },
+                                  },
+                                },
+                                {
                                   value: [
                                     'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Your_Logo_-_W.svg',
                                   ],
+                                  label: 'URL source',
+                                  key: 'urlFileSource',
                                   type: 'VARIABLE',
+                                  configuration: {
+                                    placeholder:
+                                      'Starts with https:// or http://',
+                                    as: 'MULTILINE',
+                                    condition: {
+                                      type: 'SHOW',
+                                      option: 'type',
+                                      comparator: 'EQ',
+                                      value: 'url',
+                                    },
+                                  },
                                 },
                                 {
                                   type: 'SIZE',
