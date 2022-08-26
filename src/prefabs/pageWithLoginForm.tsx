@@ -20,6 +20,7 @@ import {
   InteractionType,
   PrefabComponentOption,
 } from '@betty-blocks/component-sdk';
+import { options as defaults } from './structures/ActionJSForm/options';
 import {
   Box as BoxComponent,
   boxOptions,
@@ -39,19 +40,28 @@ import {
   OpenPageButton,
   openPageButtonOptions,
 } from './structures';
-import { options as defaults } from './structures/ActionJSForm/options';
 
+interface AuthenticationProfileOptions {
+  loginVariable: string;
+  usernameProperty: string | null;
+  passwordProperty: string | null;
+  localeProperty: string | null;
+  redirectEndpoint: string | null;
+  refreshTokenTimeout: number | null;
+  accessTokenTimeout: number | null;
+}
+
+declare enum AuthenticationProfileKind {
+  customAuthentication = 'customAuthentication',
+  usernamePassword = 'usernamePassword',
+}
 interface AuthenticationProfile {
-  __typename: string;
   default: boolean;
   id: string;
-  kind: 'usernamePassword';
+  kind: AuthenticationProfileKind;
   loginModel: string;
   name: string;
-  options: {
-    __typename: 'AuthenticationProfileOptions';
-    loginVariable: string;
-  };
+  options: AuthenticationProfileOptions;
   properties?: Array<any>;
 }
 
@@ -917,9 +927,7 @@ const beforeCreate = ({
   },
   prefab: originalPrefab,
   save,
-  helpers,
-}: any) => {
-  const {
+  helpers: {
     createUuid,
     prepareAction,
     PropertyKind,
@@ -928,8 +936,8 @@ const beforeCreate = ({
     setOption,
     useModelQuery,
     cloneStructure,
-  } = helpers;
-
+  },
+}: any) => {
   const componentId = createUuid();
   const [authProfileId, setAuthProfileId] = React.useState('');
   const [authProfile, setAuthProfile] = React.useState<AuthenticationProfile>();
@@ -1110,36 +1118,35 @@ const beforeCreate = ({
                 );
 
                 const inputPrefabs = () => {
+                  const bettyInput = (prefabName: String): PrefabReference => {
+                    const inputPrefab = makeBettyInput(
+                      prefabName,
+                      modelProp,
+                      prop,
+                      vari,
+                    );
+                    setOption(inputPrefab, 'hideLabel', (options: any) => ({
+                      ...options,
+                      value: true,
+                    }));
+                    return inputPrefab;
+                  };
+
                   switch (kind) {
                     case PropertyKind.EMAIL_ADDRESS:
                       return inputStructure(
                         prop.label,
-                        makeBettyInput(
-                          BettyPrefabs.EMAIL_ADDRESS,
-                          modelProp,
-                          prop,
-                          vari,
-                        ),
+                        bettyInput(BettyPrefabs.EMAIL_ADDRESS),
                       );
                     case PropertyKind.PASSWORD:
                       return inputStructure(
                         prop.label,
-                        makeBettyInput(
-                          BettyPrefabs.PASSWORD,
-                          modelProp,
-                          prop,
-                          vari,
-                        ),
+                        bettyInput(BettyPrefabs.PASSWORD),
                       );
                     default:
                       return inputStructure(
                         prop.label,
-                        makeBettyInput(
-                          BettyPrefabs.STRING,
-                          modelProp,
-                          prop,
-                          vari,
-                        ),
+                        bettyInput(BettyPrefabs.STRING),
                       );
                   }
                 };
