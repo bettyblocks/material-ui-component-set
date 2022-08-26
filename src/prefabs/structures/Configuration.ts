@@ -16,4 +16,6 @@ export interface Configuration {
   placeholder?: string;
   dataComponentAttribute?: string;
   optionCategories?: OptionCategory[];
+  validationPattern?: string;
+  pattern?: string;
 }
