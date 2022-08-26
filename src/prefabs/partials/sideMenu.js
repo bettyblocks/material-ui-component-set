@@ -826,14 +826,16 @@
                 {
                   label: 'Media type',
                   key: 'type',
-                  value: 'img',
+                  value: 'url',
                   type: 'CUSTOM',
                   configuration: {
                     as: 'BUTTONGROUP',
                     dataType: 'string',
                     allowedInput: [
                       { name: 'Image', value: 'img' },
+                      { name: 'Data', value: 'data' },
                       { name: 'Video', value: 'video' },
+                      { name: 'URL', value: 'url' },
                       { name: 'I-frame', value: 'iframe' },
                     ],
                   },
@@ -843,7 +845,7 @@
                     'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Your_Logo_-_W.svg',
                   ],
                   label: 'Source',
-                  key: 'urlFileSourcecece',
+                  key: 'urlFileSource',
                   type: 'VARIABLE',
                   configuration: {
                     as: 'MULTILINE',
@@ -867,6 +869,20 @@
                       option: 'type',
                       comparator: 'EQ',
                       value: 'video',
+                    },
+                  },
+                },
+                {
+                  value: '',
+                  type: 'PROPERTY',
+                  label: 'Property',
+                  key: 'propertyFileSource',
+                  configuration: {
+                    condition: {
+                      type: 'SHOW',
+                      option: 'type',
+                      comparator: 'EQ',
+                      value: 'data',
                     },
                   },
                 },

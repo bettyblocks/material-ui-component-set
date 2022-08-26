@@ -30,22 +30,25 @@
 
     const isUrlImg = type === 'url' && urlSourceType === 'image';
     const isURLVideo = type === 'url' && urlSourceType === 'video';
-    const isDataUrl = type === 'data';
+    const isDataUrl = type === 'data' && propertyFileSource && propValue;
     const isImage = type === 'img' || isUrlImg || isDataUrl;
     const isVideo = type === 'video' || isURLVideo;
     const isIframe = type === 'iframe' && iframeUrl;
-    const isEmpty = !isImage && !isVideo && !isIframe;
+    const isData = type === 'data' || isDataUrl;
+    const isEmpty = !isImage && !isVideo && !isIframe && !isData;
     const urlFileSourceText = useText(urlFileSource);
     const videoUrl = isURLVideo ? urlFileSourceText : videoSource;
 
     function getImgUrl() {
       switch (true) {
-        case isDataUrl && propValue:
+        case isDataUrl && propValue !== {}:
           return propValue[propertyFileSource.useKey];
         case isUrlImg:
           return urlFileSourceText;
-        default:
+        case type === 'img':
           return imgSource;
+        default:
+          return '';
       }
     }
 
@@ -53,7 +56,7 @@
 
     useEffect(() => {
       setImgUrl(getImgUrl());
-    }, [imgSource, propValue, urlFileSourceText]);
+    }, [imgSource, propValue, urlFileSourceText, type]);
 
     const variable =
       urlFileSource && urlFileSource.findIndex((v) => v.name) !== -1;
@@ -104,7 +107,7 @@
 
     function Placeholder() {
       switch (true) {
-        case isImage:
+        case isImage || isData:
           return <ImgPlaceholder />;
         case isVideo:
           return <VideoPlaceholder />;

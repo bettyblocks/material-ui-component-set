@@ -14,7 +14,7 @@ export const categories = [
   {
     label: 'Logo',
     expanded: true,
-    members: ['logoSource', 'logoWidth', 'endpoint'],
+    members: ['type', 'urlFileSource', 'logoSource', 'logoWidth', 'endpoint'],
   },
   {
     label: 'Styling',
@@ -74,12 +74,33 @@ export const appBarOptions = {
     },
   }),
   title: variable('Title', { value: ['App Bar'] }),
+  type: option('CUSTOM', {
+    label: 'Media type',
+    value: 'url',
+    configuration: {
+      as: 'BUTTONGROUP',
+      dataType: 'string',
+      allowedInput: [
+        { name: 'Image', value: 'img' },
+        { name: 'URL', value: 'url' },
+      ],
+    },
+  }),
   logoSource: option('PUBLIC_FILE', {
-    label: 'Logo source',
+    label: 'Logo',
     value: '',
     configuration: {
       mediaType: 'IMAGE',
       allowedExtensions: ['image/*'],
+      condition: showIf('type', 'EQ', 'img'),
+    },
+  }),
+  urlFileSource: variable('Source', {
+    value: [''],
+    configuration: {
+      placeholder: 'Starts with https:// or http://',
+      as: 'MULTILINE',
+      condition: showIf('type', 'EQ', 'url'),
     },
   }),
   logoWidth: size('Logo Width', {
@@ -104,7 +125,7 @@ export const appBarOptions = {
       ],
     },
   }),
-  endpoint: endpoint('Logo links to', { value: '' }),
+  endpoint: endpoint('Page', { value: '' }),
   appBarVariant: option('CUSTOM', {
     label: 'Variant',
     value: 'flat',
@@ -159,7 +180,7 @@ export const appBarOptions = {
         { name: '23', value: '23' },
         { name: '24', value: '24' },
       ],
-      condition: showIf('appBarVariant', 'EQ', 'elevation'),
+      condition: showIf('appBarVarient', 'EQ', 'elevation'),
     },
   }),
   square: toggle('Square', { value: true }),
