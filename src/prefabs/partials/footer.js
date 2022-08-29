@@ -4,9 +4,6 @@
   description: 'This is the footer partial',
   detail:
     'This partial is used to display the header of the page. It has a text component with the copyright with the name of the company.',
-  // previewUrl: 'https://preview.betty.app/homepage',
-  previewImage:
-    'https://assets.bettyblocks.com/bea59bf27f2a414a9ca069afa6524a2b_assets/files/Footer',
   category: 'LAYOUT',
 
   structure: [
@@ -83,7 +80,7 @@
           type: 'SIZES',
         },
         {
-          value: ['M', 'M', 'M', 'M'],
+          value: ['L', 'L', 'L', 'L'],
           label: 'Inner space',
           key: 'innerSpacing',
           type: 'SIZES',
@@ -444,7 +441,7 @@
               },
             },
             {
-              value: ['L', 'L', 'L', 'L'],
+              value: ['0rem', '0rem', '0rem', '0rem'],
               label: 'Outer space',
               key: 'outerSpacing',
               type: 'SIZES',
