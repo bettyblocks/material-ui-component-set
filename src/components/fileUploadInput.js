@@ -47,12 +47,19 @@
     const { modelProperty } = actionProperty;
 
     const getPropertyId = (property) => {
-      const { id } = property;
+      if (Array.isArray(property)) {
+        return property[0];
+      }
 
-      return Array.isArray(id) ? id[0] : id;
+      if (typeof property === 'object') {
+        return getPropertyId(property.id);
+      }
+
+      return property;
     };
 
     const propertyId = getPropertyId(modelProperty);
+
     const [upload, { error, loading, data: fileReference }] =
       usePresignedUpload({ propertyId });
 

@@ -539,8 +539,6 @@ const beforeCreate = ({
                   ),
                 );
             }
-            // eslint-disable-next-line no-console
-            return console.warn('PropertyKind not found');
           });
 
           structure.descendants.push(
