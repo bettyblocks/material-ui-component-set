@@ -1,3 +1,31 @@
+## [2.31.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.31.0...v2.31.1) (2022-08-29)
+
+
+### Bug Fixes
+
+* remove default password validation ([ffccecb](https://github.com/bettyblocks/material-ui-component-set/commit/ffccecb0ee762ecf308f28be87e72585c2399d46))
+
+# [2.31.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.30.0...v2.31.0) (2022-08-29)
+
+
+### Features
+
+* refactor inspirational dashboard to TSX TMPLT-1541 ([6d3d2f3](https://github.com/bettyblocks/material-ui-component-set/commit/6d3d2f3a123b555be216710b7aaed604e5c49de7))
+
+# [2.30.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.29.0...v2.30.0) (2022-08-25)
+
+
+### Features
+
+* card list view to tsx, update config, update forms v2 options ([81f6689](https://github.com/bettyblocks/material-ui-component-set/commit/81f6689d0f6fef316d4f9c6fca770f835bb4e98b))
+
+# [2.29.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.28.0...v2.29.0) (2022-08-24)
+
+
+### Features
+
+* converted header and footer to tsx ([bb03686](https://github.com/bettyblocks/material-ui-component-set/commit/bb0368674f5964d05ea529649f35ab838cc24e81))
+
 # [2.28.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.27.0...v2.28.0) (2022-08-22)
 
 
