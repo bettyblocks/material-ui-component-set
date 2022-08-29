@@ -163,10 +163,12 @@ const beforeCreate = ({
           );
 
           // TODO: add record id as input
-
           setOption(structure.descendants[2], 'property', (options) => ({
             ...options,
-            value: [modelIdProperty.id],
+            value: {
+              id: [modelIdProperty.id],
+              type: 'PROPERTY',
+            },
             configuration: { disabled: true },
           }));
 
