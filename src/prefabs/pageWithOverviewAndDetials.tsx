@@ -11,11 +11,11 @@ import {
   color,
   ThemeColor,
   PrefabReference,
-  BeforeCreateArgs,
   variable,
   font,
   showIfTrue,
   PrefabComponent,
+  PrefabInteraction,
 } from '@betty-blocks/component-sdk';
 import {
   Box as prefabBox,
@@ -39,6 +39,18 @@ import {
   paperOptions,
 } from './structures';
 
+const interactions = [
+  {
+    name: 'Show',
+    sourceEvent: 'OnRowClick',
+    ref: {
+      targetComponentId: '#detailsColumn',
+      sourceComponentId: '#dataTable',
+    },
+    type: 'Custom',
+  },
+] as PrefabInteraction[];
+
 const attrs = {
   name: 'Overview and detail view TS',
   icon: Icon.DataList,
@@ -51,6 +63,7 @@ const attrs = {
   previewImage:
     'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_Overview_And_Detail_View.jpg',
   category: 'LAYOUT',
+  interactions,
 };
 
 const prefabStructure: PrefabComponent[] = [
@@ -495,6 +508,7 @@ const prefabStructure: PrefabComponent[] = [
                       Row({}, [
                         Column(
                           {
+                            ref: { id: '#detailsColumn' },
                             options: {
                               ...columnOptions,
                               columnWidth: option('CUSTOM', {
@@ -612,94 +626,648 @@ const prefabStructure: PrefabComponent[] = [
                               innerSpacing: sizes('Inner space', {
                                 value: ['L', 'L', 'L', 'L'],
                               }),
+                              visible: toggle('Toggle visibility', {
+                                value: false,
+                                configuration: {
+                                  as: 'VISIBILITY',
+                                },
+                              }),
                             },
                           },
                           [
-                            DataContainer({}, [
-                              Paper(
-                                {
-                                  options: {
-                                    ...paperOptions,
-                                    square: toggle('Square', { value: true }),
-                                    variant: option('CUSTOM', {
-                                      label: 'Variant',
-                                      value: 'outlined',
-                                      configuration: {
-                                        as: 'BUTTONGROUP',
-                                        dataType: 'string',
-                                        allowedInput: [
-                                          { name: 'Flat', value: 'flat' },
-                                          {
-                                            name: 'Elevation',
-                                            value: 'elevation',
-                                          },
-                                          {
-                                            name: 'Outlined',
-                                            value: 'outlined',
-                                          },
-                                        ],
-                                      },
-                                    }),
-                                  },
-                                },
-                                [
-                                  Row(
-                                    {
-                                      ref: { id: '#detailRow' },
-                                      options: {
-                                        ...rowOptions,
-                                        maxRowWidth: option('CUSTOM', {
-                                          label: 'Width',
-                                          value: 'Full',
-                                          configuration: {
-                                            as: 'BUTTONGROUP',
-                                            dataType: 'string',
-                                            allowedInput: [
-                                              { name: 'S', value: 'S' },
-                                              { name: 'M', value: 'M' },
-                                              { name: 'L', value: 'L' },
-                                              { name: 'XL', value: 'XL' },
-                                              { name: 'Full', value: 'Full' },
-                                            ],
-                                          },
-                                        }),
-                                      },
-                                    },
-                                    [
-                                      Column(
-                                        {
-                                          options: {
-                                            ...columnOptions,
-                                            innerSpacing: sizes('Inner space', {
-                                              value: ['M', 'M', '0rem', 'M'],
-                                            }),
-                                          },
-                                        },
-                                        [
-                                          TextPrefab(
+                            DataContainer(
+                              {
+                                ref: { id: '#dataContainer' },
+                              },
+                              [
+                                Paper(
+                                  {
+                                    options: {
+                                      ...paperOptions,
+                                      square: toggle('Square', { value: true }),
+                                      variant: option('CUSTOM', {
+                                        label: 'Variant',
+                                        value: 'outlined',
+                                        configuration: {
+                                          as: 'BUTTONGROUP',
+                                          dataType: 'string',
+                                          allowedInput: [
+                                            { name: 'Flat', value: 'flat' },
                                             {
-                                              options: {
-                                                ...textOptions,
-                                                content: variable('Content', {
-                                                  value: ['Details'],
+                                              name: 'Elevation',
+                                              value: 'elevation',
+                                            },
+                                            {
+                                              name: 'Outlined',
+                                              value: 'outlined',
+                                            },
+                                          ],
+                                        },
+                                      }),
+                                    },
+                                  },
+                                  [
+                                    Row(
+                                      {
+                                        ref: { id: '#detailRow' },
+                                        options: {
+                                          ...rowOptions,
+                                          maxRowWidth: option('CUSTOM', {
+                                            label: 'Width',
+                                            value: 'Full',
+                                            configuration: {
+                                              as: 'BUTTONGROUP',
+                                              dataType: 'string',
+                                              allowedInput: [
+                                                { name: 'S', value: 'S' },
+                                                { name: 'M', value: 'M' },
+                                                { name: 'L', value: 'L' },
+                                                { name: 'XL', value: 'XL' },
+                                                { name: 'Full', value: 'Full' },
+                                              ],
+                                            },
+                                          }),
+                                        },
+                                      },
+                                      [
+                                        Column(
+                                          {
+                                            options: {
+                                              ...columnOptions,
+                                              innerSpacing: sizes(
+                                                'Inner space',
+                                                {
+                                                  value: [
+                                                    'M',
+                                                    'M',
+                                                    '0rem',
+                                                    'M',
+                                                  ],
+                                                },
+                                              ),
+                                              columnWidth: option('CUSTOM', {
+                                                label: 'Column width',
+                                                value: '12',
+                                                configuration: {
+                                                  as: 'DROPDOWN',
+                                                  dataType: 'string',
+                                                  allowedInput: [
+                                                    {
+                                                      name: 'Fit content',
+                                                      value: 'fitContent',
+                                                    },
+                                                    {
+                                                      name: 'Flexible',
+                                                      value: 'flexible',
+                                                    },
+                                                    {
+                                                      name: 'Hidden',
+                                                      value: 'hidden',
+                                                    },
+                                                    { name: '1', value: '1' },
+                                                    { name: '2', value: '2' },
+                                                    { name: '3', value: '3' },
+                                                    { name: '4', value: '4' },
+                                                    { name: '5', value: '5' },
+                                                    { name: '6', value: '6' },
+                                                    { name: '7', value: '7' },
+                                                    { name: '8', value: '8' },
+                                                    { name: '9', value: '9' },
+                                                    { name: '10', value: '10' },
+                                                    { name: '11', value: '11' },
+                                                    { name: '12', value: '12' },
+                                                  ],
+                                                },
+                                              }),
+                                              columnWidthTabletLandscape:
+                                                option('CUSTOM', {
+                                                  label:
+                                                    'Column width (tablet landscape)',
+                                                  value: '12',
                                                   configuration: {
-                                                    as: 'MULTILINE',
+                                                    as: 'DROPDOWN',
+                                                    dataType: 'string',
+                                                    allowedInput: [
+                                                      {
+                                                        name: 'Fit content',
+                                                        value: 'fitContent',
+                                                      },
+                                                      {
+                                                        name: 'Flexible',
+                                                        value: 'flexible',
+                                                      },
+                                                      {
+                                                        name: 'Hidden',
+                                                        value: 'hidden',
+                                                      },
+                                                      { name: '1', value: '1' },
+                                                      { name: '2', value: '2' },
+                                                      { name: '3', value: '3' },
+                                                      { name: '4', value: '4' },
+                                                      { name: '5', value: '5' },
+                                                      { name: '6', value: '6' },
+                                                      { name: '7', value: '7' },
+                                                      { name: '8', value: '8' },
+                                                      { name: '9', value: '9' },
+                                                      {
+                                                        name: '10',
+                                                        value: '10',
+                                                      },
+                                                      {
+                                                        name: '11',
+                                                        value: '11',
+                                                      },
+                                                      {
+                                                        name: '12',
+                                                        value: '12',
+                                                      },
+                                                    ],
                                                   },
                                                 }),
-                                                type: font('Font', {
-                                                  value: ['Title4'],
-                                                }),
-                                              },
+                                              columnWidthTabletPortrait: option(
+                                                'CUSTOM',
+                                                {
+                                                  value: '12',
+                                                  label:
+                                                    'Column width (tablet portrait)',
+                                                  configuration: {
+                                                    as: 'DROPDOWN',
+                                                    dataType: 'string',
+                                                    allowedInput: [
+                                                      {
+                                                        name: 'Fit content',
+                                                        value: 'fitContent',
+                                                      },
+                                                      {
+                                                        name: 'Flexible',
+                                                        value: 'flexible',
+                                                      },
+                                                      {
+                                                        name: 'Hidden',
+                                                        value: 'hidden',
+                                                      },
+                                                      { name: '1', value: '1' },
+                                                      { name: '2', value: '2' },
+                                                      { name: '3', value: '3' },
+                                                      { name: '4', value: '4' },
+                                                      { name: '5', value: '5' },
+                                                      { name: '6', value: '6' },
+                                                      { name: '7', value: '7' },
+                                                      { name: '8', value: '8' },
+                                                      { name: '9', value: '9' },
+                                                      {
+                                                        name: '10',
+                                                        value: '10',
+                                                      },
+                                                      {
+                                                        name: '11',
+                                                        value: '11',
+                                                      },
+                                                      {
+                                                        name: '12',
+                                                        value: '12',
+                                                      },
+                                                    ],
+                                                  },
+                                                },
+                                              ),
+                                              columnWidthMobile: option(
+                                                'CUSTOM',
+                                                {
+                                                  value: '12',
+                                                  label:
+                                                    'Column width (mobile)',
+                                                  configuration: {
+                                                    as: 'DROPDOWN',
+                                                    dataType: 'string',
+                                                    allowedInput: [
+                                                      {
+                                                        name: 'Fit content',
+                                                        value: 'fitContent',
+                                                      },
+                                                      {
+                                                        name: 'Flexible',
+                                                        value: 'flexible',
+                                                      },
+                                                      {
+                                                        name: 'Hidden',
+                                                        value: 'hidden',
+                                                      },
+                                                      { name: '1', value: '1' },
+                                                      { name: '2', value: '2' },
+                                                      { name: '3', value: '3' },
+                                                      { name: '4', value: '4' },
+                                                      { name: '5', value: '5' },
+                                                      { name: '6', value: '6' },
+                                                      { name: '7', value: '7' },
+                                                      { name: '8', value: '8' },
+                                                      { name: '9', value: '9' },
+                                                      {
+                                                        name: '10',
+                                                        value: '10',
+                                                      },
+                                                      {
+                                                        name: '11',
+                                                        value: '11',
+                                                      },
+                                                      {
+                                                        name: '12',
+                                                        value: '12',
+                                                      },
+                                                    ],
+                                                  },
+                                                },
+                                              ),
                                             },
-                                            [],
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ]),
+                                          },
+                                          [
+                                            TextPrefab(
+                                              {
+                                                options: {
+                                                  ...textOptions,
+                                                  content: variable('Content', {
+                                                    value: ['Details'],
+                                                    configuration: {
+                                                      as: 'MULTILINE',
+                                                    },
+                                                  }),
+                                                  type: font('Font', {
+                                                    value: ['Title4'],
+                                                  }),
+                                                },
+                                              },
+                                              [],
+                                            ),
+                                          ],
+                                        ),
+                                        Column(
+                                          {
+                                            options: {
+                                              ...columnOptions,
+                                              columnWidth: option('CUSTOM', {
+                                                label: 'Column width',
+                                                value: '6',
+                                                configuration: {
+                                                  as: 'DROPDOWN',
+                                                  dataType: 'string',
+                                                  allowedInput: [
+                                                    {
+                                                      name: 'Fit content',
+                                                      value: 'fitContent',
+                                                    },
+                                                    {
+                                                      name: 'Flexible',
+                                                      value: 'flexible',
+                                                    },
+                                                    {
+                                                      name: 'Hidden',
+                                                      value: 'hidden',
+                                                    },
+                                                    { name: '1', value: '1' },
+                                                    { name: '2', value: '2' },
+                                                    { name: '3', value: '3' },
+                                                    { name: '4', value: '4' },
+                                                    { name: '5', value: '5' },
+                                                    { name: '6', value: '6' },
+                                                    { name: '7', value: '7' },
+                                                    { name: '8', value: '8' },
+                                                    { name: '9', value: '9' },
+                                                    { name: '10', value: '10' },
+                                                    { name: '11', value: '11' },
+                                                    { name: '12', value: '12' },
+                                                  ],
+                                                },
+                                              }),
+                                              columnWidthTabletLandscape:
+                                                option('CUSTOM', {
+                                                  label:
+                                                    'Column width (tablet landscape)',
+                                                  value: '6',
+                                                  configuration: {
+                                                    as: 'DROPDOWN',
+                                                    dataType: 'string',
+                                                    allowedInput: [
+                                                      {
+                                                        name: 'Fit content',
+                                                        value: 'fitContent',
+                                                      },
+                                                      {
+                                                        name: 'Flexible',
+                                                        value: 'flexible',
+                                                      },
+                                                      {
+                                                        name: 'Hidden',
+                                                        value: 'hidden',
+                                                      },
+                                                      { name: '1', value: '1' },
+                                                      { name: '2', value: '2' },
+                                                      { name: '3', value: '3' },
+                                                      { name: '4', value: '4' },
+                                                      { name: '5', value: '5' },
+                                                      { name: '6', value: '6' },
+                                                      { name: '7', value: '7' },
+                                                      { name: '8', value: '8' },
+                                                      { name: '9', value: '9' },
+                                                      {
+                                                        name: '10',
+                                                        value: '10',
+                                                      },
+                                                      {
+                                                        name: '11',
+                                                        value: '11',
+                                                      },
+                                                      {
+                                                        name: '12',
+                                                        value: '12',
+                                                      },
+                                                    ],
+                                                  },
+                                                }),
+                                              columnWidthTabletPortrait: option(
+                                                'CUSTOM',
+                                                {
+                                                  value: '6',
+                                                  label:
+                                                    'Column width (tablet portrait)',
+                                                  configuration: {
+                                                    as: 'DROPDOWN',
+                                                    dataType: 'string',
+                                                    allowedInput: [
+                                                      {
+                                                        name: 'Fit content',
+                                                        value: 'fitContent',
+                                                      },
+                                                      {
+                                                        name: 'Flexible',
+                                                        value: 'flexible',
+                                                      },
+                                                      {
+                                                        name: 'Hidden',
+                                                        value: 'hidden',
+                                                      },
+                                                      { name: '1', value: '1' },
+                                                      { name: '2', value: '2' },
+                                                      { name: '3', value: '3' },
+                                                      { name: '4', value: '4' },
+                                                      { name: '5', value: '5' },
+                                                      { name: '6', value: '6' },
+                                                      { name: '7', value: '7' },
+                                                      { name: '8', value: '8' },
+                                                      { name: '9', value: '9' },
+                                                      {
+                                                        name: '10',
+                                                        value: '10',
+                                                      },
+                                                      {
+                                                        name: '11',
+                                                        value: '11',
+                                                      },
+                                                      {
+                                                        name: '12',
+                                                        value: '12',
+                                                      },
+                                                    ],
+                                                  },
+                                                },
+                                              ),
+                                              columnWidthMobile: option(
+                                                'CUSTOM',
+                                                {
+                                                  value: '12',
+                                                  label:
+                                                    'Column width (mobile)',
+                                                  configuration: {
+                                                    as: 'DROPDOWN',
+                                                    dataType: 'string',
+                                                    allowedInput: [
+                                                      {
+                                                        name: 'Fit content',
+                                                        value: 'fitContent',
+                                                      },
+                                                      {
+                                                        name: 'Flexible',
+                                                        value: 'flexible',
+                                                      },
+                                                      {
+                                                        name: 'Hidden',
+                                                        value: 'hidden',
+                                                      },
+                                                      { name: '1', value: '1' },
+                                                      { name: '2', value: '2' },
+                                                      { name: '3', value: '3' },
+                                                      { name: '4', value: '4' },
+                                                      { name: '5', value: '5' },
+                                                      { name: '6', value: '6' },
+                                                      { name: '7', value: '7' },
+                                                      { name: '8', value: '8' },
+                                                      { name: '9', value: '9' },
+                                                      {
+                                                        name: '10',
+                                                        value: '10',
+                                                      },
+                                                      {
+                                                        name: '11',
+                                                        value: '11',
+                                                      },
+                                                      {
+                                                        name: '12',
+                                                        value: '12',
+                                                      },
+                                                    ],
+                                                  },
+                                                },
+                                              ),
+                                            },
+                                          },
+                                          [],
+                                        ),
+                                        Column(
+                                          {
+                                            options: {
+                                              ...columnOptions,
+                                              columnWidth: option('CUSTOM', {
+                                                label: 'Column width',
+                                                value: '6',
+                                                configuration: {
+                                                  as: 'DROPDOWN',
+                                                  dataType: 'string',
+                                                  allowedInput: [
+                                                    {
+                                                      name: 'Fit content',
+                                                      value: 'fitContent',
+                                                    },
+                                                    {
+                                                      name: 'Flexible',
+                                                      value: 'flexible',
+                                                    },
+                                                    {
+                                                      name: 'Hidden',
+                                                      value: 'hidden',
+                                                    },
+                                                    { name: '1', value: '1' },
+                                                    { name: '2', value: '2' },
+                                                    { name: '3', value: '3' },
+                                                    { name: '4', value: '4' },
+                                                    { name: '5', value: '5' },
+                                                    { name: '6', value: '6' },
+                                                    { name: '7', value: '7' },
+                                                    { name: '8', value: '8' },
+                                                    { name: '9', value: '9' },
+                                                    { name: '10', value: '10' },
+                                                    { name: '11', value: '11' },
+                                                    { name: '12', value: '12' },
+                                                  ],
+                                                },
+                                              }),
+                                              columnWidthTabletLandscape:
+                                                option('CUSTOM', {
+                                                  label:
+                                                    'Column width (tablet landscape)',
+                                                  value: '6',
+                                                  configuration: {
+                                                    as: 'DROPDOWN',
+                                                    dataType: 'string',
+                                                    allowedInput: [
+                                                      {
+                                                        name: 'Fit content',
+                                                        value: 'fitContent',
+                                                      },
+                                                      {
+                                                        name: 'Flexible',
+                                                        value: 'flexible',
+                                                      },
+                                                      {
+                                                        name: 'Hidden',
+                                                        value: 'hidden',
+                                                      },
+                                                      { name: '1', value: '1' },
+                                                      { name: '2', value: '2' },
+                                                      { name: '3', value: '3' },
+                                                      { name: '4', value: '4' },
+                                                      { name: '5', value: '5' },
+                                                      { name: '6', value: '6' },
+                                                      { name: '7', value: '7' },
+                                                      { name: '8', value: '8' },
+                                                      { name: '9', value: '9' },
+                                                      {
+                                                        name: '10',
+                                                        value: '10',
+                                                      },
+                                                      {
+                                                        name: '11',
+                                                        value: '11',
+                                                      },
+                                                      {
+                                                        name: '12',
+                                                        value: '12',
+                                                      },
+                                                    ],
+                                                  },
+                                                }),
+                                              columnWidthTabletPortrait: option(
+                                                'CUSTOM',
+                                                {
+                                                  value: '6',
+                                                  label:
+                                                    'Column width (tablet portrait)',
+                                                  configuration: {
+                                                    as: 'DROPDOWN',
+                                                    dataType: 'string',
+                                                    allowedInput: [
+                                                      {
+                                                        name: 'Fit content',
+                                                        value: 'fitContent',
+                                                      },
+                                                      {
+                                                        name: 'Flexible',
+                                                        value: 'flexible',
+                                                      },
+                                                      {
+                                                        name: 'Hidden',
+                                                        value: 'hidden',
+                                                      },
+                                                      { name: '1', value: '1' },
+                                                      { name: '2', value: '2' },
+                                                      { name: '3', value: '3' },
+                                                      { name: '4', value: '4' },
+                                                      { name: '5', value: '5' },
+                                                      { name: '6', value: '6' },
+                                                      { name: '7', value: '7' },
+                                                      { name: '8', value: '8' },
+                                                      { name: '9', value: '9' },
+                                                      {
+                                                        name: '10',
+                                                        value: '10',
+                                                      },
+                                                      {
+                                                        name: '11',
+                                                        value: '11',
+                                                      },
+                                                      {
+                                                        name: '12',
+                                                        value: '12',
+                                                      },
+                                                    ],
+                                                  },
+                                                },
+                                              ),
+                                              columnWidthMobile: option(
+                                                'CUSTOM',
+                                                {
+                                                  value: '12',
+                                                  label:
+                                                    'Column width (mobile)',
+                                                  configuration: {
+                                                    as: 'DROPDOWN',
+                                                    dataType: 'string',
+                                                    allowedInput: [
+                                                      {
+                                                        name: 'Fit content',
+                                                        value: 'fitContent',
+                                                      },
+                                                      {
+                                                        name: 'Flexible',
+                                                        value: 'flexible',
+                                                      },
+                                                      {
+                                                        name: 'Hidden',
+                                                        value: 'hidden',
+                                                      },
+                                                      { name: '1', value: '1' },
+                                                      { name: '2', value: '2' },
+                                                      { name: '3', value: '3' },
+                                                      { name: '4', value: '4' },
+                                                      { name: '5', value: '5' },
+                                                      { name: '6', value: '6' },
+                                                      { name: '7', value: '7' },
+                                                      { name: '8', value: '8' },
+                                                      { name: '9', value: '9' },
+                                                      {
+                                                        name: '10',
+                                                        value: '10',
+                                                      },
+                                                      {
+                                                        name: '11',
+                                                        value: '11',
+                                                      },
+                                                      {
+                                                        name: '12',
+                                                        value: '12',
+                                                      },
+                                                    ],
+                                                  },
+                                                },
+                                              ),
+                                            },
+                                          },
+                                          [],
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ],
                         ),
                       ]),
@@ -814,7 +1382,7 @@ const beforeCreate = ({
     PartialSelector,
   },
   helpers: { useModelQuery, setOption, cloneStructure },
-}: BeforeCreateArgs) => {
+}: any) => {
   const [modelId, setModelId] = React.useState('');
   const [properties, setProperties] = React.useState([]);
   const [detailProperties, setDetailProperties] = React.useState([]);
@@ -824,10 +1392,16 @@ const beforeCreate = ({
   const [stepNumber, setStepNumber] = React.useState(1);
   const [headerPartialId, setHeaderPartialId] = React.useState('');
   const [footerPartialId, setFooterPartialId] = React.useState('');
+  const [idProperty, setIdProperty] = React.useState<any>();
 
   const { data } = useModelQuery({
     variables: { id: modelId },
     skip: !modelId,
+    onCompleted: (result: any) => {
+      setIdProperty(
+        result.model.properties.find(({ name }: any) => name === 'id'),
+      );
+    },
   });
 
   const getDescendantByRef = (refValue: string, structure: any) =>
@@ -849,18 +1423,18 @@ const beforeCreate = ({
       return getDescendantByRef(refValue, component.descendants);
     }, null);
 
-  // const enrichVarObj = (obj: any) => {
-  //   const returnObject = obj;
-  //   if (data && data.model) {
-  //     const property = data.model.properties.find(
-  //       (prop: any) => prop.id === obj.id[0],
-  //     );
-  //     if (property) {
-  //       returnObject.name = `{{ ${data.model.name}.${property.name} }}`;
-  //     }
-  //   }
-  //   return returnObject;
-  // };
+  const enrichVarObj = (obj: any) => {
+    const returnObject = obj;
+    if (data && data.model) {
+      const property = data.model.properties.find(
+        (prop: any) => prop.id === obj.id[0],
+      );
+      if (property) {
+        returnObject.name = `{{ ${data.model.name}.${property.name} }}`;
+      }
+    }
+    return returnObject;
+  };
 
   const stepper = {
     setStep: (step: number) => {
@@ -1014,6 +1588,17 @@ const beforeCreate = ({
         };
       });
 
+      const dataContainer = getDescendantByRef(
+        '#dataContainer',
+        newPrefab.structure,
+      );
+      setOption(dataContainer, 'model', (originalOption: any) => {
+        return {
+          ...originalOption,
+          value: modelId,
+        };
+      });
+
       properties.forEach(
         (property: {
           defaultValue: null;
@@ -1077,9 +1662,120 @@ const beforeCreate = ({
               };
             },
           );
+          if (property.kind === 'IMAGE') {
+            const media = cloneStructure('Media');
+            if (media.type !== 'COMPONENT') {
+              throw new Error(`expected component prefab, found ${media.type}`);
+            }
+            setOption(media, 'imageSource', (originalOption: any) => {
+              return {
+                ...originalOption,
+                value: [property],
+              };
+            });
+            dataTableColumnStructure.descendants.push(media);
+          }
           dataTable.descendants.push(dataTableColumnStructure);
         },
       );
+
+      const detailRow = getDescendantByRef('#detailRow', newPrefab.structure);
+      const newDetail = (descIndex: any, detail: any) => {
+        const column = cloneStructure('1 Column');
+        if (column.type !== 'COMPONENT') {
+          throw new Error(`expected component prefab, found ${column.type}`);
+        }
+        setOption(column, 'maxRowWidth', (originalOption: any) => {
+          return {
+            ...originalOption,
+            value: 'XL',
+          };
+        });
+
+        const label = cloneStructure('Text');
+        if (label.type !== 'COMPONENT') {
+          throw new Error(`expected component prefab, found ${label.type}`);
+        }
+        setOption(label, 'content', (originalOption: any) => {
+          return {
+            ...originalOption,
+            value: [`${detail.label}`],
+          };
+        });
+        setOption(label, 'type', (originalOption: any) => {
+          return {
+            ...originalOption,
+            value: ['Title6'],
+          };
+        });
+        setOption(label, 'fontWeight', (originalOption: any) => {
+          return {
+            ...originalOption,
+            value: '500',
+          };
+        });
+        if (column.descendants[0].type !== 'COMPONENT') {
+          throw new Error(`expected component prefab, found ${column.type}`);
+        }
+        column.descendants[0].descendants.push(label);
+
+        if (detail.kind === 'IMAGE') {
+          const media = cloneStructure('Media');
+          if (media.type !== 'COMPONENT') {
+            throw new Error(`expected component prefab, found ${media.type}`);
+          }
+          setOption(media, 'imageSource', (originalOption: any) => {
+            return {
+              ...originalOption,
+              value: [enrichVarObj(detail)],
+            };
+          });
+          column.descendants[0].descendants.push(media);
+        } else {
+          const valueText = cloneStructure('Text');
+          if (valueText.type !== 'COMPONENT') {
+            throw new Error(
+              `expected component prefab, found ${valueText.type}`,
+            );
+          }
+          setOption(valueText, 'content', (originalOption: any) => {
+            return {
+              ...originalOption,
+              value: [enrichVarObj(detail)],
+            };
+          });
+          column.descendants[0].descendants.push(valueText);
+        }
+        return detailRow.descendants[descIndex].descendants.push(column);
+      };
+
+      detailProperties.forEach((detail, index) => {
+        const isOdd = (num: number) => num % 2;
+        if (isOdd(index)) {
+          newDetail(2, detail);
+        } else {
+          newDetail(1, detail);
+        }
+      });
+
+      if (idProperty) {
+        newPrefab.interactions.push({
+          name: 'setCurrentRecord',
+          sourceEvent: 'OnRowClick',
+          targetOptionName: 'currentRecord',
+          parameters: [
+            {
+              id: [idProperty.id],
+              parameter: 'argument',
+            },
+          ],
+          ref: {
+            sourceComponentId: '#dataTable',
+            targetComponentId: '#dataContainer',
+          },
+          type: 'Global',
+        });
+      }
 
       const prefabFooter = getDescendantByRef('#Footer', newPrefab.structure);
       const prefabHeader = getDescendantByRef('#Header', newPrefab.structure);
