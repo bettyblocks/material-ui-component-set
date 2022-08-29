@@ -1,3 +1,16 @@
+# [2.32.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.31.1...v2.32.0) (2022-08-29)
+
+
+### Bug Fixes
+
+* add skip param to hidden input ([360a1fb](https://github.com/bettyblocks/material-ui-component-set/commit/360a1fbf943e8f40c36f67a0e7f9994b0dac496a))
+* remove skip option from hidden input ([65647ed](https://github.com/bettyblocks/material-ui-component-set/commit/65647edc1c7688b4830faa64548936b6aa7243d5))
+
+
+### Features
+
+* add variable selector to hidden input ([2160034](https://github.com/bettyblocks/material-ui-component-set/commit/21600343cb2d8175eb90259ce11c46d8caaaa982))
+
 ## [2.31.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.31.0...v2.31.1) (2022-08-29)
 
 
