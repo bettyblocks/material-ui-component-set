@@ -1833,6 +1833,7 @@ const beforeCreate = ({
           <Footer
             onClose={close}
             onSave={stepNumber === stepper.stepAmount && stepper.onSave}
+            canSave={stepNumber === stepper.stepAmount}
           />
         </Box>
       </Box>
