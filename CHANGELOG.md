@@ -1,3 +1,10 @@
+## [2.31.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.31.0...v2.31.1) (2022-08-29)
+
+
+### Bug Fixes
+
+* remove default password validation ([ffccecb](https://github.com/bettyblocks/material-ui-component-set/commit/ffccecb0ee762ecf308f28be87e72585c2399d46))
+
 # [2.31.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.30.0...v2.31.0) (2022-08-29)
 
 
