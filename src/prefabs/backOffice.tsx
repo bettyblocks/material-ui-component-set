@@ -3354,20 +3354,20 @@ const beforeCreate = ({
         ...originalOption,
         value: 'Dark',
       }));
-      titleComponent.options[0].value = [`${data?.model.label}s`];
-
+      setOption(titleComponent, 'content', (opts) => ({
+        ...opts,
+        value: [`${data?.model.label}s`],
+      }));
       // set datatable
       const dataTableComp = getDescendantByRef(
         '#dataTable',
         newPrefab.structure,
       );
 
-      dataTableComp.options[1] = {
+      setOption(dataTableComp, 'model', (opts) => ({
+        ...opts,
         value: modelId,
-        label: 'Model',
-        key: 'model',
-        type: 'MODEL_AND_RELATION',
-      };
+      }));
 
       properties.forEach(
         (property: {
@@ -3428,6 +3428,7 @@ const beforeCreate = ({
 
       const buttonColumn = cloneStructure('Datatable Column');
       const detailButton = cloneStructure('Button');
+      detailButton.ref = { id: '#detailButton' };
       detailButton.style = {
         overwrite: {
           backgroundColor: {
@@ -3448,233 +3449,14 @@ const beforeCreate = ({
           textTransform: 'none',
         },
       };
-
-      detailButton.options = [
-        {
-          label: 'Toggle visibility',
-          key: 'visible',
-          value: true,
-          type: 'TOGGLE',
-          configuration: {
-            as: 'VISIBILITY',
-          },
-        },
-        {
-          type: 'VARIABLE',
-          label: 'Button text',
-          key: 'buttonText',
-          value: [''],
-        },
-        {
-          value: false,
-          label: 'Full width',
-          key: 'fullWidth',
-          type: 'TOGGLE',
-          configuration: {
-            condition: {
-              type: 'HIDE',
-              option: 'variant',
-              comparator: 'EQ',
-              value: 'icon',
-            },
-          },
-        },
-        {
-          label: 'Icon',
-          key: 'icon',
-          value: 'Info',
-          type: 'ICON',
-        },
-        {
-          value: 'small',
-          label: 'Icon size',
-          key: 'size',
-          type: 'CUSTOM',
-          configuration: {
-            as: 'BUTTONGROUP',
-            dataType: 'string',
-            allowedInput: [
-              { name: 'Small', value: 'small' },
-              { name: 'Medium', value: 'medium' },
-              { name: 'Large', value: 'large' },
-            ],
-            condition: {
-              type: 'HIDE',
-              option: 'icon',
-              comparator: 'EQ',
-              value: 'None',
-            },
-          },
-        },
-        {
-          type: 'CUSTOM',
-          label: 'Icon position',
-          key: 'iconPosition',
-          value: 'start',
-          configuration: {
-            as: 'BUTTONGROUP',
-            dataType: 'string',
-            condition: {
-              type: 'HIDE',
-              option: 'icon',
-              comparator: 'EQ',
-              value: 'None',
-            },
-            allowedInput: [
-              { name: 'Start', value: 'start' },
-              { name: 'End', value: 'end' },
-            ],
-          },
-        },
-        {
-          value: ['0rem', '0rem', '0rem', '0rem'],
-          label: 'Outer space',
-          key: 'outerSpacing',
-          type: 'SIZES',
-        },
-        {
-          label: 'Disabled',
-          key: 'disabled',
-          value: false,
-          type: 'TOGGLE',
-        },
-        {
-          label: 'Add Tooltip',
-          key: 'addTooltip',
-          value: false,
-          type: 'TOGGLE',
-        },
-        {
-          label: 'Toggle tooltip visibility',
-          key: 'hasVisibleTooltip',
-          value: true,
-          type: 'TOGGLE',
-          configuration: {
-            as: 'VISIBILITY',
-            condition: {
-              type: 'SHOW',
-              option: 'addTooltip',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
-        },
-        {
-          type: 'VARIABLE',
-          label: 'Tooltip Content',
-          key: 'tooltipContent',
-          value: ['Tips'],
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'addTooltip',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
-        },
-        {
-          label: 'Tooltip Placement',
-          key: 'tooltipPlacement',
-          value: 'bottom',
-          type: 'CUSTOM',
-          configuration: {
-            as: 'DROPDOWN',
-            dataType: 'string',
-            allowedInput: [
-              {
-                name: 'Top Start',
-                value: 'top-start',
-              },
-              {
-                name: 'Top',
-                value: 'top',
-              },
-              {
-                name: 'Top End',
-                value: 'top-end',
-              },
-              {
-                name: 'Right',
-                value: 'right',
-              },
-              {
-                name: 'Left',
-                value: 'left',
-              },
-              {
-                name: 'Botttom Start',
-                value: 'bottom-start',
-              },
-              {
-                name: 'Bottom',
-                value: 'bottom',
-              },
-              {
-                name: 'Bottom End',
-                value: 'bottom-end',
-              },
-            ],
-            condition: {
-              type: 'SHOW',
-              option: 'addTooltip',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
-        },
-        {
-          type: 'COLOR',
-          label: 'Tooltip Background',
-          key: 'tooltipBackground',
-          value: 'Medium',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'addTooltip',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
-        },
-        {
-          type: 'COLOR',
-          label: 'Tooltip Text',
-          key: 'tooltipText',
-          value: 'Black',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'addTooltip',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
-        },
-        {
-          value: false,
-          label: 'Advanced settings',
-          key: 'advancedSettings',
-          type: 'TOGGLE',
-        },
-        {
-          type: 'VARIABLE',
-          label: 'Test attribute',
-          key: 'dataComponentAttribute',
-          value: ['Button'],
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'advancedSettings',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
-        },
-      ];
-
-      detailButton.ref = { id: '#detailButton' };
-
+      setOption(detailButton, 'buttonText', (opts) => ({
+        ...opts,
+        value: [''],
+      }));
+      setOption(detailButton, 'icon', (opts) => ({
+        ...opts,
+        value: 'Info',
+      }));
       const editButton = cloneStructure('Button');
       editButton.style = {
         overwrite: {
@@ -3696,232 +3478,20 @@ const beforeCreate = ({
           textTransform: 'none',
         },
       };
-      editButton.options = [
-        {
-          label: 'Toggle visibility',
-          key: 'visible',
-          value: true,
-          type: 'TOGGLE',
-          configuration: {
-            as: 'VISIBILITY',
-          },
-        },
-        {
-          type: 'VARIABLE',
-          label: 'Button text',
-          key: 'buttonText',
-          value: [''],
-        },
-        {
-          value: false,
-          label: 'Full width',
-          key: 'fullWidth',
-          type: 'TOGGLE',
-          configuration: {
-            condition: {
-              type: 'HIDE',
-              option: 'variant',
-              comparator: 'EQ',
-              value: 'icon',
-            },
-          },
-        },
-        {
-          label: 'Icon',
-          key: 'icon',
-          value: 'Edit',
-          type: 'ICON',
-        },
-        {
-          value: 'small',
-          label: 'Icon size',
-          key: 'size',
-          type: 'CUSTOM',
-          configuration: {
-            as: 'BUTTONGROUP',
-            dataType: 'string',
-            allowedInput: [
-              { name: 'Small', value: 'small' },
-              { name: 'Medium', value: 'medium' },
-              { name: 'Large', value: 'large' },
-            ],
-            condition: {
-              type: 'HIDE',
-              option: 'icon',
-              comparator: 'EQ',
-              value: 'None',
-            },
-          },
-        },
-        {
-          type: 'CUSTOM',
-          label: 'Icon position',
-          key: 'iconPosition',
-          value: 'start',
-          configuration: {
-            as: 'BUTTONGROUP',
-            dataType: 'string',
-            condition: {
-              type: 'HIDE',
-              option: 'icon',
-              comparator: 'EQ',
-              value: 'None',
-            },
-            allowedInput: [
-              { name: 'Start', value: 'start' },
-              { name: 'End', value: 'end' },
-            ],
-          },
-        },
-        {
-          value: ['0rem', '0rem', '0rem', '0rem'],
-          label: 'Outer space',
-          key: 'outerSpacing',
-          type: 'SIZES',
-        },
-        {
-          label: 'Disabled',
-          key: 'disabled',
-          value: false,
-          type: 'TOGGLE',
-        },
-        {
-          label: 'Add Tooltip',
-          key: 'addTooltip',
-          value: false,
-          type: 'TOGGLE',
-        },
-        {
-          label: 'Toggle tooltip visibility',
-          key: 'hasVisibleTooltip',
-          value: true,
-          type: 'TOGGLE',
-          configuration: {
-            as: 'VISIBILITY',
-            condition: {
-              type: 'SHOW',
-              option: 'addTooltip',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
-        },
-        {
-          type: 'VARIABLE',
-          label: 'Tooltip Content',
-          key: 'tooltipContent',
-          value: ['Tips'],
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'addTooltip',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
-        },
-        {
-          label: 'Tooltip Placement',
-          key: 'tooltipPlacement',
-          value: 'bottom',
-          type: 'CUSTOM',
-          configuration: {
-            as: 'DROPDOWN',
-            dataType: 'string',
-            allowedInput: [
-              {
-                name: 'Top Start',
-                value: 'top-start',
-              },
-              {
-                name: 'Top',
-                value: 'top',
-              },
-              {
-                name: 'Top End',
-                value: 'top-end',
-              },
-              {
-                name: 'Right',
-                value: 'right',
-              },
-              {
-                name: 'Left',
-                value: 'left',
-              },
-              {
-                name: 'Botttom Start',
-                value: 'bottom-start',
-              },
-              {
-                name: 'Bottom',
-                value: 'bottom',
-              },
-              {
-                name: 'Bottom End',
-                value: 'bottom-end',
-              },
-            ],
-            condition: {
-              type: 'SHOW',
-              option: 'addTooltip',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
-        },
-        {
-          type: 'COLOR',
-          label: 'Tooltip Background',
-          key: 'tooltipBackground',
-          value: 'Medium',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'addTooltip',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
-        },
-        {
-          type: 'COLOR',
-          label: 'Tooltip Text',
-          key: 'tooltipText',
-          value: 'Black',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'addTooltip',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
-        },
-        {
-          value: false,
-          label: 'Advanced settings',
-          key: 'advancedSettings',
-          type: 'TOGGLE',
-        },
-        {
-          type: 'VARIABLE',
-          label: 'Test attribute',
-          key: 'dataComponentAttribute',
-          value: ['Button'],
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'advancedSettings',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
-        },
-      ];
       editButton.ref = { id: '#editButton' };
+      setOption(editButton, 'buttonText', (opts) => ({
+        ...opts,
+        value: [''],
+      }));
+      setOption(editButton, 'icon', (opts) => ({
+        ...opts,
+        value: 'Edit',
+      }));
 
       const deleteButton = cloneStructure('Button');
+      deleteButton.ref = {
+        id: '#deleteButton',
+      };
       deleteButton.style = {
         overwrite: {
           backgroundColor: {
@@ -3942,232 +3512,16 @@ const beforeCreate = ({
           textTransform: 'none',
         },
       };
-      deleteButton.options = [
-        {
-          label: 'Toggle visibility',
-          key: 'visible',
-          value: true,
-          type: 'TOGGLE',
-          configuration: {
-            as: 'VISIBILITY',
-          },
-        },
-        {
-          type: 'VARIABLE',
-          label: 'Button text',
-          key: 'buttonText',
-          value: [''],
-        },
-        {
-          value: false,
-          label: 'Full width',
-          key: 'fullWidth',
-          type: 'TOGGLE',
-          configuration: {
-            condition: {
-              type: 'HIDE',
-              option: 'variant',
-              comparator: 'EQ',
-              value: 'icon',
-            },
-          },
-        },
-        {
-          label: 'Icon',
-          key: 'icon',
-          value: 'Delete',
-          type: 'ICON',
-        },
-        {
-          value: 'small',
-          label: 'Icon size',
-          key: 'size',
-          type: 'CUSTOM',
-          configuration: {
-            as: 'BUTTONGROUP',
-            dataType: 'string',
-            allowedInput: [
-              { name: 'Small', value: 'small' },
-              { name: 'Medium', value: 'medium' },
-              { name: 'Large', value: 'large' },
-            ],
-            condition: {
-              type: 'HIDE',
-              option: 'icon',
-              comparator: 'EQ',
-              value: 'None',
-            },
-          },
-        },
-        {
-          type: 'CUSTOM',
-          label: 'Icon position',
-          key: 'iconPosition',
-          value: 'start',
-          configuration: {
-            as: 'BUTTONGROUP',
-            dataType: 'string',
-            condition: {
-              type: 'HIDE',
-              option: 'icon',
-              comparator: 'EQ',
-              value: 'None',
-            },
-            allowedInput: [
-              { name: 'Start', value: 'start' },
-              { name: 'End', value: 'end' },
-            ],
-          },
-        },
-        {
-          value: ['0rem', '0rem', '0rem', '0rem'],
-          label: 'Outer space',
-          key: 'outerSpacing',
-          type: 'SIZES',
-        },
-        {
-          label: 'Disabled',
-          key: 'disabled',
-          value: false,
-          type: 'TOGGLE',
-        },
-        {
-          label: 'Add Tooltip',
-          key: 'addTooltip',
-          value: false,
-          type: 'TOGGLE',
-        },
-        {
-          label: 'Toggle tooltip visibility',
-          key: 'hasVisibleTooltip',
-          value: true,
-          type: 'TOGGLE',
-          configuration: {
-            as: 'VISIBILITY',
-            condition: {
-              type: 'SHOW',
-              option: 'addTooltip',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
-        },
-        {
-          type: 'VARIABLE',
-          label: 'Tooltip Content',
-          key: 'tooltipContent',
-          value: ['Tips'],
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'addTooltip',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
-        },
-        {
-          label: 'Tooltip Placement',
-          key: 'tooltipPlacement',
-          value: 'bottom',
-          type: 'CUSTOM',
-          configuration: {
-            as: 'DROPDOWN',
-            dataType: 'string',
-            allowedInput: [
-              {
-                name: 'Top Start',
-                value: 'top-start',
-              },
-              {
-                name: 'Top',
-                value: 'top',
-              },
-              {
-                name: 'Top End',
-                value: 'top-end',
-              },
-              {
-                name: 'Right',
-                value: 'right',
-              },
-              {
-                name: 'Left',
-                value: 'left',
-              },
-              {
-                name: 'Botttom Start',
-                value: 'bottom-start',
-              },
-              {
-                name: 'Bottom',
-                value: 'bottom',
-              },
-              {
-                name: 'Bottom End',
-                value: 'bottom-end',
-              },
-            ],
-            condition: {
-              type: 'SHOW',
-              option: 'addTooltip',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
-        },
-        {
-          type: 'COLOR',
-          label: 'Tooltip Background',
-          key: 'tooltipBackground',
-          value: 'Medium',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'addTooltip',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
-        },
-        {
-          type: 'COLOR',
-          label: 'Tooltip Text',
-          key: 'tooltipText',
-          value: 'Black',
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'addTooltip',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
-        },
-        {
-          value: false,
-          label: 'Advanced settings',
-          key: 'advancedSettings',
-          type: 'TOGGLE',
-        },
-        {
-          type: 'VARIABLE',
-          label: 'Test attribute',
-          key: 'dataComponentAttribute',
-          value: ['Button'],
-          configuration: {
-            condition: {
-              type: 'SHOW',
-              option: 'advancedSettings',
-              comparator: 'EQ',
-              value: true,
-            },
-          },
-        },
-      ];
-      deleteButton.ref = {
-        id: '#deleteButton',
-      };
+
+      setOption(deleteButton, 'buttonText', (opts) => ({
+        ...opts,
+        value: [''],
+      }));
+      setOption(deleteButton, 'icon', (opts) => ({
+        ...opts,
+        value: 'Delete',
+      }));
+
       const boxComp = cloneStructure('Box');
       setOption(boxComp, 'innerSpacing', (opts: any) => ({
         ...opts,
@@ -4652,10 +4006,10 @@ const beforeCreate = ({
         configuration: { disabled: true },
       }));
 
-      // setOption(deleteConfirmButton, 'property', (opts) => ({
-      //   ...opts,
-      //   value: idProperty?.id,
-      // }));
+      setOption(deleteConfirmButton, 'property', (opts) => ({
+        ...opts,
+        value: [idProperty?.id],
+      }));
 
       if (idProperty) {
         const setCurrentDeleteRecord = {
