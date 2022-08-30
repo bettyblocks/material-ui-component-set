@@ -45,6 +45,8 @@ import {
   FormErrorAlert,
   Grid,
   gridOptions,
+  OpenPageButton,
+  openPageButtonOptions,
   Paper,
   Row,
   rowOptions,
@@ -414,7 +416,78 @@ const drawerContainer = DrawerContainer(
                           }),
                         },
                       },
-                      [AppBar({}, [])],
+                      [
+                        AppBar({}, [
+                          OpenPageButton(
+                            {
+                              style: {
+                                overwrite: {
+                                  backgroundColor: {
+                                    type: 'STATIC',
+                                    value: 'transparent',
+                                  },
+                                  boxShadow: 'none',
+                                  color: {
+                                    type: 'THEME_COLOR',
+                                    value: 'white',
+                                  },
+                                  fontFamily: 'Roboto',
+                                  fontSize: '0.875rem',
+                                  fontStyle: 'none',
+                                  fontWeight: '400',
+                                  padding: ['0rem', '0rem'],
+                                  textDecoration: 'none',
+                                  textTransform: 'none',
+                                },
+                              },
+                              options: {
+                                ...openPageButtonOptions,
+                                buttonText: variable('Button text', {
+                                  value: ['Menu 1'],
+                                }),
+                                outerSpacing: sizes('Outer space', {
+                                  value: ['0rem', 'M', '0rem', 'M'],
+                                }),
+                              },
+                            },
+                            [],
+                          ),
+                          OpenPageButton(
+                            {
+                              style: {
+                                overwrite: {
+                                  backgroundColor: {
+                                    type: 'STATIC',
+                                    value: 'transparent',
+                                  },
+                                  boxShadow: 'none',
+                                  color: {
+                                    type: 'THEME_COLOR',
+                                    value: 'white',
+                                  },
+                                  fontFamily: 'Roboto',
+                                  fontSize: '0.875rem',
+                                  fontStyle: 'none',
+                                  fontWeight: '400',
+                                  padding: ['0rem', '0rem'],
+                                  textDecoration: 'none',
+                                  textTransform: 'none',
+                                },
+                              },
+                              options: {
+                                ...openPageButtonOptions,
+                                buttonText: variable('Button text', {
+                                  value: ['Menu 2'],
+                                }),
+                                outerSpacing: sizes('Outer space', {
+                                  value: ['0rem', 'M', '0rem', '0rem'],
+                                }),
+                              },
+                            },
+                            [],
+                          ),
+                        ]),
+                      ],
                     ),
                     Box(
                       {
