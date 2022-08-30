@@ -14,7 +14,6 @@ import {
   size,
   buttongroup,
   font,
-  showIfTrue,
   hideIf,
   text,
   PrefabReference,
@@ -68,6 +67,13 @@ import {
   textOptions,
 } from './structures';
 import { options as defaults } from './structures/ActionJSForm/options';
+
+interface ActionResultsProps {
+  variables: Record<string, any>;
+  action: any;
+  IdProperties: any;
+  recordInputVariable: any;
+}
 
 const interactions = [
   {
@@ -678,17 +684,11 @@ const drawerContainer = DrawerContainer(
                                             value: ['Create'],
                                             configuration: { as: 'MULTILINE' },
                                           }),
-                                          styles: toggle('Styles', {
-                                            value: true,
-                                          }),
                                           type: font('Font', {
                                             value: ['Title5'],
                                           }),
                                           textColor: color('Text color', {
                                             value: ThemeColor.WHITE,
-                                            configuration: {
-                                              condition: showIfTrue('styles'),
-                                            },
                                           }),
                                         },
                                       },
@@ -1012,15 +1012,8 @@ const drawerContainer = DrawerContainer(
                                           type: font('Font', {
                                             value: ['Title5'],
                                           }),
-                                          styles: toggle('Styles', {
-                                            value: true,
-                                          }),
-
                                           textColor: color('Text color', {
                                             value: ThemeColor.WHITE,
-                                            configuration: {
-                                              condition: showIfTrue('styles'),
-                                            },
                                           }),
                                         },
                                       },
@@ -1322,17 +1315,11 @@ const drawerContainer = DrawerContainer(
                                             value: ['Update'],
                                             configuration: { as: 'MULTILINE' },
                                           }),
-                                          styles: toggle('Styles', {
-                                            value: true,
-                                          }),
                                           type: font('Font', {
                                             value: ['Title5'],
                                           }),
                                           textColor: color('Text color', {
                                             value: ThemeColor.WHITE,
-                                            configuration: {
-                                              condition: showIfTrue('styles'),
-                                            },
                                           }),
                                         },
                                       },
@@ -2016,27 +2003,12 @@ const drawerContainer = DrawerContainer(
                                                                         ],
                                                                       },
                                                                     ),
-                                                                  styles:
-                                                                    toggle(
-                                                                      'Styles',
-                                                                      {
-                                                                        value:
-                                                                          true,
-                                                                      },
-                                                                    ),
                                                                   textColor:
                                                                     color(
                                                                       'Text color',
                                                                       {
                                                                         value:
                                                                           ThemeColor.WHITE,
-                                                                        configuration:
-                                                                          {
-                                                                            condition:
-                                                                              showIfTrue(
-                                                                                'styles',
-                                                                              ),
-                                                                          },
                                                                       },
                                                                     ),
                                                                   fontWeight:
@@ -2100,10 +2072,6 @@ const drawerContainer = DrawerContainer(
                                                                                     '900',
                                                                                 },
                                                                               ],
-                                                                            condition:
-                                                                              showIfTrue(
-                                                                                'styles',
-                                                                              ),
                                                                           },
                                                                       },
                                                                     ),
@@ -2148,27 +2116,12 @@ const drawerContainer = DrawerContainer(
                                                                         ],
                                                                       },
                                                                     ),
-                                                                  styles:
-                                                                    toggle(
-                                                                      'Styles',
-                                                                      {
-                                                                        value:
-                                                                          true,
-                                                                      },
-                                                                    ),
                                                                   textColor:
                                                                     color(
                                                                       'Text color',
                                                                       {
                                                                         value:
                                                                           ThemeColor.WHITE,
-                                                                        configuration:
-                                                                          {
-                                                                            condition:
-                                                                              showIfTrue(
-                                                                                'styles',
-                                                                              ),
-                                                                          },
                                                                       },
                                                                     ),
                                                                   fontWeight:
@@ -2232,10 +2185,6 @@ const drawerContainer = DrawerContainer(
                                                                                     '900',
                                                                                 },
                                                                               ],
-                                                                            condition:
-                                                                              showIfTrue(
-                                                                                'styles',
-                                                                              ),
                                                                           },
                                                                       },
                                                                     ),
@@ -3158,10 +3107,6 @@ const beforeCreate = ({
       ...opt,
       value: 'Body1',
     }));
-    setOption(labelText, 'Styles', (opt: any) => ({
-      ...opt,
-      value: true,
-    }));
     setOption(labelText, 'fontWeight', (opt: any) => ({
       ...opt,
       value: '500',
@@ -3198,7 +3143,9 @@ const beforeCreate = ({
     variables: { id: modelId },
     onCompleted: (result: any) => {
       setModel(result.model);
-      setIdProperty(result.model.properties.find(({ name }) => name === 'id'));
+      setIdProperty(
+        result.model.properties.find(({ name }: any) => name === 'id'),
+      );
     },
   });
 
@@ -3313,6 +3260,8 @@ const beforeCreate = ({
                 'TEXT_EXPRESSION',
                 'MINUTES',
                 'ZIPCODE',
+                'IMAGE',
+                'FILE',
               ]}
               onChange={(value: any) => {
                 setProperties(value);
@@ -4246,7 +4195,7 @@ const beforeCreate = ({
         );
         createForm.id = createFormId;
 
-        const result = await prepareAction(
+        const result: ActionResultsProps = await prepareAction(
           createFormId,
           idProperty,
           filteredproperties,
@@ -4458,18 +4407,18 @@ const beforeCreate = ({
       const editForm = getDescendantByRef('#editForm', newPrefab.structure);
       editForm.id = editFormId;
       if (idProperty && model) {
-        const result = await prepareAction(
+        const result: ActionResultsProps = await prepareAction(
           editFormId,
           idProperty,
           filteredproperties,
           'update',
         );
-        setOption(editForm, 'actionId', (opts) => ({
+        setOption(editForm, 'actionId', (opts: any) => ({
           ...opts,
           value: result.action.actionId,
           configuration: { disabled: true },
         }));
-        setOption(editForm, 'model', (opts) => ({
+        setOption(editForm, 'model', (opts: any) => ({
           ...opts,
           value: modelId,
           configuration: {
