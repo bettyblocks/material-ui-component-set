@@ -1,3 +1,10 @@
+# [2.33.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.32.0...v2.33.0) (2022-08-30)
+
+
+### Features
+
+* add new public file selector ([19d8050](https://github.com/bettyblocks/material-ui-component-set/commit/19d805012c636e1aec48dcfad1ef74ac681bccb0))
+
 # [2.32.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.31.1...v2.32.0) (2022-08-29)
 
 
