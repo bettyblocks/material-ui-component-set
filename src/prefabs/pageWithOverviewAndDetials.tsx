@@ -52,7 +52,7 @@ const interactions = [
 ] as PrefabInteraction[];
 
 const attrs = {
-  name: 'Overview and detail view TS',
+  name: 'Overview and detail view',
   icon: Icon.DataList,
   type: 'page',
   description:
