@@ -14,7 +14,6 @@ import {
   size,
   buttongroup,
   font,
-  showIfTrue,
   hideIf,
   text,
   PrefabReference,
@@ -61,6 +60,13 @@ import {
   textOptions,
 } from './structures';
 import { options as defaults } from './structures/ActionJSForm/options';
+
+interface ActionResultsProps {
+  variables: Record<string, any>;
+  action: any;
+  IdProperties: any;
+  recordInputVariable: any;
+}
 
 const interactions = [
   {
@@ -1486,17 +1492,11 @@ const drawerBar = DrawerBar(
                                     value: ['Create'],
                                     configuration: { as: 'MULTILINE' },
                                   }),
-                                  styles: toggle('Styles', {
-                                    value: true,
-                                  }),
                                   type: font('Font', {
                                     value: ['Title5'],
                                   }),
                                   textColor: color('Text color', {
                                     value: ThemeColor.WHITE,
-                                    configuration: {
-                                      condition: showIfTrue('styles'),
-                                    },
                                   }),
                                 },
                               },
@@ -1801,15 +1801,8 @@ const drawerBar = DrawerBar(
                                   type: font('Font', {
                                     value: ['Title5'],
                                   }),
-                                  styles: toggle('Styles', {
-                                    value: true,
-                                  }),
-
                                   textColor: color('Text color', {
                                     value: ThemeColor.WHITE,
-                                    configuration: {
-                                      condition: showIfTrue('styles'),
-                                    },
                                   }),
                                 },
                               },
@@ -2097,17 +2090,11 @@ const drawerBar = DrawerBar(
                                     value: ['Update'],
                                     configuration: { as: 'MULTILINE' },
                                   }),
-                                  styles: toggle('Styles', {
-                                    value: true,
-                                  }),
                                   type: font('Font', {
                                     value: ['Title5'],
                                   }),
                                   textColor: color('Text color', {
                                     value: ThemeColor.WHITE,
-                                    configuration: {
-                                      condition: showIfTrue('styles'),
-                                    },
                                   }),
                                 },
                               },
@@ -2481,10 +2468,6 @@ const beforeCreate = ({
       ...opt,
       value: 'Body1',
     }));
-    setOption(labelText, 'Styles', (opt: any) => ({
-      ...opt,
-      value: true,
-    }));
     setOption(labelText, 'fontWeight', (opt: any) => ({
       ...opt,
       value: '500',
@@ -2521,7 +2504,9 @@ const beforeCreate = ({
     variables: { id: modelId },
     onCompleted: (result: any) => {
       setModel(result.model);
-      setIdProperty(result.model.properties.find(({ name }) => name === 'id'));
+      setIdProperty(
+        result.model.properties.find(({ name }: any) => name === 'id'),
+      );
     },
   });
 
@@ -2636,6 +2621,8 @@ const beforeCreate = ({
                 'TEXT_EXPRESSION',
                 'MINUTES',
                 'ZIPCODE',
+                'IMAGE',
+                'FILE',
               ]}
               onChange={(value: any) => {
                 setProperties(value);
@@ -3549,6 +3536,10 @@ const beforeCreate = ({
         id: '#deleteButton',
       };
       const boxComp = cloneStructure('Box');
+      setOption(boxComp, 'innerSpacing', (opts: any) => ({
+        ...opts,
+        value: ['0rem', '0rem', '0rem', '0rem'],
+      }));
       boxComp.descendants = [detailButton, editButton, deleteButton];
       buttonColumn.descendants = [boxComp];
       dataTableComp.descendants.push(buttonColumn);
@@ -3570,7 +3561,7 @@ const beforeCreate = ({
         );
         createForm.id = createFormId;
 
-        const result = await prepareAction(
+        const result: ActionResultsProps = await prepareAction(
           createFormId,
           idProperty,
           filteredproperties,
@@ -3971,18 +3962,18 @@ const beforeCreate = ({
       const editForm = getDescendantByRef('#editForm', newPrefab.structure);
       editForm.id = editFormId;
       if (idProperty && model) {
-        const result = await prepareAction(
+        const result: ActionResultsProps = await prepareAction(
           editFormId,
           idProperty,
           filteredproperties,
           'update',
         );
-        setOption(editForm, 'actionId', (opts) => ({
+        setOption(editForm, 'actionId', (opts: any) => ({
           ...opts,
           value: result.action.actionId,
           configuration: { disabled: true },
         }));
-        setOption(editForm, 'model', (opts) => ({
+        setOption(editForm, 'model', (opts: any) => ({
           ...opts,
           value: modelId,
           configuration: {
@@ -3990,192 +3981,190 @@ const beforeCreate = ({
           },
         }));
 
-        Object.values(result.variables).forEach(
-          ([prop, inputVariable]): void => {
-            const generateInputPrefabs = () => {
-              switch (prop.kind) {
-                case PropertyKind.INTEGER:
-                  return inputStructure(
-                    prop.label,
-                    makeBettyUpdateInput(
-                      BettyPrefabs.INTEGER,
-                      model,
-                      prop,
-                      inputVariable,
-                      result.IdProperties,
-                    ),
-                  );
-                case PropertyKind.EMAIL_ADDRESS:
-                  return inputStructure(
-                    prop.label,
-                    makeBettyUpdateInput(
-                      BettyPrefabs.EMAIL_ADDRESS,
-                      model,
-                      prop,
-                      inputVariable,
-                      result.IdProperties,
-                    ),
-                  );
-                case PropertyKind.DECIMAL:
-                  return inputStructure(
-                    prop.label,
-                    makeBettyUpdateInput(
-                      BettyPrefabs.DECIMAL,
-                      model,
-                      prop,
-                      inputVariable,
-                      result.IdProperties,
-                    ),
-                  );
-                case PropertyKind.TEXT:
-                  return inputStructure(
-                    prop.label,
-                    makeBettyUpdateInput(
-                      BettyPrefabs.TEXT,
-                      model,
-                      prop,
-                      inputVariable,
-                      result.IdProperties,
-                    ),
-                  );
-                case PropertyKind.PRICE:
-                  return inputStructure(
-                    prop.label,
-                    makeBettyUpdateInput(
-                      BettyPrefabs.PRICE,
-                      model,
-                      prop,
-                      inputVariable,
-                      result.IdProperties,
-                    ),
-                  );
-                case PropertyKind.PASSWORD:
-                  return inputStructure(
-                    prop.label,
-                    makeBettyUpdateInput(
-                      BettyPrefabs.PASSWORD,
-                      model,
-                      prop,
-                      inputVariable,
-                      result.IdProperties,
-                    ),
-                  );
-                case PropertyKind.DATE:
-                  return inputStructure(
-                    prop.label,
-                    makeBettyUpdateInput(
-                      BettyPrefabs.DATE,
-                      model,
-                      prop,
-                      inputVariable,
-                      result.IdProperties,
-                    ),
-                  );
-                case PropertyKind.DATE_TIME:
-                  return inputStructure(
-                    prop.label,
-                    makeBettyUpdateInput(
-                      BettyPrefabs.DATE_TIME,
-                      model,
-                      prop,
-                      inputVariable,
-                      result.IdProperties,
-                    ),
-                  );
-                case PropertyKind.TIME:
-                  return inputStructure(
-                    prop.label,
-                    makeBettyUpdateInput(
-                      BettyPrefabs.TIME,
-                      model,
-                      prop,
-                      inputVariable,
-                      result.IdProperties,
-                    ),
-                  );
-                case PropertyKind.FILE:
-                  return inputStructure(
-                    prop.label,
-                    makeBettyUpdateInput(
-                      BettyPrefabs.FILE,
-                      model,
-                      prop,
-                      inputVariable,
-                      result.IdProperties,
-                    ),
-                  );
-                case PropertyKind.IMAGE:
-                  return inputStructure(
-                    prop.label,
-                    makeBettyUpdateInput(
-                      BettyPrefabs.IMAGE,
-                      model,
-                      prop,
-                      inputVariable,
-                      result.IdProperties,
-                    ),
-                  );
-                case PropertyKind.BOOLEAN:
-                  return inputStructure(
-                    prop.label,
-                    makeBettyUpdateInput(
-                      BettyPrefabs.BOOLEAN,
-                      model,
-                      prop,
-                      inputVariable,
-                      result.IdProperties,
-                    ),
-                  );
-                case PropertyKind.LIST:
-                  return inputStructure(
-                    prop.label,
-                    makeBettyUpdateInput(
-                      BettyPrefabs.LIST,
-                      model,
-                      prop,
-                      inputVariable,
-                      result.IdProperties,
-                    ),
-                  );
-                default:
-                  return inputStructure(
-                    prop.label,
-                    makeBettyUpdateInput(
-                      BettyPrefabs.STRING,
-                      model,
-                      prop,
-                      inputVariable,
-                      result.IdProperties,
-                    ),
-                  );
-              }
-            };
-            const editFormInput = generateInputPrefabs();
-            if (editFormInput.type === 'COMPONENT') {
-              setOption(
-                editFormInput.descendants[1],
-                'margin',
-                (opts: PrefabComponentOption) => ({
-                  ...opts,
-                  value: 'none',
-                }),
-              );
-              setOption(
-                editFormInput.descendants[1],
-                'hideLabel',
-                (opts: PrefabComponentOption) => ({
-                  ...opts,
-                  value: true,
-                }),
-              );
+        Object.values(result.variables).forEach(([prop, inputVariable]) => {
+          const generateInputPrefabs = () => {
+            switch (prop.kind) {
+              case PropertyKind.INTEGER:
+                return inputStructure(
+                  prop.label,
+                  makeBettyUpdateInput(
+                    BettyPrefabs.INTEGER,
+                    model,
+                    prop,
+                    inputVariable,
+                    result.IdProperties,
+                  ),
+                );
+              case PropertyKind.EMAIL_ADDRESS:
+                return inputStructure(
+                  prop.label,
+                  makeBettyUpdateInput(
+                    BettyPrefabs.EMAIL_ADDRESS,
+                    model,
+                    prop,
+                    inputVariable,
+                    result.IdProperties,
+                  ),
+                );
+              case PropertyKind.DECIMAL:
+                return inputStructure(
+                  prop.label,
+                  makeBettyUpdateInput(
+                    BettyPrefabs.DECIMAL,
+                    model,
+                    prop,
+                    inputVariable,
+                    result.IdProperties,
+                  ),
+                );
+              case PropertyKind.TEXT:
+                return inputStructure(
+                  prop.label,
+                  makeBettyUpdateInput(
+                    BettyPrefabs.TEXT,
+                    model,
+                    prop,
+                    inputVariable,
+                    result.IdProperties,
+                  ),
+                );
+              case PropertyKind.PRICE:
+                return inputStructure(
+                  prop.label,
+                  makeBettyUpdateInput(
+                    BettyPrefabs.PRICE,
+                    model,
+                    prop,
+                    inputVariable,
+                    result.IdProperties,
+                  ),
+                );
+              case PropertyKind.PASSWORD:
+                return inputStructure(
+                  prop.label,
+                  makeBettyUpdateInput(
+                    BettyPrefabs.PASSWORD,
+                    model,
+                    prop,
+                    inputVariable,
+                    result.IdProperties,
+                  ),
+                );
+              case PropertyKind.DATE:
+                return inputStructure(
+                  prop.label,
+                  makeBettyUpdateInput(
+                    BettyPrefabs.DATE,
+                    model,
+                    prop,
+                    inputVariable,
+                    result.IdProperties,
+                  ),
+                );
+              case PropertyKind.DATE_TIME:
+                return inputStructure(
+                  prop.label,
+                  makeBettyUpdateInput(
+                    BettyPrefabs.DATE_TIME,
+                    model,
+                    prop,
+                    inputVariable,
+                    result.IdProperties,
+                  ),
+                );
+              case PropertyKind.TIME:
+                return inputStructure(
+                  prop.label,
+                  makeBettyUpdateInput(
+                    BettyPrefabs.TIME,
+                    model,
+                    prop,
+                    inputVariable,
+                    result.IdProperties,
+                  ),
+                );
+              case PropertyKind.FILE:
+                return inputStructure(
+                  prop.label,
+                  makeBettyUpdateInput(
+                    BettyPrefabs.FILE,
+                    model,
+                    prop,
+                    inputVariable,
+                    result.IdProperties,
+                  ),
+                );
+              case PropertyKind.IMAGE:
+                return inputStructure(
+                  prop.label,
+                  makeBettyUpdateInput(
+                    BettyPrefabs.IMAGE,
+                    model,
+                    prop,
+                    inputVariable,
+                    result.IdProperties,
+                  ),
+                );
+              case PropertyKind.BOOLEAN:
+                return inputStructure(
+                  prop.label,
+                  makeBettyUpdateInput(
+                    BettyPrefabs.BOOLEAN,
+                    model,
+                    prop,
+                    inputVariable,
+                    result.IdProperties,
+                  ),
+                );
+              case PropertyKind.LIST:
+                return inputStructure(
+                  prop.label,
+                  makeBettyUpdateInput(
+                    BettyPrefabs.LIST,
+                    model,
+                    prop,
+                    inputVariable,
+                    result.IdProperties,
+                  ),
+                );
+              default:
+                return inputStructure(
+                  prop.label,
+                  makeBettyUpdateInput(
+                    BettyPrefabs.STRING,
+                    model,
+                    prop,
+                    inputVariable,
+                    result.IdProperties,
+                  ),
+                );
             }
-            editForm.descendants.push(editFormInput);
-            if (!prop.kind) {
-              // eslint-disable-next-line no-console
-              console.warn('PropertyKind not found');
-            }
-          },
-        );
+          };
+          const editFormInput = generateInputPrefabs();
+          if (editFormInput.type === 'COMPONENT') {
+            setOption(
+              editFormInput.descendants[1],
+              'margin',
+              (opts: PrefabComponentOption) => ({
+                ...opts,
+                value: 'none',
+              }),
+            );
+            setOption(
+              editFormInput.descendants[1],
+              'hideLabel',
+              (opts: PrefabComponentOption) => ({
+                ...opts,
+                value: true,
+              }),
+            );
+          }
+          editForm.descendants.push(editFormInput);
+          if (!prop.kind) {
+            // eslint-disable-next-line no-console
+            console.warn('PropertyKind not found');
+          }
+        });
 
         editForm.descendants.push(
           makeBettyUpdateInput(
@@ -4214,13 +4203,13 @@ const beforeCreate = ({
         configuration: { disabled: true },
       }));
 
-      setOption(deleteConfirmButton, 'property', (opts) => ({
+      setOption(deleteConfirmButton, 'property', (opts: any) => ({
         ...opts,
-        value: [idProperty.id],
+        value: [idProperty?.id],
         configuration: { disabled: true },
       }));
 
-      setOption(deleteConfirmButton, 'actionVariableId', (opts) => ({
+      setOption(deleteConfirmButton, 'actionVariableId', (opts: any) => ({
         ...opts,
         value: result.recordInputVariable.id,
         configuration: { disabled: true },
