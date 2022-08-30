@@ -138,6 +138,7 @@ const beforeCreate = ({
 
   const saveAnotherPage = () => {
     if (!data) {
+      // eslint-disable-next-line no-console
       console.error('model query did not complete');
       return;
     }
@@ -160,6 +161,7 @@ const beforeCreate = ({
 
       const structure = newPrefab.structure[0];
       if (structure.type !== 'COMPONENT') {
+        // eslint-disable-next-line no-console
         console.error(
           `found "${structure.type}" structure, expected COMPONENT`,
         );
@@ -172,6 +174,7 @@ const beforeCreate = ({
       }));
 
       if (!idProperty) {
+        // eslint-disable-next-line no-console
         console.error('unable to set up filter, no id property found');
         return;
       }
