@@ -3288,7 +3288,7 @@ const beforeCreate = ({
         ...originalOption,
         value: 'Dark',
       }));
-      setOption(titleComponent, 'content', (opts) => ({
+      setOption(titleComponent, 'content', (opts: any) => ({
         ...opts,
         value: [`${data?.model.label}s`],
       }));
@@ -3298,7 +3298,7 @@ const beforeCreate = ({
         newPrefab.structure,
       );
 
-      setOption(dataTableComp, 'model', (opts) => ({
+      setOption(dataTableComp, 'model', (opts: any) => ({
         ...opts,
         value: modelId,
       }));
@@ -3383,11 +3383,11 @@ const beforeCreate = ({
           textTransform: 'none',
         },
       };
-      setOption(detailButton, 'buttonText', (opts) => ({
+      setOption(detailButton, 'buttonText', (opts: any) => ({
         ...opts,
         value: [''],
       }));
-      setOption(detailButton, 'icon', (opts) => ({
+      setOption(detailButton, 'icon', (opts: any) => ({
         ...opts,
         value: 'Info',
       }));
@@ -3413,11 +3413,11 @@ const beforeCreate = ({
         },
       };
       editButton.ref = { id: '#editButton' };
-      setOption(editButton, 'buttonText', (opts) => ({
+      setOption(editButton, 'buttonText', (opts: any) => ({
         ...opts,
         value: [''],
       }));
-      setOption(editButton, 'icon', (opts) => ({
+      setOption(editButton, 'icon', (opts: any) => ({
         ...opts,
         value: 'Edit',
       }));
@@ -3447,11 +3447,11 @@ const beforeCreate = ({
         },
       };
 
-      setOption(deleteButton, 'buttonText', (opts) => ({
+      setOption(deleteButton, 'buttonText', (opts: any) => ({
         ...opts,
         value: [''],
       }));
-      setOption(deleteButton, 'icon', (opts) => ({
+      setOption(deleteButton, 'icon', (opts: any) => ({
         ...opts,
         value: 'Delete',
       }));
@@ -3955,7 +3955,7 @@ const beforeCreate = ({
           textTransform: 'none',
         },
       };
-      setOption(deleteSubmitButton, 'buttonText', (opts) => ({
+      setOption(deleteSubmitButton, 'buttonText', (opts: any) => ({
         ...opts,
         value: ['Delete'],
       }));
