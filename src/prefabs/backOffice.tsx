@@ -3401,7 +3401,11 @@ const beforeCreate = ({
         '#titleText',
         newPrefab.structure,
       );
-      titleComponent.options[0].value = [data?.model.label];
+      setOption(titleComponent, 'textColor', (originalOption: any) => ({
+        ...originalOption,
+        value: 'Dark',
+      }));
+      titleComponent.options[0].value = [`${data?.model.label}s`];
 
       // set datatable
       const dataTableComp = getDescendantByRef(
@@ -4216,6 +4220,10 @@ const beforeCreate = ({
         id: '#deleteButton',
       };
       const boxComp = cloneStructure('Box');
+      setOption(boxComp, 'innerSpacing', (opts: any) => ({
+        ...opts,
+        value: ['0rem', '0rem', '0rem', '0rem'],
+      }));
       boxComp.descendants = [detailButton, editButton, deleteButton];
       buttonColumn.descendants = [boxComp];
       dataTableComp.descendants.push(buttonColumn);
