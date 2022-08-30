@@ -1,3 +1,10 @@
+# [2.34.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.33.0...v2.34.0) (2022-08-30)
+
+
+### Features
+
+* card view to tsx, update config file and edit forms v2 inputs ([5162c7b](https://github.com/bettyblocks/material-ui-component-set/commit/5162c7b3198e19529a20c6a6de0e8602adef673d))
+
 # [2.33.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.32.0...v2.33.0) (2022-08-30)
 
 
