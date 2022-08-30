@@ -11,6 +11,7 @@ import {
   PrefabInteraction,
 } from '@betty-blocks/component-sdk';
 import { FormErrorAlert, FormSuccessAlert } from './structures/Alert';
+import { Form } from './structures/ActionJSForm';
 
 const beforeCreate = ({
   close,
@@ -108,7 +109,6 @@ const beforeCreate = ({
             properties,
             'empty',
           );
-          console.log('result', result);
 
           const structure = originalPrefab.structure[0];
 
@@ -345,15 +345,6 @@ const attributes = {
   interactions,
 };
 
-const options = {
-  actionId: option('ACTION_JS', { label: 'Action', value: '' }),
-  modelId: model('Model'),
-  filter: filter('Filter', { configuration: { dependsOn: 'modelId' } }),
-};
-
 export default prefab('Form Beta', attributes, beforeCreate, [
-  component('Form Beta', { ref: { id: '#formId' }, options }, [
-    FormSuccessAlert({ ref: { id: '#alertSuccessId' } }),
-    FormErrorAlert({ ref: { id: '#alertErrorId' } }),
-  ]),
+  Form('Form Beta', true),
 ]);
