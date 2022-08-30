@@ -305,7 +305,6 @@ const attributes = {
   previewImage:
     'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_Crud_With_Slide_Out_Panel.jpg',
   interactions,
-  //   variables: [],
 };
 
 const drawerContainer = DrawerContainer(
