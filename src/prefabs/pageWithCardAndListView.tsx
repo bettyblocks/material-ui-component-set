@@ -554,6 +554,7 @@ const beforeCreate = ({
               const newPrefab = { ...prefab };
               save(newPrefab);
             }}
+            onSave={stepper.onSave}
             canSave={stepNumber === stepper.stepAmount}
           />
         </Box>
