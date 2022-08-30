@@ -15,7 +15,6 @@
       disabled,
       fullWidth,
       helperText,
-      hideDefaultError,
       hideLabel,
       label,
       margin,
@@ -42,6 +41,7 @@
     const [validationMessage, setValidationMessage] = React.useState('');
     const requiredMessage = useText(requiredMessageRaw);
     const maxFileSizeMessage = useText(maxFileSizeMessageRaw);
+    const acceptedValue = useText(accept) || 'image/*';
     const requiredText = required ? '*' : '';
     const dataComponentAttributeValue = useText(dataComponentAttribute);
     const { modelProperty } = actionProperty;
@@ -62,6 +62,8 @@
 
     const [upload, { error, loading, data: fileReference }] =
       usePresignedUpload({ propertyId });
+
+    const helperValue = (error && error.message) || validationMessage || helper;
 
     const formatBytes = (bytes) => {
       if (bytes === 0) return '0 Bytes';
@@ -86,6 +88,23 @@
       });
       if (isFileSizeExceeded) {
         setValidationMessage(maxFileSizeMessage);
+        return false;
+      }
+
+      const acceptList = acceptedValue
+        .split(',')
+        .map((item) => item.trim().replace('*', ''));
+
+      const isInvalidMimeType = filesArray.some((file) => {
+        return (
+          acceptList.find((prefix) => file.type.startsWith(prefix)) === null
+        );
+      });
+
+      if (isInvalidMimeType) {
+        setValidationMessage(
+          `invalid file type. Only ${acceptedValue} are allowed`,
+        );
         return false;
       }
 
@@ -125,12 +144,7 @@
       setValidationMessage('');
     };
 
-    const { files, failureMessage } = uploads;
-
-    const acceptedValue = useText(accept) || 'image/*';
-    const acceptList = acceptedValue.split(',').map((item) => item.trim());
-    const helperValue =
-      !hideDefaultError && failureMessage.length > 0 ? failureMessage : helper;
+    const { files } = uploads;
 
     const removeFileFromList = () => {
       setUploads({
@@ -347,7 +361,7 @@
             <UploadComponent />
           </Label>
           <FormHelperText classes={{ root: classes.helper }}>
-            {validationMessage}
+            {validationMessage || helperValue}
           </FormHelperText>
           <div className={classes.messageContainer}>
             {filesArray &&

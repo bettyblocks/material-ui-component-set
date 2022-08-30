@@ -35,7 +35,6 @@ const beforeCreate = ({
   );
 };
 
-
 const attr = {
   icon: Icon.FileInputIcon,
   category: 'FORMV2',
