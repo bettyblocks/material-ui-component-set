@@ -44,18 +44,12 @@ import {
 import { options as defaults } from './structures/ActionJSForm/options';
 import { FormSuccessAlert } from './structures/Alert/index';
 
-// interface AuthenticationProfile = 				{
-//   "__typename": string,
-//   "default": boolean,
-//   "id": "f4c1373425dd4ff9aaf2286457513197",
-//   "kind": "usernamePassword",
-//   "loginModel": "f01c3e73b2f949bfbbdc3fad2a26b214",
-//   "name": "Current webuser",
-//   "options": {
-//     "__typename": "AuthenticationProfileOptions",
-//     "loginVariable": "3d33ea66bfa0445396202d2fedf9aa0c"
-//   }
-// }
+interface ActionResultsProps {
+  variables: Record<string, any>;
+  action: any;
+  IdProperties: any;
+  recordInputVariable: any;
+}
 
 const interactions: PrefabInteraction[] = [
   {
@@ -477,7 +471,7 @@ const beforeCreate = ({
             formPrefab.options[0].value = modelId;
             formPrefab.options[1].value = modelId;
             formPrefab.id = componentId;
-            const result = await prepareAction(
+            const result: ActionResultsProps = await prepareAction(
               componentId,
               idProperty,
               properties,
@@ -500,15 +494,6 @@ const beforeCreate = ({
                         ),
                       );
 
-                      return inputStructure(
-                        prop.label,
-                        makeBettyInput(
-                          BettyPrefabs.LIST,
-                          model,
-                          prop,
-                          inputVariable,
-                        ),
-                      );
                     case PropertyKind.PASSWORD:
                       return inputStructure(
                         prop.label,
