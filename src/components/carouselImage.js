@@ -4,10 +4,17 @@
   allowedTypes: [],
   orientation: 'VERTICAL',
   jsx: (() => {
-    const { env, useText } = B;
+    const { env, useText, usePublicFile } = B;
     const isDev = env === 'dev';
     const isEmpty = children.length === 0;
-    const { label, icon, imageSource, dataComponentAttribute } = options || {};
+    const {
+      label,
+      icon,
+      type,
+      imageFileSource,
+      urlFileSource,
+      dataComponentAttribute,
+    } = options || {};
     const {
       stepLabelData,
       setStepLabelData,
@@ -15,7 +22,12 @@
       isFirstRender,
       parentHeight,
     } = parent;
-    const imageSourceText = useText(imageSource);
+    const { url: publicFileUrl = '', name: publicFileName = 'carousel' } =
+      usePublicFile(imageFileSource) || {};
+    const urlFileSourceText = useText(urlFileSource) || '';
+
+    const isUrl = type === 'url';
+    const imgUrl = isUrl ? urlFileSourceText : publicFileUrl;
 
     function ImgPlaceholder() {
       return (
@@ -42,8 +54,8 @@
       ) : (
         <div className={classes.root} style={{ height: parentHeight }}>
           <img
-            src={imageSourceText}
-            alt="carousel"
+            src={imgUrl}
+            alt={publicFileName}
             data-component={useText(dataComponentAttribute) || 'CarouselImage'}
           />
         </div>

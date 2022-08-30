@@ -857,29 +857,30 @@
               name: 'Media',
               options: [
                 {
-                  label: 'Media type',
                   key: 'type',
-                  value: 'img',
+                  label: 'Media type',
+                  value: 'url',
                   type: 'CUSTOM',
                   configuration: {
                     as: 'BUTTONGROUP',
                     dataType: 'string',
                     allowedInput: [
                       { name: 'Image', value: 'img' },
+                      { name: 'Data', value: 'data' },
                       { name: 'Video', value: 'video' },
+                      { name: 'URL', value: 'url' },
                       { name: 'I-frame', value: 'iframe' },
                     ],
                   },
                 },
                 {
-                  value: [
-                    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Your_Logo_-_W.svg',
-                  ],
-                  label: 'Source',
-                  key: 'imageSource',
-                  type: 'VARIABLE',
+                  key: 'imageFileSource',
+                  label: 'Select image',
+                  value: '',
+                  type: 'PUBLIC_FILE',
                   configuration: {
-                    as: 'MULTILINE',
+                    mediaType: 'IMAGE',
+                    allowedExtensions: ['image/*'],
                     condition: {
                       type: 'SHOW',
                       option: 'type',
@@ -889,12 +890,13 @@
                   },
                 },
                 {
-                  value: [],
-                  label: 'Source',
-                  key: 'videoSource',
-                  type: 'VARIABLE',
+                  key: 'videoFileSource',
+                  label: 'Select video',
+                  value: '',
+                  type: 'PUBLIC_FILE',
                   configuration: {
-                    as: 'MULTILINE',
+                    mediaType: 'Video',
+                    allowedExtensions: ['video/*'],
                     condition: {
                       type: 'SHOW',
                       option: 'type',
@@ -903,9 +905,62 @@
                     },
                   },
                 },
+
+                {
+                  value: '',
+                  type: 'PROPERTY',
+                  label: 'Property',
+                  key: 'propertyFileSource',
+                  configuration: {
+                    condition: {
+                      type: 'SHOW',
+                      option: 'type',
+                      comparator: 'EQ',
+                      value: 'data',
+                    },
+                  },
+                },
+                {
+                  value: [
+                    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Your_Logo_-_W.svg',
+                  ],
+                  label: 'URL source',
+                  key: 'urlFileSource',
+                  type: 'VARIABLE',
+                  configuration: {
+                    placeholder: 'Starts with https:// or http://',
+                    as: 'MULTILINE',
+                    condition: {
+                      type: 'SHOW',
+                      option: 'type',
+                      comparator: 'EQ',
+                      value: 'url',
+                    },
+                  },
+                },
+                {
+                  value: 'image',
+                  label: 'Type',
+                  type: 'CUSTOM',
+                  key: 'urlSourceType',
+                  configuration: {
+                    as: 'BUTTONGROUP',
+                    dataType: 'string',
+                    allowedInput: [
+                      { name: 'Image', value: 'image' },
+                      { name: 'Video', value: 'video' },
+                    ],
+                    condition: {
+                      type: 'SHOW',
+                      option: 'type',
+                      comparator: 'EQ',
+                      value: 'url',
+                    },
+                  },
+                },
                 {
                   value: [],
-                  label: 'Source',
+                  label: 'I-frame source',
                   key: 'iframeSource',
                   type: 'VARIABLE',
                   configuration: {
@@ -14065,27 +14120,30 @@
               name: 'Media',
               options: [
                 {
-                  label: 'Media type',
                   key: 'type',
-                  value: 'img',
+                  label: 'Media type',
+                  value: 'data',
                   type: 'CUSTOM',
                   configuration: {
                     as: 'BUTTONGROUP',
                     dataType: 'string',
                     allowedInput: [
                       { name: 'Image', value: 'img' },
+                      { name: 'Data', value: 'data' },
                       { name: 'Video', value: 'video' },
+                      { name: 'URL', value: 'url' },
                       { name: 'I-frame', value: 'iframe' },
                     ],
                   },
                 },
                 {
-                  value: [{ ...property }],
-                  label: 'Source',
-                  key: 'imageSource',
-                  type: 'VARIABLE',
+                  key: 'imageFileSource',
+                  label: 'Select image',
+                  value: '',
+                  type: 'PUBLIC_FILE',
                   configuration: {
-                    as: 'MULTILINE',
+                    mediaType: 'IMAGE',
+                    allowedExtensions: ['image/*'],
                     condition: {
                       type: 'SHOW',
                       option: 'type',
@@ -14095,12 +14153,13 @@
                   },
                 },
                 {
-                  value: [],
-                  label: 'Source',
-                  key: 'videoSource',
-                  type: 'VARIABLE',
+                  key: 'videoFileSource',
+                  label: 'Select video',
+                  value: '',
+                  type: 'PUBLIC_FILE',
                   configuration: {
-                    as: 'MULTILINE',
+                    mediaType: 'Video',
+                    allowedExtensions: ['video/*'],
                     condition: {
                       type: 'SHOW',
                       option: 'type',
@@ -14110,8 +14169,58 @@
                   },
                 },
                 {
+                  value: property,
+                  type: 'PROPERTY',
+                  label: 'Property',
+                  key: 'propertyFileSource',
+                  configuration: {
+                    condition: {
+                      type: 'SHOW',
+                      option: 'type',
+                      comparator: 'EQ',
+                      value: 'data',
+                    },
+                  },
+                },
+                {
+                  value: [''],
+                  label: 'URL source',
+                  key: 'urlFileSource',
+                  type: 'VARIABLE',
+                  configuration: {
+                    placeholder: 'Starts with https:// or http://',
+                    as: 'MULTILINE',
+                    condition: {
+                      type: 'SHOW',
+                      option: 'type',
+                      comparator: 'EQ',
+                      value: 'url',
+                    },
+                  },
+                },
+                {
+                  value: 'image',
+                  label: 'Type',
+                  type: 'CUSTOM',
+                  key: 'urlSourceType',
+                  configuration: {
+                    as: 'BUTTONGROUP',
+                    dataType: 'string',
+                    allowedInput: [
+                      { name: 'Image', value: 'image' },
+                      { name: 'Video', value: 'video' },
+                    ],
+                    condition: {
+                      type: 'SHOW',
+                      option: 'type',
+                      comparator: 'EQ',
+                      value: 'url',
+                    },
+                  },
+                },
+                {
                   value: [],
-                  label: 'Source',
+                  label: 'I-frame source',
                   key: 'iframeSource',
                   type: 'VARIABLE',
                   configuration: {
@@ -14133,8 +14242,14 @@
                     as: 'BUTTONGROUP',
                     dataType: 'string',
                     allowedInput: [
-                      { name: 'Internal page', value: 'internal' },
-                      { name: 'External page', value: 'external' },
+                      {
+                        name: 'Internal page',
+                        value: 'internal',
+                      },
+                      {
+                        name: 'External page',
+                        value: 'external',
+                      },
                     ],
                     condition: {
                       type: 'SHOW',
@@ -15129,7 +15244,6 @@
         const sideMenu = [
           {
             name: 'DrawerSidebar',
-            label: 'Backoffice - Side menu',
             ref: {
               id: '#Menu',
             },
@@ -15181,7 +15295,6 @@
           },
           {
             name: 'DrawerContainer',
-            label: 'Backoffice - Content',
             options: [
               {
                 type: 'COLOR',
@@ -15315,9 +15428,6 @@
                     },
                   },
                   {
-                    ref: {
-                      id: '#contentContainerVisibility',
-                    },
                     label: 'Toggle visibility',
                     key: 'visibility',
                     value: false,
@@ -15774,9 +15884,6 @@
                 descendants: [
                   {
                     name: 'Tabs',
-                    ref: {
-                      id: '#drawerTabs',
-                    },
                     options: [
                       {
                         label: 'Selected tab index',
@@ -15785,11 +15892,8 @@
                         type: 'NUMBER',
                       },
                       {
-                        ref: {
-                          id: '#drawerTabsSelectedDesignTabIndex',
-                        },
                         type: 'CUSTOM',
-                        label: 'Show design tab',
+                        label: 'Selected design tab index',
                         key: 'selectedDesignTabIndex',
                         value: '1',
                         configuration: {
@@ -17478,14 +17582,8 @@
                                     descendants: [
                                       {
                                         name: 'Text',
-                                        ref: {
-                                          id: '#createTabTitle',
-                                        },
                                         options: [
                                           {
-                                            ref: {
-                                              id: '#createTabTitleContent',
-                                            },
                                             type: 'VARIABLE',
                                             label: 'Content',
                                             key: 'content',
@@ -21426,14 +21524,8 @@
                                     descendants: [
                                       {
                                         name: 'Text',
-                                        ref: {
-                                          id: '#detailsTabTitle',
-                                        },
                                         options: [
                                           {
-                                            ref: {
-                                              id: '#detailsTabTitleContent',
-                                            },
                                             type: 'VARIABLE',
                                             label: 'Content',
                                             key: 'content',
@@ -25143,14 +25235,8 @@
                                     descendants: [
                                       {
                                         name: 'Text',
-                                        ref: {
-                                          id: '#updateTabTitle',
-                                        },
                                         options: [
                                           {
-                                            ref: {
-                                              id: '#updateTabTitleContent',
-                                            },
                                             type: 'VARIABLE',
                                             label: 'Content',
                                             key: 'content',
@@ -32911,9 +32997,6 @@
                                                             },
                                                             options: [
                                                               {
-                                                                ref: {
-                                                                  id: '#dataTableTitleContent',
-                                                                },
                                                                 type: 'VARIABLE',
                                                                 label:
                                                                   'Content',
@@ -34799,27 +34882,30 @@
                       name: 'Media',
                       options: [
                         {
-                          label: 'Media type',
                           key: 'type',
-                          value: 'img',
+                          label: 'Media type',
+                          value: 'data',
                           type: 'CUSTOM',
                           configuration: {
                             as: 'BUTTONGROUP',
                             dataType: 'string',
                             allowedInput: [
                               { name: 'Image', value: 'img' },
+                              { name: 'Data', value: 'data' },
                               { name: 'Video', value: 'video' },
+                              { name: 'URL', value: 'url' },
                               { name: 'I-frame', value: 'iframe' },
                             ],
                           },
                         },
                         {
-                          value: [property],
-                          label: 'Source',
-                          key: 'imageSource',
-                          type: 'VARIABLE',
+                          key: 'imageFileSource',
+                          label: 'Select image',
+                          value: '',
+                          type: 'PUBLIC_FILE',
                           configuration: {
-                            as: 'MULTILINE',
+                            mediaType: 'IMAGE',
+                            allowedExtensions: ['image/*'],
                             condition: {
                               type: 'SHOW',
                               option: 'type',
@@ -34829,12 +34915,13 @@
                           },
                         },
                         {
-                          value: [],
-                          label: 'Source',
-                          key: 'videoSource',
-                          type: 'VARIABLE',
+                          key: 'videoFileSource',
+                          label: 'Select video',
+                          value: '',
+                          type: 'PUBLIC_FILE',
                           configuration: {
-                            as: 'MULTILINE',
+                            mediaType: 'Video',
+                            allowedExtensions: ['video/*'],
                             condition: {
                               type: 'SHOW',
                               option: 'type',
@@ -34844,8 +34931,58 @@
                           },
                         },
                         {
+                          value: property,
+                          type: 'PROPERTY',
+                          label: 'Property',
+                          key: 'propertyFileSource',
+                          configuration: {
+                            condition: {
+                              type: 'SHOW',
+                              option: 'type',
+                              comparator: 'EQ',
+                              value: 'data',
+                            },
+                          },
+                        },
+                        {
+                          value: [''],
+                          label: 'URL source',
+                          key: 'urlFileSource',
+                          type: 'VARIABLE',
+                          configuration: {
+                            placeholder: 'Starts with https:// or http://',
+                            as: 'MULTILINE',
+                            condition: {
+                              type: 'SHOW',
+                              option: 'type',
+                              comparator: 'EQ',
+                              value: 'url',
+                            },
+                          },
+                        },
+                        {
+                          value: 'image',
+                          label: 'Type',
+                          type: 'CUSTOM',
+                          key: 'urlSourceType',
+                          configuration: {
+                            as: 'BUTTONGROUP',
+                            dataType: 'string',
+                            allowedInput: [
+                              { name: 'Image', value: 'image' },
+                              { name: 'Video', value: 'video' },
+                            ],
+                            condition: {
+                              type: 'SHOW',
+                              option: 'type',
+                              comparator: 'EQ',
+                              value: 'url',
+                            },
+                          },
+                        },
+                        {
                           value: [],
-                          label: 'Source',
+                          label: 'I-frame source',
                           key: 'iframeSource',
                           type: 'VARIABLE',
                           configuration: {
@@ -34867,8 +35004,14 @@
                             as: 'BUTTONGROUP',
                             dataType: 'string',
                             allowedInput: [
-                              { name: 'Internal page', value: 'internal' },
-                              { name: 'External page', value: 'external' },
+                              {
+                                name: 'Internal page',
+                                value: 'internal',
+                              },
+                              {
+                                name: 'External page',
+                                value: 'external',
+                              },
                             ],
                             condition: {
                               type: 'SHOW',
@@ -36627,15 +36770,11 @@
                     },
                     {
                       name: 'Dialog',
-                      label: 'Delete dialog',
                       ref: {
-                        id: '#deleteDialog',
+                        id: '#dialog',
                       },
                       options: [
                         {
-                          ref: {
-                            id: '#deleteDialogVisibility',
-                          },
                           label: 'Toggle visibility',
                           key: 'isVisible',
                           value: false,
@@ -37660,14 +37799,8 @@
                                           descendants: [
                                             {
                                               name: 'Text',
-                                              ref: {
-                                                id: '#deleteDialogTitle',
-                                              },
                                               options: [
                                                 {
-                                                  ref: {
-                                                    id: '#deleteDialogTitleContent',
-                                                  },
                                                   type: 'VARIABLE',
                                                   label: 'Content',
                                                   key: 'content',
@@ -40134,7 +40267,7 @@
       name: 'Show',
       sourceEvent: 'Click',
       ref: {
-        targetComponentId: '#deleteDialog',
+        targetComponentId: '#dialog',
         sourceComponentId: '#deleteButton',
       },
       type: 'Custom',
@@ -40143,7 +40276,7 @@
       name: 'Hide',
       sourceEvent: 'Click',
       ref: {
-        targetComponentId: '#deleteDialog',
+        targetComponentId: '#dialog',
         sourceComponentId: '#closeBtn',
       },
       type: 'Custom',
@@ -40152,7 +40285,7 @@
       name: 'Hide',
       sourceEvent: 'Click',
       ref: {
-        targetComponentId: '#deleteDialog',
+        targetComponentId: '#dialog',
         sourceComponentId: '#cancelBtn',
       },
       type: 'Custom',
@@ -40161,7 +40294,7 @@
       name: 'Hide',
       sourceEvent: 'onActionSuccess',
       ref: {
-        targetComponentId: '#deleteDialog',
+        targetComponentId: '#dialog',
         sourceComponentId: '#deleteActionButton',
       },
       type: 'Custom',
@@ -40478,7 +40611,6 @@
   structure: [
     {
       name: 'Drawer',
-      label: 'Backoffice',
       options: [
         {
           type: 'SIZE',
