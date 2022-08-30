@@ -4107,4 +4107,4 @@ const beforeCreate = ({
   );
 };
 
-export default prefab('Backoffice', attributes, beforeCreate, prefabStructure);
+export default prefab('Back office', attributes, beforeCreate, prefabStructure);
