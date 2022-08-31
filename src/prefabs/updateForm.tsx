@@ -214,7 +214,7 @@ const beforeCreate = ({
       ref: {
         targetComponentId: '#formId',
       },
-      type: InteractionType.Global,
+      type: 'Global' as InteractionType,
     };
 
     originalPrefab.interactions.push(interaction);
