@@ -1,6 +1,7 @@
 name: Publish component set on production
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - master
