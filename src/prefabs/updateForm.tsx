@@ -52,7 +52,6 @@ const beforeCreate = ({
 
   const {
     BettyPrefabs,
-    PropertyKind,
     cloneStructure,
     createUuid,
     makeBettyUpdateInput,
@@ -62,6 +61,7 @@ const beforeCreate = ({
     setOption,
     camelToSnakeCase,
     useModelQuery,
+    PropertyKind,
   } = helpers;
 
   const [modelId, setModelId] = React.useState(null);
@@ -214,7 +214,7 @@ const beforeCreate = ({
       ref: {
         targetComponentId: '#formId',
       },
-      type: 'Global',
+      type: InteractionType.Global,
     };
 
     originalPrefab.interactions.push(interaction);
@@ -341,14 +341,6 @@ const beforeCreate = ({
         onClose={close}
         canSave={modelId && properties.length !== 0}
         onSave={async (): Promise<void> => {
-          // eslint-disable-next-line no-param-reassign
-          originalPrefab.structure[0].id = componentId;
-          const result = await prepareAction(
-            componentId,
-            idProperty,
-            properties,
-            'update',
-          );
           const structure = originalPrefab.structure[0];
           if (structure.type !== 'COMPONENT') {
             // eslint-disable-next-line no-console
@@ -357,6 +349,14 @@ const beforeCreate = ({
             );
             return;
           }
+
+          structure.id = componentId;
+          const result = await prepareAction(
+            componentId,
+            idProperty,
+            properties,
+            'update',
+          );
 
           setOption(structure, 'actionId', (option) => ({
             ...option,
