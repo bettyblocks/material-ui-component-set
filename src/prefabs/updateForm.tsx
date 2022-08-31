@@ -4,7 +4,6 @@ import {
   Icon,
   InteractionType,
   PrefabInteraction,
-  BeforeCreateArgs,
 } from '@betty-blocks/component-sdk';
 import { Form } from './structures/ActionJSForm';
 
@@ -25,7 +24,7 @@ const beforeCreate = ({
   prefab: originalPrefab,
   save,
   helpers,
-}: BeforeCreateArgs) => {
+}: any) => {
   const disabledKinds = [
     'AUTO_INCREMENT',
     'BOOLEAN_EXPRESSION',
@@ -33,6 +32,7 @@ const beforeCreate = ({
     'DATE_EXPRESSION',
     'DATE_TIME_EXPRESSION',
     'DECIMAL_EXPRESSION',
+    'FILE',
     'IMAGE',
     'INTEGER_EXPRESSION',
     'LOGIN_TOKEN',
@@ -52,6 +52,7 @@ const beforeCreate = ({
 
   const {
     BettyPrefabs,
+    PropertyKind,
     cloneStructure,
     createUuid,
     makeBettyUpdateInput,
@@ -61,7 +62,6 @@ const beforeCreate = ({
     setOption,
     camelToSnakeCase,
     useModelQuery,
-    PropertyKind,
   } = helpers;
 
   const [modelId, setModelId] = React.useState(null);
@@ -137,18 +137,10 @@ const beforeCreate = ({
   };
 
   const saveAnotherPage = () => {
-    if (!data) {
-      // eslint-disable-next-line no-console
-      console.error('model query did not complete');
-      return;
-    }
-
     if (validate()) {
       const newPrefab = { ...originalPrefab };
       const variableName = `${camelToSnakeCase(data.model.label)}_id`;
       const context = pageId ? { pageId } : { partialId };
-
-      newPrefab.variables = newPrefab.variables || [];
 
       newPrefab.variables.push({
         ...context,
@@ -159,30 +151,15 @@ const beforeCreate = ({
         },
       });
 
-      const structure = newPrefab.structure[0];
-      if (structure.type !== 'COMPONENT') {
-        // eslint-disable-next-line no-console
-        console.error(
-          `found "${structure.type}" structure, expected COMPONENT`,
-        );
-        return;
-      }
-
-      setOption(structure, 'model', (option) => ({
+      setOption(newPrefab.structure[0], 'model', (option) => ({
         ...option,
         value: anotherPageState.modelId,
       }));
 
-      if (!idProperty) {
-        // eslint-disable-next-line no-console
-        console.error('unable to set up filter, no id property found');
-        return;
-      }
-
-      setOption(structure, 'filter', (option) => ({
+      setOption(newPrefab.structure[0], 'filter', (option) => ({
         ...option,
         value: {
-          [(idProperty as any).id]: {
+          [idProperty.id]: {
             eq: {
               ref: { id: '#idVariable' },
               name: variableName,
@@ -214,7 +191,7 @@ const beforeCreate = ({
       ref: {
         targetComponentId: '#formId',
       },
-      type: InteractionType.Global,
+      type: 'Global',
     };
 
     originalPrefab.interactions.push(interaction);
@@ -341,22 +318,15 @@ const beforeCreate = ({
         onClose={close}
         canSave={modelId && properties.length !== 0}
         onSave={async (): Promise<void> => {
-          const structure = originalPrefab.structure[0];
-          if (structure.type !== 'COMPONENT') {
-            // eslint-disable-next-line no-console
-            console.error(
-              `prefab type "${structure.type}" structure is not of type COMPONENT`,
-            );
-            return;
-          }
-
-          structure.id = componentId;
+          // eslint-disable-next-line no-param-reassign
+          originalPrefab.structure[0].id = componentId;
           const result = await prepareAction(
             componentId,
             idProperty,
             properties,
             'update',
           );
+          const structure = originalPrefab.structure[0];
 
           setOption(structure, 'actionId', (option) => ({
             ...option,
@@ -364,11 +334,6 @@ const beforeCreate = ({
             configuration: { disabled: true },
           }));
 
-          if (!modelId) {
-            // eslint-disable-next-line no-console
-            console.error('unable to set model option, no model selected');
-            return;
-          }
           setOption(structure, 'model', (option) => ({
             ...option,
             value: modelId,
@@ -378,7 +343,7 @@ const beforeCreate = ({
           }));
 
           // possible helper: given property kind returns prefab name
-          Object.values(result.variables).forEach(([property, variable]) => {
+          Object.values(result.variables).map(([property, variable]) => {
             const { kind } = property;
             switch (kind) {
               case PropertyKind.BELONGS_TO: {
@@ -449,16 +414,6 @@ const beforeCreate = ({
                 structure.descendants.push(
                   makeBettyUpdateInput(
                     BettyPrefabs.EMAIL_ADDRESS,
-                    model,
-                    property,
-                    variable,
-                  ),
-                );
-                break;
-              case PropertyKind.FILE:
-                structure.descendants.push(
-                  makeBettyUpdateInput(
-                    BettyPrefabs.FILE,
                     model,
                     property,
                     variable,
@@ -575,6 +530,8 @@ const beforeCreate = ({
                   ),
                 );
             }
+            // eslint-disable-next-line no-console
+            return console.warn('PropertyKind not found');
           });
 
           structure.descendants.push(
