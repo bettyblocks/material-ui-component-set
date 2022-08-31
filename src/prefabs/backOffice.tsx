@@ -1965,7 +1965,7 @@ const drawerContainer = DrawerContainer(
                                                                   'Background color',
                                                                   {
                                                                     value:
-                                                                      ThemeColor.INFO,
+                                                                      ThemeColor.DANGER,
                                                                   },
                                                                 ),
                                                               borderRadius:
@@ -1988,7 +1988,120 @@ const drawerContainer = DrawerContainer(
                                                                       'Content',
                                                                       {
                                                                         value: [
-                                                                          'To toggle the sidebar you have to navigate to the second drawer component and click on Toggle visibility. In this sidebar you find the "add record", "edit record" forms and details of the selected record.',
+                                                                          'Attention: This template is using next generation actions!',
+                                                                        ],
+                                                                        configuration:
+                                                                          {
+                                                                            as: 'MULTILINE',
+                                                                          },
+                                                                      },
+                                                                    ),
+                                                                  type: font(
+                                                                    'Font',
+                                                                    {
+                                                                      value: [
+                                                                        'Body1',
+                                                                      ],
+                                                                    },
+                                                                  ),
+                                                                  outerSpacing:
+                                                                    sizes(
+                                                                      'Outer space',
+                                                                      {
+                                                                        value: [
+                                                                          '0rem',
+                                                                          '0rem',
+                                                                          '0rem',
+                                                                          'S',
+                                                                        ],
+                                                                      },
+                                                                    ),
+                                                                  textColor:
+                                                                    color(
+                                                                      'Text color',
+                                                                      {
+                                                                        value:
+                                                                          ThemeColor.WHITE,
+                                                                      },
+                                                                    ),
+                                                                  fontWeight:
+                                                                    option(
+                                                                      'CUSTOM',
+                                                                      {
+                                                                        label:
+                                                                          'Font weight',
+                                                                        value:
+                                                                          '500',
+                                                                        configuration:
+                                                                          {
+                                                                            as: 'DROPDOWN',
+                                                                            dataType:
+                                                                              'string',
+                                                                            allowedInput:
+                                                                              [
+                                                                                {
+                                                                                  name: '100',
+                                                                                  value:
+                                                                                    '100',
+                                                                                },
+                                                                                {
+                                                                                  name: '200',
+                                                                                  value:
+                                                                                    '200',
+                                                                                },
+                                                                                {
+                                                                                  name: '300',
+                                                                                  value:
+                                                                                    '300',
+                                                                                },
+                                                                                {
+                                                                                  name: '400',
+                                                                                  value:
+                                                                                    '400',
+                                                                                },
+                                                                                {
+                                                                                  name: '500',
+                                                                                  value:
+                                                                                    '500',
+                                                                                },
+                                                                                {
+                                                                                  name: '600',
+                                                                                  value:
+                                                                                    '600',
+                                                                                },
+                                                                                {
+                                                                                  name: '700',
+                                                                                  value:
+                                                                                    '700',
+                                                                                },
+                                                                                {
+                                                                                  name: '800',
+                                                                                  value:
+                                                                                    '800',
+                                                                                },
+                                                                                {
+                                                                                  name: '900',
+                                                                                  value:
+                                                                                    '900',
+                                                                                },
+                                                                              ],
+                                                                          },
+                                                                      },
+                                                                    ),
+                                                                },
+                                                              },
+                                                              [],
+                                                            ),
+                                                            Text(
+                                                              {
+                                                                options: {
+                                                                  ...textOptions,
+                                                                  content:
+                                                                    variable(
+                                                                      'Content',
+                                                                      {
+                                                                        value: [
+                                                                          'You need to configure the permissions of the "create", "update" and "delete" actions in order to use this template.',
                                                                         ],
                                                                         configuration:
                                                                           {
