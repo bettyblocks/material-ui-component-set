@@ -1,19 +1,13 @@
 import * as React from 'react';
 import {
-  component,
-  option,
   prefab,
-  model,
-  filter,
   BeforeCreateArgs,
   Icon,
   InteractionType,
   PrefabInteraction,
   PrefabComponent,
 } from '@betty-blocks/component-sdk';
-import { FormErrorAlert, FormSuccessAlert } from './structures/Alert';
 import { Form } from './structures/ActionJSForm';
-import updateForm from './updateForm';
 
 const beforeCreate = ({
   close,
@@ -85,14 +79,6 @@ const attributes = {
   isPublicPage: true,
 };
 
-const options = {
-  actionId: option('ACTION_JS', { label: 'Action', value: '' }),
-  modelId: model('Model'),
-  filter: filter('Filter', { configuration: { dependsOn: 'modelId' } }),
-};
-
-const prefabStructure: PrefabComponent[] = [
-    Form('Update Form Beta', true),
-];
+const prefabStructure: PrefabComponent[] = [Form('Update Form Beta', true)];
 
 export default prefab('Checklist', attributes, beforeCreate, prefabStructure);
