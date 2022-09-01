@@ -7,7 +7,6 @@ import {
   ThemeColor,
   size,
   sizes,
-  showIfTrue,
   text,
 } from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
@@ -111,14 +110,10 @@ export const avatarOptions = {
     value: '1.25rem',
     configuration: {
       as: 'UNIT',
-      condition: showIfTrue('styles'),
     },
   }),
   textColor: color('Text color', {
     value: ThemeColor.WHITE,
-    configuration: {
-      condition: showIfTrue('styles'),
-    },
   }),
   fontWeight: option('CUSTOM', {
     label: 'Font weight',
@@ -137,7 +132,6 @@ export const avatarOptions = {
         { name: '800', value: '800' },
         { name: '900', value: '900' },
       ],
-      condition: showIfTrue('styles'),
     },
   }),
 
