@@ -247,6 +247,9 @@ export const boxOptions = {
   ),
   borderRadius: size('Border radius', {
     value: '',
+    configuration: {
+      as: 'UNIT',
+    },
   }),
   ...advanced('Box'),
 };
