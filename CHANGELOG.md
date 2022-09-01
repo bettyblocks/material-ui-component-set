@@ -1,3 +1,22 @@
+# [2.42.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.41.1...v2.42.0) (2022-09-01)
+
+
+### Bug Fixes
+
+* add notifaction to template ([8087b39](https://github.com/bettyblocks/material-ui-component-set/commit/8087b394d37069a4ee9842e89c2c15b2b887fceb))
+
+
+### Features
+
+* refactor login template to tsx ([0ba950e](https://github.com/bettyblocks/material-ui-component-set/commit/0ba950e5fa0827333e91595eb3a9b3b923934215))
+
+## [2.41.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.41.0...v2.41.1) (2022-09-01)
+
+
+### Bug Fixes
+
+* single value ac triggers onload ([abc44e8](https://github.com/bettyblocks/material-ui-component-set/commit/abc44e844dd2296fc3f4c1287f3a4c639568cfab))
+
 # [2.41.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.40.1...v2.41.0) (2022-09-01)
 
 
