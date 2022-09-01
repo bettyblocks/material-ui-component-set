@@ -1,3 +1,43 @@
+# [2.41.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.40.1...v2.41.0) (2022-09-01)
+
+
+### Features
+
+* register page to tsx, update config file and update form V2 inputs ([8b247ca](https://github.com/bettyblocks/material-ui-component-set/commit/8b247ca4cadddc413db3620d5591a82542a59910))
+
+## [2.40.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.40.0...v2.40.1) (2022-09-01)
+
+
+### Bug Fixes
+
+* icon badge color not appearing ([5a92347](https://github.com/bettyblocks/material-ui-component-set/commit/5a92347c666fda1a98a4805fd92a9a2e260f3e4b))
+
+# [2.40.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.39.0...v2.40.0) (2022-09-01)
+
+
+### Bug Fixes
+
+* add notifaction to template ([97a00a4](https://github.com/bettyblocks/material-ui-component-set/commit/97a00a4eb00e9a070c2dc9c328be6bd655480f33))
+
+
+### Features
+
+* crudwithslideout to tsx ([600c9b1](https://github.com/bettyblocks/material-ui-component-set/commit/600c9b1326789a2a5d72949f43976b21430eac83))
+
+# [2.39.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.38.0...v2.39.0) (2022-09-01)
+
+
+### Features
+
+* refactor error page templates to tsx TMPLT-1542 ([1943300](https://github.com/bettyblocks/material-ui-component-set/commit/19433006d5a0296979ae9c0615196078aefe8bd9))
+
+# [2.38.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.37.0...v2.38.0) (2022-09-01)
+
+
+### Features
+
+* convert template to tsx ([2f1865c](https://github.com/bettyblocks/material-ui-component-set/commit/2f1865cf5706d8bbdb33f080f821b75d2b776ac6))
+
 # [2.37.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.36.0...v2.37.0) (2022-09-01)
 
 
