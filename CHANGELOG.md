@@ -1,3 +1,77 @@
+## [2.41.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.41.0...v2.41.1) (2022-09-01)
+
+
+### Bug Fixes
+
+* single value ac triggers onload ([abc44e8](https://github.com/bettyblocks/material-ui-component-set/commit/abc44e844dd2296fc3f4c1287f3a4c639568cfab))
+
+# [2.41.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.40.1...v2.41.0) (2022-09-01)
+
+
+### Features
+
+* register page to tsx, update config file and update form V2 inputs ([8b247ca](https://github.com/bettyblocks/material-ui-component-set/commit/8b247ca4cadddc413db3620d5591a82542a59910))
+
+## [2.40.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.40.0...v2.40.1) (2022-09-01)
+
+
+### Bug Fixes
+
+* icon badge color not appearing ([5a92347](https://github.com/bettyblocks/material-ui-component-set/commit/5a92347c666fda1a98a4805fd92a9a2e260f3e4b))
+
+# [2.40.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.39.0...v2.40.0) (2022-09-01)
+
+
+### Bug Fixes
+
+* add notifaction to template ([97a00a4](https://github.com/bettyblocks/material-ui-component-set/commit/97a00a4eb00e9a070c2dc9c328be6bd655480f33))
+
+
+### Features
+
+* crudwithslideout to tsx ([600c9b1](https://github.com/bettyblocks/material-ui-component-set/commit/600c9b1326789a2a5d72949f43976b21430eac83))
+
+# [2.39.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.38.0...v2.39.0) (2022-09-01)
+
+
+### Features
+
+* refactor error page templates to tsx TMPLT-1542 ([1943300](https://github.com/bettyblocks/material-ui-component-set/commit/19433006d5a0296979ae9c0615196078aefe8bd9))
+
+# [2.38.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.37.0...v2.38.0) (2022-09-01)
+
+
+### Features
+
+* convert template to tsx ([2f1865c](https://github.com/bettyblocks/material-ui-component-set/commit/2f1865cf5706d8bbdb33f080f821b75d2b776ac6))
+
+# [2.37.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.36.0...v2.37.0) (2022-09-01)
+
+
+### Bug Fixes
+
+* remove unused variables ([3c84924](https://github.com/bettyblocks/material-ui-component-set/commit/3c84924a7b5ab096b225682bb0eae3d87cbc1e4c))
+* use actionJSForm ([a2bf592](https://github.com/bettyblocks/material-ui-component-set/commit/a2bf592233196be53b50d39b3f7ee64986877db7))
+* use prepare action for default beta form ([0083757](https://github.com/bettyblocks/material-ui-component-set/commit/00837573a566becf73a2658a9d59f009d99f407a))
+
+
+### Features
+
+* bumped sdk ([8665be7](https://github.com/bettyblocks/material-ui-component-set/commit/8665be7040fceccb973b4b875983acefa95051fc))
+
+# [2.36.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.35.0...v2.36.0) (2022-08-31)
+
+
+### Bug Fixes
+
+* add notifaction to template ([65eddc9](https://github.com/bettyblocks/material-ui-component-set/commit/65eddc90c7008202cf0c9eb49bc9d613f57da138))
+
+
+### Features
+
+* refactor backoffice to tsx ([ff69aa1](https://github.com/bettyblocks/material-ui-component-set/commit/ff69aa1a7c3cd1563c68f140ae32d286fdaec18f))
+* refactor backoffice to tsx ([ec49744](https://github.com/bettyblocks/material-ui-component-set/commit/ec4974421bac0f4d8ef6f966daaa99f6642fdbc6))
+
 # [2.35.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.34.0...v2.35.0) (2022-08-30)
 
 
