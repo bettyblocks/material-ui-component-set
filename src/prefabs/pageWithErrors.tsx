@@ -646,10 +646,6 @@ const beforeCreate = ({
 
           save(newPrefab);
         }}
-        onSkip={() => {
-          const newPrefab = { ...prefab };
-          save(newPrefab);
-        }}
       />
     </>
   );
