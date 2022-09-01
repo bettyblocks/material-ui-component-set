@@ -20,7 +20,6 @@
       margin,
       maxFileSize,
       maxFileSizeMessage: maxFileSizeMessageRaw,
-      multiple,
       required,
       requiredMessage: requiredMessageRaw,
       showImagePreview,
@@ -62,6 +61,31 @@
 
     const [upload, { error, loading, data: fileReference }] =
       usePresignedUpload({ propertyId });
+
+    const firstRender = React.useRef(true);
+
+    React.useEffect(() => {
+      firstRender.current = false;
+    }, []);
+
+    React.useEffect(() => {
+      if (firstRender.current) return;
+      if (error && error.length > 0) B.triggerEvent('onError', error);
+    }, [error]);
+
+    React.useEffect(() => {
+      if (firstRender.current) return;
+      B.triggerEvent('onLoad', loading);
+    }, [loading]);
+
+    React.useEffect(() => {
+      if (firstRender.current) return;
+      if (!loading) {
+        if (fileReference) {
+          B.triggerEvent('onSuccess', fileReference);
+        }
+      }
+    }, [loading, fileReference]);
 
     const helperValue = (error && error.message) || validationMessage || helper;
 
@@ -124,14 +148,6 @@
       if (isValidFile) {
         upload(file.type, file);
       }
-
-      if (!loading && fileReference) {
-        B.triggerEvent('onSuccess', fileReference);
-      }
-
-      if (error) {
-        B.triggerEvent('onError', error);
-      }
     };
 
     const clearFiles = (e) => {
@@ -162,7 +178,6 @@
           <input
             accept={acceptedValue}
             className={classes.input}
-            multiple={multiple}
             type="file"
             onChange={handleChange}
             ref={inputRef}
@@ -188,9 +203,7 @@
             onClick={() => {
               if (file) {
                 removeFileFromList(file.url);
-                if (!multiple) {
-                  B.triggerEvent('onFileRemove');
-                }
+                B.triggerEvent('onFileRemove');
               }
             }}
           >
