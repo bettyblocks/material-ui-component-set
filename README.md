@@ -20,6 +20,18 @@ Now you can get started with the component set in your application. Use the foll
 
 https://github.com/bettyblocks/cli/wiki/Usage#start-the-development-server
 
+### Running with earthly
+
+Alternatively you can run the component set in a reproducible docker container
+
+#### First build the container: 
+
+```earthly +docker```
+
+#### Then start the container:
+
+```docker run -p 5002:5002 -it component-set:latest```
+
 ## Our workflow
 
 1.  Let your us know what you are working on by creating a JIRA ticket via our Techsupport department.
