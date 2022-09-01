@@ -1,3 +1,10 @@
+# [2.39.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.38.0...v2.39.0) (2022-09-01)
+
+
+### Features
+
+* refactor error page templates to tsx TMPLT-1542 ([1943300](https://github.com/bettyblocks/material-ui-component-set/commit/19433006d5a0296979ae9c0615196078aefe8bd9))
+
 # [2.38.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.37.0...v2.38.0) (2022-09-01)
 
 
