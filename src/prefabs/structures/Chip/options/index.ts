@@ -9,9 +9,32 @@ import {
   sizes,
   icon,
 } from '@betty-blocks/component-sdk';
-import { advanced } from './advanced';
+import { advanced } from '../../advanced';
 
-export const options = {
+export const categories = [
+  {
+    label: 'Styling',
+    expanded: false,
+    members: ['color', 'textColor'],
+  },
+  {
+    label: 'Spacing',
+    expanded: false,
+    members: ['margin'],
+  },
+  {
+    label: 'State',
+    expanded: false,
+    members: ['disabled'],
+  },
+  {
+    label: 'Advanced settings',
+    expanded: false,
+    members: ['dataComponentAttribute'],
+  },
+];
+
+export const chipOptions = {
   label: variable('Label', {
     value: ['Label'],
   }),
@@ -83,5 +106,5 @@ export const options = {
     value: ['M', 'M', 'M', 'M'],
   }),
 
-  ...advanced,
+  ...advanced('Chip'),
 };

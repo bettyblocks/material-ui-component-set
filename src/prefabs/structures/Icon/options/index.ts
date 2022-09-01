@@ -7,12 +7,34 @@ import {
   size,
   sizes,
   ThemeColor,
+  toggle,
   variable,
 } from '@betty-blocks/component-sdk';
-import { badge } from './badge';
-import { advanced } from './advanced';
+import { advanced } from '../../advanced';
 
-export const options = {
+export const categories = [
+  {
+    label: 'Badge',
+    expanded: false,
+    members: [
+      'addBadge',
+      'hideBadge',
+      'content',
+      'badgeColor',
+      'badgeTextColor',
+      'anchorOrigin',
+      'variant',
+      'margin',
+    ],
+  },
+  {
+    label: 'Advanced settings',
+    expanded: false,
+    members: ['dataComponentAttribute'],
+  },
+];
+
+export const iconOptions = {
   icon: icon('Icon', { value: 'AcUnit' }),
   size: size('Size', { value: 'S' }),
   color: color('Color', { value: ThemeColor.BLACK }),
@@ -44,8 +66,63 @@ export const options = {
   outerSpacing: sizes('Outer space', {
     value: ['0rem', '0rem', '0rem', '0rem'],
   }),
+  addBadge: toggle('Add Badge', { value: false }),
+  hideBadge: toggle('Hide badge if value is 0', {
+    value: false,
+  }),
+  content: variable('Content', {
+    value: ['1'],
+    configuration: {
+      as: 'MULTILINE',
+    },
+  }),
+  badgeColor: color('Badge Color', {
+    value: ThemeColor.DANGER,
+  }),
+  badgeTextColor: color('Badge Text Color', {
+    value: ThemeColor.WHITE,
+  }),
+  anchorOrigin: option('CUSTOM', {
+    label: 'Anchor Origin',
+    value: 'right,top',
+    configuration: {
+      as: 'BUTTONGROUP',
+      dataType: 'string',
+      allowedInput: [
+        {
+          name: 'Top Right',
+          value: 'right,top',
+        },
+        {
+          name: 'Top Left',
+          value: 'left,top',
+        },
+        {
+          name: 'Bottom Right',
+          value: 'right,bottom',
+        },
+        {
+          name: 'Bottom Left',
+          value: 'left,bottom',
+        },
+      ],
+    },
+  }),
+  variant: option('CUSTOM', {
+    label: 'Variant',
+    value: 'standard',
+    configuration: {
+      as: 'BUTTONGROUP',
+      dataType: 'string',
+      allowedInput: [
+        { name: 'Standard', value: 'standard' },
+        { name: 'Dot', value: 'dot' },
+      ],
+    },
+  }),
+  margin: sizes('Outer Space', {
+    value: ['S', 'S', 'S', 'S'],
+  }),
 
-  ...badge,
-
-  ...advanced,
+  ...advanced('Icon'),
 };
