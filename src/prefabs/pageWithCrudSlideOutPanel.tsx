@@ -2948,7 +2948,7 @@ const beforeCreate = ({
             />
           </Field>
           <Field
-            label="Properties used in Backoffice"
+            label="Properties used in CRUD with slide out"
             error={
               propertiesValidation && (
                 <TextComp color="#e82600">
@@ -3892,7 +3892,7 @@ const beforeCreate = ({
   };
   return (
     <>
-      <Header onClose={close} title="Configure back office" />
+      <Header onClose={close} title="Configure CRUD with slide out" />
       {stepper.progressBar()}
       <Content>{stepper.setStep(stepNumber)}</Content>
       {stepper.buttons()}
