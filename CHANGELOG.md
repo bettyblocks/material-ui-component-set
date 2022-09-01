@@ -1,3 +1,10 @@
+# [2.38.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.37.0...v2.38.0) (2022-09-01)
+
+
+### Features
+
+* convert template to tsx ([2f1865c](https://github.com/bettyblocks/material-ui-component-set/commit/2f1865cf5706d8bbdb33f080f821b75d2b776ac6))
+
 # [2.37.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.36.0...v2.37.0) (2022-09-01)
 
 
