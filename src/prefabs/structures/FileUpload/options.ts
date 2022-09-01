@@ -31,7 +31,6 @@ export const options = {
   helperText: variable('Helper text', { value: [] }),
   fullWidth: toggle('Full width', { value: true }),
   accept: variable('Accept files', { value: ['image/*'] }),
-  multiple: toggle('Allow multiple', { value: false }),
   margin: buttongroup(
     'Margin',
     [
