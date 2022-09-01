@@ -966,7 +966,7 @@ const beforeCreate = ({
         },
         {
           name: 'Toggle loading state',
-          sourceEvent: 'onSubmit',
+          sourceEvent: 'onActionLoad',
           ref: {
             sourceComponentId: '#updateTabFormId',
             targetComponentId: '#submitUpdateDialogButton',
@@ -1458,6 +1458,20 @@ const beforeCreate = ({
         },
       }));
 
+      // #region Partial selector
+      const prefabFooter = getDescendantByRef('#Footer', newPrefab.structure);
+      const prefabHeader = getDescendantByRef('#Header', newPrefab.structure);
+      if (headerPartialId) {
+        prefabHeader.descendants = [{ type: 'PARTIAL', partialId: '' }];
+        prefabHeader.descendants[0].partialId = headerPartialId;
+      }
+
+      if (footerPartialId) {
+        prefabFooter.descendants = [{ type: 'PARTIAL', partialId: '' }];
+        prefabFooter.descendants[0].partialId = footerPartialId;
+      }
+
+      // #endregion
       save(newPrefab);
     },
     buttons: () => (
