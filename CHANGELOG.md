@@ -1,3 +1,10 @@
+## [2.41.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.41.0...v2.41.1) (2022-09-01)
+
+
+### Bug Fixes
+
+* single value ac triggers onload ([abc44e8](https://github.com/bettyblocks/material-ui-component-set/commit/abc44e844dd2296fc3f4c1287f3a4c639568cfab))
+
 # [2.41.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.40.1...v2.41.0) (2022-09-01)
 
 
