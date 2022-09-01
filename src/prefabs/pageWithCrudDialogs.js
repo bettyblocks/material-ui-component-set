@@ -1,5 +1,5 @@
 (() => ({
-  name: 'CRUD with dialogs',
+  name: 'CRUD with dialogs (old)',
   icon: 'DataTable',
   type: 'page',
   description: 'This page contains a datatable with CRUD dialogs.',
