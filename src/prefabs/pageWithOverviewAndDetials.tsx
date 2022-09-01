@@ -16,6 +16,7 @@ import {
   showIfTrue,
   PrefabComponent,
   PrefabInteraction,
+  PrefabComponentOption,
 } from '@betty-blocks/component-sdk';
 import {
   Box as prefabBox,
@@ -61,7 +62,7 @@ const attrs = {
     'Display your data in a Data Table by connecting a model. The details of this data is shown on the same page via a detail view (vertically oriented). This page template also contains an App Bar on top of the page.',
   previewUrl: 'https://preview.betty.app/overview-and-detail-view',
   previewImage:
-    'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_Overview_And_Detail_View.jpg',
+    'https://assets.bettyblocks.com/63b1c6ccc6874e0796e5cc5b7e41b3da_assets/files/Page_Template_Overview_And_Detail_View.jpg',
   category: 'LAYOUT',
   interactions,
 };
@@ -1667,12 +1668,18 @@ const beforeCreate = ({
             if (media.type !== 'COMPONENT') {
               throw new Error(`expected component prefab, found ${media.type}`);
             }
-            setOption(media, 'imageSource', (originalOption: any) => {
-              return {
-                ...originalOption,
-                value: [property],
-              };
-            });
+            setOption(media, 'type', (opt: PrefabComponentOption) => ({
+              ...opt,
+              value: 'data',
+            }));
+            setOption(
+              media,
+              'propertyFileSource',
+              (opt: PrefabComponentOption) => ({
+                ...opt,
+                value: property,
+              }),
+            );
             dataTableColumnStructure.descendants.push(media);
           }
           dataTable.descendants.push(dataTableColumnStructure);
@@ -1724,12 +1731,18 @@ const beforeCreate = ({
           if (media.type !== 'COMPONENT') {
             throw new Error(`expected component prefab, found ${media.type}`);
           }
-          setOption(media, 'imageSource', (originalOption: any) => {
-            return {
-              ...originalOption,
-              value: [enrichVarObj(detail)],
-            };
-          });
+          setOption(media, 'type', (opt: PrefabComponentOption) => ({
+            ...opt,
+            value: 'data',
+          }));
+          setOption(
+            media,
+            'propertyFileSource',
+            (opt: PrefabComponentOption) => ({
+              ...opt,
+              value: detail,
+            }),
+          );
           column.descendants[0].descendants.push(media);
         } else {
           const valueText = cloneStructure('Text');
