@@ -1,3 +1,10 @@
+# [2.41.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.40.1...v2.41.0) (2022-09-01)
+
+
+### Features
+
+* register page to tsx, update config file and update form V2 inputs ([8b247ca](https://github.com/bettyblocks/material-ui-component-set/commit/8b247ca4cadddc413db3620d5591a82542a59910))
+
 ## [2.40.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.40.0...v2.40.1) (2022-09-01)
 
 
