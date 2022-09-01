@@ -1,3 +1,10 @@
+## [2.40.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.40.0...v2.40.1) (2022-09-01)
+
+
+### Bug Fixes
+
+* icon badge color not appearing ([5a92347](https://github.com/bettyblocks/material-ui-component-set/commit/5a92347c666fda1a98a4805fd92a9a2e260f3e4b))
+
 # [2.40.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.39.0...v2.40.0) (2022-09-01)
 
 
