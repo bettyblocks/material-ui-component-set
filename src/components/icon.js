@@ -12,7 +12,6 @@
       addBadge,
       hideBadge,
       content,
-      badgeColor,
       anchorOrigin,
       variant,
       linkTo,
@@ -68,7 +67,6 @@
       <Badge
         classes={{ root: classes.badge }}
         badgeContent={contentText}
-        color={badgeColor}
         anchorOrigin={anchorOriginObj}
         variant={variant}
         overlap={variant === 'dot' ? 'circle' : 'rectangle'}
@@ -149,6 +147,12 @@
         display: 'inline-flex',
         justifyContent: 'center',
         verticalAlign: 'middle',
+        '& .MuiBadge-badge': {
+          backgroundColor: ({ options: { badgeColor } }) =>
+            style.getColor(badgeColor),
+          color: ({ options: { badgeTextColor } }) =>
+            style.getColor(badgeTextColor),
+        },
       },
     };
   },
