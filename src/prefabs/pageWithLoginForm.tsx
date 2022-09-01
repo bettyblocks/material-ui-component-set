@@ -544,16 +544,39 @@ const prefabStructure: PrefabComponent[] = [
                                       {
                                         options: {
                                           ...mediaOptions,
-                                          imageSource: variable('Source', {
+                                          type: option('CUSTOM', {
+                                            label: 'Media type',
+                                            value: 'url',
+                                            configuration: {
+                                              as: 'BUTTONGROUP',
+                                              dataType: 'string',
+                                              allowedInput: [
+                                                { name: 'Image', value: 'img' },
+                                                { name: 'Data', value: 'data' },
+                                                {
+                                                  name: 'Video',
+                                                  value: 'video',
+                                                },
+                                                { name: 'URL', value: 'url' },
+                                                {
+                                                  name: 'I-frame',
+                                                  value: 'iframe',
+                                                },
+                                              ],
+                                            },
+                                          }),
+                                          urlFileSource: variable('Source', {
                                             value: [
                                               'https://assets.bettyblocks.com/373317d12bf04d5496079adc02aab34a_assets/files/Your_Logo_-_B.svg',
                                             ],
                                             configuration: {
+                                              placeholder:
+                                                'Starts with https:// or http://',
                                               as: 'MULTILINE',
                                               condition: showIf(
                                                 'type',
                                                 'EQ',
-                                                'img',
+                                                'url',
                                               ),
                                             },
                                           }),
