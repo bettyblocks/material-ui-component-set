@@ -613,8 +613,6 @@
       } else if (optionType === 'property') {
         triggerEventValue = currentValue || '';
       }
-      console.log(triggerEventValue);
-      console.log(changeContext.current);
       B.triggerEvent('onChange', triggerEventValue, changeContext.current);
     };
 
