@@ -42,7 +42,7 @@ import {
   alertOptions,
 } from './structures';
 import { options as defaults } from './structures/ActionJSForm/options';
-import { FormSuccessAlert } from './structures/Alert/index';
+import { Alert } from './structures/Alert/index';
 
 interface ActionResultsProps {
   variables: Record<string, any>;
@@ -72,7 +72,7 @@ const interactions: PrefabInteraction[] = [
   },
   {
     name: 'Toggle loading state',
-    sourceEvent: 'onSubmit',
+    sourceEvent: 'onActionLoad',
     ref: {
       targetComponentId: '#registerBtn',
       sourceComponentId: '#formId',
@@ -482,37 +482,35 @@ const beforeCreate = ({
                 const { kind } = prop;
 
                 const newInput = () => {
+                  const bettyInput = (prefabName: String): PrefabReference => {
+                    const inputPrefab = makeBettyInput(
+                      prefabName,
+                      model,
+                      prop,
+                      inputVariable,
+                    );
+                    setOption(inputPrefab, 'hideLabel', (options: any) => ({
+                      ...options,
+                      value: true,
+                    }));
+                    return inputPrefab;
+                  };
                   switch (kind) {
                     case PropertyKind.EMAIL_ADDRESS:
                       return inputStructure(
                         prop.label,
-                        makeBettyInput(
-                          BettyPrefabs.EMAIL_ADDRESS,
-                          model,
-                          prop,
-                          inputVariable,
-                        ),
+                        bettyInput(BettyPrefabs.EMAIL_ADDRESS),
                       );
 
                     case PropertyKind.PASSWORD:
                       return inputStructure(
                         prop.label,
-                        makeBettyInput(
-                          BettyPrefabs.PASSWORD,
-                          model,
-                          prop,
-                          inputVariable,
-                        ),
+                        bettyInput(BettyPrefabs.PASSWORD),
                       );
                     default:
                       return inputStructure(
                         prop.label,
-                        makeBettyInput(
-                          BettyPrefabs.STRING,
-                          model,
-                          prop,
-                          inputVariable,
-                        ),
+                        bettyInput(BettyPrefabs.STRING),
                       );
                   }
                 };
@@ -1047,10 +1045,39 @@ export default makePrefab('Register form', attrs, beforeCreate, [
                                         ref: { id: '#formId' },
                                       },
                                       [
-                                        FormSuccessAlert({
+                                        Alert({
                                           ref: { id: '#alertSuccessId' },
                                           options: {
                                             ...alertOptions,
+                                            icon: icon('Icon', {
+                                              value: 'CheckCircle',
+                                            }),
+                                            titleText: variable('Title text', {
+                                              value: ['Success'],
+                                            }),
+                                            bodyText: variable('Body text', {
+                                              value: [
+                                                'Your account has been created, you can now login',
+                                              ],
+                                            }),
+                                            textColor: color('Text color', {
+                                              value: ThemeColor.WHITE,
+                                            }),
+                                            iconColor: color('Icon color', {
+                                              value: ThemeColor.WHITE,
+                                            }),
+                                            collapsable: toggle('Collapsable', {
+                                              value: true,
+                                            }),
+                                            visible: toggle(
+                                              'Toggle visibility',
+                                              {
+                                                value: false,
+                                                configuration: {
+                                                  as: 'VISIBILITY',
+                                                },
+                                              },
+                                            ),
                                           },
                                         }),
                                         FormErrorAlert({
