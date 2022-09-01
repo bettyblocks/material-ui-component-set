@@ -605,8 +605,7 @@
      */
 
     const currentValue = getValue();
-
-    useEffect(() => {
+    const onChangeHandler = () => {
       let triggerEventValue;
 
       if (optionType === 'model') {
@@ -614,8 +613,10 @@
       } else if (optionType === 'property') {
         triggerEventValue = currentValue || '';
       }
+      console.log(triggerEventValue);
+      console.log(changeContext.current);
       B.triggerEvent('onChange', triggerEventValue, changeContext.current);
-    }, [currentValue]);
+    };
 
     useEffect(() => {
       if (results && results.length !== 0) {
@@ -668,6 +669,7 @@
           loading={loading}
           onChange={(_, newValue) => {
             setValue(newValue || '');
+            onChangeHandler();
           }}
           onInputChange={(event, newValue) => {
             let validation = event ? event.target.validity : null;
