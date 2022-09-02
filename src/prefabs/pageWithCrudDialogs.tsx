@@ -1275,7 +1275,7 @@ const beforeCreate = ({
         (options: PrefabComponentOption) => ({
           ...options,
           value: [
-            `Are you sure you want to delete this Betty models? You can't undo this action.`,
+            `Are you sure you want to delete this record? You can't undo this action.`,
           ],
         }),
       );
