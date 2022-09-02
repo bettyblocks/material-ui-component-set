@@ -1,3 +1,10 @@
+# [2.43.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.42.1...v2.43.0) (2022-09-02)
+
+
+### Features
+
+* crud with dialogs to tsx ([965b1e3](https://github.com/bettyblocks/material-ui-component-set/commit/965b1e327d9a6d74cdd9bf185c93e7c32a7cfa6c))
+
 ## [2.42.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.42.0...v2.42.1) (2022-09-02)
 
 
