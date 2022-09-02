@@ -1580,6 +1580,14 @@ const beforeCreate = ({
                       value: 'none',
                     }),
                   );
+                  setOption(
+                    formInputPrefabs.descendants[1],
+                    'required',
+                    (options: PrefabComponentOption) => ({
+                      ...options,
+                      value: true,
+                    }),
+                  );
                 }
                 formBox.descendants.push(formInputPrefabs);
                 if (!kind) {
