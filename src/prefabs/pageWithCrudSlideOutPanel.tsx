@@ -20,6 +20,9 @@ import {
   component,
   PrefabInteraction,
   PrefabComponentOption,
+  wrapper,
+  linked,
+  childSelector,
 } from '@betty-blocks/component-sdk';
 
 import { Property } from '@betty-blocks/component-sdk/build/prefabs/types/property';
@@ -800,6 +803,18 @@ const drawerContainer = DrawerContainer(
                                                   {
                                                     options: {
                                                       ...textOptions,
+                                                      content: variable(
+                                                        'Content',
+                                                        {
+                                                          ref: {
+                                                            id: '#titleOption',
+                                                          },
+                                                          value: [],
+                                                          configuration: {
+                                                            as: 'MULTILINE',
+                                                          },
+                                                        },
+                                                      ),
                                                       type: font('Font', {
                                                         value: ['Title4'],
                                                       }),
@@ -1742,8 +1757,14 @@ const drawerBar = DrawerBar(
       [
         Tabs(
           {
+            ref: { id: '#tabsOverview' },
             options: {
               ...tabsOptions,
+              selectedDesignTabIndex: childSelector('Selected tab (runtime)', {
+                ref: { id: '#switchTabOption' },
+                value: 1,
+              }),
+
               height: size('Height', {
                 value: '100%',
                 configuration: {
@@ -1848,9 +1869,11 @@ const drawerBar = DrawerBar(
                           [
                             Text(
                               {
+                                ref: { id: '#createTabText' },
                                 options: {
                                   ...textOptions,
                                   content: variable('Content', {
+                                    ref: { id: '#createTabTextOption' },
                                     value: ['Create'],
                                     configuration: { as: 'MULTILINE' },
                                   }),
@@ -2154,9 +2177,11 @@ const drawerBar = DrawerBar(
                           [
                             Text(
                               {
+                                ref: { id: '#detailsTabText' },
                                 options: {
                                   ...textOptions,
                                   content: variable('Content', {
+                                    ref: { id: '#detailsTabTextOption' },
                                     value: ['Details'],
                                     configuration: { as: 'MULTILINE' },
                                   }),
@@ -2446,9 +2471,11 @@ const drawerBar = DrawerBar(
                           [
                             Text(
                               {
+                                ref: { id: '#updateTabText' },
                                 options: {
                                   ...textOptions,
                                   content: variable('Content', {
+                                    ref: { id: '#updateTabTextOption' },
                                     value: ['Update'],
                                     configuration: { as: 'MULTILINE' },
                                   }),
@@ -2665,52 +2692,125 @@ const drawerBar = DrawerBar(
 );
 
 const prefabStructure = [
-  Drawer(
+  wrapper(
     {
+      label: 'CRUD with slide-out-panel wrapper',
       options: {
-        ...drawerOptions,
-        drawerWidth: size('Drawer Width', {
-          value: '480px',
-          configuration: {
-            as: 'UNIT',
+        toggleOverview: linked({
+          label: 'Toggle overview/record view',
+          value: {
+            ref: {
+              componentId: '#Drawer',
+              optionId: '#toggleSlideoutPanel',
+            },
           },
         }),
-        temporaryAnchor: option('CUSTOM', {
-          value: 'right',
-          label: 'Alignment',
-          configuration: {
-            as: 'BUTTONGROUP',
-            dataType: 'string',
-            allowedInput: [
-              { name: 'Left', value: 'left' },
-              { name: 'Top', value: 'top' },
-              { name: 'Right', value: 'right' },
-              { name: 'Bottom', value: 'bottom' },
-            ],
-            condition: showIf('drawerType', 'EQ', 'temporary'),
+        pageTitle: linked({
+          label: 'Page title',
+          value: {
+            ref: {
+              componentId: '#titleText',
+              optionId: '#titleOption',
+            },
           },
         }),
-        visibility: toggle('Toggle visibility', {
-          value: false,
-          configuration: {
-            as: 'VISIBILITY',
+        drawerOverview: linked({
+          label: 'Page title',
+          value: {
+            ref: {
+              componentId: '#tabsOverview',
+              optionId: '#switchTabOption',
+            },
           },
         }),
-        drawerType: option('CUSTOM', {
-          value: 'temporary',
-          label: 'Drawer type',
-          configuration: {
-            as: 'BUTTONGROUP',
-            dataType: 'string',
-            allowedInput: [
-              { name: 'Persistent', value: 'persistent' },
-              { name: 'Temporary', value: 'temporary' },
-            ],
+        createTabText: linked({
+          label: 'Create tab title',
+          value: {
+            ref: {
+              componentId: '#createTabText',
+              optionId: '#createTabTextOption',
+            },
+          },
+          // configuration: {
+          //   condition: {
+          //     type: 'SHOW',
+          //     option: 'drawerOverview',
+          //     comparator: 'EQ',
+          //     value: '1',
+          //   },
+          // },
+        }),
+        detailsTabText: linked({
+          label: 'Details tab title',
+          value: {
+            ref: {
+              componentId: '#detailsTabText',
+              optionId: '#detailsTabTextOption',
+            },
+          },
+        }),
+        updateTabText: linked({
+          label: 'Edit tab title',
+          value: {
+            ref: {
+              componentId: '#updateTabText',
+              optionId: '#updateTabTextOption',
+            },
           },
         }),
       },
     },
-    [drawerBar, drawerContainer],
+    [
+      Drawer(
+        {
+          ref: { id: '#Drawer' },
+          options: {
+            ...drawerOptions,
+            drawerWidth: size('Drawer Width', {
+              value: '480px',
+              configuration: {
+                as: 'UNIT',
+              },
+            }),
+            temporaryAnchor: option('CUSTOM', {
+              value: 'right',
+              label: 'Alignment',
+              configuration: {
+                as: 'BUTTONGROUP',
+                dataType: 'string',
+                allowedInput: [
+                  { name: 'Left', value: 'left' },
+                  { name: 'Top', value: 'top' },
+                  { name: 'Right', value: 'right' },
+                  { name: 'Bottom', value: 'bottom' },
+                ],
+                condition: showIf('drawerType', 'EQ', 'temporary'),
+              },
+            }),
+            visibility: toggle('Toggle visibility', {
+              ref: { id: '#toggleSlideoutPanel' },
+              value: false,
+              configuration: {
+                as: 'VISIBILITY',
+              },
+            }),
+            drawerType: option('CUSTOM', {
+              value: 'temporary',
+              label: 'Drawer type',
+              configuration: {
+                as: 'BUTTONGROUP',
+                dataType: 'string',
+                allowedInput: [
+                  { name: 'Persistent', value: 'persistent' },
+                  { name: 'Temporary', value: 'temporary' },
+                ],
+              },
+            }),
+          },
+        },
+        [drawerBar, drawerContainer],
+      ),
+    ],
   ),
 ];
 
