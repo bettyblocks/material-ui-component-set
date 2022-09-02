@@ -57,6 +57,7 @@ import {
   CardActions,
 } from './structures';
 import { showOn } from '../utils';
+import { Property, PropertyStateProps } from './types';
 
 const interactions: PrefabInteraction[] = [
   {
@@ -116,7 +117,6 @@ const interactions: PrefabInteraction[] = [
 ];
 
 const attrs = {
-  name: 'Card and list view',
   icon: Icon.DataList,
   type: 'page',
   description:
@@ -150,10 +150,16 @@ const beforeCreate = ({
 }: BeforeCreateArgs) => {
   const [showValidation, setShowValidation] = React.useState(false);
   const [modelId, setModelId] = React.useState('');
-  const [imageProperty, setImageProperty] = React.useState<any>('');
-  const [titleProperty, setTitleProperty] = React.useState<any>('');
-  const [subheaderProperty, setSubheaderProperty] = React.useState<any>('');
-  const [descriptionProperty, setDescriptionProperty] = React.useState<any>('');
+  const [imageProperty, setImageProperty] = React.useState<PropertyStateProps>({
+    id: '',
+  });
+  const [titleProperty, setTitleProperty] = React.useState<PropertyStateProps>({
+    id: '',
+  });
+  const [subheaderProperty, setSubheaderProperty] =
+    React.useState<PropertyStateProps>({ id: '' });
+  const [descriptionProperty, setDescriptionProperty] =
+    React.useState<PropertyStateProps>({ id: '' });
 
   const { data } = useModelQuery({
     variables: { id: modelId },
@@ -164,8 +170,11 @@ const beforeCreate = ({
   const [headerPartialId, setHeaderPartialId] = React.useState('');
   const [footerPartialId, setFooterPartialId] = React.useState('');
 
-  const getDescendantByRef = (refValue: string, structure: any) =>
-    structure.reduce((acc: string, component: PrefabReference) => {
+  const getDescendantByRef = (
+    refValue: string,
+    structure: PrefabReference[],
+  ): any =>
+    structure.reduce((acc: PrefabReference, component: PrefabReference) => {
       if (acc) return acc;
       if (
         component.type === 'COMPONENT' &&
@@ -181,9 +190,9 @@ const beforeCreate = ({
       }
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       return getDescendantByRef(refValue, component.descendants);
-    }, null);
+    });
 
-  const enrichVarObj = (obj: any) => {
+  const enrichVarObj = (obj: PropertyStateProps) => {
     const returnObject = obj;
     if (data && data.model) {
       const property = data.model.properties.find(
@@ -262,13 +271,13 @@ const beforeCreate = ({
               }
             >
               <ModelSelector
-                onChange={(value: any) => {
+                onChange={(value: string) => {
                   setShowValidation(false);
                   setModelId(value);
-                  setImageProperty('');
-                  setTitleProperty('');
-                  setSubheaderProperty('');
-                  setDescriptionProperty('');
+                  setImageProperty({ id: '' });
+                  setTitleProperty({ id: '' });
+                  setSubheaderProperty({ id: '' });
+                  setDescriptionProperty({ id: '' });
                 }}
                 value={modelId}
               />
@@ -276,7 +285,7 @@ const beforeCreate = ({
             <Field label="Image property">
               <PropertySelector
                 modelId={modelId}
-                onChange={(value: any) => {
+                onChange={(value: Property) => {
                   setImageProperty(value);
                 }}
                 value={imageProperty}
@@ -289,7 +298,7 @@ const beforeCreate = ({
               </Text>
               <PropertySelector
                 modelId={modelId}
-                onChange={(value: string) => {
+                onChange={(value: Property) => {
                   setTitleProperty(value);
                 }}
                 value={titleProperty}
@@ -299,7 +308,7 @@ const beforeCreate = ({
             <Field label="Subheader property">
               <PropertySelector
                 modelId={modelId}
-                onChange={(value: string) => {
+                onChange={(value: Property) => {
                   setSubheaderProperty(value);
                 }}
                 value={subheaderProperty}
@@ -309,7 +318,7 @@ const beforeCreate = ({
             <Field label="Description property">
               <PropertySelector
                 modelId={modelId}
-                onChange={(value: string) => {
+                onChange={(value: Property) => {
                   setDescriptionProperty(value);
                 }}
                 value={descriptionProperty}
@@ -584,7 +593,7 @@ const beforeCreate = ({
   );
 };
 
-export default makePrefab('Card and List view', attrs, beforeCreate, [
+export default makePrefab('Card and list view', attrs, beforeCreate, [
   Row(
     {
       options: {
