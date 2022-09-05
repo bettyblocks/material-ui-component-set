@@ -679,10 +679,20 @@ export default makePrefab('List view', attrs, beforeCreate, [
                                       {
                                         options: {
                                           ...appBarOptions,
-                                          logoSource: variable('Logo', {
+                                          urlFileSource: variable('Source', {
                                             value: [
                                               'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Your_Logo_-_W.svg',
                                             ],
+                                            configuration: {
+                                              placeholder:
+                                                'Starts with https:// or http://',
+                                              as: 'MULTILINE',
+                                              condition: showIf(
+                                                'type',
+                                                'EQ',
+                                                'url',
+                                              ),
+                                            },
                                           }),
                                           title: variable('Title', {
                                             value: [],
