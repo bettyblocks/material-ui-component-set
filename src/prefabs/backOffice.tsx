@@ -22,6 +22,7 @@ import {
   PrefabComponentOption,
   InteractionType,
   BeforeCreateArgs,
+  PrefabComponent,
 } from '@betty-blocks/component-sdk';
 
 import {
@@ -3098,21 +3099,25 @@ const beforeCreate = ({
   const createFormId = createUuid();
   const editFormId = createUuid();
   const deleteButtonId = createUuid();
-  const getDescendantByRef = (refValue: string, structure: any) =>
-    structure.reduce((acc: string, comp: PrefabReference) => {
-      if (acc) return acc;
-      if (
-        comp.type === 'COMPONENT' && comp.ref
-          ? Object.values(comp.ref).indexOf(refValue) > -1
-          : undefined
-      ) {
-        return comp;
+  function treeSearch(
+    dirName: string,
+    array: PrefabReference[],
+  ): PrefabComponent | undefined {
+    // eslint-disable-next-line no-plusplus
+    for (let i = 0; i < array.length; i++) {
+      const q = array[i];
+      if (q.type === 'COMPONENT') {
+        if (q.ref && q.ref.id === dirName) {
+          return q;
+        }
       }
-      if (comp.type === 'PARTIAL') {
-        return acc;
+      if (q.type !== 'PARTIAL' && q.descendants && q.descendants.length) {
+        const result = treeSearch(dirName, q.descendants);
+        if (result) return result;
       }
-      return getDescendantByRef(refValue, comp.descendants);
-    }, null);
+    }
+    return undefined;
+  }
 
   const enrichVarObj = (obj: any) => {
     const returnObject = obj;
@@ -3409,33 +3414,23 @@ const beforeCreate = ({
         return;
       }
 
-      if (headerPartialId) {
-        const sideMenuPartial = getDescendantByRef(
-          '#sideMenu',
-          newPrefab.structure,
-        );
-
+      const footerPartial = treeSearch('#footer', newPrefab.structure);
+      const sideMenuPartial = treeSearch('#sideMenu', newPrefab.structure);
+      if (headerPartialId && sideMenuPartial) {
         sideMenuPartial.descendants = [
           { type: 'PARTIAL', partialId: headerPartialId },
         ];
       }
 
-      if (footerPartialId) {
-        const footerPartial = getDescendantByRef(
-          '#footer',
-          newPrefab.structure,
-        );
-
+      if (footerPartialId && footerPartial) {
         footerPartial.descendants = [
           { type: 'PARTIAL', partialId: footerPartialId },
         ];
       }
 
       // set title prop
-      const titleComponent = getDescendantByRef(
-        '#titleText',
-        newPrefab.structure,
-      );
+      const titleComponent = treeSearch('#titleText', newPrefab.structure);
+      if (!titleComponent) throw new Error('No title component found');
       setOption(
         titleComponent,
         'textColor',
@@ -3448,12 +3443,10 @@ const beforeCreate = ({
         ...opts,
         value: [`${data?.model.label}s`],
       }));
-      // set datatable
-      const dataTableComp = getDescendantByRef(
-        '#dataTable',
-        newPrefab.structure,
-      );
 
+      // set datatable
+      const dataTableComp = treeSearch('#dataTable', newPrefab.structure);
+      if (!dataTableComp) throw new Error('No datatable component found');
       setOption(dataTableComp, 'model', (opts: PrefabComponentOption) => ({
         ...opts,
         value: modelId,
@@ -3495,7 +3488,6 @@ const beforeCreate = ({
             return {
               ...originalOption,
               value: newProperty.id,
-              // ??
             };
           },
         );
@@ -3649,10 +3641,8 @@ const beforeCreate = ({
       );
 
       if (idProperty && model) {
-        const createForm = getDescendantByRef(
-          '#createForm',
-          newPrefab.structure,
-        );
+        const createForm = treeSearch('#createForm', newPrefab.structure);
+        if (!createForm) throw new Error('No create form found');
         createForm.id = createFormId;
 
         const result = await prepareAction(
@@ -3854,10 +3844,12 @@ const beforeCreate = ({
       }
 
       // set detail tab
-      const detailDatacontainer = getDescendantByRef(
+      const detailDatacontainer = treeSearch(
         '#detailDatacontainer',
         newPrefab.structure,
       );
+      if (!detailDatacontainer)
+        throw new Error('No detail data container found');
       setOption(
         detailDatacontainer,
         'model',
@@ -3871,7 +3863,8 @@ const beforeCreate = ({
       );
 
       // set edit form
-      const editForm = getDescendantByRef('#editForm', newPrefab.structure);
+      const editForm = treeSearch('#editForm', newPrefab.structure);
+      if (!editForm) throw new Error('No edit form found');
       editForm.id = editFormId;
       if (idProperty && model) {
         const result = await prepareAction(
@@ -4094,7 +4087,8 @@ const beforeCreate = ({
       }
 
       // set delete action
-      const deleteForm = getDescendantByRef('#deleteForm', newPrefab.structure);
+      const deleteForm = treeSearch('#deleteForm', newPrefab.structure);
+      if (!deleteForm) throw new Error('No delete form found');
       deleteForm.id = deleteButtonId;
 
       if (idProperty && model) {
