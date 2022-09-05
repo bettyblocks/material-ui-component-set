@@ -23,11 +23,13 @@ import {
   InteractionType,
   BeforeCreateArgs,
   PrefabComponent,
+  showIfTrue,
 } from '@betty-blocks/component-sdk';
 
 import { Property } from '@betty-blocks/component-sdk/build/prefabs/types/property';
 import {
   AppBar,
+  appBarOptions,
   Box,
   boxOptions,
   Button,
@@ -416,74 +418,109 @@ const drawerContainer = DrawerContainer(
                         },
                       },
                       [
-                        AppBar({}, [
-                          OpenPageButton(
+                        Row({}, [
+                          Column(
                             {
-                              style: {
-                                overwrite: {
-                                  backgroundColor: {
-                                    type: 'STATIC',
-                                    value: 'transparent',
-                                  },
-                                  boxShadow: 'none',
-                                  color: {
-                                    type: 'THEME_COLOR',
-                                    value: 'white',
-                                  },
-                                  fontFamily: 'Roboto',
-                                  fontSize: '0.875rem',
-                                  fontStyle: 'none',
-                                  fontWeight: '400',
-                                  padding: ['0rem', '0rem'],
-                                  textDecoration: 'none',
-                                  textTransform: 'none',
-                                },
-                              },
                               options: {
-                                ...openPageButtonOptions,
-                                buttonText: variable('Button text', {
-                                  value: ['Menu 1'],
-                                }),
-                                outerSpacing: sizes('Outer space', {
-                                  value: ['0rem', 'M', '0rem', 'M'],
+                                ...columnOptions,
+                                innerSpacing: sizes('Inner space', {
+                                  value: ['0rem', '0rem', '0rem', '0rem'],
                                 }),
                               },
                             },
-                            [],
-                          ),
-                          OpenPageButton(
-                            {
-                              style: {
-                                overwrite: {
-                                  backgroundColor: {
-                                    type: 'STATIC',
-                                    value: 'transparent',
+                            [
+                              AppBar(
+                                {
+                                  options: {
+                                    ...appBarOptions,
+                                    urlFileSource: variable('Source', {
+                                      value: [
+                                        'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Your_Logo_-_W.svg',
+                                      ],
+                                      configuration: {
+                                        placeholder:
+                                          'Starts with https:// or http://',
+                                        as: 'MULTILINE',
+                                        condition: showIf('type', 'EQ', 'url'),
+                                      },
+                                    }),
+                                    title: variable('Title', {
+                                      value: [],
+                                    }),
                                   },
-                                  boxShadow: 'none',
-                                  color: {
-                                    type: 'THEME_COLOR',
-                                    value: 'white',
-                                  },
-                                  fontFamily: 'Roboto',
-                                  fontSize: '0.875rem',
-                                  fontStyle: 'none',
-                                  fontWeight: '400',
-                                  padding: ['0rem', '0rem'],
-                                  textDecoration: 'none',
-                                  textTransform: 'none',
                                 },
-                              },
-                              options: {
-                                ...openPageButtonOptions,
-                                buttonText: variable('Button text', {
-                                  value: ['Menu 2'],
-                                }),
-                                outerSpacing: sizes('Outer space', {
-                                  value: ['0rem', 'M', '0rem', '0rem'],
-                                }),
-                              },
-                            },
-                            [],
+                                [
+                                  OpenPageButton(
+                                    {
+                                      style: {
+                                        overwrite: {
+                                          backgroundColor: {
+                                            type: 'STATIC',
+                                            value: 'transparent',
+                                          },
+                                          boxShadow: 'none',
+                                          color: {
+                                            type: 'THEME_COLOR',
+                                            value: 'white',
+                                          },
+                                          fontFamily: 'Roboto',
+                                          fontSize: '0.875rem',
+                                          fontStyle: 'none',
+                                          fontWeight: '400',
+                                          padding: ['0rem', '0rem'],
+                                          textDecoration: 'none',
+                                          textTransform: 'none',
+                                        },
+                                      },
+                                      options: {
+                                        ...openPageButtonOptions,
+                                        buttonText: variable('Button text', {
+                                          value: ['Menu 1'],
+                                        }),
+                                        outerSpacing: sizes('Outer space', {
+                                          value: ['0rem', 'M', '0rem', 'M'],
+                                        }),
+                                      },
+                                    },
+                                    [],
+                                  ),
+                                  OpenPageButton(
+                                    {
+                                      style: {
+                                        overwrite: {
+                                          backgroundColor: {
+                                            type: 'STATIC',
+                                            value: 'transparent',
+                                          },
+                                          boxShadow: 'none',
+                                          color: {
+                                            type: 'THEME_COLOR',
+                                            value: 'white',
+                                          },
+                                          fontFamily: 'Roboto',
+                                          fontSize: '0.875rem',
+                                          fontStyle: 'none',
+                                          fontWeight: '400',
+                                          padding: ['0rem', '0rem'],
+                                          textDecoration: 'none',
+                                          textTransform: 'none',
+                                        },
+                                      },
+                                      options: {
+                                        ...openPageButtonOptions,
+                                        buttonText: variable('Button text', {
+                                          value: ['Menu 2'],
+                                        }),
+                                        outerSpacing: sizes('Outer space', {
+                                          value: ['0rem', 'M', '0rem', '0rem'],
+                                        }),
+                                      },
+                                    },
+                                    [],
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
                         ]),
                       ],
@@ -1675,6 +1712,7 @@ const drawerContainer = DrawerContainer(
                     ),
                     Box(
                       {
+                        ref: { id: '#footer' },
                         options: {
                           ...boxOptions,
                           width: size('Width', {
@@ -1694,9 +1732,54 @@ const drawerContainer = DrawerContainer(
                             value: 20,
                           }),
                         },
-                        ref: { id: '#footer' },
                       },
-                      [],
+                      [
+                        Box(
+                          {
+                            options: {
+                              ...boxOptions,
+                              innerSpacing: sizes('Inner space', {
+                                value: ['L', 'L', 'L', 'L'],
+                              }),
+                            },
+                          },
+                          [
+                            Text(
+                              {
+                                options: {
+                                  ...textOptions,
+                                  content: variable('Content', {
+                                    value: ['Powered by Bettyblocks'],
+                                    configuration: { as: 'MULTILINE' },
+                                  }),
+                                  textAlignment: option('CUSTOM', {
+                                    label: 'Text Alignment',
+                                    value: 'center',
+                                    configuration: {
+                                      as: 'BUTTONGROUP',
+                                      dataType: 'string',
+                                      allowedInput: [
+                                        { name: 'Left', value: 'left' },
+                                        { name: 'Center', value: 'center' },
+                                        { name: 'Right', value: 'right' },
+                                      ],
+                                    },
+                                  }),
+                                  type: font('Font', { value: ['Body1'] }),
+                                  styles: toggle('Styles', { value: true }),
+                                  textColor: color('Text color', {
+                                    value: ThemeColor.MEDIUM,
+                                    configuration: {
+                                      condition: showIfTrue('styles'),
+                                    },
+                                  }),
+                                },
+                              },
+                              [],
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ],
                 ),
