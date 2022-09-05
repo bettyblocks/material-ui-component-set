@@ -3,7 +3,7 @@ import {
   prefab,
   component,
   option,
-  property,
+  variable,
   Icon,
   BeforeCreateArgs,
 } from '@betty-blocks/component-sdk';
@@ -57,7 +57,7 @@ const attributes = {
 
 const options = {
   actionVariableId: option('ACTION_JS_VARIABLE', { label: 'Name', value: '' }),
-  value: property('Value'),
+  value: variable('Value'),
 };
 
 const hooks = {

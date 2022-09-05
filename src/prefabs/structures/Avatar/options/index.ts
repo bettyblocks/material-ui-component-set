@@ -7,11 +7,29 @@ import {
   ThemeColor,
   size,
   sizes,
+  text,
 } from '@betty-blocks/component-sdk';
-import { advanced } from './advanced';
-import { styles } from './styles';
+import { advanced } from '../../advanced';
 
-export const options = {
+export const categories = [
+  {
+    label: 'Styling',
+    expanded: false,
+    members: ['width', 'height', 'fontSize', 'textColor', 'fontWeight'],
+  },
+  {
+    label: 'Spacing',
+    expanded: false,
+    members: ['margin'],
+  },
+  {
+    label: 'Advanced settings',
+    expanded: false,
+    members: ['dataComponentAttribute'],
+  },
+];
+
+export const avatarOptions = {
   type: option('CUSTOM', {
     label: 'Type',
     value: 'img',
@@ -88,8 +106,34 @@ export const options = {
   margin: sizes('Outer Space', {
     value: ['M', 'M', 'M', 'M'],
   }),
+  fontSize: text('Font size', {
+    value: '1.25rem',
+    configuration: {
+      as: 'UNIT',
+    },
+  }),
+  textColor: color('Text color', {
+    value: ThemeColor.WHITE,
+  }),
+  fontWeight: option('CUSTOM', {
+    label: 'Font weight',
+    value: '400',
+    configuration: {
+      as: 'DROPDOWN',
+      dataType: 'string',
+      allowedInput: [
+        { name: '100', value: '100' },
+        { name: '200', value: '200' },
+        { name: '300', value: '300' },
+        { name: '400', value: '400' },
+        { name: '500', value: '500' },
+        { name: '600', value: '600' },
+        { name: '700', value: '700' },
+        { name: '800', value: '800' },
+        { name: '900', value: '900' },
+      ],
+    },
+  }),
 
-  ...styles,
-
-  ...advanced,
+  ...advanced('Avatar'),
 };

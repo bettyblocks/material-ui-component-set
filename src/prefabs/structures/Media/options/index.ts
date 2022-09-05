@@ -5,10 +5,34 @@ import {
   endpoint,
   size,
   sizes,
+  property,
 } from '@betty-blocks/component-sdk';
-import { advanced } from './advanced';
+import { advanced } from '../../advanced';
 
-export const options = {
+export const categories = [
+  {
+    label: 'Styling',
+    expanded: false,
+    members: ['width', 'height'],
+  },
+  {
+    label: 'Spacing',
+    expanded: false,
+    members: ['outerSpacing'],
+  },
+  {
+    label: 'Alternative names',
+    expanded: false,
+    members: ['title', 'imgAlt'],
+  },
+  {
+    label: 'Advanced settings',
+    expanded: false,
+    members: ['dataComponentAttribute'],
+  },
+];
+
+export const mediaOptions = {
   type: option('CUSTOM', {
     label: 'Media type',
     value: 'img',
@@ -17,23 +41,43 @@ export const options = {
       dataType: 'string',
       allowedInput: [
         { name: 'Image', value: 'img' },
+        { name: 'Data', value: 'data' },
         { name: 'Video', value: 'video' },
+        { name: 'URL', value: 'url' },
         { name: 'I-frame', value: 'iframe' },
       ],
     },
   }),
-  imageSource: variable('Source', {
-    value: [],
+  imageFileSource: option('PUBLIC_FILE', {
+    label: 'Select image',
+    value: '',
     configuration: {
-      as: 'MULTILINE',
+      mediaType: 'IMAGE',
+      allowedExtensions: ['image/*'],
       condition: showIf('type', 'EQ', 'img'),
     },
   }),
-  videoSource: variable('Source', {
-    value: [],
+  propertyFileSource: property('Property', {
+    value: '',
     configuration: {
-      as: 'MULTILINE',
+      condition: showIf('type', 'EQ', 'data'),
+    },
+  }),
+  videoFileSource: option('PUBLIC_FILE', {
+    label: 'Select video',
+    value: '',
+    configuration: {
+      mediaType: 'VIDEO',
+      allowedExtensions: ['video/*'],
       condition: showIf('type', 'EQ', 'video'),
+    },
+  }),
+  urlFileSource: variable('Source', {
+    value: [''],
+    configuration: {
+      placeholder: 'Starts with https:// or http://',
+      as: 'MULTILINE',
+      condition: showIf('type', 'EQ', 'url'),
     },
   }),
   iframeSource: variable('Source', {
@@ -41,6 +85,19 @@ export const options = {
     configuration: {
       as: 'MULTILINE',
       condition: showIf('type', 'EQ', 'iframe'),
+    },
+  }),
+  urlSourceType: option('CUSTOM', {
+    label: 'Type ',
+    value: 'image',
+    configuration: {
+      as: 'BUTTONGROUP',
+      dataType: 'string',
+      allowedInput: [
+        { name: 'Image', value: 'image' },
+        { name: 'Video', value: 'video' },
+      ],
+      condition: showIf('type', 'EQ', 'url'),
     },
   }),
   linkType: option('CUSTOM', {
@@ -94,5 +151,5 @@ export const options = {
     value: ['0rem', '0rem', 'M', '0rem'],
   }),
 
-  ...advanced,
+  ...advanced('Media'),
 };
