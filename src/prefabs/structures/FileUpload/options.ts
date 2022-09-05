@@ -2,6 +2,7 @@ import {
   buttongroup,
   color,
   option,
+  property,
   showIf,
   showIfTrue,
   text,
@@ -16,7 +17,7 @@ export const options = {
     value: '',
   }),
   label: variable('Label', { value: ['Select file(s)...'] }),
-  value: variable('Value', { value: [''] }),
+  value: property('Value'),
   required: toggle('Required', { value: false }),
   requiredMessage: variable('Required message', {
     value: ['file is required'],

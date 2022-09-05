@@ -4,7 +4,7 @@
   allowedTypes: ['CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { env, useText, Icon, usePresignedUpload } = B;
+    const { env, useText, Icon, usePresignedUpload, useProperty } = B;
     const { FormControl, FormHelperText, Typography, IconButton } =
       window.MaterialUI.Core;
     const {
@@ -16,7 +16,9 @@
       fullWidth,
       helperText,
       hideLabel,
+      hideDefaultError,
       label,
+      value: valueRaw,
       margin,
       maxFileSize,
       maxFileSizeMessage: maxFileSizeMessageRaw,
@@ -27,7 +29,6 @@
     } = options;
 
     const isDev = env === 'dev';
-    const inputRef = React.createRef();
     const [uploads, setUploads] = useState({
       // is updated by the html element and mutations
       files: [], // html element
@@ -42,6 +43,7 @@
     const maxFileSizeMessage = useText(maxFileSizeMessageRaw);
     const acceptedValue = useText(accept) || 'image/*';
     const requiredText = required ? '*' : '';
+    const value = useProperty(valueRaw);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
     const { modelProperty } = actionProperty;
 
@@ -64,13 +66,21 @@
 
     const firstRender = React.useRef(true);
 
+    const inputRef = React.useRef();
+
     React.useEffect(() => {
       firstRender.current = false;
     }, []);
 
     React.useEffect(() => {
       if (firstRender.current) return;
-      if (error && error.length > 0) B.triggerEvent('onError', error);
+      if (error) {
+        if (Array.isArray(error) && error.length === 0) {
+          return;
+        }
+
+        B.triggerEvent('onError', error);
+      }
     }, [error]);
 
     React.useEffect(() => {
@@ -87,7 +97,8 @@
       }
     }, [loading, fileReference]);
 
-    const helperValue = (error && error.message) || validationMessage || helper;
+    const errorHelpers = !hideDefaultError ? error && error.message : '';
+    const helperValue = errorHelpers || validationMessage || helper;
 
     const formatBytes = (bytes) => {
       if (bytes === 0) return '0 Bytes';
@@ -101,7 +112,7 @@
       const filesArray = files ? Array.from(files) : [];
 
       if (required) {
-        if (filesArray.length === 0) {
+        if (!(fileReference || value)) {
           setValidationMessage(requiredMessage);
           return false;
         }
@@ -143,6 +154,7 @@
       });
 
       const isValidFile = validateFiles(e.target.files);
+      if (isValidFile) setValidationMessage('');
       const file = e.target.files[0];
 
       if (isValidFile) {
@@ -177,6 +189,7 @@
         <div data-component={dataComponentAttributeValue}>
           <input
             accept={acceptedValue}
+            required={required && !(fileReference || value)}
             className={classes.input}
             type="file"
             onChange={handleChange}
@@ -217,11 +230,11 @@
       );
     }
 
-    function FileDetails({ file, fileType, fileSize }) {
+    function FileDetails({ fileName, fileType, fileSize }) {
       return (
         <div className={classes.fileDetails}>
           <Typography variant="body1" noWrap className={classes.span}>
-            {file ? file.name : 'File name'}
+            {fileName || 'File name'}
           </Typography>
           <div className={classes.fileDetailList}>
             <p className={classes.fileDetail}>
@@ -283,7 +296,7 @@
                 )}
                 <div className={classes.gridItemDetails}>
                   <FileDetails
-                    file={file}
+                    fileName={file.name}
                     fileType={file.type}
                     fileSize={file.size}
                   />
@@ -308,7 +321,7 @@
                     />
                   )}
                   <FileDetails
-                    file={file}
+                    fileName={file.name}
                     fileType={file.type}
                     fileSize={file.size}
                   />
@@ -361,6 +374,10 @@
 
     function Control() {
       const filesArray = files ? Array.from(files) : [];
+      const hasUploads =
+        filesArray &&
+        !loading && // TODO: show only files form the html element
+        filesArray.length > 0;
       return (
         <FormControl
           fullWidth={fullWidth}
@@ -377,9 +394,7 @@
             {validationMessage || helperValue}
           </FormHelperText>
           <div className={classes.messageContainer}>
-            {filesArray &&
-              !loading && // TODO: show only files form the html element
-              filesArray.length > 0 &&
+            {hasUploads &&
               filesArray.map((file) => (
                 <UploadedFile key={file.name} file={file} />
               ))}
