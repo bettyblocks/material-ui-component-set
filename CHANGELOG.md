@@ -1,3 +1,17 @@
+# [2.43.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.42.1...v2.43.0) (2022-09-02)
+
+
+### Features
+
+* crud with dialogs to tsx ([965b1e3](https://github.com/bettyblocks/material-ui-component-set/commit/965b1e327d9a6d74cdd9bf185c93e7c32a7cfa6c))
+
+## [2.42.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.42.0...v2.42.1) (2022-09-02)
+
+
+### Bug Fixes
+
+* made border radius as unit again ([2b88354](https://github.com/bettyblocks/material-ui-component-set/commit/2b883541926494b1b81b52e50b1ee17890510c02))
+
 # [2.42.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.41.1...v2.42.0) (2022-09-01)
 
 
