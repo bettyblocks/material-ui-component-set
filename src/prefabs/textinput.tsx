@@ -17,15 +17,10 @@ const beforeCreate = ({
     (option: { type: string }) => option.type === 'ACTION_JS_VARIABLE',
   );
 
-  // TODO: remove this code
-  if (!actionVariableOption) {
-    return <div />;
-  }
-
   return (
     <CreateFormInputWizard
       supportedKinds={['TEXT', 'URL', 'IBAN', 'STRING']}
-      actionVariableOption={actionVariableOption.key || null}
+      actionVariableOption={actionVariableOption?.key || null}
       labelOptionKey="label"
       nameOptionKey="actionVariableId"
       close={close}

@@ -4,6 +4,11 @@ import { styles } from './styles';
 import { validation } from './validation';
 
 export const options = {
+  actionVariableId: option('ACTION_JS_VARIABLE', {
+    label: 'Name',
+    value: '',
+  }),
+
   actionProperty: option('ACTION_JS_PROPERTY', {
     label: 'Property',
     value: '',

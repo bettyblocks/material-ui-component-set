@@ -7,9 +7,4 @@ export const advanced = {
     value: [],
     ...showOn('advancedSettings'),
   }),
-  actionVariableId: option('ACTION_JS_VARIABLE', {
-    label: 'Name',
-    value: '',
-    configuration: { condition: showIf('actionVariableId', 'EQ', 'never') },
-  }),
 };
