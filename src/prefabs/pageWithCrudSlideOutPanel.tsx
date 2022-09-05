@@ -2713,13 +2713,29 @@ const prefabStructure = [
               optionId: '#titleOption',
             },
           },
+          configuration: {
+            condition: {
+              type: 'HIDE',
+              option: 'toggleOverview',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
         }),
         drawerOverview: linked({
-          label: 'Page title',
+          label: 'CRUD overview',
           value: {
             ref: {
               componentId: '#tabsOverview',
               optionId: '#switchTabOption',
+            },
+          },
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'toggleOverview',
+              comparator: 'EQ',
+              value: true,
             },
           },
         }),
@@ -2731,14 +2747,14 @@ const prefabStructure = [
               optionId: '#createTabTextOption',
             },
           },
-          // configuration: {
-          //   condition: {
-          //     type: 'SHOW',
-          //     option: 'drawerOverview',
-          //     comparator: 'EQ',
-          //     value: '1',
-          //   },
-          // },
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'toggleOverview',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
         }),
         detailsTabText: linked({
           label: 'Details tab title',
@@ -2748,6 +2764,14 @@ const prefabStructure = [
               optionId: '#detailsTabTextOption',
             },
           },
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'toggleOverview',
+              comparator: 'EQ',
+              value: true,
+            },
+          },
         }),
         updateTabText: linked({
           label: 'Edit tab title',
@@ -2755,6 +2779,14 @@ const prefabStructure = [
             ref: {
               componentId: '#updateTabText',
               optionId: '#updateTabTextOption',
+            },
+          },
+          configuration: {
+            condition: {
+              type: 'SHOW',
+              option: 'toggleOverview',
+              comparator: 'EQ',
+              value: true,
             },
           },
         }),
@@ -2893,7 +2925,7 @@ const beforeCreate = ({
 
   const makeDetail = (prop: any) => {
     const mediaComponent = cloneStructure('Media');
-    setOption(mediaComponent, 'imageSource', (opt: any) => ({
+    setOption(mediaComponent, 'imageSource', (opt: PrefabComponentOption) => ({
       ...opt,
       value: [{ ...prop }],
       configuration: {
@@ -2908,29 +2940,41 @@ const beforeCreate = ({
     }));
 
     const detailComponent = cloneStructure('Box');
-    setOption(detailComponent, 'outerSpacing', (opt: any) => ({
-      ...opt,
-      value: ['0rem', '0rem', 'M', '0rem'],
-    }));
-    setOption(detailComponent, 'backgroundColor', (opt: any) => ({
-      ...opt,
-      value: 'Accent1',
-    }));
-    setOption(detailComponent, 'backgroundColorAlpha', (opt: any) => ({
-      ...opt,
-      value: '20',
-    }));
+    setOption(
+      detailComponent,
+      'outerSpacing',
+      (opt: PrefabComponentOption) => ({
+        ...opt,
+        value: ['0rem', '0rem', 'M', '0rem'],
+      }),
+    );
+    setOption(
+      detailComponent,
+      'backgroundColor',
+      (opt: PrefabComponentOption) => ({
+        ...opt,
+        value: 'Accent1',
+      }),
+    );
+    setOption(
+      detailComponent,
+      'backgroundColorAlpha',
+      (opt: PrefabComponentOption) => ({
+        ...opt,
+        value: '20',
+      }),
+    );
     const labelText = cloneStructure('Text');
-    setOption(labelText, 'content', (opt: any) => ({
+    setOption(labelText, 'content', (opt: PrefabComponentOption) => ({
       ...opt,
       value: [`${[prop.label]}:`],
       configuration: { as: 'MULTILINE' },
     }));
-    setOption(labelText, 'type', (opt: any) => ({
+    setOption(labelText, 'type', (opt: PrefabComponentOption) => ({
       ...opt,
       value: 'Body1',
     }));
-    setOption(labelText, 'fontWeight', (opt: any) => ({
+    setOption(labelText, 'fontWeight', (opt: PrefabComponentOption) => ({
       ...opt,
       value: '500',
       configuration: {
@@ -2951,7 +2995,7 @@ const beforeCreate = ({
     }));
 
     const valueText = cloneStructure('Text');
-    setOption(valueText, 'content', (opt: any) => ({
+    setOption(valueText, 'content', (opt: PrefabComponentOption) => ({
       ...opt,
       value: [enrichVarObj({ ...prop })],
       configuration: { as: 'MULTILINE' },
