@@ -1,4 +1,4 @@
-declare enum PropertyKind {
+export declare enum PropertyKind {
   AUTO_INCREMENT = 'AUTO_INCREMENT',
   BELONGS_TO = 'BELONGS_TO',
   BOOLEAN = 'BOOLEAN',
@@ -47,13 +47,42 @@ declare enum PropertyKind {
   URL = 'URL',
   ZIPCODE = 'ZIPCODE',
 }
+
 export interface Property {
   id: string[];
   name?: string;
   label?: string;
   kind?: PropertyKind;
+  format?: string;
+}
+
+export interface Properties {
+  id: string;
+  name: string;
+  label: string;
+  kind: PropertyKind;
+  format: string;
 }
 
 export interface PropertyStateProps extends Omit<Property, 'id'> {
   id: string | string[];
+}
+
+export interface IdPropertyProps {
+  id: string;
+  name: string;
+  label: string;
+  kind: PropertyKind;
+}
+
+export interface ModelProps {
+  id: string;
+  label: string;
+  name: string;
+  helpText: string;
+  properties: Properties[];
+}
+
+export interface ModelQuery {
+  model: ModelProps;
 }

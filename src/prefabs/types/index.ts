@@ -1,3 +1,19 @@
-import { Property, PropertyStateProps } from './types';
+import {
+  Property,
+  PropertyStateProps,
+  PropertyKind,
+  IdPropertyProps,
+  Properties,
+  ModelProps,
+  ModelQuery,
+} from './types';
 
-export { Property, PropertyStateProps };
+export {
+  Property,
+  PropertyStateProps,
+  PropertyKind,
+  IdPropertyProps,
+  Properties,
+  ModelProps,
+  ModelQuery,
+};

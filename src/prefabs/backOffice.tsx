@@ -20,9 +20,10 @@ import {
   component,
   PrefabInteraction,
   PrefabComponentOption,
+  InteractionType,
+  BeforeCreateArgs,
 } from '@betty-blocks/component-sdk';
 
-import { Property } from '@betty-blocks/component-sdk/build/prefabs/types/property';
 import {
   Box,
   boxOptions,
@@ -65,15 +66,9 @@ import {
   textOptions,
 } from './structures';
 import { options as defaults } from './structures/ActionJSForm/options';
+import { Properties, IdPropertyProps, ModelProps, ModelQuery } from './types';
 
-interface ActionResultsProps {
-  variables: Record<string, any>;
-  action: any;
-  IdProperties: any;
-  recordInputVariable: any;
-}
-
-const interactions = [
+const interactions: PrefabInteraction[] = [
   {
     name: 'Show',
     sourceEvent: 'Click',
@@ -81,7 +76,7 @@ const interactions = [
       targetComponentId: '#deleteDialog',
       sourceComponentId: '#deleteButton',
     },
-    type: 'Custom',
+    type: InteractionType.Custom,
   },
   {
     name: 'Hide',
@@ -90,7 +85,7 @@ const interactions = [
       targetComponentId: '#deleteDialog',
       sourceComponentId: '#closeBtn',
     },
-    type: 'Custom',
+    type: InteractionType.Custom,
   },
   {
     name: 'Hide',
@@ -99,7 +94,7 @@ const interactions = [
       targetComponentId: '#deleteDialog',
       sourceComponentId: '#cancelButton',
     },
-    type: 'Custom',
+    type: InteractionType.Custom,
   },
   {
     name: 'Hide',
@@ -108,7 +103,7 @@ const interactions = [
       targetComponentId: '#deleteDialog',
       sourceComponentId: '#deleteForm',
     },
-    type: 'Custom',
+    type: InteractionType.Custom,
   },
   {
     name: 'Refetch',
@@ -117,7 +112,7 @@ const interactions = [
       targetComponentId: '#dataTable',
       sourceComponentId: '#deleteForm',
     },
-    type: 'Custom',
+    type: InteractionType.Custom,
   },
   {
     name: 'Refetch',
@@ -126,7 +121,7 @@ const interactions = [
       targetComponentId: '#dataTable',
       sourceComponentId: '#createForm',
     },
-    type: 'Custom',
+    type: InteractionType.Custom,
   },
   {
     name: 'Hide',
@@ -135,7 +130,7 @@ const interactions = [
       targetComponentId: '#drawerSidebar',
       sourceComponentId: '#createForm',
     },
-    type: 'Custom',
+    type: InteractionType.Custom,
   },
   {
     name: 'Refetch',
@@ -144,7 +139,7 @@ const interactions = [
       targetComponentId: '#dataTable',
       sourceComponentId: '#editForm',
     },
-    type: 'Custom',
+    type: InteractionType.Custom,
   },
   {
     name: 'Hide',
@@ -153,7 +148,7 @@ const interactions = [
       targetComponentId: '#drawerSidebar',
       sourceComponentId: '#editForm',
     },
-    type: 'Custom',
+    type: InteractionType.Custom,
   },
   {
     name: 'Hide',
@@ -162,7 +157,7 @@ const interactions = [
       targetComponentId: '#editErrorAlert',
       sourceComponentId: '#editForm',
     },
-    type: 'Custom',
+    type: InteractionType.Custom,
   },
   {
     name: 'Show',
@@ -171,7 +166,7 @@ const interactions = [
       targetComponentId: '#drawerSidebar',
       sourceComponentId: '#detailButton',
     },
-    type: 'Custom',
+    type: InteractionType.Custom,
   },
   {
     name: 'Hide',
@@ -180,7 +175,7 @@ const interactions = [
       targetComponentId: '#drawerSidebar',
       sourceComponentId: '#editCancelButton',
     },
-    type: 'Custom',
+    type: InteractionType.Custom,
   },
   {
     name: 'Hide',
@@ -189,7 +184,7 @@ const interactions = [
       targetComponentId: '#drawerSidebar',
       sourceComponentId: '#createCancelButton',
     },
-    type: 'Custom',
+    type: InteractionType.Custom,
   },
   {
     name: 'Select',
@@ -198,7 +193,7 @@ const interactions = [
       targetComponentId: '#detailTab',
       sourceComponentId: '#detailButton',
     },
-    type: 'Custom',
+    type: InteractionType.Custom,
   },
   {
     name: 'Show',
@@ -207,7 +202,7 @@ const interactions = [
       targetComponentId: '#drawerSidebar',
       sourceComponentId: '#createButton',
     },
-    type: 'Custom',
+    type: InteractionType.Custom,
   },
   {
     name: 'Show',
@@ -216,7 +211,7 @@ const interactions = [
       targetComponentId: '#drawerSidebar',
       sourceComponentId: '#editButton',
     },
-    type: 'Custom',
+    type: InteractionType.Custom,
   },
   {
     name: 'Select',
@@ -225,7 +220,7 @@ const interactions = [
       targetComponentId: '#createTab',
       sourceComponentId: '#createButton',
     },
-    type: 'Custom',
+    type: InteractionType.Custom,
   },
   {
     name: 'Select',
@@ -234,7 +229,7 @@ const interactions = [
       targetComponentId: '#editTab',
       sourceComponentId: '#editButton',
     },
-    type: 'Custom',
+    type: InteractionType.Custom,
   },
   {
     name: 'Select',
@@ -243,7 +238,7 @@ const interactions = [
       targetComponentId: '#editTab',
       sourceComponentId: '#editButtonFromDetails',
     },
-    type: 'Custom',
+    type: InteractionType.Custom,
   },
   {
     name: 'Hide',
@@ -252,7 +247,7 @@ const interactions = [
       targetComponentId: '#drawerSidebar',
       sourceComponentId: '#detailCancelButton',
     },
-    type: 'Custom',
+    type: InteractionType.Custom,
   },
   {
     name: 'Hide',
@@ -261,7 +256,7 @@ const interactions = [
       targetComponentId: '#drawerSidebar',
       sourceComponentId: '#closeEditTabBtn',
     },
-    type: 'Custom',
+    type: InteractionType.Custom,
   },
   {
     name: 'Hide',
@@ -270,7 +265,7 @@ const interactions = [
       targetComponentId: '#drawerSidebar',
       sourceComponentId: '#closeCreateTabBtn',
     },
-    type: 'Custom',
+    type: InteractionType.Custom,
   },
   {
     name: 'Hide',
@@ -279,7 +274,7 @@ const interactions = [
       targetComponentId: '#drawerSidebar',
       sourceComponentId: '#closeDetailsTabBtn',
     },
-    type: 'Custom',
+    type: InteractionType.Custom,
   },
   {
     name: 'Submit',
@@ -288,7 +283,7 @@ const interactions = [
       targetComponentId: '#createForm',
       sourceComponentId: '#createSubmitButton',
     },
-    type: 'Custom',
+    type: InteractionType.Custom,
   },
   {
     name: 'Submit',
@@ -297,9 +292,9 @@ const interactions = [
       targetComponentId: '#editForm',
       sourceComponentId: '#editSubmitButton',
     },
-    type: 'Custom',
+    type: InteractionType.Custom,
   },
-] as PrefabInteraction[];
+];
 
 const attributes = {
   category: 'FORMV2',
@@ -3070,7 +3065,12 @@ const beforeCreate = ({
     Box: BoxComp,
     Button: Buttoncomp,
   },
-  helpers: {
+  helpers,
+  prefab: originalPrefab,
+  save,
+  close,
+}: BeforeCreateArgs) => {
+  const {
     useModelQuery,
     prepareAction,
     cloneStructure,
@@ -3080,17 +3080,13 @@ const beforeCreate = ({
     makeBettyUpdateInput,
     PropertyKind,
     BettyPrefabs,
-  },
-  prefab: originalPrefab,
-  save,
-  close,
-}: any) => {
+  } = helpers;
   const [modelId, setModelId] = React.useState('');
-  const [model, setModel] = React.useState(null);
-  const [properties, setProperties] = React.useState([]);
+  const [model, setModel] = React.useState<ModelProps>();
+  const [properties, setProperties] = React.useState<Properties[]>([]);
   const [modelValidation, setModelValidation] = React.useState(false);
   const [propertiesValidation, setPropertiesValidation] = React.useState(false);
-  const [idProperty, setIdProperty] = React.useState<Property>();
+  const [idProperty, setIdProperty] = React.useState<IdPropertyProps>();
   const { data } = useModelQuery({
     variables: { id: modelId },
     skip: !modelId,
@@ -3133,87 +3129,107 @@ const beforeCreate = ({
 
   const makeDetail = (prop: any) => {
     const mediaComponent = cloneStructure('Media');
-    setOption(mediaComponent, 'imageSource', (opt: any) => ({
-      ...opt,
-      value: [{ ...prop }],
-      configuration: {
-        as: 'BUTTONGROUP',
-        dataType: 'string',
-        allowedInput: [
-          { name: 'Image', value: 'img' },
-          { name: 'Video', value: 'video' },
-          { name: 'I-frame', value: 'iframe' },
-        ],
-      },
-    }));
+    if (mediaComponent.type === 'COMPONENT') {
+      setOption(
+        mediaComponent,
+        'imageSource',
+        (opt: PrefabComponentOption) => ({
+          ...opt,
+          value: [{ ...prop }],
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Image', value: 'img' },
+              { name: 'Video', value: 'video' },
+              { name: 'I-frame', value: 'iframe' },
+            ],
+          },
+        }),
+      );
+    }
 
     const detailComponent = cloneStructure('Box');
-    setOption(detailComponent, 'outerSpacing', (opt: any) => ({
-      ...opt,
-      value: ['0rem', '0rem', 'M', '0rem'],
-    }));
-    setOption(detailComponent, 'backgroundColor', (opt: any) => ({
-      ...opt,
-      value: 'Accent1',
-    }));
-    setOption(detailComponent, 'backgroundColorAlpha', (opt: any) => ({
-      ...opt,
-      value: '20',
-    }));
-    const labelText = cloneStructure('Text');
-    setOption(labelText, 'content', (opt: any) => ({
-      ...opt,
-      value: [`${[prop.label]}:`],
-      configuration: { as: 'MULTILINE' },
-    }));
-    setOption(labelText, 'type', (opt: any) => ({
-      ...opt,
-      value: 'Body1',
-    }));
-    setOption(labelText, 'fontWeight', (opt: any) => ({
-      ...opt,
-      value: '500',
-      configuration: {
-        as: 'DROPDOWN',
-        dataType: 'string',
-        allowedInput: [
-          { name: '100', value: '100' },
-          { name: '200', value: '200' },
-          { name: '300', value: '300' },
-          { name: '400', value: '400' },
-          { name: '500', value: '500' },
-          { name: '600', value: '600' },
-          { name: '700', value: '700' },
-          { name: '800', value: '800' },
-          { name: '900', value: '900' },
-        ],
-      },
-    }));
+    if (detailComponent.type === 'COMPONENT') {
+      setOption(
+        detailComponent,
+        'outerSpacing',
+        (opt: PrefabComponentOption) => ({
+          ...opt,
+          value: ['0rem', '0rem', 'M', '0rem'],
+        }),
+      );
+      setOption(
+        detailComponent,
+        'backgroundColor',
+        (opt: PrefabComponentOption) => ({
+          ...opt,
+          value: 'Accent1',
+        }),
+      );
+      setOption(
+        detailComponent,
+        'backgroundColorAlpha',
+        (opt: PrefabComponentOption) => ({
+          ...opt,
+          value: '20',
+        }),
+      );
 
-    const valueText = cloneStructure('Text');
-    setOption(valueText, 'content', (opt: any) => ({
-      ...opt,
-      value: [enrichVarObj({ ...prop })],
-      configuration: { as: 'MULTILINE' },
-    }));
-
-    detailComponent.descendants = [labelText, valueText];
-
+      const labelText = cloneStructure('Text');
+      if (labelText.type === 'COMPONENT') {
+        setOption(labelText, 'content', (opt: PrefabComponentOption) => ({
+          ...opt,
+          value: [`${[prop.label]}:`],
+          configuration: { as: 'MULTILINE' },
+        }));
+        setOption(labelText, 'type', (opt: PrefabComponentOption) => ({
+          ...opt,
+          value: 'Body1',
+        }));
+        setOption(labelText, 'fontWeight', (opt: PrefabComponentOption) => ({
+          ...opt,
+          value: '500',
+          configuration: {
+            as: 'DROPDOWN',
+            dataType: 'string',
+            allowedInput: [
+              { name: '100', value: '100' },
+              { name: '200', value: '200' },
+              { name: '300', value: '300' },
+              { name: '400', value: '400' },
+              { name: '500', value: '500' },
+              { name: '600', value: '600' },
+              { name: '700', value: '700' },
+              { name: '800', value: '800' },
+              { name: '900', value: '900' },
+            ],
+          },
+        }));
+      }
+      const valueText = cloneStructure('Text');
+      if (valueText.type === 'COMPONENT') {
+        setOption(valueText, 'content', (opt: PrefabComponentOption) => ({
+          ...opt,
+          value: [enrichVarObj({ ...prop })],
+          configuration: { as: 'MULTILINE' },
+        }));
+      }
+      detailComponent.descendants = [labelText, valueText];
+    }
     return prop.kind === 'IMAGE' ? mediaComponent : detailComponent;
   };
 
   useModelQuery({
     variables: { id: modelId },
-    onCompleted: (result: any) => {
-      setModel(result.model);
-      setIdProperty(
-        result.model.properties.find(({ name }: any) => name === 'id'),
-      );
+    onCompleted: ({ model: dataModel }: ModelQuery) => {
+      setModel(dataModel);
+      setIdProperty(dataModel.properties.find(({ name }) => name === 'id'));
     },
   });
 
   const stepper = {
-    setStep: (step: any) => {
+    setStep: (step: number) => {
       if (step === 1) {
         return (
           <>
@@ -3280,7 +3296,7 @@ const beforeCreate = ({
             }
           >
             <ModelRelationSelector
-              onChange={(value: any) => {
+              onChange={(value: string) => {
                 setModelValidation(false);
                 setModelId(value);
               }}
@@ -3326,7 +3342,7 @@ const beforeCreate = ({
                 'IMAGE',
                 'FILE',
               ]}
-              onChange={(value: any) => {
+              onChange={(value: Properties[]) => {
                 setProperties(value);
                 setPropertiesValidation(false);
               }}
@@ -3342,38 +3358,45 @@ const beforeCreate = ({
         inputPrefab: PrefabReference,
       ): PrefabReference => {
         const boxPrefab = cloneStructure('Box');
-        setOption(
-          boxPrefab,
-          'innerSpacing',
-          (options: PrefabComponentOption[]) => ({
-            ...options,
-            value: ['M', '0rem', '0rem', '0rem'],
-          }),
-        );
-        const textPrefab = cloneStructure('Text');
-        setOption(
-          textPrefab,
-          'content',
-          (options: PrefabComponentOption[]) => ({
-            ...options,
-            value: [textValue],
-            configuration: { as: 'MULTILINE' },
-          }),
-        );
-        setOption(textPrefab, 'type', (options: PrefabComponentOption[]) => ({
-          ...options,
-          value: ['Body1'],
-        }));
-        setOption(
-          textPrefab,
-          'outerSpacing',
-          (options: PrefabComponentOption[]) => ({
-            ...options,
-            value: ['0rem', '0rem', 'S', '0rem'],
-          }),
-        );
-        boxPrefab.descendants.push(textPrefab);
-        boxPrefab.descendants.push(inputPrefab);
+        if (boxPrefab.type === 'COMPONENT') {
+          setOption(
+            boxPrefab,
+            'innerSpacing',
+            (options: PrefabComponentOption) => ({
+              ...options,
+              value: ['M', '0rem', '0rem', '0rem'],
+            }),
+          );
+
+          const textPrefab = cloneStructure('Text');
+          if (textPrefab.type === 'COMPONENT') {
+            setOption(
+              textPrefab,
+              'content',
+              (options: PrefabComponentOption) => ({
+                ...options,
+                value: [textValue],
+                configuration: { as: 'MULTILINE' },
+              }),
+            );
+            setOption(textPrefab, 'type', (options: PrefabComponentOption) => ({
+              ...options,
+              value: ['Body1'],
+            }));
+            setOption(
+              textPrefab,
+              'outerSpacing',
+              (options: PrefabComponentOption) => ({
+                ...options,
+                value: ['0rem', '0rem', 'S', '0rem'],
+              }),
+            );
+          }
+
+          boxPrefab.descendants.push(textPrefab);
+          boxPrefab.descendants.push(inputPrefab);
+        }
+
         return boxPrefab;
       };
 
@@ -3413,11 +3436,15 @@ const beforeCreate = ({
         '#titleText',
         newPrefab.structure,
       );
-      setOption(titleComponent, 'textColor', (originalOption: any) => ({
-        ...originalOption,
-        value: 'Dark',
-      }));
-      setOption(titleComponent, 'content', (opts: any) => ({
+      setOption(
+        titleComponent,
+        'textColor',
+        (originalOption: PrefabComponentOption) => ({
+          ...originalOption,
+          value: 'Dark',
+        }),
+      );
+      setOption(titleComponent, 'content', (opts: PrefabComponentOption) => ({
         ...opts,
         value: [`${data?.model.label}s`],
       }));
@@ -3427,179 +3454,195 @@ const beforeCreate = ({
         newPrefab.structure,
       );
 
-      setOption(dataTableComp, 'model', (opts: any) => ({
+      setOption(dataTableComp, 'model', (opts: PrefabComponentOption) => ({
         ...opts,
         value: modelId,
       }));
 
-      properties.forEach(
-        (property: {
-          defaultValue: null;
-          id: string[];
-          kind: string;
-          labonSael: string;
-          type: string;
-          format: string;
-        }) => {
-          let newProperty = property;
-          const inheritFormatKinds = [
-            'DATE',
-            'DATE_EXPRESSION',
-            'DATE_TIME',
-            'DATE_TIME_EXPRESSION',
-            'DECIMAL',
-            'DECIMAL_EXPRESSION',
-            'INTEGER',
-            'INTEGER_EXPRESSION',
-            'PRICE',
-            'PRICE_EXPRESSION',
-            'TIME',
-          ];
-          if (inheritFormatKinds.includes(property.kind)) {
-            newProperty = {
-              ...property,
-              format: 'INHERIT',
-            };
-          }
+      properties.forEach((property) => {
+        let newProperty = property;
+        const inheritFormatKinds = [
+          'DATE',
+          'DATE_EXPRESSION',
+          'DATE_TIME',
+          'DATE_TIME_EXPRESSION',
+          'DECIMAL',
+          'DECIMAL_EXPRESSION',
+          'INTEGER',
+          'INTEGER_EXPRESSION',
+          'PRICE',
+          'PRICE_EXPRESSION',
+          'TIME',
+        ];
+        if (property.kind && inheritFormatKinds.includes(property.kind)) {
+          newProperty = {
+            ...property,
+            format: 'INHERIT',
+          };
+        }
 
-          const dataTableColumnStructure = cloneStructure('Datatable Column');
-          if (dataTableColumnStructure.type !== 'COMPONENT') {
-            throw new Error(
-              `expected component prefab, found ${dataTableColumnStructure.type}`,
-            );
-          }
-
-          setOption(
-            dataTableColumnStructure,
-            'property',
-            (originalOption: any) => {
-              return {
-                ...originalOption,
-                value: newProperty,
-              };
-            },
+        const dataTableColumnStructure = cloneStructure('Datatable Column');
+        if (dataTableColumnStructure.type !== 'COMPONENT') {
+          throw new Error(
+            `expected component prefab, found ${dataTableColumnStructure.type}`,
           );
-          setOption(dataTableColumnStructure, 'type', (originalOption: any) => {
+        }
+
+        setOption(
+          dataTableColumnStructure,
+          'property',
+          (originalOption: PrefabComponentOption) => {
+            return {
+              ...originalOption,
+              value: newProperty.id,
+              // ??
+            };
+          },
+        );
+        setOption(
+          dataTableColumnStructure,
+          'type',
+          (originalOption: PrefabComponentOption) => {
             return {
               ...originalOption,
               value: 'Title6',
             };
-          });
-          dataTableComp.descendants.push(dataTableColumnStructure);
-        },
-      );
+          },
+        );
+        dataTableComp.descendants.push(dataTableColumnStructure);
+      });
 
-      const buttonColumn = cloneStructure('Datatable Column');
       const detailButton = cloneStructure('Button');
-      detailButton.ref = { id: '#detailButton' };
-      detailButton.style = {
-        overwrite: {
-          backgroundColor: {
-            type: 'STATIC',
-            value: 'transparent',
+      if (detailButton.type === 'COMPONENT') {
+        detailButton.ref = { id: '#detailButton' };
+        detailButton.style = {
+          overwrite: {
+            backgroundColor: {
+              type: 'STATIC',
+              value: 'transparent',
+            },
+            boxShadow: 'none',
+            color: {
+              type: 'THEME_COLOR',
+              value: 'accent2',
+            },
+            fontFamily: 'Roboto',
+            fontSize: '0.875rem',
+            fontStyle: 'none',
+            fontWeight: '400',
+            padding: ['0.6875rem', '0.6875rem'],
+            textDecoration: 'none',
+            textTransform: 'none',
           },
-          boxShadow: 'none',
-          color: {
-            type: 'THEME_COLOR',
-            value: 'accent2',
-          },
-          fontFamily: 'Roboto',
-          fontSize: '0.875rem',
-          fontStyle: 'none',
-          fontWeight: '400',
-          padding: ['0.6875rem', '0.6875rem'],
-          textDecoration: 'none',
-          textTransform: 'none',
-        },
-      };
-      setOption(detailButton, 'buttonText', (opts: any) => ({
-        ...opts,
-        value: [''],
-      }));
-      setOption(detailButton, 'icon', (opts: any) => ({
-        ...opts,
-        value: 'Info',
-      }));
+        };
+        setOption(
+          detailButton,
+          'buttonText',
+          (opts: PrefabComponentOption) => ({
+            ...opts,
+            value: [''],
+          }),
+        );
+        setOption(detailButton, 'icon', (opts: PrefabComponentOption) => ({
+          ...opts,
+          value: 'Info',
+        }));
+      }
       const editButton = cloneStructure('Button');
-      editButton.style = {
-        overwrite: {
-          backgroundColor: {
-            type: 'STATIC',
-            value: 'transparent',
+      if (editButton.type === 'COMPONENT') {
+        editButton.style = {
+          overwrite: {
+            backgroundColor: {
+              type: 'STATIC',
+              value: 'transparent',
+            },
+            boxShadow: 'none',
+            color: {
+              type: 'THEME_COLOR',
+              value: 'primary',
+            },
+            fontFamily: 'Roboto',
+            fontSize: '0.875rem',
+            fontStyle: 'none',
+            fontWeight: '400',
+            padding: ['0.6875rem', '0.6875rem'],
+            textDecoration: 'none',
+            textTransform: 'none',
           },
-          boxShadow: 'none',
-          color: {
-            type: 'THEME_COLOR',
-            value: 'primary',
-          },
-          fontFamily: 'Roboto',
-          fontSize: '0.875rem',
-          fontStyle: 'none',
-          fontWeight: '400',
-          padding: ['0.6875rem', '0.6875rem'],
-          textDecoration: 'none',
-          textTransform: 'none',
-        },
-      };
-      editButton.ref = { id: '#editButton' };
-      setOption(editButton, 'buttonText', (opts: any) => ({
-        ...opts,
-        value: [''],
-      }));
-      setOption(editButton, 'icon', (opts: any) => ({
-        ...opts,
-        value: 'Edit',
-      }));
+        };
+        editButton.ref = { id: '#editButton' };
+        setOption(editButton, 'buttonText', (opts: PrefabComponentOption) => ({
+          ...opts,
+          value: [''],
+        }));
+        setOption(editButton, 'icon', (opts: PrefabComponentOption) => ({
+          ...opts,
+          value: 'Edit',
+        }));
+      }
 
       const deleteButton = cloneStructure('Button');
-      deleteButton.ref = {
-        id: '#deleteButton',
-      };
-      deleteButton.style = {
-        overwrite: {
-          backgroundColor: {
-            type: 'STATIC',
-            value: 'transparent',
+      if (deleteButton.type === 'COMPONENT') {
+        deleteButton.ref = {
+          id: '#deleteButton',
+        };
+        deleteButton.style = {
+          overwrite: {
+            backgroundColor: {
+              type: 'STATIC',
+              value: 'transparent',
+            },
+            boxShadow: 'none',
+            color: {
+              type: 'STATIC',
+              value: 'red',
+            },
+            fontFamily: 'Roboto',
+            fontSize: '0.875rem',
+            fontStyle: 'none',
+            fontWeight: '400',
+            padding: ['0.6875rem', '0.6875rem'],
+            textDecoration: 'none',
+            textTransform: 'none',
           },
-          boxShadow: 'none',
-          color: {
-            type: 'STATIC',
-            value: 'red',
-          },
-          fontFamily: 'Roboto',
-          fontSize: '0.875rem',
-          fontStyle: 'none',
-          fontWeight: '400',
-          padding: ['0.6875rem', '0.6875rem'],
-          textDecoration: 'none',
-          textTransform: 'none',
-        },
-      };
+        };
 
-      setOption(deleteButton, 'buttonText', (opts: any) => ({
-        ...opts,
-        value: [''],
-      }));
-      setOption(deleteButton, 'icon', (opts: any) => ({
-        ...opts,
-        value: 'Delete',
-      }));
+        setOption(
+          deleteButton,
+          'buttonText',
+          (opts: PrefabComponentOption) => ({
+            ...opts,
+            value: [''],
+          }),
+        );
+        setOption(deleteButton, 'icon', (opts: PrefabComponentOption) => ({
+          ...opts,
+          value: 'Delete',
+        }));
+      }
 
       const boxComp = cloneStructure('Box');
-      setOption(boxComp, 'innerSpacing', (opts: any) => ({
-        ...opts,
-        value: ['0rem', '0rem', '0rem', '0rem'],
-      }));
-      boxComp.descendants = [detailButton, editButton, deleteButton];
-      buttonColumn.descendants = [boxComp];
+      if (boxComp.type === 'COMPONENT') {
+        setOption(boxComp, 'innerSpacing', (opts: PrefabComponentOption) => ({
+          ...opts,
+          value: ['0rem', '0rem', '0rem', '0rem'],
+        }));
+        setOption(boxComp, 'alignment', (opts: PrefabComponentOption) => ({
+          ...opts,
+          value: 'flex-end',
+        }));
+        boxComp.descendants = [detailButton, editButton, deleteButton];
+      }
+
+      const buttonColumn = cloneStructure('Datatable Column');
+      if (buttonColumn.type === 'COMPONENT') {
+        buttonColumn.descendants = [boxComp];
+      }
       dataTableComp.descendants.push(buttonColumn);
-      setOption(boxComp, 'alignment', (opts: any) => ({
-        ...opts,
-        value: 'flex-end',
-      }));
+
       // set create form
       const filteredproperties = properties.filter(
-        (prop: Property) =>
+        (prop: Properties) =>
           prop.label !== 'Created at' &&
           prop.label !== 'Updated at' &&
           prop.label !== 'Id',
@@ -3612,7 +3655,7 @@ const beforeCreate = ({
         );
         createForm.id = createFormId;
 
-        const result: ActionResultsProps = await prepareAction(
+        const result = await prepareAction(
           createFormId,
           idProperty,
           filteredproperties,
@@ -3723,16 +3766,16 @@ const beforeCreate = ({
                       inputVariable,
                     ),
                   );
-                case PropertyKind.IMAGE:
-                  return inputStructure(
-                    prop.label,
-                    makeBettyInput(
-                      BettyPrefabs.IMAGE,
-                      model,
-                      prop,
-                      inputVariable,
-                    ),
-                  );
+                // case PropertyKind.IMAGE:
+                //   return inputStructure(
+                //     prop.label,
+                //     makeBettyInput(
+                //       BettyPrefabs.IMAGE,
+                //       model,
+                //       prop,
+                //       inputVariable,
+                //     ),
+                //   );
                 case PropertyKind.BOOLEAN:
                   return inputStructure(
                     prop.label,
@@ -3766,7 +3809,10 @@ const beforeCreate = ({
               }
             };
             const createFormInputPrefabs = generateInputPrefabs();
-            if (createFormInputPrefabs.type === 'COMPONENT') {
+            if (
+              createFormInputPrefabs.type === 'COMPONENT' &&
+              createFormInputPrefabs.descendants[1].type === 'COMPONENT'
+            ) {
               setOption(
                 createFormInputPrefabs.descendants[1],
                 'margin',
@@ -3792,13 +3838,13 @@ const beforeCreate = ({
           },
         );
 
-        setOption(createForm, 'actionId', (opts: any) => ({
+        setOption(createForm, 'actionId', (opts: PrefabComponentOption) => ({
           ...opts,
           value: result.action.actionId,
           configuration: { disabled: true },
         }));
 
-        setOption(createForm, 'model', (opts: any) => ({
+        setOption(createForm, 'model', (opts: PrefabComponentOption) => ({
           ...opts,
           value: modelId,
           configuration: {
@@ -3812,10 +3858,14 @@ const beforeCreate = ({
         '#detailDatacontainer',
         newPrefab.structure,
       );
-      setOption(detailDatacontainer, 'model', (opts: any) => ({
-        ...opts,
-        value: modelId,
-      }));
+      setOption(
+        detailDatacontainer,
+        'model',
+        (opts: PrefabComponentOption) => ({
+          ...opts,
+          value: modelId,
+        }),
+      );
       properties.map((prop) =>
         detailDatacontainer.descendants.push(makeDetail(prop)),
       );
@@ -3824,18 +3874,18 @@ const beforeCreate = ({
       const editForm = getDescendantByRef('#editForm', newPrefab.structure);
       editForm.id = editFormId;
       if (idProperty && model) {
-        const result: ActionResultsProps = await prepareAction(
+        const result = await prepareAction(
           editFormId,
           idProperty,
           filteredproperties,
           'update',
         );
-        setOption(editForm, 'actionId', (opts: any) => ({
+        setOption(editForm, 'actionId', (opts: PrefabComponentOption) => ({
           ...opts,
           value: result.action.actionId,
           configuration: { disabled: true },
         }));
-        setOption(editForm, 'model', (opts: any) => ({
+        setOption(editForm, 'model', (opts: PrefabComponentOption) => ({
           ...opts,
           value: modelId,
           configuration: {
@@ -3855,7 +3905,7 @@ const beforeCreate = ({
                       model,
                       prop,
                       inputVariable,
-                      result.IdProperties,
+                      result.relatedIdProperties,
                     ),
                   );
                 case PropertyKind.EMAIL_ADDRESS:
@@ -3866,7 +3916,7 @@ const beforeCreate = ({
                       model,
                       prop,
                       inputVariable,
-                      result.IdProperties,
+                      result.relatedIdProperties,
                     ),
                   );
                 case PropertyKind.DECIMAL:
@@ -3877,7 +3927,7 @@ const beforeCreate = ({
                       model,
                       prop,
                       inputVariable,
-                      result.IdProperties,
+                      result.relatedIdProperties,
                     ),
                   );
                 case PropertyKind.TEXT:
@@ -3888,7 +3938,7 @@ const beforeCreate = ({
                       model,
                       prop,
                       inputVariable,
-                      result.IdProperties,
+                      result.relatedIdProperties,
                     ),
                   );
                 case PropertyKind.PRICE:
@@ -3899,7 +3949,7 @@ const beforeCreate = ({
                       model,
                       prop,
                       inputVariable,
-                      result.IdProperties,
+                      result.relatedIdProperties,
                     ),
                   );
                 case PropertyKind.PASSWORD:
@@ -3910,7 +3960,7 @@ const beforeCreate = ({
                       model,
                       prop,
                       inputVariable,
-                      result.IdProperties,
+                      result.relatedIdProperties,
                     ),
                   );
                 case PropertyKind.DATE:
@@ -3921,7 +3971,7 @@ const beforeCreate = ({
                       model,
                       prop,
                       inputVariable,
-                      result.IdProperties,
+                      result.relatedIdProperties,
                     ),
                   );
                 case PropertyKind.DATE_TIME:
@@ -3932,7 +3982,7 @@ const beforeCreate = ({
                       model,
                       prop,
                       inputVariable,
-                      result.IdProperties,
+                      result.relatedIdProperties,
                     ),
                   );
                 case PropertyKind.TIME:
@@ -3943,7 +3993,7 @@ const beforeCreate = ({
                       model,
                       prop,
                       inputVariable,
-                      result.IdProperties,
+                      result.relatedIdProperties,
                     ),
                   );
                 case PropertyKind.FILE:
@@ -3954,20 +4004,20 @@ const beforeCreate = ({
                       model,
                       prop,
                       inputVariable,
-                      result.IdProperties,
+                      result.relatedIdProperties,
                     ),
                   );
-                case PropertyKind.IMAGE:
-                  return inputStructure(
-                    prop.label,
-                    makeBettyUpdateInput(
-                      BettyPrefabs.IMAGE,
-                      model,
-                      prop,
-                      inputVariable,
-                      result.IdProperties,
-                    ),
-                  );
+                // case PropertyKind.IMAGE:
+                //   return inputStructure(
+                //     prop.label,
+                //     makeBettyUpdateInput(
+                //       BettyPrefabs.IMAGE,
+                //       model,
+                //       prop,
+                //       inputVariable,
+                //       result.relatedIdProperties,
+                //     ),
+                //   );
                 case PropertyKind.BOOLEAN:
                   return inputStructure(
                     prop.label,
@@ -3976,7 +4026,7 @@ const beforeCreate = ({
                       model,
                       prop,
                       inputVariable,
-                      result.IdProperties,
+                      result.relatedIdProperties,
                     ),
                   );
                 case PropertyKind.LIST:
@@ -3987,7 +4037,7 @@ const beforeCreate = ({
                       model,
                       prop,
                       inputVariable,
-                      result.IdProperties,
+                      result.relatedIdProperties,
                     ),
                   );
                 default:
@@ -3998,13 +4048,16 @@ const beforeCreate = ({
                       model,
                       prop,
                       inputVariable,
-                      result.IdProperties,
+                      result.relatedIdProperties,
                     ),
                   );
               }
             };
             const editFormInput = generateInputPrefabs();
-            if (editFormInput.type === 'COMPONENT') {
+            if (
+              editFormInput.type === 'COMPONENT' &&
+              editFormInput.descendants[1].type === 'COMPONENT'
+            ) {
               setOption(
                 editFormInput.descendants[1],
                 'margin',
@@ -4044,135 +4097,136 @@ const beforeCreate = ({
       const deleteForm = getDescendantByRef('#deleteForm', newPrefab.structure);
       deleteForm.id = deleteButtonId;
 
-      const result = await prepareAction(
-        deleteButtonId,
-        idProperty,
-        undefined,
-        'delete',
-      );
-      setOption(deleteForm, 'actionId', (opts: any) => ({
-        ...opts,
-        value: result.action.actionId,
-        configuration: { disabled: true },
-      }));
-      setOption(deleteForm, 'model', (opts: any) => ({
-        ...opts,
-        value: modelId,
-        configuration: {
-          disabled: true,
-        },
-      }));
-
-      const deleteSubmitButton = cloneStructure('Submit Button');
-      deleteSubmitButton.style = {
-        overwrite: {
-          backgroundColor: {
-            type: 'STATIC',
-            value: 'red',
-          },
-          boxShadow: 'none',
-          color: {
-            type: 'THEME_COLOR',
-            value: 'white',
-          },
-          fontFamily: 'Roboto',
-          fontSize: '0.875rem',
-          fontStyle: 'none',
-          fontWeight: '400',
-          padding: ['0.6875rem', '1.375rem'],
-          textDecoration: 'none',
-          textTransform: 'none',
-        },
-      };
-      setOption(deleteSubmitButton, 'buttonText', (opts: any) => ({
-        ...opts,
-        value: ['Delete'],
-      }));
-
-      deleteForm.descendants.push(deleteSubmitButton);
-
-      deleteForm.descendants.push(
-        makeBettyUpdateInput(
-          BettyPrefabs.HIDDEN,
-          model,
+      if (idProperty && model) {
+        const result = await prepareAction(
+          deleteButtonId,
           idProperty,
-          result.recordInputVariable,
-        ),
-      );
+          undefined,
+          'delete',
+        );
+        setOption(deleteForm, 'actionId', (opts: PrefabComponentOption) => ({
+          ...opts,
+          value: result.action.actionId,
+          configuration: { disabled: true },
+        }));
 
-      if (idProperty) {
-        const setCurrentDeleteRecord = {
-          name: 'setCurrentRecord',
-          sourceEvent: 'Click',
-          targetOptionName: 'currentRecord',
-          parameters: [
-            {
-              id: [idProperty.id],
-              parameter: 'argument',
-            },
-          ],
-          ref: {
-            sourceComponentId: '#deleteButton',
-            targetComponentId: '#deleteForm',
+        setOption(deleteForm, 'model', (opts: PrefabComponentOption) => ({
+          ...opts,
+          value: modelId,
+          configuration: {
+            disabled: true,
           },
-          type: 'Global',
-        };
+        }));
 
-        const setCurrentDetailRecord = {
-          name: 'setCurrentRecord',
-          sourceEvent: 'Click',
-          targetOptionName: 'currentRecord',
-          parameters: [
-            {
-              id: [idProperty.id],
-              parameter: 'argument',
+        const deleteSubmitButton = cloneStructure('Submit Button');
+        if (deleteSubmitButton.type === 'COMPONENT') {
+          deleteSubmitButton.style = {
+            overwrite: {
+              backgroundColor: {
+                type: 'STATIC',
+                value: 'red',
+              },
+              boxShadow: 'none',
+              color: {
+                type: 'THEME_COLOR',
+                value: 'white',
+              },
+              fontFamily: 'Roboto',
+              fontSize: '0.875rem',
+              fontStyle: 'none',
+              fontWeight: '400',
+              padding: ['0.6875rem', '1.375rem'],
+              textDecoration: 'none',
+              textTransform: 'none',
             },
-          ],
-          ref: {
-            sourceComponentId: '#detailButton',
-            targetComponentId: '#detailDatacontainer',
-          },
-          type: 'Global',
-        };
+          };
+          setOption(
+            deleteSubmitButton,
+            'buttonText',
+            (opts: PrefabComponentOption) => ({
+              ...opts,
+              value: ['Delete'],
+            }),
+          );
+        }
+        deleteForm.descendants.push(deleteSubmitButton);
 
-        const setCurrentEditOnDetailsRecord = {
-          name: 'setCurrentRecord',
-          sourceEvent: 'Click',
-          targetOptionName: 'currentRecord',
-          parameters: [
-            {
-              id: [idProperty.id],
-              parameter: 'argument',
+        deleteForm.descendants.push(
+          makeBettyUpdateInput(
+            BettyPrefabs.HIDDEN,
+            model,
+            idProperty,
+            result.recordInputVariable,
+          ),
+        );
+      }
+      if (idProperty && newPrefab.interactions) {
+        newPrefab.interactions.push(
+          {
+            name: 'setCurrentRecord',
+            sourceEvent: 'Click',
+            targetOptionName: 'currentRecord',
+            parameters: [
+              {
+                id: [idProperty.id],
+                parameter: 'argument',
+              },
+            ],
+            ref: {
+              sourceComponentId: '#deleteButton',
+              targetComponentId: '#deleteForm',
             },
-          ],
-          ref: {
-            sourceComponentId: '#detailButton',
-            targetComponentId: '#editForm',
-          },
-          type: 'Global',
-        };
-
-        const setCurrentEditRecord = {
-          name: 'setCurrentRecord',
-          sourceEvent: 'Click',
-          targetOptionName: 'currentRecord',
-          parameters: [
-            {
-              id: [idProperty.id],
-              parameter: 'argument',
+            type: 'Global',
+          } as PrefabInteraction,
+          {
+            name: 'setCurrentRecord',
+            sourceEvent: 'Click',
+            targetOptionName: 'currentRecord',
+            parameters: [
+              {
+                id: [idProperty.id],
+                parameter: 'argument',
+              },
+            ],
+            ref: {
+              sourceComponentId: '#detailButton',
+              targetComponentId: '#detailDatacontainer',
             },
-          ],
-          ref: {
-            sourceComponentId: '#editButton',
-            targetComponentId: '#editForm',
-          },
-          type: 'Global',
-        };
-
-        newPrefab.interactions.push(setCurrentDeleteRecord);
-        newPrefab.interactions.push(setCurrentDetailRecord);
-        newPrefab.interactions.push(setCurrentEditOnDetailsRecord);
-        newPrefab.interactions.push(setCurrentEditRecord);
+            type: 'Global',
+          } as PrefabInteraction,
+          {
+            name: 'setCurrentRecord',
+            sourceEvent: 'Click',
+            targetOptionName: 'currentRecord',
+            parameters: [
+              {
+                id: [idProperty.id],
+                parameter: 'argument',
+              },
+            ],
+            ref: {
+              sourceComponentId: '#detailButton',
+              targetComponentId: '#editForm',
+            },
+            type: 'Global',
+          } as PrefabInteraction,
+          {
+            name: 'setCurrentRecord',
+            sourceEvent: 'Click',
+            targetOptionName: 'currentRecord',
+            parameters: [
+              {
+                id: [idProperty.id],
+                parameter: 'argument',
+              },
+            ],
+            ref: {
+              sourceComponentId: '#editButton',
+              targetComponentId: '#editForm',
+            },
+            type: 'Global',
+          } as PrefabInteraction,
+        );
       }
       save(newPrefab);
     },
