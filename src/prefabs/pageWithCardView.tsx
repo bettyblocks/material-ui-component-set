@@ -10,7 +10,6 @@ import {
   toggle,
   color,
   ThemeColor,
-  PrefabReference,
   BeforeCreateArgs,
   variable,
   font,
@@ -21,8 +20,9 @@ import {
   PrefabInteraction,
   InteractionType,
   number,
-  PrefabComponent,
   PrefabComponentOption,
+  PrefabReference,
+  PrefabComponent,
 } from '@betty-blocks/component-sdk';
 import {
   Box as prefabBox,
@@ -77,7 +77,6 @@ const interactions: PrefabInteraction[] = [
 ];
 
 const attrs = {
-  name: 'Card view',
   icon: Icon.GridIcon,
   type: 'page',
   description:
@@ -130,6 +129,19 @@ const beforeCreate = ({
   const [headerPartialId, setHeaderPartialId] = React.useState('');
   const [footerPartialId, setFooterPartialId] = React.useState('');
 
+  const enrichVarObj = (obj: any) => {
+    const returnObject = obj;
+    if (data && data.model) {
+      const property = data.model.properties.find(
+        (prop: any) => prop.id === obj.id[0],
+      );
+      if (property) {
+        returnObject.name = `{{ ${data.model.name}.${property.name} }}`;
+      }
+    }
+    return returnObject;
+  };
+
   function treeSearch(
     dirName: string,
     array: PrefabReference[],
@@ -149,19 +161,6 @@ const beforeCreate = ({
     }
     return undefined;
   }
-
-  const enrichVarObj = (obj: PropertyStateProps) => {
-    const returnObject = obj;
-    if (data && data.model) {
-      const property = data.model.properties.find(
-        (prop: any) => prop.id === obj.id[0],
-      );
-      if (property) {
-        returnObject.name = `{{ ${data.model.name}.${property.name} }}`;
-      }
-    }
-    return returnObject;
-  };
 
   const stepper = {
     setStep: (step: number) => {
@@ -393,7 +392,7 @@ const beforeCreate = ({
             'backgroundUrl',
             (originalOption: PrefabComponentOption) => ({
               ...originalOption,
-              value: [`${enrichVarObj(imageProperty)}`],
+              value: [enrichVarObj(imageProperty)],
             }),
           );
         }
@@ -408,7 +407,7 @@ const beforeCreate = ({
             'title',
             (originalOption: PrefabComponentOption) => ({
               ...originalOption,
-              value: [`${enrichVarObj(titleProperty)}`],
+              value: [enrichVarObj(titleProperty)],
             }),
           );
           if (newPrefab.interactions) {
@@ -437,7 +436,7 @@ const beforeCreate = ({
             'subHeader',
             (originalOption: PrefabComponentOption) => ({
               ...originalOption,
-              value: [`${enrichVarObj(subheaderProperty)}`],
+              value: [enrichVarObj(subheaderProperty)],
             }),
           );
         }
@@ -453,7 +452,7 @@ const beforeCreate = ({
             'content',
             (originalOption: PrefabComponentOption) => ({
               ...originalOption,
-              value: [`${enrichVarObj(descriptionProperty)}`],
+              value: [enrichVarObj(descriptionProperty)],
             }),
           );
         }
@@ -508,21 +507,6 @@ const beforeCreate = ({
             onClose={close}
             onSkip={() => {
               const newPrefab = { ...prefab };
-              // #region Partial Selection
-              const prefabFooter = treeSearch('#Footer', newPrefab.structure);
-              const prefabHeader = treeSearch('#Header', newPrefab.structure);
-              if (headerPartialId && prefabHeader) {
-                prefabHeader.descendants = [
-                  { type: 'PARTIAL', partialId: headerPartialId },
-                ];
-              }
-
-              if (footerPartialId && prefabFooter) {
-                prefabFooter.descendants = [
-                  { type: 'PARTIAL', partialId: footerPartialId },
-                ];
-              }
-              // #endregion
               save(newPrefab);
             }}
             canSave={stepNumber === stepper.stepAmount}

@@ -10,7 +10,6 @@ import {
   toggle,
   color,
   ThemeColor,
-  PrefabReference,
   BeforeCreateArgs,
   variable,
   font,
@@ -22,6 +21,9 @@ import {
   InteractionType,
   childSelector,
   number,
+  PrefabComponentOption,
+  PrefabReference,
+  PrefabComponent,
 } from '@betty-blocks/component-sdk';
 import {
   Box as prefabBox,
@@ -146,7 +148,7 @@ const beforeCreate = ({
     Button,
     PartialSelector,
   },
-  helpers: { useModelQuery },
+  helpers: { useModelQuery, setOption },
 }: BeforeCreateArgs) => {
   const [showValidation, setShowValidation] = React.useState(false);
   const [modelId, setModelId] = React.useState('');
@@ -170,29 +172,7 @@ const beforeCreate = ({
   const [headerPartialId, setHeaderPartialId] = React.useState('');
   const [footerPartialId, setFooterPartialId] = React.useState('');
 
-  const getDescendantByRef = (
-    refValue: string,
-    structure: PrefabReference[],
-  ): any =>
-    structure.reduce((acc: PrefabReference, component: PrefabReference) => {
-      if (acc) return acc;
-      if (
-        component.type === 'COMPONENT' &&
-        // eslint-disable-next-line no-prototype-builtins
-        component.ref
-          ? Object.values(component.ref).indexOf(refValue) > -1
-          : undefined
-      ) {
-        return component;
-      }
-      if (component.type === 'PARTIAL') {
-        return acc;
-      }
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      return getDescendantByRef(refValue, component.descendants);
-    });
-
-  const enrichVarObj = (obj: PropertyStateProps) => {
+  const enrichVarObj = (obj: any) => {
     const returnObject = obj;
     if (data && data.model) {
       const property = data.model.properties.find(
@@ -204,6 +184,26 @@ const beforeCreate = ({
     }
     return returnObject;
   };
+
+  function treeSearch(
+    dirName: string,
+    array: PrefabReference[],
+  ): PrefabComponent | undefined {
+    // eslint-disable-next-line no-plusplus
+    for (let i = 0; i < array.length; i++) {
+      const q = array[i];
+      if (q.type === 'COMPONENT') {
+        if (q.ref && q.ref.id === dirName) {
+          return q;
+        }
+      }
+      if (q.type !== 'PARTIAL' && q.descendants && q.descendants.length) {
+        const result = treeSearch(dirName, q.descendants);
+        if (result) return result;
+      }
+    }
+    return undefined;
+  }
 
   const stepper = {
     setStep: (step: number) => {
@@ -414,21 +414,45 @@ const beforeCreate = ({
       }
       const newPrefab = { ...prefab };
       if (modelId) {
-        const dataList = getDescendantByRef('#dataList', newPrefab.structure);
-        dataList.options[0].value = modelId;
+        const dataList = treeSearch('#dataList', newPrefab.structure);
+        if (!dataList) throw new Error('Data list not found');
+        setOption(
+          dataList,
+          'model',
+          (originalOption: PrefabComponentOption) => ({
+            ...originalOption,
+            value: modelId,
+          }),
+        );
+        // dataList.options[0].value = modelId;
         if (imageProperty.id) {
-          const imageBoxStructure = getDescendantByRef(
+          const imageBoxStructure = treeSearch(
             '#BoxImage',
             newPrefab.structure,
           );
-          imageBoxStructure.options[15].value = [enrichVarObj(imageProperty)];
+          if (!imageBoxStructure) throw new Error('Image box not found');
+          setOption(
+            imageBoxStructure,
+            'backgroundUrl',
+            (originalOption: PrefabComponentOption) => ({
+              ...originalOption,
+              value: [enrichVarObj(imageProperty)],
+            }),
+          );
+          // imageBoxStructure.options[15].value = [enrichVarObj(imageProperty)];
         }
         if (titleProperty.id) {
-          const titleStructure = getDescendantByRef(
-            '#Title',
-            newPrefab.structure,
+          const titleStructure = treeSearch('#Title', newPrefab.structure);
+          if (!titleStructure) throw new Error('Title not found');
+          setOption(
+            titleStructure,
+            'content',
+            (originalOption: PrefabComponentOption) => ({
+              ...originalOption,
+              value: [enrichVarObj(titleProperty)],
+            }),
           );
-          titleStructure.options[0].value = [enrichVarObj(titleProperty)];
+          // titleStructure.options[0].value = [enrichVarObj(titleProperty)];
           if (newPrefab.interactions) {
             newPrefab.interactions.push(
               {
@@ -469,60 +493,140 @@ const beforeCreate = ({
           }
         }
         if (subheaderProperty.id) {
-          const subHeadertructure = getDescendantByRef(
+          const subHeadertructure = treeSearch(
             '#SubHeader',
             newPrefab.structure,
           );
-          subHeadertructure.options[0].value = [
-            enrichVarObj(subheaderProperty),
-          ];
+          if (!subHeadertructure) throw new Error('Subheader not found');
+          setOption(
+            subHeadertructure,
+            'content',
+            (originalOption: PrefabComponentOption) => ({
+              ...originalOption,
+              value: [enrichVarObj(subheaderProperty)],
+            }),
+          );
+          // subHeadertructure.options[0].value = [
+          //   enrichVarObj(subheaderProperty),
+          // ];
         }
         if (descriptionProperty.id) {
-          const descriptionStructure = getDescendantByRef(
+          const descriptionStructure = treeSearch(
             '#Description',
             newPrefab.structure,
           );
-          descriptionStructure.options[0].value = [
-            enrichVarObj(descriptionProperty),
-          ];
+          if (!descriptionStructure) throw new Error('Description not found');
+          setOption(
+            descriptionStructure,
+            'content',
+            (originalOption: PrefabComponentOption) => ({
+              ...originalOption,
+              value: [enrichVarObj(descriptionProperty)],
+            }),
+          );
+
+          // descriptionStructure.options[0].value = [
+          //   enrichVarObj(descriptionProperty),
+          // ];
         }
 
-        const dataGrid = getDescendantByRef('#dataGrid', newPrefab.structure);
-        dataGrid.options[0].value = modelId;
+        const dataGrid = treeSearch('#dataGrid', newPrefab.structure);
+        if (!dataGrid) throw new Error('Data grid not found');
+        setOption(
+          dataGrid,
+          'model',
+          (originalOption: PrefabComponentOption) => ({
+            ...originalOption,
+            value: modelId,
+          }),
+        );
+        // dataGrid.options[0].value = modelId;
 
         if (imageProperty.id) {
-          const imageBoxStructure = getDescendantByRef(
+          const imageBoxStructure = treeSearch(
             '#GridBoxImage',
             newPrefab.structure,
           );
-          imageBoxStructure.options[15].value = [enrichVarObj(imageProperty)];
+          if (!imageBoxStructure) throw new Error('Image box not found');
+          setOption(
+            imageBoxStructure,
+            'backgroundUrl',
+            (originalOption: PrefabComponentOption) => ({
+              ...originalOption,
+              value: [enrichVarObj(imageProperty)],
+            }),
+          );
+          // imageBoxStructure.options[15].value = [enrichVarObj(imageProperty)];
         }
+        const titleStructure = treeSearch(
+          '#gridSubHeader',
+          newPrefab.structure,
+        );
+        if (!titleStructure) throw new Error('No title structure found');
         if (titleProperty.id) {
-          dataGrid.descendants[0].descendants[1].options[2].value = [
-            enrichVarObj(titleProperty),
-          ];
+          setOption(
+            titleStructure,
+            'title',
+            (originalOption: PrefabComponentOption) => ({
+              ...originalOption,
+              value: [enrichVarObj(titleProperty)],
+            }),
+          );
         }
+        // if (titleProperty.id) {
+        //   dataGrid.descendants[0].descendants[1].options[2].value = [
+        //     enrichVarObj(titleProperty),
+        //   ];
+        // }
         if (subheaderProperty.id) {
-          dataGrid.descendants[0].descendants[1].options[3].value = [
-            enrichVarObj(subheaderProperty),
-          ];
+          setOption(
+            titleStructure,
+            'subHeader',
+            (originalOption: PrefabComponentOption) => ({
+              ...originalOption,
+              value: [enrichVarObj(subheaderProperty)],
+            }),
+          );
         }
+        // if (subheaderProperty.id) {
+        //   dataGrid.descendants[0].descendants[1].options[3].value = [
+        //     enrichVarObj(subheaderProperty),
+        //   ];
+        // }
         if (descriptionProperty.id) {
-          dataGrid.descendants[0].descendants[2].descendants[0].descendants[0].options[0].value =
-            [enrichVarObj(descriptionProperty)];
+          const descriptionStructure = treeSearch(
+            '#gridDescription',
+            newPrefab.structure,
+          );
+          if (!descriptionStructure)
+            throw new Error('No description structure found');
+          setOption(
+            descriptionStructure,
+            'content',
+            (originalOption: PrefabComponentOption) => ({
+              ...originalOption,
+              value: [enrichVarObj(descriptionProperty)],
+            }),
+          );
         }
+        // if (descriptionProperty.id) {
+        //   dataGrid.descendants[0].descendants[2].descendants[0].descendants[0].options[0].value =
+        //     [enrichVarObj(descriptionProperty)];
+        // }
 
         // #region Partial Selection
-        const prefabFooter = getDescendantByRef('#Footer', newPrefab.structure);
-        const prefabHeader = getDescendantByRef('#Header', newPrefab.structure);
-        if (headerPartialId) {
-          prefabHeader.descendants = [{ type: 'PARTIAL', partialId: '' }];
-          prefabHeader.descendants[0].partialId = headerPartialId;
+        const prefabFooter = treeSearch('#Footer', newPrefab.structure);
+        const prefabHeader = treeSearch('#Header', newPrefab.structure);
+        if (headerPartialId && prefabHeader) {
+          prefabHeader.descendants = [
+            { type: 'PARTIAL', partialId: headerPartialId },
+          ];
         }
 
-        if (footerPartialId) {
-          prefabFooter.descendants = [{ type: 'PARTIAL', partialId: '' }];
-          prefabFooter.descendants[0].partialId = footerPartialId;
+        if (footerPartialId && prefabFooter) {
+          prefabFooter.descendants = [
+            { type: 'PARTIAL', partialId: footerPartialId },
+          ];
         }
         // #endregion
         save(newPrefab);

@@ -1,4 +1,4 @@
-export declare enum PropertyKind {
+declare enum PropertyKind {
   AUTO_INCREMENT = 'AUTO_INCREMENT',
   BELONGS_TO = 'BELONGS_TO',
   BOOLEAN = 'BOOLEAN',
