@@ -3,74 +3,33 @@ import * as React from 'react';
 import {
   prefab as makePrefab,
   Icon,
-  toggle,
   sizes,
-  showIf,
   variable,
   option,
   icon,
   ThemeColor,
   color,
-  size,
-  buttongroup,
   font,
   hideIf,
-  text,
   PrefabReference,
   component,
-  PrefabInteraction,
-  PrefabComponentOption,
-  BeforeCreateArgs,
 } from '@betty-blocks/component-sdk';
 
 import {
-  AppBar,
   Box,
   boxOptions,
   Button,
   buttonOptions,
   Column,
   columnOptions,
-  DataContainer,
   DataList,
-  DataTable,
-  dataTableOptions,
-  Dialog,
-  dialogOptions,
-  Drawer,
-  DrawerBar,
-  drawerBarOptions,
-  DrawerContainer,
-  drawerContainerOptions,
-  drawerOptions,
-  FormErrorAlert,
-  Grid,
-  gridOptions,
-  OpenPageButton,
-  openPageButtonOptions,
-  Paper,
   Row,
   rowOptions,
-  SubmitButton,
-  submitButtonOptions,
-  Tab,
-  tabOptions,
-  Tabs,
-  tabsOptions,
   Text,
   textOptions,
 } from './structures';
 import { options as defaults } from './structures/ActionJSForm/options';
 import { CheckboxInput } from './structures/CheckboxInput';
-
-interface ActionResultsProps {
-  variables: Record<string, any>;
-  action: any;
-  IdProperties: any;
-  recordInputVariable: any;
-}
-
-//const interactions = [] as PrefabInteraction[];
 
 const attrs = {
   name: 'Checklist page test',
@@ -173,7 +132,7 @@ const prefabStructure = [
             },
             [],
           ),
-          DataList({ref: {id: '#dataList'}}, [
+          DataList({ ref: { id: '#dataList' } }, [
             component(
               'Form Beta',
               {
@@ -201,7 +160,7 @@ const prefabStructure = [
                         },
                       },
                       [
-                        CheckboxInput({ref: {id: '#titleText'}}, []),
+                        CheckboxInput({ ref: { id: '#titleText' } }, []),
                         Box(
                           {
                             options: {
@@ -353,21 +312,23 @@ const prefabStructure = [
                             },
                           },
                           [
-                            Column({}, [Text(
-                              {
-                                ref: {id: '#descriptionText'},
-                                options: {
-                                  ...textOptions,
-                                  type: font('Font', {
-                                    value: ['Title4'],
-                                  }),
-                                  textColor: color('Text color', {
-                                    value: ThemeColor.DARK,
-                                  }),
+                            Column({}, [
+                              Text(
+                                {
+                                  ref: { id: '#descriptionText' },
+                                  options: {
+                                    ...textOptions,
+                                    type: font('Font', {
+                                      value: ['Title4'],
+                                    }),
+                                    textColor: color('Text color', {
+                                      value: ThemeColor.DARK,
+                                    }),
+                                  },
                                 },
-                              },
-                              [],
-                            ),],),
+                                [],
+                              ),
+                            ]),
                           ],
                         ),
                       ],
@@ -2466,24 +2427,17 @@ const beforeCreate = ({
     Content,
     Field,
     Footer,
+    // eslint-disable-next-line @typescript-eslint/no-shadow
     Text,
+    // eslint-disable-next-line @typescript-eslint/no-shadow
     Box,
     ModelSelector,
     PropertySelector,
+    // eslint-disable-next-line @typescript-eslint/no-shadow
     Button,
     PartialSelector,
   },
-  helpers: {
-    useModelQuery,
-    prepareAction,
-    cloneStructure,
-    setOption,
-    createUuid,
-    makeBettyInput,
-    makeBettyUpdateInput,
-    PropertyKind,
-    BettyPrefabs,
-  },
+  helpers: { useModelQuery },
 }: any) => {
   const [showValidation, setShowValidation] = React.useState(false);
   const [modelId, setModelId] = React.useState('');
@@ -2501,6 +2455,7 @@ const beforeCreate = ({
   const [footerPartialId, setFooterPartialId] = React.useState('');
 
   const getDescendantByRef = (refValue: string, structure: any) =>
+    // eslint-disable-next-line @typescript-eslint/no-shadow
     structure.reduce((acc: string, component: PrefabReference) => {
       if (acc) return acc;
       if (
@@ -2648,7 +2603,7 @@ const beforeCreate = ({
         return;
       }
       const newPrefab = { ...originalPrefab };
-      console.log(newPrefab.structure)
+      console.log(newPrefab.structure);
       if (modelId) {
         const dataList = getDescendantByRef('#dataList', newPrefab.structure);
         dataList.options[0].value = modelId;
@@ -2678,7 +2633,10 @@ const beforeCreate = ({
         } else {
           partialHeader.descendants[0] = defaultHeaderstructure;
         }
-        const partialFooter = getDescendantByRef('#Footer', newPrefab.structure);
+        const partialFooter = getDescendantByRef(
+          '#Footer',
+          newPrefab.structure,
+        );
         if (footerPartialId) {
           partialFooter.descendants[0].partialId = footerPartialId;
         } else {
