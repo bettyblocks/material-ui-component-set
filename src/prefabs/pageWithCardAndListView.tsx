@@ -424,7 +424,6 @@ const beforeCreate = ({
             value: modelId,
           }),
         );
-        // dataList.options[0].value = modelId;
         if (imageProperty.id) {
           const imageBoxStructure = treeSearch(
             '#BoxImage',
@@ -439,7 +438,6 @@ const beforeCreate = ({
               value: [enrichVarObj(imageProperty)],
             }),
           );
-          // imageBoxStructure.options[15].value = [enrichVarObj(imageProperty)];
         }
         if (titleProperty.id) {
           const titleStructure = treeSearch('#Title', newPrefab.structure);
@@ -452,7 +450,6 @@ const beforeCreate = ({
               value: [enrichVarObj(titleProperty)],
             }),
           );
-          // titleStructure.options[0].value = [enrichVarObj(titleProperty)];
           if (newPrefab.interactions) {
             newPrefab.interactions.push(
               {
@@ -506,9 +503,6 @@ const beforeCreate = ({
               value: [enrichVarObj(subheaderProperty)],
             }),
           );
-          // subHeadertructure.options[0].value = [
-          //   enrichVarObj(subheaderProperty),
-          // ];
         }
         if (descriptionProperty.id) {
           const descriptionStructure = treeSearch(
@@ -524,10 +518,6 @@ const beforeCreate = ({
               value: [enrichVarObj(descriptionProperty)],
             }),
           );
-
-          // descriptionStructure.options[0].value = [
-          //   enrichVarObj(descriptionProperty),
-          // ];
         }
 
         const dataGrid = treeSearch('#dataGrid', newPrefab.structure);
@@ -540,7 +530,6 @@ const beforeCreate = ({
             value: modelId,
           }),
         );
-        // dataGrid.options[0].value = modelId;
 
         if (imageProperty.id) {
           const imageBoxStructure = treeSearch(
@@ -556,7 +545,6 @@ const beforeCreate = ({
               value: [enrichVarObj(imageProperty)],
             }),
           );
-          // imageBoxStructure.options[15].value = [enrichVarObj(imageProperty)];
         }
         const titleStructure = treeSearch(
           '#gridSubHeader',
@@ -573,11 +561,6 @@ const beforeCreate = ({
             }),
           );
         }
-        // if (titleProperty.id) {
-        //   dataGrid.descendants[0].descendants[1].options[2].value = [
-        //     enrichVarObj(titleProperty),
-        //   ];
-        // }
         if (subheaderProperty.id) {
           setOption(
             titleStructure,
@@ -588,11 +571,6 @@ const beforeCreate = ({
             }),
           );
         }
-        // if (subheaderProperty.id) {
-        //   dataGrid.descendants[0].descendants[1].options[3].value = [
-        //     enrichVarObj(subheaderProperty),
-        //   ];
-        // }
         if (descriptionProperty.id) {
           const descriptionStructure = treeSearch(
             '#gridDescription',
@@ -609,10 +587,6 @@ const beforeCreate = ({
             }),
           );
         }
-        // if (descriptionProperty.id) {
-        //   dataGrid.descendants[0].descendants[2].descendants[0].descendants[0].options[0].value =
-        //     [enrichVarObj(descriptionProperty)];
-        // }
 
         // #region Partial Selection
         const prefabFooter = treeSearch('#Footer', newPrefab.structure);

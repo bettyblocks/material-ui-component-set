@@ -20,6 +20,8 @@ import {
   hideIf,
   PrefabInteraction,
   InteractionType,
+  PrefabComponent,
+  PrefabComponentOption,
 } from '@betty-blocks/component-sdk';
 import {
   Box as prefabBox,
@@ -46,6 +48,7 @@ import {
   dataListOptions,
 } from './structures';
 import { showOn } from '../utils';
+import { Property, PropertyStateProps } from './types';
 
 const interactions: PrefabInteraction[] = [
   {
@@ -99,14 +102,20 @@ const beforeCreate = ({
     Button,
     PartialSelector,
   },
-  helpers: { useModelQuery },
+  helpers: { useModelQuery, setOption },
 }: BeforeCreateArgs) => {
   const [showValidation, setShowValidation] = React.useState(false);
   const [modelId, setModelId] = React.useState('');
-  const [imageProperty, setImageProperty] = React.useState<any>('');
-  const [titleProperty, setTitleProperty] = React.useState<any>('');
-  const [subheaderProperty, setSubheaderProperty] = React.useState<any>('');
-  const [descriptionProperty, setDescriptionProperty] = React.useState<any>('');
+  const [imageProperty, setImageProperty] = React.useState<PropertyStateProps>({
+    id: '',
+  });
+  const [titleProperty, setTitleProperty] = React.useState<PropertyStateProps>({
+    id: '',
+  });
+  const [subheaderProperty, setSubheaderProperty] =
+    React.useState<PropertyStateProps>({ id: '' });
+  const [descriptionProperty, setDescriptionProperty] =
+    React.useState<PropertyStateProps>({ id: '' });
 
   const { data } = useModelQuery({
     variables: { id: modelId },
@@ -117,24 +126,25 @@ const beforeCreate = ({
   const [headerPartialId, setHeaderPartialId] = React.useState('');
   const [footerPartialId, setFooterPartialId] = React.useState('');
 
-  const getDescendantByRef = (refValue: string, structure: any) =>
-    structure.reduce((acc: string, component: PrefabReference) => {
-      if (acc) return acc;
-      if (
-        component.type === 'COMPONENT' &&
-        // eslint-disable-next-line no-prototype-builtins
-        component.ref
-          ? Object.values(component.ref).indexOf(refValue) > -1
-          : undefined
-      ) {
-        return component;
+  function treeSearch(
+    dirName: string,
+    array: PrefabReference[],
+  ): PrefabComponent | undefined {
+    // eslint-disable-next-line no-plusplus
+    for (let i = 0; i < array.length; i++) {
+      const q = array[i];
+      if (q.type === 'COMPONENT') {
+        if (q.ref && q.ref.id === dirName) {
+          return q;
+        }
       }
-      if (component.type === 'PARTIAL') {
-        return acc;
+      if (q.type !== 'PARTIAL' && q.descendants && q.descendants.length) {
+        const result = treeSearch(dirName, q.descendants);
+        if (result) return result;
       }
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      return getDescendantByRef(refValue, component.descendants);
-    }, null);
+    }
+    return undefined;
+  }
 
   const enrichVarObj = (obj: any) => {
     const returnObject = obj;
@@ -215,13 +225,13 @@ const beforeCreate = ({
               }
             >
               <ModelSelector
-                onChange={(value: any) => {
+                onChange={(value: string) => {
                   setShowValidation(false);
                   setModelId(value);
-                  setImageProperty('');
-                  setTitleProperty('');
-                  setSubheaderProperty('');
-                  setDescriptionProperty('');
+                  setImageProperty({ id: '' });
+                  setTitleProperty({ id: '' });
+                  setSubheaderProperty({ id: '' });
+                  setDescriptionProperty({ id: '' });
                 }}
                 value={modelId}
               />
@@ -229,7 +239,7 @@ const beforeCreate = ({
             <Field label="Image property">
               <PropertySelector
                 modelId={modelId}
-                onChange={(value: string) => {
+                onChange={(value: Property) => {
                   setImageProperty(value);
                 }}
                 value={imageProperty}
@@ -239,7 +249,7 @@ const beforeCreate = ({
             <Field label="Title property">
               <PropertySelector
                 modelId={modelId}
-                onChange={(value: string) => {
+                onChange={(value: Property) => {
                   setTitleProperty(value);
                 }}
                 value={titleProperty}
@@ -249,7 +259,7 @@ const beforeCreate = ({
             <Field label="Subheader property">
               <PropertySelector
                 modelId={modelId}
-                onChange={(value: string) => {
+                onChange={(value: Property) => {
                   setSubheaderProperty(value);
                 }}
                 value={subheaderProperty}
@@ -259,7 +269,7 @@ const beforeCreate = ({
             <Field label="Description property">
               <PropertySelector
                 modelId={modelId}
-                onChange={(value: string) => {
+                onChange={(value: Property) => {
                   setDescriptionProperty(value);
                 }}
                 value={descriptionProperty}
@@ -357,21 +367,43 @@ const beforeCreate = ({
       }
       const newPrefab = { ...prefab };
       if (modelId) {
-        const dataList = getDescendantByRef('#dataList', newPrefab.structure);
-        dataList.options[0].value = modelId;
+        const dataList = treeSearch('#dataList', newPrefab.structure);
+        if (!dataList) throw new Error('No datalist found');
+        setOption(
+          dataList,
+          'model',
+          (originalOption: PrefabComponentOption) => ({
+            ...originalOption,
+            value: modelId,
+          }),
+        );
         if (imageProperty.id) {
-          const imageBoxStructure = getDescendantByRef(
+          const imageBoxStructure = treeSearch(
             '#BoxImage',
             newPrefab.structure,
           );
-          imageBoxStructure.options[15].value = [enrichVarObj(imageProperty)];
-        }
-        if (titleProperty.id) {
-          const titleStructure = getDescendantByRef(
-            '#Title',
-            newPrefab.structure,
+          if (!imageBoxStructure)
+            throw new Error('No image box structure found');
+          setOption(
+            imageBoxStructure,
+            'backgroundUrl',
+            (originalOption: PrefabComponentOption) => ({
+              ...originalOption,
+              value: [enrichVarObj(imageProperty)],
+            }),
           );
-          titleStructure.options[0].value = [enrichVarObj(titleProperty)];
+        }
+        const titleStructure = treeSearch('#Title', newPrefab.structure);
+        if (!titleStructure) throw new Error('No title structure found');
+        if (titleProperty.id) {
+          setOption(
+            titleStructure,
+            'content',
+            (originalOption: PrefabComponentOption) => ({
+              ...originalOption,
+              value: [enrichVarObj(titleProperty)],
+            }),
+          );
           if (newPrefab.interactions) {
             newPrefab.interactions.push({
               name: 'Filter',
@@ -393,34 +425,50 @@ const beforeCreate = ({
           }
         }
         if (subheaderProperty.id) {
-          const subHeadertructure = getDescendantByRef(
+          const subheaderStructure = treeSearch(
             '#SubHeader',
             newPrefab.structure,
           );
-          subHeadertructure.options[0].value = [
-            enrichVarObj(subheaderProperty),
-          ];
+          if (!subheaderStructure)
+            throw new Error('No subheader structure found');
+          setOption(
+            subheaderStructure,
+            'content',
+            (originalOption: PrefabComponentOption) => ({
+              ...originalOption,
+              value: [enrichVarObj(subheaderProperty)],
+            }),
+          );
         }
         if (descriptionProperty.id) {
-          const descriptionStructure = getDescendantByRef(
+          const descriptionStructure = treeSearch(
             '#Description',
             newPrefab.structure,
           );
-          descriptionStructure.options[0].value = [
-            enrichVarObj(descriptionProperty),
-          ];
+          if (!descriptionStructure)
+            throw new Error('No description structure found');
+          setOption(
+            descriptionStructure,
+            'content',
+            (originalOption: PrefabComponentOption) => ({
+              ...originalOption,
+              value: [enrichVarObj(descriptionProperty)],
+            }),
+          );
         }
         // // #region Partial Selection
-        const prefabFooter = getDescendantByRef('#Footer', newPrefab.structure);
-        const prefabHeader = getDescendantByRef('#Header', newPrefab.structure);
-        if (headerPartialId) {
-          prefabHeader.descendants = [{ type: 'PARTIAL', partialId: '' }];
-          prefabHeader.descendants[0].partialId = headerPartialId;
+        const prefabFooter = treeSearch('#Footer', newPrefab.structure);
+        const prefabHeader = treeSearch('#Header', newPrefab.structure);
+        if (headerPartialId && prefabHeader) {
+          prefabHeader.descendants = [
+            { type: 'PARTIAL', partialId: headerPartialId },
+          ];
         }
 
-        if (footerPartialId) {
-          prefabFooter.descendants = [{ type: 'PARTIAL', partialId: '' }];
-          prefabFooter.descendants[0].partialId = footerPartialId;
+        if (footerPartialId && prefabFooter) {
+          prefabFooter.descendants = [
+            { type: 'PARTIAL', partialId: footerPartialId },
+          ];
         }
         save(newPrefab);
       }
