@@ -19,6 +19,7 @@ import {
   PrefabInteraction,
   InteractionType,
   PrefabComponentOption,
+  BeforeCreateArgs,
 } from '@betty-blocks/component-sdk';
 import { options as defaults } from './structures/ActionJSForm/options';
 import {
@@ -42,6 +43,7 @@ import {
   Conditional,
   conditionalOptions,
 } from './structures';
+import { Properties } from './types';
 
 interface AuthenticationProfileOptions {
   loginVariable: string;
@@ -64,27 +66,24 @@ interface AuthenticationProfile {
   loginModel: string;
   name: string;
   options: AuthenticationProfileOptions;
-  properties?: Array<any>;
+  properties?: Properties[];
 }
 
 interface Endpoint {
-  __typename: string;
+  id: string;
   authenticationProfileId: string;
   cache: boolean;
   cachedFullPath: string;
   contentType: string;
   debugMode: boolean;
   description?: string;
-  id: 'dbf8e21da4c24f04b399218ad81787f0';
   online: true;
   options: {
-    __typename: 'EndpointOptions';
     componentSetUrl?: string;
     runtimeTarget: string;
     showDefaultComponentSet: boolean;
   };
   page: {
-    __typename: string;
     description: string;
     id: string;
     name: string;
@@ -102,15 +101,6 @@ interface Endpoint {
 }
 
 const interactions: PrefabInteraction[] = [
-  {
-    type: InteractionType.Global,
-    name: 'login',
-    sourceEvent: 'onActionSuccess',
-    ref: {
-      sourceComponentId: '#formId',
-    },
-    parameters: [],
-  },
   {
     type: InteractionType.Custom,
     name: 'Show',
@@ -1240,7 +1230,7 @@ const beforeCreate = ({
     useModelQuery,
     cloneStructure,
   },
-}: any) => {
+}: BeforeCreateArgs) => {
   const componentId = createUuid();
   const [authProfileId, setAuthProfileId] = React.useState('');
   const [authProfile, setAuthProfile] = React.useState<AuthenticationProfile>();
@@ -1340,42 +1330,47 @@ const beforeCreate = ({
             inputPrefab: PrefabReference,
           ): PrefabReference => {
             const boxPrefab = cloneStructure('Box');
-            setOption(
-              boxPrefab,
-              'innerSpacing',
-              (options: PrefabComponentOption[]) => ({
-                ...options,
-                value: ['M', '0rem', '0rem', '0rem'],
-              }),
-            );
-            const textPrefab = cloneStructure('Text');
-            setOption(
-              textPrefab,
-              'content',
-              (options: PrefabComponentOption[]) => ({
-                ...options,
-                value: [textValue],
-                configuration: { as: 'MULTILINE' },
-              }),
-            );
-            setOption(
-              textPrefab,
-              'type',
-              (options: PrefabComponentOption[]) => ({
-                ...options,
-                value: ['Body1'],
-              }),
-            );
-            setOption(
-              textPrefab,
-              'outerSpacing',
-              (options: PrefabComponentOption[]) => ({
-                ...options,
-                value: ['0rem', '0rem', 'S', '0rem'],
-              }),
-            );
-            boxPrefab.descendants.push(textPrefab);
-            boxPrefab.descendants.push(inputPrefab);
+            if (boxPrefab.type === 'COMPONENT') {
+              setOption(
+                boxPrefab,
+                'innerSpacing',
+                (options: PrefabComponentOption) => ({
+                  ...options,
+                  value: ['M', '0rem', '0rem', '0rem'],
+                }),
+              );
+
+              const textPrefab = cloneStructure('Text');
+              if (textPrefab.type === 'COMPONENT') {
+                setOption(
+                  textPrefab,
+                  'content',
+                  (options: PrefabComponentOption) => ({
+                    ...options,
+                    value: [textValue],
+                    configuration: { as: 'MULTILINE' },
+                  }),
+                );
+                setOption(
+                  textPrefab,
+                  'type',
+                  (options: PrefabComponentOption) => ({
+                    ...options,
+                    value: ['Body1'],
+                  }),
+                );
+                setOption(
+                  textPrefab,
+                  'outerSpacing',
+                  (options: PrefabComponentOption) => ({
+                    ...options,
+                    value: ['0rem', '0rem', 'S', '0rem'],
+                  }),
+                );
+              }
+              boxPrefab.descendants.push(textPrefab);
+              boxPrefab.descendants.push(inputPrefab);
+            }
             return boxPrefab;
           };
 
@@ -1393,13 +1388,14 @@ const beforeCreate = ({
           if (!modelProp) {
             // eslint-disable-next-line no-console
             console.warn('Model not found');
+            return;
           }
           const formObject = getDescendantByRef('#formId', newPrefab.structure);
           formObject.id = componentId;
           const result = await prepareAction(
             componentId,
-            null,
-            null,
+            undefined,
+            undefined,
             'login',
             authProfile,
           );
@@ -1416,22 +1412,30 @@ const beforeCreate = ({
 
               authProfile.properties.forEach((prop: any) => {
                 const { kind, name } = prop;
-                const vari = result.variables.find(
+                const vari = Object.entries(result.variables).find(
                   (foundVariable: any) => foundVariable.name === name,
                 );
+                // ?.reduce((accum, [k, v]) => {
+                //   // accum[k] = v;
+                //   // return { ...accum, { [k], { ...v } } };
+                //   return accum;
+                // }, {});
 
+                if (!vari) return;
                 const inputPrefabs = () => {
-                  const bettyInput = (prefabName: String): PrefabReference => {
+                  const bettyInput = (prefabName: string): PrefabReference => {
                     const inputPrefab = makeBettyInput(
                       prefabName,
                       modelProp,
                       prop,
                       vari,
                     );
-                    setOption(inputPrefab, 'hideLabel', (options: any) => ({
-                      ...options,
-                      value: true,
-                    }));
+                    if (inputPrefab.type === 'COMPONENT') {
+                      setOption(inputPrefab, 'hideLabel', (options: any) => ({
+                        ...options,
+                        value: true,
+                      }));
+                    }
                     return inputPrefab;
                   };
 
@@ -1454,7 +1458,10 @@ const beforeCreate = ({
                   }
                 };
                 const formInputPrefabs = inputPrefabs();
-                if (formInputPrefabs.type === 'COMPONENT') {
+                if (
+                  formInputPrefabs.type === 'COMPONENT' &&
+                  formInputPrefabs.descendants[1].type === 'COMPONENT'
+                ) {
                   setOption(
                     formInputPrefabs.descendants[1],
                     'margin',
@@ -1471,15 +1478,23 @@ const beforeCreate = ({
                 }
               });
             }
-            if (endpoint && endpoint.params) {
-              newPrefab.interactions[0].parameters = [
-                {
-                  parameter: 'redirectTo',
-                  pageId: endpoint.pageId,
-                  endpointId: endpoint.id,
-                  parameters: serializeParameters(endpoint.params),
+            if (endpoint && endpoint.params && newPrefab.interactions) {
+              newPrefab.interactions.push({
+                type: InteractionType.Global,
+                name: 'login',
+                sourceEvent: 'onActionSuccess',
+                ref: {
+                  sourceComponentId: '#formId',
                 },
-              ];
+                parameters: [
+                  {
+                    parameter: 'redirectTo',
+                    pageId: endpoint.pageId,
+                    endpointId: endpoint.id,
+                    parameters: serializeParameters(endpoint.params),
+                  },
+                ],
+              } as PrefabInteraction);
             }
 
             // eslint-disable-next-line @typescript-eslint/no-shadow
