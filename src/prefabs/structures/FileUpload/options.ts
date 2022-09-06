@@ -18,11 +18,6 @@ export const options = {
   }),
   label: variable('Label', { value: ['Select file(s)...'] }),
   value: property('Value'),
-  required: toggle('Required', { value: false }),
-  requiredMessage: variable('Required message', {
-    value: ['file is required'],
-    configuration: { condition: showIfTrue('required') },
-  }),
   maxFileSize: text('Max file size (mb)', { value: '' }),
   maxFileSizeMessage: variable('Filesize message', {
     value: ['maximum size exceeded'],
