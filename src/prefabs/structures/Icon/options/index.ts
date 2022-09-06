@@ -21,6 +21,7 @@ export const categories = [
       'hideBadge',
       'content',
       'badgeColor',
+      'badgeTextColor',
       'anchorOrigin',
       'variant',
       'margin',
@@ -76,7 +77,10 @@ export const iconOptions = {
     },
   }),
   badgeColor: color('Badge Color', {
-    value: ThemeColor.SECONDARY,
+    value: ThemeColor.DANGER,
+  }),
+  badgeTextColor: color('Badge Text Color', {
+    value: ThemeColor.WHITE,
   }),
   anchorOrigin: option('CUSTOM', {
     label: 'Anchor Origin',
