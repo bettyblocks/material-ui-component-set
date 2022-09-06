@@ -1,6 +1,5 @@
 import { component, PrefabReference } from '@betty-blocks/component-sdk';
 import { updateOption } from '../../../utils';
-import { deleteActionVariable } from '../../hooks/deleteActionVariable';
 import { Configuration } from '../Configuration';
 import { options as defaults } from './options';
 
@@ -10,7 +9,7 @@ export enum DateInputTypes {
   TIME = 'time',
 }
 
-const $afterDelete = [deleteActionVariable];
+const $afterDelete = [];
 
 export const DateTimePicker = (
   config: Configuration,

@@ -15,7 +15,6 @@ import {
   ThemeColor,
 } from '@betty-blocks/component-sdk';
 
-import { deleteActionVariable } from './hooks/deleteActionVariable';
 
 const beforeCreate = ({
   close,
@@ -148,7 +147,7 @@ const options = {
 };
 
 const hooks = {
-  $afterDelete: [deleteActionVariable],
+  $afterDelete: [],
 };
 
 export default prefab('Checkbox Beta', attributes, beforeCreate, [
