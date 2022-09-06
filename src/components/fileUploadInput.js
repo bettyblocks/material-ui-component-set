@@ -39,8 +39,7 @@
     const [validationMessage, setValidationMessage] = React.useState('');
     const maxFileSizeMessage = useText(maxFileSizeMessageRaw);
     const acceptedValue = useText(accept) || 'image/*';
-    const initalValue = useProperty(valueRaw);
-    const [value, setValue] = useState(initalValue);
+    const [value, setValue] = useState(() => useProperty(valueRaw));
     const dataComponentAttributeValue = useText(dataComponentAttribute);
 
     const { modelProperty } = actionProperty;

@@ -19,14 +19,14 @@ export const options = {
   label: variable('Label', { value: ['Select file(s)...'] }),
   value: property('Value'),
   maxFileSize: text('Max file size (mb)', { value: '' }),
-  maxFileSizeMessage: variable('Filesize message', {
+  maxFileSizeMessage: variable('Invalid max file size message', {
     value: ['maximum size exceeded'],
   }),
   hideDefaultError: toggle('Hide default error', { value: false }),
   disabled: toggle('Disabled', { value: false }),
   helperText: variable('Helper text', { value: [] }),
   fullWidth: toggle('Full width', { value: true }),
-  accept: variable('Accept files', { value: ['image/*'] }),
+  accept: variable('Accept files', { value: ['*'] }),
   margin: buttongroup(
     'Margin',
     [
