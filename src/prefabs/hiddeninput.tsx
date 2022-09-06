@@ -58,7 +58,7 @@ const options = {
   value: variable('Value'),
 };
 
-const hooks = { };
+const hooks = {};
 
 export default prefab('Hidden Beta', attributes, beforeCreate, [
   component('Hidden Input Beta', { options, ...hooks }, []),

@@ -3,8 +3,6 @@ import { updateOption } from '../../../utils';
 import { Configuration } from '../Configuration';
 import { options as defaults } from './options';
 
-const $afterDelete = [];
-
 export const MultiAutocomplete = (
   config: Configuration,
   descendants: PrefabReference[] = [],
@@ -26,7 +24,7 @@ export const MultiAutocomplete = (
 
   return component(
     'Multi Autocomplete Beta',
-    { options, $afterDelete, style, ref, label },
+    { options, style, ref, label },
     descendants,
   );
 };

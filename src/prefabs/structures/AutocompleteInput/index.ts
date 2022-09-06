@@ -3,8 +3,6 @@ import { updateOption } from '../../../utils';
 import { Configuration } from '../Configuration';
 import { options as defaults } from './options';
 
-const $afterDelete = [];
-
 export const AutocompleteInput = (
   config: Configuration,
   descendants: PrefabReference[] = [],
@@ -30,7 +28,7 @@ export const AutocompleteInput = (
 
   return component(
     'AutocompleteInput',
-    { options, $afterDelete, style, ref, label },
+    { options, style, ref, label },
     descendants,
   );
 };

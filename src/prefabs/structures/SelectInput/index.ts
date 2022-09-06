@@ -2,8 +2,6 @@ import { component, PrefabReference } from '@betty-blocks/component-sdk';
 import { Configuration } from '../Configuration';
 import { options as defaults } from './options';
 
-const $afterDelete = [];
-
 export const SelectInput = (
   config: Configuration,
   children: PrefabReference[] = [],
@@ -13,9 +11,5 @@ export const SelectInput = (
   const ref = config.ref ? { ...config.ref } : undefined;
   const label = config.label ? config.label : undefined;
 
-  return component(
-    'SelectInput',
-    { options, $afterDelete, style, ref, label },
-    children,
-  );
+  return component('SelectInput', { options, style, ref, label }, children);
 };

@@ -3,8 +3,6 @@ import { updateOption } from '../../../utils';
 import { Configuration } from '../Configuration';
 import { options as defaults } from './options';
 
-const $afterDelete = [];
-
 export const TextInput = (
   config: Configuration,
   children: PrefabReference[] = [],
@@ -44,7 +42,7 @@ export const TextInput = (
 
   return component(
     'TextInput',
-    { label: config.label, options, ref, $afterDelete },
+    { label: config.label, options, ref },
     children,
   );
 };

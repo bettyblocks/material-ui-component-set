@@ -9,8 +9,6 @@ export enum DateInputTypes {
   TIME = 'time',
 }
 
-const $afterDelete = [];
-
 export const DateTimePicker = (
   config: Configuration,
   descendants: PrefabReference[] = [],
@@ -61,7 +59,7 @@ export const DateTimePicker = (
 
   return component(
     'DateTimePickerInput',
-    { options, style, ref, label, $afterDelete },
+    { options, style, ref, label },
     descendants,
   );
 };
