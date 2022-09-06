@@ -56,7 +56,10 @@ const attributes = {
 };
 
 const options = {
-  actionVariableId: option('ACTION_JS_VARIABLE', { label: 'Name', value: '' }),
+  actionVariableId: option('ACTION_JS_VARIABLE', {
+    label: 'Action input variable',
+    value: '',
+  }),
   value: variable('Value'),
 };
 
