@@ -33,6 +33,30 @@ const beforeCreate = ({
     useModelQuery,
   } = helpers;
 
+  const disabledKinds = [
+    'AUTO_INCREMENT',
+    'BOOLEAN_EXPRESSION',
+    'COUNT',
+    'DATE_EXPRESSION',
+    'DATE_TIME_EXPRESSION',
+    'DECIMAL_EXPRESSION',
+    'IMAGE',
+    'INTEGER_EXPRESSION',
+    'LOGIN_TOKEN',
+    'MINUTES_EXPRESSION',
+    'MULTI_FILE',
+    'MULTI_IMAGE',
+    'PDF',
+    'PRICE_EXPRESSION',
+    'RICH_TEXT',
+    'SERIAL',
+    'SIGNED_PDF',
+    'STRING_EXPRESSION',
+    'SUM',
+    'TEXT_EXPRESSION',
+    'ZIPCODE',
+  ];
+
   const [modelId, setModelId] = React.useState(null);
   const [model, setModel] = React.useState(null);
   const [idProperty, setIdProperty] = React.useState(null);
@@ -82,7 +106,7 @@ const beforeCreate = ({
         <Field label="Select properties">
           <PropertiesSelector
             allowRelations
-            disabledKinds={[]}
+            disabledKinds={disabledKinds}
             disabledNames={['created_at', 'id', 'updated_at']}
             modelId={modelId}
             onChange={setProperties}
@@ -172,6 +196,11 @@ const beforeCreate = ({
                     property,
                     variable,
                   ),
+                );
+                break;
+              case PropertyKind.FILE:
+                structure.descendants.push(
+                  makeBettyInput(BettyPrefabs.FILE, model, property, variable),
                 );
                 break;
               case PropertyKind.IBAN:

@@ -22,8 +22,6 @@
       margin,
       maxFileSize,
       maxFileSizeMessage: maxFileSizeMessageRaw,
-      required,
-      requiredMessage: requiredMessageRaw,
       showImagePreview,
       type,
     } = options;
@@ -39,12 +37,12 @@
     const helper = useText(helperText);
     const labelText = useText(label);
     const [validationMessage, setValidationMessage] = React.useState('');
-    const requiredMessage = useText(requiredMessageRaw);
     const maxFileSizeMessage = useText(maxFileSizeMessageRaw);
     const acceptedValue = useText(accept) || 'image/*';
-    const requiredText = required ? '*' : '';
-    const value = useProperty(valueRaw);
+    const initalValue = useProperty(valueRaw);
+    const [value, setValue] = useState(initalValue);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
+
     const { modelProperty } = actionProperty;
 
     const getPropertyId = (property) => {
@@ -111,13 +109,6 @@
     const validateFiles = (files) => {
       const filesArray = files ? Array.from(files) : [];
 
-      if (required) {
-        if (!(fileReference || value)) {
-          setValidationMessage(requiredMessage);
-          return false;
-        }
-      }
-
       const isFileSizeExceeded = filesArray.some((file) => {
         return file.size / 1000000 > (maxFileSize || 20);
       });
@@ -183,20 +174,51 @@
       setValidationMessage('');
     };
 
+    function InitialFileDetails({ currentFile }) {
+      if (!currentFile) return <div>no file</div>;
+
+      const { name: fileName } = currentFile;
+
+      return (
+        <div className={classes.fileDetails}>
+          <Hr />
+          <div className={classes.listView}>
+            <Typography variant="body1" noWrap className={classes.span}>
+              {fileName}
+            </Typography>
+
+            <IconButton
+              size="small"
+              className={classes.remove}
+              onClick={() => {
+                setValue(null);
+              }}
+            >
+              <Icon
+                name="Delete"
+                className={classes.deleteIcon}
+                fontSize="small"
+              />
+            </IconButton>
+          </div>
+        </div>
+      );
+    }
+
     function UploadComponent() {
+      const isDirty = !!fileReference;
       // Renders the button and the files you select
       return (
         <div data-component={dataComponentAttributeValue}>
           <input
             accept={acceptedValue}
-            required={required && !(fileReference || value)}
             className={classes.input}
             type="file"
             onChange={handleChange}
             ref={inputRef}
           />
           {children}
-          {files && ( // TODO: change to showing only what is from the html element
+          {isDirty && ( // TODO: change to showing only what is from the html element
             <input type="hidden" name={name} value={fileReference} />
           )}
         </div>
@@ -378,16 +400,16 @@
         filesArray &&
         !loading && // TODO: show only files form the html element
         filesArray.length > 0;
+      const hideInitialFileDetail = hasUploads || loading || isDev;
       return (
         <FormControl
           fullWidth={fullWidth}
-          required={required}
           error={!!validationMessage}
           disabled={disabled}
           margin={margin}
         >
           <Label className={classes.label}>
-            {hideLabel ? '' : `${labelText}${requiredText}`}
+            {hideLabel ? '' : `${labelText}`}
             <UploadComponent />
           </Label>
           <FormHelperText classes={{ root: classes.helper }}>
@@ -398,6 +420,9 @@
               filesArray.map((file) => (
                 <UploadedFile key={file.name} file={file} />
               ))}
+            {value && !hideInitialFileDetail && (
+              <InitialFileDetails currentFile={value} />
+            )}
             {loading && <UploadingFile />}
           </div>
         </FormControl>
