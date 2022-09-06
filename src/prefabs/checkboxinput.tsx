@@ -140,7 +140,10 @@ const options = {
   size,
   ...stylesOptions,
   ...advancedSettingsOptions,
-  actionVariableId: option('ACTION_JS_VARIABLE', { label: 'Name', value: '' }),
+  actionVariableId: option('ACTION_JS_VARIABLE', {
+    label: 'Action input variable',
+    value: '',
+  }),
   type: text('Type', {
     value: 'checkbox',
     configuration: { condition: showIf('actionVariableId', 'EQ', 'never') },
