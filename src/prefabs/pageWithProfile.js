@@ -9195,16 +9195,6 @@
         label: 'My account',
         options: [
           {
-            key: 'partial',
-            label: 'Edit partial options',
-            type: 'LINKED_PARTIAL',
-            value: {
-              ref: {
-                componentId: '#partialId',
-              },
-            },
-          },
-          {
             key: 'pageTitle',
             label: 'Page title',
             type: 'LINKED_OPTION',
