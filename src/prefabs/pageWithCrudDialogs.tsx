@@ -22,6 +22,9 @@ import {
   ValueDefault,
   number,
   PrefabInteraction,
+  linked,
+  wrapper,
+  childSelector,
 } from '@betty-blocks/component-sdk';
 import {
   Box as prefabBox,
@@ -1523,7 +1526,7 @@ const beforeCreate = ({
   };
   return (
     <>
-      <Header onClose={close} title="Configure list view" />
+      <Header onClose={close} title="Configure CRUD with dialogs" />
       {stepper.progressBar()}
       <Content>{stepper.setStep(stepNumber)}</Content>
       {stepper.buttons()}
@@ -1812,215 +1815,274 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                       },
                     },
                     [
-                      Row({}, [
-                        Column(
-                          {
-                            options: {
-                              ...columnOptions,
-                              columnWidth: option('CUSTOM', {
-                                label: 'Column width',
-                                value: '12',
-                                configuration: {
-                                  as: 'DROPDOWN',
-                                  dataType: 'string',
-                                  allowedInput: [
-                                    {
-                                      name: 'Fit content',
-                                      value: 'fitContent',
-                                    },
-                                    { name: 'Flexible', value: 'flexible' },
-                                    { name: 'Hidden', value: 'hidden' },
-                                    { name: '1', value: '1' },
-                                    { name: '2', value: '2' },
-                                    { name: '3', value: '3' },
-                                    { name: '4', value: '4' },
-                                    { name: '5', value: '5' },
-                                    { name: '6', value: '6' },
-                                    { name: '7', value: '7' },
-                                    { name: '8', value: '8' },
-                                    { name: '9', value: '9' },
-                                    { name: '10', value: '10' },
-                                    { name: '11', value: '11' },
-                                    { name: '12', value: '12' },
-                                  ],
-                                },
-                              }),
-                              columnWidthTabletLandscape: option('CUSTOM', {
-                                label: 'Column width (tablet landscape)',
-                                value: '12',
-                                configuration: {
-                                  as: 'DROPDOWN',
-                                  dataType: 'string',
-                                  allowedInput: [
-                                    {
-                                      name: 'Fit content',
-                                      value: 'fitContent',
-                                    },
-                                    { name: 'Flexible', value: 'flexible' },
-                                    { name: 'Hidden', value: 'hidden' },
-                                    { name: '1', value: '1' },
-                                    { name: '2', value: '2' },
-                                    { name: '3', value: '3' },
-                                    { name: '4', value: '4' },
-                                    { name: '5', value: '5' },
-                                    { name: '6', value: '6' },
-                                    { name: '7', value: '7' },
-                                    { name: '8', value: '8' },
-                                    { name: '9', value: '9' },
-                                    { name: '10', value: '10' },
-                                    { name: '11', value: '11' },
-                                    { name: '12', value: '12' },
-                                  ],
-                                },
-                              }),
-                              columnWidthTabletPortrait: option('CUSTOM', {
-                                value: '12',
-                                label: 'Column width (tablet portrait)',
-                                configuration: {
-                                  as: 'DROPDOWN',
-                                  dataType: 'string',
-                                  allowedInput: [
-                                    {
-                                      name: 'Fit content',
-                                      value: 'fitContent',
-                                    },
-                                    { name: 'Flexible', value: 'flexible' },
-                                    { name: 'Hidden', value: 'hidden' },
-                                    { name: '1', value: '1' },
-                                    { name: '2', value: '2' },
-                                    { name: '3', value: '3' },
-                                    { name: '4', value: '4' },
-                                    { name: '5', value: '5' },
-                                    { name: '6', value: '6' },
-                                    { name: '7', value: '7' },
-                                    { name: '8', value: '8' },
-                                    { name: '9', value: '9' },
-                                    { name: '10', value: '10' },
-                                    { name: '11', value: '11' },
-                                    { name: '12', value: '12' },
-                                  ],
-                                },
-                              }),
-                              columnWidthMobile: option('CUSTOM', {
-                                value: '12',
-                                label: 'Column width (mobile)',
-                                configuration: {
-                                  as: 'DROPDOWN',
-                                  dataType: 'string',
-                                  allowedInput: [
-                                    {
-                                      name: 'Fit content',
-                                      value: 'fitContent',
-                                    },
-                                    { name: 'Flexible', value: 'flexible' },
-                                    { name: 'Hidden', value: 'hidden' },
-                                    { name: '1', value: '1' },
-                                    { name: '2', value: '2' },
-                                    { name: '3', value: '3' },
-                                    { name: '4', value: '4' },
-                                    { name: '5', value: '5' },
-                                    { name: '6', value: '6' },
-                                    { name: '7', value: '7' },
-                                    { name: '8', value: '8' },
-                                    { name: '9', value: '9' },
-                                    { name: '10', value: '10' },
-                                    { name: '11', value: '11' },
-                                    { name: '12', value: '12' },
-                                  ],
-                                },
-                              }),
-                              innerSpacing: sizes('Inner space', {
-                                value: ['L', 'L', 'L', 'L'],
-                              }),
+                      wrapper(
+                        {
+                          label: 'CRUD with Dialogs wrapper',
+                          optionCategories: [
+                            {
+                              label: 'Create options',
+                              expanded: true,
+                              members: ['createDialogTitle'],
+                              condition: {
+                                type: 'SHOW',
+                                option: 'dialogVisibility',
+                                comparator: 'EQ',
+                                value: true,
+                              },
                             },
-                          },
-                          [
-                            prefabBox(
-                              {
-                                options: {
-                                  ...boxOptions,
-                                  alignment: buttongroup(
-                                    'Alignment',
-                                    [
-                                      ['None', 'none'],
-                                      ['Left', 'flex-start'],
-                                      ['Center', 'center'],
-                                      ['Right', 'flex-end'],
-                                      ['Justified', 'space-between'],
-                                    ],
-                                    {
-                                      value: 'space-between',
-                                      configuration: {
-                                        dataType: 'string',
-                                      },
-                                    },
-                                  ),
-                                  innerSpacing: sizes('Inner space', {
-                                    value: ['0rem', '0rem', '0rem', '0rem'],
-                                  }),
+                            {
+                              label: 'Update options',
+                              expanded: true,
+                              members: ['updateDialogTitle'],
+                              condition: {
+                                type: 'SHOW',
+                                option: 'dialogVisibility',
+                                comparator: 'EQ',
+                                value: true,
+                              },
+                            },
+                            {
+                              label: 'Details options',
+                              expanded: true,
+                              members: ['detailsDialogTitle'],
+                              condition: {
+                                type: 'SHOW',
+                                option: 'dialogVisibility',
+                                comparator: 'EQ',
+                                value: true,
+                              },
+                            },
+                            {
+                              label: 'Delete options',
+                              expanded: true,
+                              members: ['deleteDialogTitle'],
+                              condition: {
+                                type: 'SHOW',
+                                option: 'dialogVisibility',
+                                comparator: 'EQ',
+                                value: true,
+                              },
+                            },
+                          ],
+                          options: {
+                            titleOption: linked({
+                              value: {
+                                ref: {
+                                  componentId: '#modelTitle',
+                                  optionId: '#titleOption',
                                 },
                               },
-                              [
-                                prefabText(
-                                  {
-                                    ref: { id: '#modelTitle' },
-                                    options: {
-                                      ...textOptions,
-                                      useInnerHtml: toggle(
-                                        'Display Rich Text',
-                                        {
-                                          value: false,
-                                        },
-                                      ),
-                                      type: font('Font', { value: ['Title4'] }),
-                                    },
-                                  },
-                                  [],
+                              configuration: {
+                                condition: showIf(
+                                  'dialogVisibility',
+                                  'EQ',
+                                  false,
                                 ),
-                                prefabButton(
-                                  {
-                                    ref: { id: '#newRecordButton' },
-                                    style: {
-                                      overwrite: {
-                                        backgroundColor: {
-                                          type: 'THEME_COLOR',
-                                          value: 'primary',
-                                        },
-                                        boxShadow: 'none',
-                                        color: {
-                                          type: 'THEME_COLOR',
-                                          value: 'white',
-                                        },
-                                        fontFamily: 'Roboto',
-                                        fontSize: '0.875rem',
-                                        fontStyle: 'none',
-                                        fontWeight: '400',
-                                        padding: ['0.6875rem', '1.375rem'],
-                                        textDecoration: 'none',
-                                        textTransform: 'none',
-                                      },
-                                    },
-                                    options: {
-                                      ...buttonOptions,
-                                      buttonText: variable('Button text', {
-                                        value: ['New'],
-                                      }),
-                                      icon: icon('Icon', { value: 'Add' }),
-                                    },
-                                  },
-                                  [],
-                                ),
-                              ],
-                            ),
-                            Conditional(
+                              },
+                            }),
+                            dialogVisibility: linked({
+                              value: {
+                                ref: {
+                                  componentId: '#crudDialogVisibility',
+                                  optionId: '#crudVisibility',
+                                },
+                              },
+                            }),
+                            crudTabs: linked({
+                              value: {
+                                ref: {
+                                  componentId: '#DialogTabs',
+                                  optionId: '#selectedTabs',
+                                },
+                              },
+                              configuration: { as: 'BUTTONGROUP' },
+                            }),
+                            createDialogTitle: linked({
+                              value: {
+                                ref: {
+                                  componentId: '#createDialogTitle',
+                                  optionId: '#createDialogTitleOption',
+                                },
+                              },
+                              configuration: {
+                                condition: {
+                                  type: 'SHOW',
+                                  option: 'crudTabs',
+                                  comparator: 'EQ',
+                                  value: 1,
+                                },
+                              },
+                            }),
+                            updateDialogTitle: linked({
+                              value: {
+                                ref: {
+                                  componentId: '#updateDialogTitle',
+                                  optionId: '#updateDialogTitleOption',
+                                },
+                              },
+                              configuration: {
+                                condition: {
+                                  type: 'SHOW',
+                                  option: 'crudTabs',
+                                  comparator: 'EQ',
+                                  value: 2,
+                                },
+                              },
+                            }),
+                            detailsDialogTitle: linked({
+                              value: {
+                                ref: {
+                                  componentId: '#detailsDialogTitle',
+                                  optionId: '#detailsDialogTitleOption',
+                                },
+                              },
+                              configuration: {
+                                condition: {
+                                  type: 'SHOW',
+                                  option: 'crudTabs',
+                                  comparator: 'EQ',
+                                  value: 3,
+                                },
+                              },
+                            }),
+                            deleteDialogTitle: linked({
+                              value: {
+                                ref: {
+                                  componentId: '#deleteDialogTitle',
+                                  optionId: '#deleteDialogTitleOption',
+                                },
+                              },
+                              configuration: {
+                                condition: {
+                                  type: 'SHOW',
+                                  option: 'crudTabs',
+                                  comparator: 'EQ',
+                                  value: 4,
+                                },
+                              },
+                            }),
+                          },
+                        },
+                        [
+                          Row({}, [
+                            Column(
                               {
                                 options: {
-                                  ...conditionalOptions,
-                                  visible: toggle('Initial visibility', {
-                                    value: false,
+                                  ...columnOptions,
+                                  columnWidth: option('CUSTOM', {
+                                    label: 'Column width',
+                                    value: '12',
                                     configuration: {
-                                      as: 'VISIBILITY',
+                                      as: 'DROPDOWN',
+                                      dataType: 'string',
+                                      allowedInput: [
+                                        {
+                                          name: 'Fit content',
+                                          value: 'fitContent',
+                                        },
+                                        { name: 'Flexible', value: 'flexible' },
+                                        { name: 'Hidden', value: 'hidden' },
+                                        { name: '1', value: '1' },
+                                        { name: '2', value: '2' },
+                                        { name: '3', value: '3' },
+                                        { name: '4', value: '4' },
+                                        { name: '5', value: '5' },
+                                        { name: '6', value: '6' },
+                                        { name: '7', value: '7' },
+                                        { name: '8', value: '8' },
+                                        { name: '9', value: '9' },
+                                        { name: '10', value: '10' },
+                                        { name: '11', value: '11' },
+                                        { name: '12', value: '12' },
+                                      ],
                                     },
+                                  }),
+                                  columnWidthTabletLandscape: option('CUSTOM', {
+                                    label: 'Column width (tablet landscape)',
+                                    value: '12',
+                                    configuration: {
+                                      as: 'DROPDOWN',
+                                      dataType: 'string',
+                                      allowedInput: [
+                                        {
+                                          name: 'Fit content',
+                                          value: 'fitContent',
+                                        },
+                                        { name: 'Flexible', value: 'flexible' },
+                                        { name: 'Hidden', value: 'hidden' },
+                                        { name: '1', value: '1' },
+                                        { name: '2', value: '2' },
+                                        { name: '3', value: '3' },
+                                        { name: '4', value: '4' },
+                                        { name: '5', value: '5' },
+                                        { name: '6', value: '6' },
+                                        { name: '7', value: '7' },
+                                        { name: '8', value: '8' },
+                                        { name: '9', value: '9' },
+                                        { name: '10', value: '10' },
+                                        { name: '11', value: '11' },
+                                        { name: '12', value: '12' },
+                                      ],
+                                    },
+                                  }),
+                                  columnWidthTabletPortrait: option('CUSTOM', {
+                                    value: '12',
+                                    label: 'Column width (tablet portrait)',
+                                    configuration: {
+                                      as: 'DROPDOWN',
+                                      dataType: 'string',
+                                      allowedInput: [
+                                        {
+                                          name: 'Fit content',
+                                          value: 'fitContent',
+                                        },
+                                        { name: 'Flexible', value: 'flexible' },
+                                        { name: 'Hidden', value: 'hidden' },
+                                        { name: '1', value: '1' },
+                                        { name: '2', value: '2' },
+                                        { name: '3', value: '3' },
+                                        { name: '4', value: '4' },
+                                        { name: '5', value: '5' },
+                                        { name: '6', value: '6' },
+                                        { name: '7', value: '7' },
+                                        { name: '8', value: '8' },
+                                        { name: '9', value: '9' },
+                                        { name: '10', value: '10' },
+                                        { name: '11', value: '11' },
+                                        { name: '12', value: '12' },
+                                      ],
+                                    },
+                                  }),
+                                  columnWidthMobile: option('CUSTOM', {
+                                    value: '12',
+                                    label: 'Column width (mobile)',
+                                    configuration: {
+                                      as: 'DROPDOWN',
+                                      dataType: 'string',
+                                      allowedInput: [
+                                        {
+                                          name: 'Fit content',
+                                          value: 'fitContent',
+                                        },
+                                        { name: 'Flexible', value: 'flexible' },
+                                        { name: 'Hidden', value: 'hidden' },
+                                        { name: '1', value: '1' },
+                                        { name: '2', value: '2' },
+                                        { name: '3', value: '3' },
+                                        { name: '4', value: '4' },
+                                        { name: '5', value: '5' },
+                                        { name: '6', value: '6' },
+                                        { name: '7', value: '7' },
+                                        { name: '8', value: '8' },
+                                        { name: '9', value: '9' },
+                                        { name: '10', value: '10' },
+                                        { name: '11', value: '11' },
+                                        { name: '12', value: '12' },
+                                      ],
+                                    },
+                                  }),
+                                  innerSpacing: sizes('Inner space', {
+                                    value: ['L', 'L', 'L', 'L'],
                                   }),
                                 },
                               },
@@ -2029,301 +2091,399 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                   {
                                     options: {
                                       ...boxOptions,
-                                      outerSpacing: sizes('Outer space', {
-                                        value: ['0rem', '0rem', 'XL', '0rem'],
-                                      }),
-                                      backgroundColor: color(
-                                        'Background color',
+                                      alignment: buttongroup(
+                                        'Alignment',
+                                        [
+                                          ['None', 'none'],
+                                          ['Left', 'flex-start'],
+                                          ['Center', 'center'],
+                                          ['Right', 'flex-end'],
+                                          ['Justified', 'space-between'],
+                                        ],
                                         {
-                                          value: ThemeColor.DANGER,
+                                          value: 'space-between',
+                                          configuration: {
+                                            dataType: 'string',
+                                          },
                                         },
                                       ),
-                                      borderRadius: size('Border radius', {
-                                        value: '5px',
+                                      innerSpacing: sizes('Inner space', {
+                                        value: ['0rem', '0rem', '0rem', '0rem'],
                                       }),
                                     },
                                   },
                                   [
                                     prefabText(
                                       {
+                                        ref: { id: '#modelTitle' },
                                         options: {
                                           ...textOptions,
                                           content: variable('Content', {
-                                            value: [
-                                              'Attention: This template is using next generation actions!',
-                                            ],
-                                            configuration: {
-                                              as: 'MULTILINE',
-                                            },
+                                            ref: { id: '#titleOption' },
+                                            value: [],
+                                            configuration: { as: 'MULTILINE' },
                                           }),
+                                          useInnerHtml: toggle(
+                                            'Display Rich Text',
+                                            {
+                                              value: false,
+                                            },
+                                          ),
                                           type: font('Font', {
-                                            value: ['Body1'],
-                                          }),
-                                          outerSpacing: sizes('Outer space', {
-                                            value: [
-                                              '0rem',
-                                              '0rem',
-                                              '0rem',
-                                              'S',
-                                            ],
-                                          }),
-                                          textColor: color('Text color', {
-                                            value: ThemeColor.WHITE,
-                                          }),
-                                          fontWeight: option('CUSTOM', {
-                                            label: 'Font weight',
-                                            value: '500',
-                                            configuration: {
-                                              as: 'DROPDOWN',
-                                              dataType: 'string',
-                                              allowedInput: [
-                                                {
-                                                  name: '100',
-                                                  value: '100',
-                                                },
-                                                {
-                                                  name: '200',
-                                                  value: '200',
-                                                },
-                                                {
-                                                  name: '300',
-                                                  value: '300',
-                                                },
-                                                {
-                                                  name: '400',
-                                                  value: '400',
-                                                },
-                                                {
-                                                  name: '500',
-                                                  value: '500',
-                                                },
-                                                {
-                                                  name: '600',
-                                                  value: '600',
-                                                },
-                                                {
-                                                  name: '700',
-                                                  value: '700',
-                                                },
-                                                {
-                                                  name: '800',
-                                                  value: '800',
-                                                },
-                                                {
-                                                  name: '900',
-                                                  value: '900',
-                                                },
-                                              ],
-                                            },
+                                            value: ['Title4'],
                                           }),
                                         },
                                       },
                                       [],
                                     ),
-                                    prefabText(
+                                    prefabButton(
                                       {
-                                        options: {
-                                          ...textOptions,
-                                          content: variable('Content', {
-                                            value: [
-                                              'You need to configure the permissions of the "create", "update" and "delete" actions in order to use this template.',
-                                            ],
-                                            configuration: {
-                                              as: 'MULTILINE',
+                                        ref: { id: '#newRecordButton' },
+                                        style: {
+                                          overwrite: {
+                                            backgroundColor: {
+                                              type: 'THEME_COLOR',
+                                              value: 'primary',
                                             },
-                                          }),
-                                          type: font('Font', {
-                                            value: ['Body1'],
-                                          }),
-                                          outerSpacing: sizes('Outer space', {
-                                            value: [
-                                              '0rem',
-                                              '0rem',
-                                              '0rem',
-                                              'S',
-                                            ],
-                                          }),
-                                          textColor: color('Text color', {
-                                            value: ThemeColor.WHITE,
-                                          }),
-                                          fontWeight: option('CUSTOM', {
-                                            label: 'Font weight',
-                                            value: '500',
-                                            configuration: {
-                                              as: 'DROPDOWN',
-                                              dataType: 'string',
-                                              allowedInput: [
-                                                {
-                                                  name: '100',
-                                                  value: '100',
-                                                },
-                                                {
-                                                  name: '200',
-                                                  value: '200',
-                                                },
-                                                {
-                                                  name: '300',
-                                                  value: '300',
-                                                },
-                                                {
-                                                  name: '400',
-                                                  value: '400',
-                                                },
-                                                {
-                                                  name: '500',
-                                                  value: '500',
-                                                },
-                                                {
-                                                  name: '600',
-                                                  value: '600',
-                                                },
-                                                {
-                                                  name: '700',
-                                                  value: '700',
-                                                },
-                                                {
-                                                  name: '800',
-                                                  value: '800',
-                                                },
-                                                {
-                                                  name: '900',
-                                                  value: '900',
-                                                },
-                                              ],
+                                            boxShadow: 'none',
+                                            color: {
+                                              type: 'THEME_COLOR',
+                                              value: 'white',
                                             },
-                                          }),
+                                            fontFamily: 'Roboto',
+                                            fontSize: '0.875rem',
+                                            fontStyle: 'none',
+                                            fontWeight: '400',
+                                            padding: ['0.6875rem', '1.375rem'],
+                                            textDecoration: 'none',
+                                            textTransform: 'none',
+                                          },
                                         },
-                                      },
-                                      [],
-                                    ),
-                                    prefabText(
-                                      {
                                         options: {
-                                          ...textOptions,
-                                          content: variable('Content', {
-                                            value: [
-                                              'This message is not visible in your app',
-                                            ],
-                                            configuration: {
-                                              as: 'MULTILINE',
-                                            },
+                                          ...buttonOptions,
+                                          buttonText: variable('Button text', {
+                                            value: ['New'],
                                           }),
-                                          type: font('Font', {
-                                            value: ['Body1'],
-                                          }),
-                                          outerSpacing: sizes('Outer space', {
-                                            value: [
-                                              '0rem',
-                                              '0rem',
-                                              '0rem',
-                                              'S',
-                                            ],
-                                          }),
-                                          textColor: color('Text color', {
-                                            value: ThemeColor.WHITE,
-                                          }),
-                                          fontWeight: option('CUSTOM', {
-                                            label: 'Font weight',
-                                            value: '500',
-                                            configuration: {
-                                              as: 'DROPDOWN',
-                                              dataType: 'string',
-                                              allowedInput: [
-                                                {
-                                                  name: '100',
-                                                  value: '100',
-                                                },
-                                                {
-                                                  name: '200',
-                                                  value: '200',
-                                                },
-                                                {
-                                                  name: '300',
-                                                  value: '300',
-                                                },
-                                                {
-                                                  name: '400',
-                                                  value: '400',
-                                                },
-                                                {
-                                                  name: '500',
-                                                  value: '500',
-                                                },
-                                                {
-                                                  name: '600',
-                                                  value: '600',
-                                                },
-                                                {
-                                                  name: '700',
-                                                  value: '700',
-                                                },
-                                                {
-                                                  name: '800',
-                                                  value: '800',
-                                                },
-                                                {
-                                                  name: '900',
-                                                  value: '900',
-                                                },
-                                              ],
-                                            },
-                                          }),
+                                          icon: icon('Icon', { value: 'Add' }),
                                         },
                                       },
                                       [],
                                     ),
                                   ],
                                 ),
-                              ],
-                            ),
-                            DataTable(
-                              {
-                                ref: { id: '#dataTable' },
-                                options: {
-                                  ...dataTableOptions,
-                                  take: option('CUSTOM', {
-                                    value: '10',
-                                    label: 'Rows per page',
-                                    configuration: {
-                                      as: 'DROPDOWN',
-                                      dataType: 'string',
-                                      dependsOn: 'model',
-                                      allowedInput: [
-                                        { name: '5', value: '5' },
-                                        { name: '10', value: '10' },
-                                        { name: '25', value: '25' },
-                                        { name: '50', value: '50' },
-                                        { name: '100', value: '100' },
-                                      ],
-                                      condition: hideIf(
-                                        'autoLoadOnScroll',
-                                        'EQ',
-                                        true,
-                                      ),
-                                    },
-                                  }),
-                                  placeholderTake: number('Placeholder rows', {
-                                    value: '10',
-                                  }),
-
-                                  background: color('Background', {
-                                    value: ThemeColor.WHITE,
-                                  }),
-                                  outerSpacing: sizes('Outer space', {
-                                    value: ['L', '0rem', 'L', '0rem'],
-                                  }),
-                                },
-                              },
-                              [
-                                DataTableColumn(
+                                Conditional(
                                   {
                                     options: {
-                                      ...dataTableColumnOptions,
-                                      width: size('Width', {
-                                        value: '200px',
+                                      ...conditionalOptions,
+                                      visible: toggle('Initial visibility', {
+                                        value: false,
                                         configuration: {
-                                          as: 'UNIT',
+                                          as: 'VISIBILITY',
                                         },
+                                      }),
+                                    },
+                                  },
+                                  [
+                                    prefabBox(
+                                      {
+                                        options: {
+                                          ...boxOptions,
+                                          outerSpacing: sizes('Outer space', {
+                                            value: [
+                                              '0rem',
+                                              '0rem',
+                                              'XL',
+                                              '0rem',
+                                            ],
+                                          }),
+                                          backgroundColor: color(
+                                            'Background color',
+                                            {
+                                              value: ThemeColor.DANGER,
+                                            },
+                                          ),
+                                          borderRadius: size('Border radius', {
+                                            value: '5px',
+                                          }),
+                                        },
+                                      },
+                                      [
+                                        prefabText(
+                                          {
+                                            options: {
+                                              ...textOptions,
+                                              content: variable('Content', {
+                                                value: [
+                                                  'Attention: This template is using next generation actions!',
+                                                ],
+                                                configuration: {
+                                                  as: 'MULTILINE',
+                                                },
+                                              }),
+                                              type: font('Font', {
+                                                value: ['Body1'],
+                                              }),
+                                              outerSpacing: sizes(
+                                                'Outer space',
+                                                {
+                                                  value: [
+                                                    '0rem',
+                                                    '0rem',
+                                                    '0rem',
+                                                    'S',
+                                                  ],
+                                                },
+                                              ),
+                                              textColor: color('Text color', {
+                                                value: ThemeColor.WHITE,
+                                              }),
+                                              fontWeight: option('CUSTOM', {
+                                                label: 'Font weight',
+                                                value: '500',
+                                                configuration: {
+                                                  as: 'DROPDOWN',
+                                                  dataType: 'string',
+                                                  allowedInput: [
+                                                    {
+                                                      name: '100',
+                                                      value: '100',
+                                                    },
+                                                    {
+                                                      name: '200',
+                                                      value: '200',
+                                                    },
+                                                    {
+                                                      name: '300',
+                                                      value: '300',
+                                                    },
+                                                    {
+                                                      name: '400',
+                                                      value: '400',
+                                                    },
+                                                    {
+                                                      name: '500',
+                                                      value: '500',
+                                                    },
+                                                    {
+                                                      name: '600',
+                                                      value: '600',
+                                                    },
+                                                    {
+                                                      name: '700',
+                                                      value: '700',
+                                                    },
+                                                    {
+                                                      name: '800',
+                                                      value: '800',
+                                                    },
+                                                    {
+                                                      name: '900',
+                                                      value: '900',
+                                                    },
+                                                  ],
+                                                },
+                                              }),
+                                            },
+                                          },
+                                          [],
+                                        ),
+                                        prefabText(
+                                          {
+                                            options: {
+                                              ...textOptions,
+                                              content: variable('Content', {
+                                                value: [
+                                                  'You need to configure the permissions of the "create", "update" and "delete" actions in order to use this template.',
+                                                ],
+                                                configuration: {
+                                                  as: 'MULTILINE',
+                                                },
+                                              }),
+                                              type: font('Font', {
+                                                value: ['Body1'],
+                                              }),
+                                              outerSpacing: sizes(
+                                                'Outer space',
+                                                {
+                                                  value: [
+                                                    '0rem',
+                                                    '0rem',
+                                                    '0rem',
+                                                    'S',
+                                                  ],
+                                                },
+                                              ),
+                                              textColor: color('Text color', {
+                                                value: ThemeColor.WHITE,
+                                              }),
+                                              fontWeight: option('CUSTOM', {
+                                                label: 'Font weight',
+                                                value: '500',
+                                                configuration: {
+                                                  as: 'DROPDOWN',
+                                                  dataType: 'string',
+                                                  allowedInput: [
+                                                    {
+                                                      name: '100',
+                                                      value: '100',
+                                                    },
+                                                    {
+                                                      name: '200',
+                                                      value: '200',
+                                                    },
+                                                    {
+                                                      name: '300',
+                                                      value: '300',
+                                                    },
+                                                    {
+                                                      name: '400',
+                                                      value: '400',
+                                                    },
+                                                    {
+                                                      name: '500',
+                                                      value: '500',
+                                                    },
+                                                    {
+                                                      name: '600',
+                                                      value: '600',
+                                                    },
+                                                    {
+                                                      name: '700',
+                                                      value: '700',
+                                                    },
+                                                    {
+                                                      name: '800',
+                                                      value: '800',
+                                                    },
+                                                    {
+                                                      name: '900',
+                                                      value: '900',
+                                                    },
+                                                  ],
+                                                },
+                                              }),
+                                            },
+                                          },
+                                          [],
+                                        ),
+                                        prefabText(
+                                          {
+                                            options: {
+                                              ...textOptions,
+                                              content: variable('Content', {
+                                                value: [
+                                                  'This message is not visible in your app',
+                                                ],
+                                                configuration: {
+                                                  as: 'MULTILINE',
+                                                },
+                                              }),
+                                              type: font('Font', {
+                                                value: ['Body1'],
+                                              }),
+                                              outerSpacing: sizes(
+                                                'Outer space',
+                                                {
+                                                  value: [
+                                                    '0rem',
+                                                    '0rem',
+                                                    '0rem',
+                                                    'S',
+                                                  ],
+                                                },
+                                              ),
+                                              textColor: color('Text color', {
+                                                value: ThemeColor.WHITE,
+                                              }),
+                                              fontWeight: option('CUSTOM', {
+                                                label: 'Font weight',
+                                                value: '500',
+                                                configuration: {
+                                                  as: 'DROPDOWN',
+                                                  dataType: 'string',
+                                                  allowedInput: [
+                                                    {
+                                                      name: '100',
+                                                      value: '100',
+                                                    },
+                                                    {
+                                                      name: '200',
+                                                      value: '200',
+                                                    },
+                                                    {
+                                                      name: '300',
+                                                      value: '300',
+                                                    },
+                                                    {
+                                                      name: '400',
+                                                      value: '400',
+                                                    },
+                                                    {
+                                                      name: '500',
+                                                      value: '500',
+                                                    },
+                                                    {
+                                                      name: '600',
+                                                      value: '600',
+                                                    },
+                                                    {
+                                                      name: '700',
+                                                      value: '700',
+                                                    },
+                                                    {
+                                                      name: '800',
+                                                      value: '800',
+                                                    },
+                                                    {
+                                                      name: '900',
+                                                      value: '900',
+                                                    },
+                                                  ],
+                                                },
+                                              }),
+                                            },
+                                          },
+                                          [],
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                                DataTable(
+                                  {
+                                    ref: { id: '#dataTable' },
+                                    options: {
+                                      ...dataTableOptions,
+                                      take: option('CUSTOM', {
+                                        value: '10',
+                                        label: 'Rows per page',
+                                        configuration: {
+                                          as: 'DROPDOWN',
+                                          dataType: 'string',
+                                          dependsOn: 'model',
+                                          allowedInput: [
+                                            { name: '5', value: '5' },
+                                            { name: '10', value: '10' },
+                                            { name: '25', value: '25' },
+                                            { name: '50', value: '50' },
+                                            { name: '100', value: '100' },
+                                          ],
+                                          condition: hideIf(
+                                            'autoLoadOnScroll',
+                                            'EQ',
+                                            true,
+                                          ),
+                                        },
+                                      }),
+                                      placeholderTake: number(
+                                        'Placeholder rows',
+                                        {
+                                          value: '10',
+                                        },
+                                      ),
+
+                                      background: color('Background', {
+                                        value: ThemeColor.WHITE,
                                       }),
                                       outerSpacing: sizes('Outer space', {
                                         value: ['L', '0rem', 'L', '0rem'],
@@ -2331,229 +2491,227 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                     },
                                   },
                                   [
-                                    prefabBox(
+                                    DataTableColumn(
                                       {
-                                        ref: {
-                                          id: '#dataTableColumnButtonBox',
-                                        },
                                         options: {
-                                          ...boxOptions,
-                                          alignment: buttongroup(
-                                            'Alignment',
-                                            [
-                                              ['None', 'none'],
-                                              ['Left', 'flex-start'],
-                                              ['Center', 'center'],
-                                              ['Right', 'flex-end'],
-                                              ['Justified', 'space-between'],
-                                            ],
-                                            {
-                                              value: 'flex-end',
-                                              configuration: {
-                                                dataType: 'string',
-                                              },
+                                          ...dataTableColumnOptions,
+                                          width: size('Width', {
+                                            value: '200px',
+                                            configuration: {
+                                              as: 'UNIT',
                                             },
-                                          ),
-                                          innerSpacing: sizes('Inner space', {
-                                            value: [
-                                              '0rem',
-                                              '0rem',
-                                              '0rem',
-                                              '0rem',
-                                            ],
+                                          }),
+                                          outerSpacing: sizes('Outer space', {
+                                            value: ['L', '0rem', 'L', '0rem'],
                                           }),
                                         },
                                       },
                                       [
-                                        prefabButton(
+                                        prefabBox(
                                           {
                                             ref: {
-                                              id: '#dataTableColumnDetailsButton',
+                                              id: '#dataTableColumnButtonBox',
                                             },
-                                            style: {
-                                              overwrite: {
-                                                backgroundColor: {
-                                                  type: 'STATIC',
-                                                  value: 'transparent',
-                                                },
-                                                boxShadow: 'none',
-                                                color: {
-                                                  type: 'THEME_COLOR',
-                                                  value: 'secondary',
-                                                },
-                                                fontFamily: 'Roboto',
-                                                fontSize: '0.875rem',
-                                                fontStyle: 'none',
-                                                fontWeight: '400',
-                                                padding: [
-                                                  '0.6875rem',
-                                                  '0.6875rem',
+                                            options: {
+                                              ...boxOptions,
+                                              alignment: buttongroup(
+                                                'Alignment',
+                                                [
+                                                  ['None', 'none'],
+                                                  ['Left', 'flex-start'],
+                                                  ['Center', 'center'],
+                                                  ['Right', 'flex-end'],
+                                                  [
+                                                    'Justified',
+                                                    'space-between',
+                                                  ],
                                                 ],
-                                                textDecoration: 'none',
-                                                textTransform: 'none',
-                                              },
+                                                {
+                                                  value: 'flex-end',
+                                                  configuration: {
+                                                    dataType: 'string',
+                                                  },
+                                                },
+                                              ),
+                                              innerSpacing: sizes(
+                                                'Inner space',
+                                                {
+                                                  value: [
+                                                    '0rem',
+                                                    '0rem',
+                                                    '0rem',
+                                                    '0rem',
+                                                  ],
+                                                },
+                                              ),
                                             },
+                                          },
+                                          [
+                                            prefabButton(
+                                              {
+                                                ref: {
+                                                  id: '#dataTableColumnDetailsButton',
+                                                },
+                                                style: {
+                                                  overwrite: {
+                                                    backgroundColor: {
+                                                      type: 'STATIC',
+                                                      value: 'transparent',
+                                                    },
+                                                    boxShadow: 'none',
+                                                    color: {
+                                                      type: 'THEME_COLOR',
+                                                      value: 'secondary',
+                                                    },
+                                                    fontFamily: 'Roboto',
+                                                    fontSize: '0.875rem',
+                                                    fontStyle: 'none',
+                                                    fontWeight: '400',
+                                                    padding: [
+                                                      '0.6875rem',
+                                                      '0.6875rem',
+                                                    ],
+                                                    textDecoration: 'none',
+                                                    textTransform: 'none',
+                                                  },
+                                                },
 
-                                            options: {
-                                              ...buttonOptions,
-                                              buttonText: variable(
-                                                'Button text',
-                                                { value: [''] },
-                                              ),
-                                              icon: icon('Icon', {
-                                                value: 'Info',
-                                              }),
-                                            },
-                                          },
-                                          [],
-                                        ),
-                                        prefabButton(
-                                          {
-                                            ref: {
-                                              id: '#dataTableColumnUpdateButton',
-                                            },
-                                            style: {
-                                              overwrite: {
-                                                backgroundColor: {
-                                                  type: 'STATIC',
-                                                  value: 'transparent',
+                                                options: {
+                                                  ...buttonOptions,
+                                                  buttonText: variable(
+                                                    'Button text',
+                                                    { value: [''] },
+                                                  ),
+                                                  icon: icon('Icon', {
+                                                    value: 'Info',
+                                                  }),
                                                 },
-                                                boxShadow: 'none',
-                                                color: {
-                                                  type: 'THEME_COLOR',
-                                                  value: 'primary',
-                                                },
-                                                fontFamily: 'Roboto',
-                                                fontSize: '0.875rem',
-                                                fontStyle: 'none',
-                                                fontWeight: '400',
-                                                padding: [
-                                                  '0.6875rem',
-                                                  '0.6875rem',
-                                                ],
-                                                textDecoration: 'none',
-                                                textTransform: 'none',
                                               },
-                                            },
-                                            options: {
-                                              ...buttonOptions,
-                                              buttonText: variable(
-                                                'Button text',
-                                                { value: [''] },
-                                              ),
-                                              icon: icon('Icon', {
-                                                value: 'Edit',
-                                              }),
-                                            },
-                                          },
-                                          [],
-                                        ),
-                                        prefabButton(
-                                          {
-                                            ref: {
-                                              id: '#dataTableColumnDeleteButton',
-                                            },
-                                            style: {
-                                              overwrite: {
-                                                backgroundColor: {
-                                                  type: 'STATIC',
-                                                  value: 'transparent',
+                                              [],
+                                            ),
+                                            prefabButton(
+                                              {
+                                                ref: {
+                                                  id: '#dataTableColumnUpdateButton',
                                                 },
-                                                boxShadow: 'none',
-                                                color: {
-                                                  type: 'THEME_COLOR',
-                                                  value: 'danger',
+                                                style: {
+                                                  overwrite: {
+                                                    backgroundColor: {
+                                                      type: 'STATIC',
+                                                      value: 'transparent',
+                                                    },
+                                                    boxShadow: 'none',
+                                                    color: {
+                                                      type: 'THEME_COLOR',
+                                                      value: 'primary',
+                                                    },
+                                                    fontFamily: 'Roboto',
+                                                    fontSize: '0.875rem',
+                                                    fontStyle: 'none',
+                                                    fontWeight: '400',
+                                                    padding: [
+                                                      '0.6875rem',
+                                                      '0.6875rem',
+                                                    ],
+                                                    textDecoration: 'none',
+                                                    textTransform: 'none',
+                                                  },
                                                 },
-                                                fontFamily: 'Roboto',
-                                                fontSize: '0.875rem',
-                                                fontStyle: 'none',
-                                                fontWeight: '400',
-                                                padding: [
-                                                  '0.6875rem',
-                                                  '0.6875rem',
-                                                ],
-                                                textDecoration: 'none',
-                                                textTransform: 'none',
+                                                options: {
+                                                  ...buttonOptions,
+                                                  buttonText: variable(
+                                                    'Button text',
+                                                    { value: [''] },
+                                                  ),
+                                                  icon: icon('Icon', {
+                                                    value: 'Edit',
+                                                  }),
+                                                },
                                               },
-                                            },
-                                            options: {
-                                              ...buttonOptions,
-                                              buttonText: variable(
-                                                'Button text',
-                                                { value: [''] },
-                                              ),
-                                              icon: icon('Icon', {
-                                                value: 'Delete',
-                                              }),
-                                            },
-                                          },
-                                          [],
+                                              [],
+                                            ),
+                                            prefabButton(
+                                              {
+                                                ref: {
+                                                  id: '#dataTableColumnDeleteButton',
+                                                },
+                                                style: {
+                                                  overwrite: {
+                                                    backgroundColor: {
+                                                      type: 'STATIC',
+                                                      value: 'transparent',
+                                                    },
+                                                    boxShadow: 'none',
+                                                    color: {
+                                                      type: 'THEME_COLOR',
+                                                      value: 'danger',
+                                                    },
+                                                    fontFamily: 'Roboto',
+                                                    fontSize: '0.875rem',
+                                                    fontStyle: 'none',
+                                                    fontWeight: '400',
+                                                    padding: [
+                                                      '0.6875rem',
+                                                      '0.6875rem',
+                                                    ],
+                                                    textDecoration: 'none',
+                                                    textTransform: 'none',
+                                                  },
+                                                },
+                                                options: {
+                                                  ...buttonOptions,
+                                                  buttonText: variable(
+                                                    'Button text',
+                                                    { value: [''] },
+                                                  ),
+                                                  icon: icon('Icon', {
+                                                    value: 'Delete',
+                                                  }),
+                                                },
+                                              },
+                                              [],
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),
                                   ],
                                 ),
-                              ],
-                            ),
-                            Dialog(
-                              {
-                                label: 'CRUD dialog',
-                                ref: {
-                                  id: '#crudDialogVisibility',
-                                },
-                                options: {
-                                  ...dialogOptions,
-                                  isVisible: toggle('Toggle visibility', {
-                                    value: false,
-                                    configuration: { as: 'VISIBILITY' },
-                                  }),
-                                },
-                              },
-                              [
-                                Paper(
+                                Dialog(
                                   {
+                                    label: 'CRUD dialog',
+                                    ref: {
+                                      id: '#crudDialogVisibility',
+                                    },
                                     options: {
-                                      ...paperOptions,
-                                      variant: option('CUSTOM', {
-                                        label: 'Variant',
-                                        value: 'flat',
-                                        configuration: {
-                                          as: 'BUTTONGROUP',
-                                          dataType: 'string',
-                                          allowedInput: [
-                                            { name: 'Flat', value: 'flat' },
-                                            {
-                                              name: 'Elevation',
-                                              value: 'elevation',
-                                            },
-                                            {
-                                              name: 'Outlined',
-                                              value: 'outlined',
-                                            },
-                                          ],
-                                        },
+                                      ...dialogOptions,
+                                      isVisible: toggle('Toggle visibility', {
+                                        ref: { id: '#crudVisibility' },
+                                        value: false,
+                                        configuration: { as: 'VISIBILITY' },
                                       }),
                                     },
                                   },
                                   [
-                                    Row(
+                                    Paper(
                                       {
                                         options: {
-                                          ...rowOptions,
-                                          maxRowWidth: option('CUSTOM', {
-                                            label: 'Width',
-                                            value: 'Full',
+                                          ...paperOptions,
+                                          variant: option('CUSTOM', {
+                                            label: 'Variant',
+                                            value: 'flat',
                                             configuration: {
                                               as: 'BUTTONGROUP',
                                               dataType: 'string',
                                               allowedInput: [
-                                                { name: 'S', value: 'S' },
-                                                { name: 'M', value: 'M' },
-                                                { name: 'L', value: 'L' },
-                                                { name: 'XL', value: 'XL' },
+                                                { name: 'Flat', value: 'flat' },
                                                 {
-                                                  name: 'Full',
-                                                  value: 'Full',
+                                                  name: 'Elevation',
+                                                  value: 'elevation',
+                                                },
+                                                {
+                                                  name: 'Outlined',
+                                                  value: 'outlined',
                                                 },
                                               ],
                                             },
@@ -2561,610 +2719,323 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                         },
                                       },
                                       [
-                                        Column({}, [
-                                          Tabs(
-                                            {
-                                              ref: { id: '#DialogTabs' },
-                                              options: {
-                                                ...tabsOptions,
-                                                height: size('Height', {
-                                                  value: '100%',
-                                                  configuration: {
-                                                    as: 'UNIT',
-                                                  },
-                                                }),
-                                                hideTabs: toggle(
-                                                  'Hide visual tabs',
-                                                  { value: true },
-                                                ),
-                                              },
+                                        Row(
+                                          {
+                                            options: {
+                                              ...rowOptions,
+                                              maxRowWidth: option('CUSTOM', {
+                                                label: 'Width',
+                                                value: 'Full',
+                                                configuration: {
+                                                  as: 'BUTTONGROUP',
+                                                  dataType: 'string',
+                                                  allowedInput: [
+                                                    { name: 'S', value: 'S' },
+                                                    { name: 'M', value: 'M' },
+                                                    { name: 'L', value: 'L' },
+                                                    { name: 'XL', value: 'XL' },
+                                                    {
+                                                      name: 'Full',
+                                                      value: 'Full',
+                                                    },
+                                                  ],
+                                                },
+                                              }),
                                             },
-                                            [
-                                              Tab(
+                                          },
+                                          [
+                                            Column({}, [
+                                              Tabs(
                                                 {
-                                                  label: 'Create',
-                                                  ref: { id: '#createTab' },
+                                                  ref: { id: '#DialogTabs' },
                                                   options: {
-                                                    ...tabOptions,
-                                                    label: variable(
-                                                      'Tab label',
-                                                      { value: ['Create'] },
+                                                    ...tabsOptions,
+                                                    selectedDesignTabIndex:
+                                                      childSelector(
+                                                        'Selected tab (design)',
+                                                        {
+                                                          ref: {
+                                                            id: '#selectedTabs',
+                                                          },
+                                                          value: 1,
+                                                        },
+                                                      ),
+                                                    height: size('Height', {
+                                                      value: '100%',
+                                                      configuration: {
+                                                        as: 'UNIT',
+                                                      },
+                                                    }),
+                                                    hideTabs: toggle(
+                                                      'Hide visual tabs',
+                                                      { value: true },
                                                     ),
                                                   },
                                                 },
                                                 [
-                                                  prefabBox(
+                                                  Tab(
                                                     {
+                                                      label: 'Create',
+                                                      ref: { id: '#createTab' },
                                                       options: {
-                                                        ...boxOptions,
-                                                        alignment: buttongroup(
-                                                          'Alignment',
-                                                          [
-                                                            ['None', 'none'],
-                                                            [
-                                                              'Left',
-                                                              'flex-start',
-                                                            ],
-                                                            [
-                                                              'Center',
-                                                              'center',
-                                                            ],
-                                                            [
-                                                              'Right',
-                                                              'flex-end',
-                                                            ],
-                                                            [
-                                                              'Justified',
-                                                              'space-between',
-                                                            ],
-                                                          ],
-                                                          {
-                                                            value:
-                                                              'space-between',
-                                                            configuration: {
-                                                              dataType:
-                                                                'string',
-                                                            },
-                                                          },
-                                                        ),
-
-                                                        innerSpacing: sizes(
-                                                          'Inner space',
-                                                          {
-                                                            value: [
-                                                              'M',
-                                                              'M',
-                                                              '0rem',
-                                                              'M',
-                                                            ],
-                                                          },
+                                                        ...tabOptions,
+                                                        label: variable(
+                                                          'Tab label',
+                                                          { value: ['Create'] },
                                                         ),
                                                       },
                                                     },
                                                     [
-                                                      prefabText(
+                                                      prefabBox(
                                                         {
                                                           options: {
-                                                            ...textOptions,
-                                                            content: variable(
-                                                              'Content',
+                                                            ...boxOptions,
+                                                            alignment:
+                                                              buttongroup(
+                                                                'Alignment',
+                                                                [
+                                                                  [
+                                                                    'None',
+                                                                    'none',
+                                                                  ],
+                                                                  [
+                                                                    'Left',
+                                                                    'flex-start',
+                                                                  ],
+                                                                  [
+                                                                    'Center',
+                                                                    'center',
+                                                                  ],
+                                                                  [
+                                                                    'Right',
+                                                                    'flex-end',
+                                                                  ],
+                                                                  [
+                                                                    'Justified',
+                                                                    'space-between',
+                                                                  ],
+                                                                ],
+                                                                {
+                                                                  value:
+                                                                    'space-between',
+                                                                  configuration:
+                                                                    {
+                                                                      dataType:
+                                                                        'string',
+                                                                    },
+                                                                },
+                                                              ),
+
+                                                            innerSpacing: sizes(
+                                                              'Inner space',
                                                               {
                                                                 value: [
-                                                                  'Create',
+                                                                  'M',
+                                                                  'M',
+                                                                  '0rem',
+                                                                  'M',
                                                                 ],
-                                                                configuration: {
-                                                                  as: 'MULTILINE',
-                                                                },
-                                                              },
-                                                            ),
-                                                            type: font('Font', {
-                                                              value: ['Title4'],
-                                                            }),
-                                                          },
-                                                        },
-                                                        [],
-                                                      ),
-                                                      prefabButton(
-                                                        {
-                                                          ref: {
-                                                            id: '#closeCreateDialogButton',
-                                                          },
-                                                          style: {
-                                                            overwrite: {
-                                                              backgroundColor: {
-                                                                type: 'STATIC',
-                                                                value:
-                                                                  'Transparent',
-                                                              },
-                                                              boxShadow: 'none',
-                                                              color: {
-                                                                type: 'THEME_COLOR',
-                                                                value: 'light',
-                                                              },
-                                                              padding: ['0rem'],
-                                                            },
-                                                          },
-                                                          options: {
-                                                            ...buttonOptions,
-                                                            buttonText:
-                                                              variable(
-                                                                'Button text',
-                                                                { value: [] },
-                                                              ),
-                                                            icon: icon('Icon', {
-                                                              value: 'Close',
-                                                            }),
-                                                            size: option(
-                                                              'CUSTOM',
-                                                              {
-                                                                value: 'medium',
-                                                                label:
-                                                                  'Icon size',
-                                                                configuration: {
-                                                                  as: 'BUTTONGROUP',
-                                                                  dataType:
-                                                                    'string',
-                                                                  allowedInput:
-                                                                    [
-                                                                      {
-                                                                        name: 'Small',
-                                                                        value:
-                                                                          'small',
-                                                                      },
-                                                                      {
-                                                                        name: 'Medium',
-                                                                        value:
-                                                                          'medium',
-                                                                      },
-                                                                      {
-                                                                        name: 'Large',
-                                                                        value:
-                                                                          'large',
-                                                                      },
-                                                                    ],
-                                                                  condition:
-                                                                    hideIf(
-                                                                      'icon',
-                                                                      'EQ',
-                                                                      'none',
-                                                                    ),
-                                                                },
                                                               },
                                                             ),
                                                           },
-                                                        },
-                                                        [],
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  prefabBox(
-                                                    {
-                                                      ref: {
-                                                        id: '#createTabContentBox',
-                                                      },
-                                                    },
-                                                    [
-                                                      component(
-                                                        'Form Beta',
-                                                        {
-                                                          ref: {
-                                                            id: '#createTabFormId',
-                                                          },
-                                                          options: defaults,
                                                         },
                                                         [
-                                                          FormErrorAlert({
-                                                            ref: {
-                                                              id: '#createAlertErrorId',
+                                                          prefabText(
+                                                            {
+                                                              ref: {
+                                                                id: '#createDialogTitle',
+                                                              },
+                                                              options: {
+                                                                ...textOptions,
+                                                                content:
+                                                                  variable(
+                                                                    'Content',
+                                                                    {
+                                                                      ref: {
+                                                                        id: '#createDialogTitleOption',
+                                                                      },
+                                                                      value: [
+                                                                        'Create',
+                                                                      ],
+                                                                      configuration:
+                                                                        {
+                                                                          as: 'MULTILINE',
+                                                                        },
+                                                                    },
+                                                                  ),
+                                                                type: font(
+                                                                  'Font',
+                                                                  {
+                                                                    value: [
+                                                                      'Title4',
+                                                                    ],
+                                                                  },
+                                                                ),
+                                                              },
                                                             },
-                                                          }),
+                                                            [],
+                                                          ),
+                                                          prefabButton(
+                                                            {
+                                                              ref: {
+                                                                id: '#closeCreateDialogButton',
+                                                              },
+                                                              style: {
+                                                                overwrite: {
+                                                                  backgroundColor:
+                                                                    {
+                                                                      type: 'STATIC',
+                                                                      value:
+                                                                        'Transparent',
+                                                                    },
+                                                                  boxShadow:
+                                                                    'none',
+                                                                  color: {
+                                                                    type: 'THEME_COLOR',
+                                                                    value:
+                                                                      'light',
+                                                                  },
+                                                                  padding: [
+                                                                    '0rem',
+                                                                  ],
+                                                                },
+                                                              },
+                                                              options: {
+                                                                ...buttonOptions,
+                                                                buttonText:
+                                                                  variable(
+                                                                    'Button text',
+                                                                    {
+                                                                      value: [],
+                                                                    },
+                                                                  ),
+                                                                icon: icon(
+                                                                  'Icon',
+                                                                  {
+                                                                    value:
+                                                                      'Close',
+                                                                  },
+                                                                ),
+                                                                size: option(
+                                                                  'CUSTOM',
+                                                                  {
+                                                                    value:
+                                                                      'medium',
+                                                                    label:
+                                                                      'Icon size',
+                                                                    configuration:
+                                                                      {
+                                                                        as: 'BUTTONGROUP',
+                                                                        dataType:
+                                                                          'string',
+                                                                        allowedInput:
+                                                                          [
+                                                                            {
+                                                                              name: 'Small',
+                                                                              value:
+                                                                                'small',
+                                                                            },
+                                                                            {
+                                                                              name: 'Medium',
+                                                                              value:
+                                                                                'medium',
+                                                                            },
+                                                                            {
+                                                                              name: 'Large',
+                                                                              value:
+                                                                                'large',
+                                                                            },
+                                                                          ],
+                                                                        condition:
+                                                                          hideIf(
+                                                                            'icon',
+                                                                            'EQ',
+                                                                            'none',
+                                                                          ),
+                                                                      },
+                                                                  },
+                                                                ),
+                                                              },
+                                                            },
+                                                            [],
+                                                          ),
                                                         ],
                                                       ),
-                                                    ],
-                                                  ),
-                                                  prefabBox(
-                                                    {
-                                                      options: {
-                                                        ...boxOptions,
-                                                        alignment: buttongroup(
-                                                          'Alignment',
-                                                          [
-                                                            ['None', 'none'],
-                                                            [
-                                                              'Left',
-                                                              'flex-start',
-                                                            ],
-                                                            [
-                                                              'Center',
-                                                              'center',
-                                                            ],
-                                                            [
-                                                              'Right',
-                                                              'flex-end',
-                                                            ],
-                                                            [
-                                                              'Justified',
-                                                              'space-between',
-                                                            ],
-                                                          ],
-                                                          {
-                                                            value:
-                                                              'space-between',
-                                                            configuration: {
-                                                              dataType:
-                                                                'string',
-                                                            },
-                                                          },
-                                                        ),
-                                                      },
-                                                    },
-                                                    [
-                                                      prefabButton(
+                                                      prefabBox(
                                                         {
                                                           ref: {
-                                                            id: '#cancelCreateDialogButton',
+                                                            id: '#createTabContentBox',
                                                           },
-                                                          style: {
-                                                            name: 'outline',
-                                                            overwrite: {
-                                                              fontWeight: '400',
-                                                              textTransform:
-                                                                'none',
-                                                            },
-                                                          },
-                                                          options: {
-                                                            ...buttonOptions,
-                                                            buttonText:
-                                                              variable(
-                                                                'Button text',
-                                                                {
-                                                                  value: [
-                                                                    'Cancel',
-                                                                  ],
-                                                                },
-                                                              ),
-                                                          },
-                                                        },
-                                                        [],
-                                                      ),
-                                                      prefabButton(
-                                                        {
-                                                          ref: {
-                                                            id: '#submitCreateDialogButton',
-                                                          },
-                                                          style: {
-                                                            overwrite: {
-                                                              backgroundColor: {
-                                                                type: 'THEME_COLOR',
-                                                                value:
-                                                                  'primary',
-                                                              },
-                                                              boxShadow: 'none',
-                                                              color: {
-                                                                type: 'THEME_COLOR',
-                                                                value: 'white',
-                                                              },
-                                                              fontFamily:
-                                                                'Roboto',
-                                                              fontSize:
-                                                                '0.875rem',
-                                                              fontStyle: 'none',
-                                                              fontWeight: '400',
-                                                              padding: [
-                                                                '0.6875rem',
-                                                                '1.375rem',
-                                                              ],
-                                                              textDecoration:
-                                                                'none',
-                                                              textTransform:
-                                                                'none',
-                                                            },
-                                                          },
-                                                          options: {
-                                                            ...buttonOptions,
-                                                            buttonText:
-                                                              variable(
-                                                                'Button text',
-                                                                {
-                                                                  value: [
-                                                                    'Save',
-                                                                  ],
-                                                                },
-                                                              ),
-                                                            icon: icon('Icon', {
-                                                              value: 'Save',
-                                                            }),
-                                                          },
-                                                        },
-                                                        [],
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                              Tab(
-                                                {
-                                                  label: 'Update',
-                                                  ref: { id: '#updateTab' },
-                                                  options: {
-                                                    ...tabOptions,
-                                                    label: variable(
-                                                      'Tab label',
-                                                      { value: ['Update'] },
-                                                    ),
-                                                  },
-                                                },
-                                                [
-                                                  prefabBox(
-                                                    {
-                                                      options: {
-                                                        ...boxOptions,
-                                                        alignment: buttongroup(
-                                                          'Alignment',
-                                                          [
-                                                            ['None', 'none'],
-                                                            [
-                                                              'Left',
-                                                              'flex-start',
-                                                            ],
-                                                            [
-                                                              'Center',
-                                                              'center',
-                                                            ],
-                                                            [
-                                                              'Right',
-                                                              'flex-end',
-                                                            ],
-                                                            [
-                                                              'Justified',
-                                                              'space-between',
-                                                            ],
-                                                          ],
-                                                          {
-                                                            value:
-                                                              'space-between',
-                                                            configuration: {
-                                                              dataType:
-                                                                'string',
-                                                            },
-                                                          },
-                                                        ),
-
-                                                        innerSpacing: sizes(
-                                                          'Inner space',
-                                                          {
-                                                            value: [
-                                                              'M',
-                                                              'M',
-                                                              '0rem',
-                                                              'M',
-                                                            ],
-                                                          },
-                                                        ),
-                                                      },
-                                                    },
-                                                    [
-                                                      prefabText(
-                                                        {
-                                                          options: {
-                                                            ...textOptions,
-                                                            content: variable(
-                                                              'Content',
-                                                              {
-                                                                value: [
-                                                                  'Update',
-                                                                ],
-                                                                configuration: {
-                                                                  as: 'MULTILINE',
-                                                                },
-                                                              },
-                                                            ),
-                                                            type: font('Font', {
-                                                              value: ['Title4'],
-                                                            }),
-                                                          },
-                                                        },
-                                                        [],
-                                                      ),
-                                                      prefabButton(
-                                                        {
-                                                          ref: {
-                                                            id: '#closeUpdateDialogButton',
-                                                          },
-                                                          style: {
-                                                            overwrite: {
-                                                              backgroundColor: {
-                                                                type: 'STATIC',
-                                                                value:
-                                                                  'Transparent',
-                                                              },
-                                                              boxShadow: 'none',
-                                                              color: {
-                                                                type: 'THEME_COLOR',
-                                                                value: 'light',
-                                                              },
-                                                              padding: ['0rem'],
-                                                            },
-                                                          },
-                                                          options: {
-                                                            ...buttonOptions,
-                                                            buttonText:
-                                                              variable(
-                                                                'Button text',
-                                                                { value: [] },
-                                                              ),
-                                                            icon: icon('Icon', {
-                                                              value: 'Close',
-                                                            }),
-                                                            size: option(
-                                                              'CUSTOM',
-                                                              {
-                                                                value: 'medium',
-                                                                label:
-                                                                  'Icon size',
-                                                                configuration: {
-                                                                  as: 'BUTTONGROUP',
-                                                                  dataType:
-                                                                    'string',
-                                                                  allowedInput:
-                                                                    [
-                                                                      {
-                                                                        name: 'Small',
-                                                                        value:
-                                                                          'small',
-                                                                      },
-                                                                      {
-                                                                        name: 'Medium',
-                                                                        value:
-                                                                          'medium',
-                                                                      },
-                                                                      {
-                                                                        name: 'Large',
-                                                                        value:
-                                                                          'large',
-                                                                      },
-                                                                    ],
-                                                                  condition:
-                                                                    hideIf(
-                                                                      'icon',
-                                                                      'EQ',
-                                                                      'none',
-                                                                    ),
-                                                                },
-                                                              },
-                                                            ),
-                                                          },
-                                                        },
-                                                        [],
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  prefabBox(
-                                                    {
-                                                      ref: {
-                                                        id: '#updateTabContentBox',
-                                                      },
-                                                    },
-                                                    [
-                                                      component(
-                                                        'Form Beta',
-                                                        {
-                                                          ref: {
-                                                            id: '#updateTabFormId',
-                                                          },
-                                                          options: defaults,
                                                         },
                                                         [
-                                                          FormErrorAlert({
-                                                            ref: {
-                                                              id: '#updateAlertErrorId',
+                                                          component(
+                                                            'Form Beta',
+                                                            {
+                                                              ref: {
+                                                                id: '#createTabFormId',
+                                                              },
+                                                              options: defaults,
                                                             },
-                                                          }),
-                                                        ],
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  prefabBox(
-                                                    {
-                                                      options: {
-                                                        ...boxOptions,
-                                                        alignment: buttongroup(
-                                                          'Alignment',
-                                                          [
-                                                            ['None', 'none'],
                                                             [
-                                                              'Left',
-                                                              'flex-start',
-                                                            ],
-                                                            [
-                                                              'Center',
-                                                              'center',
-                                                            ],
-                                                            [
-                                                              'Right',
-                                                              'flex-end',
-                                                            ],
-                                                            [
-                                                              'Justified',
-                                                              'space-between',
-                                                            ],
-                                                          ],
-                                                          {
-                                                            value:
-                                                              'space-between',
-                                                            configuration: {
-                                                              dataType:
-                                                                'string',
-                                                            },
-                                                          },
-                                                        ),
-                                                      },
-                                                    },
-                                                    [
-                                                      prefabButton(
-                                                        {
-                                                          ref: {
-                                                            id: '#cancelUpdateDialogButton',
-                                                          },
-                                                          style: {
-                                                            name: 'outline',
-                                                            overwrite: {
-                                                              fontWeight: '400',
-                                                              textTransform:
-                                                                'none',
-                                                            },
-                                                          },
-                                                          options: {
-                                                            ...buttonOptions,
-                                                            buttonText:
-                                                              variable(
-                                                                'Button text',
-                                                                {
-                                                                  value: [
-                                                                    'Cancel',
-                                                                  ],
+                                                              FormErrorAlert({
+                                                                ref: {
+                                                                  id: '#createAlertErrorId',
                                                                 },
-                                                              ),
-                                                          },
-                                                        },
-                                                        [],
+                                                              }),
+                                                            ],
+                                                          ),
+                                                        ],
                                                       ),
                                                       prefabBox(
                                                         {
                                                           options: {
                                                             ...boxOptions,
-                                                            innerSpacing: sizes(
-                                                              'Inner space',
-                                                              {
-                                                                value: [
-                                                                  '0rem',
-                                                                  '0rem',
-                                                                  '0rem',
-                                                                  '0rem',
+                                                            alignment:
+                                                              buttongroup(
+                                                                'Alignment',
+                                                                [
+                                                                  [
+                                                                    'None',
+                                                                    'none',
+                                                                  ],
+                                                                  [
+                                                                    'Left',
+                                                                    'flex-start',
+                                                                  ],
+                                                                  [
+                                                                    'Center',
+                                                                    'center',
+                                                                  ],
+                                                                  [
+                                                                    'Right',
+                                                                    'flex-end',
+                                                                  ],
+                                                                  [
+                                                                    'Justified',
+                                                                    'space-between',
+                                                                  ],
                                                                 ],
-                                                              },
-                                                            ),
+                                                                {
+                                                                  value:
+                                                                    'space-between',
+                                                                  configuration:
+                                                                    {
+                                                                      dataType:
+                                                                        'string',
+                                                                    },
+                                                                },
+                                                              ),
                                                           },
                                                         },
                                                         [
                                                           prefabButton(
                                                             {
                                                               ref: {
-                                                                id: '#deleteUpdateDialogButton',
+                                                                id: '#cancelCreateDialogButton',
                                                               },
                                                               style: {
                                                                 name: 'outline',
                                                                 overwrite: {
-                                                                  borderColor: {
-                                                                    type: 'THEME_COLOR',
-                                                                    value:
-                                                                      'danger',
-                                                                  },
-                                                                  color: {
-                                                                    type: 'THEME_COLOR',
-                                                                    value:
-                                                                      'danger',
-                                                                  },
                                                                   fontWeight:
                                                                     '400',
                                                                   textTransform:
@@ -3178,26 +3049,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                                     'Button text',
                                                                     {
                                                                       value: [
-                                                                        'Delete',
-                                                                      ],
-                                                                    },
-                                                                  ),
-                                                                icon: icon(
-                                                                  'Icon',
-                                                                  {
-                                                                    value:
-                                                                      'Delete',
-                                                                  },
-                                                                ),
-                                                                outerSpacing:
-                                                                  sizes(
-                                                                    'Outer space',
-                                                                    {
-                                                                      value: [
-                                                                        '0rem',
-                                                                        'M',
-                                                                        '0rem',
-                                                                        '0rem',
+                                                                        'Cancel',
                                                                       ],
                                                                     },
                                                                   ),
@@ -3208,7 +3060,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                           prefabButton(
                                                             {
                                                               ref: {
-                                                                id: '#submitUpdateDialogButton',
+                                                                id: '#submitCreateDialogButton',
                                                               },
                                                               style: {
                                                                 overwrite: {
@@ -3269,254 +3121,634 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                       ),
                                                     ],
                                                   ),
-                                                ],
-                                              ),
-                                              Tab(
-                                                {
-                                                  label: 'Details',
-                                                  ref: { id: '#detailsTab' },
-                                                  options: {
-                                                    ...tabOptions,
-                                                    label: variable(
-                                                      'Tab label',
-                                                      { value: ['Edit'] },
-                                                    ),
-                                                  },
-                                                },
-                                                [
-                                                  prefabBox(
+                                                  Tab(
                                                     {
+                                                      label: 'Update',
+                                                      ref: { id: '#updateTab' },
                                                       options: {
-                                                        ...boxOptions,
-                                                        alignment: buttongroup(
-                                                          'Alignment',
-                                                          [
-                                                            ['None', 'none'],
-                                                            [
-                                                              'Left',
-                                                              'flex-start',
-                                                            ],
-                                                            [
-                                                              'Center',
-                                                              'center',
-                                                            ],
-                                                            [
-                                                              'Right',
-                                                              'flex-end',
-                                                            ],
-                                                            [
-                                                              'Justified',
-                                                              'space-between',
-                                                            ],
-                                                          ],
-                                                          {
-                                                            value:
-                                                              'space-between',
-                                                            configuration: {
-                                                              dataType:
-                                                                'string',
-                                                            },
-                                                          },
-                                                        ),
-
-                                                        innerSpacing: sizes(
-                                                          'Inner space',
-                                                          {
-                                                            value: [
-                                                              'M',
-                                                              'M',
-                                                              '0rem',
-                                                              'M',
-                                                            ],
-                                                          },
+                                                        ...tabOptions,
+                                                        label: variable(
+                                                          'Tab label',
+                                                          { value: ['Update'] },
                                                         ),
                                                       },
                                                     },
                                                     [
-                                                      prefabText(
+                                                      prefabBox(
                                                         {
                                                           options: {
-                                                            ...textOptions,
-                                                            content: variable(
-                                                              'Content',
+                                                            ...boxOptions,
+                                                            alignment:
+                                                              buttongroup(
+                                                                'Alignment',
+                                                                [
+                                                                  [
+                                                                    'None',
+                                                                    'none',
+                                                                  ],
+                                                                  [
+                                                                    'Left',
+                                                                    'flex-start',
+                                                                  ],
+                                                                  [
+                                                                    'Center',
+                                                                    'center',
+                                                                  ],
+                                                                  [
+                                                                    'Right',
+                                                                    'flex-end',
+                                                                  ],
+                                                                  [
+                                                                    'Justified',
+                                                                    'space-between',
+                                                                  ],
+                                                                ],
+                                                                {
+                                                                  value:
+                                                                    'space-between',
+                                                                  configuration:
+                                                                    {
+                                                                      dataType:
+                                                                        'string',
+                                                                    },
+                                                                },
+                                                              ),
+
+                                                            innerSpacing: sizes(
+                                                              'Inner space',
                                                               {
                                                                 value: [
-                                                                  'Details',
+                                                                  'M',
+                                                                  'M',
+                                                                  '0rem',
+                                                                  'M',
                                                                 ],
-                                                                configuration: {
-                                                                  as: 'MULTILINE',
-                                                                },
                                                               },
                                                             ),
-                                                            type: font('Font', {
-                                                              value: ['Title4'],
-                                                            }),
                                                           },
                                                         },
-                                                        [],
-                                                      ),
-                                                      prefabButton(
-                                                        {
-                                                          ref: {
-                                                            id: '#closeDetailsDialogButton',
-                                                          },
-                                                          style: {
-                                                            overwrite: {
-                                                              backgroundColor: {
-                                                                type: 'STATIC',
-                                                                value:
-                                                                  'Transparent',
+                                                        [
+                                                          prefabText(
+                                                            {
+                                                              ref: {
+                                                                id: '#updateDialogTitle',
                                                               },
-                                                              boxShadow: 'none',
-                                                              color: {
-                                                                type: 'THEME_COLOR',
-                                                                value: 'light',
-                                                              },
-                                                              padding: ['0rem'],
-                                                            },
-                                                          },
-                                                          options: {
-                                                            ...buttonOptions,
-                                                            buttonText:
-                                                              variable(
-                                                                'Button text',
-                                                                { value: [] },
-                                                              ),
-                                                            icon: icon('Icon', {
-                                                              value: 'Close',
-                                                            }),
-                                                            size: option(
-                                                              'CUSTOM',
-                                                              {
-                                                                value: 'medium',
-                                                                label:
-                                                                  'Icon size',
-                                                                configuration: {
-                                                                  as: 'BUTTONGROUP',
-                                                                  dataType:
-                                                                    'string',
-                                                                  allowedInput:
-                                                                    [
-                                                                      {
-                                                                        name: 'Small',
-                                                                        value:
-                                                                          'small',
+                                                              options: {
+                                                                ...textOptions,
+                                                                content:
+                                                                  variable(
+                                                                    'Content',
+                                                                    {
+                                                                      ref: {
+                                                                        id: '#updateDialogTitleOption',
                                                                       },
-                                                                      {
-                                                                        name: 'Medium',
-                                                                        value:
-                                                                          'medium',
-                                                                      },
-                                                                      {
-                                                                        name: 'Large',
-                                                                        value:
-                                                                          'large',
-                                                                      },
+
+                                                                      value: [
+                                                                        'Update',
+                                                                      ],
+                                                                      configuration:
+                                                                        {
+                                                                          as: 'MULTILINE',
+                                                                        },
+                                                                    },
+                                                                  ),
+                                                                type: font(
+                                                                  'Font',
+                                                                  {
+                                                                    value: [
+                                                                      'Title4',
                                                                     ],
-                                                                  condition:
-                                                                    hideIf(
-                                                                      'icon',
-                                                                      'EQ',
-                                                                      'none',
-                                                                    ),
-                                                                },
+                                                                  },
+                                                                ),
                                                               },
-                                                            ),
-                                                          },
-                                                        },
-                                                        [],
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  prefabBox(
-                                                    {
-                                                      ref: {
-                                                        id: '#detailsTabContentBox',
-                                                      },
-                                                      options: {
-                                                        ...boxOptions,
-                                                        innerSpacing: sizes(
-                                                          'Inner space',
-                                                          {
-                                                            value: [
-                                                              '0rem',
-                                                              '0rem',
-                                                              '0rem',
-                                                              '0rem',
-                                                            ],
-                                                          },
-                                                        ),
-                                                      },
-                                                    },
-                                                    [],
-                                                  ),
-                                                  prefabBox(
-                                                    {
-                                                      options: {
-                                                        ...boxOptions,
-                                                        alignment: buttongroup(
-                                                          'Alignment',
-                                                          [
-                                                            ['None', 'none'],
-                                                            [
-                                                              'Left',
-                                                              'flex-start',
-                                                            ],
-                                                            [
-                                                              'Center',
-                                                              'center',
-                                                            ],
-                                                            [
-                                                              'Right',
-                                                              'flex-end',
-                                                            ],
-                                                            [
-                                                              'Justified',
-                                                              'space-between',
-                                                            ],
-                                                          ],
-                                                          {
-                                                            value:
-                                                              'space-between',
-                                                            configuration: {
-                                                              dataType:
-                                                                'string',
                                                             },
-                                                          },
-                                                        ),
-                                                      },
-                                                    },
-                                                    [
-                                                      prefabButton(
-                                                        {
-                                                          ref: {
-                                                            id: '#cancelDetailsDialogButton',
-                                                          },
-                                                          style: {
-                                                            name: 'outline',
-                                                            overwrite: {
-                                                              fontWeight: '400',
-                                                              textTransform:
-                                                                'none',
-                                                            },
-                                                          },
-                                                          options: {
-                                                            ...buttonOptions,
-                                                            buttonText:
-                                                              variable(
-                                                                'Button text',
-                                                                {
-                                                                  value: [
-                                                                    'Cancel',
+                                                            [],
+                                                          ),
+                                                          prefabButton(
+                                                            {
+                                                              ref: {
+                                                                id: '#closeUpdateDialogButton',
+                                                              },
+                                                              style: {
+                                                                overwrite: {
+                                                                  backgroundColor:
+                                                                    {
+                                                                      type: 'STATIC',
+                                                                      value:
+                                                                        'Transparent',
+                                                                    },
+                                                                  boxShadow:
+                                                                    'none',
+                                                                  color: {
+                                                                    type: 'THEME_COLOR',
+                                                                    value:
+                                                                      'light',
+                                                                  },
+                                                                  padding: [
+                                                                    '0rem',
                                                                   ],
                                                                 },
-                                                              ),
-                                                          },
-                                                        },
-                                                        [],
+                                                              },
+                                                              options: {
+                                                                ...buttonOptions,
+                                                                buttonText:
+                                                                  variable(
+                                                                    'Button text',
+                                                                    {
+                                                                      value: [],
+                                                                    },
+                                                                  ),
+                                                                icon: icon(
+                                                                  'Icon',
+                                                                  {
+                                                                    value:
+                                                                      'Close',
+                                                                  },
+                                                                ),
+                                                                size: option(
+                                                                  'CUSTOM',
+                                                                  {
+                                                                    value:
+                                                                      'medium',
+                                                                    label:
+                                                                      'Icon size',
+                                                                    configuration:
+                                                                      {
+                                                                        as: 'BUTTONGROUP',
+                                                                        dataType:
+                                                                          'string',
+                                                                        allowedInput:
+                                                                          [
+                                                                            {
+                                                                              name: 'Small',
+                                                                              value:
+                                                                                'small',
+                                                                            },
+                                                                            {
+                                                                              name: 'Medium',
+                                                                              value:
+                                                                                'medium',
+                                                                            },
+                                                                            {
+                                                                              name: 'Large',
+                                                                              value:
+                                                                                'large',
+                                                                            },
+                                                                          ],
+                                                                        condition:
+                                                                          hideIf(
+                                                                            'icon',
+                                                                            'EQ',
+                                                                            'none',
+                                                                          ),
+                                                                      },
+                                                                  },
+                                                                ),
+                                                              },
+                                                            },
+                                                            [],
+                                                          ),
+                                                        ],
                                                       ),
                                                       prefabBox(
                                                         {
+                                                          ref: {
+                                                            id: '#updateTabContentBox',
+                                                          },
+                                                        },
+                                                        [
+                                                          component(
+                                                            'Form Beta',
+                                                            {
+                                                              ref: {
+                                                                id: '#updateTabFormId',
+                                                              },
+                                                              options: defaults,
+                                                            },
+                                                            [
+                                                              FormErrorAlert({
+                                                                ref: {
+                                                                  id: '#updateAlertErrorId',
+                                                                },
+                                                              }),
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      prefabBox(
+                                                        {
+                                                          options: {
+                                                            ...boxOptions,
+                                                            alignment:
+                                                              buttongroup(
+                                                                'Alignment',
+                                                                [
+                                                                  [
+                                                                    'None',
+                                                                    'none',
+                                                                  ],
+                                                                  [
+                                                                    'Left',
+                                                                    'flex-start',
+                                                                  ],
+                                                                  [
+                                                                    'Center',
+                                                                    'center',
+                                                                  ],
+                                                                  [
+                                                                    'Right',
+                                                                    'flex-end',
+                                                                  ],
+                                                                  [
+                                                                    'Justified',
+                                                                    'space-between',
+                                                                  ],
+                                                                ],
+                                                                {
+                                                                  value:
+                                                                    'space-between',
+                                                                  configuration:
+                                                                    {
+                                                                      dataType:
+                                                                        'string',
+                                                                    },
+                                                                },
+                                                              ),
+                                                          },
+                                                        },
+                                                        [
+                                                          prefabButton(
+                                                            {
+                                                              ref: {
+                                                                id: '#cancelUpdateDialogButton',
+                                                              },
+                                                              style: {
+                                                                name: 'outline',
+                                                                overwrite: {
+                                                                  fontWeight:
+                                                                    '400',
+                                                                  textTransform:
+                                                                    'none',
+                                                                },
+                                                              },
+                                                              options: {
+                                                                ...buttonOptions,
+                                                                buttonText:
+                                                                  variable(
+                                                                    'Button text',
+                                                                    {
+                                                                      value: [
+                                                                        'Cancel',
+                                                                      ],
+                                                                    },
+                                                                  ),
+                                                              },
+                                                            },
+                                                            [],
+                                                          ),
+                                                          prefabBox(
+                                                            {
+                                                              options: {
+                                                                ...boxOptions,
+                                                                innerSpacing:
+                                                                  sizes(
+                                                                    'Inner space',
+                                                                    {
+                                                                      value: [
+                                                                        '0rem',
+                                                                        '0rem',
+                                                                        '0rem',
+                                                                        '0rem',
+                                                                      ],
+                                                                    },
+                                                                  ),
+                                                              },
+                                                            },
+                                                            [
+                                                              prefabButton(
+                                                                {
+                                                                  ref: {
+                                                                    id: '#deleteUpdateDialogButton',
+                                                                  },
+                                                                  style: {
+                                                                    name: 'outline',
+                                                                    overwrite: {
+                                                                      borderColor:
+                                                                        {
+                                                                          type: 'THEME_COLOR',
+                                                                          value:
+                                                                            'danger',
+                                                                        },
+                                                                      color: {
+                                                                        type: 'THEME_COLOR',
+                                                                        value:
+                                                                          'danger',
+                                                                      },
+                                                                      fontWeight:
+                                                                        '400',
+                                                                      textTransform:
+                                                                        'none',
+                                                                    },
+                                                                  },
+                                                                  options: {
+                                                                    ...buttonOptions,
+                                                                    buttonText:
+                                                                      variable(
+                                                                        'Button text',
+                                                                        {
+                                                                          value:
+                                                                            [
+                                                                              'Delete',
+                                                                            ],
+                                                                        },
+                                                                      ),
+                                                                    icon: icon(
+                                                                      'Icon',
+                                                                      {
+                                                                        value:
+                                                                          'Delete',
+                                                                      },
+                                                                    ),
+                                                                    outerSpacing:
+                                                                      sizes(
+                                                                        'Outer space',
+                                                                        {
+                                                                          value:
+                                                                            [
+                                                                              '0rem',
+                                                                              'M',
+                                                                              '0rem',
+                                                                              '0rem',
+                                                                            ],
+                                                                        },
+                                                                      ),
+                                                                  },
+                                                                },
+                                                                [],
+                                                              ),
+                                                              prefabButton(
+                                                                {
+                                                                  ref: {
+                                                                    id: '#submitUpdateDialogButton',
+                                                                  },
+                                                                  style: {
+                                                                    overwrite: {
+                                                                      backgroundColor:
+                                                                        {
+                                                                          type: 'THEME_COLOR',
+                                                                          value:
+                                                                            'primary',
+                                                                        },
+                                                                      boxShadow:
+                                                                        'none',
+                                                                      color: {
+                                                                        type: 'THEME_COLOR',
+                                                                        value:
+                                                                          'white',
+                                                                      },
+                                                                      fontFamily:
+                                                                        'Roboto',
+                                                                      fontSize:
+                                                                        '0.875rem',
+                                                                      fontStyle:
+                                                                        'none',
+                                                                      fontWeight:
+                                                                        '400',
+                                                                      padding: [
+                                                                        '0.6875rem',
+                                                                        '1.375rem',
+                                                                      ],
+                                                                      textDecoration:
+                                                                        'none',
+                                                                      textTransform:
+                                                                        'none',
+                                                                    },
+                                                                  },
+                                                                  options: {
+                                                                    ...buttonOptions,
+                                                                    buttonText:
+                                                                      variable(
+                                                                        'Button text',
+                                                                        {
+                                                                          value:
+                                                                            [
+                                                                              'Save',
+                                                                            ],
+                                                                        },
+                                                                      ),
+                                                                    icon: icon(
+                                                                      'Icon',
+                                                                      {
+                                                                        value:
+                                                                          'Save',
+                                                                      },
+                                                                    ),
+                                                                  },
+                                                                },
+                                                                [],
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Tab(
+                                                    {
+                                                      label: 'Details',
+                                                      ref: {
+                                                        id: '#detailsTab',
+                                                      },
+                                                      options: {
+                                                        ...tabOptions,
+                                                        label: variable(
+                                                          'Tab label',
+                                                          { value: ['Edit'] },
+                                                        ),
+                                                      },
+                                                    },
+                                                    [
+                                                      prefabBox(
+                                                        {
+                                                          options: {
+                                                            ...boxOptions,
+                                                            alignment:
+                                                              buttongroup(
+                                                                'Alignment',
+                                                                [
+                                                                  [
+                                                                    'None',
+                                                                    'none',
+                                                                  ],
+                                                                  [
+                                                                    'Left',
+                                                                    'flex-start',
+                                                                  ],
+                                                                  [
+                                                                    'Center',
+                                                                    'center',
+                                                                  ],
+                                                                  [
+                                                                    'Right',
+                                                                    'flex-end',
+                                                                  ],
+                                                                  [
+                                                                    'Justified',
+                                                                    'space-between',
+                                                                  ],
+                                                                ],
+                                                                {
+                                                                  value:
+                                                                    'space-between',
+                                                                  configuration:
+                                                                    {
+                                                                      dataType:
+                                                                        'string',
+                                                                    },
+                                                                },
+                                                              ),
+
+                                                            innerSpacing: sizes(
+                                                              'Inner space',
+                                                              {
+                                                                value: [
+                                                                  'M',
+                                                                  'M',
+                                                                  '0rem',
+                                                                  'M',
+                                                                ],
+                                                              },
+                                                            ),
+                                                          },
+                                                        },
+                                                        [
+                                                          prefabText(
+                                                            {
+                                                              ref: {
+                                                                id: '#detailsDialogTitle',
+                                                              },
+                                                              options: {
+                                                                ...textOptions,
+                                                                content:
+                                                                  variable(
+                                                                    'Content',
+                                                                    {
+                                                                      ref: {
+                                                                        id: '#detailsDialogTitleOption',
+                                                                      },
+
+                                                                      value: [
+                                                                        'Details',
+                                                                      ],
+                                                                      configuration:
+                                                                        {
+                                                                          as: 'MULTILINE',
+                                                                        },
+                                                                    },
+                                                                  ),
+                                                                type: font(
+                                                                  'Font',
+                                                                  {
+                                                                    value: [
+                                                                      'Title4',
+                                                                    ],
+                                                                  },
+                                                                ),
+                                                              },
+                                                            },
+                                                            [],
+                                                          ),
+                                                          prefabButton(
+                                                            {
+                                                              ref: {
+                                                                id: '#closeDetailsDialogButton',
+                                                              },
+                                                              style: {
+                                                                overwrite: {
+                                                                  backgroundColor:
+                                                                    {
+                                                                      type: 'STATIC',
+                                                                      value:
+                                                                        'Transparent',
+                                                                    },
+                                                                  boxShadow:
+                                                                    'none',
+                                                                  color: {
+                                                                    type: 'THEME_COLOR',
+                                                                    value:
+                                                                      'light',
+                                                                  },
+                                                                  padding: [
+                                                                    '0rem',
+                                                                  ],
+                                                                },
+                                                              },
+                                                              options: {
+                                                                ...buttonOptions,
+                                                                buttonText:
+                                                                  variable(
+                                                                    'Button text',
+                                                                    {
+                                                                      value: [],
+                                                                    },
+                                                                  ),
+                                                                icon: icon(
+                                                                  'Icon',
+                                                                  {
+                                                                    value:
+                                                                      'Close',
+                                                                  },
+                                                                ),
+                                                                size: option(
+                                                                  'CUSTOM',
+                                                                  {
+                                                                    value:
+                                                                      'medium',
+                                                                    label:
+                                                                      'Icon size',
+                                                                    configuration:
+                                                                      {
+                                                                        as: 'BUTTONGROUP',
+                                                                        dataType:
+                                                                          'string',
+                                                                        allowedInput:
+                                                                          [
+                                                                            {
+                                                                              name: 'Small',
+                                                                              value:
+                                                                                'small',
+                                                                            },
+                                                                            {
+                                                                              name: 'Medium',
+                                                                              value:
+                                                                                'medium',
+                                                                            },
+                                                                            {
+                                                                              name: 'Large',
+                                                                              value:
+                                                                                'large',
+                                                                            },
+                                                                          ],
+                                                                        condition:
+                                                                          hideIf(
+                                                                            'icon',
+                                                                            'EQ',
+                                                                            'none',
+                                                                          ),
+                                                                      },
+                                                                  },
+                                                                ),
+                                                              },
+                                                            },
+                                                            [],
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      prefabBox(
+                                                        {
+                                                          ref: {
+                                                            id: '#detailsTabContentBox',
+                                                          },
                                                           options: {
                                                             ...boxOptions,
                                                             innerSpacing: sizes(
@@ -3532,25 +3764,58 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                             ),
                                                           },
                                                         },
+                                                        [],
+                                                      ),
+                                                      prefabBox(
+                                                        {
+                                                          options: {
+                                                            ...boxOptions,
+                                                            alignment:
+                                                              buttongroup(
+                                                                'Alignment',
+                                                                [
+                                                                  [
+                                                                    'None',
+                                                                    'none',
+                                                                  ],
+                                                                  [
+                                                                    'Left',
+                                                                    'flex-start',
+                                                                  ],
+                                                                  [
+                                                                    'Center',
+                                                                    'center',
+                                                                  ],
+                                                                  [
+                                                                    'Right',
+                                                                    'flex-end',
+                                                                  ],
+                                                                  [
+                                                                    'Justified',
+                                                                    'space-between',
+                                                                  ],
+                                                                ],
+                                                                {
+                                                                  value:
+                                                                    'space-between',
+                                                                  configuration:
+                                                                    {
+                                                                      dataType:
+                                                                        'string',
+                                                                    },
+                                                                },
+                                                              ),
+                                                          },
+                                                        },
                                                         [
                                                           prefabButton(
                                                             {
                                                               ref: {
-                                                                id: '#deleteDetailsDialogButton',
+                                                                id: '#cancelDetailsDialogButton',
                                                               },
                                                               style: {
                                                                 name: 'outline',
                                                                 overwrite: {
-                                                                  borderColor: {
-                                                                    type: 'THEME_COLOR',
-                                                                    value:
-                                                                      'danger',
-                                                                  },
-                                                                  color: {
-                                                                    type: 'THEME_COLOR',
-                                                                    value:
-                                                                      'danger',
-                                                                  },
                                                                   fontWeight:
                                                                     '400',
                                                                   textTransform:
@@ -3564,17 +3829,444 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                                     'Button text',
                                                                     {
                                                                       value: [
+                                                                        'Cancel',
+                                                                      ],
+                                                                    },
+                                                                  ),
+                                                              },
+                                                            },
+                                                            [],
+                                                          ),
+                                                          prefabBox(
+                                                            {
+                                                              options: {
+                                                                ...boxOptions,
+                                                                innerSpacing:
+                                                                  sizes(
+                                                                    'Inner space',
+                                                                    {
+                                                                      value: [
+                                                                        '0rem',
+                                                                        '0rem',
+                                                                        '0rem',
+                                                                        '0rem',
+                                                                      ],
+                                                                    },
+                                                                  ),
+                                                              },
+                                                            },
+                                                            [
+                                                              prefabButton(
+                                                                {
+                                                                  ref: {
+                                                                    id: '#deleteDetailsDialogButton',
+                                                                  },
+                                                                  style: {
+                                                                    name: 'outline',
+                                                                    overwrite: {
+                                                                      borderColor:
+                                                                        {
+                                                                          type: 'THEME_COLOR',
+                                                                          value:
+                                                                            'danger',
+                                                                        },
+                                                                      color: {
+                                                                        type: 'THEME_COLOR',
+                                                                        value:
+                                                                          'danger',
+                                                                      },
+                                                                      fontWeight:
+                                                                        '400',
+                                                                      textTransform:
+                                                                        'none',
+                                                                    },
+                                                                  },
+                                                                  options: {
+                                                                    ...buttonOptions,
+                                                                    buttonText:
+                                                                      variable(
+                                                                        'Button text',
+                                                                        {
+                                                                          value:
+                                                                            [
+                                                                              'Delete',
+                                                                            ],
+                                                                        },
+                                                                      ),
+                                                                    icon: icon(
+                                                                      'Icon',
+                                                                      {
+                                                                        value:
+                                                                          'Delete',
+                                                                      },
+                                                                    ),
+                                                                    outerSpacing:
+                                                                      sizes(
+                                                                        'Outer space',
+                                                                        {
+                                                                          value:
+                                                                            [
+                                                                              '0rem',
+                                                                              'M',
+                                                                              '0rem',
+                                                                              '0rem',
+                                                                            ],
+                                                                        },
+                                                                      ),
+                                                                  },
+                                                                },
+                                                                [],
+                                                              ),
+                                                              prefabButton(
+                                                                {
+                                                                  ref: {
+                                                                    id: '#editDetailsDialogButton',
+                                                                  },
+                                                                  style: {
+                                                                    overwrite: {
+                                                                      backgroundColor:
+                                                                        {
+                                                                          type: 'THEME_COLOR',
+                                                                          value:
+                                                                            'primary',
+                                                                        },
+                                                                      boxShadow:
+                                                                        'none',
+                                                                      color: {
+                                                                        type: 'THEME_COLOR',
+                                                                        value:
+                                                                          'white',
+                                                                      },
+                                                                      fontFamily:
+                                                                        'Roboto',
+                                                                      fontSize:
+                                                                        '0.875rem',
+                                                                      fontStyle:
+                                                                        'none',
+                                                                      fontWeight:
+                                                                        '400',
+                                                                      padding: [
+                                                                        '0.6875rem',
+                                                                        '1.375rem',
+                                                                      ],
+                                                                      textDecoration:
+                                                                        'none',
+                                                                      textTransform:
+                                                                        'none',
+                                                                    },
+                                                                  },
+                                                                  options: {
+                                                                    ...buttonOptions,
+                                                                    buttonText:
+                                                                      variable(
+                                                                        'Button text',
+                                                                        {
+                                                                          value:
+                                                                            [
+                                                                              'Edit',
+                                                                            ],
+                                                                        },
+                                                                      ),
+                                                                    icon: icon(
+                                                                      'Icon',
+                                                                      {
+                                                                        value:
+                                                                          'Edit',
+                                                                      },
+                                                                    ),
+                                                                  },
+                                                                },
+                                                                [],
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Tab(
+                                                    {
+                                                      ref: {
+                                                        id: '#deleteTabFormId',
+                                                      },
+                                                      label: 'Delete',
+                                                      options: {
+                                                        ...tabOptions,
+                                                        label: variable(
+                                                          'Tab label',
+                                                          {
+                                                            value: [
+                                                              'Delete tab',
+                                                            ],
+                                                          },
+                                                        ),
+                                                      },
+                                                    },
+                                                    [
+                                                      prefabBox(
+                                                        {
+                                                          options: {
+                                                            ...boxOptions,
+                                                            alignment:
+                                                              buttongroup(
+                                                                'Alignment',
+                                                                [
+                                                                  [
+                                                                    'None',
+                                                                    'none',
+                                                                  ],
+                                                                  [
+                                                                    'Left',
+                                                                    'flex-start',
+                                                                  ],
+                                                                  [
+                                                                    'Center',
+                                                                    'center',
+                                                                  ],
+                                                                  [
+                                                                    'Right',
+                                                                    'flex-end',
+                                                                  ],
+                                                                  [
+                                                                    'Justified',
+                                                                    'space-between',
+                                                                  ],
+                                                                ],
+                                                                {
+                                                                  value:
+                                                                    'space-between',
+                                                                  configuration:
+                                                                    {
+                                                                      dataType:
+                                                                        'string',
+                                                                    },
+                                                                },
+                                                              ),
+
+                                                            innerSpacing: sizes(
+                                                              'Inner space',
+                                                              {
+                                                                value: [
+                                                                  'M',
+                                                                  'M',
+                                                                  '0rem',
+                                                                  'M',
+                                                                ],
+                                                              },
+                                                            ),
+                                                          },
+                                                        },
+                                                        [
+                                                          prefabText(
+                                                            {
+                                                              ref: {
+                                                                id: '#deleteDialogTitle',
+                                                              },
+                                                              options: {
+                                                                ...textOptions,
+                                                                content:
+                                                                  variable(
+                                                                    'Content',
+                                                                    {
+                                                                      ref: {
+                                                                        id: '#deleteDialogTitleOption',
+                                                                      },
+                                                                      value: [
                                                                         'Delete',
                                                                       ],
+                                                                      configuration:
+                                                                        {
+                                                                          as: 'MULTILINE',
+                                                                        },
+                                                                    },
+                                                                  ),
+                                                                type: font(
+                                                                  'Font',
+                                                                  {
+                                                                    value: [
+                                                                      'Title4',
+                                                                    ],
+                                                                  },
+                                                                ),
+                                                              },
+                                                            },
+                                                            [],
+                                                          ),
+                                                          prefabButton(
+                                                            {
+                                                              ref: {
+                                                                id: '#closeDeleteDialogButton',
+                                                              },
+                                                              style: {
+                                                                overwrite: {
+                                                                  backgroundColor:
+                                                                    {
+                                                                      type: 'STATIC',
+                                                                      value:
+                                                                        'Transparent',
+                                                                    },
+                                                                  boxShadow:
+                                                                    'none',
+                                                                  color: {
+                                                                    type: 'THEME_COLOR',
+                                                                    value:
+                                                                      'light',
+                                                                  },
+                                                                  padding: [
+                                                                    '0rem',
+                                                                  ],
+                                                                },
+                                                              },
+                                                              options: {
+                                                                ...buttonOptions,
+                                                                buttonText:
+                                                                  variable(
+                                                                    'Button text',
+                                                                    {
+                                                                      value: [],
                                                                     },
                                                                   ),
                                                                 icon: icon(
                                                                   'Icon',
                                                                   {
                                                                     value:
-                                                                      'Delete',
+                                                                      'Close',
                                                                   },
                                                                 ),
+                                                                size: option(
+                                                                  'CUSTOM',
+                                                                  {
+                                                                    value:
+                                                                      'medium',
+                                                                    label:
+                                                                      'Icon size',
+                                                                    configuration:
+                                                                      {
+                                                                        as: 'BUTTONGROUP',
+                                                                        dataType:
+                                                                          'string',
+                                                                        allowedInput:
+                                                                          [
+                                                                            {
+                                                                              name: 'Small',
+                                                                              value:
+                                                                                'small',
+                                                                            },
+                                                                            {
+                                                                              name: 'Medium',
+                                                                              value:
+                                                                                'medium',
+                                                                            },
+                                                                            {
+                                                                              name: 'Large',
+                                                                              value:
+                                                                                'large',
+                                                                            },
+                                                                          ],
+                                                                        condition:
+                                                                          hideIf(
+                                                                            'icon',
+                                                                            'EQ',
+                                                                            'none',
+                                                                          ),
+                                                                      },
+                                                                  },
+                                                                ),
+                                                              },
+                                                            },
+                                                            [],
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      prefabBox(
+                                                        {
+                                                          ref: {
+                                                            id: '#deleteTabContentBox',
+                                                          },
+                                                          options: {
+                                                            ...boxOptions,
+                                                            innerSpacing: sizes(
+                                                              'Inner space',
+                                                              {
+                                                                value: [
+                                                                  '0rem',
+                                                                  'M',
+                                                                  '0rem',
+                                                                  'M',
+                                                                ],
+                                                              },
+                                                            ),
+                                                          },
+                                                        },
+                                                        [],
+                                                      ),
+                                                      prefabBox(
+                                                        {
+                                                          options: {
+                                                            ...boxOptions,
+                                                            alignment:
+                                                              buttongroup(
+                                                                'Alignment',
+                                                                [
+                                                                  [
+                                                                    'None',
+                                                                    'none',
+                                                                  ],
+                                                                  [
+                                                                    'Left',
+                                                                    'flex-start',
+                                                                  ],
+                                                                  [
+                                                                    'Center',
+                                                                    'center',
+                                                                  ],
+                                                                  [
+                                                                    'Right',
+                                                                    'flex-end',
+                                                                  ],
+                                                                  [
+                                                                    'Justified',
+                                                                    'space-between',
+                                                                  ],
+                                                                ],
+                                                                {
+                                                                  value:
+                                                                    'flex-end',
+                                                                  configuration:
+                                                                    {
+                                                                      dataType:
+                                                                        'string',
+                                                                    },
+                                                                },
+                                                              ),
+                                                          },
+                                                        },
+                                                        [
+                                                          prefabButton(
+                                                            {
+                                                              ref: {
+                                                                id: '#cancelDeleteDialogButton',
+                                                              },
+                                                              style: {
+                                                                name: 'outline',
+                                                                overwrite: {
+                                                                  fontWeight:
+                                                                    '400',
+                                                                  textTransform:
+                                                                    'none',
+                                                                },
+                                                              },
+                                                              options: {
+                                                                ...buttonOptions,
+                                                                buttonText:
+                                                                  variable(
+                                                                    'Button text',
+                                                                    {
+                                                                      value: [
+                                                                        'Cancel',
+                                                                      ],
+                                                                    },
+                                                                  ),
                                                                 outerSpacing:
                                                                   sizes(
                                                                     'Outer space',
@@ -3591,63 +4283,13 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                             },
                                                             [],
                                                           ),
-                                                          prefabButton(
+                                                          component(
+                                                            'Form Beta',
                                                             {
                                                               ref: {
-                                                                id: '#editDetailsDialogButton',
+                                                                id: '#deleteFormId',
                                                               },
-                                                              style: {
-                                                                overwrite: {
-                                                                  backgroundColor:
-                                                                    {
-                                                                      type: 'THEME_COLOR',
-                                                                      value:
-                                                                        'primary',
-                                                                    },
-                                                                  boxShadow:
-                                                                    'none',
-                                                                  color: {
-                                                                    type: 'THEME_COLOR',
-                                                                    value:
-                                                                      'white',
-                                                                  },
-                                                                  fontFamily:
-                                                                    'Roboto',
-                                                                  fontSize:
-                                                                    '0.875rem',
-                                                                  fontStyle:
-                                                                    'none',
-                                                                  fontWeight:
-                                                                    '400',
-                                                                  padding: [
-                                                                    '0.6875rem',
-                                                                    '1.375rem',
-                                                                  ],
-                                                                  textDecoration:
-                                                                    'none',
-                                                                  textTransform:
-                                                                    'none',
-                                                                },
-                                                              },
-                                                              options: {
-                                                                ...buttonOptions,
-                                                                buttonText:
-                                                                  variable(
-                                                                    'Button text',
-                                                                    {
-                                                                      value: [
-                                                                        'Edit',
-                                                                      ],
-                                                                    },
-                                                                  ),
-                                                                icon: icon(
-                                                                  'Icon',
-                                                                  {
-                                                                    value:
-                                                                      'Edit',
-                                                                  },
-                                                                ),
-                                                              },
+                                                              options: defaults,
                                                             },
                                                             [],
                                                           ),
@@ -3657,435 +4299,171 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                                   ),
                                                 ],
                                               ),
-                                              Tab(
-                                                {
-                                                  ref: {
-                                                    id: '#deleteTabFormId',
-                                                  },
-                                                  label: 'Delete',
-                                                  options: {
-                                                    ...tabOptions,
-                                                    label: variable(
-                                                      'Tab label',
-                                                      { value: ['Delete tab'] },
-                                                    ),
-                                                  },
-                                                },
-                                                [
-                                                  prefabBox(
-                                                    {
-                                                      options: {
-                                                        ...boxOptions,
-                                                        alignment: buttongroup(
-                                                          'Alignment',
-                                                          [
-                                                            ['None', 'none'],
-                                                            [
-                                                              'Left',
-                                                              'flex-start',
-                                                            ],
-                                                            [
-                                                              'Center',
-                                                              'center',
-                                                            ],
-                                                            [
-                                                              'Right',
-                                                              'flex-end',
-                                                            ],
-                                                            [
-                                                              'Justified',
-                                                              'space-between',
-                                                            ],
-                                                          ],
-                                                          {
-                                                            value:
-                                                              'space-between',
-                                                            configuration: {
-                                                              dataType:
-                                                                'string',
-                                                            },
-                                                          },
-                                                        ),
-
-                                                        innerSpacing: sizes(
-                                                          'Inner space',
-                                                          {
-                                                            value: [
-                                                              'M',
-                                                              'M',
-                                                              '0rem',
-                                                              'M',
-                                                            ],
-                                                          },
-                                                        ),
-                                                      },
-                                                    },
-                                                    [
-                                                      prefabText(
-                                                        {
-                                                          options: {
-                                                            ...textOptions,
-                                                            content: variable(
-                                                              'Content',
-                                                              {
-                                                                value: [
-                                                                  'Delete',
-                                                                ],
-                                                                configuration: {
-                                                                  as: 'MULTILINE',
-                                                                },
-                                                              },
-                                                            ),
-                                                            type: font('Font', {
-                                                              value: ['Title4'],
-                                                            }),
-                                                          },
-                                                        },
-                                                        [],
-                                                      ),
-                                                      prefabButton(
-                                                        {
-                                                          ref: {
-                                                            id: '#closeDeleteDialogButton',
-                                                          },
-                                                          style: {
-                                                            overwrite: {
-                                                              backgroundColor: {
-                                                                type: 'STATIC',
-                                                                value:
-                                                                  'Transparent',
-                                                              },
-                                                              boxShadow: 'none',
-                                                              color: {
-                                                                type: 'THEME_COLOR',
-                                                                value: 'light',
-                                                              },
-                                                              padding: ['0rem'],
-                                                            },
-                                                          },
-                                                          options: {
-                                                            ...buttonOptions,
-                                                            buttonText:
-                                                              variable(
-                                                                'Button text',
-                                                                { value: [] },
-                                                              ),
-                                                            icon: icon('Icon', {
-                                                              value: 'Close',
-                                                            }),
-                                                            size: option(
-                                                              'CUSTOM',
-                                                              {
-                                                                value: 'medium',
-                                                                label:
-                                                                  'Icon size',
-                                                                configuration: {
-                                                                  as: 'BUTTONGROUP',
-                                                                  dataType:
-                                                                    'string',
-                                                                  allowedInput:
-                                                                    [
-                                                                      {
-                                                                        name: 'Small',
-                                                                        value:
-                                                                          'small',
-                                                                      },
-                                                                      {
-                                                                        name: 'Medium',
-                                                                        value:
-                                                                          'medium',
-                                                                      },
-                                                                      {
-                                                                        name: 'Large',
-                                                                        value:
-                                                                          'large',
-                                                                      },
-                                                                    ],
-                                                                  condition:
-                                                                    hideIf(
-                                                                      'icon',
-                                                                      'EQ',
-                                                                      'none',
-                                                                    ),
-                                                                },
-                                                              },
-                                                            ),
-                                                          },
-                                                        },
-                                                        [],
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  prefabBox(
-                                                    {
-                                                      ref: {
-                                                        id: '#deleteTabContentBox',
-                                                      },
-                                                      options: {
-                                                        ...boxOptions,
-                                                        innerSpacing: sizes(
-                                                          'Inner space',
-                                                          {
-                                                            value: [
-                                                              '0rem',
-                                                              '0rem',
-                                                              '0rem',
-                                                              '0rem',
-                                                            ],
-                                                          },
-                                                        ),
-                                                      },
-                                                    },
-                                                    [],
-                                                  ),
-                                                  prefabBox(
-                                                    {
-                                                      options: {
-                                                        ...boxOptions,
-                                                        alignment: buttongroup(
-                                                          'Alignment',
-                                                          [
-                                                            ['None', 'none'],
-                                                            [
-                                                              'Left',
-                                                              'flex-start',
-                                                            ],
-                                                            [
-                                                              'Center',
-                                                              'center',
-                                                            ],
-                                                            [
-                                                              'Right',
-                                                              'flex-end',
-                                                            ],
-                                                            [
-                                                              'Justified',
-                                                              'space-between',
-                                                            ],
-                                                          ],
-                                                          {
-                                                            value: 'flex-end',
-                                                            configuration: {
-                                                              dataType:
-                                                                'string',
-                                                            },
-                                                          },
-                                                        ),
-                                                      },
-                                                    },
-                                                    [
-                                                      prefabButton(
-                                                        {
-                                                          ref: {
-                                                            id: '#cancelDeleteDialogButton',
-                                                          },
-                                                          style: {
-                                                            name: 'outline',
-                                                            overwrite: {
-                                                              fontWeight: '400',
-                                                              textTransform:
-                                                                'none',
-                                                            },
-                                                          },
-                                                          options: {
-                                                            ...buttonOptions,
-                                                            buttonText:
-                                                              variable(
-                                                                'Button text',
-                                                                {
-                                                                  value: [
-                                                                    'Cancel',
-                                                                  ],
-                                                                },
-                                                              ),
-                                                            outerSpacing: sizes(
-                                                              'Outer space',
-                                                              {
-                                                                value: [
-                                                                  '0rem',
-                                                                  'M',
-                                                                  '0rem',
-                                                                  '0rem',
-                                                                ],
-                                                              },
-                                                            ),
-                                                          },
-                                                        },
-                                                        [],
-                                                      ),
-                                                      component(
-                                                        'Form Beta',
-                                                        {
-                                                          ref: {
-                                                            id: '#deleteFormId',
-                                                          },
-                                                          options: defaults,
-                                                        },
-                                                        [],
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        ]),
+                                            ]),
+                                          ],
+                                        ),
                                       ],
+                                    ),
+                                  ],
+                                ),
+                                Snackbar(
+                                  {
+                                    ref: { id: '#snackbarCreated' },
+                                    options: {
+                                      ...snackbarOptions,
+                                      visible: toggle('Toggle visibility', {
+                                        value: false,
+                                        configuration: { as: 'VISIBILITY' },
+                                      }),
+                                      anchorOriginVertical: option('CUSTOM', {
+                                        label: 'Vertical position',
+                                        value: 'top',
+                                        configuration: {
+                                          as: 'BUTTONGROUP',
+                                          dataType: 'string',
+                                          allowedInput: [
+                                            {
+                                              name: 'Top',
+                                              value: 'top',
+                                            },
+                                            {
+                                              name: 'Bottom',
+                                              value: 'bottom',
+                                            },
+                                          ],
+                                        },
+                                      }),
+                                    },
+                                  },
+                                  [
+                                    Alert(
+                                      {
+                                        options: {
+                                          ...alertOptions,
+                                          bodyText: variable('Body text', {
+                                            value: [
+                                              'Record successfully created',
+                                            ],
+                                          }),
+                                          textColor: color('Text color', {
+                                            value: ThemeColor.WHITE,
+                                          }),
+                                          iconColor: color('Icon color', {
+                                            value: ThemeColor.WHITE,
+                                          }),
+                                        },
+                                      },
+                                      [],
+                                    ),
+                                  ],
+                                ),
+                                Snackbar(
+                                  {
+                                    ref: { id: '#snackbarUpdated' },
+                                    options: {
+                                      ...snackbarOptions,
+                                      visible: toggle('Toggle visibility', {
+                                        value: false,
+                                        configuration: { as: 'VISIBILITY' },
+                                      }),
+                                      anchorOriginVertical: option('CUSTOM', {
+                                        label: 'Vertical position',
+                                        value: 'top',
+                                        configuration: {
+                                          as: 'BUTTONGROUP',
+                                          dataType: 'string',
+                                          allowedInput: [
+                                            {
+                                              name: 'Top',
+                                              value: 'top',
+                                            },
+                                            {
+                                              name: 'Bottom',
+                                              value: 'bottom',
+                                            },
+                                          ],
+                                        },
+                                      }),
+                                    },
+                                  },
+                                  [
+                                    Alert(
+                                      {
+                                        options: {
+                                          ...alertOptions,
+                                          bodyText: variable('Body text', {
+                                            value: [
+                                              'Record successfully updated',
+                                            ],
+                                          }),
+                                          textColor: color('Text color', {
+                                            value: ThemeColor.WHITE,
+                                          }),
+                                          iconColor: color('Icon color', {
+                                            value: ThemeColor.WHITE,
+                                          }),
+                                        },
+                                      },
+                                      [],
+                                    ),
+                                  ],
+                                ),
+                                Snackbar(
+                                  {
+                                    ref: { id: '#snackbarDeleted' },
+                                    options: {
+                                      ...snackbarOptions,
+                                      visible: toggle('Toggle visibility', {
+                                        value: false,
+                                        configuration: { as: 'VISIBILITY' },
+                                      }),
+                                      anchorOriginVertical: option('CUSTOM', {
+                                        label: 'Vertical position',
+                                        value: 'top',
+                                        configuration: {
+                                          as: 'BUTTONGROUP',
+                                          dataType: 'string',
+                                          allowedInput: [
+                                            {
+                                              name: 'Top',
+                                              value: 'top',
+                                            },
+                                            {
+                                              name: 'Bottom',
+                                              value: 'bottom',
+                                            },
+                                          ],
+                                        },
+                                      }),
+                                    },
+                                  },
+                                  [
+                                    Alert(
+                                      {
+                                        options: {
+                                          ...alertOptions,
+                                          bodyText: variable('Body text', {
+                                            value: [
+                                              'Record successfully deleted',
+                                            ],
+                                          }),
+                                          textColor: color('Text color', {
+                                            value: ThemeColor.WHITE,
+                                          }),
+                                          iconColor: color('Icon color', {
+                                            value: ThemeColor.WHITE,
+                                          }),
+                                        },
+                                      },
+                                      [],
                                     ),
                                   ],
                                 ),
                               ],
                             ),
-                            Snackbar(
-                              {
-                                ref: { id: '#snackbarCreated' },
-                                options: {
-                                  ...snackbarOptions,
-                                  visible: toggle('Toggle visibility', {
-                                    value: false,
-                                    configuration: { as: 'VISIBILITY' },
-                                  }),
-                                  anchorOriginVertical: option('CUSTOM', {
-                                    label: 'Vertical position',
-                                    value: 'top',
-                                    configuration: {
-                                      as: 'BUTTONGROUP',
-                                      dataType: 'string',
-                                      allowedInput: [
-                                        {
-                                          name: 'Top',
-                                          value: 'top',
-                                        },
-                                        {
-                                          name: 'Bottom',
-                                          value: 'bottom',
-                                        },
-                                      ],
-                                    },
-                                  }),
-                                },
-                              },
-                              [
-                                Alert(
-                                  {
-                                    options: {
-                                      ...alertOptions,
-                                      bodyText: variable('Body text', {
-                                        value: ['Record successfully created'],
-                                      }),
-                                      textColor: color('Text color', {
-                                        value: ThemeColor.WHITE,
-                                      }),
-                                      iconColor: color('Icon color', {
-                                        value: ThemeColor.WHITE,
-                                      }),
-                                    },
-                                  },
-                                  [],
-                                ),
-                              ],
-                            ),
-                            Snackbar(
-                              {
-                                ref: { id: '#snackbarUpdated' },
-                                options: {
-                                  ...snackbarOptions,
-                                  visible: toggle('Toggle visibility', {
-                                    value: false,
-                                    configuration: { as: 'VISIBILITY' },
-                                  }),
-                                  anchorOriginVertical: option('CUSTOM', {
-                                    label: 'Vertical position',
-                                    value: 'top',
-                                    configuration: {
-                                      as: 'BUTTONGROUP',
-                                      dataType: 'string',
-                                      allowedInput: [
-                                        {
-                                          name: 'Top',
-                                          value: 'top',
-                                        },
-                                        {
-                                          name: 'Bottom',
-                                          value: 'bottom',
-                                        },
-                                      ],
-                                    },
-                                  }),
-                                },
-                              },
-                              [
-                                Alert(
-                                  {
-                                    options: {
-                                      ...alertOptions,
-                                      bodyText: variable('Body text', {
-                                        value: ['Record successfully updated'],
-                                      }),
-                                      textColor: color('Text color', {
-                                        value: ThemeColor.WHITE,
-                                      }),
-                                      iconColor: color('Icon color', {
-                                        value: ThemeColor.WHITE,
-                                      }),
-                                    },
-                                  },
-                                  [],
-                                ),
-                              ],
-                            ),
-                            Snackbar(
-                              {
-                                ref: { id: '#snackbarDeleted' },
-                                options: {
-                                  ...snackbarOptions,
-                                  visible: toggle('Toggle visibility', {
-                                    value: false,
-                                    configuration: { as: 'VISIBILITY' },
-                                  }),
-                                  anchorOriginVertical: option('CUSTOM', {
-                                    label: 'Vertical position',
-                                    value: 'top',
-                                    configuration: {
-                                      as: 'BUTTONGROUP',
-                                      dataType: 'string',
-                                      allowedInput: [
-                                        {
-                                          name: 'Top',
-                                          value: 'top',
-                                        },
-                                        {
-                                          name: 'Bottom',
-                                          value: 'bottom',
-                                        },
-                                      ],
-                                    },
-                                  }),
-                                },
-                              },
-                              [
-                                Alert(
-                                  {
-                                    options: {
-                                      ...alertOptions,
-                                      bodyText: variable('Body text', {
-                                        value: ['Record successfully deleted'],
-                                      }),
-                                      textColor: color('Text color', {
-                                        value: ThemeColor.WHITE,
-                                      }),
-                                      iconColor: color('Icon color', {
-                                        value: ThemeColor.WHITE,
-                                      }),
-                                    },
-                                  },
-                                  [],
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ]),
+                          ]),
+                        ],
+                      ),
                     ],
                   ),
                   prefabBox(
