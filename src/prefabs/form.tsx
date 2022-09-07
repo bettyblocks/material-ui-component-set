@@ -178,6 +178,7 @@ const beforeCreate = ({
               onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
                 setActionName(e.target.value)
               }
+              color="orange"
             />
           </Box>
         )}
@@ -419,6 +420,42 @@ const beforeCreate = ({
                 disabled: true,
               },
             }));
+
+            if (!modelBased) {
+              const textInputprefab = structure.descendants.find(
+                (descendant: { name: string }) =>
+                  descendant.name === 'TextInput',
+              );
+
+              const actionVariableOption = textInputprefab.options.find(
+                (option: { type: string }) =>
+                  option.type === 'ACTION_JS_VARIABLE',
+              );
+
+              const textInputVariableId = result.variables[
+                Object.keys(result.variables)[0]
+              ].find(
+                (varArray: { kind: string }) => varArray?.kind === 'STRING',
+              ).id;
+
+              setOption(
+                textInputprefab,
+                actionVariableOption.key,
+                (option) => ({
+                  ...option,
+                  value: textInputVariableId,
+                  configuration: {
+                    condition: {
+                      type: 'SHOW',
+                      option: 'actionVariableOption',
+                      comparator: 'EQ',
+                      value: 'actionVariableOption',
+                    },
+                  },
+                }),
+              );
+            }
+
             save(newPrefab);
           }
         }}
