@@ -169,6 +169,7 @@ const beforeCreate = ({
             idProperty,
             properties,
             modelBased ? 'empty' : 'custom',
+            null,
             actionName,
           );
           const structure = originalPrefab.structure[0];
