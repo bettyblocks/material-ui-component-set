@@ -16,7 +16,9 @@ import {
   showIfTrue,
   component,
   buttongroup,
-  BeforeCreateArgs,
+  PrefabInteraction,
+  icon,
+  hideIf,
 } from '@betty-blocks/component-sdk';
 
 import {
@@ -29,6 +31,7 @@ import {
   Box,
   boxOptions,
   Button,
+  buttonOptions,
   Column,
   columnOptions,
   DataList,
@@ -62,8 +65,74 @@ export interface Properties {
   format: string;
 }
 
+const interactions = [
+  {
+    name: 'Show',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#DropdownColumn',
+      sourceComponentId: '#DropdownButton',
+    },
+    type: 'Custom',
+  },
+  {
+    name: 'Show',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#UpButton',
+      sourceComponentId: '#DropdownButton',
+    },
+    type: 'Custom',
+  },
+  {
+    name: 'Hide',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#DropdownButton',
+      sourceComponentId: '#DropdownButton',
+    },
+    type: 'Custom',
+  },
+  {
+    name: 'Hide',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#DropdownColumn',
+      sourceComponentId: '#UpButton',
+    },
+    type: 'Custom',
+  },
+  {
+    name: 'Show',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#DropdownButton',
+      sourceComponentId: '#UpButton',
+    },
+    type: 'Custom',
+  },
+  {
+    name: 'Hide',
+    sourceEvent: 'Click',
+    ref: {
+      targetComponentId: '#UpButton',
+      sourceComponentId: '#UpButton',
+    },
+    type: 'Custom',
+  },
+  {
+    name: 'Submit',
+    sourceEvent: 'onChange',
+    ref: {
+      targetComponentId: '#formId',
+      sourceComponentId: '#checkBox',
+    },
+    type: 'Custom',
+  },
+] as PrefabInteraction[];
+
 const attrs = {
-  name: 'Checklist page test',
+  name: 'Page with Checklist',
   icon: Icon.DataList,
   type: 'page',
   description:
@@ -74,6 +143,7 @@ const attrs = {
   previewImage:
     'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_Card_And_List_View.jpg',
   category: 'LAYOUT',
+  interactions,
 };
 
 const prefabStructure = [
@@ -278,6 +348,13 @@ const prefabStructure = [
                 innerSpacing: sizes('Inner space', {
                   value: ['0rem', '0rem', '0rem', '0rem'],
                 }),
+                backgroundColor: color('Background color', {
+                  value: ThemeColor.LIGHT,
+                }),
+                backgroundColorAlpha: option('NUMBER', {
+                  label: 'Background color opacity',
+                  value: 20,
+                }),
               },
             },
             [
@@ -346,10 +423,13 @@ const prefabStructure = [
                                 options: {
                                   ...boxOptions,
                                   outerSpacing: sizes('Outer space', {
-                                    value: ['S', 'S', '0rem', 'S'],
+                                    value: ['0rem', '0rem', 'M', '0rem'],
                                   }),
                                   innerSpacing: sizes('Inner space', {
-                                    value: ['0remM', '0rem', '0rem', '0rem'],
+                                    value: ['0rem', '0rem', '0rem', '0rem'],
+                                  }),
+                                  backgroundColor: color('Background color', {
+                                    value: ThemeColor.WHITE,
                                   }),
                                 },
                               },
@@ -461,6 +541,43 @@ const prefabStructure = [
                                                 textTransform: 'none',
                                               },
                                             },
+                                            options: {
+                                              ...buttonOptions,
+                                              buttonText: variable(
+                                                'Button text',
+                                                { value: [''] },
+                                              ),
+                                              icon: icon('Icon', {
+                                                value: 'KeyboardArrowDown',
+                                              }),
+                                              size: option('CUSTOM', {
+                                                value: 'small',
+                                                label: 'Icon size',
+                                                configuration: {
+                                                  as: 'BUTTONGROUP',
+                                                  dataType: 'string',
+                                                  allowedInput: [
+                                                    {
+                                                      name: 'Small',
+                                                      value: 'small',
+                                                    },
+                                                    {
+                                                      name: 'Medium',
+                                                      value: 'medium',
+                                                    },
+                                                    {
+                                                      name: 'Large',
+                                                      value: 'large',
+                                                    },
+                                                  ],
+                                                  condition: hideIf(
+                                                    'icon',
+                                                    'EQ',
+                                                    'none',
+                                                  ),
+                                                },
+                                              }),
+                                            },
                                           },
                                           [],
                                         ),
@@ -487,6 +604,52 @@ const prefabStructure = [
                                                 textTransform: 'none',
                                               },
                                             },
+                                            options: {
+                                              ...buttonOptions,
+                                              visible: toggle(
+                                                'Toggle visibility',
+                                                {
+                                                  value: false,
+                                                  configuration: {
+                                                    as: 'VISIBILITY',
+                                                  },
+                                                },
+                                              ),
+                                              buttonText: variable(
+                                                'Button text',
+                                                { value: [''] },
+                                              ),
+                                              icon: icon('Icon', {
+                                                value: 'KeyboardArrowUp',
+                                              }),
+                                              size: option('CUSTOM', {
+                                                value: 'small',
+                                                label: 'Icon size',
+                                                configuration: {
+                                                  as: 'BUTTONGROUP',
+                                                  dataType: 'string',
+                                                  allowedInput: [
+                                                    {
+                                                      name: 'Small',
+                                                      value: 'small',
+                                                    },
+                                                    {
+                                                      name: 'Medium',
+                                                      value: 'medium',
+                                                    },
+                                                    {
+                                                      name: 'Large',
+                                                      value: 'large',
+                                                    },
+                                                  ],
+                                                  condition: hideIf(
+                                                    'icon',
+                                                    'EQ',
+                                                    'none',
+                                                  ),
+                                                },
+                                              }),
+                                            },
                                           },
                                           [],
                                         ),
@@ -506,6 +669,9 @@ const prefabStructure = [
                                             as: 'VISIBILITY',
                                           },
                                         }),
+                                        outerSpacing: sizes('Outer space', {
+                                          value: ['0rem', '0rem', '0rem', 'L'],
+                                        }),
                                       },
                                     },
                                     [
@@ -522,6 +688,9 @@ const prefabStructure = [
                                             }),
                                             type: font('Font', {
                                               value: ['Body1'],
+                                            }),
+                                            textColor: color('Text color', {
+                                              value: ThemeColor.DARK,
                                             }),
                                           },
                                         },
@@ -643,21 +812,28 @@ const beforeCreate = ({
   helpers: {
     useModelQuery,
     prepareAction,
-    cloneStructure,
     setOption,
     makeBettyUpdateInput,
     createUuid,
     BettyPrefabs,
   },
-}: BeforeCreateArgs) => {
+}: any) => {
   const [showValidation, setShowValidation] = React.useState(false);
+  const [titleValidation, setTitleValidation] = React.useState(false);
+  const [descriptionValidation, setDescriptionValidation] =
+    React.useState(false);
+  const [checkBoxValidation, setCheckBoxValidation] = React.useState(false);
   const [modelId, setModelId] = React.useState('');
   const [model, setModel] = React.useState(null);
   const [titleProperty, setTitleProperty] = React.useState<any>('');
   const [descriptionProperty, setDescriptionProperty] = React.useState<any>('');
-  const [checkboxProperty, setCheckboxProperty] = React.useState('');
+  const [checkboxProperty, setCheckboxProperty] = React.useState<any>('');
   const [idProperty, setIdProperty] = React.useState<Property>();
+  const [stepNumber, setStepNumber] = React.useState(1);
+  const [headerPartialId, setHeaderPartialId] = React.useState('');
+  const [footerPartialId, setFooterPartialId] = React.useState('');
   const formId = createUuid();
+  const datalistId = createUuid();
 
   const { data } = useModelQuery({
     variables: { id: modelId },
@@ -669,10 +845,6 @@ const beforeCreate = ({
       );
     },
   });
-
-  const [stepNumber, setStepNumber] = React.useState(1);
-  const [headerPartialId, setHeaderPartialId] = React.useState('');
-  const [footerPartialId, setFooterPartialId] = React.useState('');
 
   const getDescendantByRef = (refValue: string, structure: any) =>
     structure.reduce((acc: string, comp: PrefabReference) => {
@@ -792,6 +964,13 @@ const beforeCreate = ({
                 }}
                 value={titleProperty}
                 disabled={!modelId}
+                error={
+                  titleValidation && (
+                    <TextComp color="#e82600">
+                      Selecting a title property is required
+                    </TextComp>
+                  )
+                }
               />
             </Field>
             <Field label="Description property">
@@ -802,6 +981,13 @@ const beforeCreate = ({
                 }}
                 value={descriptionProperty}
                 disabled={!modelId}
+                error={
+                  descriptionValidation && (
+                    <TextComp color="#e82600">
+                      Selecting a description property is required
+                    </TextComp>
+                  )
+                }
               />
             </Field>
             <Field label="Checkbox property">
@@ -809,10 +995,60 @@ const beforeCreate = ({
                 modelId={modelId}
                 onChange={(value: 'BOOLEAN') => {
                   setCheckboxProperty(value);
-                  console.log(checkboxProperty);
                 }}
                 value={checkboxProperty}
                 disabled={!modelId}
+                error={
+                  checkBoxValidation && (
+                    <TextComp color="#e82600">
+                      Selecting a description property is required
+                    </TextComp>
+                  )
+                }
+                disabledKinds={[
+                  'AUTO_INCREMENT',
+                  'BOOLEAN_EXPRESSION',
+                  'COUNT',
+                  'DATE',
+                  'DATE_EXPRESSION',
+                  'DATE_TIME',
+                  'DATE_TIME_EXPRESSION',
+                  'DECIMAL',
+                  'DECIMAL_EXPRESSION',
+                  'EMAIL',
+                  'EMAIL_ADDRESS',
+                  'ENUM',
+                  'FILE',
+                  'FLOAT',
+                  'HAS_AND_BELONGS_TO_MANY',
+                  'HAS_MANY',
+                  'IBAN',
+                  'IMAGE',
+                  'INTEGER',
+                  'INTEGER_EXPRESSION',
+                  'LIST',
+                  'MINUTES',
+                  'MINUTES_EXPRESSION',
+                  'MULTI_FILE',
+                  'MULTI_IMAGE',
+                  'PASSWORD',
+                  'PDF',
+                  'PERIODIC_COUNT',
+                  'PHONE_NUMBER',
+                  'PRICE',
+                  'PRICE_EXPRESSION',
+                  'RICH_TEXT',
+                  'SERIAL',
+                  'SIGNED_PDF',
+                  'STRING',
+                  'STRING_EXPRESSION',
+                  'SUM',
+                  'TEXT',
+                  'TEXT_EXPRESSION',
+                  'TIME',
+                  'URL',
+                  'ZIPCODE',
+                ]}
               />
             </Field>
           </BoxComp>
@@ -825,16 +1061,28 @@ const beforeCreate = ({
         setShowValidation(true);
         return;
       }
-      debugger;
+      if (!titleProperty.id) {
+        setTitleValidation(true);
+        return;
+      }
+      if (!descriptionProperty.id) {
+        setDescriptionValidation(true);
+        return;
+      }
+      if (!checkboxProperty.id) {
+        setCheckBoxValidation(true);
+        return;
+      }
       const newPrefab = { ...originalPrefab };
+
       // set datalist
       const dataList = getDescendantByRef('#dataList', newPrefab.structure);
+      dataList.id = datalistId;
       dataList.options[0].value = modelId;
 
       // set edit action
-
-      const transformProp = (prop) => {
-        const outputProp = prop;
+      const transformProp = (obj: any) => {
+        const outputProp = obj;
         outputProp.kind = 'BOOLEAN';
         outputProp.defaultValue = {
           __typename: 'DefaultValueType',
@@ -842,7 +1090,14 @@ const beforeCreate = ({
           value: 'false',
           expressionInfo: null,
         };
-        outputProp.label = 'test';
+        if (data && data.model) {
+          const property = data.model.properties.find(
+            (prop: any) => prop.id === obj.id[0],
+          );
+          if (property) {
+            outputProp.label = property.label;
+          }
+        }
         return outputProp;
       };
       if (model && idProperty && checkboxProperty) {
@@ -867,19 +1122,51 @@ const beforeCreate = ({
           },
         }));
 
-        //   Object.values(result.variables).map(([property, vari]) => {
-        //     const checkBoxInput = makeBettyUpdateInput(
-        //       BettyPrefabs.BOOLEAN,
-        //       model,
-        //       property,
-        //       vari,
-        //     );
+        Object.values(result.variables).forEach(([property, vari]) => {
+          const checkBoxInput = makeBettyUpdateInput(
+            BettyPrefabs.BOOLEAN,
+            model,
+            property,
+            vari,
+          );
 
-        //     editForm.descendants[0].descendants[0] = [
-        //       checkBoxInput,
-        //       ...editForm.descendants[0].descendants[0],
-        //     ];
-        //   });
+          checkBoxInput.ref = { id: '#checkBox' };
+          if (checkBoxInput.type === 'COMPONENT') {
+            setOption(checkBoxInput, 'label', (opts: any) => ({
+              ...opts,
+              value: [enrichVarObj(titleProperty)],
+            }));
+            setOption(checkBoxInput, 'textColor', (opts: any) => ({
+              ...opts,
+              value: 'PRIMARY',
+            }));
+          }
+
+          setOption(editForm, 'filter', (opts: any) => ({
+            ...opts,
+            value: {
+              [idProperty.id]: {
+                eq: {
+                  id: [idProperty.id],
+                  type: 'PROPERTY',
+                  componentId: datalistId,
+                },
+              },
+            },
+          }));
+          const hiddenInput = makeBettyUpdateInput(
+            BettyPrefabs.HIDDEN,
+            model,
+            idProperty,
+            result.recordInputVariable,
+          );
+
+          editForm.descendants[0].descendants[0].descendants = [
+            checkBoxInput,
+            hiddenInput,
+            ...editForm.descendants[0].descendants[0].descendants,
+          ];
+        });
       }
 
       const descriptionText = getDescendantByRef(
@@ -905,7 +1192,6 @@ const beforeCreate = ({
       }
 
       save(newPrefab);
-      // #endregion
     },
     buttons: () => (
       <BoxComp direction="row" justify="between">
@@ -969,7 +1255,7 @@ const beforeCreate = ({
 };
 
 export default makePrefab(
-  'Checklistpage',
+  'Page with Checklist',
   attrs,
   beforeCreate,
   prefabStructure,
