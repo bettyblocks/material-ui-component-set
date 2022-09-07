@@ -17,6 +17,12 @@ const beforeCreate = ({
     ModelSelector,
     PropertiesSelector,
     Text,
+    Box,
+    Toggle,
+    BBTooltip,
+    CircleQuestion,
+    TextInput,
+    FormField,
   },
   prefab: originalPrefab,
   save,
@@ -61,6 +67,8 @@ const beforeCreate = ({
   const [model, setModel] = React.useState(null);
   const [idProperty, setIdProperty] = React.useState(null);
   const [properties, setProperties] = React.useState([]);
+  const [modelBased, setmodelBased] = React.useState(false);
+  const [actionName, setActionName] = React.useState('');
 
   const [validationMessage, setValidationMessage] = React.useState('');
   const componentId = createUuid();
@@ -87,37 +95,96 @@ const beforeCreate = ({
   return (
     <>
       <Header onClose={close} title="Configure form" />
+      <Box
+        as="header"
+        direction="row"
+        justify="between"
+        align="center"
+        margin="1.5rem 2rem"
+      >
+        <Text margin={{ bottom: 'medium' }} size="0.875rem" color="grey700">
+          You can set up a form based on a model and selected properties so that
+          your form is created with matching inputs.
+          <br />
+          You can turn off the switch to not base your form on a model within
+          your app and manually configure it.
+        </Text>
+      </Box>
       <Content>
-        <Field
-          label="Select model"
-          error={
-            validationMessage && (
-              <Text color="#e82600">{validationMessage}</Text>
-            )
-          }
-        >
-          <ModelSelector
-            onChange={(id) => {
-              setModelId(id);
-            }}
-            margin
-          />
+        <Field label="Model based form">
+          {/* TODO: fix onChange bug and move setmodelBased to Toggle onChange */}
+          <FormField onClick={(): void => setmodelBased(!modelBased)}>
+            <Toggle checked={modelBased} onChange={(): any => null} />
+          </FormField>
         </Field>
-        <Field label="Select properties">
-          <PropertiesSelector
-            allowRelations
-            disabledKinds={disabledKinds}
-            disabledNames={['created_at', 'id', 'updated_at']}
-            modelId={modelId}
-            onChange={setProperties}
-            scopedModels={false}
-            value={properties}
-          />
-        </Field>
+        {modelBased ? (
+          <>
+            <Field
+              label="Select model"
+              error={
+                validationMessage && (
+                  <Text color="#e82600">{validationMessage}</Text>
+                )
+              }
+            >
+              <ModelSelector
+                onChange={(id) => {
+                  setModelId(id);
+                }}
+                margin
+              />
+            </Field>
+            <Field label="Select properties">
+              <PropertiesSelector
+                allowRelations
+                disabledKinds={disabledKinds}
+                disabledNames={['created_at', 'id', 'updated_at']}
+                modelId={modelId}
+                onChange={setProperties}
+                scopedModels={false}
+                value={properties}
+              />
+            </Field>
+          </>
+        ) : (
+          <Box margin="0 36.5rem 0 0" width="20rem">
+            <Box style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Text
+                color="grey700"
+                weight="bold"
+                style={{
+                  fontSize: '0.75rem',
+                  textTransform: 'uppercase',
+                  marginRight: '0.1rem',
+                }}
+              >
+                Action name
+              </Text>
+              <CircleQuestion
+                color="grey500"
+                size="small"
+                data-tip="You can later find this action in the action <br /> overview with the name you now choose"
+                data-for="action-tooltip"
+              />
+              <BBTooltip
+                id="action-tooltip"
+                place="top"
+                type="dark"
+                effect="solid"
+                multiline
+              />
+            </Box>
+            <TextInput
+              onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
+                setActionName(e.target.value)
+              }
+            />
+          </Box>
+        )}
       </Content>
       <Footer
         onClose={close}
-        canSave={modelId && properties.length !== 0}
+        canSave={(modelId && properties.length !== 0) || actionName}
         onSave={async (): Promise<void> => {
           // eslint-disable-next-line no-param-reassign
           originalPrefab.structure[0].id = componentId;
@@ -125,173 +192,211 @@ const beforeCreate = ({
             componentId,
             idProperty,
             properties,
-            'empty',
+            modelBased ? 'empty' : 'custom',
+            null,
+            actionName,
           );
-
           const structure = originalPrefab.structure[0];
+          if (modelBased) {
+            Object.values(result.variables).map(([property, variable]) => {
+              const { kind } = property;
 
-          Object.values(result.variables).map(([property, variable]) => {
-            const { kind } = property;
-
-            switch (kind) {
-              case PropertyKind.BELONGS_TO: {
-                structure.descendants.push(
-                  makeBettyInput(
-                    BettyPrefabs.AUTO_COMPLETE,
-                    model,
-                    property,
-                    variable,
-                    result.relatedIdProperties,
-                  ),
-                );
-                break;
+              switch (kind) {
+                case PropertyKind.BELONGS_TO: {
+                  structure.descendants.push(
+                    makeBettyInput(
+                      BettyPrefabs.AUTO_COMPLETE,
+                      model,
+                      property,
+                      variable,
+                      result.relatedIdProperties,
+                    ),
+                  );
+                  break;
+                }
+                case PropertyKind.HAS_MANY:
+                case PropertyKind.HAS_AND_BELONGS_TO_MANY:
+                  structure.descendants.push(
+                    makeBettyInput(
+                      BettyPrefabs.MULTI_AUTO_COMPLETE,
+                      model,
+                      property,
+                      variable,
+                      result.relatedIdProperties,
+                    ),
+                  );
+                  break;
+                case PropertyKind.DATE_TIME:
+                  structure.descendants.push(
+                    makeBettyInput(
+                      BettyPrefabs.DATE_TIME,
+                      model,
+                      property,
+                      variable,
+                    ),
+                  );
+                  break;
+                case PropertyKind.DATE:
+                  structure.descendants.push(
+                    makeBettyInput(
+                      BettyPrefabs.DATE,
+                      model,
+                      property,
+                      variable,
+                    ),
+                  );
+                  break;
+                case PropertyKind.TIME:
+                  structure.descendants.push(
+                    makeBettyInput(
+                      BettyPrefabs.TIME,
+                      model,
+                      property,
+                      variable,
+                    ),
+                  );
+                  break;
+                case PropertyKind.DECIMAL:
+                  structure.descendants.push(
+                    makeBettyInput(
+                      BettyPrefabs.DECIMAL,
+                      model,
+                      property,
+                      variable,
+                    ),
+                  );
+                  break;
+                case PropertyKind.EMAIL_ADDRESS:
+                  structure.descendants.push(
+                    makeBettyInput(
+                      BettyPrefabs.EMAIL_ADDRESS,
+                      model,
+                      property,
+                      variable,
+                    ),
+                  );
+                  break;
+                case PropertyKind.FILE:
+                  structure.descendants.push(
+                    makeBettyInput(
+                      BettyPrefabs.FILE,
+                      model,
+                      property,
+                      variable,
+                    ),
+                  );
+                  break;
+                case PropertyKind.IBAN:
+                  structure.descendants.push(
+                    makeBettyInput(
+                      BettyPrefabs.IBAN,
+                      model,
+                      property,
+                      variable,
+                    ),
+                  );
+                  break;
+                case PropertyKind.LIST:
+                  structure.descendants.push(
+                    makeBettyInput(
+                      BettyPrefabs.LIST,
+                      model,
+                      property,
+                      variable,
+                    ),
+                  );
+                  break;
+                case PropertyKind.PASSWORD:
+                  structure.descendants.push(
+                    makeBettyInput(
+                      BettyPrefabs.PASSWORD,
+                      model,
+                      property,
+                      variable,
+                    ),
+                  );
+                  break;
+                case PropertyKind.PHONE_NUMBER:
+                  structure.descendants.push(
+                    makeBettyInput(
+                      BettyPrefabs.PHONE_NUMBER,
+                      model,
+                      property,
+                      variable,
+                    ),
+                  );
+                  break;
+                case PropertyKind.PRICE:
+                  structure.descendants.push(
+                    makeBettyInput(
+                      BettyPrefabs.PRICE,
+                      model,
+                      property,
+                      variable,
+                    ),
+                  );
+                  break;
+                case PropertyKind.URL:
+                  structure.descendants.push(
+                    makeBettyInput(BettyPrefabs.URL, model, property, variable),
+                  );
+                  break;
+                case PropertyKind.STRING:
+                  structure.descendants.push(
+                    makeBettyInput(
+                      BettyPrefabs.STRING,
+                      model,
+                      property,
+                      variable,
+                    ),
+                  );
+                  break;
+                case PropertyKind.TEXT:
+                  structure.descendants.push(
+                    makeBettyInput(
+                      BettyPrefabs.TEXT,
+                      model,
+                      property,
+                      variable,
+                    ),
+                  );
+                  break;
+                case PropertyKind.INTEGER:
+                  structure.descendants.push(
+                    makeBettyInput(
+                      BettyPrefabs.INTEGER,
+                      model,
+                      property,
+                      variable,
+                    ),
+                  );
+                  break;
+                case PropertyKind.BOOLEAN:
+                  structure.descendants.push(
+                    makeBettyInput(
+                      BettyPrefabs.BOOLEAN,
+                      model,
+                      property,
+                      variable,
+                    ),
+                  );
+                  break;
+                default:
+                  structure.descendants.push(
+                    makeBettyInput(
+                      BettyPrefabs.STRING,
+                      model,
+                      property,
+                      variable,
+                    ),
+                  );
               }
-              case PropertyKind.HAS_MANY:
-              case PropertyKind.HAS_AND_BELONGS_TO_MANY:
-                structure.descendants.push(
-                  makeBettyInput(
-                    BettyPrefabs.MULTI_AUTO_COMPLETE,
-                    model,
-                    property,
-                    variable,
-                    result.relatedIdProperties,
-                  ),
-                );
-                break;
-              case PropertyKind.DATE_TIME:
-                structure.descendants.push(
-                  makeBettyInput(
-                    BettyPrefabs.DATE_TIME,
-                    model,
-                    property,
-                    variable,
-                  ),
-                );
-                break;
-              case PropertyKind.DATE:
-                structure.descendants.push(
-                  makeBettyInput(BettyPrefabs.DATE, model, property, variable),
-                );
-                break;
-              case PropertyKind.TIME:
-                structure.descendants.push(
-                  makeBettyInput(BettyPrefabs.TIME, model, property, variable),
-                );
-                break;
-              case PropertyKind.DECIMAL:
-                structure.descendants.push(
-                  makeBettyInput(
-                    BettyPrefabs.DECIMAL,
-                    model,
-                    property,
-                    variable,
-                  ),
-                );
-                break;
-              case PropertyKind.EMAIL_ADDRESS:
-                structure.descendants.push(
-                  makeBettyInput(
-                    BettyPrefabs.EMAIL_ADDRESS,
-                    model,
-                    property,
-                    variable,
-                  ),
-                );
-                break;
-              case PropertyKind.FILE:
-                structure.descendants.push(
-                  makeBettyInput(BettyPrefabs.FILE, model, property, variable),
-                );
-                break;
-              case PropertyKind.IBAN:
-                structure.descendants.push(
-                  makeBettyInput(BettyPrefabs.IBAN, model, property, variable),
-                );
-                break;
-              case PropertyKind.LIST:
-                structure.descendants.push(
-                  makeBettyInput(BettyPrefabs.LIST, model, property, variable),
-                );
-                break;
-              case PropertyKind.PASSWORD:
-                structure.descendants.push(
-                  makeBettyInput(
-                    BettyPrefabs.PASSWORD,
-                    model,
-                    property,
-                    variable,
-                  ),
-                );
-                break;
-              case PropertyKind.PHONE_NUMBER:
-                structure.descendants.push(
-                  makeBettyInput(
-                    BettyPrefabs.PHONE_NUMBER,
-                    model,
-                    property,
-                    variable,
-                  ),
-                );
-                break;
-              case PropertyKind.PRICE:
-                structure.descendants.push(
-                  makeBettyInput(BettyPrefabs.PRICE, model, property, variable),
-                );
-                break;
-              case PropertyKind.URL:
-                structure.descendants.push(
-                  makeBettyInput(BettyPrefabs.URL, model, property, variable),
-                );
-                break;
-              case PropertyKind.STRING:
-                structure.descendants.push(
-                  makeBettyInput(
-                    BettyPrefabs.STRING,
-                    model,
-                    property,
-                    variable,
-                  ),
-                );
-                break;
-              case PropertyKind.TEXT:
-                structure.descendants.push(
-                  makeBettyInput(BettyPrefabs.TEXT, model, property, variable),
-                );
-                break;
-              case PropertyKind.INTEGER:
-                structure.descendants.push(
-                  makeBettyInput(
-                    BettyPrefabs.INTEGER,
-                    model,
-                    property,
-                    variable,
-                  ),
-                );
-                break;
-              case PropertyKind.BOOLEAN:
-                structure.descendants.push(
-                  makeBettyInput(
-                    BettyPrefabs.BOOLEAN,
-                    model,
-                    property,
-                    variable,
-                  ),
-                );
-                break;
-              default:
-                structure.descendants.push(
-                  makeBettyInput(
-                    BettyPrefabs.STRING,
-                    model,
-                    property,
-                    variable,
-                  ),
-                );
-            }
-            // eslint-disable-next-line no-console
-            return console.warn('PropertyKind not found');
-          });
-
+              // eslint-disable-next-line no-console
+              return console.warn('PropertyKind not found');
+            });
+          } else {
+            structure.descendants.push(cloneStructure(BettyPrefabs.STRING));
+          }
           structure.descendants.push(
             cloneStructure(BettyPrefabs.SUBMIT_BUTTON),
           );
@@ -314,7 +419,6 @@ const beforeCreate = ({
                 disabled: true,
               },
             }));
-
             save(newPrefab);
           }
         }}
