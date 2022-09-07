@@ -63,11 +63,11 @@ const beforeCreate = ({
     'ZIPCODE',
   ];
 
-  const [modelId, setModelId] = React.useState(null);
-  const [model, setModel] = React.useState(null);
+  const [modelId, setModelId] = React.useState('');
+  const [model, setModel] = React.useState('');
   const [idProperty, setIdProperty] = React.useState(null);
   const [properties, setProperties] = React.useState([]);
-  const [modelBased, setmodelBased] = React.useState(false);
+  const [modelBased, setmodelBased] = React.useState(true);
   const [actionName, setActionName] = React.useState('');
 
   const [validationMessage, setValidationMessage] = React.useState('');
