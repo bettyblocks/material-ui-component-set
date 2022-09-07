@@ -46,6 +46,12 @@ export const DateTimePicker = (
     options[key] = updateOption(options[key], update);
 
     options.type = updateOption(options.type, { value: config.inputType });
+
+    if (config.inputLabel) {
+      options.label = updateOption(options.label, {
+        value: [config.inputLabel],
+      });
+    }
   }
 
   if (config.dataComponentAttribute) {
