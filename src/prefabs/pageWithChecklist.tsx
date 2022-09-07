@@ -426,7 +426,7 @@ const prefabStructure = [
                                     value: ['0rem', '0rem', 'M', '0rem'],
                                   }),
                                   innerSpacing: sizes('Inner space', {
-                                    value: ['0rem', '0rem', '0rem', '0rem'],
+                                    value: ['0rem', 'M', '0rem', 'M'],
                                   }),
                                   backgroundColor: color('Background color', {
                                     value: ThemeColor.WHITE,
