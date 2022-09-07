@@ -39,30 +39,6 @@ const beforeCreate = ({
     useModelQuery,
   } = helpers;
 
-  const disabledKinds = [
-    'AUTO_INCREMENT',
-    'BOOLEAN_EXPRESSION',
-    'COUNT',
-    'DATE_EXPRESSION',
-    'DATE_TIME_EXPRESSION',
-    'DECIMAL_EXPRESSION',
-    'IMAGE',
-    'INTEGER_EXPRESSION',
-    'LOGIN_TOKEN',
-    'MINUTES_EXPRESSION',
-    'MULTI_FILE',
-    'MULTI_IMAGE',
-    'PDF',
-    'PRICE_EXPRESSION',
-    'RICH_TEXT',
-    'SERIAL',
-    'SIGNED_PDF',
-    'STRING_EXPRESSION',
-    'SUM',
-    'TEXT_EXPRESSION',
-    'ZIPCODE',
-  ];
-
   const [modelId, setModelId] = React.useState(null);
   const [model, setModel] = React.useState(null);
   const [idProperty, setIdProperty] = React.useState(null);
