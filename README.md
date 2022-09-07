@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/bettyblocks/material-ui-component-set.svg?branch=master)](https://travis-ci.org/bettyblocks/material-ui-component-set)
 
-# A Betty Blocks Component Toolkit
+# A Betty Blocks Component Toolkit 
 
 This is a component set for the [page builder](https://blog.bettyblocks.com/webinar-page-builder-part-1) of the [Betty Blocks](https://www.bettyblocks.com) platform based on [Material-UI](https://material-ui.com).
 
@@ -50,3 +50,13 @@ Commit messages should be descriptive in what kind of problem it solves or featu
 Like `fix: this solves this bug` or `feat: add this feature`
 
 Further guidelines about git messages are available here: https://github.com/conventional-changelog/commitlint/tree/master/@commitlint/config-conventional
+
+## Earthly builds
+
+Build component set and container:
+
+```earthly +docker```
+
+Now run the container:
+
+```docker run -p 5002:5002 -it component-set:latest```

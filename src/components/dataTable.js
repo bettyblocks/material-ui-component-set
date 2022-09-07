@@ -28,7 +28,10 @@
       Toolbar,
       TextField,
       InputAdornment,
+      IconButton,
     } = window.MaterialUI.Core;
+    const { FirstPage, LastPage, KeyboardArrowLeft, KeyboardArrowRight } =
+      window.MaterialUI.Icons;
     const isDev = env === 'dev';
     const {
       take,
@@ -39,6 +42,7 @@
       searchProperty,
       orderProperty,
       sortOrder,
+      hideRowsPerPage,
       labelRowsPerPage,
       labelNumberOfPages,
       labelSearchOn,
@@ -54,6 +58,7 @@
       autoLoadOnScroll,
       autoLoadTakeAmount,
       dataComponentAttribute,
+      enableFirstLastPageNavigation,
     } = options;
     const repeaterRef = React.createRef();
     const tableRef = React.createRef();
@@ -197,6 +202,13 @@
       setPage(0);
     });
 
+    B.defineFunction('setRowsPerPage', (val) => {
+      if (!isNaN(val)) {
+        setRowsPerPage(parseInt(val, 10));
+        setPage(0);
+      }
+    });
+
     let interactionFilters = {};
 
     const isEmptyValue = (value) =>
@@ -338,6 +350,11 @@
       }, 0);
     }
 
+    B.defineFunction('ResetOrdering', () => {
+      setOrderBy({ field: null, order: null });
+      setVariables(null);
+    });
+
     B.defineFunction('Refetch', () => {
       if (pagination === 'never') {
         clearResults();
@@ -464,6 +481,62 @@
         </Children>
       );
     };
+
+    function TablePaginationActions() {
+      const handleFirstPageButtonClick = () => {
+        setPage(0);
+      };
+
+      const handleBackButtonClick = () => {
+        setPage(page - 1);
+      };
+
+      const handleNextButtonClick = () => {
+        setPage(page + 1);
+      };
+
+      const handleLastPageButtonClick = () => {
+        const pageNumber = Math.max(0, Math.ceil(totalCount / rowsPerPage) - 1);
+        setPage(pageNumber);
+      };
+
+      return (
+        <div className={classes.paginationActions}>
+          {enableFirstLastPageNavigation && (
+            <IconButton
+              onClick={handleFirstPageButtonClick}
+              disabled={page === 0}
+              aria-label="first page"
+            >
+              <FirstPage />
+            </IconButton>
+          )}
+          <IconButton
+            onClick={handleBackButtonClick}
+            disabled={page === 0}
+            aria-label="previous page"
+          >
+            <KeyboardArrowLeft />
+          </IconButton>
+          <IconButton
+            onClick={handleNextButtonClick}
+            disabled={page >= Math.ceil(totalCount / rowsPerPage) - 1}
+            aria-label="next page"
+          >
+            <KeyboardArrowRight />
+          </IconButton>
+          {enableFirstLastPageNavigation && (
+            <IconButton
+              onClick={handleLastPageButtonClick}
+              disabled={page >= Math.ceil(totalCount / rowsPerPage) - 1}
+              aria-label="last page"
+            >
+              <LastPage />
+            </IconButton>
+          )}
+        </div>
+      );
+    }
 
     const tableContentModel = () => {
       if ((loading && !loadOnScroll) || error) {
@@ -686,7 +759,7 @@
             <TablePagination
               ref={paginationRef}
               classes={{ root: classes.pagination }}
-              rowsPerPageOptions={[5, 10, 25, 50, 100]}
+              rowsPerPageOptions={hideRowsPerPage ? [] : [5, 10, 25, 50, 100]}
               labelRowsPerPage={perPageLabel}
               labelDisplayedRows={({ from, to, count }) =>
                 `${from}-${to} ${numOfPagesLabel} ${count}`
@@ -697,6 +770,7 @@
               page={page}
               onChangePage={handleChangePage}
               onChangeRowsPerPage={handleChangeRowsPerPage}
+              ActionsComponent={() => TablePaginationActions()}
             />
           )}
         </Paper>
@@ -822,6 +896,10 @@
           style.getColor(background),
           '!important',
         ],
+      },
+      paginationActions: {
+        flexShrink: 0,
+        marginLeft: '20px',
       },
       autoRepeat: {
         opacity: 0.5,

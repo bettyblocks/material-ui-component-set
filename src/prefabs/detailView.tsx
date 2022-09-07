@@ -8,7 +8,6 @@ import {
   color,
   ThemeColor,
   showIf,
-  PrefabReference,
 } from '@betty-blocks/component-sdk';
 import { Box, boxOptions, DataContainer, Row, rowOptions } from './structures';
 
@@ -58,25 +57,6 @@ const beforeCreate = ({
     }
     return returnObj;
   };
-
-  const getDescendantByRef = (refValue: string, structure: any) =>
-    structure.reduce((acc: string, component: PrefabReference) => {
-      if (acc) return acc;
-      if (
-        component.type === 'COMPONENT' &&
-        // eslint-disable-next-line no-prototype-builtins
-        component.ref
-          ? Object.values(component.ref).indexOf(refValue) > -1
-          : undefined
-      ) {
-        return component;
-      }
-      if (component.type === 'PARTIAL') {
-        return acc;
-      }
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      return getDescendantByRef(refValue, component.descendants);
-    }, null);
 
   return (
     <>
@@ -493,13 +473,13 @@ const beforeCreate = ({
                                       {
                                         label: 'Media type',
                                         key: 'type',
-                                        value: 'img',
+                                        value: 'url',
                                         type: 'CUSTOM',
                                         configuration: {
                                           as: 'BUTTONGROUP',
                                           dataType: 'string',
                                           allowedInput: [
-                                            { name: 'Image', value: 'img' },
+                                            { name: 'Image', value: 'url' },
                                             { name: 'Video', value: 'video' },
                                             {
                                               name: 'I-frame',
@@ -511,21 +491,21 @@ const beforeCreate = ({
                                       {
                                         value: [property],
                                         label: 'Source',
-                                        key: 'imageSource',
+                                        key: 'urlFileSource',
                                         type: 'VARIABLE',
                                         configuration: {
                                           condition: {
                                             type: 'SHOW',
                                             option: 'type',
                                             comparator: 'EQ',
-                                            value: 'img',
+                                            value: 'url',
                                           },
                                         },
                                       },
                                       {
                                         value: [],
                                         label: 'Source',
-                                        key: 'videoSource',
+                                        key: 'videoFileSource',
                                         type: 'VARIABLE',
                                         configuration: {
                                           condition: {

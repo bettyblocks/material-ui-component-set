@@ -9,10 +9,10 @@ import { DateTimePicker } from './structures/DateTimePicker';
 const beforeCreate = ({
   close,
   components: { CreateFormInputWizard },
-  prefab,
+  prefab: originalPrefab,
   save,
 }: BeforeCreateArgs) => {
-  const structure = prefab.structure[0];
+  const structure = originalPrefab.structure[0];
 
   if (structure.type !== 'COMPONENT')
     return <div>expected component prefab, found {structure.type}</div>;
@@ -22,20 +22,15 @@ const beforeCreate = ({
     (option: { type: string }) => option.type === 'ACTION_JS_VARIABLE',
   );
 
-  // TODO: remove this code
-  if (!actionVariableOption) {
-    return <div>Prefab is missing the actionVariable component option</div>;
-  }
-
   return (
     <CreateFormInputWizard
       supportedKinds={['DATE_TIME']}
       actionVariableType="STRING"
-      actionVariableOption={actionVariableOption.key}
+      actionVariableOption={actionVariableOption?.key || null}
       labelOptionKey="label"
       nameOptionKey="actionVariableId"
       close={close}
-      prefab={prefab}
+      prefab={originalPrefab}
       save={save}
     />
   );

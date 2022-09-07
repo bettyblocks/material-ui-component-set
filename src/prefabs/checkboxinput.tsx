@@ -15,8 +15,6 @@ import {
   ThemeColor,
 } from '@betty-blocks/component-sdk';
 
-import { deleteActionVariable } from './hooks/deleteActionVariable';
-
 const beforeCreate = ({
   close,
   components: { CreateFormInputWizard },
@@ -140,21 +138,16 @@ const options = {
   size,
   ...stylesOptions,
   ...advancedSettingsOptions,
-  actionVariableId: option('ACTION_JS_VARIABLE', { label: 'Name', value: '' }),
+  actionVariableId: option('ACTION_JS_VARIABLE', {
+    label: 'Action input variable',
+    value: '',
+  }),
   type: text('Type', {
     value: 'checkbox',
     configuration: { condition: showIf('actionVariableId', 'EQ', 'never') },
   }),
 };
 
-const hooks = {
-  $afterDelete: [deleteActionVariable],
-};
-
 export default prefab('Checkbox Beta', attributes, beforeCreate, [
-  component(
-    'CheckboxInput',
-    { label: 'Checkbox input Beta', options, ...hooks },
-    [],
-  ),
+  component('CheckboxInput', { label: 'Checkbox input Beta', options }, []),
 ]);

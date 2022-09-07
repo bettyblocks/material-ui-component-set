@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { BeforeCreateArgs, Icon, prefab } from '@betty-blocks/component-sdk';
-import { TextInput } from './structures/TextInput';
+import { FileUpload } from './structures/FileUpload';
 
 const beforeCreate = ({
   close,
@@ -9,21 +9,22 @@ const beforeCreate = ({
   save,
 }: BeforeCreateArgs) => {
   const structure = originalPrefab.structure[0];
-
   if (structure.type !== 'COMPONENT')
     return <div>expected component prefab, found {structure.type}</div>;
 
+  // TODO: remove this code
   const actionVariableOption = structure.options.find(
     (option: { type: string }) => option.type === 'ACTION_JS_VARIABLE',
   );
 
+  // TODO: remove this code
   if (!actionVariableOption) {
     return <div>Prefab is missing the actionVariable component option</div>;
   }
 
   return (
     <CreateFormInputWizard
-      supportedKinds={['PASSWORD']}
+      supportedKinds={['FILE']}
       actionVariableOption={actionVariableOption.key}
       labelOptionKey="label"
       nameOptionKey="actionVariableId"
@@ -34,18 +35,10 @@ const beforeCreate = ({
   );
 };
 
-const attributes = {
+const attr = {
+  icon: Icon.FileInputIcon,
   category: 'FORMV2',
-  icon: Icon.PasswordInputIcon,
-  keywords: ['Form', 'input'],
+  keywords: ['Form', 'input', 'file', 'upload', 'fileupload'],
 };
 
-export default prefab('Password Beta', attributes, beforeCreate, [
-  TextInput({
-    label: 'Password field Beta',
-    inputLabel: 'Password',
-    type: 'password',
-    adornmentIcon: 'VisibilityOff',
-    dataComponentAttribute: 'PasswordInput',
-  }),
-]);
+export default prefab('File Upload Beta', attr, beforeCreate, [FileUpload()]);

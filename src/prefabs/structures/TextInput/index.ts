@@ -1,10 +1,7 @@
 import { component, PrefabReference } from '@betty-blocks/component-sdk';
 import { updateOption } from '../../../utils';
-import { deleteActionVariable } from '../../hooks/deleteActionVariable';
 import { Configuration } from '../Configuration';
 import { options as defaults } from './options';
-
-const $afterDelete = [deleteActionVariable];
 
 export const TextInput = (
   config: Configuration,
@@ -43,9 +40,18 @@ export const TextInput = (
     });
   }
 
+  if (config.dataComponentAttribute) {
+    options.dataComponentAttribute = updateOption(
+      options.dataComponentAttribute,
+      {
+        value: [config.dataComponentAttribute],
+      },
+    );
+  }
+
   return component(
     'TextInput',
-    { label: config.label, options, ref, $afterDelete },
+    { label: config.label, options, ref },
     children,
   );
 };

@@ -8,8 +8,6 @@ import {
   BeforeCreateArgs,
 } from '@betty-blocks/component-sdk';
 
-import { deleteActionVariable } from './hooks/deleteActionVariable';
-
 const beforeCreate = ({
   close,
   components: { CreateFormInputWizard },
@@ -56,13 +54,14 @@ const attributes = {
 };
 
 const options = {
-  actionVariableId: option('ACTION_JS_VARIABLE', { label: 'Name', value: '' }),
+  actionVariableId: option('ACTION_JS_VARIABLE', {
+    label: 'Action input variable',
+    value: '',
+  }),
   value: variable('Value'),
 };
 
-const hooks = {
-  $afterDelete: [deleteActionVariable],
-};
+const hooks = {};
 
 export default prefab('Hidden Beta', attributes, beforeCreate, [
   component('Hidden Input Beta', { options, ...hooks }, []),

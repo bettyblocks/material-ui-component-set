@@ -18,14 +18,10 @@ const beforeCreate = ({
     (option: { type: string }) => option.type === 'ACTION_JS_VARIABLE',
   );
 
-  if (!actionVariableOption) {
-    return <div>Prefab is missing the actionVariable component option</div>;
-  }
-
   return (
     <CreateFormInputWizard
       supportedKinds={['TEXT', 'URL', 'IBAN', 'STRING']}
-      actionVariableOption={actionVariableOption.key}
+      actionVariableOption={actionVariableOption?.key || null}
       labelOptionKey="label"
       nameOptionKey="actionVariableId"
       close={close}
@@ -46,5 +42,6 @@ export default prefab('Text Area Beta', attributes, beforeCreate, [
     label: 'Multiline text field Beta',
     inputLabel: 'Textarea',
     type: 'text',
+    dataComponentAttribute: 'TextAreaInput',
   }),
 ]);
