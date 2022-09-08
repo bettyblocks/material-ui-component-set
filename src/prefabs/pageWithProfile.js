@@ -18991,7 +18991,10 @@
                               { name: 'Left', value: 'flex-start' },
                               { name: 'Center', value: 'center' },
                               { name: 'Right', value: 'flex-end' },
-                              { name: 'Justified', value: 'space-between' },
+                              {
+                                name: 'Justified',
+                                value: 'space-between',
+                              },
                             ],
                           },
                         },
@@ -19221,14 +19224,35 @@
                             dataType: 'string',
                             allowedInput: [
                               { name: 'Left top', value: 'left top' },
-                              { name: 'Left center', value: 'left center' },
-                              { name: 'Left bottom', value: 'left bottom' },
-                              { name: 'Center top', value: 'center top' },
-                              { name: 'Center center', value: 'center center' },
-                              { name: 'Center bottom', value: 'center bottom' },
+                              {
+                                name: 'Left center',
+                                value: 'left center',
+                              },
+                              {
+                                name: 'Left bottom',
+                                value: 'left bottom',
+                              },
+                              {
+                                name: 'Center top',
+                                value: 'center top',
+                              },
+                              {
+                                name: 'Center center',
+                                value: 'center center',
+                              },
+                              {
+                                name: 'Center bottom',
+                                value: 'center bottom',
+                              },
                               { name: 'Right top', value: 'right top' },
-                              { name: 'Right center', value: 'right center' },
-                              { name: 'Right bottom', value: 'right bottom' },
+                              {
+                                name: 'Right center',
+                                value: 'right center',
+                              },
+                              {
+                                name: 'Right bottom',
+                                value: 'right bottom',
+                              },
                             ],
                             condition: {
                               type: 'SHOW',
@@ -19371,6 +19395,7 @@
                       descendants: [
                         {
                           type: 'PARTIAL',
+                          ref: { id: '#partialId' },
                           partialId: '',
                         },
                       ],
@@ -19394,7 +19419,10 @@
                               { name: 'Left', value: 'flex-start' },
                               { name: 'Center', value: 'center' },
                               { name: 'Right', value: 'flex-end' },
-                              { name: 'Justified', value: 'space-between' },
+                              {
+                                name: 'Justified',
+                                value: 'space-between',
+                              },
                             ],
                           },
                         },
@@ -19624,14 +19652,35 @@
                             dataType: 'string',
                             allowedInput: [
                               { name: 'Left top', value: 'left top' },
-                              { name: 'Left center', value: 'left center' },
-                              { name: 'Left bottom', value: 'left bottom' },
-                              { name: 'Center top', value: 'center top' },
-                              { name: 'Center center', value: 'center center' },
-                              { name: 'Center bottom', value: 'center bottom' },
+                              {
+                                name: 'Left center',
+                                value: 'left center',
+                              },
+                              {
+                                name: 'Left bottom',
+                                value: 'left bottom',
+                              },
+                              {
+                                name: 'Center top',
+                                value: 'center top',
+                              },
+                              {
+                                name: 'Center center',
+                                value: 'center center',
+                              },
+                              {
+                                name: 'Center bottom',
+                                value: 'center bottom',
+                              },
                               { name: 'Right top', value: 'right top' },
-                              { name: 'Right center', value: 'right center' },
-                              { name: 'Right bottom', value: 'right bottom' },
+                              {
+                                name: 'Right center',
+                                value: 'right center',
+                              },
+                              {
+                                name: 'Right bottom',
+                                value: 'right bottom',
+                              },
                             ],
                             condition: {
                               type: 'SHOW',
@@ -19792,7 +19841,10 @@
                               { name: 'Left', value: 'flex-start' },
                               { name: 'Center', value: 'center' },
                               { name: 'Right', value: 'flex-end' },
-                              { name: 'Justified', value: 'space-between' },
+                              {
+                                name: 'Justified',
+                                value: 'space-between',
+                              },
                             ],
                           },
                         },
@@ -20022,14 +20074,35 @@
                             dataType: 'string',
                             allowedInput: [
                               { name: 'Left top', value: 'left top' },
-                              { name: 'Left center', value: 'left center' },
-                              { name: 'Left bottom', value: 'left bottom' },
-                              { name: 'Center top', value: 'center top' },
-                              { name: 'Center center', value: 'center center' },
-                              { name: 'Center bottom', value: 'center bottom' },
+                              {
+                                name: 'Left center',
+                                value: 'left center',
+                              },
+                              {
+                                name: 'Left bottom',
+                                value: 'left bottom',
+                              },
+                              {
+                                name: 'Center top',
+                                value: 'center top',
+                              },
+                              {
+                                name: 'Center center',
+                                value: 'center center',
+                              },
+                              {
+                                name: 'Center bottom',
+                                value: 'center bottom',
+                              },
                               { name: 'Right top', value: 'right top' },
-                              { name: 'Right center', value: 'right center' },
-                              { name: 'Right bottom', value: 'right bottom' },
+                              {
+                                name: 'Right center',
+                                value: 'right center',
+                              },
+                              {
+                                name: 'Right bottom',
+                                value: 'right bottom',
+                              },
                             ],
                             condition: {
                               type: 'SHOW',
