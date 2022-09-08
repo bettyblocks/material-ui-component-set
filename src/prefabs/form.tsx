@@ -100,9 +100,9 @@ const beforeCreate = ({
         direction="row"
         justify="between"
         align="center"
-        margin="1.5rem 2rem"
+        margin="0 2rem"
       >
-        <Text margin={{ bottom: 'medium' }} size="0.875rem" color="grey700">
+        <Text size="0.875rem" color="grey700">
           You can set up a form based on a model and selected properties so that
           your form is created with matching inputs.
           <br />
@@ -111,16 +111,18 @@ const beforeCreate = ({
         </Text>
       </Box>
       <Content>
-        <Field label="Model based form">
-          {/* TODO: fix onChange bug and move setmodelBased to Toggle onChange */}
-          <FormField onClick={(): void => setmodelBased(!modelBased)}>
-            <Toggle
-              checked={modelBased}
-              onChange={(): any => null}
-              color="purple"
-            />
-          </FormField>
-        </Field>
+        <Box margin="-0.5rem 0 0.5rem 0">
+          <Field label="Model based form">
+            {/* TODO: fix onChange bug and move setmodelBased to Toggle onChange */}
+            <FormField onClick={(): void => setmodelBased(!modelBased)}>
+              <Toggle
+                checked={modelBased}
+                onChange={(): any => null}
+                color="purple"
+              />
+            </FormField>
+          </Field>
+        </Box>
         {modelBased ? (
           <>
             <Field
