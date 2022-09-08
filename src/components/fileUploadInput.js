@@ -160,6 +160,7 @@
         data: [],
         failureMessage: [],
       });
+      setValue(null);
       setValidationMessage('');
     };
 
