@@ -114,7 +114,11 @@ const beforeCreate = ({
         <Field label="Model based form">
           {/* TODO: fix onChange bug and move setmodelBased to Toggle onChange */}
           <FormField onClick={(): void => setmodelBased(!modelBased)}>
-            <Toggle checked={modelBased} onChange={(): any => null} />
+            <Toggle
+              checked={modelBased}
+              onChange={(): any => null}
+              color="purple"
+            />
           </FormField>
         </Field>
         {modelBased ? (
