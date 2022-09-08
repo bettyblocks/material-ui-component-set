@@ -956,101 +956,106 @@ const beforeCreate = ({
                 value={modelId}
               />
             </Field>
-            <Field label="Title property">
-              <PropertySelector
-                modelId={modelId}
-                onChange={(value: 'STRING') => {
-                  setTitleProperty(value);
-                }}
-                value={titleProperty}
-                disabled={!modelId}
-                error={
-                  titleValidation && (
-                    <TextComp color="#e82600">
-                      Selecting a title property is required
-                    </TextComp>
-                  )
-                }
-              />
-            </Field>
-            <Field label="Description property">
-              <PropertySelector
-                modelId={modelId}
-                onChange={(value: 'STRING') => {
-                  setDescriptionProperty(value);
-                }}
-                value={descriptionProperty}
-                disabled={!modelId}
-                error={
-                  descriptionValidation && (
-                    <TextComp color="#e82600">
-                      Selecting a description property is required
-                    </TextComp>
-                  )
-                }
-              />
-            </Field>
-            <Field label="Checkbox property">
-              <PropertySelector
-                modelId={modelId}
-                onChange={(value: 'BOOLEAN') => {
-                  setCheckboxProperty(value);
-                }}
-                value={checkboxProperty}
-                disabled={!modelId}
-                error={
-                  checkBoxValidation && (
-                    <TextComp color="#e82600">
-                      Selecting a description property is required
-                    </TextComp>
-                  )
-                }
-                disabledKinds={[
-                  'AUTO_INCREMENT',
-                  'BOOLEAN_EXPRESSION',
-                  'COUNT',
-                  'DATE',
-                  'DATE_EXPRESSION',
-                  'DATE_TIME',
-                  'DATE_TIME_EXPRESSION',
-                  'DECIMAL',
-                  'DECIMAL_EXPRESSION',
-                  'EMAIL',
-                  'EMAIL_ADDRESS',
-                  'ENUM',
-                  'FILE',
-                  'FLOAT',
-                  'HAS_AND_BELONGS_TO_MANY',
-                  'HAS_MANY',
-                  'IBAN',
-                  'IMAGE',
-                  'INTEGER',
-                  'INTEGER_EXPRESSION',
-                  'LIST',
-                  'MINUTES',
-                  'MINUTES_EXPRESSION',
-                  'MULTI_FILE',
-                  'MULTI_IMAGE',
-                  'PASSWORD',
-                  'PDF',
-                  'PERIODIC_COUNT',
-                  'PHONE_NUMBER',
-                  'PRICE',
-                  'PRICE_EXPRESSION',
-                  'RICH_TEXT',
-                  'SERIAL',
-                  'SIGNED_PDF',
-                  'STRING',
-                  'STRING_EXPRESSION',
-                  'SUM',
-                  'TEXT',
-                  'TEXT_EXPRESSION',
-                  'TIME',
-                  'URL',
-                  'ZIPCODE',
-                ]}
-              />
-            </Field>
+            <hr />
+            {model && (
+              <>
+                <Field label="Title property" info="test">
+                  <PropertySelector
+                    modelId={modelId}
+                    onChange={(value: 'STRING') => {
+                      setTitleProperty(value);
+                    }}
+                    value={titleProperty}
+                    disabled={!modelId}
+                    error={
+                      titleValidation && (
+                        <TextComp color="#e82600">
+                          Selecting a title property is required
+                        </TextComp>
+                      )
+                    }
+                  />
+                </Field>
+                <Field label="Description property">
+                  <PropertySelector
+                    modelId={modelId}
+                    onChange={(value: 'STRING') => {
+                      setDescriptionProperty(value);
+                    }}
+                    value={descriptionProperty}
+                    disabled={!modelId}
+                    error={
+                      descriptionValidation && (
+                        <TextComp color="#e82600">
+                          Selecting a description property is required
+                        </TextComp>
+                      )
+                    }
+                  />
+                </Field>
+                <Field label="Checkbox property">
+                  <PropertySelector
+                    modelId={modelId}
+                    onChange={(value: 'BOOLEAN') => {
+                      setCheckboxProperty(value);
+                    }}
+                    value={checkboxProperty}
+                    disabled={!modelId}
+                    error={
+                      checkBoxValidation && (
+                        <TextComp color="#e82600">
+                          Selecting a description property is required
+                        </TextComp>
+                      )
+                    }
+                    disabledKinds={[
+                      'AUTO_INCREMENT',
+                      'BOOLEAN_EXPRESSION',
+                      'COUNT',
+                      'DATE',
+                      'DATE_EXPRESSION',
+                      'DATE_TIME',
+                      'DATE_TIME_EXPRESSION',
+                      'DECIMAL',
+                      'DECIMAL_EXPRESSION',
+                      'EMAIL',
+                      'EMAIL_ADDRESS',
+                      'ENUM',
+                      'FILE',
+                      'FLOAT',
+                      'HAS_AND_BELONGS_TO_MANY',
+                      'HAS_MANY',
+                      'IBAN',
+                      'IMAGE',
+                      'INTEGER',
+                      'INTEGER_EXPRESSION',
+                      'LIST',
+                      'MINUTES',
+                      'MINUTES_EXPRESSION',
+                      'MULTI_FILE',
+                      'MULTI_IMAGE',
+                      'PASSWORD',
+                      'PDF',
+                      'PERIODIC_COUNT',
+                      'PHONE_NUMBER',
+                      'PRICE',
+                      'PRICE_EXPRESSION',
+                      'RICH_TEXT',
+                      'SERIAL',
+                      'SIGNED_PDF',
+                      'STRING',
+                      'STRING_EXPRESSION',
+                      'SUM',
+                      'TEXT',
+                      'TEXT_EXPRESSION',
+                      'TIME',
+                      'URL',
+                      'ZIPCODE',
+                    ]}
+                  />
+                </Field>
+              </>
+            )}
           </BoxComp>
         </BoxComp>
       );
