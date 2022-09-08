@@ -321,7 +321,7 @@ const prefabStructure: PrefabComponent[] = [
               [
                 wrapper(
                   {
-                    label: 'Login wrapper',
+                    label: 'Login',
                     options: {
                       pageTitle: linked({
                         label: 'Page title',
@@ -339,11 +339,14 @@ const prefabStructure: PrefabComponent[] = [
                       {
                         options: {
                           ...boxOptions,
-                          stretch: toggle('Stretch (when in flex container)', {
-                            value: true,
-                          }),
                           innerSpacing: sizes('Inner space', {
                             value: ['0rem', '0rem', '0rem', '0rem'],
+                          }),
+                          height: size('Height', {
+                            value: '100%',
+                            configuration: {
+                              as: 'UNIT',
+                            },
                           }),
                           backgroundOptions: toggle('Show background options', {
                             value: true,
@@ -402,7 +405,7 @@ const prefabStructure: PrefabComponent[] = [
                                 },
                               }),
                               rowHeight: text('Height', {
-                                value: '100%',
+                                value: '100vh',
                                 configuration: {
                                   as: 'UNIT',
                                 },

@@ -607,7 +607,7 @@ export default makePrefab('Register form', attrs, beforeCreate, [
               [
                 wrapper(
                   {
-                    label: 'Register wrapper',
+                    label: 'Register',
                     options: {
                       pageTitle: linked({
                         label: 'Page title',
@@ -625,11 +625,14 @@ export default makePrefab('Register form', attrs, beforeCreate, [
                       {
                         options: {
                           ...boxOptions,
-                          stretch: toggle('Stretch (when in flex container)', {
-                            value: true,
-                          }),
                           innerSpacing: sizes('Inner space', {
                             value: ['0rem', '0rem', '0rem', '0rem'],
+                          }),
+                          height: size('Height', {
+                            value: '100%',
+                            configuration: {
+                              as: 'UNIT',
+                            },
                           }),
                           backgroundOptions: toggle('Show background options', {
                             value: true,
@@ -688,7 +691,7 @@ export default makePrefab('Register form', attrs, beforeCreate, [
                                 },
                               }),
                               rowHeight: text('Height', {
-                                value: '100%',
+                                value: '100vh',
                                 configuration: {
                                   as: 'UNIT',
                                 },
