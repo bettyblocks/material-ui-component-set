@@ -1465,13 +1465,23 @@ const beforeCreate = ({
       const prefabFooter = getDescendantByRef('#Footer', newPrefab.structure);
       const prefabHeader = getDescendantByRef('#Header', newPrefab.structure);
       if (headerPartialId) {
-        prefabHeader.descendants = [{ type: 'PARTIAL', partialId: '' }];
-        prefabHeader.descendants[0].partialId = headerPartialId;
+        prefabHeader.descendants = [
+          {
+            ref: { id: '#headerPartial' },
+            type: 'PARTIAL',
+            partialId: headerPartialId,
+          },
+        ];
       }
 
       if (footerPartialId) {
-        prefabFooter.descendants = [{ type: 'PARTIAL', partialId: '' }];
-        prefabFooter.descendants[0].partialId = footerPartialId;
+        prefabFooter.descendants = [
+          {
+            ref: { id: '#footerPartial' },
+            type: 'PARTIAL',
+            partialId: footerPartialId,
+          },
+        ];
       }
 
       // #endregion
@@ -1820,42 +1830,14 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                           label: 'CRUD with Dialogs wrapper',
                           optionCategories: [
                             {
-                              label: 'Create options',
+                              label: 'Dialog title',
                               expanded: true,
-                              members: ['createDialogTitle'],
-                              condition: {
-                                type: 'SHOW',
-                                option: 'dialogVisibility',
-                                comparator: 'EQ',
-                                value: true,
-                              },
-                            },
-                            {
-                              label: 'Update options',
-                              expanded: true,
-                              members: ['updateDialogTitle'],
-                              condition: {
-                                type: 'SHOW',
-                                option: 'dialogVisibility',
-                                comparator: 'EQ',
-                                value: true,
-                              },
-                            },
-                            {
-                              label: 'Details options',
-                              expanded: true,
-                              members: ['detailsDialogTitle'],
-                              condition: {
-                                type: 'SHOW',
-                                option: 'dialogVisibility',
-                                comparator: 'EQ',
-                                value: true,
-                              },
-                            },
-                            {
-                              label: 'Delete options',
-                              expanded: true,
-                              members: ['deleteDialogTitle'],
+                              members: [
+                                'createDialogTitle',
+                                'updateDialogTitle',
+                                'detailsDialogTitle',
+                                'deleteDialogTitle',
+                              ],
                               condition: {
                                 type: 'SHOW',
                                 option: 'dialogVisibility',
@@ -1865,7 +1847,24 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                             },
                           ],
                           options: {
+                            dialogVisibility: linked({
+                              label: 'Visibility',
+                              value: {
+                                ref: {
+                                  componentId: '#crudDialogVisibility',
+                                  optionId: '#crudVisibility',
+                                },
+                              },
+                              configuration: {
+                                as: 'BUTTONGROUP',
+                                allowedInput: [
+                                  { name: 'Overview', value: false },
+                                  { name: 'Dialog', value: true },
+                                ],
+                              },
+                            }),
                             titleOption: linked({
+                              label: 'Page title',
                               value: {
                                 ref: {
                                   componentId: '#modelTitle',
@@ -1880,24 +1879,26 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                                 ),
                               },
                             }),
-                            dialogVisibility: linked({
-                              value: {
-                                ref: {
-                                  componentId: '#crudDialogVisibility',
-                                  optionId: '#crudVisibility',
-                                },
-                              },
-                            }),
                             crudTabs: linked({
+                              label: 'CRUD dialog tabs',
                               value: {
                                 ref: {
                                   componentId: '#DialogTabs',
                                   optionId: '#selectedTabs',
                                 },
                               },
-                              configuration: { as: 'BUTTONGROUP' },
+                              configuration: {
+                                as: 'BUTTONGROUP',
+                                condition: {
+                                  type: 'SHOW',
+                                  option: 'dialogVisibility',
+                                  comparator: 'EQ',
+                                  value: true,
+                                },
+                              },
                             }),
                             createDialogTitle: linked({
+                              label: 'Create tab title',
                               value: {
                                 ref: {
                                   componentId: '#createDialogTitle',
@@ -1914,6 +1915,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                               },
                             }),
                             updateDialogTitle: linked({
+                              label: 'Update tab title',
                               value: {
                                 ref: {
                                   componentId: '#updateDialogTitle',
@@ -1930,6 +1932,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                               },
                             }),
                             detailsDialogTitle: linked({
+                              label: 'Details tab title',
                               value: {
                                 ref: {
                                   componentId: '#detailsDialogTitle',
@@ -1946,6 +1949,7 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                               },
                             }),
                             deleteDialogTitle: linked({
+                              label: 'Delete tab title',
                               value: {
                                 ref: {
                                   componentId: '#deleteDialogTitle',
