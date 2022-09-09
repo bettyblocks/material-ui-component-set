@@ -147,7 +147,6 @@
     };
 
     const onKeyDown = (event) => {
-      console.log(type, separator);
       if (isNumberType && (event.key === '.' || event.key === ',')) {
         event.preventDefault();
       }
