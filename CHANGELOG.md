@@ -1,3 +1,10 @@
+## [2.45.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.45.0...v2.45.1) (2022-09-09)
+
+
+### Bug Fixes
+
+* trigger pipelines ([1d36456](https://github.com/bettyblocks/material-ui-component-set/commit/1d364567dbd6a05cfda934feb7bf832eace5a01c))
+
 # [2.45.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.44.0...v2.45.0) (2022-09-09)
 
 
