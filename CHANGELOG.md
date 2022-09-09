@@ -1,3 +1,10 @@
+# [2.45.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.44.0...v2.45.0) (2022-09-09)
+
+
+### Features
+
+* non model based form ([7471bc6](https://github.com/bettyblocks/material-ui-component-set/commit/7471bc650f1acad380897db6632467f6bc1662ec))
+
 # [2.44.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.43.0...v2.44.0) (2022-09-08)
 
 
