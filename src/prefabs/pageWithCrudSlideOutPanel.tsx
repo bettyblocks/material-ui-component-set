@@ -2695,6 +2695,19 @@ const prefabStructure = [
   wrapper(
     {
       label: 'CRUD with slide-out-panel wrapper',
+      optionCategories: [
+        {
+          label: 'Record overview options',
+          expanded: true,
+          members: ['createTabText', 'detailsTabText', 'updateTabText'],
+          condition: {
+            type: 'SHOW',
+            option: 'toggleOverview',
+            comparator: 'EQ',
+            value: true,
+          },
+        },
+      ],
       options: {
         toggleOverview: linked({
           label: 'Toggle overview/record view',
@@ -2703,6 +2716,13 @@ const prefabStructure = [
               componentId: '#Drawer',
               optionId: '#toggleSlideoutPanel',
             },
+          },
+          configuration: {
+            as: 'BUTTONGROUP',
+            allowedInput: [
+              { name: 'Overview', value: false },
+              { name: 'Record view', value: true },
+            ],
           },
         }),
         pageTitle: linked({
@@ -2750,9 +2770,9 @@ const prefabStructure = [
           configuration: {
             condition: {
               type: 'SHOW',
-              option: 'toggleOverview',
+              option: 'drawerOverview',
               comparator: 'EQ',
-              value: true,
+              value: 1,
             },
           },
         }),
@@ -2767,9 +2787,9 @@ const prefabStructure = [
           configuration: {
             condition: {
               type: 'SHOW',
-              option: 'toggleOverview',
+              option: 'drawerOverview',
               comparator: 'EQ',
-              value: true,
+              value: 2,
             },
           },
         }),
@@ -2784,9 +2804,9 @@ const prefabStructure = [
           configuration: {
             condition: {
               type: 'SHOW',
-              option: 'toggleOverview',
+              option: 'drawerOverview',
               comparator: 'EQ',
-              value: true,
+              value: 3,
             },
           },
         }),
