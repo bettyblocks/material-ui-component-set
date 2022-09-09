@@ -23,10 +23,6 @@ const beforeCreate = ({
     (o) => o.type === 'ACTION_JS_VARIABLE',
   );
 
-  if (!actionVariableOption) {
-    return <div>Prefab is missing the actionVariable component option</div>;
-  }
-
   return (
     <CreateFormInputWizard
       supportedKinds={[
@@ -38,7 +34,7 @@ const beforeCreate = ({
         'STRING',
         'TEXT',
       ]}
-      actionVariableOption={actionVariableOption.key}
+      actionVariableOption={actionVariableOption?.key || null}
       labelOptionKey="label"
       nameOptionKey="actionVariableId"
       close={close}
@@ -61,8 +57,6 @@ const options = {
   value: variable('Value'),
 };
 
-const hooks = {};
-
 export default prefab('Hidden Beta', attributes, beforeCreate, [
-  component('Hidden Input Beta', { options, ...hooks }, []),
+  component('Hidden Input Beta', { options }, []),
 ]);
