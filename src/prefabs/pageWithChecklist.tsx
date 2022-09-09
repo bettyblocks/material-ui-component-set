@@ -959,7 +959,7 @@ const beforeCreate = ({
             <hr />
             {model && (
               <>
-                <Field label="Title property" info="test">
+                <Field label="Title" info="Shows the title of Expansion Panel">
                   <PropertySelector
                     modelId={modelId}
                     onChange={(value: 'STRING') => {
@@ -976,7 +976,10 @@ const beforeCreate = ({
                     }
                   />
                 </Field>
-                <Field label="Description property">
+                <Field
+                  label="Description"
+                  info="Shows the text within the Expansion Panel"
+                >
                   <PropertySelector
                     modelId={modelId}
                     onChange={(value: 'STRING') => {
@@ -993,7 +996,10 @@ const beforeCreate = ({
                     }
                   />
                 </Field>
-                <Field label="Checkbox property">
+                <Field
+                  label="Checklist checked"
+                  info="Checks if the value is true or false"
+                >
                   <PropertySelector
                     modelId={modelId}
                     onChange={(value: 'BOOLEAN') => {
