@@ -1,3 +1,49 @@
+# [2.45.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.44.0...v2.45.0) (2022-09-09)
+
+
+### Features
+
+* non model based form ([7471bc6](https://github.com/bettyblocks/material-ui-component-set/commit/7471bc650f1acad380897db6632467f6bc1662ec))
+
+# [2.44.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.43.0...v2.44.0) (2022-09-08)
+
+
+### Bug Fixes
+
+* add default label to datepicker inputs ([d38d7c9](https://github.com/bettyblocks/material-ui-component-set/commit/d38d7c9a3fe7c2020878aaafbd8461020a544eae))
+* add fallback for actionvariable ([48ca659](https://github.com/bettyblocks/material-ui-component-set/commit/48ca65936ba5d82539887f8e66f7cc182228771e))
+* add other datepickers to allow outside a form ([32a1fb5](https://github.com/bettyblocks/material-ui-component-set/commit/32a1fb5b195ff90c6defc15a7e817c8da24c1483))
+* allow price property outside form ([15aaed2](https://github.com/bettyblocks/material-ui-component-set/commit/15aaed29486cbcada89a6d7a655cff20f824132d))
+* change label for action js variable ([44bab25](https://github.com/bettyblocks/material-ui-component-set/commit/44bab25ff44826c0c1bbf9f3624e2bee87e2f8b1))
+* datetime picker outside form ([8bba483](https://github.com/bettyblocks/material-ui-component-set/commit/8bba48372165d6e017a176a58a3b5a5a8dc9abbd))
+* remove afterDelete in hiddenInput ([f2aa360](https://github.com/bettyblocks/material-ui-component-set/commit/f2aa360da4aaac393584b9ad305bf13e7b3c5c95))
+* remove unused vars ([53fa810](https://github.com/bettyblocks/material-ui-component-set/commit/53fa81054b785a43a41a7be85b326fe9e33ee0e1))
+* retrigger pipelines ([4a39db0](https://github.com/bettyblocks/material-ui-component-set/commit/4a39db04d6e456f46276ad5d03de78ae37e1ebe6))
+* show actionjsvariable and property ([d9bd260](https://github.com/bettyblocks/material-ui-component-set/commit/d9bd26071c0a6a44caac28bdb164fa37f81d7991))
+* show correct results with a onActionSucces error ([0359dfe](https://github.com/bettyblocks/material-ui-component-set/commit/0359dfe10005b31f342abcbe81c275d66210bfc1))
+* textarea outside form ([458213f](https://github.com/bettyblocks/material-ui-component-set/commit/458213f277039f68bc5510686f49ad115395e844))
+* trigger pipelines ([171228d](https://github.com/bettyblocks/material-ui-component-set/commit/171228dfa19ec484f6becb7ec0feb74878b0858a))
+
+
+### Features
+
+* able to drag beta inputs outside form ([1f9352b](https://github.com/bettyblocks/material-ui-component-set/commit/1f9352bb260df8e8f76fe7ce558c51d2d0f0c574))
+* able to drag checkbox outside a beta form ([70de830](https://github.com/bettyblocks/material-ui-component-set/commit/70de830869dd2e1a7b887e90ee1584a69032aaaf))
+
+# [2.43.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.42.1...v2.43.0) (2022-09-02)
+
+
+### Features
+
+* crud with dialogs to tsx ([965b1e3](https://github.com/bettyblocks/material-ui-component-set/commit/965b1e327d9a6d74cdd9bf185c93e7c32a7cfa6c))
+
+## [2.42.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.42.0...v2.42.1) (2022-09-02)
+
+
+### Bug Fixes
+
+* made border radius as unit again ([2b88354](https://github.com/bettyblocks/material-ui-component-set/commit/2b883541926494b1b81b52e50b1ee17890510c02))
+
 # [2.42.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.41.1...v2.42.0) (2022-09-01)
 
 
