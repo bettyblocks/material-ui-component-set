@@ -31,7 +31,6 @@
             ],
           },
         },
-
         {
           value: true,
           label: 'Autocomplete',
@@ -47,7 +46,7 @@
         {
           label: 'Validation pattern',
           key: 'pattern',
-          value: '[0-9]{8,}',
+          value: '^[0-9]+([,.][0-9]+)?$',
           type: 'TEXT',
           configuration: {
             placeholder: '[0-9]{8,}',
