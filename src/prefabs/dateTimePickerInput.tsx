@@ -22,16 +22,11 @@ const beforeCreate = ({
     (option: { type: string }) => option.type === 'ACTION_JS_VARIABLE',
   );
 
-  // TODO: remove this code
-  if (!actionVariableOption) {
-    return <div>Prefab is missing the actionVariable component option</div>;
-  }
-
   return (
     <CreateFormInputWizard
       supportedKinds={['DATE_TIME']}
       actionVariableType="STRING"
-      actionVariableOption={actionVariableOption.key}
+      actionVariableOption={actionVariableOption?.key || null}
       labelOptionKey="label"
       nameOptionKey="actionVariableId"
       close={close}
@@ -50,6 +45,7 @@ const attributes = {
 export default makePrefab('DateTimePicker Beta', attributes, beforeCreate, [
   DateTimePicker({
     label: 'Datetime picker Beta',
+    inputLabel: 'Datetime',
     dataComponentAttribute: 'DateTime Input',
     inputType: 'datetime',
   }),
