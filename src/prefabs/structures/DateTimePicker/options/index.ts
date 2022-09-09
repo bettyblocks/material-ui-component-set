@@ -1,4 +1,5 @@
 import {
+  hideIf,
   option,
   showIf,
   text,
@@ -11,14 +12,14 @@ import { styles } from './styles';
 
 export const options = {
   actionVariableId: option('ACTION_JS_VARIABLE', {
-    label: 'Name',
+    label: 'Action input variable',
     value: '',
-    configuration: { condition: showIf('actionVariableId', 'EQ', 'never') },
   }),
 
   actionProperty: option('ACTION_JS_PROPERTY', {
     label: 'Property',
     value: '',
+    configuration: { condition: hideIf('actionProperty', 'EQ', '') },
   }),
 
   label: variable('Label', { value: [''] }),
