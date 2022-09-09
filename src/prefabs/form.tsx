@@ -208,6 +208,7 @@ const beforeCreate = ({
           if (modelBased) {
             Object.values(result.variables).map(([property, variable]) => {
               const { kind } = property;
+
               switch (kind) {
                 case PropertyKind.BELONGS_TO: {
                   structure.descendants.push(
@@ -404,7 +405,6 @@ const beforeCreate = ({
           } else {
             structure.descendants.push(cloneStructure(BettyPrefabs.STRING));
           }
-
           structure.descendants.push(
             cloneStructure(BettyPrefabs.SUBMIT_BUTTON),
           );
@@ -427,6 +427,7 @@ const beforeCreate = ({
                 disabled: true,
               },
             }));
+
             if (!modelBased) {
               const textInputprefab = structure.descendants.find(
                 (descendant: { name: string }) =>
@@ -461,6 +462,7 @@ const beforeCreate = ({
                 }),
               );
             }
+
             save(newPrefab);
           }
         }}
