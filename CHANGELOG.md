@@ -1,3 +1,11 @@
+## [2.47.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.47.0...v2.47.1) (2022-09-12)
+
+
+### Bug Fixes
+
+* add related model ids to bettyinput ([67aa71f](https://github.com/bettyblocks/material-ui-component-set/commit/67aa71f9399779d3eb581e63b622fb07a4abc657))
+* update component sdk ([0bef560](https://github.com/bettyblocks/material-ui-component-set/commit/0bef560e00bd22a99781edcfe516beba89b35378))
+
 # [2.47.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.46.2...v2.47.0) (2022-09-12)
 
 
