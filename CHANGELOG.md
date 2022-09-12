@@ -1,8 +1,56 @@
+## [2.46.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.46.1...v2.46.2) (2022-09-12)
+
+
+### Bug Fixes
+
+* placed afterDeletes back ([41535fc](https://github.com/bettyblocks/material-ui-component-set/commit/41535fcbc09b8f67b30cd13d590bdac8a09b402e))
+
+## [2.46.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.46.0...v2.46.1) (2022-09-12)
+
+
+### Bug Fixes
+
+* fix refetch singlevalueautocomplete ([a4ac7d1](https://github.com/bettyblocks/material-ui-component-set/commit/a4ac7d191246d319e6412bd55e39c6a2167439d2))
+
+# [2.46.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.45.0...v2.46.0) (2022-09-09)
+
+
+### Bug Fixes
+
+* also remove margin from multiautocomplete ([c8bcc55](https://github.com/bettyblocks/material-ui-component-set/commit/c8bcc5591382394c2fa4fe130c934730f0c20168))
+* change value in the input ([5d6c406](https://github.com/bettyblocks/material-ui-component-set/commit/5d6c406462d8a56564f32f1880cd809c8b34f37a))
+* clearFileUpload should clear current upload ([9ba797a](https://github.com/bettyblocks/material-ui-component-set/commit/9ba797a522d5ed2c8a469510e1fef7ffc8366c60))
+* console warns ([e397438](https://github.com/bettyblocks/material-ui-component-set/commit/e397438a1f75d617d87da9ff5f5a5521631af1ac))
+* create file upload crash ([9898470](https://github.com/bettyblocks/material-ui-component-set/commit/9898470034e6b57c5650d4ac6e9fb6aa574e000a))
+* design time crash on property select file input ([c1f445f](https://github.com/bettyblocks/material-ui-component-set/commit/c1f445f12723e3fb690350b3205ebbead750f7bf))
+* file upload use value property ([28e39ed](https://github.com/bettyblocks/material-ui-component-set/commit/28e39ed0f063eb2faea61147bdd43f1a63e738cb))
+* remove margin from formcontrol component ([8b13ad7](https://github.com/bettyblocks/material-ui-component-set/commit/8b13ad7e10d292176b48956ea7b4533f48b9986f))
+* trigger pipelines ([1d36456](https://github.com/bettyblocks/material-ui-component-set/commit/1d364567dbd6a05cfda934feb7bf832eace5a01c))
+* update types ([8e4aeb9](https://github.com/bettyblocks/material-ui-component-set/commit/8e4aeb923a23cafc1d2609f2eeb702f84c8d13db))
+
+
+### Features
+
+* add input wizard to file input ([bc5208a](https://github.com/bettyblocks/material-ui-component-set/commit/bc5208af7fb47d992dab0787763f513aacefea86))
+* add interactions ([4ce8865](https://github.com/bettyblocks/material-ui-component-set/commit/4ce88657ed029b22dfeb593b845da365e1bd85e2))
+* add trigger events in fileUploadInput ([0827dc8](https://github.com/bettyblocks/material-ui-component-set/commit/0827dc825f9448bbb50c48d0a85519b29438b878))
+* added loading and pass correct file type to the helper ([e8ec4c1](https://github.com/bettyblocks/material-ui-component-set/commit/e8ec4c1ba9fbf16455a8c1869413a6ebacf49340))
+* added required and maxFileSize option ([dc4ae72](https://github.com/bettyblocks/material-ui-component-set/commit/dc4ae72ad8a7ba9ffa15af3baf715676085e0144))
+* convert file upload to tsx ([82a6b3d](https://github.com/bettyblocks/material-ui-component-set/commit/82a6b3dbc7799dfc8dd73909cb3b4f68d8864148))
+* enable file property on update form ([ec9021f](https://github.com/bettyblocks/material-ui-component-set/commit/ec9021ff162dc7c46811c0379e8733a8da5bfe1c))
+* fix file upload not sending correct property ([6b73d68](https://github.com/bettyblocks/material-ui-component-set/commit/6b73d689a81c1f667a44e80f7d29c2b8f931a161))
+* fix lint issue ([5687af9](https://github.com/bettyblocks/material-ui-component-set/commit/5687af9e78127a4a02a4bf98c28bb64011f0fcaf))
+* fix non typescript type ([7a3fdac](https://github.com/bettyblocks/material-ui-component-set/commit/7a3fdac19644294409e60b11336598b158386252))
+* show current value in file upload ([5517937](https://github.com/bettyblocks/material-ui-component-set/commit/551793782e1ad419115529c71882fbd52f7b0204))
+* validate maximum file size ([c142d6e](https://github.com/bettyblocks/material-ui-component-set/commit/c142d6eb289faad5a8e812e34376f85a17025ba9))
+
 ## [2.45.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.45.0...v2.45.1) (2022-09-09)
 
 
 ### Bug Fixes
 
+* also remove margin from multiautocomplete ([c8bcc55](https://github.com/bettyblocks/material-ui-component-set/commit/c8bcc5591382394c2fa4fe130c934730f0c20168))
+* remove margin from formcontrol component ([8b13ad7](https://github.com/bettyblocks/material-ui-component-set/commit/8b13ad7e10d292176b48956ea7b4533f48b9986f))
 * trigger pipelines ([1d36456](https://github.com/bettyblocks/material-ui-component-set/commit/1d364567dbd6a05cfda934feb7bf832eace5a01c))
 
 # [2.45.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.44.0...v2.45.0) (2022-09-09)
