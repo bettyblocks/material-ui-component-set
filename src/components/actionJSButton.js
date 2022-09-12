@@ -70,7 +70,7 @@
           : {}),
       })
         .then((response) => {
-          B.triggerEvent('onActionSuccess', response.data.action);
+          B.triggerEvent('onActionSuccess', response.data.action.results);
         })
         .catch((error) => {
           B.triggerEvent('onActionError', error);
