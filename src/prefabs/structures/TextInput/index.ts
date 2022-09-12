@@ -1,7 +1,10 @@
 import { component, PrefabReference } from '@betty-blocks/component-sdk';
 import { updateOption } from '../../../utils';
+import { deleteActionVariable } from '../../hooks/deleteActionVariable';
 import { Configuration } from '../Configuration';
 import { options as defaults } from './options';
+
+const $afterDelete = [deleteActionVariable];
 
 export const TextInput = (
   config: Configuration,
@@ -42,7 +45,7 @@ export const TextInput = (
 
   return component(
     'TextInput',
-    { label: config.label, options, ref },
+    { label: config.label, options, ref, $afterDelete },
     children,
   );
 };
