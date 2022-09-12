@@ -619,13 +619,15 @@
     useEffect(() => {
       if (results && results.length !== 0) {
         setValue(initialValue);
-        setInputValue(
-          results
-            .find((option) => {
-              return option.id === parseInt(initialValue, 10);
-            })
-            [searchProp.name].toString(),
-        );
+        const result = results.find((option) => {
+          return option.id === parseInt(initialValue, 10);
+        });
+        if (result) {
+          setInputValue(result[searchProp.name].toString());
+        } else {
+          // we set the evaluatedref to false again because the default value changed and we didn't evaluate it yet
+          defaultValueEvaluatedRef.current = false;
+        }
       }
     }, [defaultValue]);
 
