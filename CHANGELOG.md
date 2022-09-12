@@ -1,3 +1,10 @@
+# [2.48.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.47.1...v2.48.0) (2022-09-12)
+
+
+### Features
+
+* implemented wrapper in profile page template TMPLT-1601 ([adc7ba0](https://github.com/bettyblocks/material-ui-component-set/commit/adc7ba03266afc7595c8dd7762d5a75b825eacb0))
+
 ## [2.47.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.47.0...v2.47.1) (2022-09-12)
 
 
