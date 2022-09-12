@@ -1,3 +1,10 @@
+## [2.46.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.46.0...v2.46.1) (2022-09-12)
+
+
+### Bug Fixes
+
+* fix refetch singlevalueautocomplete ([a4ac7d1](https://github.com/bettyblocks/material-ui-component-set/commit/a4ac7d191246d319e6412bd55e39c6a2167439d2))
+
 # [2.46.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.45.0...v2.46.0) (2022-09-09)
 
 
