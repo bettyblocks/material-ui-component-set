@@ -682,7 +682,6 @@
         size={size}
         fullWidth={fullWidth}
         required={required && !value}
-        margin={margin}
         error={errorState}
       >
         <Autocomplete

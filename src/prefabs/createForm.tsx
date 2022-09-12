@@ -130,6 +130,7 @@ const beforeCreate = ({
                     property,
                     variable,
                     result.relatedIdProperties,
+                    result.relatedModelIds,
                   ),
                 );
                 break;
@@ -171,6 +172,11 @@ const beforeCreate = ({
                     property,
                     variable,
                   ),
+                );
+                break;
+              case PropertyKind.FILE:
+                structure.descendants.push(
+                  makeBettyInput(BettyPrefabs.FILE, model, property, variable),
                 );
                 break;
               case PropertyKind.IBAN:
