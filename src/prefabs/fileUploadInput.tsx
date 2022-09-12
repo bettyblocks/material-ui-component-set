@@ -1,10 +1,6 @@
 import * as React from 'react';
-import {
-  BeforeCreateArgs,
-  Icon,
-  prefab as makePrefab,
-} from '@betty-blocks/component-sdk';
-import { DateTimePicker } from './structures/DateTimePicker';
+import { BeforeCreateArgs, Icon, prefab } from '@betty-blocks/component-sdk';
+import { FileUpload } from './structures/FileUpload';
 
 const beforeCreate = ({
   close,
@@ -13,7 +9,6 @@ const beforeCreate = ({
   save,
 }: BeforeCreateArgs) => {
   const structure = originalPrefab.structure[0];
-
   if (structure.type !== 'COMPONENT')
     return <div>expected component prefab, found {structure.type}</div>;
 
@@ -22,11 +17,15 @@ const beforeCreate = ({
     (option: { type: string }) => option.type === 'ACTION_JS_VARIABLE',
   );
 
+  // TODO: remove this code
+  if (!actionVariableOption) {
+    return <div>Prefab is missing the actionVariable component option</div>;
+  }
+
   return (
     <CreateFormInputWizard
-      supportedKinds={['DATE']}
-      actionVariableType="STRING"
-      actionVariableOption={actionVariableOption?.key || null}
+      supportedKinds={['FILE']}
+      actionVariableOption={actionVariableOption.key}
       labelOptionKey="label"
       nameOptionKey="actionVariableId"
       close={close}
@@ -36,17 +35,10 @@ const beforeCreate = ({
   );
 };
 
-const attributes = {
+const attr = {
+  icon: Icon.FileInputIcon,
   category: 'FORMV2',
-  icon: Icon.DatePickerIcon,
-  keywords: ['Form', 'input'],
+  keywords: ['Form', 'input', 'file', 'upload', 'fileupload'],
 };
 
-export default makePrefab('DatePicker Beta', attributes, beforeCreate, [
-  DateTimePicker({
-    label: 'Date picker Beta',
-    inputLabel: 'Date',
-    dataComponentAttribute: 'Date Input',
-    inputType: 'date',
-  }),
-]);
+export default prefab('File Upload Beta', attr, beforeCreate, [FileUpload()]);
