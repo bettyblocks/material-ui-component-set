@@ -37,6 +37,7 @@
       customModelAttribute: customModelAttributeObj,
       nameAttribute,
       dataComponentAttribute = ['TextField'],
+      separator,
     } = options;
 
     const {
@@ -149,6 +150,12 @@
       if (isNumberType && (event.key === '.' || event.key === ',')) {
         event.preventDefault();
       }
+      if (type === 'decimal' && separator === 'dot' && event.key === ',') {
+        event.preventDefault();
+      }
+      if (type === 'decimal' && separator === 'comma' && event.key === '.') {
+        event.preventDefault();
+      }
     };
 
     const customPatternValidation = (target) => {
@@ -253,7 +260,18 @@
       iconButtonOptions.onClick = handleClickShowPassword;
       iconButtonOptions.onMouseDown = handleMouseDownPassword;
     }
+    const decimalHandler = (val) => {
+      if (!isDev) {
+        if (separator === 'comma') {
+          return val.replaceAll('.', '').replace(/[^0-9.|,]/g, '');
+        }
+        if (separator === 'dot') {
+          return val.replaceAll(',', '').replace(/[^0-9.|,]/g, '');
+        }
+      }
 
+      return val;
+    };
     useEffect(() => {
       if (isDev) {
         setCurrentValue(defaultValueText);
@@ -272,12 +290,27 @@
         margin={margin}
         error={errorState}
       >
+        {type === 'decimal' && (
+          <input
+            type="hidden"
+            id={nameAttributeValue || customModelAttributeName}
+            name={nameAttributeValue || customModelAttributeName}
+            value={currentValue.replaceAll(',', '.')}
+          />
+        )}
+
         {labelText && !hideLabel && (
           <InputLabel classes={{ root: classes.label }}>{labelText}</InputLabel>
         )}
         <InputCmp
-          name={nameAttributeValue || customModelAttributeName}
-          value={currentValue}
+          name={
+            type !== 'decimal'
+              ? nameAttributeValue || customModelAttributeName
+              : null
+          }
+          value={
+            type !== 'decimal' ? currentValue : decimalHandler(currentValue)
+          }
           type={(isDev && type === 'number') || showPassword ? 'text' : type}
           multiline={multiline}
           autoComplete={autoComplete ? 'on' : 'off'}
