@@ -2,6 +2,9 @@ import { component, PrefabReference } from '@betty-blocks/component-sdk';
 import { updateOption } from '../../../utils';
 import { Configuration } from '../Configuration';
 import { options as defaults } from './options';
+import { deleteActionVariable } from '../../hooks/deleteActionVariable';
+
+const $afterDelete = [deleteActionVariable];
 
 export enum DateInputTypes {
   DATE_TIME = 'datetime',
@@ -65,7 +68,7 @@ export const DateTimePicker = (
 
   return component(
     'DateTimePickerInput',
-    { options, style, ref, label },
+    { options, style, ref, label, $afterDelete },
     descendants,
   );
 };
