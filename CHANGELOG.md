@@ -1,3 +1,11 @@
+# [2.47.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.46.2...v2.47.0) (2022-09-12)
+
+
+### Features
+
+* add wrapper to login template ([d9d5ac9](https://github.com/bettyblocks/material-ui-component-set/commit/d9d5ac92686823d44cc10f292913a58b61d03d66))
+* implemented wrapper in login and register page template ([803efa5](https://github.com/bettyblocks/material-ui-component-set/commit/803efa5044bbbb7cbe79a9035db10a84a041b1ed))
+
 ## [2.46.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.46.1...v2.46.2) (2022-09-12)
 
 
