@@ -1,3 +1,10 @@
+## [2.46.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.46.1...v2.46.2) (2022-09-12)
+
+
+### Bug Fixes
+
+* placed afterDeletes back ([41535fc](https://github.com/bettyblocks/material-ui-component-set/commit/41535fcbc09b8f67b30cd13d590bdac8a09b402e))
+
 ## [2.46.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.46.0...v2.46.1) (2022-09-12)
 
 
