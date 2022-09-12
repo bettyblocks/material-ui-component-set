@@ -579,7 +579,7 @@ const beforeCreate = ({
   };
   return (
     <>
-      <Header onClose={close} title="Configure list view" />
+      <Header onClose={close} title="Configure Card and List view" />
       {stepper.progressBar()}
       <Content>{stepper.setStep(stepNumber)}</Content>
       {stepper.buttons()}
