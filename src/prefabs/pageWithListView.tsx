@@ -741,60 +741,49 @@ export default makePrefab('List view', attrs, beforeCreate, [
                       ),
                     ],
                   ),
-                  wrapper(
+                  prefabBox(
                     {
-                      label: 'List view',
                       options: {
-                        pageTitle: linked({
-                          label: 'Page title',
-                          value: {
-                            ref: {
-                              componentId: '#pageTitle',
-                              optionId: '#pageTitleContent',
-                            },
+                        ...boxOptions,
+                        stretch: toggle('Stretch (when in flex container)', {
+                          value: true,
+                        }),
+                        width: size('Width', {
+                          value: '100%',
+                          configuration: {
+                            as: 'UNIT',
+                          },
+                        }),
+                        innerSpacing: sizes('Inner space', {
+                          value: ['0rem', '0rem', '0rem', '0rem'],
+                        }),
+                        backgroundColor: color('Background color', {
+                          value: ThemeColor.LIGHT,
+                          configuration: {
+                            condition: showIf('backgroundOptions', 'EQ', true),
+                          },
+                        }),
+                        backgroundColorAlpha: option('NUMBER', {
+                          label: 'Background color opacity',
+                          value: 20,
+                          configuration: {
+                            condition: showIf('backgroundOptions', 'EQ', true),
                           },
                         }),
                       },
                     },
                     [
-                      prefabBox(
+                      wrapper(
                         {
+                          label: 'List view',
                           options: {
-                            ...boxOptions,
-                            stretch: toggle(
-                              'Stretch (when in flex container)',
-                              {
-                                value: true,
-                              },
-                            ),
-                            width: size('Width', {
-                              value: '100%',
-                              configuration: {
-                                as: 'UNIT',
-                              },
-                            }),
-                            innerSpacing: sizes('Inner space', {
-                              value: ['0rem', '0rem', '0rem', '0rem'],
-                            }),
-                            backgroundColor: color('Background color', {
-                              value: ThemeColor.LIGHT,
-                              configuration: {
-                                condition: showIf(
-                                  'backgroundOptions',
-                                  'EQ',
-                                  true,
-                                ),
-                              },
-                            }),
-                            backgroundColorAlpha: option('NUMBER', {
-                              label: 'Background color opacity',
-                              value: 20,
-                              configuration: {
-                                condition: showIf(
-                                  'backgroundOptions',
-                                  'EQ',
-                                  true,
-                                ),
+                            pageTitle: linked({
+                              label: 'Page title',
+                              value: {
+                                ref: {
+                                  componentId: '#pageTitle',
+                                  optionId: '#pageTitleContent',
+                                },
                               },
                             }),
                           },
