@@ -1,3 +1,10 @@
+# [2.49.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.48.0...v2.49.0) (2022-09-12)
+
+
+### Features
+
+* add separator option to decimal input ([4c02cc1](https://github.com/bettyblocks/material-ui-component-set/commit/4c02cc124ce0846fc41bc37d36cbf5332639e487))
+
 # [2.48.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.47.1...v2.48.0) (2022-09-12)
 
 
