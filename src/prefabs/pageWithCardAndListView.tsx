@@ -579,7 +579,7 @@ const beforeCreate = ({
   };
   return (
     <>
-      <Header onClose={close} title="Configure list view" />
+      <Header onClose={close} title="Configure Card and List view" />
       {stepper.progressBar()}
       <Content>{stepper.setStep(stepNumber)}</Content>
       {stepper.buttons()}
@@ -836,69 +836,58 @@ export default makePrefab('Card and List view', attrs, beforeCreate, [
                       ),
                     ],
                   ),
-                  wrapper(
+                  prefabBox(
                     {
-                      label: 'Card and list view',
                       options: {
-                        pageTitle: linked({
-                          label: 'Page title',
-                          value: {
-                            ref: {
-                              componentId: '#pageTitle',
-                              optionId: '#pageTitleContent',
-                            },
+                        ...boxOptions,
+                        stretch: toggle('Stretch (when in flex container)', {
+                          value: true,
+                        }),
+                        width: size('Width', {
+                          value: '100%',
+                          configuration: {
+                            as: 'UNIT',
                           },
                         }),
-                        activeView: linked({
-                          label: 'Active view',
-                          value: {
-                            ref: {
-                              componentId: '#viewTabs',
-                              optionId: '#viewTabsSelectedDesignTabIndex',
-                            },
+                        innerSpacing: sizes('Inner space', {
+                          value: ['0rem', '0rem', '0rem', '0rem'],
+                        }),
+                        backgroundColor: color('Background color', {
+                          value: ThemeColor.LIGHT,
+                          configuration: {
+                            condition: showIf('backgroundOptions', 'EQ', true),
+                          },
+                        }),
+                        backgroundColorAlpha: option('NUMBER', {
+                          label: 'Background color opacity',
+                          value: 20,
+                          configuration: {
+                            condition: showIf('backgroundOptions', 'EQ', true),
                           },
                         }),
                       },
                     },
                     [
-                      prefabBox(
+                      wrapper(
                         {
+                          label: 'Card and list view',
                           options: {
-                            ...boxOptions,
-                            stretch: toggle(
-                              'Stretch (when in flex container)',
-                              {
-                                value: true,
-                              },
-                            ),
-                            width: size('Width', {
-                              value: '100%',
-                              configuration: {
-                                as: 'UNIT',
+                            pageTitle: linked({
+                              label: 'Page title',
+                              value: {
+                                ref: {
+                                  componentId: '#pageTitle',
+                                  optionId: '#pageTitleContent',
+                                },
                               },
                             }),
-                            innerSpacing: sizes('Inner space', {
-                              value: ['0rem', '0rem', '0rem', '0rem'],
-                            }),
-                            backgroundColor: color('Background color', {
-                              value: ThemeColor.LIGHT,
-                              configuration: {
-                                condition: showIf(
-                                  'backgroundOptions',
-                                  'EQ',
-                                  true,
-                                ),
-                              },
-                            }),
-                            backgroundColorAlpha: option('NUMBER', {
-                              label: 'Background color opacity',
-                              value: 20,
-                              configuration: {
-                                condition: showIf(
-                                  'backgroundOptions',
-                                  'EQ',
-                                  true,
-                                ),
+                            activeView: linked({
+                              label: 'Active view',
+                              value: {
+                                ref: {
+                                  componentId: '#viewTabs',
+                                  optionId: '#viewTabsSelectedDesignTabIndex',
+                                },
                               },
                             }),
                           },

@@ -211,7 +211,7 @@ const beforeCreate = ({
       }
       return (
         <Box direction="row">
-          <Box direction="column" basis="1/3">
+          <Box direction="column" basis="2/3">
             <Field
               label="Select model"
               error={
@@ -273,21 +273,19 @@ const beforeCreate = ({
               />
             </Field>
           </Box>
-          <Box direction="column" basis="2/3" pad={{ left: 'large' }}>
+          <Box direction="column" basis="1/3">
             <Field
               info={
                 <Text size="small" color="grey700">
-                  This is what each list item will look like on the canvas
+                  This is what each grid item will look like on the canvas
                 </Text>
               }
             >
               <Text>Preview:</Text>
             </Field>
             <Box
-              direction="row"
-              fill="horizontal"
+              fill="true"
               round="4px"
-              pad="small"
               overflow="hidden"
               border={{
                 color: '#E0E0E0',
@@ -297,7 +295,7 @@ const beforeCreate = ({
               }}
             >
               <Box
-                pad={imageProperty.id ? 'none' : 'medium'}
+                pad={imageProperty.id ? 'large' : 'medium'}
                 border={
                   imageProperty.id
                     ? {
@@ -313,43 +311,43 @@ const beforeCreate = ({
                     ? '#F0F1F5'
                     : 'url(https://assets.bettyblocks.com/771d40f1fc49403e824cdca2fe025aeb_assets/files/contemplative_lizard)'
                 }
-                width="110px"
+                flex={{ grow: '30' }}
                 justify="center"
                 align="center"
               >
-                <Text
-                  size="xsmall"
-                  textAlign="center"
-                  style={{ width: '100%' }}
-                  truncate="true"
-                >
+                <Text truncate="true">
                   {imageProperty.id ? enrichVarObj(imageProperty).name : ''}
                 </Text>
               </Box>
-              <Box flex={{ grow: '62' }} pad={{ left: 'medium' }}>
+              <Box pad="medium">
                 <Text color="#000000DE" truncate="true">
                   {titleProperty.id
                     ? enrichVarObj(titleProperty).name
                     : 'Title'}
                 </Text>
-                <Text
-                  size="small"
-                  color="#0000008A"
-                  truncate="true"
-                  margin={{ bottom: '0.5rem' }}
-                >
+                <Text size="small" color="#0000008A" truncate="true">
                   {subheaderProperty.id
                     ? enrichVarObj(subheaderProperty).name
                     : 'Subheader'}
                 </Text>
+              </Box>
+              <Box
+                pad={{
+                  top: 'none',
+                  bottom: 'medium',
+                  horizontal: 'medium',
+                }}
+              >
                 <Text size="small" truncate="true">
                   {descriptionProperty.id
                     ? enrichVarObj(descriptionProperty).name
                     : 'Description'}
                 </Text>
               </Box>
-              <Box flex={{ grow: '8' }} justify="center" align="center">
-                <Text size="large">›</Text>
+              <Box pad={{ horizontal: 'medium', vertical: 'small' }}>
+                <Text size="large" textAlign="end">
+                  ›
+                </Text>
               </Box>
             </Box>
           </Box>
@@ -508,7 +506,7 @@ const beforeCreate = ({
   };
   return (
     <>
-      <Header onClose={close} title="Configure list view" />
+      <Header onClose={close} title="Configure Card view" />
       {stepper.progressBar()}
       <Content>{stepper.setStep(stepNumber)}</Content>
       {stepper.buttons()}
@@ -765,60 +763,49 @@ export default makePrefab('Card view', attrs, beforeCreate, [
                       ),
                     ],
                   ),
-                  wrapper(
+                  prefabBox(
                     {
-                      label: 'Card view',
                       options: {
-                        pageTitle: linked({
-                          label: 'Page title',
-                          value: {
-                            ref: {
-                              componentId: '#pageTitle',
-                              optionId: '#pageTitleContent',
-                            },
+                        ...boxOptions,
+                        stretch: toggle('Stretch (when in flex container)', {
+                          value: true,
+                        }),
+                        width: size('Width', {
+                          value: '100%',
+                          configuration: {
+                            as: 'UNIT',
+                          },
+                        }),
+                        innerSpacing: sizes('Inner space', {
+                          value: ['0rem', '0rem', '0rem', '0rem'],
+                        }),
+                        backgroundColor: color('Background color', {
+                          value: ThemeColor.LIGHT,
+                          configuration: {
+                            condition: showIf('backgroundOptions', 'EQ', true),
+                          },
+                        }),
+                        backgroundColorAlpha: option('NUMBER', {
+                          label: 'Background color opacity',
+                          value: 20,
+                          configuration: {
+                            condition: showIf('backgroundOptions', 'EQ', true),
                           },
                         }),
                       },
                     },
                     [
-                      prefabBox(
+                      wrapper(
                         {
+                          label: 'Card view',
                           options: {
-                            ...boxOptions,
-                            stretch: toggle(
-                              'Stretch (when in flex container)',
-                              {
-                                value: true,
-                              },
-                            ),
-                            width: size('Width', {
-                              value: '100%',
-                              configuration: {
-                                as: 'UNIT',
-                              },
-                            }),
-                            innerSpacing: sizes('Inner space', {
-                              value: ['0rem', '0rem', '0rem', '0rem'],
-                            }),
-                            backgroundColor: color('Background color', {
-                              value: ThemeColor.LIGHT,
-                              configuration: {
-                                condition: showIf(
-                                  'backgroundOptions',
-                                  'EQ',
-                                  true,
-                                ),
-                              },
-                            }),
-                            backgroundColorAlpha: option('NUMBER', {
-                              label: 'Background color opacity',
-                              value: 20,
-                              configuration: {
-                                condition: showIf(
-                                  'backgroundOptions',
-                                  'EQ',
-                                  true,
-                                ),
+                            pageTitle: linked({
+                              label: 'Page title',
+                              value: {
+                                ref: {
+                                  componentId: '#pageTitle',
+                                  optionId: '#pageTitleContent',
+                                },
                               },
                             }),
                           },
