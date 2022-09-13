@@ -1,3 +1,24 @@
+# [2.53.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.52.0...v2.53.0) (2022-09-13)
+
+
+### Features
+
+* add wrapper, remove unwanted code and bump cli + sdk ([136ed10](https://github.com/bettyblocks/material-ui-component-set/commit/136ed102f25e6e5959b18f3740c5fa384cb80df6))
+
+# [2.52.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.51.1...v2.52.0) (2022-09-13)
+
+
+### Features
+
+* added earthly builds ([ba545bd](https://github.com/bettyblocks/material-ui-component-set/commit/ba545bd613c0907a40314ee5b506b79b92772a6c))
+
+## [2.51.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.51.0...v2.51.1) (2022-09-13)
+
+
+### Bug Fixes
+
+* remove warning condition for actionJS ([2846865](https://github.com/bettyblocks/material-ui-component-set/commit/2846865c8c452df385ad1107d540235f0139fbd6))
+
 # [2.51.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.50.0...v2.51.0) (2022-09-13)
 
 
