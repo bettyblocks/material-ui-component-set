@@ -1,3 +1,10 @@
+# [2.52.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.51.1...v2.52.0) (2022-09-13)
+
+
+### Features
+
+* added earthly builds ([ba545bd](https://github.com/bettyblocks/material-ui-component-set/commit/ba545bd613c0907a40314ee5b506b79b92772a6c))
+
 ## [2.51.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.51.0...v2.51.1) (2022-09-13)
 
 
