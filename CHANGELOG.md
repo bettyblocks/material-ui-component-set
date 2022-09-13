@@ -1,3 +1,25 @@
+# [2.49.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.48.0...v2.49.0) (2022-09-12)
+
+
+### Features
+
+* add separator option to decimal input ([4c02cc1](https://github.com/bettyblocks/material-ui-component-set/commit/4c02cc124ce0846fc41bc37d36cbf5332639e487))
+
+# [2.48.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.47.1...v2.48.0) (2022-09-12)
+
+
+### Features
+
+* implemented wrapper in profile page template TMPLT-1601 ([adc7ba0](https://github.com/bettyblocks/material-ui-component-set/commit/adc7ba03266afc7595c8dd7762d5a75b825eacb0))
+
+## [2.47.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.47.0...v2.47.1) (2022-09-12)
+
+
+### Bug Fixes
+
+* add related model ids to bettyinput ([67aa71f](https://github.com/bettyblocks/material-ui-component-set/commit/67aa71f9399779d3eb581e63b622fb07a4abc657))
+* update component sdk ([0bef560](https://github.com/bettyblocks/material-ui-component-set/commit/0bef560e00bd22a99781edcfe516beba89b35378))
+
 # [2.47.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.46.2...v2.47.0) (2022-09-12)
 
 
