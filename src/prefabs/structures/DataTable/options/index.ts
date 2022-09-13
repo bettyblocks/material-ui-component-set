@@ -172,7 +172,7 @@ export const dataTableOptions = {
       condition: hideIf('autoLoadOnScroll', 'EQ', true),
     },
   }),
-  placeholderTake: number('Placeholder rows', { value: '1' }),
+  placeholderTake: number('Placeholder rows', { value: '10' }),
   labelRowsPerPage: variable('Rows per page text', {
     value: ['Rows per page'],
     configuration: {
