@@ -1,3 +1,17 @@
+# [2.54.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.53.0...v2.54.0) (2022-09-13)
+
+
+### Bug Fixes
+
+* set new placeholdertake on datatable ([a0479f1](https://github.com/bettyblocks/material-ui-component-set/commit/a0479f1ab16d768a74be4c5891214ecd54969800))
+
+
+### Features
+
+* add wrapper and bump cli and sdk ([78db9d4](https://github.com/bettyblocks/material-ui-component-set/commit/78db9d419db3c1372e412e5bbf1e15ff1623308d))
+* add wrapper to crud slideout ([fa65a01](https://github.com/bettyblocks/material-ui-component-set/commit/fa65a016aea3f42f9c26c84c04cda6c988430f2a))
+* add wrapper with options to crud slideout ([ef50331](https://github.com/bettyblocks/material-ui-component-set/commit/ef50331faf6bef895f43a9d44bc72af48f98af68))
+
 # [2.53.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.52.0...v2.53.0) (2022-09-13)
 
 
