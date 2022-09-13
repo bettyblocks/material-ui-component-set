@@ -20,9 +20,9 @@ import {
   InteractionType,
   PrefabComponentOption,
 } from '@betty-blocks/component-sdk';
-import { options as defaults } from './structures/ActionJSForm/options';
+import { options as actionJSFormOptions } from './structures/ActionJSForm/options';
 import {
-  Box as BoxComponent,
+  Box as BoxPrefab,
   boxOptions,
   Column,
   columnOptions,
@@ -33,7 +33,7 @@ import {
   mediaOptions,
   Row,
   rowOptions,
-  Text as TextComponent,
+  Text as TextPrefab,
   textOptions,
   SubmitButton,
   submitButtonOptions,
@@ -315,7 +315,7 @@ const prefabStructure: PrefabComponent[] = [
                 },
               },
               [
-                BoxComponent(
+                BoxPrefab(
                   {
                     options: {
                       ...boxOptions,
@@ -518,7 +518,7 @@ const prefabStructure: PrefabComponent[] = [
                             },
                           },
                           [
-                            BoxComponent(
+                            BoxPrefab(
                               {
                                 options: {
                                   ...boxOptions,
@@ -528,7 +528,7 @@ const prefabStructure: PrefabComponent[] = [
                                 },
                               },
                               [
-                                BoxComponent(
+                                BoxPrefab(
                                   {
                                     options: {
                                       ...boxOptions,
@@ -590,7 +590,7 @@ const prefabStructure: PrefabComponent[] = [
                                     ),
                                   ],
                                 ),
-                                BoxComponent(
+                                BoxPrefab(
                                   {
                                     options: {
                                       ...boxOptions,
@@ -613,7 +613,7 @@ const prefabStructure: PrefabComponent[] = [
                                   },
                                   [],
                                 ),
-                                BoxComponent(
+                                BoxPrefab(
                                   {
                                     options: {
                                       ...boxOptions,
@@ -623,7 +623,7 @@ const prefabStructure: PrefabComponent[] = [
                                     },
                                   },
                                   [
-                                    TextComponent(
+                                    TextPrefab(
                                       {
                                         options: {
                                           ...textOptions,
@@ -640,7 +640,7 @@ const prefabStructure: PrefabComponent[] = [
                                     ),
                                   ],
                                 ),
-                                BoxComponent(
+                                BoxPrefab(
                                   {
                                     options: {
                                       ...boxOptions,
@@ -657,7 +657,7 @@ const prefabStructure: PrefabComponent[] = [
                                   },
                                   [],
                                 ),
-                                BoxComponent(
+                                BoxPrefab(
                                   {
                                     options: {
                                       ...boxOptions,
@@ -667,7 +667,7 @@ const prefabStructure: PrefabComponent[] = [
                                     },
                                   },
                                   [
-                                    BoxComponent(
+                                    BoxPrefab(
                                       {
                                         options: {
                                           ...boxOptions,
@@ -685,14 +685,14 @@ const prefabStructure: PrefabComponent[] = [
                                         component(
                                           'Form Beta',
                                           {
-                                            options: defaults,
+                                            options: actionJSFormOptions,
                                             ref: { id: '#formId' },
                                           },
                                           [
                                             FormErrorAlert({
                                               ref: { id: '#alertErrorId' },
                                             }),
-                                            BoxComponent({
+                                            BoxPrefab({
                                               options: {
                                                 ...boxOptions,
                                                 innerSpacing: sizes(
@@ -709,7 +709,7 @@ const prefabStructure: PrefabComponent[] = [
                                               },
                                               ref: { id: '#formBoxRef' },
                                             }),
-                                            BoxComponent(
+                                            BoxPrefab(
                                               {
                                                 options: {
                                                   ...boxOptions,
@@ -777,7 +777,7 @@ const prefabStructure: PrefabComponent[] = [
                                                   },
                                                   [],
                                                 ),
-                                                BoxComponent(
+                                                BoxPrefab(
                                                   {
                                                     options: {
                                                       ...boxOptions,
