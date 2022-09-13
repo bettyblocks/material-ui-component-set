@@ -149,6 +149,7 @@
 
     const completeFilter = deepMerge(selectedFilter, interactionFilters);
     const where = useFilter(completeFilter);
+    const hasFilter = where && Object.keys(where).length !== 0;
 
     function FormComponent() {
       return (
@@ -173,7 +174,7 @@
       );
     }
 
-    if (model) {
+    if (model && hasFilter) {
       return (
         <GetOne modelId={model} rawFilter={where}>
           <FormComponent />
