@@ -23,6 +23,7 @@ import {
   wrapper,
   linked,
   childSelector,
+  number,
 } from '@betty-blocks/component-sdk';
 
 import { Property } from '@betty-blocks/component-sdk/build/prefabs/types/property';
@@ -1875,6 +1876,10 @@ const drawerContainer = DrawerContainer(
                                                             ],
                                                           },
                                                         },
+                                                      ),
+                                                      placeholderTake: number(
+                                                        'Placeholder rows',
+                                                        { value: '10' },
                                                       ),
                                                     },
                                                   },
