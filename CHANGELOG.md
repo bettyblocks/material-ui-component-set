@@ -1,3 +1,10 @@
+## [2.51.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.51.0...v2.51.1) (2022-09-13)
+
+
+### Bug Fixes
+
+* remove warning condition for actionJS ([2846865](https://github.com/bettyblocks/material-ui-component-set/commit/2846865c8c452df385ad1107d540235f0139fbd6))
+
 # [2.51.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.50.0...v2.51.0) (2022-09-13)
 
 
