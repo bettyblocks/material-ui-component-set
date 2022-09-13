@@ -19,12 +19,11 @@ import {
   PrefabInteraction,
   icon,
   hideIf,
+  BeforeCreateArgs,
+  PrefabComponent,
+  PrefabComponentOption,
 } from '@betty-blocks/component-sdk';
 
-import {
-  Property,
-  PropertyKind,
-} from '@betty-blocks/component-sdk/build/prefabs/types/property';
 import {
   AppBar,
   appBarOptions,
@@ -35,6 +34,7 @@ import {
   Column,
   columnOptions,
   DataList,
+  dataListOptions,
   Grid,
   gridOptions,
   OpenPageButton,
@@ -44,26 +44,12 @@ import {
   textOptions,
 } from './structures';
 import { options as defaults } from './structures/ActionJSForm/options';
-
-export interface PropertyType {
-  id: string[];
-  name?: string;
-  label?: string;
-  kind?: PropertyKind;
-  format?: string;
-}
-
-export interface PropertyStateProps extends Omit<PropertyType, 'id'> {
-  id: string | string[];
-}
-
-export interface Properties {
-  id: string;
-  name: string;
-  label: string;
-  kind: PropertyKind;
-  format: string;
-}
+import {
+  IdPropertyProps,
+  ModelProps,
+  ModelQuery,
+  PropertyStateProps,
+} from './types';
 
 const interactions = [
   {
@@ -132,7 +118,7 @@ const interactions = [
 ] as PrefabInteraction[];
 
 const attrs = {
-  name: 'Page with Checklist',
+  name: 'Checklist',
   icon: Icon.DataList,
   type: 'page',
   description:
@@ -405,6 +391,23 @@ const prefabStructure = [
                     ),
                     DataList(
                       {
+                        options: {
+                          ...dataListOptions,
+                          pagination: option('CUSTOM', {
+                            label: 'Pagination',
+                            value: 'whenNeeded',
+                            configuration: {
+                              as: 'BUTTONGROUP',
+                              dataType: 'string',
+                              dependsOn: 'model',
+                              allowedInput: [
+                                { name: 'Always', value: 'always' },
+                                { name: 'When needed', value: 'whenNeeded' },
+                                { name: 'Never', value: 'never' },
+                              ],
+                            },
+                          }),
+                        },
                         ref: {
                           id: '#dataList',
                         },
@@ -479,9 +482,10 @@ const prefabStructure = [
                                         value: ['S', 'S', 'S', 'S'],
                                       }),
                                     },
+                                    ref: { id: '#formBox' },
                                   },
                                   [
-                                    /* checkbox here */ Box(
+                                    Box(
                                       {
                                         options: {
                                           ...boxOptions,
@@ -817,18 +821,26 @@ const beforeCreate = ({
     createUuid,
     BettyPrefabs,
   },
-}: any) => {
+}: BeforeCreateArgs) => {
   const [showValidation, setShowValidation] = React.useState(false);
   const [titleValidation, setTitleValidation] = React.useState(false);
   const [descriptionValidation, setDescriptionValidation] =
     React.useState(false);
   const [checkBoxValidation, setCheckBoxValidation] = React.useState(false);
   const [modelId, setModelId] = React.useState('');
-  const [model, setModel] = React.useState(null);
-  const [titleProperty, setTitleProperty] = React.useState<any>('');
-  const [descriptionProperty, setDescriptionProperty] = React.useState<any>('');
-  const [checkboxProperty, setCheckboxProperty] = React.useState<any>('');
-  const [idProperty, setIdProperty] = React.useState<Property>();
+  const [model, setModel] = React.useState<ModelProps>();
+  const [titleProperty, setTitleProperty] = React.useState<PropertyStateProps>({
+    id: '',
+  });
+  const [descriptionProperty, setDescriptionProperty] =
+    React.useState<PropertyStateProps>({
+      id: '',
+    });
+  const [checkboxProperty, setCheckboxProperty] =
+    React.useState<PropertyStateProps>({
+      id: '',
+    });
+  const [idProperty, setIdProperty] = React.useState<IdPropertyProps>();
   const [stepNumber, setStepNumber] = React.useState(1);
   const [headerPartialId, setHeaderPartialId] = React.useState('');
   const [footerPartialId, setFooterPartialId] = React.useState('');
@@ -838,32 +850,31 @@ const beforeCreate = ({
   const { data } = useModelQuery({
     variables: { id: modelId },
     skip: !modelId,
-    onCompleted: (result: any) => {
+    onCompleted: (result: ModelQuery) => {
       setModel(result.model);
-      setIdProperty(
-        result.model.properties.find(({ name }: any) => name === 'id'),
-      );
+      setIdProperty(result.model.properties.find(({ name }) => name === 'id'));
     },
   });
 
-  const getDescendantByRef = (refValue: string, structure: any) =>
-    structure.reduce((acc: string, comp: PrefabReference) => {
-      if (acc) return acc;
-      if (
-        comp.type === 'COMPONENT' &&
-        // eslint-disable-next-line no-prototype-builtins
-        comp.ref
-          ? Object.values(comp.ref).indexOf(refValue) > -1
-          : undefined
-      ) {
-        return comp;
+  const treeSearch = (
+    dirName: string,
+    array: PrefabReference[],
+  ): PrefabComponent | undefined => {
+    // eslint-disable-next-line no-plusplus
+    for (let i = 0; i < array.length; i++) {
+      const q = array[i];
+      if (q.type === 'COMPONENT') {
+        if (q.ref && q.ref.id === dirName) {
+          return q;
+        }
       }
-      if (comp.type === 'PARTIAL') {
-        return acc;
+      if (q.type !== 'PARTIAL' && q.descendants && q.descendants.length) {
+        const result = treeSearch(dirName, q.descendants);
+        if (result) return result;
       }
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      return getDescendantByRef(refValue, comp.descendants);
-    }, null);
+    }
+    return undefined;
+  };
 
   const enrichVarObj = (obj: any) => {
     const returnObject = obj;
@@ -946,12 +957,12 @@ const beforeCreate = ({
               }
             >
               <ModelSelector
-                onChange={(value: any) => {
+                onChange={(value: string) => {
                   setShowValidation(false);
                   setModelId(value);
-                  setTitleProperty('');
-                  setDescriptionProperty('');
-                  setCheckboxProperty('');
+                  setTitleProperty({ id: '' });
+                  setDescriptionProperty({ id: '' });
+                  setCheckboxProperty({ id: '' });
                 }}
                 value={modelId}
               />
@@ -962,7 +973,7 @@ const beforeCreate = ({
                 <Field label="Title" info="Shows the title of Expansion Panel">
                   <PropertySelector
                     modelId={modelId}
-                    onChange={(value: 'STRING') => {
+                    onChange={(value: PropertyStateProps) => {
                       setTitleProperty(value);
                     }}
                     value={titleProperty}
@@ -982,7 +993,7 @@ const beforeCreate = ({
                 >
                   <PropertySelector
                     modelId={modelId}
-                    onChange={(value: 'STRING') => {
+                    onChange={(value: PropertyStateProps) => {
                       setDescriptionProperty(value);
                     }}
                     value={descriptionProperty}
@@ -1002,7 +1013,7 @@ const beforeCreate = ({
                 >
                   <PropertySelector
                     modelId={modelId}
-                    onChange={(value: 'BOOLEAN') => {
+                    onChange={(value: PropertyStateProps) => {
                       setCheckboxProperty(value);
                     }}
                     value={checkboxProperty}
@@ -1087,9 +1098,14 @@ const beforeCreate = ({
       const newPrefab = { ...originalPrefab };
 
       // set datalist
-      const dataList = getDescendantByRef('#dataList', newPrefab.structure);
+      const dataList = treeSearch('#dataList', newPrefab.structure);
+      if (!dataList) throw new Error('No dataList component found');
+
       dataList.id = datalistId;
-      dataList.options[0].value = modelId;
+      setOption(dataList, 'model', (opts) => ({
+        ...opts,
+        value: modelId,
+      }));
 
       // set edit action
       const transformProp = (obj: any) => {
@@ -1111,8 +1127,11 @@ const beforeCreate = ({
         }
         return outputProp;
       };
+
       if (model && idProperty && checkboxProperty) {
-        const editForm = getDescendantByRef('#formId', newPrefab.structure);
+        const editForm = treeSearch('#formId', newPrefab.structure);
+        if (!editForm) throw new Error('No editForm component found');
+
         editForm.id = formId;
         const result = await prepareAction(
           formId,
@@ -1120,12 +1139,12 @@ const beforeCreate = ({
           [...transformProp(checkboxProperty)],
           'update',
         );
-        setOption(editForm, 'actionId', (opts: any) => ({
+        setOption(editForm, 'actionId', (opts: PrefabComponentOption) => ({
           ...opts,
           value: result.action.actionId,
           configuration: { disabled: true },
         }));
-        setOption(editForm, 'model', (opts: any) => ({
+        setOption(editForm, 'model', (opts: PrefabComponentOption) => ({
           ...opts,
           value: modelId,
           configuration: {
@@ -1141,19 +1160,27 @@ const beforeCreate = ({
             vari,
           );
 
-          checkBoxInput.ref = { id: '#checkBox' };
           if (checkBoxInput.type === 'COMPONENT') {
-            setOption(checkBoxInput, 'label', (opts: any) => ({
-              ...opts,
-              value: [enrichVarObj(titleProperty)],
-            }));
-            setOption(checkBoxInput, 'textColor', (opts: any) => ({
-              ...opts,
-              value: 'PRIMARY',
-            }));
+            checkBoxInput.ref = { id: '#checkBox' };
+            setOption(
+              checkBoxInput,
+              'label',
+              (opts: PrefabComponentOption) => ({
+                ...opts,
+                value: [enrichVarObj(titleProperty)],
+              }),
+            );
+            setOption(
+              checkBoxInput,
+              'textColor',
+              (opts: PrefabComponentOption) => ({
+                ...opts,
+                value: 'PRIMARY',
+              }),
+            );
           }
 
-          setOption(editForm, 'filter', (opts: any) => ({
+          setOption(editForm, 'filter', (opts: PrefabComponentOption) => ({
             ...opts,
             value: {
               [idProperty.id]: {
@@ -1171,32 +1198,37 @@ const beforeCreate = ({
             idProperty,
             result.recordInputVariable,
           );
+          const formBox = treeSearch('#formBox', newPrefab.structure);
+          if (!formBox) throw new Error('No form box component found');
 
-          editForm.descendants[0].descendants[0].descendants = [
+          formBox.descendants = [
             checkBoxInput,
             hiddenInput,
-            ...editForm.descendants[0].descendants[0].descendants,
+            ...formBox.descendants,
           ];
         });
       }
 
-      const descriptionText = getDescendantByRef(
+      const descriptionText = treeSearch(
         '#descriptionText',
         newPrefab.structure,
       );
 
-      if (descriptionProperty.id) {
-        descriptionText.options[0].value = [enrichVarObj(descriptionProperty)];
+      if (descriptionText && descriptionProperty.id) {
+        setOption(descriptionText, 'filter', (opts: PrefabComponentOption) => ({
+          ...opts,
+          value: [enrichVarObj(descriptionProperty)],
+        }));
       }
-      const prefabFooter = getDescendantByRef('#Footer', newPrefab.structure);
-      const prefabHeader = getDescendantByRef('#Header', newPrefab.structure);
-      if (headerPartialId) {
+      const prefabFooter = treeSearch('#Footer', newPrefab.structure);
+      const prefabHeader = treeSearch('#Header', newPrefab.structure);
+      if (headerPartialId && prefabHeader) {
         prefabHeader.descendants = [
           { type: 'PARTIAL', partialId: headerPartialId },
         ];
       }
 
-      if (footerPartialId) {
+      if (footerPartialId && prefabFooter) {
         prefabFooter.descendants = [
           { type: 'PARTIAL', partialId: footerPartialId },
         ];
@@ -1265,9 +1297,4 @@ const beforeCreate = ({
   );
 };
 
-export default makePrefab(
-  'Page with Checklist',
-  attrs,
-  beforeCreate,
-  prefabStructure,
-);
+export default makePrefab('Checklist', attrs, beforeCreate, prefabStructure);
