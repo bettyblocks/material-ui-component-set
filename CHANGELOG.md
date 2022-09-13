@@ -1,3 +1,66 @@
+# [2.51.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.50.0...v2.51.0) (2022-09-13)
+
+
+### Features
+
+* implement wrapper in backoffice ([6701d0a](https://github.com/bettyblocks/material-ui-component-set/commit/6701d0ad015d21ea0237c911b535ca3691f3e5f1))
+
+# [2.50.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.49.0...v2.50.0) (2022-09-13)
+
+
+### Bug Fixes
+
+* update beforecreate and bump cli and sdk ([eeec180](https://github.com/bettyblocks/material-ui-component-set/commit/eeec180ba688decd7b879176c63f2075f225d3aa))
+
+
+### Features
+
+* implement wrapper in card and list view templates ([a908305](https://github.com/bettyblocks/material-ui-component-set/commit/a908305ed2dcca8291725216e4c6d31f7e3a150e))
+
+# [2.49.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.48.0...v2.49.0) (2022-09-12)
+
+
+### Features
+
+* add separator option to decimal input ([4c02cc1](https://github.com/bettyblocks/material-ui-component-set/commit/4c02cc124ce0846fc41bc37d36cbf5332639e487))
+
+# [2.48.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.47.1...v2.48.0) (2022-09-12)
+
+
+### Features
+
+* implemented wrapper in profile page template TMPLT-1601 ([adc7ba0](https://github.com/bettyblocks/material-ui-component-set/commit/adc7ba03266afc7595c8dd7762d5a75b825eacb0))
+
+## [2.47.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.47.0...v2.47.1) (2022-09-12)
+
+
+### Bug Fixes
+
+* add related model ids to bettyinput ([67aa71f](https://github.com/bettyblocks/material-ui-component-set/commit/67aa71f9399779d3eb581e63b622fb07a4abc657))
+* update component sdk ([0bef560](https://github.com/bettyblocks/material-ui-component-set/commit/0bef560e00bd22a99781edcfe516beba89b35378))
+
+# [2.47.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.46.2...v2.47.0) (2022-09-12)
+
+
+### Features
+
+* add wrapper to login template ([d9d5ac9](https://github.com/bettyblocks/material-ui-component-set/commit/d9d5ac92686823d44cc10f292913a58b61d03d66))
+* implemented wrapper in login and register page template ([803efa5](https://github.com/bettyblocks/material-ui-component-set/commit/803efa5044bbbb7cbe79a9035db10a84a041b1ed))
+
+## [2.46.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.46.1...v2.46.2) (2022-09-12)
+
+
+### Bug Fixes
+
+* placed afterDeletes back ([41535fc](https://github.com/bettyblocks/material-ui-component-set/commit/41535fcbc09b8f67b30cd13d590bdac8a09b402e))
+
+## [2.46.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.46.0...v2.46.1) (2022-09-12)
+
+
+### Bug Fixes
+
+* fix refetch singlevalueautocomplete ([a4ac7d1](https://github.com/bettyblocks/material-ui-component-set/commit/a4ac7d191246d319e6412bd55e39c6a2167439d2))
+
 # [2.46.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.45.0...v2.46.0) (2022-09-09)
 
 
