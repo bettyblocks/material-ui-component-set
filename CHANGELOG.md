@@ -1,3 +1,10 @@
+# [2.51.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.50.0...v2.51.0) (2022-09-13)
+
+
+### Features
+
+* implement wrapper in backoffice ([6701d0a](https://github.com/bettyblocks/material-ui-component-set/commit/6701d0ad015d21ea0237c911b535ca3691f3e5f1))
+
 # [2.50.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.49.0...v2.50.0) (2022-09-13)
 
 
