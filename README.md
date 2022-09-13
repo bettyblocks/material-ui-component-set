@@ -50,3 +50,13 @@ Commit messages should be descriptive in what kind of problem it solves or featu
 Like `fix: this solves this bug` or `feat: add this feature`
 
 Further guidelines about git messages are available here: https://github.com/conventional-changelog/commitlint/tree/master/@commitlint/config-conventional
+
+## Earthly builds
+
+Build component set and container:
+
+```earthly +docker```
+
+Now run the container:
+
+```docker run -p 5002:5002 -it component-set:latest```
