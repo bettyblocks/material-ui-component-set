@@ -1,3 +1,45 @@
+## [2.54.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.54.0...v2.54.1) (2022-09-13)
+
+
+### Bug Fixes
+
+* create form querying data ([c3298a0](https://github.com/bettyblocks/material-ui-component-set/commit/c3298a00fe1c6d7f5224c0c534b10ff5f4ebb9ad))
+
+# [2.54.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.53.0...v2.54.0) (2022-09-13)
+
+
+### Bug Fixes
+
+* set new placeholdertake on datatable ([a0479f1](https://github.com/bettyblocks/material-ui-component-set/commit/a0479f1ab16d768a74be4c5891214ecd54969800))
+
+
+### Features
+
+* add wrapper and bump cli and sdk ([78db9d4](https://github.com/bettyblocks/material-ui-component-set/commit/78db9d419db3c1372e412e5bbf1e15ff1623308d))
+* add wrapper to crud slideout ([fa65a01](https://github.com/bettyblocks/material-ui-component-set/commit/fa65a016aea3f42f9c26c84c04cda6c988430f2a))
+* add wrapper with options to crud slideout ([ef50331](https://github.com/bettyblocks/material-ui-component-set/commit/ef50331faf6bef895f43a9d44bc72af48f98af68))
+
+# [2.53.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.52.0...v2.53.0) (2022-09-13)
+
+
+### Features
+
+* add wrapper, remove unwanted code and bump cli + sdk ([136ed10](https://github.com/bettyblocks/material-ui-component-set/commit/136ed102f25e6e5959b18f3740c5fa384cb80df6))
+
+# [2.52.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.51.1...v2.52.0) (2022-09-13)
+
+
+### Features
+
+* added earthly builds ([ba545bd](https://github.com/bettyblocks/material-ui-component-set/commit/ba545bd613c0907a40314ee5b506b79b92772a6c))
+
+## [2.51.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.51.0...v2.51.1) (2022-09-13)
+
+
+### Bug Fixes
+
+* remove warning condition for actionJS ([2846865](https://github.com/bettyblocks/material-ui-component-set/commit/2846865c8c452df385ad1107d540235f0139fbd6))
+
 # [2.51.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.50.0...v2.51.0) (2022-09-13)
 
 

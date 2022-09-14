@@ -7,7 +7,6 @@ import {
   Icon,
   BeforeCreateArgs,
 } from '@betty-blocks/component-sdk';
-
 import { deleteActionVariable } from './hooks/deleteActionVariable';
 
 const beforeCreate = ({

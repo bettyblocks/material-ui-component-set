@@ -232,7 +232,7 @@ const interactions = [
     name: 'Select',
     sourceEvent: 'Click',
     ref: {
-      targetComponentId: '#editTab',
+      targetComponentId: '#updateTab',
       sourceComponentId: '#editButton',
     },
     type: 'Custom',
@@ -241,7 +241,7 @@ const interactions = [
     name: 'Select',
     sourceEvent: 'Click',
     ref: {
-      targetComponentId: '#editTab',
+      targetComponentId: '#updateTab',
       sourceComponentId: '#editButtonFromDetails',
     },
     type: 'Custom',
@@ -517,10 +517,21 @@ const drawerContainer = DrawerContainer(
                       [
                         wrapper(
                           {
-                            label: 'CRUD with slide-out-panel wrapper',
+                            label: 'CRUD with slide-out-panel',
                             optionCategories: [
                               {
-                                label: 'Record overview options',
+                                label: 'Page title',
+                                expanded: true,
+                                members: ['pageTitle'],
+                                condition: {
+                                  type: 'SHOW',
+                                  option: 'toggleOverview',
+                                  comparator: 'EQ',
+                                  value: false,
+                                },
+                              },
+                              {
+                                label: 'Tab title',
                                 expanded: true,
                                 members: [
                                   'createTabText',
@@ -537,7 +548,7 @@ const drawerContainer = DrawerContainer(
                             ],
                             options: {
                               toggleOverview: linked({
-                                label: 'Toggle overview/record view',
+                                label: 'Page view',
                                 value: {
                                   ref: {
                                     componentId: '#Drawer',
@@ -560,17 +571,9 @@ const drawerContainer = DrawerContainer(
                                     optionId: '#titleOption',
                                   },
                                 },
-                                configuration: {
-                                  condition: {
-                                    type: 'HIDE',
-                                    option: 'toggleOverview',
-                                    comparator: 'EQ',
-                                    value: true,
-                                  },
-                                },
                               }),
                               drawerOverview: linked({
-                                label: 'CRUD overview',
+                                label: 'Show design tab',
                                 value: {
                                   ref: {
                                     componentId: '#tabsOverview',
@@ -621,7 +624,7 @@ const drawerContainer = DrawerContainer(
                                 },
                               }),
                               updateTabText: linked({
-                                label: 'Edit tab title',
+                                label: 'Update tab title',
                                 value: {
                                   ref: {
                                     componentId: '#updateTabText',
@@ -1985,7 +1988,7 @@ const drawerBar = DrawerBar(
           [
             Tab(
               {
-                label: 'CreateTab',
+                label: 'Create',
                 options: {
                   ...tabOptions,
                   label: variable('Tab label', {
@@ -2293,7 +2296,7 @@ const drawerBar = DrawerBar(
             ),
             Tab(
               {
-                label: 'DetailTab',
+                label: 'Details',
                 options: {
                   ...tabOptions,
                   label: variable('Tab label', {
@@ -2589,7 +2592,7 @@ const drawerBar = DrawerBar(
             ),
             Tab(
               {
-                label: 'EditTab',
+                label: 'Update',
                 options: {
                   ...tabOptions,
                   label: variable('Tab label', { value: ['EditTab'] }),
@@ -2600,7 +2603,7 @@ const drawerBar = DrawerBar(
                     },
                   }),
                 },
-                ref: { id: '#editTab' },
+                ref: { id: '#updateTab' },
               },
               [
                 Grid(
