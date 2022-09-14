@@ -1,9 +1,6 @@
 import { component, PrefabReference } from '@betty-blocks/component-sdk';
-import { deleteActionVariable } from '../../hooks/deleteActionVariable';
 import { Configuration } from '../Configuration';
 import { options as defaults } from './options';
-
-const $afterDelete = [deleteActionVariable];
 
 export const RadioInput = (
   config: Configuration,
@@ -14,9 +11,5 @@ export const RadioInput = (
   const ref = config.ref ? { ...config.ref } : undefined;
   const label = config.label ? config.label : undefined;
 
-  return component(
-    'RadioInput',
-    { options, $afterDelete, style, ref, label },
-    children,
-  );
+  return component('RadioInput', { options, style, ref, label }, children);
 };
