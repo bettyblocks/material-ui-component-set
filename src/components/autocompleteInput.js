@@ -23,7 +23,6 @@
       actionProperty,
       actionVariableId: name,
       closeOnSelect,
-      required: defaultRequired,
       dataComponentAttribute: dataComponentAttributeRaw,
       disabled: initialDisabled,
       errorType,
@@ -34,24 +33,25 @@
       label: labelRaw,
       labelProperty: labelPropertyId = '',
       margin,
+      maxlength,
+      minlength,
+      minvalue,
       nameAttribute: nameAttributeRaw,
       order,
       orderBy,
+      pattern,
       placeholder: placeholderRaw,
+      required: defaultRequired,
       size,
-      value: valueRaw,
+      type,
       validationBelowMinimum = [''],
       validationPatternMismatch = [''],
       validationTooLong = [''],
       validationTooShort = [''],
       validationTypeMismatch = [''],
       validationValueMissing = [''],
+      value: valueRaw,
       variant,
-      maxlength,
-      minlength,
-      pattern,
-      minvalue,
-      type,
     } = options;
     const numberPropTypes = ['serial', 'minutes', 'count', 'integer'];
 
@@ -96,14 +96,12 @@
     const tooShortMessage = useText(validationTooShort);
     const belowMinimumMessage = useText(validationBelowMinimum);
     const helperTextResolved = useText(helperTextRaw);
-
-    const modelProperty = getProperty(actionProperty.modelProperty) || {};
+    const modelProperty = getProperty(actionProperty.modelProperty || '') || {};
     const labelProperty = getProperty(labelPropertyId) || {};
 
     const { modelId: propertyModelId } = modelProperty;
-
-    const modelId = modelProperty.referenceModelId || propertyModelId;
-
+    const modelId =
+      modelProperty.referenceModelId || propertyModelId || options.model;
     const model = getModel(modelId);
     const defaultLabelProperty = getProperty(model.labelPropertyId || '') || {};
     const idProperty = getIdProperty(modelId) || {};
