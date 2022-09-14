@@ -25,10 +25,6 @@ const beforeCreate = ({
     (o) => o.type === 'ACTION_JS_VARIABLE',
   );
 
-  if (!actionVariableOption) {
-    return <div>Prefab is missing the actionVariable component option</div>;
-  }
-
   return (
     <CreateFormInputWizard
       supportedKinds={[
@@ -40,7 +36,7 @@ const beforeCreate = ({
         'STRING',
         'TEXT',
       ]}
-      actionVariableOption={actionVariableOption.key}
+      actionVariableOption={actionVariableOption?.key || null}
       labelOptionKey="label"
       nameOptionKey="actionVariableId"
       close={close}
@@ -56,7 +52,10 @@ const attributes = {
 };
 
 const options = {
-  actionVariableId: option('ACTION_JS_VARIABLE', { label: 'Name', value: '' }),
+  actionVariableId: option('ACTION_JS_VARIABLE', {
+    label: 'Action input variable',
+    value: '',
+  }),
   value: variable('Value'),
 };
 
