@@ -13,6 +13,7 @@ import {
   variable,
   Icon,
   ThemeColor,
+  hideIf,
 } from '@betty-blocks/component-sdk';
 
 const beforeCreate = ({
@@ -29,14 +30,10 @@ const beforeCreate = ({
     (o) => o.type === 'ACTION_JS_VARIABLE',
   );
 
-  if (!actionVariableOption) {
-    return <div>Prefab is missing the actionVariable component option</div>;
-  }
-
   return (
     <CreateFormInputWizard
       supportedKinds={['BOOLEAN']}
-      actionVariableOption={actionVariableOption.key}
+      actionVariableOption={actionVariableOption?.key || null}
       labelOptionKey="label"
       nameOptionKey="actionVariableId"
       close={close}
@@ -125,9 +122,14 @@ const advancedSettingsOptions = {
 };
 
 const options = {
+  actionVariableId: option('ACTION_JS_VARIABLE', {
+    label: 'Action input variable',
+    value: '',
+  }),
   actionProperty: option('ACTION_JS_PROPERTY', {
     label: 'Property',
     value: '',
+    configuration: { condition: hideIf('actionProperty', 'EQ', '') },
   }),
   label: variable('Label', { value: ['Checkbox'] }),
   value: variable('Value', { value: [] }),
@@ -138,7 +140,6 @@ const options = {
   size,
   ...stylesOptions,
   ...advancedSettingsOptions,
-  actionVariableId: option('ACTION_JS_VARIABLE', { label: 'Name', value: '' }),
   type: text('Type', {
     value: 'checkbox',
     configuration: { condition: showIf('actionVariableId', 'EQ', 'never') },
