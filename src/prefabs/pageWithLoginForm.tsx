@@ -1132,7 +1132,7 @@ const beforeCreate = ({
 
               authProfile.properties.forEach((prop: any) => {
                 const { kind, name } = prop;
-                const vari = Object.entries(result.variables).find(
+                const vari: any = Object.entries(result.variables).find(
                   (foundVariable: any) => foundVariable.name === name,
                 );
                 // ?.reduce((accum, [k, v]) => {
