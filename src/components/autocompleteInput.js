@@ -105,7 +105,11 @@
       modelProperty.referenceModelId || propertyModelId || model || '';
     const propertyModel = getModel(modelId);
     const defaultLabelProperty =
-      getProperty(propertyModel.labelPropertyId || '') || {};
+      getProperty(
+        propertyModel && propertyModel.labelPropertyId
+          ? propertyModel.labelPropertyId
+          : '',
+      ) || {};
     const idProperty = getIdProperty(modelId) || {};
     const isListProperty =
       modelProperty.kind === 'LIST' || modelProperty.kind === 'list';
@@ -223,20 +227,20 @@
     let message = '';
 
     if (!isListProperty && !isDev) {
-      if (!modelId) {
-        message = 'No model selected';
-        valid = false;
-      }
       if (!hasSearch && !hasValue) {
         message = 'No property selected';
         valid = false;
       }
       if (!hasValue) {
-        message = 'No value propery selected';
+        message = 'No value property selected';
         valid = false;
       }
       if (!hasSearch) {
         message = 'No label property selected';
+        valid = false;
+      }
+      if (!modelId) {
+        message = 'No model selected';
         valid = false;
       }
     }
