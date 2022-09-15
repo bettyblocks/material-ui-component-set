@@ -36,6 +36,7 @@
       maxlength,
       minlength,
       minvalue,
+      model,
       nameAttribute: nameAttributeRaw,
       order,
       orderBy,
@@ -101,9 +102,10 @@
 
     const { modelId: propertyModelId } = modelProperty;
     const modelId =
-      modelProperty.referenceModelId || propertyModelId || options.model;
-    const model = getModel(modelId);
-    const defaultLabelProperty = getProperty(model.labelPropertyId || '') || {};
+      modelProperty.referenceModelId || propertyModelId || model || '';
+    const propertyModel = getModel(modelId);
+    const defaultLabelProperty =
+      getProperty(propertyModel.labelPropertyId || '') || {};
     const idProperty = getIdProperty(modelId) || {};
     const isListProperty =
       modelProperty.kind === 'LIST' || modelProperty.kind === 'list';

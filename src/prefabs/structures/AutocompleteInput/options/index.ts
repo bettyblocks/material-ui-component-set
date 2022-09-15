@@ -21,6 +21,9 @@ export const options = {
   actionProperty: option('ACTION_JS_PROPERTY', {
     label: 'Property',
     value: '',
+    configuration: {
+      condition: hideIf('actionProperty', 'EQ', ''),
+    },
   }),
   label: variable('Label', { value: [] }),
   value: variable('Value', { value: [] }),
@@ -29,29 +32,38 @@ export const options = {
     [
       ['Model', 'model'],
       ['Property', 'property'],
+      ['Variable', 'variable'],
     ],
     {
-      value: 'model',
+      value: 'variable',
+      configuration: {
+        condition: showIf('optionType', 'EQ', 'never'),
+      },
     },
   ),
   model: model('Model', {
-    configuration: { condition: showIf('optionType', 'EQ', 'model') },
+    value: '',
+    configuration: {
+      condition: showIf('optionType', 'EQ', 'variable'),
+    },
   }),
   filter: option('FILTER', {
     label: 'Filter for options',
     value: {},
     configuration: {
       dependsOn: 'model',
-      condition: showIf('optionType', 'EQ', 'model'),
+      condition: hideIf('optionType', 'EQ', 'property'),
     },
   }),
   orderBy: property('Order by for options', {
     value: '',
-    configuration: { condition: showIf('optionType', 'EQ', 'model') },
+    configuration: { condition: hideIf('optionType', 'EQ', 'property') },
   }),
   labelProperty: property('Label for options', {
     value: '',
-    configuration: { condition: showIf('optionType', 'EQ', 'model') },
+    configuration: {
+      condition: hideIf('optionType', 'EQ', 'property'),
+    },
   }),
   order: buttongroup(
     'Sort order',
