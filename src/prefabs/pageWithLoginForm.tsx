@@ -19,13 +19,13 @@ import {
   PrefabInteraction,
   InteractionType,
   PrefabComponentOption,
-  BeforeCreateArgs,
   wrapper,
   linked,
+  BeforeCreateArgs,
 } from '@betty-blocks/component-sdk';
 import { options as defaults } from './structures/ActionJSForm/options';
 import {
-  Box as BoxPrefab,
+  Box as BoxComponent,
   boxOptions,
   Column,
   columnOptions,
@@ -36,71 +36,27 @@ import {
   mediaOptions,
   Row,
   rowOptions,
-  Text as TextPrefab,
+  Text as TextComponent,
   textOptions,
   SubmitButton,
   submitButtonOptions,
   OpenPageButton,
   openPageButtonOptions,
+  Conditional,
+  conditionalOptions,
 } from './structures';
-import { Properties } from './types';
-
-interface AuthenticationProfileOptions {
-  loginVariable: string;
-  usernameProperty: string | null;
-  passwordProperty: string | null;
-  localeProperty: string | null;
-  redirectEndpoint: string | null;
-  refreshTokenTimeout: number | null;
-  accessTokenTimeout: number | null;
-}
-
-declare enum AuthenticationProfileKind {
-  customAuthentication = 'customAuthentication',
-  usernamePassword = 'usernamePassword',
-}
-interface AuthenticationProfile {
-  default: boolean;
-  id: string;
-  kind: AuthenticationProfileKind;
-  loginModel: string;
-  name: string;
-  options: AuthenticationProfileOptions;
-  properties?: Properties[];
-}
-
-interface Endpoint {
-  id: string;
-  authenticationProfileId: string;
-  cache: boolean;
-  cachedFullPath: string;
-  contentType: string;
-  debugMode: boolean;
-  description?: string;
-  online: true;
-  options: {
-    componentSetUrl?: string;
-    runtimeTarget: string;
-    showDefaultComponentSet: boolean;
-  };
-  page: {
-    description: string;
-    id: string;
-    name: string;
-    rootId: string;
-    title: string;
-    type: string;
-  };
-  pageId: string;
-  redirectUrl: string;
-  redirectUrlForLogin: string;
-  requestMethod: string;
-  template: string;
-  url: string;
-  params?: { [key: string]: any };
-}
+import { AuthenticationProfile, Endpoint } from './types/types';
 
 const interactions: PrefabInteraction[] = [
+  {
+    type: InteractionType.Global,
+    name: 'login',
+    sourceEvent: 'onActionSuccess',
+    ref: {
+      sourceComponentId: '#formId',
+    },
+    parameters: [],
+  },
   {
     type: InteractionType.Custom,
     name: 'Show',
@@ -323,7 +279,7 @@ const prefabStructure: PrefabComponent[] = [
                     },
                   },
                   [
-                    BoxPrefab(
+                    BoxComponent(
                       {
                         options: {
                           ...boxOptions,
@@ -537,7 +493,7 @@ const prefabStructure: PrefabComponent[] = [
                                 },
                               },
                               [
-                                BoxPrefab(
+                                BoxComponent(
                                   {
                                     options: {
                                       ...boxOptions,
@@ -547,7 +503,7 @@ const prefabStructure: PrefabComponent[] = [
                                     },
                                   },
                                   [
-                                    BoxPrefab(
+                                    BoxComponent(
                                       {
                                         options: {
                                           ...boxOptions,
@@ -626,7 +582,7 @@ const prefabStructure: PrefabComponent[] = [
                                         ),
                                       ],
                                     ),
-                                    BoxPrefab(
+                                    BoxComponent(
                                       {
                                         options: {
                                           ...boxOptions,
@@ -654,7 +610,303 @@ const prefabStructure: PrefabComponent[] = [
                                       },
                                       [],
                                     ),
-                                    BoxPrefab(
+                                    Conditional(
+                                      {
+                                        options: {
+                                          ...conditionalOptions,
+                                          visible: toggle(
+                                            'Initial visibility',
+                                            {
+                                              value: false,
+                                              configuration: {
+                                                as: 'VISIBILITY',
+                                              },
+                                            },
+                                          ),
+                                        },
+                                      },
+                                      [
+                                        BoxComponent(
+                                          {
+                                            options: {
+                                              ...boxOptions,
+                                              outerSpacing: sizes(
+                                                'Outer space',
+                                                {
+                                                  value: [
+                                                    '0rem',
+                                                    '0rem',
+                                                    'XL',
+                                                    '0rem',
+                                                  ],
+                                                },
+                                              ),
+                                              backgroundColor: color(
+                                                'Background color',
+                                                {
+                                                  value: ThemeColor.DANGER,
+                                                },
+                                              ),
+                                              borderRadius: size(
+                                                'Border radius',
+                                                {
+                                                  value: '5px',
+                                                },
+                                              ),
+                                            },
+                                          },
+                                          [
+                                            TextComponent(
+                                              {
+                                                options: {
+                                                  ...textOptions,
+                                                  content: variable('Content', {
+                                                    value: [
+                                                      'Attention: This template is using next generation actions!',
+                                                    ],
+                                                    configuration: {
+                                                      as: 'MULTILINE',
+                                                    },
+                                                  }),
+                                                  type: font('Font', {
+                                                    value: ['Body1'],
+                                                  }),
+                                                  outerSpacing: sizes(
+                                                    'Outer space',
+                                                    {
+                                                      value: [
+                                                        '0rem',
+                                                        '0rem',
+                                                        '0rem',
+                                                        'S',
+                                                      ],
+                                                    },
+                                                  ),
+                                                  textColor: color(
+                                                    'Text color',
+                                                    {
+                                                      value: ThemeColor.WHITE,
+                                                    },
+                                                  ),
+                                                  fontWeight: option('CUSTOM', {
+                                                    label: 'Font weight',
+                                                    value: '500',
+                                                    configuration: {
+                                                      as: 'DROPDOWN',
+                                                      dataType: 'string',
+                                                      allowedInput: [
+                                                        {
+                                                          name: '100',
+                                                          value: '100',
+                                                        },
+                                                        {
+                                                          name: '200',
+                                                          value: '200',
+                                                        },
+                                                        {
+                                                          name: '300',
+                                                          value: '300',
+                                                        },
+                                                        {
+                                                          name: '400',
+                                                          value: '400',
+                                                        },
+                                                        {
+                                                          name: '500',
+                                                          value: '500',
+                                                        },
+                                                        {
+                                                          name: '600',
+                                                          value: '600',
+                                                        },
+                                                        {
+                                                          name: '700',
+                                                          value: '700',
+                                                        },
+                                                        {
+                                                          name: '800',
+                                                          value: '800',
+                                                        },
+                                                        {
+                                                          name: '900',
+                                                          value: '900',
+                                                        },
+                                                      ],
+                                                    },
+                                                  }),
+                                                },
+                                              },
+                                              [],
+                                            ),
+                                            TextComponent(
+                                              {
+                                                options: {
+                                                  ...textOptions,
+                                                  content: variable('Content', {
+                                                    value: [
+                                                      'You need to configure the permissions of the "Form Beta" actions in order to use this template.',
+                                                    ],
+                                                    configuration: {
+                                                      as: 'MULTILINE',
+                                                    },
+                                                  }),
+                                                  type: font('Font', {
+                                                    value: ['Body1'],
+                                                  }),
+                                                  outerSpacing: sizes(
+                                                    'Outer space',
+                                                    {
+                                                      value: [
+                                                        '0rem',
+                                                        '0rem',
+                                                        '0rem',
+                                                        'S',
+                                                      ],
+                                                    },
+                                                  ),
+                                                  textColor: color(
+                                                    'Text color',
+                                                    {
+                                                      value: ThemeColor.WHITE,
+                                                    },
+                                                  ),
+                                                  fontWeight: option('CUSTOM', {
+                                                    label: 'Font weight',
+                                                    value: '500',
+                                                    configuration: {
+                                                      as: 'DROPDOWN',
+                                                      dataType: 'string',
+                                                      allowedInput: [
+                                                        {
+                                                          name: '100',
+                                                          value: '100',
+                                                        },
+                                                        {
+                                                          name: '200',
+                                                          value: '200',
+                                                        },
+                                                        {
+                                                          name: '300',
+                                                          value: '300',
+                                                        },
+                                                        {
+                                                          name: '400',
+                                                          value: '400',
+                                                        },
+                                                        {
+                                                          name: '500',
+                                                          value: '500',
+                                                        },
+                                                        {
+                                                          name: '600',
+                                                          value: '600',
+                                                        },
+                                                        {
+                                                          name: '700',
+                                                          value: '700',
+                                                        },
+                                                        {
+                                                          name: '800',
+                                                          value: '800',
+                                                        },
+                                                        {
+                                                          name: '900',
+                                                          value: '900',
+                                                        },
+                                                      ],
+                                                    },
+                                                  }),
+                                                },
+                                              },
+                                              [],
+                                            ),
+                                            TextComponent(
+                                              {
+                                                options: {
+                                                  ...textOptions,
+                                                  content: variable('Content', {
+                                                    value: [
+                                                      'This message is not visible in your app',
+                                                    ],
+                                                    configuration: {
+                                                      as: 'MULTILINE',
+                                                    },
+                                                  }),
+                                                  type: font('Font', {
+                                                    value: ['Body1'],
+                                                  }),
+                                                  outerSpacing: sizes(
+                                                    'Outer space',
+                                                    {
+                                                      value: [
+                                                        '0rem',
+                                                        '0rem',
+                                                        '0rem',
+                                                        'S',
+                                                      ],
+                                                    },
+                                                  ),
+                                                  textColor: color(
+                                                    'Text color',
+                                                    {
+                                                      value: ThemeColor.WHITE,
+                                                    },
+                                                  ),
+                                                  fontWeight: option('CUSTOM', {
+                                                    label: 'Font weight',
+                                                    value: '500',
+                                                    configuration: {
+                                                      as: 'DROPDOWN',
+                                                      dataType: 'string',
+                                                      allowedInput: [
+                                                        {
+                                                          name: '100',
+                                                          value: '100',
+                                                        },
+                                                        {
+                                                          name: '200',
+                                                          value: '200',
+                                                        },
+                                                        {
+                                                          name: '300',
+                                                          value: '300',
+                                                        },
+                                                        {
+                                                          name: '400',
+                                                          value: '400',
+                                                        },
+                                                        {
+                                                          name: '500',
+                                                          value: '500',
+                                                        },
+                                                        {
+                                                          name: '600',
+                                                          value: '600',
+                                                        },
+                                                        {
+                                                          name: '700',
+                                                          value: '700',
+                                                        },
+                                                        {
+                                                          name: '800',
+                                                          value: '800',
+                                                        },
+                                                        {
+                                                          name: '900',
+                                                          value: '900',
+                                                        },
+                                                      ],
+                                                    },
+                                                  }),
+                                                },
+                                              },
+                                              [],
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                    BoxComponent(
                                       {
                                         options: {
                                           ...boxOptions,
@@ -669,7 +921,7 @@ const prefabStructure: PrefabComponent[] = [
                                         },
                                       },
                                       [
-                                        TextPrefab(
+                                        TextComponent(
                                           {
                                             ref: { id: '#titleTextPrefab' },
                                             options: {
@@ -690,7 +942,7 @@ const prefabStructure: PrefabComponent[] = [
                                         ),
                                       ],
                                     ),
-                                    BoxPrefab(
+                                    BoxComponent(
                                       {
                                         options: {
                                           ...boxOptions,
@@ -712,7 +964,7 @@ const prefabStructure: PrefabComponent[] = [
                                       },
                                       [],
                                     ),
-                                    BoxPrefab(
+                                    BoxComponent(
                                       {
                                         options: {
                                           ...boxOptions,
@@ -727,7 +979,7 @@ const prefabStructure: PrefabComponent[] = [
                                         },
                                       },
                                       [
-                                        BoxPrefab(
+                                        BoxComponent(
                                           {
                                             options: {
                                               ...boxOptions,
@@ -755,7 +1007,7 @@ const prefabStructure: PrefabComponent[] = [
                                                 FormErrorAlert({
                                                   ref: { id: '#alertErrorId' },
                                                 }),
-                                                BoxPrefab({
+                                                BoxComponent({
                                                   options: {
                                                     ...boxOptions,
                                                     innerSpacing: sizes(
@@ -772,7 +1024,7 @@ const prefabStructure: PrefabComponent[] = [
                                                   },
                                                   ref: { id: '#formBoxRef' },
                                                 }),
-                                                BoxPrefab(
+                                                BoxComponent(
                                                   {
                                                     options: {
                                                       ...boxOptions,
@@ -846,7 +1098,7 @@ const prefabStructure: PrefabComponent[] = [
                                                       },
                                                       [],
                                                     ),
-                                                    BoxPrefab(
+                                                    BoxComponent(
                                                       {
                                                         options: {
                                                           ...boxOptions,
@@ -1063,33 +1315,33 @@ const beforeCreate = ({
 
   const [modelProp, setModel] = React.useState(null);
 
-  const isEmptyEndpoint = (value: any): boolean =>
+  const isEmptyEndpoint = (value: Endpoint): boolean =>
     !value || Object.keys(value).length === 0 || value.id === '';
 
-  const getDescendantByRef = (refValue: string, structure: any) =>
-    structure.reduce((acc: string, comp: PrefabReference) => {
-      if (acc) return acc;
-      if (
-        comp.type === 'COMPONENT' &&
-        // eslint-disable-next-line no-prototype-builtins
-        comp.ref
-          ? Object.values(comp.ref).indexOf(refValue) > -1
-          : undefined
-      ) {
-        return comp;
+  function treeSearch(
+    dirName: string,
+    array: PrefabReference[],
+  ): PrefabComponent | undefined {
+    // eslint-disable-next-line no-plusplus
+    for (let i = 0; i < array.length; i++) {
+      const q = array[i];
+      if (q.type === 'COMPONENT') {
+        if (q.ref && q.ref.id === dirName) {
+          return q;
+        }
       }
-      if (comp.type === 'PARTIAL') {
-        return acc;
+      if (q.type !== 'PARTIAL' && q.descendants && q.descendants.length) {
+        const result = treeSearch(dirName, q.descendants);
+        if (result) return result;
       }
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      return getDescendantByRef(refValue, comp.descendants);
-    }, null);
-
+    }
+    return undefined;
+  }
   const modelId = (authProfile && authProfile.loginModel) || '';
   useModelQuery({
     skip: !modelId,
     variables: { id: modelId },
-    onCompleted: (result: any) => {
+    onCompleted: (result: { model: null }) => {
       setModel(result.model);
     },
   });
@@ -1116,7 +1368,10 @@ const beforeCreate = ({
           }
         >
           <AuthenticationProfileSelector
-            onChange={(id: any, authProfileObject: any) => {
+            onChange={(
+              id: string,
+              authProfileObject: AuthenticationProfile,
+            ) => {
               setAuthProfileInvalid(false);
               setAuthProfileId(id);
               setAuthProfile(authProfileObject);
@@ -1135,7 +1390,7 @@ const beforeCreate = ({
           <EndpointSelector
             value={endpoint || ''}
             size="large"
-            onChange={(value: any): void => {
+            onChange={(value: Endpoint): void => {
               setEndpointInvalid(isEmptyEndpoint(value));
               setEndpoint(value);
             }}
@@ -1161,35 +1416,36 @@ const beforeCreate = ({
                   value: ['M', '0rem', '0rem', '0rem'],
                 }),
               );
-
-              const textPrefab = cloneStructure('Text');
-              if (textPrefab.type === 'COMPONENT') {
-                setOption(
-                  textPrefab,
-                  'content',
-                  (options: PrefabComponentOption) => ({
-                    ...options,
-                    value: [textValue],
-                    configuration: { as: 'MULTILINE' },
-                  }),
-                );
-                setOption(
-                  textPrefab,
-                  'type',
-                  (options: PrefabComponentOption) => ({
-                    ...options,
-                    value: ['Body1'],
-                  }),
-                );
-                setOption(
-                  textPrefab,
-                  'outerSpacing',
-                  (options: PrefabComponentOption) => ({
-                    ...options,
-                    value: ['0rem', '0rem', 'S', '0rem'],
-                  }),
-                );
-              }
+            }
+            const textPrefab = cloneStructure('Text');
+            if (textPrefab.type === 'COMPONENT') {
+              setOption(
+                textPrefab,
+                'content',
+                (options: PrefabComponentOption) => ({
+                  ...options,
+                  value: [textValue],
+                  configuration: { as: 'MULTILINE' },
+                }),
+              );
+              setOption(
+                textPrefab,
+                'type',
+                (options: PrefabComponentOption) => ({
+                  ...options,
+                  value: ['Body1'],
+                }),
+              );
+              setOption(
+                textPrefab,
+                'outerSpacing',
+                (options: PrefabComponentOption) => ({
+                  ...options,
+                  value: ['0rem', '0rem', 'S', '0rem'],
+                }),
+              );
+            }
+            if (boxPrefab.type === 'COMPONENT') {
               boxPrefab.descendants.push(textPrefab);
               boxPrefab.descendants.push(inputPrefab);
             }
@@ -1201,7 +1457,9 @@ const beforeCreate = ({
             // eslint-disable-next-line no-useless-return
             return;
           }
-
+          if (!endpoint) {
+            throw new Error('There was no redirected page selected');
+          }
           if (isEmptyEndpoint(endpoint)) {
             setEndpointInvalid(true);
             // eslint-disable-next-line no-useless-return
@@ -1210,14 +1468,16 @@ const beforeCreate = ({
           if (!modelProp) {
             // eslint-disable-next-line no-console
             console.warn('Model not found');
-            return;
           }
-          const formObject = getDescendantByRef('#formId', newPrefab.structure);
+          const formObject = treeSearch('#formId', newPrefab.structure);
+          if (!formObject) throw new Error('Form could not be found');
           formObject.id = componentId;
           const result = await prepareAction(
             componentId,
+            // this typing is wrong hence the ts ignore
+            // @ts-ignore
             undefined,
-            undefined,
+            null,
             'login',
             authProfile,
           );
@@ -1227,40 +1487,39 @@ const beforeCreate = ({
                 authProfile.properties.reverse();
               }
 
-              const formBox = getDescendantByRef(
-                '#formBoxRef',
-                newPrefab.structure,
-              );
-
-              authProfile.properties.forEach((prop: any) => {
+              const formBox = treeSearch('#formBoxRef', newPrefab.structure);
+              if (!formBox) throw new Error('Box could not be found');
+              authProfile.properties.forEach((prop) => {
                 const { kind, name } = prop;
-                const vari: any = Object.entries(result.variables).find(
-                  (foundVariable: any) => foundVariable.name === name,
-                );
-                // ?.reduce((accum, [k, v]) => {
-                //   // accum[k] = v;
-                //   // return { ...accum, { [k], { ...v } } };
-                //   return accum;
-                // }, {});
+                const vari = Object.values(result.variables).find((v) => {
+                  // this typing is also wrong probably hence the ts-ignore
+                  // @ts-ignore
+                  return v?.name === name;
+                });
 
-                if (!vari) return;
                 const inputPrefabs = () => {
                   const bettyInput = (prefabName: string): PrefabReference => {
-                    const inputPrefab = makeBettyInput(
-                      prefabName,
-                      modelProp,
-                      prop,
-                      vari,
-                    );
-                    if (inputPrefab.type === 'COMPONENT') {
-                      setOption(inputPrefab, 'hideLabel', (options: any) => ({
-                        ...options,
-                        value: true,
-                      }));
+                    if (modelProp !== null && vari && 'options' in vari) {
+                      const inputPrefab = makeBettyInput(
+                        prefabName,
+                        modelProp,
+                        prop,
+                        vari,
+                      );
+                      if (inputPrefab.type === 'COMPONENT') {
+                        setOption(
+                          inputPrefab,
+                          'hideLabel',
+                          (options: PrefabComponentOption) => ({
+                            ...options,
+                            value: true,
+                          }),
+                        );
+                      }
+                      return inputPrefab;
                     }
-                    return inputPrefab;
+                    throw new Error('Could not return the prefab');
                   };
-
                   switch (kind) {
                     case PropertyKind.EMAIL_ADDRESS:
                       return inputStructure(
@@ -1308,39 +1567,47 @@ const beforeCreate = ({
                 }
               });
             }
-            if (endpoint && endpoint.params && newPrefab.interactions) {
-              newPrefab.interactions.push({
-                type: InteractionType.Global,
-                name: 'login',
-                sourceEvent: 'onActionSuccess',
-                ref: {
-                  sourceComponentId: '#formId',
+            if (
+              newPrefab.interactions &&
+              endpoint &&
+              endpoint.params &&
+              'parameters' in newPrefab.interactions[0]
+            ) {
+              newPrefab.interactions[0].parameters = [
+                {
+                  parameter: 'redirectTo',
+                  pageId: endpoint.pageId,
+                  endpointId: endpoint.id,
+                  parameters: serializeParameters(endpoint.params),
                 },
-                parameters: [
-                  {
-                    parameter: 'redirectTo',
-                    pageId: endpoint.pageId,
-                    endpointId: endpoint.id,
-                    parameters: serializeParameters(endpoint.params),
-                  },
-                ],
-              } as PrefabInteraction);
+              ];
+            } else {
+              throw new Error(
+                'Could not modify the interaction because one of the following items could not be found: Interaction, Interaction parameters, Endpoint, Endpoint parameters',
+              );
             }
 
-            // eslint-disable-next-line @typescript-eslint/no-shadow
-            setOption(formObject, 'actionId', (options: any) => ({
-              ...options,
-              value: result.action.actionId,
-              configuration: { disabled: true },
-            }));
+            setOption(
+              formObject,
+              'actionId',
+              (options: PrefabComponentOption) => ({
+                ...options,
+                value: result.action.actionId,
+                configuration: { disabled: true },
+              }),
+            );
 
-            setOption(formObject, 'model', (options: any) => ({
-              ...options,
-              value: authProfile.loginModel,
-              configuration: {
-                disabled: true,
-              },
-            }));
+            setOption(
+              formObject,
+              'model',
+              (options: PrefabComponentOption) => ({
+                ...options,
+                value: authProfile.loginModel,
+                configuration: {
+                  disabled: true,
+                },
+              }),
+            );
           }
 
           save(newPrefab);
