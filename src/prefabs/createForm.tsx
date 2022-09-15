@@ -7,29 +7,6 @@ import {
 } from '@betty-blocks/component-sdk';
 import { Form } from './structures/ActionJSForm';
 
-const disabledKinds = [
-  'AUTO_INCREMENT',
-  'BOOLEAN_EXPRESSION',
-  'COUNT',
-  'DATE_EXPRESSION',
-  'DATE_TIME_EXPRESSION',
-  'DECIMAL_EXPRESSION',
-  'INTEGER_EXPRESSION',
-  'LOGIN_TOKEN',
-  'MINUTES_EXPRESSION',
-  'MULTI_FILE',
-  'MULTI_IMAGE',
-  'PDF',
-  'PRICE_EXPRESSION',
-  'RICH_TEXT',
-  'SERIAL',
-  'SIGNED_PDF',
-  'STRING_EXPRESSION',
-  'SUM',
-  'TEXT_EXPRESSION',
-  'ZIPCODE',
-];
-
 const beforeCreate = ({
   close,
   components: {
@@ -45,6 +22,29 @@ const beforeCreate = ({
   save,
   helpers,
 }: any) => {
+  const disabledKinds = [
+    'AUTO_INCREMENT',
+    'BOOLEAN_EXPRESSION',
+    'COUNT',
+    'DATE_EXPRESSION',
+    'DATE_TIME_EXPRESSION',
+    'DECIMAL_EXPRESSION',
+    'INTEGER_EXPRESSION',
+    'LOGIN_TOKEN',
+    'MINUTES_EXPRESSION',
+    'MULTI_FILE',
+    'MULTI_IMAGE',
+    'PDF',
+    'PRICE_EXPRESSION',
+    'RICH_TEXT',
+    'SERIAL',
+    'SIGNED_PDF',
+    'STRING_EXPRESSION',
+    'SUM',
+    'TEXT_EXPRESSION',
+    'ZIPCODE',
+  ];
+
   const {
     BettyPrefabs,
     PropertyKind,
