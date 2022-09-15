@@ -1,20 +1,12 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-param-reassign */
 (() => ({
-  name: 'TextEditor',
+  name: 'RichTextInput',
   type: 'BODY_COMPONENT',
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {
     const { Slate: SlateP, SlateReact, SlateHistory } = window.MaterialUI;
-    const { Editable, withReact, useSlate, Slate } = SlateReact;
-    const {
-      Editor,
-      Transforms,
-      createEditor,
-      Descendant,
-      Element: SlateElement,
-    } = SlateP;
+    const { Editable, withReact, Slate } = SlateReact;
+    const { createEditor } = SlateP;
     const { withHistory } = SlateHistory;
 
     const initialValue = [
@@ -55,23 +47,31 @@
 
     function Leaf({ attributes, children, leaf }) {
       if (leaf.bold) {
+        // eslint-disable-next-line no-param-reassign
         children = <strong>{children}</strong>;
       }
 
       if (leaf.code) {
+        // eslint-disable-next-line no-param-reassign
         children = <code>{children}</code>;
       }
 
       if (leaf.italic) {
+        // eslint-disable-next-line no-param-reassign
         children = <em>{children}</em>;
       }
 
       if (leaf.underline) {
+        // eslint-disable-next-line no-param-reassign
         children = <u>{children}</u>;
       }
 
       return <span {...attributes}>{children}</span>;
     }
+
+    const onChangeHandler = (value) => {
+      console.log(value);
+    };
 
     // const renderElement = useCallback((props) => <Element {...props} />, []);
     const renderLeaf = useCallback((props) => <Leaf {...props} />, []);
@@ -82,16 +82,14 @@
 
     return (
       <div width="100%" height="100%">
-        <Slate editor={editor} value={initialValue}>
+        <Slate
+          editor={editor}
+          value={initialValue}
+          onChange={(value) => onChangeHandler(value)}
+        >
           <Editable renderLeaf={renderLeaf} />
         </Slate>
       </div>
     );
   })(),
-  styles: (B) => (theme) => {
-    const style = new B.Styling(theme);
-    return {
-      root: {},
-    };
-  },
 }))();
