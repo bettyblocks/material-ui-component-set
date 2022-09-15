@@ -18,6 +18,20 @@
           },
         },
         {
+          label: 'Separator',
+          key: 'separator',
+          value: 'dot',
+          type: 'CUSTOM',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              { name: 'Dot', value: 'dot' },
+              { name: 'Comma', value: 'comma' },
+            ],
+          },
+        },
+        {
           value: true,
           label: 'Autocomplete',
           key: 'autoComplete',
@@ -32,7 +46,7 @@
         {
           label: 'Validation pattern',
           key: 'pattern',
-          value: '',
+          value: '^[0-9]+([,.][0-9]+)?$',
           type: 'TEXT',
           configuration: {
             placeholder: '[0-9]{8,}',
