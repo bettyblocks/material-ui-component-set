@@ -1,3 +1,10 @@
+## [2.54.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.54.0...v2.54.1) (2022-09-13)
+
+
+### Bug Fixes
+
+* create form querying data ([c3298a0](https://github.com/bettyblocks/material-ui-component-set/commit/c3298a00fe1c6d7f5224c0c534b10ff5f4ebb9ad))
+
 # [2.54.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.53.0...v2.54.0) (2022-09-13)
 
 
