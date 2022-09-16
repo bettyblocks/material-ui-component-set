@@ -6,6 +6,8 @@ import {
   Properties,
   ModelProps,
   ModelQuery,
+  AuthenticationProfile,
+  Endpoint,
 } from './types';
 
 export {
@@ -16,4 +18,6 @@ export {
   Properties,
   ModelProps,
   ModelQuery,
+  AuthenticationProfile,
+  Endpoint,
 };

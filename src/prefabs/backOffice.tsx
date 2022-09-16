@@ -365,9 +365,8 @@ const sideMenu = Box(
                       dataType: 'string',
                       allowedInput: [
                         { name: 'Image', value: 'img' },
-                        { name: 'Data', value: 'data' },
+                        { name: 'Data/URL', value: 'url' },
                         { name: 'Video', value: 'video' },
-                        { name: 'URL', value: 'url' },
                         { name: 'I-frame', value: 'iframe' },
                       ],
                     },

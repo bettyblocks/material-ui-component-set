@@ -4,7 +4,7 @@
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { env, useText, usePublicFile, useProperty } = B;
+    const { env, useText, usePublicFile } = B;
     const { CardMedia } = window.MaterialUI.Core;
     const isDev = env === 'dev';
     const {
@@ -21,8 +21,7 @@
 
     const titleText = useText(title);
     const iframeUrl = useText(iframeSource);
-    const propValue =
-      !isDev && propertyFileSource && useProperty(propertyFileSource.id);
+    const propValue = !isDev && propertyFileSource;
     const { url: imgSource = '', name: imgName = 'image' } =
       usePublicFile(imageFileSource) || {};
     const { url: videoSource = '#', name: videoName = 'video' } =
