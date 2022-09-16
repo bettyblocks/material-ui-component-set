@@ -1,3 +1,10 @@
+## [2.55.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.55.0...v2.55.1) (2022-09-16)
+
+
+### Bug Fixes
+
+* remove property input from media component ([d9faeec](https://github.com/bettyblocks/material-ui-component-set/commit/d9faeecf7174492aefa9fa59b1ce320ffba8b512))
+
 # [2.55.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.54.1...v2.55.0) (2022-09-16)
 
 
