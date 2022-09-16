@@ -21,10 +21,11 @@ import {
   PrefabComponentOption,
   wrapper,
   linked,
+  BeforeCreateArgs,
 } from '@betty-blocks/component-sdk';
 import { options as defaults } from './structures/ActionJSForm/options';
 import {
-  Box as BoxPrefab,
+  Box as BoxComponent,
   boxOptions,
   Column,
   columnOptions,
@@ -35,71 +36,14 @@ import {
   mediaOptions,
   Row,
   rowOptions,
-  Text as TextPrefab,
+  Text as TextComponent,
   textOptions,
   SubmitButton,
   submitButtonOptions,
   OpenPageButton,
   openPageButtonOptions,
 } from './structures';
-
-interface AuthenticationProfileOptions {
-  loginVariable: string;
-  usernameProperty: string | null;
-  passwordProperty: string | null;
-  localeProperty: string | null;
-  redirectEndpoint: string | null;
-  refreshTokenTimeout: number | null;
-  accessTokenTimeout: number | null;
-}
-
-declare enum AuthenticationProfileKind {
-  customAuthentication = 'customAuthentication',
-  usernamePassword = 'usernamePassword',
-}
-interface AuthenticationProfile {
-  default: boolean;
-  id: string;
-  kind: AuthenticationProfileKind;
-  loginModel: string;
-  name: string;
-  options: AuthenticationProfileOptions;
-  properties?: Array<any>;
-}
-
-interface Endpoint {
-  __typename: string;
-  authenticationProfileId: string;
-  cache: boolean;
-  cachedFullPath: string;
-  contentType: string;
-  debugMode: boolean;
-  description?: string;
-  id: 'dbf8e21da4c24f04b399218ad81787f0';
-  online: true;
-  options: {
-    __typename: 'EndpointOptions';
-    componentSetUrl?: string;
-    runtimeTarget: string;
-    showDefaultComponentSet: boolean;
-  };
-  page: {
-    __typename: string;
-    description: string;
-    id: string;
-    name: string;
-    rootId: string;
-    title: string;
-    type: string;
-  };
-  pageId: string;
-  redirectUrl: string;
-  redirectUrlForLogin: string;
-  requestMethod: string;
-  template: string;
-  url: string;
-  params?: { [key: string]: any };
-}
+import { AuthenticationProfile, Endpoint } from './types/types';
 
 const interactions: PrefabInteraction[] = [
   {
@@ -333,7 +277,7 @@ const prefabStructure: PrefabComponent[] = [
                     },
                   },
                   [
-                    BoxPrefab(
+                    BoxComponent(
                       {
                         options: {
                           ...boxOptions,
@@ -547,7 +491,7 @@ const prefabStructure: PrefabComponent[] = [
                                 },
                               },
                               [
-                                BoxPrefab(
+                                BoxComponent(
                                   {
                                     options: {
                                       ...boxOptions,
@@ -557,7 +501,7 @@ const prefabStructure: PrefabComponent[] = [
                                     },
                                   },
                                   [
-                                    BoxPrefab(
+                                    BoxComponent(
                                       {
                                         options: {
                                           ...boxOptions,
@@ -636,7 +580,7 @@ const prefabStructure: PrefabComponent[] = [
                                         ),
                                       ],
                                     ),
-                                    BoxPrefab(
+                                    BoxComponent(
                                       {
                                         options: {
                                           ...boxOptions,
@@ -664,7 +608,7 @@ const prefabStructure: PrefabComponent[] = [
                                       },
                                       [],
                                     ),
-                                    BoxPrefab(
+                                    BoxComponent(
                                       {
                                         options: {
                                           ...boxOptions,
@@ -679,7 +623,7 @@ const prefabStructure: PrefabComponent[] = [
                                         },
                                       },
                                       [
-                                        TextPrefab(
+                                        TextComponent(
                                           {
                                             ref: { id: '#titleTextPrefab' },
                                             options: {
@@ -700,7 +644,7 @@ const prefabStructure: PrefabComponent[] = [
                                         ),
                                       ],
                                     ),
-                                    BoxPrefab(
+                                    BoxComponent(
                                       {
                                         options: {
                                           ...boxOptions,
@@ -722,7 +666,7 @@ const prefabStructure: PrefabComponent[] = [
                                       },
                                       [],
                                     ),
-                                    BoxPrefab(
+                                    BoxComponent(
                                       {
                                         options: {
                                           ...boxOptions,
@@ -737,7 +681,7 @@ const prefabStructure: PrefabComponent[] = [
                                         },
                                       },
                                       [
-                                        BoxPrefab(
+                                        BoxComponent(
                                           {
                                             options: {
                                               ...boxOptions,
@@ -765,7 +709,7 @@ const prefabStructure: PrefabComponent[] = [
                                                 FormErrorAlert({
                                                   ref: { id: '#alertErrorId' },
                                                 }),
-                                                BoxPrefab({
+                                                BoxComponent({
                                                   options: {
                                                     ...boxOptions,
                                                     innerSpacing: sizes(
@@ -782,7 +726,7 @@ const prefabStructure: PrefabComponent[] = [
                                                   },
                                                   ref: { id: '#formBoxRef' },
                                                 }),
-                                                BoxPrefab(
+                                                BoxComponent(
                                                   {
                                                     options: {
                                                       ...boxOptions,
@@ -856,7 +800,7 @@ const prefabStructure: PrefabComponent[] = [
                                                       },
                                                       [],
                                                     ),
-                                                    BoxPrefab(
+                                                    BoxComponent(
                                                       {
                                                         options: {
                                                           ...boxOptions,
@@ -1062,7 +1006,7 @@ const beforeCreate = ({
     useModelQuery,
     cloneStructure,
   },
-}: any) => {
+}: BeforeCreateArgs) => {
   const componentId = createUuid();
   const [authProfileId, setAuthProfileId] = React.useState('');
   const [authProfile, setAuthProfile] = React.useState<AuthenticationProfile>();
@@ -1073,33 +1017,33 @@ const beforeCreate = ({
 
   const [modelProp, setModel] = React.useState(null);
 
-  const isEmptyEndpoint = (value: any): boolean =>
+  const isEmptyEndpoint = (value: Endpoint): boolean =>
     !value || Object.keys(value).length === 0 || value.id === '';
 
-  const getDescendantByRef = (refValue: string, structure: any) =>
-    structure.reduce((acc: string, comp: PrefabReference) => {
-      if (acc) return acc;
-      if (
-        comp.type === 'COMPONENT' &&
-        // eslint-disable-next-line no-prototype-builtins
-        comp.ref
-          ? Object.values(comp.ref).indexOf(refValue) > -1
-          : undefined
-      ) {
-        return comp;
+  function treeSearch(
+    dirName: string,
+    array: PrefabReference[],
+  ): PrefabComponent | undefined {
+    // eslint-disable-next-line no-plusplus
+    for (let i = 0; i < array.length; i++) {
+      const q = array[i];
+      if (q.type === 'COMPONENT') {
+        if (q.ref && q.ref.id === dirName) {
+          return q;
+        }
       }
-      if (comp.type === 'PARTIAL') {
-        return acc;
+      if (q.type !== 'PARTIAL' && q.descendants && q.descendants.length) {
+        const result = treeSearch(dirName, q.descendants);
+        if (result) return result;
       }
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      return getDescendantByRef(refValue, comp.descendants);
-    }, null);
-
+    }
+    return undefined;
+  }
   const modelId = (authProfile && authProfile.loginModel) || '';
   useModelQuery({
     skip: !modelId,
     variables: { id: modelId },
-    onCompleted: (result: any) => {
+    onCompleted: (result: { model: null }) => {
       setModel(result.model);
     },
   });
@@ -1126,7 +1070,10 @@ const beforeCreate = ({
           }
         >
           <AuthenticationProfileSelector
-            onChange={(id: any, authProfileObject: any) => {
+            onChange={(
+              id: string,
+              authProfileObject: AuthenticationProfile,
+            ) => {
               setAuthProfileInvalid(false);
               setAuthProfileId(id);
               setAuthProfile(authProfileObject);
@@ -1145,7 +1092,7 @@ const beforeCreate = ({
           <EndpointSelector
             value={endpoint || ''}
             size="large"
-            onChange={(value: any): void => {
+            onChange={(value: Endpoint): void => {
               setEndpointInvalid(isEmptyEndpoint(value));
               setEndpoint(value);
             }}
@@ -1162,42 +1109,48 @@ const beforeCreate = ({
             inputPrefab: PrefabReference,
           ): PrefabReference => {
             const boxPrefab = cloneStructure('Box');
-            setOption(
-              boxPrefab,
-              'innerSpacing',
-              (options: PrefabComponentOption[]) => ({
-                ...options,
-                value: ['M', '0rem', '0rem', '0rem'],
-              }),
-            );
+            if (boxPrefab.type === 'COMPONENT') {
+              setOption(
+                boxPrefab,
+                'innerSpacing',
+                (options: PrefabComponentOption) => ({
+                  ...options,
+                  value: ['M', '0rem', '0rem', '0rem'],
+                }),
+              );
+            }
             const textPrefab = cloneStructure('Text');
-            setOption(
-              textPrefab,
-              'content',
-              (options: PrefabComponentOption[]) => ({
-                ...options,
-                value: [textValue],
-                configuration: { as: 'MULTILINE' },
-              }),
-            );
-            setOption(
-              textPrefab,
-              'type',
-              (options: PrefabComponentOption[]) => ({
-                ...options,
-                value: ['Body1'],
-              }),
-            );
-            setOption(
-              textPrefab,
-              'outerSpacing',
-              (options: PrefabComponentOption[]) => ({
-                ...options,
-                value: ['0rem', '0rem', 'S', '0rem'],
-              }),
-            );
-            boxPrefab.descendants.push(textPrefab);
-            boxPrefab.descendants.push(inputPrefab);
+            if (textPrefab.type === 'COMPONENT') {
+              setOption(
+                textPrefab,
+                'content',
+                (options: PrefabComponentOption) => ({
+                  ...options,
+                  value: [textValue],
+                  configuration: { as: 'MULTILINE' },
+                }),
+              );
+              setOption(
+                textPrefab,
+                'type',
+                (options: PrefabComponentOption) => ({
+                  ...options,
+                  value: ['Body1'],
+                }),
+              );
+              setOption(
+                textPrefab,
+                'outerSpacing',
+                (options: PrefabComponentOption) => ({
+                  ...options,
+                  value: ['0rem', '0rem', 'S', '0rem'],
+                }),
+              );
+            }
+            if (boxPrefab.type === 'COMPONENT') {
+              boxPrefab.descendants.push(textPrefab);
+              boxPrefab.descendants.push(inputPrefab);
+            }
             return boxPrefab;
           };
 
@@ -1206,7 +1159,9 @@ const beforeCreate = ({
             // eslint-disable-next-line no-useless-return
             return;
           }
-
+          if (!endpoint) {
+            throw new Error('There was no redirected page selected');
+          }
           if (isEmptyEndpoint(endpoint)) {
             setEndpointInvalid(true);
             // eslint-disable-next-line no-useless-return
@@ -1216,11 +1171,14 @@ const beforeCreate = ({
             // eslint-disable-next-line no-console
             console.warn('Model not found');
           }
-          const formObject = getDescendantByRef('#formId', newPrefab.structure);
+          const formObject = treeSearch('#formId', newPrefab.structure);
+          if (!formObject) throw new Error('Form could not be found');
           formObject.id = componentId;
           const result = await prepareAction(
             componentId,
-            null,
+            // this typing is wrong hence the ts ignore
+            // @ts-ignore
+            undefined,
             null,
             'login',
             authProfile,
@@ -1231,32 +1189,39 @@ const beforeCreate = ({
                 authProfile.properties.reverse();
               }
 
-              const formBox = getDescendantByRef(
-                '#formBoxRef',
-                newPrefab.structure,
-              );
-
-              authProfile.properties.forEach((prop: any) => {
+              const formBox = treeSearch('#formBoxRef', newPrefab.structure);
+              if (!formBox) throw new Error('Box could not be found');
+              authProfile.properties.forEach((prop) => {
                 const { kind, name } = prop;
-                const vari = result.variables.find(
-                  (foundVariable: any) => foundVariable.name === name,
-                );
+                const vari = Object.values(result.variables).find((v) => {
+                  // this typing is also wrong probably hence the ts-ignore
+                  // @ts-ignore
+                  return v?.name === name;
+                });
 
                 const inputPrefabs = () => {
-                  const bettyInput = (prefabName: String): PrefabReference => {
-                    const inputPrefab = makeBettyInput(
-                      prefabName,
-                      modelProp,
-                      prop,
-                      vari,
-                    );
-                    setOption(inputPrefab, 'hideLabel', (options: any) => ({
-                      ...options,
-                      value: true,
-                    }));
-                    return inputPrefab;
+                  const bettyInput = (prefabName: string): PrefabReference => {
+                    if (modelProp !== null && vari && 'options' in vari) {
+                      const inputPrefab = makeBettyInput(
+                        prefabName,
+                        modelProp,
+                        prop,
+                        vari,
+                      );
+                      if (inputPrefab.type === 'COMPONENT') {
+                        setOption(
+                          inputPrefab,
+                          'hideLabel',
+                          (options: PrefabComponentOption) => ({
+                            ...options,
+                            value: true,
+                          }),
+                        );
+                      }
+                      return inputPrefab;
+                    }
+                    throw new Error('Could not return the prefab');
                   };
-
                   switch (kind) {
                     case PropertyKind.EMAIL_ADDRESS:
                       return inputStructure(
@@ -1276,7 +1241,10 @@ const beforeCreate = ({
                   }
                 };
                 const formInputPrefabs = inputPrefabs();
-                if (formInputPrefabs.type === 'COMPONENT') {
+                if (
+                  formInputPrefabs.type === 'COMPONENT' &&
+                  formInputPrefabs.descendants[1].type === 'COMPONENT'
+                ) {
                   setOption(
                     formInputPrefabs.descendants[1],
                     'margin',
@@ -1301,7 +1269,12 @@ const beforeCreate = ({
                 }
               });
             }
-            if (endpoint && endpoint.params) {
+            if (
+              newPrefab.interactions &&
+              endpoint &&
+              endpoint.params &&
+              'parameters' in newPrefab.interactions[0]
+            ) {
               newPrefab.interactions[0].parameters = [
                 {
                   parameter: 'redirectTo',
@@ -1310,22 +1283,33 @@ const beforeCreate = ({
                   parameters: serializeParameters(endpoint.params),
                 },
               ];
+            } else {
+              throw new Error(
+                'Could not modify the interaction because one of the following items could not be found: Interaction, Interaction parameters, Endpoint, Endpoint parameters',
+              );
             }
 
-            // eslint-disable-next-line @typescript-eslint/no-shadow
-            setOption(formObject, 'actionId', (options: any) => ({
-              ...options,
-              value: result.action.actionId,
-              configuration: { disabled: true },
-            }));
+            setOption(
+              formObject,
+              'actionId',
+              (options: PrefabComponentOption) => ({
+                ...options,
+                value: result.action.actionId,
+                configuration: { disabled: true },
+              }),
+            );
 
-            setOption(formObject, 'model', (options: any) => ({
-              ...options,
-              value: authProfile.loginModel,
-              configuration: {
-                disabled: true,
-              },
-            }));
+            setOption(
+              formObject,
+              'model',
+              (options: PrefabComponentOption) => ({
+                ...options,
+                value: authProfile.loginModel,
+                configuration: {
+                  disabled: true,
+                },
+              }),
+            );
           }
 
           save(newPrefab);
