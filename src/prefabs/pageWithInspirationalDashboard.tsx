@@ -15,9 +15,9 @@ import {
   variable,
   font,
   showIfTrue,
-  PrefabInteraction,
   icon,
   buttongroup,
+  PrefabComponent,
 } from '@betty-blocks/component-sdk';
 import {
   Box as BoxPrefab,
@@ -47,10 +47,7 @@ import {
   buttonOptions,
 } from './structures';
 
-const interactions: PrefabInteraction[] = [];
-
 const attrs = {
-  name: 'Inspirational Dashboard',
   icon: Icon.DataTable,
   type: 'page',
   description: 'Page with a static dashboard for inspiration.',
@@ -60,7 +57,6 @@ const attrs = {
   previewImage:
     'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Page_Template_Inspirational_Dashboard.jpg',
   category: 'LAYOUT',
-  interactions,
 };
 
 const smallColumnOptions = {
@@ -655,27 +651,28 @@ const beforeCreate = ({
   prefab,
   components: { Header, Content, Field, Footer, Text, Box, PartialSelector },
 }: BeforeCreateArgs) => {
-  const [headerPartialId, setHeaderPartialId] = React.useState<string>('');
-  const [footerPartialId, setFooterPartialId] = React.useState<string>('');
+  const [headerPartialId, setHeaderPartialId] = React.useState('');
+  const [footerPartialId, setFooterPartialId] = React.useState('');
 
-  const getDescendantByRef = (refValue: string, structure: any) =>
-    structure.reduce((acc: string, component: PrefabReference) => {
-      if (acc) return acc;
-      if (
-        component.type === 'COMPONENT' &&
-        // eslint-disable-next-line no-prototype-builtins
-        component.ref
-          ? Object.values(component.ref).indexOf(refValue) > -1
-          : undefined
-      ) {
-        return component;
+  function treeSearch(
+    dirName: string,
+    array: PrefabReference[],
+  ): PrefabComponent | undefined {
+    // eslint-disable-next-line no-plusplus
+    for (let i = 0; i < array.length; i++) {
+      const q = array[i];
+      if (q.type === 'COMPONENT') {
+        if (q.ref && q.ref.id === dirName) {
+          return q;
+        }
       }
-      if (component.type === 'PARTIAL') {
-        return acc;
+      if (q.type !== 'PARTIAL' && q.descendants && q.descendants.length) {
+        const result = treeSearch(dirName, q.descendants);
+        if (result) return result;
       }
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      return getDescendantByRef(refValue, component.descendants);
-    }, null);
+    }
+    return undefined;
+  }
 
   return (
     <>
@@ -740,22 +737,20 @@ const beforeCreate = ({
         onSave={() => {
           const newPrefab = { ...prefab };
 
-          const prefabTopMenu = getDescendantByRef(
-            '#topMenu',
-            newPrefab.structure,
-          );
-          const prefabFooter = getDescendantByRef(
-            '#footer',
-            newPrefab.structure,
-          );
-          if (headerPartialId) {
-            prefabTopMenu.descendants = [{ type: 'PARTIAL', partialId: '' }];
-            prefabTopMenu.descendants[0].partialId = headerPartialId;
+          const prefabFooter = treeSearch('#Footer', newPrefab.structure);
+          const prefabHeader = treeSearch('#Header', newPrefab.structure);
+          if (headerPartialId && prefabHeader) {
+            prefabHeader.descendants = [
+              { type: 'PARTIAL', partialId: headerPartialId },
+            ];
           }
-          if (footerPartialId) {
-            prefabFooter.descendants = [{ type: 'PARTIAL', partialId: '' }];
-            prefabFooter.descendants[0].partialId = footerPartialId;
+
+          if (footerPartialId && prefabFooter) {
+            prefabFooter.descendants = [
+              { type: 'PARTIAL', partialId: footerPartialId },
+            ];
           }
+
           save(newPrefab);
         }}
         onSkip={() => {
@@ -907,10 +902,20 @@ export default makePrefab('Inspirational dashboard', attrs, beforeCreate, [
                                       {
                                         options: {
                                           ...appBarOptions,
-                                          logoSource: variable('Logo', {
+                                          urlFileSource: variable('Source', {
                                             value: [
                                               'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Your_Logo_-_W.svg',
                                             ],
+                                            configuration: {
+                                              placeholder:
+                                                'Starts with https:// or http://',
+                                              as: 'MULTILINE',
+                                              condition: showIf(
+                                                'type',
+                                                'EQ',
+                                                'url',
+                                              ),
+                                            },
                                           }),
                                           title: variable('Title', {
                                             value: [],
