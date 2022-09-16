@@ -43,7 +43,7 @@ import {
   OpenPageButton,
   openPageButtonOptions,
 } from './structures';
-import { AuthenticationProfile, Endpoint } from './types/types';
+import { AuthenticationProfile, Endpoint } from './types';
 
 const interactions: PrefabInteraction[] = [
   {
@@ -532,16 +532,12 @@ const prefabStructure: PrefabComponent[] = [
                                                       value: 'img',
                                                     },
                                                     {
-                                                      name: 'Data',
-                                                      value: 'data',
+                                                      name: 'Data/URL',
+                                                      value: 'url',
                                                     },
                                                     {
                                                       name: 'Video',
                                                       value: 'video',
-                                                    },
-                                                    {
-                                                      name: 'URL',
-                                                      value: 'url',
                                                     },
                                                     {
                                                       name: 'I-frame',
