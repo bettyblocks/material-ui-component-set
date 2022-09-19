@@ -122,10 +122,9 @@ const attrs = {
   name: 'Checklist',
   icon: Icon.DataList,
   type: 'page',
-  description:
-    'Toggle the view of your content between a card view or a list view.',
+  description: 'This page contains a checklist based on your model',
   detail:
-    'Display your data in different views such as a list or a card view via a toggle. This page template also contains a custom search functionality to filter your data.',
+    'This page has a checklist for your model so you can check and uncheck items. Their status is being updated directly',
   previewUrl: 'https://preview.betty.app/checklist',
   previewImage:
     'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Checklist',
