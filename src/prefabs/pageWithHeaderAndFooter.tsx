@@ -15,6 +15,7 @@ import {
   variable,
   font,
   showIfTrue,
+  PrefabComponent,
 } from '@betty-blocks/component-sdk';
 import {
   Box as prefabBox,
@@ -34,7 +35,6 @@ import {
 } from './structures';
 
 const attrs = {
-  name: 'Header and footer',
   icon: Icon.NavbarIcon,
   type: 'page',
   description: 'Full height page with a header and footer',
@@ -55,24 +55,25 @@ const beforeCreate = ({
   const [headerPartialId, setHeaderPartialId] = React.useState('');
   const [footerPartialId, setFooterPartialId] = React.useState('');
 
-  const getDescendantByRef = (refValue: string, structure: any) =>
-    structure.reduce((acc: string, component: PrefabReference) => {
-      if (acc) return acc;
-      if (
-        component.type === 'COMPONENT' &&
-        // eslint-disable-next-line no-prototype-builtins
-        component.ref
-          ? Object.values(component.ref).indexOf(refValue) > -1
-          : undefined
-      ) {
-        return component;
+  function treeSearch(
+    dirName: string,
+    array: PrefabReference[],
+  ): PrefabComponent | undefined {
+    // eslint-disable-next-line no-plusplus
+    for (let i = 0; i < array.length; i++) {
+      const q = array[i];
+      if (q.type === 'COMPONENT') {
+        if (q.ref && q.ref.id === dirName) {
+          return q;
+        }
       }
-      if (component.type === 'PARTIAL') {
-        return acc;
+      if (q.type !== 'PARTIAL' && q.descendants && q.descendants.length) {
+        const result = treeSearch(dirName, q.descendants);
+        if (result) return result;
       }
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      return getDescendantByRef(refValue, component.descendants);
-    }, null);
+    }
+    return undefined;
+  }
 
   return (
     <>
@@ -129,22 +130,18 @@ const beforeCreate = ({
         onClick={close}
         onSave={() => {
           const newPrefab = { ...prefab };
-          const prefabFooter = getDescendantByRef(
-            '#Footer',
-            newPrefab.structure,
-          );
-          const prefabHeader = getDescendantByRef(
-            '#Header',
-            newPrefab.structure,
-          );
-          if (headerPartialId) {
-            prefabHeader.descendants = [{ type: 'PARTIAL', partialId: '' }];
-            prefabHeader.descendants[0].partialId = headerPartialId;
+          const prefabFooter = treeSearch('#Footer', newPrefab.structure);
+          const prefabHeader = treeSearch('#Header', newPrefab.structure);
+          if (headerPartialId && prefabHeader) {
+            prefabHeader.descendants = [
+              { type: 'PARTIAL', partialId: headerPartialId },
+            ];
           }
 
-          if (footerPartialId) {
-            prefabFooter.descendants = [{ type: 'PARTIAL', partialId: '' }];
-            prefabFooter.descendants[0].partialId = footerPartialId;
+          if (footerPartialId && prefabFooter) {
+            prefabFooter.descendants = [
+              { type: 'PARTIAL', partialId: footerPartialId },
+            ];
           }
 
           save(newPrefab);
@@ -158,7 +155,7 @@ const beforeCreate = ({
   );
 };
 
-export default makePrefab('Header & Footer', attrs, beforeCreate, [
+export default makePrefab('Header and footer', attrs, beforeCreate, [
   Row(
     {
       options: {
@@ -299,10 +296,20 @@ export default makePrefab('Header & Footer', attrs, beforeCreate, [
                                       {
                                         options: {
                                           ...appBarOptions,
-                                          logoSource: variable('Logo', {
+                                          urlFileSource: variable('Source', {
                                             value: [
                                               'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Your_Logo_-_W.svg',
                                             ],
+                                            configuration: {
+                                              placeholder:
+                                                'Starts with https:// or http://',
+                                              as: 'MULTILINE',
+                                              condition: showIf(
+                                                'type',
+                                                'EQ',
+                                                'url',
+                                              ),
+                                            },
                                           }),
                                           title: variable('Title', {
                                             value: [],

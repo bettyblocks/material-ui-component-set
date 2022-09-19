@@ -16,8 +16,6 @@ import {
   hideIf,
 } from '@betty-blocks/component-sdk';
 
-import { deleteActionVariable } from './hooks/deleteActionVariable';
-
 const beforeCreate = ({
   close,
   components: { CreateFormInputWizard },
@@ -148,14 +146,6 @@ const options = {
   }),
 };
 
-const hooks = {
-  $afterDelete: [deleteActionVariable],
-};
-
 export default prefab('Checkbox Beta', attributes, beforeCreate, [
-  component(
-    'CheckboxInput',
-    { label: 'Checkbox input Beta', options, ...hooks },
-    [],
-  ),
+  component('CheckboxInput', { label: 'Checkbox input Beta', options }, []),
 ]);
