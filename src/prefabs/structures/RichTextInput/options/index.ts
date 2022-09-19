@@ -1,6 +1,5 @@
 import { option, hideIf, variable } from '@betty-blocks/component-sdk';
-// import { advanced } from './advanced';
-// import { styles } from './styles';
+import { styles } from './styles';
 import { validation } from './validation';
 
 export const options = {
@@ -19,6 +18,5 @@ export const options = {
   value: variable('Value', { value: [''] }),
 
   ...validation,
-  // ...styles,
-  // ...advanced,
+  ...styles,
 };

@@ -15,7 +15,15 @@
     const { withHistory } = SlateHistory;
     const { jsx } = SlateHyperscript;
 
-    const { actionVariableId: name, value: valueProp, placeholder } = options;
+    const { FormHelperText } = window.MaterialUI.Core;
+
+    const {
+      actionVariableId: name,
+      value: valueProp,
+      placeholder,
+      disabled,
+      helperText,
+    } = options;
     const { useText, env } = B;
     const isDev = env === 'dev';
 
@@ -108,7 +116,7 @@
       }
 
       if (el.nodeName === 'BODY') {
-        return jsx('fragment', {}, children);
+        return [jsx('element', { type: 'paragraph' }, children)];
       }
 
       if (ELEMENT_TAGS[nodeName]) {
@@ -190,25 +198,117 @@
     const fragment = deserialize(parsed.body);
 
     return (
-      <div width="100%" height="100%">
-        <Slate
-          editor={editor}
-          value={fragment}
-          onChange={(value) => {
-            onChangeHandler(value);
-          }}
-        >
-          <Editable
-            renderLeaf={renderLeaf}
-            renderElement={renderElement}
-            placeholder={isDev ? useText(valueProp) : placeholder}
-            readOnly={isDev}
-          />
-        </Slate>
-
-        <input type="hidden" name={name} value={currentValue} />
+      <div className={classes.root}>
+        <div className={classes.editor}>
+          <Slate
+            editor={editor}
+            value={fragment}
+            onChange={(value) => {
+              onChangeHandler(value);
+            }}
+          >
+            <Editable
+              renderLeaf={renderLeaf}
+              renderElement={renderElement}
+              placeholder={placeholder}
+              readOnly={isDev || disabled}
+            />
+          </Slate>
+          <input type="hidden" name={name} value={currentValue} />
+        </div>
+        {helperText && (
+          <FormHelperText classes={{ root: classes.helper }}>
+            {helperText}
+          </FormHelperText>
+        )}
       </div>
     );
   })(),
-  styles: () => () => ({}),
+  styles: (B) => (t) => {
+    const { Styling, env, mediaMinWidth } = B;
+    const isDev = env === 'dev';
+    const style = new Styling(t);
+    const getSpacing = (idx, device = 'Mobile') =>
+      idx === '0' ? '0rem' : style.getSpacing(idx, device);
+    return {
+      root: {
+        paddingTop: ({ options: { outerSpacing } }) =>
+          getSpacing(outerSpacing[0]),
+        paddingRight: ({ options: { outerSpacing } }) =>
+          getSpacing(outerSpacing[1]),
+        paddingBottom: ({ options: { outerSpacing } }) =>
+          getSpacing(outerSpacing[2]),
+        paddingLeft: ({ options: { outerSpacing } }) =>
+          getSpacing(outerSpacing[3]),
+        [`@media ${mediaMinWidth(600)}`]: {
+          paddingTop: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[0], 'Portrait'),
+          paddingRight: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[1], 'Portrait'),
+          paddingBottom: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[2], 'Portrait'),
+          paddingLeft: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[3], 'Portrait'),
+        },
+        [`@media ${mediaMinWidth(960)}`]: {
+          paddingTop: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[0], 'Landscape'),
+          paddingRight: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[1], 'Landscape'),
+          paddingBottom: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[2], 'Landscape'),
+          paddingLeft: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[3], 'Landscape'),
+        },
+        [`@media ${mediaMinWidth(1280)}`]: {
+          paddingTop: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[0], 'Desktop'),
+          paddingRight: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[1], 'Desktop'),
+          paddingBottom: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[2], 'Desktop'),
+          paddingLeft: ({ options: { outerSpacing } }) =>
+            getSpacing(outerSpacing[3], 'Desktop'),
+        },
+        width: ({ options: { width } }) => width,
+        height: ({ options: { height } }) => height,
+      },
+      editor: {
+        pointerEvents: isDev && 'none',
+        border: '1px solid',
+        borderRadius: '4px',
+        padding: '0.5px 14px',
+        color: isDev && 'rgb(0, 0, 0)',
+        borderColor: ({ options: { borderColor } }) => [
+          style.getColor(borderColor),
+        ],
+        backgroundColor: ({ options: { backgroundColor } }) => [
+          style.getColor(backgroundColor),
+        ],
+        '&:hover': {
+          borderColor: ({ options: { borderHoverColor } }) => [
+            style.getColor(borderHoverColor),
+          ],
+        },
+        '&:focus-within': {
+          borderColor: ({ options: { borderFocusColor } }) => [
+            style.getColor(borderFocusColor),
+          ],
+        },
+      },
+      helper: {
+        color: ({ options: { helperColor } }) => [
+          style.getColor(helperColor),
+          '!important',
+        ],
+        '&.Mui-error': {
+          color: ({ options: { errorColor } }) => [
+            style.getColor(errorColor),
+            '!important',
+          ],
+        },
+        margin: '0 14px !important',
+      },
+    };
+  },
 }))();

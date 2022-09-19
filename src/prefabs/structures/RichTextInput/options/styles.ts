@@ -1,65 +1,28 @@
 import {
-  buttongroup,
   color,
-  icon,
+  size,
+  sizes,
   ThemeColor,
   toggle,
 } from '@betty-blocks/component-sdk';
 import { showOn } from '../../../../utils';
 
 export const styles = {
-  margin: buttongroup(
-    'Margin',
-    [
-      ['None', 'none'],
-      ['Dense', 'dense'],
-      ['Normal', 'normal'],
-    ],
-    { value: 'normal' },
-  ),
-
-  size: buttongroup(
-    'Size',
-    [
-      ['Medium', 'medium'],
-      ['Small', 'small'],
-    ],
-    { value: 'medium' },
-  ),
-  fullWidth: toggle('Full width', { value: true }),
-
-  variant: buttongroup(
-    'Variant',
-    [
-      ['Standard', 'standard'],
-      ['Outlined', 'outlined'],
-      ['Filled', 'filled'],
-    ],
-    { value: 'outlined' },
-  ),
-
-  adornmentIcon: icon('Icon', {
+  height: size('Height', {
     value: '',
-  }),
-
-  adornmentPosition: buttongroup(
-    'Position',
-    [
-      ['Start', 'start'],
-      ['End', 'end'],
-    ],
-    {
-      value: 'end',
-      configuration: {
-        condition: {
-          type: 'HIDE',
-          option: 'adornmentIcon',
-          comparator: 'EQ',
-          value: '',
-        },
-      },
+    configuration: {
+      as: 'UNIT',
     },
-  ),
+  }),
+  width: size('Width', {
+    value: '',
+    configuration: {
+      as: 'UNIT',
+    },
+  }),
+  outerSpacing: sizes('Outer space', {
+    value: ['0rem', '0rem', '0rem', '0rem'],
+  }),
 
   styles: toggle('Styles'),
   hideLabel: toggle('Hide label', showOn('styles')),
@@ -86,11 +49,6 @@ export const styles = {
 
   labelColor: color('Label color', {
     value: ThemeColor.ACCENT_3,
-    ...showOn('styles'),
-  }),
-
-  textColor: color('Text color', {
-    value: ThemeColor.BLACK,
     ...showOn('styles'),
   }),
 
