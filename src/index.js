@@ -9,6 +9,7 @@ import nlLocale from 'date-fns/locale/nl';
 import * as Slate from 'slate';
 import * as SlateReact from 'slate-react';
 import * as SlateHistory from 'slate-history';
+import * as SlateHyperscript from 'slate-hyperscript';
 
 import { icons } from './icons';
 
@@ -23,4 +24,5 @@ export default {
   Slate,
   SlateReact,
   SlateHistory,
+  SlateHyperscript,
 };

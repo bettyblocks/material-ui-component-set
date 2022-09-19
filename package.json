@@ -65,6 +65,7 @@
     "react-dom": "^16.13.1",
     "slate": "^0.82.1",
     "slate-history": "^0.66.0",
+    "slate-hyperscript": "^0.77.0",
     "slate-react": "^0.82.2"
   },
   "repository": {

@@ -4,46 +4,125 @@
   allowedTypes: [],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { Slate: SlateP, SlateReact, SlateHistory } = window.MaterialUI;
+    const {
+      Slate: SlateP,
+      SlateReact,
+      SlateHistory,
+      SlateHyperscript,
+    } = window.MaterialUI;
     const { Editable, withReact, Slate } = SlateReact;
-    const { createEditor } = SlateP;
+    const { createEditor, Text } = SlateP;
     const { withHistory } = SlateHistory;
+    const { jsx } = SlateHyperscript;
 
-    const initialValue = [
-      {
-        type: 'paragraph',
-        children: [
-          { text: 'This is editable ' },
-          { text: 'rich', bold: true },
-          { text: ' text, ' },
-          { text: 'much', italic: true },
-          { text: ' better than a ' },
-          { text: '<textarea>', code: true },
-          { text: '!' },
-        ],
-      },
-      {
-        type: 'paragraph',
-        children: [
-          {
-            text: "Since it's rich text, you can do things like turn a selection of text ",
-          },
-          { text: 'bold', bold: true },
-          {
-            text: ', or add a semantically rendered block quote in the middle of the page, like this:',
-          },
-        ],
-      },
-      {
-        type: 'block-quote',
-        children: [{ text: 'A wise quote.' }],
-      },
-      {
-        type: 'paragraph',
-        align: 'center',
-        children: [{ text: 'Try it out for yourself!' }],
-      },
-    ];
+    const { actionVariableId: name, value: valueProp, placeholder } = options;
+    const { useText, env } = B;
+    const isDev = env === 'dev';
+
+    const [currentValue, setCurrentValue] = useState(useText(valueProp));
+
+    const serialize = (node) => {
+      if (Text.isText(node)) {
+        let string = node.text;
+        if (node.bold) {
+          string = `<b>${string}</b>`;
+        }
+        if (node.italic) {
+          string = `<i>${string}</i>`;
+        }
+        if (node.underline) {
+          string = `<u>${string}</u>`;
+        }
+        if (node.strikethrough) {
+          string = `<s>${string}</s>`;
+        }
+        return string;
+      }
+
+      const children =
+        node.children && node.children.map((n) => serialize(n)).join('');
+
+      switch (node.type) {
+        case 'paragraph':
+          return `<p>${children}</p>`;
+        default:
+          return children;
+      }
+    };
+
+    const ELEMENT_TAGS = {
+      A: (el) => ({ type: 'link', url: el.getAttribute('href') }),
+      BLOCKQUOTE: () => ({ type: 'quote' }),
+      H1: () => ({ type: 'heading-one' }),
+      H2: () => ({ type: 'heading-two' }),
+      H3: () => ({ type: 'heading-three' }),
+      H4: () => ({ type: 'heading-four' }),
+      H5: () => ({ type: 'heading-five' }),
+      H6: () => ({ type: 'heading-six' }),
+      IMG: (el) => ({ type: 'image', url: el.getAttribute('src') }),
+      LI: () => ({ type: 'list-item' }),
+      OL: () => ({ type: 'numbered-list' }),
+      P: () => ({ type: 'paragraph' }),
+      PRE: () => ({ type: 'code' }),
+      UL: () => ({ type: 'bulleted-list' }),
+    };
+
+    // COMPAT: `B` is omitted here because Google Docs uses `<b>` in weird ways.
+    const TEXT_TAGS = {
+      CODE: () => ({ code: true }),
+      DEL: () => ({ strikethrough: true }),
+      EM: () => ({ italic: true }),
+      I: () => ({ italic: true }),
+      S: () => ({ strikethrough: true }),
+      STRONG: () => ({ bold: true }),
+      B: () => ({ bold: true }),
+      U: () => ({ underline: true }),
+    };
+
+    const deserialize = (el) => {
+      if (el.nodeType === 3) {
+        return el.textContent;
+      }
+      if (el.nodeType !== 1) {
+        return null;
+      }
+      if (el.nodeName === 'BR') {
+        return '\n';
+      }
+
+      const { nodeName } = el;
+      let parent = el;
+
+      if (
+        nodeName === 'PRE' &&
+        el.childNodes[0] &&
+        el.childNodes[0].nodeName === 'CODE'
+      ) {
+        // eslint-disable-next-line prefer-destructuring
+        parent = el.childNodes[0];
+      }
+      let children = Array.from(parent.childNodes).map(deserialize).flat();
+
+      if (children.length === 0) {
+        children = [{ text: '' }];
+      }
+
+      if (el.nodeName === 'BODY') {
+        return jsx('fragment', {}, children);
+      }
+
+      if (ELEMENT_TAGS[nodeName]) {
+        const attrs = ELEMENT_TAGS[nodeName](el);
+        return jsx('element', attrs, children);
+      }
+
+      if (TEXT_TAGS[nodeName]) {
+        const attrs = TEXT_TAGS[nodeName](el);
+        return children.map((child) => jsx('text', attrs, child));
+      }
+
+      return children;
+    };
 
     function Leaf({ attributes, children, leaf }) {
       if (leaf.bold) {
@@ -66,30 +145,70 @@
         children = <u>{children}</u>;
       }
 
+      if (leaf.strikethrough) {
+        // eslint-disable-next-line no-param-reassign
+        children = <s>{children}</s>;
+      }
+
       return <span {...attributes}>{children}</span>;
     }
 
     const onChangeHandler = (value) => {
-      console.log(value);
+      setCurrentValue(value.map((row) => serialize(row)).join(''));
     };
 
-    // const renderElement = useCallback((props) => <Element {...props} />, []);
+    function CodeElement(props) {
+      return (
+        <pre {...props.attributes}>
+          <code>{props.children}</code>
+        </pre>
+      );
+    }
+
+    function DefaultElement(props) {
+      return <p {...props.attributes}>{props.children}</p>;
+    }
+
+    const renderElement = useCallback((props) => {
+      switch (props.element.type) {
+        case 'code':
+          return CodeElement(props);
+        default:
+          return DefaultElement(props);
+      }
+    });
     const renderLeaf = useCallback((props) => <Leaf {...props} />, []);
     const editor = React.useMemo(
       () => withHistory(withReact(createEditor())),
       [],
     );
 
+    const parsed = new DOMParser().parseFromString(
+      useText(valueProp),
+      'text/html',
+    );
+    const fragment = deserialize(parsed.body);
+
     return (
       <div width="100%" height="100%">
         <Slate
           editor={editor}
-          value={initialValue}
-          onChange={(value) => onChangeHandler(value)}
+          value={fragment}
+          onChange={(value) => {
+            onChangeHandler(value);
+          }}
         >
-          <Editable renderLeaf={renderLeaf} />
+          <Editable
+            renderLeaf={renderLeaf}
+            renderElement={renderElement}
+            placeholder={isDev ? useText(valueProp) : placeholder}
+            readOnly={isDev}
+          />
         </Slate>
+
+        <input type="hidden" name={name} value={currentValue} />
       </div>
     );
   })(),
+  styles: () => () => ({}),
 }))();
