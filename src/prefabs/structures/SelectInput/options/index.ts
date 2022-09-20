@@ -27,7 +27,7 @@ export const options = {
     },
   }),
 
-  label: variable('Label', { value: [''] }),
+  label: variable('Label', { value: ['Select'] }),
   value: variable('Value', { value: [''] }),
 
   optionType: buttongroup(
