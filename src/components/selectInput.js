@@ -214,12 +214,12 @@
     const isListProperty = kind === 'list' || kind === 'LIST';
 
     if (!isListProperty && !isDev) {
-      if (!modelId) {
-        message = 'No model selected';
-        valid = false;
-      }
       if (!labelProperty) {
         message = 'No label property selected';
+        valid = false;
+      }
+      if (!modelId) {
+        message = 'No model selected';
         valid = false;
       }
     }
@@ -245,10 +245,9 @@
 
         const rows = data ? data.results : [];
         return rows.map((row) => {
-          const value = row[kind === 'belongs_to' ? 'id' : labelKey];
           const itemLabel = row[labelKey];
           return (
-            <MenuItem key={row.id} value={value}>
+            <MenuItem key={row.id} value={row.id}>
               {itemLabel}
             </MenuItem>
           );

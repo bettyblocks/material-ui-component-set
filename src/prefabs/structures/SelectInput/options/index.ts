@@ -65,7 +65,7 @@ export const options = {
 
   labelProperty: property('Label for options', {
     value: '',
-    configuration: { condition: showIf('optionType', 'EQ', 'model') },
+    configuration: { condition: hideIf('optionType', 'EQ', 'property') },
   }),
 
   order: buttongroup(
