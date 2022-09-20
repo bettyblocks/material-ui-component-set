@@ -333,7 +333,7 @@
     useEffect(() => {
       let debounceInput;
 
-      if (optionType === ('model' || 'variable')) {
+      if (optionType === 'model' || optionType === 'variable') {
         if (inputValue !== debouncedInputValue) {
           debounceInput = setTimeout(() => {
             setDebouncedInputValue(inputValue);
@@ -342,7 +342,7 @@
       }
 
       return () => {
-        if (optionType === ('model' || 'variable')) {
+        if (optionType === 'model' || optionType === 'variable') {
           clearTimeout(debounceInput);
         }
       };
@@ -587,7 +587,7 @@
         return modelProperty.values.map((propertyValue) => propertyValue.value);
       }
 
-      if (optionType === ('model' || 'variable')) {
+      if (optionType === 'model' || optionType === 'variable') {
         if (!results) {
           return [];
         }
@@ -680,7 +680,7 @@
         <Autocomplete
           disableCloseOnSelect={!closeOnSelect}
           disabled={disabled}
-          {...(optionType === ('model' || 'variable') && {
+          {...((optionType === 'model' || optionType === 'variable') && {
             getOptionLabel: renderLabel,
           })}
           inputValue={inputValue}
@@ -691,7 +691,7 @@
 
             let triggerEventValue;
 
-            if (optionType === ('model' || 'variable')) {
+            if (optionType === 'model' || optionType === 'variable') {
               setDebouncedInputValue('');
               triggerEventValue =
                 newValue.length === 0
@@ -735,7 +735,7 @@
           options={currentOptions}
           renderInput={(params) => (
             <>
-              {optionType === ('model' || 'variable') && (
+              {(optionType === 'model' || optionType === 'variable') && (
                 <input
                   type="hidden"
                   key={value[valueProp.name] ? 'hasValue' : 'isEmpty'}

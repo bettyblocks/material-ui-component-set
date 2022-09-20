@@ -7,24 +7,24 @@
     const {
       actionProperty,
       actionVariableId,
-      disabled: initialIsDisabled,
-      filter,
-      variant,
-      size,
-      fullWidth,
-      margin,
-      order,
-      orderBy,
-      helperText = [''],
-      label,
-      labelProperty,
-      required,
-      hideLabel,
-      validationValueMissing = [''],
-      value: prefabValue,
       blanco,
       dataComponentAttribute = ['Select'],
-      model: modelContext,
+      disabled: initialIsDisabled,
+      filter,
+      fullWidth,
+      helperText = [''],
+      hideLabel,
+      label,
+      labelProperty,
+      margin,
+      model,
+      order,
+      orderBy,
+      required,
+      size,
+      validationValueMissing = [''],
+      value: prefabValue,
+      variant,
     } = options;
     const { env, getProperty, useText, useAllQuery } = B;
     const { TextField, MenuItem } = window.MaterialUI.Core;
@@ -46,7 +46,7 @@
 
     const {
       referenceModelId,
-      modelId = modelContext || '',
+      modelId = model,
       kind,
       values = [],
     } = modelProperty;
@@ -239,9 +239,9 @@
         if (labelProperty) {
           labelKey = B.getProperty(labelProperty).name;
         } else {
-          const model = B.getModel(referenceModelId);
-          if (model.labelPropertyId)
-            labelKey = B.getProperty(model.labelPropertyId).name;
+          const modelReference = B.getModel(referenceModelId);
+          if (modelReference.labelPropertyId)
+            labelKey = B.getProperty(modelReference.labelPropertyId).name;
         }
 
         const rows = data ? data.results : [];
