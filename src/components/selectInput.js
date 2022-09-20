@@ -24,6 +24,7 @@
       value: prefabValue,
       blanco,
       dataComponentAttribute = ['Select'],
+      model: modelContext,
     } = options;
     const { env, getProperty, useText, useAllQuery } = B;
     const { TextField, MenuItem } = window.MaterialUI.Core;
@@ -35,7 +36,7 @@
     const [disabled, setIsDisabled] = useState(initialIsDisabled);
     const mounted = useRef(false);
     const blancoText = useText(blanco);
-    const modelProperty = getProperty(actionProperty.modelProperty) || {};
+    const modelProperty = getProperty(actionProperty.modelProperty || '') || {};
     const [currentValue, setCurrentValue] = useState(useText(prefabValue));
     const labelText = useText(label);
     const defaultValueText = useText(prefabValue);
@@ -43,7 +44,12 @@
     const validationMessageText = useText(validationValueMissing);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
 
-    const { referenceModelId, modelId, kind, values = [] } = modelProperty;
+    const {
+      referenceModelId,
+      modelId = modelContext || '',
+      kind,
+      values = [],
+    } = modelProperty;
 
     B.defineFunction('Clear', () => setCurrentValue(''));
     B.defineFunction('Enable', () => setIsDisabled(false));
@@ -126,6 +132,7 @@
           ...(orderBy ? { sort: { relation: sort } } : {}),
         },
       },
+      !modelId,
     );
 
     useEffect(() => {
@@ -202,8 +209,23 @@
       }
     }, [isDev, defaultValueText]);
 
+    let valid = true;
+    let message = '';
+    const isListProperty = kind === 'list' || kind === 'LIST';
+
+    if (!isListProperty && !isDev) {
+      if (!modelId) {
+        message = 'No model selected';
+        valid = false;
+      }
+      if (!labelProperty) {
+        message = 'No label property selected';
+        valid = false;
+      }
+    }
+
     const renderOptions = () => {
-      if (kind === 'list' || kind === 'LIST') {
+      if (isListProperty) {
         return values.map(({ value: v }) => (
           <MenuItem key={v} value={v}>
             {v}
@@ -258,14 +280,14 @@
             'data-component': dataComponentAttributeValue,
           }}
           required={required}
-          disabled={disabled}
-          label={!hideLabel && labelText}
+          disabled={disabled || !valid}
+          label={!valid ? message : !hideLabel && labelText}
           error={errorState}
           margin={margin}
           helperText={helper}
         >
           {blancoText && <MenuItem value="">{blancoText}</MenuItem>}
-          {renderOptions()}
+          {valid && renderOptions()}
         </TextField>
         <input
           id={actionVariableId}
