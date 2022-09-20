@@ -10,13 +10,12 @@
       SlateHistory,
       SlateHyperscript,
     } = window.MaterialUI;
-    const { Editable, withReact, Slate } = SlateReact;
-    const { createEditor, Text } = SlateP;
-    const { withHistory } = SlateHistory;
-    const { jsx } = SlateHyperscript;
-
     const { FormHelperText } = window.MaterialUI.Core;
-
+    const { Editable, withReact, Slate, useSlate } = SlateReact;
+    const { createEditor, Editor, Text } = SlateP;
+    const { jsx } = SlateHyperscript;
+    const { withHistory } = SlateHistory;
+    const { Icon, useText, env } = B;
     const {
       actionVariableId: name,
       value: valueProp,
@@ -24,10 +23,25 @@
       disabled,
       helperText,
     } = options;
-    const { useText, env } = B;
     const isDev = env === 'dev';
 
     const [currentValue, setCurrentValue] = useState(useText(valueProp));
+    // const { FormatBold } = Icon;
+
+    const isMarkActive = (editor, format) => {
+      const marks = Editor.marks(editor);
+      return marks ? marks[format] === true : false;
+    };
+
+    const toggleMark = (editor, format) => {
+      const isActive = isMarkActive(editor, format);
+
+      if (isActive) {
+        Editor.removeMark(editor, format);
+      } else {
+        Editor.addMark(editor, format, true);
+      }
+    };
 
     const serialize = (node) => {
       if (Text.isText(node)) {
@@ -165,26 +179,6 @@
       setCurrentValue(value.map((row) => serialize(row)).join(''));
     };
 
-    function CodeElement(props) {
-      return (
-        <pre {...props.attributes}>
-          <code>{props.children}</code>
-        </pre>
-      );
-    }
-
-    function DefaultElement(props) {
-      return <p {...props.attributes}>{props.children}</p>;
-    }
-
-    const renderElement = useCallback((props) => {
-      switch (props.element.type) {
-        case 'code':
-          return CodeElement(props);
-        default:
-          return DefaultElement(props);
-      }
-    });
     const renderLeaf = useCallback((props) => <Leaf {...props} />, []);
     const editor = React.useMemo(
       () => withHistory(withReact(createEditor())),
@@ -197,9 +191,94 @@
     );
     const fragment = deserialize(parsed.body);
 
+    const onKeyDownHandler = (event) => {
+      if (!event.ctrlKey) {
+        return;
+      }
+
+      switch (event.key) {
+        case '`': {
+          event.preventDefault();
+          // CustomEditor.toggleCodeBlock(editor);
+          break;
+        }
+        case 'b': {
+          event.preventDefault();
+          toggleMark(editor, 'bold');
+          break;
+        }
+        case 'i': {
+          event.preventDefault();
+          toggleMark(editor, 'italic');
+          break;
+        }
+        case 'u': {
+          event.preventDefault();
+          toggleMark(editor, 'underline');
+          break;
+        }
+        case 's': {
+          event.preventDefault();
+          toggleMark(editor, 'strikethrough');
+          break;
+        }
+        default:
+          break;
+      }
+    };
+
+    function CodeElement({ attributes, children }) {
+      return (
+        <pre {...attributes}>
+          <code>{children}</code>
+        </pre>
+      );
+    }
+
+    function DefaultElement({ attributes, children }) {
+      return <p {...attributes}>{children}</p>;
+    }
+
+    const renderElement = useCallback((props) => {
+      switch (props.element.type) {
+        case 'code':
+          return CodeElement(props);
+        case 'paragraph':
+        default:
+          return DefaultElement(props);
+      }
+    });
+
+    const Button = React.forwardRef(({ active, icon, ...props }, ref) => (
+      <button
+        {...props}
+        ref={ref}
+        className={`${classes.toolbarButton} ${active ? 'active' : ''}`}
+        type="button"
+      >
+        <Icon name="FormatBold" />
+        <Icon name="AcUnit" />
+        {/* <span>{icon}</span> */}
+      </button>
+    ));
+
+    function MarkButton({ format, icon }) {
+      const ownEditor = useSlate();
+      return (
+        <Button
+          active={isMarkActive(ownEditor, format)}
+          onMouseDown={(event) => {
+            event.preventDefault();
+            toggleMark(ownEditor, format);
+          }}
+          icon={icon}
+        />
+      );
+    }
+
     return (
       <div className={classes.root}>
-        <div className={classes.editor}>
+        <div>
           <Slate
             editor={editor}
             value={fragment}
@@ -207,11 +286,21 @@
               onChangeHandler(value);
             }}
           >
+            <div>
+              <MarkButton format="bold" icon="FormatBold" />
+              <MarkButton format="italic" icon="FormatItalic" />
+              <MarkButton format="underline" icon="FormatItalic" />
+              <MarkButton format="strikethrough" icon="FormatItalic" />
+            </div>
             <Editable
+              className={classes.editor}
               renderLeaf={renderLeaf}
               renderElement={renderElement}
               placeholder={placeholder}
               readOnly={isDev || disabled}
+              onKeyDown={(event) => {
+                onKeyDownHandler(event);
+              }}
             />
           </Slate>
           <input type="hidden" name={name} value={currentValue} />
@@ -308,6 +397,12 @@
           ],
         },
         margin: '0 14px !important',
+      },
+      toolbarButton: {
+        padding: 20,
+        '&.active': {
+          color: '#3f51b5',
+        },
       },
     };
   },
