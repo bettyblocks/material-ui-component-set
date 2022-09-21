@@ -1,4 +1,4 @@
-import { option, showIf, variable, toggle } from '@betty-blocks/component-sdk';
+import { variable, toggle } from '@betty-blocks/component-sdk';
 import { showOn } from '../../../../utils';
 
 export const advanced = {
