@@ -7,14 +7,4 @@ export const advanced = {
     value: [],
     ...showOn('advancedSettings'),
   }),
-  actionVariableId: option('ACTION_JS_VARIABLE', {
-    label: 'Action input variable',
-    value: '',
-    configuration: { condition: showIf('actionVariableId', 'EQ', 'never') },
-  }),
-  propertyData: option('ACTION_JS_PROPERTY', {
-    label: 'propertyData',
-    value: '',
-    configuration: { condition: showIf('actionVariableId', 'EQ', 'never') },
-  }),
 };
