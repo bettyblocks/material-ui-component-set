@@ -9,13 +9,14 @@
       SlateReact,
       SlateHistory,
       SlateHyperscript,
+      Icons,
     } = window.MaterialUI;
     const { FormHelperText } = window.MaterialUI.Core;
     const { Editable, withReact, Slate, useSlate } = SlateReact;
     const { createEditor, Editor, Text } = SlateP;
     const { jsx } = SlateHyperscript;
     const { withHistory } = SlateHistory;
-    const { Icon, useText, env } = B;
+    const { useText, env } = B;
     const {
       actionVariableId: name,
       value: valueProp,
@@ -26,7 +27,6 @@
     const isDev = env === 'dev';
 
     const [currentValue, setCurrentValue] = useState(useText(valueProp));
-    // const { FormatBold } = Icon;
 
     const isMarkActive = (editor, format) => {
       const marks = Editor.marks(editor);
@@ -249,18 +249,16 @@
       }
     });
 
-    const Button = React.forwardRef(({ active, icon, ...props }, ref) => (
-      <button
-        {...props}
-        ref={ref}
-        className={`${classes.toolbarButton} ${active ? 'active' : ''}`}
-        type="button"
-      >
-        <Icon name="FormatBold" />
-        <Icon name="AcUnit" />
-        {/* <span>{icon}</span> */}
-      </button>
-    ));
+    const Button = React.forwardRef(({ active, icon, ...props }, ref) => {
+      const IconButton = Icons[icon];
+      return (
+        <IconButton
+          {...props}
+          ref={ref}
+          className={`${classes.toolbarButton} ${active ? 'active' : ''}`}
+        />
+      );
+    });
 
     function MarkButton({ format, icon }) {
       const ownEditor = useSlate();
@@ -286,11 +284,11 @@
               onChangeHandler(value);
             }}
           >
-            <div>
+            <div className={classes.toolbar}>
               <MarkButton format="bold" icon="FormatBold" />
               <MarkButton format="italic" icon="FormatItalic" />
-              <MarkButton format="underline" icon="FormatItalic" />
-              <MarkButton format="strikethrough" icon="FormatItalic" />
+              <MarkButton format="underline" icon="FormatUnderlined" />
+              <MarkButton format="strikethrough" icon="FormatStrikethrough" />
             </div>
             <Editable
               className={classes.editor}
@@ -398,8 +396,18 @@
         },
         margin: '0 14px !important',
       },
+      toolbar: {
+        backgroundColor: 'white',
+        height: '40px',
+        padding: '16px 16px 0px 8px',
+      },
       toolbarButton: {
-        padding: 20,
+        color: '#cccccc',
+        padding: '0px 8px',
+        '&:hover': {
+          color: '#4d4d4d',
+          cursor: 'pointer',
+        },
         '&.active': {
           color: '#3f51b5',
         },
