@@ -1,9 +1,4 @@
-import {
-  option,
-  showIf,
-  variable,
-  property,
-} from '@betty-blocks/component-sdk';
+import { option, showIf, variable } from '@betty-blocks/component-sdk';
 import { advanced } from '../../advanced';
 
 export const categories = [
@@ -23,9 +18,8 @@ export const cardMediaOptions = {
       dataType: 'string',
       allowedInput: [
         { name: 'Image', value: 'img' },
-        { name: 'Data', value: 'data' },
+        { name: 'Data/URL', value: 'url' },
         { name: 'Video', value: 'video' },
-        { name: 'URL', value: 'url' },
         { name: 'I-frame', value: 'iframe' },
       ],
     },
@@ -37,12 +31,6 @@ export const cardMediaOptions = {
       mediaType: 'IMAGE',
       allowedExtensions: ['image/*'],
       condition: showIf('type', 'EQ', 'img'),
-    },
-  }),
-  propertyFileSource: property('Property', {
-    value: '',
-    configuration: {
-      condition: showIf('type', 'EQ', 'data'),
     },
   }),
   videoFileSource: option('PUBLIC_FILE', {

@@ -10,7 +10,6 @@ import {
   toggle,
   color,
   ThemeColor,
-  PrefabReference,
   BeforeCreateArgs,
   variable,
   font,
@@ -21,6 +20,11 @@ import {
   PrefabInteraction,
   InteractionType,
   number,
+  PrefabComponentOption,
+  PrefabReference,
+  PrefabComponent,
+  wrapper,
+  linked,
 } from '@betty-blocks/component-sdk';
 import {
   Box as prefabBox,
@@ -51,6 +55,7 @@ import {
   Card,
 } from './structures';
 import { showOn } from '../utils';
+import { Property, PropertyStateProps } from './types';
 
 const interactions: PrefabInteraction[] = [
   {
@@ -74,7 +79,6 @@ const interactions: PrefabInteraction[] = [
 ];
 
 const attrs = {
-  name: 'Card view',
   icon: Icon.GridIcon,
   type: 'page',
   description:
@@ -104,14 +108,20 @@ const beforeCreate = ({
     Button,
     PartialSelector,
   },
-  helpers: { useModelQuery },
+  helpers: { useModelQuery, setOption },
 }: BeforeCreateArgs) => {
   const [showValidation, setShowValidation] = React.useState(false);
   const [modelId, setModelId] = React.useState('');
-  const [imageProperty, setImageProperty] = React.useState<any>('');
-  const [titleProperty, setTitleProperty] = React.useState<any>('');
-  const [subheaderProperty, setSubheaderProperty] = React.useState<any>('');
-  const [descriptionProperty, setDescriptionProperty] = React.useState<any>('');
+  const [imageProperty, setImageProperty] = React.useState<PropertyStateProps>({
+    id: '',
+  });
+  const [titleProperty, setTitleProperty] = React.useState<PropertyStateProps>({
+    id: '',
+  });
+  const [subheaderProperty, setSubheaderProperty] =
+    React.useState<PropertyStateProps>({ id: '' });
+  const [descriptionProperty, setDescriptionProperty] =
+    React.useState<PropertyStateProps>({ id: '' });
 
   const { data } = useModelQuery({
     variables: { id: modelId },
@@ -120,25 +130,6 @@ const beforeCreate = ({
   const [stepNumber, setStepNumber] = React.useState(1);
   const [headerPartialId, setHeaderPartialId] = React.useState('');
   const [footerPartialId, setFooterPartialId] = React.useState('');
-
-  const getDescendantByRef = (refValue: string, structure: any) =>
-    structure.reduce((acc: string, component: PrefabReference) => {
-      if (acc) return acc;
-      if (
-        component.type === 'COMPONENT' &&
-        // eslint-disable-next-line no-prototype-builtins
-        component.ref
-          ? Object.values(component.ref).indexOf(refValue) > -1
-          : undefined
-      ) {
-        return component;
-      }
-      if (component.type === 'PARTIAL') {
-        return acc;
-      }
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      return getDescendantByRef(refValue, component.descendants);
-    }, null);
 
   const enrichVarObj = (obj: any) => {
     const returnObject = obj;
@@ -152,6 +143,26 @@ const beforeCreate = ({
     }
     return returnObject;
   };
+
+  function treeSearch(
+    dirName: string,
+    array: PrefabReference[],
+  ): PrefabComponent | undefined {
+    // eslint-disable-next-line no-plusplus
+    for (let i = 0; i < array.length; i++) {
+      const q = array[i];
+      if (q.type === 'COMPONENT') {
+        if (q.ref && q.ref.id === dirName) {
+          return q;
+        }
+      }
+      if (q.type !== 'PARTIAL' && q.descendants && q.descendants.length) {
+        const result = treeSearch(dirName, q.descendants);
+        if (result) return result;
+      }
+    }
+    return undefined;
+  }
 
   const stepper = {
     setStep: (step: number) => {
@@ -209,7 +220,7 @@ const beforeCreate = ({
       }
       return (
         <Box direction="row">
-          <Box direction="column" basis="1/3">
+          <Box direction="column" basis="2/3">
             <Field
               label="Select model"
               error={
@@ -219,13 +230,13 @@ const beforeCreate = ({
               }
             >
               <ModelSelector
-                onChange={(value: any) => {
+                onChange={(value: string) => {
                   setShowValidation(false);
                   setModelId(value);
-                  setImageProperty('');
-                  setTitleProperty('');
-                  setSubheaderProperty('');
-                  setDescriptionProperty('');
+                  setImageProperty({ id: '' });
+                  setTitleProperty({ id: '' });
+                  setSubheaderProperty({ id: '' });
+                  setDescriptionProperty({ id: '' });
                 }}
                 value={modelId}
               />
@@ -233,7 +244,7 @@ const beforeCreate = ({
             <Field label="Image property">
               <PropertySelector
                 modelId={modelId}
-                onChange={(value: string) => {
+                onChange={(value: Property) => {
                   setImageProperty(value);
                 }}
                 value={imageProperty}
@@ -243,7 +254,7 @@ const beforeCreate = ({
             <Field label="Title property">
               <PropertySelector
                 modelId={modelId}
-                onChange={(value: string) => {
+                onChange={(value: Property) => {
                   setTitleProperty(value);
                 }}
                 value={titleProperty}
@@ -253,7 +264,7 @@ const beforeCreate = ({
             <Field label="Subheader property">
               <PropertySelector
                 modelId={modelId}
-                onChange={(value: string) => {
+                onChange={(value: Property) => {
                   setSubheaderProperty(value);
                 }}
                 value={subheaderProperty}
@@ -263,7 +274,7 @@ const beforeCreate = ({
             <Field label="Description property">
               <PropertySelector
                 modelId={modelId}
-                onChange={(value: string) => {
+                onChange={(value: Property) => {
                   setDescriptionProperty(value);
                 }}
                 value={descriptionProperty}
@@ -271,21 +282,19 @@ const beforeCreate = ({
               />
             </Field>
           </Box>
-          <Box direction="column" basis="2/3" pad={{ left: 'large' }}>
+          <Box direction="column" basis="1/3">
             <Field
               info={
                 <Text size="small" color="grey700">
-                  This is what each list item will look like on the canvas
+                  This is what each grid item will look like on the canvas
                 </Text>
               }
             >
               <Text>Preview:</Text>
             </Field>
             <Box
-              direction="row"
-              fill="horizontal"
+              fill="true"
               round="4px"
-              pad="small"
               overflow="hidden"
               border={{
                 color: '#E0E0E0',
@@ -295,7 +304,7 @@ const beforeCreate = ({
               }}
             >
               <Box
-                pad={imageProperty.id ? 'none' : 'medium'}
+                pad={imageProperty.id ? 'large' : 'medium'}
                 border={
                   imageProperty.id
                     ? {
@@ -311,43 +320,43 @@ const beforeCreate = ({
                     ? '#F0F1F5'
                     : 'url(https://assets.bettyblocks.com/771d40f1fc49403e824cdca2fe025aeb_assets/files/contemplative_lizard)'
                 }
-                width="110px"
+                flex={{ grow: '30' }}
                 justify="center"
                 align="center"
               >
-                <Text
-                  size="xsmall"
-                  textAlign="center"
-                  style={{ width: '100%' }}
-                  truncate="true"
-                >
+                <Text truncate="true">
                   {imageProperty.id ? enrichVarObj(imageProperty).name : ''}
                 </Text>
               </Box>
-              <Box flex={{ grow: '62' }} pad={{ left: 'medium' }}>
+              <Box pad="medium">
                 <Text color="#000000DE" truncate="true">
                   {titleProperty.id
                     ? enrichVarObj(titleProperty).name
                     : 'Title'}
                 </Text>
-                <Text
-                  size="small"
-                  color="#0000008A"
-                  truncate="true"
-                  margin={{ bottom: '0.5rem' }}
-                >
+                <Text size="small" color="#0000008A" truncate="true">
                   {subheaderProperty.id
                     ? enrichVarObj(subheaderProperty).name
                     : 'Subheader'}
                 </Text>
+              </Box>
+              <Box
+                pad={{
+                  top: 'none',
+                  bottom: 'medium',
+                  horizontal: 'medium',
+                }}
+              >
                 <Text size="small" truncate="true">
                   {descriptionProperty.id
                     ? enrichVarObj(descriptionProperty).name
                     : 'Description'}
                 </Text>
               </Box>
-              <Box flex={{ grow: '8' }} justify="center" align="center">
-                <Text size="large">›</Text>
+              <Box pad={{ horizontal: 'medium', vertical: 'small' }}>
+                <Text size="large" textAlign="end">
+                  ›
+                </Text>
               </Box>
             </Box>
           </Box>
@@ -361,21 +370,46 @@ const beforeCreate = ({
       }
       const newPrefab = { ...prefab };
       if (modelId) {
-        const dataList = getDescendantByRef('#datalist', newPrefab.structure);
-        dataList.options[0].value = modelId;
+        const dataList = treeSearch('#datalist', newPrefab.structure);
+        if (!dataList) throw new Error('No datalist found');
+        setOption(
+          dataList,
+          'model',
+          (originalOption: PrefabComponentOption) => ({
+            ...originalOption,
+            value: modelId,
+          }),
+        );
         if (imageProperty.id) {
-          const imageBoxStructure = getDescendantByRef(
+          const imageBoxStructure = treeSearch(
             '#GridBoxImage',
             newPrefab.structure,
           );
-          imageBoxStructure.options[15].value = [enrichVarObj(imageProperty)];
-        }
-        if (titleProperty.id) {
-          const titleStructure = getDescendantByRef(
-            '#gridSubHeader',
-            newPrefab.structure,
+          if (!imageBoxStructure)
+            throw new Error('No image box structure found');
+          setOption(
+            imageBoxStructure,
+            'backgroundUrl',
+            (originalOption: PrefabComponentOption) => ({
+              ...originalOption,
+              value: [enrichVarObj(imageProperty)],
+            }),
           );
-          titleStructure.options[2].value = [enrichVarObj(titleProperty)];
+        }
+        const titleStructure = treeSearch(
+          '#gridSubHeader',
+          newPrefab.structure,
+        );
+        if (!titleStructure) throw new Error('No title structure found');
+        if (titleProperty.id) {
+          setOption(
+            titleStructure,
+            'title',
+            (originalOption: PrefabComponentOption) => ({
+              ...originalOption,
+              value: [enrichVarObj(titleProperty)],
+            }),
+          );
           if (newPrefab.interactions) {
             newPrefab.interactions.push({
               name: 'Filter',
@@ -397,34 +431,44 @@ const beforeCreate = ({
           }
         }
         if (subheaderProperty.id) {
-          const subHeadertructure = getDescendantByRef(
-            '#gridSubHeader',
-            newPrefab.structure,
+          setOption(
+            titleStructure,
+            'subHeader',
+            (originalOption: PrefabComponentOption) => ({
+              ...originalOption,
+              value: [enrichVarObj(subheaderProperty)],
+            }),
           );
-          subHeadertructure.options[3].value = [
-            enrichVarObj(subheaderProperty),
-          ];
         }
         if (descriptionProperty.id) {
-          const descriptionStructure = getDescendantByRef(
+          const descriptionStructure = treeSearch(
             '#gridDescription',
             newPrefab.structure,
           );
-          descriptionStructure.options[0].value = [
-            enrichVarObj(descriptionProperty),
-          ];
+          if (!descriptionStructure)
+            throw new Error('No description structure found');
+          setOption(
+            descriptionStructure,
+            'content',
+            (originalOption: PrefabComponentOption) => ({
+              ...originalOption,
+              value: [enrichVarObj(descriptionProperty)],
+            }),
+          );
         }
         // #region Partial Selection
-        const prefabFooter = getDescendantByRef('#Footer', newPrefab.structure);
-        const prefabHeader = getDescendantByRef('#Header', newPrefab.structure);
-        if (headerPartialId) {
-          prefabHeader.descendants = [{ type: 'PARTIAL', partialId: '' }];
-          prefabHeader.descendants[0].partialId = headerPartialId;
+        const prefabFooter = treeSearch('#Footer', newPrefab.structure);
+        const prefabHeader = treeSearch('#Header', newPrefab.structure);
+        if (headerPartialId && prefabHeader) {
+          prefabHeader.descendants = [
+            { type: 'PARTIAL', partialId: headerPartialId },
+          ];
         }
 
-        if (footerPartialId) {
-          prefabFooter.descendants = [{ type: 'PARTIAL', partialId: '' }];
-          prefabFooter.descendants[0].partialId = footerPartialId;
+        if (footerPartialId && prefabFooter) {
+          prefabFooter.descendants = [
+            { type: 'PARTIAL', partialId: footerPartialId },
+          ];
         }
         // #endregion
         save(newPrefab);
@@ -463,25 +507,6 @@ const beforeCreate = ({
             onClose={close}
             onSkip={() => {
               const newPrefab = { ...prefab };
-              // #region Partial Selection
-              const prefabFooter = getDescendantByRef(
-                '#Footer',
-                newPrefab.structure,
-              );
-              const prefabHeader = getDescendantByRef(
-                '#Header',
-                newPrefab.structure,
-              );
-              if (headerPartialId) {
-                prefabHeader.descendants = [{ type: 'PARTIAL', partialId: '' }];
-                prefabHeader.descendants[0].partialId = headerPartialId;
-              }
-
-              if (footerPartialId) {
-                prefabFooter.descendants = [{ type: 'PARTIAL', partialId: '' }];
-                prefabFooter.descendants[0].partialId = footerPartialId;
-              }
-              // #endregion
               save(newPrefab);
             }}
             canSave={stepNumber === stepper.stepAmount}
@@ -506,7 +531,7 @@ const beforeCreate = ({
   };
   return (
     <>
-      <Header onClose={close} title="Configure list view" />
+      <Header onClose={close} title="Configure Card view" />
       {stepper.progressBar()}
       <Content>{stepper.setStep(stepNumber)}</Content>
       {stepper.buttons()}
@@ -655,10 +680,20 @@ export default makePrefab('Card view', attrs, beforeCreate, [
                                       {
                                         options: {
                                           ...appBarOptions,
-                                          logoSource: variable('Logo', {
+                                          urlFileSource: variable('Source', {
                                             value: [
                                               'https://assets.bettyblocks.com/efaf005f4d3041e5bdfdd0643d1f190d_assets/files/Your_Logo_-_W.svg',
                                             ],
+                                            configuration: {
+                                              placeholder:
+                                                'Starts with https:// or http://',
+                                              as: 'MULTILINE',
+                                              condition: showIf(
+                                                'type',
+                                                'EQ',
+                                                'url',
+                                              ),
+                                            },
                                           }),
                                           title: variable('Title', {
                                             value: [],
@@ -795,516 +830,561 @@ export default makePrefab('Card view', attrs, beforeCreate, [
                       },
                     },
                     [
-                      Row({}, [
-                        Column(
-                          {
-                            options: {
-                              ...columnOptions,
-                              columnWidth: option('CUSTOM', {
-                                label: 'Column width',
-                                value: 'flexible',
-                                configuration: {
-                                  as: 'DROPDOWN',
-                                  dataType: 'string',
-                                  allowedInput: [
-                                    {
-                                      name: 'Fit content',
-                                      value: 'fitContent',
-                                    },
-                                    { name: 'Flexible', value: 'flexible' },
-                                    { name: 'Hidden', value: 'hidden' },
-                                    { name: '1', value: '1' },
-                                    { name: '2', value: '2' },
-                                    { name: '3', value: '3' },
-                                    { name: '4', value: '4' },
-                                    { name: '5', value: '5' },
-                                    { name: '6', value: '6' },
-                                    { name: '7', value: '7' },
-                                    { name: '8', value: '8' },
-                                    { name: '9', value: '9' },
-                                    { name: '10', value: '10' },
-                                    { name: '11', value: '11' },
-                                    { name: '12', value: '12' },
-                                  ],
+                      wrapper(
+                        {
+                          label: 'Card view',
+                          options: {
+                            pageTitle: linked({
+                              label: 'Page title',
+                              value: {
+                                ref: {
+                                  componentId: '#pageTitle',
+                                  optionId: '#pageTitleContent',
                                 },
-                              }),
-                              columnWidthTabletLandscape: option('CUSTOM', {
-                                label: 'Column width (tablet landscape)',
-                                value: 'flexible',
-                                configuration: {
-                                  as: 'DROPDOWN',
-                                  dataType: 'string',
-                                  allowedInput: [
-                                    {
-                                      name: 'Fit content',
-                                      value: 'fitContent',
-                                    },
-                                    { name: 'Flexible', value: 'flexible' },
-                                    { name: 'Hidden', value: 'hidden' },
-                                    { name: '1', value: '1' },
-                                    { name: '2', value: '2' },
-                                    { name: '3', value: '3' },
-                                    { name: '4', value: '4' },
-                                    { name: '5', value: '5' },
-                                    { name: '6', value: '6' },
-                                    { name: '7', value: '7' },
-                                    { name: '8', value: '8' },
-                                    { name: '9', value: '9' },
-                                    { name: '10', value: '10' },
-                                    { name: '11', value: '11' },
-                                    { name: '12', value: '12' },
-                                  ],
-                                },
-                              }),
-                              columnWidthTabletPortrait: option('CUSTOM', {
-                                value: 'flexible',
-                                label: 'Column width (tablet portrait)',
-                                configuration: {
-                                  as: 'DROPDOWN',
-                                  dataType: 'string',
-                                  allowedInput: [
-                                    {
-                                      name: 'Fit content',
-                                      value: 'fitContent',
-                                    },
-                                    { name: 'Flexible', value: 'flexible' },
-                                    { name: 'Hidden', value: 'hidden' },
-                                    { name: '1', value: '1' },
-                                    { name: '2', value: '2' },
-                                    { name: '3', value: '3' },
-                                    { name: '4', value: '4' },
-                                    { name: '5', value: '5' },
-                                    { name: '6', value: '6' },
-                                    { name: '7', value: '7' },
-                                    { name: '8', value: '8' },
-                                    { name: '9', value: '9' },
-                                    { name: '10', value: '10' },
-                                    { name: '11', value: '11' },
-                                    { name: '12', value: '12' },
-                                  ],
-                                },
-                              }),
-                              columnWidthMobile: option('CUSTOM', {
-                                value: 'flexible',
-                                label: 'Column width (mobile)',
-                                configuration: {
-                                  as: 'DROPDOWN',
-                                  dataType: 'string',
-                                  allowedInput: [
-                                    {
-                                      name: 'Fit content',
-                                      value: 'fitContent',
-                                    },
-                                    { name: 'Flexible', value: 'flexible' },
-                                    { name: 'Hidden', value: 'hidden' },
-                                    { name: '1', value: '1' },
-                                    { name: '2', value: '2' },
-                                    { name: '3', value: '3' },
-                                    { name: '4', value: '4' },
-                                    { name: '5', value: '5' },
-                                    { name: '6', value: '6' },
-                                    { name: '7', value: '7' },
-                                    { name: '8', value: '8' },
-                                    { name: '9', value: '9' },
-                                    { name: '10', value: '10' },
-                                    { name: '11', value: '11' },
-                                    { name: '12', value: '12' },
-                                  ],
-                                },
-                              }),
-                              innerSpacing: sizes('Inner space', {
-                                value: ['L', 'L', 'L', 'L'],
-                              }),
-                            },
+                              },
+                            }),
                           },
-                          [
-                            TextPrefab(
+                        },
+                        [
+                          Row({}, [
+                            Column(
                               {
-                                ref: { id: '#titleComponent' },
                                 options: {
-                                  ...textOptions,
-                                  content: variable('Content', {
-                                    value: ['Overview'],
-                                    configuration: { as: 'MULTILINE' },
-                                  }),
-                                  type: font('Font', { value: ['Title4'] }),
-                                  outerSpacing: sizes('Outer space', {
-                                    value: ['0rem', '0rem', 'M', '0rem'],
-                                  }),
-                                },
-                              },
-                              [],
-                            ),
-                            TextInput(
-                              {
-                                ref: { id: '#searchField' },
-                                options: {
-                                  ...textInputOptions,
-                                  label: variable('Label', {
-                                    value: ['Search'],
-                                  }),
-                                  placeholder: variable('Placeholder', {
-                                    value: ['Search'],
-                                  }),
-
-                                  autoComplete: toggle('Autocomplete', {
-                                    value: true,
-                                  }),
-                                  adornmentIcon: icon('Icon', {
-                                    value: 'Search',
-                                  }),
-                                  adornmentPosition: buttongroup(
-                                    'Position',
-                                    [
-                                      ['Start', 'start'],
-                                      ['End', 'end'],
-                                    ],
-                                    {
-                                      value: 'start',
-                                      configuration: {
-                                        condition: {
-                                          type: 'HIDE',
-                                          option: 'adornmentIcon',
-                                          comparator: 'EQ',
-                                          value: '',
-                                        },
-                                      },
-                                    },
-                                  ),
-                                  styles: toggle('Styles', { value: true }),
-                                  hideLabel: toggle('Hide label', {
-                                    value: true,
-                                    ...showOn('styles'),
-                                  }),
-
-                                  placeholderColor: color('Placeholder color', {
-                                    value: ThemeColor.ACCENT_2,
-                                    ...showOn('styles'),
-                                  }),
-                                },
-                              },
-                              [],
-                            ),
-                            Row({}, [
-                              Column(
-                                {
-                                  ref: {
-                                    id: '#noresults',
-                                  },
-                                },
-                                [
-                                  TextPrefab(
-                                    {
-                                      options: {
-                                        ...textOptions,
-                                        content: variable('Content', {
-                                          value: ['No results found'],
-                                          configuration: { as: 'MULTILINE' },
-                                        }),
-                                        type: font('Font', {
-                                          value: ['Body1'],
-                                        }),
-                                      },
-                                    },
-                                    [],
-                                  ),
-                                ],
-                              ),
-                            ]),
-                            DataList(
-                              {
-                                ref: { id: '#datalist' },
-                                options: {
-                                  ...dataListOptions,
-                                  pagination: option('CUSTOM', {
-                                    label: 'Pagination',
-                                    value: 'whenNeeded',
+                                  ...columnOptions,
+                                  columnWidth: option('CUSTOM', {
+                                    label: 'Column width',
+                                    value: 'flexible',
                                     configuration: {
-                                      as: 'BUTTONGROUP',
-                                      dataType: 'string',
-                                      dependsOn: 'model',
-                                      allowedInput: [
-                                        {
-                                          name: 'Always',
-                                          value: 'always',
-                                        },
-                                        {
-                                          name: 'When needed',
-                                          value: 'whenNeeded',
-                                        },
-                                        {
-                                          name: 'Never',
-                                          value: 'never',
-                                        },
-                                      ],
-                                    },
-                                  }),
-                                  take: number('Rows per page (max 50)', {
-                                    value: '8',
-                                    configuration: {
-                                      dependsOn: 'model',
-                                    },
-                                  }),
-                                  placeholderTake: number('Placeholder rows', {
-                                    value: '8',
-                                  }),
-                                  type: option('CUSTOM', {
-                                    label: 'Type',
-                                    value: 'grid',
-                                    configuration: {
-                                      as: 'BUTTONGROUP',
+                                      as: 'DROPDOWN',
                                       dataType: 'string',
                                       allowedInput: [
                                         {
-                                          name: 'List',
-                                          value: 'list',
+                                          name: 'Fit content',
+                                          value: 'fitContent',
                                         },
-                                        {
-                                          name: 'Grid',
-                                          value: 'grid',
-                                        },
-                                        {
-                                          name: 'Inline',
-                                          value: 'inline',
-                                        },
+                                        { name: 'Flexible', value: 'flexible' },
+                                        { name: 'Hidden', value: 'hidden' },
+                                        { name: '1', value: '1' },
+                                        { name: '2', value: '2' },
+                                        { name: '3', value: '3' },
+                                        { name: '4', value: '4' },
+                                        { name: '5', value: '5' },
+                                        { name: '6', value: '6' },
+                                        { name: '7', value: '7' },
+                                        { name: '8', value: '8' },
+                                        { name: '9', value: '9' },
+                                        { name: '10', value: '10' },
+                                        { name: '11', value: '11' },
+                                        { name: '12', value: '12' },
                                       ],
                                     },
                                   }),
-                                  width: size('Min Width', {
-                                    value: '250px',
+                                  columnWidthTabletLandscape: option('CUSTOM', {
+                                    label: 'Column width (tablet landscape)',
+                                    value: 'flexible',
                                     configuration: {
-                                      as: 'UNIT',
-                                      condition: showIf('type', 'EQ', 'grid'),
+                                      as: 'DROPDOWN',
+                                      dataType: 'string',
+                                      allowedInput: [
+                                        {
+                                          name: 'Fit content',
+                                          value: 'fitContent',
+                                        },
+                                        { name: 'Flexible', value: 'flexible' },
+                                        { name: 'Hidden', value: 'hidden' },
+                                        { name: '1', value: '1' },
+                                        { name: '2', value: '2' },
+                                        { name: '3', value: '3' },
+                                        { name: '4', value: '4' },
+                                        { name: '5', value: '5' },
+                                        { name: '6', value: '6' },
+                                        { name: '7', value: '7' },
+                                        { name: '8', value: '8' },
+                                        { name: '9', value: '9' },
+                                        { name: '10', value: '10' },
+                                        { name: '11', value: '11' },
+                                        { name: '12', value: '12' },
+                                      ],
                                     },
                                   }),
-                                  outerSpacing: sizes('Outer space', {
-                                    value: ['M', '0rem', 'M', '0rem'],
+                                  columnWidthTabletPortrait: option('CUSTOM', {
+                                    value: 'flexible',
+                                    label: 'Column width (tablet portrait)',
+                                    configuration: {
+                                      as: 'DROPDOWN',
+                                      dataType: 'string',
+                                      allowedInput: [
+                                        {
+                                          name: 'Fit content',
+                                          value: 'fitContent',
+                                        },
+                                        { name: 'Flexible', value: 'flexible' },
+                                        { name: 'Hidden', value: 'hidden' },
+                                        { name: '1', value: '1' },
+                                        { name: '2', value: '2' },
+                                        { name: '3', value: '3' },
+                                        { name: '4', value: '4' },
+                                        { name: '5', value: '5' },
+                                        { name: '6', value: '6' },
+                                        { name: '7', value: '7' },
+                                        { name: '8', value: '8' },
+                                        { name: '9', value: '9' },
+                                        { name: '10', value: '10' },
+                                        { name: '11', value: '11' },
+                                        { name: '12', value: '12' },
+                                      ],
+                                    },
+                                  }),
+                                  columnWidthMobile: option('CUSTOM', {
+                                    value: 'flexible',
+                                    label: 'Column width (mobile)',
+                                    configuration: {
+                                      as: 'DROPDOWN',
+                                      dataType: 'string',
+                                      allowedInput: [
+                                        {
+                                          name: 'Fit content',
+                                          value: 'fitContent',
+                                        },
+                                        { name: 'Flexible', value: 'flexible' },
+                                        { name: 'Hidden', value: 'hidden' },
+                                        { name: '1', value: '1' },
+                                        { name: '2', value: '2' },
+                                        { name: '3', value: '3' },
+                                        { name: '4', value: '4' },
+                                        { name: '5', value: '5' },
+                                        { name: '6', value: '6' },
+                                        { name: '7', value: '7' },
+                                        { name: '8', value: '8' },
+                                        { name: '9', value: '9' },
+                                        { name: '10', value: '10' },
+                                        { name: '11', value: '11' },
+                                        { name: '12', value: '12' },
+                                      ],
+                                    },
+                                  }),
+                                  innerSpacing: sizes('Inner space', {
+                                    value: ['L', 'L', 'L', 'L'],
                                   }),
                                 },
                               },
                               [
-                                Card(
+                                TextPrefab(
                                   {
+                                    ref: { id: '#pageTitle' },
                                     options: {
-                                      ...cardOptions,
-                                      variant: option('CUSTOM', {
-                                        value: 'outlined',
-                                        label: 'Variant',
-                                        configuration: {
-                                          as: 'BUTTONGROUP',
-                                          dataType: 'string',
-                                          allowedInput: [
-                                            {
-                                              name: 'Elevation',
-                                              value: 'elevation',
-                                            },
-                                            {
-                                              name: 'Outlined',
-                                              value: 'outlined',
-                                            },
-                                          ],
+                                      ...textOptions,
+                                      content: variable('Content', {
+                                        value: ['Overview'],
+                                        configuration: { as: 'MULTILINE' },
+                                        ref: {
+                                          id: '#pageTitleContent',
                                         },
+                                      }),
+                                      type: font('Font', { value: ['Title4'] }),
+                                      outerSpacing: sizes('Outer space', {
+                                        value: ['0rem', '0rem', 'M', '0rem'],
                                       }),
                                     },
                                   },
-                                  [
-                                    prefabBox(
-                                      {
-                                        ref: {
-                                          id: '#GridBoxImage',
-                                        },
-                                        options: {
-                                          ...boxOptions,
-                                          height: size('Height', {
-                                            value: '220px',
-                                            configuration: {
-                                              as: 'UNIT',
-                                            },
-                                          }),
-                                          innerSpacing: sizes('Inner space', {
-                                            value: [
-                                              '0rem',
-                                              '0rem',
-                                              '0rem',
-                                              '0rem',
-                                            ],
-                                          }),
-                                          backgroundUrl: variable(
-                                            'Background url',
-                                            {
-                                              value: [
-                                                'https://assets.bettyblocks.com/771d40f1fc49403e824cdca2fe025aeb_assets/files/contemplative_lizard',
-                                              ],
-                                            },
-                                          ),
-                                          backgroundSize: buttongroup(
-                                            'Background size',
-                                            [
-                                              ['Initial', 'initial'],
-                                              ['Contain', 'contain'],
-                                              ['Cover', 'cover'],
-                                            ],
-                                            {
-                                              value: 'cover',
-                                              configuration: {
-                                                dataType: 'string',
-                                              },
-                                            },
-                                          ),
-                                        },
-                                      },
-                                      [],
-                                    ),
-                                    CardHeader(
-                                      {
-                                        ref: {
-                                          id: '#gridSubHeader',
-                                        },
-                                        options: {
-                                          ...cardHeaderOptions,
-                                          subHeader: variable('Sub header', {
-                                            value: ['Subheader'],
-                                          }),
-                                        },
-                                      },
-                                      [],
-                                    ),
-                                    CardContent({}, [
-                                      prefabBox(
-                                        {
-                                          options: {
-                                            ...boxOptions,
-                                            innerSpacing: sizes('Inner space', {
-                                              value: [
-                                                '0rem',
-                                                '0rem',
-                                                '0rem',
-                                                '0rem',
-                                              ],
-                                            }),
-                                          },
-                                        },
+                                  [],
+                                ),
+                                TextInput(
+                                  {
+                                    ref: { id: '#searchField' },
+                                    options: {
+                                      ...textInputOptions,
+                                      label: variable('Label', {
+                                        value: ['Search'],
+                                      }),
+                                      placeholder: variable('Placeholder', {
+                                        value: ['Search'],
+                                      }),
+
+                                      autoComplete: toggle('Autocomplete', {
+                                        value: true,
+                                      }),
+                                      adornmentIcon: icon('Icon', {
+                                        value: 'Search',
+                                      }),
+                                      adornmentPosition: buttongroup(
+                                        'Position',
                                         [
-                                          TextPrefab(
-                                            {
-                                              ref: {
-                                                id: '#gridDescription',
-                                              },
-                                              options: {
-                                                ...textOptions,
-                                                content: variable('Content', {
-                                                  value: ['Description'],
-                                                  configuration: {
-                                                    as: 'MULTILINE',
-                                                  },
-                                                }),
-                                                type: font('Font', {
-                                                  value: ['Body2'],
-                                                }),
-                                              },
-                                            },
-                                            [],
-                                          ),
+                                          ['Start', 'start'],
+                                          ['End', 'end'],
                                         ],
-                                      ),
-                                    ]),
-                                    CardActions({}, [
-                                      ButtonPrefab(
                                         {
-                                          style: {
-                                            overwrite: {
-                                              backgroundColor: {
-                                                type: 'STATIC',
-                                                value: 'transparent',
-                                              },
-                                              boxShadow: 'none',
-                                              color: {
-                                                type: 'THEME_COLOR',
-                                                value: 'primary',
-                                              },
-                                              fontFamily: 'Roboto',
-                                              fontSize: '0.875rem',
-                                              fontStyle: 'none',
-                                              fontWeight: '400',
-                                              padding: [
-                                                '0.6875rem',
-                                                '0.6875rem',
-                                              ],
-                                              textDecoration: 'none',
-                                              textTransform: 'none',
+                                          value: 'start',
+                                          configuration: {
+                                            condition: {
+                                              type: 'HIDE',
+                                              option: 'adornmentIcon',
+                                              comparator: 'EQ',
+                                              value: '',
                                             },
                                           },
+                                        },
+                                      ),
+                                      styles: toggle('Styles', { value: true }),
+                                      hideLabel: toggle('Hide label', {
+                                        value: true,
+                                        ...showOn('styles'),
+                                      }),
+
+                                      placeholderColor: color(
+                                        'Placeholder color',
+                                        {
+                                          value: ThemeColor.ACCENT_2,
+                                          ...showOn('styles'),
+                                        },
+                                      ),
+                                    },
+                                  },
+                                  [],
+                                ),
+                                Row({}, [
+                                  Column(
+                                    {
+                                      ref: {
+                                        id: '#noresults',
+                                      },
+                                    },
+                                    [
+                                      TextPrefab(
+                                        {
                                           options: {
-                                            ...buttonOptions,
-                                            buttonText: variable(
-                                              'Button text',
-                                              { value: ['View'] },
-                                            ),
-                                            icon: icon('Icon', {
-                                              value: 'ChevronRight',
-                                            }),
-                                            size: option('CUSTOM', {
-                                              value: 'medium',
-                                              label: 'Icon size',
+                                            ...textOptions,
+                                            content: variable('Content', {
+                                              value: ['No results found'],
                                               configuration: {
-                                                as: 'BUTTONGROUP',
-                                                dataType: 'string',
-                                                allowedInput: [
-                                                  {
-                                                    name: 'Small',
-                                                    value: 'small',
-                                                  },
-                                                  {
-                                                    name: 'Medium',
-                                                    value: 'medium',
-                                                  },
-                                                  {
-                                                    name: 'Large',
-                                                    value: 'large',
-                                                  },
-                                                ],
-                                                condition: hideIf(
-                                                  'icon',
-                                                  'EQ',
-                                                  'none',
-                                                ),
+                                                as: 'MULTILINE',
                                               },
                                             }),
-                                            iconPosition: option('CUSTOM', {
-                                              label: 'Icon position',
-                                              value: 'end',
-                                              configuration: {
-                                                as: 'BUTTONGROUP',
-                                                dataType: 'string',
-                                                allowedInput: [
-                                                  {
-                                                    name: 'Start',
-                                                    value: 'start',
-                                                  },
-                                                  {
-                                                    name: 'End',
-                                                    value: 'end',
-                                                  },
-                                                ],
-                                                condition: hideIf(
-                                                  'icon',
-                                                  'EQ',
-                                                  'none',
-                                                ),
-                                              },
+                                            type: font('Font', {
+                                              value: ['Body1'],
                                             }),
                                           },
                                         },
                                         [],
                                       ),
-                                    ]),
+                                    ],
+                                  ),
+                                ]),
+                                DataList(
+                                  {
+                                    ref: { id: '#datalist' },
+                                    options: {
+                                      ...dataListOptions,
+                                      pagination: option('CUSTOM', {
+                                        label: 'Pagination',
+                                        value: 'whenNeeded',
+                                        configuration: {
+                                          as: 'BUTTONGROUP',
+                                          dataType: 'string',
+                                          dependsOn: 'model',
+                                          allowedInput: [
+                                            {
+                                              name: 'Always',
+                                              value: 'always',
+                                            },
+                                            {
+                                              name: 'When needed',
+                                              value: 'whenNeeded',
+                                            },
+                                            {
+                                              name: 'Never',
+                                              value: 'never',
+                                            },
+                                          ],
+                                        },
+                                      }),
+                                      take: number('Rows per page (max 50)', {
+                                        value: '8',
+                                        configuration: {
+                                          dependsOn: 'model',
+                                        },
+                                      }),
+                                      placeholderTake: number(
+                                        'Placeholder rows',
+                                        {
+                                          value: '8',
+                                        },
+                                      ),
+                                      type: option('CUSTOM', {
+                                        label: 'Type',
+                                        value: 'grid',
+                                        configuration: {
+                                          as: 'BUTTONGROUP',
+                                          dataType: 'string',
+                                          allowedInput: [
+                                            {
+                                              name: 'List',
+                                              value: 'list',
+                                            },
+                                            {
+                                              name: 'Grid',
+                                              value: 'grid',
+                                            },
+                                            {
+                                              name: 'Inline',
+                                              value: 'inline',
+                                            },
+                                          ],
+                                        },
+                                      }),
+                                      width: size('Min Width', {
+                                        value: '250px',
+                                        configuration: {
+                                          as: 'UNIT',
+                                          condition: showIf(
+                                            'type',
+                                            'EQ',
+                                            'grid',
+                                          ),
+                                        },
+                                      }),
+                                      outerSpacing: sizes('Outer space', {
+                                        value: ['M', '0rem', 'M', '0rem'],
+                                      }),
+                                    },
+                                  },
+                                  [
+                                    Card(
+                                      {
+                                        options: {
+                                          ...cardOptions,
+                                          variant: option('CUSTOM', {
+                                            value: 'outlined',
+                                            label: 'Variant',
+                                            configuration: {
+                                              as: 'BUTTONGROUP',
+                                              dataType: 'string',
+                                              allowedInput: [
+                                                {
+                                                  name: 'Elevation',
+                                                  value: 'elevation',
+                                                },
+                                                {
+                                                  name: 'Outlined',
+                                                  value: 'outlined',
+                                                },
+                                              ],
+                                            },
+                                          }),
+                                        },
+                                      },
+                                      [
+                                        prefabBox(
+                                          {
+                                            ref: {
+                                              id: '#GridBoxImage',
+                                            },
+                                            options: {
+                                              ...boxOptions,
+                                              height: size('Height', {
+                                                value: '220px',
+                                                configuration: {
+                                                  as: 'UNIT',
+                                                },
+                                              }),
+                                              innerSpacing: sizes(
+                                                'Inner space',
+                                                {
+                                                  value: [
+                                                    '0rem',
+                                                    '0rem',
+                                                    '0rem',
+                                                    '0rem',
+                                                  ],
+                                                },
+                                              ),
+                                              backgroundUrl: variable(
+                                                'Background url',
+                                                {
+                                                  value: [
+                                                    'https://assets.bettyblocks.com/771d40f1fc49403e824cdca2fe025aeb_assets/files/contemplative_lizard',
+                                                  ],
+                                                },
+                                              ),
+                                              backgroundSize: buttongroup(
+                                                'Background size',
+                                                [
+                                                  ['Initial', 'initial'],
+                                                  ['Contain', 'contain'],
+                                                  ['Cover', 'cover'],
+                                                ],
+                                                {
+                                                  value: 'cover',
+                                                  configuration: {
+                                                    dataType: 'string',
+                                                  },
+                                                },
+                                              ),
+                                            },
+                                          },
+                                          [],
+                                        ),
+                                        CardHeader(
+                                          {
+                                            ref: {
+                                              id: '#gridSubHeader',
+                                            },
+                                            options: {
+                                              ...cardHeaderOptions,
+                                              subHeader: variable(
+                                                'Sub header',
+                                                {
+                                                  value: ['Subheader'],
+                                                },
+                                              ),
+                                            },
+                                          },
+                                          [],
+                                        ),
+                                        CardContent({}, [
+                                          prefabBox(
+                                            {
+                                              options: {
+                                                ...boxOptions,
+                                                innerSpacing: sizes(
+                                                  'Inner space',
+                                                  {
+                                                    value: [
+                                                      '0rem',
+                                                      '0rem',
+                                                      '0rem',
+                                                      '0rem',
+                                                    ],
+                                                  },
+                                                ),
+                                              },
+                                            },
+                                            [
+                                              TextPrefab(
+                                                {
+                                                  ref: {
+                                                    id: '#gridDescription',
+                                                  },
+                                                  options: {
+                                                    ...textOptions,
+                                                    content: variable(
+                                                      'Content',
+                                                      {
+                                                        value: ['Description'],
+                                                        configuration: {
+                                                          as: 'MULTILINE',
+                                                        },
+                                                      },
+                                                    ),
+                                                    type: font('Font', {
+                                                      value: ['Body2'],
+                                                    }),
+                                                  },
+                                                },
+                                                [],
+                                              ),
+                                            ],
+                                          ),
+                                        ]),
+                                        CardActions({}, [
+                                          ButtonPrefab(
+                                            {
+                                              style: {
+                                                overwrite: {
+                                                  backgroundColor: {
+                                                    type: 'STATIC',
+                                                    value: 'transparent',
+                                                  },
+                                                  boxShadow: 'none',
+                                                  color: {
+                                                    type: 'THEME_COLOR',
+                                                    value: 'primary',
+                                                  },
+                                                  fontFamily: 'Roboto',
+                                                  fontSize: '0.875rem',
+                                                  fontStyle: 'none',
+                                                  fontWeight: '400',
+                                                  padding: [
+                                                    '0.6875rem',
+                                                    '0.6875rem',
+                                                  ],
+                                                  textDecoration: 'none',
+                                                  textTransform: 'none',
+                                                },
+                                              },
+                                              options: {
+                                                ...buttonOptions,
+                                                buttonText: variable(
+                                                  'Button text',
+                                                  { value: ['View'] },
+                                                ),
+                                                icon: icon('Icon', {
+                                                  value: 'ChevronRight',
+                                                }),
+                                                size: option('CUSTOM', {
+                                                  value: 'medium',
+                                                  label: 'Icon size',
+                                                  configuration: {
+                                                    as: 'BUTTONGROUP',
+                                                    dataType: 'string',
+                                                    allowedInput: [
+                                                      {
+                                                        name: 'Small',
+                                                        value: 'small',
+                                                      },
+                                                      {
+                                                        name: 'Medium',
+                                                        value: 'medium',
+                                                      },
+                                                      {
+                                                        name: 'Large',
+                                                        value: 'large',
+                                                      },
+                                                    ],
+                                                    condition: hideIf(
+                                                      'icon',
+                                                      'EQ',
+                                                      'none',
+                                                    ),
+                                                  },
+                                                }),
+                                                iconPosition: option('CUSTOM', {
+                                                  label: 'Icon position',
+                                                  value: 'end',
+                                                  configuration: {
+                                                    as: 'BUTTONGROUP',
+                                                    dataType: 'string',
+                                                    allowedInput: [
+                                                      {
+                                                        name: 'Start',
+                                                        value: 'start',
+                                                      },
+                                                      {
+                                                        name: 'End',
+                                                        value: 'end',
+                                                      },
+                                                    ],
+                                                    condition: hideIf(
+                                                      'icon',
+                                                      'EQ',
+                                                      'none',
+                                                    ),
+                                                  },
+                                                }),
+                                              },
+                                            },
+                                            [],
+                                          ),
+                                        ]),
+                                      ],
+                                    ),
                                   ],
                                 ),
                               ],
                             ),
-                          ],
-                        ),
-                      ]),
+                          ]),
+                        ],
+                      ),
                     ],
                   ),
                   prefabBox(

@@ -1,10 +1,7 @@
 import { component, PrefabReference } from '@betty-blocks/component-sdk';
 import { updateOption } from '../../../utils';
-import { deleteActionVariable } from '../../hooks/deleteActionVariable';
 import { Configuration } from '../Configuration';
 import { options as defaults } from './options';
-
-const $afterDelete = [deleteActionVariable];
 
 export const AutocompleteInput = (
   config: Configuration,
@@ -31,7 +28,7 @@ export const AutocompleteInput = (
 
   return component(
     'AutocompleteInput',
-    { options, $afterDelete, style, ref, label },
+    { options, style, ref, label },
     descendants,
   );
 };

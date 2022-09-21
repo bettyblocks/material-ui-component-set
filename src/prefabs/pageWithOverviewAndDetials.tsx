@@ -17,6 +17,7 @@ import {
   PrefabComponent,
   PrefabInteraction,
   PrefabComponentOption,
+  BeforeCreateArgs,
 } from '@betty-blocks/component-sdk';
 import {
   Box as prefabBox,
@@ -39,6 +40,7 @@ import {
   Paper,
   paperOptions,
 } from './structures';
+import { IdPropertyProps, ModelQuery, Properties } from './types';
 
 const interactions = [
   {
@@ -1079,6 +1081,9 @@ const prefabStructure: PrefabComponent[] = [
                                                 },
                                               ),
                                             },
+                                            ref: {
+                                              id: '#oddDetailColumn',
+                                            },
                                           },
                                           [],
                                         ),
@@ -1260,6 +1265,9 @@ const prefabStructure: PrefabComponent[] = [
                                                 },
                                               ),
                                             },
+                                            ref: {
+                                              id: '#evenDetailColumn',
+                                            },
                                           },
                                           [],
                                         ),
@@ -1383,46 +1391,51 @@ const beforeCreate = ({
     PartialSelector,
   },
   helpers: { useModelQuery, setOption, cloneStructure },
-}: any) => {
+}: BeforeCreateArgs) => {
   const [modelId, setModelId] = React.useState('');
-  const [properties, setProperties] = React.useState([]);
-  const [detailProperties, setDetailProperties] = React.useState([]);
+  const [properties, setProperties] = React.useState<Properties[]>([]);
+  const [detailProperties, setDetailProperties] = React.useState<Properties[]>(
+    [],
+  );
   const [modelValidation, setModelValidation] = React.useState(false);
   const [propertiesValidation, setPropertiesValidation] = React.useState(false);
   const [detailsValidation, setDetailsValidation] = React.useState(false);
   const [stepNumber, setStepNumber] = React.useState(1);
   const [headerPartialId, setHeaderPartialId] = React.useState('');
   const [footerPartialId, setFooterPartialId] = React.useState('');
-  const [idProperty, setIdProperty] = React.useState<any>();
+  const [idProperty, setIdProperty] = React.useState<IdPropertyProps>();
 
   const { data } = useModelQuery({
     variables: { id: modelId },
     skip: !modelId,
-    onCompleted: (result: any) => {
+    onCompleted: ({ model: dataModel }: ModelQuery) => {
       setIdProperty(
-        result.model.properties.find(({ name }: any) => name === 'id'),
+        dataModel.properties.find(
+          ({ name }: { name: string }) => name === 'id',
+        ),
       );
     },
   });
 
-  const getDescendantByRef = (refValue: string, structure: any) =>
-    structure.reduce((acc: string, component: PrefabReference) => {
-      if (acc) return acc;
-      if (
-        component.type === 'COMPONENT' &&
-        // eslint-disable-next-line no-prototype-builtins
-        component.ref
-          ? Object.values(component.ref).indexOf(refValue) > -1
-          : undefined
-      ) {
-        return component;
+  function treeSearch(
+    dirName: string,
+    array: PrefabReference[],
+  ): PrefabComponent | undefined {
+    // eslint-disable-next-line no-plusplus
+    for (let i = 0; i < array.length; i++) {
+      const q = array[i];
+      if (q.type === 'COMPONENT') {
+        if (q.ref && q.ref.id === dirName) {
+          return q;
+        }
       }
-      if (component.type === 'PARTIAL') {
-        return acc;
+      if (q.type !== 'PARTIAL' && q.descendants && q.descendants.length) {
+        const result = treeSearch(dirName, q.descendants);
+        if (result) return result;
       }
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      return getDescendantByRef(refValue, component.descendants);
-    }, null);
+    }
+    return undefined;
+  }
 
   const enrichVarObj = (obj: any) => {
     const returnObject = obj;
@@ -1458,7 +1471,7 @@ const beforeCreate = ({
               <Field label="TOP MENU PARTIAL">
                 <PartialSelector
                   label="Select a partial"
-                  onChange={(headerId: any) => {
+                  onChange={(headerId: string) => {
                     setHeaderPartialId(headerId);
                   }}
                   preSelected="Top menu"
@@ -1475,7 +1488,7 @@ const beforeCreate = ({
               <Field label="FOOTER PARTIAL">
                 <PartialSelector
                   label="Select a partial"
-                  onChange={(footerId: any) => {
+                  onChange={(footerId: string) => {
                     setFooterPartialId(footerId);
                   }}
                   preSelected="Footer"
@@ -1503,7 +1516,7 @@ const beforeCreate = ({
               }
             >
               <ModelSelector
-                onChange={(value: any) => {
+                onChange={(value: string) => {
                   setModelValidation(false);
                   setModelId(value);
                   setPropertiesValidation(false);
@@ -1534,7 +1547,7 @@ const beforeCreate = ({
                   'SIGNED_PDF',
                   'SUM',
                 ]}
-                onChange={(value: any) => {
+                onChange={(value: Properties[]) => {
                   setPropertiesValidation(!value.length);
                   setProperties(value);
                 }}
@@ -1558,7 +1571,7 @@ const beforeCreate = ({
           <PropertiesSelector
             modelId={modelId}
             value={detailProperties}
-            onChange={(value: any) => {
+            onChange={(value: Properties[]) => {
               setDetailsValidation(!value.length);
               setDetailProperties(value);
             }}
@@ -1575,152 +1588,161 @@ const beforeCreate = ({
       }
       const newPrefab = { ...originalPrefab };
 
-      const dataTable = getDescendantByRef('#dataTable', newPrefab.structure);
-      setOption(dataTable, 'title', (originalOption: any) => {
-        return {
+      const dataTable = treeSearch('#dataTable', newPrefab.structure);
+      if (!dataTable) throw new Error('No datatable component found');
+      setOption(
+        dataTable,
+        'title',
+        (originalOption: PrefabComponentOption) => ({
           ...originalOption,
           value: [`${data?.model.name}s`],
-        };
-      });
-      setOption(dataTable, 'model', (originalOption: any) => {
-        return {
-          ...originalOption,
-          value: modelId,
-        };
-      });
-
-      const dataContainer = getDescendantByRef(
-        '#dataContainer',
-        newPrefab.structure,
+        }),
       );
-      setOption(dataContainer, 'model', (originalOption: any) => {
+      setOption(dataTable, 'model', (originalOption: PrefabComponentOption) => {
         return {
           ...originalOption,
           value: modelId,
         };
       });
 
-      properties.forEach(
-        (property: {
-          defaultValue: null;
-          id: string[];
-          kind: string;
-          labonSael: string;
-          type: string;
-          format: string;
-        }) => {
-          let newProperty = property;
-          const inheritFormatKinds = [
-            'DATE',
-            'DATE_EXPRESSION',
-            'DATE_TIME',
-            'DATE_TIME_EXPRESSION',
-            'DECIMAL',
-            'DECIMAL_EXPRESSION',
-            'INTEGER',
-            'INTEGER_EXPRESSION',
-            'PRICE',
-            'PRICE_EXPRESSION',
-            'TIME',
-          ];
-          if (inheritFormatKinds.includes(property.kind)) {
-            newProperty = {
-              ...property,
-              format: 'INHERIT',
-            };
-          }
+      const dataContainer = treeSearch('#dataContainer', newPrefab.structure);
+      if (!dataContainer) throw new Error('No datacontainer component found');
+      setOption(
+        dataContainer,
+        'model',
+        (originalOption: PrefabComponentOption) => {
+          return {
+            ...originalOption,
+            value: modelId,
+          };
+        },
+      );
 
-          const dataTableColumnStructure = cloneStructure('Datatable Column');
-          if (dataTableColumnStructure.type !== 'COMPONENT') {
-            throw new Error(
-              `expected component prefab, found ${dataTableColumnStructure.type}`,
-            );
-          }
+      properties.forEach((property) => {
+        let newProperty = property;
+        const inheritFormatKinds = [
+          'DATE',
+          'DATE_EXPRESSION',
+          'DATE_TIME',
+          'DATE_TIME_EXPRESSION',
+          'DECIMAL',
+          'DECIMAL_EXPRESSION',
+          'INTEGER',
+          'INTEGER_EXPRESSION',
+          'PRICE',
+          'PRICE_EXPRESSION',
+          'TIME',
+        ];
+        if (inheritFormatKinds.includes(property.kind)) {
+          newProperty = {
+            ...property,
+            format: 'INHERIT',
+          };
+        }
 
-          setOption(
-            dataTableColumnStructure,
-            'property',
-            (originalOption: any) => {
-              return {
-                ...originalOption,
-                value: newProperty,
-              };
-            },
+        const dataTableColumnStructure = cloneStructure('Datatable Column');
+        if (dataTableColumnStructure.type !== 'COMPONENT') {
+          throw new Error(
+            `expected component prefab, found ${dataTableColumnStructure.type}`,
           );
-          setOption(dataTableColumnStructure, 'type', (originalOption: any) => {
+        }
+
+        setOption(
+          dataTableColumnStructure,
+          'property',
+          (originalOption: PrefabComponentOption) => {
+            return {
+              ...originalOption,
+              value: newProperty.id,
+            };
+          },
+        );
+        setOption(
+          dataTableColumnStructure,
+          'type',
+          (originalOption: PrefabComponentOption) => {
             return {
               ...originalOption,
               value: 'Title6',
             };
-          });
-          setOption(
-            dataTableColumnStructure,
-            'sortable',
-            (originalOption: any) => {
-              return {
-                ...originalOption,
-                value: true,
-              };
-            },
-          );
-          if (property.kind === 'IMAGE') {
-            const media = cloneStructure('Media');
-            if (media.type !== 'COMPONENT') {
-              throw new Error(`expected component prefab, found ${media.type}`);
-            }
-            setOption(media, 'type', (opt: PrefabComponentOption) => ({
-              ...opt,
-              value: 'data',
-            }));
-            setOption(
-              media,
-              'propertyFileSource',
-              (opt: PrefabComponentOption) => ({
-                ...opt,
-                value: property,
-              }),
-            );
-            dataTableColumnStructure.descendants.push(media);
+          },
+        );
+        setOption(
+          dataTableColumnStructure,
+          'sortable',
+          (originalOption: PrefabComponentOption) => {
+            return {
+              ...originalOption,
+              value: true,
+            };
+          },
+        );
+        if (property.kind === 'IMAGE') {
+          const media = cloneStructure('Media');
+          if (media.type !== 'COMPONENT') {
+            throw new Error(`expected component prefab, found ${media.type}`);
           }
-          dataTable.descendants.push(dataTableColumnStructure);
-        },
-      );
+          setOption(media, 'type', (originalOption: PrefabComponentOption) => ({
+            ...originalOption,
+            value: 'data',
+          }));
+          setOption(
+            media,
+            'propertyFileSource',
+            (originalOption: PrefabComponentOption) => ({
+              ...originalOption,
+              value: property.id,
+            }),
+          );
+          dataTableColumnStructure.descendants.push(media);
+        }
+        dataTable.descendants.push(dataTableColumnStructure);
+      });
 
-      const detailRow = getDescendantByRef('#detailRow', newPrefab.structure);
-      const newDetail = (descIndex: any, detail: any) => {
+      const detailRow = treeSearch('#detailRow', newPrefab.structure);
+      if (!detailRow) throw new Error('No detail row component found');
+      const newDetail = (isOddColumn: boolean, detail: Properties) => {
         const column = cloneStructure('1 Column');
         if (column.type !== 'COMPONENT') {
           throw new Error(`expected component prefab, found ${column.type}`);
         }
-        setOption(column, 'maxRowWidth', (originalOption: any) => {
-          return {
-            ...originalOption,
-            value: 'XL',
-          };
-        });
+        setOption(
+          column,
+          'maxRowWidth',
+          (originalOption: PrefabComponentOption) => {
+            return {
+              ...originalOption,
+              value: 'XL',
+            };
+          },
+        );
 
         const label = cloneStructure('Text');
         if (label.type !== 'COMPONENT') {
           throw new Error(`expected component prefab, found ${label.type}`);
         }
-        setOption(label, 'content', (originalOption: any) => {
+        setOption(label, 'content', (originalOption: PrefabComponentOption) => {
           return {
             ...originalOption,
             value: [`${detail.label}`],
           };
         });
-        setOption(label, 'type', (originalOption: any) => {
+        setOption(label, 'type', (originalOption: PrefabComponentOption) => {
           return {
             ...originalOption,
             value: ['Title6'],
           };
         });
-        setOption(label, 'fontWeight', (originalOption: any) => {
-          return {
-            ...originalOption,
-            value: '500',
-          };
-        });
+        setOption(
+          label,
+          'fontWeight',
+          (originalOption: PrefabComponentOption) => {
+            return {
+              ...originalOption,
+              value: '500',
+            };
+          },
+        );
         if (column.descendants[0].type !== 'COMPONENT') {
           throw new Error(`expected component prefab, found ${column.type}`);
         }
@@ -1731,16 +1753,16 @@ const beforeCreate = ({
           if (media.type !== 'COMPONENT') {
             throw new Error(`expected component prefab, found ${media.type}`);
           }
-          setOption(media, 'type', (opt: PrefabComponentOption) => ({
-            ...opt,
+          setOption(media, 'type', (originalOption: PrefabComponentOption) => ({
+            ...originalOption,
             value: 'data',
           }));
           setOption(
             media,
             'propertyFileSource',
-            (opt: PrefabComponentOption) => ({
-              ...opt,
-              value: detail,
+            (originalOption: PrefabComponentOption) => ({
+              ...originalOption,
+              value: detail.id,
             }),
           );
           column.descendants[0].descendants.push(media);
@@ -1751,27 +1773,33 @@ const beforeCreate = ({
               `expected component prefab, found ${valueText.type}`,
             );
           }
-          setOption(valueText, 'content', (originalOption: any) => {
-            return {
-              ...originalOption,
-              value: [enrichVarObj(detail)],
-            };
-          });
+          setOption(
+            valueText,
+            'content',
+            (originalOption: PrefabComponentOption) => {
+              return {
+                ...originalOption,
+                value: [enrichVarObj(detail)],
+              };
+            },
+          );
           column.descendants[0].descendants.push(valueText);
         }
-        return detailRow.descendants[descIndex].descendants.push(column);
+
+        const detailColumn = isOddColumn
+          ? treeSearch('#oddDetailColumn', newPrefab.structure)
+          : treeSearch('#evenDetailColumn', newPrefab.structure);
+        if (!detailColumn) throw new Error('No detail column component found');
+
+        return detailColumn.descendants.push(column);
       };
 
       detailProperties.forEach((detail, index) => {
-        const isOdd = (num: number) => num % 2;
-        if (isOdd(index)) {
-          newDetail(2, detail);
-        } else {
-          newDetail(1, detail);
-        }
+        const isEven = (num: number) => num % 2 === 0;
+        newDetail(isEven(index), detail);
       });
 
-      if (idProperty) {
+      if (idProperty && newPrefab.interactions) {
         newPrefab.interactions.push({
           name: 'setCurrentRecord',
           sourceEvent: 'OnRowClick',
@@ -1787,19 +1815,21 @@ const beforeCreate = ({
             targetComponentId: '#dataContainer',
           },
           type: 'Global',
-        });
+        } as PrefabInteraction);
       }
 
-      const prefabFooter = getDescendantByRef('#Footer', newPrefab.structure);
-      const prefabHeader = getDescendantByRef('#Header', newPrefab.structure);
-      if (headerPartialId) {
-        prefabHeader.descendants = [{ type: 'PARTIAL', partialId: '' }];
-        prefabHeader.descendants[0].partialId = headerPartialId;
+      const prefabFooter = treeSearch('#Footer', newPrefab.structure);
+      const prefabHeader = treeSearch('#Header', newPrefab.structure);
+      if (headerPartialId && prefabHeader) {
+        prefabHeader.descendants = [
+          { type: 'PARTIAL', partialId: headerPartialId },
+        ];
       }
 
-      if (footerPartialId) {
-        prefabFooter.descendants = [{ type: 'PARTIAL', partialId: '' }];
-        prefabFooter.descendants[0].partialId = footerPartialId;
+      if (footerPartialId && prefabFooter) {
+        prefabFooter.descendants = [
+          { type: 'PARTIAL', partialId: footerPartialId },
+        ];
       }
 
       save(newPrefab);
