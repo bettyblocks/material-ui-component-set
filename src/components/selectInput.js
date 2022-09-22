@@ -86,7 +86,7 @@
 
     const orderByArray = [orderBy].flat();
     const sort =
-      !isDev && orderBy
+      !isDev && orderBy.id
         ? orderByArray.reduceRight((acc, orderByProperty, index) => {
             const prop = getProperty(orderByProperty);
             return index === orderByArray.length - 1
@@ -129,7 +129,7 @@
       {
         filter: completeFilter,
         variables: {
-          ...(orderBy ? { sort: { relation: sort } } : {}),
+          ...(orderBy.id ? { sort: { relation: sort } } : {}),
         },
       },
       !modelId,
