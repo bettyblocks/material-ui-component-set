@@ -177,6 +177,7 @@
 
     const onChangeHandler = (value) => {
       setCurrentValue(value.map((row) => serialize(row)).join(''));
+      B.triggerEvent('onChange', currentValue);
     };
 
     const renderLeaf = useCallback((props) => <Leaf {...props} />, []);
