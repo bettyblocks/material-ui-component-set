@@ -37,5 +37,9 @@ const attributes = {
 };
 
 export default prefab('Multi Autocomplete Beta', attributes, beforeCreate, [
-  MultiAutocomplete({ label: 'Autocomplete', type: 'text' }),
+  MultiAutocomplete({
+    label: 'Autocomplete',
+    inputLabel: 'Multi Autocomplete',
+    type: 'text',
+  }),
 ]);
