@@ -32,7 +32,9 @@
     } = options;
     const isDev = env === 'dev';
 
-    const [currentValue, setCurrentValue] = useState(useText(valueProp));
+    const [currentValue, setCurrentValue] = useState(
+      useText(valueProp, { rawValue: true }),
+    );
     const labelText = useText(label);
 
     const isMarkActive = (editor, format) => {
