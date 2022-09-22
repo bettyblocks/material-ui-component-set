@@ -39,7 +39,7 @@ const attributes = {
 export default prefab('Rich Text Field Beta', attributes, beforeCreate, [
   RichTextInput({
     label: 'Rich Text field Beta',
-    inputLabel: 'Textfield',
+    inputLabel: 'Rich Text field',
     type: 'text',
   }),
 ]);

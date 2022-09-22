@@ -23,10 +23,17 @@
       placeholder,
       disabled,
       helperText,
+      label,
+      hideLabel,
+      showBold,
+      showItalic,
+      showUnderlined,
+      showStrikethrough,
     } = options;
     const isDev = env === 'dev';
 
     const [currentValue, setCurrentValue] = useState(useText(valueProp));
+    const labelText = useText(label);
 
     const isMarkActive = (editor, format) => {
       const marks = Editor.marks(editor);
@@ -100,6 +107,10 @@
       B: () => ({ bold: true }),
       U: () => ({ underline: true }),
     };
+
+    const IS_MAC =
+      typeof window !== 'undefined' &&
+      /Mac|iPod|iPhone|iPad/.test(window.navigator.platform);
 
     const deserialize = (el) => {
       if (el.nodeType === 3) {
@@ -193,34 +204,33 @@
     const fragment = deserialize(parsed.body);
 
     const onKeyDownHandler = (event) => {
-      if (!event.ctrlKey) {
+      if (IS_MAC) {
+        if (!event.metaKey) {
+          return;
+        }
+      } else if (!event.ctrlKey) {
         return;
       }
 
+      if (event.shiftKey && event.key === 's') {
+        event.preventDefault();
+        if (showStrikethrough) toggleMark(editor, 'strikethrough');
+      }
+
       switch (event.key) {
-        case '`': {
-          event.preventDefault();
-          // CustomEditor.toggleCodeBlock(editor);
-          break;
-        }
         case 'b': {
           event.preventDefault();
-          toggleMark(editor, 'bold');
+          if (showBold) toggleMark(editor, 'bold');
           break;
         }
         case 'i': {
           event.preventDefault();
-          toggleMark(editor, 'italic');
+          if (showItalic) toggleMark(editor, 'italic');
           break;
         }
         case 'u': {
           event.preventDefault();
-          toggleMark(editor, 'underline');
-          break;
-        }
-        case 's': {
-          event.preventDefault();
-          toggleMark(editor, 'strikethrough');
+          if (showUnderlined) toggleMark(editor, 'underline');
           break;
         }
         default:
@@ -277,6 +287,9 @@
 
     return (
       <div className={classes.root}>
+        {labelText && !hideLabel && (
+          <FormHelperText className={classes.label}>{labelText}</FormHelperText>
+        )}
         <div className={classes.editorWrapper}>
           <Slate
             editor={editor}
@@ -286,10 +299,14 @@
             }}
           >
             <div className={classes.toolbar}>
-              <MarkButton format="bold" icon="FormatBold" />
-              <MarkButton format="italic" icon="FormatItalic" />
-              <MarkButton format="underline" icon="FormatUnderlined" />
-              <MarkButton format="strikethrough" icon="StrikethroughS" />
+              {showBold && <MarkButton format="bold" icon="FormatBold" />}
+              {showItalic && <MarkButton format="italic" icon="FormatItalic" />}
+              {showUnderlined && (
+                <MarkButton format="underline" icon="FormatUnderlined" />
+              )}
+              {showStrikethrough && (
+                <MarkButton format="strikethrough" icon="StrikethroughS" />
+              )}
             </div>
             <Editable
               className={classes.editor}
@@ -361,6 +378,14 @@
         width: ({ options: { width } }) => width,
         height: ({ options: { height } }) => height,
       },
+      label: {
+        color: ({ options: { labelColor } }) => [
+          style.getColor(labelColor),
+          '!important',
+        ],
+        whiteSpace: 'nowrap',
+        margin: '0 14px !important',
+      },
       editor: {
         padding: '0.5px 14px',
         color: isDev && 'rgb(0, 0, 0)',
@@ -384,6 +409,7 @@
       toolbarButton: {
         color: ({ options: { buttonColor } }) => [style.getColor(buttonColor)],
         padding: '0px 8px',
+        cursor: 'pointer',
         '&:hover': {
           color: ({ options: { buttonHoverColor } }) => [
             style.getColor(buttonHoverColor),
