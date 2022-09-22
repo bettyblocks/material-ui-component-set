@@ -21,7 +21,7 @@ export const styles = {
     },
   }),
   outerSpacing: sizes('Outer space', {
-    value: ['0rem', '0rem', '0rem', '0rem'],
+    value: ['M', '0rem', 'S', '0rem'],
   }),
 
   styles: toggle('Styles'),
@@ -43,6 +43,21 @@ export const styles = {
   }),
 
   borderFocusColor: color('Border color (focus)', {
+    value: ThemeColor.PRIMARY,
+    ...showOn('styles'),
+  }),
+
+  buttonColor: color('Button color', {
+    value: ThemeColor.ACCENT_1,
+    ...showOn('styles'),
+  }),
+
+  buttonHoverColor: color('Button color (hover)', {
+    value: ThemeColor.BLACK,
+    ...showOn('styles'),
+  }),
+
+  buttonActiveColor: color('Button color (active)', {
     value: ThemeColor.PRIMARY,
     ...showOn('styles'),
   }),

@@ -276,7 +276,7 @@
 
     return (
       <div className={classes.root}>
-        <div>
+        <div className={classes.editorWrapper}>
           <Slate
             editor={editor}
             value={fragment}
@@ -288,7 +288,7 @@
               <MarkButton format="bold" icon="FormatBold" />
               <MarkButton format="italic" icon="FormatItalic" />
               <MarkButton format="underline" icon="FormatUnderlined" />
-              <MarkButton format="strikethrough" icon="FormatStrikethrough" />
+              <MarkButton format="strikethrough" icon="StrikethroughS" />
             </div>
             <Editable
               className={classes.editor}
@@ -361,27 +361,8 @@
         height: ({ options: { height } }) => height,
       },
       editor: {
-        pointerEvents: isDev && 'none',
-        border: '1px solid',
-        borderRadius: '4px',
         padding: '0.5px 14px',
         color: isDev && 'rgb(0, 0, 0)',
-        borderColor: ({ options: { borderColor } }) => [
-          style.getColor(borderColor),
-        ],
-        backgroundColor: ({ options: { backgroundColor } }) => [
-          style.getColor(backgroundColor),
-        ],
-        '&:hover': {
-          borderColor: ({ options: { borderHoverColor } }) => [
-            style.getColor(borderHoverColor),
-          ],
-        },
-        '&:focus-within': {
-          borderColor: ({ options: { borderFocusColor } }) => [
-            style.getColor(borderFocusColor),
-          ],
-        },
       },
       helper: {
         color: ({ options: { helperColor } }) => [
@@ -397,20 +378,42 @@
         margin: '0 14px !important',
       },
       toolbar: {
-        backgroundColor: 'white',
-        height: '40px',
         padding: '16px 16px 0px 8px',
       },
       toolbarButton: {
-        color: '#cccccc',
+        color: ({ options: { buttonColor } }) => [style.getColor(buttonColor)],
         padding: '0px 8px',
         '&:hover': {
-          color: '#4d4d4d',
-          cursor: 'pointer',
+          color: ({ options: { buttonHoverColor } }) => [
+            style.getColor(buttonHoverColor),
+          ],
         },
         '&.active': {
-          color: '#3f51b5',
+          color: ({ options: { buttonActiveColor } }) => [
+            style.getColor(buttonActiveColor),
+          ],
         },
+      },
+      editorWrapper: {
+        border: '1px solid',
+        borderRadius: '4px',
+        borderColor: ({ options: { borderColor } }) => [
+          style.getColor(borderColor),
+        ],
+        pointerEvents: isDev && 'none',
+        '&:hover': {
+          borderColor: ({ options: { borderHoverColor } }) => [
+            style.getColor(borderHoverColor),
+          ],
+        },
+        '&:focus-within': {
+          borderColor: ({ options: { borderFocusColor } }) => [
+            style.getColor(borderFocusColor),
+          ],
+        },
+        backgroundColor: ({ options: { backgroundColor } }) => [
+          style.getColor(backgroundColor),
+        ],
       },
     };
   },
