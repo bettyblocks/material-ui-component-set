@@ -214,10 +214,6 @@
     const isListProperty = kind === 'list' || kind === 'LIST';
 
     if (!isListProperty && !isDev) {
-      if (!labelProperty) {
-        message = 'No label property selected';
-        valid = false;
-      }
       if (!modelId) {
         message = 'No model selected';
         valid = false;
@@ -238,7 +234,7 @@
         if (labelProperty) {
           labelKey = B.getProperty(labelProperty).name;
         } else {
-          const modelReference = B.getModel(referenceModelId);
+          const modelReference = B.getModel(referenceModelId || modelId);
           if (modelReference.labelPropertyId)
             labelKey = B.getProperty(modelReference.labelPropertyId).name;
         }
