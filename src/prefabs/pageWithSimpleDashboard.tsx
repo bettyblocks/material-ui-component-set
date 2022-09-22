@@ -194,7 +194,7 @@ const beforeCreate = ({
             />
           </Field>
           <Field
-            label="Properties used in Create, Edit and View functionalities"
+            label="Columns in the data table"
             error={
               propertiesValidation && (
                 <Text color="#e82600">Selecting a property is required</Text>
@@ -227,7 +227,6 @@ const beforeCreate = ({
                 'TEXT_EXPRESSION',
                 'MINUTES',
                 'ZIPCODE',
-                'IMAGE',
                 'FILE',
               ]}
               onChange={(selectedFieldProperty: string) => {
@@ -880,6 +879,9 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                         }),
                         innerSpacing: sizes('Inner space', {
                           value: ['0rem', '0rem', '0rem', '0rem'],
+                        }),
+                        stretch: toggle('Stretch (when in flex container)', {
+                          value: true,
                         }),
                       },
                     },
@@ -4842,9 +4844,6 @@ export default makePrefab('Crud with dialogs', attrs, beforeCreate, [
                         backgroundColorAlpha: option('NUMBER', {
                           label: 'Background color opacity',
                           value: 20,
-                        }),
-                        stretch: toggle('Stretch (when in flex container)', {
-                          value: true,
                         }),
                         innerSpacing: sizes('Inner space', {
                           value: ['0rem', '0rem', '0rem', '0rem'],
