@@ -72,6 +72,7 @@ export const options = {
       ['Descending', 'desc'],
     ],
     {
+      value: 'asc',
       configuration: {
         condition: hideIf('orderBy', 'EQ', ''),
       },
