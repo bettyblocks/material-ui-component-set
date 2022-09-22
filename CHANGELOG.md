@@ -1,3 +1,29 @@
+# [2.56.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.55.2...v2.56.0) (2022-09-22)
+
+
+### Bug Fixes
+
+* decimal input value not set correctly ([6afcafa](https://github.com/bettyblocks/material-ui-component-set/commit/6afcafaf28f3cc64790f82844784dde1ce5a28f6))
+* fix the datalist ([bcc6f01](https://github.com/bettyblocks/material-ui-component-set/commit/bcc6f01a3452e4073875036f16c96b4daa4ea90d))
+* remove unused var ([ff41513](https://github.com/bettyblocks/material-ui-component-set/commit/ff41513c06f8208222a35e285d19e13c07b6ef2e))
+* trigger pipelines ([f50b6f3](https://github.com/bettyblocks/material-ui-component-set/commit/f50b6f37707932ff49e175bef82156a42623c253))
+
+
+### Features
+
+* add checkbox tsx page ([3220ce8](https://github.com/bettyblocks/material-ui-component-set/commit/3220ce852d50750615b3816318ad49025fd18015))
+* add checklist template ([7342aa3](https://github.com/bettyblocks/material-ui-component-set/commit/7342aa37953e31166a4511242e6e029b9fc7a509))
+* add checklist template ([166da2f](https://github.com/bettyblocks/material-ui-component-set/commit/166da2f3bef81b60d386d597df2eeba6ef8428a7))
+* add datalist ([cb3a9b3](https://github.com/bettyblocks/material-ui-component-set/commit/cb3a9b39ad858ca2d4951b09b7c7dbb2be40fc30))
+
+## [2.55.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.55.2...v2.55.3) (2022-09-22)
+
+
+### Bug Fixes
+
+* decimal input value not set correctly ([6afcafa](https://github.com/bettyblocks/material-ui-component-set/commit/6afcafaf28f3cc64790f82844784dde1ce5a28f6))
+* trigger pipelines ([f50b6f3](https://github.com/bettyblocks/material-ui-component-set/commit/f50b6f37707932ff49e175bef82156a42623c253))
+
 ## [2.55.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.55.1...v2.55.2) (2022-09-20)
 
 
