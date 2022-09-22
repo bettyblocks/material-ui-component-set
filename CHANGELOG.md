@@ -1,3 +1,10 @@
+## [2.55.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.55.1...v2.55.2) (2022-09-20)
+
+
+### Bug Fixes
+
+* add take to useAllQuery ([5f35347](https://github.com/bettyblocks/material-ui-component-set/commit/5f35347ed24e8cdb2a30a6c6ea02ac899e25a8f5))
+
 ## [2.55.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.55.0...v2.55.1) (2022-09-16)
 
 
