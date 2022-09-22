@@ -6,7 +6,8 @@ import {
   Properties,
   ModelProps,
   ModelQuery,
-  PropSelector,
+  AuthenticationProfile,
+  Endpoint,
 } from './types';
 
 export {
@@ -17,5 +18,6 @@ export {
   Properties,
   ModelProps,
   ModelQuery,
-  PropSelector,
+  AuthenticationProfile,
+  Endpoint,
 };

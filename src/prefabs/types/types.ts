@@ -47,18 +47,18 @@ export declare enum PropertyKind {
   URL = 'URL',
   ZIPCODE = 'ZIPCODE',
 }
-
+interface SdkProperty {
+  id: string;
+  name: string;
+  label: string;
+  kind: PropertyKind;
+}
 export interface Property {
   id: string[];
   name?: string;
   label?: string;
   kind?: PropertyKind;
   format?: string;
-}
-
-export interface PropSelector {
-  id: string[];
-  type: 'PROPERTY';
 }
 
 export interface Properties {
@@ -90,4 +90,62 @@ export interface ModelProps {
 
 export interface ModelQuery {
   model: ModelProps;
+}
+
+export interface Endpoint {
+  __typename: string;
+  authenticationProfileId: string;
+  cache: boolean;
+  cachedFullPath: string;
+  contentType: string;
+  debugMode: boolean;
+  description?: string;
+  id: string;
+  online: true;
+  options: {
+    __typename: 'EndpointOptions';
+    componentSetUrl?: string;
+    runtimeTarget: string;
+    showDefaultComponentSet: boolean;
+  };
+  page: {
+    __typename: string;
+    description: string;
+    id: string;
+    name: string;
+    rootId: string;
+    title: string;
+    type: string;
+  };
+  pageId: string;
+  redirectUrl: string;
+  redirectUrlForLogin: string;
+  requestMethod: string;
+  template: string;
+  url: string;
+  params?: { [key: string]: any };
+}
+
+export interface AuthenticationProfile {
+  default: boolean;
+  id: string;
+  kind: AuthenticationProfileKind;
+  loginModel: string;
+  name: string;
+  options: AuthenticationProfileOptions;
+  properties?: Array<SdkProperty>;
+}
+export interface AuthenticationProfileOptions {
+  loginVariable: string;
+  usernameProperty: string | null;
+  passwordProperty: string | null;
+  localeProperty: string | null;
+  redirectEndpoint: string | null;
+  refreshTokenTimeout: number | null;
+  accessTokenTimeout: number | null;
+}
+
+export declare enum AuthenticationProfileKind {
+  customAuthentication = 'customAuthentication',
+  usernamePassword = 'usernamePassword',
 }

@@ -1,3 +1,34 @@
+## [2.55.3](https://github.com/bettyblocks/material-ui-component-set/compare/v2.55.2...v2.55.3) (2022-09-22)
+
+
+### Bug Fixes
+
+* decimal input value not set correctly ([6afcafa](https://github.com/bettyblocks/material-ui-component-set/commit/6afcafaf28f3cc64790f82844784dde1ce5a28f6))
+* trigger pipelines ([f50b6f3](https://github.com/bettyblocks/material-ui-component-set/commit/f50b6f37707932ff49e175bef82156a42623c253))
+
+## [2.55.2](https://github.com/bettyblocks/material-ui-component-set/compare/v2.55.1...v2.55.2) (2022-09-20)
+
+
+### Bug Fixes
+
+* add take to useAllQuery ([5f35347](https://github.com/bettyblocks/material-ui-component-set/commit/5f35347ed24e8cdb2a30a6c6ea02ac899e25a8f5))
+
+## [2.55.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.55.0...v2.55.1) (2022-09-16)
+
+
+### Bug Fixes
+
+* remove property input from media component ([d9faeec](https://github.com/bettyblocks/material-ui-component-set/commit/d9faeecf7174492aefa9fa59b1ce320ffba8b512))
+
+# [2.55.0](https://github.com/bettyblocks/material-ui-component-set/compare/v2.54.1...v2.55.0) (2022-09-16)
+
+
+### Features
+
+* add correct type script ([a9930aa](https://github.com/bettyblocks/material-ui-component-set/commit/a9930aaf51f8d8c7e35e2b2a7fb43acbea04042f))
+* resolved typing in overview with detail template ([6514c48](https://github.com/bettyblocks/material-ui-component-set/commit/6514c48bd0f3f297d3a4633fbf70a61b5ea47375))
+* resolved typing in register page template ([c4e83ca](https://github.com/bettyblocks/material-ui-component-set/commit/c4e83ca3e77a8287aa7bd10300782a3fedfb353e))
+
 ## [2.54.1](https://github.com/bettyblocks/material-ui-component-set/compare/v2.54.0...v2.54.1) (2022-09-13)
 
 
