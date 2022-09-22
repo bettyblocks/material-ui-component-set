@@ -32,14 +32,14 @@ const beforeCreate = ({
 
 const attributes = {
   category: 'FORMV2',
-  icon: Icon.TextInputIcon,
-  keywords: ['Form', 'input'],
+  icon: Icon.TextareaIcon,
+  keywords: ['Form', 'input', 'rich text', 'rich', 'text', 'editor'],
 };
 
-export default prefab('Rich Text Field Beta', attributes, beforeCreate, [
+export default prefab('Rich text editor', attributes, beforeCreate, [
   RichTextInput({
-    label: 'Rich Text field Beta',
-    inputLabel: 'Rich Text field',
+    label: 'Rich text editor',
+    inputLabel: 'Rich text editor',
     type: 'text',
   }),
 ]);

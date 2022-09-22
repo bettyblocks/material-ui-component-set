@@ -319,16 +319,22 @@
             }}
           >
             <div className={classes.toolbar}>
-              {showBold && <MarkButton format="bold" icon="FormatBold" />}
-              {showItalic && <MarkButton format="italic" icon="FormatItalic" />}
-              {showUnderlined && (
-                <MarkButton format="underline" icon="FormatUnderlined" />
-              )}
-              {showStrikethrough && (
-                <MarkButton format="strikethrough" icon="StrikethroughS" />
-              )}
-              <HistoryButton action="undo" icon="Undo" />
-              <HistoryButton action="redo" icon="Redo" />
+              <div className={classes.toolbarGroup}>
+                {showBold && <MarkButton format="bold" icon="FormatBold" />}
+                {showItalic && (
+                  <MarkButton format="italic" icon="FormatItalic" />
+                )}
+                {showUnderlined && (
+                  <MarkButton format="underline" icon="FormatUnderlined" />
+                )}
+                {showStrikethrough && (
+                  <MarkButton format="strikethrough" icon="StrikethroughS" />
+                )}
+              </div>
+              <div className={classes.toolbarGroup}>
+                <HistoryButton action="undo" icon="Undo" />
+                <HistoryButton action="redo" icon="Redo" />
+              </div>
             </div>
             <Editable
               className={classes.editor}
@@ -426,8 +432,11 @@
         margin: '0 14px !important',
       },
       toolbar: {
-        padding: '16px 16px 0px 8px',
+        padding: '16px 8px 0px 8px',
+        display: 'flex',
+        justifyContent: 'space-between',
       },
+      toolbarGroup: {},
       toolbarButton: {
         color: ({ options: { buttonColor } }) => [style.getColor(buttonColor)],
         padding: '0px 8px',
