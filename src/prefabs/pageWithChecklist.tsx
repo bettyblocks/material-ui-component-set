@@ -22,6 +22,7 @@ import {
   BeforeCreateArgs,
   PrefabComponent,
   PrefabComponentOption,
+  text,
 } from '@betty-blocks/component-sdk';
 
 import {
@@ -152,6 +153,12 @@ const prefabStructure = [
             ],
           },
         }),
+        rowHeight: text('Height', {
+          value: '100%',
+          configuration: {
+            as: 'UNIT',
+          },
+        }),
       },
     },
     [
@@ -261,6 +268,12 @@ const prefabStructure = [
             }),
             innerSpacing: sizes('Inner space', {
               value: ['0rem', '0rem', '0rem', '0rem'],
+            }),
+            columnHeight: text('Height', {
+              value: '100%',
+              configuration: {
+                as: 'UNIT',
+              },
             }),
           },
         },
