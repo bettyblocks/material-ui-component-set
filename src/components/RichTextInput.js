@@ -287,6 +287,24 @@
       );
     }
 
+    const HistoryButton = React.forwardRef(
+      ({ action, icon, ...props }, ref) => {
+        const IconButton = Icons[icon];
+        return (
+          <IconButton
+            {...props}
+            ref={ref}
+            className={classes.toolbarButton}
+            onMouseDown={(event) => {
+              event.preventDefault();
+              if (action === 'undo') editor.undo();
+              if (action === 'redo') editor.redo();
+            }}
+          />
+        );
+      },
+    );
+
     return (
       <div className={classes.root}>
         {labelText && !hideLabel && (
@@ -309,6 +327,8 @@
               {showStrikethrough && (
                 <MarkButton format="strikethrough" icon="StrikethroughS" />
               )}
+              <HistoryButton action="undo" icon="Undo" />
+              <HistoryButton action="redo" icon="Redo" />
             </div>
             <Editable
               className={classes.editor}
