@@ -195,6 +195,10 @@
       const fileUrl =
         file &&
         (file instanceof File ? window.URL.createObjectURL(file) : file.url);
+
+      // mitigation of issue DT-1856
+      if (!isDev && !(fileName && fileUrl)) return null;
+
       return (
         <div className={classes.listView}>
           <div className={classes.fileDetailList}>
