@@ -287,6 +287,7 @@ const beforeCreate = ({
   const [properties, setProperties] = React.useState<Properties[]>([]);
   const [showPropertiesValidation, setShowPropertiesValidation] =
     React.useState(false);
+  const [permissions, setPermissions] = React.useState('public');
   const componentId = createUuid();
 
   useModelQuery({
@@ -474,6 +475,9 @@ const beforeCreate = ({
               idProperty,
               properties,
               'create',
+              undefined,
+              undefined,
+              permissions,
             );
             setOption(
               formPrefab,

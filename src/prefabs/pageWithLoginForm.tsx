@@ -1007,6 +1007,7 @@ const beforeCreate = ({
   const [authProfileId, setAuthProfileId] = React.useState('');
   const [authProfile, setAuthProfile] = React.useState<AuthenticationProfile>();
   const [authProfileInvalid, setAuthProfileInvalid] = React.useState(false);
+  const [permissions, setPermissions] = React.useState('public');
 
   const [endpoint, setEndpoint] = React.useState<Endpoint>();
   const [endpointInvalid, setEndpointInvalid] = React.useState(false);
@@ -1178,6 +1179,8 @@ const beforeCreate = ({
             null,
             'login',
             authProfile,
+            undefined,
+            permissions,
           );
           if (authProfile) {
             if (authProfile.properties) {

@@ -56,6 +56,7 @@ const beforeCreate = ({
     createUuid,
     makeBettyUpdateInput,
     prepareAction,
+    getPageAuthenticationProfileId,
     useCurrentPartialId,
     useCurrentPageId,
     setOption,
@@ -74,6 +75,7 @@ const beforeCreate = ({
   });
   const [buttonGroupValue, setButtonGroupValue] = React.useState('anotherPage');
 
+  const [permissions, setPermissions] = React.useState('private');
   const [validationMessage, setValidationMessage] = React.useState('');
   const [anotherPageState, setAnotherPageState] = React.useState({
     modelId: '',
@@ -81,7 +83,7 @@ const beforeCreate = ({
   const pageId = useCurrentPageId();
   const partialId = useCurrentPartialId();
   const componentId = createUuid();
-
+  const pageAuthenticationProfileId = getPageAuthenticationProfileId();
   const modelRequest = useModelQuery({
     variables: { id: modelId },
     onCompleted: (result) => {
@@ -356,6 +358,10 @@ const beforeCreate = ({
             idProperty,
             properties,
             'update',
+            undefined,
+            undefined,
+            permissions,
+            pageAuthenticationProfileId,
           );
 
           setOption(structure, 'actionId', (option) => ({

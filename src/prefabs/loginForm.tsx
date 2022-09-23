@@ -37,6 +37,7 @@ const beforeCreate = ({
   const [authProfileId, setAuthProfileId] = React.useState('');
   const [authProfile, setAuthProfile] = React.useState(null);
   const [authProfileInvalid, setAuthProfileInvalid] = React.useState(false);
+  const [permissions, setPermissions] = React.useState('public');
 
   const [endpoint, setEndpoint] = React.useState(null);
   const [endpointInvalid, setEndpointInvalid] = React.useState(false);
@@ -133,6 +134,8 @@ const beforeCreate = ({
             null,
             'login',
             authProfile,
+            undefined,
+            permissions,
           );
 
           const structure = originalPrefab.structure[0];
