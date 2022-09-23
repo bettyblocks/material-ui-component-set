@@ -16,6 +16,10 @@ export const MultiAutocomplete = (
     options.type = updateOption(options.type, { value: config.type });
   }
 
+  if (config.inputLabel) {
+    options.label = updateOption(options.label, { value: [config.inputLabel] });
+  }
+
   if (config.adornmentIcon) {
     options.adornmentIcon = updateOption(options.adornmentIcon, {
       value: config.adornmentIcon,

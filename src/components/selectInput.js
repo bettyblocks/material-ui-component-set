@@ -7,23 +7,24 @@
     const {
       actionProperty,
       actionVariableId,
-      disabled: initialIsDisabled,
-      filter,
-      variant,
-      size,
-      fullWidth,
-      margin,
-      order,
-      orderBy,
-      helperText = [''],
-      label,
-      labelProperty,
-      required,
-      hideLabel,
-      validationValueMissing = [''],
-      value: prefabValue,
       blanco,
       dataComponentAttribute = ['Select'],
+      disabled: initialIsDisabled,
+      filter,
+      fullWidth,
+      helperText = [''],
+      hideLabel,
+      label,
+      labelProperty,
+      margin,
+      model,
+      order,
+      orderBy,
+      required,
+      size,
+      validationValueMissing = [''],
+      value: prefabValue,
+      variant,
     } = options;
     const { env, getProperty, useText, useAllQuery } = B;
     const { TextField, MenuItem } = window.MaterialUI.Core;
@@ -35,7 +36,7 @@
     const [disabled, setIsDisabled] = useState(initialIsDisabled);
     const mounted = useRef(false);
     const blancoText = useText(blanco);
-    const modelProperty = getProperty(actionProperty.modelProperty) || {};
+    const modelProperty = getProperty(actionProperty.modelProperty || '') || {};
     const [currentValue, setCurrentValue] = useState(useText(prefabValue));
     const labelText = useText(label);
     const defaultValueText = useText(prefabValue);
@@ -43,7 +44,12 @@
     const validationMessageText = useText(validationValueMissing);
     const dataComponentAttributeValue = useText(dataComponentAttribute);
 
-    const { referenceModelId, modelId, kind, values = [] } = modelProperty;
+    const {
+      referenceModelId,
+      modelId = model,
+      kind,
+      values = [],
+    } = modelProperty;
 
     B.defineFunction('Clear', () => setCurrentValue(''));
     B.defineFunction('Enable', () => setIsDisabled(false));
@@ -80,7 +86,7 @@
 
     const orderByArray = [orderBy].flat();
     const sort =
-      !isDev && orderBy
+      !isDev && orderBy.id
         ? orderByArray.reduceRight((acc, orderByProperty, index) => {
             const prop = getProperty(orderByProperty);
             return index === orderByArray.length - 1
@@ -124,9 +130,10 @@
         filter: completeFilter,
         take: 50,
         variables: {
-          ...(orderBy ? { sort: { relation: sort } } : {}),
+          ...(orderBy.id ? { sort: { relation: sort } } : {}),
         },
       },
+      !modelId,
     );
 
     useEffect(() => {
@@ -203,8 +210,19 @@
       }
     }, [isDev, defaultValueText]);
 
+    let valid = true;
+    let message = '';
+    const isListProperty = kind === 'list' || kind === 'LIST';
+
+    if (!isListProperty && !isDev) {
+      if (!modelId) {
+        message = 'No model selected';
+        valid = false;
+      }
+    }
+
     const renderOptions = () => {
-      if (kind === 'list' || kind === 'LIST') {
+      if (isListProperty) {
         return values.map(({ value: v }) => (
           <MenuItem key={v} value={v}>
             {v}
@@ -217,17 +235,16 @@
         if (labelProperty) {
           labelKey = B.getProperty(labelProperty).name;
         } else {
-          const model = B.getModel(referenceModelId);
-          if (model.labelPropertyId)
-            labelKey = B.getProperty(model.labelPropertyId).name;
+          const modelReference = B.getModel(referenceModelId || modelId);
+          if (modelReference.labelPropertyId)
+            labelKey = B.getProperty(modelReference.labelPropertyId).name;
         }
 
         const rows = data ? data.results : [];
         return rows.map((row) => {
-          const value = row[kind === 'belongs_to' ? 'id' : labelKey];
           const itemLabel = row[labelKey];
           return (
-            <MenuItem key={row.id} value={value}>
+            <MenuItem key={row.id} value={row.id}>
               {itemLabel}
             </MenuItem>
           );
@@ -259,14 +276,14 @@
             'data-component': dataComponentAttributeValue,
           }}
           required={required}
-          disabled={disabled}
-          label={!hideLabel && labelText}
+          disabled={disabled || !valid}
+          label={!valid ? message : !hideLabel && labelText}
           error={errorState}
           margin={margin}
           helperText={helper}
         >
           {blancoText && <MenuItem value="">{blancoText}</MenuItem>}
-          {renderOptions()}
+          {valid && renderOptions()}
         </TextField>
         <input
           id={actionVariableId}
