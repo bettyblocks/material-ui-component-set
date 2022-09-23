@@ -128,6 +128,7 @@
       referenceModelId || modelId,
       {
         filter: completeFilter,
+        take: 50,
         variables: {
           ...(orderBy.id ? { sort: { relation: sort } } : {}),
         },
