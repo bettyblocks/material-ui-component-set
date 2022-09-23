@@ -169,7 +169,7 @@
 
     function DeleteButton() {
       return (
-        <div className={classes.deleteButtonWrapper}>
+        <div>
           <IconButton
             size="small"
             className={classes.remove}
@@ -197,7 +197,7 @@
         (file instanceof File ? window.URL.createObjectURL(file) : file.url);
 
       // mitigation of issue DT-1856
-      if (!isDev && !(fileName && fileUrl)) return null;
+      if (!isDev && !fileName) return null;
 
       return (
         <div className={classes.listView}>
@@ -481,9 +481,6 @@
         margin: 0,
         border: 'none',
         backgroundColor: t.colors.light,
-      },
-      deleteButtonWrapper: {
-        margin: ({ options: { type } }) => (type === 'grid' ? 0 : '1rem'),
       },
       remove: {
         height: '1.875rem',
