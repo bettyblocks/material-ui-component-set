@@ -71,6 +71,7 @@ import {
 } from './structures';
 import { options as defaults } from './structures/ActionJSForm/options';
 import { Properties, IdPropertyProps, ModelProps, ModelQuery } from './types';
+import { PermissionType } from './types/types';
 
 const interactions: PrefabInteraction[] = [
   {
@@ -3428,6 +3429,7 @@ const beforeCreate = ({
   const {
     useModelQuery,
     prepareAction,
+    getPageAuthenticationProfileId,
     cloneStructure,
     setOption,
     createUuid,
@@ -3449,6 +3451,10 @@ const beforeCreate = ({
   const [stepNumber, setStepNumber] = React.useState(1);
   const [headerPartialId, setHeaderPartialId] = React.useState('');
   const [footerPartialId, setFooterPartialId] = React.useState('');
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [permissions, setPermissions] =
+    React.useState<PermissionType>('private');
+  const pageAuthenticationProfileId = getPageAuthenticationProfileId();
 
   const createFormId = createUuid();
   const editFormId = createUuid();
@@ -4003,11 +4009,16 @@ const beforeCreate = ({
         if (!createForm) throw new Error('No create form found');
         createForm.id = createFormId;
 
+        setPermissions('private');
         const result = await prepareAction(
           createFormId,
           idProperty,
           filteredproperties,
           'create',
+          undefined,
+          undefined,
+          permissions,
+          pageAuthenticationProfileId,
         );
 
         Object.values(result.variables).forEach(
@@ -4230,6 +4241,10 @@ const beforeCreate = ({
           idProperty,
           filteredproperties,
           'update',
+          undefined,
+          undefined,
+          permissions,
+          pageAuthenticationProfileId,
         );
         setOption(editForm, 'actionId', (opts: PrefabComponentOption) => ({
           ...opts,
@@ -4455,6 +4470,10 @@ const beforeCreate = ({
           idProperty,
           undefined,
           'delete',
+          undefined,
+          undefined,
+          permissions,
+          pageAuthenticationProfileId,
         );
         setOption(deleteForm, 'actionId', (opts: PrefabComponentOption) => ({
           ...opts,

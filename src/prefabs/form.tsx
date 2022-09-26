@@ -6,6 +6,7 @@ import {
   PrefabInteraction,
 } from '@betty-blocks/component-sdk';
 import { Form } from './structures/ActionJSForm';
+import { PermissionType } from './types/types';
 
 const beforeCreate = ({
   close,
@@ -71,7 +72,8 @@ const beforeCreate = ({
   const [modelBased, setmodelBased] = React.useState(true);
   const [actionName, setActionName] = React.useState('');
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [permissions, setPermissions] = React.useState('private');
+  const [permissions, setPermissions] =
+    React.useState<PermissionType>('private');
   const pageAuthenticationProfileId = getPageAuthenticationProfileId();
 
   const [validationMessage, setValidationMessage] = React.useState('');

@@ -50,6 +50,7 @@ import {
 import { options as betaFormOptions } from './structures/ActionJSForm/options';
 import { Alert } from './structures/Alert/index';
 import { IdPropertyProps, ModelProps, ModelQuery, Properties } from './types';
+import { PermissionType } from './types/types';
 
 const interactions: PrefabInteraction[] = [
   {
@@ -288,7 +289,8 @@ const beforeCreate = ({
   const [showPropertiesValidation, setShowPropertiesValidation] =
     React.useState(false);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [permissions, setPermissions] = React.useState('public');
+  const [permissions, setPermissions] =
+    React.useState<PermissionType>('public');
   const componentId = createUuid();
 
   useModelQuery({

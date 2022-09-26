@@ -44,6 +44,7 @@ import {
   openPageButtonOptions,
 } from './structures';
 import { AuthenticationProfile, Endpoint } from './types';
+import { PermissionType } from './types/types';
 
 const interactions: PrefabInteraction[] = [
   {
@@ -1008,7 +1009,8 @@ const beforeCreate = ({
   const [authProfile, setAuthProfile] = React.useState<AuthenticationProfile>();
   const [authProfileInvalid, setAuthProfileInvalid] = React.useState(false);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [permissions, setPermissions] = React.useState('public');
+  const [permissions, setPermissions] =
+    React.useState<PermissionType>('public');
 
   const [endpoint, setEndpoint] = React.useState<Endpoint>();
   const [endpointInvalid, setEndpointInvalid] = React.useState(false);

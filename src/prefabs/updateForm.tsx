@@ -7,6 +7,7 @@ import {
   BeforeCreateArgs,
 } from '@betty-blocks/component-sdk';
 import { Form } from './structures/ActionJSForm';
+import { PermissionType } from './types/types';
 
 const beforeCreate = ({
   close,
@@ -76,7 +77,8 @@ const beforeCreate = ({
   const [buttonGroupValue, setButtonGroupValue] = React.useState('anotherPage');
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [permissions, setPermissions] = React.useState('private');
+  const [permissions, setPermissions] =
+    React.useState<PermissionType>('private');
   const [validationMessage, setValidationMessage] = React.useState('');
   const [anotherPageState, setAnotherPageState] = React.useState({
     modelId: '',

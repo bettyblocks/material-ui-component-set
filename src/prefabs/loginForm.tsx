@@ -6,6 +6,7 @@ import {
   prefab,
 } from '@betty-blocks/component-sdk';
 import { Form } from './structures/ActionJSForm';
+import { PermissionType } from './types/types';
 
 const beforeCreate = ({
   close,
@@ -38,7 +39,8 @@ const beforeCreate = ({
   const [authProfile, setAuthProfile] = React.useState(null);
   const [authProfileInvalid, setAuthProfileInvalid] = React.useState(false);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [permissions, setPermissions] = React.useState('public');
+  const [permissions, setPermissions] =
+    React.useState<PermissionType>('public');
 
   const [endpoint, setEndpoint] = React.useState(null);
   const [endpointInvalid, setEndpointInvalid] = React.useState(false);
