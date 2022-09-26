@@ -211,7 +211,7 @@
               />
             )}
             <div>
-              <Typography variant="body1" noWrap className={classes.span}>
+              <Typography variant="body1" noWrap className={classes.fileName}>
                 {isDev ? 'File name' : fileName}
               </Typography>
               <p className={classes.fileDetail}>{isDev ? 'Size' : fileSize}</p>
@@ -343,7 +343,8 @@
         display: 'flex',
         width: '100%',
       },
-      span: {
+      fileName: {
+        maxWidth: '10rem',
         flex: 1,
         textAlign: 'start',
         marginBottom: '0.1875rem!important',
